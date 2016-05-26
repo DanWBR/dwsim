@@ -597,8 +597,8 @@ Namespace PropertyPackages
             K = fugliq.DivideY(fugvap)
 
           
-            If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Then
-                Dim cprops  = DW_GetConstantProperties()
+            If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Or K.Sum = 0.0# Then
+                Dim cprops = DW_GetConstantProperties()
                 If Settings.EnableParallelProcessing Then
                     Parallel.For(0, n + 1, Sub(ii)
                                                Dim Pc, Tc, w As Double

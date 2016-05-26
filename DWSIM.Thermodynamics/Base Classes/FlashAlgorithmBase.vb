@@ -131,6 +131,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'PT = {L1, V, Vx1, Vy, ecount, L2, Vx2, S, Vs}
                     result = Flash_PT(mixmolefrac, val1, val2, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedPressure = val1
+                        .CalculatedTemperature = val2
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))
@@ -148,6 +150,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'PT = {L1, V, Vx1, Vy, ecount, L2, Vx2, S, Vs}
                     result = Flash_PT(mixmolefrac, val2, val1, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedPressure = val2
+                        .CalculatedTemperature = val1
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))
@@ -165,6 +169,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'PH, PS, PV {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, S, Vs}
                     result = Flash_PH(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedPressure = val1
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))
@@ -183,6 +188,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'PH, PS, PV {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, S, Vs}
                     result = Flash_PS(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedPressure = val1
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))
@@ -201,6 +207,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'PH, PS, PV {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, S, Vs}
                     result = Flash_PV(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedPressure = val1
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))
@@ -219,6 +226,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'TV {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, S, Vs}
                     result = Flash_TV(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedTemperature = val1
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))
@@ -237,6 +245,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     'PH, PS, PV {L1, V, Vx1, Vy, T, ecount, Ki1, L2, Vx2, S, Vs}
                     result = Flash_PSF(mixmolefrac, val1, val2, initialestimate, pp, useestimates, initialKval)
                     With calcresult
+                        .CalculatedPressure = val1
                         .Kvalues = New List(Of Double)(DirectCast(result(3), Double()).DivideY(DirectCast(result(2), Double())))
                         .VaporPhaseMoleAmounts = New List(Of Double)(DirectCast(result(3), Double()).MultiplyConstY(Convert.ToDouble(result(1))))
                         .LiquidPhase1MoleAmounts = New List(Of Double)(DirectCast(result(2), Double()).MultiplyConstY(Convert.ToDouble(result(0))))

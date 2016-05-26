@@ -358,6 +358,7 @@ Namespace Reactors
             'Copy results to upstream MS
             Dim xl, xv, xs, T, P, H, S, wtotalx, wtotaly, wtotalS As Double
             Dim nc As Integer = ims.Phases(0).Compounds.Count - 1
+            pp.CurrentMaterialStream = ims
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
             Dim Vx(nc), Vy(nc), Vs(nc), Vwx(nc), Vwy(nc), Vws(nc) As Double

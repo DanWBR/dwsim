@@ -885,7 +885,7 @@ Namespace Reactors
                     lp = lpsolve55.make_lp(e, c)
                     lpsolve55.version(Major, Minor, release, build)
 
-                    lpsolve55.print_str(lp, "lp_solve " & Major & "." & Minor & "." & release & "." & build & " demo" & vbLf & vbLf)
+                    'lpsolve55.print_str(lp, "lp_solve " & Major & "." & Minor & "." & release & "." & build & " demo" & vbLf & vbLf)
 
                     For i = 0 To e
                         For j = 0 To c
@@ -1547,6 +1547,8 @@ Namespace Reactors
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
+            pp.CurrentMaterialStream = ims
+
             'do a flash calc (calculate final temperature/enthalpy)
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
@@ -1554,8 +1556,8 @@ Namespace Reactors
             Dim Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1) As Double
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
-            T = tmp.CalculatedTemperature
-            P = tmp.CalculatedPressure
+            'T = tmp.CalculatedTemperature
+            'P = tmp.CalculatedPressure
             H = tmp.CalculatedEnthalpy
             S = tmp.CalculatedEntropy
             Vx = tmp.GetLiquidPhase1MoleFractions

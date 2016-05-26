@@ -933,6 +933,8 @@ Namespace Reactors
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
+            pp.CurrentMaterialStream = ims
+
             'do a flash calc (calculate final temperature/enthalpy)
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
@@ -940,8 +942,8 @@ Namespace Reactors
             Dim Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1) As Double
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
-            T = tmp.CalculatedTemperature
-            P = tmp.CalculatedPressure
+            'T = tmp.CalculatedTemperature
+            'P = tmp.CalculatedPressure
             H = tmp.CalculatedEnthalpy
             S = tmp.CalculatedEntropy
             Vx = tmp.GetLiquidPhase1MoleFractions

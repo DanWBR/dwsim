@@ -181,7 +181,7 @@ Namespace BaseClasses
 
         Implements Interfaces.IReaction
 
-        Public _Components As Dictionary(Of String, ReactionStoichBase)
+        Public _Components As Dictionary(Of String, Interfaces.IReactionStoichBase)
 
         <XmlIgnore> Public Property ExpContext As Ciloci.Flee.ExpressionContext = New Ciloci.Flee.ExpressionContext
         <XmlIgnore> Public Property Expr As Ciloci.Flee.IGenericExpression(Of Double)
@@ -229,7 +229,7 @@ Namespace BaseClasses
         'Initializers
 
         Public Sub New()
-            Me._Components = New Dictionary(Of String, ReactionStoichBase)
+            Me._Components = New Dictionary(Of String, Interfaces.IReactionStoichBase)
             ExpContext = New Ciloci.Flee.ExpressionContext
             ExpContext.Imports.AddType(GetType(System.Math))
             ExpContext.Variables.Add("T", 0.0#)
@@ -309,7 +309,8 @@ Namespace BaseClasses
 
         Public ReadOnly Property Components As Dictionary(Of String, Interfaces.IReactionStoichBase) Implements Interfaces.IReaction.Components
             Get
-                Return _Components.ToDictionary(Of String, Interfaces.IReactionStoichBase)(Function(k) k.Key, Function(k) k.Value)
+                'Return _Components.ToDictionary(Of String, Interfaces.IReactionStoichBase)(Function(k) k.Key, Function(k) k.Value)
+                Return _Components
             End Get
         End Property
 
@@ -402,7 +403,7 @@ Namespace BaseClasses
 
         Implements Interfaces.IReactionSet
 
-        Protected m_reactionset As Dictionary(Of String, ReactionSetBase)
+        Protected m_reactionset As Dictionary(Of String, Interfaces.IReactionSetBase)
 
 #Region "    DWSIM Specific"
 
@@ -419,7 +420,7 @@ Namespace BaseClasses
 
         Public ReadOnly Property Reactions() As Dictionary(Of String, Interfaces.IReactionSetBase) Implements Interfaces.IReactionSet.Reactions
             Get
-                Return m_reactionset.ToDictionary(Of String, Interfaces.IReactionSetBase)(Function(k) k.Key, Function(k) k.Value)
+                Return m_reactionset
             End Get
         End Property
 
@@ -431,7 +432,7 @@ Namespace BaseClasses
 
         Sub New()
             MyBase.New()
-            Me.m_reactionset = New Dictionary(Of String, ReactionSetBase)
+            Me.m_reactionset = New Dictionary(Of String, Interfaces.IReactionSetBase)
         End Sub
 
         Sub New(ByVal id As String, ByVal name As String, ByVal description As String)

@@ -380,6 +380,7 @@ Namespace UnitOperations
         Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
+            If Me.Annotation = "DWSIM.DWSIM.Outros.Annotation" Then Me.Annotation = ""
             Return True
 
         End Function

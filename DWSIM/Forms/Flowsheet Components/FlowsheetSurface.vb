@@ -653,7 +653,7 @@ Public Class FlowsheetSurface
 
                     If cancopy Then
                         Me.CopyFromTSMI.Visible = True
-                        For Each mstr As Thermodynamics.Streams.MaterialStream In Flowsheet.Collections.FlowsheetObjectCollection.Values
+                        For Each mstr As Thermodynamics.Streams.MaterialStream In Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Thermodynamics.Streams.MaterialStream)
                             If mstr.GraphicObject.Tag <> obj.GraphicObject.Tag Then
                                 Dim newtsmi As New ToolStripMenuItem(mstr.GraphicObject.Tag)
                                 If mstr.GraphicObject.Calculated Then CopyFromTSMI.DropDownItems.Add(newtsmi)
