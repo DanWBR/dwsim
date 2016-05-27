@@ -85,6 +85,10 @@ Public Class EditingForm_CAPEOPENUO
 
             'populate ports
 
+            dginlets.Rows.Clear()
+            dgoutlets.Rows.Clear()
+            dgenergy.Rows.Clear()
+
             Dim cnobj As Object = Nothing
 
             For Each p As UnitPort In ._ports
@@ -100,9 +104,13 @@ Public Class EditingForm_CAPEOPENUO
                     If p.direction = CapePortDirection.CAPE_INLET Then
                         dginlets.Rows.Add(New Object() {p.ComponentName, tag})
                         dginlets.Rows(dginlets.Rows.Count - 1).Cells(0).Tag = p
+                        dginlets.Rows(dginlets.Rows.Count - 1).Cells(2).ToolTipText = dginlets.Columns(2).ToolTipText
+                        dginlets.Rows(dginlets.Rows.Count - 1).Cells(3).ToolTipText = dginlets.Columns(3).ToolTipText
                     Else
                         dgoutlets.Rows.Add(New Object() {p.ComponentName, tag})
                         dgoutlets.Rows(dgoutlets.Rows.Count - 1).Cells(0).Tag = p
+                        dgoutlets.Rows(dginlets.Rows.Count - 1).Cells(2).ToolTipText = dgoutlets.Columns(2).ToolTipText
+                        dgoutlets.Rows(dginlets.Rows.Count - 1).Cells(3).ToolTipText = dgoutlets.Columns(3).ToolTipText
                     End If
                 ElseIf p.portType = CapePortType.CAPE_ENERGY Then
                     Dim tag As String = ""
@@ -115,10 +123,15 @@ Public Class EditingForm_CAPEOPENUO
                     If Not conobj Is Nothing Then tag = conobj.GraphicObject.Tag
                     dgenergy.Rows.Add(New Object() {p.ComponentName, tag})
                     dgenergy.Rows(dgenergy.Rows.Count - 1).Cells(0).Tag = p
+                    dgenergy.Rows(dginlets.Rows.Count - 1).Cells(2).ToolTipText = dgenergy.Columns(2).ToolTipText
+                    dgenergy.Rows(dginlets.Rows.Count - 1).Cells(3).ToolTipText = dgenergy.Columns(3).ToolTipText
                 End If
             Next
 
             'variables
+
+            dgvinputvars.Rows.Clear()
+            dgvoutputvars.Rows.Clear()
 
             For Each p As Object In ._params
                 'find parameter type
@@ -316,6 +329,7 @@ Public Class EditingForm_CAPEOPENUO
             End If
 
             SimObject.UpdateConnectorPositions()
+            UpdateInfo()
 
         End If
 
@@ -488,6 +502,7 @@ Public Class EditingForm_CAPEOPENUO
             Editing = False
 
             SimObject.UpdateConnectorPositions()
+            UpdateInfo()
             RequestCalc()
 
         End If

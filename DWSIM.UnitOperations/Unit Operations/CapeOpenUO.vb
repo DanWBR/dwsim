@@ -452,7 +452,7 @@ Namespace UnitOperations
                                 End Try
                                 If cnobj IsNot Nothing Then
                                     If Not Me.FlowSheet Is Nothing Then
-                                        Dim mystr = FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentDescription)
+                                        Dim mystr = FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentName)
                                         Try
                                             cnobj = myport.connectedObject
                                         Catch ex As Exception
@@ -622,7 +622,7 @@ Namespace UnitOperations
                                     cnobj = Nothing
                                 End Try
                                 If cnobj IsNot Nothing Then
-                                    objid = CType(cnobj, ICapeIdentification).ComponentDescription
+                                    objid = CType(cnobj, ICapeIdentification).ComponentName
                                     myport.Disconnect()
                                     Dim gobj As GraphicObject = FlowSheet.GraphicObjects(objid)
                                     Select Case myport.portType
@@ -651,7 +651,7 @@ Namespace UnitOperations
                                     cnobj = Nothing
                                 End Try
                                 If cnobj IsNot Nothing Then
-                                    objid = CType(cnobj, ICapeIdentification).ComponentDescription
+                                    objid = CType(cnobj, ICapeIdentification).ComponentName
                                     myport.Disconnect()
                                     Dim gobj As GraphicObject = FlowSheet.GraphicObjects(objid)
                                     Select Case myport.portType
@@ -771,7 +771,7 @@ Namespace UnitOperations
                         End Try
                         Try
                             If Not cnobj Is Nothing Then
-                                _ports(_ports.Count - 1).Connect(FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentDescription))
+                                _ports(_ports.Count - 1).Connect(FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentName))
                             End If
                         Catch ex As Exception
                             Dim ecu As CapeOpen.ECapeUser = myuo

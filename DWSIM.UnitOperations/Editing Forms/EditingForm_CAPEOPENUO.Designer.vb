@@ -125,11 +125,13 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -143,26 +145,31 @@ Partial Class EditingForm_CAPEOPENUO
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox3
         '
@@ -175,6 +182,7 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'btnConfigureFlashAlg
         '
@@ -198,11 +206,13 @@ Partial Class EditingForm_CAPEOPENUO
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'cbPropPack
         '
@@ -210,11 +220,13 @@ Partial Class EditingForm_CAPEOPENUO
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
+        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'GroupBox6
         '
@@ -222,24 +234,28 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox6.Controls.Add(Me.TabControl1)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.dgvinputvars)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.dgvinputvars)
         Me.TabPage1.Name = "TabPage1"
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'dgvinputvars
         '
+        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.AllowUserToAddRows = False
         Me.dgvinputvars.AllowUserToDeleteRows = False
         Me.dgvinputvars.AllowUserToOrderColumns = True
@@ -256,11 +272,11 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle2
-        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
         Me.dgvinputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip"))
         '
         'Column3
         '
@@ -282,13 +298,15 @@ Partial Class EditingForm_CAPEOPENUO
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         Me.TabPage2.Name = "TabPage2"
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'dgvoutputvars
         '
+        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.AllowUserToAddRows = False
         Me.dgvoutputvars.AllowUserToDeleteRows = False
         Me.dgvoutputvars.AllowUserToOrderColumns = True
@@ -305,12 +323,12 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle5
-        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
         Me.dgvoutputvars.ReadOnly = True
         Me.dgvoutputvars.RowHeadersVisible = False
         Me.dgvoutputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -340,25 +358,29 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox1.Controls.Add(Me.TabControl2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'TabControl2
         '
+        resources.ApplyResources(Me.TabControl2, "TabControl2")
         Me.TabControl2.Controls.Add(Me.TabPage3)
         Me.TabControl2.Controls.Add(Me.TabPage4)
         Me.TabControl2.Controls.Add(Me.TabPage5)
-        resources.ApplyResources(Me.TabControl2, "TabControl2")
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControl2, resources.GetString("TabControl2.ToolTip"))
         '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.dginlets)
         resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.dginlets)
         Me.TabPage3.Name = "TabPage3"
+        Me.ToolTip1.SetToolTip(Me.TabPage3, resources.GetString("TabPage3.ToolTip"))
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'dginlets
         '
+        resources.ApplyResources(Me.dginlets, "dginlets")
         Me.dginlets.AllowUserToAddRows = False
         Me.dginlets.AllowUserToDeleteRows = False
         Me.dginlets.AllowUserToOrderColumns = True
@@ -375,11 +397,11 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dginlets.DefaultCellStyle = DataGridViewCellStyle6
-        resources.ApplyResources(Me.dginlets, "dginlets")
         Me.dginlets.MultiSelect = False
         Me.dginlets.Name = "dginlets"
         Me.dginlets.RowHeadersVisible = False
         Me.dginlets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dginlets, resources.GetString("dginlets.ToolTip"))
         '
         'DataGridViewTextBoxColumn3
         '
@@ -418,13 +440,15 @@ Partial Class EditingForm_CAPEOPENUO
         '
         'TabPage4
         '
-        Me.TabPage4.Controls.Add(Me.dgoutlets)
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.dgoutlets)
         Me.TabPage4.Name = "TabPage4"
+        Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
         Me.TabPage4.UseVisualStyleBackColor = True
         '
         'dgoutlets
         '
+        resources.ApplyResources(Me.dgoutlets, "dgoutlets")
         Me.dgoutlets.AllowUserToAddRows = False
         Me.dgoutlets.AllowUserToDeleteRows = False
         Me.dgoutlets.AllowUserToOrderColumns = True
@@ -441,11 +465,11 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgoutlets.DefaultCellStyle = DataGridViewCellStyle7
-        resources.ApplyResources(Me.dgoutlets, "dgoutlets")
         Me.dgoutlets.MultiSelect = False
         Me.dgoutlets.Name = "dgoutlets"
         Me.dgoutlets.RowHeadersVisible = False
         Me.dgoutlets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgoutlets, resources.GetString("dgoutlets.ToolTip"))
         '
         'DataGridViewTextBoxColumn5
         '
@@ -484,13 +508,15 @@ Partial Class EditingForm_CAPEOPENUO
         '
         'TabPage5
         '
-        Me.TabPage5.Controls.Add(Me.dgenergy)
         resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Controls.Add(Me.dgenergy)
         Me.TabPage5.Name = "TabPage5"
+        Me.ToolTip1.SetToolTip(Me.TabPage5, resources.GetString("TabPage5.ToolTip"))
         Me.TabPage5.UseVisualStyleBackColor = True
         '
         'dgenergy
         '
+        resources.ApplyResources(Me.dgenergy, "dgenergy")
         Me.dgenergy.AllowUserToAddRows = False
         Me.dgenergy.AllowUserToDeleteRows = False
         Me.dgenergy.AllowUserToOrderColumns = True
@@ -507,11 +533,11 @@ Partial Class EditingForm_CAPEOPENUO
         DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgenergy.DefaultCellStyle = DataGridViewCellStyle8
-        resources.ApplyResources(Me.dgenergy, "dgenergy")
         Me.dgenergy.MultiSelect = False
         Me.dgenergy.Name = "dgenergy"
         Me.dgenergy.RowHeadersVisible = False
         Me.dgenergy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgenergy, resources.GetString("dgenergy.ToolTip"))
         '
         'DataGridViewTextBoxColumn6
         '
@@ -554,11 +580,13 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
+        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.Button1.UseVisualStyleBackColor = True
         '
         'GroupBox4
@@ -569,24 +597,28 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox4.Controls.Add(Me.Label2)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'chkRecalc
         '
         resources.ApplyResources(Me.chkRecalc, "chkRecalc")
         Me.chkRecalc.Name = "chkRecalc"
+        Me.ToolTip1.SetToolTip(Me.chkRecalc, resources.GetString("chkRecalc.ToolTip"))
         Me.chkRecalc.UseVisualStyleBackColor = True
         '
         'cbOverrideShape
         '
+        resources.ApplyResources(Me.cbOverrideShape, "cbOverrideShape")
         Me.cbOverrideShape.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOverrideShape.FormattingEnabled = True
-        resources.ApplyResources(Me.cbOverrideShape, "cbOverrideShape")
         Me.cbOverrideShape.Name = "cbOverrideShape"
+        Me.ToolTip1.SetToolTip(Me.cbOverrideShape, resources.GetString("cbOverrideShape.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'GroupBox7
         '
@@ -599,36 +631,43 @@ Partial Class EditingForm_CAPEOPENUO
         Me.GroupBox7.Controls.Add(Me.Label6)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip"))
         '
         'lblCOName
         '
         resources.ApplyResources(Me.lblCOName, "lblCOName")
         Me.lblCOName.Name = "lblCOName"
+        Me.ToolTip1.SetToolTip(Me.lblCOName, resources.GetString("lblCOName.ToolTip"))
         '
         'lblCOVer
         '
         resources.ApplyResources(Me.lblCOVer, "lblCOVer")
         Me.lblCOVer.Name = "lblCOVer"
+        Me.ToolTip1.SetToolTip(Me.lblCOVer, resources.GetString("lblCOVer.ToolTip"))
         '
         'lblCODesc
         '
         resources.ApplyResources(Me.lblCODesc, "lblCODesc")
         Me.lblCODesc.Name = "lblCODesc"
+        Me.ToolTip1.SetToolTip(Me.lblCODesc, resources.GetString("lblCODesc.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'EditingForm_CAPEOPENUO
         '
@@ -642,6 +681,7 @@ Partial Class EditingForm_CAPEOPENUO
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox3)
         Me.Name = "EditingForm_CAPEOPENUO"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
