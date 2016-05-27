@@ -465,7 +465,6 @@ Namespace UnitOperations
             End If
         End Function
 
-
         Public Overrides Sub CloseEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then

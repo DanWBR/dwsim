@@ -20,6 +20,7 @@ Imports ScintillaNET
 Imports System.Reflection
 Imports System.Xml.Linq
 Imports System.Linq
+Imports System.Drawing
 
 ''' <summary>
 ''' scintillaNET Editor extender for code intellisense display
@@ -35,7 +36,7 @@ Module scintillaExtender
     ''' <param name="fontsize">Size of the font to be used.</param>
     ''' <param name="viewspaces">Enables or disables whitspace highlighting.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As scintillaNET.scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean)
+    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As ScintillaNET.Scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean)
 
         scintilla.StyleResetDefault()
         scintilla.Styles(Style.[Default]).Font = fontname
@@ -163,10 +164,6 @@ Module scintillaExtender
         For Each m In methods
             netprops += m.Name + " "
         Next
-        props = Type.GetType("DWSIM.FormFlowsheet").GetProperties()
-        For Each p In props
-            If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
-        Next
         props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
         For Each p In props
             If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
@@ -179,18 +176,6 @@ Module scintillaExtender
         Dim objects As String = ""
 
         If scintilla.Tag = 1 Then
-            methods = Type.GetType("DWSIM.FormFlowsheet").GetMethods()
-            For Each m In methods
-                netprops += m.Name + " "
-            Next
-            props = Type.GetType("DWSIM.SpreadsheetForm").GetProperties()
-            For Each p In props
-                If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
-            Next
-            methods = Type.GetType("DWSIM.SpreadsheetForm").GetMethods()
-            For Each m In methods
-                netprops += m.Name + " "
-            Next
             'editor is being used at flowsheet level.
             props = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetProperties()
             For Each p In props
@@ -201,6 +186,7 @@ Module scintillaExtender
                 netprops += m.Name + " "
             Next
             objects = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
+
         Else
             'editor is being used at script unit operation level
             objects = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
@@ -220,7 +206,7 @@ Module scintillaExtender
     ''' </summary>
     ''' <param name="scintilla"></param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub SetColumnMargins(scintilla As scintillaNET.scintilla)
+    <System.Runtime.CompilerServices.Extension()> Sub SetColumnMargins(scintilla As ScintillaNET.Scintilla)
 
         Dim maxLineNumberCharLength = scintilla.Lines.Count.ToString().Length
 
@@ -234,7 +220,7 @@ Module scintillaExtender
     ''' </summary>
     ''' <param name="scintilla"></param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowAutoComplete(scintilla As scintillaNET.scintilla)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowAutoComplete(scintilla As ScintillaNET.Scintilla)
 
         Dim suggestions As String = ""
 
@@ -347,7 +333,7 @@ Module scintillaExtender
     ''' <param name="scintilla"></param>
     ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As scintillaNET.scintilla, reader As Jolt.XmlDocCommentReader)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As ScintillaNET.Scintilla, reader As Jolt.XmlDocCommentReader)
 
         'parses the last keyword (object) (before the ".") and get suggestions for the autocomplete box from its properties and methods
 
@@ -405,7 +391,7 @@ Module scintillaExtender
     ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
     ''' <returns>The formatted text to display in the tooltip.</returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Private Function FormatHelpTip(scintilla As scintillaNET.scintilla, member As MemberInfo, reader As Jolt.XmlDocCommentReader) As String
+    <System.Runtime.CompilerServices.Extension()> Private Function FormatHelpTip(scintilla As ScintillaNET.Scintilla, member As MemberInfo, reader As Jolt.XmlDocCommentReader) As String
 
         Select Case member.MemberType
 
@@ -510,7 +496,7 @@ Module scintillaExtender
     ''' <param name="scintilla"></param>
     ''' <returns></returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Private Function getLastWord(scintilla As scintillaNET.scintilla) As String
+    <System.Runtime.CompilerServices.Extension()> Private Function getLastWord(scintilla As ScintillaNET.Scintilla) As String
 
         Dim word As String = ""
 

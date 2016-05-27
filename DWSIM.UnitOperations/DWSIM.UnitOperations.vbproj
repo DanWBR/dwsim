@@ -69,6 +69,12 @@
     <Reference Include="IronPython.Modules">
       <HintPath>..\DWSIM\References\IronPython.Modules.dll</HintPath>
     </Reference>
+    <Reference Include="Jolt">
+      <HintPath>..\DWSIM\References\Jolt.dll</HintPath>
+    </Reference>
+    <Reference Include="Jolt.Testing.GeneratedTypes">
+      <HintPath>..\DWSIM\References\Jolt.Testing.GeneratedTypes.dll</HintPath>
+    </Reference>
     <Reference Include="Mapack">
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
     </Reference>
@@ -87,6 +93,9 @@
     </Reference>
     <Reference Include="RichTextBoxExtended">
       <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.3.5.1\lib\net40\ScintillaNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -120,6 +129,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_CustomUO.Designer.vb">
+      <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_CustomUO.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_ReactorConvEqGibbs.Designer.vb">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </Compile>
@@ -210,8 +225,21 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_Pump_Curves.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.designer.vb">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.designer.vb">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
+    <Compile Include="Extenders\ScintillaExtender.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
     <Compile Include="Logical Operations\Adjust.vb" />
     <Compile Include="Logical Operations\EnergyRecycle.vb" />
@@ -269,6 +297,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.en.resx">
+      <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.resx">
+      <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.en.resx">
       <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
     </EmbeddedResource>
@@ -373,6 +407,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.de.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.en.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.es.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.de.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.en.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.es.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.resx">
+      <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -657,6 +715,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bullet_lightning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turn_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\turn_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shape_square_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shape_square_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\script_code.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\control_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
