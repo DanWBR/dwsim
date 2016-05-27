@@ -47,15 +47,17 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CAPEOPENUO
+
         <System.NonSerialized()> Private _couo As Object
         <System.NonSerialized()> Private _form As Form_CapeOpenSelector
 
         Private m_reactionSetID As String = "DefaultSet"
         Private m_reactionSetName As String = ""
 
-        Private _seluo As Auxiliary.CapeOpen.CapeOpenUnitOpInfo
-        Private Shadows _ports As List(Of ICapeUnitPort)
-        <System.NonSerialized()> Private _params As List(Of ICapeParameter)
+        Public _seluo As Auxiliary.CapeOpen.CapeOpenUnitOpInfo
+        Public Shadows _ports As List(Of ICapeUnitPort)
+        <System.NonSerialized()> Public _params As List(Of ICapeParameter)
 
         <System.NonSerialized> Private _tempdata As List(Of XElement)
 
@@ -821,7 +823,7 @@ Namespace UnitOperations
 
         End Sub
 
-        Function Edit(ByVal sender As Object, ByVal e As System.EventArgs) As Object
+        Sub Edit()
             If Not _couo Is Nothing Then
                 Dim myuo As CapeOpen.ICapeUtilities = _couo
                 RestorePorts()
@@ -836,8 +838,7 @@ Namespace UnitOperations
                 UpdatePorts()
                 UpdateConnectors()
             End If
-            Return "click to show ->"
-        End Function
+        End Sub
 
 #End Region
 
@@ -1184,10 +1185,28 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_CAPEOPENUO With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_CAPEOPENUO With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -1211,8 +1230,14 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace

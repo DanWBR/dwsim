@@ -1,0 +1,730 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class EditingForm_CAPEOPENUO
+
+    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_CAPEOPENUO))
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.lblTag = New System.Windows.Forms.TextBox()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
+        Me.lblConnectedTo = New System.Windows.Forms.Label()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
+        Me.btnConfigurePP = New System.Windows.Forms.Button()
+        Me.cbFlashAlg = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.cbPropPack = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.dgvinputvars = New System.Windows.Forms.DataGridView()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.dgvoutputvars = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TabControl2 = New System.Windows.Forms.TabControl()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.dginlets = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.dgoutlets = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewButtonColumn1 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DataGridViewButtonColumn2 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.dgenergy = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewButtonColumn3 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.DataGridViewButtonColumn4 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkRecalc = New System.Windows.Forms.CheckBox()
+        Me.cbOverrideShape = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.lblCOName = New System.Windows.Forms.Label()
+        Me.lblCOVer = New System.Windows.Forms.Label()
+        Me.lblCODesc = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        Me.TabControl2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.dginlets, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
+        CType(Me.dgoutlets, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage5.SuspendLayout()
+        CType(Me.dgenergy, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'GroupBox5
+        '
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.lblTag)
+        Me.GroupBox5.Controls.Add(Me.chkActive)
+        Me.GroupBox5.Controls.Add(Me.lblConnectedTo)
+        Me.GroupBox5.Controls.Add(Me.lblStatus)
+        Me.GroupBox5.Controls.Add(Me.Label13)
+        Me.GroupBox5.Controls.Add(Me.Label12)
+        Me.GroupBox5.Controls.Add(Me.Label11)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.TabStop = False
+        '
+        'lblTag
+        '
+        resources.ApplyResources(Me.lblTag, "lblTag")
+        Me.lblTag.Name = "lblTag"
+        '
+        'chkActive
+        '
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.chkActive.UseVisualStyleBackColor = True
+        '
+        'lblConnectedTo
+        '
+        resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
+        Me.lblConnectedTo.Name = "lblConnectedTo"
+        '
+        'lblStatus
+        '
+        resources.ApplyResources(Me.lblStatus, "lblStatus")
+        Me.lblStatus.Name = "lblStatus"
+        '
+        'Label13
+        '
+        resources.ApplyResources(Me.Label13, "Label13")
+        Me.Label13.Name = "Label13"
+        '
+        'Label12
+        '
+        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.Name = "Label12"
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        '
+        'GroupBox3
+        '
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
+        Me.GroupBox3.Controls.Add(Me.btnConfigureFlashAlg)
+        Me.GroupBox3.Controls.Add(Me.btnConfigurePP)
+        Me.GroupBox3.Controls.Add(Me.cbFlashAlg)
+        Me.GroupBox3.Controls.Add(Me.Label10)
+        Me.GroupBox3.Controls.Add(Me.cbPropPack)
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.TabStop = False
+        '
+        'btnConfigureFlashAlg
+        '
+        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
+        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        '
+        'btnConfigurePP
+        '
+        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
+        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigurePP.Name = "btnConfigurePP"
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.btnConfigurePP.UseVisualStyleBackColor = True
+        '
+        'cbFlashAlg
+        '
+        resources.ApplyResources(Me.cbFlashAlg, "cbFlashAlg")
+        Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbFlashAlg.FormattingEnabled = True
+        Me.cbFlashAlg.Name = "cbFlashAlg"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
+        '
+        'cbPropPack
+        '
+        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
+        Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPropPack.FormattingEnabled = True
+        Me.cbPropPack.Name = "cbPropPack"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
+        'GroupBox6
+        '
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Controls.Add(Me.TabControl1)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.TabStop = False
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.dgvinputvars)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'dgvinputvars
+        '
+        Me.dgvinputvars.AllowUserToAddRows = False
+        Me.dgvinputvars.AllowUserToDeleteRows = False
+        Me.dgvinputvars.AllowUserToOrderColumns = True
+        Me.dgvinputvars.AllowUserToResizeRows = False
+        Me.dgvinputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvinputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvinputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column5})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.NullValue = "<empty>"
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle2
+        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
+        Me.dgvinputvars.MultiSelect = False
+        Me.dgvinputvars.Name = "dgvinputvars"
+        Me.dgvinputvars.RowHeadersVisible = False
+        Me.dgvinputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'Column3
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column3.FillWeight = 25.0!
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column5
+        '
+        Me.Column5.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'dgvoutputvars
+        '
+        Me.dgvoutputvars.AllowUserToAddRows = False
+        Me.dgvoutputvars.AllowUserToDeleteRows = False
+        Me.dgvoutputvars.AllowUserToOrderColumns = True
+        Me.dgvoutputvars.AllowUserToResizeRows = False
+        Me.dgvoutputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvoutputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvoutputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.NullValue = "<empty>"
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle5
+        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
+        Me.dgvoutputvars.MultiSelect = False
+        Me.dgvoutputvars.Name = "dgvoutputvars"
+        Me.dgvoutputvars.ReadOnly = True
+        Me.dgvoutputvars.RowHeadersVisible = False
+        Me.dgvoutputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'GroupBox1
+        '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.TabControl2)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.TabStop = False
+        '
+        'TabControl2
+        '
+        Me.TabControl2.Controls.Add(Me.TabPage3)
+        Me.TabControl2.Controls.Add(Me.TabPage4)
+        Me.TabControl2.Controls.Add(Me.TabPage5)
+        resources.ApplyResources(Me.TabControl2, "TabControl2")
+        Me.TabControl2.Name = "TabControl2"
+        Me.TabControl2.SelectedIndex = 0
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.dginlets)
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'dginlets
+        '
+        Me.dginlets.AllowUserToAddRows = False
+        Me.dginlets.AllowUserToDeleteRows = False
+        Me.dginlets.AllowUserToOrderColumns = True
+        Me.dginlets.AllowUserToResizeRows = False
+        Me.dginlets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dginlets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dginlets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.Column1, Me.Column2})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.NullValue = "<empty>"
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dginlets.DefaultCellStyle = DataGridViewCellStyle6
+        resources.ApplyResources(Me.dginlets, "dginlets")
+        Me.dginlets.MultiSelect = False
+        Me.dginlets.Name = "dginlets"
+        Me.dginlets.RowHeadersVisible = False
+        Me.dginlets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn3.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn4.FillWeight = 70.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'Column1
+        '
+        Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column1.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.Text = "C"
+        Me.Column1.UseColumnTextForButtonValue = True
+        '
+        'Column2
+        '
+        Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column2.FillWeight = 10.0!
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        Me.Column2.Text = "D"
+        Me.Column2.UseColumnTextForButtonValue = True
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.dgoutlets)
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'dgoutlets
+        '
+        Me.dgoutlets.AllowUserToAddRows = False
+        Me.dgoutlets.AllowUserToDeleteRows = False
+        Me.dgoutlets.AllowUserToOrderColumns = True
+        Me.dgoutlets.AllowUserToResizeRows = False
+        Me.dgoutlets.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgoutlets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgoutlets.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewComboBoxColumn1, Me.DataGridViewButtonColumn1, Me.DataGridViewButtonColumn2})
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.NullValue = "<empty>"
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgoutlets.DefaultCellStyle = DataGridViewCellStyle7
+        resources.ApplyResources(Me.dgoutlets, "dgoutlets")
+        Me.dgoutlets.MultiSelect = False
+        Me.dgoutlets.Name = "dgoutlets"
+        Me.dgoutlets.RowHeadersVisible = False
+        Me.dgoutlets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn5.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewComboBoxColumn1
+        '
+        Me.DataGridViewComboBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewComboBoxColumn1.FillWeight = 70.0!
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn1, "DataGridViewComboBoxColumn1")
+        Me.DataGridViewComboBoxColumn1.Name = "DataGridViewComboBoxColumn1"
+        Me.DataGridViewComboBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'DataGridViewButtonColumn1
+        '
+        Me.DataGridViewButtonColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn1.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn1, "DataGridViewButtonColumn1")
+        Me.DataGridViewButtonColumn1.Name = "DataGridViewButtonColumn1"
+        Me.DataGridViewButtonColumn1.Text = "C"
+        Me.DataGridViewButtonColumn1.UseColumnTextForButtonValue = True
+        '
+        'DataGridViewButtonColumn2
+        '
+        Me.DataGridViewButtonColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn2.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn2, "DataGridViewButtonColumn2")
+        Me.DataGridViewButtonColumn2.Name = "DataGridViewButtonColumn2"
+        Me.DataGridViewButtonColumn2.Text = "D"
+        Me.DataGridViewButtonColumn2.UseColumnTextForButtonValue = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.dgenergy)
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'dgenergy
+        '
+        Me.dgenergy.AllowUserToAddRows = False
+        Me.dgenergy.AllowUserToDeleteRows = False
+        Me.dgenergy.AllowUserToOrderColumns = True
+        Me.dgenergy.AllowUserToResizeRows = False
+        Me.dgenergy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgenergy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgenergy.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6, Me.DataGridViewComboBoxColumn2, Me.DataGridViewButtonColumn3, Me.DataGridViewButtonColumn4})
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.NullValue = "<empty>"
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgenergy.DefaultCellStyle = DataGridViewCellStyle8
+        resources.ApplyResources(Me.dgenergy, "dgenergy")
+        Me.dgenergy.MultiSelect = False
+        Me.dgenergy.Name = "dgenergy"
+        Me.dgenergy.RowHeadersVisible = False
+        Me.dgenergy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn6.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewComboBoxColumn2
+        '
+        Me.DataGridViewComboBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewComboBoxColumn2.FillWeight = 70.0!
+        resources.ApplyResources(Me.DataGridViewComboBoxColumn2, "DataGridViewComboBoxColumn2")
+        Me.DataGridViewComboBoxColumn2.Name = "DataGridViewComboBoxColumn2"
+        Me.DataGridViewComboBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'DataGridViewButtonColumn3
+        '
+        Me.DataGridViewButtonColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn3.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn3, "DataGridViewButtonColumn3")
+        Me.DataGridViewButtonColumn3.Name = "DataGridViewButtonColumn3"
+        Me.DataGridViewButtonColumn3.Text = "C"
+        Me.DataGridViewButtonColumn3.UseColumnTextForButtonValue = True
+        '
+        'DataGridViewButtonColumn4
+        '
+        Me.DataGridViewButtonColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewButtonColumn4.FillWeight = 10.0!
+        resources.ApplyResources(Me.DataGridViewButtonColumn4, "DataGridViewButtonColumn4")
+        Me.DataGridViewButtonColumn4.Name = "DataGridViewButtonColumn4"
+        Me.DataGridViewButtonColumn4.Text = "D"
+        Me.DataGridViewButtonColumn4.UseColumnTextForButtonValue = True
+        '
+        'GroupBox2
+        '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.chkRecalc)
+        Me.GroupBox4.Controls.Add(Me.cbOverrideShape)
+        Me.GroupBox4.Controls.Add(Me.Label2)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.TabStop = False
+        '
+        'chkRecalc
+        '
+        resources.ApplyResources(Me.chkRecalc, "chkRecalc")
+        Me.chkRecalc.Name = "chkRecalc"
+        Me.chkRecalc.UseVisualStyleBackColor = True
+        '
+        'cbOverrideShape
+        '
+        Me.cbOverrideShape.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOverrideShape.FormattingEnabled = True
+        resources.ApplyResources(Me.cbOverrideShape, "cbOverrideShape")
+        Me.cbOverrideShape.Name = "cbOverrideShape"
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'GroupBox7
+        '
+        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
+        Me.GroupBox7.Controls.Add(Me.lblCOName)
+        Me.GroupBox7.Controls.Add(Me.lblCOVer)
+        Me.GroupBox7.Controls.Add(Me.lblCODesc)
+        Me.GroupBox7.Controls.Add(Me.Label4)
+        Me.GroupBox7.Controls.Add(Me.Label5)
+        Me.GroupBox7.Controls.Add(Me.Label6)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.TabStop = False
+        '
+        'lblCOName
+        '
+        resources.ApplyResources(Me.lblCOName, "lblCOName")
+        Me.lblCOName.Name = "lblCOName"
+        '
+        'lblCOVer
+        '
+        resources.ApplyResources(Me.lblCOVer, "lblCOVer")
+        Me.lblCOVer.Name = "lblCOVer"
+        '
+        'lblCODesc
+        '
+        resources.ApplyResources(Me.lblCODesc, "lblCODesc")
+        Me.lblCODesc.Name = "lblCODesc"
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        '
+        'EditingForm_CAPEOPENUO
+        '
+        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.GroupBox7)
+        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox5)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBox6)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Name = "EditingForm_CAPEOPENUO"
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.TabControl2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        CType(Me.dginlets, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        CType(Me.dgoutlets, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage5.ResumeLayout(False)
+        CType(Me.dgenergy, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkActive As System.Windows.Forms.CheckBox
+    Friend WithEvents lblConnectedTo As System.Windows.Forms.Label
+    Friend WithEvents lblStatus As System.Windows.Forms.Label
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents cbFlashAlg As System.Windows.Forms.ComboBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents cbPropPack As System.Windows.Forms.ComboBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
+    Friend WithEvents btnConfigurePP As System.Windows.Forms.Button
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents lblTag As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Public WithEvents dgvinputvars As System.Windows.Forms.DataGridView
+    Public WithEvents dgvoutputvars As System.Windows.Forms.DataGridView
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabControl2 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Public WithEvents dginlets As System.Windows.Forms.DataGridView
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Public WithEvents dgoutlets As System.Windows.Forms.DataGridView
+    Public WithEvents dgenergy As System.Windows.Forms.DataGridView
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents chkRecalc As System.Windows.Forms.CheckBox
+    Friend WithEvents cbOverrideShape As System.Windows.Forms.ComboBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents lblCOName As System.Windows.Forms.Label
+    Friend WithEvents lblCOVer As System.Windows.Forms.Label
+    Friend WithEvents lblCODesc As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn1 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents DataGridViewButtonColumn1 As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents DataGridViewButtonColumn2 As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewComboBoxColumn2 As System.Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents DataGridViewButtonColumn3 As System.Windows.Forms.DataGridViewButtonColumn
+    Friend WithEvents DataGridViewButtonColumn4 As System.Windows.Forms.DataGridViewButtonColumn
+End Class
