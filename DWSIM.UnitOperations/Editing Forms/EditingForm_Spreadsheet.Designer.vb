@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EditingForm_CustomUO
+Partial Class EditingForm_SpreadsheetUO
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -24,11 +24,13 @@ Partial Class EditingForm_CustomUO
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_CustomUO))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_SpreadsheetUO))
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
@@ -45,20 +47,12 @@ Partial Class EditingForm_CustomUO
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCreateAndConnectEnergyS = New System.Windows.Forms.Button()
-        Me.btnDisconnectEnergyS = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectOutlet6 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectOutlet5 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet4 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet6 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet5 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet4 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet3 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet6 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet5 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet4 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet3 = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectInlet2 = New System.Windows.Forms.Button()
@@ -67,32 +61,26 @@ Partial Class EditingForm_CustomUO
         Me.btnDisconnectOutlet3 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
         Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnect6 = New System.Windows.Forms.Button()
-        Me.btnDisconnect5 = New System.Windows.Forms.Button()
         Me.btnDisconnect4 = New System.Windows.Forms.Button()
         Me.btnDisconnect3 = New System.Windows.Forms.Button()
         Me.btnDisconnect2 = New System.Windows.Forms.Button()
         Me.btnDisconnect1 = New System.Windows.Forms.Button()
+        Me.BtnEdit = New System.Windows.Forms.Button()
+        Me.BtnNew = New System.Windows.Forms.Button()
+        Me.BtnSearch = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvinputvars = New System.Windows.Forms.DataGridView()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
-        Me.btnAddVar = New System.Windows.Forms.ToolStripButton()
-        Me.btnRemoveVar = New System.Windows.Forms.ToolStripButton()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvoutputvars = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.cbEnergyS = New System.Windows.Forms.ComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.cbOutlet6 = New System.Windows.Forms.ComboBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.cbOutlet5 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.cbOutlet4 = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -102,13 +90,9 @@ Partial Class EditingForm_CustomUO
         Me.Label14 = New System.Windows.Forms.Label()
         Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cbOutlet1 = New System.Windows.Forms.ComboBox()
-        Me.cbInlet6 = New System.Windows.Forms.ComboBox()
-        Me.cbInlet5 = New System.Windows.Forms.ComboBox()
         Me.cbInlet4 = New System.Windows.Forms.ComboBox()
         Me.cbInlet3 = New System.Windows.Forms.ComboBox()
         Me.cbInlet2 = New System.Windows.Forms.ComboBox()
@@ -116,14 +100,15 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TbFileName = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolStrip2.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -245,38 +230,6 @@ Partial Class EditingForm_CustomUO
         Me.Label9.Name = "Label9"
         Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
-        'btnCreateAndConnectEnergyS
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectEnergyS, "btnCreateAndConnectEnergyS")
-        Me.btnCreateAndConnectEnergyS.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectEnergyS.Name = "btnCreateAndConnectEnergyS"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectEnergyS, resources.GetString("btnCreateAndConnectEnergyS.ToolTip"))
-        Me.btnCreateAndConnectEnergyS.UseVisualStyleBackColor = True
-        '
-        'btnDisconnectEnergyS
-        '
-        resources.ApplyResources(Me.btnDisconnectEnergyS, "btnDisconnectEnergyS")
-        Me.btnDisconnectEnergyS.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnectEnergyS.Name = "btnDisconnectEnergyS"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectEnergyS, resources.GetString("btnDisconnectEnergyS.ToolTip"))
-        Me.btnDisconnectEnergyS.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectOutlet6
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectOutlet6, "btnCreateAndConnectOutlet6")
-        Me.btnCreateAndConnectOutlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectOutlet6.Name = "btnCreateAndConnectOutlet6"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet6, resources.GetString("btnCreateAndConnectOutlet6.ToolTip"))
-        Me.btnCreateAndConnectOutlet6.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectOutlet5
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectOutlet5, "btnCreateAndConnectOutlet5")
-        Me.btnCreateAndConnectOutlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectOutlet5.Name = "btnCreateAndConnectOutlet5"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet5, resources.GetString("btnCreateAndConnectOutlet5.ToolTip"))
-        Me.btnCreateAndConnectOutlet5.UseVisualStyleBackColor = True
-        '
         'btnCreateAndConnectOutlet4
         '
         resources.ApplyResources(Me.btnCreateAndConnectOutlet4, "btnCreateAndConnectOutlet4")
@@ -284,22 +237,6 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet4.Name = "btnCreateAndConnectOutlet4"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet4, resources.GetString("btnCreateAndConnectOutlet4.ToolTip"))
         Me.btnCreateAndConnectOutlet4.UseVisualStyleBackColor = True
-        '
-        'btnDisconnectOutlet6
-        '
-        resources.ApplyResources(Me.btnDisconnectOutlet6, "btnDisconnectOutlet6")
-        Me.btnDisconnectOutlet6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnectOutlet6.Name = "btnDisconnectOutlet6"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet6, resources.GetString("btnDisconnectOutlet6.ToolTip"))
-        Me.btnDisconnectOutlet6.UseVisualStyleBackColor = True
-        '
-        'btnDisconnectOutlet5
-        '
-        resources.ApplyResources(Me.btnDisconnectOutlet5, "btnDisconnectOutlet5")
-        Me.btnDisconnectOutlet5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnectOutlet5.Name = "btnDisconnectOutlet5"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet5, resources.GetString("btnDisconnectOutlet5.ToolTip"))
-        Me.btnDisconnectOutlet5.UseVisualStyleBackColor = True
         '
         'btnDisconnectOutlet4
         '
@@ -340,22 +277,6 @@ Partial Class EditingForm_CustomUO
         Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
         Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
         Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet6
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet6, "btnCreateAndConnectInlet6")
-        Me.btnCreateAndConnectInlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet6.Name = "btnCreateAndConnectInlet6"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip"))
-        Me.btnCreateAndConnectInlet6.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet5
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet5, "btnCreateAndConnectInlet5")
-        Me.btnCreateAndConnectInlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet5.Name = "btnCreateAndConnectInlet5"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip"))
-        Me.btnCreateAndConnectInlet5.UseVisualStyleBackColor = True
         '
         'btnCreateAndConnectInlet4
         '
@@ -421,22 +342,6 @@ Partial Class EditingForm_CustomUO
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
         Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
         '
-        'btnDisconnect6
-        '
-        resources.ApplyResources(Me.btnDisconnect6, "btnDisconnect6")
-        Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect6.Name = "btnDisconnect6"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip"))
-        Me.btnDisconnect6.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect5
-        '
-        resources.ApplyResources(Me.btnDisconnect5, "btnDisconnect5")
-        Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect5.Name = "btnDisconnect5"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip"))
-        Me.btnDisconnect5.UseVisualStyleBackColor = True
-        '
         'btnDisconnect4
         '
         resources.ApplyResources(Me.btnDisconnect4, "btnDisconnect4")
@@ -469,6 +374,28 @@ Partial Class EditingForm_CustomUO
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
+        'BtnEdit
+        '
+        resources.ApplyResources(Me.BtnEdit, "BtnEdit")
+        Me.BtnEdit.Name = "BtnEdit"
+        Me.ToolTip1.SetToolTip(Me.BtnEdit, resources.GetString("BtnEdit.ToolTip"))
+        Me.BtnEdit.UseVisualStyleBackColor = True
+        '
+        'BtnNew
+        '
+        resources.ApplyResources(Me.BtnNew, "BtnNew")
+        Me.BtnNew.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        Me.BtnNew.Name = "BtnNew"
+        Me.ToolTip1.SetToolTip(Me.BtnNew, resources.GetString("BtnNew.ToolTip"))
+        Me.BtnNew.UseVisualStyleBackColor = True
+        '
+        'BtnSearch
+        '
+        resources.ApplyResources(Me.BtnSearch, "BtnSearch")
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.ToolTip1.SetToolTip(Me.BtnSearch, resources.GetString("BtnSearch.ToolTip"))
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
@@ -490,7 +417,6 @@ Partial Class EditingForm_CustomUO
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.dgvinputvars)
-        Me.TabPage1.Controls.Add(Me.ToolStrip2)
         Me.TabPage1.Name = "TabPage1"
         Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -504,16 +430,16 @@ Partial Class EditingForm_CustomUO
         Me.dgvinputvars.AllowUserToResizeRows = False
         Me.dgvinputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvinputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvinputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column5})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.NullValue = "<empty>"
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvinputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column3, Me.Column5, Me.Column1})
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.NullValue = "<empty>"
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
@@ -522,9 +448,12 @@ Partial Class EditingForm_CustomUO
         '
         'Column3
         '
-        Me.Column3.FillWeight = 25.0!
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column3.FillWeight = 40.0!
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
         Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
@@ -536,26 +465,14 @@ Partial Class EditingForm_CustomUO
         Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'ToolStrip2
+        'Column1
         '
-        resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddVar, Me.btnRemoveVar})
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolTip1.SetToolTip(Me.ToolStrip2, resources.GetString("ToolStrip2.ToolTip"))
-        '
-        'btnAddVar
-        '
-        resources.ApplyResources(Me.btnAddVar, "btnAddVar")
-        Me.btnAddVar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnAddVar.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
-        Me.btnAddVar.Name = "btnAddVar"
-        '
-        'btnRemoveVar
-        '
-        resources.ApplyResources(Me.btnRemoveVar, "btnRemoveVar")
-        Me.btnRemoveVar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnRemoveVar.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
-        Me.btnRemoveVar.Name = "btnRemoveVar"
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Column1.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
         '
         'TabPage2
         '
@@ -574,16 +491,16 @@ Partial Class EditingForm_CustomUO
         Me.dgvoutputvars.AllowUserToResizeRows = False
         Me.dgvoutputvars.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvoutputvars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvoutputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.NullValue = "<empty>"
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvoutputvars.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column2})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.NullValue = "<empty>"
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
         Me.dgvoutputvars.ReadOnly = True
@@ -593,9 +510,9 @@ Partial Class EditingForm_CustomUO
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewTextBoxColumn1.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -604,8 +521,8 @@ Partial Class EditingForm_CustomUO
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -613,22 +530,17 @@ Partial Class EditingForm_CustomUO
         Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
+        'Column2
+        '
+        Me.Column2.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectEnergyS)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectEnergyS)
-        Me.GroupBox1.Controls.Add(Me.Label20)
-        Me.GroupBox1.Controls.Add(Me.cbEnergyS)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet6)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet5)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet4)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet6)
-        Me.GroupBox1.Controls.Add(Me.Label17)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet6)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet5)
-        Me.GroupBox1.Controls.Add(Me.Label18)
-        Me.GroupBox1.Controls.Add(Me.cbOutlet5)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet4)
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Controls.Add(Me.cbOutlet4)
@@ -636,8 +548,6 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet3)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet2)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet6)
-        Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet5)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet4)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet3)
         Me.GroupBox1.Controls.Add(Me.btnCreateAndConnectInlet2)
@@ -652,20 +562,14 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.cbOutlet2)
         Me.GroupBox1.Controls.Add(Me.btnDisconnectOutlet1)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect6)
-        Me.GroupBox1.Controls.Add(Me.btnDisconnect5)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect4)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect3)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect2)
         Me.GroupBox1.Controls.Add(Me.btnDisconnect1)
         Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.cbOutlet1)
-        Me.GroupBox1.Controls.Add(Me.cbInlet6)
-        Me.GroupBox1.Controls.Add(Me.cbInlet5)
         Me.GroupBox1.Controls.Add(Me.cbInlet4)
         Me.GroupBox1.Controls.Add(Me.cbInlet3)
         Me.GroupBox1.Controls.Add(Me.cbInlet2)
@@ -675,48 +579,6 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        '
-        'Label20
-        '
-        resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Name = "Label20"
-        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
-        '
-        'cbEnergyS
-        '
-        resources.ApplyResources(Me.cbEnergyS, "cbEnergyS")
-        Me.cbEnergyS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEnergyS.FormattingEnabled = True
-        Me.cbEnergyS.Name = "cbEnergyS"
-        Me.ToolTip1.SetToolTip(Me.cbEnergyS, resources.GetString("cbEnergyS.ToolTip"))
-        '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Name = "Label17"
-        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
-        '
-        'cbOutlet6
-        '
-        resources.ApplyResources(Me.cbOutlet6, "cbOutlet6")
-        Me.cbOutlet6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet6.FormattingEnabled = True
-        Me.cbOutlet6.Name = "cbOutlet6"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet6, resources.GetString("cbOutlet6.ToolTip"))
-        '
-        'Label18
-        '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
-        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
-        '
-        'cbOutlet5
-        '
-        resources.ApplyResources(Me.cbOutlet5, "cbOutlet5")
-        Me.cbOutlet5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet5.FormattingEnabled = True
-        Me.cbOutlet5.Name = "cbOutlet5"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet5, resources.GetString("cbOutlet5.ToolTip"))
         '
         'Label19
         '
@@ -780,18 +642,6 @@ Partial Class EditingForm_CustomUO
         Me.Label7.Name = "Label7"
         Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
-        '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
@@ -811,22 +661,6 @@ Partial Class EditingForm_CustomUO
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
         Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
-        '
-        'cbInlet6
-        '
-        resources.ApplyResources(Me.cbInlet6, "cbInlet6")
-        Me.cbInlet6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbInlet6.FormattingEnabled = True
-        Me.cbInlet6.Name = "cbInlet6"
-        Me.ToolTip1.SetToolTip(Me.cbInlet6, resources.GetString("cbInlet6.ToolTip"))
-        '
-        'cbInlet5
-        '
-        resources.ApplyResources(Me.cbInlet5, "cbInlet5")
-        Me.cbInlet5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbInlet5.FormattingEnabled = True
-        Me.cbInlet5.Name = "cbInlet5"
-        Me.ToolTip1.SetToolTip(Me.cbInlet5, resources.GetString("cbInlet5.ToolTip"))
         '
         'cbInlet4
         '
@@ -875,19 +709,36 @@ Partial Class EditingForm_CustomUO
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.Button1)
+        Me.GroupBox2.Controls.Add(Me.BtnEdit)
+        Me.GroupBox2.Controls.Add(Me.BtnNew)
+        Me.GroupBox2.Controls.Add(Me.BtnSearch)
+        Me.GroupBox2.Controls.Add(Me.TbFileName)
+        Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
-        'Button1
+        'TbFileName
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TbFileName, "TbFileName")
+        Me.TbFileName.Name = "TbFileName"
+        Me.TbFileName.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip"))
         '
-        'EditingForm_CustomUO
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.CheckFileExists = False
+        Me.OpenFileDialog1.CheckPathExists = False
+        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
+        Me.OpenFileDialog1.RestoreDirectory = True
+        '
+        'EditingForm_SpreadsheetUO
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -896,7 +747,7 @@ Partial Class EditingForm_CustomUO
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox3)
-        Me.Name = "EditingForm_CustomUO"
+        Me.Name = "EditingForm_SpreadsheetUO"
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
@@ -905,18 +756,16 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox6.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
         CType(Me.dgvinputvars, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolStrip2.ResumeLayout(False)
-        Me.ToolStrip2.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         CType(Me.dgvoutputvars, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
-    End Sub
+End Sub
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents chkActive As System.Windows.Forms.CheckBox
     Friend WithEvents lblConnectedTo As System.Windows.Forms.Label
@@ -935,19 +784,7 @@ Partial Class EditingForm_CustomUO
     Friend WithEvents lblTag As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnCreateAndConnectEnergyS As System.Windows.Forms.Button
-    Friend WithEvents btnDisconnectEnergyS As System.Windows.Forms.Button
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents cbEnergyS As System.Windows.Forms.ComboBox
-    Friend WithEvents btnCreateAndConnectOutlet6 As System.Windows.Forms.Button
-    Friend WithEvents btnCreateAndConnectOutlet5 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectOutlet4 As System.Windows.Forms.Button
-    Friend WithEvents btnDisconnectOutlet6 As System.Windows.Forms.Button
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents cbOutlet6 As System.Windows.Forms.ComboBox
-    Friend WithEvents btnDisconnectOutlet5 As System.Windows.Forms.Button
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents cbOutlet5 As System.Windows.Forms.ComboBox
     Friend WithEvents btnDisconnectOutlet4 As System.Windows.Forms.Button
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents cbOutlet4 As System.Windows.Forms.ComboBox
@@ -955,8 +792,6 @@ Partial Class EditingForm_CustomUO
     Friend WithEvents btnCreateAndConnectOutlet3 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectOutlet2 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
-    Friend WithEvents btnCreateAndConnectInlet6 As System.Windows.Forms.Button
-    Friend WithEvents btnCreateAndConnectInlet5 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet4 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet3 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet2 As System.Windows.Forms.Button
@@ -971,38 +806,36 @@ Partial Class EditingForm_CustomUO
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents cbOutlet2 As System.Windows.Forms.ComboBox
     Friend WithEvents btnDisconnectOutlet1 As System.Windows.Forms.Button
-    Friend WithEvents btnDisconnect6 As System.Windows.Forms.Button
-    Friend WithEvents btnDisconnect5 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect4 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect3 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect2 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnect1 As System.Windows.Forms.Button
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents cbOutlet1 As System.Windows.Forms.ComboBox
-    Friend WithEvents cbInlet6 As System.Windows.Forms.ComboBox
-    Friend WithEvents cbInlet5 As System.Windows.Forms.ComboBox
     Friend WithEvents cbInlet4 As System.Windows.Forms.ComboBox
     Friend WithEvents cbInlet3 As System.Windows.Forms.ComboBox
     Friend WithEvents cbInlet2 As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbInlet1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents BtnEdit As System.Windows.Forms.Button
+    Friend WithEvents BtnNew As System.Windows.Forms.Button
+    Friend WithEvents BtnSearch As System.Windows.Forms.Button
+    Friend WithEvents TbFileName As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Public WithEvents dgvinputvars As System.Windows.Forms.DataGridView
-    Public WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
-    Public WithEvents btnAddVar As System.Windows.Forms.ToolStripButton
-    Public WithEvents btnRemoveVar As System.Windows.Forms.ToolStripButton
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Public WithEvents dgvoutputvars As System.Windows.Forms.DataGridView
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

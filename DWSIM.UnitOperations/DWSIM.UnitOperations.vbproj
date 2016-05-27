@@ -129,6 +129,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Editing Forms\EditingForm_Spreadsheet.Designer.vb">
+      <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Spreadsheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_CustomUO.Designer.vb">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </Compile>
@@ -297,6 +303,12 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.en.resx">
+      <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.resx">
+      <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.en.resx">
       <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
     </EmbeddedResource>

@@ -4,11 +4,11 @@ Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
 
-Public Class EditingForm_CustomUO
+Public Class EditingForm_SpreadsheetUO
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public Property SimObject As UnitOperations.CustomUO
+    Public Property SimObject As UnitOperations.ExcelUO
 
     Public Loaded As Boolean = False
 
@@ -72,10 +72,6 @@ Public Class EditingForm_CustomUO
             cbInlet3.Items.AddRange(mslist)
             cbInlet4.Items.Clear()
             cbInlet4.Items.AddRange(mslist)
-            cbInlet5.Items.Clear()
-            cbInlet5.Items.AddRange(mslist)
-            cbInlet6.Items.Clear()
-            cbInlet6.Items.AddRange(mslist)
 
             cbOutlet1.Items.Clear()
             cbOutlet1.Items.AddRange(mslist)
@@ -85,46 +81,37 @@ Public Class EditingForm_CustomUO
             cbOutlet3.Items.AddRange(mslist)
             cbOutlet4.Items.Clear()
             cbOutlet4.Items.AddRange(mslist)
-            cbOutlet5.Items.Clear()
-            cbOutlet5.Items.AddRange(mslist)
-            cbOutlet6.Items.Clear()
-            cbOutlet6.Items.AddRange(mslist)
 
             If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.InputConnectors(1).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.InputConnectors(2).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.InputConnectors(4).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.InputConnectors(5).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(5).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.InputConnectors(6).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(6).AttachedConnector.AttachedFrom.Tag
+            If .GraphicObject.InputConnectors(3).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(1).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(2).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
-            If .GraphicObject.OutputConnectors(4).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(4).AttachedConnector.AttachedTo.Tag
-            If .GraphicObject.OutputConnectors(5).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(5).AttachedConnector.AttachedTo.Tag
-            If .GraphicObject.OutputConnectors(6).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(6).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.OutputConnectors(3).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
 
             Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
 
             cbEnergyE.Items.Clear()
             cbEnergyE.Items.AddRange(eslist)
 
-            If .GraphicObject.InputConnectors(3).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.InputConnectors(3).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.InputConnectors(4).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.InputConnectors(4).AttachedConnector.AttachedTo.Tag
 
-            cbEnergyS.Items.Clear()
-            cbEnergyS.Items.AddRange(eslist)
+            'file
 
-            If .GraphicObject.OutputConnectors(3).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
+            TbFileName.Text = .Filename
 
-            'variables
+            'parameters
 
             dgvinputvars.Rows.Clear()
-            For Each item In .InputVariables
-                dgvinputvars.Rows.Add(New Object() {item.Key, item.Value})
+            For Each par In .InputParams
+                dgvinputvars.Rows.Add(New Object() {par.Value.Name, par.Value.Value.ToString(nf), par.Value.Unit})
             Next
 
             dgvoutputvars.Rows.Clear()
-            For Each item In .OutputVariables
-                dgvoutputvars.Rows.Add(New Object() {item.Key, item.Value})
+            For Each par In .OutputParams
+                dgvoutputvars.Rows.Add(New Object() {par.Value.Name, par.Value.Value.ToString(nf), par.Value.Unit})
             Next
 
             'property package
@@ -212,38 +199,13 @@ Public Class EditingForm_CustomUO
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(3).IsAttached Then
+                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(4).IsAttached Then
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
 
-                If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(3).AttachedConnector.AttachedFrom, gobj)
-                flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 3)
-
-            End If
-
-        End If
-
-    End Sub
-
-    Private Sub cbEnergyS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergyS.SelectedIndexChanged
-
-        If Loaded Then
-
-            Dim text As String = cbEnergyS.Text
-
-            If text <> "" Then
-
-                Dim gobj = SimObject.GraphicObject
-                Dim flowsheet = SimObject.FlowSheet
-
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(3).IsAttached Then
-                    MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Exit Sub
-                End If
-
-                If gobj.OutputConnectors(3).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(3).AttachedConnector.AttachedTo)
-                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 3, 0)
+                If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(4).AttachedConnector.AttachedFrom, gobj)
+                flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 4)
 
             End If
 
@@ -257,11 +219,8 @@ Public Class EditingForm_CustomUO
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click,
                                                                                             btnCreateAndConnectInlet3.Click, btnCreateAndConnectInlet4.Click,
-                                                                                            btnCreateAndConnectInlet5.Click, btnCreateAndConnectInlet6.Click,
                                                                                             btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click,
-                                                                                            btnCreateAndConnectOutlet3.Click, btnCreateAndConnectOutlet4.Click,
-                                                                                            btnCreateAndConnectOutlet5.Click, btnCreateAndConnectOutlet6.Click,
-                                                                                            btnCreateAndConnectEnergy.Click, btnCreateAndConnectEnergyS.Click
+                                                                                            btnCreateAndConnectOutlet3.Click, btnCreateAndConnectOutlet4.Click, btnCreateAndConnectEnergy.Click
 
         Dim sgobj = SimObject.GraphicObject
         Dim fs = SimObject.FlowSheet
@@ -283,15 +242,7 @@ Public Class EditingForm_CustomUO
 
         ElseIf sender Is btnCreateAndConnectInlet4 Then
 
-            iidx = 4
-
-        ElseIf sender Is btnCreateAndConnectInlet5 Then
-
-            iidx = 5
-
-        ElseIf sender Is btnCreateAndConnectInlet6 Then
-
-            iidx = 6
+            iidx = 3
 
         ElseIf sender Is btnCreateAndConnectOutlet1 Then
 
@@ -307,15 +258,7 @@ Public Class EditingForm_CustomUO
 
         ElseIf sender Is btnCreateAndConnectOutlet4 Then
 
-            oidx = 4
-
-        ElseIf sender Is btnCreateAndConnectOutlet5 Then
-
-            oidx = 5
-
-        ElseIf sender Is btnCreateAndConnectOutlet6 Then
-
-            oidx = 6
+            oidx = 3
 
         End If
 
@@ -339,31 +282,21 @@ Public Class EditingForm_CustomUO
 
         If sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(3).Position.X - 50, sgobj.InputConnectors(3).Position.Y, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(4).Position.X - 50, sgobj.InputConnectors(3).Position.Y, "")
 
-            If sgobj.InputConnectors(3).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(3).AttachedConnector.AttachedFrom, sgobj)
-            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 3)
-
-        End If
-
-        If sender Is btnCreateAndConnectEnergyS Then
-
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.OutputConnectors(3).Position.X + 30, sgobj.OutputConnectors(0).Position.Y, "")
-
-            If sgobj.OutputConnectors(3).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(3).AttachedConnector.AttachedTo)
-            fs.ConnectObjects(sgobj, obj.GraphicObject, 3, 0)
+            If sgobj.InputConnectors(4).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(4).AttachedConnector.AttachedFrom, sgobj)
+            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 4)
 
         End If
-
 
         UpdateInfo()
         RequestCalc()
 
     End Sub
 
-    Private Sub btnDisconnect_Click(sender As Object, e As EventArgs) Handles btnDisconnect1.Click, btnDisconnect2.Click, btnDisconnect3.Click, btnDisconnect4.Click, btnDisconnect5.Click, btnDisconnect6.Click,
-                                                                              btnDisconnectOutlet1.Click, btnDisconnectOutlet2.Click, btnDisconnectOutlet3.Click, btnDisconnectOutlet4.Click, btnDisconnectOutlet5.Click, btnDisconnectOutlet6.Click,
-                                                                              btnDisconnectEnergyE.Click, btnDisconnectEnergyS.Click
+    Private Sub btnDisconnect_Click(sender As Object, e As EventArgs) Handles btnDisconnect1.Click, btnDisconnect2.Click, btnDisconnect3.Click, btnDisconnect4.Click,
+                                                                              btnDisconnectOutlet1.Click, btnDisconnectOutlet2.Click, btnDisconnectOutlet3.Click, btnDisconnectOutlet4.Click,
+                                                                              btnDisconnectEnergyE.Click
 
         Dim iindex As Integer = -1
         Dim oindex As Integer = -1
@@ -386,18 +319,8 @@ Public Class EditingForm_CustomUO
                 End If
             Case "btnDisconnect4"
                 If cbInlet4.SelectedItem.ToString <> "" Then
-                    iindex = 4
+                    iindex = 3
                     cbInlet4.SelectedItem = Nothing
-                End If
-            Case "btnDisconnect5"
-                If cbInlet5.SelectedItem.ToString <> "" Then
-                    iindex = 5
-                    cbInlet5.SelectedItem = Nothing
-                End If
-            Case "btnDisconnect6"
-                If cbInlet6.SelectedItem.ToString <> "" Then
-                    iindex = 6
-                    cbInlet6.SelectedItem = Nothing
                 End If
             Case "btnDisconnectOutlet1"
                 If cbOutlet1.SelectedItem.ToString <> "" Then
@@ -416,28 +339,13 @@ Public Class EditingForm_CustomUO
                 End If
             Case "btnDisconnectOutlet4"
                 If cbOutlet4.SelectedItem.ToString <> "" Then
-                    oindex = 4
+                    oindex = 3
                     cbOutlet4.SelectedItem = Nothing
-                End If
-            Case "btnDisconnectOutlet5"
-                If cbOutlet5.SelectedItem.ToString <> "" Then
-                    oindex = 5
-                    cbOutlet5.SelectedItem = Nothing
-                End If
-            Case "btnDisconnectOutlet6"
-                If cbOutlet6.SelectedItem.ToString <> "" Then
-                    oindex = 6
-                    cbOutlet6.SelectedItem = Nothing
                 End If
             Case "btnDisconnectEnergyE"
                 If cbEnergyE.SelectedItem.ToString <> "" Then
-                    oindex = 3
+                    oindex = 4
                     cbEnergyE.SelectedItem = Nothing
-                End If
-            Case "btnDisconnectEnergyS"
-                If cbEnergyS.SelectedItem.ToString <> "" Then
-                    oindex = 3
-                    cbEnergyS.SelectedItem = Nothing
                 End If
         End Select
 
@@ -446,11 +354,11 @@ Public Class EditingForm_CustomUO
 
     End Sub
 
-    Sub HandleInletConnections(sender As Object, e As EventArgs) Handles cbInlet1.SelectedIndexChanged, cbInlet2.SelectedIndexChanged, cbInlet3.SelectedIndexChanged, cbInlet4.SelectedIndexChanged, cbInlet5.SelectedIndexChanged, cbInlet6.SelectedIndexChanged
+    Sub HandleInletConnections(sender As Object, e As EventArgs) Handles cbInlet1.SelectedIndexChanged, cbInlet2.SelectedIndexChanged, cbInlet3.SelectedIndexChanged, cbInlet4.SelectedIndexChanged
         If Loaded Then UpdateInletConnection(sender)
     End Sub
 
-    Sub HandleOutletConnections(sender As Object, e As EventArgs) Handles cbOutlet1.SelectedIndexChanged, cbOutlet2.SelectedIndexChanged, cbOutlet3.SelectedIndexChanged, cbOutlet4.SelectedIndexChanged, cbOutlet5.SelectedIndexChanged, cbOutlet6.SelectedIndexChanged
+    Sub HandleOutletConnections(sender As Object, e As EventArgs) Handles cbOutlet1.SelectedIndexChanged, cbOutlet2.SelectedIndexChanged, cbOutlet3.SelectedIndexChanged, cbOutlet4.SelectedIndexChanged
         If Loaded Then UpdateOutletConnection(sender)
     End Sub
 
@@ -502,41 +410,66 @@ Public Class EditingForm_CustomUO
 
     End Sub
 
-    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnAddVar.Click
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        OpenFileDialog1.FileName = TbFileName.Text
+        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *xls; *.ods"
 
-        dgvinputvars.Rows.Add(New Object() {"var" + (SimObject.InputVariables.Count + 1).ToString, "0"})
+        OpenFileDialog1.ValidateNames = True
+        OpenFileDialog1.CheckFileExists = True
+        OpenFileDialog1.CheckPathExists = True
 
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            TbFileName.Text = OpenFileDialog1.FileName
+        End If
+    End Sub
+
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
+        If TbFileName.Text <> "" Then
+            If My.Computer.FileSystem.FileExists(TbFileName.Text) Then
+                If Not Thermodynamics.Calculator.IsRunningOnMono Then
+                    Process.Start(TbFileName.Text)
+                Else
+                    Process.Start(New ProcessStartInfo("xdg-open", TbFileName.Text) With {.UseShellExecute = False})
+                End If
+            Else
+                MessageBox.Show(SimObject.FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"), SimObject.FlowSheet.GetTranslatedString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnNew_Click(sender As Object, e As EventArgs) Handles BtnNew.Click
+
+        Dim FileName As String = SimObject.GraphicObject.Name
+
+        OpenFileDialog1.Title = "New Filename"
+        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *xls; *.ods"
+        OpenFileDialog1.ValidateNames = False
+        OpenFileDialog1.CheckFileExists = False
+        OpenFileDialog1.CheckPathExists = True
+        OpenFileDialog1.InitialDirectory = IO.Path.GetDirectoryName(FileName)
+
+        If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            Dim s As String = OpenFileDialog1.FileName
+            If IO.Path.GetExtension(s).ToLower = ".ods" Then
+                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.ods", s)
+            ElseIf IO.Path.GetExtension(s).ToLower = ".xls" Then
+                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xls", s)
+            Else
+                FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xlsx", s)
+            End If
+            TbFileName.Text = s
+        End If
+    End Sub
+
+    Private Sub TbFileName_TextChanged(sender As Object, e As EventArgs) Handles TbFileName.TextChanged
+        If Loaded Then SimObject.Filename = TbFileName.Text
     End Sub
 
     Private Sub dgvinputvars_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvinputvars.CellValueChanged
-        UpdateInputVars()
-    End Sub
-
-    Private Sub btnRemoveVar_Click(sender As Object, e As EventArgs) Handles btnRemoveVar.Click
-        dgvinputvars.Rows.Remove(dgvinputvars.SelectedCells(0).OwningRow)
-        UpdateInputVars()
-    End Sub
-
-    Private Sub UpdateInputVars()
         If Loaded Then
-            SimObject.InputVariables.Clear()
-            For Each row As DataGridViewRow In dgvinputvars.Rows
-                Try
-                    SimObject.InputVariables.Add(row.Cells(0).Value, row.Cells(1).Value)
-                Catch ex As Exception
-                    MessageBox.Show(ex.Message)
-                End Try
-            Next
+            Dim row = dgvinputvars.Rows(e.RowIndex)
+            SimObject.InputParams(row.Cells(0).Value).Value = row.Cells(1).Value
         End If
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If Thermodynamics.Calculator.IsRunningOnMono Then
-            Dim f As New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = SimObject}
-            SimObject.FlowSheet.DisplayForm(f)
-        Else
-            Dim f As New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = SimObject}
-            SimObject.FlowSheet.DisplayForm(f)
-        End If
-    End Sub
 End Class
