@@ -596,7 +596,6 @@ Namespace PropertyPackages
 
             K = fugliq.DivideY(fugvap)
 
-          
             If Double.IsNaN(K.Sum) Or Double.IsInfinity(K.Sum) Or K.Sum = 0.0# Then
                 Dim cprops = DW_GetConstantProperties()
                 If Settings.EnableParallelProcessing Then
@@ -647,6 +646,10 @@ Namespace PropertyPackages
                     Next
                 End If
             End If
+
+            For i = 0 To n
+                If K(i) < 0.0000000001 Then K(i) = 0.0000000001
+            Next
 
             Return K
 

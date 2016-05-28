@@ -1336,10 +1336,10 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbPressureCalcMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 23</value>
+    <value>173, 23</value>
   </data>
   <data name="cbPressureCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 21</value>
+    <value>251, 21</value>
   </data>
   <data name="cbPressureCalcMode.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>

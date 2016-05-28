@@ -47,7 +47,11 @@ Public Class EditingForm_ReactorConvEqGibbs
                     lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
                     lblStatus.ForeColor = Drawing.Color.Gray
                 ElseIf .ErrorMessage <> "" Then
-                    lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
+                    If .ErrorMessage.Length > 50 Then
+                        lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
+                    Else
+                        lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
+                    End If
                     lblStatus.ForeColor = Drawing.Color.Red
                 Else
                     lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")

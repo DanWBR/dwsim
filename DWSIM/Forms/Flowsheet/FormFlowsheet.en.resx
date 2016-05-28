@@ -225,15 +225,6 @@
   <data name="tsbAtivar.Text" xml:space="preserve">
     <value>Enable/Disable Flowsheet Calculator</value>
   </data>
-  <data name="ToolStripButton13.Text" xml:space="preserve">
-    <value>Calculate Flowsheet</value>
-  </data>
-  <data name="ToolStripButton14.Text" xml:space="preserve">
-    <value>Abort Calculation</value>
-  </data>
-  <data name="ToolStripButton15.Text" xml:space="preserve">
-    <value>Clear Calculation Queue</value>
-  </data>
   <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
     <value>Activate the Simultaneous Adjust Solver</value>
   </data>
@@ -338,43 +329,43 @@
     <value>E&amp;dit</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="BlocoDeSimulacaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Flowsheet Object</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="TabelaDePropriedadesToolStripMenuItem.Text" xml:space="preserve">
     <value>Property Table</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="TabelaDePropriedatesMestraToolStripMenuItem.Text" xml:space="preserve">
     <value>Master Property Table</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Text" xml:space="preserve">
     <value>Linked Spreadsheet Table</value>
   </data>
   <data name="FiguraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="FiguraToolStripMenuItem.Text" xml:space="preserve">
     <value>Image</value>
   </data>
   <data name="TextoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="TextoToolStripMenuItem.Text" xml:space="preserve">
     <value>Text</value>
   </data>
   <data name="RectangleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>207, 22</value>
   </data>
   <data name="RectangleToolStripMenuItem.Text" xml:space="preserve">
     <value>Rectangle</value>
@@ -413,7 +404,7 @@
     <value>321, 6</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
+    <value>47, 20</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Tools</value>
@@ -443,7 +434,7 @@
     <value>Script Manager</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
     <value>Create Report</value>
@@ -504,6 +495,12 @@
   </data>
   <data name="RestoreLayoutTSMI.Text" xml:space="preserve">
     <value>Restore Docking Panels' Layout</value>
+  </data>
+  <data name="tsmiCloseOpenedEditors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
+    <value>Close Opened Object Editors</value>
   </data>
   <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>

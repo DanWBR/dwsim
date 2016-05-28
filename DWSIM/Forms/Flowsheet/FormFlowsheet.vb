@@ -2855,4 +2855,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         f.ShowDialog(Me)
     End Sub
 
+    Private Sub tsmiCloseOpenedEditors_Click(sender As Object, e As EventArgs) Handles tsmiCloseOpenedEditors.Click
+        For Each obj In Me.SimulationObjects.Values
+            obj.CloseEditForm()
+        Next
+    End Sub
+
 End Class
