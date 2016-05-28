@@ -172,7 +172,6 @@ Namespace Streams
         End Function
 
         Public Function Item(ByVal index As Object) As Object Implements CapeOpen.ICapeCollection.Item
-
             Return m_work
         End Function
 
@@ -204,7 +203,6 @@ Namespace Streams
             End If
         End Sub
 
-
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.stream_en_32
         End Function
@@ -213,7 +211,7 @@ Namespace Streams
             If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
                 Return "Representa o fluxo de energia entrando e saindo das operações unitárias"
             Else
-                Return "Represents energy flowing in and out of unit operations"
+                Return "Energy flow from/to Unit Operations"
             End If
         End Function
 

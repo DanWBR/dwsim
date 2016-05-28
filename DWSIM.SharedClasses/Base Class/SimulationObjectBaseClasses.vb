@@ -328,13 +328,13 @@ Namespace UnitOperations
         ''' </summary>
         ''' <returns>An object of the same type with the same properties.</returns>
         ''' <remarks>Properties and fields marked with the 'NonSerializable' attribute aren't cloned.</remarks>
-        Public Function Clone() As Object Implements System.ICloneable.Clone
+        Public Overridable Function Clone() As Object Implements System.ICloneable.Clone
 
             Return ObjectCopy(Me)
 
         End Function
 
-        Function ObjectCopy(ByVal obj As UnitOperations.BaseClass) As UnitOperations.BaseClass
+        Function ObjectCopy(ByVal obj As UnitOperations.BaseClass) As Object
 
             Dim objMemStream As New MemoryStream(250000)
             Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))

@@ -165,7 +165,7 @@ Namespace UnitOperations
 
 #Region "    CAPE-OPEN Specifics"
 
-        <OnDeserialized()> Sub PersistLoad(ByVal context As System.Runtime.Serialization.StreamingContext)
+        Sub PersistLoad(ByVal context As System.Runtime.Serialization.StreamingContext)
 
             If Type.GetType("Mono.Runtime") Is Nothing Then
 
@@ -243,7 +243,7 @@ Namespace UnitOperations
 
         End Sub
 
-        <OnSerializing()> Sub PersistSave(ByVal context As System.Runtime.Serialization.StreamingContext)
+        Sub PersistSave(ByVal context As System.Runtime.Serialization.StreamingContext)
 
             'If the Unit Operation doesn't implement any of the IPersist interfaces, the _istr variable will be null.
             'The object will have to be restored using the parameters and ports' information only.
@@ -452,7 +452,7 @@ Namespace UnitOperations
                                 End Try
                                 If cnobj IsNot Nothing Then
                                     If Not Me.FlowSheet Is Nothing Then
-                                        Dim mystr = FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentName)
+                                        Dim mystr As Object = FlowSheet.SimulationObjects(CType(cnobj, ICapeIdentification).ComponentName)
                                         Try
                                             cnobj = myport.connectedObject
                                         Catch ex As Exception

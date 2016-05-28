@@ -1335,6 +1335,8 @@ Namespace GraphicObjects
 
                     Dim props = Owner.GetFlowsheet.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
 
+                    If TypeOf Owner Is CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
+
                     Dim propstring, propval, propunit As String, pval0 As Object
 
                     For Each prop In props

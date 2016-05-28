@@ -50,7 +50,11 @@ Public Class EditingForm_CAPEOPENUO
                     lblStatus.Text = .FlowSheet.GetTranslatedString("Inativo")
                     lblStatus.ForeColor = Drawing.Color.Gray
                 ElseIf .ErrorMessage <> "" Then
-                    lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
+                    If .ErrorMessage.Length > 50 Then
+                        lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage.Substring(50) & "...)"
+                    Else
+                        lblStatus.Text = .FlowSheet.GetTranslatedString("Erro") & " (" & .ErrorMessage & ")"
+                    End If
                     lblStatus.ForeColor = Drawing.Color.Red
                 Else
                     lblStatus.Text = .FlowSheet.GetTranslatedString("NoCalculado")
@@ -81,7 +85,7 @@ Public Class EditingForm_CAPEOPENUO
             DirectCast(dgoutlets.Columns(1), DataGridViewComboBoxColumn).Items.AddRange(mslist)
 
             DirectCast(dgenergy.Columns(1), DataGridViewComboBoxColumn).Items.Clear()
-            DirectCast(dgenergy.Columns(1), DataGridViewComboBoxColumn).Items.AddRange(mslist)
+            DirectCast(dgenergy.Columns(1), DataGridViewComboBoxColumn).Items.AddRange(eslist)
 
             'populate ports
 
@@ -330,6 +334,7 @@ Public Class EditingForm_CAPEOPENUO
 
             SimObject.UpdateConnectorPositions()
             UpdateInfo()
+            RequestCalc()
 
         End If
 
@@ -378,10 +383,6 @@ Public Class EditingForm_CAPEOPENUO
         Dim fs = SimObject.FlowSheet
         Dim gobj = SimObject.GraphicObject
 
-        If obj.GraphicObject.OutputConnectors(0).IsAttached Then
-            MessageBox.Show(fs.GetTranslatedString("Todasasconexespossve"), fs.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
         Dim cpoint = gobj.InputConnectors.Where(Function(x) x.ConnectorName = p.ComponentName).FirstOrDefault
         If cpoint.IsAttached Then
             fs.DisconnectObjects(cpoint.AttachedConnector.AttachedFrom, gobj)
@@ -395,10 +396,6 @@ Public Class EditingForm_CAPEOPENUO
         Dim fs = SimObject.FlowSheet
         Dim gobj = SimObject.GraphicObject
 
-        If obj.GraphicObject.InputConnectors(0).IsAttached Then
-            MessageBox.Show(fs.GetTranslatedString("Todasasconexespossve"), fs.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
         Dim cpoint = gobj.OutputConnectors.Where(Function(x) x.ConnectorName = p.ComponentName).FirstOrDefault
         If cpoint.IsAttached Then
             fs.DisconnectObjects(gobj, cpoint.AttachedConnector.AttachedTo)
