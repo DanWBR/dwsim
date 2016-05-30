@@ -76,7 +76,7 @@ Namespace UnitOperations
 
         Public Property AttachedUtilities As New List(Of IAttachedUtility) Implements ISimulationObject.AttachedUtilities
 
-        Public Property PreferredFlashAlgorithm As FlashMethod = FlashMethod.Default_Algorithm Implements ISimulationObject.PreferredFlashAlgorithm
+        Public Property PreferredFlashAlgorithmTag As String = "" Implements ISimulationObject.PreferredFlashAlgorithmTag
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated
 
         Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode

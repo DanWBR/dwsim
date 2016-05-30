@@ -94,10 +94,10 @@ Public Class EditingForm_ComprExpndr
             cbPropPack.Items.AddRange(proppacks)
             cbPropPack.SelectedItem = .PropertyPackage.Tag
 
-            Dim flashalgos As String() = [Enum].GetNames(.PreferredFlashAlgorithm.GetType)
+            Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
             cbFlashAlg.Items.Clear()
             cbFlashAlg.Items.AddRange(flashalgos)
-            cbFlashAlg.SelectedItem = .PreferredFlashAlgorithm.ToString
+            cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag
 
             'annotation
 
@@ -394,7 +394,7 @@ Public Class EditingForm_ComprExpndr
 
     Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
         If Loaded Then
-            SimObject.PreferredFlashAlgorithm = cbFlashAlg.SelectedIndex
+            SimObject.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedItem.ToString
             RequestCalc()
         End If
     End Sub

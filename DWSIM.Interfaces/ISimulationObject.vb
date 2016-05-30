@@ -6,7 +6,7 @@
 
     Sub UpdateEditForm()
 
-    Property PreferredFlashAlgorithm As Enums.FlashMethod
+    Property PreferredFlashAlgorithmTag As String
 
     Property ErrorMessage() As String
 
