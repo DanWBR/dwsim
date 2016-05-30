@@ -280,7 +280,15 @@ Namespace PropertyPackages
         Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
 
             Get
-                Return FlashAlgorithm.Clone()
+                If Not FlashAlgorithm Is Nothing Then
+                    Return FlashAlgorithm.Clone()
+                Else
+                    If Not Flowsheet Is Nothing Then
+                        Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0)
+                    Else
+                        Return New NestedLoops()
+                    End If
+                End If
             End Get
 
         End Property
