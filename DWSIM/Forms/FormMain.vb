@@ -67,6 +67,7 @@ Public Class FormMain
     Public AvailableComponents As New Dictionary(Of String, BaseClasses.ConstantProperties)
     Public AvailableUnitSystems As New Dictionary(Of String, SystemsOfUnits.Units)
     Public PropertyPackages As New Dictionary(Of String, PropertyPackages.PropertyPackage)
+    Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
 
     Public COMonitoringObjects As New Dictionary(Of String, UnitOperations.UnitOperations.Auxiliary.CapeOpen.CapeOpenUnitOpInfo)
     Public WithEvents timer1 As New Timer
@@ -582,6 +583,32 @@ Public Class FormMain
 
     End Sub
 
+    Sub AddFlashAlgorithms()
+
+        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+         Dim availableTypes As New List(Of Type)()
+
+        availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.IFlashAlgorithm") IsNot Nothing, True, False)))
+      
+        For Each item In availableTypes.OrderBy(Function(x) x.Name)
+            If Not item.IsAbstract Then
+                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
+                If Not obj.InternalUseOnly Then FlashAlgorithms.Add(obj.Name, obj)
+                If obj.Name.Contains("Gibbs") Then
+                    Dim obj2 = obj.Clone
+                    DirectCast(obj2, Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
+                    FlashAlgorithms.Add(obj2.Name, obj2)
+                End If
+                If obj.Name.Contains("SLE") Then
+                    Dim obj2 = obj.Clone
+                    DirectCast(obj2, Auxiliary.FlashAlgorithms.NestedLoopsSLE).SolidSolution = True
+                    FlashAlgorithms.Add(obj2.Name, obj2)
+                End If
+            End If
+        Next
+
+    End Sub
+
     Private Sub FormParent_MdiChildActivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.MdiChildActivate
         If Me.MdiChildren.Length >= 1 Then
             Me.ToolStripButton1.Enabled = True
@@ -678,7 +705,7 @@ Public Class FormMain
 
 #End Region
 
-#Region "    Load Databases / Property Packages"
+#Region "    Load Databases / Property Packages / Flash Algorithms"
 
     Private Function GetComponents()
 
@@ -797,18 +824,6 @@ Public Class FormMain
         Catch ex As Exception
         End Try
     End Sub
-
-    Public Function CopyPropertyPackages() As Object
-
-        Dim col As New System.Collections.Generic.Dictionary(Of String, PropertyPackages.PropertyPackage)
-
-        For Each pp As PropertyPackage In Me.PropertyPackages.Values
-            col.Add(pp.ComponentName, CType(pp.Clone, PropertyPackage))
-        Next
-
-        Return col
-
-    End Function
 
 #End Region
 

@@ -24,11 +24,13 @@ Partial Class FormSimulSettings
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulSettings))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -96,13 +98,18 @@ Partial Class FormSimulSettings
         Me.tbPassword = New System.Windows.Forms.TextBox()
         Me.chkUsePassword = New System.Windows.Forms.CheckBox()
         Me.PanelPP = New System.Windows.Forms.Panel()
-        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
-        Me.btnConfigureFlashAlgo = New System.Windows.Forms.Button()
-        Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.KryptonButton7 = New System.Windows.Forms.Button()
-        Me.LinkLabelPropertyMethods = New System.Windows.Forms.LinkLabel()
+        Me.btnDeleteFA = New System.Windows.Forms.Button()
+        Me.btnConfigFA = New System.Windows.Forms.Button()
+        Me.btnCopyFA = New System.Windows.Forms.Button()
+        Me.dgvAddedFlashAlgos = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.dgvAvailableFlashAlgos = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnAddFA = New System.Windows.Forms.Button()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.btnDeletePP = New System.Windows.Forms.Button()
         Me.btnConfigPP = New System.Windows.Forms.Button()
@@ -158,8 +165,10 @@ Partial Class FormSimulSettings
         Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.PanelPP.SuspendLayout()
-        Me.GroupBox15.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
+        CType(Me.dgvAddedFlashAlgos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox11.SuspendLayout()
+        CType(Me.dgvAvailableFlashAlgos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox12.SuspendLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox6.SuspendLayout()
@@ -309,8 +318,8 @@ Partial Class FormSimulSettings
         '
         'Column1
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -323,8 +332,8 @@ Partial Class FormSimulSettings
         '
         'Column3
         '
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -466,8 +475,8 @@ Partial Class FormSimulSettings
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -645,61 +654,115 @@ Partial Class FormSimulSettings
         '
         'PanelPP
         '
-        Me.PanelPP.Controls.Add(Me.GroupBox15)
         Me.PanelPP.Controls.Add(Me.GroupBox13)
-        Me.PanelPP.Controls.Add(Me.LinkLabelPropertyMethods)
+        Me.PanelPP.Controls.Add(Me.GroupBox11)
         Me.PanelPP.Controls.Add(Me.GroupBox12)
         Me.PanelPP.Controls.Add(Me.GroupBox6)
         resources.ApplyResources(Me.PanelPP, "PanelPP")
         Me.PanelPP.Name = "PanelPP"
         '
-        'GroupBox15
-        '
-        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
-        Me.GroupBox15.Controls.Add(Me.btnConfigureFlashAlgo)
-        Me.GroupBox15.Controls.Add(Me.ComboBoxFlashAlg)
-        Me.GroupBox15.Controls.Add(Me.Label10)
-        Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.TabStop = False
-        '
-        'btnConfigureFlashAlgo
-        '
-        resources.ApplyResources(Me.btnConfigureFlashAlgo, "btnConfigureFlashAlgo")
-        Me.btnConfigureFlashAlgo.Name = "btnConfigureFlashAlgo"
-        '
-        'ComboBoxFlashAlg
-        '
-        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
-        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxFlashAlg.DropDownWidth = 250
-        Me.ComboBoxFlashAlg.FormattingEnabled = True
-        Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
-        Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
-        '
-        'Label10
-        '
-        resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Name = "Label10"
-        '
         'GroupBox13
         '
         resources.ApplyResources(Me.GroupBox13, "GroupBox13")
-        Me.GroupBox13.Controls.Add(Me.KryptonButton7)
+        Me.GroupBox13.Controls.Add(Me.btnDeleteFA)
+        Me.GroupBox13.Controls.Add(Me.btnConfigFA)
+        Me.GroupBox13.Controls.Add(Me.btnCopyFA)
+        Me.GroupBox13.Controls.Add(Me.dgvAddedFlashAlgos)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.TabStop = False
         '
-        'KryptonButton7
+        'btnDeleteFA
         '
-        resources.ApplyResources(Me.KryptonButton7, "KryptonButton7")
-        Me.KryptonButton7.Name = "KryptonButton7"
+        resources.ApplyResources(Me.btnDeleteFA, "btnDeleteFA")
+        Me.btnDeleteFA.Name = "btnDeleteFA"
         '
-        'LinkLabelPropertyMethods
+        'btnConfigFA
         '
-        resources.ApplyResources(Me.LinkLabelPropertyMethods, "LinkLabelPropertyMethods")
-        Me.LinkLabelPropertyMethods.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.LinkLabelPropertyMethods.LinkVisited = True
-        Me.LinkLabelPropertyMethods.Name = "LinkLabelPropertyMethods"
-        Me.LinkLabelPropertyMethods.TabStop = True
+        resources.ApplyResources(Me.btnConfigFA, "btnConfigFA")
+        Me.btnConfigFA.Name = "btnConfigFA"
+        '
+        'btnCopyFA
+        '
+        resources.ApplyResources(Me.btnCopyFA, "btnCopyFA")
+        Me.btnCopyFA.Name = "btnCopyFA"
+        '
+        'dgvAddedFlashAlgos
+        '
+        Me.dgvAddedFlashAlgos.AllowUserToAddRows = False
+        Me.dgvAddedFlashAlgos.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.dgvAddedFlashAlgos, "dgvAddedFlashAlgos")
+        Me.dgvAddedFlashAlgos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvAddedFlashAlgos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvAddedFlashAlgos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.dgvAddedFlashAlgos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        Me.dgvAddedFlashAlgos.MultiSelect = False
+        Me.dgvAddedFlashAlgos.Name = "dgvAddedFlashAlgos"
+        Me.dgvAddedFlashAlgos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvAddedFlashAlgos.RowHeadersVisible = False
+        Me.dgvAddedFlashAlgos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.FillWeight = 50.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn8, "DataGridViewTextBoxColumn8")
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.FillWeight = 60.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn9, "DataGridViewTextBoxColumn9")
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.ReadOnly = True
+        '
+        'GroupBox11
+        '
+        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
+        Me.GroupBox11.Controls.Add(Me.dgvAvailableFlashAlgos)
+        Me.GroupBox11.Controls.Add(Me.btnAddFA)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.TabStop = False
+        '
+        'dgvAvailableFlashAlgos
+        '
+        Me.dgvAvailableFlashAlgos.AllowUserToAddRows = False
+        Me.dgvAvailableFlashAlgos.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.dgvAvailableFlashAlgos, "dgvAvailableFlashAlgos")
+        Me.dgvAvailableFlashAlgos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvAvailableFlashAlgos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvAvailableFlashAlgos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.dgvAvailableFlashAlgos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
+        Me.dgvAvailableFlashAlgos.MultiSelect = False
+        Me.dgvAvailableFlashAlgos.Name = "dgvAvailableFlashAlgos"
+        Me.dgvAvailableFlashAlgos.ReadOnly = True
+        Me.dgvAvailableFlashAlgos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvAvailableFlashAlgos.RowHeadersVisible = False
+        Me.dgvAvailableFlashAlgos.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAvailableFlashAlgos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewTextBoxColumn5.FillWeight = 40.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle5
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.ReadOnly = True
+        '
+        'btnAddFA
+        '
+        resources.ApplyResources(Me.btnAddFA, "btnAddFA")
+        Me.btnAddFA.Name = "btnAddFA"
         '
         'GroupBox12
         '
@@ -749,7 +812,7 @@ Partial Class FormSimulSettings
         '
         'Column16
         '
-        Me.Column16.FillWeight = 40.0!
+        Me.Column16.FillWeight = 50.0!
         resources.ApplyResources(Me.Column16, "Column16")
         Me.Column16.Name = "Column16"
         '
@@ -782,9 +845,6 @@ Partial Class FormSimulSettings
         Me.DataGridViewPP.ReadOnly = True
         Me.DataGridViewPP.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.DataGridViewPP.RowHeadersVisible = False
-        Me.DataGridViewPP.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(4)
-        Me.DataGridViewPP.RowTemplate.DefaultCellStyle.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewPP.RowTemplate.Height = 40
         Me.DataGridViewPP.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridViewPP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         '
@@ -797,8 +857,9 @@ Partial Class FormSimulSettings
         'DataGridViewTextBoxColumn2
         '
         Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridViewTextBoxColumn2.FillWeight = 40.0!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
@@ -806,9 +867,9 @@ Partial Class FormSimulSettings
         '
         'DataGridViewTextBoxColumn3
         '
-        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle7
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
@@ -1063,10 +1124,11 @@ Partial Class FormSimulSettings
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
         Me.PanelPP.ResumeLayout(False)
-        Me.PanelPP.PerformLayout()
-        Me.GroupBox15.ResumeLayout(False)
-        Me.GroupBox15.PerformLayout()
         Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
+        CType(Me.dgvAddedFlashAlgos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox11.ResumeLayout(False)
+        CType(Me.dgvAvailableFlashAlgos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
         CType(Me.dgvpp, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1128,7 +1190,6 @@ Partial Class FormSimulSettings
     Public WithEvents KryptonButton15 As System.Windows.Forms.Button
     Public WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Public WithEvents OpenFileDialog2 As System.Windows.Forms.OpenFileDialog
-    Public WithEvents KryptonButton7 As System.Windows.Forms.Button
     Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents ogc1 As System.Windows.Forms.DataGridView
     Public WithEvents Button6 As System.Windows.Forms.Button
@@ -1155,7 +1216,6 @@ Partial Class FormSimulSettings
     Public WithEvents tbPassword As System.Windows.Forms.TextBox
     Public WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents LinkLabelPropertyMethods As System.Windows.Forms.LinkLabel
     Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents casno As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1167,7 +1227,6 @@ Partial Class FormSimulSettings
     Public WithEvents Button4 As System.Windows.Forms.Button
     Public WithEvents Button5 As System.Windows.Forms.Button
     Public WithEvents Button12 As System.Windows.Forms.Button
-    Friend WithEvents GroupBox13 As System.Windows.Forms.GroupBox
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
@@ -1179,13 +1238,7 @@ Partial Class FormSimulSettings
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewComboBoxColumn
-    Friend WithEvents Column18 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column16 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents DataGridViewPP As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
     Public WithEvents Label15 As System.Windows.Forms.Label
@@ -1203,8 +1256,22 @@ Partial Class FormSimulSettings
     Friend WithEvents tsbDockingDocument As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbDockingFloat As System.Windows.Forms.ToolStripButton
     Friend WithEvents tsbClose As System.Windows.Forms.ToolStripButton
-    Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
-    Public WithEvents btnConfigureFlashAlgo As System.Windows.Forms.Button
-    Public WithEvents ComboBoxFlashAlg As System.Windows.Forms.ComboBox
-    Public WithEvents Label10 As System.Windows.Forms.Label
+    Public WithEvents GroupBox13 As System.Windows.Forms.GroupBox
+    Public WithEvents btnDeleteFA As System.Windows.Forms.Button
+    Public WithEvents btnConfigFA As System.Windows.Forms.Button
+    Public WithEvents btnCopyFA As System.Windows.Forms.Button
+    Public WithEvents dgvAddedFlashAlgos As System.Windows.Forms.DataGridView
+    Public WithEvents GroupBox11 As System.Windows.Forms.GroupBox
+    Public WithEvents dgvAvailableFlashAlgos As System.Windows.Forms.DataGridView
+    Public WithEvents btnAddFA As System.Windows.Forms.Button
+    Friend WithEvents Column18 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column16 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column17 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

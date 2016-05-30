@@ -124,6 +124,11 @@
         Simple_LLE = 8
         Nested_Loops_SLE_Eutectic = 9
         Nested_Loops_SLE_SolidSolution = 10
+        BlackOil = 11
+        Electrolyte = 12
+        SeaWater = 13
+        SourWater = 14
+        CAPE_OPEN_Equilibrium_Server = 15
     End Enum
 
     Public Enum FlashSetting

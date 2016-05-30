@@ -139,6 +139,12 @@ Public Class FormSimulSettings
                 Me.DataGridViewPP.Rows.Add(New String() {pp2.ComponentName, pp2.ComponentName, pp2.ComponentDescription})
             Next
 
+            'flash algorithms
+            Me.dgvAvailableFlashAlgos.Rows.Clear()
+            For Each fa In FormMain.FlashAlgorithms.Values
+                Me.dgvAvailableFlashAlgos.Rows.Add(New String() {fa.Name, fa.Description})
+            Next
+
         Else
 
             For Each r As DataGridViewRow In ogc1.Rows
@@ -200,6 +206,13 @@ Public Class FormSimulSettings
             Next
         End With
 
+        With Me.dgvAddedFlashAlgos.Rows
+            .Clear()
+            For Each fa In FrmChild.Options.FlashAlgorithms
+                .Add(New Object() {fa.Tag, fa.Name})
+            Next
+        End With
+
         Me.ComboBox2.Items.Clear()
         Me.ComboBox2.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
         FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
@@ -207,12 +220,6 @@ Public Class FormSimulSettings
 
         ComboBox1.SelectedItem = Me.FrmChild.Options.NumberFormat
         ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
-
-        Dim flashalgos As String() = [Enum].GetNames(FrmChild.FlowsheetOptions.PropertyPackageFlashAlgorithm.GetType)
-        ComboBoxFlashAlg.Items.Clear()
-        ComboBoxFlashAlg.Items.AddRange(flashalgos)
-
-        ComboBoxFlashAlg.SelectedIndex = Me.FrmChild.Options.PropertyPackageFlashAlgorithm
 
         FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
         FrmChild.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
@@ -866,7 +873,7 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Private Sub KryptonButton7_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton7.Click
+    Private Sub KryptonButton7_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim rm As New FormReacManager
         rm.Show(Me.FrmChild.dckPanel)
     End Sub
@@ -1254,7 +1261,7 @@ Public Class FormSimulSettings
         frmam.Close()
     End Sub
 
-    Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelPropertyMethods.LinkClicked
+    Private Sub LinkLabelPropertyMethods_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Methods_and_Correlation_Profiles")
     End Sub
 
@@ -1382,21 +1389,80 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Private Sub ComboBoxFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
+    Private Sub btnAddFA_Click(sender As Object, e As EventArgs) Handles btnAddFA.Click
 
-        Me.FrmChild.Options.PropertyPackageFlashAlgorithm = [Enum].Parse(Me.FrmChild.Options.PropertyPackageFlashAlgorithm.GetType, ComboBoxFlashAlg.SelectedItem)
+        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm
+
+        fa = FormMain.FlashAlgorithms.Values.Where(Function(x) x.Name = dgvAvailableFlashAlgos.SelectedRows(0).Cells(0).Value).FirstOrDefault
+
+        fa.Tag = fa.Name & " (" & CStr(Me.dgvAddedFlashAlgos.Rows.Count + 1) & ")"
+
+        FrmChild.Options.FlashAlgorithms.Add(fa)
+        Me.dgvAddedFlashAlgos.Rows.Add(New Object() {fa.Tag, fa.Name})
 
     End Sub
 
-    Private Sub btnConfigureFlashAlgo_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlgo.Click
+    Private Sub btnConfigFA_Click(sender As Object, e As EventArgs) Handles btnConfigFA.Click
 
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = Me.FrmChild.Options.FlashSettings(Me.FrmChild.Options.PropertyPackageFlashAlgorithm),
+        Dim faid As String = ""
+        If DWSIM.App.IsRunningOnMono Then
+            faid = dgvAddedFlashAlgos.Rows(dgvAddedFlashAlgos.SelectedCells(0).RowIndex).Cells(0).Value
+        Else
+            faid = dgvAddedFlashAlgos.SelectedRows(0).Cells(0).Value
+        End If
+        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = faid).FirstOrDefault
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
                                                                 .AvailableCompounds = Me.FrmChild.Options.SelectedComponents.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = Me.FrmChild.Options.PropertyPackageFlashAlgorithm}
+                                                                 .FlashAlgo = fa}
         f.ShowDialog(Me)
-
-        Me.FrmChild.Options.FlashSettings(Me.FrmChild.Options.PropertyPackageFlashAlgorithm) = f.Settings
+        fa.FlashSettings = f.Settings
 
     End Sub
 
+    Private Sub btnCopyFA_Click(sender As Object, e As EventArgs) Handles btnCopyFA.Click
+
+        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm
+
+        Try
+            Dim faid As String = ""
+            If DWSIM.App.IsRunningOnMono Then
+                faid = dgvAddedFlashAlgos.Rows(dgvAddedFlashAlgos.SelectedCells(0).RowIndex).Cells(0).Value
+            Else
+                faid = dgvAddedFlashAlgos.SelectedRows(0).Cells(0).Value
+            End If
+            fa = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = faid).FirstOrDefault.Clone
+            fa.Tag = fa.Tag & "_Clone"
+
+            FrmChild.Options.FlashAlgorithms.Add(fa)
+            Me.dgvAddedFlashAlgos.Rows.Add(New Object() {fa.Tag, fa.Name})
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub btnDeleteFA_Click(sender As Object, e As EventArgs) Handles btnDeleteFA.Click
+
+        If DWSIM.App.IsRunningOnMono Then
+            If dgvAddedFlashAlgos.SelectedCells.Count > 0 Then
+                Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = dgvAddedFlashAlgos.Rows(dgvAddedFlashAlgos.SelectedCells(0).RowIndex).Cells(0).Value).FirstOrDefault
+                FrmChild.Options.FlashAlgorithms.Remove(fa)
+                dgvAddedFlashAlgos.Rows.RemoveAt(dgvAddedFlashAlgos.SelectedCells(0).RowIndex)
+            End If
+        Else
+            If Not dgvpp.SelectedRows.Count = 0 Then
+                Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = FrmChild.Options.FlashAlgorithms.Where(Function(x) x.Tag = dgvAddedFlashAlgos.SelectedRows(0).Cells(0).Value).FirstOrDefault
+                FrmChild.Options.FlashAlgorithms.Remove(fa)
+                dgvAddedFlashAlgos.Rows.Remove(dgvAddedFlashAlgos.SelectedRows(0))
+            End If
+        End If
+
+    End Sub
+
+    Private Sub dgvAvailableFlashAlgos_DoubleClick(sender As Object, e As EventArgs) Handles dgvAvailableFlashAlgos.DoubleClick
+        If Me.DataGridViewPP.SelectedRows.Count = 1 Then
+            btnAddFA.PerformClick()
+        End If
+    End Sub
 End Class

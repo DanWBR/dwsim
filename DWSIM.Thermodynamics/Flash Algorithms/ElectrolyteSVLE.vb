@@ -941,7 +941,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, P, x, x0, x00, fx, fx0, fx00, Pmin, Pmax As Double
 
-            Dim nl As New DWSIMDefault
+            Dim nl As New NestedLoops
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 0.0#, proppack, Vz, Nothing, Pref)
             Pmax = flashresult.CalculatedPressure
             flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 1.0#, proppack, Vz, Nothing, Pref)
@@ -1025,7 +1025,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, T, x, x0, x00, fx, fx0, fx00, Tmin, Tmax As Double
 
-            Dim nl As New DWSIMDefault
+            Dim nl As New NestedLoops
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, P, 0.0#, proppack, Vz, Nothing, Tref)
             Tmin = flashresult.CalculatedTemperature
             flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, P, 1.0#, proppack, Vz, Nothing, Tref)

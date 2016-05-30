@@ -47,6 +47,37 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim DSv, DSl, DSl1, DSl2, Sv0, Svid, Slid1, Slid2, Sm, Sv, Sl1, Sl2 As Double
         Dim Pb, Pd, Pmin, Pmax, Px, soma_x, soma_x1, soma_y, soma_x2 As Double
         Dim proppack As PropertyPackages.PropertyPackage
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Nested_Loops_VLLE
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Nested Loops estendido para calcular equilíbrio LLV."
+                Else
+                    Return "Extended Nested Loops Flash Algorithm for VLLE calculations."
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Nested Loops (VLLE) v2"
+            End Get
+        End Property
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
@@ -1092,7 +1123,7 @@ alt:
 
             d1 = Date.Now
 
-            Dim _nl As New DWSIMDefault
+            Dim _nl As New NestedLoops
 
             Dim result As Object = _nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
 
@@ -1212,7 +1243,7 @@ alt:
 
             d1 = Date.Now
 
-            Dim _nl As New DWSIMDefault
+            Dim _nl As New NestedLoops
 
             Dim result As Object = _nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
 

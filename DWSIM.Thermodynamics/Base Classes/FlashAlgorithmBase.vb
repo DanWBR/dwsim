@@ -21,6 +21,9 @@ Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.PropertyPackages.ThermoPlugs
 Imports DWSIM.Interfaces.Enums.FlashSetting
 Imports System.Linq
+Imports System.IO
+Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.Serialization
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -30,7 +33,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     ''' <remarks></remarks>
     <System.Serializable()> Public MustInherit Class FlashAlgorithm
 
-        Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
+        Implements Interfaces.IFlashAlgorithm, XMLSerializer.Interfaces.ICustomXMLSerialization
+
+        Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String) Implements Interfaces.IFlashAlgorithm.FlashSettings
 
         Public Property StabSearchSeverity As Integer = 0
         Public Property StabSearchCompIDs As String() = New String() {}
@@ -72,7 +77,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = "IPOPT"
 
             settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 0
-           
+
             settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = ""
 
             Return settings
@@ -99,6 +104,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         ''' <returns>A FlashCalculationResult instance with the results of the calculations</returns>
         ''' <remarks>This function must be used instead of the older type-specific flash functions.
         ''' Check if the 'ResultException' property of the result object is nothing/null before proceeding.</remarks>
+
         Public Function CalculateEquilibrium(spec1 As FlashSpec, spec2 As FlashSpec,
                                             val1 As Double, val2 As Double,
                                             pp As PropertyPackage,
@@ -489,7 +495,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim gl, gv As Double
 
             If Settings.EnableParallelProcessing Then
-                
+
                 Dim task1 = Task.Factory.StartNew(Sub()
                                                       fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
                                                   End Sub,
@@ -503,7 +509,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                   TaskCreationOptions.None,
                                                  Settings.AppTaskScheduler)
                 Task.WaitAll(task1, task2)
-                
+
             Else
                 fcv = pp.DW_CalcFugCoeff(Vz, T, P, State.Vapor)
                 fcl = pp.DW_CalcFugCoeff(Vz, T, P, State.Liquid)
@@ -616,7 +622,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Loop Until j = n + 1
 
                         If Settings.EnableParallelProcessing Then
-                            
+
                             Dim task1 = Task.Factory.StartNew(Sub()
                                                                   fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
                                                               End Sub,
@@ -630,7 +636,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                                               TaskCreationOptions.None,
                                                              Settings.AppTaskScheduler)
                             Task.WaitAll(task1, task2)
-                            
+
                         Else
                             fcv = pp.DW_CalcFugCoeff(currcomp, T, P, State.Vapor)
                             fcl = pp.DW_CalcFugCoeff(currcomp, T, P, State.Liquid)
@@ -882,7 +888,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim i As Integer = 0
                 Do
                     If Settings.EnableParallelProcessing Then
-                        
+
                         Dim task1 As Task = New Task(Sub()
                                                          fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)
                                                      End Sub)
@@ -892,7 +898,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         task1.Start()
                         task2.Start()
                         Task.WaitAll(task1, task2)
-                        
+
                     Else
                         fx = 1 - CalcPIP(Vx, P, Tinv, pp, eos)(0)
                         fx2 = 1 - CalcPIP(Vx, P, Tinv - 1, pp, eos)(0)
@@ -1002,12 +1008,75 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 #End Region
 
+#Region "XML Serialization"
+
+        Public Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+
+            Dim el = (From xel As XElement In data Select xel Where xel.Name = "FlashSettings").SingleOrDefault
+
+            If Not el Is Nothing Then
+
+                FlashSettings.Clear()
+
+                For Each xel3 In el.Elements
+                    Dim esname = [Enum].Parse(Interfaces.Enums.Helpers.GetEnumType("DWSIM.Interfaces.Enums.FlashSetting"), xel3.@Name)
+                    FlashSettings.Add(esname, xel3.@Value)
+                Next
+
+            End If
+
+            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+        End Function
+
+        Public Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
+
+            elements.Add(New XElement("FlashSettings"))
+
+            For Each item In FlashSettings
+                elements(elements.Count - 1).Add(New XElement("Setting", New XAttribute("Name", item.Key), New XAttribute("Value", item.Value)))
+            Next
+
+            Return elements
+
+        End Function
+
+#End Region
+
+        Public Function Clone() As Interfaces.IFlashAlgorithm Implements Interfaces.IFlashAlgorithm.Clone
+
+            Using objMemStream As New MemoryStream()
+                Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
+                objBinaryFormatter.Serialize(objMemStream, Me)
+                objMemStream.Seek(0, SeekOrigin.Begin)
+                Clone = objBinaryFormatter.Deserialize(objMemStream)
+            End Using
+
+        End Function
+
+        Public MustOverride ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod Implements Interfaces.IFlashAlgorithm.AlgoType
+
+        Public MustOverride ReadOnly Property Description As String Implements Interfaces.IFlashAlgorithm.Description
+
+        Public MustOverride ReadOnly Property Name As String Implements Interfaces.IFlashAlgorithm.Name
+
+        Public Overridable ReadOnly Property InternalUseOnly As Boolean Implements Interfaces.IFlashAlgorithm.InternalUseOnly
+            Get
+                Return False
+            End Get
+        End Property
+
+        Public Property Tag As String = "" Implements Interfaces.IFlashAlgorithm.Tag
+
     End Class
 
     ''' <summary>
     ''' Class to store flash calculation results.
     ''' </summary>
     ''' <remarks></remarks>
+    ''' 
     <System.Serializable> Public Class FlashCalculationResult
 
         Implements Interfaces.IFlashCalculationResult

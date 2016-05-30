@@ -40,6 +40,38 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.SeaWater
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash para cálculo de equilíbrio de água salgada"
+                Else
+                    Return "Flash Algorithm for Seawater systems"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Seawater Flash"
+            End Get
+        End Property
+
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Return Flash_PT_Internal(True, Vz, P, T, PP, ReuseKI, PrevKi)

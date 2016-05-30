@@ -42,11 +42,37 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl, Hlid2, Hl2 As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl, Slid2, Sl2 As Double
 
-        Private _nl As New DWSIMDefault
+        Private _nl As New NestedLoops
+
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Nested Loops VLLE simplificado para cálculos de equilíbrio entre Água e Hidrocarbonetos."
+                Else
+                    Return "Simplified Nested Loops VLLE Flash Algorithm for Hydrocarbon-Water equilibrium calculations."
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Nested Loops (Immiscible VLLE)"
+            End Get
+        End Property
 
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
-           Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+        Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim i, n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan

@@ -480,7 +480,7 @@ Public Class FormDataRegression
                     Select Case currcase.model
                         Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
                             If PVF Then
-                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -506,7 +506,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -538,7 +538,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                         Case "UNIQUAC"
                             If PVF Then
-                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -564,7 +564,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -597,7 +597,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("A12", x(0))
                             regressedparameters.Add("A21", x(1))
                         Case "PRSV2-M", "PRSV2-VL"
-                            proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                            proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
@@ -624,7 +624,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(1), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -657,7 +657,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("kij", x(0))
                             regressedparameters.Add("kji", x(1))
                         Case "NRTL"
-                            proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                            proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                             If PVF Then
@@ -684,7 +684,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             Else
-                                proppack.FlashAlgorithm = PropertyPackages.FlashMethod.DWSIMDefault
+                                proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                                 ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, 0.0#}, {0.0#, 0.0#}}, New Double(,) {{0.0#, x(0)}, {x(1), 0.0#}}, New Double(,) {{0.0#, x(1)}, {x(0), 0.0#}}, New Double(,) {{0.0#, x(2)}, {x(2), 0.0#}}, Nothing, Nothing, Nothing, Nothing)
                                 If doparallel Then
@@ -769,7 +769,7 @@ Public Class FormDataRegression
                     Next
                 Case DataType.TPxy
                 Case DataType.Pxx, DataType.Txx
-                    proppack.FlashAlgorithm = PropertyPackages.FlashMethod.SimpleLLE
+                    proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                     Dim flashinstance As PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE = TryCast(proppack.FlashBase, PropertyPackages.Auxiliary.FlashAlgorithms.SimpleLLE)
                     If Not flashinstance Is Nothing Then
                         With flashinstance
@@ -1050,9 +1050,9 @@ Public Class FormDataRegression
                     Next
                 Case DataType.TTxSE, DataType.TTxSS
                     If currcase.datatype = DataType.TTxSE Then
-                        proppack.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE
+                        proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
                     Else
-                        proppack.FlashAlgorithm = PropertyPackages.FlashMethod.NestedLoopsSLE_SS
+                        proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.SolidSolution = True}
                     End If
                     ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                     Select Case currcase.model

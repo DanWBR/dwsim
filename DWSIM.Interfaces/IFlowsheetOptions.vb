@@ -25,12 +25,10 @@
 
     Property Key As String
 
-    Property PropertyPackageFlashAlgorithm As Enums.FlashMethod
-
     Property SelectedUnitSystem As IUnitsOfMeasure
 
     Property VisibleProperties As Dictionary(Of String, List(Of String))
 
-    Property FlashSettings As Dictionary(Of Enums.FlashMethod, Dictionary(Of Enums.FlashSetting, String))
+    Property FlashAlgorithms As List(Of IFlashAlgorithm)
 
 End Interface

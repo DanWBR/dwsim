@@ -1027,14 +1027,14 @@ Public Class MaterialStreamEditor
 
     Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
 
-        Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(MatStream.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
+        'Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(MatStream.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
 
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = MatStream.FlowSheet.FlowsheetOptions.FlashSettings(fa),
-                                                                .AvailableCompounds = MatStream.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = fa}
-        f.ShowDialog(Me)
+        'Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = MatStream.FlowSheet.FlowsheetOptions.FlashSettings(fa),
+        '                                                        .AvailableCompounds = MatStream.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
+        '                                                         .FlashAlgo = fa}
+        'f.ShowDialog(Me)
 
-        MatStream.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
+        'MatStream.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
 
     End Sub
 

@@ -814,6 +814,7 @@ Partial Class FormMain
 
         If Not Settings.CAPEOPENMode Then
             AddPropPacks()
+            AddFlashAlgorithms()
             GetComponents()
         End If
 

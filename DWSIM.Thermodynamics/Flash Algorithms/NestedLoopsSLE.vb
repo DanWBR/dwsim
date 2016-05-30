@@ -46,6 +46,40 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property SolidSolution As Boolean = False
 
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                If SolidSolution Then
+                    Return Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution
+                Else
+                    Return Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash para sistemas Sólido-Líquido"
+                Else
+                    Return "Flash Algorithm for Solid-Liquid systems"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                If SolidSolution Then
+                    Return "Nested Loops (SLE - Solid Solution)"
+                Else
+                    Return "Nested Loops (SLE - Eutectic)"
+                End If
+            End Get
+        End Property
+
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             If SolidSolution Then

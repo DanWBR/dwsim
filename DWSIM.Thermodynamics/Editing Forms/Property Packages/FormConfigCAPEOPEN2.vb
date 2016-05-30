@@ -105,18 +105,18 @@ Public Class FormConfigCAPEOPEN2
 
         End If
 
-        Dim flashalgos As String() = [Enum].GetNames(_pp.PreferredFlashAlgorithm.GetType)
-        ComboBoxFlashAlg.Items.Clear()
-        ComboBoxFlashAlg.Items.AddRange(flashalgos)
+        'Dim flashalgos As String() = [Enum].GetNames(_pp.PreferredFlashAlgorithm.GetType)
+        'ComboBoxFlashAlg.Items.Clear()
+        'ComboBoxFlashAlg.Items.AddRange(flashalgos)
 
-        ComboBoxFlashAlg.SelectedIndex = _pp.PreferredFlashAlgorithm
+        'ComboBoxFlashAlg.SelectedIndex = _pp.PreferredFlashAlgorithm
 
         Me.loaded = True
 
     End Sub
 
     Private Sub ComboBoxFlashAlg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
-        _pp.PreferredFlashAlgorithm = [Enum].Parse(_pp.PreferredFlashAlgorithm.GetType, ComboBoxFlashAlg.SelectedItem)
+        '_pp.PreferredFlashAlgorithm = [Enum].Parse(_pp.PreferredFlashAlgorithm.GetType, ComboBoxFlashAlg.SelectedItem)
     End Sub
 
     Public Function AddCompToGrid(ByRef comp As ConstantProperties) As Integer
@@ -306,7 +306,7 @@ Public Class FormConfigCAPEOPEN2
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = _pp.FlashSettings,
                                                                .AvailableCompounds = _pp._selectedcomps.Values.Select(Function(x) x.Name).ToList,
-                                                               .FlashAlgo = _pp.PreferredFlashAlgorithm}
+                                                               .FlashAlgo = _pp.FlashAlgorithm}
         f.ShowDialog(Me)
 
     End Sub

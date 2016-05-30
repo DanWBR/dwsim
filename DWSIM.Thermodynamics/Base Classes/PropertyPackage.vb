@@ -143,8 +143,6 @@ Namespace PropertyPackages
 
         <NonSerialized> Private m_ip As DataTable
 
-        Private _flashalgorithm As FlashMethod = FlashMethod.DWSIMDefault
-
         Public _packagetype As PackageType
 
         Public _tpseverity As Integer = 0
@@ -274,87 +272,15 @@ Namespace PropertyPackages
         End Property
 
         ''' <summary>
-        ''' Returns the flash algorithm selected for this property package.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns>A FlashMethod value with information about the selected flash algorithm.</returns>
-        ''' <remarks></remarks>
-        Public Property FlashAlgorithm() As FlashMethod
-            Get
-                If Settings.CAPEOPENMode Then
-                    Return _flashalgorithm
-                Else
-                    If _flashalgorithm = FlashMethod.GlobalSetting Then
-                        If Me.CurrentMaterialStream.Flowsheet Is Nothing Then
-                            Return FlashMethod.DWSIMDefault
-                        Else
-                            Return Me.CurrentMaterialStream.Flowsheet.FlowsheetOptions.PropertyPackageFlashAlgorithm
-                        End If
-                    Else
-                        Return _flashalgorithm
-                    End If
-                End If
-            End Get
-            Set(ByVal value As FlashMethod)
-                _flashalgorithm = value
-            End Set
-        End Property
-
-        ''' <summary>
         ''' Returns the FlashAlgorithm object instance for this property package.
         ''' </summary>
         ''' <value></value>
         ''' <returns>A FlashAlgorithm object to be used in flash calculations.</returns>
         ''' <remarks></remarks>
         Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
+
             Get
-                Dim fswitch As FlashMethod
-                If PreferredFlashAlgorithm = Enums.FlashMethod.Default_Algorithm Then
-                    fswitch = FlashAlgorithm
-                Else
-                    fswitch = PreferredFlashAlgorithm
-                End If
-                Select Case fswitch
-                    Case FlashMethod.DWSIMDefault
-                        Return New Auxiliary.FlashAlgorithms.DWSIMDefault
-                    Case FlashMethod.InsideOut
-                        Return New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
-                    Case FlashMethod.InsideOut3P
-                        Return New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P With
-                                                    {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                    Case FlashMethod.GibbsMin2P
-                        Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
-                                                    {.ForceTwoPhaseOnly = True}
-                    Case FlashMethod.GibbsMin3P
-                        Return New Auxiliary.FlashAlgorithms.GibbsMinimization3P With
-                                                    {.ForceTwoPhaseOnly = False, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                    Case FlashMethod.NestedLoops3P, FlashMethod.NestedLoops3PV2, FlashMethod.NestedLoops3PV3
-                        Return New Auxiliary.FlashAlgorithms.NestedLoops3PV3 With
-                                                    {.StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                    Case FlashMethod.NestedLoopsSLE
-                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
-                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                            constprops.Add(su.ConstantProperties)
-                        Next
-                        Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops}
-                    Case FlashMethod.NestedLoopsSLE_SS
-                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
-                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                            constprops.Add(su.ConstantProperties)
-                        Next
-                        Return New Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.CompoundProperties = constprops, .SolidSolution = True}
-                    Case FlashMethod.NestedLoopsImmiscible
-                        Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
-                        For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                            constprops.Add(su.ConstantProperties)
-                        Next
-                        Return New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible With
-                                                    {.CompoundProperties = constprops, .StabSearchCompIDs = _tpcompids, .StabSearchSeverity = _tpseverity}
-                    Case FlashMethod.SimpleLLE
-                        Return New Auxiliary.FlashAlgorithms.SimpleLLE
-                    Case Else
-                        Return New Auxiliary.FlashAlgorithms.DWSIMDefault
-                End Select
+                Return FlashAlgorithm.Clone()
             End Get
 
         End Property
@@ -941,9 +867,7 @@ Namespace PropertyPackages
             Dim T As Double = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
 
             If Not Settings.CAPEOPENMode Then
-                If Me.FlashBase.FlashSettings(Enums.FlashSetting.CalculateBubbleAndDewPoints) _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                If Me.FlashBase.FlashSettings(Enums.FlashSetting.CalculateBubbleAndDewPoints) Then
                     Try
                         Dim Vz As Double() = Me.RET_VMOL(Phase.Mixture)
                         Dim myres As Object = Me.FlashBase.Flash_PV(Vz, P, 0, 0, Me)
@@ -1369,9 +1293,7 @@ Namespace PropertyPackages
                             Dim dge As Double = 0
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) = True _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) = True Then
 
                                     ige = Me.DW_CalcGibbsEnergy(RET_VMOL(Phase.Mixture), T, P)
 
@@ -1449,9 +1371,7 @@ Namespace PropertyPackages
                                     End If
                                 End If
 
-                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) = True _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) = True Then
 
                                     fge = xl * Me.DW_CalcGibbsEnergy(Vx, T, P)
                                     fge += xl2 * Me.DW_CalcGibbsEnergy(Vx2, T, P)
@@ -2468,9 +2388,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vs = result(8)
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE _
-                                And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc)  Then
 
                                     fge = xl * Me.DW_CalcGibbsEnergy(Vx, T, P)
                                     fge += xl2 * Me.DW_CalcGibbsEnergy(Vx2, T, P)
@@ -3363,12 +3281,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                    If LLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                    If LLE And Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
 
-                        Select Case Me.FlashAlgorithm
-                            Case FlashMethod.DWSIMDefault, FlashMethod.GibbsMin2P, FlashMethod.InsideOut, FlashMethod.NestedLoopsImmiscible, FlashMethod.NestedLoopsSLE
-                                Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
-                        End Select
+                        If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 Or
+                            Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.GibbsMinimization3P Or
+                            Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P Then
+
+                            Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
+
+                        End If
 
                         If unstable Then
                             Dim ti, tf, uim, tit As Double
@@ -3509,13 +3430,13 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 Case "P-x-y"
 
-                    Dim px, py1, py2, px1l1, px1l2, py3 As New ArrayList
-                    Dim unstable As Boolean = False
-                    Dim ui, up As New ArrayList
-                    Dim x, y1, y2, Pest1, Pest2 As Double
-                    Dim tmp As Object = Nothing
+                        Dim px, py1, py2, px1l1, px1l2, py3 As New ArrayList
+                        Dim unstable As Boolean = False
+                        Dim ui, up As New ArrayList
+                        Dim x, y1, y2, Pest1, Pest2 As Double
+                        Dim tmp As Object = Nothing
 
-                    If Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                    If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
 
                         i = 0
                         Do
@@ -3580,16 +3501,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     End If
 
-                    Return New Object() {px, py1, py2, px1l1, px1l2, py3}
+                        Return New Object() {px, py1, py2, px1l1, px1l2, py3}
 
                 Case "(T)x-y"
 
-                    Dim px, py As New ArrayList
-                    Dim Test1 As Double
-                    Dim x, y As Double
-                    Dim tmp As Object = Nothing
+                        Dim px, py As New ArrayList
+                        Dim Test1 As Double
+                        Dim x, y As Double
+                        Dim tmp As Object = Nothing
 
-                    If Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                    If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
                             If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
@@ -3613,17 +3534,17 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                    Return New Object() {px, py}
+                        Return New Object() {px, py}
 
                 Case Else
 
-                    Dim px, py As New ArrayList
+                        Dim px, py As New ArrayList
 
-                    Dim Pest1 As Double
-                    Dim x, y As Double
-                    Dim tmp As Object = Nothing
+                        Dim Pest1 As Double
+                        Dim x, y As Double
+                        Dim tmp As Object = Nothing
 
-                    If Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                    If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
                             If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
@@ -3647,7 +3568,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                    Return New Object() {px, py}
+                        Return New Object() {px, py}
 
             End Select
 
@@ -9795,7 +9716,7 @@ Final3:
             Return Clone()
         End Function
 
-        Public Property PreferredFlashAlgorithm As Enums.FlashMethod = Enums.FlashMethod.Default_Algorithm Implements IPropertyPackage.PreferredFlashAlgorithm
+        Public Property FlashAlgorithm As Interfaces.IFlashAlgorithm Implements IPropertyPackage.FlashAlgorithm
 
         Public Overridable Sub DisplayEditingForm() Implements IPropertyPackage.DisplayEditingForm
 

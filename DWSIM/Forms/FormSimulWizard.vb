@@ -389,23 +389,23 @@ Public Class FormSimulWizard
     Private Sub ListBoxPP_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ListBoxPP.SelectedIndexChanged
         Select Case ListBoxPP.SelectedIndex
             Case 0
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.DWSIMDefault
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops())
             Case 1
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoops3PV3
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3())
             Case 2
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonBrittInsideOut())
             Case 3
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.InsideOut3P
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P())
             Case 4
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin2P
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = True})
             Case 5
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.GibbsMin3P
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = False})
             Case 6
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE)
             Case 7
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsSLE_SS
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.SolidSolution = True})
             Case 8
-                Me.FrmChild.Options.PropertyPackageFlashAlgorithm = FlashMethod.NestedLoopsImmiscible
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsImmiscible)
         End Select
     End Sub
 

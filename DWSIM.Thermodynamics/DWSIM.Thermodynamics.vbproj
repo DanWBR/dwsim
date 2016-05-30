@@ -185,6 +185,7 @@
     <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Flash Algorithms\CAPEOPEN_Equilibrium_Server.vb" />
     <Compile Include="Interfaces\Excel.vb" />
     <Compile Include="Interfaces\Thermodynamics.vb" />
     <Compile Include="Languages\Strings.Designer.vb">
@@ -195,7 +196,6 @@
     <Compile Include="Material Stream\MaterialStream.vb" />
     <Compile Include="Models\TrueCriticalPoint.vb" />
     <Compile Include="Base Classes\PropertyMethods.vb" />
-    <Compile Include="Flash Algorithms\PointF.vb" />
     <Compile Include="Main\Calculator.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
     <Compile Include="Property Packages\ActivityCoefficientBase.vb" />

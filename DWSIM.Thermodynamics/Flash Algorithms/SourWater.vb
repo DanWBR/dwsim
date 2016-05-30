@@ -43,6 +43,38 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property Reactions As List(Of Interfaces.IReaction)
 
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.SourWater
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash para cálculo de equilíbrio de sistemas de águas ácidas"
+                Else
+                    Return "Flash Algorithm for Sour Water equilibrium calculations"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Sour Water"
+            End Get
+        End Property
+
         Sub New(rx As List(Of Interfaces.IReaction))
 
 
@@ -202,7 +234,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Setup(conc, conc0, deltaconc, id)
 
-            Dim nl As New DWSIMDefault() With {.LimitVaporFraction = LimitNLVF}
+            Dim nl As New NestedLoops() With {.LimitVaporFraction = LimitNLVF}
 
             ecount = 0
 
@@ -855,7 +887,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vx(n), Vy(n), Vp(n), L, Vcalc, Vspec, P, x, x0, x00, fx, fx0, fx00, Pmin, Pmax As Double
             Dim result As Object
 
-            Dim nl As New DWSIMDefault With {.LimitVaporFraction = False}
+            Dim nl As New NestedLoops With {.LimitVaporFraction = False}
             Dim flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 0.0#, PP, Vz, Nothing, Pref)
             If flashresult.ResultException IsNot Nothing Then
                 Pmax = 0.0#
@@ -951,7 +983,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim result As Object
 
-            Dim nl As New DWSIMDefault With {.LimitVaporFraction = False}
+            Dim nl As New NestedLoops With {.LimitVaporFraction = False}
 
             If Tref = 0.0# Then
 

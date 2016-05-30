@@ -43,6 +43,32 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Pb, Pd, Pmin, Pmax, Px, soma_x1, soma_x2, soma_y, Tmin, Tmax As Double
         Dim proppack As PropertyPackages.PropertyPackage
         Dim tmpdx, refx, currx As Object
+        Sub New()
+            MyBase.New()
+        End Sub
+
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash baseado no procedimento Inside-Out de Boston e Fournier. Ref: http://www.tandfonline.com/doi/abs/10.1080/00986448108912588?journalCode=gcec20"
+                Else
+                    Return "Based on the Inside-Out procedure by Boston and Fournier. Ref: http://www.tandfonline.com/doi/abs/10.1080/00986448108912588?journalCode=gcec20"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Inside-Out VLLE (Boston-Fournier)"
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Inside_Out_VLLE
+            End Get
+        End Property
 
         Public Overrides Function Flash_PT(ByVal Vz() As Double, ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
@@ -2415,12 +2441,6 @@ out:
             Return errors.Sum()
 
         End Function
-
-        Public Sub New()
-
-
-
-        End Sub
 
     End Class
 

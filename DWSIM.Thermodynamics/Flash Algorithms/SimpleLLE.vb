@@ -43,6 +43,32 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property InitialEstimatesForPhase2 As Double()
         Public Property UseInitialEstimatesForPhase2 As Boolean = False
 
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Simple_LLE
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash para cálculo de equilíbrio entre duas fases líquidas"
+                Else
+                    Return "Flash Algorithm for simple Liquid-Liquid equilibrium calculations"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Simple LLE"
+            End Get
+        End Property
+
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim i, j, n, ecount As Integer

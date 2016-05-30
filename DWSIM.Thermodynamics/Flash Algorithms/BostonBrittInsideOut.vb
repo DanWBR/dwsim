@@ -45,6 +45,31 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim proppack As PropertyPackages.PropertyPackage
         Dim tmpdx, refx, currx As Object
         Dim fastmode As Integer
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Inside_Out_VLE
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash baseado no procedimento Inside-Out de Boston e Britt. Ref: http://www.sciencedirect.com/science/article/pii/0098135478800155"
+                Else
+                    Return "Based on the Inside-Out procedure by Boston and Britt. Ref: http://www.sciencedirect.com/science/article/pii/0098135478800155"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Inside-Out VLE (Boston-Britt)"
+            End Get
+        End Property
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 

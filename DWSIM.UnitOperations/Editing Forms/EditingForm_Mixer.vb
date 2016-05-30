@@ -274,14 +274,14 @@ Public Class EditingForm_Mixer
 
     Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
 
-        Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(MixerObject.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
+        'Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(MixerObject.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
 
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = MixerObject.FlowSheet.FlowsheetOptions.FlashSettings(fa),
-                                                                .AvailableCompounds = MixerObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = fa}
-        f.ShowDialog(Me)
+        'Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = MixerObject.FlowSheet.FlowsheetOptions.FlashSettings(fa),
+        '                                                        .AvailableCompounds = MixerObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
+        '                                                         .FlashAlgo = fa}
+        'f.ShowDialog(Me)
 
-        MixerObject.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
+        'MixerObject.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
 
     End Sub
 

@@ -185,14 +185,14 @@ Public Class EditingForm_HeaterCooler
 
     Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
 
-        Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(SimObject.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
+        'Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(SimObject.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
 
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = SimObject.FlowSheet.FlowsheetOptions.FlashSettings(fa),
-                                                                .AvailableCompounds = SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
-                                                                 .FlashAlgo = fa}
-        f.ShowDialog(Me)
+        'Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = SimObject.FlowSheet.FlowsheetOptions.FlashSettings(fa),
+        '                                                        .AvailableCompounds = SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
+        '                                                         .FlashAlgo = fa}
+        'f.ShowDialog(Me)
 
-        SimObject.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
+        'SimObject.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
 
     End Sub
 

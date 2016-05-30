@@ -1264,7 +1264,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             pp._tpseverity = 2
             Dim comps(compounds.Length - 1) As String
@@ -1374,7 +1395,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             pp._tpseverity = 2
             Dim comps(compounds.Length - 1) As String
@@ -1488,7 +1530,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             pp._tpseverity = 2
             Dim comps(compounds.Length - 1) As String
@@ -1602,7 +1665,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             pp._tpseverity = 2
             Dim comps(compounds.Length - 1) As String
@@ -1716,7 +1800,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             pp._tpseverity = 2
             Dim comps(compounds.Length - 1) As String
@@ -1828,7 +1933,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
 
@@ -1924,7 +2050,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             ms.Phases(0).Properties.temperature = InitialTemperatureEstimate
 
@@ -2024,7 +2171,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             ms.Phases(0).Properties.temperature = InitialTemperatureEstimate
 
@@ -2124,7 +2292,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             ms.Phases(0).Properties.temperature = InitialTemperatureEstimate
 
@@ -2224,7 +2413,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             ms.Phases(0).Properties.pressure = InitialPressureEstimate
 
@@ -2518,7 +2728,28 @@ Namespace CalculatorInterface
             ms._pp = pp
             pp.SetMaterial(ms)
 
-            pp.FlashAlgorithm = flashalg
+            'Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 
+            '5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE
+            Select Case flashalg
+                Case 0, 2
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
+                Case 1
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonBrittInsideOut
+                Case 3
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P
+                Case 4
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = True}
+                Case 5
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.GibbsMinimization3P With {.ForceTwoPhaseOnly = False}
+                Case 6
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Case 7
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsSLE
+                Case 8
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoopsImmiscible
+                Case 9
+                    pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
+            End Select
 
             Dim results As New FlashCalculationResult
 

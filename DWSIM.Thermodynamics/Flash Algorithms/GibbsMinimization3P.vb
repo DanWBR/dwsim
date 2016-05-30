@@ -33,7 +33,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Inherits FlashAlgorithm
 
-        Private _nl As New DWSIMDefault
+        Private _nl As New NestedLoops
         Private _nl3p As New NestedLoops3PV2
 
         Public ForceTwoPhaseOnly As Boolean = False
@@ -59,6 +59,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Vx1_ant(n), Vx2_ant(n), Ki2(n), Ki2_ant(n) As Double
         Dim Vant, T, Tant, P As Double
         Dim Ki1(n) As Double
+        Sub New()
+            MyBase.New()
+        End Sub
 
         Public Property Solver As OptimizationMethod = OptimizationMethod.IPOPT
 
@@ -71,6 +74,36 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Enum
 
         Dim objfunc As ObjFuncType = ObjFuncType.MinGibbs
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                If ForceTwoPhaseOnly Then
+                    Return Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
+                Else
+                    Return Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Encontra as fases em equilíbrio e suas composições através da minimização da Energia Livre de Gibbs."
+                Else
+                    Return "Finds the equilibrium phases and their compositions through a Free Gibbs energy minimization procedure."
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                If ForceTwoPhaseOnly Then
+                    Return "Gibbs Minimization VLE"
+                Else
+                    Return "Gibbs Minimization VLLE"
+                End If
+            End Get
+        End Property
 
         Public Function CheckSolution() As Boolean
 
@@ -652,7 +685,7 @@ out:        Return result
             Dim d1, d2 As Date, dt As TimeSpan
             Dim i, n, ecount As Integer
             Dim Tb, Td As Double
-            Dim Span(1) As PointF
+            Dim Span(1) As Drawing.PointF
 
             Dim ErrRes As Object
 
@@ -1157,7 +1190,7 @@ alt:
 
             d1 = Date.Now
 
-            Dim _nl As New DWSIMDefault
+            Dim _nl As New NestedLoops
 
             Dim result As Object = _nl.Flash_TV(Vz, T, V, Pref, PP, ReuseKI, PrevKi)
 
@@ -1278,7 +1311,7 @@ alt:
 
             d1 = Date.Now
 
-            Dim _nl As New DWSIMDefault
+            Dim _nl As New NestedLoops
 
             Dim result As Object = _nl.Flash_PV(Vz, P, V, Tref, PP, ReuseKI, PrevKi)
 

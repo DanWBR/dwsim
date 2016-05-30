@@ -1,4 +1,22 @@
-﻿Public Interface IFlashCalculationResult
+﻿Public Interface IFlashAlgorithm
+
+    Property FlashSettings As Dictionary(Of Enums.FlashSetting, String)
+
+    Function Clone() As IFlashAlgorithm
+
+    ReadOnly Property AlgoType As Enums.FlashMethod
+
+    ReadOnly Property Name As String
+
+    ReadOnly Property Description As String
+
+    Property Tag As String
+
+    ReadOnly Property InternalUseOnly As Boolean
+
+End Interface
+
+Public Interface IFlashCalculationResult
 
     Property BaseMoleAmount As Double
     Property Kvalues As List(Of Double)

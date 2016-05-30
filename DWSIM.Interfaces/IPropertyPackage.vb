@@ -6,7 +6,7 @@
 
     Property Tag As String
 
-    Property PreferredFlashAlgorithm As Enums.FlashMethod
+    Property FlashAlgorithm As IFlashAlgorithm
 
     Property CurrentMaterialStream As IMaterialStream
 

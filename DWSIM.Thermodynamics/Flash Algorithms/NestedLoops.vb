@@ -30,7 +30,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     ''' The Flash algorithms in this class are based on the Nested Loops approach to solve equilibrium calculations.
     ''' </summary>
     ''' <remarks></remarks>
-    <System.Serializable()> Public Class DWSIMDefault
+    <System.Serializable()> Public Class NestedLoops
 
         Inherits FlashAlgorithm
 
@@ -41,7 +41,33 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
 
+        Sub New()
+            MyBase.New()
+        End Sub
+
         Public Property LimitVaporFraction As Boolean = True
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Nested_Loops_VLE
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash padrão, baseado na equação de Rachford e Rice."
+                Else
+                    Return "Default Flash Algorithm, based on the Rachford-Rice VLE equations."
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Nested Loops (VLE)"
+            End Get
+        End Property
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 

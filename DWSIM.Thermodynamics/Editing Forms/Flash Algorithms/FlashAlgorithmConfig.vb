@@ -6,13 +6,13 @@
 
     Public Property AvailableCompounds As List(Of String)
 
-    Public FlashAlgo As Interfaces.Enums.FlashMethod
+    Public FlashAlgo As Interfaces.IFlashAlgorithm
 
     Dim ci As Globalization.CultureInfo
 
     Private Sub FlashAlgorithmConfig_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Select Case FlashAlgo
+        Select Case FlashAlgo.AlgoType
             Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
                 TabControl1.TabPages.Remove(TabPageGM)
                 TabControl1.TabPages.Remove(TabPageIO)

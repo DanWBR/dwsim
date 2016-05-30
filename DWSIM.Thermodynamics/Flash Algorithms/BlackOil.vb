@@ -42,13 +42,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Sv0, Svid, Slid, Sf, Sv, Sl As Double
         Dim Vf As Double
 
+        Sub New()
+            MyBase.New()
+        End Sub
+
+        Public Overrides ReadOnly Property InternalUseOnly As Boolean
+            Get
+                Return True
+            End Get
+        End Property
+
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim L, V As Double
             Dim n = Vz.Length - 1
 
             Dim Vx(n), Vy(n) As Double
-      
+
             Dim Vny As Double() = DirectCast(PP, BlackOilPropertyPackage).DW_CalcXY(T, P)
 
             V = Vny.MultiplyY(Vz).Sum()
@@ -590,6 +600,28 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
         Function Verror(ByVal type As String, ByVal T As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
             Return OBJ_FUNC_PV_FLASH(type, T, P, Vz, PP)
         End Function
+
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.BlackOil
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
+                    Return "Algoritmo Flash específico para simulações com componentes Black-Oil"
+                Else
+                    Return "Flash Algorithm specific for Black-Oil compounds & mixtures"
+                End If
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Black Oil"
+            End Get
+        End Property
 
     End Class
 
