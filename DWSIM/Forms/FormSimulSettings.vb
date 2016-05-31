@@ -1362,7 +1362,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
-        Me.Close()
+        Me.Hide()
     End Sub
 
     Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,

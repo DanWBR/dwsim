@@ -389,23 +389,23 @@ Public Class FormSimulWizard
     Private Sub ListBoxPP_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ListBoxPP.SelectedIndexChanged
         Select Case ListBoxPP.SelectedIndex
             Case 0
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops())
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name & " (1)"})
             Case 1
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3())
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3() With {.Tag = .Name & " (1)"})
             Case 2
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonBrittInsideOut())
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonBrittInsideOut() With {.Tag = .Name & " (1)"})
             Case 3
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P())
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P() With {.Tag = .Name & " (1)"})
             Case 4
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = True})
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = True, .Tag = .Name & " (1)"})
             Case 5
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = False})
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P() With {.ForceTwoPhaseOnly = False, .Tag = .Name & " (1)"})
             Case 6
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE)
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.Tag = .Name & " (1)"})
             Case 7
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.SolidSolution = True})
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE With {.SolidSolution = True, .Tag = .Name & " (1)"})
             Case 8
-                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsImmiscible)
+                Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsImmiscible With {.Tag = .Name & " (1)"})
         End Select
     End Sub
 

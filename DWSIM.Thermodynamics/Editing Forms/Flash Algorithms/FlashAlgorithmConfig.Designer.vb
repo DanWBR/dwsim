@@ -71,6 +71,7 @@ Partial Class FlashAlgorithmConfig
         Me.lvKeyComp = New System.Windows.Forms.ListView()
         Me.TabPageCOES = New System.Windows.Forms.TabPage()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.tbSelectedES = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.lblAbout2 = New System.Windows.Forms.Label()
@@ -415,6 +416,7 @@ Partial Class FlashAlgorithmConfig
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Controls.Add(Me.Button1)
         Me.GroupBox6.Controls.Add(Me.tbSelectedES)
         Me.GroupBox6.Controls.Add(Me.btnSearch)
         Me.GroupBox6.Controls.Add(Me.lblAbout2)
@@ -431,6 +433,12 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox6.Controls.Add(Me.btnEditThermoServer)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'tbSelectedES
         '
@@ -601,4 +609,5 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents btnEditThermoServer As System.Windows.Forms.Button
     Friend WithEvents tbSelectedES As System.Windows.Forms.TextBox
     Friend WithEvents btnSearch As System.Windows.Forms.Button
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class

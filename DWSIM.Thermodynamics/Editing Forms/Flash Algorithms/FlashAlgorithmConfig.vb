@@ -467,5 +467,18 @@ Public Class FlashAlgorithmConfig
 
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim txt As New Text.StringBuilder
+
+        txt.AppendLine("DWSIM -> Equilibrium Server")
+        txt.AppendLine()
+        For Each item In _mappings
+            txt.AppendLine(item.Key & " -> " & item.Value)
+        Next
+
+        MessageBox.Show(txt.ToString, "Compound Mapping", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    End Sub
 
 End Class

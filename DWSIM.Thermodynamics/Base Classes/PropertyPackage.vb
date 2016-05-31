@@ -2890,7 +2890,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, 0, Me)
                         TVB.Add(tmp2(4))
                         PB.Add(P)
-                        T = TVB(i)
+                        T = TVB(TVB.Count - 1)
                         HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                         SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                         VB.Add(1 / Me.AUX_LIQDENS(T, P, 0, 0, False) * Me.AUX_MMM(Phase.Mixture))
@@ -2903,14 +2903,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 Else
                     If beta < 20 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, PB(i - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, PB(PB.Count - 1), Me, True, KI)
                             TVB.Add(T)
                             PB.Add(tmp2(4))
-                            P = PB(i)
+                            P = PB(PB.Count - 1)
                             HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                             SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                             VB.Add(1 / Me.AUX_LIQDENS(T, P, 0, 0, False) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
+                            beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
 
                         Finally
@@ -2922,14 +2923,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         End Try
                     Else
                         Try
-                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, TVB(i - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, TVB(TVB.Count - 1), Me, True, KI)
                             TVB.Add(tmp2(4))
                             PB.Add(P)
-                            T = TVB(i)
+                            T = TVB(TVB.Count - 1)
                             HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                             SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                             VB.Add(1 / Me.AUX_LIQDENS(T, P, 0, 0, False) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
+                            beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
 
                         Finally
@@ -2940,13 +2942,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             End If
                         End Try
                     End If
-                    beta = (Math.Log(PB(i) / 101325) - Math.Log(PB(i - 1) / 101325)) / (Math.Log(TVB(i)) - Math.Log(TVB(i - 1)))
-                End If
+                 End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points (" & i + 1 & "/300)")
                 i = i + 1
-            Loop Until i >= 300 Or PB(i - 1) = 0 Or PB(i - 1) < 0 Or TVB(i - 1) < 0 Or _
-                        T >= TCR Or Double.IsNaN(PB(i - 1)) = True Or _
-                        Double.IsNaN(TVB(i - 1)) = True Or Math.Abs(T - TCR) / TCR < 0.002 And _
+            Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or _
+                        T >= TCR Or Double.IsNaN(PB(PB.Count - 1)) = True Or _
+                        Double.IsNaN(TVB(TVB.Count - 1)) = True Or Math.Abs(T - TCR) / TCR < 0.002 And _
                         Math.Abs(P - PCR) / PCR < 0.002
 
             Dim Switch = False
@@ -2967,7 +2968,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, 0, Me)
                         TVD.Add(tmp2(4))
                         PO.Add(P)
-                        T = TVD(i)
+                        T = TVD(TVD.Count - 1)
                         HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                         SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                         VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
@@ -2983,14 +2984,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 Else
                     If Abs(beta) < 2 Then
                         Try
-                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(i - 1), Me, True, KI)
+                            tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, True, KI)
                             TVD.Add(T)
                             PO.Add(tmp2(4))
-                            P = PO(i)
+                            P = PO(PO.Count - 1)
                             HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
+                            beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         Finally
                             If TVD(i) - TVD(i - 1) <= 0 Then
@@ -3009,14 +3011,15 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         End Try
                     Else
                         Try
-                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, TVD(i - 1), Me, False, KI)
+                            tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, TVD(TVD.Count - 1), Me, False, KI)
                             TVD.Add(tmp2(4))
                             PO.Add(P)
-                            T = TVD(i)
+                            T = TVD(TVD.Count - 1)
                             HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Vapor))
                             VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                             KI = tmp2(6)
+                            beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         Finally
                             If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
@@ -3029,13 +3032,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     If i >= PO.Count Then
                         i = i - 1
                     End If
-                    beta = (Math.Log(PO(i) / 101325) - Math.Log(PO(i - 1) / 101325)) / (Math.Log(TVD(i)) - Math.Log(TVD(i - 1)))
                     If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0
                 End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points (" & i + 1 & "/300)")
                 i = i + 1
-            Loop Until i >= 300 Or PO(i - 1) = 0 Or PO(i - 1) < 0 Or TVD(i - 1) < 0 Or _
-                        Double.IsNaN(PO(i - 1)) = True Or Double.IsNaN(TVD(i - 1)) = True Or _
+            Loop Until i >= 300 Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
+                        Double.IsNaN(PO(PO.Count - 1)) = True Or Double.IsNaN(TVD(TVD.Count - 1)) = True Or _
                         Math.Abs(T - TCR) / TCR < 0.03 And Math.Abs(P - PCR) / PCR < 0.03
 
             beta = 10
@@ -3057,7 +3059,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, parameters(1), 0, Me, False, KI)
                             TQ.Add(tmp2(4))
                             PQ.Add(P)
-                            T = TQ(i)
+                            T = TQ(TQ.Count - 1)
                             KI = tmp2(6)
                         Catch ex As Exception
                         Finally
@@ -3066,11 +3068,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Else
                         If beta < 2 Then
                             Try
-                                tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, parameters(1), PQ(i - 1), Me, True, KI)
+                                tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, parameters(1), PQ(PQ.Count - 1), Me, True, KI)
                                 TQ.Add(T)
                                 PQ.Add(tmp2(4))
-                                P = PQ(i)
+                                P = PQ(PQ.Count - 1)
                                 KI = tmp2(6)
+                                beta = (Math.Log(PQ(PQ.Count - 1) / 101325) - Math.Log(PQ(PQ.Count - 2) / 101325)) / (Math.Log(TQ(TQ.Count - 1)) - Math.Log(TQ(TQ.Count - 2)))
                             Catch ex As Exception
                             Finally
                                 If Math.Abs(T - TCR) / TCR < 0.1 And Math.Abs(P - PCR) / PCR < 0.2 Then
@@ -3081,11 +3084,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             End Try
                         Else
                             Try
-                                tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, parameters(1), TQ(i - 1), Me, True, KI)
+                                tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, parameters(1), TQ(TQ.Count - 1), Me, True, KI)
                                 TQ.Add(tmp2(4))
                                 PQ.Add(P)
-                                T = TQ(i)
+                                T = TQ(TQ.Count - 1)
                                 KI = tmp2(6)
+                                beta = (Math.Log(PQ(PQ.Count - 1) / 101325) - Math.Log(PQ(PQ.Count - 2) / 101325)) / (Math.Log(TQ(TQ.Count - 1)) - Math.Log(TQ(TQ.Count - 2)))
                             Catch ex As Exception
                             Finally
                                 If Math.Abs(T - TCR) / TCR < 0.1 And Math.Abs(P - PCR) / PCR < 0.1 Then
@@ -3095,15 +3099,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 End If
                             End Try
                         End If
-                        beta = (Math.Log(PQ(i) / 101325) - Math.Log(PQ(i - 1) / 101325)) / (Math.Log(TQ(i)) - Math.Log(TQ(i - 1)))
                     End If
                     If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Quality Line (" & i + 1 & "/300)")
                     i = i + 1
                     If i > 2 Then
-                        If PQ(i - 1) = PQ(i - 2) Or TQ(i - 1) = TQ(i - 2) Then Exit Do
+                        If PQ(PQ.Count - 1) = PQ(PQ.Count - 2) Or TQ(TQ.Count - 1) = TQ(TQ.Count - 2) Then Exit Do
                     End If
-                Loop Until i >= 300 Or PQ(i - 1) = 0 Or PQ(i - 1) < 0 Or TQ(i - 1) < 0 Or _
-                            Double.IsNaN(PQ(i - 1)) = True Or Double.IsNaN(TQ(i - 1)) = True Or _
+                Loop Until i >= 300 Or PQ(PQ.Count - 1) = 0 Or PQ(PQ.Count - 1) < 0 Or TQ(TQ.Count - 1) < 0 Or _
+                            Double.IsNaN(PQ(PQ.Count - 1)) = True Or Double.IsNaN(TQ(TQ.Count - 1)) = True Or _
                             Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02
             Else
                 TQ.Add(0)
