@@ -3128,16 +3128,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 TVB = New ArrayList(TVB.GetRange(0, ip))
                 PB = New ArrayList(PB.GetRange(0, ip))
                 VB = New ArrayList(VB.GetRange(0, ip))
-                HB = New ArrayList(VB.GetRange(0, ip))
-                SB = New ArrayList(VB.GetRange(0, ip))
+                HB = New ArrayList(HB.GetRange(0, ip))
+                SB = New ArrayList(SB.GetRange(0, ip))
 
                 ip = (id1 + id2) / 2
 
                 TVD = New ArrayList(TVD.GetRange(0, ip))
                 PO = New ArrayList(PO.GetRange(0, ip))
                 VO = New ArrayList(VO.GetRange(0, ip))
-                HO = New ArrayList(VO.GetRange(0, ip))
-                SO = New ArrayList(VO.GetRange(0, ip))
+                HO = New ArrayList(HO.GetRange(0, ip))
+                SO = New ArrayList(SO.GetRange(0, ip))
 
             End If
 
