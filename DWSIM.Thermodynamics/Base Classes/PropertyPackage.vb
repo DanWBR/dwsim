@@ -2867,8 +2867,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Pmin = 101325
             Tmin = 0.3 * TCR
 
-            dP = (PCR - Pmin) / 30
-            dT = (TCR - Tmin) / 30
+            dP = (PCR - Pmin) / 50
+            dT = (TCR - Tmin) / 50
 
             Dim beta As Double = 10
 
@@ -2887,6 +2887,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Do
                 If i < 2 Then
                     Try
+                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, 0, Me)
+                        TVB.Add(T)
+                        PB.Add(tmp2(4))
+                        P = PB(PB.Count - 1)
+                        HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
+                        SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
+                        VB.Add(1 / Me.AUX_LIQDENS(T, P, 0, 0, False) * Me.AUX_MMM(Phase.Mixture))
+                        KI = tmp2(6)
+                        T = T + dT
+                    Catch ex As Exception
                         tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, 0, Me)
                         TVB.Add(tmp2(4))
                         PB.Add(P)
@@ -2895,10 +2905,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                         VB.Add(1 / Me.AUX_LIQDENS(T, P, 0, 0, False) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
-                    Catch ex As Exception
-
-                    Finally
                         P = P + dP
+                    Finally
+
                     End Try
                 Else
                     If beta < 20 Then
@@ -2942,7 +2951,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             End If
                         End Try
                     End If
-                 End If
+                End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points (" & i + 1 & "/300)")
                 i = i + 1
             Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or _
@@ -2995,7 +3004,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
                         Finally
-                            If TVD(i) - TVD(i - 1) <= 0 Then
+                            If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
                                 If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
                                     T = T - dT * 0.1
                                 Else
@@ -3039,6 +3048,46 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Loop Until i >= 300 Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
                         Double.IsNaN(PO(PO.Count - 1)) = True Or Double.IsNaN(TVD(TVD.Count - 1)) = True Or _
                         Math.Abs(T - TCR) / TCR < 0.03 And Math.Abs(P - PCR) / PCR < 0.03
+
+
+            'calculate intersection point, if any
+
+            Dim mindistT, mindistP As Double
+
+            If mindistP < dP And mindistT < dT Then
+
+                'there is an intersection, update critical point
+
+                Dim Tc, Pc, Vc As Double
+
+                Tc = (TVB(i1) + TVB(j1)) / 2
+                Pc = (PB(distPkey1) + PB(distPkey2)) / 2
+                Vc = 1 / Me.AUX_VAPDENS(Tc, Pc) * Me.AUX_MMM(Phase.Mixture) / 1000
+
+                CP.Clear()
+                CP.Add(New Object() {Tc, Pc, Vc})
+
+                'remove data beyond intersection point
+
+                Dim ip As Integer = (distPkey1 + distTkey1) / 2
+
+                TVB = New ArrayList(TVB.GetRange(0, ip))
+                PB = New ArrayList(PB.GetRange(0, ip))
+                VB = New ArrayList(VB.GetRange(0, ip))
+                HB = New ArrayList(VB.GetRange(0, ip))
+                SB = New ArrayList(VB.GetRange(0, ip))
+
+                ip = (distPkey2 + distTkey2) / 2
+
+                TVD = New ArrayList(TVD.GetRange(0, ip))
+                PO = New ArrayList(PO.GetRange(0, ip))
+                VO = New ArrayList(VO.GetRange(0, ip))
+                HO = New ArrayList(VO.GetRange(0, ip))
+                SO = New ArrayList(VO.GetRange(0, ip))
+
+            End If
+
+            'calculate quality curve
 
             beta = 10
 
@@ -3159,11 +3208,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             If SB.Count > 1 Then SB.RemoveAt(SB.Count - 1)
             If VB.Count > 1 Then VB.RemoveAt(VB.Count - 1)
 
-            If ToWF.Count > 1 Then ToWF.RemoveAt(ToWF.Count - 1)
-            If PoWF.Count > 1 Then PoWF.RemoveAt(PoWF.Count - 1)
-            If HoWF.Count > 1 Then HoWF.RemoveAt(HoWF.Count - 1)
-            If SoWF.Count > 1 Then SoWF.RemoveAt(SoWF.Count - 1)
-            If VoWF.Count > 1 Then VoWF.RemoveAt(VoWF.Count - 1)
+            If TOWF.Count > 1 Then TOWF.RemoveAt(TOWF.Count - 1)
+            If POWF.Count > 1 Then POWF.RemoveAt(POWF.Count - 1)
+            If HOWF.Count > 1 Then HOWF.RemoveAt(HOWF.Count - 1)
+            If SOWF.Count > 1 Then SOWF.RemoveAt(SOWF.Count - 1)
+            If VOWF.Count > 1 Then VOWF.RemoveAt(VOWF.Count - 1)
 
             If TVD.Count > 1 Then TVD.RemoveAt(TVD.Count - 1)
             If PO.Count > 1 Then PO.RemoveAt(PO.Count - 1)
@@ -3182,7 +3231,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             If TI.Count > 1 Then TI.RemoveAt(TI.Count - 1)
             If PI.Count > 1 Then PI.RemoveAt(PI.Count - 1)
 
-            Return New Object() {TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, ToWF, PoWF, HoWF, SoWF, VoWF}
+            Return New Object() {TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, TOWF, POWF, HOWF, SOWF, VOWF}
 
         End Function
 
