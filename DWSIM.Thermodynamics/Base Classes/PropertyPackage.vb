@@ -3108,6 +3108,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i += 1
             Next
 
+            Dim d1, d2, d3, d4 As Double
+
+            d1 = PB(ib1)
+
             If mindistP < dP And mindistT < dT Then
 
                 'there is an intersection, update critical point
