@@ -339,6 +339,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim tmppp = PP.Clone
 
+            With tmppp
+                ._phasemappings = _phasemappings
+            End With
+
             With mo
 
                 .PropertyPackage = tmppp
@@ -348,7 +352,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End With
 
-            Dim s1 As String() = New String() {"temperature", Nothing, "Overall"}
+            Dim s1 As String() = New String() {"pressure", Nothing, "Overall"}
             Dim s2 As String() = New String() {"enthalpy", Nothing, "Overall"}
 
             Try
@@ -386,6 +390,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim tmppp = PP.Clone
 
+            With tmppp
+                ._phasemappings = _phasemappings
+            End With
+
             With mo
 
                 .PropertyPackage = tmppp
@@ -395,7 +403,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             End With
 
-            Dim s1 As String() = New String() {"temperature", Nothing, "Overall"}
+            Dim s1 As String() = New String() {"pressure", Nothing, "Overall"}
             Dim s2 As String() = New String() {"entropy", Nothing, "Overall"}
 
             Try
@@ -432,6 +440,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             PP.Flowsheet.AddCompoundsToMaterialStream(mo)
 
             Dim tmppp = PP.Clone
+
+            With tmppp
+                ._phasemappings = _phasemappings
+            End With
 
             With mo
 
@@ -479,6 +491,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             PP.Flowsheet.AddCompoundsToMaterialStream(mo)
 
             Dim tmppp = PP.Clone
+
+            With tmppp
+                ._phasemappings = _phasemappings
+            End With
 
             With mo
 

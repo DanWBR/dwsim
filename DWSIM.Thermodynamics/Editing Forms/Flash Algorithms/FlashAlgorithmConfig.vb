@@ -448,8 +448,8 @@ Public Class FlashAlgorithmConfig
                 If _phasemappings("Liquid2").PhaseLabel = "" Then _phasemappings("Liquid2").PhaseLabel = "Disabled"
             End If
 
-            _phasemappings("Liquid3").PhaseLabel = "Disabled"
-            _phasemappings("Aqueous").PhaseLabel = "Disabled"
+            '_phasemappings("Liquid3").PhaseLabel = "Disabled"
+            '_phasemappings("Aqueous").PhaseLabel = "Disabled"
 
             If _phasemappings("Solid").PhaseLabel = "" Then
                 i = 0
