@@ -487,4 +487,7 @@ Imports DWSIM.Interfaces.Interfaces
         Me.Close()
     End Sub
 
+    Private Sub rb11_CheckedChanged(sender As Object, e As EventArgs) Handles rb11.CheckedChanged
+
+    End Sub
 End Class

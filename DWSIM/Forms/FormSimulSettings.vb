@@ -1465,4 +1465,10 @@ Public Class FormSimulSettings
             btnAddFA.PerformClick()
         End If
     End Sub
+
+    Private Sub dgvAddedFlashAlgos_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAddedFlashAlgos.CellValueChanged
+        If loaded Then
+            FrmChild.Options.FlashAlgorithms(e.RowIndex).Tag = dgvAddedFlashAlgos.Rows(e.RowIndex).Cells(0).Value
+        End If
+    End Sub
 End Class

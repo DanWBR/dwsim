@@ -69,6 +69,21 @@ Partial Class FlashAlgorithmConfig
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lvKeyComp = New System.Windows.Forms.ListView()
+        Me.TabPageCOES = New System.Windows.Forms.TabPage()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.lblAbout2 = New System.Windows.Forms.Label()
+        Me.lblDesc2 = New System.Windows.Forms.Label()
+        Me.lblAuthorURL2 = New System.Windows.Forms.LinkLabel()
+        Me.lblVersion2 = New System.Windows.Forms.Label()
+        Me.lblName2 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.cbThermoServer = New System.Windows.Forms.ComboBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.btnEditThermoServer = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPageGeneral.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -82,30 +97,32 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox3.SuspendLayout()
         Me.TabPageVLLE.SuspendLayout()
         Me.GroupBox11.SuspendLayout()
+        Me.TabPageCOES.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
         '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPageGeneral)
         Me.TabControl1.Controls.Add(Me.TabPageConvPars)
         Me.TabControl1.Controls.Add(Me.TabPageNL)
         Me.TabControl1.Controls.Add(Me.TabPageIO)
         Me.TabControl1.Controls.Add(Me.TabPageGM)
         Me.TabControl1.Controls.Add(Me.TabPageVLLE)
+        Me.TabControl1.Controls.Add(Me.TabPageCOES)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
         'TabPageGeneral
         '
-        resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
         Me.TabPageGeneral.Controls.Add(Me.GroupBox4)
+        resources.ApplyResources(Me.TabPageGeneral, "TabPageGeneral")
         Me.TabPageGeneral.Name = "TabPageGeneral"
         Me.TabPageGeneral.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.chkReplaceFlashPT)
         Me.GroupBox4.Controls.Add(Me.Label13)
         Me.GroupBox4.Controls.Add(Me.chkDoPhaseId)
@@ -113,6 +130,7 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox4.Controls.Add(Me.chkCalcBubbleDew)
         Me.GroupBox4.Controls.Add(Me.chkValidateEqCalc)
         Me.GroupBox4.Controls.Add(Me.Label12)
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -153,14 +171,13 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageConvPars
         '
-        resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
         Me.TabPageConvPars.Controls.Add(Me.GroupBox1)
+        resources.ApplyResources(Me.TabPageConvPars, "TabPageConvPars")
         Me.TabPageConvPars.Name = "TabPageConvPars"
         Me.TabPageConvPars.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbPHExtMaxIt)
         Me.GroupBox1.Controls.Add(Me.tbPHIntMaxIt)
         Me.GroupBox1.Controls.Add(Me.tbPHExtMaxTol)
@@ -177,6 +194,7 @@ Partial Class FlashAlgorithmConfig
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.tbPTIntTol)
         Me.GroupBox1.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -262,15 +280,15 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageNL
         '
-        resources.ApplyResources(Me.TabPageNL, "TabPageNL")
         Me.TabPageNL.Controls.Add(Me.GroupBox2)
+        resources.ApplyResources(Me.TabPageNL, "TabPageNL")
         Me.TabPageNL.Name = "TabPageNL"
         Me.TabPageNL.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.chkFastModeNL)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -282,15 +300,15 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageIO
         '
-        resources.ApplyResources(Me.TabPageIO, "TabPageIO")
         Me.TabPageIO.Controls.Add(Me.GroupBox5)
+        resources.ApplyResources(Me.TabPageIO, "TabPageIO")
         Me.TabPageIO.Name = "TabPageIO"
         Me.TabPageIO.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Controls.Add(Me.chkUseBroydenIO)
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
@@ -302,25 +320,25 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageGM
         '
-        resources.ApplyResources(Me.TabPageGM, "TabPageGM")
         Me.TabPageGM.Controls.Add(Me.GroupBox3)
+        resources.ApplyResources(Me.TabPageGM, "TabPageGM")
         Me.TabPageGM.Name = "TabPageGM"
         Me.TabPageGM.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.cbMinMethodGM)
         Me.GroupBox3.Controls.Add(Me.Label9)
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
         '
         'cbMinMethodGM
         '
-        resources.ApplyResources(Me.cbMinMethodGM, "cbMinMethodGM")
         Me.cbMinMethodGM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMinMethodGM.FormattingEnabled = True
         Me.cbMinMethodGM.Items.AddRange(New Object() {resources.GetString("cbMinMethodGM.Items"), resources.GetString("cbMinMethodGM.Items1"), resources.GetString("cbMinMethodGM.Items2"), resources.GetString("cbMinMethodGM.Items3"), resources.GetString("cbMinMethodGM.Items4"), resources.GetString("cbMinMethodGM.Items5"), resources.GetString("cbMinMethodGM.Items6"), resources.GetString("cbMinMethodGM.Items7"), resources.GetString("cbMinMethodGM.Items8"), resources.GetString("cbMinMethodGM.Items9"), resources.GetString("cbMinMethodGM.Items10")})
+        resources.ApplyResources(Me.cbMinMethodGM, "cbMinMethodGM")
         Me.cbMinMethodGM.Name = "cbMinMethodGM"
         '
         'Label9
@@ -330,8 +348,8 @@ Partial Class FlashAlgorithmConfig
         '
         'TabPageVLLE
         '
-        resources.ApplyResources(Me.TabPageVLLE, "TabPageVLLE")
         Me.TabPageVLLE.Controls.Add(Me.GroupBox11)
+        resources.ApplyResources(Me.TabPageVLLE, "TabPageVLLE")
         Me.TabPageVLLE.Name = "TabPageVLLE"
         Me.TabPageVLLE.UseVisualStyleBackColor = True
         '
@@ -386,6 +404,100 @@ Partial Class FlashAlgorithmConfig
         Me.lvKeyComp.UseCompatibleStateImageBehavior = False
         Me.lvKeyComp.View = System.Windows.Forms.View.List
         '
+        'TabPageCOES
+        '
+        Me.TabPageCOES.Controls.Add(Me.GroupBox6)
+        resources.ApplyResources(Me.TabPageCOES, "TabPageCOES")
+        Me.TabPageCOES.Name = "TabPageCOES"
+        Me.TabPageCOES.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.lblAbout2)
+        Me.GroupBox6.Controls.Add(Me.lblDesc2)
+        Me.GroupBox6.Controls.Add(Me.lblAuthorURL2)
+        Me.GroupBox6.Controls.Add(Me.lblVersion2)
+        Me.GroupBox6.Controls.Add(Me.lblName2)
+        Me.GroupBox6.Controls.Add(Me.Label15)
+        Me.GroupBox6.Controls.Add(Me.Label16)
+        Me.GroupBox6.Controls.Add(Me.Label17)
+        Me.GroupBox6.Controls.Add(Me.Label18)
+        Me.GroupBox6.Controls.Add(Me.Label19)
+        Me.GroupBox6.Controls.Add(Me.cbThermoServer)
+        Me.GroupBox6.Controls.Add(Me.Label20)
+        Me.GroupBox6.Controls.Add(Me.btnEditThermoServer)
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.TabStop = False
+        '
+        'lblAbout2
+        '
+        resources.ApplyResources(Me.lblAbout2, "lblAbout2")
+        Me.lblAbout2.Name = "lblAbout2"
+        '
+        'lblDesc2
+        '
+        resources.ApplyResources(Me.lblDesc2, "lblDesc2")
+        Me.lblDesc2.Name = "lblDesc2"
+        '
+        'lblAuthorURL2
+        '
+        resources.ApplyResources(Me.lblAuthorURL2, "lblAuthorURL2")
+        Me.lblAuthorURL2.Name = "lblAuthorURL2"
+        '
+        'lblVersion2
+        '
+        resources.ApplyResources(Me.lblVersion2, "lblVersion2")
+        Me.lblVersion2.Name = "lblVersion2"
+        '
+        'lblName2
+        '
+        resources.ApplyResources(Me.lblName2, "lblName2")
+        Me.lblName2.Name = "lblName2"
+        '
+        'Label15
+        '
+        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.Name = "Label15"
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        '
+        'cbThermoServer
+        '
+        Me.cbThermoServer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbThermoServer.FormattingEnabled = True
+        resources.ApplyResources(Me.cbThermoServer, "cbThermoServer")
+        Me.cbThermoServer.Name = "cbThermoServer"
+        '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        '
+        'btnEditThermoServer
+        '
+        resources.ApplyResources(Me.btnEditThermoServer, "btnEditThermoServer")
+        Me.btnEditThermoServer.Name = "btnEditThermoServer"
+        Me.btnEditThermoServer.UseVisualStyleBackColor = True
+        '
         'FlashAlgorithmConfig
         '
         resources.ApplyResources(Me, "$this")
@@ -414,6 +526,9 @@ Partial Class FlashAlgorithmConfig
         Me.TabPageVLLE.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
         Me.GroupBox11.PerformLayout()
+        Me.TabPageCOES.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -463,4 +578,19 @@ Partial Class FlashAlgorithmConfig
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents chkUseBroydenIO As System.Windows.Forms.CheckBox
+    Friend WithEvents TabPageCOES As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents lblAbout2 As System.Windows.Forms.Label
+    Friend WithEvents lblDesc2 As System.Windows.Forms.Label
+    Friend WithEvents lblAuthorURL2 As System.Windows.Forms.LinkLabel
+    Friend WithEvents lblVersion2 As System.Windows.Forms.Label
+    Friend WithEvents lblName2 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents cbThermoServer As System.Windows.Forms.ComboBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents btnEditThermoServer As System.Windows.Forms.Button
 End Class
