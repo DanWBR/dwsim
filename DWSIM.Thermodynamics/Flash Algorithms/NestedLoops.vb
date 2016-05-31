@@ -1465,7 +1465,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     Tant = T
                     deltaT = -fval / dFdT
 
-                    If Abs(deltaT) > 0.5 * T Then
+                    If Abs(deltaT) > 0.1 * T Then
                         T = T + Sign(deltaT) * 0.1 * T
                     Else
                         T = T + deltaT

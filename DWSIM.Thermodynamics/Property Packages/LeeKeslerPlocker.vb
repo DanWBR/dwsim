@@ -43,7 +43,7 @@ Namespace PropertyPackages
             MyBase.New()
 
             Me.IsConfigurable = True
-           Me._packagetype = PropertyPackages.PackageType.CorrespondingStates
+            Me._packagetype = PropertyPackages.PackageType.CorrespondingStates
 
         End Sub
 

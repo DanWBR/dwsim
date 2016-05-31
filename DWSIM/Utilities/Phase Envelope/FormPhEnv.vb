@@ -968,6 +968,11 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
         Me.PanelCalc.Visible = False
 
+        If e.Error IsNot Nothing Then
+            Me.AttachedTo.GetFlowsheet.ShowMessage(e.Error.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
+            Exit Sub
+        End If
+
         Dim r = e.Result(0)
 
         '{TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, TC, PC, VC}

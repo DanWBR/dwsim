@@ -302,10 +302,13 @@
     <value>View Mapping</value>
   </data>
   <data name="tbSelectedES.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 26</value>
+    <value>188, 26</value>
+  </data>
+  <data name="tbSelectedES.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 20</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 24</value>
+    <value>107, 24</value>
   </data>
   <data name="btnSearch.Text" xml:space="preserve">
     <value>Select</value>

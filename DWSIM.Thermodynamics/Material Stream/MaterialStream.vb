@@ -354,6 +354,8 @@ Namespace Streams
 
                 .CurrentMaterialStream = Me
 
+                .Flowsheet = Me.FlowSheet
+
                 If W.HasValue Then
                     If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
                     foption = 0
