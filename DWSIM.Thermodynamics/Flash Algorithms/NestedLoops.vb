@@ -1325,7 +1325,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                 i = 0
                 Tref = 0.0#
                 Do
-                    Tref += 0.8 * Vz(i) * VTc(i)
+                    'Tref += 0.8 * Vz(i) * VTc(i)
+                    Tref += Vz(i) * PP.AUX_TSATi(P, i)
                     Tmin += 0.1 * Vz(i) * VTc(i)
                     Tmax += 2.0 * Vz(i) * VTc(i)
                     i += 1
@@ -1466,7 +1467,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     deltaT = -fval / dFdT
 
                     If Abs(deltaT) > 0.1 * T Then
-                        T = T + Sign(deltaT) * 0.1 * T
+                        T = T + 0.05 * deltaT
                     Else
                         T = T + deltaT
                     End If

@@ -53,6 +53,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End Get
         End Property
 
+#Region "CAPE-OPEN"
+
         Public Sub CreatePhaseMappings()
             Me._phasemappings = New Dictionary(Of String, PhaseInfo)
             With Me._phasemappings
@@ -84,6 +86,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Sub UnsetMaterial()
             CType(_coes, ICapeThermoMaterialContext).UnsetMaterial()
         End Sub
+
+#End Region
+
+#Region "XML Load/Save"
 
         Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
 
@@ -281,6 +287,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End If
 
         End Sub
+
+#End Region
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal Pspec As Double, ByVal Tspec As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
