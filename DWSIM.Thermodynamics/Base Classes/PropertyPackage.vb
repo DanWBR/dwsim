@@ -3049,10 +3049,64 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Double.IsNaN(PO(PO.Count - 1)) = True Or Double.IsNaN(TVD(TVD.Count - 1)) = True Or _
                         Math.Abs(T - TCR) / TCR < 0.03 And Math.Abs(P - PCR) / PCR < 0.03
 
-
             'calculate intersection point, if any
 
-            Dim mindistT, mindistP As Double
+            Dim distP, distT As New Dictionary(Of Integer, Dictionary(Of Integer, Double))
+
+            i = 0
+            For Each p1 In PB
+                distP.Add(i, New Dictionary(Of Integer, Double))
+                j = 0
+                For Each p2 In PO
+                    distP(i).Add(j, Abs(p1 - p2))
+                    j += 1
+                Next
+                i += 1
+            Next
+
+            i = 0
+            For Each p1 In TVB
+                distT.Add(i, New Dictionary(Of Integer, Double))
+                j = 0
+                For Each p2 In TVD
+                    distT(i).Add(j, Abs(p1 - p2))
+                    j += 1
+                Next
+                i += 1
+            Next
+
+            Dim mindistP, mindistT As Double, ib1, id1, ib2, id2 As Integer
+
+            mindistP = 1.0E+20
+            mindistT = 1.0E+20
+
+            i = 0
+            For Each item In distP.Values
+                j = 0
+                For Each item2 In item.Values
+                    j += 1
+                    If item2 < mindistP Then
+                        mindistP = item2
+                        ib1 = i
+                        id1 = j
+                    End If
+                Next
+                i += 1
+            Next
+
+            i = 0
+            For Each item In distT.Values
+                j = 0
+                For Each item2 In item.Values
+                    j += 1
+                    If item2 < mindistT Then
+                        mindistT = item2
+                        ib2 = i
+                        id2 = j
+                    End If
+                Next
+                i += 1
+            Next
 
             If mindistP < dP And mindistT < dT Then
 
@@ -3060,8 +3114,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 Dim Tc, Pc, Vc As Double
 
-                Tc = (TVB(i1) + TVB(j1)) / 2
-                Pc = (PB(distPkey1) + PB(distPkey2)) / 2
+                Tc = (TVB(ib2) + TVD(id2)) / 2
+                Pc = (PB(ib1) + PO(id1)) / 2
                 Vc = 1 / Me.AUX_VAPDENS(Tc, Pc) * Me.AUX_MMM(Phase.Mixture) / 1000
 
                 CP.Clear()
@@ -3069,7 +3123,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 'remove data beyond intersection point
 
-                Dim ip As Integer = (distPkey1 + distTkey1) / 2
+                Dim ip As Integer = (ib1 + ib2) / 2
 
                 TVB = New ArrayList(TVB.GetRange(0, ip))
                 PB = New ArrayList(PB.GetRange(0, ip))
@@ -3077,7 +3131,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 HB = New ArrayList(VB.GetRange(0, ip))
                 SB = New ArrayList(VB.GetRange(0, ip))
 
-                ip = (distPkey2 + distTkey2) / 2
+                ip = (id1 + id2) / 2
 
                 TVD = New ArrayList(TVD.GetRange(0, ip))
                 PO = New ArrayList(PO.GetRange(0, ip))
