@@ -1010,7 +1010,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 #Region "XML Serialization"
 
-        Public Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Overridable Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
 
             Dim el = (From xel As XElement In data Select xel Where xel.Name = "FlashSettings").SingleOrDefault
 
@@ -1029,7 +1029,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Overridable Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
 

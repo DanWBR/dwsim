@@ -1414,8 +1414,41 @@ Public Class FormSimulSettings
         Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
                                                                 .AvailableCompounds = Me.FrmChild.Options.SelectedComponents.Values.Select(Function(x) x.Name).ToList,
                                                                  .FlashAlgo = fa}
+
+        If TypeOf fa Is Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server Then
+
+            Dim coflash = DirectCast(fa, Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
+
+            f._coes = coflash._coes
+            f._coppm = coflash._coppm
+            f._selppm = coflash._selppm
+            f._esname = coflash._esname
+            f._mappings = coflash._mappings
+            f._phasemappings = coflash._phasemappings
+
+            f.ShowDialog(Me)
+
+            coflash._coes = f._coes
+            coflash._coppm = f._coppm
+            coflash._selppm = f._selppm
+            coflash._esname = f._esname
+            coflash._mappings = f._mappings
+            coflash._phasemappings = f._phasemappings
+
+            fa.FlashSettings = f.Settings
+
+            f.Dispose()
+            f = Nothing
+
+        Else
+
         f.ShowDialog(Me)
         fa.FlashSettings = f.Settings
+        f.Dispose()
+        f = Nothing
+
+        End If
+
 
     End Sub
 

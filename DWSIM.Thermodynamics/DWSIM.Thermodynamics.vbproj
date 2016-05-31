@@ -119,6 +119,18 @@
     <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPP.Designer.vb">
+      <DependentUpon>FormSelectCOPP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.Designer.vb">
+      <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.Designer.vb">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </Compile>
@@ -291,6 +303,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.en.resx">
+      <DependentUpon>FormSelectCOPP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.resx">
+      <DependentUpon>FormSelectCOPP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.en.resx">
+      <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.resx">
+      <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
