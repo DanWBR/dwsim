@@ -62,6 +62,8 @@ Partial Class FormSimulWizard
         Me.Column12 = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.WizardPage4 = New AeroWizard.WizardPage()
+        Me.lblFlashAlgoDesc = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.ListBoxPP = New System.Windows.Forms.ListBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
@@ -102,12 +104,12 @@ Partial Class FormSimulWizard
         '
         'WizardPage1
         '
+        resources.ApplyResources(Me.WizardPage1, "WizardPage1")
         Me.WizardPage1.AllowBack = False
         Me.WizardPage1.Controls.Add(Me.Button1)
         Me.WizardPage1.Controls.Add(Me.Label1)
         Me.WizardPage1.Name = "WizardPage1"
         Me.WizardPage1.NextPage = Me.WizardPage2
-        resources.ApplyResources(Me.WizardPage1, "WizardPage1")
         '
         'Button1
         '
@@ -122,6 +124,7 @@ Partial Class FormSimulWizard
         '
         'WizardPage2
         '
+        resources.ApplyResources(Me.WizardPage2, "WizardPage2")
         Me.WizardPage2.Controls.Add(Me.TextBox1)
         Me.WizardPage2.Controls.Add(Me.GroupBox4)
         Me.WizardPage2.Controls.Add(Me.Label2)
@@ -132,26 +135,25 @@ Partial Class FormSimulWizard
         Me.WizardPage2.Controls.Add(Me.Button7)
         Me.WizardPage2.Name = "WizardPage2"
         Me.WizardPage2.NextPage = Me.WizardPage3
-        resources.ApplyResources(Me.WizardPage2, "WizardPage2")
         '
         'TextBox1
         '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.ListViewA)
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.ListViewA)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
         'ListViewA
         '
-        Me.ListViewA.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
         resources.ApplyResources(Me.ListViewA, "ListViewA")
+        Me.ListViewA.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
         Me.ListViewA.FullRowSelect = True
         Me.ListViewA.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.ListViewA.HideSelection = False
@@ -189,6 +191,7 @@ Partial Class FormSimulWizard
         '
         'ogc1
         '
+        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
@@ -197,7 +200,6 @@ Partial Class FormSimulWizard
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5, Me.Column10})
-        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.Name = "ogc1"
         Me.ogc1.ReadOnly = True
         Me.ogc1.RowHeadersVisible = False
@@ -278,13 +280,13 @@ Partial Class FormSimulWizard
         '
         'WizardPage3
         '
+        resources.ApplyResources(Me.WizardPage3, "WizardPage3")
         Me.WizardPage3.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.WizardPage3.Controls.Add(Me.GroupBox6)
         Me.WizardPage3.Controls.Add(Me.GroupBox12)
         Me.WizardPage3.Controls.Add(Me.Label4)
         Me.WizardPage3.Name = "WizardPage3"
         Me.WizardPage3.NextPage = Me.WizardPage4
-        resources.ApplyResources(Me.WizardPage3, "WizardPage3")
         '
         'LinkLabelPropertyMethods
         '
@@ -295,9 +297,9 @@ Partial Class FormSimulWizard
         '
         'GroupBox6
         '
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Controls.Add(Me.Button8)
         Me.GroupBox6.Controls.Add(Me.ListViewPP)
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
         '
@@ -322,13 +324,14 @@ Partial Class FormSimulWizard
         '
         'GroupBox12
         '
-        Me.GroupBox12.Controls.Add(Me.dgvpp)
         resources.ApplyResources(Me.GroupBox12, "GroupBox12")
+        Me.GroupBox12.Controls.Add(Me.dgvpp)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.TabStop = False
         '
         'dgvpp
         '
+        resources.ApplyResources(Me.dgvpp, "dgvpp")
         Me.dgvpp.AllowUserToAddRows = False
         Me.dgvpp.AllowUserToDeleteRows = False
         Me.dgvpp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -336,7 +339,6 @@ Partial Class FormSimulWizard
         Me.dgvpp.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgvpp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvpp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column18, Me.Column16, Me.Column17, Me.Column12})
-        resources.ApplyResources(Me.dgvpp, "dgvpp")
         Me.dgvpp.MultiSelect = False
         Me.dgvpp.Name = "dgvpp"
         Me.dgvpp.ReadOnly = True
@@ -379,18 +381,30 @@ Partial Class FormSimulWizard
         '
         'WizardPage4
         '
+        resources.ApplyResources(Me.WizardPage4, "WizardPage4")
+        Me.WizardPage4.Controls.Add(Me.lblFlashAlgoDesc)
+        Me.WizardPage4.Controls.Add(Me.Label9)
         Me.WizardPage4.Controls.Add(Me.ListBoxPP)
         Me.WizardPage4.Controls.Add(Me.Label6)
         Me.WizardPage4.Controls.Add(Me.LinkLabel1)
         Me.WizardPage4.Controls.Add(Me.Label5)
         Me.WizardPage4.Name = "WizardPage4"
         Me.WizardPage4.NextPage = Me.WizardPage5
-        resources.ApplyResources(Me.WizardPage4, "WizardPage4")
+        '
+        'lblFlashAlgoDesc
+        '
+        resources.ApplyResources(Me.lblFlashAlgoDesc, "lblFlashAlgoDesc")
+        Me.lblFlashAlgoDesc.Name = "lblFlashAlgoDesc"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
         '
         'ListBoxPP
         '
-        Me.ListBoxPP.FormattingEnabled = True
         resources.ApplyResources(Me.ListBoxPP, "ListBoxPP")
+        Me.ListBoxPP.FormattingEnabled = True
         Me.ListBoxPP.Items.AddRange(New Object() {resources.GetString("ListBoxPP.Items"), resources.GetString("ListBoxPP.Items1"), resources.GetString("ListBoxPP.Items2"), resources.GetString("ListBoxPP.Items3"), resources.GetString("ListBoxPP.Items4"), resources.GetString("ListBoxPP.Items5"), resources.GetString("ListBoxPP.Items6"), resources.GetString("ListBoxPP.Items7"), resources.GetString("ListBoxPP.Items8")})
         Me.ListBoxPP.Name = "ListBoxPP"
         '
@@ -413,6 +427,7 @@ Partial Class FormSimulWizard
         '
         'WizardPage5
         '
+        resources.ApplyResources(Me.WizardPage5, "WizardPage5")
         Me.WizardPage5.AllowCancel = False
         Me.WizardPage5.Controls.Add(Me.DataGridView1)
         Me.WizardPage5.Controls.Add(Me.ComboBox2)
@@ -420,10 +435,10 @@ Partial Class FormSimulWizard
         Me.WizardPage5.Controls.Add(Me.Label7)
         Me.WizardPage5.IsFinishPage = True
         Me.WizardPage5.Name = "WizardPage5"
-        resources.ApplyResources(Me.WizardPage5, "WizardPage5")
         '
         'DataGridView1
         '
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
@@ -433,7 +448,6 @@ Partial Class FormSimulWizard
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
@@ -475,9 +489,9 @@ Partial Class FormSimulWizard
         '
         'ComboBox2
         '
+        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 205
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.Name = "ComboBox2"
         '
         'Label8
@@ -569,4 +583,6 @@ Partial Class FormSimulWizard
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents lblFlashAlgoDesc As System.Windows.Forms.Label
+    Public WithEvents Label9 As System.Windows.Forms.Label
 End Class

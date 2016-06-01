@@ -387,6 +387,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub ListBoxPP_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ListBoxPP.SelectedIndexChanged
+        Me.FrmChild.Options.FlashAlgorithms.Clear()
         Select Case ListBoxPP.SelectedIndex
             Case 0
                 Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name & " (1)"})
@@ -407,6 +408,7 @@ Public Class FormSimulWizard
             Case 8
                 Me.FrmChild.Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsImmiscible With {.Tag = .Name & " (1)"})
         End Select
+        lblFlashAlgoDesc.Text = Me.FrmChild.Options.FlashAlgorithms(0).Description
     End Sub
 
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError

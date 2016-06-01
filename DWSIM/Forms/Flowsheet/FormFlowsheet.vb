@@ -2864,4 +2864,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Next
     End Sub
 
+    Public Sub UpdateOpenEditForms() Implements IFlowsheet.UpdateOpenEditForms
+
+        For Each obj In SimulationObjects.Values
+            obj.UpdateEditForm()
+        Next
+
+    End Sub
+
 End Class

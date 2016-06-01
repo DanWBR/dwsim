@@ -2840,7 +2840,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim Pmin, Tmin, dP, dT, T, P, Tupper As Double
+            Dim Pmin, Tmin, dP, dT, T, P, Tupper, Tlower As Double
             Dim PB, PO, TVB, TVD, HB, HO, SB, SO, VB, VO, TE, PE, TH, PHsI, PHsII, TQ, PQ, TI, PI, TOWF, POWF, VOWF, HOWF, SOWF As New ArrayList
             Dim TCR, PCR, VCR As Double
 
@@ -2868,6 +2868,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Tmin = 0.3 * TCR
 
             Tupper = Me.RET_VTC.Max * 1.1
+            Tlower = Me.RET_VTF.Max
+
+            If Tlower <> 0.0# And Tmin < Tlower Then Tmin = Tlower
 
             dP = (PCR - Pmin) / 100
             dT = (TCR - Tmin) / 100

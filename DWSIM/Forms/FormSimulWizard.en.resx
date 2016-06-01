@@ -195,6 +195,12 @@ Click "Next" to continue.</value>
   <data name="Label4.Text" xml:space="preserve">
     <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
   </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 15</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Algorithm Description</value>
+  </data>
   <data name="ListBoxPP.Items" xml:space="preserve">
     <value>Nested Loops (VLE)</value>
   </data>
@@ -222,6 +228,15 @@ Click "Next" to continue.</value>
   <data name="ListBoxPP.Items8" xml:space="preserve">
     <value>Nested Loops (VLLE - Immiscible Liquids)</value>
   </data>
+  <data name="ListBoxPP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 149</value>
+  </data>
+  <data name="ListBoxPP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>566, 154</value>
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 149</value>
+  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 15</value>
   </data>
@@ -234,8 +249,13 @@ Click "Next" to continue.</value>
   <data name="LinkLabel1.Text" xml:space="preserve">
     <value>Click here to learn more about the flash algorithms implemented in DWSIM.</value>
   </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>709, 134</value>
+  </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Select a Default Flash Algorithm for your simulation. If your system can show instabilities in the liquid phase (immiscible compounds), select an algorithm to predict the equilibrium with two liquid phases (VLLE). To calculate equilibrium including a solid phase, select the corresponding algorithm. For complex systems, use one of the two Gibbs Minimization algorithms.
+    <value>The Flash Algorithm is the component responsible for determining the thermodynamic phases at equilibrium, their amounts (and the amounts of the compounds on these phases) at the various simulated process conditions.
+
+Select a Default Flash Algorithm for your simulation. If your system can show instabilities in the liquid phase (immiscible compounds), select an algorithm to predict the equilibrium with two liquid phases (VLLE). To calculate equilibrium including a solid phase, select the corresponding algorithm. For complex systems, use one of the two Gibbs Minimization algorithms.
 
 Click "Next" to continue.</value>
   </data>

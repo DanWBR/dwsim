@@ -253,6 +253,7 @@ Public Class FormSimulSettings
 
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         FrmChild.Options.NumberFormat = Me.ComboBox1.SelectedItem
+        FrmChild.UpdateOpenEditForms()
     End Sub
 
     Private Sub TBtit_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBtit.TextChanged
@@ -598,6 +599,8 @@ Public Class FormSimulSettings
 
         FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
 
+        FrmChild.UpdateOpenEditForms()
+
     End Sub
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
@@ -765,6 +768,8 @@ Public Class FormSimulSettings
                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsChanged"), su.Name, Me.DataGridView1.Rows(e.RowIndex).Cells(e.ColumnIndex - 1).Value, .OldValue, .NewValue)})
 
             Me.FrmChild.FormSurface.UpdateSelectedObject()
+
+            FrmChild.UpdateOpenEditForms()
 
         End If
 
@@ -999,6 +1004,8 @@ Public Class FormSimulSettings
                 dgvpp.Rows.Remove(dgvpp.SelectedRows(0))
             End If
         End If
+        FrmChild.UpdateOpenEditForms()
+
     End Sub
 
     Private Sub btnCopyPP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyPP.Click
@@ -1017,6 +1024,8 @@ Public Class FormSimulSettings
             End With
             FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
             Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
+            FrmChild.UpdateOpenEditForms()
+
         Catch ex As Exception
 
         End Try
@@ -1103,6 +1112,8 @@ Public Class FormSimulSettings
 
                 If Not DWSIM.App.IsRunningOnMono Then Me.ogc1.Rows.RemoveAt(index)
 
+                FrmChild.UpdateOpenEditForms()
+
                 If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundAdded,
                           .ObjID = tmpcomp.Name,
                           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundAdded"), tmpcomp.Name)})
@@ -1144,6 +1155,9 @@ Public Class FormSimulSettings
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
         Next
+
+        FrmChild.UpdateOpenEditForms()
+
         If My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.CompoundRemoved,
           .ObjID = tmpcomp.Name,
           .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_CompoundRemoved"), tmpcomp.Name)})
@@ -1186,6 +1200,8 @@ Public Class FormSimulSettings
         FrmChild.Options.PropertyPackages.Add(pp.UniqueID, pp)
         Me.dgvpp.Rows.Add(New Object() {pp.UniqueID, pp.Tag, pp.ComponentName})
 
+        FrmChild.UpdateOpenEditForms()
+
         FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackageAdded,
                                  .ObjID = pp.UniqueID,
                                  .NewValue = pp.Clone,
@@ -1203,6 +1219,7 @@ Public Class FormSimulSettings
 
     Private Sub ComboBox3_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox3.SelectedIndexChanged
         FrmChild.Options.FractionNumberFormat = Me.ComboBox3.SelectedItem
+        FrmChild.UpdateOpenEditForms()
     End Sub
 
     Private Sub TextBox1_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TextBox1.KeyDown
@@ -1400,6 +1417,8 @@ Public Class FormSimulSettings
         FrmChild.Options.FlashAlgorithms.Add(fa)
         Me.dgvAddedFlashAlgos.Rows.Add(New Object() {fa.Tag, fa.Name})
 
+        FrmChild.UpdateOpenEditForms()
+
     End Sub
 
     Private Sub btnConfigFA_Click(sender As Object, e As EventArgs) Handles btnConfigFA.Click
@@ -1469,6 +1488,8 @@ Public Class FormSimulSettings
             FrmChild.Options.FlashAlgorithms.Add(fa)
             Me.dgvAddedFlashAlgos.Rows.Add(New Object() {fa.Tag, fa.Name})
 
+            FrmChild.UpdateOpenEditForms()
+
         Catch ex As Exception
 
         End Try
@@ -1490,6 +1511,8 @@ Public Class FormSimulSettings
                 dgvAddedFlashAlgos.Rows.Remove(dgvAddedFlashAlgos.SelectedRows(0))
             End If
         End If
+
+        FrmChild.UpdateOpenEditForms()
 
     End Sub
 

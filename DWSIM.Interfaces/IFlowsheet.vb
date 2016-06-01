@@ -42,6 +42,8 @@
 
     Sub DisplayForm(form As Object)
 
+    Sub UpdateOpenEditForms()
+
     Sub ConnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject, fromidx As Integer, toidx As Integer)
 
     Sub DisconnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject)
