@@ -88,6 +88,8 @@ Public Interface IFlowsheetGUI
 
     Function GetTranslatedString(text As String) As String
 
+    Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String)
+
 End Interface
 
 Public Interface IFlowsheetCalculationQueue

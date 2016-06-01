@@ -233,46 +233,46 @@ Imports System.Threading
                                 .ScriptText = seditor.txtScript.Text}
                 Select Case seditor.cbLinkedObject.SelectedIndex
                     Case 0
-                        scr.LinkedObjectType = Script.ObjectType.Simulation
+                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
                         scr.LinkedObjectName = ""
                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Script.EventType.SimulationOpened
+                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Script.EventType.SimulationSaved
+                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
-                            scr.LinkedEventType = Script.EventType.SimulationClosed
+                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer1
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer5
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer15
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer30
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer60
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
                         End If
                     Case 1
-                        scr.LinkedObjectType = Script.ObjectType.Solver
+                        scr.LinkedObjectType = Scripts.ObjectType.Solver
                         scr.LinkedObjectName = ""
                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Script.EventType.SolverStarted
+                            scr.LinkedEventType = Scripts.EventType.SolverStarted
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Script.EventType.SolverFinished
+                            scr.LinkedEventType = Scripts.EventType.SolverFinished
                         Else
-                            scr.LinkedEventType = Script.EventType.SolverRecycleLoop
+                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
                         End If
                     Case Else
                         If seditor.chkLink.Checked Then
-                            scr.LinkedObjectType = Script.ObjectType.FlowsheetObject
+                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
                             scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
                         End If
                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Script.EventType.ObjectCalculationStarted
+                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Script.EventType.ObjectCalculationFinished
+                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
                         Else
-                            scr.LinkedEventType = Script.EventType.ObjectCalculationError
+                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
                         End If
                 End Select
                 fc.ScriptCollection.Add(scr.ID, scr)
@@ -285,46 +285,46 @@ Imports System.Threading
                                 .ScriptText = seditor.txtScript.Text}
                 Select Case seditor.cbLinkedObject.SelectedIndex
                     Case 0
-                        scr.LinkedObjectType = Script.ObjectType.Simulation
+                        scr.LinkedObjectType = Scripts.ObjectType.Simulation
                         scr.LinkedObjectName = ""
                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Script.EventType.SimulationOpened
+                            scr.LinkedEventType = Scripts.EventType.SimulationOpened
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Script.EventType.SimulationSaved
+                            scr.LinkedEventType = Scripts.EventType.SimulationSaved
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 2 Then
-                            scr.LinkedEventType = Script.EventType.SimulationClosed
+                            scr.LinkedEventType = Scripts.EventType.SimulationClosed
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 3 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer1
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer1
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 4 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer5
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer5
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 5 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer15
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer15
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 6 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer30
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer30
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 7 Then
-                            scr.LinkedEventType = Script.EventType.SimulationTimer60
+                            scr.LinkedEventType = Scripts.EventType.SimulationTimer60
                         End If
                     Case 1
-                        scr.LinkedObjectType = Script.ObjectType.Solver
+                        scr.LinkedObjectType = Scripts.ObjectType.Solver
                         scr.LinkedObjectName = ""
                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Script.EventType.SolverStarted
+                            scr.LinkedEventType = Scripts.EventType.SolverStarted
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Script.EventType.SolverFinished
+                            scr.LinkedEventType = Scripts.EventType.SolverFinished
                         Else
-                            scr.LinkedEventType = Script.EventType.SolverRecycleLoop
+                            scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop
                         End If
                     Case Else
                         If seditor.chkLink.Checked Then
-                            scr.LinkedObjectType = Script.ObjectType.FlowsheetObject
+                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject
                             scr.LinkedObjectName = fc.GetFlowsheetGraphicObject(seditor.cbLinkedObject.SelectedItem.ToString).Name
                         End If
                         If seditor.cbLinkedEvent.SelectedIndex = 0 Then
-                            scr.LinkedEventType = Script.EventType.ObjectCalculationStarted
+                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted
                         ElseIf seditor.cbLinkedEvent.SelectedIndex = 1 Then
-                            scr.LinkedEventType = Script.EventType.ObjectCalculationFinished
+                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished
                         Else
-                            scr.LinkedEventType = Script.EventType.ObjectCalculationError
+                            scr.LinkedEventType = Scripts.EventType.ObjectCalculationError
                         End If
                 End Select
                 fc.ScriptCollection.Add(scr.ID, scr)
@@ -400,41 +400,41 @@ Imports System.Threading
                     .cbLinkedObject.SelectedItem = fc.Collections.FlowsheetObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
                 Else
                     Select Case scriptdata.LinkedObjectType
-                        Case Script.ObjectType.Simulation
+                        Case Scripts.ObjectType.Simulation
                             .cbLinkedObject.SelectedIndex = 0
-                        Case Script.ObjectType.Solver
+                        Case Scripts.ObjectType.Solver
                             .cbLinkedObject.SelectedIndex = 1
                     End Select
                 End If
 
                 Select Case scriptdata.LinkedEventType
-                    Case Script.EventType.ObjectCalculationStarted
+                    Case Scripts.EventType.ObjectCalculationStarted
                         .cbLinkedEvent.SelectedIndex = 0
-                    Case Script.EventType.ObjectCalculationFinished
+                    Case Scripts.EventType.ObjectCalculationFinished
                         .cbLinkedEvent.SelectedIndex = 1
-                    Case Script.EventType.ObjectCalculationError
+                    Case Scripts.EventType.ObjectCalculationError
                         .cbLinkedEvent.SelectedIndex = 2
-                    Case Script.EventType.SimulationOpened
+                    Case Scripts.EventType.SimulationOpened
                         .cbLinkedEvent.SelectedIndex = 0
-                    Case Script.EventType.SimulationSaved
+                    Case Scripts.EventType.SimulationSaved
                         .cbLinkedEvent.SelectedIndex = 1
-                    Case Script.EventType.SimulationClosed
+                    Case Scripts.EventType.SimulationClosed
                         .cbLinkedEvent.SelectedIndex = 2
-                    Case Script.EventType.SolverStarted
+                    Case Scripts.EventType.SolverStarted
                         .cbLinkedEvent.SelectedIndex = 0
-                    Case Script.EventType.SolverFinished
+                    Case Scripts.EventType.SolverFinished
                         .cbLinkedEvent.SelectedIndex = 1
-                    Case Script.EventType.SolverRecycleLoop
+                    Case Scripts.EventType.SolverRecycleLoop
                         .cbLinkedEvent.SelectedIndex = 2
-                    Case Script.EventType.SimulationTimer1
+                    Case Scripts.EventType.SimulationTimer1
                         .cbLinkedEvent.SelectedIndex = 3
-                    Case Script.EventType.SimulationTimer5
+                    Case Scripts.EventType.SimulationTimer5
                         .cbLinkedEvent.SelectedIndex = 4
-                    Case Script.EventType.SimulationTimer15
+                    Case Scripts.EventType.SimulationTimer15
                         .cbLinkedEvent.SelectedIndex = 5
-                    Case Script.EventType.SimulationTimer30
+                    Case Scripts.EventType.SimulationTimer30
                         .cbLinkedEvent.SelectedIndex = 6
-                    Case Script.EventType.SimulationTimer60
+                    Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
                 End Select
 
@@ -475,41 +475,41 @@ Imports System.Threading
                     .cbLinkedObject.SelectedItem = fc.Collections.FlowsheetObjectCollection(scriptdata.LinkedObjectName).GraphicObject.Tag
                 Else
                     Select Case scriptdata.LinkedObjectType
-                        Case Script.ObjectType.Simulation
+                        Case Scripts.ObjectType.Simulation
                             .cbLinkedObject.SelectedIndex = 0
-                        Case Script.ObjectType.Solver
+                        Case Scripts.ObjectType.Solver
                             .cbLinkedObject.SelectedIndex = 1
                     End Select
                 End If
 
                 Select Case scriptdata.LinkedEventType
-                    Case Script.EventType.ObjectCalculationStarted
+                    Case Scripts.EventType.ObjectCalculationStarted
                         .cbLinkedEvent.SelectedIndex = 0
-                    Case Script.EventType.ObjectCalculationFinished
+                    Case Scripts.EventType.ObjectCalculationFinished
                         .cbLinkedEvent.SelectedIndex = 1
-                    Case Script.EventType.ObjectCalculationError
+                    Case Scripts.EventType.ObjectCalculationError
                         .cbLinkedEvent.SelectedIndex = 2
-                    Case Script.EventType.SimulationOpened
+                    Case Scripts.EventType.SimulationOpened
                         .cbLinkedEvent.SelectedIndex = 0
-                    Case Script.EventType.SimulationSaved
+                    Case Scripts.EventType.SimulationSaved
                         .cbLinkedEvent.SelectedIndex = 1
-                    Case Script.EventType.SimulationClosed
+                    Case Scripts.EventType.SimulationClosed
                         .cbLinkedEvent.SelectedIndex = 2
-                    Case Script.EventType.SolverStarted
+                    Case Scripts.EventType.SolverStarted
                         .cbLinkedEvent.SelectedIndex = 0
-                    Case Script.EventType.SolverFinished
+                    Case Scripts.EventType.SolverFinished
                         .cbLinkedEvent.SelectedIndex = 1
-                    Case Script.EventType.SolverRecycleLoop
+                    Case Scripts.EventType.SolverRecycleLoop
                         .cbLinkedEvent.SelectedIndex = 2
-                    Case Script.EventType.SimulationTimer1
+                    Case Scripts.EventType.SimulationTimer1
                         .cbLinkedEvent.SelectedIndex = 3
-                    Case Script.EventType.SimulationTimer5
+                    Case Scripts.EventType.SimulationTimer5
                         .cbLinkedEvent.SelectedIndex = 4
-                    Case Script.EventType.SimulationTimer15
+                    Case Scripts.EventType.SimulationTimer15
                         .cbLinkedEvent.SelectedIndex = 5
-                    Case Script.EventType.SimulationTimer30
+                    Case Scripts.EventType.SimulationTimer30
                         .cbLinkedEvent.SelectedIndex = 6
-                    Case Script.EventType.SimulationTimer60
+                    Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
                 End Select
 

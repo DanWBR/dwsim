@@ -9,6 +9,33 @@
 
     End Class
 
+    Public Class Scripts
+
+        Public Enum ObjectType
+            Simulation = 0
+            Solver = 1
+            FlowsheetObject = 2
+        End Enum
+
+        Public Enum EventType
+            SimulationOpened = 0
+            SimulationSaved = 1
+            SimulationClosed = 2
+            ObjectCalculationStarted = 3
+            ObjectCalculationFinished = 4
+            ObjectCalculationError = 5
+            SolverStarted = 6
+            SolverFinished = 7
+            SolverRecycleLoop = 8
+            SimulationTimer1 = 9
+            SimulationTimer5 = 10
+            SimulationTimer15 = 11
+            SimulationTimer30 = 12
+            SimulationTimer60 = 13
+        End Enum
+
+    End Class
+
     Public Enum FlowsheetUtility
         PhaseEnvelope = 0
         PhaseEnvelopeBinary = 1

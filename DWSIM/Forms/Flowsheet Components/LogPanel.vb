@@ -113,7 +113,11 @@ Public Class LogPanel
         Catch ex As Exception
         End Try
 
-        Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+        Try
+            Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 

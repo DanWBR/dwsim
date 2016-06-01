@@ -1565,7 +1565,7 @@ Public Class FormMain
         End If
 
         If Not IO.Path.GetExtension(path).ToLower.Contains("dwbcs") Then
-            form.ProcessScripts(Script.EventType.SimulationSaved, Script.ObjectType.Simulation)
+            form.ProcessScripts(Scripts.EventType.SimulationSaved, Scripts.ObjectType.Simulation, "")
         End If
 
         Dim xdoc As New XDocument()

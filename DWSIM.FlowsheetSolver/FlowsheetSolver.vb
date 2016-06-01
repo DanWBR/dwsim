@@ -54,7 +54,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         RaiseEvent UnitOpCalculationStarted(fobj, New System.EventArgs(), objArgs)
 
-        'fobj.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, objArgs.Name)
+        fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, objArgs.Name)
 
         Select Case objArgs.ObjectType
             Case ObjectType.MaterialStream
@@ -156,7 +156,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 End If
         End Select
 
-        'fobj.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Name)
+        fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, objArgs.Name)
 
         RaiseEvent UnitOpCalculationFinished(fobj, New System.EventArgs(), objArgs)
 
@@ -177,7 +177,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
 
         If objArgs.Sender = "FlowsheetSolver" Then
-            'fobj.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, objArgs.Name)
+            fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, objArgs.Name)
             Select Case objArgs.ObjectType
                 Case ObjectType.MaterialStream
                     Dim myObj = fbag.SimulationObjects(objArgs.Name)
@@ -200,7 +200,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     If myObj.IsSpecAttached And myObj.SpecVarType = SpecVarType.Source Then fbag.SimulationObjects(myObj.AttachedSpecId).Calculate()
                     RaiseEvent UnitOpCalculationFinished(fobj, New System.EventArgs(), objArgs)
             End Select
-            'fobj.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, objArgs.Name)
+            fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, objArgs.Name)
         End If
 
     End Sub
@@ -221,7 +221,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         RaiseEvent MaterialStreamCalculationStarted(fobj, New System.EventArgs(), ms)
 
-        ' fobj.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Name)
+        fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
         ms.GraphicObject.Calculated = False
 
@@ -233,7 +233,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         fgui.ShowMessage(ms.GraphicObject.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
 
-        'fobj.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Name)
+        fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
         RaiseEvent MaterialStreamCalculationFinished(fobj, New System.EventArgs(), ms)
 
@@ -270,7 +270,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         RaiseEvent MaterialStreamCalculationStarted(fobj, New System.EventArgs(), ms)
 
-        'fobj.ProcessScripts(Script.EventType.ObjectCalculationStarted, Script.ObjectType.FlowsheetObject, ms.Name)
+        fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
         ms.Calculate()
 
@@ -278,7 +278,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             If utility.AutoUpdate Then utility.Update()
         Next
 
-        'fobj.ProcessScripts(Script.EventType.ObjectCalculationFinished, Script.ObjectType.FlowsheetObject, ms.Name)
+        fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
         RaiseEvent MaterialStreamCalculationFinished(fobj, New System.EventArgs(), ms)
 
@@ -434,7 +434,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     myobj.UpdateEditForm()
                 End If
             Catch ex As AggregateException
-                'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
+                fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ""
                 For Each iex In ex.InnerExceptions
                     myobj.ErrorMessage += iex.Message.ToString & vbCrLf
@@ -442,7 +442,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 Next
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Catch ex As Exception
-                'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
+                fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ex.Message.ToString
                 loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
@@ -508,7 +508,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                              myobj.UpdateEditForm()
                                                          End If
                                                      Catch ex As AggregateException
-                                                         'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
+                                                         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ""
                                                          For Each iex In ex.InnerExceptions
                                                              myobj.ErrorMessage += iex.Message.ToString & vbCrLf
@@ -516,7 +516,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                          Next
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Catch ex As Exception
-                                                         'fobj.ProcessScripts(Script.EventType.ObjectCalculationError, Script.ObjectType.FlowsheetObject, myobj.Name)
+                                                         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ex.Message.ToString
                                                          loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
@@ -862,7 +862,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             'process scripts associated with the solverstarted event
 
-            'fobj.ProcessScripts(Script.EventType.SolverStarted, Script.ObjectType.Solver)
+            fgui.ProcessScripts(Scripts.EventType.SolverStarted, Scripts.ObjectType.Solver, "")
 
             RaiseEvent FlowsheetCalculationStarted(fobj, New System.EventArgs(), Nothing)
 
@@ -1018,7 +1018,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                                                      'process the scripts associated with the recycle loop event.
 
-                                                     'fobj.ProcessScripts(Script.EventType.SolverRecycleLoop, Script.ObjectType.Solver)
+                                                     fgui.ProcessScripts(Scripts.EventType.SolverRecycleLoop, Scripts.ObjectType.Solver, "")
 
                                                      'if the all recycles have converged (if any), then exit the loop.
 
@@ -1261,7 +1261,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             'End If
 
-            'ProcessScripts(Script.EventType.SolverFinished, Script.ObjectType.Solver)
+            'ProcessScripts(Scripts.EventType.SolverFinished, Scripts.ObjectType.Solver)
 
             GlobalSettings.Settings.CalculatorBusy = False
 

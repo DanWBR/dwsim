@@ -325,7 +325,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         My.Application.ActiveSimulation = Me
 
-        Me.ProcessScripts(Script.EventType.SimulationOpened, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationOpened, Scripts.ObjectType.Simulation, "")
 
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, MessageType.Tip)
@@ -343,7 +343,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-        Me.ProcessScripts(Script.EventType.SimulationClosed, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationClosed, Scripts.ObjectType.Simulation, "")
 
         If My.Application.ActiveSimulation Is Me Then
             My.Application.ActiveSimulation = Nothing
@@ -437,7 +437,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End If
     End Sub
 
-    Public Sub ProcessScripts(ByVal sourceevent As Script.EventType, ByVal sourceobj As Script.ObjectType, Optional ByVal sourceobjname As String = "")
+    Public Sub ProcessScripts(ByVal sourceevent As Scripts.EventType, ByVal sourceobj As Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheetGUI.ProcessScripts
 
         Me.UIThread(Sub()
                         If Not Me.ScriptCollection Is Nothing Then
@@ -1894,23 +1894,23 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 #Region "    Script Timers"
 
     Private Sub TimerScripts1_Tick(sender As Object, e As EventArgs) Handles TimerScripts1.Tick
-        Me.ProcessScripts(Script.EventType.SimulationTimer1, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationTimer1, Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts5_Tick(sender As Object, e As EventArgs) Handles TimerScripts5.Tick
-        Me.ProcessScripts(Script.EventType.SimulationTimer5, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationTimer5, Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts15_Tick(sender As Object, e As EventArgs) Handles TimerScripts15.Tick
-        Me.ProcessScripts(Script.EventType.SimulationTimer15, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationTimer15, Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts30_Tick(sender As Object, e As EventArgs) Handles TimerScripts30.Tick
-        Me.ProcessScripts(Script.EventType.SimulationTimer30, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationTimer30, Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts60_Tick(sender As Object, e As EventArgs) Handles TimerScripts60.Tick
-        Me.ProcessScripts(Script.EventType.SimulationTimer60, Script.ObjectType.Simulation)
+        Me.ProcessScripts(Scripts.EventType.SimulationTimer60, Scripts.ObjectType.Simulation, "")
     End Sub
 
 #End Region
@@ -2112,8 +2112,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
             For Each xel As XElement In data
                 Try
-                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = Activator.CreateInstance(t)
+                    Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
                     obj.LoadData(xel.Elements.ToList)
                     obj.UniqueID = pkey & obj.UniqueID
                     obj.Tag = obj.Tag & " (C)"
@@ -2136,8 +2135,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         For Each xel As XElement In data
             Dim id As String = pkey & xel.<Name>.Value
-            Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-            Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
+            Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+            If xel.Element("Type").Value.Contains("MaterialStream") Then
+                obj = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+            Else
+                obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+            End If
             Dim gobj As GraphicObject = (From go As GraphicObject In
                                 FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
             obj.GraphicObject = gobj
