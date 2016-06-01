@@ -2840,7 +2840,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
             Loop Until i = n + 1
 
-            Dim Pmin, Tmin, dP, dT, T, P As Double
+            Dim Pmin, Tmin, dP, dT, T, P, Tupper As Double
             Dim PB, PO, TVB, TVD, HB, HO, SB, SO, VB, VO, TE, PE, TH, PHsI, PHsII, TQ, PQ, TI, PI, TOWF, POWF, VOWF, HOWF, SOWF As New ArrayList
             Dim TCR, PCR, VCR As Double
 
@@ -2866,6 +2866,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             Pmin = 101325
             Tmin = 0.3 * TCR
+
+            Tupper = Me.RET_VTC.Max * 1.1
 
             dP = (PCR - Pmin) / 100
             dT = (TCR - Tmin) / 100
@@ -2956,7 +2958,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
             Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
                         Double.IsNaN(PB(PB.Count - 1)) = True Or _
-                        Double.IsNaN(TVB(TVB.Count - 1)) = True
+                        Double.IsNaN(TVB(TVB.Count - 1)) = True Or T > Tupper
 
             Dim Switch = False
 
@@ -3046,7 +3048,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
             Loop Until i >= 300 Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
                         Double.IsNaN(PO(PO.Count - 1)) = True Or
-                        Double.IsNaN(TVD(TVD.Count - 1)) = True
+                        Double.IsNaN(TVD(TVD.Count - 1)) = True Or T > Tupper
 
             'calculate intersection point, if any
 
@@ -3215,7 +3217,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     End If
                 Loop Until i >= 300 Or PQ(PQ.Count - 1) = 0 Or PQ(PQ.Count - 1) < 0 Or TQ(TQ.Count - 1) < 0 Or _
                             Double.IsNaN(PQ(PQ.Count - 1)) = True Or Double.IsNaN(TQ(TQ.Count - 1)) = True Or _
-                            Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02
+                            Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Or T > Tupper
             Else
                 TQ.Add(0)
                 PQ.Add(0)
@@ -5848,7 +5850,7 @@ Final3:
 
         End Function
 
-        Public Function RET_VTC()
+        Public Function RET_VTC() As Double()
 
             Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             Dim subst As Interfaces.ICompound

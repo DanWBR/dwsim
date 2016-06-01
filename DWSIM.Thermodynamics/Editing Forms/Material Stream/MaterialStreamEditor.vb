@@ -171,50 +171,76 @@ Public Class MaterialStreamEditor
 
                 'result compositions
 
+                TabPhaseComps.TabPages.Clear()
+                TabPhaseComps.TabPages.Add(tabCompMix)
+
                 PopulateCompGrid(gridCompMixture, .Phases(0).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
-                If .Phases(1).Properties.molarfraction > 0.0# Then
-                    PopulateCompGrid(gridCompLiqMix, .Phases(1).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
-                    tabCompLiqMix.Hide()
-                End If
-                If .Phases(2).Properties.molarfraction > 0.0# Then
+                If .Phases(2).Properties.molarfraction.HasValue Then
                     PopulateCompGrid(gridCompVapor, .Phases(2).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
-                    tabCompVapor.Hide()
+                    TabPhaseComps.TabPages.Add(tabCompVapor)
+                Else
+                    TabPhaseComps.TabPages.Remove(tabCompVapor)
                 End If
-                If .Phases(3).Properties.molarfraction > 0.0# Then
+                If .Phases(1).Properties.molarfraction.HasValue Then
+                    PopulateCompGrid(gridCompLiqMix, .Phases(1).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
+                    TabPhaseComps.TabPages.Add(tabCompLiqMix)
+                Else
+                    TabPhaseComps.TabPages.Remove(tabCompLiqMix)
+                End If
+                If .Phases(3).Properties.molarfraction.HasValue Then
                     PopulateCompGrid(gridCompLiq1, .Phases(3).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
-                    tabCompLiq1.Hide()
+                    TabPhaseComps.TabPages.Add(tabCompLiq1)
+                Else
+                    TabPhaseComps.TabPages.Remove(tabCompLiq1)
                 End If
-                If .Phases(4).Properties.molarfraction > 0.0# Then
+                If .Phases(4).Properties.molarfraction.HasValue Then
                     PopulateCompGrid(gridCompLiq2, .Phases(4).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
-                    tabCompLiq2.Hide()
+                    TabPhaseComps.TabPages.Add(tabCompLiq2)
+                Else
+                    TabPhaseComps.TabPages.Remove(tabCompLiq2)
                 End If
-                If .Phases(7).Properties.molarfraction > 0.0# Then
+                If .Phases(7).Properties.molarfraction.HasValue Then
                     PopulateCompGrid(gridCompSolid, .Phases(7).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
-                    tabCompSolid.Hide()
+                    TabPhaseComps.TabPages.Add(tabCompSolid)
+                Else
+                    TabPhaseComps.TabPages.Remove(tabCompSolid)
                 End If
 
                 'result properties
 
+                TabPhaseProps.TabPages.Clear()
+                TabPhaseProps.TabPages.Add(tabPropsMix)
+
                 PopulatePropGrid(gridPropertiesMixture, .Phases(0))
-                If .Phases(1).Properties.molarfraction > 0.0# Then
-                    PopulatePropGrid(gridPropertiesLiqMix, .Phases(1))
-                    tabPropsLiqMix.Hide()
-                End If
-                If .Phases(2).Properties.molarfraction > 0.0# Then
+                If .Phases(2).Properties.molarfraction.HasValue Then
                     PopulatePropGrid(gridPropertiesVapor, .Phases(2))
-                    tabPropsVapor.Hide()
+                    TabPhaseProps.TabPages.Add(tabPropsVapor)
+                Else
+                    TabPhaseProps.TabPages.Remove(tabPropsVapor)
                 End If
-                If .Phases(3).Properties.molarfraction > 0.0# Then
+                If .Phases(1).Properties.molarfraction.HasValue Then
+                    PopulatePropGrid(gridPropertiesLiqMix, .Phases(1))
+                    TabPhaseProps.TabPages.Add(tabPropsLiqMix)
+                Else
+                    TabPhaseProps.TabPages.Remove(tabPropsLiqMix)
+                End If
+                If .Phases(3).Properties.molarfraction.HasValue Then
                     PopulatePropGrid(gridPropertiesLiq1, .Phases(3))
-                    tabPropsLiq1.Hide()
+                    TabPhaseProps.TabPages.Add(tabPropsLiq1)
+                Else
+                    TabPhaseProps.TabPages.Remove(tabPropsLiq1)
                 End If
-                If .Phases(4).Properties.molarfraction > 0.0# Then
+                If .Phases(4).Properties.molarfraction.HasValue Then
                     PopulatePropGrid(gridPropertiesLiq2, .Phases(4))
-                    tabPropsLiq2.Hide()
+                    TabPhaseProps.TabPages.Add(tabPropsLiq2)
+                Else
+                    TabPhaseProps.TabPages.Remove(tabPropsLiq2)
                 End If
-                If .Phases(7).Properties.molarfraction > 0.0# Then
+                If .Phases(7).Properties.molarfraction.HasValue Then
                     PopulatePropGrid(gridPropertiesSolid, .Phases(7))
-                    tabPropsSolid.Hide()
+                    TabPhaseProps.TabPages.Add(tabPropsSolid)
+                Else
+                    TabPhaseProps.TabPages.Remove(tabPropsSolid)
                 End If
 
             End If

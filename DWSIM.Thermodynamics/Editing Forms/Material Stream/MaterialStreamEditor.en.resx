@@ -490,6 +490,13 @@
   <data name="tabPropsSolid.Text" xml:space="preserve">
     <value>Solid</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TabPhaseProps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TabPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 424</value>
+  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Phase Properties</value>
   </data>
@@ -519,6 +526,9 @@
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Basis</value>
+  </data>
+  <data name="TabPhaseComps.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
     <value>Compound</value>
@@ -574,10 +584,13 @@
   <data name="tabCompSolid.Text" xml:space="preserve">
     <value>Solid</value>
   </data>
+  <data name="TabPhaseComps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 216</value>
+  </data>
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Phase Composition</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>404, 874</value>
+    <value>392, 874</value>
   </data>
 </root>
