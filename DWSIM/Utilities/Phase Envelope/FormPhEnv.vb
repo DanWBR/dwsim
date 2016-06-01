@@ -69,7 +69,7 @@ Public Class FormPhEnv
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDiagr1")
 
         Try
-            Me.chkhyd.Enabled = Frm.Options.SelectedPropertyPackage.RET_VCAS().Contains("7732-18-5")
+            Me.chkhyd.Enabled = DirectCast(AttachedTo, Streams.MaterialStream).PropertyPackage.RET_VCAS().Contains("7732-18-5")
         Catch ex As Exception
 
         End Try

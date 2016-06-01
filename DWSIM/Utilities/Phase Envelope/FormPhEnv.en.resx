@@ -118,8 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 12</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 23</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LabelStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 17</value>
+  </data>
+  <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 13</value>
+  </data>
+  <data name="LabelStatus.Text" xml:space="preserve">
+    <value>Building the envelope, please wait...</value>
+  </data>
   <data name="CheckBoxHYDVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 118</value>
+    <value>253, 91</value>
   </data>
   <data name="CheckBoxHYDVAP.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 17</value>
@@ -178,35 +196,8 @@
   <data name="CheckBox1.Text" xml:space="preserve">
     <value>Include Quality Line</value>
   </data>
-  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
-  </data>
-  <data name="Label23.Text" xml:space="preserve">
-    <value>Material Stream</value>
-  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Object Selection</value>
-  </data>
-  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 12</value>
-  </data>
-  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 23</value>
-  </data>
-  <data name="Button2.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="LabelStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 17</value>
-  </data>
-  <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 13</value>
-  </data>
-  <data name="LabelStatus.Text" xml:space="preserve">
-    <value>Building the envelope, please wait...</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Options</value>
   </data>
   <data name="ComboBox1.Items" xml:space="preserve">
     <value>Pressure vs. Temperature</value>
@@ -250,13 +241,16 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Envelope type</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Results</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Options</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Table</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
 </root>

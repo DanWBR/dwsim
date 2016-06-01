@@ -2954,9 +2954,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points (" & i + 1 & "/300)")
                 i = i + 1
-                If TypeOf Me Is PengRobinsonPropertyPackage Or TypeOf Me Is SRKPropertyPackage Then
-                    If (T - TCR) / TCR < 0.05 And (P - PCR) / PCR < 0.05 Then Exit Do
-                End If
             Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
                         Double.IsNaN(PB(PB.Count - 1)) = True Or _
                         Double.IsNaN(TVB(TVB.Count - 1)) = True
@@ -3047,9 +3044,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points (" & i + 1 & "/300)")
                 i = i + 1
-                If TypeOf Me Is PengRobinsonPropertyPackage Or TypeOf Me Is SRKPropertyPackage Then
-                    If (T - TCR) / TCR < 0.05 And (P - PCR) / PCR < 0.05 Then Exit Do
-                End If
             Loop Until i >= 300 Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
                         Double.IsNaN(PO(PO.Count - 1)) = True Or
                         Double.IsNaN(TVD(TVD.Count - 1)) = True
