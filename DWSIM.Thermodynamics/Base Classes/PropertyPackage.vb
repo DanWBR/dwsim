@@ -2867,8 +2867,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Pmin = 101325
             Tmin = 0.3 * TCR
 
-            dP = (PCR - Pmin) / 50
-            dT = (TCR - Tmin) / 50
+            dP = (PCR - Pmin) / 100
+            dT = (TCR - Tmin) / 100
 
             Dim beta As Double = 10
 
@@ -2954,10 +2954,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points (" & i + 1 & "/300)")
                 i = i + 1
-            Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or _
-                        T >= TCR Or Double.IsNaN(PB(PB.Count - 1)) = True Or _
-                        Double.IsNaN(TVB(TVB.Count - 1)) = True Or Math.Abs(T - TCR) / TCR < 0.002 And _
-                        Math.Abs(P - PCR) / PCR < 0.002
+                If TypeOf Me Is PengRobinsonPropertyPackage Or TypeOf Me Is SRKPropertyPackage Then
+                    If (T - TCR) / TCR < 0.05 And (P - PCR) / PCR < 0.05 Then Exit Do
+                End If
+            Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
+                        Double.IsNaN(PB(PB.Count - 1)) = True Or _
+                        Double.IsNaN(TVB(TVB.Count - 1)) = True
 
             Dim Switch = False
 
@@ -3045,81 +3047,54 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 End If
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points (" & i + 1 & "/300)")
                 i = i + 1
+                If TypeOf Me Is PengRobinsonPropertyPackage Or TypeOf Me Is SRKPropertyPackage Then
+                    If (T - TCR) / TCR < 0.05 And (P - PCR) / PCR < 0.05 Then Exit Do
+                End If
             Loop Until i >= 300 Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
-                        Double.IsNaN(PO(PO.Count - 1)) = True Or Double.IsNaN(TVD(TVD.Count - 1)) = True Or _
-                        Math.Abs(T - TCR) / TCR < 0.03 And Math.Abs(P - PCR) / PCR < 0.03
+                        Double.IsNaN(PO(PO.Count - 1)) = True Or
+                        Double.IsNaN(TVD(TVD.Count - 1)) = True
 
             'calculate intersection point, if any
 
-            Dim distP, distT As New Dictionary(Of Integer, Dictionary(Of Integer, Double))
+            Dim dist As New Dictionary(Of Integer, Dictionary(Of Integer, Double))
 
-            i = 0
-            For Each p1 In PB
-                distP.Add(i, New Dictionary(Of Integer, Double))
-                j = 0
-                For Each p2 In PO
-                    distP(i).Add(j, Abs(p1 - p2))
-                    j += 1
+            Dim maxP, maxT As Double
+            maxP = Max(PB.ToArray.Max, PO.ToArray.Max)
+            maxT = Max(TVB.ToArray.Max, TVB.ToArray.Max)
+
+            For i = 0 To PB.Count - 1
+                dist.Add(i, New Dictionary(Of Integer, Double))
+                For j = 0 To PO.Count - 1
+                    dist(i).Add(j, Abs(PB(i) - PO(j)) / maxP + Abs(TVB(i) - TVD(j)) / maxT)
                 Next
-                i += 1
             Next
 
-            i = 0
-            For Each p1 In TVB
-                distT.Add(i, New Dictionary(Of Integer, Double))
-                j = 0
-                For Each p2 In TVD
-                    distT(i).Add(j, Abs(p1 - p2))
-                    j += 1
-                Next
-                i += 1
-            Next
+            Dim mindist As Double, ib, id As Integer
 
-            Dim mindistP, mindistT As Double, ib1, id1, ib2, id2 As Integer
-
-            mindistP = 1.0E+20
-            mindistT = 1.0E+20
+            mindist = 1.0E+20
 
             i = 0
-            For Each item In distP.Values
+            For Each item In dist.Values
                 j = 0
                 For Each item2 In item.Values
                     j += 1
-                    If item2 < mindistP Then
-                        mindistP = item2
-                        ib1 = i
-                        id1 = j
+                    If item2 < mindist Then
+                        mindist = item2
+                        ib = i
+                        id = j
                     End If
                 Next
                 i += 1
             Next
 
-            i = 0
-            For Each item In distT.Values
-                j = 0
-                For Each item2 In item.Values
-                    j += 1
-                    If item2 < mindistT Then
-                        mindistT = item2
-                        ib2 = i
-                        id2 = j
-                    End If
-                Next
-                i += 1
-            Next
-
-            Dim d1, d2, d3, d4 As Double
-
-            d1 = PB(ib1)
-
-            If mindistP < dP And mindistT < dT Then
+            If mindist < (dP / maxP + dT / maxT) Then
 
                 'there is an intersection, update critical point
 
                 Dim Tc, Pc, Vc As Double
 
-                Tc = (TVB(ib2) + TVD(id2)) / 2
-                Pc = (PB(ib1) + PO(id1)) / 2
+                Tc = (TVB(ib) + TVD(id)) / 2
+                Pc = (PB(ib) + PO(id)) / 2
                 Vc = 1 / Me.AUX_VAPDENS(Tc, Pc) * Me.AUX_MMM(Phase.Mixture) / 1000
 
                 CP.Clear()
@@ -3127,21 +3102,53 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 'remove data beyond intersection point
 
-                Dim ip As Integer = (ib1 + ib2) / 2
+                TVB = New ArrayList(TVB.GetRange(0, ib))
+                PB = New ArrayList(PB.GetRange(0, ib))
+                VB = New ArrayList(VB.GetRange(0, ib))
+                HB = New ArrayList(HB.GetRange(0, ib))
+                SB = New ArrayList(SB.GetRange(0, ib))
 
-                TVB = New ArrayList(TVB.GetRange(0, ip))
-                PB = New ArrayList(PB.GetRange(0, ip))
-                VB = New ArrayList(VB.GetRange(0, ip))
-                HB = New ArrayList(HB.GetRange(0, ip))
-                SB = New ArrayList(SB.GetRange(0, ip))
+                TVB.Add(Tc)
+                PB.Add(Pc)
+                VB.Add(Vc)
+                HB.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
+                SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
 
-                ip = (id1 + id2) / 2
+                TVB.Add(0.0#)
+                PB.Add(0.0#)
+                VB.Add(0.0#)
+                HB.Add(0.0#)
+                SB.Add(0.0#)
 
-                TVD = New ArrayList(TVD.GetRange(0, ip))
-                PO = New ArrayList(PO.GetRange(0, ip))
-                VO = New ArrayList(VO.GetRange(0, ip))
-                HO = New ArrayList(HO.GetRange(0, ip))
-                SO = New ArrayList(SO.GetRange(0, ip))
+                TVB.Add(0.0#)
+                PB.Add(0.0#)
+                VB.Add(0.0#)
+                HB.Add(0.0#)
+                SB.Add(0.0#)
+
+                TVD = New ArrayList(TVD.GetRange(0, id))
+                PO = New ArrayList(PO.GetRange(0, id))
+                VO = New ArrayList(VO.GetRange(0, id))
+                HO = New ArrayList(HO.GetRange(0, id))
+                SO = New ArrayList(SO.GetRange(0, id))
+
+                TVD.Add(Tc)
+                PO.Add(Pc)
+                VO.Add(Vc)
+                HO.Add(Me.DW_CalcEnthalpy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
+                SO.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), Tc, Pc, State.Vapor))
+
+                TVD.Add(0.0#)
+                PO.Add(0.0#)
+                VO.Add(0.0#)
+                HO.Add(0.0#)
+                SO.Add(0.0#)
+
+                TVD.Add(0.0#)
+                PO.Add(0.0#)
+                VO.Add(0.0#)
+                HO.Add(0.0#)
+                SO.Add(0.0#)
 
             End If
 
@@ -9520,6 +9527,32 @@ Final3:
                         End If
                     Next
 
+                Case "Lee-Kesler-Plöcker"
+
+                    Dim pp As LKPPropertyPackage = Me
+                    'pp.m_pr.InteractionParameters.Clear()
+
+                    Dim el = (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault
+
+                    If Not el Is Nothing Then
+
+                        For Each xel As XElement In el.Elements.ToList
+                            Dim ip As New Auxiliary.LKP_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.LKP_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
+                            Else
+                                If Not pp.m_lk.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_lk.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_lk.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
+                            End If
+                        Next
+
+                    End If
+
             End Select
 
         End Function
@@ -9545,6 +9578,7 @@ Final3:
                 Next
 
                 Select Case Me.ComponentName
+
                     Case "PC-SAFT"
 
                         Dim pp As PCSAFTPropertyPackage = Me
@@ -9782,10 +9816,27 @@ Final3:
                             Next
                         Next
 
+                    Case "Lee-Kesler-Plöcker"
+
+                        Dim pp As LKPPropertyPackage = Me
+
+                        .Add(New XElement("InteractionParameters"))
+
+                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.LKP_IPData)) In pp.m_lk.InteractionParameters
+                            For Each kvp2 As KeyValuePair(Of String, Auxiliary.LKP_IPData) In kvp.Value
+                                If Not Me.CurrentMaterialStream Is Nothing Then
+                                    If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp.Key) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp2.Key) Then
+                                        .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("Compound1", kvp.Key),
+                                                                           New XAttribute("Compound2", kvp2.Key),
+                                                                           New XAttribute("Value", kvp2.Value.kij.ToString(ci))))
+                                    End If
+                                End If
+                            Next
+                        Next
+
+                    Case "Raoult's Law", "IAPWS-IF97 Steam Tables"
                     Case "Chao-Seader"
                     Case "Grayson-Streed"
-                    Case "Lee-Kesler-Plöcker"
-                    Case "Raoult's Law", "IAPWS-IF97 Steam Tables"
 
                 End Select
 
