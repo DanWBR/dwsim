@@ -181,7 +181,7 @@ Public Class FormConfigCAPEOPEN2
                 tmpcomp = _pp._availablecomps(ogc1.Rows(index).Cells(0).Value)
                 _pp._selectedcomps.Add(tmpcomp.Name, tmpcomp)
                 _pp._availablecomps.Remove(tmpcomp.Name)
-                Me.ListViewA.Items.Add(tmpcomp.Name, tmpcomp.Name).Tag = tmpcomp.Name
+                Me.ListViewA.Items.Add(tmpcomp.Name & " (" & tmpcomp.OriginalDB & ")", tmpcomp.Name).Tag = tmpcomp.Name
                 Me.ogc1.Rows.RemoveAt(index)
             End If
         End If

@@ -46,6 +46,12 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Overrides Sub AddDefaultCompounds(compnames() As String)
+
+            MyBase.AddDefaultCompounds(New String() {"Water"})
+
+        End Sub
+
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
             Return Me.m_iapws97.densW(T, P / 100000)

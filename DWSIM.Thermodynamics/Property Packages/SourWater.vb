@@ -77,6 +77,12 @@ Namespace PropertyPackages
             End Get
         End Property
 
+        Public Overrides Sub AddDefaultCompounds(compnames() As String)
+
+            MyBase.AddDefaultCompounds(New String() {"Water", "Carbon dioxide", "Ammonia", "Hydrogen sulfide", "Methane", "Ethane"})
+
+        End Sub
+
         Public Function CalcHenryConstants(Vx As Array, Vy As Array, T As Double, P As Double, Optional type As String = "LV") As Double()
 
             Me.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = 0

@@ -264,6 +264,12 @@ Namespace PropertyPackages
 
 #Region "Main Property Routines"
 
+        Public Overrides Sub AddDefaultCompounds(compnames() As String)
+
+            MyBase.AddDefaultCompounds(New String() {"Water", "Ethanol"})
+
+        End Sub
+
         Public Function GetArguments() As Object
 
             If TypeOf Me Is NRTLPropertyPackage Then

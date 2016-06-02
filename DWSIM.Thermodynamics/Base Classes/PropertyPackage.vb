@@ -186,9 +186,17 @@ Namespace PropertyPackages
 
                 Me.LoadCSDB()
 
-                'load DWSIM XML database
+                'load Electrolytes XML database
 
-                'Me.LoadDWSIMDB()
+                Me.LoadEDB()
+
+                'load Biodiesel XML database
+
+                Me.LoadBDDB()
+
+                'load CoolProp database
+
+                Me.LoadCPDB()
 
             End If
 
@@ -215,6 +223,44 @@ Namespace PropertyPackages
             For Each cp As BaseClasses.ConstantProperties In cpa
                 If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
             Next
+        End Sub
+
+
+        Public Sub LoadBDDB()
+            Dim bddb As New Databases.Biodiesel
+            Dim cpa() As BaseClasses.ConstantProperties
+            bddb.Load()
+            cpa = bddb.Transfer()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Public Sub LoadEDB()
+            Dim edb As New Databases.Electrolyte
+            Dim cpa() As BaseClasses.ConstantProperties
+            edb.Load()
+            cpa = edb.Transfer()
+            For Each cp As BaseClasses.ConstantProperties In cpa
+                If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
+            Next
+        End Sub
+
+        Public Sub LoadCPDB()
+            Dim cpdb As New Databases.CoolProp
+            Dim cpa() As BaseClasses.ConstantProperties
+            cpdb.Load()
+            Try
+                cpa = cpdb.Transfer()
+                For Each cp As BaseClasses.ConstantProperties In cpa
+                    If Not _availablecomps.ContainsKey(cp.Name) Then
+                        _availablecomps.Add(cp.Name, cp)
+                    Else
+                        _availablecomps(cp.Name).IsCOOLPROPSupported = True
+                    End If
+                Next
+            Catch ex As Exception
+            End Try
         End Sub
 
         Public Shared Function ReturnInstance(typename As String) As Object
@@ -377,6 +423,23 @@ Namespace PropertyPackages
 #End Region
 
 #Region "   Must Override or Overridable Functions"
+
+        Public Overridable Sub AddDefaultCompounds(compnames As String())
+
+            For Each comp In compnames
+
+                If _availablecomps.ContainsKey(comp) Then
+
+                    Dim tmpcomp As New BaseClasses.ConstantProperties
+                    tmpcomp = _availablecomps(comp)
+                    _selectedcomps.Add(tmpcomp.Name, tmpcomp)
+                    _availablecomps.Remove(tmpcomp.Name)
+
+                End If
+
+            Next
+
+        End Sub
 
         ''' <summary>
         ''' Provides a wrapper function for CAPE-OPEN CalcProp/CalcSingleProp functions.
@@ -8859,6 +8922,14 @@ Final3:
                 HP.C = Val(HenryLines(i).Split(";")(4))
                 If Not m_Henry.ContainsKey(HP.CAS) Then m_Henry.Add(HP.CAS, HP)
             Next
+
+            If Settings.CAPEOPENMode Then
+
+                'add default compounds
+
+                AddDefaultCompounds(New String() {"Methane", "Ethane", "Propane"})
+
+            End If
 
         End Sub
 

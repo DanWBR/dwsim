@@ -49,7 +49,7 @@ Namespace PropertyPackages
             Me.SupportedComponents.Add(15)
 
             Me.IsConfigurable = True
-      
+
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
@@ -89,6 +89,12 @@ Namespace PropertyPackages
             Return Me.SIA.vap_density_si(T, P)
 
         End Function
+
+        Public Overrides Sub AddDefaultCompounds(compnames() As String)
+
+            MyBase.AddDefaultCompounds(New String() {"Water", "NaCl"})
+
+        End Sub
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
 
