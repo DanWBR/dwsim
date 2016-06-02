@@ -386,14 +386,7 @@ Public Class EditingForm_Separator
 
     Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
 
-        'Dim fa As Interfaces.Enums.FlashMethod = [Enum].Parse(VesselObject.PreferredFlashAlgorithm.GetType, cbFlashAlg.SelectedItem)
-
-        'Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = VesselObject.FlowSheet.FlowsheetOptions.FlashSettings(fa),
-        '                                                        .AvailableCompounds = VesselObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
-        '                                                         .FlashAlgo = fa}
-        'f.ShowDialog(Me)
-
-        'VesselObject.FlowSheet.FlowsheetOptions.FlashSettings(fa) = f.Settings
+        Thermodynamics.Calculator.ConfigureFlashInstance(VesselObject, cbFlashAlg.SelectedItem.ToString)
 
     End Sub
 

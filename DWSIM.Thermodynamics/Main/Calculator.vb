@@ -137,5 +137,48 @@ Public Class Calculator
 
     End Sub
 
+    Public Shared Sub ConfigureFlashInstance(simobj As Interfaces.ISimulationObject, fname As String)
+
+        Dim fa As Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = simobj.GetFlowsheet.FlowsheetOptions.FlashAlgorithms.Where(Function(x) x.Tag = fname).FirstOrDefault
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
+                                                                .AvailableCompounds = simobj.GetFlowsheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList,
+                                                                 .FlashAlgo = fa}
+
+        If TypeOf fa Is Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server Then
+
+            Dim coflash = DirectCast(fa, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
+
+            f._coes = coflash._coes
+            f._coppm = coflash._coppm
+            f._selppm = coflash._selppm
+            f._esname = coflash._esname
+            f._mappings = coflash._mappings
+            f._phasemappings = coflash._phasemappings
+
+            f.ShowDialog()
+
+            coflash._coes = f._coes
+            coflash._coppm = f._coppm
+            coflash._selppm = f._selppm
+            coflash._esname = f._esname
+            coflash._mappings = f._mappings
+            coflash._phasemappings = f._phasemappings
+
+            fa.FlashSettings = f.Settings
+
+            f.Dispose()
+            f = Nothing
+
+        Else
+
+            f.ShowDialog()
+            fa.FlashSettings = f.Settings
+            f.Dispose()
+            f = Nothing
+
+        End If
+
+    End Sub
+
 
 End Class
