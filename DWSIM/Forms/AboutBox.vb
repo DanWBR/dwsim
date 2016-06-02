@@ -6,7 +6,7 @@ Imports System.Linq
 Imports Cudafy
 Imports Cudafy.Host
 
-Public Class AboutBoxNET
+Public Class AboutBox
 
     Private _IsPainted As Boolean = False
     Private _EntryAssemblyName As String
@@ -23,6 +23,8 @@ Public Class AboutBoxNET
         If File.Exists(updfile) Then
             Version.Text += " Update " & File.ReadAllText(updfile)
         End If
+
+        lblCurrentVersion.Text = Version.Text
 
         Copyright.Text = My.Application.Info.Copyright
 
@@ -104,10 +106,30 @@ Public Class AboutBoxNET
             .Add(New Object() {"ZedGraph", "5.1.0.32336", "2005", "John Champion", "https://sourceforge.net/projects/zedgraph", "LGPLv2", "http://www.gnu.org/licenses/lgpl.html"})
             .Add(New Object() {"scintillaNET", "3.5.1.0", "2015", "Jacob Slusser", "https://github.com/jacobslusser/scintillaNET", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
             .Add(New Object() {"Jolt.NET", "0.4", "2009", "Steve Guidi", "https://github.com/jacobslusser/scintillaNET", "New BSD License (BSD)", "http://jolt.codeplex.com/license"})
-            .Add(New Object() {"Yeppp!", Yeppp.Library.GetVersion.ToString, "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"})
+            .Add(New Object() {"Yeppp!", "1.0.0.1", "2014", "Marat Dukhan", "http://www.yeppp.info", "Yeppp! License", "http://www.yeppp.info/resources/yeppp-license.txt"})
             .Add(New Object() {"ExcelDNA", "0.33", "2015", "Govert van Drimmelen", "http://excel-dna.net/", "MIT License", "http://www.opensource.org/licenses/mit-license.html"})
+            .Add(New Object() {"AODL", "1.4.0.3", "2011", "Chris Constantin", "https://bitbucket.org/chrisc/aodl", "Apache License v2", "https://wiki.openoffice.org/wiki/OpenOffice.org_Wiki:Copyrights"})
+            .Add(New Object() {"SwarmOps", "3.1", "2011", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/swarmops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/swarmops/cs/files/license.txt"})
+            .Add(New Object() {"RandomOps", "2.1", "2010", "Magnus Erik Hvass Pedersen", "http://www.hvass-labs.org/projects/randomops/cs/", "MIT-style License", "http://www.hvass-labs.org/projects/randomops/cs/files/license.txt"})
         End With
         Me.DataGridView1.Sort(Me.DataGridView1.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
+
+        'get DWSIM components' versions
+
+        Dim assnames = New String() {"DWSIM.exe", "DWSIM.DrawingTools.dll", "DWSIM.ExtensionMethods.dll", "DWSIM.FileDownloader.dll",
+                                     "DWSIM.FlowsheetSolver.dll", "DWSIM.GlobalSettings.dll", "DWSIM.Interfaces.dll", "DWSIM.MathOps.dll",
+                                     "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll", "DWSIM.Thermodynamics.NativeLibraries.dll",
+                                     "DWSIM.UnitOperations.dll", "DWSIM.Updater.exe", "DWSIM.XMLSerializer.dll"}
+
+        dgvDWSIMComponents.Rows.Clear()
+        For Each assn In assnames
+            Dim assemb = Assembly.LoadFile(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & assn)
+            If Not assemb Is Nothing Then
+                Dim assdesc = assemb.GetCustomAttributes(Type.GetType("System.Reflection.AssemblyDescriptionAttribute"), False).FirstOrDefault().Description
+                dgvDWSIMComponents.Rows.Add(New Object() {assn, assemb.GetName.Version.ToString, AssemblyBuildDate(assemb).ToShortDateString, assdesc})
+                assemb = Nothing
+            End If
+        Next
 
     End Sub
 
@@ -132,7 +154,10 @@ Public Class AboutBoxNET
     ''' </summary>
     Private Sub PopulateAssemblies()
         For Each a As [Assembly] In AppDomain.CurrentDomain.GetAssemblies
-            PopulateAssemblySummary(a)
+            Try
+                PopulateAssemblySummary(a)
+            Catch ex As Exception
+            End Try
         Next
         AssemblyNamesComboBox.SelectedIndex = AssemblyNamesComboBox.FindStringExact(_EntryAssemblyName)
     End Sub

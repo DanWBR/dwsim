@@ -292,12 +292,6 @@
     <Compile Include="Controls\ScriptEditorControlMono.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\AboutBoxMono.Designer.vb">
-      <DependentUpon>AboutBoxMono.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AboutBoxMono.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </Compile>
@@ -410,10 +404,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Objects\Classes\Optimization\Optimization.vb" />
-    <Compile Include="Forms\AboutBoxNET.Designer.vb">
-      <DependentUpon>AboutBoxNET.vb</DependentUpon>
+    <Compile Include="Forms\AboutBox.Designer.vb">
+      <DependentUpon>AboutBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AboutBoxNET.vb">
+    <Compile Include="Forms\AboutBox.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormCapeOpenUnitSelector.Designer.vb">
@@ -734,14 +728,8 @@
     <EmbeddedResource Include="Controls\ScriptEditorControlMono.resx">
       <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutBoxMono.es.resx">
-      <DependentUpon>AboutBoxMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutBoxMono.resx">
-      <DependentUpon>AboutBoxMono.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutBoxNET.es.resx">
-      <DependentUpon>AboutBoxNET.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\AboutBox.es.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.en.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
@@ -2261,8 +2249,8 @@
     <EmbeddedResource Include="Forms\FormMain.es.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AboutBoxNET.resx">
-      <DependentUpon>AboutBoxNET.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\AboutBox.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.en.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>

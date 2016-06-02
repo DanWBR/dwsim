@@ -2130,13 +2130,8 @@ ruf:                Application.DoEvents()
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
-        If Not DWSIM.App.IsRunningOnMono Then
-            Dim frmAbout As New AboutBoxNET
-            frmAbout.ShowDialog(Me)
-        Else
-            Dim frmAbout As New AboutBoxMONO
-            frmAbout.ShowDialog(Me)
-        End If
+        Dim frmAbout As New AboutBox
+        frmAbout.ShowDialog(Me)
     End Sub
 
     Private Sub LinkLabel7_LinkClicked_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
