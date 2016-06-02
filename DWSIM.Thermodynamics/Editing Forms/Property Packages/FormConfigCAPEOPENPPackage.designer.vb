@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormConfigCAPEOPEN2
+Partial Class FormConfigCAPEOPENPPackage
     Inherits FormConfigPropertyPackageBase
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class FormConfigCAPEOPEN2
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPEN2))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPENPPackage))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
@@ -36,6 +36,10 @@ Partial Class FormConfigCAPEOPEN2
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ogc1 = New System.Windows.Forms.DataGridView()
+        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -73,10 +77,6 @@ Partial Class FormConfigCAPEOPEN2
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.Column11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -193,6 +193,33 @@ Partial Class FormConfigCAPEOPEN2
         Me.ogc1.ShowCellErrors = False
         Me.ogc1.ShowEditingIcon = False
         Me.ogc1.ShowRowErrors = False
+        '
+        'Column11
+        '
+        Me.Column11.FillWeight = 5.0!
+        resources.ApplyResources(Me.Column11, "Column11")
+        Me.Column11.Name = "Column11"
+        '
+        'Column6
+        '
+        Me.Column6.FillWeight = 40.0!
+        resources.ApplyResources(Me.Column6, "Column6")
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'Column7
+        '
+        Me.Column7.FillWeight = 30.0!
+        resources.ApplyResources(Me.Column7, "Column7")
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        '
+        'Column9
+        '
+        Me.Column9.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column9, "Column9")
+        Me.Column9.Name = "Column9"
+        Me.Column9.ReadOnly = True
         '
         'FaTabStripItem7
         '
@@ -468,41 +495,14 @@ Partial Class FormConfigCAPEOPEN2
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
-        'Column11
-        '
-        Me.Column11.FillWeight = 5.0!
-        resources.ApplyResources(Me.Column11, "Column11")
-        Me.Column11.Name = "Column11"
-        '
-        'Column6
-        '
-        Me.Column6.FillWeight = 40.0!
-        resources.ApplyResources(Me.Column6, "Column6")
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'Column7
-        '
-        Me.Column7.FillWeight = 30.0!
-        resources.ApplyResources(Me.Column7, "Column7")
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        '
-        'Column9
-        '
-        Me.Column9.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column9, "Column9")
-        Me.Column9.Name = "Column9"
-        Me.Column9.ReadOnly = True
-        '
-        'FormConfigCAPEOPEN2
+        'FormConfigCAPEOPENPPackage
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.FaTabStrip1)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FormConfigCAPEOPEN2"
+        Me.Name = "FormConfigCAPEOPENPPackage"
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)

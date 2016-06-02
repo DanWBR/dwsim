@@ -44,7 +44,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Pb, Pd, Pmin, Pmax, Px, soma_x, soma_y, Tmin, Tmax As Double
         Dim proppack As PropertyPackages.PropertyPackage
         Dim tmpdx, refx, currx As Object
-        Dim fastmode As Integer
+        Dim fastmode As Boolean
         Sub New()
             MyBase.New()
         End Sub
@@ -351,7 +351,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 WriteDebugInfo("PT Flash [IO]: Iteration #" & ecount & ", VF = " & V)
 
-                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSqrSumY(fx) < etol
 
@@ -763,7 +763,7 @@ restart:    Do
                 WriteDebugInfo("PH Flash [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PH Flash [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSqrSumY(fx) < etol Or ecount > maxit_e
 
@@ -1232,7 +1232,7 @@ restart:    Do
                 WriteDebugInfo("PS Flash [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PS Flash [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1578,7 +1578,7 @@ restart:    Do
                 WriteDebugInfo("PV Flash [IO]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
                 WriteDebugInfo("PV Flash [IO]: Iteration #" & ecount & ", Damping Factor = " & alpha)
 
-                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol * (n + 2)
 
@@ -1984,7 +1984,7 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = Hf / 1000 - L * (DHl + Hlid) - V * (DHv + Hvid)
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2029,7 +2029,7 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = Hf / 1000 - L * (DHl + Hlid) - V * (DHv + Hvid)
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -2037,7 +2037,7 @@ final:      d2 = Date.Now
 
         Private Function EnergyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim HL, balerror As Double
 
@@ -2056,7 +2056,7 @@ final:      d2 = Date.Now
 
         Private Function EnergyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim HV, balerror As Double
 
@@ -2112,7 +2112,7 @@ final:      d2 = Date.Now
             Slid = proppack.RET_Sid(298.15, T, Pf, Vx) * proppack.AUX_MMM(Vx)
 
             Dim eberror As Double = Sf - L * (DSl + Slid) - V * (DSv + Svid)
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2154,7 +2154,7 @@ final:      d2 = Date.Now
             Slid = proppack.RET_Sid(298.15, T, Pf, Vx) * proppack.AUX_MMM(Vx)
 
             Dim eberror As Double = Sf - L * (DSl + Slid) - V * (DSv + Svid)
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror ^ 2
 
@@ -2162,7 +2162,7 @@ final:      d2 = Date.Now
 
         Private Function EntropyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim SL, balerror As Double
 
@@ -2181,7 +2181,7 @@ final:      d2 = Date.Now
 
         Private Function EntropyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim SV, balerror As Double
 
@@ -2224,7 +2224,7 @@ final:      d2 = Date.Now
 
             For i = 0 To n
                 Kw11(i) = K(i)
-                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
                 Kw21(i) = K2(i)
             Next
 
@@ -2280,7 +2280,7 @@ final:      d2 = Date.Now
 
             Dim eberror As Double = sumpi / sumeuipi - 1
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror ^ 2
 

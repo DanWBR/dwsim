@@ -2775,7 +2775,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Property
 
     Public Sub SaveToXML(file As String) Implements IFlowsheetBag.SaveToXML
-
+        FormMain.SaveXML(file, Me)
     End Sub
 
     Public Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData

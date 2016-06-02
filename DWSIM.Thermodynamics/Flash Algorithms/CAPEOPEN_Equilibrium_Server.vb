@@ -30,7 +30,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Inherits FlashAlgorithm
 
         Public _selppm As CapeOpenObjInfo
-        Private _istres, _istrppm As ComIStreamWrapper
+        <System.NonSerialized()> Private _istres, _istrppm As ComIStreamWrapper
 
         <System.NonSerialized()> Public _coes, _coppm As Object 'CAPE-OPEN ES & Manager
         Public _esname As String = ""

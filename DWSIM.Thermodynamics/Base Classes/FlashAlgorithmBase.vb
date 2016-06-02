@@ -34,12 +34,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     <System.Serializable()> Public MustInherit Class FlashAlgorithm
 
         Implements Interfaces.IFlashAlgorithm, XMLSerializer.Interfaces.ICustomXMLSerialization
-
         Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String) Implements Interfaces.IFlashAlgorithm.FlashSettings
-
         Public Property StabSearchSeverity As Integer = 0
         Public Property StabSearchCompIDs As String() = New String() {}
-
         Private _P As Double, _Vz, _Vx1est, _Vx2est As Double(), _pp As PropertyPackage
 
         Sub New()

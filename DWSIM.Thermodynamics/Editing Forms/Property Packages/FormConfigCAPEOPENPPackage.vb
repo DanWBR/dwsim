@@ -2,8 +2,10 @@
 Imports Cudafy
 Imports Cudafy.Host
 Imports System.Drawing
+Imports System.Reflection
+Imports DWSIM.Thermodynamics.PropertyPackages
 
-Public Class FormConfigCAPEOPEN2
+Public Class FormConfigCAPEOPENPPackage
 
     Inherits FormConfigPropertyPackageBase
 
@@ -11,7 +13,11 @@ Public Class FormConfigCAPEOPEN2
 
     Dim ACSC1 As AutoCompleteStringCollection
 
+    Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
+
     Private Sub FormConfigCAPEOPEN2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Me.TopMost = True
 
         Application.DoEvents()
 
@@ -105,18 +111,20 @@ Public Class FormConfigCAPEOPEN2
 
         End If
 
-        'Dim flashalgos As String() = [Enum].GetNames(_pp.PreferredFlashAlgorithm.GetType)
-        'ComboBoxFlashAlg.Items.Clear()
-        'ComboBoxFlashAlg.Items.AddRange(flashalgos)
+        AddFlashAlgorithms()
 
-        'ComboBoxFlashAlg.SelectedIndex = _pp.PreferredFlashAlgorithm
+        ComboBoxFlashAlg.Items.Clear()
+        ComboBoxFlashAlg.Items.AddRange(FlashAlgorithms.Keys.ToArray)
+        ComboBoxFlashAlg.SelectedItem = _pp.FlashBase.Name
 
         Me.loaded = True
 
     End Sub
 
     Private Sub ComboBoxFlashAlg_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxFlashAlg.SelectedIndexChanged
-        '_pp.PreferredFlashAlgorithm = [Enum].Parse(_pp.PreferredFlashAlgorithm.GetType, ComboBoxFlashAlg.SelectedItem)
+
+        _pp.FlashAlgorithm = FlashAlgorithms(ComboBoxFlashAlg.SelectedItem)
+
     End Sub
 
     Public Function AddCompToGrid(ByRef comp As ConstantProperties) As Integer
@@ -304,10 +312,45 @@ Public Class FormConfigCAPEOPEN2
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = _pp.FlashSettings,
-                                                               .AvailableCompounds = _pp._selectedcomps.Values.Select(Function(x) x.Name).ToList,
-                                                               .FlashAlgo = _pp.FlashAlgorithm}
-        f.ShowDialog(Me)
+
+        Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = _pp.FlashBase
+        Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,
+                                                                .AvailableCompounds = _pp._selectedcomps.Values.Select(Function(x) x.Name).ToList,
+                                                                 .FlashAlgo = fa}
+
+        If TypeOf fa Is Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server Then
+
+            Dim coflash = DirectCast(fa, Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
+
+            f._coes = coflash._coes
+            f._coppm = coflash._coppm
+            f._selppm = coflash._selppm
+            f._esname = coflash._esname
+            f._mappings = coflash._mappings
+            f._phasemappings = coflash._phasemappings
+
+            f.ShowDialog(Me)
+
+            coflash._coes = f._coes
+            coflash._coppm = f._coppm
+            coflash._selppm = f._selppm
+            coflash._esname = f._esname
+            coflash._mappings = f._mappings
+            coflash._phasemappings = f._phasemappings
+
+            fa.FlashSettings = f.Settings
+
+            f.Dispose()
+            f = Nothing
+
+        Else
+
+            f.ShowDialog(Me)
+            fa.FlashSettings = f.Settings
+            f.Dispose()
+            f = Nothing
+
+        End If
 
     End Sub
 
@@ -317,6 +360,35 @@ Public Class FormConfigCAPEOPEN2
 
     Private Sub ogc1_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles ogc1.CellDoubleClick
         If e.RowIndex > -1 Then AddCompToSimulation(e.RowIndex)
+    End Sub
+
+    Sub AddFlashAlgorithms()
+
+        Dim calculatorassembly = Assembly.GetExecutingAssembly
+        Dim availableTypes As New List(Of Type)()
+
+        availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.IFlashAlgorithm") IsNot Nothing, True, False)))
+
+        For Each item In availableTypes.OrderBy(Function(x) x.Name)
+            If Not item.IsAbstract Then
+                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
+                obj.Tag = obj.Name
+                If Not obj.InternalUseOnly Then FlashAlgorithms.Add(obj.Name, obj)
+                If obj.Name.Contains("Gibbs") Then
+                    Dim obj2 = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
+                    obj2.Tag = obj2.Name
+                    DirectCast(obj2, Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
+                    FlashAlgorithms.Add(obj2.Name, obj2)
+                End If
+                If obj.Name.Contains("SLE") Then
+                    Dim obj2 = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
+                    obj2.Tag = obj2.Name
+                    DirectCast(obj2, Auxiliary.FlashAlgorithms.NestedLoopsSLE).SolidSolution = True
+                    FlashAlgorithms.Add(obj2.Name, obj2)
+                End If
+            End If
+        Next
+
     End Sub
 
 End Class

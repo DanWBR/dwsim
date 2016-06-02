@@ -93,7 +93,7 @@ Namespace PropertyPackages
 
             If Me._phasemappings Is Nothing Then CreatePhaseMappings()
 
-            Dim f As New FormConfigCAPEOPEN
+            Dim f As New FormConfigCAPEOPENPPSocket
 
             f._copp = Me._copp
             f._pptpl = Me._pptpl

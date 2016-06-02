@@ -33,6 +33,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports System.Reflection
+Imports System.Runtime.InteropServices
 
 Namespace PropertyPackages
 
@@ -159,7 +160,7 @@ Namespace PropertyPackages
 
         Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
-        Friend Property ExceptionLog As String = ""
+        Public Property ExceptionLog As String = ""
 
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
@@ -327,7 +328,11 @@ Namespace PropertyPackages
 
             Get
                 If Not FlashAlgorithm Is Nothing Then
-                    Return FlashAlgorithm.Clone()
+                    If Settings.CAPEOPENMode Then
+                        Return FlashAlgorithm
+                    Else
+                        Return FlashAlgorithm.Clone()
+                    End If
                 Else
                     If Not Flowsheet Is Nothing Then
                         Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0)
@@ -8626,11 +8631,7 @@ Final3:
             End If
             If Settings.CAPEOPENMode Then
                 _como = material
-                If TryCast(material, Interfaces.IMaterialStream) Is Nothing Then
-                    Me.CurrentMaterialStream = COMaterialtoDWMaterial(material)
-                Else
-                    Me.CurrentMaterialStream = material
-                End If
+                Me.CurrentMaterialStream = COMaterialtoDWMaterial(material)
             Else
                 Me.CurrentMaterialStream = material
             End If
@@ -8666,200 +8667,208 @@ Final3:
         ''' <remarks>This function is called by SetMaterial when DWSIM Property Packages are working in outside environments (CAPE-OPEN COSEs) like COCO/COFE.</remarks>
         Public Function COMaterialtoDWMaterial(ByVal material As Object) As Interfaces.IMaterialStream
 
-            Dim ms As New Streams.MaterialStream("", "")
+            If TryCast(material, Interfaces.IMaterialStream) Is Nothing Then
 
-            For Each phase In ms.Phases.Values
-                For Each tmpcomp In _selectedcomps.Values
-                    phase.Compounds.Add(tmpcomp.Name, New BaseClasses.Compound(tmpcomp.Name, ""))
-                    phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase In ms.Phases.Values
+                    For Each tmpcomp In _selectedcomps.Values
+                        phase.Compounds.Add(tmpcomp.Name, New BaseClasses.Compound(tmpcomp.Name, ""))
+                        phase.Compounds(tmpcomp.Name).ConstantProperties = tmpcomp
+                    Next
                 Next
-            Next
 
-            'transfer values
+                'transfer values
 
-            Dim mys As ICapeThermoMaterial = material
+                Dim mys As ICapeThermoMaterial = material
 
-            Dim Tv, Tl1, Tl2, Ts, Pv, Pl1, Pl2, Ps, xv, xl1, xl2, xs As Double
-            Dim Vz As Object = Nothing
-            Dim Vy As Object = Nothing
-            Dim Vx1 As Object = Nothing
-            Dim Vx2 As Object = Nothing
-            Dim Vs As Object = Nothing
-            Dim Vwy As Object = Nothing
-            Dim Vwx1 As Object = Nothing
-            Dim Vwx2 As Object = Nothing
-            Dim Vws As Object = Nothing
-            Dim labels As Object = Nothing
-            Dim statuses As Object = Nothing
-            Dim res As Object = Nothing
+                Dim Tv, Tl1, Tl2, Ts, Pv, Pl1, Pl2, Ps, xv, xl1, xl2, xs As Double
+                Dim Vz As Object = Nothing
+                Dim Vy As Object = Nothing
+                Dim Vx1 As Object = Nothing
+                Dim Vx2 As Object = Nothing
+                Dim Vs As Object = Nothing
+                Dim Vwy As Object = Nothing
+                Dim Vwx1 As Object = Nothing
+                Dim Vwx2 As Object = Nothing
+                Dim Vws As Object = Nothing
+                Dim labels As Object = Nothing
+                Dim statuses As Object = Nothing
+                Dim res As Object = Nothing
 
-            Try
-                mys.GetOverallProp("fraction", "Mole", res)
-                Vz = res
-            Catch ex As Exception
-                Vz = RET_NullVector()
-            End Try
+                Try
+                    mys.GetOverallProp("fraction", "Mole", res)
+                    Vz = res
+                Catch ex As Exception
+                    Vz = RET_NullVector()
+                End Try
 
-            mys.GetPresentPhases(labels, statuses)
+                mys.GetPresentPhases(labels, statuses)
 
-            Dim data(0) As Double
+                Dim data(0) As Double
 
-            Dim i As Integer = 0
-            Dim n As Integer = UBound(labels)
+                Dim i As Integer = 0
+                Dim n As Integer = UBound(labels)
 
-            For i = 0 To n
-                If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
-                    Select Case labels(i)
-                        Case "Vapor"
-                            mys.GetTPFraction(labels(i), Tv, Pv, Vy)
-                        Case "Liquid"
-                            mys.GetTPFraction(labels(i), Tl1, Pl1, Vx1)
-                        Case "Liquid2"
-                            mys.GetTPFraction(labels(i), Tl2, Pl2, Vx2)
-                        Case "Solid"
-                            mys.GetTPFraction(labels(i), Ts, Ps, Vs)
-                    End Select
-                    Select Case labels(i)
-                        Case "Vapor"
-                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                            xv = res(0)
-                        Case "Liquid"
-                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                            xl1 = res(0)
-                        Case "Liquid2"
-                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                            xl2 = res(0)
-                        Case "Solid"
-                            mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
-                            xs = res(0)
-                    End Select
-                Else
-                    Select Case labels(i)
-                        Case "Vapor"
-                            xv = 0.0#
-                        Case "Liquid"
-                            xl1 = 0.0#
-                        Case "Liquid2"
-                            xl2 = 0.0#
-                        Case "Solid"
-                            xs = 0.0#
-                    End Select
-                End If
-            Next
-
-            Me.CurrentMaterialStream = ms
-
-            'copy fractions
-
-            With ms
-                i = 0
-                For Each s As Interfaces.ICompound In .Phases(0).Compounds.Values
-                    s.MoleFraction = Vz(i)
-                    i += 1
+                For i = 0 To n
+                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                        Select Case labels(i)
+                            Case "Vapor"
+                                mys.GetTPFraction(labels(i), Tv, Pv, Vy)
+                            Case "Liquid"
+                                mys.GetTPFraction(labels(i), Tl1, Pl1, Vx1)
+                            Case "Liquid2"
+                                mys.GetTPFraction(labels(i), Tl2, Pl2, Vx2)
+                            Case "Solid"
+                                mys.GetTPFraction(labels(i), Ts, Ps, Vs)
+                        End Select
+                        Select Case labels(i)
+                            Case "Vapor"
+                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                                xv = res(0)
+                            Case "Liquid"
+                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                                xl1 = res(0)
+                            Case "Liquid2"
+                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                                xl2 = res(0)
+                            Case "Solid"
+                                mys.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                                xs = res(0)
+                        End Select
+                    Else
+                        Select Case labels(i)
+                            Case "Vapor"
+                                xv = 0.0#
+                            Case "Liquid"
+                                xl1 = 0.0#
+                            Case "Liquid2"
+                                xl2 = 0.0#
+                            Case "Solid"
+                                xs = 0.0#
+                        End Select
+                    End If
                 Next
-                If Vy IsNot Nothing Then
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                        s.MoleFraction = Vy(i)
-                        i += 1
-                    Next
-                    Vwy = Me.AUX_CONVERT_MOL_TO_MASS(Vy)
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                        s.MassFraction = Vwy(i)
-                        i += 1
-                    Next
-                Else
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                        s.MoleFraction = 0.0#
-                        i += 1
-                    Next
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
-                        s.MassFraction = 0.0#
-                        i += 1
-                    Next
-                End If
-                .Phases(2).Properties.molarfraction = xv
-                If Vx1 IsNot Nothing Then
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                        s.MoleFraction = Vx1(i)
-                        i += 1
-                    Next
-                    Vwx1 = Me.AUX_CONVERT_MOL_TO_MASS(Vx1)
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                        s.MassFraction = Vwx1(i)
-                        i += 1
-                    Next
-                Else
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                        s.MoleFraction = 0.0#
-                        i += 1
-                    Next
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
-                        s.MassFraction = 0.0#
-                        i += 1
-                    Next
-                End If
-                .Phases(3).Properties.molarfraction = xl1
-                If Vx2 IsNot Nothing Then
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                        s.MoleFraction = Vx2(i)
-                        i += 1
-                    Next
-                    Vwx2 = Me.AUX_CONVERT_MOL_TO_MASS(Vx2)
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                        s.MassFraction = Vwx2(i)
-                        i += 1
-                    Next
-                Else
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                        s.MoleFraction = 0.0#
-                        i += 1
-                    Next
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
-                        s.MassFraction = 0.0#
-                        i += 1
-                    Next
-                End If
-                .Phases(4).Properties.molarfraction = xl2
-                If Vs IsNot Nothing Then
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                        s.MoleFraction = Vs(i)
-                        i += 1
-                    Next
-                    Vws = Me.AUX_CONVERT_MOL_TO_MASS(Vs)
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                        s.MassFraction = Vws(i)
-                        i += 1
-                    Next
-                Else
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                        s.MoleFraction = 0.0#
-                        i += 1
-                    Next
-                    i = 0
-                    For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
-                        s.MassFraction = 0.0#
-                        i += 1
-                    Next
-                End If
-                .Phases(7).Properties.molarfraction = xs
-            End With
 
-            Return ms
+                Me.CurrentMaterialStream = ms
+
+                'copy fractions
+
+                With ms
+                    i = 0
+                    For Each s As Interfaces.ICompound In .Phases(0).Compounds.Values
+                        s.MoleFraction = Vz(i)
+                        i += 1
+                    Next
+                    If Vy IsNot Nothing Then
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                            s.MoleFraction = Vy(i)
+                            i += 1
+                        Next
+                        Vwy = Me.AUX_CONVERT_MOL_TO_MASS(Vy)
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                            s.MassFraction = Vwy(i)
+                            i += 1
+                        Next
+                    Else
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                            s.MoleFraction = 0.0#
+                            i += 1
+                        Next
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(2).Compounds.Values
+                            s.MassFraction = 0.0#
+                            i += 1
+                        Next
+                    End If
+                    .Phases(2).Properties.molarfraction = xv
+                    If Vx1 IsNot Nothing Then
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                            s.MoleFraction = Vx1(i)
+                            i += 1
+                        Next
+                        Vwx1 = Me.AUX_CONVERT_MOL_TO_MASS(Vx1)
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                            s.MassFraction = Vwx1(i)
+                            i += 1
+                        Next
+                    Else
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                            s.MoleFraction = 0.0#
+                            i += 1
+                        Next
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(3).Compounds.Values
+                            s.MassFraction = 0.0#
+                            i += 1
+                        Next
+                    End If
+                    .Phases(3).Properties.molarfraction = xl1
+                    If Vx2 IsNot Nothing Then
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                            s.MoleFraction = Vx2(i)
+                            i += 1
+                        Next
+                        Vwx2 = Me.AUX_CONVERT_MOL_TO_MASS(Vx2)
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                            s.MassFraction = Vwx2(i)
+                            i += 1
+                        Next
+                    Else
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                            s.MoleFraction = 0.0#
+                            i += 1
+                        Next
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(4).Compounds.Values
+                            s.MassFraction = 0.0#
+                            i += 1
+                        Next
+                    End If
+                    .Phases(4).Properties.molarfraction = xl2
+                    If Vs IsNot Nothing Then
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                            s.MoleFraction = Vs(i)
+                            i += 1
+                        Next
+                        Vws = Me.AUX_CONVERT_MOL_TO_MASS(Vs)
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                            s.MassFraction = Vws(i)
+                            i += 1
+                        Next
+                    Else
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                            s.MoleFraction = 0.0#
+                            i += 1
+                        Next
+                        i = 0
+                        For Each s As Interfaces.ICompound In .Phases(7).Compounds.Values
+                            s.MassFraction = 0.0#
+                            i += 1
+                        Next
+                    End If
+                    .Phases(7).Properties.molarfraction = xs
+                End With
+
+                Return ms
+
+            Else
+
+                Return material
+
+            End If
 
         End Function
 
@@ -8877,7 +8886,7 @@ Final3:
         ''' available it returns an error.</summary>
         ''' <remarks></remarks>
         Public Overridable Sub Edit() Implements CapeOpen.ICapeUtilities.Edit
-            Dim cf As New FormConfigCAPEOPEN2 With {._pp = Me}
+            Dim cf As New FormConfigCAPEOPENPPackage With {._pp = Me}
             cf.ShowDialog()
         End Sub
 
@@ -8951,7 +8960,7 @@ Final3:
             Get
                 Dim parms As New CapeOpen.ParameterCollection
                 For Each kvp As KeyValuePair(Of String, Double) In Me.Parameters
-                    parms.Add(New CapeOpen.RealParameter(kvp.Key, kvp.Key, kvp.Value, kvp.Value, Double.MinValue, Double.MaxValue, CapeParamMode.CAPE_OUTPUT, ""))
+                    parms.Add(New CapeOpen.RealParameter(kvp.Key, kvp.Key, kvp.Value, kvp.Value, Double.MinValue, Double.MaxValue, CapeParamMode.CAPE_INPUT, ""))
                 Next
                 Return parms
             End Get
@@ -8993,6 +9002,12 @@ Final3:
         Public Overridable Sub Terminate() Implements CapeOpen.ICapeUtilities.Terminate
             Me.CurrentMaterialStream = Nothing
             If _como IsNot Nothing Then System.Runtime.InteropServices.Marshal.ReleaseComObject(_como)
+            If Not _pme Is Nothing Then
+                If System.Runtime.InteropServices.Marshal.IsComObject(_pme) Then
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(_pme)
+                End If
+            End If
+            Me.simulationContext = Nothing
             Me.Dispose()
         End Sub
 
@@ -9020,32 +9035,35 @@ Final3:
 
         Public Sub Load(ByVal pStm As System.Runtime.InteropServices.ComTypes.IStream) Implements IPersistStreamInit.Load
 
-            ' Read the length of the string  
-            Dim arrLen As Byte() = New [Byte](3) {}
-            pStm.Read(arrLen, arrLen.Length, IntPtr.Zero)
-
-            ' Calculate the length  
-            Dim cb As Integer = BitConverter.ToInt32(arrLen, 0)
-
-            ' Read the stream to get the string    
-            Dim bytes As Byte() = New Byte(cb - 1) {}
-            Dim pcb As New IntPtr()
-            pStm.Read(bytes, bytes.Length, pcb)
-            If System.Runtime.InteropServices.Marshal.IsComObject(pStm) Then System.Runtime.InteropServices.Marshal.ReleaseComObject(pStm)
-
-            ' Deserialize byte array    
-
-            Dim memoryStream As New System.IO.MemoryStream(bytes)
-
             Try
+
+                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
 
                 Dim domain As AppDomain = AppDomain.CurrentDomain
                 AddHandler domain.AssemblyResolve, New ResolveEventHandler(AddressOf MyResolveEventHandler)
 
+                ' Read the length of the string  
+                Dim arrLen As Byte() = New [Byte](3) {}
+                pStm.Read(arrLen, arrLen.Length, IntPtr.Zero)
+
+                ' Calculate the length  
+                Dim cb As Integer = BitConverter.ToInt32(arrLen, 0)
+
+                ' Read the stream to get the string    
+                Dim bytes As Byte() = New Byte(cb - 1) {}
+                Dim pcb As New IntPtr()
+                pStm.Read(bytes, bytes.Length, pcb)
+                If System.Runtime.InteropServices.Marshal.IsComObject(pStm) Then System.Runtime.InteropServices.Marshal.ReleaseComObject(pStm)
+
+                ' Deserialize byte array    
+
                 Dim myarr As ArrayList
 
-                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                myarr = mySerializer.Deserialize(memoryStream)
+                Using memoryStream As New System.IO.MemoryStream(bytes)
+
+                    myarr = mySerializer.Deserialize(memoryStream)
+
+                End Using
 
                 _availablecomps = myarr(0)
                 _selectedcomps = myarr(1)
@@ -9053,7 +9071,11 @@ Final3:
                 _tpseverity = myarr(3)
                 _tpcompids = TryCast(myarr(4), String())
                 m_par = myarr(5)
-                _flashalgorithm = myarr(6)
+
+                Dim xmldoc = XDocument.Parse(myarr(6))
+                Dim fadata As List(Of XElement) = xmldoc.Element("Data").Elements.ToList
+                _FlashAlgorithm = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(fadata.Where(Function(x) x.Name = "Type").FirstOrDefault.Value)
+                DirectCast(_FlashAlgorithm, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(fadata)
 
                 Select Case Me.ComponentName
                     Case "PC-SAFT"
@@ -9102,80 +9124,86 @@ Final3:
 
             Catch p_Ex As System.Exception
 
-                Throw p_Ex
+                Dim hcode As Integer = 0
+                Dim comEx As COMException = New COMException(p_Ex.Message.ToString, p_Ex)
+                If Not IsNothing(comEx) Then hcode = comEx.ErrorCode
+                ThrowCAPEException(p_Ex, "Error", p_Ex.Message, "IPersistStream", p_Ex.Source, p_Ex.StackTrace, "Load", hcode)
 
             End Try
-
-            memoryStream.Close()
 
         End Sub
 
         Public Sub Save(ByVal pStm As System.Runtime.InteropServices.ComTypes.IStream, ByVal fClearDirty As Boolean) Implements IPersistStreamInit.Save
-
-            Dim props As New ArrayList
-
-            With props
-
-                .Add(_availablecomps)
-                .Add(_selectedcomps)
-                .Add("")
-                .Add(_tpseverity)
-                .Add(_tpcompids)
-                .Add(m_par)
-                .Add(_flashalgorithm)
-
-                Select Case Me.ComponentName
-                    Case "PC-SAFT"
-                        .Add(CType(Me, PCSAFTPropertyPackage).m_pr)
-                    Case "Peng-Robinson (PR)"
-                        .Add(CType(Me, PengRobinsonPropertyPackage).m_pr)
-                    Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
-                        .Add(CType(Me, PRSV2PropertyPackage).m_pr)
-                    Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
-                        .Add(CType(Me, PRSV2VLPropertyPackage).m_pr)
-                    Case "Soave-Redlich-Kwong (SRK)"
-                        .Add(CType(Me, SRKPropertyPackage).m_pr)
-                    Case "Peng-Robinson / Lee-Kesler (PR/LK)"
-                        .Add(CType(Me, PengRobinsonLKPropertyPackage).m_pr)
-                        .Add(CType(Me, PengRobinsonLKPropertyPackage).m_lk)
-                    Case "UNIFAC"
-                        .Add(CType(Me, UNIFACPropertyPackage).m_pr)
-                    Case "UNIFAC-LL"
-                        .Add(CType(Me, UNIFACLLPropertyPackage).m_pr)
-                    Case "NRTL"
-                        .Add(CType(Me, NRTLPropertyPackage).m_pr)
-                        .Add(CType(Me, NRTLPropertyPackage).m_uni)
-                    Case "UNIQUAC"
-                        .Add(CType(Me, UNIQUACPropertyPackage).m_pr)
-                        .Add(CType(Me, UNIQUACPropertyPackage).m_uni)
-                    Case "Modified UNIFAC (Dortmund)"
-                        .Add(CType(Me, MODFACPropertyPackage).m_pr)
-                    Case "Chao-Seader"
-                        .Add(CType(Me, ChaoSeaderPropertyPackage).m_pr)
-                        .Add(CType(Me, ChaoSeaderPropertyPackage).m_lk)
-                        .Add(CType(Me, ChaoSeaderPropertyPackage).m_cs)
-                    Case "Grayson-Streed"
-                        .Add(CType(Me, GraysonStreedPropertyPackage).m_pr)
-                        .Add(CType(Me, GraysonStreedPropertyPackage).m_lk)
-                        .Add(CType(Me, GraysonStreedPropertyPackage).m_cs)
-                    Case "Lee-Kesler-Plöcker"
-                        .Add(CType(Me, LKPPropertyPackage).m_pr)
-                        .Add(CType(Me, LKPPropertyPackage).m_lk)
-                    Case "Raoult's Law", "IAPWS-IF97 Steam Tables"
-                End Select
-
-            End With
-
-            Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-            Dim mstr As New MemoryStream
-            mySerializer.Serialize(mstr, props)
-            Dim bytes As Byte() = mstr.ToArray()
-            mstr.Close()
-
-            ' construct length (separate into two separate bytes)    
-
-            Dim arrLen As Byte() = BitConverter.GetBytes(bytes.Length)
             Try
+
+                Dim props As New ArrayList
+
+                With props
+
+                    .Add(_availablecomps)
+                    .Add(_selectedcomps)
+                    .Add("")
+                    .Add(_tpseverity)
+                    .Add(_tpcompids)
+                    .Add(m_par)
+
+                    Dim xdata As New XDocument()
+                    xdata.AddFirst(New XElement("Data"))
+                    xdata.Element("Data").Add(DirectCast(FlashBase, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData())
+
+                    .Add(xdata.ToString)
+
+                    Select Case Me.ComponentName
+                        Case "PC-SAFT"
+                            .Add(CType(Me, PCSAFTPropertyPackage).m_pr)
+                        Case "Peng-Robinson (PR)"
+                            .Add(CType(Me, PengRobinsonPropertyPackage).m_pr)
+                        Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
+                            .Add(CType(Me, PRSV2PropertyPackage).m_pr)
+                        Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
+                            .Add(CType(Me, PRSV2VLPropertyPackage).m_pr)
+                        Case "Soave-Redlich-Kwong (SRK)"
+                            .Add(CType(Me, SRKPropertyPackage).m_pr)
+                        Case "Peng-Robinson / Lee-Kesler (PR/LK)"
+                            .Add(CType(Me, PengRobinsonLKPropertyPackage).m_pr)
+                            .Add(CType(Me, PengRobinsonLKPropertyPackage).m_lk)
+                        Case "UNIFAC"
+                            .Add(CType(Me, UNIFACPropertyPackage).m_pr)
+                        Case "UNIFAC-LL"
+                            .Add(CType(Me, UNIFACLLPropertyPackage).m_pr)
+                        Case "NRTL"
+                            .Add(CType(Me, NRTLPropertyPackage).m_pr)
+                            .Add(CType(Me, NRTLPropertyPackage).m_uni)
+                        Case "UNIQUAC"
+                            .Add(CType(Me, UNIQUACPropertyPackage).m_pr)
+                            .Add(CType(Me, UNIQUACPropertyPackage).m_uni)
+                        Case "Modified UNIFAC (Dortmund)"
+                            .Add(CType(Me, MODFACPropertyPackage).m_pr)
+                        Case "Chao-Seader"
+                            .Add(CType(Me, ChaoSeaderPropertyPackage).m_pr)
+                            .Add(CType(Me, ChaoSeaderPropertyPackage).m_lk)
+                            .Add(CType(Me, ChaoSeaderPropertyPackage).m_cs)
+                        Case "Grayson-Streed"
+                            .Add(CType(Me, GraysonStreedPropertyPackage).m_pr)
+                            .Add(CType(Me, GraysonStreedPropertyPackage).m_lk)
+                            .Add(CType(Me, GraysonStreedPropertyPackage).m_cs)
+                        Case "Lee-Kesler-Plöcker"
+                            .Add(CType(Me, LKPPropertyPackage).m_pr)
+                            .Add(CType(Me, LKPPropertyPackage).m_lk)
+                        Case "Raoult's Law", "IAPWS-IF97 Steam Tables"
+                    End Select
+
+                End With
+
+                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
+                Dim mstr As New MemoryStream
+                mySerializer.Serialize(mstr, props)
+                Dim bytes As Byte() = mstr.ToArray()
+                mstr.Close()
+
+                ' construct length (separate into two separate bytes)    
+
+                Dim arrLen As Byte() = BitConverter.GetBytes(bytes.Length)
 
                 ' Save the array in the stream    
                 pStm.Write(arrLen, arrLen.Length, IntPtr.Zero)
@@ -9184,7 +9212,10 @@ Final3:
 
             Catch p_Ex As System.Exception
 
-                Throw p_Ex
+                Dim hcode As Integer = 0
+                Dim comEx As COMException = New COMException(p_Ex.Message.ToString, p_Ex)
+                If Not IsNothing(comEx) Then hcode = comEx.ErrorCode
+                ThrowCAPEException(p_Ex, "Error", p_Ex.Message, "IPersistStreamInit", p_Ex.Source, p_Ex.StackTrace, "Save", hcode)
 
             End Try
 
@@ -10014,7 +10045,7 @@ Final3:
 
         Public Overrides ReadOnly Property Length() As Long
             Get
-                Dim stat As STATSTG
+                Dim stat As ComTypes.STATSTG
                 stat = Nothing
                 mSource.Stat(stat, 1)
                 Return stat.cbSize

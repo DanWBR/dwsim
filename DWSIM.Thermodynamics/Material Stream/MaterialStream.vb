@@ -5001,6 +5001,10 @@ Namespace Streams
             _operation = operation
             _scope = scope
 
+            If Not PropertyPackage Is Nothing Then
+                PropertyPackage.ExceptionLog += Date.Now + ": " + vbCrLf + vbCrLf + ex.ToString + vbCrLf + vbCrLf
+            End If
+
             'Throw ex
 
         End Sub

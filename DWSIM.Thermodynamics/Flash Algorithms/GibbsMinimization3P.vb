@@ -1095,12 +1095,12 @@ alt:
         End Function
 
         Function Herror(ByVal type As String, ByVal X As Double, ByVal P As Double, ByVal Vz() As Double, ByVal PP As PropertyPackages.PropertyPackage) As Object
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PH_FLASH(type, X, P, Vz, PP)
         End Function
 
         Function Serror(ByVal Tt As Double, ByVal otherargs As Object) As Double
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return OBJ_FUNC_PS_FLASH(Tt, Sf, Pf, fi)
         End Function
 
@@ -1980,7 +1980,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         Public Function FunctionValue(ByVal x() As Double) As Double
 
-            proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim pval As Double = 0.0#
             Dim fcv(n), fcl(n), fcl2(n) As Double

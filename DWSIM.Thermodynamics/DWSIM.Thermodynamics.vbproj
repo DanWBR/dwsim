@@ -137,16 +137,16 @@
     <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.designer.vb">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.designer.vb">
+      <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.vb">
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.designer.vb">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.designer.vb">
+      <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.vb">
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
@@ -322,20 +322,20 @@
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.de.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.de.resx">
+      <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.en.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.en.resx">
+      <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.es.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.es.resx">
+      <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN.resx">
-      <DependentUpon>FormConfigCAPEOPEN.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.resx">
+      <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPEN2.resx">
-      <DependentUpon>FormConfigCAPEOPEN2.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.resx">
+      <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.de.resx">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>

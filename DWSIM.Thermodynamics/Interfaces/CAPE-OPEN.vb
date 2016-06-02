@@ -1,12 +1,17 @@
 ﻿Imports CapeOpen
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports Cudafy
+Imports System.Runtime.InteropServices
 
 <System.Serializable()>
 <ComClass(CAPEOPENManager.ClassId, CAPEOPENManager.InterfaceId, CAPEOPENManager.EventsId)>
 Public Class CAPEOPENManager
 
     Implements ICapeIdentification, ICapeThermoPropertyPackageManager, ICapeUtilities
+
+    'CAPE-OPEN Error Interfaces
+    Implements ECapeUser, ECapeUnknown, ECapeRoot
+
     Implements IDisposable
 
     Public Const ClassId As String = "7f5822f2-098d-46dd-9b89-0189d666edb1"
@@ -15,6 +20,8 @@ Public Class CAPEOPENManager
 
     Private _name, _description As String
     Private _params As ParameterCollection
+
+    Private _scontext As Object
 
     Sub New()
         _name = "DWSIM Property Package Manager"
@@ -124,53 +131,76 @@ Public Class CAPEOPENManager
 
     Public Sub Initialize() Implements ICapeUtilities.Initialize
 
-        Application.EnableVisualStyles()
+        If Not Settings.InitializedCOPPM Then
 
-        My.Application.ChangeCulture("en")
-        My.Application.ChangeUICulture("en")
+            'Application.EnableVisualStyles()
 
-        _params = New ParameterCollection()
+            My.Application.ChangeCulture("en")
+            My.Application.ChangeUICulture("en")
 
-        'set CUDA params
+            _params = New ParameterCollection()
 
-        CudafyModes.Compiler = eGPUCompiler.All
-        CudafyModes.Target = GlobalSettings.Settings.CudafyTarget
+            'set CUDA params
 
-        'handler for unhandled exceptions
+            CudafyModes.Compiler = eGPUCompiler.All
+            CudafyModes.Target = GlobalSettings.Settings.CudafyTarget
 
-        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-        AddHandler Application.ThreadException, AddressOf UnhandledException
-        AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
+            'handler for unhandled exceptions
 
-        Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.InitLibraries()
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+            AddHandler Application.ThreadException, AddressOf UnhandledException
+            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
 
-        'For Each ex In exlist
-        'Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
-        'Next
+            Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.InitLibraries()
+
+            'For Each ex In exlist
+            'Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
+            'Next
+
+            Settings.InitializedCOPPM = True
+
+        End If
 
     End Sub
 
     Private Sub UnhandledException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
+
         Try
             Dim frmEx As New FormUnhandledException
             frmEx.TextBox1.Text = e.Exception.ToString
             frmEx.ex = e.Exception
             frmEx.ShowDialog()
         Finally
-
         End Try
+
+        If Settings.CAPEOPENMode Then
+            Dim hcode As Integer = 0
+            Dim comEx As COMException = New COMException(e.Exception.Message.ToString, e.Exception)
+            If Not IsNothing(comEx) Then hcode = comEx.ErrorCode
+            ThrowCAPEException(e.Exception, "Error", e.Exception.Message, "UnhandledException", e.Exception.Source, e.Exception.StackTrace, "UnhandledException", hcode)
+        End If
+
     End Sub
 
     Private Sub UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
+
         Try
             Dim frmEx As New FormUnhandledException
             frmEx.TextBox1.Text = e.ExceptionObject.ToString
             frmEx.ex = e.ExceptionObject
             frmEx.ShowDialog()
         Catch ex As Exception
-
         End Try
+
+        If Settings.CAPEOPENMode Then
+            Dim hcode As Integer = 0
+            Dim comEx As COMException = e.ExceptionObject
+            If Not IsNothing(comEx) Then hcode = comEx.ErrorCode
+            ThrowCAPEException(e.ExceptionObject, "Error", e.ExceptionObject.ToString, "UnhandledException", e.ExceptionObject.ToString, "", "UnhandledException", hcode)
+        End If
+
     End Sub
+
     Public ReadOnly Property parameters() As Object Implements ICapeUtilities.parameters
         Get
             Return _params
@@ -179,13 +209,21 @@ Public Class CAPEOPENManager
 
     <Runtime.InteropServices.ComVisible(False)> Public WriteOnly Property simulationContext() As Object Implements ICapeUtilities.simulationContext
         Set(ByVal value As Object)
-            'do nothing
+            _scontext = value
         End Set
     End Property
 
     Public Sub Terminate() Implements ICapeUtilities.Terminate
 
         Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+
+        If Not _scontext Is Nothing Then
+            If System.Runtime.InteropServices.Marshal.IsComObject(_scontext) Then
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(_scontext)
+            End If
+        End If
+
+        Me.simulationContext = Nothing
 
         Me.Dispose()
 
@@ -210,6 +248,67 @@ Public Class CAPEOPENManager
         Dispose(True)
         GC.SuppressFinalize(Me)
     End Sub
+#End Region
+
+#Region "CAPE-OPEN Error Interfaces"
+
+    Sub ThrowCAPEException(ByVal ex As Exception, ByVal name As String, ByVal description As String, ByVal interf As String, ByVal moreinfo As String, ByVal operation As String, ByVal scope As String, ByVal code As Integer)
+
+        _code = code
+        _edescription = description
+        _interfacename = interf
+        _moreinfo = moreinfo
+        _operation = operation
+        _scope = scope
+
+        Throw New CapeOpen.CapeUnknownException(ex.Message.ToArray, ex)
+
+    End Sub
+
+    Private _edescription, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer
+
+    Public ReadOnly Property Name2() As String Implements CapeOpen.ECapeRoot.Name
+        Get
+            Return Me.ComponentName
+        End Get
+    End Property
+
+    Public ReadOnly Property code() As Integer Implements CapeOpen.ECapeUser.code
+        Get
+            Return _code
+        End Get
+    End Property
+
+    Public ReadOnly Property description() As String Implements CapeOpen.ECapeUser.description
+        Get
+            Return _edescription
+        End Get
+    End Property
+
+    Public ReadOnly Property interfaceName() As String Implements CapeOpen.ECapeUser.interfaceName
+        Get
+            Return _interfacename
+        End Get
+    End Property
+
+    Public ReadOnly Property moreInfo() As String Implements CapeOpen.ECapeUser.moreInfo
+        Get
+            Return _moreinfo
+        End Get
+    End Property
+
+    Public ReadOnly Property operation() As String Implements CapeOpen.ECapeUser.operation
+        Get
+            Return _operation
+        End Get
+    End Property
+
+    Public ReadOnly Property scope() As String Implements CapeOpen.ECapeUser.scope
+        Get
+            Return _scope
+        End Get
+    End Property
+
 #End Region
 
     <System.Runtime.InteropServices.ComRegisterFunction()> _

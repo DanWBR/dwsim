@@ -92,7 +92,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub AddDefaultCompounds(compnames() As String)
 
-            MyBase.AddDefaultCompounds(New String() {"Water", "NaCl"})
+            MyBase.AddDefaultCompounds(New String() {"Water", "Sodium Chloride"})
 
         End Sub
 

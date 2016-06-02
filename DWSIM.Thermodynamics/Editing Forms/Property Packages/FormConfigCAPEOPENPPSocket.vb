@@ -6,7 +6,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Linq
 Imports DWSIM.Interfaces.Interfaces
 
-<System.Serializable()> Public Class FormConfigCAPEOPEN
+<System.Serializable()> Public Class FormConfigCAPEOPENPPSocket
 
     Inherits FormConfigPropertyPackageBase
 

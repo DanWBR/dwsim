@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormConfigCAPEOPEN
+Partial Class FormConfigCAPEOPENPPSocket
 
     Inherits FormConfigPropertyPackageBase
 
@@ -24,7 +24,7 @@ Partial Class FormConfigCAPEOPEN
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPEN))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPENPPSocket))
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lblAbout2 = New System.Windows.Forms.Label()
         Me.lblDesc2 = New System.Windows.Forms.Label()

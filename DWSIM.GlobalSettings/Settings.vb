@@ -39,13 +39,11 @@ Public Class Settings
     Public Shared Property ServerIPAddress As String
     Public Shared Property ServerPort As Integer
     Public Shared Property CurrentCulture As String = "en"
-
     Public Shared DefaultEditFormLocation As Integer = 8
     Public Shared SolverBreakOnException As Boolean = False
-
-    Shared Property SelectedGPU As String
-
-    Shared Property CultureInfo As String
+    Public Shared Property SelectedGPU As String
+    Public Shared Property CultureInfo As String
+    Public Shared Property InitializedCOPPM As Boolean = False
 
     Shared Sub LoadSettings(Optional ByVal configfile As String = "")
 

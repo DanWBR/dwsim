@@ -240,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 int_count += 1
 
-                proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 'Loop Until int_count > MaximumIterations
 
@@ -513,7 +513,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
                     End If
 
-                    proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop
 
