@@ -447,6 +447,7 @@
     <EmbeddedResource Include="Assets\uniquac.dat" />
     <EmbeddedResource Include="Assets\uniquacip.dat" />
     <None Include="app.config" />
+    <EmbeddedResource Include="Assets\swreactions.dwrxm" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

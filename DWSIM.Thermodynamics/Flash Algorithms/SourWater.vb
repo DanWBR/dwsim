@@ -41,11 +41,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
-        Public Property Reactions As List(Of Interfaces.IReaction)
-
-        Sub New()
-            MyBase.New()
-        End Sub
+        Public Property Reactions As New List(Of Interfaces.IReaction)
 
         Public Overrides ReadOnly Property InternalUseOnly As Boolean
             Get
@@ -75,20 +71,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End Get
         End Property
 
-        Sub New(rx As List(Of Interfaces.IReaction))
+        Sub New()
 
+            MyBase.New()
 
-            'Dim rfile As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "reactions" & Path.DirectorySeparatorChar & "Sour Water Reaction Set.dwrxm"
-
-            'Dim xdoc As XDocument = XDocument.Load(rfile)
-            'Dim data As List(Of XElement) = xdoc.Element("DWSIM_Reaction_Data").Elements.ToList
-            'For Each xel As XElement In data
-            '    Dim obj As Interfaces.IReaction
-            '    DirectCast(obj, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
-            '    Reactions.Add(obj)
-            'Next
-
-            Reactions = rx
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.swreactions.dwrxm")
+                Dim xdoc As XDocument = XDocument.Load(filestr)
+                Dim data As List(Of XElement) = xdoc.Element("DWSIM_Reaction_Data").Elements.ToList
+                For Each xel As XElement In data
+                    Dim obj As New BaseClasses.Reaction()
+                    DirectCast(obj, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
+                    Reactions.Add(obj)
+                Next
+            End Using
 
             '   i   Name                            Equation
             '

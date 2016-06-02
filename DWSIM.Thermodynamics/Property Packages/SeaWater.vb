@@ -80,7 +80,8 @@ Namespace PropertyPackages
                 For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     constprops.Add(su.ConstantProperties)
                 Next
-                Return New Auxiliary.FlashAlgorithms.Seawater With {.CompoundProperties = constprops}
+                FlashAlgorithm = New Auxiliary.FlashAlgorithms.Seawater With {.CompoundProperties = constprops}
+                Return FlashAlgorithm
             End Get
         End Property
 
@@ -92,7 +93,7 @@ Namespace PropertyPackages
 
         Public Overrides Sub AddDefaultCompounds(compnames() As String)
 
-            MyBase.AddDefaultCompounds(New String() {"Water", "Sodium Chloride"})
+            MyBase.AddDefaultCompounds(New String() {"Water", "Salt"})
 
         End Sub
 

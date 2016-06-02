@@ -59,7 +59,8 @@ Namespace PropertyPackages
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
-                Return New Auxiliary.FlashAlgorithms.BlackOil
+                FlashAlgorithm = New Auxiliary.FlashAlgorithms.BlackOil
+                Return FlashAlgorithm
             End Get
         End Property
 

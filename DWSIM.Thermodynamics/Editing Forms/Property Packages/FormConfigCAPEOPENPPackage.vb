@@ -111,11 +111,22 @@ Public Class FormConfigCAPEOPENPPackage
 
         End If
 
-        AddFlashAlgorithms()
+        If Not TypeOf _pp Is SeawaterPropertyPackage And
+            Not TypeOf _pp Is SteamTablesPropertyPackage And
+            Not TypeOf _pp Is SourWaterPropertyPackage Then
 
-        ComboBoxFlashAlg.Items.Clear()
-        ComboBoxFlashAlg.Items.AddRange(FlashAlgorithms.Keys.ToArray)
-        ComboBoxFlashAlg.SelectedItem = _pp.FlashBase.Name
+            AddFlashAlgorithms()
+
+            ComboBoxFlashAlg.Items.Clear()
+            ComboBoxFlashAlg.Items.AddRange(FlashAlgorithms.Keys.ToArray)
+            ComboBoxFlashAlg.SelectedItem = _pp.FlashBase.Name
+
+        Else
+
+            ComboBoxFlashAlg.Enabled = False
+            btnConfigFlashAlg.Enabled = False
+
+        End If
 
         Me.loaded = True
 
@@ -311,7 +322,7 @@ Public Class FormConfigCAPEOPENPPackage
         GlobalSettings.Settings.EnableGPUProcessing = chkEnableGPUProcessing.Checked
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnConfigFlashAlg.Click
 
         Dim fa As Auxiliary.FlashAlgorithms.FlashAlgorithm = _pp.FlashBase
         Dim f As New Thermodynamics.FlashAlgorithmConfig() With {.Settings = fa.FlashSettings,

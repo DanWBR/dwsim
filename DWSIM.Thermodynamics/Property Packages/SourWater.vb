@@ -73,7 +73,8 @@ Namespace PropertyPackages
                 For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                     constprops.Add(su.ConstantProperties)
                 Next
-                Return New Auxiliary.FlashAlgorithms.SourWater(Nothing) With {.CompoundProperties = constprops}
+                FlashAlgorithm = New Auxiliary.FlashAlgorithms.SourWater() With {.CompoundProperties = constprops}
+                Return FlashAlgorithm
             End Get
         End Property
 

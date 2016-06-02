@@ -266,7 +266,11 @@ Namespace PropertyPackages
 
         Public Overrides Sub AddDefaultCompounds(compnames() As String)
 
-            MyBase.AddDefaultCompounds(New String() {"Water", "Ethanol"})
+            If TypeOf Me Is SourWaterPropertyPackage Then
+                MyBase.AddDefaultCompounds(compnames)
+            Else
+                MyBase.AddDefaultCompounds(New String() {"Water", "Ethanol"})
+            End If
 
         End Sub
 

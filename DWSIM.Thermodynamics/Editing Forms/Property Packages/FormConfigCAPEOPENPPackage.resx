@@ -394,7 +394,7 @@
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.20209, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.26294, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -402,37 +402,37 @@
   <data name="&gt;&gt;FaTabStripItem1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Button5.AutoSize" type="System.Boolean, mscorlib">
+  <data name="btnConfigFlashAlg.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Button5.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+  <data name="btnConfigFlashAlg.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <data name="Button5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnConfigFlashAlg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnConfigFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
     <value>482, 51</value>
   </data>
-  <data name="Button5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnConfigFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 23</value>
   </data>
-  <data name="Button5.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnConfigFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="Button5.Text" xml:space="preserve">
+  <data name="btnConfigFlashAlg.Text" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="&gt;&gt;Button5.Name" xml:space="preserve">
-    <value>Button5</value>
+  <data name="&gt;&gt;btnConfigFlashAlg.Name" xml:space="preserve">
+    <value>btnConfigFlashAlg</value>
   </data>
-  <data name="&gt;&gt;Button5.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnConfigFlashAlg.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnConfigFlashAlg.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;Button5.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnConfigFlashAlg.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
@@ -886,7 +886,7 @@
     <value>FaTabStripItem7</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.20209, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.26294, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1075,7 +1075,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.20209, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.26294, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1099,7 +1099,7 @@
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5997.20209, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.5997.26294, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1251,26 +1251,17 @@
   <data name="Column12.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="Column12.Width" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <metadata name="Column13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column13.HeaderText" xml:space="preserve">
     <value>Column13</value>
   </data>
-  <data name="Column13.Width" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <metadata name="Column14.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column14.HeaderText" xml:space="preserve">
     <value>Column14</value>
-  </data>
-  <data name="Column14.Width" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <metadata name="Column15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1283,9 +1274,6 @@
   </metadata>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Column1</value>
-  </data>
-  <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="dgvdb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -1351,7 +1339,7 @@
     <value>FaTabStripItem5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.20209, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.5997.26294, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1556,6 +1544,6 @@
     <value>FormConfigCAPEOPENPPackage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5997.20210, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5997.26479, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

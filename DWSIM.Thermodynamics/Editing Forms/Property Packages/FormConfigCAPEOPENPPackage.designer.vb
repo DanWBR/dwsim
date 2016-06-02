@@ -42,7 +42,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.btnConfigFlashAlg = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -232,7 +232,7 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.Button5)
+        Me.GroupBox5.Controls.Add(Me.btnConfigFlashAlg)
         Me.GroupBox5.Controls.Add(Me.Label4)
         Me.GroupBox5.Controls.Add(Me.ComboBoxFlashAlg)
         Me.GroupBox5.Controls.Add(Me.Button3)
@@ -241,11 +241,11 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
-        'Button5
+        'btnConfigFlashAlg
         '
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnConfigFlashAlg, "btnConfigFlashAlg")
+        Me.btnConfigFlashAlg.Name = "btnConfigFlashAlg"
+        Me.btnConfigFlashAlg.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -572,7 +572,7 @@ Partial Class FormConfigCAPEOPENPPackage
     Public WithEvents ComboBoxFlashAlg As System.Windows.Forms.ComboBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Public WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents btnConfigFlashAlg As System.Windows.Forms.Button
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents tbErrorLog As System.Windows.Forms.TextBox
     Public WithEvents cbSIMD As System.Windows.Forms.CheckBox
