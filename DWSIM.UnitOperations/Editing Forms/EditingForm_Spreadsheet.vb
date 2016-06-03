@@ -87,13 +87,13 @@ Public Class EditingForm_SpreadsheetUO
             cbOutlet4.Items.AddRange(mslist)
 
             If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.InputConnectors(1).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.InputConnectors(2).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Tag
-            If .GraphicObject.InputConnectors(3).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Tag
+            If .GraphicObject.InputConnectors(1).IsAttached Then cbInlet2.SelectedItem = .GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom.Tag
+            If .GraphicObject.InputConnectors(2).IsAttached Then cbInlet3.SelectedItem = .GraphicObject.InputConnectors(2).AttachedConnector.AttachedFrom.Tag
+            If .GraphicObject.InputConnectors(3).IsAttached Then cbInlet4.SelectedItem = .GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
             If .GraphicObject.OutputConnectors(1).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
-            If .GraphicObject.OutputConnectors(2).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
-            If .GraphicObject.OutputConnectors(3).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.OutputConnectors(2).IsAttached Then cbOutlet3.SelectedItem = .GraphicObject.OutputConnectors(2).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.OutputConnectors(3).IsAttached Then cbOutlet4.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
 
             Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
 
@@ -409,7 +409,7 @@ Public Class EditingForm_SpreadsheetUO
 
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         OpenFileDialog1.FileName = TbFileName.Text
-        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *xls; *.ods"
+        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xls; *.ods"
 
         OpenFileDialog1.ValidateNames = True
         OpenFileDialog1.CheckFileExists = True
@@ -439,7 +439,7 @@ Public Class EditingForm_SpreadsheetUO
         Dim FileName As String = SimObject.GraphicObject.Name
 
         OpenFileDialog1.Title = "New Filename"
-        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *xls; *.ods"
+        OpenFileDialog1.Filter = "Spreadsheet files|*.xlsx; *.xls; *.ods"
         OpenFileDialog1.ValidateNames = False
         OpenFileDialog1.CheckFileExists = False
         OpenFileDialog1.CheckPathExists = True

@@ -135,6 +135,12 @@
     <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_Flowsheet.Designer.vb">
+      <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Flowsheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Spreadsheet.Designer.vb">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </Compile>
@@ -249,6 +255,18 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.designer.vb">
+      <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.designer.vb">
+      <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -314,6 +332,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.en.resx">
+      <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.resx">
+      <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.en.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
@@ -455,6 +479,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_CustomUO_ScriptEditor_Mono.resx">
       <DependentUpon>EditingForm_CustomUO_ScriptEditor_Mono.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.de.resx">
+      <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.en.resx">
+      <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.es.resx">
+      <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Editor.resx">
+      <DependentUpon>EditingForm_Flowsheet_Editor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.resx">
+      <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -766,6 +805,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tag_blue.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

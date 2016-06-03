@@ -2872,4 +2872,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
+    Public Function GetSurface() As Object Implements IFlowsheetBag.GetSurface
+        Return Me.FormSurface
+    End Function
+
 End Class

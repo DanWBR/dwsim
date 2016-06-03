@@ -76,6 +76,8 @@ Public Interface IFlowsheetBag
 
     Sub UpdateProcessData(xdoc As XDocument)
 
+    Function GetSurface() As Object
+
 End Interface
 
 Public Interface IFlowsheetGUI

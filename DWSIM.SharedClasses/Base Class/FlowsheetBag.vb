@@ -11,6 +11,8 @@
         Dim _re As Dictionary(Of String, IReaction)
         Dim _rs As Dictionary(Of String, IReactionSet)
 
+        Dim _surface As Object
+
         Sub New(so As Dictionary(Of String, ISimulationObject),
                 go As Dictionary(Of String, IGraphicObject),
                 co As Dictionary(Of String, ICompoundConstantProperties),
@@ -70,6 +72,10 @@
         Public Overridable Sub UpdateProcessData(xdoc As XDocument) Implements IFlowsheetBag.UpdateProcessData
             Throw New NotImplementedException
         End Sub
+
+        Public Function GetSurface() As Object Implements IFlowsheetBag.GetSurface
+            Return _surface
+        End Function
 
     End Class
 
