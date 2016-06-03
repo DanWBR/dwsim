@@ -250,14 +250,15 @@ Partial Class FormConfigCAPEOPENPPackage
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label4.Name = "Label4"
         '
         'ComboBoxFlashAlg
         '
         Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
         Me.ComboBoxFlashAlg.FormattingEnabled = True
         Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
-        resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
         Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
         '
         'Button3
@@ -269,6 +270,7 @@ Partial Class FormConfigCAPEOPENPPackage
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label1.Name = "Label1"
         '
         'GroupBox7
@@ -306,13 +308,14 @@ Partial Class FormConfigCAPEOPENPPackage
         'cbGPU
         '
         Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGPU.FormattingEnabled = True
         resources.ApplyResources(Me.cbGPU, "cbGPU")
+        Me.cbGPU.FormattingEnabled = True
         Me.cbGPU.Name = "cbGPU"
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label9.Name = "Label9"
         '
         'chkEnableGPUProcessing
@@ -323,13 +326,14 @@ Partial Class FormConfigCAPEOPENPPackage
         'cbParallelism
         '
         Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbParallelism.FormattingEnabled = True
         resources.ApplyResources(Me.cbParallelism, "cbParallelism")
+        Me.cbParallelism.FormattingEnabled = True
         Me.cbParallelism.Name = "cbParallelism"
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label11.Name = "Label11"
         '
         'chkEnableParallelCalcs
@@ -351,12 +355,14 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'lblDescription
         '
+        Me.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.System
         resources.ApplyResources(Me.lblDescription, "lblDescription")
         Me.lblDescription.Name = "lblDescription"
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label5.Name = "Label5"
         '
         'GroupBox3
@@ -375,11 +381,13 @@ Partial Class FormConfigCAPEOPENPPackage
         'lblName
         '
         resources.ApplyResources(Me.lblName, "lblName")
+        Me.lblName.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblName.Name = "lblName"
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label8.Name = "Label8"
         '
         'FaTabStripItem5

@@ -304,15 +304,17 @@ Public Class FormConfigCAPEOPENPPackage
             Else
                 GlobalSettings.Settings.CudafyTarget = eGPUType.OpenCL
             End If
-            For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
-                    GlobalSettings.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
-                    GlobalSettings.Settings.CudafyDeviceID = prop.DeviceId
-                    GetCUDACaps(prop)
-                    Exit For
-                End If
-            Next
-            MessageBox.Show("Changes will be effective upon restart.")
+            Try
+                For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
+                    If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
+                        GlobalSettings.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
+                        GlobalSettings.Settings.CudafyDeviceID = prop.DeviceId
+                        GetCUDACaps(prop)
+                        Exit For
+                    End If
+                Next
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 

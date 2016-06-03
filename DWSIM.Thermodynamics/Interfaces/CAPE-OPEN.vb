@@ -133,7 +133,7 @@ Public Class CAPEOPENManager
 
         If Not Settings.InitializedCOPPM Then
 
-            'Application.EnableVisualStyles()
+            Application.EnableVisualStyles()
 
             My.Application.ChangeCulture("en")
             My.Application.ChangeUICulture("en")
