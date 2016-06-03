@@ -411,9 +411,6 @@
   <data name="&gt;&gt;FaTabStripItem1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnConfigFlashAlg.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="btnConfigFlashAlg.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
@@ -427,7 +424,7 @@
     <value>482, 51</value>
   </data>
   <data name="btnConfigFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 22</value>
+    <value>68, 23</value>
   </data>
   <data name="btnConfigFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -541,7 +538,7 @@
     <value>209, 21</value>
   </data>
   <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 23</value>
+    <value>341, 23</value>
   </data>
   <data name="Button3.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1284,17 +1281,26 @@
   <data name="Column12.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
+  <data name="Column12.Width" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <metadata name="Column13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column13.HeaderText" xml:space="preserve">
     <value>Column13</value>
   </data>
+  <data name="Column13.Width" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <metadata name="Column14.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column14.HeaderText" xml:space="preserve">
     <value>Column14</value>
+  </data>
+  <data name="Column14.Width" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <metadata name="Column15.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1307,6 +1313,9 @@
   </metadata>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Column1</value>
+  </data>
+  <data name="Column1.Width" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="dgvdb.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -1580,6 +1589,6 @@
     <value>FormConfigCAPEOPENPPackage</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5997.37350, Culture=neutral, PublicKeyToken=null</value>
+    <value>DWSIM.Thermodynamics.FormConfigPropertyPackageBase, DWSIM.Thermodynamics, Version=4.0.5997.37459, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
