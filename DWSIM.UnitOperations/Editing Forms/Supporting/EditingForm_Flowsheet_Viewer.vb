@@ -7,7 +7,7 @@
     Private Sub FlowsheetUOViewerForm_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         fsuo.Fsheet.GetSurface.Flowsheet = fsuo.Fsheet
-        Me.Controls.Add(fsuo.Fsheet.GetSurface)
+        Me.Controls.Add(fsuo.Fsheet.GetSurface.FlowsheetDesignSurface)
         fsuo.Fsheet.GetSurface.FlowsheetDesignSurface.Zoom = 1.0#
         fsuo.Fsheet.GetSurface.FlowsheetDesignSurface.Center()
         fsuo.Fsheet.GetSurface.FlowsheetDesignSurface.Invalidate()

@@ -22,6 +22,8 @@
 
     Property FilePath As String
 
+    Property RedirectMessages As Boolean
+
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)
@@ -54,7 +56,19 @@
 
     Function AddObject(t As Enums.GraphicObjects.ObjectType, xcoord As Integer, ycoord As Integer, tag As String) As ISimulationObject
 
+    Sub AddGraphicObject(obj As IGraphicObject)
+
+    Sub AddSimulationObject(obj As ISimulationObject)
+
     Function GetUtility(uttype As Enums.FlowsheetUtility) As IAttachedUtility
+
+    Function GetSurface() As Object
+
+    Function GetNewInstance() As IFlowsheet
+
+    Sub AddPropertyPackage(obj As IPropertyPackage)
+
+    Property MasterFlowsheet As IFlowsheet
 
 End Interface
 

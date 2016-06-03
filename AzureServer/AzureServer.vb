@@ -243,7 +243,7 @@ Module AzureServer
 
     Sub ProcessData(bytes As Byte(), requestID As String)
         Using bytestream As New MemoryStream(bytes)
-            Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream)
+            Using form As FormFlowsheet = DWSIM.UnitOperations.UnitOperations.Flowsheet.InitializeFlowsheet(bytestream, New FormFlowsheet)
                 If Not solutions.ContainsKey(form.Options.Key) Then
                     FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, 1, ts)
                     Using retbytes As MemoryStream = DWSIM.UnitOperations.UnitOperations.Flowsheet.ReturnProcessData(form)

@@ -65,6 +65,8 @@ Namespace UnitOperations
 
         Inherits SharedClasses.UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_FlowsheetUO
+
         Public Property SimulationFile As String = ""
         <System.Xml.Serialization.XmlIgnore> Public Property Initialized As Boolean = False
         Public Property InitializeOnLoad As Boolean = False
@@ -72,7 +74,7 @@ Namespace UnitOperations
         Public Property MassTransferMode As FlowsheetUOMassTransferMode = FlowsheetUOMassTransferMode.CompoundMassFlows
         Public Property InputParams As Dictionary(Of String, FlowsheetUOParameter)
         Public Property OutputParams As Dictionary(Of String, FlowsheetUOParameter)
-        <System.Xml.Serialization.XmlIgnore> <System.NonSerialized> Public Fsheet As SharedClasses.Flowsheet.FlowsheetBag = Nothing
+        <System.Xml.Serialization.XmlIgnore> <System.NonSerialized> Public Fsheet As Interfaces.IFlowsheet
         Public Property InputConnections As List(Of String)
         Public Property OutputConnections As List(Of String)
         Public Property MassBalanceError As Double = 0.0#
@@ -92,9 +94,6 @@ Namespace UnitOperations
 
             InputConnections = New List(Of String) From {"", "", "", "", "", "", "", "", "", ""}
             OutputConnections = New List(Of String) From {"", "", "", "", "", "", "", "", "", ""}
-
-
-
 
         End Sub
 
@@ -119,7 +118,7 @@ Namespace UnitOperations
             'create mappings
             If CompoundMappings.Count = 0 Then
                 For Each c In Me.FlowSheet.SelectedCompounds.Values
-                    If Me.Fsheet.Compounds.ContainsKey(c.Name) Then CompoundMappings.Add(c.Name, c.Name) Else CompoundMappings.Add(c.Name, "")
+                    If Me.Fsheet.SelectedCompounds.ContainsKey(c.Name) Then CompoundMappings.Add(c.Name, c.Name) Else CompoundMappings.Add(c.Name, "")
                 Next
             End If
 
@@ -127,7 +126,7 @@ Namespace UnitOperations
                 'update mappings
                 For Each c In Me.FlowSheet.SelectedCompounds.Values
                     If Not CompoundMappings.ContainsKey(c.Name) Then
-                        If Me.Fsheet.Compounds.ContainsKey(c.Name) Then CompoundMappings.Add(c.Name, c.Name) Else CompoundMappings.Add(c.Name, "")
+                        If Me.Fsheet.SelectedCompounds.ContainsKey(c.Name) Then CompoundMappings.Add(c.Name, c.Name) Else CompoundMappings.Add(c.Name, "")
                     End If
                 Next
             End If
@@ -146,106 +145,51 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Shared Function InitializeFlowsheet(path As String) As IFlowsheetBag
-            Return InitializeFlowsheetInternal(XDocument.Load(path))
+        Public Shared Function InitializeFlowsheet(path As String, form As IFlowsheet) As IFlowsheetBag
+            Return InitializeFlowsheetInternal(XDocument.Load(path), form)
         End Function
 
-        Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream) As IFlowsheetBag
+        Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet) As IFlowsheetBag
             Using decompressedstream As New IO.MemoryStream
                 compressedstream.Position = 0
                 Using gzs As New IO.BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Decompress, True), 64 * 1024)
                     gzs.CopyTo(decompressedstream)
                     gzs.Close()
                     decompressedstream.Position = 0
-                    Return InitializeFlowsheetInternal(XDocument.Load(decompressedstream))
+                    Return InitializeFlowsheetInternal(XDocument.Load(decompressedstream), form)
                 End Using
             End Using
         End Function
 
-        Private Shared Function InitializeFlowsheetInternal(xdoc As XDocument) As IFlowsheetBag
+        Private Shared Function InitializeFlowsheetInternal(xdoc As XDocument, fs As IFlowsheet)
+
+            For Each xel1 As XElement In xdoc.Descendants
+                SharedClasses.Utility.UpdateElement(xel1)
+            Next
 
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
             Dim excs As New Concurrent.ConcurrentBag(Of Exception)
 
-            Dim form As New FlowsheetBag(New Dictionary(Of String, Interfaces.ISimulationObject),
-                                         New Dictionary(Of String, Interfaces.IGraphicObject),
-                                         New Dictionary(Of String, Interfaces.ICompoundConstantProperties),
-                                         New Dictionary(Of String, Interfaces.IPropertyPackage),
-                                         New Dictionary(Of String, Interfaces.IReaction),
-                                         New Dictionary(Of String, Interfaces.IReactionSet))
+            Try
+                Dim el = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("FlashAlgorithms")
+                If Not el Is Nothing Then
+                    For Each xel As XElement In el.Elements
+                        Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                        obj.LoadData(xel.Elements.ToList)
+                        fs.FlowsheetOptions.FlashAlgorithms.Add(obj)
+                    Next
+                Else
+                    fs.FlowsheetOptions.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
+                End If
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
+            End Try
 
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
-            For Each xel As XElement In data
-                Try
-                    Dim obj As GraphicObject = Nothing
-                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                    If obj Is Nothing Then
-                        obj = GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value)
-                    End If
-                    obj.LoadData(xel.Elements.ToList)
-                    obj.CreateConnectors(0, 0)
-                    form.GraphicObjects.Add(obj.Name, obj)
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
-                End Try
-            Next
-
-            For Each xel As XElement In data
-                Try
-                    Dim id As String = xel.Element("Name").Value
-                    If id <> "" Then
-                        If Not form.GraphicObjects.ContainsKey(id) Then
-                            Dim i As Integer = 0
-                            For Each xel2 As XElement In xel.Element("InputConnectors").Elements
-                                If xel2.@IsAttached = True Then
-                                    form.GraphicObjects(id).InputConnectors(i).ConnectorName = xel2.@AttachedFromObjID & "|" & xel2.@AttachedFromConnIndex
-                                    form.GraphicObjects(id).InputConnectors(i).Type = [Enum].Parse(form.GraphicObjects(id).InputConnectors(i).Type.GetType, xel2.@ConnType)
-                                End If
-                                i += 1
-                            Next
-                        End If
-                    End If
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
-                End Try
-            Next
-
-            For Each xel As XElement In data
-                Try
-                    Dim id As String = xel.Element("Name").Value
-                    If id <> "" Then
-                        If Not form.GraphicObjects(id) Is Nothing Then
-                            For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
-                                If xel2.@IsAttached = True Then
-                                    Dim objToID = xel2.@AttachedToObjID
-                                    If objToID <> "" Then
-                                        Dim fromidx As Integer = -1
-                                        Dim cp As ConnectionPoint = (From cp2 As ConnectionPoint In form.GraphicObjects(objToID).InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = form.GraphicObjects(id).Name).SingleOrDefault
-                                        If Not cp Is Nothing Then
-                                            fromidx = cp.ConnectorName.Split("|")(1)
-                                        End If
-                                        'ConnectObject(obj, objTo, fromidx, xel2.@AttachedToConnIndex)
-                                    End If
-                                End If
-                            Next
-                            For Each xel2 As XElement In xel.Element("EnergyConnector").Elements
-                                If xel2.@IsAttached = True Then
-                                    Dim objToID = xel2.@AttachedToObjID
-                                    If objToID <> "" Then
-                                        'ConnectObject(obj, objTo, -1, xel2.@AttachedToConnIndex)
-                                    End If
-                                End If
-                            Next
-                        End If
-                    End If
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
-                End Try
-            Next
-
+            AddGraphicObjects(fs, data, excs)
+    
             data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
             Dim complist As New Concurrent.ConcurrentBag(Of ConstantProperties)
@@ -263,7 +207,7 @@ Namespace UnitOperations
             Dim orderedlist = complist.OrderBy(Function(o) o.Molar_Weight)
 
             For Each obj In orderedlist
-                form.Compounds.Add(obj.Name, obj)
+                fs.SelectedCompounds.Add(obj.Name, obj)
             Next
 
             complist = Nothing
@@ -273,12 +217,12 @@ Namespace UnitOperations
 
             For Each xel As XElement In data
                 Try
-                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As PropertyPackage = Activator.CreateInstance(t)
+                    xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
+                    Dim obj As PropertyPackage = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
                     obj.LoadData(xel.Elements.ToList)
                     Dim newID As String = Guid.NewGuid.ToString
-                    If form.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
-                    form.PropertyPackages.Add(obj.UniqueID, obj)
+                    If fs.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
+                    fs.AddPropertyPackage(obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Property Package Information", ex))
                 End Try
@@ -291,16 +235,20 @@ Namespace UnitOperations
             For Each xel In data
                 Try
                     Dim id As String = xel.<Name>.Value
-                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                    Dim obj As SharedClasses.UnitOperations.BaseClass = Activator.CreateInstance(t)
-                    Dim gobj As IGraphicObject = form.GraphicObjects(obj.Name)
+                    Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+                    If xel.Element("Type").Value.Contains("MaterialStream") Then
+                        obj = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        obj = Resolver.ReturnInstance(xel.Element("Type").Value)
+                    End If
+                    Dim gobj As IGraphicObject = fs.GraphicObjects(id)
                     obj.GraphicObject = gobj
-                    'obj.SetFlowsheet(form)
+                    obj.SetFlowsheet(fs)
                     If Not gobj Is Nothing Then
                         obj.LoadData(xel.Elements.ToList)
                         If TypeOf obj Is MaterialStream Then
                             For Each phase As BaseClasses.Phase In DirectCast(obj, MaterialStream).Phases.Values
-                                For Each c As ICompoundConstantProperties In form.Compounds.Values
+                                For Each c As ICompoundConstantProperties In fs.SelectedCompounds.Values
                                     phase.Compounds(c.Name).ConstantProperties = c
                                 Next
                             Next
@@ -313,14 +261,7 @@ Namespace UnitOperations
             Next
 
             For Each obj In objlist
-                Try
-                    Dim id = obj.Name
-                    Dim gobj = obj.GraphicObject
-                    form.SimulationObjects.Add(id, obj)
-                    'form.GraphicObjects.Add(id, gobj)
-                Catch ex As Exception
-                    excs.Add(New Exception("Error Loading Unit Operation Information", ex))
-                End Try
+                fs.AddSimulationObject(obj)
             Next
 
             'For Each so In form.SimulationObjects.Values
@@ -360,15 +301,13 @@ Namespace UnitOperations
             '    End Try
             'Next
 
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
-
             data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
 
             For Each xel As XElement In data
                 Try
                     Dim obj As New ReactionSet()
                     obj.LoadData(xel.Elements.ToList)
-                    form.ReactionSets.Add(obj.ID, obj)
+                    If Not fs.ReactionSets.ContainsKey(obj.ID) Then fs.ReactionSets.Add(obj.ID, obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Reaction Set Information", ex))
                 End Try
@@ -376,27 +315,132 @@ Namespace UnitOperations
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions").Elements.ToList
 
+            fs.Reactions.Clear()
             For Each xel As XElement In data
                 Try
                     Dim obj As New Reaction()
                     obj.LoadData(xel.Elements.ToList)
-                    form.Reactions.Add(obj.ID, obj)
+                    fs.Reactions.Add(obj.ID, obj)
                 Catch ex As Exception
                     excs.Add(New Exception("Error Loading Reaction Information", ex))
                 End Try
             Next
 
-            For Each pp As PropertyPackages.PropertyPackage In form.PropertyPackages.Values
+            If excs.Count > 0 Then Throw New AggregateException(excs).Flatten Else Return fs
+
+        End Function
+
+        Shared Sub AddGraphicObjects(fs As IFlowsheet, data As List(Of XElement), excs As Concurrent.ConcurrentBag(Of Exception),
+                       Optional ByVal pkey As String = "", Optional ByVal shift As Integer = 0, Optional ByVal reconnectinlets As Boolean = False)
+
+            Dim objcount As Integer, searchtext As String
+
+            For Each xel As XElement In data
                 Try
-                    'If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
+                    xel.Element("Type").Value = xel.Element("Type").Value.Replace("Microsoft.MSDN.Samples.GraphicObjects", "DWSIM.DrawingTools.GraphicObjects")
+                    Dim obj As GraphicObject = Nothing
+                    Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
+                    If Not t Is Nothing Then obj = Activator.CreateInstance(t)
+                    If obj Is Nothing Then obj = DrawingTools.GraphicObjects.GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                    If Not obj Is Nothing Then
+                        obj.LoadData(xel.Elements.ToList)
+                        obj.Name = pkey & obj.Name
+                        obj.X += shift
+                        obj.Y += shift
+                        If pkey <> "" Then
+                            searchtext = obj.Tag.Split("(")(0).Trim()
+                            objcount = (From go As GraphicObject In fs.GraphicObjects.Values Select go Where go.Tag.Equals(obj.Tag)).Count
+                            If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
+                        End If
+                        If TypeOf obj Is DistillationColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or
+                            TypeOf obj Is RefluxedAbsorberGraphic Or TypeOf obj Is ReboiledAbsorberGraphic Or TypeOf obj Is CapeOpenUOGraphic Then
+                            obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
+                        Else
+                            If obj.Name = "" Then obj.Name = obj.Tag
+                            obj.CreateConnectors(0, 0)
+                        End If
+                        fs.AddGraphicObject(obj)
+                    End If
                 Catch ex As Exception
-                    excs.Add(New Exception("Error Reconfiguring Property Package", ex))
+                    excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
                 End Try
             Next
 
-            If excs.Count > 0 Then Throw New AggregateException(excs).Flatten Else Return form
+            For Each xel As XElement In data
+                Try
+                    Dim id As String = pkey & xel.Element("Name").Value
+                    If id <> "" Then
+                        Dim obj As GraphicObject = (From go As GraphicObject In fs.GraphicObjects.Values Where go.Name = id).SingleOrDefault
+                        If obj Is Nothing Then obj = (From go As GraphicObject In fs.GraphicObjects.Values Where go.Name = xel.Element("Name").Value).SingleOrDefault
+                        If Not obj Is Nothing Then
+                            Dim i As Integer = 0
+                            For Each xel2 As XElement In xel.Element("InputConnectors").Elements
+                                If xel2.@IsAttached = True Then
+                                    obj.InputConnectors(i).ConnectorName = pkey & xel2.@AttachedFromObjID & "|" & xel2.@AttachedFromConnIndex
+                                    obj.InputConnectors(i).Type = [Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType)
+                                    If reconnectinlets Then
+                                        Dim objFrom As GraphicObject = (From go As GraphicObject In fs.GraphicObjects.Values Where go.Name = xel2.@AttachedFromObjID).SingleOrDefault
+                                        If Not objFrom Is Nothing Then
+                                            If Not objFrom.OutputConnectors(xel2.@AttachedFromConnIndex).IsAttached Then
+                                                fs.ConnectObjects(objFrom, obj, xel2.@AttachedFromConnIndex, xel2.@AttachedToConnIndex)
+                                            End If
+                                        End If
+                                    End If
+                                End If
+                                i += 1
+                            Next
+                        End If
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
+                End Try
+            Next
 
-        End Function
+            For Each xel As XElement In data
+                Try
+                    Dim id As String = pkey & xel.Element("Name").Value
+                    If id <> "" Then
+                        Dim obj As GraphicObject = (From go As GraphicObject In
+                                                                fs.GraphicObjects.Values Where go.Name = id).SingleOrDefault
+                        If Not obj Is Nothing Then
+                            For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
+                                If xel2.@IsAttached = True Then
+                                    Dim objToID = pkey & xel2.@AttachedToObjID
+                                    If objToID <> "" Then
+                                        Dim objTo As GraphicObject = (From go As GraphicObject In
+                                                                                        fs.GraphicObjects.Values Where go.Name = objToID).SingleOrDefault
+                                        If objTo Is Nothing Then objTo = (From go As GraphicObject In
+                                                                                        fs.GraphicObjects.Values Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
+                                        Dim fromidx As Integer = -1
+                                        Dim cp As ConnectionPoint = (From cp2 As ConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = obj.Name).SingleOrDefault
+                                        If cp Is Nothing Then cp = (From cp2 As ConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = xel2.@AttachedToObjID).SingleOrDefault
+                                        If Not cp Is Nothing Then
+                                            fromidx = cp.ConnectorName.Split("|")(1)
+                                        End If
+                                        If Not obj Is Nothing And Not objTo Is Nothing Then fs.ConnectObjects(obj, objTo, fromidx, xel2.@AttachedToConnIndex)
+                                    End If
+                                End If
+                            Next
+                            For Each xel2 As XElement In xel.Element("EnergyConnector").Elements
+                                If xel2.@IsAttached = True Then
+                                    Dim objToID = pkey & xel2.@AttachedToObjID
+                                    If objToID <> "" Then
+                                        Dim objTo As GraphicObject = (From go As GraphicObject In
+                                                                                        fs.GraphicObjects.Values Where go.Name = objToID).SingleOrDefault
+                                        If objTo Is Nothing Then obj = (From go As GraphicObject In
+                                                                                        fs.GraphicObjects.Values Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
+                                        If Not obj Is Nothing And Not objTo Is Nothing Then fs.ConnectObjects(obj, objTo, -1, xel2.@AttachedToConnIndex)
+                                    End If
+                                End If
+                            Next
+                        End If
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Flowsheet Object Connection Information", ex))
+                End Try
+            Next
+
+        End Sub
 
         Public Shared Function UpdateProcessData(form As IFlowsheetBag, xdoc As XDocument)
 
@@ -513,7 +557,7 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional args As Object = Nothing)
 
-            Validate()
+            'Validate()
 
             'Me.Fsheet.MasterUnitOp = Me
 
@@ -622,12 +666,15 @@ Namespace UnitOperations
 
             Next
 
-            'Select Case Calculator.SolverMode
-            '    Case 0, 3, 4
-            '        'DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(Fsheet, 0, Settings.TaskCancellationTokenSource)
-            '    Case 1, 2
-            '        'DWSIM.Flowsheet.FlowsheetSolver.CalculateAll2(Fsheet, 1, Settings.TaskCancellationTokenSource)
-            'End Select
+            Fsheet.MasterFlowsheet = Me.FlowSheet
+            Fsheet.RedirectMessages = Me.RedirectOutput
+            
+            Select Case Settings.SolverMode
+                Case 0, 3, 4
+                    DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 0, Settings.TaskCancellationTokenSource)
+                Case 1, 2
+                    DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 1, Settings.TaskCancellationTokenSource)
+            End Select
 
             wout = 0.0#
             For Each c In Me.GraphicObject.OutputConnectors
@@ -808,7 +855,8 @@ Namespace UnitOperations
 
             If InitializeOnLoad Then
                 If IO.File.Exists(SimulationFile) Then
-                    Me.Fsheet = InitializeFlowsheet(SimulationFile)
+                    Me.Fsheet = Me.FlowSheet.GetNewInstance
+                    InitializeFlowsheet(SimulationFile, Me.Fsheet)
                     Me.Initialized = True
                 End If
             End If
@@ -887,10 +935,28 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_FlowsheetUO With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_FlowsheetUO With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -914,8 +980,14 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace

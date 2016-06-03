@@ -51,9 +51,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #Region "    Variable Declarations "
 
-    Public Property MasterFlowsheet As FormFlowsheet = Nothing
+    Public Property MasterFlowsheet As IFlowsheet = Nothing Implements IFlowsheet.MasterFlowsheet
     Public Property MasterUnitOp As Flowsheet = Nothing
-    Public Property RedirectMessages As Boolean = False
+    Public Property RedirectMessages As Boolean = False Implements IFlowsheet.RedirectMessages
 
     Public FrmStSim1 As New FormSimulSettings
     Public FrmPCBulk As New FormPCBulk
@@ -194,7 +194,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 'If pp.ConfigForm Is Nothing Then pp.ReconfigureConfigForm()
             Next
 
-            Me.Options.NotSelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
+            Me.Options.NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
             Dim tmpc As BaseClasses.ConstantProperties
             For Each tmpc In FormMain.AvailableComponents.Values
@@ -2653,13 +2653,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public ReadOnly Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions, IFlowsheetBag.Reactions
         Get
-            Return Options.Reactions.ToDictionary(Of String, IReaction)(Function(k) k.Key, Function(k) k.Value)
+            Return Options.Reactions
         End Get
     End Property
 
     Public ReadOnly Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets, IFlowsheetBag.ReactionSets
         Get
-            Return Options.ReactionSets.ToDictionary(Of String, IReactionSet)(Function(k) k.Key, Function(k) k.Value)
+            Return Options.ReactionSets
         End Get
     End Property
 
@@ -2725,7 +2725,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds, IFlowsheetBag.Compounds
         Get
-            Return Options.SelectedComponents.ToDictionary(Of String, ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)
+            Return Options.SelectedComponents
         End Get
     End Property
 
@@ -2872,8 +2872,27 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Public Function GetSurface() As Object Implements IFlowsheetBag.GetSurface
+    Public Function GetSurface() As Object Implements IFlowsheetBag.GetSurface, IFlowsheet.GetSurface
         Return Me.FormSurface
     End Function
+
+    Public Function GetNewInstance() As IFlowsheet Implements IFlowsheet.GetNewInstance
+        Dim fs As New FormFlowsheet()
+        fs.Options.VisibleProperties = Me.Options.VisibleProperties
+        Return fs
+    End Function
+
+    Public Sub AddGraphicObject(obj As IGraphicObject) Implements IFlowsheet.AddGraphicObject
+        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
+        Me.Collections.GraphicObjectCollection.Add(obj.Name, obj)
+    End Sub
+
+    Public Sub AddSimulationObject(obj As ISimulationObject) Implements IFlowsheet.AddSimulationObject
+        Me.Collections.FlowsheetObjectCollection.Add(obj.Name, obj)
+    End Sub
+
+    Public Sub AddPropertyPackage(obj As IPropertyPackage) Implements IFlowsheet.AddPropertyPackage
+        Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
+    End Sub
 
 End Class

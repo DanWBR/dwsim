@@ -805,9 +805,13 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False)
 
-        If GlobalSettings.Settings.CalculatorActivated And Not GlobalSettings.Settings.CalculatorBusy Then
+        If GlobalSettings.Settings.CalculatorActivated Then
 
-            GlobalSettings.Settings.CalculatorBusy = True
+            Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
+
+            If Not fs Is Nothing Then
+                If fs.MasterFlowsheet Is Nothing And GlobalSettings.Settings.CalculatorBusy Then Exit Sub
+            End If
 
             Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
             Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
@@ -815,14 +819,15 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             'checks if the calculator is activated.
 
-            'If fobj.MasterFlowsheet Is Nothing Then My.Application.CalculatorBusy = True
+            If fs.MasterFlowsheet Is Nothing Then GlobalSettings.Settings.CalculatorBusy = True
 
             'this is the cancellation token for background threads. it checks for calculator stop requests and forwards the request to the tasks.
 
-            'If fobj.MasterFlowsheet Is Nothing Then
-            If ts Is Nothing Then ts = New CancellationTokenSource
-            Settings.TaskCancellationTokenSource = ts
-            'End If
+            If fs IsNot Nothing AndAlso fs.MasterFlowsheet Is Nothing Then
+                If ts Is Nothing Then ts = New CancellationTokenSource
+                Settings.TaskCancellationTokenSource = ts
+            End If
+
             Dim ct As CancellationToken = Settings.TaskCancellationTokenSource.Token
 
             Dim obj As ISimulationObject

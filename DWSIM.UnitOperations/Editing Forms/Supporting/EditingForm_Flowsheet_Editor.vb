@@ -43,7 +43,7 @@ Public Class EditingForm_Flowsheet_Editor
     Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click
 
         Try
-            fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile)
+            fsuo.Fsheet = UnitOperations.Flowsheet.InitializeFlowsheet(fsuo.SimulationFile, fsuo.FlowSheet.GetNewInstance)
             fsuo.Initialized = True
         Catch ex As AggregateException
             fsuo.FlowSheet.ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
@@ -139,7 +139,7 @@ Public Class EditingForm_Flowsheet_Editor
 
         Me.fsuo.InitializeMappings()
 
-        Dim complist = Me.fsuo.Fsheet.Compounds.Values.ToArray
+        Dim complist = Me.fsuo.Fsheet.SelectedCompounds.Values.ToArray
         Dim cb As New DataGridViewComboBoxCell
 
         For Each c In complist

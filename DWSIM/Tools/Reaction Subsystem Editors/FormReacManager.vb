@@ -145,9 +145,9 @@ Public Class FormReacManager
                             xdoc.Add(New XElement("DWSIM_Reaction_Data"))
                             xel = xdoc.Element("DWSIM_Reaction_Data")
                             For Each row As DataGridViewRow In GridRxns.SelectedRows
-                                xel.Add(New XElement("Reaction", {frmchild.Options.Reactions(row.Cells(3).Value).SaveData().ToArray()}))
+                                xel.Add(New XElement("Reaction", {DirectCast(frmchild.Options.Reactions(row.Cells(3).Value), XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
                             Next
-                            For Each pp As KeyValuePair(Of String, Reaction) In frmchild.Options.Reactions
+                            For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In frmchild.Options.Reactions
                             Next
                             xdoc.Save(myStream)
                         Catch ex As Exception

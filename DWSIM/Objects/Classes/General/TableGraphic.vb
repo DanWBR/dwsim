@@ -1333,7 +1333,8 @@ Namespace GraphicObjects
                     If size.Width > maxL1 Then maxL1 = size.Width
                     If size.Height > maxH Then maxH = size.Height
 
-                    Dim props = Owner.GetFlowsheet.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
+                    Dim fs = Owner.GetFlowsheet
+                    Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
 
                     If TypeOf Owner Is CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
 

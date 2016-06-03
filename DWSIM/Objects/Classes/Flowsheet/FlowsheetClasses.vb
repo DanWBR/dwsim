@@ -110,15 +110,15 @@ Namespace DWSIM.Flowsheet
             End Get
         End Property
 
-        Public SelectedComponents As Dictionary(Of String, BaseClasses.ConstantProperties)
+        Public SelectedComponents As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
-        Public NotSelectedComponents As Dictionary(Of String, BaseClasses.ConstantProperties)
+        Public NotSelectedComponents As Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
         Public Databases As Dictionary(Of String, String())
 
-        Public Reactions As Dictionary(Of String, BaseClasses.Reaction)
+        Public Reactions As Dictionary(Of String, Interfaces.IReaction)
 
-        Public ReactionSets As Dictionary(Of String, BaseClasses.ReactionSet)
+        Public ReactionSets As Dictionary(Of String, Interfaces.IReactionSet)
 
         Public SimulationMode As String = ""
 
@@ -128,11 +128,11 @@ Namespace DWSIM.Flowsheet
 
         Sub New()
 
-            SelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
-            NotSelectedComponents = New Dictionary(Of String, BaseClasses.ConstantProperties)
+            SelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+            NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
             SelectedUnitSystem = New SystemsOfUnits.SI()
-            Reactions = New Dictionary(Of String, BaseClasses.Reaction)
-            ReactionSets = New Dictionary(Of String, BaseClasses.ReactionSet)
+            Reactions = New Dictionary(Of String, Interfaces.IReaction)
+            ReactionSets = New Dictionary(Of String, Interfaces.IReactionSet)
             Databases = New Dictionary(Of String, String())
             PropertyPackages = New Dictionary(Of String, PropertyPackages.PropertyPackage)
             PetroleumAssays = New Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)

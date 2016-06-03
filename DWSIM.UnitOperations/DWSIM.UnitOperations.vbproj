@@ -526,6 +526,10 @@
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
+      <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
+      <Name>DWSIM.FlowsheetSolver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
