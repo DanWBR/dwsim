@@ -2869,7 +2869,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i += 1
             Next
 
-            Dim j, k, l As Integer
+            Dim j, k, l, np As Integer
             i = 0
             Do
                 If Vz(i) = 0 Then j += 1
@@ -2936,12 +2936,14 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Tmin = 0.3 * TCR
 
             Tupper = Me.RET_VTC.Max * 1.1
-            Tlower = Me.RET_VTF.Max
+            Tlower = Me.RET_VTF.Max * 0.9
 
             If Tlower <> 0.0# And Tmin < Tlower Then Tmin = Tlower
 
-            dP = (PCR - Pmin) / 100
-            dT = (TCR - Tmin) / 100
+            dP = (PCR - Pmin) / 250
+            dT = (TCR - Tmin) / 250
+
+            np = 500
 
             Dim beta As Double = 10
 
@@ -3025,11 +3027,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         End Try
                     End If
                 End If
-                If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points (" & i + 1 & "/300)")
+                If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points... " & ((i + 1) / np * 100).ToString("N1") & "%")
                 i = i + 1
-            Loop Until i >= 300 Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
+            Loop Until i >= np Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
                         Double.IsNaN(PB(PB.Count - 1)) = True Or _
-                        Double.IsNaN(TVB(TVB.Count - 1)) = True Or T > Tupper
+                        Double.IsNaN(TVB(TVB.Count - 1)) = True 'Or T > Tupper
 
             Dim Switch = False
 
@@ -3115,9 +3117,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     End If
                     If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0
                 End If
-                If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points (" & i + 1 & "/300)")
+                If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points... " & ((i + 1) / np * 100).ToString("N1") & "%")
                 i = i + 1
-            Loop Until i >= 300 Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
+            Loop Until i >= np Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
                         Double.IsNaN(PO(PO.Count - 1)) = True Or
                         Double.IsNaN(TVD(TVD.Count - 1)) = True Or T > Tupper
 
@@ -3281,12 +3283,12 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             End Try
                         End If
                     End If
-                    If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Quality Line (" & i + 1 & "/300)")
+                    If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Quality Line... " & ((i + 1) / np * 100).ToString("N1") & "%")
                     i = i + 1
                     If i > 2 Then
                         If PQ(PQ.Count - 1) = PQ(PQ.Count - 2) Or TQ(TQ.Count - 1) = TQ(TQ.Count - 2) Then Exit Do
                     End If
-                Loop Until i >= 300 Or PQ(PQ.Count - 1) = 0 Or PQ(PQ.Count - 1) < 0 Or TQ(TQ.Count - 1) < 0 Or _
+                Loop Until i >= np Or PQ(PQ.Count - 1) = 0 Or PQ(PQ.Count - 1) < 0 Or TQ(TQ.Count - 1) < 0 Or _
                             Double.IsNaN(PQ(PQ.Count - 1)) = True Or Double.IsNaN(TQ(TQ.Count - 1)) = True Or _
                             Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Or T > Tupper
             Else
@@ -3363,7 +3365,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             If TI.Count > 1 Then TI.RemoveAt(TI.Count - 1)
             If PI.Count > 1 Then PI.RemoveAt(PI.Count - 1)
 
-            Return New Object() {TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, TOWF, POWF, HOWF, SOWF, VOWF}
+            Return New Object() {TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, TOWF, POWF, HOWF, SOWF, VOWF, np}
 
         End Function
 

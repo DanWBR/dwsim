@@ -254,7 +254,7 @@ Namespace PropertyPackages.Auxiliary
             C = c1 - c2 / Tr + c3 / Tr ^ 3
             D = d1 + d2 / Tr
 
-            Vr = Me.ESTIMAR_Vr2(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
+            Vr = Me.ESTIMAR_Vr(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
             zs = Pr * Vr / Tr
 
             b1 = 0.2026579
@@ -274,7 +274,7 @@ Namespace PropertyPackages.Auxiliary
             C = c1 - c2 / Tr + c3 / Tr ^ 3
             D = d1 + d2 / Tr
 
-            Vr = Me.ESTIMAR_Vr2(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
+            Vr = Me.ESTIMAR_Vr(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
 
             zh = Pr * Vr / Tr
 
@@ -459,7 +459,7 @@ Namespace PropertyPackages.Auxiliary
             Else
                 Tinf = 1001
                 Tsup = 0
-                nsub = 100
+                nsub = 1000
             End If
 
             delta_T = (Tsup - Tinf) / nsub
