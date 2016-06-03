@@ -316,6 +316,12 @@
     <Compile Include="Forms\FormConfigureSpreadsheetTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormCORegistration.Designer.vb">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCORegistration.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
@@ -770,6 +776,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.resx">
       <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCORegistration.en.resx">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCORegistration.resx">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.en.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
@@ -1999,6 +2011,10 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\user_ninja.png" />
+    <None Include="Resources\set_security_question.png" />
+    <None Include="Resources\Security1.png" />
+    <None Include="Resources\Security.png" />
     <None Include="Resources\world_connect.png" />
     <None Include="Resources\shape_square_edit.png" />
     <None Include="Resources\shape_handles.png" />

@@ -2548,7 +2548,7 @@ ruf:                Application.DoEvents()
         DWSIM.App.HelpRequested("Frame.htm")
     End Sub
 
-    Private Sub RegistrarTiposCOMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RegistrarTiposCOMToolStripMenuItem.Click
+    Private Sub RegistrarTiposCOMToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Dim windir As String = Environment.GetEnvironmentVariable("SystemRoot")
         Process.Start(windir & "\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/codebase /silent " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.UnitOperations.dll" & Chr(34))
@@ -2561,7 +2561,7 @@ ruf:                Application.DoEvents()
 
     End Sub
 
-    Private Sub DeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeToolStripMenuItem.Click
+    Private Sub DeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Dim windir As String = Environment.GetEnvironmentVariable("SystemRoot")
         Process.Start(windir & "\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/u " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.UnitOperations.dll" & Chr(34))
@@ -2880,5 +2880,10 @@ ruf:                Application.DoEvents()
     Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) Handles UpdateBox_Button2.Click
         File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
         Application.Restart()
+    End Sub
+
+    Private Sub RegistroCAPEOPENToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroCAPEOPENToolStripMenuItem.Click
+        Dim f As New FormCORegistration
+        f.ShowDialog(Me)
     End Sub
 End Class
