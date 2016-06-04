@@ -27,10 +27,10 @@ Partial Class FormCORegistration
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnUnregisterUser = New System.Windows.Forms.Button()
+        Me.btnRegisterUser = New System.Windows.Forms.Button()
+        Me.btnUnregisterSystem = New System.Windows.Forms.Button()
+        Me.btnRegisterSystem = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -65,33 +65,33 @@ Partial Class FormCORegistration
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
-        'Button4
+        'btnUnregisterUser
         '
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.Image = Global.DWSIM.My.Resources.Resources.user_ninja
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnUnregisterUser, "btnUnregisterUser")
+        Me.btnUnregisterUser.Image = Global.DWSIM.My.Resources.Resources.user_ninja
+        Me.btnUnregisterUser.Name = "btnUnregisterUser"
+        Me.btnUnregisterUser.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnRegisterUser
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Image = Global.DWSIM.My.Resources.Resources.user_ninja
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnRegisterUser, "btnRegisterUser")
+        Me.btnRegisterUser.Image = Global.DWSIM.My.Resources.Resources.user_ninja
+        Me.btnRegisterUser.Name = "btnRegisterUser"
+        Me.btnRegisterUser.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnUnregisterSystem
         '
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.Image = Global.DWSIM.My.Resources.Resources.set_security_question
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnUnregisterSystem, "btnUnregisterSystem")
+        Me.btnUnregisterSystem.Image = Global.DWSIM.My.Resources.Resources.set_security_question
+        Me.btnUnregisterSystem.Name = "btnUnregisterSystem"
+        Me.btnUnregisterSystem.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnRegisterSystem
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Image = Global.DWSIM.My.Resources.Resources.set_security_question
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnRegisterSystem, "btnRegisterSystem")
+        Me.btnRegisterSystem.Image = Global.DWSIM.My.Resources.Resources.set_security_question
+        Me.btnRegisterSystem.Name = "btnRegisterSystem"
+        Me.btnRegisterSystem.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -121,13 +121,16 @@ Partial Class FormCORegistration
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnUnregisterUser)
+        Me.Controls.Add(Me.btnRegisterUser)
+        Me.Controls.Add(Me.btnUnregisterSystem)
+        Me.Controls.Add(Me.btnRegisterSystem)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormCORegistration"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
+        Me.TopMost = True
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -136,10 +139,10 @@ Partial Class FormCORegistration
     End Sub
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents btnRegisterSystem As System.Windows.Forms.Button
+    Friend WithEvents btnUnregisterSystem As System.Windows.Forms.Button
+    Friend WithEvents btnRegisterUser As System.Windows.Forms.Button
+    Friend WithEvents btnUnregisterUser As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
