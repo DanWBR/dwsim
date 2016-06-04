@@ -20,8 +20,6 @@
 
     Property DebugText As String
 
-    <Xml.Serialization.XmlIgnore> Property CreatedWithThreadID As Integer
-
     <Xml.Serialization.XmlIgnore> Property LastUpdated As Date
 
     Sub CheckSpec(val As Double, onlypositive As Boolean, paramname As String)

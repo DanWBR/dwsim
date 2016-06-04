@@ -105,8 +105,6 @@ Namespace UnitOperations
             OutputVariables = New Dictionary(Of String, Double)
             Me.ComponentName = name
             Me.ComponentDescription = description
-
-
         End Sub
 
         Private Property engine As ScriptEngine
@@ -379,20 +377,21 @@ Namespace UnitOperations
 
         Public Overrides Sub Edit1()
 
-            'Dim edform As New ScriptEditorForm
-            'With edform
-            '    .fontname = Me.FontName
-            '    .fontsize = Me.FontSize
-            '    .includes = Me.Includes
-            '    .scripttext = Me.ScriptText
-            '    .ShowDialog()
-            '    Me.FontName = .fontname
-            '    Me.FontSize = .fontsize
-            '    Me.Includes = .includes
-            '    Me.ScriptText = .txtScript.Text
-            'End With
-            'edform.Dispose()
-            'edform = Nothing
+            Dim edform As New EditingForm_CustomUO_ScriptEditor
+            With edform
+                .fontname = Me.FontName
+                .fontsize = Me.FontSize
+                .includes = Me.Includes
+                .txtScript.Text = Me.ScriptText
+                .ScriptUO = Me
+                .ShowDialog()
+                Me.FontName = .fontname
+                Me.FontSize = .fontsize
+                Me.Includes = .includes
+                Me.ScriptText = .txtScript.Text
+            End With
+            edform.Dispose()
+            edform = Nothing
 
         End Sub
 

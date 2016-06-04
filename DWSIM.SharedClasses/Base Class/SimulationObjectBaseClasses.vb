@@ -49,7 +49,7 @@ Namespace UnitOperations
         End Sub
 
         Sub CreateNew()
-            CreatedWithThreadID = Threading.Thread.CurrentThread.ManagedThreadId
+
         End Sub
 
 #End Region
@@ -82,8 +82,6 @@ Namespace UnitOperations
         Public Property DebugMode As Boolean = False Implements Interfaces.ISimulationObject.DebugMode
 
         Public Property DebugText As String = "" Implements Interfaces.ISimulationObject.DebugText
-
-        <Xml.Serialization.XmlIgnore> Public Property CreatedWithThreadID As Integer = 0 Implements Interfaces.ISimulationObject.CreatedWithThreadID
 
         <Xml.Serialization.XmlIgnore> Public Property LastUpdated As New Date Implements Interfaces.ISimulationObject.LastUpdated
 

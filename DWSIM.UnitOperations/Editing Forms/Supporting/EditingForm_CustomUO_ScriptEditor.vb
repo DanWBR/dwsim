@@ -39,6 +39,8 @@ Imports System.Drawing
 
     Private reader As Jolt.XmlDocCommentReader
 
+    Public CAPEOPEN As Boolean = False
+
 #Region "Custom members"
     Private maxLineNumberCharLength As Integer
     Private loaded As Boolean = False
