@@ -33,7 +33,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class ShortcutColumn
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Public Enum CondenserType
             TotalCond = 0

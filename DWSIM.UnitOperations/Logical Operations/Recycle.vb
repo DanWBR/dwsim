@@ -30,7 +30,7 @@ Namespace SpecialOps
 
     <System.Serializable()> Public Class Recycle
 
-        Inherits SharedClasses.UnitOperations.SpecialOpBaseClass
+        Inherits UnitOperations.SpecialOpBaseClass
 
         Implements Interfaces.IRecycle
 

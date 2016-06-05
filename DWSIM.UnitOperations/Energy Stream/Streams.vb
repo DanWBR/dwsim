@@ -42,6 +42,14 @@ Namespace Streams
 
         Protected WithEvents m_work As CapeOpen.RealParameter
 
+#Region "   CAPE-OPEN ICapeIdentification"
+
+        Public Overrides Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
+
+        Public Overrides Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
+
+#End Region
+
 #Region "   DWSIM Specific"
 
         Public Sub New()

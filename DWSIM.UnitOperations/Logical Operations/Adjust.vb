@@ -29,7 +29,7 @@ Namespace SpecialOps
 
     <System.Serializable()> Public Class Adjust
 
-        Inherits SharedClasses.UnitOperations.SpecialOpBaseClass
+        Inherits UnitOperations.SpecialOpBaseClass
 
         Implements Interfaces.IAdjust
 
@@ -342,9 +342,9 @@ Namespace SpecialOps
         Public Sub New(ByVal name As String, ByVal description As String)
 
             MyBase.CreateNew()
-            m_ManipulatedObjectData = New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
-            m_ControlledObjectData = New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
-            m_ReferencedObjectData = New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
+            m_ManipulatedObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
+            m_ControlledObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
+            m_ReferencedObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
             Me.ComponentName = name
             Me.ComponentDescription = description
 

@@ -69,7 +69,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class HeatExchanger
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Protected m_Q As Nullable(Of Double) = 0
         Protected m_dp As Nullable(Of Double) = 0

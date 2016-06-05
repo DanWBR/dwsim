@@ -31,10 +31,10 @@ Namespace SpecialOps
 
     <System.Serializable()> Public Class Spec
 
-        Inherits SharedClasses.UnitOperations.SpecialOpBaseClass
+        Inherits UnitOperations.SpecialOpBaseClass
 
-        Protected m_SourceObjectData As New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
-        Protected m_TargetObjectData As New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
+        Protected m_SourceObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
+        Protected m_TargetObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
 
         Protected m_CalculateTargetObject As Boolean = False
 
@@ -125,20 +125,20 @@ Namespace SpecialOps
             End Set
         End Property
 
-        Public Property SourceObjectData() As SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
+        Public Property SourceObjectData() As SpecialOps.Helpers.SpecialOpObjectInfo
             Get
                 Return Me.m_SourceObjectData
             End Get
-            Set(ByVal value As SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo)
+            Set(ByVal value As SpecialOps.Helpers.SpecialOpObjectInfo)
                 Me.m_SourceObjectData = value
             End Set
         End Property
 
-        Public Property TargetObjectData() As SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
+        Public Property TargetObjectData() As SpecialOps.Helpers.SpecialOpObjectInfo
             Get
                 Return Me.m_TargetObjectData
             End Get
-            Set(ByVal value As SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo)
+            Set(ByVal value As SpecialOps.Helpers.SpecialOpObjectInfo)
                 Me.m_TargetObjectData = value
             End Set
         End Property
@@ -256,8 +256,8 @@ Namespace SpecialOps
 
             MyBase.CreateNew()
 
-            m_SourceObjectData = New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
-            m_TargetObjectData = New SharedClasses.SpecialOps.Helpers.SpecialOpObjectInfo
+            m_SourceObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
+            m_TargetObjectData = New SpecialOps.Helpers.SpecialOpObjectInfo
 
             m_eopt = New ExpressionContext
             With m_eopt

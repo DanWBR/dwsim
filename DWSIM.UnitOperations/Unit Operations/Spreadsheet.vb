@@ -43,7 +43,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class ExcelUO
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOpBaseClass
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_SpreadsheetUO
 

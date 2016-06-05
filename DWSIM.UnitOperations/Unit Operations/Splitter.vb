@@ -28,7 +28,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class Splitter
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Splitter
 

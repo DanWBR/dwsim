@@ -67,7 +67,7 @@ Public Class MaterialStreamEditor
 
             'connections
 
-            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_Recycle).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is SharedClasses.UnitOperations.BaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_Recycle).Select(Function(m) m.GraphicObject.Tag).ToArray
 
             cbInlet.Items.Clear()
             cbInlet.Items.AddRange(objlist)

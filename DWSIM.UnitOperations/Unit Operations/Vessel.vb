@@ -30,7 +30,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class Vessel
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Separator
 

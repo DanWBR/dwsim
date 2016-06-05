@@ -1403,7 +1403,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public MustInherit Class Column
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Public Enum ColType
             DistillationColumn = 0

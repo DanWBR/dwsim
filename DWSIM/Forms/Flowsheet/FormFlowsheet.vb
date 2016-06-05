@@ -2014,9 +2014,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     If Not ppackages.Contains(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name) Then
                         ppackages.Add(DirectCast(so, Streams.MaterialStream).PropertyPackage.Name)
                     End If
-                ElseIf TypeOf so Is SharedClasses.UnitOperations.UnitOpBaseClass Then
-                    If Not ppackages.Contains(DirectCast(so, SharedClasses.UnitOperations.UnitOpBaseClass).PropertyPackage.Name) Then
-                        ppackages.Add(DirectCast(so, SharedClasses.UnitOperations.UnitOpBaseClass).PropertyPackage.Name)
+                ElseIf TypeOf so Is UnitOpBaseClass Then
+                    If Not ppackages.Contains(DirectCast(so, UnitOpBaseClass).PropertyPackage.Name) Then
+                        ppackages.Add(DirectCast(so, UnitOpBaseClass).PropertyPackage.Name)
                     End If
                 End If
             End If
@@ -2164,9 +2164,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             If My.Settings.ClipboardCopyMode_PropertyPackages = 1 Then
                 If TypeOf obj Is Streams.MaterialStream Then
                     DirectCast(obj, Streams.MaterialStream).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, Streams.MaterialStream)._ppid)
-                ElseIf TypeOf obj Is SharedClasses.UnitOperations.UnitOpBaseClass Then
-                    If DirectCast(obj, SharedClasses.UnitOperations.UnitOpBaseClass)._ppid <> "" Then
-                        DirectCast(obj, SharedClasses.UnitOperations.UnitOpBaseClass).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, SharedClasses.UnitOperations.UnitOpBaseClass)._ppid)
+                ElseIf TypeOf obj Is UnitOpBaseClass Then
+                    If DirectCast(obj, UnitOpBaseClass)._ppid <> "" Then
+                        DirectCast(obj, UnitOpBaseClass).PropertyPackage = Me.Options.PropertyPackages(pkey & DirectCast(obj, UnitOpBaseClass)._ppid)
                     End If
                 End If
             End If

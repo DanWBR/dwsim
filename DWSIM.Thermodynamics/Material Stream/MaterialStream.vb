@@ -2073,6 +2073,14 @@ Namespace Streams
 
 #End Region
 
+#Region "    CAPE-OPEN ICapeIdentification"
+
+        Public Overrides Property ComponentDescription() As String = "" Implements CapeOpen.ICapeIdentification.ComponentDescription
+
+        Public Overrides Property ComponentName() As String = "" Implements CapeOpen.ICapeIdentification.ComponentName
+
+#End Region
+
 #Region "    CAPE-OPEN 1.0 Methods and Properties"
 
         ''' <summary>

@@ -30,7 +30,7 @@ Namespace SpecialOps
 
     <System.Serializable()> Public Class EnergyRecycle
 
-        Inherits SharedClasses.UnitOperations.SpecialOpBaseClass
+        Inherits UnitOperations.SpecialOpBaseClass
 
         Protected m_ConvPar As ConvergenceParametersE
         Protected m_ConvHist As ConvergenceHistoryE

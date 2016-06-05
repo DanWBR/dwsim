@@ -34,7 +34,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class Filter
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Protected m_ei As Double
 

@@ -37,7 +37,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class Pipe
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Protected m_profile As New PipeProfile
         Protected m_thermalprofile As New ThermalEditorDefinitions

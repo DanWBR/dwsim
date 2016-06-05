@@ -7,7 +7,7 @@ Public Class EditingForm_ComprExpndr
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public Property SimObject As SharedClasses.UnitOperations.UnitOpBaseClass
+    Public Property SimObject As UnitOperations.UnitOpBaseClass
 
     Public Loaded As Boolean = False
 

@@ -29,7 +29,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class OrificePlate
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Public Enum CalcMethod
             Homogeneous = 0

@@ -29,7 +29,7 @@ Namespace UnitOperations
 
     <System.Serializable()> Public Class Cooler
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_HeaterCooler
 

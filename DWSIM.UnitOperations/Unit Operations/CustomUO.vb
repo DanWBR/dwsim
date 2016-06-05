@@ -37,7 +37,7 @@ Namespace UnitOperations
 
     <Guid(CustomUO.ClassId)> <System.Serializable()> <ComVisible(True)> Public Class CustomUO
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CustomUO
 

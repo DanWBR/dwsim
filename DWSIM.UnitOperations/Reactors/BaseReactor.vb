@@ -33,7 +33,7 @@ Namespace Reactors
 
     <System.Serializable()> Public MustInherit Class Reactor
 
-        Inherits SharedClasses.UnitOperations.UnitOpBaseClass
+        Inherits UnitOperations.UnitOpBaseClass
 
         Protected m_reactionSequence As SortedList(Of Integer, ArrayList)
         Protected m_reactions As List(Of String)
