@@ -17,7 +17,6 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports DWSIM.DrawingTools.GraphicsSurface
 Imports DWSIM.Thermodynamics
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.SharedClasses
@@ -95,6 +94,8 @@ Namespace UnitOperations
 
         Public Sub New()
             MyBase.New()
+            ComponentName = "IronPython UO"
+            ComponentDescription = "IronPython Scripting Unit Operation"
             InputVariables = New Dictionary(Of String, Double)
             OutputVariables = New Dictionary(Of String, Double)
         End Sub
@@ -108,7 +109,6 @@ Namespace UnitOperations
         End Sub
 
         Private Property engine As ScriptEngine
-
         Private Property scope As Object
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
@@ -257,7 +257,7 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Sub Validate()
-            MyBase.Validate()
+            'MyBase.Validate()
         End Sub
 
         Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
@@ -333,7 +333,9 @@ Namespace UnitOperations
 
 #Region "   CAPE-OPEN Methods"
 
-        Protected WithEvents m_sl As OptionParameter
+        Public Overrides Sub InitNew()
+
+        End Sub
 
         Public Overrides Sub Initialize()
 

@@ -113,8 +113,8 @@ Public Class EditingForm_CAPEOPENUO
                     Else
                         dgoutlets.Rows.Add(New Object() {p.ComponentName, tag})
                         dgoutlets.Rows(dgoutlets.Rows.Count - 1).Cells(0).Tag = p
-                        dgoutlets.Rows(dginlets.Rows.Count - 1).Cells(2).ToolTipText = dgoutlets.Columns(2).ToolTipText
-                        dgoutlets.Rows(dginlets.Rows.Count - 1).Cells(3).ToolTipText = dgoutlets.Columns(3).ToolTipText
+                        dgoutlets.Rows(dgoutlets.Rows.Count - 1).Cells(2).ToolTipText = dgoutlets.Columns(2).ToolTipText
+                        dgoutlets.Rows(dgoutlets.Rows.Count - 1).Cells(3).ToolTipText = dgoutlets.Columns(3).ToolTipText
                     End If
                 ElseIf p.portType = CapePortType.CAPE_ENERGY Then
                     Dim tag As String = ""
@@ -127,8 +127,8 @@ Public Class EditingForm_CAPEOPENUO
                     If Not conobj Is Nothing Then tag = conobj.GraphicObject.Tag
                     dgenergy.Rows.Add(New Object() {p.ComponentName, tag})
                     dgenergy.Rows(dgenergy.Rows.Count - 1).Cells(0).Tag = p
-                    dgenergy.Rows(dginlets.Rows.Count - 1).Cells(2).ToolTipText = dgenergy.Columns(2).ToolTipText
-                    dgenergy.Rows(dginlets.Rows.Count - 1).Cells(3).ToolTipText = dgenergy.Columns(3).ToolTipText
+                    dgenergy.Rows(dgenergy.Rows.Count - 1).Cells(2).ToolTipText = dgenergy.Columns(2).ToolTipText
+                    dgenergy.Rows(dgenergy.Rows.Count - 1).Cells(3).ToolTipText = dgenergy.Columns(3).ToolTipText
                 End If
             Next
 

@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 52</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -136,12 +140,8 @@
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
@@ -165,17 +165,17 @@
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 52</value>
   </data>
-  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
-    <value>Button2</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>429, 52</value>
   </data>
   <data name="btnRegisterUser.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 249</value>
   </data>
-  <data name="&gt;&gt;btnRegisterSystem.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>682, 374</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Registra os componentes CAPE-OPEN do DWSIM para todos os usuários. Requer privilégios de administrador.</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -198,8 +198,14 @@
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="btnUnregisterUser.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -213,13 +219,13 @@
   <data name="Button4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
+  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
+    <value>PictureBox1</value>
+  </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnRegisterUser.Type" xml:space="preserve">
@@ -243,8 +249,8 @@
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;btnRegisterSystem.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;btnRegisterSystem.Parent" xml:space="preserve">
     <value>$this</value>
@@ -252,11 +258,11 @@
   <data name="btnRegisterSystem.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
-  </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
   </data>
   <data name="Label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -276,8 +282,8 @@
   <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormCORegistration</value>
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
   </data>
   <data name="&gt;&gt;btnUnregisterUser.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -291,14 +297,11 @@
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 249</value>
-  </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="btnDeRegisterSystem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 191</value>
+  <data name="&gt;&gt;Button4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -332,9 +335,6 @@
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;btnUnregisterSystem.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -375,11 +375,11 @@
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
+    <value>Button2</value>
   </data>
-  <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Registro CAPE-OPEN</value>
   </data>
   <data name="btnRegisterSystem.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 133</value>
@@ -411,8 +411,8 @@
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>493, 62</value>
   </data>
-  <data name="&gt;&gt;btnUnregisterUser.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormCORegistration</value>
   </data>
   <data name="&gt;&gt;Button3.Name" xml:space="preserve">
     <value>Button3</value>
@@ -429,9 +429,6 @@
   <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -441,8 +438,8 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 52</value>
+  <data name="Label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -453,8 +450,8 @@
   <data name="&gt;&gt;btnUnregisterUser.Name" xml:space="preserve">
     <value>btnUnregisterUser</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
-    <value>PictureBox1</value>
+  <data name="&gt;&gt;btnUnregisterUser.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>241, 307</value>
@@ -483,11 +480,11 @@
   <data name="Button2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Registra os componentes CAPE-OPEN do DWSIM para todos os usuários. Requer privilégios de administrador.</value>
-  </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 191</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -504,20 +501,20 @@
   <data name="btnUnregisterSystem.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 52</value>
+  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="btnUnregisterSystem.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 191</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>682, 374</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Registro CAPE-OPEN</value>
+  <data name="btnDeRegisterSystem.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 191</value>
   </data>
   <data name="&gt;&gt;Button4.Parent" xml:space="preserve">
     <value>$this</value>
@@ -537,6 +534,9 @@
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 52</value>
+  </data>
   <data name="&gt;&gt;btnUnregisterSystem.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -552,8 +552,8 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>    Registrar para Sistema</value>
   </data>
-  <data name="&gt;&gt;Button4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 249</value>
   </data>
   <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -570,8 +570,8 @@
   <data name="Label6.Text" xml:space="preserve">
     <value>Remove as entradas de registro dos componentes CAPE-OPEN do DWSIM para o usuário atualmente logado.</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="Label6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>$this</value>

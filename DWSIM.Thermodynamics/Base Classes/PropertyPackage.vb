@@ -9247,7 +9247,7 @@ Final3:
 
             ExceptionLog += Date.Now + ": " + vbCrLf + vbCrLf + ex.ToString + vbCrLf + vbCrLf
 
-            Throw ex
+            Throw New CapeComputationException(ex.Message.ToString, ex)
 
         End Sub
 

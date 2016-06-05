@@ -897,6 +897,7 @@
     <None Include="Assets\docs\User_Guide.pdf" />
     <None Include="Assets\DWSIM.dna" />
     <None Include="Assets\DWSIM.xll" />
+    <None Include="Assets\DWSIM_32.bat" />
     <None Include="Assets\DWSIM_64.dna" />
     <None Include="Assets\DWSIM_64.xll" />
     <None Include="Assets\ExcelAddInHelp.chm" />
@@ -1070,6 +1071,10 @@
     <ProjectReference Include="..\RandomOps\DWSIM.MathOps.RandomOps.csproj">
       <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
       <Name>DWSIM.MathOps.RandomOps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RunAsx86\DWSIM.Apps.RunAsx86.csproj">
+      <Project>{caa85a70-4427-4075-a894-8eddca42ddd4}</Project>
+      <Name>DWSIM.Apps.RunAsx86</Name>
     </ProjectReference>
     <ProjectReference Include="..\SwarmOps\DWSIM.MathOps.SwarmOps.csproj">
       <Project>{8f45efaa-9eac-403f-b2b0-123f0321056e}</Project>

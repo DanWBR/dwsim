@@ -5005,7 +5005,7 @@ Namespace Streams
                 PropertyPackage.ExceptionLog += Date.Now + ": " + vbCrLf + vbCrLf + ex.ToString + vbCrLf + vbCrLf
             End If
 
-            'Throw ex
+            Throw New CapeComputationException(ex.Message.ToString, ex)
 
         End Sub
 

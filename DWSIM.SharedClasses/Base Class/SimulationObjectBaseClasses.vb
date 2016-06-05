@@ -807,7 +807,7 @@ Namespace UnitOperations
         ''' are required. For example, at this point the validity of Material Objects connected to ports can
         ''' be checked.
         ''' There are no input or output arguments for this method.</remarks>
-        Public Overridable Overloads Sub Calculate1() Implements CapeOpen.ICapeUnit.Calculate
+        Public Overridable Sub Calculate1() Implements CapeOpen.ICapeUnit.Calculate
             'do CAPE calculation here
             MyBase.Calculate()
         End Sub
@@ -914,6 +914,7 @@ Namespace UnitOperations
         ''' <remarks></remarks>
         Public Overridable Sub Initialize() Implements CapeOpen.ICapeUtilities.Initialize
             'do CAPE Initialization here
+            MsgBox("OKI")
             CreateCOPorts()
             CreateCOParameters()
         End Sub
@@ -953,6 +954,7 @@ Namespace UnitOperations
         ''' is now available for any kind of PMC, ICapeUnit. SetSimulationContext is deprecated.</remarks>
         <Xml.Serialization.XmlIgnore()> Public WriteOnly Property simulationContext() As Object Implements CapeOpen.ICapeUtilities.simulationContext
             Set(ByVal value As Object)
+                MsgBox("OKSC")
                 _simcontext = value
             End Set
         End Property
@@ -996,7 +998,7 @@ Namespace UnitOperations
             pcbSize = 1024 * 1024
         End Sub
 
-        Public Sub InitNew() Implements IPersistStreamInit.InitNew
+        Public Overridable Sub InitNew() Implements IPersistStreamInit.InitNew
             'do nothing
         End Sub
 

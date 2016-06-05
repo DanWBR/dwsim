@@ -130,7 +130,6 @@ Partial Class FormCORegistration
         Me.Name = "FormCORegistration"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.TopMost = True
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
