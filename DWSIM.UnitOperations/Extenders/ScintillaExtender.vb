@@ -201,6 +201,49 @@ Module scintillaExtender
 
             scintilla.SetKeywords(1, objects + " " + netprops)
 
+        Else
+
+            Dim capeopenassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("CapeOpen,")).FirstOrDefault
+
+            Dim netprops As String = ""
+
+            Dim props = capeopenassembly.GetType("CapeOpen.ICapeThermoMaterialObject").GetProperties()
+            For Each p In props
+                netprops += (p.Name) + " "
+            Next
+            Dim methods = capeopenassembly.GetType("CapeOpen.ICapeThermoMaterialObject").GetMethods()
+            For Each m In methods
+                netprops += (m.Name) + " "
+            Next
+            props = capeopenassembly.GetType("CapeOpen.ICapeCollection").GetProperties()
+            For Each p In props
+                netprops += (p.Name) + " "
+            Next
+            methods = capeopenassembly.GetType("CapeOpen.ICapeCollection").GetMethods()
+            For Each m In methods
+                netprops += (m.Name) + " "
+            Next
+            props = capeopenassembly.GetType("CapeOpen.ICapeUtilities").GetProperties()
+            For Each p In props
+                netprops += (p.Name) + " "
+            Next
+            methods = capeopenassembly.GetType("CapeOpen.ICapeUtilities").GetMethods()
+            For Each m In methods
+                netprops += (m.Name) + " "
+            Next
+            props = capeopenassembly.GetType("CapeOpen.ICapeSimulationContext").GetProperties()
+            For Each p In props
+                netprops += (p.Name) + " "
+            Next
+            methods = capeopenassembly.GetType("CapeOpen.ICapeSimulationContext").GetMethods()
+            For Each m In methods
+                netprops += (m.Name) + " "
+            Next
+
+            Dim objects As String = "ims1 ims2 ims3 ims4 ims5 ims6 ims7 ims8 ims9 ims10 ies1 oms1 oms2 oms3 oms4 oms5 oms6 ims7 ims8 oms9 ims10 oes1 this pme"
+
+            scintilla.SetKeywords(1, objects + " " + netprops)
+
         End If
 
         scintilla.SetColumnMargins()
@@ -516,7 +559,8 @@ Module scintillaExtender
                     For Each p In params
                         If p.Value.ToString.Length > 50 Then
                             Try
-                                p.Value = p.Value.Replace(vbCr, " ").Replace(vbLf, " ").Replace(vbCrLf, " ")
+                                p.Value = p.Value.Replace(vbCr, " ").Replace(vbLf, " ").Replace(vbCrLf, " ").Replace(vbTab, "")
+                                p.Value = System.Text.RegularExpressions.Regex.Replace(p.Value, "\s+", " ")
                                 Dim lines As String() = Enumerable.Range(0, p.Value.Length / 50).Select(Function(i) p.Value.Substring(i * 50, If(p.Value.Length - i * 50 > 50, 50, p.Value.Length - i * 50))).ToArray
                                 Dim argtext As String = lines(0) & vbCrLf
                                 For i As Integer = 1 To lines.Length - 1
@@ -534,11 +578,13 @@ Module scintillaExtender
                     If method.ReturnType.Name <> "Void" Then
                         Dim rdesc = xmlhelp.Elements("comments").Elements("returns").FirstOrDefault
                         If Not rdesc Is Nothing Then
+                            rdesc.Value = System.Text.RegularExpressions.Regex.Replace(rdesc.Value, "\s+", " ")
                             returndescription = rdesc.Value
                         End If
                     End If
                     Dim redesc = xmlhelp.Elements("comments").Elements("remarks").FirstOrDefault
                     If Not redesc Is Nothing Then
+                        redesc.Value = System.Text.RegularExpressions.Regex.Replace(redesc.Value, "\s+", " ")
                         If redesc.Value.Length > 1000 Then
                             remarks = redesc.Value.Substring(0, 1000) & " [...]"
                         Else

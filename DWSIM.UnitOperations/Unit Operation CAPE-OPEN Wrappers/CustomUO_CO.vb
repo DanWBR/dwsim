@@ -34,6 +34,7 @@ Imports System.Drawing.Design
 Imports Microsoft.Scripting.Hosting
 Imports System.Drawing.Text
 Imports System.Drawing
+Imports DWSIM.Interfaces.Interfaces2
 
 Namespace UnitOperations.CAPEOPENWrappers
 
@@ -41,15 +42,19 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         Inherits CapeOpen.CapeUnitBase
 
-        Implements CapeOpen.ICapeUtilities
+        Implements CapeOpen.ICapeUtilities, IPersistStreamInit, ICapeUnit
 
         Private _scripttext As String = ""
-        Private _fontname As String = "Courier New"
+        Private _fontname As String = "Consolas"
         Private _fontsize As Integer = 10
         Private _lastrun As String = ""
 
+        Private _inletmaterialports As Integer = 1
+        Private _outletmaterialports As Integer = 1
+        Private _inletenergyports As Integer = 0
+        Private _outletenergyports As Integer = 0
+
         Public Property HighlightSpaces As Boolean = False
-        Public Property HighlightTabs As Boolean = False
 
         Public Shadows Const ClassId As String = "1FD2DC53-DC7B-4c4d-BBEE-F37F4E5ADDFB"
 
@@ -57,6 +62,8 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         Private Property engine As ScriptEngine
         Private Property scope As Object
+
+        Private _initialized As Boolean = False
 
         Public Shadows WriteOnly Property simulationContext As Object Implements ICapeUtilities.simulationContext
             Set(value As Object)
@@ -70,42 +77,20 @@ Namespace UnitOperations.CAPEOPENWrappers
 
             'handler for unhandled exceptions
 
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-            AddHandler Application.ThreadException, AddressOf UnhandledException
-            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
+            Try
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+                AddHandler Application.ThreadException, AddressOf UnhandledException
+                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
+            Catch ex As Exception
+
+            End Try
 
             'create port collection
 
             Me.ComponentName = "Scripting Unit Operation"
             Me.ComponentDescription = "IronPython Scripting Unit Operation"
 
-            ' create ports
-
-            With DirectCast(Me.Ports, CapeOpen.PortCollection)
-                .Clear()
-                .Add(New UnitPort("Inlet_Port_1", "Material Object Inlet Port 1", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_2", "Material Object Inlet Port 2", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_3", "Material Object Inlet Port 3", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_4", "Material Object Inlet Port 4", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_5", "Material Object Inlet Port 5", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_6", "Material Object Inlet Port 6", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_7", "Material Object Inlet Port 7", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_8", "Material Object Inlet Port 8", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_9", "Material Object Inlet Port 9", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Inlet_Port_10", "Material Object Inlet Port 10", CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_1", "Material Object Outlet Port 1", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_2", "Material Object Outlet Port 2", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_3", "Material Object Outlet Port 3", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_4", "Material Object Outlet Port 4", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_5", "Material Object Outlet Port 5", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_6", "Material Object Outlet Port 6", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_7", "Material Object Outlet Port 7", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_8", "Material Object Outlet Port 8", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_9", "Material Object Outlet Port 9", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Outlet_Port_10", "Material Object Outlet Port 10", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
-                .Add(New UnitPort("Energy_Inlet_Port_1", "Energy Stream Inlet Port", CapePortDirection.CAPE_INLET, CapePortType.CAPE_ENERGY))
-                .Add(New UnitPort("Energy_Outlet_Port_1", "Energy Stream Outlet Port", CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_ENERGY))
-            End With
+            CreatePorts()
 
             Dim fontnames As New List(Of String)
 
@@ -121,9 +106,65 @@ Namespace UnitOperations.CAPEOPENWrappers
             With DirectCast(Me.Parameters, CapeOpen.ParameterCollection)
                 .Clear()
                 .Add(New CapeOpen.OptionParameter("Script", _scripttext))
-                .Add(New CapeOpen.OptionParameter("Font Name", "Script editor font name", "Courier New", "Courier New", fontnames.ToArray, False, CapeParamMode.CAPE_INPUT))
-                .Add(New CapeOpen.OptionParameter("Font Size", "Script editor font name", 10, 10, New String() {"6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"}, True, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.OptionParameter("FontName", "Script editor font name", _fontname, "Consolas", fontnames.ToArray, False, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.OptionParameter("FontSize", "Script editor font size", _fontsize, 10, New String() {"6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"}, True, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.BooleanParameter("HighlightSpaces", "Highlight spaces in the script editor", HighlightSpaces, True, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.IntegerParameter("InletMaterialPorts", "Number of Inlet Material Object Ports", _inletmaterialports, 1, 0, 10, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.IntegerParameter("OutletMaterialPorts", "Number of Outlet Material Object Ports", _outletmaterialports, 1, 0, 10, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.IntegerParameter("InletEnergyPorts", "Number of Inlet Energy Ports", _inletenergyports, 1, 0, 1, CapeParamMode.CAPE_INPUT))
+                .Add(New CapeOpen.IntegerParameter("OutletEnergyPorts", "Number of Outlet Energy Ports", _outletenergyports, 1, 0, 1, CapeParamMode.CAPE_INPUT))
             End With
+
+        End Sub
+
+        Sub CreatePorts()
+
+            ' create ports
+
+            If Me.Ports.Count > 0 Then
+                For Each p In Me.Ports
+                    If p.connectedObject IsNot Nothing Then p.Disconnect()
+                Next
+            End If
+
+            With Me.Ports
+                .Clear()
+                For i As Integer = 1 To _inletmaterialports
+                    .Add(New UnitPort("Inlet_Material_Port_" & i, "Material Object Inlet Port " & i, CapePortDirection.CAPE_INLET, CapePortType.CAPE_MATERIAL))
+                Next
+                For i As Integer = 1 To _inletenergyports
+                    .Add(New UnitPort("Inlet_Energy_Port_" & i, "Energy Stream Inlet Port " & i, CapePortDirection.CAPE_INLET, CapePortType.CAPE_ENERGY))
+                Next
+                For i As Integer = 1 To _outletmaterialports
+                    .Add(New UnitPort("Outlet_Material_Port_" & i, "Material Object Outlet Port " & i, CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_MATERIAL))
+                Next
+                For i As Integer = 1 To _outletenergyports
+                    .Add(New UnitPort("Outlet_Energy_Port_" & i, "Energy Stream Outlet Port " & i, CapePortDirection.CAPE_OUTLET, CapePortType.CAPE_ENERGY))
+                Next
+            End With
+
+        End Sub
+
+        Private Sub CO_CustomUO_PropertyChanged(sender As Object, e As PropertyChangedEventArgs) Handles Me.PropertyChanged
+
+            Select Case e.PropertyName
+                Case "Script"
+                    _scripttext = DirectCast(Me.Parameters(0), OptionParameter).Value
+                Case "Font Name"
+                    _scripttext = DirectCast(Me.Parameters(1), OptionParameter).Value
+                Case "Font Size"
+                    _scripttext = DirectCast(Me.Parameters(2), OptionParameter).Value
+                Case "HighlightSpaces"
+                    HighlightSpaces = DirectCast(Me.Parameters(3), BooleanParameter).Value
+                Case "InletMaterialPorts"
+                    _inletmaterialports = DirectCast(Me.Parameters(4), IntegerParameter).Value
+                Case "OutletMaterialPorts"
+                    _outletmaterialports = DirectCast(Me.Parameters(5), IntegerParameter).Value
+                Case "InletEnergyPorts"
+                    _inletenergyports = DirectCast(Me.Parameters(6), IntegerParameter).Value
+                Case "OutletEnergyPorts"
+                    _outletenergyports = DirectCast(Me.Parameters(7), IntegerParameter).Value
+            End Select
 
         End Sub
 
@@ -139,81 +180,46 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         End Sub
 
-        Public Shadows Sub Calculate()
-
-            Dim ims1, ims2, ims3, ims4, ims5, ims6, ims7, ims8, ims9, ims10,
-                oms1, oms2, oms3, oms4, oms5, oms6, oms7, oms8, oms9, oms10 As ICapeThermoMaterialObject
-
-            ims1 = TryCast(Me.Ports(0).connectedObject, ICapeThermoMaterialObject)
-            ims2 = TryCast(Me.Ports(1).connectedObject, ICapeThermoMaterialObject)
-            ims3 = TryCast(Me.Ports(2).connectedObject, ICapeThermoMaterialObject)
-            ims4 = TryCast(Me.Ports(3).connectedObject, ICapeThermoMaterialObject)
-            ims5 = TryCast(Me.Ports(4).connectedObject, ICapeThermoMaterialObject)
-            ims6 = TryCast(Me.Ports(5).connectedObject, ICapeThermoMaterialObject)
-            ims7 = TryCast(Me.Ports(6).connectedObject, ICapeThermoMaterialObject)
-            ims8 = TryCast(Me.Ports(7).connectedObject, ICapeThermoMaterialObject)
-            ims9 = TryCast(Me.Ports(8).connectedObject, ICapeThermoMaterialObject)
-            ims10 = TryCast(Me.Ports(9).connectedObject, ICapeThermoMaterialObject)
-            oms1 = TryCast(Me.Ports(10).connectedObject, ICapeThermoMaterialObject)
-            oms2 = TryCast(Me.Ports(11).connectedObject, ICapeThermoMaterialObject)
-            oms3 = TryCast(Me.Ports(12).connectedObject, ICapeThermoMaterialObject)
-            oms4 = TryCast(Me.Ports(13).connectedObject, ICapeThermoMaterialObject)
-            oms5 = TryCast(Me.Ports(14).connectedObject, ICapeThermoMaterialObject)
-            oms6 = TryCast(Me.Ports(15).connectedObject, ICapeThermoMaterialObject)
-            oms7 = TryCast(Me.Ports(16).connectedObject, ICapeThermoMaterialObject)
-            oms8 = TryCast(Me.Ports(17).connectedObject, ICapeThermoMaterialObject)
-            oms9 = TryCast(Me.Ports(18).connectedObject, ICapeThermoMaterialObject)
-            oms10 = TryCast(Me.Ports(19).connectedObject, ICapeThermoMaterialObject)
-
-            Dim ies1, oes1 As ICapeCollection
-
-            ies1 = TryCast(Me.Ports(20).connectedObject, ICapeCollection)
-            oes1 = TryCast(Me.Ports(21).connectedObject, ICapeCollection)
+        Public Shadows Sub Calculate() Implements CapeOpen.ICapeUnit.Calculate
 
             Dim source As Microsoft.Scripting.Hosting.ScriptSource
             Try
                 engine = IronPython.Hosting.Python.CreateEngine()
                 engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-                engine.Runtime.LoadAssembly(GetType(ICapeIdentification).Assembly)
                 engine.Runtime.LoadAssembly(GetType(CapeOpen.ICapeIdentification).Assembly)
-                engine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
                 scope = engine.CreateScope()
                 scope.SetVariable("pme", Me._sctxt)
                 scope.SetVariable("this", Me)
-                scope.SetVariable("ims1", ims1)
-                scope.SetVariable("ims2", ims2)
-                scope.SetVariable("ims3", ims3)
-                scope.SetVariable("ims4", ims4)
-                scope.SetVariable("ims5", ims5)
-                scope.SetVariable("ims6", ims6)
-                scope.SetVariable("ims7", ims7)
-                scope.SetVariable("ims8", ims8)
-                scope.SetVariable("ims9", ims9)
-                scope.SetVariable("ims10", ims10)
-                scope.SetVariable("oms1", oms1)
-                scope.SetVariable("oms2", oms2)
-                scope.SetVariable("oms3", oms3)
-                scope.SetVariable("oms4", oms4)
-                scope.SetVariable("oms5", oms5)
-                scope.SetVariable("oms6", oms6)
-                scope.SetVariable("oms7", oms7)
-                scope.SetVariable("oms8", oms8)
-                scope.SetVariable("oms9", oms9)
-                scope.SetVariable("oms10", oms10)
-                scope.SetVariable("ies1", ies1)
-                scope.SetVariable("oes1", oes1)
+                Dim ocount As Integer = 0
+                For i As Integer = 1 To _inletmaterialports
+                    scope.SetVariable("ims" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject))
+                    ocount += 1
+                Next
+                For i As Integer = 1 To _inletenergyports
+                    scope.SetVariable("ies" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection))
+                    ocount += 1
+                Next
+                For i As Integer = 1 To _outletmaterialports
+                    scope.SetVariable("oms" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeThermoMaterialObject))
+                    ocount += 1
+                Next
+                For i As Integer = 1 To _outletenergyports
+                    scope.SetVariable("oes" & i, TryCast(Me.Ports(ocount).connectedObject, ICapeCollection))
+                    ocount += 1
+                Next
                 Dim txtcode As String = ""
                 txtcode += Me._scripttext
                 source = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
                 source.Execute(Me.scope)
-                _lastrun = "script executed succesfully."
+                _lastrun = "Script executed succesfully."
             Catch ex As Exception
                 Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
                 engine = Nothing
                 scope = Nothing
                 source = Nothing
-                _lastrun = "error executing script: " & ops.FormatException(ex).ToString
-                Throw ex
+                _lastrun = "Error executing script: " & ops.FormatException(ex).ToString
+                MessageBox.Show(_lastrun)
+                Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
             Finally
                 engine = Nothing
                 scope = Nothing
@@ -227,14 +233,15 @@ Namespace UnitOperations.CAPEOPENWrappers
             Dim edform As New EditingForm_CustomUO_ScriptEditor
             With edform
                 .CAPEOPEN = True
-                .fontname = Me._fontname
-                .fontsize = Me._fontsize
-                .txtScript.Text = Me._scripttext
+                .fontname = DirectCast(Me.Parameters(1), OptionParameter).Value
+                .fontsize = DirectCast(Me.Parameters(2), OptionParameter).Value
+                .txtScript.Text = DirectCast(Me.Parameters(0), OptionParameter).Value
+                .highlightspaces = DirectCast(Me.Parameters(3), BooleanParameter).Value
                 .ShowDialog()
-                Me._fontname = .fontname
-                Me._fontsize = .fontsize
-                Me._scripttext = .scripttext
-
+                DirectCast(Me.Parameters(1), OptionParameter).Value = .fontname
+                DirectCast(Me.Parameters(2), OptionParameter).Value = .fontsize
+                DirectCast(Me.Parameters(0), OptionParameter).Value = .scripttext
+                DirectCast(Me.Parameters(3), BooleanParameter).Value = .highlightspaces
             End With
             edform.Dispose()
             edform = Nothing
@@ -255,13 +262,6 @@ Namespace UnitOperations.CAPEOPENWrappers
             Finally
             End Try
 
-            If Settings.CAPEOPENMode Then
-                Dim hcode As Integer = 0
-                Dim comEx As COMException = New COMException(e.Exception.Message.ToString, e.Exception)
-                If Not IsNothing(comEx) Then hcode = comEx.ErrorCode
-                ThrowCAPEException(e.Exception, "Error", e.Exception.Message, "UnhandledException", e.Exception.Source, e.Exception.StackTrace, "UnhandledException", hcode)
-            End If
-
         End Sub
 
         Private Sub UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
@@ -274,24 +274,138 @@ Namespace UnitOperations.CAPEOPENWrappers
             Catch ex As Exception
             End Try
 
-            If Settings.CAPEOPENMode Then
-                Dim hcode As Integer = 0
-                Dim comEx As COMException = e.ExceptionObject
-                If Not IsNothing(comEx) Then hcode = comEx.ErrorCode
-                ThrowCAPEException(e.ExceptionObject, "Error", e.ExceptionObject.ToString, "UnhandledException", e.ExceptionObject.ToString, "", "UnhandledException", hcode)
-            End If
-
-        End Sub
-
-        Sub ThrowCAPEException(ByVal ex As Exception, ByVal name As String, ByVal description As String, ByVal interf As String, ByVal moreinfo As String, ByVal operation As String, ByVal scope As String, ByVal code As Integer)
-
-            Throw New CapeOpen.CapeUnknownException(ex.Message.ToArray, ex)
-
         End Sub
 
         Public Overrides Sub OnCalculate()
 
         End Sub
+
+#Region "   CAPE-OPEN Persistence Implementation"
+
+        Protected m_dirty As Boolean = True
+
+        Public Sub GetClassID(ByRef pClassID As System.Guid) Implements IPersistStreamInit.GetClassID
+            pClassID = New Guid(CO_CustomUO.ClassId)
+        End Sub
+
+        Public Sub GetSizeMax(ByRef pcbSize As Long) Implements IPersistStreamInit.GetSizeMax
+            pcbSize = 1024 * 1024
+        End Sub
+
+        Public Overridable Sub InitNew() Implements IPersistStreamInit.InitNew
+
+
+        End Sub
+
+        Public Function IsDirty() As Integer Implements IPersistStreamInit.IsDirty
+            Return m_dirty
+        End Function
+
+        Public Sub Load(ByVal pStm As System.Runtime.InteropServices.ComTypes.IStream) Implements IPersistStreamInit.Load
+
+            ' Read the length of the string  
+            Dim arrLen As Byte() = New [Byte](3) {}
+            pStm.Read(arrLen, arrLen.Length, IntPtr.Zero)
+
+            ' Calculate the length  
+            Dim cb As Integer = BitConverter.ToInt32(arrLen, 0)
+
+            ' Read the stream to get the string    
+            Dim bytes As Byte() = New Byte(cb - 1) {}
+            Dim pcb As New IntPtr()
+            pStm.Read(bytes, bytes.Length, pcb)
+            If System.Runtime.InteropServices.Marshal.IsComObject(pStm) Then System.Runtime.InteropServices.Marshal.ReleaseComObject(pStm)
+
+            ' Deserialize byte array    
+
+            Dim memoryStream As New System.IO.MemoryStream(bytes)
+
+            Try
+
+                Dim domain As AppDomain = AppDomain.CurrentDomain
+                AddHandler domain.AssemblyResolve, New ResolveEventHandler(AddressOf MyResolveEventHandler)
+
+                Dim myarr As ArrayList
+
+                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
+                myarr = mySerializer.Deserialize(memoryStream)
+
+                _scripttext = myarr(0)
+                _fontname = myarr(1)
+                _fontsize = myarr(2)
+                If myarr.Count > 3 Then
+                    HighlightSpaces = myarr(3)
+                    _inletmaterialports = myarr(4)
+                    _outletmaterialports = myarr(5)
+                    _inletenergyports = myarr(6)
+                    _outletenergyports = myarr(7)
+                End If
+
+                myarr = Nothing
+                mySerializer = Nothing
+
+                RemoveHandler domain.AssemblyResolve, New ResolveEventHandler(AddressOf MyResolveEventHandler)
+
+            Catch p_Ex As System.Exception
+
+                System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
+
+            End Try
+
+            memoryStream.Close()
+
+        End Sub
+
+        Public Sub Save(ByVal pStm As System.Runtime.InteropServices.ComTypes.IStream, ByVal fClearDirty As Boolean) Implements IPersistStreamInit.Save
+
+            Dim props As New ArrayList
+
+            With props
+
+                .Add(DirectCast(Me.Parameters(0), OptionParameter).Value)
+                .Add(DirectCast(Me.Parameters(1), OptionParameter).Value)
+                .Add(DirectCast(Me.Parameters(2), OptionParameter).Value)
+                .Add(DirectCast(Me.Parameters(3), BooleanParameter).Value)
+                .Add(DirectCast(Me.Parameters(4), IntegerParameter).Value)
+                .Add(DirectCast(Me.Parameters(5), IntegerParameter).Value)
+                .Add(DirectCast(Me.Parameters(6), IntegerParameter).Value)
+                .Add(DirectCast(Me.Parameters(7), IntegerParameter).Value)
+
+            End With
+
+            Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
+            Dim mstr As New MemoryStream
+            mySerializer.Serialize(mstr, props)
+            Dim bytes As Byte() = mstr.ToArray()
+            mstr.Close()
+
+            ' construct length (separate into two separate bytes)    
+
+            Dim arrLen As Byte() = BitConverter.GetBytes(bytes.Length)
+            Try
+
+                ' Save the array in the stream    
+                pStm.Write(arrLen, arrLen.Length, IntPtr.Zero)
+                pStm.Write(bytes, bytes.Length, IntPtr.Zero)
+                If System.Runtime.InteropServices.Marshal.IsComObject(pStm) Then System.Runtime.InteropServices.Marshal.ReleaseComObject(pStm)
+
+            Catch p_Ex As System.Exception
+
+                System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
+
+            End Try
+
+            If fClearDirty Then
+                m_dirty = False
+            End If
+
+        End Sub
+
+        Protected Function MyResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As System.Reflection.Assembly
+            Return Me.[GetType]().Assembly
+        End Function
+
+#End Region
 
     End Class
 
