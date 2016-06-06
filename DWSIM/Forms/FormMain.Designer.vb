@@ -109,8 +109,6 @@ Partial Class FormMain
         Me.UpdateBox_Button1 = New System.Windows.Forms.Button()
         Me.UpdateBox_PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.UpdateBox_Label1 = New System.Windows.Forms.Label()
-        Me.RegToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UnregToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -295,7 +293,7 @@ Partial Class FormMain
         '
         'HelpToolStripMenuItem
         '
-        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.DonateToolStripMenuItem, Me.AboutToolStripMenuItem, Me.RegToolStripMenuItem, Me.UnregToolStripMenuItem})
+        Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.DocumentacaoToolStripMenuItem, Me.toolStripSeparator5, Me.DWSIMNaInternetToolStripMenuItem, Me.DonateToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.HelpToolStripMenuItem.MergeIndex = 102
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
@@ -614,16 +612,6 @@ Partial Class FormMain
         Me.UpdateBox_Label1.ForeColor = System.Drawing.Color.White
         Me.UpdateBox_Label1.Name = "UpdateBox_Label1"
         '
-        'RegToolStripMenuItem
-        '
-        Me.RegToolStripMenuItem.Name = "RegToolStripMenuItem"
-        resources.ApplyResources(Me.RegToolStripMenuItem, "RegToolStripMenuItem")
-        '
-        'UnregToolStripMenuItem
-        '
-        Me.UnregToolStripMenuItem.Name = "UnregToolStripMenuItem"
-        resources.ApplyResources(Me.UnregToolStripMenuItem, "UnregToolStripMenuItem")
-        '
         'FormMain
         '
         Me.AllowDrop = True
@@ -891,7 +879,5 @@ Partial Class FormMain
     Friend WithEvents UpdateBox_Label1 As System.Windows.Forms.Label
     Friend WithEvents UpdateBox_ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents RegistroCAPEOPENToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents RegToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents UnregToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

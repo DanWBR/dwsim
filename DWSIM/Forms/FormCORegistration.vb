@@ -23,14 +23,22 @@ Public Class FormCORegistration
 
         UpdateRegFile(systemregfile)
 
-        Dim p As Process = Process.Start("regedit.exe", Chr(34) & systemregfile & Chr(34))
+        Dim p As New Process
+        p.StartInfo.FileName = "regedit.exe"
+        p.StartInfo.Arguments = Chr(34) & systemregfile & Chr(34)
+        If System.Environment.OSVersion.Version.Major >= 6 Then p.StartInfo.Verb = "runas"
+        p.Start()
         p.WaitForExit()
 
     End Sub
 
     Private Sub btnUnregisterSystem_Click(sender As Object, e As EventArgs) Handles btnUnregisterSystem.Click
 
-        Dim p As Process = Process.Start("regedit.exe", Chr(34) & systemunregfile & Chr(34))
+        Dim p As New Process
+        p.StartInfo.FileName = "regedit.exe"
+        p.StartInfo.Arguments = Chr(34) & systemunregfile & Chr(34)
+        If System.Environment.OSVersion.Version.Major >= 6 Then p.StartInfo.Verb = "runas"
+        p.Start()
         p.WaitForExit()
 
     End Sub

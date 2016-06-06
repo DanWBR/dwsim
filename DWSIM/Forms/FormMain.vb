@@ -2762,31 +2762,4 @@ ruf:                Application.DoEvents()
         f.ShowDialog(Me)
     End Sub
 
-    Private Sub RegToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegToolStripMenuItem.Click
-        Dim windir As String = Environment.GetEnvironmentVariable("SystemRoot")
-        Process.Start(windir & "\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/codebase /silent " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.UnitOperations.dll" & Chr(34))
-        Process.Start(windir & "\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/codebase /silent " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.Thermodynamics.dll" & Chr(34))
-
-        If Environment.Is64BitOperatingSystem Then
-            Process.Start(windir & "\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/codebase /silent " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.UnitOperations.dll" & Chr(34))
-            Process.Start(windir & "\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/codebase /silent " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.Thermodynamics.dll" & Chr(34))
-            Process.Start(windir & "\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/codebase /silent " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.SharedClasses.dll" & Chr(34))
-        End If
-
-    End Sub
-
-    Private Sub UnregToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UnregToolStripMenuItem.Click
-
-        Dim windir As String = Environment.GetEnvironmentVariable("SystemRoot")
-        Process.Start(windir & "\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/u " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.UnitOperations.dll" & Chr(34))
-        Process.Start(windir & "\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe", "/u " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.Thermodynamics.dll" & Chr(34))
-
-        If Environment.Is64BitOperatingSystem Then
-            Process.Start(windir & "\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/u " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.UnitOperations.dll" & Chr(34))
-            Process.Start(windir & "\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/u " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.Thermodynamics.dll" & Chr(34))
-            Process.Start(windir & "\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe", "/u " & Chr(34) & My.Application.Info.DirectoryPath & " \DWSIM.SharedClasses.dll" & Chr(34))
-        End If
-
-    End Sub
-
 End Class
