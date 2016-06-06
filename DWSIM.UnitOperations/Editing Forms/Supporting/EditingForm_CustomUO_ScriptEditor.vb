@@ -36,8 +36,9 @@ Imports System.Drawing
     Public fontname As String = "Courier New"
     Public fontsize As Integer = 10
     Public highlightspaces As Boolean = False
+    Public scripttext As String = ""
 
-    Private reader As Jolt.XmlDocCommentReader
+    Private reader As New List(Of Jolt.XmlDocCommentReader)
 
     Public CAPEOPEN As Boolean = False
 
@@ -47,7 +48,7 @@ Imports System.Drawing
 #End Region
 
     Private Sub ScriptEditorForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If Not CAPEOPEN Then ScriptUO.ScriptText = txtScript.Text
+        If Not CAPEOPEN Then ScriptUO.ScriptText = txtScript.Text Else scripttext = txtScript.Text
     End Sub
 
     Private Sub ScriptEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -58,7 +59,20 @@ Imports System.Drawing
             Me.Text = ScriptUO.GraphicObject.Tag & " - " & Me.Text
         End If
 
-        If Not CAPEOPEN Then reader = New Jolt.XmlDocCommentReader(Assembly.GetExecutingAssembly())
+        If Not CAPEOPEN Then
+
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+            Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+
+            reader.Add(New Jolt.XmlDocCommentReader(Assembly.GetExecutingAssembly()))
+            reader.Add(New Jolt.XmlDocCommentReader(calculatorassembly))
+            reader.Add(New Jolt.XmlDocCommentReader(fsolverassembly))
+
+        Else
+
+            reader.Add(New Jolt.XmlDocCommentReader(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "CapeOpen.xml"))
+
+        End If
 
         Me.txtScript.Tag = 0
 
@@ -212,12 +226,10 @@ Imports System.Drawing
         btnUndo.Enabled = txtScript.CanUndo
         btnRedo.Enabled = txtScript.CanRedo
 
-        If Not CAPEOPEN Then
-            txtScript.ShowAutoComplete()
-            txtScript.ShowToolTip(reader)
-            ScriptUO.ScriptText = txtScript.Text
-        End If
-
+        txtScript.ShowAutoComplete(CAPEOPEN)
+        txtScript.ShowToolTip(reader, CAPEOPEN)
+        If Not CAPEOPEN Then ScriptUO.ScriptText = txtScript.Text
+       
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnUndo.Click

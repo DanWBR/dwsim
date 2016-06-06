@@ -142,7 +142,7 @@ Namespace UnitOperations.CAPEOPENWrappers
         Public Shadows Sub Calculate()
 
             Dim ims1, ims2, ims3, ims4, ims5, ims6, ims7, ims8, ims9, ims10,
-       oms1, oms2, oms3, oms4, oms5, oms6, oms7, oms8, oms9, oms10 As ICapeThermoMaterialObject
+                oms1, oms2, oms3, oms4, oms5, oms6, oms7, oms8, oms9, oms10 As ICapeThermoMaterialObject
 
             ims1 = TryCast(Me.Ports(0).connectedObject, ICapeThermoMaterialObject)
             ims2 = TryCast(Me.Ports(1).connectedObject, ICapeThermoMaterialObject)
@@ -233,7 +233,7 @@ Namespace UnitOperations.CAPEOPENWrappers
                 .ShowDialog()
                 Me._fontname = .fontname
                 Me._fontsize = .fontsize
-                Me._scripttext = .txtScript.Text
+                Me._scripttext = .scripttext
 
             End With
             edform.Dispose()

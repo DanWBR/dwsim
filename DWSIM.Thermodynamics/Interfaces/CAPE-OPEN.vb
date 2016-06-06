@@ -147,9 +147,12 @@ Public Class CAPEOPENManager
 
             'handler for unhandled exceptions
 
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-            AddHandler Application.ThreadException, AddressOf UnhandledException
-            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
+            Try
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+                AddHandler Application.ThreadException, AddressOf UnhandledException
+                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
+            Catch ex As Exception
+            End Try
 
             Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.InitLibraries()
 

@@ -579,6 +579,17 @@ Public Class FormMain
         BOPP.ComponentName = "Black Oil"
         BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
+        'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.
+        If Not DWSIM.App.IsRunningOnMono Then
+
+            Dim COPP As CAPEOPENPropertyPackage = New CAPEOPENPropertyPackage()
+            COPP.ComponentName = "CAPE-OPEN"
+            COPP.ComponentDescription = DWSIM.App.GetLocalString("DescCOPP")
+
+            PropertyPackages.Add(COPP.ComponentName.ToString, COPP)
+
+        End If
+
         PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
     End Sub

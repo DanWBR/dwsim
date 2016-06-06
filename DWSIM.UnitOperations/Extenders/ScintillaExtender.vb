@@ -226,7 +226,7 @@ Module scintillaExtender
     ''' </summary>
     ''' <param name="scintilla"></param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowAutoComplete(scintilla As ScintillaNET.Scintilla)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowAutoComplete(scintilla As ScintillaNET.Scintilla, capeopen As Boolean)
 
         Dim suggestions As String = ""
 
@@ -242,81 +242,143 @@ Module scintillaExtender
             Else
                 lastkeyword = text(text.Length - 1).Trim
             End If
-            Select Case lastkeyword
-                Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
-                    Dim props = Type.GetType("DWSIM.Streams.MaterialStream").GetProperties()
-                    For Each p In props
-                        suggestions += (p.Name) + " "
-                    Next
-                    Dim methods = Type.GetType("DWSIM.Streams.MaterialStream").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case "ies1", "oes1", "EnergyStream"
-                    Dim props = Type.GetType("DWSIM.Streams.EnergyStream").GetProperties()
-                    For Each p In props
-                        suggestions += (p.Name) + " "
-                    Next
-                    Dim methods = Type.GetType("DWSIM.Streams.EnergyStream").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case "Flowsheet"
-                    Dim props = Type.GetType("DWSIM.FormFlowsheet").GetProperties()
-                    For Each p In props
-                        If p.PropertyType.Namespace <> "System.Windows.Forms" Then suggestions += (p.Name) + " "
-                    Next
-                    Dim methods = Type.GetType("DWSIM.FormFlowsheet").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case "Spreadsheet"
-                    Dim props = Type.GetType("DWSIM.SpreadsheetForm").GetProperties()
-                    For Each p In props
-                        If p.PropertyType.Namespace <> "System.Windows.Forms" Then suggestions += (p.Name) + " "
-                    Next
-                    Dim methods = Type.GetType("DWSIM.SpreadsheetForm").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case "PropertyPackage"
-                    Dim props = Type.GetType("PropertyPackages.PropertyPackage").GetProperties()
-                    For Each p In props
-                        suggestions += (p.Name) + " "
-                    Next
-                    Dim methods = Type.GetType("PropertyPackages.PropertyPackage").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case "UnitOp", "Me"
-                    Dim props = Type.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetProperties()
-                    For Each p In props
-                        suggestions += (p.Name) + " "
-                    Next
-                    Dim methods = Type.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case "Solver"
-                    Dim methods = Type.GetType("DWSIM.DWSIM.Flowsheet.FlowsheetSolver").GetMethods()
-                    For Each m In methods
-                        suggestions += (m.Name) + " "
-                    Next
-                Case Else
-                    If scintilla.Tag = 1 Then
-                        suggestions = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
-                    Else
-                        suggestions = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
-                    End If
-            End Select
-        Else
-            If scintilla.Tag = 1 Then
-                'editor is being used at flowsheet level.
-                suggestions = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
+
+            If Not capeopen Then
+
+                Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+                Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
+                Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+                Dim interfaceassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Interfaces,")).FirstOrDefault
+
+                Select Case lastkeyword
+                    Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                        Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "ies1", "oes1", "EnergyStream"
+                        Dim props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "Flowsheet"
+                        Dim props = interfaceassembly.GetType("DWSIM.Interfaces.IFlowsheet").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = interfaceassembly.GetType("DWSIM.Interfaces.IFlowsheet").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "PropertyPackage"
+                        Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "UnitOp", "Me"
+                        Dim props = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "Solver"
+                        Dim methods = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case Else
+                        If scintilla.Tag = 1 Then
+                            suggestions = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
+                        Else
+                            suggestions = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
+                        End If
+                End Select
+
             Else
-                'editor is being used at script unit operation level
-                suggestions = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
+
+                Dim capeopenassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("CapeOpen,")).FirstOrDefault
+               
+                Select Case lastkeyword
+                    Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5",
+                         "ims6", "ims7", "ims8", "ims9", "ims10", "oms6", "oms7", "oms8", "oms9", "oms10"
+                        Dim props = capeopenassembly.GetType("CapeOpen.ICapeThermoMaterialObject").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = capeopenassembly.GetType("CapeOpen.ICapeThermoMaterialObject").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "ies1", "oes1"
+                        Dim props = capeopenassembly.GetType("CapeOpen.ICapeCollection").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = capeopenassembly.GetType("CapeOpen.ICapeCollection").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "this"
+                        Dim props = capeopenassembly.GetType("CapeOpen.ICapeUtilities").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = capeopenassembly.GetType("CapeOpen.ICapeUtilities").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case "pme"
+                        Dim props = capeopenassembly.GetType("CapeOpen.ICapeSimulationContext").GetProperties()
+                        For Each p In props
+                            suggestions += (p.Name) + " "
+                        Next
+                        Dim methods = capeopenassembly.GetType("CapeOpen.ICapeSimulationContext").GetMethods()
+                        For Each m In methods
+                            suggestions += (m.Name) + " "
+                        Next
+                    Case Else
+                        suggestions = "ims1 ims2 ims3 ims4 ims5 ims6 ims7 ims8 ims9 ims10 ies1 oms1 oms2 oms3 oms4 oms5 oms6 ims7 ims8 oms9 ims10 oes1 this pme"
+                End Select
+
             End If
+
+        Else
+
+            If Not capeopen Then
+
+                If scintilla.Tag = 1 Then
+
+                    'editor is being used at flowsheet level.
+                    suggestions = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
+
+                Else
+
+                    'editor is being used at script unit operation level
+                    suggestions = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
+
+                End If
+
+            Else
+
+                suggestions = "ims1 ims2 ims3 ims4 ims5 ims6 ims7 ims8 ims9 ims10 ies1 oms1 oms2 oms3 oms4 oms5 oms6 ims7 ims8 oms9 ims10 oes1 this pme"
+
+            End If
+
         End If
 
         Dim currentPos = scintilla.CurrentPosition
@@ -337,9 +399,9 @@ Module scintillaExtender
     ''' Show a tooltip with information about the entered object method or property.
     ''' </summary>
     ''' <param name="scintilla"></param>
-    ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
+    ''' <param name="readers">Jolt's XmlDocCommentReader list or readers, to get and display comments from assembly-generated XML file.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As ScintillaNET.Scintilla, reader As Jolt.XmlDocCommentReader)
+    <System.Runtime.CompilerServices.Extension()> Sub ShowToolTip(scintilla As ScintillaNET.Scintilla, readers As List(Of Jolt.XmlDocCommentReader), capeopen As Boolean)
 
         'parses the last keyword (object) (before the ".") and get suggestions for the autocomplete box from its properties and methods
 
@@ -349,31 +411,60 @@ Module scintillaExtender
         Dim helptext As String = ""
 
         If text.Length >= 2 Then
+
             Dim lastkeyword = text(text.Length - 1)
             Dim lastobj = text(text.Length - 2).Trim()
-            Select Case lastobj
-                Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
-                    Dim prop = Type.GetType("DWSIM.Streams.MaterialStream").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "ies1", "oes1", "EnergyStream"
-                    Dim prop = Type.GetType("DWSIM.Streams.EnergyStream").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "Flowsheet"
-                    Dim prop = Type.GetType("DWSIM.FormFlowsheet").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "Spreadsheet"
-                    Dim prop = Type.GetType("DWSIM.SpreadsheetForm").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "PropertyPackage"
-                    Dim prop = Type.GetType("PropertyPackages.PropertyPackage").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "UnitOp", "Me"
-                    Dim prop = Type.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-                Case "Solver"
-                    Dim prop = Type.GetType("DWSIM.DWSIM.Flowsheet.FlowsheetSolver").GetMember(lastkeyword)
-                    If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), reader)
-            End Select
+
+            If Not capeopen Then
+
+                Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+                Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
+                Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+                Dim interfaceassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Interfaces,")).FirstOrDefault
+
+                Select Case lastobj
+                    Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5", "MaterialStream"
+                        Dim prop = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "ies1", "oes1", "EnergyStream"
+                        Dim prop = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "Flowsheet"
+                        Dim prop = interfaceassembly.GetType("DWSIM.Interfaces.IFlowsheet").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "PropertyPackage"
+                        Dim prop = calculatorassembly.GetType("PropertyPackages.PropertyPackage").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "UnitOp", "Me", "this"
+                        Dim prop = unitopassembly.GetType("DWSIM.SharedClasses.UnitOperations.UnitOpBaseClass").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "Solver"
+                        Dim prop = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "pme"
+                End Select
+
+            Else
+
+                Dim capeopenassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("CapeOpen,")).FirstOrDefault
+          
+                Select Case lastobj
+                    Case "ims1", "ims2", "ims3", "ims4", "ims5", "ims6", "oms1", "oms2", "oms3", "oms4", "oms5",
+                        "ims6", "ims7", "ims8", "ims9", "ims10", "oms6", "oms7", "oms8", "oms9", "oms10"
+                        Dim prop = capeopenassembly.GetType("CapeOpen.ICapeThermoMaterialObject").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "ies1", "oes1"
+                        Dim prop = capeopenassembly.GetType("CapeOpen.ICapeCollection").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "this"
+                        Dim prop = capeopenassembly.GetType("CapeOpen.ICapeUtilities").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                    Case "pme"
+                        Dim prop = capeopenassembly.GetType("CapeOpen.ICapeSimulationContext").GetMember(lastkeyword)
+                        If prop.Length > 0 Then helptext = scintilla.FormatHelpTip(prop(0), readers, capeopen)
+                End Select
+
+            End If
 
             'shows the tooltip
 
@@ -397,13 +488,13 @@ Module scintillaExtender
     ''' <param name="reader">Jolt's XmlDocCommentReader instance, to get and display comments from assembly-generated XML file.</param>
     ''' <returns>The formatted text to display in the tooltip.</returns>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Private Function FormatHelpTip(scintilla As ScintillaNET.Scintilla, member As MemberInfo, reader As Jolt.XmlDocCommentReader) As String
+    <System.Runtime.CompilerServices.Extension()> Private Function FormatHelpTip(scintilla As ScintillaNET.Scintilla, member As MemberInfo, reader As List(Of Jolt.XmlDocCommentReader), capeopen As Boolean) As String
 
         Select Case member.MemberType
 
             Case MemberTypes.Method
 
-                Dim methods = Type.GetType(member.DeclaringType.FullName).GetMethods().Where(Function(m) m.Name = member.Name).ToList
+                Dim methods = member.ReflectedType.GetMethods().Where(Function(m) m.Name = member.Name).ToList
                 Dim method = methods(0)
 
                 Dim summary As String = ""
@@ -415,24 +506,38 @@ Module scintillaExtender
 
                 Dim txthelp As String = method.DeclaringType.Name & " method '" & member.Name & "'" & vbCrLf
 
-                Dim xmlhelp = reader.GetComments(method)
+                Dim xmlhelp As New XElement("comments")
+                For Each r In reader
+                    xmlhelp.Add(r.GetComments(method))
+                Next
 
-                If Not xmlhelp Is Nothing Then
-                    Dim params = xmlhelp.Elements("param").ToList
+                If Not xmlhelp Is Nothing AndAlso xmlhelp.Elements.Count > 0 Then
+                    Dim params = xmlhelp.Elements.ElementAt(0).Elements("param").ToList
                     For Each p In params
-                        If p.Value.ToString.Length > 70 Then
-                            argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString.Substring(0, 70).Trim(vbLf) & " [...]")
+                        If p.Value.ToString.Length > 50 Then
+                            Try
+                                p.Value = p.Value.Replace(vbCr, " ").Replace(vbLf, " ").Replace(vbCrLf, " ")
+                                Dim lines As String() = Enumerable.Range(0, p.Value.Length / 50).Select(Function(i) p.Value.Substring(i * 50, If(p.Value.Length - i * 50 > 50, 50, p.Value.Length - i * 50))).ToArray
+                                Dim argtext As String = lines(0) & vbCrLf
+                                For i As Integer = 1 To lines.Length - 1
+                                    argtext += "                                 " + lines(i) & vbCrLf
+                                Next
+                                argtext = argtext.TrimEnd(New Char() {vbCrLf, vbTab, ""})
+                                argumentdescriptions.Add(p.Attribute("name"), argtext)
+                            Catch ex As Exception
+                                argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString)
+                            End Try
                         Else
                             argumentdescriptions.Add(p.Attribute("name"), p.Value.ToString.Trim(vbLf))
                         End If
                     Next
                     If method.ReturnType.Name <> "Void" Then
-                        Dim rdesc = xmlhelp.Elements("returns").FirstOrDefault
+                        Dim rdesc = xmlhelp.Elements("comments").Elements("returns").FirstOrDefault
                         If Not rdesc Is Nothing Then
                             returndescription = rdesc.Value
                         End If
                     End If
-                    Dim redesc = xmlhelp.Elements("remarks").FirstOrDefault
+                    Dim redesc = xmlhelp.Elements("comments").Elements("remarks").FirstOrDefault
                     If Not redesc Is Nothing Then
                         If redesc.Value.Length > 1000 Then
                             remarks = redesc.Value.Substring(0, 1000) & " [...]"
@@ -440,7 +545,7 @@ Module scintillaExtender
                             remarks = redesc.Value
                         End If
                     End If
-                    redesc = xmlhelp.Elements("summary").FirstOrDefault
+                    redesc = xmlhelp.Elements("comments").Elements("summary").FirstOrDefault
                     If Not redesc Is Nothing Then
                         summary = redesc.Value
                         txthelp += summary & vbCrLf
@@ -449,7 +554,7 @@ Module scintillaExtender
 
                 If method.GetParameters.Count > 0 Then
                     txthelp += "Parameters:" & vbCrLf & vbCrLf
-                    txthelp += "Type".PadRight(18) & "Name".PadRight(15) & "Description" & vbCrLf
+                    txthelp += "Type".PadRight(18) & "Name".PadRight(15) & "Description" & vbCrLf & vbCrLf
                     For Each par In method.GetParameters
                         If argumentdescriptions.ContainsKey(par.Name) Then
                             txthelp += par.ParameterType.Name.PadRight(18) & par.Name.PadRight(15) & argumentdescriptions(par.Name) & vbCrLf
@@ -468,7 +573,7 @@ Module scintillaExtender
 
             Case MemberTypes.Property
 
-                Dim props = Type.GetType(member.DeclaringType.FullName).GetProperties().Where(Function(p) p.Name = member.Name).ToList
+                Dim props = member.ReflectedType.GetProperties().Where(Function(p) p.Name = member.Name).ToList
                 Dim prop = props(0)
 
                 Dim summary As String = ""
@@ -477,10 +582,13 @@ Module scintillaExtender
                 Dim txthelp As String = prop.DeclaringType.Name & " property '" & prop.Name & "'" & vbCrLf
                 txthelp += "Type: " & prop.PropertyType.ToString
 
-                Dim xmlhelp = reader.GetComments(prop)
+                Dim xmlhelp As New XElement("comments")
+                For Each r In reader
+                    xmlhelp.Add(r.GetComments(prop))
+                Next
 
-                If Not xmlhelp Is Nothing Then
-                    Dim redesc = xmlhelp.Elements("summary").FirstOrDefault
+                If Not xmlhelp Is Nothing AndAlso xmlhelp.Elements.Count > 0 Then
+                    Dim redesc = xmlhelp.Elements.ElementAt(0).Elements("summary").FirstOrDefault
                     If Not redesc Is Nothing Then
                         txthelp += vbCrLf & "Description: " & redesc.Value
                     End If
