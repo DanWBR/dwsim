@@ -263,7 +263,6 @@ Partial Class FormUnhandledException
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Public WithEvents LabelWithDivider2 As System.Windows.Forms.Label
@@ -281,4 +280,5 @@ Partial Class FormUnhandledException
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label8 As System.Windows.Forms.Label
     Public WithEvents Label9 As System.Windows.Forms.Label
+    Public WithEvents TextBox1 As System.Windows.Forms.TextBox
 End Class

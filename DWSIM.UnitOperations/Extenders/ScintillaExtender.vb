@@ -36,7 +36,7 @@ Module scintillaExtender
     ''' <param name="fontsize">Size of the font to be used.</param>
     ''' <param name="viewspaces">Enables or disables whitspace highlighting.</param>
     ''' <remarks></remarks>
-    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As ScintillaNET.Scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean)
+    <System.Runtime.CompilerServices.Extension()> Sub SetEditorStyle(scintilla As ScintillaNET.Scintilla, fontname As String, fontsize As Integer, viewspaces As Boolean, capeopen As Boolean)
 
         scintilla.StyleResetDefault()
         scintilla.Styles(Style.[Default]).Font = fontname
@@ -140,62 +140,68 @@ Module scintillaExtender
         Dim python2 = "and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or pass print raise return try while with yield"
         Dim python3 = "False None True and as assert break class continue def del elif else except finally for from global if import in is lambda nonlocal not or pass raise return try while with yield"
 
+        scintilla.SetKeywords(0, python2 + " " + python3)
+
         'add keywords from DWSIM classes properties and methods
 
-        Dim netprops As String = ""
+        If Not capeopen Then
 
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
-        Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
+            Dim netprops As String = ""
 
-        Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
-        For Each p In props
-            netprops += p.Name + " "
-        Next
-        Dim methods = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMethods()
-        For Each m In methods
-            netprops += m.Name + " "
-        Next
-        props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties()
-        For Each p In props
-            netprops += p.Name + " "
-        Next
-        methods = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMethods()
-        For Each m In methods
-            netprops += m.Name + " "
-        Next
-        props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
-        For Each p In props
-            If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
-        Next
-        methods = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMethods()
-        For Each m In methods
-            netprops += m.Name + " "
-        Next
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+            Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations,")).FirstOrDefault
+            Dim fsolverassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.FlowsheetSolver,")).FirstOrDefault
 
-        Dim objects As String = ""
-
-        If scintilla.Tag = 1 Then
-            'editor is being used at flowsheet level.
-            props = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetProperties()
+            Dim props = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetProperties()
             For Each p In props
-                If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
+                netprops += p.Name + " "
             Next
-            methods = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMethods()
+            Dim methods = calculatorassembly.GetType("DWSIM.Thermodynamics.Streams.MaterialStream").GetMethods()
             For Each m In methods
                 netprops += m.Name + " "
             Next
-            objects = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
+            props = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetProperties()
+            For Each p In props
+                netprops += p.Name + " "
+            Next
+            methods = unitopassembly.GetType("DWSIM.UnitOperations.Streams.EnergyStream").GetMethods()
+            For Each m In methods
+                netprops += m.Name + " "
+            Next
+            props = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetProperties()
+            For Each p In props
+                If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
+            Next
+            methods = calculatorassembly.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage").GetMethods()
+            For Each m In methods
+                netprops += m.Name + " "
+            Next
 
-        Else
-            'editor is being used at script unit operation level
-            objects = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
+            Dim objects As String = ""
+
+            If scintilla.Tag = 1 Then
+
+                'editor is being used at flowsheet level.
+                props = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetProperties()
+                For Each p In props
+                    If p.PropertyType.Namespace <> "System.Windows.Forms" Then netprops += p.Name + " "
+                Next
+                methods = fsolverassembly.GetType("DWSIM.FlowsheetSolver.FlowsheetSolver").GetMethods()
+                For Each m In methods
+                    netprops += m.Name + " "
+                Next
+                objects = "MaterialStream EnergyStream PropertyPackage UnitOp Flowsheet Spreadsheet Plugins Solver DWSIM"
+
+            Else
+
+                'editor is being used at script unit operation level
+                objects = "ims1 ims2 ims3 ims4 ims5 ims6 ies1 oms1 oms2 oms3 oms4 oms5 oms6 oes1 Flowsheet Spreadsheet Plugins Solver Me DWSIM"
+
+            End If
+
+            scintilla.SetKeywords(1, objects + " " + netprops)
 
         End If
-
-
-        scintilla.SetKeywords(0, python2 + " " + python3)
-        scintilla.SetKeywords(1, objects + " " + netprops)
 
         scintilla.SetColumnMargins()
 

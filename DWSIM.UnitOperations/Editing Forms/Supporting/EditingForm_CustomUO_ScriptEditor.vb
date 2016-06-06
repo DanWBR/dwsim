@@ -47,18 +47,22 @@ Imports System.Drawing
 #End Region
 
     Private Sub ScriptEditorForm_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        ScriptUO.ScriptText = txtScript.Text
+        If Not CAPEOPEN Then ScriptUO.ScriptText = txtScript.Text
     End Sub
 
     Private Sub ScriptEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Text = ScriptUO.GraphicObject.Tag & " - " & Me.Text
+        If CAPEOPEN Then
+            Me.Text = "Script Editor"
+        Else
+            Me.Text = ScriptUO.GraphicObject.Tag & " - " & Me.Text
+        End If
 
-        reader = New Jolt.XmlDocCommentReader(Assembly.GetExecutingAssembly())
+        If Not CAPEOPEN Then reader = New Jolt.XmlDocCommentReader(Assembly.GetExecutingAssembly())
 
         Me.txtScript.Tag = 0
 
-        Me.txtScript.Text = ScriptUO.ScriptText
+        If Not CAPEOPEN Then Me.txtScript.Text = ScriptUO.ScriptText
 
         Me.ListBox1.Items.Clear()
         If Not includes Is Nothing Then
@@ -84,7 +88,7 @@ Imports System.Drawing
 
         btnHighlightSpaces.Checked = highlightspaces
 
-        txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked)
+        txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
 
         loaded = True
 
@@ -92,8 +96,14 @@ Imports System.Drawing
 
     Private Sub OpenToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripButton.Click
         If Me.txtScript.Text <> "" Then
-            If MessageBox.Show(ScriptUO.FlowSheet.GetTranslatedString("DesejaSalvaroScriptAtual"), ScriptUO.FlowSheet.GetTranslatedString("Ateno"), MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
-                SaveToolStripButton_Click(sender, e)
+            If Not CAPEOPEN Then
+                If MessageBox.Show(ScriptUO.FlowSheet.GetTranslatedString("DesejaSalvaroScriptAtual"), ScriptUO.FlowSheet.GetTranslatedString("Ateno"), MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+                    SaveToolStripButton_Click(sender, e)
+                End If
+            Else
+                If MessageBox.Show("Save current script?", "Save changes", MessageBoxButtons.YesNo) = Windows.Forms.DialogResult.Yes Then
+                    SaveToolStripButton_Click(sender, e)
+                End If
             End If
         End If
         If Me.ofd2.ShowDialog = Windows.Forms.DialogResult.OK Then
@@ -123,11 +133,11 @@ Imports System.Drawing
     End Sub
 
     Private Sub tscb1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb1.SelectedIndexChanged
-        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked)
+        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 
     Private Sub tscb2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tscb2.SelectedIndexChanged
-        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked)
+        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 
     Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
@@ -187,7 +197,7 @@ Imports System.Drawing
 
     Private Sub txtScript__KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtScript.KeyDown
 
-        If e.KeyValue = Keys.F5 Then
+        If e.KeyValue = Keys.F5 And Not CAPEOPEN Then
 
             btnDebug_Click(sender, e)
 
@@ -202,11 +212,11 @@ Imports System.Drawing
         btnUndo.Enabled = txtScript.CanUndo
         btnRedo.Enabled = txtScript.CanRedo
 
-        txtScript.ShowAutoComplete()
-
-        txtScript.ShowToolTip(reader)
-
-        ScriptUO.ScriptText = txtScript.Text
+        If Not CAPEOPEN Then
+            txtScript.ShowAutoComplete()
+            txtScript.ShowToolTip(reader)
+            ScriptUO.ScriptText = txtScript.Text
+        End If
 
     End Sub
 
@@ -220,7 +230,7 @@ Imports System.Drawing
 
     Private Sub btnHighlightSpaces_Click(sender As Object, e As EventArgs) Handles btnHighlightSpaces.CheckedChanged
         highlightspaces = btnHighlightSpaces.Checked
-        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked)
+        If loaded Then txtScript.SetEditorStyle(tscb1.SelectedItem.ToString, tscb2.SelectedItem.ToString, btnHighlightSpaces.Checked, CAPEOPEN)
     End Sub
 
 End Class

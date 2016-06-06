@@ -912,6 +912,8 @@
     <None Include="Assets\data\reactions\Water Self-Ionization.dwrxm" />
     <None Include="Assets\registry\CO_register_admin.reg" />
     <None Include="Assets\registry\CO_register_user.reg" />
+    <None Include="Assets\registry\CO_unregister_admin.reg" />
+    <None Include="Assets\registry\CO_unregister_user.reg" />
     <None Include="Assets\samples\1,2-Dichloroethane-N-Heptane-LKP.dwrsd" />
     <None Include="Assets\samples\1,2-Dichloroethane-N-Heptane-SRK.dwrsd" />
     <None Include="Assets\samples\1-Propanol-Water-NRTL.dwrsd" />
