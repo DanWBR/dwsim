@@ -1,5 +1,5 @@
-﻿'    Custom (Scripting) Unit Operation Calculation Routines 
-'    Copyright 2010-2011 Daniel Wagner O. de Medeiros
+﻿'    IronPython Script Unit Operation CAPE-OPEN Wrapper
+'    Copyright 2016 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -40,9 +40,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
     <Guid(CO_CustomUO.ClassId)> <System.Serializable()> <ComVisible(True)> Public Class CO_CustomUO
 
-        Inherits CapeOpen.CapeUnitBase
-
-        Implements CapeOpen.ICapeUtilities, IPersistStreamInit, ICapeUnit
+        Inherits CapeOpenBase
 
         Private _scripttext As String = ""
         Private _fontname As String = "Consolas"
@@ -63,34 +61,24 @@ Namespace UnitOperations.CAPEOPENWrappers
         Private Property engine As ScriptEngine
         Private Property scope As Object
 
-        Private _initialized As Boolean = False
+        Public Overrides Sub Initialize()
 
-        Public Shadows WriteOnly Property simulationContext As Object Implements ICapeUtilities.simulationContext
-            Set(value As Object)
-                _sctxt = value
-            End Set
-        End Property
-
-        Public Shadows Sub Initialize() Implements ICapeUtilities.Initialize
-
-            My.Application.ChangeUICulture("en")
-
-            'handler for unhandled exceptions
-
-            Try
-                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-                AddHandler Application.ThreadException, AddressOf UnhandledException
-                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
-            Catch ex As Exception
-
-            End Try
-
-            'create port collection
+            MyBase.Initialize()
 
             Me.ComponentName = "Scripting Unit Operation"
             Me.ComponentDescription = "IronPython Scripting Unit Operation"
 
+            'create port collection
+
             CreatePorts()
+        
+            'parameters
+
+            If Parameters.Count = 0 Then CreateParameters()
+   
+        End Sub
+
+        Public Overrides Sub CreateParameters()
 
             Dim fontnames As New List(Of String)
 
@@ -168,19 +156,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         End Sub
 
-        Public Shadows Sub Terminate() Implements ICapeUtilities.Terminate
-
-            If Not _sctxt Is Nothing Then
-                If System.Runtime.InteropServices.Marshal.IsComObject(_sctxt) Then
-                    System.Runtime.InteropServices.Marshal.ReleaseComObject(_sctxt)
-                End If
-            End If
-
-            Me.simulationContext = Nothing
-
-        End Sub
-
-        Public Shadows Sub Calculate() Implements CapeOpen.ICapeUnit.Calculate
+        Public Overrides Sub Calculate()
 
             Dim source As Microsoft.Scripting.Hosting.ScriptSource
             Try
@@ -251,161 +227,6 @@ Namespace UnitOperations.CAPEOPENWrappers
         Public Overrides Sub ProduceReport(ByRef report As String)
             report = _lastrun
         End Sub
-
-        Private Sub UnhandledException(ByVal sender As Object, ByVal e As System.Threading.ThreadExceptionEventArgs)
-
-            Try
-                Dim frmEx As New FormUnhandledException
-                frmEx.TextBox1.Text = e.Exception.ToString
-                frmEx.ex = e.Exception
-                frmEx.ShowDialog()
-            Finally
-            End Try
-
-        End Sub
-
-        Private Sub UnhandledException2(ByVal sender As Object, ByVal e As System.UnhandledExceptionEventArgs)
-
-            Try
-                Dim frmEx As New FormUnhandledException
-                frmEx.TextBox1.Text = e.ExceptionObject.ToString
-                frmEx.ex = e.ExceptionObject
-                frmEx.ShowDialog()
-            Catch ex As Exception
-            End Try
-
-        End Sub
-
-        Public Overrides Sub OnCalculate()
-
-        End Sub
-
-#Region "   CAPE-OPEN Persistence Implementation"
-
-        Protected m_dirty As Boolean = True
-
-        Public Sub GetClassID(ByRef pClassID As System.Guid) Implements IPersistStreamInit.GetClassID
-            pClassID = New Guid(CO_CustomUO.ClassId)
-        End Sub
-
-        Public Sub GetSizeMax(ByRef pcbSize As Long) Implements IPersistStreamInit.GetSizeMax
-            pcbSize = 1024 * 1024
-        End Sub
-
-        Public Overridable Sub InitNew() Implements IPersistStreamInit.InitNew
-
-
-        End Sub
-
-        Public Function IsDirty() As Integer Implements IPersistStreamInit.IsDirty
-            Return m_dirty
-        End Function
-
-        Public Sub Load(ByVal pStm As System.Runtime.InteropServices.ComTypes.IStream) Implements IPersistStreamInit.Load
-
-            ' Read the length of the string  
-            Dim arrLen As Byte() = New [Byte](3) {}
-            pStm.Read(arrLen, arrLen.Length, IntPtr.Zero)
-
-            ' Calculate the length  
-            Dim cb As Integer = BitConverter.ToInt32(arrLen, 0)
-
-            ' Read the stream to get the string    
-            Dim bytes As Byte() = New Byte(cb - 1) {}
-            Dim pcb As New IntPtr()
-            pStm.Read(bytes, bytes.Length, pcb)
-            If System.Runtime.InteropServices.Marshal.IsComObject(pStm) Then System.Runtime.InteropServices.Marshal.ReleaseComObject(pStm)
-
-            ' Deserialize byte array    
-
-            Dim memoryStream As New System.IO.MemoryStream(bytes)
-
-            Try
-
-                Dim domain As AppDomain = AppDomain.CurrentDomain
-                AddHandler domain.AssemblyResolve, New ResolveEventHandler(AddressOf MyResolveEventHandler)
-
-                Dim myarr As ArrayList
-
-                Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-                myarr = mySerializer.Deserialize(memoryStream)
-
-                _scripttext = myarr(0)
-                _fontname = myarr(1)
-                _fontsize = myarr(2)
-                If myarr.Count > 3 Then
-                    HighlightSpaces = myarr(3)
-                    _inletmaterialports = myarr(4)
-                    _outletmaterialports = myarr(5)
-                    _inletenergyports = myarr(6)
-                    _outletenergyports = myarr(7)
-                End If
-
-                myarr = Nothing
-                mySerializer = Nothing
-
-                RemoveHandler domain.AssemblyResolve, New ResolveEventHandler(AddressOf MyResolveEventHandler)
-
-            Catch p_Ex As System.Exception
-
-                System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
-
-            End Try
-
-            memoryStream.Close()
-
-        End Sub
-
-        Public Sub Save(ByVal pStm As System.Runtime.InteropServices.ComTypes.IStream, ByVal fClearDirty As Boolean) Implements IPersistStreamInit.Save
-
-            Dim props As New ArrayList
-
-            With props
-
-                .Add(DirectCast(Me.Parameters(0), OptionParameter).Value)
-                .Add(DirectCast(Me.Parameters(1), OptionParameter).Value)
-                .Add(DirectCast(Me.Parameters(2), OptionParameter).Value)
-                .Add(DirectCast(Me.Parameters(3), BooleanParameter).Value)
-                .Add(DirectCast(Me.Parameters(4), IntegerParameter).Value)
-                .Add(DirectCast(Me.Parameters(5), IntegerParameter).Value)
-                .Add(DirectCast(Me.Parameters(6), IntegerParameter).Value)
-                .Add(DirectCast(Me.Parameters(7), IntegerParameter).Value)
-
-            End With
-
-            Dim mySerializer As Binary.BinaryFormatter = New Binary.BinaryFormatter(Nothing, New System.Runtime.Serialization.StreamingContext())
-            Dim mstr As New MemoryStream
-            mySerializer.Serialize(mstr, props)
-            Dim bytes As Byte() = mstr.ToArray()
-            mstr.Close()
-
-            ' construct length (separate into two separate bytes)    
-
-            Dim arrLen As Byte() = BitConverter.GetBytes(bytes.Length)
-            Try
-
-                ' Save the array in the stream    
-                pStm.Write(arrLen, arrLen.Length, IntPtr.Zero)
-                pStm.Write(bytes, bytes.Length, IntPtr.Zero)
-                If System.Runtime.InteropServices.Marshal.IsComObject(pStm) Then System.Runtime.InteropServices.Marshal.ReleaseComObject(pStm)
-
-            Catch p_Ex As System.Exception
-
-                System.Windows.Forms.MessageBox.Show(p_Ex.ToString())
-
-            End Try
-
-            If fClearDirty Then
-                m_dirty = False
-            End If
-
-        End Sub
-
-        Protected Function MyResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As System.Reflection.Assembly
-            Return Me.[GetType]().Assembly
-        End Function
-
-#End Region
 
     End Class
 
