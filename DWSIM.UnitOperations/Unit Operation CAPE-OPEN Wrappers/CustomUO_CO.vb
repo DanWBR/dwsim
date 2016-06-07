@@ -60,8 +60,8 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         Private _sctxt As Object
 
-        Private Property engine As ScriptEngine
-        Private Property scope As Object
+        <System.NonSerialized()> Public scope As Microsoft.Scripting.Hosting.ScriptScope
+        <System.NonSerialized()> Public engine As Microsoft.Scripting.Hosting.ScriptEngine
 
         Private _initialized As Boolean = False
 
@@ -158,12 +158,16 @@ Namespace UnitOperations.CAPEOPENWrappers
                     HighlightSpaces = DirectCast(Me.Parameters(3), BooleanParameter).Value
                 Case "InletMaterialPorts"
                     _inletmaterialports = DirectCast(Me.Parameters(4), IntegerParameter).Value
+                    CreatePorts()
                 Case "OutletMaterialPorts"
                     _outletmaterialports = DirectCast(Me.Parameters(5), IntegerParameter).Value
+                    CreatePorts()
                 Case "InletEnergyPorts"
                     _inletenergyports = DirectCast(Me.Parameters(6), IntegerParameter).Value
+                    CreatePorts()
                 Case "OutletEnergyPorts"
                     _outletenergyports = DirectCast(Me.Parameters(7), IntegerParameter).Value
+                    CreatePorts()
             End Select
 
         End Sub
@@ -186,7 +190,9 @@ Namespace UnitOperations.CAPEOPENWrappers
             Try
                 engine = IronPython.Hosting.Python.CreateEngine()
                 engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+                engine.Runtime.LoadAssembly(GetType(CAPEOPEN110.ICapeIdentification).Assembly)
                 engine.Runtime.LoadAssembly(GetType(CapeOpen.ICapeIdentification).Assembly)
+                engine.Runtime.LoadAssembly(Reflection.Assembly.GetExecutingAssembly)
                 scope = engine.CreateScope()
                 scope.SetVariable("pme", Me._sctxt)
                 scope.SetVariable("this", Me)
@@ -208,7 +214,7 @@ Namespace UnitOperations.CAPEOPENWrappers
                     ocount += 1
                 Next
                 Dim txtcode As String = ""
-                txtcode += Me._scripttext
+                txtcode += DirectCast(Me.Parameters(0), OptionParameter).Value
                 source = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
                 source.Execute(Me.scope)
                 _lastrun = "Script executed succesfully."
@@ -218,7 +224,7 @@ Namespace UnitOperations.CAPEOPENWrappers
                 scope = Nothing
                 source = Nothing
                 _lastrun = "Error executing script: " & ops.FormatException(ex).ToString
-                MessageBox.Show(_lastrun)
+                MessageBox.Show(_lastrun, Me.ComponentName)
                 Throw New CapeOpen.CapeSolvingErrorException(_lastrun, ex)
             Finally
                 engine = Nothing

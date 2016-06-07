@@ -66,6 +66,10 @@
     <Reference Include="GemBox.Spreadsheet">
       <HintPath>..\packages\GemBox.Spreadsheet.39.3.30.1037\lib\net30\GemBox.Spreadsheet.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.CAPEOPEN110">
+      <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="IronPython">
       <HintPath>..\DWSIM\References\IronPython.dll</HintPath>
     </Reference>
