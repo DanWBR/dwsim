@@ -131,7 +131,7 @@ Module scintillaExtender
             .ForeColor = Color.FromKnownColor(KnownColor.ActiveCaptionText)
         End With
 
-        If viewspaces Then scintilla.ViewWhitespace = WhitespaceMode.VisibleAfterIndent
+        If viewspaces Then scintilla.ViewWhitespace = WhitespaceMode.VisibleAfterIndent Else scintilla.ViewWhitespace = WhitespaceMode.Invisible
 
         ' Keyword lists:
         ' 0 "Keywords",
