@@ -144,6 +144,12 @@
     <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_Filter.Designer.vb">
+      <DependentUpon>EditingForm_Filter.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Filter.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Flowsheet.Designer.vb">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </Compile>
@@ -348,6 +354,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Filter.en.resx">
+      <DependentUpon>EditingForm_Filter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Filter.resx">
+      <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.en.resx">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
