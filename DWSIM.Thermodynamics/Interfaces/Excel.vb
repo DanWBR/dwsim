@@ -37,6 +37,8 @@ Namespace ExcelAddIn
 
             Try
 
+                Settings.ExcelMode = True
+
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
                 If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
@@ -83,6 +85,8 @@ Namespace ExcelAddIn
             <ExcelArgument("Property identifier.")> ByVal prop As String, _
             <ExcelArgument("Temperature in K, if needed. Set as zero for a constant or P-dep property.")> ByVal temperature As Double, _
             <ExcelArgument("Pressure in Pa, if needed. Set as zero for a constant or T-dep property.")> ByVal pressure As Double) As Object
+
+            Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
@@ -133,6 +137,8 @@ Namespace ExcelAddIn
         <ExcelFunction(description:="Returns a list of the available single compound properties.", HelpTopic:="ExcelAddInHelp.chm!3")> _
         Public Shared Function GetCompoundPropList() As Object(,)
 
+            Settings.ExcelMode = True
+
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
@@ -162,6 +168,8 @@ Namespace ExcelAddIn
 
         <ExcelFunction(description:="Returns a list of the available Property Packages.", HelpTopic:="ExcelAddInHelp.chm!4")> _
         Public Shared Function GetPropPackList() As Object(,)
+
+            Settings.ExcelMode = True
 
             Dim ppm As New CAPEOPENManager()
 
@@ -210,6 +218,8 @@ Namespace ExcelAddIn
             <ExcelArgument("Thermodynamic Model (use 'GetModelList' to get a list of available models).")> ByVal Model As String,
             <ExcelArgument("The name of the first compound.")> ByVal Compound1 As String,
             <ExcelArgument("The name of the second compound.")> ByVal Compound2 As String) As Object(,)
+
+            Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
@@ -433,6 +443,8 @@ Namespace ExcelAddIn
             <ExcelArgument("The name of the first compound.")> ByVal Compound1 As String,
             <ExcelArgument("The name of the second compound.")> ByVal Compound2 As String) As Object(,)
 
+            Settings.ExcelMode = True
+
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
 
@@ -489,6 +501,8 @@ Namespace ExcelAddIn
         Public Shared Function GetPropList( _
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
+            Settings.ExcelMode = True
+
             Dim ppm As New CAPEOPENManager()
 
             Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
@@ -516,6 +530,8 @@ Namespace ExcelAddIn
         Public Shared Function GetPhaseList( _
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
+            Settings.ExcelMode = True
+
             Dim ppm As New CAPEOPENManager()
 
             Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
@@ -542,6 +558,8 @@ Namespace ExcelAddIn
         <ExcelFunction(description:="Returns a list of the available compounds.", HelpTopic:="ExcelAddInHelp.chm!10")> _
         Public Shared Function GetCompoundList( _
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
+
+            Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
             If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
@@ -597,6 +615,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
+
+            Settings.ExcelMode = True
 
             Try
 
@@ -712,6 +732,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
+
+            Settings.ExcelMode = True
 
             Try
 
@@ -942,6 +964,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            Settings.ExcelMode = True
+
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -1087,6 +1111,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
+
+            Settings.ExcelMode = True
 
             Try
 
@@ -1234,6 +1260,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            Settings.ExcelMode = True
+
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -1379,6 +1407,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
         <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
+
+            Settings.ExcelMode = True
 
             Try
 

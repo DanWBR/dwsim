@@ -2768,7 +2768,7 @@ ruf:                Application.DoEvents()
         Application.Restart()
     End Sub
 
-    Private Sub RegistroCAPEOPENToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroCAPEOPENToolStripMenuItem.Click
+    Private Sub RegistroCAPEOPENToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroCAPEOPENToolStripMenuItem.Click, tsbRegCO.Click
         Dim f As New FormCORegistration
         f.ShowDialog(Me)
     End Sub

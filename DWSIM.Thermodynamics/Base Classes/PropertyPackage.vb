@@ -208,7 +208,6 @@ Namespace PropertyPackages
         Public Sub LoadCSDB()
             Dim csdb As New Databases.ChemSep
             Dim cpa() As BaseClasses.ConstantProperties
-            'Try
             csdb.Load()
             cpa = csdb.Transfer()
             For Each cp As BaseClasses.ConstantProperties In cpa
@@ -431,18 +430,22 @@ Namespace PropertyPackages
 
         Public Overridable Sub AddDefaultCompounds(compnames As String())
 
-            For Each comp In compnames
+            If Not Settings.ExcelMode Then
 
-                If _availablecomps.ContainsKey(comp) Then
+                For Each comp In compnames
 
-                    Dim tmpcomp As New BaseClasses.ConstantProperties
-                    tmpcomp = _availablecomps(comp)
-                    _selectedcomps.Add(tmpcomp.Name, tmpcomp)
-                    _availablecomps.Remove(tmpcomp.Name)
+                    If _availablecomps.ContainsKey(comp) Then
 
-                End If
+                        Dim tmpcomp As New BaseClasses.ConstantProperties
+                        tmpcomp = _availablecomps(comp)
+                        _selectedcomps.Add(tmpcomp.Name, tmpcomp)
+                        _availablecomps.Remove(tmpcomp.Name)
 
-            Next
+                    End If
+
+                Next
+
+            End If
 
         End Sub
 
@@ -8934,7 +8937,7 @@ Final3:
                 If Not m_Henry.ContainsKey(HP.CAS) Then m_Henry.Add(HP.CAS, HP)
             Next
 
-            If Settings.CAPEOPENMode Then
+            If Settings.CAPEOPENMode And Not Settings.ExcelMode Then
 
                 'add default compounds
 
