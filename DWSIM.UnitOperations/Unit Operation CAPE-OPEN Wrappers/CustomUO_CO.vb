@@ -56,8 +56,6 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         Public Shadows Const ClassId As String = "1FD2DC53-DC7B-4c4d-BBEE-F37F4E5ADDFB"
 
-        Private _sctxt As Object
-
         <System.NonSerialized()> Public scope As Microsoft.Scripting.Hosting.ScriptScope
         <System.NonSerialized()> Public engine As Microsoft.Scripting.Hosting.ScriptEngine
 

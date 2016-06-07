@@ -32,7 +32,7 @@ Namespace UnitOperations.CAPEOPENWrappers
 
         Implements CapeOpen.ICapeUtilities, IPersistStreamInit, ICapeUnit
 
-        Private _sctxt As Object
+        Protected _sctxt As Object
 
         Public Shadows WriteOnly Property simulationContext As Object Implements ICapeUtilities.simulationContext
             Set(value As Object)
