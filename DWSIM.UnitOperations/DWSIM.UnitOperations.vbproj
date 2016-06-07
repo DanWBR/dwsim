@@ -210,6 +210,12 @@
     <Compile Include="Editing Forms\EditingForm_Splitter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_OrificePlate.Designer.vb">
+      <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_OrificePlate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Valve.Designer.vb">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </Compile>
@@ -408,6 +414,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Splitter.resx">
       <DependentUpon>EditingForm_Splitter.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.en.resx">
+      <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.resx">
+      <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Valve.en.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>

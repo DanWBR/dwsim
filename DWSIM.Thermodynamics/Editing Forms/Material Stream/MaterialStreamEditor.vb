@@ -381,9 +381,6 @@ Public Class MaterialStreamEditor
 
         tbTemp.Enabled = False
         tbPressure.Enabled = False
-        tbMassFlow.Enabled = False
-        tbMoleFlow.Enabled = False
-        tbVolFlow.Enabled = False
         tbEnth.Enabled = False
         tbEntr.Enabled = False
         tbFracSpec.Enabled = False
