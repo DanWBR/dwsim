@@ -1,1 +1,0 @@
-When compiling DWSIM using Visual Studio 2010, 2012, 2013 for Windows Desktop or 2013 Community Edition, change the build configuration to "Release/x86", otherwise you'll get missing file errors during initialization.
