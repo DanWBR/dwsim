@@ -16,14 +16,14 @@ Public Class EditingForm_SolidsSep
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
-
-        UpdateInfo()
+       UpdateInfo()
 
     End Sub
 
     Sub UpdateInfo()
+
+        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Loaded = False
 

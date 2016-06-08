@@ -168,6 +168,12 @@
     <Compile Include="Editing Forms\EditingForm_ReactorPFR.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_EnergyRecycle.Designer.vb">
+      <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_EnergyRecycle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Spreadsheet.Designer.vb">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </Compile>
@@ -232,6 +238,12 @@
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_OrificePlate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Recycle.Designer.vb">
+      <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Recycle.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_Valve.Designer.vb">
@@ -391,6 +403,12 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.resx">
       <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.en.resx">
+      <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.resx">
+      <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.en.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </EmbeddedResource>
@@ -456,6 +474,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.en.resx">
+      <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.resx">
+      <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Valve.en.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>

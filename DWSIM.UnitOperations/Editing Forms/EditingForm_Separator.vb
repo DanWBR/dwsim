@@ -17,14 +17,14 @@ Public Class EditingForm_Separator
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
-        units = VesselObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        nf = VesselObject.FlowSheet.FlowsheetOptions.NumberFormat
-
         UpdateInfo()
 
     End Sub
 
     Sub UpdateInfo()
+
+        units = VesselObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = VesselObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Loaded = False
 

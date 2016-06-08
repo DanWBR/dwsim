@@ -20,14 +20,14 @@ Public Class EditingForm_ReactorCSTR
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
-        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
-
         UpdateInfo()
 
     End Sub
 
     Sub UpdateInfo()
+
+        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Loaded = False
 

@@ -19,14 +19,14 @@ Public Class EditingForm_FlowsheetUO
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
 
-        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
-
-        UpdateInfo()
+         UpdateInfo()
 
     End Sub
 
     Sub UpdateInfo()
+
+        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Loaded = False
 

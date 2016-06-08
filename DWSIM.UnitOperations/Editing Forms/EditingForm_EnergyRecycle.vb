@@ -3,11 +3,11 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 
-Public Class EditingForm_OrificePlate
+Public Class EditingForm_EnergyRecycle
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public Property SimObject As UnitOperations.OrificePlate
+    Public Property SimObject As SpecialOps.EnergyRecycle
 
     Public Loaded As Boolean = False
 
@@ -63,28 +63,16 @@ Public Class EditingForm_OrificePlate
 
             'connections
 
-            Dim mslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Select(Function(m) m.Tag).ToArray
+            Dim eslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.Tag).ToArray
 
             cbInlet1.Items.Clear()
-            cbInlet1.Items.AddRange(mslist)
+            cbInlet1.Items.AddRange(eslist)
 
             cbOutlet1.Items.Clear()
-            cbOutlet1.Items.AddRange(mslist)
+            cbOutlet1.Items.AddRange(eslist)
 
             If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
-
-            'property package
-
-            Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
-            cbPropPack.Items.Clear()
-            cbPropPack.Items.AddRange(proppacks)
-            cbPropPack.SelectedItem = .PropertyPackage.Tag
-
-            Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
-            cbFlashAlg.Items.Clear()
-            cbFlashAlg.Items.AddRange(flashalgos)
-            cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag
 
             'annotation
 
@@ -96,54 +84,16 @@ Public Class EditingForm_OrificePlate
 
             'parameters
 
-            cbOrifDiam.Items.Clear()
-            cbOrifDiam.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.diameter).ToArray)
-            cbOrifDiam.SelectedItem = units.diameter
+            cbE.Items.Clear()
+            cbE.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow).ToArray)
+            cbE.SelectedItem = units.heatflow
 
-            cbDeltaT.Items.Clear()
-            cbDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
-            cbDeltaT.SelectedItem = units.deltaT
-
-            cbOrificePdrop.Items.Clear()
-            cbOrificePdrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
-            cbOrificePdrop.SelectedItem = units.deltaP
-
-            cbOverallPdrop.Items.Clear()
-            cbOverallPdrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
-            cbOverallPdrop.SelectedItem = units.deltaP
-
-            Dim uobj = SimObject
-
-            Select Case uobj.OrifType
-                Case UnitOperations.OrificePlate.OrificeType.CornerTaps
-                    rbCorner.Checked = True
-                Case UnitOperations.OrificePlate.OrificeType.FlangeTaps
-                    rbFlange.Checked = True
-                Case UnitOperations.OrificePlate.OrificeType.RadiusTaps
-                    rbRadius.Checked = True
-            End Select
-
-            tbOrificeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.OrificeDiameter.ToString(nf))
-            tbBeta.Text = .Beta.ToString(nf)
-            tbCorrF.Text = .CorrectionFactor.ToString(nf)
-        
-            tbOverallPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.OverallPressureDrop).ToString(nf)
-            tbOrificePDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.OrificePressureDrop).ToString(nf)
-            tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
+            tbET.Text = su.Converter.ConvertFromSI(units.massflow, .ConvergenceParameters.Energy).ToString(nf)
+            tbEE.Text = su.Converter.ConvertFromSI(units.massflow, .ConvergenceHistory.EnergyE).ToString(nf)
 
         End With
 
         Loaded = True
-
-    End Sub
-
-    Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
-        SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
-    End Sub
-
-    Private Sub btnConfigureFlashAlg_Click(sender As Object, e As EventArgs) Handles btnConfigureFlashAlg.Click
-
-        Thermodynamics.Calculator.ConfigureFlashInstance(SimObject, cbFlashAlg.SelectedItem.ToString)
 
     End Sub
 
@@ -166,35 +116,10 @@ Public Class EditingForm_OrificePlate
         End If
     End Sub
 
-    Private Sub cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOrifDiam.SelectedIndexChanged
-
-        If Loaded Then
-            Try
-                If sender Is cbOrifDiam Then
-                    tbOrificeDiameter.Text = su.Converter.Convert(cbOrifDiam.SelectedItem.ToString, units.diameter, Double.Parse(tbOrificeDiameter.Text)).ToString(nf)
-                    cbOrifDiam.SelectedItem = units.diameter
-                    UpdateProps(tbOrificeDiameter)
-                End If
-            Catch ex As Exception
-                SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
-            End Try
-        End If
-
-    End Sub
-
     Sub UpdateProps(sender As Object)
 
-        'Pressão na Saída
-        'Variação da Pressão
-
-        Dim uobj = SimObject
-
-        If sender Is tbBeta Then uobj.Beta = tbBeta.Text
-        If sender Is tbOrificeDiameter Then uobj.OrificeDiameter = su.Converter.ConvertToSI(cbOrifDiam.SelectedItem.ToString, tbOrificeDiameter.Text)
-        If sender Is tbCorrF Then uobj.CorrectionFactor = tbCorrF.Text
-
-        RequestCalc()
-
+        If sender Is tbET Then SimObject.ConvergenceParameters.Energy = su.Converter.ConvertToSI(cbE.SelectedItem.ToString, tbET.Text)
+     
     End Sub
 
     Sub RequestCalc()
@@ -203,7 +128,7 @@ Public Class EditingForm_OrificePlate
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOrificeDiameter.TextChanged, tbBeta.TextChanged, tbCorrF.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbET.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -215,7 +140,7 @@ Public Class EditingForm_OrificePlate
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOrificeDiameter.KeyDown, tbBeta.KeyDown, tbCorrF.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbET.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -225,20 +150,6 @@ Public Class EditingForm_OrificePlate
 
         End If
 
-    End Sub
-
-    Private Sub cbPropPack_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPropPack.SelectedIndexChanged
-        If Loaded Then
-            SimObject.PropertyPackage = SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault
-            RequestCalc()
-        End If
-    End Sub
-
-    Private Sub cbFlashAlg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlashAlg.SelectedIndexChanged
-        If Loaded Then
-            SimObject.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedItem.ToString
-            RequestCalc()
-        End If
     End Sub
 
     Private Sub cbInlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInlet1.SelectedIndexChanged
@@ -321,7 +232,7 @@ Public Class EditingForm_OrificePlate
 
         If iidx >= 0 Then
 
-            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.InputConnectors(iidx).Position.X - 50, sgobj.InputConnectors(iidx).Position.Y, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(iidx).Position.X - 50, sgobj.InputConnectors(iidx).Position.Y, "")
 
             If sgobj.InputConnectors(iidx).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(iidx).AttachedConnector.AttachedFrom, sgobj)
             fs.ConnectObjects(obj.GraphicObject, sgobj, 0, iidx)
@@ -330,7 +241,7 @@ Public Class EditingForm_OrificePlate
 
         If oidx >= 0 Then
 
-            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(oidx).Position.X + 30, sgobj.OutputConnectors(oidx).Position.Y, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.OutputConnectors(oidx).Position.X + 30, sgobj.OutputConnectors(oidx).Position.Y, "")
 
             If sgobj.OutputConnectors(oidx).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(oidx).AttachedConnector.AttachedTo)
             fs.ConnectObjects(sgobj, obj.GraphicObject, oidx, 0)
@@ -339,18 +250,6 @@ Public Class EditingForm_OrificePlate
 
         UpdateInfo()
         RequestCalc()
-
-    End Sub
-
-    Private Sub rbCorner_CheckedChanged(sender As Object, e As EventArgs) Handles rbCorner.CheckedChanged, rbFlange.CheckedChanged, rbRadius.CheckedChanged
-
-        If sender Is rbCorner Then
-            If rbCorner.Checked Then SimObject.OrifType = UnitOperations.OrificePlate.OrificeType.CornerTaps
-        ElseIf sender Is rbFlange Then
-            If rbFlange.Checked Then SimObject.OrifType = UnitOperations.OrificePlate.OrificeType.FlangeTaps
-        ElseIf sender Is rbRadius Then
-            If rbRadius.Checked Then SimObject.OrifType = UnitOperations.OrificePlate.OrificeType.RadiusTaps
-        End If
 
     End Sub
 

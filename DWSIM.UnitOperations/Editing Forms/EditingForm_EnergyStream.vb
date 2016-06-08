@@ -16,14 +16,14 @@ Public Class EditingForm_EnergyStream
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
-
         UpdateInfo()
 
     End Sub
 
     Sub UpdateInfo()
+
+        units = SimObject.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = SimObject.FlowSheet.FlowsheetOptions.NumberFormat
 
         Loaded = False
 
@@ -63,7 +63,7 @@ Public Class EditingForm_EnergyStream
 
             'connections
 
-            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is UnitOperations.UnitOpBaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_Recycle).Select(Function(m) m.GraphicObject.Tag).ToArray
+            Dim objlist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) TypeOf x Is UnitOperations.UnitOpBaseClass Or x.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle).Select(Function(m) m.GraphicObject.Tag).ToArray
 
             cbInlet1.Items.Clear()
             cbInlet1.Items.AddRange(objlist)

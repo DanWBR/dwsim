@@ -34,6 +34,8 @@ Namespace SpecialOps
 
         Implements Interfaces.IRecycle
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Recycle
+
         Protected m_ConvPar As Helpers.Recycle.ConvergenceParameters
         Protected m_ConvHist As IRecycleConvergenceHistory
         Protected m_AccelMethod As AccelMethod = AccelMethod.GlobalBroyden
@@ -578,10 +580,28 @@ Namespace SpecialOps
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_Recycle With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_Recycle With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -605,8 +625,14 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace
