@@ -33,6 +33,8 @@ Namespace SpecialOps
 
         Inherits UnitOperations.SpecialOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Spec
+
         Protected m_SourceObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
         Protected m_TargetObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
 
@@ -393,6 +395,19 @@ Namespace SpecialOps
 
         End Function
 
+        Public Function ParseExpression() As Double
+
+            Me.ExpContext = New Ciloci.Flee.ExpressionContext
+            Me.ExpContext.Imports.AddType(GetType(System.Math))
+
+            Me.ExpContext.Variables.Add("X", Double.Parse(Me.GetSourceVarValue))
+            Me.ExpContext.Variables.Add("Y", Double.Parse(Me.GetTargetVarValue))
+            Me.Expr = Me.ExpContext.CompileGeneric(Of Double)(Me.Expression)
+
+            Return Me.Expr.Evaluate
+
+        End Function
+
         Public Shadows Sub Calculate()
 
             If Me.GraphicObject.Active Then
@@ -464,10 +479,28 @@ Namespace SpecialOps
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_Spec With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_Spec With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -491,8 +524,14 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace
