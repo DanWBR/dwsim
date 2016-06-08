@@ -1053,6 +1053,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Options.NumberFormat = Me.ToolStripComboBoxNumberFormatting.SelectedItem
         Try
             Me.FormSurface.UpdateSelectedObject()
+            Me.UpdateOpenEditForms()
         Catch ex As Exception
 
         End Try
@@ -1062,6 +1063,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Options.FractionNumberFormat = Me.ToolStripComboBoxNumberFractionFormatting.SelectedItem
         Try
             Me.FormSurface.UpdateSelectedObject()
+            Me.UpdateOpenEditForms()
         Catch ex As Exception
 
         End Try
@@ -1076,6 +1078,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             End If
 
             Me.FormSurface.UpdateSelectedObject()
+            Me.UpdateOpenEditForms()
 
         Catch ex As Exception
 

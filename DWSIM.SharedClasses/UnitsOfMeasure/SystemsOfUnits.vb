@@ -246,7 +246,8 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"m/kg", "ft/lbm", "cm/g"})
                 Case Enums.UnitOfMeasure.mediumresistance
                     units.AddRange(New String() {"m-1", "cm-1", "ft-1"})
-
+                Case Enums.UnitOfMeasure.mass
+                    units.AddRange(New String() {"kg", "g", "lb"})
             End Select
 
             Return units
@@ -1018,6 +1019,11 @@ Namespace SystemsOfUnits
                 Case "lb/s"
                     Return value / 2.20462
 
+                Case "g"
+                    Return value / 1000
+                Case "lb", "lbm"
+                    Return value / 2.20462
+
                 Case "mol/h"
                     Return value / 3600
                 Case "mol/d"
@@ -1428,8 +1434,14 @@ Namespace SystemsOfUnits
                 Case "lb/min"
                     Return value * 132.277
                 Case "lb/s"
-                    Return 2.20462
+                    Return value * 2.20462
 
+                Case "g"
+                    Return value * 1000
+                Case "lb", "lbm"
+                    Return value * 2.20462
+
+                    Return value
                 Case "bbl/h"
                     Return value * 22643.3
                 Case "bbl/d"
