@@ -47,8 +47,14 @@ Public Class EditingForm_Spec
             cbTargetObj.Items.Clear()
             cbTargetObj.Items.AddRange(objlist)
 
-            If .SourceObjectData.Name <> "" Then cbSourceObj.SelectedItem = .SourceObjectData.Name
-            If .TargetObjectData.Name <> "" Then cbTargetObj.SelectedItem = .TargetObjectData.Name
+            If .SourceObjectData.Name <> "" Then
+                cbSourceObj.SelectedItem = .SourceObjectData.Name
+                cbSourceProp.SelectedItem = .FlowSheet.GetTranslatedString(.SourceObjectData.PropertyName)
+            End If
+            If .TargetObjectData.Name <> "" Then
+                cbTargetObj.SelectedItem = .TargetObjectData.Name
+                cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.TargetObjectData.PropertyName)
+            End If
 
             'annotation
 
@@ -95,27 +101,21 @@ Public Class EditingForm_Spec
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbExpression.TextChanged
 
-        If Loaded Then
+        Dim tbox = DirectCast(sender, TextBox)
 
-            Dim tbox = DirectCast(sender, TextBox)
+        Me.SimObject.Expression = tbox.Text
 
-            Me.SimObject.Expression = tbox.Text
-
-            Try
-                lblResult.Text = "Y = " & SimObject.ParseExpression() & " " & SimObject.FlowSheet.SimulationObjects(SimObject.TargetObjectData.ID).GetPropertyUnit(SimObject.TargetObjectData.PropertyName, units)
-                tbox.ForeColor = Drawing.Color.Blue
-            Catch ex As Exception
-                lblResult.Text = "Error"
-                tbox.ForeColor = Drawing.Color.Red
-            End Try
-
-        End If
+        Try
+            lblResult.Text = "Y = " & SimObject.ParseExpression() & " " & SimObject.FlowSheet.SimulationObjects(SimObject.TargetObjectData.ID).GetPropertyUnit(SimObject.TargetObjectData.PropertyName, units)
+            tbox.ForeColor = Drawing.Color.Blue
+        Catch ex As Exception
+            lblResult.Text = "Error"
+            tbox.ForeColor = Drawing.Color.Red
+        End Try
 
     End Sub
 
     Private Sub cbInlet1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSourceObj.SelectedIndexChanged
-
-        If Loaded Then
 
             If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.SourceObjectData.ID) Then
                 With SimObject.FlowSheet.SimulationObjects(SimObject.SourceObjectData.ID)
@@ -147,9 +147,10 @@ Public Class EditingForm_Spec
                     cbSourceProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
                 Next
 
+                SimObject.SourceObject = SimObject.FlowSheet.SimulationObjects(SimObject.SourceObjectData.ID)
+                DirectCast(SimObject.GraphicObject, DrawingTools.GraphicObjects.SpecGraphic).ConnectedToSv = SimObject.SourceObject.GraphicObject
+           
             End If
-
-        End If
 
     End Sub
 
@@ -162,8 +163,6 @@ Public Class EditingForm_Spec
     End Sub
 
     Private Sub cbTargetObj_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetObj.SelectedIndexChanged
-
-        If Loaded Then
 
             If SimObject.FlowSheet.SimulationObjects.ContainsKey(SimObject.TargetObjectData.ID) Then
                 With SimObject.FlowSheet.SimulationObjects(SimObject.TargetObjectData.ID)
@@ -195,32 +194,28 @@ Public Class EditingForm_Spec
                     cbTargetProp.Items.Add(SimObject.FlowSheet.GetTranslatedString(p))
                 Next
 
+                SimObject.TargetObject = SimObject.FlowSheet.SimulationObjects(SimObject.TargetObjectData.ID)
+                DirectCast(SimObject.GraphicObject, DrawingTools.GraphicObjects.SpecGraphic).ConnectedToTv = SimObject.TargetObject.GraphicObject
+       
             End If
-
-        End If
 
     End Sub
 
     Private Sub cbSourceProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSourceProp.SelectedIndexChanged
 
-        If Loaded Then
+        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
 
-            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbSourceObj.SelectedItem.ToString).FirstOrDefault
+        If Not obj Is Nothing Then
 
-            If Not obj Is Nothing Then
+            Dim props = obj.GetProperties(Enums.PropertyType.WR)
 
-                Dim props = obj.GetProperties(Enums.PropertyType.WR)
-
-                For Each p In props
-                    If SimObject.FlowSheet.GetTranslatedString(p) = cbSourceProp.SelectedItem.ToString Then
-                        SimObject.SourceObjectData.PropertyName = p
-                        lblSourceVal.Text = obj.GetPropertyValue(p, units) & " " & obj.GetPropertyUnit(p, units)
-                        Exit For
-                    End If
-                Next
-
-
-            End If
+            For Each p In props
+                If SimObject.FlowSheet.GetTranslatedString(p) = cbSourceProp.SelectedItem.ToString Then
+                    SimObject.SourceObjectData.PropertyName = p
+                    lblSourceVal.Text = obj.GetPropertyValue(p, units) & " " & obj.GetPropertyUnit(p, units)
+                    Exit For
+                End If
+            Next
 
 
         End If
@@ -229,23 +224,19 @@ Public Class EditingForm_Spec
 
     Private Sub cbTargetProp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTargetProp.SelectedIndexChanged
 
-        If Loaded Then
+        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
 
-            Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+        If Not obj Is Nothing Then
 
-            If Not obj Is Nothing Then
+            Dim props = obj.GetProperties(Enums.PropertyType.WR)
 
-                Dim props = obj.GetProperties(Enums.PropertyType.WR)
-
-                For Each p In props
-                    If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
-                        SimObject.TargetObjectData.PropertyName = p
-                        lblTargetVal.Text = obj.GetPropertyValue(p, units) & " " & obj.GetPropertyUnit(p, units)
-                        Exit For
-                    End If
-                Next
-
-            End If
+            For Each p In props
+                If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
+                    SimObject.TargetObjectData.PropertyName = p
+                    lblTargetVal.Text = obj.GetPropertyValue(p, units) & " " & obj.GetPropertyUnit(p, units)
+                    Exit For
+                End If
+            Next
 
         End If
 

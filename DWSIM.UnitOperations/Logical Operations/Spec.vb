@@ -163,24 +163,6 @@ Namespace SpecialOps
             End Set
         End Property
 
-        Public Property SourceVariable() As String
-            Get
-                Return Me.m_SourceVariable
-            End Get
-            Set(ByVal value As String)
-                Me.m_SourceVariable = value
-            End Set
-        End Property
-
-        Public Property TargetVariable() As String
-            Get
-                Return Me.m_TargetVariable
-            End Get
-            Set(ByVal value As String)
-                Me.m_TargetVariable = value
-            End Set
-        End Property
-
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
