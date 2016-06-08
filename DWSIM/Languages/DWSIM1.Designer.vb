@@ -11908,6 +11908,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Coordenada de Reação.
+        '''</summary>
+        Friend Shared ReadOnly Property ReactionExtent() As String
+            Get
+                Return ResourceManager.GetString("ReactionExtent", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Coordenadas de Reação.
         '''</summary>
         Friend Shared ReadOnly Property ReactionExtents() As String
@@ -11917,11 +11926,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Calor de Reação.
+        '''</summary>
+        Friend Shared ReadOnly Property ReactionHeat() As String
+            Get
+                Return ResourceManager.GetString("ReactionHeat", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Calores de Reação.
         '''</summary>
         Friend Shared ReadOnly Property ReactionHeats() As String
             Get
                 Return ResourceManager.GetString("ReactionHeats", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Taxa de Reação.
+        '''</summary>
+        Friend Shared ReadOnly Property ReactionRate() As String
+            Get
+                Return ResourceManager.GetString("ReactionRate", resourceCulture)
             End Get
         End Property
         
@@ -14059,7 +14086,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Tempo de residência do fluido no tanque.
+        '''  Looks up a localized string similar to Tempo de residência do fluido.
         '''</summary>
         Friend Shared ReadOnly Property TKResTime() As String
             Get

@@ -156,6 +156,18 @@
     <Compile Include="Editing Forms\EditingForm_Flowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_ReactorCSTR.Designer.vb">
+      <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_ReactorCSTR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_ReactorPFR.Designer.vb">
+      <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_ReactorPFR.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Spreadsheet.Designer.vb">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>
     </Compile>
@@ -366,6 +378,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.resx">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.en.resx">
+      <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.resx">
+      <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.en.resx">
+      <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.resx">
+      <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Spreadsheet.en.resx">
       <DependentUpon>EditingForm_Spreadsheet.vb</DependentUpon>

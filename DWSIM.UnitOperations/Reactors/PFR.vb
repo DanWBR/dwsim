@@ -42,9 +42,9 @@ Namespace Reactors
         Dim Kf, Kr As ArrayList
         Dim DN As Dictionary(Of String, Double)
         Dim N00 As Dictionary(Of String, Double)
-        Dim Rxi As New Dictionary(Of String, Double)
-        Dim RxiT As New Dictionary(Of String, Double)
-        Dim DHRi As New Dictionary(Of String, Double)
+        Public Rxi As New Dictionary(Of String, Double)
+        Public RxiT As New Dictionary(Of String, Double)
+        Public DHRi As New Dictionary(Of String, Double)
 
         Public points As ArrayList
 
@@ -53,6 +53,8 @@ Namespace Reactors
         <System.NonSerialized()> Dim ims As MaterialStream
         <System.NonSerialized()> Dim pp As PropertyPackages.PropertyPackage
         <System.NonSerialized()> Dim ppr As New PropertyPackages.RaoultPropertyPackage()
+
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorPFR
 
         Public Property Length As Double = 1.0#
 
@@ -79,6 +81,8 @@ Namespace Reactors
         Public Property CatalystVoidFraction As Double = 0.0#
 
         Public Property CatalystParticleDiameter As Double = 0.0#
+
+        Public Property ResidenceTime As Double = 0.0#
 
         Public Sub New()
 
@@ -118,8 +122,6 @@ Namespace Reactors
             Rxi = New Dictionary(Of String, Double)
 
         End Sub
-
-        Private Property ResidenceTime As Object
 
         Public Sub ODEFunc(ByVal y As Double(), ByRef dy As Double())
 
@@ -1038,10 +1040,28 @@ Namespace Reactors
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_ReactorPFR With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_ReactorPFR With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UpdateInfo()
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -1065,8 +1085,14 @@ Namespace Reactors
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace

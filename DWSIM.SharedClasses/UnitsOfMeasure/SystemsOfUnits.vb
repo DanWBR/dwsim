@@ -931,6 +931,22 @@ Namespace SystemsOfUnits
 
     <System.Serializable()> Public Class Converter
 
+        Public Shared Function ConvertArrayToSI(ByVal units As String, ByVal values As Double()) As Double()
+            Dim newarr As New List(Of Double)
+            For Each d In values
+                newarr.Add(ConvertToSI(units, d))
+            Next
+            Return newarr.ToArray
+        End Function
+
+        Public Shared Function ConvertArrayFromSI(ByVal units As String, ByVal values As Double()) As Double()
+            Dim newarr As New List(Of Double)
+            For Each d In values
+                newarr.Add(ConvertFromSI(units, d))
+            Next
+            Return newarr.ToArray
+        End Function
+
         Public Shared Function ConvertToSI(ByVal units As String, ByVal value As Double) As Double
 
             Select Case units

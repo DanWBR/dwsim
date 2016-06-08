@@ -4073,7 +4073,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Erro ao calcular o trocador: os parâmetros fornecidos geraram uma solução inconsistente.</value>
   </data>
   <data name="TKResTime" xml:space="preserve">
-    <value>Tempo de residência do fluido no tanque</value>
+    <value>Tempo de residência do fluido</value>
   </data>
   <data name="TKVol" xml:space="preserve">
     <value>Volume do tanque</value>
@@ -5381,5 +5381,14 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="ReactionConversion" xml:space="preserve">
     <value>Conversão</value>
+  </data>
+  <data name="ReactionExtent" xml:space="preserve">
+    <value>Coordenada de Reação</value>
+  </data>
+  <data name="ReactionHeat" xml:space="preserve">
+    <value>Calor de Reação</value>
+  </data>
+  <data name="ReactionRate" xml:space="preserve">
+    <value>Taxa de Reação</value>
   </data>
 </root>

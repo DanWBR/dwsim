@@ -5363,4 +5363,13 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ReactionConversion" xml:space="preserve">
     <value>Conversion</value>
   </data>
+  <data name="ReactionExtent" xml:space="preserve">
+    <value>Reaction Coordinate</value>
+  </data>
+  <data name="ReactionHeat" xml:space="preserve">
+    <value>Reaction heat</value>
+  </data>
+  <data name="ReactionRate" xml:space="preserve">
+    <value>Reaction Rate</value>
+  </data>
 </root>
