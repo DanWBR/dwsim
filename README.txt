@@ -1,6 +1,11 @@
 DWSIM - Open Source Process Simulator
 Copyright 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo León
 
+Supported Operating Systems
+
+Windows with .NET Framework 4.0 or newer
+Linux with Mono 4.0 or newer
+
 Project Name				Description
 
 DWSIM					Main DWSIM GUI with Tools and Utilities
