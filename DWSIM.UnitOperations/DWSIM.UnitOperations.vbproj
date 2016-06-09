@@ -174,6 +174,12 @@
     <Compile Include="Editing Forms\EditingForm_EnergyRecycle.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_Adjust.Designer.vb">
+      <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Adjust.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Spec.Designer.vb">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </Compile>
@@ -318,6 +324,12 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.designer.vb">
+      <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -414,6 +426,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.resx">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.en.resx">
+      <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.resx">
+      <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Spec.en.resx">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
@@ -588,6 +606,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.en.resx">
+      <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.resx">
+      <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -908,7 +932,30 @@
   <ItemGroup>
     <None Include="Resources\tag_blue.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rewind.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrows_4_way.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
