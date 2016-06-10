@@ -117,87 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PanelStreams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 61</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>STREAMS</value>
-  </data>
-  <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 84</value>
-  </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 86</value>
-  </data>
-  <data name="PanelUnitOps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 236</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>UNIT OPERATIONS</value>
   </data>
-  <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 259</value>
-  </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 261</value>
-  </data>
-  <data name="SplitContainer3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 351</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="SplitContainer3.SplitterDistance" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
-  <data name="PanelLogicalOps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 59</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
-  </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>LOGICAL BLOCKS</value>
   </data>
-  <data name="Panel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 82</value>
-  </data>
-  <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 84</value>
-  </data>
-  <data name="PanelCustomOps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 57</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 23</value>
-  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>CUSTOM BLOCKS</value>
-  </data>
-  <data name="Panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 80</value>
-  </data>
-  <data name="Panel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 82</value>
-  </data>
-  <data name="SplitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 170</value>
-  </data>
-  <data name="SplitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>84</value>
-  </data>
-  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 525</value>
-  </data>
-  <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>351</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>207, 525</value>
   </data>
 </root>

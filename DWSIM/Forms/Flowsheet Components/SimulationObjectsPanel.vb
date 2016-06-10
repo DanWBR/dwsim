@@ -9,6 +9,8 @@ Public Class SimulationObjectsPanel
 
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Me.AutoHidePortion = 580
+
         SplitContainer1.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance1
         SplitContainer2.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance2
         SplitContainer3.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance3
