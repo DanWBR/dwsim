@@ -71,6 +71,8 @@ Public Class FlowsheetSurface
 
     Private Sub frmSurface_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Me.PanelSearch.Location = New Point(Me.PanelSearch.Location.X, Me.Height - Me.PanelSearch.Height - 20)
+
         If TypeOf Me.ParentForm Is FormFlowsheet Then
             Flowsheet = Me.ParentForm
         ElseIf Flowsheet Is Nothing Then
@@ -3249,4 +3251,16 @@ Public Class FlowsheetSurface
         f.Show(Flowsheet.dckPanel)
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If Me.PanelSearch.Width = 36 Then
+            Me.PanelSearch.Width = 299
+        ElseIf Me.PanelSearch.Width = 299 Then
+            Me.PanelSearch.Width = 36
+        End If
+        Me.PanelSearch.Location = New Point(Me.PanelSearch.Location.X, Me.Height - Me.PanelSearch.Height - 20)
+    End Sub
+
+    Private Sub tbSearch_TextChanged(sender As Object, e As EventArgs) Handles tbSearch.TextChanged
+
+    End Sub
 End Class

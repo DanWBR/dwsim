@@ -2019,6 +2019,9 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\Zoom Out.png" />
+    <None Include="Resources\Zoom In.png" />
+    <None Include="Resources\Search.png" />
     <None Include="Resources\user_ninja.png" />
     <None Include="Resources\set_security_question.png" />
     <None Include="Resources\Security1.png" />
@@ -2130,6 +2133,7 @@
     <None Include="Resources\col_abs_16.png" />
     <None Include="Resources\col_dc_16.png" />
     <None Include="Resources\col_sc_16.png" />
+    <None Include="Resources\Configure alt 3.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <Content Include="Resources\de.png" />
@@ -2147,6 +2151,7 @@
     <None Include="Resources\DWSIM4 icon.png" />
     <None Include="Resources\DownloadFromAppStore.png" />
     <None Include="Resources\En-play-badge.png" />
+    <None Include="Resources\Default.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />
