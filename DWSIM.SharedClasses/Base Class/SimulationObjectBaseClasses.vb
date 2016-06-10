@@ -25,7 +25,6 @@ Imports System.Runtime.Serialization.Formatters
 Imports System.Runtime.InteropServices.Marshal
 Imports System.Runtime.InteropServices
 Imports System.Text
-Imports DWSIM.Interfaces.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports System.Windows.Forms

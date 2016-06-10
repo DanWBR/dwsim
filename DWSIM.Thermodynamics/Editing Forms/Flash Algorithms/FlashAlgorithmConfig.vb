@@ -1,6 +1,6 @@
 ﻿Imports DWSIM.SharedClasses
 Imports Microsoft.Win32
-Imports DWSIM.Interfaces.Interfaces
+Imports DWSIM.Interfaces.Interfaces2
 Imports CapeOpen
 
 Public Class FlashAlgorithmConfig

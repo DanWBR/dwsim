@@ -26,7 +26,7 @@ Imports Microsoft.Win32
 Imports System.Linq
 Imports System.Runtime.InteropServices
 Imports DWSIM.SharedClasses
-Imports DWSIM.Interfaces.Interfaces
+Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Interfaces
 
 Namespace PropertyPackages
