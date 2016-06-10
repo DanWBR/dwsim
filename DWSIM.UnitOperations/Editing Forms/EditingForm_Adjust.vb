@@ -216,7 +216,7 @@ Public Class EditingForm_Adjust
             For Each p In props
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
                     SimObject.ControlledObjectData.PropertyName = p
-                    lblTargetVal.Text = obj.GetPropertyValue(p, units) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - SimObject.AdjustValue).ToString("+#.####;-#.####;0") & ") " & obj.GetPropertyUnit(p, units)
+                    lblTargetVal.Text = obj.GetPropertyValue(p, units) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - SimObject.AdjustValue).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
                     lblSPUnits.Text = obj.GetPropertyUnit(p, units)
                     Exit For
                 End If

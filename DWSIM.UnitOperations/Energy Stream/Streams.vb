@@ -206,7 +206,7 @@ Namespace Streams
         Public Overrides Sub UpdateEditForm()
             If f IsNot Nothing Then
                 If Not f.IsDisposed Then
-                    f.UpdateInfo()
+                    f.UIThread(Sub() f.UpdateInfo())
                 End If
             End If
         End Sub

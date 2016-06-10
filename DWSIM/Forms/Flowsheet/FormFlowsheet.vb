@@ -2862,16 +2862,22 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub tsmiCloseOpenedEditors_Click(sender As Object, e As EventArgs) Handles tsmiCloseOpenedEditors.Click
-        For Each obj In Me.SimulationObjects.Values
-            obj.CloseEditForm()
-        Next
+
+        Me.UIThreadInvoke(Sub()
+                              For Each obj In Me.SimulationObjects.Values
+                                  obj.CloseEditForm()
+                              Next
+                          End Sub)
+
     End Sub
 
     Public Sub UpdateOpenEditForms() Implements IFlowsheet.UpdateOpenEditForms
 
-        For Each obj In SimulationObjects.Values
-            obj.UpdateEditForm()
-        Next
+        Me.UIThreadInvoke(Sub()
+                              For Each obj In SimulationObjects.Values
+                                  obj.UpdateEditForm()
+                              Next
+                          End Sub)
 
     End Sub
 

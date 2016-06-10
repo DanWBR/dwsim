@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.DrawingTools" />
+    <Import Include="DWSIM.ExtensionMethods" />
     <Import Include="DWSIM.GlobalSettings" />
     <Import Include="DWSIM.Interfaces" />
     <Import Include="Microsoft.VisualBasic" />
@@ -132,6 +133,7 @@
     <Import Include="System.Data" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
+    <Import Include="System.Windows.Forms" />
     <Import Include="System.Xml.Linq" />
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
@@ -154,6 +156,12 @@
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_Flowsheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Pipe.Designer.vb">
+      <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Pipe.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_ReactorCSTR.Designer.vb">
@@ -294,6 +302,9 @@
     <Compile Include="Editing Forms\Other\Form_LoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Supporting\EditingForm_Pump_Curves.designer.vb">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </Compile>
@@ -330,6 +341,24 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.designer.vb">
+      <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.designer.vb">
+      <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.designer.vb">
+      <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -359,6 +388,7 @@
     <Compile Include="Reactors\Equilibrium.vb" />
     <Compile Include="Reactors\Gibbs.vb" />
     <Compile Include="Reactors\PFR.vb" />
+    <Compile Include="Support Classes\PipeThermalProfile.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
     <Compile Include="Type Resolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
@@ -408,6 +438,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.resx">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.en.resx">
+      <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.resx">
+      <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.en.resx">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
@@ -556,6 +592,18 @@
     <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.de.resx">
+      <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.en.resx">
+      <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.es.resx">
+      <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.resx">
+      <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pump_Curves.de.resx">
       <DependentUpon>EditingForm_Pump_Curves.vb</DependentUpon>
     </EmbeddedResource>
@@ -613,6 +661,42 @@
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.resx">
       <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.de.resx">
+      <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.en.resx">
+      <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.es.resx">
+      <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ThermalProfileEditor.resx">
+      <DependentUpon>EditingForm_Pipe_ThermalProfileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.de.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.en.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.es.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsChart.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsChart.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.de.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.en.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.es.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.resx">
+      <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -622,6 +706,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="Assets\fittings.dat" />
+    <EmbeddedResource Include="Assets\pipes.dat" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -644,6 +730,10 @@
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
       <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
