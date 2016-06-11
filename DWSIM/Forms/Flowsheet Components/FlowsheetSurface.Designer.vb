@@ -23,7 +23,7 @@ Partial Class FlowsheetSurface
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FlowsheetSurface))
-        Me.FlowsheetDesignSurface = New DrawingTools.GraphicsSurface()
+        Me.FlowsheetDesignSurface = New GraphicsSurface()
         Me.CMS_NoSel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -442,6 +442,8 @@ Partial Class FlowsheetSurface
         '
         'tbSearch
         '
+        Me.tbSearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.tbSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
         resources.ApplyResources(Me.tbSearch, "tbSearch")
         Me.tbSearch.Name = "tbSearch"
         '

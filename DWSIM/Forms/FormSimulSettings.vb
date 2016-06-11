@@ -42,8 +42,6 @@ Public Class FormSimulSettings
     Private prevsort As System.ComponentModel.ListSortDirection = System.ComponentModel.ListSortDirection.Ascending
     Private prevcol As Integer = 1
 
-    'Public ComponentDataSet As DataSet
-    'Public ComponentBindingSource As BindingSource
     Dim ACSC1 As AutoCompleteStringCollection
 
     Dim vdPP, vdSR As MessageBox()

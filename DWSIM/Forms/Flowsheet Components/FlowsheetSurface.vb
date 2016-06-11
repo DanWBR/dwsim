@@ -3261,6 +3261,20 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub tbSearch_TextChanged(sender As Object, e As EventArgs) Handles tbSearch.TextChanged
-
+        Dim obj = Me.FlowsheetDesignSurface.DrawingObjects.FindObjectWithTag(tbSearch.Text)
+        If Not obj Is Nothing Then
+            Me.FlowsheetDesignSurface.SelectedObject = obj
+            Try
+                Me.FlowsheetDesignSurface.AutoScrollPosition = New Point(obj.X * Me.FlowsheetDesignSurface.Zoom - Me.Width / 2, obj.Y * Me.FlowsheetDesignSurface.Zoom - Me.Height / 2)
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
+
+    Private Sub tbSearch_MouseClick(sender As Object, e As MouseEventArgs) Handles tbSearch.MouseClick
+        Dim acsc As New AutoCompleteStringCollection()
+        acsc.AddRange(Me.FlowsheetDesignSurface.DrawingObjects.ToArray.Select(Function(x) x.Tag).ToArray)
+        tbSearch.AutoCompleteCustomSource = acsc
+    End Sub
+
 End Class

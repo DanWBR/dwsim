@@ -19,7 +19,7 @@ Namespace GraphicObjects
     <Serializable()> _
     Public Class GraphicObjectCollection
 
-        Inherits CollectionBase
+        Inherits List(Of GraphicObject)
 
         Protected m_HorizRes As Integer = 72
         Protected m_VertRes As Integer = 72
@@ -126,9 +126,9 @@ Namespace GraphicObjects
             g.PageUnit = GraphicsUnit.Pixel
             g.ScaleTransform(Scale, Scale)
             Dim oldlinecolor, oldfillcolor, oldgradcolor1, oldgradcolor2 As Color
-            If Not Me.InnerList Is Nothing AndAlso Me.InnerList.Count > 0 Then
-                For i = 0 To Me.InnerList.Count - 1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+            If Me.Count > 0 Then
+                For i = 0 To Me.Count - 1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     If drawObj.ObjectType = ObjectType.GO_Rectangle Then
                         If transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, RectangleGraphic)
@@ -153,8 +153,8 @@ Namespace GraphicObjects
                         End If
                     End If
                 Next
-                For i = 0 To Me.InnerList.Count - 1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+                For i = 0 To Me.Count - 1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     If drawObj.ObjectType = ObjectType.Nenhum Then
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
@@ -181,8 +181,8 @@ Namespace GraphicObjects
                         End If
                     End If
                 Next
-                For i = 0 To Me.InnerList.Count - 1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+                For i = 0 To Me.Count - 1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     If drawObj.ObjectType <> Interfaces.Enums.GraphicObjects.ObjectType.Nenhum Then
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
@@ -214,15 +214,15 @@ Namespace GraphicObjects
             Dim drawObj As GraphicObject
             Dim i As Integer
             g.PageUnit = GraphicsUnit.Pixel
-            If Not Me.InnerList Is Nothing AndAlso Me.InnerList.Count > 0 Then
-                For i = 0 To Me.InnerList.Count - 1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+            If Me.Count > 0 Then
+                For i = 0 To Me.Count - 1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     drawObj.X += dx
                     drawObj.Y += dy
                     drawObj.Draw(g)
                 Next
-                For i = 0 To Me.InnerList.Count - 1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+                For i = 0 To Me.Count - 1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     drawObj.X -= dx
                     drawObj.Y -= dy
                 Next
@@ -235,9 +235,9 @@ Namespace GraphicObjects
 
             Dim drawObj As GraphicObject
             Dim i As Integer
-            If Not Me.InnerList Is Nothing AndAlso Me.InnerList.Count > 0 Then
-                For i = Me.InnerList.Count - 1 To 0 Step -1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+            If Me.Count > 0 Then
+                For i = Me.Count - 1 To 0 Step -1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     If drawObj.HitTest(pt.ToSDPoint) Then
                         objlist.Add(drawObj)
                     End If
@@ -261,12 +261,26 @@ Namespace GraphicObjects
 
             Dim drawObj As GraphicObject
             Dim i As Integer
-            If Not Me.InnerList Is Nothing AndAlso _
-                    Me.InnerList.Count > 0 Then
-                For i = Me.InnerList.Count - 1 To 0 Step -1
-                    drawObj = CType(Me.InnerList(i), GraphicObject)
+            If Me.Count > 0 Then
+                For i = Me.Count - 1 To 0 Step -1
+                    drawObj = CType(Me.Item(i), GraphicObject)
                     If drawObj.Name = name Then
                         Return drawObj
+                        Exit For
+                    End If
+                Next
+            End If
+            Return Nothing
+
+        End Function
+
+        Public Function FindObjectWithTag(ByVal tag As String) As GraphicObject
+
+            Dim i As Integer
+            If Me.Count > 0 Then
+                For i = Me.Count - 1 To 0 Step -1
+                    If Me.Item(i).Tag = tag Then
+                        Return Me.Item(i)
                         Exit For
                     End If
                 Next
@@ -307,19 +321,6 @@ Namespace GraphicObjects
             Me.AddRange(value)
         End Sub
 
-        Default Public Property Item(ByVal index As Integer) As GraphicObject
-            Get
-                Return CType(List(index), GraphicObject)
-            End Get
-            Set(ByVal Value As GraphicObject)
-                List(index) = Value
-            End Set
-        End Property
-
-        Public Function Add(ByVal value As GraphicObject) As Integer
-            Return List.Add(value)
-        End Function
-
         Public Overloads Sub AddRange(ByVal value() As GraphicObject)
             Dim i As Integer = 0
             Do While (i < value.Length)
@@ -335,74 +336,6 @@ Namespace GraphicObjects
                 i = (i + 1)
             Loop
         End Sub
-
-        Public Function Contains(ByVal value As GraphicObject) As Boolean
-            Return List.Contains(value)
-        End Function
-
-        Public Sub CopyTo(ByVal array() As GraphicObject, ByVal index As Integer)
-            List.CopyTo(array, index)
-        End Sub
-
-        Public Function IndexOf(ByVal value As GraphicObject) As Integer
-            Return List.IndexOf(value)
-        End Function
-
-        Public Sub Insert(ByVal index As Integer, ByVal value As GraphicObject)
-            List.Insert(index, value)
-        End Sub
-
-        'See also 'System.Collections.IEnumerator'
-        Public Shadows Function GetEnumerator() As GraphicObjectEnumerator
-            Return New GraphicObjectEnumerator(Me)
-        End Function
-
-        Public Sub Remove(ByVal value As GraphicObject)
-            List.Remove(value)
-        End Sub
-
-        Public Class GraphicObjectEnumerator
-            Inherits Object
-            Implements IEnumerator
-
-            Private baseEnumerator As IEnumerator
-
-            Private temp As IEnumerable
-
-            Public Sub New(ByVal mappings As GraphicObjectCollection)
-                MyBase.New()
-                Me.temp = CType(mappings, IEnumerable)
-                Me.baseEnumerator = temp.GetEnumerator
-            End Sub
-
-            Public ReadOnly Property Current() As GraphicObject
-                Get
-                    Return CType(baseEnumerator.Current, GraphicObject)
-                End Get
-            End Property
-
-            ReadOnly Property IEnumerator_Current() As Object Implements IEnumerator.Current
-                Get
-                    Return baseEnumerator.Current
-                End Get
-            End Property
-
-            Public Function MoveNext() As Boolean
-                Return baseEnumerator.MoveNext
-            End Function
-
-            Function IEnumerator_MoveNext() As Boolean Implements IEnumerator.MoveNext
-                Return baseEnumerator.MoveNext
-            End Function
-
-            Public Sub Reset()
-                baseEnumerator.Reset()
-            End Sub
-
-            Sub IEnumerator_Reset() Implements IEnumerator.Reset
-                baseEnumerator.Reset()
-            End Sub
-        End Class
 
     End Class
 

@@ -133,9 +133,6 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
-  </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
@@ -151,11 +148,8 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
-  </data>
-  <data name="TabPage4.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
   </data>
   <data name="chkIncludeJT.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 126</value>
@@ -179,13 +173,13 @@
     <value>Calculation Mode</value>
   </data>
   <data name="cbCalcMode.Items" xml:space="preserve">
-    <value>Isothermic</value>
+    <value>Specify Length/Hydraulic Profile (Default)</value>
   </data>
   <data name="cbCalcMode.Items1" xml:space="preserve">
-    <value>Adiabatic</value>
+    <value>Specify Outlet Pressure</value>
   </data>
   <data name="cbCalcMode.Items2" xml:space="preserve">
-    <value>Define Outlet Temperature</value>
+    <value>Specify Outlet Temperature</value>
   </data>
   <data name="cbCalcMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 14</value>
@@ -223,14 +217,17 @@
   <data name="tbOutletPressure.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 20</value>
   </data>
+  <data name="TabPage4.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="TabPage5.Text" xml:space="preserve">
-    <value>Hydraluic Profile</value>
+    <value>Hydraulic Profile</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Thermal Profile</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
   </data>
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Disconnect</value>
@@ -259,11 +256,8 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Inlet Stream</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Results</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Connections</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -274,13 +268,16 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Profile Data</value>
   </data>
-  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 240</value>
-  </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Profile Graph</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
 </root>

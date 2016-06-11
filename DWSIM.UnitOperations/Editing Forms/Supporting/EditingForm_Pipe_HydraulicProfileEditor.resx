@@ -126,21 +126,22 @@
   <data name="&gt;&gt;GridMalha.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
-    <value>ToolStripSeparator2</value>
+  <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
+    <value>ToolStripLabel1</value>
   </data>
   <data name="&gt;&gt;CMenu1.Name" xml:space="preserve">
     <value>CMenu1</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem6.Name" xml:space="preserve">
-    <value>ToolStripMenuItem6</value>
-  </data>
-  <data name="&gt;&gt;ToolStripButton5.Name" xml:space="preserve">
-    <value>ToolStripButton5</value>
+  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripButton5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GridMalha.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="ToolStripButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -154,16 +155,10 @@
   <data name="&gt;&gt;ToolStripMenuItem11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripMenuItem6.Text" xml:space="preserve">
+    <value>6"</value>
   </data>
   <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 22</value>
-  </data>
-  <data name="GridMalha.Text" xml:space="preserve">
-    <value>DataGridView1</value>
-  </data>
-  <data name="ToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -173,8 +168,11 @@
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Adicionar</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
-    <value>ToolStripMenuItem3</value>
+  <data name="&gt;&gt;ToolStripButton5.Name" xml:space="preserve">
+    <value>ToolStripButton5</value>
+  </data>
+  <data name="&gt;&gt;GridMalha.Name" xml:space="preserve">
+    <value>GridMalha</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem7.Name" xml:space="preserve">
     <value>ToolStripMenuItem7</value>
@@ -233,9 +231,8 @@
   <data name="&gt;&gt;ToolStripSeparator1.Name" xml:space="preserve">
     <value>ToolStripSeparator1</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GridMalha.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Horizontal</value>
+  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
+    <value>ToolStripMenuItem2</value>
   </data>
   <data name="ToolStrip1.Text" xml:space="preserve">
     <value>ToolStrip1</value>
@@ -258,9 +255,6 @@
   <data name="&gt;&gt;ToolStripButton1.Name" xml:space="preserve">
     <value>ToolStripButton1</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PipeHydraulicProfileEditor</value>
-  </data>
   <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
@@ -282,23 +276,23 @@
   <data name="ToolStripMenuItem5.Text" xml:space="preserve">
     <value>4"</value>
   </data>
+  <data name="CMenu1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 224</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItem4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ColBase.Name" xml:space="preserve">
-    <value>ColBase</value>
+  <data name="GridMalha.Text" xml:space="preserve">
+    <value>DataGridView1</value>
   </data>
   <data name="ToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="GridMalha.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;ColBase.Name" xml:space="preserve">
+    <value>ColBase</value>
   </data>
   <data name="ToolStripMenuItem11.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
@@ -306,14 +300,11 @@
   <data name="GridMalha.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <data name="&gt;&gt;ToolStripButton1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ToolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ToolStripMenuItem9.Text" xml:space="preserve">
-    <value>12"</value>
+  <data name="&gt;&gt;ToolStripSeparator2.Name" xml:space="preserve">
+    <value>ToolStripSeparator2</value>
   </data>
   <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -321,14 +312,20 @@
   <data name="&gt;&gt;ToolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripLabel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolStripMenuItem9.Name" xml:space="preserve">
+    <value>ToolStripMenuItem9</value>
+  </data>
+  <data name="&gt;&gt;GridMalha.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="ToolStripButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="ToolStripMenuItem8.Text" xml:space="preserve">
     <value>10"</value>
+  </data>
+  <data name="ToolStripButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="ToolStripButton4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -348,8 +345,8 @@
   <data name="GridMalha.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 25</value>
   </data>
-  <data name="ToolStripMenuItem6.Text" xml:space="preserve">
-    <value>6"</value>
+  <data name="&gt;&gt;ToolStripMenuItem6.Name" xml:space="preserve">
+    <value>ToolStripMenuItem6</value>
   </data>
   <data name="ToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
@@ -357,17 +354,11 @@
   <data name="&gt;&gt;GridMalha.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 25</value>
-  </data>
-  <data name="&gt;&gt;ToolStripButton3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
   </data>
   <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
@@ -381,20 +372,26 @@
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 302</value>
   </data>
+  <data name="GridMalha.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 277</value>
+  </data>
   <data name="ToolStripMenuItem9.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
   </data>
-  <data name="CMenu1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 224</value>
+  <data name="&gt;&gt;ToolStripMenuItem7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 22</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
-    <value>ToolStripMenuItem2</value>
+  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
   </data>
-  <data name="&gt;&gt;GridMalha.Name" xml:space="preserve">
-    <value>GridMalha</value>
+  <data name="ToolStripButton4.Text" xml:space="preserve">
+    <value>Remover Todos</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItem5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStripMenuItem10.Text" xml:space="preserve">
     <value>14"</value>
@@ -405,38 +402,41 @@
   <data name="&gt;&gt;ToolStripButton4.Name" xml:space="preserve">
     <value>ToolStripButton4</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ToolStripMenuItem9.Text" xml:space="preserve">
+    <value>12"</value>
   </data>
-  <data name="GridMalha.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 277</value>
+  <data name="&gt;&gt;ToolStripMenuItem3.Name" xml:space="preserve">
+    <value>ToolStripMenuItem3</value>
   </data>
-  <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="ToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 22</value>
+  </data>
+  <data name="&gt;&gt;ToolStripButton3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 22</value>
   </data>
-  <data name="ToolStripButton4.Text" xml:space="preserve">
-    <value>Remover Todos</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>PipeHydraulicProfileEditor</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Remover</value>
   </data>
-  <data name="&gt;&gt;GridMalha.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="GridMalha.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Horizontal</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem9.Name" xml:space="preserve">
-    <value>ToolStripMenuItem9</value>
+  <data name="&gt;&gt;ToolStripButton1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItem10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripLabel2.Name" xml:space="preserve">
     <value>ToolStripLabel2</value>
-  </data>
-  <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
-    <value>ToolStripLabel1</value>
   </data>
   <data name="&gt;&gt;ToolStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -321,6 +321,7 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.AllowUserToAddRows = False
         Me.GridMalha.AllowUserToOrderColumns = True
+        Me.GridMalha.AllowUserToResizeRows = False
         Me.GridMalha.BackgroundColor = System.Drawing.SystemColors.Control
         Me.GridMalha.ColumnHeadersVisible = False
         Me.GridMalha.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColBase})

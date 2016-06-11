@@ -264,11 +264,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Set
     End Property
 
-    Public Overridable ReadOnly Property drawingObjects() As GraphicObjectCollection
+    Public Overridable ReadOnly Property DrawingObjects() As GraphicObjectCollection
         Get
-            'since this is a reference type, users can add/remove/manipulate its contents
-            'even though it is read only. they can't change m_drawingobjects itself though
-            'ie. graphicssurface1.drawingobjects = Nothing would fail.
             Return m_drawingObjects
         End Get
     End Property
