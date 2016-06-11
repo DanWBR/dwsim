@@ -241,7 +241,7 @@ Namespace UnitOperations
 
             Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Tout_ant2, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, TinP, PinP, _
                 rho_l, rho_v, Cp_l, Cp_v, Cp_m, K_l, K_v, eta_l, eta_v, tens, Hin, Hout, HinP, _
-                fT, fT_ant, fT_ant2, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT As Double
+                fT, fT_ant, fT_ant2, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT, dText_dL As Double
             Dim cntP, cntT As Integer
 
             If Me.Specification = specmode.OutletTemperature Then
@@ -251,8 +251,10 @@ Namespace UnitOperations
 
             If Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
                 Text = Me.ThermalProfile.Temp_amb_definir
+                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient
             Else
                 Text = Me.ThermalProfile.Temp_amb_estimar
+                dText_dL = Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC
             End If
 
             'Calcular DP
@@ -282,6 +284,8 @@ Namespace UnitOperations
 
                 'Iteracao para cada segmento
                 Dim count As Integer = 0
+
+                Dim currL As Double = 0.0#
 
                 Dim j As Integer = 0
 
@@ -347,8 +351,8 @@ Namespace UnitOperations
                                 Tout = Tin / 1.005
                             End If
 
-                            If Tin < Text And Tout > Text Then Tout = Text * 0.98
-                            If Tin > Text And Tout < Text Then Tout = Text * 1.02
+                            If Tin < Text And Tout > Text Then Tout = Text * 0.98 + dText_dL * currL
+                            If Tin > Text And Tout < Text Then Tout = Text * 1.02 + dText_dL * currL
 
                             cntT = 0
                             'Loop externo (convergencia do Delta T)
@@ -431,8 +435,8 @@ Namespace UnitOperations
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                             Tpe = Tin + (Tout - Tin) / 2
                                             Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos, _
-                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material), Tpe, results.VapVel, results.LiqVel, _
-                                                                                results.Cpl, results.Cpv, results.Kl, results.Kv, _
+                                                                                .DI * 0.0254, .DE * 0.0254, Me.rugosidade(.Material), Tpe, Text + dText_dL * currL,
+                                                                                results.VapVel, results.LiqVel, results.Cpl, results.Cpv, results.Kl, results.Kv, _
                                                                                 results.MUl, results.MUv, results.RHOl, results.RHOv, _
                                                                                 Me.ThermalProfile.Incluir_cti, Me.ThermalProfile.Incluir_isolamento, _
                                                                                 Me.ThermalProfile.Incluir_paredes, Me.ThermalProfile.Incluir_cte)
@@ -445,7 +449,7 @@ Namespace UnitOperations
                                             End With
                                         End If
                                         If U <> 0.0# Then
-                                            DQ = (Tout - Tin) / Math.Log((Text - Tin) / (Text - Tout)) * U / 1000 * A
+                                            DQ = (Tout - Tin) / Math.Log((Text + dText_dL * currL - Tin) / (Text + dText_dL * currL - Tout)) * U / 1000 * A
                                             If Double.IsNaN(DQ) Then
                                                 DQ = 0.0#
                                             Else
@@ -662,6 +666,7 @@ Namespace UnitOperations
                             DQ = 0
 
                             With results
+
                                 .CalorTransferido = DQ
                                 .DpPorFriccao = dpf
                                 .DpPorHidrostatico = dph
@@ -679,6 +684,8 @@ Namespace UnitOperations
                         End With
 
                     End If
+
+                    currL += segmento.Comprimento
 
                 Next
 
@@ -1079,7 +1086,7 @@ Namespace UnitOperations
 
         Function CalcOverallHeatTransferCoefficient(ByVal materialparede As String, ByVal EL As Double, ByVal L As Double, _
                             ByVal Dint As Double, ByVal Dext As Double, ByVal rugosidade As Double, _
-                            ByVal T As Double, ByVal vel_g As Double, ByVal vel_l As Double, _
+                            ByVal T As Double, ByVal Text As Double, ByVal vel_g As Double, ByVal vel_l As Double, _
                             ByVal Cpl As Double, ByVal Cpv As Double, ByVal kl As Double, ByVal kv As Double, _
                             ByVal mu_l As Double, ByVal mu_v As Double, ByVal rho_l As Double, _
                             ByVal rho_v As Double, ByVal hinterno As Boolean, ByVal isolamento As Boolean, _
@@ -1168,8 +1175,7 @@ Namespace UnitOperations
 
                     'Average air properties
                     vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
-                    Dim Tamb = Me.m_thermalprofile.Temp_amb_estimar
-                    Dim props = PropsAR(Tamb, 101325)
+                    Dim props = PropsAR(Text, 101325)
                     mu2 = props(1)
                     rho2 = props(0)
                     cp2 = props(2) * 1000
@@ -1191,8 +1197,7 @@ Namespace UnitOperations
 
                     'Average water properties
                     vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
-                    Dim Tamb = Me.m_thermalprofile.Temp_amb_estimar
-                    Dim props = PropsAGUA(Tamb, 101325)
+                    Dim props = PropsAGUA(Text, 101325)
                     mu2 = props(1)
                     rho2 = props(0)
                     cp2 = props(2) * 1000

@@ -1144,7 +1144,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                         deltaP = -fval / dFdP
 
-                        If Abs(deltaP) > 0.1 * P Then
+                        If Abs(deltaP) < etol / 1000 And ecount > 5 Then Exit Do
+
+                        If Abs(deltaP) > 0.1 * P And ecount < 5 Then
                             P = P + Sign(deltaP) * 0.1 * P
                         Else
                             P = P + deltaP
@@ -1259,7 +1261,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                         deltaP = -fval / dFdP
 
-                        If Abs(deltaP) > 0.1 * P Then
+                        If Abs(deltaP) < etol / 1000 And ecount > 5 Then Exit Do
+
+                        If Abs(deltaP) > 0.1 * P And ecount < 5 Then
                             P = P + Sign(deltaP) * 0.1 * P
                         Else
                             P = P + deltaP
@@ -1466,7 +1470,9 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     Tant = T
                     deltaT = -fval / dFdT
 
-                    If Abs(deltaT) > 0.1 * T Then
+                    If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
+
+                    If Abs(deltaT) > 0.1 * T And ecount < 5 Then
                         T = T + 0.05 * deltaT
                     Else
                         T = T + deltaT
@@ -1536,8 +1542,12 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                     fval = stmp4 - 1
 
                     Tant = T
+
                     deltaT = -fval / dFdT
-                    If Abs(deltaT) > 0.1 * T Then
+
+                    If Abs(deltaT) < etol / 1000 And ecount > 5 Then Exit Do
+
+                    If Abs(deltaT) > 0.1 * T And ecount < 5 Then
                         T = T + Sign(deltaT) * 0.1 * T
                     Else
                         T = T + deltaT

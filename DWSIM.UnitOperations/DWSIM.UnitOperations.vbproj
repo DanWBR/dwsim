@@ -359,6 +359,30 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections.designer.vb">
+      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Connections.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.designer.vb">
+      <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Results.designer.vb">
+      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Results.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Stages.designer.vb">
+      <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_Column_Stages.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -390,6 +414,7 @@
     <Compile Include="Reactors\PFR.vb" />
     <Compile Include="Support Classes\PipeThermalProfile.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
+    <Compile Include="Support Classes\ComboBoxColumnTemplates.vb" />
     <Compile Include="Type Resolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
     <Compile Include="Unit Operations\CustomUO.vb" />
@@ -696,6 +721,54 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.de.resx">
+      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.en.resx">
+      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.es.resx">
+      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.resx">
+      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.de.resx">
+      <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.en.resx">
+      <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.es.resx">
+      <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_InitialEstimates.resx">
+      <DependentUpon>EditingForm_Column_InitialEstimates.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.de.resx">
+      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.en.resx">
+      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.es.resx">
+      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Results.resx">
+      <DependentUpon>EditingForm_Column_Results.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.de.resx">
+      <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.en.resx">
+      <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.es.resx">
+      <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.resx">
+      <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -1045,6 +1118,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrows_4_way.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_plain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_white_gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printer_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_in1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_rotate_clockwise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_page_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page_white_magnify.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

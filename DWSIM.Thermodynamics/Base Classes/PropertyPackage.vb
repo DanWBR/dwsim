@@ -2943,10 +2943,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             If Tlower <> 0.0# And Tmin < Tlower Then Tmin = Tlower
 
-            dP = (PCR - Pmin) / 250
-            dT = (TCR - Tmin) / 250
+            dP = (PCR - Pmin) / 200
+            dT = (TCR - Tmin) / 200
 
-            np = 500
+            np = 300
 
             Dim beta As Double = 10
 
@@ -3034,7 +3034,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
             Loop Until i >= np Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
                         Double.IsNaN(PB(PB.Count - 1)) = True Or _
-                        Double.IsNaN(TVB(TVB.Count - 1)) = True 'Or T > Tupper
+                        Double.IsNaN(TVB(TVB.Count - 1)) = True Or T > Tupper
 
             Dim Switch = False
 

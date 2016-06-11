@@ -254,7 +254,7 @@ Namespace PropertyPackages.Auxiliary
             C = c1 - c2 / Tr + c3 / Tr ^ 3
             D = d1 + d2 / Tr
 
-            Vr = Me.ESTIMAR_Vr(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
+            Vr = Me.ESTIMAR_Vr2(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
             zs = Pr * Vr / Tr
 
             b1 = 0.2026579
@@ -274,7 +274,7 @@ Namespace PropertyPackages.Auxiliary
             C = c1 - c2 / Tr + c3 / Tr ^ 3
             D = d1 + d2 / Tr
 
-            Vr = Me.ESTIMAR_Vr(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
+            Vr = Me.ESTIMAR_Vr2(TIPO, Pr, Tr, B, C, D, c4, beta, gamma)
 
             zh = Pr * Vr / Tr
 
@@ -455,11 +455,11 @@ Namespace PropertyPackages.Auxiliary
             If TIPO = "L" Then
                 Tinf = 0
                 Tsup = 10
-                nsub = 1000
+                nsub = 500
             Else
                 Tinf = 1001
                 Tsup = 0
-                nsub = 1000
+                nsub = 500
             End If
 
             delta_T = (Tsup - Tinf) / nsub
@@ -472,7 +472,7 @@ Namespace PropertyPackages.Auxiliary
                 Tinf = Tinf + delta_T
                 Vr = Tinf
                 fT_inf = Pr * Vr / Tr - (1 + B / Vr + C / Vr ^ 2 + D / Vr ^ 5 + c4 / Tr ^ 3 / Vr ^ 2 * (beta + gamma / Vr ^ 2) * Math.Exp(-gamma / Vr ^ 2))
-            Loop Until fT * fT_inf < 0 Or i >= 1000
+            Loop Until fT * fT_inf < 0 Or i >= 500
             Tsup = Tinf
             Tinf = Tinf - delta_T
 
