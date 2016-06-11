@@ -118,6 +118,7 @@ Public Class EditingForm_Pipe
 
             'results
 
+            gridResults.Rows.Clear()
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DeltaP"), su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf), units.deltaP})
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})

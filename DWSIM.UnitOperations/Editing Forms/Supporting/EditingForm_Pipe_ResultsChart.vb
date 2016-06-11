@@ -360,8 +360,13 @@ Public Class EditingForm_Pipe_ResultsChart
                     .Symbol.Fill.Type = ZedGraph.FillType.Solid
                 End With
                 .Title.Text = Me.ComboBox2.SelectedItem
+                .Title.FontSpec.Size = 24
                 .XAxis.Title.Text = Me.m_xtitle
+                .XAxis.Scale.FontSpec.Size = 20
+                .XAxis.Title.FontSpec.Size = 20
                 .YAxis.Title.Text = Me.m_ytitle
+                .YAxis.Scale.FontSpec.Size = 20
+                .YAxis.Title.FontSpec.Size = 20
                 .Legend.IsVisible = False
                 .AxisChange(Me.CreateGraphics)
             End With
@@ -382,8 +387,13 @@ Public Class EditingForm_Pipe_ResultsChart
                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
             End With
             .Title.Text = Me.ComboBox2.SelectedItem
+            .Title.FontSpec.Size = 24
             .XAxis.Title.Text = Me.m_xtitle
+            .XAxis.Scale.FontSpec.Size = 20
+            .XAxis.Title.FontSpec.Size = 20
             .YAxis.Title.Text = Me.m_ytitle
+            .YAxis.Scale.FontSpec.Size = 20
+            .YAxis.Title.FontSpec.Size = 20
             .Legend.IsVisible = False
             .AxisChange(Me.CreateGraphics)
         End With

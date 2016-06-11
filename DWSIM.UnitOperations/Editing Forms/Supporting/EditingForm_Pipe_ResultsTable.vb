@@ -16,7 +16,7 @@ Public Class EditingForm_Pipe_ResultsTable
         With Me.DataGridView1.Columns
             .Item(0).HeaderText = Replace(.Item(0).HeaderText, "(m)", "(" & su.distance & ")")
             .Item(1).HeaderText = Replace(.Item(1).HeaderText, "(kPa)", "(" & su.pressure & ")")
-            .Item(2).HeaderText = Replace(.Item(2).HeaderText, "(C)", "(" & su.temperature & ")")
+            .Item(2).HeaderText = Replace(.Item(2).HeaderText, "(°C)", "(" & su.temperature & ")")
             .Item(3).HeaderText = Replace(.Item(3).HeaderText, "(m/s)", "(" & su.velocity & ")")
             .Item(4).HeaderText = Replace(.Item(4).HeaderText, "(m/s)", "(" & su.velocity & ")")
             .Item(5).HeaderText = Replace(.Item(5).HeaderText, "(kW)", "(" & su.heatflow & ")")
