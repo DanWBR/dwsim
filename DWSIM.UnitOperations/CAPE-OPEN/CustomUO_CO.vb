@@ -66,14 +66,14 @@ Namespace UnitOperations.CAPEOPENWrappers
             Me.ComponentName = "Scripting Unit Operation"
             Me.ComponentDescription = "IronPython Scripting Unit Operation"
 
-            'create port collection
-
-            CreatePorts()
-        
             'parameters
 
             If Parameters.Count = 0 Then CreateParameters()
-   
+
+            'create port collection
+
+            CreatePorts()
+
         End Sub
 
         Public Overrides Sub CreateParameters()
@@ -112,6 +112,11 @@ Namespace UnitOperations.CAPEOPENWrappers
                     If p.connectedObject IsNot Nothing Then p.Disconnect()
                 Next
             End If
+
+            _inletmaterialports = DirectCast(Me.Parameters(4), IntegerParameter).Value
+            _outletmaterialports = DirectCast(Me.Parameters(5), IntegerParameter).Value
+            _inletenergyports = DirectCast(Me.Parameters(6), IntegerParameter).Value
+            _outletenergyports = DirectCast(Me.Parameters(7), IntegerParameter).Value
 
             With Me.Ports
                 .Clear()
