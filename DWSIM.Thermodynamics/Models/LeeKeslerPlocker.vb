@@ -73,7 +73,6 @@ Namespace PropertyPackages.Auxiliary
                 End Using
             End Using
 
-            Dim csdb As New ChemSepHelper.ChemSepIDConverter
             For Each lkpip In lkpipc
                 If Me.InteractionParameters.ContainsKey((lkpip.ID1)) Then
                     If Me.InteractionParameters((lkpip.ID1)).ContainsKey((lkpip.ID2)) Then

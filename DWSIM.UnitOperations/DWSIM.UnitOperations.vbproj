@@ -158,6 +158,12 @@
     <Compile Include="Editing Forms\EditingForm_Flowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_Column.Designer.vb">
+      <DependentUpon>EditingForm_Column.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_Column.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Pipe.Designer.vb">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </Compile>
@@ -463,6 +469,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Flowsheet.resx">
       <DependentUpon>EditingForm_Flowsheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Column.en.resx">
+      <DependentUpon>EditingForm_Column.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Column.resx">
+      <DependentUpon>EditingForm_Column.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.en.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>

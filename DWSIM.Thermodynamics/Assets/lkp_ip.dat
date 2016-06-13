@@ -1,143 +1,143 @@
 Lee-Kesler-Plocker Interaction Parameters - taken from ""Calculation of High-Pressure Vapor-Liquid Equilibria from a Corresponding-States Correlation with Emphasis on Asymmetric Mixtures"" - Ulf Plöcker, Helmut Knapp and John Prausnitz (Ind. Eng. Chem. Process Des. Dev., Vol 17, No. 3, 1978.
-Metano	Etano	1.052
-Metano	Etileno	1.014
-Metano	Propano	1.113
-Metano	Propileno	1.089
-Metano	nButano	1.171
-Metano	iButano	1.155
-Metano	nPentano	1.24
-Metano	iPentano	1.228
-Metano	nHexano	1.304
-Metano	cicloHexano	1.269
-Metano	Benzeno	1.234
-Metano	nHeptano	1.367
-Metano	nOctano	1.423
-Metano	nNonano	1.484
-Metano	nDecano	1.533
-Etano	Etileno	0.991
-Etano	Propano	1.01
-Etano	Propileno	1.002
-Etano	nButano	1.029
-Etano	iButano	1.036
-Etano	nPentano	1.064
-Etano	iPentano	1.07
-Etano	nHexano	1.106
-Etano	cicloHexano	1.081
-Etano	Benzeno	1.066
-Etano	nHeptano	1.143
-Etano	nOctano	1.165
-Etano	nNonano	1.214
-Etano	nDecano	1.237
-Etileno	nButano	0.998
-Etileno	Benzeno	1.094
-Etileno	nHeptano	1.163
-Acetileno	Etileno	0.948
-Propano	Propileno	0.992
-Propano	nButano	1.003
-Propano	iButano	1.003
-Propano	nPentano	1.006
-Propano	iPentano	1.009
-Propano	nHexano	1.047
-Propano	cicloHexano	1.037
-Propano	Benzeno	1.011
-Propano	nHeptano	1.067
-Propano	nOctano	1.09
-Propano	nNonano	1.115
-Propano	nDecano	1.139
-Propileno	nButano	1.01
-Propileno	iButano	1.009
-Propileno	isobuteno	1.006
-nButano	iButano	1.001
-nButano	nPentano	0.994
-nButano	iPentano	0.998
-nButano	nHexano	1.018
-nButano	cicloHexano	1.008
-nButano	Benzeno	0.999
-nButano	nHeptano	1.027
-nButano	nOctano	1.046
-nButano	nNonano	1.064
-nButano	nDecano	1.078
-nPentano	iPentano	0.987
-nPentano	nHexano	0.996
-nPentano	cicloHexano	0.996
-nPentano	Benzeno	0.977
-nPentano	nHeptano	1.004
-nPentano	nOctano	1.02
-nPentano	nNonano	1.033
-nPentano	nDecano	1.045
-nHexano	cicloHexano	0.998
-nHexano	Benzeno	0.978
-nHexano	nHeptano	1.008
-nHexano	nOctano	1.005
-nHexano	nNonano	1.015
-nHexano	nDecano	1.025
-Benzeno	cicloHexano	0.979
-Benzeno	nHeptano	0.985
-Benzeno	nOctano	0.987
-Benzeno	nNonano	0.982
-Benzeno	iOctano	1.034
-Benzeno	nNonano	1.047
-Benzeno	nDecano	0.999
-cicloHexano	nHeptano	1.01
-cicloHexano	nOctano	1.021
-cicloHexano	nNonano	1.032
-cicloHexano	nDecano	0.993
-nHeptano	nOctano	1.002
-nHeptano	nNonano	1.002
-nHeptano	nDecano	1.01
-nOctano	nNonano	0.993
-nOctano	nDecano	0.999
-nNonano	nDecano	0.991
-Nitrogenio	Metano	0.977
-Nitrogenio	Etileno	1.032
-Nitrogenio	Etano	1.082
-Nitrogenio	Propano	1.177
-Nitrogenio	Propileno	1.151
-Nitrogenio	nButano	1.276
-Nitrogenio	nPentano	1.372
-Nitrogenio	nHexano	1.442
-Nitrogenio	Oxigenio	0.997
-Nitrogenio	MonoxidoDeCarbono	0.987
-Nitrogenio	Argonio	0.988
-Nitrogenio	SulfetoDeHidrogenio	0.983
-Nitrogenio	DioxidoDeCarbono	1.11
-Nitrogenio	OxidoNitroso	1.073
-Nitrogenio	Amonia	1.033
-DioxidoDeCarbono	Metano	0.975
-DioxidoDeCarbono	Etano	0.938
-DioxidoDeCarbono	Propano	0.925
-DioxidoDeCarbono	nButano	0.955
-DioxidoDeCarbono	iButano	0.946
-DioxidoDeCarbono	nPentano	1.002
-DioxidoDeCarbono	nHexano	1.018
-DioxidoDeCarbono	cicloHexano	1.054
-DioxidoDeCarbono	Benzeno	1.018
-DioxidoDeCarbono	nHeptano	1.058
-DioxidoDeCarbono	nOctano	1.09
-DioxidoDeCarbono	nNonano	1.126
-DioxidoDeCarbono	nDecano	1.16
-DioxidoDeCarbono	SulfetoDeHidrogenio	0.922
-DioxidoDeCarbono	R12	0.969
-DioxidoDeCarbono	Metanol	1.069
-Hidrogenio	Metano	1.216
-Hidrogenio	Etano	1.604
-Hidrogenio	Etileno	1.498
-Hidrogenio	Propano	1.826
-Hidrogenio	nButano	2.093
-Hidrogenio	nPentano	2.335
-Hidrogenio	nHexano	2.456
-Hidrogenio	nHeptano	2.634
-Hidrogenio	Nitrogenio	1.08
-Hidrogenio	MonoxidoDeCarbono	1.085
-Hidrogenio	DioxidoDeCarbono	1.624
-Argonio	Oxigenio	0.985
-Argonio	Amonia	1.01
-Argonio	Metano	0.984
-Oxigenio	OxidoNitroso	1.057
-MonoxidoDeCarbono	Metano	0.974
-Kriptonio	Oxigenio	0.989
-SulfetoDeHidrogenio	iButano	0.947
-OxidoNitroso	Metano	1.017
-Agua	DioxidoDeCarbono	0.92
-Agua	Amonia	1.152
-Agua	Metanol	0.979
+Methane	Ethane	1.052
+Methane	Ethylene	1.014
+Methane	Propane	1.113
+Methane	Propylene	1.089
+Methane	N-butane	1.171
+Methane	Isobutane	1.155
+Methane	N-pentane	1.2401
+Methane	Isopentane	1.228
+Methane	N-hexane	1.304
+Methane	Cyclohexane	1.269
+Methane	Benzene	1.234
+Methane	N-heptane	1.367
+Methane	N-octane	1.423
+Methane	N-nonane	1.484
+Methane	N-decane	1.533
+Ethane	Ethylene	0.991
+Ethane	Propane	1.01
+Ethane	Propylene	1.002
+Ethane	N-butane	1.029
+Ethane	Isobutane	1.036
+Ethane	N-pentane	1.064
+Ethane	Isopentane	1.07
+Ethane	N-hexane	1.106
+Ethane	Cyclohexane	1.081
+Ethane	Benzene	1.066
+Ethane	N-heptane	1.143
+Ethane	N-octane	1.165
+Ethane	N-nonane	1.214
+Ethane	N-decane	1.237
+Ethylene	N-butane	0.998
+Ethylene	Benzene	1.094
+Ethylene	N-heptane	1.163
+Acetylene	Ethylene	0.948
+Propane	Propylene	0.992
+Propane	N-butane	1.003
+Propane	Isobutane	1.003
+Propane	N-pentane	1.008
+Propane	Isopentane	1.009
+Propane	N-hexane	1.047
+Propane	Cyclohexane	1.037
+Propane	Benzene	1.011
+Propane	N-heptane	1.067
+Propane	N-octane	1.09
+Propane	N-nonane	1.115
+Propane	N-decane	1.139
+Propylene	N-butane	1.01
+Propylene	Isobutane	1.009
+Propylene	Isobutene	1.006
+N-butane	Isobutane	1.001
+N-butane	N-pentane	0.994
+N-butane	Isopentane	0.998
+N-butane	N-hexane	1.018
+N-butane	Cyclohexane	1.008
+N-butane	Benzene	0.999
+N-butane	N-heptane	1.027
+N-butane	N-octane	1.046
+N-butane	N-nonane	1.064
+N-butane	N-decane	1.078
+N-pentane	Isopentane	0.987
+N-pentane	N-hexane	0.998
+N-pentane	Cyclohexane	0.996
+N-pentane	Benzene	0.977
+N-pentane	N-heptane	1.004
+N-pentane	N-octane	1.02
+N-pentane	N-nonane	1.033
+N-pentane	N-decane	1.045
+N-hexane	Cyclohexane	0.998
+N-hexane	Benzene	0.978
+N-hexane	N-heptane	1.008
+N-hexane	N-octane	1.005
+N-hexane	N-nonane	1.015
+N-hexane	N-decane	1.025
+Benzene	Cyclohexane	0.979
+Benzene	N-heptane	0.985
+Benzene	N-octane	0.987
+Benzene	Isooctane	0.982
+Benzene	N-nonane	1.034
+Benzene	N-decane	1.047
+Cyclohexane	N-heptane	0.999
+Cyclohexane	N-octane	1.01
+Cyclohexane	N-nonane	1.021
+Cyclohexane	N-decane	1.032
+N-heptane	N-octane	0.993
+N-heptane	Isooctane	1.002
+N-heptane	N-nonane	1.002
+N-heptane	N-decane	1.01
+N-octane	N-nonane	0.993
+N-octane	N-decane	0.999
+N-octane	N-decane	0.991
+Nitrogen	Nitrogen	0.977
+Nitrogen	Ethylene	1.032
+Nitrogen	Ethane	1.082
+Nitrogen	Propane	1.177
+Nitrogen	Propylene	1.151
+Nitrogen	N-butane	1.276
+Nitrogen	N-pentane	1.372
+Nitrogen	N-hexane	1.442
+Nitrogen	Oxygen	0.997
+Nitrogen	Carbon monoxide	0.987
+Nitrogen	Argon	0.988
+Nitrogen	Hydrogen sulfide	0.983
+Nitrogen	Carbon dioxide	1.11
+Nitrogen	Nitrous oxide	1.073
+Nitrogen	Ammonia	1.033
+Carbon dioxide	Methane	0.975
+Carbon dioxide	Ethane	0.938
+Carbon dioxide	Propane	0.925
+Carbon dioxide	N-butane	0.955
+Carbon dioxide	Isobutane	0.946
+Carbon dioxide	N-pentane	1.002
+Carbon dioxide	N-hexane	1.018
+Carbon dioxide	Cyclohexane	1.054
+Carbon dioxide	Benzene	1018
+Carbon dioxide	N-heptane	1.058
+Carbon dioxide	N-octane	1.09
+Carbon dioxide	N-nonane	1.126
+Carbon dioxide	N-decane	1.16
+Carbon dioxide	Hydrogen sulfide	0.922
+Carbon dioxide	R12	0.969
+Carbon dioxide	Methanol	1.069
+Hydrogen	Methane	1.216
+Hydrogen	Methane	1.604
+Hydrogen	Ethylene	1408
+Hydrogen	Propane	1828
+Hydrogen	itbutane	2093
+Hydrogen	N-pentane	2.335
+Hydrogen	N-hexane	2.466
+Hydrogen	N-heptane	2.834
+Hydrogen	Nitrogen	1.08
+Hydrogen	Carbon monoxide	1.085
+Hydrogen	Carbon dioxide	1.624
+Argon	Oxygen	0.985
+Argon	Ammonia	1.01
+Argon	Methane	0.984
+Oxygen	Nitrous oxide	1.057
+Carbon monoxide	Carbon Methane	0.974
+Krypton	Oxygen	0.989
+Hydrogen sulfide	Isobutane	0.947
+Nitrous oxide	Methane	1.017
+Water	Carbon dioxide	0.92
+Water	Ammonia	1.152
+Water	Methanol	0.979
