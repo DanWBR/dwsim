@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 17</value>
-  </data>
   <data name="CheckBox1.Text" xml:space="preserve">
     <value>Mostrar las estimados iniciales</value>
   </data>
@@ -133,26 +129,11 @@
   <data name="FaTabStripItem5.Title" xml:space="preserve">
     <value>Tabla</value>
   </data>
-  <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 17</value>
-  </data>
   <data name="CheckBox2.Text" xml:space="preserve">
     <value>Mostrar las estimados iniciales</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 45</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Opciones</value>
-  </data>
-  <data name="GraphVL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 369</value>
-  </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 389</value>
-  </data>
-  <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 445</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Tabla</value>
@@ -160,17 +141,8 @@
   <data name="FaTabStripItem7.Title" xml:space="preserve">
     <value>Tabla</value>
   </data>
-  <data name="FaTabStrip3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 466</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 466</value>
-  </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Flujos</value>
-  </data>
-  <data name="CheckBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 17</value>
   </data>
   <data name="CheckBox4.Text" xml:space="preserve">
     <value>Mostrar los coeficientes de distribución (valores K)</value>
@@ -178,20 +150,8 @@
   <data name="CheckBox3.Text" xml:space="preserve">
     <value>Mostrar Flujos individuales</value>
   </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 45</value>
-  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Opciones</value>
-  </data>
-  <data name="GraphCP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 369</value>
-  </data>
-  <data name="GroupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 389</value>
-  </data>
-  <data name="FaTabStripItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 445</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Tabla</value>
@@ -199,50 +159,17 @@
   <data name="FaTabStripItem9.Title" xml:space="preserve">
     <value>Tabla</value>
   </data>
-  <data name="FaTabStrip4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 466</value>
-  </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 466</value>
-  </data>
   <data name="FaTabStripItem3.Title" xml:space="preserve">
     <value>Flujos de los Componentes</value>
-  </data>
-  <data name="GroupBox21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 45</value>
   </data>
   <data name="GroupBox21.Text" xml:space="preserve">
     <value>Opciones</value>
   </data>
-  <data name="GraphConc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 369</value>
-  </data>
-  <data name="GroupBox22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 389</value>
-  </data>
-  <data name="FaTabStripItem21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 445</value>
-  </data>
-  <data name="DataGridView4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>542, 412</value>
-  </data>
-  <data name="GroupBox23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>548, 432</value>
-  </data>
   <data name="GroupBox23.Text" xml:space="preserve">
     <value>Tabla</value>
   </data>
-  <data name="FaTabStripItem22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 445</value>
-  </data>
   <data name="FaTabStripItem22.Title" xml:space="preserve">
     <value>Tabla</value>
-  </data>
-  <data name="FaTabStrip9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 466</value>
-  </data>
-  <data name="FaTabStripItem20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 466</value>
   </data>
   <data name="FaTabStripItem20.Title" xml:space="preserve">
     <value>Fracciones de los componentes</value>

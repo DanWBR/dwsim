@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
     <value>Kopieren</value>
@@ -143,16 +143,6 @@
   </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Austauschgrad</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="dgv1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 0</value>
-  </data>
-  <data name="dgv1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 329</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>390, 329</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Stufeneditor</value>

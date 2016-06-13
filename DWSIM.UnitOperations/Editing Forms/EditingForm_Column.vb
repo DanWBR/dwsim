@@ -90,6 +90,26 @@ Public Class EditingForm_Column
 
             'parameters
 
+            cbCondPressureUnits.Items.Clear()
+            cbCondPressureUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
+            cbCondPressureUnits.SelectedItem = units.pressure
+
+            cbRebPressure.Items.Clear()
+            cbRebPressure.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
+            cbRebPressure.SelectedItem = units.pressure
+
+            cbCondPDropUnits.Items.Clear()
+            cbCondPDropUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
+            cbCondPDropUnits.SelectedItem = units.deltaP
+
+            cbIOTempPerturbationUnits.Items.Clear()
+            cbIOTempPerturbationUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
+            cbIOTempPerturbationUnits.SelectedItem = units.deltaT
+
+            cbNSMaximumDeltaT.Items.Clear()
+            cbNSMaximumDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
+            cbNSMaximumDeltaT.SelectedItem = units.deltaT
+
             tbNStages.Text = .NumberOfStages
 
             If TypeOf SimObject Is AbsorptionColumn Then cbAbsorberMode.SelectedIndex = DirectCast(SimObject, AbsorptionColumn).OperationMode Else cbAbsorberMode.Enabled = False
@@ -198,11 +218,6 @@ Public Class EditingForm_Column
             ieditor.Dock = DockStyle.Fill
             TabInitialEstimates.Controls.Add(ieditor)
 
-            TabResults.Controls.Clear()
-            Dim reditor As New EditingForm_Column_Results With {.dc = Me.SimObject}
-            reditor.Dock = DockStyle.Fill
-            TabResults.Controls.Add(reditor)
-
             'results
 
             gridResults.Rows.Clear()
@@ -216,6 +231,8 @@ Public Class EditingForm_Column
                 Case ColType.RefluxedAbsorber
                     gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.deltaP})
             End Select
+
+            Button1.Enabled = .Calculated
 
             'property package
 
@@ -324,6 +341,20 @@ Public Class EditingForm_Column
         '        SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
         '    End Try
         'End If
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim d As New WeifenLuo.WinFormsUI.Docking.DockContent()
+
+        Dim reditor As New EditingForm_Column_Results With {.dc = Me.SimObject}
+        reditor.Dock = DockStyle.Fill
+        d.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
+        d.TabText = d.Text
+        d.Controls.Add(reditor)
+        d.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
+        SimObject.FlowSheet.DisplayForm(d)
 
     End Sub
 

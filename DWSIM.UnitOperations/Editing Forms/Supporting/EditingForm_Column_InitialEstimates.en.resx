@@ -117,33 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>37, 17</value>
-  </data>
   <data name="Button4.ToolTip" xml:space="preserve">
     <value>Save estimates to a file</value>
-  </data>
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>68, 17</value>
   </data>
   <data name="Button3.ToolTip" xml:space="preserve">
     <value>Update estimates with results from current solution</value>
   </data>
-  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>594, 17</value>
-  </data>
   <data name="Button2.ToolTip" xml:space="preserve">
     <value>Load estimates from selected file</value>
-  </data>
-  <data name="TextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 20</value>
-  </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>489, 20</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 17</value>
   </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Open file with initial estimates</value>
@@ -153,9 +134,6 @@
   </data>
   <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
     <value>Copy</value>
-  </data>
-  <data name="ToolStripButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 20</value>
   </data>
   <data name="ToolStripButton2.ToolTipText" xml:space="preserve">
     <value>Paste</value>
@@ -169,20 +147,11 @@
   <data name="ToolStripButton7.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
   </data>
-  <data name="ToolStripButton28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
-  </data>
   <data name="ToolStripButton28.ToolTipText" xml:space="preserve">
     <value>Interpolate Temperature (empty cells)</value>
   </data>
-  <data name="ToolStripButton27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
-  </data>
   <data name="ToolStripButton27.ToolTipText" xml:space="preserve">
     <value>Interpolate Vapor Flow (empty cells)</value>
-  </data>
-  <data name="ToolStripButton26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
   </data>
   <data name="ToolStripButton26.ToolTipText" xml:space="preserve">
     <value>Interpolate Liquid Flow (empty cells)</value>
@@ -229,45 +198,23 @@
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Column5.Width" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="ToolStripButton21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 20</value>
-  </data>
   <data name="ToolStripButton21.ToolTipText" xml:space="preserve">
     <value>Copy</value>
-  </data>
-  <data name="ToolStripButton22.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 20</value>
   </data>
   <data name="ToolStripButton22.ToolTipText" xml:space="preserve">
     <value>Paste</value>
   </data>
-  <data name="ToolStripButton23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 20</value>
-  </data>
   <data name="ToolStripButton23.ToolTipText" xml:space="preserve">
     <value>Clean</value>
   </data>
-  <data name="ToolStripButton24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 20</value>
-  </data>
   <data name="ToolStripButton24.ToolTipText" xml:space="preserve">
     <value>Lock</value>
-  </data>
-  <data name="ToolStripButton25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 20</value>
   </data>
   <data name="ToolStripButton25.ToolTipText" xml:space="preserve">
     <value>Unlock</value>
   </data>
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Stage</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
-    <value>60</value>
   </data>
   <data name="FaTabStripItem3.Title" xml:space="preserve">
     <value>Variables</value>

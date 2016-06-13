@@ -734,13 +734,7 @@
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_ResultsTable.resx">
       <DependentUpon>EditingForm_Pipe_ResultsTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.de.resx">
-      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.en.resx">
-      <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.es.resx">
       <DependentUpon>EditingForm_Column_Connections.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Connections.resx">

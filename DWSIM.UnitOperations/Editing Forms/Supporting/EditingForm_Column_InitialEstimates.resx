@@ -259,7 +259,7 @@
     <value>4, 2</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 51</value>
+    <value>464, 51</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -373,7 +373,7 @@
     <value>0, 0</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 246</value>
+    <value>24, 289</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -424,7 +424,7 @@
     <value>27, 0</value>
   </data>
   <data name="dgvv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>566, 246</value>
+    <value>429, 289</value>
   </data>
   <data name="dgvv.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -442,7 +442,7 @@
     <value>1</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 246</value>
+    <value>456, 289</value>
   </data>
   <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -742,7 +742,7 @@
     <value>3, 16</value>
   </data>
   <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>595, 267</value>
+    <value>458, 310</value>
   </data>
   <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -766,7 +766,7 @@
     <value>4, 53</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 286</value>
+    <value>464, 329</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1116,8 +1116,11 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>610, 341</value>
+    <value>473, 384</value>
   </data>
   <data name="&gt;&gt;ToolStripButton1.Name" xml:space="preserve">
     <value>ToolStripButton1</value>
