@@ -4,6 +4,8 @@ Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
 Imports System.Drawing
+Imports DWSIM.UnitOperations.UnitOperations.Column
+Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 
 Public Class EditingForm_Column
 
@@ -65,39 +67,155 @@ Public Class EditingForm_Column
             If .IsSpecAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedSpecId).GraphicObject.Tag
             If .IsAdjustAttached Then lblConnectedTo.Text = .FlowSheet.SimulationObjects(.AttachedAdjustId).GraphicObject.Tag
 
-            'connections
+            If TypeOf SimObject Is DistillationColumn Then
+            ElseIf TypeOf SimObject Is AbsorptionColumn Then
+                TabControl1.TabPages.Remove(TabCondenser)
+                TabControl1.TabPages.Remove(TabReboiler)
+            ElseIf TypeOf SimObject Is RefluxedAbsorber Then
+                TabControl1.TabPages.Remove(TabReboiler)
+            ElseIf TypeOf SimObject Is ReboiledAbsorber Then
+                TabControl1.TabPages.Remove(TabCondenser)
+            End If
+
+            If .SolvingMethod = 0 Then
+                TabControl2.TabPages.Remove(TabSolverIO)
+                TabControl2.TabPages.Remove(TabSolverNS)
+            ElseIf .SolvingMethod = 1 Then
+                TabControl2.TabPages.Remove(TabSolverBP)
+                TabControl2.TabPages.Remove(TabSolverIO)
+            Else
+                TabControl2.TabPages.Remove(TabSolverBP)
+                TabControl2.TabPages.Remove(TabSolverNS)
+            End If
 
             'parameters
 
+            tbNStages.Text = .NumberOfStages
 
-            'profiles
+            If TypeOf SimObject Is AbsorptionColumn Then cbAbsorberMode.SelectedIndex = DirectCast(SimObject, AbsorptionColumn).OperationMode Else cbAbsorberMode.Enabled = False
+            cbSolvingMethod.SelectedIndex = .SolvingMethod
+            tbMaxIt.Text = .MaxIterations
+            tbConvTol.Text = .ExternalLoopTolerance
 
-            'TabPage5.Controls.Clear()
-            'Dim heditor As New PipeHydraulicProfileEditor With {.PipeOp = Me.SimObject}
-            'heditor.Dock = DockStyle.Fill
-            'TabPage5.Controls.Add(heditor)
+            cbCondType.SelectedIndex = .CondenserType
+            tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .CondenserPressure).ToString(nf)
+            tbCondPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .CondenserDeltaP).ToString(nf)
+            cbCondSpec.SelectedIndex = .Specs("C").SType
+            Dim cunits As String() = {}
+            Select Case .Specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    cunits = New String() {"M", "We"}
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Component_Recovery
+                    cunits = New String() {"% M/M", "% W/W"}
+                Case ColumnSpec.SpecType.Heat_Duty
+                    cunits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    cunits = New String() {""}
+                Case ColumnSpec.SpecType.Temperature
+                    cunits = New String() {"K", "R", "C", "F"}
+            End Select
+            cbCondSpecUnits.Items.Clear()
+            cbCondSpecUnits.Items.AddRange(cunits)
+            cbCondSpecUnits.SelectedItem = .Specs("C").SpecUnit
+            tbCondSpec.Text = su.Converter.ConvertFromSI(.Specs("C").SpecUnit, .Specs("C").SpecValue).ToString(nf)
+            cbCondVapFlowUnits.Items.Clear()
+            cbCondVapFlowUnits.Items.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
+            cbCondVapFlowUnits.SelectedItem = .VaporFlowRateUnit
+            tbCondVapFlow.Text = su.Converter.ConvertFromSI(.VaporFlowRateUnit, .VaporFlowRate).ToString(nf)
 
-            'TabPage6.Controls.Clear()
-            'Dim teditor As New PipeThermalProfileEditor With {.PipeOp = Me.SimObject}
-            'teditor.Dock = DockStyle.Fill
-            'TabPage6.Controls.Add(teditor)
+            tbRebPressure.Text = su.Converter.ConvertFromSI(units.pressure, .ReboilerPressure).ToString(nf)
+            cbRebSpec.SelectedIndex = .Specs("R").SType
+            Dim runits As String() = {}
+            Select Case .Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    runits = New String() {"M", "We"}
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    runits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    runits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Component_Recovery
+                    runits = New String() {"% M/M", "% W/W"}
+                Case ColumnSpec.SpecType.Heat_Duty
+                    runits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    runits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    runits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    runits = New String() {""}
+                Case ColumnSpec.SpecType.Temperature
+                    runits = New String() {"K", "R", "C", "F"}
+            End Select
+            cbRebSpecUnits.Items.Clear()
+            cbRebSpecUnits.Items.AddRange(cunits)
+            cbRebSpecUnits.SelectedItem = .Specs("R").SpecUnit
+            tbRebSpecValue.Text = su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").SpecValue).ToString(nf)
+
+            chkUseIE_T.Checked = .UseTemperatureEstimates
+            chkUseIE_LF.Checked = .UseLiquidFlowEstimates
+            chkUseIE_VF.Checked = .UseVaporFlowEstimates
+            chkUseIE_C.Checked = .UseCompositionEstimates
+
+            tbBPStopAtIter.Text = .StopAtIterationNumber
+            tbNSMaximumDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, .SC_MaximumTemperatureChange).ToString(nf)
+            tbNSNumericalDerivativeStep.Text = .SC_NumericalDerivativeStep
+            chkNSJacobian.Checked = .StoreAndReuseJacobian
+            chkNSUseDampingFactor.Checked = .UseDampingFactor
+            chkNSUseNewton.Checked = .UseNewtonUpdate
+
+            tbIONumericalDerivativeStep.Text = .IO_NumericalDerivativeStep
+            tbIOTempPerturbation.Text = su.Converter.ConvertFromSI(units.deltaT, .IO_ExtLoop_DeltaT).ToString(nf)
+            tbIOMinDamping.Text = .IO_DampingFactorMin
+            tbIOMaxDamping.Text = .IO_DampingFactorMax
+            chkIOAdjustSb.Checked = .AdjustSb
+            chkIOAverageKb.Checked = .KbjWeightedAverage
+            chkIOJacobian.Checked = .StoreAndReuseJacobian
+            chkIONewton.Checked = .UseNewtonUpdate
+            chkIOUseDampingFactor.Checked = .UseDampingFactor
+
+            'tabs
+
+            TabStages.Controls.Clear()
+            Dim seditor As New EditingForm_Column_Stages With {.dc = Me.SimObject}
+            seditor.Dock = DockStyle.Fill
+            TabStages.Controls.Add(seditor)
+
+            TabConnections.Controls.Clear()
+            Dim ceditor As New EditingForm_Column_Connections With {.dc = Me.SimObject}
+            ceditor.Dock = DockStyle.Fill
+            TabConnections.Controls.Add(ceditor)
+
+            TabInitialEstimates.Controls.Clear()
+            Dim ieditor As New EditingForm_Column_InitialEstimates With {.dc = Me.SimObject}
+            ieditor.Dock = DockStyle.Fill
+            TabInitialEstimates.Controls.Add(ieditor)
+
+            TabResults.Controls.Clear()
+            Dim reditor As New EditingForm_Column_Results With {.dc = Me.SimObject}
+            reditor.Dock = DockStyle.Fill
+            TabResults.Controls.Add(reditor)
 
             'results
 
-            'gridResults.Rows.Clear()
-            'gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DeltaP"), su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf), units.deltaP})
-            'gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
-            'gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
-
-            'TabPage2.Controls.Clear()
-            'Dim tview As New EditingForm_Pipe_ResultsTable With {.PipeOp = Me.SimObject}
-            'tview.Dock = DockStyle.Fill
-            'TabPage2.Controls.Add(tview)
-
-            'TabPage3.Controls.Clear()
-            'Dim cview As New EditingForm_Pipe_ResultsChart With {.PipeOp = Me.SimObject}
-            'cview.Dock = DockStyle.Fill
-            'TabPage3.Controls.Add(cview)
+            gridResults.Rows.Clear()
+            Select Case .ColumnType
+                Case ColType.DistillationColumn
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.deltaP})
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.deltaT})
+                Case ColType.AbsorptionColumn
+                Case ColType.ReboiledAbsorber
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.deltaT})
+                Case ColType.RefluxedAbsorber
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.deltaP})
+            End Select
 
             'property package
 
@@ -168,7 +286,7 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletPressure.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbNStages.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 

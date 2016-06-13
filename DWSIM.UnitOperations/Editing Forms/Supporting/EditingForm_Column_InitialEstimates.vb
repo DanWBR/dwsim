@@ -26,7 +26,7 @@ Public Class EditingForm_Column_InitialEstimates
 
     Inherits UserControl
 
-    Dim dc As Column
+    Public dc As Column
     Dim form As IFlowsheet
 
     Dim cb1, cb2, cb3 As Object

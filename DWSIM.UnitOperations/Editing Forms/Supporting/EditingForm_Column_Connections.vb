@@ -26,7 +26,7 @@ Public Class EditingForm_Column_Connections
 
     Inherits UserControl
 
-    Dim dc As Column
+    Public dc As Column
     Dim form As IFlowsheet
     Dim cb As Object
     Dim loaded As Boolean = False

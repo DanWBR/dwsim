@@ -1405,6 +1405,8 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Column
+
         Public Enum ColType
             DistillationColumn = 0
             AbsorptionColumn = 1
@@ -3010,6 +3012,37 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_Column With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_Column With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
+        End Sub
+
+        Public Overrides Sub UpdateEditForm()
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UIThread(Sub() f.UpdateInfo())
+                End If
+            End If
+        End Sub
+
+        Public Overrides Sub CloseEditForm()
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
 
     End Class

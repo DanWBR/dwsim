@@ -44,77 +44,76 @@ Partial Class EditingForm_Column
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.cbPDropModel = New System.Windows.Forms.ComboBox()
+        Me.TabGeneral = New System.Windows.Forms.TabPage()
+        Me.cbSolvingMethod = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.tbConvTol = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cbAbsorberMode = New System.Windows.Forms.ComboBox()
+        Me.tbMaxIt = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.tbOutletPressure = New System.Windows.Forms.TextBox()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
+        Me.tbNStages = New System.Windows.Forms.TextBox()
+        Me.TabCondenser = New System.Windows.Forms.TabPage()
+        Me.cbCondType = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.cbCondVapFlowUnits = New System.Windows.Forms.ComboBox()
+        Me.tbCondVapFlow = New System.Windows.Forms.TextBox()
+        Me.cbCondSpecUnits = New System.Windows.Forms.ComboBox()
+        Me.tbCondSpec = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.cbCondSpec = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.cbCondPDropUnits = New System.Windows.Forms.ComboBox()
+        Me.tbCondPDrop = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.cbCondPressureUnits = New System.Windows.Forms.ComboBox()
+        Me.tbCondPressure = New System.Windows.Forms.TextBox()
+        Me.TabReboiler = New System.Windows.Forms.TabPage()
+        Me.cbRebSpecUnits = New System.Windows.Forms.ComboBox()
+        Me.tbRebSpecValue = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
+        Me.cbRebSpec = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.cbRebPressure = New System.Windows.Forms.ComboBox()
+        Me.tbRebPressure = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TabPage9 = New System.Windows.Forms.TabPage()
-        Me.TabPage8 = New System.Windows.Forms.TabPage()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TabConnections = New System.Windows.Forms.TabPage()
+        Me.TabStages = New System.Windows.Forms.TabPage()
+        Me.TabInitialEstimates = New System.Windows.Forms.TabPage()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chkUseIE_C = New System.Windows.Forms.CheckBox()
+        Me.chkUseIE_VF = New System.Windows.Forms.CheckBox()
+        Me.chkUseIE_LF = New System.Windows.Forms.CheckBox()
+        Me.chkUseIE_T = New System.Windows.Forms.CheckBox()
+        Me.TabSolverBP = New System.Windows.Forms.TabPage()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TabPage10 = New System.Windows.Forms.TabPage()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.tbBPStopAtIter = New System.Windows.Forms.TextBox()
+        Me.TabSolverNS = New System.Windows.Forms.TabPage()
+        Me.chkNSJacobian = New System.Windows.Forms.CheckBox()
+        Me.chkNSUseNewton = New System.Windows.Forms.CheckBox()
+        Me.chkNSUseDampingFactor = New System.Windows.Forms.CheckBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.cbNSMaximumDeltaT = New System.Windows.Forms.ComboBox()
+        Me.tbNSMaximumDeltaT = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TabPage11 = New System.Windows.Forms.TabPage()
-        Me.CheckBox8 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox7 = New System.Windows.Forms.CheckBox()
-        Me.TextBox19 = New System.Windows.Forms.TextBox()
-        Me.TextBox18 = New System.Windows.Forms.TextBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox6 = New System.Windows.Forms.CheckBox()
+        Me.tbNSNumericalDerivativeStep = New System.Windows.Forms.TextBox()
+        Me.TabSolverIO = New System.Windows.Forms.TabPage()
+        Me.chkIOAverageKb = New System.Windows.Forms.CheckBox()
+        Me.chkIOAdjustSb = New System.Windows.Forms.CheckBox()
+        Me.tbIOMaxDamping = New System.Windows.Forms.TextBox()
+        Me.tbIOMinDamping = New System.Windows.Forms.TextBox()
+        Me.chkIOJacobian = New System.Windows.Forms.CheckBox()
+        Me.chkIONewton = New System.Windows.Forms.CheckBox()
+        Me.chkIOUseDampingFactor = New System.Windows.Forms.CheckBox()
         Me.Label22 = New System.Windows.Forms.Label()
-        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
+        Me.cbIOTempPerturbationUnits = New System.Windows.Forms.ComboBox()
+        Me.tbIOTempPerturbation = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
+        Me.tbIONumericalDerivativeStep = New System.Windows.Forms.TextBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
@@ -123,24 +122,19 @@ Partial Class EditingForm_Column
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.CheckBox9 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox10 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox11 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox12 = New System.Windows.Forms.CheckBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TabResults = New System.Windows.Forms.TabPage()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
-        Me.TabPage5.SuspendLayout()
-        Me.TabPage6.SuspendLayout()
+        Me.TabGeneral.SuspendLayout()
+        Me.TabCondenser.SuspendLayout()
+        Me.TabReboiler.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl2.SuspendLayout()
-        Me.TabPage9.SuspendLayout()
-        Me.TabPage8.SuspendLayout()
-        Me.TabPage10.SuspendLayout()
-        Me.TabPage11.SuspendLayout()
+        Me.TabInitialEstimates.SuspendLayout()
+        Me.TabSolverBP.SuspendLayout()
+        Me.TabSolverNS.SuspendLayout()
+        Me.TabSolverIO.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -247,36 +241,75 @@ Partial Class EditingForm_Column
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Controls.Add(Me.TabPage6)
+        Me.TabControl1.Controls.Add(Me.TabGeneral)
+        Me.TabControl1.Controls.Add(Me.TabCondenser)
+        Me.TabControl1.Controls.Add(Me.TabReboiler)
         resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         '
-        'TabPage4
+        'TabGeneral
         '
-        Me.TabPage4.Controls.Add(Me.btnConfigureFlashAlg)
-        Me.TabPage4.Controls.Add(Me.btnConfigurePP)
-        Me.TabPage4.Controls.Add(Me.cbPDropModel)
-        Me.TabPage4.Controls.Add(Me.cbFlashAlg)
-        Me.TabPage4.Controls.Add(Me.Label10)
-        Me.TabPage4.Controls.Add(Me.cbPropPack)
-        Me.TabPage4.Controls.Add(Me.Label9)
-        Me.TabPage4.Controls.Add(Me.Label6)
-        Me.TabPage4.Controls.Add(Me.Label1)
-        Me.TabPage4.Controls.Add(Me.tbOutletPressure)
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.UseVisualStyleBackColor = True
+        Me.TabGeneral.Controls.Add(Me.cbSolvingMethod)
+        Me.TabGeneral.Controls.Add(Me.Label18)
+        Me.TabGeneral.Controls.Add(Me.Label16)
+        Me.TabGeneral.Controls.Add(Me.btnConfigureFlashAlg)
+        Me.TabGeneral.Controls.Add(Me.tbConvTol)
+        Me.TabGeneral.Controls.Add(Me.btnConfigurePP)
+        Me.TabGeneral.Controls.Add(Me.Label14)
+        Me.TabGeneral.Controls.Add(Me.cbAbsorberMode)
+        Me.TabGeneral.Controls.Add(Me.tbMaxIt)
+        Me.TabGeneral.Controls.Add(Me.cbFlashAlg)
+        Me.TabGeneral.Controls.Add(Me.Label10)
+        Me.TabGeneral.Controls.Add(Me.cbPropPack)
+        Me.TabGeneral.Controls.Add(Me.Label9)
+        Me.TabGeneral.Controls.Add(Me.Label6)
+        Me.TabGeneral.Controls.Add(Me.Label1)
+        Me.TabGeneral.Controls.Add(Me.tbNStages)
+        resources.ApplyResources(Me.TabGeneral, "TabGeneral")
+        Me.TabGeneral.Name = "TabGeneral"
+        Me.TabGeneral.UseVisualStyleBackColor = True
         '
-        'cbPDropModel
+        'cbSolvingMethod
         '
-        resources.ApplyResources(Me.cbPDropModel, "cbPDropModel")
-        Me.cbPDropModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPDropModel.FormattingEnabled = True
-        Me.cbPDropModel.Items.AddRange(New Object() {resources.GetString("cbPDropModel.Items"), resources.GetString("cbPDropModel.Items1"), resources.GetString("cbPDropModel.Items2")})
-        Me.cbPDropModel.Name = "cbPDropModel"
+        resources.ApplyResources(Me.cbSolvingMethod, "cbSolvingMethod")
+        Me.cbSolvingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSolvingMethod.FormattingEnabled = True
+        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1"), resources.GetString("cbSolvingMethod.Items2")})
+        Me.cbSolvingMethod.Name = "cbSolvingMethod"
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        '
+        'tbConvTol
+        '
+        resources.ApplyResources(Me.tbConvTol, "tbConvTol")
+        Me.tbConvTol.Name = "tbConvTol"
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        '
+        'cbAbsorberMode
+        '
+        resources.ApplyResources(Me.cbAbsorberMode, "cbAbsorberMode")
+        Me.cbAbsorberMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbAbsorberMode.FormattingEnabled = True
+        Me.cbAbsorberMode.Items.AddRange(New Object() {resources.GetString("cbAbsorberMode.Items"), resources.GetString("cbAbsorberMode.Items1")})
+        Me.cbAbsorberMode.Name = "cbAbsorberMode"
+        '
+        'tbMaxIt
+        '
+        resources.ApplyResources(Me.tbMaxIt, "tbMaxIt")
+        Me.tbMaxIt.Name = "tbMaxIt"
         '
         'Label6
         '
@@ -288,39 +321,39 @@ Partial Class EditingForm_Column
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
         '
-        'tbOutletPressure
+        'tbNStages
         '
-        resources.ApplyResources(Me.tbOutletPressure, "tbOutletPressure")
-        Me.tbOutletPressure.Name = "tbOutletPressure"
+        resources.ApplyResources(Me.tbNStages, "tbNStages")
+        Me.tbNStages.Name = "tbNStages"
         '
-        'TabPage5
+        'TabCondenser
         '
-        Me.TabPage5.Controls.Add(Me.ComboBox6)
-        Me.TabPage5.Controls.Add(Me.Label2)
-        Me.TabPage5.Controls.Add(Me.Label8)
-        Me.TabPage5.Controls.Add(Me.ComboBox5)
-        Me.TabPage5.Controls.Add(Me.TextBox4)
-        Me.TabPage5.Controls.Add(Me.ComboBox4)
-        Me.TabPage5.Controls.Add(Me.TextBox3)
-        Me.TabPage5.Controls.Add(Me.Label7)
-        Me.TabPage5.Controls.Add(Me.ComboBox3)
-        Me.TabPage5.Controls.Add(Me.Label5)
-        Me.TabPage5.Controls.Add(Me.ComboBox2)
-        Me.TabPage5.Controls.Add(Me.TextBox2)
-        Me.TabPage5.Controls.Add(Me.Label4)
-        Me.TabPage5.Controls.Add(Me.ComboBox1)
-        Me.TabPage5.Controls.Add(Me.TextBox1)
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.UseVisualStyleBackColor = True
+        Me.TabCondenser.Controls.Add(Me.cbCondType)
+        Me.TabCondenser.Controls.Add(Me.Label2)
+        Me.TabCondenser.Controls.Add(Me.Label8)
+        Me.TabCondenser.Controls.Add(Me.cbCondVapFlowUnits)
+        Me.TabCondenser.Controls.Add(Me.tbCondVapFlow)
+        Me.TabCondenser.Controls.Add(Me.cbCondSpecUnits)
+        Me.TabCondenser.Controls.Add(Me.tbCondSpec)
+        Me.TabCondenser.Controls.Add(Me.Label7)
+        Me.TabCondenser.Controls.Add(Me.cbCondSpec)
+        Me.TabCondenser.Controls.Add(Me.Label5)
+        Me.TabCondenser.Controls.Add(Me.cbCondPDropUnits)
+        Me.TabCondenser.Controls.Add(Me.tbCondPDrop)
+        Me.TabCondenser.Controls.Add(Me.Label4)
+        Me.TabCondenser.Controls.Add(Me.cbCondPressureUnits)
+        Me.TabCondenser.Controls.Add(Me.tbCondPressure)
+        resources.ApplyResources(Me.TabCondenser, "TabCondenser")
+        Me.TabCondenser.Name = "TabCondenser"
+        Me.TabCondenser.UseVisualStyleBackColor = True
         '
-        'ComboBox6
+        'cbCondType
         '
-        resources.ApplyResources(Me.ComboBox6, "ComboBox6")
-        Me.ComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox6.FormattingEnabled = True
-        Me.ComboBox6.Items.AddRange(New Object() {resources.GetString("ComboBox6.Items"), resources.GetString("ComboBox6.Items1"), resources.GetString("ComboBox6.Items2")})
-        Me.ComboBox6.Name = "ComboBox6"
+        resources.ApplyResources(Me.cbCondType, "cbCondType")
+        Me.cbCondType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondType.FormattingEnabled = True
+        Me.cbCondType.Items.AddRange(New Object() {resources.GetString("cbCondType.Items"), resources.GetString("cbCondType.Items1"), resources.GetString("cbCondType.Items2")})
+        Me.cbCondType.Name = "cbCondType"
         '
         'Label2
         '
@@ -332,137 +365,137 @@ Partial Class EditingForm_Column
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
         '
-        'ComboBox5
+        'cbCondVapFlowUnits
         '
-        resources.ApplyResources(Me.ComboBox5, "ComboBox5")
-        Me.ComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Items.AddRange(New Object() {resources.GetString("ComboBox5.Items"), resources.GetString("ComboBox5.Items1"), resources.GetString("ComboBox5.Items2")})
-        Me.ComboBox5.Name = "ComboBox5"
+        resources.ApplyResources(Me.cbCondVapFlowUnits, "cbCondVapFlowUnits")
+        Me.cbCondVapFlowUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondVapFlowUnits.FormattingEnabled = True
+        Me.cbCondVapFlowUnits.Items.AddRange(New Object() {resources.GetString("cbCondVapFlowUnits.Items"), resources.GetString("cbCondVapFlowUnits.Items1"), resources.GetString("cbCondVapFlowUnits.Items2")})
+        Me.cbCondVapFlowUnits.Name = "cbCondVapFlowUnits"
         '
-        'TextBox4
+        'tbCondVapFlow
         '
-        resources.ApplyResources(Me.TextBox4, "TextBox4")
-        Me.TextBox4.Name = "TextBox4"
+        resources.ApplyResources(Me.tbCondVapFlow, "tbCondVapFlow")
+        Me.tbCondVapFlow.Name = "tbCondVapFlow"
         '
-        'ComboBox4
+        'cbCondSpecUnits
         '
-        resources.ApplyResources(Me.ComboBox4, "ComboBox4")
-        Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {resources.GetString("ComboBox4.Items"), resources.GetString("ComboBox4.Items1"), resources.GetString("ComboBox4.Items2")})
-        Me.ComboBox4.Name = "ComboBox4"
+        resources.ApplyResources(Me.cbCondSpecUnits, "cbCondSpecUnits")
+        Me.cbCondSpecUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondSpecUnits.FormattingEnabled = True
+        Me.cbCondSpecUnits.Items.AddRange(New Object() {resources.GetString("cbCondSpecUnits.Items"), resources.GetString("cbCondSpecUnits.Items1"), resources.GetString("cbCondSpecUnits.Items2")})
+        Me.cbCondSpecUnits.Name = "cbCondSpecUnits"
         '
-        'TextBox3
+        'tbCondSpec
         '
-        resources.ApplyResources(Me.TextBox3, "TextBox3")
-        Me.TextBox3.Name = "TextBox3"
+        resources.ApplyResources(Me.tbCondSpec, "tbCondSpec")
+        Me.tbCondSpec.Name = "tbCondSpec"
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
         '
-        'ComboBox3
+        'cbCondSpec
         '
-        resources.ApplyResources(Me.ComboBox3, "ComboBox3")
-        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {resources.GetString("ComboBox3.Items"), resources.GetString("ComboBox3.Items1"), resources.GetString("ComboBox3.Items2")})
-        Me.ComboBox3.Name = "ComboBox3"
+        resources.ApplyResources(Me.cbCondSpec, "cbCondSpec")
+        Me.cbCondSpec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondSpec.FormattingEnabled = True
+        Me.cbCondSpec.Items.AddRange(New Object() {resources.GetString("cbCondSpec.Items"), resources.GetString("cbCondSpec.Items1"), resources.GetString("cbCondSpec.Items2"), resources.GetString("cbCondSpec.Items3"), resources.GetString("cbCondSpec.Items4"), resources.GetString("cbCondSpec.Items5"), resources.GetString("cbCondSpec.Items6"), resources.GetString("cbCondSpec.Items7"), resources.GetString("cbCondSpec.Items8")})
+        Me.cbCondSpec.Name = "cbCondSpec"
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
         '
-        'ComboBox2
+        'cbCondPDropUnits
         '
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items"), resources.GetString("ComboBox2.Items1"), resources.GetString("ComboBox2.Items2")})
-        Me.ComboBox2.Name = "ComboBox2"
+        resources.ApplyResources(Me.cbCondPDropUnits, "cbCondPDropUnits")
+        Me.cbCondPDropUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondPDropUnits.FormattingEnabled = True
+        Me.cbCondPDropUnits.Items.AddRange(New Object() {resources.GetString("cbCondPDropUnits.Items"), resources.GetString("cbCondPDropUnits.Items1"), resources.GetString("cbCondPDropUnits.Items2")})
+        Me.cbCondPDropUnits.Name = "cbCondPDropUnits"
         '
-        'TextBox2
+        'tbCondPDrop
         '
-        resources.ApplyResources(Me.TextBox2, "TextBox2")
-        Me.TextBox2.Name = "TextBox2"
+        resources.ApplyResources(Me.tbCondPDrop, "tbCondPDrop")
+        Me.tbCondPDrop.Name = "tbCondPDrop"
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
         '
-        'ComboBox1
+        'cbCondPressureUnits
         '
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2")})
-        Me.ComboBox1.Name = "ComboBox1"
+        resources.ApplyResources(Me.cbCondPressureUnits, "cbCondPressureUnits")
+        Me.cbCondPressureUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondPressureUnits.FormattingEnabled = True
+        Me.cbCondPressureUnits.Items.AddRange(New Object() {resources.GetString("cbCondPressureUnits.Items"), resources.GetString("cbCondPressureUnits.Items1"), resources.GetString("cbCondPressureUnits.Items2")})
+        Me.cbCondPressureUnits.Name = "cbCondPressureUnits"
         '
-        'TextBox1
+        'tbCondPressure
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
-        Me.TextBox1.Name = "TextBox1"
+        resources.ApplyResources(Me.tbCondPressure, "tbCondPressure")
+        Me.tbCondPressure.Name = "tbCondPressure"
         '
-        'TabPage6
+        'TabReboiler
         '
-        Me.TabPage6.Controls.Add(Me.ComboBox7)
-        Me.TabPage6.Controls.Add(Me.TextBox6)
-        Me.TabPage6.Controls.Add(Me.Label15)
-        Me.TabPage6.Controls.Add(Me.ComboBox8)
-        Me.TabPage6.Controls.Add(Me.Label17)
-        Me.TabPage6.Controls.Add(Me.ComboBox10)
-        Me.TabPage6.Controls.Add(Me.TextBox8)
-        resources.ApplyResources(Me.TabPage6, "TabPage6")
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.UseVisualStyleBackColor = True
+        Me.TabReboiler.Controls.Add(Me.cbRebSpecUnits)
+        Me.TabReboiler.Controls.Add(Me.tbRebSpecValue)
+        Me.TabReboiler.Controls.Add(Me.Label15)
+        Me.TabReboiler.Controls.Add(Me.cbRebSpec)
+        Me.TabReboiler.Controls.Add(Me.Label17)
+        Me.TabReboiler.Controls.Add(Me.cbRebPressure)
+        Me.TabReboiler.Controls.Add(Me.tbRebPressure)
+        resources.ApplyResources(Me.TabReboiler, "TabReboiler")
+        Me.TabReboiler.Name = "TabReboiler"
+        Me.TabReboiler.UseVisualStyleBackColor = True
         '
-        'ComboBox7
+        'cbRebSpecUnits
         '
-        resources.ApplyResources(Me.ComboBox7, "ComboBox7")
-        Me.ComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox7.FormattingEnabled = True
-        Me.ComboBox7.Items.AddRange(New Object() {resources.GetString("ComboBox7.Items"), resources.GetString("ComboBox7.Items1"), resources.GetString("ComboBox7.Items2")})
-        Me.ComboBox7.Name = "ComboBox7"
+        resources.ApplyResources(Me.cbRebSpecUnits, "cbRebSpecUnits")
+        Me.cbRebSpecUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRebSpecUnits.FormattingEnabled = True
+        Me.cbRebSpecUnits.Items.AddRange(New Object() {resources.GetString("cbRebSpecUnits.Items"), resources.GetString("cbRebSpecUnits.Items1"), resources.GetString("cbRebSpecUnits.Items2")})
+        Me.cbRebSpecUnits.Name = "cbRebSpecUnits"
         '
-        'TextBox6
+        'tbRebSpecValue
         '
-        resources.ApplyResources(Me.TextBox6, "TextBox6")
-        Me.TextBox6.Name = "TextBox6"
+        resources.ApplyResources(Me.tbRebSpecValue, "tbRebSpecValue")
+        Me.tbRebSpecValue.Name = "tbRebSpecValue"
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
         '
-        'ComboBox8
+        'cbRebSpec
         '
-        resources.ApplyResources(Me.ComboBox8, "ComboBox8")
-        Me.ComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox8.FormattingEnabled = True
-        Me.ComboBox8.Items.AddRange(New Object() {resources.GetString("ComboBox8.Items"), resources.GetString("ComboBox8.Items1"), resources.GetString("ComboBox8.Items2")})
-        Me.ComboBox8.Name = "ComboBox8"
+        resources.ApplyResources(Me.cbRebSpec, "cbRebSpec")
+        Me.cbRebSpec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRebSpec.FormattingEnabled = True
+        Me.cbRebSpec.Items.AddRange(New Object() {resources.GetString("cbRebSpec.Items"), resources.GetString("cbRebSpec.Items1"), resources.GetString("cbRebSpec.Items2"), resources.GetString("cbRebSpec.Items3"), resources.GetString("cbRebSpec.Items4"), resources.GetString("cbRebSpec.Items5"), resources.GetString("cbRebSpec.Items6"), resources.GetString("cbRebSpec.Items7"), resources.GetString("cbRebSpec.Items8")})
+        Me.cbRebSpec.Name = "cbRebSpec"
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
         '
-        'ComboBox10
+        'cbRebPressure
         '
-        resources.ApplyResources(Me.ComboBox10, "ComboBox10")
-        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.Items.AddRange(New Object() {resources.GetString("ComboBox10.Items"), resources.GetString("ComboBox10.Items1"), resources.GetString("ComboBox10.Items2")})
-        Me.ComboBox10.Name = "ComboBox10"
+        resources.ApplyResources(Me.cbRebPressure, "cbRebPressure")
+        Me.cbRebPressure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRebPressure.FormattingEnabled = True
+        Me.cbRebPressure.Items.AddRange(New Object() {resources.GetString("cbRebPressure.Items"), resources.GetString("cbRebPressure.Items1"), resources.GetString("cbRebPressure.Items2")})
+        Me.cbRebPressure.Name = "cbRebPressure"
         '
-        'TextBox8
+        'tbRebPressure
         '
-        resources.ApplyResources(Me.TextBox8, "TextBox8")
-        Me.TextBox8.Name = "TextBox8"
+        resources.ApplyResources(Me.tbRebPressure, "tbRebPressure")
+        Me.tbRebPressure.Name = "tbRebPressure"
         '
         'GroupBox1
         '
@@ -473,274 +506,231 @@ Partial Class EditingForm_Column
         '
         'TabControl2
         '
-        Me.TabControl2.Controls.Add(Me.TabPage7)
-        Me.TabControl2.Controls.Add(Me.TabPage3)
-        Me.TabControl2.Controls.Add(Me.TabPage9)
-        Me.TabControl2.Controls.Add(Me.TabPage8)
-        Me.TabControl2.Controls.Add(Me.TabPage10)
-        Me.TabControl2.Controls.Add(Me.TabPage11)
+        Me.TabControl2.Controls.Add(Me.TabConnections)
+        Me.TabControl2.Controls.Add(Me.TabStages)
+        Me.TabControl2.Controls.Add(Me.TabInitialEstimates)
+        Me.TabControl2.Controls.Add(Me.TabSolverBP)
+        Me.TabControl2.Controls.Add(Me.TabSolverNS)
+        Me.TabControl2.Controls.Add(Me.TabSolverIO)
         resources.ApplyResources(Me.TabControl2, "TabControl2")
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
         '
-        'TabPage7
+        'TabConnections
         '
-        resources.ApplyResources(Me.TabPage7, "TabPage7")
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabConnections, "TabConnections")
+        Me.TabConnections.Name = "TabConnections"
+        Me.TabConnections.UseVisualStyleBackColor = True
         '
-        'TabPage3
+        'TabStages
         '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.TabStages, "TabStages")
+        Me.TabStages.Name = "TabStages"
+        Me.TabStages.UseVisualStyleBackColor = True
         '
-        'TabPage9
+        'TabInitialEstimates
         '
-        Me.TabPage9.Controls.Add(Me.Panel1)
-        Me.TabPage9.Controls.Add(Me.CheckBox12)
-        Me.TabPage9.Controls.Add(Me.CheckBox11)
-        Me.TabPage9.Controls.Add(Me.CheckBox10)
-        Me.TabPage9.Controls.Add(Me.CheckBox9)
-        resources.ApplyResources(Me.TabPage9, "TabPage9")
-        Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.UseVisualStyleBackColor = True
+        Me.TabInitialEstimates.Controls.Add(Me.Panel1)
+        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_C)
+        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_VF)
+        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_LF)
+        Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_T)
+        resources.ApplyResources(Me.TabInitialEstimates, "TabInitialEstimates")
+        Me.TabInitialEstimates.Name = "TabInitialEstimates"
+        Me.TabInitialEstimates.UseVisualStyleBackColor = True
         '
-        'TabPage8
+        'Panel1
         '
-        Me.TabPage8.Controls.Add(Me.Label16)
-        Me.TabPage8.Controls.Add(Me.TextBox9)
-        Me.TabPage8.Controls.Add(Me.Label14)
-        Me.TabPage8.Controls.Add(Me.TextBox7)
-        Me.TabPage8.Controls.Add(Me.Label3)
-        Me.TabPage8.Controls.Add(Me.TextBox5)
-        resources.ApplyResources(Me.TabPage8, "TabPage8")
-        Me.TabPage8.Name = "TabPage8"
-        Me.TabPage8.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Name = "Panel1"
         '
-        'Label16
+        'chkUseIE_C
         '
-        resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.Name = "Label16"
+        resources.ApplyResources(Me.chkUseIE_C, "chkUseIE_C")
+        Me.chkUseIE_C.Name = "chkUseIE_C"
+        Me.chkUseIE_C.UseVisualStyleBackColor = True
         '
-        'TextBox9
+        'chkUseIE_VF
         '
-        resources.ApplyResources(Me.TextBox9, "TextBox9")
-        Me.TextBox9.Name = "TextBox9"
+        resources.ApplyResources(Me.chkUseIE_VF, "chkUseIE_VF")
+        Me.chkUseIE_VF.Name = "chkUseIE_VF"
+        Me.chkUseIE_VF.UseVisualStyleBackColor = True
         '
-        'Label14
+        'chkUseIE_LF
         '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.Name = "Label14"
+        resources.ApplyResources(Me.chkUseIE_LF, "chkUseIE_LF")
+        Me.chkUseIE_LF.Name = "chkUseIE_LF"
+        Me.chkUseIE_LF.UseVisualStyleBackColor = True
         '
-        'TextBox7
+        'chkUseIE_T
         '
-        resources.ApplyResources(Me.TextBox7, "TextBox7")
-        Me.TextBox7.Name = "TextBox7"
+        resources.ApplyResources(Me.chkUseIE_T, "chkUseIE_T")
+        Me.chkUseIE_T.Name = "chkUseIE_T"
+        Me.chkUseIE_T.UseVisualStyleBackColor = True
+        '
+        'TabSolverBP
+        '
+        Me.TabSolverBP.Controls.Add(Me.Label3)
+        Me.TabSolverBP.Controls.Add(Me.tbBPStopAtIter)
+        resources.ApplyResources(Me.TabSolverBP, "TabSolverBP")
+        Me.TabSolverBP.Name = "TabSolverBP"
+        Me.TabSolverBP.UseVisualStyleBackColor = True
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
         '
-        'TextBox5
+        'tbBPStopAtIter
         '
-        resources.ApplyResources(Me.TextBox5, "TextBox5")
-        Me.TextBox5.Name = "TextBox5"
+        resources.ApplyResources(Me.tbBPStopAtIter, "tbBPStopAtIter")
+        Me.tbBPStopAtIter.Name = "tbBPStopAtIter"
         '
-        'TabPage10
+        'TabSolverNS
         '
-        Me.TabPage10.Controls.Add(Me.CheckBox3)
-        Me.TabPage10.Controls.Add(Me.CheckBox2)
-        Me.TabPage10.Controls.Add(Me.CheckBox1)
-        Me.TabPage10.Controls.Add(Me.Label21)
-        Me.TabPage10.Controls.Add(Me.ComboBox9)
-        Me.TabPage10.Controls.Add(Me.TextBox13)
-        Me.TabPage10.Controls.Add(Me.Label20)
-        Me.TabPage10.Controls.Add(Me.TextBox12)
-        Me.TabPage10.Controls.Add(Me.Label18)
-        Me.TabPage10.Controls.Add(Me.TextBox10)
-        Me.TabPage10.Controls.Add(Me.Label19)
-        Me.TabPage10.Controls.Add(Me.TextBox11)
-        resources.ApplyResources(Me.TabPage10, "TabPage10")
-        Me.TabPage10.Name = "TabPage10"
-        Me.TabPage10.UseVisualStyleBackColor = True
+        Me.TabSolverNS.Controls.Add(Me.chkNSJacobian)
+        Me.TabSolverNS.Controls.Add(Me.chkNSUseNewton)
+        Me.TabSolverNS.Controls.Add(Me.chkNSUseDampingFactor)
+        Me.TabSolverNS.Controls.Add(Me.Label21)
+        Me.TabSolverNS.Controls.Add(Me.cbNSMaximumDeltaT)
+        Me.TabSolverNS.Controls.Add(Me.tbNSMaximumDeltaT)
+        Me.TabSolverNS.Controls.Add(Me.Label20)
+        Me.TabSolverNS.Controls.Add(Me.tbNSNumericalDerivativeStep)
+        resources.ApplyResources(Me.TabSolverNS, "TabSolverNS")
+        Me.TabSolverNS.Name = "TabSolverNS"
+        Me.TabSolverNS.UseVisualStyleBackColor = True
         '
-        'CheckBox3
+        'chkNSJacobian
         '
-        resources.ApplyResources(Me.CheckBox3, "CheckBox3")
-        Me.CheckBox3.Name = "CheckBox3"
-        Me.CheckBox3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkNSJacobian, "chkNSJacobian")
+        Me.chkNSJacobian.Name = "chkNSJacobian"
+        Me.chkNSJacobian.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'chkNSUseNewton
         '
-        resources.ApplyResources(Me.CheckBox2, "CheckBox2")
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkNSUseNewton, "chkNSUseNewton")
+        Me.chkNSUseNewton.Name = "chkNSUseNewton"
+        Me.chkNSUseNewton.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'chkNSUseDampingFactor
         '
-        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkNSUseDampingFactor, "chkNSUseDampingFactor")
+        Me.chkNSUseDampingFactor.Name = "chkNSUseDampingFactor"
+        Me.chkNSUseDampingFactor.UseVisualStyleBackColor = True
         '
         'Label21
         '
         resources.ApplyResources(Me.Label21, "Label21")
         Me.Label21.Name = "Label21"
         '
-        'ComboBox9
+        'cbNSMaximumDeltaT
         '
-        resources.ApplyResources(Me.ComboBox9, "ComboBox9")
-        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox9.FormattingEnabled = True
-        Me.ComboBox9.Items.AddRange(New Object() {resources.GetString("ComboBox9.Items"), resources.GetString("ComboBox9.Items1"), resources.GetString("ComboBox9.Items2")})
-        Me.ComboBox9.Name = "ComboBox9"
+        resources.ApplyResources(Me.cbNSMaximumDeltaT, "cbNSMaximumDeltaT")
+        Me.cbNSMaximumDeltaT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbNSMaximumDeltaT.FormattingEnabled = True
+        Me.cbNSMaximumDeltaT.Items.AddRange(New Object() {resources.GetString("cbNSMaximumDeltaT.Items"), resources.GetString("cbNSMaximumDeltaT.Items1"), resources.GetString("cbNSMaximumDeltaT.Items2")})
+        Me.cbNSMaximumDeltaT.Name = "cbNSMaximumDeltaT"
         '
-        'TextBox13
+        'tbNSMaximumDeltaT
         '
-        resources.ApplyResources(Me.TextBox13, "TextBox13")
-        Me.TextBox13.Name = "TextBox13"
+        resources.ApplyResources(Me.tbNSMaximumDeltaT, "tbNSMaximumDeltaT")
+        Me.tbNSMaximumDeltaT.Name = "tbNSMaximumDeltaT"
         '
         'Label20
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
         '
-        'TextBox12
+        'tbNSNumericalDerivativeStep
         '
-        resources.ApplyResources(Me.TextBox12, "TextBox12")
-        Me.TextBox12.Name = "TextBox12"
+        resources.ApplyResources(Me.tbNSNumericalDerivativeStep, "tbNSNumericalDerivativeStep")
+        Me.tbNSNumericalDerivativeStep.Name = "tbNSNumericalDerivativeStep"
         '
-        'Label18
+        'TabSolverIO
         '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
+        Me.TabSolverIO.Controls.Add(Me.chkIOAverageKb)
+        Me.TabSolverIO.Controls.Add(Me.chkIOAdjustSb)
+        Me.TabSolverIO.Controls.Add(Me.tbIOMaxDamping)
+        Me.TabSolverIO.Controls.Add(Me.tbIOMinDamping)
+        Me.TabSolverIO.Controls.Add(Me.chkIOJacobian)
+        Me.TabSolverIO.Controls.Add(Me.chkIONewton)
+        Me.TabSolverIO.Controls.Add(Me.chkIOUseDampingFactor)
+        Me.TabSolverIO.Controls.Add(Me.Label22)
+        Me.TabSolverIO.Controls.Add(Me.cbIOTempPerturbationUnits)
+        Me.TabSolverIO.Controls.Add(Me.tbIOTempPerturbation)
+        Me.TabSolverIO.Controls.Add(Me.Label23)
+        Me.TabSolverIO.Controls.Add(Me.tbIONumericalDerivativeStep)
+        resources.ApplyResources(Me.TabSolverIO, "TabSolverIO")
+        Me.TabSolverIO.Name = "TabSolverIO"
+        Me.TabSolverIO.UseVisualStyleBackColor = True
         '
-        'TextBox10
+        'chkIOAverageKb
         '
-        resources.ApplyResources(Me.TextBox10, "TextBox10")
-        Me.TextBox10.Name = "TextBox10"
+        resources.ApplyResources(Me.chkIOAverageKb, "chkIOAverageKb")
+        Me.chkIOAverageKb.Name = "chkIOAverageKb"
+        Me.chkIOAverageKb.UseVisualStyleBackColor = True
         '
-        'Label19
+        'chkIOAdjustSb
         '
-        resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Name = "Label19"
+        resources.ApplyResources(Me.chkIOAdjustSb, "chkIOAdjustSb")
+        Me.chkIOAdjustSb.Name = "chkIOAdjustSb"
+        Me.chkIOAdjustSb.UseVisualStyleBackColor = True
         '
-        'TextBox11
+        'tbIOMaxDamping
         '
-        resources.ApplyResources(Me.TextBox11, "TextBox11")
-        Me.TextBox11.Name = "TextBox11"
+        resources.ApplyResources(Me.tbIOMaxDamping, "tbIOMaxDamping")
+        Me.tbIOMaxDamping.Name = "tbIOMaxDamping"
         '
-        'TabPage11
+        'tbIOMinDamping
         '
-        Me.TabPage11.Controls.Add(Me.CheckBox8)
-        Me.TabPage11.Controls.Add(Me.CheckBox7)
-        Me.TabPage11.Controls.Add(Me.TextBox19)
-        Me.TabPage11.Controls.Add(Me.TextBox18)
-        Me.TabPage11.Controls.Add(Me.CheckBox4)
-        Me.TabPage11.Controls.Add(Me.CheckBox5)
-        Me.TabPage11.Controls.Add(Me.CheckBox6)
-        Me.TabPage11.Controls.Add(Me.Label22)
-        Me.TabPage11.Controls.Add(Me.ComboBox11)
-        Me.TabPage11.Controls.Add(Me.TextBox14)
-        Me.TabPage11.Controls.Add(Me.Label23)
-        Me.TabPage11.Controls.Add(Me.TextBox15)
-        Me.TabPage11.Controls.Add(Me.Label24)
-        Me.TabPage11.Controls.Add(Me.TextBox16)
-        Me.TabPage11.Controls.Add(Me.Label25)
-        Me.TabPage11.Controls.Add(Me.TextBox17)
-        resources.ApplyResources(Me.TabPage11, "TabPage11")
-        Me.TabPage11.Name = "TabPage11"
-        Me.TabPage11.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.tbIOMinDamping, "tbIOMinDamping")
+        Me.tbIOMinDamping.Name = "tbIOMinDamping"
         '
-        'CheckBox8
+        'chkIOJacobian
         '
-        resources.ApplyResources(Me.CheckBox8, "CheckBox8")
-        Me.CheckBox8.Name = "CheckBox8"
-        Me.CheckBox8.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkIOJacobian, "chkIOJacobian")
+        Me.chkIOJacobian.Name = "chkIOJacobian"
+        Me.chkIOJacobian.UseVisualStyleBackColor = True
         '
-        'CheckBox7
+        'chkIONewton
         '
-        resources.ApplyResources(Me.CheckBox7, "CheckBox7")
-        Me.CheckBox7.Name = "CheckBox7"
-        Me.CheckBox7.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkIONewton, "chkIONewton")
+        Me.chkIONewton.Name = "chkIONewton"
+        Me.chkIONewton.UseVisualStyleBackColor = True
         '
-        'TextBox19
+        'chkIOUseDampingFactor
         '
-        resources.ApplyResources(Me.TextBox19, "TextBox19")
-        Me.TextBox19.Name = "TextBox19"
-        '
-        'TextBox18
-        '
-        resources.ApplyResources(Me.TextBox18, "TextBox18")
-        Me.TextBox18.Name = "TextBox18"
-        '
-        'CheckBox4
-        '
-        resources.ApplyResources(Me.CheckBox4, "CheckBox4")
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.UseVisualStyleBackColor = True
-        '
-        'CheckBox5
-        '
-        resources.ApplyResources(Me.CheckBox5, "CheckBox5")
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.UseVisualStyleBackColor = True
-        '
-        'CheckBox6
-        '
-        resources.ApplyResources(Me.CheckBox6, "CheckBox6")
-        Me.CheckBox6.Name = "CheckBox6"
-        Me.CheckBox6.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.chkIOUseDampingFactor, "chkIOUseDampingFactor")
+        Me.chkIOUseDampingFactor.Name = "chkIOUseDampingFactor"
+        Me.chkIOUseDampingFactor.UseVisualStyleBackColor = True
         '
         'Label22
         '
         resources.ApplyResources(Me.Label22, "Label22")
         Me.Label22.Name = "Label22"
         '
-        'ComboBox11
+        'cbIOTempPerturbationUnits
         '
-        resources.ApplyResources(Me.ComboBox11, "ComboBox11")
-        Me.ComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox11.FormattingEnabled = True
-        Me.ComboBox11.Items.AddRange(New Object() {resources.GetString("ComboBox11.Items"), resources.GetString("ComboBox11.Items1"), resources.GetString("ComboBox11.Items2")})
-        Me.ComboBox11.Name = "ComboBox11"
+        resources.ApplyResources(Me.cbIOTempPerturbationUnits, "cbIOTempPerturbationUnits")
+        Me.cbIOTempPerturbationUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbIOTempPerturbationUnits.FormattingEnabled = True
+        Me.cbIOTempPerturbationUnits.Items.AddRange(New Object() {resources.GetString("cbIOTempPerturbationUnits.Items"), resources.GetString("cbIOTempPerturbationUnits.Items1"), resources.GetString("cbIOTempPerturbationUnits.Items2")})
+        Me.cbIOTempPerturbationUnits.Name = "cbIOTempPerturbationUnits"
         '
-        'TextBox14
+        'tbIOTempPerturbation
         '
-        resources.ApplyResources(Me.TextBox14, "TextBox14")
-        Me.TextBox14.Name = "TextBox14"
+        resources.ApplyResources(Me.tbIOTempPerturbation, "tbIOTempPerturbation")
+        Me.tbIOTempPerturbation.Name = "tbIOTempPerturbation"
         '
         'Label23
         '
         resources.ApplyResources(Me.Label23, "Label23")
         Me.Label23.Name = "Label23"
         '
-        'TextBox15
+        'tbIONumericalDerivativeStep
         '
-        resources.ApplyResources(Me.TextBox15, "TextBox15")
-        Me.TextBox15.Name = "TextBox15"
-        '
-        'Label24
-        '
-        resources.ApplyResources(Me.Label24, "Label24")
-        Me.Label24.Name = "Label24"
-        '
-        'TextBox16
-        '
-        resources.ApplyResources(Me.TextBox16, "TextBox16")
-        Me.TextBox16.Name = "TextBox16"
-        '
-        'Label25
-        '
-        resources.ApplyResources(Me.Label25, "Label25")
-        Me.Label25.Name = "Label25"
-        '
-        'TextBox17
-        '
-        resources.ApplyResources(Me.TextBox17, "TextBox17")
-        Me.TextBox17.Name = "TextBox17"
+        resources.ApplyResources(Me.tbIONumericalDerivativeStep, "tbIONumericalDerivativeStep")
+        Me.tbIONumericalDerivativeStep.Name = "tbIONumericalDerivativeStep"
         '
         'GroupBox6
         '
@@ -752,7 +742,7 @@ Partial Class EditingForm_Column
         'tabstrip1
         '
         Me.tabstrip1.Controls.Add(Me.TabPage1)
-        Me.tabstrip1.Controls.Add(Me.TabPage2)
+        Me.tabstrip1.Controls.Add(Me.TabResults)
         resources.ApplyResources(Me.tabstrip1, "tabstrip1")
         Me.tabstrip1.Name = "tabstrip1"
         Me.tabstrip1.SelectedIndex = 0
@@ -803,40 +793,11 @@ Partial Class EditingForm_Column
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
-        'TabPage2
+        'TabResults
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'CheckBox9
-        '
-        resources.ApplyResources(Me.CheckBox9, "CheckBox9")
-        Me.CheckBox9.Name = "CheckBox9"
-        Me.CheckBox9.UseVisualStyleBackColor = True
-        '
-        'CheckBox10
-        '
-        resources.ApplyResources(Me.CheckBox10, "CheckBox10")
-        Me.CheckBox10.Name = "CheckBox10"
-        Me.CheckBox10.UseVisualStyleBackColor = True
-        '
-        'CheckBox11
-        '
-        resources.ApplyResources(Me.CheckBox11, "CheckBox11")
-        Me.CheckBox11.Name = "CheckBox11"
-        Me.CheckBox11.UseVisualStyleBackColor = True
-        '
-        'CheckBox12
-        '
-        resources.ApplyResources(Me.CheckBox12, "CheckBox12")
-        Me.CheckBox12.Name = "CheckBox12"
-        Me.CheckBox12.UseVisualStyleBackColor = True
-        '
-        'Panel1
-        '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Name = "Panel1"
+        resources.ApplyResources(Me.TabResults, "TabResults")
+        Me.TabResults.Name = "TabResults"
+        Me.TabResults.UseVisualStyleBackColor = True
         '
         'EditingForm_Column
         '
@@ -851,22 +812,22 @@ Partial Class EditingForm_Column
         Me.GroupBox5.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage4.ResumeLayout(False)
-        Me.TabPage4.PerformLayout()
-        Me.TabPage5.ResumeLayout(False)
-        Me.TabPage5.PerformLayout()
-        Me.TabPage6.ResumeLayout(False)
-        Me.TabPage6.PerformLayout()
+        Me.TabGeneral.ResumeLayout(False)
+        Me.TabGeneral.PerformLayout()
+        Me.TabCondenser.ResumeLayout(False)
+        Me.TabCondenser.PerformLayout()
+        Me.TabReboiler.ResumeLayout(False)
+        Me.TabReboiler.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.TabControl2.ResumeLayout(False)
-        Me.TabPage9.ResumeLayout(False)
-        Me.TabPage9.PerformLayout()
-        Me.TabPage8.ResumeLayout(False)
-        Me.TabPage8.PerformLayout()
-        Me.TabPage10.ResumeLayout(False)
-        Me.TabPage10.PerformLayout()
-        Me.TabPage11.ResumeLayout(False)
-        Me.TabPage11.PerformLayout()
+        Me.TabInitialEstimates.ResumeLayout(False)
+        Me.TabInitialEstimates.PerformLayout()
+        Me.TabSolverBP.ResumeLayout(False)
+        Me.TabSolverBP.PerformLayout()
+        Me.TabSolverNS.ResumeLayout(False)
+        Me.TabSolverNS.PerformLayout()
+        Me.TabSolverIO.ResumeLayout(False)
+        Me.TabSolverIO.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.tabstrip1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
@@ -894,85 +855,79 @@ Partial Class EditingForm_Column
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents tabstrip1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents TabResults As System.Windows.Forms.TabPage
     Friend WithEvents gridResults As System.Windows.Forms.DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents tbOutletPressure As System.Windows.Forms.TextBox
+    Friend WithEvents tbNStages As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
-    Friend WithEvents cbPDropModel As System.Windows.Forms.ComboBox
+    Friend WithEvents TabGeneral As System.Windows.Forms.TabPage
+    Friend WithEvents TabCondenser As System.Windows.Forms.TabPage
+    Friend WithEvents TabReboiler As System.Windows.Forms.TabPage
+    Friend WithEvents cbAbsorberMode As System.Windows.Forms.ComboBox
     Friend WithEvents TabControl2 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage8 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage9 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage10 As System.Windows.Forms.TabPage
-    Friend WithEvents TabPage11 As System.Windows.Forms.TabPage
-    Friend WithEvents ComboBox6 As System.Windows.Forms.ComboBox
+    Friend WithEvents TabConnections As System.Windows.Forms.TabPage
+    Friend WithEvents TabStages As System.Windows.Forms.TabPage
+    Friend WithEvents TabSolverBP As System.Windows.Forms.TabPage
+    Friend WithEvents TabInitialEstimates As System.Windows.Forms.TabPage
+    Friend WithEvents TabSolverNS As System.Windows.Forms.TabPage
+    Friend WithEvents TabSolverIO As System.Windows.Forms.TabPage
+    Friend WithEvents cbCondType As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox5 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents ComboBox4 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents cbCondVapFlowUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents tbCondVapFlow As System.Windows.Forms.TextBox
+    Friend WithEvents cbCondSpecUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents tbCondSpec As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbCondSpec As System.Windows.Forms.ComboBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents cbCondPDropUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents tbCondPDrop As System.Windows.Forms.TextBox
     Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents ComboBox7 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
+    Friend WithEvents cbCondPressureUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents tbCondPressure As System.Windows.Forms.TextBox
+    Friend WithEvents cbRebSpecUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents tbRebSpecValue As System.Windows.Forms.TextBox
     Friend WithEvents Label15 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox8 As System.Windows.Forms.ComboBox
+    Friend WithEvents cbRebSpec As System.Windows.Forms.ComboBox
     Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox10 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
+    Friend WithEvents cbRebPressure As System.Windows.Forms.ComboBox
+    Friend WithEvents tbRebPressure As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
+    Friend WithEvents tbConvTol As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents tbMaxIt As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox3 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents tbBPStopAtIter As System.Windows.Forms.TextBox
+    Friend WithEvents chkNSJacobian As System.Windows.Forms.CheckBox
+    Friend WithEvents chkNSUseNewton As System.Windows.Forms.CheckBox
+    Friend WithEvents chkNSUseDampingFactor As System.Windows.Forms.CheckBox
     Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox9 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox13 As System.Windows.Forms.TextBox
+    Friend WithEvents cbNSMaximumDeltaT As System.Windows.Forms.ComboBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents TextBox12 As System.Windows.Forms.TextBox
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox8 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox7 As System.Windows.Forms.CheckBox
-    Friend WithEvents TextBox19 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox18 As System.Windows.Forms.TextBox
-    Friend WithEvents CheckBox4 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox5 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox6 As System.Windows.Forms.CheckBox
+    Friend WithEvents tbNSNumericalDerivativeStep As System.Windows.Forms.TextBox
+    Friend WithEvents chkIOAverageKb As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIOAdjustSb As System.Windows.Forms.CheckBox
+    Friend WithEvents tbIOMaxDamping As System.Windows.Forms.TextBox
+    Friend WithEvents tbIOMinDamping As System.Windows.Forms.TextBox
+    Friend WithEvents chkIOJacobian As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIONewton As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIOUseDampingFactor As System.Windows.Forms.CheckBox
     Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox11 As System.Windows.Forms.ComboBox
-    Friend WithEvents TextBox14 As System.Windows.Forms.TextBox
+    Friend WithEvents cbIOTempPerturbationUnits As System.Windows.Forms.ComboBox
+    Friend WithEvents tbIOTempPerturbation As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
-    Friend WithEvents TextBox15 As System.Windows.Forms.TextBox
-    Friend WithEvents Label24 As System.Windows.Forms.Label
-    Friend WithEvents TextBox16 As System.Windows.Forms.TextBox
-    Friend WithEvents Label25 As System.Windows.Forms.Label
-    Friend WithEvents TextBox17 As System.Windows.Forms.TextBox
+    Friend WithEvents tbIONumericalDerivativeStep As System.Windows.Forms.TextBox
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents CheckBox12 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox11 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox10 As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox9 As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseIE_C As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseIE_VF As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseIE_LF As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseIE_T As System.Windows.Forms.CheckBox
+    Friend WithEvents tbNSMaximumDeltaT As System.Windows.Forms.TextBox
+    Friend WithEvents cbSolvingMethod As System.Windows.Forms.ComboBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
 End Class

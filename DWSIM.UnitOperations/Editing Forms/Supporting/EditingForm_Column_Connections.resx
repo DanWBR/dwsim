@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -145,7 +149,6 @@
   <data name="Column4.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dgv1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -154,7 +157,7 @@
     <value>3, 41</value>
   </data>
   <data name="dgv1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 115</value>
+    <value>315, 115</value>
   </data>
   <data name="dgv1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -199,7 +202,7 @@
     <value>3, 16</value>
   </data>
   <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 25</value>
+    <value>315, 25</value>
   </data>
   <data name="ToolStrip2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -223,7 +226,7 @@
     <value>3, 3</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 159</value>
+    <value>321, 159</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -242,6 +245,9 @@
   </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <metadata name="DataGridViewComboBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -271,7 +277,7 @@
     <value>3, 16</value>
   </data>
   <data name="dgv3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 140</value>
+    <value>315, 140</value>
   </data>
   <data name="dgv3.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -289,10 +295,10 @@
     <value>0</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 3</value>
+    <value>3, 165</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 159</value>
+    <value>321, 159</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -310,7 +316,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <metadata name="DataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -361,7 +370,7 @@
     <value>3, 41</value>
   </data>
   <data name="dgv2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 133</value>
+    <value>315, 133</value>
   </data>
   <data name="dgv2.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -406,7 +415,7 @@
     <value>3, 16</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 25</value>
+    <value>315, 25</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -427,10 +436,10 @@
     <value>1</value>
   </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 162</value>
+    <value>3, 507</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 177</value>
+    <value>321, 177</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -448,7 +457,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
+  </data>
+  <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <metadata name="DataGridViewComboBoxColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -481,7 +493,7 @@
     <value>20</value>
   </data>
   <data name="dgv4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 133</value>
+    <value>315, 133</value>
   </data>
   <data name="dgv4.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -517,7 +529,7 @@
     <value>3, 16</value>
   </data>
   <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 25</value>
+    <value>315, 25</value>
   </data>
   <data name="ToolStrip3.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -535,10 +547,10 @@
     <value>1</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 162</value>
+    <value>3, 328</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 177</value>
+    <value>321, 177</value>
   </data>
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -556,7 +568,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -564,14 +576,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>579, 343</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Conexões</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>327, 686</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
@@ -706,9 +712,9 @@
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>UIConnectionsEditorForm</value>
+    <value>EditingForm_Column_Connections</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

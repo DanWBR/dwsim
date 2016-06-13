@@ -49,46 +49,46 @@ Partial Class EditingForm_Column_Stages
         '
         'ToolStripButton1
         '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = My.Resources.Resources.copy
+        Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = My.Resources.Resources.paste_plain
+        Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.paste_plain
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'ToolStripButton5
         '
-        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton5.Image = My.Resources.Resources.cross
+        Me.ToolStripButton5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
+        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.Name = "ToolStripButton5"
         '
         'ToolStripButton3
         '
-        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton3.Image = My.Resources.Resources.arrow_in1
+        Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_in1
+        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
-        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton4.Image = My.Resources.Resources.chart_line
+        Me.ToolStripButton4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.chart_line
         Me.ToolStripButton4.Name = "ToolStripButton4"
+        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         '
         'dgv1
         '
-        resources.ApplyResources(Me.dgv1, "dgv1")
         Me.dgv1.AllowUserToAddRows = False
         Me.dgv1.AllowUserToDeleteRows = False
         Me.dgv1.AllowUserToOrderColumns = True
         Me.dgv1.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgv1, "dgv1")
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column3, Me.Column2, Me.Column4})
@@ -135,13 +135,13 @@ Partial Class EditingForm_Column_Stages
         resources.ApplyResources(Me.Column4, "Column4")
         Me.Column4.Name = "Column4"
         '
-        'UIStagesEditorForm
+        'EditingForm_Column_Stages
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.dgv1)
-        Me.Name = "UIStagesEditorForm"
+        Me.Name = "EditingForm_Column_Stages"
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).EndInit()
