@@ -28,28 +28,11 @@ Imports DWSIM.SharedClasses
 
 Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
-    Public Enum DistColSolvingMethod
-        Russell_InsideOut = 0
-        WangHenke_BubblePoint = 1
-        NaphtaliSandholm_SimultaneousCorrection = 3
-    End Enum
-
-    Public Enum AbsColSolvingMethod
-        Russell_InsideOut = 0
-        Burningham_Otto_SumRates = 2
-        NaphtaliSandholm_SimultaneousCorrection = 3
-    End Enum
-
-    Public Enum RebAbsColSolvingMethod
-        Russell_InsideOut = 0
-        WangHenke_BubblePoint = 1
-        NaphtaliSandholm_SimultaneousCorrection = 3
-    End Enum
-
-    Public Enum RefAbsColSolvingMethod
-        Russell_InsideOut = 0
-        WangHenke_BubblePoint = 1
-        NaphtaliSandholm_SimultaneousCorrection = 3
+    Public Enum ColSolvingMethod
+        WangHenke_BubblePoint = 0
+        NaphtaliSandholm_SimultaneousCorrection = 1
+        Russell_InsideOut = 2
+        Burningham_Otto_SumRates = 4
     End Enum
 
     <System.Serializable()> Public Class Tomich

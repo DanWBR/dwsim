@@ -83,7 +83,11 @@ Public Class EditingForm_Column
             ElseIf .SolvingMethod = 1 Then
                 TabControl2.TabPages.Remove(TabSolverBP)
                 TabControl2.TabPages.Remove(TabSolverIO)
+            ElseIf .SolvingMethod = 2 Then
+                TabControl2.TabPages.Remove(TabSolverBP)
+                TabControl2.TabPages.Remove(TabSolverNS)
             Else
+                TabControl2.TabPages.Remove(TabSolverIO)
                 TabControl2.TabPages.Remove(TabSolverBP)
                 TabControl2.TabPages.Remove(TabSolverNS)
             End If
@@ -213,26 +217,28 @@ Public Class EditingForm_Column
             ceditor.Dock = DockStyle.Fill
             TabConnections.Controls.Add(ceditor)
 
-            TabInitialEstimates.Controls.Clear()
+            InitialEstimatesPanel.Controls.Clear()
             Dim ieditor As New EditingForm_Column_InitialEstimates With {.dc = Me.SimObject}
             ieditor.Dock = DockStyle.Fill
-            TabInitialEstimates.Controls.Add(ieditor)
+            InitialEstimatesPanel.Controls.Add(ieditor)
 
             'results
 
             gridResults.Rows.Clear()
             Select Case .ColumnType
                 Case ColType.DistillationColumn
-                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.deltaP})
-                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.deltaT})
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
                 Case ColType.AbsorptionColumn
                 Case ColType.ReboiledAbsorber
-                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.deltaT})
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCReboilerDuty"), su.Converter.ConvertFromSI(units.heatflow, .ReboilerDuty).ToString(nf), units.heatflow})
                 Case ColType.RefluxedAbsorber
-                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.deltaP})
+                    gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCCondenserDuty"), su.Converter.ConvertFromSI(units.heatflow, .CondenserDuty).ToString(nf), units.heatflow})
             End Select
+            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCILIts"), .ic, ""})
+            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DCELIts"), .ec, ""})
 
-            Button1.Enabled = .Calculated
+            btnResults.Enabled = .x0.Count > 0
 
             'property package
 
@@ -344,7 +350,7 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnResults.Click
 
         Dim d As New WeifenLuo.WinFormsUI.Docking.DockContent()
 
@@ -358,4 +364,376 @@ Public Class EditingForm_Column
 
     End Sub
 
+    Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged
+
+        If Loaded Then
+
+            SimObject.NumberOfStages = tbNStages.Text
+
+            Dim ne As Integer = SimObject.NumberOfStages
+
+            Dim nep As Integer = SimObject.Stages.Count
+
+            Dim dif As Integer = ne - nep
+
+            If dif < 0 Then
+                SimObject.Stages.RemoveRange(nep + dif - 1, -dif)
+                With SimObject.InitialEstimates
+                    .LiqCompositions.RemoveRange(nep + dif - 1, -dif)
+                    .VapCompositions.RemoveRange(nep + dif - 1, -dif)
+                    .LiqMolarFlows.RemoveRange(nep + dif - 1, -dif)
+                    .VapMolarFlows.RemoveRange(nep + dif - 1, -dif)
+                    .StageTemps.RemoveRange(nep + dif - 1, -dif)
+                End With
+            ElseIf dif > 0 Then
+                Dim i As Integer
+                For i = 1 To dif
+                    SimObject.Stages.Insert(SimObject.Stages.Count - 1, New Stage(Guid.NewGuid().ToString))
+                    SimObject.Stages(SimObject.Stages.Count - 2).Name = SimObject.FlowSheet.GetTranslatedString("DCStage") & "_" & SimObject.Stages.Count - 2
+                    With SimObject.InitialEstimates
+                        Dim d As New Dictionary(Of String, Parameter)
+                        For Each cp In SimObject.FlowSheet.SelectedCompounds.Values
+                            d.Add(cp.Name, New Parameter)
+                        Next
+                        .LiqCompositions.Insert(.LiqCompositions.Count - 1, d)
+                        .VapCompositions.Insert(.VapCompositions.Count - 1, d)
+                        .LiqMolarFlows.Insert(.LiqMolarFlows.Count - 1, New Parameter)
+                        .VapMolarFlows.Insert(.VapMolarFlows.Count - 1, New Parameter)
+                        .StageTemps.Insert(.StageTemps.Count - 1, New Parameter)
+                    End With
+                Next
+            End If
+
+            UpdateInfo()
+
+        End If
+
+    End Sub
+
+    Private Sub tbMaxIt_TextChanged(sender As Object, e As EventArgs) Handles tbMaxIt.TextChanged
+
+        If Loaded Then
+
+            SimObject.MaxIterations = tbMaxIt.Text
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub tbConvTol_TextChanged(sender As Object, e As EventArgs) Handles tbConvTol.TextChanged
+
+        If Loaded Then
+
+            SimObject.ExternalLoopTolerance = tbMaxIt.Text
+            SimObject.InternalLoopTolerance = tbMaxIt.Text
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub cbAbsorberMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbAbsorberMode.SelectedIndexChanged
+
+        If Loaded Then
+
+            DirectCast(SimObject, AbsorptionColumn).OperationMode = cbAbsorberMode.SelectedIndex
+
+        End If
+
+    End Sub
+
+    Private Sub cbSolvingMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolvingMethod.SelectedIndexChanged
+
+        If Loaded Then
+
+            SimObject.SolvingMethod = cbSolvingMethod.SelectedIndex
+
+            If SimObject.SolvingMethod = 0 Then
+                If Not TabControl2.TabPages.Contains(TabSolverBP) Then TabControl2.TabPages.Add(TabSolverBP)
+                If TabControl2.TabPages.Contains(TabSolverIO) Then TabControl2.TabPages.Remove(TabSolverIO)
+                If TabControl2.TabPages.Contains(TabSolverNS) Then TabControl2.TabPages.Remove(TabSolverNS)
+            ElseIf SimObject.SolvingMethod = 1 Then
+                If Not TabControl2.TabPages.Contains(TabSolverNS) Then TabControl2.TabPages.Add(TabSolverNS)
+                If TabControl2.TabPages.Contains(TabSolverBP) Then TabControl2.TabPages.Remove(TabSolverBP)
+                If TabControl2.TabPages.Contains(TabSolverIO) Then TabControl2.TabPages.Remove(TabSolverIO)
+            ElseIf SimObject.SolvingMethod = 2 Then
+                If Not TabControl2.TabPages.Contains(TabSolverIO) Then TabControl2.TabPages.Add(TabSolverIO)
+                If TabControl2.TabPages.Contains(TabSolverBP) Then TabControl2.TabPages.Remove(TabSolverBP)
+                If TabControl2.TabPages.Contains(TabSolverNS) Then TabControl2.TabPages.Remove(TabSolverNS)
+            Else
+                If TabControl2.TabPages.Contains(TabSolverIO) Then TabControl2.TabPages.Remove(TabSolverIO)
+                If TabControl2.TabPages.Contains(TabSolverBP) Then TabControl2.TabPages.Remove(TabSolverBP)
+                If TabControl2.TabPages.Contains(TabSolverNS) Then TabControl2.TabPages.Remove(TabSolverNS)
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub cbCondType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCondType.SelectedIndexChanged
+
+        SimObject.CondenserType = cbCondType.SelectedIndex
+
+        If SimObject.CondenserType = condtype.Partial_Condenser Then
+            tbCondVapFlow.Enabled = True
+            cbCondVapFlowUnits.Enabled = True
+        Else
+            tbCondVapFlow.Enabled = False
+            cbCondVapFlowUnits.Enabled = False
+        End If
+
+    End Sub
+
+    Private Sub cbCondSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCondSpec.SelectedIndexChanged
+
+        If Loaded Then
+
+            SimObject.Specs("C").SType = cbCondSpec.SelectedIndex
+            Dim cunits As String() = {}
+            Select Case SimObject.Specs("C").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    cunits = New String() {"M", "We"}
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Component_Recovery
+                    cunits = New String() {"% M/M", "% W/W"}
+                Case ColumnSpec.SpecType.Heat_Duty
+                    cunits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    cunits = New String() {""}
+                Case ColumnSpec.SpecType.Temperature
+                    cunits = New String() {"K", "R", "C", "F"}
+            End Select
+            cbCondSpecUnits.Items.Clear()
+            cbCondSpecUnits.Items.AddRange(cunits)
+            cbCondSpecUnits.SelectedItem = Nothing
+
+        End If
+
+    End Sub
+
+    Private Sub tbCondPressure_TextChanged(sender As Object, e As EventArgs) Handles tbCondPressure.TextChanged
+
+        If Loaded Then
+
+            SimObject.CondenserPressure = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub tbCondPDrop_TextChanged(sender As Object, e As EventArgs) Handles tbCondPDrop.TextChanged
+
+        If Loaded Then
+
+            SimObject.CondenserDeltaP = su.Converter.ConvertToSI(units.deltaP, tbCondPDrop.Text)
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub tbCondSpec_TextChanged(sender As Object, e As EventArgs) Handles tbCondSpec.TextChanged
+
+        If Loaded Then
+
+            SimObject.Specs("C").SpecValue = su.Converter.ConvertToSI(SimObject.Specs("C").SpecUnit, tbCondSpec.Text)
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub cbCondSpecUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCondSpecUnits.SelectedIndexChanged
+
+        If Loaded Then
+
+            SimObject.Specs("C").SpecUnit = cbCondSpecUnits.SelectedItem.ToString
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub tbCondVapFlow_TextChanged(sender As Object, e As EventArgs) Handles tbCondVapFlow.TextChanged
+
+        If Loaded Then
+
+            SimObject.VaporFlowRate = su.Converter.ConvertToSI(SimObject.VaporFlowRateUnit, tbCondVapFlow.Text)
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub cbCondVapFlowUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCondVapFlowUnits.SelectedIndexChanged
+
+        If Loaded Then
+
+            SimObject.VaporFlowRateUnit = cbCondVapFlowUnits.SelectedItem.ToString
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub tbRebPressure_TextChanged(sender As Object, e As EventArgs) Handles tbRebPressure.TextChanged
+
+        If Loaded Then
+
+            SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text)
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub cbRebSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRebSpec.SelectedIndexChanged
+
+        If Loaded Then
+
+            SimObject.Specs("R").SType = cbRebSpec.SelectedIndex
+            Dim cunits As String() = {}
+            Select Case SimObject.Specs("R").SType
+                Case ColumnSpec.SpecType.Component_Fraction
+                    cunits = New String() {"M", "We"}
+                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
+                    cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
+                    cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Component_Recovery
+                    cunits = New String() {"% M/M", "% W/W"}
+                Case ColumnSpec.SpecType.Heat_Duty
+                    cunits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
+                    cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
+                    cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                Case ColumnSpec.SpecType.Stream_Ratio
+                    cunits = New String() {""}
+                Case ColumnSpec.SpecType.Temperature
+                    cunits = New String() {"K", "R", "C", "F"}
+            End Select
+            cbRebSpec.Items.Clear()
+            cbRebSpec.Items.AddRange(cunits)
+            cbRebSpec.SelectedItem = Nothing
+
+        End If
+
+    End Sub
+
+    Private Sub tbRebSpecValue_TextChanged(sender As Object, e As EventArgs) Handles tbRebSpecValue.TextChanged
+
+        If Loaded Then
+
+            SimObject.Specs("R").SpecValue = su.Converter.ConvertToSI(SimObject.Specs("R").SpecUnit, tbRebSpecValue.Text)
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub cbRebSpecUnits_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRebSpecUnits.SelectedIndexChanged
+
+        If Loaded Then
+
+            SimObject.Specs("R").SpecUnit = cbRebSpecUnits.SelectedItem.ToString
+
+            RequestCalc()
+
+        End If
+
+    End Sub
+
+    Private Sub chkUseIE_T_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseIE_T.CheckedChanged
+        SimObject.UseTemperatureEstimates = chkUseIE_T.Checked
+    End Sub
+
+    Private Sub chkUseIE_LF_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseIE_LF.CheckedChanged
+        SimObject.UseLiquidFlowEstimates = chkUseIE_LF.Checked
+    End Sub
+
+    Private Sub chkUseIE_VF_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseIE_VF.CheckedChanged
+        SimObject.UseVaporFlowEstimates = chkUseIE_VF.Checked
+    End Sub
+
+    Private Sub chkUseIE_C_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseIE_C.CheckedChanged
+        SimObject.UseCompositionEstimates = chkUseIE_C.Checked
+    End Sub
+
+    Private Sub tbBPStopAtIter_TextChanged(sender As Object, e As EventArgs) Handles tbBPStopAtIter.TextChanged
+        SimObject.StopAtIterationNumber = tbBPStopAtIter.Text
+    End Sub
+
+    Private Sub tbNSNumericalDerivativeStep_TextChanged(sender As Object, e As EventArgs) Handles tbNSNumericalDerivativeStep.TextChanged
+        SimObject.SC_NumericalDerivativeStep = tbNSNumericalDerivativeStep.Text
+    End Sub
+
+    Private Sub tbIONumericalDerivativeStep_TextChanged(sender As Object, e As EventArgs) Handles tbIONumericalDerivativeStep.TextChanged
+        SimObject.IO_NumericalDerivativeStep = tbIONumericalDerivativeStep.Text
+    End Sub
+
+    Private Sub tbNSMaximumDeltaT_TextChanged(sender As Object, e As EventArgs) Handles tbNSMaximumDeltaT.TextChanged
+        SimObject.SC_MaximumTemperatureChange = su.Converter.ConvertToSI(units.temperature, tbNSMaximumDeltaT.Text)
+    End Sub
+
+    Private Sub chkNSUseDampingFactor_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSUseDampingFactor.CheckedChanged
+        SimObject.UseDampingFactor = chkNSUseDampingFactor.Checked
+    End Sub
+
+    Private Sub chkNSUseNewton_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSUseNewton.CheckedChanged
+        SimObject.UseNewtonUpdate = chkNSUseNewton.Checked
+    End Sub
+
+    Private Sub chkNSJacobian_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSJacobian.CheckedChanged
+        SimObject.StoreAndReuseJacobian = chkNSJacobian.Checked
+    End Sub
+
+    Private Sub tbIOTempPerturbation_TextChanged(sender As Object, e As EventArgs) Handles tbIOTempPerturbation.TextChanged
+        SimObject.IO_ExtLoop_DeltaT = su.Converter.ConvertToSI(units.temperature, tbIOTempPerturbation.Text)
+    End Sub
+
+    Private Sub tbIOMinDamping_TextChanged(sender As Object, e As EventArgs) Handles tbIOMinDamping.TextChanged
+        SimObject.IO_DampingFactorMin = tbIOMinDamping.Text
+    End Sub
+
+    Private Sub tbIOMaxDamping_TextChanged(sender As Object, e As EventArgs) Handles tbIOMaxDamping.TextChanged
+        SimObject.IO_DampingFactorMax = tbIOMaxDamping.Text
+    End Sub
+
+    Private Sub chkIOUseDampingFactor_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOUseDampingFactor.CheckedChanged
+        SimObject.UseDampingFactor = chkIOUseDampingFactor.Checked
+    End Sub
+
+    Private Sub chkIONewton_CheckedChanged(sender As Object, e As EventArgs) Handles chkIONewton.CheckedChanged
+        SimObject.UseNewtonUpdate = chkIONewton.Checked
+    End Sub
+
+    Private Sub chkIOJacobian_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOJacobian.CheckedChanged
+        SimObject.StoreAndReuseJacobian = chkIOJacobian.Checked
+    End Sub
+
+    Private Sub chkIOAdjustSb_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOAdjustSb.CheckedChanged
+        SimObject.AdjustSb = chkIOAdjustSb.Checked
+    End Sub
+
+    Private Sub chkIOAverageKb_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOAverageKb.CheckedChanged
+        SimObject.KbjWeightedAverage = chkIOAverageKb.Checked
+    End Sub
 End Class

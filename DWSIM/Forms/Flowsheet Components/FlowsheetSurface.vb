@@ -564,6 +564,8 @@ Public Class FlowsheetSurface
         Me.ConectarAToolStripMenuItem.Visible = False
         Me.ToolStripSeparator3.Visible = False
         Me.CopyFromTSMI.Visible = False
+
+        Me.AtivadoToolStripMenuItem.Checked = Me.FlowsheetDesignSurface.SelectedObject.Active
       
         DepurarObjetoToolStripMenuItem.Visible = Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name)
 
@@ -3277,4 +3279,7 @@ Public Class FlowsheetSurface
         tbSearch.AutoCompleteCustomSource = acsc
     End Sub
 
+    Private Sub AtivadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AtivadoToolStripMenuItem.Click
+        Me.FlowsheetDesignSurface.SelectedObject.Active = Me.AtivadoToolStripMenuItem.Checked
+    End Sub
 End Class

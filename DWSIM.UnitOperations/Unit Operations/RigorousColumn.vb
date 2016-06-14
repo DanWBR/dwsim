@@ -673,7 +673,7 @@ Namespace UnitOperations
 
         'solving method (default = IO)
 
-        Public _sm As SolvingMethods.DistColSolvingMethod = SolvingMethods.DistColSolvingMethod.WangHenke_BubblePoint
+        Public _sm As SolvingMethods.ColSolvingMethod = SolvingMethods.ColSolvingMethod.WangHenke_BubblePoint
 
         Public Sub New()
             MyBase.New()
@@ -896,10 +896,6 @@ Namespace UnitOperations
 
         End Function
 
-        Public Overrides Sub UpdateEditForm()
-
-        End Sub
-
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.col_dc_32
         End Function
@@ -920,16 +916,13 @@ Namespace UnitOperations
             End If
         End Function
 
-        Public Overrides Sub CloseEditForm()
-
-        End Sub
     End Class
 
     <Serializable()> Public Class AbsorptionColumn
 
         Inherits Column
 
-        Public _sm As SolvingMethods.AbsColSolvingMethod
+        Public _sm As SolvingMethods.ColSolvingMethod
 
         Public _opmode As OpMode = OpMode.Absorber
 
@@ -1056,10 +1049,6 @@ Namespace UnitOperations
             Return 1
         End Function
 
-        Public Overrides Sub UpdateEditForm()
-
-        End Sub
-
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.col_abs_32
         End Function
@@ -1080,9 +1069,6 @@ Namespace UnitOperations
             End If
         End Function
 
-        Public Overrides Sub CloseEditForm()
-
-        End Sub
     End Class
 
     <Serializable()> Public Class ReboiledAbsorber
@@ -1091,7 +1077,7 @@ Namespace UnitOperations
 
         'solving method (default = IO)
 
-        Public _sm As SolvingMethods.RebAbsColSolvingMethod
+        Public _sm As SolvingMethods.ColSolvingMethod
 
         Public Sub New()
             MyBase.New()
@@ -1211,10 +1197,6 @@ Namespace UnitOperations
             Return 1
         End Function
 
-        Public Overrides Sub UpdateEditForm()
-
-        End Sub
-
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.col_rebabs_32
         End Function
@@ -1235,9 +1217,6 @@ Namespace UnitOperations
             End If
         End Function
 
-        Public Overrides Sub CloseEditForm()
-
-        End Sub
     End Class
 
     <Serializable()> Public Class RefluxedAbsorber
@@ -1246,7 +1225,7 @@ Namespace UnitOperations
 
         'solving method (default = IO)
 
-        Public _sm As SolvingMethods.RefAbsColSolvingMethod
+        Public _sm As SolvingMethods.ColSolvingMethod
 
         Public Sub New()
             MyBase.New()
@@ -1372,10 +1351,6 @@ Namespace UnitOperations
             Return 1
         End Function
 
-        Public Overrides Sub UpdateEditForm()
-
-        End Sub
-
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.col_rflabs_32
         End Function
@@ -1396,9 +1371,6 @@ Namespace UnitOperations
             End If
         End Function
 
-        Public Overrides Sub CloseEditForm()
-
-        End Sub
     End Class
 
     <System.Serializable()> Public MustInherit Class Column
@@ -2573,18 +2545,18 @@ Namespace UnitOperations
             Dim result As Object
 
             Select Case Me.SolvingMethod
-                Case 0 'IO
+                Case 2 'IO 
                     Dim rm As New SolvingMethods.RussellMethod
                     result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.UseDampingFactor, Me.UseNewtonUpdate, Me.AdjustSb, Me.UseIdentityAsJacobianInverse, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, Me.StoreAndReuseJacobian, Me.JacobianMatrix, Me.IO_NumericalDerivativeStep, Me.IO_MaxVarChgFac, Me.IO_DampingFactorMin, Me.IO_DampingFactorMax, Me.IO_ExtLoop_DeltaT, llextractor)
                     ic = result(9)
                     ec = result(11)
-                Case 1 'BP
+                Case 0 'BP
                     result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs)
                     ic = result(9)
-                Case 2 'SR
+                Case 3 'SR
                     result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, llextractor)
                     ic = result(9)
-                Case 3 'SC
+                Case 1 'SC
                     Dim scm As New SolvingMethods.NaphtaliSandholmMethod
                     result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.UseDampingFactor, Me.UseNewtonUpdate, Me.UseIdentityAsJacobianInverse, Me.ColumnType, pp, Me.Specs, Me.StoreAndReuseJacobian, Me.JacobianMatrix, Me.SC_DampingFactor, Me.SC_MaximumTemperatureChange, Me.SC_NumericalDerivativeStep, Me.SC_MaxVarChgFac, llextractor)
                     ec = result(11)
@@ -2604,8 +2576,8 @@ Namespace UnitOperations
             For i = 0 To ns
                 yf.Add(result(5)(i))
                 xf.Add(result(6)(i))
-                If Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.Russell_InsideOut Or _
-                   Me.SolvingMethod = SolvingMethods.DistColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
+                If Me.SolvingMethod = SolvingMethods.ColSolvingMethod.Russell_InsideOut Or _
+                   Me.SolvingMethod = SolvingMethods.ColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
                     Dim obj(nc - 1) As Double
                     For j = 0 To nc - 1
                         obj(j) = result(7)(i, j)

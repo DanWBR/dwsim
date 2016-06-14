@@ -33,25 +33,28 @@ Public Class EditingForm_Column_Connections
 
     Dim tpl As Auxiliary.DGVCBSelectors.Templates
 
-    'Private Sub UIConnectionsEditorForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub UpdateInfo()
 
-    '    Dim i As Integer = 0
-    '    Dim obj1(dc.GraphicObject.InputConnectors.Count), obj2(dc.GraphicObject.InputConnectors.Count) As Double
-    '    Dim obj3(dc.GraphicObject.OutputConnectors.Count), obj4(dc.GraphicObject.OutputConnectors.Count) As Double
-    '    For Each ic As ConnectionPoint In dc.GraphicObject.InputConnectors
-    '        obj1(i) = -dc.GraphicObject.X + ic.Position.X
-    '        obj2(i) = -dc.GraphicObject.Y + ic.Position.Y
-    '        i = i + 1
-    '    Next
-    '    i = 0
-    '    For Each oc As ConnectionPoint In dc.GraphicObject.OutputConnectors
-    '        obj3(i) = -dc.GraphicObject.X + oc.Position.X
-    '        obj4(i) = -dc.GraphicObject.Y + oc.Position.Y
-    '        i = i + 1
-    '    Next
-    '    dc.GraphicObject.AdditionalInfo = New Object() {obj1, obj2, obj3, obj4}
+        Try
+            Dim i As Integer = 0
+            Dim obj1(dc.GraphicObject.InputConnectors.Count), obj2(dc.GraphicObject.InputConnectors.Count) As Double
+            Dim obj3(dc.GraphicObject.OutputConnectors.Count), obj4(dc.GraphicObject.OutputConnectors.Count) As Double
+            For Each ic As ConnectionPoint In dc.GraphicObject.InputConnectors
+                obj1(i) = -dc.GraphicObject.X + ic.Position.X
+                obj2(i) = -dc.GraphicObject.Y + ic.Position.Y
+                i = i + 1
+            Next
+            i = 0
+            For Each oc As ConnectionPoint In dc.GraphicObject.OutputConnectors
+                obj3(i) = -dc.GraphicObject.X + oc.Position.X
+                obj4(i) = -dc.GraphicObject.Y + oc.Position.Y
+                i = i + 1
+            Next
+            dc.GraphicObject.AdditionalInfo = New Object() {obj1, obj2, obj3, obj4}
+        Catch ex As Exception
+        End Try
 
-    'End Sub
+    End Sub
 
     Private Sub UIConnectionsEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -403,6 +406,7 @@ Public Class EditingForm_Column_Connections
             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams.Remove(id)
             .RemoveAt(dgv1.SelectedCells(0).RowIndex)
         End With
+        UpdateInfo()
     End Sub
 
     Private Sub ToolStripButton4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton4.Click
@@ -419,6 +423,7 @@ Public Class EditingForm_Column_Connections
             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams.Remove(id)
             .RemoveAt(dgv2.SelectedCells(0).RowIndex)
         End With
+        UpdateInfo()
     End Sub
 
     Private Shared Function ContainsCONDENSER(ByVal s As String) As Boolean
@@ -494,6 +499,7 @@ Public Class EditingForm_Column_Connections
                     End If
             End Select
             dc.CheckConnPos()
+            UpdateInfo()
         End If
     End Sub
 
@@ -558,6 +564,7 @@ Public Class EditingForm_Column_Connections
                     If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).FlowRate.Value = cv.ConvertToSI(form.FlowsheetOptions.SelectedUnitSystem.molarflow, value)
             End Select
             dc.CheckConnPos()
+            UpdateInfo()
         End If
     End Sub
 
@@ -637,6 +644,7 @@ Public Class EditingForm_Column_Connections
             End Select
 
             dc.CheckConnPos()
+            UpdateInfo()
         End If
     End Sub
 
@@ -746,6 +754,7 @@ Public Class EditingForm_Column_Connections
             End Select
 
             dc.CheckConnPos()
+            UpdateInfo()
 
         End If
     End Sub

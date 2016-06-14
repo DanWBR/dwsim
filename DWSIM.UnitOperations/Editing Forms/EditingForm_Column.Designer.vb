@@ -84,7 +84,7 @@ Partial Class EditingForm_Column
         Me.TabConnections = New System.Windows.Forms.TabPage()
         Me.TabStages = New System.Windows.Forms.TabPage()
         Me.TabInitialEstimates = New System.Windows.Forms.TabPage()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.InitialEstimatesPanel = New System.Windows.Forms.Panel()
         Me.chkUseIE_C = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_VF = New System.Windows.Forms.CheckBox()
         Me.chkUseIE_LF = New System.Windows.Forms.CheckBox()
@@ -118,7 +118,7 @@ Partial Class EditingForm_Column
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.tabstrip1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnResults = New System.Windows.Forms.Button()
         Me.gridResults = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -289,7 +289,7 @@ Partial Class EditingForm_Column
         resources.ApplyResources(Me.cbSolvingMethod, "cbSolvingMethod")
         Me.cbSolvingMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSolvingMethod.FormattingEnabled = True
-        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1"), resources.GetString("cbSolvingMethod.Items2")})
+        Me.cbSolvingMethod.Items.AddRange(New Object() {resources.GetString("cbSolvingMethod.Items"), resources.GetString("cbSolvingMethod.Items1"), resources.GetString("cbSolvingMethod.Items2"), resources.GetString("cbSolvingMethod.Items3")})
         Me.cbSolvingMethod.Name = "cbSolvingMethod"
         Me.ToolTip1.SetToolTip(Me.cbSolvingMethod, resources.GetString("cbSolvingMethod.ToolTip"))
         '
@@ -583,7 +583,7 @@ Partial Class EditingForm_Column
         'TabInitialEstimates
         '
         resources.ApplyResources(Me.TabInitialEstimates, "TabInitialEstimates")
-        Me.TabInitialEstimates.Controls.Add(Me.Panel1)
+        Me.TabInitialEstimates.Controls.Add(Me.InitialEstimatesPanel)
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_C)
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_VF)
         Me.TabInitialEstimates.Controls.Add(Me.chkUseIE_LF)
@@ -592,11 +592,11 @@ Partial Class EditingForm_Column
         Me.ToolTip1.SetToolTip(Me.TabInitialEstimates, resources.GetString("TabInitialEstimates.ToolTip"))
         Me.TabInitialEstimates.UseVisualStyleBackColor = True
         '
-        'Panel1
+        'InitialEstimatesPanel
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Name = "Panel1"
-        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
+        resources.ApplyResources(Me.InitialEstimatesPanel, "InitialEstimatesPanel")
+        Me.InitialEstimatesPanel.Name = "InitialEstimatesPanel"
+        Me.ToolTip1.SetToolTip(Me.InitialEstimatesPanel, resources.GetString("InitialEstimatesPanel.ToolTip"))
         '
         'chkUseIE_C
         '
@@ -834,18 +834,18 @@ Partial Class EditingForm_Column
         'TabPage1
         '
         resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.Controls.Add(Me.Button1)
+        Me.TabPage1.Controls.Add(Me.btnResults)
         Me.TabPage1.Controls.Add(Me.gridResults)
         Me.TabPage1.Name = "TabPage1"
         Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnResults
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnResults, "btnResults")
+        Me.btnResults.Name = "btnResults"
+        Me.ToolTip1.SetToolTip(Me.btnResults, resources.GetString("btnResults.ToolTip"))
+        Me.btnResults.UseVisualStyleBackColor = True
         '
         'gridResults
         '
@@ -1010,7 +1010,7 @@ Partial Class EditingForm_Column
     Friend WithEvents tbIOTempPerturbation As System.Windows.Forms.TextBox
     Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents tbIONumericalDerivativeStep As System.Windows.Forms.TextBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents InitialEstimatesPanel As System.Windows.Forms.Panel
     Friend WithEvents chkUseIE_C As System.Windows.Forms.CheckBox
     Friend WithEvents chkUseIE_VF As System.Windows.Forms.CheckBox
     Friend WithEvents chkUseIE_LF As System.Windows.Forms.CheckBox
@@ -1018,5 +1018,5 @@ Partial Class EditingForm_Column
     Friend WithEvents tbNSMaximumDeltaT As System.Windows.Forms.TextBox
     Friend WithEvents cbSolvingMethod As System.Windows.Forms.ComboBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btnResults As System.Windows.Forms.Button
 End Class
