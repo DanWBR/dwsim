@@ -71,10 +71,12 @@ Partial Class SimulationObjectsPanel
         '
         'SplitContainer1.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer1.Panel1, "SplitContainer1.Panel1")
         Me.SplitContainer1.Panel1.Controls.Add(Me.SplitContainer3)
         '
         'SplitContainer1.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer1.Panel2, "SplitContainer1.Panel2")
         Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
         '
         'SplitContainer3
@@ -84,24 +86,26 @@ Partial Class SimulationObjectsPanel
         '
         'SplitContainer3.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer3.Panel1, "SplitContainer3.Panel1")
         Me.SplitContainer3.Panel1.Controls.Add(Me.Panel1)
         '
         'SplitContainer3.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer3.Panel2, "SplitContainer3.Panel2")
         Me.SplitContainer3.Panel2.Controls.Add(Me.Panel3)
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Panel2)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'Panel2
         '
+        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Controls.Add(Me.PanelStreams)
         Me.Panel2.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Name = "Panel2"
         '
         'PanelStreams
@@ -112,23 +116,23 @@ Partial Class SimulationObjectsPanel
         '
         'Label1
         '
-        Me.Label1.BackColor = System.Drawing.SystemColors.ActiveCaption
         resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Name = "Label1"
         '
         'Panel3
         '
+        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.Panel4)
-        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Name = "Panel3"
         '
         'Panel4
         '
+        resources.ApplyResources(Me.Panel4, "Panel4")
         Me.Panel4.Controls.Add(Me.PanelUnitOps)
         Me.Panel4.Controls.Add(Me.Label2)
-        resources.ApplyResources(Me.Panel4, "Panel4")
         Me.Panel4.Name = "Panel4"
         '
         'PanelUnitOps
@@ -139,8 +143,8 @@ Partial Class SimulationObjectsPanel
         '
         'Label2
         '
-        Me.Label2.BackColor = System.Drawing.SystemColors.ActiveCaption
         resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label2.Name = "Label2"
         '
@@ -151,24 +155,26 @@ Partial Class SimulationObjectsPanel
         '
         'SplitContainer2.Panel1
         '
+        resources.ApplyResources(Me.SplitContainer2.Panel1, "SplitContainer2.Panel1")
         Me.SplitContainer2.Panel1.Controls.Add(Me.Panel5)
         '
         'SplitContainer2.Panel2
         '
+        resources.ApplyResources(Me.SplitContainer2.Panel2, "SplitContainer2.Panel2")
         Me.SplitContainer2.Panel2.Controls.Add(Me.Panel7)
         '
         'Panel5
         '
+        resources.ApplyResources(Me.Panel5, "Panel5")
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel5.Controls.Add(Me.Panel6)
-        resources.ApplyResources(Me.Panel5, "Panel5")
         Me.Panel5.Name = "Panel5"
         '
         'Panel6
         '
+        resources.ApplyResources(Me.Panel6, "Panel6")
         Me.Panel6.Controls.Add(Me.PanelLogicalOps)
         Me.Panel6.Controls.Add(Me.Label3)
-        resources.ApplyResources(Me.Panel6, "Panel6")
         Me.Panel6.Name = "Panel6"
         '
         'PanelLogicalOps
@@ -179,23 +185,23 @@ Partial Class SimulationObjectsPanel
         '
         'Label3
         '
-        Me.Label3.BackColor = System.Drawing.SystemColors.ActiveCaption
         resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label3.Name = "Label3"
         '
         'Panel7
         '
+        resources.ApplyResources(Me.Panel7, "Panel7")
         Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel7.Controls.Add(Me.Panel8)
-        resources.ApplyResources(Me.Panel7, "Panel7")
         Me.Panel7.Name = "Panel7"
         '
         'Panel8
         '
+        resources.ApplyResources(Me.Panel8, "Panel8")
         Me.Panel8.Controls.Add(Me.PanelCustomOps)
         Me.Panel8.Controls.Add(Me.Label4)
-        resources.ApplyResources(Me.Panel8, "Panel8")
         Me.Panel8.Name = "Panel8"
         '
         'PanelCustomOps
@@ -206,8 +212,8 @@ Partial Class SimulationObjectsPanel
         '
         'Label4
         '
-        Me.Label4.BackColor = System.Drawing.SystemColors.ActiveCaption
         resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label4.Name = "Label4"
         '
@@ -215,6 +221,8 @@ Partial Class SimulationObjectsPanel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CloseButton = False
+        Me.CloseButtonVisible = False
         Me.Controls.Add(Me.SplitContainer1)
         Me.DockAreas = CType(((((WeifenLuo.WinFormsUI.Docking.DockAreas.Float Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft) _
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight) _
