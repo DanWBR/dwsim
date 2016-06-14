@@ -562,7 +562,7 @@ Public Class FlowsheetSurface
 
         Me.DesconectarDeToolStripMenuItem.Visible = False
         Me.ConectarAToolStripMenuItem.Visible = False
-        Me.ToolStripSeparator3.Visible = False
+        Me.ToolStripSeparator4.Visible = False
         Me.CopyFromTSMI.Visible = False
 
         Me.AtivadoToolStripMenuItem.Checked = Me.FlowsheetDesignSurface.SelectedObject.Active
@@ -600,7 +600,7 @@ Public Class FlowsheetSurface
                             Me.CMS_ItemsToConnect.Items.Add(arr(i))
                             i = i + 1
                             Me.ConectarAToolStripMenuItem.Visible = True
-                            Me.ToolStripSeparator3.Visible = True
+                            Me.ToolStripSeparator4.Visible = True
                             Me.ConectarAToolStripMenuItem.DropDown = Me.CMS_ItemsToConnect
                         Loop Until i = arr.Count
                     End If
@@ -615,7 +615,7 @@ Public Class FlowsheetSurface
                             i = i + 1
                         Loop Until i = arr.Count
                         Me.DesconectarDeToolStripMenuItem.Visible = True
-                        Me.ToolStripSeparator3.Visible = True
+                        Me.ToolStripSeparator4.Visible = True
                         Me.DesconectarDeToolStripMenuItem.DropDown = Me.CMS_ItemsToDisconnect
                     End If
                 End If
@@ -630,7 +630,7 @@ Public Class FlowsheetSurface
                             i = i + 1
                         Loop Until i = arr.Count
                         Me.DesconectarDeToolStripMenuItem.Visible = True
-                        Me.ToolStripSeparator3.Visible = True
+                        Me.ToolStripSeparator4.Visible = True
                         Me.DesconectarDeToolStripMenuItem.DropDown = Me.CMS_ItemsToDisconnect
                     End If
                 End If
@@ -3281,5 +3281,6 @@ Public Class FlowsheetSurface
 
     Private Sub AtivadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AtivadoToolStripMenuItem.Click
         Me.FlowsheetDesignSurface.SelectedObject.Active = Me.AtivadoToolStripMenuItem.Checked
+        Me.Flowsheet.UpdateOpenEditForms()
     End Sub
 End Class

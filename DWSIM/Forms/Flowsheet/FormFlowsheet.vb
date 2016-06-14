@@ -216,11 +216,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             FormSurface.DockPanel = Nothing
             FormObjects.DockPanel = Nothing
 
-            FormSpreadsheet.Show(dckPanel)
-            FormMatList.Show(FormSpreadsheet.Pane, FormSpreadsheet)
-            FormSurface.Show(FormSpreadsheet.Pane, Nothing)
+            FormSurface.Show(dckPanel)
+            FormMatList.Show(FormSurface.Pane, Nothing)
+            FormSpreadsheet.Show(FormSurface.Pane, Nothing)
             FormObjects.Show(dckPanel)
             FormLog.Show(FormSurface.Pane, DockAlignment.Bottom, 0.2)
+
+            FormSurface.Activate()
 
             dckPanel.BringToFront()
             dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)

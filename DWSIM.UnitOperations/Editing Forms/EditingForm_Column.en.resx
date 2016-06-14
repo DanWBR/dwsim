@@ -401,6 +401,9 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Column Configuration</value>
   </data>
+  <data name="btnResults.Text" xml:space="preserve">
+    <value>View Temperature, Pressure and Composition Profiles</value>
+  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>

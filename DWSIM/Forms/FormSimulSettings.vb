@@ -941,6 +941,8 @@ Public Class FormSimulSettings
 
 
     Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox1.TextChanged
+        ogc1.ClearSelection()
+        Dim needselecting As Boolean = True
         For Each r As DataGridViewRow In ogc1.Rows
             If Not r.Cells(1).Value Is Nothing Then
                 If r.Cells(1).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Or
@@ -948,17 +950,17 @@ Public Class FormSimulSettings
                    r.Cells(4).Value.ToString.ToLower.Contains(Me.TextBox1.Text.ToLower) Then
                     r.Visible = True
                     If r.Cells(1).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
-                                       r.Cells(4).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
-                        'r.Selected = True
+                    r.Cells(2).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Or
+                    r.Cells(4).Value.ToString.ToLower.Equals(Me.TextBox1.Text.ToLower) Then
+                        r.Selected = True
+                        needselecting = False
                     End If
                 Else
-                    'r.Selected = False
                     r.Visible = False
                 End If
             End If
         Next
-        If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 Then
+        If ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible) >= 0 And needselecting Then
             ogc1.Rows(ogc1.Rows.GetFirstRow(DataGridViewElementStates.Visible)).Selected = True
         End If
         If TextBox1.Text = "" Then
