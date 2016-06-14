@@ -324,7 +324,8 @@ Namespace UnitOperations
         ''' <remarks>Properties and fields marked with the 'NonSerializable' attribute aren't cloned.</remarks>
         Public Overridable Function Clone() As Object Implements System.ICloneable.Clone
 
-            Return ObjectCopy(Me)
+            'Return ObjectCopy(Me)
+            Return Me.MemberwiseClone()
 
         End Function
 

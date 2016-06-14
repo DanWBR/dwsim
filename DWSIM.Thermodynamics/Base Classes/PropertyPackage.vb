@@ -334,7 +334,7 @@ Namespace PropertyPackages
                     End If
                 Else
                     If Not Flowsheet Is Nothing Then
-                        Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0)
+                        Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
                     Else
                         Return New NestedLoops()
                     End If
@@ -405,7 +405,7 @@ Namespace PropertyPackages
 
         Public Overridable Function Clone() As PropertyPackage
 
-            Return ObjectCopy(Me)
+            Return Me.MemberwiseClone()
 
         End Function
 
