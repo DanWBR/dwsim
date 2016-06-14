@@ -94,6 +94,7 @@ Partial Class FormOptions
         Me.chkAutoUpdate = New System.Windows.Forms.CheckBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.chkEnableMultipleEditors = New System.Windows.Forms.CheckBox()
         Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.chkCloseFormsOnDeselect = New System.Windows.Forms.CheckBox()
@@ -652,11 +653,17 @@ Partial Class FormOptions
         'GroupBox12
         '
         resources.ApplyResources(Me.GroupBox12, "GroupBox12")
+        Me.GroupBox12.Controls.Add(Me.chkEnableMultipleEditors)
         Me.GroupBox12.Controls.Add(Me.cbDefaultLocation)
         Me.GroupBox12.Controls.Add(Me.Label14)
         Me.GroupBox12.Controls.Add(Me.chkCloseFormsOnDeselect)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.TabStop = False
+        '
+        'chkEnableMultipleEditors
+        '
+        resources.ApplyResources(Me.chkEnableMultipleEditors, "chkEnableMultipleEditors")
+        Me.chkEnableMultipleEditors.Name = "chkEnableMultipleEditors"
         '
         'cbDefaultLocation
         '
@@ -826,50 +833,50 @@ Partial Class FormOptions
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.FaTabStrip1)
-        Me.DoubleBuffered = True
+        Me.DoubleBuffered = true
         Me.Name = "FormOptions"
-        Me.FaTabStrip1.ResumeLayout(False)
-        Me.FaTabStripItem1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBoxBGThreadConfig.ResumeLayout(False)
-        Me.GroupBoxBGThreadConfig.PerformLayout()
-        Me.GroupBoxAzureConfig.ResumeLayout(False)
-        Me.GroupBoxAzureConfig.PerformLayout()
-        Me.GroupBoxNetworkComputerConfig.ResumeLayout(False)
-        Me.GroupBoxNetworkComputerConfig.PerformLayout()
-        Me.GroupBox7.ResumeLayout(False)
-        Me.GroupBox7.PerformLayout()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
-        Me.FaTabStripItem3.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox10.ResumeLayout(False)
-        CType(Me.dgvIPDB, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem2.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FaTabStripItem7.ResumeLayout(False)
-        Me.GroupBox13.ResumeLayout(False)
-        Me.GroupBox13.PerformLayout()
-        Me.GroupBox12.ResumeLayout(False)
-        Me.GroupBox12.PerformLayout()
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        Me.ResumeLayout(False)
+        Me.FaTabStrip1.ResumeLayout(false)
+        Me.FaTabStripItem1.ResumeLayout(false)
+        Me.GroupBox2.ResumeLayout(false)
+        Me.GroupBox2.PerformLayout
+        Me.GroupBoxBGThreadConfig.ResumeLayout(false)
+        Me.GroupBoxBGThreadConfig.PerformLayout
+        Me.GroupBoxAzureConfig.ResumeLayout(false)
+        Me.GroupBoxAzureConfig.PerformLayout
+        Me.GroupBoxNetworkComputerConfig.ResumeLayout(false)
+        Me.GroupBoxNetworkComputerConfig.PerformLayout
+        Me.GroupBox7.ResumeLayout(false)
+        Me.GroupBox7.PerformLayout
+        Me.GroupBox8.ResumeLayout(false)
+        Me.GroupBox8.PerformLayout
+        Me.FaTabStripItem3.ResumeLayout(false)
+        Me.GroupBox4.ResumeLayout(false)
+        Me.GroupBox4.PerformLayout
+        CType(Me.dgvdb,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox10.ResumeLayout(false)
+        CType(Me.dgvIPDB,System.ComponentModel.ISupportInitialize).EndInit
+        Me.FaTabStripItem2.ResumeLayout(false)
+        Me.GroupBox3.ResumeLayout(false)
+        Me.GroupBox3.PerformLayout
+        CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.FaTabStripItem7.ResumeLayout(false)
+        Me.GroupBox13.ResumeLayout(false)
+        Me.GroupBox13.PerformLayout
+        Me.GroupBox12.ResumeLayout(false)
+        Me.GroupBox12.PerformLayout
+        Me.GroupBox11.ResumeLayout(false)
+        Me.GroupBox11.PerformLayout
+        Me.GroupBox5.ResumeLayout(false)
+        Me.GroupBox5.PerformLayout
+        Me.GroupBox1.ResumeLayout(false)
+        Me.GroupBox1.PerformLayout
+        Me.GroupBox9.ResumeLayout(false)
+        Me.GroupBox9.PerformLayout
+        Me.GroupBox6.ResumeLayout(false)
+        Me.GroupBox6.PerformLayout
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
     Public WithEvents FaTabStrip1 As System.Windows.Forms.TabControl
     Public WithEvents FaTabStripItem1 As System.Windows.Forms.TabPage
     Public WithEvents FaTabStripItem2 As System.Windows.Forms.TabPage
@@ -961,4 +968,5 @@ Partial Class FormOptions
     Public WithEvents GroupBox13 As System.Windows.Forms.GroupBox
     Public WithEvents chkAutoUpdate As System.Windows.Forms.CheckBox
     Public WithEvents chkUpdates As System.Windows.Forms.CheckBox
+    Public WithEvents chkEnableMultipleEditors As System.Windows.Forms.CheckBox
 End Class

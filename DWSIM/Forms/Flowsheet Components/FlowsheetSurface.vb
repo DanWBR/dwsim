@@ -408,6 +408,12 @@ Public Class FlowsheetSurface
 
                 If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
+                    If Not My.Settings.EnableMultipleObjectEditors Then
+                        For Each obj In Me.Flowsheet.SimulationObjects.Values
+                            obj.CloseEditForm()
+                        Next
+                    End If
+
                     Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
 
                 Else

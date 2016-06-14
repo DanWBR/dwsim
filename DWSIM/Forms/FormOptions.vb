@@ -93,6 +93,7 @@ Public Class FormOptions
         chkStorePreviousSolutions.Checked = My.Settings.StorePreviousSolutions
 
         chkCloseFormsOnDeselect.Checked = My.Settings.CloseFormsOnDeselecting
+        chkEnableMultipleEditors.Checked = My.Settings.EnableMultipleObjectEditors
 
         'databases
 
@@ -673,5 +674,9 @@ Public Class FormOptions
 
     Private Sub chkAutoUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoUpdate.CheckedChanged
         My.Settings.AutomaticUpdates = chkAutoUpdate.Checked
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableMultipleEditors.CheckedChanged
+        My.Settings.EnableMultipleObjectEditors = chkEnableMultipleEditors.Checked
     End Sub
 End Class
