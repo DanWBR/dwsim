@@ -272,6 +272,12 @@
     <Compile Include="Editing Forms\EditingForm_Recycle.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\EditingForm_HeatExchanger.Designer.vb">
+      <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\EditingForm_HeatExchanger.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\EditingForm_Valve.Designer.vb">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </Compile>
@@ -583,6 +589,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.en.resx">
+      <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.resx">
+      <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Valve.en.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
