@@ -364,9 +364,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged
+    Private Sub tbNStages_TextChanged(sender As Object, e As KeyEventArgs) Handles tbNStages.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.NumberOfStages = tbNStages.Text
 
@@ -410,9 +410,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbMaxIt_TextChanged(sender As Object, e As EventArgs) Handles tbMaxIt.TextChanged
+    Private Sub tbMaxIt_TextChanged(sender As Object, e As KeyEventArgs) Handles tbMaxIt.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.MaxIterations = tbMaxIt.Text
             RequestCalc()
@@ -421,9 +421,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbConvTol_TextChanged(sender As Object, e As EventArgs) Handles tbConvTol.TextChanged
+    Private Sub tbConvTol_TextChanged(sender As Object, e As KeyEventArgs) Handles tbConvTol.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.ExternalLoopTolerance = tbMaxIt.Text
             SimObject.InternalLoopTolerance = tbMaxIt.Text
@@ -519,9 +519,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbCondPressure_TextChanged(sender As Object, e As EventArgs) Handles tbCondPressure.TextChanged
+    Private Sub tbCondPressure_TextChanged(sender As Object, e As KeyEventArgs) Handles tbCondPressure.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.CondenserPressure = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
 
@@ -531,9 +531,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbCondPDrop_TextChanged(sender As Object, e As EventArgs) Handles tbCondPDrop.TextChanged
+    Private Sub tbCondPDrop_TextChanged(sender As Object, e As KeyEventArgs) Handles tbCondPDrop.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.CondenserDeltaP = su.Converter.ConvertToSI(units.deltaP, tbCondPDrop.Text)
 
@@ -543,9 +543,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbCondSpec_TextChanged(sender As Object, e As EventArgs) Handles tbCondSpec.TextChanged
+    Private Sub tbCondSpec_TextChanged(sender As Object, e As KeyEventArgs) Handles tbCondSpec.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.Specs("C").SpecValue = su.Converter.ConvertToSI(SimObject.Specs("C").SpecUnit, tbCondSpec.Text)
 
@@ -567,9 +567,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbCondVapFlow_TextChanged(sender As Object, e As EventArgs) Handles tbCondVapFlow.TextChanged
+    Private Sub tbCondVapFlow_TextChanged(sender As Object, e As KeyEventArgs) Handles tbCondVapFlow.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.VaporFlowRate = su.Converter.ConvertToSI(SimObject.VaporFlowRateUnit, tbCondVapFlow.Text)
 
@@ -591,9 +591,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbRebPressure_TextChanged(sender As Object, e As EventArgs) Handles tbRebPressure.TextChanged
+    Private Sub tbRebPressure_TextChanged(sender As Object, e As KeyEventArgs) Handles tbRebPressure.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text)
 
@@ -637,9 +637,9 @@ Public Class EditingForm_Column
 
     End Sub
 
-    Private Sub tbRebSpecValue_TextChanged(sender As Object, e As EventArgs) Handles tbRebSpecValue.TextChanged
+    Private Sub tbRebSpecValue_TextChanged(sender As Object, e As KeyEventArgs) Handles tbRebSpecValue.KeyDown
 
-        If Loaded Then
+        If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.Specs("R").SpecValue = su.Converter.ConvertToSI(SimObject.Specs("R").SpecUnit, tbRebSpecValue.Text)
 
@@ -677,20 +677,28 @@ Public Class EditingForm_Column
         SimObject.UseCompositionEstimates = chkUseIE_C.Checked
     End Sub
 
-    Private Sub tbBPStopAtIter_TextChanged(sender As Object, e As EventArgs) Handles tbBPStopAtIter.TextChanged
-        SimObject.StopAtIterationNumber = tbBPStopAtIter.Text
+    Private Sub tbBPStopAtIter_TextChanged(sender As Object, e As KeyEventArgs) Handles tbBPStopAtIter.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.StopAtIterationNumber = tbBPStopAtIter.Text
+        End If
     End Sub
 
-    Private Sub tbNSNumericalDerivativeStep_TextChanged(sender As Object, e As EventArgs) Handles tbNSNumericalDerivativeStep.TextChanged
-        SimObject.SC_NumericalDerivativeStep = tbNSNumericalDerivativeStep.Text
+    Private Sub tbNSNumericalDerivativeStep_TextChanged(sender As Object, e As KeyEventArgs) Handles tbNSNumericalDerivativeStep.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.SC_NumericalDerivativeStep = tbNSNumericalDerivativeStep.Text
+        End If
     End Sub
 
-    Private Sub tbIONumericalDerivativeStep_TextChanged(sender As Object, e As EventArgs) Handles tbIONumericalDerivativeStep.TextChanged
-        SimObject.IO_NumericalDerivativeStep = tbIONumericalDerivativeStep.Text
+    Private Sub tbIONumericalDerivativeStep_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIONumericalDerivativeStep.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_NumericalDerivativeStep = tbIONumericalDerivativeStep.Text
+        End If
     End Sub
 
-    Private Sub tbNSMaximumDeltaT_TextChanged(sender As Object, e As EventArgs) Handles tbNSMaximumDeltaT.TextChanged
-        SimObject.SC_MaximumTemperatureChange = su.Converter.ConvertToSI(units.temperature, tbNSMaximumDeltaT.Text)
+    Private Sub tbNSMaximumDeltaT_TextChanged(sender As Object, e As KeyEventArgs) Handles tbNSMaximumDeltaT.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.SC_MaximumTemperatureChange = su.Converter.ConvertToSI(units.temperature, tbNSMaximumDeltaT.Text)
+        End If
     End Sub
 
     Private Sub chkNSUseDampingFactor_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSUseDampingFactor.CheckedChanged
@@ -705,16 +713,22 @@ Public Class EditingForm_Column
         SimObject.StoreAndReuseJacobian = chkNSJacobian.Checked
     End Sub
 
-    Private Sub tbIOTempPerturbation_TextChanged(sender As Object, e As EventArgs) Handles tbIOTempPerturbation.TextChanged
-        SimObject.IO_ExtLoop_DeltaT = su.Converter.ConvertToSI(units.temperature, tbIOTempPerturbation.Text)
+    Private Sub tbIOTempPerturbation_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIOTempPerturbation.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_ExtLoop_DeltaT = su.Converter.ConvertToSI(units.temperature, tbIOTempPerturbation.Text)
+        End If
     End Sub
 
-    Private Sub tbIOMinDamping_TextChanged(sender As Object, e As EventArgs) Handles tbIOMinDamping.TextChanged
-        SimObject.IO_DampingFactorMin = tbIOMinDamping.Text
+    Private Sub tbIOMinDamping_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIOMinDamping.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_DampingFactorMin = tbIOMinDamping.Text
+        End If
     End Sub
 
-    Private Sub tbIOMaxDamping_TextChanged(sender As Object, e As EventArgs) Handles tbIOMaxDamping.TextChanged
-        SimObject.IO_DampingFactorMax = tbIOMaxDamping.Text
+    Private Sub tbIOMaxDamping_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIOMaxDamping.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_DampingFactorMax = tbIOMaxDamping.Text
+        End If
     End Sub
 
     Private Sub chkIOUseDampingFactor_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOUseDampingFactor.CheckedChanged

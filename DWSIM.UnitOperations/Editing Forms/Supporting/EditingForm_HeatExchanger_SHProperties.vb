@@ -3,8 +3,6 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Public Class EditingForm_HeatExchanger_SHProperties
 
-    Public props As Auxiliary.HeatExchanger.STHXProperties
-
     Public hx As UnitOperations.HeatExchanger
 
     Dim su As SharedClasses.SystemsOfUnits.Units
@@ -12,7 +10,7 @@ Public Class EditingForm_HeatExchanger_SHProperties
 
     Private Sub STHXEditorForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
-        With props
+        With hx.STProperties
 
             .Shell_BaffleCut = tbBaffleCut.Text
             .Shell_BaffleSpacing = cv.ConvertToSI(su.thickness, tbBaffleSpacing.Text)
@@ -47,7 +45,11 @@ Public Class EditingForm_HeatExchanger_SHProperties
 
     Private Sub STHXEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        With props
+        su = hx.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = hx.FlowSheet.FlowsheetOptions.NumberFormat
+
+        With hx.STProperties
+
             tbBaffleCut.Text = Format(.Shell_BaffleCut, nf)
             tbBaffleSpacing.Text = Format(cv.ConvertFromSI(su.thickness, .Shell_BaffleSpacing), nf)
             tbNumberOfShellPasses.Text = .Shell_NumberOfPasses
@@ -71,6 +73,7 @@ Public Class EditingForm_HeatExchanger_SHProperties
             Else
                 rbCold.Checked = False
             End If
+
         End With
 
         lbTubeDe.Text = su.diameter

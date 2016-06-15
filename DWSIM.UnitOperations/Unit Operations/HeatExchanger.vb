@@ -72,6 +72,8 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_HeatExchanger
+
         Protected m_Q As Nullable(Of Double) = 0
         Protected m_dp As Nullable(Of Double) = 0
         Protected m_OverallCoefficient As Nullable(Of Double) = 1000
@@ -129,7 +131,10 @@ Namespace UnitOperations
         End Property
 
         Public Property ThermalEfficiency As Double = 0.0#
+
         Public Property MaxHeatExchange As Double = 0.0#
+
+        Public Property MITA As Double = 0.0#
 
         Public Overrides Function LoadData(data As List(Of XElement)) As Boolean
             'workaround for renaming CalcBothTemp_KA calculation type to CalcBothTemp_UA
@@ -1339,10 +1344,28 @@ Namespace UnitOperations
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_HeatExchanger With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_HeatExchanger With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UIThread(Sub() f.UpdateInfo())
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -1366,7 +1389,12 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
     End Class
 
