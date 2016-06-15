@@ -410,6 +410,10 @@ Namespace UnitOperations
                             qprof.Add(i / nsteps * dhc * Wc)
                             tcprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
 
+                        Next
+
+                        For i As Integer = 1 To nsteps
+
                             tmpstr = StInHot.Clone
                             tmpstr.PropertyPackage = StInHot.PropertyPackage
                             tmpstr.SetFlowsheet(StInHot.FlowSheet)
@@ -420,8 +424,12 @@ Namespace UnitOperations
 
                             thprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
 
-                            dtprof.Add(Abs(thprof(thprof.Count - 1) - tcprof(tcprof.Count - 1)))
+                        Next
 
+                        If FlowDir = FlowDirection.CounterCurrent Then thprof.Reverse()
+
+                        For i As Integer = 0 To nsteps - 1
+                            dtprof.Add(Abs(thprof(i) - tcprof(i)))
                         Next
 
                         fx00 = fx0
