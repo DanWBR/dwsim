@@ -88,21 +88,21 @@ Public Class EditingForm_HeatExchanger
 
             'parameters
 
-            cbPress.Items.Clear()
-            cbPress.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
-            cbPress.SelectedItem = units.pressure
+            cbHotFluidPDrop.Items.Clear()
+            cbHotFluidPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
+            cbHotFluidPDrop.SelectedItem = units.pressure
 
-            cbPressureDropU.Items.Clear()
-            cbPressureDropU.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
-            cbPressureDropU.SelectedItem = units.deltaP
+            cbColdFluidPDrop.Items.Clear()
+            cbColdFluidPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
+            cbColdFluidPDrop.SelectedItem = units.deltaP
 
-            cbTemp.Items.Clear()
-            cbTemp.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
-            cbTemp.SelectedItem = units.temperature
+            cbColdFluidOutletT.Items.Clear()
+            cbColdFluidOutletT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
+            cbColdFluidOutletT.SelectedItem = units.temperature
 
-            cbDeltaT.Items.Clear()
-            cbDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
-            cbDeltaT.SelectedItem = units.deltaT
+            cbHotFluidOutletT.Items.Clear()
+            cbHotFluidOutletT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
+            cbHotFluidOutletT.SelectedItem = units.deltaT
 
             Dim uobj = SimObject
 
@@ -113,10 +113,10 @@ Public Class EditingForm_HeatExchanger
                     cbCalcMode.SelectedIndex = 1
             End Select
 
-            tbOutletPressure.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
-            tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
-            tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
-            tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
+            tbHotFluidPDrop.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
+            tbColdFluidPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
+            tbColdFluidOutletT.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
+            tbHotFluidOutletT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
 
         End With
 
@@ -159,30 +159,30 @@ Public Class EditingForm_HeatExchanger
         'Variação da Pressão
         Select Case cbCalcMode.SelectedIndex
             Case 0
-                tbPressureDrop.Enabled = False
-                tbOutletPressure.Enabled = True
+                tbColdFluidPDrop.Enabled = False
+                tbHotFluidPDrop.Enabled = True
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.OutletPressure
             Case 1
-                tbPressureDrop.Enabled = True
-                tbOutletPressure.Enabled = False
+                tbColdFluidPDrop.Enabled = True
+                tbHotFluidPDrop.Enabled = False
                 SimObject.CalcMode = UnitOperations.Valve.CalculationMode.DeltaP
         End Select
 
     End Sub
 
-    Private Sub cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPressureDropU.SelectedIndexChanged,
-                                                                                  cbPress.SelectedIndexChanged
+    Private Sub cb_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbColdFluidPDrop.SelectedIndexChanged,
+                                                                                  cbHotFluidPDrop.SelectedIndexChanged
 
         If Loaded Then
             Try
-                If sender Is cbPress Then
-                    tbOutletPressure.Text = su.Converter.Convert(cbPress.SelectedItem.ToString, units.pressure, Double.Parse(tbOutletPressure.Text)).ToString(nf)
-                    cbPress.SelectedItem = units.pressure
-                    UpdateProps(tbOutletPressure)
-                ElseIf sender Is cbPressureDropU Then
-                    tbPressureDrop.Text = su.Converter.Convert(cbPressureDropU.SelectedItem.ToString, units.deltaP, Double.Parse(tbPressureDrop.Text)).ToString(nf)
-                    cbPressureDropU.SelectedItem = units.deltaP
-                    UpdateProps(tbPressureDrop)
+                If sender Is cbHotFluidPDrop Then
+                    tbHotFluidPDrop.Text = su.Converter.Convert(cbHotFluidPDrop.SelectedItem.ToString, units.pressure, Double.Parse(tbHotFluidPDrop.Text)).ToString(nf)
+                    cbHotFluidPDrop.SelectedItem = units.pressure
+                    UpdateProps(tbHotFluidPDrop)
+                ElseIf sender Is cbColdFluidPDrop Then
+                    tbColdFluidPDrop.Text = su.Converter.Convert(cbColdFluidPDrop.SelectedItem.ToString, units.deltaP, Double.Parse(tbColdFluidPDrop.Text)).ToString(nf)
+                    cbColdFluidPDrop.SelectedItem = units.deltaP
+                    UpdateProps(tbColdFluidPDrop)
                 End If
             Catch ex As Exception
                 SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
@@ -205,8 +205,8 @@ Public Class EditingForm_HeatExchanger
                 uobj.CalcMode = UnitOperations.Valve.CalculationMode.DeltaP
         End Select
 
-        If sender Is tbOutletPressure Then uobj.OutletPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbOutletPressure.Text)
-        If sender Is tbPressureDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbPressureDropU.SelectedItem.ToString, tbPressureDrop.Text)
+        If sender Is tbHotFluidPDrop Then uobj.OutletPressure = su.Converter.ConvertToSI(cbHotFluidPDrop.SelectedItem.ToString, tbHotFluidPDrop.Text)
+        If sender Is tbColdFluidPDrop Then uobj.DeltaP = su.Converter.ConvertToSI(cbColdFluidPDrop.SelectedItem.ToString, tbColdFluidPDrop.Text)
 
         RequestCalc()
 
@@ -218,7 +218,7 @@ Public Class EditingForm_HeatExchanger
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbPressureDrop.TextChanged, tbOutletPressure.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbColdFluidPDrop.TextChanged, tbHotFluidPDrop.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -230,7 +230,7 @@ Public Class EditingForm_HeatExchanger
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbPressureDrop.KeyDown, tbOutletPressure.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbColdFluidPDrop.KeyDown, tbHotFluidPDrop.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 

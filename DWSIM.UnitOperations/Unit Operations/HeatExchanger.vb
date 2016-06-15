@@ -41,6 +41,7 @@ Namespace UnitOperations
         CalcArea = 4
         ShellandTube_Rating = 5
         ShellandTube_CalcFoulingFactor = 6
+        PinchPoint = 7
 
     End Enum
 

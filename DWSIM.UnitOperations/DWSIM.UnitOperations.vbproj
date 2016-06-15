@@ -395,6 +395,12 @@
     <Compile Include="Editing Forms\Supporting\EditingForm_Column_Stages.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.designer.vb">
+      <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Energy Stream\Streams.vb" />
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
@@ -788,6 +794,18 @@
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Column_Stages.resx">
       <DependentUpon>EditingForm_Column_Stages.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.de.resx">
+      <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.en.resx">
+      <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.es.resx">
+      <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_SHProperties.resx">
+      <DependentUpon>EditingForm_HeatExchanger_SHProperties.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -1178,6 +1196,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\page_white_magnify.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Straight-tube_heat_exchanger_1-pass.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Straight-tube_heat_exchanger_2-pass.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
