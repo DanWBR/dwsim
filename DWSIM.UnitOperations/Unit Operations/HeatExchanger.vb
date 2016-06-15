@@ -397,11 +397,12 @@ Namespace UnitOperations
                         dtprof.Clear()
                         qprof.Clear()
 
+                        tmpstr = StInCold.Clone
+                        tmpstr.PropertyPackage = StInCold.PropertyPackage
+                        tmpstr.SetFlowsheet(StInCold.FlowSheet)
+
                         For i As Integer = 1 To nsteps
 
-                            tmpstr = StInCold.Clone
-                            tmpstr.PropertyPackage = StInCold.PropertyPackage
-                            tmpstr.SetFlowsheet(StInCold.FlowSheet)
                             tmpstr.Phases(0).Properties.enthalpy = Hc1 + i / nsteps * dhc
                             tmpstr.Phases(0).Properties.pressure = Pc1 - i / nsteps * ColdSidePressureDrop
                             tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
@@ -412,13 +413,14 @@ Namespace UnitOperations
 
                         Next
 
+                        tmpstr = StInHot.Clone
+                        tmpstr.PropertyPackage = StInHot.PropertyPackage
+                        tmpstr.SetFlowsheet(StInHot.FlowSheet)
+
                         For i As Integer = 1 To nsteps
 
-                            tmpstr = StInHot.Clone
-                            tmpstr.PropertyPackage = StInHot.PropertyPackage
-                            tmpstr.SetFlowsheet(StInHot.FlowSheet)
                             tmpstr.Phases(0).Properties.enthalpy = Hh1 - i / nsteps * dhc
-                            tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * ColdSidePressureDrop
+                            tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * HotSidePressureDrop
                             tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
                             tmpstr.Calculate(True, True)
 
@@ -440,8 +442,13 @@ Namespace UnitOperations
                         x0 = x
                         x = dhc
 
+                        If Abs(fx - fx00) < 0.005 AndAlso cntint > 3 Then
+                            FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Minimum pinch is " & SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(FlowSheet.FlowsheetOptions.SelectedUnitSystem.temperature, dtprof.Min) & " " & FlowSheet.FlowsheetOptions.SelectedUnitSystem.temperature, IFlowsheet.MessageType.Warning)
+                            Exit Do
+                        End If
+
                         If cntint > 3 Then
-                            dhc = x - 0.7 * fx * (x - x00) / (fx - fx00)
+                            dhc = x - 0.4 * fx * (x - x00) / (fx - fx00)
                         Else
                             dhc *= 1.1
                         End If

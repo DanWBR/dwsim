@@ -210,6 +210,8 @@ Public Class EditingForm_HeatExchanger
 
     Private Sub cbCalcMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalcMode.SelectedIndexChanged
 
+        SimObject.CalculationMode = cbCalcMode.SelectedIndex
+
         tbColdFluidOutletT.Enabled = True
         tbHotFluidOutletT.Enabled = True
         tbOverallU.Enabled = True
