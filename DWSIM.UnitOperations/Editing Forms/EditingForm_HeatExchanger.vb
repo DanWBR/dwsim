@@ -150,17 +150,27 @@ Public Class EditingForm_HeatExchanger
 
             gridResults.Rows.Clear()
 
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("MaximumHeatExchange"), .MaxHeatExchange.ToString(nf), units.heatflow})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("ThermalEfficiency"), .ThermalEfficiency.ToString(nf), "%"})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("HXLMTD"), .LMTD.ToString(nf), units.deltaT})
+            If .Calculated Then
 
-            If .CalculationMode = UnitOperations.HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor Or .CalculationMode = UnitOperations.HeatExchangerCalcMode.ShellandTube_Rating Then
-                gridResults.Rows.Add(New Object() {"Re Shell", .STProperties.ReS.ToString(nf), ""})
-                gridResults.Rows.Add(New Object() {"Re Tube", .STProperties.ReT.ToString(nf), ""})
-                gridResults.Rows.Add(New Object() {"F Shell", .STProperties.Fs.ToString("E6"), units.foulingfactor})
-                gridResults.Rows.Add(New Object() {"F Tube", .STProperties.Ft.ToString("E6"), units.foulingfactor})
-                gridResults.Rows.Add(New Object() {"F Pipe", .STProperties.Fc.ToString("E6"), units.foulingfactor})
-                gridResults.Rows.Add(New Object() {"F Fouling", .STProperties.Ff.ToString("E6"), units.foulingfactor})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("MaximumHeatExchange"), .MaxHeatExchange.ToString(nf), units.heatflow})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("ThermalEfficiency"), .ThermalEfficiency.ToString(nf), "%"})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("HXLMTD"), .LMTD.ToString(nf), units.deltaT})
+
+                If .CalculationMode = UnitOperations.HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor Or .CalculationMode = UnitOperations.HeatExchangerCalcMode.ShellandTube_Rating Then
+                    gridResults.Rows.Add(New Object() {"Re Shell", .STProperties.ReS.ToString(nf), ""})
+                    gridResults.Rows.Add(New Object() {"Re Tube", .STProperties.ReT.ToString(nf), ""})
+                    gridResults.Rows.Add(New Object() {"F Shell", .STProperties.Fs.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"F Tube", .STProperties.Ft.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"F Pipe", .STProperties.Fc.ToString("E6"), units.foulingfactor})
+                    gridResults.Rows.Add(New Object() {"F Fouling", .STProperties.Ff.ToString("E6"), units.foulingfactor})
+                End If
+
+                If .CalculationMode = UnitOperations.HeatExchangerCalcMode.PinchPoint Then
+                    btnViewProfile.Enabled = True
+                Else
+                    btnViewProfile.Enabled = False
+                End If
+
             End If
 
         End With
@@ -205,12 +215,14 @@ Public Class EditingForm_HeatExchanger
         tbOverallU.Enabled = True
         tbArea.Enabled = True
         tbHeat.Enabled = True
+        tbMITA.Enabled = False
 
         cbColdFluidOutletT.Enabled = True
         cbHotFluidOutletT.Enabled = True
         cbOverallHTC.Enabled = True
         cbArea.Enabled = True
         cbHeat.Enabled = True
+        cbMITA.Enabled = False
 
         btnEditSTProps.Enabled = False
 
@@ -273,6 +285,16 @@ Public Class EditingForm_HeatExchanger
                 btnEditSTProps.Enabled = True
             Case 7
                 'Ponto de 'Pinch'
+                tbMITA.Enabled = True
+                cbMITA.Enabled = True
+                tbHotFluidOutletT.Enabled = False
+                cbHotFluidOutletT.Enabled = False
+                tbColdFluidOutletT.Enabled = False
+                cbColdFluidOutletT.Enabled = False
+                tbArea.Enabled = False
+                cbArea.Enabled = False
+                tbHeat.Enabled = False
+                cbHeat.Enabled = False
         End Select
 
     End Sub
@@ -282,7 +304,7 @@ Public Class EditingForm_HeatExchanger
                                                                                   cbColdFluidOutletT.SelectedIndexChanged,
                                                                                   cbHotFluidOutletT.SelectedIndexChanged,
                                                                                   cbArea.SelectedIndexChanged, cbOverallHTC.SelectedIndexChanged,
-                                                                                  cbHeat.SelectedIndexChanged
+                                                                                  cbHeat.SelectedIndexChanged, cbMITA.SelectedIndexChanged
 
         If Loaded Then
             Try
@@ -314,6 +336,10 @@ Public Class EditingForm_HeatExchanger
                     tbArea.Text = su.Converter.Convert(cbArea.SelectedItem.ToString, units.heatflow, Double.Parse(tbArea.Text)).ToString(nf)
                     cbArea.SelectedItem = units.heatflow
                     UpdateProps(tbArea)
+                ElseIf sender Is cbMITA Then
+                    tbMITA.Text = su.Converter.Convert(cbMITA.SelectedItem.ToString, units.deltaT, Double.Parse(tbMITA.Text)).ToString(nf)
+                    cbMITA.SelectedItem = units.deltaT
+                    UpdateProps(tbMITA)
                 End If
             Catch ex As Exception
                 SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
@@ -575,6 +601,9 @@ Public Class EditingForm_HeatExchanger
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
+
+        Dim f As New EditingForm_HeatExchanger_ViewProfile With {.hx = SimObject}
+        f.Show()
 
     End Sub
 

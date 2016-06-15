@@ -314,6 +314,12 @@
     <Compile Include="Editing Forms\Other\Form_LoadSave.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.Designer.vb">
+      <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -646,6 +652,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.en.resx">
+      <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.resx">
+      <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Pipe_HydraulicProfileEditor.de.resx">
       <DependentUpon>EditingForm_Pipe_HydraulicProfileEditor.vb</DependentUpon>

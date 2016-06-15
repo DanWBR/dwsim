@@ -91,6 +91,9 @@ Namespace UnitOperations
         Protected m_stprops As New STHXProperties
         Protected m_f As Double = 1.0#
 
+        Public Property HeatProfile As Double() = {}
+        Public Property TemperatureProfileCold As Double() = {}
+        Public Property TemperatureProfileHot As Double() = {}
         Public Property IgnoreLMTDError As Boolean = True
 
         Public Property STProperties() As STHXProperties
@@ -373,7 +376,112 @@ Namespace UnitOperations
 
             Select Case CalcMode
 
+                Case HeatExchangerCalcMode.PinchPoint
+
+                    Dim dhc, fx00, fx0, fx, x00, x0, x As Double, nsteps, cntint As Integer
+
+                    nsteps = 25
+
+                    Dim tcprof, thprof, dtprof, qprof As New List(Of Double)
+
+                    dhc = MaxHeatExchange / Wc / 2
+
+                    cntint = 0
+
+                    Do
+
+                        'calculate profiles
+
+                        tcprof.Clear()
+                        thprof.Clear()
+                        dtprof.Clear()
+                        qprof.Clear()
+
+                        For i As Integer = 1 To nsteps
+
+                            tmpstr = StInCold.Clone
+                            tmpstr.PropertyPackage = StInCold.PropertyPackage
+                            tmpstr.SetFlowsheet(StInCold.FlowSheet)
+                            tmpstr.Phases(0).Properties.enthalpy = Hc1 + i / nsteps * dhc
+                            tmpstr.Phases(0).Properties.pressure = Pc1 - i / nsteps * ColdSidePressureDrop
+                            tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                            tmpstr.Calculate(True, True)
+
+                            qprof.Add(i / nsteps * dhc * Wc)
+                            tcprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
+
+                            tmpstr = StInHot.Clone
+                            tmpstr.PropertyPackage = StInHot.PropertyPackage
+                            tmpstr.SetFlowsheet(StInHot.FlowSheet)
+                            tmpstr.Phases(0).Properties.enthalpy = Hh1 - i / nsteps * dhc
+                            tmpstr.Phases(0).Properties.pressure = Ph1 - i / nsteps * ColdSidePressureDrop
+                            tmpstr.SpecType = StreamSpec.Pressure_and_Enthalpy
+                            tmpstr.Calculate(True, True)
+
+                            thprof.Add(tmpstr.Phases(0).Properties.temperature.GetValueOrDefault)
+
+                            dtprof.Add(Abs(thprof(thprof.Count - 1) - tcprof(tcprof.Count - 1)))
+
+                        Next
+
+                        fx00 = fx0
+                        fx0 = fx
+                        fx = dtprof.Min - MITA
+
+                        x00 = x0
+                        x0 = x
+                        x = dhc
+
+                        If cntint > 3 Then
+                            dhc = x - 0.7 * fx * (x - x00) / (fx - fx00)
+                        Else
+                            dhc *= 1.1
+                        End If
+
+                        If dhc < 0.0# Then dhc = MaxHeatExchange / Wc
+                        If dhc * Wc > MaxHeatExchange Then dhc = MaxHeatExchange / Wc
+
+                        cntint += 1
+
+                        If Double.IsNaN(fx) Or Double.IsNaN(dhc) Then Throw New Exception("Error calculating temperature profile.")
+
+                        If cntint > 50 Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Reached maximum number of iterations without converging. Check if the current MITA is consistent.", IFlowsheet.MessageType.Warning)
+
+                    Loop Until Abs(fx) < 0.01
+
+                    Me.HeatProfile = qprof.ToArray
+                    Me.TemperatureProfileCold = tcprof.ToArray
+                    Me.TemperatureProfileHot = thprof.ToArray
+
+                    Hc2 = Hc1 + dhc
+                    Q = dhc * Wc
+                    Tc2 = tcprof(tcprof.Count - 1)
+
+                    Dim tmp As IFlashCalculationResult
+
+                    DeltaHh = -Q / Wh
+                    Hh2 = Hh1 + DeltaHh
+                    StInHot.PropertyPackage.CurrentMaterialStream = StInHot
+                    If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]", Ph2, Hh2))
+                    tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Ph2, Hh2, 0)
+                    Th2 = tmp.CalculatedTemperature
+                    If DebugMode Then AppendDebugLine(String.Format("Calculated hot stream outlet temperature T2 = {0} K", Th2))
+
+                    Select Case Me.FlowDir
+                        Case FlowDirection.CoCurrent
+                            LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
+                        Case FlowDirection.CounterCurrent
+                            LMTD = ((Th1 - Tc2) - (Th2 - Tc1)) / Math.Log((Th1 - Tc2) / (Th2 - Tc1))
+                    End Select
+
+                    If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+
+                    U = Me.OverallCoefficient
+
+                    A = Q / (LMTD * U) * 1000
+
                 Case HeatExchangerCalcMode.CalcBothTemp_UA
+
                     Dim Qi, Q_old, PIc1, PIc2, PIh1, PIh2 As Double
                     Dim NTUh, NTUc, WWh, WWc, RRh, RRc, PPh, PPc As Double
                     Dim tmp As IFlashCalculationResult
