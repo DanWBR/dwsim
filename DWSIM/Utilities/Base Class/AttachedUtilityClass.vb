@@ -26,10 +26,31 @@
     Public Property InternalUtility As Interfaces.IAttachedUtility
 
     Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
+        Get
+            Return InternalUtility.AttachedTo
+        End Get
+        Set(value As Interfaces.ISimulationObject)
+            InternalUtility.AttachedTo = value
+        End Set
+    End Property
 
     Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
+        Get
+            Return InternalUtility.ID
+        End Get
+        Set(value As Integer)
+            InternalUtility.ID = value
+        End Set
+    End Property
 
     Public Property UtilityName As String Implements Interfaces.IAttachedUtility.Name
+        Get
+            Return InternalUtility.Name
+        End Get
+        Set(value As String)
+            InternalUtility.Name = value
+        End Set
+    End Property
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
         Return InternalUtility.GetPropertyUnits(pname)
@@ -288,5 +309,13 @@
         AutoUpdate = chkAutoUpdate.Checked
         InternalUtility.AutoUpdate = chkAutoUpdate.Checked
     End Sub
+
+    Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
+        InternalUtility.LoadData(data)
+    End Sub
+
+    Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
+        Return InternalUtility.SaveData
+    End Function
 
 End Class

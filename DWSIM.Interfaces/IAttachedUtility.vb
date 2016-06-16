@@ -20,4 +20,8 @@
 
     Property AutoUpdate As Boolean
 
+    Function SaveData() As Dictionary(Of String, Object)
+
+    Sub LoadData(data As Dictionary(Of String, Object))
+
 End Interface

@@ -1195,7 +1195,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
         Dim units = AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
-         Select pname
+        Select Case pname
             Case Me.Name1 + "_" + "Cricondentherm"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, Cricondentherm)
             Case Me.Name1 + "_" + "Cricondenbar"
@@ -1229,4 +1229,11 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
+    Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
+
+    End Sub
+
+    Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
+
+    End Function
 End Class
