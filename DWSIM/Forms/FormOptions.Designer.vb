@@ -61,6 +61,19 @@ Partial Class FormOptions
         Me.cbParallelism = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.chkEnableParallelCalcs = New System.Windows.Forms.CheckBox()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.ComboBoxPropPackCopyMode = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.ComboBoxCompoundCopyMode = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.chkEnableMultipleEditors = New System.Windows.Forms.CheckBox()
+        Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.chkCloseFormsOnDeselect = New System.Windows.Forms.CheckBox()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.CheckBoxUndoRedoRecalc = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem3 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.cbudb = New System.Windows.Forms.CheckBox()
@@ -93,18 +106,6 @@ Partial Class FormOptions
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.chkAutoUpdate = New System.Windows.Forms.CheckBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
-        Me.chkEnableMultipleEditors = New System.Windows.Forms.CheckBox()
-        Me.cbDefaultLocation = New System.Windows.Forms.ComboBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.chkCloseFormsOnDeselect = New System.Windows.Forms.CheckBox()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.CheckBoxUndoRedoRecalc = New System.Windows.Forms.CheckBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.ComboBoxPropPackCopyMode = New System.Windows.Forms.ComboBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ComboBoxCompoundCopyMode = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ComboBoxUILanguage = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -127,6 +128,10 @@ Partial Class FormOptions
         Me.GroupBoxNetworkComputerConfig.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox12.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
         Me.FaTabStripItem3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -137,9 +142,6 @@ Partial Class FormOptions
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
-        Me.GroupBox12.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -149,6 +151,7 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem1)
+        Me.FaTabStrip1.Controls.Add(Me.TabPage1)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem3)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem2)
         Me.FaTabStrip1.Controls.Add(Me.FaTabStripItem7)
@@ -158,6 +161,7 @@ Partial Class FormOptions
         'FaTabStripItem1
         '
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
+        Me.FaTabStripItem1.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
@@ -369,9 +373,100 @@ Partial Class FormOptions
         resources.ApplyResources(Me.chkEnableParallelCalcs, "chkEnableParallelCalcs")
         Me.chkEnableParallelCalcs.Name = "chkEnableParallelCalcs"
         '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.GroupBox5)
+        Me.TabPage1.Controls.Add(Me.GroupBox12)
+        Me.TabPage1.Controls.Add(Me.GroupBox11)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.ComboBoxPropPackCopyMode)
+        Me.GroupBox5.Controls.Add(Me.Label7)
+        Me.GroupBox5.Controls.Add(Me.ComboBoxCompoundCopyMode)
+        Me.GroupBox5.Controls.Add(Me.Label5)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.TabStop = False
+        '
+        'ComboBoxPropPackCopyMode
+        '
+        resources.ApplyResources(Me.ComboBoxPropPackCopyMode, "ComboBoxPropPackCopyMode")
+        Me.ComboBoxPropPackCopyMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxPropPackCopyMode.FormattingEnabled = True
+        Me.ComboBoxPropPackCopyMode.Items.AddRange(New Object() {resources.GetString("ComboBoxPropPackCopyMode.Items"), resources.GetString("ComboBoxPropPackCopyMode.Items1")})
+        Me.ComboBoxPropPackCopyMode.Name = "ComboBoxPropPackCopyMode"
+        '
+        'Label7
+        '
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        '
+        'ComboBoxCompoundCopyMode
+        '
+        resources.ApplyResources(Me.ComboBoxCompoundCopyMode, "ComboBoxCompoundCopyMode")
+        Me.ComboBoxCompoundCopyMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxCompoundCopyMode.FormattingEnabled = True
+        Me.ComboBoxCompoundCopyMode.Items.AddRange(New Object() {resources.GetString("ComboBoxCompoundCopyMode.Items"), resources.GetString("ComboBoxCompoundCopyMode.Items1")})
+        Me.ComboBoxCompoundCopyMode.Name = "ComboBoxCompoundCopyMode"
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'GroupBox12
+        '
+        resources.ApplyResources(Me.GroupBox12, "GroupBox12")
+        Me.GroupBox12.Controls.Add(Me.chkEnableMultipleEditors)
+        Me.GroupBox12.Controls.Add(Me.cbDefaultLocation)
+        Me.GroupBox12.Controls.Add(Me.Label14)
+        Me.GroupBox12.Controls.Add(Me.chkCloseFormsOnDeselect)
+        Me.GroupBox12.Name = "GroupBox12"
+        Me.GroupBox12.TabStop = False
+        '
+        'chkEnableMultipleEditors
+        '
+        resources.ApplyResources(Me.chkEnableMultipleEditors, "chkEnableMultipleEditors")
+        Me.chkEnableMultipleEditors.Name = "chkEnableMultipleEditors"
+        '
+        'cbDefaultLocation
+        '
+        resources.ApplyResources(Me.cbDefaultLocation, "cbDefaultLocation")
+        Me.cbDefaultLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDefaultLocation.FormattingEnabled = True
+        Me.cbDefaultLocation.Items.AddRange(New Object() {resources.GetString("cbDefaultLocation.Items"), resources.GetString("cbDefaultLocation.Items1")})
+        Me.cbDefaultLocation.Name = "cbDefaultLocation"
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        '
+        'chkCloseFormsOnDeselect
+        '
+        resources.ApplyResources(Me.chkCloseFormsOnDeselect, "chkCloseFormsOnDeselect")
+        Me.chkCloseFormsOnDeselect.Name = "chkCloseFormsOnDeselect"
+        '
+        'GroupBox11
+        '
+        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
+        Me.GroupBox11.Controls.Add(Me.CheckBoxUndoRedoRecalc)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.TabStop = False
+        '
+        'CheckBoxUndoRedoRecalc
+        '
+        resources.ApplyResources(Me.CheckBoxUndoRedoRecalc, "CheckBoxUndoRedoRecalc")
+        Me.CheckBoxUndoRedoRecalc.Name = "CheckBoxUndoRedoRecalc"
+        '
         'FaTabStripItem3
         '
         resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
+        Me.FaTabStripItem3.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox10)
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
@@ -553,6 +648,7 @@ Partial Class FormOptions
         'FaTabStripItem2
         '
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
+        Me.FaTabStripItem2.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
         '
@@ -580,6 +676,7 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'KryptonLabel3
         '
@@ -603,6 +700,7 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.KryptonButton1, "KryptonButton1")
         Me.KryptonButton1.Name = "KryptonButton1"
+        Me.KryptonButton1.UseVisualStyleBackColor = True
         '
         'KryptonTextBox1
         '
@@ -623,10 +721,8 @@ Partial Class FormOptions
         'FaTabStripItem7
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
+        Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox13)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox12)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox11)
-        Me.FaTabStripItem7.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
@@ -649,87 +745,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.chkUpdates, "chkUpdates")
         Me.chkUpdates.Name = "chkUpdates"
-        '
-        'GroupBox12
-        '
-        resources.ApplyResources(Me.GroupBox12, "GroupBox12")
-        Me.GroupBox12.Controls.Add(Me.chkEnableMultipleEditors)
-        Me.GroupBox12.Controls.Add(Me.cbDefaultLocation)
-        Me.GroupBox12.Controls.Add(Me.Label14)
-        Me.GroupBox12.Controls.Add(Me.chkCloseFormsOnDeselect)
-        Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.TabStop = False
-        '
-        'chkEnableMultipleEditors
-        '
-        resources.ApplyResources(Me.chkEnableMultipleEditors, "chkEnableMultipleEditors")
-        Me.chkEnableMultipleEditors.Name = "chkEnableMultipleEditors"
-        '
-        'cbDefaultLocation
-        '
-        resources.ApplyResources(Me.cbDefaultLocation, "cbDefaultLocation")
-        Me.cbDefaultLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDefaultLocation.FormattingEnabled = True
-        Me.cbDefaultLocation.Items.AddRange(New Object() {resources.GetString("cbDefaultLocation.Items"), resources.GetString("cbDefaultLocation.Items1")})
-        Me.cbDefaultLocation.Name = "cbDefaultLocation"
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.Name = "Label14"
-        '
-        'chkCloseFormsOnDeselect
-        '
-        resources.ApplyResources(Me.chkCloseFormsOnDeselect, "chkCloseFormsOnDeselect")
-        Me.chkCloseFormsOnDeselect.Name = "chkCloseFormsOnDeselect"
-        '
-        'GroupBox11
-        '
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
-        Me.GroupBox11.Controls.Add(Me.CheckBoxUndoRedoRecalc)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.TabStop = False
-        '
-        'CheckBoxUndoRedoRecalc
-        '
-        resources.ApplyResources(Me.CheckBoxUndoRedoRecalc, "CheckBoxUndoRedoRecalc")
-        Me.CheckBoxUndoRedoRecalc.Name = "CheckBoxUndoRedoRecalc"
-        '
-        'GroupBox5
-        '
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
-        Me.GroupBox5.Controls.Add(Me.ComboBoxPropPackCopyMode)
-        Me.GroupBox5.Controls.Add(Me.Label7)
-        Me.GroupBox5.Controls.Add(Me.ComboBoxCompoundCopyMode)
-        Me.GroupBox5.Controls.Add(Me.Label5)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.TabStop = False
-        '
-        'ComboBoxPropPackCopyMode
-        '
-        resources.ApplyResources(Me.ComboBoxPropPackCopyMode, "ComboBoxPropPackCopyMode")
-        Me.ComboBoxPropPackCopyMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxPropPackCopyMode.FormattingEnabled = True
-        Me.ComboBoxPropPackCopyMode.Items.AddRange(New Object() {resources.GetString("ComboBoxPropPackCopyMode.Items"), resources.GetString("ComboBoxPropPackCopyMode.Items1")})
-        Me.ComboBoxPropPackCopyMode.Name = "ComboBoxPropPackCopyMode"
-        '
-        'Label7
-        '
-        resources.ApplyResources(Me.Label7, "Label7")
-        Me.Label7.Name = "Label7"
-        '
-        'ComboBoxCompoundCopyMode
-        '
-        resources.ApplyResources(Me.ComboBoxCompoundCopyMode, "ComboBoxCompoundCopyMode")
-        Me.ComboBoxCompoundCopyMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxCompoundCopyMode.FormattingEnabled = True
-        Me.ComboBoxCompoundCopyMode.Items.AddRange(New Object() {resources.GetString("ComboBoxCompoundCopyMode.Items"), resources.GetString("ComboBoxCompoundCopyMode.Items1")})
-        Me.ComboBoxCompoundCopyMode.Name = "ComboBoxCompoundCopyMode"
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
         '
         'GroupBox1
         '
@@ -833,42 +848,43 @@ Partial Class FormOptions
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.FaTabStrip1)
-        Me.DoubleBuffered = true
+        Me.DoubleBuffered = True
         Me.Name = "FormOptions"
-        Me.FaTabStrip1.ResumeLayout(false)
-        Me.FaTabStripItem1.ResumeLayout(false)
-        Me.GroupBox2.ResumeLayout(false)
-        Me.GroupBox2.PerformLayout
-        Me.GroupBoxBGThreadConfig.ResumeLayout(false)
-        Me.GroupBoxBGThreadConfig.PerformLayout
-        Me.GroupBoxAzureConfig.ResumeLayout(false)
-        Me.GroupBoxAzureConfig.PerformLayout
-        Me.GroupBoxNetworkComputerConfig.ResumeLayout(false)
-        Me.GroupBoxNetworkComputerConfig.PerformLayout
-        Me.GroupBox7.ResumeLayout(false)
-        Me.GroupBox7.PerformLayout
-        Me.GroupBox8.ResumeLayout(false)
-        Me.GroupBox8.PerformLayout
-        Me.FaTabStripItem3.ResumeLayout(false)
-        Me.GroupBox4.ResumeLayout(false)
-        Me.GroupBox4.PerformLayout
-        CType(Me.dgvdb,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox10.ResumeLayout(false)
-        CType(Me.dgvIPDB,System.ComponentModel.ISupportInitialize).EndInit
-        Me.FaTabStripItem2.ResumeLayout(false)
-        Me.GroupBox3.ResumeLayout(false)
-        Me.GroupBox3.PerformLayout
-        CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.FaTabStripItem7.ResumeLayout(false)
-        Me.GroupBox13.ResumeLayout(false)
-        Me.GroupBox13.PerformLayout
-        Me.GroupBox12.ResumeLayout(false)
-        Me.GroupBox12.PerformLayout
-        Me.GroupBox11.ResumeLayout(false)
-        Me.GroupBox11.PerformLayout
-        Me.GroupBox5.ResumeLayout(false)
-        Me.GroupBox5.PerformLayout
-        Me.GroupBox1.ResumeLayout(false)
+        Me.FaTabStrip1.ResumeLayout(False)
+        Me.FaTabStripItem1.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBoxBGThreadConfig.ResumeLayout(False)
+        Me.GroupBoxBGThreadConfig.PerformLayout()
+        Me.GroupBoxAzureConfig.ResumeLayout(False)
+        Me.GroupBoxAzureConfig.PerformLayout()
+        Me.GroupBoxNetworkComputerConfig.ResumeLayout(False)
+        Me.GroupBoxNetworkComputerConfig.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox8.PerformLayout()
+        Me.TabPage1.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox12.ResumeLayout(False)
+        Me.GroupBox12.PerformLayout()
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
+        Me.FaTabStripItem3.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox10.ResumeLayout(False)
+        CType(Me.dgvIPDB, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FaTabStripItem2.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox13.ResumeLayout(False)
+        Me.GroupBox13.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout
         Me.GroupBox9.ResumeLayout(false)
         Me.GroupBox9.PerformLayout
@@ -969,4 +985,5 @@ End Sub
     Public WithEvents chkAutoUpdate As System.Windows.Forms.CheckBox
     Public WithEvents chkUpdates As System.Windows.Forms.CheckBox
     Public WithEvents chkEnableMultipleEditors As System.Windows.Forms.CheckBox
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
 End Class

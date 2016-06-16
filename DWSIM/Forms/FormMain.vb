@@ -721,7 +721,6 @@ Public Class FormMain
     Private Function GetComponents()
 
         'try to find chemsep xml database
-
         Me.LoadCSDB()
 
         'load DWSIM XML database

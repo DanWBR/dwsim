@@ -130,20 +130,11 @@
   <data name="chkSolverBreak.Text" xml:space="preserve">
     <value>Break calculation when an exception is thrown</value>
   </data>
-  <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 52</value>
-  </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>seconds</value>
-  </data>
-  <data name="tbSolverTimeout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 49</value>
-  </data>
-  <data name="tbSolverTimeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 21</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -164,10 +155,10 @@
     <value>Network Computer</value>
   </data>
   <data name="cbSolverMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 20</value>
+    <value>131, 20</value>
   </data>
   <data name="cbSolverMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 21</value>
+    <value>196, 21</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -175,17 +166,11 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Calculation Mode</value>
   </data>
-  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 51</value>
-  </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>x 'CPU cores'</value>
-  </data>
-  <data name="tbMaxThreadMultiplier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 47</value>
   </data>
   <data name="cbTaskScheduler.Items" xml:space="preserve">
     <value>Default (.NET/Mono)</value>
@@ -194,10 +179,10 @@
     <value>Limited Concurrency</value>
   </data>
   <data name="cbTaskScheduler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 20</value>
+    <value>120, 20</value>
   </data>
   <data name="cbTaskScheduler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 21</value>
+    <value>188, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
@@ -257,10 +242,10 @@
     <value>OpenCL/CUDA device info</value>
   </data>
   <data name="cbGPU.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 123</value>
+    <value>131, 123</value>
   </data>
   <data name="cbGPU.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 21</value>
+    <value>201, 21</value>
   </data>
   <data name="chkEnableGPUProcessing.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 17</value>
@@ -283,8 +268,68 @@
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Local Calculation Engine Settings</value>
   </data>
-  <data name="cbudb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 252</value>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 711</value>
+  </data>
+  <data name="ComboBoxPropPackCopyMode.Items" xml:space="preserve">
+    <value>Do not copy, use default</value>
+  </data>
+  <data name="ComboBoxPropPackCopyMode.Items1" xml:space="preserve">
+    <value>Copy and associate</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Property Packages</value>
+  </data>
+  <data name="ComboBoxCompoundCopyMode.Items" xml:space="preserve">
+    <value>Do not copy, keep existent</value>
+  </data>
+  <data name="ComboBoxCompoundCopyMode.Items1" xml:space="preserve">
+    <value>Copy and associate non-existent</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Compounds</value>
+  </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Cut/Copy/Paste Flowsheet Objects</value>
+  </data>
+  <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
+  </data>
+  <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
+    <value>Enable multiple editors</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 13</value>
+  </data>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Default initial placement</value>
+  </data>
+  <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 17</value>
+  </data>
+  <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
+    <value>Close editors on deselecting</value>
+  </data>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Flowsheet Object Editors</value>
+  </data>
+  <data name="CheckBoxUndoRedoRecalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 17</value>
+  </data>
+  <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
+    <value>Recalculate flowsheet when undoing/redoing actions</value>
+  </data>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Undo/Redo</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Flowsheet</value>
   </data>
   <data name="cbudb.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 17</value>
@@ -326,26 +371,11 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="dgvdb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 225</value>
-  </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 248</value>
-  </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 23</value>
-  </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Add User Database</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 283</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>User Compound Datasets</value>
-  </data>
-  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 378</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add user database</value>
@@ -367,17 +397,11 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="dgvIPDB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 355</value>
-  </data>
-  <data name="GroupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 295</value>
-  </data>
-  <data name="GroupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 407</value>
-  </data>
   <data name="GroupBox10.Text" xml:space="preserve">
     <value>Interaction Parameter Datasets</value>
+  </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 711</value>
   </data>
   <data name="FaTabStripItem3.Text" xml:space="preserve">
     <value>Datasets</value>
@@ -418,11 +442,11 @@
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Backup Copies</value>
   </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 711</value>
+  </data>
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
-  </data>
-  <data name="chkAutoUpdate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 49</value>
   </data>
   <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 17</value>
@@ -430,86 +454,20 @@
   <data name="chkAutoUpdate.Text" xml:space="preserve">
     <value>Enable automatic updates</value>
   </data>
-  <data name="chkUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 22</value>
-  </data>
   <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 17</value>
   </data>
   <data name="chkUpdates.Text" xml:space="preserve">
     <value>Check for updates on startup</value>
   </data>
-  <data name="GroupBox13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 83</value>
-  </data>
   <data name="GroupBox13.Text" xml:space="preserve">
     <value>Updates</value>
   </data>
-  <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 17</value>
+  <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 25</value>
   </data>
-  <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
-    <value>Enable multiple editors</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 13</value>
-  </data>
-  <data name="Label14.Text" xml:space="preserve">
-    <value>Default initial placement</value>
-  </data>
-  <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 17</value>
-  </data>
-  <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
-    <value>Close editors on deselecting</value>
-  </data>
-  <data name="GroupBox12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 388</value>
-  </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Flowsheet Object Editors</value>
-  </data>
-  <data name="CheckBoxUndoRedoRecalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 17</value>
-  </data>
-  <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
-    <value>Recalculate flowsheet when undoing/redoing actions</value>
-  </data>
-  <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 328</value>
-  </data>
-  <data name="GroupBox11.Text" xml:space="preserve">
-    <value>Undo/Redo</value>
-  </data>
-  <data name="ComboBoxPropPackCopyMode.Items" xml:space="preserve">
-    <value>Do not copy, use default</value>
-  </data>
-  <data name="ComboBoxPropPackCopyMode.Items1" xml:space="preserve">
-    <value>Copy and associate</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 13</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Property Packages</value>
-  </data>
-  <data name="ComboBoxCompoundCopyMode.Items" xml:space="preserve">
-    <value>Do not copy, keep existent</value>
-  </data>
-  <data name="ComboBoxCompoundCopyMode.Items1" xml:space="preserve">
-    <value>Copy and associate non-existent</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Compounds</value>
-  </data>
-  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 240</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Cut/Copy/Paste Flowsheet Objects</value>
+  <data name="ComboBoxUILanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 21</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -517,14 +475,8 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 176</value>
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>UI Language</value>
-  </data>
-  <data name="chkShowWhatsNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 50</value>
   </data>
   <data name="chkShowWhatsNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 17</value>
@@ -537,9 +489,6 @@
   </data>
   <data name="KryptonCheckBox1.Text" xml:space="preserve">
     <value>Show tips</value>
-  </data>
-  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>340, 83</value>
   </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Messages</value>
@@ -556,6 +505,12 @@
   <data name="cbDebugLevel.Items3" xml:space="preserve">
     <value>High</value>
   </data>
+  <data name="cbDebugLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 23</value>
+  </data>
+  <data name="cbDebugLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 21</value>
+  </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 13</value>
   </data>
@@ -568,11 +523,11 @@
   <data name="chkconsole.Text" xml:space="preserve">
     <value>Redirect console output</value>
   </data>
-  <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 92</value>
-  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Debug mode</value>
+  </data>
+  <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 711</value>
   </data>
   <data name="FaTabStripItem7.Text" xml:space="preserve">
     <value>Other</value>
@@ -582,7 +537,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAfwBBgH8AQYBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAegBBwHoAQcBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
