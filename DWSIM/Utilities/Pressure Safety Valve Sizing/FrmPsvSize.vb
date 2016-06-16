@@ -29,11 +29,6 @@ Public Class FrmPsvSize
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat
 
-        Me.ComboBox3.Items.Clear()
-        Me.ComboBox3.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
-        Me.ComboBox3.SelectedIndex = 0
-        Me.ComboBox3.Enabled = False
-
         Me.ComboBox2.SelectedIndex = 0
 
         Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDimen")
@@ -49,6 +44,8 @@ Public Class FrmPsvSize
         TextBox10.Text = Format(0.85#, "0.00")
         TextBox9.Text = Format(1.0#, "0.00")
         TextBox6.Text = Format(1.0#, "0.00")
+
+        Calculate()
 
     End Sub
 
@@ -174,56 +171,47 @@ Public Class FrmPsvSize
 
     End Sub
 
-    Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Calculate()
 
-        If Not Me.ComboBox3.SelectedItem Is Nothing Then
-
-            Dim gobj As DrawingTools.GraphicObjects.GraphicObject = FormFlowsheet.SearchSurfaceObjectsByTag(Me.ComboBox3.SelectedItem, Frm.FormSurface.FlowsheetDesignSurface)
-            Me.valve = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
-            Me.LblSelected.Text = Me.valve.GraphicObject.Tag
-            Me.entmat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            Me.saimat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+ 
+        Dim gobj As DrawingTools.GraphicObjects.GraphicObject = AttachedTo.GraphicObject
+        Me.valve = Frm.Collections.FlowsheetObjectCollection(gobj.Name)
+        Me.entmat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+        Me.saimat = Frm.Collections.FlowsheetObjectCollection(Me.valve.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
 
-            Me.TextBox1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, entmat.Phases(0).Properties.temperature), nf)
-            Me.TextBox2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, entmat.Phases(0).Properties.pressure), nf)
-            Me.TextBox4.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, saimat.Phases(0).Properties.pressure), nf)
+        Me.TextBox1.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, entmat.Phases(0).Properties.temperature), nf)
+        Me.TextBox2.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, entmat.Phases(0).Properties.pressure), nf)
+        Me.TextBox4.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, saimat.Phases(0).Properties.pressure), nf)
 
-            Me.TextBox8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault), nf)
-            Me.TextBox7.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault), nf)
-            Me.TextBox5.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault), nf)
+        Me.TextBox8.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault), nf)
+        Me.TextBox7.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault), nf)
+        Me.TextBox5.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault), nf)
 
-            'Gas
-            'Liquido
-            'Gas + Liquido (Bifasico)
+        'Gas
+        'Liquido
+        'Gas + Liquido (Bifasico)
 
-            If entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault = 0 Then
-                ComboBox1.Items.Clear()
-            Else
-                If entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault = 0 And _
-                        entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault <> 0 Then
-                    ComboBox1.Items.Clear()
-                    ComboBox1.Items.Add(DWSIM.App.GetLocalString("Lquido"))
-                    ComboBox1.SelectedIndex = 0
-                ElseIf entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault <> 0 And _
-                        entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault = 0 Then
-                    ComboBox1.Items.Clear()
-                    ComboBox1.Items.Add(DWSIM.App.GetLocalString("Vapor"))
-                    ComboBox1.SelectedIndex = 0
-                Else
-                    ComboBox1.Items.Clear()
-                    ComboBox1.Items.Add(DWSIM.App.GetLocalString("Vapor"))
-                    ComboBox1.Items.Add(DWSIM.App.GetLocalString("Lquido"))
-                    ComboBox1.Items.Add(DWSIM.App.GetLocalString("GsLquidoBifsico"))
-                    ComboBox1.SelectedIndex = 0
-                End If
-
-            End If
-
+        If entmat.Phases(0).Properties.volumetric_flow.GetValueOrDefault = 0 Then
+            ComboBox1.Items.Clear()
         Else
-
-            Me.valve = Nothing
-            Me.LblSelected.Text = ""
+            If entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault = 0 And _
+                    entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault <> 0 Then
+                ComboBox1.Items.Clear()
+                ComboBox1.Items.Add(DWSIM.App.GetLocalString("Lquido"))
+                ComboBox1.SelectedIndex = 0
+            ElseIf entmat.Phases(2).Properties.volumetric_flow.GetValueOrDefault <> 0 And _
+                    entmat.Phases(3).Properties.volumetric_flow.GetValueOrDefault = 0 Then
+                ComboBox1.Items.Clear()
+                ComboBox1.Items.Add(DWSIM.App.GetLocalString("Vapor"))
+                ComboBox1.SelectedIndex = 0
+            Else
+                ComboBox1.Items.Clear()
+                ComboBox1.Items.Add(DWSIM.App.GetLocalString("Vapor"))
+                ComboBox1.Items.Add(DWSIM.App.GetLocalString("Lquido"))
+                ComboBox1.Items.Add(DWSIM.App.GetLocalString("GsLquidoBifsico"))
+                ComboBox1.SelectedIndex = 0
+            End If
 
         End If
 

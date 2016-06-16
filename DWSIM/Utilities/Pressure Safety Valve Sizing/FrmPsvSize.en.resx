@@ -130,8 +130,14 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Relieved Phase (Fluid)</value>
   </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 3</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Sizing Method</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 85</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Relieving Conditions</value>
@@ -157,14 +163,20 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Temperature</value>
   </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 166</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Relieving Flow Rates</value>
+  </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Liquid</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Relieving Flow Rates</value>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 266</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Constants</value>
@@ -177,6 +189,9 @@
   </data>
   <data name="TextBox10.Text" xml:space="preserve">
     <value>0.85</value>
+  </data>
+  <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 266</value>
   </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Sizing</value>
@@ -208,25 +223,7 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>PSV Orifice Area</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Configure</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 14</value>
-  </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 19</value>
-  </data>
-  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
-  </data>
-  <data name="Label23.Text" xml:space="preserve">
-    <value>Valve</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Relief Valve (PSV) - Sizing</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>506, 373</value>
   </data>
 </root>

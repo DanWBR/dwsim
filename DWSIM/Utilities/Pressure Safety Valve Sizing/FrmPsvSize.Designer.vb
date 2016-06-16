@@ -63,17 +63,11 @@ Partial Class FrmPsvSize
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox11 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.LblSelected = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -89,9 +83,9 @@ Partial Class FrmPsvSize
         '
         'ComboBox2
         '
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 325
+        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items")})
         Me.ComboBox2.Name = "ComboBox2"
         '
@@ -102,9 +96,9 @@ Partial Class FrmPsvSize
         '
         'ComboBox1
         '
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 325
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Name = "ComboBox1"
         '
         'Label1
@@ -260,7 +254,6 @@ Partial Class FrmPsvSize
         '
         'GroupBox4
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox4.Controls.Add(Me.TextBox6)
         Me.GroupBox4.Controls.Add(Me.Label19)
@@ -268,6 +261,7 @@ Partial Class FrmPsvSize
         Me.GroupBox4.Controls.Add(Me.TextBox10)
         Me.GroupBox4.Controls.Add(Me.Label21)
         Me.GroupBox4.Controls.Add(Me.Label22)
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -327,8 +321,8 @@ Partial Class FrmPsvSize
         '
         'TextBox12
         '
-        resources.ApplyResources(Me.TextBox12, "TextBox12")
         Me.TextBox12.BackColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.TextBox12, "TextBox12")
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.ReadOnly = True
         '
@@ -344,8 +338,8 @@ Partial Class FrmPsvSize
         '
         'TextBox11
         '
-        resources.ApplyResources(Me.TextBox11, "TextBox11")
         Me.TextBox11.BackColor = System.Drawing.SystemColors.Control
+        resources.ApplyResources(Me.TextBox11, "TextBox11")
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.ReadOnly = True
         '
@@ -354,43 +348,10 @@ Partial Class FrmPsvSize
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
         '
-        'GroupBox6
-        '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.LblSelected)
-        Me.GroupBox6.Controls.Add(Me.Button1)
-        Me.GroupBox6.Controls.Add(Me.ComboBox3)
-        Me.GroupBox6.Controls.Add(Me.Label23)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.TabStop = False
-        '
-        'LblSelected
-        '
-        resources.ApplyResources(Me.LblSelected, "LblSelected")
-        Me.LblSelected.Name = "LblSelected"
-        '
-        'Button1
-        '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        '
-        'ComboBox3
-        '
-        resources.ApplyResources(Me.ComboBox3, "ComboBox3")
-        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox3.DropDownWidth = 165
-        Me.ComboBox3.Name = "ComboBox3"
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
-        '
         'FrmPsvSize
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox3)
@@ -408,8 +369,6 @@ Partial Class FrmPsvSize
         Me.GroupBox4.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -456,9 +415,4 @@ Partial Class FrmPsvSize
     Public WithEvents Label20 As System.Windows.Forms.Label
     Public WithEvents Label24 As System.Windows.Forms.Label
     Public WithEvents KryptonButton1 As System.Windows.Forms.Button
-    Public WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Public WithEvents LblSelected As System.Windows.Forms.Label
-    Public WithEvents Button1 As System.Windows.Forms.Button
-    Public WithEvents ComboBox3 As System.Windows.Forms.ComboBox
-    Public WithEvents Label23 As System.Windows.Forms.Label
 End Class

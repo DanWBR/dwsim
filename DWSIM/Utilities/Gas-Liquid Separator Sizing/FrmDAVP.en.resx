@@ -125,7 +125,7 @@
     <value>134, 23</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
-    <value>Select and Calculate</value>
+    <value>Calculate</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 19</value>
@@ -138,6 +138,12 @@
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Configure</value>
+  </data>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
   <data name="Label41.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 13</value>
@@ -169,8 +175,8 @@
   <data name="Label48.Text" xml:space="preserve">
     <value>Inlet Noozle</value>
   </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Results</value>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Input Data</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -184,11 +190,8 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Vapor:</value>
   </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Input Data</value>
-  </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Details</value>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Criteria</value>
   </data>
   <data name="ComboBoxTipoVaso.Location" type="System.Drawing.Point, System.Drawing">
     <value>361, 81</value>
@@ -262,7 +265,7 @@
   <data name="Label30.Text" xml:space="preserve">
     <value>L/D Ratio</value>
   </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Criteria</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>564, 339</value>
   </data>
 </root>

@@ -2,6 +2,7 @@
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
+Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class EditingForm_Valve
 
@@ -16,7 +17,7 @@ Public Class EditingForm_Valve
 
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-         UpdateInfo()
+        UpdateInfo()
 
     End Sub
 
@@ -364,5 +365,40 @@ Public Class EditingForm_Valve
         RequestCalc()
 
     End Sub
+    Private Sub btnUtils_Click(sender As Object, e As EventArgs) Handles btnUtils.Click
+        UtilitiesCtxMenu.Show(btnUtils, New Drawing.Point(20, 0))
+    End Sub
+
+    Private Sub sizingtsmi_Click(sender As Object, e As EventArgs) Handles sizingtsmi.Click
+
+        Dim utility As Interfaces.IAttachedUtility = SimObject.FlowSheet.GetUtility(Enums.FlowsheetUtility.PSVSizing)
+        utility.Name = "PressureSafetyValveSizing" & (SimObject.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.PSVSizing).Count + 1).ToString
+
+        utility.AttachedTo = SimObject
+
+        With DirectCast(utility, DockContent)
+            .ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        End With
+
+        SimObject.AttachedUtilities.Add(utility)
+        SimObject.FlowSheet.DisplayForm(utility)
+
+        AddHandler DirectCast(utility, Form).FormClosed, Sub()
+                                                             utility.AttachedTo = Nothing
+                                                             SimObject.AttachedUtilities.Remove(utility)
+                                                         End Sub
+    End Sub
+
+    Private Sub UtilitiesCtxMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles UtilitiesCtxMenu.Opening
+
+        For Each item In SimObject.AttachedUtilities
+            Dim ts As New ToolStripMenuItem(item.Name)
+            AddHandler ts.Click, Sub() DirectCast(item, Form).Select()
+            UtilitiesCtxMenu.Items.Add(ts)
+            AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
+        Next
+
+    End Sub
+
 
 End Class

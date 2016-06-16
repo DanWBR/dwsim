@@ -76,6 +76,7 @@ Partial Class EditingForm_Separator
         Me.tbTemperature = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.lblConnectedTo = New System.Windows.Forms.Label()
@@ -93,12 +94,16 @@ Partial Class EditingForm_Separator
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.UtilitiesCtxMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddUtilityTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.sizingtsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.UtilitiesCtxMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -505,6 +510,7 @@ Partial Class EditingForm_Separator
         'GroupBox5
         '
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
+        Me.GroupBox5.Controls.Add(Me.btnUtils)
         Me.GroupBox5.Controls.Add(Me.lblTag)
         Me.GroupBox5.Controls.Add(Me.chkActive)
         Me.GroupBox5.Controls.Add(Me.lblConnectedTo)
@@ -514,6 +520,14 @@ Partial Class EditingForm_Separator
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        '
+        'btnUtils
+        '
+        resources.ApplyResources(Me.btnUtils, "btnUtils")
+        Me.btnUtils.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_sparkle
+        Me.btnUtils.Name = "btnUtils"
+        Me.ToolTip1.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip"))
+        Me.btnUtils.UseVisualStyleBackColor = True
         '
         'lblTag
         '
@@ -619,6 +633,25 @@ Partial Class EditingForm_Separator
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         '
+        'UtilitiesCtxMenu
+        '
+        Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
+        Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
+        resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
+        '
+        'AddUtilityTSMI
+        '
+        Me.AddUtilityTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.sizingtsmi})
+        Me.AddUtilityTSMI.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        Me.AddUtilityTSMI.Name = "AddUtilityTSMI"
+        resources.ApplyResources(Me.AddUtilityTSMI, "AddUtilityTSMI")
+        '
+        'sizingtsmi
+        '
+        Me.sizingtsmi.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.sizingtsmi.Name = "sizingtsmi"
+        resources.ApplyResources(Me.sizingtsmi, "sizingtsmi")
+        '
         'EditingForm_Separator
         '
         resources.ApplyResources(Me, "$this")
@@ -636,6 +669,7 @@ Partial Class EditingForm_Separator
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.UtilitiesCtxMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -708,4 +742,8 @@ Partial Class EditingForm_Separator
     Friend WithEvents btnCreateAndConnectInlet3 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet2 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
+    Friend WithEvents btnUtils As System.Windows.Forms.Button
+    Friend WithEvents UtilitiesCtxMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents AddUtilityTSMI As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents sizingtsmi As System.Windows.Forms.ToolStripMenuItem
 End Class

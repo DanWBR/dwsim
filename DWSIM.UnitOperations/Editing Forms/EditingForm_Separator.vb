@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
+Imports WeifenLuo.WinFormsUI.Docking
 
 Public Class EditingForm_Separator
 
@@ -354,7 +355,7 @@ Public Class EditingForm_Separator
 
         If sender Is tbTemperature Then VesselObject.FlashTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbTemperature.Text)
         If sender Is tbPressure Then VesselObject.FlashPressure = su.Converter.ConvertToSI(cbPress.SelectedItem.ToString, tbPressure.Text)
-      
+
         RequestCalc()
 
     End Sub
@@ -495,5 +496,39 @@ Public Class EditingForm_Separator
 
     End Sub
 
+    Private Sub btnUtils_Click(sender As Object, e As EventArgs) Handles btnUtils.Click
+        UtilitiesCtxMenu.Show(btnUtils, New Drawing.Point(20, 0))
+    End Sub
+
+    Private Sub sizingtsmi_Click(sender As Object, e As EventArgs) Handles sizingtsmi.Click
+
+        Dim utility As Interfaces.IAttachedUtility = VesselObject.FlowSheet.GetUtility(Enums.FlowsheetUtility.SeparatorSizing)
+        utility.Name = "VesselSizing" & (VesselObject.AttachedUtilities.Where(Function(x) x.GetUtilityType = Interfaces.Enums.FlowsheetUtility.SeparatorSizing).Count + 1).ToString
+
+        utility.AttachedTo = VesselObject
+
+        With DirectCast(utility, DockContent)
+            .ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        End With
+
+        VesselObject.AttachedUtilities.Add(utility)
+        VesselObject.FlowSheet.DisplayForm(utility)
+
+        AddHandler DirectCast(utility, Form).FormClosed, Sub()
+                                                             utility.AttachedTo = Nothing
+                                                             VesselObject.AttachedUtilities.Remove(utility)
+                                                         End Sub
+    End Sub
+
+    Private Sub UtilitiesCtxMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles UtilitiesCtxMenu.Opening
+
+        For Each item In VesselObject.AttachedUtilities
+            Dim ts As New ToolStripMenuItem(item.Name)
+            AddHandler ts.Click, Sub() DirectCast(item, Form).Select()
+            UtilitiesCtxMenu.Items.Add(ts)
+            AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
+        Next
+
+    End Sub
 
 End Class
