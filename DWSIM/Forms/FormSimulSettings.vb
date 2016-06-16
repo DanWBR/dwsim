@@ -1527,4 +1527,15 @@ Public Class FormSimulSettings
             FrmChild.Options.FlashAlgorithms(e.RowIndex).Tag = dgvAddedFlashAlgos.Rows(e.RowIndex).Cells(0).Value
         End If
     End Sub
+
+    Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
+        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.NotSelectedComponents(ogc1.SelectedRows(0).Cells(0).Value)}
+        FrmChild.DisplayForm(f)
+    End Sub
+
+    Private Sub btnInfoRight_Click(sender As Object, e As EventArgs) Handles btnInfoRight.Click
+        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
+        FrmChild.DisplayForm(f)
+    End Sub
+
 End Class

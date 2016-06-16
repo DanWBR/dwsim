@@ -3,6 +3,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.IO
 Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
+Imports System.Linq
 
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
 '              2013-2014 Gregor Reichert
@@ -24,15 +25,15 @@ Imports DWSIM.Thermodynamics.Streams
 
 Public Class FormPureComp
 
-    Inherits UserControl
-
-    Implements Interfaces.IAttachedUtility
+    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Dim MatStream As Streams.MaterialStream
 
     Public Flowsheet As FormFlowsheet
 
-    Public OnlyViewing As Boolean = True
+    Public MyCompound As ConstantProperties
+
+    Public Added As Boolean = False
 
     Dim vxCp, vyCp, vxPvap, vyPvap, vxVisc, vyVisc, vxDHvap, vyDHvap, vxLD, vyLD, vxSD, vySD, vxSCP, vySCP, vxVapVisc,
         vyVapVisc, vxVapThCond, vyVapThCond, vxLiqThCond, vyLiqThCond, vxSurfTens, vySurfTens, vxLiqCp, vyLiqCp As New ArrayList
@@ -40,20 +41,19 @@ Public Class FormPureComp
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Flowsheet = AttachedTo.GetFlowsheet
+        Me.Text = Me.Text & " - " & MyCompound.Name
 
-        OnlyViewing = False
-        If constprop Is Nothing Then
-            OnlyViewing = True
+        chkEnableEdit.Enabled = Added
 
-            With Me.Flowsheet
-                Dim subst As BaseClasses.ConstantProperties
-                Me.ComboBox1.Items.Clear()
-                For Each subst In .Options.SelectedComponents.Values
-                    Me.ComboBox1.Items.Add((subst.Name) + " [" + subst.Name + "]")
-                Next
-            End With
-        End If
+        Me.ComboBox1.Items.Clear()
+        Me.ComboBox1.Items.Add(MyCompound.Name)
+        Me.ComboBox1.SelectedIndex = 0
+        Me.ComboBox1.Enabled = False
+
+        constprop = MyCompound
+        SetCompStatus()
+
+        Populate()
 
     End Sub
 
@@ -62,12 +62,18 @@ Public Class FormPureComp
         Dim su As SystemsOfUnits.Units = Flowsheet.Options.SelectedUnitSystem
         Dim cv As New SystemsOfUnits.Converter
         Dim nf As String = Flowsheet.Options.NumberFormat
-        Dim pp As PropertyPackages.PropertyPackage = Flowsheet.Options.SelectedPropertyPackage
+        Dim pp As New PropertyPackages.RaoultPropertyPackage(False)
 
-        Me.MatStream = New MaterialStream("", "", Flowsheet, Flowsheet.PropertyPackages(0))
+        Me.MatStream = New MaterialStream("", "", Flowsheet, pp)
 
-        'add simulation compounds to the dummy material stream
-        Me.Flowsheet.AddComponentsRows(Me.MatStream)
+        'add compound to the dummy material stream
+        For Each phase As BaseClasses.Phase In MatStream.Phases.Values
+            With phase
+                .Compounds.Add(MyCompound.Name, New BaseClasses.Compound(MyCompound.Name, ""))
+                .Compounds(MyCompound.Name).ConstantProperties = MyCompound
+            End With
+        Next
+        DirectCast(MatStream, Streams.MaterialStream).EqualizeOverallComposition()
 
         pp.CurrentMaterialStream = MatStream
 
@@ -747,16 +753,6 @@ Public Class FormPureComp
 
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
-        If OnlyViewing = True Or constprop Is Nothing Then
-            Dim name As String = ComboBox1.SelectedItem.ToString.Substring(ComboBox1.SelectedItem.ToString.IndexOf("[") + 1, ComboBox1.SelectedItem.ToString.Length - ComboBox1.SelectedItem.ToString.IndexOf("[") - 2)
-            constprop = Nothing
-            constprop = Me.Flowsheet.Options.SelectedComponents(name)
-            SetCompStatus()
-        End If
-        Populate()
-    End Sub
-
     Private Sub GridProps_CellEndEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridProps.CellEndEdit
 
         Dim cv As New SystemsOfUnits.Converter
@@ -878,10 +874,8 @@ Public Class FormPureComp
     End Sub
     Private Sub chkEnableEdit_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkEnableEdit.CheckedChanged
         If chkEnableEdit.Checked Then
-            Me.ComboBox1.Enabled = False
             Colorize(False)
         Else
-            Me.ComboBox1.Enabled = True
             Colorize(True)
         End If
     End Sub
@@ -999,37 +993,5 @@ Public Class FormPureComp
     Private Sub FormPureComp_HelpRequested(sender As System.Object, hlpevent As System.Windows.Forms.HelpEventArgs) Handles MyBase.HelpRequested
         DWSIM.App.HelpRequested("UT_PureCompProps.htm")
     End Sub
-
-    Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
-
-    Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
-        Return New List(Of String)
-    End Function
-
-    Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
-        Return ""
-    End Function
-
-    Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
-        Return ""
-    End Function
-
-    Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
-
-    Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
-
-    Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
-
-    End Sub
-
-    Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
-
-    End Sub
-
-    Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
-        Return FlowsheetUtility.PureCompoundProperties
-    End Function
-
-    Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
 End Class
