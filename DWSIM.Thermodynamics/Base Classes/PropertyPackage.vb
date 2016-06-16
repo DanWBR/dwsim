@@ -3426,7 +3426,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Dim x, y1, y2, Test1, Test2 As Double
                     Dim tmp1 As Object = Nothing, tmp2 As Object = Nothing
 
-                    'If VLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE And Not Me.FlashAlgorithm = FlashMethod.NestedLoopsSLE_SS Then
+                    'If VLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE_SS Then
                     If VLE Then
                         i = 0
                         Do
@@ -3478,11 +3478,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                    If LLE And Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+                    If LLE And Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
 
-                        If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 Or
-                            Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.GibbsMinimization3P Or
-                            Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P Then
+                        If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoops3PV3 And
+                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.GibbsMinimization3P And
+                            Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.BostonFournierInsideOut3P Then
 
                             Throw New Exception(Calculator.GetLocalString("UnsuitableFlashAlgorithmSelected"))
 
@@ -3627,13 +3627,13 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                 Case "P-x-y"
 
-                        Dim px, py1, py2, px1l1, px1l2, py3 As New ArrayList
-                        Dim unstable As Boolean = False
-                        Dim ui, up As New ArrayList
-                        Dim x, y1, y2, Pest1, Pest2 As Double
-                        Dim tmp As Object = Nothing
+                    Dim px, py1, py2, px1l1, px1l2, py3 As New ArrayList
+                    Dim unstable As Boolean = False
+                    Dim ui, up As New ArrayList
+                    Dim x, y1, y2, Pest1, Pest2 As Double
+                    Dim tmp As Object = Nothing
 
-                    If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+                    If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
 
                         i = 0
                         Do
@@ -3698,16 +3698,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     End If
 
-                        Return New Object() {px, py1, py2, px1l1, px1l2, py3}
+                    Return New Object() {px, py1, py2, px1l1, px1l2, py3}
 
                 Case "(T)x-y"
 
-                        Dim px, py As New ArrayList
-                        Dim Test1 As Double
-                        Dim x, y As Double
-                        Dim tmp As Object = Nothing
+                    Dim px, py As New ArrayList
+                    Dim Test1 As Double
+                    Dim x, y As Double
+                    Dim tmp As Object = Nothing
 
-                    If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+                    If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
                             If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
@@ -3731,17 +3731,17 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                        Return New Object() {px, py}
+                    Return New Object() {px, py}
 
                 Case Else
 
-                        Dim px, py As New ArrayList
+                    Dim px, py As New ArrayList
 
-                        Dim Pest1 As Double
-                        Dim x, y As Double
-                        Dim tmp As Object = Nothing
+                    Dim Pest1 As Double
+                    Dim x, y As Double
+                    Dim tmp As Object = Nothing
 
-                    If Not TypeOf Me.FlashAlgorithm Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+                    If Not TypeOf Me.FlashBase Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                         i = 0
                         Do
                             If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/42)")
@@ -3765,7 +3765,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         Loop Until (i - 1) * dx >= 1
                     End If
 
-                        Return New Object() {px, py}
+                    Return New Object() {px, py}
 
             End Select
 

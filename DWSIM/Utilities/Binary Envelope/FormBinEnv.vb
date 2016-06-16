@@ -244,6 +244,8 @@ Public Class FormBinEnv
 
         Me.GraphControl.GraphPane.CurveList.Clear()
 
+        If e.Error IsNot Nothing Then Throw e.Error
+
         Dim c(1) As String
         c(0) = cbComp1.SelectedItem.ToString
         c(1) = cbComp2.SelectedItem.ToString
