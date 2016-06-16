@@ -24,4 +24,6 @@
 
     Sub LoadData(data As Dictionary(Of String, Object))
 
+    Sub Initialize()
+
 End Interface

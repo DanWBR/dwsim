@@ -384,7 +384,7 @@ Namespace UnitOperations
                     Dim u = FlowSheet.GetUtility(xel.Element("UtilityType").Value)
                     u.ID = xel.Element("ID").Value
                     u.Name = xel.Element("Name").Value
-                    u.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value))
+                    u.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(xel.Element("Data").Value))
                     Me.AttachedUtilities.Add(u)
                 Next
             End If
