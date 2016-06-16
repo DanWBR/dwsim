@@ -1280,4 +1280,10 @@
   <data name="PROP_PF_8" xml:space="preserve">
     <value>Carga térmica</value>
   </data>
+  <data name="PROP_HX_27" xml:space="preserve">
+    <value>Diferença Mínima entre Temperaturas</value>
+  </data>
+  <data name="PROP_PS_7" xml:space="preserve">
+    <value>Gradiente de Temperatura Ambiente</value>
+  </data>
 </root>

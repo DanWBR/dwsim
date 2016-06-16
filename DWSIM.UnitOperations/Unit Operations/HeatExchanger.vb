@@ -460,7 +460,10 @@ Namespace UnitOperations
 
                         If Double.IsNaN(fx) Or Double.IsNaN(dhc) Then Throw New Exception("Error calculating temperature profile.")
 
-                        If cntint > 50 Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Reached maximum number of iterations without converging. Check if the current MITA is consistent.", IFlowsheet.MessageType.Warning)
+                        If cntint > 50 Then
+                            FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Reached maximum number of iterations without converging. Check if the current MITA is consistent.", IFlowsheet.MessageType.Warning)
+                            Throw New Exception("Error calculating temperature profile.")
+                        End If
 
                     Loop Until Abs(fx) < 0.01
 
@@ -1314,9 +1317,12 @@ Namespace UnitOperations
                     value = ThermalEfficiency
                 Case 26
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, MaxHeatExchange)
+                Case 27
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, MITA)
             End Select
 
             Return value
+
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
@@ -1333,15 +1339,16 @@ Namespace UnitOperations
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 26
+                    For i = 0 To 27
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
                 Case PropertyType.WR
                     For i = 0 To 16
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
+                    proplist.Add("PROP_HX_27")
                 Case PropertyType.ALL
-                    For i = 0 To 26
+                    For i = 0 To 27
                         proplist.Add("PROP_HX_" + CStr(i))
                     Next
             End Select
@@ -1395,6 +1402,8 @@ Namespace UnitOperations
                     Me.STProperties.Tube_NumberPerShell = propval
                 Case 16
                     Me.STProperties.Tube_Pitch = SystemsOfUnits.Converter.ConvertToSI(su.thickness, propval)
+                Case 27
+                    Me.MITA = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
             End Select
             Return 1
         End Function
@@ -1450,7 +1459,7 @@ Namespace UnitOperations
                     value = su.foulingfactor
                 Case 18
                     value = ""
-                Case 19
+                Case 19, 27
                     value = su.deltaT
                 Case 20, 21, 22
                     value = su.foulingfactor

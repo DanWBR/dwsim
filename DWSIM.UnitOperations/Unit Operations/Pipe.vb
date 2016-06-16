@@ -1496,6 +1496,8 @@ Final3:     T = bbb
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.ThermalProfile.CGTC_Definido)
                 Case 6
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ThermalProfile.Temp_amb_definir)
+                Case 7
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / SystemsOfUnits.Converter.ConvertFromSI(su.distance, 1.0#)
             End Select
 
             Return value
@@ -1505,7 +1507,7 @@ Final3:     T = bbb
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
-            For i = 0 To 6
+            For i = 0 To 7
                 proplist.Add("PROP_PS_" + CStr(i))
             Next
             Return proplist.ToArray(GetType(System.String))
@@ -1528,6 +1530,9 @@ Final3:     T = bbb
                     Me.ThermalProfile.CGTC_Definido = SystemsOfUnits.Converter.ConvertToSI(su.heat_transf_coeff, propval)
                 Case 6
                     Me.ThermalProfile.Temp_amb_definir = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                Case 7
+                    Me.ThermalProfile.AmbientTemperatureGradient = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
+                    Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
             End Select
 
             Return 1
@@ -1554,6 +1559,8 @@ Final3:     T = bbb
                     value = su.heat_transf_coeff
                 Case 6
                     value = su.temperature
+                Case 7
+                    value = su.deltaT & "/" & su.distance
             End Select
 
             Return value

@@ -368,6 +368,9 @@
   <data name="PROP_HX_26" xml:space="preserve">
     <value>Maximum Theoretical Heat Exchange</value>
   </data>
+  <data name="PROP_HX_27" xml:space="preserve">
+    <value>Minimum Temperature Difference</value>
+  </data>
   <data name="PROP_HX_3" xml:space="preserve">
     <value>Austrittstemperatur des kalten Mediums</value>
   </data>
@@ -1064,6 +1067,9 @@
   </data>
   <data name="PROP_PS_6" xml:space="preserve">
     <value>External Temperature (Spec)</value>
+  </data>
+  <data name="PROP_PS_7" xml:space="preserve">
+    <value>Ambient Temperature Gradient</value>
   </data>
   <data name="PROP_PU_0" xml:space="preserve">
     <value>Druckerhöhung (Höhe)</value>
