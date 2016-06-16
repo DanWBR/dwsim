@@ -1116,7 +1116,7 @@ Public Class FormBinEnv
     Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
-        Return New List(Of String)
+        Return New List(Of String)(New String() {"Name", "AutoUpdate", "Comp1", "Comp2", "Type", "VLE", "LLE", "SLE", "SLE_SS", "CRIT", "XAxisBase", "P", "T", "PP", "CompareModels", "ExpX", "ExpY", "ExpT", "ExpP"})
     End Function
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
@@ -1124,6 +1124,87 @@ Public Class FormBinEnv
     End Function
 
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+        Select Case pname
+            Case "Name"
+                Return Name
+            Case "AutoUpdate"
+                Return AutoUpdate
+            Case "Comp1"
+                Return cbComp1.SelectedItem.ToString
+            Case "Comp2"
+                Return cbComp2.SelectedItem.ToString
+            Case "Type"
+                If RadioButton1.Checked Then Return "Txy"
+                If RadioButton2.Checked Then Return "Pxy"
+                If RadioButton3.Checked Then Return "(T)xy"
+                If RadioButton4.Checked Then Return "(P)xy"
+            Case "VLE"
+                Return chkVLE.Checked
+            Case "LLE"
+                Return chkLLE.Checked
+            Case "SLE"
+                Return chkSLE.Checked
+            Case "SLE_SS"
+                Return rbSolidSolution.Checked
+            Case "CRIT"
+                Return chkCritical.Checked
+            Case "XAxisBase"
+                Return cbXAxisBasis.SelectedIndex
+            Case "P"
+                Return Double.Parse(tbP.Text)
+            Case "T"
+                Return Double.Parse(tbT.Text)
+            Case "PP"
+                Return cbPropPack.SelectedIndex
+            Case "CompareModels"
+                Return chkCompareModels.Checked
+            Case "ExpX"
+                Dim datap As New List(Of Double)
+                For Each r As DataGridViewRow In Me.GridExpData.Rows
+                    Try
+                        If r.Cells("check").Value Then
+                            If Double.TryParse(r.Cells("colx1").Value, New Double) Then datap.Add(Double.Parse(r.Cells("colx1").Value)) Else datap.Add(0.0#)
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+                Return datap
+            Case "ExpY"
+                Dim datap As New List(Of Double)
+                For Each r As DataGridViewRow In Me.GridExpData.Rows
+                    Try
+                        If r.Cells("check").Value Then
+                            If Double.TryParse(r.Cells("coly1").Value, New Double) Then datap.Add(Double.Parse(r.Cells("coly1").Value)) Else datap.Add(0.0#)
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+                Return datap
+            Case "ExpT"
+                Dim datap As New List(Of Double)
+                For Each r As DataGridViewRow In Me.GridExpData.Rows
+                    Try
+                        If r.Cells("check").Value Then
+                            If Double.TryParse(r.Cells("colt").Value, New Double) Then datap.Add(Double.Parse(r.Cells("colt").Value)) Else datap.Add(0.0#)
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+                Return datap
+            Case "ExpP"
+                Dim datap As New List(Of Double)
+                For Each r As DataGridViewRow In Me.GridExpData.Rows
+                    Try
+                        If r.Cells("check").Value Then
+                            If Double.TryParse(r.Cells("colp").Value, New Double) Then datap.Add(Double.Parse(r.Cells("colp").Value)) Else datap.Add(0.0#)
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+                Return datap
+            Case Else
+                Return ""
+        End Select
         Return ""
     End Function
 
@@ -1132,11 +1213,69 @@ Public Class FormBinEnv
     Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
 
     Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
-
+        Select Case pname
+            Case "Name"
+                Name = pvalue
+            Case "AutoUpdate"
+                AutoUpdate = pvalue
+            Case "Comp1"
+                cbComp1.SelectedItem = pvalue
+            Case "Comp2"
+                cbComp2.SelectedItem = pvalue
+            Case "Type"
+                If pvalue = "Txy" Then RadioButton1.Checked = True
+                If pvalue = "Pxy" Then RadioButton2.Checked = True
+                If pvalue = "(T)xy" Then RadioButton3.Checked = True
+                If pvalue = "(P)xy" Then RadioButton4.Checked = True
+            Case "VLE"
+                chkVLE.Checked = pvalue
+            Case "LLE"
+                chkLLE.Checked = pvalue
+            Case "SLE"
+                chkSLE.Checked = pvalue
+            Case "SLE_SS"
+                rbSolidSolution.Checked = pvalue
+            Case "CRIT"
+                chkCritical.Checked = pvalue
+            Case "XAxisBase"
+                cbXAxisBasis.SelectedIndex = pvalue
+            Case "P"
+                tbP.Text = pvalue
+            Case "T"
+                tbT.Text = pvalue
+            Case "PP"
+                cbPropPack.SelectedIndex = pvalue
+            Case "CompareModels"
+                chkCompareModels.Checked = pvalue
+            Case "ExpX"
+                If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
+                Dim datap As List(Of Double) = pvalue
+                For i As Integer = 0 To datap.Count - 1
+                    GridExpData.Rows(i).Cells("colx1").Value = datap(i)
+                Next
+            Case "ExpY"
+                 If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
+                Dim datap As List(Of Double) = pvalue
+                For i As Integer = 0 To datap.Count - 1
+                    GridExpData.Rows(i).Cells("coly1").Value = datap(i)
+                Next
+            Case "ExpT"
+                If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
+                Dim datap As List(Of Double) = pvalue
+                For i As Integer = 0 To datap.Count - 1
+                    GridExpData.Rows(i).Cells("colt").Value = datap(i)
+                Next
+            Case "ExpP"
+               If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
+                Dim datap As List(Of Double) = pvalue
+                For i As Integer = 0 To datap.Count - 1
+                    GridExpData.Rows(i).Cells("colp").Value = datap(i)
+                Next
+        End Select
     End Sub
 
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
-
+        Button1_Click(Me, New EventArgs)
     End Sub
 
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
@@ -1146,11 +1285,17 @@ Public Class FormBinEnv
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
     Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
-
+        For Each item In data
+            SetPropertyValue(item.Key, item.Value)
+        Next
     End Sub
 
     Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
-
+        Dim props As New Dictionary(Of String, Object)
+        For Each prop In GetPropertyList()
+            props.Add(prop, GetPropertyValue(prop))
+        Next
+        Return props
     End Function
 
 End Class

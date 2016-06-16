@@ -375,7 +375,22 @@ Namespace UnitOperations
         Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
+
+            Dim xel_u = (From xel2 As XElement In data Select xel2 Where xel2.Name = "AttachedUtilities")
+
+            If Not xel_u Is Nothing Then
+                Dim dataUtilities As List(Of XElement) = xel_u.Elements.ToList
+                For Each xel As XElement In dataUtilities
+                    Dim u = FlowSheet.GetUtility(xel.Element("UtilityType").Value)
+                    u.ID = xel.Element("ID").Value
+                    u.Name = xel.Element("Name").Value
+                    u.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value))
+                    Me.AttachedUtilities.Add(u)
+                Next
+            End If
+
             If Me.Annotation = "DWSIM.DWSIM.Outros.Annotation" Then Me.Annotation = ""
+
             Return True
 
         End Function
@@ -388,6 +403,16 @@ Namespace UnitOperations
         Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
+
+            With elements
+                .Add(New XElement("AttachedUtilities"))
+                For Each util In AttachedUtilities
+                    .Item(.Count - 1).Add(New XElement("AttachedUtility", {New XElement("ID", util.ID),
+                                                                           New XElement("Name", util.Name),
+                                                                           New XElement("UtilityType", Convert.ToInt32(util.GetUtilityType)),
+                                                                           New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(util.SaveData))}))
+                Next
+            End With
 
             Return elements
 

@@ -304,18 +304,30 @@
     End Sub
 
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
+        Get
+            Return InternalUtility.AutoUpdate
+        End Get
+        Set(value As Boolean)
+            InternalUtility.AutoUpdate = value
+        End Set
+    End Property
 
     Private Sub chkAutoUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkAutoUpdate.CheckedChanged
         AutoUpdate = chkAutoUpdate.Checked
-        InternalUtility.AutoUpdate = chkAutoUpdate.Checked
     End Sub
 
     Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
-        InternalUtility.LoadData(data)
+        For Each item In data
+            InternalUtility.SetPropertyValue(item.Key, item.Value)
+        Next
     End Sub
 
     Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
-        Return InternalUtility.SaveData
+        Dim props As New Dictionary(Of String, Object)
+        For Each prop In InternalUtility.GetPropertyList
+            props.Add(prop, InternalUtility.GetPropertyValue(prop))
+        Next
+        Return props
     End Function
 
 End Class

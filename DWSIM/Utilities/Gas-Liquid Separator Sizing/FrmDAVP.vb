@@ -226,7 +226,7 @@
     Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
-        Return New List(Of String)
+        Return New List(Of String)(New String() {"Name", "AutoUpdate", "L_D", "C", "Tres", "Fsurge", "Vmaxliq", "Vgi", "K", "Type"})
     End Function
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
@@ -234,6 +234,28 @@
     End Function
 
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
+        Select Case pname
+            Case "Name"
+                Return Name
+            Case "AutoUpdate"
+                Return AutoUpdate
+            Case "L_D"
+                Return Double.Parse(tbRLD.Text)
+            Case "C"
+                Return Double.Parse(tbC.Text)
+            Case "Tres"
+                Return Double.Parse(tbTR.Text)
+            Case "Fsurge"
+                Return Double.Parse(TextBox114.Text)
+            Case "Vmaxliq"
+                Return Double.Parse(tbVMAX.Text)
+            Case "Vgi"
+                Return Double.Parse(tbVGI.Text)
+            Case "K"
+                Return Double.Parse(tbK.Text)
+            Case "Type"
+                Return ComboBoxTipoVaso.SelectedIndex
+        End Select
         Return ""
     End Function
 
@@ -242,11 +264,32 @@
     Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
 
     Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
-
+        Select Case pname
+            Case "Name"
+                Name = pvalue
+            Case "AutoUpdate"
+                AutoUpdate = pvalue
+            Case "L_D"
+                tbRLD.Text = pvalue
+            Case "C"
+                tbC.Text = pvalue
+            Case "Tres"
+                tbTR.Text = pvalue
+            Case "Fsurge"
+                TextBox114.Text = pvalue
+            Case "Vmaxliq"
+                tbVMAX.Text = pvalue
+            Case "Vgi"
+                tbVGI.Text = pvalue
+            Case "K"
+                tbK.Text = pvalue
+            Case "Type"
+                ComboBoxTipoVaso.SelectedIndex = pvalue
+        End Select
     End Sub
 
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
-
+        Button1_Click(Me, New EventArgs)
     End Sub
 
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
@@ -256,10 +299,17 @@
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
     Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
-
+        For Each item In data
+            SetPropertyValue(item.Key, item.Value)
+        Next
     End Sub
 
     Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
-
+        Dim props As New Dictionary(Of String, Object)
+        For Each prop In GetPropertyList()
+            props.Add(prop, GetPropertyValue(prop))
+        Next
+        Return props
     End Function
+
 End Class

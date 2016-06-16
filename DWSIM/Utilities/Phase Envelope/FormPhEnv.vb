@@ -1164,13 +1164,13 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
 
-        Dim plist As New List(Of String)
+        Dim plist As New List(Of String)(New String() {"Name", "AutoUpdate", "QL", "QLVAL", "STAB", "HYD", "HYDMODEL", "HYDVAPONLY", "PIP", "OP", "EnvelopeType"})
 
-        plist.Add(Me.Name1 + "_" + "Cricondentherm")
-        plist.Add(Me.Name1 + "_" + "Cricondenbar")
-        plist.Add(Me.Name1 + "_" + "Critical Pressure")
-        plist.Add(Me.Name1 + "_" + "Critical Temperature")
-        plist.Add(Me.Name1 + "_" + "Critical Volume")
+        plist.Add("Cricondentherm")
+        plist.Add("Cricondenbar")
+        plist.Add("Critical Pressure")
+        plist.Add("Critical Temperature")
+        plist.Add("Critical Volume")
 
         Return plist
 
@@ -1178,15 +1178,15 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
         Select Case pname
-            Case Me.Name1 + "_" + "Cricondentherm"
+            Case "Cricondentherm"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
-            Case Me.Name1 + "_" + "Cricondenbar"
+            Case "Cricondenbar"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
-            Case Me.Name1 + "_" + "Critical Pressure"
+            Case "Critical Pressure"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
-            Case Me.Name1 + "_" + "Critical Temperature"
+            Case "Critical Temperature"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
-            Case Me.Name1 + "_" + "Critical Volume"
+            Case "Critical Volume"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.molar_volume
             Case Else
                 Return ""
@@ -1196,19 +1196,42 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
         Dim units = AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
         Select Case pname
-            Case Me.Name1 + "_" + "Cricondentherm"
+            Case "Name"
+                Return Name
+            Case "AutoUpdate"
+                Return AutoUpdate
+            Case "QL"
+                Return CheckBox1.Checked
+            Case "QLVAL"
+                Return Double.Parse(TextBox1.Text)
+            Case "STAB"
+                Return CheckBox3.Checked
+            Case "HYD"
+                Return chkhyd.Checked
+            Case "HYDMODEL"
+                Return ComboBox2.SelectedIndex
+            Case "HYDVAPONLY"
+                Return CheckBoxHYDVAP.Checked
+            Case "PIP"
+                Return chkpip.Checked
+            Case "OP"
+                Return CheckBox2.Checked
+            Case "EnvelopeType"
+                Return ComboBox1.SelectedIndex
+            Case "Cricondentherm"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, Cricondentherm)
-            Case Me.Name1 + "_" + "Cricondenbar"
+            Case "Cricondenbar"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, Cricondenbar)
-            Case Me.Name1 + "_" + "Critical Pressure"
+            Case "Critical Pressure"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, CriticalPressure)
-            Case Me.Name1 + "_" + "Critical Temperature"
+            Case "Critical Temperature"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, CriticalTemperature)
-            Case Me.Name1 + "_" + "Critical Volume"
+            Case "Critical Volume"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.molar_volume, CriticalVolume)
             Case Else
                 Return ""
         End Select
+        Return ""
     End Function
 
     Public Property ID As Integer Implements Interfaces.IAttachedUtility.ID
@@ -1216,11 +1239,34 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Public Property Name1 As String Implements Interfaces.IAttachedUtility.Name
 
     Public Sub SetPropertyValue(pname As String, pvalue As Object) Implements Interfaces.IAttachedUtility.SetPropertyValue
-
+        Select Case pname
+            Case "Name"
+                Name = pvalue
+            Case "AutoUpdate"
+                AutoUpdate = pvalue
+            Case "QL"
+                CheckBox1.Checked = pvalue
+            Case "QLVAL"
+                TextBox1.Text = pvalue
+            Case "STAB"
+                CheckBox3.Checked = pvalue
+            Case "HYD"
+                chkhyd.Checked = pvalue
+            Case "HYDMODEL"
+                ComboBox2.SelectedIndex = pvalue
+            Case "HYDVAPONLY"
+                CheckBoxHYDVAP.Checked = pvalue
+            Case "PIP"
+                chkpip.Checked = pvalue
+            Case "OP"
+                CheckBox2.Checked = pvalue
+            Case "EnvelopeType"
+                ComboBox1.SelectedIndex = pvalue
+        End Select
     End Sub
 
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
-
+        Button1_Click(Me, New EventArgs)
     End Sub
 
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType
@@ -1230,10 +1276,17 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
     Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
-
+        For Each item In data
+            SetPropertyValue(item.Key, item.Value)
+        Next
     End Sub
 
     Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
-
+        Dim props As New Dictionary(Of String, Object)
+        For Each prop In GetPropertyList()
+            props.Add(prop, GetPropertyValue(prop))
+        Next
+        Return props
     End Function
+
 End Class

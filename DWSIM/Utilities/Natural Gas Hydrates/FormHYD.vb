@@ -357,10 +357,17 @@ Public Class FormHYD
     Public Property AutoUpdate As Boolean Implements Interfaces.IAttachedUtility.AutoUpdate
 
     Public Sub LoadData(data As Dictionary(Of String, Object)) Implements Interfaces.IAttachedUtility.LoadData
-
+        For Each item In data
+            SetPropertyValue(item.Key, item.Value)
+        Next
     End Sub
 
     Public Function SaveData() As Dictionary(Of String, Object) Implements Interfaces.IAttachedUtility.SaveData
-
+        Dim props As New Dictionary(Of String, Object)
+        For Each prop In GetPropertyList()
+            props.Add(prop, GetPropertyValue(prop))
+        Next
+        Return props
     End Function
+
 End Class
