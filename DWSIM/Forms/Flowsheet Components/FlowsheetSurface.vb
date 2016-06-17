@@ -3322,38 +3322,50 @@ Public Class FlowsheetSurface
 
     Private Sub SplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SplitToolStripMenuItem.Click
 
-        Dim stream = FlowsheetDesignSurface.SelectedObject
-        Dim newstream = CloneObject(stream)
-        newstream.Status = stream.Status
+        Try
+            My.Application.PushUndoRedoAction = False
+            Dim stream = FlowsheetDesignSurface.SelectedObject
+            Dim newstream = CloneObject(stream)
+            newstream.Status = stream.Status
 
-        Dim objfrom As GraphicObject, fromidx As Integer
-        If stream.InputConnectors(0).IsAttached Then
-            objfrom = stream.InputConnectors(0).AttachedConnector.AttachedFrom
-            fromidx = stream.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-            Flowsheet.DisconnectObjects(objfrom, stream)
-            Flowsheet.ConnectObjects(objfrom, newstream, fromidx, 0)
-        End If
+            Dim objfrom As GraphicObject, fromidx As Integer
+            If stream.InputConnectors(0).IsAttached Then
+                objfrom = stream.InputConnectors(0).AttachedConnector.AttachedFrom
+                fromidx = stream.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                Flowsheet.DisconnectObjects(objfrom, stream)
+                Flowsheet.ConnectObjects(objfrom, newstream, fromidx, 0)
+            End If
+        Catch ex As Exception
+        Finally
+            My.Application.PushUndoRedoAction = True
+        End Try
 
     End Sub
 
     Private Sub MergeStreamsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeStreamsToolStripMenuItem.Click
 
-        Dim stream1 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(0)
-        Dim stream2 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(1)
+        Try
+            My.Application.PushUndoRedoAction = False
+            Dim stream1 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(0)
+            Dim stream2 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(1)
 
-        If stream1.OutputConnectors(0).IsAttached Then
-            stream1 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(1)
-            stream2 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(0)
-        End If
+            If stream1.OutputConnectors(0).IsAttached Then
+                stream1 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(1)
+                stream2 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(0)
+            End If
 
-        Dim objto As GraphicObject, toidx As Integer
-        If stream2.OutputConnectors(0).IsAttached Then
-            objto = stream2.OutputConnectors(0).AttachedConnector.AttachedTo
-            toidx = stream2.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
-            Flowsheet.DisconnectObjects(stream2, objto)
-            Flowsheet.DeleteObject(stream2.Tag, False)
-            Flowsheet.ConnectObjects(stream1, objto, 0, toidx)
-        End If
+            Dim objto As GraphicObject, toidx As Integer
+            If stream2.OutputConnectors(0).IsAttached Then
+                objto = stream2.OutputConnectors(0).AttachedConnector.AttachedTo
+                toidx = stream2.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
+                Flowsheet.DisconnectObjects(stream2, objto)
+                Flowsheet.DeleteObject(stream2.Tag, False)
+                Flowsheet.ConnectObjects(stream1, objto, 0, toidx)
+            End If
+        Catch ex As Exception
+        Finally
+            My.Application.PushUndoRedoAction = True
+        End Try
 
     End Sub
 
