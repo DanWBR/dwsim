@@ -117,11 +117,13 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -135,26 +137,31 @@ Partial Class EditingForm_HeatExchanger
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox3
         '
@@ -167,6 +174,7 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'btnConfigureFlashAlg
         '
@@ -190,11 +198,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'cbPropPack
         '
@@ -202,11 +212,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
+        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'GroupBox2
         '
@@ -243,6 +255,7 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'cbMITA
         '
@@ -251,21 +264,25 @@ Partial Class EditingForm_HeatExchanger
         Me.cbMITA.FormattingEnabled = True
         Me.cbMITA.Items.AddRange(New Object() {resources.GetString("cbMITA.Items"), resources.GetString("cbMITA.Items1"), resources.GetString("cbMITA.Items2")})
         Me.cbMITA.Name = "cbMITA"
+        Me.ToolTip1.SetToolTip(Me.cbMITA, resources.GetString("cbMITA.ToolTip"))
         '
         'tbMITA
         '
         resources.ApplyResources(Me.tbMITA, "tbMITA")
         Me.tbMITA.Name = "tbMITA"
+        Me.ToolTip1.SetToolTip(Me.tbMITA, resources.GetString("tbMITA.ToolTip"))
         '
         'Label18
         '
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
         '
         'btnEditSTProps
         '
         resources.ApplyResources(Me.btnEditSTProps, "btnEditSTProps")
         Me.btnEditSTProps.Name = "btnEditSTProps"
+        Me.ToolTip1.SetToolTip(Me.btnEditSTProps, resources.GetString("btnEditSTProps.ToolTip"))
         Me.btnEditSTProps.UseVisualStyleBackColor = True
         '
         'cbHeat
@@ -275,11 +292,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbHeat.FormattingEnabled = True
         Me.cbHeat.Items.AddRange(New Object() {resources.GetString("cbHeat.Items"), resources.GetString("cbHeat.Items1"), resources.GetString("cbHeat.Items2")})
         Me.cbHeat.Name = "cbHeat"
+        Me.ToolTip1.SetToolTip(Me.cbHeat, resources.GetString("cbHeat.ToolTip"))
         '
         'tbHeat
         '
         resources.ApplyResources(Me.tbHeat, "tbHeat")
         Me.tbHeat.Name = "tbHeat"
+        Me.ToolTip1.SetToolTip(Me.tbHeat, resources.GetString("tbHeat.ToolTip"))
         '
         'cbArea
         '
@@ -288,11 +307,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbArea.FormattingEnabled = True
         Me.cbArea.Items.AddRange(New Object() {resources.GetString("cbArea.Items"), resources.GetString("cbArea.Items1"), resources.GetString("cbArea.Items2")})
         Me.cbArea.Name = "cbArea"
+        Me.ToolTip1.SetToolTip(Me.cbArea, resources.GetString("cbArea.ToolTip"))
         '
         'tbArea
         '
         resources.ApplyResources(Me.tbArea, "tbArea")
         Me.tbArea.Name = "tbArea"
+        Me.ToolTip1.SetToolTip(Me.tbArea, resources.GetString("tbArea.ToolTip"))
         '
         'cbOverallHTC
         '
@@ -301,31 +322,37 @@ Partial Class EditingForm_HeatExchanger
         Me.cbOverallHTC.FormattingEnabled = True
         Me.cbOverallHTC.Items.AddRange(New Object() {resources.GetString("cbOverallHTC.Items"), resources.GetString("cbOverallHTC.Items1"), resources.GetString("cbOverallHTC.Items2")})
         Me.cbOverallHTC.Name = "cbOverallHTC"
+        Me.ToolTip1.SetToolTip(Me.cbOverallHTC, resources.GetString("cbOverallHTC.ToolTip"))
         '
         'tbOverallU
         '
         resources.ApplyResources(Me.tbOverallU, "tbOverallU")
         Me.tbOverallU.Name = "tbOverallU"
+        Me.ToolTip1.SetToolTip(Me.tbOverallU, resources.GetString("tbOverallU.ToolTip"))
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'cbFlowDir
         '
@@ -334,11 +361,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbFlowDir.FormattingEnabled = True
         Me.cbFlowDir.Items.AddRange(New Object() {resources.GetString("cbFlowDir.Items"), resources.GetString("cbFlowDir.Items1")})
         Me.cbFlowDir.Name = "cbFlowDir"
+        Me.ToolTip1.SetToolTip(Me.cbFlowDir, resources.GetString("cbFlowDir.ToolTip"))
         '
         'chkIgnoreLMTD
         '
         resources.ApplyResources(Me.chkIgnoreLMTD, "chkIgnoreLMTD")
         Me.chkIgnoreLMTD.Name = "chkIgnoreLMTD"
+        Me.ToolTip1.SetToolTip(Me.chkIgnoreLMTD, resources.GetString("chkIgnoreLMTD.ToolTip"))
         Me.chkIgnoreLMTD.UseVisualStyleBackColor = True
         '
         'cbHotFluidOutletT
@@ -348,16 +377,19 @@ Partial Class EditingForm_HeatExchanger
         Me.cbHotFluidOutletT.FormattingEnabled = True
         Me.cbHotFluidOutletT.Items.AddRange(New Object() {resources.GetString("cbHotFluidOutletT.Items"), resources.GetString("cbHotFluidOutletT.Items1"), resources.GetString("cbHotFluidOutletT.Items2")})
         Me.cbHotFluidOutletT.Name = "cbHotFluidOutletT"
+        Me.ToolTip1.SetToolTip(Me.cbHotFluidOutletT, resources.GetString("cbHotFluidOutletT.ToolTip"))
         '
         'tbHotFluidOutletT
         '
         resources.ApplyResources(Me.tbHotFluidOutletT, "tbHotFluidOutletT")
         Me.tbHotFluidOutletT.Name = "tbHotFluidOutletT"
+        Me.ToolTip1.SetToolTip(Me.tbHotFluidOutletT, resources.GetString("tbHotFluidOutletT.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'cbColdFluidOutletT
         '
@@ -366,16 +398,19 @@ Partial Class EditingForm_HeatExchanger
         Me.cbColdFluidOutletT.FormattingEnabled = True
         Me.cbColdFluidOutletT.Items.AddRange(New Object() {resources.GetString("cbColdFluidOutletT.Items"), resources.GetString("cbColdFluidOutletT.Items1"), resources.GetString("cbColdFluidOutletT.Items2")})
         Me.cbColdFluidOutletT.Name = "cbColdFluidOutletT"
+        Me.ToolTip1.SetToolTip(Me.cbColdFluidOutletT, resources.GetString("cbColdFluidOutletT.ToolTip"))
         '
         'tbColdFluidOutletT
         '
         resources.ApplyResources(Me.tbColdFluidOutletT, "tbColdFluidOutletT")
         Me.tbColdFluidOutletT.Name = "tbColdFluidOutletT"
+        Me.ToolTip1.SetToolTip(Me.tbColdFluidOutletT, resources.GetString("tbColdFluidOutletT.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'cbHotFluidPDrop
         '
@@ -384,16 +419,19 @@ Partial Class EditingForm_HeatExchanger
         Me.cbHotFluidPDrop.FormattingEnabled = True
         Me.cbHotFluidPDrop.Items.AddRange(New Object() {resources.GetString("cbHotFluidPDrop.Items"), resources.GetString("cbHotFluidPDrop.Items1"), resources.GetString("cbHotFluidPDrop.Items2")})
         Me.cbHotFluidPDrop.Name = "cbHotFluidPDrop"
+        Me.ToolTip1.SetToolTip(Me.cbHotFluidPDrop, resources.GetString("cbHotFluidPDrop.ToolTip"))
         '
         'tbHotFluidPDrop
         '
         resources.ApplyResources(Me.tbHotFluidPDrop, "tbHotFluidPDrop")
         Me.tbHotFluidPDrop.Name = "tbHotFluidPDrop"
+        Me.ToolTip1.SetToolTip(Me.tbHotFluidPDrop, resources.GetString("tbHotFluidPDrop.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbColdFluidPDrop
         '
@@ -402,16 +440,19 @@ Partial Class EditingForm_HeatExchanger
         Me.cbColdFluidPDrop.FormattingEnabled = True
         Me.cbColdFluidPDrop.Items.AddRange(New Object() {resources.GetString("cbColdFluidPDrop.Items"), resources.GetString("cbColdFluidPDrop.Items1"), resources.GetString("cbColdFluidPDrop.Items2")})
         Me.cbColdFluidPDrop.Name = "cbColdFluidPDrop"
+        Me.ToolTip1.SetToolTip(Me.cbColdFluidPDrop, resources.GetString("cbColdFluidPDrop.ToolTip"))
         '
         'tbColdFluidPDrop
         '
         resources.ApplyResources(Me.tbColdFluidPDrop, "tbColdFluidPDrop")
         Me.tbColdFluidPDrop.Name = "tbColdFluidPDrop"
+        Me.ToolTip1.SetToolTip(Me.tbColdFluidPDrop, resources.GetString("tbColdFluidPDrop.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'cbCalcMode
         '
@@ -420,11 +461,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbCalcMode.FormattingEnabled = True
         Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2"), resources.GetString("cbCalcMode.Items3"), resources.GetString("cbCalcMode.Items4"), resources.GetString("cbCalcMode.Items5"), resources.GetString("cbCalcMode.Items6"), resources.GetString("cbCalcMode.Items7")})
         Me.cbCalcMode.Name = "cbCalcMode"
+        Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'GroupBox1
         '
@@ -447,6 +490,7 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'btnCreateAndConnectOutlet2
         '
@@ -484,6 +528,7 @@ Partial Class EditingForm_HeatExchanger
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'cbOutlet2
         '
@@ -491,6 +536,7 @@ Partial Class EditingForm_HeatExchanger
         Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'cbInlet2
         '
@@ -498,11 +544,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbInlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet2.FormattingEnabled = True
         Me.cbInlet2.Name = "cbInlet2"
+        Me.ToolTip1.SetToolTip(Me.cbInlet2, resources.GetString("cbInlet2.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'btnCreateAndConnectOutlet1
         '
@@ -540,6 +588,7 @@ Partial Class EditingForm_HeatExchanger
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'cbOutlet1
         '
@@ -547,6 +596,7 @@ Partial Class EditingForm_HeatExchanger
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
         'cbInlet1
         '
@@ -554,11 +604,13 @@ Partial Class EditingForm_HeatExchanger
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'GroupBox6
         '
@@ -567,23 +619,26 @@ Partial Class EditingForm_HeatExchanger
         Me.GroupBox6.Controls.Add(Me.gridResults)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'btnViewProfile
         '
         resources.ApplyResources(Me.btnViewProfile, "btnViewProfile")
         Me.btnViewProfile.Name = "btnViewProfile"
+        Me.ToolTip1.SetToolTip(Me.btnViewProfile, resources.GetString("btnViewProfile.ToolTip"))
         Me.btnViewProfile.UseVisualStyleBackColor = True
         '
         'gridResults
         '
-        Me.gridResults.AllowUserToAddRows = False
         resources.ApplyResources(Me.gridResults, "gridResults")
+        Me.gridResults.AllowUserToAddRows = False
         Me.gridResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
         Me.gridResults.Name = "gridResults"
         Me.gridResults.ReadOnly = True
         Me.gridResults.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridResults, resources.GetString("gridResults.ToolTip"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -622,6 +677,7 @@ Partial Class EditingForm_HeatExchanger
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_HeatExchanger"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)

@@ -127,11 +127,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -145,26 +147,31 @@ Partial Class EditingForm_SpreadsheetUO
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox3
         '
@@ -177,6 +184,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'btnConfigureFlashAlg
         '
@@ -200,11 +208,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'cbPropPack
         '
@@ -212,11 +222,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
+        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'btnCreateAndConnectOutlet4
         '
@@ -390,24 +402,28 @@ Partial Class EditingForm_SpreadsheetUO
         Me.GroupBox6.Controls.Add(Me.TabControl1)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.dgvinputvars)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.dgvinputvars)
         Me.TabPage1.Name = "TabPage1"
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'dgvinputvars
         '
+        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.AllowUserToAddRows = False
         Me.dgvinputvars.AllowUserToDeleteRows = False
         Me.dgvinputvars.AllowUserToOrderColumns = True
@@ -424,11 +440,11 @@ Partial Class EditingForm_SpreadsheetUO
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle3
-        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
         Me.dgvinputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip"))
         '
         'Column3
         '
@@ -460,13 +476,15 @@ Partial Class EditingForm_SpreadsheetUO
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         Me.TabPage2.Name = "TabPage2"
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'dgvoutputvars
         '
+        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.AllowUserToAddRows = False
         Me.dgvoutputvars.AllowUserToDeleteRows = False
         Me.dgvoutputvars.AllowUserToOrderColumns = True
@@ -483,12 +501,12 @@ Partial Class EditingForm_SpreadsheetUO
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle6
-        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
         Me.dgvoutputvars.ReadOnly = True
         Me.dgvoutputvars.RowHeadersVisible = False
         Me.dgvoutputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -560,11 +578,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'cbOutlet4
         '
@@ -572,11 +592,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbOutlet4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet4.FormattingEnabled = True
         Me.cbOutlet4.Name = "cbOutlet4"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet4, resources.GetString("cbOutlet4.ToolTip"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'cbEnergyE
         '
@@ -584,11 +606,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbEnergyE.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEnergyE.FormattingEnabled = True
         Me.cbEnergyE.Name = "cbEnergyE"
+        Me.ToolTip1.SetToolTip(Me.cbEnergyE, resources.GetString("cbEnergyE.ToolTip"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'cbOutlet3
         '
@@ -596,11 +620,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbOutlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet3.FormattingEnabled = True
         Me.cbOutlet3.Name = "cbOutlet3"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'cbOutlet2
         '
@@ -608,21 +634,25 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'cbOutlet1
         '
@@ -630,6 +660,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
         'cbInlet4
         '
@@ -637,6 +668,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbInlet4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet4.FormattingEnabled = True
         Me.cbInlet4.Name = "cbInlet4"
+        Me.ToolTip1.SetToolTip(Me.cbInlet4, resources.GetString("cbInlet4.ToolTip"))
         '
         'cbInlet3
         '
@@ -644,6 +676,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbInlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet3.FormattingEnabled = True
         Me.cbInlet3.Name = "cbInlet3"
+        Me.ToolTip1.SetToolTip(Me.cbInlet3, resources.GetString("cbInlet3.ToolTip"))
         '
         'cbInlet2
         '
@@ -651,11 +684,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbInlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet2.FormattingEnabled = True
         Me.cbInlet2.Name = "cbInlet2"
+        Me.ToolTip1.SetToolTip(Me.cbInlet2, resources.GetString("cbInlet2.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbInlet1
         '
@@ -663,11 +698,13 @@ Partial Class EditingForm_SpreadsheetUO
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'GroupBox2
         '
@@ -679,22 +716,26 @@ Partial Class EditingForm_SpreadsheetUO
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'TbFileName
         '
         resources.ApplyResources(Me.TbFileName, "TbFileName")
         Me.TbFileName.Name = "TbFileName"
         Me.TbFileName.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.CheckFileExists = False
         Me.OpenFileDialog1.CheckPathExists = False
+        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.RestoreDirectory = True
         '
         'EditingForm_SpreadsheetUO
@@ -707,6 +748,7 @@ Partial Class EditingForm_SpreadsheetUO
         Me.Controls.Add(Me.GroupBox6)
         Me.Controls.Add(Me.GroupBox3)
         Me.Name = "EditingForm_SpreadsheetUO"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)

@@ -26,10 +26,10 @@ Partial Class EditingForm_FlowsheetUO
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_FlowsheetUO))
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -87,8 +87,15 @@ Partial Class EditingForm_FlowsheetUO
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvinputvars = New System.Windows.Forms.DataGridView()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvoutputvars = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.cbOutlet10 = New System.Windows.Forms.ComboBox()
@@ -139,13 +146,6 @@ Partial Class EditingForm_FlowsheetUO
         Me.btnViewFlowsheet = New System.Windows.Forms.Button()
         Me.btnOpenControlPanel = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -169,11 +169,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -187,26 +189,31 @@ Partial Class EditingForm_FlowsheetUO
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'BtnSearch
         '
@@ -541,24 +548,28 @@ Partial Class EditingForm_FlowsheetUO
         Me.GroupBox6.Controls.Add(Me.TabControl1)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'TabControl1
         '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.dgvinputvars)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.dgvinputvars)
         Me.TabPage1.Name = "TabPage1"
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'dgvinputvars
         '
+        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.AllowUserToAddRows = False
         Me.dgvinputvars.AllowUserToDeleteRows = False
         Me.dgvinputvars.AllowUserToOrderColumns = True
@@ -575,21 +586,58 @@ Partial Class EditingForm_FlowsheetUO
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvinputvars.DefaultCellStyle = DataGridViewCellStyle4
-        resources.ApplyResources(Me.dgvinputvars, "dgvinputvars")
         Me.dgvinputvars.MultiSelect = False
         Me.dgvinputvars.Name = "dgvinputvars"
         Me.dgvinputvars.RowHeadersVisible = False
         Me.dgvinputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgvinputvars, resources.GetString("dgvinputvars.ToolTip"))
+        '
+        'Column4
+        '
+        resources.ApplyResources(Me.Column4, "Column4")
+        Me.Column4.Name = "Column4"
+        '
+        'Column3
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
+        Me.Column3.FillWeight = 25.0!
+        resources.ApplyResources(Me.Column3, "Column3")
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column5
+        '
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Column5.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column5, "Column5")
+        Me.Column5.Name = "Column5"
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column2
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Column2.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column2, "Column2")
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.dgvoutputvars)
         Me.TabPage2.Name = "TabPage2"
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'dgvoutputvars
         '
+        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.AllowUserToAddRows = False
         Me.dgvoutputvars.AllowUserToDeleteRows = False
         Me.dgvoutputvars.AllowUserToOrderColumns = True
@@ -606,12 +654,43 @@ Partial Class EditingForm_FlowsheetUO
         DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvoutputvars.DefaultCellStyle = DataGridViewCellStyle8
-        resources.ApplyResources(Me.dgvoutputvars, "dgvoutputvars")
         Me.dgvoutputvars.MultiSelect = False
         Me.dgvoutputvars.Name = "dgvoutputvars"
         Me.dgvoutputvars.ReadOnly = True
         Me.dgvoutputvars.RowHeadersVisible = False
         Me.dgvoutputvars.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.dgvoutputvars, resources.GetString("dgvoutputvars.ToolTip"))
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
+        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'Column1
+        '
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle7
+        Me.Column1.FillWeight = 20.0!
+        resources.ApplyResources(Me.Column1, "Column1")
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
         '
         'GroupBox1
         '
@@ -698,11 +777,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'Label20
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
         '
         'cbOutlet10
         '
@@ -710,11 +791,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet10.FormattingEnabled = True
         Me.cbOutlet10.Name = "cbOutlet10"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet10, resources.GetString("cbOutlet10.ToolTip"))
         '
         'Label21
         '
         resources.ApplyResources(Me.Label21, "Label21")
         Me.Label21.Name = "Label21"
+        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
         '
         'cbOutlet9
         '
@@ -722,11 +805,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet9.FormattingEnabled = True
         Me.cbOutlet9.Name = "cbOutlet9"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet9, resources.GetString("cbOutlet9.ToolTip"))
         '
         'Label22
         '
         resources.ApplyResources(Me.Label22, "Label22")
         Me.Label22.Name = "Label22"
+        Me.ToolTip1.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
         '
         'cbOutlet8
         '
@@ -734,11 +819,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet8.FormattingEnabled = True
         Me.cbOutlet8.Name = "cbOutlet8"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet8, resources.GetString("cbOutlet8.ToolTip"))
         '
         'Label23
         '
         resources.ApplyResources(Me.Label23, "Label23")
         Me.Label23.Name = "Label23"
+        Me.ToolTip1.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip"))
         '
         'cbOutlet7
         '
@@ -746,26 +833,31 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet7.FormattingEnabled = True
         Me.cbOutlet7.Name = "cbOutlet7"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet7, resources.GetString("cbOutlet7.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'cbInlet10
         '
@@ -773,6 +865,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet10.FormattingEnabled = True
         Me.cbInlet10.Name = "cbInlet10"
+        Me.ToolTip1.SetToolTip(Me.cbInlet10, resources.GetString("cbInlet10.ToolTip"))
         '
         'cbInlet9
         '
@@ -780,6 +873,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet9.FormattingEnabled = True
         Me.cbInlet9.Name = "cbInlet9"
+        Me.ToolTip1.SetToolTip(Me.cbInlet9, resources.GetString("cbInlet9.ToolTip"))
         '
         'cbInlet8
         '
@@ -787,6 +881,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet8.FormattingEnabled = True
         Me.cbInlet8.Name = "cbInlet8"
+        Me.ToolTip1.SetToolTip(Me.cbInlet8, resources.GetString("cbInlet8.ToolTip"))
         '
         'cbInlet7
         '
@@ -794,11 +889,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet7.FormattingEnabled = True
         Me.cbInlet7.Name = "cbInlet7"
+        Me.ToolTip1.SetToolTip(Me.cbInlet7, resources.GetString("cbInlet7.ToolTip"))
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
         '
         'cbOutlet6
         '
@@ -806,11 +903,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet6.FormattingEnabled = True
         Me.cbOutlet6.Name = "cbOutlet6"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet6, resources.GetString("cbOutlet6.ToolTip"))
         '
         'Label18
         '
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
         '
         'cbOutlet5
         '
@@ -818,11 +917,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet5.FormattingEnabled = True
         Me.cbOutlet5.Name = "cbOutlet5"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet5, resources.GetString("cbOutlet5.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'cbOutlet4
         '
@@ -830,11 +931,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet4.FormattingEnabled = True
         Me.cbOutlet4.Name = "cbOutlet4"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet4, resources.GetString("cbOutlet4.ToolTip"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'cbOutlet3
         '
@@ -842,11 +945,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet3.FormattingEnabled = True
         Me.cbOutlet3.Name = "cbOutlet3"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'cbOutlet2
         '
@@ -854,31 +959,37 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'cbOutlet1
         '
@@ -886,6 +997,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
         'cbInlet6
         '
@@ -893,6 +1005,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet6.FormattingEnabled = True
         Me.cbInlet6.Name = "cbInlet6"
+        Me.ToolTip1.SetToolTip(Me.cbInlet6, resources.GetString("cbInlet6.ToolTip"))
         '
         'cbInlet5
         '
@@ -900,6 +1013,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet5.FormattingEnabled = True
         Me.cbInlet5.Name = "cbInlet5"
+        Me.ToolTip1.SetToolTip(Me.cbInlet5, resources.GetString("cbInlet5.ToolTip"))
         '
         'cbInlet4
         '
@@ -907,6 +1021,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet4.FormattingEnabled = True
         Me.cbInlet4.Name = "cbInlet4"
+        Me.ToolTip1.SetToolTip(Me.cbInlet4, resources.GetString("cbInlet4.ToolTip"))
         '
         'cbInlet3
         '
@@ -914,6 +1029,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet3.FormattingEnabled = True
         Me.cbInlet3.Name = "cbInlet3"
+        Me.ToolTip1.SetToolTip(Me.cbInlet3, resources.GetString("cbInlet3.ToolTip"))
         '
         'cbInlet2
         '
@@ -921,11 +1037,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet2.FormattingEnabled = True
         Me.cbInlet2.Name = "cbInlet2"
+        Me.ToolTip1.SetToolTip(Me.cbInlet2, resources.GetString("cbInlet2.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbInlet1
         '
@@ -933,11 +1051,13 @@ Partial Class EditingForm_FlowsheetUO
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'GroupBox2
         '
@@ -952,23 +1072,27 @@ Partial Class EditingForm_FlowsheetUO
         Me.GroupBox2.Controls.Add(Me.btnOpenControlPanel)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'chkUpdateProcessData
         '
         resources.ApplyResources(Me.chkUpdateProcessData, "chkUpdateProcessData")
         Me.chkUpdateProcessData.Name = "chkUpdateProcessData"
+        Me.ToolTip1.SetToolTip(Me.chkUpdateProcessData, resources.GetString("chkUpdateProcessData.ToolTip"))
         Me.chkUpdateProcessData.UseVisualStyleBackColor = True
         '
         'chkRedirect
         '
         resources.ApplyResources(Me.chkRedirect, "chkRedirect")
         Me.chkRedirect.Name = "chkRedirect"
+        Me.ToolTip1.SetToolTip(Me.chkRedirect, resources.GetString("chkRedirect.ToolTip"))
         Me.chkRedirect.UseVisualStyleBackColor = True
         '
         'chkInitialize
         '
         resources.ApplyResources(Me.chkInitialize, "chkInitialize")
         Me.chkInitialize.Name = "chkInitialize"
+        Me.ToolTip1.SetToolTip(Me.chkInitialize, resources.GetString("chkInitialize.ToolTip"))
         Me.chkInitialize.UseVisualStyleBackColor = True
         '
         'TbFileName
@@ -976,95 +1100,34 @@ Partial Class EditingForm_FlowsheetUO
         resources.ApplyResources(Me.TbFileName, "TbFileName")
         Me.TbFileName.Name = "TbFileName"
         Me.TbFileName.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.TbFileName, resources.GetString("TbFileName.ToolTip"))
         '
         'Label24
         '
         resources.ApplyResources(Me.Label24, "Label24")
         Me.Label24.Name = "Label24"
+        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
         '
         'btnViewFlowsheet
         '
         resources.ApplyResources(Me.btnViewFlowsheet, "btnViewFlowsheet")
         Me.btnViewFlowsheet.Name = "btnViewFlowsheet"
+        Me.ToolTip1.SetToolTip(Me.btnViewFlowsheet, resources.GetString("btnViewFlowsheet.ToolTip"))
         Me.btnViewFlowsheet.UseVisualStyleBackColor = True
         '
         'btnOpenControlPanel
         '
         resources.ApplyResources(Me.btnOpenControlPanel, "btnOpenControlPanel")
         Me.btnOpenControlPanel.Name = "btnOpenControlPanel"
+        Me.ToolTip1.SetToolTip(Me.btnOpenControlPanel, resources.GetString("btnOpenControlPanel.ToolTip"))
         Me.btnOpenControlPanel.UseVisualStyleBackColor = True
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.CheckFileExists = False
         Me.OpenFileDialog1.CheckPathExists = False
+        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         Me.OpenFileDialog1.RestoreDirectory = True
-        '
-        'Column4
-        '
-        resources.ApplyResources(Me.Column4, "Column4")
-        Me.Column4.Name = "Column4"
-        '
-        'Column3
-        '
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle1
-        Me.Column3.FillWeight = 25.0!
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column5
-        '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle2
-        Me.Column5.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column5, "Column5")
-        Me.Column5.Name = "Column5"
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column2
-        '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
-        Me.Column2.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column2, "Column2")
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle5
-        Me.DataGridViewTextBoxColumn1.FillWeight = 25.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle6
-        Me.DataGridViewTextBoxColumn2.FillWeight = 20.0!
-        resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'Column1
-        '
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle7
-        Me.Column1.FillWeight = 20.0!
-        resources.ApplyResources(Me.Column1, "Column1")
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
         '
         'EditingForm_FlowsheetUO
         '
@@ -1075,6 +1138,7 @@ Partial Class EditingForm_FlowsheetUO
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox6)
         Me.Name = "EditingForm_FlowsheetUO"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)

@@ -101,11 +101,13 @@ Partial Class EditingForm_Filter
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -119,26 +121,31 @@ Partial Class EditingForm_Filter
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox4
         '
@@ -146,6 +153,7 @@ Partial Class EditingForm_Filter
         Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'rtbAnnotations
         '
@@ -155,6 +163,7 @@ Partial Class EditingForm_Filter
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
+        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
         '
         'GroupBox3
         '
@@ -167,6 +176,7 @@ Partial Class EditingForm_Filter
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'btnConfigureFlashAlg
         '
@@ -190,11 +200,13 @@ Partial Class EditingForm_Filter
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'cbPropPack
         '
@@ -202,11 +214,13 @@ Partial Class EditingForm_Filter
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
+        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'GroupBox2
         '
@@ -235,6 +249,7 @@ Partial Class EditingForm_Filter
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'cbPDrop
         '
@@ -243,16 +258,19 @@ Partial Class EditingForm_Filter
         Me.cbPDrop.FormattingEnabled = True
         Me.cbPDrop.Items.AddRange(New Object() {resources.GetString("cbPDrop.Items"), resources.GetString("cbPDrop.Items1"), resources.GetString("cbPDrop.Items2")})
         Me.cbPDrop.Name = "cbPDrop"
+        Me.ToolTip1.SetToolTip(Me.cbPDrop, resources.GetString("cbPDrop.ToolTip"))
         '
         'tbPressureDrop
         '
         resources.ApplyResources(Me.tbPressureDrop, "tbPressureDrop")
         Me.tbPressureDrop.Name = "tbPressureDrop"
+        Me.ToolTip1.SetToolTip(Me.tbPressureDrop, resources.GetString("tbPressureDrop.ToolTip"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'cbArea
         '
@@ -261,36 +279,43 @@ Partial Class EditingForm_Filter
         Me.cbArea.FormattingEnabled = True
         Me.cbArea.Items.AddRange(New Object() {resources.GetString("cbArea.Items"), resources.GetString("cbArea.Items1"), resources.GetString("cbArea.Items2")})
         Me.cbArea.Name = "cbArea"
+        Me.ToolTip1.SetToolTip(Me.cbArea, resources.GetString("cbArea.ToolTip"))
         '
         'tbTotalArea
         '
         resources.ApplyResources(Me.tbTotalArea, "tbTotalArea")
         Me.tbTotalArea.Name = "tbTotalArea"
+        Me.ToolTip1.SetToolTip(Me.tbTotalArea, resources.GetString("tbTotalArea.ToolTip"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'tbCakeRelativeHumidity
         '
         resources.ApplyResources(Me.tbCakeRelativeHumidity, "tbCakeRelativeHumidity")
         Me.tbCakeRelativeHumidity.Name = "tbCakeRelativeHumidity"
+        Me.ToolTip1.SetToolTip(Me.tbCakeRelativeHumidity, resources.GetString("tbCakeRelativeHumidity.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'tbSubmergedArea
         '
         resources.ApplyResources(Me.tbSubmergedArea, "tbSubmergedArea")
         Me.tbSubmergedArea.Name = "tbSubmergedArea"
+        Me.ToolTip1.SetToolTip(Me.tbSubmergedArea, resources.GetString("tbSubmergedArea.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'cbCycleTime
         '
@@ -299,16 +324,19 @@ Partial Class EditingForm_Filter
         Me.cbCycleTime.FormattingEnabled = True
         Me.cbCycleTime.Items.AddRange(New Object() {resources.GetString("cbCycleTime.Items"), resources.GetString("cbCycleTime.Items1"), resources.GetString("cbCycleTime.Items2")})
         Me.cbCycleTime.Name = "cbCycleTime"
+        Me.ToolTip1.SetToolTip(Me.cbCycleTime, resources.GetString("cbCycleTime.ToolTip"))
         '
         'tbCycleTime
         '
         resources.ApplyResources(Me.tbCycleTime, "tbCycleTime")
         Me.tbCycleTime.Name = "tbCycleTime"
+        Me.ToolTip1.SetToolTip(Me.tbCycleTime, resources.GetString("tbCycleTime.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'cbCakeResistance
         '
@@ -317,16 +345,19 @@ Partial Class EditingForm_Filter
         Me.cbCakeResistance.FormattingEnabled = True
         Me.cbCakeResistance.Items.AddRange(New Object() {resources.GetString("cbCakeResistance.Items"), resources.GetString("cbCakeResistance.Items1"), resources.GetString("cbCakeResistance.Items2")})
         Me.cbCakeResistance.Name = "cbCakeResistance"
+        Me.ToolTip1.SetToolTip(Me.cbCakeResistance, resources.GetString("cbCakeResistance.ToolTip"))
         '
         'tbCakeResistance
         '
         resources.ApplyResources(Me.tbCakeResistance, "tbCakeResistance")
         Me.tbCakeResistance.Name = "tbCakeResistance"
+        Me.ToolTip1.SetToolTip(Me.tbCakeResistance, resources.GetString("tbCakeResistance.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbFilterResistance
         '
@@ -335,22 +366,26 @@ Partial Class EditingForm_Filter
         Me.cbFilterResistance.FormattingEnabled = True
         Me.cbFilterResistance.Items.AddRange(New Object() {resources.GetString("cbFilterResistance.Items"), resources.GetString("cbFilterResistance.Items1"), resources.GetString("cbFilterResistance.Items2")})
         Me.cbFilterResistance.Name = "cbFilterResistance"
+        Me.ToolTip1.SetToolTip(Me.cbFilterResistance, resources.GetString("cbFilterResistance.ToolTip"))
         '
         'tbFilterMediumResistance
         '
         resources.ApplyResources(Me.tbFilterMediumResistance, "tbFilterMediumResistance")
         Me.tbFilterMediumResistance.Name = "tbFilterMediumResistance"
+        Me.ToolTip1.SetToolTip(Me.tbFilterMediumResistance, resources.GetString("tbFilterMediumResistance.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'rbEvaluation
         '
         resources.ApplyResources(Me.rbEvaluation, "rbEvaluation")
         Me.rbEvaluation.Name = "rbEvaluation"
         Me.rbEvaluation.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbEvaluation, resources.GetString("rbEvaluation.ToolTip"))
         Me.rbEvaluation.UseVisualStyleBackColor = True
         '
         'rbSizing
@@ -358,12 +393,14 @@ Partial Class EditingForm_Filter
         resources.ApplyResources(Me.rbSizing, "rbSizing")
         Me.rbSizing.Name = "rbSizing"
         Me.rbSizing.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbSizing, resources.GetString("rbSizing.ToolTip"))
         Me.rbSizing.UseVisualStyleBackColor = True
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'GroupBox1
         '
@@ -386,6 +423,7 @@ Partial Class EditingForm_Filter
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'btnCreateAndConnectEnergy
         '
@@ -431,6 +469,7 @@ Partial Class EditingForm_Filter
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'cbOutlet2
         '
@@ -438,6 +477,7 @@ Partial Class EditingForm_Filter
         Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'btnDisconnectEnergy
         '
@@ -451,6 +491,7 @@ Partial Class EditingForm_Filter
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'cbEnergy
         '
@@ -458,6 +499,7 @@ Partial Class EditingForm_Filter
         Me.cbEnergy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEnergy.FormattingEnabled = True
         Me.cbEnergy.Name = "cbEnergy"
+        Me.ToolTip1.SetToolTip(Me.cbEnergy, resources.GetString("cbEnergy.ToolTip"))
         '
         'btnDisconnectOutlet1
         '
@@ -479,6 +521,7 @@ Partial Class EditingForm_Filter
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'cbOutlet1
         '
@@ -486,6 +529,7 @@ Partial Class EditingForm_Filter
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
         'cbInlet1
         '
@@ -493,11 +537,13 @@ Partial Class EditingForm_Filter
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'EditingForm_Filter
         '
@@ -509,6 +555,7 @@ Partial Class EditingForm_Filter
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox3)
         Me.Name = "EditingForm_Filter"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)

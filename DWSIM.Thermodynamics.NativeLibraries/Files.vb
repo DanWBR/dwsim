@@ -205,7 +205,7 @@ Public Class Files
 
             For i As Integer = 0 To dlist.Count - 1
 
-                ' Copy the assembly to the temporary file
+                ' Delete the assemblies
 
                 Try
                     File.Delete(Path.Combine(Environment.CurrentDirectory, dlist(i)))

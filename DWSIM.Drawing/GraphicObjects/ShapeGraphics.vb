@@ -56,20 +56,24 @@ Namespace GraphicObjects
 
             If SemiTransparent Then alpha = 50
 
-            Select Case gobj.Status
-                Case Status.Calculated
-                    gobj.LineColor = Color.FromArgb(alpha, Color.SteelBlue)
-                Case Status.Calculating
-                    gobj.LineColor = Color.FromArgb(alpha, Color.YellowGreen)
-                Case Status.ErrorCalculating
-                    gobj.LineColor = Color.FromArgb(alpha, Color.DarkRed)
-                Case Status.Idle
-                    gobj.LineColor = Color.FromArgb(alpha, Color.SteelBlue)
-                Case Status.Inactive
-                    gobj.LineColor = Color.FromArgb(alpha, Color.Gray)
-                Case Else
-                    gobj.LineColor = Color.FromArgb(alpha, gobj.LineColor)
-            End Select
+            If gobj.Active Then
+                Select Case gobj.Status
+                    Case Status.Calculated
+                        gobj.LineColor = Color.FromArgb(alpha, Color.SteelBlue)
+                    Case Status.Calculating
+                        gobj.LineColor = Color.FromArgb(alpha, Color.YellowGreen)
+                    Case Status.ErrorCalculating
+                        gobj.LineColor = Color.FromArgb(alpha, Color.DarkRed)
+                    Case Status.Idle
+                        gobj.LineColor = Color.FromArgb(alpha, Color.SteelBlue)
+                    Case Status.Inactive
+                        gobj.LineColor = Color.FromArgb(alpha, Color.Gray)
+                    Case Else
+                        gobj.LineColor = Color.FromArgb(alpha, gobj.LineColor)
+                End Select
+            Else
+                gobj.LineColor = Color.FromArgb(alpha, Color.Gray)
+            End If
 
         End Sub
 

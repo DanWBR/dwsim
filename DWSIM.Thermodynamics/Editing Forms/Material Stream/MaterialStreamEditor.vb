@@ -1072,4 +1072,7 @@ Public Class MaterialStreamEditor
         If Loaded Then MatStream.Annotation = rtbAnnotations.Rtf
     End Sub
 
+    Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
+        If Loaded Then MatStream.GraphicObject.Active = chkActive.Checked
+    End Sub
 End Class
