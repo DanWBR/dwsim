@@ -343,6 +343,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Este recurso utiliza uma biblioteca nativa (não-.NET) da plataforma em execução, e não funciona com o modo de cálculo em paralelo na CPU ativado. por favor desative esse recurso e tente novamente..
+        '''</summary>
+        Friend Shared ReadOnly Property ParallelPInvokeError() As String
+            Get
+                Return ResourceManager.GetString("ParallelPInvokeError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Método de Cálculo Entalpia/Entropia/Cp/Cv (0 = Lee-Kesler, 1 = Ideal, 2 = Excesso).
         '''</summary>
         Friend Shared ReadOnly Property PP_ENTH_CP_CALC_METHOD() As String
@@ -555,6 +564,168 @@ Namespace My.Resources
         Friend Shared ReadOnly Property PP_USEEXPLIQTHERMALCOND() As String
             Get
                 Return ResourceManager.GetString("PP_USEEXPLIQTHERMALCOND", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Erro no cálculo Flash..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O número máximo de iterações no cálculo Flash foi atingido..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashMaxIt() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashMaxIt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PT: Máx Iterações Atingido..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashMaxIt2() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashMaxIt2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PH: Erro no loop interno..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPHInternalLoopError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPHInternalLoopError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PH: Máximo de iterações no loop externo atingido..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPHMaxExtIt() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPHMaxExtIt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PH: Máximo de iterações no loop interno atingido..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPHMaxIntIt() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPHMaxIntIt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PH: Erro ao calcular temperatura..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlasHPHTempError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlasHPHTempError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O cálculo Flash PSF não é suportado..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPSFError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPSFError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PS: Erro no loop interno..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPSInternalLoopError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPSInternalLoopError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PS: Máximo de iterações no loop externo atingido..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPSMaxExtIt() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPSMaxExtIt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PS: Máximo de iterações no loop interno atingido..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPSMaxIntIt() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPSMaxIntIt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PS: Erro ao calcular temperatura..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlasHPSTempError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlasHPSTempError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O cálculo Flash PV não é suportado..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashPVNotSupported() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashPVNotSupported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O cálculo Flash TH não é suportado..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashTHNotSupported() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashTHNotSupported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Flash PT: Erro ao calcular fração de vapor..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashTPVapFracError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashTPVapFracError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O algoritmo Flash convergiu para a solução trivial. Tente executar o cálculo em uma condição perturbada de temperatura e/ou pressão ou utilize outro Pacote de Propriedades similar ao atual..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashTrivialSolution() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashTrivialSolution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O cálculo Flash TS não é suportado..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_FlashTSNotSupported() As String
+            Get
+                Return ResourceManager.GetString("PropPack_FlashTSNotSupported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Erro no cálculo do fator de compressibilidade..
+        '''</summary>
+        Friend Shared ReadOnly Property PropPack_ZError() As String
+            Get
+                Return ResourceManager.GetString("PropPack_ZError", resourceCulture)
             End Get
         End Property
     End Class

@@ -326,19 +326,28 @@ Namespace PropertyPackages
         Public Overridable ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
 
             Get
-                If Not FlashAlgorithm Is Nothing Then
-                    If Settings.CAPEOPENMode Then
-                        Return FlashAlgorithm
-                    Else
-                        Return FlashAlgorithm.Clone()
-                    End If
+
+                If Me.CurrentMaterialStream IsNot Nothing AndAlso
+                    Me.CurrentMaterialStream.Flowsheet IsNot Nothing AndAlso
+                    DirectCast(Me.CurrentMaterialStream, ISimulationObject).PreferredFlashAlgorithmTag <> "" Then
+
+                    Dim fa = Flowsheet.FlowsheetOptions.FlashAlgorithms.Where(Function(x) x.Tag = DirectCast(Me.CurrentMaterialStream, ISimulationObject).PreferredFlashAlgorithmTag).FirstOrDefault
+                    If Not fa Is Nothing Then Return fa.Clone Else Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
+
                 Else
-                    If Not Flowsheet Is Nothing Then
-                        Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
+
+                    If Not FlashAlgorithm Is Nothing Then
+                        Return FlashAlgorithm.Clone()
                     Else
-                        Return New NestedLoops()
+                        If Not Flowsheet Is Nothing Then
+                            Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
+                        Else
+                            Return New NestedLoops()
+                        End If
                     End If
+
                 End If
+
             End Get
 
         End Property

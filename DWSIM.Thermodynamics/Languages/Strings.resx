@@ -306,4 +306,61 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PP_USE_EOS_VOLUME_SHIFT" xml:space="preserve">
     <value>Usar correção de volume (Peneloux) (0 = Desativar, 1 = Ativar)</value>
   </data>
+  <data name="ParallelPInvokeError" xml:space="preserve">
+    <value>Este recurso utiliza uma biblioteca nativa (não-.NET) da plataforma em execução, e não funciona com o modo de cálculo em paralelo na CPU ativado. por favor desative esse recurso e tente novamente.</value>
+  </data>
+  <data name="PropPack_FlashError" xml:space="preserve">
+    <value>Erro no cálculo Flash.</value>
+  </data>
+  <data name="PropPack_FlashMaxIt" xml:space="preserve">
+    <value>O número máximo de iterações no cálculo Flash foi atingido.</value>
+  </data>
+  <data name="PropPack_FlashMaxIt2" xml:space="preserve">
+    <value>Flash PT: Máx Iterações Atingido.</value>
+  </data>
+  <data name="PropPack_FlashPHInternalLoopError" xml:space="preserve">
+    <value>Flash PH: Erro no loop interno.</value>
+  </data>
+  <data name="PropPack_FlashPHMaxExtIt" xml:space="preserve">
+    <value>Flash PH: Máximo de iterações no loop externo atingido.</value>
+  </data>
+  <data name="PropPack_FlashPHMaxIntIt" xml:space="preserve">
+    <value>Flash PH: Máximo de iterações no loop interno atingido.</value>
+  </data>
+  <data name="PropPack_FlasHPHTempError" xml:space="preserve">
+    <value>Flash PH: Erro ao calcular temperatura.</value>
+  </data>
+  <data name="PropPack_FlashPSFError" xml:space="preserve">
+    <value>O cálculo Flash PSF não é suportado.</value>
+  </data>
+  <data name="PropPack_FlashPSInternalLoopError" xml:space="preserve">
+    <value>Flash PS: Erro no loop interno.</value>
+  </data>
+  <data name="PropPack_FlashPSMaxExtIt" xml:space="preserve">
+    <value>Flash PS: Máximo de iterações no loop externo atingido.</value>
+  </data>
+  <data name="PropPack_FlashPSMaxIntIt" xml:space="preserve">
+    <value>Flash PS: Máximo de iterações no loop interno atingido.</value>
+  </data>
+  <data name="PropPack_FlasHPSTempError" xml:space="preserve">
+    <value>Flash PS: Erro ao calcular temperatura.</value>
+  </data>
+  <data name="PropPack_FlashPVNotSupported" xml:space="preserve">
+    <value>O cálculo Flash PV não é suportado.</value>
+  </data>
+  <data name="PropPack_FlashTHNotSupported" xml:space="preserve">
+    <value>O cálculo Flash TH não é suportado.</value>
+  </data>
+  <data name="PropPack_FlashTPVapFracError" xml:space="preserve">
+    <value>Flash PT: Erro ao calcular fração de vapor.</value>
+  </data>
+  <data name="PropPack_FlashTrivialSolution" xml:space="preserve">
+    <value>O algoritmo Flash convergiu para a solução trivial. Tente executar o cálculo em uma condição perturbada de temperatura e/ou pressão ou utilize outro Pacote de Propriedades similar ao atual.</value>
+  </data>
+  <data name="PropPack_FlashTSNotSupported" xml:space="preserve">
+    <value>O cálculo Flash TS não é suportado.</value>
+  </data>
+  <data name="PropPack_ZError" xml:space="preserve">
+    <value>Erro no cálculo do fator de compressibilidade.</value>
+  </data>
 </root>

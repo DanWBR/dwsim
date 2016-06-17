@@ -299,4 +299,61 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PP_USE_EOS_VOLUME_SHIFT" xml:space="preserve">
     <value>Use Peneloux Volume Translation correction (0 = Disable, 1 = Enable)</value>
   </data>
+  <data name="ParallelPInvokeError" xml:space="preserve">
+    <value>This feature uses a platform-specific, unmanaged (non-.NET) native library, which doesn't work with CPU Parallel Processing enabled. Please disable CPU Parallel Processing and try again.</value>
+  </data>
+  <data name="PropPack_FlashError" xml:space="preserve">
+    <value>Phase equilibria calculation error.</value>
+  </data>
+  <data name="PropPack_FlashMaxIt" xml:space="preserve">
+    <value>PT/PV/TV Flash: Maximum number of iterations reached.</value>
+  </data>
+  <data name="PropPack_FlashMaxIt2" xml:space="preserve">
+    <value>PT/PV/TV Flash: Maximum number of iterations reached.</value>
+  </data>
+  <data name="PropPack_FlashPHInternalLoopError" xml:space="preserve">
+    <value>PH Flash: Error calculating equilibrium temperature.</value>
+  </data>
+  <data name="PropPack_FlashPHMaxExtIt" xml:space="preserve">
+    <value>PH Flash: Maximum number of external iterations reached.</value>
+  </data>
+  <data name="PropPack_FlashPHMaxIntIt" xml:space="preserve">
+    <value>PH Flash: Maximum number of internal iterations reached.</value>
+  </data>
+  <data name="PropPack_FlasHPHTempError" xml:space="preserve">
+    <value>PH Flash: Error calculating equilibrium temperature.</value>
+  </data>
+  <data name="PropPack_FlashPSFError" xml:space="preserve">
+    <value>PSF Flash is not supported.</value>
+  </data>
+  <data name="PropPack_FlashPSInternalLoopError" xml:space="preserve">
+    <value>PS Flash: Error calculating equilibrium temperature.</value>
+  </data>
+  <data name="PropPack_FlashPSMaxExtIt" xml:space="preserve">
+    <value>PS Flash: Maximum number of external iterations reached.</value>
+  </data>
+  <data name="PropPack_FlashPSMaxIntIt" xml:space="preserve">
+    <value>PS Flash: Maximum number of internal iterations reached.</value>
+  </data>
+  <data name="PropPack_FlasHPSTempError" xml:space="preserve">
+    <value>PS Flash: Error calculating equilibrium temperature.</value>
+  </data>
+  <data name="PropPack_FlashPVNotSupported" xml:space="preserve">
+    <value>PV Flash is not supported by this Property Package.</value>
+  </data>
+  <data name="PropPack_FlashTHNotSupported" xml:space="preserve">
+    <value>TH Flash is not supported by this Property Package.</value>
+  </data>
+  <data name="PropPack_FlashTPVapFracError" xml:space="preserve">
+    <value>PT Flash: Error calculating amount of the vapor phase in the mixture.</value>
+  </data>
+  <data name="PropPack_FlashTrivialSolution" xml:space="preserve">
+    <value>The Flash algorithm converged to the trivial solution. Try to calculate the stream with slightly perturbed temperature and/or pressure conditions or use another Property Package. </value>
+  </data>
+  <data name="PropPack_FlashTSNotSupported" xml:space="preserve">
+    <value>TS Flash is not supported.</value>
+  </data>
+  <data name="PropPack_ZError" xml:space="preserve">
+    <value>Error calculating compressibility factor.</value>
+  </data>
 </root>
