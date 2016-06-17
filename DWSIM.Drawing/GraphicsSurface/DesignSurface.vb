@@ -77,7 +77,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private dragOffset As New Point(0, 0)
     Private dragStart As New Point(0, 0)
 
-    Private selectionDragging As Boolean = False
+    Public selectionDragging As Boolean = False
     Private selectable As Boolean = True
     Public dragging As Boolean = False
     Private draggingfs As Boolean = False
@@ -1092,9 +1092,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             dragging = False
             rotating = False
             If selectionDragging Then
-                'TODO: Rewrite to handle multiple selections
-                'really just need to change from m_SelectedObject to a collection
-                'add each found object in this loop, removing the Exit For
                 Dim zoomedSelection As Rectangle = DeZoomRectangle(selectionRect)
                 Dim graphicObj As GraphicObject
                 For Each graphicObj In Me.drawingObjects

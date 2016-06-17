@@ -406,6 +406,9 @@ Public Class FlowsheetSurface
 
             If Not Me.FlowsheetDesignSurface.SelectedObject Is Nothing Then
 
+                FlowsheetDesignSurface.dragging = False
+                FlowsheetDesignSurface.selectiondragging = False
+
                 If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
                     If Not My.Settings.EnableMultipleObjectEditors Then

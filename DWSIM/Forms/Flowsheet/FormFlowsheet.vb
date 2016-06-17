@@ -2612,31 +2612,31 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs)
 
-        Dim hovereditem As ToolStripSplitButton = DirectCast(sender, ToolStripSplitButton)
-
-        For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
-            tsmi.Checked = False
-        Next
-
-        For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
-            tsmi.Checked = True
-            If tsmi Is hovereditem Then Exit For
-        Next
+        If TypeOf sender Is ToolStripMenuItem Then
+            Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+            For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
+                tsmi.Checked = False
+            Next
+            For Each tsmi As ToolStripMenuItem In tsbUndo.DropDownItems
+                tsmi.Checked = True
+                If tsmi Is hovereditem Then Exit For
+            Next
+        End If
 
     End Sub
 
     Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs)
 
-        Dim hovereditem As ToolStripSplitButton = DirectCast(sender, ToolStripSplitButton)
-
-        For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
-            tsmi.Checked = False
-        Next
-
-        For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
-            tsmi.Checked = True
-            If tsmi Is hovereditem Then Exit For
-        Next
+        If TypeOf sender Is ToolStripMenuItem Then
+            Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+            For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
+                tsmi.Checked = False
+            Next
+            For Each tsmi As ToolStripMenuItem In tsbRedo.DropDownItems
+                tsmi.Checked = True
+                If tsmi Is hovereditem Then Exit For
+            Next
+        End If
 
     End Sub
 
