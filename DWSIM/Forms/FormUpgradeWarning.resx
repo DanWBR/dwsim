@@ -127,10 +127,10 @@
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="chkDoNotShowAgain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 17</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
   </data>
@@ -151,9 +151,6 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="LabelVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>305, 13</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
-    <value>PictureBox1</value>
-  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>510, 124</value>
   </data>
@@ -163,8 +160,8 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -181,17 +178,20 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="chkDoNotShowAgain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 181</value>
+  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Aviso de incompatibilidade</value>
+  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>495, 177</value>
+  </data>
+  <data name="&gt;&gt;chkDoNotShowAgain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LabelVersion.Name" xml:space="preserve">
     <value>LabelVersion</value>
@@ -205,11 +205,11 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="&gt;&gt;LabelVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;chkDoNotShowAgain.Name" xml:space="preserve">
     <value>chkDoNotShowAgain</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkDoNotShowAgain.Parent" xml:space="preserve">
     <value>$this</value>
@@ -220,8 +220,8 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="LabelVersion.Location" type="System.Drawing.Point, System.Drawing">
     <value>60, 12</value>
   </data>
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="chkDoNotShowAgain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 17</value>
   </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -232,8 +232,11 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;LabelVersion.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
+    <value>PictureBox1</value>
   </data>
   <data name="LabelVersion.Text" xml:space="preserve">
     <value>Você está abrindo uma simulação salva com o DWSIM versão </value>
@@ -247,23 +250,20 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="LabelVersion.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
   </data>
-  <data name="&gt;&gt;LabelVersion.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="chkDoNotShowAgain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 181</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="&gt;&gt;chkDoNotShowAgain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Aviso de incompatibilidade</value>
   </data>
   <data name="PictureBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

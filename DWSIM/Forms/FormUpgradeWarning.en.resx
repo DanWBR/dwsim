@@ -137,7 +137,7 @@
     <value>464, 124</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>DWSIM 4 modifies the structure of the XML file to save information that is incompatible with DWSIM 3. As a result, if you perform changes to the simulation and replace the existing file, the it will not be readable by DWSIM version 3.x anymore.
+    <value>DWSIM 4 modifies the structure of the XML file to save information that is incompatible with DWSIM 3. As a result, if you perform changes to the simulation and replace the existing file, it will not be readable by DWSIM version 3.x anymore.
 
 If you do not update the simulation file, it still will be usable by both DWSIM 3 and DWSIM 4.
 
