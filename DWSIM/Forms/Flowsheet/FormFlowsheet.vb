@@ -1,4 +1,4 @@
-﻿'    Copyright 2008-2015 Daniel Wagner O. de Medeiros
+﻿'    Copyright 2008-2016 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -1262,6 +1262,54 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         tsbCutObj.Enabled = status
         tsbCopyObj.Enabled = status
         tsbPasteObj.Enabled = status
+
+    End Sub
+
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click, TabelaDePropriedadesToolStripMenuItem.Click
+        Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+         -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
+        Dim gObj As GraphicObject = Nothing
+        myPropertyTable.Flowsheet = Me
+        gObj = myPropertyTable
+        gObj.Name = "PROPERTYTABLE-" & Guid.NewGuid.ToString
+        gObj.Tag = "PROPERTYTABLE-" & Guid.NewGuid.ToString
+        gObj.AutoSize = True
+        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+    End Sub
+
+    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click, RectangleToolStripMenuItem.Click
+        Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
+        myobj.Name = "RECT-" & Guid.NewGuid.ToString
+        myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.drawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
+        myobj.Height = 200
+        myobj.Width = 200
+        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(myobj)
+        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+    End Sub
+
+    Private Sub tsbResizeModeKeepAR_Click(sender As Object, e As EventArgs) Handles tsbResizeModeKeepAR.Click
+        Me.FormSurface.FlowsheetDesignSurface.ResizingMode_KeepAR = tsbResizeModeKeepAR.Checked
+    End Sub
+
+    Private Sub tsbResizeMode_Click(sender As Object, e As EventArgs) Handles tsbResizeMode.Click
+        Me.FormSurface.FlowsheetDesignSurface.ResizingMode = tsbResizeMode.Checked
+    End Sub
+
+    Private Sub BlocoDeSimulacaoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlocoDeSimulacaoToolStripMenuItem.Click
+        Dim f As New FormAddFlowsheetObject() With {.Flowsheet = Me}
+        f.ShowDialog(Me)
+    End Sub
+
+    Private Sub tsmiCloseOpenedEditors_Click(sender As Object, e As EventArgs) Handles tsmiCloseOpenedEditors.Click
+
+        Me.UIThreadInvoke(Sub()
+                              For Each obj In Me.SimulationObjects.Values
+                                  obj.CloseEditForm()
+                              Next
+                          End Sub)
 
     End Sub
 
@@ -2706,8 +2754,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Get
     End Property
 
-#End Region
-
     Public Function GetTranslatedString1(text As String) As String Implements IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
         Dim returntext As String = text
         returntext = DWSIM.App.GetLocalString(text)
@@ -2802,19 +2848,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click, TabelaDePropriedadesToolStripMenuItem.Click
-        Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
-         -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
-        Dim gObj As GraphicObject = Nothing
-        myPropertyTable.Flowsheet = Me
-        gObj = myPropertyTable
-        gObj.Name = "PROPERTYTABLE-" & Guid.NewGuid.ToString
-        gObj.Tag = "PROPERTYTABLE-" & Guid.NewGuid.ToString
-        gObj.AutoSize = True
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
-        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
     Public Function GetUtility(uttype As Enums.FlowsheetUtility) As IAttachedUtility Implements IFlowsheet.GetUtility
         Select Case uttype
             Case FlowsheetUtility.NaturalGasHydrates
@@ -2838,40 +2871,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Select
         Throw New ArgumentException
     End Function
-
-    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click, RectangleToolStripMenuItem.Click
-        Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
-          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
-        myobj.Name = "RECT-" & Guid.NewGuid.ToString
-        myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.drawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
-        myobj.Height = 200
-        myobj.Width = 200
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(myobj)
-        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
-    Private Sub tsbResizeModeKeepAR_Click(sender As Object, e As EventArgs) Handles tsbResizeModeKeepAR.Click
-        Me.FormSurface.FlowsheetDesignSurface.ResizingMode_KeepAR = tsbResizeModeKeepAR.Checked
-    End Sub
-
-    Private Sub tsbResizeMode_Click(sender As Object, e As EventArgs) Handles tsbResizeMode.Click
-        Me.FormSurface.FlowsheetDesignSurface.ResizingMode = tsbResizeMode.Checked
-    End Sub
-
-    Private Sub BlocoDeSimulacaoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlocoDeSimulacaoToolStripMenuItem.Click
-        Dim f As New FormAddFlowsheetObject() With {.Flowsheet = Me}
-        f.ShowDialog(Me)
-    End Sub
-
-    Private Sub tsmiCloseOpenedEditors_Click(sender As Object, e As EventArgs) Handles tsmiCloseOpenedEditors.Click
-
-        Me.UIThreadInvoke(Sub()
-                              For Each obj In Me.SimulationObjects.Values
-                                  obj.CloseEditForm()
-                              Next
-                          End Sub)
-
-    End Sub
 
     Public Sub UpdateOpenEditForms() Implements IFlowsheet.UpdateOpenEditForms
 
@@ -2906,5 +2905,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public Sub AddPropertyPackage(obj As IPropertyPackage) Implements IFlowsheet.AddPropertyPackage
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub
+
+#End Region
 
 End Class
