@@ -629,9 +629,9 @@ Public Class EditingForm_Column
                 Case ColumnSpec.SpecType.Temperature
                     cunits = New String() {"K", "R", "C", "F"}
             End Select
-            cbRebSpec.Items.Clear()
-            cbRebSpec.Items.AddRange(cunits)
-            cbRebSpec.SelectedItem = Nothing
+            cbRebSpecUnits.Items.Clear()
+            cbRebSpecUnits.Items.AddRange(cunits)
+            cbRebSpecUnits.SelectedItem = Nothing
 
         End If
 

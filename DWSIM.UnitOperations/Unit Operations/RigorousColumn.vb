@@ -1642,8 +1642,33 @@ Namespace UnitOperations
 
         Sub AddStages()
 
-            For i As Integer = 0 To Me.NumberOfStages - 1
-                _st.Add(New Stage(Guid.NewGuid().ToString) With {.Name = "S" & (i + 1)})
+            Dim i As Integer
+            For i = 0 To Me.NumberOfStages - 1
+                _st.Add(New Stage(Guid.NewGuid().ToString))
+                Select Case Me.ColumnType
+                    Case ColType.DistillationColumn
+                        If i = 0 Then
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
+                        ElseIf i = Me.NumberOfStages - 1 Then
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
+                        Else
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                        End If
+                    Case ColType.AbsorptionColumn
+                        _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                    Case ColType.ReboiledAbsorber
+                        If i = Me.NumberOfStages - 1 Then
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCReboiler")
+                        Else
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                        End If
+                    Case ColType.RefluxedAbsorber
+                        If i = 0 Then
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCCondenser")
+                        Else
+                            _st(_st.Count - 1).Name = FlowSheet.GetTranslatedString("DCStage") & _st.Count - 1
+                        End If
+                End Select
             Next
 
             RebuildEstimates()
