@@ -54,7 +54,7 @@ Public Class FormPhEnv
 
     Public bw As System.ComponentModel.BackgroundWorker
 
-    Private Sub FormPhEnv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
         Me.ComboBox1.SelectedIndex = 0
         Me.ComboBox2.SelectedIndex = 0
@@ -66,10 +66,8 @@ Public Class FormPhEnv
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat
 
-        Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDiagr1")
-
         Try
-            Me.chkhyd.Enabled = DirectCast(AttachedTo, Streams.MaterialStream).PropertyPackage.RET_VCAS().Contains("7732-18-5")
+            Me.chkhyd.Enabled = Frm.SelectedCompounds.Values.Select(Function(x) x.CAS_Number).Contains("7732-18-5")
         Catch ex As Exception
 
         End Try
@@ -92,6 +90,16 @@ Public Class FormPhEnv
         Me.loaded = True
 
         If DWSIM.App.IsRunningOnMono Then GroupBox2.Width -= 80
+
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+    End Sub
+
+    Private Sub FormPhEnv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        If Not loaded Then Initialize()
 
     End Sub
 
@@ -1289,11 +1297,4 @@ exec:       With Me.GraphControl.GraphPane.Legend
         Return props
     End Function
 
-    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
-
-    End Sub
-
-    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
-
-    End Sub
 End Class

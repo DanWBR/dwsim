@@ -14,7 +14,7 @@
 
     End Sub
 
-    Private Sub FrmDAVP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
         Me.Frm = AttachedTo.GetFlowsheet
 
@@ -23,9 +23,17 @@
         Me.ComboBox1.SelectedIndex = 0
         Me.ComboBox1.Enabled = False
 
-        Me.ComboBoxTipoVaso.SelectedIndex = 0
+    End Sub
 
-        Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDAVP")
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+    End Sub
+
+    Private Sub FrmDAVP_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Initialize()
+
+        Me.ComboBoxTipoVaso.SelectedIndex = 0
 
     End Sub
 
@@ -312,11 +320,4 @@
         Return props
     End Function
 
-    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
-
-    End Sub
-
-    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
-
-    End Sub
 End Class

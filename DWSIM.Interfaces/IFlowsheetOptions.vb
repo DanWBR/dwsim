@@ -21,8 +21,6 @@
     Property FlowsheetShowCalculationQueue As Boolean
     Property FlowsheetShowWatchWindow As Boolean
 
-    Property BinaryEnvelopeExpData As String
-
     Property Key As String
 
     Property SelectedUnitSystem As IUnitsOfMeasure

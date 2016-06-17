@@ -2878,6 +2878,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.UIThreadInvoke(Sub()
                               For Each obj In SimulationObjects.Values
                                   obj.UpdateEditForm()
+                                  obj.AttachedUtilities.ForEach(Sub(x) x.Populate())
                               Next
                           End Sub)
 

@@ -276,7 +276,9 @@
     End Function
 
     Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
-        Me.Close()
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+            Me.Close()
+        End If
     End Sub
 
     Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,

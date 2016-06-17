@@ -42,26 +42,57 @@ Public Class FormBinEnv
 
     Private Sub FormBinEnv_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Flowsheet = AttachedTo.GetFlowsheet
+        If Not loaded Then Initialize()
 
-        Me.Text = DWSIM.App.GetLocalString("DWSIMUtilitriosDiagr")
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+        Me.su = Flowsheet.FlowsheetOptions.SelectedUnitSystem
+        Me.nf = Flowsheet.FlowsheetOptions.NumberFormat
+
+        Dim s1, s2, s3 As Object
+
+        s1 = Me.cbComp1.SelectedItem
+        s2 = Me.cbComp2.SelectedItem
+        s3 = Me.cbPropPack.SelectedItem
+
+        Me.cbComp1.Items.Clear()
+        Me.cbComp2.Items.Clear()
+        For Each co As ConstantProperties In Flowsheet.SelectedCompounds.Values
+            Me.cbComp1.Items.Add((co.Name))
+            Me.cbComp2.Items.Add((co.Name))
+        Next
+
+        Me.cbPropPack.Items.Clear()
+        For Each pp As PropertyPackage In Flowsheet.PropertyPackages.Values
+            Me.cbPropPack.Items.Add(pp.Tag & " (" & pp.ComponentName & ")")
+        Next
+
+        Try
+            Me.cbComp1.SelectedItem = s1
+            Me.cbComp2.SelectedItem = s2
+            Me.cbPropPack.SelectedItem = s3
+        Catch ex As Exception
+        End Try
+
+        Me.lblP.Text = su.pressure
+        Me.lblT.Text = su.temperature
+
+        Me.GridExpData.Columns(1).HeaderText = "x1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
+        Me.GridExpData.Columns(2).HeaderText = "y1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
+        Me.GridExpData.Columns(3).HeaderText = "T (" & su.temperature & ")"
+        Me.GridExpData.Columns(4).HeaderText = "P (" & su.pressure & ")"
+
+    End Sub
+
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
+
+        Flowsheet = AttachedTo.GetFlowsheet
 
         If Flowsheet.SelectedCompounds.Count > 1 Then
 
-            Me.su = Flowsheet.FlowsheetOptions.SelectedUnitSystem
-            Me.nf = Flowsheet.FlowsheetOptions.NumberFormat
-
-            Me.cbComp1.Items.Clear()
-            Me.cbComp2.Items.Clear()
-            For Each co As ConstantProperties In Flowsheet.SelectedCompounds.Values
-                Me.cbComp1.Items.Add((co.Name))
-                Me.cbComp2.Items.Add((co.Name))
-            Next
-
-            Me.cbPropPack.Items.Clear()
-            For Each pp As PropertyPackage In Flowsheet.PropertyPackages.Values
-                Me.cbPropPack.Items.Add(pp.Tag & " (" & pp.ComponentName & ")")
-            Next
+            Populate()
 
             If Me.cbPropPack.Items.Count > 0 Then Me.cbPropPack.SelectedIndex = 0
 
@@ -70,24 +101,10 @@ Public Class FormBinEnv
 
             cbXAxisBasis.SelectedIndex = 0
 
-            Me.lblP.Text = su.pressure
-            Me.lblT.Text = su.temperature
-
             Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101325), nf)
             Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
 
             Me.GraphControl.IsShowPointValues = True
-
-            Me.GridExpData.Columns(1).HeaderText = "x1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
-            Me.GridExpData.Columns(2).HeaderText = "y1 (" & DWSIM.App.GetLocalString("FraoMolar1") & ")"
-            Me.GridExpData.Columns(3).HeaderText = "T (" & su.temperature & ")"
-            Me.GridExpData.Columns(4).HeaderText = "P (" & su.pressure & ")"
-
-            Try
-                If Flowsheet.FlowsheetOptions.BinaryEnvelopeExpData <> "" Then Me.GridExpData.PasteData2(Flowsheet.FlowsheetOptions.BinaryEnvelopeExpData)
-            Catch ex As Exception
-
-            End Try
 
             If DWSIM.App.IsRunningOnMono Then GroupBox2.Width -= 80
 
@@ -97,6 +114,7 @@ Public Class FormBinEnv
 
         End If
 
+        loaded = True
 
     End Sub
 
@@ -1249,25 +1267,25 @@ Public Class FormBinEnv
                 chkCompareModels.Checked = pvalue
             Case "ExpX"
                 If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
-                Dim datap As List(Of Double) = pvalue
+                Dim datap As List(Of Double) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Double))(pvalue.ToString)
                 For i As Integer = 0 To datap.Count - 1
                     GridExpData.Rows(i).Cells("colx1").Value = datap(i)
                 Next
             Case "ExpY"
                 If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
-                Dim datap As List(Of Double) = pvalue
+                Dim datap As List(Of Double) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Double))(pvalue.ToString)
                 For i As Integer = 0 To datap.Count - 1
                     GridExpData.Rows(i).Cells("coly1").Value = datap(i)
                 Next
             Case "ExpT"
                 If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
-                Dim datap As List(Of Double) = pvalue
+                Dim datap As List(Of Double) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Double))(pvalue.ToString)
                 For i As Integer = 0 To datap.Count - 1
                     GridExpData.Rows(i).Cells("colt").Value = datap(i)
                 Next
             Case "ExpP"
                 If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
-                Dim datap As List(Of Double) = pvalue
+                Dim datap As List(Of Double) = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Double))(pvalue.ToString)
                 For i As Integer = 0 To datap.Count - 1
                     GridExpData.Rows(i).Cells("colp").Value = datap(i)
                 Next
@@ -1298,11 +1316,4 @@ Public Class FormBinEnv
         Return props
     End Function
 
-    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
-
-    End Sub
-
-    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
-
-    End Sub
 End Class

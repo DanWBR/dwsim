@@ -381,11 +381,17 @@ Namespace UnitOperations
             If Not xel_u Is Nothing Then
                 Dim dataUtilities As List(Of XElement) = xel_u.Elements.ToList
                 For Each xel As XElement In dataUtilities
-                    Dim u = FlowSheet.GetUtility(xel.Element("UtilityType").Value)
-                    u.ID = xel.Element("ID").Value
-                    u.Name = xel.Element("Name").Value
-                    u.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(xel.Element("Data").Value))
-                    Me.AttachedUtilities.Add(u)
+                    Try
+                        Dim u = FlowSheet.GetUtility(xel.Element("UtilityType").Value)
+                        u.ID = xel.Element("ID").Value
+                        u.Name = xel.Element("Name").Value
+                        u.AttachedTo = Me
+                        u.Initialize()
+                        u.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(xel.Element("Data").Value))
+                        Me.AttachedUtilities.Add(u)
+                    Catch ex As Exception
+                        FlowSheet.ShowMessage("Error restoring attached utility to " & Me.Name & ": " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                    End Try
                 Next
             End If
 

@@ -35,7 +35,9 @@ Public Class FormHYD
     Dim resPC, resTC As Object
     Dim tipoPC, tipoTC As String, nomesglobal() As String
 
-    Private Sub FormHYD_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Property loaded As Boolean = False
+
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
         Me.ComboBox1.SelectedIndex = 0
 
@@ -45,13 +47,23 @@ Public Class FormHYD
 
         Me.Frm = AttachedTo.GetFlowsheet
 
-        Me.su = Frm.Options.SelectedUnitSystem
-        Me.nf = Frm.Options.NumberFormat
-
         Me.ComboBox3.Items.Clear()
         Me.ComboBox3.Items.Add(AttachedTo.GraphicObject.Tag.ToString)
         Me.ComboBox3.SelectedIndex = 0
         Me.ComboBox3.Enabled = False
+
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+        Me.su = Frm.Options.SelectedUnitSystem
+        Me.nf = Frm.Options.NumberFormat
+
+    End Sub
+
+    Private Sub FormHYD_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        If Not loaded Then Initialize()
 
     End Sub
 
@@ -370,11 +382,4 @@ Public Class FormHYD
         Return props
     End Function
 
-    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
-
-    End Sub
-
-    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
-
-    End Sub
 End Class

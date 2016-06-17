@@ -524,7 +524,14 @@ Public Class EditingForm_Separator
 
         For Each item In VesselObject.AttachedUtilities
             Dim ts As New ToolStripMenuItem(item.Name)
-            AddHandler ts.Click, Sub() DirectCast(item, Form).Select()
+            AddHandler ts.Click, Sub()
+                                     Dim f = DirectCast(item, DockContent)
+                                     If f.Visible Then
+                                         f.Select()
+                                     Else
+                                         VesselObject.FlowSheet.DisplayForm(f)
+                                     End If
+                                 End Sub
             UtilitiesCtxMenu.Items.Add(ts)
             AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
         Next

@@ -204,8 +204,6 @@ Namespace DWSIM.Flowsheet
 
         Public Property BackupFileName As String = "" Implements Interfaces.IFlowsheetOptions.BackupFileName
 
-        Public Property BinaryEnvelopeExpData As String = "" Implements Interfaces.IFlowsheetOptions.BinaryEnvelopeExpData
-
         Public Property FilePath As String = "" Implements Interfaces.IFlowsheetOptions.FilePath
 
         Public Property FlowsheetQuickConnect As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetQuickConnect

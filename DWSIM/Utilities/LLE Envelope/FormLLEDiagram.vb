@@ -41,6 +41,8 @@ Public Class FormLLEDiagram
 
     Dim P, T As Double
 
+    Private Property loaded As Boolean = False
+
     Private Function Transform(ByVal G As Graphics, ByVal X As Double, ByVal Y As Double) As Drawing.Point
 
         Dim R As New Drawing.Point
@@ -528,45 +530,23 @@ Public Class FormLLEDiagram
 
     End Sub
 
-    Private Sub FormLLEDiagram_Shown(sender As Object, e As EventArgs) Handles Me.Load
-
-        Dim i As Integer
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
         Frm = AttachedTo.GetFlowsheet
         mat = New MaterialStream("", "", Frm, Nothing)
 
         If Me.Frm.Options.SelectedComponents.Count > 2 Then
-            ReDim Names(Me.Frm.Options.SelectedComponents.Count - 1)
 
-            su = Frm.Options.SelectedUnitSystem
-            nf = Frm.Options.NumberFormat
-
-            cbComp1.Items.Clear()
-            cbComp2.Items.Clear()
-            cbComp3.Items.Clear()
-
-            For Each co As ConstantProperties In Frm.Options.SelectedComponents.Values
-                cbComp1.Items.Add((co.Name))
-                cbComp2.Items.Add((co.Name))
-                cbComp3.Items.Add((co.Name))
-                Names(i) = co.Name
-                i += 1
-            Next
+            Populate()
 
             cbComp1.SelectedIndex = 0
             cbComp2.SelectedIndex = 1
             cbComp3.SelectedIndex = 2
 
-            Me.cbPropPack.Items.Clear()
-            For Each pp As PropertyPackage In Me.Frm.Options.PropertyPackages.Values
-                Me.cbPropPack.Items.Add(pp.Tag & " (" & pp.ComponentName & ")")
-            Next
             cbPropPack.SelectedIndex = 0
 
-            Me.lblT.Text = su.temperature
             Me.tbT.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, 298.15), nf)
 
-            Me.lblP.Text = su.pressure
             Me.tbP.Text = Format(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, 101400), nf)
 
             DataGridView1.Columns(0).HeaderText = "[1] " & cbComp1.Text
@@ -579,6 +559,61 @@ Public Class FormLLEDiagram
             MessageBox.Show(DWSIM.App.GetLocalString("LLEEnvError_ThreeCompoundsMinimum"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End If
+
+        loaded = True
+
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+        ReDim Names(Me.Frm.Options.SelectedComponents.Count - 1)
+
+        su = Frm.Options.SelectedUnitSystem
+        nf = Frm.Options.NumberFormat
+
+        Dim i As Integer
+
+        Dim s1, s2, s3, s4 As Object
+        s1 = cbComp1.SelectedItem
+        s2 = cbComp2.SelectedItem
+        s3 = cbComp3.SelectedItem
+        s4 = cbPropPack.SelectedItem
+
+        cbComp1.Items.Clear()
+        cbComp2.Items.Clear()
+        cbComp3.Items.Clear()
+
+        For Each co As ConstantProperties In Frm.Options.SelectedComponents.Values
+            cbComp1.Items.Add((co.Name))
+            cbComp2.Items.Add((co.Name))
+            cbComp3.Items.Add((co.Name))
+            Names(i) = co.Name
+            i += 1
+        Next
+
+        Me.cbPropPack.Items.Clear()
+        For Each pp As PropertyPackage In Me.Frm.Options.PropertyPackages.Values
+            Me.cbPropPack.Items.Add(pp.Tag & " (" & pp.ComponentName & ")")
+        Next
+
+        Me.lblT.Text = su.temperature
+        Me.lblP.Text = su.pressure
+
+        Try
+            cbComp1.SelectedItem = s1
+            cbComp2.SelectedItem = s2
+            cbComp3.SelectedItem = s3
+            cbPropPack.SelectedItem = s4
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub FormLLEDiagram_Shown(sender As Object, e As EventArgs) Handles Me.Load
+
+        If Not loaded Then Initialize()
+
     End Sub
 
     Public Property AttachedTo As Interfaces.ISimulationObject Implements Interfaces.IAttachedUtility.AttachedTo
@@ -662,13 +697,6 @@ Public Class FormLLEDiagram
         Return props
     End Function
 
-    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
-
-    End Sub
-
-    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
-
-    End Sub
 End Class
 
 Public Class Rec

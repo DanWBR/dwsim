@@ -1004,7 +1004,7 @@ Public Class FormSimulSettings
                 dgvpp.Rows.Remove(dgvpp.SelectedRows(0))
             End If
         End If
-        FrmChild.UpdateOpenEditForms()
+        If dgvpp.Rows.Count > 0 Then FrmChild.UpdateOpenEditForms()
 
     End Sub
 
