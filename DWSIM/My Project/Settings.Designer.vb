@@ -604,18 +604,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property Setting() As String
-            Get
-                Return CType(Me("Setting"),String)
-            End Get
-            Set
-                Me("Setting") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CloseFormsOnDeselecting() As Boolean
             Get
@@ -659,6 +647,18 @@ Namespace My
             End Get
             Set
                 Me("EnableMultipleObjectEditors") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property SimulationUpgradeWarning() As Boolean
+            Get
+                Return CType(Me("SimulationUpgradeWarning"),Boolean)
+            End Get
+            Set
+                Me("SimulationUpgradeWarning") = value
             End Set
         End Property
     End Class

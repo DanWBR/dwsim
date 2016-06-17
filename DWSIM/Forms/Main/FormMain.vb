@@ -1067,6 +1067,20 @@ Public Class FormMain
             SharedClasses.Utility.UpdateElement(xel1)
         Next
 
+        Try
+            If My.Settings.SimulationUpgradeWarning Then
+                Dim versiontext = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo").Element("BuildVersion").Value
+                If versiontext.StartsWith("3") Then
+                    Dim fw As New FormUpgradeWarning()
+                    fw.LabelVersion.Text += versiontext & "."
+                    fw.ShowDialog(Me)
+                End If
+            End If
+        Catch ex As Exception
+        End Try
+
+
+
         Dim form As FormFlowsheet = New FormFlowsheet()
         Settings.CAPEOPENMode = False
         My.Application.ActiveSimulation = form

@@ -141,9 +141,6 @@
     <Setting Name="ObjectSelectorSplitterDistance3" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">84</Value>
     </Setting>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="CloseFormsOnDeselecting" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -154,6 +151,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="EnableMultipleObjectEditors" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SimulationUpgradeWarning" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

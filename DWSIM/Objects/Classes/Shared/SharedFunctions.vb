@@ -282,6 +282,9 @@ Namespace DWSIM
 
             My.Settings.AutomaticUpdates = source.Configs("Misc").GetBoolean("AutoUpdate", True)
 
+            My.Settings.DefaultEditorLocation = source.Configs("Misc").GetInt("DefaultEditorLocation", 8)
+            My.Settings.EnableMultipleObjectEditors = source.Configs("Misc").GetBoolean("EnableMultipleObjectEditors", True)
+            My.Settings.SimulationUpgradeWarning = source.Configs("Misc").GetBoolean("SimulationUpgradeWarning", True)
 
         End Sub
 
@@ -349,6 +352,10 @@ Namespace DWSIM
             source.Configs("Misc").Set("UseSIMDExtensions", My.Settings.UseSIMDExtensions)
             source.Configs("Misc").Set("CloseFormsOnDeselecting", My.Settings.CloseFormsOnDeselecting)
             source.Configs("Misc").Set("AutoUpdate", My.Settings.AutomaticUpdates)
+
+            source.Configs("Misc").Set("DefaultEditorLocation", My.Settings.DefaultEditorLocation)
+            source.Configs("Misc").Set("EnableMultipleObjectEditors", My.Settings.EnableMultipleObjectEditors)
+            source.Configs("Misc").Set("SimulationUpgradeWarning", My.Settings.SimulationUpgradeWarning)
 
             source.Save(configfile)
 

@@ -392,6 +392,12 @@
     <Compile Include="Forms\FormTextBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormUpgradeWarning.Designer.vb">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUpgradeWarning.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormWhatsNew.Designer.vb">
       <DependentUpon>FormWhatsNew.vb</DependentUpon>
     </Compile>
@@ -527,10 +533,10 @@
     <Compile Include="Forms\Flowsheet\FormFlowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMain.vb">
+    <Compile Include="Forms\Main\FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormMain.Designer.vb">
+    <Compile Include="Forms\Main\FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -830,7 +836,7 @@
     <EmbeddedResource Include="Forms\FormDBManager.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMain.resx">
+    <EmbeddedResource Include="Forms\Main\FormMain.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -855,6 +861,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormTextBox.resx">
       <DependentUpon>FormTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpgradeWarning.en.resx">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpgradeWarning.resx">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWhatsNew.de.resx">
       <DependentUpon>FormWhatsNew.vb</DependentUpon>
@@ -1146,7 +1158,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMain.en.resx">
+    <EmbeddedResource Include="Forms\Main\FormMain.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -2279,10 +2291,10 @@
     <EmbeddedResource Include="Forms\Flowsheet Components\WatchPanel.resx">
       <DependentUpon>WatchPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMain.de.resx">
+    <EmbeddedResource Include="Forms\Main\FormMain.de.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormMain.es.resx">
+    <EmbeddedResource Include="Forms\Main\FormMain.es.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.resx">
