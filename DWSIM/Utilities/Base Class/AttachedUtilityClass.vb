@@ -330,4 +330,12 @@
         Return props
     End Function
 
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
+        InternalUtility.Initialize()
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+        InternalUtility.Populate()
+    End Sub
+
 End Class

@@ -1254,7 +1254,7 @@ Public Class FormBinEnv
                     GridExpData.Rows(i).Cells("colx1").Value = datap(i)
                 Next
             Case "ExpY"
-                 If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
+                If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
                 Dim datap As List(Of Double) = pvalue
                 For i As Integer = 0 To datap.Count - 1
                     GridExpData.Rows(i).Cells("coly1").Value = datap(i)
@@ -1266,7 +1266,7 @@ Public Class FormBinEnv
                     GridExpData.Rows(i).Cells("colt").Value = datap(i)
                 Next
             Case "ExpP"
-               If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
+                If GridExpData.Rows.Count < 100 Then GridExpData.Rows.Add(100)
                 Dim datap As List(Of Double) = pvalue
                 For i As Integer = 0 To datap.Count - 1
                     GridExpData.Rows(i).Cells("colp").Value = datap(i)
@@ -1298,4 +1298,11 @@ Public Class FormBinEnv
         Return props
     End Function
 
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
+
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+    End Sub
 End Class

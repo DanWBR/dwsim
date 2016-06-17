@@ -304,4 +304,11 @@ Public Class FrmPsvSize
         Return props
     End Function
 
+    Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
+
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+
+    End Sub
 End Class
