@@ -571,6 +571,10 @@ Public Class FlowsheetSurface
         Me.ToolStripSeparator4.Visible = False
         Me.CopyFromTSMI.Visible = False
 
+        Me.ToolStripSeparator8.Visible = False
+        Me.SplitToolStripMenuItem.Visible = False
+        Me.MergeStreamsToolStripMenuItem.Visible = False
+
         Me.AtivadoToolStripMenuItem.Checked = Me.FlowsheetDesignSurface.SelectedObject.Active
       
         DepurarObjetoToolStripMenuItem.Visible = Flowsheet.Collections.FlowsheetObjectCollection.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name)
@@ -594,6 +598,24 @@ Public Class FlowsheetSurface
             Me.HorizontalmenteToolStripMenuItem.Visible = True
 
             Try
+
+                If Me.FlowsheetDesignSurface.SelectedObjects.Count = 2 AndAlso
+                    Me.FlowsheetDesignSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Count = 2 Or
+                    Me.FlowsheetDesignSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Count = 2 Then
+
+                    Me.ToolStripSeparator8.Visible = True
+                    Me.MergeStreamsToolStripMenuItem.Visible = True
+
+                End If
+
+                If Me.FlowsheetDesignSurface.SelectedObjects.Count = 1 AndAlso
+                    Me.FlowsheetDesignSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.MaterialStream).Count = 1 Or
+                    Me.FlowsheetDesignSurface.SelectedObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Count = 1 Then
+
+                    Me.ToolStripSeparator8.Visible = True
+                    Me.SplitToolStripMenuItem.Visible = True
+
+                End If
 
                 Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(Me.FlowsheetDesignSurface.SelectedObject.Name)
 
@@ -740,7 +762,7 @@ Public Class FlowsheetSurface
         CloneObject(Me.FlowsheetDesignSurface.SelectedObject)
     End Sub
 
-    Public Sub CloneObject(gobj As GraphicObject)
+    Public Function CloneObject(gobj As GraphicObject) As GraphicObject
 
         Flowsheet = My.Application.ActiveSimulation
 
@@ -749,7 +771,7 @@ Public Class FlowsheetSurface
 
         Dim searchtext As String = gobj.Tag.Split("(")(0).Trim()
 
-        Dim objcount As Integer = (From go As GraphicObject In Me.FlowsheetDesignSurface.drawingObjects Select go Where go.Tag.Contains(searchtext)).Count
+        Dim objcount As Integer = (From go As GraphicObject In Me.FlowsheetDesignSurface.DrawingObjects Select go Where go.Tag.Contains(searchtext)).Count
 
         Dim mpx = Me.FlowsheetDesignSurface.SelectedObject.X + Me.FlowsheetDesignSurface.SelectedObject.Width * 1.1
         Dim mpy = Me.FlowsheetDesignSurface.SelectedObject.Y + Me.FlowsheetDesignSurface.SelectedObject.Height * 1.1
@@ -784,7 +806,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_Spec
                 Dim myDWOBJ As Spec = CType(newobj, Spec)
                 With myDWOBJ.GraphicObject
@@ -813,7 +835,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_Recycle
                 Dim myDWOBJ As Recycle = CType(newobj, Recycle)
                 With myDWOBJ.GraphicObject
@@ -842,7 +864,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OT_EnergyRecycle
                 Dim myDWOBJ As EnergyRecycle = CType(newobj, EnergyRecycle)
                 With myDWOBJ.GraphicObject
@@ -871,7 +893,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeIn
                 Dim myDWOBJ As Mixer = CType(newobj, Mixer)
                 With myDWOBJ.GraphicObject
@@ -900,7 +922,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.NodeOut
                 Dim myDWOBJ As UnitOperations.UnitOperations.Splitter = CType(newobj, UnitOperations.UnitOperations.Splitter)
                 With myDWOBJ.GraphicObject
@@ -929,7 +951,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Pump
                 Dim myDWOBJ As Pump = CType(newobj, Pump)
                 With myDWOBJ.GraphicObject
@@ -958,7 +980,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Tank
                 Dim myDWOBJ As Tank = CType(newobj, Tank)
                 With myDWOBJ.GraphicObject
@@ -987,7 +1009,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Vessel
                 Dim myDWOBJ As Vessel = CType(newobj, Vessel)
                 With myDWOBJ.GraphicObject
@@ -1016,7 +1038,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.MaterialStream
                 Dim myDWOBJ As Thermodynamics.Streams.MaterialStream = CType(newobj, Thermodynamics.Streams.MaterialStream)
                 With myDWOBJ.GraphicObject
@@ -1045,7 +1067,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.EnergyStream
                 Dim myDWOBJ As EnergyStream = CType(newobj, Streams.EnergyStream)
                 With myDWOBJ.GraphicObject
@@ -1074,7 +1096,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Compressor
                 Dim myDWOBJ As Compressor = CType(newobj, Compressor)
                 With myDWOBJ.GraphicObject
@@ -1103,7 +1125,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Expander
                 Dim myDWOBJ As Expander = CType(newobj, Expander)
                 With myDWOBJ.GraphicObject
@@ -1132,7 +1154,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Cooler
                 Dim myDWOBJ As Cooler = CType(newobj, Cooler)
                 With myDWOBJ.GraphicObject
@@ -1161,7 +1183,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Heater
                 Dim myDWOBJ As Heater = CType(newobj, Heater)
                 With myDWOBJ.GraphicObject
@@ -1190,7 +1212,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Pipe
                 Dim myDWOBJ As Pipe = CType(newobj, Pipe)
                 With myDWOBJ.GraphicObject
@@ -1219,7 +1241,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Valve
                 Dim myDWOBJ As Valve = CType(newobj, Valve)
                 With myDWOBJ.GraphicObject
@@ -1248,7 +1270,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Conversion
                 Dim myDWOBJ As Reactor_Conversion = CType(newobj, Reactor_Conversion)
                 With myDWOBJ.GraphicObject
@@ -1277,7 +1299,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Equilibrium
                 Dim myDWOBJ As Reactor_Equilibrium = CType(newobj, Reactor_Equilibrium)
                 With myDWOBJ.GraphicObject
@@ -1306,7 +1328,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_Gibbs
                 Dim myDWOBJ As Reactor_Gibbs = CType(newobj, Reactor_Gibbs)
                 With myDWOBJ.GraphicObject
@@ -1335,7 +1357,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_CSTR
                 Dim myDWOBJ As Reactor_CSTR = CType(newobj, Reactor_CSTR)
                 With myDWOBJ.GraphicObject
@@ -1364,7 +1386,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RCT_PFR
                 Dim myDWOBJ As Reactor_PFR = CType(newobj, Reactor_PFR)
                 With myDWOBJ.GraphicObject
@@ -1393,7 +1415,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.HeatExchanger
                 Dim myDWOBJ As HeatExchanger = CType(newobj, HeatExchanger)
                 With myDWOBJ.GraphicObject
@@ -1422,7 +1444,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ShortcutColumn
                 Dim myDWOBJ As ShortcutColumn = CType(newobj, ShortcutColumn)
                 With myDWOBJ.GraphicObject
@@ -1451,7 +1473,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.DistillationColumn
                 Dim myDWOBJ As DistillationColumn = CType(newobj, DistillationColumn)
                 With myDWOBJ.GraphicObject
@@ -1480,7 +1502,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.AbsorptionColumn
                 Dim myDWOBJ As AbsorptionColumn = CType(newobj, AbsorptionColumn)
                 With myDWOBJ.GraphicObject
@@ -1509,7 +1531,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ReboiledAbsorber
                 Dim myDWOBJ As ReboiledAbsorber = CType(newobj, ReboiledAbsorber)
                 With myDWOBJ.GraphicObject
@@ -1538,7 +1560,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.RefluxedAbsorber
                 Dim myDWOBJ As RefluxedAbsorber = CType(newobj, RefluxedAbsorber)
                 With myDWOBJ.GraphicObject
@@ -1567,7 +1589,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.ComponentSeparator
                 Dim myDWOBJ As ComponentSeparator = CType(newobj, ComponentSeparator)
                 With myDWOBJ.GraphicObject
@@ -1596,7 +1618,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.SolidSeparator
                 Dim myDWOBJ As SolidsSeparator = CType(newobj, SolidsSeparator)
                 With myDWOBJ.GraphicObject
@@ -1625,7 +1647,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.Filter
                 Dim myDWOBJ As Filter = CType(newobj, Filter)
                 With myDWOBJ.GraphicObject
@@ -1654,7 +1676,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.OrificePlate
                 Dim myDWOBJ As OrificePlate = CType(newobj, OrificePlate)
                 With myDWOBJ.GraphicObject
@@ -1683,7 +1705,7 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CustomUO
                 Dim myDWOBJ As CustomUO = CType(newobj, CustomUO)
                 With myDWOBJ.GraphicObject
@@ -1712,13 +1734,18 @@ Public Class FlowsheetSurface
                 myDWOBJ.Name = myDWOBJ.GraphicObject.Name
                 Flowsheet.Collections.GraphicObjectCollection.Add(myDWOBJ.GraphicObject.Name, myDWOBJ.GraphicObject)
                 Flowsheet.Collections.FlowsheetObjectCollection.Add(myDWOBJ.Name, myDWOBJ)
-                Me.FlowsheetDesignSurface.drawingObjects.Add(myDWOBJ.GraphicObject)
+                Me.FlowsheetDesignSurface.DrawingObjects.Add(myDWOBJ.GraphicObject)
             Case ObjectType.CapeOpenUO, ObjectType.FlowsheetUO
                 MessageBox.Show("Cloning is not supported by CAPE-OPEN/Flowsheet Unit Operations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Select
+
         Me.FlowsheetDesignSurface.Invalidate()
 
-    End Sub
+        newobj.SetFlowsheet(Flowsheet)
+
+        Return newobj.GraphicObject
+
+    End Function
 
     Private Sub CMS_ItemsToDisconnect_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles CMS_ItemsToDisconnect.ItemClicked
 
@@ -3289,4 +3316,42 @@ Public Class FlowsheetSurface
         Me.FlowsheetDesignSurface.SelectedObject.Active = Me.AtivadoToolStripMenuItem.Checked
         Me.Flowsheet.UpdateOpenEditForms()
     End Sub
+
+    Private Sub SplitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SplitToolStripMenuItem.Click
+
+        Dim stream = FlowsheetDesignSurface.SelectedObject
+        Dim newstream = CloneObject(stream)
+        newstream.Status = stream.Status
+
+        Dim objfrom As GraphicObject, fromidx As Integer
+        If stream.InputConnectors(0).IsAttached Then
+            objfrom = stream.InputConnectors(0).AttachedConnector.AttachedFrom
+            fromidx = stream.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+            Flowsheet.DisconnectObjects(objfrom, stream)
+            Flowsheet.ConnectObjects(objfrom, newstream, fromidx, 0)
+        End If
+
+    End Sub
+
+    Private Sub MergeStreamsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MergeStreamsToolStripMenuItem.Click
+
+        Dim stream1 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(0)
+        Dim stream2 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(1)
+
+        If stream1.OutputConnectors(0).IsAttached Then
+            stream1 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(1)
+            stream2 = FlowsheetDesignSurface.SelectedObjects.Values.ElementAt(0)
+        End If
+
+        Dim objto As GraphicObject, toidx As Integer
+        If stream2.OutputConnectors(0).IsAttached Then
+            objto = stream2.OutputConnectors(0).AttachedConnector.AttachedTo
+            toidx = stream2.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
+            Flowsheet.DisconnectObjects(stream2, objto)
+            Flowsheet.DeleteObject(stream2.Tag, False)
+            Flowsheet.ConnectObjects(stream1, objto, 0, toidx)
+        End If
+
+    End Sub
+
 End Class
