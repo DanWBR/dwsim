@@ -609,6 +609,7 @@ Namespace Reactors
             Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
             ims.SetFlowsheet(Me.FlowSheet)
+            ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
             Dim Hr0 As Double

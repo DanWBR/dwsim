@@ -101,6 +101,7 @@ Namespace Reactors
             Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
             ims.SetFlowsheet(Me.FlowSheet)
+            ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             pp.CurrentMaterialStream = ims
             ppr.CurrentMaterialStream = ims

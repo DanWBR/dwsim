@@ -274,6 +274,7 @@ Namespace Reactors
             ppr = New PropertyPackages.RaoultPropertyPackage()
 
             ims.SetFlowsheet(Me.FlowSheet)
+            ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             Me.Reactions.Clear()
             Me.ReactionsSequence.Clear()

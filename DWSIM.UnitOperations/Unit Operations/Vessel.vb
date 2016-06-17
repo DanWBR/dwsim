@@ -222,6 +222,8 @@ Namespace UnitOperations
 
             With mix
 
+                .PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+
                 If W <> 0.0# Then .Phases(0).Properties.enthalpy = Hs
                 .Phases(0).Properties.pressure = P
                 .Phases(0).Properties.massflow = W

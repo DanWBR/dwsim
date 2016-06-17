@@ -278,6 +278,7 @@ Namespace UnitOperations
 
                 oms = Me.GetInletMaterialStream(0).Clone()
                 oms.SetFlowsheet(Me.FlowSheet)
+                oms.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
                 Me.PropertyPackage.CurrentMaterialStream = oms
 
                 oms.Validate()
