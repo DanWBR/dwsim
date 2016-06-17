@@ -13,7 +13,7 @@ DWSIM.Apps.AzureServer			Azure Solver Server
 DWSIM.Apps.RunAsx86			Runs DWSIM in 32-bit mode
 DWSIM.Apps.TCPServer			TCP/IP Solver Server
 DWSIM.Controls.DockPanel		DockPanel control
-DWSIM.Controls.DockPanel.ThemeVS2012Light	Theme for DockPanel control
+DWSIM.Controls.DockPanel.ThemeVS2012	Theme for DockPanel control
 DWSIM.Controls.PropertyGridEx		Extended Property Grid Control
 DWSIM.Controls.TabStrip			TabStrip control
 DWSIM.DrawingTools			Flowsheet Drawing Tools
@@ -34,4 +34,4 @@ DWSIM.XMLSerializer			Custom XML Serializer
 
 Compiling
 
-The whole DWSIM project can be compiled using Visual Studio 2013 or 2015.
+The whole DWSIM project can be compiled using Visual Studio 2013 or 2015, only on Windows.
