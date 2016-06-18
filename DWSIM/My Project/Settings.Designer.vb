@@ -661,6 +661,15 @@ Namespace My
                 Me("SimulationUpgradeWarning") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Preview 1")>  _
+        Public ReadOnly Property PreviewVersion() As String
+            Get
+                Return CType(Me("PreviewVersion"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

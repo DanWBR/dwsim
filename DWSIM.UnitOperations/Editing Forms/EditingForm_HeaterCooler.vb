@@ -545,7 +545,7 @@ Public Class EditingForm_HeaterCooler
 
             Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
 
-            If TypeOf SimObject Is UnitOperations.Compressor Then
+            If TypeOf SimObject Is UnitOperations.Heater Then
 
                 If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
                 fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)

@@ -1360,6 +1360,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                              .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
                                              .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
                         'DWSIM
+                        Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
                         Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
                         Me.Collections.FlowsheetObjectCollection.Remove(namesel)
                         Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
@@ -1413,6 +1414,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                                                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
 
                             'dispose object
+                            Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
                             Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
 
                             Me.Collections.FlowsheetObjectCollection.Remove(namesel)

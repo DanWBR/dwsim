@@ -1379,7 +1379,11 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub tsbClose_Click(sender As Object, e As EventArgs) Handles tsbClose.Click
-        Me.Hide()
+        If DWSIM.App.IsRunningOnMono Then
+            Me.Close()
+        Else
+            Me.Hide()
+        End If
     End Sub
 
     Public Sub DockingHandler(sender As Object, e As EventArgs) Handles tsbDockingLeft.Click, tsbDockingBottom.Click, tsbDockingDocument.Click,
@@ -1529,8 +1533,13 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnInfoLeft_Click(sender As Object, e As EventArgs) Handles btnInfoLeft.Click
-        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.NotSelectedComponents(ogc1.SelectedRows(0).Cells(0).Value)}
-        FrmChild.DisplayForm(f)
+        If DWSIM.App.IsRunningOnMono Then
+            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(ogc1.SelectedCells(0).RowIndex).Cells(0).Value)}
+            FrmChild.DisplayForm(f)
+        Else
+            Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.NotSelectedComponents(ogc1.SelectedRows(0).Cells(0).Value)}
+            FrmChild.DisplayForm(f)
+        End If
     End Sub
 
     Private Sub btnInfoRight_Click(sender As Object, e As EventArgs) Handles btnInfoRight.Click

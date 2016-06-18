@@ -23,6 +23,9 @@ Public Class AboutBox
         If File.Exists(updfile) Then
             Version.Text += " Update " & File.ReadAllText(updfile)
         End If
+        If My.Settings.PreviewVersion <> "" Then
+            Version.Text += " " & My.Settings.PreviewVersion
+        End If
 
         lblCurrentVersion.Text = Version.Text
 
@@ -34,17 +37,45 @@ Public Class AboutBox
 
         Lblcpuinfo.Text = "Retrieving CPU info..."
 
-        Threading.Tasks.Task.Factory.StartNew(Function()
-                                                  Dim scrh As New System.Management.ManagementObjectSearcher("select * from Win32_Processor")
-                                                  Dim text1 As String = System.Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER")
-                                                  For Each qinfo In scrh.Get()
-                                                      text1 += " / " & qinfo.Properties("Name").Value.ToString
-                                                  Next
-                                                  text1 += " (" & Yeppp.Library.GetProcessABI().Description & ")"
-                                                  Return text1
-                                              End Function).ContinueWith(Sub(t)
-                                                                             Lblcpuinfo.Text = t.Result
-                                                                         End Sub, Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext)
+        If Not DWSIM.App.IsRunningOnMono Then
+
+            Threading.Tasks.Task.Factory.StartNew(Function()
+                                                      Dim scrh As New System.Management.ManagementObjectSearcher("select * from Win32_Processor")
+                                                      Dim text1 As String = System.Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER")
+                                                      For Each qinfo In scrh.Get()
+                                                          text1 += " / " & qinfo.Properties("Name").Value.ToString
+                                                      Next
+                                                      text1 += " (" & Yeppp.Library.GetProcessABI().Description & ")"
+                                                      Return text1
+                                                  End Function).ContinueWith(Sub(t)
+                                                                                 Lblcpuinfo.Text = t.Result
+                                                                             End Sub, Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext)
+
+        Else
+
+            Threading.Tasks.Task.Factory.StartNew(Function()
+                                                      Dim sinfo As New ProcessStartInfo With {.FileName = "lshw", .Arguments = "-c CPU", .RedirectStandardOutput = True, .UseShellExecute = False}
+                                                      Dim p As New Process With {.StartInfo = sinfo}
+                                                      p.Start()
+                                                      Dim output As String = p.StandardOutput.ReadToEnd
+                                                      p.WaitForExit()
+                                                      Dim lbltext As String = ""
+                                                      For Each l In output.Split(New Char() {vbCrLf, vbLf, vbCr})
+                                                          If l.Contains("product") Then
+                                                              lbltext = l.Split(":")(1).TrimStart(" ")
+                                                          End If
+                                                          If l.Contains("vendor") Then
+                                                              lbltext += " / " & l.Split(": ")(1).TrimStart(" ")
+                                                              Exit For
+                                                          End If
+                                                      Next
+                                                      Return lbltext
+                                                  End Function).ContinueWith(Sub(t)
+                                                                                 Lblcpuinfo.Text = t.Result
+                                                                                 Lblcpuinfo.Text += " (" & Yeppp.Library.GetProcessABI().Description & ")"
+                                                                             End Sub, Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext)
+
+        End If
 
         Lblcpusimd.Text = "Querying CPU SIMD capabilities..."
 

@@ -41,6 +41,7 @@ Public NotInheritable Class SplashScreen
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
         Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
         If File.Exists(updfile) Then Version.Text += " Update " & File.ReadAllText(updfile)
+        If My.Settings.PreviewVersion <> "" Then Version.Text += " " & My.Settings.PreviewVersion
 
         'Copyright info
         'Copyright.Text = My.Application.Info.Copyright

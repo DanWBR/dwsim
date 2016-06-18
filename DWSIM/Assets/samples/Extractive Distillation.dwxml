@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DWSIM_Simulation_Data>
   <GeneralInfo>
-    <BuildVersion>3.4.5581.29801</BuildVersion>
+    <BuildVersion>4.0.0.0</BuildVersion>
     <BuildDate>2015-04-13T16:33:22</BuildDate>
     <OSInfo>Microsoft Windows 7 Enterprise , Version 6.1.7601.65536, Win32NT Platform</OSInfo>
     <SavedOn>2015-04-13T17:15:46.9846622-04:00</SavedOn>

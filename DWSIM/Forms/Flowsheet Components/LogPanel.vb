@@ -119,6 +119,12 @@ Public Class LogPanel
 
         End Try
 
+        Try
+            Grid1.FirstDisplayedScrollingRowIndex = Grid1.RowCount - 1
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Private Sub Grid1_RowsRemoved(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowsRemovedEventArgs) Handles Grid1.RowsRemoved

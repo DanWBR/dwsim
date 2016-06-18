@@ -659,10 +659,12 @@ Final3:
     End Sub
 
     Private Sub rbSecante_CheckedChanged(sender As Object, e As EventArgs) Handles rbSecante.CheckedChanged
-        If myADJ.MaxVal.GetValueOrDefault = 0 And myADJ.MinVal.GetValueOrDefault = 0 Then
-            Me.usemaxmin = False
-        Else
-            Me.usemaxmin = True
+        If loaded Then
+            If myADJ.MaxVal.GetValueOrDefault = 0 And myADJ.MinVal.GetValueOrDefault = 0 Then
+                Me.usemaxmin = False
+            Else
+                Me.usemaxmin = True
+            End If
         End If
     End Sub
 End Class

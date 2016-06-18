@@ -366,6 +366,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                 CalculateObject(fobj, myinfo, Nothing, Isolated)
                             End If
                         End If
+                        For Each au In myobj.AttachedUtilities
+                            If au.AutoUpdate Then au.Update()
+                        Next
                         myobj.GraphicObject.Calculated = True
                         myobj.LastUpdated = Date.Now
                         myobj.UpdateEditForm()
@@ -429,6 +432,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     Else
                         CalculateObjectAsync(fobj, myinfo, ct)
                     End If
+                    For Each au In myobj.AttachedUtilities
+                        If au.AutoUpdate Then au.Update()
+                    Next
                     myobj.GraphicObject.Calculated = True
                     myobj.LastUpdated = Date.Now
                     myobj.UpdateEditForm()
@@ -503,6 +509,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                              Else
                                                                  CalculateObjectAsync(fobj, myinfo, ct)
                                                              End If
+                                                             For Each au In myobj.AttachedUtilities
+                                                                 If au.AutoUpdate Then au.Update()
+                                                             Next
                                                              myobj.GraphicObject.Calculated = True
                                                              myobj.LastUpdated = Date.Now
                                                              myobj.UpdateEditForm()
