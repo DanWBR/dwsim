@@ -498,6 +498,8 @@ Namespace UnitOperations
 
                     A = Q / (LMTD * U) * 1000
 
+                    If Double.IsNaN(Area) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
+
                 Case HeatExchangerCalcMode.CalcBothTemp_UA
 
                     Dim Qi, Q_old, PIc1, PIc2, PIh1, PIh2 As Double

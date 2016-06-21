@@ -529,7 +529,7 @@ Public Class EditingForm_HeatExchanger
 
         If Loaded Then
 
-            Dim text As String = cbInlet1.Text
+            Dim text As String = cbInlet2.Text
 
             If text <> "" Then
 
@@ -555,7 +555,7 @@ Public Class EditingForm_HeatExchanger
 
         If Loaded Then
 
-            Dim text As String = cbOutlet1.Text
+            Dim text As String = cbOutlet2.Text
 
             If text <> "" Then
 
@@ -600,6 +600,7 @@ Public Class EditingForm_HeatExchanger
 
     Private Sub cbFlowDir_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlowDir.SelectedIndexChanged
         SimObject.FlowDir = cbFlowDir.SelectedIndex
+        RequestCalc()
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click
