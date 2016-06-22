@@ -1026,10 +1026,10 @@ Public Class MaterialStreamEditor
         MatStream.AttachedUtilities.Add(utility)
         MatStream.FlowSheet.DisplayForm(utility)
 
-        AddHandler DirectCast(utility, Form).FormClosed, Sub()
-                                                             utility.AttachedTo = Nothing
-                                                             MatStream.AttachedUtilities.Remove(utility)
-                                                         End Sub
+        AddHandler DirectCast(utility, DockContent).FormClosed, Sub()
+                                                                    MatStream.AttachedUtilities.Remove(utility)
+                                                                    utility.AttachedTo = Nothing
+                                                                End Sub
 
     End Sub
 
@@ -1047,6 +1047,10 @@ Public Class MaterialStreamEditor
                                  End Sub
             UtilitiesCtxMenu.Items.Add(ts)
             AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
+            AddHandler DirectCast(item, DockContent).FormClosed, Sub()
+                                                                     MatStream.AttachedUtilities.Remove(item)
+                                                                     item.AttachedTo = Nothing
+                                                                 End Sub
         Next
 
     End Sub

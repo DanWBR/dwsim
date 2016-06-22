@@ -534,6 +534,10 @@ Public Class EditingForm_Separator
                                  End Sub
             UtilitiesCtxMenu.Items.Add(ts)
             AddHandler UtilitiesCtxMenu.Closed, Sub() If UtilitiesCtxMenu.Items.Contains(ts) Then UtilitiesCtxMenu.Items.Remove(ts)
+            AddHandler DirectCast(item, DockContent).FormClosed, Sub()
+                                                                     VesselObject.AttachedUtilities.Remove(item)
+                                                                     item.AttachedTo = Nothing
+                                                                 End Sub
         Next
 
     End Sub

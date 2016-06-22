@@ -827,9 +827,9 @@ Namespace Streams
 
                 If prop.StartsWith("PROP_MS") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
-                    If prop.Split(",").Length = 2 Then
-                        sname = prop.Split(",")(1)
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("/")(0).Split("_")(2))
+                    If prop.Split("/").Length = 2 Then
+                        sname = prop.Split("/")(1)
                     End If
 
                     Select Case propidx
@@ -1468,7 +1468,7 @@ Namespace Streams
                     Next
                     For i = 102 To 105
                         For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                            proplist.Add("PROP_MS_" + CStr(i) + "," + subst.Name)
+                            proplist.Add("PROP_MS_" + CStr(i) + "/" + subst.Name)
                         Next
                     Next
                 Case PropertyType.RO
@@ -1479,34 +1479,34 @@ Namespace Streams
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
                     For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
-                        proplist.Add("PROP_MS_102" + "," + subst.Name)
-                        proplist.Add("PROP_MS_103" + "," + subst.Name)
-                        proplist.Add("PROP_MS_104" + "," + subst.Name)
-                        proplist.Add("PROP_MS_105" + "," + subst.Name)
-                        proplist.Add("PROP_MS_106" + "," + subst.Name)
-                        proplist.Add("PROP_MS_107" + "," + subst.Name)
-                        proplist.Add("PROP_MS_108" + "," + subst.Name)
-                        proplist.Add("PROP_MS_109" + "," + subst.Name)
-                        proplist.Add("PROP_MS_110" + "," + subst.Name)
-                        proplist.Add("PROP_MS_111" + "," + subst.Name)
-                        proplist.Add("PROP_MS_112" + "," + subst.Name)
-                        proplist.Add("PROP_MS_113" + "," + subst.Name)
-                        proplist.Add("PROP_MS_114" + "," + subst.Name)
-                        proplist.Add("PROP_MS_115" + "," + subst.Name)
-                        proplist.Add("PROP_MS_116" + "," + subst.Name)
-                        proplist.Add("PROP_MS_117" + "," + subst.Name)
-                        proplist.Add("PROP_MS_118" + "," + subst.Name)
-                        proplist.Add("PROP_MS_119" + "," + subst.Name)
-                        proplist.Add("PROP_MS_120" + "," + subst.Name)
-                        proplist.Add("PROP_MS_121" + "," + subst.Name)
-                        proplist.Add("PROP_MS_122" + "," + subst.Name)
-                        proplist.Add("PROP_MS_123" + "," + subst.Name)
-                        proplist.Add("PROP_MS_124" + "," + subst.Name)
-                        proplist.Add("PROP_MS_125" + "," + subst.Name)
-                        proplist.Add("PROP_MS_149" + "," + subst.Name)
-                        proplist.Add("PROP_MS_150" + "," + subst.Name)
-                        proplist.Add("PROP_MS_151" + "," + subst.Name)
-                        proplist.Add("PROP_MS_152" + "," + subst.Name)
+                        proplist.Add("PROP_MS_102" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_103" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_104" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_105" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_106" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_107" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_108" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_109" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_110" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_111" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_112" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_113" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_114" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_115" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_116" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_117" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_118" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_119" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_120" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_121" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_122" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_123" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_124" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_125" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_149" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_150" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_151" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_152" + "/" + subst.Name)
                     Next
                     For i = 126 To 130
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -1522,7 +1522,7 @@ Namespace Streams
                     proplist.Add("PROP_MS_27")
                     For i = 102 To 105
                         For Each subst As Compound In Me.Phases(0).Compounds.Values
-                            proplist.Add("PROP_MS_" + CStr(i) + "," + subst.Name)
+                            proplist.Add("PROP_MS_" + CStr(i) + "/" + subst.Name)
                         Next
                     Next
                 Case PropertyType.ALL
@@ -1533,34 +1533,34 @@ Namespace Streams
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
                     For Each subst As ConstantProperties In Me.FlowSheet.SelectedCompounds.Values
-                        proplist.Add("PROP_MS_102" + "," + subst.Name)
-                        proplist.Add("PROP_MS_103" + "," + subst.Name)
-                        proplist.Add("PROP_MS_104" + "," + subst.Name)
-                        proplist.Add("PROP_MS_105" + "," + subst.Name)
-                        proplist.Add("PROP_MS_106" + "," + subst.Name)
-                        proplist.Add("PROP_MS_107" + "," + subst.Name)
-                        proplist.Add("PROP_MS_108" + "," + subst.Name)
-                        proplist.Add("PROP_MS_109" + "," + subst.Name)
-                        proplist.Add("PROP_MS_110" + "," + subst.Name)
-                        proplist.Add("PROP_MS_111" + "," + subst.Name)
-                        proplist.Add("PROP_MS_112" + "," + subst.Name)
-                        proplist.Add("PROP_MS_113" + "," + subst.Name)
-                        proplist.Add("PROP_MS_114" + "," + subst.Name)
-                        proplist.Add("PROP_MS_115" + "," + subst.Name)
-                        proplist.Add("PROP_MS_116" + "," + subst.Name)
-                        proplist.Add("PROP_MS_117" + "," + subst.Name)
-                        proplist.Add("PROP_MS_118" + "," + subst.Name)
-                        proplist.Add("PROP_MS_119" + "," + subst.Name)
-                        proplist.Add("PROP_MS_120" + "," + subst.Name)
-                        proplist.Add("PROP_MS_121" + "," + subst.Name)
-                        proplist.Add("PROP_MS_122" + "," + subst.Name)
-                        proplist.Add("PROP_MS_123" + "," + subst.Name)
-                        proplist.Add("PROP_MS_124" + "," + subst.Name)
-                        proplist.Add("PROP_MS_125" + "," + subst.Name)
-                        proplist.Add("PROP_MS_149" + "," + subst.Name)
-                        proplist.Add("PROP_MS_150" + "," + subst.Name)
-                        proplist.Add("PROP_MS_151" + "," + subst.Name)
-                        proplist.Add("PROP_MS_152" + "," + subst.Name)
+                        proplist.Add("PROP_MS_102" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_103" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_104" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_105" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_106" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_107" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_108" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_109" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_110" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_111" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_112" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_113" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_114" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_115" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_116" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_117" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_118" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_119" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_120" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_121" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_122" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_123" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_124" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_125" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_149" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_150" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_151" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_152" + "/" + subst.Name)
                     Next
                     For i = 126 To 130
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -1585,10 +1585,10 @@ Namespace Streams
 
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
-                Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("/")(0).Split("_")(2))
                 Dim sname As String = ""
-                If prop.Split(",").Length = 2 Then
-                    sname = prop.Split(",")(1)
+                If prop.Split("/").Length = 2 Then
+                    sname = prop.Split("/")(1)
                 End If
 
                 Me.PropertyPackage.CurrentMaterialStream = Me
@@ -1711,7 +1711,7 @@ Namespace Streams
 
                 If prop.StartsWith("PROP_MS") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split(",")(0).Split("_")(2))
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("/")(0).Split("_")(2))
 
                     Select Case propidx
 
