@@ -256,20 +256,26 @@ Namespace UnitOperations
 
         Public Overridable Function GetProperties(proptype As PropertyType) As String() Implements Interfaces.ISimulationObject.GetProperties
 
+            Dim proplist As New List(Of String)
+
             For Each item In AttachedUtilities
-                Return item.GetPropertyList().ToArray
+                proplist.AddRange(item.GetPropertyList().ConvertAll(New Converter(Of String, String)(Function(s As String)
+                                                                                                         Return item.Name & ": " & s
+                                                                                                     End Function)))
             Next
 
-            Return New String() {}
+            Return proplist.ToArray
 
         End Function
 
         Public Overridable Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
 
             For Each item In AttachedUtilities
-                For Each prop1 In item.GetPropertyList()
-                    If prop1 = prop Then Return item.GetPropertyUnits(prop)
-                Next
+                If prop.StartsWith(item.Name) Then
+                    For Each prop1 In item.GetPropertyList()
+                        If prop.Contains(prop1) Then Return item.GetPropertyUnits(prop.Split(": ")(1).Trim)
+                    Next
+                End If
             Next
 
             Return "NF"
@@ -279,9 +285,12 @@ Namespace UnitOperations
         Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
 
             For Each item In AttachedUtilities
-                For Each prop1 In item.GetPropertyList()
-                    If prop1 = prop Then Return item.GetPropertyValue(prop)
-                Next
+                If prop.StartsWith(item.Name) Then
+                    For Each prop1 In item.GetPropertyList()
+                        If prop.Contains(prop1) Then Return item.GetPropertyValue(prop.Split(": ")(1).Trim)
+                    Next
+                End If
+
             Next
 
             Return Nothing
@@ -291,12 +300,14 @@ Namespace UnitOperations
         Public Overridable Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
 
             For Each item In AttachedUtilities
-                For Each prop1 In item.GetPropertyList()
-                    If prop1 = prop Then
-                        item.SetPropertyValue(prop, propval)
-                        Exit For
-                    End If
-                Next
+                If prop.StartsWith(item.Name) Then
+                    For Each prop1 In item.GetPropertyList()
+                        If prop.Contains(prop1) Then
+                            item.SetPropertyValue(prop.Split(": ")(1).Trim, propval)
+                            Return True
+                        End If
+                    Next
+                End If
             Next
 
             Return False

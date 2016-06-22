@@ -204,14 +204,14 @@ Public Class FrmCritpt
 
         Dim plist As New List(Of String)
 
-        plist.Add(Me.Name1 + "_" + "Critical Pressure")
-        plist.Add(Me.Name1 + "_" + "Critical Temperature")
-        plist.Add(Me.Name1 + "_" + "Critical Volume")
-        plist.Add(Me.Name1 + "_" + "Critical Compressibility")
-        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Pressure")
-        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Temperature")
-        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Volume")
-        plist.Add(Me.Name1 + "_" + "Pseudo-Critical Compressibility")
+        plist.Add("Critical Pressure")
+        plist.Add("Critical Temperature")
+        plist.Add("Critical Volume")
+        plist.Add("Critical Compressibility")
+        plist.Add("Pseudo-Critical Pressure")
+        plist.Add("Pseudo-Critical Temperature")
+        plist.Add("Pseudo-Critical Volume")
+        plist.Add("Pseudo-Critical Compressibility")
 
         Return plist
 
@@ -219,11 +219,11 @@ Public Class FrmCritpt
 
     Public Function GetPropertyUnits(pname As String) As String Implements Interfaces.IAttachedUtility.GetPropertyUnits
         Select Case pname
-            Case Me.Name1 + "_" + "Critical Pressure", Me.Name1 + "_" + "Pseudo-Critical Pressure"
+            Case "Critical Pressure", "Pseudo-Critical Pressure"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.pressure
-            Case Me.Name1 + "_" + "Critical Temperature", Me.Name1 + "_" + "Pseudo-Critical Temperature"
+            Case "Critical Temperature", "Pseudo-Critical Temperature"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.temperature
-            Case Me.Name1 + "_" + "Critical Volume", Me.Name1 + "_" + "Pseudo-Critical Volume"
+            Case "Critical Volume", "Pseudo-Critical Volume"
                 Return AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem.molar_volume
             Case Else
                 Return ""
@@ -233,21 +233,21 @@ Public Class FrmCritpt
     Public Function GetPropertyValue(pname As String) As Object Implements Interfaces.IAttachedUtility.GetPropertyValue
         Dim units = AttachedTo.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem
         Select Case pname
-            Case Me.Name1 + "_" + "Critical Pressure"
+            Case "Critical Pressure"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, CriticalPressure)
-            Case Me.Name1 + "_" + "Critical Temperature"
+            Case "Critical Temperature"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, CriticalTemperature)
-            Case Me.Name1 + "_" + "Critical Volume"
+            Case "Critical Volume"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.molar_volume, CriticalVolume)
-            Case Me.Name1 + "_" + "Critical Compressibility"
+            Case "Critical Compressibility"
                 Return CriticalCompressibility
-            Case Me.Name1 + "_" + "Pseudo-Critical Pressure"
+            Case "Pseudo-Critical Pressure"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.pressure, PseudoCriticalPressure)
-            Case Me.Name1 + "_" + "Pseudo-Critical Temperature"
+            Case "Pseudo-Critical Temperature"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, PseudoCriticalTemperature)
-            Case Me.Name1 + "_" + "Pseudo-Critical Volume"
+            Case "Pseudo-Critical Volume"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.molar_volume, PseudoCriticalVolume)
-            Case Me.Name1 + "_" + "Pseudo-Critical Compressibility"
+            Case "Pseudo-Critical Compressibility"
                 Return PseudoCriticalCompressibility
             Case Else
                 Return ""
@@ -263,7 +263,7 @@ Public Class FrmCritpt
     End Sub
 
     Public Sub Update1() Implements Interfaces.IAttachedUtility.Update
-
+        Button1_Click(Me, New EventArgs)
     End Sub
 
     Public Function GetUtilityType() As Interfaces.Enums.FlowsheetUtility Implements Interfaces.IAttachedUtility.GetUtilityType

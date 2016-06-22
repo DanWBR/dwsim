@@ -227,10 +227,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
         ms.Calculate()
 
-        For Each utility In ms.AttachedUtilities
-            If utility.AutoUpdate Then utility.Update()
-        Next
-
         fgui.ShowMessage(ms.GraphicObject.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, ms.Name)
@@ -273,10 +269,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
         ms.Calculate()
-
-        For Each utility In ms.AttachedUtilities
-            If utility.AutoUpdate Then utility.Update()
-        Next
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, ms.Name)
 

@@ -132,7 +132,7 @@ Namespace DWSIM
 
             Dim retstr As String
             If Not PropID Is Nothing Then
-                Dim prop As String = PropID.Split(",")(0)
+                Dim prop As String = PropID.Split("/")(0)
                 Dim sname As String = ""
                 If PropID.Split("/").Length = 2 Then
                     sname = PropID.Split("/")(1)
