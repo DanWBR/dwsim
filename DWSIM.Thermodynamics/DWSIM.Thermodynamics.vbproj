@@ -68,8 +68,9 @@
     <Reference Include="DotNumerics">
       <HintPath>..\DWSIM\References\DotNumerics.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelDna.Integration">
-      <HintPath>..\DWSIM\References\ExcelDna.Integration.dll</HintPath>
+    <Reference Include="ExcelDna.Integration, Version=0.33.5730.40390, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDna.Integration.0.33.9\lib\ExcelDna.Integration.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.1.5\lib\net40\FileHelpers.dll</HintPath>
@@ -83,6 +84,10 @@
       <HintPath>..\DWSIM\References\Mapack.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RichTextBoxExtended">
       <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
     </Reference>
@@ -90,11 +95,16 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Yeppp.CLR.Bundle, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.ExtensionMethods" />
@@ -115,6 +125,18 @@
     <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
     <Compile Include="Databases\Databases.vb" />
+    <Compile Include="Editing Forms\Excel Interface\AboutForm.Designer.vb">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Excel Interface\AboutForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Editing Forms\Excel Interface\SettingsForm.Designer.vb">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Excel Interface\SettingsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.Designer.vb">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </Compile>
@@ -300,6 +322,12 @@
     <Compile Include="Property Packages\UNIQUAC.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.resx">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Excel Interface\SettingsForm.resx">
+      <DependentUpon>SettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.en.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </EmbeddedResource>
@@ -428,6 +456,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\DWSIM4 icon.png" />
     <EmbeddedResource Include="Assets\biod_intparm_nrtl.dat" />
     <EmbeddedResource Include="Assets\csid.dat" />
     <EmbeddedResource Include="Assets\diel.dat" />
@@ -450,6 +479,9 @@
     <EmbeddedResource Include="Assets\uniquacip.dat" />
     <None Include="app.config" />
     <EmbeddedResource Include="Assets\swreactions.dwrxm" />
+    <Content Include="DWSIM.Thermodynamics-AddIn.dna">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -566,6 +598,13 @@
     <None Include="Resources\emblem-important.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDna.xll" "$(TargetDir)DWSIM.Thermodynamics-AddIn.xll*" /C /Y
+xcopy "$(TargetDir)DWSIM.Thermodynamics-AddIn.dna*" "$(TargetDir)DWSIM.Thermodynamics-AddIn64.dna*" /C /Y
+xcopy "$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDna64.xll" "$(TargetDir)DWSIM.Thermodynamics-AddIn64.xll*" /C /Y
+"$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDnaPack.exe" "$(TargetDir)DWSIM.Thermodynamics-AddIn.dna" /Y
+"$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDnaPack.exe" "$(TargetDir)DWSIM.Thermodynamics-AddIn64.dna" /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

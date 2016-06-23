@@ -40,7 +40,7 @@ Namespace ExcelAddIn
                 Settings.ExcelMode = True
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim pp As New RaoultPropertyPackage(True)
 
@@ -74,9 +74,21 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
+
         End Function
 
         <ExcelFunction(description:="Returns a single property value for a compound. For a constant property, set T = 0 and P = 0. For a T-dep property, set P = 0. For a P-dep property, set T = 0.", HelpTopic:="ExcelAddInHelp.chm!2")> _
@@ -89,7 +101,7 @@ Namespace ExcelAddIn
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
             Try
 
@@ -129,9 +141,21 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return ex.ToString
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return ex.Message
+                    Case 1
+                        Return ex.ToString
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return "Error"
+                End Select
 
             End Try
+
         End Function
 
         <ExcelFunction(description:="Returns a list of the available single compound properties.", HelpTopic:="ExcelAddInHelp.chm!3")> _
@@ -140,7 +164,7 @@ Namespace ExcelAddIn
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
             Dim pp As New RaoultPropertyPackage(True)
 
@@ -222,7 +246,7 @@ Namespace ExcelAddIn
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
             Dim ipdata(1, 8) As Object
 
@@ -446,7 +470,7 @@ Namespace ExcelAddIn
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
             Dim iplist As New List(Of BaseClasses.InteractionParameter) '= UserIPDB.GetStoredIPsets(Compound1, Compound2, Model)
 
@@ -562,7 +586,7 @@ Namespace ExcelAddIn
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
             Dim ppm As New CAPEOPENManager()
 
@@ -621,7 +645,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -705,7 +729,18 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
 
@@ -738,7 +773,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -795,14 +830,21 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
-                pp._tpseverity = 2
+                If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
+                    Try
+                        pp.FlashAlgorithm.FlashSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Interfaces.Enums.FlashSetting, String))(GlobalSettings.Settings.ExcelFlashSettings)
+                    Catch ex As Exception
+                    End Try
+                End If
+
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps.ToArrayString
 
                 If GlobalSettings.Settings.EnableGPUProcessing Then
                     Calculator.InitComputeDevice()
@@ -852,7 +894,18 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
 
@@ -969,7 +1022,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1026,15 +1079,21 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
+                If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
+                    Try
+                        pp.FlashAlgorithm.FlashSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Interfaces.Enums.FlashSetting, String))(GlobalSettings.Settings.ExcelFlashSettings)
+                    Catch ex As Exception
+                    End Try
+                End If
 
-                pp._tpseverity = 2
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps.ToArrayString
 
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
@@ -1088,7 +1147,18 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
 
@@ -1117,7 +1187,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1174,15 +1244,21 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
+                If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
+                    Try
+                        pp.FlashAlgorithm.FlashSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Interfaces.Enums.FlashSetting, String))(GlobalSettings.Settings.ExcelFlashSettings)
+                    Catch ex As Exception
+                    End Try
+                End If
 
-                pp._tpseverity = 2
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps.ToArrayString
 
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
@@ -1236,7 +1312,18 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
 
@@ -1265,7 +1352,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1322,15 +1409,21 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
+                If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
+                    Try
+                        pp.FlashAlgorithm.FlashSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Interfaces.Enums.FlashSetting, String))(GlobalSettings.Settings.ExcelFlashSettings)
+                    Catch ex As Exception
+                    End Try
+                End If
 
-                pp._tpseverity = 2
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps.ToArrayString
 
                 ms.Phases(0).Properties.temperature = InitialEstimate
 
@@ -1384,7 +1477,18 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
 
@@ -1413,7 +1517,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -1470,15 +1574,21 @@ Namespace ExcelAddIn
                         pp.FlashAlgorithm = New Auxiliary.FlashAlgorithms.SimpleLLE
                 End Select
 
+                If GlobalSettings.Settings.ExcelFlashSettings <> "" Then
+                    Try
+                        pp.FlashAlgorithm.FlashSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of Interfaces.Enums.FlashSetting, String))(GlobalSettings.Settings.ExcelFlashSettings)
+                    Catch ex As Exception
+                    End Try
+                End If
 
-                pp._tpseverity = 2
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
                 Dim comps(compounds.Length - 1) As String
                 Dim k As Integer
                 For Each c As String In compounds
                     comps(k) = c
                     k += 1
                 Next
-                pp._tpcompids = comps
+                pp.FlashAlgorithm.FlashSettings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps.ToArrayString
 
                 ms.Phases(0).Properties.pressure = InitialEstimate
 
@@ -1532,7 +1642,18 @@ Namespace ExcelAddIn
 
             Catch ex As Exception
 
-                Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
 
             End Try
 
@@ -1889,7 +2010,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2024,7 +2145,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2161,7 +2282,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2298,7 +2419,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 
@@ -2435,7 +2556,7 @@ Namespace ExcelAddIn
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-                If File.Exists(inifile) Then GlobalSettings.Settings.LoadSettings(inifile)
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
 
                 Dim ppm As New CAPEOPENManager()
 

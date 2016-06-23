@@ -23,51 +23,63 @@ Public Class FlashAlgorithmConfig
     Public _esname As String = ""
     Public _phasemappings As New Dictionary(Of String, PropertyPackages.PhaseInfo)
 
+    Public Property ExcelMode As Boolean = False
+
     Private Sub FlashAlgorithmConfig_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.Text += " - " & FlashAlgo.Tag
+        If Not ExcelMode Then
 
-        Select Case FlashAlgo.AlgoType
-            Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
-                TabControl1.TabPages.Remove(TabPageGM)
-                TabControl1.TabPages.Remove(TabPageIO)
-                TabControl1.TabPages.Remove(TabPageVLLE)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE, Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
-                TabControl1.TabPages.Remove(TabPageGM)
-                TabControl1.TabPages.Remove(TabPageIO)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
-                TabControl1.TabPages.Remove(TabPageNL)
-                TabControl1.TabPages.Remove(TabPageIO)
-                TabControl1.TabPages.Remove(TabPageVLLE)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
-                TabControl1.TabPages.Remove(TabPageNL)
-                TabControl1.TabPages.Remove(TabPageIO)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.Inside_Out_VLE
-                TabControl1.TabPages.Remove(TabPageGM)
-                TabControl1.TabPages.Remove(TabPageNL)
-                TabControl1.TabPages.Remove(TabPageVLLE)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
-                TabControl1.TabPages.Remove(TabPageGM)
-                TabControl1.TabPages.Remove(TabPageNL)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic, Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
-                TabControl1.TabPages.Remove(TabPageGM)
-                TabControl1.TabPages.Remove(TabPageNL)
-                TabControl1.TabPages.Remove(TabPageIO)
-                TabControl1.TabPages.Remove(TabPageVLLE)
-                TabControl1.TabPages.Remove(TabPageCOES)
-            Case Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server
-                TabControl1.TabPages.Remove(TabPageConvPars)
-                TabControl1.TabPages.Remove(TabPageGM)
-                TabControl1.TabPages.Remove(TabPageNL)
-                TabControl1.TabPages.Remove(TabPageIO)
-                TabControl1.TabPages.Remove(TabPageVLLE)
-        End Select
+            Me.Text += " - " & FlashAlgo.Tag
+
+            Select Case FlashAlgo.AlgoType
+                Case Interfaces.Enums.FlashMethod.Default_Algorithm, Interfaces.Enums.FlashMethod.Nested_Loops_VLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageVLLE)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.Nested_Loops_VLLE, Interfaces.Enums.FlashMethod.Nested_Loops_Immiscible_VLLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLE
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageVLLE)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.Gibbs_Minimization_VLLE
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.Inside_Out_VLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageVLLE)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.Inside_Out_VLLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.Nested_Loops_SLE_Eutectic, Interfaces.Enums.FlashMethod.Nested_Loops_SLE_SolidSolution, Interfaces.Enums.FlashMethod.Simple_LLE
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageVLLE)
+                    TabControl1.TabPages.Remove(TabPageCOES)
+                Case Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server
+                    TabControl1.TabPages.Remove(TabPageConvPars)
+                    TabControl1.TabPages.Remove(TabPageGM)
+                    TabControl1.TabPages.Remove(TabPageNL)
+                    TabControl1.TabPages.Remove(TabPageIO)
+                    TabControl1.TabPages.Remove(TabPageVLLE)
+            End Select
+
+        Else
+
+            Me.Text = "Flash Algorithm Settings"
+
+            TabControl1.TabPages.Remove(TabPageCOES)
+
+        End If
 
         ci = Globalization.CultureInfo.InvariantCulture
 
@@ -77,7 +89,7 @@ Public Class FlashAlgorithmConfig
         chkDoPhaseId.Checked = Settings(Interfaces.Enums.FlashSetting.UsePhaseIdentificationAlgorithm)
         chkCalcBubbleDew.Checked = Settings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints)
 
-        If FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server Then
+        If FlashAlgo IsNot Nothing AndAlso FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server Then
 
             If Not _coppm Is Nothing Then
 
@@ -134,7 +146,7 @@ Public Class FlashAlgorithmConfig
                     rbHigh.Checked = True
             End Select
 
-            SetupKeyCompounds()
+            If Not ExcelMode Then SetupKeyCompounds()
 
         End If
 
@@ -151,7 +163,7 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance) = Double.Parse(tbFlashValidationTolerance.Text).ToString(ci)
 
-            If Not FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server Then
+            If ExcelMode OrElse FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server Then
 
                 Settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations) = Integer.Parse(tbPHExtMaxIt.Text).ToString(ci)
                 Settings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance) = Double.Parse(tbPHExtMaxTol.Text).ToString(ci)

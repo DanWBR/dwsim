@@ -493,34 +493,36 @@ Public Class FormOptions
     End Sub
 
     Private Sub cbGPU_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cbGPU.SelectedIndexChanged
-        If cbGPU.SelectedItem.ToString.Contains("Emulator") Then
-            My.Settings.CudafyTarget = eGPUType.Emulator
-        ElseIf cbGPU.SelectedItem.ToString.Contains("CUDA") Then
-            My.Settings.CudafyTarget = eGPUType.Cuda
-        Else
-            My.Settings.CudafyTarget = eGPUType.OpenCL
-        End If
-        Settings.CudafyTarget = My.Settings.CudafyTarget
-        Try
-            For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(My.Settings.CudafyTarget, False)
-                If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
-                    My.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
-                    My.Settings.CudafyDeviceID = prop.DeviceId
-                    Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
-                    Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
-                    GetCUDACaps(prop)
-                    Exit For
-                End If
-            Next
-        Catch ex As Exception
-
-        End Try
-        If loaded Then
-            If Not Settings.gpu Is Nothing Then
-                Settings.gpu.Dispose()
-                Settings.gpu = Nothing
+        If Not cbGPU.SelectedItem Is Nothing Then
+            If cbGPU.SelectedItem.ToString.Contains("Emulator") Then
+                My.Settings.CudafyTarget = eGPUType.Emulator
+            ElseIf cbGPU.SelectedItem.ToString.Contains("CUDA") Then
+                My.Settings.CudafyTarget = eGPUType.Cuda
             Else
-                Calculator.InitComputeDevice()
+                My.Settings.CudafyTarget = eGPUType.OpenCL
+            End If
+            Settings.CudafyTarget = My.Settings.CudafyTarget
+            Try
+                For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(My.Settings.CudafyTarget, False)
+                    If Me.cbGPU.SelectedItem.ToString.Split("|")(1).Contains(prop.Name) Then
+                        My.Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
+                        My.Settings.CudafyDeviceID = prop.DeviceId
+                        Settings.SelectedGPU = Me.cbGPU.SelectedItem.ToString
+                        Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
+                        GetCUDACaps(prop)
+                        Exit For
+                    End If
+                Next
+            Catch ex As Exception
+
+            End Try
+            If loaded Then
+                If Not Settings.gpu Is Nothing Then
+                    Settings.gpu.Dispose()
+                    Settings.gpu = Nothing
+                Else
+                    Calculator.InitComputeDevice()
+                End If
             End If
         End If
     End Sub
