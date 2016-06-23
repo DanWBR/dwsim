@@ -356,4 +356,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="PropPack_ZError" xml:space="preserve">
     <value>Error calculating compressibility factor.</value>
   </data>
+  <data name="ErrorInvalidFlashSpecValue" xml:space="preserve">
+    <value>One or more flash specification values are invalid. Please check the associated Unit Operation or Material Stream for incorrect specifications or miscalculated values.</value>
+  </data>
 </root>

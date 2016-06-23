@@ -76,7 +76,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
@@ -731,7 +731,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
@@ -896,7 +896,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
@@ -1149,7 +1149,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
@@ -1314,7 +1314,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
@@ -1479,7 +1479,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
@@ -1644,7 +1644,7 @@ Namespace ExcelAddIn
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
-                        Return New Object(,) {{ex.Message}, {ex.InnerException.Message.ToString}}
+                        Return New Object(,) {{ex.Message}, {""}}
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else

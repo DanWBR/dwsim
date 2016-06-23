@@ -343,6 +343,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Um ou ambos os valores das variáveis especificadas para o cálculo flash está (estão) inválido(s). Por favor verifique a Operação Unitária associada ou suas correntes de entrada para encontrar possíveis erros nas suas propriedades especificadas ou calculadas..
+        '''</summary>
+        Friend Shared ReadOnly Property ErrorInvalidFlashSpecValue() As String
+            Get
+                Return ResourceManager.GetString("ErrorInvalidFlashSpecValue", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Este recurso utiliza uma biblioteca nativa (não-.NET) da plataforma em execução, e não funciona com o modo de cálculo em paralelo na CPU ativado. por favor desative esse recurso e tente novamente..
         '''</summary>
         Friend Shared ReadOnly Property ParallelPInvokeError() As String
