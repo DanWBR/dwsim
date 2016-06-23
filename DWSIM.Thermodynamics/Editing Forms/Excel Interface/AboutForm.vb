@@ -10,7 +10,7 @@ Public Class AboutForm
 
     Private Sub AboutForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Version.Text = "Excel Add-In Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
+        Version.Text = "Excel Add-In Version " & My.Application.Info.Version.ToString
 
         Copyright.Text = My.Application.Info.Copyright
 

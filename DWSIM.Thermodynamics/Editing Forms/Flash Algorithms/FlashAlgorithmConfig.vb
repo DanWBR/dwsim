@@ -78,6 +78,7 @@ Public Class FlashAlgorithmConfig
             Me.Text = "Flash Algorithm Settings"
 
             TabControl1.TabPages.Remove(TabPageCOES)
+            TabControl1.TabPages.Remove(TabPageGeneral)
 
         End If
 
