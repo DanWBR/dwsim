@@ -15,9 +15,11 @@ Public Class Calculator
 
     Public Shared Function GetLocalString(ByVal text As String) As String
 
+    
         If _ResourceManager Is Nothing Then
 
             Dim cultureinfo As String = If(Settings.ExcelMode, "en", GlobalSettings.Settings.CultureInfo)
+            My.Application.ChangeUICulture(cultureinfo)
 
             'loads the resource manager
             _ResourceManager = New System.Resources.ResourceManager("DWSIM.Thermodynamics.Strings", System.Reflection.Assembly.GetExecutingAssembly())
