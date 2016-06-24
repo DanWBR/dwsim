@@ -1649,11 +1649,26 @@ Namespace Databases
                                 .Ion_CpAq_c = Double.Parse(node2.InnerText, nf)
                         End Select
                     Next
+
                     .ID = i
                     .IsHYPO = False
                     .IsPF = False
                     .VaporPressureEquation = 101
                     .IdealgasCpEquation = 5
+
+                    'Add some surrogate standard parameters 
+
+                    .Critical_Temperature = 2000
+                    .Critical_Pressure = 30000000.0
+                    .Critical_Volume = 0.554
+                    .Acentric_Factor = 0.65
+                    .Critical_Compressibility = 0.23
+                    .Z_Rackett = 0.23
+                    .LiquidDensityEquation = 1 'constant density
+                    .Liquid_Density_Const_A = .SolidDensityAtTs / .Molar_Weight
+                    .LiquidHeatCapacityEquation = 1 'constant Cp
+                    .Liquid_Heat_Capacity_Const_A = .Electrolyte_Cp0 * 1000 * 1000 * 2 'this is an estimation from solid Cp due to missing values
+
                 End With
 
                 If CompName = "" Then
