@@ -80,6 +80,9 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
@@ -147,6 +150,9 @@ Namespace ExcelAddIn
                     Case 1
                         Return ex.ToString
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
@@ -642,6 +648,10 @@ Namespace ExcelAddIn
 
             Settings.ExcelMode = True
 
+            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Then
+                Thermodynamics.NativeLibraries.Files.InitLibraries()
+            End If
+
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -735,12 +745,21 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
+
+            Finally
+
+                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Then
+                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+                End If
 
             End Try
 
@@ -769,6 +788,10 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Settings.ExcelMode = True
+
+            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                Thermodynamics.NativeLibraries.Files.InitLibraries()
+            End If
 
             Try
 
@@ -900,12 +923,21 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
+
+            Finally
+
+                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                    Thermodynamics.NativeLibraries.Files.InitLibraries()
+                End If
 
             End Try
 
@@ -1018,6 +1050,10 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
+
+            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                Thermodynamics.NativeLibraries.Files.InitLibraries()
+            End If
 
             Try
 
@@ -1153,12 +1189,21 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
+
+            Finally
+
+                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+                End If
 
             End Try
 
@@ -1183,6 +1228,10 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
+
+            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                Thermodynamics.NativeLibraries.Files.InitLibraries()
+            End If
 
             Try
 
@@ -1318,12 +1367,21 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
+
+            Finally
+
+                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+                End If
 
             End Try
 
@@ -1348,6 +1406,10 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
+
+            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                Thermodynamics.NativeLibraries.Files.InitLibraries()
+            End If
 
             Try
 
@@ -1483,12 +1545,21 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
+
+            Finally
+
+                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+                End If
 
             End Try
 
@@ -1513,6 +1584,10 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
+
+            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                Thermodynamics.NativeLibraries.Files.InitLibraries()
+            End If
 
             Try
 
@@ -1648,12 +1723,21 @@ Namespace ExcelAddIn
                     Case 1
                         Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
                     Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
                         Dim frmEx As New FormUnhandledException
                         frmEx.TextBox1.Text = ex.ToString
                         frmEx.ex = ex
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
+
+            Finally
+
+                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
+                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+                End If
 
             End Try
 

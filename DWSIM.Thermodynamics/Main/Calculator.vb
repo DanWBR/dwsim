@@ -17,7 +17,7 @@ Public Class Calculator
 
         If _ResourceManager Is Nothing Then
 
-            Dim cultureinfo As String = GlobalSettings.Settings.CultureInfo
+            Dim cultureinfo As String = If(Settings.ExcelMode, "en", GlobalSettings.Settings.CultureInfo)
 
             'loads the resource manager
             _ResourceManager = New System.Resources.ResourceManager("DWSIM.Thermodynamics.Strings", System.Reflection.Assembly.GetExecutingAssembly())
