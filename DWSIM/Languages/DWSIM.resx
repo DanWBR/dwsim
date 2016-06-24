@@ -5391,4 +5391,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ReactionRate" xml:space="preserve">
     <value>Taxa de Reação</value>
   </data>
+  <data name="UnauthorizedAccessError" xml:space="preserve">
+    <value>Esta operação requer elevação. Execute o DWSIM com privilégios administrativos e tente novamente.</value>
+  </data>
 </root>

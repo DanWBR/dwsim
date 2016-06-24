@@ -14329,6 +14329,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Esta operação requer elevação. Execute o DWSIM com privilégios administrativos e tente novamente..
+        '''</summary>
+        Friend Shared ReadOnly Property UnauthorizedAccessError() As String
+            Get
+                Return ResourceManager.GetString("UnauthorizedAccessError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Desfazer.
         '''</summary>
         Friend Shared ReadOnly Property Undo() As String
