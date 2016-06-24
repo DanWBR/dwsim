@@ -1,4 +1,4 @@
-﻿Public Class AttachedUtilityClass
+﻿<Serializable> Public Class AttachedUtilityClass
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 

@@ -352,7 +352,7 @@ Namespace PropertyPackages
 
         End Property
 
-        Public Property UniqueID() As String Implements IPropertyPackage.UniqueID
+        Public Property UniqueID() As String = "" Implements IPropertyPackage.UniqueID
 
         Public Property Tag() As String Implements IPropertyPackage.Tag
 

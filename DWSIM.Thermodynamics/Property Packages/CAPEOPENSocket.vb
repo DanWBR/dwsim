@@ -620,16 +620,16 @@ Namespace PropertyPackages
             MyBase.DW_CalcOverallProps()
         End Sub
 
-        Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
+        Public Overrides Sub DW_CalcPhaseProps(ByVal myphase As PropertyPackages.Phase)
 
-            Dim myphase As String = ""
+            Dim phase As String = ""
             Dim result As Double
             Dim phasemolarfrac As Double = Nothing
             Dim overallmolarflow As Double = Nothing
             Dim i As Integer
             Dim phaseID As Integer
 
-            Select Case Phase
+            Select Case myphase
                 Case PropertyPackages.Phase.Aqueous
                     phaseID = 6
                 Case PropertyPackages.Phase.Liquid
@@ -660,18 +660,17 @@ Namespace PropertyPackages
                 Me.DW_CalcCompVolFlow(phaseID)
             End If
 
-            Select Case Phase
-                Case Phase.Mixture
-                    myphase = "Overall"
+            Select Case myphase
+                Case PropertyPackages.Phase.Mixture
+                    phase = "Overall"
                 Case Else
                     For Each pin As PhaseInfo In Me.PhaseMappings.Values
                         If pin.DWPhaseID = myphase Then
-                            myphase = pin.PhaseLabel
+                            phase = pin.PhaseLabel
                             Exit For
                         End If
                     Next
             End Select
-
             Dim proplist As String()
 
             If _coversion = "1.0" Then
@@ -691,12 +690,12 @@ Namespace PropertyPackages
                     End If
                 End If
             Else
-                If myphase <> "Overall" And myphase <> "" Then
+                If phase <> "Overall" And phase <> "" Then
                     proplist = Me.GetSinglePhasePropList
                     For i = 0 To UBound(proplist) - 1
                         If Not proplist(i).Contains(".D") Then
                             Try
-                                Me.CalcSinglePhaseProp(New String() {proplist(i)}, myphase)
+                                Me.CalcSinglePhaseProp(New String() {proplist(i)}, phase)
                             Catch ex As Exception
                             End Try
                         End If
@@ -706,11 +705,11 @@ Namespace PropertyPackages
                 End If
             End If
 
-            If myphase = "Overall" Then
+            If phase = "Overall" Then
 
                 Me.DW_CalcOverallProps()
 
-            ElseIf Phase = PropertyPackages.Phase.Liquid Then
+            ElseIf phase = "Liquid" Then
 
                 Me.DW_CalcLiqMixtureProps()
 
@@ -1618,7 +1617,7 @@ Namespace PropertyPackages
 
             _phasemappings.Clear()
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "PhaseMappings").Elements
-                _phasemappings.Add(xel2.@From, New PhaseInfo(xel2.@PhaseLabel, xel2.@DWPhaseIndex, [Enum].Parse(Type.GetType("DWSIM.PropertyPackages.Phase"), xel2.@DWPhaseID)))
+                _phasemappings.Add(xel2.@From, New PhaseInfo(xel2.@PhaseLabel, xel2.@DWPhaseIndex, [Enum].Parse(Type.GetType("DWSIM.Thermodynamics.PropertyPackages.Phase"), xel2.@DWPhaseID)))
             Next
 
             Dim pdata1 As XElement = (From el As XElement In data Select el Where el.Name = "PersistedData1").SingleOrDefault
