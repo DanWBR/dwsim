@@ -33,17 +33,17 @@ Public Class Settings
     Public Shared Property SolverTimeoutSeconds As Integer = 300
     Public Shared Property SolverMode As Integer = 0
     Public Shared Property SimultaneousAdjustEnabled As Boolean
-    Public Shared Property ServiceBusConnectionString As String
+    Public Shared Property ServiceBusConnectionString As String = ""
     Public Shared Property CalculatorStopRequested As Boolean
     Public Shared Property CalculatorActivated As Boolean
     Public Shared Property CalculatorBusy As Boolean
-    Public Shared Property ServerIPAddress As String
+    Public Shared Property ServerIPAddress As String = ""
     Public Shared Property ServerPort As Integer
     Public Shared Property CurrentCulture As String = "en"
     Public Shared DefaultEditFormLocation As Integer = 8
     Public Shared SolverBreakOnException As Boolean = False
     Public Shared Property SelectedGPU As String
-    Public Shared Property CultureInfo As String
+    Public Shared Property CultureInfo As String = "en"
     Public Shared Property InitializedCOPPM As Boolean = False
     Public Shared Property ExcelErrorHandlingMode As Integer = 0
     Public Shared Property ExcelFlashSettings As String = ""
