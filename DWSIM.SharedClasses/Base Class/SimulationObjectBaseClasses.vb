@@ -70,7 +70,16 @@ Namespace UnitOperations
 
         Public MustOverride Function GetIconBitmap() As Object Implements ISimulationObject.GetIconBitmap
 
-        Public Property AttachedUtilities As New List(Of IAttachedUtility) Implements ISimulationObject.AttachedUtilities
+        <NonSerialized> Private _AttachedUtilities As New List(Of IAttachedUtility)
+
+        Public Property AttachedUtilities As List(Of IAttachedUtility) Implements ISimulationObject.AttachedUtilities
+            Get
+                Return _AttachedUtilities
+            End Get
+            Set(value As List(Of IAttachedUtility))
+                _AttachedUtilities = value
+            End Set
+        End Property
 
         Public Property PreferredFlashAlgorithmTag As String = "" Implements ISimulationObject.PreferredFlashAlgorithmTag
         Public Property Calculated As Boolean = False Implements Interfaces.ISimulationObject.Calculated

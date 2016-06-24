@@ -2925,25 +2925,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim TCR, PCR, VCR As Double
 
             Dim CP As New ArrayList
-            If n > 0 Then
-                CP = cpc.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
-                If CP.Count > 0 Then
-                    Dim cp0 = CP(0)
-                    TCR = cp0(0)
-                    PCR = cp0(1)
-                    VCR = cp0(2)
-                Else
-                    TCR = 0
-                    PCR = 0
-                    VCR = 0
-                End If
-            Else
-                TCR = Me.AUX_TCM(Phase.Mixture)
-                PCR = Me.AUX_PCM(Phase.Mixture)
-                VCR = Me.AUX_VCM(Phase.Mixture)
-                CP.Add(New Object() {TCR, PCR, VCR})
-            End If
-
+            TCR = Me.AUX_TCM(Phase.Mixture)
+            PCR = Me.AUX_PCM(Phase.Mixture)
+            VCR = Me.AUX_VCM(Phase.Mixture)
+            CP.Add(New Object() {TCR, PCR, VCR})
+            
             Pmin = 101325
             Tmin = 0.3 * TCR
 
