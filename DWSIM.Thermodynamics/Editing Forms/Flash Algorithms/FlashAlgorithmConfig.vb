@@ -79,6 +79,7 @@ Public Class FlashAlgorithmConfig
 
             TabControl1.TabPages.Remove(TabPageCOES)
             TabControl1.TabPages.Remove(TabPageGeneral)
+            TabControl1.TabPages.Remove(TabPageVLLE)
 
         End If
 

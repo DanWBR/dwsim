@@ -201,7 +201,7 @@ Partial Class SettingsForm
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage4.Size = New System.Drawing.Size(588, 272)
         Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Miscelaneous"
+        Me.TabPage4.Text = "Miscellaneous"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
         'cbErrorHandlingMode
