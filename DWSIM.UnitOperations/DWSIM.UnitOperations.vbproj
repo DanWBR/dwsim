@@ -50,8 +50,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CapeOpen">
-      <HintPath>..\..\DWSIM3\DWSIM\bin\Release\CapeOpen.dll</HintPath>
+    <Reference Include="CapeOpen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=90d5303f0e924b64, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
     </Reference>
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
