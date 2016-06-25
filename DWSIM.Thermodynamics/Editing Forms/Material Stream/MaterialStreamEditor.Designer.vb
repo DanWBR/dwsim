@@ -37,7 +37,6 @@ Partial Class MaterialStreamEditor
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
@@ -61,7 +60,6 @@ Partial Class MaterialStreamEditor
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.GroupBoxInput = New System.Windows.Forms.GroupBox()
         Me.tbFracSpec = New System.Windows.Forms.TextBox()
         Me.rbSpecSolid = New System.Windows.Forms.RadioButton()
         Me.rbSpecLiquid = New System.Windows.Forms.RadioButton()
@@ -110,11 +108,7 @@ Partial Class MaterialStreamEditor
         Me.PetroleumPropsTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.HydratesTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.TCPTSMI = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.btnExpand = New System.Windows.Forms.CheckBox()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.TabPhaseProps = New System.Windows.Forms.TabControl()
         Me.tabPropsMix = New System.Windows.Forms.TabPage()
         Me.gridPropertiesMixture = New System.Windows.Forms.DataGridView()
@@ -146,7 +140,6 @@ Partial Class MaterialStreamEditor
         Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.lblAmountTotal = New System.Windows.Forms.Label()
         Me.cbCalculatedAmountsBasis = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -176,16 +169,17 @@ Partial Class MaterialStreamEditor
         Me.DataGridViewTextBoxColumn28 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn29 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Panel1.SuspendLayout()
+        Me.TabControlMain = New System.Windows.Forms.TabControl()
+        Me.TabPageInput = New System.Windows.Forms.TabPage()
+        Me.TabPageResultsComp = New System.Windows.Forms.TabPage()
+        Me.TabPageResultsProps = New System.Windows.Forms.TabPage()
+        Me.TabPageAnnotations = New System.Windows.Forms.TabPage()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBoxInput.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.gridInputComposition, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UtilitiesCtxMenu.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
         Me.TabPhaseProps.SuspendLayout()
         Me.tabPropsMix.SuspendLayout()
         CType(Me.gridPropertiesMixture, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -199,7 +193,6 @@ Partial Class MaterialStreamEditor
         CType(Me.gridPropertiesLiq2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPropsSolid.SuspendLayout()
         CType(Me.gridPropertiesSolid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox8.SuspendLayout()
         Me.TabPhaseComps.SuspendLayout()
         Me.tabCompMix.SuspendLayout()
         CType(Me.gridCompMixture, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -213,16 +206,12 @@ Partial Class MaterialStreamEditor
         CType(Me.gridCompLiq2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabCompSolid.SuspendLayout()
         CType(Me.gridCompSolid, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControlMain.SuspendLayout()
+        Me.TabPageInput.SuspendLayout()
+        Me.TabPageResultsComp.SuspendLayout()
+        Me.TabPageResultsProps.SuspendLayout()
+        Me.TabPageAnnotations.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'Panel1
-        '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.GroupBox5)
-        Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Controls.Add(Me.GroupBox3)
-        Me.Panel1.Controls.Add(Me.GroupBoxInput)
-        Me.Panel1.Name = "Panel1"
         '
         'GroupBox5
         '
@@ -385,41 +374,6 @@ Partial Class MaterialStreamEditor
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
-        '
-        'GroupBoxInput
-        '
-        resources.ApplyResources(Me.GroupBoxInput, "GroupBoxInput")
-        Me.GroupBoxInput.Controls.Add(Me.tbFracSpec)
-        Me.GroupBoxInput.Controls.Add(Me.rbSpecSolid)
-        Me.GroupBoxInput.Controls.Add(Me.rbSpecLiquid)
-        Me.GroupBoxInput.Controls.Add(Me.rbSpecVapor)
-        Me.GroupBoxInput.Controls.Add(Me.Label17)
-        Me.GroupBoxInput.Controls.Add(Me.GroupBox6)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsS)
-        Me.GroupBoxInput.Controls.Add(Me.tbEntr)
-        Me.GroupBoxInput.Controls.Add(Me.Label15)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsH)
-        Me.GroupBoxInput.Controls.Add(Me.tbEnth)
-        Me.GroupBoxInput.Controls.Add(Me.Label14)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsQ)
-        Me.GroupBoxInput.Controls.Add(Me.tbVolFlow)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsM)
-        Me.GroupBoxInput.Controls.Add(Me.tbMoleFlow)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsW)
-        Me.GroupBoxInput.Controls.Add(Me.tbMassFlow)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsP)
-        Me.GroupBoxInput.Controls.Add(Me.tbPressure)
-        Me.GroupBoxInput.Controls.Add(Me.Label7)
-        Me.GroupBoxInput.Controls.Add(Me.Label6)
-        Me.GroupBoxInput.Controls.Add(Me.cbUnitsT)
-        Me.GroupBoxInput.Controls.Add(Me.tbTemp)
-        Me.GroupBoxInput.Controls.Add(Me.Label5)
-        Me.GroupBoxInput.Controls.Add(Me.Label4)
-        Me.GroupBoxInput.Controls.Add(Me.Label3)
-        Me.GroupBoxInput.Controls.Add(Me.cbSpec)
-        Me.GroupBoxInput.Controls.Add(Me.Label8)
-        Me.GroupBoxInput.Name = "GroupBoxInput"
-        Me.GroupBoxInput.TabStop = False
         '
         'tbFracSpec
         '
@@ -734,13 +688,6 @@ Partial Class MaterialStreamEditor
         Me.TCPTSMI.Name = "TCPTSMI"
         resources.ApplyResources(Me.TCPTSMI, "TCPTSMI")
         '
-        'GroupBox4
-        '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.rtbAnnotations)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.TabStop = False
-        '
         'rtbAnnotations
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
@@ -751,24 +698,6 @@ Partial Class MaterialStreamEditor
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowSave = False
         Me.rtbAnnotations.ShowUndo = False
-        '
-        'Label18
-        '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
-        '
-        'btnExpand
-        '
-        resources.ApplyResources(Me.btnExpand, "btnExpand")
-        Me.btnExpand.Name = "btnExpand"
-        Me.btnExpand.UseVisualStyleBackColor = True
-        '
-        'GroupBox7
-        '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
-        Me.GroupBox7.Controls.Add(Me.TabPhaseProps)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.TabStop = False
         '
         'TabPhaseProps
         '
@@ -1004,16 +933,6 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.DataGridViewTextBoxColumn17, "DataGridViewTextBoxColumn17")
         Me.DataGridViewTextBoxColumn17.Name = "DataGridViewTextBoxColumn17"
         '
-        'GroupBox8
-        '
-        Me.GroupBox8.Controls.Add(Me.lblAmountTotal)
-        Me.GroupBox8.Controls.Add(Me.cbCalculatedAmountsBasis)
-        Me.GroupBox8.Controls.Add(Me.Label19)
-        Me.GroupBox8.Controls.Add(Me.TabPhaseComps)
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.TabStop = False
-        '
         'lblAmountTotal
         '
         resources.ApplyResources(Me.lblAmountTotal, "lblAmountTotal")
@@ -1034,13 +953,13 @@ Partial Class MaterialStreamEditor
         '
         'TabPhaseComps
         '
+        resources.ApplyResources(Me.TabPhaseComps, "TabPhaseComps")
         Me.TabPhaseComps.Controls.Add(Me.tabCompMix)
         Me.TabPhaseComps.Controls.Add(Me.tabCompVapor)
         Me.TabPhaseComps.Controls.Add(Me.tabCompLiqMix)
         Me.TabPhaseComps.Controls.Add(Me.tabCompLiq1)
         Me.TabPhaseComps.Controls.Add(Me.tabCompLiq2)
         Me.TabPhaseComps.Controls.Add(Me.tabCompSolid)
-        resources.ApplyResources(Me.TabPhaseComps, "TabPhaseComps")
         Me.TabPhaseComps.Name = "TabPhaseComps"
         Me.TabPhaseComps.SelectedIndex = 0
         '
@@ -1230,33 +1149,95 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.DataGridViewTextBoxColumn29, "DataGridViewTextBoxColumn29")
         Me.DataGridViewTextBoxColumn29.Name = "DataGridViewTextBoxColumn29"
         '
+        'TabControlMain
+        '
+        resources.ApplyResources(Me.TabControlMain, "TabControlMain")
+        Me.TabControlMain.Controls.Add(Me.TabPageInput)
+        Me.TabControlMain.Controls.Add(Me.TabPageResultsComp)
+        Me.TabControlMain.Controls.Add(Me.TabPageResultsProps)
+        Me.TabControlMain.Controls.Add(Me.TabPageAnnotations)
+        Me.TabControlMain.Name = "TabControlMain"
+        Me.TabControlMain.SelectedIndex = 0
+        '
+        'TabPageInput
+        '
+        Me.TabPageInput.Controls.Add(Me.tbFracSpec)
+        Me.TabPageInput.Controls.Add(Me.Label8)
+        Me.TabPageInput.Controls.Add(Me.rbSpecSolid)
+        Me.TabPageInput.Controls.Add(Me.cbSpec)
+        Me.TabPageInput.Controls.Add(Me.rbSpecLiquid)
+        Me.TabPageInput.Controls.Add(Me.Label3)
+        Me.TabPageInput.Controls.Add(Me.rbSpecVapor)
+        Me.TabPageInput.Controls.Add(Me.Label4)
+        Me.TabPageInput.Controls.Add(Me.Label17)
+        Me.TabPageInput.Controls.Add(Me.Label5)
+        Me.TabPageInput.Controls.Add(Me.GroupBox6)
+        Me.TabPageInput.Controls.Add(Me.tbTemp)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsS)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsT)
+        Me.TabPageInput.Controls.Add(Me.tbEntr)
+        Me.TabPageInput.Controls.Add(Me.Label6)
+        Me.TabPageInput.Controls.Add(Me.Label15)
+        Me.TabPageInput.Controls.Add(Me.Label7)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsH)
+        Me.TabPageInput.Controls.Add(Me.tbPressure)
+        Me.TabPageInput.Controls.Add(Me.tbEnth)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsP)
+        Me.TabPageInput.Controls.Add(Me.Label14)
+        Me.TabPageInput.Controls.Add(Me.tbMassFlow)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsQ)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsW)
+        Me.TabPageInput.Controls.Add(Me.tbVolFlow)
+        Me.TabPageInput.Controls.Add(Me.tbMoleFlow)
+        Me.TabPageInput.Controls.Add(Me.cbUnitsM)
+        resources.ApplyResources(Me.TabPageInput, "TabPageInput")
+        Me.TabPageInput.Name = "TabPageInput"
+        Me.TabPageInput.UseVisualStyleBackColor = True
+        '
+        'TabPageResultsComp
+        '
+        Me.TabPageResultsComp.Controls.Add(Me.TabPhaseComps)
+        Me.TabPageResultsComp.Controls.Add(Me.lblAmountTotal)
+        Me.TabPageResultsComp.Controls.Add(Me.Label19)
+        Me.TabPageResultsComp.Controls.Add(Me.cbCalculatedAmountsBasis)
+        resources.ApplyResources(Me.TabPageResultsComp, "TabPageResultsComp")
+        Me.TabPageResultsComp.Name = "TabPageResultsComp"
+        Me.TabPageResultsComp.UseVisualStyleBackColor = True
+        '
+        'TabPageResultsProps
+        '
+        Me.TabPageResultsProps.Controls.Add(Me.TabPhaseProps)
+        resources.ApplyResources(Me.TabPageResultsProps, "TabPageResultsProps")
+        Me.TabPageResultsProps.Name = "TabPageResultsProps"
+        Me.TabPageResultsProps.UseVisualStyleBackColor = True
+        '
+        'TabPageAnnotations
+        '
+        Me.TabPageAnnotations.Controls.Add(Me.rtbAnnotations)
+        resources.ApplyResources(Me.TabPageAnnotations, "TabPageAnnotations")
+        Me.TabPageAnnotations.Name = "TabPageAnnotations"
+        Me.TabPageAnnotations.UseVisualStyleBackColor = True
+        '
         'MaterialStreamEditor
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.GroupBox8)
-        Me.Controls.Add(Me.GroupBox7)
-        Me.Controls.Add(Me.btnExpand)
-        Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBox5)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.TabControlMain)
         Me.Name = "MaterialStreamEditor"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
-        Me.Panel1.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBoxInput.ResumeLayout(False)
-        Me.GroupBoxInput.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         CType(Me.gridInputComposition, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UtilitiesCtxMenu.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox7.ResumeLayout(False)
         Me.TabPhaseProps.ResumeLayout(False)
         Me.tabPropsMix.ResumeLayout(False)
         CType(Me.gridPropertiesMixture, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1270,8 +1251,6 @@ Partial Class MaterialStreamEditor
         CType(Me.gridPropertiesLiq2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPropsSolid.ResumeLayout(False)
         CType(Me.gridPropertiesSolid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox8.ResumeLayout(False)
-        Me.GroupBox8.PerformLayout()
         Me.TabPhaseComps.ResumeLayout(False)
         Me.tabCompMix.ResumeLayout(False)
         CType(Me.gridCompMixture, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1285,12 +1264,17 @@ Partial Class MaterialStreamEditor
         CType(Me.gridCompLiq2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabCompSolid.ResumeLayout(False)
         CType(Me.gridCompSolid, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControlMain.ResumeLayout(False)
+        Me.TabPageInput.ResumeLayout(False)
+        Me.TabPageInput.PerformLayout()
+        Me.TabPageResultsComp.ResumeLayout(False)
+        Me.TabPageResultsComp.PerformLayout()
+        Me.TabPageResultsProps.ResumeLayout(False)
+        Me.TabPageAnnotations.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents chkActive As System.Windows.Forms.CheckBox
     Friend WithEvents lblConnectedTo As System.Windows.Forms.Label
@@ -1299,7 +1283,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents rtbAnnotations As Extended.Windows.Forms.RichTextBoxExtended
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents cbFlashAlg As System.Windows.Forms.ComboBox
@@ -1313,7 +1296,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents cbInlet As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents GroupBoxInput As System.Windows.Forms.GroupBox
     Friend WithEvents cbUnitsT As System.Windows.Forms.ComboBox
     Friend WithEvents tbTemp As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -1346,9 +1328,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents cbCompBasis As System.Windows.Forms.ComboBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents lblInputAmount As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents btnExpand As System.Windows.Forms.CheckBox
-    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Friend WithEvents TabPhaseProps As System.Windows.Forms.TabControl
     Friend WithEvents tabPropsMix As System.Windows.Forms.TabPage
     Friend WithEvents gridPropertiesMixture As System.Windows.Forms.DataGridView
@@ -1360,7 +1339,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents gridPropertiesLiq2 As System.Windows.Forms.DataGridView
     Friend WithEvents tabPropsSolid As System.Windows.Forms.TabPage
     Friend WithEvents gridPropertiesSolid As System.Windows.Forms.DataGridView
-    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents TabPhaseComps As System.Windows.Forms.TabControl
     Friend WithEvents tabCompMix As System.Windows.Forms.TabPage
     Friend WithEvents gridCompMixture As System.Windows.Forms.DataGridView
@@ -1430,4 +1408,9 @@ Partial Class MaterialStreamEditor
     Friend WithEvents btnUtils As System.Windows.Forms.Button
     Friend WithEvents btnConfigureFlashAlg As System.Windows.Forms.Button
     Friend WithEvents btnConfigurePP As System.Windows.Forms.Button
+    Friend WithEvents TabControlMain As System.Windows.Forms.TabControl
+    Friend WithEvents TabPageInput As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageResultsComp As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageResultsProps As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageAnnotations As System.Windows.Forms.TabPage
 End Class

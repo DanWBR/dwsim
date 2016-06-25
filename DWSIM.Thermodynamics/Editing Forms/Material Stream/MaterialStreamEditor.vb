@@ -163,11 +163,12 @@ Public Class MaterialStreamEditor
 
             End Try
 
-            btnExpand.Enabled = .Calculated
-
             cbCalculatedAmountsBasis.SelectedIndex = 0
 
             If .Calculated Then
+
+                If Not TabControlMain.TabPages.Contains(TabPageResultsComp) Then TabControlMain.TabPages.Insert(1, TabPageResultsComp)
+                If Not TabControlMain.TabPages.Contains(TabPageResultsProps) Then TabControlMain.TabPages.Insert(2, TabPageResultsProps)
 
                 'result compositions
 
@@ -243,17 +244,22 @@ Public Class MaterialStreamEditor
                     TabPhaseProps.TabPages.Remove(tabPropsSolid)
                 End If
 
+            Else
+
+                If TabControlMain.TabPages.Contains(TabPageResultsComp) Then TabControlMain.TabPages.Remove(TabPageResultsComp)
+                If TabControlMain.TabPages.Contains(TabPageResultsProps) Then TabControlMain.TabPages.Remove(TabPageResultsProps)
+
             End If
 
             If .GraphicObject.InputConnectors(0).IsAttached Then
                 If .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.ObjectType = ObjectType.OT_Recycle Then
-                    GroupBoxInput.Enabled = True
+                    TabPageInput.Enabled = True
                 Else
-                    GroupBoxInput.Enabled = False
+                    TabPageInput.Enabled = False
                 End If
-                GroupBoxInput.Enabled = False
+                TabPageInput.Enabled = False
             Else
-                GroupBoxInput.Enabled = True
+                TabPageInput.Enabled = True
             End If
 
         End With
@@ -356,21 +362,6 @@ Public Class MaterialStreamEditor
             row.Cells(2).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next
 
-    End Sub
-
-    Private Sub btnExpand_CheckedChanged(sender As Object, e As EventArgs) Handles btnExpand.CheckedChanged
-        If btnExpand.Checked Then Me.Width = 850 Else Me.Width = 414
-        If Me.DockPanel IsNot Nothing Then
-            If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeftAutoHide Or
-                     Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide Then
-                If btnExpand.Checked Then Me.AutoHidePortion = 850 Else Me.AutoHidePortion = 414
-            ElseIf Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft Or
-                     Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.DockRight Then
-                If btnExpand.Checked Then Me.DockPanel.DockLeftPortion = 850 Else Me.DockPanel.DockLeftPortion = 414
-            ElseIf Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
-                If btnExpand.Checked Then Me.FloatPane.FloatWindow.Width = 850 Else Me.FloatPane.FloatWindow.Width = 414
-            End If
-        End If
     End Sub
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
@@ -1072,4 +1063,5 @@ Public Class MaterialStreamEditor
     Private Sub chkActive_CheckedChanged(sender As Object, e As EventArgs) Handles chkActive.CheckedChanged
         If Loaded Then MatStream.GraphicObject.Active = chkActive.Checked
     End Sub
+
 End Class
