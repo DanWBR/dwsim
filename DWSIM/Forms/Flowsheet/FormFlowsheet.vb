@@ -493,6 +493,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 Next
             Next
             DirectCast(MaterialStream, Streams.MaterialStream).EqualizeOverallComposition()
+            DirectCast(MaterialStream, Streams.MaterialStream).CalcOverallCompMassFractions()
         End If
     End Sub
 

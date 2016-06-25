@@ -74,6 +74,7 @@ Namespace UnitOperations
 
         Public Property AttachedUtilities As List(Of IAttachedUtility) Implements ISimulationObject.AttachedUtilities
             Get
+                If _AttachedUtilities Is Nothing Then _AttachedUtilities = New List(Of IAttachedUtility)
                 Return _AttachedUtilities
             End Get
             Set(value As List(Of IAttachedUtility))

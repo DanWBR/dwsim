@@ -17,17 +17,15 @@ Public Class MaterialStreamEditor
 
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        Me.Width = 420
-
-        units = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
-        nf = MatStream.FlowSheet.FlowsheetOptions.NumberFormat
-        nff = MatStream.FlowSheet.FlowsheetOptions.FractionNumberFormat
-
         UpdateInfo()
 
     End Sub
 
     Sub UpdateInfo()
+
+        units = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
+        nf = MatStream.FlowSheet.FlowsheetOptions.NumberFormat
+        nff = MatStream.FlowSheet.FlowsheetOptions.FractionNumberFormat
 
         Loaded = False
 
