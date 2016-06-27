@@ -419,6 +419,8 @@ Public Class FlowsheetSurface
 
                     Flowsheet.SimulationObjects(Me.FlowsheetDesignSurface.SelectedObject.Name).DisplayEditForm()
 
+                    Me.FlowsheetDesignSurface.Focus()
+
                 Else
 
                     'Me.FlowsheetDesignSurface.SelectedObject = Nothing
