@@ -32,7 +32,7 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Separator
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Vessel
 
         Protected m_DQ As Nullable(Of Double)
 
@@ -247,7 +247,7 @@ Namespace UnitOperations
                     End If
                 Next
                 Me.PropertyPackage.CurrentMaterialStream = mix
-                .Phases(0).Properties.temperature = T
+                mix.Phases(0).Properties.temperature = T
                 .Phases(0).Properties.molarflow = W / Me.PropertyPackage.AUX_MMM(PropertyPackages.Phase.Mixture) * 1000
 
             End With
@@ -258,7 +258,9 @@ Namespace UnitOperations
                 Dim j As Integer = 0
 
                 mix.PropertyPackage = Me.PropertyPackage
+                mix.SpecType = StreamSpec.Pressure_and_Enthalpy
                 mix.Calculate(True, True)
+                T = mix.Phases(0).Properties.temperature.getvalueordefault
 
             Else
 
@@ -280,6 +282,7 @@ Namespace UnitOperations
                 Me.PropertyPackage.CurrentMaterialStream = mix
 
                 mix.PropertyPackage = Me.PropertyPackage
+                mix.SpecType = StreamSpec.Temperature_and_Pressure
                 mix.Calculate(True, True)
 
             End If
@@ -408,7 +411,7 @@ Namespace UnitOperations
             Me.DeltaQ = Hf - H0
 
             'Energy stream - update power value (kJ/s)
-            If Me.GraphicObject.InputConnectors(6).IsAttached Then
+            If Me.GraphicObject.InputConnectors(6).IsAttached And (Me.OverrideP OrElse Me.OverrideT) Then
                 With Me.GetInletEnergyStream(6)
                     .EnergyFlow = Me.DeltaQ.GetValueOrDefault
                     .GraphicObject.Calculated = True
@@ -545,12 +548,12 @@ Namespace UnitOperations
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then
-                f = New EditingForm_Separator With {.VesselObject = Me}
+                f = New EditingForm_Vessel With {.VesselObject = Me}
                 f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                 Me.FlowSheet.DisplayForm(f)
             Else
                 If f.IsDisposed Then
-                    f = New EditingForm_Separator With {.VesselObject = Me}
+                    f = New EditingForm_Vessel With {.VesselObject = Me}
                     f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
                     Me.FlowSheet.DisplayForm(f)
                 Else

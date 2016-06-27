@@ -232,10 +232,10 @@
     <Compile Include="Editing Forms\EditingForm_Pump.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Separator.Designer.vb">
-      <DependentUpon>EditingForm_Separator.vb</DependentUpon>
+    <Compile Include="Editing Forms\EditingForm_Vessel.Designer.vb">
+      <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\EditingForm_Separator.vb">
+    <Compile Include="Editing Forms\EditingForm_Vessel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Editing Forms\EditingForm_EnergyStream.Designer.vb">
@@ -562,11 +562,11 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Separator.en.resx">
-      <DependentUpon>EditingForm_Separator.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.en.resx">
+      <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editing Forms\EditingForm_Separator.resx">
-      <DependentUpon>EditingForm_Separator.vb</DependentUpon>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.resx">
+      <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.en.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>

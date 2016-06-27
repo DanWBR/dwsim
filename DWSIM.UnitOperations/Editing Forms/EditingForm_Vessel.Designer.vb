@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EditingForm_Separator
+Partial Class EditingForm_Vessel
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Partial Class EditingForm_Separator
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Separator))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Vessel))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet3 = New System.Windows.Forms.Button()
@@ -700,12 +700,12 @@ Partial Class EditingForm_Separator
         Me.sizingtsmi.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
         Me.sizingtsmi.Name = "sizingtsmi"
         '
-        'EditingForm_Separator
+        'EditingForm_Vessel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "EditingForm_Separator"
+        Me.Name = "EditingForm_Vessel"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox1.ResumeLayout(False)

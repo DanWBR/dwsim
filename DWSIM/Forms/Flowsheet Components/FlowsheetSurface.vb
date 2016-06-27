@@ -3280,7 +3280,7 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
-        Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject}
+        Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject, .fs = FlowsheetDesignSurface}
         f.Show(Flowsheet.dckPanel)
     End Sub
 

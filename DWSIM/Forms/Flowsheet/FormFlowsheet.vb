@@ -2848,6 +2848,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Else
             FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, Settings.SolverMode)
         End If
+        FormSurface.FlowsheetDesignSurface.Invalidate()
 
     End Sub
 

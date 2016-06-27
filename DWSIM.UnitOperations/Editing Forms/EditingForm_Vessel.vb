@@ -3,7 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports WeifenLuo.WinFormsUI.Docking
 
-Public Class EditingForm_Separator
+Public Class EditingForm_Vessel
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
@@ -340,7 +340,20 @@ Public Class EditingForm_Separator
         If Loaded Then RequestCalc()
     End Sub
 
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbPressure.TextChanged, tbTemperature.TextChanged
+
+        Dim tbox = DirectCast(sender, TextBox)
+
+        If Double.TryParse(tbox.Text, New Double()) Then
+            tbox.ForeColor = Drawing.Color.Blue
+        Else
+            tbox.ForeColor = Drawing.Color.Red
+        End If
+
+    End Sub
+
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbPressure.KeyDown, tbTemperature.KeyDown
+
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
             UpdateProps(sender)
@@ -466,7 +479,7 @@ Public Class EditingForm_Separator
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(6).Position.X - 30, sgobj.InputConnectors(6).Position.Y + 60, "")
 
             If sgobj.InputConnectors(6).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(6).AttachedConnector.AttachedFrom, sgobj)
             fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 6)

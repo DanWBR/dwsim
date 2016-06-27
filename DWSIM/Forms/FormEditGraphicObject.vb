@@ -364,4 +364,11 @@
         End If
     End Sub
 
+    Private Sub PGEx2_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) Handles PGEx2.PropertyValueChanged
+        fs.Invalidate()
+        For Each obj In fs.DrawingObjects
+            obj.Draw(Graphics.FromHwnd(fs.Handle))
+        Next
+    End Sub
+
 End Class
