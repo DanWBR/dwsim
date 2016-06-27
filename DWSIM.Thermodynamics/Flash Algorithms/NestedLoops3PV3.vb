@@ -1268,7 +1268,7 @@ alt:
 
                 If stresult(0) = False Then
 
-                    Dim vx2est(n), fcl(n), fcv(n) As Double
+                    Dim vx2est(nc), fcl(nc), fcv(nc) As Double
                     Dim m As Double = UBound(stresult(1), 1)
                     Dim gl, gv, gli As Double
 

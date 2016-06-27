@@ -96,6 +96,13 @@ Public Class EditingForm_Vessel
             If Not .GetOutletMaterialStream(1) Is Nothing Then cbOutlet2.SelectedItem = .GetOutletMaterialStream(1).GraphicObject.Tag
             If Not .GetOutletMaterialStream(2) Is Nothing Then cbOutlet3.SelectedItem = .GetOutletMaterialStream(2).GraphicObject.Tag
 
+            Dim eslist As String() = .FlowSheet.GraphicObjects.Values.Where(Function(x) x.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.Tag).ToArray
+
+            cbEnergy.Items.Clear()
+            cbEnergy.Items.AddRange(eslist)
+
+            If Not .GetInletEnergyStream(6) Is Nothing Then cbEnergy.SelectedItem = .GetInletEnergyStream(6).GraphicObject.Tag
+
             'parameters
 
             Select Case .PressureCalculation

@@ -1,4 +1,4 @@
-﻿'    Copyright 2008 Daniel Wagner O. de Medeiros
+﻿'    Copyright 2008-2016 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -16,6 +16,7 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Linq
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Public Class FormPhEnv
 
@@ -29,7 +30,6 @@ Public Class FormPhEnv
     Dim cp As Utilities.TCP.Methods
 
     Public su As New SystemsOfUnits.Units
-    Public cv As New SystemsOfUnits.Converter
     Public nf As String
 
     Private loaded As Boolean = False
@@ -39,11 +39,16 @@ Public Class FormPhEnv
     Private phaseidentification As Boolean = False
     Private showoppoint As Boolean = True
 
-    'desmembrar vetores
-    Dim PB, PO, TVB, TVD, HB, HO, SB, SO, VB, VO, TE, PE, PHsI, PHsII, THsI, THsII, TQ, PQ, TI, PI, POWF, TOWF, HOWF, SOWF, VOWF As New ArrayList
+    Dim PB, PO, TVB, TVD, HB, HO, SB, SO, VB, VO, TE, PE,
+        PB1, TVB1, HB1, SB1, VB1, PB2, TVB2, HB2, SB2, VB2,
+        PHsI, PHsII, THsI, THsII, TQ, PQ, TI, PI, POWF, TOWF, HOWF, SOWF, VOWF As New ArrayList
+
     Dim UT, UP, UH, US, UV As New ArrayList
+
     Dim PC As ArrayList
+
     Dim ot, op, ov, oh, os As Double
+
     Dim strname As String = ""
 
     Public Property Cricondentherm As Double
@@ -52,16 +57,28 @@ Public Class FormPhEnv
     Public Property CriticalTemperature As Double
     Public Property CriticalVolume As Double
 
+    Public Property EnvelopeSettings As New PropertyPackages.PhaseEnvelopeSettings
+
     Public bw As System.ComponentModel.BackgroundWorker
 
     Public Sub Initialize() Implements Interfaces.IAttachedUtility.Initialize
 
         Me.ComboBox1.SelectedIndex = 0
-        Me.ComboBox2.SelectedIndex = 0
+        Me.cbhydmodel.SelectedIndex = 0
 
         Me.Frm = My.Application.ActiveSimulation
 
         Me.cp = New Utilities.TCP.Methods
+
+        Populate()
+
+        Me.loaded = True
+
+        If DWSIM.App.IsRunningOnMono Then GroupBox2.Width -= 80
+
+    End Sub
+
+    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
 
         Me.su = Frm.Options.SelectedUnitSystem
         Me.nf = Frm.Options.NumberFormat
@@ -72,28 +89,64 @@ Public Class FormPhEnv
 
         End Try
 
-        If Frm.Options.SelectedPropertyPackage.ComponentName.Contains("(PR)") Or _
-           Frm.Options.SelectedPropertyPackage.ComponentName.Contains("(SRK)") Then
-            Me.CheckBox1.Enabled = True
-            Me.TextBox1.Enabled = True
-            Me.CheckBox3.Enabled = True
+        If TypeOf AttachedTo.PropertyPackage Is PropertyPackages.PengRobinsonPropertyPackage Or _
+           TypeOf AttachedTo.PropertyPackage Is PropertyPackages.SRKPropertyPackage Then
+            Me.chkStabCurve.Enabled = True
             chkpip.Enabled = True
         Else
-            Me.CheckBox1.Enabled = False
-            Me.TextBox1.Enabled = False
-            Me.CheckBox3.Enabled = False
+            Me.chkStabCurve.Enabled = False
             chkpip.Enabled = False
         End If
 
-        ComboBox2.Enabled = chkhyd.Checked
+        cbhydmodel.Enabled = chkhyd.Checked
 
-        Me.loaded = True
+        With EnvelopeSettings
+            chkQualityLine.Checked = .QualityLine
+            tbQuality.TextAlign = .QualityValue
+            chkhyd.Checked = .Hydrate
+            chkHydVapOnly.Checked = .HydrateVaporOnly
+            chkStabCurve.Checked = .StabilityCurve
+            chkOp.Checked = .OperatingPoint
+            chkpip.Checked = .PhaseIdentificationCurve
+            cbhydmodel.SelectedIndex = .HydrateModel
 
-        If DWSIM.App.IsRunningOnMono Then GroupBox2.Width -= 80
+            chkBubLiqInstability.Checked = .CheckLiquidInstability
+            lbBubDP.Text = su.deltaP
+            lbBubDT.Text = su.deltaT
+            lbBubP0.Text = su.pressure
+            lbBubT0.Text = su.temperature
 
-    End Sub
+            lbDewDP.Text = su.deltaP
+            lbDewDT.Text = su.deltaT
+            lbDewP0.Text = su.pressure
+            lbDewT0.Text = su.temperature
 
-    Public Sub Populate() Implements Interfaces.IAttachedUtility.Populate
+            If .BubbleCurveInitialFlash = "PVF" Then rbBubPVF.Checked = True Else rbBubTVF.Checked = True
+
+            tbBubDP.Text = cv.ConvertFromSI(su.deltaP, .BubbleCurveDeltaP).ToString(nf)
+            tbBubDT.Text = cv.ConvertFromSI(su.deltaT, .BubbleCurveDeltaT).ToString(nf)
+            tbBubP0.Text = cv.ConvertFromSI(su.pressure, .BubbleCurveInitialPressure).ToString(nf)
+            tbBubT0.Text = cv.ConvertFromSI(su.temperature, .BubbleCurveInitialTemperature).ToString(nf)
+            tbBubMaxPoints.Text = .BubbleCurveMaximumPoints
+
+            If .DewCurveInitialFlash = "PVF" Then rbDewPVF.Checked = True Else rbDewTVF.Checked = True
+
+            tbDewDP.Text = cv.ConvertFromSI(su.deltaP, .DewCurveDeltaP).ToString(nf)
+            tbDewDT.Text = cv.ConvertFromSI(su.deltaT, .DewCurveDeltaT).ToString(nf)
+            tbDewP0.Text = cv.ConvertFromSI(su.pressure, .DewCurveInitialPressure).ToString(nf)
+            tbDewT0.Text = cv.ConvertFromSI(su.temperature, .DewCurveInitialTemperature).ToString(nf)
+            tbDewMaxPoints.Text = .DewCurveMaximumPoints
+
+      
+            Try
+                Dim pp = DirectCast(AttachedTo, Streams.MaterialStream).PropertyPackage
+                chkBubLiqInstability.Enabled = (pp.FlashBase.AlgoType = FlashMethod.Gibbs_Minimization_VLLE Or
+                                                pp.FlashBase.AlgoType = FlashMethod.Inside_Out_VLLE Or
+                                                pp.FlashBase.AlgoType = FlashMethod.Nested_Loops_VLLE)
+            Catch ex As Exception
+            End Try
+
+        End With
 
     End Sub
 
@@ -109,8 +162,8 @@ Public Class FormPhEnv
 
             Dim x As Double
 
-            If Me.CheckBox1.Checked Then
-                If Double.TryParse(TextBox1.Text, x) Then
+            If Me.chkQualityLine.Checked Then
+                If Double.TryParse(tbQuality.Text, x) Then
                     If x >= 0 And x <= 1 Then
                         GoTo exec
                     Else
@@ -127,8 +180,8 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 .FontSpec.Size = 10
                 .FontSpec.IsDropShadow = False
             End With
-            If Me.CheckBox1.Enabled Then Me.qualitycalc = Me.CheckBox1.Checked Else Me.qualitycalc = False
-            If Me.CheckBox2.Checked Then Me.showoppoint = True Else Me.showoppoint = False
+            If Me.chkQualityLine.Enabled Then Me.qualitycalc = Me.chkQualityLine.Checked Else Me.qualitycalc = False
+            If Me.chkOp.Checked Then Me.showoppoint = True Else Me.showoppoint = False
             Me.phaseidentification = chkpip.Checked
             Me.hydratecalc = chkhyd.Checked
             Me.Button1.Enabled = False
@@ -138,7 +191,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 Settings.gpu.EnableMultithreading()
             End If
 
-            Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.TextBox1.Text, Me.CheckBox1.Checked, Me.CheckBox3.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.CheckBoxHYDVAP.Checked})
+            Me.BackgroundWorker1.RunWorkerAsync(New Object() {0, Me.tbQuality.Text, Me.chkQualityLine.Checked, Me.chkStabCurve.Checked, Me.chkpip.Checked, Me.chkhyd.Checked, Me.chkHydVapOnly.Checked})
 
             Me.bw = Me.BackgroundWorker1
 
@@ -157,7 +210,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                 Case 0
 
-                    Dim px1, py1, px2, py2, px3, py3, px4, py4, ph1, ph2, th1, th2, px5, py5, px6, py6 As New ArrayList
+                    Dim px1, py1, px2, py2, px3, py3, px4, py4, ph1, ph2, th1, th2, px5, py5, px6, py6, px7, py7, px8, py8 As New ArrayList
 
                     Dim i As Integer
 
@@ -193,6 +246,14 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         py6.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TOWF(i)))
                         px6.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, POWF(i)))
                     Next
+                    For i = 0 To TVB1.Count - 1
+                        py7.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TVB1(i)))
+                        px7.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB1(i)))
+                    Next
+                    For i = 0 To TVB2.Count - 1
+                        py8.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TVB2(i)))
+                        px8.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB2(i)))
+                    Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
@@ -205,6 +266,20 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsVisible = True
+                            .Line.IsSmooth = False
+                            .Line.Style = Drawing2D.DashStyle.Dash
+                            .Symbol.IsVisible = False
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsVisible = True
+                            .Line.IsSmooth = False
+                            .Line.Style = Drawing2D.DashStyle.Dash
+                            .Symbol.IsVisible = False
+                        End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
                             .Line.IsSmooth = False
@@ -215,7 +290,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        If CheckBox3.Checked Then
+                        If chkStabCurve.Checked Then
                             With .AddCurve(DWSIM.App.GetLocalString("LimitedeEstabilidade"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkOrange
                                 .Line.IsSmooth = False
@@ -223,7 +298,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             End With
                         End If
                         If qualitycalc Then
-                            With .AddCurve("V = " & Me.TextBox1.Text, px4.ToArray(GetType(Double)), py4.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
+                            With .AddCurve("V = " & Me.tbQuality.Text, px4.ToArray(GetType(Double)), py4.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkGreen
                                 .Line.IsSmooth = False
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
@@ -418,7 +493,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
                 Case 4
 
-                    Dim px1, py1, px2, py2, px3, py3, px4, py4, ph1, ph2, th1, th2, px5, py5, px6, py6 As New ArrayList
+                    Dim px1, py1, px2, py2, px3, py3, px4, py4, ph1, ph2, th1, th2, px5, py5, px6, py6, px7, py7, px8, py8 As New ArrayList
 
                     Dim i As Integer
 
@@ -454,6 +529,14 @@ exec:       With Me.GraphControl.GraphPane.Legend
                         px6.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TOWF(i)))
                         py6.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, POWF(i)))
                     Next
+                    For i = 0 To TVB1.Count - 1
+                        px7.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TVB1(i)))
+                        py7.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB1(i)))
+                    Next
+                    For i = 0 To TVB2.Count - 1
+                        px8.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, TVB2(i)))
+                        py8.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB2(i)))
+                    Next
 
                     With Me.GraphControl.GraphPane
                         .CurveList.Clear()
@@ -466,6 +549,20 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsVisible = True
+                            .Line.IsSmooth = False
+                            .Line.Style = Drawing2D.DashStyle.Dash
+                            .Symbol.IsVisible = False
+                        End With
+                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                            .Color = Color.SteelBlue
+                            .Line.IsVisible = True
+                            .Line.IsSmooth = False
+                            .Line.Style = Drawing2D.DashStyle.Dash
+                            .Symbol.IsVisible = False
+                        End With
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
                             .Line.IsSmooth = False
@@ -476,7 +573,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        If CheckBox3.Checked Then
+                        If chkStabCurve.Checked Then
                             With .AddCurve(DWSIM.App.GetLocalString("LimitedeEstabilidade"), px3.ToArray(GetType(Double)), py3.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkOrange
                                 .Line.IsSmooth = False
@@ -484,7 +581,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             End With
                         End If
                         If qualitycalc Then
-                            With .AddCurve("V = " & Me.TextBox1.Text, px4.ToArray(GetType(Double)), py4.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
+                            With .AddCurve("V = " & Me.tbQuality.Text, px4.ToArray(GetType(Double)), py4.ToArray(GetType(Double)), Color.Red, ZedGraph.SymbolType.Circle)
                                 .Color = Color.DarkGreen
                                 .Line.IsSmooth = False
                                 .Symbol.Fill.Type = ZedGraph.FillType.Solid
@@ -903,7 +1000,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
         mat.PropertyPackage.CurrentMaterialStream = mat
 
-        Dim diagdata As Object = mat.PropertyPackage.DW_ReturnPhaseEnvelope(e.Argument, Me.BackgroundWorker1)
+        Dim diagdata As Object = mat.PropertyPackage.DW_ReturnPhaseEnvelope(EnvelopeSettings, Me.BackgroundWorker1)
 
         PC = diagdata(15)
 
@@ -923,7 +1020,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
             For Ph = Pmin To Pmax Step 5 * 101325
                 Try
-                    Select Case Me.ComboBox2.SelectedIndex
+                    Select Case Me.cbhydmodel.SelectedIndex
                         Case 0
                             Th = New DWSIM.Utilities.HYD.vdwP_PP(mat).HYD_vdwP2T(Ph, Vz, m_aux.RetornarIDsParaCalculoDeHidratos(Vn), e.Argument(6))
                         Case 1
@@ -1010,6 +1107,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
         HOWF = r(22)
         SOWF = r(23)
         VOWF = r(24)
+        TVB1 = r(25)
+        PB1 = r(26)
+        HB1 = r(27)
+        SB1 = r(28)
+        VB1 = r(29)
+        TVB2 = r(30)
+        PB2 = r(31)
+        HB2 = r(32)
+        SB2 = r(33)
+        VB2 = r(34)
 
         Cricondentherm = TVD.ToArray().Max
         Cricondenbar = PB.ToArray().Max
@@ -1024,16 +1131,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
         With Me.Grid1.Columns
             .Clear()
-            .Add("c1", "Tbol (" & su.temperature & ")")
-            .Add("c2", DWSIM.App.GetLocalString("Pbol") & su.pressure & ")")
-            .Add("c3", "Hbol (" & su.enthalpy & ")")
-            .Add("c4", DWSIM.App.GetLocalString("Sbol") & su.entropy & ")")
-            .Add("c5", DWSIM.App.GetLocalString("Vbolm3mol"))
-            .Add("c6", "Torv (" & su.temperature & ")")
-            .Add("c7", DWSIM.App.GetLocalString("Porv") & su.pressure & ")")
-            .Add("c8", "Horv (" & su.enthalpy & ")")
-            .Add("c9", "Sorv (" & su.entropy & ")")
-            .Add("c10", DWSIM.App.GetLocalString("Vorvm3mol"))
+            .Add("c1", "Tb (" & su.temperature & ")")
+            .Add("c2", "Pb (" & su.pressure & ")")
+            .Add("c3", "Hb (" & su.enthalpy & ")")
+            .Add("c4", "Sb (" & su.entropy & ")")
+            .Add("c5", "Vb (m3/mol)")
+            .Add("c6", "Td (" & su.temperature & ")")
+            .Add("c7", "Pd (" & su.pressure & ")")
+            .Add("c8", "Hd (" & su.enthalpy & ")")
+            .Add("c9", "Sd (" & su.entropy & ")")
+            .Add("c10", "Vd (m3/mol)")
             .Add("c11", "Test (" & su.temperature & ")")
             .Add("c12", DWSIM.App.GetLocalString("Pest") & su.pressure & ")")
             .Add("c13", "TQ (" & su.temperature & ")")
@@ -1049,6 +1156,16 @@ exec:       With Me.GraphControl.GraphPane.Legend
             .Add("c23", "HDWF (" & su.enthalpy & ")")
             .Add("c24", "SDWF (" & su.entropy & ")")
             .Add("c25", "VDWF (m3/mol)")
+            .Add("c26", "Tb1 (" & su.temperature & ")")
+            .Add("c27", "Pb1 (" & su.pressure & ")")
+            .Add("c28", "Hb1 (" & su.enthalpy & ")")
+            .Add("c29", "Sb1 (" & su.entropy & ")")
+            .Add("c30", "Vb1 (m3/mol)")
+            .Add("c31", "Tb2 (" & su.temperature & ")")
+            .Add("c32", "Pb2 (" & su.pressure & ")")
+            .Add("c33", "Hb2 (" & su.enthalpy & ")")
+            .Add("c34", "Sb2 (" & su.entropy & ")")
+            .Add("c35", "Vb2 (m3/mol)")
         End With
 
         For Each c As DataGridViewColumn In Me.Grid1.Columns
@@ -1066,21 +1183,55 @@ exec:       With Me.GraphControl.GraphPane.Legend
         j = 0
         For Each d As Double In TVB
             data(0, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
-            data(1, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB(j))
-            data(2, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, HB(j))
-            data(3, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, SB(j))
-            data(4, j) = VB(j)
             j = j + 1
         Next
         j = 0
-        For Each d As Double In TVD
-            data(5, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
-            data(6, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PO(j))
-            data(7, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, HO(j))
-            data(8, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, SO(j))
-            data(9, j) = VO(j)
+        For Each d As Double In PB
+            data(1, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, d)
             j = j + 1
         Next
+        j = 0
+        For Each d As Double In HB
+            data(2, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In SB
+            data(3, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In VB
+            data(4, j) = d
+            j = j + 1
+        Next
+
+        j = 0
+        For Each d As Double In TVD
+            data(5, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In PO
+            data(6, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In HO
+            data(7, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In SO
+            data(8, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, d)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In VO
+            data(9, j) = d
+            j = j + 1
+        Next
+
         j = 0
         For Each d As Double In TE
             data(10, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
@@ -1112,12 +1263,21 @@ exec:       With Me.GraphControl.GraphPane.Legend
             j = j + 1
         Next
         j = 0
-        For Each d As Double In TOWF
-            data(20, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
-            data(21, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, POWF(j))
-            data(22, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, HOWF(j))
-            data(23, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, SOWF(j))
-            data(24, j) = VOWF(j)
+        For Each d As Double In TVB1
+            data(25, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
+            data(26, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB1(j))
+            data(27, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, HB1(j))
+            data(28, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, SB1(j))
+            data(29, j) = VB1(j)
+            j = j + 1
+        Next
+        j = 0
+        For Each d As Double In TVB2
+            data(30, j) = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, d)
+            data(31, j) = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, PB2(j))
+            data(32, j) = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, HB2(j))
+            data(33, j) = SystemsOfUnits.Converter.ConvertFromSI(su.entropy, SB2(j))
+            data(34, j) = VB2(j)
             j = j + 1
         Next
 
@@ -1143,12 +1303,14 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     End Sub
 
-    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox1.CheckedChanged
-        If Me.CheckBox1.Checked Then Me.TextBox1.Enabled = True Else Me.TextBox1.Enabled = False
+    Private Sub CheckBox1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkQualityLine.CheckedChanged
+        If Me.chkQualityLine.Checked Then Me.tbQuality.Enabled = True Else Me.tbQuality.Enabled = False
+        EnvelopeSettings.QualityLine = chkQualityLine.Checked
     End Sub
 
-    Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckBox2.CheckedChanged
-        If Me.CheckBox2.Checked Then Me.showoppoint = True Else Me.showoppoint = False
+    Private Sub CheckBox2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOp.CheckedChanged
+        If Me.chkOp.Checked Then Me.showoppoint = True Else Me.showoppoint = False
+        EnvelopeSettings.OperatingPoint = chkOp.Checked
     End Sub
 
     Private Sub FormPhEnv_HelpRequested(sender As System.Object, hlpevent As System.Windows.Forms.HelpEventArgs) Handles MyBase.HelpRequested
@@ -1156,11 +1318,14 @@ exec:       With Me.GraphControl.GraphPane.Legend
     End Sub
 
     Private Sub chkhyd_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkhyd.CheckedChanged
-        ComboBox2.Enabled = chkhyd.Checked
+        cbhydmodel.Enabled = chkhyd.Checked
+        chkHydVapOnly.Enabled = chkhyd.Checked
+        EnvelopeSettings.Hydrate = chkhyd.Checked
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
-        If ComboBox2.SelectedIndex = 2 Then CheckBoxHYDVAP.Enabled = False Else CheckBoxHYDVAP.Enabled = True
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbhydmodel.SelectedIndexChanged
+        If cbhydmodel.SelectedIndex = 2 Then chkHydVapOnly.Enabled = False Else chkHydVapOnly.Enabled = True
+        EnvelopeSettings.HydrateModel = cbhydmodel.SelectedIndex
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
@@ -1172,7 +1337,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
 
     Public Function GetPropertyList() As List(Of String) Implements Interfaces.IAttachedUtility.GetPropertyList
 
-        Dim plist As New List(Of String)(New String() {"Name", "AutoUpdate", "QL", "QLVAL", "STAB", "HYD", "HYDMODEL", "HYDVAPONLY", "PIP", "OP", "EnvelopeType"})
+        Dim plist As New List(Of String)(New String() {"Name", "AutoUpdate", "EnvelopeType", "EnvelopeSettings"})
 
         plist.Add("Cricondentherm")
         plist.Add("Cricondenbar")
@@ -1208,24 +1373,10 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 Return Name
             Case "AutoUpdate"
                 Return AutoUpdate
-            Case "QL"
-                Return CheckBox1.Checked
-            Case "QLVAL"
-                Return Double.Parse(TextBox1.Text)
-            Case "STAB"
-                Return CheckBox3.Checked
-            Case "HYD"
-                Return chkhyd.Checked
-            Case "HYDMODEL"
-                Return ComboBox2.SelectedIndex
-            Case "HYDVAPONLY"
-                Return CheckBoxHYDVAP.Checked
-            Case "PIP"
-                Return chkpip.Checked
-            Case "OP"
-                Return CheckBox2.Checked
             Case "EnvelopeType"
                 Return ComboBox1.SelectedIndex
+            Case "EnvelopeSettings"
+                Return Newtonsoft.Json.JsonConvert.SerializeObject(EnvelopeSettings)
             Case "Cricondentherm"
                 Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units.temperature, Cricondentherm)
             Case "Cricondenbar"
@@ -1252,24 +1403,10 @@ exec:       With Me.GraphControl.GraphPane.Legend
                 Name = pvalue
             Case "AutoUpdate"
                 AutoUpdate = pvalue
-            Case "QL"
-                CheckBox1.Checked = pvalue
-            Case "QLVAL"
-                TextBox1.Text = pvalue
-            Case "STAB"
-                CheckBox3.Checked = pvalue
-            Case "HYD"
-                chkhyd.Checked = pvalue
-            Case "HYDMODEL"
-                ComboBox2.SelectedIndex = pvalue
-            Case "HYDVAPONLY"
-                CheckBoxHYDVAP.Checked = pvalue
-            Case "PIP"
-                chkpip.Checked = pvalue
-            Case "OP"
-                CheckBox2.Checked = pvalue
             Case "EnvelopeType"
                 ComboBox1.SelectedIndex = pvalue
+            Case "EnvelopeSettings"
+                EnvelopeSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of PropertyPackages.PhaseEnvelopeSettings)(pvalue.ToString)
         End Select
     End Sub
 
@@ -1297,4 +1434,127 @@ exec:       With Me.GraphControl.GraphPane.Legend
         Return props
     End Function
 
+    Private Sub tbQuality_ValueChanged(sender As Object, e As EventArgs) Handles tbQuality.ValueChanged
+        Try
+            EnvelopeSettings.QualityValue = tbQuality.Value
+            tbQuality.ForeColor = Color.Blue
+        Catch ex As Exception
+            tbQuality.ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub chkStabCurve_CheckedChanged(sender As Object, e As EventArgs) Handles chkStabCurve.CheckedChanged
+        EnvelopeSettings.StabilityCurve = chkStabCurve.Checked
+    End Sub
+
+    Private Sub chkHydVapOnly_CheckedChanged(sender As Object, e As EventArgs) Handles chkHydVapOnly.CheckedChanged
+        EnvelopeSettings.HydrateVaporOnly = chkHydVapOnly.Checked
+    End Sub
+
+    Private Sub chkpip_CheckedChanged(sender As Object, e As EventArgs) Handles chkpip.CheckedChanged
+        EnvelopeSettings.PhaseIdentificationCurve = chkpip.Checked
+    End Sub
+
+    Private Sub rbBubPVF_CheckedChanged(sender As Object, e As EventArgs) Handles rbBubPVF.CheckedChanged, rbBubTVF.CheckedChanged
+        If rbBubPVF.Checked Then EnvelopeSettings.BubbleCurveInitialFlash = "PVF" Else EnvelopeSettings.BubbleCurveInitialFlash = "TVF"
+    End Sub
+
+    Private Sub tbBubP0_TextChanged(sender As Object, e As EventArgs) Handles tbBubP0.TextChanged
+
+        Try
+            EnvelopeSettings.BubbleCurveInitialPressure = cv.ConvertToSI(su.pressure, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbBubT0_TextChanged(sender As Object, e As EventArgs) Handles tbBubT0.TextChanged
+        Try
+            EnvelopeSettings.BubbleCurveInitialTemperature = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbBubMaxPoints_TextChanged(sender As Object, e As EventArgs) Handles tbBubMaxPoints.TextChanged
+        Try
+            EnvelopeSettings.BubbleCurveMaximumPoints = DirectCast(sender, TextBox).Text
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbBubDP_TextChanged(sender As Object, e As EventArgs) Handles tbBubDP.TextChanged
+        Try
+            EnvelopeSettings.BubbleCurveDeltaP = cv.ConvertToSI(su.deltaP, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbBubDT_TextChanged(sender As Object, e As EventArgs) Handles tbBubDT.TextChanged
+        Try
+            EnvelopeSettings.BubbleCurveDeltaT = cv.ConvertToSI(su.deltaT, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub chkBubLiqInstability_CheckedChanged(sender As Object, e As EventArgs) Handles chkBubLiqInstability.CheckedChanged
+        EnvelopeSettings.CheckLiquidInstability = chkBubLiqInstability.Checked
+    End Sub
+
+    Private Sub rbDewPVF_CheckedChanged(sender As Object, e As EventArgs) Handles rbDewPVF.CheckedChanged
+        If rbDewPVF.Checked Then EnvelopeSettings.DewCurveInitialFlash = "PVF" Else EnvelopeSettings.DewCurveInitialFlash = "TVF"
+    End Sub
+
+    Private Sub tbDewP0_TextChanged(sender As Object, e As EventArgs) Handles tbDewP0.TextChanged
+        Try
+            EnvelopeSettings.DewCurveInitialPressure = cv.ConvertToSI(su.pressure, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbDewT0_TextChanged(sender As Object, e As EventArgs) Handles tbDewT0.TextChanged
+        Try
+            EnvelopeSettings.DewCurveInitialTemperature = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbDewMaxPoints_TextChanged(sender As Object, e As EventArgs) Handles tbDewMaxPoints.TextChanged
+        Try
+            EnvelopeSettings.DewCurveMaximumPoints = DirectCast(sender, TextBox).Text
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbDewDP_TextChanged(sender As Object, e As EventArgs) Handles tbDewDP.TextChanged
+        Try
+            EnvelopeSettings.DewCurveDeltaP = cv.ConvertToSI(su.deltaP, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbDewDT_TextChanged(sender As Object, e As EventArgs) Handles tbDewDT.TextChanged
+        Try
+            EnvelopeSettings.DewCurveDeltaT = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
 End Class

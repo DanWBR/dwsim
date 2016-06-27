@@ -33,3 +33,34 @@
     Sub DisplayEditingForm()
 
 End Interface
+
+Public Interface IPhaseEnvelopeOptions
+
+    Property QualityLine As Boolean
+    Property QualityValue As Double
+    Property StabilityCurve As Boolean
+    Property PhaseIdentificationCurve As Boolean
+    Property CheckLiquidInstability As Boolean
+    Property Hydrate As Boolean
+    Property HydrateModel As Integer
+    Property HydrateVaporOnly As Boolean
+    Property OperatingPoint As Boolean
+
+    Property BubbleCurveInitialFlash As String
+    Property BubbleCurveInitialPressure As Double
+    Property BubbleCurveInitialTemperature As Double
+
+    Property DewCurveInitialFlash As String
+    Property DewCurveInitialPressure As Double
+    Property DewCurveInitialTemperature As Double
+
+    Property BubbleCurveMaximumPoints As Integer
+    Property DewCurveMaximumPoints As Integer
+
+    Property BubbleCurveDeltaP As Double
+    Property BubbleCurveDeltaT As Double
+
+    Property DewCurveDeltaP As Double
+    Property DewCurveDeltaT As Double
+
+End Interface

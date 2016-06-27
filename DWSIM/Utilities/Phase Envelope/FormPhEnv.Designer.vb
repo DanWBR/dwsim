@@ -27,18 +27,59 @@ Partial Class FormPhEnv
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPhEnv))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.chkQualityLine = New System.Windows.Forms.CheckBox()
+        Me.chkStabCurve = New System.Windows.Forms.CheckBox()
+        Me.chkHydVapOnly = New System.Windows.Forms.CheckBox()
+        Me.chkOp = New System.Windows.Forms.CheckBox()
+        Me.cbhydmodel = New System.Windows.Forms.ComboBox()
+        Me.tbQuality = New System.Windows.Forms.NumericUpDown()
+        Me.chkpip = New System.Windows.Forms.CheckBox()
+        Me.chkhyd = New System.Windows.Forms.CheckBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.lbBubDT = New System.Windows.Forms.Label()
+        Me.lbBubDP = New System.Windows.Forms.Label()
+        Me.lbBubT0 = New System.Windows.Forms.Label()
+        Me.lbBubP0 = New System.Windows.Forms.Label()
+        Me.tbBubDT = New System.Windows.Forms.TextBox()
+        Me.tbBubDP = New System.Windows.Forms.TextBox()
+        Me.tbBubMaxPoints = New System.Windows.Forms.TextBox()
+        Me.tbBubT0 = New System.Windows.Forms.TextBox()
+        Me.tbBubP0 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.rbBubTVF = New System.Windows.Forms.RadioButton()
+        Me.rbBubPVF = New System.Windows.Forms.RadioButton()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.chkBubLiqInstability = New System.Windows.Forms.CheckBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.lbDewDT = New System.Windows.Forms.Label()
+        Me.lbDewDP = New System.Windows.Forms.Label()
+        Me.lbDewT0 = New System.Windows.Forms.Label()
+        Me.lbDewP0 = New System.Windows.Forms.Label()
+        Me.tbDewDT = New System.Windows.Forms.TextBox()
+        Me.tbDewDP = New System.Windows.Forms.TextBox()
+        Me.tbDewMaxPoints = New System.Windows.Forms.TextBox()
+        Me.tbDewT0 = New System.Windows.Forms.TextBox()
+        Me.tbDewP0 = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.rbDewTVF = New System.Windows.Forms.RadioButton()
+        Me.rbDewPVF = New System.Windows.Forms.RadioButton()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.PanelCalc = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.LabelStatus = New System.Windows.Forms.Label()
-        Me.CheckBoxHYDVAP = New System.Windows.Forms.CheckBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.chkpip = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.chkhyd = New System.Windows.Forms.CheckBox()
-        Me.TextBox1 = New System.Windows.Forms.NumericUpDown()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox3 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -61,8 +102,12 @@ Partial Class FormPhEnv
         Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox6.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.tbQuality, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.PanelCalc.SuspendLayout()
-        CType(Me.TextBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -76,18 +121,326 @@ Partial Class FormPhEnv
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
+        Me.GroupBox6.Controls.Add(Me.TabControl1)
         Me.GroupBox6.Controls.Add(Me.PanelCalc)
-        Me.GroupBox6.Controls.Add(Me.CheckBoxHYDVAP)
-        Me.GroupBox6.Controls.Add(Me.ComboBox2)
-        Me.GroupBox6.Controls.Add(Me.chkpip)
         Me.GroupBox6.Controls.Add(Me.Button1)
-        Me.GroupBox6.Controls.Add(Me.chkhyd)
-        Me.GroupBox6.Controls.Add(Me.TextBox1)
-        Me.GroupBox6.Controls.Add(Me.CheckBox2)
-        Me.GroupBox6.Controls.Add(Me.CheckBox3)
-        Me.GroupBox6.Controls.Add(Me.CheckBox1)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Multiline = True
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.Label3)
+        Me.TabPage1.Controls.Add(Me.Label2)
+        Me.TabPage1.Controls.Add(Me.chkQualityLine)
+        Me.TabPage1.Controls.Add(Me.chkStabCurve)
+        Me.TabPage1.Controls.Add(Me.chkHydVapOnly)
+        Me.TabPage1.Controls.Add(Me.chkOp)
+        Me.TabPage1.Controls.Add(Me.cbhydmodel)
+        Me.TabPage1.Controls.Add(Me.tbQuality)
+        Me.TabPage1.Controls.Add(Me.chkpip)
+        Me.TabPage1.Controls.Add(Me.chkhyd)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        '
+        'chkQualityLine
+        '
+        resources.ApplyResources(Me.chkQualityLine, "chkQualityLine")
+        Me.chkQualityLine.Name = "chkQualityLine"
+        '
+        'chkStabCurve
+        '
+        resources.ApplyResources(Me.chkStabCurve, "chkStabCurve")
+        Me.chkStabCurve.Name = "chkStabCurve"
+        '
+        'chkHydVapOnly
+        '
+        resources.ApplyResources(Me.chkHydVapOnly, "chkHydVapOnly")
+        Me.chkHydVapOnly.Name = "chkHydVapOnly"
+        '
+        'chkOp
+        '
+        resources.ApplyResources(Me.chkOp, "chkOp")
+        Me.chkOp.Checked = True
+        Me.chkOp.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkOp.Name = "chkOp"
+        '
+        'cbhydmodel
+        '
+        Me.cbhydmodel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbhydmodel.DropDownWidth = 260
+        Me.cbhydmodel.Items.AddRange(New Object() {resources.GetString("cbhydmodel.Items"), resources.GetString("cbhydmodel.Items1"), resources.GetString("cbhydmodel.Items2"), resources.GetString("cbhydmodel.Items3")})
+        resources.ApplyResources(Me.cbhydmodel, "cbhydmodel")
+        Me.cbhydmodel.Name = "cbhydmodel"
+        '
+        'tbQuality
+        '
+        Me.tbQuality.DecimalPlaces = 2
+        Me.tbQuality.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        resources.ApplyResources(Me.tbQuality, "tbQuality")
+        Me.tbQuality.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.tbQuality.Name = "tbQuality"
+        Me.tbQuality.Value = New Decimal(New Integer() {5, 0, 0, 65536})
+        '
+        'chkpip
+        '
+        resources.ApplyResources(Me.chkpip, "chkpip")
+        Me.chkpip.Name = "chkpip"
+        '
+        'chkhyd
+        '
+        resources.ApplyResources(Me.chkhyd, "chkhyd")
+        Me.chkhyd.Name = "chkhyd"
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.lbBubDT)
+        Me.TabPage2.Controls.Add(Me.lbBubDP)
+        Me.TabPage2.Controls.Add(Me.lbBubT0)
+        Me.TabPage2.Controls.Add(Me.lbBubP0)
+        Me.TabPage2.Controls.Add(Me.tbBubDT)
+        Me.TabPage2.Controls.Add(Me.tbBubDP)
+        Me.TabPage2.Controls.Add(Me.tbBubMaxPoints)
+        Me.TabPage2.Controls.Add(Me.tbBubT0)
+        Me.TabPage2.Controls.Add(Me.tbBubP0)
+        Me.TabPage2.Controls.Add(Me.Label9)
+        Me.TabPage2.Controls.Add(Me.Label8)
+        Me.TabPage2.Controls.Add(Me.Label7)
+        Me.TabPage2.Controls.Add(Me.Label6)
+        Me.TabPage2.Controls.Add(Me.Label5)
+        Me.TabPage2.Controls.Add(Me.rbBubTVF)
+        Me.TabPage2.Controls.Add(Me.rbBubPVF)
+        Me.TabPage2.Controls.Add(Me.Label4)
+        Me.TabPage2.Controls.Add(Me.chkBubLiqInstability)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'lbBubDT
+        '
+        resources.ApplyResources(Me.lbBubDT, "lbBubDT")
+        Me.lbBubDT.Name = "lbBubDT"
+        '
+        'lbBubDP
+        '
+        resources.ApplyResources(Me.lbBubDP, "lbBubDP")
+        Me.lbBubDP.Name = "lbBubDP"
+        '
+        'lbBubT0
+        '
+        resources.ApplyResources(Me.lbBubT0, "lbBubT0")
+        Me.lbBubT0.Name = "lbBubT0"
+        '
+        'lbBubP0
+        '
+        resources.ApplyResources(Me.lbBubP0, "lbBubP0")
+        Me.lbBubP0.Name = "lbBubP0"
+        '
+        'tbBubDT
+        '
+        resources.ApplyResources(Me.tbBubDT, "tbBubDT")
+        Me.tbBubDT.Name = "tbBubDT"
+        '
+        'tbBubDP
+        '
+        resources.ApplyResources(Me.tbBubDP, "tbBubDP")
+        Me.tbBubDP.Name = "tbBubDP"
+        '
+        'tbBubMaxPoints
+        '
+        resources.ApplyResources(Me.tbBubMaxPoints, "tbBubMaxPoints")
+        Me.tbBubMaxPoints.Name = "tbBubMaxPoints"
+        '
+        'tbBubT0
+        '
+        resources.ApplyResources(Me.tbBubT0, "tbBubT0")
+        Me.tbBubT0.Name = "tbBubT0"
+        '
+        'tbBubP0
+        '
+        resources.ApplyResources(Me.tbBubP0, "tbBubP0")
+        Me.tbBubP0.Name = "tbBubP0"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
+        '
+        'Label7
+        '
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'rbBubTVF
+        '
+        resources.ApplyResources(Me.rbBubTVF, "rbBubTVF")
+        Me.rbBubTVF.Name = "rbBubTVF"
+        Me.rbBubTVF.TabStop = True
+        Me.rbBubTVF.UseVisualStyleBackColor = True
+        '
+        'rbBubPVF
+        '
+        resources.ApplyResources(Me.rbBubPVF, "rbBubPVF")
+        Me.rbBubPVF.Name = "rbBubPVF"
+        Me.rbBubPVF.TabStop = True
+        Me.rbBubPVF.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        '
+        'chkBubLiqInstability
+        '
+        resources.ApplyResources(Me.chkBubLiqInstability, "chkBubLiqInstability")
+        Me.chkBubLiqInstability.Name = "chkBubLiqInstability"
+        '
+        'TabPage3
+        '
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Controls.Add(Me.lbDewDT)
+        Me.TabPage3.Controls.Add(Me.lbDewDP)
+        Me.TabPage3.Controls.Add(Me.lbDewT0)
+        Me.TabPage3.Controls.Add(Me.lbDewP0)
+        Me.TabPage3.Controls.Add(Me.tbDewDT)
+        Me.TabPage3.Controls.Add(Me.tbDewDP)
+        Me.TabPage3.Controls.Add(Me.tbDewMaxPoints)
+        Me.TabPage3.Controls.Add(Me.tbDewT0)
+        Me.TabPage3.Controls.Add(Me.tbDewP0)
+        Me.TabPage3.Controls.Add(Me.Label18)
+        Me.TabPage3.Controls.Add(Me.Label19)
+        Me.TabPage3.Controls.Add(Me.Label20)
+        Me.TabPage3.Controls.Add(Me.Label21)
+        Me.TabPage3.Controls.Add(Me.Label22)
+        Me.TabPage3.Controls.Add(Me.rbDewTVF)
+        Me.TabPage3.Controls.Add(Me.rbDewPVF)
+        Me.TabPage3.Controls.Add(Me.Label23)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'lbDewDT
+        '
+        resources.ApplyResources(Me.lbDewDT, "lbDewDT")
+        Me.lbDewDT.Name = "lbDewDT"
+        '
+        'lbDewDP
+        '
+        resources.ApplyResources(Me.lbDewDP, "lbDewDP")
+        Me.lbDewDP.Name = "lbDewDP"
+        '
+        'lbDewT0
+        '
+        resources.ApplyResources(Me.lbDewT0, "lbDewT0")
+        Me.lbDewT0.Name = "lbDewT0"
+        '
+        'lbDewP0
+        '
+        resources.ApplyResources(Me.lbDewP0, "lbDewP0")
+        Me.lbDewP0.Name = "lbDewP0"
+        '
+        'tbDewDT
+        '
+        resources.ApplyResources(Me.tbDewDT, "tbDewDT")
+        Me.tbDewDT.Name = "tbDewDT"
+        '
+        'tbDewDP
+        '
+        resources.ApplyResources(Me.tbDewDP, "tbDewDP")
+        Me.tbDewDP.Name = "tbDewDP"
+        '
+        'tbDewMaxPoints
+        '
+        resources.ApplyResources(Me.tbDewMaxPoints, "tbDewMaxPoints")
+        Me.tbDewMaxPoints.Name = "tbDewMaxPoints"
+        '
+        'tbDewT0
+        '
+        resources.ApplyResources(Me.tbDewT0, "tbDewT0")
+        Me.tbDewT0.Name = "tbDewT0"
+        '
+        'tbDewP0
+        '
+        resources.ApplyResources(Me.tbDewP0, "tbDewP0")
+        Me.tbDewP0.Name = "tbDewP0"
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        '
+        'Label22
+        '
+        resources.ApplyResources(Me.Label22, "Label22")
+        Me.Label22.Name = "Label22"
+        '
+        'rbDewTVF
+        '
+        resources.ApplyResources(Me.rbDewTVF, "rbDewTVF")
+        Me.rbDewTVF.Name = "rbDewTVF"
+        Me.rbDewTVF.TabStop = True
+        Me.rbDewTVF.UseVisualStyleBackColor = True
+        '
+        'rbDewPVF
+        '
+        resources.ApplyResources(Me.rbDewPVF, "rbDewPVF")
+        Me.rbDewPVF.Name = "rbDewPVF"
+        Me.rbDewPVF.TabStop = True
+        Me.rbDewPVF.UseVisualStyleBackColor = True
+        '
+        'Label23
+        '
+        resources.ApplyResources(Me.Label23, "Label23")
+        Me.Label23.Name = "Label23"
         '
         'PanelCalc
         '
@@ -106,59 +459,10 @@ Partial Class FormPhEnv
         resources.ApplyResources(Me.LabelStatus, "LabelStatus")
         Me.LabelStatus.Name = "LabelStatus"
         '
-        'CheckBoxHYDVAP
-        '
-        resources.ApplyResources(Me.CheckBoxHYDVAP, "CheckBoxHYDVAP")
-        Me.CheckBoxHYDVAP.Name = "CheckBoxHYDVAP"
-        '
-        'ComboBox2
-        '
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.DropDownWidth = 260
-        Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items"), resources.GetString("ComboBox2.Items1"), resources.GetString("ComboBox2.Items2"), resources.GetString("ComboBox2.Items3")})
-        Me.ComboBox2.Name = "ComboBox2"
-        '
-        'chkpip
-        '
-        resources.ApplyResources(Me.chkpip, "chkpip")
-        Me.chkpip.Name = "chkpip"
-        '
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
-        '
-        'chkhyd
-        '
-        resources.ApplyResources(Me.chkhyd, "chkhyd")
-        Me.chkhyd.Name = "chkhyd"
-        '
-        'TextBox1
-        '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
-        Me.TextBox1.DecimalPlaces = 2
-        Me.TextBox1.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.TextBox1.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Value = New Decimal(New Integer() {5, 0, 0, 65536})
-        '
-        'CheckBox2
-        '
-        resources.ApplyResources(Me.CheckBox2, "CheckBox2")
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox2.Name = "CheckBox2"
-        '
-        'CheckBox3
-        '
-        resources.ApplyResources(Me.CheckBox3, "CheckBox3")
-        Me.CheckBox3.Name = "CheckBox3"
-        '
-        'CheckBox1
-        '
-        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
-        Me.CheckBox1.Name = "CheckBox1"
         '
         'GroupBox1
         '
@@ -190,26 +494,26 @@ Partial Class FormPhEnv
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GraphControl)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GraphControl
         '
-        resources.ApplyResources(Me.GraphControl, "GraphControl")
         Me.GraphControl.Cursor = System.Windows.Forms.Cursors.Default
+        resources.ApplyResources(Me.GraphControl, "GraphControl")
         Me.GraphControl.IsAntiAlias = True
         Me.GraphControl.IsAutoScrollRange = True
         Me.GraphControl.Name = "GraphControl"
@@ -223,15 +527,14 @@ Partial Class FormPhEnv
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.Grid1)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'Grid1
         '
-        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.AllowUserToAddRows = False
         Me.Grid1.AllowUserToDeleteRows = False
         Me.Grid1.AllowUserToOrderColumns = True
@@ -241,6 +544,7 @@ Partial Class FormPhEnv
         Me.Grid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.Grid1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.Grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        resources.ApplyResources(Me.Grid1, "Grid1")
         Me.Grid1.Name = "Grid1"
         Me.Grid1.ReadOnly = True
         Me.Grid1.RowHeadersVisible = False
@@ -253,59 +557,59 @@ Partial Class FormPhEnv
         '
         'dckMenu
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         '
         'DockLeftToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         '
         'DockRightToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         '
         'DockTopToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         '
         'DockBottomToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         '
         'DocumentToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         '
         'FormPhEnv
         '
@@ -316,10 +620,16 @@ Partial Class FormPhEnv
         Me.Controls.Add(Me.GroupBox6)
         Me.Name = "FormPhEnv"
         Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        CType(Me.tbQuality, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         Me.PanelCalc.ResumeLayout(False)
         Me.PanelCalc.PerformLayout()
-        CType(Me.TextBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -344,14 +654,14 @@ Partial Class FormPhEnv
     Public WithEvents Grid1 As System.Windows.Forms.DataGridView
     Public WithEvents GraphControl As ZedGraph.ZedGraphControl
     Public WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
-    Public WithEvents CheckBox1 As System.Windows.Forms.CheckBox
-    Public WithEvents CheckBox2 As System.Windows.Forms.CheckBox
-    Public WithEvents CheckBox3 As System.Windows.Forms.CheckBox
-    Public WithEvents TextBox1 As System.Windows.Forms.NumericUpDown
+    Public WithEvents chkQualityLine As System.Windows.Forms.CheckBox
+    Public WithEvents chkOp As System.Windows.Forms.CheckBox
+    Public WithEvents chkStabCurve As System.Windows.Forms.CheckBox
+    Public WithEvents tbQuality As System.Windows.Forms.NumericUpDown
     Public WithEvents chkpip As System.Windows.Forms.CheckBox
     Public WithEvents chkhyd As System.Windows.Forms.CheckBox
-    Public WithEvents ComboBox2 As System.Windows.Forms.ComboBox
-    Public WithEvents CheckBoxHYDVAP As System.Windows.Forms.CheckBox
+    Public WithEvents cbhydmodel As System.Windows.Forms.ComboBox
+    Public WithEvents chkHydVapOnly As System.Windows.Forms.CheckBox
     Friend WithEvents dckMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents FloatToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DockLeftToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -366,4 +676,45 @@ Partial Class FormPhEnv
     Friend WithEvents PanelCalc As System.Windows.Forms.Panel
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents LabelStatus As System.Windows.Forms.Label
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents rbBubTVF As System.Windows.Forms.RadioButton
+    Friend WithEvents rbBubPVF As System.Windows.Forms.RadioButton
+    Public WithEvents Label4 As System.Windows.Forms.Label
+    Public WithEvents chkBubLiqInstability As System.Windows.Forms.CheckBox
+    Friend WithEvents lbBubDT As System.Windows.Forms.Label
+    Friend WithEvents lbBubDP As System.Windows.Forms.Label
+    Friend WithEvents lbBubT0 As System.Windows.Forms.Label
+    Friend WithEvents lbBubP0 As System.Windows.Forms.Label
+    Friend WithEvents tbBubDT As System.Windows.Forms.TextBox
+    Friend WithEvents tbBubDP As System.Windows.Forms.TextBox
+    Friend WithEvents tbBubMaxPoints As System.Windows.Forms.TextBox
+    Friend WithEvents tbBubT0 As System.Windows.Forms.TextBox
+    Friend WithEvents tbBubP0 As System.Windows.Forms.TextBox
+    Public WithEvents Label9 As System.Windows.Forms.Label
+    Public WithEvents Label8 As System.Windows.Forms.Label
+    Public WithEvents Label7 As System.Windows.Forms.Label
+    Public WithEvents Label6 As System.Windows.Forms.Label
+    Public WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lbDewDT As System.Windows.Forms.Label
+    Friend WithEvents lbDewDP As System.Windows.Forms.Label
+    Friend WithEvents lbDewT0 As System.Windows.Forms.Label
+    Friend WithEvents lbDewP0 As System.Windows.Forms.Label
+    Friend WithEvents tbDewDT As System.Windows.Forms.TextBox
+    Friend WithEvents tbDewDP As System.Windows.Forms.TextBox
+    Friend WithEvents tbDewMaxPoints As System.Windows.Forms.TextBox
+    Friend WithEvents tbDewT0 As System.Windows.Forms.TextBox
+    Friend WithEvents tbDewP0 As System.Windows.Forms.TextBox
+    Public WithEvents Label18 As System.Windows.Forms.Label
+    Public WithEvents Label19 As System.Windows.Forms.Label
+    Public WithEvents Label20 As System.Windows.Forms.Label
+    Public WithEvents Label21 As System.Windows.Forms.Label
+    Public WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents rbDewTVF As System.Windows.Forms.RadioButton
+    Friend WithEvents rbDewPVF As System.Windows.Forms.RadioButton
+    Public WithEvents Label23 As System.Windows.Forms.Label
 End Class

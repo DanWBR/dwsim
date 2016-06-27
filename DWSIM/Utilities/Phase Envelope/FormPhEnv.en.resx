@@ -118,6 +118,209 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 252</value>
+  </data>
+  <data name="PanelCalc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 303</value>
+  </data>
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 274</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 361</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 226</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Vapor Phase Mole Fraction</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkQualityLine.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkQualityLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 17</value>
+  </data>
+  <data name="chkQualityLine.Text" xml:space="preserve">
+    <value>Include Quality Line</value>
+  </data>
+  <data name="chkStabCurve.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkStabCurve.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 17</value>
+  </data>
+  <data name="chkStabCurve.Text" xml:space="preserve">
+    <value>Include Stability Curve (PT/TP only)</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkHydVapOnly.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="chkHydVapOnly.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkHydVapOnly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkHydVapOnly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="chkHydVapOnly.Text" xml:space="preserve">
+    <value>Vapor Only</value>
+  </data>
+  <data name="chkOp.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkOp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkOp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 17</value>
+  </data>
+  <data name="chkOp.Text" xml:space="preserve">
+    <value>Include Operation Point</value>
+  </data>
+  <data name="cbhydmodel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="cbhydmodel.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cbhydmodel.ItemHeight" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="cbhydmodel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 21</value>
+  </data>
+  <data name="tbQuality.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="chkpip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 17</value>
+  </data>
+  <data name="chkpip.Text" xml:space="preserve">
+    <value>Include Phase Identification Parameter Boundary</value>
+  </data>
+  <data name="chkhyd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 17</value>
+  </data>
+  <data name="chkhyd.Text" xml:space="preserve">
+    <value>Include Hydrate Equilibrium Curve</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 226</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Bubble Points</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Pressure Step</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Temperature Step</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Maximum Points</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Initial Temperature</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Initial Pressure</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Initial Flash</value>
+  </data>
+  <data name="chkBubLiqInstability.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkBubLiqInstability.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="chkBubLiqInstability.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkBubLiqInstability.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 17</value>
+  </data>
+  <data name="chkBubLiqInstability.Text" xml:space="preserve">
+    <value>Check for Liquid Phase Instability</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 226</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Dew Points</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Pressure Step</value>
+  </data>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
+  </data>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Temperature Step</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>Maximum Points</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Initial Temperature</value>
+  </data>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Initial Pressure</value>
+  </data>
+  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="Label23.Text" xml:space="preserve">
+    <value>Initial Flash</value>
+  </data>
   <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
     <value>213, 12</value>
   </data>
@@ -136,68 +339,11 @@
   <data name="LabelStatus.Text" xml:space="preserve">
     <value>Building the envelope, please wait...</value>
   </data>
-  <data name="CheckBoxHYDVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 91</value>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 369</value>
   </data>
-  <data name="CheckBoxHYDVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 17</value>
-  </data>
-  <data name="CheckBoxHYDVAP.Text" xml:space="preserve">
-    <value>Vapor Only</value>
-  </data>
-  <data name="ComboBox2.Items" xml:space="preserve">
-    <value>Modified van der Waals &amp; Platteeuw (Parrish and Prausnitz) (1972)</value>
-  </data>
-  <data name="ComboBox2.Items1" xml:space="preserve">
-    <value>Klauda &amp; Sandler (2000)</value>
-  </data>
-  <data name="ComboBox2.Items2" xml:space="preserve">
-    <value>Chen &amp; Guo (1998)</value>
-  </data>
-  <data name="ComboBox2.Items3" xml:space="preserve">
-    <value>Klauda &amp; Sandler (with inhibitor support)</value>
-  </data>
-  <data name="chkpip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 17</value>
-  </data>
-  <data name="chkpip.Text" xml:space="preserve">
-    <value>Include Phase Identification Parameter Boundary</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 195</value>
-  </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 23</value>
-  </data>
-  <data name="Button1.Text" xml:space="preserve">
-    <value>Calculate</value>
-  </data>
-  <data name="chkhyd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 17</value>
-  </data>
-  <data name="chkhyd.Text" xml:space="preserve">
-    <value>Include Hydrate Equilibrium Curve</value>
-  </data>
-  <data name="CheckBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 17</value>
-  </data>
-  <data name="CheckBox2.Text" xml:space="preserve">
-    <value>Include Operation Point</value>
-  </data>
-  <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 17</value>
-  </data>
-  <data name="CheckBox3.Text" xml:space="preserve">
-    <value>Include Stability Curve (PT/TP only)</value>
-  </data>
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 17</value>
-  </data>
-  <data name="CheckBox1.Text" xml:space="preserve">
-    <value>Include Quality Line</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Object Selection</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Current View</value>
   </data>
   <data name="ComboBox1.Items" xml:space="preserve">
     <value>Pressure vs. Temperature</value>
@@ -235,14 +381,26 @@
   <data name="ComboBox1.Items11" xml:space="preserve">
     <value>Molar Volume vs. Entropy</value>
   </data>
+  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 16</value>
+  </data>
+  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 21</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Envelope type</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Options</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 414</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 374</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
@@ -250,7 +408,13 @@
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Table</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Results</value>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 395</value>
+  </data>
+  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>396, 374</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>783, 421</value>
   </data>
 </root>
