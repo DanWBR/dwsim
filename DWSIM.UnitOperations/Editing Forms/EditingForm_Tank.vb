@@ -83,8 +83,9 @@ Public Class EditingForm_Tank
 
             Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
             cbFlashAlg.Items.Clear()
+            cbFlashAlg.Items.Add("Default")
             cbFlashAlg.Items.AddRange(flashalgos)
-            cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag
+            If .PreferredFlashAlgorithmTag <> "" Then cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag Else cbFlashAlg.SelectedIndex = 0
 
             'annotation
 

@@ -129,20 +129,15 @@ Public Class EditingForm_Vessel
             tbPressure.Text = su.Converter.ConvertFromSI(units.pressure, .FlashPressure).ToString(nf)
 
             Dim proppacks As String() = .FlowSheet.PropertyPackages.Values.Select(Function(m) m.Tag).ToArray
-
             cbPropPack.Items.Clear()
-
             cbPropPack.Items.AddRange(proppacks)
-
             cbPropPack.SelectedItem = .PropertyPackage.Tag
 
             Dim flashalgos As String() = .FlowSheet.FlowsheetOptions.FlashAlgorithms.Select(Function(x) x.Tag).ToArray
-
             cbFlashAlg.Items.Clear()
-
+            cbFlashAlg.Items.Add("Default")
             cbFlashAlg.Items.AddRange(flashalgos)
-
-            cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag
+            If .PreferredFlashAlgorithmTag <> "" Then cbFlashAlg.SelectedItem = .PreferredFlashAlgorithmTag Else cbFlashAlg.SelectedIndex = 0
 
             'annotation
 
