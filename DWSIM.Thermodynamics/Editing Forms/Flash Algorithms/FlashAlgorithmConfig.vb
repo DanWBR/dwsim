@@ -165,7 +165,7 @@ Public Class FlashAlgorithmConfig
 
             Settings(Interfaces.Enums.FlashSetting.ValidationGibbsTolerance) = Double.Parse(tbFlashValidationTolerance.Text).ToString(ci)
 
-            If ExcelMode OrElse FlashAlgo.AlgoType = Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server Then
+            If FlashAlgo.AlgoType <> Interfaces.Enums.FlashMethod.CAPE_OPEN_Equilibrium_Server Then
 
                 Settings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations) = Integer.Parse(tbPHExtMaxIt.Text).ToString(ci)
                 Settings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance) = Double.Parse(tbPHExtMaxTol.Text).ToString(ci)
@@ -182,17 +182,21 @@ Public Class FlashAlgorithmConfig
 
                 Settings(Interfaces.Enums.FlashSetting.GM_OptimizationMethod) = cbMinMethodGM.SelectedItem
 
-                If rbLow.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 0
-                If rbMedium.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 1
-                If rbHigh.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
+                If Not ExcelMode Then
 
-                Dim comps As String = ""
+                    If rbLow.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 0
+                    If rbMedium.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 1
+                    If rbHigh.Checked Then Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
 
-                For Each lvi As ListViewItem In lvKeyComp.Items
-                    If lvi.Checked Then comps += lvi.Text + ","
-                Next
+                    Dim comps As String = ""
 
-                Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps
+                    For Each lvi As ListViewItem In lvKeyComp.Items
+                        If lvi.Checked Then comps += lvi.Text + ","
+                    Next
+
+                    Settings(Interfaces.Enums.FlashSetting.ThreePhaseFlashStabTestCompIds) = comps
+
+                End If
 
             End If
 

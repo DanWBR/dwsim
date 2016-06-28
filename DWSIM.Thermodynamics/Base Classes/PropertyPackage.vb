@@ -3056,13 +3056,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             KI = tmp2(6)
                             beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
-
-                        Finally
-                            If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                T = T + options.BubbleCurveDeltaT * 0.5
-                            Else
-                                T = T + options.BubbleCurveDeltaT
-                            End If
                         End Try
                     Else
                         Try
@@ -3076,13 +3069,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             KI = tmp2(6)
                             beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
-
-                        Finally
-                            If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.01 Then
-                                P = P + options.BubbleCurveDeltaP * 0.1
-                            Else
-                                P = P + options.BubbleCurveDeltaP
-                            End If
                         End Try
                     End If
 
@@ -3111,6 +3097,20 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 VB2.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase2MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase2MoleFractions))
                             Catch ex As Exception
                             End Try
+                        End If
+                    End If
+
+                    If beta < 20 Then
+                        If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                            T = T + options.BubbleCurveDeltaT * 0.5
+                        Else
+                            T = T + options.BubbleCurveDeltaT
+                        End If
+                    Else
+                        If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.01 Then
+                            P = P + options.BubbleCurveDeltaP * 0.1
+                        Else
+                            P = P + options.BubbleCurveDeltaP
                         End If
                     End If
 
