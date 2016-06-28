@@ -2918,6 +2918,28 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
             Loop Until i = n + 1
 
+            With options
+                If Not .BubbleUseCustomParameters Then
+                    .BubbleCurveDeltaP = 101325
+                    .BubbleCurveDeltaT = 5
+                    .BubbleCurveInitialPressure = 0.0#
+                    .BubbleCurveInitialTemperature = RET_VTF.Min
+                    .BubbleCurveInitialFlash = "TVF"
+                    .BubbleCurveMaximumPoints = 300
+                    .BubbleCurveMaximumTemperature = RET_VTC.Max
+                    .CheckLiquidInstability = False
+                End If
+                If Not .DewUseCustomParameters Then
+                    .DewCurveDeltaP = 101325
+                    .DewCurveDeltaT = 5
+                    .DewCurveInitialPressure = 101325
+                    .DewCurveInitialTemperature = 0.0#
+                    .DewCurveInitialFlash = "PVF"
+                    .DewCurveMaximumPoints = 300
+                    .DewCurveMaximumTemperature = RET_VTC.Max
+                End If
+            End With
+
             Dim T, P As Double
 
             Dim PB, PO, TVB, TVD, HB, HO, SB, SO, VB, VO, TE, PE, TH, PHsI, PHsII,
@@ -2981,6 +3003,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             Dim result As IFlashCalculationResult = Nothing
             Dim KI(n) As Double
 
+            Dim tpflash As New NestedLoops3PV3() With {.FlashSettings = Me.FlashBase.FlashSettings}
+            tpflash.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity) = 2
+
             j = 0
             Do
                 KI(j) = 0
@@ -2991,9 +3016,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             P = options.BubbleCurveInitialPressure
             T = options.BubbleCurveInitialTemperature
             Do
+
                 If i < 2 Then
+
                     If options.BubbleCurveInitialFlash = "TVF" Then
-                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, 0, Me)
+                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 0, options.BubbleCurveInitialPressure, Me)
                         TVB.Add(T)
                         PB.Add(tmp2(4))
                         P = PB(PB.Count - 1)
@@ -3003,7 +3030,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         KI = tmp2(6)
                         T = T + options.BubbleCurveDeltaT
                     Else
-                        tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, 0, Me)
+                        tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, options.BubbleCurveInitialTemperature, Me)
                         TVB.Add(tmp2(4))
                         PB.Add(P)
                         T = TVB(TVB.Count - 1)
@@ -3015,7 +3042,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     End If
 
                     'check instability
-                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+
+                    result = tpflash.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+
                     If result.ResultException Is Nothing Then
                         If result.GetLiquidPhase2MoleFraction > 0.0# Then
                             'liquid phase is unstable
@@ -3056,7 +3085,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             KI = tmp2(6)
                             beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
-
                         Finally
                             If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
                                 T = T + options.BubbleCurveDeltaT * 0.5
@@ -3076,7 +3104,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             KI = tmp2(6)
                             beta = (Math.Log(PB(PB.Count - 1) / 101325) - Math.Log(PB(PB.Count - 2) / 101325)) / (Math.Log(TVB(TVB.Count - 1)) - Math.Log(TVB(TVB.Count - 2)))
                         Catch ex As Exception
-
                         Finally
                             If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.01 Then
                                 P = P + options.BubbleCurveDeltaP * 0.1
@@ -3087,7 +3114,9 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     End If
 
                     'check instability
-                    result = Me.FlashBase.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+
+                    result = tpflash.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+
                     If result.ResultException Is Nothing Then
                         If result.GetLiquidPhase2MoleFraction > 0.0# Then
                             'liquid phase is unstable
@@ -3121,7 +3150,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 i = i + 1
 
             Loop Until i >= options.BubbleCurveMaximumPoints Or PB(PB.Count - 1) = 0 Or PB(PB.Count - 1) < 0 Or TVB(TVB.Count - 1) < 0 Or
-                        Double.IsNaN(PB(PB.Count - 1)) = True Or Double.IsNaN(TVB(TVB.Count - 1)) = True
+                        Double.IsNaN(PB(PB.Count - 1)) = True Or Double.IsNaN(TVB(TVB.Count - 1)) = True Or T >= options.BubbleCurveMaximumTemperature
 
             Dim Switch = False
 
@@ -3137,9 +3166,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             P = options.DewCurveInitialPressure
             T = options.DewCurveInitialTemperature
             Do
+
                 If i < 2 Then
+
                     If options.DewCurveInitialFlash = "TVF" Then
-                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, 0, Me)
+                        tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, options.DewCurveInitialPressure, Me)
                         TVD.Add(T)
                         PO.Add(tmp2(4))
                         P = PO(PO.Count - 1)
@@ -3149,7 +3180,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         KI = tmp2(6)
                         T = T + options.DewCurveDeltaT
                     Else
-                        tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, 0, Me)
+                        tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 1, options.DewCurveInitialTemperature, Me)
                         TVD.Add(tmp2(4))
                         PO.Add(P)
                         T = TVD(TVD.Count - 1)
@@ -3158,8 +3189,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         VO.Add(1 / Me.AUX_VAPDENS(T, P) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
                         P = P + options.DewCurveDeltaP
-                    End If 
+                    End If
+
                 Else
+
                     If Abs(beta) < 2 Then
                         Try
                             tmp2 = Me.FlashBase.Flash_TV(Me.RET_VMOL(Phase.Mixture), T, 1, PO(PO.Count - 1), Me, True, KI)
@@ -3207,17 +3240,21 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             End If
                         End Try
                     End If
+
                     If i >= PO.Count Then
                         i = i - 1
                     End If
-                    If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0
-                End If
-                If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points... " & ((i + 1) / options.DewCurveMaximumPoints * 100).ToString("N1") & "%")
-                i = i + 1
-            Loop Until i >= options.DewCurveMaximumPoints Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
-                        Double.IsNaN(PO(PO.Count - 1)) = True Or
-                        Double.IsNaN(TVD(TVD.Count - 1)) = True
 
+                    If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0
+
+                End If
+
+                If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Dew Points... " & ((i + 1) / options.DewCurveMaximumPoints * 100).ToString("N1") & "%")
+
+                i = i + 1
+
+            Loop Until i >= options.DewCurveMaximumPoints Or PO(PO.Count - 1) = 0 Or PO(PO.Count - 1) < 0 Or TVD(TVD.Count - 1) < 0 Or _
+                        Double.IsNaN(PO(PO.Count - 1)) = True Or Double.IsNaN(TVD(TVD.Count - 1)) = True Or T >= options.DewCurveMaximumTemperature
 
             If recalcCP OrElse (Not TypeOf Me Is PengRobinsonPropertyPackage And Not TypeOf Me Is SRKPropertyPackage) Then
 

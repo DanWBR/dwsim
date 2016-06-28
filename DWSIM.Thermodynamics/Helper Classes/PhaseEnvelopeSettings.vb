@@ -45,6 +45,14 @@
 
         Public Property StabilityCurve As Boolean = False Implements Interfaces.IPhaseEnvelopeOptions.StabilityCurve
 
+        Public Property BubbleCurveMaximumTemperature As Double = 1000.0# Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveMaximumTemperature
+
+        Public Property BubbleUseCustomParameters As Boolean = False Implements Interfaces.IPhaseEnvelopeOptions.BubbleUseCustomParameters
+
+        Public Property DewCurveMaximumTemperature As Double = 1000.0# Implements Interfaces.IPhaseEnvelopeOptions.DewCurveMaximumTemperature
+
+        Public Property DewUseCustomParameters As Boolean = False Implements Interfaces.IPhaseEnvelopeOptions.DewUseCustomParameters
+
     End Class
 
 End Namespace

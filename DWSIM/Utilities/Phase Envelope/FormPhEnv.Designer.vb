@@ -40,42 +40,52 @@ Partial Class FormPhEnv
         Me.chkpip = New System.Windows.Forms.CheckBox()
         Me.chkhyd = New System.Windows.Forms.CheckBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.lbBubDT = New System.Windows.Forms.Label()
-        Me.lbBubDP = New System.Windows.Forms.Label()
-        Me.lbBubT0 = New System.Windows.Forms.Label()
-        Me.lbBubP0 = New System.Windows.Forms.Label()
-        Me.tbBubDT = New System.Windows.Forms.TextBox()
-        Me.tbBubDP = New System.Windows.Forms.TextBox()
-        Me.tbBubMaxPoints = New System.Windows.Forms.TextBox()
-        Me.tbBubT0 = New System.Windows.Forms.TextBox()
-        Me.tbBubP0 = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.rbBubTVF = New System.Windows.Forms.RadioButton()
-        Me.rbBubPVF = New System.Windows.Forms.RadioButton()
+        Me.PanelBub = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.lblBubTmax = New System.Windows.Forms.Label()
         Me.chkBubLiqInstability = New System.Windows.Forms.CheckBox()
+        Me.tbBubTmax = New System.Windows.Forms.TextBox()
+        Me.rbBubPVF = New System.Windows.Forms.RadioButton()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.rbBubTVF = New System.Windows.Forms.RadioButton()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lbBubDT = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lbBubDP = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lbBubT0 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lbBubP0 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.tbBubDT = New System.Windows.Forms.TextBox()
+        Me.tbBubP0 = New System.Windows.Forms.TextBox()
+        Me.tbBubDP = New System.Windows.Forms.TextBox()
+        Me.tbBubT0 = New System.Windows.Forms.TextBox()
+        Me.tbBubMaxPoints = New System.Windows.Forms.TextBox()
+        Me.chkControlBubInit = New System.Windows.Forms.CheckBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.PanelDew = New System.Windows.Forms.Panel()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.lblDewTmax = New System.Windows.Forms.Label()
+        Me.rbDewPVF = New System.Windows.Forms.RadioButton()
+        Me.tbDewTmax = New System.Windows.Forms.TextBox()
+        Me.rbDewTVF = New System.Windows.Forms.RadioButton()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.lbDewDT = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.lbDewDP = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.lbDewT0 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.lbDewP0 = New System.Windows.Forms.Label()
+        Me.tbDewP0 = New System.Windows.Forms.TextBox()
         Me.tbDewDT = New System.Windows.Forms.TextBox()
+        Me.tbDewT0 = New System.Windows.Forms.TextBox()
         Me.tbDewDP = New System.Windows.Forms.TextBox()
         Me.tbDewMaxPoints = New System.Windows.Forms.TextBox()
-        Me.tbDewT0 = New System.Windows.Forms.TextBox()
-        Me.tbDewP0 = New System.Windows.Forms.TextBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.rbDewTVF = New System.Windows.Forms.RadioButton()
-        Me.rbDewPVF = New System.Windows.Forms.RadioButton()
-        Me.Label23 = New System.Windows.Forms.Label()
+        Me.chkControlDewInit = New System.Windows.Forms.CheckBox()
         Me.PanelCalc = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.LabelStatus = New System.Windows.Forms.Label()
@@ -106,7 +116,9 @@ Partial Class FormPhEnv
         Me.TabPage1.SuspendLayout()
         CType(Me.tbQuality, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
+        Me.PanelBub.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.PanelDew.SuspendLayout()
         Me.PanelCalc.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -215,103 +227,56 @@ Partial Class FormPhEnv
         'TabPage2
         '
         resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Controls.Add(Me.lbBubDT)
-        Me.TabPage2.Controls.Add(Me.lbBubDP)
-        Me.TabPage2.Controls.Add(Me.lbBubT0)
-        Me.TabPage2.Controls.Add(Me.lbBubP0)
-        Me.TabPage2.Controls.Add(Me.tbBubDT)
-        Me.TabPage2.Controls.Add(Me.tbBubDP)
-        Me.TabPage2.Controls.Add(Me.tbBubMaxPoints)
-        Me.TabPage2.Controls.Add(Me.tbBubT0)
-        Me.TabPage2.Controls.Add(Me.tbBubP0)
-        Me.TabPage2.Controls.Add(Me.Label9)
-        Me.TabPage2.Controls.Add(Me.Label8)
-        Me.TabPage2.Controls.Add(Me.Label7)
-        Me.TabPage2.Controls.Add(Me.Label6)
-        Me.TabPage2.Controls.Add(Me.Label5)
-        Me.TabPage2.Controls.Add(Me.rbBubTVF)
-        Me.TabPage2.Controls.Add(Me.rbBubPVF)
-        Me.TabPage2.Controls.Add(Me.Label4)
-        Me.TabPage2.Controls.Add(Me.chkBubLiqInstability)
+        Me.TabPage2.Controls.Add(Me.PanelBub)
+        Me.TabPage2.Controls.Add(Me.chkControlBubInit)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'lbBubDT
+        'PanelBub
         '
-        resources.ApplyResources(Me.lbBubDT, "lbBubDT")
-        Me.lbBubDT.Name = "lbBubDT"
+        resources.ApplyResources(Me.PanelBub, "PanelBub")
+        Me.PanelBub.Controls.Add(Me.Label4)
+        Me.PanelBub.Controls.Add(Me.lblBubTmax)
+        Me.PanelBub.Controls.Add(Me.chkBubLiqInstability)
+        Me.PanelBub.Controls.Add(Me.tbBubTmax)
+        Me.PanelBub.Controls.Add(Me.rbBubPVF)
+        Me.PanelBub.Controls.Add(Me.Label12)
+        Me.PanelBub.Controls.Add(Me.rbBubTVF)
+        Me.PanelBub.Controls.Add(Me.Label5)
+        Me.PanelBub.Controls.Add(Me.lbBubDT)
+        Me.PanelBub.Controls.Add(Me.Label6)
+        Me.PanelBub.Controls.Add(Me.lbBubDP)
+        Me.PanelBub.Controls.Add(Me.Label7)
+        Me.PanelBub.Controls.Add(Me.lbBubT0)
+        Me.PanelBub.Controls.Add(Me.Label8)
+        Me.PanelBub.Controls.Add(Me.lbBubP0)
+        Me.PanelBub.Controls.Add(Me.Label9)
+        Me.PanelBub.Controls.Add(Me.tbBubDT)
+        Me.PanelBub.Controls.Add(Me.tbBubP0)
+        Me.PanelBub.Controls.Add(Me.tbBubDP)
+        Me.PanelBub.Controls.Add(Me.tbBubT0)
+        Me.PanelBub.Controls.Add(Me.tbBubMaxPoints)
+        Me.PanelBub.Name = "PanelBub"
         '
-        'lbBubDP
+        'Label4
         '
-        resources.ApplyResources(Me.lbBubDP, "lbBubDP")
-        Me.lbBubDP.Name = "lbBubDP"
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
         '
-        'lbBubT0
+        'lblBubTmax
         '
-        resources.ApplyResources(Me.lbBubT0, "lbBubT0")
-        Me.lbBubT0.Name = "lbBubT0"
+        resources.ApplyResources(Me.lblBubTmax, "lblBubTmax")
+        Me.lblBubTmax.Name = "lblBubTmax"
         '
-        'lbBubP0
+        'chkBubLiqInstability
         '
-        resources.ApplyResources(Me.lbBubP0, "lbBubP0")
-        Me.lbBubP0.Name = "lbBubP0"
+        resources.ApplyResources(Me.chkBubLiqInstability, "chkBubLiqInstability")
+        Me.chkBubLiqInstability.Name = "chkBubLiqInstability"
         '
-        'tbBubDT
+        'tbBubTmax
         '
-        resources.ApplyResources(Me.tbBubDT, "tbBubDT")
-        Me.tbBubDT.Name = "tbBubDT"
-        '
-        'tbBubDP
-        '
-        resources.ApplyResources(Me.tbBubDP, "tbBubDP")
-        Me.tbBubDP.Name = "tbBubDP"
-        '
-        'tbBubMaxPoints
-        '
-        resources.ApplyResources(Me.tbBubMaxPoints, "tbBubMaxPoints")
-        Me.tbBubMaxPoints.Name = "tbBubMaxPoints"
-        '
-        'tbBubT0
-        '
-        resources.ApplyResources(Me.tbBubT0, "tbBubT0")
-        Me.tbBubT0.Name = "tbBubT0"
-        '
-        'tbBubP0
-        '
-        resources.ApplyResources(Me.tbBubP0, "tbBubP0")
-        Me.tbBubP0.Name = "tbBubP0"
-        '
-        'Label9
-        '
-        resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Name = "Label9"
-        '
-        'Label8
-        '
-        resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.Name = "Label8"
-        '
-        'Label7
-        '
-        resources.ApplyResources(Me.Label7, "Label7")
-        Me.Label7.Name = "Label7"
-        '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        '
-        'Label5
-        '
-        resources.ApplyResources(Me.Label5, "Label5")
-        Me.Label5.Name = "Label5"
-        '
-        'rbBubTVF
-        '
-        resources.ApplyResources(Me.rbBubTVF, "rbBubTVF")
-        Me.rbBubTVF.Name = "rbBubTVF"
-        Me.rbBubTVF.TabStop = True
-        Me.rbBubTVF.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.tbBubTmax, "tbBubTmax")
+        Me.tbBubTmax.Name = "tbBubTmax"
         '
         'rbBubPVF
         '
@@ -320,63 +285,219 @@ Partial Class FormPhEnv
         Me.rbBubPVF.TabStop = True
         Me.rbBubPVF.UseVisualStyleBackColor = True
         '
-        'Label4
+        'Label12
         '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
+        resources.ApplyResources(Me.Label12, "Label12")
+        Me.Label12.Name = "Label12"
         '
-        'chkBubLiqInstability
+        'rbBubTVF
         '
-        resources.ApplyResources(Me.chkBubLiqInstability, "chkBubLiqInstability")
-        Me.chkBubLiqInstability.Name = "chkBubLiqInstability"
+        resources.ApplyResources(Me.rbBubTVF, "rbBubTVF")
+        Me.rbBubTVF.Name = "rbBubTVF"
+        Me.rbBubTVF.TabStop = True
+        Me.rbBubTVF.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        '
+        'lbBubDT
+        '
+        resources.ApplyResources(Me.lbBubDT, "lbBubDT")
+        Me.lbBubDT.Name = "lbBubDT"
+        '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        '
+        'lbBubDP
+        '
+        resources.ApplyResources(Me.lbBubDP, "lbBubDP")
+        Me.lbBubDP.Name = "lbBubDP"
+        '
+        'Label7
+        '
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        '
+        'lbBubT0
+        '
+        resources.ApplyResources(Me.lbBubT0, "lbBubT0")
+        Me.lbBubT0.Name = "lbBubT0"
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
+        '
+        'lbBubP0
+        '
+        resources.ApplyResources(Me.lbBubP0, "lbBubP0")
+        Me.lbBubP0.Name = "lbBubP0"
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
+        'tbBubDT
+        '
+        resources.ApplyResources(Me.tbBubDT, "tbBubDT")
+        Me.tbBubDT.Name = "tbBubDT"
+        '
+        'tbBubP0
+        '
+        resources.ApplyResources(Me.tbBubP0, "tbBubP0")
+        Me.tbBubP0.Name = "tbBubP0"
+        '
+        'tbBubDP
+        '
+        resources.ApplyResources(Me.tbBubDP, "tbBubDP")
+        Me.tbBubDP.Name = "tbBubDP"
+        '
+        'tbBubT0
+        '
+        resources.ApplyResources(Me.tbBubT0, "tbBubT0")
+        Me.tbBubT0.Name = "tbBubT0"
+        '
+        'tbBubMaxPoints
+        '
+        resources.ApplyResources(Me.tbBubMaxPoints, "tbBubMaxPoints")
+        Me.tbBubMaxPoints.Name = "tbBubMaxPoints"
+        '
+        'chkControlBubInit
+        '
+        resources.ApplyResources(Me.chkControlBubInit, "chkControlBubInit")
+        Me.chkControlBubInit.Name = "chkControlBubInit"
         '
         'TabPage3
         '
         resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.Controls.Add(Me.lbDewDT)
-        Me.TabPage3.Controls.Add(Me.lbDewDP)
-        Me.TabPage3.Controls.Add(Me.lbDewT0)
-        Me.TabPage3.Controls.Add(Me.lbDewP0)
-        Me.TabPage3.Controls.Add(Me.tbDewDT)
-        Me.TabPage3.Controls.Add(Me.tbDewDP)
-        Me.TabPage3.Controls.Add(Me.tbDewMaxPoints)
-        Me.TabPage3.Controls.Add(Me.tbDewT0)
-        Me.TabPage3.Controls.Add(Me.tbDewP0)
-        Me.TabPage3.Controls.Add(Me.Label18)
-        Me.TabPage3.Controls.Add(Me.Label19)
-        Me.TabPage3.Controls.Add(Me.Label20)
-        Me.TabPage3.Controls.Add(Me.Label21)
-        Me.TabPage3.Controls.Add(Me.Label22)
-        Me.TabPage3.Controls.Add(Me.rbDewTVF)
-        Me.TabPage3.Controls.Add(Me.rbDewPVF)
-        Me.TabPage3.Controls.Add(Me.Label23)
+        Me.TabPage3.Controls.Add(Me.PanelDew)
+        Me.TabPage3.Controls.Add(Me.chkControlDewInit)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'PanelDew
+        '
+        resources.ApplyResources(Me.PanelDew, "PanelDew")
+        Me.PanelDew.Controls.Add(Me.Label23)
+        Me.PanelDew.Controls.Add(Me.lblDewTmax)
+        Me.PanelDew.Controls.Add(Me.rbDewPVF)
+        Me.PanelDew.Controls.Add(Me.tbDewTmax)
+        Me.PanelDew.Controls.Add(Me.rbDewTVF)
+        Me.PanelDew.Controls.Add(Me.Label11)
+        Me.PanelDew.Controls.Add(Me.Label22)
+        Me.PanelDew.Controls.Add(Me.Label21)
+        Me.PanelDew.Controls.Add(Me.lbDewDT)
+        Me.PanelDew.Controls.Add(Me.Label20)
+        Me.PanelDew.Controls.Add(Me.lbDewDP)
+        Me.PanelDew.Controls.Add(Me.Label19)
+        Me.PanelDew.Controls.Add(Me.lbDewT0)
+        Me.PanelDew.Controls.Add(Me.Label18)
+        Me.PanelDew.Controls.Add(Me.lbDewP0)
+        Me.PanelDew.Controls.Add(Me.tbDewP0)
+        Me.PanelDew.Controls.Add(Me.tbDewDT)
+        Me.PanelDew.Controls.Add(Me.tbDewT0)
+        Me.PanelDew.Controls.Add(Me.tbDewDP)
+        Me.PanelDew.Controls.Add(Me.tbDewMaxPoints)
+        Me.PanelDew.Name = "PanelDew"
+        '
+        'Label23
+        '
+        resources.ApplyResources(Me.Label23, "Label23")
+        Me.Label23.Name = "Label23"
+        '
+        'lblDewTmax
+        '
+        resources.ApplyResources(Me.lblDewTmax, "lblDewTmax")
+        Me.lblDewTmax.Name = "lblDewTmax"
+        '
+        'rbDewPVF
+        '
+        resources.ApplyResources(Me.rbDewPVF, "rbDewPVF")
+        Me.rbDewPVF.Name = "rbDewPVF"
+        Me.rbDewPVF.TabStop = True
+        Me.rbDewPVF.UseVisualStyleBackColor = True
+        '
+        'tbDewTmax
+        '
+        resources.ApplyResources(Me.tbDewTmax, "tbDewTmax")
+        Me.tbDewTmax.Name = "tbDewTmax"
+        '
+        'rbDewTVF
+        '
+        resources.ApplyResources(Me.rbDewTVF, "rbDewTVF")
+        Me.rbDewTVF.Name = "rbDewTVF"
+        Me.rbDewTVF.TabStop = True
+        Me.rbDewTVF.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        resources.ApplyResources(Me.Label11, "Label11")
+        Me.Label11.Name = "Label11"
+        '
+        'Label22
+        '
+        resources.ApplyResources(Me.Label22, "Label22")
+        Me.Label22.Name = "Label22"
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
         '
         'lbDewDT
         '
         resources.ApplyResources(Me.lbDewDT, "lbDewDT")
         Me.lbDewDT.Name = "lbDewDT"
         '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        '
         'lbDewDP
         '
         resources.ApplyResources(Me.lbDewDP, "lbDewDP")
         Me.lbDewDP.Name = "lbDewDP"
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
         '
         'lbDewT0
         '
         resources.ApplyResources(Me.lbDewT0, "lbDewT0")
         Me.lbDewT0.Name = "lbDewT0"
         '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
         'lbDewP0
         '
         resources.ApplyResources(Me.lbDewP0, "lbDewP0")
         Me.lbDewP0.Name = "lbDewP0"
         '
+        'tbDewP0
+        '
+        resources.ApplyResources(Me.tbDewP0, "tbDewP0")
+        Me.tbDewP0.Name = "tbDewP0"
+        '
         'tbDewDT
         '
         resources.ApplyResources(Me.tbDewDT, "tbDewDT")
         Me.tbDewDT.Name = "tbDewDT"
+        '
+        'tbDewT0
+        '
+        resources.ApplyResources(Me.tbDewT0, "tbDewT0")
+        Me.tbDewT0.Name = "tbDewT0"
         '
         'tbDewDP
         '
@@ -388,59 +509,10 @@ Partial Class FormPhEnv
         resources.ApplyResources(Me.tbDewMaxPoints, "tbDewMaxPoints")
         Me.tbDewMaxPoints.Name = "tbDewMaxPoints"
         '
-        'tbDewT0
+        'chkControlDewInit
         '
-        resources.ApplyResources(Me.tbDewT0, "tbDewT0")
-        Me.tbDewT0.Name = "tbDewT0"
-        '
-        'tbDewP0
-        '
-        resources.ApplyResources(Me.tbDewP0, "tbDewP0")
-        Me.tbDewP0.Name = "tbDewP0"
-        '
-        'Label18
-        '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
-        '
-        'Label19
-        '
-        resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Name = "Label19"
-        '
-        'Label20
-        '
-        resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Name = "Label20"
-        '
-        'Label21
-        '
-        resources.ApplyResources(Me.Label21, "Label21")
-        Me.Label21.Name = "Label21"
-        '
-        'Label22
-        '
-        resources.ApplyResources(Me.Label22, "Label22")
-        Me.Label22.Name = "Label22"
-        '
-        'rbDewTVF
-        '
-        resources.ApplyResources(Me.rbDewTVF, "rbDewTVF")
-        Me.rbDewTVF.Name = "rbDewTVF"
-        Me.rbDewTVF.TabStop = True
-        Me.rbDewTVF.UseVisualStyleBackColor = True
-        '
-        'rbDewPVF
-        '
-        resources.ApplyResources(Me.rbDewPVF, "rbDewPVF")
-        Me.rbDewPVF.Name = "rbDewPVF"
-        Me.rbDewPVF.TabStop = True
-        Me.rbDewPVF.UseVisualStyleBackColor = True
-        '
-        'Label23
-        '
-        resources.ApplyResources(Me.Label23, "Label23")
-        Me.Label23.Name = "Label23"
+        resources.ApplyResources(Me.chkControlDewInit, "chkControlDewInit")
+        Me.chkControlDewInit.Name = "chkControlDewInit"
         '
         'PanelCalc
         '
@@ -626,8 +698,12 @@ Partial Class FormPhEnv
         CType(Me.tbQuality, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
+        Me.PanelBub.ResumeLayout(False)
+        Me.PanelBub.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.PanelDew.ResumeLayout(False)
+        Me.PanelDew.PerformLayout()
         Me.PanelCalc.ResumeLayout(False)
         Me.PanelCalc.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -717,4 +793,14 @@ Partial Class FormPhEnv
     Friend WithEvents rbDewTVF As System.Windows.Forms.RadioButton
     Friend WithEvents rbDewPVF As System.Windows.Forms.RadioButton
     Public WithEvents Label23 As System.Windows.Forms.Label
+    Public WithEvents chkControlBubInit As System.Windows.Forms.CheckBox
+    Public WithEvents chkControlDewInit As System.Windows.Forms.CheckBox
+    Friend WithEvents lblBubTmax As System.Windows.Forms.Label
+    Friend WithEvents tbBubTmax As System.Windows.Forms.TextBox
+    Public WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents lblDewTmax As System.Windows.Forms.Label
+    Friend WithEvents tbDewTmax As System.Windows.Forms.TextBox
+    Public WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents PanelBub As System.Windows.Forms.Panel
+    Friend WithEvents PanelDew As System.Windows.Forms.Panel
 End Class

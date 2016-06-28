@@ -49,10 +49,12 @@ Public Interface IPhaseEnvelopeOptions
     Property BubbleCurveInitialFlash As String
     Property BubbleCurveInitialPressure As Double
     Property BubbleCurveInitialTemperature As Double
+    Property BubbleCurveMaximumTemperature As Double
 
     Property DewCurveInitialFlash As String
     Property DewCurveInitialPressure As Double
     Property DewCurveInitialTemperature As Double
+    Property DewCurveMaximumTemperature As Double
 
     Property BubbleCurveMaximumPoints As Integer
     Property DewCurveMaximumPoints As Integer
@@ -62,5 +64,9 @@ Public Interface IPhaseEnvelopeOptions
 
     Property DewCurveDeltaP As Double
     Property DewCurveDeltaT As Double
+
+    Property BubbleUseCustomParameters As Boolean
+    Property DewUseCustomParameters As Boolean
+
 
 End Interface

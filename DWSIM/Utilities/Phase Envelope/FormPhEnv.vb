@@ -101,6 +101,7 @@ Public Class FormPhEnv
         cbhydmodel.Enabled = chkhyd.Checked
 
         With EnvelopeSettings
+
             chkQualityLine.Checked = .QualityLine
             tbQuality.TextAlign = .QualityValue
             chkhyd.Checked = .Hydrate
@@ -110,16 +111,21 @@ Public Class FormPhEnv
             chkpip.Checked = .PhaseIdentificationCurve
             cbhydmodel.SelectedIndex = .HydrateModel
 
+            chkControlBubInit.Checked = .BubbleUseCustomParameters
+            chkControlDewInit.Checked = .DewUseCustomParameters
+
             chkBubLiqInstability.Checked = .CheckLiquidInstability
             lbBubDP.Text = su.deltaP
             lbBubDT.Text = su.deltaT
             lbBubP0.Text = su.pressure
             lbBubT0.Text = su.temperature
+            lblBubTmax.Text = su.temperature
 
             lbDewDP.Text = su.deltaP
             lbDewDT.Text = su.deltaT
             lbDewP0.Text = su.pressure
             lbDewT0.Text = su.temperature
+            lblDewTmax.Text = su.temperature
 
             If .BubbleCurveInitialFlash = "PVF" Then rbBubPVF.Checked = True Else rbBubTVF.Checked = True
 
@@ -127,6 +133,7 @@ Public Class FormPhEnv
             tbBubDT.Text = cv.ConvertFromSI(su.deltaT, .BubbleCurveDeltaT).ToString(nf)
             tbBubP0.Text = cv.ConvertFromSI(su.pressure, .BubbleCurveInitialPressure).ToString(nf)
             tbBubT0.Text = cv.ConvertFromSI(su.temperature, .BubbleCurveInitialTemperature).ToString(nf)
+            tbBubTmax.Text = cv.ConvertFromSI(su.temperature, .BubbleCurveMaximumTemperature).ToString(nf)
             tbBubMaxPoints.Text = .BubbleCurveMaximumPoints
 
             If .DewCurveInitialFlash = "PVF" Then rbDewPVF.Checked = True Else rbDewTVF.Checked = True
@@ -135,16 +142,8 @@ Public Class FormPhEnv
             tbDewDT.Text = cv.ConvertFromSI(su.deltaT, .DewCurveDeltaT).ToString(nf)
             tbDewP0.Text = cv.ConvertFromSI(su.pressure, .DewCurveInitialPressure).ToString(nf)
             tbDewT0.Text = cv.ConvertFromSI(su.temperature, .DewCurveInitialTemperature).ToString(nf)
+            tbDewTmax.Text = cv.ConvertFromSI(su.temperature, .DewCurveMaximumTemperature).ToString(nf)
             tbDewMaxPoints.Text = .DewCurveMaximumPoints
-
-      
-            Try
-                Dim pp = DirectCast(AttachedTo, Streams.MaterialStream).PropertyPackage
-                chkBubLiqInstability.Enabled = (pp.FlashBase.AlgoType = FlashMethod.Gibbs_Minimization_VLLE Or
-                                                pp.FlashBase.AlgoType = FlashMethod.Inside_Out_VLLE Or
-                                                pp.FlashBase.AlgoType = FlashMethod.Nested_Loops_VLLE)
-            Catch ex As Exception
-            End Try
 
         End With
 
@@ -266,20 +265,22 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsVisible = True
-                            .Line.IsSmooth = False
-                            .Line.Style = Drawing2D.DashStyle.Dash
-                            .Symbol.IsVisible = False
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsVisible = True
-                            .Line.IsSmooth = False
-                            .Line.Style = Drawing2D.DashStyle.Dash
-                            .Symbol.IsVisible = False
-                        End With
+                        If px7.Count > 0 Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                                .Color = Color.SteelBlue
+                                .Line.IsVisible = True
+                                .Line.IsSmooth = False
+                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Symbol.IsVisible = False
+                            End With
+                            With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                                .Color = Color.SteelBlue
+                                .Line.IsVisible = True
+                                .Line.IsSmooth = False
+                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Symbol.IsVisible = False
+                            End With
+                        End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
                             .Line.IsSmooth = False
@@ -549,20 +550,22 @@ exec:       With Me.GraphControl.GraphPane.Legend
                             .Line.IsSmooth = False
                             .Symbol.Fill.Type = ZedGraph.FillType.Solid
                         End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsVisible = True
-                            .Line.IsSmooth = False
-                            .Line.Style = Drawing2D.DashStyle.Dash
-                            .Symbol.IsVisible = False
-                        End With
-                        With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
-                            .Color = Color.SteelBlue
-                            .Line.IsVisible = True
-                            .Line.IsSmooth = False
-                            .Line.Style = Drawing2D.DashStyle.Dash
-                            .Symbol.IsVisible = False
-                        End With
+                        If px7.Count > 0 Then
+                            With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq I", px7.ToArray(GetType(Double)), py7.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                                .Color = Color.SteelBlue
+                                .Line.IsVisible = True
+                                .Line.IsSmooth = False
+                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Symbol.IsVisible = False
+                            End With
+                            With .AddCurve(DWSIM.App.GetLocalString("PontosdeBolha") & " Liq II", px8.ToArray(GetType(Double)), py8.ToArray(GetType(Double)), Color.SlateBlue, ZedGraph.SymbolType.Circle)
+                                .Color = Color.SteelBlue
+                                .Line.IsVisible = True
+                                .Line.IsSmooth = False
+                                .Line.Style = Drawing2D.DashStyle.Dash
+                                .Symbol.IsVisible = False
+                            End With
+                        End If
                         With .AddCurve(DWSIM.App.GetLocalString("PontosdeOrvalho"), px2.ToArray(GetType(Double)), py2.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
                             .Color = Color.YellowGreen
                             .Line.IsSmooth = False
@@ -1552,6 +1555,34 @@ exec:       With Me.GraphControl.GraphPane.Legend
     Private Sub tbDewDT_TextChanged(sender As Object, e As EventArgs) Handles tbDewDT.TextChanged
         Try
             EnvelopeSettings.DewCurveDeltaT = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub chkControlBubInit_CheckedChanged(sender As Object, e As EventArgs) Handles chkControlBubInit.CheckedChanged
+        PanelBub.Enabled = chkControlBubInit.Checked
+        EnvelopeSettings.BubbleUseCustomParameters = chkControlBubInit.Checked
+    End Sub
+
+    Private Sub chkControlDewInit_CheckedChanged(sender As Object, e As EventArgs) Handles chkControlDewInit.CheckedChanged
+        PanelDew.Enabled = chkControlDewInit.Checked
+        EnvelopeSettings.DewUseCustomParameters = chkControlDewInit.Checked
+    End Sub
+
+    Private Sub tbBubTmax_TextChanged(sender As Object, e As EventArgs) Handles tbBubTmax.TextChanged
+        Try
+            EnvelopeSettings.BubbleCurveMaximumTemperature = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
+            DirectCast(sender, TextBox).ForeColor = Color.Blue
+        Catch ex As Exception
+            DirectCast(sender, TextBox).ForeColor = Color.Red
+        End Try
+    End Sub
+
+    Private Sub tbDewTmax_TextChanged(sender As Object, e As EventArgs) Handles tbDewTmax.TextChanged
+        Try
+            EnvelopeSettings.DewCurveMaximumTemperature = cv.ConvertToSI(su.temperature, DirectCast(sender, TextBox).Text)
             DirectCast(sender, TextBox).ForeColor = Color.Blue
         Catch ex As Exception
             DirectCast(sender, TextBox).ForeColor = Color.Red
