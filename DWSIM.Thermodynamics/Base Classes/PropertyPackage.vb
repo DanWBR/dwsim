@@ -2948,7 +2948,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             Dim TCR, PCR, VCR As Double
 
-            Dim CP As New ArrayList, recalcCP As Boolean = False
+            Dim CP As New ArrayList, recalcCP As Boolean = False, stopAtCP As Boolean = False
 
             If TypeOf Me Is PengRobinsonPropertyPackage Then
                 If n > 0 Then
@@ -2958,6 +2958,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         TCR = cp0(0)
                         PCR = cp0(1)
                         VCR = cp0(2)
+                        stopAtCP = True
                     Else
                         TCR = Me.AUX_TCM(Phase.Mixture)
                         PCR = Me.AUX_PCM(Phase.Mixture)
@@ -2978,6 +2979,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         TCR = cp0(0)
                         PCR = cp0(1)
                         VCR = cp0(2)
+                        stopAtCP = True
                     Else
                         TCR = Me.AUX_TCM(Phase.Mixture)
                         PCR = Me.AUX_PCM(Phase.Mixture)
@@ -3144,6 +3146,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     End If
 
+                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+
                     If beta < 20 Then
                         If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then
                             T = T + options.BubbleCurveDeltaT * 0.5
@@ -3159,6 +3163,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     End If
 
                 End If
+
+                If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0.0#
 
                 If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "Bubble Points... " & ((i + 1) / options.BubbleCurveMaximumPoints * 100).ToString("N1") & "%")
 
@@ -3220,20 +3226,6 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             KI = tmp2(6)
                             beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
-                        Finally
-                            If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
-                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                    T = T - options.DewCurveDeltaT * 0.1
-                                Else
-                                    T = T - options.DewCurveDeltaT
-                                End If
-                            Else
-                                If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
-                                    T = T + options.DewCurveDeltaT * 0.1
-                                Else
-                                    T = T + options.DewCurveDeltaT
-                                End If
-                            End If
                         End Try
                     Else
                         Try
@@ -3247,20 +3239,38 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             KI = tmp2(6)
                             beta = (Math.Log(PO(PO.Count - 1) / 101325) - Math.Log(PO(PO.Count - 2) / 101325)) / (Math.Log(TVD(TVD.Count - 1)) - Math.Log(TVD(TVD.Count - 2)))
                         Catch ex As Exception
-                        Finally
-                            If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
-                                P = P + options.DewCurveDeltaP * 0.25
-                            Else
-                                P = P + options.DewCurveDeltaP
-                            End If
                         End Try
+                    End If
+
+                    If stopAtCP Then If Math.Abs(T - TCR) / TCR < 0.01 And Math.Abs(P - PCR) / PCR < 0.02 Then Exit Do
+
+                    If Abs(beta) < 2 Then
+                        If TVD(TVD.Count - 1) - TVD(TVD.Count - 2) <= 0 Then
+                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                T = T - options.DewCurveDeltaT * 0.1
+                            Else
+                                T = T - options.DewCurveDeltaT
+                            End If
+                        Else
+                            If Math.Abs(T - TCR) / TCR < 0.02 And Math.Abs(P - PCR) / PCR < 0.02 Then
+                                T = T + options.DewCurveDeltaT * 0.1
+                            Else
+                                T = T + options.DewCurveDeltaT
+                            End If
+                        End If
+                    Else
+                        If Math.Abs(T - TCR) / TCR < 0.05 And Math.Abs(P - PCR) / PCR < 0.05 Then
+                            P = P + options.DewCurveDeltaP * 0.25
+                        Else
+                            P = P + options.DewCurveDeltaP
+                        End If
                     End If
 
                     If i >= PO.Count Then
                         i = i - 1
                     End If
 
-                    If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0
+                    If Double.IsNaN(beta) Or Double.IsInfinity(beta) Then beta = 0.0#
 
                 End If
 
