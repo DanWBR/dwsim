@@ -2912,4 +2912,31 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #End Region
 
+    Private Sub UtilitiesTSMI_Click(sender As Object, e As EventArgs) Handles UtilitiesTSMI.DropDownOpening
+
+        UtilitiesTSMI.DropDownItems.Clear()
+
+        Application.DoEvents()
+
+        For Each obj In Me.SimulationObjects.Values
+            For Each attchu In obj.AttachedUtilities
+                Dim tsmi As New ToolStripMenuItem
+                With tsmi
+                    .Text = obj.GraphicObject.Tag & " / " & attchu.Name
+                    .Image = My.Resources.cog
+                End With
+                AddHandler tsmi.Click, Sub()
+                                           Dim f = DirectCast(attchu, DockContent)
+                                           If f.Visible Then
+                                               f.Select()
+                                           Else
+                                               obj.GetFlowsheet.DisplayForm(f)
+                                           End If
+                                       End Sub
+                UtilitiesTSMI.DropDownItems.Add(tsmi)
+            Next
+        Next
+
+    End Sub
+
 End Class

@@ -57,7 +57,7 @@ Public Class FormPhEnv
     Public Property CriticalTemperature As Double
     Public Property CriticalVolume As Double
 
-    Public Property EnvelopeSettings As New PropertyPackages.PhaseEnvelopeSettings
+    Public Property EnvelopeSettings As New PropertyPackages.PhaseEnvelopeOptions
 
     Public bw As System.ComponentModel.BackgroundWorker
 
@@ -1177,7 +1177,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
         Next
 
-        Dim maxl As Integer = MathEx.Common.Max(New Object() {TVB.Count, TVD.Count, TE.Count, TQ.Count, TI.Count, THsI.Count, TOWF.Count}) - 1
+        Dim maxl As Integer = MathEx.Common.Max(New Object() {TVB.Count, TVB1.Count, TVB2.Count, TVD.Count, TE.Count, TQ.Count, TI.Count, THsI.Count, TOWF.Count}) - 1
 
         Dim k, j As Integer
         Dim maxc As Integer = Me.Grid1.Columns.Count - 1
@@ -1409,7 +1409,7 @@ exec:       With Me.GraphControl.GraphPane.Legend
             Case "EnvelopeType"
                 ComboBox1.SelectedIndex = pvalue
             Case "EnvelopeSettings"
-                EnvelopeSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of PropertyPackages.PhaseEnvelopeSettings)(pvalue.ToString)
+                EnvelopeSettings = Newtonsoft.Json.JsonConvert.DeserializeObject(Of PropertyPackages.PhaseEnvelopeOptions)(pvalue.ToString)
         End Select
     End Sub
 

@@ -110,6 +110,7 @@ Partial Class FormFlowsheet
         Me.GerenciadorDeAmostrasDePetroleoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GerenciadorDeReacoesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
+        Me.UtilitiesTSMI = New System.Windows.Forms.ToolStripMenuItem()
         Me.OtimizaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnaliseDeSensibilidadeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MultivariateOptimizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -576,7 +577,7 @@ Partial Class FormFlowsheet
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ArquivoToolStripMenuItem, Me.EditarToolStripMenuItem, Me.InserirToolStripMenuItem, Me.FerramentasToolStripMenuItem, Me.UtilitiesTSMI, Me.OtimizaToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ResultadosToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ExibirToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.ShowItemToolTips = True
         '
@@ -797,12 +798,19 @@ Partial Class FormFlowsheet
         Me.ToolStripSeparator15.MergeIndex = 4
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         '
+        'UtilitiesTSMI
+        '
+        resources.ApplyResources(Me.UtilitiesTSMI, "UtilitiesTSMI")
+        Me.UtilitiesTSMI.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.UtilitiesTSMI.MergeIndex = 4
+        Me.UtilitiesTSMI.Name = "UtilitiesTSMI"
+        '
         'OtimizaToolStripMenuItem
         '
         resources.ApplyResources(Me.OtimizaToolStripMenuItem, "OtimizaToolStripMenuItem")
         Me.OtimizaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AnaliseDeSensibilidadeToolStripMenuItem, Me.MultivariateOptimizerToolStripMenuItem})
         Me.OtimizaToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.OtimizaToolStripMenuItem.MergeIndex = 4
+        Me.OtimizaToolStripMenuItem.MergeIndex = 5
         Me.OtimizaToolStripMenuItem.Name = "OtimizaToolStripMenuItem"
         '
         'AnaliseDeSensibilidadeToolStripMenuItem
@@ -822,7 +830,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.ScriptsToolStripMenuItem, "ScriptsToolStripMenuItem")
         Me.ScriptsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IronRubyToolStripMenuItem})
         Me.ScriptsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.ScriptsToolStripMenuItem.MergeIndex = 5
+        Me.ScriptsToolStripMenuItem.MergeIndex = 6
         Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
         '
         'IronRubyToolStripMenuItem
@@ -836,7 +844,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.ResultadosToolStripMenuItem, "ResultadosToolStripMenuItem")
         Me.ResultadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GerarRelatorioToolStripMenuItem})
         Me.ResultadosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.ResultadosToolStripMenuItem.MergeIndex = 6
+        Me.ResultadosToolStripMenuItem.MergeIndex = 7
         Me.ResultadosToolStripMenuItem.Name = "ResultadosToolStripMenuItem"
         '
         'GerarRelatorioToolStripMenuItem
@@ -850,7 +858,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.PluginsToolStripMenuItem, "PluginsToolStripMenuItem")
         Me.PluginsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem})
         Me.PluginsToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.PluginsToolStripMenuItem.MergeIndex = 7
+        Me.PluginsToolStripMenuItem.MergeIndex = 8
         Me.PluginsToolStripMenuItem.Name = "PluginsToolStripMenuItem"
         '
         'CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem
@@ -864,7 +872,7 @@ Partial Class FormFlowsheet
         resources.ApplyResources(Me.ExibirToolStripMenuItem, "ExibirToolStripMenuItem")
         Me.ExibirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.consoletsmi, Me.ExibirListaDeItensACalcularToolStripMenuItem, Me.varpaneltsmi, Me.COObjTSMI, Me.ToolStripSeparator10, Me.showflowsheettoolstripmenuitem, Me.showunitstoolstripmenuitem, Me.ToolStripSeparator11, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ExibirToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
-        Me.ExibirToolStripMenuItem.MergeIndex = 8
+        Me.ExibirToolStripMenuItem.MergeIndex = 9
         Me.ExibirToolStripMenuItem.Name = "ExibirToolStripMenuItem"
         '
         'consoletsmi
@@ -1187,4 +1195,5 @@ Partial Class FormFlowsheet
     Friend WithEvents TextoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RectangleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmiCloseOpenedEditors As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents UtilitiesTSMI As System.Windows.Forms.ToolStripMenuItem
 End Class

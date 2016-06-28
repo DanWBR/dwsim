@@ -1,7 +1,7 @@
 ﻿Namespace PropertyPackages
-    <Serializable> Public Class PhaseEnvelopeSettings
+    <Serializable> Public Class PhaseEnvelopeOptions
 
-        Implements Interfaces.IPhaseEnvelopeOptions
+        Implements Interfaces.IPhaseEnvelopeOptions, ICloneable
 
         Public Property BubbleCurveDeltaP As Double = 101325.0 Implements Interfaces.IPhaseEnvelopeOptions.BubbleCurveDeltaP
 
@@ -52,6 +52,10 @@
         Public Property DewCurveMaximumTemperature As Double = 1000.0# Implements Interfaces.IPhaseEnvelopeOptions.DewCurveMaximumTemperature
 
         Public Property DewUseCustomParameters As Boolean = False Implements Interfaces.IPhaseEnvelopeOptions.DewUseCustomParameters
+
+        Public Function Clone() As Object Implements ICloneable.Clone
+            Return Me.MemberwiseClone
+        End Function
 
     End Class
 

@@ -2859,10 +2859,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         ''' <summary>
         ''' This function returns points to build the phase envelope.
         ''' </summary>
-        ''' <param name="options"></param>
+        ''' <param name="peoptions"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overridable Function DW_ReturnPhaseEnvelope(ByVal options As IPhaseEnvelopeOptions, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
+        Public Overridable Function DW_ReturnPhaseEnvelope(ByVal peoptions As PhaseEnvelopeOptions, Optional ByVal bw As System.ComponentModel.BackgroundWorker = Nothing) As Object
 
             If Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
@@ -2917,6 +2917,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 End If
                 i = i + 1
             Loop Until i = n + 1
+
+            Dim options As PhaseEnvelopeOptions = peoptions.Clone()
 
             With options
                 If Not .BubbleUseCustomParameters Then
@@ -2999,7 +3001,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 CP.Add(New Object() {TCR, PCR, VCR})
             End If
 
-            Dim beta As Double = 10
+            Dim beta As Double = 10.0#
 
             Dim tmp2 As Object
             Dim result As IFlashCalculationResult = Nothing
@@ -3030,7 +3032,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         SB.Add(Me.DW_CalcEntropy(Me.RET_VMOL(Phase.Mixture), T, P, State.Liquid))
                         VB.Add(1 / Me.AUX_LIQDENS(T, Me.RET_VMOL(Phase.Mixture), P, P) * Me.AUX_MMM(Phase.Mixture))
                         KI = tmp2(6)
-                   Else
+                    Else
                         tmp2 = Me.FlashBase.Flash_PV(Me.RET_VMOL(Phase.Mixture), P, 0, options.BubbleCurveInitialTemperature, Me)
                         TVB.Add(tmp2(4))
                         PB.Add(P)
@@ -3052,7 +3054,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 'liquid phase is unstable
                                 'bubble line liquid phase 1
                                 Try
-                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P, Me)
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P * 1.05, Me)
                                     TVB1.Add(T)
                                     PB1.Add(tmp2(4))
                                     HB1.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
@@ -3062,7 +3064,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 End Try
                                 'bubble line liquid phase 2
                                 Try
-                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P, Me)
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P * 1.05, Me)
                                     TVB2.Add(T)
                                     PB2.Add(tmp2(4))
                                     HB2.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
@@ -3123,7 +3125,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 'liquid phase is unstable
                                 'bubble line liquid phase 1
                                 Try
-                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P, Me)
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P * 1.05, Me)
                                     TVB1.Add(T)
                                     PB1.Add(tmp2(4))
                                     HB1.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
@@ -3133,7 +3135,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                                 End Try
                                 'bubble line liquid phase 2
                                 Try
-                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P, Me)
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P * 1.05, Me)
                                     TVB2.Add(T)
                                     PB2.Add(tmp2(4))
                                     HB2.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
