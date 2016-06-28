@@ -2925,18 +2925,18 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     .BubbleCurveInitialPressure = 0.0#
                     .BubbleCurveInitialTemperature = RET_VTF.Min
                     .BubbleCurveInitialFlash = "TVF"
-                    .BubbleCurveMaximumPoints = 300
-                    .BubbleCurveMaximumTemperature = RET_VTC.Max
+                    .BubbleCurveMaximumPoints = 100
+                    .BubbleCurveMaximumTemperature = RET_VTC.Max * 1.2
                     .CheckLiquidInstability = False
                 End If
                 If Not .DewUseCustomParameters Then
-                    .DewCurveDeltaP = 101325
+                    .DewCurveDeltaP = 2 * 101325
                     .DewCurveDeltaT = 5
                     .DewCurveInitialPressure = 101325
                     .DewCurveInitialTemperature = 0.0#
                     .DewCurveInitialFlash = "PVF"
-                    .DewCurveMaximumPoints = 300
-                    .DewCurveMaximumTemperature = RET_VTC.Max
+                    .DewCurveMaximumPoints = 100
+                    .DewCurveMaximumTemperature = RET_VTC.Max * 1.5
                 End If
             End With
 
@@ -3041,32 +3041,36 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     'check instability
 
-                    result = tpflash.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+                    If options.CheckLiquidInstability Then
 
-                    If result.ResultException Is Nothing Then
-                        If result.GetLiquidPhase2MoleFraction > 0.0# Then
-                            'liquid phase is unstable
-                            'bubble line liquid phase 1
-                            Try
-                                tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P, Me)
-                                TVB1.Add(T)
-                                PB1.Add(tmp2(4))
-                                HB1.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
-                                SB1.Add(Me.DW_CalcEntropy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
-                                VB1.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase1MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase1MoleFractions))
-                            Catch ex As Exception
-                            End Try
-                            'bubble line liquid phase 2
-                            Try
-                                tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P, Me)
-                                TVB2.Add(T)
-                                PB2.Add(tmp2(4))
-                                HB2.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
-                                SB2.Add(Me.DW_CalcEntropy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
-                                VB2.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase2MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase2MoleFractions))
-                            Catch ex As Exception
-                            End Try
+                        result = tpflash.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+
+                        If result.ResultException Is Nothing Then
+                            If result.GetLiquidPhase2MoleFraction > 0.0# Then
+                                'liquid phase is unstable
+                                'bubble line liquid phase 1
+                                Try
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P, Me)
+                                    TVB1.Add(T)
+                                    PB1.Add(tmp2(4))
+                                    HB1.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
+                                    SB1.Add(Me.DW_CalcEntropy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
+                                    VB1.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase1MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase1MoleFractions))
+                                Catch ex As Exception
+                                End Try
+                                'bubble line liquid phase 2
+                                Try
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P, Me)
+                                    TVB2.Add(T)
+                                    PB2.Add(tmp2(4))
+                                    HB2.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
+                                    SB2.Add(Me.DW_CalcEntropy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
+                                    VB2.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase2MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase2MoleFractions))
+                                Catch ex As Exception
+                                End Try
+                            End If
                         End If
+
                     End If
 
                     If options.BubbleCurveInitialFlash = "TVF" Then
@@ -3105,34 +3109,39 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         End Try
                     End If
 
-                    'check instability
 
-                    result = tpflash.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+                    If options.CheckLiquidInstability Then
 
-                    If result.ResultException Is Nothing Then
-                        If result.GetLiquidPhase2MoleFraction > 0.0# Then
-                            'liquid phase is unstable
-                            'bubble line liquid phase 1
-                            Try
-                                tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P, Me)
-                                TVB1.Add(T)
-                                PB1.Add(tmp2(4))
-                                HB1.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
-                                SB1.Add(Me.DW_CalcEntropy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
-                                VB1.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase1MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase1MoleFractions))
-                            Catch ex As Exception
-                            End Try
-                            'bubble line liquid phase 2
-                            Try
-                                tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P, Me)
-                                TVB2.Add(T)
-                                PB2.Add(tmp2(4))
-                                HB2.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
-                                SB2.Add(Me.DW_CalcEntropy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
-                                VB2.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase2MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase2MoleFractions))
-                            Catch ex As Exception
-                            End Try
+                        'check instability
+
+                        result = tpflash.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, Me, RET_VMOL(Phase.Mixture), Nothing, 0)
+
+                        If result.ResultException Is Nothing Then
+                            If result.GetLiquidPhase2MoleFraction > 0.0# Then
+                                'liquid phase is unstable
+                                'bubble line liquid phase 1
+                                Try
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase1MoleFractions, T, 0.0#, P, Me)
+                                    TVB1.Add(T)
+                                    PB1.Add(tmp2(4))
+                                    HB1.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
+                                    SB1.Add(Me.DW_CalcEntropy(result.GetLiquidPhase1MoleFractions, T, tmp2(4), State.Liquid))
+                                    VB1.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase1MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase1MoleFractions))
+                                Catch ex As Exception
+                                End Try
+                                'bubble line liquid phase 2
+                                Try
+                                    tmp2 = Me.FlashBase.Flash_TV(result.GetLiquidPhase2MoleFractions, T, 0.0#, P, Me)
+                                    TVB2.Add(T)
+                                    PB2.Add(tmp2(4))
+                                    HB2.Add(Me.DW_CalcEnthalpy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
+                                    SB2.Add(Me.DW_CalcEntropy(result.GetLiquidPhase2MoleFractions, T, tmp2(4), State.Liquid))
+                                    VB2.Add(1 / Me.AUX_LIQDENS(T, result.GetLiquidPhase2MoleFractions) * Me.AUX_MMM(result.GetLiquidPhase2MoleFractions))
+                                Catch ex As Exception
+                                End Try
+                            End If
                         End If
+
                     End If
 
                     If beta < 20 Then

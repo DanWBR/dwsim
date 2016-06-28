@@ -204,9 +204,6 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Initial Flash</value>
   </data>
-  <data name="chkBubLiqInstability.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="chkBubLiqInstability.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -305,6 +302,9 @@
   </data>
   <data name="chkControlDewInit.Text" xml:space="preserve">
     <value>Custom Initialization</value>
+  </data>
+  <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>338, 243</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Dew Points</value>
