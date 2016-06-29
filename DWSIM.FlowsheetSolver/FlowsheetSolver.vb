@@ -376,6 +376,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     myobj.ErrorMessage = ex.Message.ToString & vbCrLf
                     loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                     If GlobalSettings.Settings.SolverBreakOnException Then Exit While
+                Finally
+                    fgui.UpdateInterface()
                 End Try
 
             End If
@@ -445,8 +447,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Finally
-                'fobj.UIThread(Sub() UpdateDisplayStatus(fobj, New String() {myinfo.Name}))
+                fgui.UpdateInterface()
             End Try
+
 
             If fqueue.CalculationQueue.Count > 0 Then fqueue.CalculationQueue.Dequeue()
 
@@ -522,7 +525,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                                          loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Finally
-                                                         'fobj.UIThread(Sub() UpdateDisplayStatus(fobj, New String() {myinfo.Name}))
+                                                         fgui.UpdateInterface()
                                                      End Try
                                                  End Sub)
         Next

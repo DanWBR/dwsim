@@ -510,7 +510,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
-        For Each gObj In Surface.drawingObjects
+        For Each gObj In Surface.DrawingObjects
             If gObj.Name.ToString = Name Then
                 gObj2 = gObj
                 Exit For
@@ -524,7 +524,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
-        For Each gObj In Surface.drawingObjects
+        For Each gObj In Surface.DrawingObjects
             If gObj.Tag.ToString = Name Then
                 gObj2 = gObj
                 Exit For
@@ -538,7 +538,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Dim gObj As GraphicObject = Nothing
         Dim gObj2 As GraphicObject = Nothing
-        For Each gObj In Me.FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each gObj In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects
             If gObj.Tag.ToString = tag Then
                 gObj2 = gObj
                 Exit For
@@ -662,6 +662,33 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 #End Region
 
 #Region "    Click Event Handlers "
+
+    Private Sub UtilitiesTSMI_Click(sender As Object, e As EventArgs) Handles UtilitiesTSMI.DropDownOpening
+
+        UtilitiesTSMI.DropDownItems.Clear()
+
+        Application.DoEvents()
+
+        For Each obj In Me.SimulationObjects.Values
+            For Each attchu In obj.AttachedUtilities
+                Dim tsmi As New ToolStripMenuItem
+                With tsmi
+                    .Text = obj.GraphicObject.Tag & " / " & attchu.Name
+                    .Image = My.Resources.cog
+                End With
+                AddHandler tsmi.Click, Sub()
+                                           Dim f = DirectCast(attchu, DockContent)
+                                           If f.Visible Then
+                                               f.Select()
+                                           Else
+                                               obj.GetFlowsheet.DisplayForm(f)
+                                           End If
+                                       End Sub
+                UtilitiesTSMI.DropDownItems.Add(tsmi)
+            Next
+        Next
+
+    End Sub
 
     Private Sub FormFlowsheet_HelpRequested(sender As System.Object, hlpevent As System.Windows.Forms.HelpEventArgs) Handles MyBase.HelpRequested
 
@@ -932,10 +959,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim gObj As GraphicObject = Nothing
         gObj = myTextObject
         gObj.Name = "TEXT-" & Guid.NewGuid.ToString
-        gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.drawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
+        gObj.Tag = "TEXT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Text).Count + 1).ToString
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_Text
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
 
     End Sub
@@ -949,7 +976,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         gObj.Name = "MASTERTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_MasterTable
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
@@ -965,7 +992,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         gObj.Tag = "Spreadsheet Table"
         gObj.AutoSize = True
         gObj.ObjectType = ObjectType.GO_SpreadsheetTable
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
@@ -989,7 +1016,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
                     gObj.AutoSize = True
                 End If
-                Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+                Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
                 Me.FormSurface.FlowsheetDesignSurface.Invalidate()
             End If
         End With
@@ -1276,7 +1303,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         gObj.Name = "PROPERTYTABLE-" & Guid.NewGuid.ToString
         gObj.Tag = "PROPERTYTABLE-" & Guid.NewGuid.ToString
         gObj.AutoSize = True
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(gObj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
@@ -1284,10 +1311,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
           -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
         myobj.Name = "RECT-" & Guid.NewGuid.ToString
-        myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.drawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
+        myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
         myobj.Height = 200
         myobj.Width = 200
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(myobj)
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
@@ -1720,7 +1747,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     End If
                     .AttachedToConnectorIndex = gObjTo.InputConnectors.IndexOf(InConSlot)
                     If Not myCon Is Nothing Then
-                        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(myCon)
+                        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myCon)
                         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
                     End If
                 End With
@@ -2081,7 +2108,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As GraphicObject In FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each go As GraphicObject In FormSurface.FlowsheetDesignSurface.DrawingObjects
             If Not go.IsConnector And go.Selected Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 
@@ -2198,7 +2225,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
             End If
             Dim gobj As GraphicObject = (From go As GraphicObject In
-                                FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
+                                FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
             obj.GraphicObject = gobj
             obj.SetFlowsheet(Me)
             If Not gobj Is Nothing Then
@@ -2292,7 +2319,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                 Case UndoRedoActionType.FlowsheetObjectPropertyChanged
 
-                    Dim gobj = Me.FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(act.ObjID)
+                    Dim gobj = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID)
 
                     'Property not listed, set using Reflection
                     Dim method As FieldInfo = gobj.GetType().GetField(act.PropertyName)
@@ -2334,7 +2361,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                     If undo Then
                         Collections.FlowsheetObjectCollection(FormSurface.AddObjectToSurface(gobj1.ObjectType, gobj1.X, gobj1.Y, gobj1.Tag, gobj1.Name)).LoadData(act.OldValue)
-                        FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(gobj1.Name).LoadData(gobj1.SaveData)
+                        FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(gobj1.Name).LoadData(gobj1.SaveData)
                         If gobj1.ObjectType = ObjectType.MaterialStream Then
                             For Each phase As BaseClasses.Phase In DirectCast(Collections.FlowsheetObjectCollection(gobj1.Name), Streams.MaterialStream).Phases.Values
                                 For Each c As ConstantProperties In Options.SelectedComponents.Values
@@ -2348,8 +2375,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                 Case UndoRedoActionType.FlowsheetObjectConnected
 
-                    Dim gobj1 = Me.FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(act.ObjID)
-                    Dim gobj2 = Me.FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(act.ObjID2)
+                    Dim gobj1 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID)
+                    Dim gobj2 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID2)
 
                     If undo Then
                         DisconnectObject(gobj1, gobj2)
@@ -2359,8 +2386,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                 Case UndoRedoActionType.FlowsheetObjectDisconnected
 
-                    Dim gobj1 = Me.FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(act.ObjID)
-                    Dim gobj2 = Me.FormSurface.FlowsheetDesignSurface.drawingObjects.FindObjectWithName(act.ObjID2)
+                    Dim gobj1 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID)
+                    Dim gobj2 = Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.FindObjectWithName(act.ObjID2)
 
                     If undo Then
                         ConnectObject(gobj1, gobj2, act.OldValue, act.NewValue)
@@ -2898,7 +2925,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Function
 
     Public Sub AddGraphicObject(obj As IGraphicObject) Implements IFlowsheet.AddGraphicObject
-        Me.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(obj)
         Me.Collections.GraphicObjectCollection.Add(obj.Name, obj)
     End Sub
 
@@ -2910,33 +2937,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub
 
-#End Region
-
-    Private Sub UtilitiesTSMI_Click(sender As Object, e As EventArgs) Handles UtilitiesTSMI.DropDownOpening
-
-        UtilitiesTSMI.DropDownItems.Clear()
-
-        Application.DoEvents()
-
-        For Each obj In Me.SimulationObjects.Values
-            For Each attchu In obj.AttachedUtilities
-                Dim tsmi As New ToolStripMenuItem
-                With tsmi
-                    .Text = obj.GraphicObject.Tag & " / " & attchu.Name
-                    .Image = My.Resources.cog
-                End With
-                AddHandler tsmi.Click, Sub()
-                                           Dim f = DirectCast(attchu, DockContent)
-                                           If f.Visible Then
-                                               f.Select()
-                                           Else
-                                               obj.GetFlowsheet.DisplayForm(f)
-                                           End If
-                                       End Sub
-                UtilitiesTSMI.DropDownItems.Add(tsmi)
-            Next
-        Next
-
+    Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface
+        Me.UIThread(Sub() Me.FormSurface.FlowsheetDesignSurface.Invalidate())
     End Sub
+
+#End Region
 
 End Class

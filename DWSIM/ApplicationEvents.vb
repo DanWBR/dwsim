@@ -130,6 +130,11 @@ Namespace My
             CudafyModes.Target = My.Settings.CudafyTarget
 
             'set global settings
+            GlobalSettings.Settings.SolverMode = My.Settings.SolverMode
+            GlobalSettings.Settings.SolverTimeoutSeconds = My.Settings.SolverTimeoutSeconds
+            GlobalSettings.Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
+            GlobalSettings.Settings.TaskScheduler = My.Settings.TaskScheduler
+            GlobalSettings.Settings.MaxThreadMultiplier = My.Settings.MaxThreadMultiplier
             GlobalSettings.Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
             GlobalSettings.Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
             GlobalSettings.Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
@@ -138,7 +143,6 @@ Namespace My
             GlobalSettings.Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
             GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
             GlobalSettings.Settings.DefaultEditFormLocation = My.Settings.DefaultEditorLocation
-            GlobalSettings.Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
 
             GlobalSettings.Settings.CalculatorActivated = True
 

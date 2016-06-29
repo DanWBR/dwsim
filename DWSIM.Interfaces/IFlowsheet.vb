@@ -108,6 +108,8 @@ Public Interface IFlowsheetGUI
 
     Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String)
 
+    Sub UpdateInterface()
+
 End Interface
 
 Public Interface IFlowsheetCalculationQueue
