@@ -457,6 +457,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\information.png" />
+    <None Include="Resources\help.png" />
     <None Include="Resources\DWSIM4 icon.png" />
     <EmbeddedResource Include="Assets\biod_intparm_nrtl.dat" />
     <EmbeddedResource Include="Assets\csid.dat" />

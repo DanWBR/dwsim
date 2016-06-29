@@ -22,8 +22,12 @@ Partial Class SettingsForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.tbGPUCaps = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -40,8 +44,12 @@ Partial Class SettingsForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbConfigFilePath = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox8.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage4.SuspendLayout()
@@ -61,6 +69,9 @@ Partial Class SettingsForm
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.PictureBox3)
+        Me.TabPage1.Controls.Add(Me.PictureBox2)
+        Me.TabPage1.Controls.Add(Me.PictureBox1)
         Me.TabPage1.Controls.Add(Me.GroupBox8)
         Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Controls.Add(Me.chkEnableSIMD)
@@ -76,6 +87,41 @@ Partial Class SettingsForm
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Calculation Engine"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        Me.PictureBox3.Location = New System.Drawing.Point(247, 75)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox3.TabIndex = 11
+        Me.PictureBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " & _
+        "a GPGPU device.")
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        Me.PictureBox2.Location = New System.Drawing.Point(195, 45)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 10
+        Me.PictureBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox2, "Enables acceleration of math vector operations through CPU SIMD extensions.")
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        Me.PictureBox1.Location = New System.Drawing.Point(195, 17)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(16, 16)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 9
+        Me.PictureBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" & _
+        " cores to be used at the same time.")
         '
         'GroupBox8
         '
@@ -103,7 +149,7 @@ Partial Class SettingsForm
         '
         Me.Label4.AutoSize = True
         Me.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label4.Location = New System.Drawing.Point(246, 75)
+        Me.Label4.Location = New System.Drawing.Point(271, 75)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(82, 13)
         Me.Label4.TabIndex = 8
@@ -133,7 +179,7 @@ Partial Class SettingsForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label6.Location = New System.Drawing.Point(246, 17)
+        Me.Label6.Location = New System.Drawing.Point(217, 17)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(103, 13)
         Me.Label6.TabIndex = 1
@@ -152,7 +198,7 @@ Partial Class SettingsForm
         '
         Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbParallelism.FormattingEnabled = True
-        Me.cbParallelism.Location = New System.Drawing.Point(359, 14)
+        Me.cbParallelism.Location = New System.Drawing.Point(331, 14)
         Me.cbParallelism.Name = "cbParallelism"
         Me.cbParallelism.Size = New System.Drawing.Size(117, 21)
         Me.cbParallelism.TabIndex = 2
@@ -240,6 +286,11 @@ Partial Class SettingsForm
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Configuration File Path"
         '
+        'ToolTip1
+        '
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTip1.ToolTipTitle = "Information"
+        '
         'SettingsForm
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -252,6 +303,9 @@ Partial Class SettingsForm
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
@@ -278,4 +332,8 @@ End Sub
     Friend WithEvents tbConfigFilePath As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
 End Class

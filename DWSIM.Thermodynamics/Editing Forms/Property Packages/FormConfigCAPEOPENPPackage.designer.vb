@@ -24,7 +24,7 @@ Partial Class FormConfigCAPEOPENPPackage
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPENPPackage))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -42,15 +42,20 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.Column9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.btnConfigFlashAlg = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.ComboBoxFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.cbSIMD = New System.Windows.Forms.CheckBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.tbGPUCaps = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cbGPU = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chkEnableGPUProcessing = New System.Windows.Forms.CheckBox()
@@ -77,6 +82,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -85,8 +91,13 @@ Partial Class FormConfigCAPEOPENPPackage
         CType(Me.ogc1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox7.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox8.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem6.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.FaTabStripItem5.SuspendLayout()
@@ -102,7 +113,7 @@ Partial Class FormConfigCAPEOPENPPackage
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem7, Me.FaTabStripItem6})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem7
         '
         'FaTabStripItem1
         '
@@ -110,7 +121,6 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GroupBox2
@@ -181,8 +191,8 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.Column7, Me.Column9})
@@ -228,10 +238,13 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        Me.FaTabStripItem7.Selected = True
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.PictureBox5)
+        Me.GroupBox5.Controls.Add(Me.PictureBox4)
         Me.GroupBox5.Controls.Add(Me.btnConfigFlashAlg)
         Me.GroupBox5.Controls.Add(Me.Label4)
         Me.GroupBox5.Controls.Add(Me.ComboBoxFlashAlg)
@@ -240,6 +253,22 @@ Partial Class FormConfigCAPEOPENPPackage
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        '
+        'PictureBox5
+        '
+        Me.PictureBox5.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        resources.ApplyResources(Me.PictureBox5, "PictureBox5")
+        Me.PictureBox5.Name = "PictureBox5"
+        Me.PictureBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox5, resources.GetString("PictureBox5.ToolTip"))
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        resources.ApplyResources(Me.PictureBox4, "PictureBox4")
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox4, resources.GetString("PictureBox4.ToolTip"))
         '
         'btnConfigFlashAlg
         '
@@ -276,8 +305,11 @@ Partial Class FormConfigCAPEOPENPPackage
         'GroupBox7
         '
         resources.ApplyResources(Me.GroupBox7, "GroupBox7")
+        Me.GroupBox7.Controls.Add(Me.PictureBox3)
         Me.GroupBox7.Controls.Add(Me.cbSIMD)
+        Me.GroupBox7.Controls.Add(Me.PictureBox2)
         Me.GroupBox7.Controls.Add(Me.GroupBox8)
+        Me.GroupBox7.Controls.Add(Me.PictureBox1)
         Me.GroupBox7.Controls.Add(Me.cbGPU)
         Me.GroupBox7.Controls.Add(Me.Label9)
         Me.GroupBox7.Controls.Add(Me.chkEnableGPUProcessing)
@@ -287,10 +319,26 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
         '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        resources.ApplyResources(Me.PictureBox3, "PictureBox3")
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox3, resources.GetString("PictureBox3.ToolTip"))
+        '
         'cbSIMD
         '
         resources.ApplyResources(Me.cbSIMD, "cbSIMD")
         Me.cbSIMD.Name = "cbSIMD"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        resources.ApplyResources(Me.PictureBox2, "PictureBox2")
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
         '
         'GroupBox8
         '
@@ -304,6 +352,14 @@ Partial Class FormConfigCAPEOPENPPackage
         resources.ApplyResources(Me.tbGPUCaps, "tbGPUCaps")
         Me.tbGPUCaps.Name = "tbGPUCaps"
         Me.tbGPUCaps.ReadOnly = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
         '
         'cbGPU
         '
@@ -503,6 +559,11 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
+        'ToolTip1
+        '
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
+        Me.ToolTip1.ToolTipTitle = "Information"
+        '
         'FormConfigCAPEOPENPPackage
         '
         resources.ApplyResources(Me, "$this")
@@ -521,10 +582,15 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem7.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem6.ResumeLayout(False)
         Me.FaTabStripItem6.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -590,4 +656,10 @@ Partial Class FormConfigCAPEOPENPPackage
     Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents PictureBox5 As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 End Class
