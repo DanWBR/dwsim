@@ -181,7 +181,7 @@ Public Class MaterialStreamEditor
                 Else
                     TabPhaseComps.TabPages.Remove(tabCompVapor)
                 End If
-                If .Phases(1).Properties.molarfraction.HasValue Then
+                If .Phases(3).Properties.molarfraction.GetValueOrDefault > 0.0# AndAlso .Phases(4).Properties.molarfraction.GetValueOrDefault > 0.0# Then
                     PopulateCompGrid(gridCompLiqMix, .Phases(1).Compounds.Values.ToList, cbCalculatedAmountsBasis.SelectedItem.ToString)
                     TabPhaseComps.TabPages.Add(tabCompLiqMix)
                 Else
