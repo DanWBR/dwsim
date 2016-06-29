@@ -52,7 +52,7 @@ Public Class FormSimulSettings
             If Me.DockState = WeifenLuo.WinFormsUI.Docking.DockState.Float Then
                 Dim floatWin = Me.DockHandler.FloatPane.FloatWindow
                 If Not floatWin Is Nothing Then
-                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 820, 490)
+                    floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 820, 550)
                 End If
             End If
         End If
@@ -1547,4 +1547,15 @@ Public Class FormSimulSettings
         FrmChild.DisplayForm(f)
     End Sub
 
+    Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
+        For Each item As ListViewItem In PropertyListView.Items
+            item.Checked = True
+        Next
+    End Sub
+
+    Private Sub btnClearSelection_Click(sender As Object, e As EventArgs) Handles btnClearSelection.Click
+        For Each item As ListViewItem In PropertyListView.Items
+            item.Checked = False
+        Next
+    End Sub
 End Class
