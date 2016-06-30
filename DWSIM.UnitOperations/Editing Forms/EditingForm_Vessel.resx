@@ -127,9 +127,6 @@
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectInlet5.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="&gt;&gt;chkOverrideP.Name" xml:space="preserve">
     <value>chkOverrideP</value>
   </data>
@@ -882,6 +879,9 @@
   <data name="&gt;&gt;cbInlet6.ZOrder" xml:space="preserve">
     <value>32</value>
   </data>
+  <data name="cbOutlet1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 192</value>
+  </data>
   <data name="&gt;&gt;cbInlet4.Name" xml:space="preserve">
     <value>cbInlet4</value>
   </data>
@@ -954,8 +954,8 @@
   <data name="&gt;&gt;cbPropPack.Name" xml:space="preserve">
     <value>cbPropPack</value>
   </data>
-  <data name="cbOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 192</value>
+  <data name="&gt;&gt;btnCreateAndConnectInlet5.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;cbOutlet1.ZOrder" xml:space="preserve">
     <value>31</value>

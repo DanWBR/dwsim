@@ -150,6 +150,11 @@ Public Class EditingForm_SpreadsheetUO
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then SimObject.GraphicObject.Tag = lblTag.Text
         Me.Text = SimObject.GetDisplayName() & ": " & SimObject.GraphicObject.Tag
+        If Loaded Then SimObject.FlowSheet.UpdateOpenEditForms()
+        DirectCast(SimObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+        lblTag.Focus()
+        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
+        lblTag.SelectionLength = 0
     End Sub
 
     Private Sub btnDisconnect1_Click(sender As Object, e As EventArgs)

@@ -4,6 +4,7 @@
 
     Public gobj As DrawingTools.GraphicObjects.GraphicObject
     Public fs As DrawingTools.GraphicsSurface
+    Public flowsheet As Interfaces.IFlowsheet
 
     Private Sub FormEditGraphicObject_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
 
@@ -369,6 +370,10 @@
         For Each obj In fs.DrawingObjects
             obj.Draw(Graphics.FromHwnd(fs.Handle))
         Next
+        If e.ChangedItem.Label.Contains("Tag") Then
+            If Not gobj Is Nothing Then Me.Text = gobj.Tag + " - " + Me.Text
+            flowsheet.UpdateOpenEditForms()
+        End If
     End Sub
 
 End Class

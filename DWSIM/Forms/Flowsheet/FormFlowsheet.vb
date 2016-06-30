@@ -2832,10 +2832,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Sub ConnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject, fromidx As Integer, toidx As Integer) Implements IFlowsheet.ConnectObjects
         ConnectObject(gobjfrom, gobjto, fromidx, toidx)
+        UpdateOpenEditForms()
     End Sub
 
     Public Sub DisconnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject) Implements IFlowsheet.DisconnectObjects
         DisconnectObject(gobjfrom, gobjto, False)
+        UpdateOpenEditForms()
     End Sub
 
     Public Function GetFlowsheetBag() As IFlowsheetBag Implements IFlowsheet.GetFlowsheetBag

@@ -330,5 +330,10 @@ Public Class EditingForm_Mixer
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then MixerObject.GraphicObject.Tag = lblTag.Text
         Me.Text = MixerObject.GetDisplayName() & ": " & MixerObject.GraphicObject.Tag
+        If Loaded Then MixerObject.FlowSheet.UpdateOpenEditForms()
+        DirectCast(MixerObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+        lblTag.Focus()
+        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
+        lblTag.SelectionLength = 0
     End Sub
 End Class

@@ -101,7 +101,7 @@ Namespace UnitOperations
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CompoundSeparator
 
         Protected m_ei As Double
-        Protected _compsepspeccollection As Dictionary(Of String, ComponentSeparationSpec)
+        Protected _compsepspeccollection As New Dictionary(Of String, ComponentSeparationSpec)
         Protected _streamindex As Byte = 0
 
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
@@ -398,15 +398,32 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+       
+            If prop.StartsWith("SepSpecValue_") Then
 
-            Select Case propidx
+                Dim compound As String = prop.Split("_")(1)
 
-                Case 0
+                If ComponentSepSpecs.ContainsKey(compound) Then
+                    Return ComponentSepSpecs(compound).SpecValue
+                End If
 
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+            ElseIf prop.Equals("SpecifiedStreamIndex") Then
 
-            End Select
+                Return SpecifiedStreamIndex
+
+            Else
+
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+
+                    Case 0
+
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+
+                End Select
+
+            End If
 
             Return value
 
@@ -427,6 +444,10 @@ Namespace UnitOperations
                         proplist.Add("PROP_CP_" + CStr(i))
                     Next
             End Select
+            proplist.Add("SpecifiedStreamIndex")
+            For Each item In ComponentSepSpecs.Values
+                proplist.Add("SepSpecValue_" & item.ComponentID)
+            Next
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
@@ -434,11 +455,21 @@ Namespace UnitOperations
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
+            If prop.StartsWith("SepSpecValue_") Then
 
-            End Select
+                Dim compound As String = prop.Split("_")(1)
+
+                If ComponentSepSpecs.ContainsKey(compound) Then
+                    ComponentSepSpecs(compound).SpecValue = Convert.ToDouble(propval)
+                End If
+
+            ElseIf prop.Equals("SpecifiedStreamIndex") Then
+
+                SpecifiedStreamIndex = propval
+
+            End If
+
 
             Return 1
 
@@ -448,17 +479,32 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
+            If prop.StartsWith("SepSpecValue_") Then
 
-                Case 0
+                Dim compound As String = prop.Split("_")(1)
 
-                    value = su.heatflow
+                If ComponentSepSpecs.ContainsKey(compound) Then
+                    Return ComponentSepSpecs(compound).SpecUnit
+                Else
+                    Return ""
+                End If
 
-            End Select
+            ElseIf prop.Equals("SpecifiedStreamIndex") Then
+
+            Else
+
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+                    Case 0
+                        value = su.heatflow
+                End Select
+
+            End If
 
             Return value
+
         End Function
 
         Public Overrides Sub DisplayEditForm()

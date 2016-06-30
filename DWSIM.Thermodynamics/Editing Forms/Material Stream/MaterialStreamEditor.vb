@@ -365,6 +365,12 @@ Public Class MaterialStreamEditor
 
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then MatStream.GraphicObject.Tag = lblTag.Text
+        If Loaded Then MatStream.FlowSheet.UpdateOpenEditForms()
+        Me.Text = MatStream.GetDisplayName() & ": " & MatStream.GraphicObject.Tag
+        DirectCast(MatStream.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+        lblTag.Focus()
+        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
+        lblTag.SelectionLength = 0
     End Sub
 
     Private Sub cbSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSpec.SelectedIndexChanged

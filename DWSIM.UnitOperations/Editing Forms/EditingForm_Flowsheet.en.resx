@@ -429,6 +429,12 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 147</value>
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 153</value>
+  </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Output</value>
   </data>

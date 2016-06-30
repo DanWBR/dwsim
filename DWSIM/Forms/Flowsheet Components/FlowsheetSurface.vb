@@ -3282,12 +3282,12 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
-        Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject, .fs = FlowsheetDesignSurface}
+        Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject, .fs = FlowsheetDesignSurface, .flowsheet = Me.Flowsheet}
         f.Show(Flowsheet.dckPanel)
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-        Dim f As New FormEditGraphicObject() With {.fs = Me.FlowsheetDesignSurface}
+        Dim f As New FormEditGraphicObject() With {.fs = Me.FlowsheetDesignSurface, .flowsheet = Me.Flowsheet}
         f.Show(Flowsheet.dckPanel)
     End Sub
 

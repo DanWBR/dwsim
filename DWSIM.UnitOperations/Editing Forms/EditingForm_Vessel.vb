@@ -428,6 +428,11 @@ Public Class EditingForm_Vessel
     Private Sub lblTag_TextChanged(sender As Object, e As EventArgs) Handles lblTag.TextChanged
         If Loaded Then VesselObject.GraphicObject.Tag = lblTag.Text
         Me.Text = VesselObject.GetDisplayName() & ": " & VesselObject.GraphicObject.Tag
+        If Loaded Then VesselObject.FlowSheet.UpdateOpenEditForms()
+        DirectCast(VesselObject.FlowSheet, Interfaces.IFlowsheetGUI).UpdateInterface()
+        lblTag.Focus()
+        lblTag.SelectionStart = Math.Max(0, lblTag.Text.Length)
+        lblTag.SelectionLength = 0
     End Sub
 
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click,
