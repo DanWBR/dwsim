@@ -119,19 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>401, 179</value>
-  </data>
-  <data name="chkDoNotShowAgain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 183</value>
+    <value>537, 259</value>
   </data>
   <data name="chkDoNotShowAgain.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 17</value>
   </data>
   <data name="chkDoNotShowAgain.Text" xml:space="preserve">
     <value>Do not show this warning again</value>
-  </data>
-  <data name="LabelVersion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 21</value>
   </data>
   <data name="LabelVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 13</value>
@@ -140,10 +134,10 @@
     <value>You are opening a simulation saved with DWSIM version </value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 53</value>
+    <value>21, 13</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>464, 121</value>
+    <value>600, 103</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>DWSIM 4 modifies the structure of the XML file to save information that is incompatible with DWSIM 3. As a result, if you perform changes to the simulation and replace the existing file, it will not be readable by DWSIM version 3.x anymore.
@@ -152,8 +146,17 @@ If you do not update the simulation file, it still will be usable by both DWSIM 
 
 DWSIM only updates the simulation file during saving. No changes are made when opening the file or during simulation operations.</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>486, 210</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 146</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>IronPython scripts must be updated to reflect the API changes from DWSIM 3 to DWSIM 4. Please refer to the help file or DWSIM's wiki for more information.</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 120</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>IronPython Scripts</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM Version Compatibility Warning</value>
