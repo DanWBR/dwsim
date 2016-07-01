@@ -606,7 +606,7 @@ Public Class EditingForm_HeatExchanger
 
     Private Sub cbFlowDir_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbFlowDir.SelectedIndexChanged
         SimObject.FlowDir = cbFlowDir.SelectedIndex
-        RequestCalc()
+        If Loaded Then RequestCalc()
     End Sub
 
     Private Sub btnViewProfile_Click(sender As Object, e As EventArgs) Handles btnViewProfile.Click

@@ -2943,6 +2943,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.UIThread(Sub() Me.FormSurface.FlowsheetDesignSurface.Invalidate())
     End Sub
 
+    Public ReadOnly Property UtilityPlugins As Dictionary(Of String, IUtilityPlugin) Implements IFlowsheet.UtilityPlugins
+        Get
+            Return My.Application.UtilityPlugins
+        End Get
+    End Property
+
 #End Region
+
 
 End Class

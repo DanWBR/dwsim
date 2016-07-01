@@ -26,7 +26,7 @@ Namespace My
         Public Property MainThreadId As Integer
         Public Property CalculatorBusy As Boolean = False
 
-        Public UtilityPlugins As Dictionary(Of String, Interfaces.IUtilityPlugin)
+        Public UtilityPlugins As New Dictionary(Of String, Interfaces.IUtilityPlugin)
 
         Public Property PushUndoRedoAction As Boolean = True
 

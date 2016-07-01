@@ -190,28 +190,28 @@ Namespace UnitOperations
             engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
             scope = engine.CreateScope()
             scope.SetVariable("Flowsheet", FlowSheet)
-            'scope.SetVariable("Plugins", My.Application.UtilityPlugins)
+            scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
             scope.SetVariable("Me", Me)
-            'scope.SetVariable("AbortScript", My.Application.CalculatorStopRequested)
+
             For Each variable In InputVariables
                 scope.SetVariable(variable.Key, variable.Value)
             Next
-            scope.SetVariable("ims1", ims1)
-            scope.SetVariable("ims2", ims2)
-            scope.SetVariable("ims3", ims3)
-            scope.SetVariable("ims4", ims4)
-            scope.SetVariable("ims5", ims5)
-            scope.SetVariable("ims6", ims6)
-            scope.SetVariable("oms1", oms1)
-            scope.SetVariable("oms2", oms2)
-            scope.SetVariable("oms3", oms3)
-            scope.SetVariable("oms4", oms4)
-            scope.SetVariable("oms5", oms5)
-            scope.SetVariable("oms6", oms6)
-            scope.SetVariable("ies1", ies1)
-            scope.SetVariable("oes1", oes1)
-            'Dim Solver As New DWSIM.Flowshee
-            'scope.SetVariable("Solver", Solver)
+
+            If Not ims1 Is Nothing Then scope.SetVariable("ims1", ims1)
+            If Not ims2 Is Nothing Then scope.SetVariable("ims2", ims2)
+            If Not ims3 Is Nothing Then scope.SetVariable("ims3", ims3)
+            If Not ims4 Is Nothing Then scope.SetVariable("ims4", ims4)
+            If Not ims5 Is Nothing Then scope.SetVariable("ims5", ims5)
+            If Not ims6 Is Nothing Then scope.SetVariable("ims6", ims6)
+            If Not oms1 Is Nothing Then scope.SetVariable("oms1", oms1)
+            If Not oms2 Is Nothing Then scope.SetVariable("oms2", oms2)
+            If Not oms3 Is Nothing Then scope.SetVariable("oms3", oms3)
+            If Not oms4 Is Nothing Then scope.SetVariable("oms4", oms4)
+            If Not oms5 Is Nothing Then scope.SetVariable("oms5", oms5)
+            If Not oms6 Is Nothing Then scope.SetVariable("oms6", oms6)
+            If Not ies1 Is Nothing Then scope.SetVariable("ies1", ies1)
+            If Not oes1 Is Nothing Then scope.SetVariable("oes1", oes1)
+
             Dim txtcode As String = ""
             If Not Includes Is Nothing Then
                 For Each fname As String In Me.Includes

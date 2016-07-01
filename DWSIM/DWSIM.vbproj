@@ -203,6 +203,9 @@
       <HintPath>References\IronPython.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>References\IronPython.Modules.dll</HintPath>
+    </Reference>
     <Reference Include="Jolt">
       <HintPath>References\Jolt.dll</HintPath>
     </Reference>
@@ -215,6 +218,10 @@
     </Reference>
     <Reference Include="Microsoft.Scripting">
       <HintPath>References\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Microsoft.Scripting.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="NeoDataType.MyNeoReport, Version=1.4.0.0, Culture=neutral, PublicKeyToken=cc45d3430ba4f561, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
