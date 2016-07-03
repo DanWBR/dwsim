@@ -437,6 +437,17 @@ Namespace GraphicObjects
 
         <Xml.Serialization.XmlIgnore> Property Owner As ISimulationObject Implements IGraphicObject.Owner
 
+        <Xml.Serialization.XmlIgnore> <NonSerialized> Private _editorform As System.Windows.Forms.Form
+
+        Public Property Editor As Object Implements IGraphicObject.Editor
+            Get
+                Return _editorform
+            End Get
+            Set(value As Object)
+                _editorform = value
+            End Set
+        End Property
+
     End Class
 
 End Namespace

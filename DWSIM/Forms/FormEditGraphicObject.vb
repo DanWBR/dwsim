@@ -6,6 +6,8 @@
     Public fs As DrawingTools.GraphicsSurface
     Public flowsheet As Interfaces.IFlowsheet
 
+    Private _origtext As String = ""
+
     Private Sub FormEditGraphicObject_DockStateChanged(sender As Object, e As EventArgs) Handles Me.DockStateChanged
 
         If Not Me.FloatPane Is Nothing Then
@@ -19,7 +21,9 @@
 
     Private Sub FormEditGraphicObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If Not gobj Is Nothing Then Me.Text = gobj.Tag + " - " + Me.Text
+        _origtext = Me.Text
+
+        If Not gobj Is Nothing Then Me.Text = gobj.Tag + " - " + _origtext
 
         Me.TabText = Me.Text
 
@@ -370,9 +374,13 @@
         For Each obj In fs.DrawingObjects
             obj.Draw(Graphics.FromHwnd(fs.Handle))
         Next
-        If e.ChangedItem.Label.Contains("Tag") Then
-            If Not gobj Is Nothing Then Me.Text = gobj.Tag + " - " + Me.Text
+        If e.ChangedItem.Label.Contains(DWSIM.App.GetLocalString("Nome")) Then
+            If Not gobj Is Nothing Then
+                Me.Text = gobj.Tag + " - " + _origtext
+                Me.TabText = Me.Text
+            End If
             flowsheet.UpdateOpenEditForms()
+            Me.PGEx2.Focus()
         End If
     End Sub
 

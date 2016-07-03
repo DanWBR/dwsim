@@ -3282,13 +3282,27 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click
-        Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject, .fs = FlowsheetDesignSurface, .flowsheet = Me.Flowsheet}
-        f.Show(Flowsheet.dckPanel)
+
+        If Me.FlowsheetDesignSurface.SelectedObject.Editor Is Nothing OrElse DirectCast(Me.FlowsheetDesignSurface.SelectedObject.Editor, Form).IsDisposed Then
+            Dim f As New FormEditGraphicObject() With {.gobj = Me.FlowsheetDesignSurface.SelectedObject, .fs = FlowsheetDesignSurface, .flowsheet = Me.Flowsheet}
+            Me.FlowsheetDesignSurface.SelectedObject.Editor = f
+            f.Show(Flowsheet.dckPanel)
+        Else
+            DirectCast(Me.FlowsheetDesignSurface.SelectedObject.Editor, Form).Activate()
+        End If
+
     End Sub
 
     Private Sub ToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
-        Dim f As New FormEditGraphicObject() With {.fs = Me.FlowsheetDesignSurface, .flowsheet = Me.Flowsheet}
-        f.Show(Flowsheet.dckPanel)
+
+        If Me.FlowsheetDesignSurface.Editor Is Nothing OrElse DirectCast(Me.FlowsheetDesignSurface.Editor, Form).IsDisposed Then
+            Dim f As New FormEditGraphicObject() With {.fs = Me.FlowsheetDesignSurface, .flowsheet = Me.Flowsheet}
+            Me.FlowsheetDesignSurface.Editor = f
+            f.Show(Flowsheet.dckPanel)
+        Else
+            Me.FlowsheetDesignSurface.Editor.Activate()
+        End If
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

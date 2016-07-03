@@ -20,6 +20,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 <System.Serializable()> Public Class GraphicsSurface
+
     Inherits System.Windows.Forms.UserControl
 
 #Region " Windows Form Designer generated code "
@@ -155,7 +156,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             Dim myBinarySerializer As New Formatters.Binary.BinaryFormatter()
             myBinarySerializer.Serialize( _
                 New IO.FileStream(settingsPath, IO.FileMode.Create), _
-                Me.drawingObjects)
+                Me.DrawingObjects)
             RaiseEvent StatusUpdate(Me, _
                 New StatusUpdateEventArgs(StatusUpdateType.FileSaved, _
                 m_SelectedObject, _
@@ -167,6 +168,17 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
 #End Region
+
+    <Xml.Serialization.XmlIgnore> <NonSerialized> Private _editorform As System.Windows.Forms.Form
+
+    Public Property Editor As Form
+        Get
+            Return _editorform
+        End Get
+        Set(value As Form)
+            _editorform = value
+        End Set
+    End Property
 
     Public Property ResizingMode As Boolean = False
     Public Property ResizingMode_KeepAR As Boolean = True
@@ -501,14 +513,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         For Each gr As GraphicObject In Me.SelectedObjects.Values
             gr.Selected = True
-            Me.drawingObjects.DrawSelectedObject(g, gr, Me.Zoom)
+            Me.DrawingObjects.DrawSelectedObject(g, gr, Me.Zoom)
         Next
 
-        For Each gr As GraphicObject In Me.drawingObjects
+        For Each gr As GraphicObject In Me.DrawingObjects
             If Not Me.SelectedObjects.ContainsKey(gr.Name) Then gr.Selected = False
         Next
 
-        With Me.drawingObjects
+        With Me.DrawingObjects
             .HorizontalResolution = g.DpiX
             .VerticalResolution = g.DpiY
             .DrawObjects(g, Me.Zoom, dragging)
@@ -528,7 +540,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         ' End Try
 
         If ResizingMode Then
-            For Each obj In drawingObjects
+            For Each obj In DrawingObjects
                 If obj.ObjectType <> ObjectType.Nenhum And obj.ObjectType <> ObjectType.GO_FloatingTable And
                     obj.ObjectType <> ObjectType.GO_MasterTable And obj.ObjectType <> ObjectType.GO_SpreadsheetTable And
                     obj.ObjectType <> ObjectType.GO_Table Then
@@ -735,7 +747,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         dragStart = New Point(e.X, e.Y)
 
-        Me.SelectedObject = Me.drawingObjects.FindObjectAtPoint(mousePT)
+        Me.SelectedObject = Me.DrawingObjects.FindObjectAtPoint(mousePT)
 
         If Not SelectedObject Is Nothing Then Size0 = SelectedObject.GetSize
 
@@ -800,7 +812,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim maxx As Integer = 0
         Dim maxy As Integer = 0
 
-        For Each gobj As GraphicObject In Me.drawingObjects
+        For Each gobj As GraphicObject In Me.DrawingObjects
             If gobj.ObjectType <> ObjectType.Nenhum Then
                 If gobj.X <= minx Then minx = gobj.X
                 If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 60
@@ -850,7 +862,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Dim maxy As Integer = 0
         Dim middlex, middley As Integer
 
-        For Each gobj As GraphicObject In Me.drawingObjects
+        For Each gobj As GraphicObject In Me.DrawingObjects
             If gobj.ObjectType <> ObjectType.Nenhum Then
                 If gobj.X <= minx Then minx = gobj.X
                 If gobj.X + gobj.Width >= maxx Then maxx = gobj.X + gobj.Width + 60
@@ -905,7 +917,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 If Not Me.QuickConnect Or Not My.Computer.Keyboard.CtrlKeyDown Then
                     Dim dragPoint As Point = gscTogoc(e.X, e.Y)
 
-                    Dim obj As GraphicObject = Me.drawingObjects.FindObjectAtPoint(dragPoint)
+                    Dim obj As GraphicObject = Me.DrawingObjects.FindObjectAtPoint(dragPoint)
 
                     If Not obj Is Nothing Then
                         If obj.ObjectType <> ObjectType.GO_FloatingTable And obj.ObjectType <> ObjectType.GO_Text _
@@ -1060,9 +1072,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
             End If
 
-                Me.Invalidate()
+            Me.Invalidate()
 
-            End If
+        End If
 
     End Sub
 
@@ -1094,13 +1106,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             If selectionDragging Then
                 Dim zoomedSelection As Rectangle = DeZoomRectangle(selectionRect)
                 Dim graphicObj As GraphicObject
-                For Each graphicObj In Me.drawingObjects
+                For Each graphicObj In Me.DrawingObjects
                     If graphicObj.HitTest(zoomedSelection) Then
                         Me.SelectedObject = graphicObj
                         Exit For
                     End If
                 Next
-                For Each graphicObj In Me.drawingObjects
+                For Each graphicObj In Me.DrawingObjects
                     If graphicObj.HitTest(zoomedSelection) Then
                         If Not Me.SelectedObjects.ContainsKey(graphicObj.Name) Then Me.SelectedObjects.Add(graphicObj.Name, graphicObj)
                     End If
@@ -1219,8 +1231,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public Sub DeleteSelectedObject(gobj As GraphicObject)
         Dim objectToDelete As GraphicObject = gobj
         If Not objectToDelete Is Nothing Then
-            If Me.drawingObjects.Contains(objectToDelete) Then
-                Me.drawingObjects.Remove(objectToDelete)
+            If Me.DrawingObjects.Contains(objectToDelete) Then
+                Me.DrawingObjects.Remove(objectToDelete)
                 Me.SelectedObject = Nothing
                 Me.Invalidate()
             End If
@@ -1228,7 +1240,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Sub DeleteAllObjects()
-        Me.drawingObjects.Clear()
+        Me.DrawingObjects.Clear()
         Me.Invalidate()
     End Sub
 

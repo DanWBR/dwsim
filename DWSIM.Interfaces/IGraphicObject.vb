@@ -4,6 +4,8 @@ Public Interface IGraphicObject
 
     Sub Draw(surface As Object)
 
+    Property Editor As Object
+
     Function Clone() As IGraphicObject
 
     Property ShapeOverride() As ShapeIcon

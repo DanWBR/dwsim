@@ -1371,6 +1371,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 End If
                 If msgresult = MsgBoxResult.Yes Then
 
+                    'close opened editor
+
+                    If SelectedObj.Editor IsNot Nothing Then
+                        If Not DirectCast(SelectedObj.Editor, Form).IsDisposed Then DirectCast(SelectedObj.Editor, Form).Close()
+                        SelectedObj.Editor = Nothing
+                    End If
+
                     If SelectedObj.IsEnergyStream Then
 
                         Dim InCon, OutCon As ConnectionPoint
