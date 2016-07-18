@@ -259,7 +259,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Me.TPErrorFunc(R)
 
-                If V < 0.0000001 Then
+                If V < 0.0000001 And ecount > 10 Then
                     R = 0
                     L = 1.0#
                     V = 0.0#
@@ -277,7 +277,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vy(i) = Exp(ui(i)) * pi(i) / sumeuipi
                     Next
                     Exit Do
-                ElseIf V > 0.999999 Then
+                ElseIf V > 0.999999 And ecount > 10 Then
                     R = 1
                     L = 0.0#
                     V = 1.0#

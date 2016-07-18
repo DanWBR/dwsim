@@ -9199,6 +9199,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ocorreu um erro ao extrair as bibliotecas nativas para o diretório onde o DWSIM está instalado. Por favor verifique se você tem acesso de escrita ou execute o DWSIM como administrador (Windows 8/10)..
+        '''</summary>
+        Friend Shared ReadOnly Property NativeLibrariesExtractionError() As String
+            Get
+                Return ResourceManager.GetString("NativeLibrariesExtractionError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to n-Butano (nC4).
         '''</summary>
         Friend Shared ReadOnly Property nButanonC4() As String

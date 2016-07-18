@@ -701,6 +701,25 @@ Public Class FormMain
         'check for updates (automatic updater)
         If My.Settings.AutomaticUpdates Then Task.Factory.StartNew(Sub() LaunchUpdateProcess())
 
+        'display initialization errors
+        If My.Application.InitializationExceptions.Count > 0 Then
+
+            ErrorBox_Panel.Visible = True
+            ErrorBox_Label1.Text = DWSIM.App.GetLocalString("NativeLibrariesExtractionError")
+
+            AddHandler ErrorBox_Button1.Click, Sub()
+
+                                                   Dim aex As New AggregateException(My.Application.InitializationExceptions)
+                                                   Dim f As New FormUnhandledException
+                                                   f.TextBox1.Text = aex.Flatten.Message
+                                                   f.ex = aex
+                                                   f.ShowDialog()
+                                                   ErrorBox_Panel.Visible = False
+
+                                               End Sub
+
+        End If
+
     End Sub
 
     Sub OpenWelcomeScreen()

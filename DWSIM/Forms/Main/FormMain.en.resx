@@ -154,6 +154,9 @@
   <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
+  <data name="MenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1092, 24</value>
+  </data>
   <data name="NewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 22</value>
   </data>
@@ -397,6 +400,9 @@
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About DWSIM...</value>
   </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1092, 25</value>
+  </data>
   <data name="NewToolStripButton.Text" xml:space="preserve">
     <value>New Steady-State Simulation</value>
   </data>
@@ -447,6 +453,18 @@
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Save active simulation</value>
+  </data>
+  <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1092, 22</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1092, 378</value>
+  </data>
+  <data name="ErrorBox_Panel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>727, 30</value>
+  </data>
+  <data name="UpdateBox_Panel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>727, 30</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1227,14 +1245,29 @@
   <data name="SaveUnifacIPRegrDlg.Title" xml:space="preserve">
     <value>Save Regression</value>
   </data>
+  <data name="UpdateBox_ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 8</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UpdateBox_Button2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="UpdateBox_Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>647, 3</value>
+  </data>
   <data name="UpdateBox_Button2.Text" xml:space="preserve">
     <value>Restart</value>
   </data>
+  <data name="UpdateBox_Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>566, 3</value>
+  </data>
   <data name="UpdateBox_Button1.Text" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ErrorBox_Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>566, 3</value>
+  </data>
+  <data name="ErrorBox_Button1.Text" xml:space="preserve">
+    <value>View Details</value>
   </data>
 </root>

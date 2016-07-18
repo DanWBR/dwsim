@@ -151,9 +151,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz() As Double, ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi() As Double = Nothing) As Object
 
-            Calculator.CheckParallelPInvoke()
-
             Me.Solver = [Enum].Parse(Me.Solver.GetType, Me.FlashSettings(FlashSetting.GM_OptimizationMethod))
+
+            If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
 
             Dim i, j, k As Integer
 

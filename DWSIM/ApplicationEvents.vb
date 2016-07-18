@@ -15,10 +15,16 @@ Namespace My
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
 
+        Public Property InitializationExceptions As New List(Of Exception)
+
         Public _ResourceManager As System.Resources.ResourceManager
+
         Public _HelpManager As System.Resources.ResourceManager
+
         Public _PropertyNameManager As System.Resources.ResourceManager
+
         Public _CultureInfo As System.Globalization.CultureInfo
+
         Public Property CalculatorStopRequested As Boolean = False
         Public Property MasterCalculatorStopRequested As Boolean = False
         Public Property CommandLineMode As Boolean = False
@@ -148,7 +154,7 @@ Namespace My
 
             If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
-            Thermodynamics.NativeLibraries.Files.InitLibraries()
+            InitializationExceptions = Thermodynamics.NativeLibraries.Files.InitLibraries()
 
         End Sub
 
