@@ -797,6 +797,35 @@ Namespace PropertyPackages.Auxiliary
                 End Using
             End Using
 
+            'load user database interactions
+            If Not GlobalSettings.Settings.UserInteractionsDatabases Is Nothing Then
+                For Each IPDBPath As String In GlobalSettings.Settings.UserInteractionsDatabases
+                    Dim Interactions As BaseClasses.InteractionParameter()
+                    Dim IP As BaseClasses.InteractionParameter
+                    Try
+                        Interactions = Databases.UserIPDB.ReadInteractions(IPDBPath, "UNIFAC")
+                        For Each IP In Interactions
+                            If Not Me.InteracParam.ContainsKey(IP.Comp1) Then
+                                Me.InteracParam.Add(IP.Comp1, New System.Collections.Generic.Dictionary(Of Integer, Double))
+                            End If
+                            If Not Me.InteracParam.ContainsKey(IP.Comp2) Then
+                                Me.InteracParam.Add(IP.Comp2, New System.Collections.Generic.Dictionary(Of Integer, Double))
+                            End If
+                            If Not Me.InteracParam(IP.Comp1).ContainsKey(IP.Comp2) Then
+                                Me.InteracParam(IP.Comp1).Add(IP.Comp2, 0)
+                            End If
+                            If Not Me.InteracParam(IP.Comp2).ContainsKey(IP.Comp1) Then
+                                Me.InteracParam(IP.Comp2).Add(IP.Comp1, 0)
+                            End If
+                            Me.InteracParam(IP.Comp1)(IP.Comp2) = IP.Parameters("aij")
+                            Me.InteracParam(IP.Comp2)(IP.Comp1) = IP.Parameters("aji")
+                        Next
+                    Catch ex As Exception
+                        Console.WriteLine(ex.ToString)
+                    End Try
+                Next
+            End If
+
         End Sub
 
         Public ReadOnly Property Groups() As System.Collections.Generic.Dictionary(Of Integer, UnifacGroup)

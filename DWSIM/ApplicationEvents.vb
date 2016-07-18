@@ -152,6 +152,11 @@ Namespace My
 
             GlobalSettings.Settings.CalculatorActivated = True
 
+            GlobalSettings.Settings.UserInteractionsDatabases.Clear()
+            For Each item In My.Settings.UserInteractionsDatabases
+                GlobalSettings.Settings.UserInteractionsDatabases.Add(item)
+            Next
+
             If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
 
             InitializationExceptions = Thermodynamics.NativeLibraries.Files.InitLibraries()

@@ -372,13 +372,13 @@
 </value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
-    <value>Add User Database</value>
+    <value>Add User Dataset</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>User Compound Datasets</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
-    <value>Add user database</value>
+    <value>Add User IP Dataset</value>
   </data>
   <data name="DataGridViewCellStyle3.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -398,13 +398,13 @@
 </value>
   </data>
   <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Interaction Parameter Datasets</value>
+    <value>User-Defined Interaction Parameter Datasets</value>
   </data>
   <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 711</value>
   </data>
   <data name="FaTabStripItem3.Text" xml:space="preserve">
-    <value>Datasets</value>
+    <value>User-Defined Datasets</value>
   </data>
   <data name="chkSaveBackupFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 17</value>
@@ -537,7 +537,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAegBBwHoAQcBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAfABBwHwAQcBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

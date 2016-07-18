@@ -137,6 +137,23 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(cp.Name) Then
             End If
         Next
 
+        For Each r As DataGridViewRow In dgvu1.Rows
+            Dim cb As DataGridViewComboBoxCell = r.Cells(2)
+            cb.Items.Clear()
+            Dim ipsets As List(Of BaseClasses.InteractionParameter) = Databases.UserIPDB.GetStoredIPsets(r.Cells(0).Value, r.Cells(1).Value, "NRTL")
+            cb.Items.Add(ipsets.Count)
+            For Each ip As InteractionParameter In ipsets
+                Dim strb As New StringBuilder
+                For Each kvp As KeyValuePair(Of String, Object) In ip.Parameters
+                    strb.Append(kvp.Key & ": " & Double.Parse(kvp.Value).ToString("N2") & ", ")
+                Next
+                strb.Append("{" & ip.DataType & " / " & ip.Description & "}")
+                cb.Items.Add(strb.ToString)
+                cb.Tag = ipsets
+            Next
+            r.Cells(2).Value = cb.Items(0)
+        Next
+
         Loaded = True
 
     End Sub

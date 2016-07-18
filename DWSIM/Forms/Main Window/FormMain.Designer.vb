@@ -752,10 +752,10 @@ Partial Class FormMain
                 startInfo.UseShellExecute = True
                 Process.Start(startInfo)
             End If
-            Process.GetCurrentProcess().Kill()
+            Process.GetCurrentProcess.Kill()
         End If
 
-        If DWSIM.App.IsRunningOnMono() Then
+        If DWSIM.App.IsRunningOnMono Then
 
             'handler for unhandled exceptions (!)
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)

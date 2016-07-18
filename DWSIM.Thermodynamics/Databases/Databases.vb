@@ -1495,55 +1495,55 @@ Namespace Databases
 
         End Function
 
-        'Public Shared Function GetStoredIPsets(ByVal comp1 As String, ByVal comp2 As String, ByVal model As String) As List(Of Thermodynamics.BaseClasses.InteractionParameter)
+        Public Shared Function GetStoredIPsets(ByVal comp1 As String, ByVal comp2 As String, ByVal model As String) As List(Of Thermodynamics.BaseClasses.InteractionParameter)
 
-        '    Dim results As New List(Of Thermodynamics.BaseClasses.InteractionParameter)
+            Dim results As New List(Of Thermodynamics.BaseClasses.InteractionParameter)
 
-        '    'If Not My.Settings.UserInteractionsDatabases Is Nothing Then
-        '    '    For Each IPDBPath As String In My.Settings.UserInteractionsDatabases
-        '    Dim Interactions As Thermodynamics.BaseClasses.InteractionParameter()
-        '    Try
-        '        Interactions = UserIPDB.ReadInteractions(IPDBPath, model)
-        '        For Each ipset As Thermodynamics.BaseClasses.InteractionParameter In Interactions
-        '            If ipset.Comp1 = comp1 And ipset.Comp2 = comp2 Then
-        '                results.Add(ipset)
-        '            ElseIf ipset.Comp1 = comp2 And ipset.Comp2 = comp1 Then
-        '                'invert parameters
-        '                Dim ipset2 As Thermodynamics.BaseClasses.InteractionParameter = ipset.Clone
-        '                Dim tmpval As Object
-        '                With ipset2
-        '                    .Comp1 = comp2
-        '                    .Comp2 = comp1
-        '                    If .Parameters.ContainsKey("A12") Then
-        '                        tmpval = .Parameters("A12")
-        '                        .Parameters("A12") = .Parameters("A21")
-        '                        .Parameters("A21") = tmpval
-        '                    End If
-        '                    If .Parameters.ContainsKey("B12") Then
-        '                        tmpval = .Parameters("B12")
-        '                        .Parameters("B12") = .Parameters("B21")
-        '                        .Parameters("B21") = tmpval
-        '                    End If
-        '                    If .Parameters.ContainsKey("C12") Then
-        '                        tmpval = .Parameters("C12")
-        '                        .Parameters("C12") = .Parameters("C21")
-        '                        .Parameters("C21") = tmpval
-        '                    End If
-        '                    If .Parameters.ContainsKey("kji") Then
-        '                        tmpval = .Parameters("kij")
-        '                        .Parameters("kij") = .Parameters("kji")
-        '                        .Parameters("kji") = tmpval
-        '                    End If
-        '                End With
-        '                results.Add(ipset2)
-        '            End If
-        '        Next
-        '    Catch ex As Exception
-        '    End Try
-        '    '    Next
-        '    'End If
-        '    Return results
-        'End Function
+            If Not GlobalSettings.Settings.UserInteractionsDatabases Is Nothing Then
+                For Each IPDBPath As String In GlobalSettings.Settings.UserInteractionsDatabases
+                    Dim Interactions As Thermodynamics.BaseClasses.InteractionParameter()
+                    Try
+                        Interactions = UserIPDB.ReadInteractions(IPDBPath, model)
+                        For Each ipset As Thermodynamics.BaseClasses.InteractionParameter In Interactions
+                            If ipset.Comp1 = comp1 And ipset.Comp2 = comp2 Then
+                                results.Add(ipset)
+                            ElseIf ipset.Comp1 = comp2 And ipset.Comp2 = comp1 Then
+                                'invert parameters
+                                Dim ipset2 As Thermodynamics.BaseClasses.InteractionParameter = ipset.Clone
+                                Dim tmpval As Object
+                                With ipset2
+                                    .Comp1 = comp2
+                                    .Comp2 = comp1
+                                    If .Parameters.ContainsKey("A12") Then
+                                        tmpval = .Parameters("A12")
+                                        .Parameters("A12") = .Parameters("A21")
+                                        .Parameters("A21") = tmpval
+                                    End If
+                                    If .Parameters.ContainsKey("B12") Then
+                                        tmpval = .Parameters("B12")
+                                        .Parameters("B12") = .Parameters("B21")
+                                        .Parameters("B21") = tmpval
+                                    End If
+                                    If .Parameters.ContainsKey("C12") Then
+                                        tmpval = .Parameters("C12")
+                                        .Parameters("C12") = .Parameters("C21")
+                                        .Parameters("C21") = tmpval
+                                    End If
+                                    If .Parameters.ContainsKey("kji") Then
+                                        tmpval = .Parameters("kij")
+                                        .Parameters("kij") = .Parameters("kji")
+                                        .Parameters("kji") = tmpval
+                                    End If
+                                End With
+                                results.Add(ipset2)
+                            End If
+                        Next
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+                    Return results
+        End Function
 
     End Class
 

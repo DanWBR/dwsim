@@ -48,6 +48,8 @@ Public Class Settings
     Public Shared Property ExcelErrorHandlingMode As Integer = 0
     Public Shared Property ExcelFlashSettings As String = ""
 
+    Public Shared Property UserInteractionsDatabases As New List(Of String)
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

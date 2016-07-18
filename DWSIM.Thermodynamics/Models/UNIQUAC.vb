@@ -181,6 +181,39 @@ Namespace PropertyPackages.Auxiliary
                 End If
             Next
 
+            'load user database interactions
+            If Not GlobalSettings.Settings.UserInteractionsDatabases Is Nothing Then
+                For Each IPDBPath As String In GlobalSettings.Settings.UserInteractionsDatabases
+                    Dim Interactions As BaseClasses.InteractionParameter()
+                    Dim IP As BaseClasses.InteractionParameter
+                    Try
+                        Interactions = Databases.UserIPDB.ReadInteractions(IPDBPath, "UNIQUAC")
+                        For Each IP In Interactions
+                            Dim IPD As New UNIQUAC_IPData
+                            IPD.A12 = IP.Parameters.Item("A12")
+                            IPD.A21 = IP.Parameters.Item("A21")
+                            IPD.comment = IP.Description
+                            If IP.Parameters.ContainsKey("B12") Then IPD.B12 = IP.Parameters.Item("B12")
+                            If IP.Parameters.ContainsKey("B21") Then IPD.B21 = IP.Parameters.Item("B21")
+                            If IP.Parameters.ContainsKey("C12") Then IPD.C12 = IP.Parameters.Item("C12")
+                            If IP.Parameters.ContainsKey("C21") Then IPD.C21 = IP.Parameters.Item("C21")
+
+                            If Me.InteractionParameters.ContainsKey(IP.Comp1) Then
+                                If Me.InteractionParameters(IP.Comp1).ContainsKey(IP.Comp2) Then
+                                Else
+                                    Me.InteractionParameters(IP.Comp1).Add(IP.Comp2, IPD.Clone)
+                                End If
+                            Else
+                                Me.InteractionParameters.Add(IP.Comp1, New Dictionary(Of String, UNIQUAC_IPData))
+                                Me.InteractionParameters(IP.Comp1).Add(IP.Comp2, IPD.Clone)
+                            End If
+                        Next
+                    Catch ex As Exception
+                        Console.WriteLine(ex.ToString)
+                    End Try
+                Next
+            End If
+
             uniquacip = Nothing
             uniquacipc = Nothing
             uniquacipc2 = Nothing
