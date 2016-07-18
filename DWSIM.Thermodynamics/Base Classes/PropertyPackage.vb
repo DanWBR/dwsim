@@ -3646,53 +3646,63 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     'If VLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE And Not Me.FlashBase = FlashMethod.NestedLoopsSLE_SS Then
                     If VLE Then
+
                         i = 0
+
                         Do
+
                             If bw IsNot Nothing Then If bw.CancellationPending Then Exit Do Else bw.ReportProgress(0, "VLE (" & i + 1 & "/41)")
-                            Try
-                                If i = 0 Then
-                                    tmp1 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0, 0, Me)
+
+                            x = i * dx
+
+                            px.Add(x)
+
+                            If i = 0 Then
+                                Try
+                                    tmp1 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, 0.0#, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
-                                    tmp2 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1, 0, Me)
+                                    py1.Add(Test1)
+                                Catch ex As Exception
+                                    py1.Add(Double.NaN)
+                                End Try
+                                Try
+                                    tmp2 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, 0.0#, Me)
                                     y2 = tmp2(4)
                                     Test2 = y2
-                                Else
-                                    tmp1 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0, Test1, Me)
+                                    py2.Add(Test2)
+                                Catch ex As Exception
+                                    py2.Add(Double.NaN)
+                                End Try
+                            Else
+                                Try
+                                    tmp1 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 0.0#, Test1, Me)
                                     calcT = tmp1(4)
                                     Test1 = calcT
-                                    tmp2 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1, Test2, Me)
-                                    y2 = tmp2(4)
-                                    Test2 = y2
-                                End If
-                                x = i * dx
-                                y1 = calcT
-                                px.Add(x)
-                                py1.Add(y1)
-                                py2.Add(y2)
+                                    py1.Add(calcT)
+                                Catch ex As Exception
+                                    py1.Add(Double.NaN)
+                                End Try
+                                Try
+                                    tmp2 = Me.FlashBase.Flash_PV(New Double() {i * dx, 1 - i * dx}, P, 1.0#, Test2, Me)
+                                    calcT = tmp2(4)
+                                    Test2 = calcT
+                                    py2.Add(calcT)
+                                Catch ex As Exception
+                                    py2.Add(Double.NaN)
+                                End Try
+                            End If
 
-                                'check if liquid phase is stable.
-                                If tmp1(7) > 0 Then
-                                    unstable = True
-                                    ui.Add(px.Count - 1)
-                                    ut.Add(tmp1(4))
-                                End If
+                            'check if liquid phase is stable.
 
-                                'check if liquid phase is stable.
-                                'Test2 = x * Me.RET_VTF()(0) + (1 - x) * Me.RET_VTF()(1)
-                                'result = Me.FlashBase.Flash_PT(New Double() {i * dx, 1 - i * dx}, P, Test1 * 0.8, Me)
-                                'If result(5) > 0.0# Then
-                                '    If Abs(result(2)(0) - result(6)(0)) > 0.01 Then
-                                '        unstable = True
-                                '        ui.Add(px.Count - 1)
-                                '        ut.Add(Me.FlashBase.BubbleTemperature_LLE(New Double() {i * dx, 1 - i * dx}, result(2), result(6), P, y1 - 50, y2 + 20, Me))
-                                '        py1(py1.Count - 1) = ut(ut.count-1)
-                                '    End If
-                                'End If
+                            If tmp1(7) > 0 Then
+                                unstable = True
+                                ui.Add(px.Count - 1)
+                                ut.Add(tmp1(4))
+                            End If
 
-                            Catch ex As Exception
-                            End Try
                             i = i + 1
+
                         Loop Until (i - 1) * dx >= 1
                     End If
 
