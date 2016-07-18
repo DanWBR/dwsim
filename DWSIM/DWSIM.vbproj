@@ -351,10 +351,10 @@
     <Compile Include="Forms\FormCoolPropWarning.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormDataRegression.Designer.vb">
+    <Compile Include="Forms\Data Regression\FormDataRegression.Designer.vb">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormDataRegression.vb">
+    <Compile Include="Forms\Data Regression\FormDataRegression.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormChart.Designer.vb">
@@ -363,10 +363,10 @@
     <Compile Include="Forms\FormChart.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormCompoundCreator.Designer.vb">
+    <Compile Include="Forms\Compound Creator\FormCompoundCreator.Designer.vb">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormCompoundCreator.vb">
+    <Compile Include="Forms\Compound Creator\FormCompoundCreator.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormDBManager.Designer.vb">
@@ -457,10 +457,10 @@
     <Compile Include="Forms\Flowsheet Components\WatchPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormOptimization.Designer.vb">
+    <Compile Include="Forms\Flowsheet Analysis\FormOptimization.Designer.vb">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormOptimization.vb">
+    <Compile Include="Forms\Flowsheet Analysis\FormOptimization.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormReportConfig.designer.vb">
@@ -469,10 +469,10 @@
     <Compile Include="Forms\FormReportConfig.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormSensAnalysis.Designer.vb">
+    <Compile Include="Forms\Flowsheet Analysis\FormSensAnalysis.Designer.vb">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSensAnalysis.vb">
+    <Compile Include="Forms\Flowsheet Analysis\FormSensAnalysis.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormTemplateSelect.Designer.vb">
@@ -540,10 +540,10 @@
     <Compile Include="Forms\Flowsheet\FormFlowsheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Main\FormMain.vb">
+    <Compile Include="Forms\Main Window\FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Main\FormMain.Designer.vb">
+    <Compile Include="Forms\Main Window\FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -775,10 +775,10 @@
     <EmbeddedResource Include="Forms\FormChart.es.resx">
       <DependentUpon>FormChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCompoundCreator.de.resx">
+    <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.de.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCompoundCreator.es.resx">
+    <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureMasterTable.en.resx">
@@ -831,10 +831,10 @@
     <EmbeddedResource Include="Forms\FormCoolPropWarning.resx">
       <DependentUpon>FormCoolPropWarning.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormDataRegression.de.resx">
+    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.de.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormDataRegression.es.resx">
+    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.es.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.es.resx">
@@ -843,7 +843,7 @@
     <EmbeddedResource Include="Forms\FormDBManager.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\FormMain.resx">
+    <EmbeddedResource Include="Forms\Main Window\FormMain.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -1165,7 +1165,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\FormMain.en.resx">
+    <EmbeddedResource Include="Forms\Main Window\FormMain.en.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -2246,10 +2246,10 @@
     <None Include="Resources\about.png" />
     <None Include="Resources\control_stop_blue1.png" />
     <None Include="Resources\clock.png" />
-    <EmbeddedResource Include="Forms\FormDataRegression.en.resx">
+    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.en.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormDataRegression.resx">
+    <EmbeddedResource Include="Forms\Data Regression\FormDataRegression.resx">
       <DependentUpon>FormDataRegression.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormChart.en.resx">
@@ -2258,10 +2258,10 @@
     <EmbeddedResource Include="Forms\FormChart.resx">
       <DependentUpon>FormChart.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCompoundCreator.en.resx">
+    <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.en.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormCompoundCreator.resx">
+    <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet\FormFlowsheet.de.resx">
@@ -2298,10 +2298,10 @@
     <EmbeddedResource Include="Forms\Flowsheet Components\WatchPanel.resx">
       <DependentUpon>WatchPanel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\FormMain.de.resx">
+    <EmbeddedResource Include="Forms\Main Window\FormMain.de.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Main\FormMain.es.resx">
+    <EmbeddedResource Include="Forms\Main Window\FormMain.es.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.resx">
@@ -2340,16 +2340,16 @@
     <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.de.resx">
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormOptimization.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormOptimization.de.resx">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormOptimization.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormOptimization.en.resx">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormOptimization.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormOptimization.es.resx">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormOptimization.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormOptimization.resx">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormOptions.de.resx">
@@ -2401,16 +2401,16 @@
       <DependentUpon>FormScript.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSensAnalysis.de.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormSensAnalysis.de.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSensAnalysis.en.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormSensAnalysis.en.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSensAnalysis.es.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormSensAnalysis.es.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormSensAnalysis.resx">
+    <EmbeddedResource Include="Forms\Flowsheet Analysis\FormSensAnalysis.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormState.en.resx">

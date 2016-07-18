@@ -1590,6 +1590,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Me.btnCancel.Enabled = False
             Me.btnCalcOnce.Enabled = True
 
+            GlobalSettings.Settings.CAPEOPENMode = False
+
         End Try
 
     End Sub
@@ -3493,6 +3495,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Me.btnDoReg.Enabled = True
             Me.btnCancel.Enabled = False
             Me.btnCalcOnce.Enabled = True
+
+            GlobalSettings.Settings.CAPEOPENMode = False
 
         End Try
 
