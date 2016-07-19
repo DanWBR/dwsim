@@ -485,4 +485,9 @@ Public Class FormSimulWizard
         Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
         f.ShowDialog(Me)
     End Sub
+
+    Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Property_Package_Selection")
+    End Sub
+
 End Class

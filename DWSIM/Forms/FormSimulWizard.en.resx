@@ -168,6 +168,12 @@ Click "Next" to continue.</value>
   <data name="Button7.Text" xml:space="preserve">
     <value>Add &gt;</value>
   </data>
+  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>544, 15</value>
+  </data>
+  <data name="LinkLabel2.Text" xml:space="preserve">
+    <value>Click here to get help on selecting the best Thermodynamic Model/Property Package for your system.</value>
+  </data>
   <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
     <value>593, 15</value>
   </data>
