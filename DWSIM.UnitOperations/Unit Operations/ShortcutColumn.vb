@@ -35,6 +35,8 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ShortcutColumn
+
         Public Enum CondenserType
             TotalCond = 0
             PartialCond = 1
@@ -42,11 +44,11 @@ Namespace UnitOperations
 
         Public m_lightkey As String = ""
         Public m_heavykey As String = ""
-        Public m_lightkeymolarfrac As Double = 0.001
-        Public m_heavykeymolarfrac As Double = 0.001
+        Public m_lightkeymolarfrac As Double = 0.01
+        Public m_heavykeymolarfrac As Double = 0.01
         Public m_refluxratio As Double = 1.5
-        Public m_boilerpressure As Double = 0
-        Public m_condenserpressure As Double = 0
+        Public m_boilerpressure As Double = 101325.0#
+        Public m_condenserpressure As Double = 101325.0#
 
         Public m_N, m_Nmin, m_Rmin, m_Tc, m_Tb, m_Qc, m_Qb, L, V, L_, V_, ofs As Double
 
@@ -622,10 +624,28 @@ restart:    B = F - D
 
         Public Overrides Sub DisplayEditForm()
 
+            If f Is Nothing Then
+                f = New EditingForm_ShortcutColumn With {.SimObject = Me}
+                f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                Me.FlowSheet.DisplayForm(f)
+            Else
+                If f.IsDisposed Then
+                    f = New EditingForm_ShortcutColumn With {.SimObject = Me}
+                    f.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
+                    Me.FlowSheet.DisplayForm(f)
+                Else
+                    f.Activate()
+                End If
+            End If
+
         End Sub
 
         Public Overrides Sub UpdateEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.UIThread(Sub() f.UpdateInfo())
+                End If
+            End If
         End Sub
 
         Public Overrides Function GetIconBitmap() As Object
@@ -649,8 +669,14 @@ restart:    B = F - D
         End Function
 
         Public Overrides Sub CloseEditForm()
-
+            If f IsNot Nothing Then
+                If Not f.IsDisposed Then
+                    f.Close()
+                    f = Nothing
+                End If
+            End If
         End Sub
+
     End Class
 
 End Namespace
