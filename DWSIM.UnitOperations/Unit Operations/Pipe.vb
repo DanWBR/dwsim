@@ -529,6 +529,12 @@ Namespace UnitOperations
 
                             If oms.PropertyPackage.AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
                                 oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                            Else
+                                If U <> 0.0# Then
+                                    oms.SpecType = Interfaces.Enums.StreamSpec.Temperature_and_Pressure
+                                Else
+                                    oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                                End If
                             End If
 
                             oms.Calculate(True, True)
