@@ -496,7 +496,7 @@ Public Class MaterialStreamEditor
 
                     Dim total As Double = 0
                     For Each row As DataGridViewRow In gridInputComposition.Rows
-                        total += row.Cells(0).Value
+                        total += row.Cells(1).Value
                     Next
                     W = Converter.ConvertToSI(units.massflow, total)
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows

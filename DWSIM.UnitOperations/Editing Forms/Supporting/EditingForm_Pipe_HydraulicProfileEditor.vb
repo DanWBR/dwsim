@@ -917,10 +917,10 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         For Each psec In Profile.Sections.Values
             Me.Button8_Click(Nothing, Nothing)
             Me.GridMalha.Rows(0).Cells(psec.Indice - 1).Value = psec.Indice
-            If Not CBTemplate.Items.Contains(psec.Tipo) Then
+            If Not CBTemplate.Items.Contains(psec.TipoSegmento) Then
                 Me.GridMalha.Rows(1).Cells(psec.Indice - 1).Value = CBTemplate.Items(0)
             Else
-                Me.GridMalha.Rows(1).Cells(psec.Indice - 1).Value = psec.Tipo
+                Me.GridMalha.Rows(1).Cells(psec.Indice - 1).Value = psec.TipoSegmento
             End If
             Me.GridMalha.Rows(2).Cells(psec.Indice - 1).Value = psec.Quantidade
             Me.GridMalha.Rows(3).Cells(psec.Indice - 1).Value = psec.Incrementos

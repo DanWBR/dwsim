@@ -214,7 +214,7 @@ Namespace UnitOperations
                 If Me.Profile.Sections.Count > 1 Then
                     Throw New Exception(FlowSheet.GetTranslatedString("PipeOutletPressureRestriction"))
                 ElseIf Me.Profile.Sections.Count = 1 Then
-                    If Me.Profile.Sections(1).Tipo <> "Tubulaosimples" Then
+                    If Me.Profile.Sections(1).TipoSegmento <> "Tubulaosimples" Then
                         Throw New Exception(FlowSheet.GetTranslatedString("PipeOutletPressureRestriction"))
                     End If
                 End If
@@ -315,7 +315,7 @@ Namespace UnitOperations
 
                     segmento.Resultados.Clear()
 
-                    If segmento.Tipo = "Tubulaosimples" Then
+                    If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Then
 
                         j = 0
                         nseg = segmento.Incrementos
@@ -652,7 +652,7 @@ Namespace UnitOperations
                             End With
 
                             results.TipoFluxo = ""
-                            resv = Me.Kfit(segmento.Tipo)
+                            resv = Me.Kfit(segmento.TipoSegmento)
                             If resv(1) Then
                                 dph = 0
                                 dpf = resv(0) * (0.0101 * (.DI * 0.0254) ^ -0.2232) * (Qlin / (Qvin + Qlin) * rho_l + Qvin / (Qvin + Qlin) * rho_v) * (results.LiqVel.GetValueOrDefault + results.VapVel.GetValueOrDefault) ^ 2 / 2

@@ -33,7 +33,7 @@ Public Class EditingForm_Pipe_ResultsTable
             Dim res As PipeResults
             Dim comp_ant As Double = 0
             For Each ps In .Sections.Values
-                If ps.Tipo = "Tubulaosimples" Then
+                If ps.TipoSegmento = "Tubulaosimples" Then
                     For Each res In ps.Resultados
                         Me.DataGridView1.Rows.Add(New Object() {cv.ConvertFromSI(su.distance, comp_ant), cv.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault), cv.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault), cv.ConvertFromSI(su.velocity, res.LiqVel), cv.ConvertFromSI(su.velocity, res.VapVel), cv.ConvertFromSI(su.heatflow, res.CalorTransferido), res.HoldupDeLiquido, PipeOp.FlowSheet.GetTranslatedString(res.TipoFluxo), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation), cv.ConvertFromSI(su.heat_transf_coeff, res.HTC_external)})
                         comp_ant += ps.Comprimento / ps.Incrementos

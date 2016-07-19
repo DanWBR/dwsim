@@ -63,7 +63,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Sections").Elements.ToList
                 Dim pr As New PipeSection()
                 pr.LoadData(xel.Elements.ToList)
-                pr.Tipo = pr.Tipo.Replace("°", " dg")
+                pr.TipoSegmento = pr.TipoSegmento.Replace("°", " dg")
                 m_collection.Add(xel.@ID, pr)
             Next
             Return True
@@ -167,7 +167,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Property Tipo() As String
+        Public Property TipoSegmento() As String
             Get
                 Return m_tipo
             End Get
