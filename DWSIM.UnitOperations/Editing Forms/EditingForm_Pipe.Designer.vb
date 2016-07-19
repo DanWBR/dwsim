@@ -36,8 +36,6 @@ Partial Class EditingForm_Pipe
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
-        Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
@@ -45,7 +43,10 @@ Partial Class EditingForm_Pipe
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
         Me.chkIncludeJT = New System.Windows.Forms.CheckBox()
+        Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbPDropModel = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
@@ -150,22 +151,6 @@ Partial Class EditingForm_Pipe
         Me.Label11.Name = "Label11"
         Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
-        'btnConfigureFlashAlg
-        '
-        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
-        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
-        '
-        'btnConfigurePP
-        '
-        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
-        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.btnConfigurePP.UseVisualStyleBackColor = True
-        '
         'cbFlashAlg
         '
         resources.ApplyResources(Me.cbFlashAlg, "cbFlashAlg")
@@ -215,6 +200,7 @@ Partial Class EditingForm_Pipe
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.Button1)
         Me.TabPage4.Controls.Add(Me.btnConfigureFlashAlg)
         Me.TabPage4.Controls.Add(Me.chkIncludeJT)
         Me.TabPage4.Controls.Add(Me.btnConfigurePP)
@@ -236,12 +222,36 @@ Partial Class EditingForm_Pipe
         Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.information
+        Me.Button1.Name = "Button1"
+        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnConfigureFlashAlg
+        '
+        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
+        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        '
         'chkIncludeJT
         '
         resources.ApplyResources(Me.chkIncludeJT, "chkIncludeJT")
         Me.chkIncludeJT.Name = "chkIncludeJT"
         Me.ToolTip1.SetToolTip(Me.chkIncludeJT, resources.GetString("chkIncludeJT.ToolTip"))
         Me.chkIncludeJT.UseVisualStyleBackColor = True
+        '
+        'btnConfigurePP
+        '
+        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
+        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigurePP.Name = "btnConfigurePP"
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbPDropModel
         '
@@ -596,4 +606,5 @@ Partial Class EditingForm_Pipe
     Friend WithEvents TabPage6 As System.Windows.Forms.TabPage
     Friend WithEvents chkIncludeJT As System.Windows.Forms.CheckBox
     Friend WithEvents cbPDropModel As System.Windows.Forms.ComboBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 End Class
