@@ -363,41 +363,18 @@ Public Class FormOptions
         '=======================================
         '=== Interaction parameter databases ===
         '=======================================
-        'chemsep databases 
-        name = "ChemSep NRTL   "
-        path2 = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "nrtl.dat"
-        If File.Exists(path2) Then
-            Me.dgvIPDB.Rows.Add(New Object() {dgvIPDB.Rows.Count + 1, name, path2, My.Resources.lock})
-            Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ReadOnly = True
-            Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ToolTipText = DWSIM.App.GetLocalString("Selado")
-        End If
-
-        name = "ChemSep UNIQUAC-1   "
-        path2 = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquac.dat"
-        If File.Exists(path2) Then
-            Me.dgvIPDB.Rows.Add(New Object() {dgvIPDB.Rows.Count + 1, name, path2, My.Resources.lock})
-            Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ReadOnly = True
-            Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ToolTipText = DWSIM.App.GetLocalString("Selado")
-        End If
-
-        name = "ChemSep UNIQUAC-2   "
-        path2 = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "uniquacip.dat"
-        If File.Exists(path2) Then
-            Me.dgvIPDB.Rows.Add(New Object() {dgvIPDB.Rows.Count + 1, name, path2, My.Resources.lock})
-            Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ReadOnly = True
-            Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ToolTipText = DWSIM.App.GetLocalString("Selado")
-        End If
-
+     
         'user databases
         If Not My.Settings.UserInteractionsDatabases Is Nothing Then
             For Each str As String In My.Settings.UserInteractionsDatabases
-                If File.Exists(path2) Then
+                If File.Exists(str) Then
                     Me.dgvIPDB.Rows.Add(New Object() {dgvIPDB.Rows.Count + 1, "User   ", str, My.Resources.disconnect})
                     Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ReadOnly = True
                     Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ToolTipText = DWSIM.App.GetLocalString("Remove")
                 End If
             Next
         End If
+
     End Sub
 
     Private Sub dgvdb_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvdb.CellContentClick
@@ -433,9 +410,10 @@ Public Class FormOptions
         End If
     End Sub
     Private Sub dgvIPDB_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvIPDB.CellContentClick
+
         'remove user interactions database
 
-        If e.ColumnIndex = 3 And e.RowIndex > 3 Then
+        If e.ColumnIndex = 3 Then
             If Me.dgvIPDB.Rows(e.RowIndex).Cells(1).Value = "User   " Then
                 My.Settings.UserInteractionsDatabases.Remove(Me.dgvIPDB.Rows(e.RowIndex).Cells(2).Value)
                 If Not DWSIM.App.IsRunningOnMono Then My.Settings.Save()
