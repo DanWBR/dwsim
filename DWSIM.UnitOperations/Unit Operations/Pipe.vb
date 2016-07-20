@@ -451,24 +451,25 @@ Namespace UnitOperations
                                         End If
                                         If U <> 0.0# Then
                                             DQ = (Tout - Tin) / Math.Log((Text + dText_dL * currL - Tin) / (Text + dText_dL * currL - Tout)) * U / 1000 * A
-                                            If Double.IsNaN(DQ) Then
-                                                DQ = 0.0#
-                                            Else
-                                                Tout = DQ / (Win * Cp_m) + Tin
-                                            End If
-                                            If Not Double.TryParse(Tout, New Double) Or Double.IsNaN(Tout) Or Tout < 100 Or Tout > 1000 Then
-                                                Throw New Exception(FlowSheet.GetTranslatedString("Erroaocalculartemper"))
-                                            End If
+                                            If Double.IsNaN(DQ) Then DQ = 0.0#
+                                            'Tout = DQ / (Win * Cp_m) + Tin
                                         Else
                                             Tout = Tin
+                                            DQ = 0.0#
                                         End If
                                     Else
                                         DQ = Me.ThermalProfile.Calor_trocado / tseg
-                                        Tout = DQ / (Win * Cp_m) + Tin
+                                        'Tout = DQ / (Win * Cp_m) + Tin
                                         A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                         U = DQ / (A * (Tout - Tin)) * 1000
                                     End If
                                 End With
+
+                                Hout = Hin + DQ / Win
+
+                                oms.PropertyPackage.CurrentMaterialStream = oms
+
+                                Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
 
                                 fT_ant2 = fT_ant
                                 fT_ant = fT
@@ -489,8 +490,6 @@ Namespace UnitOperations
                                 FlowSheet.CheckStatus()
 
                             Loop Until Math.Abs(fT) < Me.TolT
-
-                            Hout = Hin + DQ / Win
 
                             If IncludeJTEffect Then
 
@@ -527,16 +526,8 @@ Namespace UnitOperations
                             oms.Phases(0).Properties.pressure = Pout
                             oms.Phases(0).Properties.enthalpy = Hout
 
-                            If oms.PropertyPackage.AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
-                                oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                            Else
-                                If U <> 0.0# Then
-                                    oms.SpecType = Interfaces.Enums.StreamSpec.Temperature_and_Pressure
-                                Else
-                                    oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                                End If
-                            End If
-
+                            oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                            
                             oms.Calculate(True, True)
 
                             With oms

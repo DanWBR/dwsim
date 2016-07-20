@@ -120,10 +120,16 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Length (m)</value>
   </data>
+  <data name="Column14.HeaderText" xml:space="preserve">
+    <value>Inclination (degrees)</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Column14.Width" type="System.Int32, mscorlib">
+    <value>97</value>
+  </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Pressure (kPa)</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column2.Width" type="System.Int32, mscorlib">
     <value>74</value>
   </data>
@@ -181,16 +187,10 @@
   <data name="Column12.HeaderText" xml:space="preserve">
     <value>k/L (Insulation)</value>
   </data>
-  <data name="Column12.Width" type="System.Int32, mscorlib">
-    <value>76</value>
-  </data>
   <data name="Column13.HeaderText" xml:space="preserve">
     <value>h (External)</value>
   </data>
   <data name="Column13.Width" type="System.Int32, mscorlib">
     <value>59</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Results - Property Profiles</value>
   </data>
 </root>
