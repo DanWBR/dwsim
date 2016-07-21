@@ -5725,7 +5725,7 @@ Final3:
 
         Public Function AUX_INT_CPDTi(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Dim deltaT As Double = (T2 - T1) / 10
+            Dim deltaT As Double = (T2 - T1) / 100
             Dim i As Integer
             Dim integral, Ti As Double
 
@@ -5733,13 +5733,13 @@ Final3:
 
             If Settings.EnableParallelProcessing Then
                 Dim values As New Concurrent.ConcurrentBag(Of Double)
-                Parallel.For(0, 10, Sub(ii)
-                                        values.Add(Me.AUX_CPi(subst, Ti + deltaT * ii) * deltaT)
-                                    End Sub)
+                Parallel.For(0, 100, Sub(ii)
+                                         values.Add(Me.AUX_CPi(subst, Ti + deltaT * ii) * deltaT)
+                                     End Sub)
                 integral = values.Sum
             Else
                 integral = 0.0#
-                For i = 0 To 9
+                For i = 0 To 99
                     integral += Me.AUX_CPi(subst, Ti) * deltaT
                     Ti += deltaT
                 Next
@@ -5774,7 +5774,7 @@ Final3:
 
         Public Function AUX_INT_CPDT_Ti(ByVal T1 As Double, ByVal T2 As Double, ByVal subst As String) As Double
 
-            Dim deltaT As Double = (T2 - T1) / 10
+            Dim deltaT As Double = (T2 - T1) / 100
             Dim i As Integer
             Dim integral, Ti As Double
 
@@ -5782,13 +5782,13 @@ Final3:
 
             If Settings.EnableParallelProcessing Then
                 Dim values As New Concurrent.ConcurrentBag(Of Double)
-                Parallel.For(0, 10, Sub(ii)
-                                        values.Add(Me.AUX_CPi(subst, Ti + deltaT * ii) * deltaT / (Ti + deltaT * (ii - 1)))
-                                    End Sub)
+                Parallel.For(0, 100, Sub(ii)
+                                         values.Add(Me.AUX_CPi(subst, Ti + deltaT * ii) * deltaT / (Ti + deltaT * (ii - 1)))
+                                     End Sub)
                 integral = values.Sum
             Else
                 integral = 0.0#
-                For i = 0 To 9
+                For i = 0 To 99
                     integral += Me.AUX_CPi(subst, Ti) * deltaT / (Ti - deltaT)
                     Ti += deltaT
                 Next
@@ -6400,7 +6400,6 @@ Final3:
         Public Function RET_Sid(ByVal T1 As Double, ByVal T2 As Double, ByVal P2 As Double, ByVal Vz As Double()) As Double
 
             Dim val As Double
-            Dim subst As Interfaces.ICompound
             Dim Vw = Me.AUX_CONVERT_MOL_TO_MASS(Vz)
 
             Dim i As Integer = 0

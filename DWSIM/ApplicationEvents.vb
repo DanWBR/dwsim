@@ -153,6 +153,7 @@ Namespace My
             GlobalSettings.Settings.CalculatorActivated = True
 
             GlobalSettings.Settings.UserInteractionsDatabases.Clear()
+            If My.Settings.UserInteractionsDatabases Is Nothing Then My.Settings.UserInteractionsDatabases = New Specialized.StringCollection
             For Each item In My.Settings.UserInteractionsDatabases
                 GlobalSettings.Settings.UserInteractionsDatabases.Add(item)
             Next
