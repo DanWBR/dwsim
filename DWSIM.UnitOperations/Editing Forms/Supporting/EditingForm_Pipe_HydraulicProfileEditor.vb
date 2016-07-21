@@ -1188,5 +1188,4 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
     End Sub
 
-  
 End Class

@@ -12,6 +12,8 @@ Public Class MaterialStreamEditor
 
     Public Loaded As Boolean = False
 
+    Private dontshowtooltip As Boolean = False
+
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf, nff As String
 
@@ -315,15 +317,19 @@ Public Class MaterialStreamEditor
             refval = p.Properties.molarflow.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.molarflow, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Vazomolar"), val, units.molarflow})
-            refval = p.Properties.molarfraction.GetValueOrDefault
-            If refval.HasValue Then val = Format(refval, nf)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomolardaPhase"), val})
-            refval = p.Properties.massfraction.GetValueOrDefault
-            If refval.HasValue Then val = refval
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomssicadaPhase"), val})
-            refval = p.Properties.compressibilityFactor.GetValueOrDefault
-            If refval.HasValue Then val = refval
-            .Add(New Object() {"Z", val})
+
+            If p.Name <> "Mixture" Then
+                refval = p.Properties.molarfraction.GetValueOrDefault
+                If refval.HasValue Then val = Format(refval, nf)
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomolardaPhase"), val})
+                refval = p.Properties.massfraction.GetValueOrDefault
+                If refval.HasValue Then val = refval
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomssicadaPhase"), val})
+                refval = p.Properties.compressibilityFactor.GetValueOrDefault
+                If refval.HasValue Then val = refval
+                .Add(New Object() {"Z", val})
+            End If
+
             refval = p.Properties.heatCapacityCp.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.heatCapacityCp, refval)
             .Add(New Object() {"Cp", val, units.heatCapacityCp})
@@ -332,12 +338,15 @@ Public Class MaterialStreamEditor
             refval = p.Properties.thermalConductivity.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.thermalConductivity, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Condutividadetrmica"), val, units.thermalConductivity})
-            refval = p.Properties.kinematic_viscosity.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.cinematic_viscosity, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadecinemtica"), val, units.cinematic_viscosity})
-            refval = p.Properties.viscosity.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.viscosity, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadedinmica"), val, units.viscosity})
+
+            If p.Name <> "Mixture" Then
+                refval = p.Properties.kinematic_viscosity.GetValueOrDefault
+                If refval.HasValue Then val = Converter.ConvertFromSI(units.cinematic_viscosity, refval)
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadecinemtica"), val, units.cinematic_viscosity})
+                refval = p.Properties.viscosity.GetValueOrDefault
+                If refval.HasValue Then val = Converter.ConvertFromSI(units.viscosity, refval)
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadedinmica"), val, units.viscosity})
+            End If
 
             If MatStream.PropertyPackage.FlashBase.FlashSettings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = True And p.Name = "Mixture" Then
                 refval = p.Properties.bubblePressure.GetValueOrDefault
@@ -863,6 +872,10 @@ Public Class MaterialStreamEditor
                 Next
                 lblInputAmount.Text = "Total: " & sum.ToString(nf)
                 Me.lblInputAmount.ForeColor = Drawing.Color.Blue
+                If Not dontshowtooltip Then
+                    ToolTip2.Show(ToolTip1.GetToolTip(btnCompAcceptChanges), btnCompAcceptChanges, 2000)
+                    dontshowtooltip = True
+                End If
             Catch ex As Exception
                 Me.lblInputAmount.ForeColor = Drawing.Color.Red
             End Try
