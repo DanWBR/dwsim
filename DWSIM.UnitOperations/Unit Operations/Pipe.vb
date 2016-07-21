@@ -454,7 +454,7 @@ Namespace UnitOperations
                                             If Math.Abs(DQ) > Math.Abs(DQmax) Then DQ = DQmax
                                             'Tout = DQ / (Win * Cp_m) + Tin
                                         Else
-                                            Tout = Tin
+                                            'Tout = Tin
                                             DQ = 0.0#
                                             DQmax = 0.0#
                                         End If
