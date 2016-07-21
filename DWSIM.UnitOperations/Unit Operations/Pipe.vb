@@ -264,7 +264,7 @@ Namespace UnitOperations
             Dim tmp As Object = Nothing
             Dim tipofluxo As String
             Dim first As Boolean = True
-            Dim holdup, dpf, dph, dpt, DQ, U, A, eta, fx, fx0, x, x0, fx00, x00, p0, t0 As Double
+            Dim holdup, dpf, dph, dpt, DQ, DQmax, U, A, eta, fx, fx0, x, x0, fx00, x00, p0, t0 As Double
             Dim nseg As Double
             Dim segmento As New PipeSection
             Dim results As New PipeResults
@@ -425,8 +425,6 @@ Namespace UnitOperations
                                 With segmento
 
                                     Cp_m = holdup * Cp_l + (1 - holdup) * Cp_v
-                                    Tout_ant2 = Tout_ant
-                                    Tout_ant = Tout
 
                                     If Not Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
                                         If Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
@@ -451,11 +449,14 @@ Namespace UnitOperations
                                         End If
                                         If U <> 0.0# Then
                                             DQ = (Tout - Tin) / Math.Log((Text + dText_dL * currL - Tin) / (Text + dText_dL * currL - Tout)) * U / 1000 * A
+                                            DQmax = (Text + dText_dL * currL - Tin) * Cp_m * Win
                                             If Double.IsNaN(DQ) Then DQ = 0.0#
+                                            If Math.Abs(DQ) > Math.Abs(DQmax) Then DQ = DQmax
                                             'Tout = DQ / (Win * Cp_m) + Tin
                                         Else
                                             Tout = Tin
                                             DQ = 0.0#
+                                            DQmax = 0.0#
                                         End If
                                     Else
                                         DQ = Me.ThermalProfile.Calor_trocado / tseg
@@ -469,15 +470,13 @@ Namespace UnitOperations
 
                                 oms.PropertyPackage.CurrentMaterialStream = oms
 
+                                Tout_ant = Tout
                                 Tout = oms.PropertyPackage.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.H, Pout, Hout, oms.PropertyPackage, oms.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture), Nothing, Tout).CalculatedTemperature
+                                Tout = 0.7 * Tout_ant + 0.3 * Tout
 
-                                fT_ant2 = fT_ant
-                                fT_ant = fT
                                 fT = Tout - Tout_ant
 
-                                If cntT > 3 Then
-                                    Tout = Tout - fT * (Tout - Tout_ant2) / (fT - fT_ant2)
-                                End If
+                                If Math.Abs(fT) < Me.TolT Then Exit Do
 
                                 cntT += 1
 
@@ -489,7 +488,7 @@ Namespace UnitOperations
 
                                 FlowSheet.CheckStatus()
 
-                            Loop Until Math.Abs(fT) < Me.TolT
+                            Loop
 
                             If IncludeJTEffect Then
 

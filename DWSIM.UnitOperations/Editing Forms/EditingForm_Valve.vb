@@ -123,7 +123,7 @@ Public Class EditingForm_Valve
                     cbCalcMode.SelectedIndex = 1
             End Select
 
-            tbOutletPressure.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
+            tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.OutletPressure.GetValueOrDefault).ToString(nf)
             tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
             tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
             tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
