@@ -239,9 +239,9 @@ Namespace UnitOperations
 
             Dim oms As MaterialStream
 
-            Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Tout_ant2, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, TinP, PinP, _
+            Dim Tin, Pin, Tout, Pout, Tout_ant, Pout_ant, Pout_ant2, Toutj, Text, Win, Qin, Qvin, Qlin, TinP, PinP, _
                 rho_l, rho_v, Cp_l, Cp_v, Cp_m, K_l, K_v, eta_l, eta_v, tens, Hin, Hout, HinP, _
-                fT, fT_ant, fT_ant2, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT, dText_dL As Double
+                fT, fP, fP_ant, fP_ant2, w_v, w_l, w, z, z2, dzdT, dText_dL As Double
             Dim cntP, cntT As Integer
 
             If Me.Specification = specmode.OutletTemperature Then

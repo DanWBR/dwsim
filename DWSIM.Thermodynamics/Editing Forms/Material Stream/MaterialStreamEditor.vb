@@ -218,7 +218,7 @@ Public Class MaterialStreamEditor
                 Else
                     TabPhaseProps.TabPages.Remove(tabPropsVapor)
                 End If
-                If .Phases(1).Properties.molarfraction.HasValue Then
+                If .Phases(1).Properties.molarfraction.GetValueOrDefault > 0.0# Then
                     PopulatePropGrid(gridPropertiesLiqMix, .Phases(1))
                     TabPhaseProps.TabPages.Add(tabPropsLiqMix)
                 Else
@@ -354,8 +354,8 @@ Public Class MaterialStreamEditor
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.pressure})
             End If
 
-            If p.Name = "Mixture" Then
-                refval = p.Properties.surfaceTension.GetValueOrDefault
+            If p.Name = "OverallLiquid" Then
+                refval = MatStream.Phases(0).Properties.surfaceTension.GetValueOrDefault
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.surfaceTension, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Tensosuperficial"), val, units.surfaceTension})
             End If
