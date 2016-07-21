@@ -218,11 +218,11 @@ Namespace DWSIM.Flowsheet
 
         Public Property FlowsheetSnapToGrid As Boolean = False Implements Interfaces.IFlowsheetOptions.FlowsheetSnapToGrid
 
-        Public Property FractionNumberFormat As String = "N4" Implements Interfaces.IFlowsheetOptions.FractionNumberFormat
+        Public Property FractionNumberFormat As String = "R" Implements Interfaces.IFlowsheetOptions.FractionNumberFormat
 
         Public Property Key As String = "" Implements Interfaces.IFlowsheetOptions.Key
 
-        Public Property NumberFormat As String = "N" Implements Interfaces.IFlowsheetOptions.NumberFormat
+        Public Property NumberFormat As String = "R" Implements Interfaces.IFlowsheetOptions.NumberFormat
 
         Public Property Password As String = "" Implements Interfaces.IFlowsheetOptions.Password
 
