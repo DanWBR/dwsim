@@ -452,10 +452,10 @@
     <Compile Include="Unit Operations\CustomUO.vb" />
     <Compile Include="Unit Operations\FlowsheetUO.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
-    <Compile Include="Support Classes\FlowPackageBaseClass.vb" />
-    <Compile Include="Support Classes\BeggsBrill.vb" />
-    <Compile Include="Support Classes\LockhartMartinelli.vb" />
-    <Compile Include="Support Classes\PetalasAziz.vb" />
+    <Compile Include="Fluid Flow Correlations\FlowPackageBaseClass.vb" />
+    <Compile Include="Fluid Flow Correlations\BeggsBrill.vb" />
+    <Compile Include="Fluid Flow Correlations\LockhartMartinelli.vb" />
+    <Compile Include="Fluid Flow Correlations\PetalasAziz.vb" />
     <Compile Include="Support Classes\PipeHydraulicProfile.vb" />
     <Compile Include="Unit Operations\CapeOpenUO.vb" />
     <Compile Include="Unit Operations\ComponentSeparator.vb" />

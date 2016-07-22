@@ -137,7 +137,7 @@ Namespace FlowPackages
                 VsG = qv / 24 / 3600 / (Math.PI * (D ^ 2) / 4) * 3.28084
                 VsL = ql / 24 / 3600 / (Math.PI * (D ^ 2) / 4) * 3.28084
                 Dia = D * 39.37
-                Theta = Math.Asin(deltaz / L) * 180 / Math.PI
+                Theta = Math.Atan(deltaz / (L ^ 2 - deltaz ^ 2) ^ 0.5) * 180 / Math.PI
                 Rough = k * 3.28084
                 RegionText = "                    "
 
