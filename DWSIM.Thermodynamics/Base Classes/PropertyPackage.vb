@@ -418,6 +418,12 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overridable Function DeepClone() As PropertyPackage
+
+            Return ObjectCopy(Me)
+
+        End Function
+
         Function ObjectCopy(ByVal obj As Object) As Object
 
             Dim objMemStream As New MemoryStream()

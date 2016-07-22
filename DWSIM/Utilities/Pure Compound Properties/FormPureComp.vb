@@ -848,7 +848,7 @@ Public Class FormPureComp
         constprop.IsModified = True
         SetCompStatus()
 
-        For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
+        For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.MaterialStream)
             For Each p As BaseClasses.Phase In mat.Phases.Values
                 For Each subst As BaseClasses.Compound In p.Compounds.Values
                     If subst.ConstantProperties.Name = constprop.Name Then

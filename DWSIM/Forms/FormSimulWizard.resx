@@ -120,6 +120,9 @@
   <data name="&gt;&gt;lblFlashAlgoDesc.Name" xml:space="preserve">
     <value>lblFlashAlgoDesc</value>
   </data>
+  <data name="casno.HeaderText" xml:space="preserve">
+    <value>No. CAS</value>
+  </data>
   <data name="Button8.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -129,9 +132,9 @@
   <data name="&gt;&gt;DataGridView1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnInfoLeft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>679, 50</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button11.TabIndex" type="System.Int32, mscorlib">
@@ -146,18 +149,21 @@
   <data name="&gt;&gt;btnInfoLeft.Parent" xml:space="preserve">
     <value>WizardPage2</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="WizardPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>715, 404</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
+  <data name="$this.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;LinkLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblFlashAlgoDesc.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 356</value>
   </data>
   <data name="&gt;&gt;dgvpp.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -168,8 +174,8 @@
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Column10.ToolTipText" xml:space="preserve">
-    <value>Supported by FPROPS Property Package</value>
+  <data name="&gt;&gt;WizardPage1.Type" xml:space="preserve">
+    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
   <data name="ComboBox2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -179,9 +185,6 @@
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="Column12.HeaderText" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;lblFlashAlgoDesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -195,17 +198,26 @@
   <data name="&gt;&gt;Column6.Name" xml:space="preserve">
     <value>Column6</value>
   </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>O Algoritmo Flash é responsável por determinar as fases em equilíbrio, suas quantidades (e distribuição dos componentes nestas fases) nas diversas condições do processo simulado.
+
+Selecione um Algoritmo Flash Padrão, adequado para a sua simulação. Se seu sistema pode apresentar instabilidades na Phase líquida (sistemas imiscíveis), selecione um algoritmo capaz de prever o equilíbrio entre três Phases (ELLV). Para calcular equilíbrio incluindo uma Phase sólida, selecione o algoritmo correspondente. Para sistemas complexos, utilize o algoritmo de minimização de Gibbs mais adequado (duas ou três Phases).
+
+Clique em "Próximo" para continuar.</value>
+  </data>
   <data name="WizardPage1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="btnInfoLeft.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;Column7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;ListViewA.Name" xml:space="preserve">
     <value>ListViewA</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Bem-vindo ao assistente de configuração da simulação. 
+
+Clique em "Próximo" para continuar.</value>
   </data>
   <data name="Button10.Location" type="System.Drawing.Point, System.Drawing">
     <value>439, 100</value>
@@ -213,17 +225,14 @@
   <data name="&gt;&gt;Button7.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;ListViewPP.Name" xml:space="preserve">
-    <value>ListViewPP</value>
-  </data>
   <data name="Button8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>WizardPage2</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 15</value>
+  <data name="ListViewPP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -249,11 +258,11 @@
   <data name="Button10.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="ComboBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 58</value>
+  <data name="&gt;&gt;btnInfoLeft.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Procurar</value>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 4</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.Parent" xml:space="preserve">
     <value>WizardPage3</value>
@@ -264,14 +273,11 @@
   <data name="&gt;&gt;WizardPage3.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="Button8.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
+  <data name="ComboBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 58</value>
   </data>
   <data name="&gt;&gt;Button8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -284,9 +290,6 @@
   </data>
   <data name="Button10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 15</value>
@@ -312,14 +315,8 @@
   <data name="DataGridView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 90</value>
   </data>
-  <data name="GroupBox6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introdução</value>
-  </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -345,17 +342,11 @@
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;StepWizardControl1.Name" xml:space="preserve">
-    <value>StepWizardControl1</value>
-  </data>
   <data name="&gt;&gt;ListViewPP.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;ListViewA.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
   </data>
   <data name="&gt;&gt;ListBoxPP.Name" xml:space="preserve">
     <value>ListBoxPP</value>
@@ -363,20 +354,17 @@
   <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
-    <value>Column1</value>
-  </data>
   <data name="LinkLabelPropertyMethods.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 380</value>
   </data>
-  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
+    <value>LinkLabel2</value>
   </data>
   <data name="Label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="WizardPage2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
     <value>619, 15</value>
@@ -414,32 +402,41 @@
   <data name="WizardPage4.Size" type="System.Drawing.Size, System.Drawing">
     <value>715, 404</value>
   </data>
+  <data name="Column12.ToolTipText" xml:space="preserve">
+    <value>Configure</value>
+  </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 25</value>
   </data>
   <data name="btnInfoRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>439, 187</value>
   </data>
-  <data name="Button8.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+  <data name="ListViewPP.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Button11.Name" xml:space="preserve">
-    <value>Button11</value>
+  <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
+    <value>WizardPage4</value>
+  </data>
+  <data name="dgvpp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 19</value>
   </data>
   <data name="TextBox1.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>679, 107</value>
+  </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 4</value>
+  <data name="StepWizardControl1.FinishButtonText" xml:space="preserve">
+    <value>&amp;Finalizar</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="&gt;&gt;Column11.Name" xml:space="preserve">
     <value>Column11</value>
@@ -447,8 +444,8 @@
   <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnInfoLeft.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 23</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>WizardPage5</value>
@@ -459,11 +456,11 @@
   <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 281</value>
   </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Procurar</value>
   </data>
-  <data name="btnInfoLeft.ToolTip" xml:space="preserve">
-    <value>Clique para visualizar informações sobre o componente selecionado na lista à esquerda.</value>
+  <data name="&gt;&gt;Button11.Name" xml:space="preserve">
+    <value>Button11</value>
   </data>
   <data name="LinkLabel1.ToolTip" xml:space="preserve">
     <value />
@@ -510,11 +507,11 @@
   <data name="GroupBox12.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>Sistema de Unidades</value>
-  </data>
-  <data name="ListViewA.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
     <value>356, 309</value>
@@ -537,8 +534,8 @@
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ListViewPP.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Button7.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="btnInfoRight.Text" xml:space="preserve">
     <value> &gt;&gt;&gt;</value>
@@ -546,8 +543,8 @@
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Column18.HeaderText" xml:space="preserve">
-    <value>ID</value>
+  <data name="Column12.HeaderText" xml:space="preserve">
+    <value />
   </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -567,20 +564,11 @@
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
-  <data name="btnInfoLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 23</value>
-  </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 42</value>
   </data>
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="dgvpp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 19</value>
-  </data>
-  <data name="&gt;&gt;LinkLabelPropertyMethods.Name" xml:space="preserve">
-    <value>LinkLabelPropertyMethods</value>
   </data>
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -594,11 +582,11 @@
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;ogc1.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;Column16.Name" xml:space="preserve">
+    <value>Column16</value>
   </data>
-  <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
-    <value>LinkLabel2</value>
+  <data name="ogc1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 45</value>
@@ -611,6 +599,9 @@
   </data>
   <data name="StepWizardControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
+  </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;DataGridView1.Parent" xml:space="preserve">
     <value>WizardPage5</value>
@@ -627,9 +618,6 @@
   <data name="&gt;&gt;ListBoxPP.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
   <data name="&gt;&gt;StepWizardControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -644,9 +632,6 @@
   </data>
   <data name="ListViewA.LabelWrap" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="ComboBox2.ItemHeight" type="System.Int32, mscorlib">
-    <value>15</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 164</value>
@@ -675,8 +660,14 @@
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column17.Type" xml:space="preserve">
+  <data name="&gt;&gt;casno.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
+    <value>182</value>
+  </data>
+  <data name="&gt;&gt;dgvpp.Parent" xml:space="preserve">
+    <value>GroupBox12</value>
   </data>
   <data name="&gt;&gt;casno.Name" xml:space="preserve">
     <value>casno</value>
@@ -696,20 +687,17 @@
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 23</value>
+  <data name="Column8.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
+    <value>Label2</value>
   </data>
   <data name="Button11.Location" type="System.Drawing.Point, System.Drawing">
     <value>439, 129</value>
-  </data>
-  <data name="Button11.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ListBoxPP.Items2" xml:space="preserve">
     <value>Inside-Out (Equilíbrio Líquido-Vapor)</value>
@@ -729,8 +717,8 @@
   <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;casno.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnInfoLeft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Unidade</value>
@@ -740,6 +728,9 @@
   </data>
   <data name="LinkLabel2.Text" xml:space="preserve">
     <value>Clique aqui para obter ajuda na seleção do Pacote de Propriedades mais apropriado para seu sistema.</value>
+  </data>
+  <data name="GroupBox12.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
   <data name="LinkLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -756,6 +747,9 @@
   <data name="btnInfoRight.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
+  <data name="&gt;&gt;btnInfoRight.Name" xml:space="preserve">
+    <value>btnInfoRight</value>
+  </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>439, 158</value>
   </data>
@@ -768,14 +762,17 @@
   <data name="&gt;&gt;WizardPage5.Name" xml:space="preserve">
     <value>WizardPage5</value>
   </data>
-  <data name="&gt;&gt;Column16.Name" xml:space="preserve">
-    <value>Column16</value>
+  <data name="&gt;&gt;ogc1.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="Column11.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="&gt;&gt;Column9.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
   </data>
   <data name="&gt;&gt;Column12.Name" xml:space="preserve">
     <value>Column12</value>
@@ -816,17 +813,14 @@
   <data name="&gt;&gt;WizardPage4.Name" xml:space="preserve">
     <value>WizardPage4</value>
   </data>
-  <data name="&gt;&gt;ogc1.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
-  </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>320, 23</value>
   </data>
-  <data name="&gt;&gt;Column16.Type" xml:space="preserve">
+  <data name="&gt;&gt;Column17.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ListViewPP.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="&gt;&gt;Column16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ListBoxPP.Items6" xml:space="preserve">
     <value>Loops Aninhados (Equilíbrio Sólido-Líquido - Sistemas Eutéticos)</value>
@@ -834,11 +828,14 @@
   <data name="Button10.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;Button7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="WizardPage3.Text" xml:space="preserve">
+    <value>Pacote de Propriedades</value>
   </data>
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>
+  </data>
+  <data name="&gt;&gt;Button7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ListBoxPP.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 164</value>
@@ -855,8 +852,8 @@
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Propriedade</value>
+  <data name="GroupBox4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>706, 38</value>
@@ -867,8 +864,8 @@
   <data name="Label9.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="lblFlashAlgoDesc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 319</value>
+  <data name="ComboBox2.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="ListBoxPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>566, 139</value>
@@ -885,8 +882,8 @@
   <data name="&gt;&gt;Column8.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnInfoLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 25</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 319</value>
@@ -900,10 +897,7 @@
   <data name="&gt;&gt;ListBoxPP.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="WizardPage3.Text" xml:space="preserve">
-    <value>Pacote de Propriedades</value>
-  </data>
-  <data name="&gt;&gt;Column6.Type" xml:space="preserve">
+  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="WizardPage2.Text" xml:space="preserve">
@@ -912,20 +906,17 @@
   <data name="btnInfoRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 23</value>
   </data>
-  <data name="&gt;&gt;Column18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="StepWizardControl1.BackButtonToolTipText" xml:space="preserve">
     <value>Retorna para a página anterior</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 50</value>
-  </data>
   <data name="&gt;&gt;Button7.Parent" xml:space="preserve">
     <value>WizardPage2</value>
+  </data>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
@@ -960,9 +951,6 @@
   <data name="&gt;&gt;btnInfoRight.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="WizardPage2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;LinkLabelPropertyMethods.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -983,6 +971,9 @@
   </data>
   <data name="LinkLabelPropertyMethods.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>709, 146</value>
   </data>
   <data name="StepWizardControl1.TitleIcon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1111,8 +1102,8 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>679, 107</value>
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
   <data name="Column8.HeaderText" xml:space="preserve">
     <value>Tipo</value>
@@ -1144,6 +1135,9 @@
   <data name="&gt;&gt;Column7.Name" xml:space="preserve">
     <value>Column7</value>
   </data>
+  <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
+    <value>WizardPage2</value>
+  </data>
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Nome</value>
   </data>
@@ -1156,20 +1150,17 @@
   <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
     <value>439, 71</value>
   </data>
-  <data name="&gt;&gt;WizardPage1.Type" xml:space="preserve">
-    <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
+  <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;GroupBox12.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ComboBox2.ToolTip" xml:space="preserve">
+  <data name="Button8.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="Label2.ToolTip" xml:space="preserve">
     <value />
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Selecione os componentes que deseja adicionar à simulação. Utilize a caixa de texto para procurar e selecionar um componente na lista. Clique em "Próximo" para continuar.</value>
-  </data>
-  <data name="&gt;&gt;Column12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button8.Name" xml:space="preserve">
     <value>Button8</value>
@@ -1177,8 +1168,8 @@
   <data name="Column5.ToolTipText" xml:space="preserve">
     <value>Supported by CoolProp Property Package</value>
   </data>
-  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 356</value>
+  <data name="&gt;&gt;Column18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextBox1.Parent" xml:space="preserve">
     <value>WizardPage2</value>
@@ -1194,6 +1185,9 @@
   </data>
   <data name="Button11.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 23</value>
+  </data>
+  <data name="Column18.HeaderText" xml:space="preserve">
+    <value>ID</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 5</value>
@@ -1219,6 +1213,9 @@
   <data name="&gt;&gt;Button8.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
+  <data name="&gt;&gt;Label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Pacotes Disponíveis</value>
   </data>
@@ -1228,8 +1225,8 @@
   <data name="ListViewPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 285</value>
   </data>
-  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
-    <value>WizardPage4</value>
+  <data name="&gt;&gt;Column12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ListViewA.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1237,8 +1234,8 @@
   <data name="LinkLabelPropertyMethods.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
-  <data name="Column12.ToolTipText" xml:space="preserve">
-    <value>Configure</value>
+  <data name="&gt;&gt;Column1.Name" xml:space="preserve">
+    <value>Column1</value>
   </data>
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1252,8 +1249,8 @@
   <data name="Button11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Button11.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;LinkLabelPropertyMethods.Name" xml:space="preserve">
+    <value>LinkLabelPropertyMethods</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 15</value>
@@ -1264,8 +1261,8 @@
   <data name="WizardPage1.Size" type="System.Drawing.Size, System.Drawing">
     <value>715, 404</value>
   </data>
-  <data name="ListViewPP.LabelWrap" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="btnInfoLeft.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="lblFlashAlgoDesc.ToolTip" xml:space="preserve">
     <value />
@@ -1279,47 +1276,47 @@
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Column8.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 15</value>
   </data>
-  <data name="btnInfoLeft.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;ListViewPP.Name" xml:space="preserve">
+    <value>ListViewPP</value>
   </data>
-  <data name="ogc1.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="&gt;&gt;Column6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Button10.Text" xml:space="preserve">
     <value>&lt; Remover</value>
   </data>
+  <data name="&gt;&gt;StepWizardControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
   <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="Button8.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Fechar e ir para a Janela de Configuração da Simulação</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 4</value>
+  <data name="&gt;&gt;ColumnHeader3.Name" xml:space="preserve">
+    <value>ColumnHeader3</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader3.Name" xml:space="preserve">
-    <value>ColumnHeader3</value>
+  <data name="btnInfoLeft.ToolTip" xml:space="preserve">
+    <value>Clique para visualizar informações sobre o componente selecionado na lista à esquerda.</value>
   </data>
-  <data name="lblFlashAlgoDesc.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Selecione os componentes que deseja adicionar à simulação. Utilize a caixa de texto para procurar e selecionar um componente na lista. Clique em "Próximo" para continuar.</value>
   </data>
   <data name="lblFlashAlgoDesc.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
-    <value>Column2</value>
+  <data name="ListViewA.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Adicionar &gt;</value>
@@ -1327,16 +1324,14 @@
   <data name="&gt;&gt;Column3.Name" xml:space="preserve">
     <value>Column3</value>
   </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="ListViewPP.LabelWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;Column7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Bem-vindo ao assistente de configuração da simulação. 
-
-Clique em "Próximo" para continuar.</value>
+  <data name="btnInfoLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>CP</value>
@@ -1344,8 +1339,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="Label7.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="ListViewPP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="lblFlashAlgoDesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 319</value>
   </data>
   <data name="Button11.Text" xml:space="preserve">
     <value>Limpar Lista</value>
@@ -1353,23 +1348,23 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;LinkLabel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>WizardPage5</value>
+  <data name="Button11.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="&gt;&gt;Column11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Column2.Name" xml:space="preserve">
+    <value>Column2</value>
   </data>
   <data name="WizardPage5.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;btnInfoRight.Name" xml:space="preserve">
-    <value>btnInfoRight</value>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Sistema de Unidades</value>
   </data>
-  <data name="ListViewA.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;btnInfoLeft.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1389,38 +1384,41 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;ComboBox2.Parent" xml:space="preserve">
     <value>WizardPage5</value>
   </data>
-  <data name="&gt;&gt;TextBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>WizardPage5</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 4</value>
   </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>540, 15</value>
   </data>
-  <data name="&gt;&gt;lblFlashAlgoDesc.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="ListViewA.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="&gt;&gt;StepWizardControl1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;ogc1.Parent" xml:space="preserve">
+    <value>WizardPage2</value>
   </data>
   <data name="&gt;&gt;WizardPage5.Type" xml:space="preserve">
     <value>AeroWizard.WizardPage, AeroWizard, Version=2.0.2.27955, Culture=neutral, PublicKeyToken=915e74f5d64b8f37</value>
   </data>
-  <data name="ColumnHeader3.Width" type="System.Int32, mscorlib">
-    <value>182</value>
+  <data name="Column10.ToolTipText" xml:space="preserve">
+    <value>Supported by FPROPS Property Package</value>
   </data>
   <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>709, 146</value>
+  <data name="&gt;&gt;StepWizardControl1.Name" xml:space="preserve">
+    <value>StepWizardControl1</value>
   </data>
   <data name="WizardPage4.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
+    <value>WizardPage4</value>
   </data>
-  <data name="Button7.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Button11.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="ListViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1428,8 +1426,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;GroupBox12.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="GroupBox12.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="ListBoxPP.Items8" xml:space="preserve">
     <value>Loops Aninhados (Equilíbrio Líquido-Líquido-Vapor, Phases Líquidas Completamente Imiscíveis)</value>
@@ -1470,8 +1468,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="casno.HeaderText" xml:space="preserve">
-    <value>No. CAS</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Propriedade</value>
   </data>
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1485,27 +1483,29 @@ Clique em "Próximo" para continuar.</value>
   <data name="WizardPage5.Size" type="System.Drawing.Size, System.Drawing">
     <value>715, 404</value>
   </data>
-  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
-  <data name="btnInfoLeft.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+  <data name="GroupBox6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;lblFlashAlgoDesc.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;TextBox1.Name" xml:space="preserve">
     <value>TextBox1</value>
   </data>
-  <data name="&gt;&gt;Button10.Parent" xml:space="preserve">
-    <value>WizardPage2</value>
+  <data name="ComboBox2.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;ListViewA.Parent" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>O Algoritmo Flash é responsável por determinar as fases em equilíbrio, suas quantidades (e distribuição dos componentes nestas fases) nas diversas condições do processo simulado.
-
-Selecione um Algoritmo Flash Padrão, adequado para a sua simulação. Se seu sistema pode apresentar instabilidades na Phase líquida (sistemas imiscíveis), selecione um algoritmo capaz de prever o equilíbrio entre três Phases (ELLV). Para calcular equilíbrio incluindo uma Phase sólida, selecione o algoritmo correspondente. Para sistemas complexos, utilize o algoritmo de minimização de Gibbs mais adequado (duas ou três Phases).
-
-Clique em "Próximo" para continuar.</value>
+  <data name="Button7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btnInfoLeft.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
   </data>
   <data name="&gt;&gt;GroupBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1519,8 +1519,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="LinkLabelPropertyMethods.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="StepWizardControl1.FinishButtonText" xml:space="preserve">
-    <value>&amp;Finalizar</value>
+  <data name="&gt;&gt;ListViewPP.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;GroupBox12.Name" xml:space="preserve">
     <value>GroupBox12</value>
@@ -1540,8 +1540,8 @@ Clique em "Próximo" para continuar.</value>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 368</value>
   </data>
-  <data name="&gt;&gt;dgvpp.Parent" xml:space="preserve">
-    <value>GroupBox12</value>
+  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>460, 23</value>
   </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Assistente de Configuração da Simulação</value>
@@ -1552,19 +1552,19 @@ Clique em "Próximo" para continuar.</value>
   <data name="Column9.HeaderText" xml:space="preserve">
     <value>Fórmula</value>
   </data>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="casno.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1582,7 +1582,7 @@ Clique em "Próximo" para continuar.</value>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>
-  <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1594,7 +1594,7 @@ Clique em "Próximo" para continuar.</value>
   <metadata name="Column18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1606,7 +1606,7 @@ Clique em "Próximo" para continuar.</value>
   <metadata name="Column17.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column11.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

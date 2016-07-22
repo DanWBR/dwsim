@@ -482,7 +482,7 @@ Public Class FormSimulWizard
     End Sub
 
     Private Sub btnInfoRight_Click(sender As Object, e As EventArgs) Handles btnInfoRight.Click
-        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
+        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = True, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
         f.ShowDialog(Me)
     End Sub
 

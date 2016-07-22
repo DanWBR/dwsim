@@ -127,16 +127,10 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Close Wizard and go to the Simulation Configuration Window</value>
   </data>
-  <data name="Button1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Welcome to the simulation configuration wizard.
 
 Click "Next" to continue.</value>
-  </data>
-  <data name="Label1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="btnInfoRight.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the right-hand list.</value>
@@ -144,29 +138,14 @@ Click "Next" to continue.</value>
   <data name="btnInfoLeft.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the left-hand list.</value>
   </data>
-  <data name="TextBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListViewA.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Added</value>
-  </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Select the compounds that you want to add to the simulation. Use the textbox to search and select a compound in the list. Click "Next" to continue.</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button11.Text" xml:space="preserve">
     <value>Clear List</value>
-  </data>
-  <data name="Button11.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 15</value>
@@ -174,14 +153,8 @@ Click "Next" to continue.</value>
   <data name="Label3.Text" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button10.Text" xml:space="preserve">
     <value>&lt; Remove</value>
-  </data>
-  <data name="Button10.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -198,14 +171,8 @@ Click "Next" to continue.</value>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Database</value>
   </data>
-  <data name="ogc1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Add &gt;</value>
-  </data>
-  <data name="Button7.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>544, 15</value>
@@ -213,32 +180,17 @@ Click "Next" to continue.</value>
   <data name="LinkLabel2.Text" xml:space="preserve">
     <value>Click here to get help on selecting the best Thermodynamic Model/Property Package for your system.</value>
   </data>
-  <data name="LinkLabel2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
     <value>593, 15</value>
   </data>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
     <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
   </data>
-  <data name="LinkLabelPropertyMethods.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="Button8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ListViewPP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
-  </data>
-  <data name="GroupBox6.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -246,14 +198,8 @@ Click "Next" to continue.</value>
   <data name="Column17.HeaderText" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="dgvpp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Added Property Packages</value>
-  </data>
-  <data name="GroupBox12.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>703, 33</value>
@@ -261,20 +207,11 @@ Click "Next" to continue.</value>
   <data name="Label4.Text" xml:space="preserve">
     <value>Select and Add the Property Packages that you want to use in your simulation. The first on the list will be used by default by all flowsheet objects. Click "Next" to continue.</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblFlashAlgoDesc.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 15</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Algorithm Description</value>
-  </data>
-  <data name="Label9.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ListBoxPP.Items" xml:space="preserve">
     <value>Nested Loops (VLE)</value>
@@ -309,9 +246,6 @@ Click "Next" to continue.</value>
   <data name="ListBoxPP.Size" type="System.Drawing.Size, System.Drawing">
     <value>566, 154</value>
   </data>
-  <data name="ListBoxPP.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 149</value>
   </data>
@@ -321,17 +255,11 @@ Click "Next" to continue.</value>
   <data name="Label6.Text" xml:space="preserve">
     <value>Default Flash Algorithm</value>
   </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>407, 15</value>
   </data>
   <data name="LinkLabel1.Text" xml:space="preserve">
     <value>Click here to learn more about the flash algorithms implemented in DWSIM.</value>
-  </data>
-  <data name="LinkLabel1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>709, 134</value>
@@ -342,9 +270,6 @@ Click "Next" to continue.</value>
 Select a Default Flash Algorithm for your simulation. If your system can show instabilities in the liquid phase (immiscible compounds), select an algorithm to predict the equilibrium with two liquid phases (VLLE). To calculate equilibrium including a solid phase, select the corresponding algorithm. For complex systems, use one of the two Gibbs Minimization algorithms.
 
 Click "Next" to continue.</value>
-  </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -358,57 +283,30 @@ Click "Next" to continue.</value>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
-  <data name="DataGridView1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ComboBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 15</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
-  <data name="Label8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Select the desired System of Units for your simulation. You can change the units of existing systems, include new systems and perform other operations in the simulation setup window anytime after finishing this wizard.
 Click "Finish" to exit the wizard and start simulating.</value>
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
-  </data>
-  <data name="WizardPage5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="WizardPage4.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
   </data>
-  <data name="WizardPage4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>Property Packages</value>
-  </data>
-  <data name="WizardPage3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="WizardPage2.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
-  <data name="WizardPage2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Introduction</value>
-  </data>
-  <data name="WizardPage1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Simulation Configuration Wizard</value>
@@ -539,11 +437,5 @@ Click "Finish" to exit the wizard and start simulating.</value>
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
-  </data>
-  <data name="StepWizardControl1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

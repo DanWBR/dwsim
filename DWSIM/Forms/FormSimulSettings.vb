@@ -1017,7 +1017,8 @@ Public Class FormSimulSettings
             Else
                 ppid = dgvpp.SelectedRows(0).Cells(0).Value
             End If
-            pp = FrmChild.Options.PropertyPackages(ppid).Clone
+            pp = FrmChild.Options.PropertyPackages(ppid).DeepClone
+            pp.Flowsheet = FrmChild
             With pp
                 pp.Tag = pp.Tag & CStr(FormFlowsheet.Options.PropertyPackages.Count)
                 pp.UniqueID = Guid.NewGuid.ToString
@@ -1543,7 +1544,7 @@ Public Class FormSimulSettings
     End Sub
 
     Private Sub btnInfoRight_Click(sender As Object, e As EventArgs) Handles btnInfoRight.Click
-        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = False, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
+        Dim f As New FormPureComp() With {.Flowsheet = FrmChild, .Added = True, .MyCompound = Me.FrmChild.Options.SelectedComponents(Me.ListViewA.SelectedItems(0).Tag)}
         FrmChild.DisplayForm(f)
     End Sub
 

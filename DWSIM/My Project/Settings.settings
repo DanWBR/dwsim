@@ -157,7 +157,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="PreviewVersion" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Preview 3</Value>
+      <Value Profile="(Default)">Preview 4</Value>
     </Setting>
   </Settings>
 </SettingsFile>
