@@ -17,7 +17,7 @@ Public Class PipeThermalProfileEditor
     Private Sub RadioButton9_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton9.CheckedChanged
         If RadioButton9.Checked = True Then
 
-            PipeOp.ThermalProfile.Tipo = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC
+            PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC
             TextBoxCGTC.Enabled = True
             TextBoxTA.Enabled = True
             TextBoxTAG.Enabled = True
@@ -34,7 +34,7 @@ Public Class PipeThermalProfileEditor
     Private Sub RadioButton8_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton8.CheckedChanged
         If RadioButton8.Checked = True Then
 
-            PipeOp.ThermalProfile.Tipo = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q
+            PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q
             TextBoxCT.Enabled = True
 
         Else
@@ -47,7 +47,7 @@ Public Class PipeThermalProfileEditor
     Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
 
         If RadioButton7.Checked = True Then
-            PipeOp.ThermalProfile.Tipo = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC
+            PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC
             TextBoxTA2.Enabled = True
             TextBoxTAG2.Enabled = True
             CheckBoxIPT.Enabled = True
@@ -151,9 +151,9 @@ Public Class PipeThermalProfileEditor
             Me.ComboBoxMAT.SelectedIndex = 0
         Else
             With PipeOp.ThermalProfile
-                If PipeOp.ThermalProfile.Tipo = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then Me.RadioButton9.Checked = True
-                If PipeOp.ThermalProfile.Tipo = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then Me.RadioButton8.Checked = True
-                If PipeOp.ThermalProfile.Tipo = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
+                If PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then Me.RadioButton9.Checked = True
+                If PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then Me.RadioButton8.Checked = True
+                If PipeOp.ThermalProfile.TipoPerfil = UnitOperations.Auxiliary.Pipe.ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then Me.RadioButton7.Checked = True
                 Me.ComboBoxMAMB.SelectedIndex = .Meio
                 Me.ComboBoxMAT.SelectedIndex = .Material
                 Me.TextBoxCGTC.Text = cv.ConvertFromSI(su.heat_transf_coeff, .CGTC_Definido).ToString()

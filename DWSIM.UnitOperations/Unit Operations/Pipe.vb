@@ -245,11 +245,11 @@ Namespace UnitOperations
             Dim cntP, cntT As Integer
 
             If Me.Specification = specmode.OutletTemperature Then
-                Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_Q
+                Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q
                 Me.ThermalProfile.Calor_trocado = 0.0#
             End If
 
-            If Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
+            If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
                 Text = Me.ThermalProfile.Temp_amb_definir
                 dText_dL = Me.ThermalProfile.AmbientTemperatureGradient
             Else
@@ -426,11 +426,11 @@ Namespace UnitOperations
 
                                     Cp_m = holdup * Cp_l + (1 - holdup) * Cp_v
 
-                                    If Not Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
-                                        If Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
+                                    If Not Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_Q Then
+                                        If Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Definir_CGTC Then
                                             U = Me.ThermalProfile.CGTC_Definido
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
-                                        ElseIf Me.ThermalProfile.Tipo = ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then
+                                        ElseIf Me.ThermalProfile.TipoPerfil = ThermalEditorDefinitions.ThermalProfileType.Estimar_CGTC Then
                                             A = Math.PI * (.DE * 0.0254) * .Comprimento / .Incrementos
                                             Tpe = Tin + (Tout - Tin) / 2
                                             Dim resultU As Double() = CalcOverallHeatTransferCoefficient(.Material, holdup, .Comprimento / .Incrementos, _

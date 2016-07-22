@@ -140,7 +140,7 @@
             End Set
         End Property
 
-        Public Property Tipo() As ThermalProfileType
+        Public Property TipoPerfil() As ThermalProfileType
             Get
                 Return m_type
             End Get
@@ -150,9 +150,9 @@
         End Property
 
         Public Enum ThermalProfileType
-            Definir_CGTC
-            Definir_Q
-            Estimar_CGTC
+            Definir_CGTC = 0
+            Definir_Q = 1
+            Estimar_CGTC = 2
         End Enum
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
