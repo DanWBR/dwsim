@@ -315,6 +315,12 @@
     <Compile Include="Forms\FormAddFlowsheetObject.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormAddUtility.Designer.vb">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAddUtility.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormConfigureMasterTable.Designer.vb">
       <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
     </Compile>
@@ -764,6 +770,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddFlowsheetObject.resx">
       <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddUtility.en.resx">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddUtility.resx">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.es.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>

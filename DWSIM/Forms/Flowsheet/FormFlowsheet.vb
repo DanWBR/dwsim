@@ -669,6 +669,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Application.DoEvents()
 
+        UtilitiesTSMI.DropDownItems.Add(TSMIAddUtility)
+
         For Each obj In Me.SimulationObjects.Values
             For Each attchu In obj.AttachedUtilities
                 Dim tsmi As New ToolStripMenuItem
@@ -2958,5 +2960,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #End Region
 
+
+    Private Sub AdicionarUtilitárioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TSMIAddUtility.Click
+
+        Dim f As New FormAddUtility() With {.Flowsheet = Me}
+
+        f.ShowDialog(Me)
+
+    End Sub
 
 End Class
