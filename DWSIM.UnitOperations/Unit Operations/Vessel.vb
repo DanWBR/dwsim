@@ -140,7 +140,7 @@ Namespace UnitOperations
                 End If
             End If
 
-            Dim H, Hs, T, W, M, We, P, VF, Hf, H0 As Double
+            Dim H, Hs, T, W, M, We, P, VF, Hf, H0 As Double, nstr As Integer
             H = 0
             Hs = 0
             T = 0
@@ -158,6 +158,7 @@ Namespace UnitOperations
 
             Dim cp As ConnectionPoint
 
+            nstr = 0.0#
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached And cp.Type = GraphicObjects.ConType.ConIn Then
                     nc += 1
@@ -185,6 +186,7 @@ Namespace UnitOperations
                     W += We
                     VF += ms.Phases(2).Properties.molarfraction.GetValueOrDefault * ms.Phases(0).Properties.molarflow.GetValueOrDefault
                     If Not Double.IsNaN(ms.Phases(0).Properties.enthalpy.GetValueOrDefault) Then H += We * ms.Phases(0).Properties.enthalpy.GetValueOrDefault
+                    nstr += 1
                 End If
             Next
 
@@ -255,12 +257,24 @@ Namespace UnitOperations
             If Me.OverrideT = False And Me.OverrideP = False Then
 
                 W = mix.Phases(0).Properties.massflow.GetValueOrDefault
-                Dim j As Integer = 0
 
-                mix.PropertyPackage = Me.PropertyPackage
-                mix.SpecType = StreamSpec.Pressure_and_Enthalpy
-                mix.Calculate(True, True)
-                T = mix.Phases(0).Properties.temperature.getvalueordefault
+                If nstr = 1 And E0 = 0.0# Then
+                    'no need to perform flash if there's only one stream and no heat added
+                    For Each cp In Me.GraphicObject.InputConnectors
+                        If cp.IsAttached And cp.Type = GraphicObjects.ConType.ConIn Then
+                            ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
+                            mix.Assign(ms)
+                            mix.AssignProps(ms)
+                            Exit For
+                        End If
+                    Next
+                Else
+                    mix.PropertyPackage = Me.PropertyPackage
+                    mix.SpecType = StreamSpec.Pressure_and_Enthalpy
+                    mix.Calculate(True, True)
+                End If
+
+                T = mix.Phases(0).Properties.temperature.GetValueOrDefault
 
             Else
 
