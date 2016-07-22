@@ -120,7 +120,7 @@ Namespace DWSIM.Flowsheet
 
         Public ReactionSets As Dictionary(Of String, Interfaces.IReactionSet)
 
-        Public SimulationMode As String = ""
+        Public Property SimulationMode As String = ""
 
         Public PetroleumAssays As Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
 
@@ -174,13 +174,13 @@ Namespace DWSIM.Flowsheet
                 FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
             End If
 
-            Return XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
 
-            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me, True)
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
 
             elements.Add(New XElement("VisibleProperties"))
 
