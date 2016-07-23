@@ -19,6 +19,7 @@
 Imports System.Windows.Forms
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports System.Drawing
 
 <System.Serializable()> Public Class PipeHydraulicProfileEditor
 
@@ -71,7 +72,16 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
     Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
     Friend WithEvents ColBase As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Public WithEvents KryptonRadioButton2 As System.Windows.Forms.RadioButton
+    Public WithEvents KryptonRadioButton1 As System.Windows.Forms.RadioButton
+    Public WithEvents GraphControl As ZedGraph.ZedGraphControl
     Private NumberFormat As String = ""
+
+    Dim px, py As New ArrayList
+    Dim loaded As Boolean = False
 
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
 
@@ -283,11 +293,11 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PipeHydraulicProfileEditor))
         Me.GridMalha = New System.Windows.Forms.DataGridView()
         Me.ColBase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CMenu1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -311,17 +321,28 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.KryptonRadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.KryptonRadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.GraphControl = New ZedGraph.ZedGraphControl()
         CType(Me.GridMalha, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CMenu1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'GridMalha
         '
+        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.AllowUserToAddRows = False
         Me.GridMalha.AllowUserToOrderColumns = True
         Me.GridMalha.AllowUserToResizeRows = False
         Me.GridMalha.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.GridMalha.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.GridMalha.ColumnHeadersVisible = False
         Me.GridMalha.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColBase})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -329,12 +350,11 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle2.FormatProvider = New System.Globalization.CultureInfo("pt-BR")
-        DataGridViewCellStyle2.NullValue = "<vazio>"
+        DataGridViewCellStyle2.NullValue = "<empty>"
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.GridMalha.DefaultCellStyle = DataGridViewCellStyle2
-        resources.ApplyResources(Me.GridMalha, "GridMalha")
         Me.GridMalha.GridColor = System.Drawing.SystemColors.Control
         Me.GridMalha.MultiSelect = False
         Me.GridMalha.Name = "GridMalha"
@@ -366,62 +386,62 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         '
         'CMenu1
         '
+        resources.ApplyResources(Me.CMenu1, "CMenu1")
         Me.CMenu1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7, Me.ToolStripMenuItem8, Me.ToolStripMenuItem9, Me.ToolStripMenuItem10, Me.ToolStripMenuItem11})
         Me.CMenu1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.CMenu1.Name = "ContextMenuStrip1"
         Me.CMenu1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.CMenu1.ShowImageMargin = False
-        resources.ApplyResources(Me.CMenu1, "CMenu1")
         '
         'ToolStripMenuItem2
         '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         '
         'ToolStripMenuItem3
         '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
         resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
         '
         'ToolStripMenuItem4
         '
-        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
         resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
         '
         'ToolStripMenuItem5
         '
-        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
         resources.ApplyResources(Me.ToolStripMenuItem5, "ToolStripMenuItem5")
+        Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
         '
         'ToolStripMenuItem6
         '
-        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
         resources.ApplyResources(Me.ToolStripMenuItem6, "ToolStripMenuItem6")
+        Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
         '
         'ToolStripMenuItem7
         '
-        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
         resources.ApplyResources(Me.ToolStripMenuItem7, "ToolStripMenuItem7")
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
         '
         'ToolStripMenuItem8
         '
-        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
         resources.ApplyResources(Me.ToolStripMenuItem8, "ToolStripMenuItem8")
+        Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
         '
         'ToolStripMenuItem9
         '
-        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
         resources.ApplyResources(Me.ToolStripMenuItem9, "ToolStripMenuItem9")
+        Me.ToolStripMenuItem9.Name = "ToolStripMenuItem9"
         '
         'ToolStripMenuItem10
         '
-        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
         resources.ApplyResources(Me.ToolStripMenuItem10, "ToolStripMenuItem10")
+        Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
         '
         'ToolStripMenuItem11
         '
-        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
         resources.ApplyResources(Me.ToolStripMenuItem11, "ToolStripMenuItem11")
+        Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
         '
         'ToolStrip1
         '
@@ -431,71 +451,126 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
         '
         'ToolStripButton1
         '
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.arrow_up
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'ToolStripButton3
         '
+        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
-        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
+        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.cross
-        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'ToolStripSeparator1
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         '
         'ToolStripButton5
         '
+        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
-        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
         Me.ToolStripButton5.Name = "ToolStripButton5"
         '
         'ToolStripSeparator2
         '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         '
         'ToolStripLabel1
         '
-        Me.ToolStripLabel1.Name = "ToolStripLabel1"
         resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
         '
         'ToolStripLabel2
         '
-        Me.ToolStripLabel2.Name = "ToolStripLabel2"
         resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.GridMalha)
+        Me.TabPage1.Controls.Add(Me.ToolStrip1)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.KryptonRadioButton2)
+        Me.TabPage2.Controls.Add(Me.KryptonRadioButton1)
+        Me.TabPage2.Controls.Add(Me.GraphControl)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'KryptonRadioButton2
+        '
+        resources.ApplyResources(Me.KryptonRadioButton2, "KryptonRadioButton2")
+        Me.KryptonRadioButton2.Checked = True
+        Me.KryptonRadioButton2.Name = "KryptonRadioButton2"
+        Me.KryptonRadioButton2.TabStop = True
+        '
+        'KryptonRadioButton1
+        '
+        resources.ApplyResources(Me.KryptonRadioButton1, "KryptonRadioButton1")
+        Me.KryptonRadioButton1.Name = "KryptonRadioButton1"
+        '
+        'GraphControl
+        '
+        resources.ApplyResources(Me.GraphControl, "GraphControl")
+        Me.GraphControl.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GraphControl.IsAntiAlias = True
+        Me.GraphControl.IsAutoScrollRange = True
+        Me.GraphControl.Name = "GraphControl"
+        Me.GraphControl.ScrollGrace = 0.0R
+        Me.GraphControl.ScrollMaxX = 0.0R
+        Me.GraphControl.ScrollMaxY = 0.0R
+        Me.GraphControl.ScrollMaxY2 = 0.0R
+        Me.GraphControl.ScrollMinX = 0.0R
+        Me.GraphControl.ScrollMinY = 0.0R
+        Me.GraphControl.ScrollMinY2 = 0.0R
         '
         'PipeHydraulicProfileEditor
         '
         resources.ApplyResources(Me, "$this")
-        Me.Controls.Add(Me.GridMalha)
-        Me.Controls.Add(Me.ToolStrip1)
+        Me.Controls.Add(Me.TabControl1)
         Me.Name = "PipeHydraulicProfileEditor"
         CType(Me.GridMalha, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CMenu1.ResumeLayout(False)
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -823,11 +898,13 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton5.Click
 
         Dim column As New DataGridViewColumn
+        Dim parsingresult As String
         Dim v1, v2, v3, v4, v5, v6, v7, v8, v9 As Object
 
         If Not PipeOp.Profile Is Nothing Then PipeOp.Profile.Sections.Clear()
         For Each column In Me.GridMalha.Columns
-            If ParseColumn(column) = "OK" Then
+            parsingresult = ParseColumn(column)
+            If parsingresult = "OK" Then
                 v1 = column.Index + 1
                 v2 = Me.GridMalha.Rows(1).Cells(column.Name).Value
                 v3 = Me.GridMalha.Rows(2).Cells(column.Name).Value
@@ -842,7 +919,7 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
                 PipeOp.Profile.Sections.Add(column.Index + 1, New PipeSection(v1, v2, v3, v4, v5, cv.Convert(Me.Units.distance, "m", v6), cv.Convert(Me.Units.distance, "m", v7), cv.Convert(Me.Units.diameter, "in", v8), cv.Convert(Me.Units.diameter, "in", v9)))
             Else
-                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1 & "."
+                ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Erronasecao") & " " & column.Index + 1 & ": " & parsingresult
                 RaiseEvent StatusChanged(e, PipeEditorStatus.Erro)
                 Exit Sub
             End If
@@ -880,29 +957,30 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
                 End If
                 If .Rows(1).Cells(column.Name).Value = PipeOp.FlowSheet.GetTranslatedString("Tubulaosimples") Then
                     If Not .Rows(3).Cells(column.Name).Value > 0.0# Then
-                        Return PipeOp.FlowSheet.GetTranslatedString("Erro")
-                        Exit Function
+                        Return "Invalid number of sections"
                     End If
                     If Not Convert.ToDouble(.Rows(5).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(5).Cells(column.Name).Value) Then
-                        Return PipeOp.FlowSheet.GetTranslatedString("Erro")
-                        Exit Function
+                        Return "Invalid length"
                     End If
                     If Double.IsNaN(.Rows(6).Cells(column.Name).Value) Then
-                        Return PipeOp.FlowSheet.GetTranslatedString("Erro")
+                        Return "Invalid elevation"
                         Exit Function
                     End If
+                    If Math.Abs(Convert.ToDouble(.Rows(6).Cells(column.Name).Value)) > Math.Abs(Convert.ToDouble(.Rows(5).Cells(column.Name).Value)) Then
+                        Return "Invalid elevation (H > L!)"
+                    End If
                     If Not Convert.ToDouble(.Rows(7).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(7).Cells(column.Name).Value) Then
-                        Return PipeOp.FlowSheet.GetTranslatedString("Erro")
+                        Return "Invalid external diameter"
                         Exit Function
                     End If
                     If Not Convert.ToDouble(.Rows(8).Cells(column.Name).Value) > 0.0# Or Double.IsNaN(.Rows(8).Cells(column.Name).Value) Or CDbl(.Rows(8).Cells(column.Name).Value) > CDbl(.Rows(7).Cells(column.Name).Value) Then
-                        Return PipeOp.FlowSheet.GetTranslatedString("Erro")
+                        Return "Invalid internal diameter"
                         Exit Function
                     End If
                 End If
             End With
         Catch ex As Exception
-            Return PipeOp.FlowSheet.GetTranslatedString("Erro")
+            Return ex.Message.ToString
             Exit Function
         End Try
         Return "OK"
@@ -1184,6 +1262,119 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
                 ToolStripLabel2.ForeColor = Drawing.Color.Green
                 PipeOp.Profile.Status = PipeEditorStatus.OK
             End If
+            Me.PipeEditor1_StatusChanged(e, PipeEditorStatus.OK)
+        End If
+
+        loaded = True
+
+    End Sub
+
+    Private Sub KryptonRadioButton1_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles KryptonRadioButton1.CheckedChanged, KryptonRadioButton2.CheckedChanged
+
+        If loaded Then Call Me.PipeEditor1_StatusChanged(e, PipeEditorStatus.OK)
+
+    End Sub
+
+    Private Sub PipeEditor1_StatusChanged(ByVal e As System.EventArgs, ByVal statuscode As PipeEditorStatus) Handles Me.StatusChanged
+
+        If PipeOp.Profile.Sections.Count = 0 Then Exit Sub
+
+        If statuscode = PipeEditorStatus.OK Then
+            px.Clear()
+            py.Clear()
+            px.Add(0.0#)
+            py.Add(0.0#)
+            If Me.KryptonRadioButton1.Checked Then
+                With PipeOp.Profile
+                    Dim i As Integer = 1
+                    Do
+                        If .Sections(i).TipoSegmento = "Tubulaosimples" Then
+                            If i >= 2 Then
+                                px.Add(px(px.Count - 1) + CDbl(.Sections(i).Comprimento))
+                                py.Add(py(py.Count - 1) + CDbl(.Sections(i).Elevacao))
+                            Else
+                                px.Add(CDbl(.Sections(i).Comprimento))
+                                py.Add(CDbl(.Sections(i).Elevacao))
+                            End If
+                        Else
+                            If i >= 2 Then
+                                px.Add(px(px.Count - 1))
+                                py.Add(py(py.Count - 1))
+                            Else
+                                px.Add(0.0#)
+                                py.Add(0.0#)
+                            End If
+                        End If
+                        i = i + 1
+                    Loop Until .Sections.ContainsKey(i) = False
+                End With
+
+                With Me.GraphControl.GraphPane
+                    .XAxis.Title.Text = PipeOp.FlowSheet.GetTranslatedString("Comprimentom")
+                    .YAxis.Title.Text = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
+                End With
+
+            Else
+                With PipeOp.Profile
+                    Dim i As Integer = 1
+                    Do
+                        If .Sections(i).TipoSegmento = "Tubulaosimples" Then
+                            If i >= 2 Then
+                                px.Add(px(px.Count - 1) + (CDbl(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
+                                py.Add(py(py.Count - 1) + CDbl(.Sections(i).Elevacao))
+                            Else
+                                px.Add((CDbl(.Sections(i).Comprimento ^ 2 - .Sections(i).Elevacao ^ 2) ^ 0.5))
+                                py.Add(CDbl(.Sections(i).Elevacao))
+                            End If
+                        Else
+                            If i >= 2 Then
+                                px.Add(px(px.Count - 1))
+                                py.Add(py(py.Count - 1))
+                            Else
+                                px.Add(0.0#)
+                                py.Add(0.0#)
+                            End If
+                        End If
+                        i = i + 1
+                    Loop Until .Sections.ContainsKey(i) = False
+                End With
+
+                With Me.GraphControl.GraphPane
+                    .XAxis.Title.Text = PipeOp.FlowSheet.GetTranslatedString("DistnciaHorizontalm")
+                    .YAxis.Title.Text = PipeOp.FlowSheet.GetTranslatedString("Elevaom")
+                End With
+
+            End If
+
+        End If
+
+        With Me.GraphControl.GraphPane
+            .Title.IsVisible = False
+            .CurveList.Clear()
+            With .AddCurve(PipeOp.FlowSheet.GetTranslatedString("Perfil"), px.ToArray(GetType(Double)), py.ToArray(GetType(Double)), Color.DeepSkyBlue, ZedGraph.SymbolType.Circle)
+                .Color = Color.SteelBlue
+                .Line.IsSmooth = False
+                .Symbol.Fill.Type = ZedGraph.FillType.Solid
+            End With
+            Me.GraphControl.IsAutoScrollRange = True
+            .XAxis.Title.FontSpec.Size = 22
+            .YAxis.Title.FontSpec.Size = 22
+            .XAxis.Scale.FontSpec.Size = 18
+            .YAxis.Scale.FontSpec.Size = 18
+            .AxisChange(Me.CreateGraphics)
+            Me.GraphControl.Invalidate()
+        End With
+
+        Me.GraphControl.GraphPane.Legend.IsVisible = False
+
+    End Sub
+
+
+    Private Sub GridMalha_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles GridMalha.CellValueChanged
+
+        If loaded Then
+            ToolStripLabel2.Text = PipeOp.FlowSheet.GetTranslatedString("Modified")
+            ToolStripLabel2.ForeColor = Color.DarkOrange
         End If
 
     End Sub

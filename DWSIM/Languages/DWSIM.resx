@@ -4658,7 +4658,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Por favor selecione um Pacote de Propriedades para continuar.</value>
   </data>
   <data name="Modified" xml:space="preserve">
-    <value>Modificar</value>
+    <value>Modificado</value>
   </data>
   <data name="Saved" xml:space="preserve">
     <value>Salvar</value>

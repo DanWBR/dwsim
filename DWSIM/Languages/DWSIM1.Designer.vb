@@ -8893,7 +8893,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Modificar.
+        '''  Looks up a localized string similar to Modificado.
         '''</summary>
         Friend Shared ReadOnly Property Modified() As String
             Get
