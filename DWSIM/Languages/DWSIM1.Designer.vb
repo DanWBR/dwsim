@@ -6130,7 +6130,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Ferro Bottomido.
+        '''  Looks up a localized string similar to Ferro Fundido.
         '''</summary>
         Friend Shared ReadOnly Property FerroBottomido() As String
             Get
