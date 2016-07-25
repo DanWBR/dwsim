@@ -230,7 +230,7 @@ Namespace UnitOperations
                         fpp = New FlowPackages.PetalasAziz
                         Calculator.CheckParallelPInvoke()
                     Else
-                        FlowSheet.ShowMessage("'Petalas-Aziz' model not available in 64-bit mode. Falling back to 'Beggs & Brill'...", IFlowsheet.MessageType.Warning)
+                        FlowSheet.ShowMessage("'Petalas & Aziz' model not available in 64-bit mode. Switching to 'Beggs & Brill'...", IFlowsheet.MessageType.Warning)
                         fpp = New FlowPackages.BeggsBrill
                     End If
                 Case Else
