@@ -25,7 +25,7 @@ Imports System.Linq
 
 Public Class FormPureComp
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits Form
 
     Dim MatStream As Streams.MaterialStream
 
@@ -34,6 +34,7 @@ Public Class FormPureComp
     Public MyCompound As ConstantProperties
 
     Public Added As Boolean = False
+    Public Loaded As Boolean = False
 
     Dim vxCp, vyCp, vxPvap, vyPvap, vxVisc, vyVisc, vxDHvap, vyDHvap, vxLD, vyLD, vxSD, vySD, vxSCP, vySCP, vxVapVisc,
         vyVapVisc, vxVapThCond, vyVapThCond, vxLiqThCond, vyLiqThCond, vxSurfTens, vySurfTens, vxLiqCp, vyLiqCp As New ArrayList
@@ -41,19 +42,7 @@ Public Class FormPureComp
 
     Private Sub FormPureComp_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Text = Me.Text & " - " & MyCompound.Name
-
-        chkEnableEdit.Enabled = Added
-
-        Me.ComboBox1.Items.Clear()
-        Me.ComboBox1.Items.Add(MyCompound.Name)
-        Me.ComboBox1.SelectedIndex = 0
-        Me.ComboBox1.Enabled = False
-
-        constprop = MyCompound
-        SetCompStatus()
-
-        Populate()
+        If Not MyCompound Is Nothing Then Me.Text = Me.Text & " - " & MyCompound.Name
 
     End Sub
 
@@ -994,4 +983,45 @@ Public Class FormPureComp
         DWSIM.App.HelpRequested("UT_PureCompProps.htm")
     End Sub
 
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
+        If loaded Then
+            Dim name As String = ComboBox1.SelectedItem.ToString
+            MyCompound = Me.Flowsheet.Options.SelectedComponents(name)
+            constprop = MyCompound
+            SetCompStatus()
+            Populate()
+        End If
+    End Sub
+
+    Private Sub FormPureComp_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        If MyCompound Is Nothing Then
+
+            Added = True
+            With Me.Flowsheet
+                Me.ComboBox1.Items.Clear()
+                For Each subst In .Options.SelectedComponents.Values
+                    Me.ComboBox1.Items.Add(subst.Name)
+                Next
+            End With
+            Me.ComboBox1.Enabled = True
+            loaded = True
+
+        Else
+
+            Me.ComboBox1.Items.Clear()
+            Me.ComboBox1.Items.Add(MyCompound.Name)
+            Me.ComboBox1.SelectedIndex = 0
+            Me.ComboBox1.Enabled = False
+
+            constprop = MyCompound
+            SetCompStatus()
+
+            Populate()
+
+        End If
+
+        chkEnableEdit.Enabled = Added
+
+    End Sub
 End Class

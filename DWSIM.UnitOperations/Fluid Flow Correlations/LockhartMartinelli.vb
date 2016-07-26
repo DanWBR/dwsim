@@ -48,7 +48,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
                 Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                resvect(0) = ("Lquidoapenas")
+                resvect(0) = "Liquid Only"
                 resvect(1) = 1
                 resvect(2) = dPl
                 resvect(3) = dPh
@@ -74,7 +74,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
                 Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                resvect(0) = ("Gsapenas")
+                resvect(0) = "Liquid Only"
                 resvect(1) = 0
                 resvect(2) = dPl
                 resvect(3) = dPh
@@ -149,7 +149,7 @@ Namespace FlowPackages
 
                 dPg = (Cg * rhov + Cl * rhol) * g * Math.Sin(teta) * L
 
-                resvect(0) = ("Homogneo")
+                resvect(0) = "Homogeneous"
                 resvect(1) = Cl
                 resvect(2) = dPf
                 resvect(3) = dPg

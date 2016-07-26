@@ -29,12 +29,12 @@ Namespace SystemsOfUnits
         End Sub
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
-            XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Return True
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
-            Return XMLSerializer.XMLSerializer.Serialize(Me, True)
+            Return XMLSerializer.XMLSerializer.Serialize(Me)
         End Function
 
         Public Property accel As String Implements Interfaces.IUnitsOfMeasure.accel
@@ -348,7 +348,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = "Custom1"
+                .Name = "C1"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -432,7 +432,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = "Custom2"
+                .Name = "C2"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -516,7 +516,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = "Custom3"
+                .Name = "C3"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -600,7 +600,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = "Custom4"
+                .Name = "C4"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -684,7 +684,7 @@ Namespace SystemsOfUnits
 
             With Me
 
-                .Name = "Custom5"
+                .Name = "C5"
 
                 .accel = "m/s2"
                 .area = "m2"

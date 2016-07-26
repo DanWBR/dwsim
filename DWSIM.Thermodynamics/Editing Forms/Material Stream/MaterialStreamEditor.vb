@@ -506,6 +506,8 @@ Public Class MaterialStreamEditor
                         comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                         W += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                     Next
+                    MatStream.Phases(0).Properties.molarflow = Q
+                    MatStream.Phases(0).Properties.massflow = W
 
                 Case 3
 
@@ -525,6 +527,8 @@ Public Class MaterialStreamEditor
                         comp.MoleFraction = comp.MassFraction.GetValueOrDefault / comp.ConstantProperties.Molar_Weight / mmtotal
                         Q += comp.MassFraction.GetValueOrDefault * W / comp.ConstantProperties.Molar_Weight * 1000
                     Next
+                    MatStream.Phases(0).Properties.molarflow = Q
+                    MatStream.Phases(0).Properties.massflow = W
 
                 Case 5
 
@@ -577,6 +581,8 @@ Public Class MaterialStreamEditor
                         comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                         W += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                     Next
+                    MatStream.Phases(0).Properties.molarflow = Q
+                    MatStream.Phases(0).Properties.massflow = W
 
                     ipp = Nothing
 
@@ -613,6 +619,8 @@ Public Class MaterialStreamEditor
                         comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
                         W += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                     Next
+                    MatStream.Phases(0).Properties.molarflow = Q
+                    MatStream.Phases(0).Properties.massflow = W
 
                 Case 4
 

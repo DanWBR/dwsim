@@ -54,7 +54,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
                 Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                ResVector(0) = ("Lquidoapenas")
+                ResVector(0) = "Liquid Only"
                 ResVector(1) = 1
                 ResVector(2) = dPl
                 ResVector(3) = dPh
@@ -80,7 +80,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
                 Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                ResVector(0) = ("Gsapenas")
+                ResVector(0) = "Vapor Only"
                 ResVector(1) = 0
                 ResVector(2) = dPl
                 ResVector(3) = dPh
@@ -145,23 +145,23 @@ Namespace FlowPackages
 
                 Dim fluxo As String
                 fluxo = ("NA")
-                If Cl < 0.01 And Frm < L1 Then fluxo = ("Segregado")
-                If Cl >= 0.01 And Frm < L2 Then fluxo = ("Segregado")
-                If Cl >= 0.01 And Cl < 0.4 And Frm > L3 And Frm <= L1 Then fluxo = ("Intermitente")
-                If Cl >= 0.4 And Frm > L3 And Frm <= L4 Then fluxo = ("Intermitente")
-                If Cl < 0.4 And Frm >= L1 Then fluxo = ("Distribudo")
-                If Cl >= 0.4 And Frm > L4 Then fluxo = ("Distribudo")
-                If Cl >= 0.01 And Frm > L2 And Frm < L3 Then fluxo = ("Transio")
+                If Cl < 0.01 And Frm < L1 Then fluxo = "Segregated"
+                If Cl >= 0.01 And Frm < L2 Then fluxo = "Segregated"
+                If Cl >= 0.01 And Cl < 0.4 And Frm > L3 And Frm <= L1 Then fluxo = "Intermittent"
+                If Cl >= 0.4 And Frm > L3 And Frm <= L4 Then fluxo = "Intermittent"
+                If Cl < 0.4 And Frm >= L1 Then fluxo = "Distributed"
+                If Cl >= 0.4 And Frm > L4 Then fluxo = "Distributed"
+                If Cl >= 0.01 And Frm > L2 And Frm < L3 Then fluxo = "Transition"
 
                 'calculo do ("liquidholdup") horizontal
                 Dim El_0, El_teta As Double
-                If fluxo = ("Segregado") Then
+                If fluxo = "Segregated" Then
                     El_0 = 0.98 * Cl ^ 0.4846 / (Frm ^ 0.0868)
-                ElseIf fluxo = ("Intermitente") Then
+                ElseIf fluxo = "Intermittent" Then
                     El_0 = 0.845 * Cl ^ 0.5351 / (Frm ^ 0.0173)
-                ElseIf fluxo = ("Distribudo") Then
+                ElseIf fluxo = "Distributed" Then
                     El_0 = 1.065 * Cl ^ 0.5824 / (Frm ^ 0.0609)
-                ElseIf fluxo = ("Transio") Then
+                ElseIf fluxo = "Transition" Then
                     Dim AI = (L3 - Frm) / (L3 - L2)
                     Dim BI = 1 - AI
                     El_0 = AI * 0.98 * Cl ^ 0.4846 / (Frm ^ 0.0868) + BI * 0.845 * Cl ^ 0.5351 / (Frm ^ 0.0173)
@@ -173,11 +173,11 @@ Namespace FlowPackages
                 Dim Nvl = 1.938 * vsl * (rhol / (32.2 * surft)) ^ 0.25
 
                 If deltaz > 0 Then
-                    If fluxo = ("Segregado") Then
+                    If fluxo = "Segregated" Then
                         beta = (1 - Cl) * Math.Log(0.011 * Nvl ^ 3.539 / (Cl ^ 3.768 * Frm ^ 1.614))
-                    ElseIf fluxo = ("Intermitente") Then
+                    ElseIf fluxo = "Intermittent" Then
                         beta = (1 - Cl) * Math.Log(2.96 * Cl ^ 0.305 * Frm ^ 0.0978 / Nvl ^ 0.4473)
-                    ElseIf fluxo = ("Distribudo") Then
+                    ElseIf fluxo = "Distributed" Then
                         beta = 0
                     End If
                 Else

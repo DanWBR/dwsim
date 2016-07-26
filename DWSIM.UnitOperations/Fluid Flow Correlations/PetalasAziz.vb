@@ -1,3 +1,5 @@
+Imports System.Runtime.InteropServices
+
 '    Petalas-Aziz Pressure Drop Calculation Routine
 '    Copyright 2012 Daniel Wagner O. de Medeiros
 '
@@ -22,15 +24,6 @@ Namespace FlowPackages
 
         Inherits FPBaseClass
 
-        Declare Sub DLL_PetAz Lib "PetAz.dll" Alias "_PETAZ" (ByRef DnsL As Single, _
-        ByRef DnsG As Single, ByRef MuL As Single, ByRef MuG As Single, ByRef Sgma As Single, _
-        ByRef D As Single, ByRef aK As Single, ByRef Theta As Single, ByRef VsL As Single, _
-        ByRef VsG As Single, ByRef Reg As Integer, ByRef dPf As Single, ByRef dPh As Single, _
-        ByRef eLx As Single, ByVal xReg As String)
-
-        'Call DLL_PetAz(DensL, DensG, MuL, MuG, Sigma, Dia, Rough, Theta, VsL,_ 
-        'VsG, Region, dPfr, dPhh, eL, RegionText)
-
         'INPUT Variables
         Protected DensL As Single  'Liquid density (lb/ft³)
         Protected DensG As Single  'Gas density (lb/ft³)
@@ -46,7 +39,14 @@ Namespace FlowPackages
         Protected dPhh As Single   'Hydrostatic Pressure Gradient (psi/ft)
         Protected eL As Single 'Volume Fraction Liquid
         Protected Region As Integer    'Code designating predicted flow regime
-        Public RegionText As String 'Text description of predicted flow regime
+        Public FlowRegime As String 'Text description of predicted flow regime
+
+        <DllImport("PetAz", CallingConvention:=CallingConvention.Cdecl, EntryPoint:="calcpdrop")> _
+        Public Shared Sub calcpdrop(ByRef DensL As Single, ByRef DensG As Single, ByRef MuL As Single, ByRef MuG As Single,
+                                                               ByRef Sigma As Single, ByRef Dia As Single, ByRef Rough As Single, ByRef Theta As Single,
+                                                               ByRef VsL As Single, ByRef VsG As Single, ByRef Region As Integer, ByRef dPfr As Single,
+                                                               ByRef dPhh As Single, ByRef eL As Single)
+        End Sub
 
         Function NRe(ByVal rho As Double, ByVal v As Double, ByVal D As Double, ByVal mu As Double) As Double
 
@@ -78,7 +78,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vlo ^ 2 / 2 * rhol
                 Dim dPh = rhol * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                ResVector(0) = ("Lquidoapenas")
+                ResVector(0) = "Liquid Only"
                 ResVector(1) = 1
                 ResVector(2) = dPl
                 ResVector(3) = dPh
@@ -104,7 +104,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
                 Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                ResVector(0) = ("Gsapenas")
+                ResVector(0) = "Vapor Only"
                 ResVector(1) = 0
                 ResVector(2) = dPl
                 ResVector(3) = dPh
@@ -139,11 +139,46 @@ Namespace FlowPackages
                 Dia = D * 39.37
                 Theta = Math.Atan(deltaz / (L ^ 2 - deltaz ^ 2) ^ 0.5) * 180 / Math.PI
                 Rough = k * 3.28084
-                RegionText = "                    "
+                FlowRegime = "                    "
 
-                DLL_PetAz(DensL, DensG, mul, muv, Sigma, Dia, Rough, Theta, VsL, VsG, Region, dPfr, dPhh, eL, RegionText)
+                calcpdrop(DensL, DensG, mul, muv, Sigma, Dia, Rough, Theta, VsL, VsG, Region, dPfr, dPhh, eL)
 
-                CalculateDeltaP = New Object() {RegionText.TrimEnd(" "), eL, dPfr * 6894.76 * 3.28084 * L, dPhh * 6894.76 * 3.28084 * L, (dPfr + dPhh) * 6894.76 * 3.28084 * L}
+                Select Case Region
+                    Case 1
+                        FlowRegime = "Elongated Bubbles"
+                    Case 2
+                        FlowRegime = "Bubbles"
+                    Case 3
+                        FlowRegime = "Stratified Smooth"
+                    Case 4
+                        FlowRegime = "Stratified Waves"
+                    Case 5
+                        FlowRegime = "Slug"
+                    Case 6
+                        FlowRegime = "Annular Mist"
+                    Case 7
+                        FlowRegime = "Dispersed Bubbles"
+                    Case 8
+                        FlowRegime = "Froth I (DB/AM transition)"
+                    Case 9
+                        FlowRegime = "Homogeneous"
+                    Case 10
+                        FlowRegime = "Froth"
+                    Case 11
+                        FlowRegime = "Stratified"
+                    Case 12
+                        FlowRegime = "Segregated"
+                    Case 13
+                        FlowRegime = "Transition"
+                    Case 14
+                        FlowRegime = "Intermittent"
+                    Case 15
+                        FlowRegime = "Distributed"
+                    Case 16
+                        FlowRegime = "Single Phase"
+                End Select
+
+                CalculateDeltaP = New Object() {FlowRegime, eL, dPfr * 6894.76 * 3.28084 * L, dPhh * 6894.76 * 3.28084 * L, (dPfr + dPhh) * 6894.76 * 3.28084 * L}
 
             End If
 

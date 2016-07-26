@@ -1,6 +1,6 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FormPureComp
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -24,29 +24,29 @@ Partial Class FormPureComp
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPureComp))
-        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle55 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle56 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LblModified = New System.Windows.Forms.Label()
         Me.BtnRestaurar = New System.Windows.Forms.Button()
@@ -182,21 +182,21 @@ Partial Class FormPureComp
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.LblModified)
         Me.GroupBox1.Controls.Add(Me.BtnRestaurar)
         Me.GroupBox1.Controls.Add(Me.chkEnableEdit)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.FaTabStrip1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
         'LblModified
         '
+        resources.ApplyResources(Me.LblModified, "LblModified")
         Me.LblModified.BackColor = System.Drawing.Color.Lime
         Me.LblModified.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.LblModified, "LblModified")
         Me.LblModified.ForeColor = System.Drawing.Color.Black
         Me.LblModified.Name = "LblModified"
         '
@@ -214,9 +214,9 @@ Partial Class FormPureComp
         '
         'ComboBox1
         '
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 300
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Name = "ComboBox1"
         '
         'Label1
@@ -226,20 +226,19 @@ Partial Class FormPureComp
         '
         'FaTabStrip1
         '
-        Me.FaTabStrip1.AlwaysShowClose = False
         resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
+        Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem6, Me.FaTabStripItem16, Me.FaTabStripItem17, Me.FaTabStripItem18, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem6
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GroupBox2
         '
@@ -250,6 +249,7 @@ Partial Class FormPureComp
         '
         'GridProps
         '
+        resources.ApplyResources(Me.GridProps, "GridProps")
         Me.GridProps.AllowUserToAddRows = False
         Me.GridProps.AllowUserToDeleteRows = False
         Me.GridProps.AllowUserToResizeColumns = False
@@ -257,7 +257,6 @@ Partial Class FormPureComp
         Me.GridProps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridProps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridProps.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
-        resources.ApplyResources(Me.GridProps, "GridProps")
         Me.GridProps.Name = "GridProps"
         Me.GridProps.RowHeadersVisible = False
         Me.GridProps.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -265,9 +264,9 @@ Partial Class FormPureComp
         'Column1
         '
         Me.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle47.BackColor = System.Drawing.Color.LightGray
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle47
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column1.FillWeight = 60.0!
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
@@ -276,8 +275,8 @@ Partial Class FormPureComp
         'Column2
         '
         Me.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle48
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column2.FillWeight = 20.0!
         resources.ApplyResources(Me.Column2, "Column2")
         Me.Column2.Name = "Column2"
@@ -286,9 +285,9 @@ Partial Class FormPureComp
         'Column3
         '
         Me.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle49.BackColor = System.Drawing.Color.LightGray
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle49
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column3.FillWeight = 20.0!
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
@@ -296,12 +295,13 @@ Partial Class FormPureComp
         '
         'FaTabStripItem6
         '
+        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         Me.FaTabStripItem6.CanClose = False
         Me.FaTabStripItem6.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem6.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
-        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
+        Me.FaTabStripItem6.Selected = True
         '
         'GroupBox3
         '
@@ -402,34 +402,34 @@ Partial Class FormPureComp
         '
         'FaTabStripItem16
         '
+        resources.ApplyResources(Me.FaTabStripItem16, "FaTabStripItem16")
         Me.FaTabStripItem16.CanClose = False
         Me.FaTabStripItem16.Controls.Add(Me.FaTabStripLiq)
         Me.FaTabStripItem16.IsDrawn = True
         Me.FaTabStripItem16.Name = "FaTabStripItem16"
-        resources.ApplyResources(Me.FaTabStripItem16, "FaTabStripItem16")
         '
         'FaTabStripLiq
         '
+        resources.ApplyResources(Me.FaTabStripLiq, "FaTabStripLiq")
         Me.FaTabStripLiq.AlwaysShowClose = False
         Me.FaTabStripLiq.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStripLiq, "FaTabStripLiq")
         Me.FaTabStripLiq.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPLIQ, Me.FaTabStripItemHVAP, Me.FaTabStripItemPVAP, Me.FaTabStripItemSURFT, Me.FaTabStripItemLIQVISC, Me.FaTabStripItemLIQDENS, Me.FaTabStripItemLIQTCOND, Me.FaTabStripItemTabLiq})
         Me.FaTabStripLiq.Name = "FaTabStripLiq"
         Me.FaTabStripLiq.SelectedItem = Me.FaTabStripItemCPLIQ
         '
         'FaTabStripItemCPLIQ
         '
+        resources.ApplyResources(Me.FaTabStripItemCPLIQ, "FaTabStripItemCPLIQ")
         Me.FaTabStripItemCPLIQ.CanClose = False
         Me.FaTabStripItemCPLIQ.Controls.Add(Me.GraphLiqCp)
         Me.FaTabStripItemCPLIQ.IsDrawn = True
         Me.FaTabStripItemCPLIQ.Name = "FaTabStripItemCPLIQ"
         Me.FaTabStripItemCPLIQ.Selected = True
-        resources.ApplyResources(Me.FaTabStripItemCPLIQ, "FaTabStripItemCPLIQ")
         '
         'GraphLiqCp
         '
-        Me.GraphLiqCp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphLiqCp, "GraphLiqCp")
+        Me.GraphLiqCp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphLiqCp.IsAntiAlias = True
         Me.GraphLiqCp.IsAutoScrollRange = True
         Me.GraphLiqCp.IsShowPointValues = True
@@ -444,16 +444,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemHVAP
         '
+        resources.ApplyResources(Me.FaTabStripItemHVAP, "FaTabStripItemHVAP")
         Me.FaTabStripItemHVAP.CanClose = False
         Me.FaTabStripItemHVAP.Controls.Add(Me.GraphDHVAP)
         Me.FaTabStripItemHVAP.IsDrawn = True
         Me.FaTabStripItemHVAP.Name = "FaTabStripItemHVAP"
-        resources.ApplyResources(Me.FaTabStripItemHVAP, "FaTabStripItemHVAP")
         '
         'GraphDHVAP
         '
-        Me.GraphDHVAP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphDHVAP, "GraphDHVAP")
+        Me.GraphDHVAP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphDHVAP.IsAntiAlias = True
         Me.GraphDHVAP.IsAutoScrollRange = True
         Me.GraphDHVAP.IsShowPointValues = True
@@ -468,16 +468,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemPVAP
         '
+        resources.ApplyResources(Me.FaTabStripItemPVAP, "FaTabStripItemPVAP")
         Me.FaTabStripItemPVAP.CanClose = False
         Me.FaTabStripItemPVAP.Controls.Add(Me.GraphPvap)
         Me.FaTabStripItemPVAP.IsDrawn = True
         Me.FaTabStripItemPVAP.Name = "FaTabStripItemPVAP"
-        resources.ApplyResources(Me.FaTabStripItemPVAP, "FaTabStripItemPVAP")
         '
         'GraphPvap
         '
-        Me.GraphPvap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphPvap, "GraphPvap")
+        Me.GraphPvap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphPvap.IsAntiAlias = True
         Me.GraphPvap.IsAutoScrollRange = True
         Me.GraphPvap.IsShowPointValues = True
@@ -492,16 +492,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemSURFT
         '
+        resources.ApplyResources(Me.FaTabStripItemSURFT, "FaTabStripItemSURFT")
         Me.FaTabStripItemSURFT.CanClose = False
         Me.FaTabStripItemSURFT.Controls.Add(Me.GraphSurfT)
         Me.FaTabStripItemSURFT.IsDrawn = True
         Me.FaTabStripItemSURFT.Name = "FaTabStripItemSURFT"
-        resources.ApplyResources(Me.FaTabStripItemSURFT, "FaTabStripItemSURFT")
         '
         'GraphSurfT
         '
-        Me.GraphSurfT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphSurfT, "GraphSurfT")
+        Me.GraphSurfT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphSurfT.IsAntiAlias = True
         Me.GraphSurfT.IsAutoScrollRange = True
         Me.GraphSurfT.IsShowPointValues = True
@@ -516,16 +516,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemLIQVISC
         '
+        resources.ApplyResources(Me.FaTabStripItemLIQVISC, "FaTabStripItemLIQVISC")
         Me.FaTabStripItemLIQVISC.CanClose = False
         Me.FaTabStripItemLIQVISC.Controls.Add(Me.GraphVisc)
         Me.FaTabStripItemLIQVISC.IsDrawn = True
         Me.FaTabStripItemLIQVISC.Name = "FaTabStripItemLIQVISC"
-        resources.ApplyResources(Me.FaTabStripItemLIQVISC, "FaTabStripItemLIQVISC")
         '
         'GraphVisc
         '
-        Me.GraphVisc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphVisc, "GraphVisc")
+        Me.GraphVisc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphVisc.IsAntiAlias = True
         Me.GraphVisc.IsAutoScrollRange = True
         Me.GraphVisc.IsShowPointValues = True
@@ -540,16 +540,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemLIQDENS
         '
+        resources.ApplyResources(Me.FaTabStripItemLIQDENS, "FaTabStripItemLIQDENS")
         Me.FaTabStripItemLIQDENS.CanClose = False
         Me.FaTabStripItemLIQDENS.Controls.Add(Me.GraphLiqDens)
         Me.FaTabStripItemLIQDENS.IsDrawn = True
         Me.FaTabStripItemLIQDENS.Name = "FaTabStripItemLIQDENS"
-        resources.ApplyResources(Me.FaTabStripItemLIQDENS, "FaTabStripItemLIQDENS")
         '
         'GraphLiqDens
         '
-        Me.GraphLiqDens.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphLiqDens, "GraphLiqDens")
+        Me.GraphLiqDens.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphLiqDens.IsAntiAlias = True
         Me.GraphLiqDens.IsAutoScrollRange = True
         Me.GraphLiqDens.IsShowPointValues = True
@@ -564,16 +564,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemLIQTCOND
         '
+        resources.ApplyResources(Me.FaTabStripItemLIQTCOND, "FaTabStripItemLIQTCOND")
         Me.FaTabStripItemLIQTCOND.CanClose = False
         Me.FaTabStripItemLIQTCOND.Controls.Add(Me.GraphLiqThermCond)
         Me.FaTabStripItemLIQTCOND.IsDrawn = True
         Me.FaTabStripItemLIQTCOND.Name = "FaTabStripItemLIQTCOND"
-        resources.ApplyResources(Me.FaTabStripItemLIQTCOND, "FaTabStripItemLIQTCOND")
         '
         'GraphLiqThermCond
         '
-        Me.GraphLiqThermCond.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphLiqThermCond, "GraphLiqThermCond")
+        Me.GraphLiqThermCond.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphLiqThermCond.IsAntiAlias = True
         Me.GraphLiqThermCond.IsAutoScrollRange = True
         Me.GraphLiqThermCond.IsShowPointValues = True
@@ -588,13 +588,14 @@ Partial Class FormPureComp
         '
         'FaTabStripItemTabLiq
         '
+        resources.ApplyResources(Me.FaTabStripItemTabLiq, "FaTabStripItemTabLiq")
         Me.FaTabStripItemTabLiq.Controls.Add(Me.DataTableLiquid)
         Me.FaTabStripItemTabLiq.IsDrawn = True
         Me.FaTabStripItemTabLiq.Name = "FaTabStripItemTabLiq"
-        resources.ApplyResources(Me.FaTabStripItemTabLiq, "FaTabStripItemTabLiq")
         '
         'DataTableLiquid
         '
+        resources.ApplyResources(Me.DataTableLiquid, "DataTableLiquid")
         Me.DataTableLiquid.AllowUserToAddRows = False
         Me.DataTableLiquid.AllowUserToDeleteRows = False
         Me.DataTableLiquid.AllowUserToResizeColumns = False
@@ -602,7 +603,6 @@ Partial Class FormPureComp
         Me.DataTableLiquid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataTableLiquid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataTableLiquid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17, Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25, Me.DataGridViewTextBoxColumn26})
-        resources.ApplyResources(Me.DataTableLiquid, "DataTableLiquid")
         Me.DataTableLiquid.Name = "DataTableLiquid"
         Me.DataTableLiquid.RowHeadersVisible = False
         Me.DataTableLiquid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -610,9 +610,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn9
         '
         Me.DataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle50.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn9.DefaultCellStyle = DataGridViewCellStyle50
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn9.DefaultCellStyle = DataGridViewCellStyle4
         resources.ApplyResources(Me.DataGridViewTextBoxColumn9, "DataGridViewTextBoxColumn9")
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         Me.DataGridViewTextBoxColumn9.ReadOnly = True
@@ -621,8 +621,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn10
         '
         Me.DataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle51
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewTextBoxColumn10.DividerWidth = 3
         Me.DataGridViewTextBoxColumn10.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn10, "DataGridViewTextBoxColumn10")
@@ -633,9 +633,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn11
         '
         Me.DataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle52.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn11.DefaultCellStyle = DataGridViewCellStyle52
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn11.DefaultCellStyle = DataGridViewCellStyle6
         resources.ApplyResources(Me.DataGridViewTextBoxColumn11, "DataGridViewTextBoxColumn11")
         Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
         Me.DataGridViewTextBoxColumn11.ReadOnly = True
@@ -644,8 +644,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn12
         '
         Me.DataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn12.DefaultCellStyle = DataGridViewCellStyle53
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn12.DefaultCellStyle = DataGridViewCellStyle7
         Me.DataGridViewTextBoxColumn12.DividerWidth = 3
         Me.DataGridViewTextBoxColumn12.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn12, "DataGridViewTextBoxColumn12")
@@ -656,9 +656,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn13
         '
         Me.DataGridViewTextBoxColumn13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle54.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle54
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle8
         resources.ApplyResources(Me.DataGridViewTextBoxColumn13, "DataGridViewTextBoxColumn13")
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
         Me.DataGridViewTextBoxColumn13.ReadOnly = True
@@ -667,8 +667,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn14
         '
         Me.DataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn14.DefaultCellStyle = DataGridViewCellStyle55
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn14.DefaultCellStyle = DataGridViewCellStyle9
         Me.DataGridViewTextBoxColumn14.DividerWidth = 3
         Me.DataGridViewTextBoxColumn14.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn14, "DataGridViewTextBoxColumn14")
@@ -679,9 +679,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn15
         '
         Me.DataGridViewTextBoxColumn15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle56.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn15.DefaultCellStyle = DataGridViewCellStyle56
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn15.DefaultCellStyle = DataGridViewCellStyle10
         resources.ApplyResources(Me.DataGridViewTextBoxColumn15, "DataGridViewTextBoxColumn15")
         Me.DataGridViewTextBoxColumn15.Name = "DataGridViewTextBoxColumn15"
         Me.DataGridViewTextBoxColumn15.ReadOnly = True
@@ -690,8 +690,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn16
         '
         Me.DataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle57
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewTextBoxColumn16.DividerWidth = 3
         Me.DataGridViewTextBoxColumn16.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn16, "DataGridViewTextBoxColumn16")
@@ -703,9 +703,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn17
         '
         Me.DataGridViewTextBoxColumn17.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle58.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle58
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle12
         resources.ApplyResources(Me.DataGridViewTextBoxColumn17, "DataGridViewTextBoxColumn17")
         Me.DataGridViewTextBoxColumn17.Name = "DataGridViewTextBoxColumn17"
         Me.DataGridViewTextBoxColumn17.ReadOnly = True
@@ -714,8 +714,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn18
         '
         Me.DataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn18.DefaultCellStyle = DataGridViewCellStyle59
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn18.DefaultCellStyle = DataGridViewCellStyle13
         Me.DataGridViewTextBoxColumn18.DividerWidth = 3
         resources.ApplyResources(Me.DataGridViewTextBoxColumn18, "DataGridViewTextBoxColumn18")
         Me.DataGridViewTextBoxColumn18.Name = "DataGridViewTextBoxColumn18"
@@ -725,9 +725,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn23
         '
         Me.DataGridViewTextBoxColumn23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle60.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle60
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn23.DefaultCellStyle = DataGridViewCellStyle14
         resources.ApplyResources(Me.DataGridViewTextBoxColumn23, "DataGridViewTextBoxColumn23")
         Me.DataGridViewTextBoxColumn23.Name = "DataGridViewTextBoxColumn23"
         Me.DataGridViewTextBoxColumn23.ReadOnly = True
@@ -736,8 +736,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn24
         '
         Me.DataGridViewTextBoxColumn24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn24.DefaultCellStyle = DataGridViewCellStyle61
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn24.DefaultCellStyle = DataGridViewCellStyle15
         Me.DataGridViewTextBoxColumn24.DividerWidth = 3
         resources.ApplyResources(Me.DataGridViewTextBoxColumn24, "DataGridViewTextBoxColumn24")
         Me.DataGridViewTextBoxColumn24.Name = "DataGridViewTextBoxColumn24"
@@ -758,34 +758,34 @@ Partial Class FormPureComp
         '
         'FaTabStripItem17
         '
+        resources.ApplyResources(Me.FaTabStripItem17, "FaTabStripItem17")
         Me.FaTabStripItem17.CanClose = False
         Me.FaTabStripItem17.Controls.Add(Me.FaTabStripVap)
         Me.FaTabStripItem17.IsDrawn = True
         Me.FaTabStripItem17.Name = "FaTabStripItem17"
-        resources.ApplyResources(Me.FaTabStripItem17, "FaTabStripItem17")
         '
         'FaTabStripVap
         '
+        resources.ApplyResources(Me.FaTabStripVap, "FaTabStripVap")
         Me.FaTabStripVap.AlwaysShowClose = False
         Me.FaTabStripVap.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStripVap, "FaTabStripVap")
         Me.FaTabStripVap.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPIG, Me.FaTabStripItemVAPVISC, Me.FaTabStripItemVAPTCOND, Me.FaTabStripItemDataTab})
         Me.FaTabStripVap.Name = "FaTabStripVap"
         Me.FaTabStripVap.SelectedItem = Me.FaTabStripItemCPIG
         '
         'FaTabStripItemCPIG
         '
+        resources.ApplyResources(Me.FaTabStripItemCPIG, "FaTabStripItemCPIG")
         Me.FaTabStripItemCPIG.CanClose = False
         Me.FaTabStripItemCPIG.Controls.Add(Me.GraphCp)
         Me.FaTabStripItemCPIG.IsDrawn = True
         Me.FaTabStripItemCPIG.Name = "FaTabStripItemCPIG"
         Me.FaTabStripItemCPIG.Selected = True
-        resources.ApplyResources(Me.FaTabStripItemCPIG, "FaTabStripItemCPIG")
         '
         'GraphCp
         '
-        Me.GraphCp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphCp, "GraphCp")
+        Me.GraphCp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphCp.IsAntiAlias = True
         Me.GraphCp.IsAutoScrollRange = True
         Me.GraphCp.IsEnableSelection = True
@@ -802,16 +802,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemVAPVISC
         '
+        resources.ApplyResources(Me.FaTabStripItemVAPVISC, "FaTabStripItemVAPVISC")
         Me.FaTabStripItemVAPVISC.CanClose = False
         Me.FaTabStripItemVAPVISC.Controls.Add(Me.GraphVapVisc)
         Me.FaTabStripItemVAPVISC.IsDrawn = True
         Me.FaTabStripItemVAPVISC.Name = "FaTabStripItemVAPVISC"
-        resources.ApplyResources(Me.FaTabStripItemVAPVISC, "FaTabStripItemVAPVISC")
         '
         'GraphVapVisc
         '
-        Me.GraphVapVisc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphVapVisc, "GraphVapVisc")
+        Me.GraphVapVisc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphVapVisc.IsAntiAlias = True
         Me.GraphVapVisc.IsAutoScrollRange = True
         Me.GraphVapVisc.IsEnableSelection = True
@@ -828,16 +828,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemVAPTCOND
         '
+        resources.ApplyResources(Me.FaTabStripItemVAPTCOND, "FaTabStripItemVAPTCOND")
         Me.FaTabStripItemVAPTCOND.CanClose = False
         Me.FaTabStripItemVAPTCOND.Controls.Add(Me.GraphVapThermCond)
         Me.FaTabStripItemVAPTCOND.IsDrawn = True
         Me.FaTabStripItemVAPTCOND.Name = "FaTabStripItemVAPTCOND"
-        resources.ApplyResources(Me.FaTabStripItemVAPTCOND, "FaTabStripItemVAPTCOND")
         '
         'GraphVapThermCond
         '
-        Me.GraphVapThermCond.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphVapThermCond, "GraphVapThermCond")
+        Me.GraphVapThermCond.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphVapThermCond.IsAntiAlias = True
         Me.GraphVapThermCond.IsAutoScrollRange = True
         Me.GraphVapThermCond.IsEnableSelection = True
@@ -854,13 +854,14 @@ Partial Class FormPureComp
         '
         'FaTabStripItemDataTab
         '
+        resources.ApplyResources(Me.FaTabStripItemDataTab, "FaTabStripItemDataTab")
         Me.FaTabStripItemDataTab.Controls.Add(Me.DataTableVapour)
         Me.FaTabStripItemDataTab.IsDrawn = True
         Me.FaTabStripItemDataTab.Name = "FaTabStripItemDataTab"
-        resources.ApplyResources(Me.FaTabStripItemDataTab, "FaTabStripItemDataTab")
         '
         'DataTableVapour
         '
+        resources.ApplyResources(Me.DataTableVapour, "DataTableVapour")
         Me.DataTableVapour.AllowUserToAddRows = False
         Me.DataTableVapour.AllowUserToDeleteRows = False
         Me.DataTableVapour.AllowUserToResizeColumns = False
@@ -868,7 +869,6 @@ Partial Class FormPureComp
         Me.DataTableVapour.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataTableVapour.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataTableVapour.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn27, Me.DataGridViewTextBoxColumn28, Me.DataGridViewTextBoxColumn29, Me.DataGridViewTextBoxColumn30, Me.DataGridViewTextBoxColumn31, Me.DataGridViewTextBoxColumn32})
-        resources.ApplyResources(Me.DataTableVapour, "DataTableVapour")
         Me.DataTableVapour.Name = "DataTableVapour"
         Me.DataTableVapour.RowHeadersVisible = False
         Me.DataTableVapour.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -876,9 +876,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn27
         '
         Me.DataGridViewTextBoxColumn27.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle62.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle62
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn27.DefaultCellStyle = DataGridViewCellStyle16
         resources.ApplyResources(Me.DataGridViewTextBoxColumn27, "DataGridViewTextBoxColumn27")
         Me.DataGridViewTextBoxColumn27.Name = "DataGridViewTextBoxColumn27"
         Me.DataGridViewTextBoxColumn27.ReadOnly = True
@@ -887,8 +887,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn28
         '
         Me.DataGridViewTextBoxColumn28.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn28.DefaultCellStyle = DataGridViewCellStyle63
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn28.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridViewTextBoxColumn28.DividerWidth = 3
         Me.DataGridViewTextBoxColumn28.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn28, "DataGridViewTextBoxColumn28")
@@ -899,9 +899,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn29
         '
         Me.DataGridViewTextBoxColumn29.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle64.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle64
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn29.DefaultCellStyle = DataGridViewCellStyle18
         resources.ApplyResources(Me.DataGridViewTextBoxColumn29, "DataGridViewTextBoxColumn29")
         Me.DataGridViewTextBoxColumn29.Name = "DataGridViewTextBoxColumn29"
         Me.DataGridViewTextBoxColumn29.ReadOnly = True
@@ -910,8 +910,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn30
         '
         Me.DataGridViewTextBoxColumn30.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn30.DefaultCellStyle = DataGridViewCellStyle65
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn30.DefaultCellStyle = DataGridViewCellStyle19
         Me.DataGridViewTextBoxColumn30.DividerWidth = 3
         Me.DataGridViewTextBoxColumn30.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn30, "DataGridViewTextBoxColumn30")
@@ -922,9 +922,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn31
         '
         Me.DataGridViewTextBoxColumn31.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle66.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn31.DefaultCellStyle = DataGridViewCellStyle66
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn31.DefaultCellStyle = DataGridViewCellStyle20
         resources.ApplyResources(Me.DataGridViewTextBoxColumn31, "DataGridViewTextBoxColumn31")
         Me.DataGridViewTextBoxColumn31.Name = "DataGridViewTextBoxColumn31"
         Me.DataGridViewTextBoxColumn31.ReadOnly = True
@@ -933,8 +933,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn32
         '
         Me.DataGridViewTextBoxColumn32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn32.DefaultCellStyle = DataGridViewCellStyle67
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn32.DefaultCellStyle = DataGridViewCellStyle21
         Me.DataGridViewTextBoxColumn32.DividerWidth = 3
         Me.DataGridViewTextBoxColumn32.FillWeight = 46.9608!
         resources.ApplyResources(Me.DataGridViewTextBoxColumn32, "DataGridViewTextBoxColumn32")
@@ -944,33 +944,33 @@ Partial Class FormPureComp
         '
         'FaTabStripItem18
         '
+        resources.ApplyResources(Me.FaTabStripItem18, "FaTabStripItem18")
         Me.FaTabStripItem18.CanClose = False
         Me.FaTabStripItem18.Controls.Add(Me.FaTabStripSolid)
         Me.FaTabStripItem18.IsDrawn = True
         Me.FaTabStripItem18.Name = "FaTabStripItem18"
-        resources.ApplyResources(Me.FaTabStripItem18, "FaTabStripItem18")
         '
         'FaTabStripSolid
         '
+        resources.ApplyResources(Me.FaTabStripSolid, "FaTabStripSolid")
         Me.FaTabStripSolid.AlwaysShowClose = False
         Me.FaTabStripSolid.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStripSolid, "FaTabStripSolid")
         Me.FaTabStripSolid.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPSOLID, Me.FaTabStripItemSOLIDDENS, Me.FaTabStripItemTabela})
         Me.FaTabStripSolid.Name = "FaTabStripSolid"
         Me.FaTabStripSolid.SelectedItem = Me.FaTabStripItemCPSOLID
         '
         'FaTabStripItemCPSOLID
         '
+        resources.ApplyResources(Me.FaTabStripItemCPSOLID, "FaTabStripItemCPSOLID")
         Me.FaTabStripItemCPSOLID.Controls.Add(Me.GraphCpSolid)
         Me.FaTabStripItemCPSOLID.IsDrawn = True
         Me.FaTabStripItemCPSOLID.Name = "FaTabStripItemCPSOLID"
         Me.FaTabStripItemCPSOLID.Selected = True
-        resources.ApplyResources(Me.FaTabStripItemCPSOLID, "FaTabStripItemCPSOLID")
         '
         'GraphCpSolid
         '
-        Me.GraphCpSolid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphCpSolid, "GraphCpSolid")
+        Me.GraphCpSolid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphCpSolid.IsAntiAlias = True
         Me.GraphCpSolid.IsAutoScrollRange = True
         Me.GraphCpSolid.IsShowPointValues = True
@@ -985,16 +985,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemSOLIDDENS
         '
+        resources.ApplyResources(Me.FaTabStripItemSOLIDDENS, "FaTabStripItemSOLIDDENS")
         Me.FaTabStripItemSOLIDDENS.CanClose = False
         Me.FaTabStripItemSOLIDDENS.Controls.Add(Me.GraphSolidDens)
         Me.FaTabStripItemSOLIDDENS.IsDrawn = True
         Me.FaTabStripItemSOLIDDENS.Name = "FaTabStripItemSOLIDDENS"
-        resources.ApplyResources(Me.FaTabStripItemSOLIDDENS, "FaTabStripItemSOLIDDENS")
         '
         'GraphSolidDens
         '
-        Me.GraphSolidDens.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         resources.ApplyResources(Me.GraphSolidDens, "GraphSolidDens")
+        Me.GraphSolidDens.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.GraphSolidDens.IsAntiAlias = True
         Me.GraphSolidDens.IsAutoScrollRange = True
         Me.GraphSolidDens.IsShowPointValues = True
@@ -1009,13 +1009,14 @@ Partial Class FormPureComp
         '
         'FaTabStripItemTabela
         '
+        resources.ApplyResources(Me.FaTabStripItemTabela, "FaTabStripItemTabela")
         Me.FaTabStripItemTabela.Controls.Add(Me.DataTableSolid)
         Me.FaTabStripItemTabela.IsDrawn = True
         Me.FaTabStripItemTabela.Name = "FaTabStripItemTabela"
-        resources.ApplyResources(Me.FaTabStripItemTabela, "FaTabStripItemTabela")
         '
         'DataTableSolid
         '
+        resources.ApplyResources(Me.DataTableSolid, "DataTableSolid")
         Me.DataTableSolid.AllowUserToAddRows = False
         Me.DataTableSolid.AllowUserToDeleteRows = False
         Me.DataTableSolid.AllowUserToResizeColumns = False
@@ -1023,7 +1024,6 @@ Partial Class FormPureComp
         Me.DataTableSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataTableSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataTableSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21, Me.DataGridViewTextBoxColumn22})
-        resources.ApplyResources(Me.DataTableSolid, "DataTableSolid")
         Me.DataTableSolid.Name = "DataTableSolid"
         Me.DataTableSolid.RowHeadersVisible = False
         Me.DataTableSolid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -1031,9 +1031,9 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn19
         '
         Me.DataGridViewTextBoxColumn19.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle68.BackColor = System.Drawing.Color.LightGray
-        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle68
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.LightGray
+        Me.DataGridViewTextBoxColumn19.DefaultCellStyle = DataGridViewCellStyle22
         resources.ApplyResources(Me.DataGridViewTextBoxColumn19, "DataGridViewTextBoxColumn19")
         Me.DataGridViewTextBoxColumn19.Name = "DataGridViewTextBoxColumn19"
         Me.DataGridViewTextBoxColumn19.ReadOnly = True
@@ -1042,8 +1042,8 @@ Partial Class FormPureComp
         'DataGridViewTextBoxColumn20
         '
         Me.DataGridViewTextBoxColumn20.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.DataGridViewTextBoxColumn20.DefaultCellStyle = DataGridViewCellStyle69
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DataGridViewTextBoxColumn20.DefaultCellStyle = DataGridViewCellStyle23
         Me.DataGridViewTextBoxColumn20.DividerWidth = 3
         resources.ApplyResources(Me.DataGridViewTextBoxColumn20, "DataGridViewTextBoxColumn20")
         Me.DataGridViewTextBoxColumn20.Name = "DataGridViewTextBoxColumn20"
@@ -1064,11 +1064,11 @@ Partial Class FormPureComp
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'GroupBox4
         '
@@ -1090,7 +1090,6 @@ Partial Class FormPureComp
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormPureComp"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
         Me.ShowIcon = False
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

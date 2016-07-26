@@ -147,7 +147,7 @@ Public Class EditingForm_ComprExpndr
 
                 tbEfficiency.Text = uobj.EficienciaAdiabatica.GetValueOrDefault.ToString(nf)
                 tbPower.Text = su.Converter.ConvertFromSI(units.heatflow, uobj.DeltaQ.GetValueOrDefault).ToString(nf)
-                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.temperature, uobj.POut.GetValueOrDefault).ToString(nf)
+                tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, uobj.POut.GetValueOrDefault).ToString(nf)
                 tbPressureDrop.Text = su.Converter.ConvertFromSI(units.deltaP, uobj.DeltaP.GetValueOrDefault).ToString(nf)
                 tbTemp.Text = su.Converter.ConvertFromSI(units.temperature, uobj.OutletTemperature).ToString(nf)
                 tbDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, uobj.DeltaT.GetValueOrDefault).ToString(nf)
