@@ -90,6 +90,7 @@ Public Class Files
                 dlist.Add("libfprops_ascend.so")
                 dlist.Add("liblpsolve55.so")
                 dlist.Add("libPC_SAFT_PROP.so")
+                dlist.Add("libPetAz.so")
                 If envir = 32 Then
                     dlist.Add("libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz")
                 Else
@@ -102,6 +103,7 @@ Public Class Files
                 alist.Add("L" + envir.ToString + "_" + "libfprops_ascend.so")
                 alist.Add("L" + envir.ToString + "_" + "liblpsolve55.so")
                 alist.Add("L" + envir.ToString + "_" + "libPC_SAFT_PROP.so")
+                alist.Add("L" + envir.ToString + "_" + "libPetAz.so")
                 If envir = 32 Then
                     alist.Add("L" + envir.ToString + "_" + "libipopt_mono_dwsim_ubuntu_11.10_32.tar.gz")
                 Else

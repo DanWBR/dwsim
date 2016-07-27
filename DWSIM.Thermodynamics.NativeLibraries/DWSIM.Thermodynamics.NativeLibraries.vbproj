@@ -110,6 +110,8 @@
     <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libPC_SAFT_PROP.so" />
     <EmbeddedResource Include="Unmanaged Libraries\Linux\L_Cureos.Numerics.dll.config" />
     <EmbeddedResource Include="Unmanaged Libraries\Linux\L_DWSIM.exe.config" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\64-bit\L64_libPetAz.so" />
+    <EmbeddedResource Include="Unmanaged Libraries\Linux\32-bit\L32_libPetAz.so" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Unmanaged Libraries\Windows\32-bit\W32_CoolProp.dll" />
