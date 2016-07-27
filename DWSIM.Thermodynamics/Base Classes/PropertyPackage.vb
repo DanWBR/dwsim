@@ -340,7 +340,11 @@ Namespace PropertyPackages
                         Return FlashAlgorithm.Clone()
                     Else
                         If Not Flowsheet Is Nothing Then
-                            Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
+                            If Flowsheet.FlowsheetOptions.FlashAlgorithms.Count > 0 Then
+                                Return Flowsheet.FlowsheetOptions.FlashAlgorithms(0).Clone
+                            Else
+                                Return New NestedLoops()
+                            End If
                         Else
                             Return New NestedLoops()
                         End If
