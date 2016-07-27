@@ -35,7 +35,7 @@ Public Class FormCompoundCreator
     Public nf As String
 
     Public methods As HYP
-    Public jb As Joback
+    Public jb As New Joback
     Friend m_props As PROPS
 
     Friend mycase As New CompoundGeneratorCase
@@ -46,8 +46,7 @@ Public Class FormCompoundCreator
     Friend isUserDBSaved As Boolean = True
     Private forceclose As Boolean = False
     Private populating As Boolean = False
-    Private UNIFAClines(), MODFACLines(), JOBACKlines(), ElementLines() As String
-
+    Private UNIFAClines, MODFACLines, JOBACKlines, ElementLines As New List(Of String)
 
     Private Sub FormCompoundCreator_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -55,19 +54,25 @@ Public Class FormCompoundCreator
 
         Dim pathsep = System.IO.Path.DirectorySeparatorChar
         Dim picpath As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac" & pathsep
-        Dim filename As String = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "unifac.txt"
-
+   
         Dim i As Integer
         Dim ID, GroupType, GroupName, S, TT As String
         Dim L As Boolean = True
 
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac.txt")
+            Using parser As New TextFieldParser(filestr)
+                While Not parser.EndOfData
+                    UNIFAClines.Add(parser.ReadLine())
+                End While
+            End Using
+        End Using
 
         L = True
-        UNIFAClines = IO.File.ReadAllLines(filename)
+
         GroupName = UNIFAClines(2).Split(",")(2)
         With Me.GridUNIFAC.Rows
             .Clear()
-            For i = 2 To UNIFAClines.Length - 1
+            For i = 2 To UNIFAClines.Count - 1
                 S = picpath & UNIFAClines(i).Split(",")(7) & ".png"
                 If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
@@ -96,8 +101,15 @@ Public Class FormCompoundCreator
 
         'Grid MODFAC
         L = True
-        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "modfac.txt"
-        MODFACLines = IO.File.ReadAllLines(filename)
+
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.modfac.txt")
+            Using parser As New TextFieldParser(filestr)
+                While Not parser.EndOfData
+                    MODFACLines.Add(parser.ReadLine())
+                End While
+            End Using
+        End Using
+
         Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
         Dim fields As String()
         Dim delimiter As String = ";"
@@ -106,69 +118,26 @@ Public Class FormCompoundCreator
 
         Me.GridMODFAC.Rows.Clear()
 
-        Using parser As New TextFieldParser(filename)
-            parser.SetDelimiters(delimiter)
-            parser.ReadLine()
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.modfac.txt")
+            Using parser As New TextFieldParser(filestr)
+                parser.SetDelimiters(delimiter)
+                parser.ReadLine()
 
-            While Not parser.EndOfData
-                fields = parser.ReadFields()
-                With Me.GridMODFAC.Rows
-                    S = picpath & fields(6) & ".png"
-                    If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
-
-                    .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
-                    .Item(.Count - 1).HeaderCell.Value = "ID " & fields(3)
-                    .Item(.Count - 1).Cells(0).Value = fields(1)
-                    .Item(.Count - 1).Cells(1).Value = fields(2)
-                    .Item(.Count - 1).Cells(2).Value = 0
-                    TT = "Rk / Qk: " & fields(4) & " / " & fields(5) & vbCrLf & _
-                                                             "Example Compound: " & fields(6) & vbCrLf & fields(7)
-
-                    .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(3)}
-
-                    If L Then
-                        .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(230, 230, 200)
-                        .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(230, 230, 200)
-                    Else
-                        .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(200, 230, 230)
-                        .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(200, 230, 230)
-                    End If
-                End With
-            End While
-        End Using
-
-
-        'Grid NIST-MODFAC
-        L = True
-        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "NIST-MODFAC_RiQi.txt"
-        MODFACLines = IO.File.ReadAllLines(filename)
-        delimiter = vbTab
-        Me.GridNISTMODFAC.Rows.Clear()
-
-        Using parser As New TextFieldParser(filename)
-            parser.SetDelimiters(delimiter)
-            parser.ReadLine()
-            parser.ReadLine()
-
-            While Not parser.EndOfData
-                fields = parser.ReadFields()
-                If fields(0).StartsWith("(") Then
-                    maingroup = fields(0).Split(")")(0).Substring(1)
-                    mainname = fields(0).Trim().Split(")")(1).Trim
-                    L = Not L
-                Else
-                    With Me.GridNISTMODFAC.Rows
-                        S = picpath & fields(4) & ".png"
+                While Not parser.EndOfData
+                    fields = parser.ReadFields()
+                    With Me.GridMODFAC.Rows
+                        S = picpath & fields(6) & ".png"
                         If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
 
                         .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
-                        .Item(.Count - 1).HeaderCell.Value = "ID " & fields(0)
-                        .Item(.Count - 1).Cells(0).Value = mainname
-                        .Item(.Count - 1).Cells(1).Value = fields(1)
+                        .Item(.Count - 1).HeaderCell.Value = "ID " & fields(3)
+                        .Item(.Count - 1).Cells(0).Value = fields(1)
+                        .Item(.Count - 1).Cells(1).Value = fields(2)
                         .Item(.Count - 1).Cells(2).Value = 0
-                        TT = "Rk / Qk: " & fields(2) & " / " & fields(3) & vbCrLf & _
-                                                                 "Example Compound: " & fields(4) & vbCrLf & fields(5)
-                        .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(0)}
+                        TT = "Rk / Qk: " & fields(4) & " / " & fields(5) & vbCrLf & _
+                                                                 "Example Compound: " & fields(6) & vbCrLf & fields(7)
+
+                        .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(3)}
 
                         If L Then
                             .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(230, 230, 200)
@@ -178,20 +147,79 @@ Public Class FormCompoundCreator
                             .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(200, 230, 230)
                         End If
                     End With
-                End If
-            End While
+                End While
+            End Using
         End Using
 
 
+        'Grid NIST-MODFAC
+        L = True
+
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.NIST-MODFAC_RiQi.txt")
+            Using parser As New TextFieldParser(filestr)
+                While Not parser.EndOfData
+                    MODFACLines.Add(parser.ReadLine())
+                End While
+            End Using
+        End Using
+ 
+        delimiter = vbTab
+        Me.GridNISTMODFAC.Rows.Clear()
+
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.NIST-MODFAC_RiQi.txt")
+            Using parser As New TextFieldParser(filestr)
+                parser.SetDelimiters(delimiter)
+                parser.ReadLine()
+                parser.ReadLine()
+
+                While Not parser.EndOfData
+                    fields = parser.ReadFields()
+                    If fields(0).StartsWith("(") Then
+                        maingroup = fields(0).Split(")")(0).Substring(1)
+                        mainname = fields(0).Trim().Split(")")(1).Trim
+                        L = Not L
+                    Else
+                        With Me.GridNISTMODFAC.Rows
+                            S = picpath & fields(4) & ".png"
+                            If Not My.Computer.FileSystem.FileExists(S) Then S = picpath & "Empty.png"
+
+                            .Add(New Object() {CInt(0), CInt(0), CInt(0), Image.FromFile(S)})
+                            .Item(.Count - 1).HeaderCell.Value = "ID " & fields(0)
+                            .Item(.Count - 1).Cells(0).Value = mainname
+                            .Item(.Count - 1).Cells(1).Value = fields(1)
+                            .Item(.Count - 1).Cells(2).Value = 0
+                            TT = "Rk / Qk: " & fields(2) & " / " & fields(3) & vbCrLf & _
+                                                                     "Example Compound: " & fields(4) & vbCrLf & fields(5)
+                            .Item(.Count - 1).Cells(3).Tag = {S, TT, fields(0)}
+
+                            If L Then
+                                .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(230, 230, 200)
+                                .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(230, 230, 200)
+                            Else
+                                .Item(.Count - 1).Cells(0).Style.BackColor = Color.FromArgb(200, 230, 230)
+                                .Item(.Count - 1).Cells(1).Style.BackColor = Color.FromArgb(200, 230, 230)
+                            End If
+                        End With
+                    End If
+                End While
+            End Using
+        End Using
+
         'Grid Joback
-        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "JobackGroups.txt"
-        JOBACKlines = IO.File.ReadAllLines(filename)
+
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.JobackGroups.txt")
+            Using parser As New TextFieldParser(filestr)
+                While Not parser.EndOfData
+                    JOBACKlines.Add(parser.ReadLine())
+                End While
+            End Using
+        End Using
 
         GroupType = ""
 
         With Me.GridJoback.Rows
             .Clear()
-            For i = 1 To JOBACKlines.Length - 1
+            For i = 1 To JOBACKlines.Count - 1
 
                 ID = JOBACKlines(i).Split(";")(0)
 
@@ -216,11 +244,18 @@ Public Class FormCompoundCreator
         End With
 
         'Grid addition Elements
-        filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "Elements.txt"
-        ElementLines = IO.File.ReadAllLines(filename)
+
+        Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(jb.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.Elements.txt")
+            Using parser As New TextFieldParser(filestr)
+                While Not parser.EndOfData
+                    ElementLines.Add(parser.ReadLine())
+                End While
+            End Using
+        End Using
+
         With Me.AddAtomDataGrid.Rows
             .Clear()
-            For i = 1 To ElementLines.Length - 1
+            For i = 1 To ElementLines.Count - 1
                 .Add(New Object())
                 .Item(.Count - 1).Cells(0).Value = ElementLines(i).Split(";")(2)
                 .Item(.Count - 1).Cells(0).ToolTipText = "Element # " & ElementLines(i).Split(";")(0) & vbCrLf & _
@@ -1036,7 +1071,7 @@ Public Class FormCompoundCreator
             'add atoms from special UNIFAC groups to list where no Joback subgroup is defined -> e.g. silanes
             Dim i, n, k, AtomCount As Integer
             Dim s, AtomTypeCount, AtomName As String
-            For i = 2 To UNIFAClines.Length - 1
+            For i = 2 To UNIFAClines.Count - 1
                 s = UNIFAClines(i).Split(",")(9)
                 If Not s = "" And vnd(i - 2) > 0 Then
                     SpecialDefinition = True

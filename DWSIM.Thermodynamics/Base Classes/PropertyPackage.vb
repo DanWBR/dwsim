@@ -6849,6 +6849,8 @@ Final3:
                     Return A + B * T + C * T ^ 2 + D * T ^ 3
                 Case "5"
                     Return A + B * T + C * T ^ 2 + D * T ^ 3 + E * T ^ 4
+                Case "6"
+                    Return A + B * T + C * T ^ 2 + D * T ^ 3 + E / T ^ 2
                 Case "10"
                     Return Exp(A - B / (T + C))
                 Case "11"
@@ -6893,6 +6895,8 @@ Final3:
                     Return A + B * (1 - Tr) ^ 0.35 + C * (1 - Tr) ^ (2 / 3) + D * (1 - Tr) + E * (1 - Tr) ^ (4 / 3)
                 Case "117"
                     Return A * T + B * (C / T) / Tanh(C / T) - D * (E / T) / Tanh(E / T)
+                Case "119"
+                    Return Exp(A / T + B + C * T + D * T ^ 2 + E * Log(T))
                 Case "207"
                     Return Exp(A - B / (T + C))
                 Case "208"
@@ -6903,8 +6907,18 @@ Final3:
                     Return 10 ^ (A + B / T + C * T + D * T ^ 2)
                 Case "211"
                     Return A * ((B - T) / (B - C)) ^ D
+                Case "212"
+                    Return Exp((E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6))
+                Case "213"
+                    Return (E / T) * (A * (1 - T / E) + B * (1 - T / E) ^ 1.5 + C * (1 - T / E) ^ 3 + D * (1 - T / E) ^ 6)
+                Case "221"
+                    Return -B / T ^ 2 + C / T + D * E * T ^ (E - 1)
+                Case "230"
+                    Return -B / T ^ 2 + C / T + D - 2 * E / T ^ 3
+                Case "231"
+                    Return B - C / (T - D) ^ 2
                 Case Else
-                    Return 0
+                    Return 0.0#
             End Select
 
 
