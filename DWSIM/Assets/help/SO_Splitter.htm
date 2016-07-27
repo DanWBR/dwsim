@@ -1,16 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html><head>
+
 <script src="ContentScripts.js"></script>
-<head>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
-</head>
 
-<!-- ================================================================================== -->
-<!-- ====================   Begin of content    ==============================================-->
-<!-- ================================================================================== -->
-<body onload="LoadMenue()">
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ==============================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
 
-<H2>Splitter</H2>
+<h2>Splitter</h2>
 <a href="SO_Mixer.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
 <a href="SO_Separator.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
 <hr>
@@ -19,16 +14,17 @@
 other streams</p>
 
 <table>
-<tr>
-<td><img src="pictures/SO_Splitter1.png"></td>
+<tbody><tr>
+<td><br>
+</td>
 
 <td>
 
 
 <h3>Input Parameters</h3>
 
-<table style="margin-left:20px;">
-<tr><td><b>Operation Mode</b></td><td><b>Parameter</b></td></tr>
+<table style="margin-left: 20px;">
+<tbody><tr><td><b>Operation Mode</b></td><td><b>Parameter</b></td></tr>
 <tr><td>SplitRatios:</td><td>This mode allows to define the mass flow fractions to be passed to each outlet
 stream in the splitter. Each fraction must have a value between 0 and 1 and the total sum is automatically calculated 
 as 1 by adjusting the outlet fraction of the stream with highest number.<br></td></tr>
@@ -37,7 +33,7 @@ as 1 by adjusting the outlet fraction of the stream with highest number.<br></td
 The last outlet stream with highest index number recives the residual mass flow to maintain the massbalance.<br></td></tr>
 
 <tr><td>StreamMoleFlowSpec:</td><td>This mode works as the prior one except that the mole flow is specified here.</td></tr>
-</table>
+</tbody></table>
 
 <br>
 
@@ -46,10 +42,9 @@ There are no output parameters for this object.
 </td>
 
 </tr>
-</table>
+</tbody></table>
 
 <br><br>
 
 
-</BODY>
-</HTML>
+</body></html>

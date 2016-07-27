@@ -1,16 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html><head>
+
 <script src="ContentScripts.js"></script>
-<head>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css" >
-</head>
 
-<!-- ================================================================================== -->
-<!-- ====================   Begin of content    ======================================= -->
-<!-- ================================================================================== -->
-<body onload="LoadMenue()">
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ======================================= --><!-- ================================================================================== --></head><body onload="LoadMenue()">
 
-<H2>Recycle</H2>
+<h2>Recycle</h2>
 <a href="SO_Reactor.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
 <a href="SO_Adjust.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
 <hr>
@@ -25,8 +20,9 @@ to an object somewhere earlier in the simulation as input again.
 </p>
 
 <table>
-<tr>
-<td><img src="pictures/SO_Recycle.png"></td>
+<tbody><tr>
+<td><br>
+</td>
 
 <td>
 
@@ -34,7 +30,7 @@ to an object somewhere earlier in the simulation as input again.
 <h3>Input Parameters</h3>
 <b>Acceleration Method</b><br>
 There are two acceleration methods available: Wegstein and Dominant Eigenvalue. The
-Wegstein method must be used when there isn’t a significant interaction between convergent
+Wegstein method must be used when there isn&#8217;t a significant interaction between convergent
 variables, in the contrary the other method can be used. The successive substitution method is
 slow, but convergence is guaranteed.<br><br>
 
@@ -55,17 +51,16 @@ in order to converge the recycle.<br><br>
 As a result, the actual error values are shown, together with the necessary convergence iteration steps.
 
 <hr>
-<H2>Energy Recycle</H2>
+<h2>Energy Recycle</h2>
 The Energy Recycle logical operation works the same way as the normal Recycle, except that it
 is aimed at Energy Streams. Here, instead of defining convergence parameters for temperature,
-pressure and flow rate, you’ll define the convergence error for the energy only.
+pressure and flow rate, you&#8217;ll define the convergence error for the energy only.
 <br><br>
 </td>
 
 </tr>
-</table>
+</tbody></table>
 
 <br><br>
 
-</BODY>
-</HTML>
+</body></html>

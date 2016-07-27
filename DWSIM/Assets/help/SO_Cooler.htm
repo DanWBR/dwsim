@@ -1,16 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html><head>
+
 <script src="ContentScripts.js"></script>
-<head>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
-</head>
 
-<!-- ================================================================================== -->
-<!-- ====================   Begin of content    ========================================-->
-<!-- ================================================================================== -->
-<body onload="LoadMenue()">
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ========================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
 
-<H2>Cooler</H2>
+<h2>Cooler</h2>
 <a href="SO_Heater.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
 <a href="SO_Shortcut_Column.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
 <hr>
@@ -18,8 +13,9 @@
 <p>The cooler simulates a stream cooling process.</p>
 
 <table>
-<tr>
-<td><img src="pictures/SO_Cooler1.png"></td>
+<tbody><tr>
+<td><br>
+</td>
 
 <td>
 
@@ -29,12 +25,12 @@
 <b>Pressure drop: </b>pressure drop in the cooler.<br>
 <b>Efficiency: </b>cooler efficiency.<br>
 <b>Calculation mode: </b>depending on calculation mode a dedicated parameter is specified:<br><br>
-<table style="margin-left:50px;">
-<tr><td><b>Mode   </b></td><td><b>Parameter</b></td></tr>
+<table style="margin-left: 50px;">
+<tbody><tr><td><b>Mode   </b></td><td><b>Parameter</b></td></tr>
 <tr><td>HeatRemoved:   </td><td>amount of heat removed by the cooler</td></tr>
 <tr><td>OutletTemperature:   </td><td>Outlet temperature</td></tr>
 <tr><td>OutletVapourFraction:   </td><td>Molar fraction of vapour phase</td></tr>
-</table>
+</tbody></table>
 
 <h3>Calculation</h3>
 The outlet stream temperature is calculated by doing a PH Flash, were
@@ -48,10 +44,9 @@ the outlet stream enthalpy is calculated by a energy balance in the cooler.
 </td>
 
 </tr>
-</table>
+</tbody></table>
 
 <br><br>
 
 
-</BODY>
-</HTML>
+</body></html>

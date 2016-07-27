@@ -1,39 +1,42 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html><head><title>Excel Addin</title>
 
-<head>
-<title>Excel Addin</title>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
-</head>
-<body>
+
+
+
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"></head><body>
 
 <!-- ================================================================================== -->
 <!-- ====================   Begin of content    ======================================= -->
 <!-- ================================================================================== -->
 
-<H2>Excel Addin</H2>
-<a href="EX_Installation_1.htm" ><img src="pictures/arrow-up.gif"></a>
-<a href="EX_Overriding_IPs_3.htm" ><img src="pictures/arrow-down.gif"></a>
+<h2>Excel Addin</h2>
+<a href="EX_Installation_1.htm"><img src="pictures/arrow-up.gif"></a>
+<a href="EX_Overriding_IPs_3.htm"><img src="pictures/arrow-down.gif"></a>
 <hr>
-<H3>Usage</H3>
+<h3>Usage</h3><br>
+
 The functionality of that Add-In is realised by offering special functions which are used for doing calculations 
 for process simulation via an Excel interface. This interface allows access to the original DWSIM thermodynamics engine and 
 component databases.<br><br>
 You start by add a new function to do your calculations by pressing the marked Symbor "<b>fx</b>" left of the edit field:<br>
+<br>
 <img src="pictures/Excel03b.png"><br><br>
 
-Now the following dialog appears. Functions exposed by this AddIn will be grouped in a category named “DWSIM”. You may click 
+Now the following dialog appears. Functions exposed by this AddIn will be grouped in a category named &#8220;DWSIM&#8221;. You may click 
 the marked link in this dialog to get further help on that function.<br>
+<br>
 <img src="pictures/Excel03.png"><br><br>
 
 After selecting the required function and pressing OK the following dialog appears:<br>
-<img src="pictures/Excel03a.png"><br>
+<br>
+<img src="pictures/Excel03a.png"><br><br>
 Be aware, that some functions need a lot of parameters which will not fit into this dialog. The picture shows an example of 
 the PTFlash function where the parameters already were defined. You will find the marked slider at the right side which will
-allow you to scroll down to edit the other parameters.<br><br><br><br>
+allow you to scroll down to edit the other parameters.<br>
+<br>
 
-<hr>
-
+<hr><br>
 All DWSIM functions are one ore two dimensional <b><i>Matrix formulas</i></b> which may be recognised by their curly brackets: <b>{}</b>.<br>
 This kind of formulas is entered in Excel in three steps as depicted in the following picture:<br>
 <ol>
@@ -64,6 +67,31 @@ contain the phase mole fractions and the other lines will contain the compound m
 <img src="pictures/Excel05.png"><br><br>
 
 For PH, PS, TVF and PVF flash calculation functions, an additional line is returned that will contain the temperature in K or 
-pressure in Pa in the first column.
-</BODY>
-</HTML>
+pressure in Pa in the first column.<br>
+<h3>Ribbon Menu<br>
+</h3>
+
+<br>
+After activating DWSIM's add-in, a ribbon menu will appear on Excel 2007 and newer:<br>
+<br>
+<img style="width: 212px; height: 88px;" alt="" src="Pictures/Excel10.png"><br>
+<br>
+<span style="font-weight: bold;">- Options:</span> click to edit some settings for the add-in<br>
+<span style="font-weight: bold;">- Help:</span> opens this help file<br>
+<span style="font-weight: bold;">- About: </span>displays the About Box with information about add-in version, copyright and licensing.<br>
+<span style="font-weight: bold;">- Open Sample Sheet:</span> opens a sample excel sheet with add-in function calls.<br>
+<h3>Options</h3>
+<br>
+The options dialog lets you configure the calculation mode (CPU and GPU
+parallel acceleration), configure the flash algorithm settings and also
+how to handle add-in internal errors.<br>
+<br>
+Settings are saved to and read from a file in a folder named "DWSIM Application Data" inside your "My Documents" folder.<br>
+<br>
+<img style="width: 612px; height: 332px;" alt="" src="Pictures/Excel11.png"><br>
+<br>
+<img style="width: 612px; height: 332px;" alt="" src="Pictures/Excel12.png"><br>
+<br>
+<img style="width: 612px; height: 332px;" alt="" src="Pictures/Excel13.png"><br>
+<br>
+</body></html>
