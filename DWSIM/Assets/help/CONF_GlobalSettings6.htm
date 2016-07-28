@@ -1,38 +1,65 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<script src="ContentScripts.js"></script>
-<head>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
-</head>
+<html><head>
 
-<!-- ================================================================================== -->
-<!-- ====================   Begin of content    ========================================-->
-<!-- ================================================================================== -->
-<body onload="LoadMenue()">
 
-<H2>Global Settings</H2>
+  
+  <script src="ContentScripts.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ========================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
+<h2>Global Settings</h2>
+
 <a href="CONF_GlobalSettings5.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
-<a href="CONF_GlobalSettings7.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
-<b>This tool is used to edit global settings of DWSIM</b>
+<a href="CONF_GlobalSettings7.htm" target="_parent"><img src="pictures/arrow-down.gif"></a><b>This tool is used to edit global
+settings of DWSIM</b>
 <hr>
-
-<H3>Scripts</H3>
-
-<table>
-<tr>
-<td><img src="pictures/CONF0_6.png"></td>
-
-<td>
-<h3>Script path</h3>
-Manage the paths where the compiler should search files for importing into scripts.<br><br>
+<h2>Flowsheet Options</h2>
 
 
-</td>
-</tr>
-</table>
+<h3>
 
-<br><br>
+Cut/Copy/Paste Flowsheet Objects</h3>
+<br>
+Defines how to handle compounds and property packages during copy/paste
+operations between different simulations.<br>
+
+<br><span style="font-weight: bold;">
+
+Compounds: </span>choose between not copying or copying and associating
+non-added compounds.<br>
+
+<br style="font-style: italic; font-weight: bold;"><span style="font-weight: bold;">
+
+Property Packages:</span><span style="font-style: italic; font-weight: bold;"> </span>choose between using the default Property Package
+from the current simulation or copying and associating the ones from
+the previous simulation.<br>
+<h3>
+
+Undo/Redo</h3>
 
 
-</BODY>
-</HTML>
+
+<span style="font-weight: bold;"><br>
+Recalculate flowsheet when undoing/redoing actions: </span>check this box to
+enable flowsheet recalculation after a n undo/redo operation.<br>
+<h3>
+
+Flowsheet Object Editors</h3>
+
+
+
+<span style="font-weight: bold;"><br>
+Enable multiple editors:</span> check this box to allow multiple editor
+windows opened at the same time.<br>
+
+<br><span style="font-weight: bold;">
+
+Close editors on deselecting:</span> check this box to close the editor once
+the associated object is deselected. <br>
+
+<br><span style="font-weight: bold;">
+
+Default initial placement:</span> select the default position for the editor
+window to be shown at.<br>
+
+<br>
+</body></html>

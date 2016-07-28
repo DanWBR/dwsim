@@ -162,11 +162,11 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
         Dim parname As String = Me.KryptonDataGridView1.Rows(e.RowIndex).Cells(1).Value
 
         _pp.Parameters(parid) = newvalue
-        'If Not _form Is Nothing Then
-        '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-        '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
-        '                                                       .OldValue = oldvalue, .NewValue = newvalue, .Tag = _pp, .ObjID = parid, .PropertyName = "PARAM"})
-        'End If
+        If Not _form Is Nothing Then
+                 _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
+                                                                   .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, parname, oldvalue, newvalue),
+                                                               .OldValue = oldvalue, .NewValue = newvalue, .Tag = _pp, .ObjID = parid, .PropertyName = "PARAM"})
+        End If
 
     End Sub
 
@@ -231,12 +231,12 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                         ppu.m_pr.InteractionParameters(id1)(id2).kji = value
                         tp = "PRSV2_KJI"
                 End Select
-                'If Not _form Is Nothing Then
-                '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-                '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
-                '                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
-                '                                                       .Tag = _pp, .PropertyName = tp})
-                'End If
+                If Not _form Is Nothing Then
+                    _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
+                                                                       .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
+                                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
+                                                                       .Tag = _pp, .PropertyName = tp})
+                End If
             Else
                 Dim ppu As PRSV2VLPropertyPackage = _pp
                 Dim value As Object = KryptonDataGridView2.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
@@ -252,12 +252,12 @@ gt2:            If ppu.m_pr._data.ContainsKey(cp.Name.ToLower) Then
                         ppu.m_pr.InteractionParameters(id1)(id2).kji = value
                         tp = "PRSV2VL_KJI"
                 End Select
-                'If Not _form Is Nothing Then
-                '    _form.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.PropertyPackagePropertyChanged,
-                '                                                       .Name = String.Format(Calculator.GetLocalString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
-                '                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
-                '                                                       .Tag = _pp, .PropertyName = tp})
-                'End If
+                If Not _form Is Nothing Then
+                    _form.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.PropertyPackagePropertyChanged,
+                                                                       .Name = String.Format(_pp.Flowsheet.GetTranslatedString("UndoRedo_PropertyPackagePropertyChanged"), _pp.Tag, tp, oldvalue, value),
+                                                                       .OldValue = oldvalue, .NewValue = CDbl(value), .ObjID = id1, .ObjID2 = id2,
+                                                                       .Tag = _pp, .PropertyName = tp})
+                End If
             End If
         End If
     End Sub

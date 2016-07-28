@@ -83,6 +83,7 @@
     <Compile Include="IReactionStoichBase.vb" />
     <Compile Include="ISpecialOps.vb" />
     <Compile Include="ISimulationObject.vb" />
+    <Compile Include="IUndoRedoAction.vb" />
     <Compile Include="IUnitsOfMeasure.vb" />
     <Compile Include="IUtilityPlugin.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

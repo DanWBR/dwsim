@@ -1,16 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html><head>
+
 <script src="ContentScripts.js"></script>
-<head>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
-</head>
 
-<!-- ================================================================================== -->
-<!-- ====================   Begin of content    ======================================= -->
-<!-- ================================================================================== -->
-<body onload="LoadMenue()">
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ======================================= --><!-- ================================================================================== --></head><body onload="LoadMenue()">
 
-<H2>Continuous Cake Filter</H2>
+<h2>Continuous Cake Filter</h2>
 <a href="SO_SolidSeparator.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
 <a href="SO_Reactor.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
 <hr>
@@ -21,8 +16,9 @@ discharging - and that each step involves progressive and continual change in co
 pressure drop across the filter during cake formation is, however, held constant.</p>
 
 <table>
-<tr>
-<td><img src="pictures/SO_CakeFilter1.png"></td>
+<tbody><tr>
+<td><br>
+</td>
 
 <td>
 <h3>Input Parameters</h3>
@@ -37,16 +33,16 @@ with the rate of solids production is <a href="SO_CakeFilter.htm#Refs">[1]</a>:<
 <img src="pictures/SO_CakeFilter2.png"><br><vr>
 
 where
-<table style="margin-left:50px;">
-<tr><td><img src="pictures/SO_CakeFilter3.png"> </td><td>rate of solids production [kg/s]</td></tr>
+</vr><table style="margin-left: 50px;">
+<tbody><tr><td><img src="pictures/SO_CakeFilter3.png"> </td><td>rate of solids production [kg/s]</td></tr>
 <tr><td>A<sub>T</sub>: </td><td>total filter area [m²]</td></tr>
-<tr><td>&#916P: </td><td>total pressure drop [Pa]</td></tr>
+<tr><td>&#916;P: </td><td>total pressure drop [Pa]</td></tr>
 <tr><td>f: </td><td>fraction of filter area available for cake formation</td></tr>
 <tr><td>c: </td><td>solids concentration in the solids stream</td></tr>
-<tr><td>&#945: </td><td>specific cake resistance [m/kg]</td></tr>
+<tr><td>&#945;: </td><td>specific cake resistance [m/kg]</td></tr>
 <tr><td>R<sub>m</sub>: </td><td>filter medium resistance, [1/m]</td></tr>
 <tr><td>n: </td><td>drum speed [1/s]</td></tr>
-</table>
+</tbody></table>
 <br>
 
 <h3>Input and Output Parameters</h3>
@@ -57,10 +53,10 @@ where
 <li><b>Cake Relative Humidity: </b>Filter cake moisture in % wet basis</li>
 <li><b>Filter Calculation Mode: </b>Design or Simulation<br>
 
-<table style="margin-left:20px;">
-<tr><td>Design mode: </td><td>DWSIM will calculate the filter area given the total pressure drop</td></tr>
+<table style="margin-left: 20px;">
+<tbody><tr><td>Design mode: </td><td>DWSIM will calculate the filter area given the total pressure drop</td></tr>
 <tr><td>Simulation mode: </td><td>DWSIM will calculate the total pressure drop given the filter area</td></tr>
-</table>
+</tbody></table>
 </li>
 <li><b>Total Filter Area: </b>Filter area measured perpendicularly to the direction of flow</li>
 <li><b>Pressure Drop: </b>Total pressure drop across the filter (cake + medium).</li>
@@ -68,10 +64,10 @@ where
 </td>
 
 </tr>
-</table>
+</tbody></table>
 
 <hr>
-<h3  id="Refs">References</h3>
+<h3 id="Refs">References</h3>
 <ol>
 <li>
 McCabe W, Smith J, Harriott P.<br>
@@ -79,5 +75,4 @@ McCabe W, Smith J, Harriott P.<br>
  Chemical Engineering Series. McGraw-Hill Education. 2005.<br>
 
 </li></ol>
-</BODY>
-</HTML>
+</body></html>

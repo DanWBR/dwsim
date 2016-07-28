@@ -547,11 +547,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\dielectricconstants.txt" />
-    <EmbeddedResource Include="Assets\elements.txt" />
+    <EmbeddedResource Include="Assets\Elements.txt" />
     <EmbeddedResource Include="Assets\ExUNIQUAC_RiQi.txt" />
     <EmbeddedResource Include="Assets\ExUNIQUAC_uij.txt" />
     <EmbeddedResource Include="Assets\henry.txt" />
-    <EmbeddedResource Include="Assets\jobackgroups.txt" />
+    <EmbeddedResource Include="Assets\JobackGroups.txt" />
     <EmbeddedResource Include="Assets\kij_srk.txt" />
     <EmbeddedResource Include="Assets\LIQUAC2_IP.txt" />
     <EmbeddedResource Include="Assets\LIQUAC2_RiQi.txt" />

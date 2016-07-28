@@ -1,4 +1,6 @@
-﻿'    Hypotheticals Calculation Routines 
+﻿Imports Microsoft.VisualBasic.FileIO
+
+'    Hypotheticals Calculation Routines 
 '    Copyright 2008/2013 Daniel Wagner O. de Medeiros
 '              2013 Gregor Reichert   
 '
@@ -27,15 +29,21 @@ Namespace Utilities.Hypos.Methods
         Sub New()
 
             Dim pathsep = System.IO.Path.DirectorySeparatorChar
-            Dim ElementLines(), JOBACKlines() As String
+            Dim ElementLines, JOBACKlines As New List(Of String)
             Dim i As Integer
 
             'Load Elements data
             m_JElements = New System.Collections.Generic.Dictionary(Of String, Element)
-            Dim ElementsFilename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "Elements.txt"
-            ElementLines = IO.File.ReadAllLines(ElementsFilename)
+ 
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.Elements.txt")
+                Using parser As New TextFieldParser(filestr)
+                    While Not parser.EndOfData
+                        ElementLines.Add(parser.ReadLine)
+                    End While
+                End Using
+            End Using
 
-            For i = 1 To ElementLines.Length - 1
+            For i = 1 To ElementLines.Count - 1
                 With ElementLines(i)
                     Dim El As New Element
                     'ID;Name;Symbol;MW
@@ -49,11 +57,16 @@ Namespace Utilities.Hypos.Methods
 
             'Load Joback-groups data
             m_Jgroups = New System.Collections.Generic.Dictionary(Of Integer, JobackGroup)
-            Dim filename = My.Application.Info.DirectoryPath & pathsep & "data" & pathsep & "JobackGroups.txt"
-            JOBACKlines = IO.File.ReadAllLines(filename)
+     
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.JobackGroups.txt")
+                Using parser As New TextFieldParser(filestr)
+                    While Not parser.EndOfData
+                        JOBACKlines.Add(parser.ReadLine)
+                    End While
+                End Using
+            End Using
 
-
-            For i = 2 To JOBACKlines.Length - 1
+            For i = 2 To JOBACKlines.Count - 1
                 With JOBACKlines(i)
                     If Not .Split(";")(0) = "X" Then
                         Dim JG As New JobackGroup

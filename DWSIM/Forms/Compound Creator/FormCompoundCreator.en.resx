@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1066, 53</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Compound Database</value>
+  </data>
   <data name="chkReplaceComps.Location" type="System.Drawing.Point, System.Drawing">
     <value>854, 24</value>
   </data>
@@ -155,12 +161,6 @@
   <data name="btnCreateNewDB.Text" xml:space="preserve">
     <value>Create New</value>
   </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1066, 53</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Compound Database</value>
-  </data>
   <data name="btnSaveToDB.Location" type="System.Drawing.Point, System.Drawing">
     <value>1151, 14</value>
   </data>
@@ -169,6 +169,12 @@
   </data>
   <data name="btnSaveToDB.Text" xml:space="preserve">
     <value>Save compound to database</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1331, 470</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Compound Properties</value>
   </data>
   <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 20</value>
@@ -218,6 +224,49 @@
   <data name="Label54.Text" xml:space="preserve">
     <value>Compound Type</value>
   </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Identification</value>
+  </data>
+  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FaTabStripItemBO.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
+  <data name="FaTabStripItemEL.Title" xml:space="preserve">
+    <value>Electrolyte/Salt</value>
+  </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>General Properties</value>
+  </data>
+  <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
+  <data name="FaTabStripItem7.Title" xml:space="preserve">
+    <value>Vapor Pressure</value>
+  </data>
+  <data name="FaTabStripItem8.Title" xml:space="preserve">
+    <value>Heat Capacity</value>
+  </data>
+  <data name="FaTabStripItem9.Title" xml:space="preserve">
+    <value>Liquid Density</value>
+  </data>
+  <data name="FaTabStripItem10.Title" xml:space="preserve">
+    <value>Liquid Viscosity</value>
+  </data>
+  <data name="FaTabStripItem11.Title" xml:space="preserve">
+    <value>Solid Properties</value>
+  </data>
+  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1319, 417</value>
+  </data>
   <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
     <value>1223, 111</value>
   </data>
@@ -239,11 +288,11 @@
   <data name="Label22.Text" xml:space="preserve">
     <value>Mole Weight</value>
   </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
+  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>365, 6</value>
   </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Identification</value>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Optional data</value>
   </data>
   <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 13</value>
@@ -275,11 +324,11 @@
   <data name="Label95.Text" xml:space="preserve">
     <value>Oil Viscosity 1</value>
   </data>
-  <data name="GroupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 6</value>
+  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>353, 170</value>
   </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Optional data</value>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Required data</value>
   </data>
   <data name="Label102.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 108</value>
@@ -323,18 +372,11 @@
   <data name="Label97.Text" xml:space="preserve">
     <value>Gas-Oil Ratio @ Standard Conditions</value>
   </data>
-  <data name="GroupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 170</value>
+  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 116</value>
   </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Required data</value>
-  </data>
-  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FaTabStripItemBO.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Solid Phase/Precipitate</value>
   </data>
   <data name="Label111.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 53</value>
@@ -378,11 +420,11 @@
   <data name="Label124.Text" xml:space="preserve">
     <value>Enthalpy of Fusion @ Tf</value>
   </data>
-  <data name="GroupBox12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 116</value>
+  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>413, 115</value>
   </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Solid Phase/Precipitate</value>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Formation Properties</value>
   </data>
   <data name="Label126.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 85</value>
@@ -419,12 +461,6 @@
   </data>
   <data name="Label122.Text" xml:space="preserve">
     <value>Heat Capacity @ 298 K</value>
-  </data>
-  <data name="GroupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 115</value>
-  </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Formation Properties</value>
   </data>
   <data name="Label127.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -483,23 +519,17 @@
   <data name="Label118.Text" xml:space="preserve">
     <value>Positive Ion Stoichiometric Coefficient</value>
   </data>
-  <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
-  </data>
-  <data name="FaTabStripItemEL.Title" xml:space="preserve">
-    <value>Electrolyte/Salt</value>
-  </data>
   <data name="Label60.Size" type="System.Drawing.Size, System.Drawing">
     <value>393, 13</value>
   </data>
   <data name="Label60.Text" xml:space="preserve">
     <value>Enter the amount of each UNIFAC group in the compound structure, if available.</value>
   </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Amount</value>
-  </data>
   <data name="GridUNIFAC.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>60</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Amount</value>
   </data>
   <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
     <value>Amount</value>
@@ -564,6 +594,9 @@
   <data name="ColumnCountJoback.HeaderText" xml:space="preserve">
     <value>Count Joback</value>
   </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>PC-SAFT Parameters</value>
+  </data>
   <data name="LabelWithDivider8.Text" xml:space="preserve">
     <value>Attraction Parameter</value>
   </data>
@@ -572,9 +605,6 @@
   </data>
   <data name="LabelWithDivider10.Text" xml:space="preserve">
     <value>Segment Diameter</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>PC-SAFT Parameters</value>
   </data>
   <data name="GroupBox11.Text" xml:space="preserve">
     <value>UNIQUAC Parameters</value>
@@ -675,9 +705,6 @@
   <data name="Label63.Text" xml:space="preserve">
     <value>Chao-Seader Solubility Parameter</value>
   </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>General Properties</value>
-  </data>
   <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 205</value>
   </data>
@@ -741,6 +768,9 @@
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 102</value>
   </data>
+  <data name="cbEqPVAP.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="cbEqPVAP.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 41</value>
   </data>
@@ -759,8 +789,8 @@
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
     <value>236, 76</value>
   </data>
-  <data name="FaTabStripItem7.Title" xml:space="preserve">
-    <value>Vapor Pressure</value>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Cp (Liquid)</value>
   </data>
   <data name="Label87.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
@@ -792,8 +822,8 @@
   <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regress Experimental Data</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Cp (Liquid)</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Cp (Ideal Gas)</value>
   </data>
   <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 203</value>
@@ -872,12 +902,6 @@
   </data>
   <data name="tbCPIG_C.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 123</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Cp (Ideal Gas)</value>
-  </data>
-  <data name="FaTabStripItem8.Title" xml:space="preserve">
-    <value>Heat Capacity</value>
   </data>
   <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 205</value>
@@ -960,9 +984,6 @@
   <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 76</value>
   </data>
-  <data name="FaTabStripItem9.Title" xml:space="preserve">
-    <value>Liquid Density</value>
-  </data>
   <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 205</value>
   </data>
@@ -1041,11 +1062,11 @@
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
     <value>234, 76</value>
   </data>
-  <data name="FaTabStripItem10.Title" xml:space="preserve">
-    <value>Liquid Viscosity</value>
-  </data>
   <data name="LabelWithDivider7.Text" xml:space="preserve">
     <value>Density and Heat Capacity</value>
+  </data>
+  <data name="gbCPs.Text" xml:space="preserve">
+    <value>Heat Capacity ( Solid phase)</value>
   </data>
   <data name="btnRegressSolidCp.Text" xml:space="preserve">
     <value>Regress Data</value>
@@ -1074,8 +1095,8 @@
   <data name="Label74.Text" xml:space="preserve">
     <value>Equation</value>
   </data>
-  <data name="gbCPs.Text" xml:space="preserve">
-    <value>Heat Capacity ( Solid phase)</value>
+  <data name="gbSolidDens.Text" xml:space="preserve">
+    <value>Density (Solid Phase)</value>
   </data>
   <data name="rbEstimateSolidDens.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 17</value>
@@ -1107,9 +1128,6 @@
   <data name="Label76.Text" xml:space="preserve">
     <value>Equation</value>
   </data>
-  <data name="gbSolidDens.Text" xml:space="preserve">
-    <value>Density (Solid Phase)</value>
-  </data>
   <data name="LabelWithDivider1.Text" xml:space="preserve">
     <value>Fusion data</value>
   </data>
@@ -1125,20 +1143,14 @@
   <data name="Label55.Text" xml:space="preserve">
     <value>Enthalpy of fusion</value>
   </data>
-  <data name="FaTabStripItem11.Title" xml:space="preserve">
-    <value>Solid Properties</value>
-  </data>
-  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1319, 417</value>
-  </data>
   <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
     <value>385, 18</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1331, 470</value>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1080, 6</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Compound Properties</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>System of Units</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 13</value>
@@ -1154,12 +1166,6 @@
   </data>
   <data name="cbUnits.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
-  </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1080, 6</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>System of Units</value>
   </data>
   <data name="DBOpenDlg.Filter" xml:space="preserve">
     <value>XML Files|*.xml</value>

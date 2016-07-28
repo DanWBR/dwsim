@@ -72,6 +72,8 @@
 
     Property MasterFlowsheet As IFlowsheet
 
+    Sub AddUndoRedoAction(action As IUndoRedoAction)
+
 End Interface
 
 Public Interface IFlowsheetBag
@@ -111,6 +113,8 @@ Public Interface IFlowsheetGUI
     Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String)
 
     Sub UpdateInterface()
+
+    Sub UpdateInformation()
 
 End Interface
 

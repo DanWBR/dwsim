@@ -21,16 +21,13 @@ Namespace FlowPackages
 
         Inherits FPBaseClass
 
-        Public Overrides Function CalculateDeltaP(ByVal D As Object, ByVal L As Object, _
-                                ByVal deltaz As Object, ByVal k As Object, ByVal qv As Object, _
-                                ByVal ql As Object, ByVal muv As Object, ByVal mul As Object, _
-                                ByVal rhov As Object, ByVal rhol As Object, ByVal surft As Object) As Object
+      Public Overrides Function CalculateDeltaP(ByVal D As Double, ByVal L As Double, ByVal deltaz As Double, ByVal k As Double, ByVal qv As Double, ByVal ql As Double, ByVal muv As Double, ByVal mul As Double, ByVal rhov As Double, ByVal rhol As Double, ByVal surft As Double) As Object
 
             CalculateDeltaP = Nothing
 
             Dim resvect(4) As Object
 
-            If qv = 0 Then
+            If qv = 0.0# Then
 
                 ql = ql / 3600 / 24
                 Dim vlo = ql / (Math.PI * D ^ 2 / 4)
@@ -56,7 +53,7 @@ Namespace FlowPackages
 
                 CalculateDeltaP = resvect
 
-            ElseIf ql = 0 Then
+            ElseIf ql = 0.0# Then
 
                 qv = qv / 3600 / 24
                 Dim vgo = qv / (Math.PI * D ^ 2 / 4)
@@ -74,7 +71,7 @@ Namespace FlowPackages
                 Dim dPl = fric * L / D * vgo ^ 2 / 2 * rhov
                 Dim dPh = rhov * 9.8 * Math.Sin(Math.Asin(deltaz / L)) * L
 
-                resvect(0) = "Liquid Only"
+                resvect(0) = "Vapor Only"
                 resvect(1) = 0
                 resvect(2) = dPl
                 resvect(3) = dPh

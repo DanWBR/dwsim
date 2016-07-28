@@ -755,15 +755,15 @@ Namespace PropertyPackages.Auxiliary
             Dim fields As String()
             Dim delimiter As String = ","
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac.txt")
-                    Using parser As New TextFieldParser(filestr)
-                        parser.SetDelimiters(delimiter)
+                Using parser As New TextFieldParser(filestr)
+                    parser.SetDelimiters(delimiter)
+                    fields = parser.ReadFields()
+                    fields = parser.ReadFields()
+                    While Not parser.EndOfData
                         fields = parser.ReadFields()
-                        fields = parser.ReadFields()
-                        While Not parser.EndOfData
-                            fields = parser.ReadFields()
-                            Me.Groups.Add(fields(1), New UnifacGroup(fields(2), fields(3), fields(0), fields(1), Double.Parse(fields(4), cult), Double.Parse(fields(5), cult)))
-                        End While
-                    End Using
+                        Me.Groups.Add(fields(1), New UnifacGroup(fields(2), fields(3), fields(0), fields(1), Double.Parse(fields(4), cult), Double.Parse(fields(5), cult)))
+                    End While
+                End Using
             End Using
 
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac_ip.txt")

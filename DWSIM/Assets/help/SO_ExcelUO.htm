@@ -1,16 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html><head>
+
 <script src="ContentScripts.js"></script>
-<head>
-<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
-</head>
 
-<!-- ================================================================================== -->
-<!-- ====================   Begin of content    ==============================================-->
-<!-- ================================================================================== -->
-<body onload="LoadMenue()">
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ==============================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
 
-<H2>Excel Unit Operation</H2>
+<h2>Excel Unit Operation</h2>
 <a href="SO_CustomUO.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
 <a href="SO_FlowsheetUO.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
 <hr>
@@ -21,14 +16,16 @@ are calculated by Excel spread sheet calculator.<br><br>
 Each instance of that unit operation model is associated with a separate calculation file. This file is preconfigured
 in a special way to recieve data from DWSIM for executing the calculations and hold results to be transfered back.
 The results are fetched from DWSIM to be fed back into the exit streams of that unit operation.<br>
-You also may transfere user defined parameters from DWSIM to Excel and read other user defined parameters as results back to DWSIM.
-
-Up to four streams may be connected both to inlet and outlet of that unit. 
-The energy stream recieves the calculatd energy from enthalpy balance.</p>
+You also may transfere user defined parameters from DWSIM to Excel and
+read other user defined parameters as results back to DWSIM.
+Up to four streams may be connected both to inlet and outlet of that
+unit. The energy stream recieves the calculatd energy from enthalpy
+balance.</p>
 
 <table>
-<tr>
-<td><img src="pictures/SO_ExcelUO1.png"></td>
+<tbody><tr>
+<td><br>
+</td>
 
 <td>
 This sample depicts a simple model of a membrane electrolysis cell stack with inlet streams for Anolyte and Catholyte solution.
@@ -48,12 +45,13 @@ The selected parameter may contain an anotation which is defined inside the Exce
 </td>
 
 </tr>
-</table>
+</tbody></table>
 <hr>
 
 <table>
-<tr>
-<td><img src="pictures/SO_ExcelUO2.png"></td>
+<tbody><tr>
+<td><br>
+</td>
 
 <td>
 <h3>Search</h3>
@@ -67,7 +65,7 @@ Opens definition file with Excel for editing. After editing you just save the Ex
 </td>
 
 </tr>
-</table>
+</tbody></table>
 
 <hr>
 <h2>Excel definition file</h2>
@@ -102,5 +100,4 @@ After finishing the calculations in Excel DWSIM checks the mass balance of that 
 will issue an error message.
 
 <br><br>
-</BODY>
-</HTML>
+</body></html>

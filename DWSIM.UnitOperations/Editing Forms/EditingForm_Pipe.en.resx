@@ -197,7 +197,7 @@
     <value>148, 94</value>
   </data>
   <data name="cbPDropModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 21</value>
+    <value>206, 21</value>
   </data>
   <data name="cbPDropModel.ToolTip" xml:space="preserve">
     <value />
@@ -268,11 +268,17 @@
   <data name="TabPage4.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 286</value>
+  </data>
   <data name="TabPage5.Text" xml:space="preserve">
     <value>Hydraulic Profile</value>
   </data>
   <data name="TabPage5.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 286</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Thermal Profile</value>
@@ -368,7 +374,7 @@
     <value />
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 305</value>
+    <value>391, 279</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Profile Data</value>
@@ -377,7 +383,7 @@
     <value />
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 305</value>
+    <value>391, 279</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Profile Graph</value>

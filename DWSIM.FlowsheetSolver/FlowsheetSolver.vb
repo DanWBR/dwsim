@@ -863,7 +863,10 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             Dim filteredlist As Dictionary(Of Integer, List(Of String)) = objl(2)
             Dim objstack As List(Of String) = objl(0)
 
-            If objstack.Count = 0 Then Exit Sub
+            If objstack.Count = 0 Then
+                GlobalSettings.Settings.CalculatorBusy = False
+                Exit Sub
+            End If
 
             'adds a message to the log window to indicate that the flowsheet started solving
 
@@ -1234,43 +1237,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             'updates the flowsheet display information if the fobj is visible.
 
-            'If fobj.Visible And fobj.MasterFlowsheet Is Nothing Then
+            fgui.UpdateInformation()
 
-            '    fobj.FormWatch.UpdateList()
-
-            '    fobj.FormQueue.TextBox1.Clear()
-
-            '    'For Each g As IGraphicObject In fobj.FormSurface.FlowsheetDesignSurface.drawingObjects
-            '    '    If g.ObjectType = ObjectType.GO_MasterTable Then
-            '    '        CType(g, MasterTableGraphic).Update(fobj)
-            '    '    End If
-            '    'Next
-
-            '    If Not fobj.FormSpreadsheet Is Nothing Then
-            '        If fobj.FormSpreadsheet.chkUpdate.Checked Then
-            '            fobj.FormSpreadsheet.EvaluateAll()
-            '            fobj.FormSpreadsheet.EvaluateAll()
-            '        End If
-            '    End If
-
-            '    fobj.UpdateStatusLabel(preLab)
-
-            '    If fobj.FormSurface.Timer2.Enabled = True Then fobj.FormSurface.Timer2.Stop()
-            '    fobj.FormSurface.PictureBox3.Image = My.Resources.tick
-            '    fobj.FormSurface.LabelTime.Text = ""
-
-            '    'fobj.FormSurface.LabelSimultAdjInfo.Text = ""
-            '    'fobj.FormSurface.PicSimultAdjust.Visible = False
-            '    'fobj.FormSurface.LabelSimultAdjInfo.Visible = False
-            '    'fobj.FormSurface.LabelSimultAdjustStatus.Visible = False
-
-            '    If Not fobj.FormSurface.FlowsheetDesignSurface.SelectedObject Is Nothing Then Call fobj.FormSurface.UpdateSelectedObject()
-
-            '    Application.DoEvents()
-
-            'End If
-
-            'ProcessScripts(Scripts.EventType.SolverFinished, Scripts.ObjectType.Solver)
+            fgui.ProcessScripts(Scripts.EventType.SolverFinished, Scripts.ObjectType.Solver, "")
 
             GlobalSettings.Settings.CalculatorBusy = False
 
@@ -1512,11 +1481,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             Catch ex As Exception
                 fgui.ShowMessage(fgui.GetTranslatedString("SADJGeneralError") & ": " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
-            Finally
-                'fobj.FormSurface.LabelSimultAdjInfo.Text = ""
-                'fobj.FormSurface.PicSimultAdjust.Visible = False
-                'fobj.FormSurface.LabelSimultAdjInfo.Visible = False
-                'fobj.FormSurface.LabelSimultAdjustStatus.Visible = False
             End Try
 
         End If

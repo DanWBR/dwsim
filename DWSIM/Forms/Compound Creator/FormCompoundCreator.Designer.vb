@@ -522,8 +522,8 @@ Partial Class FormCompoundCreator
         '
         'ToolStripLabel2
         '
-        resources.ApplyResources(ToolStripLabel2, "ToolStripLabel2")
         ToolStripLabel2.Name = "ToolStripLabel2"
+        resources.ApplyResources(ToolStripLabel2, "ToolStripLabel2")
         '
         'GroupBox1
         '
@@ -535,7 +535,6 @@ Partial Class FormCompoundCreator
         Me.GroupBox1.Controls.Add(Me.btnCreateNewDB)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'chkReplaceComps
         '
@@ -543,7 +542,6 @@ Partial Class FormCompoundCreator
         Me.chkReplaceComps.Checked = True
         Me.chkReplaceComps.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkReplaceComps.Name = "chkReplaceComps"
-        Me.ToolTip1.SetToolTip(Me.chkReplaceComps, resources.GetString("chkReplaceComps.ToolTip"))
         Me.chkReplaceComps.UseVisualStyleBackColor = True
         '
         'tbDBPath
@@ -551,28 +549,24 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.tbDBPath, "tbDBPath")
         Me.tbDBPath.Name = "tbDBPath"
         Me.tbDBPath.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbDBPath, resources.GetString("tbDBPath.ToolTip"))
         '
         'btnSearch
         '
         resources.ApplyResources(Me.btnSearch, "btnSearch")
         Me.btnSearch.Image = Global.DWSIM.My.Resources.Resources.folder_go
         Me.btnSearch.Name = "btnSearch"
-        Me.ToolTip1.SetToolTip(Me.btnSearch, resources.GetString("btnSearch.ToolTip"))
         Me.btnSearch.UseVisualStyleBackColor = True
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'btnCreateNewDB
         '
         resources.ApplyResources(Me.btnCreateNewDB, "btnCreateNewDB")
         Me.btnCreateNewDB.Image = Global.DWSIM.My.Resources.Resources.page_white
         Me.btnCreateNewDB.Name = "btnCreateNewDB"
-        Me.ToolTip1.SetToolTip(Me.btnCreateNewDB, resources.GetString("btnCreateNewDB.ToolTip"))
         Me.btnCreateNewDB.UseVisualStyleBackColor = True
         '
         'btnSaveToDB
@@ -580,7 +574,6 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.btnSaveToDB, "btnSaveToDB")
         Me.btnSaveToDB.Image = Global.DWSIM.My.Resources.Resources.disk
         Me.btnSaveToDB.Name = "btnSaveToDB"
-        Me.ToolTip1.SetToolTip(Me.btnSaveToDB, resources.GetString("btnSaveToDB.ToolTip"))
         Me.btnSaveToDB.UseVisualStyleBackColor = True
         '
         'GroupBox2
@@ -598,40 +591,34 @@ Partial Class FormCompoundCreator
         Me.GroupBox2.Controls.Add(Me.TextBoxID)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'RadioButton3
         '
         resources.ApplyResources(Me.RadioButton3, "RadioButton3")
         Me.RadioButton3.Name = "RadioButton3"
-        Me.ToolTip1.SetToolTip(Me.RadioButton3, resources.GetString("RadioButton3.ToolTip"))
         Me.RadioButton3.UseVisualStyleBackColor = True
         '
         'RadioButton2
         '
         resources.ApplyResources(Me.RadioButton2, "RadioButton2")
         Me.RadioButton2.Name = "RadioButton2"
-        Me.ToolTip1.SetToolTip(Me.RadioButton2, resources.GetString("RadioButton2.ToolTip"))
         Me.RadioButton2.UseVisualStyleBackColor = True
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
-        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
-        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
         '
         'TextBoxName
         '
         resources.ApplyResources(Me.TextBoxName, "TextBoxName")
         Me.TextBoxName.BackColor = System.Drawing.Color.White
         Me.TextBoxName.Name = "TextBoxName"
-        Me.ToolTip1.SetToolTip(Me.TextBoxName, resources.GetString("TextBoxName.ToolTip"))
         '
         'RadioButton1
         '
@@ -639,27 +626,23 @@ Partial Class FormCompoundCreator
         Me.RadioButton1.Checked = True
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.RadioButton1, resources.GetString("RadioButton1.ToolTip"))
         Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'Label54
         '
         resources.ApplyResources(Me.Label54, "Label54")
         Me.Label54.Name = "Label54"
-        Me.ToolTip1.SetToolTip(Me.Label54, resources.GetString("Label54.ToolTip"))
         '
         'FaTabStrip2
         '
-        resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
         Me.FaTabStrip2.AlwaysShowClose = False
+        resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItemBO, Me.FaTabStripItemEL, Me.FaTabStripItem2, Me.FaTabStripItem5, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4, Me.FaTabStripItem7, Me.FaTabStripItem8, Me.FaTabStripItem9, Me.FaTabStripItem10, Me.FaTabStripItem11})
         Me.FaTabStrip2.Name = "FaTabStrip2"
         Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
-        Me.ToolTip1.SetToolTip(Me.FaTabStrip2, resources.GetString("FaTabStrip2.ToolTip"))
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.TextBoxComments)
         Me.FaTabStripItem1.Controls.Add(Me.Label94)
@@ -680,19 +663,17 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'TextBoxComments
         '
         resources.ApplyResources(Me.TextBoxComments, "TextBoxComments")
         Me.TextBoxComments.Name = "TextBoxComments"
-        Me.ToolTip1.SetToolTip(Me.TextBoxComments, resources.GetString("TextBoxComments.ToolTip"))
         '
         'Label94
         '
         resources.ApplyResources(Me.Label94, "Label94")
         Me.Label94.Name = "Label94"
-        Me.ToolTip1.SetToolTip(Me.Label94, resources.GetString("Label94.ToolTip"))
         '
         'LinkLabel1
         '
@@ -706,7 +687,6 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.btnRenderSMILES, "btnRenderSMILES")
         Me.btnRenderSMILES.Name = "btnRenderSMILES"
-        Me.ToolTip1.SetToolTip(Me.btnRenderSMILES, resources.GetString("btnRenderSMILES.ToolTip"))
         Me.btnRenderSMILES.UseVisualStyleBackColor = True
         '
         'LinkPubChem
@@ -714,46 +694,39 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.LinkPubChem, "LinkPubChem")
         Me.LinkPubChem.Name = "LinkPubChem"
         Me.LinkPubChem.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.LinkPubChem, resources.GetString("LinkPubChem.ToolTip"))
         Me.LinkPubChem.UseCompatibleTextRendering = True
         '
         'TextBoxSMILES
         '
         resources.ApplyResources(Me.TextBoxSMILES, "TextBoxSMILES")
         Me.TextBoxSMILES.Name = "TextBoxSMILES"
-        Me.ToolTip1.SetToolTip(Me.TextBoxSMILES, resources.GetString("TextBoxSMILES.ToolTip"))
         '
         'TextBoxCAS
         '
-        resources.ApplyResources(Me.TextBoxCAS, "TextBoxCAS")
         Me.TextBoxCAS.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxCAS, "TextBoxCAS")
         Me.TextBoxCAS.Name = "TextBoxCAS"
-        Me.ToolTip1.SetToolTip(Me.TextBoxCAS, resources.GetString("TextBoxCAS.ToolTip"))
         '
         'Label51
         '
         resources.ApplyResources(Me.Label51, "Label51")
         Me.Label51.Name = "Label51"
-        Me.ToolTip1.SetToolTip(Me.Label51, resources.GetString("Label51.ToolTip"))
         '
         'Label21
         '
         resources.ApplyResources(Me.Label21, "Label21")
         Me.Label21.Name = "Label21"
-        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
         '
         'Label47
         '
         resources.ApplyResources(Me.Label47, "Label47")
         Me.Label47.Name = "Label47"
-        Me.ToolTip1.SetToolTip(Me.Label47, resources.GetString("Label47.ToolTip"))
         '
         'TextBoxFormula
         '
-        resources.ApplyResources(Me.TextBoxFormula, "TextBoxFormula")
         Me.TextBoxFormula.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxFormula, "TextBoxFormula")
         Me.TextBoxFormula.Name = "TextBoxFormula"
-        Me.ToolTip1.SetToolTip(Me.TextBoxFormula, resources.GetString("TextBoxFormula.ToolTip"))
         '
         'pbRender
         '
@@ -761,18 +734,16 @@ Partial Class FormCompoundCreator
         Me.pbRender.BackColor = System.Drawing.SystemColors.ControlLight
         Me.pbRender.Name = "pbRender"
         Me.pbRender.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.pbRender, resources.GetString("pbRender.ToolTip"))
         '
         'Label22
         '
         resources.ApplyResources(Me.Label22, "Label22")
         Me.Label22.Name = "Label22"
-        Me.ToolTip1.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
         '
         'TextBoxMW
         '
-        resources.ApplyResources(Me.TextBoxMW, "TextBoxMW")
         Me.TextBoxMW.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxMW, "TextBoxMW")
         Me.TextBoxMW.Name = "TextBoxMW"
         Me.ToolTip1.SetToolTip(Me.TextBoxMW, resources.GetString("TextBoxMW.ToolTip"))
         '
@@ -780,7 +751,6 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.lblMW, "lblMW")
         Me.lblMW.Name = "lblMW"
-        Me.ToolTip1.SetToolTip(Me.lblMW, resources.GetString("lblMW.ToolTip"))
         '
         'CheckBoxMW
         '
@@ -793,17 +763,15 @@ Partial Class FormCompoundCreator
         '
         'FaTabStripItemBO
         '
-        resources.ApplyResources(Me.FaTabStripItemBO, "FaTabStripItemBO")
         Me.FaTabStripItemBO.CanClose = False
         Me.FaTabStripItemBO.Controls.Add(Me.GroupBox8)
         Me.FaTabStripItemBO.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItemBO.IsDrawn = True
         Me.FaTabStripItemBO.Name = "FaTabStripItemBO"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItemBO, resources.GetString("FaTabStripItemBO.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItemBO, "FaTabStripItemBO")
         '
         'GroupBox8
         '
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
         Me.GroupBox8.Controls.Add(Me.lblBOT1)
         Me.GroupBox8.Controls.Add(Me.lblBOT2)
         Me.GroupBox8.Controls.Add(Me.tbBOT1)
@@ -823,134 +791,114 @@ Partial Class FormCompoundCreator
         Me.GroupBox8.Controls.Add(Me.Label103)
         Me.GroupBox8.Controls.Add(Me.Label96)
         Me.GroupBox8.Controls.Add(Me.Label95)
+        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox8, resources.GetString("GroupBox8.ToolTip"))
         '
         'lblBOT1
         '
         resources.ApplyResources(Me.lblBOT1, "lblBOT1")
         Me.lblBOT1.Name = "lblBOT1"
-        Me.ToolTip1.SetToolTip(Me.lblBOT1, resources.GetString("lblBOT1.ToolTip"))
         '
         'lblBOT2
         '
         resources.ApplyResources(Me.lblBOT2, "lblBOT2")
         Me.lblBOT2.Name = "lblBOT2"
-        Me.ToolTip1.SetToolTip(Me.lblBOT2, resources.GetString("lblBOT2.ToolTip"))
         '
         'tbBOT1
         '
-        resources.ApplyResources(Me.tbBOT1, "tbBOT1")
         Me.tbBOT1.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOT1, "tbBOT1")
         Me.tbBOT1.Name = "tbBOT1"
-        Me.ToolTip1.SetToolTip(Me.tbBOT1, resources.GetString("tbBOT1.ToolTip"))
         '
         'tbBOT2
         '
-        resources.ApplyResources(Me.tbBOT2, "tbBOT2")
         Me.tbBOT2.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOT2, "tbBOT2")
         Me.tbBOT2.Name = "tbBOT2"
-        Me.ToolTip1.SetToolTip(Me.tbBOT2, resources.GetString("tbBOT2.ToolTip"))
         '
         'lblBOVisc1
         '
         resources.ApplyResources(Me.lblBOVisc1, "lblBOVisc1")
         Me.lblBOVisc1.Name = "lblBOVisc1"
-        Me.ToolTip1.SetToolTip(Me.lblBOVisc1, resources.GetString("lblBOVisc1.ToolTip"))
         '
         'lblBOVisc2
         '
         resources.ApplyResources(Me.lblBOVisc2, "lblBOVisc2")
         Me.lblBOVisc2.Name = "lblBOVisc2"
-        Me.ToolTip1.SetToolTip(Me.lblBOVisc2, resources.GetString("lblBOVisc2.ToolTip"))
         '
         'tbBOV1
         '
-        resources.ApplyResources(Me.tbBOV1, "tbBOV1")
         Me.tbBOV1.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOV1, "tbBOV1")
         Me.tbBOV1.Name = "tbBOV1"
-        Me.ToolTip1.SetToolTip(Me.tbBOV1, resources.GetString("tbBOV1.ToolTip"))
         '
         'tbBOV2
         '
-        resources.ApplyResources(Me.tbBOV2, "tbBOV2")
         Me.tbBOV2.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOV2, "tbBOV2")
         Me.tbBOV2.Name = "tbBOV2"
-        Me.ToolTip1.SetToolTip(Me.tbBOV2, resources.GetString("tbBOV2.ToolTip"))
         '
         'Label108
         '
         resources.ApplyResources(Me.Label108, "Label108")
         Me.Label108.Name = "Label108"
-        Me.ToolTip1.SetToolTip(Me.Label108, resources.GetString("Label108.ToolTip"))
         '
         'tbBOPNAP
         '
-        resources.ApplyResources(Me.tbBOPNAP, "tbBOPNAP")
         Me.tbBOPNAP.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOPNAP, "tbBOPNAP")
         Me.tbBOPNAP.Name = "tbBOPNAP"
-        Me.ToolTip1.SetToolTip(Me.tbBOPNAP, resources.GetString("tbBOPNAP.ToolTip"))
         '
         'Label107
         '
         resources.ApplyResources(Me.Label107, "Label107")
         Me.Label107.Name = "Label107"
-        Me.ToolTip1.SetToolTip(Me.Label107, resources.GetString("Label107.ToolTip"))
         '
         'tbBOPNAN
         '
-        resources.ApplyResources(Me.tbBOPNAN, "tbBOPNAN")
         Me.tbBOPNAN.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOPNAN, "tbBOPNAN")
         Me.tbBOPNAN.Name = "tbBOPNAN"
-        Me.ToolTip1.SetToolTip(Me.tbBOPNAN, resources.GetString("tbBOPNAN.ToolTip"))
         '
         'Label106
         '
         resources.ApplyResources(Me.Label106, "Label106")
         Me.Label106.Name = "Label106"
-        Me.ToolTip1.SetToolTip(Me.Label106, resources.GetString("Label106.ToolTip"))
         '
         'tbBOPNAA
         '
-        resources.ApplyResources(Me.tbBOPNAA, "tbBOPNAA")
         Me.tbBOPNAA.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOPNAA, "tbBOPNAA")
         Me.tbBOPNAA.Name = "tbBOPNAA"
-        Me.ToolTip1.SetToolTip(Me.tbBOPNAA, resources.GetString("tbBOPNAA.ToolTip"))
         '
         'Label105
         '
         resources.ApplyResources(Me.Label105, "Label105")
         Me.Label105.Name = "Label105"
-        Me.ToolTip1.SetToolTip(Me.Label105, resources.GetString("Label105.ToolTip"))
         '
         'Label104
         '
         resources.ApplyResources(Me.Label104, "Label104")
         Me.Label104.Name = "Label104"
-        Me.ToolTip1.SetToolTip(Me.Label104, resources.GetString("Label104.ToolTip"))
         '
         'Label103
         '
         resources.ApplyResources(Me.Label103, "Label103")
         Me.Label103.Name = "Label103"
-        Me.ToolTip1.SetToolTip(Me.Label103, resources.GetString("Label103.ToolTip"))
         '
         'Label96
         '
         resources.ApplyResources(Me.Label96, "Label96")
         Me.Label96.Name = "Label96"
-        Me.ToolTip1.SetToolTip(Me.Label96, resources.GetString("Label96.ToolTip"))
         '
         'Label95
         '
         resources.ApplyResources(Me.Label95, "Label95")
         Me.Label95.Name = "Label95"
-        Me.ToolTip1.SetToolTip(Me.Label95, resources.GetString("Label95.ToolTip"))
         '
         'GroupBox7
         '
-        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
         Me.GroupBox7.Controls.Add(Me.Label102)
         Me.GroupBox7.Controls.Add(Me.lblBORGO)
         Me.GroupBox7.Controls.Add(Me.tbBOBSW)
@@ -961,88 +909,76 @@ Partial Class FormCompoundCreator
         Me.GroupBox7.Controls.Add(Me.Label100)
         Me.GroupBox7.Controls.Add(Me.Label98)
         Me.GroupBox7.Controls.Add(Me.Label97)
+        resources.ApplyResources(Me.GroupBox7, "GroupBox7")
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip"))
         '
         'Label102
         '
         resources.ApplyResources(Me.Label102, "Label102")
         Me.Label102.Name = "Label102"
-        Me.ToolTip1.SetToolTip(Me.Label102, resources.GetString("Label102.ToolTip"))
         '
         'lblBORGO
         '
         resources.ApplyResources(Me.lblBORGO, "lblBORGO")
         Me.lblBORGO.Name = "lblBORGO"
-        Me.ToolTip1.SetToolTip(Me.lblBORGO, resources.GetString("lblBORGO.ToolTip"))
         '
         'tbBOBSW
         '
-        resources.ApplyResources(Me.tbBOBSW, "tbBOBSW")
         Me.tbBOBSW.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOBSW, "tbBOBSW")
         Me.tbBOBSW.Name = "tbBOBSW"
-        Me.ToolTip1.SetToolTip(Me.tbBOBSW, resources.GetString("tbBOBSW.ToolTip"))
         '
         'tbBOGOR
         '
-        resources.ApplyResources(Me.tbBOGOR, "tbBOGOR")
         Me.tbBOGOR.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOGOR, "tbBOGOR")
         Me.tbBOGOR.Name = "tbBOGOR"
-        Me.ToolTip1.SetToolTip(Me.tbBOGOR, resources.GetString("tbBOGOR.ToolTip"))
         '
         'tbBOSGO
         '
-        resources.ApplyResources(Me.tbBOSGO, "tbBOSGO")
         Me.tbBOSGO.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOSGO, "tbBOSGO")
         Me.tbBOSGO.Name = "tbBOSGO"
-        Me.ToolTip1.SetToolTip(Me.tbBOSGO, resources.GetString("tbBOSGO.ToolTip"))
         '
         'tbBOSGG
         '
-        resources.ApplyResources(Me.tbBOSGG, "tbBOSGG")
         Me.tbBOSGG.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbBOSGG, "tbBOSGG")
         Me.tbBOSGG.Name = "tbBOSGG"
-        Me.ToolTip1.SetToolTip(Me.tbBOSGG, resources.GetString("tbBOSGG.ToolTip"))
         '
         'Label99
         '
         resources.ApplyResources(Me.Label99, "Label99")
         Me.Label99.Name = "Label99"
-        Me.ToolTip1.SetToolTip(Me.Label99, resources.GetString("Label99.ToolTip"))
         '
         'Label100
         '
         resources.ApplyResources(Me.Label100, "Label100")
         Me.Label100.Name = "Label100"
-        Me.ToolTip1.SetToolTip(Me.Label100, resources.GetString("Label100.ToolTip"))
         '
         'Label98
         '
         resources.ApplyResources(Me.Label98, "Label98")
         Me.Label98.Name = "Label98"
-        Me.ToolTip1.SetToolTip(Me.Label98, resources.GetString("Label98.ToolTip"))
         '
         'Label97
         '
         resources.ApplyResources(Me.Label97, "Label97")
         Me.Label97.Name = "Label97"
-        Me.ToolTip1.SetToolTip(Me.Label97, resources.GetString("Label97.ToolTip"))
         '
         'FaTabStripItemEL
         '
-        resources.ApplyResources(Me.FaTabStripItemEL, "FaTabStripItemEL")
         Me.FaTabStripItemEL.CanClose = False
         Me.FaTabStripItemEL.Controls.Add(Me.GroupBox12)
         Me.FaTabStripItemEL.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItemEL.Controls.Add(Me.GroupBox10)
         Me.FaTabStripItemEL.IsDrawn = True
         Me.FaTabStripItemEL.Name = "FaTabStripItemEL"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItemEL, resources.GetString("FaTabStripItemEL.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItemEL, "FaTabStripItemEL")
         '
         'GroupBox12
         '
-        resources.ApplyResources(Me.GroupBox12, "GroupBox12")
         Me.GroupBox12.Controls.Add(Me.Label111)
         Me.GroupBox12.Controls.Add(Me.Label110)
         Me.GroupBox12.Controls.Add(Me.Label109)
@@ -1054,79 +990,67 @@ Partial Class FormCompoundCreator
         Me.GroupBox12.Controls.Add(Me.Label125)
         Me.GroupBox12.Controls.Add(Me.Label123)
         Me.GroupBox12.Controls.Add(Me.Label124)
+        resources.ApplyResources(Me.GroupBox12, "GroupBox12")
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox12, resources.GetString("GroupBox12.ToolTip"))
         '
         'Label111
         '
         resources.ApplyResources(Me.Label111, "Label111")
         Me.Label111.Name = "Label111"
-        Me.ToolTip1.SetToolTip(Me.Label111, resources.GetString("Label111.ToolTip"))
         '
         'Label110
         '
         resources.ApplyResources(Me.Label110, "Label110")
         Me.Label110.Name = "Label110"
-        Me.ToolTip1.SetToolTip(Me.Label110, resources.GetString("Label110.ToolTip"))
         '
         'Label109
         '
         resources.ApplyResources(Me.Label109, "Label109")
         Me.Label109.Name = "Label109"
-        Me.ToolTip1.SetToolTip(Me.Label109, resources.GetString("Label109.ToolTip"))
         '
         'tbElecSolidDensT
         '
         resources.ApplyResources(Me.tbElecSolidDensT, "tbElecSolidDensT")
         Me.tbElecSolidDensT.Name = "tbElecSolidDensT"
-        Me.ToolTip1.SetToolTip(Me.tbElecSolidDensT, resources.GetString("tbElecSolidDensT.ToolTip"))
         '
         'Label101
         '
         resources.ApplyResources(Me.Label101, "Label101")
         Me.Label101.Name = "Label101"
-        Me.ToolTip1.SetToolTip(Me.Label101, resources.GetString("Label101.ToolTip"))
         '
         'tbElecSolidDens
         '
         resources.ApplyResources(Me.tbElecSolidDens, "tbElecSolidDens")
         Me.tbElecSolidDens.Name = "tbElecSolidDens"
-        Me.ToolTip1.SetToolTip(Me.tbElecSolidDens, resources.GetString("tbElecSolidDens.ToolTip"))
         '
         'tbElecEnthFusion
         '
         resources.ApplyResources(Me.tbElecEnthFusion, "tbElecEnthFusion")
         Me.tbElecEnthFusion.Name = "tbElecEnthFusion"
-        Me.ToolTip1.SetToolTip(Me.tbElecEnthFusion, resources.GetString("tbElecEnthFusion.ToolTip"))
         '
         'tbElecSolidTf
         '
         resources.ApplyResources(Me.tbElecSolidTf, "tbElecSolidTf")
         Me.tbElecSolidTf.Name = "tbElecSolidTf"
-        Me.ToolTip1.SetToolTip(Me.tbElecSolidTf, resources.GetString("tbElecSolidTf.ToolTip"))
         '
         'Label125
         '
         resources.ApplyResources(Me.Label125, "Label125")
         Me.Label125.Name = "Label125"
-        Me.ToolTip1.SetToolTip(Me.Label125, resources.GetString("Label125.ToolTip"))
         '
         'Label123
         '
         resources.ApplyResources(Me.Label123, "Label123")
         Me.Label123.Name = "Label123"
-        Me.ToolTip1.SetToolTip(Me.Label123, resources.GetString("Label123.ToolTip"))
         '
         'Label124
         '
         resources.ApplyResources(Me.Label124, "Label124")
         Me.Label124.Name = "Label124"
-        Me.ToolTip1.SetToolTip(Me.Label124, resources.GetString("Label124.ToolTip"))
         '
         'GroupBox9
         '
-        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.Controls.Add(Me.Label126)
         Me.GroupBox9.Controls.Add(Me.Label113)
         Me.GroupBox9.Controls.Add(Me.Label112)
@@ -1136,67 +1060,57 @@ Partial Class FormCompoundCreator
         Me.GroupBox9.Controls.Add(Me.Label120)
         Me.GroupBox9.Controls.Add(Me.Label121)
         Me.GroupBox9.Controls.Add(Me.Label122)
+        resources.ApplyResources(Me.GroupBox9, "GroupBox9")
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox9, resources.GetString("GroupBox9.ToolTip"))
         '
         'Label126
         '
         resources.ApplyResources(Me.Label126, "Label126")
         Me.Label126.Name = "Label126"
-        Me.ToolTip1.SetToolTip(Me.Label126, resources.GetString("Label126.ToolTip"))
         '
         'Label113
         '
         resources.ApplyResources(Me.Label113, "Label113")
         Me.Label113.Name = "Label113"
-        Me.ToolTip1.SetToolTip(Me.Label113, resources.GetString("Label113.ToolTip"))
         '
         'Label112
         '
         resources.ApplyResources(Me.Label112, "Label112")
         Me.Label112.Name = "Label112"
-        Me.ToolTip1.SetToolTip(Me.Label112, resources.GetString("Label112.ToolTip"))
         '
         'tbElecHeatCapacityForm
         '
         resources.ApplyResources(Me.tbElecHeatCapacityForm, "tbElecHeatCapacityForm")
         Me.tbElecHeatCapacityForm.Name = "tbElecHeatCapacityForm"
-        Me.ToolTip1.SetToolTip(Me.tbElecHeatCapacityForm, resources.GetString("tbElecHeatCapacityForm.ToolTip"))
         '
         'tbElecEnthForm
         '
         resources.ApplyResources(Me.tbElecEnthForm, "tbElecEnthForm")
         Me.tbElecEnthForm.Name = "tbElecEnthForm"
-        Me.ToolTip1.SetToolTip(Me.tbElecEnthForm, resources.GetString("tbElecEnthForm.ToolTip"))
         '
         'tbElecGibbsEnergyForm
         '
         resources.ApplyResources(Me.tbElecGibbsEnergyForm, "tbElecGibbsEnergyForm")
         Me.tbElecGibbsEnergyForm.Name = "tbElecGibbsEnergyForm"
-        Me.ToolTip1.SetToolTip(Me.tbElecGibbsEnergyForm, resources.GetString("tbElecGibbsEnergyForm.ToolTip"))
         '
         'Label120
         '
         resources.ApplyResources(Me.Label120, "Label120")
         Me.Label120.Name = "Label120"
-        Me.ToolTip1.SetToolTip(Me.Label120, resources.GetString("Label120.ToolTip"))
         '
         'Label121
         '
         resources.ApplyResources(Me.Label121, "Label121")
         Me.Label121.Name = "Label121"
-        Me.ToolTip1.SetToolTip(Me.Label121, resources.GetString("Label121.ToolTip"))
         '
         'Label122
         '
         resources.ApplyResources(Me.Label122, "Label122")
         Me.Label122.Name = "Label122"
-        Me.ToolTip1.SetToolTip(Me.Label122, resources.GetString("Label122.ToolTip"))
         '
         'GroupBox10
         '
-        resources.ApplyResources(Me.GroupBox10, "GroupBox10")
         Me.GroupBox10.Controls.Add(Me.tbElecIonCharge)
         Me.GroupBox10.Controls.Add(Me.Label127)
         Me.GroupBox10.Controls.Add(Me.tbEsteqCoeffNegIon)
@@ -1213,57 +1127,49 @@ Partial Class FormCompoundCreator
         Me.GroupBox10.Controls.Add(Me.Label117)
         Me.GroupBox10.Controls.Add(Me.Label119)
         Me.GroupBox10.Controls.Add(Me.Label118)
+        resources.ApplyResources(Me.GroupBox10, "GroupBox10")
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox10, resources.GetString("GroupBox10.ToolTip"))
         '
         'tbElecIonCharge
         '
         resources.ApplyResources(Me.tbElecIonCharge, "tbElecIonCharge")
         Me.tbElecIonCharge.Name = "tbElecIonCharge"
-        Me.ToolTip1.SetToolTip(Me.tbElecIonCharge, resources.GetString("tbElecIonCharge.ToolTip"))
         '
         'Label127
         '
         resources.ApplyResources(Me.Label127, "Label127")
         Me.Label127.Name = "Label127"
-        Me.ToolTip1.SetToolTip(Me.Label127, resources.GetString("Label127.ToolTip"))
         '
         'tbEsteqCoeffNegIon
         '
         resources.ApplyResources(Me.tbEsteqCoeffNegIon, "tbEsteqCoeffNegIon")
         Me.tbEsteqCoeffNegIon.Name = "tbEsteqCoeffNegIon"
-        Me.ToolTip1.SetToolTip(Me.tbEsteqCoeffNegIon, resources.GetString("tbEsteqCoeffNegIon.ToolTip"))
         '
         'tbEsteqCoeffPosIon
         '
         resources.ApplyResources(Me.tbEsteqCoeffPosIon, "tbEsteqCoeffPosIon")
         Me.tbEsteqCoeffPosIon.Name = "tbEsteqCoeffPosIon"
-        Me.ToolTip1.SetToolTip(Me.tbEsteqCoeffPosIon, resources.GetString("tbEsteqCoeffPosIon.ToolTip"))
         '
         'tbHydrNumber
         '
         resources.ApplyResources(Me.tbHydrNumber, "tbHydrNumber")
         Me.tbHydrNumber.Name = "tbHydrNumber"
-        Me.ToolTip1.SetToolTip(Me.tbHydrNumber, resources.GetString("tbHydrNumber.ToolTip"))
         '
         'tbNegativeIonFormula
         '
         resources.ApplyResources(Me.tbNegativeIonFormula, "tbNegativeIonFormula")
         Me.tbNegativeIonFormula.Name = "tbNegativeIonFormula"
-        Me.ToolTip1.SetToolTip(Me.tbNegativeIonFormula, resources.GetString("tbNegativeIonFormula.ToolTip"))
         '
         'tbPositiveIonFormula
         '
         resources.ApplyResources(Me.tbPositiveIonFormula, "tbPositiveIonFormula")
         Me.tbPositiveIonFormula.Name = "tbPositiveIonFormula"
-        Me.ToolTip1.SetToolTip(Me.tbPositiveIonFormula, resources.GetString("tbPositiveIonFormula.ToolTip"))
         '
         'Label114
         '
         resources.ApplyResources(Me.Label114, "Label114")
         Me.Label114.Name = "Label114"
-        Me.ToolTip1.SetToolTip(Me.Label114, resources.GetString("Label114.ToolTip"))
         '
         'rbIon
         '
@@ -1271,56 +1177,47 @@ Partial Class FormCompoundCreator
         Me.rbIon.Checked = True
         Me.rbIon.Name = "rbIon"
         Me.rbIon.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbIon, resources.GetString("rbIon.ToolTip"))
         Me.rbIon.UseVisualStyleBackColor = True
         '
         'rbSalt
         '
         resources.ApplyResources(Me.rbSalt, "rbSalt")
         Me.rbSalt.Name = "rbSalt"
-        Me.ToolTip1.SetToolTip(Me.rbSalt, resources.GetString("rbSalt.ToolTip"))
         Me.rbSalt.UseVisualStyleBackColor = True
         '
         'rbHydratedSalt
         '
         resources.ApplyResources(Me.rbHydratedSalt, "rbHydratedSalt")
         Me.rbHydratedSalt.Name = "rbHydratedSalt"
-        Me.ToolTip1.SetToolTip(Me.rbHydratedSalt, resources.GetString("rbHydratedSalt.ToolTip"))
         Me.rbHydratedSalt.UseVisualStyleBackColor = True
         '
         'Label115
         '
         resources.ApplyResources(Me.Label115, "Label115")
         Me.Label115.Name = "Label115"
-        Me.ToolTip1.SetToolTip(Me.Label115, resources.GetString("Label115.ToolTip"))
         '
         'Label116
         '
         resources.ApplyResources(Me.Label116, "Label116")
         Me.Label116.Name = "Label116"
-        Me.ToolTip1.SetToolTip(Me.Label116, resources.GetString("Label116.ToolTip"))
         '
         'Label117
         '
         resources.ApplyResources(Me.Label117, "Label117")
         Me.Label117.Name = "Label117"
-        Me.ToolTip1.SetToolTip(Me.Label117, resources.GetString("Label117.ToolTip"))
         '
         'Label119
         '
         resources.ApplyResources(Me.Label119, "Label119")
         Me.Label119.Name = "Label119"
-        Me.ToolTip1.SetToolTip(Me.Label119, resources.GetString("Label119.ToolTip"))
         '
         'Label118
         '
         resources.ApplyResources(Me.Label118, "Label118")
         Me.Label118.Name = "Label118"
-        Me.ToolTip1.SetToolTip(Me.Label118, resources.GetString("Label118.ToolTip"))
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.TBUnifac)
         Me.FaTabStripItem2.Controls.Add(Me.PicUNIFAC)
@@ -1329,23 +1226,21 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem2.Controls.Add(Me.GridUNIFAC)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem2, resources.GetString("FaTabStripItem2.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'TBUnifac
         '
-        resources.ApplyResources(Me.TBUnifac, "TBUnifac")
         Me.TBUnifac.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.TBUnifac, "TBUnifac")
         Me.TBUnifac.Name = "TBUnifac"
-        Me.ToolTip1.SetToolTip(Me.TBUnifac, resources.GetString("TBUnifac.ToolTip"))
         '
         'PicUNIFAC
         '
-        resources.ApplyResources(Me.PicUNIFAC, "PicUNIFAC")
         Me.PicUNIFAC.BackColor = System.Drawing.Color.White
         Me.PicUNIFAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.PicUNIFAC, "PicUNIFAC")
         Me.PicUNIFAC.Name = "PicUNIFAC"
         Me.PicUNIFAC.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicUNIFAC, resources.GetString("PicUNIFAC.ToolTip"))
         '
         'LinkLabel2
         '
@@ -1359,15 +1254,14 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.Label60, "Label60")
         Me.Label60.Name = "Label60"
-        Me.ToolTip1.SetToolTip(Me.Label60, resources.GetString("Label60.ToolTip"))
         '
         'GridUNIFAC
         '
-        resources.ApplyResources(Me.GridUNIFAC, "GridUNIFAC")
         Me.GridUNIFAC.AllowUserToAddRows = False
         Me.GridUNIFAC.AllowUserToDeleteRows = False
         Me.GridUNIFAC.AllowUserToResizeColumns = False
         Me.GridUNIFAC.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.GridUNIFAC, "GridUNIFAC")
         Me.GridUNIFAC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridUNIFAC.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.GridUNIFAC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -1375,7 +1269,6 @@ Partial Class FormCompoundCreator
         Me.GridUNIFAC.Name = "GridUNIFAC"
         Me.GridUNIFAC.RowTemplate.Height = 40
         Me.GridUNIFAC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.ToolTip1.SetToolTip(Me.GridUNIFAC, resources.GetString("GridUNIFAC.ToolTip"))
         '
         'Column3
         '
@@ -1409,7 +1302,6 @@ Partial Class FormCompoundCreator
         '
         'FaTabStripItem5
         '
-        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         Me.FaTabStripItem5.Controls.Add(Me.LinkLabel4)
         Me.FaTabStripItem5.Controls.Add(Me.TBModfac)
         Me.FaTabStripItem5.Controls.Add(Me.PicMODFAC)
@@ -1417,7 +1309,7 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem5.Controls.Add(Me.Label85)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         '
         'LinkLabel4
         '
@@ -1429,27 +1321,25 @@ Partial Class FormCompoundCreator
         '
         'TBModfac
         '
-        resources.ApplyResources(Me.TBModfac, "TBModfac")
         Me.TBModfac.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.TBModfac, "TBModfac")
         Me.TBModfac.Name = "TBModfac"
-        Me.ToolTip1.SetToolTip(Me.TBModfac, resources.GetString("TBModfac.ToolTip"))
         '
         'PicMODFAC
         '
-        resources.ApplyResources(Me.PicMODFAC, "PicMODFAC")
         Me.PicMODFAC.BackColor = System.Drawing.Color.White
         Me.PicMODFAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.PicMODFAC, "PicMODFAC")
         Me.PicMODFAC.Name = "PicMODFAC"
         Me.PicMODFAC.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicMODFAC, resources.GetString("PicMODFAC.ToolTip"))
         '
         'GridMODFAC
         '
-        resources.ApplyResources(Me.GridMODFAC, "GridMODFAC")
         Me.GridMODFAC.AllowUserToAddRows = False
         Me.GridMODFAC.AllowUserToDeleteRows = False
         Me.GridMODFAC.AllowUserToResizeColumns = False
         Me.GridMODFAC.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.GridMODFAC, "GridMODFAC")
         Me.GridMODFAC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridMODFAC.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.GridMODFAC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -1457,7 +1347,6 @@ Partial Class FormCompoundCreator
         Me.GridMODFAC.Name = "GridMODFAC"
         Me.GridMODFAC.RowTemplate.Height = 40
         Me.GridMODFAC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.ToolTip1.SetToolTip(Me.GridMODFAC, resources.GetString("GridMODFAC.ToolTip"))
         '
         'MainGroup
         '
@@ -1497,41 +1386,37 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.Label85, "Label85")
         Me.Label85.Name = "Label85"
-        Me.ToolTip1.SetToolTip(Me.Label85, resources.GetString("Label85.ToolTip"))
         '
         'FaTabStripItem6
         '
-        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         Me.FaTabStripItem6.Controls.Add(Me.TbNISTMODFAC)
         Me.FaTabStripItem6.Controls.Add(Me.PicNISTMODFAC)
         Me.FaTabStripItem6.Controls.Add(Me.GridNISTMODFAC)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem6, resources.GetString("FaTabStripItem6.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         '
         'TbNISTMODFAC
         '
-        resources.ApplyResources(Me.TbNISTMODFAC, "TbNISTMODFAC")
         Me.TbNISTMODFAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.TbNISTMODFAC, "TbNISTMODFAC")
         Me.TbNISTMODFAC.Name = "TbNISTMODFAC"
-        Me.ToolTip1.SetToolTip(Me.TbNISTMODFAC, resources.GetString("TbNISTMODFAC.ToolTip"))
         '
         'PicNISTMODFAC
         '
-        resources.ApplyResources(Me.PicNISTMODFAC, "PicNISTMODFAC")
         Me.PicNISTMODFAC.BackColor = System.Drawing.Color.White
         Me.PicNISTMODFAC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.PicNISTMODFAC, "PicNISTMODFAC")
         Me.PicNISTMODFAC.Name = "PicNISTMODFAC"
         Me.PicNISTMODFAC.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PicNISTMODFAC, resources.GetString("PicNISTMODFAC.ToolTip"))
         '
         'GridNISTMODFAC
         '
-        resources.ApplyResources(Me.GridNISTMODFAC, "GridNISTMODFAC")
         Me.GridNISTMODFAC.AllowUserToAddRows = False
         Me.GridNISTMODFAC.AllowUserToDeleteRows = False
         Me.GridNISTMODFAC.AllowUserToResizeColumns = False
         Me.GridNISTMODFAC.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.GridNISTMODFAC, "GridNISTMODFAC")
         Me.GridNISTMODFAC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridNISTMODFAC.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.GridNISTMODFAC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -1539,7 +1424,6 @@ Partial Class FormCompoundCreator
         Me.GridNISTMODFAC.Name = "GridNISTMODFAC"
         Me.GridNISTMODFAC.RowTemplate.Height = 40
         Me.GridNISTMODFAC.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.ToolTip1.SetToolTip(Me.GridNISTMODFAC, resources.GetString("GridNISTMODFAC.ToolTip"))
         '
         'DataGridViewTextBoxColumn16
         '
@@ -1577,7 +1461,6 @@ Partial Class FormCompoundCreator
         '
         'FaTabStripItem3
         '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.Controls.Add(Me.Label58)
         Me.FaTabStripItem3.Controls.Add(Me.AddAtomDataGrid)
         Me.FaTabStripItem3.Controls.Add(Me.TextBox1)
@@ -1588,28 +1471,26 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem3.Controls.Add(Me.GridJoback)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem3, resources.GetString("FaTabStripItem3.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'Label58
         '
         resources.ApplyResources(Me.Label58, "Label58")
         Me.Label58.Name = "Label58"
-        Me.ToolTip1.SetToolTip(Me.Label58, resources.GetString("Label58.ToolTip"))
         '
         'AddAtomDataGrid
         '
-        resources.ApplyResources(Me.AddAtomDataGrid, "AddAtomDataGrid")
         Me.AddAtomDataGrid.AllowUserToAddRows = False
         Me.AddAtomDataGrid.AllowUserToDeleteRows = False
         Me.AddAtomDataGrid.AllowUserToResizeColumns = False
         Me.AddAtomDataGrid.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.AddAtomDataGrid, "AddAtomDataGrid")
         Me.AddAtomDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.AddAtomDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.AddAtomDataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Atom, Me.Count})
         Me.AddAtomDataGrid.MultiSelect = False
         Me.AddAtomDataGrid.Name = "AddAtomDataGrid"
         Me.AddAtomDataGrid.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.AddAtomDataGrid, resources.GetString("AddAtomDataGrid.ToolTip"))
         '
         'Atom
         '
@@ -1628,28 +1509,25 @@ Partial Class FormCompoundCreator
         '
         'TextBox1
         '
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.TextBox1.ForeColor = System.Drawing.Color.Red
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
-        Me.ToolTip1.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip"))
         '
         'Label59
         '
         resources.ApplyResources(Me.Label59, "Label59")
         Me.Label59.Name = "Label59"
-        Me.ToolTip1.SetToolTip(Me.Label59, resources.GetString("Label59.ToolTip"))
         '
         'AtomDataGrid
         '
-        resources.ApplyResources(Me.AtomDataGrid, "AtomDataGrid")
         Me.AtomDataGrid.AllowUserToAddRows = False
         Me.AtomDataGrid.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.AtomDataGrid, "AtomDataGrid")
         Me.AtomDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.AtomDataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColAtom, Me.ColCount})
         Me.AtomDataGrid.Name = "AtomDataGrid"
         Me.AtomDataGrid.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.AtomDataGrid, resources.GetString("AtomDataGrid.ToolTip"))
         '
         'ColAtom
         '
@@ -1683,20 +1561,18 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.Label57, "Label57")
         Me.Label57.Name = "Label57"
-        Me.ToolTip1.SetToolTip(Me.Label57, resources.GetString("Label57.ToolTip"))
         '
         'GridJoback
         '
-        resources.ApplyResources(Me.GridJoback, "GridJoback")
         Me.GridJoback.AllowUserToAddRows = False
         Me.GridJoback.AllowUserToDeleteRows = False
         Me.GridJoback.AllowUserToResizeColumns = False
         Me.GridJoback.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.GridJoback, "GridJoback")
         Me.GridJoback.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridJoback.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridJoback.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.ColumnGroupName, Me.ColumnCountUNIFAC, Me.ColumnCountJoback})
         Me.GridJoback.Name = "GridJoback"
-        Me.ToolTip1.SetToolTip(Me.GridJoback, resources.GetString("GridJoback.ToolTip"))
         '
         'Column2
         '
@@ -1737,7 +1613,6 @@ Partial Class FormCompoundCreator
         '
         'FaTabStripItem4
         '
-        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
         Me.FaTabStripItem4.CanClose = False
         Me.FaTabStripItem4.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem4.Controls.Add(Me.CheckBoxAF)
@@ -1797,11 +1672,10 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem4.Controls.Add(Me.Label63)
         Me.FaTabStripItem4.IsDrawn = True
         Me.FaTabStripItem4.Name = "FaTabStripItem4"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem4, resources.GetString("FaTabStripItem4.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
         '
         'GroupBox6
         '
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Controls.Add(Me.LabelWithDivider8)
         Me.GroupBox6.Controls.Add(Me.TextBoxPCSAFTEpsilon)
         Me.GroupBox6.Controls.Add(Me.Label20)
@@ -1811,69 +1685,60 @@ Partial Class FormCompoundCreator
         Me.GroupBox6.Controls.Add(Me.LabelWithDivider10)
         Me.GroupBox6.Controls.Add(Me.TextBoxPCSAFTSigma)
         Me.GroupBox6.Controls.Add(Me.Label27)
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'LabelWithDivider8
         '
         resources.ApplyResources(Me.LabelWithDivider8, "LabelWithDivider8")
         Me.LabelWithDivider8.Gap = 5
         Me.LabelWithDivider8.Name = "LabelWithDivider8"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider8, resources.GetString("LabelWithDivider8.ToolTip"))
         '
         'TextBoxPCSAFTEpsilon
         '
-        resources.ApplyResources(Me.TextBoxPCSAFTEpsilon, "TextBoxPCSAFTEpsilon")
         Me.TextBoxPCSAFTEpsilon.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxPCSAFTEpsilon, "TextBoxPCSAFTEpsilon")
         Me.TextBoxPCSAFTEpsilon.Name = "TextBoxPCSAFTEpsilon"
-        Me.ToolTip1.SetToolTip(Me.TextBoxPCSAFTEpsilon, resources.GetString("TextBoxPCSAFTEpsilon.ToolTip"))
         '
         'Label20
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
-        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
         '
         'LabelWithDivider9
         '
         resources.ApplyResources(Me.LabelWithDivider9, "LabelWithDivider9")
         Me.LabelWithDivider9.Gap = 5
         Me.LabelWithDivider9.Name = "LabelWithDivider9"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider9, resources.GetString("LabelWithDivider9.ToolTip"))
         '
         'TextBoxPCSAFTm
         '
-        resources.ApplyResources(Me.TextBoxPCSAFTm, "TextBoxPCSAFTm")
         Me.TextBoxPCSAFTm.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxPCSAFTm, "TextBoxPCSAFTm")
         Me.TextBoxPCSAFTm.Name = "TextBoxPCSAFTm"
-        Me.ToolTip1.SetToolTip(Me.TextBoxPCSAFTm, resources.GetString("TextBoxPCSAFTm.ToolTip"))
         '
         'Label25
         '
         resources.ApplyResources(Me.Label25, "Label25")
         Me.Label25.Name = "Label25"
-        Me.ToolTip1.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip"))
         '
         'LabelWithDivider10
         '
         resources.ApplyResources(Me.LabelWithDivider10, "LabelWithDivider10")
         Me.LabelWithDivider10.Gap = 5
         Me.LabelWithDivider10.Name = "LabelWithDivider10"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider10, resources.GetString("LabelWithDivider10.ToolTip"))
         '
         'TextBoxPCSAFTSigma
         '
-        resources.ApplyResources(Me.TextBoxPCSAFTSigma, "TextBoxPCSAFTSigma")
         Me.TextBoxPCSAFTSigma.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxPCSAFTSigma, "TextBoxPCSAFTSigma")
         Me.TextBoxPCSAFTSigma.Name = "TextBoxPCSAFTSigma"
-        Me.ToolTip1.SetToolTip(Me.TextBoxPCSAFTSigma, resources.GetString("TextBoxPCSAFTSigma.ToolTip"))
         '
         'Label27
         '
         resources.ApplyResources(Me.Label27, "Label27")
         Me.Label27.Name = "Label27"
-        Me.ToolTip1.SetToolTip(Me.Label27, resources.GetString("Label27.ToolTip"))
         '
         'CheckBoxAF
         '
@@ -1895,54 +1760,47 @@ Partial Class FormCompoundCreator
         '
         'GroupBox11
         '
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
         Me.GroupBox11.Controls.Add(Me.TextBoxUNIQUAC_R)
         Me.GroupBox11.Controls.Add(Me.Label48)
         Me.GroupBox11.Controls.Add(Me.TextBoxUNIQUAC_Q)
         Me.GroupBox11.Controls.Add(Me.Label49)
+        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox11, resources.GetString("GroupBox11.ToolTip"))
         '
         'TextBoxUNIQUAC_R
         '
-        resources.ApplyResources(Me.TextBoxUNIQUAC_R, "TextBoxUNIQUAC_R")
         Me.TextBoxUNIQUAC_R.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxUNIQUAC_R, "TextBoxUNIQUAC_R")
         Me.TextBoxUNIQUAC_R.Name = "TextBoxUNIQUAC_R"
-        Me.ToolTip1.SetToolTip(Me.TextBoxUNIQUAC_R, resources.GetString("TextBoxUNIQUAC_R.ToolTip"))
         '
         'Label48
         '
         resources.ApplyResources(Me.Label48, "Label48")
         Me.Label48.Name = "Label48"
-        Me.ToolTip1.SetToolTip(Me.Label48, resources.GetString("Label48.ToolTip"))
         '
         'TextBoxUNIQUAC_Q
         '
-        resources.ApplyResources(Me.TextBoxUNIQUAC_Q, "TextBoxUNIQUAC_Q")
         Me.TextBoxUNIQUAC_Q.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxUNIQUAC_Q, "TextBoxUNIQUAC_Q")
         Me.TextBoxUNIQUAC_Q.Name = "TextBoxUNIQUAC_Q"
-        Me.ToolTip1.SetToolTip(Me.TextBoxUNIQUAC_Q, resources.GetString("TextBoxUNIQUAC_Q.ToolTip"))
         '
         'Label49
         '
         resources.ApplyResources(Me.Label49, "Label49")
         Me.Label49.Name = "Label49"
-        Me.ToolTip1.SetToolTip(Me.Label49, resources.GetString("Label49.ToolTip"))
         '
         'LabelWithDivider12
         '
         resources.ApplyResources(Me.LabelWithDivider12, "LabelWithDivider12")
         Me.LabelWithDivider12.Gap = 5
         Me.LabelWithDivider12.Name = "LabelWithDivider12"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider12, resources.GetString("LabelWithDivider12.ToolTip"))
         '
         'LabelWithDivider2
         '
         resources.ApplyResources(Me.LabelWithDivider2, "LabelWithDivider2")
         Me.LabelWithDivider2.Gap = 5
         Me.LabelWithDivider2.Name = "LabelWithDivider2"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider2, resources.GetString("LabelWithDivider2.ToolTip"))
         '
         'CheckBoxZRa
         '
@@ -1966,13 +1824,11 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.Label50, "Label50")
         Me.Label50.Name = "Label50"
-        Me.ToolTip1.SetToolTip(Me.Label50, resources.GetString("Label50.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
-        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'CheckBoxCSAF
         '
@@ -1985,10 +1841,9 @@ Partial Class FormCompoundCreator
         '
         'TextBoxDHF
         '
-        resources.ApplyResources(Me.TextBoxDHF, "TextBoxDHF")
         Me.TextBoxDHF.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxDHF, "TextBoxDHF")
         Me.TextBoxDHF.Name = "TextBoxDHF"
-        Me.ToolTip1.SetToolTip(Me.TextBoxDHF, resources.GetString("TextBoxDHF.ToolTip"))
         '
         'CheckBoxZc
         '
@@ -2012,14 +1867,12 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.lblDHF, "lblDHF")
         Me.lblDHF.Name = "lblDHF"
-        Me.ToolTip1.SetToolTip(Me.lblDHF, resources.GetString("lblDHF.ToolTip"))
         '
         'TextBoxTc
         '
-        resources.ApplyResources(Me.TextBoxTc, "TextBoxTc")
         Me.TextBoxTc.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxTc, "TextBoxTc")
         Me.TextBoxTc.Name = "TextBoxTc"
-        Me.ToolTip1.SetToolTip(Me.TextBoxTc, resources.GetString("TextBoxTc.ToolTip"))
         '
         'CheckBoxDGF
         '
@@ -2035,13 +1888,11 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.LabelWithDivider4, "LabelWithDivider4")
         Me.LabelWithDivider4.Gap = 5
         Me.LabelWithDivider4.Name = "LabelWithDivider4"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider4, resources.GetString("LabelWithDivider4.ToolTip"))
         '
         'Label53
         '
         resources.ApplyResources(Me.Label53, "Label53")
         Me.Label53.Name = "Label53"
-        Me.ToolTip1.SetToolTip(Me.Label53, resources.GetString("Label53.ToolTip"))
         '
         'CheckBoxPc
         '
@@ -2065,39 +1916,33 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
-        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'TextBoxDGF
         '
-        resources.ApplyResources(Me.TextBoxDGF, "TextBoxDGF")
         Me.TextBoxDGF.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxDGF, "TextBoxDGF")
         Me.TextBoxDGF.Name = "TextBoxDGF"
-        Me.ToolTip1.SetToolTip(Me.TextBoxDGF, resources.GetString("TextBoxDGF.ToolTip"))
         '
         'lblTc
         '
         resources.ApplyResources(Me.lblTc, "lblTc")
         Me.lblTc.Name = "lblTc"
-        Me.ToolTip1.SetToolTip(Me.lblTc, resources.GetString("lblTc.ToolTip"))
         '
         'Label68
         '
         resources.ApplyResources(Me.Label68, "Label68")
         Me.Label68.Name = "Label68"
-        Me.ToolTip1.SetToolTip(Me.Label68, resources.GetString("Label68.ToolTip"))
         '
         'TextBoxZc
         '
-        resources.ApplyResources(Me.TextBoxZc, "TextBoxZc")
         Me.TextBoxZc.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxZc, "TextBoxZc")
         Me.TextBoxZc.Name = "TextBoxZc"
-        Me.ToolTip1.SetToolTip(Me.TextBoxZc, resources.GetString("TextBoxZc.ToolTip"))
         '
         'lblDGF
         '
         resources.ApplyResources(Me.lblDGF, "lblDGF")
         Me.lblDGF.Name = "lblDGF"
-        Me.ToolTip1.SetToolTip(Me.lblDGF, resources.GetString("lblDGF.ToolTip"))
         '
         'CheckBoxTc
         '
@@ -2110,188 +1955,159 @@ Partial Class FormCompoundCreator
         '
         'TextBoxVTCSRK
         '
-        resources.ApplyResources(Me.TextBoxVTCSRK, "TextBoxVTCSRK")
         Me.TextBoxVTCSRK.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxVTCSRK, "TextBoxVTCSRK")
         Me.TextBoxVTCSRK.Name = "TextBoxVTCSRK"
-        Me.ToolTip1.SetToolTip(Me.TextBoxVTCSRK, resources.GetString("TextBoxVTCSRK.ToolTip"))
         '
         'TextBoxZRa
         '
-        resources.ApplyResources(Me.TextBoxZRa, "TextBoxZRa")
         Me.TextBoxZRa.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxZRa, "TextBoxZRa")
         Me.TextBoxZRa.Name = "TextBoxZRa"
-        Me.ToolTip1.SetToolTip(Me.TextBoxZRa, resources.GetString("TextBoxZRa.ToolTip"))
         '
         'Label56
         '
         resources.ApplyResources(Me.Label56, "Label56")
         Me.Label56.Name = "Label56"
-        Me.ToolTip1.SetToolTip(Me.Label56, resources.GetString("Label56.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
-        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'Text1
         '
         resources.ApplyResources(Me.Text1, "Text1")
         Me.Text1.Name = "Text1"
-        Me.ToolTip1.SetToolTip(Me.Text1, resources.GetString("Text1.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
-        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'TextBoxNBP
         '
         resources.ApplyResources(Me.TextBoxNBP, "TextBoxNBP")
         Me.TextBoxNBP.Name = "TextBoxNBP"
-        Me.ToolTip1.SetToolTip(Me.TextBoxNBP, resources.GetString("TextBoxNBP.ToolTip"))
         '
         'LabelWithDivider6
         '
         resources.ApplyResources(Me.LabelWithDivider6, "LabelWithDivider6")
         Me.LabelWithDivider6.Gap = 5
         Me.LabelWithDivider6.Name = "LabelWithDivider6"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider6, resources.GetString("LabelWithDivider6.ToolTip"))
         '
         'Label67
         '
         resources.ApplyResources(Me.Label67, "Label67")
         Me.Label67.Name = "Label67"
-        Me.ToolTip1.SetToolTip(Me.Label67, resources.GetString("Label67.ToolTip"))
         '
         'LabelWithDivider5
         '
         resources.ApplyResources(Me.LabelWithDivider5, "LabelWithDivider5")
         Me.LabelWithDivider5.Gap = 5
         Me.LabelWithDivider5.Name = "LabelWithDivider5"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider5, resources.GetString("LabelWithDivider5.ToolTip"))
         '
         'lblNBP
         '
         resources.ApplyResources(Me.lblNBP, "lblNBP")
         Me.lblNBP.Name = "lblNBP"
-        Me.ToolTip1.SetToolTip(Me.lblNBP, resources.GetString("lblNBP.ToolTip"))
         '
         'TextBoxPc
         '
-        resources.ApplyResources(Me.TextBoxPc, "TextBoxPc")
         Me.TextBoxPc.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxPc, "TextBoxPc")
         Me.TextBoxPc.Name = "TextBoxPc"
-        Me.ToolTip1.SetToolTip(Me.TextBoxPc, resources.GetString("TextBoxPc.ToolTip"))
         '
         'Label66
         '
         resources.ApplyResources(Me.Label66, "Label66")
         Me.Label66.Name = "Label66"
-        Me.ToolTip1.SetToolTip(Me.Label66, resources.GetString("Label66.ToolTip"))
         '
         'LabelWithDivider3
         '
         resources.ApplyResources(Me.LabelWithDivider3, "LabelWithDivider3")
         Me.LabelWithDivider3.Gap = 5
         Me.LabelWithDivider3.Name = "LabelWithDivider3"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider3, resources.GetString("LabelWithDivider3.ToolTip"))
         '
         'LabelWithDivider13
         '
         resources.ApplyResources(Me.LabelWithDivider13, "LabelWithDivider13")
         Me.LabelWithDivider13.Gap = 5
         Me.LabelWithDivider13.Name = "LabelWithDivider13"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider13, resources.GetString("LabelWithDivider13.ToolTip"))
         '
         'TextBoxAF
         '
-        resources.ApplyResources(Me.TextBoxAF, "TextBoxAF")
         Me.TextBoxAF.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxAF, "TextBoxAF")
         Me.TextBoxAF.Name = "TextBoxAF"
-        Me.ToolTip1.SetToolTip(Me.TextBoxAF, resources.GetString("TextBoxAF.ToolTip"))
         '
         'TextBoxVTCPR
         '
-        resources.ApplyResources(Me.TextBoxVTCPR, "TextBoxVTCPR")
         Me.TextBoxVTCPR.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxVTCPR, "TextBoxVTCPR")
         Me.TextBoxVTCPR.Name = "TextBoxVTCPR"
-        Me.ToolTip1.SetToolTip(Me.TextBoxVTCPR, resources.GetString("TextBoxVTCPR.ToolTip"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
-        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'LabelWithDivider16
         '
         resources.ApplyResources(Me.LabelWithDivider16, "LabelWithDivider16")
         Me.LabelWithDivider16.Gap = 5
         Me.LabelWithDivider16.Name = "LabelWithDivider16"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider16, resources.GetString("LabelWithDivider16.ToolTip"))
         '
         'lblPc
         '
         resources.ApplyResources(Me.lblPc, "lblPc")
         Me.lblPc.Name = "lblPc"
-        Me.ToolTip1.SetToolTip(Me.lblPc, resources.GetString("lblPc.ToolTip"))
         '
         'TextBoxCSLV
         '
-        resources.ApplyResources(Me.TextBoxCSLV, "TextBoxCSLV")
         Me.TextBoxCSLV.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxCSLV, "TextBoxCSLV")
         Me.TextBoxCSLV.Name = "TextBoxCSLV"
-        Me.ToolTip1.SetToolTip(Me.TextBoxCSLV, resources.GetString("TextBoxCSLV.ToolTip"))
         '
         'Label62
         '
         resources.ApplyResources(Me.Label62, "Label62")
         Me.Label62.Name = "Label62"
-        Me.ToolTip1.SetToolTip(Me.Label62, resources.GetString("Label62.ToolTip"))
         '
         'TextBoxCSSP
         '
-        resources.ApplyResources(Me.TextBoxCSSP, "TextBoxCSSP")
         Me.TextBoxCSSP.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxCSSP, "TextBoxCSSP")
         Me.TextBoxCSSP.Name = "TextBoxCSSP"
-        Me.ToolTip1.SetToolTip(Me.TextBoxCSSP, resources.GetString("TextBoxCSSP.ToolTip"))
         '
         'TextBoxCSAF
         '
-        resources.ApplyResources(Me.TextBoxCSAF, "TextBoxCSAF")
         Me.TextBoxCSAF.BackColor = System.Drawing.Color.LightSteelBlue
+        resources.ApplyResources(Me.TextBoxCSAF, "TextBoxCSAF")
         Me.TextBoxCSAF.Name = "TextBoxCSAF"
-        Me.ToolTip1.SetToolTip(Me.TextBoxCSAF, resources.GetString("TextBoxCSAF.ToolTip"))
         '
         'Label65
         '
         resources.ApplyResources(Me.Label65, "Label65")
         Me.Label65.Name = "Label65"
-        Me.ToolTip1.SetToolTip(Me.Label65, resources.GetString("Label65.ToolTip"))
         '
         'Label61
         '
         resources.ApplyResources(Me.Label61, "Label61")
         Me.Label61.Name = "Label61"
-        Me.ToolTip1.SetToolTip(Me.Label61, resources.GetString("Label61.ToolTip"))
         '
         'Label64
         '
         resources.ApplyResources(Me.Label64, "Label64")
         Me.Label64.Name = "Label64"
-        Me.ToolTip1.SetToolTip(Me.Label64, resources.GetString("Label64.ToolTip"))
         '
         'Label63
         '
         resources.ApplyResources(Me.Label63, "Label63")
         Me.Label63.Name = "Label63"
-        Me.ToolTip1.SetToolTip(Me.Label63, resources.GetString("Label63.ToolTip"))
         '
         'FaTabStripItem7
         '
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.CanClose = False
         Me.FaTabStripItem7.Controls.Add(Me.Label43)
         Me.FaTabStripItem7.Controls.Add(Me.rbEstimatePVAP)
@@ -2316,13 +2132,12 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem7.Controls.Add(Me.Label29)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem7, resources.GetString("FaTabStripItem7.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
         'Label43
         '
         resources.ApplyResources(Me.Label43, "Label43")
         Me.Label43.Name = "Label43"
-        Me.ToolTip1.SetToolTip(Me.Label43, resources.GetString("Label43.ToolTip"))
         '
         'rbEstimatePVAP
         '
@@ -2330,40 +2145,35 @@ Partial Class FormCompoundCreator
         Me.rbEstimatePVAP.Checked = True
         Me.rbEstimatePVAP.Name = "rbEstimatePVAP"
         Me.rbEstimatePVAP.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbEstimatePVAP, resources.GetString("rbEstimatePVAP.ToolTip"))
         Me.rbEstimatePVAP.UseVisualStyleBackColor = True
         '
         'tbPVAP_E
         '
-        resources.ApplyResources(Me.tbPVAP_E, "tbPVAP_E")
         Me.tbPVAP_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbPVAP_E, "tbPVAP_E")
         Me.tbPVAP_E.Name = "tbPVAP_E"
-        Me.ToolTip1.SetToolTip(Me.tbPVAP_E, resources.GetString("tbPVAP_E.ToolTip"))
         '
         'rbRegressPVAP
         '
         resources.ApplyResources(Me.rbRegressPVAP, "rbRegressPVAP")
         Me.rbRegressPVAP.Name = "rbRegressPVAP"
-        Me.ToolTip1.SetToolTip(Me.rbRegressPVAP, resources.GetString("rbRegressPVAP.ToolTip"))
         Me.rbRegressPVAP.UseVisualStyleBackColor = True
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
-        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'GridExpDataPVAP
         '
-        resources.ApplyResources(Me.GridExpDataPVAP, "GridExpDataPVAP")
         DataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataPVAP.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
         Me.GridExpDataPVAP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataPVAP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataPVAP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
+        resources.ApplyResources(Me.GridExpDataPVAP, "GridExpDataPVAP")
         Me.GridExpDataPVAP.Name = "GridExpDataPVAP"
         Me.GridExpDataPVAP.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataPVAP, resources.GetString("GridExpDataPVAP.ToolTip"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -2382,121 +2192,104 @@ Partial Class FormCompoundCreator
         '
         'tbPVAP_D
         '
-        resources.ApplyResources(Me.tbPVAP_D, "tbPVAP_D")
         Me.tbPVAP_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbPVAP_D, "tbPVAP_D")
         Me.tbPVAP_D.Name = "tbPVAP_D"
-        Me.ToolTip1.SetToolTip(Me.tbPVAP_D, resources.GetString("tbPVAP_D.ToolTip"))
         '
         'btnRegressPVAP
         '
         resources.ApplyResources(Me.btnRegressPVAP, "btnRegressPVAP")
         Me.btnRegressPVAP.Name = "btnRegressPVAP"
-        Me.ToolTip1.SetToolTip(Me.btnRegressPVAP, resources.GetString("btnRegressPVAP.ToolTip"))
         Me.btnRegressPVAP.UseVisualStyleBackColor = True
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
-        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'btnViewPVAP
         '
         resources.ApplyResources(Me.btnViewPVAP, "btnViewPVAP")
         Me.btnViewPVAP.Name = "btnViewPVAP"
-        Me.ToolTip1.SetToolTip(Me.btnViewPVAP, resources.GetString("btnViewPVAP.ToolTip"))
         Me.btnViewPVAP.UseVisualStyleBackColor = True
         '
         'tbPVAP_C
         '
-        resources.ApplyResources(Me.tbPVAP_C, "tbPVAP_C")
         Me.tbPVAP_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbPVAP_C, "tbPVAP_C")
         Me.tbPVAP_C.Name = "tbPVAP_C"
-        Me.ToolTip1.SetToolTip(Me.tbPVAP_C, resources.GetString("tbPVAP_C.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'tbStatusPVAP
         '
         resources.ApplyResources(Me.tbStatusPVAP, "tbStatusPVAP")
         Me.tbStatusPVAP.Name = "tbStatusPVAP"
         Me.tbStatusPVAP.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusPVAP, resources.GetString("tbStatusPVAP.ToolTip"))
         '
         'tbPVAP_B
         '
-        resources.ApplyResources(Me.tbPVAP_B, "tbPVAP_B")
         Me.tbPVAP_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbPVAP_B, "tbPVAP_B")
         Me.tbPVAP_B.Name = "tbPVAP_B"
-        Me.ToolTip1.SetToolTip(Me.tbPVAP_B, resources.GetString("tbPVAP_B.ToolTip"))
         '
         'rbCoeffPVAP
         '
         resources.ApplyResources(Me.rbCoeffPVAP, "rbCoeffPVAP")
         Me.rbCoeffPVAP.Name = "rbCoeffPVAP"
-        Me.ToolTip1.SetToolTip(Me.rbCoeffPVAP, resources.GetString("rbCoeffPVAP.ToolTip"))
         Me.rbCoeffPVAP.UseVisualStyleBackColor = True
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
-        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'cbEqPVAP
         '
-        resources.ApplyResources(Me.cbEqPVAP, "cbEqPVAP")
         Me.cbEqPVAP.BackColor = System.Drawing.Color.White
-        Me.cbEqPVAP.DropDownHeight = 200
+        Me.cbEqPVAP.DropDownHeight = 300
         Me.cbEqPVAP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqPVAP.DropDownWidth = 300
+        Me.cbEqPVAP.DropDownWidth = 500
         Me.cbEqPVAP.FormattingEnabled = True
-        Me.cbEqPVAP.Items.AddRange(New Object() {resources.GetString("cbEqPVAP.Items"), resources.GetString("cbEqPVAP.Items1"), resources.GetString("cbEqPVAP.Items2"), resources.GetString("cbEqPVAP.Items3"), resources.GetString("cbEqPVAP.Items4"), resources.GetString("cbEqPVAP.Items5"), resources.GetString("cbEqPVAP.Items6"), resources.GetString("cbEqPVAP.Items7"), resources.GetString("cbEqPVAP.Items8"), resources.GetString("cbEqPVAP.Items9"), resources.GetString("cbEqPVAP.Items10"), resources.GetString("cbEqPVAP.Items11"), resources.GetString("cbEqPVAP.Items12"), resources.GetString("cbEqPVAP.Items13"), resources.GetString("cbEqPVAP.Items14"), resources.GetString("cbEqPVAP.Items15"), resources.GetString("cbEqPVAP.Items16"), resources.GetString("cbEqPVAP.Items17"), resources.GetString("cbEqPVAP.Items18"), resources.GetString("cbEqPVAP.Items19"), resources.GetString("cbEqPVAP.Items20"), resources.GetString("cbEqPVAP.Items21"), resources.GetString("cbEqPVAP.Items22"), resources.GetString("cbEqPVAP.Items23"), resources.GetString("cbEqPVAP.Items24"), resources.GetString("cbEqPVAP.Items25"), resources.GetString("cbEqPVAP.Items26"), resources.GetString("cbEqPVAP.Items27"), resources.GetString("cbEqPVAP.Items28"), resources.GetString("cbEqPVAP.Items29"), resources.GetString("cbEqPVAP.Items30"), resources.GetString("cbEqPVAP.Items31"), resources.GetString("cbEqPVAP.Items32")})
+        resources.ApplyResources(Me.cbEqPVAP, "cbEqPVAP")
+        Me.cbEqPVAP.Items.AddRange(New Object() {resources.GetString("cbEqPVAP.Items"), resources.GetString("cbEqPVAP.Items1"), resources.GetString("cbEqPVAP.Items2"), resources.GetString("cbEqPVAP.Items3"), resources.GetString("cbEqPVAP.Items4"), resources.GetString("cbEqPVAP.Items5"), resources.GetString("cbEqPVAP.Items6"), resources.GetString("cbEqPVAP.Items7"), resources.GetString("cbEqPVAP.Items8"), resources.GetString("cbEqPVAP.Items9"), resources.GetString("cbEqPVAP.Items10"), resources.GetString("cbEqPVAP.Items11"), resources.GetString("cbEqPVAP.Items12"), resources.GetString("cbEqPVAP.Items13"), resources.GetString("cbEqPVAP.Items14"), resources.GetString("cbEqPVAP.Items15"), resources.GetString("cbEqPVAP.Items16"), resources.GetString("cbEqPVAP.Items17"), resources.GetString("cbEqPVAP.Items18"), resources.GetString("cbEqPVAP.Items19"), resources.GetString("cbEqPVAP.Items20"), resources.GetString("cbEqPVAP.Items21"), resources.GetString("cbEqPVAP.Items22"), resources.GetString("cbEqPVAP.Items23"), resources.GetString("cbEqPVAP.Items24"), resources.GetString("cbEqPVAP.Items25"), resources.GetString("cbEqPVAP.Items26"), resources.GetString("cbEqPVAP.Items27"), resources.GetString("cbEqPVAP.Items28"), resources.GetString("cbEqPVAP.Items29"), resources.GetString("cbEqPVAP.Items30"), resources.GetString("cbEqPVAP.Items31"), resources.GetString("cbEqPVAP.Items32"), resources.GetString("cbEqPVAP.Items33"), resources.GetString("cbEqPVAP.Items34"), resources.GetString("cbEqPVAP.Items35"), resources.GetString("cbEqPVAP.Items36"), resources.GetString("cbEqPVAP.Items37"), resources.GetString("cbEqPVAP.Items38"), resources.GetString("cbEqPVAP.Items39")})
         Me.cbEqPVAP.Name = "cbEqPVAP"
-        Me.ToolTip1.SetToolTip(Me.cbEqPVAP, resources.GetString("cbEqPVAP.ToolTip"))
         '
         'tbPVAP_A
         '
-        resources.ApplyResources(Me.tbPVAP_A, "tbPVAP_A")
         Me.tbPVAP_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbPVAP_A, "tbPVAP_A")
         Me.tbPVAP_A.Name = "tbPVAP_A"
-        Me.ToolTip1.SetToolTip(Me.tbPVAP_A, resources.GetString("tbPVAP_A.ToolTip"))
         '
         'Label30
         '
         resources.ApplyResources(Me.Label30, "Label30")
         Me.Label30.Name = "Label30"
-        Me.ToolTip1.SetToolTip(Me.Label30, resources.GetString("Label30.ToolTip"))
         '
         'Label29
         '
         resources.ApplyResources(Me.Label29, "Label29")
         Me.Label29.Name = "Label29"
-        Me.ToolTip1.SetToolTip(Me.Label29, resources.GetString("Label29.ToolTip"))
         '
         'FaTabStripItem8
         '
-        resources.ApplyResources(Me.FaTabStripItem8, "FaTabStripItem8")
         Me.FaTabStripItem8.CanClose = False
         Me.FaTabStripItem8.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem8.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem8.IsDrawn = True
         Me.FaTabStripItem8.Name = "FaTabStripItem8"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem8, resources.GetString("FaTabStripItem8.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem8, "FaTabStripItem8")
         '
         'GroupBox5
         '
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Controls.Add(Me.Label86)
         Me.GroupBox5.Controls.Add(Me.Label87)
         Me.GroupBox5.Controls.Add(Me.tbStatusCPLiquid)
@@ -2517,137 +2310,119 @@ Partial Class FormCompoundCreator
         Me.GroupBox5.Controls.Add(Me.GridExpDataCPLiquid)
         Me.GroupBox5.Controls.Add(Me.rbRegressCPLiquid)
         Me.GroupBox5.Controls.Add(Me.tbCPLiquid_C)
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'Label86
         '
         resources.ApplyResources(Me.Label86, "Label86")
         Me.Label86.Name = "Label86"
-        Me.ToolTip1.SetToolTip(Me.Label86, resources.GetString("Label86.ToolTip"))
         '
         'Label87
         '
         resources.ApplyResources(Me.Label87, "Label87")
         Me.Label87.Name = "Label87"
-        Me.ToolTip1.SetToolTip(Me.Label87, resources.GetString("Label87.ToolTip"))
         '
         'tbStatusCPLiquid
         '
         resources.ApplyResources(Me.tbStatusCPLiquid, "tbStatusCPLiquid")
         Me.tbStatusCPLiquid.Name = "tbStatusCPLiquid"
         Me.tbStatusCPLiquid.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusCPLiquid, resources.GetString("tbStatusCPLiquid.ToolTip"))
         '
         'Label88
         '
         resources.ApplyResources(Me.Label88, "Label88")
         Me.Label88.Name = "Label88"
-        Me.ToolTip1.SetToolTip(Me.Label88, resources.GetString("Label88.ToolTip"))
         '
         'tbCPLiquid_E
         '
-        resources.ApplyResources(Me.tbCPLiquid_E, "tbCPLiquid_E")
         Me.tbCPLiquid_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPLiquid_E, "tbCPLiquid_E")
         Me.tbCPLiquid_E.Name = "tbCPLiquid_E"
-        Me.ToolTip1.SetToolTip(Me.tbCPLiquid_E, resources.GetString("tbCPLiquid_E.ToolTip"))
         '
         'Label89
         '
         resources.ApplyResources(Me.Label89, "Label89")
         Me.Label89.Name = "Label89"
-        Me.ToolTip1.SetToolTip(Me.Label89, resources.GetString("Label89.ToolTip"))
         '
         'tbCPLiquid_A
         '
-        resources.ApplyResources(Me.tbCPLiquid_A, "tbCPLiquid_A")
         Me.tbCPLiquid_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPLiquid_A, "tbCPLiquid_A")
         Me.tbCPLiquid_A.Name = "tbCPLiquid_A"
-        Me.ToolTip1.SetToolTip(Me.tbCPLiquid_A, resources.GetString("tbCPLiquid_A.ToolTip"))
         '
         'Label90
         '
         resources.ApplyResources(Me.Label90, "Label90")
         Me.Label90.Name = "Label90"
-        Me.ToolTip1.SetToolTip(Me.Label90, resources.GetString("Label90.ToolTip"))
         '
         'cbEqCPLiquid
         '
-        resources.ApplyResources(Me.cbEqCPLiquid, "cbEqCPLiquid")
         Me.cbEqCPLiquid.BackColor = System.Drawing.Color.White
         Me.cbEqCPLiquid.DropDownHeight = 200
         Me.cbEqCPLiquid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqCPLiquid.DropDownWidth = 300
+        Me.cbEqCPLiquid.DropDownWidth = 500
         Me.cbEqCPLiquid.FormattingEnabled = True
-        Me.cbEqCPLiquid.Items.AddRange(New Object() {resources.GetString("cbEqCPLiquid.Items"), resources.GetString("cbEqCPLiquid.Items1"), resources.GetString("cbEqCPLiquid.Items2"), resources.GetString("cbEqCPLiquid.Items3"), resources.GetString("cbEqCPLiquid.Items4"), resources.GetString("cbEqCPLiquid.Items5"), resources.GetString("cbEqCPLiquid.Items6"), resources.GetString("cbEqCPLiquid.Items7"), resources.GetString("cbEqCPLiquid.Items8"), resources.GetString("cbEqCPLiquid.Items9"), resources.GetString("cbEqCPLiquid.Items10"), resources.GetString("cbEqCPLiquid.Items11"), resources.GetString("cbEqCPLiquid.Items12"), resources.GetString("cbEqCPLiquid.Items13"), resources.GetString("cbEqCPLiquid.Items14"), resources.GetString("cbEqCPLiquid.Items15"), resources.GetString("cbEqCPLiquid.Items16"), resources.GetString("cbEqCPLiquid.Items17"), resources.GetString("cbEqCPLiquid.Items18"), resources.GetString("cbEqCPLiquid.Items19"), resources.GetString("cbEqCPLiquid.Items20"), resources.GetString("cbEqCPLiquid.Items21"), resources.GetString("cbEqCPLiquid.Items22"), resources.GetString("cbEqCPLiquid.Items23"), resources.GetString("cbEqCPLiquid.Items24"), resources.GetString("cbEqCPLiquid.Items25"), resources.GetString("cbEqCPLiquid.Items26"), resources.GetString("cbEqCPLiquid.Items27"), resources.GetString("cbEqCPLiquid.Items28"), resources.GetString("cbEqCPLiquid.Items29"), resources.GetString("cbEqCPLiquid.Items30"), resources.GetString("cbEqCPLiquid.Items31"), resources.GetString("cbEqCPLiquid.Items32")})
+        resources.ApplyResources(Me.cbEqCPLiquid, "cbEqCPLiquid")
+        Me.cbEqCPLiquid.Items.AddRange(New Object() {resources.GetString("cbEqCPLiquid.Items"), resources.GetString("cbEqCPLiquid.Items1"), resources.GetString("cbEqCPLiquid.Items2"), resources.GetString("cbEqCPLiquid.Items3"), resources.GetString("cbEqCPLiquid.Items4"), resources.GetString("cbEqCPLiquid.Items5"), resources.GetString("cbEqCPLiquid.Items6"), resources.GetString("cbEqCPLiquid.Items7"), resources.GetString("cbEqCPLiquid.Items8"), resources.GetString("cbEqCPLiquid.Items9"), resources.GetString("cbEqCPLiquid.Items10"), resources.GetString("cbEqCPLiquid.Items11"), resources.GetString("cbEqCPLiquid.Items12"), resources.GetString("cbEqCPLiquid.Items13"), resources.GetString("cbEqCPLiquid.Items14"), resources.GetString("cbEqCPLiquid.Items15"), resources.GetString("cbEqCPLiquid.Items16"), resources.GetString("cbEqCPLiquid.Items17"), resources.GetString("cbEqCPLiquid.Items18"), resources.GetString("cbEqCPLiquid.Items19"), resources.GetString("cbEqCPLiquid.Items20"), resources.GetString("cbEqCPLiquid.Items21"), resources.GetString("cbEqCPLiquid.Items22"), resources.GetString("cbEqCPLiquid.Items23"), resources.GetString("cbEqCPLiquid.Items24"), resources.GetString("cbEqCPLiquid.Items25"), resources.GetString("cbEqCPLiquid.Items26"), resources.GetString("cbEqCPLiquid.Items27"), resources.GetString("cbEqCPLiquid.Items28"), resources.GetString("cbEqCPLiquid.Items29"), resources.GetString("cbEqCPLiquid.Items30"), resources.GetString("cbEqCPLiquid.Items31"), resources.GetString("cbEqCPLiquid.Items32"), resources.GetString("cbEqCPLiquid.Items33"), resources.GetString("cbEqCPLiquid.Items34"), resources.GetString("cbEqCPLiquid.Items35"), resources.GetString("cbEqCPLiquid.Items36"), resources.GetString("cbEqCPLiquid.Items37"), resources.GetString("cbEqCPLiquid.Items38"), resources.GetString("cbEqCPLiquid.Items39")})
         Me.cbEqCPLiquid.Name = "cbEqCPLiquid"
-        Me.ToolTip1.SetToolTip(Me.cbEqCPLiquid, resources.GetString("cbEqCPLiquid.ToolTip"))
         '
         'btnViewCPLiquid
         '
         resources.ApplyResources(Me.btnViewCPLiquid, "btnViewCPLiquid")
         Me.btnViewCPLiquid.Name = "btnViewCPLiquid"
-        Me.ToolTip1.SetToolTip(Me.btnViewCPLiquid, resources.GetString("btnViewCPLiquid.ToolTip"))
         Me.btnViewCPLiquid.UseVisualStyleBackColor = True
         '
         'Label91
         '
         resources.ApplyResources(Me.Label91, "Label91")
         Me.Label91.Name = "Label91"
-        Me.ToolTip1.SetToolTip(Me.Label91, resources.GetString("Label91.ToolTip"))
         '
         'tbCPLiquid_D
         '
-        resources.ApplyResources(Me.tbCPLiquid_D, "tbCPLiquid_D")
         Me.tbCPLiquid_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPLiquid_D, "tbCPLiquid_D")
         Me.tbCPLiquid_D.Name = "tbCPLiquid_D"
-        Me.ToolTip1.SetToolTip(Me.tbCPLiquid_D, resources.GetString("tbCPLiquid_D.ToolTip"))
         '
         'rbCoeffCPLiquid
         '
         resources.ApplyResources(Me.rbCoeffCPLiquid, "rbCoeffCPLiquid")
         Me.rbCoeffCPLiquid.Name = "rbCoeffCPLiquid"
-        Me.ToolTip1.SetToolTip(Me.rbCoeffCPLiquid, resources.GetString("rbCoeffCPLiquid.ToolTip"))
         Me.rbCoeffCPLiquid.UseVisualStyleBackColor = True
         '
         'btnRegressCPLiquid
         '
         resources.ApplyResources(Me.btnRegressCPLiquid, "btnRegressCPLiquid")
         Me.btnRegressCPLiquid.Name = "btnRegressCPLiquid"
-        Me.ToolTip1.SetToolTip(Me.btnRegressCPLiquid, resources.GetString("btnRegressCPLiquid.ToolTip"))
         Me.btnRegressCPLiquid.UseVisualStyleBackColor = True
         '
         'tbCPLiquid_B
         '
-        resources.ApplyResources(Me.tbCPLiquid_B, "tbCPLiquid_B")
         Me.tbCPLiquid_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPLiquid_B, "tbCPLiquid_B")
         Me.tbCPLiquid_B.Name = "tbCPLiquid_B"
-        Me.ToolTip1.SetToolTip(Me.tbCPLiquid_B, resources.GetString("tbCPLiquid_B.ToolTip"))
         '
         'Label92
         '
         resources.ApplyResources(Me.Label92, "Label92")
         Me.Label92.Name = "Label92"
-        Me.ToolTip1.SetToolTip(Me.Label92, resources.GetString("Label92.ToolTip"))
         '
         'Label93
         '
         resources.ApplyResources(Me.Label93, "Label93")
         Me.Label93.Name = "Label93"
-        Me.ToolTip1.SetToolTip(Me.Label93, resources.GetString("Label93.ToolTip"))
         '
         'GridExpDataCPLiquid
         '
-        resources.ApplyResources(Me.GridExpDataCPLiquid, "GridExpDataCPLiquid")
         DataGridViewCellStyle16.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataCPLiquid.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle16
         Me.GridExpDataCPLiquid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataCPLiquid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataCPLiquid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15})
+        resources.ApplyResources(Me.GridExpDataCPLiquid, "GridExpDataCPLiquid")
         Me.GridExpDataCPLiquid.Name = "GridExpDataCPLiquid"
         Me.GridExpDataCPLiquid.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataCPLiquid, resources.GetString("GridExpDataCPLiquid.ToolTip"))
         '
         'DataGridViewTextBoxColumn14
         '
@@ -2668,19 +2443,16 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.rbRegressCPLiquid, "rbRegressCPLiquid")
         Me.rbRegressCPLiquid.Name = "rbRegressCPLiquid"
-        Me.ToolTip1.SetToolTip(Me.rbRegressCPLiquid, resources.GetString("rbRegressCPLiquid.ToolTip"))
         Me.rbRegressCPLiquid.UseVisualStyleBackColor = True
         '
         'tbCPLiquid_C
         '
-        resources.ApplyResources(Me.tbCPLiquid_C, "tbCPLiquid_C")
         Me.tbCPLiquid_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPLiquid_C, "tbCPLiquid_C")
         Me.tbCPLiquid_C.Name = "tbCPLiquid_C"
-        Me.ToolTip1.SetToolTip(Me.tbCPLiquid_C, resources.GetString("tbCPLiquid_C.ToolTip"))
         '
         'GroupBox4
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.Label3)
         Me.GroupBox4.Controls.Add(Me.Label44)
         Me.GroupBox4.Controls.Add(Me.rbEstimateCPIG)
@@ -2702,21 +2474,19 @@ Partial Class FormCompoundCreator
         Me.GroupBox4.Controls.Add(Me.GridExpDataCPIG)
         Me.GroupBox4.Controls.Add(Me.rbRegressCPIG)
         Me.GroupBox4.Controls.Add(Me.tbCPIG_C)
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'Label44
         '
         resources.ApplyResources(Me.Label44, "Label44")
         Me.Label44.Name = "Label44"
-        Me.ToolTip1.SetToolTip(Me.Label44, resources.GetString("Label44.ToolTip"))
         '
         'rbEstimateCPIG
         '
@@ -2724,7 +2494,6 @@ Partial Class FormCompoundCreator
         Me.rbEstimateCPIG.Checked = True
         Me.rbEstimateCPIG.Name = "rbEstimateCPIG"
         Me.rbEstimateCPIG.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbEstimateCPIG, resources.GetString("rbEstimateCPIG.ToolTip"))
         Me.rbEstimateCPIG.UseVisualStyleBackColor = True
         '
         'tbStatusCPIG
@@ -2732,116 +2501,100 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.tbStatusCPIG, "tbStatusCPIG")
         Me.tbStatusCPIG.Name = "tbStatusCPIG"
         Me.tbStatusCPIG.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusCPIG, resources.GetString("tbStatusCPIG.ToolTip"))
         '
         'Label26
         '
         resources.ApplyResources(Me.Label26, "Label26")
         Me.Label26.Name = "Label26"
-        Me.ToolTip1.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip"))
         '
         'tbCPIG_E
         '
-        resources.ApplyResources(Me.tbCPIG_E, "tbCPIG_E")
         Me.tbCPIG_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPIG_E, "tbCPIG_E")
         Me.tbCPIG_E.Name = "tbCPIG_E"
-        Me.ToolTip1.SetToolTip(Me.tbCPIG_E, resources.GetString("tbCPIG_E.ToolTip"))
         '
         'Label28
         '
         resources.ApplyResources(Me.Label28, "Label28")
         Me.Label28.Name = "Label28"
-        Me.ToolTip1.SetToolTip(Me.Label28, resources.GetString("Label28.ToolTip"))
         '
         'tbCPIG_A
         '
-        resources.ApplyResources(Me.tbCPIG_A, "tbCPIG_A")
         Me.tbCPIG_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPIG_A, "tbCPIG_A")
         Me.tbCPIG_A.Name = "tbCPIG_A"
-        Me.ToolTip1.SetToolTip(Me.tbCPIG_A, resources.GetString("tbCPIG_A.ToolTip"))
         '
         'Label18
         '
         resources.ApplyResources(Me.Label18, "Label18")
         Me.Label18.Name = "Label18"
-        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
         '
         'cbEqCPIG
         '
-        resources.ApplyResources(Me.cbEqCPIG, "cbEqCPIG")
         Me.cbEqCPIG.BackColor = System.Drawing.Color.White
         Me.cbEqCPIG.DropDownHeight = 200
         Me.cbEqCPIG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqCPIG.DropDownWidth = 300
+        Me.cbEqCPIG.DropDownWidth = 500
         Me.cbEqCPIG.FormattingEnabled = True
-        Me.cbEqCPIG.Items.AddRange(New Object() {resources.GetString("cbEqCPIG.Items"), resources.GetString("cbEqCPIG.Items1"), resources.GetString("cbEqCPIG.Items2"), resources.GetString("cbEqCPIG.Items3"), resources.GetString("cbEqCPIG.Items4"), resources.GetString("cbEqCPIG.Items5"), resources.GetString("cbEqCPIG.Items6"), resources.GetString("cbEqCPIG.Items7"), resources.GetString("cbEqCPIG.Items8"), resources.GetString("cbEqCPIG.Items9"), resources.GetString("cbEqCPIG.Items10"), resources.GetString("cbEqCPIG.Items11"), resources.GetString("cbEqCPIG.Items12"), resources.GetString("cbEqCPIG.Items13"), resources.GetString("cbEqCPIG.Items14"), resources.GetString("cbEqCPIG.Items15"), resources.GetString("cbEqCPIG.Items16"), resources.GetString("cbEqCPIG.Items17"), resources.GetString("cbEqCPIG.Items18"), resources.GetString("cbEqCPIG.Items19"), resources.GetString("cbEqCPIG.Items20"), resources.GetString("cbEqCPIG.Items21"), resources.GetString("cbEqCPIG.Items22"), resources.GetString("cbEqCPIG.Items23"), resources.GetString("cbEqCPIG.Items24"), resources.GetString("cbEqCPIG.Items25"), resources.GetString("cbEqCPIG.Items26"), resources.GetString("cbEqCPIG.Items27"), resources.GetString("cbEqCPIG.Items28"), resources.GetString("cbEqCPIG.Items29"), resources.GetString("cbEqCPIG.Items30"), resources.GetString("cbEqCPIG.Items31"), resources.GetString("cbEqCPIG.Items32")})
+        resources.ApplyResources(Me.cbEqCPIG, "cbEqCPIG")
+        Me.cbEqCPIG.Items.AddRange(New Object() {resources.GetString("cbEqCPIG.Items"), resources.GetString("cbEqCPIG.Items1"), resources.GetString("cbEqCPIG.Items2"), resources.GetString("cbEqCPIG.Items3"), resources.GetString("cbEqCPIG.Items4"), resources.GetString("cbEqCPIG.Items5"), resources.GetString("cbEqCPIG.Items6"), resources.GetString("cbEqCPIG.Items7"), resources.GetString("cbEqCPIG.Items8"), resources.GetString("cbEqCPIG.Items9"), resources.GetString("cbEqCPIG.Items10"), resources.GetString("cbEqCPIG.Items11"), resources.GetString("cbEqCPIG.Items12"), resources.GetString("cbEqCPIG.Items13"), resources.GetString("cbEqCPIG.Items14"), resources.GetString("cbEqCPIG.Items15"), resources.GetString("cbEqCPIG.Items16"), resources.GetString("cbEqCPIG.Items17"), resources.GetString("cbEqCPIG.Items18"), resources.GetString("cbEqCPIG.Items19"), resources.GetString("cbEqCPIG.Items20"), resources.GetString("cbEqCPIG.Items21"), resources.GetString("cbEqCPIG.Items22"), resources.GetString("cbEqCPIG.Items23"), resources.GetString("cbEqCPIG.Items24"), resources.GetString("cbEqCPIG.Items25"), resources.GetString("cbEqCPIG.Items26"), resources.GetString("cbEqCPIG.Items27"), resources.GetString("cbEqCPIG.Items28"), resources.GetString("cbEqCPIG.Items29"), resources.GetString("cbEqCPIG.Items30"), resources.GetString("cbEqCPIG.Items31"), resources.GetString("cbEqCPIG.Items32"), resources.GetString("cbEqCPIG.Items33"), resources.GetString("cbEqCPIG.Items34"), resources.GetString("cbEqCPIG.Items35"), resources.GetString("cbEqCPIG.Items36"), resources.GetString("cbEqCPIG.Items37"), resources.GetString("cbEqCPIG.Items38"), resources.GetString("cbEqCPIG.Items39")})
         Me.cbEqCPIG.Name = "cbEqCPIG"
-        Me.ToolTip1.SetToolTip(Me.cbEqCPIG, resources.GetString("cbEqCPIG.ToolTip"))
         '
         'btnViewCPIG
         '
         resources.ApplyResources(Me.btnViewCPIG, "btnViewCPIG")
         Me.btnViewCPIG.Name = "btnViewCPIG"
-        Me.ToolTip1.SetToolTip(Me.btnViewCPIG, resources.GetString("btnViewCPIG.ToolTip"))
         Me.btnViewCPIG.UseVisualStyleBackColor = True
         '
         'Label24
         '
         resources.ApplyResources(Me.Label24, "Label24")
         Me.Label24.Name = "Label24"
-        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
         '
         'tbCPIG_D
         '
-        resources.ApplyResources(Me.tbCPIG_D, "tbCPIG_D")
         Me.tbCPIG_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPIG_D, "tbCPIG_D")
         Me.tbCPIG_D.Name = "tbCPIG_D"
-        Me.ToolTip1.SetToolTip(Me.tbCPIG_D, resources.GetString("tbCPIG_D.ToolTip"))
         '
         'rbCoeffCPIG
         '
         resources.ApplyResources(Me.rbCoeffCPIG, "rbCoeffCPIG")
         Me.rbCoeffCPIG.Name = "rbCoeffCPIG"
-        Me.ToolTip1.SetToolTip(Me.rbCoeffCPIG, resources.GetString("rbCoeffCPIG.ToolTip"))
         Me.rbCoeffCPIG.UseVisualStyleBackColor = True
         '
         'btnRegressCPIG
         '
         resources.ApplyResources(Me.btnRegressCPIG, "btnRegressCPIG")
         Me.btnRegressCPIG.Name = "btnRegressCPIG"
-        Me.ToolTip1.SetToolTip(Me.btnRegressCPIG, resources.GetString("btnRegressCPIG.ToolTip"))
         Me.btnRegressCPIG.UseVisualStyleBackColor = True
         '
         'tbCPIG_B
         '
-        resources.ApplyResources(Me.tbCPIG_B, "tbCPIG_B")
         Me.tbCPIG_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPIG_B, "tbCPIG_B")
         Me.tbCPIG_B.Name = "tbCPIG_B"
-        Me.ToolTip1.SetToolTip(Me.tbCPIG_B, resources.GetString("tbCPIG_B.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
-        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'Label23
         '
         resources.ApplyResources(Me.Label23, "Label23")
         Me.Label23.Name = "Label23"
-        Me.ToolTip1.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip"))
         '
         'GridExpDataCPIG
         '
-        resources.ApplyResources(Me.GridExpDataCPIG, "GridExpDataCPIG")
         DataGridViewCellStyle19.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataCPIG.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
         Me.GridExpDataCPIG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataCPIG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataCPIG.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
+        resources.ApplyResources(Me.GridExpDataCPIG, "GridExpDataCPIG")
         Me.GridExpDataCPIG.Name = "GridExpDataCPIG"
         Me.GridExpDataCPIG.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataCPIG, resources.GetString("GridExpDataCPIG.ToolTip"))
         '
         'DataGridViewTextBoxColumn3
         '
@@ -2862,19 +2615,16 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.rbRegressCPIG, "rbRegressCPIG")
         Me.rbRegressCPIG.Name = "rbRegressCPIG"
-        Me.ToolTip1.SetToolTip(Me.rbRegressCPIG, resources.GetString("rbRegressCPIG.ToolTip"))
         Me.rbRegressCPIG.UseVisualStyleBackColor = True
         '
         'tbCPIG_C
         '
-        resources.ApplyResources(Me.tbCPIG_C, "tbCPIG_C")
         Me.tbCPIG_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCPIG_C, "tbCPIG_C")
         Me.tbCPIG_C.Name = "tbCPIG_C"
-        Me.ToolTip1.SetToolTip(Me.tbCPIG_C, resources.GetString("tbCPIG_C.ToolTip"))
         '
         'FaTabStripItem9
         '
-        resources.ApplyResources(Me.FaTabStripItem9, "FaTabStripItem9")
         Me.FaTabStripItem9.CanClose = False
         Me.FaTabStripItem9.Controls.Add(Me.Label45)
         Me.FaTabStripItem9.Controls.Add(Me.rbEstimateLIQDENS)
@@ -2899,13 +2649,12 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem9.Controls.Add(Me.Label35)
         Me.FaTabStripItem9.IsDrawn = True
         Me.FaTabStripItem9.Name = "FaTabStripItem9"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem9, resources.GetString("FaTabStripItem9.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem9, "FaTabStripItem9")
         '
         'Label45
         '
         resources.ApplyResources(Me.Label45, "Label45")
         Me.Label45.Name = "Label45"
-        Me.ToolTip1.SetToolTip(Me.Label45, resources.GetString("Label45.ToolTip"))
         '
         'rbEstimateLIQDENS
         '
@@ -2913,40 +2662,35 @@ Partial Class FormCompoundCreator
         Me.rbEstimateLIQDENS.Checked = True
         Me.rbEstimateLIQDENS.Name = "rbEstimateLIQDENS"
         Me.rbEstimateLIQDENS.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbEstimateLIQDENS, resources.GetString("rbEstimateLIQDENS.ToolTip"))
         Me.rbEstimateLIQDENS.UseVisualStyleBackColor = True
         '
         'tbLIQDENS_E
         '
-        resources.ApplyResources(Me.tbLIQDENS_E, "tbLIQDENS_E")
         Me.tbLIQDENS_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQDENS_E, "tbLIQDENS_E")
         Me.tbLIQDENS_E.Name = "tbLIQDENS_E"
-        Me.ToolTip1.SetToolTip(Me.tbLIQDENS_E, resources.GetString("tbLIQDENS_E.ToolTip"))
         '
         'rbRegressLIQDENS
         '
         resources.ApplyResources(Me.rbRegressLIQDENS, "rbRegressLIQDENS")
         Me.rbRegressLIQDENS.Name = "rbRegressLIQDENS"
-        Me.ToolTip1.SetToolTip(Me.rbRegressLIQDENS, resources.GetString("rbRegressLIQDENS.ToolTip"))
         Me.rbRegressLIQDENS.UseVisualStyleBackColor = True
         '
         'Label31
         '
         resources.ApplyResources(Me.Label31, "Label31")
         Me.Label31.Name = "Label31"
-        Me.ToolTip1.SetToolTip(Me.Label31, resources.GetString("Label31.ToolTip"))
         '
         'GridExpDataLIQDENS
         '
-        resources.ApplyResources(Me.GridExpDataLIQDENS, "GridExpDataLIQDENS")
         DataGridViewCellStyle22.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataLIQDENS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle22
         Me.GridExpDataLIQDENS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataLIQDENS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataLIQDENS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
+        resources.ApplyResources(Me.GridExpDataLIQDENS, "GridExpDataLIQDENS")
         Me.GridExpDataLIQDENS.Name = "GridExpDataLIQDENS"
         Me.GridExpDataLIQDENS.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataLIQDENS, resources.GetString("GridExpDataLIQDENS.ToolTip"))
         '
         'DataGridViewTextBoxColumn5
         '
@@ -2965,111 +2709,95 @@ Partial Class FormCompoundCreator
         '
         'tbLIQDENS_D
         '
-        resources.ApplyResources(Me.tbLIQDENS_D, "tbLIQDENS_D")
         Me.tbLIQDENS_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQDENS_D, "tbLIQDENS_D")
         Me.tbLIQDENS_D.Name = "tbLIQDENS_D"
-        Me.ToolTip1.SetToolTip(Me.tbLIQDENS_D, resources.GetString("tbLIQDENS_D.ToolTip"))
         '
         'btnRegressLIQDENS
         '
         resources.ApplyResources(Me.btnRegressLIQDENS, "btnRegressLIQDENS")
         Me.btnRegressLIQDENS.Name = "btnRegressLIQDENS"
-        Me.ToolTip1.SetToolTip(Me.btnRegressLIQDENS, resources.GetString("btnRegressLIQDENS.ToolTip"))
         Me.btnRegressLIQDENS.UseVisualStyleBackColor = True
         '
         'Label32
         '
         resources.ApplyResources(Me.Label32, "Label32")
         Me.Label32.Name = "Label32"
-        Me.ToolTip1.SetToolTip(Me.Label32, resources.GetString("Label32.ToolTip"))
         '
         'btnViewLIQDENS
         '
         resources.ApplyResources(Me.btnViewLIQDENS, "btnViewLIQDENS")
         Me.btnViewLIQDENS.Name = "btnViewLIQDENS"
-        Me.ToolTip1.SetToolTip(Me.btnViewLIQDENS, resources.GetString("btnViewLIQDENS.ToolTip"))
         Me.btnViewLIQDENS.UseVisualStyleBackColor = True
         '
         'tbLIQDENS_C
         '
-        resources.ApplyResources(Me.tbLIQDENS_C, "tbLIQDENS_C")
         Me.tbLIQDENS_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQDENS_C, "tbLIQDENS_C")
         Me.tbLIQDENS_C.Name = "tbLIQDENS_C"
-        Me.ToolTip1.SetToolTip(Me.tbLIQDENS_C, resources.GetString("tbLIQDENS_C.ToolTip"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
-        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'Label33
         '
         resources.ApplyResources(Me.Label33, "Label33")
         Me.Label33.Name = "Label33"
-        Me.ToolTip1.SetToolTip(Me.Label33, resources.GetString("Label33.ToolTip"))
         '
         'tbStatusLIQDENS
         '
         resources.ApplyResources(Me.tbStatusLIQDENS, "tbStatusLIQDENS")
         Me.tbStatusLIQDENS.Name = "tbStatusLIQDENS"
         Me.tbStatusLIQDENS.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusLIQDENS, resources.GetString("tbStatusLIQDENS.ToolTip"))
         '
         'tbLIQDENS_B
         '
-        resources.ApplyResources(Me.tbLIQDENS_B, "tbLIQDENS_B")
         Me.tbLIQDENS_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQDENS_B, "tbLIQDENS_B")
         Me.tbLIQDENS_B.Name = "tbLIQDENS_B"
-        Me.ToolTip1.SetToolTip(Me.tbLIQDENS_B, resources.GetString("tbLIQDENS_B.ToolTip"))
         '
         'rbCoeffLIQDENS
         '
         resources.ApplyResources(Me.rbCoeffLIQDENS, "rbCoeffLIQDENS")
         Me.rbCoeffLIQDENS.Name = "rbCoeffLIQDENS"
-        Me.ToolTip1.SetToolTip(Me.rbCoeffLIQDENS, resources.GetString("rbCoeffLIQDENS.ToolTip"))
         Me.rbCoeffLIQDENS.UseVisualStyleBackColor = True
         '
         'Label34
         '
         resources.ApplyResources(Me.Label34, "Label34")
         Me.Label34.Name = "Label34"
-        Me.ToolTip1.SetToolTip(Me.Label34, resources.GetString("Label34.ToolTip"))
         '
         'cbEqLIQDENS
         '
-        resources.ApplyResources(Me.cbEqLIQDENS, "cbEqLIQDENS")
         Me.cbEqLIQDENS.BackColor = System.Drawing.Color.White
         Me.cbEqLIQDENS.DropDownHeight = 200
         Me.cbEqLIQDENS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqLIQDENS.DropDownWidth = 300
+        Me.cbEqLIQDENS.DropDownWidth = 500
         Me.cbEqLIQDENS.FormattingEnabled = True
-        Me.cbEqLIQDENS.Items.AddRange(New Object() {resources.GetString("cbEqLIQDENS.Items"), resources.GetString("cbEqLIQDENS.Items1"), resources.GetString("cbEqLIQDENS.Items2"), resources.GetString("cbEqLIQDENS.Items3"), resources.GetString("cbEqLIQDENS.Items4"), resources.GetString("cbEqLIQDENS.Items5"), resources.GetString("cbEqLIQDENS.Items6"), resources.GetString("cbEqLIQDENS.Items7"), resources.GetString("cbEqLIQDENS.Items8"), resources.GetString("cbEqLIQDENS.Items9"), resources.GetString("cbEqLIQDENS.Items10"), resources.GetString("cbEqLIQDENS.Items11"), resources.GetString("cbEqLIQDENS.Items12"), resources.GetString("cbEqLIQDENS.Items13"), resources.GetString("cbEqLIQDENS.Items14"), resources.GetString("cbEqLIQDENS.Items15"), resources.GetString("cbEqLIQDENS.Items16"), resources.GetString("cbEqLIQDENS.Items17"), resources.GetString("cbEqLIQDENS.Items18"), resources.GetString("cbEqLIQDENS.Items19"), resources.GetString("cbEqLIQDENS.Items20"), resources.GetString("cbEqLIQDENS.Items21"), resources.GetString("cbEqLIQDENS.Items22"), resources.GetString("cbEqLIQDENS.Items23"), resources.GetString("cbEqLIQDENS.Items24"), resources.GetString("cbEqLIQDENS.Items25"), resources.GetString("cbEqLIQDENS.Items26"), resources.GetString("cbEqLIQDENS.Items27"), resources.GetString("cbEqLIQDENS.Items28"), resources.GetString("cbEqLIQDENS.Items29"), resources.GetString("cbEqLIQDENS.Items30"), resources.GetString("cbEqLIQDENS.Items31"), resources.GetString("cbEqLIQDENS.Items32")})
+        resources.ApplyResources(Me.cbEqLIQDENS, "cbEqLIQDENS")
+        Me.cbEqLIQDENS.Items.AddRange(New Object() {resources.GetString("cbEqLIQDENS.Items"), resources.GetString("cbEqLIQDENS.Items1"), resources.GetString("cbEqLIQDENS.Items2"), resources.GetString("cbEqLIQDENS.Items3"), resources.GetString("cbEqLIQDENS.Items4"), resources.GetString("cbEqLIQDENS.Items5"), resources.GetString("cbEqLIQDENS.Items6"), resources.GetString("cbEqLIQDENS.Items7"), resources.GetString("cbEqLIQDENS.Items8"), resources.GetString("cbEqLIQDENS.Items9"), resources.GetString("cbEqLIQDENS.Items10"), resources.GetString("cbEqLIQDENS.Items11"), resources.GetString("cbEqLIQDENS.Items12"), resources.GetString("cbEqLIQDENS.Items13"), resources.GetString("cbEqLIQDENS.Items14"), resources.GetString("cbEqLIQDENS.Items15"), resources.GetString("cbEqLIQDENS.Items16"), resources.GetString("cbEqLIQDENS.Items17"), resources.GetString("cbEqLIQDENS.Items18"), resources.GetString("cbEqLIQDENS.Items19"), resources.GetString("cbEqLIQDENS.Items20"), resources.GetString("cbEqLIQDENS.Items21"), resources.GetString("cbEqLIQDENS.Items22"), resources.GetString("cbEqLIQDENS.Items23"), resources.GetString("cbEqLIQDENS.Items24"), resources.GetString("cbEqLIQDENS.Items25"), resources.GetString("cbEqLIQDENS.Items26"), resources.GetString("cbEqLIQDENS.Items27"), resources.GetString("cbEqLIQDENS.Items28"), resources.GetString("cbEqLIQDENS.Items29"), resources.GetString("cbEqLIQDENS.Items30"), resources.GetString("cbEqLIQDENS.Items31"), resources.GetString("cbEqLIQDENS.Items32"), resources.GetString("cbEqLIQDENS.Items33"), resources.GetString("cbEqLIQDENS.Items34"), resources.GetString("cbEqLIQDENS.Items35"), resources.GetString("cbEqLIQDENS.Items36"), resources.GetString("cbEqLIQDENS.Items37"), resources.GetString("cbEqLIQDENS.Items38"), resources.GetString("cbEqLIQDENS.Items39")})
         Me.cbEqLIQDENS.Name = "cbEqLIQDENS"
-        Me.ToolTip1.SetToolTip(Me.cbEqLIQDENS, resources.GetString("cbEqLIQDENS.ToolTip"))
         '
         'tbLIQDENS_A
         '
-        resources.ApplyResources(Me.tbLIQDENS_A, "tbLIQDENS_A")
         Me.tbLIQDENS_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQDENS_A, "tbLIQDENS_A")
         Me.tbLIQDENS_A.Name = "tbLIQDENS_A"
-        Me.ToolTip1.SetToolTip(Me.tbLIQDENS_A, resources.GetString("tbLIQDENS_A.ToolTip"))
         '
         'Label36
         '
         resources.ApplyResources(Me.Label36, "Label36")
         Me.Label36.Name = "Label36"
-        Me.ToolTip1.SetToolTip(Me.Label36, resources.GetString("Label36.ToolTip"))
         '
         'Label35
         '
         resources.ApplyResources(Me.Label35, "Label35")
         Me.Label35.Name = "Label35"
-        Me.ToolTip1.SetToolTip(Me.Label35, resources.GetString("Label35.ToolTip"))
         '
         'FaTabStripItem10
         '
-        resources.ApplyResources(Me.FaTabStripItem10, "FaTabStripItem10")
         Me.FaTabStripItem10.CanClose = False
         Me.FaTabStripItem10.Controls.Add(Me.Label46)
         Me.FaTabStripItem10.Controls.Add(Me.rbEstimateLIQVISC)
@@ -3094,13 +2822,12 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem10.Controls.Add(Me.Label41)
         Me.FaTabStripItem10.IsDrawn = True
         Me.FaTabStripItem10.Name = "FaTabStripItem10"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem10, resources.GetString("FaTabStripItem10.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem10, "FaTabStripItem10")
         '
         'Label46
         '
         resources.ApplyResources(Me.Label46, "Label46")
         Me.Label46.Name = "Label46"
-        Me.ToolTip1.SetToolTip(Me.Label46, resources.GetString("Label46.ToolTip"))
         '
         'rbEstimateLIQVISC
         '
@@ -3108,40 +2835,35 @@ Partial Class FormCompoundCreator
         Me.rbEstimateLIQVISC.Checked = True
         Me.rbEstimateLIQVISC.Name = "rbEstimateLIQVISC"
         Me.rbEstimateLIQVISC.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbEstimateLIQVISC, resources.GetString("rbEstimateLIQVISC.ToolTip"))
         Me.rbEstimateLIQVISC.UseVisualStyleBackColor = True
         '
         'tbLIQVISC_E
         '
-        resources.ApplyResources(Me.tbLIQVISC_E, "tbLIQVISC_E")
         Me.tbLIQVISC_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQVISC_E, "tbLIQVISC_E")
         Me.tbLIQVISC_E.Name = "tbLIQVISC_E"
-        Me.ToolTip1.SetToolTip(Me.tbLIQVISC_E, resources.GetString("tbLIQVISC_E.ToolTip"))
         '
         'rbRegressLIQVISC
         '
         resources.ApplyResources(Me.rbRegressLIQVISC, "rbRegressLIQVISC")
         Me.rbRegressLIQVISC.Name = "rbRegressLIQVISC"
-        Me.ToolTip1.SetToolTip(Me.rbRegressLIQVISC, resources.GetString("rbRegressLIQVISC.ToolTip"))
         Me.rbRegressLIQVISC.UseVisualStyleBackColor = True
         '
         'Label37
         '
         resources.ApplyResources(Me.Label37, "Label37")
         Me.Label37.Name = "Label37"
-        Me.ToolTip1.SetToolTip(Me.Label37, resources.GetString("Label37.ToolTip"))
         '
         'GridExpDataLIQVISC
         '
-        resources.ApplyResources(Me.GridExpDataLIQVISC, "GridExpDataLIQVISC")
         DataGridViewCellStyle25.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataLIQVISC.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle25
         Me.GridExpDataLIQVISC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataLIQVISC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataLIQVISC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
+        resources.ApplyResources(Me.GridExpDataLIQVISC, "GridExpDataLIQVISC")
         Me.GridExpDataLIQVISC.Name = "GridExpDataLIQVISC"
         Me.GridExpDataLIQVISC.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataLIQVISC, resources.GetString("GridExpDataLIQVISC.ToolTip"))
         '
         'DataGridViewTextBoxColumn7
         '
@@ -3160,111 +2882,95 @@ Partial Class FormCompoundCreator
         '
         'tbLIQVISC_D
         '
-        resources.ApplyResources(Me.tbLIQVISC_D, "tbLIQVISC_D")
         Me.tbLIQVISC_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQVISC_D, "tbLIQVISC_D")
         Me.tbLIQVISC_D.Name = "tbLIQVISC_D"
-        Me.ToolTip1.SetToolTip(Me.tbLIQVISC_D, resources.GetString("tbLIQVISC_D.ToolTip"))
         '
         'btnRegressLIQVISC
         '
         resources.ApplyResources(Me.btnRegressLIQVISC, "btnRegressLIQVISC")
         Me.btnRegressLIQVISC.Name = "btnRegressLIQVISC"
-        Me.ToolTip1.SetToolTip(Me.btnRegressLIQVISC, resources.GetString("btnRegressLIQVISC.ToolTip"))
         Me.btnRegressLIQVISC.UseVisualStyleBackColor = True
         '
         'Label38
         '
         resources.ApplyResources(Me.Label38, "Label38")
         Me.Label38.Name = "Label38"
-        Me.ToolTip1.SetToolTip(Me.Label38, resources.GetString("Label38.ToolTip"))
         '
         'btnViewLIQVISC
         '
         resources.ApplyResources(Me.btnViewLIQVISC, "btnViewLIQVISC")
         Me.btnViewLIQVISC.Name = "btnViewLIQVISC"
-        Me.ToolTip1.SetToolTip(Me.btnViewLIQVISC, resources.GetString("btnViewLIQVISC.ToolTip"))
         Me.btnViewLIQVISC.UseVisualStyleBackColor = True
         '
         'tbLIQVISC_C
         '
-        resources.ApplyResources(Me.tbLIQVISC_C, "tbLIQVISC_C")
         Me.tbLIQVISC_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQVISC_C, "tbLIQVISC_C")
         Me.tbLIQVISC_C.Name = "tbLIQVISC_C"
-        Me.ToolTip1.SetToolTip(Me.tbLIQVISC_C, resources.GetString("tbLIQVISC_C.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
-        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'Label39
         '
         resources.ApplyResources(Me.Label39, "Label39")
         Me.Label39.Name = "Label39"
-        Me.ToolTip1.SetToolTip(Me.Label39, resources.GetString("Label39.ToolTip"))
         '
         'tbStatusLIQVISC
         '
         resources.ApplyResources(Me.tbStatusLIQVISC, "tbStatusLIQVISC")
         Me.tbStatusLIQVISC.Name = "tbStatusLIQVISC"
         Me.tbStatusLIQVISC.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusLIQVISC, resources.GetString("tbStatusLIQVISC.ToolTip"))
         '
         'tbLIQVISC_B
         '
-        resources.ApplyResources(Me.tbLIQVISC_B, "tbLIQVISC_B")
         Me.tbLIQVISC_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQVISC_B, "tbLIQVISC_B")
         Me.tbLIQVISC_B.Name = "tbLIQVISC_B"
-        Me.ToolTip1.SetToolTip(Me.tbLIQVISC_B, resources.GetString("tbLIQVISC_B.ToolTip"))
         '
         'rbCoeffLIQVISC
         '
         resources.ApplyResources(Me.rbCoeffLIQVISC, "rbCoeffLIQVISC")
         Me.rbCoeffLIQVISC.Name = "rbCoeffLIQVISC"
-        Me.ToolTip1.SetToolTip(Me.rbCoeffLIQVISC, resources.GetString("rbCoeffLIQVISC.ToolTip"))
         Me.rbCoeffLIQVISC.UseVisualStyleBackColor = True
         '
         'Label40
         '
         resources.ApplyResources(Me.Label40, "Label40")
         Me.Label40.Name = "Label40"
-        Me.ToolTip1.SetToolTip(Me.Label40, resources.GetString("Label40.ToolTip"))
         '
         'cbEqLIQVISC
         '
-        resources.ApplyResources(Me.cbEqLIQVISC, "cbEqLIQVISC")
         Me.cbEqLIQVISC.BackColor = System.Drawing.Color.White
         Me.cbEqLIQVISC.DropDownHeight = 200
         Me.cbEqLIQVISC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqLIQVISC.DropDownWidth = 300
+        Me.cbEqLIQVISC.DropDownWidth = 500
         Me.cbEqLIQVISC.FormattingEnabled = True
-        Me.cbEqLIQVISC.Items.AddRange(New Object() {resources.GetString("cbEqLIQVISC.Items"), resources.GetString("cbEqLIQVISC.Items1"), resources.GetString("cbEqLIQVISC.Items2"), resources.GetString("cbEqLIQVISC.Items3"), resources.GetString("cbEqLIQVISC.Items4"), resources.GetString("cbEqLIQVISC.Items5"), resources.GetString("cbEqLIQVISC.Items6"), resources.GetString("cbEqLIQVISC.Items7"), resources.GetString("cbEqLIQVISC.Items8"), resources.GetString("cbEqLIQVISC.Items9"), resources.GetString("cbEqLIQVISC.Items10"), resources.GetString("cbEqLIQVISC.Items11"), resources.GetString("cbEqLIQVISC.Items12"), resources.GetString("cbEqLIQVISC.Items13"), resources.GetString("cbEqLIQVISC.Items14"), resources.GetString("cbEqLIQVISC.Items15"), resources.GetString("cbEqLIQVISC.Items16"), resources.GetString("cbEqLIQVISC.Items17"), resources.GetString("cbEqLIQVISC.Items18"), resources.GetString("cbEqLIQVISC.Items19"), resources.GetString("cbEqLIQVISC.Items20"), resources.GetString("cbEqLIQVISC.Items21"), resources.GetString("cbEqLIQVISC.Items22"), resources.GetString("cbEqLIQVISC.Items23"), resources.GetString("cbEqLIQVISC.Items24"), resources.GetString("cbEqLIQVISC.Items25"), resources.GetString("cbEqLIQVISC.Items26"), resources.GetString("cbEqLIQVISC.Items27"), resources.GetString("cbEqLIQVISC.Items28"), resources.GetString("cbEqLIQVISC.Items29"), resources.GetString("cbEqLIQVISC.Items30"), resources.GetString("cbEqLIQVISC.Items31"), resources.GetString("cbEqLIQVISC.Items32")})
+        resources.ApplyResources(Me.cbEqLIQVISC, "cbEqLIQVISC")
+        Me.cbEqLIQVISC.Items.AddRange(New Object() {resources.GetString("cbEqLIQVISC.Items"), resources.GetString("cbEqLIQVISC.Items1"), resources.GetString("cbEqLIQVISC.Items2"), resources.GetString("cbEqLIQVISC.Items3"), resources.GetString("cbEqLIQVISC.Items4"), resources.GetString("cbEqLIQVISC.Items5"), resources.GetString("cbEqLIQVISC.Items6"), resources.GetString("cbEqLIQVISC.Items7"), resources.GetString("cbEqLIQVISC.Items8"), resources.GetString("cbEqLIQVISC.Items9"), resources.GetString("cbEqLIQVISC.Items10"), resources.GetString("cbEqLIQVISC.Items11"), resources.GetString("cbEqLIQVISC.Items12"), resources.GetString("cbEqLIQVISC.Items13"), resources.GetString("cbEqLIQVISC.Items14"), resources.GetString("cbEqLIQVISC.Items15"), resources.GetString("cbEqLIQVISC.Items16"), resources.GetString("cbEqLIQVISC.Items17"), resources.GetString("cbEqLIQVISC.Items18"), resources.GetString("cbEqLIQVISC.Items19"), resources.GetString("cbEqLIQVISC.Items20"), resources.GetString("cbEqLIQVISC.Items21"), resources.GetString("cbEqLIQVISC.Items22"), resources.GetString("cbEqLIQVISC.Items23"), resources.GetString("cbEqLIQVISC.Items24"), resources.GetString("cbEqLIQVISC.Items25"), resources.GetString("cbEqLIQVISC.Items26"), resources.GetString("cbEqLIQVISC.Items27"), resources.GetString("cbEqLIQVISC.Items28"), resources.GetString("cbEqLIQVISC.Items29"), resources.GetString("cbEqLIQVISC.Items30"), resources.GetString("cbEqLIQVISC.Items31"), resources.GetString("cbEqLIQVISC.Items32"), resources.GetString("cbEqLIQVISC.Items33"), resources.GetString("cbEqLIQVISC.Items34"), resources.GetString("cbEqLIQVISC.Items35"), resources.GetString("cbEqLIQVISC.Items36"), resources.GetString("cbEqLIQVISC.Items37"), resources.GetString("cbEqLIQVISC.Items38"), resources.GetString("cbEqLIQVISC.Items39")})
         Me.cbEqLIQVISC.Name = "cbEqLIQVISC"
-        Me.ToolTip1.SetToolTip(Me.cbEqLIQVISC, resources.GetString("cbEqLIQVISC.ToolTip"))
         '
         'tbLIQVISC_A
         '
-        resources.ApplyResources(Me.tbLIQVISC_A, "tbLIQVISC_A")
         Me.tbLIQVISC_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbLIQVISC_A, "tbLIQVISC_A")
         Me.tbLIQVISC_A.Name = "tbLIQVISC_A"
-        Me.ToolTip1.SetToolTip(Me.tbLIQVISC_A, resources.GetString("tbLIQVISC_A.ToolTip"))
         '
         'Label42
         '
         resources.ApplyResources(Me.Label42, "Label42")
         Me.Label42.Name = "Label42"
-        Me.ToolTip1.SetToolTip(Me.Label42, resources.GetString("Label42.ToolTip"))
         '
         'Label41
         '
         resources.ApplyResources(Me.Label41, "Label41")
         Me.Label41.Name = "Label41"
-        Me.ToolTip1.SetToolTip(Me.Label41, resources.GetString("Label41.ToolTip"))
         '
         'FaTabStripItem11
         '
-        resources.ApplyResources(Me.FaTabStripItem11, "FaTabStripItem11")
         Me.FaTabStripItem11.CanClose = False
         Me.FaTabStripItem11.Controls.Add(Me.LabelWithDivider7)
         Me.FaTabStripItem11.Controls.Add(Me.gbCPs)
@@ -3282,18 +2988,16 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem11.Controls.Add(Me.CheckBoxMeltingTemp)
         Me.FaTabStripItem11.IsDrawn = True
         Me.FaTabStripItem11.Name = "FaTabStripItem11"
-        Me.ToolTip1.SetToolTip(Me.FaTabStripItem11, resources.GetString("FaTabStripItem11.ToolTip"))
+        resources.ApplyResources(Me.FaTabStripItem11, "FaTabStripItem11")
         '
         'LabelWithDivider7
         '
         resources.ApplyResources(Me.LabelWithDivider7, "LabelWithDivider7")
         Me.LabelWithDivider7.Gap = 5
         Me.LabelWithDivider7.Name = "LabelWithDivider7"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider7, resources.GetString("LabelWithDivider7.ToolTip"))
         '
         'gbCPs
         '
-        resources.ApplyResources(Me.gbCPs, "gbCPs")
         Me.gbCPs.Controls.Add(Me.Label84)
         Me.gbCPs.Controls.Add(Me.tbStatusSolidCp)
         Me.gbCPs.Controls.Add(Me.btnRegressSolidCp)
@@ -3314,35 +3018,31 @@ Partial Class FormCompoundCreator
         Me.gbCPs.Controls.Add(Me.tbCpS_A)
         Me.gbCPs.Controls.Add(Me.cbEqCpS)
         Me.gbCPs.Controls.Add(Me.Label74)
+        resources.ApplyResources(Me.gbCPs, "gbCPs")
         Me.gbCPs.Name = "gbCPs"
         Me.gbCPs.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.gbCPs, resources.GetString("gbCPs.ToolTip"))
         '
         'Label84
         '
         resources.ApplyResources(Me.Label84, "Label84")
         Me.Label84.Name = "Label84"
-        Me.ToolTip1.SetToolTip(Me.Label84, resources.GetString("Label84.ToolTip"))
         '
         'tbStatusSolidCp
         '
         resources.ApplyResources(Me.tbStatusSolidCp, "tbStatusSolidCp")
         Me.tbStatusSolidCp.Name = "tbStatusSolidCp"
         Me.tbStatusSolidCp.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusSolidCp, resources.GetString("tbStatusSolidCp.ToolTip"))
         '
         'btnRegressSolidCp
         '
         resources.ApplyResources(Me.btnRegressSolidCp, "btnRegressSolidCp")
         Me.btnRegressSolidCp.Name = "btnRegressSolidCp"
-        Me.ToolTip1.SetToolTip(Me.btnRegressSolidCp, resources.GetString("btnRegressSolidCp.ToolTip"))
         Me.btnRegressSolidCp.UseVisualStyleBackColor = True
         '
         'btnViewSolidCp
         '
         resources.ApplyResources(Me.btnViewSolidCp, "btnViewSolidCp")
         Me.btnViewSolidCp.Name = "btnViewSolidCp"
-        Me.ToolTip1.SetToolTip(Me.btnViewSolidCp, resources.GetString("btnViewSolidCp.ToolTip"))
         Me.btnViewSolidCp.UseVisualStyleBackColor = True
         '
         'rbCoeffSolidCp
@@ -3351,27 +3051,24 @@ Partial Class FormCompoundCreator
         Me.rbCoeffSolidCp.Checked = True
         Me.rbCoeffSolidCp.Name = "rbCoeffSolidCp"
         Me.rbCoeffSolidCp.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbCoeffSolidCp, resources.GetString("rbCoeffSolidCp.ToolTip"))
         Me.rbCoeffSolidCp.UseVisualStyleBackColor = True
         '
         'rbRegressSolidCp
         '
         resources.ApplyResources(Me.rbRegressSolidCp, "rbRegressSolidCp")
         Me.rbRegressSolidCp.Name = "rbRegressSolidCp"
-        Me.ToolTip1.SetToolTip(Me.rbRegressSolidCp, resources.GetString("rbRegressSolidCp.ToolTip"))
         Me.rbRegressSolidCp.UseVisualStyleBackColor = True
         '
         'GridExpDataCpS
         '
-        resources.ApplyResources(Me.GridExpDataCpS, "GridExpDataCpS")
         DataGridViewCellStyle28.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataCpS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle28
         Me.GridExpDataCpS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataCpS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataCpS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
+        resources.ApplyResources(Me.GridExpDataCpS, "GridExpDataCpS")
         Me.GridExpDataCpS.Name = "GridExpDataCpS"
         Me.GridExpDataCpS.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataCpS, resources.GetString("GridExpDataCpS.ToolTip"))
         '
         'DataGridViewTextBoxColumn9
         '
@@ -3392,94 +3089,80 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.Label75, "Label75")
         Me.Label75.Name = "Label75"
-        Me.ToolTip1.SetToolTip(Me.Label75, resources.GetString("Label75.ToolTip"))
         '
         'tbCpS_E
         '
-        resources.ApplyResources(Me.tbCpS_E, "tbCpS_E")
         Me.tbCpS_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCpS_E, "tbCpS_E")
         Me.tbCpS_E.Name = "tbCpS_E"
-        Me.ToolTip1.SetToolTip(Me.tbCpS_E, resources.GetString("tbCpS_E.ToolTip"))
         '
         'Label73
         '
         resources.ApplyResources(Me.Label73, "Label73")
         Me.Label73.Name = "Label73"
-        Me.ToolTip1.SetToolTip(Me.Label73, resources.GetString("Label73.ToolTip"))
         '
         'tbCpS_D
         '
-        resources.ApplyResources(Me.tbCpS_D, "tbCpS_D")
         Me.tbCpS_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCpS_D, "tbCpS_D")
         Me.tbCpS_D.Name = "tbCpS_D"
-        Me.ToolTip1.SetToolTip(Me.tbCpS_D, resources.GetString("tbCpS_D.ToolTip"))
         '
         'Label72
         '
         resources.ApplyResources(Me.Label72, "Label72")
         Me.Label72.Name = "Label72"
-        Me.ToolTip1.SetToolTip(Me.Label72, resources.GetString("Label72.ToolTip"))
         '
         'tbCpS_C
         '
-        resources.ApplyResources(Me.tbCpS_C, "tbCpS_C")
         Me.tbCpS_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCpS_C, "tbCpS_C")
         Me.tbCpS_C.Name = "tbCpS_C"
-        Me.ToolTip1.SetToolTip(Me.tbCpS_C, resources.GetString("tbCpS_C.ToolTip"))
         '
         'Label71
         '
         resources.ApplyResources(Me.Label71, "Label71")
         Me.Label71.Name = "Label71"
-        Me.ToolTip1.SetToolTip(Me.Label71, resources.GetString("Label71.ToolTip"))
         '
         'tbCpS_B
         '
-        resources.ApplyResources(Me.tbCpS_B, "tbCpS_B")
         Me.tbCpS_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCpS_B, "tbCpS_B")
         Me.tbCpS_B.Name = "tbCpS_B"
-        Me.ToolTip1.SetToolTip(Me.tbCpS_B, resources.GetString("tbCpS_B.ToolTip"))
         '
         'Label70
         '
         resources.ApplyResources(Me.Label70, "Label70")
         Me.Label70.Name = "Label70"
-        Me.ToolTip1.SetToolTip(Me.Label70, resources.GetString("Label70.ToolTip"))
         '
         'Label69
         '
         resources.ApplyResources(Me.Label69, "Label69")
         Me.Label69.Name = "Label69"
-        Me.ToolTip1.SetToolTip(Me.Label69, resources.GetString("Label69.ToolTip"))
         '
         'tbCpS_A
         '
-        resources.ApplyResources(Me.tbCpS_A, "tbCpS_A")
         Me.tbCpS_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbCpS_A, "tbCpS_A")
         Me.tbCpS_A.Name = "tbCpS_A"
-        Me.ToolTip1.SetToolTip(Me.tbCpS_A, resources.GetString("tbCpS_A.ToolTip"))
         '
         'cbEqCpS
         '
-        resources.ApplyResources(Me.cbEqCpS, "cbEqCpS")
         Me.cbEqCpS.BackColor = System.Drawing.Color.White
         Me.cbEqCpS.DropDownHeight = 200
         Me.cbEqCpS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqCpS.DropDownWidth = 300
+        Me.cbEqCpS.DropDownWidth = 500
         Me.cbEqCpS.FormattingEnabled = True
-        Me.cbEqCpS.Items.AddRange(New Object() {resources.GetString("cbEqCpS.Items"), resources.GetString("cbEqCpS.Items1"), resources.GetString("cbEqCpS.Items2"), resources.GetString("cbEqCpS.Items3"), resources.GetString("cbEqCpS.Items4"), resources.GetString("cbEqCpS.Items5"), resources.GetString("cbEqCpS.Items6"), resources.GetString("cbEqCpS.Items7"), resources.GetString("cbEqCpS.Items8"), resources.GetString("cbEqCpS.Items9"), resources.GetString("cbEqCpS.Items10"), resources.GetString("cbEqCpS.Items11"), resources.GetString("cbEqCpS.Items12"), resources.GetString("cbEqCpS.Items13"), resources.GetString("cbEqCpS.Items14"), resources.GetString("cbEqCpS.Items15"), resources.GetString("cbEqCpS.Items16"), resources.GetString("cbEqCpS.Items17"), resources.GetString("cbEqCpS.Items18"), resources.GetString("cbEqCpS.Items19"), resources.GetString("cbEqCpS.Items20"), resources.GetString("cbEqCpS.Items21"), resources.GetString("cbEqCpS.Items22"), resources.GetString("cbEqCpS.Items23"), resources.GetString("cbEqCpS.Items24"), resources.GetString("cbEqCpS.Items25"), resources.GetString("cbEqCpS.Items26"), resources.GetString("cbEqCpS.Items27"), resources.GetString("cbEqCpS.Items28"), resources.GetString("cbEqCpS.Items29"), resources.GetString("cbEqCpS.Items30"), resources.GetString("cbEqCpS.Items31"), resources.GetString("cbEqCpS.Items32")})
+        resources.ApplyResources(Me.cbEqCpS, "cbEqCpS")
+        Me.cbEqCpS.Items.AddRange(New Object() {resources.GetString("cbEqCpS.Items"), resources.GetString("cbEqCpS.Items1"), resources.GetString("cbEqCpS.Items2"), resources.GetString("cbEqCpS.Items3"), resources.GetString("cbEqCpS.Items4"), resources.GetString("cbEqCpS.Items5"), resources.GetString("cbEqCpS.Items6"), resources.GetString("cbEqCpS.Items7"), resources.GetString("cbEqCpS.Items8"), resources.GetString("cbEqCpS.Items9"), resources.GetString("cbEqCpS.Items10"), resources.GetString("cbEqCpS.Items11"), resources.GetString("cbEqCpS.Items12"), resources.GetString("cbEqCpS.Items13"), resources.GetString("cbEqCpS.Items14"), resources.GetString("cbEqCpS.Items15"), resources.GetString("cbEqCpS.Items16"), resources.GetString("cbEqCpS.Items17"), resources.GetString("cbEqCpS.Items18"), resources.GetString("cbEqCpS.Items19"), resources.GetString("cbEqCpS.Items20"), resources.GetString("cbEqCpS.Items21"), resources.GetString("cbEqCpS.Items22"), resources.GetString("cbEqCpS.Items23"), resources.GetString("cbEqCpS.Items24"), resources.GetString("cbEqCpS.Items25"), resources.GetString("cbEqCpS.Items26"), resources.GetString("cbEqCpS.Items27"), resources.GetString("cbEqCpS.Items28"), resources.GetString("cbEqCpS.Items29"), resources.GetString("cbEqCpS.Items30"), resources.GetString("cbEqCpS.Items31"), resources.GetString("cbEqCpS.Items32"), resources.GetString("cbEqCpS.Items33"), resources.GetString("cbEqCpS.Items34"), resources.GetString("cbEqCpS.Items35"), resources.GetString("cbEqCpS.Items36"), resources.GetString("cbEqCpS.Items37"), resources.GetString("cbEqCpS.Items38"), resources.GetString("cbEqCpS.Items39")})
         Me.cbEqCpS.Name = "cbEqCpS"
-        Me.ToolTip1.SetToolTip(Me.cbEqCpS, resources.GetString("cbEqCpS.ToolTip"))
         '
         'Label74
         '
         resources.ApplyResources(Me.Label74, "Label74")
         Me.Label74.Name = "Label74"
-        Me.ToolTip1.SetToolTip(Me.Label74, resources.GetString("Label74.ToolTip"))
         '
         'gbSolidDens
         '
-        resources.ApplyResources(Me.gbSolidDens, "gbSolidDens")
         Me.gbSolidDens.Controls.Add(Me.rbEstimateSolidDens)
         Me.gbSolidDens.Controls.Add(Me.Label83)
         Me.gbSolidDens.Controls.Add(Me.tbStatusSolidDens)
@@ -3501,9 +3184,9 @@ Partial Class FormCompoundCreator
         Me.gbSolidDens.Controls.Add(Me.tbRoS_A)
         Me.gbSolidDens.Controls.Add(Me.cbEqSolidDENS)
         Me.gbSolidDens.Controls.Add(Me.Label76)
+        resources.ApplyResources(Me.gbSolidDens, "gbSolidDens")
         Me.gbSolidDens.Name = "gbSolidDens"
         Me.gbSolidDens.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.gbSolidDens, resources.GetString("gbSolidDens.ToolTip"))
         '
         'rbEstimateSolidDens
         '
@@ -3511,73 +3194,63 @@ Partial Class FormCompoundCreator
         Me.rbEstimateSolidDens.Checked = True
         Me.rbEstimateSolidDens.Name = "rbEstimateSolidDens"
         Me.rbEstimateSolidDens.TabStop = True
-        Me.ToolTip1.SetToolTip(Me.rbEstimateSolidDens, resources.GetString("rbEstimateSolidDens.ToolTip"))
         Me.rbEstimateSolidDens.UseVisualStyleBackColor = True
         '
         'Label83
         '
         resources.ApplyResources(Me.Label83, "Label83")
         Me.Label83.Name = "Label83"
-        Me.ToolTip1.SetToolTip(Me.Label83, resources.GetString("Label83.ToolTip"))
         '
         'tbStatusSolidDens
         '
         resources.ApplyResources(Me.tbStatusSolidDens, "tbStatusSolidDens")
         Me.tbStatusSolidDens.Name = "tbStatusSolidDens"
         Me.tbStatusSolidDens.ReadOnly = True
-        Me.ToolTip1.SetToolTip(Me.tbStatusSolidDens, resources.GetString("tbStatusSolidDens.ToolTip"))
         '
         'btnRegressSolidDens
         '
         resources.ApplyResources(Me.btnRegressSolidDens, "btnRegressSolidDens")
         Me.btnRegressSolidDens.Name = "btnRegressSolidDens"
-        Me.ToolTip1.SetToolTip(Me.btnRegressSolidDens, resources.GetString("btnRegressSolidDens.ToolTip"))
         Me.btnRegressSolidDens.UseVisualStyleBackColor = True
         '
         'btnViewSolidDens
         '
         resources.ApplyResources(Me.btnViewSolidDens, "btnViewSolidDens")
         Me.btnViewSolidDens.Name = "btnViewSolidDens"
-        Me.ToolTip1.SetToolTip(Me.btnViewSolidDens, resources.GetString("btnViewSolidDens.ToolTip"))
         Me.btnViewSolidDens.UseVisualStyleBackColor = True
         '
         'rbCoeffSolidDens
         '
         resources.ApplyResources(Me.rbCoeffSolidDens, "rbCoeffSolidDens")
         Me.rbCoeffSolidDens.Name = "rbCoeffSolidDens"
-        Me.ToolTip1.SetToolTip(Me.rbCoeffSolidDens, resources.GetString("rbCoeffSolidDens.ToolTip"))
         Me.rbCoeffSolidDens.UseVisualStyleBackColor = True
         '
         'rbRegressSolidDens
         '
         resources.ApplyResources(Me.rbRegressSolidDens, "rbRegressSolidDens")
         Me.rbRegressSolidDens.Name = "rbRegressSolidDens"
-        Me.ToolTip1.SetToolTip(Me.rbRegressSolidDens, resources.GetString("rbRegressSolidDens.ToolTip"))
         Me.rbRegressSolidDens.UseVisualStyleBackColor = True
         '
         'Label77
         '
         resources.ApplyResources(Me.Label77, "Label77")
         Me.Label77.Name = "Label77"
-        Me.ToolTip1.SetToolTip(Me.Label77, resources.GetString("Label77.ToolTip"))
         '
         'Label78
         '
         resources.ApplyResources(Me.Label78, "Label78")
         Me.Label78.Name = "Label78"
-        Me.ToolTip1.SetToolTip(Me.Label78, resources.GetString("Label78.ToolTip"))
         '
         'GridExpDataRoS
         '
-        resources.ApplyResources(Me.GridExpDataRoS, "GridExpDataRoS")
         DataGridViewCellStyle31.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpDataRoS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle31
         Me.GridExpDataRoS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataRoS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataRoS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
+        resources.ApplyResources(Me.GridExpDataRoS, "GridExpDataRoS")
         Me.GridExpDataRoS.Name = "GridExpDataRoS"
         Me.GridExpDataRoS.RowHeadersVisible = False
-        Me.ToolTip1.SetToolTip(Me.GridExpDataRoS, resources.GetString("GridExpDataRoS.ToolTip"))
         '
         'DataGridViewTextBoxColumn11
         '
@@ -3596,93 +3269,80 @@ Partial Class FormCompoundCreator
         '
         'tbRoS_E
         '
-        resources.ApplyResources(Me.tbRoS_E, "tbRoS_E")
         Me.tbRoS_E.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbRoS_E, "tbRoS_E")
         Me.tbRoS_E.Name = "tbRoS_E"
-        Me.ToolTip1.SetToolTip(Me.tbRoS_E, resources.GetString("tbRoS_E.ToolTip"))
         '
         'Label79
         '
         resources.ApplyResources(Me.Label79, "Label79")
         Me.Label79.Name = "Label79"
-        Me.ToolTip1.SetToolTip(Me.Label79, resources.GetString("Label79.ToolTip"))
         '
         'tbRoS_D
         '
-        resources.ApplyResources(Me.tbRoS_D, "tbRoS_D")
         Me.tbRoS_D.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbRoS_D, "tbRoS_D")
         Me.tbRoS_D.Name = "tbRoS_D"
-        Me.ToolTip1.SetToolTip(Me.tbRoS_D, resources.GetString("tbRoS_D.ToolTip"))
         '
         'Label80
         '
         resources.ApplyResources(Me.Label80, "Label80")
         Me.Label80.Name = "Label80"
-        Me.ToolTip1.SetToolTip(Me.Label80, resources.GetString("Label80.ToolTip"))
         '
         'tbRoS_C
         '
-        resources.ApplyResources(Me.tbRoS_C, "tbRoS_C")
         Me.tbRoS_C.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbRoS_C, "tbRoS_C")
         Me.tbRoS_C.Name = "tbRoS_C"
-        Me.ToolTip1.SetToolTip(Me.tbRoS_C, resources.GetString("tbRoS_C.ToolTip"))
         '
         'Label81
         '
         resources.ApplyResources(Me.Label81, "Label81")
         Me.Label81.Name = "Label81"
-        Me.ToolTip1.SetToolTip(Me.Label81, resources.GetString("Label81.ToolTip"))
         '
         'tbRoS_B
         '
-        resources.ApplyResources(Me.tbRoS_B, "tbRoS_B")
         Me.tbRoS_B.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbRoS_B, "tbRoS_B")
         Me.tbRoS_B.Name = "tbRoS_B"
-        Me.ToolTip1.SetToolTip(Me.tbRoS_B, resources.GetString("tbRoS_B.ToolTip"))
         '
         'Label82
         '
         resources.ApplyResources(Me.Label82, "Label82")
         Me.Label82.Name = "Label82"
-        Me.ToolTip1.SetToolTip(Me.Label82, resources.GetString("Label82.ToolTip"))
         '
         'tbRoS_A
         '
-        resources.ApplyResources(Me.tbRoS_A, "tbRoS_A")
         Me.tbRoS_A.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbRoS_A, "tbRoS_A")
         Me.tbRoS_A.Name = "tbRoS_A"
-        Me.ToolTip1.SetToolTip(Me.tbRoS_A, resources.GetString("tbRoS_A.ToolTip"))
         '
         'cbEqSolidDENS
         '
-        resources.ApplyResources(Me.cbEqSolidDENS, "cbEqSolidDENS")
         Me.cbEqSolidDENS.BackColor = System.Drawing.Color.White
         Me.cbEqSolidDENS.DropDownHeight = 200
         Me.cbEqSolidDENS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbEqSolidDENS.DropDownWidth = 300
+        Me.cbEqSolidDENS.DropDownWidth = 500
         Me.cbEqSolidDENS.FormattingEnabled = True
-        Me.cbEqSolidDENS.Items.AddRange(New Object() {resources.GetString("cbEqSolidDENS.Items"), resources.GetString("cbEqSolidDENS.Items1"), resources.GetString("cbEqSolidDENS.Items2"), resources.GetString("cbEqSolidDENS.Items3"), resources.GetString("cbEqSolidDENS.Items4"), resources.GetString("cbEqSolidDENS.Items5"), resources.GetString("cbEqSolidDENS.Items6"), resources.GetString("cbEqSolidDENS.Items7"), resources.GetString("cbEqSolidDENS.Items8"), resources.GetString("cbEqSolidDENS.Items9"), resources.GetString("cbEqSolidDENS.Items10"), resources.GetString("cbEqSolidDENS.Items11"), resources.GetString("cbEqSolidDENS.Items12"), resources.GetString("cbEqSolidDENS.Items13"), resources.GetString("cbEqSolidDENS.Items14"), resources.GetString("cbEqSolidDENS.Items15"), resources.GetString("cbEqSolidDENS.Items16"), resources.GetString("cbEqSolidDENS.Items17"), resources.GetString("cbEqSolidDENS.Items18"), resources.GetString("cbEqSolidDENS.Items19"), resources.GetString("cbEqSolidDENS.Items20"), resources.GetString("cbEqSolidDENS.Items21"), resources.GetString("cbEqSolidDENS.Items22"), resources.GetString("cbEqSolidDENS.Items23"), resources.GetString("cbEqSolidDENS.Items24"), resources.GetString("cbEqSolidDENS.Items25"), resources.GetString("cbEqSolidDENS.Items26"), resources.GetString("cbEqSolidDENS.Items27"), resources.GetString("cbEqSolidDENS.Items28"), resources.GetString("cbEqSolidDENS.Items29"), resources.GetString("cbEqSolidDENS.Items30"), resources.GetString("cbEqSolidDENS.Items31"), resources.GetString("cbEqSolidDENS.Items32")})
+        resources.ApplyResources(Me.cbEqSolidDENS, "cbEqSolidDENS")
+        Me.cbEqSolidDENS.Items.AddRange(New Object() {resources.GetString("cbEqSolidDENS.Items"), resources.GetString("cbEqSolidDENS.Items1"), resources.GetString("cbEqSolidDENS.Items2"), resources.GetString("cbEqSolidDENS.Items3"), resources.GetString("cbEqSolidDENS.Items4"), resources.GetString("cbEqSolidDENS.Items5"), resources.GetString("cbEqSolidDENS.Items6"), resources.GetString("cbEqSolidDENS.Items7"), resources.GetString("cbEqSolidDENS.Items8"), resources.GetString("cbEqSolidDENS.Items9"), resources.GetString("cbEqSolidDENS.Items10"), resources.GetString("cbEqSolidDENS.Items11"), resources.GetString("cbEqSolidDENS.Items12"), resources.GetString("cbEqSolidDENS.Items13"), resources.GetString("cbEqSolidDENS.Items14"), resources.GetString("cbEqSolidDENS.Items15"), resources.GetString("cbEqSolidDENS.Items16"), resources.GetString("cbEqSolidDENS.Items17"), resources.GetString("cbEqSolidDENS.Items18"), resources.GetString("cbEqSolidDENS.Items19"), resources.GetString("cbEqSolidDENS.Items20"), resources.GetString("cbEqSolidDENS.Items21"), resources.GetString("cbEqSolidDENS.Items22"), resources.GetString("cbEqSolidDENS.Items23"), resources.GetString("cbEqSolidDENS.Items24"), resources.GetString("cbEqSolidDENS.Items25"), resources.GetString("cbEqSolidDENS.Items26"), resources.GetString("cbEqSolidDENS.Items27"), resources.GetString("cbEqSolidDENS.Items28"), resources.GetString("cbEqSolidDENS.Items29"), resources.GetString("cbEqSolidDENS.Items30"), resources.GetString("cbEqSolidDENS.Items31"), resources.GetString("cbEqSolidDENS.Items32"), resources.GetString("cbEqSolidDENS.Items33"), resources.GetString("cbEqSolidDENS.Items34"), resources.GetString("cbEqSolidDENS.Items35"), resources.GetString("cbEqSolidDENS.Items36"), resources.GetString("cbEqSolidDENS.Items37"), resources.GetString("cbEqSolidDENS.Items38"), resources.GetString("cbEqSolidDENS.Items39")})
         Me.cbEqSolidDENS.Name = "cbEqSolidDENS"
-        Me.ToolTip1.SetToolTip(Me.cbEqSolidDENS, resources.GetString("cbEqSolidDENS.ToolTip"))
         '
         'Label76
         '
         resources.ApplyResources(Me.Label76, "Label76")
         Me.Label76.Name = "Label76"
-        Me.ToolTip1.SetToolTip(Me.Label76, resources.GetString("Label76.ToolTip"))
         '
         'lblEnthOfFusion
         '
         resources.ApplyResources(Me.lblEnthOfFusion, "lblEnthOfFusion")
         Me.lblEnthOfFusion.Name = "lblEnthOfFusion"
-        Me.ToolTip1.SetToolTip(Me.lblEnthOfFusion, resources.GetString("lblEnthOfFusion.ToolTip"))
         '
         'TextBoxEnthOfFusion2
         '
-        resources.ApplyResources(Me.TextBoxEnthOfFusion2, "TextBoxEnthOfFusion2")
         Me.TextBoxEnthOfFusion2.BackColor = System.Drawing.Color.LightGray
+        resources.ApplyResources(Me.TextBoxEnthOfFusion2, "TextBoxEnthOfFusion2")
         Me.TextBoxEnthOfFusion2.Name = "TextBoxEnthOfFusion2"
-        Me.ToolTip1.SetToolTip(Me.TextBoxEnthOfFusion2, resources.GetString("TextBoxEnthOfFusion2.ToolTip"))
         '
         'CheckBoxEnthOfFusion
         '
@@ -3698,45 +3358,38 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.LabelWithDivider1, "LabelWithDivider1")
         Me.LabelWithDivider1.Gap = 5
         Me.LabelWithDivider1.Name = "LabelWithDivider1"
-        Me.ToolTip1.SetToolTip(Me.LabelWithDivider1, resources.GetString("LabelWithDivider1.ToolTip"))
         '
         'lblEnthOfFusionKJmol
         '
         resources.ApplyResources(Me.lblEnthOfFusionKJmol, "lblEnthOfFusionKJmol")
         Me.lblEnthOfFusionKJmol.Name = "lblEnthOfFusionKJmol"
-        Me.ToolTip1.SetToolTip(Me.lblEnthOfFusionKJmol, resources.GetString("lblEnthOfFusionKJmol.ToolTip"))
         '
         'Label52
         '
         resources.ApplyResources(Me.Label52, "Label52")
         Me.Label52.Name = "Label52"
-        Me.ToolTip1.SetToolTip(Me.Label52, resources.GetString("Label52.ToolTip"))
         '
         'TextBoxEnthOfFusion
         '
-        resources.ApplyResources(Me.TextBoxEnthOfFusion, "TextBoxEnthOfFusion")
         Me.TextBoxEnthOfFusion.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxEnthOfFusion, "TextBoxEnthOfFusion")
         Me.TextBoxEnthOfFusion.Name = "TextBoxEnthOfFusion"
-        Me.ToolTip1.SetToolTip(Me.TextBoxEnthOfFusion, resources.GetString("TextBoxEnthOfFusion.ToolTip"))
         '
         'TextBoxMeltingTemp
         '
-        resources.ApplyResources(Me.TextBoxMeltingTemp, "TextBoxMeltingTemp")
         Me.TextBoxMeltingTemp.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.TextBoxMeltingTemp, "TextBoxMeltingTemp")
         Me.TextBoxMeltingTemp.Name = "TextBoxMeltingTemp"
-        Me.ToolTip1.SetToolTip(Me.TextBoxMeltingTemp, resources.GetString("TextBoxMeltingTemp.ToolTip"))
         '
         'Label55
         '
         resources.ApplyResources(Me.Label55, "Label55")
         Me.Label55.Name = "Label55"
-        Me.ToolTip1.SetToolTip(Me.Label55, resources.GetString("Label55.ToolTip"))
         '
         'lblMeltingTemp
         '
         resources.ApplyResources(Me.lblMeltingTemp, "lblMeltingTemp")
         Me.lblMeltingTemp.Name = "lblMeltingTemp"
-        Me.ToolTip1.SetToolTip(Me.lblMeltingTemp, resources.GetString("lblMeltingTemp.ToolTip"))
         '
         'CheckBoxMeltingTemp
         '
@@ -3751,7 +3404,6 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.TextBoxID, "TextBoxID")
         Me.TextBoxID.Name = "TextBoxID"
-        Me.ToolTip1.SetToolTip(Me.TextBoxID, resources.GetString("TextBoxID.ToolTip"))
         '
         'GroupBox3
         '
@@ -3760,24 +3412,21 @@ Partial Class FormCompoundCreator
         Me.GroupBox3.Controls.Add(Me.cbUnits)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
-        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'cbUnits
         '
-        resources.ApplyResources(Me.cbUnits, "cbUnits")
         Me.cbUnits.BackColor = System.Drawing.Color.White
         Me.cbUnits.DropDownHeight = 200
         Me.cbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbUnits.DropDownWidth = 300
         Me.cbUnits.FormattingEnabled = True
+        resources.ApplyResources(Me.cbUnits, "cbUnits")
         Me.cbUnits.Name = "cbUnits"
-        Me.ToolTip1.SetToolTip(Me.cbUnits, resources.GetString("cbUnits.ToolTip"))
         '
         'DBOpenDlg
         '
@@ -3786,46 +3435,44 @@ Partial Class FormCompoundCreator
         '
         'StatusStrip1
         '
-        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.ToolStripStatusDWSIM, Me.ToolStripSpace1, ToolStripLabel2, Me.ToolStripStatusUserDB})
+        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.ToolTip1.SetToolTip(Me.StatusStrip1, resources.GetString("StatusStrip1.ToolTip"))
         '
         'ToolStripLabel1
         '
-        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
         '
         'ToolStripStatusDWSIM
         '
-        resources.ApplyResources(Me.ToolStripStatusDWSIM, "ToolStripStatusDWSIM")
         Me.ToolStripStatusDWSIM.BackColor = System.Drawing.Color.Green
         Me.ToolStripStatusDWSIM.ForeColor = System.Drawing.Color.White
         Me.ToolStripStatusDWSIM.Name = "ToolStripStatusDWSIM"
+        resources.ApplyResources(Me.ToolStripStatusDWSIM, "ToolStripStatusDWSIM")
         '
         'ToolStripSpace1
         '
-        resources.ApplyResources(Me.ToolStripSpace1, "ToolStripSpace1")
         Me.ToolStripSpace1.Name = "ToolStripSpace1"
+        resources.ApplyResources(Me.ToolStripSpace1, "ToolStripSpace1")
         '
         'ToolStripStatusUserDB
         '
-        resources.ApplyResources(Me.ToolStripStatusUserDB, "ToolStripStatusUserDB")
         Me.ToolStripStatusUserDB.BackColor = System.Drawing.Color.Green
         Me.ToolStripStatusUserDB.ForeColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.ToolStripStatusUserDB, "ToolStripStatusUserDB")
         Me.ToolStripStatusUserDB.Name = "ToolStripStatusUserDB"
         '
         'ComboBox1
         '
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.BackColor = System.Drawing.Color.White
         Me.ComboBox1.DropDownHeight = 200
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 300
         Me.ComboBox1.FormattingEnabled = True
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5"), resources.GetString("ComboBox1.Items6"), resources.GetString("ComboBox1.Items7"), resources.GetString("ComboBox1.Items8"), resources.GetString("ComboBox1.Items9"), resources.GetString("ComboBox1.Items10"), resources.GetString("ComboBox1.Items11"), resources.GetString("ComboBox1.Items12"), resources.GetString("ComboBox1.Items13"), resources.GetString("ComboBox1.Items14"), resources.GetString("ComboBox1.Items15"), resources.GetString("ComboBox1.Items16"), resources.GetString("ComboBox1.Items17"), resources.GetString("ComboBox1.Items18"), resources.GetString("ComboBox1.Items19"), resources.GetString("ComboBox1.Items20"), resources.GetString("ComboBox1.Items21"), resources.GetString("ComboBox1.Items22"), resources.GetString("ComboBox1.Items23"), resources.GetString("ComboBox1.Items24"), resources.GetString("ComboBox1.Items25"), resources.GetString("ComboBox1.Items26"), resources.GetString("ComboBox1.Items27"), resources.GetString("ComboBox1.Items28"), resources.GetString("ComboBox1.Items29"), resources.GetString("ComboBox1.Items30"), resources.GetString("ComboBox1.Items31"), resources.GetString("ComboBox1.Items32")})
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ToolTip1.SetToolTip(Me.ComboBox1, resources.GetString("ComboBox1.ToolTip"))
         '
         'FormCompoundCreator
         '
@@ -3836,7 +3483,6 @@ Partial Class FormCompoundCreator
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FormCompoundCreator"
-        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)

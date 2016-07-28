@@ -36,6 +36,25 @@
 
     End Class
 
+    Public Enum UndoRedoActionType
+        SimulationObjectPropertyChanged = 0
+        FlowsheetObjectPropertyChanged = 1
+        FlowsheetObjectConnected = 2
+        FlowsheetObjectDisconnected = 3
+        ObjectAdded = 4
+        ObjectRemoved = 5
+        SystemOfUnitsAdded = 6
+        SystemOfUnitsRemoved = 7
+        SystemOfUnitsChanged = 8
+        CompoundAdded = 9
+        CompoundRemoved = 10
+        PropertyPackagePropertyChanged = 11
+        PropertyPackageAdded = 12
+        PropertyPackageRemoved = 13
+        CutObjects = 14
+        PasteObjects = 15
+    End Enum
+
     Public Enum FlowsheetUtility
         PhaseEnvelope = 0
         PhaseEnvelopeBinary = 1

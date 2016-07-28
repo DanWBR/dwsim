@@ -1050,6 +1050,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
+        If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
     End Sub
 
@@ -1400,6 +1401,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                         Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
                         Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
                         Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+                        Me.Collections.GraphicObjectCollection.Remove(namesel)
                         Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
 
                     Else
@@ -1455,6 +1457,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
 
                             Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+                            Me.Collections.GraphicObjectCollection.Remove(namesel)
 
                             If gobj.ObjectType = ObjectType.OT_Spec Then
                                 Dim specobj As Spec = Me.Collections.FlowsheetObjectCollection(namesel)
@@ -2554,7 +2557,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     End Sub
 
-    Sub AddUndoRedoAction(act As UndoRedoAction)
+    Sub AddUndoRedoAction(act As Interfaces.IUndoRedoAction) Implements Interfaces.IFlowsheet.AddUndoRedoAction
 
         If Me.MasterFlowsheet Is Nothing Then
 
@@ -2949,7 +2952,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface
-        Me.UIThread(Sub() Me.FormSurface.FlowsheetDesignSurface.Invalidate())
+
+        Me.UIThread(Sub()
+                        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+                    End Sub)
     End Sub
 
     Public ReadOnly Property UtilityPlugins As Dictionary(Of String, IUtilityPlugin) Implements IFlowsheet.UtilityPlugins
@@ -2972,5 +2978,33 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Private Sub PropriedadesDasSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropriedadesDasSubstânciasToolStripMenuItem.Click
         Dim frmpc As New FormPureComp With {.Flowsheet = Me}
         frmpc.ShowDialog(Me)
+    End Sub
+
+    Public Sub UpdateInformation() Implements IFlowsheetGUI.UpdateInformation
+
+        Me.UIThread(Sub()
+
+                        If Me.Visible And Me.MasterFlowsheet Is Nothing Then
+
+                            Me.FormWatch.UpdateList()
+
+                            For Each g As IGraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects
+                                If g.ObjectType = ObjectType.GO_MasterTable Then
+                                    CType(g, MasterTableGraphic).Update()
+                                End If
+                            Next
+
+                            If Not Me.FormSpreadsheet Is Nothing Then
+                                If Me.FormSpreadsheet.chkUpdate.Checked Then
+                                    Me.FormSpreadsheet.EvaluateAll()
+                                    Me.FormSpreadsheet.EvaluateAll()
+                                End If
+                            End If
+
+                            Application.DoEvents()
+
+                        End If
+
+                    End Sub)
     End Sub
 End Class
