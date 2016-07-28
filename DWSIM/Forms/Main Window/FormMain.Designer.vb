@@ -60,6 +60,7 @@ Partial Class FormMain
         Me.DocumentacaoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualTecnicoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GuiaDoUsuarioToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GuiaDoUsuarioHTMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.DWSIMNaInternetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DownloadsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -316,7 +317,7 @@ Partial Class FormMain
         '
         'DocumentacaoToolStripMenuItem
         '
-        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTecnicoToolStripMenuItem, Me.GuiaDoUsuarioToolStripMenuItem})
+        Me.DocumentacaoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualTecnicoToolStripMenuItem, Me.GuiaDoUsuarioToolStripMenuItem, Me.GuiaDoUsuarioHTMLToolStripMenuItem})
         Me.DocumentacaoToolStripMenuItem.Name = "DocumentacaoToolStripMenuItem"
         resources.ApplyResources(Me.DocumentacaoToolStripMenuItem, "DocumentacaoToolStripMenuItem")
         '
@@ -331,6 +332,12 @@ Partial Class FormMain
         Me.GuiaDoUsuarioToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white_acrobat
         Me.GuiaDoUsuarioToolStripMenuItem.Name = "GuiaDoUsuarioToolStripMenuItem"
         resources.ApplyResources(Me.GuiaDoUsuarioToolStripMenuItem, "GuiaDoUsuarioToolStripMenuItem")
+        '
+        'GuiaDoUsuarioHTMLToolStripMenuItem
+        '
+        Me.GuiaDoUsuarioHTMLToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_world
+        Me.GuiaDoUsuarioHTMLToolStripMenuItem.Name = "GuiaDoUsuarioHTMLToolStripMenuItem"
+        resources.ApplyResources(Me.GuiaDoUsuarioHTMLToolStripMenuItem, "GuiaDoUsuarioHTMLToolStripMenuItem")
         '
         'toolStripSeparator5
         '
@@ -939,5 +946,6 @@ Partial Class FormMain
     Friend WithEvents ErrorBox_Button1 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents ErrorBox_Label1 As System.Windows.Forms.Label
+    Friend WithEvents GuiaDoUsuarioHTMLToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

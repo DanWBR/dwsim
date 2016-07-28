@@ -2809,4 +2809,17 @@ ruf:                Application.DoEvents()
         f.ShowDialog(Me)
     End Sub
 
+    Private Sub GuiaDoUsuarioHTMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GuiaDoUsuarioHTMLToolStripMenuItem.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide" & Path.DirectorySeparatorChar & "user_guide.html"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide" & Path.DirectorySeparatorChar & "user_guide.html")
+        End If
+    End Sub
 End Class
