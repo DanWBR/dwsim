@@ -802,15 +802,52 @@ Public Class MaterialStreamEditor
 
     Sub UpdateProps(sender As Object)
 
+        Dim oldvalue, newvalue As Double, propname As String = ""
+
         With MatStream.Phases(0).Properties
 
-            If sender Is tbTemp Then .temperature = Converter.ConvertToSI(cbUnitsT.SelectedItem.ToString, Double.Parse(tbTemp.Text))
-            If sender Is tbPressure Then .pressure = Converter.ConvertToSI(cbUnitsP.SelectedItem.ToString, Double.Parse(tbPressure.Text))
-            If sender Is tbMassFlow Then .massflow = Converter.ConvertToSI(cbUnitsW.SelectedItem.ToString, Double.Parse(tbMassFlow.Text))
-            If sender Is tbMoleFlow Then .molarflow = Converter.ConvertToSI(cbUnitsM.SelectedItem.ToString, Double.Parse(tbMoleFlow.Text))
-            If sender Is tbVolFlow Then .volumetric_flow = Converter.ConvertToSI(cbUnitsQ.SelectedItem.ToString, Double.Parse(tbVolFlow.Text))
-            If sender Is tbEnth Then .enthalpy = Converter.ConvertToSI(cbUnitsH.SelectedItem.ToString, Double.Parse(tbEnth.Text))
-            If sender Is tbEntr Then .entropy = Converter.ConvertToSI(cbUnitsS.SelectedItem.ToString, Double.Parse(tbEntr.Text))
+            If sender Is tbTemp Then
+                oldvalue = .temperature.GetValueOrDefault
+                .temperature = Converter.ConvertToSI(cbUnitsT.SelectedItem.ToString, Double.Parse(tbTemp.Text))
+                newvalue = .temperature.GetValueOrDefault
+                propname = "PROP_MS_0"
+            End If
+            If sender Is tbPressure Then
+                oldvalue = .pressure.GetValueOrDefault
+                .pressure = Converter.ConvertToSI(cbUnitsP.SelectedItem.ToString, Double.Parse(tbPressure.Text))
+                newvalue = .pressure.GetValueOrDefault
+                propname = "PROP_MS_1"
+            End If
+            If sender Is tbMassFlow Then
+                oldvalue = .massflow.GetValueOrDefault
+                .massflow = Converter.ConvertToSI(cbUnitsW.SelectedItem.ToString, Double.Parse(tbMassFlow.Text))
+                newvalue = .massflow.GetValueOrDefault
+                propname = "PROP_MS_2"
+            End If
+            If sender Is tbMoleFlow Then
+                oldvalue = .molarflow.GetValueOrDefault
+                .molarflow = Converter.ConvertToSI(cbUnitsM.SelectedItem.ToString, Double.Parse(tbMoleFlow.Text))
+                newvalue = .molarflow.GetValueOrDefault
+                propname = "PROP_MS_3"
+            End If
+            If sender Is tbVolFlow Then
+                oldvalue = .volumetric_flow.GetValueOrDefault
+                .volumetric_flow = Converter.ConvertToSI(cbUnitsQ.SelectedItem.ToString, Double.Parse(tbVolFlow.Text))
+                newvalue = .volumetric_flow.GetValueOrDefault
+                propname = "PROP_MS_4"
+            End If
+            If sender Is tbEnth Then
+                oldvalue = .enthalpy.GetValueOrDefault
+                .enthalpy = Converter.ConvertToSI(cbUnitsH.SelectedItem.ToString, Double.Parse(tbEnth.Text))
+                newvalue = .enthalpy.GetValueOrDefault
+                propname = "PROP_MS_7"
+            End If
+            If sender Is tbEntr Then
+                oldvalue = .entropy.GetValueOrDefault
+                .entropy = Converter.ConvertToSI(cbUnitsS.SelectedItem.ToString, Double.Parse(tbEntr.Text))
+                newvalue = .entropy.GetValueOrDefault
+                propname = "PROP_MS_8"
+            End If
 
         End With
 
@@ -822,6 +859,14 @@ Public Class MaterialStreamEditor
             MatStream.Phases(7).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
         End If
 
+        MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,
+                                                                .ObjID = MatStream.Name,
+                                                                .OldValue = oldvalue,
+                                                                .NewValue = newvalue,
+                                                                .PropertyName = propname,
+                                                                .Tag = MatStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem,
+                                                                .Name = String.Format(MatStream.FlowSheet.GetTranslatedString("UndoRedo_FlowsheetObjectPropertyChanged"), MatStream.GraphicObject.Tag, MatStream.FlowSheet.GetTranslatedString(.PropertyName), .OldValue, .NewValue)})
+        
         RequestCalc()
 
     End Sub

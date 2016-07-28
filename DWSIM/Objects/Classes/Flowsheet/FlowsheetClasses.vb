@@ -29,39 +29,6 @@ Namespace DWSIM.Flowsheet
         Tip
     End Enum
 
-    Public Enum UndoRedoActionType
-        SimulationObjectPropertyChanged = 0
-        FlowsheetObjectPropertyChanged = 1
-        FlowsheetObjectConnected = 2
-        FlowsheetObjectDisconnected = 3
-        ObjectAdded = 4
-        ObjectRemoved = 5
-        SystemOfUnitsAdded = 6
-        SystemOfUnitsRemoved = 7
-        SystemOfUnitsChanged = 8
-        CompoundAdded = 9
-        CompoundRemoved = 10
-        PropertyPackagePropertyChanged = 11
-        PropertyPackageAdded = 12
-        PropertyPackageRemoved = 13
-        CutObjects = 14
-        PasteObjects = 15
-    End Enum
-
-    <System.Serializable()> Public Class UndoRedoAction
-
-        Property ID As String = ""
-        Property Name As String = ""
-        Property AType As UndoRedoActionType
-        Property ObjID As String = ""
-        Property ObjID2 As String = ""
-        Property OldValue As Object = Nothing
-        Property NewValue As Object = Nothing
-        Property Tag As Object = Nothing
-        Property PropertyName As String = ""
-
-    End Class
-
     <System.Serializable()> Public Class ObjectCollection
 
         Public GraphicObjectCollection As Dictionary(Of String, GraphicObject)

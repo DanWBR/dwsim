@@ -2648,7 +2648,7 @@ Public Class FlowsheetSurface
                 FlowsheetSolver.FlowsheetSolver.CalculateObject(Me.Flowsheet, gObj.Name)
             End If
             Application.DoEvents()
-            If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New DWSIM.Flowsheet.UndoRedoAction() With {.AType = DWSIM.Flowsheet.UndoRedoActionType.ObjectAdded,
+            If My.Application.PushUndoRedoAction Then Flowsheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = UndoRedoActionType.ObjectAdded,
                                      .ObjID = gObj.Name,
                                      .NewValue = gObj,
                                      .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectAdded"), gObj.Tag)})
