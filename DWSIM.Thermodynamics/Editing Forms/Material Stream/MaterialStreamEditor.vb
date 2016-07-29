@@ -804,6 +804,17 @@ Public Class MaterialStreamEditor
 
         Dim oldvalue, newvalue As Double, propname As String = ""
 
+        If sender Is tbMassFlow Then
+            MatStream.Phases(0).Properties.molarflow = Nothing
+            MatStream.Phases(0).Properties.volumetric_flow = Nothing
+        ElseIf sender Is tbMoleFlow Then
+            MatStream.Phases(0).Properties.massflow = Nothing
+            MatStream.Phases(0).Properties.volumetric_flow = Nothing
+        ElseIf sender Is tbVolFlow Then
+            MatStream.Phases(0).Properties.massflow = Nothing
+            MatStream.Phases(0).Properties.molarflow = Nothing
+        End If
+
         With MatStream.Phases(0).Properties
 
             If sender Is tbTemp Then
