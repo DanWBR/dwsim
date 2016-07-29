@@ -329,30 +329,7 @@ Public Class EditingForm_Column
 
     Sub UpdateProps(sender As Object)
 
-        'If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
-        'If sender Is tbOutletPressure Then SimObject.OutletPressure = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text)
-
-        RequestCalc()
-
-    End Sub
-
-    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-        'If Loaded Then
-        '    Try
-        '        If sender Is cbTemp Then
-        '            tbOutletTemperature.Text = su.Converter.Convert(cbTemp.SelectedItem.ToString, units.temperature, Double.Parse(tbOutletTemperature.Text)).ToString(nf)
-        '            cbTemp.SelectedItem = units.temperature
-        '            UpdateProps(tbOutletTemperature)
-        '        ElseIf sender Is cbPressure Then
-        '            tbOutletPressure.Text = su.Converter.Convert(cbPressure.SelectedItem.ToString, units.pressure, Double.Parse(tbOutletPressure.Text)).ToString(nf)
-        '            cbPressure.SelectedItem = units.pressure
-        '            UpdateProps(tbOutletPressure)
-        '        End If
-        '    Catch ex As Exception
-        '        SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
-        '    End Try
-        'End If
+         RequestCalc()
 
     End Sub
 

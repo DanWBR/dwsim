@@ -852,11 +852,20 @@ Public Class MaterialStreamEditor
         End With
 
         If sender Is tbFracSpec And rbSpecVapor.Checked Then
+            oldvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             MatStream.Phases(2).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
+            newvalue = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
+            propname = "PROP_MS_27"
         ElseIf sender Is tbFracSpec And rbSpecLiquid.Checked Then
+            oldvalue = 1.0# - MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             MatStream.Phases(2).Properties.molarfraction = 1.0# - Double.Parse(tbFracSpec.Text)
+            newvalue = 1.0# - MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault
+            propname = "PROP_MS_27"
         ElseIf sender Is tbFracSpec And rbSpecSolid.Checked Then
+            oldvalue = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault
             MatStream.Phases(7).Properties.molarfraction = Double.Parse(tbFracSpec.Text)
+            newvalue = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault
+            propname = "PROP_MS_146"
         End If
 
         MatStream.FlowSheet.AddUndoRedoAction(New SharedClasses.UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SimulationObjectPropertyChanged,

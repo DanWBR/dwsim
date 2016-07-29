@@ -3277,8 +3277,51 @@ Public Class FlowsheetSurface
                 Case ObjectType.GO_MasterTable
                     Dim f As New FormConfigureMasterTable() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
                     f.ShowDialog(Me)
+                Case ObjectType.FlowsheetUO
+                    Dim myobj As UnitOperations.UnitOperations.Flowsheet = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    If My.Computer.Keyboard.ShiftKeyDown Then
+                        Dim viewform As New unitoperations.EditingForm_Flowsheet_Viewer
+                        With viewform
+                            .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                            .fsuo = myobj
+                            .ShowDialog()
+                            .Dispose()
+                        End With
+                        viewform = Nothing
+                    Else
+                        If myobj.Initialized Then
+                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
+                            With viewform
+                                .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                                .fsuo = myobj
+                                .Show(Flowsheet.dckPanel)
+                            End With
+                        Else
+                            Dim viewform As New UnitOperations.EditingForm_Flowsheet_Editor
+                            With viewform
+                                .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
+                                .fsuo = myobj
+                                .ShowDialog()
+                                .Dispose()
+                            End With
+                            viewform = Nothing
+                        End If
+                    End If
+                Case ObjectType.CapeOpenUO
+                    Dim myobj As CapeOpenUO = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    myobj.Edit()
+                Case ObjectType.CustomUO
+                    Dim myobj As CustomUO = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
+                    If Not DWSIM.App.IsRunningOnMono Then
+                        Dim f As New EditingForm_CustomUO_ScriptEditor With {.ScriptUO = myobj}
+                        myobj.FlowSheet.DisplayForm(f)
+                    Else
+                         Dim f As New EditingForm_CustomUO_ScriptEditor_Mono With {.ScriptUO = myobj}
+                        myobj.FlowSheet.DisplayForm(f)
+                    End If
             End Select
         End If
+
     End Sub
 
     Private Sub EditarAparênciaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EditAppearanceToolStripMenuItem.Click

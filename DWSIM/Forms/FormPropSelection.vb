@@ -72,11 +72,11 @@ Public Class FormPropSelection
             Select Case TreeView1.SelectedNode.Index
                 Case 0
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = MaterialStream And obj.InputConnectors(0).IsAttached = False Then .Add(obj.Name, obj.Tag).Tag = obj.Name
+                        If obj.ObjectType = MaterialStream Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 1
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
-                        If obj.ObjectType = EnergyStream And obj.InputConnectors(0).IsAttached = False Then .Add(obj.Name, obj.Tag).Tag = obj.Name
+                        If obj.ObjectType = EnergyStream Then .Add(obj.Name, obj.Tag).Tag = obj.Name
                     Next
                 Case 2
                     For Each obj In formC.Collections.GraphicObjectCollection.Values
