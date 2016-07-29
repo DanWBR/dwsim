@@ -120,14 +120,26 @@
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Perdas de Informação</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Problemas podem ocorrer durante a conversão da simulação, tais como perda de propriedades de alguns tipos de objetos, configurações de Pacotes de Propriedades e Algortimo Flash, entre outros.
+
+Caso ocorra alguma incompatibilidade, você poderá manter uma instalação do DWSIM 3 em paralelo para trabalhar com suas simulações antigas.</value>
+  </data>
   <data name="&gt;&gt;chkDoNotShowAgain.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Scripts IronPython</value>
   </data>
-  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 159</value>
+  </data>
+  <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="LabelVersion.AutoSize" type="System.Boolean, mscorlib">
@@ -142,34 +154,42 @@
   <data name="&gt;&gt;Button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormUpgradeWarning</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 257</value>
+    <value>537, 360</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="chkDoNotShowAgain.Text" xml:space="preserve">
     <value>Não mostrar essa mensagem novamente</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 134</value>
+    <value>21, 235</value>
   </data>
-  <data name="LabelVersion.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Aviso de incompatibilidade</value>
   </data>
   <data name="LabelVersion.Text" xml:space="preserve">
     <value>Você está abrindo uma simulação salva com o DWSIM versão </value>
@@ -199,7 +219,7 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="Button1.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
@@ -207,6 +227,12 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 13</value>
   </data>
   <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -225,9 +251,6 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   </data>
   <data name="chkDoNotShowAgain.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>-9, 50</value>
@@ -250,6 +273,9 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>AutoSize</value>
   </data>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Os scripts em IronPython deverão ser atualizados para refletir as mudanças na API do DWSIM. Consulte a ajuda e o Wiki para mais detalhes.</value>
   </data>
@@ -262,17 +288,17 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="PictureBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
-  <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
-    <value>Panel1</value>
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
   </data>
   <data name="&gt;&gt;LabelVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 71</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormUpgradeWarning</value>
+  <data name="Label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
     <value>PictureBox1</value>
@@ -280,11 +306,17 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
+  <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 156</value>
+    <value>21, 257</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -298,26 +330,35 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>646, 201</value>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 135</value>
+  </data>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;chkDoNotShowAgain.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Aviso de incompatibilidade</value>
-  </data>
   <data name="&gt;&gt;LabelVersion.Name" xml:space="preserve">
     <value>LabelVersion</value>
+  </data>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;LabelVersion.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
+  </data>
+  <data name="LabelVersion.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>600, 38</value>
@@ -328,8 +369,23 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="&gt;&gt;PictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>646, 299</value>
+  </data>
   <data name="chkDoNotShowAgain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 263</value>
+    <value>15, 366</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -338,7 +394,7 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
     <value>chkDoNotShowAgain</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>624, 292</value>
+    <value>624, 395</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>600, 126</value>
@@ -346,8 +402,14 @@ O DWSIM só altera o arquivo de simulação ao salvar modificações. Não são 
   <data name="Label3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

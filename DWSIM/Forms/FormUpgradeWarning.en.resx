@@ -119,7 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>537, 259</value>
+    <value>537, 350</value>
+  </data>
+  <data name="chkDoNotShowAgain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 354</value>
   </data>
   <data name="chkDoNotShowAgain.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 17</value>
@@ -147,16 +150,39 @@ If you do not update the simulation file, it still will be usable by both DWSIM 
 DWSIM only updates the simulation file during saving. No changes are made when opening the file or during simulation operations.</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 146</value>
+    <value>21, 243</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>IronPython scripts must be updated to reflect the API changes from DWSIM 3 to DWSIM 4. Please refer to the help file or DWSIM's wiki for more information.</value>
   </data>
   <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 120</value>
+    <value>21, 218</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>IronPython Scripts</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 141</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Some problems may arise during data conversion like: object property data loss, property package and flash algorithm configuration loss and corruption, and others.
+
+If your simulation has issues after loading in DWSIM 4, you can keep a DWSIM 3 installation side-by-side on your computer to continue working with your older simulation files.</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 116</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 13</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Conversion Issues</value>
+  </data>
+  <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>646, 289</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>624, 385</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM Version Compatibility Warning</value>
