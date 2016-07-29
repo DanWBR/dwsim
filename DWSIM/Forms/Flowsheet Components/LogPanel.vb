@@ -98,10 +98,11 @@ Public Class LogPanel
 
         If Me.Grid1.Rows.Count > 0 Then
             Me.Grid1.ClearSelection()
-            Me.Grid1.Rows(Me.Grid1.Rows.Count - 1).Selected = True
+            Me.Grid1.Rows(0).Selected = True
             Try
-                Me.Grid1.FirstDisplayedScrollingRowIndex = Me.Grid1.Rows.Count - 1
+                Me.Grid1.FirstDisplayedScrollingRowIndex = 0
             Catch ex As Exception
+
             End Try
         End If
 
@@ -113,17 +114,7 @@ Public Class LogPanel
         Catch ex As Exception
         End Try
 
-        Try
-            Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Ascending)
-        Catch ex As Exception
-
-        End Try
-
-        Try
-            Grid1.FirstDisplayedScrollingRowIndex = Grid1.RowCount - 1
-        Catch ex As Exception
-
-        End Try
+        If DWSIM.App.IsRunningOnMono Then Grid1.Sort(Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
 
     End Sub
 

@@ -123,9 +123,6 @@
   <data name="Button2.Text" xml:space="preserve">
     <value>Start Bulk C7+ Petroleum Characterization Utility</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 13</value>
@@ -138,6 +135,9 @@
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Apply the following formatting to numerical values:</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Misc</value>
   </data>
   <data name="TBdesc.Text" xml:space="preserve">
     <value>description</value>
@@ -166,12 +166,6 @@
   <data name="Label27.Text" xml:space="preserve">
     <value>Title:</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Units</value>
-  </data>
-  <data name="GroupBox18.Text" xml:space="preserve">
-    <value>Tasks</value>
-  </data>
   <data name="KryptonButton23.Text" xml:space="preserve">
     <value>Save to File</value>
   </data>
@@ -183,6 +177,9 @@
   </data>
   <data name="KryptonButton15.Text" xml:space="preserve">
     <value>Create New...</value>
+  </data>
+  <data name="GroupBox18.Text" xml:space="preserve">
+    <value>Tasks</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -202,12 +199,15 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Units</value>
+  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAbgBCgG4AQoBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAcABCgHAAQoBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -486,9 +486,6 @@
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Components Selected</value>
   </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
   <data name="KryptonButton2.Text" xml:space="preserve">
     <value>Sort list&gt;</value>
   </data>
@@ -504,6 +501,9 @@
   <data name="KryptonButton6.Text" xml:space="preserve">
     <value>Add&gt;</value>
   </data>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Components</value>
   </data>
@@ -515,9 +515,6 @@
   </data>
   <data name="chkUsePassword.Text" xml:space="preserve">
     <value>Protect with Password</value>
-  </data>
-  <data name="GroupBox13.Text" xml:space="preserve">
-    <value>Added Flash Algorithms</value>
   </data>
   <data name="btnDeleteFA.Text" xml:space="preserve">
     <value>Delete</value>
@@ -534,8 +531,8 @@
   <data name="DataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="GroupBox11.Text" xml:space="preserve">
-    <value>Available Flash Algorithms</value>
+  <data name="GroupBox13.Text" xml:space="preserve">
+    <value>Added Flash Algorithms</value>
   </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -550,8 +547,8 @@
   <data name="btnAddFA.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Added Property Packages</value>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Available Flash Algorithms</value>
   </data>
   <data name="btnDeletePP.Text" xml:space="preserve">
     <value>Delete</value>
@@ -568,8 +565,8 @@
   <data name="Column17.HeaderText" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Available Property Packages</value>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Added Property Packages</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -582,6 +579,9 @@
   </data>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Available Property Packages</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>XML File|*.xml|All files|*.*</value>
@@ -625,17 +625,11 @@
   <data name="TabPage4.Text" xml:space="preserve">
     <value>System of Units</value>
   </data>
-  <data name="TabPage5.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="TabPage6.Text" xml:space="preserve">
-    <value>Floating Tables</value>
-  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="GroupBox14.Text" xml:space="preserve">
-    <value>Property Tables</value>
+  <data name="TabPage5.Text" xml:space="preserve">
+    <value>Misc</value>
   </data>
   <data name="btnClearSelection.Text" xml:space="preserve">
     <value>Clear Selection</value>
@@ -654,6 +648,12 @@
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Select the properties to show on Floating Property Tables according to object type.</value>
+  </data>
+  <data name="GroupBox14.Text" xml:space="preserve">
+    <value>Property Tables</value>
+  </data>
+  <data name="TabPage6.Text" xml:space="preserve">
+    <value>Floating Tables</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 25</value>

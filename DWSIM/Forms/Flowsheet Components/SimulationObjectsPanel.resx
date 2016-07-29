@@ -137,17 +137,15 @@
   <data name="Panel7.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 79</value>
   </data>
-  <data name="&gt;&gt;SplitContainer2.Name" xml:space="preserve">
-    <value>SplitContainer2</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PanelUnitOps.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
-    <value>SplitContainer2.Panel2</value>
-  </data>
-  <data name="Label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
+    <value>Panel3</value>
   </data>
   <data name="&gt;&gt;Panel8.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -155,22 +153,16 @@
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="PanelUnitOps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>556, 233</value>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>SplitContainer3.Panel1</value>
   </data>
   <data name="Panel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="Panel8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
   </data>
   <data name="&gt;&gt;Panel4.Name" xml:space="preserve">
     <value>Panel4</value>
   </data>
   <data name="Panel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="PanelLogicalOps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
@@ -185,16 +177,19 @@
   <data name="Label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="&gt;&gt;PanelLogicalOps.Name" xml:space="preserve">
-    <value>PanelLogicalOps</value>
-  </data>
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>558, 510</value>
+  <data name="&gt;&gt;SplitContainer2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+  <data name="Label2.Text" xml:space="preserve">
+    <value>OPERAÇÕES UNITÁRIAS</value>
+  </data>
+  <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 510</value>
   </data>
   <data name="&gt;&gt;Panel7.ZOrder" xml:space="preserve">
@@ -209,8 +204,8 @@
   <data name="SplitContainer3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>BLOCOS LÓGICOS</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -218,14 +213,11 @@
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;SplitContainer2.Name" xml:space="preserve">
+    <value>SplitContainer2</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Object Palette</value>
-  </data>
-  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
-    <value>Panel1</value>
   </data>
   <data name="Panel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -236,13 +228,15 @@
   <data name="&gt;&gt;Panel6.Parent" xml:space="preserve">
     <value>Panel5</value>
   </data>
+  <data name="PanelCustomOps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>556, 54</value>
+  </data>
   <data name="&gt;&gt;Panel4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PanelLogicalOps.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -261,20 +255,11 @@
   <data name="&gt;&gt;SplitContainer3.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;PanelCustomOps.Parent" xml:space="preserve">
-    <value>Panel8</value>
-  </data>
   <data name="PanelCustomOps.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 23</value>
   </data>
-  <data name="&gt;&gt;Panel8.Name" xml:space="preserve">
-    <value>Panel8</value>
-  </data>
-  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;PanelCustomOps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SplitContainer2.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -291,6 +276,9 @@
   <data name="&gt;&gt;SplitContainer3.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;SplitContainer1.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="SplitContainer2.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 165</value>
   </data>
@@ -300,8 +288,8 @@
   <data name="SplitContainer2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;PanelCustomOps.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>CORRENTES</value>
   </data>
   <data name="Panel4.Size" type="System.Drawing.Size, System.Drawing">
     <value>556, 256</value>
@@ -324,11 +312,8 @@
   <data name="PanelLogicalOps.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;PanelLogicalOps.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Panel8.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -347,12 +332,6 @@
   </data>
   <data name="Panel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="Panel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>556, 77</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>BLOCOS CUSTOMIZÁVEIS</value>
   </data>
   <data name="Panel8.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -393,20 +372,17 @@
   <data name="SplitContainer3.SplitterDistance" type="System.Int32, mscorlib">
     <value>79</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>BLOCOS LÓGICOS</value>
-  </data>
   <data name="&gt;&gt;SplitContainer2.Panel2.Parent" xml:space="preserve">
     <value>SplitContainer2</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>558, 79</value>
   </data>
-  <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
-    <value>SplitContainer2.Panel1</value>
+  <data name="&gt;&gt;PanelCustomOps.Parent" xml:space="preserve">
+    <value>Panel8</value>
   </data>
-  <data name="&gt;&gt;PanelCustomOps.Name" xml:space="preserve">
-    <value>PanelCustomOps</value>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>Panel2</value>
   </data>
   <data name="Label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -429,6 +405,9 @@
   <data name="&gt;&gt;Panel6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;Panel8.Name" xml:space="preserve">
+    <value>Panel8</value>
+  </data>
   <data name="Panel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -441,17 +420,23 @@
   <data name="&gt;&gt;SplitContainer1.Panel2.Name" xml:space="preserve">
     <value>SplitContainer1.Panel2</value>
   </data>
+  <data name="&gt;&gt;Panel8.Parent" xml:space="preserve">
+    <value>Panel7</value>
+  </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>Panel2</value>
+  <data name="&gt;&gt;PanelCustomOps.Name" xml:space="preserve">
+    <value>PanelCustomOps</value>
   </data>
   <data name="PanelCustomOps.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 82</value>
   </data>
   <data name="Label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -462,14 +447,14 @@
   <data name="&gt;&gt;SplitContainer1.Panel2.Parent" xml:space="preserve">
     <value>SplitContainer1</value>
   </data>
-  <data name="PanelUnitOps.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;SplitContainer3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Panel7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -479,6 +464,9 @@
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>341</value>
+  </data>
+  <data name="&gt;&gt;SplitContainer3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SplitContainer3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -498,23 +486,26 @@
   <data name="&gt;&gt;SplitContainer2.Panel2.Name" xml:space="preserve">
     <value>SplitContainer2.Panel2</value>
   </data>
+  <data name="Label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
   <data name="&gt;&gt;SplitContainer2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelStreams.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="Panel3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="PanelCustomOps.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
+    <value>SplitContainer1.Panel1</value>
   </data>
   <data name="PanelUnitOps.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 23</value>
@@ -534,8 +525,11 @@
   <data name="&gt;&gt;PanelUnitOps.Parent" xml:space="preserve">
     <value>Panel4</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>CORRENTES</value>
+  <data name="PanelUnitOps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>556, 233</value>
+  </data>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>Panel8</value>
   </data>
   <data name="SplitContainer3.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -570,8 +564,8 @@
   <data name="&gt;&gt;SplitContainer3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;PanelUnitOps.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="PanelLogicalOps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="PanelLogicalOps.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 23</value>
@@ -579,14 +573,14 @@
   <data name="SplitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
-  <data name="&gt;&gt;Panel8.Parent" xml:space="preserve">
-    <value>Panel7</value>
+  <data name="Panel8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>556, 77</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="Panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="Panel5.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -594,8 +588,8 @@
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel5.Name" xml:space="preserve">
-    <value>Panel5</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;SplitContainer3.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -603,35 +597,32 @@
   <data name="&gt;&gt;PanelStreams.Type" xml:space="preserve">
     <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="Label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="SplitContainer3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>558, 341</value>
+  <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
   </data>
-  <data name="&gt;&gt;SplitContainer2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Panel5.Name" xml:space="preserve">
+    <value>Panel5</value>
+  </data>
+  <data name="&gt;&gt;PanelUnitOps.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;PanelUnitOps.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
-    <value>Panel3</value>
-  </data>
   <data name="SplitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="Label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;SplitContainer3.Name" xml:space="preserve">
+    <value>SplitContainer3</value>
   </data>
-  <data name="SplitContainer1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;PanelUnitOps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -642,23 +633,26 @@
   <data name="Panel7.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Panel7.Parent" xml:space="preserve">
+    <value>SplitContainer2.Panel2</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>556, 23</value>
   </data>
-  <data name="&gt;&gt;SplitContainer1.Panel1.Name" xml:space="preserve">
-    <value>SplitContainer1.Panel1</value>
+  <data name="&gt;&gt;PanelLogicalOps.Name" xml:space="preserve">
+    <value>PanelLogicalOps</value>
   </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>SplitContainer3.Panel1</value>
+  <data name="PanelStreams.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>Panel8</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>558, 510</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>OPERAÇÕES UNITÁRIAS</value>
+  <data name="&gt;&gt;PanelLogicalOps.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Panel5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -666,17 +660,20 @@
   <data name="Panel8.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;Panel3.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;SplitContainer2.Panel1.Name" xml:space="preserve">
+    <value>SplitContainer2.Panel1</value>
   </data>
-  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>BLOCOS CUSTOMIZÁVEIS</value>
+  </data>
+  <data name="&gt;&gt;Panel2.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="SplitContainer2.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
-  <data name="PanelCustomOps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>556, 54</value>
+  <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -687,11 +684,14 @@
   <data name="&gt;&gt;SplitContainer3.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>558, 82</value>
+  <data name="SplitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="Panel6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="SplitContainer3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>558, 341</value>
   </data>
   <data name="Label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -702,8 +702,8 @@
   <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;SplitContainer3.Name" xml:space="preserve">
-    <value>SplitContainer3</value>
+  <data name="Panel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="SplitContainer2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -712,9 +712,6 @@
     <value>Fill</value>
   </data>
   <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="PanelStreams.TabIndex" type="System.Int32, mscorlib">
@@ -729,11 +726,14 @@
   <data name="&gt;&gt;SplitContainer2.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SplitContainer2.Panel1.Name" xml:space="preserve">
-    <value>SplitContainer2.Panel1</value>
+  <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;Panel5.Parent" xml:space="preserve">
+    <value>SplitContainer2.Panel1</value>
   </data>
   <data name="SplitContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>

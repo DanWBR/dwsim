@@ -229,7 +229,7 @@ Partial Class SimulationObjectsPanel
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockTop) _
             Or WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom), WeifenLuo.WinFormsUI.Docking.DockAreas)
         Me.Name = "SimulationObjectsPanel"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRightAutoHide
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockRight
         Me.ShowIcon = False
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
