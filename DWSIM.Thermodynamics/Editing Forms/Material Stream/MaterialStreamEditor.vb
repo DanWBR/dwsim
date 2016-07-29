@@ -1150,4 +1150,7 @@ Public Class MaterialStreamEditor
         If Loaded Then MatStream.GraphicObject.Active = chkActive.Checked
     End Sub
 
+    Private Sub gridInputComposition_KeyDown(sender As Object, e As KeyEventArgs) Handles gridInputComposition.KeyDown
+        If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition)
+    End Sub
 End Class
