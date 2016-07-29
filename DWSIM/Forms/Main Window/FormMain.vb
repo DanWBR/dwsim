@@ -2692,7 +2692,11 @@ ruf:                Application.DoEvents()
                         End If
                     Next
 
-                    File.Delete(updfile)
+                    Try
+                        File.Delete(updfile)
+                    Catch ex As Exception
+                        Exit Sub
+                    End Try
 
                     Dim dlder As New FileDownloader(True)
 
@@ -2800,8 +2804,12 @@ ruf:                Application.DoEvents()
     End Function
 
     Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) Handles UpdateBox_Button2.Click
-        File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
-        Application.Restart()
+        Try
+            File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update.run", "")
+            Application.Restart()
+        Catch ex As Exception
+            MessageBox.Show("Application restart failed. Please restart DWSIM manually.")
+        End Try
     End Sub
 
     Private Sub RegistroCAPEOPENToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RegistroCAPEOPENToolStripMenuItem.Click, tsbRegCO.Click

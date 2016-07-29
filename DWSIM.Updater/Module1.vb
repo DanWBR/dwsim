@@ -130,7 +130,10 @@ Module Module1
                 Catch ex As Exception
                 End Try
 
-                File.Delete(My.Application.Info.DirectoryPath & sep & "update.run")
+                Try
+                    File.Delete(My.Application.Info.DirectoryPath & sep & "update.run")
+                Catch ex As Exception
+                End Try
 
                 Environment.Exit(0)
 

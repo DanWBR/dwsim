@@ -984,6 +984,7 @@
     <None Include="Assets\TemplateExcelUO.ods" />
     <None Include="Assets\TemplateExcelUO.xls" />
     <None Include="Assets\TemplateExcelUO.xlsx" />
+    <None Include="Assets\version.info" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
