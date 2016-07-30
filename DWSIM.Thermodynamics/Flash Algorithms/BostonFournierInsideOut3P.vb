@@ -1054,8 +1054,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
-            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
 
             n = Vz.Length - 1
 
@@ -1239,7 +1239,7 @@ restart:    Do
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", L2F = " & L2)
                 WriteDebugInfo("PH Flash 3P [IO]: Iteration #" & ecount & ", H error = " & fr)
 
-                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1280,7 +1280,7 @@ restart:    Do
 
         Private Function EnergyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim Hl1, Hl2, balerror As Double
 
@@ -1299,7 +1299,7 @@ restart:    Do
 
         Private Function EnergyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim HV, balerror As Double
 
@@ -1322,8 +1322,8 @@ restart:    Do
 
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_Internal_Iterations)
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance)
-            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PHFlash_External_Loop_Tolerance).ToDoubleFromInvariant
 
             n = Vz.Length - 1
 
@@ -1501,7 +1501,7 @@ restart:    Do
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", VF = " & V)
                 WriteDebugInfo("PS Flash 3P [IO]: Iteration #" & ecount & ", S error = " & fr)
 
-                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1589,9 +1589,9 @@ restart:    Do
 
             Dim i, j As Integer
 
-            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = Vz.Length - 1
@@ -1773,7 +1773,7 @@ restart:    Do
 
                 WriteDebugInfo("PT Flash [IO]: Iteration #" & ecount & ", VF = " & V)
 
-                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 
@@ -1858,7 +1858,7 @@ out:
 
             Dim err1 As Double = Kb - 1
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return err1 ^ 2
 
@@ -1892,9 +1892,9 @@ out:
 
             Dim i, j As Integer
 
-            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance)
+            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             n = Vz.Length - 1
@@ -2103,7 +2103,7 @@ out:
 
                 WriteDebugInfo("PV Flash 3P [IO]: Iteration #" & ecount & ", T = " & T & ", VF = " & V)
 
-                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol * (n + 2)
 
@@ -2115,7 +2115,7 @@ out:
 
             Dim i, j As Integer
 
-            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance)
+            etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
 
             n = Vz.Length - 1
@@ -2304,7 +2304,7 @@ out:
 
                 WriteDebugInfo("TV Flash 3P [IO]: Iteration #" & ecount & ", P = " & P & ", VF = " & V)
 
-                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Loop Until AbsSum(fx) < etol
 

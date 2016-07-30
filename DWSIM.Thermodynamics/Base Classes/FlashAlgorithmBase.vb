@@ -1066,13 +1066,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function Clone() As Interfaces.IFlashAlgorithm Implements Interfaces.IFlashAlgorithm.Clone
 
-            'Using objMemStream As New MemoryStream()
-            '    Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
-            '    objBinaryFormatter.Serialize(objMemStream, Me)
-            '    objMemStream.Seek(0, SeekOrigin.Begin)
-            '    Clone = objBinaryFormatter.Deserialize(objMemStream)
-            'End Using
-            Return Me.MemberwiseClone()
+            Using objMemStream As New MemoryStream()
+                Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
+                objBinaryFormatter.Serialize(objMemStream, Me)
+                objMemStream.Seek(0, SeekOrigin.Begin)
+                Clone = objBinaryFormatter.Deserialize(objMemStream)
+            End Using
+            'Return Me.MemberwiseClone()
 
         End Function
 
