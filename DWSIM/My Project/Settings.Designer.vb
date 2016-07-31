@@ -664,7 +664,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Release Candidate 2 (RC2)")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public ReadOnly Property PreviewVersion() As String
             Get
                 Return CType(Me("PreviewVersion"),String)
