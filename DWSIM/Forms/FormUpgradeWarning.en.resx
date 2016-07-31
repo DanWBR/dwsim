@@ -165,7 +165,7 @@ DWSIM only updates the simulation file during saving. No changes are made when o
     <value>21, 141</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Some problems may arise during data conversion like: object property data loss, property package and flash algorithm configuration loss and corruption, and others.
+    <value>Some problems may arise during data conversion/upgrade, like: object property data loss, property package and flash algorithm configuration loss and corruption, and others.
 
 If your simulation has issues after loading in DWSIM 4, you can keep a DWSIM 3 installation side-by-side on your computer to continue working with your older simulation files.</value>
   </data>
