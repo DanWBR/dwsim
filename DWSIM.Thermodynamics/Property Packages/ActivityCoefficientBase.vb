@@ -305,9 +305,9 @@ Namespace PropertyPackages
                     Case 0 'LK
                         H = Me.m_lk.H_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Hid(298.15, T, Vx))
                     Case 1 'Ideal
-                        H = Me.RET_Hid(298.15, T, Vx) - Me.RET_Hid_L(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                        H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                     Case 2 'Excess
-                        H = Me.RET_Hid(298.15, T, Vx) - Me.RET_Hid_L(298.15, T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                        H = Me.RET_Hid(298.15, T, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
                 End Select
             Else
                 Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
@@ -360,9 +360,9 @@ Namespace PropertyPackages
                     Case 0 'LK
                         S = Me.m_lk.S_LK_MIX("L", T, P, Vx, RET_VKij(), RET_VTC, RET_VPC, RET_VW, RET_VMM, Me.RET_Sid(298.15, T, P, Vx))
                     Case 1 'Ideal
-                        S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_Sid_L(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                        S = Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                     Case 2 'Excess
-                        S = Me.RET_Sid(298.15, T, P, Vx) - (Me.RET_Sid_L(298.15, T, Vx) * T + Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx)) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                        S = Me.RET_Sid(298.15, T, P, Vx) - Me.m_act.CalcExcessEnthalpy(T, Vx, Me.GetArguments()) / Me.AUX_MMM(Vx) / T - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                 End Select
             Else
                 Select Case Me.Parameters("PP_ENTH_CP_CALC_METHOD")
