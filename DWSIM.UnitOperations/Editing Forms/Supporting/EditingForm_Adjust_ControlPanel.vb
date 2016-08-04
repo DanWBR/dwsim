@@ -276,6 +276,7 @@ Public Class EditingForm_Adjust_ControlPanel
                         Exit Sub
                     End If
                 End If
+                If cancelar = True Then Exit Do
             Loop Until f * f_inf < 0
             maxval = minval
             minval = minval - delta
@@ -292,6 +293,7 @@ Public Class EditingForm_Adjust_ControlPanel
             fcc = fbb
             iter2 = 0
             Do
+                If cancelar = True Then Exit Do
                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (iter2 + l + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
                 Me.tbErro.Text = fbb

@@ -116,6 +116,7 @@ Public Interface IFlowsheetGUI
 
     Sub UpdateInformation()
 
+ 
 End Interface
 
 Public Interface IFlowsheetCalculationQueue

@@ -814,7 +814,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
             If Not fs Is Nothing Then
-                If fs.MasterFlowsheet Is Nothing And GlobalSettings.Settings.CalculatorBusy Then Exit Sub
+                If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then Exit Sub
             End If
 
             Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
@@ -1412,8 +1412,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
+        Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
-        If Settings.SimultaneousAdjustEnabled Then
+        If fs.FlowsheetOptions.SimultaneousAdjustSolverEnabled Then
 
             Try
 
@@ -1452,9 +1453,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                             il_err += (fx(i)) ^ 2
                         Next
 
-                        'fobj.FormSurface.LabelSimultAdjInfo.Text = "Iteration #" & ic + 1 & ", NSSE: " & il_err
-
-                        'Application.DoEvents()
+                        fgui.ShowMessage(fgui.GetTranslatedString("SimultaneousAdjust") & ": Iteration #" & ic + 1 & ", NSSE: " & il_err, IFlowsheet.MessageType.Information)
 
                         If il_err < 0.0000000001 Then Exit Do
 
@@ -1498,8 +1497,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
+        Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
-        If Settings.SimultaneousAdjustEnabled Then
+        If fs.FlowsheetOptions.SimultaneousAdjustSolverEnabled Then
 
             'this is the cancellation token for background threads. it checks for calculator stop requests and passes the request to the tasks.
 
@@ -1546,7 +1546,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         il_err += (fx(i)) ^ 2
                     Next
 
-                    ' fobj.UIThread(Sub() fobj.FormSurface.LabelSimultAdjInfo.Text = "Iteration #" & ic + 1 & ", NSSE: " & il_err)
+                    fgui.ShowMessage(fgui.GetTranslatedString("SimultaneousAdjust") & ": Iteration #" & ic + 1 & ", NSSE: " & il_err, IFlowsheet.MessageType.Information)
 
                     If il_err < 0.0000000001 Then Exit Do
 

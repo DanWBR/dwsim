@@ -61,7 +61,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public m_IsLoadedFromFile As Boolean = False
     Public m_overrideCloseQuestion As Boolean = False
-    Public m_simultadjustsolverenabled As Boolean = True
 
     Public FormSurface As New FlowsheetSurface
     Public FormLog As New LogPanel
@@ -160,6 +159,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Else
             Me.tsbAtivar.Checked = False
         End If
+
+        Me.tsbSimultAdjustSolver.Checked = Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled
 
         Me.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
         Me.ToolStripButton17.Checked = Me.Options.FlowsheetQuickConnect
@@ -1278,7 +1279,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub tsbSimultAdjustSolver_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
-        m_simultadjustsolverenabled = tsbSimultAdjustSolver.Checked
+        Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled = tsbSimultAdjustSolver.Checked
     End Sub
 
     Sub ChangeEditMenuStatus(status As Boolean)
@@ -3021,4 +3022,5 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                     End Sub)
     End Sub
+
 End Class

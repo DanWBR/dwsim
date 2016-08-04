@@ -54,7 +54,22 @@ Public Class EditingForm_Adjust
             If .ControlledObjectData.Name <> "" Then
                 cbTargetObj.SelectedItem = .ControlledObjectData.Name
                 cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.ControlledObjectData.PropertyName)
+
+                Try
+
+                    Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+
+                    'parameters
+
+                    tbSetPoint.Text = su.Converter.ConvertFromSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(SimObject.AdjustValue)).ToString(nf)
+
+                Catch ex As Exception
+
+                End Try
+
             End If
+
+            chkSolveGlobal.Checked = SimObject.SimultaneousAdjust
 
             'annotation
 
@@ -64,10 +79,7 @@ Public Class EditingForm_Adjust
 
             End Try
 
-            'parameters
-
-            tbSetPoint.Text = .AdjustValue.ToString(nf)
-
+          
         End With
 
         Loaded = True
@@ -201,7 +213,7 @@ Public Class EditingForm_Adjust
             For Each p In props
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbSourceProp.SelectedItem.ToString Then
                     SimObject.ManipulatedObjectData.PropertyName = p
-                    lblSourceVal.Text = obj.GetPropertyValue(p, units) & " " & obj.GetPropertyUnit(p, units)
+                    lblSourceVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " " & obj.GetPropertyUnit(p, units)
                     Exit For
                 End If
             Next
@@ -221,7 +233,7 @@ Public Class EditingForm_Adjust
             For Each p In props
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then
                     SimObject.ControlledObjectData.PropertyName = p
-                    lblTargetVal.Text = obj.GetPropertyValue(p, units) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - SimObject.AdjustValue).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
+                    lblTargetVal.Text = Convert.ToDouble(obj.GetPropertyValue(p, units)).ToString(nf) & " (" & (Convert.ToDouble(obj.GetPropertyValue(p, units)) - su.Converter.ConvertFromSI(obj.GetPropertyUnit(p, units), SimObject.AdjustValue)).ToString("+0.####;-0.####;0") & ") " & obj.GetPropertyUnit(p, units)
                     lblSPUnits.Text = obj.GetPropertyUnit(p, units)
                     Exit For
                 End If
@@ -233,7 +245,6 @@ Public Class EditingForm_Adjust
 
     Private Sub chkSolveGlobal_CheckedChanged(sender As Object, e As EventArgs) Handles chkSolveGlobal.CheckedChanged
         SimObject.SimultaneousAdjust = chkSolveGlobal.Checked
-        tbSetPoint.Enabled = Not chkSolveGlobal.Checked
         btnOpenControlPanel.Enabled = Not chkSolveGlobal.Checked
     End Sub
 
@@ -260,7 +271,8 @@ Public Class EditingForm_Adjust
 
         If Loaded Then
             Try
-                SimObject.AdjustValue = Double.Parse(tbSetPoint.Text)
+                Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+                SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text))
             Catch ex As Exception
 
             End Try

@@ -29,4 +29,6 @@
 
     Property FlashAlgorithms As List(Of IFlashAlgorithm)
 
+    Property SimultaneousAdjustSolverEnabled As Boolean
+
 End Interface
