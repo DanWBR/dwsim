@@ -318,19 +318,23 @@ Namespace SpecialOps
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
+            If m_ManipulatedObjectData.ObjectType = Nothing Then m_ManipulatedObjectData.ObjectType = ""
+            If m_ControlledObjectData.ObjectType = Nothing Then m_ControlledObjectData.ObjectType = ""
+            If m_ReferencedObjectData.ObjectType = Nothing Then m_ReferencedObjectData.ObjectType = ""
+
             With elements
                 .Add(New XElement("ManipulatedObjectData", New XAttribute("ID", m_ManipulatedObjectData.ID),
                                   New XAttribute("Name", m_ManipulatedObjectData.Name),
                                   New XAttribute("Property", m_ManipulatedObjectData.PropertyName),
-                                  New XAttribute("Type", m_ManipulatedObjectData.ObjectType)))
+                                  New XAttribute("ObjectType", m_ManipulatedObjectData.ObjectType)))
                 .Add(New XElement("ControlledObjectData", New XAttribute("ID", m_ControlledObjectData.ID),
                                   New XAttribute("Name", m_ControlledObjectData.Name),
                                   New XAttribute("Property", m_ControlledObjectData.PropertyName),
-                                  New XAttribute("Type", m_ControlledObjectData.ObjectType)))
+                                  New XAttribute("ObjectType", m_ControlledObjectData.ObjectType)))
                 .Add(New XElement("ReferencedObjectData", New XAttribute("ID", m_ReferencedObjectData.ID),
                                   New XAttribute("Name", m_ReferencedObjectData.Name),
                                   New XAttribute("Property", m_ReferencedObjectData.PropertyName),
-                                  New XAttribute("Type", m_ReferencedObjectData.ObjectType)))
+                                  New XAttribute("ObjectType", m_ReferencedObjectData.ObjectType)))
             End With
 
             Return elements

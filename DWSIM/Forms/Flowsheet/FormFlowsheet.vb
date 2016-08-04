@@ -1452,13 +1452,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                                                          .OldValue = Me.Collections.FlowsheetObjectCollection(namesel).SaveData(),
                                                                          .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_ObjectRemoved"), gobj.Tag)})
 
-                            'dispose object
-                            Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
-                            Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
-
-                            Me.Collections.FlowsheetObjectCollection.Remove(namesel)
-                            Me.Collections.GraphicObjectCollection.Remove(namesel)
-
                             If gobj.ObjectType = ObjectType.OT_Spec Then
                                 Dim specobj As Spec = Me.Collections.FlowsheetObjectCollection(namesel)
                                 If Me.Collections.FlowsheetObjectCollection.ContainsKey(specobj.TargetObjectData.ID) Then
@@ -1469,7 +1462,28 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                                     Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.ID).IsSpecAttached = False
                                     Me.Collections.FlowsheetObjectCollection(specobj.SourceObjectData.ID).AttachedSpecId = ""
                                 End If
+                            ElseIf gobj.ObjectType = ObjectType.OT_Adjust Then
+                                Dim adjobj As Adjust = Me.Collections.FlowsheetObjectCollection(namesel)
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(adjobj.ManipulatedObjectData.ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(adjobj.ManipulatedObjectData.ID).IsAdjustAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(adjobj.ManipulatedObjectData.ID).AttachedAdjustId = ""
+                                End If
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(adjobj.ControlledObjectData.ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(adjobj.ControlledObjectData.ID).IsAdjustAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(adjobj.ControlledObjectData.ID).AttachedAdjustId = ""
+                                End If
+                                If Me.Collections.FlowsheetObjectCollection.ContainsKey(adjobj.ReferencedObjectData.ID) Then
+                                    Me.Collections.FlowsheetObjectCollection(adjobj.ReferencedObjectData.ID).IsAdjustAttached = False
+                                    Me.Collections.FlowsheetObjectCollection(adjobj.ReferencedObjectData.ID).AttachedAdjustId = ""
+                                End If
                             End If
+
+                            'dispose object
+                            Me.Collections.FlowsheetObjectCollection(namesel).CloseEditForm()
+                            Me.Collections.FlowsheetObjectCollection(namesel).Dispose()
+
+                            Me.Collections.FlowsheetObjectCollection.Remove(namesel)
+                            Me.Collections.GraphicObjectCollection.Remove(namesel)
 
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
 
