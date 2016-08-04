@@ -179,7 +179,7 @@ Namespace SpecialOps
                     .ID = xel.@ID
                     .Name = xel.@Name
                     .PropertyName = xel.@Property
-                    .Type = xel.@Type
+                    .ObjectType = xel.@ObjectType
                 End With
 
             End If
@@ -192,7 +192,7 @@ Namespace SpecialOps
                     .ID = xel.@ID
                     .Name = xel.@Name
                     .PropertyName = xel.@Property
-                    .Type = xel.@Type
+                    .ObjectType = xel.@ObjectType
                 End With
 
             End If
@@ -221,11 +221,11 @@ Namespace SpecialOps
                 .Add(New XElement("SourceObjectData", New XAttribute("ID", m_SourceObjectData.ID),
                                   New XAttribute("Name", m_SourceObjectData.Name),
                                   New XAttribute("Property", m_SourceObjectData.PropertyName),
-                                  New XAttribute("Type", m_SourceObjectData.Type)))
+                                  New XAttribute("Type", m_SourceObjectData.ObjectType)))
                 .Add(New XElement("TargetObjectData", New XAttribute("ID", m_TargetObjectData.ID),
                                   New XAttribute("Name", m_TargetObjectData.Name),
                                   New XAttribute("Property", m_TargetObjectData.PropertyName),
-                                  New XAttribute("Type", m_TargetObjectData.Type)))
+                                  New XAttribute("Type", m_TargetObjectData.ObjectType)))
             End With
 
             Return elements

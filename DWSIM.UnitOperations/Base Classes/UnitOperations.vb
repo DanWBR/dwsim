@@ -220,7 +220,7 @@ Namespace SpecialOps.Helpers
 
         Public Property PropertyName As String = "" Implements ISpecialOpObjectInfo.PropertyName
 
-        Public Property Type As String = "" Implements ISpecialOpObjectInfo.Type
+        Public Property ObjectType As String = "" Implements ISpecialOpObjectInfo.Type
 
     End Class
 

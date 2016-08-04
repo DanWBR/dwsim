@@ -54,9 +54,9 @@ Namespace SpecialOps
         Protected m_Tolerance As Double = 0.0001
         Protected m_MaxIterations As Integer = 10
 
-        Protected m_ManipulatedObjectData As Object
-        Protected m_ControlledObjectData As Object
-        Protected m_ReferencedObjectData As Object
+        Protected m_ManipulatedObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
+        Protected m_ControlledObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
+        Protected m_ReferencedObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo
 
         Protected m_CV_OK As Boolean = False
         Protected m_MV_OK As Boolean = False
@@ -277,10 +277,10 @@ Namespace SpecialOps
             If Not xel Is Nothing Then
 
                 With m_ManipulatedObjectData
-                    .m_ID = xel.@ID
-                    .m_Name = xel.@Name
+                    .ID = xel.@ID
+                    .Name = xel.@Name
                     .PropertyName = xel.@Property
-                    .m_Type = xel.@Type
+                    .ObjectType = xel.@ObjectType
                 End With
 
             End If
@@ -290,10 +290,10 @@ Namespace SpecialOps
             If Not xel Is Nothing Then
 
                 With m_ControlledObjectData
-                    .m_ID = xel.@ID
-                    .m_Name = xel.@Name
+                    .ID = xel.@ID
+                    .Name = xel.@Name
                     .PropertyName = xel.@Property
-                    .m_Type = xel.@Type
+                    .ObjectType = xel.@ObjectType
                 End With
 
             End If
@@ -303,10 +303,10 @@ Namespace SpecialOps
             If Not xel Is Nothing Then
 
                 With m_ReferencedObjectData
-                    .m_ID = xel.@ID
-                    .m_Name = xel.@Name
+                    .ID = xel.@ID
+                    .Name = xel.@Name
                     .PropertyName = xel.@Property
-                    .m_Type = xel.@Type
+                    .ObjectType = xel.@ObjectType
                 End With
 
             End If
@@ -319,18 +319,18 @@ Namespace SpecialOps
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
-                .Add(New XElement("ManipulatedObjectData", New XAttribute("ID", m_ManipulatedObjectData.m_ID),
-                                  New XAttribute("Name", m_ManipulatedObjectData.m_Name),
+                .Add(New XElement("ManipulatedObjectData", New XAttribute("ID", m_ManipulatedObjectData.ID),
+                                  New XAttribute("Name", m_ManipulatedObjectData.Name),
                                   New XAttribute("Property", m_ManipulatedObjectData.PropertyName),
-                                  New XAttribute("Type", m_ManipulatedObjectData.m_Type)))
-                .Add(New XElement("ControlledObjectData", New XAttribute("ID", m_ControlledObjectData.m_ID),
-                                  New XAttribute("Name", m_ControlledObjectData.m_Name),
+                                  New XAttribute("Type", m_ManipulatedObjectData.ObjectType)))
+                .Add(New XElement("ControlledObjectData", New XAttribute("ID", m_ControlledObjectData.ID),
+                                  New XAttribute("Name", m_ControlledObjectData.Name),
                                   New XAttribute("Property", m_ControlledObjectData.PropertyName),
-                                  New XAttribute("Type", m_ControlledObjectData.m_Type)))
-                .Add(New XElement("ReferencedObjectData", New XAttribute("ID", m_ReferencedObjectData.m_ID),
-                                  New XAttribute("Name", m_ReferencedObjectData.m_Name),
+                                  New XAttribute("Type", m_ControlledObjectData.ObjectType)))
+                .Add(New XElement("ReferencedObjectData", New XAttribute("ID", m_ReferencedObjectData.ID),
+                                  New XAttribute("Name", m_ReferencedObjectData.Name),
                                   New XAttribute("Property", m_ReferencedObjectData.PropertyName),
-                                  New XAttribute("Type", m_ReferencedObjectData.m_Type)))
+                                  New XAttribute("Type", m_ReferencedObjectData.ObjectType)))
             End With
 
             Return elements
