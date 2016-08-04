@@ -66,6 +66,10 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
 
+Version 4.0 Update 2
+
+- [FIX] Fixed issues with Adjust and Simultaneous Adjust Solver
+
 Version 4.0 Update 1
 
 - [FIX] Fixed issues with Adjust and Spec logical blocks
