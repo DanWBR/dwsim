@@ -1128,26 +1128,15 @@ Public Class FormMain
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
-        Dim complist As New Concurrent.ConcurrentBag(Of ConstantProperties)
-
-        Parallel.ForEach(data, Sub(xel)
-                                   Try
-                                       Dim obj As New ConstantProperties
-                                       obj.LoadData(xel.Elements.ToList)
-                                       complist.Add(obj)
-                                   Catch ex As Exception
-                                       excs.Add(New Exception("Error Loading Compound Information", ex))
-                                   End Try
-                               End Sub)
-
-        Dim orderedlist = complist.OrderBy(Function(o) o.Normal_Boiling_Point)
-
-        For Each obj In orderedlist
-            form.Options.SelectedComponents.Add(obj.Name, obj)
+        For Each xel As XElement In data
+            Try
+                Dim obj As New ConstantProperties
+                obj.LoadData(xel.Elements.ToList)
+                form.Options.SelectedComponents.Add(obj.Name, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Compound Information", ex))
+            End Try
         Next
-
-        complist = Nothing
-        orderedlist = Nothing
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
 
@@ -1205,18 +1194,18 @@ Public Class FormMain
 
         'reorder compound lists in streams
 
-        For Each obj In objlist
-            If TypeOf obj Is Streams.MaterialStream Then
-                Dim mstr As Streams.MaterialStream = DirectCast(obj, Streams.MaterialStream)
-                For Each p In mstr.Phases.Values
-                    Dim clist = p.Compounds.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
-                    p.Compounds.Clear()
-                    For Each c In clist
-                        p.Compounds.Add(c.Name, c)
-                    Next
-                Next
-            End If
-        Next
+        'For Each obj In objlist
+        '    If TypeOf obj Is Streams.MaterialStream Then
+        '        Dim mstr As Streams.MaterialStream = DirectCast(obj, Streams.MaterialStream)
+        '        For Each p In mstr.Phases.Values
+        '            Dim clist = p.Compounds.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
+        '            p.Compounds.Clear()
+        '            For Each c In clist
+        '                p.Compounds.Add(c.Name, c)
+        '            Next
+        '        Next
+        '    End If
+        'Next
 
         AddSimulationObjects(form, objlist, excs)
 

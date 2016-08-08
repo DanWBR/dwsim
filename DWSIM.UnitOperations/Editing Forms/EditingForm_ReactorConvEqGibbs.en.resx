@@ -205,33 +205,6 @@
   <data name="cbGibbsMinMode.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Minimization Method</value>
-  </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbPDrop.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbPDrop.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Pressure Drop</value>
-  </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbReacSet.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
   </data>
@@ -241,19 +214,25 @@
   <data name="Label4.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="cbTemp.ToolTip" xml:space="preserve">
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Minimization Method</value>
+  </data>
+  <data name="Label6.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbOutletTemperature.ToolTip" xml:space="preserve">
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Calculation Mode</value>
+  </data>
+  <data name="Label2.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Outlet Temperature</value>
-  </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
+  <data name="cbPDrop.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="cbCalcMode.Items" xml:space="preserve">
@@ -268,13 +247,64 @@
   <data name="cbCalcMode.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
+  <data name="tbPDrop.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Calculation Mode</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Outlet Temperature</value>
+  </data>
+  <data name="Label3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Pressure Drop</value>
+  </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbOutletTemperature.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbReacSet.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbTemp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageParams.Text" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="TabPageParams.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ListViewCompounds.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageCompounds.Text" xml:space="preserve">
+    <value>Compounds</value>
+  </data>
+  <data name="TabPageCompounds.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageElements.Text" xml:space="preserve">
+    <value>Elements</value>
+  </data>
+  <data name="TabPageElements.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabPageInitialEstimates.Text" xml:space="preserve">
+    <value>Initial Estimates</value>
+  </data>
+  <data name="TabPageInitialEstimates.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TabControlParameters.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">

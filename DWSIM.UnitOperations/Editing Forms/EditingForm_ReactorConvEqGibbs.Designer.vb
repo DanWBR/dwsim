@@ -52,18 +52,24 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TabControlParameters = New System.Windows.Forms.TabControl()
+        Me.TabPageParams = New System.Windows.Forms.TabPage()
         Me.cbGibbsMinMode = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cbPDrop = New System.Windows.Forms.ComboBox()
-        Me.tbPDrop = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cbReacSet = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.cbTemp = New System.Windows.Forms.ComboBox()
-        Me.tbOutletTemperature = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbCalcMode = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.cbPDrop = New System.Windows.Forms.ComboBox()
+        Me.cbCalcMode = New System.Windows.Forms.ComboBox()
+        Me.tbPDrop = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.tbOutletTemperature = New System.Windows.Forms.TextBox()
+        Me.cbReacSet = New System.Windows.Forms.ComboBox()
+        Me.cbTemp = New System.Windows.Forms.ComboBox()
+        Me.TabPageCompounds = New System.Windows.Forms.TabPage()
+        Me.ListViewCompounds = New System.Windows.Forms.ListView()
+        Me.TabPageElements = New System.Windows.Forms.TabPage()
+        Me.TabPageInitialEstimates = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
@@ -103,6 +109,9 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TabControlParameters.SuspendLayout()
+        Me.TabPageParams.SuspendLayout()
+        Me.TabPageCompounds.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
@@ -250,21 +259,41 @@ Partial Class EditingForm_ReactorConvEqGibbs
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.cbGibbsMinMode)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.cbPDrop)
-        Me.GroupBox2.Controls.Add(Me.tbPDrop)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.cbReacSet)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.cbTemp)
-        Me.GroupBox2.Controls.Add(Me.tbOutletTemperature)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.cbCalcMode)
-        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.TabControlParameters)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'TabControlParameters
+        '
+        resources.ApplyResources(Me.TabControlParameters, "TabControlParameters")
+        Me.TabControlParameters.Controls.Add(Me.TabPageParams)
+        Me.TabControlParameters.Controls.Add(Me.TabPageCompounds)
+        Me.TabControlParameters.Controls.Add(Me.TabPageElements)
+        Me.TabControlParameters.Controls.Add(Me.TabPageInitialEstimates)
+        Me.TabControlParameters.Name = "TabControlParameters"
+        Me.TabControlParameters.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControlParameters, resources.GetString("TabControlParameters.ToolTip"))
+        '
+        'TabPageParams
+        '
+        resources.ApplyResources(Me.TabPageParams, "TabPageParams")
+        Me.TabPageParams.Controls.Add(Me.cbGibbsMinMode)
+        Me.TabPageParams.Controls.Add(Me.Label4)
+        Me.TabPageParams.Controls.Add(Me.GroupBox3)
+        Me.TabPageParams.Controls.Add(Me.Label6)
+        Me.TabPageParams.Controls.Add(Me.Label2)
+        Me.TabPageParams.Controls.Add(Me.cbPDrop)
+        Me.TabPageParams.Controls.Add(Me.cbCalcMode)
+        Me.TabPageParams.Controls.Add(Me.tbPDrop)
+        Me.TabPageParams.Controls.Add(Me.Label3)
+        Me.TabPageParams.Controls.Add(Me.Label5)
+        Me.TabPageParams.Controls.Add(Me.tbOutletTemperature)
+        Me.TabPageParams.Controls.Add(Me.cbReacSet)
+        Me.TabPageParams.Controls.Add(Me.cbTemp)
+        Me.TabPageParams.Name = "TabPageParams"
+        Me.ToolTip1.SetToolTip(Me.TabPageParams, resources.GetString("TabPageParams.ToolTip"))
+        Me.TabPageParams.UseVisualStyleBackColor = True
         '
         'cbGibbsMinMode
         '
@@ -275,11 +304,23 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.cbGibbsMinMode.Name = "cbGibbsMinMode"
         Me.ToolTip1.SetToolTip(Me.cbGibbsMinMode, resources.GetString("cbGibbsMinMode.ToolTip"))
         '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        '
+        'Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'cbPDrop
         '
@@ -290,17 +331,38 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.cbPDrop.Name = "cbPDrop"
         Me.ToolTip1.SetToolTip(Me.cbPDrop, resources.GetString("cbPDrop.ToolTip"))
         '
+        'cbCalcMode
+        '
+        resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
+        Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCalcMode.FormattingEnabled = True
+        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2")})
+        Me.cbCalcMode.Name = "cbCalcMode"
+        Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
+        '
         'tbPDrop
         '
         resources.ApplyResources(Me.tbPDrop, "tbPDrop")
         Me.tbPDrop.Name = "tbPDrop"
         Me.ToolTip1.SetToolTip(Me.tbPDrop, resources.GetString("tbPDrop.ToolTip"))
         '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
         Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        '
+        'tbOutletTemperature
+        '
+        resources.ApplyResources(Me.tbOutletTemperature, "tbOutletTemperature")
+        Me.tbOutletTemperature.Name = "tbOutletTemperature"
+        Me.ToolTip1.SetToolTip(Me.tbOutletTemperature, resources.GetString("tbOutletTemperature.ToolTip"))
         '
         'cbReacSet
         '
@@ -311,12 +373,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.cbReacSet.Name = "cbReacSet"
         Me.ToolTip1.SetToolTip(Me.cbReacSet, resources.GetString("cbReacSet.ToolTip"))
         '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
-        '
         'cbTemp
         '
         resources.ApplyResources(Me.cbTemp, "cbTemp")
@@ -326,32 +382,36 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.cbTemp.Name = "cbTemp"
         Me.ToolTip1.SetToolTip(Me.cbTemp, resources.GetString("cbTemp.ToolTip"))
         '
-        'tbOutletTemperature
+        'TabPageCompounds
         '
-        resources.ApplyResources(Me.tbOutletTemperature, "tbOutletTemperature")
-        Me.tbOutletTemperature.Name = "tbOutletTemperature"
-        Me.ToolTip1.SetToolTip(Me.tbOutletTemperature, resources.GetString("tbOutletTemperature.ToolTip"))
+        resources.ApplyResources(Me.TabPageCompounds, "TabPageCompounds")
+        Me.TabPageCompounds.Controls.Add(Me.ListViewCompounds)
+        Me.TabPageCompounds.Name = "TabPageCompounds"
+        Me.ToolTip1.SetToolTip(Me.TabPageCompounds, resources.GetString("TabPageCompounds.ToolTip"))
+        Me.TabPageCompounds.UseVisualStyleBackColor = True
         '
-        'Label3
+        'ListViewCompounds
         '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        resources.ApplyResources(Me.ListViewCompounds, "ListViewCompounds")
+        Me.ListViewCompounds.CheckBoxes = True
+        Me.ListViewCompounds.Name = "ListViewCompounds"
+        Me.ToolTip1.SetToolTip(Me.ListViewCompounds, resources.GetString("ListViewCompounds.ToolTip"))
+        Me.ListViewCompounds.UseCompatibleStateImageBehavior = False
+        Me.ListViewCompounds.View = System.Windows.Forms.View.List
         '
-        'cbCalcMode
+        'TabPageElements
         '
-        resources.ApplyResources(Me.cbCalcMode, "cbCalcMode")
-        Me.cbCalcMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCalcMode.FormattingEnabled = True
-        Me.cbCalcMode.Items.AddRange(New Object() {resources.GetString("cbCalcMode.Items"), resources.GetString("cbCalcMode.Items1"), resources.GetString("cbCalcMode.Items2")})
-        Me.cbCalcMode.Name = "cbCalcMode"
-        Me.ToolTip1.SetToolTip(Me.cbCalcMode, resources.GetString("cbCalcMode.ToolTip"))
+        resources.ApplyResources(Me.TabPageElements, "TabPageElements")
+        Me.TabPageElements.Name = "TabPageElements"
+        Me.ToolTip1.SetToolTip(Me.TabPageElements, resources.GetString("TabPageElements.ToolTip"))
+        Me.TabPageElements.UseVisualStyleBackColor = True
         '
-        'Label2
+        'TabPageInitialEstimates
         '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        resources.ApplyResources(Me.TabPageInitialEstimates, "TabPageInitialEstimates")
+        Me.TabPageInitialEstimates.Name = "TabPageInitialEstimates"
+        Me.ToolTip1.SetToolTip(Me.TabPageInitialEstimates, resources.GetString("TabPageInitialEstimates.ToolTip"))
+        Me.TabPageInitialEstimates.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -661,7 +721,6 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox5)
         Me.Controls.Add(Me.GroupBox2)
@@ -673,7 +732,10 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.TabControlParameters.ResumeLayout(False)
+        Me.TabPageParams.ResumeLayout(False)
+        Me.TabPageParams.PerformLayout()
+        Me.TabPageCompounds.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -752,4 +814,10 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Friend WithEvents btnCreateAndConnectOutlet2 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectOutlet1 As System.Windows.Forms.Button
     Friend WithEvents btnCreateAndConnectInlet1 As System.Windows.Forms.Button
+    Friend WithEvents TabControlParameters As System.Windows.Forms.TabControl
+    Friend WithEvents TabPageParams As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageCompounds As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageElements As System.Windows.Forms.TabPage
+    Friend WithEvents TabPageInitialEstimates As System.Windows.Forms.TabPage
+    Friend WithEvents ListViewCompounds As System.Windows.Forms.ListView
 End Class

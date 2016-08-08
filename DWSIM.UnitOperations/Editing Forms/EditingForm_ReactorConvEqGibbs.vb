@@ -15,6 +15,9 @@ Public Class EditingForm_ReactorConvEqGibbs
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf As String
 
+    Dim eeditor As EditingForm_Gibbs_ElementMatrixEditor
+    Dim ieditor As EditingForm_Gibbs_InitialEstimatesEditor
+
     Private Sub EditingForm_HeaterCooler_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.ShowHint = GlobalSettings.Settings.DefaultEditFormLocation
@@ -111,14 +114,52 @@ Public Class EditingForm_ReactorConvEqGibbs
             tbPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf)
 
             If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
+
                 cbGibbsMinMode.Enabled = True
                 cbGibbsMinMode.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod
+
+                'key compounds
+
+                ListViewCompounds.Items.Clear()
+                For Each comp In SimObject.FlowSheet.SelectedCompounds.Values
+                    Dim lvi As New ListViewItem()
+                    With lvi
+                        .Text = comp.Name
+                        .Tag = comp.Name
+                        .Name = comp.Name
+                    End With
+                    ListViewCompounds.Items.Add(lvi)
+                Next
+                Me.ListViewCompounds.SelectedItems.Clear()
+
+                For Each lvi As ListViewItem In Me.ListViewCompounds.Items
+                    If DirectCast(SimObject, Reactors.Reactor_Gibbs).ComponentIDs.Contains(lvi.Tag) Then lvi.Checked = True
+                Next
+
+                'other editors
+
+                TabPageElements.Controls.Clear()
+                eeditor = New EditingForm_Gibbs_ElementMatrixEditor With {.gr = Me.SimObject}
+                eeditor.Dock = DockStyle.Fill
+                TabPageElements.Controls.Add(eeditor)
+
+                TabPageInitialEstimates.Controls.Clear()
+                ieditor = New EditingForm_Gibbs_InitialEstimatesEditor With {.gr = Me.SimObject}
+                ieditor.Dock = DockStyle.Fill
+                TabPageInitialEstimates.Controls.Add(ieditor)
+
+            Else
+
+                TabControlParameters.TabPages.Remove(TabPageCompounds)
+                TabControlParameters.TabPages.Remove(TabPageElements)
+                TabControlParameters.TabPages.Remove(TabPageInitialEstimates)
+
             End If
 
             Dim rsets As String() = .FlowSheet.ReactionSets.Values.Select(Function(m) m.Name).ToArray
             cbReacSet.Items.Clear()
             cbReacSet.Items.AddRange(rsets)
-           
+
             If Not .FlowSheet.ReactionSets.ContainsKey(.ReactionSetID) Then .ReactionSetID = "DefaultSet"
             cbReacSet.SelectedItem = .FlowSheet.ReactionSets(.ReactionSetID).Name
 
@@ -220,6 +261,24 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         Loaded = True
 
+    End Sub
+
+    Private Sub ListViewCompounds_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles ListViewCompounds.ItemChecked
+        If Loaded Then
+            Dim robj = DirectCast(SimObject, Reactors.Reactor_Gibbs)
+            For Each lvi As ListViewItem In Me.ListViewCompounds.Items
+                If lvi.Checked Then
+                    If Not robj.ComponentIDs.Contains(lvi.Tag) Then
+                        robj.ComponentIDs.Add(lvi.Tag)
+                    End If
+                Else
+                    If robj.ComponentIDs.Contains(lvi.Tag) Then
+                        robj.ComponentIDs.Remove(lvi.Tag)
+                    End If
+                End If
+            Next
+            ieditor.GibbsInitialEstimatesEditorForm_Load(sender, e)
+        End If
     End Sub
 
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
@@ -497,10 +556,10 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
-            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X + 30, sgobj.EnergyConnector.Position.Y + 30, "")
+            Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.EnergyConnector.Position.X - 30, sgobj.EnergyConnector.Position.Y + 30, "")
 
-            If sgobj.EnergyConnector.IsAttached Then fs.DisconnectObjects(sgobj, sgobj.EnergyConnector.AttachedConnector.AttachedTo)
-            fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
+            If sgobj.InputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj.InputConnectors(1).AttachedConnector.AttachedFrom, sgobj)
+            fs.ConnectObjects(obj.GraphicObject, sgobj, 0, 1)
 
         End If
 

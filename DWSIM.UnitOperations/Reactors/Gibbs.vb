@@ -51,8 +51,8 @@ Namespace Reactors
         Private _el_mat As Double(,) = New Double(,) {}
         Private _components As New List(Of String)
         Private _initialestimates As New List(Of Double)
-        Private _elements As String()
-        Private _totalelements As Double()
+        Private _elements As String() = {}
+        Private _totalelements As Double() = {}
         Private _ige, _fge, _elbal As Double
 
         Dim tmpx As Double(), tmpdx As Double()
