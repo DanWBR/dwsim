@@ -456,4 +456,18 @@ Public Class AboutBox
     Private Sub AboutBoxNET_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         PopulateAssemblies()
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Dim p As New Process()
+            With p
+                .StartInfo.FileName = "xdg-open"
+                .StartInfo.Arguments = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt"
+                .StartInfo.UseShellExecute = False
+                .Start()
+            End With
+        Else
+            Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "readme.txt")
+        End If
+    End Sub
 End Class

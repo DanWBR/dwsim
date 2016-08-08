@@ -54,6 +54,7 @@ Partial Class AboutBox
         Me.Lblmem = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.FaTabStripItem5 = New FarsiLibrary.Win.FATabStripItem()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.dgvDWSIMComponents = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -303,13 +304,19 @@ Partial Class AboutBox
         'FaTabStripItem5
         '
         Me.FaTabStripItem5.CanClose = False
+        Me.FaTabStripItem5.Controls.Add(Me.Button2)
         Me.FaTabStripItem5.Controls.Add(Me.dgvDWSIMComponents)
         Me.FaTabStripItem5.Controls.Add(Me.lblCurrentVersion)
         Me.FaTabStripItem5.Controls.Add(Me.Label15)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        Me.FaTabStripItem5.Selected = True
         resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'dgvDWSIMComponents
         '
@@ -605,4 +612,5 @@ Partial Class AboutBox
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewLinkColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Public WithEvents Button2 As System.Windows.Forms.Button
 End Class
