@@ -1267,43 +1267,20 @@ STEP2:
 
                 'CALCULO DAS FRAcoES MOLARES DOS COMPONENTES NA Phase AQUOSA
 
-                Dim fresult As Object = unfPP.FlashBase.Flash_PT(Vy, P, T, unfPP)
-                If fresult(0) > 0.0# Then
-                    For i = 0 To n
-                        Ki(i) = fresult(3)(i) / fresult(2)(i)
-                        If Double.IsNaN(Ki(i)) Then Ki(i) = Double.PositiveInfinity
-                    Next
-                Else
-                    For i = 0 To n
-                        Ki(i) = Double.PositiveInfinity
-                    Next
-                End If
-
                 i = 0
                 Do
                     If i <> pos Then Vxaq(i) = PHIV(i) / (H(i) * Math.Exp(ZLinf(i)))
-                    If H(i) = 101325.0# Then
-                        Vxaq(i) = 0.0#
-                    End If
-                    VxHC(i) = Vy(i) / Ki(i)
+                    If H(i) = 101325.0# Then Vxaq(i) = 0.0#
                     i = i + 1
                 Loop Until i = n + 1
 
                 Dim sum_vxaq = 0.0#
-                Dim sum_vxhc = 0.0#
                 i = 0
                 Do
                     If i <> pos Then sum_vxaq += Vxaq(i)
-                    sum_vxhc += VxHC(i)
                     i = i + 1
                 Loop Until i = n + 1
                 Vxaq(pos) = 1 - sum_vxaq
-
-                i = 0
-                Do
-                    If sum_vxhc <> 0.0# Then VxHC(i) = VxHC(i) / sum_vxhc
-                    i = i + 1
-                Loop Until i = n + 1
 
                 Dim WAC As Double = unf.GAMMA(T, Vxaq, unfPP.RET_VIDS, unfPP.RET_VQ, unfPP.RET_VR, pos)
 

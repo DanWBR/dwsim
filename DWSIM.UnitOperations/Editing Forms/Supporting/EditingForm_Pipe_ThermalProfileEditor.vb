@@ -60,6 +60,8 @@ Public Class PipeThermalProfileEditor
             ComboBoxMAMB.Enabled = True
             TextBoxVEL.Enabled = True
 
+            ComboBoxMAT_SelectedIndexChanged(sender, e)
+
         Else
 
             TextBoxTA2.Enabled = False
@@ -79,53 +81,57 @@ Public Class PipeThermalProfileEditor
 
     Private Sub ComboBoxMAT_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBoxMAT.SelectedIndexChanged
 
-        Dim fi As New Globalization.CultureInfo("en-US")
+        If loaded Then
 
-        Try
-            PipeOp.ThermalProfile.Material = Me.ComboBoxMAT.SelectedIndex
-        Catch ex As Exception
+            Dim fi As New Globalization.CultureInfo("en-US")
 
-        End Try
+            Try
+                PipeOp.ThermalProfile.Material = Me.ComboBoxMAT.SelectedIndex
+            Catch ex As Exception
 
-        If ComboBoxMAT.SelectedIndex = 0 Then
+            End Try
 
-            TextBoxCTERM.Text = Double.Parse("0.7", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            If ComboBoxMAT.SelectedIndex = 0 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 1 Then
+                TextBoxCTERM.Text = Double.Parse("0.7", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("1", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            ElseIf ComboBoxMAT.SelectedIndex = 1 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 2 Then
+                TextBoxCTERM.Text = Double.Parse("1", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("0.018", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            ElseIf ComboBoxMAT.SelectedIndex = 2 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 3 Then
+                TextBoxCTERM.Text = Double.Parse("0.018", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("0.04", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            ElseIf ComboBoxMAT.SelectedIndex = 3 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 4 Then
+                TextBoxCTERM.Text = Double.Parse("0.04", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("0.035", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            ElseIf ComboBoxMAT.SelectedIndex = 4 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 5 Then
+                TextBoxCTERM.Text = Double.Parse("0.035", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("0.036", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            ElseIf ComboBoxMAT.SelectedIndex = 5 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 6 Then
+                TextBoxCTERM.Text = Double.Parse("0.036", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("0.08", fi).ToString()
-            TextBoxCTERM.ReadOnly = True
+            ElseIf ComboBoxMAT.SelectedIndex = 6 Then
 
-        ElseIf ComboBoxMAT.SelectedIndex = 7 Then
+                TextBoxCTERM.Text = Double.Parse("0.08", fi).ToString()
+                TextBoxCTERM.ReadOnly = True
 
-            TextBoxCTERM.Text = Double.Parse("0", fi).ToString()
-            TextBoxCTERM.ReadOnly = False
+            ElseIf ComboBoxMAT.SelectedIndex = 7 Then
+
+                TextBoxCTERM.Text = Double.Parse("0", fi).ToString()
+                TextBoxCTERM.ReadOnly = False
+
+            End If
 
         End If
 
@@ -269,6 +275,7 @@ Public Class PipeThermalProfileEditor
             Me.ComboBoxMAT.Enabled = True
             Me.TextBoxCTERM.Enabled = True
             Me.TextBoxESP.Enabled = True
+            ComboBoxMAT_SelectedIndexChanged(sender, e)
         End If
     End Sub
 

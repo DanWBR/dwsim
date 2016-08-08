@@ -1129,7 +1129,7 @@ Namespace UnitOperations
             If parede = True Then
 
                 U_parede = k_parede(materialparede, T) / (Math.Log(Dext / Dint) * Dint)
-                If Dext = Dint Then U_parede = 0
+                If Dext = Dint Then U_parede = 0.0#
 
             End If
 
@@ -1139,8 +1139,8 @@ Namespace UnitOperations
             Dim esp_isol = 0.0#
             If isolamento = True Then
 
-                esp_isol = Me.m_thermalprofile.Espessura / 1000
-                U_isol = Convert.ToDouble(Me.m_thermalprofile.Condtermica) / (Math.Log((Dext + esp_isol) / Dext) * Dext)
+                esp_isol = Me.m_thermalprofile.Espessura
+                U_isol = Me.m_thermalprofile.Condtermica / (Math.Log((Dext + esp_isol) / Dext) * Dext)
 
             End If
 
@@ -1149,9 +1149,9 @@ Namespace UnitOperations
 
             If hexterno = True Then
 
-                Dim mu2, k2, cp2, rho2 As Double
+                Dim mu2, k2, cp2, rho2 As Double 'Soil, undergound
 
-                If Me.m_thermalprofile.Meio <> 0 And Me.m_thermalprofile.Meio <> 1 Then
+                If Me.m_thermalprofile.Meio <> "0" And Me.m_thermalprofile.Meio <> "1" Then
 
                     Dim Zb = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
 
@@ -1163,7 +1163,7 @@ Namespace UnitOperations
                         U_ext = 1000000.0
                     End If
 
-                ElseIf Me.m_thermalprofile.Meio = 0 Then
+                ElseIf Me.m_thermalprofile.Meio = "0" Then 'Air
 
                     'Average air properties
                     vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
@@ -1185,7 +1185,7 @@ Namespace UnitOperations
                     'External HTC contribution
                     U_ext = h_ext * (Dext + esp_isol) / Dint
 
-                ElseIf Me.m_thermalprofile.Meio = 1 Then
+                ElseIf Me.m_thermalprofile.Meio = 1 Then 'Water
 
                     'Average water properties
                     vel = Convert.ToDouble(Me.m_thermalprofile.Velocidade)
