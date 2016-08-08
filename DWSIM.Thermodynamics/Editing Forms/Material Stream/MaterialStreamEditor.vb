@@ -363,7 +363,7 @@ Public Class MaterialStreamEditor
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.pressure})
             End If
 
-            If p.Name = "OverallLiquid" Then
+            If p.Name.Contains("Overall") Then
                 refval = MatStream.Phases(0).Properties.surfaceTension.GetValueOrDefault
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.surfaceTension, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Tensosuperficial"), val, units.surfaceTension})
@@ -429,7 +429,7 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub btnNormalizeInput_Click(sender As Object, e As EventArgs) Handles btnNormalizeInput.Click
-        Dim total As Double = 0
+        Dim total As Double = 0.0#
         For Each row As DataGridViewRow In gridInputComposition.Rows
             total += row.Cells(1).Value
         Next
@@ -439,15 +439,15 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub btnEqualizeInput_Click(sender As Object, e As EventArgs) Handles btnEqualizeInput.Click
-        Dim total As Double = 0
+        Dim total As Double = 0.0#
         For Each row As DataGridViewRow In gridInputComposition.Rows
-            row.Cells(1).Value = 1 / gridInputComposition.Rows.Count
+            row.Cells(1).Value = 1.0# / gridInputComposition.Rows.Count
         Next
     End Sub
 
     Private Sub btnEraseInput_Click(sender As Object, e As EventArgs) Handles btnEraseInput.Click
         For Each row As DataGridViewRow In gridInputComposition.Rows
-            row.Cells(1).Value = 0
+            row.Cells(1).Value = 0.0#
         Next
     End Sub
 
