@@ -338,6 +338,11 @@ Namespace UnitOperations
             For Each xel As XElement In data
                 Try
                     xel.Element("Type").Value = xel.Element("Type").Value.Replace("Microsoft.MSDN.Samples.GraphicObjects", "DWSIM.DrawingTools.GraphicObjects")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("OT_Ajuste", "OT_Adjust")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("OT_Especificacao", "OT_Spec")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("OT_Reciclo", "OT_Recycle")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("GO_Texto", "GO_Text")
+                    xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("GO_Figura", "GO_Image")
                     Dim obj As GraphicObject = Nothing
                     Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                     If Not t Is Nothing Then obj = Activator.CreateInstance(t)

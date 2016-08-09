@@ -220,4 +220,7 @@
   <data name="btnInitialize.Text" xml:space="preserve">
     <value>Initialize/Reload</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Flowsheet UO - Control Panel</value>
+  </data>
 </root>

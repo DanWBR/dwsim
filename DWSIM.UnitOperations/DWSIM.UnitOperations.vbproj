@@ -679,6 +679,9 @@
     <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.en.resx">
+      <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.en.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>

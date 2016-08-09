@@ -22,21 +22,18 @@ Partial Class EditingForm_Flowsheet_Viewer
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Flowsheet_Viewer))
         Me.SuspendLayout()
         '
-        'FlowsheetUOViewerForm
+        'EditingForm_Flowsheet_Viewer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1008, 600)
         Me.DoubleBuffered = True
-        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.HideOnClose = True
-        Me.Name = "FlowsheetUOViewerForm"
+        Me.Name = "EditingForm_Flowsheet_Viewer"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FlowsheetUOViewerForm"
         Me.ResumeLayout(False)
 
     End Sub
