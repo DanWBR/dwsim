@@ -1343,6 +1343,7 @@ Namespace GraphicObjects
                     For Each prop In props
                         propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
                         pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                        If pval0 Is Nothing Then Exit For
                         If TypeOf pval0 Is Double Then
                             propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
                         Else
@@ -1428,6 +1429,7 @@ Namespace GraphicObjects
                     For Each prop In props
                         propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
                         pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                        If pval0 Is Nothing Then Exit For
                         If TypeOf pval0 Is Double Then
                             propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
                         Else
