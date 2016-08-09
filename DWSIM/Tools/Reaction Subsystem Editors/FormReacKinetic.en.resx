@@ -120,19 +120,37 @@
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="KryptonLabel18.ImageKey" xml:space="preserve">
+    <value>(none)</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="KryptonLabel18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
   <data name="KryptonLabel18.Text" xml:space="preserve">
-    <value>T in K</value>
+    <value>E in J/mol, T in K</value>
+  </data>
+  <data name="KryptonLabel17.ImageKey" xml:space="preserve">
+    <value>(none)</value>
+  </data>
+  <data name="KryptonLabel17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
   </data>
   <data name="KryptonLabel17.Text" xml:space="preserve">
-    <value>T in K</value>
+    <value>E in J/mol, T in K</value>
+  </data>
+  <data name="KryptonLabel15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 13</value>
   </data>
   <data name="KryptonLabel15.Text" xml:space="preserve">
     <value>E '</value>
   </data>
+  <data name="KryptonLabel16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 13</value>
+  </data>
   <data name="KryptonLabel16.Text" xml:space="preserve">
     <value>A '</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="KryptonLabel11.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
   </data>
@@ -157,8 +175,17 @@
   <data name="cbVelUnit.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 21</value>
   </data>
+  <data name="KryptonLabel10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 13</value>
+  </data>
   <data name="KryptonLabel10.Text" xml:space="preserve">
     <value>Reverse Reaction [k' = A' exp(-E'/RT)]</value>
+  </data>
+  <data name="KryptonLabel5.ImageKey" xml:space="preserve">
+    <value>(none)</value>
+  </data>
+  <data name="KryptonLabel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 13</value>
   </data>
   <data name="KryptonLabel5.Text" xml:space="preserve">
     <value>Direct Reaction [k = A exp(-E/RT)]</value>
@@ -195,12 +222,6 @@
   </data>
   <data name="cbBase.Items6" xml:space="preserve">
     <value>Partial Pressures</value>
-  </data>
-  <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
-  <data name="KryptonLabel6.Text" xml:space="preserve">
-    <value>Phase</value>
   </data>
   <data name="tbPhase.Items1" xml:space="preserve">
     <value>Liquid</value>

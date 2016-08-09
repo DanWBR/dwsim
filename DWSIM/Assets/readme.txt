@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 4 - August 2016
+Version 4.0 Update 5 - August 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 5
+
+- [FIX] Fixed missing Compound Spec selection on Rigorous Column editor
+- [FIX] Fixed non-converging samples
+- [FIX] Fixed bugs in the Flowsheet UO
 
 Version 4.0 Update 4
 

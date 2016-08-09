@@ -84,18 +84,19 @@ Partial Class FormReacKinetic
         '
         'KryptonButton4
         '
-        Me.KryptonButton4.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonButton4, "KryptonButton4")
+        Me.KryptonButton4.ImageKey = Nothing
         Me.KryptonButton4.Name = "KryptonButton4"
         '
         'KryptonButton3
         '
-        Me.KryptonButton3.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonButton3, "KryptonButton3")
+        Me.KryptonButton3.ImageKey = Nothing
         Me.KryptonButton3.Name = "KryptonButton3"
         '
         'GroupBox2
         '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.GroupBox3)
         Me.GroupBox2.Controls.Add(Me.tbCompBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel9)
@@ -107,12 +108,12 @@ Partial Class FormReacKinetic
         Me.GroupBox2.Controls.Add(Me.cbBase)
         Me.GroupBox2.Controls.Add(Me.KryptonLabel6)
         Me.GroupBox2.Controls.Add(Me.tbPhase)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'GroupBox3
         '
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.KryptonLabel18)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel17)
         Me.GroupBox3.Controls.Add(Me.tbRevE)
@@ -129,19 +130,16 @@ Partial Class FormReacKinetic
         Me.GroupBox3.Controls.Add(Me.cbVelUnit)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel10)
         Me.GroupBox3.Controls.Add(Me.KryptonLabel5)
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
         '
         'KryptonLabel18
         '
-        Me.KryptonLabel18.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel18, "KryptonLabel18")
         Me.KryptonLabel18.Name = "KryptonLabel18"
         '
         'KryptonLabel17
         '
-        Me.KryptonLabel17.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel17, "KryptonLabel17")
         Me.KryptonLabel17.Name = "KryptonLabel17"
         '
@@ -152,8 +150,8 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel15
         '
-        Me.KryptonLabel15.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel15, "KryptonLabel15")
+        Me.KryptonLabel15.ImageKey = Nothing
         Me.KryptonLabel15.Name = "KryptonLabel15"
         '
         'tbRevA
@@ -163,8 +161,8 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel16
         '
-        Me.KryptonLabel16.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel16, "KryptonLabel16")
+        Me.KryptonLabel16.ImageKey = Nothing
         Me.KryptonLabel16.Name = "KryptonLabel16"
         '
         'tbFwdE
@@ -174,8 +172,8 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel14
         '
-        Me.KryptonLabel14.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel14, "KryptonLabel14")
+        Me.KryptonLabel14.ImageKey = Nothing
         Me.KryptonLabel14.Name = "KryptonLabel14"
         '
         'tbFwdA
@@ -185,45 +183,44 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel13
         '
-        Me.KryptonLabel13.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel13, "KryptonLabel13")
+        Me.KryptonLabel13.ImageKey = Nothing
         Me.KryptonLabel13.Name = "KryptonLabel13"
         '
         'KryptonLabel11
         '
         resources.ApplyResources(Me.KryptonLabel11, "KryptonLabel11")
-        Me.KryptonLabel11.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel11.ImageKey = Nothing
         Me.KryptonLabel11.Name = "KryptonLabel11"
         '
         'cbConcUnit
         '
+        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
         Me.cbConcUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbConcUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbConcUnit, "cbConcUnit")
         Me.cbConcUnit.Name = "cbConcUnit"
         '
         'KryptonLabel12
         '
         resources.ApplyResources(Me.KryptonLabel12, "KryptonLabel12")
-        Me.KryptonLabel12.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel12.ImageKey = Nothing
         Me.KryptonLabel12.Name = "KryptonLabel12"
         '
         'cbVelUnit
         '
+        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
         Me.cbVelUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbVelUnit.DropDownWidth = 121
-        resources.ApplyResources(Me.cbVelUnit, "cbVelUnit")
         Me.cbVelUnit.Name = "cbVelUnit"
         '
         'KryptonLabel10
         '
-        Me.KryptonLabel10.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel10, "KryptonLabel10")
+        Me.KryptonLabel10.ImageKey = Nothing
         Me.KryptonLabel10.Name = "KryptonLabel10"
         '
         'KryptonLabel5
         '
-        Me.KryptonLabel5.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel5, "KryptonLabel5")
         Me.KryptonLabel5.Name = "KryptonLabel5"
         '
@@ -235,8 +232,8 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel9
         '
-        Me.KryptonLabel9.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel9, "KryptonLabel9")
+        Me.KryptonLabel9.ImageKey = Nothing
         Me.KryptonLabel9.Name = "KryptonLabel9"
         '
         'tbTmax
@@ -252,45 +249,46 @@ Partial Class FormReacKinetic
         'KryptonLabel8
         '
         resources.ApplyResources(Me.KryptonLabel8, "KryptonLabel8")
-        Me.KryptonLabel8.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel8.ImageKey = Nothing
         Me.KryptonLabel8.Name = "KryptonLabel8"
         '
         'KryptonLabel7
         '
         resources.ApplyResources(Me.KryptonLabel7, "KryptonLabel7")
-        Me.KryptonLabel7.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel7.ImageKey = Nothing
         Me.KryptonLabel7.Name = "KryptonLabel7"
         '
         'KryptonLabel4
         '
         resources.ApplyResources(Me.KryptonLabel4, "KryptonLabel4")
-        Me.KryptonLabel4.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel4.ImageKey = Nothing
         Me.KryptonLabel4.Name = "KryptonLabel4"
         '
         'cbBase
         '
+        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbBase.DropDownWidth = 121
-        resources.ApplyResources(Me.cbBase, "cbBase")
         Me.cbBase.Items.AddRange(New Object() {resources.GetString("cbBase.Items"), resources.GetString("cbBase.Items1"), resources.GetString("cbBase.Items2"), resources.GetString("cbBase.Items3"), resources.GetString("cbBase.Items4"), resources.GetString("cbBase.Items5"), resources.GetString("cbBase.Items6")})
         Me.cbBase.Name = "cbBase"
         '
         'KryptonLabel6
         '
         resources.ApplyResources(Me.KryptonLabel6, "KryptonLabel6")
-        Me.KryptonLabel6.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonLabel6.ImageKey = Nothing
         Me.KryptonLabel6.Name = "KryptonLabel6"
         '
         'tbPhase
         '
+        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.tbPhase.DropDownWidth = 121
         Me.tbPhase.Items.AddRange(New Object() {resources.GetString("tbPhase.Items"), resources.GetString("tbPhase.Items1"), resources.GetString("tbPhase.Items2")})
-        resources.ApplyResources(Me.tbPhase, "tbPhase")
         Me.tbPhase.Name = "tbPhase"
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.tbEquation)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel3)
         Me.GroupBox1.Controls.Add(Me.KryptonButton2)
@@ -299,7 +297,6 @@ Partial Class FormReacKinetic
         Me.GroupBox1.Controls.Add(Me.tbStoich)
         Me.GroupBox1.Controls.Add(Me.KryptonDataGridView1)
         Me.GroupBox1.Controls.Add(Me.KryptonLabel1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -311,14 +308,14 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel3
         '
-        Me.KryptonLabel3.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel3, "KryptonLabel3")
+        Me.KryptonLabel3.ImageKey = Nothing
         Me.KryptonLabel3.Name = "KryptonLabel3"
         '
         'KryptonButton2
         '
         resources.ApplyResources(Me.KryptonButton2, "KryptonButton2")
-        Me.KryptonButton2.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.KryptonButton2.ImageKey = Nothing
         Me.KryptonButton2.Name = "KryptonButton2"
         '
         'tbReacHeat
@@ -329,8 +326,8 @@ Partial Class FormReacKinetic
         '
         'KryptonLabel2
         '
-        Me.KryptonLabel2.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel2, "KryptonLabel2")
+        Me.KryptonLabel2.ImageKey = Nothing
         Me.KryptonLabel2.Name = "KryptonLabel2"
         '
         'tbStoich
@@ -341,13 +338,13 @@ Partial Class FormReacKinetic
         '
         'KryptonDataGridView1
         '
+        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.AllowUserToAddRows = False
         Me.KryptonDataGridView1.AllowUserToDeleteRows = False
         Me.KryptonDataGridView1.AllowUserToResizeRows = False
         Me.KryptonDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.KryptonDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.KryptonDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7, Me.Column8, Me.Column1})
-        resources.ApplyResources(Me.KryptonDataGridView1, "KryptonDataGridView1")
         Me.KryptonDataGridView1.MultiSelect = False
         Me.KryptonDataGridView1.Name = "KryptonDataGridView1"
         Me.KryptonDataGridView1.RowHeadersVisible = False
@@ -359,7 +356,7 @@ Partial Class FormReacKinetic
         resources.ApplyResources(Me.Column2, "Column2")
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
-        Me.Column2.ToolTipText = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.Column2.ToolTipText = Nothing
         '
         'Column3
         '
@@ -367,14 +364,14 @@ Partial Class FormReacKinetic
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
-        Me.Column3.ToolTipText = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.Column3.ToolTipText = Nothing
         '
         'Column4
         '
         Me.Column4.FillWeight = 10.0!
         resources.ApplyResources(Me.Column4, "Column4")
         Me.Column4.Name = "Column4"
-        Me.Column4.ToolTipText = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.Column4.ToolTipText = Nothing
         '
         'Column5
         '
@@ -387,7 +384,7 @@ Partial Class FormReacKinetic
         Me.Column6.FillWeight = 20.0!
         resources.ApplyResources(Me.Column6, "Column6")
         Me.Column6.Name = "Column6"
-        Me.Column6.ToolTipText = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.Column6.ToolTipText = Nothing
         '
         'Column7
         '
@@ -406,34 +403,34 @@ Partial Class FormReacKinetic
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
-        Me.Column1.ToolTipText = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
+        Me.Column1.ToolTipText = Nothing
         '
         'KryptonLabel1
         '
-        Me.KryptonLabel1.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel1, "KryptonLabel1")
+        Me.KryptonLabel1.ImageKey = Nothing
         Me.KryptonLabel1.Name = "KryptonLabel1"
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.KryptonLabel19)
         Me.GroupBox4.Controls.Add(Me.KryptonLabel20)
         Me.GroupBox4.Controls.Add(Me.tbName)
         Me.GroupBox4.Controls.Add(Me.tbDesc)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
         'KryptonLabel19
         '
-        Me.KryptonLabel19.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel19, "KryptonLabel19")
+        Me.KryptonLabel19.ImageKey = Nothing
         Me.KryptonLabel19.Name = "KryptonLabel19"
         '
         'KryptonLabel20
         '
-        Me.KryptonLabel20.ImageKey = Global.DWSIM.My.Resources.DWSIM.NewVersionAvailable
         resources.ApplyResources(Me.KryptonLabel20, "KryptonLabel20")
+        Me.KryptonLabel20.ImageKey = Nothing
         Me.KryptonLabel20.Name = "KryptonLabel20"
         '
         'tbName
