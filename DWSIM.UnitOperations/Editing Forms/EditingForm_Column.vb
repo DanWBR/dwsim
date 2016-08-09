@@ -129,22 +129,31 @@ Public Class EditingForm_Column
             Select Case .Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     cunits = New String() {"M", "We"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
                     cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Recovery
                     cunits = New String() {"% M/M", "% W/W"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Heat_Duty
                     cunits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Stream_Ratio
                     cunits = New String() {""}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     cunits = New String() {"K", "R", "C", "F"}
+                    cbCondComp.Enabled = False
             End Select
             cbCondSpecUnits.Items.Clear()
             cbCondSpecUnits.Items.AddRange(cunits)
@@ -161,27 +170,45 @@ Public Class EditingForm_Column
             Select Case .Specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     runits = New String() {"M", "We"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     runits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
                     runits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Recovery
                     runits = New String() {"% M/M", "% W/W"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Heat_Duty
                     runits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                     runits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     runits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Stream_Ratio
                     runits = New String() {""}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     runits = New String() {"K", "R", "C", "F"}
+                    cbRebComp.Enabled = False
             End Select
             cbRebSpecUnits.Items.Clear()
             cbRebSpecUnits.Items.AddRange(cunits)
             cbRebSpecUnits.SelectedItem = .Specs("R").SpecUnit
             tbRebSpecValue.Text = su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").SpecValue).ToString(nf)
+
+            cbCondComp.Items.Clear()
+            cbCondComp.Items.AddRange(SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToArray)
+
+            cbRebComp.Items.Clear()
+            cbRebComp.Items.AddRange(SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToArray)
+
+            If cbCondComp.Items.Contains(.Specs("C").ComponentID) Then cbCondComp.SelectedItem = .Specs("C").ComponentID
+            If cbRebComp.Items.Contains(.Specs("R").ComponentID) Then cbRebComp.SelectedItem = .Specs("R").ComponentID
 
             chkUseIE_T.Checked = .UseTemperatureEstimates
             chkUseIE_LF.Checked = .UseLiquidFlowEstimates
@@ -477,22 +504,31 @@ Public Class EditingForm_Column
             Select Case SimObject.Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     cunits = New String() {"M", "We"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
                     cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Recovery
                     cunits = New String() {"% M/M", "% W/W"}
+                    cbCondComp.Enabled = True
                 Case ColumnSpec.SpecType.Heat_Duty
                     cunits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Stream_Ratio
                     cunits = New String() {""}
+                    cbCondComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     cunits = New String() {"K", "R", "C", "F"}
+                    cbCondComp.Enabled = False
             End Select
             cbCondSpecUnits.Items.Clear()
             cbCondSpecUnits.Items.AddRange(cunits)
@@ -595,22 +631,31 @@ Public Class EditingForm_Column
             Select Case SimObject.Specs("R").SType
                 Case ColumnSpec.SpecType.Component_Fraction
                     cunits = New String() {"M", "We"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
                     cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Component_Recovery
                     cunits = New String() {"% M/M", "% W/W"}
+                    cbRebComp.Enabled = True
                 Case ColumnSpec.SpecType.Heat_Duty
                     cunits = New String() {"kW", "kcal/h", "BTU/h", "BTU/s", "cal/s", "HP", "kJ/h", "kJ/d", "MW", "W"}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
                     cunits = New String() {"g/s", "lbm/h", "kg/s", "kg/h", "kg/d", "kg/min", "lb/min", "lb/s"}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
                     cunits = New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Stream_Ratio
                     cunits = New String() {""}
+                    cbRebComp.Enabled = False
                 Case ColumnSpec.SpecType.Temperature
                     cunits = New String() {"K", "R", "C", "F"}
+                    cbRebComp.Enabled = False
             End Select
             cbRebSpecUnits.Items.Clear()
             cbRebSpecUnits.Items.AddRange(cunits)
@@ -733,4 +778,17 @@ Public Class EditingForm_Column
     Private Sub chkIOAverageKb_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOAverageKb.CheckedChanged
         SimObject.KbjWeightedAverage = chkIOAverageKb.Checked
     End Sub
+
+    Private Sub cbCondComp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCondComp.SelectedIndexChanged
+        If Loaded Then
+            Me.SimObject.Specs("C").ComponentID = cbCondComp.SelectedItem.ToString
+        End If
+    End Sub
+
+    Private Sub cbRebComp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRebComp.SelectedIndexChanged
+        If Loaded Then
+            Me.SimObject.Specs("R").ComponentID = cbRebComp.SelectedItem.ToString
+        End If
+    End Sub
+
 End Class

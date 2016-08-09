@@ -113,12 +113,10 @@ Public Class EditingForm_ShortcutColumn
 
             cbLKey.Items.Clear()
             cbLKey.Items.AddRange(SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToArray)
-            cbLKey.SelectedItem = units.heatflow
-
+   
             cbHKey.Items.Clear()
             cbHKey.Items.AddRange(SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToArray)
-            cbHKey.SelectedItem = units.deltaT
-
+   
             If cbLKey.Items.Contains(.m_lightkey) Then cbLKey.SelectedItem = .m_lightkey
             If cbHKey.Items.Contains(.m_heavykey) Then cbHKey.SelectedItem = .m_heavykey
 

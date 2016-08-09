@@ -56,6 +56,8 @@ Partial Class EditingForm_Column
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tbNStages = New System.Windows.Forms.TextBox()
         Me.TabCondenser = New System.Windows.Forms.TabPage()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.cbCondComp = New System.Windows.Forms.ComboBox()
         Me.cbCondType = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -72,6 +74,8 @@ Partial Class EditingForm_Column
         Me.cbCondPressureUnits = New System.Windows.Forms.ComboBox()
         Me.tbCondPressure = New System.Windows.Forms.TextBox()
         Me.TabReboiler = New System.Windows.Forms.TabPage()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.cbRebComp = New System.Windows.Forms.ComboBox()
         Me.cbRebSpecUnits = New System.Windows.Forms.ComboBox()
         Me.tbRebSpecValue = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -353,6 +357,8 @@ Partial Class EditingForm_Column
         'TabCondenser
         '
         resources.ApplyResources(Me.TabCondenser, "TabCondenser")
+        Me.TabCondenser.Controls.Add(Me.Label19)
+        Me.TabCondenser.Controls.Add(Me.cbCondComp)
         Me.TabCondenser.Controls.Add(Me.cbCondType)
         Me.TabCondenser.Controls.Add(Me.Label2)
         Me.TabCondenser.Controls.Add(Me.Label8)
@@ -371,6 +377,21 @@ Partial Class EditingForm_Column
         Me.TabCondenser.Name = "TabCondenser"
         Me.ToolTip1.SetToolTip(Me.TabCondenser, resources.GetString("TabCondenser.ToolTip"))
         Me.TabCondenser.UseVisualStyleBackColor = True
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        '
+        'cbCondComp
+        '
+        resources.ApplyResources(Me.cbCondComp, "cbCondComp")
+        Me.cbCondComp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCondComp.FormattingEnabled = True
+        Me.cbCondComp.Items.AddRange(New Object() {resources.GetString("cbCondComp.Items"), resources.GetString("cbCondComp.Items1"), resources.GetString("cbCondComp.Items2"), resources.GetString("cbCondComp.Items3"), resources.GetString("cbCondComp.Items4"), resources.GetString("cbCondComp.Items5"), resources.GetString("cbCondComp.Items6"), resources.GetString("cbCondComp.Items7"), resources.GetString("cbCondComp.Items8")})
+        Me.cbCondComp.Name = "cbCondComp"
+        Me.ToolTip1.SetToolTip(Me.cbCondComp, resources.GetString("cbCondComp.ToolTip"))
         '
         'cbCondType
         '
@@ -483,6 +504,8 @@ Partial Class EditingForm_Column
         'TabReboiler
         '
         resources.ApplyResources(Me.TabReboiler, "TabReboiler")
+        Me.TabReboiler.Controls.Add(Me.Label24)
+        Me.TabReboiler.Controls.Add(Me.cbRebComp)
         Me.TabReboiler.Controls.Add(Me.cbRebSpecUnits)
         Me.TabReboiler.Controls.Add(Me.tbRebSpecValue)
         Me.TabReboiler.Controls.Add(Me.Label15)
@@ -493,6 +516,21 @@ Partial Class EditingForm_Column
         Me.TabReboiler.Name = "TabReboiler"
         Me.ToolTip1.SetToolTip(Me.TabReboiler, resources.GetString("TabReboiler.ToolTip"))
         Me.TabReboiler.UseVisualStyleBackColor = True
+        '
+        'Label24
+        '
+        resources.ApplyResources(Me.Label24, "Label24")
+        Me.Label24.Name = "Label24"
+        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
+        '
+        'cbRebComp
+        '
+        resources.ApplyResources(Me.cbRebComp, "cbRebComp")
+        Me.cbRebComp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbRebComp.FormattingEnabled = True
+        Me.cbRebComp.Items.AddRange(New Object() {resources.GetString("cbRebComp.Items"), resources.GetString("cbRebComp.Items1"), resources.GetString("cbRebComp.Items2"), resources.GetString("cbRebComp.Items3"), resources.GetString("cbRebComp.Items4"), resources.GetString("cbRebComp.Items5"), resources.GetString("cbRebComp.Items6"), resources.GetString("cbRebComp.Items7"), resources.GetString("cbRebComp.Items8")})
+        Me.cbRebComp.Name = "cbRebComp"
+        Me.ToolTip1.SetToolTip(Me.cbRebComp, resources.GetString("cbRebComp.ToolTip"))
         '
         'cbRebSpecUnits
         '
@@ -1019,4 +1057,8 @@ Partial Class EditingForm_Column
     Friend WithEvents cbSolvingMethod As System.Windows.Forms.ComboBox
     Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents btnResults As System.Windows.Forms.Button
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents cbCondComp As System.Windows.Forms.ComboBox
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents cbRebComp As System.Windows.Forms.ComboBox
 End Class
