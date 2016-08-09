@@ -1361,7 +1361,7 @@ Namespace GraphicObjects
                         count += 1
                     Next
 
-                    Me.Padding = 3 / Me.AdditionalInfo
+                    If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
 
                     If maxH = 0 Then maxH = 20
 

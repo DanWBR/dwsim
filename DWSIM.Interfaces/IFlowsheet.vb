@@ -26,6 +26,8 @@
 
     ReadOnly Property UtilityPlugins As Dictionary(Of String, IUtilityPlugin)
 
+    Property MasterUnitOp As ISimulationObject
+
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)

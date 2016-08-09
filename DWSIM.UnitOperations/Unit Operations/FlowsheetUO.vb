@@ -264,42 +264,42 @@ Namespace UnitOperations
                 fs.AddSimulationObject(obj)
             Next
 
-            'For Each so In form.SimulationObjects.Values
-            '    Try
-            '        If TryCast(so, SpecialOps.Adjust) IsNot Nothing Then
-            '            Dim so2 As DWSIM.SimulationObjects.SpecialOps.Adjust = so
-            '            If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ManipulatedObjectData.m_ID) Then
-            '                so2.ManipulatedObject = form.Collections.FlowsheetObjectCollection(so2.ManipulatedObjectData.m_ID)
-            '                DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
-            '            End If
-            '            If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ControlledObjectData.m_ID) Then
-            '                so2.ControlledObject = form.Collections.FlowsheetObjectCollection(so2.ControlledObjectData.m_ID)
-            '                DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
-            '            End If
-            '            If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.ReferencedObjectData.m_ID) Then
-            '                so2.ReferenceObject = form.Collections.FlowsheetObjectCollection(so2.ReferencedObjectData.m_ID)
-            '                DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
-            '            End If
-            '        End If
-            '        If TryCast(so, DWSIM.SimulationObjects.SpecialOps.Spec) IsNot Nothing Then
-            '            Dim so2 As DWSIM.SimulationObjects.SpecialOps.Spec = so
-            '            If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.m_ID) Then
-            '                so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.m_ID)
-            '                DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
-            '            End If
-            '            If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.m_ID) Then
-            '                so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.m_ID)
-            '                DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
-            '            End If
-            '        End If
-            '        If TryCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO) IsNot Nothing Then
-            '            DirectCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).UpdateConnectors2()
-            '            DirectCast(so, DWSIM.SimulationObjects.UnitOperations.CapeOpenUO).UpdatePortsFromConnectors()
-            '        End If
-            '    Catch ex As Exception
-            '        excs.Add(New Exception("Error Loading Unit Operation Connection Information", ex))
-            '    End Try
-            'Next
+            For Each so In fs.SimulationObjects.Values
+                Try
+                    If TryCast(so, SpecialOps.Adjust) IsNot Nothing Then
+                        Dim so2 As SpecialOps.Adjust = so
+                        If fs.SimulationObjects.ContainsKey(so2.ManipulatedObjectData.ID) Then
+                            so2.ManipulatedObject = fs.SimulationObjects(so2.ManipulatedObjectData.ID)
+                            DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
+                        End If
+                        If fs.SimulationObjects.ContainsKey(so2.ControlledObjectData.ID) Then
+                            so2.ControlledObject = fs.SimulationObjects(so2.ControlledObjectData.ID)
+                            DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
+                        End If
+                        If fs.SimulationObjects.ContainsKey(so2.ReferencedObjectData.ID) Then
+                            so2.ReferenceObject = fs.SimulationObjects(so2.ReferencedObjectData.ID)
+                            DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
+                        End If
+                    End If
+                    If TryCast(so, SpecialOps.Spec) IsNot Nothing Then
+                        Dim so2 As SpecialOps.Spec = so
+                        If fs.SimulationObjects.ContainsKey(so2.TargetObjectData.ID) Then
+                            so2.TargetObject = fs.SimulationObjects(so2.TargetObjectData.ID)
+                            DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
+                        End If
+                        If fs.SimulationObjects.ContainsKey(so2.SourceObjectData.ID) Then
+                            so2.SourceObject = fs.SimulationObjects(so2.SourceObjectData.ID)
+                            DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
+                        End If
+                    End If
+                    If TryCast(so, CapeOpenUO) IsNot Nothing Then
+                        DirectCast(so, CapeOpenUO).UpdateConnectors2()
+                        DirectCast(so, CapeOpenUO).UpdatePortsFromConnectors()
+                    End If
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Unit Operation Connection Information", ex))
+                End Try
+            Next
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
 
@@ -564,7 +564,7 @@ Namespace UnitOperations
 
             'Validate()
 
-            'Me.Fsheet.MasterUnitOp = Me
+            Me.Fsheet.MasterUnitOp = Me
 
             Calculated = False
 

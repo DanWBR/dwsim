@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 2 - August 2016
+Version 4.0 Update 4 - August 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 4
+
+- [FIX] Fixed loading of DWSIM 3.x simulations with logical blocks
+- [FIX] Fixed bugs in the Flowsheet UO
+
+Version 4.0 Update 3
+
+- [FIX] Fixed Gibbs Reactor Editor
+- [FIX] Fixed Pipe insulation k calculation
+- [FIX] Fixed Material Stream editor composition Clear/Equalize buttons
 
 Version 4.0 Update 2
 

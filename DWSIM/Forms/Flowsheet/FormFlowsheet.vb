@@ -52,7 +52,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 #Region "    Variable Declarations "
 
     Public Property MasterFlowsheet As IFlowsheet = Nothing Implements IFlowsheet.MasterFlowsheet
-    Public Property MasterUnitOp As Flowsheet = Nothing
+    <Xml.Serialization.XmlIgnore> Public Property MasterUnitOp As ISimulationObject = Nothing Implements IFlowsheet.MasterUnitOp
     Public Property RedirectMessages As Boolean = False Implements IFlowsheet.RedirectMessages
 
     Public FrmStSim1 As New FormSimulSettings
