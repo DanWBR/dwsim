@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 5 - August 2016
+Version 4.0 Update 6 - August 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 6
+
+- [NEW] Added an option to hide solid phase from list of present phases (for ChemSep compatibility)
+- [NEW] Sour Water PP: Added an option to ignore vapor fraction bounds during flash calculations
 
 Version 4.0 Update 5
 

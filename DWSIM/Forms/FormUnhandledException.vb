@@ -45,14 +45,15 @@ Public Class FormUnhandledException
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         If DWSIM.App.IsRunningOnMono Then Console.WriteLine(ex.ToString)
-        Me.TextBox1.Text = ex.Message.ToString
-        Me.TextBox2.Text = ex.ToString
+        Me.TextBox1.Text = ex.Message.ToString.Replace("C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM4\", "").Replace("C:\Users\ptc0\Source\Repos\dwsim4\", "")
+        Me.TextBox2.Text = ex.ToString.Replace("C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM4\", "").Replace("C:\Users\ptc0\Source\Repos\dwsim4\", "")
         Button4.Enabled = False
         Try
             Dim baseaddress As String = "https://github.com/DanWBR/dwsim4/blob/master/"
             Dim st As New StackTrace(ex, True)
             Dim frame As StackFrame = st.GetFrame(0)
             Dim path As String = frame.GetFileName.Replace("C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM4\", baseaddress)
+            path = path.Replace("C:\Users\ptc0\Source\Repos\dwsim4\", baseaddress)
             Dim line As Integer = frame.GetFileLineNumber()
             If path.Contains(baseaddress) Then
                 githublink = path & "#L" & line
