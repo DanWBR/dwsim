@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Base Class\FlowsheetBag.vb" />
     <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
+    <Compile Include="Misc\Crypto.vb" />
     <Compile Include="Misc\CapeOpenObjInfo.vb" />
     <Compile Include="Misc\CCapeCollection.vb" />
     <Compile Include="Misc\ComIStreamWrapper.vb" />

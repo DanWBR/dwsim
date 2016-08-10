@@ -44,16 +44,19 @@ Public Class FormUnhandledException
 
     Private Sub FormUnhandledException_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If DWSIM.App.IsRunningOnMono Then Console.WriteLine(ex.ToString)
-        Me.TextBox1.Text = ex.Message.ToString.Replace("C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM4\", "").Replace("C:\Users\ptc0\Source\Repos\dwsim4\", "")
-        Me.TextBox2.Text = ex.ToString.Replace("C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM4\", "").Replace("C:\Users\ptc0\Source\Repos\dwsim4\", "")
+        Dim mystring = SharedClasses.EncryptString.StringCipher.Decrypt("YEZeCozmw0l3XjOYI0EpOXHh1LK9as6Bi5Gwqr7pYZyXtcNYQyzayHXts6NjAJlpfixoim98NAwVHli/+h1fYk6g4W82ewXDxkLwzg5SFCCSS2W0K3TvGMgC0wQWuKfrut0QdnByVKZ4x+/svdQwwXsUkZdELOUtnWiOdeV6WIQ=", "dwsim000000")
+        Dim mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000")
+
+        If DWSIM.App.IsRunningOnMono Then Console.WriteLine(ex.ToString.Replace(mystring, "").Replace(mystring2, ""))
+        Me.TextBox1.Text = ex.Message.ToString.Replace(mystring, "").Replace(mystring2, "")
+        Me.TextBox2.Text = ex.ToString.Replace(mystring, "").Replace(mystring2, "")
         Button4.Enabled = False
         Try
             Dim baseaddress As String = "https://github.com/DanWBR/dwsim4/blob/master/"
             Dim st As New StackTrace(ex, True)
             Dim frame As StackFrame = st.GetFrame(0)
-            Dim path As String = frame.GetFileName.Replace("C:\Users\danie\Documents\Visual Studio 2013\Projects\DWSIM4\", baseaddress)
-            path = path.Replace("C:\Users\ptc0\Source\Repos\dwsim4\", baseaddress)
+            Dim path As String = frame.GetFileName.Replace(mystring, baseaddress)
+            path = path.Replace(mystring2, baseaddress)
             Dim line As Integer = frame.GetFileLineNumber()
             If path.Contains(baseaddress) Then
                 githublink = path & "#L" & line
