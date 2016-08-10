@@ -453,16 +453,19 @@ Public Class MaterialStreamEditor
             Case 3
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
+                rbSpecVapor.Checked = True
                 rbSpecVapor.Enabled = True
                 rbSpecLiquid.Enabled = True
             Case 4
                 tbTemp.Enabled = True
                 tbFracSpec.Enabled = True
+                rbSpecVapor.Checked = True
                 rbSpecVapor.Enabled = True
                 rbSpecLiquid.Enabled = True
             Case 5
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
+                rbSpecSolid.Checked = True
                 rbSpecSolid.Enabled = True
         End Select
 
