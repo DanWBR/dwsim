@@ -369,6 +369,45 @@ Public Class MaterialStreamEditor
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Tensosuperficial"), val, units.surfaceTension})
             End If
 
+            If p.Name = "Liquid1" Then
+
+                If TypeOf MatStream.PropertyPackage Is PropertyPackages.SeawaterPropertyPackage Then
+
+                    Dim water As BaseClasses.Compound = (From subst As BaseClasses.Compound In MatStream.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.CAS_Number = "7732-18-5").SingleOrDefault
+                    Dim salt As BaseClasses.Compound = (From subst As BaseClasses.Compound In MatStream.Phases(3).Compounds.Values Select subst Where subst.ConstantProperties.Name = "Salt").SingleOrDefault
+
+                    Dim salinity As Double = salt.MassFraction.GetValueOrDefault / water.MassFraction.GetValueOrDefault
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Salinity"), salinity, ""})
+
+                End If
+
+                If TypeOf MatStream.PropertyPackage Is PropertyPackages.SourWaterPropertyPackage Then
+
+                    refval = MatStream.Phases(3).Properties.pH.GetValueOrDefault
+                    .Add(New Object() {"pH", refval, ""})
+
+                End If
+
+                If MatStream.PropertyPackage.IsElectrolytePP Then
+
+                    refval = MatStream.Phases(3).Properties.pH.GetValueOrDefault
+                    .Add(New Object() {"pH", refval, ""})
+
+                    refval = MatStream.Phases(3).Properties.osmoticCoefficient.GetValueOrDefault
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("OsmoticCoefficient"), refval, ""})
+
+                    refval = MatStream.Phases(3).Properties.freezingPoint.GetValueOrDefault
+                    val = Converter.ConvertFromSI(units.temperature, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FreezingPoint"), val, units.temperature})
+
+                    refval = MatStream.Phases(3).Properties.freezingPointDepression.GetValueOrDefault
+                    val = Converter.ConvertFromSI(units.deltaT, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FreezingPointDepression"), val, units.deltaT})
+
+                End If
+
+            End If
+
         End With
 
         For Each row As DataGridViewRow In grid.Rows
@@ -415,9 +454,12 @@ Public Class MaterialStreamEditor
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
                 rbSpecVapor.Enabled = True
+                rbSpecLiquid.Enabled = True
             Case 4
                 tbTemp.Enabled = True
                 tbFracSpec.Enabled = True
+                rbSpecVapor.Enabled = True
+                rbSpecLiquid.Enabled = True
             Case 5
                 tbPressure.Enabled = True
                 tbFracSpec.Enabled = True
@@ -1163,5 +1205,19 @@ Public Class MaterialStreamEditor
 
     Private Sub gridInputComposition_KeyDown(sender As Object, e As KeyEventArgs) Handles gridInputComposition.KeyDown
         If e.KeyCode = Keys.V And e.Modifiers = Keys.Control Then PasteData(gridInputComposition)
+    End Sub
+
+    Private Sub rbSpecVapor_CheckedChanged(sender As Object, e As EventArgs) Handles rbSpecVapor.CheckedChanged, rbSpecLiquid.CheckedChanged, rbSpecSolid.CheckedChanged
+
+        If Loaded Then
+            If rbSpecVapor.Checked Then
+                tbFracSpec.Text = MatStream.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(nf)
+            ElseIf rbSpecLiquid.Checked Then
+                tbFracSpec.Text = MatStream.Phases(1).Properties.molarfraction.GetValueOrDefault.ToString(nf)
+            Else
+                tbFracSpec.Text = MatStream.Phases(7).Properties.molarfraction.GetValueOrDefault.ToString(nf)
+            End If
+        End If
+
     End Sub
 End Class
