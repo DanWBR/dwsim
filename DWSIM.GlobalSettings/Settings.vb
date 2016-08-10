@@ -49,6 +49,8 @@ Public Class Settings
 
     Public Shared Property UserInteractionsDatabases As New List(Of String)
 
+    Public Shared Property HideSolidPhaseFromCAPEOPENComponents As Boolean = False
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

@@ -187,7 +187,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PT(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Return Flash_PT_Internal(Vz, P, T, PP, False)
+            Dim ignorevfbounds As Boolean
+
+            If Not PP.Parameters.ContainsKey("PP_IGNORE_VAPOR_FRACTION_LIMIT") Then
+                PP.Parameters.Add("PP_IGNORE_VAPOR_FRACTION_LIMIT", 0)
+            End If
+
+            If PP.Parameters("PP_IGNORE_VAPOR_FRACTION_LIMIT") = 0 Then
+                ignorevfbounds = False
+            Else
+                ignorevfbounds = True
+            End If
+
+            Return Flash_PT_Internal(Vz, P, T, PP, ignorevfbounds)
 
         End Function
 
@@ -229,7 +241,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Setup(conc, conc0, deltaconc, id)
 
-            Dim nl As New NestedLoops() With {.LimitVaporFraction = LimitNLVF}
+            Dim nl As New NestedLoops() With {.LimitVaporFraction = True}
 
             ecount = 0
 

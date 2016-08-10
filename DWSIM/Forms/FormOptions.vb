@@ -81,6 +81,8 @@ Public Class FormOptions
             Me.KryptonLabel3.Text = TrackBar1.Value & " " & DWSIM.App.GetLocalString("minutos")
         End If
 
+        chkHideSolidPhaseCO.Checked = My.Settings.HideSolidPhase_CO
+
         'solver
 
         cbSolverMode.SelectedIndex = My.Settings.SolverMode
@@ -658,5 +660,10 @@ Public Class FormOptions
 
     Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableMultipleEditors.CheckedChanged
         My.Settings.EnableMultipleObjectEditors = chkEnableMultipleEditors.Checked
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles chkHideSolidPhaseCO.CheckedChanged
+        My.Settings.HideSolidPhase_CO = chkHideSolidPhaseCO.Checked
+        GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
     End Sub
 End Class

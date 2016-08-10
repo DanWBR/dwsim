@@ -103,6 +103,8 @@ Partial Class FormOptions
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
         Me.chkAutoUpdate = New System.Windows.Forms.CheckBox()
         Me.chkUpdates = New System.Windows.Forms.CheckBox()
@@ -141,6 +143,7 @@ Partial Class FormOptions
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
+        Me.GroupBox14.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
@@ -722,11 +725,24 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox13)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        '
+        'GroupBox14
+        '
+        resources.ApplyResources(Me.GroupBox14, "GroupBox14")
+        Me.GroupBox14.Controls.Add(Me.chkHideSolidPhaseCO)
+        Me.GroupBox14.Name = "GroupBox14"
+        Me.GroupBox14.TabStop = False
+        '
+        'chkHideSolidPhaseCO
+        '
+        resources.ApplyResources(Me.chkHideSolidPhaseCO, "chkHideSolidPhaseCO")
+        Me.chkHideSolidPhaseCO.Name = "chkHideSolidPhaseCO"
         '
         'GroupBox13
         '
@@ -882,17 +898,18 @@ Partial Class FormOptions
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout
-        Me.GroupBox9.ResumeLayout(false)
-        Me.GroupBox9.PerformLayout
-        Me.GroupBox6.ResumeLayout(false)
-        Me.GroupBox6.PerformLayout
-        Me.ResumeLayout(false)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Public WithEvents FaTabStrip1 As System.Windows.Forms.TabControl
     Public WithEvents FaTabStripItem1 As System.Windows.Forms.TabPage
     Public WithEvents FaTabStripItem2 As System.Windows.Forms.TabPage
@@ -986,4 +1003,6 @@ End Sub
     Public WithEvents chkUpdates As System.Windows.Forms.CheckBox
     Public WithEvents chkEnableMultipleEditors As System.Windows.Forms.CheckBox
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Public WithEvents GroupBox14 As System.Windows.Forms.GroupBox
+    Public WithEvents chkHideSolidPhaseCO As System.Windows.Forms.CheckBox
 End Class

@@ -424,6 +424,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Remover limite da fração de vapor (VF &gt;= 0 e VF &lt;= 1) no cálculo flash.
+        '''</summary>
+        Friend Shared ReadOnly Property PP_IGNORE_VAPOR_FRACTION_LIMIT() As String
+            Get
+                Return ResourceManager.GetString("PP_IGNORE_VAPOR_FRACTION_LIMIT", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Flash PH - Tolerância do Loop Externo.
         '''</summary>
         Friend Shared ReadOnly Property PP_PHFELT() As String

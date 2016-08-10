@@ -286,6 +286,8 @@ Namespace DWSIM
             My.Settings.EnableMultipleObjectEditors = source.Configs("Misc").GetBoolean("EnableMultipleObjectEditors", True)
             My.Settings.SimulationUpgradeWarning = source.Configs("Misc").GetBoolean("SimulationUpgradeWarning", True)
 
+            My.Settings.HideSolidPhase_CO = source.Configs("Misc").GetBoolean("HideSolidPhase_COInterface", False)
+
         End Sub
 
         Shared Sub SaveSettings(Optional ByVal configfile As String = "")
@@ -356,6 +358,8 @@ Namespace DWSIM
             source.Configs("Misc").Set("DefaultEditorLocation", My.Settings.DefaultEditorLocation)
             source.Configs("Misc").Set("EnableMultipleObjectEditors", My.Settings.EnableMultipleObjectEditors)
             source.Configs("Misc").Set("SimulationUpgradeWarning", My.Settings.SimulationUpgradeWarning)
+
+            source.Configs("Misc").Set("HideSolidPhase_COInterface", My.Settings.HideSolidPhase_CO)
 
             source.Save(configfile)
 

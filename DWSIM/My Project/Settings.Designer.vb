@@ -670,6 +670,18 @@ Namespace My
                 Return CType(Me("PreviewVersion"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HideSolidPhase_CO() As Boolean
+            Get
+                Return CType(Me("HideSolidPhase_CO"),Boolean)
+            End Get
+            Set
+                Me("HideSolidPhase_CO") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

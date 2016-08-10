@@ -288,7 +288,7 @@ Namespace PropertyPackages
                 .Add("Liquid2", New PhaseInfo("", 4, Phase.Liquid2))
                 .Add("Liquid3", New PhaseInfo("", 5, Phase.Liquid3))
                 .Add("Aqueous", New PhaseInfo("", 6, Phase.Aqueous))
-                .Add("Solid", New PhaseInfo("", 7, Phase.Solid))
+                If Not GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents Then .Add("Solid", New PhaseInfo("", 7, Phase.Solid))
             End With
         End Sub
 
@@ -298,7 +298,7 @@ Namespace PropertyPackages
                 .Add("Vapor", New PhaseInfo("Vapor", 2, Phase.Vapor))
                 .Add("Liquid1", New PhaseInfo("Liquid", 3, Phase.Liquid1))
                 .Add("Liquid2", New PhaseInfo("Liquid2", 4, Phase.Liquid2))
-                .Add("Solid", New PhaseInfo("Solid", 7, Phase.Solid))
+                If Not GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents Then .Add("Solid", New PhaseInfo("Solid", 7, Phase.Solid))
             End With
         End Sub
 
@@ -7322,8 +7322,12 @@ Final3:
         Public Overridable Sub PropList(ByRef flashType As Object, ByRef props As Object, ByRef phases As Object, ByRef calcType As Object) Implements CapeOpen.ICapeThermoEquilibriumServer.PropList
             props = GetPropList()
             flashType = New String() {"TP", "PH", "PS", "TVF", "PVF", "PT", "HP", "SP", "VFT", "VFP"}
-            phases = New String() {"Vapor", "Liquid1", "Liquid2", "Solid", "Overall"}
             calcType = New String() {"Mixture"}
+            If GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents Then
+                phases = New String() {"Vapor", "Liquid1", "Liquid2", "Overall"}
+            Else
+                phases = New String() {"Vapor", "Liquid1", "Liquid2", "Solid", "Overall"}
+            End If
         End Sub
 
         Public Overridable Sub ValidityCheck1(ByVal materialObject As Object, ByVal props As Object, ByRef relList As Object) Implements CapeOpen.ICapeThermoEquilibriumServer.ValidityCheck
@@ -8683,6 +8687,8 @@ Final3:
                 If ms.Phases(3).Properties.molarfraction.HasValue Then l1ok = True
                 If ms.Phases(4).Properties.molarfraction.HasValue Then l2ok = True
                 If ms.Phases(7).Properties.molarfraction.HasValue Then sok = True
+
+                If GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents Then sok = False
 
                 Dim phases As String() = Nothing
                 Dim statuses As CapePhaseStatus() = Nothing

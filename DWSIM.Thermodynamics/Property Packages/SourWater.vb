@@ -49,7 +49,7 @@ Namespace PropertyPackages
 
             'DirectCast(m_act, NRTL).InteractionParameters("Water").Add("Ammonia", New NRTL_IPData() With {.A21 = 1453.9636, .A12 = -1712.3278, .alpha12 = 0.2})
 
-            Me.IsConfigurable = False
+            Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
         End Sub
@@ -62,17 +62,31 @@ Namespace PropertyPackages
 
             'DirectCast(m_act, NRTL).InteractionParameters("Water").Add("Ammonia", New NRTL_IPData() With {.A21 = 1453.9636, .A12 = -1712.3278, .alpha12 = 0.2})
 
-            Me.IsConfigurable = False
+            Me.IsConfigurable = True
             Me._packagetype = PropertyPackages.PackageType.ActivityCoefficient
 
+        End Sub
+        Public Overrides Sub ConfigParameters()
+            m_par = New System.Collections.Generic.Dictionary(Of String, Double)
+            With Me.Parameters
+                .Clear()
+                .Add("PP_IDEAL_MIXRULE_LIQDENS", 1)
+                .Add("PP_USEEXPLIQDENS", 1)
+                .Add("PP_USE_EOS_LIQDENS", 0)
+                .Add("PP_IDEAL_VAPOR_PHASE_FUG", 1)
+                .Add("PP_ENTH_CP_CALC_METHOD", 0)
+                .Add("PP_IGNORE_VAPOR_FRACTION_LIMIT", 0)
+            End With
         End Sub
 
         Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
             Get
                 Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
-                For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                    constprops.Add(su.ConstantProperties)
-                Next
+                If Not Me.CurrentMaterialStream Is Nothing Then
+                    For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                        constprops.Add(su.ConstantProperties)
+                    Next
+                End If
                 FlashAlgorithm = New Auxiliary.FlashAlgorithms.SourWater() With {.CompoundProperties = constprops}
                 Return FlashAlgorithm
             End Get

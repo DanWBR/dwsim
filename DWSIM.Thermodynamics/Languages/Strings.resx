@@ -366,4 +366,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ErrorInvalidFlashSpecValue" xml:space="preserve">
     <value>Um ou ambos os valores das variáveis especificadas para o cálculo flash está (estão) inválido(s). Por favor verifique a Operação Unitária associada ou suas correntes de entrada para encontrar possíveis erros nas suas propriedades especificadas ou calculadas.</value>
   </data>
+  <data name="PP_IGNORE_VAPOR_FRACTION_LIMIT" xml:space="preserve">
+    <value>Remover limite da fração de vapor (VF &gt;= 0 e VF &lt;= 1) no cálculo flash</value>
+  </data>
 </root>

@@ -150,6 +150,8 @@ Namespace My
             GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
             GlobalSettings.Settings.DefaultEditFormLocation = My.Settings.DefaultEditorLocation
 
+            GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
+
             GlobalSettings.Settings.CalculatorActivated = True
 
             GlobalSettings.Settings.UserInteractionsDatabases.Clear()
