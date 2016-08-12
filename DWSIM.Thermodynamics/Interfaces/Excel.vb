@@ -687,6 +687,7 @@ Namespace ExcelAddIn
                 Next
 
                 ms.SetPhaseComposition(molefractions, dwp)
+                ms.CalcPhaseMassComposition(dwp)
                 ms.Phases(0).Properties.temperature = temperature
                 ms.Phases(0).Properties.pressure = pressure
 

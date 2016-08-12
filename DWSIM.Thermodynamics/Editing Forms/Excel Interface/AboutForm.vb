@@ -12,6 +12,8 @@ Public Class AboutForm
 
         Application.EnableVisualStyles()
 
+        Me.Text += " (" & My.Application.Info.DirectoryPath & "\DWSIM.xll)"
+
         Version.Text = "Excel Add-In Version " & My.Application.Info.Version.ToString
 
         Copyright.Text = My.Application.Info.Copyright
