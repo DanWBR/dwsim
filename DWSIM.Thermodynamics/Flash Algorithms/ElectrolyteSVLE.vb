@@ -240,7 +240,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 int_count += 1
 
-                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 'Loop Until int_count > MaximumIterations
 
@@ -321,11 +321,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Case KOpt.Constant
                             'rxn.ConstantKeqValue = rxn.ConstantKeqValue
                         Case KOpt.Expression
-                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
-                            rxn.ExpContext.Variables.Add("T", T)
-                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
-                            rxn.ConstantKeqValue = Exp(rxn.Expr.Evaluate)
+                            Dim expr As New Ciloci.Flee.ExpressionContext
+                            expr.Imports.AddType(GetType(System.Math))
+                            expr.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                            expr.Variables.Add("T", T)
+                            rxn.ConstantKeqValue = Exp(expr.CompileGeneric(Of Double)(rxn.Expression).Evaluate)
                         Case KOpt.Gibbs
                             Dim id(rxn.Components.Count - 1) As String
                             Dim stcoef(rxn.Components.Count - 1) As Double
@@ -417,10 +417,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
                         var1 = -N0(comp.CompName) / comp.StoichCoeff
                         If j = 0 Then
-                            lbound(i) = 0.0#
+                            lbound(i) = Tolerance
                             ubound(i) = var1
                         Else
-                            If var1 < lbound(i) Then lbound(i) = 0.0#
+                            If var1 < lbound(i) Then lbound(i) = Tolerance
                             If var1 > ubound(i) Then ubound(i) = var1
                         End If
                         j += 1
@@ -442,7 +442,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
                             rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
                             If rxn.ConstantKeqValue < 1 Then
-                                REx(i) = 0.01#
+                                REx(i) = N0(rxn.BaseReactant) * rxn.ConstantKeqValue
                             ElseIf rxn.ConstantKeqValue > 70 Then
                                 REx(i) = ubound(i)
                             Else
@@ -457,7 +457,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 'solve using newton's method
 
-                Dim fx(r), dfdx(r, r), dfdx_ant(r, r), dx(r), x(r), df As Double
+                Dim fx(r), dfdx(r, r), dfdx_ant(r, r), dx(r), x(r), df, fval As Double
                 Dim brentsolver As New BrentOpt.BrentMinimize
                 brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
 
@@ -497,7 +497,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     tmpx = x
                     tmpdx = dx
                     df = 1.0#
-                    'fval = brentsolver.brentoptimize(0.00001, 2.0#, 0.00000001, df)
+                    fval = brentsolver.brentoptimize(0.00001, 2.0#, 0.00000001, df)
 
                     For i = 0 To r
                         x(i) -= dx(i) * df
@@ -513,7 +513,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
                     End If
 
-                    If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 Loop
 
@@ -665,10 +665,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-                    f(i) = Log(prod(i)) - Log(.ConstantKeqValue)
-                    If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Or pen_val <> 0.0# Then
-                        f(i) = pen_val ^ 2
-                    End If
+                    f(i) = (Log(prod(i)) - Log(.ConstantKeqValue)) / Log(.ConstantKeqValue) '+ pen_val ^ 2
                 End With
             Next
 
@@ -678,7 +675,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
-            Dim epsilon As Double = 0.000001
+            Dim epsilon As Double = 0.001
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double

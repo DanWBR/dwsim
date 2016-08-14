@@ -62,10 +62,6 @@
 
     Property RateEquationDenominator As String
 
-    Property ExpContext As Object
-
-    Property Expr As Object
-
     Function EvaluateK(T As Double, PP As IPropertyPackage) As Double
 
 End Interface

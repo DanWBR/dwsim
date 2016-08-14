@@ -368,24 +368,6 @@ Namespace BaseClasses
 
         Public Property VelUnit As String = "" Implements Interfaces.IReaction.VelUnit
 
-        Public Property Expr1 As Object Implements Interfaces.IReaction.Expr
-            Get
-                Return Expr
-            End Get
-            Set(value As Object)
-                Expr = Expr1
-            End Set
-        End Property
-
-        Public Property ExpContext1 As Object Implements Interfaces.IReaction.ExpContext
-            Get
-                Return ExpContext
-            End Get
-            Set(value As Object)
-                ExpContext = value
-            End Set
-        End Property
-
         Public Function EvaluateK1(T As Double, PP As Interfaces.IPropertyPackage) As Double Implements Interfaces.IReaction.EvaluateK
             Return EvaluateK(T, PP)
         End Function
