@@ -65,9 +65,6 @@
     <Reference Include="Cureos.Numerics">
       <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="DotNumerics">
-      <HintPath>..\DWSIM\References\DotNumerics.dll</HintPath>
-    </Reference>
     <Reference Include="ExcelDna.Integration, Version=0.33.5730.40390, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDna.Integration.0.33.9\lib\ExcelDna.Integration.dll</HintPath>
       <Private>False</Private>
@@ -506,6 +503,10 @@
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+      <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
+      <Name>DWSIM.MathOps.DotNumerics</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>

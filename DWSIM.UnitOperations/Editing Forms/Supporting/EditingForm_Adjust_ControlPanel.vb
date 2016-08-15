@@ -76,7 +76,6 @@ Public Class EditingForm_Adjust_ControlPanel
             .FontSpec.IsDropShadow = False
         End With
 
-
         Dim mvVal, cvVal, rfVal, maxval, minval As Double
 
         If formC.SimulationObjects(myADJ.ControlledObjectData.ID).GraphicObject.Calculated Then

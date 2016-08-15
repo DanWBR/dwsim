@@ -164,10 +164,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Cureos.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="DotNumerics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\DotNumerics.dll</HintPath>
-    </Reference>
     <Reference Include="ExcelApi">
       <HintPath>References\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -1050,6 +1046,10 @@
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+      <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
+      <Name>DWSIM.MathOps.DotNumerics</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>

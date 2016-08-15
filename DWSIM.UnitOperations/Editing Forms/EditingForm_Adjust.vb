@@ -228,7 +228,7 @@ Public Class EditingForm_Adjust
 
         If Not obj Is Nothing Then
 
-            Dim props = obj.GetProperties(Enums.PropertyType.WR)
+            Dim props = obj.GetProperties(Enums.PropertyType.ALL)
 
             For Each p In props
                 If SimObject.FlowSheet.GetTranslatedString(p) = cbTargetProp.SelectedItem.ToString Then

@@ -43,10 +43,6 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNumerics">
-      <HintPath>..\DWSIM\References\DotNumerics.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -110,6 +106,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+      <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
+      <Name>DWSIM.MathOps.DotNumerics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
       <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
       <Name>DWSIM.DrawingTools</Name>

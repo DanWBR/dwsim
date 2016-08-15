@@ -416,7 +416,7 @@ Namespace PropertyPackages
                             M = result("MoleSum")
                             W = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            Dim Vnf = result("MixtureMoleFlows")
+                            'Dim Vnf = result("MixtureMoleFlows")
 
                             Vx = result("LiquidPhaseMolarComposition")
                             Vy = result("VaporPhaseMolarComposition")
@@ -617,7 +617,7 @@ Namespace PropertyPackages
                             M = result("MoleSum")
                             W = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            Dim Vnf = result("MixtureMoleFlows")
+                            'Dim Vnf = result("MixtureMoleFlows")
 
                             'MW = Me.AUX_MMM(Vnf)
 
@@ -738,17 +738,17 @@ Namespace PropertyPackages
                             M = result("MoleSum")
                             W = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            Dim Vnf = result("MixtureMoleFlows")
+                            'Dim Vnf = result("MixtureMoleFlows")
 
-                            MW = Me.AUX_MMM(Vnf)
+                            'MW = Me.AUX_MMM(Vnf)
 
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
 
-                            i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.MoleFraction = Vnf(i) / M
-                                i += 1
-                            Next
+                            'i = 0
+                            'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            '    subst.MoleFraction = Vnf(i) / M
+                            '    i += 1
+                            'Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                             Next
@@ -832,17 +832,17 @@ Namespace PropertyPackages
                             M = result("MoleSum")
                             W = Me.CurrentMaterialStream.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            Dim Vnf = result("MixtureMoleFlows")
+                            'Dim Vnf = result("MixtureMoleFlows")
 
-                            MW = Me.AUX_MMM(Vnf)
+                            'MW = Me.AUX_MMM(Vnf)
 
                             Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
 
-                            i = 0
-                            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                                subst.MoleFraction = Vnf(i) / M
-                                i += 1
-                            Next
+                            'i = 0
+                            'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                            '    subst.MoleFraction = Vnf(i) / M
+                            '    i += 1
+                            'Next
                             For Each subst In Me.CurrentMaterialStream.Phases(7).Compounds.Values
                                 subst.MassFraction = Me.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
                             Next

@@ -586,7 +586,7 @@
     <value>TSTable</value>
   </data>
   <data name="&gt;&gt;TSTable.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6060.23159, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6071.28603, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <metadata name="ToolStripUnits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>421, 17</value>
@@ -946,7 +946,13 @@
     <value>&amp;Ferramentas</value>
   </data>
   <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 22</value>
+    <value>175, 22</value>
+  </data>
+  <data name="TSMIAddUtility.Text" xml:space="preserve">
+    <value>Adicionar Utilidade</value>
+  </data>
+  <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
+    <value>Adicionar Utilidade</value>
   </data>
   <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 20</value>

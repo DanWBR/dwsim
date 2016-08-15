@@ -117,15 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="GridRSets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 214</value>
+  </data>
+  <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 214</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 239</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 233</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Reaction Sets</value>
+  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GridRSets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>425, 214</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Add New Reaction Set</value>
@@ -142,18 +154,6 @@
   <data name="ToolStripButton2.Text" xml:space="preserve">
     <value>Remove Selected Set</value>
   </data>
-  <data name="ToolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 214</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 239</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 233</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Reaction Sets</value>
-  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -165,6 +165,54 @@
   </data>
   <data name="GridRxns.Size" type="System.Drawing.Size, System.Drawing">
     <value>425, 183</value>
+  </data>
+  <data name="ToolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="ToolStripDropDownButton1.Text" xml:space="preserve">
+    <value>Add Reaction</value>
+  </data>
+  <data name="ToolStripButton6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="ToolStripButton6.Text" xml:space="preserve">
+    <value>Edit Selected Reaction</value>
+  </data>
+  <data name="ToolStripButton7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="ToolStripButton7.Text" xml:space="preserve">
+    <value>Copy Selected Reaction</value>
+  </data>
+  <data name="ToolStripButton8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="ToolStripButton8.Text" xml:space="preserve">
+    <value>Remove Selected Reaction</value>
+  </data>
+  <data name="ToolStripButton8.ToolTipText" xml:space="preserve">
+    <value>Remove Selected Reaction</value>
+  </data>
+  <data name="ToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="ToolStripButton4.Text" xml:space="preserve">
+    <value>Export Selected Reactions</value>
+  </data>
+  <data name="ToolStripButton9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 20</value>
+  </data>
+  <data name="ToolStripButton9.Text" xml:space="preserve">
+    <value>Import Reactions</value>
+  </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 183</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 202</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Chemical Reactions</value>
   </data>
   <data name="ConversaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 22</value>
@@ -190,39 +238,6 @@
   <data name="HeterogeneaCataliticaToolStripMenuItem.Text" xml:space="preserve">
     <value>Heterogeneous Catalytic</value>
   </data>
-  <data name="ToolStripDropDownButton1.Text" xml:space="preserve">
-    <value>Add Reaction</value>
-  </data>
-  <data name="ToolStripButton6.Text" xml:space="preserve">
-    <value>Edit Selected Reaction</value>
-  </data>
-  <data name="ToolStripButton7.Text" xml:space="preserve">
-    <value>Copy Selected Reaction</value>
-  </data>
-  <data name="ToolStripButton8.Text" xml:space="preserve">
-    <value>Remove Selected Reaction</value>
-  </data>
-  <data name="ToolStripButton4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
-  </data>
-  <data name="ToolStripButton4.Text" xml:space="preserve">
-    <value>Export Selected Reactions</value>
-  </data>
-  <data name="ToolStripButton9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 20</value>
-  </data>
-  <data name="ToolStripButton9.Text" xml:space="preserve">
-    <value>Import Reactions</value>
-  </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 183</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 202</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Chemical Reactions</value>
-  </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>DWSIM Chemical Reactions File|*.dwrxs;*.dwrxm</value>
   </data>
@@ -234,6 +249,9 @@
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Save Simulation Reactions to a File</value>
+  </data>
+  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 224</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
@@ -326,8 +344,8 @@
   <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
     <value>Document</value>
   </data>
-  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 224</value>
+  <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>468, 28</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 25</value>
@@ -364,9 +382,6 @@
   </data>
   <data name="tsbClose.Text" xml:space="preserve">
     <value>Close</value>
-  </data>
-  <data name="ToolStrip3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>468, 28</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>468, 476</value>

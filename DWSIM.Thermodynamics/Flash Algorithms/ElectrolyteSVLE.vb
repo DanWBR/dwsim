@@ -52,8 +52,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
         Public Property ComponentConversions As Dictionary(Of String, Double)
 
-        Public Property MaximumIterations As Integer = 1000
-        Public Property Tolerance As Double = 0.000001
+        Public Property MaximumIterations As Integer = 5000
+        Public Property Tolerance As Double = 1.0E-40
 
         Public Property CalculateChemicalEquilibria As Boolean = True
 
@@ -415,31 +415,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 For i = 0 To c
                     lbound(i) = Log(1.0E-40)
                     ubound(i) = Log(1.0#)
-                    If Vx0(i) = 0.0# Then x(i) = Log(1.0E-38) Else x(i) = Log(Vx0(i))
+                    If Vx0(i) = 0.0# Then x(i) = Log(1.0E-20) Else x(i) = Log(Vx0(i))
                 Next
-
-                'solve using newton's method
 
                 Me.T = T
                 Me.P = P
 
-
-                Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
-
-                Calculator.CheckParallelPInvoke()
-
-                'Using problem As New Ipopt(x.Length, lbound, ubound, 0, Nothing, Nothing, _
-                '       0, 0, AddressOf eval_f, AddressOf eval_g, _
-                '       AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                '    problem.AddOption("tol", Tolerance)
-                '    problem.AddOption("acceptable_tol", Tolerance)
-                '    'problem.AddOption("nlp_scaling_method", "none")
-                '    problem.AddOption("max_iter", MaximumIterations)
-                '    problem.AddOption("mu_strategy", "adaptive")
-                '    problem.AddOption("bound_frac", 0.0#)
-                '    problem.AddOption("hessian_approximation", "limited-memory")
-                '    status = problem.SolveProblem(x, fx, Nothing, Nothing, Nothing, Nothing)
-                'End Using
+                IdealCalc = False
 
                 Dim variables(c) As OptBoundVariable
                 For i = 0 To c
@@ -449,7 +431,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 solver.Tolerance = Tolerance
                 solver.MaxFunEvaluations = MaximumIterations
                 x = solver.ComputeMin(AddressOf FunctionValue2N, variables)
-             
+
+                If solver.FunEvaluations >= solver.MaxFunEvaluations Then
+                    Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                End If
+
                 fx = Me.FunctionValue2N(x)
 
                 solver = Nothing
@@ -594,17 +580,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-                        f(i) = Log(.ConstantKeqValue) - Log(prod(i))
+                    If .ConstantKeqValue < 1 Then
+                        f(i) = Log(1 / .ConstantKeqValue) ^ 2 - Log(1 / prod(i)) ^ 2
+                    Else
+                        f(i) = .ConstantKeqValue / prod(i) - 1
+                    End If
                 End With
             Next
 
-            Return f.AbsSqrSumY + pen_val
+            Return f.AbsSumY + pen_val ^ 2
 
         End Function
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.01
+            Dim epsilon As Double = Log(0.1)
 
             Dim f1, f2 As Double
             Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
@@ -616,13 +606,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         x1(j) = x(j)
                         x2(j) = x(j)
                     Else
-                        If x(j) = 0.0# Then
-                            x1(j) = x(j) + epsilon
-                            x2(j) = x(j) + 2 * epsilon
-                        Else
-                            x1(j) = x(j) * (1 - epsilon)
-                            x2(j) = x(j) * (1 + epsilon)
-                        End If
+                        x1(j) = x(j) * (1 - epsilon)
+                        x2(j) = x(j) * (1 + epsilon)
                     End If
                 Next
                 f1 = FunctionValue2N(x1)
@@ -639,7 +624,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
             Dim Vn(1) As String, Vx(1), Vy(1), Vx_ant(1), Vy_ant(1), Vp(1), Ki(1), Ki_ant(1), fi(1) As Double
-            Dim j, n, ecount As Integer
+            Dim n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
             Dim L, V, T, Pf As Double
 
@@ -650,15 +635,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hf = H
             Pf = P
 
-            ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), fi(n)
+            ReDim Vn(n), Vx(n), Vy(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n)
 
-            fi = Vz.Clone
-
-            Dim maxitINT As Integer = 100
-            Dim maxitEXT As Integer = 100
-            Dim tolINT As Double = 0.00001
-            Dim tolEXT As Double = 0.00001
-
+            Vx0 = Vz.Clone
 
             Dim Tmin, Tmax, epsilon(4), maxDT As Double
 
@@ -672,50 +651,23 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             epsilon(3) = 0.0001
             epsilon(4) = 0.00001
 
-            Dim fx, fx2, dfdx, x1, dx As Double
-
-            Dim cnt As Integer
-
+            Dim fx As Double
             If Tref = 0.0# Then Tref = 298.15
 
-            For j = 0 To 4
+            Me.P = P
 
-                cnt = 0
-                x1 = Tref
+            Dim tvar As New OptBoundVariable(Tref, 273.15, 500)
 
-                Do
+            Dim solver As New Simplex
+            solver.Tolerance = Tolerance
+            solver.MaxFunEvaluations = MaximumIterations
+            T = solver.ComputeMin(AddressOf Herror, New OptBoundVariable() {tvar})(0)
 
-                    fx = Herror(x1, P, Vz)
-                    fx2 = Herror(x1 + epsilon(j), P, Vz)
+            fx = Herror({T})
 
-                    If Abs(fx) <= tolEXT Then Exit Do
-
-                    dfdx = (fx2 - fx) / epsilon(j)
-
-                    If dfdx = 0.0# Then
-                        fx = 0.0#
-                        Exit Do
-                    End If
-
-                    dx = fx / dfdx
-
-                    If Abs(dx) > maxDT Then dx = maxDT * Sign(dx)
-
-                    x1 = x1 - dx
-
-                    cnt += 1
-
-                Loop Until cnt > maxitEXT Or Double.IsNaN(x1) Or x1 < 0.0#
-
-                T = x1
-
-                If Not Double.IsNaN(T) And Not Double.IsInfinity(T) And Not cnt > maxitEXT Then
-                    If T > Tmin And T < Tmax Then Exit For
-                End If
-
-            Next
-
-            If Double.IsNaN(T) Or T <= Tmin Or T >= Tmax Or cnt > maxitEXT Or Abs(fx) > tolEXT Then Throw New Exception("PH Flash [Electrolyte]: Invalid result: Temperature did not converge.")
+            If Double.IsNaN(T) Or solver.FunEvaluations > MaximumIterations Then
+                Throw New Exception("PH Flash [Electrolyte]: Invalid result: Temperature did not converge.")
+            End If
 
             Dim tmp As Object = Flash_PT(Vz, T, P)
 
@@ -754,8 +706,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Function Herror(ByVal X As Double, ByVal P As Double, ByVal Vz() As Double) As Double
-            Return OBJ_FUNC_PH_FLASH(X, P, Vz)
+        Function Herror(ByVal x() As Double) As Double
+            Return OBJ_FUNC_PH_FLASH(x(0), P, Vx0)
         End Function
 
         Function OBJ_FUNC_PH_FLASH(ByVal T As Double, ByVal P As Double, ByVal Vz As Object) As Double
@@ -788,7 +740,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             mms = proppack.AUX_MMM(Vs)
 
             Dim herr As Double = Hf - ((mmg * V / (mmg * V + mml * L + mms * S)) * _Hv + (mml * L / (mmg * V + mml * L + mms * S)) * _Hl + (mms * S / (mmg * V + mml * L + mms * S)) * _Hs)
-            OBJ_FUNC_PH_FLASH = herr
+            OBJ_FUNC_PH_FLASH = herr ^ 2
 
             WriteDebugInfo("PH Flash [Electrolyte]: Current T = " & T & ", Current H Error = " & herr)
 

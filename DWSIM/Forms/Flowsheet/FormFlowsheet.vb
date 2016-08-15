@@ -59,6 +59,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public FrmPCBulk As New FormPCBulk
     Public FrmReport As New FormReportConfig
 
+    Public FrmReacMan As FormReacManager
+
     Public m_IsLoadedFromFile As Boolean = False
     Public m_overrideCloseQuestion As Boolean = False
 
@@ -1070,8 +1072,12 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub GerenciadorDeReacoesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeReacoesToolStripMenuItem.Click
-        Dim rm As New FormReacManager
-        rm.Show(Me.dckPanel)
+        If FrmReacMan Is Nothing Then
+            FrmReacMan = New FormReacManager
+            FrmReacMan.Show(Me.dckPanel)
+        Else
+            FrmReacMan.Activate()
+        End If
     End Sub
 
     Private Sub CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Click
