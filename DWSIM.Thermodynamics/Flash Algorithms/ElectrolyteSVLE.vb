@@ -461,27 +461,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim brentsolver As New BrentOpt.BrentMinimize
                 brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
 
-                Dim niter As Integer, allok As Boolean
+                Dim niter As Integer
 
                 Me.T = T
                 Me.P = P
 
                 x = REx
                 niter = 0
-                allok = True
                 Do
 
                     fx = Me.FunctionValue2N(x)
 
-                    For i = 0 To r
-                        If x(i) < 0.5 And Abs(x(i)) ^ 2 > Tolerance Then
-                            allok = False
-                        ElseIf x(i) >= 0.5 And Abs(x(i) - 1.0#) ^ 2 > Tolerance Then
-                            allok = False
-                        End If
-                    Next
+                    'For i = 0 To r
+                    '    If x(i) < 0.5 And Abs(x(i)) > Tolerance Then
+                    '        allok = False
+                    '    ElseIf x(i) >= 0.5 And Abs(x(i) - 1.0#) ^ 2 > Tolerance Then
+                    '        allok = False
+                    '    End If
+                    'Next
 
-                    If SumSqr(fx) < Tolerance Or allok Then Exit Do
+                    If fx.AbsSumY < Tolerance Then Exit Do
 
                     dfdx_ant = dfdx.Clone
                     dfdx = Me.FunctionGradient2N(x)
