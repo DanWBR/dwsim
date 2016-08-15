@@ -25,6 +25,8 @@ Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
 Imports Ciloci.Flee
 Imports DWSIM.Interfaces.Enums
+Imports Cureos.Numerics
+Imports DotNumerics.Optimization
 
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
@@ -41,6 +43,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim Hf, Hl, Hv, Hs, T, P, P0, Ninerts, Winerts, E(,) As Double
         Dim r, c, els, comps As Integer
 
+        Private IdealCalc As Boolean = False
+
         Public Property ReactionSet As String = "DefaultSet"
         Public Property Reactions As List(Of String)
         Public Property ReactionExtents As Dictionary(Of String, Double)
@@ -49,7 +53,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property ComponentConversions As Dictionary(Of String, Double)
 
         Public Property MaximumIterations As Integer = 1000
-        Public Property Tolerance As Double = 1.0E-20
+        Public Property Tolerance As Double = 0.000001
 
         Public Property CalculateChemicalEquilibria As Boolean = True
 
@@ -168,9 +172,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'calculate activity coefficients.
 
                 If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                    activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl, CompoundProperties)
+                    activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
                 ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                    activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_uni.GAMMA_MR(T, Vxl, CompoundProperties)
+                    activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_uni.GAMMA_MR(T, Vxl.Clone, CompoundProperties)
                 End If
 
                 If activcoeff(wid) = 0.0# Then
@@ -404,127 +408,53 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 N0tot = 1.0#
                 Ninerts = N0tot - Sum(fm0)
 
-                'upper and lower bounds for reaction extents (just an estimate, will be different when a single compound appears in multiple reactions)
+                Dim lbound(c) As Double
+                Dim ubound(c) As Double
+                Dim fx, x(c) As Double
 
-                Dim lbound(Me.ReactionExtents.Count - 1) As Double
-                Dim ubound(Me.ReactionExtents.Count - 1) As Double
-                Dim var1 As Double
-
-                i = 0
-                For Each rxid As String In Me.Reactions
-                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
-                    j = 0
-                    For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
-                        var1 = -N0(comp.CompName) / comp.StoichCoeff
-                        If j = 0 Then
-                            lbound(i) = Tolerance
-                            ubound(i) = var1
-                        Else
-                            If var1 < lbound(i) Then lbound(i) = Tolerance
-                            If var1 > ubound(i) Then ubound(i) = var1
-                        End If
-                        j += 1
-                    Next
-                    i += 1
+                For i = 0 To c
+                    lbound(i) = Log(1.0E-40)
+                    ubound(i) = Log(1.0#)
+                    If Vx0(i) = 0.0# Then x(i) = Log(1.0E-38) Else x(i) = Log(Vx0(i))
                 Next
 
-                'initial estimates for the reaction extents
-
-                Dim REx(r) As Double
-
-                If Not prevx Is Nothing Then
-                    For i = 0 To r
-                        REx(i) = prevx(i) * 0.9
-                    Next
-                Else
-                    i = 0
-                    For Each rxnsb As Interfaces.IReactionSetBase In proppack.CurrentMaterialStream.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
-                        If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
-                            rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
-                            If rxn.ConstantKeqValue < 1 Then
-                                REx(i) = N0(rxn.BaseReactant) * rxn.ConstantKeqValue
-                            ElseIf rxn.ConstantKeqValue > 70 Then
-                                REx(i) = ubound(i)
-                            Else
-                                REx(i) = ubound(i) * 0.5
-                            End If
-                            i += 1
-                        End If
-                    Next
-                End If
-
-                Dim REx0(REx.Length - 1) As Double
-
                 'solve using newton's method
-
-                Dim fx(r), dfdx(r, r), dfdx_ant(r, r), dx(r), x(r), df, fval As Double
-                Dim brentsolver As New BrentOpt.BrentMinimize
-                brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
-
-                Dim niter As Integer
 
                 Me.T = T
                 Me.P = P
 
-                x = REx
-                niter = 0
-                Do
 
-                    fx = Me.FunctionValue2N(x)
+                Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
 
-                    'For i = 0 To r
-                    '    If x(i) < 0.5 And Abs(x(i)) > Tolerance Then
-                    '        allok = False
-                    '    ElseIf x(i) >= 0.5 And Abs(x(i) - 1.0#) ^ 2 > Tolerance Then
-                    '        allok = False
-                    '    End If
-                    'Next
+                Calculator.CheckParallelPInvoke()
 
-                    If fx.AbsSumY < Tolerance Then Exit Do
+                'Using problem As New Ipopt(x.Length, lbound, ubound, 0, Nothing, Nothing, _
+                '       0, 0, AddressOf eval_f, AddressOf eval_g, _
+                '       AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                '    problem.AddOption("tol", Tolerance)
+                '    problem.AddOption("acceptable_tol", Tolerance)
+                '    'problem.AddOption("nlp_scaling_method", "none")
+                '    problem.AddOption("max_iter", MaximumIterations)
+                '    problem.AddOption("mu_strategy", "adaptive")
+                '    problem.AddOption("bound_frac", 0.0#)
+                '    problem.AddOption("hessian_approximation", "limited-memory")
+                '    status = problem.SolveProblem(x, fx, Nothing, Nothing, Nothing, Nothing)
+                'End Using
 
-                    dfdx_ant = dfdx.Clone
-                    dfdx = Me.FunctionGradient2N(x)
-
-                    Dim success As Boolean
-                    success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
-
-                    If Not success Then
-                        dfdx = dfdx_ant.Clone
-                        MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
-                    End If
-
-                    tmpx = x
-                    tmpdx = dx
-                    df = 1.0#
-                    fval = brentsolver.brentoptimize(0.00001, 2.0#, 0.00000001, df)
-
-                    For i = 0 To r
-                        x(i) -= dx(i) * df
-                    Next
-
-                    niter += 1
-
-                    If AbsSum(dx) = 0.0# Then
-                        Throw New Exception("Chemical Equilibrium Solver error: No solution found - reached a stationary point of the objective function (singular gradient matrix).")
-                    End If
-
-                    If niter > MaximumIterations Then
-                        Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
-                    End If
-
-                    If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                Loop
-
+                Dim variables(c) As OptBoundVariable
+                For i = 0 To c
+                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
+                Next
+                Dim solver As New Simplex
+                solver.Tolerance = Tolerance
+                solver.MaxFunEvaluations = MaximumIterations
+                x = solver.ComputeMin(AddressOf FunctionValue2N, variables)
+             
                 fx = Me.FunctionValue2N(x)
 
-                i = 0
-                For Each r As String In Me.Reactions
-                    Me.ReactionExtents(r) = REx(i)
-                    i += 1
-                Next
+                solver = Nothing
 
-                ' comp. conversions
+                'comp. conversions
 
                 For Each sb As String In ids
                     If Me.ComponentConversions.ContainsKey(sb) Then
@@ -561,32 +491,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Private Function FunctionValue2N(ByVal x() As Double) As Double()
+        Private Function FunctionValue2N(ByVal x() As Double) As Double
 
             Dim i, j, nc As Integer
 
             nc = Me.CompoundProperties.Count - 1
 
-            i = 0
-            For Each s As String In N.Keys
-                DN(s) = 0
-                For j = 0 To r
-                    DN(s) += E(i, j) * x(j)
-                Next
-                i += 1
-            Next
+            Dim comps = N.Keys.ToList
 
-            For Each s As String In DN.Keys
-                N(s) = N0(s) + DN(s)
-                'If N(s) < 0 Then N(s) = 0
+            i = 0
+            For Each s As String In comps
+                N(s) = Exp(x(i))
+                i += 1
             Next
 
             Dim Vx(nc) As Double
 
             'calculate molality considering 1 mol of mixture.
 
-            Dim wtotal As Double = 0
-            Dim mtotal As Double = 0
+            Dim wtotal As Double = 0.0#
+            Dim mtotal As Double = 0.0#
             Dim molality(nc) As Double
 
             For i = 0 To nc
@@ -601,6 +525,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End If
                 Next
             Next
+
+            Dim pen_val As Double = (Vx0.SumY * proppack.AUX_MMM(Vx0) - Vx.SumY * proppack.AUX_MMM(Vx)) ^ 2
 
             i = 0
             Do
@@ -623,14 +549,20 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim activcoeff(nc) As Double
 
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx, CompoundProperties)
+                activcoeff = CType(proppack, ExUNIQUACPropertyPackage).m_uni.GAMMA_MR(T, Vx.Clone, CompoundProperties)
             ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_uni.GAMMA_MR(T, Vx, CompoundProperties)
+                activcoeff = CType(proppack, LIQUAC2PropertyPackage).m_uni.GAMMA_MR(T, Vx.Clone, CompoundProperties)
+            End If
+
+            If IdealCalc Then
+                For i = 0 To nc
+                    activcoeff(i) = 1.0#
+                Next
             End If
 
             Dim CP(nc) As Double
-            Dim f(x.Length - 1) As Double
-            Dim prod(x.Length - 1) As Double
+            Dim f(Me.Reactions.Count - 1) As Double
+            Dim prod(Me.Reactions.Count - 1) As Double
 
             For i = 0 To nc
                 If CompoundProperties(i).IsIon Then
@@ -660,97 +592,45 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
             Next
 
-            Dim pen_val As Double = ReturnPenaltyValue()
-
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-                    f(i) = (Log(prod(i)) - Log(.ConstantKeqValue)) / Log(.ConstantKeqValue) '+ pen_val ^ 2
+                        f(i) = Log(.ConstantKeqValue) - Log(prod(i))
                 End With
             Next
 
-            Return f
+            Return f.AbsSqrSumY + pen_val
 
         End Function
 
-        Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
+        Private Function FunctionGradient2N(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.001
+            Dim epsilon As Double = 0.01
 
-            Dim f1(), f2() As Double
-            Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
-            Dim i, j, k As Integer
+            Dim f1, f2 As Double
+            Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
+            Dim i, j As Integer
 
-            f1 = FunctionValue2N(x)
             For i = 0 To x.Length - 1
                 For j = 0 To x.Length - 1
                     If i <> j Then
+                        x1(j) = x(j)
                         x2(j) = x(j)
                     Else
                         If x(j) = 0.0# Then
-                            x2(j) = x(j) + epsilon
+                            x1(j) = x(j) + epsilon
+                            x2(j) = x(j) + 2 * epsilon
                         Else
+                            x1(j) = x(j) * (1 - epsilon)
                             x2(j) = x(j) * (1 + epsilon)
                         End If
                     End If
                 Next
+                f1 = FunctionValue2N(x1)
                 f2 = FunctionValue2N(x2)
-                For k = 0 To x.Length - 1
-                    g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
-                Next
+                g(i) = (f2 - f1) / (x2(i) - x1(i))
             Next
 
             Return g
-
-        End Function
-
-        Public Function MinimizeError(ByVal t As Double) As Double
-
-            Dim tmpx0 As Double() = tmpx.Clone
-
-            For i = 0 To r
-                tmpx0(i) -= tmpdx(i) * t
-            Next
-
-            Dim abssum0 = AbsSum(FunctionValue2N(tmpx0))
-            Return abssum0
-
-        End Function
-
-        Private Function ReturnPenaltyValue() As Double
-
-            'calculate penalty functions for constraint variables
-
-            Dim i As Integer
-            Dim nc As Integer = Me.CompoundProperties.Count - 1
-
-            Dim con_lc(nc), con_uc(nc), con_val(nc) As Double
-            Dim pen_val As Double = 0
-            Dim delta1, delta2 As Double
-
-            i = 0
-            For Each comp As String In Me.ComponentIDs
-                con_lc(i) = 0
-                con_uc(i) = 1
-                con_val(i) = N(comp)
-                i += 1
-            Next
-
-            pen_val = 0
-            For i = 0 To nc
-                delta1 = con_val(i) - con_lc(i)
-                delta2 = con_val(i) - con_uc(i)
-                If delta1 < 0 Then
-                    pen_val += -delta1 * 100000
-                ElseIf delta2 > 1 Then
-                    pen_val += -delta2 * 100000
-                Else
-                    pen_val += 0
-                End If
-            Next
-
-            If Double.IsNaN(pen_val) Then pen_val = 0
-
-            Return pen_val
 
         End Function
 
@@ -1088,6 +968,74 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             results.Add("LiquidPhaseActivityCoefficients", tmp("LiquidPhaseActivityCoefficients"))
 
             Return results
+
+        End Function
+
+        Public Function eval_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef obj_value As Double) As Boolean
+            Dim fval As Double = FunctionValue2N(x)
+            obj_value = fval
+            Return True
+        End Function
+
+        Public Function eval_grad_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef grad_f As Double()) As Boolean
+            Dim g As Double() = FunctionGradient2N(x)
+            grad_f = g
+            Return True
+        End Function
+
+        Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
+            Return True
+        End Function
+
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+         ByRef jCol As Integer(), ByRef values As Double()) As Boolean
+
+            Dim k As Integer
+
+            If values Is Nothing Then
+
+                Dim row(nele_jac - 1), col(nele_jac - 1) As Integer
+
+                k = 0
+                For i = 0 To m - 1
+                    row(i) = i
+                    row(i + m) = i
+                    col(i) = i
+                    col(i + m) = i + m
+                Next
+
+                iRow = row
+                jCol = col
+
+            Else
+
+                Dim res(nele_jac - 1) As Double
+
+                For i = 0 To nele_jac - 1
+                    res(i) = -1
+                Next
+
+                values = res
+
+            End If
+            Return True
+        End Function
+
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+         ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
+
+            If values Is Nothing Then
+
+                Dim row(nele_hess - 1), col(nele_hess - 1) As Integer
+
+                iRow = row
+                jCol = col
+
+            Else
+
+            End If
+
+            Return True
 
         End Function
 
