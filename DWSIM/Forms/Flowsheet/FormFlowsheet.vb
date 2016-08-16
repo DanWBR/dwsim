@@ -1072,7 +1072,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Private Sub GerenciadorDeReacoesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeReacoesToolStripMenuItem.Click
-        If FrmReacMan Is Nothing Then
+        If FrmReacMan Is Nothing OrElse FrmReacMan.IsDisposed Then
             FrmReacMan = New FormReacManager
             FrmReacMan.Show(Me.dckPanel)
         Else

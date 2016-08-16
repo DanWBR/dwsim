@@ -200,4 +200,12 @@ gt1:        If ppu.m_uni.InteractionParameters.ContainsKey(id1) Then
         End If
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim data As Double() = DirectCast(_pp, PropertyPackages.ExUNIQUACPropertyPackage).ElectrolyteFlash.ObjectiveFunctionHistory.ToArray
+        Dim str As String = ""
+        For Each d In data
+            str += d.ToString & vbCrLf
+        Next
+        Clipboard.SetText(str)
+    End Sub
 End Class

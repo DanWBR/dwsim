@@ -117,6 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>644, 353</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>General Options</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Interaction Parameters</value>
+  </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Estimate (UNIFAC-LL)</value>
   </data>
@@ -126,10 +139,18 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Estimate (UNIFAC)</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Interaction Parameters</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Debug</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 23</value>
+  </data>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>Copy Objective Function History from Last Chemical Equilibrium Calculation</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Chemical Equilibrium</value>
+  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 13</value>
   </data>
@@ -154,22 +175,19 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Reaction Set</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Chemical Equilibrium</value>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>633, 343</value>
   </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Advanced Settings</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>General Options</value>
+  </data>
+  <data name="KryptonDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>618, 319</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Parameter</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Value</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>General Options</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>General Options</value>
   </data>
 </root>

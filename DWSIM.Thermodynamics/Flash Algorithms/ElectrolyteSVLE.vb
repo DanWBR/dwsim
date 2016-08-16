@@ -54,8 +54,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
         Public Property ComponentConversions As Dictionary(Of String, Double)
 
-        Public Property MaximumIterations As Integer = 5000
-        Public Property Tolerance As Double = 1.0E-40
+        Public Property MaximumIterations As Integer = 10000
+        Public Property Tolerance As Double = 1.0E-30
+
+        Public Property ObjectiveFunctionHistory As New List(Of Double)
 
         Public Property CalculateChemicalEquilibria As Boolean = True
 
@@ -413,6 +415,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 IdealCalc = False
 
+                ObjectiveFunctionHistory.Clear()
+
                 Dim variables(c) As OptBoundVariable
                 For i = 0 To c
                     variables(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
@@ -457,7 +461,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 '    Vx(i) = Vx(i) '/ mtot
                 'Next
 
-                Return New Object() {Vx2, x}
+                Return New Object() {Vx2.NormalizeY, x}
 
             Else
 
@@ -507,7 +511,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = Vx0.SumY * proppack.AUX_MMM(Vx0)
             val2 = Vx.SumY * proppack.AUX_MMM(Vx)
 
-            Dim pen_val As Double = (val1 - val2) ^ 2
+            Dim pen_val As Double = (val1 - val2) ^ 3
 
             i = 0
             Do
@@ -576,14 +580,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                     If .ConstantKeqValue < 1 Then
-                        f(i) = Log(1 / .ConstantKeqValue) ^ 2 - Log(1 / prod(i)) ^ 2
+                        f(i) = Log(.ConstantKeqValue) ^ 2 - Log(prod(i)) ^ 2
                     Else
                         f(i) = .ConstantKeqValue / prod(i) - 1
                     End If
                 End With
             Next
 
-            Return f.AbsSumY + pen_val ^ 2
+            Dim fval As Double = f.AbsSumY + pen_val ^ 2
+
+            ObjectiveFunctionHistory.Add(fval)
+
+            Return fval
 
         End Function
 
