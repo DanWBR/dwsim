@@ -322,9 +322,9 @@ Namespace PropertyPackages
                 result = Me.AUX_LIQDENS(T, P, 0.0#, phaseID, False)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = 1 / (8.314 * result * 1000 / Me.AUX_MMM(Phase) * T / P)
-                result = Me.m_elec.LiquidEnthalpy(T, RET_VMOL(dwpl), constprops, Me.m_uni.GAMMA_MR(T + 0.1, RET_VMOL(dwpl), constprops), Me.m_uni.GAMMA_MR(T, RET_VMOL(dwpl), constprops), False)
+                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = 0.0#
+                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = Me.m_elec.HeatCapacityCp(T, RET_VMOL(dwpl), constprops)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
@@ -345,10 +345,9 @@ Namespace PropertyPackages
 
                 result = Me.AUX_VAPDENS(T, P)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
-                result = Me.m_elec.LiquidEnthalpy(T, RET_VMOL(Phase.Vapor), constprops, Me.m_uni.GAMMA_MR(T + 0.1, RET_VMOL(Phase.Vapor), constprops), Me.m_uni.GAMMA_MR(T, RET_VMOL(Phase.Vapor), constprops), False)
-                result += Me.RET_HVAPM(RET_VMAS(Phase.Vapor), T)
+                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                result = Me.m_id.S_RA_MIX("V", T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), Me.RET_Sid(298.15, T, P, Phase.Vapor), Me.RET_VHVAP(T), Me.RET_Hid(298.15, T, Phase.Vapor))
+                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 1
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = result
@@ -372,9 +371,10 @@ Namespace PropertyPackages
 
                 result = Me.AUX_SOLIDDENS
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
-                result = Me.m_elec.SolidEnthalpy(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
+                result = Me.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Solid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-                Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = 0.0# 'result
+                result = Me.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Solid)
+                Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                 result = 1
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = 0.0# 'result
                 result = Me.AUX_SOLIDCP(RET_VMAS(Phase), constprops, T)
@@ -423,12 +423,11 @@ Namespace PropertyPackages
 
             Select Case st
                 Case State.Liquid
-                    H = Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False)
+                    H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False)
                 Case State.Solid
-                    H = Me.m_elec.SolidEnthalpy(T, Vx, constprops)
+                    H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False) - Me.m_elec.SolidEnthalpy(T, Vx, constprops)
                 Case State.Vapor
-                    H = Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False)
-                    H += Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T)
+                    H = Me.RET_Hid(298.15, T, Vx)
             End Select
 
             Return H
@@ -446,11 +445,11 @@ Namespace PropertyPackages
 
             Select Case st
                 Case State.Liquid
-                    H = Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), True)
+                    H = 0.0#
                 Case State.Solid
-                    H = Me.m_elec.SolidEnthalpy(T, Vx, constprops)
+                    H = 0.0#
                 Case State.Vapor
-                    H = m_id.H_RA_MIX("V", T, P, Vx, RET_VKij, RET_VTC(), RET_VPC(), RET_VW(), RET_VMM(), 0.0#, Me.RET_VHVAP(T))
+                    H = 0.0#
             End Select
 
             Return H
@@ -459,7 +458,14 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Return 0.0#
+            Select Case st
+                Case State.Liquid
+                    Return Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
+                Case State.Solid
+                    Return 0.0#
+                Case State.Vapor
+                    Return Me.RET_Sid(298.15, T, P, Vx)
+            End Select
 
         End Function
 

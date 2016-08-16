@@ -572,7 +572,7 @@ Namespace PropertyPackages
 
             Me.CurrentMaterialStream.AtEquilibrium = False
 
-            Dim P, T, H, S, xv, xl, xs, M, W, MW As Double
+            Dim P, T, H, S, xv, xl, xs, M, W As Double
             Dim result As Dictionary(Of String, Object)
             Dim subst As Interfaces.ICompound
             Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count

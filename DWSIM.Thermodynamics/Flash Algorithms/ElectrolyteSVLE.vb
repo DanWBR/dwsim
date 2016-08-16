@@ -511,7 +511,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = Vx0.SumY * proppack.AUX_MMM(Vx0)
             val2 = Vx.SumY * proppack.AUX_MMM(Vx)
 
-            Dim pen_val As Double = (val1 - val2) ^ 3
+            Dim pen_val As Double = (val1 - val2) ^ 2
 
             i = 0
             Do
@@ -580,7 +580,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                     If .ConstantKeqValue < 1 Then
-                        f(i) = Log(.ConstantKeqValue) ^ 2 - Log(prod(i)) ^ 2
+                        f(i) = Log(1 / .ConstantKeqValue) ^ 2 - Log(1 / prod(i)) ^ 2
                     Else
                         f(i) = .ConstantKeqValue / prod(i) - 1
                     End If

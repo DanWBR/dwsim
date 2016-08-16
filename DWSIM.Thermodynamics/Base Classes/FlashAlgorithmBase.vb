@@ -293,6 +293,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 calcresult.ResultException = ex
 
+                Throw ex
+
             End Try
 
             Return calcresult
