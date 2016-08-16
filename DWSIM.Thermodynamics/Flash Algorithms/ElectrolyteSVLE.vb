@@ -33,6 +33,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
     <System.Serializable()> Public Class ElectrolyteSVLE
 
+        Inherits FlashAlgorithm
+
         Public proppack As PropertyPackage
 
         Dim tmpx As Double(), tmpdx As Double()
@@ -61,19 +63,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Private LoopVarF, LoopVarX As Double, LoopVarVz As Double(), LoopVarState As State
 
-        Public Sub WriteDebugInfo(text As String)
-
-            Select Case Settings.DebugLevel
-                Case 0
-                    'do nothing
-                Case 1
-                    Console.WriteLine(text)
-                Case 2
-            End Select
-
-        End Sub
-
-        Public Function Flash_PT(Vx As Array, T As Double, P As Double) As Dictionary(Of String, Object)
+        Public Overloads Function Flash_PT(Vx As Array, T As Double, P As Double) As Dictionary(Of String, Object)
 
             'This flash algorithm is for Electrolye/Salt systems with Water as the single solvent.
             'The vapor and solid phases are considered to be ideal.
@@ -619,7 +609,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+        Public Overloads Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double) As Dictionary(Of String, Object)
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
@@ -753,7 +743,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double) As Object
+        Public Overloads Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double) As Object
 
             Dim n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -837,7 +827,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double) As Object
+        Public Overloads Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double) As Object
 
             Dim n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
@@ -923,56 +913,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Function eval_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef obj_value As Double) As Boolean
-            Dim fval As Double = FunctionValue2N(x)
-            obj_value = fval
-            Return True
-        End Function
-
-        Public Function eval_grad_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef grad_f As Double()) As Boolean
-            Dim g As Double() = FunctionGradient2N(x)
-            grad_f = g
-            Return True
-        End Function
-
-        Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
-            Return True
-        End Function
-
-        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
-         ByRef jCol As Integer(), ByRef values As Double()) As Boolean
-
-            Dim k As Integer
-
-            If values Is Nothing Then
-
-                Dim row(nele_jac - 1), col(nele_jac - 1) As Integer
-
-                k = 0
-                For i = 0 To m - 1
-                    row(i) = i
-                    row(i + m) = i
-                    col(i) = i
-                    col(i + m) = i + m
-                Next
-
-                iRow = row
-                jCol = col
-
-            Else
-
-                Dim res(nele_jac - 1) As Double
-
-                For i = 0 To nele_jac - 1
-                    res(i) = -1
-                Next
-
-                values = res
-
-            End If
-            Return True
-        End Function
-
         Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
 
@@ -991,6 +931,60 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
+        Public Overrides ReadOnly Property AlgoType As Interfaces.Enums.FlashMethod
+            Get
+                Return Interfaces.Enums.FlashMethod.Electrolyte
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property Description As String
+            Get
+                Return "Electrolyte Flash"
+            End Get
+        End Property
+
+        Public Overrides Function Flash_PH(Vz() As Double, P As Double, H As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+            Dim results = Flash_PH(Vz, P, H, Tref)
+            'Return New Object() {L, V, Vx, Vy, T, ecount, Ki, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            With results
+                Return New Object() {results("LiquidPhaseMoleFraction"), results("VaporPhaseMoleFraction"), results("LiquidPhaseMolarComposition"),
+                                     results("VaporPhaseMolarComposition"), results("Temperature"), 1, PP.RET_NullVector, 0.0#, PP.RET_NullVector, results("SolidPhaseMoleFraction"), results("SolidPhaseMolarComposition")}
+            End With
+        End Function
+
+        Public Overrides Function Flash_PS(Vz() As Double, P As Double, S As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+            Throw New NotImplementedException
+        End Function
+
+        Public Overrides Function Flash_PT(Vz() As Double, P As Double, T As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+            Dim results = Flash_PT(Vz, T, P)
+            With results
+                Return New Object() {results("LiquidPhaseMoleFraction"), results("VaporPhaseMoleFraction"), results("LiquidPhaseMolarComposition"),
+                                     results("VaporPhaseMolarComposition"), 1, 0.0#, PP.RET_NullVector, results("SolidPhaseMoleFraction"), results("SolidPhaseMolarComposition")}
+            End With
+        End Function
+
+        Public Overrides Function Flash_PV(Vz() As Double, P As Double, V As Double, Tref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+            Dim results = Flash_PV(Vz, P, V, Tref)
+            With results
+                Return New Object() {results("LiquidPhaseMoleFraction"), results("VaporPhaseMoleFraction"), results("LiquidPhaseMolarComposition"),
+                                     results("VaporPhaseMolarComposition"), results("Temperature"), 1, PP.RET_NullVector, 0.0#, PP.RET_NullVector, results("SolidPhaseMoleFraction"), results("SolidPhaseMolarComposition")}
+            End With
+        End Function
+
+        Public Overrides Function Flash_TV(Vz() As Double, T As Double, V As Double, Pref As Double, PP As PropertyPackage, Optional ReuseKI As Boolean = False, Optional PrevKi() As Double = Nothing) As Object
+            Dim results = Flash_TV(Vz, T, V, Pref)
+            With results
+                Return New Object() {results("LiquidPhaseMoleFraction"), results("VaporPhaseMoleFraction"), results("LiquidPhaseMolarComposition"),
+                                     results("VaporPhaseMolarComposition"), results("Pressure"), 1, PP.RET_NullVector, 0.0#, PP.RET_NullVector, results("SolidPhaseMoleFraction"), results("SolidPhaseMolarComposition")}
+            End With
+        End Function
+
+        Public Overrides ReadOnly Property Name As String
+            Get
+                Return "Electrolyte SVLE"
+            End Get
+        End Property
     End Class
 
 End Namespace

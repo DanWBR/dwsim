@@ -1470,7 +1470,10 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                         ic += 1
 
-                        If ic >= 100 Then Throw New Exception(fgui.GetTranslatedString("SADJMaxIterationsReached"))
+                        fs.CheckStatus()
+                        fgui.UpdateInterface()
+
+                        If ic >= 25 Then Throw New Exception(fgui.GetTranslatedString("SADJMaxIterationsReached"))
                         If Double.IsNaN(il_err) Then Throw New Exception(fgui.GetTranslatedString("SADJGeneralError"))
                         If Math.Abs(MathEx.Common.AbsSum(dx)) < 0.000001 Then Exit Do
 
@@ -1510,14 +1513,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             Next
 
             If n > 0 Then
-
-                'fobj.UIThread(Sub()
-                '                  fobj.FormSurface.LabelSimultAdjInfo.Text = ""
-                '                  fobj.FormSurface.PicSimultAdjust.Visible = True
-                '                  fobj.FormSurface.LabelSimultAdjInfo.Visible = True
-                '                  fobj.FormSurface.LabelSimultAdjustStatus.Visible = True
-
-                '              End Sub)
 
                 n -= 1
 
@@ -1561,20 +1556,16 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         Next
                     End If
 
+                    fs.CheckStatus()
+                    fgui.UpdateInterface()
+
                     ic += 1
 
-                    If ic >= 100 Then Throw New Exception(fgui.GetTranslatedString("SADJMaxIterationsReached"))
+                    If ic >= 25 Then Throw New Exception(fgui.GetTranslatedString("SADJMaxIterationsReached"))
                     If Double.IsNaN(il_err) Then Throw New Exception(fgui.GetTranslatedString("SADJGeneralError"))
                     If Math.Abs(MathEx.Common.AbsSum(dx)) < 0.000001 Then Exit Do
 
                 Loop
-
-                'fobj.UIThread(Sub()
-                '                  fobj.FormSurface.LabelSimultAdjInfo.Text = ""
-                '                  fobj.FormSurface.PicSimultAdjust.Visible = False
-                '                  fobj.FormSurface.LabelSimultAdjInfo.Visible = False
-                '                  fobj.FormSurface.LabelSimultAdjustStatus.Visible = False
-                '              End Sub)
 
             End If
 

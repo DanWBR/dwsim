@@ -60,6 +60,22 @@ Namespace PropertyPackages
 
         End Sub
 
+        ''' <summary>
+        ''' Returns the FlashAlgorithm object instance for this property package.
+        ''' </summary>
+        ''' <value></value>
+        ''' <returns>A FlashAlgorithm object to be used in flash calculations.</returns>
+        ''' <remarks></remarks>
+        Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
+
+            Get
+
+                Return Me.ElectrolyteFlash
+
+            End Get
+
+        End Property
+
 
 #Region "    DWSIM Functions"
 
