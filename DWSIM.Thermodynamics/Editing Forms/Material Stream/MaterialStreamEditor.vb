@@ -810,7 +810,7 @@ Public Class MaterialStreamEditor
                     Else
                         liqdens(i) = ipp.AUX_LIQDENSi(s, 298.15)
                     End If
-                    totalvol += s.MoleFraction * s.ConstantProperties.Molar_Weight / liqdens(i)
+                    totalvol += s.MoleFraction.GetValueOrDefault * s.ConstantProperties.Molar_Weight / liqdens(i)
                     i += 1
                 Next
                 i = 0

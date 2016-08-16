@@ -378,7 +378,7 @@ Namespace Streams
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculating phase equilibria..."))
 
-                    If .AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Or .IsElectrolytePP Then
+                    If .AUX_IS_SINGLECOMP(PropertyPackages.Phase.Mixture) Then
 
                         If Not Me.GraphicObject Is Nothing AndAlso Me.GraphicObject.InputConnectors(0).IsAttached Then
                             If DebugMode Then AppendDebugLine(String.Format("Stream is single-compound and attached to the outlet of an unit operation. PH flash equilibrium calculation forced."))

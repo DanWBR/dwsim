@@ -758,7 +758,7 @@ Namespace PropertyPackages
 
                             'MW = Me.AUX_MMM(Vnf)
 
-                            Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
+                            Me.CurrentMaterialStream.Phases(0).Properties.molarflow *= M '* W / MW * 1000
 
                             'i = 0
                             'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
@@ -852,7 +852,7 @@ Namespace PropertyPackages
 
                             'MW = Me.AUX_MMM(Vnf)
 
-                            Me.CurrentMaterialStream.Phases(0).Properties.molarflow = M * W / MW * 1000
+                            Me.CurrentMaterialStream.Phases(0).Properties.molarflow *= M '* W / MW * 1000
 
                             'i = 0
                             'For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values

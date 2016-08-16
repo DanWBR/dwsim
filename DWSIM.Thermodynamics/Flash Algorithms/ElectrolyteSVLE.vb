@@ -403,7 +403,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim fx, x(c) As Double
 
                 For i = 0 To c
-                    lbound(i) = Log(1.0E-40)
+                    lbound(i) = Log(1.0E-50)
                     ubound(i) = Log(1.0#)
                     If Vx0(i) = 0.0# Then x(i) = Log(1.0E-20) Else x(i) = Log(Vx0(i))
                 Next
@@ -502,7 +502,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
             Next
 
-            Dim pen_val As Double = (Vx0.SumY * proppack.AUX_MMM(Vx0) - Vx.SumY * proppack.AUX_MMM(Vx)) ^ 2
+            Dim val1, val2 As Double
+
+            val1 = Vx0.SumY * proppack.AUX_MMM(Vx0)
+            val2 = Vx.SumY * proppack.AUX_MMM(Vx)
+
+            Dim pen_val As Double = (val1 - val2) ^ 2
 
             i = 0
             Do
