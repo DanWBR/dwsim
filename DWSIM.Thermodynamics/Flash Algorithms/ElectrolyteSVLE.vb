@@ -209,6 +209,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     If Vns(i) < 0.0# Then Vns(i) = 0.0#
                 Next
 
+                For i = 0 To n
+                    If Vp(i) > P Then
+                        Vnv(i) = Vnl(i) + Vns(i)
+                        Vns(i) = 0.0#
+                        Vnl(i) = 0.0#
+                    End If
+                Next
+
                 'liquid mole amounts
 
                 L_ant = L
@@ -247,14 +255,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
 
             End If
-
-            For i = 0 To n
-                If Vp(i) > P Then
-                    Vnv(i) = Vnl(i)
-                    Vxl(i) = 0.0#
-                    Vnl(i) = 0.0#
-                End If
-            Next
 
             L = Vnl.Sum()
             S = Vns.Sum()
@@ -416,19 +416,22 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         var1 = -N0(comp.CompName) / comp.StoichCoeff
                         If j = 0 Then
                             lbound(i) = Log(1.0E-40)
-                            ubound(i) = var1
+                            ubound(i) = Log(var1)
                         Else
-                            If var1 < lbound(i) Then lbound(i) = Log(1.0E-40)
-                            If var1 > ubound(i) Then ubound(i) = var1
+                            If Log(var1) < lbound(i) Then lbound(i) = Log(1.0E-40)
+                            If Log(var1) > ubound(i) Then ubound(i) = Log(var1)
                         End If
                         j += 1
                     Next
                     i += 1
                 Next
 
+                Me.T = T
+                Me.P = P
+
                 'initial estimates for the reaction extents
 
-                Dim REx(r), x(r), fx As Double
+                Dim REx(r), iest(r), x(r), fx As Double
 
                 If Not prevx Is Nothing Then
                     For i = 0 To r
@@ -442,34 +445,67 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             If rxn.ConstantKeqValue < 1 Then
                                 REx(i) = 1.0E-20
                             Else
-                                If ubound(i) = 0.0# Then
-                                    REx(i) = 1.0E-20
-                                Else
-                                    REx(i) = ubound(i) * 0.9
-                                End If
+                                REx(i) = Exp(ubound(i)) * 0.9
                             End If
                             i += 1
                         End If
                     Next
                 End If
 
-                Me.T = T
-                Me.P = P
+                'optimize initial estimates
 
-                For i = 0 To r
-                    x(i) = Log(REx(i))
-                Next
+                If ubound.ExpY.SumY > 0.0# Then
 
-                If ubound.SumY > 0.0# Then
+                    Dim extvars(r) As OptBoundVariable
+                    For i = 0 To r
+                        extvars(i) = New OptBoundVariable("ex" & CStr(i + 1), Log(REx(i)), False, lbound(i), ubound(i))
+                    Next
 
-                    IdealCalc = False
+                    Dim extsolver As New Simplex
+                    extsolver.Tolerance = 0.001
+                    extsolver.MaxFunEvaluations = 1000
+                    iest = extsolver.ComputeMin(Function(xvar() As Double)
 
-                    ObjectiveFunctionHistory.Clear()
+                                                    For i = 0 To r
+                                                        x(i) = Log(xvar(i))
+                                                    Next
+
+                                                    ObjectiveFunctionHistory.Clear()
+
+                                                    IdealCalc = True
+
+                                                    Dim intvars(r) As OptBoundVariable
+                                                    For i = 0 To r
+                                                        intvars(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
+                                                    Next
+                                                    Dim intsolver As New Simplex
+                                                    intsolver.Tolerance = Tolerance
+                                                    intsolver.MaxFunEvaluations = MaximumIterations
+                                                    x = intsolver.ComputeMin(AddressOf FunctionValue2N, intvars)
+
+                                                    intsolver = Nothing
+
+                                                    fx = Me.FunctionValue2N(x)
+
+                                                    Return fx
+
+                                                End Function, extvars)
+
+                    For i = 0 To r
+                        x(i) = iest(i)
+                        If x(i) < lbound(i) Then x(i) = lbound(i) * 1.1
+                        If x(i) > ubound(i) Then x(i) = ubound(i) * 0.9
+                    Next
 
                     Dim variables(r) As OptBoundVariable
                     For i = 0 To r
                         variables(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
                     Next
+
+                    ObjectiveFunctionHistory.Clear()
+
+                    IdealCalc = False
+
                     Dim solver As New Simplex
                     solver.Tolerance = Tolerance
                     solver.MaxFunEvaluations = MaximumIterations
@@ -481,7 +517,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     fx = Me.FunctionValue2N(x)
 
-                    solver = Nothing
+                    If Double.IsNaN(fx) Then
+                        Throw New Exception("Chemical Equilibrium Solver error: general numerical error.")
+                    End If
 
                 End If
 
@@ -568,17 +606,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = Vx0.SumY * proppack.AUX_MMM(Vx0)
             val2 = Vx.SumY * proppack.AUX_MMM(Vx)
 
-            Dim pen_val As Double = 0.0#
-
-            'For i = 0 To Me.Reactions.Count - 1
-            '    For Each s As String In Me.ComponentIDs
-            '        With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-            '            If .Components.ContainsKey(s) Then
-            '                pen_val += N(s) * .Components(s).StoichCoeff * 100
-            '            End If
-            '        End With
-            '    Next
-            'Next
+            Dim pen_val As Double = (val1 - val2) ^ 2
 
             i = 0
             Do
@@ -620,7 +648,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End If
 
             Dim CP(nc) As Double
-            Dim f(Me.Reactions.Count - 1) As Double
+            Dim f1, f2 As Double
             Dim prod(Me.Reactions.Count - 1) As Double
 
             For i = 0 To nc
@@ -653,15 +681,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For i = 0 To Me.Reactions.Count - 1
                 With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-                    If .ConstantKeqValue < 1 Then
-                        f(i) = Log(1 / .ConstantKeqValue) ^ 2 - Log(1 / prod(i)) ^ 2
-                    Else
-                        f(i) = .ConstantKeqValue / prod(i) - 1
-                    End If
+                    f1 += Log(.ConstantKeqValue)
+                    f2 += Log(prod(i))
                 End With
             Next
 
-            Dim fval As Double = f.AbsSumY + pen_val ^ 2
+            If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then f2 = Log(1000000.0)
+
+            Dim fval As Double = (f1 - f2) ^ 2 + pen_val
 
             ObjectiveFunctionHistory.Add(fval)
 
