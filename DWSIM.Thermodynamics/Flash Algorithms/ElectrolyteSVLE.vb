@@ -466,10 +466,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     extsolver.MaxFunEvaluations = 1000
                     iest = extsolver.ComputeMin(Function(xvar() As Double)
 
-                                                    For i = 0 To r
-                                                        x(i) = Log(xvar(i))
-                                                    Next
-
                                                     ObjectiveFunctionHistory.Clear()
 
                                                     IdealCalc = True
@@ -686,7 +682,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End With
             Next
 
-            If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then f2 = Log(1000000.0)
+            'If Double.IsNaN(f2) Or Double.IsInfinity(f2) Then f2 = Log(1000000.0)
 
             Dim fval As Double = (f1 - f2) ^ 2 + pen_val
 
