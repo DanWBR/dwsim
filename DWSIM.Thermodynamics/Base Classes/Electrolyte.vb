@@ -98,10 +98,12 @@ Namespace PropertyPackages.Auxiliary
                 i += 1
             Loop Until i = n + 1
 
+            Dim wden = LiquidDensity(Vx, T, cprops)
+
             i = 0
             Do
                 If cprops(i).IsIon Then
-                    molality(i) = Vx(i) / wtotal
+                    molality(i) = Vx(i) / wtotal * wden
                     summ += molality(i)
                 End If
                 i += 1
@@ -136,10 +138,12 @@ Namespace PropertyPackages.Auxiliary
                 i += 1
             Loop Until i = n + 1
 
+            Dim wden = LiquidDensity(Vx, T, cprops)
+
             i = 0
             Do
                 If cprops(i).IsIon Then
-                    molality(i) = Vx(i) / wtotal
+                    molality(i) = Vx(i) / wtotal * wden
                     summ += molality(i)
                 End If
                 i += 1

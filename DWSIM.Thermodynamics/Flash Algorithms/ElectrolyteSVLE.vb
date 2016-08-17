@@ -149,6 +149,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'Do
 
                 'calculate chemical equilibria between ions, salts and water. 
+
                 ''SolveChemicalEquilibria' returns the equilibrium molar amounts in the liquid phase, including precipitates.
 
                 If CalculateChemicalEquilibria And Vp(wid) < P Then
@@ -511,7 +512,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = Vx0.SumY * proppack.AUX_MMM(Vx0)
             val2 = Vx.SumY * proppack.AUX_MMM(Vx)
 
-            Dim pen_val As Double = (val1 - val2) ^ 2
+            Dim pen_val As Double = 0.0# '(val1 - val2) ^ 2
 
             i = 0
             Do
@@ -524,10 +525,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Xsolv As Double = 1
 
+            Dim wden As Double = 0.0#
+            If TypeOf proppack Is ExUNIQUACPropertyPackage Then
+                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vx, T, CompoundProperties)
+            ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
+                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vx, T, CompoundProperties)
+            End If
+
             i = 0
             Do
-                Vx(i) /= mtotal
-                molality(i) = Vx(i) / wtotal
+                'Vx(i) /= mtotal
+                molality(i) = Vx(i) / wtotal * wden
                 i += 1
             Loop Until i = nc + 1
 
