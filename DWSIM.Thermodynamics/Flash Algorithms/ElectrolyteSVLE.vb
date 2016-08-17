@@ -182,7 +182,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 'calculate maximum solubilities for solids/precipitates.
 
                 For i = 0 To n
-                    If CompoundProperties(i).TemperatureOfFusion <> 0.0# And i <> wid Then
+                    If CompoundProperties(i).IsSalt Then
+                        Vxlmax(i) = 0.0#
+                    ElseIf CompoundProperties(i).TemperatureOfFusion <> 0.0# And i <> wid Then
                         Vxlmax(i) = (1 / activcoeff(i)) * Exp(-CompoundProperties(i).EnthalpyOfFusionAtTf / (0.00831447 * T) * (1 - T / CompoundProperties(i).TemperatureOfFusion))
                         If Vxlmax(i) > 1 Then Vxlmax(i) = 1.0#
                     Else
@@ -198,12 +200,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 For i = 0 To n
                     Vnl_ant(i) = Vnl(i)
-                    If Vxl(i) > Vxlmax(i) Then
-                        Vxl(i) = Vxlmax(i)
+                    If Vnl(i) > Vxlmax(i) * L Then
+                        Vnl(i) = Vxlmax(i) * L
+                        Vns(i) = Vnl_ant(i) - Vxlmax(i) * L
                     Else
                         Vns(i) = 0
                     End If
-                    Vns(i) = Vnf(i) - Vnl(i)
                     If Vns(i) < 0.0# Then Vns(i) = 0.0#
                 Next
 
@@ -400,39 +402,88 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 N0tot = 1.0#
                 Ninerts = N0tot - Sum(fm0)
 
-                Dim lbound(c) As Double
-                Dim ubound(c) As Double
-                Dim fx, x(c) As Double
+                'upper and lower bounds for reaction extents (just an estimate, will be different when a single compound appears in multiple reactions)
 
-                For i = 0 To c
-                    lbound(i) = Log(1.0E-50)
-                    ubound(i) = Log(1.0#)
-                    If Vx0(i) = 0.0# Then x(i) = Log(1.0E-20) Else x(i) = Log(Vx0(i))
+                Dim lbound(Me.ReactionExtents.Count - 1) As Double
+                Dim ubound(Me.ReactionExtents.Count - 1) As Double
+                Dim var1 As Double
+
+                i = 0
+                For Each rxid As String In Me.Reactions
+                    rx = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxid)
+                    j = 0
+                    For Each comp As Interfaces.IReactionStoichBase In rx.Components.Values
+                        var1 = -N0(comp.CompName) / comp.StoichCoeff
+                        If j = 0 Then
+                            lbound(i) = Log(1.0E-40)
+                            ubound(i) = var1
+                        Else
+                            If var1 < lbound(i) Then lbound(i) = Log(1.0E-40)
+                            If var1 > ubound(i) Then ubound(i) = var1
+                        End If
+                        j += 1
+                    Next
+                    i += 1
                 Next
+
+                'initial estimates for the reaction extents
+
+                Dim REx(r), x(r), fx As Double
+
+                If Not prevx Is Nothing Then
+                    For i = 0 To r
+                        REx(i) = prevx(i) * 0.9
+                    Next
+                Else
+                    i = 0
+                    For Each rxnsb As Interfaces.IReactionSetBase In proppack.CurrentMaterialStream.Flowsheet.ReactionSets(Me.ReactionSet).Reactions.Values
+                        If proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
+                            rxn = proppack.CurrentMaterialStream.Flowsheet.Reactions(rxnsb.ReactionID)
+                            If rxn.ConstantKeqValue < 1 Then
+                                REx(i) = 1.0E-20
+                            Else
+                                If ubound(i) = 0.0# Then
+                                    REx(i) = 1.0E-20
+                                Else
+                                    REx(i) = ubound(i) * 0.9
+                                End If
+                            End If
+                            i += 1
+                        End If
+                    Next
+                End If
 
                 Me.T = T
                 Me.P = P
 
-                IdealCalc = False
-
-                ObjectiveFunctionHistory.Clear()
-
-                Dim variables(c) As OptBoundVariable
-                For i = 0 To c
-                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
+                For i = 0 To r
+                    x(i) = Log(REx(i))
                 Next
-                Dim solver As New Simplex
-                solver.Tolerance = Tolerance
-                solver.MaxFunEvaluations = MaximumIterations
-                x = solver.ComputeMin(AddressOf FunctionValue2N, variables)
 
-                If solver.FunEvaluations >= solver.MaxFunEvaluations Then
-                    Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                If ubound.SumY > 0.0# Then
+
+                    IdealCalc = False
+
+                    ObjectiveFunctionHistory.Clear()
+
+                    Dim variables(r) As OptBoundVariable
+                    For i = 0 To r
+                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
+                    Next
+                    Dim solver As New Simplex
+                    solver.Tolerance = Tolerance
+                    solver.MaxFunEvaluations = MaximumIterations
+                    x = solver.ComputeMin(AddressOf FunctionValue2N, variables)
+
+                    If solver.FunEvaluations >= solver.MaxFunEvaluations Then
+                        Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
+                    End If
+
+                    fx = Me.FunctionValue2N(x)
+
+                    solver = Nothing
+
                 End If
-
-                fx = Me.FunctionValue2N(x)
-
-                solver = Nothing
 
                 'comp. conversions
 
@@ -477,12 +528,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             nc = Me.CompoundProperties.Count - 1
 
-            Dim comps = N.Keys.ToList
-
             i = 0
-            For Each s As String In comps
-                N(s) = Exp(x(i))
+            For Each s As String In N.Keys
+                DN(s) = 0
+                For j = 0 To r
+                    DN(s) += E(i, j) * Exp(x(j))
+                Next
                 i += 1
+            Next
+
+            For Each s As String In DN.Keys
+                N(s) = N0(s) + DN(s)
+                'If N(s) < 0 Then N(s) = 0
             Next
 
             Dim Vx(nc) As Double
@@ -511,17 +568,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val1 = Vx0.SumY * proppack.AUX_MMM(Vx0)
             val2 = Vx.SumY * proppack.AUX_MMM(Vx)
 
-            Dim pen_val As Double = 0.0# '(val1 - val2) ^ 2
+            Dim pen_val As Double = 0.0#
 
-            For i = 0 To Me.Reactions.Count - 1
-                For Each s As String In Me.ComponentIDs
-                    With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
-                        If .Components.ContainsKey(s) Then
-                            pen_val += N(s) * .Components(s).StoichCoeff * 10
-                        End If
-                    End With
-                Next
-            Next
+            'For i = 0 To Me.Reactions.Count - 1
+            '    For Each s As String In Me.ComponentIDs
+            '        With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
+            '            If .Components.ContainsKey(s) Then
+            '                pen_val += N(s) * .Components(s).StoichCoeff * 100
+            '            End If
+            '        End With
+            '    Next
+            'Next
 
             i = 0
             Do
@@ -544,7 +601,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             i = 0
             Do
                 'Vx(i) /= mtotal
-                molality(i) = Vx(i) / wtotal * wden
+                molality(i) = Vx(i) / wtotal * wden / 1000
                 i += 1
             Loop Until i = nc + 1
 

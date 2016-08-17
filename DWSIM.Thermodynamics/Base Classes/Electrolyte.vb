@@ -103,7 +103,7 @@ Namespace PropertyPackages.Auxiliary
             i = 0
             Do
                 If cprops(i).IsIon Then
-                    molality(i) = Vx(i) / wtotal * wden
+                    molality(i) = Vx(i) / wtotal * wden / 1000
                     summ += molality(i)
                 End If
                 i += 1
@@ -143,7 +143,7 @@ Namespace PropertyPackages.Auxiliary
             i = 0
             Do
                 If cprops(i).IsIon Then
-                    molality(i) = Vx(i) / wtotal * wden
+                    molality(i) = Vx(i) / wtotal * wden / 1000
                     summ += molality(i)
                 End If
                 i += 1
