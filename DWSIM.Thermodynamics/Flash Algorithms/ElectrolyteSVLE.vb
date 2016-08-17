@@ -662,14 +662,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 For Each s As String In Me.ComponentIDs
                     With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
                         If .Components.ContainsKey(s) Then
-                            If .Components(s).StoichCoeff > 0 Then
-                                For j = 0 To nc
-                                    If CompoundProperties(j).Name = s Then
-                                        prod(i) *= CP(j) ^ .Components(s).StoichCoeff
-                                        Exit For
-                                    End If
-                                Next
-                            End If
+                            For j = 0 To nc
+                                If CompoundProperties(j).Name = s And Not CompoundProperties(j).IsSalt Then
+                                    prod(i) *= CP(j) ^ .Components(s).StoichCoeff
+                                    Exit For
+                                End If
+                            Next
                         End If
                     End With
                 Next
