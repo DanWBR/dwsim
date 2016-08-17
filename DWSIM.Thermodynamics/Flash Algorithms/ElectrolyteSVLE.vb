@@ -472,7 +472,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                                                     Dim intvars(r) As OptBoundVariable
                                                     For i = 0 To r
-                                                        intvars(i) = New OptBoundVariable("x" & CStr(i + 1), x(i), False, lbound(i), ubound(i))
+                                                        intvars(i) = New OptBoundVariable("x" & CStr(i + 1), xvar(i), False, lbound(i), ubound(i))
                                                     Next
                                                     Dim intsolver As New Simplex
                                                     intsolver.Tolerance = Tolerance
@@ -573,7 +573,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             For Each s As String In DN.Keys
                 N(s) = N0(s) + DN(s)
-                'If N(s) < 0 Then N(s) = 0
+                'If N(s) < 0.0# Then N(s) = -N(s)
             Next
 
             Dim Vx(nc) As Double
