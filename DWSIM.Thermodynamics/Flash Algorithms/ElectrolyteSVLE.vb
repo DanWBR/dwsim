@@ -200,12 +200,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Vnl_ant(i) = Vnl(i)
                     If Vxl(i) > Vxlmax(i) Then
                         Vxl(i) = Vxlmax(i)
-                        Vns(i) = Vnl(i) - Vxl(i) * L
-                        Vnl(i) = Vxl(i) * L
                     Else
-                        'Vnl(i) = Vf(i)
                         Vns(i) = 0
                     End If
+                    Vns(i) = Vnf(i) - Vnl(i)
+                    If Vns(i) < 0.0# Then Vns(i) = 0.0#
                 Next
 
                 'liquid mole amounts
@@ -462,7 +461,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 '    Vx(i) = Vx(i) '/ mtot
                 'Next
 
-                Return New Object() {Vx2.NormalizeY, x}
+                Return New Object() {Vx2, x}
 
             Else
 
@@ -513,6 +512,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             val2 = Vx.SumY * proppack.AUX_MMM(Vx)
 
             Dim pen_val As Double = 0.0# '(val1 - val2) ^ 2
+
+            For i = 0 To Me.Reactions.Count - 1
+                For Each s As String In Me.ComponentIDs
+                    With proppack.CurrentMaterialStream.Flowsheet.Reactions(Me.Reactions(i))
+                        If .Components.ContainsKey(s) Then
+                            pen_val += N(s) * .Components(s).StoichCoeff * 10
+                        End If
+                    End With
+                Next
+            Next
 
             i = 0
             Do
