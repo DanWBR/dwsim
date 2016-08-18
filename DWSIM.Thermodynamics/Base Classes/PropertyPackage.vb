@@ -4981,6 +4981,22 @@ Final3:
 
         End Function
 
+        Public Function RET_HFUSM(ByVal Vxw As Array, ByVal T As Double) As Double
+
+            Dim val As Double = 0.0#
+            Dim i As Integer
+            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
+
+            i = 0
+            For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val += Vxw(i) * Me.AUX_HFUSi(subst.Name, T)
+                i += 1
+            Next
+
+            Return val
+
+        End Function
+
         Public Function AUX_HVAPi(ByVal sub1 As String, ByVal T As Double)
 
             Dim A, B, C, D, E, Tr, result As Double
@@ -5023,6 +5039,13 @@ Final3:
             Else
                 Return 0.0#
             End If
+
+        End Function
+
+        Public Function AUX_HFUSi(ByVal sub1 As String, ByVal T As Double)
+
+            'return DHfus in kJ/kg
+            Return Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.EnthalpyOfFusionAtTf * 1000 / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
 
         End Function
 

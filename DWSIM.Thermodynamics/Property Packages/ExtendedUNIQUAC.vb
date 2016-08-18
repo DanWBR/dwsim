@@ -425,7 +425,7 @@ Namespace PropertyPackages
                 Case State.Liquid
                     H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False)
                 Case State.Solid
-                    H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False) - Me.m_elec.SolidEnthalpy(T, Vx, constprops)
+                    H = Me.RET_Hid(298.15, T, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - Me.m_elec.LiquidEnthalpy(T, Vx, constprops, Me.m_uni.GAMMA_MR(T + 0.1, Vx, constprops), Me.m_uni.GAMMA_MR(T, Vx, constprops), False) - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) - Me.m_elec.SolidEnthalpy(T, Vx, constprops)
                 Case State.Vapor
                     H = Me.RET_Hid(298.15, T, Vx)
             End Select
@@ -436,23 +436,7 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Dim H As Double
-
-            Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
-            For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                constprops.Add(su.ConstantProperties)
-            Next
-
-            Select Case st
-                Case State.Liquid
-                    H = 0.0#
-                Case State.Solid
-                    H = 0.0#
-                Case State.Vapor
-                    H = 0.0#
-            End Select
-
-            Return H
+            Return 0.0#
 
         End Function
 
@@ -462,7 +446,7 @@ Namespace PropertyPackages
                 Case State.Liquid
                     Return Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                 Case State.Solid
-                    Return 0.0#
+                    Return Me.RET_Sid(298.15, T, P, Vx) - Me.RET_HVAPM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T - Me.RET_HFUSM(Me.AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
                 Case State.Vapor
                     Return Me.RET_Sid(298.15, T, P, Vx)
             End Select

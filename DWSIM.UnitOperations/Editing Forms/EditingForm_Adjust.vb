@@ -47,26 +47,27 @@ Public Class EditingForm_Adjust
             cbTargetObj.Items.Clear()
             cbTargetObj.Items.AddRange(objlist)
 
-            If .ManipulatedObjectData.Name <> "" Then
-                cbSourceObj.SelectedItem = .ManipulatedObjectData.Name
-                cbSourceProp.SelectedItem = .FlowSheet.GetTranslatedString(.ManipulatedObjectData.PropertyName)
+            If .ManipulatedObjectData.ID <> "" Then
+                Dim obj = .GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .ManipulatedObjectData.ID).SingleOrDefault
+                If Not obj Is Nothing Then
+                    .ManipulatedObjectData.Name = obj.GraphicObject.Tag
+                    cbSourceObj.SelectedItem = .ManipulatedObjectData.Name
+                    cbSourceProp.SelectedItem = .FlowSheet.GetTranslatedString(.ManipulatedObjectData.PropertyName)
+                End If
             End If
-            If .ControlledObjectData.Name <> "" Then
-                cbTargetObj.SelectedItem = .ControlledObjectData.Name
-                cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.ControlledObjectData.PropertyName)
-
-                Try
-
-                    Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
-
-                    'parameters
-
-                    tbSetPoint.Text = su.Converter.ConvertFromSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(SimObject.AdjustValue)).ToString(nf)
-
-                Catch ex As Exception
-
-                End Try
-
+            If .ControlledObjectData.ID <> "" Then
+                Dim obj2 = .GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .ControlledObjectData.ID).SingleOrDefault
+                If Not obj2 Is Nothing Then
+                    .ControlledObjectData.Name = obj2.GraphicObject.Tag
+                    cbTargetObj.SelectedItem = .ControlledObjectData.Name
+                    cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.ControlledObjectData.PropertyName)
+                    Try
+                        Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+                        'parameters
+                        tbSetPoint.Text = su.Converter.ConvertFromSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(SimObject.AdjustValue)).ToString(nf)
+                    Catch ex As Exception
+                    End Try
+                End If
             End If
 
             chkSolveGlobal.Checked = SimObject.SimultaneousAdjust

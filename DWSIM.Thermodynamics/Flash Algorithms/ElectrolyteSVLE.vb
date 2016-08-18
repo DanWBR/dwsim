@@ -452,9 +452,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Next
                 End If
 
-                'optimize initial estimates
+                'check if there is enough reactant to proceeed with chemical equilibrium calculation
 
                 If ubound.ExpY.SumY > 0.0# Then
+
+                    'optimize initial estimates
 
                     Dim extvars(r) As OptBoundVariable
                     For i = 0 To r
@@ -487,6 +489,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                                                 End Function, extvars)
 
+                    'use the best set of initial estimates for the reaction extents
+
                     For i = 0 To r
                         x(i) = iest(i)
                         If x(i) < lbound(i) Then x(i) = lbound(i) * 1.1
@@ -511,6 +515,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception("Chemical Equilibrium Solver error: Reached the maximum number of internal iterations without converging.")
                     End If
 
+                    ' check objective function value
+                    ' an acceptable solution should have a function value less than one at least because the 
+                    ' simplex solver doesn't always obey the tolerance value
+
                     fx = Me.FunctionValue2N(x)
 
                     If Double.IsNaN(fx) Then
@@ -519,7 +527,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 End If
 
-                'comp. conversions
+                'compound conversions
 
                 For Each sb As String In ids
                     If Me.ComponentConversions.ContainsKey(sb) Then
@@ -615,16 +623,27 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Xsolv As Double = 1
 
+            'solvent density without solids and ions
+
+            Dim Vxns(nc) As Double
+
+            For i = 0 To nc
+                If Not CompoundProperties(i).IsSalt And Not CompoundProperties(i).IsIon Then
+                    Vxns(i) = Vx(i)
+                End If
+            Next
+
+            Vxns = Vxns.NormalizeY
+
             Dim wden As Double = 0.0#
             If TypeOf proppack Is ExUNIQUACPropertyPackage Then
-                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vx, T, CompoundProperties)
+                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
             ElseIf TypeOf proppack Is LIQUAC2PropertyPackage Then
-                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vx, T, CompoundProperties)
+                wden = CType(proppack, ExUNIQUACPropertyPackage).m_elec.LiquidDensity(Vxns, T, CompoundProperties)
             End If
 
             i = 0
             Do
-                'Vx(i) /= mtotal
                 molality(i) = Vx(i) / wtotal * wden / 1000
                 i += 1
             Loop Until i = nc + 1

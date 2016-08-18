@@ -119,7 +119,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
+    <Compile Include="Base Classes\IActivityCoefficientBase.vb" />
     <Compile Include="Base Classes\ThermodynamicsBase.vb" />
     <Compile Include="Databases\Databases.vb" />
     <Compile Include="Editing Forms\Excel Interface\AboutForm.Designer.vb">
@@ -232,8 +232,8 @@
     <Compile Include="Base Classes\PropertyMethods.vb" />
     <Compile Include="Main\Calculator.vb" />
     <Compile Include="Helper Classes\ChemSepIDConverter.vb" />
-    <Compile Include="Property Packages\ActivityCoefficientBase.vb" />
-    <Compile Include="Base Classes\Electrolyte.vb" />
+    <Compile Include="Base Classes\ActivityCoefficientBase.vb" />
+    <Compile Include="Base Classes\ElectrolyteProperties.vb" />
     <Compile Include="Base Classes\ElectrolyteBase.vb" />
     <Compile Include="Models\Hypotheticals.vb" />
     <Compile Include="Base Classes\MichelsenBase.vb" />

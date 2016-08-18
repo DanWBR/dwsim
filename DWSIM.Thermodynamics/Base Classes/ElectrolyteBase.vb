@@ -339,18 +339,6 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-
-            Return 0.0#
-
-        End Function
-
-        Public Overrides Function DW_CalcEntropyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-
-            Return 0.0#
-
-        End Function
-
 #End Region
 
 #Region "    Auxiliary Functions"

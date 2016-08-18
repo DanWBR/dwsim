@@ -47,13 +47,21 @@ Public Class EditingForm_Spec
             cbTargetObj.Items.Clear()
             cbTargetObj.Items.AddRange(objlist)
 
-            If .SourceObjectData.Name <> "" Then
-                cbSourceObj.SelectedItem = .SourceObjectData.Name
-                cbSourceProp.SelectedItem = .FlowSheet.GetTranslatedString(.SourceObjectData.PropertyName)
+            If .SourceObjectData.ID <> "" Then
+                Dim obj = .GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .SourceObjectData.ID).SingleOrDefault
+                If Not obj Is Nothing Then
+                    .SourceObjectData.Name = obj.GraphicObject.Tag
+                    cbSourceObj.SelectedItem = .SourceObjectData.Name
+                    cbSourceProp.SelectedItem = .FlowSheet.GetTranslatedString(.SourceObjectData.PropertyName)
+                End If
             End If
-            If .TargetObjectData.Name <> "" Then
-                cbTargetObj.SelectedItem = .TargetObjectData.Name
-                cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.TargetObjectData.PropertyName)
+            If .TargetObjectData.ID <> "" Then
+                Dim obj = .GetFlowsheet.SimulationObjects.Values.Where(Function(x) x.Name = .TargetObjectData.ID).SingleOrDefault
+                If Not obj Is Nothing Then
+                    .TargetObjectData.Name = obj.GraphicObject.Tag
+                    cbTargetObj.SelectedItem = .TargetObjectData.Name
+                    cbTargetProp.SelectedItem = .FlowSheet.GetTranslatedString(.TargetObjectData.PropertyName)
+                End If
             End If
 
             'annotation
@@ -67,7 +75,7 @@ Public Class EditingForm_Spec
             'parameters
 
             tbExpression.Text = .Expression
-            
+
         End With
 
         Loaded = True
