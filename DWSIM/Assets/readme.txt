@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 7 - August 2016
+Version 4.0 Update 9 - August 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 9
+
+- [FIX] Fixed command buttons not showing in Data Regression Utility
+
+Version 4.0 Update 8
+
+- [FIX] Electrolytes subsystem stability and reliability enhancements
+- [FIX] Fixed Material Stream, Heater/Cooler, Adjust and Spec editors
+- [FIX] Minor bug fixes and enhancements
 
 Version 4.0 Update 7
 

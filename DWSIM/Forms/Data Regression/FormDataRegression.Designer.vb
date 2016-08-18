@@ -27,9 +27,9 @@ Partial Class FormDataRegression
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.graph = New ZedGraph.ZedGraphControl()
@@ -86,6 +86,11 @@ Partial Class FormDataRegression
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.gridInEst = New System.Windows.Forms.DataGridView()
+        Me.colpar = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colval = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colmax = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cf = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.cbPunit = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -127,11 +132,6 @@ Partial Class FormDataRegression
         Me.tbTitle = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.DBOpenDlg = New System.Windows.Forms.OpenFileDialog()
-        Me.colpar = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmin = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colval = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colmax = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cf = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -149,21 +149,21 @@ Partial Class FormDataRegression
         '
         'FaTabStrip1
         '
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem3})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.graph)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'graph
         '
@@ -179,11 +179,11 @@ Partial Class FormDataRegression
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.graph2)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'graph2
         '
@@ -199,14 +199,15 @@ Partial Class FormDataRegression
         '
         'FaTabStripItem3
         '
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.CanClose = False
         Me.FaTabStripItem3.Controls.Add(Me.gridstats)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'gridstats
         '
+        resources.ApplyResources(Me.gridstats, "gridstats")
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.gridstats.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.gridstats.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -214,7 +215,6 @@ Partial Class FormDataRegression
         Me.gridstats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridstats.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.x1l1, Me.x1l1calc, Me.x1l2, Me.x1l2calc, Me.y1, Me.y1c, Me.t, Me.tcalc, Me.p, Me.pcalc, Me.dy, Me.dyy, Me.dyp, Me.dp, Me.dpp, Me.dppp, Me.dt, Me.dtt, Me.dttp, Me.dx1l1, Me.dxx1, Me.dxxp, Me.dx2, Me.dxx2, Me.dxx2p, Me.coltl_error, Me.colts_error})
         Me.gridstats.ContextMenuStrip = Me.ContextMenuStrip1
-        resources.ApplyResources(Me.gridstats, "gridstats")
         Me.gridstats.Name = "gridstats"
         Me.gridstats.ReadOnly = True
         Me.gridstats.RowHeadersVisible = False
@@ -383,51 +383,51 @@ Partial Class FormDataRegression
         '
         'ContextMenuStrip1
         '
+        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripMenuItem5, Me.ToolStripMenuItem6, Me.ToolStripMenuItem7})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         '
         'ToolStripMenuItem1
         '
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         Me.ToolStripMenuItem1.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
         '
         'ToolStripMenuItem2
         '
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         Me.ToolStripMenuItem2.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
         '
         'ToolStripMenuItem3
         '
+        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
         Me.ToolStripMenuItem3.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        resources.ApplyResources(Me.ToolStripMenuItem3, "ToolStripMenuItem3")
         '
         'ToolStripMenuItem4
         '
+        resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
         Me.ToolStripMenuItem4.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-        resources.ApplyResources(Me.ToolStripMenuItem4, "ToolStripMenuItem4")
         '
         'ToolStripMenuItem5
         '
+        resources.ApplyResources(Me.ToolStripMenuItem5, "ToolStripMenuItem5")
         Me.ToolStripMenuItem5.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-        resources.ApplyResources(Me.ToolStripMenuItem5, "ToolStripMenuItem5")
         '
         'ToolStripMenuItem6
         '
+        resources.ApplyResources(Me.ToolStripMenuItem6, "ToolStripMenuItem6")
         Me.ToolStripMenuItem6.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem6.Name = "ToolStripMenuItem6"
-        resources.ApplyResources(Me.ToolStripMenuItem6, "ToolStripMenuItem6")
         '
         'ToolStripMenuItem7
         '
+        resources.ApplyResources(Me.ToolStripMenuItem7, "ToolStripMenuItem7")
         Me.ToolStripMenuItem7.Image = Global.DWSIM.My.Resources.Resources.lightning
         Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        resources.ApplyResources(Me.ToolStripMenuItem7, "ToolStripMenuItem7")
         '
         'GroupBox1
         '
@@ -543,6 +543,7 @@ Partial Class FormDataRegression
         '
         'gridInEst
         '
+        resources.ApplyResources(Me.gridInEst, "gridInEst")
         Me.gridInEst.AllowUserToAddRows = False
         Me.gridInEst.AllowUserToDeleteRows = False
         Me.gridInEst.AllowUserToResizeRows = False
@@ -559,9 +560,46 @@ Partial Class FormDataRegression
         Me.gridInEst.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.gridInEst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridInEst.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colpar, Me.colmin, Me.colval, Me.colmax, Me.cf})
-        resources.ApplyResources(Me.gridInEst, "gridInEst")
         Me.gridInEst.Name = "gridInEst"
         Me.gridInEst.RowHeadersVisible = False
+        '
+        'colpar
+        '
+        Me.colpar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colpar, "colpar")
+        Me.colpar.Name = "colpar"
+        Me.colpar.ReadOnly = True
+        Me.colpar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'colmin
+        '
+        Me.colmin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colmin, "colmin")
+        Me.colmin.Name = "colmin"
+        Me.colmin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'colval
+        '
+        Me.colval.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle4.Format = "N4"
+        Me.colval.DefaultCellStyle = DataGridViewCellStyle4
+        resources.ApplyResources(Me.colval, "colval")
+        Me.colval.Name = "colval"
+        Me.colval.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'colmax
+        '
+        Me.colmax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        resources.ApplyResources(Me.colmax, "colmax")
+        Me.colmax.Name = "colmax"
+        Me.colmax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        '
+        'cf
+        '
+        Me.cf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.cf.FillWeight = 20.0!
+        resources.ApplyResources(Me.cf, "cf")
+        Me.cf.Name = "cf"
         '
         'btnCancel
         '
@@ -571,10 +609,10 @@ Partial Class FormDataRegression
         '
         'cbPunit
         '
+        resources.ApplyResources(Me.cbPunit, "cbPunit")
         Me.cbPunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPunit.FormattingEnabled = True
         Me.cbPunit.Items.AddRange(New Object() {resources.GetString("cbPunit.Items"), resources.GetString("cbPunit.Items1"), resources.GetString("cbPunit.Items2"), resources.GetString("cbPunit.Items3"), resources.GetString("cbPunit.Items4"), resources.GetString("cbPunit.Items5"), resources.GetString("cbPunit.Items6"), resources.GetString("cbPunit.Items7"), resources.GetString("cbPunit.Items8"), resources.GetString("cbPunit.Items9"), resources.GetString("cbPunit.Items10"), resources.GetString("cbPunit.Items11"), resources.GetString("cbPunit.Items12"), resources.GetString("cbPunit.Items13"), resources.GetString("cbPunit.Items14"), resources.GetString("cbPunit.Items15"), resources.GetString("cbPunit.Items16"), resources.GetString("cbPunit.Items17"), resources.GetString("cbPunit.Items18")})
-        resources.ApplyResources(Me.cbPunit, "cbPunit")
         Me.cbPunit.Name = "cbPunit"
         '
         'Label8
@@ -584,10 +622,10 @@ Partial Class FormDataRegression
         '
         'cbTunit
         '
+        resources.ApplyResources(Me.cbTunit, "cbTunit")
         Me.cbTunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTunit.FormattingEnabled = True
         Me.cbTunit.Items.AddRange(New Object() {resources.GetString("cbTunit.Items"), resources.GetString("cbTunit.Items1"), resources.GetString("cbTunit.Items2"), resources.GetString("cbTunit.Items3")})
-        resources.ApplyResources(Me.cbTunit, "cbTunit")
         Me.cbTunit.Name = "cbTunit"
         '
         'Label1
@@ -642,9 +680,9 @@ Partial Class FormDataRegression
         '
         'cbCompound1
         '
+        resources.ApplyResources(Me.cbCompound1, "cbCompound1")
         Me.cbCompound1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCompound1.FormattingEnabled = True
-        resources.ApplyResources(Me.cbCompound1, "cbCompound1")
         Me.cbCompound1.Name = "cbCompound1"
         '
         'LabelWithDivider3
@@ -660,9 +698,9 @@ Partial Class FormDataRegression
         '
         'GridExpData
         '
+        resources.ApplyResources(Me.GridExpData, "GridExpData")
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GridExpData.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
-        resources.ApplyResources(Me.GridExpData, "GridExpData")
         Me.GridExpData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpData.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.check, Me.colx1, Me.colx2, Me.coly1, Me.colT, Me.coltl, Me.colts, Me.colP})
@@ -721,25 +759,25 @@ Partial Class FormDataRegression
         '
         'cbCompound2
         '
+        resources.ApplyResources(Me.cbCompound2, "cbCompound2")
         Me.cbCompound2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbCompound2.FormattingEnabled = True
-        resources.ApplyResources(Me.cbCompound2, "cbCompound2")
         Me.cbCompound2.Name = "cbCompound2"
         '
         'cbDataType
         '
+        resources.ApplyResources(Me.cbDataType, "cbDataType")
         Me.cbDataType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDataType.FormattingEnabled = True
         Me.cbDataType.Items.AddRange(New Object() {resources.GetString("cbDataType.Items"), resources.GetString("cbDataType.Items1"), resources.GetString("cbDataType.Items2"), resources.GetString("cbDataType.Items3"), resources.GetString("cbDataType.Items4"), resources.GetString("cbDataType.Items5"), resources.GetString("cbDataType.Items6"), resources.GetString("cbDataType.Items7")})
-        resources.ApplyResources(Me.cbDataType, "cbDataType")
         Me.cbDataType.Name = "cbDataType"
         '
         'cbModel
         '
+        resources.ApplyResources(Me.cbModel, "cbModel")
         Me.cbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbModel.FormattingEnabled = True
         Me.cbModel.Items.AddRange(New Object() {resources.GetString("cbModel.Items"), resources.GetString("cbModel.Items1"), resources.GetString("cbModel.Items2"), resources.GetString("cbModel.Items3"), resources.GetString("cbModel.Items4"), resources.GetString("cbModel.Items5"), resources.GetString("cbModel.Items6"), resources.GetString("cbModel.Items7")})
-        resources.ApplyResources(Me.cbModel, "cbModel")
         Me.cbModel.Name = "cbModel"
         '
         'Label5
@@ -776,15 +814,15 @@ Partial Class FormDataRegression
         '
         'BtnSelectIPDB
         '
-        Me.BtnSelectIPDB.Image = Global.DWSIM.My.Resources.Resources.folder_go
         resources.ApplyResources(Me.BtnSelectIPDB, "BtnSelectIPDB")
+        Me.BtnSelectIPDB.Image = Global.DWSIM.My.Resources.Resources.folder_go
         Me.BtnSelectIPDB.Name = "BtnSelectIPDB"
         Me.BtnSelectIPDB.UseVisualStyleBackColor = True
         '
         'BtnSaveIPDB
         '
-        Me.BtnSaveIPDB.Image = Global.DWSIM.My.Resources.Resources.disk
         resources.ApplyResources(Me.BtnSaveIPDB, "BtnSaveIPDB")
+        Me.BtnSaveIPDB.Image = Global.DWSIM.My.Resources.Resources.disk
         Me.BtnSaveIPDB.Name = "BtnSaveIPDB"
         Me.BtnSaveIPDB.UseVisualStyleBackColor = True
         '
@@ -800,8 +838,8 @@ Partial Class FormDataRegression
         '
         'BtnNewIPDB
         '
-        Me.BtnNewIPDB.Image = Global.DWSIM.My.Resources.Resources.page_white
         resources.ApplyResources(Me.BtnNewIPDB, "BtnNewIPDB")
+        Me.BtnNewIPDB.Image = Global.DWSIM.My.Resources.Resources.page_white
         Me.BtnNewIPDB.Name = "BtnNewIPDB"
         Me.BtnNewIPDB.UseVisualStyleBackColor = True
         '
@@ -829,44 +867,6 @@ Partial Class FormDataRegression
         '
         Me.DBOpenDlg.CheckFileExists = False
         resources.ApplyResources(Me.DBOpenDlg, "DBOpenDlg")
-        '
-        'colpar
-        '
-        Me.colpar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colpar, "colpar")
-        Me.colpar.Name = "colpar"
-        Me.colpar.ReadOnly = True
-        Me.colpar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'colmin
-        '
-        Me.colmin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colmin, "colmin")
-        Me.colmin.Name = "colmin"
-        Me.colmin.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'colval
-        '
-        Me.colval.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle4.Format = "N4"
-        Me.colval.DefaultCellStyle = DataGridViewCellStyle4
-        resources.ApplyResources(Me.colval, "colval")
-        Me.colval.Name = "colval"
-        Me.colval.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'colmax
-        '
-        Me.colmax.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        resources.ApplyResources(Me.colmax, "colmax")
-        Me.colmax.Name = "colmax"
-        Me.colmax.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        '
-        'cf
-        '
-        Me.cf.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.cf.FillWeight = 20.0!
-        resources.ApplyResources(Me.cf, "cf")
-        Me.cf.Name = "cf"
         '
         'FormDataRegression
         '
