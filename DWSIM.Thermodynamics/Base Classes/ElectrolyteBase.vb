@@ -70,6 +70,7 @@ Namespace PropertyPackages
 
             Get
 
+                If Me.ElectrolyteFlash.CompoundProperties Is Nothing Then Me.ElectrolyteFlash.CompoundProperties = DW_GetConstantProperties()
                 Return Me.ElectrolyteFlash
 
             End Get
