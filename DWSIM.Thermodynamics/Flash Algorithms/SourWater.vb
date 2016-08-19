@@ -398,7 +398,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub CalculateEquilibriumConcentrations(T As Double, pp As PropertyPackage, conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), deltaconc As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
 
-            Dim nch, pch, pH, pH_old, pH_old0, errCN, totalCN, totalCN0, oldCN, fx, fx_old, fx_old0, Istr, k1, k5 As Double
+            Dim nch, pch, pH, pH_old, pH_old0, errCN, totalC, totalC0, oldCN, fx, fx_old, fx_old0, Istr, k1, k5 As Double
             Dim icount, icount0 As Integer
 
             'calculate equilibrium constants (f(T))
@@ -415,7 +415,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             conc("H2NCOO-") = Math.Min(conc0("CO2") / 100, conc0("NH3") / 100)
 
-            totalCN = conc0("CO2") + conc0("NH3")
+            totalC = conc0("CO2")
 
             Do
 
@@ -539,18 +539,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Loop
 
-                If totalCN = 0.0# Then Exit Do
+                If totalC = 0.0# Then Exit Do
 
                 oldCN = conc("H2NCOO-")
 
-                totalCN0 = totalCN
-                totalCN = conc("NH4+") + conc("NH3") + conc("CO2") + conc("HCO3-") + conc("CO3-2") + conc("H2NCOO-")
+                totalC0 = totalC
+                totalC = conc("CO2") + conc("HCO3-") + conc("CO3-2") + conc("H2NCOO-")
 
-                errCN = totalCN - totalCN0
+                errCN = totalC - totalC0
 
                 If Math.Abs(errCN) < 1.0E-30 Then Exit Do
 
-                conc("H2NCOO-") *= totalCN / totalCN0
+                conc("H2NCOO-") *= totalC / totalC0
 
                 icount0 += 1
 
