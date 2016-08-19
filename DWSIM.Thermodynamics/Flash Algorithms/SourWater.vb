@@ -464,7 +464,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     '   3   Ammonia ionization	            H+ + NH3 <--> NH4+ 
                     '   4   Carbamate production	        HCO3- + NH3 <--> H2NCOO- + H2O 
 
-                    conc("NH4+") = kr(2) * (conc("H+") * conc0("NH3") - conc("H2NCOO-")) / (1 + kr(2) * conc("H+"))
+                    If conc("HCO3-") > 0.0# Then conc("NH4+") = kr(2) * (conc("H+") * conc("H2NCOO-") / conc("HCO3-") / kr(3)) '/ (1 + kr(2) * conc("H+"))
                     deltaconc("NH4+") = conc("NH4+") - conc0("NH4+")
 
                     '   5   H2S ionization	                H2S <--> HS- + H+ 
@@ -515,7 +515,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                     End If
 
-                    If Abs(fx) * 1000 < itol Then Exit Do
+                    If Abs(fx) < 1.0E-30 Or Abs(fx - fx_old) < 1.0E-30 Then Exit Do
 
                     pH_old0 = pH_old
                     pH_old = pH
@@ -548,7 +548,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 errCN = totalCN - totalCN0
 
-                If Math.Abs(errCN) < itol Then Exit Do
+                If Math.Abs(errCN) < 1.0E-30 Then Exit Do
 
                 conc("H2NCOO-") *= totalCN / totalCN0
 
