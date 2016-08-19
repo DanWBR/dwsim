@@ -968,52 +968,94 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             n = Vz.Length - 1
 
-            Dim Vx(n), Vy(n), Vp(n), Vcalc, Vspec, T, x, x0, x00, fx, fx0, fx00, Tmin, Tmax As Double
+            Dim Vx(n), Vy(n), Vp(n), gamma(n), Vcalc, Vspec, T, x, x0, x00, fx, fx0, fx00, Pcalc As Double
 
             Dim nl As New NestedLoops
-            Dim flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, P, 0.0#, proppack, Vz, Nothing, Tref)
-            Tmin = flashresult.CalculatedTemperature
-            flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, P, 1.0#, proppack, Vz, Nothing, Tref)
-            Tmax = flashresult.CalculatedTemperature
-
-            If Tmin < 273.15 Then Tmin = 273.15
-
-            T = Tmin + V * (Tmax - Tmin)
-
+        
             ecount = 0
             Vspec = V
-            x = T
+            x = Tref
 
             Dim tmp As Dictionary(Of String, Object)
 
-            Do
+            If Vspec = 0.0# Then
 
-                tmp = Flash_PT(Vz, x, P)
+                'bubble point
 
-                Vcalc = tmp("VaporPhaseMoleFraction")
+                Do
 
-                fx00 = fx0
-                fx0 = fx
+                    Vp = proppack.RET_VPVAP(x)
 
-                fx = Vspec - Vcalc
+                    tmp = Flash_PT(Vz, x, P)
 
-                If Abs(fx) < tolEXT Then Exit Do
+                    gamma = tmp("LiquidPhaseActivityCoefficients")
 
-                x00 = x0
-                x0 = x
+                    fx00 = fx0
+                    fx0 = fx
 
-                If ecount <= 1 Then
-                    x += 1.0#
-                Else
-                    x = x - fx * (x - x00) / (fx - fx00)
-                    If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
-                End If
+                    Pcalc = 0.0#
+                    For i = 0 To n
+                        If Not CompoundProperties(i).IsIon And Not CompoundProperties(i).IsSalt Then
+                            Pcalc += gamma(i) * Vp(i)
+                        End If
+                    Next
 
-                ecount += 1
+                    fx = P - Pcalc
 
-                If ecount > maxitEXT Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+                    If Abs(fx) < 1.0# Then Exit Do
 
-            Loop
+                    x00 = x0
+                    x0 = x
+
+                    If ecount <= 1 Then
+                        x += 1.0#
+                    Else
+                        If ecount < 10 Then
+                            x = x - 0.1 * fx * (x - x00) / (fx - fx00)
+                        Else
+                            x = x - fx * (x - x00) / (fx - fx00)
+                        End If
+                        If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
+                    End If
+
+                    ecount += 1
+
+                    If ecount > 1000 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+
+                Loop
+
+            Else
+
+                Do
+
+                    tmp = Flash_PT(Vz, x, P)
+
+                    Vcalc = tmp("VaporPhaseMoleFraction")
+
+                    fx00 = fx0
+                    fx0 = fx
+
+                    fx = Vspec - Vcalc
+
+                    If Abs(fx) < tolEXT Then Exit Do
+
+                    x00 = x0
+                    x0 = x
+
+                    If ecount <= 1 Then
+                        x += 1.0#
+                    Else
+                        x = x - 0.3 * fx * (x - x00) / (fx - fx00)
+                        If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
+                    End If
+
+                    ecount += 1
+
+                    If ecount > maxitEXT Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+
+                Loop
+
+            End If
 
             T = x
 
@@ -1033,7 +1075,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             results.Add("LiquidPhaseMolarComposition", tmp("LiquidPhaseMolarComposition"))
             results.Add("SolidPhaseMolarComposition", tmp("SolidPhaseMolarComposition"))
             results.Add("MoleSum", tmp("MoleSum"))
-            results.Add("Pressure", P)
+            results.Add("Temperature", T)
             results.Add("LiquidPhaseActivityCoefficients", tmp("LiquidPhaseActivityCoefficients"))
 
             Return results

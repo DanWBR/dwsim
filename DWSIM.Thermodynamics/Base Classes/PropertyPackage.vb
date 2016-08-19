@@ -4672,6 +4672,22 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Function
 
+        Public Overridable Function RET_VPVAP(ByVal T As Double) As Double()
+
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+            Dim subst As Interfaces.ICompound
+            Dim i As Integer = 0
+
+            For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                val(i) = AUX_PVAPi(i, T)
+                i += 1
+            Next
+
+            Return val
+
+        End Function
+
+
         Public Overridable Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double)
 
             If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then

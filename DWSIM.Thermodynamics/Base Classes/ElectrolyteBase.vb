@@ -820,6 +820,9 @@ Namespace PropertyPackages
 
                         Case FlashSpec.VAP
 
+                            T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+                            P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
                             result = Me.ElectrolyteFlash.Flash_PV(RET_VMOL(Phase.Mixture), P, xv, T)
 
                             T = result("Temperature")
