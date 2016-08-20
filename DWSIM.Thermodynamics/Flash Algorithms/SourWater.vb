@@ -413,7 +413,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             icount0 = 0.0#
 
-            conc("H2NCOO-") = Math.Min(conc0("CO2") / 100, conc0("NH3") / 100)
+            conc("H2NCOO-") = Math.Min(conc0("CO2") / 10000, conc0("NH3") / 10000)
 
             totalC = conc0("CO2")
 
@@ -421,12 +421,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 'loop: pH convergence
 
-                If conc("H+") > 0.0# Then
-                    pH = -Log10(conc("H+"))
-                Else
-                    If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 12.0# Else pH = 7.0#
-                    conc("H+") = 10 ^ (-pH)
-                End If
+                'If conc("H+") > 0.0# Then
+                '    pH = -Log10(conc("H+"))
+                'Else
+                If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 12.0# Else pH = 7.0#
+                conc("H+") = 10 ^ (-pH)
+                'End If
 
                 'calculate ionic strength
 
@@ -455,7 +455,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     k1 = Exp(Log(kr(0)) - 0.278 * conc("H2S") + (-1.32 + 1558.8 / (T * 1.8)) * Istr ^ 0.4)
 
-                    conc("HCO3-") = k1 * (conc0("CO2") - conc("H2NCOO-")) / (conc("H+") + k1 + 2 * k1 * kr(1) / conc("H+"))
+                    conc("HCO3-") = k1 * conc("CO2") / conc("H+")
                     deltaconc("HCO3-") = conc("HCO3-") - conc0("HCO3-")
 
                     conc("CO3-2") = kr(1) * conc("HCO3-") / conc("H+")
@@ -464,7 +464,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     '   3   Ammonia ionization	            H+ + NH3 <--> NH4+ 
                     '   4   Carbamate production	        HCO3- + NH3 <--> H2NCOO- + H2O 
 
-                    If conc("HCO3-") > 0.0# Then conc("NH4+") = kr(2) * (conc("H+") * conc("H2NCOO-") / conc("HCO3-") / kr(3)) '/ (1 + kr(2) * conc("H+"))
+                    conc("NH4+") = kr(2) * conc("H+") * conc("NH3")
                     deltaconc("NH4+") = conc("NH4+") - conc0("NH4+")
 
                     '   5   H2S ionization	                H2S <--> HS- + H+ 
@@ -474,7 +474,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     k5 = Exp(Log(kr(4)) + 0.427 * conc("CO2"))
 
-                    conc("HS-") = k5 * conc0("H2S") / (conc("H+") + k5 + 2 * k5 * kr(5) / conc("H+"))
+                    conc("HS-") = k5 * conc("H2S") / (conc("H+") + k5 + 2 * k5 * kr(5) / conc("H+"))
                     deltaconc("HS-") = conc("HS-") - conc0("HS-")
 
                     conc("S-2") = kr(5) * conc("HS-") / conc("H+")
@@ -492,16 +492,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     deltaconc("OH-") = conc("OH-") - conc0("OH-")
                     deltaconc("Na+") = conc("Na+") - conc0("Na+")
 
-                    conc("CO2") = conc0("CO2") - conc("HCO3-") - conc("CO3-2") - conc("H2NCOO-")
-                    conc("H2S") = conc0("H2S") - conc("HS-") - conc("S-2")
-                    conc("NH3") = conc0("NH3") - conc("NH4+") - conc("H2NCOO-")
-                    conc("NaOH") = conc0("NaOH") - conc("Na+")
-
-                    deltaconc("CO2") = -conc0("CO2") + conc("CO2")
-                    deltaconc("H2S") = -conc0("H2S") + conc("H2S")
-                    deltaconc("NH3") = -conc0("NH3") + conc("NH3")
-                    deltaconc("NaOH") = -conc0("NaOH") + conc("NaOH")
-
                     'neutrality check
 
                     pch = conc("H+") + conc("NH4+") + conc("Na+")
@@ -515,7 +505,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                     End If
 
-                    If Abs(fx) < 1.0E-30 Or Abs(fx - fx_old) < 1.0E-30 Then Exit Do
+                    If Abs(fx) < 1.0E-20 Or Abs(fx - fx_old) < 1.0E-20 Then Exit Do
 
                     pH_old0 = pH_old
                     pH_old = pH
@@ -531,7 +521,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         End If
                     End If
 
-                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
+                    If Not pp.CurrentMaterialStream.Flowsheet Is Nothing Then pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                     icount += 1
 
@@ -548,7 +538,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 errCN = totalC - totalC0
 
-                If Math.Abs(errCN) < 1.0E-30 Then Exit Do
+                If Math.Abs(errCN) < etol Then Exit Do
 
                 conc("H2NCOO-") *= totalC / totalC0
 
@@ -557,6 +547,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If icount0 > maxit_i * 10 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
+
+            'conc("CO2") = conc0("CO2") - conc("HCO3-") - conc("CO3-2") - conc("H2NCOO-")
+            'conc("H2S") = conc0("H2S") - conc("HS-") - conc("S-2")
+            'conc("NH3") = conc0("NH3") - conc("NH4+") - conc("H2NCOO-")
+            'conc("NaOH") = conc0("NaOH") - conc("Na+")
+
+            'deltaconc("CO2") = -conc0("CO2") + conc("CO2")
+            'deltaconc("H2S") = -conc0("H2S") + conc("H2S")
+            'deltaconc("NH3") = -conc0("NH3") + conc("NH3")
+            'deltaconc("NaOH") = -conc0("NaOH") + conc("NaOH")
 
         End Sub
 
