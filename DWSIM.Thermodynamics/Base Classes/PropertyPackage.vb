@@ -4474,11 +4474,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 Tc = subst.ConstantProperties.Critical_Temperature
-                If T / Tc <= 1 Then
-                    val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
-                Else
-                    val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, 0.5 * Tc)
-                End If
+                val += subst.MoleFraction.GetValueOrDefault * Me.AUX_PVAPi(subst.Name, T)
             Next
 
             Return val

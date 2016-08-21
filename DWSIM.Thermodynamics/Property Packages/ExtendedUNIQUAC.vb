@@ -518,9 +518,9 @@ Namespace PropertyPackages
             ElseIf st = State.Vapor Then
                 For i = 0 To n
                     If constprops(i).IsIon Then
-                        fugcoeff(i) = 1.0E+20
+                        fugcoeff(i) = 10000000000.0
                     ElseIf constprops(i).IsSalt Then
-                        fugcoeff(i) = 1.0E+20
+                        fugcoeff(i) = 10000000000.0
                     Else
                         fugcoeff(i) = 1.0#
                     End If
@@ -548,7 +548,7 @@ Namespace PropertyPackages
 
             Dim i As Integer = 0
             For Each cp In cprops
-                If cp.IsIon Or cp.IsSalt Or cp.IsHydratedSalt Then val0(i) = 1.0E-30
+                If cp.IsIon Or cp.IsSalt Or cp.IsHydratedSalt Then val0(i) = 0.0000000001
                 i += 1
             Next
 
@@ -556,6 +556,17 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function AUX_PVAPi(ByVal sub1 As String, ByVal T As Double)
+
+            Dim cprops = Me.DW_GetConstantProperties.Where(Function(x) x.Name = sub1).FirstOrDefault
+
+            If cprops.IsIon Or cprops.IsSalt Then
+                Return 0.0001
+            Else
+                Return MyBase.AUX_PVAPi(sub1, T)
+            End If
+
+        End Function
 
 #End Region
 

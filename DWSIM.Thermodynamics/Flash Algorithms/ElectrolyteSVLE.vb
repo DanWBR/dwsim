@@ -92,67 +92,50 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.Name = "Water").SingleOrDefault)
 
-            'calculate water vapor pressure.
+            Dim nl As New NestedLoops() With {.LimitVaporFraction = True}
 
-            Dim Psat = proppack.AUX_PVAPi(wid, T)
+            Dim flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.T, P, T, proppack, Vx, Nothing, 0.0#)
+            If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
 
+            V = flashresult.GetVaporPhaseMoleFraction
+            L = flashresult.GetLiquidPhase1MoleFraction
+            S = 0.0#
+
+            Vnv = flashresult.VaporPhaseMoleAmounts.ToArray
+            Vnl = flashresult.LiquidPhase1MoleAmounts.ToArray
+
+            'calculate SLE.
+
+            Dim ids As New List(Of String)
             For i = 0 To n
-                If i <> wid Then
-                    Vxv(i) = 0.0#
-                Else
-                    Vxv(i) = 1.0#
-                End If
+                ids.Add(CompoundProperties(i).Name)
+                Vp(i) = proppack.AUX_PVAPi(i, T)
+                If Double.IsNaN(Vp(i)) Then Vp(i) = 0.0#
             Next
 
-            If Vnf(wid) = 0.0# Then
+            'get the default reaction set.
 
-                'only solids in the stream (no liquid water).
+            Me.Vx0 = Vx.Clone
 
-                V = 0.0#
-                L = 0.0#
-                S = 1.0#
-                For i = 0 To n
-                    Vxs(i) = Vnf(i)
-                    Vns(i) = Vnf(i)
-                Next
-                Vf = Vnf
-                sumN = 1.0#
+            Vf = Vx.Clone
 
-            Else
+            Dim int_count As Integer = 0
+            Dim L_ant As Double = 0.0#
 
-                V = 0.0#
-                L = 1.0#
-                S = 0.0#
+            Dim rext As Double() = Nothing
+            Dim result As Object
 
-                'calculate SLE.
+            sumN = 1.0#
 
-                Dim ids As New List(Of String)
-                For i = 0 To n
-                    ids.Add(CompoundProperties(i).Name)
-                    Vp(i) = proppack.AUX_PVAPi(i, T)
-                    If Double.IsNaN(Vp(i)) Then Vp(i) = 0.0#
-                Next
+            'Do
 
-                'get the default reaction set.
-
-                Me.Vx0 = Vx.Clone
-
-                Vnl = Vx.Clone
-                Vf = Vx.Clone
-
-                Dim int_count As Integer = 0
-                Dim L_ant As Double = 0.0#
-
-                Dim rext As Double() = Nothing
-                Dim result As Object
-
-                'Do
+            If L > 0.0# Then
 
                 'calculate chemical equilibria between ions, salts and water. 
 
                 ''SolveChemicalEquilibria' returns the equilibrium molar amounts in the liquid phase, including precipitates.
 
-                If CalculateChemicalEquilibria And Vp(wid) < P Then
+                If CalculateChemicalEquilibria And Vnl(wid) > 0.0# And Vp(wid) < P Then
                     result = SolveChemicalEquilibria(Vnf, T, P, ids, rext)
                     Vnl = result(0).clone
                     rext = result(1)
@@ -194,9 +177,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Vxlmax(i) = 1.0#
                         End If
                     End If
+                    If Double.IsNaN(Vxlmax(i)) Then Vxlmax(i) = 1.0#
                 Next
 
-                'mass balance.
+                'mass/solids balance.
 
                 For i = 0 To n
                     Vnl_ant(i) = Vnl(i)
@@ -207,14 +191,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vns(i) = 0
                     End If
                     If Vns(i) < 0.0# Then Vns(i) = 0.0#
-                Next
-
-                For i = 0 To n
-                    If Vp(i) > P Then
-                        Vnv(i) = Vnl(i) + Vns(i)
-                        Vns(i) = 0.0#
-                        Vnl(i) = 0.0#
-                    End If
                 Next
 
                 'liquid mole amounts
@@ -770,10 +746,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim fx As Double
             If Tref = 0.0# Then Tref = 298.15
+            If Double.IsNaN(Tref) Then Tref = 298.15
 
             Me.P = P
 
-            Dim tvar As New OptBoundVariable(Tref, 273.15, 500)
+            Dim tvar As New OptBoundVariable(Tref, 273.15, 1000)
 
             Dim solver As New Simplex
             solver.Tolerance = Tolerance
@@ -824,7 +801,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Function Herror(ByVal x() As Double) As Double
-            Return OBJ_FUNC_PH_FLASH(x(0), P, Vx0)
+            Return OBJ_FUNC_PH_FLASH(x(0), P, Vx0.Clone)
         End Function
 
         Function OBJ_FUNC_PH_FLASH(ByVal T As Double, ByVal P As Double, ByVal Vz As Object) As Double
@@ -857,7 +834,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             mms = proppack.AUX_MMM(Vs)
 
             Dim herr As Double = Hf - ((mmg * V / (mmg * V + mml * L + mms * S)) * _Hv + (mml * L / (mmg * V + mml * L + mms * S)) * _Hl + (mms * S / (mmg * V + mml * L + mms * S)) * _Hs)
-            OBJ_FUNC_PH_FLASH = herr ^ 2
+
+            If Double.IsNaN(herr) Then herr = 10000000000.0
+
+            Return herr ^ 2
 
             WriteDebugInfo("PH Flash [Electrolyte]: Current T = " & T & ", Current H Error = " & herr)
 
