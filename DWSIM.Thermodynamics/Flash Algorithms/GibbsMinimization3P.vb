@@ -314,9 +314,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If V <= 0.0# Then V = 0.2
 
             For i = 0 To n
-                initval(i) = Vy(i) * V
-                lconstr(i) = 0.0#
-                uconstr(i) = Vz(i)
+                initval(i) = Log(Vy(i) * V)
+                lconstr(i) = Log(1.0E-40)
+                uconstr(i) = Log(Vz(i))
+            Next
+
+            For i = 0 To n
+                If Double.IsNegativeInfinity(initval(i)) Then initval(i) = Log(1.0E-40)
+                If Double.IsNegativeInfinity(lconstr(i)) Then lconstr(i) = Log(1.0E-40)
+                If Double.IsNegativeInfinity(uconstr(i)) Then uconstr(i) = Log(1.0E-40)
             Next
 
             ecount = 0
@@ -519,7 +525,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Dim maxl As Double = MathEx.Common.Max(vx2est)
                             Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
 
-                            F = 1000.0#
+                            F = 1.0#
                             V = result(1)
                             L2 = F * result(3)(imaxl)
                             L1 = F - L2 - V
@@ -544,7 +550,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 lconstr2(i) = 0.0#
                                 uconstr2(i) = fi(i) * F
                                 glow(i) = 0.0#
-                                gup(i) = 1000.0#
+                                gup(i) = 1.0#
                                 If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
                             Next
                             For i = n + 1 To 2 * n + 1
@@ -565,6 +571,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                             objval = 0.0#
                             objval0 = 0.0#
+
+                            For i = 0 To 2 * n + 1
+                                If initval2(i) = 0.0# Then initval2(i) = 1.0E-40
+                                initval2(i) = Log(initval2(i))
+                                If lconstr2(i) = 0.0# Then lconstr2(i) = 1.0E-40
+                                lconstr2(i) = Log(lconstr2(i))
+                                If uconstr2(i) = 0.0# Then uconstr2(i) = 1.0E-40
+                                uconstr2(i) = Log(uconstr2(i))
+                            Next
 
                             status = IpoptReturnCode.Invalid_Problem_Definition
 
@@ -1985,209 +2000,118 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
             Dim pval As Double = 0.0#
             Dim fcv(n), fcl(n), fcl2(n) As Double
 
-            Select Case objfunc
+            If Not ThreePhase Then
 
-                Case ObjFuncType.MinGibbs
+                soma_y = MathEx.Common.Sum(x.ExpY)
+                V = soma_y
+                L = 1 - soma_y
 
-                    If Not ThreePhase Then
+                For i = 0 To x.Length - 1
+                    If V <> 0.0# Then Vy(i) = Abs(Exp(x(i)) / V) Else Vy(i) = 0.0#
+                    If L <> 0.0# Then Vx1(i) = Abs((fi(i) - Exp(x(i))) / L) Else Vx1(i) = 0.0#
+                Next
 
-                        soma_y = MathEx.Common.Sum(x)
-                        V = soma_y
-                        L = 1 - soma_y
+                If Settings.EnableParallelProcessing Then
 
-                        For i = 0 To x.Length - 1
-                            If V <> 0.0# Then Vy(i) = Abs(x(i) / V) Else Vy(i) = 0.0#
-                            If L <> 0.0# Then Vx1(i) = Abs((fi(i) - x(i)) / L) Else Vx1(i) = 0.0#
-                        Next
+                    Dim task1 As Task = New Task(Sub()
+                                                     fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                                                 End Sub)
+                    Dim task2 As Task = New Task(Sub()
+                                                     fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                                                 End Sub)
+                    task1.Start()
+                    task2.Start()
+                    Task.WaitAll(task1, task2)
 
-                        If Settings.EnableParallelProcessing Then
+                Else
+                    fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                    fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                End If
 
-                            Dim task1 As Task = New Task(Sub()
-                                                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
+                Gv = 0
+                Gl1 = 0
+                For i = 0 To x.Length - 1
+                    If Vy(i) <> 0.0# Then Gv += Vy(i) * V * Log(fcv(i) * Vy(i))
+                    If Vx1(i) <> 0.0# Then Gl1 += Vx1(i) * L * Log(fcl(i) * Vx1(i))
+                Next
 
-                        Else
-                            fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                            fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                        End If
+                Gm = Gv + Gl1
 
-                        Gv = 0
-                        Gl1 = 0
-                        For i = 0 To x.Length - 1
-                            If Vy(i) <> 0.0# Then Gv += Vy(i) * V * Log(fcv(i) * Vy(i))
-                            If Vx1(i) <> 0.0# Then Gl1 += Vx1(i) * L * Log(fcl(i) * Vx1(i))
-                        Next
+                WriteDebugInfo("[GM] V = " & Format(V, "N4") & ", L = " & Format(L, "N4") & " / GE = " & Format(Gm * 8.314 * Tf, "N2") & " kJ/kmol")
 
-                        Gm = Gv + Gl1
+            Else
 
-                        WriteDebugInfo("[GM] V = " & Format(V, "N4") & ", L = " & Format(L, "N4") & " / GE = " & Format(Gm * 8.314 * Tf, "N2") & " kJ/kmol")
+                soma_y = 0
+                For i = 0 To x.Length - n - 2
+                    soma_y += Exp(x(i))
+                Next
+                soma_x2 = 0
+                For i = x.Length - n - 1 To x.Length - 1
+                    soma_x2 += Exp(x(i))
+                Next
+                V = soma_y
+                L = F - soma_y
+                L2 = soma_x2
+                L1 = F - V - L2
 
-                    Else
+                pval = 0.0#
+                For i = 0 To n
+                    If V <> 0.0# Then Vy(i) = (Exp(x(i)) / V) Else Vy(i) = 0.0#
+                    If L2 <> 0.0# Then Vx2(i) = (Exp(x(i + n + 1)) / L2) Else Vx2(i) = 0.0#
+                    If L1 <> 0.0# Then Vx1(i) = ((fi(i) * F - Vy(i) * V - Vx2(i) * L2) / L1) Else Vx1(i) = 0.0#
+                    If Vy(i) < 0.0# Then Vy(i) = 1.0E-20
+                    If Vx1(i) < 0.0# Then Vx1(i) = 1.0E-20
+                    If Vx2(i) < 0.0# Then Vx2(i) = 1.0E-20
+                Next
 
-                        soma_y = 0
-                        For i = 0 To x.Length - n - 2
-                            soma_y += x(i)
-                        Next
-                        soma_x2 = 0
-                        For i = x.Length - n - 1 To x.Length - 1
-                            soma_x2 += x(i)
-                        Next
-                        V = soma_y
-                        L = F - soma_y
-                        L2 = soma_x2
-                        L1 = F - V - L2
+                soma_x1 = 0
+                For i = 0 To n
+                    soma_x1 += Vx1(i)
+                Next
+                For i = 0 To n
+                    If soma_x1 <> 0.0# Then Vx1(i) /= soma_x1
+                Next
 
-                        pval = 0.0#
-                        For i = 0 To n
-                            If V <> 0.0# Then Vy(i) = (x(i) / V) Else Vy(i) = 0.0#
-                            If L2 <> 0.0# Then Vx2(i) = (x(i + n + 1) / L2) Else Vx2(i) = 0.0#
-                            If L1 <> 0.0# Then Vx1(i) = ((fi(i) * F - Vy(i) * V - Vx2(i) * L2) / L1) Else Vx1(i) = 0.0#
-                            If Vy(i) < 0.0# Then Vy(i) = 1.0E-20
-                            If Vx1(i) < 0.0# Then Vx1(i) = 1.0E-20
-                            If Vx2(i) < 0.0# Then Vx2(i) = 1.0E-20
-                        Next
+                If Settings.EnableParallelProcessing Then
 
-                        soma_x1 = 0
-                        For i = 0 To n
-                            soma_x1 += Vx1(i)
-                        Next
-                        For i = 0 To n
-                            If soma_x1 <> 0.0# Then Vx1(i) /= soma_x1
-                        Next
+                    Dim task1 As Task = New Task(Sub()
+                                                     fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                                                 End Sub)
+                    Dim task2 As Task = New Task(Sub()
+                                                     fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                                                 End Sub)
+                    Dim task3 As Task = New Task(Sub()
+                                                     fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
+                                                 End Sub)
+                    task1.Start()
+                    task2.Start()
+                    task3.Start()
+                    Task.WaitAll(task1, task2, task3)
 
-                        If Settings.EnableParallelProcessing Then
+                Else
+                    fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                    fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                    fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
+                End If
 
-                            Dim task1 As Task = New Task(Sub()
-                                                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                         End Sub)
-                            Dim task3 As Task = New Task(Sub()
-                                                             fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            task3.Start()
-                            Task.WaitAll(task1, task2, task3)
+                Gv = 0
+                Gl1 = 0
+                Gl2 = 0
+                For i = 0 To n
+                    If Vy(i) <> 0 Then Gv += Vy(i) * V * Log(fcv(i) * Vy(i))
+                    If Vx1(i) <> 0 Then Gl1 += Vx1(i) * L1 * Log(fcl(i) * Vx1(i))
+                    If Vx2(i) <> 0 Then Gl2 += Vx2(i) * L2 * Log(fcl2(i) * Vx2(i))
+                Next
 
-                        Else
-                            fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                            fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                            fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                        End If
+                Gm = Gv + Gl1 + Gl2 + pval
 
-                        Gv = 0
-                        Gl1 = 0
-                        Gl2 = 0
-                        For i = 0 To n
-                            If Vy(i) <> 0 Then Gv += Vy(i) * V * Log(fcv(i) * Vy(i))
-                            If Vx1(i) <> 0 Then Gl1 += Vx1(i) * L1 * Log(fcl(i) * Vx1(i))
-                            If Vx2(i) <> 0 Then Gl2 += Vx2(i) * L2 * Log(fcl2(i) * Vx2(i))
-                        Next
+                WriteDebugInfo("[GM] V = " & Format(V / 1000, "N4") & ", L1 = " & Format(L1 / 1000, "N4") & ", L2 = " & Format(L2 / 1000, "N4") & " / GE = " & Format(Gm * 8.314 * Tf / 1000, "N2") & " kJ/kmol")
 
-                        Gm = Gv + Gl1 + Gl2 + pval
+            End If
 
-                        WriteDebugInfo("[GM] V = " & Format(V / 1000, "N4") & ", L1 = " & Format(L1 / 1000, "N4") & ", L2 = " & Format(L2 / 1000, "N4") & " / GE = " & Format(Gm * 8.314 * Tf / 1000, "N2") & " kJ/kmol")
+            ecount += 1
 
-                    End If
-
-                    ecount += 1
-
-                    Return Gm
-
-                Case Else
-
-                    L1 = L1sat
-                    L2 = 1 - V - L1
-
-                    Dim sumx As Double = 0
-                    For i = 0 To n
-                        sumx += x(i)
-                    Next
-
-                    Select Case objfunc
-                        Case ObjFuncType.BubblePointP, ObjFuncType.DewPointP
-                            Pf = x(n + 1)
-                        Case ObjFuncType.BubblePointT, ObjFuncType.DewPointT
-                            Tf = x(n + 1)
-                    End Select
-
-                    Select Case objfunc
-                        Case ObjFuncType.BubblePointP, ObjFuncType.BubblePointT
-                            For i = 0 To n
-                                Vy(i) = x(i) / sumx
-                                Vx1(i) = fi(i)
-                                Vx2(i) = ((L1 + 0.0000000001) * Vx1(i) - (V + 0.0000000001) * Vy(i)) / L2
-                                If L2 = 0.0# Then Vx2(i) = 0
-                            Next
-                        Case ObjFuncType.DewPointP, ObjFuncType.DewPointT
-                            For i = 0 To n
-                                Vy(i) = fi(i)
-                                Vx1(i) = x(i) / sumx
-                                Vx2(i) = ((L1 + 0.0000000001) * Vx1(i) - (V + 0.0000000001) * Vy(i)) / L2
-                                If L2 = 0.0# Then Vx2(i) = 0
-                            Next
-                    End Select
-
-                    For i = 0 To n
-                        If Vx2(i) <= 0 Then Vx2(i) = 1.0E-20
-                    Next
-
-                    soma_x2 = 0
-                    For i = 0 To n
-                        soma_x2 += Vx2(i)
-                    Next
-                    For i = 0 To n
-                        Vx2(i) /= soma_x2
-                    Next
-
-                    If Settings.EnableParallelProcessing Then
-
-                        Dim task1 As Task = New Task(Sub()
-                                                         fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                                     End Sub)
-                        Dim task2 As Task = New Task(Sub()
-                                                         fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                     End Sub)
-                        Dim task3 As Task = New Task(Sub()
-                                                         fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                                                     End Sub)
-                        task1.Start()
-                        task2.Start()
-                        task3.Start()
-                        Task.WaitAll(task1, task2, task3)
-
-                    Else
-                        fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                        fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                        fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                    End If
-
-                    Gv = 0
-                    Gl1 = 0
-                    Gl2 = 0
-                    For i = 0 To n
-                        If Vy(i) <> 0 Then Gv += Vy(i) * V * Log(fcv(i) * Vy(i))
-                        If Vx1(i) <> 0 Then Gl1 += Vx1(i) * L1 * Log(fcl(i) * Vx1(i))
-                        If Vx2(i) <> 0 Then Gl2 += Vx2(i) * L2 * Log(fcl2(i) * Vx2(i))
-                    Next
-
-                    pval = 0.0#
-
-                    Gm = Gv + Gl1 + Gl2 + pval
-
-                    ecount += 1
-
-                    Return Gm
-
-            End Select
+            Return Gm
 
         End Function
 
@@ -2198,201 +2122,109 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
             Dim fcv(x.Length - 1), fcl(x.Length - 1), fcl2(x.Length - 1) As Double
             Dim i As Integer
 
-            Select Case objfunc
+            If Not ThreePhase Then
 
-                Case ObjFuncType.MinGibbs
+                soma_y = MathEx.Common.Sum(x.ExpY)
+                V = soma_y
+                L = 1 - soma_y
 
-                    If Not ThreePhase Then
+                For i = 0 To x.Length - 1
+                    Vy(i) = Abs(Exp(x(i)) / V)
+                    Vx1(i) = Abs((fi(i) - Exp(x(i))) / L)
+                Next
 
-                        soma_y = MathEx.Common.Sum(x)
-                        V = soma_y
-                        L = 1 - soma_y
+                If Settings.EnableParallelProcessing Then
 
-                        For i = 0 To x.Length - 1
-                            Vy(i) = Abs(x(i) / V)
-                            Vx1(i) = Abs((fi(i) - x(i)) / L)
-                        Next
+                    Dim task1 As Task = New Task(Sub()
+                                                     fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                                                 End Sub)
+                    Dim task2 As Task = New Task(Sub()
+                                                     fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                                                 End Sub)
+                    task1.Start()
+                    task2.Start()
+                    Task.WaitAll(task1, task2)
 
-                        If Settings.EnableParallelProcessing Then
+                Else
+                    fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                    fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                End If
 
-                            Dim task1 As Task = New Task(Sub()
-                                                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            Task.WaitAll(task1, task2)
+                For i = 0 To x.Length - 1
+                    If Vy(i) <> 0 And Vx1(i) <> 0 Then g(i) = Log(fcv(i) * Vy(i) / (fcl(i) * Vx1(i)))
+                Next
 
-                        Else
-                            fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                            fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                        End If
+            Else
 
-                        For i = 0 To x.Length - 1
-                            If Vy(i) <> 0 And Vx1(i) <> 0 Then g(i) = Log(fcv(i) * Vy(i) / (fcl(i) * Vx1(i)))
-                        Next
+                soma_y = 0
+                For i = 0 To x.Length - n - 2
+                    soma_y += Exp(x(i))
+                Next
+                soma_x2 = 0
+                For i = x.Length - n - 1 To x.Length - 1
+                    soma_x2 += Exp(x(i))
+                Next
+                V = soma_y
+                L = F - soma_y
+                L2 = soma_x2
+                L1 = F - V - L2
 
-                    Else
+                For i = 0 To n
+                    If V <> 0.0# Then Vy(i) = (Exp(x(i)) / V) Else Vy(i) = 0.0#
+                    If L2 <> 0.0# Then Vx2(i) = (Exp(x(i + n + 1)) / L2) Else Vx2(i) = 0.0#
+                    If L1 <> 0.0# Then Vx1(i) = ((fi(i) * F - Vy(i) * V - Vx2(i) * L2) / L1) Else Vx1(i) = 0.0#
+                    If Vy(i) < 0.0# Then Vy(i) = 1.0E-20
+                    If Vx1(i) < 0.0# Then Vx1(i) = 1.0E-20
+                    If Vx2(i) < 0.0# Then Vx2(i) = 1.0E-20
+                Next
 
-                        soma_y = 0
-                        For i = 0 To x.Length - n - 2
-                            soma_y += x(i)
-                        Next
-                        soma_x2 = 0
-                        For i = x.Length - n - 1 To x.Length - 1
-                            soma_x2 += x(i)
-                        Next
-                        V = soma_y
-                        L = F - soma_y
-                        L2 = soma_x2
-                        L1 = F - V - L2
+                soma_x1 = 0
+                For i = 0 To n
+                    soma_x1 += Vx1(i)
+                Next
+                For i = 0 To n
+                    Vx1(i) /= soma_x1
+                Next
 
-                        For i = 0 To n
-                            If V <> 0.0# Then Vy(i) = (x(i) / V) Else Vy(i) = 0.0#
-                            If L2 <> 0.0# Then Vx2(i) = (x(i + n + 1) / L2) Else Vx2(i) = 0.0#
-                            If L1 <> 0.0# Then Vx1(i) = ((fi(i) * F - Vy(i) * V - Vx2(i) * L2) / L1) Else Vx1(i) = 0.0#
-                            If Vy(i) < 0.0# Then Vy(i) = 1.0E-20
-                            If Vx1(i) < 0.0# Then Vx1(i) = 1.0E-20
-                            If Vx2(i) < 0.0# Then Vx2(i) = 1.0E-20
-                        Next
+                If Settings.EnableParallelProcessing Then
 
-                        soma_x1 = 0
-                        For i = 0 To n
-                            soma_x1 += Vx1(i)
-                        Next
-                        For i = 0 To n
-                            Vx1(i) /= soma_x1
-                        Next
+                    Dim task1 As Task = New Task(Sub()
+                                                     fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                                                 End Sub)
+                    Dim task2 As Task = New Task(Sub()
+                                                     fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                                                 End Sub)
+                    Dim task3 As Task = New Task(Sub()
+                                                     fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
+                                                 End Sub)
+                    task1.Start()
+                    task2.Start()
+                    task3.Start()
+                    Task.WaitAll(task1, task2, task3)
 
-                        If Settings.EnableParallelProcessing Then
+                Else
+                    fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
+                    fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
+                    fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
+                End If
 
-                            Dim task1 As Task = New Task(Sub()
-                                                             fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                                         End Sub)
-                            Dim task2 As Task = New Task(Sub()
-                                                             fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                         End Sub)
-                            Dim task3 As Task = New Task(Sub()
-                                                             fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                                                         End Sub)
-                            task1.Start()
-                            task2.Start()
-                            task3.Start()
-                            Task.WaitAll(task1, task2, task3)
+                For i = 0 To x.Length - n - 2
+                    If Vy(i) <> 0 And Vx2(i) <> 0 Then g(i) = Log(fcv(i) * Vy(i)) - Log(fcl(i) * Vx1(i))
+                Next
+                For i = x.Length - n - 1 To (x.Length - 1)
+                    If Vx1(i - (x.Length - n - 1)) <> 0 And Vx2(i - (x.Length - n - 1)) <> 0 Then g(i) = Log(fcl2(i - (x.Length - n - 1)) * Vx2(i - (x.Length - n - 1))) - Log(fcl(i - (x.Length - n - 1)) * Vx1(i - (x.Length - n - 1)))
+                Next
 
-                        Else
-                            fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                            fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                            fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                        End If
+            End If
 
-                        For i = 0 To x.Length - n - 2
-                            If Vy(i) <> 0 And Vx2(i) <> 0 Then g(i) = Log(fcv(i) * Vy(i)) - Log(fcl(i) * Vx1(i))
-                        Next
-                        For i = x.Length - n - 1 To (x.Length - 1)
-                            If Vx1(i - (x.Length - n - 1)) <> 0 And Vx2(i - (x.Length - n - 1)) <> 0 Then g(i) = Log(fcl2(i - (x.Length - n - 1)) * Vx2(i - (x.Length - n - 1))) - Log(fcl(i - (x.Length - n - 1)) * Vx1(i - (x.Length - n - 1)))
-                        Next
-
-                    End If
-
-                    Return g
-
-                Case Else
-
-                    L1 = L1sat
-                    L2 = 1 - V - L1
-
-                    Dim sumx As Double = 0
-                    For i = 0 To n
-                        sumx += x(i)
-                    Next
-
-                    Select Case objfunc
-                        Case ObjFuncType.BubblePointP, ObjFuncType.DewPointP
-                            Pf = x(n + 1)
-                        Case ObjFuncType.BubblePointT, ObjFuncType.DewPointT
-                            Tf = x(n + 1)
-                    End Select
-
-                    Select Case objfunc
-                        Case ObjFuncType.BubblePointP, ObjFuncType.BubblePointT
-                            For i = 0 To n
-                                Vy(i) = x(i) / sumx
-                                Vx1(i) = fi(i)
-                                Vx2(i) = ((L1 + 0.0000000001) * Vx1(i) - (V + 0.0000000001) * Vy(i)) / L2
-                                If L2 = 0.0# Then Vx2(i) = 0
-                            Next
-                        Case ObjFuncType.DewPointP, ObjFuncType.DewPointT
-                            For i = 0 To n
-                                Vy(i) = fi(i)
-                                Vx1(i) = x(i) / sumx
-                                Vx2(i) = ((L1 + 0.0000000001) * Vx1(i) - (V + 0.0000000001) * Vy(i)) / L2
-                                If L2 = 0.0# Then Vx2(i) = 0
-                            Next
-                    End Select
-
-                    For i = 0 To n
-                        If Vx2(i) <= 0 Then Vx2(i) = 1.0E-20
-                    Next
-
-                    soma_x2 = 0
-                    For i = 0 To n
-                        soma_x2 += Vx2(i)
-                    Next
-                    For i = 0 To n
-                        Vx2(i) /= soma_x2
-                    Next
-
-                    If Settings.EnableParallelProcessing Then
-
-                        Dim task1 As Task = New Task(Sub()
-                                                         fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                                                     End Sub)
-                        Dim task2 As Task = New Task(Sub()
-                                                         fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                                                     End Sub)
-                        Dim task3 As Task = New Task(Sub()
-                                                         fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                                                     End Sub)
-                        task1.Start()
-                        task2.Start()
-                        task3.Start()
-                        Task.WaitAll(task1, task2, task3)
-
-                    Else
-                        fcv = proppack.DW_CalcFugCoeff(Vy, Tf, Pf, State.Vapor)
-                        fcl = proppack.DW_CalcFugCoeff(Vx1, Tf, Pf, State.Liquid)
-                        fcl2 = proppack.DW_CalcFugCoeff(Vx2, Tf, Pf, State.Liquid)
-                    End If
-
-                    Select Case objfunc
-                        Case ObjFuncType.BubblePointP, ObjFuncType.BubblePointT
-                            For i = 0 To n
-                                If Vy(i) <> 0 And Vx1(i) <> 0 Then g(i) = Log(fcl(i) * Vx1(i)) - Log(fcv(i) * Vy(i))
-                            Next
-                        Case ObjFuncType.DewPointP, ObjFuncType.DewPointT
-                            For i = 0 To n
-                                If Vy(i) <> 0 And Vx1(i) <> 0 Then g(i) = Log(fcv(i) * Vy(i)) - Log(fcl(i) * Vx1(i))
-                            Next
-                    End Select
-                    Dim xg1, xg2 As Double()
-                    xg1 = x.Clone
-                    xg2 = x.Clone
-                    xg2(n + 1) *= 1.01
-                    g(n + 1) = (FunctionValue(xg2) - FunctionValue(xg1)) / (0.01 * xg1(n + 1))
-
-                    Return g
-
-            End Select
+            Return g
 
 
         End Function
 
         Private Function FunctionHessian(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.001
+            Dim epsilon As Double = 0.01
 
             Dim f2() As Double = Nothing
             Dim f3() As Double = Nothing
@@ -2453,7 +2285,7 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
             For i = 0 To m - 1
-                g(i) = fi(i) * F - x(i) - x(i + m)
+                g(i) = fi(i) * F - Exp(x(i)) - Exp(x(i + m))
             Next
             Return True
         End Function
