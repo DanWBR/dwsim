@@ -227,7 +227,7 @@ Namespace PropertyPackages
                                 Else
                                     LoopVarF = H
                                     LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 623.15, 20, 0.0001, 1000, Nothing)
+                                    T = brentsolverT.BrentOpt(273.15, 2000, 20, 0.0001, 1000, Nothing)
                                 End If
 
                             End With
@@ -256,7 +256,7 @@ Namespace PropertyPackages
                                 Else
                                     LoopVarF = H
                                     LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 623.15, 20, 0.0001, 1000, Nothing)
+                                    T = brentsolverT.BrentOpt(273.15, 2000, 20, 0.0001, 1000, Nothing)
                                 End If
 
                             End With
@@ -952,14 +952,7 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-            Select Case st
-                Case State.Liquid
-                    Return Me.m_iapws97.enthalpySatLiqTW(T)
-                Case State.Vapor
-                    Return Me.m_iapws97.enthalpySatVapTW(T)
-                Case Else
-                    Return Me.m_iapws97.enthalpyW(T, P / 100000)
-            End Select
+            Return Me.m_iapws97.enthalpyW(T, P / 100000)
         End Function
 
         Public Overrides Function DW_CalcKvalue(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double) As Double()
@@ -967,14 +960,7 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEnthalpyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-            Select Case st
-                Case State.Liquid
-                    Return Me.m_iapws97.enthalpySatLiqTW(T) - Me.RET_Hid(298.15, T, Vx)
-                Case State.Vapor
-                    Return Me.m_iapws97.enthalpySatVapTW(T) - Me.RET_Hid(298.15, T, Vx)
-                Case Else
-                    Return Me.m_iapws97.enthalpyW(T, P / 100000) - Me.RET_Hid(298.15, T, Vx)
-            End Select
+            Return Me.m_iapws97.enthalpyW(T, P / 100000) - Me.RET_Hid(298.15, T, Vx)
         End Function
 
         Public Overrides Function DW_CalcBubP(ByVal Vx As System.Array, ByVal T As Double, Optional ByVal Pref As Double = 0, Optional ByVal K As System.Array = Nothing, Optional ByVal ReuseK As Boolean = False) As Object
@@ -1018,25 +1004,11 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-            Select Case st
-                Case State.Liquid
-                    Return Me.m_iapws97.entropySatLiqTW(T)
-                Case State.Vapor
-                    Return Me.m_iapws97.entropySatVapTW(T)
-                Case Else
-                    Return Me.m_iapws97.entropyW(T, P / 100000)
-            End Select
+            Return Me.m_iapws97.entropyW(T, P / 100000)
         End Function
 
         Public Overrides Function DW_CalcEntropyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-            Select Case st
-                Case State.Liquid
-                    Return Me.m_iapws97.entropySatLiqTW(T) - Me.RET_Sid(298.15, T, P, Vx)
-                Case State.Vapor
-                    Return Me.m_iapws97.entropySatVapTW(T) - Me.RET_Sid(298.15, T, P, Vx)
-                Case Else
-                    Return Me.m_iapws97.entropyW(T, P / 100000) - Me.RET_Sid(298.15, T, P, Vx)
-            End Select
+            Return Me.m_iapws97.entropyW(T, P / 100000) - Me.RET_Sid(298.15, T, P, Vx)
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
