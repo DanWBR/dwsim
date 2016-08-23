@@ -860,8 +860,10 @@ out:
             End If
 
             If Span(0).Y > 0 And Span(1).Y < 0 Then
+
                 'specified enthalpy requires partial evaporation 
                 'calculate vapour fraction
+
                 Dim Vn, Hn As Double
 
                 ecount = 0

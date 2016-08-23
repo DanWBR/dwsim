@@ -209,7 +209,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 ecount += 1
 
-                If ecount > 10000 Then Throw New Exception(Calculator.GetLocalString("Nmeromximodeiteraesa3"))
+                If ecount > 10000 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt"))
 
             Loop
 
