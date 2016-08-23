@@ -188,7 +188,7 @@ Public Class EditingForm_Pipe
 
     Private Sub btnDisconnectEnergy_Click(sender As Object, e As EventArgs) Handles btnDisconnectEnergy.Click
         If cbEnergy.SelectedItem IsNot Nothing Then
-            SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo, SimObject.GraphicObject)
+            SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo)
             cbEnergy.SelectedItem = Nothing
         End If
     End Sub
@@ -283,8 +283,8 @@ Public Class EditingForm_Pipe
                     Exit Sub
                 End If
 
-                If gobj.InputConnectors(1).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.InputConnectors(1).AttachedConnector.AttachedTo)
-                flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 1)
+                If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.EnergyConnector.AttachedConnector.AttachedTo)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
 
             End If
 
