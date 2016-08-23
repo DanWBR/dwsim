@@ -30,7 +30,7 @@ Public Class FormConfigPRSV2
 
         Loaded = False
 
-        Me.Text = Calculator.GetLocalString("ConfigurarPacotedePropriedades") & _pp.Tag & ")"
+        Me.Text += " (" & _pp.Tag & ")"
 
         With Me.KryptonDataGridView1.Rows
             .Clear()
