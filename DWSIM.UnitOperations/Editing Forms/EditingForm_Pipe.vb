@@ -95,8 +95,19 @@ Public Class EditingForm_Pipe
             cbPressure.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
             cbPressure.SelectedItem = units.pressure
 
+            cbTtol.Items.Clear()
+            cbTtol.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
+            cbTtol.SelectedItem = units.deltaT
+
+            cbPtol.Items.Clear()
+            cbPtol.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
+            cbPtol.SelectedItem = units.deltaP
+
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
             tbOutletPressure.Text = su.Converter.ConvertFromSI(units.pressure, .OutletPressure).ToString(nf)
+
+            tbTtol.Text = su.Converter.ConvertFromSI(units.deltaT, .TolT).ToString(nf)
+            tbPtol.Text = su.Converter.ConvertFromSI(units.deltaP, .TolP).ToString(nf)
 
             chkIncludeJT.Checked = .IncludeJTEffect
 
@@ -296,7 +307,7 @@ Public Class EditingForm_Pipe
         If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbOutletPressure.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbOutletPressure.TextChanged, tbTtol.TextChanged, tbPtol.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -308,7 +319,7 @@ Public Class EditingForm_Pipe
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbOutletPressure.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbOutletPressure.KeyDown, tbTtol.KeyDown, tbPtol.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -324,6 +335,8 @@ Public Class EditingForm_Pipe
 
         If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
         If sender Is tbOutletPressure Then SimObject.OutletPressure = su.Converter.ConvertToSI(cbPressure.SelectedItem.ToString, tbOutletPressure.Text)
+        If sender Is tbTtol Then SimObject.TolT = su.Converter.ConvertToSI(cbTtol.SelectedItem.ToString, tbTtol.Text)
+        If sender Is tbPtol Then SimObject.TolP = su.Converter.ConvertToSI(cbPtol.SelectedItem.ToString, tbPtol.Text)
 
         RequestCalc()
 
@@ -362,7 +375,7 @@ Public Class EditingForm_Pipe
 
     End Sub
 
-    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTemp.SelectedIndexChanged, cbPressure.SelectedIndexChanged
+    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTemp.SelectedIndexChanged, cbPressure.SelectedIndexChanged, cbTtol.SelectedIndexChanged, cbPtol.SelectedIndexChanged
 
         If Loaded Then
             Try
@@ -374,6 +387,14 @@ Public Class EditingForm_Pipe
                     tbOutletPressure.Text = su.Converter.Convert(cbPressure.SelectedItem.ToString, units.pressure, Double.Parse(tbOutletPressure.Text)).ToString(nf)
                     cbPressure.SelectedItem = units.pressure
                     UpdateProps(tbOutletPressure)
+                ElseIf sender Is cbTtol Then
+                    tbTtol.Text = su.Converter.Convert(cbTtol.SelectedItem.ToString, units.deltaT, Double.Parse(tbTtol.Text)).ToString(nf)
+                    cbTtol.SelectedItem = units.deltaT
+                    UpdateProps(tbTtol)
+                ElseIf sender Is cbPtol Then
+                    tbPtol.Text = su.Converter.Convert(cbPtol.SelectedItem.ToString, units.deltaP, Double.Parse(tbPtol.Text)).ToString(nf)
+                    cbPtol.SelectedItem = units.deltaP
+                    UpdateProps(tbPtol)
                 End If
             Catch ex As Exception
                 SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)

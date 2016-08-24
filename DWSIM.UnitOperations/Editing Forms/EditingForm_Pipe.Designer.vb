@@ -43,6 +43,12 @@ Partial Class EditingForm_Pipe
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.tbTtol = New System.Windows.Forms.TextBox()
+        Me.cbTtol = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cbPtol = New System.Windows.Forms.ComboBox()
+        Me.tbPtol = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
         Me.chkIncludeJT = New System.Windows.Forms.CheckBox()
@@ -200,6 +206,12 @@ Partial Class EditingForm_Pipe
         'TabPage4
         '
         resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Controls.Add(Me.Label4)
+        Me.TabPage4.Controls.Add(Me.tbTtol)
+        Me.TabPage4.Controls.Add(Me.cbTtol)
+        Me.TabPage4.Controls.Add(Me.Label5)
+        Me.TabPage4.Controls.Add(Me.cbPtol)
+        Me.TabPage4.Controls.Add(Me.tbPtol)
         Me.TabPage4.Controls.Add(Me.Button1)
         Me.TabPage4.Controls.Add(Me.btnConfigureFlashAlg)
         Me.TabPage4.Controls.Add(Me.chkIncludeJT)
@@ -221,6 +233,48 @@ Partial Class EditingForm_Pipe
         Me.TabPage4.Name = "TabPage4"
         Me.ToolTip1.SetToolTip(Me.TabPage4, resources.GetString("TabPage4.ToolTip"))
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        '
+        'tbTtol
+        '
+        resources.ApplyResources(Me.tbTtol, "tbTtol")
+        Me.tbTtol.Name = "tbTtol"
+        Me.ToolTip1.SetToolTip(Me.tbTtol, resources.GetString("tbTtol.ToolTip"))
+        '
+        'cbTtol
+        '
+        resources.ApplyResources(Me.cbTtol, "cbTtol")
+        Me.cbTtol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTtol.FormattingEnabled = True
+        Me.cbTtol.Items.AddRange(New Object() {resources.GetString("cbTtol.Items"), resources.GetString("cbTtol.Items1"), resources.GetString("cbTtol.Items2")})
+        Me.cbTtol.Name = "cbTtol"
+        Me.ToolTip1.SetToolTip(Me.cbTtol, resources.GetString("cbTtol.ToolTip"))
+        '
+        'Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        '
+        'cbPtol
+        '
+        resources.ApplyResources(Me.cbPtol, "cbPtol")
+        Me.cbPtol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPtol.FormattingEnabled = True
+        Me.cbPtol.Items.AddRange(New Object() {resources.GetString("cbPtol.Items"), resources.GetString("cbPtol.Items1"), resources.GetString("cbPtol.Items2")})
+        Me.cbPtol.Name = "cbPtol"
+        Me.ToolTip1.SetToolTip(Me.cbPtol, resources.GetString("cbPtol.ToolTip"))
+        '
+        'tbPtol
+        '
+        resources.ApplyResources(Me.tbPtol, "tbPtol")
+        Me.tbPtol.Name = "tbPtol"
+        Me.ToolTip1.SetToolTip(Me.tbPtol, resources.GetString("tbPtol.ToolTip"))
         '
         'Button1
         '
@@ -607,4 +661,10 @@ Partial Class EditingForm_Pipe
     Friend WithEvents chkIncludeJT As System.Windows.Forms.CheckBox
     Friend WithEvents cbPDropModel As System.Windows.Forms.ComboBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents tbTtol As System.Windows.Forms.TextBox
+    Friend WithEvents cbTtol As System.Windows.Forms.ComboBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents cbPtol As System.Windows.Forms.ComboBox
+    Friend WithEvents tbPtol As System.Windows.Forms.TextBox
 End Class

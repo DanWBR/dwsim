@@ -48,11 +48,11 @@ Namespace UnitOperations
         Protected m_dt As Nullable(Of Double)
         Protected m_DQ As Nullable(Of Double)
 
-        Protected m_tolP As Double = 10
+        Protected m_tolP As Double = 100
         Protected m_tolT As Double = 0.01
 
-        Protected m_maxItT As Integer = 25
-        Protected m_maxItP As Integer = 25
+        Protected m_maxItT As Integer = 50
+        Protected m_maxItP As Integer = 50
 
         Protected m_flashP As Double = 1
         Protected m_flashT As Double = 1
@@ -479,7 +479,7 @@ Namespace UnitOperations
                                     Throw New Exception(FlowSheet.GetTranslatedString("Erronoclculodatemper"))
                                 End If
 
-                                If cntT > Me.MaxPressureIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Ocalculadorexcedeuon"))
+                                If cntT > Me.MaxTemperatureIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Ocalculadorexcedeuon1"))
 
                                 FlowSheet.CheckStatus()
 
