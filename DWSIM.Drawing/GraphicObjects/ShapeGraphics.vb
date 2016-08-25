@@ -2219,6 +2219,7 @@ Namespace GraphicObjects
                 End If
 
             End With
+
         End Sub
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
