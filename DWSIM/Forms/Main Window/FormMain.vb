@@ -1139,7 +1139,11 @@ Public Class FormMain
             Try
                 Dim obj As New ConstantProperties
                 obj.LoadData(xel.Elements.ToList)
-                form.Options.SelectedComponents.Add(obj.Name, obj)
+                If My.Settings.IgnoreCompoundPropertiesOnLoad AndAlso AvailableComponents.ContainsKey(obj.Name) Then
+                    form.Options.SelectedComponents.Add(obj.Name, AvailableComponents(obj.Name))
+                Else
+                    form.Options.SelectedComponents.Add(obj.Name, obj)
+                End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Compound Information", ex))
             End Try
@@ -1744,7 +1748,7 @@ Label_00CC:
 
     Sub SaveXMLZIP(ByVal zipfilename As String, ByVal form As FormFlowsheet)
 
-        Dim xmlfile As String = My.Computer.FileSystem.GetTempFileName
+        Dim xmlfile As String = Path.ChangeExtension(My.Computer.FileSystem.GetTempFileName, "xml")
         Me.SaveXML(xmlfile, form, zipfilename)
 
         Dim i_Files As ArrayList = New ArrayList()
@@ -1771,7 +1775,7 @@ Label_00CC:
             Dim abyBuffer(strmFile.Length - 1) As Byte
 
             strmFile.Read(abyBuffer, 0, abyBuffer.Length)
-            Dim objZipEntry As ZipEntry = New ZipEntry(strFile)
+            Dim objZipEntry As ZipEntry = New ZipEntry(Path.GetFileName(strFile))
 
             objZipEntry.DateTime = DateTime.Now
             objZipEntry.Size = strmFile.Length

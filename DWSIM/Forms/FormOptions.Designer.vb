@@ -103,6 +103,8 @@ Partial Class FormOptions
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
+        Me.chkIgnoreCompConstData = New System.Windows.Forms.CheckBox()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.chkHideSolidPhaseCO = New System.Windows.Forms.CheckBox()
         Me.GroupBox13 = New System.Windows.Forms.GroupBox()
@@ -143,6 +145,7 @@ Partial Class FormOptions
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
+        Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -725,12 +728,25 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox13)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
+        '
+        'GroupBox15
+        '
+        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
+        Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
+        Me.GroupBox15.Name = "GroupBox15"
+        Me.GroupBox15.TabStop = False
+        '
+        'chkIgnoreCompConstData
+        '
+        resources.ApplyResources(Me.chkIgnoreCompConstData, "chkIgnoreCompConstData")
+        Me.chkIgnoreCompConstData.Name = "chkIgnoreCompConstData"
         '
         'GroupBox14
         '
@@ -898,6 +914,7 @@ Partial Class FormOptions
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
@@ -1005,4 +1022,6 @@ Partial Class FormOptions
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Public WithEvents GroupBox14 As System.Windows.Forms.GroupBox
     Public WithEvents chkHideSolidPhaseCO As System.Windows.Forms.CheckBox
+    Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
+    Public WithEvents chkIgnoreCompConstData As System.Windows.Forms.CheckBox
 End Class

@@ -3836,6 +3836,7 @@ Namespace GraphicObjects
     End Class
 
     <Serializable()> Public Class AdjustGraphic
+
         Inherits ShapeGraphic
 
         Protected m_mvPT, m_cvPT, m_rvPT As GraphicObject

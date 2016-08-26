@@ -439,6 +439,12 @@
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
   </data>
+  <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
+    <value>Ignore compound constant properties stored in the simulation file during loading</value>
+  </data>
+  <data name="GroupBox15.Text" xml:space="preserve">
+    <value>Compound Constant Properties</value>
+  </data>
   <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
     <value>Remove Solid Phase from the list of present phases for external components</value>
   </data>
@@ -528,7 +534,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAARABCAEQAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAASABCAEgAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

@@ -276,13 +276,13 @@ Public Class XMLSerializer
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
                                 .Add(New XElement(prop.Name, ArrayToString(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Single Then
-                                .Add(New XElement(prop.Name, Single.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString(ci)))
+                                .Add(New XElement(prop.Name, Single.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Double Then
-                                .Add(New XElement(prop.Name, Double.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString(ci)))
+                                .Add(New XElement(prop.Name, Double.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nullable(Of Double) Then
-                                .Add(New XElement(prop.Name, Double.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString(ci)))
+                                .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Nullable(Of Double)).GetValueOrDefault.ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nullable(Of Single) Then
-                                .Add(New XElement(prop.Name, Single.Parse(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)).ToString(ci)))
+                                .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Nullable(Of Single)).GetValueOrDefault.ToString("R", ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Nullable(Of Integer) Then
                                 .Add(New XElement(prop.Name, obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Integer Then
@@ -324,13 +324,13 @@ Public Class XMLSerializer
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ArrayList Then
                             .Add(New XElement(prop.Name, ArrayToString(obj.GetType.GetField(prop.Name).GetValue(obj), ci)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Single Then
-                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), System.Single).ToString(ci)))
+                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), System.Single).ToString("R", ci)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Double Then
-                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), System.Double).ToString(ci)))
+                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), System.Double).ToString("R", ci)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Nullable(Of Double) Then
-                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Nullable(Of Double)).GetValueOrDefault.ToString(ci)))
+                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Nullable(Of Double)).GetValueOrDefault.ToString("R", ci)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Nullable(Of Single) Then
-                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Nullable(Of Single)).GetValueOrDefault.ToString(ci)))
+                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Nullable(Of Single)).GetValueOrDefault.ToString("R", ci)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Nullable(Of Integer) Then
                             .Add(New XElement(prop.Name, obj.GetType.GetField(prop.Name).GetValue(obj)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Integer Then
@@ -366,7 +366,7 @@ Public Class XMLSerializer
 
             For Each obj As Object In sourcearray
                 If TypeOf obj Is Double Then
-                    sb += Double.Parse(obj).ToString(ci) + ","
+                    sb += Double.Parse(obj).ToString("R", ci) + ","
                 Else
                     sb += obj.ToString + ","
                 End If
@@ -389,7 +389,7 @@ Public Class XMLSerializer
 
                 For Each obj As Object In sourcearray
                     If TypeOf obj Is Double Then
-                        sb += Double.Parse(obj).ToString(ci) + ","
+                        sb += Double.Parse(obj).ToString("R", ci) + ","
                     Else
                         sb += obj.ToString + ","
                     End If

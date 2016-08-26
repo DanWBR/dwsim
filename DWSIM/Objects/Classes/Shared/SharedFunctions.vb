@@ -287,6 +287,7 @@ Namespace DWSIM
             My.Settings.SimulationUpgradeWarning = source.Configs("Misc").GetBoolean("SimulationUpgradeWarning", True)
 
             My.Settings.HideSolidPhase_CO = source.Configs("Misc").GetBoolean("HideSolidPhase_COInterface", False)
+            My.Settings.IgnoreCompoundPropertiesOnLoad = source.Configs("Misc").GetBoolean("IgnoreCompoundConstantPropertyDatainXMLFile", False)
 
         End Sub
 
@@ -360,6 +361,7 @@ Namespace DWSIM
             source.Configs("Misc").Set("SimulationUpgradeWarning", My.Settings.SimulationUpgradeWarning)
 
             source.Configs("Misc").Set("HideSolidPhase_COInterface", My.Settings.HideSolidPhase_CO)
+            source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", My.Settings.IgnoreCompoundPropertiesOnLoad)
 
             source.Save(configfile)
 

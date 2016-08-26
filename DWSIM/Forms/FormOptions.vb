@@ -67,6 +67,8 @@ Public Class FormOptions
         Me.chkUpdates.Checked = My.Settings.CheckForUpdates
         Me.chkAutoUpdate.Checked = My.Settings.AutomaticUpdates
 
+        Me.chkIgnoreCompConstData.Checked = My.Settings.IgnoreCompoundPropertiesOnLoad
+
         Me.chkShowWhatsNew.Checked = My.Settings.ShowWhatsNew
 
         Me.cbudb.Checked = My.Settings.ReplaceComps
@@ -665,5 +667,9 @@ Public Class FormOptions
     Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles chkHideSolidPhaseCO.CheckedChanged
         My.Settings.HideSolidPhase_CO = chkHideSolidPhaseCO.Checked
         GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
+    End Sub
+
+    Private Sub chkIgnoreCompConstData_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreCompConstData.CheckedChanged
+        My.Settings.IgnoreCompoundPropertiesOnLoad = Me.chkIgnoreCompConstData.Checked
     End Sub
 End Class
