@@ -5379,7 +5379,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Reaction Rate</value>
   </data>
   <data name="UnauthorizedAccessError" xml:space="preserve">
-    <value>This operation requires elevation. Run DWSIM with elevated privileges and try again.</value>
+    <value>DWSIM is trying to save "dwsim.ini" to the folder where it is installed and it seems that this operation requires elevation. Run DWSIM with elevated privileges and try again. Alternatively, you can change the write access to DWSIM's installation folder to enable writing or reinstall it on a folder where you have full write access without requiring elevation.</value>
   </data>
   <data name="NativeLibrariesExtractionError" xml:space="preserve">
     <value>An error ocurred during extraction of the native libraries to DWSIM's installation directory. Please check if you have write access to that folder or run DWSIM with elevated privileges (Windows 7/8/10).</value>

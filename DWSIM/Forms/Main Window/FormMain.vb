@@ -1089,7 +1089,11 @@ Public Class FormMain
 
         Dim excs As New Concurrent.ConcurrentBag(Of Exception)
 
-        Dim xdoc As XDocument = XDocument.Load(path)
+        Dim xdoc As XDocument = Nothing
+
+        Using fstr As Stream = File.OpenRead(path)
+            xdoc = XDocument.Load(fstr)
+        End Using
 
         For Each xel1 As XElement In xdoc.Descendants
             SharedClasses.Utility.UpdateElement(xel1)
@@ -1175,7 +1179,7 @@ Public Class FormMain
                     obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
                 End If
                 Dim gobj As GraphicObject = (From go As GraphicObject In
-                                    form.FormSurface.FlowsheetDesignSurface.drawingObjects Where go.Name = id).SingleOrDefault
+                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
                 gobj.Owner = obj
                 obj.SetFlowsheet(form)
@@ -1349,7 +1353,7 @@ Public Class FormMain
         End Try
 
 
-        For Each obj In form.FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each obj In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
             If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
                 DirectCast(obj, SpreadsheetTableGraphic).SetSpreadsheet(form.FormSpreadsheet)
             End If
@@ -1461,7 +1465,7 @@ Public Class FormMain
 
         'Master Property Tables
 
-        For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
             If g.ObjectType = ObjectType.GO_MasterTable Then
                 CType(g, MasterTableGraphic).Update()
             End If
@@ -1537,8 +1541,8 @@ Public Class FormMain
         'the entire flowsheet, saving time and resources.
 
         Dim hash As String = ""
-        Using md5 As System.Security.Cryptography.MD5 = System.Security.Cryptography.MD5.Create()
-            hash = BitConverter.ToString(md5.ComputeHash(Encoding.UTF8.GetBytes(xel.ToString)))
+        Using sha1 As System.Security.Cryptography.SHA1CryptoServiceProvider = System.Security.Cryptography.SHA1CryptoServiceProvider.Create()
+            hash = BitConverter.ToString(sha1.ComputeHash(Encoding.UTF8.GetBytes(xel.ToString)))
         End Using
 
         form.Options.Key = hash.Replace("-", "")
@@ -1817,7 +1821,7 @@ csd:                Application.DoEvents()
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = Me
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open)
+                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName
@@ -1833,7 +1837,7 @@ rsd:                Application.DoEvents()
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open)
+                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.currcase = x.Deserialize(objStreamReader)
                     NewMDIChild.currcase.filename = Me.OpenFileDialog1.FileName
@@ -1849,7 +1853,7 @@ ruf:                Application.DoEvents()
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open)
+                    Dim objStreamReader As New FileStream(Me.OpenFileDialog1.FileName, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.OpenFileDialog1.FileName

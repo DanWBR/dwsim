@@ -104,7 +104,7 @@ Public Class FormWelcome
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = FormMain
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open)
+                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
@@ -114,7 +114,7 @@ Public Class FormWelcome
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me.Owner
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open)
+                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.currcase = x.Deserialize(objStreamReader)
                     NewMDIChild.currcase.filename = Me.lvlatest.SelectedItems(0).Tag
@@ -125,7 +125,7 @@ Public Class FormWelcome
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me.Owner
                     NewMDIChild.Show()
-                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open)
+                    Dim objStreamReader As New FileStream(Me.lvlatest.SelectedItems(0).Tag, FileMode.Open, FileAccess.Read)
                     Dim x As New BinaryFormatter()
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
