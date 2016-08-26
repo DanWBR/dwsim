@@ -214,7 +214,7 @@ public class FileDownloader : System.Object, IDisposable
     public static string FormatSizeBinary(Int64 size, Int32 decimals)
     {
         // By De Dauw Jeroen - April 2009 - jeroen_dedauw@yahoo.com
-        String[] sizes = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB" };
+        String[] sizes = { "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
         Double formattedSize = size;
         Int32 sizeIndex = 0;
         while (formattedSize >= 1024 && sizeIndex < sizes.Length)
@@ -222,7 +222,7 @@ public class FileDownloader : System.Object, IDisposable
             formattedSize /= 1024;
             sizeIndex += 1;
         }
-        return Math.Round(formattedSize, decimals) + sizes[sizeIndex];
+        return Math.Round(formattedSize, decimals) + " " + sizes[sizeIndex];
     }
 
     /// <summary>Format an amount of bytes to a more readible notation with decimal notation symbols</summary>
