@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 12 - August 2016
+Version 4.0 Update 13 - August 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 13
+
+- [FIX] Fixed cryptographic issues on FIPS-compliant systems
+- [FIX] Fixed opening sample files on read-only installations
 
 Version 4.0 Update 12
 
