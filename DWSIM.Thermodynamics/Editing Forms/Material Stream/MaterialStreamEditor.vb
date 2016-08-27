@@ -213,6 +213,8 @@ Public Class MaterialStreamEditor
                 TabPhaseProps.TabPages.Clear()
                 TabPhaseProps.TabPages.Add(tabPropsMix)
 
+                MatStream.PropertyPackage.CurrentMaterialStream = MatStream
+
                 PopulatePropGrid(gridPropertiesMixture, .Phases(0))
                 If .Phases(2).Properties.molarfraction.HasValue Then
                     PopulatePropGrid(gridPropertiesVapor, .Phases(2))
@@ -258,7 +260,6 @@ Public Class MaterialStreamEditor
                 Else
                     TabPageInput.Enabled = False
                 End If
-                TabPageInput.Enabled = False
             Else
                 TabPageInput.Enabled = True
             End If
