@@ -492,6 +492,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.de.resx">
+      <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Filter.en.resx">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </EmbeddedResource>
@@ -509,6 +512,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Column.resx">
       <DependentUpon>EditingForm_Column.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.de.resx">
+      <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.en.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>

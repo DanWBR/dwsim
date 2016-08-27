@@ -726,6 +726,9 @@
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>de</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -745,7 +748,7 @@
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>EditingForm_ComprExpndr</value>
+    <value>EditingForm_EnergyStream</value>
   </data>
   <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
     <value>ToolTip1</value>

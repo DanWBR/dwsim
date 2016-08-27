@@ -437,6 +437,9 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.en.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>

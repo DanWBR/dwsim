@@ -755,6 +755,9 @@
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.de.resx">
+      <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.en.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </EmbeddedResource>
@@ -806,6 +809,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCORegistration.resx">
       <DependentUpon>FormCORegistration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
+      <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.en.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
