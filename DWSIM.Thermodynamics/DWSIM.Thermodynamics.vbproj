@@ -344,6 +344,9 @@
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.de.resx">
+      <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
