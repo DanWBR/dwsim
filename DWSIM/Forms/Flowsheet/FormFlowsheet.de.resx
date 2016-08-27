@@ -117,13 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 22</value>
-  </data>
-  <data name="ToolStripLabel4.Text" xml:space="preserve">
-    <value>Fließbild</value>
-  </data>
   <data name="tsbUndo.Text" xml:space="preserve">
     <value>Rückgängig</value>
   </data>
@@ -138,6 +131,12 @@
   </data>
   <data name="tsbPasteObj.Text" xml:space="preserve">
     <value>Objekte einfügen</value>
+  </data>
+  <data name="ToolStripButton12.Text" xml:space="preserve">
+    <value>Rechteck einfügen</value>
+  </data>
+  <data name="ToolStripButton12.ToolTipText" xml:space="preserve">
+    <value>Rechteck einfügen</value>
   </data>
   <data name="TSBtabela.Text" xml:space="preserve">
     <value>Bild einfügen</value>
@@ -154,14 +153,11 @@
   <data name="ToolStripButton4.Text" xml:space="preserve">
     <value>Verknüpfte Arbeitsblatttabelle</value>
   </data>
+  <data name="ToolStripButton6.Text" xml:space="preserve">
+    <value>Eigenschaftentabelle</value>
+  </data>
   <data name="ToolStripButton19.Text" xml:space="preserve">
-    <value>Master Property Table</value>
-  </data>
-  <data name="ToolStripButton12.Text" xml:space="preserve">
-    <value>Rechteck einfügen</value>
-  </data>
-  <data name="ToolStripButton12.ToolTipText" xml:space="preserve">
-    <value>Rechteck einfügen</value>
+    <value>Master Property Tabelle</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Fließbild verkleinern</value>
@@ -178,14 +174,29 @@
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Zoom Standard (100%)</value>
   </data>
-  <data name="ToolStripButton18.Text" xml:space="preserve">
-    <value>Als Grafik speichern</value>
+  <data name="tsbResizeMode.Text" xml:space="preserve">
+    <value>Redimensionierungsmodus</value>
+  </data>
+  <data name="tsbResizeModeKeepAR.Text" xml:space="preserve">
+    <value>Grössenverhältnis beibehalten</value>
   </data>
   <data name="ToolStripButton16.Text" xml:space="preserve">
     <value>Am Raster ausrichten</value>
   </data>
   <data name="ToolStripButton17.Text" xml:space="preserve">
     <value>Schnellkupplung</value>
+  </data>
+  <data name="ToolStripButton18.Text" xml:space="preserve">
+    <value>Als Grafik speichern</value>
+  </data>
+  <data name="tsbConfigPage.Text" xml:space="preserve">
+    <value>Seite einrichten</value>
+  </data>
+  <data name="tsbConfigPrinter.Text" xml:space="preserve">
+    <value>Drucker einrichten</value>
+  </data>
+  <data name="tsbPrint.Text" xml:space="preserve">
+    <value>Fliessbild anzeigen und drucken</value>
   </data>
   <data name="tsbAlignLefts.Text" xml:space="preserve">
     <value>Links ausrichten</value>
@@ -211,114 +222,28 @@
   <data name="tsbAlignHorizontal.Text" xml:space="preserve">
     <value>Gleiche horizontale Abstände</value>
   </data>
-  <data name="ToolStripFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>793, 25</value>
-  </data>
-  <data name="ToolStripCalculator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 0</value>
-  </data>
-  <data name="ToolStripCalculator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 25</value>
-  </data>
-  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 22</value>
-  </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Rechner</value>
-  </data>
   <data name="tsbAtivar.Text" xml:space="preserve">
     <value>Aktivieren</value>
-  </data>
-  <data name="tsbDesat.Text" xml:space="preserve">
-    <value>Deaktivieren</value>
-  </data>
-  <data name="ToolStripButton13.Text" xml:space="preserve">
-    <value>Alles neu berechnen</value>
-  </data>
-  <data name="ToolStripButton14.Text" xml:space="preserve">
-    <value>Berechnung abbrechen</value>
-  </data>
-  <data name="ToolStripButton15.Text" xml:space="preserve">
-    <value>Rechnerausgabe löschen</value>
   </data>
   <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
     <value>Aktivieren Löser Simultane Anpassungen</value>
   </data>
-  <data name="ToolStripSimulation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 25</value>
-  </data>
-  <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 22</value>
-  </data>
-  <data name="ToolStripLabel2.Text" xml:space="preserve">
-    <value>Simulation</value>
-  </data>
-  <data name="ToolStripButton5.Text" xml:space="preserve">
-    <value>Simulation konfigurieren</value>
-  </data>
-  <data name="ToolStripButton8.Text" xml:space="preserve">
-    <value>Ergebnisse - Bericht</value>
-  </data>
-  <data name="ToolStripStates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 0</value>
-  </data>
-  <data name="ToolStripStates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 25</value>
-  </data>
-  <data name="ToolStripLabel8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 22</value>
-  </data>
-  <data name="ToolStripLabel8.Text" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="tsbSaveState.Text" xml:space="preserve">
-    <value>Status speichern</value>
-  </data>
-  <data name="tsbSaveState.ToolTipText" xml:space="preserve">
-    <value>Status speichern</value>
-  </data>
-  <data name="tsbRestoreStates.Text" xml:space="preserve">
-    <value>Status wieder herstellen</value>
-  </data>
-  <data name="tsbRestoreStates.ToolTipText" xml:space="preserve">
-    <value>Status wieder herstellen</value>
-  </data>
-  <data name="tsbClearStates.Text" xml:space="preserve">
-    <value>Gespeicherte Status löschen</value>
-  </data>
-  <data name="ToolStripLabel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 22</value>
-  </data>
-  <data name="ToolStripLabel5.Text" xml:space="preserve">
-    <value>Lösungen</value>
-  </data>
-  <data name="tsbRestoreSolutions.Text" xml:space="preserve">
-    <value>Wiederherstellungslösung</value>
-  </data>
-  <data name="ToolStripUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>662, 25</value>
-  </data>
-  <data name="ToolStripLabel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 22</value>
-  </data>
-  <data name="ToolStripLabel3.Text" xml:space="preserve">
+  <data name="ToolStripComboBoxUnitSystem.ToolTipText" xml:space="preserve">
     <value>Einheitensystem</value>
   </data>
   <data name="ToolStripButton7.Text" xml:space="preserve">
     <value>Einheitensystem hinzufügen</value>
   </data>
-  <data name="ToolStripLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 22</value>
+  <data name="ToolStripButton7.ToolTipText" xml:space="preserve">
+    <value>Einheitensystem hinzufügen</value>
   </data>
-  <data name="ToolStripLabel6.Text" xml:space="preserve">
+  <data name="ToolStripComboBoxNumberFormatting.ToolTipText" xml:space="preserve">
     <value>Zahlenformat</value>
   </data>
-  <data name="ToolStripLabel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 22</value>
+  <data name="ToolStripComboBoxNumberFractionFormatting.ToolTipText" xml:space="preserve">
+    <value>Fraktionsformat</value>
   </data>
-  <data name="ToolStripLabel7.Text" xml:space="preserve">
-    <value>Anteilformat</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ArquivoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
@@ -326,10 +251,10 @@
     <value>&amp;Datei</value>
   </data>
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 22</value>
+    <value>233, 22</value>
   </data>
   <data name="CloseToolStripMenuItem.Text" xml:space="preserve">
-    <value>Schließen der aktiven Simulation</value>
+    <value>Simulation schliessen</value>
   </data>
   <data name="EditarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 20</value>
@@ -409,245 +334,47 @@
   <data name="InserirToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;infügen</value>
   </data>
-  <data name="CorrentesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
+  <data name="BlocoDeSimulacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="CorrentesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ströme</value>
+  <data name="BlocoDeSimulacaoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Objekte</value>
   </data>
-  <data name="TSMIMaterialStream.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+  <data name="TabelaDePropriedadesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="TSMIMaterialStream.Text" xml:space="preserve">
-    <value>Stoffstrom</value>
+  <data name="TabelaDePropriedadesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eigenschaftentabelle</value>
   </data>
-  <data name="TSMIEnergyStream.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+  <data name="TabelaDePropriedatesMestraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="TSMIEnergyStream.Text" xml:space="preserve">
-    <value>Energiestrom</value>
+  <data name="TabelaDePropriedatesMestraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Masterproperty Tabelle</value>
   </data>
-  <data name="OperaçõesUnitáriasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
+  <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="OperaçõesUnitáriasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Grundoperationen</value>
+  <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Verknüpfte Arbeitsblatttabelle</value>
   </data>
-  <data name="TSMIMixer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
+  <data name="FiguraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="TSMIMixer.Text" xml:space="preserve">
-    <value>Mixer</value>
+  <data name="FiguraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Bild</value>
   </data>
-  <data name="TSMISplitter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
+  <data name="TextoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="TSMISplitter.Text" xml:space="preserve">
-    <value>Splitter</value>
+  <data name="TextoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Text</value>
   </data>
-  <data name="TSMICompressor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
+  <data name="RectangleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 22</value>
   </data>
-  <data name="TSMICompressor.Text" xml:space="preserve">
-    <value>Adiabater Verdichter</value>
-  </data>
-  <data name="TSMIExpander.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIExpander.Text" xml:space="preserve">
-    <value>Adiabater Expander</value>
-  </data>
-  <data name="TSMIPump.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIPump.Text" xml:space="preserve">
-    <value>Adiabate Pumpe</value>
-  </data>
-  <data name="TSMIPipe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIPipe.Text" xml:space="preserve">
-    <value>Rohrleitungssegment</value>
-  </data>
-  <data name="TSMIValve.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIValve.Text" xml:space="preserve">
-    <value>Ventil (Isenthalp)</value>
-  </data>
-  <data name="TSMISeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMISeparator.Text" xml:space="preserve">
-    <value>Abscheider (Behälter)</value>
-  </data>
-  <data name="TSMIHeater.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIHeater.Text" xml:space="preserve">
-    <value>Heizer</value>
-  </data>
-  <data name="TSMICooler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMICooler.Text" xml:space="preserve">
-    <value>Kühler</value>
-  </data>
-  <data name="TSMIOrificePlate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIOrificePlate.Text" xml:space="preserve">
-    <value>Drosselscheibe</value>
-  </data>
-  <data name="TSMIComponentSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIComponentSeparator.Text" xml:space="preserve">
-    <value>Komponentenseparator</value>
-  </data>
-  <data name="TSMIHeatExchanger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIHeatExchanger.Text" xml:space="preserve">
-    <value>Wärmetauscher</value>
-  </data>
-  <data name="TSMITank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMITank.Text" xml:space="preserve">
-    <value>Tank</value>
-  </data>
-  <data name="TSMIExcelUO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIExcelUO.Text" xml:space="preserve">
-    <value>Kalkulationstabelle UO</value>
-  </data>
-  <data name="TSMICUO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMICUO.Text" xml:space="preserve">
-    <value>Custom UO</value>
-  </data>
-  <data name="TSMICOUO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMICOUO.Text" xml:space="preserve">
-    <value>CAPE-OPEN Grundoperation</value>
-  </data>
-  <data name="TSMISolidsSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMISolidsSeparator.Text" xml:space="preserve">
-    <value>Feststoffabscheider</value>
-  </data>
-  <data name="TSMIFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIFilter.Text" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="TSMIFlowsheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 22</value>
-  </data>
-  <data name="TSMIFlowsheet.Text" xml:space="preserve">
-    <value>Fließbild UO</value>
-  </data>
-  <data name="ColunasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="ColunasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Kolonnen</value>
-  </data>
-  <data name="TSMIColShortcut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="TSMIColShortcut.Text" xml:space="preserve">
-    <value>Shortcut-Kolonne</value>
-  </data>
-  <data name="TSMIColDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="TSMIColDist.Text" xml:space="preserve">
-    <value>Destillationskolonne</value>
-  </data>
-  <data name="TSMIColAbs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="TSMIColAbs.Text" xml:space="preserve">
-    <value>Absorptionskolonne</value>
-  </data>
-  <data name="TSMIColAbsReb.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="TSMIColAbsReb.Text" xml:space="preserve">
-    <value>Absorber mit Reboiler</value>
-  </data>
-  <data name="TSMIColAbsCond.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="TSMIColAbsCond.Text" xml:space="preserve">
-    <value>Absorber mit Rücklauf</value>
-  </data>
-  <data name="ReatoresToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="ReatoresToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reaktoren</value>
-  </data>
-  <data name="TSMIReactorConv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="TSMIReactorConv.Text" xml:space="preserve">
-    <value>Reaktor (Umsatz)</value>
-  </data>
-  <data name="TSMIReactorEquilibrium.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="TSMIReactorEquilibrium.Text" xml:space="preserve">
-    <value>Gleichgewichtsreaktor</value>
-  </data>
-  <data name="TSMIReactorGibbs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="TSMIReactorGibbs.Text" xml:space="preserve">
-    <value>Gibbs'scher Reaktor</value>
-  </data>
-  <data name="TSMIReactorCSTR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="TSMIReactorPFR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="OperaçõesLógicasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="OperaçõesLógicasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Logische Operationen</value>
-  </data>
-  <data name="TSMIRecycle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 22</value>
-  </data>
-  <data name="TSMIRecycle.Text" xml:space="preserve">
-    <value>Rückführung (Material)</value>
-  </data>
-  <data name="TSMIEnergyRecycle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 22</value>
-  </data>
-  <data name="TSMIEnergyRecycle.Text" xml:space="preserve">
-    <value>Rückführung (Energie)</value>
-  </data>
-  <data name="TSMIAdjust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 22</value>
-  </data>
-  <data name="TSMIAdjust.Text" xml:space="preserve">
-    <value>Ausrichten</value>
-  </data>
-  <data name="TSMISpecification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 22</value>
-  </data>
-  <data name="TSMISpecification.Text" xml:space="preserve">
-    <value>Spezifikation</value>
+  <data name="RectangleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rechteck</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 20</value>
@@ -655,195 +382,53 @@
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Werkzeuge</value>
   </data>
-  <data name="CaracterizaçãoDePetróleosFraçõesC7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 22</value>
+  <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 22</value>
   </data>
-  <data name="CaracterizaçãoDePetróleosFraçõesC7ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Erdölfraktionscharakterisierung (C7+ mittlere Eigenschaften)</value>
+  <data name="CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Charakterisierung Rohöl (C7+)</value>
   </data>
-  <data name="CaracterizaçãoDePetróleosCurvasDeDestilaçãoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 22</value>
+  <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 22</value>
   </data>
-  <data name="CaracterizaçãoDePetróleosCurvasDeDestilaçãoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Erdölfraktionscharakterisierung (Siedeanalysen)</value>
+  <data name="CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Charakterisierung Rohöl (Destillation)</value>
   </data>
-  <data name="GerenciadorDeAmostrasDePetróleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 22</value>
+  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 22</value>
   </data>
-  <data name="GerenciadorDeAmostrasDePetróleoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Petroleum Assay Manager</value>
+  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ölprobenmanager</value>
   </data>
-  <data name="GerenciadorDeReaçõesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 22</value>
+  <data name="GerenciadorDeReacoesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 22</value>
   </data>
-  <data name="GerenciadorDeReaçõesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="GerenciadorDeReacoesToolStripMenuItem.Text" xml:space="preserve">
     <value>Reaktionsmanager</value>
   </data>
-  <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 6</value>
+  <data name="PropriedadesDasSubstânciasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 22</value>
   </data>
-  <data name="SuplementosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="PropriedadesDasSubstânciasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eigenschaften Reinstoffe</value>
+  </data>
+  <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 6</value>
+  </data>
+  <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
-  <data name="SuplementosToolStripMenuItem.Text" xml:space="preserve">
+  <data name="UtilitiesTSMI.Text" xml:space="preserve">
     <value>&amp;Hilfsmittel</value>
   </data>
-  <data name="PontoCríticoRealToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
+  <data name="TSMIAddUtility.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
   </data>
-  <data name="PontoCríticoRealToolStripMenuItem.Text" xml:space="preserve">
-    <value>Wahrer kritischer Punkt</value>
+  <data name="TSMIAddUtility.Text" xml:space="preserve">
+    <value>Weitere Hilfsmittel</value>
   </data>
-  <data name="HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="HYDVerificaçãoDasCondiçõesDeFormaçãoDeHidratosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hydratdissoziationshilfsmittel</value>
-  </data>
-  <data name="PropriedadesDosComponentesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="PropriedadesDosComponentesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="PropriedadesDosComponentesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eigenschaften reiner Komponenten</value>
-  </data>
-  <data name="AnáliseDePetróleosToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="AnáliseDePetróleosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="AnáliseDePetróleosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Analyse von Erdölfraktionen</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Stabilitätsanalyse</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="DiagramaDePhasesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Phasengleichgewichtskurve</value>
-  </data>
-  <data name="DiagramaBinárioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="DiagramaBinárioToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zweiphasengleichgewichtskurve</value>
-  </data>
-  <data name="LLEDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="LLEDiagramToolStripMenuItem.Text" xml:space="preserve">
-    <value>LLE Diagramm</value>
-  </data>
-  <data name="PropriedadesEspeciaisToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="PropriedadesEspeciaisToolStripMenuItem.Text" xml:space="preserve">
-    <value>Spezielle Eigenschaften</value>
-  </data>
-  <data name="PSVSizingToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="PSVSizingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="PSVSizingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Auslegung von Sicherheitsventilen</value>
-  </data>
-  <data name="FlashVesselSizingToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACk0lEQVQ4T3VTT0s6URQVP4B7P4Lfw00b
-        Qd1EtdEEMalok6Qk9mcISWiRLkqJorKoBA0slMpSUytHU1SKrIV/GBJy5Xbm/u59oGX0E67DzHvn3HPO
-        fU8GAH/W09PTZDabTaTT6QT+Jv/aQzX0UiqVVIVCQYFgOYI77XYbWq0WnJ2ddS4uLuTn5+eKUCik+on5
-        CfYjWHx8fBQymYwymUwKHx8f8P7+DggUIpGIEomEo6MjcX9/3z9E8Pz87KjX6/D19QVvb2+A4N7NzY1U
-        q9WgUqlAOByWENxDZSAIAlxeXsL6+rpjQIBdF9GrRCQEeH19ZUR9Anovl8tABLlcDhYWFqS5ubnFAQHV
-        /f09R5vz+Tw8PDxAPB6HQCAAe3t7pAjQFtzd3bHubreb6+NkyMhj9+bt7W335eUFeJ6Hq6srWF5ezths
-        NrXT6VRvbGxkUqkUI6J1j8fTXVtba66srPAyBIufn59MLnXGIOHw8BBWV1fV/S7b29tqzABwL1NGaihc
-        q9UqynDGYqPRYB5pgTpg4rC5uTkg8Pl86uPjY6aALKBatt9gMIgyHAmPEpu7u7vdYrHISCiHnZ2dzNbW
-        ltrr9TIL5J+sxWIxMJlM3dHR0aZer+cHIaJEDoNkQdETDxKcnJwAzp19w7FCNBpl3ywWy3eI9Hd6eroY
-        DAalarXKwDQuPFgsEyIiRfT9+vqarc3MzEhms/l7jAcHBw6SRycPiQDT7XEcJ1Fo5Ht6elpCUI/WyLvL
-        5QKdTvd9kKiWlpb8s7OzIvoT5ufnlUgiUDdSYDQahbGxMSX6FjQajTgyMjJ8lPuFBKqpqSmF3W6XI2GH
-        JOM9gPHx8Q4SyCcmJhRI8Pdl+l0oexI7JrRabQLl/uc6g+wfcVve9+tNVSkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="FlashVesselSizingToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="FlashVesselSizingToolStripMenuItem.Text" xml:space="preserve">
-    <value>Auslegung von Entgasungsbehältern</value>
-  </data>
-  <data name="PropriedadesDePetróleosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 22</value>
-  </data>
-  <data name="PropriedadesDePetróleosToolStripMenuItem.Text" xml:space="preserve">
-    <value>kalte Fließeigenschaften von Erdölfraktionen</value>
+  <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
+    <value>Liste mit Hilfsmitteln bearbeiten, welche an Flowsheet Objekten verbunden sind</value>
   </data>
   <data name="OtimizaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 20</value>
@@ -851,8 +436,8 @@
   <data name="OtimizaToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Optimierung</value>
   </data>
-  <data name="AnáliseDeSensibilidadeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sensitivitätsanalyse</value>
+  <data name="AnaliseDeSensibilidadeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sensitivitätsstudie</value>
   </data>
   <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
     <value>Mehrvariablenoptimierer</value>
@@ -875,11 +460,11 @@
   <data name="ResultadosToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Ergebnisse</value>
   </data>
-  <data name="GerarRelatórioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+  <data name="GerarRelatorioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 22</value>
   </data>
-  <data name="GerarRelatórioToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bericht erstellen</value>
+  <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
+    <value>Berichte</value>
   </data>
   <data name="ExibirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
@@ -914,12 +499,6 @@
   <data name="ToolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
   </data>
-  <data name="showsimulationtoolstripmenuitem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 22</value>
-  </data>
-  <data name="showsimulationtoolstripmenuitem.Text" xml:space="preserve">
-    <value>Toolbar Simulation</value>
-  </data>
   <data name="showflowsheettoolstripmenuitem.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
   </data>
@@ -941,12 +520,24 @@
   <data name="RestoreLayoutTSMI.Text" xml:space="preserve">
     <value>Panellayout wieder herstellen</value>
   </data>
+  <data name="tsmiCloseOpenedEditors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
+    <value>Offene Editoren schliessen</value>
+  </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>This.toolStripMenuItem3</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dckPanel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
+  </data>
+  <data name="QuestionBox_Button2.Text" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="QuestionBox_Button1.Text" xml:space="preserve">
+    <value>Ja</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

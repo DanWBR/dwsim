@@ -222,7 +222,7 @@ Partial Class FormWelcome
         'Button5
         '
         resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.BackgroundImage = Global.DWSIM.My.Resources.Resources.Lab_icon
+        Me.Button5.BackgroundImage = Global.DWSIM.My.Resources.Resources.accessories_text_editor
         Me.Button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
         Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -232,7 +232,7 @@ Partial Class FormWelcome
         'Button3
         '
         resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.BackgroundImage = Global.DWSIM.My.Resources.Resources.accessories_text_editor
+        Me.Button3.BackgroundImage = Global.DWSIM.My.Resources.Resources.Lab_icon
         Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
         Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))

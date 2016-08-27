@@ -118,11 +118,92 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="NewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="NewToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Neue stationäre Simulation</value>
+  </data>
+  <data name="NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Neue Komponente</value>
+  </data>
+  <data name="NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Neue Datenregression</value>
+  </data>
+  <data name="NovoRegressaoUNIFACIPs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="NovoRegressaoUNIFACIPs.Text" xml:space="preserve">
+    <value>Neue Regression von UNIFAC IPs</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Simulation ö&amp;ffnen</value>
+  </data>
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Beispiele öffnen</value>
+  </data>
+  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="SaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="SaveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Aktive Simulation &amp;speichern</value>
+  </data>
+  <data name="SaveAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="SaveAllToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alle speichern</value>
+  </data>
+  <data name="SaveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="SaveAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Speichern &amp;unter...</value>
+  </data>
+  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="CloseAllToolstripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="CloseAllToolstripMenuItem.Text" xml:space="preserve">
+    <value>Alle offenen Simulationen schließen</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>DWSIM &amp;beenden</value>
+  </data>
   <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
   <data name="FileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Datei</value>
+  </data>
+  <data name="PreferenciasDoDWSIMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="PreferenciasDoDWSIMToolStripMenuItem.Text" xml:space="preserve">
+    <value>Allgemeine Einstellungen</value>
   </data>
   <data name="VerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 20</value>
@@ -130,11 +211,41 @@
   <data name="VerToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;dit</value>
   </data>
+  <data name="DatabaseManagerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 22</value>
+  </data>
+  <data name="DatabaseManagerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Datenbank Manager</value>
+  </data>
+  <data name="RegistroCAPEOPENToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 22</value>
+  </data>
+  <data name="RegistroCAPEOPENToolStripMenuItem.Text" xml:space="preserve">
+    <value>Registriere Komponenten für CAPE-OPEN</value>
+  </data>
   <data name="FerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 20</value>
   </data>
   <data name="FerramentasToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Werkzeuge</value>
+  </data>
+  <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="CascadeToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Kaskadieren</value>
+  </data>
+  <data name="TileVerticalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="TileVerticalToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Horizontal</value>
+  </data>
+  <data name="TileHorizontalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="TileHorizontalToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Vertikal</value>
   </data>
   <data name="WindowsMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
@@ -142,119 +253,17 @@
   <data name="WindowsMenu.Text" xml:space="preserve">
     <value>&amp;Fenster</value>
   </data>
+  <data name="MostrarBarraDeFerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="MostrarBarraDeFerramentasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Zeige Tooltips</value>
+  </data>
   <data name="VerToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 20</value>
   </data>
   <data name="VerToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Zeigen</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hilfe</value>
-  </data>
-  <data name="NewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="NewToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Neue stationäre Simulation</value>
-  </data>
-  <data name="NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="NovoEstudoDoCriadorDeComponentesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Neue Komponente</value>
-  </data>
-  <data name="NovoEstudoDeRegressaoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="NovoRegressaoUNIFACIPs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="NovoRegressaoUNIFACIPs.Text" xml:space="preserve">
-    <value>Neue Regression von UNIFAC IPs</value>
-  </data>
-  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Simulation ö&amp;ffnen</value>
-  </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Beispiele öffnen</value>
-  </data>
-  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 6</value>
-  </data>
-  <data name="SaveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="SaveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Aktive Simulation &amp;speichern</value>
-  </data>
-  <data name="SaveAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="SaveAllToolStripMenuItem.Text" xml:space="preserve">
-    <value>Alle speichern</value>
-  </data>
-  <data name="SaveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="SaveAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Speichern &amp;unter...</value>
-  </data>
-  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 6</value>
-  </data>
-  <data name="CloseAllToolstripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="CloseAllToolstripMenuItem.Text" xml:space="preserve">
-    <value>Alle offenen Simulationen schließen</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 6</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 22</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>DWSIM &amp;beenden</value>
-  </data>
-  <data name="DatabaseManagerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
-  </data>
-  <data name="DatabaseManagerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Datenbank Manager</value>
-  </data>
-  <data name="CascadeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 22</value>
-  </data>
-  <data name="CascadeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Über&amp;lappend</value>
-  </data>
-  <data name="TileVerticalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 22</value>
-  </data>
-  <data name="TileVerticalToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Horizontal</value>
-  </data>
-  <data name="TileHorizontalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 22</value>
-  </data>
-  <data name="TileHorizontalToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Vertikal</value>
-  </data>
-  <data name="MostrarBarraDeFerramentasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="MostrarBarraDeFerramentasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zeige Tooltips</value>
   </data>
   <data name="ContentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
@@ -262,17 +271,32 @@
   <data name="ContentsToolStripMenuItem.Text" xml:space="preserve">
     <value>Hilfe &amp;anzeigen</value>
   </data>
+  <data name="ManualTecnicoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
+  </data>
+  <data name="ManualTecnicoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Technisches Handbuch (PDF)</value>
+  </data>
+  <data name="GuiaDoUsuarioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
+  </data>
+  <data name="GuiaDoUsuarioToolStripMenuItem.Text" xml:space="preserve">
+    <value>Benutzerhandbuch (PDF)</value>
+  </data>
+  <data name="GuiaDoUsuarioHTMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
+  </data>
+  <data name="GuiaDoUsuarioHTMLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Benutzerhandbuch (HTML)</value>
+  </data>
   <data name="DocumentacaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
+  <data name="DocumentacaoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dokumentation</value>
+  </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 6</value>
-  </data>
-  <data name="DWSIMNaInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
-    <value>DWSIM im Netz</value>
   </data>
   <data name="DownloadsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -296,7 +320,7 @@
 </value>
   </data>
   <data name="DownloadsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 22</value>
+    <value>351, 22</value>
   </data>
   <data name="WikiToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -320,10 +344,13 @@
 </value>
   </data>
   <data name="WikiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 22</value>
+    <value>351, 22</value>
   </data>
   <data name="ForumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 22</value>
+    <value>351, 22</value>
+  </data>
+  <data name="ForumToolStripMenuItem.Text" xml:space="preserve">
+    <value>Disukussionsforen</value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -347,28 +374,16 @@
 </value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 22</value>
+    <value>351, 22</value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Text" xml:space="preserve">
     <value>Bug Tracking / Feature und Unterstützung anfordern</value>
   </data>
-  <data name="RegistroToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="DWSIMNaInternetToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="RegistroToolStripMenuItem.Text" xml:space="preserve">
-    <value>Registry</value>
-  </data>
-  <data name="RegistrarTiposCOMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
-  </data>
-  <data name="RegistrarTiposCOMToolStripMenuItem.Text" xml:space="preserve">
-    <value>Register types for COM Interop</value>
-  </data>
-  <data name="DeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
-  </data>
-  <data name="DeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Unregister types</value>
+  <data name="DWSIMNaInternetToolStripMenuItem.Text" xml:space="preserve">
+    <value>DWSIM im Netz</value>
   </data>
   <data name="DonateToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
@@ -381,6 +396,12 @@
   </data>
   <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Über DWSIM...</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hilfe</value>
   </data>
   <data name="NewToolStripButton.Text" xml:space="preserve">
     <value>Neue stationäre Simulation</value>
@@ -401,7 +422,7 @@
     <value>Allgemeine Einstellungen</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
-    <value>Fenster überlappen</value>
+    <value>Fenster kaskadieren</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Fenster horizontal anordnen</value>
@@ -410,13 +431,16 @@
     <value>Fenster vertikal anordnen</value>
   </data>
   <data name="ToolStripButton6.Text" xml:space="preserve">
-    <value>Show Context-Sensitive Help</value>
+    <value>Kontextsensitive Hilfe anzeigen</value>
   </data>
   <data name="ToolStripButton7.Text" xml:space="preserve">
     <value>Spenden</value>
   </data>
   <data name="ToolStripButton8.Text" xml:space="preserve">
     <value>Über DWSIM</value>
+  </data>
+  <data name="tsbRegCO.Text" xml:space="preserve">
+    <value>Registriere Komponenten für CAPE-OPEN</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>Steady-state Simulation (XML) (*.dwxml)|*.dwxml|Steady-state Simulation (Komprimiertes XML) (*.dwxmz)|*.dwxmz|Compound Creator Studie (*.dwcsd)|*.dwcsd|Daten Regression Studie (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Studie (*.dwruf)|*.dwruf|Alle DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf</value>
@@ -429,6 +453,15 @@
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Aktive Simularion speichern</value>
+  </data>
+  <data name="ErrorBox_Button1.Text" xml:space="preserve">
+    <value>Details anzeigen...</value>
+  </data>
+  <data name="UpdateBox_Button2.Text" xml:space="preserve">
+    <value>Neustart</value>
+  </data>
+  <data name="UpdateBox_Button1.Text" xml:space="preserve">
+    <value>Abbruch</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -568,11 +601,5 @@
   </data>
   <data name="SaveUnifacIPRegrDlg.Title" xml:space="preserve">
     <value>Speichere Regression</value>
-  </data>
-  <data name="UpdateBox_Button2.Text" xml:space="preserve">
-    <value>Restart</value>
-  </data>
-  <data name="UpdateBox_Button1.Text" xml:space="preserve">
-    <value>Cancel</value>
   </data>
 </root>

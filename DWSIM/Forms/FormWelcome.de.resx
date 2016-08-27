@@ -117,28 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Fenster schließen</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 13</value>
+    <value>236, 13</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
-    <value>Verwaltung eigener Komponenten (Reinstoffe)</value>
+    <value>Regression von Gleichgewichtsdaten (VLE/LLE)</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 17</value>
+    <value>169, 17</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
-    <value>Eigene Komponenten</value>
+    <value>Regression von Daten</value>
   </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAWQBAAFkAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAXwBAAF8AQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -222,16 +219,16 @@
     <value>Beispiele</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 13</value>
+    <value>215, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Regression von Gleichgewichtsdaten (VLE/LLE)</value>
+    <value>Definition eigener Komponenten (Reinstoffe)</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 17</value>
+    <value>162, 17</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
-    <value>Regression von Daten</value>
+    <value>Eigene Komponenten</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 13</value>
@@ -272,11 +269,14 @@
   <data name="LabelWithDivider12.Text" xml:space="preserve">
     <value>Unterstützen des Projekts</value>
   </data>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 63</value>
+  </data>
   <data name="Label15.Text" xml:space="preserve">
-    <value>DWSIM ist eine Open-Source-Software und wird dies immer bleiben. Allerdings gibt es Kosten für Entwicklung (Kauf der Bücher und Fachartikel) und Wartung (Web-Server, Hardware), die erforderlich sind, um das Projekt am Leben zu halten und wachsen zu lassen. Wenn DWSIM in irgendeiner Weise für Sie nützlich war, erwägen Sie bitte eine Spende via PayPal. Jeder Betrag wird sehr willkommen sein.</value>
+    <value>DWSIM ist eine Open-Source-Software und wird dies immer bleiben. Wenn DWSIM in irgendeiner Weise für Sie nützlich war, erwägen Sie bitte eine Spende via PayPal. Jeder Betrag wird sehr willkommen sein.</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 237</value>
+    <value>58, 268</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 19</value>
@@ -291,10 +291,19 @@
     <value>Neueste Dateien</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 19</value>
+    <value>122, 19</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
-    <value>Letzte Ordnern</value>
+    <value>Letzte Ordner</value>
+  </data>
+  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>635, 500</value>
+  </data>
+  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="Button7.Text" xml:space="preserve">
+    <value>Fenster schließen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Willkommen bei DWSIM</value>
