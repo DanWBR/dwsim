@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Cerrar Ventana</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 13</value>
@@ -138,7 +135,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAVwBAAFcAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAWQBAAFkAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -292,6 +289,15 @@
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Archivos Recentes</value>
+  </data>
+  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>645, 500</value>
+  </data>
+  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 23</value>
+  </data>
+  <data name="Button7.Text" xml:space="preserve">
+    <value>Cerrar Ventana</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Bienvenido a DWSIM</value>

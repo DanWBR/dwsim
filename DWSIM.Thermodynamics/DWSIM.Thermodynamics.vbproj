@@ -344,6 +344,9 @@
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.de.resx">
+      <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
@@ -433,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigUNIQUAC.resx">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.de.resx">
+      <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.en.resx">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
