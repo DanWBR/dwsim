@@ -32,7 +32,7 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "170D6E8A-8880-4bf9-B7A0-E4A3FDBFD589"
 
-        Protected m_iapws97 As New IAPWS_IF97
+        Friend m_iapws97 As New IAPWS_IF97
         'Protected m_steam67 As New STEAM67
 
         Public Sub New(ByVal comode As Boolean)
@@ -51,6 +51,13 @@ Namespace PropertyPackages
             MyBase.AddDefaultCompounds(New String() {"Water"})
 
         End Sub
+
+        Public Overrides ReadOnly Property FlashBase() As Auxiliary.FlashAlgorithms.FlashAlgorithm
+            Get
+                FlashAlgorithm = New Auxiliary.FlashAlgorithms.SteamTables
+                Return FlashAlgorithm
+            End Get
+        End Property
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
@@ -146,7 +153,7 @@ Namespace PropertyPackages
                                 Else
                                     LoopVarF = H
                                     LoopVarX = T
-                                    P = brentsolverP.BrentOpt(0.001, 600, 20, 0.0001, 1000, Nothing)
+                                    P = brentsolverP.BrentOpt(0.001, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
                                 P = P * 100000
 
@@ -176,7 +183,7 @@ Namespace PropertyPackages
                                 Else
                                     LoopVarF = H
                                     LoopVarX = T
-                                    P = brentsolverP.BrentOpt(0.001, 1000, 20, 0.0001, 1000, Nothing)
+                                    P = brentsolverP.BrentOpt(0.001, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
                                 P = P * 100000
 
@@ -227,7 +234,7 @@ Namespace PropertyPackages
                                 Else
                                     LoopVarF = H
                                     LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 2000, 20, 0.0001, 1000, Nothing)
+                                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
 
                             End With
@@ -256,7 +263,7 @@ Namespace PropertyPackages
                                 Else
                                     LoopVarF = H
                                     LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 2000, 20, 0.0001, 1000, Nothing)
+                                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
 
                             End With
@@ -442,7 +449,7 @@ FINAL:
                                 Else
                                     LoopVarF = H
                                     LoopVarX = T
-                                    P = brentsolverP.BrentOpt(0.001, 600, 20, 0.0001, 1000, Nothing)
+                                    P = brentsolverP.BrentOpt(0.001, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
                                 P = P * 100000
 
@@ -473,7 +480,7 @@ FINAL:
                                 Else
                                     LoopVarF = H
                                     LoopVarX = T
-                                    P = brentsolverP.BrentOpt(0.001, 1000, 20, 0.0001, 1000, Nothing)
+                                    P = brentsolverP.BrentOpt(0.001, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
                                 P = P * 100000
 
@@ -526,7 +533,7 @@ FINAL:
                                 Else
                                     LoopVarF = H
                                     LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 623.15, 20, 0.0001, 1000, Nothing)
+                                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
 
                             End With
@@ -554,9 +561,9 @@ FINAL:
                                 If vf <> 0 And vf <> 1 Then
                                     T = .tSatW(P / 100000)
                                 Else
-                                    LoopVarF = H
+                                    LoopVarF = S
                                     LoopVarX = P / 100000
-                                    T = brentsolverT.BrentOpt(273.15, 623.15, 20, 0.0001, 1000, Nothing)
+                                    T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
                                 End If
 
                             End With
@@ -952,7 +959,14 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-            Return Me.m_iapws97.enthalpyW(T, P / 100000)
+            Select Case st
+                Case State.Liquid
+                    Return Me.m_iapws97.enthalpySatLiqPW(P / 100000)
+                Case State.Vapor
+                    Return Me.m_iapws97.enthalpySatVapPW(P / 100000)
+                Case Else
+                    Return Me.m_iapws97.enthalpyW(T, P / 100000)
+            End Select
         End Function
 
         Public Overrides Function DW_CalcKvalue(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double) As Double()
@@ -987,8 +1001,8 @@ FINAL:
 
         End Sub
 
-        Dim LoopVarF As Double = 0
-        Dim LoopVarX As Double = 0
+        Friend LoopVarF As Double = 0
+        Friend LoopVarX As Double = 0
 
         Public Function EnthalpyTx(ByVal x As Double, ByVal otherargs As Object) As Double
 
@@ -1004,7 +1018,14 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-            Return Me.m_iapws97.entropyW(T, P / 100000)
+            Select Case st
+                Case State.Liquid
+                    Return Me.m_iapws97.entropySatLiqPW(P / 100000)
+                Case State.Vapor
+                    Return Me.m_iapws97.entropySatVapPW(P / 100000)
+                Case Else
+                    Return Me.m_iapws97.entropyW(T, P / 100000)
+            End Select
         End Function
 
         Public Overrides Function DW_CalcEntropyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double

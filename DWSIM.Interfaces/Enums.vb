@@ -175,6 +175,7 @@
         SeaWater = 13
         SourWater = 14
         CAPE_OPEN_Equilibrium_Server = 15
+        SteamTables = 16
     End Enum
 
     Public Enum FlashSetting
