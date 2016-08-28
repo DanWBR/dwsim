@@ -25,20 +25,6 @@ Partial Class EditingForm_Mixer
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Mixer))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet6 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet5 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet4 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet3 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet2 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnect6 = New System.Windows.Forms.Button()
-        Me.btnDisconnect5 = New System.Windows.Forms.Button()
-        Me.btnDisconnect4 = New System.Windows.Forms.Button()
-        Me.btnDisconnect3 = New System.Windows.Forms.Button()
-        Me.btnDisconnect2 = New System.Windows.Forms.Button()
-        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -59,14 +45,11 @@ Partial Class EditingForm_Mixer
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
-        Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -74,6 +57,23 @@ Partial Class EditingForm_Mixer
         Me.lblConnectedTo = New System.Windows.Forms.Label()
         Me.lblTag = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
+        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
+        Me.btnConfigurePP = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet6 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet5 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet4 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet3 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet2 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnect6 = New System.Windows.Forms.Button()
+        Me.btnDisconnect5 = New System.Windows.Forms.Button()
+        Me.btnDisconnect4 = New System.Windows.Forms.Button()
+        Me.btnDisconnect3 = New System.Windows.Forms.Button()
+        Me.btnDisconnect2 = New System.Windows.Forms.Button()
+        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
@@ -115,118 +115,6 @@ Partial Class EditingForm_Mixer
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
-        '
-        'btnCreateAndConnectOutlet1
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
-        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
-        Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet6
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet6, "btnCreateAndConnectInlet6")
-        Me.btnCreateAndConnectInlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet6.Name = "btnCreateAndConnectInlet6"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip"))
-        Me.btnCreateAndConnectInlet6.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet5
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet5, "btnCreateAndConnectInlet5")
-        Me.btnCreateAndConnectInlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet5.Name = "btnCreateAndConnectInlet5"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip"))
-        Me.btnCreateAndConnectInlet5.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet4
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet4, "btnCreateAndConnectInlet4")
-        Me.btnCreateAndConnectInlet4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet4.Name = "btnCreateAndConnectInlet4"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip"))
-        Me.btnCreateAndConnectInlet4.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet3
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet3, "btnCreateAndConnectInlet3")
-        Me.btnCreateAndConnectInlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet3.Name = "btnCreateAndConnectInlet3"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip"))
-        Me.btnCreateAndConnectInlet3.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet2
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet2, "btnCreateAndConnectInlet2")
-        Me.btnCreateAndConnectInlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet2.Name = "btnCreateAndConnectInlet2"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip"))
-        Me.btnCreateAndConnectInlet2.UseVisualStyleBackColor = True
-        '
-        'btnCreateAndConnectInlet1
-        '
-        resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
-        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
-        Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
-        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
-        Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
-        '
-        'btnDisconnectOutlet1
-        '
-        resources.ApplyResources(Me.btnDisconnectOutlet1, "btnDisconnectOutlet1")
-        Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
-        Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect6
-        '
-        resources.ApplyResources(Me.btnDisconnect6, "btnDisconnect6")
-        Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect6.Name = "btnDisconnect6"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip"))
-        Me.btnDisconnect6.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect5
-        '
-        resources.ApplyResources(Me.btnDisconnect5, "btnDisconnect5")
-        Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect5.Name = "btnDisconnect5"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip"))
-        Me.btnDisconnect5.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect4
-        '
-        resources.ApplyResources(Me.btnDisconnect4, "btnDisconnect4")
-        Me.btnDisconnect4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect4.Name = "btnDisconnect4"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip"))
-        Me.btnDisconnect4.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect3
-        '
-        resources.ApplyResources(Me.btnDisconnect3, "btnDisconnect3")
-        Me.btnDisconnect3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect3.Name = "btnDisconnect3"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip"))
-        Me.btnDisconnect3.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect2
-        '
-        resources.ApplyResources(Me.btnDisconnect2, "btnDisconnect2")
-        Me.btnDisconnect2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect2.Name = "btnDisconnect2"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip"))
-        Me.btnDisconnect2.UseVisualStyleBackColor = True
-        '
-        'btnDisconnect1
-        '
-        resources.ApplyResources(Me.btnDisconnect1, "btnDisconnect1")
-        Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
-        Me.btnDisconnect1.Name = "btnDisconnect1"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
-        Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'Label7
         '
@@ -381,22 +269,6 @@ Partial Class EditingForm_Mixer
         Me.GroupBox3.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
-        'btnConfigureFlashAlg
-        '
-        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
-        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
-        '
-        'btnConfigurePP
-        '
-        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
-        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.btnConfigurePP.UseVisualStyleBackColor = True
-        '
         'cbFlashAlg
         '
         resources.ApplyResources(Me.cbFlashAlg, "cbFlashAlg")
@@ -424,14 +296,6 @@ Partial Class EditingForm_Mixer
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
         Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
-        '
-        'chkActive
-        '
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
-        Me.chkActive.Name = "chkActive"
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.chkActive.UseVisualStyleBackColor = True
         '
         'Label11
         '
@@ -482,6 +346,142 @@ Partial Class EditingForm_Mixer
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        '
+        'chkActive
+        '
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.chkActive.UseVisualStyleBackColor = True
+        '
+        'btnConfigureFlashAlg
+        '
+        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
+        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        '
+        'btnConfigurePP
+        '
+        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
+        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigurePP.Name = "btnConfigurePP"
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.btnConfigurePP.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectOutlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
+        Me.btnCreateAndConnectOutlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectOutlet1.Name = "btnCreateAndConnectOutlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectOutlet1, resources.GetString("btnCreateAndConnectOutlet1.ToolTip"))
+        Me.btnCreateAndConnectOutlet1.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet6
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet6, "btnCreateAndConnectInlet6")
+        Me.btnCreateAndConnectInlet6.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet6.Name = "btnCreateAndConnectInlet6"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet6, resources.GetString("btnCreateAndConnectInlet6.ToolTip"))
+        Me.btnCreateAndConnectInlet6.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet5
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet5, "btnCreateAndConnectInlet5")
+        Me.btnCreateAndConnectInlet5.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet5.Name = "btnCreateAndConnectInlet5"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet5, resources.GetString("btnCreateAndConnectInlet5.ToolTip"))
+        Me.btnCreateAndConnectInlet5.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet4
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet4, "btnCreateAndConnectInlet4")
+        Me.btnCreateAndConnectInlet4.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet4.Name = "btnCreateAndConnectInlet4"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet4, resources.GetString("btnCreateAndConnectInlet4.ToolTip"))
+        Me.btnCreateAndConnectInlet4.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet3
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet3, "btnCreateAndConnectInlet3")
+        Me.btnCreateAndConnectInlet3.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet3.Name = "btnCreateAndConnectInlet3"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet3, resources.GetString("btnCreateAndConnectInlet3.ToolTip"))
+        Me.btnCreateAndConnectInlet3.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet2
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet2, "btnCreateAndConnectInlet2")
+        Me.btnCreateAndConnectInlet2.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet2.Name = "btnCreateAndConnectInlet2"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet2, resources.GetString("btnCreateAndConnectInlet2.ToolTip"))
+        Me.btnCreateAndConnectInlet2.UseVisualStyleBackColor = True
+        '
+        'btnCreateAndConnectInlet1
+        '
+        resources.ApplyResources(Me.btnCreateAndConnectInlet1, "btnCreateAndConnectInlet1")
+        Me.btnCreateAndConnectInlet1.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_lightning
+        Me.btnCreateAndConnectInlet1.Name = "btnCreateAndConnectInlet1"
+        Me.ToolTip1.SetToolTip(Me.btnCreateAndConnectInlet1, resources.GetString("btnCreateAndConnectInlet1.ToolTip"))
+        Me.btnCreateAndConnectInlet1.UseVisualStyleBackColor = True
+        '
+        'btnDisconnectOutlet1
+        '
+        resources.ApplyResources(Me.btnDisconnectOutlet1, "btnDisconnectOutlet1")
+        Me.btnDisconnectOutlet1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnectOutlet1.Name = "btnDisconnectOutlet1"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet1, resources.GetString("btnDisconnectOutlet1.ToolTip"))
+        Me.btnDisconnectOutlet1.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect6
+        '
+        resources.ApplyResources(Me.btnDisconnect6, "btnDisconnect6")
+        Me.btnDisconnect6.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect6.Name = "btnDisconnect6"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect6, resources.GetString("btnDisconnect6.ToolTip"))
+        Me.btnDisconnect6.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect5
+        '
+        resources.ApplyResources(Me.btnDisconnect5, "btnDisconnect5")
+        Me.btnDisconnect5.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect5.Name = "btnDisconnect5"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect5, resources.GetString("btnDisconnect5.ToolTip"))
+        Me.btnDisconnect5.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect4
+        '
+        resources.ApplyResources(Me.btnDisconnect4, "btnDisconnect4")
+        Me.btnDisconnect4.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect4.Name = "btnDisconnect4"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect4, resources.GetString("btnDisconnect4.ToolTip"))
+        Me.btnDisconnect4.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect3
+        '
+        resources.ApplyResources(Me.btnDisconnect3, "btnDisconnect3")
+        Me.btnDisconnect3.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect3.Name = "btnDisconnect3"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect3, resources.GetString("btnDisconnect3.ToolTip"))
+        Me.btnDisconnect3.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect2
+        '
+        resources.ApplyResources(Me.btnDisconnect2, "btnDisconnect2")
+        Me.btnDisconnect2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect2.Name = "btnDisconnect2"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect2, resources.GetString("btnDisconnect2.ToolTip"))
+        Me.btnDisconnect2.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect1
+        '
+        resources.ApplyResources(Me.btnDisconnect1, "btnDisconnect1")
+        Me.btnDisconnect1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        Me.btnDisconnect1.Name = "btnDisconnect1"
+        Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
+        Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
         'EditingForm_Mixer
         '

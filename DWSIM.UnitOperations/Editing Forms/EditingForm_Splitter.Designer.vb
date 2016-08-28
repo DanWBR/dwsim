@@ -26,7 +26,6 @@ Partial Class EditingForm_Splitter
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Splitter))
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
-        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.lblConnectedTo = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -50,23 +49,24 @@ Partial Class EditingForm_Splitter
         Me.cbCalcMode = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnCreateAndConnectOutlet3 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet3 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cbOutlet3 = New System.Windows.Forms.ComboBox()
-        Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbOutlet2 = New System.Windows.Forms.ComboBox()
-        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbOutlet1 = New System.Windows.Forms.ComboBox()
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnCreateAndConnectOutlet3 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet3 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet2 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnect1 = New System.Windows.Forms.Button()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -94,14 +94,6 @@ Partial Class EditingForm_Splitter
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
         Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
-        '
-        'chkActive
-        '
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
-        Me.chkActive.Name = "chkActive"
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
         '
@@ -292,6 +284,62 @@ Partial Class EditingForm_Splitter
         Me.GroupBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
+        'Label6
+        '
+        resources.ApplyResources(Me.Label6, "Label6")
+        Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        '
+        'cbOutlet3
+        '
+        resources.ApplyResources(Me.cbOutlet3, "cbOutlet3")
+        Me.cbOutlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet3.FormattingEnabled = True
+        Me.cbOutlet3.Name = "cbOutlet3"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        '
+        'cbOutlet2
+        '
+        resources.ApplyResources(Me.cbOutlet2, "cbOutlet2")
+        Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet2.FormattingEnabled = True
+        Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
+        '
+        'Label7
+        '
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
+        '
+        'cbOutlet1
+        '
+        resources.ApplyResources(Me.cbOutlet1, "cbOutlet1")
+        Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet1.FormattingEnabled = True
+        Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
+        '
+        'cbInlet1
+        '
+        resources.ApplyResources(Me.cbInlet1, "cbInlet1")
+        Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInlet1.FormattingEnabled = True
+        Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        '
         'btnCreateAndConnectOutlet3
         '
         resources.ApplyResources(Me.btnCreateAndConnectOutlet3, "btnCreateAndConnectOutlet3")
@@ -332,20 +380,6 @@ Partial Class EditingForm_Splitter
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet3, resources.GetString("btnDisconnectOutlet3.ToolTip"))
         Me.btnDisconnectOutlet3.UseVisualStyleBackColor = True
         '
-        'Label6
-        '
-        resources.ApplyResources(Me.Label6, "Label6")
-        Me.Label6.Name = "Label6"
-        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
-        '
-        'cbOutlet3
-        '
-        resources.ApplyResources(Me.cbOutlet3, "cbOutlet3")
-        Me.cbOutlet3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet3.FormattingEnabled = True
-        Me.cbOutlet3.Name = "cbOutlet3"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet3, resources.GetString("cbOutlet3.ToolTip"))
-        '
         'btnDisconnectOutlet2
         '
         resources.ApplyResources(Me.btnDisconnectOutlet2, "btnDisconnectOutlet2")
@@ -353,20 +387,6 @@ Partial Class EditingForm_Splitter
         Me.btnDisconnectOutlet2.Name = "btnDisconnectOutlet2"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectOutlet2, resources.GetString("btnDisconnectOutlet2.ToolTip"))
         Me.btnDisconnectOutlet2.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
-        '
-        'cbOutlet2
-        '
-        resources.ApplyResources(Me.cbOutlet2, "cbOutlet2")
-        Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet2.FormattingEnabled = True
-        Me.cbOutlet2.Name = "cbOutlet2"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'btnDisconnectOutlet1
         '
@@ -384,33 +404,13 @@ Partial Class EditingForm_Splitter
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
-        'Label7
+        'chkActive
         '
-        resources.ApplyResources(Me.Label7, "Label7")
-        Me.Label7.Name = "Label7"
-        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
-        '
-        'cbOutlet1
-        '
-        resources.ApplyResources(Me.cbOutlet1, "cbOutlet1")
-        Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet1.FormattingEnabled = True
-        Me.cbOutlet1.Name = "cbOutlet1"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
-        '
-        'cbInlet1
-        '
-        resources.ApplyResources(Me.cbInlet1, "cbInlet1")
-        Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbInlet1.FormattingEnabled = True
-        Me.cbInlet1.Name = "cbInlet1"
-        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
-        '
-        'Label19
-        '
-        resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Name = "Label19"
-        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.chkActive.UseVisualStyleBackColor = True
         '
         'EditingForm_Splitter
         '
