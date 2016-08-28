@@ -522,6 +522,12 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.de.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.de.resx">
+      <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Pump.de.resx">
+      <DependentUpon>EditingForm_Pump.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.en.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </EmbeddedResource>
