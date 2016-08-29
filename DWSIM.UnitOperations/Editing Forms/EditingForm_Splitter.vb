@@ -424,7 +424,14 @@ Public Class EditingForm_Splitter
     End Sub
 
     Private Sub TrackBar2_Scroll(sender As Object, e As EventArgs) Handles TrackBar2.Scroll
-        If Loaded Then SimObject.Ratios(1) = TrackBar2.Value / 100
+        If Loaded Then
+            SimObject.Ratios(1) = TrackBar2.Value / 100
+            If Not SimObject.GraphicObject.OutputConnectors(2).IsAttached Then
+                TrackBar1.Value = 100 - TrackBar2.Value
+                SimObject.Ratios(0) = TrackBar1.Value / 100
+                lblRatio1.Text = Convert.ToDouble(TrackBar1.Value / 100).ToString("N2")
+            End If
+        End If
         lblRatio2.Text = Convert.ToDouble(TrackBar2.Value / 100).ToString("N2")
     End Sub
 
