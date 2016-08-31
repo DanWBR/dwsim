@@ -129,7 +129,7 @@
     <value>133, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 20</value>
+    <value>206, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 43</value>
+    <value>318, 43</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -343,7 +343,7 @@
     <value>6, 6</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 98</value>
+    <value>345, 98</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -370,7 +370,7 @@
     <value>148, 249</value>
   </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 21</value>
+    <value>146, 21</value>
   </data>
   <data name="cbFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -424,7 +424,7 @@
     <value>148, 222</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 21</value>
+    <value>146, 21</value>
   </data>
   <data name="cbPropPack.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -484,13 +484,16 @@
     <value>8, 125</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 13</value>
+    <value>135, 13</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Tolerância para Loop de Temperatura</value>
+    <value>Tolerância de Temperatura</value>
+  </data>
+  <data name="Label4.ToolTip" xml:space="preserve">
+    <value>Toleranz in Berechnungsschleife der Temperatur</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -508,10 +511,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tbTtol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 122</value>
+    <value>148, 122</value>
   </data>
   <data name="tbTtol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="tbTtol.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -544,7 +547,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbTtol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 121</value>
+    <value>252, 121</value>
   </data>
   <data name="cbTtol.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 21</value>
@@ -574,13 +577,16 @@
     <value>8, 151</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 13</value>
+    <value>113, 13</value>
   </data>
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Tolerância para Loop de Pressão</value>
+    <value>Tolerância de Pressão</value>
+  </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value>Toleranz in Berechnungsschleife des Drucks</value>
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
@@ -607,7 +613,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbPtol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 147</value>
+    <value>252, 147</value>
   </data>
   <data name="cbPtol.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 21</value>
@@ -631,10 +637,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tbPtol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 148</value>
+    <value>148, 148</value>
   </data>
   <data name="tbPtol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="tbPtol.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -664,7 +670,7 @@
     <value>NoControl</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 94</value>
+    <value>300, 94</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -697,7 +703,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 249</value>
+    <value>300, 249</value>
   </data>
   <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -760,7 +766,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 222</value>
+    <value>300, 222</value>
   </data>
   <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -796,10 +802,10 @@
     <value>Petalas &amp; Aziz</value>
   </data>
   <data name="cbPDropModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 94</value>
+    <value>148, 94</value>
   </data>
   <data name="cbPDropModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 21</value>
+    <value>146, 21</value>
   </data>
   <data name="cbPDropModel.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -862,7 +868,7 @@
     <value>148, 14</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 21</value>
+    <value>173, 21</value>
   </data>
   <data name="cbCalcMode.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -913,10 +919,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tbOutletTemperature.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 42</value>
+    <value>148, 42</value>
   </data>
   <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="tbOutletTemperature.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -949,7 +955,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 41</value>
+    <value>252, 41</value>
   </data>
   <data name="cbTemp.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 21</value>
@@ -979,13 +985,13 @@
     <value>8, 97</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 13</value>
+    <value>94, 13</value>
   </data>
   <data name="Label6.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
-    <value>Modelo para cálculo da Perda de Carga</value>
+    <value>Modelo de cálculo</value>
   </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
@@ -1042,7 +1048,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 67</value>
+    <value>252, 67</value>
   </data>
   <data name="cbPressure.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 21</value>
@@ -1066,10 +1072,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tbOutletPressure.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 68</value>
+    <value>148, 68</value>
   </data>
   <data name="tbOutletPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="tbOutletPressure.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1096,7 +1102,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 286</value>
+    <value>331, 286</value>
   </data>
   <data name="TabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1123,7 +1129,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 286</value>
+    <value>331, 286</value>
   </data>
   <data name="TabPage5.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1147,7 +1153,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 286</value>
+    <value>331, 286</value>
   </data>
   <data name="TabPage6.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1174,7 +1180,7 @@
     <value>3, 16</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 312</value>
+    <value>339, 312</value>
   </data>
   <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1195,7 +1201,7 @@
     <value>6, 219</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 331</value>
+    <value>345, 331</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1228,7 +1234,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 77</value>
+    <value>291, 77</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1261,7 +1267,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 50</value>
+    <value>291, 50</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1294,7 +1300,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 23</value>
+    <value>291, 23</value>
   </data>
   <data name="btnCreateAndConnectInlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1324,7 +1330,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 77</value>
+    <value>318, 77</value>
   </data>
   <data name="btnDisconnectEnergy.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1384,7 +1390,7 @@
     <value>133, 77</value>
   </data>
   <data name="cbEnergy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 21</value>
+    <value>152, 21</value>
   </data>
   <data name="cbEnergy.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1408,7 +1414,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 50</value>
+    <value>318, 50</value>
   </data>
   <data name="btnDisconnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1438,7 +1444,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>470, 23</value>
+    <value>318, 23</value>
   </data>
   <data name="btnDisconnect1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1498,7 +1504,7 @@
     <value>133, 50</value>
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 21</value>
+    <value>152, 21</value>
   </data>
   <data name="cbOutlet1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1522,7 +1528,7 @@
     <value>133, 23</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 21</value>
+    <value>152, 21</value>
   </data>
   <data name="cbInlet1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1573,7 +1579,7 @@
     <value>6, 106</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 109</value>
+    <value>345, 109</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1624,7 +1630,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 273</value>
+    <value>325, 247</value>
   </data>
   <data name="gridResults.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1648,7 +1654,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 279</value>
+    <value>331, 253</value>
   </data>
   <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1675,7 +1681,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 279</value>
+    <value>331, 279</value>
   </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1699,7 +1705,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 279</value>
+    <value>331, 279</value>
   </data>
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1726,7 +1732,7 @@
     <value>3, 16</value>
   </data>
   <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>491, 305</value>
+    <value>339, 279</value>
   </data>
   <data name="tabstrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1747,7 +1753,7 @@
     <value>6, 553</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>497, 324</value>
+    <value>345, 298</value>
   </data>
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1780,7 +1786,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>523, 750</value>
+    <value>355, 855</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>

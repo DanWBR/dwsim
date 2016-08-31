@@ -120,14 +120,30 @@
   <data name="RadioButton7.Text" xml:space="preserve">
     <value>Wärmedurchgangskoeff abschätzen</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Isolationsdicke</value>
+  </data>
   <data name="Label25.Text" xml:space="preserve">
     <value>C</value>
+  </data>
+  <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
   </data>
   <data name="Label26.Text" xml:space="preserve">
     <value>Umgebungstemperatur</value>
   </data>
+  <data name="Label28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
   <data name="Label28.Text" xml:space="preserve">
     <value>m / s [m]</value>
+  </data>
+  <data name="Label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 13</value>
   </data>
   <data name="Label29.Text" xml:space="preserve">
     <value>Geschwindigkeit [oder Tiefe]</value>
@@ -150,11 +166,20 @@
   <data name="ComboBoxMAMB.Items5" xml:space="preserve">
     <value>Feuchter Boden</value>
   </data>
+  <data name="Label30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
   <data name="Label30.Text" xml:space="preserve">
     <value>Umgebung</value>
   </data>
+  <data name="Label33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
   <data name="Label33.Text" xml:space="preserve">
     <value>W / mK</value>
+  </data>
+  <data name="Label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
   </data>
   <data name="Label34.Text" xml:space="preserve">
     <value>Wärmeleitfähigkeit / Dicke</value>
@@ -183,14 +208,23 @@
   <data name="ComboBoxMAT.Items7" xml:space="preserve">
     <value>Anwenderdefiniert</value>
   </data>
+  <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
   <data name="Label35.Text" xml:space="preserve">
     <value>Isolationsmaterial</value>
   </data>
+  <data name="CheckBoxICTE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 19</value>
+  </data>
   <data name="CheckBoxICTE.Text" xml:space="preserve">
-    <value>Äußeren Wärmeübergangskoeff. berücksichtigen</value>
+    <value>Äußeren Wärmeübergangskoeffizient berücksichtigen</value>
+  </data>
+  <data name="CheckBoxICTI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 19</value>
   </data>
   <data name="CheckBoxICTI.Text" xml:space="preserve">
-    <value>Inneren Wärmeübergangskoeff. berücksichtigen</value>
+    <value>Inneren Wärmeübergangskoeffizient berücksichtigen</value>
   </data>
   <data name="CheckBoxII.Text" xml:space="preserve">
     <value>Isolation berücksichtigen</value>
@@ -201,6 +235,9 @@
   <data name="RadioButton8.Text" xml:space="preserve">
     <value>Ausgetauschte Wärme definieren</value>
   </data>
+  <data name="Label38.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
   <data name="Label38.Text" xml:space="preserve">
     <value>Ausgetauschte Wärme</value>
   </data>
@@ -210,13 +247,16 @@
   <data name="TextBoxTA.Text" xml:space="preserve">
     <value>298,15</value>
   </data>
+  <data name="Label51.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
   <data name="Label51.Text" xml:space="preserve">
-    <value>Umgebungstemp.</value>
+    <value>Umgebungstemperatur</value>
+  </data>
+  <data name="Label53.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 13</value>
   </data>
   <data name="Label53.Text" xml:space="preserve">
     <value>Wärmedurchgangskoeffizient</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Thermisches Profil bearbeiten</value>
   </data>
 </root>

@@ -112,22 +112,38 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Länge (m)</value>
   </data>
+  <data name="Column14.HeaderText" xml:space="preserve">
+    <value>Inklination (Grad)</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Column14.Width" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Druck (kPa)</value>
+  </data>
+  <data name="Column2.Width" type="System.Int32, mscorlib">
+    <value>63</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Temperatur (C)</value>
   </data>
+  <data name="Column3.Width" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Flüssiggeschw. (m/s)</value>
+  </data>
+  <data name="Column4.Width" type="System.Int32, mscorlib">
+    <value>101</value>
   </data>
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>Dampfgeschw. (m/s)</value>
@@ -135,20 +151,49 @@
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Wärme (kW)</value>
   </data>
+  <data name="Column6.Width" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
   <data name="Column7.HeaderText" xml:space="preserve">
     <value>Flüssig-Holdup</value>
+  </data>
+  <data name="Column7.Width" type="System.Int32, mscorlib">
+    <value>82</value>
   </data>
   <data name="Column8.HeaderText" xml:space="preserve">
     <value>Strömungsregime</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="DataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>730, 324</value>
+  <data name="Column8.Width" type="System.Int32, mscorlib">
+    <value>94</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>730, 324</value>
+  <data name="Column9.HeaderText" xml:space="preserve">
+    <value>Gesamt K-Wert</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Ergebnis - Profile</value>
+  <data name="Column9.Width" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="Column10.HeaderText" xml:space="preserve">
+    <value>K-Wert Intern</value>
+  </data>
+  <data name="Column10.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="Column11.HeaderText" xml:space="preserve">
+    <value>k/L Wand</value>
+  </data>
+  <data name="Column11.Width" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="Column12.HeaderText" xml:space="preserve">
+    <value>k/L Isolation</value>
+  </data>
+  <data name="Column12.Width" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="Column13.HeaderText" xml:space="preserve">
+    <value>K-Wert Extern</value>
+  </data>
+  <data name="Column13.Width" type="System.Int32, mscorlib">
+    <value>71</value>
   </data>
 </root>

@@ -112,42 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Undefiniert</value>
-  </data>
-  <data name="Button4.Text" xml:space="preserve">
-    <value>Anwenden</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Managen</value>
-  </data>
-  <data name="Button6.Text" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>Ausschließen</value>
-  </data>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Einfügen</value>
-  </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Hinzufügen</value>
-  </data>
-  <data name="GroupBox17.Text" xml:space="preserve">
-    <value>Abschnitte</value>
-  </data>
-  <data name="GroupBox16.Text" xml:space="preserve">
-    <value>Rohrleitungsprofil</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 22</value>
   </data>
@@ -210,5 +180,38 @@
   </data>
   <data name="CMenu1.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 224</value>
+  </data>
+  <data name="ToolStripButton1.Text" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="ToolStripButton2.Text" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="ToolStripButton3.Text" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="ToolStripButton4.Text" xml:space="preserve">
+    <value>Alle entfernen</value>
+  </data>
+  <data name="ToolStripButton5.Text" xml:space="preserve">
+    <value>Änderungen übernehmen</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Definition</value>
+  </data>
+  <data name="KryptonRadioButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 17</value>
+  </data>
+  <data name="KryptonRadioButton2.Text" xml:space="preserve">
+    <value>Horizontale Distanz vs. -Höhe</value>
+  </data>
+  <data name="KryptonRadioButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 17</value>
+  </data>
+  <data name="KryptonRadioButton1.Text" xml:space="preserve">
+    <value>Segement vs. Höhe</value>
+  </data>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Visualisation</value>
   </data>
 </root>

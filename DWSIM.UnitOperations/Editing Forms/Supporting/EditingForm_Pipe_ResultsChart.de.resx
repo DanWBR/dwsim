@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ComboBox2.Items" xml:space="preserve">
     <value>Länge</value>
@@ -141,12 +141,15 @@
   <data name="ComboBox2.Items7" xml:space="preserve">
     <value>Wärmedurchgangskoeffizient</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ComboBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 15</value>
+    <value>219, 17</value>
   </data>
   <data name="ComboBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 21</value>
+  </data>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 20</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -174,9 +177,6 @@
   </data>
   <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>62, 15</value>
-  </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 21</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>

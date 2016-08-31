@@ -37,19 +37,19 @@ Partial Class EditingForm_Pipe_ResultsChart
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.ComboBox2)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
         'ComboBox2
         '
+        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 161
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items"), resources.GetString("ComboBox2.Items1"), resources.GetString("ComboBox2.Items2"), resources.GetString("ComboBox2.Items3"), resources.GetString("ComboBox2.Items4"), resources.GetString("ComboBox2.Items5"), resources.GetString("ComboBox2.Items6"), resources.GetString("ComboBox2.Items7")})
         Me.ComboBox2.Name = "ComboBox2"
         '
@@ -60,9 +60,9 @@ Partial Class EditingForm_Pipe_ResultsChart
         '
         'ComboBox1
         '
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 161
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5")})
         Me.ComboBox1.Name = "ComboBox1"
         '
@@ -73,8 +73,8 @@ Partial Class EditingForm_Pipe_ResultsChart
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.ZedGraphControl1)
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.ZedGraphControl1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '

@@ -74,7 +74,6 @@ Partial Class EditingForm_Vessel
         Me.chkOverrideT = New System.Windows.Forms.CheckBox()
         Me.cbTemp = New System.Windows.Forms.ComboBox()
         Me.tbTemperature = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
@@ -99,7 +98,6 @@ Partial Class EditingForm_Vessel
         Me.sizingtsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -527,17 +525,6 @@ Partial Class EditingForm_Vessel
         Me.tbTemperature.Name = "tbTemperature"
         Me.ToolTip1.SetToolTip(Me.tbTemperature, resources.GetString("tbTemperature.ToolTip"))
         '
-        'Panel1
-        '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.GroupBox5)
-        Me.Panel1.Controls.Add(Me.GroupBox4)
-        Me.Panel1.Controls.Add(Me.GroupBox3)
-        Me.Panel1.Controls.Add(Me.GroupBox1)
-        Me.Panel1.Controls.Add(Me.GroupBox2)
-        Me.Panel1.Name = "Panel1"
-        Me.ToolTip1.SetToolTip(Me.Panel1, resources.GetString("Panel1.ToolTip"))
-        '
         'GroupBox5
         '
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
@@ -704,7 +691,11 @@ Partial Class EditingForm_Vessel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.GroupBox4)
+        Me.Controls.Add(Me.GroupBox5)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Name = "EditingForm_Vessel"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
         Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
@@ -712,7 +703,6 @@ Partial Class EditingForm_Vessel
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
@@ -738,7 +728,6 @@ Partial Class EditingForm_Vessel
     Friend WithEvents cbInlet1 As System.Windows.Forms.ComboBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents cbFlashAlg As System.Windows.Forms.ComboBox

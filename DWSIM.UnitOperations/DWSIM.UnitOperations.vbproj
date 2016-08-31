@@ -603,6 +603,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.de.resx">
+      <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.en.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
     </EmbeddedResource>

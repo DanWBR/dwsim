@@ -286,6 +286,18 @@
   <data name="Label3.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="cbCalcMode.Items" xml:space="preserve">
+    <value>Ausgangsdruck</value>
+  </data>
+  <data name="cbCalcMode.Items1" xml:space="preserve">
+    <value>Druckänderung</value>
+  </data>
+  <data name="cbCalcMode.Items2" xml:space="preserve">
+    <value>Leistung (benötigt/produziert)</value>
+  </data>
+  <data name="cbCalcMode.Items3" xml:space="preserve">
+    <value>Energiestrom</value>
+  </data>
   <data name="cbCalcMode.ToolTip" xml:space="preserve">
     <value />
   </data>

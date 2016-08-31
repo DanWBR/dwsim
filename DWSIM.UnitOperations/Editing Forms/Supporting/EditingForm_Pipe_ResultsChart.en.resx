@@ -117,129 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;ComboBox2.Name" xml:space="preserve">
-    <value>ComboBox2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Graph</value>
-  </data>
-  <data name="&gt;&gt;ComboBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>FormGraph</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>X Axis</value>
-  </data>
-  <data name="&gt;&gt;ZedGraphControl1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ComboBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ZedGraphControl1.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormGraph</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ZedGraphControl1.Name" xml:space="preserve">
-    <value>ZedGraphControl1</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Y Axis</value>
-  </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox2.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ZedGraphControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Axis</value>
-  </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="ComboBox1.Items" xml:space="preserve">
-    <value>Length</value>
-  </data>
-  <data name="ComboBox1.Items1" xml:space="preserve">
-    <value>Pressure</value>
-  </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
-    <value>Temperature</value>
-  </data>
-  <data name="ComboBox1.Items3" xml:space="preserve">
-    <value>Liquid Velocity</value>
-  </data>
-  <data name="ComboBox1.Items4" xml:space="preserve">
-    <value>Vapor Velocity</value>
-  </data>
-  <data name="ComboBox1.Items5" xml:space="preserve">
-    <value>Heat Transferred</value>
-  </data>
   <data name="ComboBox2.Items" xml:space="preserve">
     <value>Length</value>
   </data>
@@ -263,5 +140,42 @@
   </data>
   <data name="ComboBox2.Items7" xml:space="preserve">
     <value>Heat Transfer Coefficient</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Y Axis</value>
+  </data>
+  <data name="ComboBox1.Items" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="ComboBox1.Items1" xml:space="preserve">
+    <value>Pressure</value>
+  </data>
+  <data name="ComboBox1.Items2" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="ComboBox1.Items3" xml:space="preserve">
+    <value>Liquid Velocity</value>
+  </data>
+  <data name="ComboBox1.Items4" xml:space="preserve">
+    <value>Vapor Velocity</value>
+  </data>
+  <data name="ComboBox1.Items5" xml:space="preserve">
+    <value>Heat Transferred</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>X Axis</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Axis</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Graph</value>
   </data>
 </root>
