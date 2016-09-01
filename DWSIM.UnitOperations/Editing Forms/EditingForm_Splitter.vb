@@ -92,62 +92,55 @@ Public Class EditingForm_Splitter
 
             'parameters
 
-            If SimObject.OperationMode = UnitOperations.Splitter.OpMode.StreamMassFlowSpec Then
-
-                cbFlowSpec1.Items.Clear()
-                cbFlowSpec1.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow).ToArray)
-                cbFlowSpec1.SelectedItem = units.massflow
-
-                cbFlowSpec2.Items.Clear()
-                cbFlowSpec2.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow).ToArray)
-                cbFlowSpec2.SelectedItem = units.massflow
-
-                tbFlowSpec1.Text = su.Converter.ConvertFromSI(units.massflow, .StreamFlowSpec).ToString(nf)
-                tbFlowSpec2.Text = su.Converter.ConvertFromSI(units.massflow, .Stream2FlowSpec).ToString(nf)
-
-                TrackBar1.Enabled = False
-                TrackBar2.Enabled = False
-
-            ElseIf SimObject.OperationMode = UnitOperations.Splitter.OpMode.StreamMoleFlowSpec Then
-
-                cbFlowSpec1.Items.Clear()
-                cbFlowSpec1.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molarflow).ToArray)
-                cbFlowSpec1.SelectedItem = units.molarflow
-
-                cbFlowSpec2.Items.Clear()
-                cbFlowSpec2.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molarflow).ToArray)
-                cbFlowSpec2.SelectedItem = units.molarflow
-
-                tbFlowSpec1.Text = su.Converter.ConvertFromSI(units.molarflow, .StreamFlowSpec).ToString(nf)
-                tbFlowSpec2.Text = su.Converter.ConvertFromSI(units.molarflow, .Stream2FlowSpec).ToString(nf)
-
-                TrackBar1.Enabled = False
-                TrackBar2.Enabled = False
-
-            ElseIf SimObject.OperationMode = UnitOperations.Splitter.OpMode.SplitRatios Then
-
-                cbFlowSpec1.Items.Clear()
-
-                cbFlowSpec2.Items.Clear()
-
-                tbFlowSpec1.Text = ""
-                tbFlowSpec2.Text = ""
-
-                TrackBar1.Enabled = True
-                TrackBar2.Enabled = True
-
-                TrackBar1.Value = Convert.ToDouble(.Ratios(0)) * 100
-                TrackBar2.Value = Convert.ToDouble(.Ratios(1)) * 100
-
-            End If
-
             Select Case .OperationMode
                 Case UnitOperations.Splitter.OpMode.SplitRatios
                     cbCalcMode.SelectedIndex = 0
+                    cbFlowSpec1.Items.Clear()
+                    cbFlowSpec2.Items.Clear()
+
+                    tbFlowSpec1.Text = ""
+                    tbFlowSpec2.Text = ""
+
+                    TrackBar1.Enabled = True
+                    TrackBar2.Enabled = True
+
+                    TrackBar1.Value = Convert.ToDouble(.Ratios(0)) * 100
+                    TrackBar2.Value = Convert.ToDouble(.Ratios(1)) * 100
+
+                    lblRatio1.Text = Convert.ToDouble(.Ratios(0)).ToString("N2")
+                    lblRatio2.Text = Convert.ToDouble(.Ratios(1)).ToString("N2")
+
                 Case UnitOperations.Splitter.OpMode.StreamMassFlowSpec
                     cbCalcMode.SelectedIndex = 1
+                    cbFlowSpec1.Items.Clear()
+                    cbFlowSpec1.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow).ToArray)
+                    cbFlowSpec1.SelectedItem = units.massflow
+
+                    cbFlowSpec2.Items.Clear()
+                    cbFlowSpec2.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow).ToArray)
+                    cbFlowSpec2.SelectedItem = units.massflow
+
+                    tbFlowSpec1.Text = su.Converter.ConvertFromSI(units.massflow, .StreamFlowSpec).ToString(nf)
+                    tbFlowSpec2.Text = su.Converter.ConvertFromSI(units.massflow, .Stream2FlowSpec).ToString(nf)
+
+                    TrackBar1.Enabled = False
+                    TrackBar2.Enabled = False
+
                 Case UnitOperations.Splitter.OpMode.StreamMoleFlowSpec
                     cbCalcMode.SelectedIndex = 2
+                    cbFlowSpec1.Items.Clear()
+                    cbFlowSpec1.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molarflow).ToArray)
+                    cbFlowSpec1.SelectedItem = units.molarflow
+
+                    cbFlowSpec2.Items.Clear()
+                    cbFlowSpec2.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molarflow).ToArray)
+                    cbFlowSpec2.SelectedItem = units.molarflow
+
+                    tbFlowSpec1.Text = su.Converter.ConvertFromSI(units.molarflow, .StreamFlowSpec).ToString(nf)
+                    tbFlowSpec2.Text = su.Converter.ConvertFromSI(units.molarflow, .Stream2FlowSpec).ToString(nf)
+
+                    TrackBar1.Enabled = False
+                    TrackBar2.Enabled = False
             End Select
 
         End With
