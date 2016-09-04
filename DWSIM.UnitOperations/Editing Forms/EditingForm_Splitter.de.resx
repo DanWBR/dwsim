@@ -136,9 +136,6 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notizen</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Berechnungsparameter</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TrackBar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -182,32 +179,8 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Berechnungsmodus</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Verbindungen</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Austrittstrom 3</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Austrittstrom 2</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Austrittstrom 1</value>
-  </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="Label19.Text" xml:space="preserve">
-    <value>Eintrittstrom</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Berechnungsparameter</value>
   </data>
   <data name="btnCreateAndConnectOutlet3.ToolTip" xml:space="preserve">
     <value>Erstellen und verbinden</value>
@@ -224,14 +197,38 @@
   <data name="btnDisconnectOutlet3.ToolTip" xml:space="preserve">
     <value>Trennen</value>
   </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Austrittstrom 3</value>
+  </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Trennen</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Austrittstrom 2</value>
   </data>
   <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
     <value>Trennen</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Trennen</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Austrittstrom 1</value>
+  </data>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Eintrittstrom</value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
