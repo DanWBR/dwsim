@@ -522,6 +522,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.de.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.de.resx">
+      <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.de.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </EmbeddedResource>
@@ -602,6 +605,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Valve.de.resx">
+      <DependentUpon>EditingForm_Valve.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Vessel.de.resx">
       <DependentUpon>EditingForm_Vessel.vb</DependentUpon>
