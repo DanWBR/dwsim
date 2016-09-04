@@ -498,6 +498,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.de.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Filter.de.resx">
+      <DependentUpon>EditingForm_Filter.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Filter.en.resx">
       <DependentUpon>EditingForm_Filter.vb</DependentUpon>
     </EmbeddedResource>
@@ -518,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_HeaterCooler.de.resx">
       <DependentUpon>EditingForm_HeaterCooler.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_HeatExchanger.de.resx">
+      <DependentUpon>EditingForm_HeatExchanger.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Mixer.de.resx">
       <DependentUpon>EditingForm_Mixer.vb</DependentUpon>
@@ -605,6 +611,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Tank.de.resx">
+      <DependentUpon>EditingForm_Tank.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Valve.de.resx">
       <DependentUpon>EditingForm_Valve.vb</DependentUpon>
@@ -707,6 +716,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.en.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.de.resx">
+      <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.en.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>

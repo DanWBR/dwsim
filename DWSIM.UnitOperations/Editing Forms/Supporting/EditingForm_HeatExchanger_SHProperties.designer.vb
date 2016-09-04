@@ -413,7 +413,7 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         resources.ApplyResources(Me.PictureBox2, "PictureBox2")
         Me.PictureBox2.BackColor = System.Drawing.Color.White
         Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox2.Image = My.Resources.Resources.Straight_tube_heat_exchanger_1_pass
+        Me.PictureBox2.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.Straight_tube_heat_exchanger_1_pass
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.TabStop = False
         '
@@ -422,11 +422,11 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.BackColor = System.Drawing.Color.White
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Image = My.Resources.Resources.Straight_tube_heat_exchanger_2_pass
+        Me.PictureBox1.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.Straight_tube_heat_exchanger_2_pass
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
-        'STHXEditorForm
+        'EditingForm_HeatExchanger_SHProperties
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -435,7 +435,7 @@ Partial Class EditingForm_HeatExchanger_SHProperties
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "STHXEditorForm"
+        Me.Name = "EditingForm_HeatExchanger_SHProperties"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
