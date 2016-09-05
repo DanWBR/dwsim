@@ -689,7 +689,7 @@
       <DependentUpon>FormPureComp.vb</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Pure Compound Properties\FormPureComp.vb">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tools\Reaction Subsystem Editors\FormReacManager.Designer.vb">
       <DependentUpon>FormReacManager.vb</DependentUpon>

@@ -321,6 +321,7 @@ Partial Class EditingForm_HeatExchanger
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'Label14
         '

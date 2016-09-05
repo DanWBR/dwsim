@@ -475,6 +475,9 @@
   <data name="btnUtils.Location" type="System.Drawing.Point, System.Drawing">
     <value>322, 19</value>
   </data>
+  <data name="btnUtils.ToolTip" xml:space="preserve">
+    <value>Hinzufügen/anzeigen Hilfsmittel</value>
+  </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 20</value>
   </data>
@@ -539,13 +542,13 @@
     <value>322, 53</value>
   </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
-    <value />
+    <value>Konfigurieren</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
     <value>322, 26</value>
   </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
-    <value />
+    <value>Konfigurieren</value>
   </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 21</value>
