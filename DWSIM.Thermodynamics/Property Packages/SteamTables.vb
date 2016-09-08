@@ -1039,11 +1039,32 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
+            Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
+            Dim Tcrit As Double = 374.0 + 273.15
             Select Case st
                 Case State.Liquid
-                    Return Me.m_iapws97.entropySatLiqPW(P / 100000)
+                    If T > Tsat Then
+                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                        x1 = Tsat + (Tcrit - Tsat) * 0.2
+                        x2 = Tsat + (Tcrit - Tsat) * 0.4
+                        x3 = Tsat + (Tcrit - Tsat) * 0.6
+                        x4 = Tsat + (Tcrit - Tsat) * 0.8
+                        x5 = Tsat + (Tcrit - Tsat) * 0.9
+                        p1 = Me.m_iapws97.entropySatLiqTW(x1)
+                        p2 = Me.m_iapws97.entropySatLiqTW(x2)
+                        p3 = Me.m_iapws97.entropySatLiqTW(x3)
+                        p4 = Me.m_iapws97.entropySatLiqTW(x4)
+                        p5 = Me.m_iapws97.entropySatLiqTW(x5)
+                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    Else
+                        Return Me.m_iapws97.entropySatLiqPW(P / 100000)
+                    End If
                 Case State.Vapor
-                    Return Me.m_iapws97.entropySatVapPW(P / 100000)
+                    If T > Tcrit Then
+                        Return Me.m_iapws97.entropyW(T, P / 100000)
+                    Else
+                        Return Me.m_iapws97.entropySatVapPW(P / 100000)
+                    End If
                 Case Else
                     Return Me.m_iapws97.entropyW(T, P / 100000)
             End Select
