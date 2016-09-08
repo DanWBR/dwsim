@@ -146,8 +146,8 @@ Partial Class FormReacEq
         '
         'rbKeqGibbs
         '
-        Me.rbKeqGibbs.Checked = True
         resources.ApplyResources(Me.rbKeqGibbs, "rbKeqGibbs")
+        Me.rbKeqGibbs.Checked = True
         Me.rbKeqGibbs.Name = "rbKeqGibbs"
         Me.rbKeqGibbs.TabStop = True
         '

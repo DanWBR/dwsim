@@ -543,7 +543,9 @@ Public Class EditingForm_Column
         If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.CondenserPressure = su.Converter.ConvertToSI(units.pressure, tbCondPressure.Text)
+            SimObject.Stages(0).P = SimObject.CondenserPressure
 
+            UpdateInfo()
             RequestCalc()
 
         End If
@@ -555,7 +557,8 @@ Public Class EditingForm_Column
         If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.CondenserDeltaP = su.Converter.ConvertToSI(units.deltaP, tbCondPDrop.Text)
-
+            
+            UpdateInfo()
             RequestCalc()
 
         End If
@@ -615,7 +618,9 @@ Public Class EditingForm_Column
         If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.ReboilerPressure = su.Converter.ConvertToSI(units.pressure, tbRebPressure.Text)
+            SimObject.Stages(SimObject.Stages.Count - 1).P = SimObject.ReboilerPressure
 
+            UpdateInfo()
             RequestCalc()
 
         End If

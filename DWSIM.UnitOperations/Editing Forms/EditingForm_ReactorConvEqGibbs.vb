@@ -266,14 +266,16 @@ Public Class EditingForm_ReactorConvEqGibbs
     Private Sub ListViewCompounds_ItemChecked(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemCheckedEventArgs) Handles ListViewCompounds.ItemChecked
         If Loaded Then
             Dim robj = DirectCast(SimObject, Reactors.Reactor_Gibbs)
-            For Each lvi As ListViewItem In Me.ListViewCompounds.Items
-                If lvi.Checked Then
-                    If Not robj.ComponentIDs.Contains(lvi.Tag) Then
-                        robj.ComponentIDs.Add(lvi.Tag)
-                    End If
-                Else
-                    If robj.ComponentIDs.Contains(lvi.Tag) Then
-                        robj.ComponentIDs.Remove(lvi.Tag)
+            For Each lvi as ListViewItem In Me.ListViewCompounds.Items
+                If Not lvi Is Nothing Then
+                    If lvi.Checked Then
+                        If Not robj.ComponentIDs.Contains(lvi.Tag) Then
+                            robj.ComponentIDs.Add(lvi.Tag)
+                        End If
+                    Else
+                        If robj.ComponentIDs.Contains(lvi.Tag) Then
+                            robj.ComponentIDs.Remove(lvi.Tag)
+                        End If
                     End If
                 End If
             Next

@@ -495,17 +495,20 @@
   <data name="&gt;&gt;tbExp.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="KryptonLabel6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="KryptonLabel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>407, 20</value>
   </data>
   <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 19</value>
+    <value>30, 13</value>
   </data>
   <data name="KryptonLabel6.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="KryptonLabel6.Text" xml:space="preserve">
-    <value>Phase</value>
+    <value>Fase</value>
   </data>
   <data name="&gt;&gt;KryptonLabel6.Name" xml:space="preserve">
     <value>KryptonLabel6</value>
