@@ -297,7 +297,7 @@ Public Class EditingForm_Pump
     End Sub
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbTemperatureChange.TextChanged, tbPressureIncr.TextChanged, tbOutletTemperature.TextChanged,
-                                                                        tbHeatingChange.TextChanged, tbEfficiency.TextChanged
+                                                                        tbHeatingChange.TextChanged, tbEfficiency.TextChanged, tbOutletPressure.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -476,6 +476,5 @@ Public Class EditingForm_Pump
         RequestCalc()
 
     End Sub
-
 
 End Class
