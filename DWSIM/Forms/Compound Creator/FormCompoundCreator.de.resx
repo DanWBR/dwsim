@@ -117,15 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>644, 53</value>
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Komponentendatenbank</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkReplaceComps.Location" type="System.Drawing.Point, System.Drawing">
-    <value>453, 22</value>
+    <value>818, 22</value>
   </data>
   <data name="chkReplaceComps.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 17</value>
@@ -137,10 +134,10 @@
     <value>43, 21</value>
   </data>
   <data name="tbDBPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
+    <value>554, 20</value>
   </data>
   <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 17</value>
+    <value>602, 17</value>
   </data>
   <data name="btnSearch.Text" xml:space="preserve">
     <value>Suche</value>
@@ -152,7 +149,7 @@
     <value>Pfad</value>
   </data>
   <data name="btnCreateNewDB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 17</value>
+    <value>688, 17</value>
   </data>
   <data name="btnCreateNewDB.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 26</value>
@@ -161,7 +158,7 @@
     <value>Neue Datenbank</value>
   </data>
   <data name="btnSaveToDB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>689, 15</value>
+    <value>1054, 15</value>
   </data>
   <data name="btnSaveToDB.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 26</value>
@@ -169,11 +166,17 @@
   <data name="btnSaveToDB.Text" xml:space="preserve">
     <value>Speichere Komponente in Datenbank</value>
   </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>909, 505</value>
-  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Komponenten Eigenschaften</value>
+  </data>
+  <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 20</value>
+  </data>
+  <data name="RadioButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 17</value>
+  </data>
+  <data name="RadioButton3.Text" xml:space="preserve">
+    <value>Elektrolyt/Salz</value>
   </data>
   <data name="RadioButton2.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 20</value>
@@ -184,20 +187,17 @@
   <data name="RadioButton2.Text" xml:space="preserve">
     <value>'Black-Oil'</value>
   </data>
-  <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 22</value>
-  </data>
   <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 22</value>
+    <value>497, 24</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="TextBoxName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 19</value>
+    <value>538, 19</value>
   </data>
   <data name="TextBoxName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 20</value>
+    <value>510, 20</value>
   </data>
   <data name="RadioButton1.Location" type="System.Drawing.Point, System.Drawing">
     <value>48, 20</value>
@@ -214,14 +214,17 @@
   <data name="Label54.Text" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>895, 431</value>
-  </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Identifikation</value>
   </data>
   <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>948, 431</value>
+    <value>1260, 396</value>
+  </data>
+  <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>895, 431</value>
+  </data>
+  <data name="FaTabStripItemEL.Title" xml:space="preserve">
+    <value>Elektrolyt/Salz</value>
   </data>
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>Eigenschaften</value>
@@ -241,8 +244,18 @@
   <data name="FaTabStripItem11.Title" xml:space="preserve">
     <value>Feststoff</value>
   </data>
-  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>897, 452</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 241</value>
+  </data>
+  <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1167, 111</value>
+  </data>
+  <data name="Label94.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 241</value>
   </data>
   <data name="Label94.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
@@ -262,6 +275,9 @@
   <data name="Label21.Text" xml:space="preserve">
     <value>Formel</value>
   </data>
+  <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1000, 164</value>
+  </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
   </data>
@@ -269,58 +285,160 @@
     <value>Molgewicht</value>
   </data>
   <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Optional data</value>
+    <value>Optionale Daten</value>
   </data>
   <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 13</value>
+    <value>122, 13</value>
   </data>
   <data name="Label105.Text" xml:space="preserve">
-    <value>PNA Analysis, Aromatics</value>
+    <value>PNA Analyse, Aromaten</value>
   </data>
   <data name="Label104.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 13</value>
+    <value>128, 13</value>
   </data>
   <data name="Label104.Text" xml:space="preserve">
-    <value>PNA Analysis, Naphthenes</value>
+    <value>PNA Analyse, Naphthene</value>
   </data>
   <data name="Label103.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 13</value>
   </data>
   <data name="Label103.Text" xml:space="preserve">
-    <value>PNA Analysis, Paraffins</value>
+    <value>PNA Analyse, Paraffine</value>
   </data>
   <data name="Label96.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>71, 13</value>
   </data>
   <data name="Label96.Text" xml:space="preserve">
-    <value>Oil viscosity 2</value>
+    <value>Ölviscosität 2</value>
   </data>
   <data name="Label95.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 13</value>
+    <value>71, 13</value>
   </data>
   <data name="Label95.Text" xml:space="preserve">
-    <value>Oil viscosity 1</value>
+    <value>Ölviscosität 1</value>
   </data>
   <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Required data</value>
+    <value>Benötigte Daten</value>
   </data>
   <data name="Label99.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
+    <value>102, 13</value>
   </data>
   <data name="Label99.Text" xml:space="preserve">
-    <value>Oil specific gravity</value>
+    <value>Spezifische Öldichte</value>
   </data>
   <data name="Label100.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
+    <value>109, 13</value>
   </data>
   <data name="Label100.Text" xml:space="preserve">
-    <value>Gas specific gravity</value>
+    <value>spezifische Gasdichte</value>
   </data>
   <data name="Label97.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 13</value>
+    <value>118, 13</value>
   </data>
   <data name="Label97.Text" xml:space="preserve">
-    <value>Gas-Oil ratio @ SC</value>
+    <value>Gas-Öl Verhältnis @ SC</value>
+  </data>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Feststoff / Ausfällung</value>
+  </data>
+  <data name="Label125.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="Label125.Text" xml:space="preserve">
+    <value>Feststoffdichte</value>
+  </data>
+  <data name="Label123.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="Label123.Text" xml:space="preserve">
+    <value>Schmelztemperatur Tf</value>
+  </data>
+  <data name="Label124.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="Label124.Text" xml:space="preserve">
+    <value>Schmelzenthalpie @ Tf</value>
+  </data>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Bildungsenergieen @ 298 K / 25 °C</value>
+  </data>
+  <data name="Label120.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="Label120.Text" xml:space="preserve">
+    <value>Gibbs Bildungsenthalpie</value>
+  </data>
+  <data name="Label121.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="Label121.Text" xml:space="preserve">
+    <value>Bildungsenthalpie</value>
+  </data>
+  <data name="Label122.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="Label122.Text" xml:space="preserve">
+    <value>Wärmekapazität</value>
+  </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Molekül</value>
+  </data>
+  <data name="Label127.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="Label127.Text" xml:space="preserve">
+    <value>Ladung Ion</value>
+  </data>
+  <data name="Label114.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 13</value>
+  </data>
+  <data name="Label114.Text" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="rbIon.Text" xml:space="preserve">
+    <value>Ion</value>
+  </data>
+  <data name="rbSalt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 17</value>
+  </data>
+  <data name="rbSalt.Text" xml:space="preserve">
+    <value>Salz</value>
+  </data>
+  <data name="rbHydratedSalt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
+  </data>
+  <data name="rbHydratedSalt.Text" xml:space="preserve">
+    <value>Hydratsalz</value>
+  </data>
+  <data name="Label115.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 13</value>
+  </data>
+  <data name="Label115.Text" xml:space="preserve">
+    <value>Formel Kation (pos.)</value>
+  </data>
+  <data name="Label116.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="Label116.Text" xml:space="preserve">
+    <value>Formel Anion (neg.)</value>
+  </data>
+  <data name="Label117.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="Label117.Text" xml:space="preserve">
+    <value>Hydratzahl</value>
+  </data>
+  <data name="Label119.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 13</value>
+  </data>
+  <data name="Label119.Text" xml:space="preserve">
+    <value>Stöchiometrischer Koeffizient Anion</value>
+  </data>
+  <data name="Label118.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 13</value>
+  </data>
+  <data name="Label118.Text" xml:space="preserve">
+    <value>Stöchiometrischer Koeffizient Kation</value>
   </data>
   <data name="LinkLabel2.ToolTip" xml:space="preserve">
     <value>Aufruf der Dortmund-Dataenbank zur Unterstützung bei der UNIFAC-Gruppenzuordnung.</value>
@@ -385,7 +503,6 @@
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Typ</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column2.Width" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
@@ -942,12 +1059,6 @@
   <data name="Label55.Text" xml:space="preserve">
     <value>Schmelzenthalpie</value>
   </data>
-  <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 19</value>
-  </data>
-  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>658, 6</value>
-  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Einheitensystem</value>
   </data>
@@ -971,15 +1082,6 @@
   </data>
   <data name="DBOpenDlg.Title" xml:space="preserve">
     <value>Öffne/Erzeuge Database</value>
-  </data>
-  <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 573</value>
-  </data>
-  <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>924, 22</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>924, 595</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2424,9 +2526,6 @@
         AAAAAAAAAAAAAAAAAAD8PzV78A8AAMADAACAAcADgAGAAQAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAB
         AACAAYABwAOAAeAHwAP4HwAE
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Komponente / Komponentenmanager</value>
