@@ -508,9 +508,8 @@ Namespace PropertyPackages
             For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
             Next
-            result = Me.DW_CalcSolidEnthalpy(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
-            Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
-            Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result / T
+            Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = Me.DW_CalcEnthalpy(RET_VMOL(PropertyPackages.Phase.Solid), T, P, State.Solid)
+            Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = Me.DW_CalcEntropy(RET_VMOL(PropertyPackages.Phase.Solid), T, P, State.Solid)
             Me.CurrentMaterialStream.Phases(phaseID).Properties.compressibilityFactor = 0.0#
             result = Me.DW_CalcSolidHeatCapacityCp(T, RET_VMOL(PropertyPackages.Phase.Solid), constprops)
             Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCp = result
@@ -1778,37 +1777,53 @@ Namespace PropertyPackages
                                 Dim brentsolverT As New BrentOpt.Brent
                                 brentsolverT.DefineFuncDelegate(AddressOf EnthalpyTx)
 
-                                Dim hl, hv, sl, sv, Tsat As Double
+                                Dim hl, hlf, hv, hs, sl, slf, sv, ss, Tsat, Tfus As Double
                                 Dim vz As Object = Me.RET_VMOL(Phase.Mixture)
 
                                 Tsat = 0.0#
+                                Tfus = 0.0#
                                 For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                                     Tsat += subst.MoleFraction * Me.AUX_TSATi(P, subst.Name)
+                                    Tfus += subst.MoleFraction * subst.ConstantProperties.TemperatureOfFusion
                                 Next
 
                                 hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
                                 hv = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Vapor)
+                                hs = Me.DW_CalcEnthalpy(vz, Tfus, P, State.Solid)
+                                hlf = Me.DW_CalcEnthalpy(vz, Tfus, P, State.Liquid)
                                 sl = Me.DW_CalcEntropy(vz, Tsat, P, State.Liquid)
                                 sv = Me.DW_CalcEntropy(vz, Tsat, P, State.Vapor)
-                                If H <= hl Then
-                                    xv = 0
+                                ss = Me.DW_CalcEntropy(vz, Tfus, P, State.Vapor)
+                                slf = Me.DW_CalcEntropy(vz, Tfus, P, State.Liquid)
+                                If H <= hs Then
+                                    xs = 1.0#
+                                    xv = 0.0#
+                                ElseIf H <= hlf Then
+                                    xv = 0.0#
+                                    xs = (H - hs) / (hl - hs)
+                                    T = Tfus
+                                ElseIf H <= hl Then
+                                    xv = 0.0#
+                                    xs = 0.0#
                                     LoopVarState = State.Liquid
                                 ElseIf H >= hv Then
+                                    xs = 0.0#
                                     xv = 1
                                     LoopVarState = State.Vapor
                                 Else
+                                    xs = 0.0#
                                     xv = (H - hl) / (hv - hl)
                                 End If
                                 If Tsat > Me.AUX_TCM(Phase.Mixture) Then
                                     xv = 1.0#
                                     LoopVarState = State.Vapor
                                 End If
-                                xl = 1 - xv
+                                xl = 1 - xv - xs
 
-                                If xv <> 0.0# And xv <> 1.0# Then
+                                If xv <> 0.0# And xv <> 1.0# And xs = 0.0# Then
                                     T = Tsat
                                     S = xv * sv + (1 - xv) * sl
-                                Else
+                                ElseIf xs = 0.0# Then
                                     LoopVarF = H
                                     LoopVarX = P
                                     T = brentsolverT.BrentOpt(Me.AUX_TFM(Phase.Mixture), 2000, 20, 0.0001, 1000, Nothing)

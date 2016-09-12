@@ -913,7 +913,7 @@ out:        Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector
 
             Dim cnt As Integer = 0
 
-            If Tref = 0 Then Tref = 100.0#
+            If Tref = 0 Then Tref = 300.0#
             x1 = Tref
             Do
                 fx = Herror(x1, {P, Vz, PP})
@@ -1090,7 +1090,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
             Dim mmg, mml, mms As Double
             If V > 0 Then _Hv = pp.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
             If L > 0 Then _Hl = pp.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
-            If S > 0 Then _Hs = pp.DW_CalcSolidEnthalpy(T, Vs, CompoundProperties)
+            If S > 0 Then _Hs = pp.DW_CalcEnthalpy(Vs, T, P, State.Solid)
             mmg = pp.AUX_MMM(Vy)
             mml = pp.AUX_MMM(Vx)
             mms = pp.AUX_MMM(Vs)
@@ -1124,7 +1124,7 @@ alt:            T = bo.BrentOpt(Tinf, Tsup, 10, tolEXT, maxitEXT, {P, Vz, PP})
 
             If V > 0 Then _Sv = pp.DW_CalcEntropy(Vy, T, P, State.Vapor)
             If L > 0 Then _Sl = pp.DW_CalcEntropy(Vx, T, P, State.Liquid)
-            If Ssf > 0 Then _Ss = pp.DW_CalcSolidEnthalpy(T, Vs, CompoundProperties) / (T - 298.15)
+            If Ssf > 0 Then _Ss = pp.DW_CalcEntropy(Vs, T, P, State.Solid)
             mmg = pp.AUX_MMM(Vy)
             mml = pp.AUX_MMM(Vx)
             mms = pp.AUX_MMM(Vs)

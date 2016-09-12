@@ -318,7 +318,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If V > 0.0# And Vy.Sum > 0.0# Then _Hv = pp.DW_CalcEnthalpy(Vy, T, P, State.Vapor)
             If L > 0.0# And Vx.Sum > 0.0# Then _Hl = pp.DW_CalcEnthalpy(Vx, T, P, State.Liquid)
             If L2 > 0.0# And Vx2.Sum > 0.0# Then _Hl2 = pp.DW_CalcEnthalpy(Vx2, T, P, State.Liquid)
-            If S > 0.0# And Vs.Sum > 0.0# Then _Hs = pp.DW_CalcSolidEnthalpy(T, Vs, pp.DW_GetConstantProperties)
+            If S > 0.0# And Vs.Sum > 0.0# Then _Hs = pp.DW_CalcEnthalpy(Vs, T, P, State.Solid)
 
             If V > 0.0# And Vy.Sum > 0.0# Then mmg = pp.AUX_MMM(Vy)
             If L > 0.0# And Vx.Sum > 0.0# Then mml = pp.AUX_MMM(Vx)
@@ -347,7 +347,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             If V > 0.0# And Vy.Sum > 0.0# Then _Sv = pp.DW_CalcEntropy(Vy, T, P, State.Vapor)
             If L > 0.0# And Vx.Sum > 0.0# Then _Sl = pp.DW_CalcEntropy(Vx, T, P, State.Liquid)
-            If L2 > 0.0# And Vx2.Sum > 0.0# Then _Sl2 = pp.DW_CalcEntropy(Vx2, T, P, State.Liquid)
+            If L2 > 0.0# And Vx2.Sum > 0.0# Then _Sl2 = pp.DW_CalcEntropy(Vs, T, P, State.Solid)
 
             If V > 0.0# And Vy.Sum > 0.0# Then mmg = pp.AUX_MMM(Vy)
             If L > 0.0# And Vx.Sum > 0.0# Then mml = pp.AUX_MMM(Vx)
