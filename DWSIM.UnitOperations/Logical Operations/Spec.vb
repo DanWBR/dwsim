@@ -390,7 +390,7 @@ Namespace SpecialOps
 
         End Function
 
-        Public Shadows Sub Calculate()
+        Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Me.GraphicObject.Active Then
 
