@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 18 - September 2016
+Version 4.0 Update 19 - September 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 19
+
+- [FIX] Fixed Specification Block calculation
+- [FIX] Fixed Solid Phase Enthalpy calculation on Activity Coefficient models
 
 Version 4.0 Update 16/17/18
 
