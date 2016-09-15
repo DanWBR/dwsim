@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 19 - September 2016
+Version 4.0 Update 20 - September 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Cumulative Update 2 (Update 20)
+
+Cumulative Update 2 (Update 20) includes all changes from Update 1 to 19 as well as:
+
+- [FIX] Fixed Petroleum Characterization utilities not working
+- [CHG] More German translations
 
 Version 4.0 Update 19
 
