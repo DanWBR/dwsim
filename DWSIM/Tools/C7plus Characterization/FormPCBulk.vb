@@ -705,6 +705,8 @@ Public Class FormPCBulk
         Dim gObj As DrawingTools.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
+        If Not frm.FrmStSim1.initialized Then frm.FrmStSim1.Init()
+
         For Each subst In ccol.Values
             tmpcomp = subst.ConstantProperties
             frm.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
@@ -720,7 +722,6 @@ Public Class FormPCBulk
         myMStr.Tag = corr
         gObj = myMStr
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
-        frm.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
         'OBJETO DWSIM
         Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
@@ -741,9 +742,9 @@ Public Class FormPCBulk
             myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
             myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
         Next
-        frm.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
-        frm.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
-        frm.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        myCOMS.SetFlowsheet(frm)
+        frm.AddSimulationObject(myCOMS)
+        frm.AddGraphicObject(gObj)
         frm.FormSurface.FlowsheetDesignSurface.Invalidate()
 
         Me.Close()

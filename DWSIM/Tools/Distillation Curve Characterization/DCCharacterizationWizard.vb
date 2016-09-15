@@ -706,6 +706,8 @@ Public Class DCCharacterizationWizard
         Dim gObj As DrawingTools.GraphicObjects.GraphicObject = Nothing
         Dim idx As Integer = 0
 
+        If Not form.FrmStSim1.initialized Then form.FrmStSim1.Init()
+
         For Each subst In ccol.Values
             tmpcomp = subst.ConstantProperties
             form.Options.NotSelectedComponents.Add(tmpcomp.Name, tmpcomp)
@@ -721,8 +723,7 @@ Public Class DCCharacterizationWizard
         myMStr.Tag = corr
         gObj = myMStr
         gObj.Name = "MAT-" & Guid.NewGuid.ToString
-        form.Collections.GraphicObjectCollection.Add(gObj.Name, myMStr)
-        'OBJETO DWSIM
+
         Dim myCOMS As Streams.MaterialStream = New Streams.MaterialStream(myMStr.Name, DWSIM.App.GetLocalString("CorrentedeMatria"))
         myCOMS.GraphicObject = myMStr
         form.AddComponentsRows(myCOMS)
@@ -742,9 +743,9 @@ Public Class DCCharacterizationWizard
             myCOMS.Phases(1).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
             myCOMS.Phases(2).Compounds.Item(subst.Name).ConstantProperties = subst.ConstantProperties
         Next
-        form.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
-        form.Collections.FlowsheetObjectCollection.Add(myCOMS.Name, myCOMS)
-        form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(gObj)
+        myCOMS.SetFlowsheet(form)
+        form.AddSimulationObject(myCOMS)
+        form.AddGraphicObject(gObj)
         form.FormSurface.FlowsheetDesignSurface.Invalidate()
 
         Me.Close()
