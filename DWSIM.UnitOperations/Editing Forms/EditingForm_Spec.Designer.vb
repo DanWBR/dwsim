@@ -32,6 +32,7 @@ Partial Class EditingForm_Spec
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblResult = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.tbExpression = New System.Windows.Forms.TextBox()
@@ -49,7 +50,6 @@ Partial Class EditingForm_Spec
         Me.cbSourceObj = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblResult = New System.Windows.Forms.Label()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -108,6 +108,11 @@ Partial Class EditingForm_Spec
         Me.GroupBox2.Controls.Add(Me.tbExpression)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'lblResult
+        '
+        resources.ApplyResources(Me.lblResult, "lblResult")
+        Me.lblResult.Name = "lblResult"
         '
         'Label1
         '
@@ -209,11 +214,6 @@ Partial Class EditingForm_Spec
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
-        '
-        'lblResult
-        '
-        resources.ApplyResources(Me.lblResult, "lblResult")
-        Me.lblResult.Name = "lblResult"
         '
         'EditingForm_Spec
         '

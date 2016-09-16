@@ -486,6 +486,9 @@
     <Compile Include="Unit Operations\Vessel.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.de.resx">
+      <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.en.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
@@ -494,6 +497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.de.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.de.resx">
+      <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyStream.de.resx">
       <DependentUpon>EditingForm_EnergyStream.vb</DependentUpon>
@@ -537,6 +543,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.de.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.de.resx">
+      <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.en.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </EmbeddedResource>
@@ -572,6 +581,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Adjust.resx">
       <DependentUpon>EditingForm_Adjust.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_SolidsSep.de.resx">
+      <DependentUpon>EditingForm_SolidsSep.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Spec.de.resx">
+      <DependentUpon>EditingForm_Spec.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Spec.en.resx">
       <DependentUpon>EditingForm_Spec.vb</DependentUpon>
@@ -713,6 +728,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Other\Form_LoadSave.resx">
       <DependentUpon>Form_LoadSave.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Adjust_ControlPanel.de.resx">
+      <DependentUpon>EditingForm_Adjust_ControlPanel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.en.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>

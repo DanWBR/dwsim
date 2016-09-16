@@ -859,7 +859,7 @@ Public Class FormPureComp
             LblModified.BackColor = Color.Lime
             LblModified.ForeColor = Color.Black
         End If
-        Me.BtnRestaurar.Enabled = constprop.IsModified
+        'Me.BtnRestaurar.Enabled = constprop.IsModified
     End Sub
     Private Sub chkEnableEdit_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkEnableEdit.CheckedChanged
         If chkEnableEdit.Checked Then
@@ -943,7 +943,7 @@ Public Class FormPureComp
                 End Try
         End Select
 
-        For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values
+        For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
             For Each p As BaseClasses.Phase In mat.Phases.Values
                 For Each subst As BaseClasses.Compound In p.Compounds.Values
                     subst.ConstantProperties = constprop
