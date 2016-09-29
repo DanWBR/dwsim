@@ -1177,7 +1177,7 @@ Namespace SystemsOfUnits
                 Case "lbf"
                     Return value / 0.224809
                 Case "mol/L"                            'conc molar
-                    Return value
+                    Return value * 1000
                 Case "kmol/m3"
                     Return value
                 Case "mol/cm3"
@@ -1227,11 +1227,11 @@ Namespace SystemsOfUnits
                 Case "mol/[m3.h]"
                     Return value / 3600
                 Case "mol/[L.s]"
-                    Return value / 1000
+                    Return value * 1000
                 Case "mol/[L.min.]"
-                    Return value / 60 / 1000
+                    Return value / 60 * 1000
                 Case "mol/[L.h]"
-                    Return value / 3600 / 1000
+                    Return value / 3600 * 1000
                 Case "mol/[cm3.s]"
                     Return value * 1000000.0
                 Case "mol/[cm3.min.]"
@@ -1595,7 +1595,7 @@ Namespace SystemsOfUnits
                 Case "lbf"
                     Return value * 0.224809
                 Case "mol/L"                            'conc molar
-                    Return value
+                    Return value / 1000
                 Case "kmol/m3"
                     Return value
                 Case "mol/cm3"
@@ -1647,11 +1647,11 @@ Namespace SystemsOfUnits
                 Case "mol/[m3.h]"
                     Return value * 3600
                 Case "mol/[L.s]"
-                    Return value * 1000
+                    Return value / 1000
                 Case "mol/[L.min.]"
-                    Return value * 60 * 1000
+                    Return value * 60 / 1000
                 Case "mol/[L.h]"
-                    Return value * 3600 * 1000
+                    Return value * 3600 / 1000
                 Case "mol/[cm3.s]"
                     Return value / 1000000.0
                 Case "mol/[cm3.min.]"
