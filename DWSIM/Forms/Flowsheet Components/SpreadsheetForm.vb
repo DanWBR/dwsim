@@ -37,11 +37,6 @@ Public Class SpreadsheetForm
     Public dt1(99, 25) As Object
     Public dt2(99, 25) As Object
 
-    Public StopWriting As Boolean = False
-    Public WriteMode As Boolean = False
-
-    Public InternalCounter As Integer = 0
-
     Public Property Expr() As IGenericExpression(Of Object)
         Get
             Return m_e
@@ -692,52 +687,23 @@ Public Class SpreadsheetForm
     Public Sub EvaluateAll()
 
         Try
-
             If Not formc Is Nothing Then
-
                 If GlobalSettings.Settings.CalculatorActivated Then
-
-                    StopWriting = True
-                    Dim forcestop As Boolean = False
-                    Dim delta As Double = 0.0#
-                    Dim i As Integer
-
-                    i = 0
                     For Each r As DataGridViewRow In Me.DataGridView1.Rows
                         For Each ce As DataGridViewCell In r.Cells
                             ccparams = ce.Tag
                             If Not ccparams Is Nothing Then
                                 If ccparams.Expression <> "" Then
-                                    'If ccparams.Expression.Substring(0, 1) = "=" Or ccparams.Expression.Substring(0, 1) = ":" Then
                                     ccparams.PrevVal = ce.Value
                                     UpdateValue(ce, ccparams.Expression)
                                     ccparams.CurrVal = ce.Value
-                                    'End If
-                                    If ccparams.CellType = VarType.Write Then
-                                        i += 1
-                                        delta += Math.Abs((Convert.ToDouble(ccparams.CurrVal) - Convert.ToDouble(ccparams.PrevVal)) / Convert.ToDouble(ccparams.PrevVal))
-                                        If Double.IsNaN(delta) Or Double.IsInfinity(delta) Then forcestop = True
-                                    End If
                                 End If
                             End If
                         Next
                     Next
-
-                    If delta > i * Convert.ToDouble(Me.tbTolerance.Text) Then StopWriting = False
-
-                    If Me.WriteMode Then
-                        If Not StopWriting Then
-                            If Not forcestop Then WriteAll()
-                        End If
-                        If InternalCounter = 0 Then WriteAll()
-                    End If
-
-                    InternalCounter += 1
-
                 End If
             End If
         Catch ex As Exception
-            Console.WriteLine(ex.ToString)
         End Try
 
     End Sub
@@ -757,15 +723,6 @@ Public Class SpreadsheetForm
                     If ccparams.CellType = VarType.Write And Not ce.Value Is Nothing Then
                         obj = formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID)
                         obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
-                        'Call function to calculate flowsheet
-                        Dim objargs As New CalculationArgs
-                        With objargs
-                            .Calculated = False
-                            .Name = obj.Name
-                            .Tag = obj.GraphicObject.Tag
-                            .ObjectType = obj.GraphicObject.ObjectType
-                        End With
-                        My.Application.ActiveSimulation.CalculationQueue.Enqueue(objargs)
                     End If
                 End If
             Next
@@ -778,10 +735,6 @@ Public Class SpreadsheetForm
         frmps.ssheet = Me
         frmps.mode = 1
         frmps.ShowDialog(Me)
-    End Sub
-
-    Private Sub chkWriteMode_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkWriteMode.CheckedChanged
-        Me.WriteMode = chkWriteMode.Checked
     End Sub
 
     Public Sub New()

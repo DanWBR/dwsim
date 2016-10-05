@@ -3029,4 +3029,22 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                     End Sub)
     End Sub
 
+    Public Sub UpdateSpreadsheet() Implements IFlowsheet.UpdateSpreadsheet
+
+        Try
+            Me.UIThread(Sub()
+                            If FormSpreadsheet IsNot Nothing AndAlso FormSpreadsheet.chkUpdate.Checked Then Me.FormSpreadsheet.EvaluateAll()
+                        End Sub)
+        Catch ex As Exception
+            WriteToLog("Error updating spreadsheet: " & ex.Message.ToString, Color.Red, MessageType.GeneralError)
+        End Try
+
+    End Sub
+
+    Public Sub WriteSpreadsheetVariables() Implements IFlowsheet.WriteSpreadsheetVariables
+        Me.UIThread(Sub()
+                        If FormSpreadsheet IsNot Nothing Then Me.FormSpreadsheet.WriteAll()
+                    End Sub)
+    End Sub
+
 End Class

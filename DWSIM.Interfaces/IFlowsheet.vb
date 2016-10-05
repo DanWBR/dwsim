@@ -76,6 +76,10 @@
 
     Sub AddUndoRedoAction(action As IUndoRedoAction)
 
+    Sub UpdateSpreadsheet()
+
+    Sub WriteSpreadsheetVariables()
+
 End Interface
 
 Public Interface IFlowsheetBag

@@ -1591,6 +1591,8 @@ Namespace Streams
                     sname = prop.Split("/")(1)
                 End If
 
+                Dim prevstream = Me.PropertyPackage.CurrentMaterialStream
+
                 Me.PropertyPackage.CurrentMaterialStream = Me
 
                 Select Case propidx
@@ -1693,6 +1695,8 @@ Namespace Streams
                             Next
                         End If
                 End Select
+
+                Me.PropertyPackage.CurrentMaterialStream = prevstream
 
             End If
 

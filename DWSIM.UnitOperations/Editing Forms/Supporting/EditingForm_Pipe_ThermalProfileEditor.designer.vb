@@ -148,9 +148,9 @@ Partial Class PipeThermalProfileEditor
         '
         'ComboBoxMAMB
         '
-        resources.ApplyResources(Me.ComboBoxMAMB, "ComboBoxMAMB")
         Me.ComboBoxMAMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxMAMB.DropDownWidth = 173
+        resources.ApplyResources(Me.ComboBoxMAMB, "ComboBoxMAMB")
         Me.ComboBoxMAMB.Items.AddRange(New Object() {resources.GetString("ComboBoxMAMB.Items"), resources.GetString("ComboBoxMAMB.Items1"), resources.GetString("ComboBoxMAMB.Items2"), resources.GetString("ComboBoxMAMB.Items3"), resources.GetString("ComboBoxMAMB.Items4"), resources.GetString("ComboBoxMAMB.Items5")})
         Me.ComboBoxMAMB.Name = "ComboBoxMAMB"
         '
@@ -186,9 +186,9 @@ Partial Class PipeThermalProfileEditor
         '
         'ComboBoxMAT
         '
-        resources.ApplyResources(Me.ComboBoxMAT, "ComboBoxMAT")
         Me.ComboBoxMAT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxMAT.DropDownWidth = 173
+        resources.ApplyResources(Me.ComboBoxMAT, "ComboBoxMAT")
         Me.ComboBoxMAT.Items.AddRange(New Object() {resources.GetString("ComboBoxMAT.Items"), resources.GetString("ComboBoxMAT.Items1"), resources.GetString("ComboBoxMAT.Items2"), resources.GetString("ComboBoxMAT.Items3"), resources.GetString("ComboBoxMAT.Items4"), resources.GetString("ComboBoxMAT.Items5"), resources.GetString("ComboBoxMAT.Items6"), resources.GetString("ComboBoxMAT.Items7")})
         Me.ComboBoxMAT.Name = "ComboBoxMAT"
         '

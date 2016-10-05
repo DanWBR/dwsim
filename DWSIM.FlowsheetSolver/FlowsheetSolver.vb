@@ -876,6 +876,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             fgui.ProcessScripts(Scripts.EventType.SolverStarted, Scripts.ObjectType.Solver, "")
 
+            'call spreadsheet update to get values when in write mode
+
+            fs.UpdateSpreadsheet()
+            fs.WriteSpreadsheetVariables()
+
             RaiseEvent FlowsheetCalculationStarted(fobj, New System.EventArgs(), Nothing)
 
             'find recycles
@@ -1236,6 +1241,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             End If
 
             'updates the flowsheet display information if the fobj is visible.
+
+            fs.UpdateSpreadsheet()
+            fs.UpdateSpreadsheet()
 
             fgui.UpdateInformation()
 

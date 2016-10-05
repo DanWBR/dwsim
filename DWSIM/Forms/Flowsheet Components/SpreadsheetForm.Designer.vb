@@ -23,8 +23,8 @@ Partial Class SpreadsheetForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpreadsheetForm))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SpreadsheetForm))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.A = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -69,10 +69,7 @@ Partial Class SpreadsheetForm
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.chkWriteMode = New System.Windows.Forms.CheckBox()
         Me.chkUpdate = New System.Windows.Forms.CheckBox()
-        Me.tbTolerance = New System.Windows.Forms.TextBox()
         Me.dckMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.FloatToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockLeftToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -92,11 +89,11 @@ Partial Class SpreadsheetForm
         '
         'DataGridView1
         '
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
@@ -273,9 +270,9 @@ Partial Class SpreadsheetForm
         '
         'ContextMenuStrip1
         '
-        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CelulaToolStripMenuItem, Me.ToolStripSeparator2, Me.AvaliarFormulaToolStripMenuItem, Me.ImportarDadosToolStripMenuItem, Me.ExportarDadosToolStripMenuItem, Me.ToolStripSeparator1, Me.LimparToolStripMenuItem, Me.CopiarToolStripMenuItem, Me.ColarToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        resources.ApplyResources(Me.ContextMenuStrip1, "ContextMenuStrip1")
         '
         'CelulaToolStripMenuItem
         '
@@ -284,49 +281,49 @@ Partial Class SpreadsheetForm
         '
         'ToolStripSeparator2
         '
-        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
         '
         'AvaliarFormulaToolStripMenuItem
         '
-        resources.ApplyResources(Me.AvaliarFormulaToolStripMenuItem, "AvaliarFormulaToolStripMenuItem")
         Me.AvaliarFormulaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.calculator
         Me.AvaliarFormulaToolStripMenuItem.Name = "AvaliarFormulaToolStripMenuItem"
+        resources.ApplyResources(Me.AvaliarFormulaToolStripMenuItem, "AvaliarFormulaToolStripMenuItem")
         '
         'ImportarDadosToolStripMenuItem
         '
-        resources.ApplyResources(Me.ImportarDadosToolStripMenuItem, "ImportarDadosToolStripMenuItem")
         Me.ImportarDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_in1
         Me.ImportarDadosToolStripMenuItem.Name = "ImportarDadosToolStripMenuItem"
+        resources.ApplyResources(Me.ImportarDadosToolStripMenuItem, "ImportarDadosToolStripMenuItem")
         '
         'ExportarDadosToolStripMenuItem
         '
-        resources.ApplyResources(Me.ExportarDadosToolStripMenuItem, "ExportarDadosToolStripMenuItem")
         Me.ExportarDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.arrow_out
         Me.ExportarDadosToolStripMenuItem.Name = "ExportarDadosToolStripMenuItem"
+        resources.ApplyResources(Me.ExportarDadosToolStripMenuItem, "ExportarDadosToolStripMenuItem")
         '
         'ToolStripSeparator1
         '
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         '
         'LimparToolStripMenuItem
         '
-        resources.ApplyResources(Me.LimparToolStripMenuItem, "LimparToolStripMenuItem")
         Me.LimparToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.LimparToolStripMenuItem.Name = "LimparToolStripMenuItem"
+        resources.ApplyResources(Me.LimparToolStripMenuItem, "LimparToolStripMenuItem")
         '
         'CopiarToolStripMenuItem
         '
-        resources.ApplyResources(Me.CopiarToolStripMenuItem, "CopiarToolStripMenuItem")
         Me.CopiarToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_copy
         Me.CopiarToolStripMenuItem.Name = "CopiarToolStripMenuItem"
+        resources.ApplyResources(Me.CopiarToolStripMenuItem, "CopiarToolStripMenuItem")
         '
         'ColarToolStripMenuItem
         '
-        resources.ApplyResources(Me.ColarToolStripMenuItem, "ColarToolStripMenuItem")
         Me.ColarToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.paste_plain
         Me.ColarToolStripMenuItem.Name = "ColarToolStripMenuItem"
+        resources.ApplyResources(Me.ColarToolStripMenuItem, "ColarToolStripMenuItem")
         '
         'tbCell
         '
@@ -360,21 +357,10 @@ Partial Class SpreadsheetForm
         '
         'Button2
         '
-        resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.Image = Global.DWSIM.My.Resources.Resources.arrow_refresh
+        resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
-        '
-        'chkWriteMode
-        '
-        resources.ApplyResources(Me.chkWriteMode, "chkWriteMode")
-        Me.chkWriteMode.Name = "chkWriteMode"
-        Me.chkWriteMode.UseVisualStyleBackColor = True
         '
         'chkUpdate
         '
@@ -384,66 +370,61 @@ Partial Class SpreadsheetForm
         Me.chkUpdate.Name = "chkUpdate"
         Me.chkUpdate.UseVisualStyleBackColor = True
         '
-        'tbTolerance
-        '
-        resources.ApplyResources(Me.tbTolerance, "tbTolerance")
-        Me.tbTolerance.Name = "tbTolerance"
-        '
         'dckMenu
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         '
         'DockLeftToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         '
         'DockRightToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         '
         'DockTopToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         '
         'DockBottomToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         '
         'DocumentToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         '
         'Button4
         '
@@ -459,10 +440,7 @@ Partial Class SpreadsheetForm
         Me.CloseButton = False
         Me.CloseButtonVisible = False
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.tbTolerance)
-        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.chkWriteMode)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.chkUpdate)
         Me.Controls.Add(Me.Button3)
@@ -500,9 +478,6 @@ Partial Class SpreadsheetForm
     Public WithEvents AvaliarFormulaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ExportarDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents chkUpdate As System.Windows.Forms.CheckBox
-    Public WithEvents tbTolerance As System.Windows.Forms.TextBox
-    Public WithEvents Label2 As System.Windows.Forms.Label
-    Public WithEvents chkWriteMode As System.Windows.Forms.CheckBox
     Public WithEvents A As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents B As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents C As System.Windows.Forms.DataGridViewTextBoxColumn
