@@ -196,10 +196,10 @@ Namespace Reactors
             i = 0
             For Each s As Compound In tms.Phases(3).Compounds.Values
                 If s.MoleFraction > 0.0# Then
-                    fugl(i) = s.ActivityCoeff.GetValueOrDefault
+                    fugl(i) = s.FugacityCoeff.GetValueOrDefault
                     cpl(i) = (fugl(i) * s.MoleFraction.GetValueOrDefault)
                 Else
-                    fugl(i) = s.ActivityCoeff.GetValueOrDefault
+                    fugl(i) = s.FugacityCoeff.GetValueOrDefault
                     cpl(i) = (fugl(i) * 0.01)
                 End If
                 i += 1
@@ -315,7 +315,7 @@ Namespace Reactors
             For Each s As Compound In tms.Phases(3).Compounds.Values
                 If s.MoleFraction <> 0.0# Then
                     DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugl(i) = s.ActivityCoeff.GetValueOrDefault
+                    fugl(i) = s.FugacityCoeff.GetValueOrDefault
                     CPl(i) = s.MoleFraction * (DGf + Log(fugl(i) * s.MoleFraction.GetValueOrDefault))
                 Else
                     CPl(i) = 0.0#
