@@ -120,155 +120,6 @@ Namespace Reactors
 
 #Region "Auxiliary Functions"
 
-        Private Function FunctionGradient(ByVal x() As Double) As Double()
-
-            Dim epsilon As Double = 0.0001
-
-            Dim f1, f2 As Double
-            Dim g(x.Length - 1), x2(x.Length - 1) As Double
-            Dim i, j As Integer
-
-            For i = 0 To x.Length - 1
-                f1 = FunctionValue(x)
-                For j = 0 To x.Length - 1
-                    If x(j) = 0 Then
-                        If i <> j Then
-                            x2(j) = (x(j) + 0.000001)
-                        Else
-                            x2(j) = (x(j) + 0.000001) * (1 + epsilon)
-                        End If
-                    Else
-                        If i <> j Then
-                            x2(j) = x(j)
-                        Else
-                            x2(j) = x(j) * (1 + epsilon)
-                        End If
-                    End If
-                Next
-                f2 = FunctionValue(x2)
-                g(i) = (f2 - f1) / (x2(i) - x(i))
-            Next
-
-            Return g
-
-        End Function
-
-        Private Function FunctionValue(ByVal x() As Double) As Double
-
-            Dim i, j As Integer
-
-            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
-
-            i = 0
-            For Each s As String In N.Keys
-                DN(s) = 0
-                For j = 0 To r
-                    DN(s) += E(i, j) * x(j)
-                Next
-                i += 1
-            Next
-
-            For Each s As String In DN.Keys
-                N(s) = N0(s) + DN(s)
-            Next
-
-            Dim fw(c), fm(c), sumfm, sum1, sumn, sumw As Double
-
-            N.Values.CopyTo(fm, 0)
-
-            sumfm = Sum(fm) + Ninerts
-
-            sum1 = 0.0#
-            sumn = 0.0#
-            For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Name) Then
-                    s.MolarFlow = N(s.Name)
-                    s.MoleFraction = N(s.Name) / sumfm
-                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
-                Else
-                    s.MoleFraction = s.MolarFlow / sumfm
-                End If
-                sumn += s.MolarFlow
-            Next
-
-            tms.Phases(0).Properties.molarflow = sumn
-
-            sumw = 0.0#
-            For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Name) Then
-                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
-                End If
-                s.MassFraction = s.MassFlow / (sum1 + Winerts)
-                sumw += s.MassFlow
-            Next
-
-            tms.Phases(0).Properties.massflow = sumw
-
-            With pp
-                .CurrentMaterialStream = tms
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                '.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                '.DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                '.DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                '.DW_CalcCompMolarFlow(-1)
-                '.DW_CalcCompMassFlow(-1)
-                '.DW_CalcCompVolFlow(-1)
-                '.DW_CalcOverallProps()
-                '.DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                '.DW_CalcVazaoVolumetrica()
-                '.DW_CalcKvalue()
-            End With
-
-            Dim fugs(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim prod(x.Length - 1) As Double
-            'Dim DGf As Double
-
-            i = 0
-            For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.MoleFraction > 0.0# Then
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0)
-                Else
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (fugs(i) * 0.0000000001 * P / P0)
-                End If
-                i += 1
-            Next
-
-            For i = 0 To Me.Reactions.Count - 1
-                prod(i) = 1.0#
-                j = 0
-                For Each s As Compound In tms.Phases(2).Compounds.Values
-                    With FlowSheet.Reactions(Me.Reactions(i))
-                        If .Components.ContainsKey(s.Name) Then
-                            prod(i) *= CP(j) ^ .Components(s.Name).StoichCoeff
-                        End If
-                    End With
-                    j += 1
-                Next
-            Next
-
-            Dim pen_val As Double = ReturnPenaltyValue()
-
-            Dim objfunc As Double = 0
-            For i = 0 To Me.Reactions.Count - 1
-                With FlowSheet.Reactions(Me.Reactions(i))
-                    objfunc += Abs(prod(i) - .ConstantKeqValue)
-                End With
-            Next
-
-
-            Dim fval As Double
-            If Double.IsNaN(objfunc) Or Double.IsInfinity(objfunc) Then
-                fval = pen_val
-            Else
-                fval = objfunc + pen_val
-            End If
-            Return fval
-
-        End Function
-
         Private Function FunctionValue2N(ByVal x() As Double) As Double()
 
             Dim i, j As Integer
@@ -323,32 +174,33 @@ Namespace Reactors
             With pp
                 .CurrentMaterialStream = tms
                 .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                '.DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                '.DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                '.DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                '.DW_CalcCompMolarFlow(-1)
-                '.DW_CalcCompMassFlow(-1)
-                '.DW_CalcCompVolFlow(-1)
-                '.DW_CalcOverallProps()
-                '.DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                '.DW_CalcVazaoVolumetrica()
-                '.DW_CalcKvalue()
             End With
 
-            Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim cpv(tms.Phases(0).Compounds.Count - 1), cpl(tms.Phases(0).Compounds.Count - 1) As Double
             Dim f(x.Length - 1) As Double
 
-            Dim fugs(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
+            Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
             i = 0
             For Each s As Compound In tms.Phases(2).Compounds.Values
                 If s.MoleFraction > 0.0# Then
-                    'DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0)
+                    fugv(i) = s.FugacityCoeff.GetValueOrDefault
+                    cpv(i) = (fugv(i) * s.MoleFraction.GetValueOrDefault * P / P0)
                 Else
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (fugs(i) * 0.01 * P / P0)
+                    fugv(i) = s.FugacityCoeff.GetValueOrDefault
+                    cpv(i) = (fugv(i) * 0.01 * P / P0)
+                End If
+                i += 1
+            Next
+
+            i = 0
+            For Each s As Compound In tms.Phases(3).Compounds.Values
+                If s.MoleFraction > 0.0# Then
+                    fugl(i) = s.ActivityCoeff.GetValueOrDefault
+                    cpl(i) = (fugl(i) * s.MoleFraction.GetValueOrDefault)
+                Else
+                    fugl(i) = s.ActivityCoeff.GetValueOrDefault
+                    cpl(i) = (fugl(i) * 0.01)
                 End If
                 i += 1
             Next
@@ -358,8 +210,10 @@ Namespace Reactors
                 j = 0
                 For Each s As Compound In tms.Phases(2).Compounds.Values
                     With FlowSheet.Reactions(Me.Reactions(i))
-                        If .Components.ContainsKey(s.Name) Then
-                            prod(i) *= CP(j) ^ .Components(s.Name).StoichCoeff
+                        If .ReactionPhase = PhaseName.Vapor AndAlso .Components.ContainsKey(s.Name) Then
+                            prod(i) *= cpv(j) ^ .Components(s.Name).StoichCoeff
+                        ElseIf .ReactionPhase = PhaseName.Liquid AndAlso .Components.ContainsKey(s.Name) Then
+                            prod(i) *= cpl(j) ^ .Components(s.Name).StoichCoeff
                         End If
                     End With
                     j += 1
@@ -435,37 +289,43 @@ Namespace Reactors
             With pp
                 .CurrentMaterialStream = tms
                 .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                .DW_CalcCompMolarFlow(-1)
-                .DW_CalcCompMassFlow(-1)
-                .DW_CalcCompVolFlow(-1)
-                .DW_CalcOverallProps()
-                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                .DW_CalcVazaoVolumetrica()
-                .DW_CalcKvalue()
             End With
 
-            Dim fugs(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim DGf As Double
+            Dim fugv(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim CPv(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim fugl(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim CPl(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim DGf, xv, xl As Double
 
             i = 0
+            xv = tms.Phases(2).Properties.molarfraction.GetValueOrDefault
             For Each s As Compound In tms.Phases(2).Compounds.Values
                 If s.MoleFraction <> 0.0# Then
                     DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = s.MoleFraction * (DGf + Log(fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0))
+                    fugv(i) = s.FugacityCoeff.GetValueOrDefault
+                    CPv(i) = s.MoleFraction * (DGf + Log(fugv(i) * s.MoleFraction.GetValueOrDefault * P / P0))
                 Else
-                    CP(i) = 0.0#
+                    CPv(i) = 0.0#
+                End If
+                i += 1
+            Next
+
+            i = 0
+            xl = tms.Phases(3).Properties.molarfraction.GetValueOrDefault
+            For Each s As Compound In tms.Phases(3).Compounds.Values
+                If s.MoleFraction <> 0.0# Then
+                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
+                    fugl(i) = s.ActivityCoeff.GetValueOrDefault
+                    CPl(i) = s.MoleFraction * (DGf + Log(fugl(i) * s.MoleFraction.GetValueOrDefault))
+                Else
+                    CPl(i) = 0.0#
                 End If
                 i += 1
             Next
 
             Dim pen_val As Double = ReturnPenaltyValue()
 
-            Dim gibbs As Double = Sum(CP) * sumn * 8.314 * T
+            Dim gibbs As Double = (xv * Sum(CPv) + xl * Sum(CPl)) * sumn * 8.314 * T
 
             Return gibbs
 
