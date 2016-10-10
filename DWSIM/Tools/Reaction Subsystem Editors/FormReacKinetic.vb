@@ -107,7 +107,7 @@ Public Class FormReacKinetic
                 Me.cbBase.SelectedIndex = 6
         End Select
 
-        'Me.cbConcUnit.Items.AddRange(New String() {"kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3", "kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
+        Me.cbConcUnit.Items.AddRange(New String() {"kmol/m3", "mol/m3", "mol/L", "mol/cm3", "mol/mL", "lbmol/ft3", "kg/m3", "g/L", "g/cm3", "g/mL", "lbm/ft3"})
         If rc.ConcUnit = "" Then
             Me.cbConcUnit.SelectedIndex = 0
         Else
