@@ -827,7 +827,7 @@ Namespace Streams
 
                 If prop.StartsWith("PROP_MS") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split("/")(0).Split("_")(2))
+                    Dim propidx As Integer = Integer.Parse(prop.Split("/")(0).Split("_")(2))
                     If prop.Split("/").Length = 2 Then
                         sname = prop.Split("/")(1)
                     End If
@@ -1585,7 +1585,7 @@ Namespace Streams
 
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("/")(0).Split("_")(2))
+                Dim propidx As Integer = Integer.Parse(prop.Split("/")(0).Split("_")(2))
                 Dim sname As String = ""
                 If prop.Split("/").Length = 2 Then
                     sname = prop.Split("/")(1)
@@ -1715,7 +1715,7 @@ Namespace Streams
 
                 If prop.StartsWith("PROP_MS") Then
 
-                    Dim propidx As Integer = Convert.ToInt32(prop.Split("/")(0).Split("_")(2))
+                    Dim propidx As Integer = Integer.Parse(prop.Split("/")(0).Split("_")(2))
 
                     Select Case propidx
 
