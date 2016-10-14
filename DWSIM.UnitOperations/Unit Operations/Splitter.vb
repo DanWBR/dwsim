@@ -107,13 +107,16 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-
             If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
-
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac8"))
             ElseIf Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
+
+            OutCount = 0
+            For Each cp In GraphicObject.OutputConnectors
+                If cp.IsAttached Then OutCount += 1
+            Next
 
             Dim ems As Thermodynamics.Streams.MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
             ems.Validate()
