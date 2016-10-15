@@ -160,7 +160,11 @@ Namespace My
                 GlobalSettings.Settings.UserInteractionsDatabases.Add(item)
             Next
 
-            If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
+            Try
+                If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
+            Catch ex As Exception
+                MessageBox.Show("GPU initialization failed: " & ex.Message)
+            End Try
 
             InitializationExceptions = Thermodynamics.NativeLibraries.Files.InitLibraries()
 
