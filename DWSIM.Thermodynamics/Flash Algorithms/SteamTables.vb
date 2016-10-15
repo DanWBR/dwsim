@@ -133,17 +133,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim vf, lf, T, H As Double
+            Dim vf, lf, T As Double
 
             spp = PP
 
             Dim brentsolverT As New BrentOpt.Brent
-            brentsolverT.DefineFuncDelegate(AddressOf spp.EnthalpyTx)
+            brentsolverT.DefineFuncDelegate(AddressOf spp.EntropyTx)
 
             With spp.m_iapws97
 
-                Hl = .enthalpySatLiqPW(P / 100000)
-                Hv = .enthalpySatVapPW(P / 100000)
                 Sl = .entropySatLiqPW(P / 100000)
                 Sv = .entropySatVapPW(P / 100000)
 
@@ -155,12 +153,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     vf = (S - Sl) / (Sv - Sl)
                 End If
 
-                H = vf * Hv + (1 - vf) * Hl
-
                 If vf <> 0.0# And vf <> 1.0# Then
                     T = .tSatW(P / 100000)
                 Else
-                    spp.LoopVarF = H
+                    spp.LoopVarF = S
                     spp.LoopVarX = P / 100000
                     T = brentsolverT.BrentOpt(273.15, 2000, 100, 0.0001, 1000, Nothing)
                 End If
