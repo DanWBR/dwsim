@@ -120,6 +120,7 @@ Namespace PropertyPackages
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(sub1, "TMIN")
+                Tmax = CoolProp.Props1SI(sub1, "TMAX")
                 Tc = CoolProp.Props1SI(sub1, "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
