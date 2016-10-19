@@ -383,8 +383,8 @@ Public Class FormOptions
 
     Private Sub dgvdb_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvdb.CellContentClick
         'remove component database
-        If e.ColumnIndex = 3 And e.RowIndex > 3 Then
-            Dim result = MessageBox.Show("Delete database " & dgvdb.Rows(e.RowIndex).Cells(1).Value & " ?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+        If e.ColumnIndex = 3 Then
+            Dim result = MessageBox.Show("Delete database " & dgvdb.Rows(e.RowIndex).Cells(1).Value & "?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
             If result = DialogResult.OK Then
                 If Me.dgvdb.Rows(e.RowIndex).Cells(1).Value = "ChemSep   " Then
 

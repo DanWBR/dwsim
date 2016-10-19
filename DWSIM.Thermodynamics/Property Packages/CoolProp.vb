@@ -57,10 +57,8 @@ Namespace PropertyPackages
             Select Case Settings.DebugLevel
                 Case 0
                     'do nothing
-                Case 1
+                Case Else
                     Console.WriteLine(message)
-                Case 2, 3
-
             End Select
         End Sub
 
@@ -573,10 +571,9 @@ Namespace PropertyPackages
             Return val
         End Function
 
-        Public Overrides Function AUX_VAPVISCi(cprop As Interfaces.ICompoundConstantProperties, T As Double) As Double
+        Public Overloads Function AUX_VAPVISCi(cprop As Interfaces.ICompoundConstantProperties, T As Double, P As Double) As Double
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, val As Double
-            Dim P = Me.CurrentMaterialStream.Phases(2).Properties.pressure.GetValueOrDefault
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(cprop.Name, "TMIN")
                 Tmax = CoolProp.Props1SI(cprop.Name, "TMAX")
