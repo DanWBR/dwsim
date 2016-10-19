@@ -815,7 +815,7 @@ Namespace Databases
 
         End Sub
 
-        Public Shared Sub AddCompounds(ByVal comps() As Thermodynamics.BaseClasses.ConstantProperties, ByVal xmlpath As String, ByVal replace As Boolean)
+        Public Shared Sub AddCompounds(ByVal comps() As Interfaces.ICompoundConstantProperties, ByVal xmlpath As String, ByVal replace As Boolean)
 
             Dim xmldoc As XmlDocument
             Dim reader As XmlReader = XmlReader.Create(xmlpath)
@@ -857,6 +857,7 @@ Namespace Databases
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Name", "")).InnerText = comp.Name
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CAS_Number", "")).InnerText = comp.CAS_Number
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "ID", "")).InnerText = comp.ID
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Comments", "")).InnerText = comp.Comments
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "CompCreatorStudyFile", "")).InnerText = comp.CompCreatorStudyFile
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Formula", "")).InnerText = comp.Formula
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "SMILES", "")).InnerText = comp.SMILES
@@ -894,6 +895,14 @@ Namespace Databases
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_Const_E", "")).InnerText = comp.Liquid_Heat_Capacity_Const_E.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_TMin", "")).InnerText = comp.Liquid_Heat_Capacity_Tmin.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Heat_Capacity_TMax", "")).InnerText = comp.Liquid_Heat_Capacity_Tmax.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_EqNo", "")).InnerText = comp.LiquidThermalConductivityEquation
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_A", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_A.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_B", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_B.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_C", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_C.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_D", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_D.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_E", "")).InnerText = comp.Liquid_Thermal_Conductivity_Const_E.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_Tmin", "")).InnerText = comp.Liquid_Thermal_Conductivity_Tmin.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Thermal_Conductivity_Const_Tmax", "")).InnerText = comp.Liquid_Thermal_Conductivity_Tmax.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_EqNo", "")).InnerText = comp.LiquidViscosityEquation
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_A", "")).InnerText = comp.Liquid_Viscosity_Const_A.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Viscosity_Const_B", "")).InnerText = comp.Liquid_Viscosity_Const_B.ToString(cult)
@@ -906,6 +915,20 @@ Namespace Databases
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_C", "")).InnerText = comp.Liquid_Density_Const_C.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_D", "")).InnerText = comp.Liquid_Density_Const_D.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Liquid_Density_Const_E", "")).InnerText = comp.Liquid_Density_Const_E.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_EqNo", "")).InnerText = comp.VaporViscosityEquation
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_A", "")).InnerText = comp.Vapor_Viscosity_Const_A.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_B", "")).InnerText = comp.Vapor_Viscosity_Const_B.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_C", "")).InnerText = comp.Vapor_Viscosity_Const_C.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_D", "")).InnerText = comp.Vapor_Viscosity_Const_D.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Viscosity_Const_E", "")).InnerText = comp.Vapor_Viscosity_Const_E.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_EqNo", "")).InnerText = comp.VaporThermalConductivityEquation
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_A", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_A.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_B", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_B.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_C", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_C.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_D", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_D.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_E", "")).InnerText = comp.Vapor_Thermal_Conductivity_Const_E.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_Tmin", "")).InnerText = comp.Vapor_Thermal_Conductivity_Tmin.ToString(cult)
+                    .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Vapor_Thermal_Conductivity_Const_Tmax", "")).InnerText = comp.Vapor_Thermal_Conductivity_Tmax.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_EqNo", "")).InnerText = comp.SolidHeatCapacityEquation
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_A", "")).InnerText = comp.Solid_Heat_Capacity_Const_A.ToString(cult)
                     .AppendChild(xmldoc.CreateNode(XmlNodeType.Element, "Solid_Heat_Capacity_Constant_B", "")).InnerText = comp.Solid_Heat_Capacity_Const_B.ToString(cult)
@@ -1076,6 +1099,8 @@ Namespace Databases
                                 .CAS_Number = node2.InnerText
                             Case "CompCreatorStudyFile"
                                 .CompCreatorStudyFile = node2.InnerText
+                            Case "Comments"
+                                .Comments = node2.InnerText
                             Case "Formula"
                                 .Formula = node2.InnerText
                             Case "Molar_Weight"
@@ -1118,6 +1143,46 @@ Namespace Databases
                                 .Vapor_Pressure_Constant_D = Double.Parse(node2.InnerText, nf)
                             Case "Vapor_Pressure_Constant_E"
                                 .Vapor_Pressure_Constant_E = Double.Parse(node2.InnerText, nf)
+
+                            Case "Vapor_Viscosity_EqNo"
+                                If node2.InnerText <> "" Then .VaporViscosityEquation = Integer.Parse(node2.InnerText, nf)
+                            Case "Vapor_Viscosity_Const_A"
+                                .Vapor_Viscosity_Const_A = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Viscosity_Const_B"
+                                .Vapor_Viscosity_Const_B = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Viscosity_Const_C"
+                                .Vapor_Viscosity_Const_C = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Viscosity_Const_D"
+                                .Vapor_Viscosity_Const_D = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Viscosity_Const_E"
+                                .Vapor_Viscosity_Const_E = Double.Parse(node2.InnerText, nf)
+
+                            Case "Vapor_Thermal_Conductivity_EqNo"
+                                If node2.InnerText <> "" Then .VaporThermalConductivityEquation = Integer.Parse(node2.InnerText, nf)
+                            Case "Vapor_Thermal_Conductivity_Const_A"
+                                .Vapor_Thermal_Conductivity_Const_A = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Thermal_Conductivity_Const_B"
+                                .Vapor_Thermal_Conductivity_Const_B = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Thermal_Conductivity_Const_C"
+                                .Vapor_Thermal_Conductivity_Const_C = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Thermal_Conductivity_Const_D"
+                                .Vapor_Thermal_Conductivity_Const_D = Double.Parse(node2.InnerText, nf)
+                            Case "Vapor_Thermal_Conductivity_Const_E"
+                                .Vapor_Thermal_Conductivity_Const_E = Double.Parse(node2.InnerText, nf)
+
+                            Case "Liquid_Thermal_Conductivity_EqNo"
+                                If node2.InnerText <> "" Then .LiquidThermalConductivityEquation = Integer.Parse(node2.InnerText, nf)
+                            Case "Liquid_Thermal_Conductivity_Const_A"
+                                .Liquid_Thermal_Conductivity_Const_A = Double.Parse(node2.InnerText, nf)
+                            Case "Liquid_Thermal_Conductivity_Const_B"
+                                .Liquid_Thermal_Conductivity_Const_B = Double.Parse(node2.InnerText, nf)
+                            Case "Liquid_Thermal_Conductivity_Const_C"
+                                .Liquid_Thermal_Conductivity_Const_C = Double.Parse(node2.InnerText, nf)
+                            Case "Liquid_Thermal_Conductivity_Const_D"
+                                .Liquid_Thermal_Conductivity_Const_D = Double.Parse(node2.InnerText, nf)
+                            Case "Liquid_Thermal_Conductivity_Const_E"
+                                .Liquid_Thermal_Conductivity_Const_E = Double.Parse(node2.InnerText, nf)
+
                             Case "Ideal_Gas_Heat_Capacity_EqNo"
                                 If node2.InnerText <> "" Then .IdealgasCpEquation = Integer.Parse(node2.InnerText, nf)
                             Case "Ideal_Gas_Heat_Capacity_Const_A"
@@ -1130,7 +1195,7 @@ Namespace Databases
                                 .Ideal_Gas_Heat_Capacity_Const_D = Double.Parse(node2.InnerText, nf)
                             Case "Ideal_Gas_Heat_Capacity_Const_E"
                                 .Ideal_Gas_Heat_Capacity_Const_E = Double.Parse(node2.InnerText, nf)
-                            Case "Liquid_Viscosity_Const_EqNo"
+                            Case "Liquid_Viscosity_EqNo"
                                 If node2.InnerText <> "" Then .LiquidViscosityEquation = Integer.Parse(node2.InnerText, nf)
                             Case "Liquid_Viscosity_Const_A"
                                 .Liquid_Viscosity_Const_A = Double.Parse(node2.InnerText, nf)
@@ -1142,7 +1207,7 @@ Namespace Databases
                                 .Liquid_Viscosity_Const_D = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Viscosity_Const_E"
                                 .Liquid_Viscosity_Const_E = Double.Parse(node2.InnerText, nf)
-                            Case "Liquid_Density_Const_EqNo"
+                            Case "Liquid_Density_EqNo"
                                 If node2.InnerText <> "" Then .LiquidDensityEquation = Integer.Parse(node2.InnerText, nf)
                             Case "Liquid_Density_Const_A"
                                 .Liquid_Density_Const_A = Double.Parse(node2.InnerText, nf)

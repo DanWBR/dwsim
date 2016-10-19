@@ -20,7 +20,7 @@ Imports System.Math
 
 Namespace DWSIM.Utilities.PetroleumCharacterization
 
-    Class LMFit
+    Public Class LMFit
 
         Public Enum FitType
             Pvap = 0
