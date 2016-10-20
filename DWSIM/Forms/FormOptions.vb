@@ -252,7 +252,7 @@ Public Class FormOptions
                             End If
                         Next
                     End If
-                    Me.AddDatabase("User" & CStr(My.Settings.UserDatabases.Count + 1) & "   ", path)
+                    Me.AddDatabase("User" & CStr(My.Settings.UserDatabases.Count + 1), path)
                     MessageBox.Show(DWSIM.App.GetLocalString("UDBAdded"))
                 End If
             Catch ex As System.Runtime.Serialization.SerializationException
@@ -386,23 +386,11 @@ Public Class FormOptions
         If e.ColumnIndex = 3 Then
             Dim result = MessageBox.Show("Delete database " & dgvdb.Rows(e.RowIndex).Cells(1).Value & "?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
             If result = DialogResult.OK Then
-                If Me.dgvdb.Rows(e.RowIndex).Cells(1).Value = "ChemSep   " Then
-
-                    'remove chemsep database
-                    My.Settings.ChemSepDatabasePath = ""
-                    Me.dgvdb.Rows.RemoveAt(e.RowIndex)
-                    MessageBox.Show(DWSIM.App.GetLocalString("NextStartupOnly"))
-
-                Else
-
-                    'remove user database
+                'remove user database
                     My.Settings.UserDatabases.Remove(Me.dgvdb.Rows(e.RowIndex).Cells(2).Value)
                     Me.dgvdb.Rows.RemoveAt(e.RowIndex)
                     MessageBox.Show(DWSIM.App.GetLocalString("UDBRemoved"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                End If
             End If
-
         End If
 
         If e.ColumnIndex = 4 Then

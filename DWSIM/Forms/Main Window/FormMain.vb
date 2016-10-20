@@ -749,7 +749,7 @@ Public Class FormMain
         'load DWSIM XML database
         Me.LoadDWSIMDB()
 
-        'load CoolProp list of compounds
+        'load CoolProp database
         Me.LoadCPDB()
 
         'load Electrolyte XML database

@@ -268,11 +268,6 @@ Public Class FormSimulWizard
                 Dim tmpcomp As New BaseClasses.ConstantProperties
                 tmpcomp = Me.FrmChild.Options.NotSelectedComponents(ogc1.Rows(index).Cells(0).Value)
 
-                If tmpcomp.OriginalDB = "CoolProp" And My.Settings.ShowCoolPropWarning Then
-                    Dim fc As New FormCoolPropWarning
-                    fc.ShowDialog()
-                End If
-
                 Me.FrmChild.Options.SelectedComponents.Add(tmpcomp.Name, tmpcomp)
                 Me.FrmChild.Options.NotSelectedComponents.Remove(tmpcomp.Name)
                 Dim ms As Streams.MaterialStream

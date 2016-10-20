@@ -3598,7 +3598,7 @@
     <value>Component Type</value>
   </data>
   <data name="UDBAdded" xml:space="preserve">
-    <value>You added a user database. Changes will be effective only on the next program startup.</value>
+    <value>You've added an user database. Changes will be effective for new simulations only.</value>
   </data>
   <data name="UDBRemoved" xml:space="preserve">
     <value>You removed a user database. Changes will be effective only on the next program startup.</value>

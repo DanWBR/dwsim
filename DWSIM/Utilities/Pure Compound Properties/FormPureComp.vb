@@ -124,7 +124,7 @@ Public Class FormPureComp
             vxCp.Clear()
             vyCp.Clear()
 
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_CPi(constprop.Name, T))
@@ -154,15 +154,20 @@ Public Class FormPureComp
 
             'vapor viscosity
             With constprop
-                Tmin = 0.6 * .Critical_Temperature
-                Tmax = .Critical_Temperature
+                If .Vapor_Viscosity_Tmin <> 0 Then
+                    Tmin = 0.6 * .Vapor_Viscosity_Tmin
+                    Tmax = .Vapor_Viscosity_Tmax
+                Else
+                    Tmin = 0.6 * .Critical_Temperature
+                    Tmax = .Critical_Temperature
+                End If
                 delta = (Tmax - Tmin) / 50
             End With
             T = Tmin
             Row = 0
             vxVapVisc.Clear()
             vyVapVisc.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, pp.AUX_VAPVISCi(constprop, T))
@@ -202,7 +207,7 @@ Public Class FormPureComp
             Row = 0
             vxVapThCond.Clear()
             vyVapThCond.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_VAPTHERMCONDi(constprop, T, 101325))
@@ -246,7 +251,7 @@ Public Class FormPureComp
             vxLiqCp.Clear()
             vyLiqCp.Clear()
 
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_LIQ_Cpi(constprop, T))
@@ -285,7 +290,7 @@ Public Class FormPureComp
             Row = 0
             vxDHvap.Clear()
             vyDHvap.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, pp.AUX_HVAPi(constprop.Name, T))
@@ -325,7 +330,7 @@ Public Class FormPureComp
             Row = 0
             vxPvap.Clear()
             vyPvap.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, pp.AUX_PVAPi(constprop.Name, T))
@@ -367,7 +372,7 @@ Public Class FormPureComp
             Row = 0
             vxSurfTens.Clear()
             vySurfTens.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.surfaceTension, pp.AUX_SURFTi(constprop, T))
@@ -405,7 +410,7 @@ Public Class FormPureComp
             Row = 0
             vxVisc.Clear()
             vyVisc.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.viscosity, pp.AUX_LIQVISCi(constprop.Name, T))
@@ -446,7 +451,7 @@ Public Class FormPureComp
             Row = 0
             vxLD.Clear()
             vyLD.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.density, pp.AUX_LIQDENSi(constprop, T))
@@ -486,7 +491,7 @@ Public Class FormPureComp
             Row = 0
             vxLiqThCond.Clear()
             vyLiqThCond.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.thermalConductivity, pp.AUX_LIQTHERMCONDi(constprop, T))
@@ -528,7 +533,7 @@ Public Class FormPureComp
             Row = 0
             vxSD.Clear()
             vySD.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.density, pp.AUX_SOLIDDENSi(constprop, T))
@@ -572,7 +577,7 @@ Public Class FormPureComp
             Row = 0
             vxSCP.Clear()
             vySCP.Clear()
-            If Not constprop.IsIon And Not constprop.IsSalt And Not constprop.OriginalDB = "CoolProp" Then
+            If Not constprop.IsIon And Not constprop.IsSalt Then
                 Do
                     TD = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, T)
                     VD = SystemsOfUnits.Converter.ConvertFromSI(su.heatCapacityCp, pp.AUX_SolidHeatCapacity(constprop, T))

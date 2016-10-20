@@ -598,12 +598,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Assets\Databases\biod_db.xml" />
     <EmbeddedResource Include="Assets\Databases\chemsep1.xml" />
-    <EmbeddedResource Include="Assets\Databases\coolprop.txt" />
     <EmbeddedResource Include="Assets\Databases\dwsim.xml" />
     <EmbeddedResource Include="Assets\Databases\electrolyte.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\emblem-important.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\coolprop.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
