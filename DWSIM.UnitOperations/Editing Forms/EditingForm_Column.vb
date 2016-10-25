@@ -497,9 +497,7 @@ Public Class EditingForm_Column
 
     Private Sub cbCondSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCondSpec.SelectedIndexChanged
 
-        If Loaded Then
-
-            SimObject.Specs("C").SType = cbCondSpec.SelectedIndex
+        SimObject.Specs("C").SType = cbCondSpec.SelectedIndex
             Dim cunits As String() = {}
             Select Case SimObject.Specs("C").SType
                 Case ColumnSpec.SpecType.Component_Fraction
@@ -533,8 +531,6 @@ Public Class EditingForm_Column
             cbCondSpecUnits.Items.Clear()
             cbCondSpecUnits.Items.AddRange(cunits)
             cbCondSpecUnits.SelectedItem = Nothing
-
-        End If
 
     End Sub
 
@@ -629,8 +625,6 @@ Public Class EditingForm_Column
 
     Private Sub cbRebSpec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbRebSpec.SelectedIndexChanged
 
-        If Loaded Then
-
             SimObject.Specs("R").SType = cbRebSpec.SelectedIndex
             Dim cunits As String() = {}
             Select Case SimObject.Specs("R").SType
@@ -665,8 +659,6 @@ Public Class EditingForm_Column
             cbRebSpecUnits.Items.Clear()
             cbRebSpecUnits.Items.AddRange(cunits)
             cbRebSpecUnits.SelectedItem = Nothing
-
-        End If
 
     End Sub
 

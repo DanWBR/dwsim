@@ -606,7 +606,7 @@ Namespace Reactors
             If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
                 Return "Suporta reações definidas por uma taxa de conversão de reagentes"
             Else
-                Return "Supports reactant conversion rate-defined reactions"
+                Return "Supports reactions defined by amounts of reactant converted as a function of temperature"
             End If
         End Function
 

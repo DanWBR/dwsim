@@ -397,10 +397,10 @@ Public Class EditingForm_Column_Connections
                 Dim obj = form.SimulationObjects(sid).GraphicObject
                 If Not obj Is Nothing Then
                     Dim idx As Integer = obj.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
-                    form.DisconnectObjects(form.SimulationObjects(sid).GraphicObject, dc.GraphicObject)
                     'dc.GraphicObject.InputConnectors.RemoveAt(idx)
                     dc.GraphicObject.InputConnectors(idx).AttachedConnector = Nothing
                     dc.GraphicObject.InputConnectors(idx).IsAttached = False
+                    form.DisconnectObjects(form.SimulationObjects(sid).GraphicObject, dc.GraphicObject)
                 End If
             End If
             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams.Remove(id)
@@ -415,10 +415,10 @@ Public Class EditingForm_Column_Connections
         With Me.dgv2.Rows
             If Not id = "" Then
                 Dim idx As Integer = form.SimulationObjects(sid).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
-                'dc.GraphicObject.OutputConnectors.RemoveAt(idx)
+                 'dc.GraphicObject.OutputConnectors.RemoveAt(idx)
                 dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
                 dc.GraphicObject.OutputConnectors(idx).IsAttached = False
+                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
             End If
             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams.Remove(id)
             .RemoveAt(dgv2.SelectedCells(0).RowIndex)
@@ -456,8 +456,8 @@ Public Class EditingForm_Column_Connections
                         If Not id = "" Then
                             Try
                                 Dim idx As Integer = form.SimulationObjects(id).GraphicObject.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
+                               dc.GraphicObject.InputConnectors.RemoveAt(idx)
                                 form.DisconnectObjects(form.SimulationObjects(id).GraphicObject, dc.GraphicObject)
-                                dc.GraphicObject.InputConnectors.RemoveAt(idx)
                             Catch ex As Exception
                             End Try
                         End If
@@ -474,8 +474,8 @@ Public Class EditingForm_Column_Connections
                             Else
                                 .InputConnectors(.InputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             End If
-                            form.ConnectObjects(form.SimulationObjects(sid).GraphicObject, dc.GraphicObject, fidx, tidx)
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
+                            form.ConnectObjects(form.SimulationObjects(sid).GraphicObject, dc.GraphicObject, fidx, tidx)
                         End With
                     Else
                         If Not id = "" Then
@@ -483,10 +483,10 @@ Public Class EditingForm_Column_Connections
                                 Dim sid As String = dc.MaterialStreams(id).StreamID
                                 If form.SimulationObjects.ContainsKey(sid) Then
                                     Dim idx As Integer = form.SimulationObjects(id).GraphicObject.OutputConnectors(0).AttachedConnector.AttachedToConnectorIndex
-                                    form.DisconnectObjects(form.SimulationObjects(id).GraphicObject, dc.GraphicObject)
                                     dc.GraphicObject.InputConnectors(idx).AttachedConnector = Nothing
                                     dc.GraphicObject.InputConnectors(idx).IsAttached = False
                                     dc.MaterialStreams(id).StreamID = ""
+                                    form.DisconnectObjects(form.SimulationObjects(id).GraphicObject, dc.GraphicObject)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -513,8 +513,8 @@ Public Class EditingForm_Column_Connections
                         If Not id = "" Then
                             Try
                                 Dim idx As Integer = form.SimulationObjects(id).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(id).GraphicObject)
                                 dc.GraphicObject.OutputConnectors.RemoveAt(idx)
+                                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(id).GraphicObject)
                             Catch ex As Exception
                             End Try
                         End If
@@ -531,8 +531,8 @@ Public Class EditingForm_Column_Connections
                             Else
                                 .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.MaterialStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                             End If
-                            form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
+                            form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
                         End With
                     Else
                         If Not id = "" Then
@@ -540,10 +540,10 @@ Public Class EditingForm_Column_Connections
                                 Dim sid As String = dc.MaterialStreams(id).StreamID
                                 If form.SimulationObjects.ContainsKey(sid) Then
                                     Dim idx As Integer = form.SimulationObjects(sid).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                                     dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
                                     dc.GraphicObject.OutputConnectors(idx).IsAttached = False
                                     dc.MaterialStreams(id).StreamID = ""
+                                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -578,8 +578,8 @@ Public Class EditingForm_Column_Connections
                         If Not id = "" Then
                             Try
                                 Dim idx As Integer = form.SimulationObjects(id).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(id).GraphicObject)
                                 dc.GraphicObject.OutputConnectors.RemoveAt(idx)
+                                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(id).GraphicObject)
                             Catch ex As Exception
                             End Try
                         End If
@@ -622,8 +622,8 @@ Public Class EditingForm_Column_Connections
                                 End Try
                             Next
 
-                            form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
                             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams(id).StreamID = sid
+                            form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
 
                         End With
                     Else
@@ -632,10 +632,10 @@ Public Class EditingForm_Column_Connections
                                 Dim sid As String = dc.MaterialStreams(id).StreamID
                                 If form.SimulationObjects.ContainsKey(sid) Then
                                     Dim idx As Integer = form.SimulationObjects(sid).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                                     dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
                                     dc.GraphicObject.OutputConnectors(idx).IsAttached = False
                                     dc.MaterialStreams(id).StreamID = ""
+                                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -658,8 +658,8 @@ Public Class EditingForm_Column_Connections
                         If Not id = "" Then
                             Try
                                 Dim idx As Integer = form.SimulationObjects(id).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                                 dc.GraphicObject.OutputConnectors.RemoveAt(idx)
                                 form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(id).GraphicObject)
-                                dc.GraphicObject.OutputConnectors.RemoveAt(idx)
                             Catch ex As Exception
                             End Try
                         End If
@@ -678,13 +678,6 @@ Public Class EditingForm_Column_Connections
                                     Else
                                         .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.08 * dc.GraphicObject.Height)
                                     End If
-                                    Try
-                                        form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
-                                    Catch ex As Exception
-                                        form.ShowMessage(ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
-                                        dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
-                                        Exit Sub
-                                    End Try
                                 Case StreamInformation.Behavior.BottomsLiquid
                                     .OutputConnectors.Add(New ConnectionPoint())
                                     .OutputConnectors(.OutputConnectors.Count - 1).Type = ConType.ConEn
@@ -695,13 +688,6 @@ Public Class EditingForm_Column_Connections
                                     Else
                                         .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + 0.825 * dc.GraphicObject.Height)
                                     End If
-                                    Try
-                                        form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
-                                    Catch ex As Exception
-                                        form.ShowMessage(ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
-                                        dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
-                                        Exit Sub
-                                    End Try
                                 Case StreamInformation.Behavior.InterExchanger
                                     .OutputConnectors.Add(New ConnectionPoint())
                                     .OutputConnectors(.OutputConnectors.Count - 1).Type = ConType.ConEn
@@ -712,13 +698,6 @@ Public Class EditingForm_Column_Connections
                                     Else
                                         .OutputConnectors(.OutputConnectors.Count - 1).Position = New Point(dc.GraphicObject.X + dc.GraphicObject.Width, dc.GraphicObject.Y + dc.StageIndex(dc.EnergyStreams(id).AssociatedStage) / dc.NumberOfStages * dc.GraphicObject.Height)
                                     End If
-                                    Try
-                                        form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
-                                    Catch ex As Exception
-                                        form.ShowMessage(ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
-                                        dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
-                                        Exit Sub
-                                    End Try
                             End Select
                             If dc.EnergyStreams.ContainsKey(id) Then dc.EnergyStreams(id).StreamID = sid
                             Dim k As Integer
@@ -730,6 +709,32 @@ Public Class EditingForm_Column_Connections
                                     End Try
                                 End If
                             Next
+                            Select Case dc.EnergyStreams(id).StreamBehavior
+                                Case StreamInformation.Behavior.Distillate
+                                    Try
+                                        form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
+                                    Catch ex As Exception
+                                        form.ShowMessage(ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                                        dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
+                                        Exit Sub
+                                    End Try
+                                Case StreamInformation.Behavior.BottomsLiquid
+                                    Try
+                                        form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
+                                    Catch ex As Exception
+                                        form.ShowMessage(ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                                        dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
+                                        Exit Sub
+                                    End Try
+                                Case StreamInformation.Behavior.InterExchanger
+                                    Try
+                                        form.ConnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject, fidx, tidx)
+                                    Catch ex As Exception
+                                        form.ShowMessage(ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                                        dgv4.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
+                                        Exit Sub
+                                    End Try
+                            End Select
                         End With
                     Else
                         If Not id = "" Then
@@ -737,10 +742,10 @@ Public Class EditingForm_Column_Connections
                                 Dim sid As String = dc.EnergyStreams(id).StreamID
                                 If form.SimulationObjects.ContainsKey(sid) Then
                                     Dim idx As Integer = form.SimulationObjects(sid).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                                     dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
                                     dc.GraphicObject.OutputConnectors(idx).IsAttached = False
                                     dc.EnergyStreams(id).StreamID = ""
+                                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                                 End If
                             Catch ex As Exception
                             End Try
@@ -803,10 +808,10 @@ Public Class EditingForm_Column_Connections
                     Dim obj = form.SimulationObjects(sid).GraphicObject
                     If Not obj Is Nothing Then
                         Dim idx As Integer = obj.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                        form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                         'dc.GraphicObject.OutputConnectors.RemoveAt(idx)
                         dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
                         dc.GraphicObject.OutputConnectors(idx).IsAttached = False
+                        form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
                     End If
                 End If
                 If dc.EnergyStreams.ContainsKey(id) Then dc.EnergyStreams.Remove(id)
