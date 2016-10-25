@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 24 - October 2016
+Version 4.0 Update 26 - October 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 26
+
+- [CHG] CoolProp database compounds can now be used with most Property Packages
+- [FIX] Fixed bugs with the CoolProp Property Package
+- [FIX] Fixed Shortcut and Rigorous Column connection editors
 
 Version 4.0 Update 25
 
