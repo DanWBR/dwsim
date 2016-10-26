@@ -148,6 +148,12 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Column Specs</value>
+  </data>
+  <data name="TabGeneral.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
   </data>
@@ -178,8 +184,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Number of Stages</value>
   </data>
-  <data name="TabGeneral.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="TabCondenser.Text" xml:space="preserve">
+    <value>Condenser</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 119</value>
@@ -230,7 +236,7 @@
     <value>Compound Mass Flow in Product Stream</value>
   </data>
   <data name="cbCondSpec.Items5" xml:space="preserve">
-    <value>Compound Molar Fraction in Product Stream</value>
+    <value>Compound Fraction in Product Stream</value>
   </data>
   <data name="cbCondSpec.Items6" xml:space="preserve">
     <value>Compound Recovery</value>
@@ -253,8 +259,8 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Condenser Pressure</value>
   </data>
-  <data name="TabCondenser.Text" xml:space="preserve">
-    <value>Condenser</value>
+  <data name="TabReboiler.Text" xml:space="preserve">
+    <value>Reboiler</value>
   </data>
   <data name="Label24.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -284,7 +290,7 @@
     <value>Compound Mass Flow in Product Stream</value>
   </data>
   <data name="cbRebSpec.Items5" xml:space="preserve">
-    <value>Compound Molar Fraction in Product Stream</value>
+    <value>Compound Fraction in Product Stream</value>
   </data>
   <data name="cbRebSpec.Items6" xml:space="preserve">
     <value>Compound Recovery</value>
@@ -301,17 +307,17 @@
   <data name="Label17.Text" xml:space="preserve">
     <value>Reboiler Pressure</value>
   </data>
-  <data name="TabReboiler.Text" xml:space="preserve">
-    <value>Reboiler</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Column Specs</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Column Configuration</value>
   </data>
   <data name="TabConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
   <data name="TabStages.Text" xml:space="preserve">
     <value>Stages</value>
+  </data>
+  <data name="TabInitialEstimates.Text" xml:space="preserve">
+    <value>Initial Estimates</value>
   </data>
   <data name="InitialEstimatesPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>360, 307</value>
@@ -339,9 +345,6 @@
   </data>
   <data name="chkUseIE_T.ToolTip" xml:space="preserve">
     <value>Use initial estimates for stage temperature</value>
-  </data>
-  <data name="TabInitialEstimates.Text" xml:space="preserve">
-    <value>Initial Estimates</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -421,8 +424,11 @@
   <data name="Label23.Text" xml:space="preserve">
     <value>Numerical Derivative Step</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Column Configuration</value>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="btnResults.Text" xml:space="preserve">
     <value>View Temperature, Pressure and Composition Profiles</value>
@@ -435,11 +441,5 @@
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Results</value>
   </data>
 </root>
