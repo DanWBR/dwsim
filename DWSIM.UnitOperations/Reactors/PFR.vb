@@ -34,7 +34,7 @@ Namespace Reactors
         Inherits Reactor
 
         Protected m_vol As Double
-        Protected m_dv As Double = 0.05
+        Protected m_dv As Double = 0.01
 
         Dim C0 As Dictionary(Of String, Double)
         Dim C As Dictionary(Of String, Double)
@@ -52,7 +52,6 @@ Namespace Reactors
 
         <System.NonSerialized()> Dim ims As MaterialStream
         <System.NonSerialized()> Dim pp As PropertyPackages.PropertyPackage
-        <System.NonSerialized()> Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorPFR
 
@@ -248,13 +247,13 @@ Namespace Reactors
 
             Dim conv As New SystemsOfUnits.Converter
 
-            If Ri Is Nothing Then Ri = New Dictionary(Of String, Double)
-            If Rxi Is Nothing Then Rxi = New Dictionary(Of String, Double)
-            If DHRi Is Nothing Then DHRi = New Dictionary(Of String, Double)
-            If DN Is Nothing Then DN = New Dictionary(Of String, Double)
-            If N00 Is Nothing Then N00 = New Dictionary(Of String, Double)
-            If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
-            If Me.ComponentConversions Is Nothing Then Me.m_componentconversions = New Dictionary(Of String, Double)
+            Ri = New Dictionary(Of String, Double)
+            Rxi = New Dictionary(Of String, Double)
+            DHRi = New Dictionary(Of String, Double)
+            DN = New Dictionary(Of String, Double)
+            N00 = New Dictionary(Of String, Double)
+            m_conversions = New Dictionary(Of String, Double)
+            m_componentconversions = New Dictionary(Of String, Double)
 
             points = New ArrayList
 
@@ -267,7 +266,8 @@ Namespace Reactors
             End If
             ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
             pp = Me.PropertyPackage
-            ppr = New PropertyPackages.RaoultPropertyPackage()
+
+            pp.CurrentMaterialStream = ims
 
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
@@ -312,7 +312,6 @@ Namespace Reactors
             Loop Until i = maxrank + 1
 
             pp.CurrentMaterialStream = ims
-            ppr.CurrentMaterialStream = ims
 
             Dim N0 As New Dictionary(Of String, Double)
             Dim N As New Dictionary(Of String, Double)
@@ -546,25 +545,26 @@ Namespace Reactors
 
                     Me.activeAL = Me.ReactionsSequence.IndexOfValue(ar)
 
-                    Dim vc(N.Count) As Double
+                    Dim vc(N.Count), vc0(N.Count) As Double
                     i = 1
                     For Each d As Double In N.Values
                         vc(i) = d
+                        vc0(i) = vc(i)
                         i = i + 1
                     Next
 
                     Dim bs As New MathEx.ODESolver.bulirschstoer
                     bs.DefineFuncDelegate(AddressOf ODEFunc)
-                    bs.solvesystembulirschstoer(prevvol, currvol, vc, Ri.Count, 0.1 * currvol, 0.001, True)
+                    bs.solvesystembulirschstoer(prevvol, currvol, vc, Ri.Count, 0.01 * currvol, 0.0000000001, True)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
                     i = 1
                     For Each sb As KeyValuePair(Of String, Double) In C0
                         If Not DN.ContainsKey(sb.Key) Then
-                            DNj.Add(sb.Key, vc(i) - vol * C(sb.Key))
+                            DNj.Add(sb.Key, vc(i) - vc0(i))
                         Else
-                            DNj(sb.Key) = vc(i) - vol * C(sb.Key)
+                            DNj(sb.Key) = vc(i) - vc0(i)
                         End If
                         i = i + 1
                     Next
@@ -722,13 +722,10 @@ Namespace Reactors
 
                         Case OperationMode.OutletTemperature
 
-                            Me.DeltaQ = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault
+                            DeltaT = OutletTemperature - T0
 
-                            'Products Enthalpy (kJ/kg * kg/s = kW)
-                            Hp = Me.dV * Me.DeltaQ.GetValueOrDefault + Hr + Hid_p - Hid_r - DHr
+                            ims.Phases(0).Properties.temperature += DeltaT * dV
 
-                            Me.DeltaT = Me.DeltaT.GetValueOrDefault + Me.OutletTemperature - T
-                            ims.Phases(0).Properties.temperature = Me.OutletTemperature
                             T = ims.Phases(0).Properties.temperature.GetValueOrDefault
 
                     End Select
@@ -812,7 +809,7 @@ Namespace Reactors
                 prevvol = currvol
                 currvol += Me.dV * Me.Volume
 
-            Loop Until currvol - Me.Volume > dV * Me.Volume * 0.98
+            Loop Until currvol > Volume
 
             Me.DeltaP = P0 - P
 
@@ -841,8 +838,20 @@ Namespace Reactors
                 'Products Enthalpy (kJ/kg * kg/s = kW)
                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
                 'Heat (kW)
+
                 Me.DeltaQ = DHr + Hp - Hr0
-                Me.DeltaT = 0
+
+                Me.DeltaT = 0.0#
+
+            ElseIf Me.ReactorOperationMode = OperationMode.OutletTemperature Then
+
+                'Products Enthalpy (kJ/kg * kg/s = kW)
+                Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                'Heat (kW)
+                Me.DeltaQ = DHr + Hp - Hr0
+
+                Me.DeltaT = OutletTemperature - T0
 
             End If
 
