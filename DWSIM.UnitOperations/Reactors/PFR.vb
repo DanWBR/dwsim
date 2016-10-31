@@ -88,19 +88,6 @@ Namespace Reactors
 
             MyBase.New()
 
-            '
-            '
-
-            'N00 = New Dictionary(Of String, Double)
-            'DN = New Dictionary(Of String, Double)
-            'C0 = New Dictionary(Of String, Double)
-            'C = New Dictionary(Of String, Double)
-            'Ri = New Dictionary(Of String, Double)
-            'DHRi = New Dictionary(Of String, Double)
-            'Kf = New ArrayList
-            'Kr = New ArrayList
-            'Rxi = New Dictionary(Of String, Double)
-
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -108,8 +95,6 @@ Namespace Reactors
             MyBase.New()
             Me.ComponentName = name
             Me.ComponentDescription = description
-
-
 
             N00 = New Dictionary(Of String, Double)
             DN = New Dictionary(Of String, Double)
@@ -159,7 +144,7 @@ Namespace Reactors
                 j = 1
                 For Each sb As ReactionStoichBase In rxn.Components.Values
 
-                    C(sb.CompName) = y(j)
+                    C(sb.CompName) = y(j) * ResidenceTime / Volume
                     j = j + 1
 
                 Next
@@ -191,6 +176,7 @@ Namespace Reactors
                     Next
 
                     rx = kxf * rxf - kxr * rxr
+
                     Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
                     Kf(i) = kxf
@@ -228,7 +214,9 @@ Namespace Reactors
 
                     denmval = rxn.Expr.Evaluate
 
-                    rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
+                    rx = numval / denmval
+
+                    Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, rx)
 
                 End If
 
@@ -249,7 +237,7 @@ Namespace Reactors
             j = 1
             For Each kv As KeyValuePair(Of String, Double) In Ri
 
-                dy(j) = -kv.Value '* Me.Volume
+                dy(j) = -kv.Value
                 j += 1
 
             Next
@@ -283,6 +271,8 @@ Namespace Reactors
 
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+
+            ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             Me.Reactions.Clear()
             Me.ReactionsSequence.Clear()
@@ -348,7 +338,8 @@ Namespace Reactors
             DHRi.Clear()
 
             'do the calculations on each dV
-            Dim currvol As Double = 0
+            Dim currvol As Double = 0.0#
+            Dim prevvol As Double = 0.0#
             Do
 
                 C = New Dictionary(Of String, Double)
@@ -555,26 +546,25 @@ Namespace Reactors
 
                     Me.activeAL = Me.ReactionsSequence.IndexOfValue(ar)
 
-                    Dim vc(C.Count) As Double
-                    'vc(1) = Me.Volume
+                    Dim vc(N.Count) As Double
                     i = 1
-                    For Each d As Double In C.Values
+                    For Each d As Double In N.Values
                         vc(i) = d
                         i = i + 1
                     Next
 
                     Dim bs As New MathEx.ODESolver.bulirschstoer
                     bs.DefineFuncDelegate(AddressOf ODEFunc)
-                    bs.solvesystembulirschstoer(0, currvol, vc, Ri.Count, 0.05 * currvol, 0.001, True)
+                    bs.solvesystembulirschstoer(prevvol, currvol, vc, Ri.Count, 0.1 * currvol, 0.001, True)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
                     i = 1
                     For Each sb As KeyValuePair(Of String, Double) In C0
                         If Not DN.ContainsKey(sb.Key) Then
-                            DNj.Add(sb.Key, vol * (vc(i) - C(sb.Key)))
+                            DNj.Add(sb.Key, vc(i) - vol * C(sb.Key))
                         Else
-                            DNj(sb.Key) = vol * (vc(i) - C(sb.Key))
+                            DNj(sb.Key) = vc(i) - vol * C(sb.Key)
                         End If
                         i = i + 1
                     Next
@@ -582,7 +572,7 @@ Namespace Reactors
                     C.Clear()
                     i = 1
                     For Each sb As KeyValuePair(Of String, Double) In C0
-                        C(sb.Key) = Convert.ToDouble(vc(i))
+                        C(sb.Key) = Convert.ToDouble(vc(i) * ResidenceTime / Volume)
                         i = i + 1
                     Next
 
@@ -819,6 +809,7 @@ Namespace Reactors
 
                 ims.Phases(0).Properties.pressure = P
 
+                prevvol = currvol
                 currvol += Me.dV * Me.Volume
 
             Loop Until currvol - Me.Volume > dV * Me.Volume * 0.98
@@ -854,8 +845,6 @@ Namespace Reactors
                 Me.DeltaT = 0
 
             End If
-
-            ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             Dim ms As MaterialStream
             Dim cp As ConnectionPoint
