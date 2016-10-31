@@ -80,19 +80,6 @@ Namespace Reactors
 
             MyBase.New()
 
-            '
-            '
-
-            'N00 = New Dictionary(Of String, Double)
-            'DN = New Dictionary(Of String, Double)
-            'C0 = New Dictionary(Of String, Double)
-            'C = New Dictionary(Of String, Double)
-            'Ri = New Dictionary(Of String, Double)
-            'Rxi = New Dictionary(Of String, Double)
-            'DHRi = New Dictionary(Of String, Double)
-            'Kf = New ArrayList
-            'Kr = New ArrayList
-
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
@@ -152,7 +139,7 @@ Namespace Reactors
                 j = 1
                 For Each sb As ReactionStoichBase In rxn.Components.Values
 
-                    C(sb.CompName) = y(j)
+                    C(sb.CompName) = y(j) * ResidenceTime / Volume
                     j = j + 1
 
                 Next
@@ -223,14 +210,16 @@ Namespace Reactors
 
                     rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
 
+                    Rxi(rxn.ID) = rx
+
                 End If
 
                 For Each sb As ReactionStoichBase In rxn.Components.Values
 
                     If rxn.ReactionType = ReactionType.Kinetic Then
-                        Ri(sb.CompName) += rx * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.Volume
+                        Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.Volume
                     ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                        Ri(sb.CompName) += rx * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.CatalystAmount
+                        Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.CatalystAmount
                     End If
 
                 Next
@@ -275,6 +264,8 @@ Namespace Reactors
 
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+
+            ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             Me.Reactions.Clear()
             Me.ReactionsSequence.Clear()
@@ -546,24 +537,23 @@ Namespace Reactors
 
                 Me.activeAL = Me.ReactionsSequence.IndexOfValue(ar)
 
-                Dim vc(C.Count) As Double
-                'vc(1) = Me.Volume
+                Dim vc(N.Count) As Double
                 i = 1
-                For Each d As Double In C.Values
+                For Each d As Double In N.Values
                     vc(i) = d
                     i = i + 1
                 Next
 
                 Dim bs As New MathEx.ODESolver.bulirschstoer
                 bs.DefineFuncDelegate(AddressOf ODEFunc)
-                bs.solvesystembulirschstoer(0.0#, 1.0#, vc, Ri.Count, 0.05, 0.000001, True)
+                bs.solvesystembulirschstoer(0.0#, Volume, vc, Ri.Count, 0.05 * Volume, 0.000001, True)
 
                 If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
                 C.Clear()
                 i = 1
                 For Each sb As KeyValuePair(Of String, Double) In C0
-                    C(sb.Key) = Convert.ToDouble(vc(i))
+                    C(sb.Key) = Convert.ToDouble(vc(i) * ResidenceTime / Volume)
                     i = i + 1
                 Next
 
@@ -746,8 +736,6 @@ Namespace Reactors
                 Loop Until i = ar.Count
 
             Next
-
-            ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             If Me.ReactorOperationMode = OperationMode.Isothermic Or Me.ReactorOperationMode = OperationMode.OutletTemperature Then
 

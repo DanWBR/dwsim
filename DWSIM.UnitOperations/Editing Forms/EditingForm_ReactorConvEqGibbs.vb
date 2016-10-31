@@ -233,7 +233,9 @@ Public Class EditingForm_ReactorConvEqGibbs
 
             gridConversions.Rows.Clear()
             For Each dbl As KeyValuePair(Of String, Double) In .ComponentConversions
-                gridConversions.Rows.Add(New Object() {dbl.Key, Format(dbl.Value * 100, nf)})
+                If dbl.Value >= 0.0# Then
+                    gridConversions.Rows.Add(New Object() {dbl.Key, Format(dbl.Value * 100, nf)})
+                End If
             Next
 
             'property package
