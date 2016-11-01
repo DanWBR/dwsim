@@ -250,10 +250,6 @@
     <Reference Include="Yeppp.CLR.Bundle">
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>
     </Reference>
-    <Reference Include="ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\ZedGraph.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.ExtensionMethods" />
@@ -1106,6 +1102,10 @@
     <ProjectReference Include="..\TabStrip\DWSIM.Controls.TabStrip.csproj">
       <Project>{f929ca6a-87bd-42c8-8d0a-6455db6f55dc}</Project>
       <Name>DWSIM.Controls.TabStrip</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZedGraph\DWSIM.Controls.ZedGraph.csproj">
+      <Project>{2541686b-1673-43bf-af89-3163945db009}</Project>
+      <Name>DWSIM.Controls.ZedGraph</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
