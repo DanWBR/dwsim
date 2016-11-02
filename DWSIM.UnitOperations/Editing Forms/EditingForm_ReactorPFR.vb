@@ -534,12 +534,12 @@ Public Class EditingForm_ReactorPFR
                 .IsY2Axis = True
                 .YAxisIndex = 1
             End With
-            .XAxis.Title.Text = SimObject.FlowSheet.GetTranslatedString("V / " & units.volume)
+            .XAxis.Title.Text = "V / " & units.volume
             .XAxis.Title.FontSpec.Size = 16
             .XAxis.Scale.FontSpec.Size = 16
             .XAxis.Scale.MaxAuto = False
             .XAxis.Scale.Max = su.Converter.ConvertFromSI(units.volume, vx.Max)
-            .YAxis.Title.Text = SimObject.FlowSheet.GetTranslatedString("C / " & units.molar_conc)
+            .YAxis.Title.Text = "C / " & units.molar_conc
             .YAxis.Scale.FontSpec.Size = 16
             .YAxis.Title.FontSpec.Size = 16
             .XAxis.Scale.Format = nf

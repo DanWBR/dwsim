@@ -230,6 +230,8 @@ Namespace Reactors
                 j += 1
             Next
 
+            FlowSheet.CheckStatus()
+
             Return dy
 
         End Function
