@@ -1010,7 +1010,7 @@ Public Class FormBinEnv
     End Sub
 
     Private Sub TSB_Copy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSB_Copy.Click
-        Me.GraphControl.Copy(1)
+        Me.GraphControl.Copy(1, False)
     End Sub
 
     Private Sub chkVLE_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkVLE.CheckedChanged

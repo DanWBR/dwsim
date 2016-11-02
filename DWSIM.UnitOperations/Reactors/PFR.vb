@@ -38,9 +38,13 @@ Namespace Reactors
 
         Dim C0 As Dictionary(Of String, Double)
         Dim C As Dictionary(Of String, Double)
+
         Dim Ri As Dictionary(Of String, Double)
+
         Dim Kf, Kr As ArrayList
+
         Dim N00 As Dictionary(Of String, Double)
+
         Public Rxi As New Dictionary(Of String, Double)
         Public RxiT As New Dictionary(Of String, Double)
         Public DHRi As New Dictionary(Of String, Double)
@@ -50,7 +54,6 @@ Namespace Reactors
         Dim activeAL As Integer = 0
 
         <System.NonSerialized()> Dim ims As MaterialStream
-        <System.NonSerialized()> Dim pp As PropertyPackages.PropertyPackage
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorPFR
 
@@ -245,12 +248,17 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
+            N00 = New Dictionary(Of String, Double)
+            C0 = New Dictionary(Of String, Double)
+            C = New Dictionary(Of String, Double)
+            Ri = New Dictionary(Of String, Double)
+            DHRi = New Dictionary(Of String, Double)
+            Kf = New ArrayList
+            Kr = New ArrayList
+            Rxi = New Dictionary(Of String, Double)
+
             Dim conv As New SystemsOfUnits.Converter
 
-            Ri = New Dictionary(Of String, Double)
-            Rxi = New Dictionary(Of String, Double)
-            DHRi = New Dictionary(Of String, Double)
-            N00 = New Dictionary(Of String, Double)
             m_conversions = New Dictionary(Of String, Double)
             m_componentconversions = New Dictionary(Of String, Double)
 
@@ -263,11 +271,10 @@ Namespace Reactors
             ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
+
             ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
-            pp = Me.PropertyPackage
-
-            pp.CurrentMaterialStream = ims
-
+            ims.SetPropertyPackage(PropertyPackage)
+            PropertyPackage.CurrentMaterialStream = ims
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
@@ -308,8 +315,6 @@ Namespace Reactors
                 If arr.Count > 0 Then Me.ReactionsSequence.Add(i, arr)
                 i = i + 1
             Loop Until i = maxrank + 1
-
-            pp.CurrentMaterialStream = ims
 
             Dim N0 As New Dictionary(Of String, Double)
             Dim N As New Dictionary(Of String, Double)
@@ -461,7 +466,7 @@ Namespace Reactors
 
                             If Kf.Count - 1 <= i Then
                                 Kf.Add(kxf)
-                                Kr.Add(kxf)
+                                Kr.Add(kxr)
                             Else
                                 Kf(i) = kxf
                                 Kr(i) = kxr
@@ -638,7 +643,7 @@ Namespace Reactors
 
                     'do a flash calc (calculate final temperature/enthalpy)
 
-                    Me.PropertyPackage.CurrentMaterialStream = ims
+                    PropertyPackage.CurrentMaterialStream = ims
 
                     Select Case Me.ReactorOperationMode
 
@@ -834,12 +839,6 @@ Namespace Reactors
 
         Public Overrides Sub DeCalculate()
 
-            'If Not Me.GraphicObject.InputConnectors(0).IsAttached Then Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac10"))
-            'If Not Me.GraphicObject.OutputConnectors(0).IsAttached Then Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac11"))
-            'If Not Me.GraphicObject.OutputConnectors(1).IsAttached Then Throw New Exception(Flowsheet.GetTranslatedString("Nohcorrentedematriac11"))
-
-            'Dim ems As DWSIM.SimulationObjects.Streams.MaterialStream = Flowsheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
-            'Dim W As Double = ems.Phases(0).Properties.massflow.GetValueOrDefault
             Dim j As Integer = 0
 
             Dim ms As MaterialStream

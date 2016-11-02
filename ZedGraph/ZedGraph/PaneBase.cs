@@ -815,7 +815,7 @@ namespace ZedGraph
 		/// <seealso cref="GetMetafile(int,int)"/>
 		public Bitmap GetImage()
 		{
-			return GetImage( false );
+			return GetImage(1,  false );
 		}
 
 		/// <summary>
@@ -826,15 +826,15 @@ namespace ZedGraph
 		/// <seealso cref="GetImage(int,int,float)"/>
 		/// <seealso cref="GetMetafile()"/>
 		/// <seealso cref="GetMetafile(int,int)"/>
-		public Bitmap GetImage( bool isAntiAlias )
+		public Bitmap GetImage(int scale, bool isAntiAlias )
 		{
-			Bitmap bitmap = new Bitmap( (int) _rect.Width, (int) _rect.Height );
+            Bitmap bitmap = new Bitmap((int)_rect.Width * scale, (int)_rect.Height * scale);
 			using ( Graphics bitmapGraphics = Graphics.FromImage( bitmap ) )
 			{
 				bitmapGraphics.TranslateTransform( -_rect.Left, -_rect.Top );
+                bitmapGraphics.ScaleTransform(scale, scale);
 				this.Draw( bitmapGraphics );
 			}
-
 			return bitmap;
 		}
 
@@ -890,8 +890,8 @@ namespace ZedGraph
 			if ( isAntiAlias )
 			{
 				g.SmoothingMode = SmoothingMode.AntiAlias;
-				g.TextRenderingHint = TextRenderingHint.AntiAlias;
-				g.CompositingQuality = CompositingQuality.HighQuality;
+				g.TextRenderingHint = TextRenderingHint.SystemDefault;
+				g.CompositingQuality = CompositingQuality.Default;
 				g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 			}
 		}

@@ -490,13 +490,13 @@ Public Class EditingForm_Column_Results
     Private Sub TSB_Copy_Click(sender As System.Object, e As System.EventArgs) Handles TSB_Copy.Click
         Select Case SelTab
             Case 0
-                GraphTP.Copy(True)
+                GraphTP.Copy(1, True)
             Case 1
-                GraphVL.Copy(True)
+                GraphVL.Copy(1, True)
             Case 2
-                GraphCP.Copy(True)
+                GraphCP.Copy(1, True)
             Case 3
-                GraphConc.Copy(True)
+                GraphConc.Copy(1, True)
         End Select
     End Sub
 End Class

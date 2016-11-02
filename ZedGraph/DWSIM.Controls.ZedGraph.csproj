@@ -73,6 +73,12 @@
     <Compile Include="ZedGraph\BasicArrayPointList.cs" />
     <Compile Include="ZedGraph\Border.cs" />
     <Compile Include="ZedGraph\BoxObj.cs" />
+    <Compile Include="ZedGraph\DetachedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZedGraph\DetachedForm.Designer.cs">
+      <DependentUpon>DetachedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ZedGraph\HiLowBarItem.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -183,6 +189,15 @@
     <Compile Include="ZedGraph\ZoomStateStack.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ZedGraph\DetachedForm.en.resx">
+      <DependentUpon>DetachedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZedGraph\DetachedForm.pt-BR.resx">
+      <DependentUpon>DetachedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZedGraph\DetachedForm.resx">
+      <DependentUpon>DetachedForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ZedGraph\ZedGraphControl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

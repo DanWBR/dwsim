@@ -49,9 +49,7 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorCSTR
 
-        <System.NonSerialized()> Dim form As IFlowsheet
         <System.NonSerialized()> Dim ims As MaterialStream
-        <System.NonSerialized()> Dim pp As PropertyPackages.PropertyPackage
 
         Public Property ResidenceTime As Double = 0.0#
 
@@ -238,10 +236,15 @@ Namespace Reactors
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
-            Ri = New Dictionary(Of String, Double)
-            Rxi = New Dictionary(Of String, Double)
-            DHRi = New Dictionary(Of String, Double)
             N00 = New Dictionary(Of String, Double)
+            C0 = New Dictionary(Of String, Double)
+            C = New Dictionary(Of String, Double)
+            Ri = New Dictionary(Of String, Double)
+            DHRi = New Dictionary(Of String, Double)
+            Kf = New ArrayList
+            Kr = New ArrayList
+            Rxi = New Dictionary(Of String, Double)
+
             m_conversions = New Dictionary(Of String, Double)
             m_componentconversions = New Dictionary(Of String, Double)
 
@@ -295,10 +298,8 @@ Namespace Reactors
                 W = ims.Phases(0).Properties.massflow.GetValueOrDefault
                 Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
 
-                pp = Me.PropertyPackage
-
-                pp.CurrentMaterialStream = ims
-
+                PropertyPackage.CurrentMaterialStream = ims
+                ims.SetPropertyPackage(PropertyPackage)
                 ims.SetFlowsheet(Me.FlowSheet)
                 ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
@@ -344,7 +345,7 @@ Namespace Reactors
                     i = i + 1
                 Loop Until i = maxrank + 1
 
-                pp.CurrentMaterialStream = ims
+                PropertyPackage.CurrentMaterialStream = ims
 
                 T0 = ims.Phases(0).Properties.temperature.GetValueOrDefault
                 P0 = ims.Phases(0).Properties.pressure.GetValueOrDefault
@@ -484,7 +485,7 @@ Namespace Reactors
 
                             If Kf.Count - 1 <= i Then
                                 Kf.Add(kxf)
-                                Kr.Add(kxf)
+                                Kr.Add(kxr)
                             Else
                                 Kf(i) = kxf
                                 Kr(i) = kxr
@@ -643,8 +644,8 @@ Namespace Reactors
                     Next
                     For Each s2 As Compound In ims.Phases(0).Compounds.Values
                         If N.ContainsKey(s2.Name) Then
-                            s2.MoleFraction = (ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault + N(s2.Name)) / Nsum
-                            s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault + N(s2.Name)
+                            s2.MoleFraction = N(s2.Name) / Nsum
+                            s2.MolarFlow = N(s2.Name)
                         Else
                             s2.MoleFraction = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault / Nsum
                             s2.MolarFlow = ims.Phases(0).Compounds(s2.Name).MolarFlow.GetValueOrDefault
@@ -808,7 +809,7 @@ Namespace Reactors
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
-                ms = form.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .Phases(0).Properties.temperature = Nothing
                     .Phases(0).Properties.pressure = Nothing

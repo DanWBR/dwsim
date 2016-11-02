@@ -120,11 +120,32 @@ namespace ZedGraph
 					string menuStr = string.Empty;
 
 					ToolStripMenuItem item = new ToolStripMenuItem();
-					item.Name = "copy";
+                    item.Name = "detach";
+                    item.Tag = "detach";
+                    item.Text = _resourceManager.GetString("detach");
+                    item.Click += new System.EventHandler(this.MenuClick_Detach);
+                    menuStrip.Items.Add(item);
+                    
+                    item = new ToolStripMenuItem();
+                    item.Name = "copy";
 					item.Tag = "copy";
 					item.Text = _resourceManager.GetString( "copy" );
 					item.Click += new System.EventHandler( this.MenuClick_Copy );
 					menuStrip.Items.Add( item );
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "copy2x";
+                    item.Tag = "copy2x";
+                    item.Text = _resourceManager.GetString("copy") + " @ 2x";
+                    item.Click += new System.EventHandler(this.MenuClick_Copy);
+                    menuStrip.Items.Add(item);
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "copy3x";
+                    item.Tag = "copy3x";
+                    item.Text = _resourceManager.GetString("copy") + " @ 3x";
+                    item.Click += new System.EventHandler(this.MenuClick_Copy);
+                    menuStrip.Items.Add(item);
 
 					item = new ToolStripMenuItem();
 					item.Name = "save_as";
@@ -132,6 +153,20 @@ namespace ZedGraph
 					item.Text = _resourceManager.GetString( "save_as" );
 					item.Click += new System.EventHandler( this.MenuClick_SaveAs );
 					menuStrip.Items.Add( item );
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "save_as2x";
+                    item.Tag = "save_as2x";
+                    item.Text = _resourceManager.GetString("save_as") + " @ 2x";
+                    item.Click += new System.EventHandler(this.MenuClick_SaveAs);
+                    menuStrip.Items.Add(item);
+
+                    item = new ToolStripMenuItem();
+                    item.Name = "save_as3x";
+                    item.Tag = "save_as3x";
+                    item.Text = _resourceManager.GetString("save_as") + " @ 3x";
+                    item.Click += new System.EventHandler(this.MenuClick_SaveAs);
+                    menuStrip.Items.Add(item);
 
 					item = new ToolStripMenuItem();
 					item.Name = "page_setup";
@@ -218,6 +253,22 @@ namespace ZedGraph
 			}
 		}
 
+        private void MenuClick_Detach(object sender, EventArgs e)
+        {
+
+            var f = new ZedGraph.DetachedForm();
+            f.Paint += (object sender2, PaintEventArgs e2) => {
+                var g = f.CreateGraphics();
+                var scalex = g.VisibleClipBounds.Width / _masterPane.Rect.Width;
+                var scaley = g.VisibleClipBounds.Height / _masterPane.Rect.Height;
+                g.ScaleTransform(scalex, scaley);
+                this._masterPane.Draw(g);
+            };
+            f.Show();
+
+        }
+
+
 		/// <summary>
 		/// Handler for the "Copy" context menu item.  Copies the current image to a bitmap on the
 		/// clipboard.
@@ -226,7 +277,14 @@ namespace ZedGraph
 		/// <param name="e"></param>
 		protected void MenuClick_Copy( System.Object sender, System.EventArgs e )
 		{
-			Copy( _isShowCopyMessage );
+            var tag = ((ToolStripMenuItem)sender).Tag.ToString();
+            int scale = 1;
+            if (tag.Contains("2x"))
+            { scale = 2; }
+            else if (tag.Contains("3x"))
+            { scale = 3; }
+
+			Copy(scale, _isShowCopyMessage );
 		}
 
 		/// <summary>
@@ -235,20 +293,11 @@ namespace ZedGraph
 		/// </summary>
 		/// <param name="isShowMessage">boolean value that determines whether or not a prompt will be
 		/// displayed.  true to show a message of "Image Copied to ClipBoard".</param>
-		public void Copy( bool isShowMessage )
+		public void Copy(int scale, bool isShowMessage )
 		{
 			if ( _masterPane != null )
 			{
-				//Clipboard.SetDataObject( _masterPane.GetImage(), true );
-
-				// Threaded copy mode to avoid crash with MTA
-				// Contributed by Dave Moor
-				Thread ct = new Thread( new ThreadStart( this.ClipboardCopyThread ) );
-				//ct.ApartmentState = ApartmentState.STA;
-				ct.SetApartmentState( ApartmentState.STA );
-				ct.Start();
-				ct.Join();
-
+                ClipboardCopyThread(scale);
 				if ( isShowMessage )
 				{
 					string str = _resourceManager.GetString( "copied_to_clip" );
@@ -261,9 +310,9 @@ namespace ZedGraph
 		/// <summary>
 		/// A threaded version of the copy method to avoid crash with MTA
 		/// </summary>
-		private void ClipboardCopyThread()
+		private void ClipboardCopyThread(int scale)
 		{
-			Clipboard.SetDataObject( ImageRender(), true );
+			Clipboard.SetDataObject( ImageRender(scale), true );
 		}
 
 		// 
@@ -272,9 +321,9 @@ namespace ZedGraph
 		/// returning the resultant image file
 		/// </summary>
 		/// <returns></returns>
-		private Image ImageRender()
+		private Image ImageRender(int scale)
 		{
-			return _masterPane.GetImage( _masterPane.IsAntiAlias );
+			return _masterPane.GetImage(scale, _masterPane.IsAntiAlias );
 		}
 
 		/// <summary>
@@ -336,7 +385,13 @@ namespace ZedGraph
 		/// <param name="e"></param>
 		protected void MenuClick_SaveAs( System.Object sender, System.EventArgs e )
 		{
-			SaveAs();
+            var tag = ((ToolStripMenuItem)sender).Tag.ToString();
+            int scale = 1;
+            if (tag.Contains("2x"))
+            { scale = 2; }
+            else if (tag.Contains("3x"))
+            { scale = 3; }
+			SaveAs(scale);
 		}
 
 		/// <summary>
@@ -347,9 +402,9 @@ namespace ZedGraph
 		/// Note that <see cref="SaveAsBitmap" /> and <see cref="SaveAsEmf" /> methods are provided
 		/// which allow for Bitmap-only or Emf-only handling of the "Save As" context menu item.
 		/// </remarks>
-		public void SaveAs()
+		public void SaveAs(int scale)
 		{
-			SaveAs( null );
+			SaveAs(scale, null);
 		}
 
 		/// <summary>
@@ -366,7 +421,7 @@ namespace ZedGraph
 		/// Note that <see cref="SaveAsBitmap" /> and <see cref="SaveAsEmf" /> methods are provided
 		/// which allow for Bitmap-only or Emf-only handling of the "Save As" context menu item.
 		/// </remarks>
-		public String SaveAs( String DefaultFileName )
+		public String SaveAs(int scale, String DefaultFileName )
 		{
 			if ( _masterPane != null )
 			{
@@ -421,7 +476,7 @@ namespace ZedGraph
 								case 6: format = ImageFormat.Bmp; break;
 							}
 
-							ImageRender().Save( myStream, format );
+							ImageRender(scale).Save( myStream, format );
 							//_masterPane.GetImage().Save( myStream, format );
 							myStream.Close();
 						}
@@ -440,7 +495,7 @@ namespace ZedGraph
 		/// Note that this handler saves as a bitmap only.  The default handler is
 		/// <see cref="SaveAs()" />, which allows for Bitmap or EMF formats
 		/// </remarks>
-		public void SaveAsBitmap()
+		public void SaveAsBitmap(int scale)
 		{
 			if ( _masterPane != null )
 			{
@@ -467,7 +522,7 @@ namespace ZedGraph
 					if ( myStream != null )
 					{
 						//_masterPane.GetImage().Save( myStream, format );
-						ImageRender().Save( myStream, format );
+						ImageRender(scale).Save( myStream, format );
 						myStream.Close();
 					}
 				}

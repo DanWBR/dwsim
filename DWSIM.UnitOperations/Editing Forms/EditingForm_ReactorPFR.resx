@@ -1870,7 +1870,7 @@
     <value>ZedGraphControl1</value>
   </data>
   <data name="&gt;&gt;ZedGraphControl1.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.30023, Culture=neutral, PublicKeyToken=null</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.18018, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ZedGraphControl1.Parent" xml:space="preserve">
     <value>TabPage4</value>
