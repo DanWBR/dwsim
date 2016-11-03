@@ -117,6 +117,12 @@ Namespace Reactors
             Dim scBC As Double = 0
             Dim BC As String = ""
 
+            j = 0
+            For Each s As String In N00.Keys
+                C(s) = y(j) * ResidenceTime / Volume
+                j = j + 1
+            Next
+
             'conversion factors for different basis other than molar concentrations
             Dim convfactors As New Dictionary(Of String, Double)
 
@@ -140,14 +146,6 @@ Namespace Reactors
                 rxn = FlowSheet.Reactions(ar(i))
                 BC = rxn.BaseReactant
                 scBC = rxn.Components(BC).StoichCoeff
-
-                j = 0
-                For Each sb As ReactionStoichBase In rxn.Components.Values
-
-                    C(sb.CompName) = y(j) * ResidenceTime / Volume
-                    j = j + 1
-
-                Next
 
                 Dim T As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
 
