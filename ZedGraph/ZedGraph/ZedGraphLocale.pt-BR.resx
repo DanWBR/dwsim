@@ -118,48 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="copy" xml:space="preserve">
-    <value>Copy</value>
+    <value>Copiar</value>
   </data>
   <data name="copied_to_clip" xml:space="preserve">
-    <value>Image copied to clipboard</value>
+    <value>Imagem copiada para o clipboard</value>
   </data>
   <data name="save_as" xml:space="preserve">
-    <value>Save Image As...</value>
+    <value>Gravar Imagem...</value>
   </data>
   <data name="set_default" xml:space="preserve">
-    <value>Set Scale to Default</value>
+    <value>Escala original</value>
   </data>
   <data name="show_val" xml:space="preserve">
-    <value>Show Point Values</value>
+    <value>Ver os valores dos pontos</value>
   </data>
   <data name="title_def" xml:space="preserve">
-    <value>Title</value>
+    <value>Título</value>
   </data>
   <data name="undo_all" xml:space="preserve">
-    <value>Undo All Zoom/Pan</value>
+    <value>Desfazer todas as ações Zoom/deslocar</value>
   </data>
   <data name="unpan" xml:space="preserve">
-    <value>Un-Pan</value>
+    <value>Desfazer a última ação de deslocamento</value>
   </data>
   <data name="unzoom" xml:space="preserve">
-    <value>Un-Zoom</value>
+    <value>Desfazer o último Zoom</value>
   </data>
   <data name="x_title_def" xml:space="preserve">
-    <value>X Axis</value>
+    <value>Eixo X</value>
   </data>
   <data name="y_title_def" xml:space="preserve">
-    <value>Y Axis</value>
-  </data>
-  <data name="unscroll" xml:space="preserve">
-    <value>Undo Scroll</value>
+    <value>Eixo Y</value>
   </data>
   <data name="page_setup" xml:space="preserve">
-    <value>Page Setup...</value>
+    <value>Configurar Página...</value>
   </data>
   <data name="print" xml:space="preserve">
-    <value>Print...</value>
+    <value>Imprimir...</value>
   </data>
   <data name="detach" xml:space="preserve">
-    <value>Show in Another Window</value>
+    <value>Mostrar em outra janela</value>
   </data>
 </root>

@@ -207,43 +207,7 @@
     <EmbeddedResource Include="ZedGraph\ZedGraphLocale.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.fr.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.hu.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.it.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.ja.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.pt.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.ru.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.sk.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.sv.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.tr.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.tw.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.zh-cn.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.zh-tw.resx">
+    <EmbeddedResource Include="ZedGraph\ZedGraphLocale.pt-BR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
