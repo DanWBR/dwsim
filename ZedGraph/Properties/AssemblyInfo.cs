@@ -36,4 +36,4 @@ using System.Resources;
 [assembly: AssemblyVersion( "5.1.5.*" )]
 //[assembly: AssemblyFileVersion( "4.9.7.0" )]
 //[assembly: AllowPartiallyTrustedCallers ]
-[assembly: NeutralResourcesLanguageAttribute( "" )]
+[assembly: NeutralResourcesLanguageAttribute("en")]
