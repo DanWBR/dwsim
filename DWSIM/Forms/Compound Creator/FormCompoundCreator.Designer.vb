@@ -639,7 +639,7 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItemBO, Me.FaTabStripItemEL, Me.FaTabStripItem2, Me.FaTabStripItem5, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4, Me.FaTabStripItem7, Me.FaTabStripItem8, Me.FaTabStripItem9, Me.FaTabStripItem10, Me.FaTabStripItem11})
         Me.FaTabStrip2.Name = "FaTabStrip2"
-        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem7
+        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem9
         '
         'FaTabStripItem1
         '
@@ -2131,7 +2131,6 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem7.Controls.Add(Me.Label29)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        Me.FaTabStripItem7.Selected = True
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
         'Label43
@@ -2649,6 +2648,7 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem9.Controls.Add(Me.Label35)
         Me.FaTabStripItem9.IsDrawn = True
         Me.FaTabStripItem9.Name = "FaTabStripItem9"
+        Me.FaTabStripItem9.Selected = True
         resources.ApplyResources(Me.FaTabStripItem9, "FaTabStripItem9")
         '
         'Label45

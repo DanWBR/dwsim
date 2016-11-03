@@ -1009,7 +1009,7 @@
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -1882,7 +1882,7 @@
     <value>FaTabStripItemBO</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3007,7 +3007,7 @@
     <value>FaTabStripItemEL</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3199,7 +3199,7 @@
     <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3388,7 +3388,7 @@
     <value>FaTabStripItem5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3511,7 +3511,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3826,7 +3826,7 @@
     <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -5863,7 +5863,7 @@
     <value>FaTabStripItem4</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -6604,7 +6604,7 @@
     <value>FaTabStripItem7</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -8083,7 +8083,7 @@
     <value>FaTabStripItem8</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -8824,7 +8824,7 @@
     <value>FaTabStripItem9</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -9565,7 +9565,7 @@
     <value>FaTabStripItem10</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -11299,7 +11299,7 @@
     <value>FaTabStripItem11</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -11320,7 +11320,7 @@
     <value>FaTabStrip2</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6128.15361, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6151.15384, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Parent" xml:space="preserve">
     <value>GroupBox2</value>

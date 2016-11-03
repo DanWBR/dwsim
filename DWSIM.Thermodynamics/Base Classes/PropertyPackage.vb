@@ -5738,7 +5738,7 @@ Final3:
 
             If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
                 val = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
-                If subst.ConstantProperties.OriginalDB <> "CoolProp" Then val = subst.ConstantProperties.Molar_Weight * val
+                If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then val = subst.ConstantProperties.Molar_Weight * val
             Else
                 val = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, 101325, Me.AUX_PVAPi(subst.Name, T))
             End If
@@ -5753,7 +5753,7 @@ Final3:
 
             If cprop.LiquidDensityEquation <> "" And cprop.LiquidDensityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
                 val = Me.CalcCSTDepProp(cprop.LiquidDensityEquation, cprop.Liquid_Density_Const_A, cprop.Liquid_Density_Const_B, cprop.Liquid_Density_Const_C, cprop.Liquid_Density_Const_D, cprop.Liquid_Density_Const_E, T, cprop.Critical_Temperature)
-                If cprop.OriginalDB <> "CoolProp" Then val = cprop.Molar_Weight * val
+                If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "User" Then val = cprop.Molar_Weight * val
             Else
                 val = Auxiliary.PROPS.liq_dens_rackett(T, cprop.Critical_Temperature, cprop.Critical_Pressure, cprop.Acentric_Factor, cprop.Molar_Weight, cprop.Z_Rackett, 101325, Me.AUX_PVAPi(cprop.Name, T))
             End If
