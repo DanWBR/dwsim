@@ -109,7 +109,7 @@ Public Class FormWelcome
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
                     objStreamReader.Close()
-                    NewMDIChild.Activate()
+                    NewMDIChild.WriteData()
                 Case ".dwrsd"
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me.Owner
@@ -120,7 +120,6 @@ Public Class FormWelcome
                     NewMDIChild.currcase.filename = Me.lvlatest.SelectedItems(0).Tag
                     objStreamReader.Close()
                     NewMDIChild.LoadCase(NewMDIChild.currcase, False)
-                    NewMDIChild.Activate()
                 Case ".dwruf"
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me.Owner
@@ -131,7 +130,6 @@ Public Class FormWelcome
                     NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
                     objStreamReader.Close()
                     NewMDIChild.LoadCase(NewMDIChild.mycase, False)
-                    NewMDIChild.Activate()
             End Select
 
             Me.Close()

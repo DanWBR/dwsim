@@ -145,17 +145,8 @@
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
-  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>812, 354</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>818, 374</value>
-  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Properties</value>
-  </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>833, 388</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
@@ -213,6 +204,12 @@
   </data>
   <data name="FaTabStripItemLIQVISC.Title" xml:space="preserve">
     <value>Viscosity</value>
+  </data>
+  <data name="GraphLiqDens.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 367</value>
+  </data>
+  <data name="FaTabStripItemLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 367</value>
   </data>
   <data name="FaTabStripItemLIQDENS.Title" xml:space="preserve">
     <value>Density</value>
@@ -283,17 +280,8 @@
   <data name="FaTabStripItem18.Title" xml:space="preserve">
     <value>Solid Phase</value>
   </data>
-  <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>814, 515</value>
-  </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>820, 535</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Comments</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>833, 388</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Comments</value>

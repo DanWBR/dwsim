@@ -1688,11 +1688,12 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub btnRegressLIQDENS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressLIQDENS.Click
+        Dim MW As Double = Me.TextBoxMW.Text
         loaded = False
         mycase.DataLDENS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataLIQDENS.Rows
             Try
-                If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.density, row.Cells(1).Value)})
+                If row.Index < Me.GridExpDataLIQDENS.Rows.Count - 1 Then mycase.DataLDENS.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.density, row.Cells(1).Value / MW)})
             Catch ex As Exception
             End Try
         Next
@@ -2096,7 +2097,7 @@ Public Class FormCompoundCreator
         If Not Eq = "0" Then
             For k2 = 0 To px.Count - 1
                 T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, px(k2))
-                y = SystemsOfUnits.Converter.ConvertFromSI(su.density, pp.CalcCSTDepProp(Eq, tbLIQDENS_A.Text, tbLIQDENS_B.Text, tbLIQDENS_C.Text, tbLIQDENS_D.Text, tbLIQDENS_E.Text, T, 0))
+                y = SystemsOfUnits.Converter.ConvertFromSI(su.density, pp.CalcCSTDepProp(Eq, tbLIQDENS_A.Text, tbLIQDENS_B.Text, tbLIQDENS_C.Text, tbLIQDENS_D.Text, tbLIQDENS_E.Text, T, 0)) * TextBoxMW.Text
 
                 Select Case CurveCount
                     Case 1

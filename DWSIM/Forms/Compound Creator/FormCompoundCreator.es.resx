@@ -205,6 +205,9 @@
   <data name="FaTabStripItem8.Title" xml:space="preserve">
     <value>Capacidad Calorífica</value>
   </data>
+  <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>990, 431</value>
+  </data>
   <data name="FaTabStripItem9.Title" xml:space="preserve">
     <value>Densidad (Líquido)</value>
   </data>
@@ -600,10 +603,10 @@
     <value>255, 203</value>
   </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 13</value>
+    <value>134, 13</value>
   </data>
   <data name="Label45.Text" xml:space="preserve">
-    <value>* Dens en kg/m3, T en K</value>
+    <value>* Dens en kmol/m3, T en K</value>
   </data>
   <data name="tbLIQDENS_E.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 175</value>
@@ -793,6 +796,9 @@
   </data>
   <data name="DBOpenDlg.Title" xml:space="preserve">
     <value>Abrir/Crear Base de Datos</value>
+  </data>
+  <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 573</value>
   </data>
   <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1019, 22</value>
