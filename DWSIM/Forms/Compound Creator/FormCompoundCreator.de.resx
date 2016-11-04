@@ -217,9 +217,6 @@
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Identifikation</value>
   </data>
-  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1260, 396</value>
-  </data>
   <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
     <value>895, 431</value>
   </data>
@@ -813,10 +810,10 @@
     <value>241, 203</value>
   </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 13</value>
+    <value>132, 13</value>
   </data>
   <data name="Label45.Text" xml:space="preserve">
-    <value>* Dens in kg/m3, T in K</value>
+    <value>* Dichte in kmol/m3, T in K</value>
   </data>
   <data name="rbEstimateLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 17</value>

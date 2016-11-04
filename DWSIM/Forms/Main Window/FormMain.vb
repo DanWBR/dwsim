@@ -2097,7 +2097,7 @@ ruf:                Application.DoEvents()
             If File.Exists(myLink.Tag.ToString) Then
                 Dim nome = myLink.Tag.ToString
                 Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " (" + nome + ")"
-                Me.filename = Name
+                Me.filename = nome
                 Application.DoEvents()
                 Dim objStreamReader As FileStream = Nothing
                 Try
@@ -2116,7 +2116,7 @@ ruf:                Application.DoEvents()
                             Dim x As New BinaryFormatter()
                             NewMDIChild.mycase = x.Deserialize(objStreamReader)
                             objStreamReader.Close()
-                            NewMDIChild.mycase.Filename = Name
+                            NewMDIChild.mycase.Filename = nome
                             NewMDIChild.WriteData()
                         Case ".dwrsd"
                             Dim NewMDIChild As New FormDataRegression()
@@ -2134,7 +2134,7 @@ ruf:                Application.DoEvents()
                             objStreamReader = New FileStream(nome, FileMode.Open)
                             Dim x As New BinaryFormatter()
                             NewMDIChild.mycase = x.Deserialize(objStreamReader)
-                            NewMDIChild.mycase.Filename = Name
+                            NewMDIChild.mycase.Filename = nome
                             objStreamReader.Close()
                             NewMDIChild.LoadCase(NewMDIChild.mycase, False)
                     End Select
