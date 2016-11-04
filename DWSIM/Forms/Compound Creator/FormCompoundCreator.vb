@@ -294,6 +294,8 @@ Public Class FormCompoundCreator
         SetCompCreatorSaveStatus(True)
         SetUserDBSaveStatus(True)
 
+        UpdateUnits()
+
     End Sub
 
     Private Sub FormCompoundCreator_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
@@ -1390,10 +1392,10 @@ Public Class FormCompoundCreator
         c_vi(3) = 0
         c_vi(4) = 0
 
-        c_de(3) = 0.15994
+        c_de(3) = 1.0#
         c_de(2) = 647.3
         c_de(1) = 0.14056
-        c_de(0) = -141.26
+        c_de(0) = 1.0#
 
         c_sd(0) = 11
         c_sd(1) = -0.005
@@ -1453,18 +1455,22 @@ Public Class FormCompoundCreator
 
                 rhoc = mycase.cp.Molar_Weight / mycase.cp.Critical_Compressibility * 8.314 * mycase.cp.Critical_Temperature / mycase.cp.Critical_Pressure * 1000
 
-                x1 = Log(1 - mycase.DataLDENS(0)(0) / mycase.cp.Critical_Temperature)
-                x2 = Log(1 - mycase.DataLDENS(1)(0) / mycase.cp.Critical_Temperature)
-                y1 = Log(Log(mycase.DataLDENS(0)(1) / rhoc))
-                y2 = Log(Log(mycase.DataLDENS(1)(1) / rhoc))
+                If Not Double.IsNaN(rhoc) Then
 
-                al = (y2 - y1) / (x2 - x1)
-                bl = y1 - al * x1
+                    x1 = Log(1 - mycase.DataLDENS(0)(0) / mycase.cp.Critical_Temperature)
+                    x2 = Log(1 - mycase.DataLDENS(1)(0) / mycase.cp.Critical_Temperature)
+                    y1 = Log(Log(mycase.DataLDENS(0)(1) / rhoc))
+                    y2 = Log(Log(mycase.DataLDENS(1)(1) / rhoc))
 
-                c_de(3) = al
-                c_de(2) = mycase.cp.Critical_Temperature
-                c_de(1) = 1 / Exp(Exp(bl))
-                c_de(0) = c_de(1) * rhoc
+                    al = (y2 - y1) / (x2 - x1)
+                    bl = y1 - al * x1
+
+                    c_de(3) = al
+                    c_de(2) = mycase.cp.Critical_Temperature
+                    c_de(1) = 1 / Exp(Exp(bl))
+                    c_de(0) = c_de(1) * rhoc
+
+                End If
 
                 'regressão dos dados
                 obj = lmfit.GetCoeffs(CopyToVector(mycase.DataLDENS, 0), CopyToVector(mycase.DataLDENS, 1), c_de, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.LiqDens, 0.00001, 0.00001, 0.00001, 10000)
@@ -1513,8 +1519,8 @@ Public Class FormCompoundCreator
         End Select
 
     End Function
-    Private Sub btnRegressPVAP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressPVAP.Click
-        loaded = False
+
+    Sub StorePVAPData()
         mycase.DataPVAP.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataPVAP.Rows
             If row.Index < Me.GridExpDataPVAP.Rows.Count - 1 Then
@@ -1525,6 +1531,13 @@ Public Class FormCompoundCreator
                 End Try
             End If
         Next
+    End Sub
+
+    Private Sub btnRegressPVAP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressPVAP.Click
+
+        loaded = False
+
+        StorePVAPData()
 
         Dim result As Object = RegressData(0, False)
         tbStatusPVAP.Text = GetInfo(result(3))
@@ -1556,10 +1569,9 @@ Public Class FormCompoundCreator
         BothSaveStatusModified(sender, e)
     End Sub
 
-    Private Sub btnRegressSolidCp_Click(sender As System.Object, e As System.EventArgs) Handles btnRegressSolidCp.Click
+    Sub StoreSolidCpData()
         Dim MW As Double = Me.TextBoxMW.Text
         Dim XL, YL As Double
-        loaded = False
         mycase.DataCpS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataCpS.Rows
             If row.Index < Me.GridExpDataCpS.Rows.Count - 1 Then
@@ -1568,6 +1580,13 @@ Public Class FormCompoundCreator
                 mycase.DataCpS.Add(New Double() {XL, YL})
             End If
         Next
+    End Sub
+
+    Private Sub btnRegressSolidCp_Click(sender As System.Object, e As System.EventArgs) Handles btnRegressSolidCp.Click
+
+        loaded = False
+
+        StoreSolidCpData()
 
         Dim result As Object = RegressData(5, False)
         tbStatusSolidCp.Text = GetInfo(result(3))
@@ -1599,10 +1618,11 @@ Public Class FormCompoundCreator
         loaded = True
         BothSaveStatusModified(sender, e)
     End Sub
-    Private Sub btnRegressSolidDens_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressSolidDens.Click
+
+    Sub StoreSolidDensData()
+
         Dim MW As Double = Me.TextBoxMW.Text
         Dim XL, YL As Double
-        loaded = False
         mycase.DataRoS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataRoS.Rows
             If row.Index < Me.GridExpDataRoS.Rows.Count - 1 Then
@@ -1611,6 +1631,14 @@ Public Class FormCompoundCreator
                 mycase.DataRoS.Add(New Double() {XL, YL})
             End If
         Next
+
+    End Sub
+
+    Private Sub btnRegressSolidDens_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressSolidDens.Click
+
+        loaded = False
+
+        StoreSolidDensData()
 
         Dim result As Object = RegressData(4, False)
         tbStatusSolidDens.Text = GetInfo(result(3))
@@ -1643,11 +1671,10 @@ Public Class FormCompoundCreator
         BothSaveStatusModified(sender, e)
     End Sub
 
-    Private Sub btnRegressCPIG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressCPIG.Click
-        Dim MW As Double = Me.TextBoxMW.Text
+    Sub StoreCPIGData()
 
-        loaded = False
         mycase.DataCPIG.Clear()
+        Dim MW As Double = Me.TextBoxMW.Text
         For Each row As DataGridViewRow In Me.GridExpDataCPIG.Rows
             Try
                 If row.Index < Me.GridExpDataCPIG.Rows.Count - 1 Then mycase.DataCPIG.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW})
@@ -1655,6 +1682,16 @@ Public Class FormCompoundCreator
             End Try
         Next
 
+    End Sub
+
+
+    Private Sub btnRegressCPIG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressCPIG.Click
+
+        loaded = False
+
+        StoreCPIGData()
+
+       
         Dim result As Object = RegressData(1, False)
 
         tbStatusCPIG.Text = GetInfo(result(3))
@@ -1687,8 +1724,8 @@ Public Class FormCompoundCreator
         BothSaveStatusModified(sender, e)
     End Sub
 
-    Private Sub btnRegressLIQDENS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressLIQDENS.Click
-        loaded = False
+    Sub StoreLiqDensData()
+
         mycase.DataLDENS.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataLIQDENS.Rows
             Try
@@ -1696,6 +1733,14 @@ Public Class FormCompoundCreator
             Catch ex As Exception
             End Try
         Next
+
+    End Sub
+
+    Private Sub btnRegressLIQDENS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressLIQDENS.Click
+
+        loaded = False
+
+        StoreLiqDensData()
 
         Dim result As Object = RegressData(3, False)
 
@@ -1729,12 +1774,25 @@ Public Class FormCompoundCreator
         BothSaveStatusModified(sender, e)
     End Sub
 
-    Private Sub btnRegressLIQVISC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressLIQVISC.Click
-        loaded = False
+    Sub StoreLIQVData()
+
         mycase.DataLVISC.Clear()
         For Each row As DataGridViewRow In Me.GridExpDataLIQVISC.Rows
-            If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then mycase.DataLVISC.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.viscosity, row.Cells(1).Value)})
+            If row.Index < Me.GridExpDataLIQVISC.Rows.Count - 1 Then
+                Try
+                    mycase.DataLVISC.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.viscosity, row.Cells(1).Value)})
+                Catch ex As Exception
+                End Try
+            End If
         Next
+
+    End Sub
+
+    Private Sub btnRegressLIQVISC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRegressLIQVISC.Click
+
+        loaded = False
+
+        StoreLIQVData()
 
         Dim result As Object = RegressData(2, False)
 
@@ -2071,9 +2129,13 @@ Public Class FormCompoundCreator
         'Add calculated Rackett Data
         For k2 = 0 To px.Count - 1
             T = SystemsOfUnits.Converter.ConvertToSI(su.temperature, px(k2))
-            PV = PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text)
-            y = SystemsOfUnits.Converter.ConvertFromSI(su.density, PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text, TextBoxZRa.Text, 101325, PV))
-
+            Try
+                PV = PropertyPackages.Auxiliary.PROPS.Pvp_leekesler(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text)
+                y = SystemsOfUnits.Converter.ConvertFromSI(su.density, PropertyPackages.Auxiliary.PROPS.liq_dens_rackett(T, SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxTc.Text), SystemsOfUnits.Converter.ConvertToSI(su.pressure, TextBoxPc.Text), TextBoxAF.Text, TextBoxMW.Text, TextBoxZRa.Text, 101325, PV))
+            Catch ex As Exception
+                y = 0.0#
+            End Try
+   
             Select Case CurveCount
                 Case 0
                     py1.Add(y)
@@ -2849,6 +2911,16 @@ Public Class FormCompoundCreator
     Private Sub GridExpData_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles GridExpDataPVAP.CellValueChanged, _
                 GridExpDataLIQVISC.CellValueChanged, GridExpDataLIQDENS.CellValueChanged, GridExpDataRoS.CellValueChanged, GridExpDataCpS.CellValueChanged, GridExpDataCPLiquid.CellValueChanged, GridExpDataCPIG.CellValueChanged
         If loaded Then
+            Try
+                StoreCPIGData()
+                StoreCPLData()
+                StoreLiqDensData()
+                StoreLIQVData()
+                StorePVAPData()
+                StoreSolidCpData()
+                StoreSolidDensData()
+            Catch ex As Exception
+            End Try
             SetCompCreatorSaveStatus(False)
         End If
     End Sub
@@ -2943,17 +3015,24 @@ Public Class FormCompoundCreator
         End With
     End Sub
 
-    Private Sub btnRegressCPLiquid_Click(sender As System.Object, e As System.EventArgs) Handles btnRegressCPLiquid.Click
-        Dim MW As Double = Me.TextBoxMW.Text
+    Sub StoreCPLData()
 
-        loaded = False
         mycase.DataCPLiquid.Clear()
+        Dim MW As Double = Me.TextBoxMW.Text
         For Each row As DataGridViewRow In Me.GridExpDataCPLiquid.Rows
             Try
                 If row.Index < Me.GridExpDataCPLiquid.Rows.Count - 1 Then mycase.DataCPLiquid.Add(New Double() {SystemsOfUnits.Converter.ConvertToSI(su.temperature, row.Cells(0).Value), SystemsOfUnits.Converter.ConvertToSI(su.heatCapacityCp, row.Cells(1).Value) * MW})
             Catch ex As Exception
             End Try
         Next
+
+    End Sub
+
+    Private Sub btnRegressCPLiquid_Click(sender As System.Object, e As System.EventArgs) Handles btnRegressCPLiquid.Click
+       
+        loaded = False
+        
+        StoreCPLData()
 
         Dim result As Object = RegressData(6, False)
 

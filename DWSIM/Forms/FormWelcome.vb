@@ -109,6 +109,7 @@ Public Class FormWelcome
                     NewMDIChild.mycase = x.Deserialize(objStreamReader)
                     NewMDIChild.mycase.Filename = Me.lvlatest.SelectedItems(0).Tag
                     objStreamReader.Close()
+                    NewMDIChild.WriteData()
                     NewMDIChild.Activate()
                 Case ".dwrsd"
                     Dim NewMDIChild As New FormDataRegression()

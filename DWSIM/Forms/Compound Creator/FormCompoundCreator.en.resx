@@ -501,6 +501,9 @@
   <data name="GridUNIFAC.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
+  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
   <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
@@ -509,6 +512,12 @@
   </data>
   <data name="Label85.Text" xml:space="preserve">
     <value>Enter the amount of each MODFAC group in the compound structure, if available.</value>
+  </data>
+  <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
+  <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
   </data>
   <data name="Label58.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
@@ -563,6 +572,9 @@
   </data>
   <data name="ColumnCountJoback.HeaderText" xml:space="preserve">
     <value>Count Joback</value>
+  </data>
+  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
   </data>
   <data name="LabelWithDivider8.Text" xml:space="preserve">
     <value>Attraction Parameter</value>
@@ -674,6 +686,9 @@
   </data>
   <data name="Label63.Text" xml:space="preserve">
     <value>Chao-Seader Solubility Parameter</value>
+  </data>
+  <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
   </data>
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>General Properties</value>
@@ -879,6 +894,9 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Cp (Ideal Gas)</value>
   </data>
+  <data name="FaTabStripItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
   <data name="FaTabStripItem8.Title" xml:space="preserve">
     <value>Heat Capacity</value>
   </data>
@@ -963,6 +981,9 @@
   <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 76</value>
   </data>
+  <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
+  </data>
   <data name="FaTabStripItem9.Title" xml:space="preserve">
     <value>Liquid Density</value>
   </data>
@@ -1043,6 +1064,9 @@
   </data>
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
     <value>234, 76</value>
+  </data>
+  <data name="FaTabStripItem10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
   </data>
   <data name="FaTabStripItem10.Title" xml:space="preserve">
     <value>Liquid Viscosity</value>
@@ -1127,6 +1151,9 @@
   </data>
   <data name="Label55.Text" xml:space="preserve">
     <value>Enthalpy of fusion</value>
+  </data>
+  <data name="FaTabStripItem11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1317, 396</value>
   </data>
   <data name="FaTabStripItem11.Title" xml:space="preserve">
     <value>Solid Properties</value>
