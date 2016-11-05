@@ -800,6 +800,9 @@
     <EmbeddedResource Include="Forms\FormCORegistration.resx">
       <DependentUpon>FormCORegistration.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDBManager.de.resx">
+      <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.de.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </EmbeddedResource>
@@ -834,6 +837,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
+      <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main Window\FormMain.resx">
       <SubType>Designer</SubType>

@@ -1011,7 +1011,7 @@ Public Class FormPureComp
             End With
             Me.ComboBox1.Enabled = True
             loaded = True
-
+            Me.ComboBox1.SelectedIndex = 0
         Else
 
             Me.ComboBox1.Items.Clear()

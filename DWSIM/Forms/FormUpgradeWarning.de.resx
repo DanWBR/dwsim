@@ -117,107 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Diagramm</value>
-  </data>
-  <data name="TabPage2.Text" xml:space="preserve">
-    <value>Daten</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 13</value>
+  <data name="chkDoNotShowAgain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 17</value>
   </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Property Package</value>
+  <data name="chkDoNotShowAgain.Text" xml:space="preserve">
+    <value>Diese Meldung nicht mehr anzeigen</value>
   </data>
-  <data name="btnCalcDiagram.Text" xml:space="preserve">
-    <value>Berechne Diagramm</value>
+  <data name="LabelVersion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>409, 13</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 13</value>
+  <data name="LabelVersion.Text" xml:space="preserve">
+    <value>Sie öffnen eine Simulation, welche mit einer alten DWSIM Version gespeichert wurde.</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Bedingungen</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>DWSIM 4 verändert die Struktur der XML-Datei beim Speichern, welche mit DWSIM inkompatibel ist. Als Konsequenz kann DWSIM 3 die Datei nicht mehr lesen, wenn Sie Änderungen vornehmen und die Datei ersetzen.
+
+Wenn Sie die Simulationsdatei nicht updaten, kann sie weiter von DWSIM 3 und DWSIM 4 verwendet werden. 
+
+DWSIM ändert die Simulationsdatei nur beim Speichern. Beim Öffnen der Datei oder während Simulationsrechnungen werden keine Änderungen daran vorgenommen.</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Komponenten</value>
+    <value>IronPython-Scripts müssen aktualisiert werden, um die API-Änderungen von DWSM 3 nach DWSIM 4 wiederzugeben.
+Bitte konsultieren Sie die Hilfedate oder das DWSIM-Wiki um mehr Informationen zu erhalten.</value>
   </data>
-  <data name="TSB_Print.Text" xml:space="preserve">
-    <value>Drucken</value>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Während der Konvertierung könnten einige Probleme auftreten wie z.B.: Verlust von Objektdaten, Verlust von Konfigurationsdaten des Flash-Algorithmus und Property Package.
+
+Wenn Ihre Simulation nach dem Laden in DWSIM 4 Probleme macht, können Sie weiterhin DWSIM 3 nebenher installiert lassen um damit weiter zu arbeiten.</value>
   </data>
-  <data name="TSB_PrinterSetup.Text" xml:space="preserve">
-    <value>Drucker Setup</value>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 13</value>
   </data>
-  <data name="TSB_CalcDiagr.Text" xml:space="preserve">
-    <value>Diagramm berechnen</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Konvertierungsprobleme</value>
   </data>
-  <data name="TSB_CalcDiagr.ToolTipText" xml:space="preserve">
-    <value>Berechne Diagramm</value>
-  </data>
-  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
-    <value>Frei schwebend</value>
-  </data>
-  <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
-    <value>Links andocken</value>
-  </data>
-  <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
-    <value>Rechts andocken</value>
-  </data>
-  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
-    <value>Oben andocken</value>
-  </data>
-  <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
-    <value>Unten andocken</value>
-  </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Links andocken Auto-Hide</value>
-  </data>
-  <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Rechts andocken Auto-Hide</value>
-  </data>
-  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Oben andocken Auto-Hide</value>
-  </data>
-  <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
-    <value>Unten andocken Auto-Hide</value>
-  </data>
-  <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 22</value>
-  </data>
-  <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
-    <value>Dokument</value>
-  </data>
-  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 224</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Inkompatibilitätswarnung</value>
   </data>
 </root>

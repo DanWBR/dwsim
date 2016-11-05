@@ -136,13 +136,28 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Schließen und zum Konfigurationsdialog der Simulation gehen.</value>
   </data>
+  <data name="Button1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Willkommen beim Assistenten zur Konfiguration der Simulation.
 
 Klicken Sie "Weiter" um fortzufahren.</value>
   </data>
+  <data name="Label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TextBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ListViewA.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Auswahl</value>
+  </data>
+  <data name="GroupBox4.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
@@ -153,8 +168,14 @@ Klicken Sie "Weiter" um fortzufahren.</value>
   <data name="Label2.Text" xml:space="preserve">
     <value>Wählen Sie die Komponenten, welche Sie der Simulation hinzufügen möchten. Verwenden Sie das Textfeld, um in der Liste zu suchen, und wählen Sie eine Komponente. Klicken Sie "Weiter" um fortzufahren.</value>
   </data>
+  <data name="Label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button11.Text" xml:space="preserve">
     <value>Liste leeren</value>
+  </data>
+  <data name="Button11.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 15</value>
@@ -162,8 +183,14 @@ Klicken Sie "Weiter" um fortzufahren.</value>
   <data name="Label3.Text" xml:space="preserve">
     <value>Suchen</value>
   </data>
+  <data name="Label3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button10.Text" xml:space="preserve">
     <value>&lt; Entfernen</value>
+  </data>
+  <data name="Button10.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Column6.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -186,20 +213,62 @@ Klicken Sie "Weiter" um fortzufahren.</value>
   <data name="Column10.ToolTipText" xml:space="preserve">
     <value>Unterstützt durch FPROPS Property Package</value>
   </data>
+  <data name="ogc1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Einfügen &gt;</value>
   </data>
+  <data name="Button7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>583, 15</value>
+  </data>
+  <data name="LinkLabel2.Text" xml:space="preserve">
+    <value>Hier klicken, um Hilfe bei der Auswahl des für Ihr System am besten geeigneten PropertyPackages zu erhalten</value>
+  </data>
+  <data name="LinkLabel2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="LinkLabelPropertyMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 15</value>
+    <value>655, 15</value>
   </data>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
-    <value>Hier klicken um die Methoden der PropertyPackages zu sehen mit denen die Eigenschaften von Fluiden berechnet werden.</value>
+    <value>Hier klicken, um die Methoden der PropertyPackages zu sehen mit denen die Eigenschaften von Fluiden berechnet werden.</value>
+  </data>
+  <data name="LinkLabelPropertyMethods.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ListViewPP.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Button8.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Verfügbare PropertyPackages</value>
   </data>
+  <data name="GroupBox6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Column16.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column17.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="dgvpp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Gewählte PropertyPackages</value>
+  </data>
+  <data name="GroupBox12.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 5</value>
@@ -209,6 +278,30 @@ Klicken Sie "Weiter" um fortzufahren.</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Wählen Sie die PropertyPackages die Sie für die Berechnung der Eigenschaften verwenden möchten. Das erste in der Liste wird standardmäßig für die Berechnung der Objekte verwendet. Klicken Sie "Weiter" um fortzufahren.</value>
+  </data>
+  <data name="Label4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblFlashAlgoDesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>157, 319</value>
+  </data>
+  <data name="lblFlashAlgoDesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>550, 48</value>
+  </data>
+  <data name="lblFlashAlgoDesc.Text" xml:space="preserve">
+    <value>Beschreibung des Algorithmus</value>
+  </data>
+  <data name="lblFlashAlgoDesc.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 15</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Beschreibung Algorithmus</value>
+  </data>
+  <data name="Label9.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="ListBoxPP.Items" xml:space="preserve">
     <value>Nested Loops (VLE)</value>
@@ -241,13 +334,22 @@ Klicken Sie "Weiter" um fortzufahren.</value>
     <value>112, 114</value>
   </data>
   <data name="ListBoxPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 244</value>
+    <value>566, 184</value>
+  </data>
+  <data name="ListBoxPP.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 114</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 15</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Flash Algorithmus</value>
+  </data>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>502, 15</value>
@@ -256,25 +358,86 @@ Klicken Sie "Weiter" um fortzufahren.</value>
     <value>Klicken Sie hier für weitere Details und Grenzen der Anwendbarkeit der einzelnen Algorithmen.
 </value>
   </data>
+  <data name="LinkLabel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Wählen Sie einen Flash Algorithmus für Ihre Simulation. Wenn Ihr System Instabilitäten in der flüssigen Phase (nicht mischbare Systeme) aufweist, wählen Sie einen Algorithmus, um das Gleichgewicht der drei Phasen (VLLE) vorherzusagen. Um ein Gleichgewicht mit einer festen Phase zu berechnen, wählen Sie den entsprechenden Algorithmus. Für komplexe Systeme ist der Gibbs-Minimierungsalgorithmus besser geeignet (zwei oder drei Phasen).
 
 Klicken Sie "Weiter" um fortzufahren.</value>
   </data>
+  <data name="Label5.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Eigenschaft</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Eigenschaft</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Einheit</value>
+  </data>
+  <data name="DataGridView1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ComboBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 15</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Einheitensystem</value>
+  </data>
+  <data name="Label8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>709, 52</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Wählen Sie die gewünschten Systemeinheiten für Ihre Simulation. Sie können die Einheiten der bestehenden Systeme ändern, neue Systeme einfügen und andere Operationen im Konfigurationsfenster nach Beendigung dieses Assistenten durchführen.
+Klicken Sie "Beenden" um fortzufahren und die Simulation zu starten.</value>
+  </data>
+  <data name="Label7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>Einheitensystem</value>
+  </data>
+  <data name="WizardPage5.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="WizardPage4.Text" xml:space="preserve">
     <value>Flash Algorithmus</value>
   </data>
+  <data name="WizardPage4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="WizardPage3.Text" xml:space="preserve">
     <value>PropertyPackages</value>
+  </data>
+  <data name="WizardPage3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="WizardPage2.Text" xml:space="preserve">
     <value>Komponenten</value>
   </data>
+  <data name="WizardPage2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="WizardPage1.Text" xml:space="preserve">
     <value>Einleitung</value>
+  </data>
+  <data name="WizardPage1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="StepWizardControl1.Title" xml:space="preserve">
     <value>Assistent zur Konfiguration der Simulation</value>
@@ -406,44 +569,13 @@ Klicken Sie "Weiter" um fortzufahren.</value>
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
   </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Hinzufügen</value>
-  </data>
-  <data name="Column16.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Column17.HeaderText" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Eigenschaft</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Einheit</value>
-  </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Eigenschaft</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Einheit</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 15</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Einheitensystem</value>
-  </data>
-  <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>709, 52</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Wählen Sie die gewünschten Systemeinheiten für Ihre Simulation. Sie können die Einheiten der bestehenden Systeme ändern, neue Systeme einfügen und andere Operationen im Konfigurationsfenster nach Beendigung dieses Assistenten durchführen.
-Klicken Sie "Beenden" um fortzufahren und die Simulation zu starten.</value>
+  <data name="StepWizardControl1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Konfigurations Wizard</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

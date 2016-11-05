@@ -24,10 +24,10 @@ Partial Class FormLLEDiagram
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormLLEDiagram))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -109,26 +109,27 @@ Partial Class FormLLEDiagram
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.PanelDiag)
         resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.PanelDiag)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'PanelDiag
         '
-        Me.PanelDiag.BackColor = System.Drawing.Color.WhiteSmoke
         resources.ApplyResources(Me.PanelDiag, "PanelDiag")
+        Me.PanelDiag.BackColor = System.Drawing.Color.WhiteSmoke
         Me.PanelDiag.Name = "PanelDiag"
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.DataGridView1)
         resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.DataGridView1)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
@@ -136,16 +137,15 @@ Partial Class FormLLEDiagram
         Me.DataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.X11, Me.X12, Me.X21, Me.X22})
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         '
         'X11
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle1.Format = "N6"
-        DataGridViewCellStyle1.NullValue = Nothing
-        Me.X11.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle9.Format = "N6"
+        DataGridViewCellStyle9.NullValue = Nothing
+        Me.X11.DefaultCellStyle = DataGridViewCellStyle9
         Me.X11.Frozen = True
         resources.ApplyResources(Me.X11, "X11")
         Me.X11.Name = "X11"
@@ -155,10 +155,10 @@ Partial Class FormLLEDiagram
         '
         'X12
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle2.Format = "N6"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.X12.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle10.Format = "N6"
+        DataGridViewCellStyle10.NullValue = Nothing
+        Me.X12.DefaultCellStyle = DataGridViewCellStyle10
         Me.X12.DividerWidth = 5
         Me.X12.Frozen = True
         resources.ApplyResources(Me.X12, "X12")
@@ -169,10 +169,10 @@ Partial Class FormLLEDiagram
         '
         'X21
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.PaleTurquoise
-        DataGridViewCellStyle3.Format = "N6"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.X21.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.PaleTurquoise
+        DataGridViewCellStyle11.Format = "N6"
+        DataGridViewCellStyle11.NullValue = Nothing
+        Me.X21.DefaultCellStyle = DataGridViewCellStyle11
         resources.ApplyResources(Me.X21, "X21")
         Me.X21.Name = "X21"
         Me.X21.ReadOnly = True
@@ -181,10 +181,10 @@ Partial Class FormLLEDiagram
         '
         'X22
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.PaleTurquoise
-        DataGridViewCellStyle4.Format = "N6"
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.X22.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.PaleTurquoise
+        DataGridViewCellStyle12.Format = "N6"
+        DataGridViewCellStyle12.NullValue = Nothing
+        Me.X22.DefaultCellStyle = DataGridViewCellStyle12
         resources.ApplyResources(Me.X22, "X22")
         Me.X22.Name = "X22"
         Me.X22.ReadOnly = True
@@ -240,15 +240,15 @@ Partial Class FormLLEDiagram
         '
         'cbPropPack
         '
+        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
-        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.Name = "cbPropPack"
         '
         'btnCalcDiagram
         '
-        Me.btnCalcDiagram.Image = Global.DWSIM.My.Resources.Resources.chart_LLE
         resources.ApplyResources(Me.btnCalcDiagram, "btnCalcDiagram")
+        Me.btnCalcDiagram.Image = Global.DWSIM.My.Resources.Resources.chart_LLE
         Me.btnCalcDiagram.Name = "btnCalcDiagram"
         Me.btnCalcDiagram.UseVisualStyleBackColor = True
         '
@@ -284,23 +284,23 @@ Partial Class FormLLEDiagram
         '
         'cbComp3
         '
+        resources.ApplyResources(Me.cbComp3, "cbComp3")
         Me.cbComp3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp3.FormattingEnabled = True
-        resources.ApplyResources(Me.cbComp3, "cbComp3")
         Me.cbComp3.Name = "cbComp3"
         '
         'cbComp2
         '
+        resources.ApplyResources(Me.cbComp2, "cbComp2")
         Me.cbComp2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp2.FormattingEnabled = True
-        resources.ApplyResources(Me.cbComp2, "cbComp2")
         Me.cbComp2.Name = "cbComp2"
         '
         'cbComp1
         '
+        resources.ApplyResources(Me.cbComp1, "cbComp1")
         Me.cbComp1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp1.FormattingEnabled = True
-        resources.ApplyResources(Me.cbComp1, "cbComp1")
         Me.cbComp1.Name = "cbComp1"
         '
         'Label1
@@ -310,87 +310,87 @@ Partial Class FormLLEDiagram
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSB_Print, Me.TSB_PrinterSetup, Me.TSB_CalcDiagr})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSB_Print, Me.TSB_PrinterSetup, Me.TSB_CalcDiagr})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         '
         'TSB_Print
         '
+        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Print.Image = Global.DWSIM.My.Resources.Resources.printer
-        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.Name = "TSB_Print"
         '
         'TSB_PrinterSetup
         '
+        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_PrinterSetup.Image = Global.DWSIM.My.Resources.Resources.printer_add
-        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.Name = "TSB_PrinterSetup"
         '
         'TSB_CalcDiagr
         '
+        resources.ApplyResources(Me.TSB_CalcDiagr, "TSB_CalcDiagr")
         Me.TSB_CalcDiagr.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_CalcDiagr.Image = Global.DWSIM.My.Resources.Resources.chart_LLE
-        resources.ApplyResources(Me.TSB_CalcDiagr, "TSB_CalcDiagr")
         Me.TSB_CalcDiagr.Name = "TSB_CalcDiagr"
         '
         'dckMenu
         '
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
+        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
         '
         'DockLeftToolStripMenuItem
         '
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
+        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
         '
         'DockRightToolStripMenuItem
         '
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
+        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
         '
         'DockTopToolStripMenuItem
         '
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
+        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
         '
         'DockBottomToolStripMenuItem
         '
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
+        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
+        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
+        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
+        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
+        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
         '
         'DocumentToolStripMenuItem
         '
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
+        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
         'FormLLEDiagram
         '

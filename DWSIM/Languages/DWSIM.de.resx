@@ -5378,4 +5378,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NativeLibrariesExtractionError" xml:space="preserve">
     <value>An error ocurred during extraction of the native libraries to DWSIM's installation directory. Please check if you have write access to that folder or run DWSIM with elevated privileges (Windows 7/8/10).</value>
   </data>
+  <data name="DBManagerNoFile" xml:space="preserve">
+    <value>Keine Komponenten-Datei definiert!</value>
+  </data>
 </root>

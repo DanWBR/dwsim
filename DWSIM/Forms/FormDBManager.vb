@@ -43,6 +43,7 @@ Public Class FormDBManager
                     End If
                 End If
             Next
+            DGrComps.Sort(DGrComps.Columns(0), System.ComponentModel.ListSortDirection.Ascending)
         End If
     End Sub
     Private Sub CBDBName_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBDBName.SelectedIndexChanged
@@ -66,7 +67,7 @@ Public Class FormDBManager
         Dim CompID As String = DGrComps.Rows(idx).Cells("ID").Value
         Dim CompName As String = DGrComps.Rows(idx).Cells("CompName").Value
 
-        Dim result = MessageBox.Show("Delete component " & CompName & " ?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
+        Dim result = MessageBox.Show(CompName & " -> " & DWSIM.App.GetLocalString("ExcluirComponente") & " ?", DWSIM.App.GetLocalString("Pergunta"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
         If result = DialogResult.OK Then
             Databases.UserDB.RemoveCompound(DBPath, CompID)
 
@@ -99,7 +100,7 @@ Public Class FormDBManager
             NewMDIChild.WriteData()
 
         Else
-            MessageBox.Show("No Component Creator Study file defined!")
+            MessageBox.Show(DWSIM.App.GetLocalString("DBManagerNoFile"))
         End If
     End Sub
 
