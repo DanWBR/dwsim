@@ -5520,8 +5520,7 @@ Final3:
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
-                                            If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
+                                            vk(i) = AUX_LIQDENSi(subst, T)
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
@@ -5567,8 +5566,7 @@ Final3:
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
-                                            If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
+                                            vk(i) = AUX_LIQDENSi(subst, T)
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         Else
@@ -5612,8 +5610,7 @@ Final3:
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If T < subst.ConstantProperties.Critical_Temperature And subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
-                                            If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
+                                            vk(i) = AUX_LIQDENSi(subst, T)
                                         ElseIf T > subst.ConstantProperties.Critical_Temperature Then
                                             vk(i) = 800
                                         Else
@@ -5657,8 +5654,7 @@ Final3:
                                 If Me.Parameters.ContainsKey("PP_USEEXPLIQDENS") Then
                                     If Convert.ToInt32(Me.Parameters("PP_USEEXPLIQDENS")) = 1 Then
                                         If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                                            vk(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
-                                            If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then vk(i) = subst.ConstantProperties.Molar_Weight * vk(i)
+                                            vk(i) = AUX_LIQDENSi(subst, T)
                                         Else
                                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
                                         End If
