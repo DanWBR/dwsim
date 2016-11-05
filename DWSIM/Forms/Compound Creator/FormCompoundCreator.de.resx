@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Komponentendatenbank</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkReplaceComps.Location" type="System.Drawing.Point, System.Drawing">
     <value>818, 22</value>
@@ -157,6 +154,9 @@
   <data name="btnCreateNewDB.Text" xml:space="preserve">
     <value>Neue Datenbank</value>
   </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Komponentendatenbank</value>
+  </data>
   <data name="btnSaveToDB.Location" type="System.Drawing.Point, System.Drawing">
     <value>1054, 15</value>
   </data>
@@ -165,9 +165,6 @@
   </data>
   <data name="btnSaveToDB.Text" xml:space="preserve">
     <value>Speichere Komponente in Datenbank</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Komponenten Eigenschaften</value>
   </data>
   <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 20</value>
@@ -214,37 +211,6 @@
   <data name="Label54.Text" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Identifikation</value>
-  </data>
-  <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>895, 431</value>
-  </data>
-  <data name="FaTabStripItemEL.Title" xml:space="preserve">
-    <value>Elektrolyt/Salz</value>
-  </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>Eigenschaften</value>
-  </data>
-  <data name="FaTabStripItem7.Title" xml:space="preserve">
-    <value>Dampfdruck</value>
-  </data>
-  <data name="FaTabStripItem8.Title" xml:space="preserve">
-    <value>Wärmekapazität</value>
-  </data>
-  <data name="FaTabStripItem9.Title" xml:space="preserve">
-    <value>Flüssigkeitsdichte</value>
-  </data>
-  <data name="FaTabStripItem10.Title" xml:space="preserve">
-    <value>Viskositat Flüssigkeit</value>
-  </data>
-  <data name="FaTabStripItem11.Title" xml:space="preserve">
-    <value>Feststoff</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
     <value>85, 241</value>
   </data>
@@ -281,8 +247,8 @@
   <data name="Label22.Text" xml:space="preserve">
     <value>Molgewicht</value>
   </data>
-  <data name="GroupBox8.Text" xml:space="preserve">
-    <value>Optionale Daten</value>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Identifikation</value>
   </data>
   <data name="Label105.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -314,8 +280,8 @@
   <data name="Label95.Text" xml:space="preserve">
     <value>Ölviscosität 1</value>
   </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Benötigte Daten</value>
+  <data name="GroupBox8.Text" xml:space="preserve">
+    <value>Optionale Daten</value>
   </data>
   <data name="Label99.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -335,8 +301,8 @@
   <data name="Label97.Text" xml:space="preserve">
     <value>Gas-Öl Verhältnis @ SC</value>
   </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Feststoff / Ausfällung</value>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Benötigte Daten</value>
   </data>
   <data name="Label125.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
@@ -356,8 +322,8 @@
   <data name="Label124.Text" xml:space="preserve">
     <value>Schmelzenthalpie @ Tf</value>
   </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Bildungsenergieen @ 298 K / 25 °C</value>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Feststoff / Ausfällung</value>
   </data>
   <data name="Label120.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 13</value>
@@ -377,8 +343,8 @@
   <data name="Label122.Text" xml:space="preserve">
     <value>Wärmekapazität</value>
   </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Molekül</value>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Bildungsenergieen @ 298 K / 25 °C</value>
   </data>
   <data name="Label127.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -436,6 +402,15 @@
   </data>
   <data name="Label118.Text" xml:space="preserve">
     <value>Stöchiometrischer Koeffizient Kation</value>
+  </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Molekül</value>
+  </data>
+  <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>895, 431</value>
+  </data>
+  <data name="FaTabStripItemEL.Title" xml:space="preserve">
+    <value>Elektrolyt/Salz</value>
   </data>
   <data name="LinkLabel2.ToolTip" xml:space="preserve">
     <value>Aufruf der Dortmund-Dataenbank zur Unterstützung bei der UNIFAC-Gruppenzuordnung.</value>
@@ -500,6 +475,7 @@
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Column2.Width" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
@@ -521,9 +497,6 @@
   <data name="ColumnCountJoback.ToolTipText" xml:space="preserve">
     <value>Anzahl zusätzlicher Joback-Gruppen welche nicht bereits als UNIFAC-Untergruppe definiert sind.</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>PC-SAFT Parameter</value>
-  </data>
   <data name="LabelWithDivider8.Text" xml:space="preserve">
     <value>Attraktions-Parameter</value>
   </data>
@@ -532,6 +505,9 @@
   </data>
   <data name="LabelWithDivider10.Text" xml:space="preserve">
     <value>Segment Durchmesser</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>PC-SAFT Parameter</value>
   </data>
   <data name="GroupBox11.Text" xml:space="preserve">
     <value>UNIQUAC Parameter</value>
@@ -607,6 +583,9 @@
   </data>
   <data name="Label63.Text" xml:space="preserve">
     <value>Chao-Seader Löslichkeitsparameter</value>
+  </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Eigenschaften</value>
   </data>
   <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 197</value>
@@ -689,8 +668,8 @@
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 68</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Cp (Flüssigkeit)</value>
+  <data name="FaTabStripItem7.Title" xml:space="preserve">
+    <value>Dampfdruck</value>
   </data>
   <data name="Label87.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
@@ -722,8 +701,8 @@
   <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Cp (Ideales Gas)</value>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Cp (Flüssigkeit)</value>
   </data>
   <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 203</value>
@@ -806,14 +785,20 @@
   <data name="tbCPIG_C.Location" type="System.Drawing.Point, System.Drawing">
     <value>257, 123</value>
   </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Cp (Ideales Gas)</value>
+  </data>
+  <data name="FaTabStripItem8.Title" xml:space="preserve">
+    <value>Wärmekapazität</value>
+  </data>
   <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
     <value>241, 203</value>
   </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 13</value>
+    <value>122, 13</value>
   </data>
   <data name="Label45.Text" xml:space="preserve">
-    <value>* Dichte in kmol/m3, T in K</value>
+    <value>* Dichte in kg/m3, T in K</value>
   </data>
   <data name="rbEstimateLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 17</value>
@@ -889,6 +874,9 @@
   </data>
   <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 76</value>
+  </data>
+  <data name="FaTabStripItem9.Title" xml:space="preserve">
+    <value>Flüssigkeitsdichte</value>
   </data>
   <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 202</value>
@@ -971,11 +959,11 @@
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 76</value>
   </data>
+  <data name="FaTabStripItem10.Title" xml:space="preserve">
+    <value>Viskositat Flüssigkeit</value>
+  </data>
   <data name="LabelWithDivider7.Text" xml:space="preserve">
     <value>Dichte / Wärmekapazität</value>
-  </data>
-  <data name="gbCPs.Text" xml:space="preserve">
-    <value>Wärmekapazität (Feststoff)</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnRegressSolidCp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1005,8 +993,8 @@
   <data name="Label74.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="gbSolidDens.Text" xml:space="preserve">
-    <value>Dichte (Feststoff)</value>
+  <data name="gbCPs.Text" xml:space="preserve">
+    <value>Wärmekapazität (Feststoff)</value>
   </data>
   <data name="rbEstimateSolidDens.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 17</value>
@@ -1041,6 +1029,9 @@
   <data name="Label76.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
+  <data name="gbSolidDens.Text" xml:space="preserve">
+    <value>Dichte (Feststoff)</value>
+  </data>
   <data name="LabelWithDivider1.Text" xml:space="preserve">
     <value>Schmelzpunkt Daten</value>
   </data>
@@ -1056,8 +1047,14 @@
   <data name="Label55.Text" xml:space="preserve">
     <value>Schmelzenthalpie</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Einheitensystem</value>
+  <data name="FaTabStripItem11.Title" xml:space="preserve">
+    <value>Feststoff</value>
+  </data>
+  <data name="FaTabStrip2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Komponenten Eigenschaften</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
@@ -1073,6 +1070,9 @@
   </data>
   <data name="cbUnits.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Einheitensystem</value>
   </data>
   <data name="DBOpenDlg.Filter" xml:space="preserve">
     <value>XML Files|*.xml</value>

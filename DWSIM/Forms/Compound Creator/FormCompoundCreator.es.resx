@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>739, 53</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Base de Datos</value>
-  </data>
   <data name="chkReplaceComps.Location" type="System.Drawing.Point, System.Drawing">
     <value>505, 23</value>
   </data>
@@ -160,6 +154,12 @@
   <data name="btnCreateNewDB.Text" xml:space="preserve">
     <value>Crear Nuevo</value>
   </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>739, 53</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Base de Datos</value>
+  </data>
   <data name="btnSaveToDB.Location" type="System.Drawing.Point, System.Drawing">
     <value>754, 15</value>
   </data>
@@ -168,12 +168,6 @@
   </data>
   <data name="btnSaveToDB.Text" xml:space="preserve">
     <value>Guardar Componente en la Base de Datos</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1004, 505</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Propriedades del Componente</value>
   </data>
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -186,36 +180,6 @@
   </data>
   <data name="TextBoxName.Size" type="System.Drawing.Size, System.Drawing">
     <value>313, 20</value>
-  </data>
-  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 431</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Identificación</value>
-  </data>
-  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 431</value>
-  </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>Propiedades</value>
-  </data>
-  <data name="FaTabStripItem7.Title" xml:space="preserve">
-    <value>Presión de Vapor</value>
-  </data>
-  <data name="FaTabStripItem8.Title" xml:space="preserve">
-    <value>Capacidad Calorífica</value>
-  </data>
-  <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>990, 431</value>
-  </data>
-  <data name="FaTabStripItem9.Title" xml:space="preserve">
-    <value>Densidad (Líquido)</value>
-  </data>
-  <data name="FaTabStripItem10.Title" xml:space="preserve">
-    <value>Viscosidad (Líquido)</value>
-  </data>
-  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 452</value>
   </data>
   <data name="Label47.Text" xml:space="preserve">
     <value>Editor PubChem</value>
@@ -232,14 +196,20 @@
   <data name="CheckBoxMW.ToolTip" xml:space="preserve">
     <value>Cálculo Joback</value>
   </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>990, 431</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Identificación</value>
+  </data>
+  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>990, 431</value>
+  </data>
   <data name="Label60.Size" type="System.Drawing.Size, System.Drawing">
     <value>485, 13</value>
   </data>
   <data name="Label60.Text" xml:space="preserve">
     <value>Introduzca la cantidad de cada grupo funcional UNIFAC presente en la sustancia, si está disponible.</value>
-  </data>
-  <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>571, 277</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Grupo Principal</value>
@@ -252,6 +222,9 @@
   </data>
   <data name="UNIFACImageColumn.HeaderText" xml:space="preserve">
     <value>Ejemplo</value>
+  </data>
+  <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>571, 277</value>
   </data>
   <data name="MainGroup.HeaderText" xml:space="preserve">
     <value>GrupoPrincipal</value>
@@ -329,9 +302,6 @@
   <data name="ColumnCountJoback.ToolTipText" xml:space="preserve">
     <value>Cantidad Adicional de grupos Jöback que no estan ya definidos como subgrupos UNIFAC.</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Parámetros PC-SAFT</value>
-  </data>
   <data name="LabelWithDivider8.Text" xml:space="preserve">
     <value>Parámetro de Atracción</value>
   </data>
@@ -340,6 +310,9 @@
   </data>
   <data name="LabelWithDivider10.Text" xml:space="preserve">
     <value>Diámetro del Segmento</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Parámetros PC-SAFT</value>
   </data>
   <data name="CheckBoxAF.ToolTip" xml:space="preserve">
     <value>Cálculo Joback</value>
@@ -446,6 +419,9 @@
   <data name="Label63.Text" xml:space="preserve">
     <value>Parámetro de Solubilidad Chao-Seader</value>
   </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Propiedades</value>
+  </data>
   <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
     <value>250, 202</value>
   </data>
@@ -506,6 +482,9 @@
   <data name="Label30.Text" xml:space="preserve">
     <value>Ecuación</value>
   </data>
+  <data name="FaTabStripItem7.Title" xml:space="preserve">
+    <value>Presión de Vapor</value>
+  </data>
   <data name="Label89.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
@@ -532,9 +511,6 @@
   </data>
   <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regresión de Datos Experimentales</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Cp (Gas Ideal)</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -599,14 +575,20 @@
   <data name="tbCPIG_C.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 123</value>
   </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Cp (Gas Ideal)</value>
+  </data>
+  <data name="FaTabStripItem8.Title" xml:space="preserve">
+    <value>Capacidad Calorífica</value>
+  </data>
   <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 203</value>
   </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 13</value>
+    <value>124, 13</value>
   </data>
   <data name="Label45.Text" xml:space="preserve">
-    <value>* Dens en kmol/m3, T en K</value>
+    <value>* Dens en kg/m3, T en K</value>
   </data>
   <data name="tbLIQDENS_E.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 175</value>
@@ -658,6 +640,12 @@
   </data>
   <data name="Label36.Text" xml:space="preserve">
     <value>Ecuación</value>
+  </data>
+  <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>990, 431</value>
+  </data>
+  <data name="FaTabStripItem9.Title" xml:space="preserve">
+    <value>Densidad (Líquido)</value>
   </data>
   <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
     <value>253, 203</value>
@@ -716,11 +704,11 @@
   <data name="Label42.Text" xml:space="preserve">
     <value>Ecuación</value>
   </data>
+  <data name="FaTabStripItem10.Title" xml:space="preserve">
+    <value>Viscosidad (Líquido)</value>
+  </data>
   <data name="LabelWithDivider7.Text" xml:space="preserve">
     <value>Densidad y Capacidad Calorífica</value>
-  </data>
-  <data name="gbCPs.Text" xml:space="preserve">
-    <value>Capacidad Calorífica (Sólido)</value>
   </data>
   <data name="btnRegressSolidCp.Text" xml:space="preserve">
     <value>Hacer Regresión</value>
@@ -743,8 +731,8 @@
   <data name="Label74.Text" xml:space="preserve">
     <value>Ecuación</value>
   </data>
-  <data name="gbSolidDens.Text" xml:space="preserve">
-    <value>Densidad (Sólido)</value>
+  <data name="gbCPs.Text" xml:space="preserve">
+    <value>Capacidad Calorífica (Sólido)</value>
   </data>
   <data name="btnRegressSolidDens.Text" xml:space="preserve">
     <value>Hacer Regresión</value>
@@ -767,6 +755,9 @@
   <data name="Label76.Text" xml:space="preserve">
     <value>Ecuación</value>
   </data>
+  <data name="gbSolidDens.Text" xml:space="preserve">
+    <value>Densidad (Sólido)</value>
+  </data>
   <data name="CheckBoxEnthOfFusion.ToolTip" xml:space="preserve">
     <value>Cálculo Joback</value>
   </data>
@@ -788,6 +779,15 @@
   <data name="CheckBoxMeltingTemp.ToolTip" xml:space="preserve">
     <value>Cálculo Joback</value>
   </data>
+  <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>992, 452</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1004, 505</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Propriedades del Componente</value>
+  </data>
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>753, 6</value>
   </data>
@@ -796,12 +796,6 @@
   </data>
   <data name="DBOpenDlg.Title" xml:space="preserve">
     <value>Abrir/Crear Base de Datos</value>
-  </data>
-  <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 573</value>
-  </data>
-  <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1019, 22</value>
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 17</value>
@@ -820,6 +814,12 @@
   </data>
   <data name="ToolStripStatusUserDB.Text" xml:space="preserve">
     <value>GUARDAR</value>
+  </data>
+  <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 573</value>
+  </data>
+  <data name="StatusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1019, 22</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1019, 595</value>
