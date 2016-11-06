@@ -186,16 +186,16 @@
     <comment>1</comment>
   </data>
   <data name="PROP_CS_1" xml:space="preserve">
-    <value>Residence time</value>
+    <value>Verweilzeit</value>
   </data>
   <data name="PROP_CS_2" xml:space="preserve">
-    <value>Volume</value>
+    <value>Volumen</value>
   </data>
   <data name="PROP_CS_3" xml:space="preserve">
-    <value>Temperature delta</value>
+    <value>Temperaturdifferenz</value>
   </data>
   <data name="PROP_CS_4" xml:space="preserve">
-    <value>Heat load</value>
+    <value>Wärmeleistung</value>
   </data>
   <data name="PROP_DC_0" xml:space="preserve">
     <value>Kondensatordruck</value>
@@ -363,13 +363,13 @@
     <value>[Rohrbündel WT] Reynolds-Zahl Rohre</value>
   </data>
   <data name="PROP_HX_25" xml:space="preserve">
-    <value>Thermal Efficiency</value>
+    <value>Thermischer Wirkungsgrad</value>
   </data>
   <data name="PROP_HX_26" xml:space="preserve">
-    <value>Maximum Theoretical Heat Exchange</value>
+    <value>Maximaler theoretischer Wärmeaustausch</value>
   </data>
   <data name="PROP_HX_27" xml:space="preserve">
-    <value>Minimum Temperature Difference</value>
+    <value>Minimale Temperaturdifferenz</value>
   </data>
   <data name="PROP_HX_3" xml:space="preserve">
     <value>Austrittstemperatur des kalten Mediums</value>
@@ -521,7 +521,7 @@
     <comment>0</comment>
   </data>
   <data name="PROP_MS_127" xml:space="preserve">
-    <value>Kondensatinsdruck bei Stromtemperatur</value>
+    <value>Kondensationsdruck bei Stromtemperatur</value>
     <comment>0</comment>
   </data>
   <data name="PROP_MS_128" xml:space="preserve">
@@ -615,7 +615,7 @@
     <value>Massenstrom Feststoff</value>
   </data>
   <data name="PROP_MS_153" xml:space="preserve">
-    <value>Liquid Phase 1 pH</value>
+    <value>Flüssigphase 1 pH</value>
   </data>
   <data name="PROP_MS_154" xml:space="preserve">
     <value>Leistung</value>
@@ -1021,28 +1021,28 @@
     <comment>1</comment>
   </data>
   <data name="PROP_PF_1" xml:space="preserve">
-    <value>Residence time</value>
+    <value>Verweilzeit</value>
   </data>
   <data name="PROP_PF_2" xml:space="preserve">
-    <value>Volume</value>
+    <value>Volumen</value>
   </data>
   <data name="PROP_PF_3" xml:space="preserve">
-    <value>Length</value>
+    <value>Länge</value>
   </data>
   <data name="PROP_PF_4" xml:space="preserve">
-    <value>Catalyst loading</value>
+    <value>Katalysatorbeladung</value>
   </data>
   <data name="PROP_PF_5" xml:space="preserve">
-    <value>Catalyst diameter</value>
+    <value>Katalysator Durchmesser</value>
   </data>
   <data name="PROP_PF_6" xml:space="preserve">
-    <value>Catalyst void fraction</value>
+    <value>Katalysator Holraumanteil</value>
   </data>
   <data name="PROP_PF_7" xml:space="preserve">
-    <value>Temperature delta</value>
+    <value>Temperaturdifferenz</value>
   </data>
   <data name="PROP_PF_8" xml:space="preserve">
-    <value>Heat load</value>
+    <value>Wärmeleistung</value>
   </data>
   <data name="PROP_PS_0" xml:space="preserve">
     <value>Druckverlust</value>
@@ -1057,19 +1057,19 @@
     <comment>0</comment>
   </data>
   <data name="PROP_PS_3" xml:space="preserve">
-    <value>Outlet Pressure (Spec)</value>
+    <value>Auslassdruck (Spec)</value>
   </data>
   <data name="PROP_PS_4" xml:space="preserve">
-    <value>Outlet Temperature (Spec)</value>
+    <value>Auslasstemperatur (Spec)</value>
   </data>
   <data name="PROP_PS_5" xml:space="preserve">
-    <value>Overall HTC (Spec)</value>
+    <value>Globaler K-Wert (Spec)</value>
   </data>
   <data name="PROP_PS_6" xml:space="preserve">
-    <value>External Temperature (Spec)</value>
+    <value>Externe Temperatur (Spec)</value>
   </data>
   <data name="PROP_PS_7" xml:space="preserve">
-    <value>Ambient Temperature Gradient</value>
+    <value>Gradient Umgebungstemperatur</value>
   </data>
   <data name="PROP_PU_0" xml:space="preserve">
     <value>Druckerhöhung (Höhe)</value>
@@ -1220,10 +1220,10 @@
     <comment>0</comment>
   </data>
   <data name="PROP_SP_1" xml:space="preserve">
-    <value>Stream 1 Flow Spec</value>
+    <value>Strom 1 Durchfluss Spec</value>
   </data>
   <data name="PROP_SP_2" xml:space="preserve">
-    <value>Stream 2 Flow Spec</value>
+    <value>Strom 2 Durchfluss Spec</value>
   </data>
   <data name="PROP_SS_0" xml:space="preserve">
     <value>Druckverlust</value>

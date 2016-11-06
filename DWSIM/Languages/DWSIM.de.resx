@@ -628,7 +628,7 @@
     <value>Basis für Zusammensetzung</value>
   </data>
   <data name="CompPseudo" xml:space="preserve">
-    <value>Pseudo</value>
+    <value>Pseudokomponente</value>
   </data>
   <data name="CompressibilidadeCrt" xml:space="preserve">
     <value>Kritische Kompressibilität</value>
@@ -1090,7 +1090,7 @@
     <value>Dämpfeproduktmenge</value>
   </data>
   <data name="de" xml:space="preserve">
-    <value>of</value>
+    <value>von</value>
   </data>
   <data name="DefinaumnomeparaoSis" xml:space="preserve">
     <value>Definieren Sie einen Namen für dieses Einheitensystem</value>
@@ -1337,7 +1337,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
     <value>Höhe (m)</value>
   </data>
   <data name="en" xml:space="preserve">
-    <value>En</value>
+    <value>In</value>
   </data>
   <data name="EnergyFlow" xml:space="preserve">
     <value>Energie</value>
@@ -1679,7 +1679,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
     <value>Gußeisen</value>
   </data>
   <data name="Fibradevidro" xml:space="preserve">
-    <value>GlasPhaser</value>
+    <value>Glasfaser</value>
   </data>
   <data name="FIGURA" xml:space="preserve">
     <value>Abbildung -</value>
@@ -1772,7 +1772,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
     <value>Technisches Handbuch *</value>
   </data>
   <data name="FormTips_KryptonLabel11Text" xml:space="preserve">
-    <value>Öffen einer existierenden Simulation</value>
+    <value>Öffnen einer existierenden Simulation</value>
   </data>
   <data name="FormTips_KryptonLabel11Text2" xml:space="preserve">
     <value>auf Ihrem Computer.</value>
@@ -3101,7 +3101,7 @@ Oberflächenspannung (flüssig): Brock-Bird-Methode</value>
     <value>Normal reduzieren 4:3</value>
   </data>
   <data name="ReferencedObjectData" xml:space="preserve">
-    <value>ReferencedObjectData</value>
+    <value>Daten referenziertes Objekt</value>
   </data>
   <data name="RefluxedAbsorber" xml:space="preserve">
     <value>Absorber mit Rücklauf</value>
@@ -4740,7 +4740,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Eintrittsstrom 6</value>
   </data>
   <data name="ActivityCoefficients" xml:space="preserve">
-    <value>Activity Coefficients</value>
+    <value>Aktivitätskoeffizenten</value>
   </data>
   <data name="FreezingPoint" xml:space="preserve">
     <value>Gefrierpunk</value>
@@ -4764,16 +4764,16 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Excel Tabelle erfolgreich gespeichert.</value>
   </data>
   <data name="Electrolyte_Cp0" xml:space="preserve">
-    <value>[Electrolyte] Standard State Heat Capacity at 298 K</value>
+    <value>[Electrolyte] Standard Zustand Wärmekapazität bei 298 K</value>
   </data>
   <data name="Electrolyte_DelGF" xml:space="preserve">
-    <value>[Electrolyte] Standard State Gibbs Energy of Formation at 298 K</value>
+    <value>[Electrolyte] Standard Zustand Gibbs Bildungsenergie  bei 298 K</value>
   </data>
   <data name="Electrolyte_DelHF" xml:space="preserve">
-    <value>[Electrolyte] Standard State Enthalpy of Formation at 298 K</value>
+    <value>[Electrolyte] Standard Zustand Bildungsenthalpie bei 298 K</value>
   </data>
   <data name="Electrolyte_StdStateMolVol" xml:space="preserve">
-    <value>[Electrolyte] Standard State Molar Volume at 298 K</value>
+    <value>[Electrolyte] Standard Zustand Molares Volumen bei 298 K</value>
   </data>
   <data name="Selado" xml:space="preserve">
     <value>Gesperrt</value>
@@ -4782,13 +4782,13 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Keine regressierten Parameter verfügbar! Keine Daten gespeichert.</value>
   </data>
   <data name="ParametrosAdicionadosComSucesso" xml:space="preserve">
-    <value>Interaction Parameters successfully added to the database.</value>
+    <value>Interaktions-Parameter erfolgreich in die Datenbank geschrieben.</value>
   </data>
   <data name="SplitterOperationMode" xml:space="preserve">
-    <value>Operation Mode (Split Ratios / Stream 1 Flow Spec)</value>
+    <value>Modus (Split Verhältnis / Strom 1 Durchfluss Spec)</value>
   </data>
   <data name="CancelText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Abbrechen</value>
   </data>
   <data name="FinishText" xml:space="preserve">
     <value>Ende</value>
@@ -4932,7 +4932,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Flowsheet wurde nicht initialisiert. Clicken Sie auf den linke Knopf, um es zu initialisieren.</value>
   </data>
   <data name="FlowsheetUOEditor" xml:space="preserve">
-    <value>Control panel</value>
+    <value>Kontrolpanel</value>
   </data>
   <data name="FlowsheetUOEditorDesc" xml:space="preserve">
     <value>Initialisiere das Flowsheet, definieren Sie Verknüpfungen der Materialströme, machen Sie die Objekteigenschaften sichtbar und wählen Sie den Massentransfermodus zwischen Strömen.</value>
@@ -4971,7 +4971,7 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>Flowsheet Unit Operation</value>
   </data>
   <data name="RedirectOutput" xml:space="preserve">
-    <value>Redirect rechner nachrichten</value>
+    <value>Umleitung Rechnernachrichten</value>
   </data>
   <data name="RedirectOutputDesc" xml:space="preserve">
     <value>Leiten Sie Nachrichten von Teilfließbild Berechnungen Log-Fenster des Hauptfließbild ist.</value>
@@ -5110,16 +5110,16 @@ Die erhaltenen Daten werden hauptsächlich für die Berechnung von VLE-Daten emp
     <value>Nutzlänge</value>
   </data>
   <data name="PFRMassBalanceError" xml:space="preserve">
-    <value>An error ocurred during the mass balance calculation. Check reaction kinetics data and reactor sizing information as well.</value>
+    <value>Fehler bei der Berechnung der Massenbilanz. Überprüfen Sie ebenfalls die Reaktionskinetik und die Reaktorgröße.</value>
   </data>
   <data name="PFRNegativePressureError" xml:space="preserve">
-    <value>The pressure drop inside the PFR is too high. Check input data like volume, diameter and catalyst loading information, if applicable.</value>
+    <value>Druckverlust innerhalb des PFR zu hoch. Überprüfen Sie die Eingabedaten wie Volumen, Durchmesser und Katalysatorbeladung, falls zutreffend.</value>
   </data>
   <data name="PFRDenominatorEvaluationError" xml:space="preserve">
-    <value>Error evaluating denominator expression for reaction</value>
+    <value>Fehler bei der Auswertung des Denominator-Ausdrucks</value>
   </data>
   <data name="PFRNumeratorEvaluationError" xml:space="preserve">
-    <value>Error evaluating numerator expression for reaction</value>
+    <value>Fehler bei der Auswertung des Numerator-Ausdrucks für die Reaktion</value>
   </data>
   <data name="SpreadsheetCell" xml:space="preserve">
     <value>Kalkulationstabellenzelle</value>
@@ -5152,7 +5152,7 @@ Die erhaltenen Daten werden hauptsächlich für die Berechnung von VLE-Daten emp
     <value>Lösung erfolgreich, benötigte Zeit:</value>
   </data>
   <data name="ConfirmOperation" xml:space="preserve">
-    <value>Gehen sie bei der angeforderten aktion?</value>
+    <value>Angeforderte Aktion ausführen?</value>
   </data>
   <data name="CopyOnError" xml:space="preserve">
     <value>Kopiere Stromdaten bei Fehler</value>
@@ -5176,34 +5176,34 @@ Die erhaltenen Daten werden hauptsächlich für die Berechnung von VLE-Daten emp
     <value>[Black Oil] BSW (%)</value>
   </data>
   <data name="BlackOil_GOR" xml:space="preserve">
-    <value>[Black Oil] Gas-Oil Ratio @ SC</value>
+    <value>[Black Oil] Gas-Öl Verhältnis @ SC</value>
   </data>
   <data name="BlackOil_PNA_A" xml:space="preserve">
-    <value>[Black Oil] Oil PNA analysis, Aromatics, %</value>
+    <value>[Black Oil] Öl PNA Analyse, Aromaten, %</value>
   </data>
   <data name="BlackOil_PNA_N" xml:space="preserve">
-    <value>[Black Oil] Oil PNA analysis, Naphthenes, %</value>
+    <value>[Black Oil] Öl PNA Analyse, Naphthene, %</value>
   </data>
   <data name="BlackOil_PNA_P" xml:space="preserve">
-    <value>[Black Oil] Oil PNA analysis, Paraffins, %</value>
+    <value>[Black Oil] Öl PNA Analyse, Paraffine, %</value>
   </data>
   <data name="BlackOil_SGG" xml:space="preserve">
-    <value>[Black Oil] Gas specific gravity</value>
+    <value>[Black Oil] Gas specifische Dichte</value>
   </data>
   <data name="BlackOil_SGO" xml:space="preserve">
-    <value>[Black Oil] Oil specific gravity</value>
+    <value>[Black Oil] Öl specifische Dichte</value>
   </data>
   <data name="BlackOil_T1" xml:space="preserve">
-    <value>[Black Oil] Oil viscosity 1 temperature</value>
+    <value>[Black Oil] Öl Viskosität 1 Temperatur</value>
   </data>
   <data name="BlackOil_T2" xml:space="preserve">
-    <value>[Black Oil] Oil viscosity 2 temperature</value>
+    <value>[Black Oil] Öl Viskosität 2 Temperatur</value>
   </data>
   <data name="BlackOil_V1" xml:space="preserve">
-    <value>[Black Oil] Oil viscosity 1</value>
+    <value>[Black Oil] Öl Viskosität 1</value>
   </data>
   <data name="BlackOil_V2" xml:space="preserve">
-    <value>[Black Oil] Oil viscosity 2</value>
+    <value>[Black Oil] Öl Viskosität 2</value>
   </data>
   <data name="DescBOPP" xml:space="preserve">
     <value>Ein einfaches Property Package zur schnellen Berechnung von Petroleum-Fluiden, welche durch einfache Eigenschaften, wie z.B. spezifische Dichte und Gas/Öl-Verhältnis, charakterisiert sind.</value>
@@ -5224,22 +5224,22 @@ Die erhaltenen Daten werden hauptsächlich für die Berechnung von VLE-Daten emp
     <value>Keine Anwenderdatenbank vorhanden!</value>
   </data>
   <data name="Unsupported_Feature" xml:space="preserve">
-    <value>This feature is not supported on this platform.</value>
+    <value>Diese Funktion wird auf dieser Plattform nicht unterstützt.</value>
   </data>
   <data name="ParallelPInvokeError" xml:space="preserve">
     <value>This feature uses a platform-specific, unmanaged (non-.NET) native library, which doesn't work with CPU Parallel Processing enabled. Please disable CPU Parallel Processing and try again.</value>
   </data>
   <data name="PipeSpecMode" xml:space="preserve">
-    <value>Pipe Specification</value>
+    <value>Rohr Spezifikation</value>
   </data>
   <data name="PipeSpecModeDesc" xml:space="preserve">
-    <value>Length = specify segments' length to calculate outlet pressure and temperature; OutletPressure = specify outlet pressure to calculate temperature and resulting length for a single, straight pipe segment; OutletTemperature = specify outlet temperature and segments' length to calculate outlet pressure and heat exchanged (thermal profile option automatically switches to 'Heat Exchanged' in this mode).</value>
+    <value>Länge = Spezifiziere Segementlänge um den Austrittsdruck zu berechnen; Auslassdruck = Spezifiziere Auslassdruck um die Temperatur und die Länge für ein einzelnes gerades Rohrsegment zu berechnen; Auslasstemperatur = Spezifiziere Auslasstemperatur und Segmentlänge um den Auslassdruck und die ausgetauschte Wärme zu berechnen (Die Option "Thermische Profil" wechselt in diesem Modus automatisch zu "Ausgetauschte Wärme") </value>
   </data>
   <data name="PipeOutletPressureRestriction" xml:space="preserve">
-    <value>When in "Outlet Pressure" calculation mode, the pipe must have a single segment only, and it must of "Straight Tube" type.</value>
+    <value>Im Berechnungsmodus "Outlet Pressure" darf das Rohr nur ein einzelnes gerades Rohr-Segment haben.</value>
   </data>
   <data name="CompoundNotFound" xml:space="preserve">
-    <value>compound not found on any of the loaded databases.</value>
+    <value>Komponente in keiner der geladenen Datenbanken gefunden.</value>
   </data>
   <data name="DescSourWaterPP" xml:space="preserve">
     <value>The Sour Water Property Package is based on the SWEQ model described in the USEPA Report EPA-600/2-80-067: 'A new correlation of NH3, CO2, and H2S volatility data from aqueous sour water systems', by Wilson, Grant M., available online at http://nepis.epa.gov/Exe/ZyPDF.cgi?Dockey=9101B309.PDF  
@@ -5271,58 +5271,58 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Ignorieren LMTD Fehler</value>
   </data>
   <data name="HXIgnoreLMTDErrorDesc" xml:space="preserve">
-    <value>If True, an error on LMTD calculation doesn't throw an exception - a "temperature cross" message is shown instead. Useful for simulations with recycles.</value>
+    <value>Wenn True, wird ein Fehler bei der LMTD-Berechnung keine Fehlermeldung "Überkreuzung Temperatur" erzeugen. Dies ist für Simulationen mit Recyclen hilfreich.</value>
   </data>
   <data name="UndoRedo_CompoundAdded" xml:space="preserve">
-    <value>Compound added: {0}</value>
+    <value>Komponente hinzugefügt: {0}</value>
   </data>
   <data name="UndoRedo_CompoundRemoved" xml:space="preserve">
-    <value>Compound removed: {0}</value>
+    <value>Komponente entfernt: {0}</value>
   </data>
   <data name="UndoRedo_FlowsheetObjectPropertyChanged" xml:space="preserve">
-    <value>Property changed: {0}, {1} from {2} to {3}</value>
+    <value>Eigenschaft geändert: {0}, {1} von {2} zu {3}</value>
   </data>
   <data name="UndoRedo_GraphicObjectPropertyChanged" xml:space="preserve">
-    <value>Property changed: {0}, {1} from {2} to {3}</value>
+    <value>Eigenschaft geändert: {0}, {1} von {2} zu {3}</value>
   </data>
   <data name="UndoRedo_ObjectAdded" xml:space="preserve">
-    <value>Object added: {0}</value>
+    <value>Objekt hinzugefügt: {0}</value>
   </data>
   <data name="UndoRedo_ObjectConnected" xml:space="preserve">
-    <value>Objects connected: {0} to {1}</value>
+    <value>Objekte verbunden: {0} zu {1}</value>
   </data>
   <data name="UndoRedo_ObjectDisconnected" xml:space="preserve">
-    <value>Objects disconnected: {0} from {1}</value>
+    <value>Objekte entkoppelt: {0} von {1}</value>
   </data>
   <data name="UndoRedo_ObjectRemoved" xml:space="preserve">
-    <value>Object removed: {0}</value>
+    <value>Objekt entfernt: {0}</value>
   </data>
   <data name="UndoRedo_PropertyPackageAdded" xml:space="preserve">
-    <value>Package added: {0}</value>
+    <value>Package hinzugefügt: {0}</value>
   </data>
   <data name="UndoRedo_PropertyPackagePropertyChanged" xml:space="preserve">
-    <value>Parameter changed: {0}, {1} from {2} to {3}</value>
+    <value>Parameter geändert: {0}, {1} von {2} zu {3}</value>
   </data>
   <data name="UndoRedo_PropertyPackageRemoved" xml:space="preserve">
-    <value>Package removed: {0}</value>
+    <value>Package entfernt: {0}</value>
   </data>
   <data name="UndoRedo_SystemOfUnitsAdded" xml:space="preserve">
-    <value>System of Units added: {0}</value>
+    <value>Einheitensystem hinzugefügt: {0}</value>
   </data>
   <data name="UndoRedo_SystemOfUnitsChanged" xml:space="preserve">
-    <value>System of Units changed: {0}, {1} from {2} to {3}</value>
+    <value>Einheitensystem geändert: {0}, {1} von {2} zu {3}</value>
   </data>
   <data name="UndoRedo_SystemOfUnitsRemoved" xml:space="preserve">
-    <value>System of Units removed: {0}</value>
+    <value>Einheitensystem: {0}</value>
   </data>
   <data name="UndoRedo_Cut" xml:space="preserve">
-    <value>Cut objects</value>
+    <value>Schneide Objekte</value>
   </data>
   <data name="UndoRedo_Paste" xml:space="preserve">
-    <value>Paste objects</value>
+    <value>Objekte einfügen</value>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Redo</value>
+    <value>Widerholen</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>
@@ -5331,31 +5331,31 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Line {0}, Column {1}</value>
   </data>
   <data name="DoubleClickToEdit" xml:space="preserve">
-    <value>Double-click to edit</value>
+    <value>Doppel-Klick zum Bearbeiten</value>
   </data>
   <data name="SolvingUtility" xml:space="preserve">
     <value>Updating utility {0} attached to {1}...</value>
   </data>
   <data name="Deleterectangle" xml:space="preserve">
-    <value>Remove the selected rectangle?</value>
+    <value>Das ausgewählte Rechteck entfernen?</value>
   </data>
   <data name="rectangletext" xml:space="preserve">
-    <value>DESCRIPTION</value>
+    <value>Beschreibung</value>
   </data>
   <data name="Gradiente_Cor1" xml:space="preserve">
-    <value>Gradient color 1</value>
+    <value>Gradient Farbe 1</value>
   </data>
   <data name="Gradiente_Cor2" xml:space="preserve">
-    <value>Gradient color 2</value>
+    <value>Gradient Farbe 2</value>
   </data>
   <data name="FileSaved" xml:space="preserve">
-    <value>File saved successfully.</value>
+    <value>File erfolgreich gespeichert.</value>
   </data>
   <data name="DownloadingUpdates" xml:space="preserve">
-    <value>Downloading updates</value>
+    <value>Download von Updates</value>
   </data>
   <data name="UpdateReady" xml:space="preserve">
-    <value>Updates are ready to install. Click on 'Restart' to restart and update DWSIM.</value>
+    <value>Updates sind zur Installation bereit. Klicken Sie auf 'Restart' um DWSIM neu zu starten und zu aktualisieren.</value>
   </data>
   <data name="ReactionCoordinate" xml:space="preserve">
     <value>Extent</value>
@@ -5367,16 +5367,16 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Reaction Coordinate</value>
   </data>
   <data name="ReactionHeat" xml:space="preserve">
-    <value>Reaction heat</value>
+    <value>Reaktionswärme</value>
   </data>
   <data name="ReactionRate" xml:space="preserve">
-    <value>Reaction Rate</value>
+    <value>Reaktionsgeschwindigkeit</value>
   </data>
   <data name="UnauthorizedAccessError" xml:space="preserve">
     <value>This operation requires elevation. Run DWSIM with elevated privileges and try again.</value>
   </data>
   <data name="NativeLibrariesExtractionError" xml:space="preserve">
-    <value>An error ocurred during extraction of the native libraries to DWSIM's installation directory. Please check if you have write access to that folder or run DWSIM with elevated privileges (Windows 7/8/10).</value>
+    <value>Bei der Extraktion der Ursprungsbibliotheken zum DWSIM Installationsverzeichnis trat ein Fehler auf. Überprüfen Sie bitte, dass Sie  Schreibrechte auf dieses Verzeichnis haben oder betreiben Sie DWSIM mit höheren Privilegien (Windows 7/8/10).</value>
   </data>
   <data name="DBManagerNoFile" xml:space="preserve">
     <value>Keine Komponenten-Datei definiert!</value>
