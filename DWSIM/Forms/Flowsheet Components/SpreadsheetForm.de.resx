@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 170</value>
-  </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 22</value>
   </data>
@@ -130,11 +127,11 @@
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 6</value>
   </data>
-  <data name="AvaliarFórmulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="AvaliarFormulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 22</value>
   </data>
-  <data name="AvaliarFórmulaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Formel berechnen</value>
+  <data name="AvaliarFormulaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Formel auswerten</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 22</value>
@@ -169,23 +166,14 @@
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Einfügen</value>
   </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 170</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Wert</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Relative Abweichung für schreibbare Variablen</value>
-  </data>
-  <data name="chkWriteMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 17</value>
-  </data>
-  <data name="chkWriteMode.Text" xml:space="preserve">
-    <value>Schreibmodus umschalten</value>
   </data>
   <data name="chkUpdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 17</value>
@@ -194,13 +182,13 @@
     <value>Automatisch neu berechnen</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>676, 503</value>
+    <value>619, 503</value>
   </data>
   <data name="Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 24</value>
+    <value>202, 24</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
-    <value>Copy data to Clipboard</value>
+    <value>Daten in Zwischenablage kopieren</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

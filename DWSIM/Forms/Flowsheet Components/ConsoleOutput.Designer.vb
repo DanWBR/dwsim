@@ -121,7 +121,7 @@ Partial Class ConsoleOutput
         resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
-        'frmOutput
+        'ConsoleOutput
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -130,7 +130,7 @@ Partial Class ConsoleOutput
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.DoubleBuffered = True
-        Me.Name = "frmOutput"
+        Me.Name = "ConsoleOutput"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockBottom
         Me.ShowInTaskbar = False
         Me.TabPageContextMenuStrip = Me.dckMenu

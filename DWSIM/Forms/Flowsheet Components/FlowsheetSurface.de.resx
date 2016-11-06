@@ -117,132 +117,102 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LabelCalculator.Text" xml:space="preserve">
-    <value>Status: Inaktiv</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="LabelSimultAdjustStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 17</value>
-  </data>
-  <data name="LabelSimultAdjustStatus.Text" xml:space="preserve">
-    <value>Die gleichzeitige Anpassen Löser funktioniert, bitte warten ...</value>
-  </data>
-  <data name="LabelSimultAdjInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 25</value>
-  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>Fließbild</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 6</value>
+    <value>258, 6</value>
   </data>
   <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="ToolStripMenuItem2.Text" xml:space="preserve">
     <value>Stil konfigurieren</value>
   </data>
   <data name="ToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="ToolStripMenuItem5.Text" xml:space="preserve">
     <value>Drucken</value>
   </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+  <data name="CopiarParaAareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 22</value>
   </data>
-  <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="ToolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="ToolStripMenuItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="CopiarParaAÁreaDeTransferênciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
-  </data>
-  <data name="CopiarParaAÁreaDeTransferênciaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Bildschirmkopie zu Zwischenablage senden</value>
+  <data name="CopiarParaAareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Sichtbaren Bereich als Bild kopieren</value>
   </data>
   <data name="ExibirTudoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="ExibirTudoToolStripMenuItem.Text" xml:space="preserve">
     <value>Alles zeigen</value>
   </data>
-  <data name="ZoomPadrão100ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+  <data name="ZoomPadrao100ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 22</value>
   </data>
-  <data name="ZoomPadrão100ToolStripMenuItem.Text" xml:space="preserve">
-    <value>Standard-Zoom (100%)</value>
+  <data name="ZoomPadrao100ToolStripMenuItem.Text" xml:space="preserve">
+    <value>Zoom Standard</value>
   </data>
   <data name="CentralizarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>303, 22</value>
+    <value>261, 22</value>
   </data>
   <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
     <value>Zentrieren</value>
   </data>
   <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>304, 164</value>
+    <value>262, 164</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
+  </data>
+  <data name="AtivadoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 22</value>
+  </data>
+  <data name="AtivadoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Berechnung aktivieren</value>
   </data>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 6</value>
+    <value>255, 6</value>
   </data>
   <data name="RecalcularToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="RecalcularToolStripMenuItem.Text" xml:space="preserve">
     <value>Neu berechnen</value>
   </data>
-  <data name="EditCompTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
-  </data>
-  <data name="EditCompTSMI.Text" xml:space="preserve">
-    <value>Bearbeiten Stream-Komposition</value>
-  </data>
   <data name="CopyFromTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="CopyFromTSMI.Text" xml:space="preserve">
     <value>Kopieren von...</value>
   </data>
-  <data name="RestoreTSMI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
-  </data>
-  <data name="RestoreTSMI.Text" xml:space="preserve">
-    <value>Wiederherstellung Standardeigenschaften</value>
-  </data>
   <data name="DepurarObjetoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="DepurarObjetoToolStripMenuItem.Text" xml:space="preserve">
     <value>Debug-Objekt</value>
   </data>
   <data name="ToolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 6</value>
+    <value>255, 6</value>
   </data>
   <data name="ConectarAToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="ConectarAToolStripMenuItem.Text" xml:space="preserve">
     <value>Verbinden mit...</value>
   </data>
   <data name="DesconectarDeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="DesconectarDeToolStripMenuItem.Text" xml:space="preserve">
     <value>Trennen von...</value>
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 6</value>
+    <value>255, 6</value>
   </data>
   <data name="ToolStripMenuItem6.Text" xml:space="preserve">
     <value>90 °</value>
@@ -344,22 +314,22 @@
 </value>
   </data>
   <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="TSMI_Girar.Text" xml:space="preserve">
     <value>Drehen</value>
   </data>
   <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="HorizontalmenteToolStripMenuItem.Text" xml:space="preserve">
     <value>Horizontal spiegeln</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 6</value>
+    <value>255, 6</value>
   </data>
   <data name="ClonarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="ClonarToolStripMenuItem.Text" xml:space="preserve">
     <value>Klonen</value>
@@ -368,46 +338,46 @@
     <value>Erstellt eine exakte Kopie des ausgewählten Objektes.</value>
   </data>
   <data name="ExcluirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="ExcluirToolStripMenuItem.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
   <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 6</value>
+    <value>255, 6</value>
   </data>
-  <data name="MostrarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 22</value>
   </data>
-  <data name="MostrarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Zeigen</value>
-  </data>
-  <data name="ConfigurarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
-  </data>
-  <data name="ConfigurarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Konfigurieren...</value>
-  </data>
-  <data name="TabelaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
-  </data>
-  <data name="TabelaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tabelle</value>
+  <data name="CopiarDadosParaareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Daten in  Zwischenablage kopieren</value>
   </data>
   <data name="ToolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 6</value>
+    <value>255, 6</value>
   </data>
-  <data name="CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+  <data name="EditAppearanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 22</value>
   </data>
-  <data name="CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem.Text" xml:space="preserve">
-    <value>Daten in Zwischenablage kopieren</value>
+  <data name="EditAppearanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Erscheinungsbild bearbeiten</value>
   </data>
-  <data name="CopiarDadosParaÁreaDeTransferênciaToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Kopiert alle Eigenschaften mit ihren Werten in die Zwischenablage.</value>
+  <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 6</value>
+  </data>
+  <data name="SplitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 22</value>
+  </data>
+  <data name="SplitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Strom teilen</value>
+  </data>
+  <data name="MergeStreamsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 22</value>
+  </data>
+  <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ströme verbinden</value>
   </data>
   <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 348</value>
+    <value>259, 376</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -431,10 +401,6 @@
         AABsAgAAbAIAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAHwAAAB8AAAAAAAAAA==
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PreviewDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAEBAAAAEAGABoAwAAFgAAACgAAAAQAAAAIAAAAAEAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -453,9 +419,6 @@
         //////////////////////////////////////////////////////////////////8AAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Fließbild</value>
