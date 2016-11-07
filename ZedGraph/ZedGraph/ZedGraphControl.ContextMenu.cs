@@ -257,7 +257,15 @@ namespace ZedGraph
         {
 
             var f = new ZedGraph.DetachedForm();
-            f.Paint += (object sender2, PaintEventArgs e2) => {
+            f.Resize += (object sender2, EventArgs e2) => {
+                var g = f.CreateGraphics();
+                var scalex = g.VisibleClipBounds.Width / _masterPane.Rect.Width;
+                var scaley = g.VisibleClipBounds.Height / _masterPane.Rect.Height;
+                g.ScaleTransform(scalex, scaley);
+                this._masterPane.Draw(g);
+            };
+            f.Shown += (object sender3, EventArgs e3) =>
+            {
                 var g = f.CreateGraphics();
                 var scalex = g.VisibleClipBounds.Width / _masterPane.Rect.Width;
                 var scaley = g.VisibleClipBounds.Height / _masterPane.Rect.Height;
@@ -265,6 +273,7 @@ namespace ZedGraph
                 this._masterPane.Draw(g);
             };
             f.Show();
+            f.Refresh();
 
         }
 

@@ -303,10 +303,10 @@ Namespace Reactors
                 Me.DeltaQ = 0
                 Me.DeltaT = 0
 
-                Dim rxp As PhaseName = PhaseName.Mixture
-
                 'check active reactions (kinetic and heterogeneous only) in the reaction set
                 'check if there are multiple reactions on different phases (unsupported)
+
+                Dim rxp As PhaseName = PhaseName.Mixture
 
                 For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                     rxn = FlowSheet.Reactions(rxnsb.ReactionID)
@@ -355,7 +355,7 @@ Namespace Reactors
 
                 VolumeFraction = Qf / Q
 
-                ResidenceTime = (Volume * VolumeFraction) / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                ResidenceTime = Volume / Q
 
                 'order reactions
                 i = 0
@@ -585,6 +585,7 @@ Namespace Reactors
                             err1 = Abs(Tout - Tout0)
 
                             ims.Phases(0).Properties.temperature = Tout
+                            ims.Phases(0).Properties.enthalpy = Hp / W
                             T = Tout
 
                             ims.SpecType = StreamSpec.Pressure_and_Enthalpy
