@@ -486,8 +486,6 @@ Namespace Reactors
                         i += 1
                     Next
 
-                    DHRi.Clear()
-
                     i = 0
                     Do
 
@@ -496,8 +494,6 @@ Namespace Reactors
 
                          'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
                         DHr = rxn.ReactionHeat * (N00(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
-
-                        DHRi.Add(rxn.ID, DHr)
 
                         i += 1
 
