@@ -266,7 +266,7 @@ Namespace Reactors
             Dim Cprev As New Dictionary(Of String, Double)
             N00.Clear()
 
-            Dim i As Integer
+            Dim i, iloop As Integer
 
             Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Qf, Q As Double
             Dim BC As String = ""
@@ -277,7 +277,15 @@ Namespace Reactors
 
             Dim err1 As Double = 1.0#
 
-            While err1 > 0.01
+            iloop = 0
+
+            Dim phasechange As Boolean = False
+
+            While iloop < 2 OrElse err1 > 0.01
+
+                If Not phasechange Then
+                    ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
+                End If
 
                 Ri.Clear()
                 Rxi.Clear()
@@ -294,7 +302,7 @@ Namespace Reactors
 
                 N0.Clear()
                 N.Clear()
-                N00.Clear()
+                'N00.Clear()
 
                 Me.Reactions.Clear()
                 Me.ReactionsSequence.Clear()
@@ -324,8 +332,6 @@ Namespace Reactors
                         End If
                     End If
                 Next
-
-                ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
 
                 W = ims.Phases(0).Properties.massflow.GetValueOrDefault
                 Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
@@ -434,7 +440,7 @@ Namespace Reactors
 
                             If Not N0.ContainsKey(sb.CompName) Then
                                 N0.Add(sb.CompName, m0)
-                                N00.Add(sb.CompName, N0(sb.CompName))
+                                If Not N00.ContainsKey(sb.CompName) Then N00.Add(sb.CompName, N0(sb.CompName))
                                 N.Add(sb.CompName, N0(sb.CompName))
                                 C0.Add(sb.CompName, N0(sb.CompName) / Qf)
                             Else
@@ -469,7 +475,7 @@ Namespace Reactors
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
                     odesolver.InitializeODEs(AddressOf ODEFunc, N.Count)
-                    odesolver.Solve(vc, 0.0#, 0.1 * Volume * VolumeFraction, Volume * VolumeFraction, Sub(x As Double, y As Double()) vc = y)
+                    odesolver.Solve(vc, 0.0#, 0.01 * Volume * VolumeFraction, Volume * VolumeFraction, Sub(x As Double, y As Double()) vc = y)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
@@ -610,11 +616,25 @@ Namespace Reactors
 
                     End Select
 
+                    Dim v0, l0, s0, v, l, s As Double
+
+                    v0 = ims.Phases(2).Properties.molarfraction.GetValueOrDefault()
+                    l0 = ims.Phases(1).Properties.molarfraction.GetValueOrDefault()
+                    s0 = ims.Phases(7).Properties.molarfraction.GetValueOrDefault
+
                     ims.Calculate(True, True)
+
+                    v = ims.Phases(2).Properties.molarfraction.GetValueOrDefault()
+                    l = ims.Phases(1).Properties.molarfraction.GetValueOrDefault()
+                    s = ims.Phases(7).Properties.molarfraction.GetValueOrDefault
+
+                    If Abs(v - v0) + Abs(l - l0) + Abs(s - s0) > 0.01 Then phasechange = True
 
                     err1 += C.Values.ToArray.SubtractY(Cprev.Values.ToArray).AbsSqrSumY
 
                 Next
+
+                iloop += 1
 
             End While
 

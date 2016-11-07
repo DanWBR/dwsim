@@ -1640,6 +1640,11 @@ Public Class FormMain
             xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
         Next
 
+        Try
+            form.FormSpreadsheet.CopyToDT()
+        Catch ex As Exception
+        End Try
+
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Spreadsheet"))
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data1"))
         xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(New XElement("Data2"))
