@@ -53,6 +53,8 @@ Namespace Reactors
 
         Public Property ResidenceTime As Double = 0.0#
 
+        Private VolumeFraction As Double = 1.0#
+
         Public Property IsothermalTemperature() As Double
             Get
                 Return m_isotemp
@@ -107,7 +109,7 @@ Namespace Reactors
 
             j = 0
             For Each s As String In N00.Keys
-                C(s) = y(j) * ResidenceTime / Volume
+                C(s) = y(j) * ResidenceTime / (Volume * VolumeFraction)
                 j = j + 1
             Next
 
@@ -261,11 +263,12 @@ Namespace Reactors
 
             Dim N0 As New Dictionary(Of String, Double)
             Dim N As New Dictionary(Of String, Double)
+            Dim Cprev As New Dictionary(Of String, Double)
             N00.Clear()
 
             Dim i As Integer
 
-            Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, vol As Double
+            Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Qf, Q As Double
             Dim BC As String = ""
             Dim tmp As IFlashCalculationResult
             Dim maxXarr As New ArrayList
@@ -293,10 +296,40 @@ Namespace Reactors
                 N.Clear()
                 N00.Clear()
 
+                Me.Reactions.Clear()
+                Me.ReactionsSequence.Clear()
+                Me.Conversions.Clear()
+                Me.ComponentConversions.Clear()
+                Me.DeltaQ = 0
+                Me.DeltaT = 0
+
+                Dim rxp As PhaseName = PhaseName.Mixture
+
+                'check active reactions (kinetic and heterogeneous only) in the reaction set
+                'check if there are multiple reactions on different phases (unsupported)
+
+                For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                    rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                    If rxn.ReactionType = ReactionType.Kinetic And rxnsb.IsActive Then
+                        Me.Reactions.Add(rxnsb.ReactionID)
+                        If rxp = PhaseName.Mixture Then rxp = rxn.ReactionPhase
+                        If rxp <> rxn.ReactionPhase Then
+                            Throw New Exception(FlowSheet.GetTranslatedString("MultipleReactionPhasesNotSupported"))
+                        End If
+                    ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic And rxnsb.IsActive Then
+                        Me.Reactions.Add(rxnsb.ReactionID)
+                        If rxp = PhaseName.Mixture Then rxp = rxn.ReactionPhase
+                        If rxp <> rxn.ReactionPhase Then
+                            Throw New Exception(FlowSheet.GetTranslatedString("MultipleReactionPhasesNotSupported"))
+                        End If
+                    End If
+                Next
+
                 ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
 
                 W = ims.Phases(0).Properties.massflow.GetValueOrDefault
                 Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
+                Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault()
 
                 PropertyPackage.CurrentMaterialStream = ims
                 ims.SetPropertyPackage(PropertyPackage)
@@ -308,23 +341,21 @@ Namespace Reactors
                     ims.Calculate(True, True)
                 End If
 
-                ResidenceTime = Volume / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                If Me.Reactions.Count > 0 Then
+                    Select Case FlowSheet.Reactions(Me.Reactions(0)).ReactionPhase
+                        Case PhaseName.Vapor
+                            Qf = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
+                        Case PhaseName.Liquid
+                            Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault()
+                        Case PhaseName.Mixture
+                            Qf = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault() +
+                                ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault()
+                    End Select
+                End If
 
-                Me.Reactions.Clear()
-                Me.ReactionsSequence.Clear()
-                Me.Conversions.Clear()
-                Me.ComponentConversions.Clear()
-                Me.DeltaQ = 0
-                Me.DeltaT = 0
-             
-                'check active reactions (kinetic and heterogeneous only) in the reaction set
-                For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
-                    If FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Kinetic And rxnsb.IsActive Then
-                        Me.Reactions.Add(rxnsb.ReactionID)
-                    ElseIf FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Heterogeneous_Catalytic And rxnsb.IsActive Then
-                        Me.Reactions.Add(rxnsb.ReactionID)
-                    End If
-                Next
+                VolumeFraction = Qf / Q
+
+                ResidenceTime = (Volume * VolumeFraction) / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
                 'order reactions
                 i = 0
@@ -393,49 +424,29 @@ Namespace Reactors
                             Select Case rxn.ReactionPhase
                                 Case PhaseName.Liquid
                                     m0 = ims.Phases(3).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
-                                    If m0 = 0.0# Then m0 = 0.0000000001
-                                    If Not N0.ContainsKey(sb.CompName) Then
-                                        N0.Add(sb.CompName, m0)
-                                        N00.Add(sb.CompName, N0(sb.CompName))
-                                        N.Add(sb.CompName, N0(sb.CompName))
-                                        C0.Add(sb.CompName, N0(sb.CompName) / ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault)
-                                    Else
-                                        N0(sb.CompName) = m0
-                                        N(sb.CompName) = N0(sb.CompName)
-                                        C0(sb.CompName) = N0(sb.CompName) / ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault
-                                    End If
-                                    vol = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault
                                 Case PhaseName.Vapor
                                     m0 = ims.Phases(2).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
-                                    If m0 = 0.0# Then m0 = 0.0000000001
-                                    If Not N0.ContainsKey(sb.CompName) Then
-                                        N0.Add(sb.CompName, m0)
-                                        N00.Add(sb.CompName, N0(sb.CompName))
-                                        N.Add(sb.CompName, N0(sb.CompName))
-                                        C0.Add(sb.CompName, N0(sb.CompName) / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault)
-                                    Else
-                                        N0(sb.CompName) = m0
-                                        N(sb.CompName) = N0(sb.CompName)
-                                        C0(sb.CompName) = N0(sb.CompName) / ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault
-                                    End If
-                                    vol = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault
                                 Case PhaseName.Mixture
                                     m0 = ims.Phases(0).Compounds(sb.CompName).MolarFlow.GetValueOrDefault
-                                    If m0 = 0.0# Then m0 = 0.0000000001
-                                    If Not N0.ContainsKey(sb.CompName) Then
-                                        N0.Add(sb.CompName, m0)
-                                        N00.Add(sb.CompName, N0(sb.CompName))
-                                        N.Add(sb.CompName, N0(sb.CompName))
-                                        C0.Add(sb.CompName, N0(sb.CompName) / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault)
-                                    Else
-                                        N0(sb.CompName) = m0
-                                        N(sb.CompName) = N0(sb.CompName)
-                                        C0(sb.CompName) = N0(sb.CompName) / ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
-                                    End If
-                                    vol = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
                             End Select
 
+                            If m0 = 0.0# Then m0 = 0.0000000001
+
+                            If Not N0.ContainsKey(sb.CompName) Then
+                                N0.Add(sb.CompName, m0)
+                                N00.Add(sb.CompName, N0(sb.CompName))
+                                N.Add(sb.CompName, N0(sb.CompName))
+                                C0.Add(sb.CompName, N0(sb.CompName) / Qf)
+                            Else
+                                N0(sb.CompName) = m0
+                                N(sb.CompName) = N0(sb.CompName)
+                                C0(sb.CompName) = N0(sb.CompName) / Qf
+                            End If
+
                         Next
+
+                        Kf.Add(0.0#)
+                        Kr.Add(0.0#)
 
                         i += 1
 
@@ -443,123 +454,6 @@ Namespace Reactors
 
                     Ri.Clear()
                     Rxi.Clear()
-
-                    i = 0
-                    Do
-
-                        Dim rx As Double = 0.0#
-
-                        'process reaction i
-
-                        rxn = FlowSheet.Reactions(ar(i))
-                        BC = rxn.BaseReactant
-                        scBC = rxn.Components(BC).StoichCoeff
-
-                        For Each sb As ReactionStoichBase In rxn.Components.Values
-
-                            If C0(sb.CompName) = 0.0# Then C0(sb.CompName) = 0.0000000001
-                            C(sb.CompName) = C0(sb.CompName)
-
-                        Next
-
-                        T = ims.Phases(0).Properties.temperature.GetValueOrDefault
-
-                        convfactors = Me.GetConvFactors(rxn, ims)
-
-                        If rxn.ReactionType = ReactionType.Kinetic Then
-
-                            Dim kxf As Double = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
-                            Dim kxr As Double = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
-
-                            Dim rxf As Double = 1.0#
-                            Dim rxr As Double = 1.0#
-
-                            'kinetic expression
-
-                            For Each sb As ReactionStoichBase In rxn.Components.Values
-                                rxf *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.DirectOrder
-                                rxr *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.ReverseOrder
-                            Next
-
-                            rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, kxf * rxf - kxr * rxr)
-
-                            If Kf.Count - 1 <= i Then
-                                Kf.Add(kxf)
-                                Kr.Add(kxr)
-                            Else
-                                Kf(i) = kxf
-                                Kr(i) = kxr
-                            End If
-
-                        ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-
-                            Dim numval, denmval As Double
-
-                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
-                            rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-
-                            rxn.ExpContext.Variables.Clear()
-                            rxn.ExpContext.Variables.Add("T", T)
-
-                            Dim ir As Integer = 1
-                            Dim ip As Integer = 1
-
-                            For Each sb As ReactionStoichBase In rxn.Components.Values
-                                If sb.StoichCoeff < 0 Then
-                                    rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                                    ir += 1
-                                ElseIf sb.StoichCoeff > 0 Then
-                                    rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                                    ip += 1
-                                End If
-                            Next
-
-                            Try
-                                rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
-                                numval = rxn.Expr.Evaluate
-                            Catch ex As Exception
-                                Throw New Exception(FlowSheet.GetTranslatedString("PFRNumeratorEvaluationError") & " " & rxn.Name)
-                            End Try
-
-                            Try
-                                rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
-                                denmval = rxn.Expr.Evaluate
-                            Catch ex As Exception
-                                Throw New Exception(FlowSheet.GetTranslatedString("PFRDenominatorEvaluationError") & " " & rxn.Name)
-                            End Try
-
-                            rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
-
-                        End If
-
-                        If Not Rxi.ContainsKey(rxn.ID) Then
-                            Rxi.Add(rxn.ID, rx)
-                        Else
-                            Rxi(rxn.ID) = rx
-                        End If
-
-                        For Each sb As ReactionStoichBase In rxn.Components.Values
-
-                            If Not Ri.ContainsKey(sb.CompName) Then
-                                Ri.Add(sb.CompName, 0)
-                            End If
-
-                        Next
-
-                        For Each sb As ReactionStoichBase In rxn.Components.Values
-
-                            If rxn.ReactionType = ReactionType.Kinetic Then
-                                Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.Volume
-                            ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                                Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / rxn.Components(BC).StoichCoeff * Me.CatalystAmount
-                            End If
-
-                        Next
-
-                        i += 1
-
-                    Loop Until i = ar.Count
 
                     'SOLVE ODEs
 
@@ -574,16 +468,20 @@ Namespace Reactors
                     Next
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
-                    odesolver.InitializeODEs(AddressOf ODEFunc, Ri.Count)
-                    odesolver.Solve(vc, 0.0#, 0.1 * Volume, Volume, Sub(x As Double, y As Double()) vc = y)
+                    odesolver.InitializeODEs(AddressOf ODEFunc, N.Count)
+                    odesolver.Solve(vc, 0.0#, 0.1 * Volume * VolumeFraction, Volume * VolumeFraction, Sub(x As Double, y As Double()) vc = y)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
+
+                    For Each kvp In C
+                        Cprev(kvp.Key) = kvp.Value
+                    Next
 
                     C.Clear()
                     i = 0
                     For Each sb As KeyValuePair(Of String, Double) In C0
-                        C(sb.Key) = vc(i) * ResidenceTime / Volume
-                         i = i + 1
+                        C(sb.Key) = vc(i) * ResidenceTime / (Volume * VolumeFraction)
+                        i = i + 1
                     Next
 
                     i = 0
@@ -689,9 +587,13 @@ Namespace Reactors
                             ims.Phases(0).Properties.temperature = Tout
                             T = Tout
 
+                            ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+
                         Case OperationMode.Isothermic
 
                             err1 = 1.0E-20
+
+                            ims.SpecType = StreamSpec.Temperature_and_Pressure
 
                         Case OperationMode.OutletTemperature
 
@@ -703,9 +605,13 @@ Namespace Reactors
 
                             T = ims.Phases(0).Properties.temperature.GetValueOrDefault
 
+                            ims.SpecType = StreamSpec.Temperature_and_Pressure
+
                     End Select
 
                     ims.Calculate(True, True)
+
+                    err1 += C.Values.ToArray.SubtractY(Cprev.Values.ToArray).AbsSqrSumY
 
                 Next
 
@@ -770,6 +676,7 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .SpecType = ims.SpecType
                     .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
                     .Phases(0).Properties.massfraction = 1
                     .Phases(0).Properties.temperature = ims.Phases(0).Properties.temperature.GetValueOrDefault

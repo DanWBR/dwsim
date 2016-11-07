@@ -5381,4 +5381,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DBManagerNoFile" xml:space="preserve">
     <value>Keine Komponenten-Datei definiert!</value>
   </data>
+  <data name="MultipleReactionPhasesNotSupported" xml:space="preserve">
+    <value>Multiple reaction phases are not supported.</value>
+  </data>
 </root>
