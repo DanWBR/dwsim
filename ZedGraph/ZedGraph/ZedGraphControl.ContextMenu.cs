@@ -108,6 +108,9 @@ namespace ZedGraph
 			{
 				menuStrip.Items.Clear();
 
+                menuStrip.ShowImageMargin = false;
+                menuStrip.ShowCheckMargin = false;
+
 				_isZooming = false;
 				_isPanning = false;
 				Cursor.Current = Cursors.Default;
