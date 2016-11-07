@@ -648,7 +648,7 @@ Namespace Reactors
                 prevvol = currvol
                 currvol += dV * Volume
 
-            Loop Until currvol > Volume
+            Loop Until (currvol - Volume) >= dV
 
             Me.DeltaP = P0 - P
 
