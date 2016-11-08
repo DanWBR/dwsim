@@ -333,8 +333,7 @@ Namespace Reactors
 
                 W = ims.Phases(0).Properties.massflow.GetValueOrDefault
                 Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
-                Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault()
-
+               
                 PropertyPackage.CurrentMaterialStream = ims
                 ims.SetPropertyPackage(PropertyPackage)
                 ims.SetFlowsheet(Me.FlowSheet)
@@ -406,9 +405,11 @@ Namespace Reactors
                     'converge concentrations
                     Do
 
+                        Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault()
+
                         i = 0
                         Do
-                          
+
                             'process reaction i
                             rxn = FlowSheet.Reactions(ar(i))
 
