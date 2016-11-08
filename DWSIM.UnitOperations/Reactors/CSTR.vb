@@ -545,13 +545,14 @@ Namespace Reactors
                         DHRi.Clear()
 
                         i = 0
+                        DHr = 0.0#
                         Do
 
                             'process reaction i
                             rxn = FlowSheet.Reactions(ar(i))
 
                             'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                            DHr = rxn.ReactionHeat * (N00(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
+                            DHr += rxn.ReactionHeat * (N00(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
 
                             DHRi.Add(rxn.ID, DHr)
 

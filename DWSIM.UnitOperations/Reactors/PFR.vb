@@ -447,8 +447,10 @@ Namespace Reactors
                     Next
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
+                    odesolver.RelTol = 0.000001
+                    odesolver.AbsTol = 0.0000000001
                     odesolver.InitializeODEs(AddressOf ODEFunc, N.Count)
-                    odesolver.Solve(vc, 0.0#, 0.05 * dV * Volume * VolumeFraction, dV * Volume * VolumeFraction, Sub(x As Double, y As Double()) vc = y)
+                    odesolver.Solve(vc, 0.0#, 0.05 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
 
                     If Double.IsNaN(vc.Sum) Then Throw New Exception(FlowSheet.GetTranslatedString("PFRMassBalanceError"))
 
@@ -487,13 +489,14 @@ Namespace Reactors
                     Next
 
                     i = 0
+                    DHr = 0.0#
                     Do
 
                         'process reaction i
                         rxn = FlowSheet.Reactions(ar(i))
 
-                         'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                        DHr = rxn.ReactionHeat * (N00(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
+                        'Heat released (or absorbed) (kJ/s = kW)
+                        DHr += rxn.ReactionHeat * (N0(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
 
                         i += 1
 
@@ -544,7 +547,7 @@ Namespace Reactors
                             Me.DeltaQ = 0.0#
 
                             'Products Enthalpy (kJ/kg * kg/s = kW)
-                            Hp = Hr0 - DHr
+                            Hp = Hr - DHr
 
                             tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / W, T)
                             Dim Tout As Double = tmp.CalculatedTemperature
@@ -650,6 +653,7 @@ Namespace Reactors
 
             RxiT.Clear()
             DHRi.Clear()
+            DHr = 0.0#
 
             For Each ar As ArrayList In Me.ReactionsSequence.Values
 
@@ -658,6 +662,9 @@ Namespace Reactors
 
                     'process reaction i
                     rxn = FlowSheet.Reactions(ar(i))
+
+                    'Heat released (or absorbed) (kJ/s = kW)
+                    DHr += rxn.ReactionHeat * (N00(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
 
                     RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000)
                     DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID) * rxn.Components(rxn.BaseReactant).StoichCoeff / 1000)
@@ -672,7 +679,6 @@ Namespace Reactors
 
                 'Products Enthalpy (kJ/kg * kg/s = kW)
                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
-                'Heat (kW)
 
                 Me.DeltaQ = DHr + Hp - Hr0
 
