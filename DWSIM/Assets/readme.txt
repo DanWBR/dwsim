@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 29 - November 2016
+Version 4.0 Update 30 - November 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 30
+
+- [NEW] Added the ability to display charts on another window, zoomed copy and save
+- [NEW] New Welcome Screen
+- [FIX] Fixed PFR/CSTR heat balance
+- [FIX] Fixed bugs with the Compound Creator
 
 Version 4.0 Update 28/29
 
