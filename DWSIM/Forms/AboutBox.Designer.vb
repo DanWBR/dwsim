@@ -526,6 +526,7 @@ Partial Class AboutBox
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ControlBox = False
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Copyright)
