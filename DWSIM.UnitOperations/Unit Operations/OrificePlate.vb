@@ -47,8 +47,9 @@ Namespace UnitOperations
         Protected m_dt As Nullable(Of Double)
         Protected _orificeDP As Double = 0
         Protected _fluidDP As Double = 0
-        Protected _beta As Double = 0
-        Protected _orificediameter As Double = 0
+        Protected _beta As Double = 0.5
+        Protected _orificediameter As Double = 0.1
+        Protected _internaldiameter As Double = 0.2
         Protected _orificetype As OrificeType = OrificeType.FlangeTaps
         Protected _calcmethod As CalcMethod
         Protected _corrfactor As Double = 1
@@ -123,7 +124,14 @@ Namespace UnitOperations
                 _orificediameter = value
             End Set
         End Property
-
+        Public Property InternalPipeDiameter() As Double
+            Get
+                Return _internaldiameter
+            End Get
+            Set(ByVal value As Double)
+                _internaldiameter = value
+            End Set
+        End Property
         Public Property DeltaT() As Nullable(Of Double)
             Get
                 Return m_dt
@@ -178,7 +186,7 @@ Namespace UnitOperations
             Dim beta, A1, A2, s2_s1, L1, L2 As Double
 
             beta = _beta
-            A1 = 3.1416 * (_orificediameter / _beta) ^ 2 / 4
+            A1 = 3.1416 * (_internaldiameter) ^ 2 / 4
             A2 = 3.1416 * (_orificediameter) ^ 2 / 4
 
             Select Case _orificetype
@@ -227,6 +235,10 @@ Namespace UnitOperations
             P2 = Pi - _fluidDP
             H2 = H1
 
+            If P2 <= 0 Then
+                Throw New Exception("Error: Negative Pressure! Orifice Plate to small for inlet stream.")
+            End If
+
             Dim tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P2, H2, Ti)
             T2 = tmp.CalculatedTemperature
 
@@ -245,6 +257,7 @@ Namespace UnitOperations
                     i += 1
                 Next
                 .Phases(0).Properties.massflow = instr.Phases(0).Properties.massflow.GetValueOrDefault
+                .SpecType = StreamSpec.Pressure_and_Enthalpy
             End With
 
         End Sub
@@ -291,19 +304,22 @@ Namespace UnitOperations
                     'PROP_OP_1	Orifice Diameter	1
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
                 Case 2
-                    'PROP_OP_2	Beta (d/D)	1
-                    value = Me.Beta
+                    'PROP_OP_2	Internal Pipe Diameter	1
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.InternalPipeDiameter)
                 Case 3
                     'PROP_OP_3	Correction Factor	1
                     value = Me.CorrectionFactor
                 Case 4
-                    'PROP_OP_4	Overall Pressure Drop	0
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop)
+                    'PROP_OP_4	Beta (d/D)	1
+                    value = Me.Beta
                 Case 5
-                    'PROP_OP_5	Orifice Pressure Drop	0
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop)
+                    'PROP_OP_5	Overall Pressure Drop	0
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop)
                 Case 6
-                    'PROP_OP_6	Delta T	0
+                    'PROP_OP_6	Orifice Pressure Drop	0
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop)
+                Case 7
+                    'PROP_OP_7	Delta T	0
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
             End Select
 
@@ -316,11 +332,11 @@ Namespace UnitOperations
             Dim proplist As New ArrayList
             Select Case proptype
                 Case PropertyType.RO
-                    For i = 4 To 6
+                    For i = 4 To 7
                         proplist.Add("PROP_OP_" + CStr(i))
                     Next
                 Case PropertyType.RW
-                    For i = 0 To 6
+                    For i = 0 To 7
                         proplist.Add("PROP_OP_" + CStr(i))
                     Next
                 Case PropertyType.WR
@@ -328,7 +344,7 @@ Namespace UnitOperations
                         proplist.Add("PROP_OP_" + CStr(i))
                     Next
                 Case PropertyType.ALL
-                    For i = 0 To 6
+                    For i = 0 To 7
                         proplist.Add("PROP_OP_" + CStr(i))
                     Next
             End Select
@@ -336,11 +352,12 @@ Namespace UnitOperations
             proplist = Nothing
             'PROP_OP_0	Orifice Type	1
             'PROP_OP_1	Orifice Diameter	1
-            'PROP_OP_2	Beta (d/D)	1
+            'PROP_OP_2	Internal Pipe Diameter	1
             'PROP_OP_3	Correction Factor	1
-            'PROP_OP_4	Overall Pressure Drop	0
-            'PROP_OP_5	Orifice Pressure Drop	0
-            'PROP_OP_6	Delta T	0
+            'PROP_OP_4	Beta (d/D)	1
+            'PROP_OP_5	Overall Pressure Drop	0
+            'PROP_OP_6	Orifice Pressure Drop	0
+            'PROP_OP_7	Delta T	0
 
         End Function
 
@@ -356,9 +373,11 @@ Namespace UnitOperations
                 Case 1
                     'PROP_OP_1	Orifice Diameter	1
                     Me.OrificeDiameter = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
+                    Me.Beta = Me.OrificeDiameter / Me.InternalPipeDiameter
                 Case 2
-                    'PROP_OP_2	Beta (d/D)	1
-                    Me.Beta = propval
+                    'PROP_OP_2	Internal Pipe Diameter	1
+                    Me.InternalPipeDiameter = SystemsOfUnits.Converter.ConvertToSI(su.diameter, propval)
+                    Me.Beta = Me.OrificeDiameter / Me.InternalPipeDiameter
                 Case 3
                     'PROP_OP_3	Correction Factor	1
                     Me.CorrectionFactor = propval
@@ -380,18 +399,21 @@ Namespace UnitOperations
                     'PROP_OP_1	Orifice Diameter	1
                     value = su.diameter
                 Case 2
-                    'PROP_OP_2	Beta (d/D)	1
-                    value = ""
+                    'PROP_OP_2	Internal Pipe Diameter
+                    value = su.diameter
                 Case 3
                     'PROP_OP_3	Correction Factor	1
                     value = ""
                 Case 4
+                    'PROP_OP_4	Beta (d/D)	1
+                    value = ""
+                Case 5
                     'PROP_OP_4	Overall Pressure Drop	0
                     value = su.deltaP
-                Case 5
+                Case 6
                     'PROP_OP_5	Orifice Pressure Drop	0
                     value = su.deltaP
-                Case 6
+                Case 7
                     'PROP_OP_6	Delta T	0
                     value = su.deltaT
             End Select
