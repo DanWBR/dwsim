@@ -1,5 +1,6 @@
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Linq
 
 '    Copyright 2008 Daniel Wagner O. de Medeiros
 '
@@ -26,19 +27,28 @@ Public Class FormWelcome
 
         If DWSIM.App.IsRunningOnMono Then Me.BackgroundImageLayout = ImageLayout.Stretch
 
+        Dim existingfiles As New List(Of String)
         For Each f As String In My.Settings.MostRecentFiles
-            If File.Exists(f) And Path.GetExtension(f).ToLower <> ".dwbcs" Then
-                Me.lvlatest.Items.Add(Path.GetFileName(f), 0).Tag = f
-                Me.lvlatest.Items(Me.lvlatest.Items.Count - 1).ToolTipText = f
+            existingfiles.Add(f)
+        Next
+
+        existingfiles = existingfiles.Where(Function(x) File.Exists(x)).OrderByDescending(Function(x) File.GetLastWriteTime(x)).ToList
+
+        For Each f As String In existingfiles
+            If Path.GetExtension(f).ToLower <> ".dwbcs" Then
+                Me.lvlatest.Items.Add(f, 0).Tag = f
+                Dim lvi = Me.lvlatest.Items(Me.lvlatest.Items.Count - 1)
+                lvi.ToolTipText = f
+                lvi.SubItems.Add(New ListViewItem.ListViewSubItem(lvi, File.GetLastWriteTime(f)))
                 Select Case Path.GetExtension(f).ToLower
                     Case ".dwsim"
-                        Me.lvlatest.Items(Me.lvlatest.Items.Count - 1).ImageIndex = 0
+                        lvi.ImageIndex = 0
                     Case ".dwxml", ".dwxmz"
-                        Me.lvlatest.Items(Me.lvlatest.Items.Count - 1).ImageIndex = 1
+                        lvi.ImageIndex = 1
                     Case ".dwcsd"
-                        Me.lvlatest.Items(Me.lvlatest.Items.Count - 1).ImageIndex = 2
+                        lvi.ImageIndex = 2
                     Case ".dwrsd"
-                        Me.lvlatest.Items(Me.lvlatest.Items.Count - 1).ImageIndex = 3
+                        lvi.ImageIndex = 3
                 End Select
                 If Not Me.lvlatestfolders.Items.ContainsKey(Path.GetDirectoryName(f)) Then
                     Me.lvlatestfolders.Items.Add(Path.GetDirectoryName(f), Path.GetDirectoryName(f), 4).Tag = Path.GetDirectoryName(f)
@@ -205,18 +215,17 @@ Public Class FormWelcome
         ' Do nothing here!
     End Sub
 
-    Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
+    'Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
 
-        pevent.Graphics.DrawImage(My.Resources.splashWelcome_Background, New Rectangle(0, 0, Me.Width, Me.Height))
+    '    pevent.Graphics.DrawImage(My.Resources.splashWelcome_Background, New Rectangle(0, 0, Me.Width, Me.Height))
 
+    'End Sub
+
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        Process.Start("https://itunes.apple.com/us/app/dwsim-simulator/id1162110266?ls=1&mt=8")
     End Sub
 
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        Process.Start("https://play.google.com/store/apps/developer?id=Daniel+Medeiros")
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Process.Start("https://play.google.com/store/apps/details?id=com.danielmedeiros.dwsim_simulator")
     End Sub
-
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Process.Start("https://itunes.apple.com/us/developer/daniel-medeiros/id1091004600")
-    End Sub
-
 End Class

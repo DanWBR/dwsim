@@ -135,7 +135,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAXwBAAF8AQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAbwBAQG8AQEBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -231,10 +231,10 @@
     <value>Eigene Komponenten</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 13</value>
+    <value>188, 13</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
-    <value>Erstellt eine neue stationäre Simulation.</value>
+    <value>Erstellt eine neue stationäre Simulation</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 13</value>
@@ -255,10 +255,10 @@
     <value>Simulation öffnen</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 13</value>
+    <value>160, 13</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
-    <value>Zeigt die Dokumentation im PDF.</value>
+    <value>Zeigt die Dokumentation im PDF</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 17</value>
@@ -269,14 +269,8 @@
   <data name="LabelWithDivider12.Text" xml:space="preserve">
     <value>Unterstützen des Projekts</value>
   </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 63</value>
-  </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>DWSIM ist eine Open-Source-Software und wird dies immer bleiben. Wenn DWSIM in irgendeiner Weise für Sie nützlich war, erwägen Sie bitte eine Spende via PayPal. Jeder Betrag wird sehr willkommen sein.</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 268</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 19</value>
@@ -296,14 +290,17 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Letzte Ordner</value>
   </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 500</value>
-  </data>
   <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Fenster schließen</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>DWSIM ist auch auf Android- und iOS-Plattformen verfügbar! Klicken Sie auf die Schaltflächen, um die entsprechenden Speicher herunterzuladen.</value>
+  </data>
+  <data name="LabelWithDivider1.Text" xml:space="preserve">
+    <value>DWSIM für Android, iPhone und iPad</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Willkommen bei DWSIM</value>

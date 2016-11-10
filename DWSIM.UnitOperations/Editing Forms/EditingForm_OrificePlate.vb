@@ -195,9 +195,9 @@ Public Class EditingForm_OrificePlate
 
         Dim uobj = SimObject
 
-        If sender Is tbBeta Then uobj.Beta = tbBeta.Text
+        If sender Is tbBeta Then uobj.Beta = Double.Parse(tbBeta.Text)
         If sender Is tbOrificeDiameter Then uobj.OrificeDiameter = su.Converter.ConvertToSI(cbOrifDiam.SelectedItem.ToString, tbOrificeDiameter.Text)
-        If sender Is tbCorrF Then uobj.CorrectionFactor = tbCorrF.Text
+        If sender Is tbCorrF Then uobj.CorrectionFactor = Double.Parse(tbCorrF.Text)
 
         RequestCalc()
 

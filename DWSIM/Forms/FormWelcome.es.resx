@@ -117,151 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>275, 13</value>
-  </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Abrir herramienta de Regresión de Datos Experimentales.</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 17</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>Nuevo Estudio de Regresión de Datos</value>
   </data>
-  <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAWQBAAFkAQABEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
-        AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
-        AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
-        AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
-        ASQBewHZAX8BaAFuZAABaAFuAf4BfwG2AX8BtAF/AZIBfwGQAXsBbgF7AWwBewFKAXsBSQF7AUcBewEm
-        AXsB2QF/AWgBbmQAAYcBbgH+AX8B2QF/AbcBfwG1AX8BswF/AZEBewGPAXsBbQF7AWsBewFJAXsBSAF7
-        AdoBfwGIAW5kAAGnAW4B/wF/Af8BfwH+AX8B/gF/Af4BfwHbAX8BkgF/AZABewFuAXsBbQF7AWsBewHa
-        AX8BqAFuZAABpwFuAd0BfwFSAXcBMQF3AQ4BdwG5AXsB/gF/Af4BfwH+AX8B/gF/Af0BfwH9AX8B/wF/
-        AcgBbmQAAckBbgH+AX8BcgF7AXIBewFQAXsBLQF3AS0BdwFQAXcBUAF3AU8BdwEuAXcBLgF3Ad0BfwHI
-        AW5kAAHJAW4B/gF/AZEBfwFyAXsBkwF7AZUBewH9AX8B/gF/Af4BfwH+AX8B/QF/Af0BfwH/AX8BDQFv
-        ZAAByAFuAf8BfwH/AX8B/wF/Af8BfwH/AX8B3QF/AS4BcwEuAXMBLgFzAS4BcwFQAXMBUQFzAbsBe2QA
-        AQ4BbwEMAXMBDAFzAQwBcwEMAXMBDAFzAQwBbwH/AX8B/wF/Af8BfwH/AX8B/wF/Af8BfwH/AX//AOcA
-        AZ0BZwGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmQEmCAABnQFnAZgBHgGY
-        AR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGZASYIAAGdAWcBmAEeAZgBHgGYAR4BmAEe
-        AZgBHgGYAR4BmAEeAZgBHgGYAR4BmAEeAZkBJggAAZ0BZwGYAR4BmAEeAZgBHgGYAR4BmAEeAZgBHgGY
-        AR4BmAEeAZgBHgGYAR4BmQEmCAABfAFnAVgBDgFYAQ4BkQEFAbEBBQEVAQoBNgEOAfQBBQHzAQkB9AEJ
-        AVgBDgF5ARYIAAF8AWcBWAEOATcBDgH1AQkBsgEFAfQBBQE3AQ4BFQEKAdMBBQGRAQUBkgEFAVcBFggA
-        AXwBZwFYAQ4BNwEOAZABBQH0AQkBsgEFAZABBQEVAQoBkQEFAZEBBQFYAQ4BeQEWCAABfAFnAVgBDgHU
-        AQkBNgEKAbIBBQH0AQUBkQEFAfQBBQGRAQUBkQEFATYBCgF5ARYIAAF8AWcBWAEOAVgBDgHTAQUBsgEF
-        AfUBCQEWAQ4B0wEFAXABBQHUAQkBWAEOAZkBFggAAXwBZwFYAQ4BWAEOAZABBQGyAQUB9AEFAZEBBQGy
-        AQUBswEFAZEBBQFYAQ4BmQEWCAABfAFnAVgBDgFwAQUBNwEKAfQBBQEWAQoB9AEFAdQBCQGzAQUBFQEK
-        ARUBCgGZARYIAAF8AWcBWAEOAdMBCQHUAQUBsgEFARYBCgEWAQoBsQEFAZIBBQE3AQoBTgEFAZkBFggA
-        AXwBZwFYAQ4BWAEOAZEBBQFwAQUBFgEKARYBDgFPAQUBkQEFAdQBCQFYAQ4BmQEWCAABfAFnAVgBDgFY
-        AQ4BkQEFAdQBCQH0AQUBTgEFAZEBBQGzAQUBkQEFAVgBDgGZARYIAAF8AWcBWAEOAU4BBQE3AQoBWAEO
-        AXABBQGxAQkBNwEOAbMBBQEWAQoB0wEJAZkBFggAAXwBZwFYAQ4B0wEJAfQBCQFwAQUB0wEFAW8BBQFY
-        AQoBkgEFAVgBCgFOAQUBmQEWCAABfQFnAVkBDgFZAQ4BkAEFAXABBQEWAQoBNgEOAU8BBQEWAQoB1QEJ
-        AVkBDgGaARoIAAF9AWcBWQEOAVkBDgGyAQUBsgEFAfMBCQFwAQUBsgEFAbMBBQGRAQUBWQEOAZoBGggA
-        AX0BZwFZAQ4BNwEKAXEBBQHTAQUBkQEFAXABBQE3AQoBcAEFAXABBQFZAQ4BmgEaCAABfQFnAVkBDgHT
-        AQkBkQEFAZEBBQH0AQkBsQEFAfUBBQGRAQUBcQEFARUBCgGaARoIAAGdAWcBmQESAZkBEgFXAQ4BeQEO
-        AXkBEgF5ARIBWAEOAXkBDgFZAQoBWQEOAZoBGggAAZ0BZwGZARIBmQESAXgBEgF4AQ4BWAEOAVgBDgFY
-        AQ4BWAEKAVgBCgFZAQ4BmgEaCAABnQFnAZkBEgGZARIBWAEOAZkBEgF5ARIBWAEOAXkBDgE3AQoBWQEK
-        AVkBDgGaARoIAAGdAWcBmQESAXgBEgFXAQ4BeQEOAXkBEgFXAQ4BeQESAVgBCgFYAQoBWQEOAZoBGggA
-        AZ0BZwGZARYBmQEWAZkBFgGZARIBmQESAXkBEgF6AQ4BegEOAXoBDgFZAQ4BmgEaCAABnQFnAZkBFgGZ
-        ARYBmQEWAZkBEgGZARIBeQESAXoBDgF6AQ4BegEOAVkBDgGaARoIAAGdAWcBmQEWAZkBFgGZARYBmQES
-        AZkBEgF5ARIBegEOAXoBDgF6AQ4BWQEOAZoBGggAAZ0BZwGZARYBmQEWAZkBFgGZARIBmQESAXkBEgF6
-        AQ4BegEOAXoBDgFZAQ4BmgEaCAABnQFnAZoBEgGaARYBmgEWAZoBFgGaARIBmgESAZoBEgGaARIBmgEO
-        AXoBDgGbARoIAAGdAWcBmgESAZoBFgGaARYBmgEWAZoBEgGaARIBmgESAZoBEgGaAQ4BegEOAZsBGggA
-        AZ0BZwGaARIBmgEWAZoBFgGaARYBmgESAZoBEgGaARIBmgESAZoBDgF6AQ4BmwEaCAABnQFnAZoBEgGa
-        ARYBmgEWAZoBFgGaARIBmgESAZoBEgGaARIBmgEOAXoBDgGbARoIAAGdAWcBmgESAZoBEgGaARIBmgES
-        AZoBFgGaARYBmgESAZoBEgGaARIBmgEOAbsBGggAAZ0BZwGaARIBmgESAZoBEgGaARIBmgEWAZoBFgGa
-        ARIBmgESAZoBEgGaAQ4BuwEaCAABnQFnAZoBEgGaARIBmgESAZoBEgGaARYBmgEWAZoBEgGaARIBmgES
-        AZoBDgG7ARoIAAGdAWcBmgESAZoBEgGaARIBmgESAZoBFgGaARYBmgESAZoBEgGaARIBmgEOAbsBGggA
-        AZ0BZwGbARIBmwESAXsBDgF7AQ4BuwEWAZsBFgGbARIBmwESAZsBEgGbARIBuwEaCAABnQFnAZsBEgGb
-        ARIBewEOAXsBDgG7ARYBmwEWAZsBEgGbARIBmwESAZsBEgG7ARoIAAGdAWcBmwESAZsBEgF7AQ4BewEO
-        AbsBFgGbARYBmwESAZsBEgGbARIBmwESAbsBGggAAZ0BZwGbARIBmwESAXsBDgF7AQ4BuwEWAZsBFgGb
-        ARIBmwESAZsBEgGbARIBuwEaCAABnQFnAZsBEgGbARIBmwEOAZsBDgGbARIBuwEWAZsBFgGbARYBmwEW
-        AZsBEgG8ARoIAAGdAWcBmwESAZsBEgGbAQ4BmwEOAZsBEgG7ARYBmwEWAZsBFgGbARYBmwESAbwBGggA
-        AZ0BZwGbARIBmwESAZsBDgGbAQ4BmwESAbsBFgGbARYBmwEWAZsBFgGbARIBvAEaCAABnQFnAZsBEgGb
-        ARIBmwEOAZsBDgGbARIBuwEWAZsBFgGbARYBmwEWAZsBEgG8ARoIAAGdAWcB3AEiAX4BVwGcARIBHQEz
-        AT4BPwEdATcBHQEvAT4BPwE+ATcBfgFTAdwBIggAAZ0BZwHcASIBfgFXAZwBEgEdATMBPgE/AR0BNwEd
-        AS8BPgE/AT4BNwF+AVMB3AEiCAABnQFnAdwBIgF+AVcBnAESAR0BMwE+AT8BHQE3AR0BLwE+AT8BPgE3
-        AX4BUwHcASIIAAGdAWcB3AEiAX4BVwGcARIBHQEzAT4BPwEdATcBHQEvAT4BPwE+ATcBfgFTAdwBIggA
-        AZ0BZwH9ASYB3AEWAV4BQwG/AV8BvwFnAX8BSwF/AVMBfgFLAb8BZwG+AWcB3QEiCAABnQFnAf0BJgHc
-        ARYBXgFDAb8BXwG/AWcBfwFLAX8BUwF+AUsBvwFnAb4BZwHdASIIAAGdAWcB/QEmAdwBFgFeAUMBvwFf
-        Ab8BZwF/AUsBfwFTAX4BSwG/AWcBvgFnAd0BIggAAZ0BZwH9ASYB3AEWAV4BQwG/AV8BvwFnAX8BSwF/
-        AVMBfgFLAb8BZwG+AWcB3QEiCAABngFnAf0BJgF+AUcBfgFLAZ8BWwFeAUMB3wFvAT4BMwF/AUsBvwFn
-        Af8BfwHdASIIAAGeAWcB/QEmAX4BRwF+AUsBnwFbAV4BQwHfAW8BPgEzAX8BSwG/AWcB/wF/Ad0BIggA
-        AZ4BZwH9ASYBfgFHAX4BSwGfAVsBXgFDAd8BbwE+ATMBfwFLAb8BZwH/AX8B3QEiCAABngFnAf0BJgF+
-        AUcBfgFLAZ8BWwFeAUMB3wFvAT4BMwF/AUsBvwFnAf8BfwHdASIIAAGeAWcB3QEWAd0BFgHdARYB3QEW
-        Ad0BFgHdARYB3QEaAd0BGgHdARoB3QEaAd0BIggAAZ4BZwHdARYB3QEWAd0BFgHdARYB3QEWAd0BFgHd
-        ARoB3QEaAd0BGgHdARoB3QEiCAABngFnAd0BFgHdARYB3QEWAd0BFgHdARYB3QEWAd0BGgHdARoB3QEa
-        Ad0BGgHdASIIAAGeAWcB3QEWAd0BFgHdARYB3QEWAd0BFgHdARYB3QEaAd0BGgHdARoB3QEaAd0BIoQA
-        AUIBTQE+BwABPgMAASgDAAFAAwABIAMAAQEBAAEBBgABARYAA/8BAAL/BgAC/wYAAYABAQYAAYABAQYA
-        AYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAv8GAAL/
-        BgAC/wYAAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHAAQMBwAEDAcABAwHA
-        AQMBwAEDCP8L
-</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 13</value>
-  </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Abrir Archivos de Simulación de Ejemplo</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Ejemplos</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 13</value>
-  </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Abrir nueva ventana de Creador de Componentes.</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 17</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Crear Nuevo Componente</value>
   </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 13</value>
-  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Crear nueva simulación en estado estacionario.</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Abre una simulación o estudio ya guardado.</value>
   </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 17</value>
-  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Crear Nueva Simulación</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 17</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Abrir Simulación</value>
   </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 13</value>
-  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Muestra la documentación en formato PDF.</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 17</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Consultar La Documentación</value>
@@ -272,32 +159,20 @@
   <data name="Label15.Text" xml:space="preserve">
     <value>DWSIM es un software de código abierto y siempre lo será. Sin embargo, hay costos de desarrollo (adquisición de libros y artículos técnicos) y de mantenimiento (servidor web, hardware) que se necesitan para mantener el proyecto vivo y en crecimiento. Si DWSIM le ha gustado de algún modo, por favor considere hacer una donación usando tu cuenta de PayPal. Cualquier cantidad será muy bienvenida.</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 19</value>
-  </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Tareas</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 19</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Archivos Recientes</value>
   </data>
-  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 19</value>
-  </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Archivos Recentes</value>
   </data>
-  <data name="Button7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>645, 500</value>
-  </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 23</value>
-  </data>
   <data name="Button7.Text" xml:space="preserve">
     <value>Cerrar Ventana</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>DWSIM también está disponible para Android y el iOS! Haga clic en los botones en el lado de descarga.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Bienvenido a DWSIM</value>
