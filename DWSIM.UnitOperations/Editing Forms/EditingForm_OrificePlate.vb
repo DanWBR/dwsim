@@ -101,6 +101,10 @@ Public Class EditingForm_OrificePlate
             cbOrifDiam.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.diameter).ToArray)
             cbOrifDiam.SelectedItem = units.diameter
 
+            cbIntPipeDiam.Items.Clear()
+            cbIntPipeDiam.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.diameter).ToArray)
+            cbIntPipeDiam.SelectedItem = units.diameter
+
             cbDeltaT.Items.Clear()
             cbDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
             cbDeltaT.SelectedItem = units.deltaT
@@ -125,6 +129,7 @@ Public Class EditingForm_OrificePlate
             End Select
 
             tbOrificeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.OrificeDiameter.ToString(nf))
+            tbIntPipeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.InternalPipeDiameter.ToString(nf))
             tbBeta.Text = .Beta.ToString(nf)
             tbCorrF.Text = .CorrectionFactor.ToString(nf)
         
@@ -187,7 +192,19 @@ Public Class EditingForm_OrificePlate
         End If
 
     End Sub
-
+    Private Sub cbIntPipeDiam_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbIntPipeDiam.SelectedIndexChanged
+        If Loaded Then
+            Try
+                If sender Is cbIntPipeDiam Then
+                    tbIntPipeDiameter.Text = su.Converter.Convert(cbIntPipeDiam.SelectedItem.ToString, units.diameter, Double.Parse(tbIntPipeDiameter.Text)).ToString(nf)
+                    cbIntPipeDiam.SelectedItem = units.diameter
+                    UpdateProps(tbOrificeDiameter)
+                End If
+            Catch ex As Exception
+                SimObject.FlowSheet.ShowMessage(ex.Message.ToString, Interfaces.IFlowsheet.MessageType.GeneralError)
+            End Try
+        End If
+    End Sub
     Sub UpdateProps(sender As Object)
 
         'Pressão na Saída
@@ -195,8 +212,10 @@ Public Class EditingForm_OrificePlate
 
         Dim uobj = SimObject
 
-        If sender Is tbBeta Then uobj.Beta = Double.Parse(tbBeta.Text)
+        If sender Is tbIntPipeDiameter Then uobj.InternalPipeDiameter = su.Converter.ConvertToSI(cbIntPipeDiam.SelectedItem.ToString, tbIntPipeDiameter.Text)
         If sender Is tbOrificeDiameter Then uobj.OrificeDiameter = su.Converter.ConvertToSI(cbOrifDiam.SelectedItem.ToString, tbOrificeDiameter.Text)
+        If sender Is tbOrificeDiameter Or sender Is tbIntPipeDiameter Then uobj.Beta = uobj.OrificeDiameter / uobj.InternalPipeDiameter
+
         If sender Is tbCorrF Then uobj.CorrectionFactor = Double.Parse(tbCorrF.Text)
 
         RequestCalc()
@@ -209,7 +228,7 @@ Public Class EditingForm_OrificePlate
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOrificeDiameter.TextChanged, tbBeta.TextChanged, tbCorrF.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOrificeDiameter.TextChanged, tbCorrF.TextChanged, tbIntPipeDiameter.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -221,7 +240,7 @@ Public Class EditingForm_OrificePlate
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOrificeDiameter.KeyDown, tbBeta.KeyDown, tbCorrF.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOrificeDiameter.KeyDown, tbCorrF.KeyDown, tbIntPipeDiameter.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -360,4 +379,5 @@ Public Class EditingForm_OrificePlate
 
     End Sub
 
+    
 End Class

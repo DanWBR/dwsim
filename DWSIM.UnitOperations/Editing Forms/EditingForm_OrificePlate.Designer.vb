@@ -26,6 +26,7 @@ Partial Class EditingForm_OrificePlate
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_OrificePlate))
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.lblConnectedTo = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -34,11 +35,16 @@ Partial Class EditingForm_OrificePlate
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
+        Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.cbFlashAlg = New System.Windows.Forms.ComboBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cbPropPack = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbIntPipeDiam = New System.Windows.Forms.ComboBox()
+        Me.tbIntPipeDiameter = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.cbOrificePdrop = New System.Windows.Forms.ComboBox()
         Me.tbOrificePDrop = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -60,18 +66,15 @@ Partial Class EditingForm_OrificePlate
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
+        Me.btnDisconnect1 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cbOutlet1 = New System.Windows.Forms.ComboBox()
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnCreateAndConnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnCreateAndConnectInlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnectOutlet1 = New System.Windows.Forms.Button()
-        Me.btnDisconnect1 = New System.Windows.Forms.Button()
-        Me.chkActive = New System.Windows.Forms.CheckBox()
-        Me.btnConfigureFlashAlg = New System.Windows.Forms.Button()
-        Me.btnConfigurePP = New System.Windows.Forms.Button()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -98,6 +101,14 @@ Partial Class EditingForm_OrificePlate
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
         Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        '
+        'chkActive
+        '
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
         '
@@ -160,6 +171,22 @@ Partial Class EditingForm_OrificePlate
         Me.GroupBox3.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
+        'btnConfigureFlashAlg
+        '
+        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
+        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        '
+        'btnConfigurePP
+        '
+        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
+        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
+        Me.btnConfigurePP.Name = "btnConfigurePP"
+        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.btnConfigurePP.UseVisualStyleBackColor = True
+        '
         'cbFlashAlg
         '
         resources.ApplyResources(Me.cbFlashAlg, "cbFlashAlg")
@@ -191,6 +218,9 @@ Partial Class EditingForm_OrificePlate
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.cbIntPipeDiam)
+        Me.GroupBox2.Controls.Add(Me.tbIntPipeDiameter)
+        Me.GroupBox2.Controls.Add(Me.Label14)
         Me.GroupBox2.Controls.Add(Me.cbOrificePdrop)
         Me.GroupBox2.Controls.Add(Me.tbOrificePDrop)
         Me.GroupBox2.Controls.Add(Me.Label6)
@@ -214,6 +244,27 @@ Partial Class EditingForm_OrificePlate
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'cbIntPipeDiam
+        '
+        resources.ApplyResources(Me.cbIntPipeDiam, "cbIntPipeDiam")
+        Me.cbIntPipeDiam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbIntPipeDiam.FormattingEnabled = True
+        Me.cbIntPipeDiam.Items.AddRange(New Object() {resources.GetString("cbIntPipeDiam.Items"), resources.GetString("cbIntPipeDiam.Items1"), resources.GetString("cbIntPipeDiam.Items2")})
+        Me.cbIntPipeDiam.Name = "cbIntPipeDiam"
+        Me.ToolTip1.SetToolTip(Me.cbIntPipeDiam, resources.GetString("cbIntPipeDiam.ToolTip"))
+        '
+        'tbIntPipeDiameter
+        '
+        resources.ApplyResources(Me.tbIntPipeDiameter, "tbIntPipeDiameter")
+        Me.tbIntPipeDiameter.Name = "tbIntPipeDiameter"
+        Me.ToolTip1.SetToolTip(Me.tbIntPipeDiameter, resources.GetString("tbIntPipeDiameter.ToolTip"))
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'cbOrificePdrop
         '
@@ -321,6 +372,7 @@ Partial Class EditingForm_OrificePlate
         '
         resources.ApplyResources(Me.tbBeta, "tbBeta")
         Me.tbBeta.Name = "tbBeta"
+        Me.tbBeta.ReadOnly = True
         Me.ToolTip1.SetToolTip(Me.tbBeta, resources.GetString("tbBeta.ToolTip"))
         '
         'Label2
@@ -371,34 +423,6 @@ Partial Class EditingForm_OrificePlate
         Me.GroupBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
-        'Label7
-        '
-        resources.ApplyResources(Me.Label7, "Label7")
-        Me.Label7.Name = "Label7"
-        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
-        '
-        'cbOutlet1
-        '
-        resources.ApplyResources(Me.cbOutlet1, "cbOutlet1")
-        Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbOutlet1.FormattingEnabled = True
-        Me.cbOutlet1.Name = "cbOutlet1"
-        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
-        '
-        'cbInlet1
-        '
-        resources.ApplyResources(Me.cbInlet1, "cbInlet1")
-        Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbInlet1.FormattingEnabled = True
-        Me.cbInlet1.Name = "cbInlet1"
-        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
-        '
-        'Label19
-        '
-        resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Name = "Label19"
-        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
-        '
         'btnCreateAndConnectOutlet1
         '
         resources.ApplyResources(Me.btnCreateAndConnectOutlet1, "btnCreateAndConnectOutlet1")
@@ -431,29 +455,33 @@ Partial Class EditingForm_OrificePlate
         Me.ToolTip1.SetToolTip(Me.btnDisconnect1, resources.GetString("btnDisconnect1.ToolTip"))
         Me.btnDisconnect1.UseVisualStyleBackColor = True
         '
-        'chkActive
+        'Label7
         '
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
-        Me.chkActive.Name = "chkActive"
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.chkActive.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
-        'btnConfigureFlashAlg
+        'cbOutlet1
         '
-        resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
-        Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
-        Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cbOutlet1, "cbOutlet1")
+        Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbOutlet1.FormattingEnabled = True
+        Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
-        'btnConfigurePP
+        'cbInlet1
         '
-        resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
-        Me.btnConfigurePP.BackgroundImage = Global.DWSIM.UnitOperations.My.Resources.Resources.cog
-        Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
-        Me.btnConfigurePP.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cbInlet1, "cbInlet1")
+        Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbInlet1.FormattingEnabled = True
+        Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
+        '
+        'Label19
+        '
+        resources.ApplyResources(Me.Label19, "Label19")
+        Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'EditingForm_OrificePlate
         '
@@ -526,4 +554,7 @@ Partial Class EditingForm_OrificePlate
     Friend WithEvents cbOverallPdrop As System.Windows.Forms.ComboBox
     Friend WithEvents tbOverallPDrop As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents tbIntPipeDiameter As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents cbIntPipeDiam As System.Windows.Forms.ComboBox
 End Class

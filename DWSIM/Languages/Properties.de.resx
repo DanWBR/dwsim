@@ -989,15 +989,15 @@
     <comment>0</comment>
   </data>
   <data name="PROP_OP_0" xml:space="preserve">
-    <value>Pressure Tappings</value>
+    <value>Druckabgriff</value>
     <comment>1</comment>
   </data>
   <data name="PROP_OP_1" xml:space="preserve">
-    <value>Drosselscheibendurchmesser</value>
+    <value>Durchmesser Bohrung</value>
     <comment>1</comment>
   </data>
   <data name="PROP_OP_2" xml:space="preserve">
-    <value>Beta (d/D)</value>
+    <value>Innendurchmesser Rohr</value>
     <comment>1</comment>
   </data>
   <data name="PROP_OP_3" xml:space="preserve">
@@ -1005,14 +1005,18 @@
     <comment>1</comment>
   </data>
   <data name="PROP_OP_4" xml:space="preserve">
+    <value>Beta (d/D)</value>
+    <comment>1</comment>
+  </data>
+  <data name="PROP_OP_5" xml:space="preserve">
     <value>Gesamtdruckverlust</value>
     <comment>0</comment>
   </data>
-  <data name="PROP_OP_5" xml:space="preserve">
+  <data name="PROP_OP_6" xml:space="preserve">
     <value>Blendendruckverlust</value>
     <comment>0</comment>
   </data>
-  <data name="PROP_OP_6" xml:space="preserve">
+  <data name="PROP_OP_7" xml:space="preserve">
     <value>Temperaturdifferenz</value>
     <comment>0</comment>
   </data>

@@ -942,22 +942,22 @@
     <comment>1</comment>
   </data>
   <data name="PROP_OP_2" xml:space="preserve">
-    <value>Beta (d/D)</value>
+    <value>Diâmetro Interno de Tubo</value>
     <comment>1</comment>
   </data>
   <data name="PROP_OP_3" xml:space="preserve">
     <value>Fator de Correção</value>
     <comment>1</comment>
   </data>
-  <data name="PROP_OP_4" xml:space="preserve">
+  <data name="PROP_OP_5" xml:space="preserve">
     <value>Perda de Carga Total</value>
     <comment>0</comment>
   </data>
-  <data name="PROP_OP_5" xml:space="preserve">
+  <data name="PROP_OP_6" xml:space="preserve">
     <value>Perda de Carga no Orifício</value>
     <comment>0</comment>
   </data>
-  <data name="PROP_OP_6" xml:space="preserve">
+  <data name="PROP_OP_7" xml:space="preserve">
     <value>Delta T</value>
     <comment>0</comment>
   </data>
@@ -1285,5 +1285,9 @@
   </data>
   <data name="PROP_PS_7" xml:space="preserve">
     <value>Gradiente de Temperatura Ambiente</value>
+  </data>
+  <data name="PROP_OP_4" xml:space="preserve">
+    <value>Beta (d/D)</value>
+    <comment>1</comment>
   </data>
 </root>

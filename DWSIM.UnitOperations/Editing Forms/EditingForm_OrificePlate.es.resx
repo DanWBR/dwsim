@@ -117,132 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="chkActive.ToolTip" xml:space="preserve">
-    <value>Aktivieren/Deaktivieren</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
-  </data>
-  <data name="Label13.Text" xml:space="preserve">
-    <value>Verbunden mit</value>
-  </data>
-  <data name="Label11.Text" xml:space="preserve">
-    <value>Objekt</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Allgemeine Information</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Notizen</value>
-  </data>
-  <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
-    <value>Konfigurieren</value>
-  </data>
-  <data name="btnConfigurePP.ToolTip" xml:space="preserve">
-    <value>Konfigurieren</value>
-  </data>
-  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="Label10.Text" xml:space="preserve">
-    <value>Flashalgorithmus</value>
-  </data>
-  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 13</value>
-  </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Property Package</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Konfiguration Property Package</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 13</value>
-  </data>
   <data name="Label14.Text" xml:space="preserve">
-    <value>Innerer Rohrdurchmesser</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Druckverlust Blende</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Druckabfall gesamt</value>
-  </data>
-  <data name="rbFlange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
-  </data>
-  <data name="rbFlange.Text" xml:space="preserve">
-    <value>Flansch</value>
+    <value>Diâmetro Interno do Tubo</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rbCorner.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rbCorner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 17</value>
-  </data>
-  <data name="rbCorner.Text" xml:space="preserve">
-    <value>Ecke</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Temperaturänderung</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Korrekturfaktor</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Blendendurchmesser</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Druckmessung</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Berechnungsparameter</value>
-  </data>
-  <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
-    <value>Erstellen und verbinden</value>
-  </data>
-  <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
-    <value>Erstellen und verbinden</value>
-  </data>
-  <data name="btnDisconnectOutlet1.ToolTip" xml:space="preserve">
-    <value>Trennen</value>
-  </data>
-  <data name="btnDisconnect1.ToolTip" xml:space="preserve">
-    <value>Trennen</value>
-  </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Austrittstrom</value>
-  </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="Label19.Text" xml:space="preserve">
-    <value>Eintrittstrom</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Verbindungen</value>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
 </root>

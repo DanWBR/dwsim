@@ -534,6 +534,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.de.resx">
       <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_OrificePlate.es.resx">
+      <DependentUpon>EditingForm_OrificePlate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Pipe.de.resx">
       <DependentUpon>EditingForm_Pipe.vb</DependentUpon>
     </EmbeddedResource>
