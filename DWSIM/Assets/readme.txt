@@ -69,6 +69,8 @@ The full changelog, including code changes and their authors can be viewed at ht
 Version 4.0 Update 31
 
 - [FIX] CAPE-OPEN PP interface workaround for ChemSep
+- [FIX] Fixed Sensitivity Analysis variable units
+- [CHG] Orifice Plate diameter input
 
 Version 4.0 Update 30
 
