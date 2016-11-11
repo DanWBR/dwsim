@@ -7454,8 +7454,10 @@ Final3:
                             vals.Add(c.ConstantProperties.CAS_Number)
                         Case "chemicalformula", "structureformula"
                             vals.Add(c.ConstantProperties.Formula)
+                        Case "triplepointtemperature"
+                            vals.Add(c.ConstantProperties.TemperatureOfFusion)
                         Case Else
-                            Throw New CapeOpen.CapeNoImplException
+                            vals.Add(Double.MinValue)
                     End Select
                 Next
             Next
