@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 30 - November 2016
+Version 4.0 Update 31 - November 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,10 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.0 Update 31
+
+- [FIX] CAPE-OPEN PP interface workaround for ChemSep
 
 Version 4.0 Update 30
 
