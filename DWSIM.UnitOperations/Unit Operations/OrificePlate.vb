@@ -230,7 +230,11 @@ Namespace UnitOperations
             DP = DP + (rhom * 9.8 * (s2_s1))
 
             _orificeDP = DP
-            _fluidDP = DP * ((1 - beta ^ 4 * (1 - Cd ^ 2)) ^ 0.5 - Cd * beta ^ 2) / ((1 - beta ^ 4 * (1 - Cd ^ 2)) ^ 0.5 + Cd * beta ^ 2)
+            If beta >= 1.0# Then
+                _fluidDP = DP
+            Else
+                _fluidDP = DP * ((1 - beta ^ 4 * (1 - Cd ^ 2)) ^ 0.5 - Cd * beta ^ 2) / ((1 - beta ^ 4 * (1 - Cd ^ 2)) ^ 0.5 + Cd * beta ^ 2)
+            End If
 
             P2 = Pi - _fluidDP
             H2 = H1

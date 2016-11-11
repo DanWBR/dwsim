@@ -524,14 +524,14 @@ Public Class FormSensAnalysis
         SaveForm(sacase)
 
         With sacase
-            iv1ll = SystemsOfUnits.Converter.ConvertToSI(.iv1.unit, .iv1.lowerlimit)
-            iv1ul = SystemsOfUnits.Converter.ConvertToSI(.iv1.unit, .iv1.upperlimit)
+            iv1ll = .iv1.lowerlimit
+            iv1ul = .iv1.upperlimit
             iv1np = .iv1.points - 1
             iv1id = .iv1.objectID
             iv1prop = .iv1.propID
             If chkIndVar2.Checked Then
-                iv2ll = SystemsOfUnits.Converter.ConvertToSI(.iv2.unit, .iv2.lowerlimit)
-                iv2ul = SystemsOfUnits.Converter.ConvertToSI(.iv2.unit, .iv2.upperlimit)
+                iv2ll = .iv2.lowerlimit
+                iv2ul = .iv2.upperlimit
                 iv2np = .iv2.points - 1
                 iv2id = .iv2.objectID
                 iv2prop = .iv2.propID
