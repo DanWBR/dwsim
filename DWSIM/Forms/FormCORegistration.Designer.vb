@@ -41,11 +41,11 @@ Partial Class FormCORegistration
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.PictureBox1)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'Label2
@@ -60,36 +60,36 @@ Partial Class FormCORegistration
         '
         'PictureBox1
         '
-        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.colan
+        resources.ApplyResources(Me.PictureBox1, "PictureBox1")
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
         'btnUnregisterUser
         '
-        resources.ApplyResources(Me.btnUnregisterUser, "btnUnregisterUser")
         Me.btnUnregisterUser.Image = Global.DWSIM.My.Resources.Resources.user_ninja
+        resources.ApplyResources(Me.btnUnregisterUser, "btnUnregisterUser")
         Me.btnUnregisterUser.Name = "btnUnregisterUser"
         Me.btnUnregisterUser.UseVisualStyleBackColor = True
         '
         'btnRegisterUser
         '
-        resources.ApplyResources(Me.btnRegisterUser, "btnRegisterUser")
         Me.btnRegisterUser.Image = Global.DWSIM.My.Resources.Resources.user_ninja
+        resources.ApplyResources(Me.btnRegisterUser, "btnRegisterUser")
         Me.btnRegisterUser.Name = "btnRegisterUser"
         Me.btnRegisterUser.UseVisualStyleBackColor = True
         '
         'btnUnregisterSystem
         '
-        resources.ApplyResources(Me.btnUnregisterSystem, "btnUnregisterSystem")
         Me.btnUnregisterSystem.Image = Global.DWSIM.My.Resources.Resources.set_security_question
+        resources.ApplyResources(Me.btnUnregisterSystem, "btnUnregisterSystem")
         Me.btnUnregisterSystem.Name = "btnUnregisterSystem"
         Me.btnUnregisterSystem.UseVisualStyleBackColor = True
         '
         'btnRegisterSystem
         '
-        resources.ApplyResources(Me.btnRegisterSystem, "btnRegisterSystem")
         Me.btnRegisterSystem.Image = Global.DWSIM.My.Resources.Resources.set_security_question
+        resources.ApplyResources(Me.btnRegisterSystem, "btnRegisterSystem")
         Me.btnRegisterSystem.Name = "btnRegisterSystem"
         Me.btnRegisterSystem.UseVisualStyleBackColor = True
         '

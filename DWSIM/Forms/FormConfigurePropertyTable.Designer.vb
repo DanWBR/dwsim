@@ -33,10 +33,10 @@ Partial Class FormConfigurePropertyTable
         '
         'lvProps
         '
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -47,9 +47,9 @@ Partial Class FormConfigurePropertyTable
         '
         'lvObjects
         '
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False
@@ -71,7 +71,7 @@ Partial Class FormConfigurePropertyTable
         resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         '
-        'FormSelectProperties
+        'FormConfigurePropertyTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -80,7 +80,7 @@ Partial Class FormConfigurePropertyTable
         Me.Controls.Add(Me.lvObjects)
         Me.Controls.Add(Me.lvProps)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FormSelectProperties"
+        Me.Name = "FormConfigurePropertyTable"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

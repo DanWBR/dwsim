@@ -117,66 +117,126 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="LabelStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 17</value>
-  </data>
-  <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 13</value>
-  </data>
-  <data name="LabelStatus.Text" xml:space="preserve">
-    <value>Erstellen des diagramm, bitte warten...</value>
-  </data>
-  <data name="CheckBoxHYDVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 118</value>
-  </data>
-  <data name="CheckBoxHYDVAP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
-  </data>
-  <data name="CheckBoxHYDVAP.Text" xml:space="preserve">
-    <value>Vapor only</value>
-  </data>
-  <data name="ComboBox2.Items" xml:space="preserve">
-    <value>van der Waals &amp; Platteeuw modifiziert (Parrish und Prausnitz) (1972)</value>
-  </data>
-  <data name="ComboBox2.Items1" xml:space="preserve">
-    <value>Klauda &amp; Sandler (2000)</value>
-  </data>
-  <data name="ComboBox2.Items2" xml:space="preserve">
-    <value>Chen &amp; Guo (1998)</value>
-  </data>
-  <data name="ComboBox2.Items3" xml:space="preserve">
-    <value>Klauda &amp; Sandler (mit Inhibitorunterstützung)</value>
-  </data>
-  <data name="chkpip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 17</value>
-  </data>
-  <data name="chkpip.Text" xml:space="preserve">
-    <value>Include Phase Identification Parameter Limit</value>
-  </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Berechnen</value>
   </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Objektauswahl</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Molanteil Dampfphase</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Modell</value>
+  </data>
+  <data name="chkQualityLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 17</value>
+  </data>
+  <data name="chkQualityLine.Text" xml:space="preserve">
+    <value>Berechne Qualitätslinie</value>
+  </data>
+  <data name="chkStabCurve.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 17</value>
+  </data>
+  <data name="chkStabCurve.Text" xml:space="preserve">
+    <value>Berechne Stabilitätskurve (nur PT/TP)</value>
+  </data>
+  <data name="chkHydVapOnly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
+  <data name="chkHydVapOnly.Text" xml:space="preserve">
+    <value>Nur Dampf</value>
+  </data>
+  <data name="chkOp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 17</value>
+  </data>
+  <data name="chkOp.Text" xml:space="preserve">
+    <value>Arbeitspunkt anzeigen</value>
+  </data>
+  <data name="cbhydmodel.Items" xml:space="preserve">
+    <value>Modifizierte van der Waals &amp; Platteeuw (Parrish and Prausnitz) (1972)</value>
+  </data>
+  <data name="cbhydmodel.Items3" xml:space="preserve">
+    <value>Klauda &amp; Sandler (mit Inhibitor Unterstützung)</value>
+  </data>
+  <data name="chkpip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 17</value>
+  </data>
+  <data name="chkpip.Text" xml:space="preserve">
+    <value>Grenze für Phasen-Identifikations-Parameter</value>
+  </data>
   <data name="chkhyd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 17</value>
+    <value>159, 17</value>
   </data>
   <data name="chkhyd.Text" xml:space="preserve">
-    <value>Include hydrate equilibrium curve</value>
+    <value>Hydrat-Gleichgewichtskurve</value>
   </data>
-  <data name="CheckBox2.Text" xml:space="preserve">
-    <value>Arbeitspunkt einschließen</value>
+  <data name="TabPage2.Text" xml:space="preserve">
+    <value>Siedepunkte</value>
   </data>
-  <data name="CheckBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 17</value>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
   </data>
-  <data name="CheckBox3.Text" xml:space="preserve">
-    <value>Stabilitätskurve einschließen (nur PT/TP)</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Flash Anfang</value>
   </data>
-  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 17</value>
+  <data name="chkBubLiqInstability.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 17</value>
   </data>
-  <data name="CheckBox1.Text" xml:space="preserve">
-    <value>Qualitätslinie einschließen</value>
+  <data name="chkBubLiqInstability.Text" xml:space="preserve">
+    <value>Stabilität der Flüssigphase überprüfen</value>
+  </data>
+  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Maximale Temperatur</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Anfangsdruck</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Anfangstemperatur</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 13</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Maximale Anzahl Punkte</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Schrittweite Temperatur</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Schrittweite Druck</value>
+  </data>
+  <data name="chkControlBubInit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>15, 14</value>
+  </data>
+  <data name="TabPage3.Text" xml:space="preserve">
+    <value>Taupunkte</value>
   </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -184,11 +244,65 @@
   <data name="Label23.Text" xml:space="preserve">
     <value>Stoffstrom</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Objektauswahl</value>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="Label11.Text" xml:space="preserve">
+    <value>Maximale Temperatur</value>
+  </data>
+  <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="Label22.Text" xml:space="preserve">
+    <value>Anfangsdruck</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Anfangstemperatur</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 13</value>
+  </data>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>Maximale Anzahl Punkte</value>
+  </data>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Schrittweite Temperatur</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Schrittweite Druck</value>
+  </data>
+  <data name="chkControlDewInit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 17</value>
+  </data>
+  <data name="chkControlDewInit.Text" xml:space="preserve">
+    <value>Anfangsparameter definieren</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="LabelStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 17</value>
+  </data>
+  <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 13</value>
+  </data>
+  <data name="LabelStatus.Text" xml:space="preserve">
+    <value>Erstellen des Diagramms, bitte warten...</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Optionen</value>
   </data>
   <data name="ComboBox1.Items" xml:space="preserve">
-    <value>Temperatur als Funktion der Druck</value>
+    <value>Temperatur als Funktion des Drucks</value>
   </data>
   <data name="ComboBox1.Items1" xml:space="preserve">
     <value>Temperatur als Funktion der Enthalpie</value>
@@ -212,7 +326,7 @@
     <value>Druck als Funktion des Molaren Volumens</value>
   </data>
   <data name="ComboBox1.Items8" xml:space="preserve">
-    <value>Molares Volumen als Funktion der Drucke</value>
+    <value>Molares Volumen als Funktion des Drucks</value>
   </data>
   <data name="ComboBox1.Items9" xml:space="preserve">
     <value>Molares Volumen als Funktion der Temperatur</value>
@@ -229,12 +343,18 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Gleichgewichtstyp</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Optionen</value>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 438</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Ergebnisse</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FaTabStrip1.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>444, 398</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Grafische Darstellung</value>
@@ -242,8 +362,11 @@
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Tabelle</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Ergebnisse</value>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>446, 419</value>
+  </data>
+  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>444, 398</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>829, 444</value>

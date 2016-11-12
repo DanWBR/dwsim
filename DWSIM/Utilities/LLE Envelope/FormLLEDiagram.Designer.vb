@@ -24,10 +24,10 @@ Partial Class FormLLEDiagram
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormLLEDiagram))
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -142,10 +142,10 @@ Partial Class FormLLEDiagram
         '
         'X11
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle9.Format = "N6"
-        DataGridViewCellStyle9.NullValue = Nothing
-        Me.X11.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle1.Format = "N6"
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.X11.DefaultCellStyle = DataGridViewCellStyle1
         Me.X11.Frozen = True
         resources.ApplyResources(Me.X11, "X11")
         Me.X11.Name = "X11"
@@ -155,10 +155,10 @@ Partial Class FormLLEDiagram
         '
         'X12
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle10.Format = "N6"
-        DataGridViewCellStyle10.NullValue = Nothing
-        Me.X12.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle2.Format = "N6"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.X12.DefaultCellStyle = DataGridViewCellStyle2
         Me.X12.DividerWidth = 5
         Me.X12.Frozen = True
         resources.ApplyResources(Me.X12, "X12")
@@ -169,10 +169,10 @@ Partial Class FormLLEDiagram
         '
         'X21
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.PaleTurquoise
-        DataGridViewCellStyle11.Format = "N6"
-        DataGridViewCellStyle11.NullValue = Nothing
-        Me.X21.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.PaleTurquoise
+        DataGridViewCellStyle3.Format = "N6"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.X21.DefaultCellStyle = DataGridViewCellStyle3
         resources.ApplyResources(Me.X21, "X21")
         Me.X21.Name = "X21"
         Me.X21.ReadOnly = True
@@ -181,10 +181,10 @@ Partial Class FormLLEDiagram
         '
         'X22
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.PaleTurquoise
-        DataGridViewCellStyle12.Format = "N6"
-        DataGridViewCellStyle12.NullValue = Nothing
-        Me.X22.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.PaleTurquoise
+        DataGridViewCellStyle4.Format = "N6"
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.X22.DefaultCellStyle = DataGridViewCellStyle4
         resources.ApplyResources(Me.X22, "X22")
         Me.X22.Name = "X22"
         Me.X22.ReadOnly = True

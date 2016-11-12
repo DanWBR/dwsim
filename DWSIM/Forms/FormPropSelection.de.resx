@@ -120,9 +120,6 @@
   <data name="KryptonButton2.Text" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Objekt auswählen</value>
-  </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Variable:</value>
   </data>
@@ -136,11 +133,14 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Typ:</value>
   </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Objekt auswählen</value>
+  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 13</value>
+    <value>518, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Bei der Ausführung DWSIM über Mono, drücken Sie "ESC" nach der Rückkehr an die Kalkulationstabelle.</value>
+    <value>Bei der Ausführung von DWSIM in Mono, drücken Sie "ESC" nach der Rückkehr an die Kalkulationstabelle.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Objekt/Eigenschaft auswählen</value>

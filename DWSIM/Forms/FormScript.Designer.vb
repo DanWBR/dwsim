@@ -96,7 +96,6 @@
         '
         resources.ApplyResources(Me.SaveToolStripButton, "SaveToolStripButton")
         Me.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SaveToolStripButton.Image = Global.DWSIM.My.Resources.Resources.disk
         Me.SaveToolStripButton.Name = "SaveToolStripButton"
         '
         'PrintToolStripButton

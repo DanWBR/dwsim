@@ -742,6 +742,9 @@
     <EmbeddedResource Include="Controls\ScriptEditorControlMono.resx">
       <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AboutBox.de.resx">
+      <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
@@ -753,6 +756,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddFlowsheetObject.de.resx">
+      <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddFlowsheetObject.en.resx">
       <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
@@ -768,6 +774,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddUtility.resx">
       <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.de.resx">
+      <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCapeOpenUnitSelector.es.resx">
       <DependentUpon>FormCapeOpenUnitSelector.vb</DependentUpon>
@@ -785,17 +794,29 @@
     <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureMasterTable.de.resx">
+      <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureMasterTable.en.resx">
       <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureMasterTable.resx">
       <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigurePropertyTable.de.resx">
+      <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.de.resx">
+      <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.en.resx">
       <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureSpreadsheetTable.resx">
       <DependentUpon>FormConfigureSpreadsheetTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCORegistration.de.resx">
+      <DependentUpon>FormCORegistration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormCORegistration.en.resx">
       <DependentUpon>FormCORegistration.vb</DependentUpon>
@@ -814,6 +835,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPassword.de.resx">
+      <DependentUpon>FormPassword.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSimulWizard.de.resx">
       <DependentUpon>FormSimulWizard.vb</DependentUpon>
@@ -840,6 +864,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDBManager.resx">
       <DependentUpon>FormDBManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTextBox.de.resx">
+      <DependentUpon>FormTextBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormUpgradeWarning.de.resx">
       <DependentUpon>FormUpgradeWarning.vb</DependentUpon>
@@ -887,6 +914,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWhatsNew.resx">
       <DependentUpon>FormWhatsNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SplashScreen.de.resx">
+      <DependentUpon>SplashScreen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Tips.de.resx" />
     <EmbeddedResource Include="Languages\Tips.en.resx" />

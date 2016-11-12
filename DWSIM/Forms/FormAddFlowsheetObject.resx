@@ -137,6 +137,10 @@
   <data name="lblVersion.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 23</value>
+  </data>
   <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
@@ -152,10 +156,9 @@
   <data name="lblVersion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;txtDesc.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
   </data>
@@ -198,9 +201,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Adicionar Objeto ao Fluxograma</value>
   </data>
-  <data name="&gt;&gt;ListBox1.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
@@ -240,11 +240,8 @@
   <data name="lblLibVersion.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Sobre:</value>
+  <data name="&gt;&gt;ListBox1.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="lblVersion.Text" xml:space="preserve">
     <value>lblVersion</value>
@@ -258,11 +255,8 @@
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblLibVersion.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 23</value>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
   </data>
   <data name="&gt;&gt;lblLibVersion.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -272,6 +266,9 @@
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Nome:</value>
   </data>
   <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
     <value>$this</value>
@@ -291,9 +288,6 @@
   <data name="lblName.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;lblVersion.Name" xml:space="preserve">
-    <value>lblVersion</value>
-  </data>
   <data name="lblVersion.Location" type="System.Drawing.Point, System.Drawing">
     <value>416, 59</value>
   </data>
@@ -309,8 +303,8 @@
   <data name="lblName.Text" xml:space="preserve">
     <value>lblNome</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
+  <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblLibVersion.Text" xml:space="preserve">
     <value>jkhjkhjkh</value>
@@ -324,6 +318,9 @@
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
   <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
@@ -332,6 +329,9 @@
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>727, 311</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -351,9 +351,6 @@
   <data name="&gt;&gt;lblLibVersion.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -362,9 +359,6 @@
   </data>
   <data name="&gt;&gt;txtDesc.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
@@ -381,32 +375,26 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Biblioteca:</value>
   </data>
-  <data name="txtAbout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 209</value>
-  </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;lblLibrary.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;lblLibVersion.Name" xml:space="preserve">
     <value>lblLibVersion</value>
   </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblLibVersion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>291, 84</value>
   </data>
-  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
-    <value>Label4</value>
-  </data>
-  <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
   </data>
   <data name="lblVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
   </data>
-  <data name="&gt;&gt;lblLibrary.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="lblLibrary.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Selecione um tipo de objeto da lista abaixo para adiconá-lo ao fluxograma.</value>
@@ -429,8 +417,11 @@
   <data name="btnOK.Text" xml:space="preserve">
     <value>Adicionar</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="txtDesc.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
   </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -443,9 +434,6 @@
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Versão:</value>
-  </data>
-  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -465,8 +453,8 @@
   <data name="txtDesc.Location" type="System.Drawing.Point, System.Drawing">
     <value>419, 137</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 212</value>
+  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -474,20 +462,20 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancelar</value>
   </data>
+  <data name="txtAbout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 209</value>
+  </data>
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
   <data name="&gt;&gt;Label8.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Nome:</value>
+  <data name="&gt;&gt;lblVersion.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -507,8 +495,17 @@
   <data name="&gt;&gt;lblName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="lblLibVersion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
+  </data>
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 50</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
   </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 11</value>
@@ -516,8 +513,8 @@
   <data name="&gt;&gt;PictureBox1.Name" xml:space="preserve">
     <value>PictureBox1</value>
   </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 212</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -552,14 +549,14 @@
   <data name="btnOK.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>727, 311</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-    <value>btnCancel</value>
+  <data name="&gt;&gt;txtDesc.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 23</value>
+  <data name="&gt;&gt;lblVersion.Name" xml:space="preserve">
+    <value>lblVersion</value>
   </data>
   <data name="&gt;&gt;ListBox1.Name" xml:space="preserve">
     <value>ListBox1</value>
@@ -573,6 +570,9 @@
   <data name="txtDesc.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;txtAbout.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -585,13 +585,13 @@
   <data name="&gt;&gt;lblLibrary.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txtDesc.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="lblLibVersion.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 23</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;lblLibrary.Name" xml:space="preserve">
@@ -600,14 +600,14 @@
   <data name="lblLibVersion.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
-  <data name="lblLibrary.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Sobre:</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
-  <data name="Label7.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>$this</value>
@@ -617,8 +617,5 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
   </metadata>
 </root>

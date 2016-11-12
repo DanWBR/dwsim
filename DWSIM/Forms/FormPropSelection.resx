@@ -124,6 +124,9 @@
     <value>Quando estiver rodando o DWSIM através do Mono, pressione 'ESC' após retornar a planilha para sair do modo de edição da célula.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>655, 342</value>
+  </data>
   <data name="KryptonButton2.Location" type="System.Drawing.Point, System.Drawing">
     <value>461, 310</value>
   </data>
@@ -139,6 +142,9 @@
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
+  </data>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 287</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -173,6 +179,9 @@
   <data name="TreeView3.Location" type="System.Drawing.Point, System.Drawing">
     <value>338, 32</value>
   </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Objeto:</value>
   </data>
@@ -185,6 +194,9 @@
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
+  </data>
+  <data name="KryptonButton2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -222,11 +234,8 @@
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="KryptonButton2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;TreeView1.Name" xml:space="preserve">
+    <value>TreeView1</value>
   </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -261,9 +270,6 @@
   <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Seleção</value>
   </data>
@@ -272,9 +278,6 @@
   </data>
   <data name="TreeView3.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
-  </data>
-  <data name="&gt;&gt;TreeView1.Name" xml:space="preserve">
-    <value>TreeView1</value>
   </data>
   <data name="KryptonButton1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -309,8 +312,8 @@
   <data name="&gt;&gt;TreeView2.Name" xml:space="preserve">
     <value>TreeView2</value>
   </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;Label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -338,9 +341,6 @@
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 3</value>
@@ -372,8 +372,8 @@
   <data name="&gt;&gt;TreeView1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>655, 342</value>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -381,8 +381,8 @@
   <data name="TreeView2.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 287</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
   </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

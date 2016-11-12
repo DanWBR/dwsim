@@ -120,4 +120,14 @@
   <data name="Version.Text" xml:space="preserve">
     <value>Version {0}.{1:00}</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="LabelLicense.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 273</value>
+  </data>
+  <data name="LabelLicense.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 47</value>
+  </data>
+  <data name="LabelLicense.Text" xml:space="preserve">
+    <value>Diese Software wird zu den Bedingungen der GNU General Public License (GPL) version 3 veröffentlicht.</value>
+  </data>
 </root>

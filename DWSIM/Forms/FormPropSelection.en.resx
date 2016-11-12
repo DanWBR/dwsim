@@ -127,9 +127,6 @@
   <data name="KryptonButton1.Location" type="System.Drawing.Point, System.Drawing">
     <value>557, 312</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Select Object</value>
-  </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Variable:</value>
   </data>
@@ -141,6 +138,9 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Type:</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Select Object</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>530, 13</value>

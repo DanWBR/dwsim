@@ -130,15 +130,15 @@
   <data name="&gt;&gt;cbhydmodel.Parent" xml:space="preserve">
     <value>TabPage1</value>
   </data>
+  <data name="&gt;&gt;tbBubDT.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PanelBub.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 211</value>
+    <value>309, 211</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
-  </data>
-  <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
-    <value>FaTabStripItem1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GraphControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -168,20 +168,23 @@
   <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 11</value>
   </data>
-  <data name="Label20.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="chkStabCurve.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 17</value>
   </data>
   <data name="&gt;&gt;tbBubT0.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ComboBox1.Items2" xml:space="preserve">
-    <value>Pressão vs. Entropia</value>
+  <data name="Label12.Text" xml:space="preserve">
+    <value>Temperatura Máxima</value>
   </data>
   <data name="&gt;&gt;lblDewTmax.Parent" xml:space="preserve">
     <value>PanelDew</value>
   </data>
   <data name="chkBubLiqInstability.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 17</value>
+  </data>
+  <data name="PanelDew.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -222,6 +225,9 @@
   <data name="&gt;&gt;tbBubMaxPoints.Parent" xml:space="preserve">
     <value>PanelBub</value>
   </data>
+  <data name="lbBubDP.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
@@ -242,12 +248,6 @@
   </data>
   <data name="rbBubTVF.Text" xml:space="preserve">
     <value>TVF</value>
-  </data>
-  <data name="lbDewT0.Text" xml:space="preserve">
-    <value>Pa</value>
-  </data>
-  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="&gt;&gt;Label12.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -303,6 +303,9 @@
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
+    <value>GroupBox6</value>
+  </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -330,11 +333,11 @@
   <data name="&gt;&gt;tbDewDT.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="lblDewTmax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;Label18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbDewDP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>PanelCalc</value>
@@ -354,14 +357,14 @@
   <data name="&gt;&gt;PanelDew.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lbDewT0.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 61</value>
-  </data>
   <data name="&gt;&gt;lbBubDT.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="chkBubLiqInstability.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
+  </data>
+  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbDewDP.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 110</value>
@@ -405,8 +408,8 @@
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 2</value>
   </data>
-  <data name="lbBubDT.Text" xml:space="preserve">
-    <value>Pa</value>
+  <data name="LabelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Modelo</value>
@@ -423,8 +426,8 @@
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>404, 438</value>
   </data>
-  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbBubDP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 20</value>
   </data>
   <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>104, 16</value>
@@ -432,14 +435,14 @@
   <data name="&gt;&gt;cbhydmodel.Name" xml:space="preserve">
     <value>cbhydmodel</value>
   </data>
-  <data name="&gt;&gt;tbBubP0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;chkControlBubInit.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lbBubDT.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbBubT0.ZOrder" xml:space="preserve">
-    <value>19</value>
+  <data name="&gt;&gt;lbDewT0.Parent" xml:space="preserve">
+    <value>PanelDew</value>
   </data>
   <data name="tbDewDT.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -455,6 +458,9 @@
   </data>
   <data name="chkpip.Text" xml:space="preserve">
     <value>Calcular Linha de Identificação de Fases</value>
+  </data>
+  <data name="lbBubP0.Text" xml:space="preserve">
+    <value>Pa</value>
   </data>
   <data name="lblDewTmax.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -474,9 +480,6 @@
   <data name="rbDewTVF.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 17</value>
   </data>
-  <data name="rbBubTVF.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormPhEnv</value>
   </data>
@@ -486,11 +489,8 @@
   <data name="TabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="lbBubP0.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 35</value>
-  </data>
-  <data name="&gt;&gt;Label21.Parent" xml:space="preserve">
-    <value>PanelDew</value>
+  <data name="Label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;lbDewDP.Parent" xml:space="preserve">
     <value>PanelDew</value>
@@ -501,17 +501,17 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Tipo de diagrama</value>
   </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;tbDewDP.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="chkControlBubInit.Text" xml:space="preserve">
-    <value>Definir Parâmetros de Inicialização</value>
+  <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
   </data>
-  <data name="chkControlBubInit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 17</value>
+  <data name="&gt;&gt;lbDewP0.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="Label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -519,26 +519,17 @@
   <data name="chkOp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbDewDP.Text" xml:space="preserve">
+  <data name="lbDewT0.Text" xml:space="preserve">
     <value>Pa</value>
-  </data>
-  <data name="&gt;&gt;rbDewTVF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PanelCalc.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
   </data>
   <data name="&gt;&gt;lbBubDP.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="FaTabStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;DockRightToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockRightToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lbDewDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 139</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Flash Inicial</value>
@@ -558,9 +549,6 @@
   <data name="lbDewT0.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -573,14 +561,11 @@
   <data name="lbBubT0.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;GroupBox6.Name" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="PanelCalc.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
   </data>
   <data name="TabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
-  </data>
-  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>361, 385</value>
@@ -594,14 +579,8 @@
   <data name="&gt;&gt;lbBubT0.Name" xml:space="preserve">
     <value>lbBubT0</value>
   </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
   <data name="&gt;&gt;lbBubDP.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
   </data>
   <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
     <value>GroupBox2</value>
@@ -621,14 +600,14 @@
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockTopAutoHideToolStripMenuItem</value>
   </data>
-  <data name="PanelDew.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbBubTmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 20</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6022.19030, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6160.29722, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -651,17 +630,20 @@
   <data name="&gt;&gt;tbDewMaxPoints.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
-    <value>Label11</value>
+  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 139</value>
   </data>
-  <data name="&gt;&gt;PanelCalc.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;chkStabCurve.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbBubP0.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tbDewTmax.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkOp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 17</value>
   </data>
   <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -702,8 +684,8 @@
   <data name="tbDewDP.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;tbDewMaxPoints.Parent" xml:space="preserve">
-    <value>PanelDew</value>
+  <data name="ComboBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -720,6 +702,9 @@
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 165</value>
   </data>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>PanelBub</value>
+  </data>
   <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -729,11 +714,8 @@
   <data name="tbDewDT.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 136</value>
   </data>
-  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="&gt;&gt;Label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tbDewT0.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 58</value>
   </data>
   <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
     <value>TabPage1</value>
@@ -746,9 +728,6 @@
   </data>
   <data name="&gt;&gt;lblBubTmax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ComboBox1.Items7" xml:space="preserve">
-    <value>Temperatura vs. Volume</value>
   </data>
   <data name="lbDewDP.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
@@ -786,11 +765,14 @@
   <data name="&gt;&gt;Button1.Name" xml:space="preserve">
     <value>Button1</value>
   </data>
-  <data name="ComboBox1.Items5" xml:space="preserve">
-    <value>Temperatura vs. Entalpia</value>
+  <data name="&gt;&gt;PanelBub.Parent" xml:space="preserve">
+    <value>TabPage2</value>
   </data>
   <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;chkControlBubInit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tbQuality.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -804,9 +786,6 @@
   <data name="PanelDew.Size" type="System.Drawing.Size, System.Drawing">
     <value>260, 185</value>
   </data>
-  <data name="&gt;&gt;PanelBub.Parent" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
   <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
@@ -818,9 +797,6 @@
   </data>
   <data name="TabPage2.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="tbDewT0.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
   </data>
   <data name="rbBubPVF.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 17</value>
@@ -843,11 +819,11 @@
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 298</value>
   </data>
-  <data name="lblDewTmax.Text" xml:space="preserve">
-    <value>Pa</value>
-  </data>
   <data name="chkHydVapOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label18.Name" xml:space="preserve">
+    <value>Label18</value>
   </data>
   <data name="&gt;&gt;tbDewT0.ZOrder" xml:space="preserve">
     <value>17</value>
@@ -861,20 +837,20 @@
   <data name="tbBubMaxPoints.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
+  <data name="Label20.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;rbBubPVF.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lblDewTmax.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;Label12.Name" xml:space="preserve">
     <value>Label12</value>
@@ -885,9 +861,6 @@
   <data name="&gt;&gt;lbBubT0.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="chkpip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 17</value>
-  </data>
   <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
   </data>
@@ -897,17 +870,20 @@
   <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Grid1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
   </data>
-  <data name="&gt;&gt;LabelStatus.Parent" xml:space="preserve">
-    <value>PanelCalc</value>
+  <data name="lbDewT0.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 61</value>
   </data>
   <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
+  </data>
+  <data name="&gt;&gt;tbDewDT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDewDP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkBubLiqInstability.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -945,6 +921,9 @@
   <data name="GraphControl.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
+  <data name="&gt;&gt;LabelStatus.Name" xml:space="preserve">
+    <value>LabelStatus</value>
+  </data>
   <data name="&gt;&gt;rbBubPVF.Parent" xml:space="preserve">
     <value>PanelBub</value>
   </data>
@@ -960,8 +939,8 @@
   <data name="LabelStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 13</value>
   </data>
-  <data name="&gt;&gt;Label18.Name" xml:space="preserve">
-    <value>Label18</value>
+  <data name="Grid1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 393</value>
@@ -984,11 +963,17 @@
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;PanelDew.Name" xml:space="preserve">
+    <value>PanelDew</value>
+  </data>
   <data name="chkStabCurve.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="&gt;&gt;Label19.Name" xml:space="preserve">
     <value>Label19</value>
+  </data>
+  <data name="&gt;&gt;LabelStatus.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tbBubDP.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -996,8 +981,8 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Fração Molar da Fase Vapor</value>
   </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Temperatura Máxima</value>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="chkhyd.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1005,8 +990,8 @@
   <data name="lbDewDP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.29723, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="lbDewDT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1016,9 +1001,6 @@
   </data>
   <data name="Label22.Text" xml:space="preserve">
     <value>Pressão Inicial</value>
-  </data>
-  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>548, 494</value>
@@ -1050,17 +1032,29 @@
   <data name="&gt;&gt;chkpip.Name" xml:space="preserve">
     <value>chkpip</value>
   </data>
+  <data name="lbDewDP.Text" xml:space="preserve">
+    <value>Pa</value>
+  </data>
   <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
   <data name="lbDewDT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;tbBubT0.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
   <data name="&gt;&gt;lbDewT0.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tbBubDP.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Pontos de Orvalho</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 13</value>
   </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>PanelBub</value>
@@ -1083,12 +1077,6 @@
   <data name="&gt;&gt;chkOp.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="&gt;&gt;FloatToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Left Auto-Hide</value>
   </data>
@@ -1109,9 +1097,6 @@
   </data>
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 61</value>
   </data>
   <data name="Label21.Text" xml:space="preserve">
     <value>Temperatura Inicial</value>
@@ -1152,6 +1137,9 @@
   <data name="tbDewT0.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 20</value>
   </data>
+  <data name="ComboBox1.Items5" xml:space="preserve">
+    <value>Temperatura vs. Entalpia</value>
+  </data>
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Name" xml:space="preserve">
     <value>DockBottomToolStripMenuItem</value>
   </data>
@@ -1164,11 +1152,14 @@
   <data name="lbDewDT.Text" xml:space="preserve">
     <value>Pa</value>
   </data>
-  <data name="lbBubP0.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="FaTabStrip1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Passo de Temperatura</value>
+  </data>
+  <data name="chkControlBubInit.Text" xml:space="preserve">
+    <value>Definir Parâmetros de Inicialização</value>
   </data>
   <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1185,14 +1176,17 @@
   <data name="chkQualityLine.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;lbDewDT.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="&gt;&gt;DockLeftToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockLeftToolStripMenuItem</value>
   </data>
   <data name="FaTabStrip1.Text" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;PanelCalc.Parent" xml:space="preserve">
     <value>GroupBox6</value>
+  </data>
+  <data name="&gt;&gt;chkBubLiqInstability.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label23.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1209,11 +1203,11 @@
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>374, 2</value>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
-  <data name="lbBubP0.Text" xml:space="preserve">
-    <value>Pa</value>
+  <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
+    <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;tbDewMaxPoints.ZOrder" xml:space="preserve">
     <value>19</value>
@@ -1223,9 +1217,6 @@
   </data>
   <data name="rbBubPVF.Text" xml:space="preserve">
     <value>PVF</value>
-  </data>
-  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="tbDewTmax.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1248,14 +1239,14 @@
   <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;tbBubMaxPoints.ZOrder" xml:space="preserve">
-    <value>20</value>
+  <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbDewDP.Name" xml:space="preserve">
     <value>tbDewDP</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6022.19030, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6160.29722, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;rbBubTVF.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -1265,6 +1256,9 @@
   </data>
   <data name="&gt;&gt;DockLeftAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 13</value>
   </data>
   <data name="lbDewDP.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1281,6 +1275,9 @@
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>PanelDew</value>
   </data>
+  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 21</value>
+  </data>
   <data name="Label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
   </data>
@@ -1292,9 +1289,6 @@
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Gráfico</value>
-  </data>
-  <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
@@ -1308,8 +1302,8 @@
   <data name="lblDewTmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
   </data>
-  <data name="chkStabCurve.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 17</value>
+  <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1319,9 +1313,6 @@
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>GroupBox2</value>
-  </data>
-  <data name="ComboBox1.Items11" xml:space="preserve">
-    <value>Volume vs. Entropia</value>
   </data>
   <data name="&gt;&gt;tbQuality.Parent" xml:space="preserve">
     <value>TabPage1</value>
@@ -1350,14 +1341,11 @@
   <data name="&gt;&gt;lbDewDP.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>PanelBub</value>
+  <data name="ComboBox1.Items4" xml:space="preserve">
+    <value>Temperatura vs. Pressão</value>
   </data>
-  <data name="&gt;&gt;rbBubPVF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FloatToolStripMenuItem.Name" xml:space="preserve">
     <value>FloatToolStripMenuItem</value>
@@ -1383,9 +1371,6 @@
   <data name="&gt;&gt;DockTopToolStripMenuItem.Name" xml:space="preserve">
     <value>DockTopToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;chkStabCurve.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lbDewDT.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
   </data>
@@ -1398,8 +1383,8 @@
   <data name="rbDewPVF.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
+  <data name="tbDewP0.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="&gt;&gt;lbDewT0.Name" xml:space="preserve">
     <value>lbDewT0</value>
@@ -1416,11 +1401,17 @@
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ComboBox1.Items10" xml:space="preserve">
+    <value>Volume vs. Entalpia</value>
+  </data>
   <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
     <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;lblBubTmax.Parent" xml:space="preserve">
     <value>PanelBub</value>
+  </data>
+  <data name="lbBubDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 139</value>
   </data>
   <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
@@ -1446,6 +1437,9 @@
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
+  <data name="&gt;&gt;Label21.Parent" xml:space="preserve">
+    <value>PanelDew</value>
+  </data>
   <data name="Label4.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
@@ -1457,9 +1451,6 @@
   </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="PanelCalc.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 327</value>
@@ -1476,14 +1467,17 @@
   <data name="lbBubT0.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 61</value>
   </data>
+  <data name="&gt;&gt;chkhyd.Name" xml:space="preserve">
+    <value>chkhyd</value>
+  </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Calcular</value>
   </data>
-  <data name="tbDewP0.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
+  <data name="&gt;&gt;lbDewDT.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="tbBubT0.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1493,6 +1487,9 @@
   </data>
   <data name="Label22.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;chkBubLiqInstability.Name" xml:space="preserve">
+    <value>chkBubLiqInstability</value>
   </data>
   <data name="&gt;&gt;DockTopAutoHideToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1527,11 +1524,11 @@
   <data name="&gt;&gt;Label18.Parent" xml:space="preserve">
     <value>PanelDew</value>
   </data>
+  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbBubTmax.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -1560,9 +1557,6 @@
   <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lblDewTmax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;tbDewTmax.Parent" xml:space="preserve">
     <value>PanelDew</value>
   </data>
@@ -1577,9 +1571,6 @@
   </data>
   <data name="cbhydmodel.Items3" xml:space="preserve">
     <value>Klauda &amp; Sandler (with inhibitor support)</value>
-  </data>
-  <data name="DocumentToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1596,14 +1587,14 @@
   <data name="lbBubDP.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
   </data>
-  <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
+  <data name="lbBubP0.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 35</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;chkhyd.Name" xml:space="preserve">
-    <value>chkhyd</value>
+  <data name="chkControlBubInit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 17</value>
   </data>
   <data name="lblBubTmax.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -1622,6 +1613,9 @@
   </data>
   <data name="chkControlDewInit.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
+  </data>
+  <data name="chkhyd.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;tbQuality.Name" xml:space="preserve">
     <value>tbQuality</value>
@@ -1647,8 +1641,8 @@
   <data name="&gt;&gt;lblDewTmax.Name" xml:space="preserve">
     <value>lblDewTmax</value>
   </data>
-  <data name="chkStabCurve.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 64</value>
+  <data name="rbBubTVF.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
   <data name="lbBubDP.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1671,17 +1665,11 @@
   <data name="&gt;&gt;DocumentToolStripMenuItem.Name" xml:space="preserve">
     <value>DocumentToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;tbDewDT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbBubP0.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
   <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Right Auto-Hide</value>
-  </data>
-  <data name="ComboBox1.Items4" xml:space="preserve">
-    <value>Temperatura vs. Pressão</value>
-  </data>
-  <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockBottomAutoHideToolStripMenuItem</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1698,23 +1686,29 @@
   <data name="chkHydVapOnly.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="&gt;&gt;tbDewTmax.Name" xml:space="preserve">
+    <value>tbDewTmax</value>
+  </data>
   <data name="Label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;DockRightToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockRightToolStripMenuItem</value>
-  </data>
   <data name="&gt;&gt;DockLeftToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkStabCurve.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 64</value>
   </data>
   <data name="DockBottomAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;Grid1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1725,8 +1719,8 @@
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
   </data>
-  <data name="&gt;&gt;tbDewP0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Opções</value>
   </data>
   <data name="tbBubMaxPoints.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 84</value>
@@ -1737,11 +1731,8 @@
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
   </data>
-  <data name="chkOp.Text" xml:space="preserve">
-    <value>Exibir Condições da Corrente</value>
-  </data>
-  <data name="&gt;&gt;LabelStatus.Name" xml:space="preserve">
-    <value>LabelStatus</value>
+  <data name="lblDewTmax.Text" xml:space="preserve">
+    <value>Pa</value>
   </data>
   <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1749,11 +1740,11 @@
   <data name="Label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;tbBubMaxPoints.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
   <data name="&gt;&gt;tbBubTmax.Name" xml:space="preserve">
     <value>tbBubTmax</value>
-  </data>
-  <data name="&gt;&gt;lbDewT0.Parent" xml:space="preserve">
-    <value>PanelDew</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1770,14 +1761,17 @@
   <data name="&gt;&gt;DockRightAutoHideToolStripMenuItem.Name" xml:space="preserve">
     <value>DockRightAutoHideToolStripMenuItem</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Resultados</value>
-  </data>
   <data name="cbhydmodel.Location" type="System.Drawing.Point, System.Drawing">
     <value>68, 110</value>
   </data>
-  <data name="&gt;&gt;tbBubDT.ZOrder" xml:space="preserve">
-    <value>16</value>
+  <data name="&gt;&gt;Label11.Name" xml:space="preserve">
+    <value>Label11</value>
+  </data>
+  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
+    <value>TabControl1</value>
+  </data>
+  <data name="&gt;&gt;PanelCalc.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="rbBubTVF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1788,8 +1782,8 @@
   <data name="&gt;&gt;chkhyd.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Passo de Pressão</value>
+  <data name="chkControlDewInit.Text" xml:space="preserve">
+    <value>Definir Parâmetros de Inicialização</value>
   </data>
   <data name="chkpip.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 165</value>
@@ -1836,8 +1830,8 @@
   <data name="tbDewDP.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 20</value>
   </data>
-  <data name="&gt;&gt;PanelDew.Name" xml:space="preserve">
-    <value>PanelDew</value>
+  <data name="FloatToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>PanelBub</value>
@@ -1847,6 +1841,9 @@
   </data>
   <data name="&gt;&gt;PanelBub.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LabelStatus.Parent" xml:space="preserve">
+    <value>PanelCalc</value>
   </data>
   <data name="&gt;&gt;Label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1878,14 +1875,11 @@
   <data name="&gt;&gt;chkControlBubInit.Parent" xml:space="preserve">
     <value>TabPage2</value>
   </data>
-  <data name="&gt;&gt;chkBubLiqInstability.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="DockLeftToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="FaTabStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
-  </data>
-  <data name="ComboBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
   </data>
   <data name="ComboBox1.Items3" xml:space="preserve">
     <value>Pressão vs. Volume</value>
@@ -1893,8 +1887,8 @@
   <data name="tbBubTmax.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
   </data>
-  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
+    <value>ComboBox1</value>
   </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1905,8 +1899,8 @@
   <data name="lbBubT0.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 13</value>
   </data>
-  <data name="&gt;&gt;chkBubLiqInstability.Name" xml:space="preserve">
-    <value>chkBubLiqInstability</value>
+  <data name="ComboBox1.Items7" xml:space="preserve">
+    <value>Temperatura vs. Volume</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Opções</value>
@@ -1920,20 +1914,17 @@
   <data name="PanelCalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>346, 47</value>
   </data>
-  <data name="LabelStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="DockLeftToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;tbBubDP.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 23</value>
   </data>
-  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbBubPVF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 16</value>
@@ -1944,8 +1935,11 @@
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
-  <data name="chkQualityLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 14</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Resultados</value>
+  </data>
+  <data name="lblDewTmax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
     <value>Dock Top</value>
@@ -1959,14 +1953,11 @@
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DockLeftToolStripMenuItem.Name" xml:space="preserve">
-    <value>DockLeftToolStripMenuItem</value>
+  <data name="&gt;&gt;DockBottomAutoHideToolStripMenuItem.Name" xml:space="preserve">
+    <value>DockBottomAutoHideToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;lbDewP0.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;chkControlBubInit.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="Label20.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
   </data>
   <data name="lbBubDP.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 113</value>
@@ -1977,8 +1968,8 @@
   <data name="&gt;&gt;lbBubP0.Name" xml:space="preserve">
     <value>lbBubP0</value>
   </data>
-  <data name="tbDewT0.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 58</value>
+  <data name="DockLeftAutoHideToolStripMenuItem.ShowShortcutKeys" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 165</value>
@@ -2016,9 +2007,6 @@
   <data name="&gt;&gt;lblDewTmax.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tbBubDP.Name" xml:space="preserve">
-    <value>tbBubDP</value>
-  </data>
   <data name="&gt;&gt;lbDewP0.Parent" xml:space="preserve">
     <value>PanelDew</value>
   </data>
@@ -2028,8 +2016,8 @@
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
-  <data name="lbBubDP.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>374, 2</value>
   </data>
   <data name="&gt;&gt;Label22.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -2037,8 +2025,8 @@
   <data name="rbDewTVF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="rbBubPVF.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -2046,8 +2034,8 @@
   <data name="tbDewP0.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 32</value>
   </data>
-  <data name="tbBubDP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 20</value>
+  <data name="ComboBox1.Items2" xml:space="preserve">
+    <value>Pressão vs. Entropia</value>
   </data>
   <data name="&gt;&gt;rbDewTVF.Name" xml:space="preserve">
     <value>rbDewTVF</value>
@@ -2063,6 +2051,9 @@
   </data>
   <data name="&gt;&gt;TabPage3.Parent" xml:space="preserve">
     <value>TabControl1</value>
+  </data>
+  <data name="&gt;&gt;tbBubP0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label23.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2106,8 +2097,8 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Opções</value>
+  <data name="tbDewT0.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -2130,14 +2121,14 @@
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="&gt;&gt;rbDewTVF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="TabPage1.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2148,14 +2139,14 @@
   <data name="chkControlBubInit.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="&gt;&gt;chkControlBubInit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="chkControlDewInit.Text" xml:space="preserve">
-    <value>Definir Parâmetros de Inicialização</value>
+  <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="chkQualityLine.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 17</value>
@@ -2193,11 +2184,14 @@
   <data name="&gt;&gt;DockBottomToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 61</value>
   </data>
   <data name="PanelDew.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 31</value>
+  </data>
+  <data name="lbBubDT.Text" xml:space="preserve">
+    <value>Pa</value>
   </data>
   <data name="&gt;&gt;PanelBub.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2210,6 +2204,9 @@
   </data>
   <data name="chkControlBubInit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
     <value>TabPage1</value>
@@ -2229,11 +2226,11 @@
   <data name="&gt;&gt;GraphControl.Name" xml:space="preserve">
     <value>GraphControl</value>
   </data>
-  <data name="ComboBox1.Items10" xml:space="preserve">
-    <value>Volume vs. Entalpia</value>
+  <data name="&gt;&gt;tbBubTmax.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;LabelStatus.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="ComboBox1.Items11" xml:space="preserve">
+    <value>Volume vs. Entropia</value>
   </data>
   <data name="lbBubDT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2250,11 +2247,11 @@
   <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>196, 22</value>
   </data>
-  <data name="tbBubDP.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
   </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 13</value>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
     <value>Float</value>
@@ -2265,8 +2262,8 @@
   <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 61</value>
   </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tbDewP0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -2274,14 +2271,14 @@
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 139</value>
+  <data name="&gt;&gt;tbBubDP.Name" xml:space="preserve">
+    <value>tbBubDP</value>
   </data>
-  <data name="chkhyd.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="chkpip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 17</value>
   </data>
-  <data name="&gt;&gt;tbDewTmax.Name" xml:space="preserve">
-    <value>tbDewTmax</value>
+  <data name="chkOp.Text" xml:space="preserve">
+    <value>Exibir Condições da Corrente</value>
   </data>
   <data name="GraphControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -2319,8 +2316,8 @@
   <data name="&gt;&gt;Label11.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbBubDT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 139</value>
+  <data name="&gt;&gt;tbDewMaxPoints.Parent" xml:space="preserve">
+    <value>PanelDew</value>
   </data>
   <data name="lbBubT0.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -2340,8 +2337,11 @@
   <data name="&gt;&gt;chkStabCurve.Parent" xml:space="preserve">
     <value>TabPage1</value>
   </data>
-  <data name="chkOp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 17</value>
+  <data name="chkQualityLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 14</value>
+  </data>
+  <data name="lbDewDT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 139</value>
   </data>
   <data name="&gt;&gt;lbBubDT.Parent" xml:space="preserve">
     <value>PanelBub</value>
@@ -2353,10 +2353,10 @@
     <value>Label20</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6022.19030, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6160.29722, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 21</value>
+  <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -2367,23 +2367,20 @@
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>346, 276</value>
   </data>
-  <data name="TabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Passo de Pressão</value>
   </data>
-  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 13</value>
+  <data name="&gt;&gt;lblDewTmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbBubDT.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>51</value>
+    <value>41</value>
   </metadata>
   <metadata name="dckMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>427, 17</value>

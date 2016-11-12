@@ -83,9 +83,9 @@ Partial Class FrmPsvSize
         '
         'ComboBox2
         '
+        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 325
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.Items.AddRange(New Object() {resources.GetString("ComboBox2.Items")})
         Me.ComboBox2.Name = "ComboBox2"
         '
@@ -96,9 +96,9 @@ Partial Class FrmPsvSize
         '
         'ComboBox1
         '
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 325
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Name = "ComboBox1"
         '
         'Label1
@@ -254,6 +254,7 @@ Partial Class FrmPsvSize
         '
         'GroupBox4
         '
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox4.Controls.Add(Me.TextBox6)
         Me.GroupBox4.Controls.Add(Me.Label19)
@@ -261,7 +262,6 @@ Partial Class FrmPsvSize
         Me.GroupBox4.Controls.Add(Me.TextBox10)
         Me.GroupBox4.Controls.Add(Me.Label21)
         Me.GroupBox4.Controls.Add(Me.Label22)
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -321,8 +321,8 @@ Partial Class FrmPsvSize
         '
         'TextBox12
         '
-        Me.TextBox12.BackColor = System.Drawing.SystemColors.Control
         resources.ApplyResources(Me.TextBox12, "TextBox12")
+        Me.TextBox12.BackColor = System.Drawing.SystemColors.Control
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.ReadOnly = True
         '
@@ -338,8 +338,8 @@ Partial Class FrmPsvSize
         '
         'TextBox11
         '
-        Me.TextBox11.BackColor = System.Drawing.SystemColors.Control
         resources.ApplyResources(Me.TextBox11, "TextBox11")
+        Me.TextBox11.BackColor = System.Drawing.SystemColors.Control
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.ReadOnly = True
         '

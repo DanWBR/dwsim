@@ -96,9 +96,9 @@ Partial Class FrmDAVP
         '
         'ComboBox1
         '
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 179
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Name = "ComboBox1"
         '
         'Label1
@@ -118,6 +118,7 @@ Partial Class FrmDAVP
         '
         'GroupBox10
         '
+        resources.ApplyResources(Me.GroupBox10, "GroupBox10")
         Me.GroupBox10.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox10.Controls.Add(Me.Label38)
         Me.GroupBox10.Controls.Add(Me.Label39)
@@ -135,7 +136,6 @@ Partial Class FrmDAVP
         Me.GroupBox10.Controls.Add(Me.Label47)
         Me.GroupBox10.Controls.Add(Me.Label48)
         Me.GroupBox10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        resources.ApplyResources(Me.GroupBox10, "GroupBox10")
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.TabStop = False
         '
@@ -151,16 +151,16 @@ Partial Class FrmDAVP
         '
         'TbA
         '
+        resources.ApplyResources(Me.TbA, "TbA")
         Me.TbA.BackColor = System.Drawing.SystemColors.Control
         Me.TbA.ForeColor = System.Drawing.SystemColors.WindowText
-        resources.ApplyResources(Me.TbA, "TbA")
         Me.TbA.Name = "TbA"
         Me.TbA.ReadOnly = True
         '
         'TbD
         '
-        Me.TbD.BackColor = System.Drawing.SystemColors.Control
         resources.ApplyResources(Me.TbD, "TbD")
+        Me.TbD.BackColor = System.Drawing.SystemColors.Control
         Me.TbD.Name = "TbD"
         Me.TbD.ReadOnly = True
         '
@@ -191,22 +191,22 @@ Partial Class FrmDAVP
         '
         'TbBSL
         '
-        Me.TbBSL.BackColor = System.Drawing.SystemColors.Control
         resources.ApplyResources(Me.TbBSL, "TbBSL")
+        Me.TbBSL.BackColor = System.Drawing.SystemColors.Control
         Me.TbBSL.Name = "TbBSL"
         Me.TbBSL.ReadOnly = True
         '
         'TbBSG
         '
-        Me.TbBSG.BackColor = System.Drawing.SystemColors.Control
         resources.ApplyResources(Me.TbBSG, "TbBSG")
+        Me.TbBSG.BackColor = System.Drawing.SystemColors.Control
         Me.TbBSG.Name = "TbBSG"
         Me.TbBSG.ReadOnly = True
         '
         'TbBE
         '
-        Me.TbBE.BackColor = System.Drawing.SystemColors.Control
         resources.ApplyResources(Me.TbBE, "TbBE")
+        Me.TbBE.BackColor = System.Drawing.SystemColors.Control
         Me.TbBE.Name = "TbBE"
         Me.TbBE.ReadOnly = True
         '
@@ -227,13 +227,13 @@ Partial Class FrmDAVP
         '
         'GroupBox8
         '
+        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
         Me.GroupBox8.BackColor = System.Drawing.Color.Transparent
         Me.GroupBox8.Controls.Add(Me.LblGas)
         Me.GroupBox8.Controls.Add(Me.LblLiq)
         Me.GroupBox8.Controls.Add(Me.Label20)
         Me.GroupBox8.Controls.Add(Me.Label19)
         Me.GroupBox8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        resources.ApplyResources(Me.GroupBox8, "GroupBox8")
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.TabStop = False
         '
@@ -290,9 +290,9 @@ Partial Class FrmDAVP
         '
         'ComboBoxTipoVaso
         '
+        resources.ApplyResources(Me.ComboBoxTipoVaso, "ComboBoxTipoVaso")
         Me.ComboBoxTipoVaso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxTipoVaso.DropDownWidth = 134
-        resources.ApplyResources(Me.ComboBoxTipoVaso, "ComboBoxTipoVaso")
         Me.ComboBoxTipoVaso.Items.AddRange(New Object() {resources.GetString("ComboBoxTipoVaso.Items"), resources.GetString("ComboBoxTipoVaso.Items1")})
         Me.ComboBoxTipoVaso.Name = "ComboBoxTipoVaso"
         '
