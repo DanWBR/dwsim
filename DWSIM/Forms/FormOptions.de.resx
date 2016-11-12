@@ -117,11 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FaTabStripItem1.Text" xml:space="preserve">
+    <value>Solver Konfiguration</value>
+  </data>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Simulation</value>
+  </data>
+  <data name="FaTabStripItem3.Text" xml:space="preserve">
+    <value>Komponenten</value>
+  </data>
+  <data name="FaTabStripItem2.Text" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="FaTabStripItem7.Text" xml:space="preserve">
+    <value>Andere Optionen</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Solver-Optionen</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkStorePreviousSolutions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 17</value>
+  </data>
   <data name="chkStorePreviousSolutions.Text" xml:space="preserve">
     <value>Speichern von bisherigen Lösungen</value>
   </data>
+  <data name="chkSolverBreak.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 17</value>
+  </data>
   <data name="chkSolverBreak.Text" xml:space="preserve">
     <value>Berechnung abbrechen wenn eine Ausnahme ausgelöst wird</value>
+  </data>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Vorlaufzeit</value>
@@ -138,11 +166,32 @@
   <data name="cbSolverMode.Items4" xml:space="preserve">
     <value>Netzwerkcomputer</value>
   </data>
+  <data name="cbSolverMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 20</value>
+  </data>
+  <data name="cbSolverMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 21</value>
+  </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Berechnungsmodus</value>
   </data>
+  <data name="GroupBoxBGThreadConfig.Text" xml:space="preserve">
+    <value>Zusätzliche Einstellungen</value>
+  </data>
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 51</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>x 'Prozessorkerne'</value>
+  </data>
+  <data name="tbMaxThreadMultiplier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>154, 48</value>
   </data>
   <data name="cbTaskScheduler.Items" xml:space="preserve">
     <value>Default (.NET)</value>
@@ -150,35 +199,56 @@
   <data name="cbTaskScheduler.Items2" xml:space="preserve">
     <value>Limited Concurrency</value>
   </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Task Scheduler</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Maximale Parallelthreads</value>
   </data>
-  <data name="GroupBoxBGThreadConfig.Text" xml:space="preserve">
-    <value>Zusätzliche Einstellungen</value>
+  <data name="GroupBoxAzureConfig.Text" xml:space="preserve">
+    <value>Einstellungen Azure Service Bus (Azure Service Bus)</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 13</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Connection String</value>
   </data>
-  <data name="GroupBoxAzureConfig.Text" xml:space="preserve">
-    <value>Einstellungen Azure Service Bus (Azure Service Bus)</value>
+  <data name="GroupBoxNetworkComputerConfig.Text" xml:space="preserve">
+    <value>Einstellungen für die Verbindung mit dem Computer über das Netzwerk</value>
+  </data>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>TCP-Port</value>
   </data>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>IP-Adresse</value>
   </data>
-  <data name="GroupBoxNetworkComputerConfig.Text" xml:space="preserve">
-    <value>Einstellungen für die Verbindung mit dem Computer über das Netzwerk</value>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Einstellunge für lokalen Solver</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Solver-Optionen</value>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 126</value>
+  </data>
+  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Gewählte GPU</value>
+  </data>
+  <data name="chkEnableSIMD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 17</value>
   </data>
   <data name="chkEnableSIMD.Text" xml:space="preserve">
     <value>Aktiviere CPU-SIMD-Beschleunigung</value>
@@ -186,132 +256,35 @@
   <data name="GroupBox8.Text" xml:space="preserve">
     <value>Informationen ausgewählte GPU</value>
   </data>
+  <data name="chkEnableGPUProcessing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 17</value>
+  </data>
   <data name="chkEnableGPUProcessing.Text" xml:space="preserve">
     <value>Aktiviere GPU/CUDA Verarbeitung</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Maximale Parallelität</value>
   </data>
+  <data name="chkEnableParallelCalcs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 17</value>
+  </data>
   <data name="chkEnableParallelCalcs.Text" xml:space="preserve">
     <value>Aktiviere parallele Berechnungen</value>
   </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Einstellunge für lokalen Solver</value>
-  </data>
-  <data name="FaTabStripItem1.Text" xml:space="preserve">
-    <value>Solver Konfiguration</value>
-  </data>
-  <data name="cbudb.Text" xml:space="preserve">
-    <value>Beim Laden von Anwenderdatenbanken Komponenten ersetzen</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="DataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="DataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="Button11.Text" xml:space="preserve">
-    <value>ChemSep™ Datenbank hinzugügen</value>
-  </data>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Anwenderdatenbank hinzufügen</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Datenbanken Komponenten</value>
-  </data>
-  <data name="Button4.Text" xml:space="preserve">
-    <value>Datenbank für Wechselwirkungsparameter hinzufügen</value>
-  </data>
-  <data name="DataGridViewCellStyle3.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
-        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
-        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
-        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
-        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
-        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
-        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
-        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
-        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
-        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
-        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
-        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
-</value>
-  </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>Datenbanken Wechselwirkungsparameter</value>
-  </data>
-  <data name="FaTabStripItem3.Text" xml:space="preserve">
-    <value>Komponenten</value>
-  </data>
-  <data name="chkSaveBackupFile.Text" xml:space="preserve">
-    <value>Beim Speichern eine Kopie der existierenden Files beibehalten</value>
-  </data>
-  <data name="Button2.Text" xml:space="preserve">
-    <value>Lösche alle ".dwbak"-Dateien im Backupverzeichnis</value>
-  </data>
-  <data name="KryptonLabel3.Text" xml:space="preserve">
-    <value>5 Minuten</value>
-  </data>
-  <data name="KryptonLabel2.Text" xml:space="preserve">
-    <value>Zwischenspeicherintervall:</value>
-  </data>
-  <data name="KryptonButton1.Text" xml:space="preserve">
-    <value>Auswählen</value>
-  </data>
-  <data name="KryptonLabel1.Text" xml:space="preserve">
-    <value>Backupverzeichnis</value>
-  </data>
-  <data name="KryptonCheckBox6.Text" xml:space="preserve">
-    <value>Aktiviere Backupkopien</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Backupkopie</value>
-  </data>
-  <data name="FaTabStripItem2.Text" xml:space="preserve">
-    <value>Backups</value>
-  </data>
-  <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
-    <value>Flowsheet neu berechnen bei "Wiederherstellen/Wiederholen"</value>
-  </data>
-  <data name="GroupBox11.Text" xml:space="preserve">
-    <value>Rückgängig/Wiederholen</value>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Ausschneiden / Kopieren / Einfügen von Objekten</value>
   </data>
   <data name="ComboBoxPropPackCopyMode.Items" xml:space="preserve">
     <value>Nicht kopieren, Standard verwenden</value>
   </data>
   <data name="ComboBoxPropPackCopyMode.Items1" xml:space="preserve">
     <value>Kopieren und zuweisen</value>
+  </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>PropertyPackage</value>
@@ -325,32 +298,206 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Komponenten</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Ausschneiden/Kopieren/Einfügen von Objekten</value>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Objekteditoren</value>
   </data>
-  <data name="chkLoadLegacyFiles.Text" xml:space="preserve">
-    <value>Lade Binärfiles (*.dwsim) durch Verwendung alter Einstellungen  (pre-3.0 Versionen)</value>
+  <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 17</value>
+  </data>
+  <data name="chkEnableMultipleEditors.Text" xml:space="preserve">
+    <value>Mehrere Editoren ermöglichen</value>
+  </data>
+  <data name="cbDefaultLocation.Items" xml:space="preserve">
+    <value>Nocht kopieren, Standard verwenden</value>
+  </data>
+  <data name="cbDefaultLocation.Items1" xml:space="preserve">
+    <value>Kopieren und verbinden</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Standardposition</value>
+  </data>
+  <data name="chkCloseFormsOnDeselect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 17</value>
+  </data>
+  <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
+    <value>Editor beim Abwählen schliessen</value>
+  </data>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Rückgängig/Wiederholen</value>
+  </data>
+  <data name="CheckBoxUndoRedoRecalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>323, 17</value>
+  </data>
+  <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
+    <value>Flowsheet neu berechnen bei "Wiederherstellen/Wiederholen"</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Datenbanken Komponenten</value>
+  </data>
+  <data name="cbudb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 17</value>
+  </data>
+  <data name="cbudb.Text" xml:space="preserve">
+    <value>Beim Laden von Anwenderdatenbanken Komponenten ersetzen</value>
+  </data>
+  <data name="DataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="DataGridViewCellStyle5.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="Button7.Text" xml:space="preserve">
+    <value>Anwenderdatenbank hinzufügen</value>
+  </data>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>Datenbanken Wechselwirkungsparameter</value>
+  </data>
+  <data name="Button4.Text" xml:space="preserve">
+    <value>Datenbank für Wechselwirkungsparameter hinzufügen</value>
+  </data>
+  <data name="DataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
+        w8bGw8bGw8bGw8bGw8bGw8YAAAAAAISChP///////////////////////////////////////////8bD
+        xgAAAAAAhIKE////////////////////////////////////////////xsPGAAAAAACEgoT/////////
+        ///////////////////////////////////Gw8YAAAAAAISChP//////////////////////////////
+        /////////////8bDxgAAAAAAhIKE////////////AAD/AAD/////////AAD/AAD/////////xsPGAAAA
+        AACEgoT///////////////8AAP8AAP8AAP8AAP/////////////Gw8YAAAAAAISChP//////////////
+        /////wAA/wAA/////////////////8bDxgAAAAAAhIKE////////////////AAD/AAD/AAD/AAD/////
+        ////////xsPGAAAAAACEgoT///////////8AAP8AAP////////8AAP8AAP/////////Gw8YAAAAAAISC
+        hP///////////////////////////////////////////8bDxgAAAAAAhIKE////////////////////
+        ////////////////////////xsPGAAAAAACEgoT/////////////////////////////////////////
+        ///Gw8YAAAAAAISChP///////////////////////////////////////////8bDxgAAAAAAhIKEhIKE
+        hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
+</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Backupkopie</value>
+  </data>
+  <data name="chkSaveBackupFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>320, 17</value>
+  </data>
+  <data name="chkSaveBackupFile.Text" xml:space="preserve">
+    <value>Beim Speichern eine Kopie der existierenden Files beibehalten</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 104</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 25</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Alle ".dwbak"-Dateien löschen</value>
+  </data>
+  <data name="KryptonLabel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="KryptonLabel3.Text" xml:space="preserve">
+    <value>5 Minuten</value>
+  </data>
+  <data name="KryptonLabel2.Text" xml:space="preserve">
+    <value>Zwischenspeicherintervall:</value>
+  </data>
+  <data name="KryptonButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 25</value>
+  </data>
+  <data name="KryptonButton1.Text" xml:space="preserve">
+    <value>Verzeichnis auswählen</value>
+  </data>
+  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="KryptonLabel1.Text" xml:space="preserve">
+    <value>Backupverzeichnis</value>
+  </data>
+  <data name="KryptonCheckBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 17</value>
+  </data>
+  <data name="KryptonCheckBox6.Text" xml:space="preserve">
+    <value>Aktiviere Backupkopien</value>
+  </data>
+  <data name="GroupBox15.Text" xml:space="preserve">
+    <value>Stoffdaten</value>
+  </data>
+  <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
+    <value>Ignorieren der in der Simulation gespeicherten Stoffdaten. Lade Daten aus Datenbank.</value>
+  </data>
+  <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
+    <value>Feststoff aus Liste der verfügbaren Phasen für externe Komponenten ausblenden.</value>
   </data>
   <data name="GroupBox13.Text" xml:space="preserve">
     <value>Kompatibilität</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Sprache</value>
+  <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 17</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Sprache</value>
+  <data name="chkAutoUpdate.Text" xml:space="preserve">
+    <value>DWSIM automatisch aktualisieren</value>
   </data>
-  <data name="chkShowWhatsNew.Text" xml:space="preserve">
-    <value>Anzeigefenster "Was ist neu" beiim Starten</value>
-  </data>
-  <data name="KryptonCheckBox1.Text" xml:space="preserve">
-    <value>Zeige Tipps</value>
+  <data name="chkUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 17</value>
   </data>
   <data name="chkUpdates.Text" xml:space="preserve">
     <value>Beim Starten nach Updates suchen </value>
   </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
   <data name="GroupBox9.Text" xml:space="preserve">
     <value>Nachrichten</value>
+  </data>
+  <data name="chkShowWhatsNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 17</value>
+  </data>
+  <data name="chkShowWhatsNew.Text" xml:space="preserve">
+    <value>Anzeigefenster "Was ist neu" beiim Starten</value>
+  </data>
+  <data name="KryptonCheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="KryptonCheckBox1.Text" xml:space="preserve">
+    <value>Zeige Tipps</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Debug</value>
   </data>
   <data name="cbDebugLevel.Items" xml:space="preserve">
     <value>Keine Ausgabe</value>
@@ -364,17 +511,206 @@
   <data name="cbDebugLevel.Items3" xml:space="preserve">
     <value>Hoch</value>
   </data>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Debuglevel</value>
+  </data>
+  <data name="chkconsole.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 17</value>
   </data>
   <data name="chkconsole.Text" xml:space="preserve">
     <value>Umleitung der Konsolenausgabe</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Debug</value>
-  </data>
-  <data name="FaTabStripItem7.Text" xml:space="preserve">
-    <value>Andere Optionen</value>
+  <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
+        KgAAAk1TRnQBSQFMAgEBCgEAAUABCAFAAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
+        ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
+        AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm
+        BuUD3QPsA/AD7gPtAeoB6wHqA+gD5wLlAeYC4wHkA+ID4QPfAd4C3QbcA89gAAP3A/sD+gb5A/gG9wP2
+        A/UD9ATzCPID3QPtA/sD+gb5A/gC8gH3AusB9wLqAfYC7wH1A/QE8wjyA89gAAP5A/wG+gP5A/gD9wP2
+        A/UD9APzBPIF8QPyA98D7wP8BvoD+QL3AfgCtwH3AoIB9gJ9AfUCrAH0AvAB8wTyBfED8gPPYAAD+gP8
+        BvoD+QP4A/cD9gP1A/QD8wPyBvED8gPfA/AD/Ab6A/kCzQH4AnEB9wJIAfYCQgH1AmIB9AK9AfMD8gbx
+        A/ID0WAAA/sD/Ab7A/oD+QP4A/cD9gP1A/QD8wbyA/MD4APxA/wG+wL4AfoCjQH5AjUB+AIwAfcCKwH2
+        AiUB9QJzAfQC7wHzBvID8wPTYAAG/QP8AfsB/AT7A/oD+QP4A/cD9gP1A/QD8wPyA/QD4gPxA/0D/AH7
+        AfwB+wLrAfsCVwH6ATkBOgH5AjQB+AIuAfcCKQH2AjoB9QLbAfQD8wPyA/QD02AAAbEBtQH0AdsB3QH6
+        AdMB1QH4AdEB1AH3AdAB0gH2Ac4B0QH1AcwBzwH0AcoBzAHzAcgBywHyAcYByAHxAcMBxgHwAcEBxAHv
+        Ab8BwgHuAb0BwAHsAccByQHvAXsBgQHXA/ID/gP9A/wC3QH8AkcB+wE9AT4B+gI4AfkCMwH4Ai0B9wIr
+        AfYCyAH1A/QD8wL1AfQD1GAAAVIBWQHoAa0BsgH1AZwBoQHxAZkBngHwAZUBmwHwAZIBmQHuAY8BlQHt
+        AYsBkQHsAYgBjgHrAYQBigHqAYABhwHoAX0BhAHnAXkBgAHmAXYBfQHkAYkBjwHnAQ8BGQHHA/MD/gP9
+        A/wC1wH8AkkB+wJBAfoCPAH5AjcB+AIxAfcCLQH2AsEB9QP0A/MC9QH0A9VgAAENAQ4B3QGCAYkB7wFn
+        AXAB6wFkAWwB6gFfAWcB6gFaAWQB6AFWAV8B5wFRAVoB5gFMAVUB5AFHAVEB4wFCAU0B4QE+AUgB4AE4
+        AUIB3gEzAT4B3AFQAVoB4QECAQQBuAP1Bv4D/QLnAf0CUwH8AkUB+wJAAfoBOwE6AfkCNQH4AjYB9wLW
+        AfYD9QP0A/UD12IAAd0BgAGHAe8BZQFuAewBYgFqAesBXQFmAeoBWQFiAegBVAFdAegBTwFZAecBSwFV
+        AeUBRgFQAeQBQQFLAeIBPAFHAeEBNgFBAd8BMQE9Ad0BTgFYAeECAAG4A/UJ/gL1Af0ChQH9AkkB/AJE
+        AfsBPwE+AfoCOQH5AmsB+ALqAfcD9gP1A/YD2WEAAQEB3wGGAYwB8AFsAXQB7QFpAXEB7AFlAW0B6wFh
+        AWkB6gFcAWUB6QFYAWEB6AFTAV0B5wFPAVgB5QFKAVMB5AFFAU8B4gFAAUoB4QE6AUUB4AFWAV8B4wIA
+        AbwD9Qn+A/0CvwH9AmcB/AJVAfsBUAFPAfoCWQH5Aq0B+AP3A/YD9QP2A9xhAAEDAd8BhwGOAfEBbgF2
+        Ae0BawFzAe0BaAFwAewBZAFsAesBYAFoAeoBXAFkAekBVwFhAegBUwFcAeYBTgFXAeUBSQFTAeMBRAFO
+        AeIBPgFIAeEBWQFiAeQCAAG/A/UD/wn+AvgB/QK0Af0BfAF7AfwCdgH7AqgB+gLzAfkD+AP3A/YD9wPd
+        YQABAQHfAYcBjgHxAX4BhQHwAXsBgwHvAXkBgAHvAXYBfQHuAXMBegHtAW8BdgHsAWoBdAHrAWcBbwHq
+        AWMBawHoAV4BZwHnAVkBYwHmAVUBXQHlAVwBZQHlAgABwAP1Bv8J/gHlAeQB/QHOAc0B/QLLAfwC3wH7
+        A/oD+QP4BvcD3mAAAQEBBQHfAV0BYwHrAV0BYwHrAVsBYQHrAVoBXwHqAVgBXQHpAVcBWwHoAVQBWQHn
+        AVEBVwHnAU8BVAHlAUwBUgHjAUoBTwHiAUYBTAHgAUMBSQHeAUEBRgHdAgABwwP1BvwK+wL6A/kG+AP3
+        A/UD9APzA/ED4GAAAQMBEQHfAQABAwHfAQABAwHfAQABAwHfAgAB3QIAAd0CAAHbAgAB2QIAAdkCAAHV
+        AgAB0wIAAdECAAHPAgABywIAAckCAAHHD/UG8wPxBu8D7QPrA+kD5wPlAuMB4WAAAUIBAAGnAUIBAAGn
+        AUIBAAGlAUIBAAGjAUIBAAGjAUIBAAGjAUIBAAGiAUIBAAGgAUIBAAGfAUIBAAGcAUIBAAGcAUIBAAGa
+        AUIBAAGYAUIBAAGYAUIBAAGYAUIBAAGYAUIBAAGnAUIBAAGnAUIBAAGlAUIBAAGjAUIBAAGjAUIBAAGj
+        AUIBAAGiAUIBAAGgAUIBAAGfAUIBAAGcAUIBAAGcAUIBAAGaAUIBAAGYAUIBAAGYAUIBAAGYAUIBAAGY
+        AcEBRwErAb4BQQEkAbkBPAEfAbcBNgEXAbMBMQEQAcQCggHBAn8BuwF5AXsBuQJ3AbUCcwGuAmwBQgEA
+        AY0BQgEAAYsBQgEAAYkBQgEAAYcBQgEAAYcBYgFhAXcBYgFfAX0BYgFbAXwBYgFdAXsBYgFWAXUBYgFW
+        AXUBYgFhAXQBYgFbAXUBYgFZAXQBYgFbAXABYgFWAW4BYgFUAWwBYgFWAXABYgFRAW4BYgFSAW4BYgFP
+        AWUCAAH2ASUBJAH2AiMB9AIhAfMCIAHyAh4B8QIcAfACGgHuAhkB7QIXAesCFQHpAhQB6AITAeYCEgHl
+        AhEB5QIAAd0CAAH2ASUBJAH2AiMB9AIhAfMCIAHyAh4B8QIcAfACGgHuAhkB7QIXAesCFQHpAhQB6AIT
+        AeYCEgHlAhEB5QIAAd0BuwFrAUMBxgGDAWMBwQF9AVwBvgF3AVUBugFwAUwD0APMAsYByAPDA78DuQEk
+        ASkB2QEjAScB1wEhASYB1AEgASUB0gIAAcUBLwGVAbEBWAGwAdABVwGrAc4BVQGtAc0BVAGnAckBUgGm
+        AccBUAGuAcYBTgGpAccBTQGmAcUBSwGnAcEBSgGjAb8BSQGgAb0BRwGhAcABRgGcAb4BRQGdAb4BLwF1
+        AZcCAAH3AWIBYQH7AlsB+gJWAfkBUwFSAfkCTgH4AkkB9wJEAfcCQAH2AjsB9QI3AfQCMwHzAjAB8gIt
+        AfICLAHyAgAB3QIAAfcBYgFhAfsCWwH6AlYB+QFTAVIB+QJOAfgCSQH3AkQB9wJAAfYCOwH1AjcB9AIz
+        AfMCMAHyAi0B8gIsAfICAAHdAb0BcQFKAeIBvwGvAeABvAGpAd0BuAGmAdwBtAGiA+0D7APqA+gD5wPl
+        AV8BbAHsAVsBaAHqAVcBZAHpAVUBYwHoAgABxQEvAaEBtgGdAe0B+gGXAesB+QGRAesB+QGOAekB+AGI
+        AecB9wGDAeUB9QF+AeMB9QF7AeEB9AF2Ad8B8wFyAd0B8gFuAdwB8QFqAdsB8AFmAdoB7gFpAdoB7wEv
+        AXoBnQIAAfkCZQH8AkoB+gJFAfoCQQH5AjsB+AI1AfcCMAH2AisB9QImAfQCIQHzAhwB8gEXARgB8QIU
+        AfECLgHyAgAB3wIAAfkCZQH8AkoB+gJFAfoCQQH5AjsB+AI1AfcCMAH2AisB9QImAfQCIQHzAhwB8gEX
+        ARgB8QIUAfECLgHyAgAB3wHCAXYBUQHkAcIBsgHeAbYBowHbAbIBnwHZAa4BmgPsA+sD6QPnA+UD4wFO
+        AVwB6gFKAVgB6QFFAVMB5wFZAWUB6QIAAccBLwGmAbYBoQHwAfsBdQHnAfkBbgHmAfgBaAHkAfYBYQHi
+        AfUBWgHfAfMBVAHdAfIBTgHbAfABSAHZAe8BQQHXAe0BPAHUAesBNQHSAeoBMQHRAegBbAHfAe8BLwGB
+        AZwBAAFuAfoBaAGoAfwBRgGUAfoBbQF+AeEBQQF5AfMBPgFmAe8BXwFsAdsBMgF/AfABJgF/AfUBIQF8
+        AfQBHAF5AfMBFgF1AfIBEQFyAfEBDQFwAfEBMAGFAfIBAAFiAd8CAAHaAXcBaAHuAVgBRgHpAVQBQgHo
+        AU8BPAHnAUoBNwHmAUQBMQHkAUABLAHjAToBJgHhATUBIQHgATEBHAHeASwBFgHdAScBEQHbASQBDQHa
+        AUQBMAHgAgABswHFAXsBVwHlAcUBtQHeAbYBogHbAbIBngHZAa4BmQPtA+sD6QPnA+UD4wFLAVkB6gFF
+        AVQB6QFAAU8B5wFbAWgB6QIAAckBLwGTAbYBowHlAfsBaQHPAfkBYgHNAfgBWwHKAfYBVAHGAfQBTQHD
+        AfMBRgHAAfEBPwG9AfABOAG6Ae4BMAG2AewBKQGyAeoBIwGwAekBHQGsAecBbQHOAe8BLwFmAZwBAAL7
+        AWsC/AFKAvsBrgHSAccBTAHBAeoBSwGdAeUBpgHBAb4BPgHsAekBKwL2ASUC9QEgAvQBGgLzARUC8gER
+        AvIBMwLzAQAC4AEgAQABnQGaAWsBzgGDAUoBwwGAAUYBwAF8AUABvwF5ATsBvAF0ATUBugFwATABtwFs
+        ASsBtQFnASUBswFkASABsAFgARoBrgFcARUBqgFZAREBqAFxATMBtgEcAQABbAHIAYABXAHmAccBtwHf
+        AbkBpgHdAbYBoQHaAbEBnQPuA+wD6wPoA+YD5AFQAV4B6wFJAVgB6gFEAVMB6AFeAWsB6gIAAcsBLwFy
+        AbgBpAHQAfwBawGpAfoBZAGmAfkBXQGhAfcBVgGcAfUBTwGYAfQBRwGTAfIBQQGOAfEBOQGJAe8BMgGE
+        Ae4BKgF/AesBJAF7AeoBHQF2AegBbAGvAfABLwE/AZ4BAAL9AW4C/QFOAvwBzQHqAe4BUAGXAeIBUAFj
+        AesB1QHhAekBRgHjAe8BLgL3ASkC9gEjAvUBHgL0ARgC8wETAvIBNQL0AQAC4gHOAQABIgHoAW4BgwHi
+        AU4BaAHhAUkBYwHgAUQBXwHeAT8BWwHdAToBVgHbATQBUQHZAS4BTAHXASkBRwHWASMBQgHUAR4BPgHT
+        ARgBOAHRARMBNAHYATUBUQG4AQABFwHKAYQBYgHoAckBuQHhAbsBqAHfAbgBpAHcAbQBoAPwA+4D7APq
+        A+gD5gFUAWIB7QFOAVwB6wFJAVYB6gFhAW0B7AIAAc0BLwFKAbsBpQG2AfwBbQF6AfsBZgF0AfoBXwFt
+        AfkBWAFnAfcBUQFgAfYBSQFZAfQBQgFSAfIBOwFMAfEBMgFEAe8BKwE+Ae0BJAE3AesBHgExAeoBawGH
+        AfEBLwE/AaQBAAL9AXEC/gFRAv0BxAHaAfcBUgF6AecCkwHsAckB1AH0AUUB4QHuATMC+AEtAvcBKAL2
+        ASIC9QEcAvQBFwLzATkB9QH0AQAC5AH9AgAB/gJxAf0CUQH8AU0BTAH8AkgB+wJDAfoCPgH5AjgB+AIz
+        AfcCLQH2ASgBJwH1AiIB9AIcAfMCFwH1AjkB5AIAAcwBhwFmAekBywG8AeIBvgGsAeABuwGnAd8BtwGk
+        A/ED7wPtA+wD6gPoAVkBZgHvAVMBYQHtAU0BWwHrAWUBcQHtAgAB0AEvAT8BvQGnAbEB/AJwAfwCagH7
+        AmMB+gJdAfgCVQH3Ak4B9QJGAfMCPwHyAjcB8AEvATAB7wIoAe0BIgEhAesBbgF+AfIBLwE/AacBAAL9
+        AXQC/gFUAv0BoAHMAfQBVAFrAe4BvQG/AewBqQHEAfEBQgHlAe0BNwL4ATEC9wEsAvYBJgL1ASAC9AEb
+        AvMBPAH1AfQBAALlAf0CAAH+AnMB/QJUAfwCUAH8AUsBTAH7AkcB+gJBAfkCPAH4AjcB9wIxAfYBLAEr
+        AfUCJgH0AiAB8wIbAfUCPAHlAgABzgGKAWoB6QHMAb4B4wHAAa8B4gG9AaoB4AG6AacD8APvA+0D7APq
+        A+gBXQFqAe8BVwFlAe4BUQFfAewBaQF1Ae0CAAHTATABQAG9AaoBswH8AnQB/AFvAW4B+wJoAfoCYgH5
+        AlsB9wJUAfYCTAH0AkUB8wI+AfECNQHvAS4BLQHuAScBJgHsAXEBgAHyAS8BPwGoAQAC/QF2Av4BVwL+
+        AWEB7QHyAVcBewHxAWcBdgHrAZEB3AHuAUEC8gE7AvkBNQL4AS8C9wEqAvYBJAL1AR8C9AE/AvUBAALn
+        Af0CAAH+AnYB/gJXAf0CUwH9AU4BTwH8AkoB+wJFAfoCQAH5AjoB+AI1AfcCLwH2AioB9QIkAfQCHwH1
+        Aj8B5wIAAdEBjgFuAeoBzgHAAeUBwgGxAeQBvwGtAeEBvQGqA+4D7QLrAewD6gPoA+YBYgFvAfEBWwFp
+        AfABVgFjAe4BbAF4Ae8CAAHVATQBQwG+AawBtQH9AngB/QJyAfwCbQH7AmcB+gJgAfkCWQH4AVIBUQH2
+        AkoB9AJDAfMCOwHxATQBMgHwAiwB7gF1AYMB8wEvAT8BqQEAAf0B/gF4Av4BWgL+AVcC+QFXAb0B8wFV
+        AasB6wFoAesB8wFEAvgBPwL6ATkC+QEzAvgBLgL3ASgC9gEjAfQB9QFCAfUB9gEAAucB/gIpAf4ClwH+
+        AoEB/gJ+Af0CegH9AnYB/AJzAfsCbwH6AmoB+QJmAfgCYgH3Al4B9gJZAfUCVAH2AmwB5wIAAdIBkQFx
+        AesBzwHCAeYBxAGzAeUBwQGwAeMBvwGsA+8G7AHrAuoD6QPlAWcBdAHyAWEBbQHxAVoBaQHvAW8BewHw
+        AgAB2AE5AUcBjQGuAbcB4AJ8AcgCdwHFAnEBwwJsAcACZQG9Al4BugFYAVcBtQJQAbIBSAFJAa4CQQGp
+        ATkBOAGmAjIBoQF4AYcBxwEvAT8BbQEAAb4B/wF5Ad0B/gFdAdYB/gFaAdYB/gFYAckB9wFTAbwB8AFN
+        AcsB+QFIAc8B+wFDAc0B+gE+AcsB+QE4AckB+AEzAccB9wEtAcUB9gEoAcIB9QFFAcoB9gEAAa0B6AH/
+        AnQB/gLFAf4CuAH+ArYB/QK0Af0CsQH8ArAB+wKtAfoCqgH5AqgB+AKkAfcCogH2Ap8B9QKbAfYCqQHo
+        AjcB0wGUAXMB7AHRAcMB5wHGAbUB5gHEAbIB5AHBAa8D7wPrA+wD6wPpA+YBbAF5AfQBZgFyAfIBXwFt
+        AfEBdAGAAfECAAHcATwBSQFfAbABuQHGAn8BmAJ7AZQCdgGQAnEBjAJqAYYCYwGBAl0BewJVAXUBTQFO
+        AW8BRgFHAWgCPgFiATcBOAFbAXsBigGfAS8CPwEAARAB/wF6AYMB/wFfAWkB/gFcAWYB/gFZAWIB/QFU
+        AV0B/AFRAVsB/QFMAVcB/AFHAVIB+wFCAU0B+gE9AUgB+QE3AUMB+AExAT0B9wEsATkB9gFJAVQB9wEA
+        AQ4B6QH/AuoB/wL6Af4C+AH+AvgB/gL4Af0C9wH9AvcB/AL1AfsC9AH6AvMB+QLyAfgC8QH3AvAB9gLu
+        AfcC8QHpAs8B0wGVAXMB7QHSAcQB6AHIAbcB5wHFAbQB5QHDAbID7QPsA+sD6QPqA+cBcgF9AfUBawF3
+        AfMBZAFxAfIBeAGEAfICAAHdATwBSQFLAbEBugG7AoMBhAJ+AYACegF8AnUBdwJvAXEBaQFoAWsCYgFk
+        AlsBXQFTAVQBVgFMAU0BTwJEAUcCPQFAAX8BjQGPAS8CPwIAAf8CewH/AnEB/wJuAf4CbAH+AmgB/gFl
+        AWQB/QJhAf0CXAH8AlgB+wJTAfoCTgH5AkkB+AJEAfcCTAH3AgAB6gH/AvUG/wr+Bf0D/AP7A/oD+QP4
+        BvcB6gLeAdMBlQFzAe0B0wHEAesBzwG/AeoBzQG9AekBywG7A/QG8wPxA/AD7wGEAY0B9wF+AYkB9gF3
+        AYMB9AF8AYcB8wIAAeABOwJIAbECugGgAqUBnQKiAZoCoAGWApwBkgKYAY0BkwGUAYgCjwGDAooBfgKF
+        AXgBfwGAAXMCegFtAnUBggKQAS8CPwIAAf8CVQH/AlUB/wJTAf4CUgH+AlAB/gFOAU0B/QJLAf0CSAH8
+        AkUB+wJCAfoCPwH4AjwB9wI5AfYCNgH1AgAB7AH/AvUB/wL8Af8C/AH+AvsB/gL7Af4C+wH+AvoB/QL5
+        AfwC+AH7AvgB+gL3AfgC9QH3AvQB9gLzAfUC8QHsAuAB0wGVAXMB5QHAAasB5QHAAasB5AG+AaoB4wG8
+        AagD8APvA+wD6wboAWIBbgH2AV4BZwH1AVoBYQHyAVcBXgHwAgAB4gE9AkkBjAGXAZgBiwGWAZgBiwKW
+        AYkCkwGFAo8BggKNAX8CiwF8AokBeQKGAXcCgwFzAoABcAJ+AW0CewFpAncBLwI/AgAB/wIAAf8CAAH/
+        AgAB/wIAAf0CAAH9AgAB/QIAAf0CAAH7AgAB+QIAAfcCAAH1AgAB8wIAAfECAAHvAgAB7QH/AvUB/wL1
+        Af8C9QH/AvUB/QL1Af0C8wH9AvMB/QLxAfsC7wH5Au8B9wLtAfUC6wHzAukB8QLnAe8C5QHvAeMB4QHT
+        AZUBcwHTAZUBcwHTAZUBcwHTAZUBcwHRAZEBcQPfA9wD1QPSA84DzwEAARMB8QEAAQcB7wIAAesCAAHn
+        AgAB5QFDAkwBOgFJAUwBOAFHAUwBPAFKAUwBOgJGATYBQQFAATECPwEvAj8BLwI/AS8CPwEvAj8BLwI/
+        AS8CPwEvAj8BLwI/AS8CPzCGAfABygGmApkCzAKZAcwCmQHMApkBzAKZA+MCmQHMApkBzAPjAcwBmQFm
+        AcwBmQFmAcwBmQFmAcwCmQPXAaQCoAKZAf8CmQHMApkBzAKZAcwCmQHMApkBzAKZAcwCmQHMApkBzAKZ
+        AcwCmQHMApkBzAKZAcwCmQHMApkBzAKZAcwBQgEAAacBQgEAAacBQgEAAaUBQgEAAaUBQgEAAaUBQgEA
+        AaMBQgEAAaMBQgEAAaMBQgEAAaIBQgEAAaIBQgEAAaABQgEAAaABQgEAAZ8BQgEAAZwBQgEAAZwBcAEA
+        AWsBAAEzAQABMwFmAjMBZgIzAWYCMwFmAjMBZgEzAykBMwFmAjMBZgEzBikBAAEzAQAJHAMAAcwEmQHM
+        A4YBzAJmAZkCMwGZAjMD6gIzAcwCMwHMA+oBmQIzAZkCMwGZAWYBMwGZAmYBpAKgAZkBMwJmAZkBzAKZ
+        Af8CmQHMApkB/wKZAcwCmQHMApkBzAKZAcwCmQHMApkBzAKZAcwCmQHMApkBzAKZAcwBkAGpAa0CZgHM
+        AgAB9gIZAfYCJAH1AiMB9AIhAfMCIQHyAiEB8gIhAfECIAHxAh0B8AIbAe4CGgHtAhgB7QIXAesCCQHn
+        AUIBAAGcAQABMwEAAWYBmQJmAZkCZgGZAmYBmQJmAZkCZgGZAWYBMwLMATMCzAEzAZkBZgEzAZkCMwGZ
+        AjMBmQIzAZkCMwGZATMDAAHMApkD/wGAAXwB/wTMAZkBZgHMAmYD/wJQAf8CUAT/AcwCZgHMAmYDzAHw
+        AfsB/wJmAcwBmQJmA9cD/w/xDOoB1gLnA+MD1wPdAmYB/wIAAfcCQwH6AmAB+wJbAfoCVwH5AlwB+QFj
+        AWIB+QFiAWEB+AJeAfgCVgH3AkcB9wJCAfYCQAH2Aj0B9QIXAesBQgEAAZwBAAEzAQABZgHMAmYBmQFm
+        ATMBmQIzAZkCMwGZAjMCzAEzAf8BzAEzAf8BzAEzAswBMwGZAjMBmQIzAZkCMwGZAjMBmQEzAwABzAFm
+        ATMDzAHWAucCmQH/ApkCzAJmA/8CMwH/AjME/wGZAjMD3QKZAcwBgAF8Af8BpAKgAWYCMwKZAf8CzAH/
+        ApkB/wKZAf8BgAF8Af8BgAF8Af8CZgH/AmYB/wJmAf8CZgH/AlAB/wJQAf8CUAH/AlAB/wKZAf8BMwFm
+        AcwCAAH5AkUB+wJbAfsCSgH6AkYB+gKCAfoC0QH5AtAB+ALPAfgCsAH3AkQB9gIuAfUCMQH1Aj8B9gIZ
+        Ae0BQgEAAZ8BAAFmAQABZgHMAWYBMwGZAjMBmQIzAcwBZgEzAcwBmQGQAakBrQGQAakBrQGQAakBrQFm
+        AswBMwHMAWYBMwGZAWYBMwGZATMBAAGAAQABMwGZATMDAAHMAWYBMwHMApkB8AHKAaYCmQPMAf8BmQFm
+        AZkD/wIzAf8CMwT/AcwEmQH/ApkBzAFmATMBmQHMA2YCAAKZAf8CzAH/AswB/wKZAf8CmQH/ApkB/wKZ
+        Af8CmQH/AYABfAH/AYABfAH/AYABfAH/AYABfAH/AmYB/wJmAf8CmQH/AmYBmQIAAfoCRwH7AlsB+wJG
+        AfoCQwH6ApIB+gP5BvgC0QH3AkUB9gIpAfUCLgH1AkIB9gIaAe0BQgEAAZ8BAAFmAQABZgHMAmYBmQFm
+        ATMBmQFmATMCzAEzAcwC/wJmAf8BZgEzAf8BZgEzAf8CZgEzAcwB/wEzAcwBmQEzAZkCMwGZAjMBmQEz
+        AwABzAJmAcwCmQHMAmYD4wPxAYABfAT/AjMB/wIzB/8CZgH/AcwBmQHMAZkCMwHMA2YCMwPXA/EJ6gPj
+        Bt0D1wHGAdYB7wHGAdYB7wHGAdYB7wHGAdYB7wHGAdYB7wLMAf8DhgIAAfsCSgH8AmcB/AJfAfsCXQH7
+        AqEB+wP6BvkC1wH4Al4B9wJFAfYCRQH2AkgB9wIbAe4BQgEAAaABAAFmAQABZgHMAWYBMwGZAWYBMwH/
+        AcwBMwL/AaQCoAH/AWYBMwH/AWYBMwH/AWYBMwHwAcoBpgGQAakBrQEzAf8BzAEzAswBAAGZAjMBmQEz
+        AwAB8AHKAaYD8QPqBv8D6gP/AjMB/wIzB/8CzAH/A/ED3QPjAswBmQHMAmYB8AHKAaYB/wGZAWYB/wGZ
+        AWYB/wGZAWYBzAGZATMBzAGZATMBzAFmATMBzAIzAmYB/wJQAf8CUAH/AlAB/wIzAf8CmQH/AmYBmQIA
+        Af0CTQH9ApkB/QLaAfwB2QHaAfsB6AHpBPsG+gLyAfkC1wH4AtEB9wKwAfcCVgH3Ah0B8AFCAQABogEA
+        AWYBAAFmAcwBmQFmAswBMwL/ATMC/wHMAZkBZgH/AWYBMwH/AZkBZgH/AZkBZgHwAcoBpgHMApkBMwL/
+        ATMC/wEAAcwBmQEzAZkBZgMAAcwBmQPMAf8CzAH/ApkB/wKZAf8CmQH/ApkB/wJQAf8CMwH/ApkB/wKZ
+        Af8CmQH/ApkB/wKZAf8CmQH/AZkBZgGZAcwCZgH/AewBzAH/AWYBMwH/AcwBmQH/AWYBMwHMAZkBZgHM
+        AWYBAAHMAZkBZgHMATMBAAKZAf8CmQH/ApkB/wGAAXwB/wGAAXwB/wHGAdYB7wFmAZkBzAIAAf0CUQH+
+        AqkB/gP9CfwG+wP6A/kD+ALPAfgCYAH4AiAB8QFCAQABowEAAWYBAAFmAcwBmQFmAf8BzAFmAv8BMwL/
+        AcwBmQFmAf8BmQFmAf8CmQHwAcoBpgHwAcoBpgHMAZkBZgEzAv8BMwL/ATMCzAEzAcwBZgMAAZkBZgHM
+        ApkB/wGAAXwB/wGAAXwB/wGAAXwB/wGAAXwB/wJmAf8CUAH/AlAB/wJmAf8CZgH/AmYB/wJQAf8CUAH/
+        AmYB/wFmATMBmQHMAmYD8QH/AWYBMwH/AewBzAH/AWYBMwH/AswB/wFmAQAB8AHKAaYBzAFmAQABxgHW
+        Ae8BxgHWAe8BxgHWAe8BxgHWAe8BxgHWAe8D4wGQAakBrQIAAf0CVAH+AqsB/gP9CfwG+wP6A/kD+ALR
+        AfgCZQH4AiIB8QFCAQABowEAAWYBAAFmAcwCZgHMAmYC/wEzAv8DwAH/AswB/wHsAcwB8AHKAaYB/wFm
+        ATMBzAJmATMC/wEzAv8BMwGZAjMBmQEzAwAD1wP/D/ECUAH/AlAB/w/qA/EEzAJmAfABygGmAf8BZgEz
+        Af8BmQFmAf8BZgEzAf8BmQEzAf8BZgEzAf8BmQEzAcwBZgEAAmYB/wJmAf8CUAH/AlAB/wJQAf8CmQH/
+        AmYBzAIAAf0CUwH+AqsE/gf9AfwB/Qb8A/sD+gP5AtIB+QJlAfkCIgHzAUIBAAGjAQABZgEAAWYBzAJm
+        AZkCZgHMAZkBZgH/AcwBZgHMAv8CmQH/ApkB/wGZAWYB/wNmAswBMwLMATMBzAGZATMBmQIzAZkBMwMA
+        AcwCmQH/AswB8AHKAaYD6gLMB/8CZgH/AlAE/wKZBP8D6gHMApkB8AHKAaYBzAJmAcwCZgHwAcoBpgHw
+        AcoBpgH/AWYBMwHwAcoBpgH/AWYBMwHwAcoBpgH/AWYBMwHMAWYBAAKZAf8CmQH/ApkB/wKZAf8BMwGZ
+        Af8CzAH/ApkBzAIAAf4CUwH+AokB/gKjAf4CoQH+AskB/gn9AugB/AKiAfsCkwH6AoQB+gJeAfoCIgH0
+        AUIBAAGlAQABZgEAAWYBzAJmAZkCZgGZAmYBzAGZAWYDzAKZAcwBmQFmAcwBmQFmAcwCmQEzAswBMwHM
+        AZkBMwGZAjMBmQIzAZkBMwMAAcwBmQFmAfABygGmAcwCmQLMAf8CmQH/A+oD/wJmAf8CZgT/AZkBZgPM
+        Af8D1wHMAmYBzAGZAWYBmQEzAQABzAJmAfABygGmAf8B7AHMAf8BZgEzAf8CzAH/AWYBMwH/AswB/wFm
+        ATMB/wFmAQABxgHWAe8CzAH/AswB/wLMAf8BZgHMAf8BxgHWAe8BmQLMAgAB/wFTAVQB/gJvAf4CXQH+
+        AlsB/gKiAf4J/QLbAfwCXwH7AkUB+gJJAfoCWgH6AiMB9QFCAQABpQEAAWYBAAGZAcwBmQFmAcwCZgGZ
+        AmYBmQJmAZkCZgL/AWYC/wFmAv8BMwL/ATMBmQFmATMBmQIzAZkCMwGZATMBZgGZAWYBAAEzAQABzAGZ
+        AWYB8AHKAaYCmQH/AswE/wHMApkD/wJmAf8CZgT/AcwBmQFmAcwBmQH/ApkE/wHMA5kCMwHMAmYB8AHK
+        AaYB/wGZAWYB/wGZATMB/wGZATMB/wFmATMB/wGZATMB/wFmATMB/wFmATMBgAF8Af8CZgH/AmYB/wJQ
+        Af8CUAH/ApkB/wJmAcwCAAH/AVQBVQH/AXABcQH/Al8B/gJdAf4CowT+Bv0C3AH9AmIB/AJJAfsCTQH7
+        Al4B+wIkAfYBQgEAAacBAAFmAQABmQHMAZkBZgHMAmYBzAJmAcwCZgHMAmYBzAGZAWYB/wHMAWYB/wHM
+        AWYBzAGZAWYBmQJmAZkCZgGZAWYBMwGZATMBZgGZAWYBAAEzAQABzAKZAcYB1gHvAswB/wPdAf8DzAKZ
+        A/8BgAF8Af8BgAF8BP8BzAKZAcwBmQTMAZkBzAH/A+MBzAGZAWYBzAJmAf8B7AHMAf8CmQHwAcoBpgH/
+        AZkBZgHwAcoBpgH/AZkBZgHwAcoBpgH/AZkBZgLMAf8CzAH/AswB/wLMAf8CzAH/AswB/wFmAZkBzAIA
+        Af8CVQH/AncB/wJxAf8CbwH+AokB/gKsAf4CqwH+AqoB/gKbAf0CagH9Al4B/AJeAfwCYgH8AiUB9wFC
+        AQABpwEAAWYBAAFmAZkCZgGZAmYBmQJmAZkCZgGZAmYBmQFmATMBzAFmATMBzAFmATMBmQIzAZkCMwGZ
+        AjMBmQIzAZkCMwFmATMBAAEzAQABzAKZAcYB1gHvA90B8AHKAaYBzAKZAcwCmQP/AYABfAH/AYABfAT/
+        AcwBmQFmAcwBmQFmAcwEmQXMApkBzAJmAf8CzAH/ApkB/wLMAf8CmQH/A8wCmQPXAcwCmQLMAf8CzAH/
+        AcYB1gHvAcYB1gHvAcYB1gHvAcYB1gHvApkBzAIAAf8COgH/AlUB/wJVAf8CVAH+AlMB/gJUAf4CVAH+
+        AlMB/gJQAf0CTAH9AkoB/AJIAfwCRQH7AhoB+AFCAQABqQEAAWYCAAFmAgABZgIAAWYCAAFmAgABZgIA
+        AWYCAAFmAgABZgIAATMCAAEzAgABMwIAATMCAAEzAgABMwIAATMBAAHMApkB8AHKAaYBzAGZAWYBzAGZ
+        AWYBzAGZAWYBzAGZAWYD4wGZAWYBmQJmAZkD4wHMAWYBMwHMAWYBMwHMAWYBMwHMAZkDZgGZAcwBmQFm
+        AcwCZgHMAmYBzAJmAcwCZgHMAmYBzAJmAcwCZgHMAmYBzAJmAYABfAH/AmYB/wJQAf8CUAH/AlAB/wEz
+        AWYBzAEzAWYBzAIAAf8CAAH/AgAB/wIAAf8CAAH/AgAB/gIAAf0CAAH9AgAB/QIAAf0CAAH9AgAB/AIA
+        AfsCAAH5AgAB+AFCAQABqgFCAU0BPgcAAT4DAAEoAwABQAMAATADAAEBAQABAQUAAYABARYAA///AIIA
+        Cw==
+</value>
   </data>
   <data name="FolderBrowserDialog1.Description" xml:space="preserve">
     <value>Auswahl eines Verzeichnisses...</value>

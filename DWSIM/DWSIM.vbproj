@@ -760,6 +760,9 @@
     <EmbeddedResource Include="Forms\FormAddFlowsheetObject.resx">
       <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddUtility.de.resx">
+      <DependentUpon>FormAddUtility.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAddUtility.en.resx">
       <DependentUpon>FormAddUtility.vb</DependentUpon>
     </EmbeddedResource>

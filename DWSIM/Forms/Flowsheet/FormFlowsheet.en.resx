@@ -430,6 +430,9 @@
   <data name="TSMIAddUtility.Text" xml:space="preserve">
     <value>Add Utility</value>
   </data>
+  <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
+    <value>Add Utility</value>
+  </data>
   <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
   </data>

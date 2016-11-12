@@ -431,13 +431,16 @@
     <value>Weitere Hilfsmittel</value>
   </data>
   <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
-    <value>Liste mit Hilfsmitteln bearbeiten, welche an Flowsheet Objekten verbunden sind</value>
+    <value>Liste mit Hilfsmitteln bearbeiten, welche mit Flowsheet Objekten verbunden sind.</value>
   </data>
   <data name="UtilitiesTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 20</value>
   </data>
   <data name="UtilitiesTSMI.Text" xml:space="preserve">
     <value>&amp;Hilfsmittel</value>
+  </data>
+  <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
+    <value>Liste mit Hilfsmitteln anzeigen, welche mit Flowsheet-Objekten verbunden sind.</value>
   </data>
   <data name="AnaliseDeSensibilidadeToolStripMenuItem.Text" xml:space="preserve">
     <value>Sensitivitätsstudie</value>
