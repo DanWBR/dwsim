@@ -1,5 +1,5 @@
 '    PFR Calculation Routines 
-'    Copyright 2008 Daniel Wagner O. de Medeiros
+'    Copyright 2008-2016 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
 '
@@ -663,11 +663,8 @@ Namespace Reactors
                     'process reaction i
                     rxn = FlowSheet.Reactions(ar(i))
 
-                    'Heat released (or absorbed) (kJ/s = kW)
-                    DHr += rxn.ReactionHeat * (N00(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
-
-                    RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000)
-                    DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID) * rxn.Components(rxn.BaseReactant).StoichCoeff / 1000)
+                    RxiT.Add(rxn.ID, (N(rxn.BaseReactant) - N00(rxn.BaseReactant)) / rxn.Components(rxn.BaseReactant).StoichCoeff / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant))
+                    DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID))
 
                     i += 1
 
@@ -680,7 +677,7 @@ Namespace Reactors
                 'Products Enthalpy (kJ/kg * kg/s = kW)
                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                Me.DeltaQ = DHr + Hp - Hr0
+                Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
 
                 Me.DeltaT = 0.0#
 
@@ -690,7 +687,7 @@ Namespace Reactors
                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                 'Heat (kW)
-                Me.DeltaQ = DHr + Hp - Hr0
+                Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
 
                 Me.DeltaT = OutletTemperature - T0
 
