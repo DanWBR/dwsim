@@ -2220,7 +2220,7 @@ Public Class FormCompoundCreator
         Dim Eq As String
 
         StoreData()
-        Eq = cbEqCpS.SelectedIndex.ToString.Split(":")(0)
+        Eq = cbEqCpS.SelectedItem.ToString.Split(":")(0)
         If mycase.DataCpS.Count = 0 Then
             T = 0
             mytext.AppendLine("T" & vbTab & "yCALC")
@@ -2287,7 +2287,7 @@ Public Class FormCompoundCreator
         Dim pp As New PropertyPackages.RaoultPropertyPackage(False)
         Dim frc As New FormChart
         Dim Eq As String
-        Eq = cbEqSolidDENS.SelectedIndex.ToString.Split(":")(0)
+        Eq = cbEqSolidDENS.SelectedItem.ToString.Split(":")(0)
         If mycase.DataRoS.Count = 0 Then
             T = 0
             mytext.AppendLine("T" & vbTab & "yCALC")
