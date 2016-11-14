@@ -133,7 +133,7 @@ Public Class MaterialStreamEditor
             gridInputComposition.Rows.Clear()
             gridInputComposition.Columns(1).CellTemplate.Style.Format = nff
             For Each comp In .Phases(0).Compounds.Values
-                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
 
             Dim sum As Double = 0.0#
@@ -276,7 +276,7 @@ Public Class MaterialStreamEditor
         grid.Rows.Clear()
         grid.Columns(1).CellTemplate.Style.Format = nff
         For Each comp In complist
-            grid.Rows(grid.Rows.Add(New Object() {comp.Name, comp.MoleFraction})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+            grid.Rows(grid.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
         Next
 
     End Sub
