@@ -6940,7 +6940,7 @@ Final3:
                 Case "106"
                     Return A * (1 - Tr) ^ (B + C * Tr + D * Tr ^ 2 + E * Tr ^ 3)
                 Case "107"
-                    Return A + B * (C / T / Sinh(C / T)) ^ 2 + D * (D / T / Cosh(D / T)) ^ 2
+                    Return A + B * (C / T / Sinh(C / T)) ^ 2 + D * (E / T / Cosh(E / T)) ^ 2
                 Case "114"
                     Return A * T + B * T ^ 2 / 2 + C * T ^ 3 / 3 + D * T ^ 4 / 4
                 Case "115"
