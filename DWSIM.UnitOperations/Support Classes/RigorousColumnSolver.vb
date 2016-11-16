@@ -2660,7 +2660,7 @@ restart:            fx = Me.FunctionValue(xvar)
                     Else
                         Vj(i) = -Lj(ns) + sum3(i)
                     End If
-                    'If Vj(i) < 0 Then Vj(i) = 0.01 '-Vj(i)
+                    If Vj(i) < 0 Then Vj(i) = 0.01 '-Vj(i)
                 Next
 
                 For i = 0 To ns

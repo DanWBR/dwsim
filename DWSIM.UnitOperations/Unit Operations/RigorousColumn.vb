@@ -2394,6 +2394,11 @@ Namespace UnitOperations
                 Next
             Next
 
+            pp.CurrentMaterialStream = pp.CurrentMaterialStream.Clone()
+            pp.CurrentMaterialStream.SetPropertyPackageObject(pp)
+            DirectCast(pp.CurrentMaterialStream, MaterialStream).SetFlowsheet(FlowSheet)
+            DirectCast(pp.CurrentMaterialStream, MaterialStream).PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+
             T(0) = T1
             T(ns) = T2
 
@@ -2503,6 +2508,9 @@ Namespace UnitOperations
                     If llextractor Then
                         x(i) = flashresult(2)
                         y(i) = flashresult(6)
+                        If y(i).SumY = 0.0# Then
+                            y(i) = x(i).Clone
+                        End If
                     Else
                         x(i) = flashresult(2)
                         y(i) = flashresult(3)
