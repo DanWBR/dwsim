@@ -1166,6 +1166,27 @@ Namespace BaseClasses
         Public Property viscosity As Double? Implements Interfaces.IPhaseProperties.viscosity
 
         Public Property volumetric_flow As Double? Implements Interfaces.IPhaseProperties.volumetric_flow
+
+        Public Property bulk_modulus As Double? Implements Interfaces.IPhaseProperties.bulk_modulus
+
+        Public Property gibbs_free_energy As Double? Implements Interfaces.IPhaseProperties.gibbs_free_energy
+
+        Public Property helmholtz_energy As Double? Implements Interfaces.IPhaseProperties.helmholtz_energy
+
+        Public Property internal_energy As Double? Implements Interfaces.IPhaseProperties.internal_energy
+
+        Public Property isothermal_compressibility As Double? Implements Interfaces.IPhaseProperties.isothermal_compressibility
+
+        Public Property joule_thomson_coeff As Double? Implements Interfaces.IPhaseProperties.joule_thomson_coeff
+
+        Public Property molar_gibbs_free_energy As Double? Implements Interfaces.IPhaseProperties.molar_gibbs_free_energy
+
+        Public Property molar_helmholtz_energy As Double? Implements Interfaces.IPhaseProperties.molar_helmholtz_energy
+
+        Public Property molar_internal_energy As Double? Implements Interfaces.IPhaseProperties.molar_internal_energy
+
+        Public Property speed_of_sound As Double? Implements Interfaces.IPhaseProperties.speed_of_sound
+
     End Class
 
     <System.Serializable()> Public Class InteractionParameter
