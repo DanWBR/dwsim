@@ -291,6 +291,16 @@ Public Class MaterialStreamEditor
 
         With grid.Rows
 
+            refval = p.Properties.massflow.GetValueOrDefault / Convert.ToDouble(p.Properties.density.GetValueOrDefault)
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.volumetricFlow, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("VazoTP"), val, units.volumetricFlow})
+            refval = p.Properties.massflow.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.massflow, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Vazomssica"), val, units.massflow})
+            refval = p.Properties.molarflow.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molarflow, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Vazomolar"), val, units.molarflow})
+
             If p.Name <> "Mixture" Then
                 refval = p.Properties.molarfraction.GetValueOrDefault
                 If refval.HasValue Then val = Format(refval, nf)
@@ -302,16 +312,6 @@ Public Class MaterialStreamEditor
                 If refval.HasValue Then val = refval
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CompressibilityFactor"), val})
             End If
-
-            refval = p.Properties.massflow.GetValueOrDefault / Convert.ToDouble(p.Properties.density.GetValueOrDefault)
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.volumetricFlow, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("VazoTP"), val, units.volumetricFlow})
-            refval = p.Properties.massflow.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.massflow, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Vazomssica"), val, units.massflow})
-            refval = p.Properties.molarflow.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.molarflow, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Vazomolar"), val, units.molarflow})
 
             refval = p.Properties.enthalpy.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.enthalpy, refval)
@@ -357,9 +357,9 @@ Public Class MaterialStreamEditor
 
             refval = p.Properties.heatCapacityCp.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.heatCapacityCp, refval)
-            .Add(New Object() {"HeatCapacityCp", val, units.heatCapacityCp})
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HeatCapacityCp"), val, units.heatCapacityCp})
             refval = p.Properties.heatCapacityCp.GetValueOrDefault / p.Properties.heatCapacityCv.GetValueOrDefault
-            .Add(New Object() {"HeatCapacityRatio", refval.GetValueOrDefault})
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HeatCapacityRatio"), refval.GetValueOrDefault})
             refval = p.Properties.thermalConductivity.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.thermalConductivity, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Condutividadetrmica"), val, units.thermalConductivity})

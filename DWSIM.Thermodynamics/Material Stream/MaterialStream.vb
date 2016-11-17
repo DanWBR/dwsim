@@ -30,6 +30,7 @@ Imports DWSIM.Interfaces.Enums
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports System.Windows.Forms
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Namespace Streams
 
@@ -826,8 +827,7 @@ Namespace Streams
             If val0 Is Nothing Then
 
                 If su Is Nothing Then su = New SystemsOfUnits.SI
-                Dim cv As New SystemsOfUnits.Converter
-                Dim value As Object = ""
+               Dim value As Object = ""
                 Dim sname As String = ""
 
                 If prop.StartsWith("PROP_MS") Then
@@ -1444,6 +1444,235 @@ Namespace Streams
                         Case 154
                             'total energy flow
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
+                        Case 155
+                            'PROP_MS_155	Isothermal Compressibility (Vapor)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(2).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 156
+                            'PROP_MS_156	Bulk Modulus (Vapor)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(2).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 157
+                            'PROP_MS_157	Speed of Sound (Vapor)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(2).Properties.speedOfSound.GetValueOrDefault)
+                        Case 158
+                            'PROP_MS_158	Joule-Thomson Coefficient (Vapor)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(2).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 159
+                            'PROP_MS_159	Internal Energy (Vapor)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(2).Properties.internal_energy.GetValueOrDefault)
+                        Case 160
+                            'PROP_MS_160	Gibbs Free Energy (Vapor)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(2).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 161
+                            'PROP_MS_161	Helmholtz Free Energy (Vapor)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(2).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 162
+                            'PROP_MS_162	Isothermal Compressibility (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(1).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 163
+                            'PROP_MS_163	Bulk Modulus (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(1).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 164
+                            'PROP_MS_164	Speed of Sound (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(1).Properties.speedOfSound.GetValueOrDefault)
+                        Case 165
+                            'PROP_MS_165	Joule-Thomson Coefficient (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(1).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 166
+                            'PROP_MS_166	Internal Energy (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(1).Properties.internal_energy.GetValueOrDefault)
+                        Case 167
+                            'PROP_MS_167	Gibbs Free Energy (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(1).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 168
+                            'PROP_MS_168	Helmholtz Free Energy (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(1).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 169
+                            'PROP_MS_169	Bulk Modulus (Liquid 1)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(3).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 170
+                            'PROP_MS_170	Speed of Sound (Liquid 1)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(3).Properties.speedOfSound.GetValueOrDefault)
+                        Case 171
+                            'PROP_MS_171	Joule-Thomson Coefficient (Liquid 1)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(3).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 172
+                            'PROP_MS_172	Internal Energy (Liquid 1)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(3).Properties.internal_energy.GetValueOrDefault)
+                        Case 173
+                            'PROP_MS_173	Gibbs Free Energy (Liquid 1)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(3).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 174
+                            'PROP_MS_174	Helmholtz Free Energy (Liquid 1)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(3).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 175
+                            'PROP_MS_175	Isothermal Compressibility (Liquid 1)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(3).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 176
+                            'PROP_MS_176	Bulk Modulus (Liquid 2)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(4).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 177
+                            'PROP_MS_177	Speed of Sound (Liquid 2)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(4).Properties.speedOfSound.GetValueOrDefault)
+                        Case 178
+                            'PROP_MS_178	Joule-Thomson Coefficient (Liquid 2)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(4).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 179
+                            'PROP_MS_179	Internal Energy (Liquid 2)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(4).Properties.internal_energy.GetValueOrDefault)
+                        Case 180
+                            'PROP_MS_180	Gibbs Free Energy (Liquid 2)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(4).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 181
+                            'PROP_MS_181	Helmholtz Free Energy (Liquid 2)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(4).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 182
+                            'PROP_MS_182	Isothermal Compressibility (Liquid 2)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(4).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 183
+                            'PROP_MS_183	Bulk Modulus (Liquid 3)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(5).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 184
+                            'PROP_MS_184	Speed of Sound (Liquid 3)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(5).Properties.speedOfSound.GetValueOrDefault)
+                        Case 185
+                            'PROP_MS_185	Joule-Thomson Coefficient (Liquid 3)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(5).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 186
+                            'PROP_MS_186	Internal Energy (Liquid 3)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(5).Properties.internal_energy.GetValueOrDefault)
+                        Case 187
+                            'PROP_MS_187	Gibbs Free Energy (Liquid 3)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(5).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 188
+                            'PROP_MS_188	Helmholtz Free Energy (Liquid 3)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(5).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 189
+                            'PROP_MS_189	Isothermal Compressibility (Liquid 3)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(5).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 190
+                            'PROP_MS_190	Bulk Modulus (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(6).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 191
+                            'PROP_MS_191	Speed of Sound (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(6).Properties.speedOfSound.GetValueOrDefault)
+                        Case 192
+                            'PROP_MS_192	Joule-Thomson Coefficient (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(6).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 193
+                            'PROP_MS_193	Internal Energy (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(6).Properties.internal_energy.GetValueOrDefault)
+                        Case 194
+                            'PROP_MS_194	Gibbs Free Energy (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(6).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 195
+                            'PROP_MS_195	Helmholtz Free Energy (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(6).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 196
+                            'PROP_MS_196	Isothermal Compressibility (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(6).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 198
+                            'PROP_MS_198	Bulk Modulus (Solid)	
+                            value = cv.ConvertFromSI(su.pressure, Phases(7).Properties.bulk_modulus.GetValueOrDefault)
+                        Case 199
+                            'PROP_MS_199	Speed of Sound (Solid)	
+                            value = cv.ConvertFromSI(su.speedOfSound, Phases(7).Properties.speedOfSound.GetValueOrDefault)
+                        Case 200
+                            'PROP_MS_200	Joule-Thomson Coefficient (Solid)	
+                            value = cv.ConvertFromSI(su.jouleThomsonCoefficient, Phases(7).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                        Case 201
+                            'PROP_MS_201	Internal Energy (Solid)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.internal_energy.GetValueOrDefault)
+                        Case 202
+                            'PROP_MS_202	Gibbs Free Energy (Solid)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 203
+                            'PROP_MS_203	Helmholtz Free Energy (Solid)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 204
+                            'PROP_MS_204	Isothermal Compressibility (Solid)	
+                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(7).Properties.isothermal_compressibility.GetValueOrDefault)
+                        Case 205
+                            'PROP_MS_205	Internal Energy (Mixture)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(0).Properties.internal_energy.GetValueOrDefault)
+                        Case 206
+                            'PROP_MS_206	Gibbs Free Energy (Mixture)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(0).Properties.gibbs_free_energy.GetValueOrDefault)
+                        Case 207
+                            'PROP_MS_207	Helmholtz Free Energy (Mixture)	
+                            value = cv.ConvertFromSI(su.enthalpy, Phases(0).Properties.helmholtz_energy.GetValueOrDefault)
+                        Case 208
+                            'PROP_MS_208	Molar Internal Energy (Mixture)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(0).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 209
+                            'PROP_MS_209	Molar Gibbs Free Energy (Mixture)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(0).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 210
+                            'PROP_MS_210	Molar Helmholtz Free Energy (Mixture)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(0).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 211
+                            'PROP_MS_211	Molar Internal Energy (Vapor)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(2).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 212
+                            'PROP_MS_212	Molar Gibbs Free Energy (Vapor)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(2).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 213
+                            'PROP_MS_213	Molar Helmholtz Free Energy (Vapor)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(2).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 214
+                            'PROP_MS_214	Molar Internal Energy (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(1).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 215
+                            'PROP_MS_215	Molar Gibbs Free Energy (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(1).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 216
+                            'PROP_MS_216	Molar Helmholtz Free Energy (Overall Liquid)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(1).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 217
+                            'PROP_MS_217	Molar Internal Energy (Liquid 1)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(3).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 218
+                            'PROP_MS_218	Molar Gibbs Free Energy (Liquid 1)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(3).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 219
+                            'PROP_MS_219	Molar Helmholtz Free Energy (Liquid 1)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(3).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 220
+                            'PROP_MS_220	Molar Internal Energy (Liquid 2)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(4).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 221
+                            'PROP_MS_221	Molar Gibbs Free Energy (Liquid 2)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(4).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 222
+                            'PROP_MS_222	Molar Helmholtz Free Energy (Liquid 2)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(4).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 223
+                            'PROP_MS_223	Molar Internal Energy (Liquid 3)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(5).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 224
+                            'PROP_MS_224	Molar Gibbs Free Energy (Liquid 3)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(5).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 225
+                            'PROP_MS_225	Molar Helmholtz Free Energy (Liquid 3)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(5).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 226
+                            'PROP_MS_226	Molar Internal Energy (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(6).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 227
+                            'PROP_MS_227	Molar Gibbs Free Energy (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(6).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 228
+                            'PROP_MS_228	Molar Helmholtz Free Energy (Aqueous Phase)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(6).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Case 229
+                            'PROP_MS_229	Molar Internal Energy (Solid)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(7).Properties.molar_internal_energy.GetValueOrDefault)
+                        Case 230
+                            'PROP_MS_230	Molar Gibbs Free Energy (Solid)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(7).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Case 231
+                            'PROP_MS_231	Molar Helmholtz Free Energy (Solid)	
+                            value = cv.ConvertFromSI(su.molar_enthalpy, Phases(7).Properties.molar_helmholtz_energy.GetValueOrDefault)
+
                     End Select
 
                     Return value
@@ -1518,6 +1747,9 @@ Namespace Streams
                     Next
                     proplist.Add("PROP_MS_153")
                     proplist.Add("PROP_MS_154")
+                    For i = 155 To 231
+                        proplist.Add("PROP_MS_" + CStr(i))
+                    Next
                 Case PropertyType.WR
                     For i = 0 To 4
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -1572,6 +1804,9 @@ Namespace Streams
                     Next
                     proplist.Add("PROP_MS_153")
                     proplist.Add("PROP_MS_154")
+                    For i = 155 To 231
+                        proplist.Add("PROP_MS_" + CStr(i))
+                    Next
             End Select
 
             proplist.AddRange(MyBase.GetProperties(proptype))
@@ -2060,6 +2295,235 @@ Namespace Streams
                             value = su.temperature
                         Case 154
                             value = su.heatflow
+                        Case 155
+                            'PROP_MS_155	Isothermal Compressibility (Vapor)	
+                            value = su.isothermalCompressibility
+                        Case 156
+                            'PROP_MS_156	Bulk Modulus (Vapor)	
+                            value = su.pressure
+                        Case 157
+                            'PROP_MS_157	Speed of Sound (Vapor)	
+                            value = su.speedOfSound
+                        Case 158
+                            'PROP_MS_158	Joule-Thomson Coefficient (Vapor)	
+                            value = su.jouleThomsonCoefficient
+                        Case 159
+                            'PROP_MS_159	Internal Energy (Vapor)	
+                            value = su.enthalpy
+                        Case 160
+                            'PROP_MS_160	Gibbs Free Energy (Vapor)	
+                            value = su.enthalpy
+                        Case 161
+                            'PROP_MS_161	Helmholtz Free Energy (Vapor)	
+                            value = su.enthalpy
+                        Case 162
+                            'PROP_MS_162	Isothermal Compressibility (Overall Liquid)	
+                            value = su.isothermalCompressibility
+                        Case 163
+                            'PROP_MS_163	Bulk Modulus (Overall Liquid)	
+                            value = su.pressure
+                        Case 164
+                            'PROP_MS_164	Speed of Sound (Overall Liquid)	
+                            value = su.speedOfSound
+                        Case 165
+                            'PROP_MS_165	Joule-Thomson Coefficient (Overall Liquid)	
+                            value = su.jouleThomsonCoefficient
+                        Case 166
+                            'PROP_MS_166	Internal Energy (Overall Liquid)	
+                            value = su.enthalpy
+                        Case 167
+                            'PROP_MS_167	Gibbs Free Energy (Overall Liquid)	
+                            value = su.enthalpy
+                        Case 168
+                            'PROP_MS_168	Helmholtz Free Energy (Overall Liquid)	
+                            value = su.enthalpy
+                        Case 169
+                            'PROP_MS_169	Bulk Modulus (Liquid 1)	
+                            value = su.pressure
+                        Case 170
+                            'PROP_MS_170	Speed of Sound (Liquid 1)	
+                            value = su.speedOfSound
+                        Case 171
+                            'PROP_MS_171	Joule-Thomson Coefficient (Liquid 1)	
+                            value = su.jouleThomsonCoefficient
+                        Case 172
+                            'PROP_MS_172	Internal Energy (Liquid 1)	
+                            value = su.enthalpy
+                        Case 173
+                            'PROP_MS_173	Gibbs Free Energy (Liquid 1)	
+                            value = su.enthalpy
+                        Case 174
+                            'PROP_MS_174	Helmholtz Free Energy (Liquid 1)	
+                            value = su.enthalpy
+                        Case 175
+                            'PROP_MS_175	Isothermal Compressibility (Liquid 1)	
+                            value = su.isothermalCompressibility
+                        Case 176
+                            'PROP_MS_176	Bulk Modulus (Liquid 2)	
+                            value = su.pressure
+                        Case 177
+                            'PROP_MS_177	Speed of Sound (Liquid 2)	
+                            value = su.speedOfSound
+                        Case 178
+                            'PROP_MS_178	Joule-Thomson Coefficient (Liquid 2)	
+                            value = su.jouleThomsonCoefficient
+                        Case 179
+                            'PROP_MS_179	Internal Energy (Liquid 2)	
+                            value = su.enthalpy
+                        Case 180
+                            'PROP_MS_180	Gibbs Free Energy (Liquid 2)	
+                            value = su.enthalpy
+                        Case 181
+                            'PROP_MS_181	Helmholtz Free Energy (Liquid 2)	
+                            value = su.enthalpy
+                        Case 182
+                            'PROP_MS_182	Isothermal Compressibility (Liquid 2)	
+                            value = su.isothermalCompressibility
+                        Case 183
+                            'PROP_MS_183	Bulk Modulus (Liquid 3)	
+                            value = su.pressure
+                        Case 184
+                            'PROP_MS_184	Speed of Sound (Liquid 3)	
+                            value = su.speedOfSound
+                        Case 185
+                            'PROP_MS_185	Joule-Thomson Coefficient (Liquid 3)	
+                            value = su.jouleThomsonCoefficient
+                        Case 186
+                            'PROP_MS_186	Internal Energy (Liquid 3)	
+                            value = su.enthalpy
+                        Case 187
+                            'PROP_MS_187	Gibbs Free Energy (Liquid 3)	
+                            value = su.enthalpy
+                        Case 188
+                            'PROP_MS_188	Helmholtz Free Energy (Liquid 3)	
+                            value = su.enthalpy
+                        Case 189
+                            'PROP_MS_189	Isothermal Compressibility (Liquid 3)	
+                            value = su.isothermalCompressibility
+                        Case 190
+                            'PROP_MS_190	Bulk Modulus (Aqueous Phase)	
+                            value = su.pressure
+                        Case 191
+                            'PROP_MS_191	Speed of Sound (Aqueous Phase)	
+                            value = su.speedOfSound
+                        Case 192
+                            'PROP_MS_192	Joule-Thomson Coefficient (Aqueous Phase)	
+                            value = su.jouleThomsonCoefficient
+                        Case 193
+                            'PROP_MS_193	Internal Energy (Aqueous Phase)	
+                            value = su.enthalpy
+                        Case 194
+                            'PROP_MS_194	Gibbs Free Energy (Aqueous Phase)	
+                            value = su.enthalpy
+                        Case 195
+                            'PROP_MS_195	Helmholtz Free Energy (Aqueous Phase)	
+                            value = su.enthalpy
+                        Case 196
+                            'PROP_MS_196	Isothermal Compressibility (Aqueous Phase)	
+                            value = su.isothermalCompressibility
+                        Case 198
+                            'PROP_MS_198	Bulk Modulus (Solid)	
+                            value = su.pressure
+                        Case 199
+                            'PROP_MS_199	Speed of Sound (Solid)	
+                            value = su.speedOfSound
+                        Case 200
+                            'PROP_MS_200	Joule-Thomson Coefficient (Solid)	
+                            value = su.jouleThomsonCoefficient
+                        Case 201
+                            'PROP_MS_201	Internal Energy (Solid)	
+                            value = su.enthalpy
+                        Case 202
+                            'PROP_MS_202	Gibbs Free Energy (Solid)	
+                            value = su.enthalpy
+                        Case 203
+                            'PROP_MS_203	Helmholtz Free Energy (Solid)	
+                            value = su.enthalpy
+                        Case 204
+                            'PROP_MS_204	Isothermal Compressibility (Solid)	
+                            value = su.isothermalCompressibility
+                        Case 205
+                            'PROP_MS_205	Internal Energy (Mixture)	
+                            value = su.enthalpy
+                        Case 206
+                            'PROP_MS_206	Gibbs Free Energy (Mixture)	
+                            value = su.enthalpy
+                        Case 207
+                            'PROP_MS_207	Helmholtz Free Energy (Mixture)	
+                            value = su.enthalpy
+                        Case 208
+                            'PROP_MS_208	Molar Internal Energy (Mixture)	
+                            value = su.molar_enthalpy
+                        Case 209
+                            'PROP_MS_209	Molar Gibbs Free Energy (Mixture)	
+                            value = su.molar_enthalpy
+                        Case 210
+                            'PROP_MS_210	Molar Helmholtz Free Energy (Mixture)	
+                            value = su.molar_enthalpy
+                        Case 211
+                            'PROP_MS_211	Molar Internal Energy (Vapor)	
+                            value = su.molar_enthalpy
+                        Case 212
+                            'PROP_MS_212	Molar Gibbs Free Energy (Vapor)	
+                            value = su.molar_enthalpy
+                        Case 213
+                            'PROP_MS_213	Molar Helmholtz Free Energy (Vapor)	
+                            value = su.molar_enthalpy
+                        Case 214
+                            'PROP_MS_214	Molar Internal Energy (Overall Liquid)	
+                            value = su.molar_enthalpy
+                        Case 215
+                            'PROP_MS_215	Molar Gibbs Free Energy (Overall Liquid)	
+                            value = su.molar_enthalpy
+                        Case 216
+                            'PROP_MS_216	Molar Helmholtz Free Energy (Overall Liquid)	
+                            value = su.molar_enthalpy
+                        Case 217
+                            'PROP_MS_217	Molar Internal Energy (Liquid 1)	
+                            value = su.molar_enthalpy
+                        Case 218
+                            'PROP_MS_218	Molar Gibbs Free Energy (Liquid 1)	
+                            value = su.molar_enthalpy
+                        Case 219
+                            'PROP_MS_219	Molar Helmholtz Free Energy (Liquid 1)	
+                            value = su.molar_enthalpy
+                        Case 220
+                            'PROP_MS_220	Molar Internal Energy (Liquid 2)	
+                            value = su.molar_enthalpy
+                        Case 221
+                            'PROP_MS_221	Molar Gibbs Free Energy (Liquid 2)	
+                            value = su.molar_enthalpy
+                        Case 222
+                            'PROP_MS_222	Molar Helmholtz Free Energy (Liquid 2)	
+                            value = su.molar_enthalpy
+                        Case 223
+                            'PROP_MS_223	Molar Internal Energy (Liquid 3)	
+                            value = su.molar_enthalpy
+                        Case 224
+                            'PROP_MS_224	Molar Gibbs Free Energy (Liquid 3)	
+                            value = su.molar_enthalpy
+                        Case 225
+                            'PROP_MS_225	Molar Helmholtz Free Energy (Liquid 3)	
+                            value = su.molar_enthalpy
+                        Case 226
+                            'PROP_MS_226	Molar Internal Energy (Aqueous Phase)	
+                            value = su.molar_enthalpy
+                        Case 227
+                            'PROP_MS_227	Molar Gibbs Free Energy (Aqueous Phase)	
+                            value = su.molar_enthalpy
+                        Case 228
+                            'PROP_MS_228	Molar Helmholtz Free Energy (Aqueous Phase)	
+                            value = su.molar_enthalpy
+                        Case 229
+                            'PROP_MS_229	Molar Internal Energy (Solid)	
+                            value = su.molar_enthalpy
+                        Case 230
+                            'PROP_MS_230	Molar Gibbs Free Energy (Solid)	
+                            value = su.molar_enthalpy
+                        Case 231
+                            'PROP_MS_231	Molar Helmholtz Free Energy (Solid)	
+                            value = su.molar_enthalpy
+
                         Case Else
                             value = ""
                     End Select

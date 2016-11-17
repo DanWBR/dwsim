@@ -3778,13 +3778,13 @@
     <value>Mass flow rate in the Mixture</value>
   </data>
   <data name="VazoTP" xml:space="preserve">
-    <value>Flow Rate @ T, P</value>
+    <value>Volumetric Flow Rate @ T, P</value>
   </data>
   <data name="VazoTPPhaseLquida" xml:space="preserve">
-    <value>Flow Rate @ T, P (Liquid Phase)</value>
+    <value>Volumetric Flow Rate @ T, P (Liquid Phase)</value>
   </data>
   <data name="VazoTPPhaseVapor" xml:space="preserve">
-    <value>Flow Rate @ T, P (Vapor Phase)</value>
+    <value>Volumetric Flow Rate @ T, P (Vapor Phase)</value>
   </data>
   <data name="Vazovolumtrica" xml:space="preserve">
     <value>Volumetric flow rate</value>

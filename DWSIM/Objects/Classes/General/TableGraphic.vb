@@ -1013,7 +1013,7 @@ Namespace GraphicObjects
                         If size.Width > maxL0 Then maxL0 = size.Width
                         If size.Height > maxH Then maxH = size.Height
 
-                        propstring = Me.Flowsheet.GetTranslatedString(value)
+                        propstring = Flowsheet.GetTranslatedString(value)
                         pval0 = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyValue(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
                         If TypeOf pval0 Is Double Then
                             propval = Convert.ToDouble(pval0).ToString(Me.Flowsheet.FlowsheetOptions.NumberFormat)
@@ -1022,7 +1022,7 @@ Namespace GraphicObjects
                         End If
                         propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
-                        size = g.MeasureString(DWSIM.App.GetPropertyName(propstring), Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                        size = g.MeasureString(propstring, Me.FontCol1, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
                         If size.Width > maxL1 Then maxL1 = size.Width
                         If size.Height > maxH Then maxH = size.Height
 

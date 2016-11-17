@@ -101,6 +101,80 @@ Namespace PropertyPackages.Auxiliary
             fh1 = Nothing
         End Sub
 
+        Function JT_PR(ByVal Z As Double, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VMM As Double(), ByVal VZc As Double(), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Cp As Double, ByVal Vw As Double()) As Double
+
+            Dim n, R As Double
+            Dim vetor(8) As Double
+            Dim Tc(), Pc(), Vc(), W(), Zc(), a, b, c, Tr() As Double
+
+            n = Vz.Length - 1
+
+            ReDim Zc(n), Tc(n), Pc(n), Vc(n), W(n), Tr(n)
+
+            R = 8.314
+
+            Dim i, j As Integer
+            i = 0
+            Do
+                Tc(i) = VTc(i)
+                Tr(i) = T / Tc(i)
+                Pc(i) = VPc(i)
+                W(i) = Vw(i)
+                Zc(i) = VZc(i)
+                Vc(i) = Zc(i) * R * Tc(i) / Pc(i)
+                i = i + 1
+            Loop Until i = n + 1
+
+            i = 0
+            Dim Vcm = 0.0#
+            Dim wm = 0.0#
+            Dim Zcm = 0.0#
+            Dim MMm = 0.0#
+            Do
+                If Vz(i) <> 0 Then
+                    Vcm += Vz(i) * Vc(i)
+                    wm += Vz(i) * W(i)
+                    Zcm += Vz(i) * Zc(i)
+                    MMm += Vz(i) * VMM(i)
+                End If
+                i += 1
+            Loop Until i = n + 1
+
+            i = 0
+            Dim Tcm = 0.0#
+            Do
+                j = 0
+                Do
+                    If Vz(i) <> 0 And Vz(j) <> 0 Then Tcm += Vz(i) * Vz(j) * (Tc(i) * Tc(j)) ^ 0.5
+                    j += 1
+                Loop Until j = n + 1
+                i += 1
+            Loop Until i = n + 1
+
+            Dim Pcm = Zcm * R * Tcm / (Vcm)
+
+            a = 0.45724 * R ^ 2 * Tcm ^ 2 / Pcm
+            b = 0.0778 * R * Tcm / Pcm
+            c = 0.37464 + 1.54226 * wm - 0.26992 * wm ^ 2
+
+            Dim Trm = T / Tcm
+            Dim AG = -b * R * T
+            Dim BG = -2 * a * T * (1 + c - c * Trm ^ 0.5) * (-0.5 * c * Trm ^ 0.5)
+            Dim CG = a * (1 + c - c * Trm ^ 0.5) ^ 2
+
+            Dim V As Double = Z * 8.314 * T / P
+
+            Dim dP_dT_V = R / (V - b) - (a * (1 + c) * c * Tcm ^ -0.5 * T ^ -0.5 + a * c ^ 2 * Tcm ^ -1) / (V ^ 2 + 2 * b * V - b ^ 2)
+
+            Dim dP_dV_T = -R * T / (V - b) ^ 2 + (2 * b + 2 * V) * (a * (1 + c) ^ 2 + 2 * a * (1 + c) * c * Tcm ^ -0.5 * T ^ 0.5 + a * c ^ 2 * Tcm ^ -1 * T) / (V ^ 2 + 2 * b * V - b ^ 2) ^ 2
+
+            Dim JT = -(T * dP_dT_V / dP_dV_T + V) / (Cp * MMm)
+
+            JT_PR = JT
+
+        End Function
+
+
         Function Zc1(ByVal w As Double) As Double
 
             Zc1 = 0.291 - 0.08 * w
@@ -283,8 +357,6 @@ Namespace PropertyPackages.Auxiliary
                 V = (Z * R * T / P) ' m3/mol
 
             End If
-
-            Dim tmp1 = MM / V / 1000
 
             Dim DHres = R * T * (Z - 1) + (T * dadT - ai) / (2 ^ 1.5 * bi) * Math.Log((Z + 2.44 * BG1) / (Z - 0.414 * BG1))
 

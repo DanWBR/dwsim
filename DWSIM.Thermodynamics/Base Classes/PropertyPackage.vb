@@ -505,25 +505,25 @@ Namespace PropertyPackages
 
             CurrentMaterialStream = cmst
 
-            cmst.Phases(0).Properties.pressure = P0 + 0.01
+            cmst.Phases(0).Properties.pressure = P0 + 0.0001
 
             Select Case p.Name
                 Case "Mixture"
-                    DW_CalcProp("compressibilityFactor", Phase.Mixture)
+                    'DW_CalcPhaseProps(Phase.Mixture)
                 Case "Vapor"
-                    DW_CalcProp("compressibilityFactor", Phase.Vapor)
+                    DW_CalcPhaseProps(Phase.Vapor)
                 Case "OverallLiquid"
-                    DW_CalcProp("compressibilityFactor", Phase.Liquid)
+                    'DW_CalcPhaseProps(Phase.Liquid)
                 Case "Liquid1"
-                    DW_CalcProp("compressibilityFactor", Phase.Liquid1)
+                    DW_CalcPhaseProps(Phase.Liquid1)
                 Case "Liquid2"
-                    DW_CalcProp("compressibilityFactor", Phase.Liquid2)
+                    DW_CalcPhaseProps(Phase.Liquid2)
                 Case "Liquid3"
-                    DW_CalcProp("compressibilityFactor", Phase.Liquid3)
+                    DW_CalcPhaseProps(Phase.Liquid3)
                 Case "Aqueous"
-                    DW_CalcProp("compressibilityFactor", Phase.Aqueous)
+                    DW_CalcPhaseProps(Phase.Aqueous)
                 Case "Solid"
-                    DW_CalcProp("compressibilityFactor", Phase.Solid)
+                    DW_CalcPhaseProps(Phase.Solid)
             End Select
 
             Z1 = cmst.GetPhase(p.Name).Properties.compressibilityFactor.GetValueOrDefault
@@ -533,13 +533,19 @@ Namespace PropertyPackages
 
             CurrentMaterialStream = cms0
 
-            Return 1 / P0 - 1 / Z * (Z1 - Z) / 0.01
+            Dim K As Double = 1 / P0 - 1 / Z * (Z1 - Z) / 0.0001
+
+            If Double.IsNaN(K) Or Double.IsInfinity(K) Then K = 0.0#
+
+            Return K
 
         End Function
 
         Public Overridable Function CalcBulkModulus(p As IPhase) As Double
 
-            Return 1.0# / CalcIsothermalCompressibility(p)
+            Dim BM As Double = CalcIsothermalCompressibility(p)
+
+            If BM <> 0.0# Then Return 1 / BM Else Return 0.0#
 
         End Function
 
@@ -556,7 +562,33 @@ Namespace PropertyPackages
 
         Public Overridable Function CalcJouleThomsonCoefficient(p As IPhase) As Double
 
-            Return 0.0#
+            Dim T As Double
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+
+            Select Case p.Name
+                Case "Mixture"
+                    Return 0.0#
+                Case "Vapor"
+                    Dim SG = p.Properties.molecularWeight.GetValueOrDefault / 28.97
+                    Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Vapor), AUX_PCM(Phase.Vapor), p.Properties.heatCapacityCp.GetValueOrDefault,
+                                                     "V", SG)
+                Case "OverallLiquid"
+                    Return 0.0#
+                Case "Liquid1"
+                    Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Liquid1), AUX_PCM(Phase.Liquid1), p.Properties.heatCapacityCp.GetValueOrDefault,
+                                                     "L", p.Properties.density.GetValueOrDefault)
+                Case "Liquid2"
+                    Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Liquid2), AUX_PCM(Phase.Liquid2), p.Properties.heatCapacityCp.GetValueOrDefault,
+                                                     "L", p.Properties.density.GetValueOrDefault)
+                Case "Liquid3"
+                    Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Liquid3), AUX_PCM(Phase.Liquid3), p.Properties.heatCapacityCp.GetValueOrDefault,
+                                                     "L", p.Properties.density.GetValueOrDefault)
+                Case "Aqueous"
+                    Return Auxiliary.PROPS.JT_Goldzberg(T, AUX_TCM(Phase.Aqueous), AUX_PCM(Phase.Aqueous), p.Properties.heatCapacityCp.GetValueOrDefault,
+                                                     "L", p.Properties.density.GetValueOrDefault)
+                Case "Solid"
+                    Return 0.0#
+            End Select
 
         End Function
 

@@ -172,7 +172,7 @@ Namespace PropertyPackages.Auxiliary
 
         End Function
 
-        Shared Function JT_Goldzberg(ByVal T As Double, ByVal Tpc As Double, ByVal Ppc As Double, ByVal Cp As Double, ByVal fluido As Double, ByVal SG As Double)
+        Shared Function JT_Goldzberg(ByVal T As Double, ByVal Tpc As Double, ByVal Ppc As Double, ByVal Cp As Double, ByVal fluido As String, ByVal SG As Double)
 
             'T em °F
             T = 5 / 9 * (T + 459.7)
@@ -196,7 +196,7 @@ Namespace PropertyPackages.Auxiliary
 
             'para liquidos
 
-            If fluido = "L" Then eta = -1 / (SG / 16.0185 * Cp)
+            If fluido = "L" Then eta = -1 / (SG * Cp)
 
             JT_Goldzberg = eta / 1.8 / 6894.76 '(K/Pa)
 
@@ -759,96 +759,6 @@ Namespace PropertyPackages.Auxiliary
             tmp(2) = Cv / MMm
 
             CpCvR = tmp
-
-        End Function
-
-        Shared Function JT_PR(ByVal TIPO, ByVal T, ByVal P, ByVal Vz, ByVal Vzmass, ByVal VTc, ByVal VPc, ByVal VCpig, ByVal VMM, ByVal Vw, ByVal VZRa)
-
-            Dim n, R, Cpm_ig As Double
-            Dim vetor(8) As Double
-            Dim Tc(), Pc(), Vc(), W(), Zc(), a, b, c, Tr() As Double
-
-            n = Vz.Length - 1
-
-            ReDim Zc(n), Tc(n), Pc(n), Vc(n), W(n), Tr(n)
-
-            R = 8.314
-
-            Dim i, j As Integer
-            i = 0
-            Do
-                Tc(i) = VTc(i)
-                Tr(i) = T / Tc(i)
-                Pc(i) = VPc(i)
-                W(i) = Vw(i)
-                Vc(i) = Zc1(W(i)) * R * Tc(i) / Pc(i)
-                i = i + 1
-            Loop Until i = n + 1
-
-            i = 0
-            Dim Vcm = 0.0#
-            Dim wm = 0.0#
-            Dim Zcm = 0.0#
-            Dim MMm = 0.0#
-            Dim ZRam = 0.0#
-            Do
-                If Vz(i) <> 0 Then
-                    Vcm += Vz(i) * Vc(i)
-                    wm += Vz(i) * W(i)
-                    Zcm += Vz(i) * Zc1(W(i))
-                    MMm += Vz(i) * VMM(i)
-                    ZRam = Vz(i) * VZRa(i)
-                End If
-                i += 1
-            Loop Until i = n + 1
-
-            i = 0
-            Dim Tcm = 0.0#
-            Do
-                j = 0
-                Do
-                    If Vz(i) <> 0 And Vz(j) <> 0 Then Tcm += Vz(i) * Vz(j) * (Tc(i) * Tc(j)) ^ 0.5
-                    j += 1
-                Loop Until j = n + 1
-                i += 1
-            Loop Until i = n + 1
-
-            Dim Pcm = Zcm * R * Tcm / (Vcm)
-
-            Dim V = 0.0#
-            If TIPO = "L" Then
-
-                'V = (Z_PR(T, P, Vz, VTc, VPc, Vw, "L") * R * T / P) * 1000 ' m3/kgmol
-
-            ElseIf TIPO = "V" Then
-
-                'V = (Z_PR(T, P, Vz, VTc, VPc, Vw, "V") * R * T / P) * 1000 ' m3/kgmol
-
-            End If
-
-            a = 0.45724 * R ^ 2 * Tcm ^ 2 / Pcm
-            b = 0.0778 * R * Tcm / Pcm
-            c = 0.37464 + 1.54226 * wm - 0.26992 * wm ^ 2
-
-            Dim Trm = T / Tcm
-            Dim AG = -b * R * T
-            Dim BG = -2 * a * T * (1 + c - c * Trm ^ 0.5) * (-0.5 * c * Trm ^ 0.5)
-            Dim CG = a * (1 + c - c * Trm ^ 0.5) ^ 2
-
-            Dim dP_dT_V = R / (V - b) - (a * (1 + c) * c * Tcm ^ -0.5 * T ^ -0.5 + a * c ^ 2 * Tcm ^ -1) / (V ^ 2 + 2 * b * V - b ^ 2)
-
-            Dim dP_dV_T = -R * T / (V - b) ^ 2 + (2 * b + 2 * V) * (a * (1 + c) ^ 2 + 2 * a * (1 + c) * c * Tcm ^ -0.5 * T ^ 0.5 + a * c ^ 2 * Tcm ^ -1 * T) / (V ^ 2 + 2 * b * V - b ^ 2) ^ 2
-
-            Cpm_ig = 0.0#
-            i = 0
-            Do
-                Cpm_ig += Vzmass(i) * VCpig(i)
-                i += 1
-            Loop Until i = n + 1
-
-            Dim JT = -(T * dP_dT_V / dP_dV_T + V) / (Cpm_ig * MMm)
-
-            JT_PR = JT
 
         End Function
 
