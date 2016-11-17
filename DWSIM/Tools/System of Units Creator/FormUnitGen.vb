@@ -236,6 +236,18 @@ Public Class FormUnitGen
             .Add(New Object() {DWSIM.App.GetLocalString("FilterMediumResistance")})
             .Item(.Count - 1).Cells(1) = cb
 
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.compressibility))
+            cb.Value = currentset.isothermalCompressibility
+            .Add(New Object() {DWSIM.App.GetLocalString("IsothermalCompressibility")})
+            .Item(.Count - 1).Cells(1) = cb
+
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient))
+            cb.Value = currentset.jouleThomsonCoefficient
+            .Add(New Object() {DWSIM.App.GetLocalString("JouleThomsonCoefficient")})
+            .Item(.Count - 1).Cells(1) = cb
+
         End With
     End Sub
 

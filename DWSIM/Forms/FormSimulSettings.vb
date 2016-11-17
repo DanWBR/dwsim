@@ -298,6 +298,7 @@ Public Class FormSimulSettings
             .Add(New String() {DWSIM.App.GetLocalString("MolarEnthalpy"), su.molar_enthalpy, DWSIM.App.GetLocalString("MolarEntropy"), su.molar_entropy})
             .Add(New String() {DWSIM.App.GetLocalString("Velocity"), su.velocity, DWSIM.App.GetLocalString("HXFoulingFactor"), su.foulingfactor})
             .Add(New String() {DWSIM.App.GetLocalString("FilterSpecificCakeResistance"), su.cakeresistance, DWSIM.App.GetLocalString("FilterMediumResistance"), su.mediumresistance})
+            .Add(New String() {DWSIM.App.GetLocalString("IsothermalCompressibility"), su.compressibility, DWSIM.App.GetLocalString("JouleThomsonCoefficient"), su.jouleThomsonCoefficient})
         End With
 
         If ComboBox2.SelectedIndex <= 2 Then
@@ -595,6 +596,20 @@ Public Class FormSimulSettings
             .Style.Tag = 36
         End With
 
+        With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(1), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.compressibility))
+            .Value = su.compressibility
+            .Style.Tag = 35
+        End With
+
+        With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(3), DataGridViewComboBoxCell)
+            .Items.Clear()
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient))
+            .Value = su.jouleThomsonCoefficient
+            .Style.Tag = 36
+        End With
+
         FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
 
         FrmChild.UpdateOpenEditForms()
@@ -756,6 +771,14 @@ Public Class FormSimulSettings
                     member = "mediumresistance"
                     oldvalue = su.mediumresistance
                     su.mediumresistance = cell.Value
+                Case 35
+                    member = "isothermalcompressibility"
+                    oldvalue = su.compressibility
+                    su.compressibility = cell.Value
+                Case 36
+                    member = "joulethomsoncoefficient"
+                    oldvalue = su.jouleThomsonCoefficient
+                    su.jouleThomsonCoefficient = cell.Value
             End Select
 
             If initialized And Not DWSIM.App.IsRunningOnMono Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
