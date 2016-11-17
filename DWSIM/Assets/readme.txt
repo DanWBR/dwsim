@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.0 Update 35 - November 2016
+Version 4.1 - November 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
