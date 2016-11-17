@@ -1235,6 +1235,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Módulo de Elasticidade.
+        '''</summary>
+        Friend Shared ReadOnly Property BulkModulus() As String
+            Get
+                Return ResourceManager.GetString("BulkModulus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Cabeçalho.
         '''</summary>
         Friend Shared ReadOnly Property Cabealho() As String
@@ -2095,6 +2104,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property CompressibilidadeCrt() As String
             Get
                 Return ResourceManager.GetString("CompressibilidadeCrt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Fator de Compressibilidade.
+        '''</summary>
+        Friend Shared ReadOnly Property CompressibilityFactor() As String
+            Get
+                Return ResourceManager.GetString("CompressibilityFactor", resourceCulture)
             End Get
         End Property
         
@@ -6976,7 +6994,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração molar da Phase.
+        '''  Looks up a localized string similar to Fração Molar.
         '''</summary>
         Friend Shared ReadOnly Property FraomolardaPhase() As String
             Get
@@ -7075,7 +7093,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Fração mássica da Phase.
+        '''  Looks up a localized string similar to Fração Mássica.
         '''</summary>
         Friend Shared ReadOnly Property FraomssicadaPhase() As String
             Get
@@ -7228,6 +7246,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Energia Livre de Gibbs Específica.
+        '''</summary>
+        Friend Shared ReadOnly Property GibbsEnergy() As String
+            Get
+                Return ResourceManager.GetString("GibbsEnergy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Gradiente?.
         '''</summary>
         Friend Shared ReadOnly Property Gradiente() As String
@@ -7354,6 +7381,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Capacidade Calorífica (Cp).
+        '''</summary>
+        Friend Shared ReadOnly Property HeatCapacityCp() As String
+            Get
+                Return ResourceManager.GetString("HeatCapacityCp", resourceCulture)
+            End Get
+        End Property
+
+        '''<summary>
+        '''  Looks up a localized string similar to Cp/Cv.
+        '''</summary>
+        Friend Shared ReadOnly Property HeatCapacityRatio() As String
+            Get
+                Return ResourceManager.GetString("HeatCapacityRatio", resourceCulture)
+            End Get
+        End Property
+
+        '''<summary>
         '''  Looks up a localized string similar to Modo de Cálculo.
         '''</summary>
         Friend Shared ReadOnly Property HeaterCoolerCalcMode() As String
@@ -7422,6 +7467,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property HeatTransferArea() As String
             Get
                 Return ResourceManager.GetString("HeatTransferArea", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Energia Livre de Helmholtz Específica.
+        '''</summary>
+        Friend Shared ReadOnly Property HelmholtzEnergy() As String
+            Get
+                Return ResourceManager.GetString("HelmholtzEnergy", resourceCulture)
             End Get
         End Property
         
@@ -7912,6 +7966,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Energia Interna Específica.
+        '''</summary>
+        Friend Shared ReadOnly Property InternalEnergy() As String
+            Get
+                Return ResourceManager.GetString("InternalEnergy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Expressão inválida na célula.
         '''</summary>
         Friend Shared ReadOnly Property Invalidexpressiononcell() As String
@@ -7935,6 +7998,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property IsGradientBackground() As String
             Get
                 Return ResourceManager.GetString("IsGradientBackground", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Compressibilidade Isotérmica.
+        '''</summary>
+        Friend Shared ReadOnly Property IsothermalCompressibility() As String
+            Get
+                Return ResourceManager.GetString("IsothermalCompressibility", resourceCulture)
             End Get
         End Property
         
@@ -8034,6 +8106,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Joelhoem90() As String
             Get
                 Return ResourceManager.GetString("Joelhoem90", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Coeficiente Joule-Thomson.
+        '''</summary>
+        Friend Shared ReadOnly Property JouleThomsonCoefficient() As String
+            Get
+                Return ResourceManager.GetString("JouleThomsonCoefficient", resourceCulture)
             End Get
         End Property
         
@@ -8943,6 +9024,33 @@ Namespace My.Resources
         Friend Shared ReadOnly Property MolarEntropy() As String
             Get
                 Return ResourceManager.GetString("MolarEntropy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Energia Livre de Gibbs Molar.
+        '''</summary>
+        Friend Shared ReadOnly Property MolarGibbsEnergy() As String
+            Get
+                Return ResourceManager.GetString("MolarGibbsEnergy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Energia Livre de Helmholtz Molar.
+        '''</summary>
+        Friend Shared ReadOnly Property MolarHelmholtzEnergy() As String
+            Get
+                Return ResourceManager.GetString("MolarHelmholtzEnergy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Energia Interna Molar.
+        '''</summary>
+        Friend Shared ReadOnly Property MolarInternalEnergy() As String
+            Get
+                Return ResourceManager.GetString("MolarInternalEnergy", resourceCulture)
             End Get
         End Property
         
@@ -13605,6 +13713,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property SpecSource() As String
             Get
                 Return ResourceManager.GetString("SpecSource", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Velocidade do Som.
+        '''</summary>
+        Friend Shared ReadOnly Property SpeedOfSound() As String
+            Get
+                Return ResourceManager.GetString("SpeedOfSound", resourceCulture)
             End Get
         End Property
         

@@ -1270,4 +1270,232 @@
     <value>Diámetro Interno de Tubo</value>
     <comment>1</comment>
   </data>
+  <data name="PROP_MS_155" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_156" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_157" xml:space="preserve">
+    <value>Velocidade do Som na Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_158" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_159" xml:space="preserve">
+    <value>Energia Interna da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_160" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_161" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_162" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_163" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_164" xml:space="preserve">
+    <value>Velocidade do Som na Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_165" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_166" xml:space="preserve">
+    <value>Energia Interna da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_167" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_168" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_169" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_170" xml:space="preserve">
+    <value>Velocidade do Som na Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_171" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_172" xml:space="preserve">
+    <value>Energia Interna da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_173" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_174" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_175" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_176" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_177" xml:space="preserve">
+    <value>Velocidade do Som na Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_178" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_179" xml:space="preserve">
+    <value>Energia Interna da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_180" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_181" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_182" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_183" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_184" xml:space="preserve">
+    <value>Velocidade do Som na Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_185" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_186" xml:space="preserve">
+    <value>Energia Interna da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_187" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_188" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_189" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_190" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_191" xml:space="preserve">
+    <value>Velocidade do Som na Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_192" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_193" xml:space="preserve">
+    <value>Energia Interna da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_194" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_195" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_196" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_198" xml:space="preserve">
+    <value>Módulo de Elasticidade da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_199" xml:space="preserve">
+    <value>Velocidade do Som na Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_200" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_201" xml:space="preserve">
+    <value>Energia Interna da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_202" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_203" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_204" xml:space="preserve">
+    <value>Compressibilidade Isotérmica da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_205" xml:space="preserve">
+    <value>Energia Interna da Mistura</value>
+  </data>
+  <data name="PROP_MS_206" xml:space="preserve">
+    <value>Energia Livre de Gibbs da Mistura</value>
+  </data>
+  <data name="PROP_MS_207" xml:space="preserve">
+    <value>Energia Livre de Helmholtz da Mistura</value>
+  </data>
+  <data name="PROP_MS_208" xml:space="preserve">
+    <value>Energia Interna Molar da Mistura</value>
+  </data>
+  <data name="PROP_MS_209" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Mistura</value>
+  </data>
+  <data name="PROP_MS_210" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Mistura</value>
+  </data>
+  <data name="PROP_MS_211" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_212" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_213" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Vapor</value>
+  </data>
+  <data name="PROP_MS_214" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_215" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_216" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Líquida (Mistura)</value>
+  </data>
+  <data name="PROP_MS_217" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_218" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_219" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Líquida 1</value>
+  </data>
+  <data name="PROP_MS_220" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_221" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_222" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Líquida 2</value>
+  </data>
+  <data name="PROP_MS_223" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_224" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_225" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Líquida 3</value>
+  </data>
+  <data name="PROP_MS_226" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_227" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_228" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Aquosa</value>
+  </data>
+  <data name="PROP_MS_229" xml:space="preserve">
+    <value>Energia Interna Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_230" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar da Fase Sólida</value>
+  </data>
+  <data name="PROP_MS_231" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar da Fase Sólida</value>
+  </data>
 </root>

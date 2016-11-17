@@ -1840,7 +1840,7 @@
     <value>Cumulative Molar Fraction</value>
   </data>
   <data name="FraomolardaPhase" xml:space="preserve">
-    <value>Phase molar fraction</value>
+    <value>Phase Molar Fraction</value>
   </data>
   <data name="FraomolardaPhasePhaseL" xml:space="preserve">
     <value>Phase molar fraction (Liquid Phase)</value>
@@ -1873,7 +1873,7 @@
     <value>Mass Fraction</value>
   </data>
   <data name="FraomssicadaPhase" xml:space="preserve">
-    <value>Phase mass fraction</value>
+    <value>Phase Mass Fraction</value>
   </data>
   <data name="FraomssicadaPhasePhase" xml:space="preserve">
     <value>Phase mass fraction (Vapor Phase)</value>
@@ -3745,13 +3745,13 @@
     <value>&lt;empty&gt;</value>
   </data>
   <data name="Vazomolar" xml:space="preserve">
-    <value>Molar flow rate</value>
+    <value>Molar Flow Rate</value>
   </data>
   <data name="Vazomolardacorrente" xml:space="preserve">
     <value>Molar flow rate of the stream</value>
   </data>
   <data name="Vazomssica" xml:space="preserve">
-    <value>Mass flow rate</value>
+    <value>Mass Flow Rate</value>
   </data>
   <data name="Vazomssicadacorrente" xml:space="preserve">
     <value>Mass flow rate of the stream</value>
@@ -5386,5 +5386,44 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="MultipleReactionPhasesNotSupported" xml:space="preserve">
     <value>Multiple reaction phases are not supported.</value>
+  </data>
+  <data name="BulkModulus" xml:space="preserve">
+    <value>Bulk Modulus</value>
+  </data>
+  <data name="GibbsEnergy" xml:space="preserve">
+    <value>Gibbs Free Energy</value>
+  </data>
+  <data name="HelmholtzEnergy" xml:space="preserve">
+    <value>Helmholtz Free Energy</value>
+  </data>
+  <data name="InternalEnergy" xml:space="preserve">
+    <value>Internal Energy</value>
+  </data>
+  <data name="IsothermalCompressibility" xml:space="preserve">
+    <value>Isothermal Compressibility</value>
+  </data>
+  <data name="JouleThomsonCoefficient" xml:space="preserve">
+    <value>Joule Thomson Coefficient</value>
+  </data>
+  <data name="MolarGibbsEnergy" xml:space="preserve">
+    <value>Molar Gibbs Free Energy</value>
+  </data>
+  <data name="MolarHelmholtzEnergy" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy</value>
+  </data>
+  <data name="MolarInternalEnergy" xml:space="preserve">
+    <value>Molar Internal Energy</value>
+  </data>
+  <data name="SpeedOfSound" xml:space="preserve">
+    <value>Speed of Sound</value>
+  </data>
+  <data name="CompressibilityFactor" xml:space="preserve">
+    <value>Compressibility Factor</value>
+  </data>
+  <data name="HeatCapacityCp" xml:space="preserve">
+    <value>Heat Capacity (Cp)</value>
+  </data>
+  <data name="HeatCapacityRatio" xml:space="preserve">
+    <value>Heat Capacity Ratio (Cp/Cv)</value>
   </data>
 </root>

@@ -284,7 +284,7 @@ Namespace Streams
             Select Case phasename
                 Case "Vapor"
                     Return Phases(2)
-                Case "LiquidMixture"
+                Case "LiquidMixture", "OverallLiquid"
                     Return Phases(1)
                 Case "Liquid1"
                     Return Phases(3)
@@ -530,6 +530,11 @@ Namespace Streams
                             .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
                         End If
                     End If
+
+                    'calculate additional properties
+
+                    .CalcAdditionalPhaseProperties()
+
                     If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
                         .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                         .DW_CalcLiqMixtureProps()

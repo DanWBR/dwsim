@@ -5384,4 +5384,13 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="MultipleReactionPhasesNotSupported" xml:space="preserve">
     <value>Multiple reaction phases are not supported.</value>
   </data>
+  <data name="CompressibilityFactor" xml:space="preserve">
+    <value>Compressibility Factor</value>
+  </data>
+  <data name="HeatCapacityCp" xml:space="preserve">
+    <value>Heat Capacity (Cp)</value>
+  </data>
+  <data name="HeatCapacityRatio" xml:space="preserve">
+    <value>Heat Capacity Ratio (Cp/Cv)</value>
+  </data>
 </root>

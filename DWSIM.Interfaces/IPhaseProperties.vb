@@ -51,8 +51,6 @@
     Property molar_gibbs_free_energy As Nullable(Of Double)
     Property helmholtz_energy As Nullable(Of Double)
     Property molar_helmholtz_energy As Nullable(Of Double)
-    Property joule_thomson_coeff As Nullable(Of Double)
-    Property speed_of_sound As Nullable(Of Double)
     Property bulk_modulus As Nullable(Of Double)
     Property isothermal_compressibility As Nullable(Of Double)
 

@@ -1177,15 +1177,12 @@ Namespace BaseClasses
 
         Public Property isothermal_compressibility As Double? Implements Interfaces.IPhaseProperties.isothermal_compressibility
 
-        Public Property joule_thomson_coeff As Double? Implements Interfaces.IPhaseProperties.joule_thomson_coeff
-
         Public Property molar_gibbs_free_energy As Double? Implements Interfaces.IPhaseProperties.molar_gibbs_free_energy
 
         Public Property molar_helmholtz_energy As Double? Implements Interfaces.IPhaseProperties.molar_helmholtz_energy
 
         Public Property molar_internal_energy As Double? Implements Interfaces.IPhaseProperties.molar_internal_energy
 
-        Public Property speed_of_sound As Double? Implements Interfaces.IPhaseProperties.speed_of_sound
 
     End Class
 

@@ -620,21 +620,153 @@
   <data name="PROP_MS_154" xml:space="preserve">
     <value>Leistung</value>
   </data>
+  <data name="PROP_MS_155" xml:space="preserve">
+    <value>Isothermal Compressibility (Vapor)</value>
+  </data>
+  <data name="PROP_MS_156" xml:space="preserve">
+    <value>Bulk Modulus (Vapor)</value>
+  </data>
+  <data name="PROP_MS_157" xml:space="preserve">
+    <value>Speed of Sound (Vapor)</value>
+  </data>
+  <data name="PROP_MS_158" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Vapor)</value>
+  </data>
+  <data name="PROP_MS_159" xml:space="preserve">
+    <value>Internal Energy (Vapor)</value>
+  </data>
   <data name="PROP_MS_16" xml:space="preserve">
     <value>Molare Enthalpie Dampfphase</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_MS_160" xml:space="preserve">
+    <value>Gibbs Free Energy (Vapor)</value>
+  </data>
+  <data name="PROP_MS_161" xml:space="preserve">
+    <value>Helmholtz Free Energy (Vapor)</value>
+  </data>
+  <data name="PROP_MS_162" xml:space="preserve">
+    <value>Isothermal Compressibility (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_163" xml:space="preserve">
+    <value>Bulk Modulus (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_164" xml:space="preserve">
+    <value>Speed of Sound (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_165" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_166" xml:space="preserve">
+    <value>Internal Energy (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_167" xml:space="preserve">
+    <value>Gibbs Free Energy (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_168" xml:space="preserve">
+    <value>Helmholtz Free Energy (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_169" xml:space="preserve">
+    <value>Bulk Modulus (Liquid 1)</value>
   </data>
   <data name="PROP_MS_17" xml:space="preserve">
     <value>Molare Entropie Dampfphase</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_MS_170" xml:space="preserve">
+    <value>Speed of Sound (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_171" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_172" xml:space="preserve">
+    <value>Internal Energy (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_173" xml:space="preserve">
+    <value>Gibbs Free Energy (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_174" xml:space="preserve">
+    <value>Helmholtz Free Energy (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_175" xml:space="preserve">
+    <value>Isothermal Compressibility (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_176" xml:space="preserve">
+    <value>Bulk Modulus (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_177" xml:space="preserve">
+    <value>Speed of Sound (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_178" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_179" xml:space="preserve">
+    <value>Internal Energy (Liquid 2)</value>
+  </data>
   <data name="PROP_MS_18" xml:space="preserve">
     <value>Wärmeleitfähigkeit Dampfphase</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_MS_180" xml:space="preserve">
+    <value>Gibbs Free Energy (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_181" xml:space="preserve">
+    <value>Helmholtz Free Energy (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_182" xml:space="preserve">
+    <value>Isothermal Compressibility (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_183" xml:space="preserve">
+    <value>Bulk Modulus (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_184" xml:space="preserve">
+    <value>Speed of Sound (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_185" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_186" xml:space="preserve">
+    <value>Internal Energy (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_187" xml:space="preserve">
+    <value>Gibbs Free Energy (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_188" xml:space="preserve">
+    <value>Helmholtz Free Energy (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_189" xml:space="preserve">
+    <value>Isothermal Compressibility (Liquid 3)</value>
+  </data>
   <data name="PROP_MS_19" xml:space="preserve">
     <value>Kinematische Viskosität Dampfphase</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_MS_190" xml:space="preserve">
+    <value>Bulk Modulus (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_191" xml:space="preserve">
+    <value>Speed of Sound (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_192" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_193" xml:space="preserve">
+    <value>Internal Energy (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_194" xml:space="preserve">
+    <value>Gibbs Free Energy (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_195" xml:space="preserve">
+    <value>Helmholtz Free Energy (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_196" xml:space="preserve">
+    <value>Isothermal Compressibility (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_198" xml:space="preserve">
+    <value>Bulk Modulus (Solid)</value>
+  </data>
+  <data name="PROP_MS_199" xml:space="preserve">
+    <value>Speed of Sound (Solid)</value>
   </data>
   <data name="PROP_MS_2" xml:space="preserve">
     <value>Massenstrom</value>
@@ -644,17 +776,113 @@
     <value>Dynamische Viskosität Dampfphase</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_MS_200" xml:space="preserve">
+    <value>Joule-Thomson Coefficient (Solid)</value>
+  </data>
+  <data name="PROP_MS_201" xml:space="preserve">
+    <value>Internal Energy (Solid)</value>
+  </data>
+  <data name="PROP_MS_202" xml:space="preserve">
+    <value>Gibbs Free Energy (Solid)</value>
+  </data>
+  <data name="PROP_MS_203" xml:space="preserve">
+    <value>Helmholtz Free Energy (Solid)</value>
+  </data>
+  <data name="PROP_MS_204" xml:space="preserve">
+    <value>Isothermal Compressibility (Solid)</value>
+  </data>
+  <data name="PROP_MS_205" xml:space="preserve">
+    <value>Internal Energy (Mixture)</value>
+  </data>
+  <data name="PROP_MS_206" xml:space="preserve">
+    <value>Gibbs Free Energy (Mixture)</value>
+  </data>
+  <data name="PROP_MS_207" xml:space="preserve">
+    <value>Helmholtz Free Energy (Mixture)</value>
+  </data>
+  <data name="PROP_MS_208" xml:space="preserve">
+    <value>Molar Internal Energy (Mixture)</value>
+  </data>
+  <data name="PROP_MS_209" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Mixture)</value>
+  </data>
   <data name="PROP_MS_21" xml:space="preserve">
     <value>Wärmekapazität (Cp) Dampfphase</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_MS_210" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Mixture)</value>
+  </data>
+  <data name="PROP_MS_211" xml:space="preserve">
+    <value>Molar Internal Energy (Vapor)</value>
+  </data>
+  <data name="PROP_MS_212" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Vapor)</value>
+  </data>
+  <data name="PROP_MS_213" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Vapor)</value>
+  </data>
+  <data name="PROP_MS_214" xml:space="preserve">
+    <value>Molar Internal Energy (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_215" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_216" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_217" xml:space="preserve">
+    <value>Molar Internal Energy (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_218" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Liquid 1)</value>
+  </data>
+  <data name="PROP_MS_219" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Liquid 1)</value>
   </data>
   <data name="PROP_MS_22" xml:space="preserve">
     <value>Adiabatenexponent (Cp/Cv) Dampfphase</value>
     <comment>0</comment>
   </data>
+  <data name="PROP_MS_220" xml:space="preserve">
+    <value>Molar Internal Energy (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_221" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_222" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Liquid 2)</value>
+  </data>
+  <data name="PROP_MS_223" xml:space="preserve">
+    <value>Molar Internal Energy (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_224" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_225" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Liquid 3)</value>
+  </data>
+  <data name="PROP_MS_226" xml:space="preserve">
+    <value>Molar Internal Energy (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_227" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_228" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_229" xml:space="preserve">
+    <value>Molar Internal Energy (Solid)</value>
+  </data>
   <data name="PROP_MS_23" xml:space="preserve">
     <value>Massenstrom Dampfphase</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_MS_230" xml:space="preserve">
+    <value>Molar Gibbs Free Energy (Solid)</value>
+  </data>
+  <data name="PROP_MS_231" xml:space="preserve">
+    <value>Molar Helmholtz Free Energy (Solid)</value>
   </data>
   <data name="PROP_MS_24" xml:space="preserve">
     <value>Molenstrom Dampfphase</value>

@@ -34,6 +34,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports System.Reflection
 Imports System.Runtime.InteropServices
+Imports DWSIM.Thermodynamics.Streams
 
 Namespace PropertyPackages
 
@@ -468,6 +469,146 @@ Namespace PropertyPackages
 
         End Sub
 
+        Public Sub CalcAdditionalPhaseProperties() Implements IPropertyPackage.CalcAdditionalPhaseProperties
+
+            For Each p As IPhase In Me.CurrentMaterialStream.Phases.Values
+                If p.Name <> "Mixture" And p.Name <> "OverallLiquid" Then
+                    With p.Properties
+                        .isothermal_compressibility = CalcIsothermalCompressibility(p)
+                        .bulk_modulus = CalcBulkModulus(p)
+                        .speedOfSound = CalcSpeedOfSound(p)
+                        .jouleThomsonCoefficient = CalcJouleThomsonCoefficient(p)
+                    End With
+                    CalcInternalEnergy(p)
+                    CalcGibbsFreeEnergy(p)
+                    CalcHelmholtzEnergy(p)
+                End If
+            Next
+
+        End Sub
+
+        Public Overridable Function CalcIsothermalCompressibility(p As IPhase) As Double
+
+            Dim Z, P0, T, Z1 As Double
+
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+            Z = p.Properties.compressibilityFactor.GetValueOrDefault
+
+            Dim cms0, cmst As MaterialStream
+
+            cms0 = CurrentMaterialStream
+            cmst = CurrentMaterialStream.Clone
+
+            cmst.SetFlowsheet(cms0.FlowSheet)
+            cmst.PropertyPackage = Me
+
+            CurrentMaterialStream = cmst
+
+            cmst.Phases(0).Properties.pressure = P0 + 0.01
+
+            Select Case p.Name
+                Case "Mixture"
+                    DW_CalcProp("compressibilityFactor", Phase.Mixture)
+                Case "Vapor"
+                    DW_CalcProp("compressibilityFactor", Phase.Vapor)
+                Case "OverallLiquid"
+                    DW_CalcProp("compressibilityFactor", Phase.Liquid)
+                Case "Liquid1"
+                    DW_CalcProp("compressibilityFactor", Phase.Liquid1)
+                Case "Liquid2"
+                    DW_CalcProp("compressibilityFactor", Phase.Liquid2)
+                Case "Liquid3"
+                    DW_CalcProp("compressibilityFactor", Phase.Liquid3)
+                Case "Aqueous"
+                    DW_CalcProp("compressibilityFactor", Phase.Aqueous)
+                Case "Solid"
+                    DW_CalcProp("compressibilityFactor", Phase.Solid)
+            End Select
+
+            Z1 = cmst.GetPhase(p.Name).Properties.compressibilityFactor.GetValueOrDefault
+
+            cmst.Dispose()
+            cmst = Nothing
+
+            CurrentMaterialStream = cms0
+
+            Return 1 / P0 - 1 / Z * (Z1 - Z) / 0.01
+
+        End Function
+
+        Public Overridable Function CalcBulkModulus(p As IPhase) As Double
+
+            Return 1.0# / CalcIsothermalCompressibility(p)
+
+        End Function
+
+        Public Overridable Function CalcSpeedOfSound(p As IPhase) As Double
+
+            Dim K, rho As Double
+
+            K = p.Properties.bulk_modulus.GetValueOrDefault
+            rho = p.Properties.density.GetValueOrDefault
+
+            Return (K / rho) ^ 0.5
+
+        End Function
+
+        Public Overridable Function CalcJouleThomsonCoefficient(p As IPhase) As Double
+
+            Return 0.0#
+
+        End Function
+
+        Public Sub CalcInternalEnergy(p As IPhase)
+
+            Dim H, P0, V, T, Z, MW, U As Double
+
+            H = p.Properties.enthalpy.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            Z = p.Properties.compressibilityFactor.GetValueOrDefault
+            MW = p.Properties.molecularWeight.GetValueOrDefault
+
+            V = Z * 8314 * T / P0
+
+            U = H - P0 * V / MW
+
+            If Double.IsNaN(U) Then U = 0.0#
+
+            p.Properties.internal_energy = U
+            p.Properties.molar_internal_energy = U * MW
+
+        End Sub
+
+        Public Sub CalcGibbsFreeEnergy(p As IPhase)
+
+            Dim H, S, T, MW As Double
+
+            H = p.Properties.enthalpy.GetValueOrDefault
+            S = p.Properties.entropy.GetValueOrDefault
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            MW = p.Properties.molecularWeight.GetValueOrDefault
+
+            p.Properties.gibbs_free_energy = H - T * S
+            p.Properties.molar_gibbs_free_energy = (H - T * S) * MW
+
+        End Sub
+
+        Public Sub CalcHelmholtzEnergy(p As IPhase)
+
+            Dim U, S, T, MW As Double
+
+            U = p.Properties.internal_energy.GetValueOrDefault
+            S = p.Properties.entropy.GetValueOrDefault
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            MW = p.Properties.molecularWeight.GetValueOrDefault
+
+            p.Properties.helmholtz_energy = U - T * S
+            p.Properties.molar_helmholtz_energy = (U - T * S) * MW
+
+        End Sub
+
         ''' <summary>
         ''' Provides a wrapper function for CAPE-OPEN CalcProp/CalcSingleProp functions.
         ''' </summary>
@@ -866,6 +1007,7 @@ Namespace PropertyPackages
         Public Overridable Sub DW_CalcOverallProps()
 
             Dim HL, HV, HS, SL, SV, SS, DL, DV, DS, CPL, CPV, CPS, KL, KV, KS, CVL, CVV, CSV As Nullable(Of Double)
+            Dim UL, UV, US, GL, GV, GS, AL, AV, AS_ As Double
             Dim xl, xv, xs, wl, wv, ws, vl, vv, vs, result As Double
 
             xl = Me.CurrentMaterialStream.Phases(1).Properties.molarfraction.GetValueOrDefault
@@ -925,6 +1067,27 @@ Namespace PropertyPackages
             result = wl * SL.GetValueOrDefault + wv * SV.GetValueOrDefault + ws * SS.GetValueOrDefault
             Me.CurrentMaterialStream.Phases(0).Properties.entropy = result
 
+            UL = Me.CurrentMaterialStream.Phases(1).Properties.internal_energy.GetValueOrDefault
+            UV = Me.CurrentMaterialStream.Phases(2).Properties.internal_energy.GetValueOrDefault
+            US = Me.CurrentMaterialStream.Phases(7).Properties.internal_energy.GetValueOrDefault
+
+            result = wl * UL + wv * UV + ws * US
+            Me.CurrentMaterialStream.Phases(0).Properties.internal_energy = result
+
+            GL = Me.CurrentMaterialStream.Phases(1).Properties.gibbs_free_energy.GetValueOrDefault
+            GV = Me.CurrentMaterialStream.Phases(2).Properties.gibbs_free_energy.GetValueOrDefault
+            GS = Me.CurrentMaterialStream.Phases(7).Properties.gibbs_free_energy.GetValueOrDefault
+
+            result = wl * GL + wv * GV + ws * GS
+            Me.CurrentMaterialStream.Phases(0).Properties.gibbs_free_energy = result
+
+            AL = Me.CurrentMaterialStream.Phases(1).Properties.helmholtz_energy.GetValueOrDefault
+            AV = Me.CurrentMaterialStream.Phases(2).Properties.helmholtz_energy.GetValueOrDefault
+            AS_ = Me.CurrentMaterialStream.Phases(7).Properties.helmholtz_energy.GetValueOrDefault
+
+            result = wl * AL + wv * AV + ws * AS_
+            Me.CurrentMaterialStream.Phases(0).Properties.helmholtz_energy = result
+
             Me.CurrentMaterialStream.Phases(0).Properties.compressibilityFactor = Nothing
 
             CPL = Me.CurrentMaterialStream.Phases(1).Properties.heatCapacityCp.GetValueOrDefault
@@ -948,6 +1111,12 @@ Namespace PropertyPackages
             Me.CurrentMaterialStream.Phases(0).Properties.molar_enthalpy = result
             result = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(0).Properties.molecularWeight.GetValueOrDefault
             Me.CurrentMaterialStream.Phases(0).Properties.molar_entropy = result
+            result = Me.CurrentMaterialStream.Phases(0).Properties.internal_energy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(0).Properties.molecularWeight.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(0).Properties.molar_internal_energy = result
+            result = Me.CurrentMaterialStream.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(0).Properties.molecularWeight.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(0).Properties.molar_gibbs_free_energy = result
+            result = Me.CurrentMaterialStream.Phases(0).Properties.helmholtz_energy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(0).Properties.molecularWeight.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(0).Properties.molar_helmholtz_energy = result
 
             KL = Me.CurrentMaterialStream.Phases(1).Properties.thermalConductivity.GetValueOrDefault
             KV = Me.CurrentMaterialStream.Phases(2).Properties.thermalConductivity.GetValueOrDefault
@@ -1124,6 +1293,7 @@ Namespace PropertyPackages
         Public Overridable Sub DW_CalcLiqMixtureProps()
 
             Dim hl, hl1, hl2, hl3, hw, sl, sl1, sl2, sl3, sw, dl, dl1, dl2, dl3, dw As Double
+            Dim ul, ul1, ul2, ul3, uw, gl, gl1, gl2, gl3, gw, al, al1, al2, al3, aw As Double
             Dim cpl, cpl1, cpl2, cpl3, cpw, cvl, cvl1, cvl2, cvl3, cvw As Double
             Dim kl, kl1, kl2, kl3, kw, vil, vil1, vil2, vil3, viw As Double
             Dim xl, xl1, xl2, xl3, xw, wl, wl1, wl2, wl3, ww As Double
@@ -1246,6 +1416,33 @@ Namespace PropertyPackages
 
             Me.CurrentMaterialStream.Phases(1).Properties.entropy = sl / wl
 
+            ul1 = Me.CurrentMaterialStream.Phases(3).Properties.internal_energy.GetValueOrDefault
+            ul2 = Me.CurrentMaterialStream.Phases(4).Properties.internal_energy.GetValueOrDefault
+            ul3 = Me.CurrentMaterialStream.Phases(5).Properties.internal_energy.GetValueOrDefault
+            uw = Me.CurrentMaterialStream.Phases(6).Properties.internal_energy.GetValueOrDefault
+
+            ul = ul1 * wl1 + ul2 * ul2 + ul3 * ul3 + uw * ww
+
+            Me.CurrentMaterialStream.Phases(1).Properties.internal_energy = ul / wl
+
+            gl1 = Me.CurrentMaterialStream.Phases(3).Properties.gibbs_free_energy.GetValueOrDefault
+            gl2 = Me.CurrentMaterialStream.Phases(4).Properties.gibbs_free_energy.GetValueOrDefault
+            gl3 = Me.CurrentMaterialStream.Phases(5).Properties.gibbs_free_energy.GetValueOrDefault
+            gw = Me.CurrentMaterialStream.Phases(6).Properties.gibbs_free_energy.GetValueOrDefault
+
+            gl = gl1 * wl1 + gl2 * wl2 + gl3 * wl3 + gw * ww
+
+            Me.CurrentMaterialStream.Phases(1).Properties.gibbs_free_energy = gl / wl
+
+            al1 = Me.CurrentMaterialStream.Phases(3).Properties.helmholtz_energy.GetValueOrDefault
+            al2 = Me.CurrentMaterialStream.Phases(4).Properties.helmholtz_energy.GetValueOrDefault
+            al3 = Me.CurrentMaterialStream.Phases(5).Properties.helmholtz_energy.GetValueOrDefault
+            aw = Me.CurrentMaterialStream.Phases(6).Properties.helmholtz_energy.GetValueOrDefault
+
+            al = al1 * wl1 + al2 * wl2 + al3 * wl3 + aw * ww
+
+            Me.CurrentMaterialStream.Phases(1).Properties.helmholtz_energy = al / wl
+
             cpl1 = Me.CurrentMaterialStream.Phases(3).Properties.heatCapacityCp.GetValueOrDefault
             cpl2 = Me.CurrentMaterialStream.Phases(4).Properties.heatCapacityCp.GetValueOrDefault
             cpl3 = Me.CurrentMaterialStream.Phases(5).Properties.heatCapacityCp.GetValueOrDefault
@@ -1274,6 +1471,15 @@ Namespace PropertyPackages
 
             result = Me.CurrentMaterialStream.Phases(1).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(1).Properties.molecularWeight.GetValueOrDefault
             Me.CurrentMaterialStream.Phases(1).Properties.molar_entropy = result
+
+            result = Me.CurrentMaterialStream.Phases(1).Properties.internal_energy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(1).Properties.molecularWeight.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(1).Properties.molar_internal_energy = result
+
+            result = Me.CurrentMaterialStream.Phases(1).Properties.gibbs_free_energy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(1).Properties.molecularWeight.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(1).Properties.molar_gibbs_free_energy = result
+
+            result = Me.CurrentMaterialStream.Phases(1).Properties.helmholtz_energy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(1).Properties.molecularWeight.GetValueOrDefault
+            Me.CurrentMaterialStream.Phases(1).Properties.molar_helmholtz_energy = result
 
             kl1 = Me.CurrentMaterialStream.Phases(3).Properties.thermalConductivity.GetValueOrDefault
             kl2 = Me.CurrentMaterialStream.Phases(4).Properties.thermalConductivity.GetValueOrDefault

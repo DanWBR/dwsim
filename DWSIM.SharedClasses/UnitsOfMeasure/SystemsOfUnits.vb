@@ -238,7 +238,7 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"kJ/kmol", "cal/mol", "BTU/lbmol"})
                 Case Enums.UnitOfMeasure.molar_entropy
                     units.AddRange(New String() {"kJ/[kmol.K]", "cal/[mol.C]", "BTU/[lbmol.R]"})
-                Case Enums.UnitOfMeasure.velocity
+                Case Enums.UnitOfMeasure.velocity, Enums.UnitOfMeasure.speedOfSound
                     units.AddRange(New String() {"m/s", "cm/s", "mm/s", "km/h", "ft/h", "ft/min", "ft/s", "in/s"})
                 Case Enums.UnitOfMeasure.foulingfactor
                     units.AddRange(New String() {"K.m2/W", "C.cm2.s/cal", "ft2.h.F/BTU"})
@@ -248,12 +248,17 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"m-1", "cm-1", "ft-1"})
                 Case Enums.UnitOfMeasure.mass
                     units.AddRange(New String() {"kg", "g", "lb"})
+                Case Enums.UnitOfMeasure.jouleThomsonCoefficient
+                    units.AddRange(New String() {"K/Pa", "F/psi", "C/atm"})
+                Case Enums.UnitOfMeasure.compressibility
+                    units.AddRange(New String() {"1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"})
             End Select
 
             Return units
 
         End Function
 
+        Public Property isothermalCompressibility As String Implements IUnitsOfMeasure.isothermalCompressibility
     End Class
 
     <System.Serializable()> Public Class SI
@@ -265,7 +270,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "SI"
-
+                .jouleThomsonCoefficient = "K/Pa"
                 .accel = "m2/s"
                 .area = "m2"
                 .diameter = "mm"
@@ -294,7 +299,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "K"
                 .activity = "Pa"
                 .activityCoefficient = "-"
-                .compressibility = "Pa-1"
+                .compressibility = "1/Pa"
                 .compressibilityFactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
@@ -349,6 +354,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "C1"
+                .jouleThomsonCoefficient = "K/Pa"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -378,7 +384,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "C"
                 .activity = "Pa"
                 .activityCoefficient = "-"
-                .compressibility = "Pa-1"
+                .compressibility = "1/Pa"
                 .compressibilityFactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
@@ -433,6 +439,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "C2"
+                .jouleThomsonCoefficient = "K/Pa"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -462,7 +469,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "C"
                 .activity = "Pa"
                 .activityCoefficient = "-"
-                .compressibility = "Pa-1"
+                .compressibility = "1/Pa"
                 .compressibilityFactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
@@ -517,6 +524,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "C3"
+                .jouleThomsonCoefficient = "K/Pa"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -546,7 +554,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "C"
                 .activity = "Pa"
                 .activityCoefficient = "-"
-                .compressibility = "Pa-1"
+                .compressibility = "1/Pa"
                 .compressibilityFactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
@@ -601,6 +609,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "C4"
+                .jouleThomsonCoefficient = "K/Pa"
 
                 .accel = "m/s2"
                 .area = "m2"
@@ -630,7 +639,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "C"
                 .activity = "Pa"
                 .activityCoefficient = "-"
-                .compressibility = "Pa-1"
+                .compressibility = "1/Pa"
                 .compressibilityFactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
@@ -686,6 +695,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C5"
 
+                .jouleThomsonCoefficient = "K/Pa"
                 .accel = "m/s2"
                 .area = "m2"
                 .diameter = "mm"
@@ -714,7 +724,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "C"
                 .activity = "Pa"
                 .activityCoefficient = "-"
-                .compressibility = "Pa-1"
+                .compressibility = "1/Pa"
                 .compressibilityFactor = "-"
                 .density = "kg/m3"
                 .enthalpy = "kJ/kg"
@@ -770,6 +780,7 @@ Namespace SystemsOfUnits
 
                 .Name = "ENG"
 
+                .jouleThomsonCoefficient = "F/psi"
                 .gor = "ft3/bbl"
 
                 .accel = "ft/s2"
@@ -800,7 +811,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "R"
                 .activity = "lbf/ft2"
                 .activityCoefficient = "-"
-                .compressibility = "ft2/lbf"
+                .compressibility = "1/psi"
                 .compressibilityFactor = "-"
                 .density = "lbm/ft3"
                 .enthalpy = "BTU/lbm"
@@ -856,6 +867,7 @@ Namespace SystemsOfUnits
 
                 .Name = "CGS"
 
+                .jouleThomsonCoefficient = "C/atm"
                 .accel = "cm/s2"
                 .area = "cm2"
                 .diameter = "mm"
@@ -884,7 +896,7 @@ Namespace SystemsOfUnits
                 .pdp_meltingTemperature = "C"
                 .activity = "atm"
                 .activityCoefficient = "-"
-                .compressibility = "atm-1"
+                .compressibility = "1/atm"
                 .compressibilityFactor = "-"
                 .density = "g/cm3"
                 .enthalpy = "cal/g"
@@ -952,6 +964,24 @@ Namespace SystemsOfUnits
 
             Select Case units
 
+                Case "K/Pa"
+                    Return value
+                Case "C/atm"
+                    Return (value + 273.15) / 101325
+                Case "F/psi"
+                    Return ((value - 32) * 5 / 9 + 273.15) * 0.000145038
+
+                Case "1/kPa"
+                    Return value * 0.001
+                Case "1/MPa"
+                    Return value * 0.000001
+                Case "1/psi"
+                    Return value * 0.000145038
+                Case "1/bar"
+                    Return value / 100000
+                Case "1/atm"
+                    Return value / 101325
+            
                 Case "ft3/bbl"
                     Return value * 0.177295
                 Case "g"
@@ -1368,6 +1398,24 @@ Namespace SystemsOfUnits
         Public Shared Function ConvertFromSI(ByVal units As String, ByVal value As Double) As Double
 
             Select Case units
+
+                Case "K/Pa"
+                    Return value
+                Case "C/atm"
+                    Return (value - 273.15) * 101325
+                Case "F/psi"
+                    Return ((value - 273.15) * 9 / 5 + 32) / 0.000145038
+
+                Case "1/kPa"
+                    Return value / 0.001
+                Case "1/MPa"
+                    Return value / 0.000001
+                Case "1/psi"
+                    Return value / 0.000145038
+                Case "1/bar"
+                    Return value * 100000
+                Case "1/atm"
+                    Return value * 101325
 
                 Case "ft3/bbl"
                     Return value / 0.177295

@@ -32,6 +32,8 @@
 
     Sub DisplayEditingForm()
 
+    Sub CalcAdditionalPhaseProperties()
+
 End Interface
 
 Public Interface IPhaseEnvelopeOptions

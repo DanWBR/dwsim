@@ -291,24 +291,18 @@ Public Class MaterialStreamEditor
 
         With grid.Rows
 
-            refval = p.Properties.enthalpy.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.enthalpy, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("EntalpiaEspecfica"), val, units.enthalpy})
-            refval = p.Properties.entropy.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.entropy, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("EntropiaEspecfica"), val, units.entropy})
-            refval = p.Properties.molar_enthalpy.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_enthalpy, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarEnthalpy"), val, units.molar_enthalpy})
-            refval = p.Properties.molar_entropy.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_entropy, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarEntropy"), val, units.molar_entropy})
-            refval = p.Properties.molecularWeight.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.molecularWeight, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Massamolar"), val, units.molecularWeight})
-            refval = p.Properties.density.GetValueOrDefault
-            If refval.HasValue Then val = Converter.ConvertFromSI(units.density, refval)
-            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Massaespecfica"), val, units.density})
+            If p.Name <> "Mixture" Then
+                refval = p.Properties.molarfraction.GetValueOrDefault
+                If refval.HasValue Then val = Format(refval, nf)
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomolardaPhase"), val})
+                refval = p.Properties.massfraction.GetValueOrDefault
+                If refval.HasValue Then val = refval
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomssicadaPhase"), val})
+                refval = p.Properties.compressibilityFactor.GetValueOrDefault
+                If refval.HasValue Then val = refval
+                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("CompressibilityFactor"), val})
+            End If
+
             refval = p.Properties.massflow.GetValueOrDefault / Convert.ToDouble(p.Properties.density.GetValueOrDefault)
             If refval.HasValue Then val = Converter.ConvertFromSI(units.volumetricFlow, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("VazoTP"), val, units.volumetricFlow})
@@ -319,34 +313,86 @@ Public Class MaterialStreamEditor
             If refval.HasValue Then val = Converter.ConvertFromSI(units.molarflow, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Vazomolar"), val, units.molarflow})
 
-            If p.Name <> "Mixture" Then
-                refval = p.Properties.molarfraction.GetValueOrDefault
-                If refval.HasValue Then val = Format(refval, nf)
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomolardaPhase"), val})
-                refval = p.Properties.massfraction.GetValueOrDefault
-                If refval.HasValue Then val = refval
-                .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("FraomssicadaPhase"), val})
-                refval = p.Properties.compressibilityFactor.GetValueOrDefault
-                If refval.HasValue Then val = refval
-                .Add(New Object() {"Z", val})
-            End If
+            refval = p.Properties.enthalpy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("EntalpiaEspecfica"), val, units.enthalpy})
+            refval = p.Properties.molar_enthalpy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarEnthalpy"), val, units.molar_enthalpy})
+
+            refval = p.Properties.entropy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.entropy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("EntropiaEspecfica"), val, units.entropy})
+            refval = p.Properties.molar_entropy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_entropy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarEntropy"), val, units.molar_entropy})
+
+            refval = p.Properties.internal_energy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("InternalEnergy"), val, units.enthalpy})
+            refval = p.Properties.molar_internal_energy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarInternalEnergy"), val, units.molar_enthalpy})
+
+            refval = p.Properties.gibbs_free_energy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("GibbsEnergy"), val, units.enthalpy})
+            refval = p.Properties.molar_gibbs_free_energy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarGibbsEnergy"), val, units.molar_enthalpy})
+
+            refval = p.Properties.helmholtz_energy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("HelmholtzEnergy"), val, units.enthalpy})
+            refval = p.Properties.molar_helmholtz_energy.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molar_enthalpy, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("MolarHelmholtzEnergy"), val, units.molar_enthalpy})
+
+            refval = p.Properties.molecularWeight.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.molecularWeight, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Massamolar"), val, units.molecularWeight})
+            refval = p.Properties.density.GetValueOrDefault
+            If refval.HasValue Then val = Converter.ConvertFromSI(units.density, refval)
+            .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Massaespecfica"), val, units.density})
 
             refval = p.Properties.heatCapacityCp.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.heatCapacityCp, refval)
-            .Add(New Object() {"Cp", val, units.heatCapacityCp})
+            .Add(New Object() {"HeatCapacityCp", val, units.heatCapacityCp})
             refval = p.Properties.heatCapacityCp.GetValueOrDefault / p.Properties.heatCapacityCv.GetValueOrDefault
-            .Add(New Object() {"Cp/Cv", refval.GetValueOrDefault})
+            .Add(New Object() {"HeatCapacityRatio", refval.GetValueOrDefault})
             refval = p.Properties.thermalConductivity.GetValueOrDefault
             If refval.HasValue Then val = Converter.ConvertFromSI(units.thermalConductivity, refval)
             .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Condutividadetrmica"), val, units.thermalConductivity})
 
             If p.Name <> "Mixture" Then
+
+                If Not p.Name.Contains("Overall") Then
+
+                    refval = p.Properties.isothermal_compressibility.GetValueOrDefault
+                    If refval.HasValue Then val = Converter.ConvertFromSI(units.compressibility, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("IsothermalCompressibility"), val, units.compressibility})
+
+                    refval = p.Properties.bulk_modulus.GetValueOrDefault
+                    If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BulkModulus"), val, units.pressure})
+
+                    refval = p.Properties.speedOfSound.GetValueOrDefault
+                    If refval.HasValue Then val = Converter.ConvertFromSI(units.speedOfSound, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("SpeedOfSound"), val, units.speedOfSound})
+
+                    refval = p.Properties.jouleThomsonCoefficient.GetValueOrDefault
+                    If refval.HasValue Then val = Converter.ConvertFromSI(units.jouleThomsonCoefficient, refval)
+                    .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("JouleThomsonCoefficient"), val, units.jouleThomsonCoefficient})
+
+                End If
+
                 refval = p.Properties.kinematic_viscosity.GetValueOrDefault
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.cinematic_viscosity, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadecinemtica"), val, units.cinematic_viscosity})
                 refval = p.Properties.viscosity.GetValueOrDefault
                 If refval.HasValue Then val = Converter.ConvertFromSI(units.viscosity, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("Viscosidadedinmica"), val, units.viscosity})
+
             End If
 
             If MatStream.PropertyPackage.FlashBase.FlashSettings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = True And p.Name = "Mixture" Then

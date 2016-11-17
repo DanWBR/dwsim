@@ -1523,7 +1523,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Fração Molar Cumulativa</value>
   </data>
   <data name="FraomolardaPhase" xml:space="preserve">
-    <value>Fração molar da Phase</value>
+    <value>Fração Molar</value>
   </data>
   <data name="FraomolardaPhasePhaseL" xml:space="preserve">
     <value>Fração molar da Phase (Phase Líquida)</value>
@@ -1556,7 +1556,7 @@ Tensão Superficial da Phase Líquida: Método Brock-Bird</value>
     <value>Fração Mássica</value>
   </data>
   <data name="FraomssicadaPhase" xml:space="preserve">
-    <value>Fração mássica da Phase</value>
+    <value>Fração Mássica</value>
   </data>
   <data name="FraomssicadaPhasePhase" xml:space="preserve">
     <value>Fração mássica da Phase (Phase Vapor)</value>
@@ -5402,5 +5402,44 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="MultipleReactionPhasesNotSupported" xml:space="preserve">
     <value>Reações em diferentes fases não são suportadas por este reator.</value>
+  </data>
+  <data name="BulkModulus" xml:space="preserve">
+    <value>Módulo de Elasticidade</value>
+  </data>
+  <data name="GibbsEnergy" xml:space="preserve">
+    <value>Energia Livre de Gibbs Específica</value>
+  </data>
+  <data name="HelmholtzEnergy" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Específica</value>
+  </data>
+  <data name="InternalEnergy" xml:space="preserve">
+    <value>Energia Interna Específica</value>
+  </data>
+  <data name="IsothermalCompressibility" xml:space="preserve">
+    <value>Compressibilidade Isotérmica</value>
+  </data>
+  <data name="JouleThomsonCoefficient" xml:space="preserve">
+    <value>Coeficiente Joule-Thomson</value>
+  </data>
+  <data name="MolarGibbsEnergy" xml:space="preserve">
+    <value>Energia Livre de Gibbs Molar</value>
+  </data>
+  <data name="MolarHelmholtzEnergy" xml:space="preserve">
+    <value>Energia Livre de Helmholtz Molar</value>
+  </data>
+  <data name="MolarInternalEnergy" xml:space="preserve">
+    <value>Energia Interna Molar</value>
+  </data>
+  <data name="SpeedOfSound" xml:space="preserve">
+    <value>Velocidade do Som</value>
+  </data>
+  <data name="CompressibilityFactor" xml:space="preserve">
+    <value>Fator de Compressibilidade</value>
+  </data>
+  <data name="HeatCapacityCp" xml:space="preserve">
+    <value>Capacidade Calorífica (Cp)</value>
+  </data>
+  <data name="HeatCapacityRatio" xml:space="preserve">
+    <value>Cp/Cv</value>
   </data>
 </root>
