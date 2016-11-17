@@ -967,9 +967,9 @@ Namespace SystemsOfUnits
                 Case "K/Pa"
                     Return value
                 Case "C/atm"
-                    Return (value + 273.15) / 101325
+                    Return value * 101325
                 Case "F/psi"
-                    Return ((value - 32) * 5 / 9 + 273.15) * 0.000145038
+                    Return value / 1.8 * 0.000145038
 
                 Case "1/kPa"
                     Return value * 0.001
@@ -1402,9 +1402,9 @@ Namespace SystemsOfUnits
                 Case "K/Pa"
                     Return value
                 Case "C/atm"
-                    Return (value - 273.15) * 101325
+                    Return value / 101325
                 Case "F/psi"
-                    Return ((value - 273.15) * 9 / 5 + 32) / 0.000145038
+                    Return value * 1.8 / 0.000145038
 
                 Case "1/kPa"
                     Return value / 0.001

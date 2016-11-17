@@ -237,13 +237,13 @@ Public Class FormUnitGen
             .Item(.Count - 1).Cells(1) = cb
 
             cb = New DataGridViewComboBoxCell
-            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.compressibility))
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.compressibility).ToArray)
             cb.Value = currentset.isothermalCompressibility
             .Add(New Object() {DWSIM.App.GetLocalString("IsothermalCompressibility")})
             .Item(.Count - 1).Cells(1) = cb
 
             cb = New DataGridViewComboBoxCell
-            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient))
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient).ToArray)
             cb.Value = currentset.jouleThomsonCoefficient
             .Add(New Object() {DWSIM.App.GetLocalString("JouleThomsonCoefficient")})
             .Item(.Count - 1).Cells(1) = cb

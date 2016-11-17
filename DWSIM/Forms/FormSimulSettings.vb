@@ -598,16 +598,16 @@ Public Class FormSimulSettings
 
         With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(1), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.compressibility))
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.compressibility).ToArray)
             .Value = su.compressibility
-            .Style.Tag = 35
+            .Style.Tag = 37
         End With
 
         With DirectCast(Me.DataGridView1.Rows.Item(17).Cells(3), DataGridViewComboBoxCell)
             .Items.Clear()
-            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient))
+            .Items.AddRange(su.GetUnitSet(UnitOfMeasure.jouleThomsonCoefficient).ToArray)
             .Value = su.jouleThomsonCoefficient
-            .Style.Tag = 36
+            .Style.Tag = 38
         End With
 
         FrmChild.ToolStripComboBoxUnitSystem.SelectedItem = ComboBox2.SelectedItem
@@ -772,11 +772,11 @@ Public Class FormSimulSettings
                     oldvalue = su.mediumresistance
                     su.mediumresistance = cell.Value
                 Case 35
-                    member = "isothermalcompressibility"
+                    member = "compressibility"
                     oldvalue = su.compressibility
                     su.compressibility = cell.Value
                 Case 36
-                    member = "joulethomsoncoefficient"
+                    member = "jouleThomsonCoefficient"
                     oldvalue = su.jouleThomsonCoefficient
                     su.jouleThomsonCoefficient = cell.Value
             End Select
