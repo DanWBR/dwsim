@@ -1183,7 +1183,74 @@ Final3:
 
         End Function
 
-        Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
+        Function JT_SRK(ByVal Z As Double, ByVal T As Double, ByVal P As Double, ByVal Vz As Double(), ByVal VMM As Double(), ByVal VZc As Double(), ByVal VTc As Double(), ByVal VPc As Double(), ByVal Cp As Double, ByVal Vw As Double()) As Double
+
+            Dim n, R As Double
+            Dim vetor(8) As Double
+            Dim Tc(), Pc(), Vc(), W(), Zc(), a, b, c, Tr() As Double
+
+            n = Vz.Length - 1
+
+            ReDim Zc(n), Tc(n), Pc(n), Vc(n), W(n), Tr(n)
+
+            R = 8.314
+
+            Dim i, j As Integer
+            i = 0
+            Do
+                Tc(i) = VTc(i)
+                Tr(i) = T / Tc(i)
+                Pc(i) = VPc(i)
+                W(i) = Vw(i)
+                Zc(i) = VZc(i)
+                Vc(i) = Zc(i) * R * Tc(i) / Pc(i)
+                i = i + 1
+            Loop Until i = n + 1
+
+            i = 0
+            Dim Vcm = 0.0#
+            Dim wm = 0.0#
+            Dim Zcm = 0.0#
+            Dim MMm = 0.0#
+            Do
+                If Vz(i) <> 0 Then
+                    Vcm += Vz(i) * Vc(i)
+                    wm += Vz(i) * W(i)
+                    Zcm += Vz(i) * Zc(i)
+                    MMm += Vz(i) * VMM(i)
+                End If
+                i += 1
+            Loop Until i = n + 1
+
+            i = 0
+            Dim Tcm = 0.0#
+            Do
+                j = 0
+                Do
+                    If Vz(i) <> 0 And Vz(j) <> 0 Then Tcm += Vz(i) * Vz(j) * (Tc(i) * Tc(j)) ^ 0.5
+                    j += 1
+                Loop Until j = n + 1
+                i += 1
+            Loop Until i = n + 1
+
+            Dim Pcm = Zcm * R * Tcm / (Vcm)
+
+            a = 0.42748 * R ^ 2 * Tcm ^ 2 / Pcm
+            b = 0.08664 * R * Tcm / Pcm
+            c = 0.48 + 1.574 * wm - 0.176 * wm ^ 2
+
+            Dim V As Double = Z * 8.314 * T / P
+
+            Dim dP_dT_V = c * (1 - Math.Sqrt(T / Tcm)) / (Tcm * V * (V + b) * Math.Sqrt(T / Tcm)) + R / (V - b)
+            Dim dP_dV_T = (c * (1 - Math.Sqrt(T / Tcm)) ^ 2 + 1) / (V ^ 2 * (V + b)) + (c * (1 - Math.Sqrt(T / Tcm)) ^ 2 + 1) / (V * (V + b) ^ 2) - R * T / (V - b) ^ 2
+
+            Dim JT = -(T * dP_dT_V / dP_dV_T + V) / (Cp * MMm)
+
+            Return JT
+
+        End Function
+
+      Function CalcLnFug(ByVal T, ByVal P, ByVal Vx, ByVal VKij, ByVal VTc, ByVal VPc, ByVal Vw, ByVal VTb, ByVal TIPO)
 
             Dim n, R, coeff(3) As Double
             Dim Vant(0, 4) As Double
@@ -1324,7 +1391,7 @@ Final3:
 
             End If
 
-            beta = 1 / P * (1 - (BG * ZV ^ 2 + AG * ZV - 6 * BG ^ 2 * ZV - 2 * BG * ZV - 2 * AG * BG + 2 * BG ^ 2 + 2 * BG) / (ZV * (3 * ZV ^ 2 - 2 * ZV + 2 * BG * ZV + AG - 3 * BG ^ 2 - 2 * BG)))
+            beta = 1 / P * (1 - (2 * AG * BG + ZV * BG + 2 * BG ^ 2 * ZV - AG * ZV) / (ZV * (3 * ZV ^ 2 - 2 * ZV + AG - BG - BG ^ 2)))
 
             rho0 = 1 / bml
             rho_mc = 0.2599 / bml

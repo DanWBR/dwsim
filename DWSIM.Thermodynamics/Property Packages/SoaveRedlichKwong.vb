@@ -85,6 +85,66 @@ Namespace PropertyPackages
 
 #Region "    DWSIM Functions"
 
+        Public Overrides Function CalcIsothermalCompressibility(p As Interfaces.IPhase) As Double
+
+            Dim T, P0 As Double
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Select Case p.Name
+                Case "Mixture"
+                    Return 0.0#
+                Case "Vapor"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Vapor), P0, T, Me, "SRK")
+                Case "OverallLiquid"
+                    Return 0.0#
+                Case "Liquid1"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid1), P0, T, Me, "SRK")
+                Case "Liquid2"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid2), P0, T, Me, "SRK")
+                Case "Liquid3"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Liquid3), P0, T, Me, "SRK")
+                Case "Aqueous"
+                    Return ThermoPlug.CalcIsothermalCompressibility(RET_VMOL(Phase.Aqueous), P0, T, Me, "SRK")
+                Case "Solid"
+                    Return 0.0#
+            End Select
+
+        End Function
+
+        Public Overrides Function CalcJouleThomsonCoefficient(p As Interfaces.IPhase) As Double
+
+            Dim T, P0 As Double
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Select Case p.Name
+                Case "Mixture"
+                    Return 0.0#
+                Case "Vapor"
+                    Return m_pr.JT_SRK(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Vapor), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
+                                      p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
+                Case "OverallLiquid"
+                    Return 0.0#
+                Case "Liquid1"
+                    Return m_pr.JT_SRK(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid1), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
+                                      p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
+                Case "Liquid2"
+                    Return m_pr.JT_SRK(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid2), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
+                                      p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
+                Case "Liquid3"
+                    Return m_pr.JT_SRK(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Liquid3), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
+                            p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
+                Case "Aqueous"
+                    Return m_pr.JT_SRK(p.Properties.compressibilityFactor.GetValueOrDefault, T, P0, RET_VMOL(Phase.Aqueous), RET_VMM, RET_VZC, RET_VTC, RET_VPC,
+                  p.Properties.heatCapacityCp.GetValueOrDefault, RET_VW)
+                Case "Solid"
+                    Return 0.0#
+            End Select
+
+        End Function
+
+
         Public Function AUX_CM(ByVal Vx As Object) As Double
 
             Dim val As Double
