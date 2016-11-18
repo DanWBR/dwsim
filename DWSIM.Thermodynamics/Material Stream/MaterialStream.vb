@@ -64,7 +64,10 @@ Namespace Streams
 
             MyBase.LoadData(data)
 
-            Me._ppid = (From xel As XElement In data Select xel Where xel.Name = "PropertyPackage").SingleOrDefault.Value
+            Try
+                Me._ppid = (From xel As XElement In data Select xel Where xel.Name = "PropertyPackage").SingleOrDefault.Value
+            Catch ex As Exception
+            End Try
 
             Dim dataPhases As List(Of XElement) = (From xel As XElement In data Select xel Where xel.Name = "Phases").Elements.ToList
 

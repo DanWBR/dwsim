@@ -9968,8 +9968,11 @@ Final3:
             Me.ComponentName = (From el As XElement In data Select el Where el.Name = "ComponentName").SingleOrDefault.Value
             Me.ComponentDescription = (From el As XElement In data Select el Where el.Name = "ComponentDescription").SingleOrDefault.Value
             Me.Tag = (From el As XElement In data Select el Where el.Name = "Tag").SingleOrDefault.Value
-            Me._tpseverity = (From el As XElement In data Select el Where el.Name = "TPSeverity").SingleOrDefault.Value
-            Me._tpcompids = XMLSerializer.XMLSerializer.StringToArray2((From el As XElement In data Select el Where el.Name = "TPCompIDs").SingleOrDefault.Value, ci, Type.GetType("System.String"))
+            Try
+                Me._tpseverity = (From el As XElement In data Select el Where el.Name = "TPSeverity").SingleOrDefault.Value
+                Me._tpcompids = XMLSerializer.XMLSerializer.StringToArray2((From el As XElement In data Select el Where el.Name = "TPCompIDs").SingleOrDefault.Value, ci, Type.GetType("System.String"))
+            Catch ex As Exception
+            End Try
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").SingleOrDefault.Elements.ToList
                 If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))

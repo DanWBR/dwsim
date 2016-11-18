@@ -80,6 +80,8 @@
 
     Sub WriteSpreadsheetVariables()
 
+    Property MobileCompatibilityMode As Boolean
+
 End Interface
 
 Public Interface IFlowsheetBag

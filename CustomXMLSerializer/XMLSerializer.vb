@@ -87,8 +87,10 @@ Public Class XMLSerializer
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Integer Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
-                                Dim val As Integer = xel.Value
-                                obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                If Not xel Is Nothing Then
+                                    Dim val As Integer = xel.Value
+                                    obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Boolean Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
@@ -117,8 +119,10 @@ Public Class XMLSerializer
                                 End Try
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Color Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
-                                Dim val As Color = ColorTranslator.FromHtml(xel.Value)
-                                obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                If Not xel Is Nothing Then
+                                    Dim val As Color = ColorTranslator.FromHtml(xel.Value)
+                                    obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
+                                End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 Dim val As ArrayList = StringToArray(xel.Value, ci)

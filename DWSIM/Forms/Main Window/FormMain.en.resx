@@ -449,13 +449,13 @@
     <value>CAPE-OPEN Component Registration</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Steady-state Simulation (XML) (*.dwxml)|*.dwxml|Steady-state Simulation (Compressed XML) (*.dwxmz)|*.dwxmz|Compound Creator Study (*.dwcsd)|*.dwcsd|Data Regression Study (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Study (*.dwruf)|*.dwruf|All DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf</value>
+    <value>Steady-State Simulation (XML) (*.dwxml)|*.dwxml|Steady-State Simulation (Compressed XML) (*.dwxmz)|*.dwxmz|Steady-State Simulation (Android/iOS) (*.xml)|*.xml|Compound Creator Study (*.dwcsd)|*.dwcsd|Data Regression Study (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Study (*.dwruf)|*.dwruf|All DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf;*.xml</value>
   </data>
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Open existing simulation</value>
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Steady-state simulation (XML) (*.dwxml)|*.dwxml|Steady-state simulation (Compressed XML) (*.dwxmz)|*.dwxmz</value>
+    <value>Steady-State simulation (XML) (*.dwxml)|*.dwxml|Steady-State simulation (Compressed XML) (*.dwxmz)|*.dwxmz|Steady-State simulation (Android/iOS) (*.xml)|*.xml</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Save active simulation</value>

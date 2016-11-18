@@ -364,7 +364,7 @@
 </value>
   </data>
   <data name="DownloadsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="DownloadsToolStripMenuItem.Text" xml:space="preserve">
     <value>Downloads</value>
@@ -391,13 +391,13 @@
 </value>
   </data>
   <data name="WikiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="WikiToolStripMenuItem.Text" xml:space="preserve">
     <value>Wiki</value>
   </data>
   <data name="ForumToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="ForumToolStripMenuItem.Text" xml:space="preserve">
     <value>Fórums</value>
@@ -424,7 +424,7 @@
 </value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 22</value>
+    <value>409, 22</value>
   </data>
   <data name="RastreamentoDeBugsToolStripMenuItem.Text" xml:space="preserve">
     <value>Rastreamento de Bugs / Pedidos de Recursos e Suporte Técnico</value>
@@ -652,7 +652,7 @@
     <value>721, 17</value>
   </metadata>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Simulações do DWSIM (XML) (*.dwxml)|*.dwxml|Simulações do DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz|Estudo do Criador de Componentes|*.dwcsd|Estudo de Regressão de Dados|*.dwrsd|Estudo de Regressão de UNIFAC IPs|*.dwruf|Todos os arquivos do DWSIM|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf</value>
+    <value>Simulações do DWSIM (XML) (*.dwxml)|*.dwxml|Simulações do DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz|Simulações do DWSIM (Android/iOS) (*.xml)|*.xml|Estudo do Criador de Componentes|*.dwcsd|Estudo de Regressão de Dados|*.dwrsd|Estudo de Regressão de UNIFAC IPs|*.dwruf|Todos os arquivos do DWSIM|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf;*.xml</value>
   </data>
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Carregar simulação existente</value>
@@ -661,7 +661,7 @@
     <value>351, 17</value>
   </metadata>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>Simulações do DWSIM (XML) (*.dwxml)|*.dwxml|Simulações do DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz</value>
+    <value>Simulação do DWSIM (XML) (*.dwxml)|*.dwxml|Simulação do DWSIM (XML Comprimido) (*.dwxmz)|*.dwxmz|Simulação do DWSIM (Android/iOS) (*.xml)|*.xml</value>
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Salvar simulação atual</value>

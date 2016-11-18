@@ -1081,6 +1081,241 @@ Public Class FormMain
 
     End Function
 
+    Sub LoadMobileXML(ByVal path As String)
+
+        My.Application.PushUndoRedoAction = False
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        Dim excs As New Concurrent.ConcurrentBag(Of Exception)
+
+        Dim xdoc As XDocument = Nothing
+
+        Using fstr As Stream = File.OpenRead(path)
+            xdoc = XDocument.Load(fstr)
+        End Using
+
+        For Each xel1 As XElement In xdoc.Descendants
+            SharedClasses.Utility.UpdateElementForMobileXML(xel1)
+        Next
+
+        Dim form As FormFlowsheet = New FormFlowsheet()
+        Settings.CAPEOPENMode = False
+        My.Application.ActiveSimulation = form
+
+        Application.DoEvents()
+
+        Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
+
+        Try
+            form.Options.LoadData(data)
+        Catch ex As Exception
+            excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
+        End Try
+
+        Me.filename = path
+
+        form.Options.FilePath = Me.filename
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
+
+        AddGraphicObjects(form, data, excs)
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New ConstantProperties
+                obj.LoadData(xel.Elements.ToList)
+                If My.Settings.IgnoreCompoundPropertiesOnLoad AndAlso AvailableComponents.ContainsKey(obj.Name) Then
+                    form.Options.SelectedComponents.Add(obj.Name, AvailableComponents(obj.Name))
+                Else
+                    form.Options.SelectedComponents.Add(obj.Name, obj)
+                End If
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Compound Information", ex))
+            End Try
+        Next
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                xel.Element("Type").Value = xel.Element("Type").Value.Replace("PortableDTL.DTL.SimulationObjects", "DWSIM.Thermodynamics")
+                Dim obj As PropertyPackage = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                obj.LoadData(xel.Elements.ToList)
+                Dim newID As String = Guid.NewGuid.ToString
+                If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
+                obj.Flowsheet = form
+                form.Options.PropertyPackages.Add(obj.UniqueID, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Property Package Information", ex))
+            End Try
+        Next
+
+        My.Application.ActiveSimulation = form
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects").Elements.ToList
+
+        Dim objlist As New Concurrent.ConcurrentBag(Of SharedClasses.UnitOperations.BaseClass)
+
+        For Each xel In data
+            Try
+                Dim id As String = xel.<Name>.Value
+                Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
+                If xel.Element("Type").Value.Contains("MaterialStream") Then
+                    obj = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                Else
+                    obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
+                End If
+                Dim gobj As GraphicObject = (From go As GraphicObject In
+                                    form.FormSurface.FlowsheetDesignSurface.DrawingObjects Where go.Name = id).SingleOrDefault
+                obj.GraphicObject = gobj
+                gobj.Owner = obj
+                obj.SetFlowsheet(form)
+                If Not gobj Is Nothing Then
+                    obj.LoadData(xel.Elements.ToList)
+                    If TypeOf obj Is Streams.MaterialStream Then
+                        For Each phase As BaseClasses.Phase In DirectCast(obj, Streams.MaterialStream).Phases.Values
+                            For Each c As ConstantProperties In form.Options.SelectedComponents.Values
+                                phase.Compounds(c.Name).ConstantProperties = c
+                            Next
+                        Next
+                    End If
+                End If
+                objlist.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Unit Operation Information", ex))
+            End Try
+        Next
+
+        AddSimulationObjects(form, objlist, excs)
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
+
+        form.Options.ReactionSets.Clear()
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New ReactionSet()
+                obj.LoadData(xel.Elements.ToList)
+                form.Options.ReactionSets.Add(obj.ID, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Reaction Set Information", ex))
+            End Try
+        Next
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New Reaction()
+                obj.LoadData(xel.Elements.ToList)
+                form.Options.Reactions.Add(obj.ID, obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Reaction Information", ex))
+            End Try
+        Next
+
+        Dim sel As XElement = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis")
+
+        If Not sel Is Nothing Then
+
+            data = sel.Elements.ToList
+
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New DWSIM.Optimization.SensitivityAnalysisCase
+                    obj.LoadData(xel.Elements.ToList)
+                    form.Collections.OPT_SensAnalysisCollection.Add(obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Sensitivity Analysis Case Information", ex))
+                End Try
+            Next
+
+        End If
+
+        form.ScriptCollection = New Dictionary(Of String, Script)
+
+        form.Options.NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
+
+        Dim tmpc As BaseClasses.ConstantProperties
+        For Each tmpc In Me.AvailableComponents.Values
+            Dim newc As New BaseClasses.ConstantProperties
+            newc = tmpc
+            If Not form.Options.SelectedComponents.ContainsKey(tmpc.Name) Then
+                form.Options.NotSelectedComponents.Add(tmpc.Name, newc)
+            End If
+        Next
+
+        My.Application.ActiveSimulation = form
+
+        m_childcount += 1
+
+        form.m_IsLoadedFromFile = True
+
+        ' Set DockPanel properties
+        form.dckPanel.ActiveAutoHideContent = Nothing
+        form.dckPanel.Parent = form
+
+        Me.tmpform2 = form
+        form.FormLog.DockPanel = Nothing
+        form.FormMatList.DockPanel = Nothing
+        form.FormSpreadsheet.DockPanel = Nothing
+        form.FormWatch.DockPanel = Nothing
+        form.FormSurface.DockPanel = Nothing
+        form.FormObjects.DockPanel = Nothing
+
+        Try
+            form.FormSpreadsheet.Show(form.dckPanel)
+            form.FormMatList.Show(form.dckPanel)
+            form.FormSurface.Show(form.dckPanel)
+            form.FormObjects.Show(form.dckPanel)
+            form.FormLog.Show(form.dckPanel)
+            form.dckPanel.BringToFront()
+            form.dckPanel.UpdateDockWindowZOrder(DockStyle.Fill, True)
+        Catch ex As Exception
+            excs.Add(New Exception("Error Restoring Window Layout", ex))
+        End Try
+
+        Me.Invalidate()
+        Application.DoEvents()
+
+        Dim mypath As String = path
+        If Not My.Settings.MostRecentFiles.Contains(mypath) And IO.Path.GetExtension(mypath).ToLower <> ".dwbcs" Then
+            My.Settings.MostRecentFiles.Add(mypath)
+            Me.UpdateMRUList()
+        End If
+
+        My.Application.ActiveSimulation = form
+
+        form.MdiParent = Me
+        form.Show()
+        form.Activate()
+
+        form.FrmStSim1.Init(True)
+
+        form.FormSurface.FlowsheetDesignSurface.Invalidate()
+
+        If excs.Count > 0 Then
+            form.WriteToLog("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", Color.DarkRed, MessageType.GeneralError)
+            For Each ex As Exception In excs
+                form.WriteToLog(ex.Message.ToString & ": " & ex.InnerException.ToString, Color.Red, MessageType.GeneralError)
+            Next
+        Else
+            form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("carregadocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+        End If
+
+        form.UpdateFormText()
+
+        Me.ToolStripStatusLabel1.Text = ""
+
+        My.Application.PushUndoRedoAction = True
+
+        Application.DoEvents()
+
+    End Sub
+
     Sub LoadXML(ByVal path As String, Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False)
 
         My.Application.PushUndoRedoAction = False
@@ -1562,7 +1797,7 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
 
-        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.drawingObjects
+        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
             If Not go.IsConnector Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
         Next
 
@@ -1826,6 +2061,18 @@ simx2:              Dim myStream As System.IO.FileStream
                         Me.LoadAndExtractXMLZIP(Me.filename)
                     End If
                 Case 3
+simxm:              Dim myStream As System.IO.FileStream
+                    myStream = Me.OpenFileDialog1.OpenFile()
+                    If Not (myStream Is Nothing) Then
+                        Dim nome = myStream.Name
+                        myStream.Close()
+                        Me.filename = nome
+                        Me.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + nome + "..."
+                        Application.DoEvents()
+                        Application.DoEvents()
+                        Me.LoadMobileXML(Me.filename)
+                    End If
+                Case 4
 csd:                Application.DoEvents()
                     Dim NewMDIChild As New FormCompoundCreator()
                     NewMDIChild.MdiParent = Me
@@ -1841,7 +2088,7 @@ csd:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 4
+                Case 5
 rsd:                Application.DoEvents()
                     Dim NewMDIChild As New FormDataRegression()
                     NewMDIChild.MdiParent = Me
@@ -1857,7 +2104,7 @@ rsd:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 5
+                Case 6
 ruf:                Application.DoEvents()
                     Dim NewMDIChild As New FormUNIFACRegression()
                     NewMDIChild.MdiParent = Me
@@ -1873,12 +2120,14 @@ ruf:                Application.DoEvents()
                         Me.UpdateMRUList()
                     End If
                     NewMDIChild.Activate()
-                Case 6
+                Case 7
                     Select Case Path.GetExtension(Me.OpenFileDialog1.FileName).ToLower()
                         Case ".dwxml"
                             GoTo simx
                         Case ".dwxmz"
                             GoTo simx2
+                        Case ".xml"
+                            GoTo simxm
                         Case ".dwcsd"
                             GoTo csd
                         Case ".dwrsd"

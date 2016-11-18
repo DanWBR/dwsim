@@ -2985,7 +2985,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Get
     End Property
 
-#End Region
 
 
     Private Sub AdicionarUtilitárioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TSMIAddUtility.Click
@@ -3046,5 +3045,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                         If FormSpreadsheet IsNot Nothing Then Me.FormSpreadsheet.WriteAll()
                     End Sub)
     End Sub
+
+    Public Property MobileCompatibilityMode As Boolean = False Implements IFlowsheet.MobileCompatibilityMode
+
+#End Region
 
 End Class
