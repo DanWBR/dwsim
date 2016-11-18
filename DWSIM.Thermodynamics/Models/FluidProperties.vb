@@ -40,7 +40,7 @@ Namespace PropertyPackages.Auxiliary
             'Wilke and Lee (1955) Props of Gases and Liquids 5th edition p. 11.10
 
             Dim LNE As Double = (LNEa * LNEb) ^ 0.5
-            Dim Ta As Double = 1.38064852E-23 * T / LNE
+            Dim Ta As Double = T / LNE
 
             Dim omega As Double = 1.06036 / Ta ^ 0.1561 + 0.193 / Math.Exp(0.47635 * Ta) + 1.03587 / Math.Exp(1.52996 * Ta) + 1.76474 / Math.Exp(3.89411 * Ta)
 
@@ -57,6 +57,8 @@ Namespace PropertyPackages.Auxiliary
         Shared Function CalcLiquidDiffusivity_WilkeAndChang(T As Double, Mb As Double, etab As Double, Va As Double) As Double
 
             Dim fi As Double = 1.0#
+
+            If Double.IsNaN(Mb) Or Double.IsInfinity(Mb) Then Return 0.0#
 
             Select Case Convert.ToInt32(Mb)
                 Case 18 'water

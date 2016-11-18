@@ -200,7 +200,7 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
                 Case Enums.UnitOfMeasure.thermalConductivity
                     units.AddRange(New String() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
-                Case Enums.UnitOfMeasure.cinematic_viscosity, diffusivity
+                Case Enums.UnitOfMeasure.cinematic_viscosity, Enums.UnitOfMeasure.diffusivity
                     units.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s", "cm2/s"})
                 Case Enums.UnitOfMeasure.viscosity
                     units.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})

@@ -701,7 +701,11 @@ Namespace PropertyPackages
                 Dabl = Auxiliary.PROPS.CalcLiquidDiffusivity_WilkeAndChang(T, Mni, p.Properties.viscosity.GetValueOrDefault, subst.PartialVolume.GetValueOrDefault)
 
                 If type = "V" Then
-                    subst.DiffusionCoefficient = Dabv1
+                    If FVi <> 0.0# And FVni <> 0.0# Then
+                        subst.DiffusionCoefficient = Dabv1
+                    Else
+                        subst.DiffusionCoefficient = Dabv2
+                    End If
                 Else
                     subst.DiffusionCoefficient = Dabl
                 End If

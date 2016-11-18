@@ -134,6 +134,7 @@
         viscosityOfVapor
         volume
         volumetricFlow
+        diffusivity
 
     End Enum
 

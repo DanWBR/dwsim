@@ -166,6 +166,8 @@ Public Class MaterialStreamEditor
 
             cbCalculatedAmountsBasis.SelectedIndex = 0
 
+            cbCompoundPhaseProperties.SelectedIndex = 0
+
             If .Calculated Then
 
                 If Not TabControlMain.TabPages.Contains(TabPageResultsComp) Then TabControlMain.TabPages.Insert(1, TabPageResultsComp)
@@ -1352,17 +1354,22 @@ Public Class MaterialStreamEditor
                 For Each row As DataGridViewRow In grid.Rows
                     row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).PartialPressure.GetValueOrDefault
                 Next
+                suffix = units.pressure
             Case 4
                 'Volumes Parciais
                 For Each row As DataGridViewRow In grid.Rows
                     row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).PartialVolume.GetValueOrDefault
                 Next
+                suffix = units.molar_volume
             Case 5
                 'Coeficientes de Difusão
                 For Each row As DataGridViewRow In grid.Rows
                     row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).DiffusionCoefficient.GetValueOrDefault
                 Next
+                suffix = units.diffusivity
         End Select
+
+        If cb Is cbCompoundPhaseProperties Then lblCompPropUnits.Text = suffix
 
     End Sub
 
