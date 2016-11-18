@@ -37,6 +37,10 @@ Partial Class MaterialStreamEditor
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
@@ -172,9 +176,31 @@ Partial Class MaterialStreamEditor
         Me.TabControlMain = New System.Windows.Forms.TabControl()
         Me.TabPageInput = New System.Windows.Forms.TabPage()
         Me.TabPageResultsComp = New System.Windows.Forms.TabPage()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.TabCompoundPhaseProps = New System.Windows.Forms.TabControl()
+        Me.TabCompPropVapor = New System.Windows.Forms.TabPage()
+        Me.gridCompPropVapor = New System.Windows.Forms.DataGridView()
+        Me.TabCompPropLiq1 = New System.Windows.Forms.TabPage()
+        Me.gridCompPropLiq1 = New System.Windows.Forms.DataGridView()
+        Me.TabCompPropLiq2 = New System.Windows.Forms.TabPage()
+        Me.gridCompPropLiq2 = New System.Windows.Forms.DataGridView()
+        Me.TabCompPropSolid = New System.Windows.Forms.TabPage()
+        Me.gridCompPropSolid = New System.Windows.Forms.DataGridView()
+        Me.cbCompoundPhaseProperties = New System.Windows.Forms.ComboBox()
         Me.TabPageResultsProps = New System.Windows.Forms.TabPage()
         Me.TabPageAnnotations = New System.Windows.Forms.TabPage()
         Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.DataGridViewTextBoxColumn32 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn33 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn36 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn37 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn38 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn39 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn40 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn41 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -210,6 +236,18 @@ Partial Class MaterialStreamEditor
         Me.TabControlMain.SuspendLayout()
         Me.TabPageInput.SuspendLayout()
         Me.TabPageResultsComp.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabCompoundPhaseProps.SuspendLayout()
+        Me.TabCompPropVapor.SuspendLayout()
+        CType(Me.gridCompPropVapor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabCompPropLiq1.SuspendLayout()
+        CType(Me.gridCompPropLiq1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabCompPropLiq2.SuspendLayout()
+        CType(Me.gridCompPropLiq2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabCompPropSolid.SuspendLayout()
+        CType(Me.gridCompPropSolid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageResultsProps.SuspendLayout()
         Me.TabPageAnnotations.SuspendLayout()
         Me.SuspendLayout()
@@ -227,6 +265,8 @@ Partial Class MaterialStreamEditor
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip1"))
         '
         'btnUtils
         '
@@ -234,12 +274,15 @@ Partial Class MaterialStreamEditor
         Me.btnUtils.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_sparkle
         Me.btnUtils.Name = "btnUtils"
         Me.ToolTip1.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip1"))
         Me.btnUtils.UseVisualStyleBackColor = True
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip2.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip1"))
         '
         'chkActive
         '
@@ -247,32 +290,43 @@ Partial Class MaterialStreamEditor
         Me.chkActive.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
         Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip1"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip1"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip1"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip1"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip1"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip1"))
         '
         'GroupBox1
         '
@@ -285,12 +339,15 @@ Partial Class MaterialStreamEditor
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip1"))
         '
         'btnDisconnectO
         '
         resources.ApplyResources(Me.btnDisconnectO, "btnDisconnectO")
         Me.btnDisconnectO.Name = "btnDisconnectO"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectO, resources.GetString("btnDisconnectO.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnDisconnectO, resources.GetString("btnDisconnectO.ToolTip1"))
         Me.btnDisconnectO.UseVisualStyleBackColor = True
         '
         'btnDisconnectI
@@ -298,6 +355,7 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.btnDisconnectI, "btnDisconnectI")
         Me.btnDisconnectI.Name = "btnDisconnectI"
         Me.ToolTip1.SetToolTip(Me.btnDisconnectI, resources.GetString("btnDisconnectI.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnDisconnectI, resources.GetString("btnDisconnectI.ToolTip1"))
         Me.btnDisconnectI.UseVisualStyleBackColor = True
         '
         'cbOutlet
@@ -306,11 +364,15 @@ Partial Class MaterialStreamEditor
         Me.cbOutlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet.FormattingEnabled = True
         Me.cbOutlet.Name = "cbOutlet"
+        Me.ToolTip2.SetToolTip(Me.cbOutlet, resources.GetString("cbOutlet.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbOutlet, resources.GetString("cbOutlet.ToolTip1"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip1"))
         '
         'cbInlet
         '
@@ -318,11 +380,15 @@ Partial Class MaterialStreamEditor
         Me.cbInlet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet.FormattingEnabled = True
         Me.cbInlet.Name = "cbInlet"
+        Me.ToolTip2.SetToolTip(Me.cbInlet, resources.GetString("cbInlet.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbInlet, resources.GetString("cbInlet.ToolTip1"))
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip1"))
         '
         'GroupBox3
         '
@@ -335,6 +401,8 @@ Partial Class MaterialStreamEditor
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip1"))
         '
         'btnConfigureFlashAlg
         '
@@ -342,6 +410,7 @@ Partial Class MaterialStreamEditor
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
         Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip1"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -350,6 +419,7 @@ Partial Class MaterialStreamEditor
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
         Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip1"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -358,11 +428,15 @@ Partial Class MaterialStreamEditor
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
+        Me.ToolTip2.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip1"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip1"))
         '
         'cbPropPack
         '
@@ -370,27 +444,37 @@ Partial Class MaterialStreamEditor
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
+        Me.ToolTip2.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip1"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip1"))
         '
         'tbFracSpec
         '
         resources.ApplyResources(Me.tbFracSpec, "tbFracSpec")
         Me.tbFracSpec.Name = "tbFracSpec"
+        Me.ToolTip2.SetToolTip(Me.tbFracSpec, resources.GetString("tbFracSpec.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbFracSpec, resources.GetString("tbFracSpec.ToolTip1"))
         '
         'rbSpecSolid
         '
         resources.ApplyResources(Me.rbSpecSolid, "rbSpecSolid")
         Me.rbSpecSolid.Name = "rbSpecSolid"
+        Me.ToolTip1.SetToolTip(Me.rbSpecSolid, resources.GetString("rbSpecSolid.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.rbSpecSolid, resources.GetString("rbSpecSolid.ToolTip1"))
         Me.rbSpecSolid.UseVisualStyleBackColor = True
         '
         'rbSpecLiquid
         '
         resources.ApplyResources(Me.rbSpecLiquid, "rbSpecLiquid")
         Me.rbSpecLiquid.Name = "rbSpecLiquid"
+        Me.ToolTip1.SetToolTip(Me.rbSpecLiquid, resources.GetString("rbSpecLiquid.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.rbSpecLiquid, resources.GetString("rbSpecLiquid.ToolTip1"))
         Me.rbSpecLiquid.UseVisualStyleBackColor = True
         '
         'rbSpecVapor
@@ -399,12 +483,16 @@ Partial Class MaterialStreamEditor
         Me.rbSpecVapor.Checked = True
         Me.rbSpecVapor.Name = "rbSpecVapor"
         Me.rbSpecVapor.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbSpecVapor, resources.GetString("rbSpecVapor.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.rbSpecVapor, resources.GetString("rbSpecVapor.ToolTip1"))
         Me.rbSpecVapor.UseVisualStyleBackColor = True
         '
         'Label17
         '
         resources.ApplyResources(Me.Label17, "Label17")
         Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip1"))
         '
         'GroupBox6
         '
@@ -420,6 +508,8 @@ Partial Class MaterialStreamEditor
         Me.GroupBox6.Controls.Add(Me.Label16)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip1"))
         '
         'Button1
         '
@@ -427,6 +517,7 @@ Partial Class MaterialStreamEditor
         Me.Button1.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_cross
         Me.Button1.Name = "Button1"
         Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip1"))
         Me.Button1.UseVisualStyleBackColor = True
         '
         'btnCompAcceptChanges
@@ -435,18 +526,22 @@ Partial Class MaterialStreamEditor
         Me.btnCompAcceptChanges.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_tick
         Me.btnCompAcceptChanges.Name = "btnCompAcceptChanges"
         Me.ToolTip1.SetToolTip(Me.btnCompAcceptChanges, resources.GetString("btnCompAcceptChanges.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnCompAcceptChanges, resources.GetString("btnCompAcceptChanges.ToolTip1"))
         Me.btnCompAcceptChanges.UseVisualStyleBackColor = True
         '
         'lblInputAmount
         '
         resources.ApplyResources(Me.lblInputAmount, "lblInputAmount")
         Me.lblInputAmount.Name = "lblInputAmount"
+        Me.ToolTip1.SetToolTip(Me.lblInputAmount, resources.GetString("lblInputAmount.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.lblInputAmount, resources.GetString("lblInputAmount.ToolTip1"))
         '
         'btnEraseInput
         '
         resources.ApplyResources(Me.btnEraseInput, "btnEraseInput")
         Me.btnEraseInput.Name = "btnEraseInput"
         Me.ToolTip1.SetToolTip(Me.btnEraseInput, resources.GetString("btnEraseInput.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnEraseInput, resources.GetString("btnEraseInput.ToolTip1"))
         Me.btnEraseInput.UseVisualStyleBackColor = True
         '
         'btnEqualizeInput
@@ -454,6 +549,7 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.btnEqualizeInput, "btnEqualizeInput")
         Me.btnEqualizeInput.Name = "btnEqualizeInput"
         Me.ToolTip1.SetToolTip(Me.btnEqualizeInput, resources.GetString("btnEqualizeInput.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnEqualizeInput, resources.GetString("btnEqualizeInput.ToolTip1"))
         Me.btnEqualizeInput.UseVisualStyleBackColor = True
         '
         'btnNormalizeInput
@@ -461,17 +557,20 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.btnNormalizeInput, "btnNormalizeInput")
         Me.btnNormalizeInput.Name = "btnNormalizeInput"
         Me.ToolTip1.SetToolTip(Me.btnNormalizeInput, resources.GetString("btnNormalizeInput.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.btnNormalizeInput, resources.GetString("btnNormalizeInput.ToolTip1"))
         Me.btnNormalizeInput.UseVisualStyleBackColor = True
         '
         'gridInputComposition
         '
-        Me.gridInputComposition.AllowUserToAddRows = False
         resources.ApplyResources(Me.gridInputComposition, "gridInputComposition")
+        Me.gridInputComposition.AllowUserToAddRows = False
         Me.gridInputComposition.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridInputComposition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridInputComposition.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.compname, Me.compamount})
         Me.gridInputComposition.Name = "gridInputComposition"
         Me.gridInputComposition.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridInputComposition, resources.GetString("gridInputComposition.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridInputComposition, resources.GetString("gridInputComposition.ToolTip1"))
         '
         'compname
         '
@@ -495,11 +594,15 @@ Partial Class MaterialStreamEditor
         Me.cbCompBasis.FormattingEnabled = True
         Me.cbCompBasis.Items.AddRange(New Object() {resources.GetString("cbCompBasis.Items"), resources.GetString("cbCompBasis.Items1"), resources.GetString("cbCompBasis.Items2"), resources.GetString("cbCompBasis.Items3"), resources.GetString("cbCompBasis.Items4"), resources.GetString("cbCompBasis.Items5"), resources.GetString("cbCompBasis.Items6")})
         Me.cbCompBasis.Name = "cbCompBasis"
+        Me.ToolTip2.SetToolTip(Me.cbCompBasis, resources.GetString("cbCompBasis.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbCompBasis, resources.GetString("cbCompBasis.ToolTip1"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip1"))
         '
         'cbUnitsS
         '
@@ -508,16 +611,22 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsS.FormattingEnabled = True
         Me.cbUnitsS.Items.AddRange(New Object() {resources.GetString("cbUnitsS.Items"), resources.GetString("cbUnitsS.Items1"), resources.GetString("cbUnitsS.Items2")})
         Me.cbUnitsS.Name = "cbUnitsS"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsS, resources.GetString("cbUnitsS.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsS, resources.GetString("cbUnitsS.ToolTip1"))
         '
         'tbEntr
         '
         resources.ApplyResources(Me.tbEntr, "tbEntr")
         Me.tbEntr.Name = "tbEntr"
+        Me.ToolTip2.SetToolTip(Me.tbEntr, resources.GetString("tbEntr.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbEntr, resources.GetString("tbEntr.ToolTip1"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip1"))
         '
         'cbUnitsH
         '
@@ -526,16 +635,22 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsH.FormattingEnabled = True
         Me.cbUnitsH.Items.AddRange(New Object() {resources.GetString("cbUnitsH.Items"), resources.GetString("cbUnitsH.Items1"), resources.GetString("cbUnitsH.Items2")})
         Me.cbUnitsH.Name = "cbUnitsH"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsH, resources.GetString("cbUnitsH.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsH, resources.GetString("cbUnitsH.ToolTip1"))
         '
         'tbEnth
         '
         resources.ApplyResources(Me.tbEnth, "tbEnth")
         Me.tbEnth.Name = "tbEnth"
+        Me.ToolTip2.SetToolTip(Me.tbEnth, resources.GetString("tbEnth.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbEnth, resources.GetString("tbEnth.ToolTip1"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip1"))
         '
         'cbUnitsQ
         '
@@ -544,11 +659,15 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsQ.FormattingEnabled = True
         Me.cbUnitsQ.Items.AddRange(New Object() {resources.GetString("cbUnitsQ.Items"), resources.GetString("cbUnitsQ.Items1"), resources.GetString("cbUnitsQ.Items2")})
         Me.cbUnitsQ.Name = "cbUnitsQ"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsQ, resources.GetString("cbUnitsQ.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsQ, resources.GetString("cbUnitsQ.ToolTip1"))
         '
         'tbVolFlow
         '
         resources.ApplyResources(Me.tbVolFlow, "tbVolFlow")
         Me.tbVolFlow.Name = "tbVolFlow"
+        Me.ToolTip2.SetToolTip(Me.tbVolFlow, resources.GetString("tbVolFlow.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbVolFlow, resources.GetString("tbVolFlow.ToolTip1"))
         '
         'cbUnitsM
         '
@@ -557,11 +676,15 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsM.FormattingEnabled = True
         Me.cbUnitsM.Items.AddRange(New Object() {resources.GetString("cbUnitsM.Items"), resources.GetString("cbUnitsM.Items1"), resources.GetString("cbUnitsM.Items2")})
         Me.cbUnitsM.Name = "cbUnitsM"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsM, resources.GetString("cbUnitsM.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsM, resources.GetString("cbUnitsM.ToolTip1"))
         '
         'tbMoleFlow
         '
         resources.ApplyResources(Me.tbMoleFlow, "tbMoleFlow")
         Me.tbMoleFlow.Name = "tbMoleFlow"
+        Me.ToolTip2.SetToolTip(Me.tbMoleFlow, resources.GetString("tbMoleFlow.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbMoleFlow, resources.GetString("tbMoleFlow.ToolTip1"))
         '
         'cbUnitsW
         '
@@ -570,11 +693,15 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsW.FormattingEnabled = True
         Me.cbUnitsW.Items.AddRange(New Object() {resources.GetString("cbUnitsW.Items"), resources.GetString("cbUnitsW.Items1"), resources.GetString("cbUnitsW.Items2")})
         Me.cbUnitsW.Name = "cbUnitsW"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsW, resources.GetString("cbUnitsW.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsW, resources.GetString("cbUnitsW.ToolTip1"))
         '
         'tbMassFlow
         '
         resources.ApplyResources(Me.tbMassFlow, "tbMassFlow")
         Me.tbMassFlow.Name = "tbMassFlow"
+        Me.ToolTip2.SetToolTip(Me.tbMassFlow, resources.GetString("tbMassFlow.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbMassFlow, resources.GetString("tbMassFlow.ToolTip1"))
         '
         'cbUnitsP
         '
@@ -583,21 +710,29 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsP.FormattingEnabled = True
         Me.cbUnitsP.Items.AddRange(New Object() {resources.GetString("cbUnitsP.Items"), resources.GetString("cbUnitsP.Items1"), resources.GetString("cbUnitsP.Items2")})
         Me.cbUnitsP.Name = "cbUnitsP"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsP, resources.GetString("cbUnitsP.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsP, resources.GetString("cbUnitsP.ToolTip1"))
         '
         'tbPressure
         '
         resources.ApplyResources(Me.tbPressure, "tbPressure")
         Me.tbPressure.Name = "tbPressure"
+        Me.ToolTip2.SetToolTip(Me.tbPressure, resources.GetString("tbPressure.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbPressure, resources.GetString("tbPressure.ToolTip1"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip1"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip1"))
         '
         'cbUnitsT
         '
@@ -606,26 +741,36 @@ Partial Class MaterialStreamEditor
         Me.cbUnitsT.FormattingEnabled = True
         Me.cbUnitsT.Items.AddRange(New Object() {resources.GetString("cbUnitsT.Items"), resources.GetString("cbUnitsT.Items1"), resources.GetString("cbUnitsT.Items2")})
         Me.cbUnitsT.Name = "cbUnitsT"
+        Me.ToolTip2.SetToolTip(Me.cbUnitsT, resources.GetString("cbUnitsT.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbUnitsT, resources.GetString("cbUnitsT.ToolTip1"))
         '
         'tbTemp
         '
         resources.ApplyResources(Me.tbTemp, "tbTemp")
         Me.tbTemp.Name = "tbTemp"
+        Me.ToolTip2.SetToolTip(Me.tbTemp, resources.GetString("tbTemp.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tbTemp, resources.GetString("tbTemp.ToolTip1"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip1"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip1"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip1"))
         '
         'cbSpec
         '
@@ -634,60 +779,66 @@ Partial Class MaterialStreamEditor
         Me.cbSpec.FormattingEnabled = True
         Me.cbSpec.Items.AddRange(New Object() {resources.GetString("cbSpec.Items"), resources.GetString("cbSpec.Items1"), resources.GetString("cbSpec.Items2"), resources.GetString("cbSpec.Items3"), resources.GetString("cbSpec.Items4"), resources.GetString("cbSpec.Items5")})
         Me.cbSpec.Name = "cbSpec"
+        Me.ToolTip2.SetToolTip(Me.cbSpec, resources.GetString("cbSpec.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbSpec, resources.GetString("cbSpec.ToolTip1"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip1"))
         '
         'UtilitiesCtxMenu
         '
+        resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
         Me.UtilitiesCtxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUtilityTSMI})
         Me.UtilitiesCtxMenu.Name = "ContextMenuStrip1"
-        resources.ApplyResources(Me.UtilitiesCtxMenu, "UtilitiesCtxMenu")
+        Me.ToolTip2.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.UtilitiesCtxMenu, resources.GetString("UtilitiesCtxMenu.ToolTip1"))
         '
         'AddUtilityTSMI
         '
+        resources.ApplyResources(Me.AddUtilityTSMI, "AddUtilityTSMI")
         Me.AddUtilityTSMI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DiagramaDeFasesToolStripMenuItem, Me.BinaryTSMI, Me.TernaryTSMI, Me.PetroleumPropsTSMI, Me.HydratesTSMI, Me.TCPTSMI})
         Me.AddUtilityTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.add
         Me.AddUtilityTSMI.Name = "AddUtilityTSMI"
-        resources.ApplyResources(Me.AddUtilityTSMI, "AddUtilityTSMI")
         '
         'DiagramaDeFasesToolStripMenuItem
         '
+        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem, "DiagramaDeFasesToolStripMenuItem")
         Me.DiagramaDeFasesToolStripMenuItem.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.DiagramaDeFasesToolStripMenuItem.Name = "DiagramaDeFasesToolStripMenuItem"
-        resources.ApplyResources(Me.DiagramaDeFasesToolStripMenuItem, "DiagramaDeFasesToolStripMenuItem")
         '
         'BinaryTSMI
         '
+        resources.ApplyResources(Me.BinaryTSMI, "BinaryTSMI")
         Me.BinaryTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.BinaryTSMI.Name = "BinaryTSMI"
-        resources.ApplyResources(Me.BinaryTSMI, "BinaryTSMI")
         '
         'TernaryTSMI
         '
+        resources.ApplyResources(Me.TernaryTSMI, "TernaryTSMI")
         Me.TernaryTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.TernaryTSMI.Name = "TernaryTSMI"
-        resources.ApplyResources(Me.TernaryTSMI, "TernaryTSMI")
         '
         'PetroleumPropsTSMI
         '
+        resources.ApplyResources(Me.PetroleumPropsTSMI, "PetroleumPropsTSMI")
         Me.PetroleumPropsTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.PetroleumPropsTSMI.Name = "PetroleumPropsTSMI"
-        resources.ApplyResources(Me.PetroleumPropsTSMI, "PetroleumPropsTSMI")
         '
         'HydratesTSMI
         '
+        resources.ApplyResources(Me.HydratesTSMI, "HydratesTSMI")
         Me.HydratesTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.HydratesTSMI.Name = "HydratesTSMI"
-        resources.ApplyResources(Me.HydratesTSMI, "HydratesTSMI")
         '
         'TCPTSMI
         '
+        resources.ApplyResources(Me.TCPTSMI, "TCPTSMI")
         Me.TCPTSMI.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.TCPTSMI.Name = "TCPTSMI"
-        resources.ApplyResources(Me.TCPTSMI, "TCPTSMI")
         '
         'rtbAnnotations
         '
@@ -700,35 +851,43 @@ Partial Class MaterialStreamEditor
         Me.rtbAnnotations.ShowSave = False
         Me.rtbAnnotations.ShowUndo = False
         Me.rtbAnnotations.ToolbarVisible = False
+        Me.ToolTip2.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.rtbAnnotations, resources.GetString("rtbAnnotations.ToolTip1"))
         '
         'TabPhaseProps
         '
+        resources.ApplyResources(Me.TabPhaseProps, "TabPhaseProps")
         Me.TabPhaseProps.Controls.Add(Me.tabPropsMix)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsVapor)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsLiqMix)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsLiq1)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsLiq2)
         Me.TabPhaseProps.Controls.Add(Me.tabPropsSolid)
-        resources.ApplyResources(Me.TabPhaseProps, "TabPhaseProps")
         Me.TabPhaseProps.Name = "TabPhaseProps"
         Me.TabPhaseProps.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabPhaseProps, resources.GetString("TabPhaseProps.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.TabPhaseProps, resources.GetString("TabPhaseProps.ToolTip1"))
         '
         'tabPropsMix
         '
-        Me.tabPropsMix.Controls.Add(Me.gridPropertiesMixture)
         resources.ApplyResources(Me.tabPropsMix, "tabPropsMix")
+        Me.tabPropsMix.Controls.Add(Me.gridPropertiesMixture)
         Me.tabPropsMix.Name = "tabPropsMix"
+        Me.ToolTip2.SetToolTip(Me.tabPropsMix, resources.GetString("tabPropsMix.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabPropsMix, resources.GetString("tabPropsMix.ToolTip1"))
         Me.tabPropsMix.UseVisualStyleBackColor = True
         '
         'gridPropertiesMixture
         '
+        resources.ApplyResources(Me.gridPropertiesMixture, "gridPropertiesMixture")
         Me.gridPropertiesMixture.AllowUserToAddRows = False
         Me.gridPropertiesMixture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesMixture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesMixture.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
-        resources.ApplyResources(Me.gridPropertiesMixture, "gridPropertiesMixture")
         Me.gridPropertiesMixture.Name = "gridPropertiesMixture"
         Me.gridPropertiesMixture.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridPropertiesMixture, resources.GetString("gridPropertiesMixture.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridPropertiesMixture, resources.GetString("gridPropertiesMixture.ToolTip1"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -752,20 +911,24 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsVapor
         '
-        Me.tabPropsVapor.Controls.Add(Me.gridPropertiesVapor)
         resources.ApplyResources(Me.tabPropsVapor, "tabPropsVapor")
+        Me.tabPropsVapor.Controls.Add(Me.gridPropertiesVapor)
         Me.tabPropsVapor.Name = "tabPropsVapor"
+        Me.ToolTip2.SetToolTip(Me.tabPropsVapor, resources.GetString("tabPropsVapor.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabPropsVapor, resources.GetString("tabPropsVapor.ToolTip1"))
         Me.tabPropsVapor.UseVisualStyleBackColor = True
         '
         'gridPropertiesVapor
         '
+        resources.ApplyResources(Me.gridPropertiesVapor, "gridPropertiesVapor")
         Me.gridPropertiesVapor.AllowUserToAddRows = False
         Me.gridPropertiesVapor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesVapor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesVapor.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
-        resources.ApplyResources(Me.gridPropertiesVapor, "gridPropertiesVapor")
         Me.gridPropertiesVapor.Name = "gridPropertiesVapor"
         Me.gridPropertiesVapor.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridPropertiesVapor, resources.GetString("gridPropertiesVapor.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridPropertiesVapor, resources.GetString("gridPropertiesVapor.ToolTip1"))
         '
         'DataGridViewTextBoxColumn3
         '
@@ -789,20 +952,24 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsLiqMix
         '
-        Me.tabPropsLiqMix.Controls.Add(Me.gridPropertiesLiqMix)
         resources.ApplyResources(Me.tabPropsLiqMix, "tabPropsLiqMix")
+        Me.tabPropsLiqMix.Controls.Add(Me.gridPropertiesLiqMix)
         Me.tabPropsLiqMix.Name = "tabPropsLiqMix"
+        Me.ToolTip2.SetToolTip(Me.tabPropsLiqMix, resources.GetString("tabPropsLiqMix.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabPropsLiqMix, resources.GetString("tabPropsLiqMix.ToolTip1"))
         Me.tabPropsLiqMix.UseVisualStyleBackColor = True
         '
         'gridPropertiesLiqMix
         '
+        resources.ApplyResources(Me.gridPropertiesLiqMix, "gridPropertiesLiqMix")
         Me.gridPropertiesLiqMix.AllowUserToAddRows = False
         Me.gridPropertiesLiqMix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesLiqMix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesLiqMix.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
-        resources.ApplyResources(Me.gridPropertiesLiqMix, "gridPropertiesLiqMix")
         Me.gridPropertiesLiqMix.Name = "gridPropertiesLiqMix"
         Me.gridPropertiesLiqMix.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridPropertiesLiqMix, resources.GetString("gridPropertiesLiqMix.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridPropertiesLiqMix, resources.GetString("gridPropertiesLiqMix.ToolTip1"))
         '
         'DataGridViewTextBoxColumn6
         '
@@ -826,20 +993,24 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsLiq1
         '
-        Me.tabPropsLiq1.Controls.Add(Me.gridPropertiesLiq1)
         resources.ApplyResources(Me.tabPropsLiq1, "tabPropsLiq1")
+        Me.tabPropsLiq1.Controls.Add(Me.gridPropertiesLiq1)
         Me.tabPropsLiq1.Name = "tabPropsLiq1"
+        Me.ToolTip2.SetToolTip(Me.tabPropsLiq1, resources.GetString("tabPropsLiq1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabPropsLiq1, resources.GetString("tabPropsLiq1.ToolTip1"))
         Me.tabPropsLiq1.UseVisualStyleBackColor = True
         '
         'gridPropertiesLiq1
         '
+        resources.ApplyResources(Me.gridPropertiesLiq1, "gridPropertiesLiq1")
         Me.gridPropertiesLiq1.AllowUserToAddRows = False
         Me.gridPropertiesLiq1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesLiq1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesLiq1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11})
-        resources.ApplyResources(Me.gridPropertiesLiq1, "gridPropertiesLiq1")
         Me.gridPropertiesLiq1.Name = "gridPropertiesLiq1"
         Me.gridPropertiesLiq1.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridPropertiesLiq1, resources.GetString("gridPropertiesLiq1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridPropertiesLiq1, resources.GetString("gridPropertiesLiq1.ToolTip1"))
         '
         'DataGridViewTextBoxColumn9
         '
@@ -863,20 +1034,24 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsLiq2
         '
-        Me.tabPropsLiq2.Controls.Add(Me.gridPropertiesLiq2)
         resources.ApplyResources(Me.tabPropsLiq2, "tabPropsLiq2")
+        Me.tabPropsLiq2.Controls.Add(Me.gridPropertiesLiq2)
         Me.tabPropsLiq2.Name = "tabPropsLiq2"
+        Me.ToolTip2.SetToolTip(Me.tabPropsLiq2, resources.GetString("tabPropsLiq2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabPropsLiq2, resources.GetString("tabPropsLiq2.ToolTip1"))
         Me.tabPropsLiq2.UseVisualStyleBackColor = True
         '
         'gridPropertiesLiq2
         '
+        resources.ApplyResources(Me.gridPropertiesLiq2, "gridPropertiesLiq2")
         Me.gridPropertiesLiq2.AllowUserToAddRows = False
         Me.gridPropertiesLiq2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesLiq2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesLiq2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14})
-        resources.ApplyResources(Me.gridPropertiesLiq2, "gridPropertiesLiq2")
         Me.gridPropertiesLiq2.Name = "gridPropertiesLiq2"
         Me.gridPropertiesLiq2.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridPropertiesLiq2, resources.GetString("gridPropertiesLiq2.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridPropertiesLiq2, resources.GetString("gridPropertiesLiq2.ToolTip1"))
         '
         'DataGridViewTextBoxColumn12
         '
@@ -900,20 +1075,24 @@ Partial Class MaterialStreamEditor
         '
         'tabPropsSolid
         '
-        Me.tabPropsSolid.Controls.Add(Me.gridPropertiesSolid)
         resources.ApplyResources(Me.tabPropsSolid, "tabPropsSolid")
+        Me.tabPropsSolid.Controls.Add(Me.gridPropertiesSolid)
         Me.tabPropsSolid.Name = "tabPropsSolid"
+        Me.ToolTip2.SetToolTip(Me.tabPropsSolid, resources.GetString("tabPropsSolid.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabPropsSolid, resources.GetString("tabPropsSolid.ToolTip1"))
         Me.tabPropsSolid.UseVisualStyleBackColor = True
         '
         'gridPropertiesSolid
         '
+        resources.ApplyResources(Me.gridPropertiesSolid, "gridPropertiesSolid")
         Me.gridPropertiesSolid.AllowUserToAddRows = False
         Me.gridPropertiesSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridPropertiesSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridPropertiesSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17})
-        resources.ApplyResources(Me.gridPropertiesSolid, "gridPropertiesSolid")
         Me.gridPropertiesSolid.Name = "gridPropertiesSolid"
         Me.gridPropertiesSolid.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridPropertiesSolid, resources.GetString("gridPropertiesSolid.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridPropertiesSolid, resources.GetString("gridPropertiesSolid.ToolTip1"))
         '
         'DataGridViewTextBoxColumn15
         '
@@ -939,6 +1118,8 @@ Partial Class MaterialStreamEditor
         '
         resources.ApplyResources(Me.lblAmountTotal, "lblAmountTotal")
         Me.lblAmountTotal.Name = "lblAmountTotal"
+        Me.ToolTip1.SetToolTip(Me.lblAmountTotal, resources.GetString("lblAmountTotal.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.lblAmountTotal, resources.GetString("lblAmountTotal.ToolTip1"))
         '
         'cbCalculatedAmountsBasis
         '
@@ -947,11 +1128,15 @@ Partial Class MaterialStreamEditor
         Me.cbCalculatedAmountsBasis.FormattingEnabled = True
         Me.cbCalculatedAmountsBasis.Items.AddRange(New Object() {resources.GetString("cbCalculatedAmountsBasis.Items"), resources.GetString("cbCalculatedAmountsBasis.Items1"), resources.GetString("cbCalculatedAmountsBasis.Items2"), resources.GetString("cbCalculatedAmountsBasis.Items3"), resources.GetString("cbCalculatedAmountsBasis.Items4"), resources.GetString("cbCalculatedAmountsBasis.Items5"), resources.GetString("cbCalculatedAmountsBasis.Items6")})
         Me.cbCalculatedAmountsBasis.Name = "cbCalculatedAmountsBasis"
+        Me.ToolTip2.SetToolTip(Me.cbCalculatedAmountsBasis, resources.GetString("cbCalculatedAmountsBasis.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbCalculatedAmountsBasis, resources.GetString("cbCalculatedAmountsBasis.ToolTip1"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip1"))
         '
         'TabPhaseComps
         '
@@ -964,23 +1149,29 @@ Partial Class MaterialStreamEditor
         Me.TabPhaseComps.Controls.Add(Me.tabCompSolid)
         Me.TabPhaseComps.Name = "TabPhaseComps"
         Me.TabPhaseComps.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabPhaseComps, resources.GetString("TabPhaseComps.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.TabPhaseComps, resources.GetString("TabPhaseComps.ToolTip1"))
         '
         'tabCompMix
         '
-        Me.tabCompMix.Controls.Add(Me.gridCompMixture)
         resources.ApplyResources(Me.tabCompMix, "tabCompMix")
+        Me.tabCompMix.Controls.Add(Me.gridCompMixture)
         Me.tabCompMix.Name = "tabCompMix"
+        Me.ToolTip2.SetToolTip(Me.tabCompMix, resources.GetString("tabCompMix.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabCompMix, resources.GetString("tabCompMix.ToolTip1"))
         Me.tabCompMix.UseVisualStyleBackColor = True
         '
         'gridCompMixture
         '
+        resources.ApplyResources(Me.gridCompMixture, "gridCompMixture")
         Me.gridCompMixture.AllowUserToAddRows = False
         Me.gridCompMixture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompMixture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompMixture.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn19})
-        resources.ApplyResources(Me.gridCompMixture, "gridCompMixture")
         Me.gridCompMixture.Name = "gridCompMixture"
         Me.gridCompMixture.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompMixture, resources.GetString("gridCompMixture.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompMixture, resources.GetString("gridCompMixture.ToolTip1"))
         '
         'DataGridViewTextBoxColumn18
         '
@@ -998,20 +1189,24 @@ Partial Class MaterialStreamEditor
         '
         'tabCompVapor
         '
-        Me.tabCompVapor.Controls.Add(Me.gridCompVapor)
         resources.ApplyResources(Me.tabCompVapor, "tabCompVapor")
+        Me.tabCompVapor.Controls.Add(Me.gridCompVapor)
         Me.tabCompVapor.Name = "tabCompVapor"
+        Me.ToolTip2.SetToolTip(Me.tabCompVapor, resources.GetString("tabCompVapor.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabCompVapor, resources.GetString("tabCompVapor.ToolTip1"))
         Me.tabCompVapor.UseVisualStyleBackColor = True
         '
         'gridCompVapor
         '
+        resources.ApplyResources(Me.gridCompVapor, "gridCompVapor")
         Me.gridCompVapor.AllowUserToAddRows = False
         Me.gridCompVapor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompVapor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompVapor.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21})
-        resources.ApplyResources(Me.gridCompVapor, "gridCompVapor")
         Me.gridCompVapor.Name = "gridCompVapor"
         Me.gridCompVapor.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompVapor, resources.GetString("gridCompVapor.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompVapor, resources.GetString("gridCompVapor.ToolTip1"))
         '
         'DataGridViewTextBoxColumn20
         '
@@ -1029,20 +1224,24 @@ Partial Class MaterialStreamEditor
         '
         'tabCompLiqMix
         '
-        Me.tabCompLiqMix.Controls.Add(Me.gridCompLiqMix)
         resources.ApplyResources(Me.tabCompLiqMix, "tabCompLiqMix")
+        Me.tabCompLiqMix.Controls.Add(Me.gridCompLiqMix)
         Me.tabCompLiqMix.Name = "tabCompLiqMix"
+        Me.ToolTip2.SetToolTip(Me.tabCompLiqMix, resources.GetString("tabCompLiqMix.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabCompLiqMix, resources.GetString("tabCompLiqMix.ToolTip1"))
         Me.tabCompLiqMix.UseVisualStyleBackColor = True
         '
         'gridCompLiqMix
         '
+        resources.ApplyResources(Me.gridCompLiqMix, "gridCompLiqMix")
         Me.gridCompLiqMix.AllowUserToAddRows = False
         Me.gridCompLiqMix.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompLiqMix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompLiqMix.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23})
-        resources.ApplyResources(Me.gridCompLiqMix, "gridCompLiqMix")
         Me.gridCompLiqMix.Name = "gridCompLiqMix"
         Me.gridCompLiqMix.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompLiqMix, resources.GetString("gridCompLiqMix.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompLiqMix, resources.GetString("gridCompLiqMix.ToolTip1"))
         '
         'DataGridViewTextBoxColumn22
         '
@@ -1060,20 +1259,24 @@ Partial Class MaterialStreamEditor
         '
         'tabCompLiq1
         '
-        Me.tabCompLiq1.Controls.Add(Me.gridCompLiq1)
         resources.ApplyResources(Me.tabCompLiq1, "tabCompLiq1")
+        Me.tabCompLiq1.Controls.Add(Me.gridCompLiq1)
         Me.tabCompLiq1.Name = "tabCompLiq1"
+        Me.ToolTip2.SetToolTip(Me.tabCompLiq1, resources.GetString("tabCompLiq1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabCompLiq1, resources.GetString("tabCompLiq1.ToolTip1"))
         Me.tabCompLiq1.UseVisualStyleBackColor = True
         '
         'gridCompLiq1
         '
+        resources.ApplyResources(Me.gridCompLiq1, "gridCompLiq1")
         Me.gridCompLiq1.AllowUserToAddRows = False
         Me.gridCompLiq1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompLiq1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompLiq1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25})
-        resources.ApplyResources(Me.gridCompLiq1, "gridCompLiq1")
         Me.gridCompLiq1.Name = "gridCompLiq1"
         Me.gridCompLiq1.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompLiq1, resources.GetString("gridCompLiq1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompLiq1, resources.GetString("gridCompLiq1.ToolTip1"))
         '
         'DataGridViewTextBoxColumn24
         '
@@ -1091,20 +1294,24 @@ Partial Class MaterialStreamEditor
         '
         'tabCompLiq2
         '
-        Me.tabCompLiq2.Controls.Add(Me.gridCompLiq2)
         resources.ApplyResources(Me.tabCompLiq2, "tabCompLiq2")
+        Me.tabCompLiq2.Controls.Add(Me.gridCompLiq2)
         Me.tabCompLiq2.Name = "tabCompLiq2"
+        Me.ToolTip2.SetToolTip(Me.tabCompLiq2, resources.GetString("tabCompLiq2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabCompLiq2, resources.GetString("tabCompLiq2.ToolTip1"))
         Me.tabCompLiq2.UseVisualStyleBackColor = True
         '
         'gridCompLiq2
         '
+        resources.ApplyResources(Me.gridCompLiq2, "gridCompLiq2")
         Me.gridCompLiq2.AllowUserToAddRows = False
         Me.gridCompLiq2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompLiq2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompLiq2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn26, Me.DataGridViewTextBoxColumn27})
-        resources.ApplyResources(Me.gridCompLiq2, "gridCompLiq2")
         Me.gridCompLiq2.Name = "gridCompLiq2"
         Me.gridCompLiq2.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompLiq2, resources.GetString("gridCompLiq2.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompLiq2, resources.GetString("gridCompLiq2.ToolTip1"))
         '
         'DataGridViewTextBoxColumn26
         '
@@ -1122,20 +1329,24 @@ Partial Class MaterialStreamEditor
         '
         'tabCompSolid
         '
-        Me.tabCompSolid.Controls.Add(Me.gridCompSolid)
         resources.ApplyResources(Me.tabCompSolid, "tabCompSolid")
+        Me.tabCompSolid.Controls.Add(Me.gridCompSolid)
         Me.tabCompSolid.Name = "tabCompSolid"
+        Me.ToolTip2.SetToolTip(Me.tabCompSolid, resources.GetString("tabCompSolid.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.tabCompSolid, resources.GetString("tabCompSolid.ToolTip1"))
         Me.tabCompSolid.UseVisualStyleBackColor = True
         '
         'gridCompSolid
         '
+        resources.ApplyResources(Me.gridCompSolid, "gridCompSolid")
         Me.gridCompSolid.AllowUserToAddRows = False
         Me.gridCompSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridCompSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridCompSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn28, Me.DataGridViewTextBoxColumn29})
-        resources.ApplyResources(Me.gridCompSolid, "gridCompSolid")
         Me.gridCompSolid.Name = "gridCompSolid"
         Me.gridCompSolid.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompSolid, resources.GetString("gridCompSolid.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompSolid, resources.GetString("gridCompSolid.ToolTip1"))
         '
         'DataGridViewTextBoxColumn28
         '
@@ -1160,9 +1371,12 @@ Partial Class MaterialStreamEditor
         Me.TabControlMain.Controls.Add(Me.TabPageAnnotations)
         Me.TabControlMain.Name = "TabControlMain"
         Me.TabControlMain.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControlMain, resources.GetString("TabControlMain.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.TabControlMain, resources.GetString("TabControlMain.ToolTip1"))
         '
         'TabPageInput
         '
+        resources.ApplyResources(Me.TabPageInput, "TabPageInput")
         Me.TabPageInput.Controls.Add(Me.tbFracSpec)
         Me.TabPageInput.Controls.Add(Me.Label8)
         Me.TabPageInput.Controls.Add(Me.rbSpecSolid)
@@ -1192,37 +1406,243 @@ Partial Class MaterialStreamEditor
         Me.TabPageInput.Controls.Add(Me.tbVolFlow)
         Me.TabPageInput.Controls.Add(Me.tbMoleFlow)
         Me.TabPageInput.Controls.Add(Me.cbUnitsM)
-        resources.ApplyResources(Me.TabPageInput, "TabPageInput")
         Me.TabPageInput.Name = "TabPageInput"
+        Me.ToolTip2.SetToolTip(Me.TabPageInput, resources.GetString("TabPageInput.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPageInput, resources.GetString("TabPageInput.ToolTip1"))
         Me.TabPageInput.UseVisualStyleBackColor = True
         '
         'TabPageResultsComp
         '
-        Me.TabPageResultsComp.Controls.Add(Me.TabPhaseComps)
-        Me.TabPageResultsComp.Controls.Add(Me.lblAmountTotal)
-        Me.TabPageResultsComp.Controls.Add(Me.Label19)
-        Me.TabPageResultsComp.Controls.Add(Me.cbCalculatedAmountsBasis)
         resources.ApplyResources(Me.TabPageResultsComp, "TabPageResultsComp")
+        Me.TabPageResultsComp.Controls.Add(Me.TabControl1)
         Me.TabPageResultsComp.Name = "TabPageResultsComp"
+        Me.ToolTip2.SetToolTip(Me.TabPageResultsComp, resources.GetString("TabPageResultsComp.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPageResultsComp, resources.GetString("TabPageResultsComp.ToolTip1"))
         Me.TabPageResultsComp.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.TabControl1, resources.GetString("TabControl1.ToolTip1"))
+        '
+        'TabPage1
+        '
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Controls.Add(Me.Label19)
+        Me.TabPage1.Controls.Add(Me.TabPhaseComps)
+        Me.TabPage1.Controls.Add(Me.cbCalculatedAmountsBasis)
+        Me.TabPage1.Controls.Add(Me.lblAmountTotal)
+        Me.TabPage1.Name = "TabPage1"
+        Me.ToolTip2.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPage1, resources.GetString("TabPage1.ToolTip1"))
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Controls.Add(Me.Label18)
+        Me.TabPage2.Controls.Add(Me.TabCompoundPhaseProps)
+        Me.TabPage2.Controls.Add(Me.cbCompoundPhaseProperties)
+        Me.TabPage2.Name = "TabPage2"
+        Me.ToolTip2.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPage2, resources.GetString("TabPage2.ToolTip1"))
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip1"))
+        '
+        'TabCompoundPhaseProps
+        '
+        resources.ApplyResources(Me.TabCompoundPhaseProps, "TabCompoundPhaseProps")
+        Me.TabCompoundPhaseProps.Controls.Add(Me.TabCompPropVapor)
+        Me.TabCompoundPhaseProps.Controls.Add(Me.TabCompPropLiq1)
+        Me.TabCompoundPhaseProps.Controls.Add(Me.TabCompPropLiq2)
+        Me.TabCompoundPhaseProps.Controls.Add(Me.TabCompPropSolid)
+        Me.TabCompoundPhaseProps.Name = "TabCompoundPhaseProps"
+        Me.TabCompoundPhaseProps.SelectedIndex = 0
+        Me.ToolTip1.SetToolTip(Me.TabCompoundPhaseProps, resources.GetString("TabCompoundPhaseProps.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.TabCompoundPhaseProps, resources.GetString("TabCompoundPhaseProps.ToolTip1"))
+        '
+        'TabCompPropVapor
+        '
+        resources.ApplyResources(Me.TabCompPropVapor, "TabCompPropVapor")
+        Me.TabCompPropVapor.Controls.Add(Me.gridCompPropVapor)
+        Me.TabCompPropVapor.Name = "TabCompPropVapor"
+        Me.ToolTip2.SetToolTip(Me.TabCompPropVapor, resources.GetString("TabCompPropVapor.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabCompPropVapor, resources.GetString("TabCompPropVapor.ToolTip1"))
+        Me.TabCompPropVapor.UseVisualStyleBackColor = True
+        '
+        'gridCompPropVapor
+        '
+        resources.ApplyResources(Me.gridCompPropVapor, "gridCompPropVapor")
+        Me.gridCompPropVapor.AllowUserToAddRows = False
+        Me.gridCompPropVapor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.gridCompPropVapor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridCompPropVapor.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn32, Me.DataGridViewTextBoxColumn33})
+        Me.gridCompPropVapor.Name = "gridCompPropVapor"
+        Me.gridCompPropVapor.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompPropVapor, resources.GetString("gridCompPropVapor.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompPropVapor, resources.GetString("gridCompPropVapor.ToolTip1"))
+        '
+        'TabCompPropLiq1
+        '
+        resources.ApplyResources(Me.TabCompPropLiq1, "TabCompPropLiq1")
+        Me.TabCompPropLiq1.Controls.Add(Me.gridCompPropLiq1)
+        Me.TabCompPropLiq1.Name = "TabCompPropLiq1"
+        Me.ToolTip2.SetToolTip(Me.TabCompPropLiq1, resources.GetString("TabCompPropLiq1.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabCompPropLiq1, resources.GetString("TabCompPropLiq1.ToolTip1"))
+        Me.TabCompPropLiq1.UseVisualStyleBackColor = True
+        '
+        'gridCompPropLiq1
+        '
+        resources.ApplyResources(Me.gridCompPropLiq1, "gridCompPropLiq1")
+        Me.gridCompPropLiq1.AllowUserToAddRows = False
+        Me.gridCompPropLiq1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.gridCompPropLiq1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridCompPropLiq1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn36, Me.DataGridViewTextBoxColumn37})
+        Me.gridCompPropLiq1.Name = "gridCompPropLiq1"
+        Me.gridCompPropLiq1.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompPropLiq1, resources.GetString("gridCompPropLiq1.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompPropLiq1, resources.GetString("gridCompPropLiq1.ToolTip1"))
+        '
+        'TabCompPropLiq2
+        '
+        resources.ApplyResources(Me.TabCompPropLiq2, "TabCompPropLiq2")
+        Me.TabCompPropLiq2.Controls.Add(Me.gridCompPropLiq2)
+        Me.TabCompPropLiq2.Name = "TabCompPropLiq2"
+        Me.ToolTip2.SetToolTip(Me.TabCompPropLiq2, resources.GetString("TabCompPropLiq2.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabCompPropLiq2, resources.GetString("TabCompPropLiq2.ToolTip1"))
+        Me.TabCompPropLiq2.UseVisualStyleBackColor = True
+        '
+        'gridCompPropLiq2
+        '
+        resources.ApplyResources(Me.gridCompPropLiq2, "gridCompPropLiq2")
+        Me.gridCompPropLiq2.AllowUserToAddRows = False
+        Me.gridCompPropLiq2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.gridCompPropLiq2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridCompPropLiq2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn38, Me.DataGridViewTextBoxColumn39})
+        Me.gridCompPropLiq2.Name = "gridCompPropLiq2"
+        Me.gridCompPropLiq2.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompPropLiq2, resources.GetString("gridCompPropLiq2.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompPropLiq2, resources.GetString("gridCompPropLiq2.ToolTip1"))
+        '
+        'TabCompPropSolid
+        '
+        resources.ApplyResources(Me.TabCompPropSolid, "TabCompPropSolid")
+        Me.TabCompPropSolid.Controls.Add(Me.gridCompPropSolid)
+        Me.TabCompPropSolid.Name = "TabCompPropSolid"
+        Me.ToolTip2.SetToolTip(Me.TabCompPropSolid, resources.GetString("TabCompPropSolid.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabCompPropSolid, resources.GetString("TabCompPropSolid.ToolTip1"))
+        Me.TabCompPropSolid.UseVisualStyleBackColor = True
+        '
+        'gridCompPropSolid
+        '
+        resources.ApplyResources(Me.gridCompPropSolid, "gridCompPropSolid")
+        Me.gridCompPropSolid.AllowUserToAddRows = False
+        Me.gridCompPropSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.gridCompPropSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gridCompPropSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn40, Me.DataGridViewTextBoxColumn41})
+        Me.gridCompPropSolid.Name = "gridCompPropSolid"
+        Me.gridCompPropSolid.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridCompPropSolid, resources.GetString("gridCompPropSolid.ToolTip"))
+        Me.ToolTip2.SetToolTip(Me.gridCompPropSolid, resources.GetString("gridCompPropSolid.ToolTip1"))
+        '
+        'cbCompoundPhaseProperties
+        '
+        resources.ApplyResources(Me.cbCompoundPhaseProperties, "cbCompoundPhaseProperties")
+        Me.cbCompoundPhaseProperties.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCompoundPhaseProperties.FormattingEnabled = True
+        Me.cbCompoundPhaseProperties.Items.AddRange(New Object() {resources.GetString("cbCompoundPhaseProperties.Items"), resources.GetString("cbCompoundPhaseProperties.Items1"), resources.GetString("cbCompoundPhaseProperties.Items2"), resources.GetString("cbCompoundPhaseProperties.Items3"), resources.GetString("cbCompoundPhaseProperties.Items4"), resources.GetString("cbCompoundPhaseProperties.Items5")})
+        Me.cbCompoundPhaseProperties.Name = "cbCompoundPhaseProperties"
+        Me.ToolTip2.SetToolTip(Me.cbCompoundPhaseProperties, resources.GetString("cbCompoundPhaseProperties.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.cbCompoundPhaseProperties, resources.GetString("cbCompoundPhaseProperties.ToolTip1"))
         '
         'TabPageResultsProps
         '
-        Me.TabPageResultsProps.Controls.Add(Me.TabPhaseProps)
         resources.ApplyResources(Me.TabPageResultsProps, "TabPageResultsProps")
+        Me.TabPageResultsProps.Controls.Add(Me.TabPhaseProps)
         Me.TabPageResultsProps.Name = "TabPageResultsProps"
+        Me.ToolTip2.SetToolTip(Me.TabPageResultsProps, resources.GetString("TabPageResultsProps.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPageResultsProps, resources.GetString("TabPageResultsProps.ToolTip1"))
         Me.TabPageResultsProps.UseVisualStyleBackColor = True
         '
         'TabPageAnnotations
         '
-        Me.TabPageAnnotations.Controls.Add(Me.rtbAnnotations)
         resources.ApplyResources(Me.TabPageAnnotations, "TabPageAnnotations")
+        Me.TabPageAnnotations.Controls.Add(Me.rtbAnnotations)
         Me.TabPageAnnotations.Name = "TabPageAnnotations"
+        Me.ToolTip2.SetToolTip(Me.TabPageAnnotations, resources.GetString("TabPageAnnotations.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me.TabPageAnnotations, resources.GetString("TabPageAnnotations.ToolTip1"))
         Me.TabPageAnnotations.UseVisualStyleBackColor = True
         '
         'ToolTip2
         '
         Me.ToolTip2.IsBalloon = True
+        '
+        'DataGridViewTextBoxColumn32
+        '
+        Me.DataGridViewTextBoxColumn32.FillWeight = 60.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn32, "DataGridViewTextBoxColumn32")
+        Me.DataGridViewTextBoxColumn32.Name = "DataGridViewTextBoxColumn32"
+        '
+        'DataGridViewTextBoxColumn33
+        '
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn33.DefaultCellStyle = DataGridViewCellStyle14
+        Me.DataGridViewTextBoxColumn33.FillWeight = 40.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn33, "DataGridViewTextBoxColumn33")
+        Me.DataGridViewTextBoxColumn33.Name = "DataGridViewTextBoxColumn33"
+        '
+        'DataGridViewTextBoxColumn36
+        '
+        Me.DataGridViewTextBoxColumn36.FillWeight = 60.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn36, "DataGridViewTextBoxColumn36")
+        Me.DataGridViewTextBoxColumn36.Name = "DataGridViewTextBoxColumn36"
+        '
+        'DataGridViewTextBoxColumn37
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn37.DefaultCellStyle = DataGridViewCellStyle15
+        Me.DataGridViewTextBoxColumn37.FillWeight = 40.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn37, "DataGridViewTextBoxColumn37")
+        Me.DataGridViewTextBoxColumn37.Name = "DataGridViewTextBoxColumn37"
+        '
+        'DataGridViewTextBoxColumn38
+        '
+        Me.DataGridViewTextBoxColumn38.FillWeight = 60.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn38, "DataGridViewTextBoxColumn38")
+        Me.DataGridViewTextBoxColumn38.Name = "DataGridViewTextBoxColumn38"
+        '
+        'DataGridViewTextBoxColumn39
+        '
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn39.DefaultCellStyle = DataGridViewCellStyle16
+        Me.DataGridViewTextBoxColumn39.FillWeight = 40.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn39, "DataGridViewTextBoxColumn39")
+        Me.DataGridViewTextBoxColumn39.Name = "DataGridViewTextBoxColumn39"
+        '
+        'DataGridViewTextBoxColumn40
+        '
+        Me.DataGridViewTextBoxColumn40.FillWeight = 60.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn40, "DataGridViewTextBoxColumn40")
+        Me.DataGridViewTextBoxColumn40.Name = "DataGridViewTextBoxColumn40"
+        '
+        'DataGridViewTextBoxColumn41
+        '
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.DataGridViewTextBoxColumn41.DefaultCellStyle = DataGridViewCellStyle17
+        Me.DataGridViewTextBoxColumn41.FillWeight = 40.0!
+        resources.ApplyResources(Me.DataGridViewTextBoxColumn41, "DataGridViewTextBoxColumn41")
+        Me.DataGridViewTextBoxColumn41.Name = "DataGridViewTextBoxColumn41"
         '
         'MaterialStreamEditor
         '
@@ -1234,6 +1654,8 @@ Partial Class MaterialStreamEditor
         Me.Controls.Add(Me.TabControlMain)
         Me.Name = "MaterialStreamEditor"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.DockLeft
+        Me.ToolTip2.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip1"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -1274,7 +1696,20 @@ Partial Class MaterialStreamEditor
         Me.TabPageInput.ResumeLayout(False)
         Me.TabPageInput.PerformLayout()
         Me.TabPageResultsComp.ResumeLayout(False)
-        Me.TabPageResultsComp.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        Me.TabCompoundPhaseProps.ResumeLayout(False)
+        Me.TabCompPropVapor.ResumeLayout(False)
+        CType(Me.gridCompPropVapor, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabCompPropLiq1.ResumeLayout(False)
+        CType(Me.gridCompPropLiq1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabCompPropLiq2.ResumeLayout(False)
+        CType(Me.gridCompPropLiq2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabCompPropSolid.ResumeLayout(False)
+        CType(Me.gridCompPropSolid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageResultsProps.ResumeLayout(False)
         Me.TabPageAnnotations.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -1420,4 +1855,26 @@ Partial Class MaterialStreamEditor
     Friend WithEvents DataGridViewTextBoxColumn27 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn28 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn29 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents TabCompoundPhaseProps As System.Windows.Forms.TabControl
+    Friend WithEvents TabCompPropVapor As System.Windows.Forms.TabPage
+    Friend WithEvents gridCompPropVapor As System.Windows.Forms.DataGridView
+    Friend WithEvents TabCompPropLiq1 As System.Windows.Forms.TabPage
+    Friend WithEvents gridCompPropLiq1 As System.Windows.Forms.DataGridView
+    Friend WithEvents TabCompPropLiq2 As System.Windows.Forms.TabPage
+    Friend WithEvents gridCompPropLiq2 As System.Windows.Forms.DataGridView
+    Friend WithEvents TabCompPropSolid As System.Windows.Forms.TabPage
+    Friend WithEvents gridCompPropSolid As System.Windows.Forms.DataGridView
+    Friend WithEvents cbCompoundPhaseProperties As System.Windows.Forms.ComboBox
+    Friend WithEvents DataGridViewTextBoxColumn32 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn33 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn36 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn37 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn38 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn39 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn40 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn41 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

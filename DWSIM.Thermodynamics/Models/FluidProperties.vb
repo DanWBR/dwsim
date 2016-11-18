@@ -22,6 +22,57 @@ Namespace PropertyPackages.Auxiliary
 
     <System.Serializable()> Public Class PROPS
 
+        Shared Function CalcVaporDiffusivity_Fuller(T As Double, P As Double, Ma As Double, Mb As Double, FVa As Double, FVb As Double) As Double
+
+            'Fuller et al (1965, 1966, 1969) Props of Gases and Liquids 5th edition p. 11.10
+
+            Dim Mab As Double = 2 * ((1 / Ma) + (1 / Mb)) ^ -1
+
+            Dim Dab As Double = 0.00143 * T ^ 1.75 / (P * Mab ^ 0.5 * (FVa ^ (1 / 3) + FVb ^ (1 / 3)) ^ 2)
+
+            Return Dab / 100 / 100 'cm2/s to m2/s
+
+        End Function
+
+        Shared Function CalcVaporDiffusivity_WilkeAndLee(T As Double, P As Double, Ma As Double, Mb As Double, LNEa As Double, LNEb As Double,
+                                                         LNDa As Double, LNDb As Double) As Double
+
+            'Wilke and Lee (1955) Props of Gases and Liquids 5th edition p. 11.10
+
+            Dim LNE As Double = (LNEa * LNEb) ^ 0.5
+            Dim Ta As Double = 1.38064852E-23 * T / LNE
+
+            Dim omega As Double = 1.06036 / Ta ^ 0.1561 + 0.193 / Math.Exp(0.47635 * Ta) + 1.03587 / Math.Exp(1.52996 * Ta) + 1.76474 / Math.Exp(3.89411 * Ta)
+
+            Dim sigma As Double = (LNDa + LNDb) / 2 * 10000000000.0
+
+            Dim Mab As Double = 2 * ((1 / Ma) + (1 / Mb)) ^ -1
+
+            Dim Dab As Double = (3.03 - (0.98 / Mab ^ 0.5)) * 0.001 * T ^ (3 / 2) / (P * Mab ^ 0.5 * sigma ^ 2 * omega)
+
+            Return Dab / 100 / 100 'cm2/s to m2/s
+
+        End Function
+
+        Shared Function CalcLiquidDiffusivity_WilkeAndChang(T As Double, Mb As Double, etab As Double, Va As Double) As Double
+
+            Dim fi As Double = 1.0#
+
+            Select Case Convert.ToInt32(Mb)
+                Case 18 'water
+                    fi = 2.6
+                Case 32 'methanol
+                    fi = 1.9
+                Case 78 'ethanol
+                    fi = 1.5
+            End Select
+
+            Dim Dab = 0.000000074 * (fi * Mb) ^ 0.5 * T / (etab * 1000 * (Va * 1000) ^ 0.6)
+
+            Return Dab / 100 / 100 'cm2/s to m2/s
+
+        End Function
+
         Shared Function Cpl_rb(cpig As Double, T As Double, Tc As Double, w As Double, MW As Double) As Double
 
             'liquid heat capacity by Rowlinson/Bondi correlation

@@ -211,4 +211,9 @@
     Property MODFACGroups As SortedList
     Property NISTMODFACGroups As SortedList
 
+    Property LennardJonesDiameter As Double
+    Property LennardJonesEnergy As Double
+    Property Parachor As Double
+    Property FullerDiffusionVolume As Double
+
 End Interface

@@ -482,6 +482,7 @@ Namespace PropertyPackages
                     CalcInternalEnergy(p)
                     CalcGibbsFreeEnergy(p)
                     CalcHelmholtzEnergy(p)
+                    CalcDiffusionCoefficients(p)
                 End If
             Next
 
@@ -638,6 +639,74 @@ Namespace PropertyPackages
 
             p.Properties.helmholtz_energy = U - T * S
             p.Properties.molar_helmholtz_energy = (U - T * S) * MW
+
+        End Sub
+
+        Public Sub CalcDiffusionCoefficients(p As IPhase)
+
+            Dim T, P0 As Double
+            T = CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Dim type As String = "L", Vx As Double()
+
+            Select Case p.Name
+                Case "Vapor"
+                    type = "V"
+                    Vx = RET_VMOL(Phase.Vapor)
+                Case "Liquid1"
+                    type = "L"
+                    Vx = RET_VMOL(Phase.Liquid1)
+                Case "Liquid2"
+                    type = "L"
+                    Vx = RET_VMOL(Phase.Liquid2)
+                Case "Liquid3"
+                    type = "L"
+                    Vx = RET_VMOL(Phase.Liquid3)
+                Case "Aqueous"
+                    type = "L"
+                    Vx = RET_VMOL(Phase.Aqueous)
+            End Select
+
+            Dim xi, Mi, Mni, LNEni, LNDni, LNEi, LNDi, FVi, FVni, Dabv1, Dabv2, Dabl As Double
+
+            For Each subst In p.Compounds.Values
+
+                xi = subst.MoleFraction.GetValueOrDefault
+
+                Mi = subst.ConstantProperties.Molar_Weight
+                LNEi = subst.ConstantProperties.LennardJonesEnergy
+                LNDi = subst.ConstantProperties.LennardJonesDiameter
+                FVi = subst.ConstantProperties.FullerDiffusionVolume
+
+                Mni = 0.0#
+                LNEni = 0.0#
+                LNDni = 0.0#
+                FVni = 0.0#
+                For Each subst2 In p.Compounds.Values
+                    If subst.Name <> subst2.Name Then
+                        Mni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.Molar_Weight
+                        LNEni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.LennardJonesEnergy
+                        LNDni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.LennardJonesDiameter
+                        FVni += subst.MoleFraction.GetValueOrDefault * subst.ConstantProperties.FullerDiffusionVolume
+                    End If
+                Next
+                Mni /= xi
+                LNEni /= xi
+                LNDni /= xi
+                FVni /= xi
+
+                Dabv1 = Auxiliary.PROPS.CalcVaporDiffusivity_Fuller(T, P0, Mi, Mni, FVi, FVni)
+                Dabv2 = Auxiliary.PROPS.CalcVaporDiffusivity_WilkeAndLee(T, P0, Mi, Mni, LNEi, LNEni, LNDi, LNDni)
+                Dabl = Auxiliary.PROPS.CalcLiquidDiffusivity_WilkeAndChang(T, Mni, p.Properties.viscosity.GetValueOrDefault, subst.PartialVolume.GetValueOrDefault)
+
+                If type = "V" Then
+                    subst.DiffusionCoefficient = Dabv1
+                Else
+                    subst.DiffusionCoefficient = Dabl
+                End If
+
+            Next
 
         End Sub
 
@@ -4332,6 +4401,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             For Each subs As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(f)).Compounds.Values
                 subs.FugacityCoeff = fc(i)
                 subs.ActivityCoeff = fc(i) * P / Me.AUX_PVAPi(i, T)
+                subs.PartialPressure = subs.MoleFraction.GetValueOrDefault() * P
                 i += 1
             Next
 

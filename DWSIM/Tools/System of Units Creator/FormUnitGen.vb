@@ -238,7 +238,7 @@ Public Class FormUnitGen
 
             cb = New DataGridViewComboBoxCell
             cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.compressibility).ToArray)
-            cb.Value = currentset.isothermalCompressibility
+            cb.Value = currentset.compressibility
             .Add(New Object() {DWSIM.App.GetLocalString("IsothermalCompressibility")})
             .Item(.Count - 1).Cells(1) = cb
 

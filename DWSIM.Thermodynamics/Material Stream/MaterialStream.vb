@@ -1446,7 +1446,7 @@ Namespace Streams
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Phases(0).Properties.enthalpy.GetValueOrDefault * Phases(0).Properties.massflow.GetValueOrDefault)
                         Case 155
                             'PROP_MS_155	Isothermal Compressibility (Vapor)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(2).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(2).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 156
                             'PROP_MS_156	Bulk Modulus (Vapor)	
                             value = cv.ConvertFromSI(su.pressure, Phases(2).Properties.bulk_modulus.GetValueOrDefault)
@@ -1467,7 +1467,7 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(2).Properties.helmholtz_energy.GetValueOrDefault)
                         Case 162
                             'PROP_MS_162	Isothermal Compressibility (Overall Liquid)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(1).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(1).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 163
                             'PROP_MS_163	Bulk Modulus (Overall Liquid)	
                             value = cv.ConvertFromSI(su.pressure, Phases(1).Properties.bulk_modulus.GetValueOrDefault)
@@ -1506,7 +1506,7 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(3).Properties.helmholtz_energy.GetValueOrDefault)
                         Case 175
                             'PROP_MS_175	Isothermal Compressibility (Liquid 1)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(3).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(3).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 176
                             'PROP_MS_176	Bulk Modulus (Liquid 2)	
                             value = cv.ConvertFromSI(su.pressure, Phases(4).Properties.bulk_modulus.GetValueOrDefault)
@@ -1527,7 +1527,7 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(4).Properties.helmholtz_energy.GetValueOrDefault)
                         Case 182
                             'PROP_MS_182	Isothermal Compressibility (Liquid 2)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(4).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(4).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 183
                             'PROP_MS_183	Bulk Modulus (Liquid 3)	
                             value = cv.ConvertFromSI(su.pressure, Phases(5).Properties.bulk_modulus.GetValueOrDefault)
@@ -1548,7 +1548,7 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(5).Properties.helmholtz_energy.GetValueOrDefault)
                         Case 189
                             'PROP_MS_189	Isothermal Compressibility (Liquid 3)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(5).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(5).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 190
                             'PROP_MS_190	Bulk Modulus (Aqueous Phase)	
                             value = cv.ConvertFromSI(su.pressure, Phases(6).Properties.bulk_modulus.GetValueOrDefault)
@@ -1569,7 +1569,7 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(6).Properties.helmholtz_energy.GetValueOrDefault)
                         Case 196
                             'PROP_MS_196	Isothermal Compressibility (Aqueous Phase)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(6).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(6).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 198
                             'PROP_MS_198	Bulk Modulus (Solid)	
                             value = cv.ConvertFromSI(su.pressure, Phases(7).Properties.bulk_modulus.GetValueOrDefault)
@@ -1590,7 +1590,7 @@ Namespace Streams
                             value = cv.ConvertFromSI(su.enthalpy, Phases(7).Properties.helmholtz_energy.GetValueOrDefault)
                         Case 204
                             'PROP_MS_204	Isothermal Compressibility (Solid)	
-                            value = cv.ConvertFromSI(su.isothermalCompressibility, Phases(7).Properties.isothermal_compressibility.GetValueOrDefault)
+                            value = cv.ConvertFromSI(su.compressibility, Phases(7).Properties.isothermal_compressibility.GetValueOrDefault)
                         Case 205
                             'PROP_MS_205	Internal Energy (Mixture)	
                             value = cv.ConvertFromSI(su.enthalpy, Phases(0).Properties.internal_energy.GetValueOrDefault)
@@ -2297,7 +2297,7 @@ Namespace Streams
                             value = su.heatflow
                         Case 155
                             'PROP_MS_155	Isothermal Compressibility (Vapor)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 156
                             'PROP_MS_156	Bulk Modulus (Vapor)	
                             value = su.pressure
@@ -2318,7 +2318,7 @@ Namespace Streams
                             value = su.enthalpy
                         Case 162
                             'PROP_MS_162	Isothermal Compressibility (Overall Liquid)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 163
                             'PROP_MS_163	Bulk Modulus (Overall Liquid)	
                             value = su.pressure
@@ -2357,7 +2357,7 @@ Namespace Streams
                             value = su.enthalpy
                         Case 175
                             'PROP_MS_175	Isothermal Compressibility (Liquid 1)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 176
                             'PROP_MS_176	Bulk Modulus (Liquid 2)	
                             value = su.pressure
@@ -2378,7 +2378,7 @@ Namespace Streams
                             value = su.enthalpy
                         Case 182
                             'PROP_MS_182	Isothermal Compressibility (Liquid 2)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 183
                             'PROP_MS_183	Bulk Modulus (Liquid 3)	
                             value = su.pressure
@@ -2399,7 +2399,7 @@ Namespace Streams
                             value = su.enthalpy
                         Case 189
                             'PROP_MS_189	Isothermal Compressibility (Liquid 3)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 190
                             'PROP_MS_190	Bulk Modulus (Aqueous Phase)	
                             value = su.pressure
@@ -2420,7 +2420,7 @@ Namespace Streams
                             value = su.enthalpy
                         Case 196
                             'PROP_MS_196	Isothermal Compressibility (Aqueous Phase)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 198
                             'PROP_MS_198	Bulk Modulus (Solid)	
                             value = su.pressure
@@ -2441,7 +2441,7 @@ Namespace Streams
                             value = su.enthalpy
                         Case 204
                             'PROP_MS_204	Isothermal Compressibility (Solid)	
-                            value = su.isothermalCompressibility
+                            value = su.compressibility
                         Case 205
                             'PROP_MS_205	Internal Energy (Mixture)	
                             value = su.enthalpy

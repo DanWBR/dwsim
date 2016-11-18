@@ -169,6 +169,8 @@ Namespace SystemsOfUnits
 
         Public Property volumetricFlow As String Implements Interfaces.IUnitsOfMeasure.volumetricFlow
 
+        Public Property diffusivity As String Implements IUnitsOfMeasure.diffusivity
+
         Public Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String) Implements IUnitsOfMeasure.GetUnitSet
 
             Dim units As New List(Of String)
@@ -198,8 +200,8 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"kJ/[kg.K]", "cal/[g.C]", "BTU/[lbm.R]"})
                 Case Enums.UnitOfMeasure.thermalConductivity
                     units.AddRange(New String() {"W/[m.K]", "cal/[cm.s.C]", "BTU/[ft.h.R]"})
-                Case Enums.UnitOfMeasure.cinematic_viscosity
-                    units.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s"})
+                Case Enums.UnitOfMeasure.cinematic_viscosity, diffusivity
+                    units.AddRange(New String() {"m2/s", "cSt", "ft2/s", "mm2/s", "cm2/s"})
                 Case Enums.UnitOfMeasure.viscosity
                     units.AddRange(New String() {"kg/[m.s]", "Pa.s", "cP", "lbm/[ft.h]"})
                 Case Enums.UnitOfMeasure.deltaP
@@ -258,7 +260,6 @@ Namespace SystemsOfUnits
 
         End Function
 
-        Public Property isothermalCompressibility As String Implements IUnitsOfMeasure.isothermalCompressibility
     End Class
 
     <System.Serializable()> Public Class SI
@@ -271,6 +272,7 @@ Namespace SystemsOfUnits
 
                 .Name = "SI"
                 .jouleThomsonCoefficient = "K/Pa"
+                .diffusivity = "m2/s"
                 .accel = "m2/s"
                 .area = "m2"
                 .diameter = "mm"
@@ -355,6 +357,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C1"
                 .jouleThomsonCoefficient = "K/Pa"
+                .diffusivity = "m2/s"
 
                 .accel = "m2/s"
                 .area = "m2"
@@ -441,6 +444,7 @@ Namespace SystemsOfUnits
                 .Name = "C2"
                 .jouleThomsonCoefficient = "K/Pa"
 
+                .diffusivity = "m2/s"
                 .accel = "m2/s"
                 .area = "m2"
                 .diameter = "mm"
@@ -526,6 +530,7 @@ Namespace SystemsOfUnits
                 .Name = "C3"
                 .jouleThomsonCoefficient = "K/Pa"
 
+                .diffusivity = "m2/s"
                 .accel = "m/s2"
                 .area = "m2"
                 .diameter = "mm"
@@ -611,6 +616,7 @@ Namespace SystemsOfUnits
                 .Name = "C4"
                 .jouleThomsonCoefficient = "K/Pa"
 
+                .diffusivity = "m2/s"
                 .accel = "m/s2"
                 .area = "m2"
                 .diameter = "mm"
@@ -695,6 +701,7 @@ Namespace SystemsOfUnits
 
                 .Name = "C5"
 
+                .diffusivity = "m2/s"
                 .jouleThomsonCoefficient = "K/Pa"
                 .accel = "m/s2"
                 .area = "m2"
@@ -779,6 +786,8 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "ENG"
+
+                .diffusivity = "ft2/s"
 
                 .jouleThomsonCoefficient = "F/psi"
                 .gor = "ft3/bbl"
@@ -866,6 +875,7 @@ Namespace SystemsOfUnits
             With Me
 
                 .Name = "CGS"
+                .diffusivity = "cm2/s"
 
                 .jouleThomsonCoefficient = "C/atm"
                 .accel = "cm/s2"

@@ -30,4 +30,6 @@
 
     Property Name() As String
 
+    Property DiffusionCoefficient As Nullable(Of Double)
+
 End Interface

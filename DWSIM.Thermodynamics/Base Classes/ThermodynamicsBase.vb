@@ -86,6 +86,7 @@ Namespace BaseClasses
 
         <XmlIgnore> Public Property ConstantProperties As Interfaces.ICompoundConstantProperties = New ConstantProperties Implements Interfaces.ICompound.ConstantProperties
 
+        Public Property DiffusionCoefficient As Double? Implements Interfaces.ICompound.DiffusionCoefficient
     End Class
 
     <System.Serializable()> Public Class Phase
@@ -1726,6 +1727,13 @@ Namespace BaseClasses
 
         Public Property UNIFACGroups As SortedList = New SortedList() Implements Interfaces.ICompoundConstantProperties.UNIFACGroups
 
+        Public Property FullerDiffusionVolume As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.FullerDiffusionVolume
+
+        Public Property LennardJonesDiameter As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.LennardJonesDiameter
+
+        Public Property LennardJonesEnergy As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.LennardJonesEnergy
+
+        Public Property Parachor As Double = 0.0# Implements Interfaces.ICompoundConstantProperties.Parachor
     End Class
 
     <System.Serializable()> Public Class ConstantPropertiesCollection

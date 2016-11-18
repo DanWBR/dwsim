@@ -169,6 +169,14 @@ Namespace Databases
                             cp.Acentric_Factor = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "DipoleMoment" 'coloumb.m
                             cp.Dipole_Moment = Double.Parse(node2.Attributes("value").Value, nf)
+                        Case "DiameterLJ" 'm
+                            cp.LennardJonesDiameter = Double.Parse(node2.Attributes("value").Value, nf)
+                        Case "EnergyLJ" 'K
+                            cp.LennardJonesEnergy = Double.Parse(node2.Attributes("value").Value, nf)
+                        Case "FullerVolume"
+                            cp.FullerDiffusionVolume = Double.Parse(node2.Attributes("value").Value, nf)
+                        Case "Parachor" 'kg0.25.m3/s0.5/kmol
+                            cp.Parachor = Double.Parse(node2.Attributes("value").Value, nf)
                         Case "HeatOfFusionAtMeltingPoint" ' kJ/mol
                             cp.EnthalpyOfFusionAtTf = Double.Parse(node2.Attributes("value").Value, nf) / 1000 / 1000
                         Case "HeatOfFormation" '/1000/MW, kJ/kg

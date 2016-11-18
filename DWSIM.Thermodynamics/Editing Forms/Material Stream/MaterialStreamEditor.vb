@@ -208,6 +208,35 @@ Public Class MaterialStreamEditor
                     TabPhaseComps.TabPages.Remove(tabCompSolid)
                 End If
 
+                'result compound properties
+
+                TabCompoundPhaseProps.TabPages.Clear()
+
+                If .Phases(2).Properties.molarfraction.HasValue Then
+                    PopulateCompPropGrid(gridCompPropVapor, .Phases(2).Compounds.Values.ToList)
+                    TabCompoundPhaseProps.TabPages.Add(TabCompPropVapor)
+                Else
+                    TabCompoundPhaseProps.TabPages.Remove(TabCompPropVapor)
+                End If
+                If .Phases(3).Properties.molarfraction.HasValue Then
+                    PopulateCompPropGrid(gridCompPropLiq1, .Phases(3).Compounds.Values.ToList)
+                    TabCompoundPhaseProps.TabPages.Add(TabCompPropLiq1)
+                Else
+                    TabCompoundPhaseProps.TabPages.Remove(TabCompPropLiq1)
+                End If
+                If .Phases(4).Properties.molarfraction.HasValue Then
+                    PopulateCompPropGrid(gridCompPropLiq2, .Phases(4).Compounds.Values.ToList)
+                    TabCompoundPhaseProps.TabPages.Add(TabCompPropLiq2)
+                Else
+                    TabCompoundPhaseProps.TabPages.Remove(TabCompPropLiq2)
+                End If
+                If .Phases(7).Properties.molarfraction.HasValue Then
+                    PopulateCompPropGrid(gridCompPropSolid, .Phases(7).Compounds.Values.ToList)
+                    TabCompoundPhaseProps.TabPages.Add(TabCompPropSolid)
+                Else
+                    TabCompoundPhaseProps.TabPages.Remove(TabCompPropSolid)
+                End If
+
                 'result properties
 
                 TabPhaseProps.TabPages.Clear()
@@ -280,6 +309,18 @@ Public Class MaterialStreamEditor
         Next
 
     End Sub
+
+    Sub PopulateCompPropGrid(grid As DataGridView, complist As List(Of Interfaces.ICompound))
+
+        grid.ReadOnly = True
+        grid.Rows.Clear()
+        grid.Columns(1).CellTemplate.Style.Format = nf
+        For Each comp In complist
+            grid.Rows(grid.Rows.Add(New Object() {comp.Name, 0.0#})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+        Next
+
+    End Sub
+
 
     Sub PopulatePropGrid(grid As DataGridView, p As Interfaces.IPhase)
 
@@ -1270,4 +1311,60 @@ Public Class MaterialStreamEditor
         End If
 
     End Sub
+
+    Private Sub rtbAnnotations_Load(sender As Object, e As EventArgs) Handles rtbAnnotations.Load
+
+    End Sub
+
+    Private Sub cbCompoundPhaseProperties_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCompoundPhaseProperties.SelectedIndexChanged
+
+        UpdateCompPropBasis(cbCompoundPhaseProperties, gridCompPropVapor, MatStream.Phases(2))
+        UpdateCompPropBasis(cbCompoundPhaseProperties, gridCompPropLiq1, MatStream.Phases(3))
+        UpdateCompPropBasis(cbCompoundPhaseProperties, gridCompPropLiq2, MatStream.Phases(4))
+        UpdateCompPropBasis(cbCompoundPhaseProperties, gridCompPropSolid, MatStream.Phases(7))
+
+    End Sub
+
+    Sub UpdateCompPropBasis(cb As ComboBox, grid As DataGridView, phase As Interfaces.IPhase)
+
+       
+        Dim W, Q As Double, suffix As String = ""
+        W = phase.Properties.massflow.GetValueOrDefault
+        Q = phase.Properties.molarflow.GetValueOrDefault
+        Select Case cb.SelectedIndex
+            Case 0
+                'Coeficientes de Fugacidade
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).FugacityCoeff.GetValueOrDefault
+                Next
+            Case 1
+                'Log dos Coeficientes de Fugacidade
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = Math.Log(phase.Compounds(row.Cells(0).Value).FugacityCoeff.GetValueOrDefault)
+                Next
+            Case 2
+                'Coeficientes de Atividade
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).ActivityCoeff.GetValueOrDefault
+                Next
+            Case 3
+                'Pressões Parciais
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).PartialPressure.GetValueOrDefault
+                Next
+            Case 4
+                'Volumes Parciais
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).PartialVolume.GetValueOrDefault
+                Next
+            Case 5
+                'Coeficientes de Difusão
+                For Each row As DataGridViewRow In grid.Rows
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).DiffusionCoefficient.GetValueOrDefault
+                Next
+        End Select
+
+    End Sub
+
+
 End Class

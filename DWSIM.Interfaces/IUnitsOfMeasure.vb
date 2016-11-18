@@ -134,6 +134,6 @@
 
     Property surfaceTension As String
 
-    Property isothermalCompressibility As String
+    Property diffusivity As String
 
 End Interface
