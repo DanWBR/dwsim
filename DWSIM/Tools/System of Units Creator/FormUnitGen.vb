@@ -248,6 +248,12 @@ Public Class FormUnitGen
             .Add(New Object() {DWSIM.App.GetLocalString("JouleThomsonCoefficient")})
             .Item(.Count - 1).Cells(1) = cb
 
+            cb = New DataGridViewComboBoxCell
+            cb.Items.AddRange(currentset.GetUnitSet(UnitOfMeasure.diffusivity).ToArray)
+            cb.Value = currentset.diffusivity
+            .Add(New Object() {DWSIM.App.GetLocalString("DiffusionCoefficient")})
+            .Item(.Count - 1).Cells(1) = cb
+
         End With
     End Sub
 
