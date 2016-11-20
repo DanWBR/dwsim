@@ -12,6 +12,10 @@
 
     Property MassFraction() As Nullable(Of Double)
 
+    Property Molarity() As Nullable(Of Double)
+
+    Property Molality() As Nullable(Of Double)
+
     Property MolarFlow() As Nullable(Of Double)
 
     Property MassFlow() As Nullable(Of Double)

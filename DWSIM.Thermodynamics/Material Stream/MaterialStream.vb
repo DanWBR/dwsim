@@ -536,7 +536,6 @@ Namespace Streams
                     End If
 
                     'calculate additional properties
-
                     .CalcAdditionalPhaseProperties()
 
                     If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
@@ -569,10 +568,13 @@ Namespace Streams
                             .DW_CalcKvalue()
                     End Select
 
+                    'calculate molar concentrations
+                    .DW_CalcConcentrations()
+
                     If DebugMode Then AppendDebugLine(String.Format("Material Stream calculated succesfully."))
 
                 End If
-
+                
                 .CurrentMaterialStream = Nothing
 
             End With

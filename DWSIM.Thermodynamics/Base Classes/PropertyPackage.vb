@@ -750,6 +750,8 @@ Namespace PropertyPackages
 
             result = Me.AUX_SOLIDDENS
             Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
+            Me.CurrentMaterialStream.Phases(phaseID).Properties.volumetric_flow = Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow / Me.CurrentMaterialStream.Phases(phaseID).Properties.density
+
             Dim constprops As New List(Of Interfaces.ICompoundConstantProperties)
             For Each su As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(0).Compounds.Values
                 constprops.Add(su.ConstantProperties)
@@ -1108,7 +1110,35 @@ Namespace PropertyPackages
             Return g 'kJ/kmol
 
         End Function
+        Public Sub DW_CalcConcentrations()
+            Dim CF, MF, VF As Double
 
+            For PhaseID = 0 To Me.CurrentMaterialStream.Phases.Count - 1
+                VF = Me.CurrentMaterialStream.Phases(PhaseID).Properties.volumetric_flow.GetValueOrDefault
+                If Me.CurrentMaterialStream.Phases(PhaseID).Compounds.ContainsKey("Water") Then
+                    MF = Me.CurrentMaterialStream.Phases(PhaseID).Compounds("Water").MassFraction.GetValueOrDefault * Me.CurrentMaterialStream.Phases(PhaseID).Properties.massflow.GetValueOrDefault
+                End If
+
+                For Each C In Me.CurrentMaterialStream.Phases(PhaseID).Compounds.Values
+                    CF = C.MoleFraction.GetValueOrDefault * Me.CurrentMaterialStream.Phases(PhaseID).Properties.molarflow.GetValueOrDefault
+
+                    'molarity = mol solute per liter in phase
+                    If VF > 0 Then
+                        C.Molarity = CF / VF
+                    Else
+                        C.Molarity = 0
+                    End If
+
+                    'Molality = mol solute per 1000 g of water
+                    If MF > 0 Then
+                        C.Molality = CF / MF
+                    Else
+                        C.Molality = 0
+                    End If
+                Next
+            Next
+            
+        End Sub
         Public Overridable Sub DW_CalcOverallProps()
 
             Dim HL, HV, HS, SL, SV, SS, DL, DV, DS, CPL, CPV, CPS, KL, KV, KS, CVL, CVV, CSV As Nullable(Of Double)

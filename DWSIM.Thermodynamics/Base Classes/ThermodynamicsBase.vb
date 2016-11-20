@@ -64,6 +64,10 @@ Namespace BaseClasses
 
         Public Property MoleFraction As Double? = 0.0# Implements Interfaces.ICompound.MoleFraction
 
+        Public Property Molarity As Double? = 0.0# Implements Interfaces.ICompound.Molarity
+
+        Public Property Molality As Double? = 0.0# Implements Interfaces.ICompound.Molality
+
         Public Property FugacityCoeff As Double? = 0.0# Implements Interfaces.ICompound.FugacityCoeff
 
         Public Property Kvalue As Double = 0.0# Implements Interfaces.ICompound.Kvalue

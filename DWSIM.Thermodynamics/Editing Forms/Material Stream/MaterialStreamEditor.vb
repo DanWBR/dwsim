@@ -851,40 +851,18 @@ Public Class MaterialStreamEditor
                 suffix = units.massflow
             Case 5
                 'molarity = mol solute per liter solution
-                Dim n As Integer = phase.Compounds.Count
-                Dim liqdens(n - 1), nbp(n - 1) As Double
-                Dim ipp As New Thermodynamics.PropertyPackages.RaoultPropertyPackage()
-                ipp.CurrentMaterialStream = MatStream
                 Dim i As Integer = 0
-                For Each s In phase.Compounds.Values
-                    nbp(i) = s.ConstantProperties.Normal_Boiling_Point
-                    If 298.15 > nbp(i) Then
-                        liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
-                    Else
-                        liqdens(i) = ipp.AUX_LIQDENSi(s, 298.15)
-                    End If
-                    i += 1
-                Next
-                i = 0
                 For Each row As DataGridViewRow In grid.Rows
-                    If row.Cells(0).Value.ToString.Contains("Water") Then
-                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q * phase.Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / 1000 / liqdens(i) * 1000
-                    Else
-                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
-                    End If
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molarity / 1000
                     i += 1
                 Next
                 suffix = "mol/L"
             Case 6
-                'molarity = mol solute per kg solvent
+                'molality = mol solute per kg water
                 For Each row As DataGridViewRow In grid.Rows
-                    If row.Cells(0).Value.ToString.Contains("Water") Then
-                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault * W
-                    Else
-                        row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * Q
-                    End If
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molality
                 Next
-                suffix = "mol/kg"
+                suffix = "mol/kg Water"
             Case 4
                 'liquid vol. frac
                 Dim n As Integer = phase.Compounds.Count
