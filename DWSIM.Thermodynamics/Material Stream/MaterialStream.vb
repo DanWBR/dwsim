@@ -1677,7 +1677,48 @@ Namespace Streams
                         Case 231
                             'PROP_MS_231	Molar Helmholtz Free Energy (Solid)	
                             value = cv.ConvertFromSI(su.molar_enthalpy, Phases(7).Properties.molar_helmholtz_energy.GetValueOrDefault)
-
+                        Case 232, 233, 234, 235, 236, 237, 238
+                            'Molalities
+                            If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                                If propidx = 232 Then
+                                    value = Me.Phases(0).Compounds(sname).Molality.GetValueOrDefault
+                                ElseIf propidx = 233 Then
+                                    value = Me.Phases(2).Compounds(sname).Molality.GetValueOrDefault
+                                ElseIf propidx = 234 Then
+                                    value = Me.Phases(1).Compounds(sname).Molality.GetValueOrDefault
+                                ElseIf propidx = 235 Then
+                                    value = Me.Phases(3).Compounds(sname).Molality.GetValueOrDefault
+                                ElseIf propidx = 236 Then
+                                    value = Me.Phases(4).Compounds(sname).Molality.GetValueOrDefault
+                                ElseIf propidx = 237 Then
+                                    value = Me.Phases(5).Compounds(sname).Molality.GetValueOrDefault
+                                ElseIf propidx = 238 Then
+                                    value = Me.Phases(7).Compounds(sname).Molality.GetValueOrDefault
+                                End If
+                            Else
+                                value = 0
+                            End If
+                        Case 239, 240, 241, 242, 243, 244, 245
+                            'Molarities
+                            If Me.Phases(0).Compounds.ContainsKey(sname) Then
+                                If propidx = 239 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(0).Compounds(sname).Molarity.GetValueOrDefault)
+                                ElseIf propidx = 240 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(2).Compounds(sname).Molarity.GetValueOrDefault)
+                                ElseIf propidx = 241 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(1).Compounds(sname).Molarity.GetValueOrDefault)
+                                ElseIf propidx = 242 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(3).Compounds(sname).Molarity.GetValueOrDefault)
+                                ElseIf propidx = 243 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(4).Compounds(sname).Molarity.GetValueOrDefault)
+                                ElseIf propidx = 244 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(5).Compounds(sname).Molarity.GetValueOrDefault)
+                                ElseIf propidx = 245 Then
+                                    value = cv.ConvertFromSI(su.molar_conc, Me.Phases(7).Compounds(sname).Molarity.GetValueOrDefault)
+                                End If
+                            Else
+                                value = 0
+                            End If
                     End Select
 
                     Return value
@@ -1755,6 +1796,21 @@ Namespace Streams
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
                     Next
+                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                        proplist.Add("PROP_MS_232" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_233" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_234" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_235" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_236" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_238" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_239" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_240" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_241" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_242" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_243" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_244" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_245" + "/" + subst.Name)
+                    Next
                 Case PropertyType.WR
                     For i = 0 To 4
                         proplist.Add("PROP_MS_" + CStr(i))
@@ -1811,6 +1867,21 @@ Namespace Streams
                     proplist.Add("PROP_MS_154")
                     For i = 155 To 231
                         proplist.Add("PROP_MS_" + CStr(i))
+                    Next
+                    For Each subst As ConstantProperties In FlowSheet.SelectedCompounds.Values
+                        proplist.Add("PROP_MS_232" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_233" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_234" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_235" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_236" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_238" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_239" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_240" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_241" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_242" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_243" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_244" + "/" + subst.Name)
+                        proplist.Add("PROP_MS_245" + "/" + subst.Name)
                     Next
             End Select
 
@@ -2528,7 +2599,12 @@ Namespace Streams
                         Case 231
                             'PROP_MS_231	Molar Helmholtz Free Energy (Solid)	
                             value = su.molar_enthalpy
-
+                        Case 232, 233, 234, 235, 236, 237, 238
+                            'Molality
+                            value = "mol/Kg Water"
+                        Case 239, 240, 241, 242, 243, 244, 245
+                            'Molality
+                            value = su.molar_conc
                         Case Else
                             value = ""
                     End Select

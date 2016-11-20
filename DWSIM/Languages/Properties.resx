@@ -1518,4 +1518,46 @@
   <data name="PROP_MS_231" xml:space="preserve">
     <value>Energia Livre de Helmholtz Molar da Fase Sólida</value>
   </data>
+  <data name="PROP_MS_232" xml:space="preserve">
+    <value>Molality (Mistura)</value>
+  </data>
+  <data name="PROP_MS_233" xml:space="preserve">
+    <value>Molality (Fase Vapor)</value>
+  </data>
+  <data name="PROP_MS_234" xml:space="preserve">
+    <value>Molality (Fase Líquida - Total)</value>
+  </data>
+  <data name="PROP_MS_235" xml:space="preserve">
+    <value>Molality (Fase Líquida 1)</value>
+  </data>
+  <data name="PROP_MS_236" xml:space="preserve">
+    <value>Molality (Fase Líquida 2)</value>
+  </data>
+  <data name="PROP_MS_237" xml:space="preserve">
+    <value>Molality (Fase Aquosa)</value>
+  </data>
+  <data name="PROP_MS_238" xml:space="preserve">
+    <value>Molality (Fase Sólida)</value>
+  </data>
+  <data name="PROP_MS_239" xml:space="preserve">
+    <value>Molarity (Mistura)</value>
+  </data>
+  <data name="PROP_MS_240" xml:space="preserve">
+    <value>Molarity (Fase Vapor)</value>
+  </data>
+  <data name="PROP_MS_241" xml:space="preserve">
+    <value>Molarity (Fase Líquida - Total)</value>
+  </data>
+  <data name="PROP_MS_242" xml:space="preserve">
+    <value>Molarity (Fase Líquida 1)</value>
+  </data>
+  <data name="PROP_MS_243" xml:space="preserve">
+    <value>Molarity (Fase Líquida 2)</value>
+  </data>
+  <data name="PROP_MS_244" xml:space="preserve">
+    <value>Molarity (Fase Aquosa)</value>
+  </data>
+  <data name="PROP_MS_245" xml:space="preserve">
+    <value>Molarity (Fase Sólida)</value>
+  </data>
 </root>

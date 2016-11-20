@@ -884,9 +884,51 @@
   <data name="PROP_MS_231" xml:space="preserve">
     <value>Molar Helmholtz Free Energy (Solid)</value>
   </data>
+  <data name="PROP_MS_232" xml:space="preserve">
+    <value>Molalität (Gemisch)</value>
+  </data>
+  <data name="PROP_MS_233" xml:space="preserve">
+    <value>Molalität (Dampfphase)</value>
+  </data>
+  <data name="PROP_MS_234" xml:space="preserve">
+    <value>Molalität (Gesamtflüssigphase)</value>
+  </data>
+  <data name="PROP_MS_235" xml:space="preserve">
+    <value>Molalität (Flüssigphase 1)</value>
+  </data>
+  <data name="PROP_MS_236" xml:space="preserve">
+    <value>Molalität (Flüssigphase 2)</value>
+  </data>
+  <data name="PROP_MS_237" xml:space="preserve">
+    <value>Molalität (wässrige Phase)</value>
+  </data>
+  <data name="PROP_MS_238" xml:space="preserve">
+    <value>Molalität (Feststoff)</value>
+  </data>
+  <data name="PROP_MS_239" xml:space="preserve">
+    <value>Molarität (Gemisch)</value>
+  </data>
   <data name="PROP_MS_24" xml:space="preserve">
     <value>Molenstrom Dampfphase</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_MS_240" xml:space="preserve">
+    <value>Molarität (Dampfphase)</value>
+  </data>
+  <data name="PROP_MS_241" xml:space="preserve">
+    <value>Molarität (Gesamtflüssigphase)</value>
+  </data>
+  <data name="PROP_MS_242" xml:space="preserve">
+    <value>Molarität (Flüssigphase 1)</value>
+  </data>
+  <data name="PROP_MS_243" xml:space="preserve">
+    <value>Molarität (Flüssigphase 2)</value>
+  </data>
+  <data name="PROP_MS_244" xml:space="preserve">
+    <value>Molarität (wässrige Phase)</value>
+  </data>
+  <data name="PROP_MS_245" xml:space="preserve">
+    <value>Molarität (Feststoff)</value>
   </data>
   <data name="PROP_MS_25" xml:space="preserve">
     <value>Volumenstrom Dampfphase</value>
