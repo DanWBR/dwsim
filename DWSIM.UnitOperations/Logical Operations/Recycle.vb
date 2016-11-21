@@ -234,12 +234,21 @@ Namespace SpecialOps
             Dim Tnew, Pnew, Wnew, Hnew, Snew As Double
 
             Dim ems As MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name)
+            Dim oms As MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+
+            Dim v1, v2 As Double()
+            v1 = ems.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+            v2 = oms.Phases(0).Compounds.Values.Select(Function(x) x.MassFlow.GetValueOrDefault).ToArray
+
+            Dim Wsum As Double = v1.Sum
+            Dim Wsum2 As Double = v2.Sum
+            Dim Werr As Double = (v1.SubtractY(v2).SumY ^ 2) ^ 0.5
 
             With ems.Phases(0).Properties
 
                 Me.ConvergenceHistory.TemperaturaE = .temperature.GetValueOrDefault - Me.ConvergenceHistory.Temperatura
                 Me.ConvergenceHistory.PressaoE = .pressure.GetValueOrDefault - Me.ConvergenceHistory.Pressao
-                Me.ConvergenceHistory.VazaoMassicaE = .massflow.GetValueOrDefault - Me.ConvergenceHistory.VazaoMassica
+                Me.ConvergenceHistory.VazaoMassicaE = Werr
 
                 Me.ConvergenceHistory.TemperaturaE0 = Me.ConvergenceHistory.Temperatura - Me.ConvergenceHistory.Temperatura0
                 Me.ConvergenceHistory.PressaoE0 = Me.ConvergenceHistory.Pressao - Me.ConvergenceHistory.Pressao0
@@ -251,7 +260,7 @@ Namespace SpecialOps
 
                 Me.ConvergenceHistory.Temperatura = .temperature.GetValueOrDefault
                 Me.ConvergenceHistory.Pressao = .pressure.GetValueOrDefault
-                Me.ConvergenceHistory.VazaoMassica = .massflow.GetValueOrDefault
+                Me.ConvergenceHistory.VazaoMassica = Wsum
 
                 Hnew = .enthalpy.GetValueOrDefault
                 Snew = .entropy.GetValueOrDefault
@@ -259,30 +268,28 @@ Namespace SpecialOps
                 If Me.Errors.Count = 0 Then
                     Me.Errors.Add("Temperature", .temperature.GetValueOrDefault)
                     Me.Errors.Add("Pressure", .pressure.GetValueOrDefault)
-                    Me.Errors.Add("MassFlow", .massflow.GetValueOrDefault)
+                    Me.Errors.Add("MassFlow", Wsum)
                     Me.Errors.Add("Enthalpy", .enthalpy.GetValueOrDefault)
                 Else
                     Me.Errors("Temperature") = Me.Values("Temperature") - .temperature.GetValueOrDefault
                     Me.Errors("Pressure") = Me.Values("Pressure") - .pressure.GetValueOrDefault
-                    Me.Errors("MassFlow") = Me.Values("MassFlow") - .massflow.GetValueOrDefault
+                    Me.Errors("MassFlow") = Werr
                     Me.Errors("Enthalpy") = Me.Values("Enthalpy") - .enthalpy.GetValueOrDefault
                 End If
 
             End With
-
-            Dim oms As MaterialStream = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
 
             With oms.Phases(0).Properties
 
                 If Me.Values.Count = 0 Then
                     Me.Values.Add("Temperature", .temperature.GetValueOrDefault)
                     Me.Values.Add("Pressure", .pressure.GetValueOrDefault)
-                    Me.Values.Add("MassFlow", .massflow.GetValueOrDefault)
+                    Me.Values.Add("MassFlow", Wsum2)
                     Me.Values.Add("Enthalpy", .enthalpy.GetValueOrDefault)
                 Else
                     Me.Values("Temperature") = .temperature.GetValueOrDefault
                     Me.Values("Pressure") = .pressure.GetValueOrDefault
-                    Me.Values("MassFlow") = .massflow.GetValueOrDefault
+                    Me.Values("MassFlow") = Wsum2
                     Me.Values("Enthalpy") = .enthalpy.GetValueOrDefault
                 End If
 
