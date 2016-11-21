@@ -2357,11 +2357,13 @@ ruf:                Application.DoEvents()
                 Try
                     Select Case Path.GetExtension(nome).ToLower()
                         Case ".dwxml"
-                            Me.LoadXML(nome)
+                            LoadXML(nome)
                         Case ".dwxmz"
-                            Me.LoadAndExtractXMLZIP(nome)
+                            LoadAndExtractXMLZIP(nome)
                         Case ".dwsim"
                             ' Me.LoadF(nome)
+                        Case ".xml"
+                            LoadMobileXML(nome)
                         Case ".dwcsd"
                             Dim NewMDIChild As New FormCompoundCreator()
                             NewMDIChild.MdiParent = Me

@@ -285,6 +285,13 @@ Namespace GraphicObjects
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
+            'DWSIM Mobile compatibility
+
+            If ObjectType = Enums.GraphicObjects.ObjectType.CompressorExpander Then ObjectType = Enums.GraphicObjects.ObjectType.Compressor
+            If ObjectType = Enums.GraphicObjects.ObjectType.HeaterCooler Then ObjectType = Enums.GraphicObjects.ObjectType.Heater
+
+            'Other Properties
+
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim xel As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "AdditionalInfo").SingleOrDefault
 

@@ -240,7 +240,7 @@ Public Class XMLSerializer
                     End If
                 End If
             Next
-         End If
+        End If
         Return True
 
     End Function
@@ -249,7 +249,7 @@ Public Class XMLSerializer
     ''' Serializes selected properties of an object to XML.
     ''' </summary>
     ''' <param name="obj">The object to serialize.</param>
-   ''' <returns>True if successful.</returns>
+    ''' <returns>True if successful.</returns>
     ''' <remarks> Properties of type String, Double, Single, Integer, Nullable(Of Double), 
     ''' Nullable(Of Single), Nullable(Of Integer), ArrayList, Font, Color, [Enum]
     ''' are supported.</remarks>

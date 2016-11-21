@@ -85,7 +85,7 @@ Namespace GraphicObjects
 
         Public Overridable Property LineColor() As Color = Color.Black
 
-        Public Overridable Property Fill() As Boolean = False
+        Public Overridable Property Fill() As Boolean = True
 
         Public Overridable Property FillColor() As Color = Color.LightGray
 

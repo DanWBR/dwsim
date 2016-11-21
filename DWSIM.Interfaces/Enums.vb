@@ -371,6 +371,9 @@ Namespace Enums.GraphicObjects
         GO_SpreadsheetTable
         GO_Rectangle
 
+        CompressorExpander
+        HeaterCooler
+
     End Enum
 
     Public Enum ShapeIcon

@@ -116,6 +116,8 @@
         If xel.Value = "Referencia" Then xel.Value = "Referenced"
         If xel.Value = "Controlada" Then xel.Value = "Controlled"
 
+        If xel.Name = "Fill" Then xel.Value = "True"
+
         If xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.EquilibriumReactorGraphic") Then
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.ReactorEquilibriumGraphic"
         ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.ConversionReactorGraphic") Then
@@ -124,6 +126,14 @@
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.ReactorCSTRGraphic"
         ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.PFRGraphic") Then
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.ReactorPFRGraphic"
+        ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.MixerGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.NodeInGraphic"
+        ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.SplitterGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.NodeOutGraphic"
+        ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.HeaterCoolerGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.HeaterGraphic"
+        ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.CompressorGraphic"
         End If
 
         If xel.Value.StartsWith("PortableFlowsheetDrawing.GraphicObjects.Shapes") And xel.Name = "Type" Then
@@ -134,7 +144,7 @@
         If xel.Value.EndsWith("Streams.EnergyStream") Then xel.Value = "DWSIM.UnitOperations.Streams.EnergyStream"
 
         If xel.Value.EndsWith("UnitOperations.Separator") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Vessel"
-        If xel.Value.EndsWith("UnitOperations.CompressorExpander") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Compressor"
+        If xel.Value.EndsWith("UnitOperations.AdiabaticExpanderCompressor") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Compressor"
         If xel.Value.EndsWith("UnitOperations.HeaterCooler") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Heater"
         If xel.Value.EndsWith("UnitOperations.HeatExchanger") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.HeatExchanger"
         If xel.Value.EndsWith("UnitOperations.Mixer") Then xel.Value = "DWSIM.UnitOperations.UnitOperations.Mixer"
