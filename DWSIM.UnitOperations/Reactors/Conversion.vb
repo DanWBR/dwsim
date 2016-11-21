@@ -177,19 +177,29 @@ Namespace Reactors
 
                     nBC = N0(rxn.BaseReactant)
 
-                    rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                    rxn.ExpContext.Imports.AddType(GetType(System.Math))
-                    rxn.ExpContext.Variables.Clear()
-                    rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                    rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                    If FlowSheet.MobileCompatibilityMode Then
 
-                    rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
-                    X = rxn.Expr.Evaluate / 100
+                        Dim parser As YAMP.Parser = New YAMP.Parser()
+                        Dim vars As New Dictionary(Of String, YAMP.Value)
+                        vars.Add("T", New YAMP.ScalarValue(ims.Phases(0).Properties.temperature.GetValueOrDefault))
+                        X = DirectCast(parser.Evaluate(rxn.Expression, vars), YAMP.ScalarValue).Value / 100
+
+                    Else
+
+                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+                        rxn.ExpContext.Variables.Clear()
+                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
+                        X = rxn.Expr.Evaluate / 100
+
+                    End If
 
                     If X < 0 Or X > 1 Then Throw New ArgumentOutOfRangeException("Conversion Expression", "The conversion expression for reaction " & rxn.Name & " results in a value that is out of the valid range (0 to 100%).")
 
                     'verify if the calculated conversion is reachable
-
 
                     For Each sb As ReactionStoichBase In rxn.Components.Values
                         If sb.StoichCoeff < 1 Then

@@ -1099,7 +1099,8 @@ Public Class FormMain
             SharedClasses.Utility.UpdateElementForMobileXML(xel1)
         Next
 
-        Dim form As FormFlowsheet = New FormFlowsheet()
+        Dim form As FormFlowsheet = New FormFlowsheet() With {.MobileCompatibilityMode = True}
+
         Settings.CAPEOPENMode = False
         My.Application.ActiveSimulation = form
 

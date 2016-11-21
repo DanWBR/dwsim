@@ -186,33 +186,60 @@ Namespace Reactors
 
                     Dim numval, denmval As Double
 
-                    rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                    rxn.ExpContext.Imports.AddType(GetType(System.Math))
-                    rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                    If FlowSheet.MobileCompatibilityMode Then
 
-                    rxn.ExpContext.Variables.Clear()
-                    rxn.ExpContext.Variables.Add("T", T)
+                        Dim parser As YAMP.Parser = New YAMP.Parser()
+                        Dim vars As New Dictionary(Of String, YAMP.Value)
+                        vars.Add("T", New YAMP.ScalarValue(ims.Phases(0).Properties.temperature.GetValueOrDefault))
 
-                    Dim ir As Integer = 1
-                    Dim ip As Integer = 1
+                        Dim ir As Integer = 1
+                        Dim ip As Integer = 1
 
-                    For Each sb As ReactionStoichBase In rxn.Components.Values
-                        If sb.StoichCoeff < 0 Then
-                            rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                            ir += 1
-                        ElseIf sb.StoichCoeff > 0 Then
-                            rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                            ip += 1
-                        End If
-                    Next
+                        For Each sb As ReactionStoichBase In rxn.Components.Values
+                            If sb.StoichCoeff < 0.0# Then
+                                vars.Add("R" & ir.ToString, New YAMP.ScalarValue(C(sb.CompName) * convfactors(sb.CompName)))
+                                ir += 1
+                            ElseIf sb.StoichCoeff > 0.0# Then
+                                vars.Add("P" & ip.ToString, New YAMP.ScalarValue(C(sb.CompName) * convfactors(sb.CompName)))
+                                ip += 1
+                            End If
+                        Next
 
-                    rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
+                        numval = DirectCast(parser.Evaluate(rxn.RateEquationNumerator, vars), YAMP.ScalarValue).Value
 
-                    numval = rxn.Expr.Evaluate
+                        denmval = DirectCast(parser.Evaluate(rxn.RateEquationDenominator, vars), YAMP.ScalarValue).Value
 
-                    rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+                    Else
 
-                    denmval = rxn.Expr.Evaluate
+                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+
+                        rxn.ExpContext.Variables.Clear()
+                        rxn.ExpContext.Variables.Add("T", T)
+
+                        Dim ir As Integer = 1
+                        Dim ip As Integer = 1
+
+                        For Each sb As ReactionStoichBase In rxn.Components.Values
+                            If sb.StoichCoeff < 0 Then
+                                rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                ir += 1
+                            ElseIf sb.StoichCoeff > 0 Then
+                                rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                ip += 1
+                            End If
+                        Next
+
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
+
+                        numval = rxn.Expr.Evaluate
+
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+
+                        denmval = rxn.Expr.Evaluate
+
+                    End If
 
                     rx = numval / denmval
 

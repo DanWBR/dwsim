@@ -115,6 +115,10 @@
       <HintPath>..\DWSIM\References\VBIDEApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
+    <Reference Include="YAMP, Version=1.6.0.40202, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YAMP.1.6.0.40202\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\YAMP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="DWSIM.DrawingTools" />
@@ -997,6 +1001,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\disconnect.png" />
   </ItemGroup>
   <ItemGroup>
