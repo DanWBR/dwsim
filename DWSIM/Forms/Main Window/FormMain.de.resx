@@ -443,7 +443,7 @@
     <value>Registriere Komponenten für CAPE-OPEN</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
-    <value>Steady-state Simulation (XML) (*.dwxml)|*.dwxml|Steady-state Simulation (Komprimiertes XML) (*.dwxmz)|*.dwxmz|Steady-state Simulation (Android/iOS) (*.xml)|*.xmlCompound Creator Studie (*.dwcsd)|*.dwcsd|Daten Regression Studie (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Studie (*.dwruf)|*.dwruf|Alle DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf;*.xml</value>
+    <value>Steady-state Simulation (XML) (*.dwxml)|*.dwxml|Steady-state Simulation (Komprimiertes XML) (*.dwxmz)|*.dwxmz|Steady-state Simulation (Android/iOS) (*.xml)|*.xml|Compound Creator Studie (*.dwcsd)|*.dwcsd|Daten Regression Studie (*.dwrsd)|*.dwrsd|UNIFAC IPs Regression Studie (*.dwruf)|*.dwruf|Alle DWSIM Files|*.dwxml;*.dwxmz;*.dwcsd;*.dwrsd;*.dwruf;*.xml</value>
   </data>
   <data name="OpenFileDialog1.Title" xml:space="preserve">
     <value>Öffnen einer existierenden Simulation</value>
