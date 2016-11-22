@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <compounds>
 <compound>
-<Name>Glycerol_BD</Name>
+<Name>Glycerol</Name>
 <Molecular_Weight>92.0950012207031</Molecular_Weight>
 <Normal_Boiling_Pt_C>288.850000000000</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>1260.78002929688</Ideal_Liq_Density_kg_m3>
@@ -56,7 +56,7 @@
 <ZRa>0</ZRa>
 </compound>
 <compound>
-<Name>NaOH_BD</Name>
+<Name>Sodium Hydroxide</Name>
 <Molecular_Weight>39.9970016479492</Molecular_Weight>
 <Normal_Boiling_Pt_C>388.259973144531</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>1782.31005859375</Ideal_Liq_Density_kg_m3>
@@ -111,7 +111,7 @@
 <ZRa>0</ZRa>
 </compound>
 <compound>
-<Name>PPP</Name>
+<Name>TriPalmitin (PPP)</Name>
 <Molecular_Weight>807.331604003906</Molecular_Weight>
 <Normal_Boiling_Pt_C>531.469995117188</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>920.059997558594</Ideal_Liq_Density_kg_m3>
@@ -166,7 +166,7 @@
 <ZRa>0.18812</ZRa>
 </compound>
 <compound>
-<Name>POP</Name>
+<Name>Palmitate-Oleate-Palmitate (POP)</Name>
 <Molecular_Weight>833.369384765625</Molecular_Weight>
 <Normal_Boiling_Pt_C>538.149987792969</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>921.349975585938</Ideal_Liq_Density_kg_m3>
@@ -221,7 +221,7 @@
 <ZRa>0.18658</ZRa>
 </compound>
 <compound>
-<Name>PLiP</Name>
+<Name>Palmitate-Linoleate-Palmitate (PLiP)</Name>
 <Molecular_Weight>831.353576660156</Molecular_Weight>
 <Normal_Boiling_Pt_C>537.600000000000</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>925.030029296875</Ideal_Liq_Density_kg_m3>
@@ -276,7 +276,7 @@
 <ZRa>0.18591</ZRa>
 </compound>
 <compound>
-<Name>POS</Name>
+<Name>Palmitate-Oleate-Stearate (POS)</Name>
 <Molecular_Weight>861.422973632813</Molecular_Weight>
 <Normal_Boiling_Pt_C>545.139978027344</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>919.010009765625</Ideal_Liq_Density_kg_m3>
@@ -331,7 +331,7 @@
 <ZRa>0.18584</ZRa>
 </compound>
 <compound>
-<Name>POO</Name>
+<Name>Palmitate-Oleate-Oleate (POO)</Name>
 <Molecular_Weight>859.407226562500</Molecular_Weight>
 <Normal_Boiling_Pt_C>544.610009765625</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>922.549987792969</Ideal_Liq_Density_kg_m3>
@@ -386,7 +386,7 @@
 <ZRa>0.18519</ZRa>
 </compound>
 <compound>
-<Name>POLi</Name>
+<Name>Palmitate-Oleate-Linoleate (POLi)</Name>
 <Molecular_Weight>857.391418457031</Molecular_Weight>
 <Normal_Boiling_Pt_C>544.079980468750</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>926.140014648438</Ideal_Liq_Density_kg_m3>
@@ -441,7 +441,7 @@
 <ZRa>0.18457</ZRa>
 </compound>
 <compound>
-<Name>OOO</Name>
+<Name>TriOlein (OOO)</Name>
 <Molecular_Weight>885.445007324219</Molecular_Weight>
 <Normal_Boiling_Pt_C>550.880029296875</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>923.690002441406</Ideal_Liq_Density_kg_m3>
@@ -496,7 +496,7 @@
 <ZRa>0.18396</ZRa>
 </compound>
 <compound>
-<Name>EtP</Name>
+<Name>Ethyl Palmitate (EtP)</Name>
 <Molecular_Weight>284.481201171875</Molecular_Weight>
 <Normal_Boiling_Pt_C>318.529992675781</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>862.580017089844</Ideal_Liq_Density_kg_m3>
@@ -551,7 +551,7 @@
 <ZRa>0.22951</ZRa>
 </compound>
 <compound>
-<Name>EtO</Name>
+<Name>Ethyl Oleate (EtO)</Name>
 <Molecular_Weight>310.519012451172</Molecular_Weight>
 <Normal_Boiling_Pt_C>336.920007324219</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>870.179992675781</Ideal_Liq_Density_kg_m3>
@@ -606,7 +606,7 @@
 <ZRa>0.22226</ZRa>
 </compound>
 <compound>
-<Name>EtLi</Name>
+<Name>Ethyl Linoleate (EtLi)</Name>
 <Molecular_Weight>308.503204345703</Molecular_Weight>
 <Normal_Boiling_Pt_C>335.440026855469</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>878.760009765625</Ideal_Liq_Density_kg_m3>
@@ -661,7 +661,7 @@
 <ZRa>0.22021</ZRa>
 </compound>
 <compound>
-<Name>EtS</Name>
+<Name>Ethyl Stearate (EtS)</Name>
 <Molecular_Weight>312.534790039063</Molecular_Weight>
 <Normal_Boiling_Pt_C>338.380029296875</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>861.869995117188</Ideal_Liq_Density_kg_m3>
@@ -716,7 +716,7 @@
 <ZRa>0.22432</ZRa>
 </compound>
 <compound>
-<Name>Palmitic_Acid</Name>
+<Name>Palmitic Acid</Name>
 <Molecular_Weight>256.428009033203</Molecular_Weight>
 <Normal_Boiling_Pt_C>351.000024414063</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>881.578002929688</Ideal_Liq_Density_kg_m3>
@@ -771,7 +771,7 @@
 <ZRa>0.22432</ZRa>
 </compound>
 <compound>
-<Name>NaP</Name>
+<Name>Sodium Palmitate</Name>
 <Molecular_Weight>278.405914306641</Molecular_Weight>
 <Normal_Boiling_Pt_C>296.963708496094</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>969.211303710938</Ideal_Liq_Density_kg_m3>
@@ -823,116 +823,6 @@
 <IG_Gibbs_Form_kJ_kmol_c>0</IG_Gibbs_Form_kJ_kmol_c>
 <IG_Gibbs_Form_kJ_kmol_d>0</IG_Gibbs_Form_kJ_kmol_d>
 <IG_Gibbs_Form_kJ_kmol_e>0</IG_Gibbs_Form_kJ_kmol_e>
-<ZRa>0.2338</ZRa>
-</compound>
-<compound>
-<Name>Ethanol_BD</Name>
-<Molecular_Weight>46.0699005126953</Molecular_Weight>
-<Normal_Boiling_Pt_C>78.2480102539063</Normal_Boiling_Pt_C>
-<Ideal_Liq_Density_kg_m3>795.979980468750</Ideal_Liq_Density_kg_m3>
-<Temperature_C>240.750024414063</Temperature_C>
-<Pressure_kPa>6147.00000000000</Pressure_kPa>
-<Volume_m3_kgmole>0.167080000042915</Volume_m3_kgmole>
-<Acentricity>0.644370019435883</Acentricity>
-<PRSV_-_Kappa>3.93779994919896e-003</PRSV_-_Kappa>
-<GS_CS_-_Solubility_Parameter>11.2338705062866</GS_CS_-_Solubility_Parameter>
-<GS_CS_-_Mol_Vol_m3_kgmole>5.84923210144043e-002</GS_CS_-_Mol_Vol_m3_kgmole>
-<GS_CS_-_Acentricity>0.644370019435883</GS_CS_-_Acentricity>
-<UNIQUAC_-_R>2.10540008544922</UNIQUAC_-_R>
-<UNIQUAC_-_Q>1.97200000286102</UNIQUAC_-_Q>
-<Wilson_Molar_Volume_m3_kgmole>5.84923192985598e-002</Wilson_Molar_Volume_m3_kgmole>
-<CN_Solubility>12.9680004119873</CN_Solubility>
-<CN_Molar_Volume_m3_kgmole>7.77869987487793e-003</CN_Molar_Volume_m3_kgmole>
-<Dipole_Moment_Debye>1.70000004768372</Dipole_Moment_Debye>
-<Radius_of_Gyration_Angstrom>2.25900006294250</Radius_of_Gyration_Angstrom>
-<COSTALD_SRK_Acentricity>-0.497539997100830</COSTALD_SRK_Acentricity>
-<COSTALD_Volume_m3_kgmole>0.138119995594025</COSTALD_Volume_m3_kgmole>
-<Viscosity_Coeff_A>-4.70407009124756e-002</Viscosity_Coeff_A>
-<Viscosity_Coeff_B>-0.774290025234222</Viscosity_Coeff_B>
-<Cavett_Heat_of_Vap_Coeff_A>0.242890000343323</Cavett_Heat_of_Vap_Coeff_A>
-<Heat_of_Form_25_C_kJ_kgmole>-234990.000000000</Heat_of_Form_25_C_kJ_kgmole>
-<Enthalpy_Basis_Offset_kJ_kgmole>-246462.420025561</Enthalpy_Basis_Offset_kJ_kgmole>
-<Ideal_Gas_Enthalpy_kJ_kg_Equation_Shape>Y_=_a_+_b*X_+_c*X^2_+_d*X^3_+_e*X^4_+_f*X^5</Ideal_Gas_Enthalpy_kJ_kg_Equation_Shape>
-<Ideal_Gas_Enthalpy_kJ_kg_Min_Temp_K>3.15000000000000</Ideal_Gas_Enthalpy_kJ_kg_Min_Temp_K>
-<Ideal_Gas_Enthalpy_kJ_kg_Max_Temp_K>5273.15000000000</Ideal_Gas_Enthalpy_kJ_kg_Max_Temp_K>
-<Ideal_Gas_Enthalpy_kJ_kg_a>0.000000000000000</Ideal_Gas_Enthalpy_kJ_kg_a>
-<Ideal_Gas_Enthalpy_kJ_kg_b>0.195770000000000</Ideal_Gas_Enthalpy_kJ_kg_b>
-<Ideal_Gas_Enthalpy_kJ_kg_c>2.32519000000000e-003</Ideal_Gas_Enthalpy_kJ_kg_c>
-<Ideal_Gas_Enthalpy_kJ_kg_d>-6.07458000000000e-007</Ideal_Gas_Enthalpy_kJ_kg_d>
-<Ideal_Gas_Enthalpy_kJ_kg_e>7.45539000000000e-012</Ideal_Gas_Enthalpy_kJ_kg_e>
-<Ideal_Gas_Enthalpy_kJ_kg_f>0.000000000000000</Ideal_Gas_Enthalpy_kJ_kg_f>
-<Vapor_Pressure_kPa_Equation_Shape>Y_=_a_+_b/X_+_c_+_d*lnX_+_e*X^f</Vapor_Pressure_kPa_Equation_Shape>
-<Vapor_Pressure_kPa_Min_Temp_K>293.000000000000</Vapor_Pressure_kPa_Min_Temp_K>
-<Vapor_Pressure_kPa_Max_Temp_K>512.000000000000</Vapor_Pressure_kPa_Max_Temp_K>
-<Vapor_Pressure_kPa_a>86.4860000000000</Vapor_Pressure_kPa_a>
-<Vapor_Pressure_kPa_b>-7931.10000000000</Vapor_Pressure_kPa_b>
-<Vapor_Pressure_kPa_c>0.000000000000000</Vapor_Pressure_kPa_c>
-<Vapor_Pressure_kPa_d>-10.2498000000000</Vapor_Pressure_kPa_d>
-<Vapor_Pressure_kPa_e>6.38949000000000e-006</Vapor_Pressure_kPa_e>
-<Vapor_Pressure_kPa_f>2.00000000000000</Vapor_Pressure_kPa_f>
-<IG_Gibbs_Form_kJ_kmol_Equation_Shape>Y_=_a_+_b*X_+_c*X^2_+_d*X^3_+_e*X^4</IG_Gibbs_Form_kJ_kmol_Equation_Shape>
-<IG_Gibbs_Form_kJ_kmol_Min_Temp_K>298.150000000000</IG_Gibbs_Form_kJ_kmol_Min_Temp_K>
-<IG_Gibbs_Form_kJ_kmol_Max_Temp_K>700.000000000000</IG_Gibbs_Form_kJ_kmol_Max_Temp_K>
-<IG_Gibbs_Form_kJ_kmol_a>-236100.000000000</IG_Gibbs_Form_kJ_kmol_a>
-<IG_Gibbs_Form_kJ_kmol_b>219.039001464844</IG_Gibbs_Form_kJ_kmol_b>
-<IG_Gibbs_Form_kJ_kmol_c>2.56590005010366e-002</IG_Gibbs_Form_kJ_kmol_c>
-<IG_Gibbs_Form_kJ_kmol_d>0.000000000000000</IG_Gibbs_Form_kJ_kmol_d>
-<IG_Gibbs_Form_kJ_kmol_e>0.000000000000000</IG_Gibbs_Form_kJ_kmol_e>
-<ZRa>0.0</ZRa>
-</compound>
-<compound>
-<Name>Water_BD</Name>
-<Molecular_Weight>18.0151004791260</Molecular_Weight>
-<Normal_Boiling_Pt_C>99.9980102539063</Normal_Boiling_Pt_C>
-<Ideal_Liq_Density_kg_m3>997.986022949219</Ideal_Liq_Density_kg_m3>
-<Temperature_C>374.149011230469</Temperature_C>
-<Pressure_kPa>22120.0000000000</Pressure_kPa>
-<Volume_m3_kgmole>5.71000017225742e-002</Volume_m3_kgmole>
-<Acentricity>0.344000011682510</Acentricity>
-<PRSV_-_Kappa>-7.66990035772324e-002</PRSV_-_Kappa>
-<GS_CS_-_Solubility_Parameter>20.8737621307373</GS_CS_-_Solubility_Parameter>
-<GS_CS_-_Mol_Vol_m3_kgmole>1.78833827972412e-002</GS_CS_-_Mol_Vol_m3_kgmole>
-<GS_CS_-_Acentricity>0.344000011682510</GS_CS_-_Acentricity>
-<UNIQUAC_-_R>0.920000016689301</UNIQUAC_-_R>
-<UNIQUAC_-_Q>1.39970004558563</UNIQUAC_-_Q>
-<Wilson_Molar_Volume_m3_kgmole>1.78833825504182e-002</Wilson_Molar_Volume_m3_kgmole>
-<CN_Solubility>21.9109992980957</CN_Solubility>
-<CN_Molar_Volume_m3_kgmole>2.54889988899231e-003</CN_Molar_Volume_m3_kgmole>
-<Dipole_Moment_Debye>1.79999005794525</Dipole_Moment_Debye>
-<Radius_of_Gyration_Angstrom>0.615000009536743</Radius_of_Gyration_Angstrom>
-<COSTALD_SRK_Acentricity>-0.654420018196106</COSTALD_SRK_Acentricity>
-<COSTALD_Volume_m3_kgmole>4.35700006783009e-002</COSTALD_Volume_m3_kgmole>
-<Viscosity_Coeff_A>-0.867780029773712</Viscosity_Coeff_A>
-<Viscosity_Coeff_B>-1.10669004917145</Viscosity_Coeff_B>
-<Cavett_Heat_of_Vap_Coeff_A>0.265720009803772</Cavett_Heat_of_Vap_Coeff_A>
-<Heat_of_Form_25_C_kJ_kgmole>-241000.000000000</Heat_of_Form_25_C_kJ_kgmole>
-<Enthalpy_Basis_Offset_kJ_kgmole>-250898.490605563</Enthalpy_Basis_Offset_kJ_kgmole>
-<Ideal_Gas_Enthalpy_kJ_kg_Equation_Shape>Y_=_a_+_b*X_+_c*X^2_+_d*X^3_+_e*X^4_+_f*X^5</Ideal_Gas_Enthalpy_kJ_kg_Equation_Shape>
-<Ideal_Gas_Enthalpy_kJ_kg_Min_Temp_K>3.15000000000000</Ideal_Gas_Enthalpy_kJ_kg_Min_Temp_K>
-<Ideal_Gas_Enthalpy_kJ_kg_Max_Temp_K>5273.15000000000</Ideal_Gas_Enthalpy_kJ_kg_Max_Temp_K>
-<Ideal_Gas_Enthalpy_kJ_kg_a>-5.72960000000000</Ideal_Gas_Enthalpy_kJ_kg_a>
-<Ideal_Gas_Enthalpy_kJ_kg_b>1.91450000000000</Ideal_Gas_Enthalpy_kJ_kg_b>
-<Ideal_Gas_Enthalpy_kJ_kg_c>-3.95740000000000e-004</Ideal_Gas_Enthalpy_kJ_kg_c>
-<Ideal_Gas_Enthalpy_kJ_kg_d>8.76206000000000e-007</Ideal_Gas_Enthalpy_kJ_kg_d>
-<Ideal_Gas_Enthalpy_kJ_kg_e>-4.95055000000000e-010</Ideal_Gas_Enthalpy_kJ_kg_e>
-<Ideal_Gas_Enthalpy_kJ_kg_f>1.03846000000000e-013</Ideal_Gas_Enthalpy_kJ_kg_f>
-<Vapor_Pressure_kPa_Equation_Shape>Y_=_a_+_b/X_+_c_+_d*lnX_+_e*X^f</Vapor_Pressure_kPa_Equation_Shape>
-<Vapor_Pressure_kPa_Min_Temp_K>275.000000000000</Vapor_Pressure_kPa_Min_Temp_K>
-<Vapor_Pressure_kPa_Max_Temp_K>647.299011230469</Vapor_Pressure_kPa_Max_Temp_K>
-<Vapor_Pressure_kPa_a>65.9278000000000</Vapor_Pressure_kPa_a>
-<Vapor_Pressure_kPa_b>-7227.53000000000</Vapor_Pressure_kPa_b>
-<Vapor_Pressure_kPa_c>0.000000000000000</Vapor_Pressure_kPa_c>
-<Vapor_Pressure_kPa_d>-7.17695000000000</Vapor_Pressure_kPa_d>
-<Vapor_Pressure_kPa_e>4.03130000000000e-006</Vapor_Pressure_kPa_e>
-<Vapor_Pressure_kPa_f>2.00000000000000</Vapor_Pressure_kPa_f>
-<IG_Gibbs_Form_kJ_kmol_Equation_Shape>Y_=_a_+_b*X_+_c*X^2_+_d*X^3_+_e*X^4</IG_Gibbs_Form_kJ_kmol_Equation_Shape>
-<IG_Gibbs_Form_kJ_kmol_Min_Temp_K>298.150000000000</IG_Gibbs_Form_kJ_kmol_Min_Temp_K>
-<IG_Gibbs_Form_kJ_kmol_Max_Temp_K>700.000000000000</IG_Gibbs_Form_kJ_kmol_Max_Temp_K>
-<IG_Gibbs_Form_kJ_kmol_a>-241215.796875000</IG_Gibbs_Form_kJ_kmol_a>
-<IG_Gibbs_Form_kJ_kmol_b>43.4085617065430</IG_Gibbs_Form_kJ_kmol_b>
-<IG_Gibbs_Form_kJ_kmol_c>4.95832785964012e-003</IG_Gibbs_Form_kJ_kmol_c>
-<IG_Gibbs_Form_kJ_kmol_d>0.000000000000000</IG_Gibbs_Form_kJ_kmol_d>
-<IG_Gibbs_Form_kJ_kmol_e>0.000000000000000</IG_Gibbs_Form_kJ_kmol_e>
 <ZRa>0.2338</ZRa>
 </compound>
 </compounds>
