@@ -2,6 +2,7 @@
 <compounds>
 <compound>
 <Name>Glycerol</Name>
+<Formula>C3H8O3</Formula>
 <Molecular_Weight>92.0950012207031</Molecular_Weight>
 <Normal_Boiling_Pt_C>288.850000000000</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>1260.78002929688</Ideal_Liq_Density_kg_m3>
@@ -57,7 +58,8 @@
 </compound>
 <compound>
 <Name>Sodium Hydroxide</Name>
-<Molecular_Weight>39.9970016479492</Molecular_Weight>
+  <Formula>NaOH</Formula>
+  <Molecular_Weight>39.9970016479492</Molecular_Weight>
 <Normal_Boiling_Pt_C>388.259973144531</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>1782.31005859375</Ideal_Liq_Density_kg_m3>
 <Temperature_C>494.370019531250</Temperature_C>
@@ -112,6 +114,7 @@
 </compound>
 <compound>
 <Name>TriPalmitin (PPP)</Name>
+<Formula>PPP</Formula>
 <Molecular_Weight>807.331604003906</Molecular_Weight>
 <Normal_Boiling_Pt_C>531.469995117188</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>920.059997558594</Ideal_Liq_Density_kg_m3>
@@ -167,6 +170,7 @@
 </compound>
 <compound>
 <Name>Palmitate-Oleate-Palmitate (POP)</Name>
+  <Formula>POP</Formula>
 <Molecular_Weight>833.369384765625</Molecular_Weight>
 <Normal_Boiling_Pt_C>538.149987792969</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>921.349975585938</Ideal_Liq_Density_kg_m3>
@@ -222,6 +226,7 @@
 </compound>
 <compound>
 <Name>Palmitate-Linoleate-Palmitate (PLiP)</Name>
+  <Formula>PLiP</Formula>
 <Molecular_Weight>831.353576660156</Molecular_Weight>
 <Normal_Boiling_Pt_C>537.600000000000</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>925.030029296875</Ideal_Liq_Density_kg_m3>
@@ -277,6 +282,7 @@
 </compound>
 <compound>
 <Name>Palmitate-Oleate-Stearate (POS)</Name>
+  <Formula>POS</Formula>
 <Molecular_Weight>861.422973632813</Molecular_Weight>
 <Normal_Boiling_Pt_C>545.139978027344</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>919.010009765625</Ideal_Liq_Density_kg_m3>
@@ -332,6 +338,7 @@
 </compound>
 <compound>
 <Name>Palmitate-Oleate-Oleate (POO)</Name>
+  <Formula>POO</Formula>
 <Molecular_Weight>859.407226562500</Molecular_Weight>
 <Normal_Boiling_Pt_C>544.610009765625</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>922.549987792969</Ideal_Liq_Density_kg_m3>
@@ -387,6 +394,7 @@
 </compound>
 <compound>
 <Name>Palmitate-Oleate-Linoleate (POLi)</Name>
+  <Formula>POLi</Formula>
 <Molecular_Weight>857.391418457031</Molecular_Weight>
 <Normal_Boiling_Pt_C>544.079980468750</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>926.140014648438</Ideal_Liq_Density_kg_m3>
@@ -442,6 +450,7 @@
 </compound>
 <compound>
 <Name>TriOlein (OOO)</Name>
+  <Formula>OOO</Formula>
 <Molecular_Weight>885.445007324219</Molecular_Weight>
 <Normal_Boiling_Pt_C>550.880029296875</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>923.690002441406</Ideal_Liq_Density_kg_m3>
@@ -497,6 +506,7 @@
 </compound>
 <compound>
 <Name>Ethyl Palmitate (EtP)</Name>
+  <Formula>EtP</Formula>
 <Molecular_Weight>284.481201171875</Molecular_Weight>
 <Normal_Boiling_Pt_C>318.529992675781</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>862.580017089844</Ideal_Liq_Density_kg_m3>
@@ -552,6 +562,7 @@
 </compound>
 <compound>
 <Name>Ethyl Oleate (EtO)</Name>
+  <Formula>EtO</Formula>
 <Molecular_Weight>310.519012451172</Molecular_Weight>
 <Normal_Boiling_Pt_C>336.920007324219</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>870.179992675781</Ideal_Liq_Density_kg_m3>
@@ -607,6 +618,7 @@
 </compound>
 <compound>
 <Name>Ethyl Linoleate (EtLi)</Name>
+  <Formula>EtLi</Formula>
 <Molecular_Weight>308.503204345703</Molecular_Weight>
 <Normal_Boiling_Pt_C>335.440026855469</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>878.760009765625</Ideal_Liq_Density_kg_m3>
@@ -662,6 +674,7 @@
 </compound>
 <compound>
 <Name>Ethyl Stearate (EtS)</Name>
+  <Formula>EtS</Formula>
 <Molecular_Weight>312.534790039063</Molecular_Weight>
 <Normal_Boiling_Pt_C>338.380029296875</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>861.869995117188</Ideal_Liq_Density_kg_m3>
@@ -717,6 +730,7 @@
 </compound>
 <compound>
 <Name>Palmitic Acid</Name>
+  <Formula>C16H32O2</Formula>
 <Molecular_Weight>256.428009033203</Molecular_Weight>
 <Normal_Boiling_Pt_C>351.000024414063</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>881.578002929688</Ideal_Liq_Density_kg_m3>
@@ -772,6 +786,7 @@
 </compound>
 <compound>
 <Name>Sodium Palmitate</Name>
+  <Formula>‎C16H31NaO2</Formula>
 <Molecular_Weight>278.405914306641</Molecular_Weight>
 <Normal_Boiling_Pt_C>296.963708496094</Normal_Boiling_Pt_C>
 <Ideal_Liq_Density_kg_m3>969.211303710938</Ideal_Liq_Density_kg_m3>

@@ -723,7 +723,8 @@ Namespace Databases
                         Select Case node2.Name
                             Case "Name"
                                 .Name = node2.InnerText
-                                .Formula = .Name
+                            Case "Formula"
+                                .Formula = node2.InnerText
                             Case "Molecular_Weight"
                                 .Molar_Weight = Double.Parse(node2.InnerText, nf)
                             Case "Normal_Boiling_Pt_C"
