@@ -351,6 +351,9 @@
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.en.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.es.resx">
+      <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </EmbeddedResource>
