@@ -499,10 +499,7 @@ Namespace PropertyPackages
             Dim cms0, cmst As MaterialStream
 
             cms0 = CurrentMaterialStream
-            cmst = CurrentMaterialStream.Clone
-
-            cmst.SetFlowsheet(cms0.FlowSheet)
-            cmst.PropertyPackage = Me
+            cmst = DirectCast(CurrentMaterialStream, MaterialStream).ShallowClone
 
             CurrentMaterialStream = cmst
 

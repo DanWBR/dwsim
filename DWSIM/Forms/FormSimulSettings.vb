@@ -1344,7 +1344,7 @@ Public Class FormSimulSettings
                 End If
 
                 Dim proplist As New ArrayList
-                For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values
+                For Each mstr In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                     For Each phase As BaseClasses.Phase In mstr.Phases.Values
                         tmpsubst = phase.Compounds(Me.ListViewA.SelectedItems(0).Tag)
                         phase.Compounds.Remove(Me.ListViewA.SelectedItems(0).Tag)

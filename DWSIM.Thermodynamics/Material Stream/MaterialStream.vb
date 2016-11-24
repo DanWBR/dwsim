@@ -5631,6 +5631,17 @@ Namespace Streams
             Return Me.Clone()
         End Function
 
+        Public Function ShallowClone() As Streams.MaterialStream
+
+            Dim ms As New MaterialStream("", "", FlowSheet, PropertyPackage)
+            FlowSheet.AddCompoundsToMaterialStream(ms)
+            ms.Assign(Me)
+            ms.AssignProps(Me)
+
+            Return ms
+
+        End Function
+
         Public ReadOnly Property Flowsheet1 As IFlowsheet Implements IMaterialStream.Flowsheet
             Get
                 Return FlowSheet
