@@ -806,9 +806,11 @@ Namespace PropertyPackages.Auxiliary
 
             Dim partvol(n) As Double
 
+            'V/RT = d(log f)/dP, const T
+
             i = 0
             For i = 0 To n
-                partvol(i) = (Math.Log(Math.Exp(lnfug2(i)) * Vx(i) * P2) - Math.Log(Math.Exp(lnfug1(i)) * Vx(i) * P1)) / deltaP * (8.314 * T) 'm3/mol
+                partvol(i) = (Math.Log(Math.Exp(lnfug2(i)) * Vx(i) * P2) - Math.Log(Math.Exp(lnfug1(i)) * Vx(i) * P1)) / deltaP * (8314 * T) 'm3/kmol
                 If Double.IsNaN(partvol(i)) Then partvol(i) = 0
             Next
 

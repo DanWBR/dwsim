@@ -89,43 +89,53 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
             Dim val As Double
-            Dim Z As Double = m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
+            Dim Z As Double = 1.0#
+            If Not Me.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then Me.Parameters.Add("PP_IDEAL_VAPOR_PHASE_FUG", 0)
+            If Me.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = 1 Then
+                Z = 1.0#
+            Else
+                Z = m_pr.Z_PR(T, P, RET_VMOL(Phase.Vapor), RET_VKij, RET_VTC, RET_VPC, RET_VW, "V")
+            End If
             val = P / (Z * 8.314 * T) / 1000 * AUX_MMM(Phase.Vapor)
             Return val
         End Function
 
         Public Overloads Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
+            Dim pi As Integer = 0
             Select Case phase
-                Case Phase.Liquid
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
-                        subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                    Next
-                Case Phase.Aqueous
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(6).Compounds.Values
-                        subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                    Next
-                Case Phase.Liquid1
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(3).Compounds.Values
-                        subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                    Next
-                Case Phase.Liquid2
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(4).Compounds.Values
-                        subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                    Next
-                Case Phase.Liquid3
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(5).Compounds.Values
-                        subst.PartialVolume = 1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T))
-                    Next
-                Case Phase.Vapor
-                    Dim partvol As New Object
-                    Dim i As Integer = 0
-                    partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
-                    i = 0
-                    For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                        subst.PartialVolume = partvol(i)
-                        i += 1
-                    Next
+                Case phase.Liquid
+                Case phase.Aqueous
+                    pi = 6
+                Case phase.Liquid1
+                    pi = 3
+                Case phase.Liquid2
+                    pi = 4
+                Case phase.Liquid3
+                    pi = 5
+                Case phase.Vapor
+                    If Not Me.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then Me.Parameters.Add("PP_IDEAL_VAPOR_PHASE_FUG", 0)
+                    If Me.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = 1 Then
+                        Dim vapdens = AUX_VAPDENS(T, P)
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                            subst.PartialVolume = subst.ConstantProperties.Molar_Weight / vapdens
+                        Next
+                    Else
+                        Dim partvol As New Object
+                        Dim i As Integer = 0
+                        partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.0001)
+                        i = 0
+                        For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
+                            subst.PartialVolume = partvol(i)
+                            i += 1
+                        Next
+                    End If
             End Select
+            If pi <> 0 Then
+                For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(pi).Compounds.Values
+                    subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
+                Next
+            End If
+
         End Sub
 
         Public Function RET_KIJ(ByVal id1 As String, ByVal id2 As String) As Double

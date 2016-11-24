@@ -695,7 +695,7 @@ Namespace PropertyPackages
                     Else
                         partvol = New ArrayList
                         For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
+                            partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
                 Case Phase.Aqueous
@@ -705,7 +705,7 @@ Namespace PropertyPackages
                     Else
                         partvol = New ArrayList
                         For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
+                            partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
                 Case Phase.Liquid1
@@ -715,7 +715,7 @@ Namespace PropertyPackages
                     Else
                         partvol = New ArrayList
                         For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
+                            partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
                 Case Phase.Liquid2
@@ -725,7 +725,7 @@ Namespace PropertyPackages
                     Else
                         partvol = New ArrayList
                         For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
+                            partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
                 Case Phase.Liquid3
@@ -735,7 +735,7 @@ Namespace PropertyPackages
                     Else
                         partvol = New ArrayList
                         For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(key).Compounds.Values
-                            partvol.Add(1 / 1000 * subst.ConstantProperties.Molar_Weight / Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, P, Me.AUX_PVAPi(subst.Name, T)))
+                            partvol.Add(subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T))
                         Next
                     End If
                 Case Phase.Vapor
