@@ -253,6 +253,9 @@
   <data name="btnNormalizeInput.ToolTip" xml:space="preserve">
     <value>Normalize</value>
   </data>
+  <data name="colsolv.ToolTipText" xml:space="preserve">
+    <value>Solvent (for Molality input)</value>
+  </data>
   <data name="compname.HeaderText" xml:space="preserve">
     <value>Compound</value>
   </data>
@@ -418,12 +421,6 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
-  <data name="tabPropsVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
   <data name="tabPropsVapor.Text" xml:space="preserve">
     <value>Vapor</value>
   </data>
@@ -435,12 +432,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
     <value>Units</value>
-  </data>
-  <data name="gridPropertiesLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
-  <data name="tabPropsLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
   </data>
   <data name="tabPropsLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
@@ -454,12 +445,6 @@
   <data name="DataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
-  <data name="tabPropsLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
   <data name="tabPropsLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
   </data>
@@ -472,12 +457,6 @@
   <data name="DataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
-  <data name="tabPropsLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
   <data name="tabPropsLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
   </data>
@@ -489,12 +468,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
     <value>Units</value>
-  </data>
-  <data name="gridPropertiesSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
-  <data name="tabPropsSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
   </data>
   <data name="tabPropsSolid.Text" xml:space="preserve">
     <value>Solid</value>
@@ -541,12 +514,6 @@
   <data name="DataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
-  <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
   <data name="tabCompVapor.Text" xml:space="preserve">
     <value>Vapor</value>
   </data>
@@ -555,12 +522,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn23.HeaderText" xml:space="preserve">
     <value>Amount</value>
-  </data>
-  <data name="gridCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
-  <data name="tabCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
   </data>
   <data name="tabCompLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
@@ -571,12 +532,6 @@
   <data name="DataGridViewTextBoxColumn25.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
-  <data name="tabCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
   <data name="tabCompLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
   </data>
@@ -586,12 +541,6 @@
   <data name="DataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
-  <data name="tabCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
   <data name="tabCompLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
   </data>
@@ -600,12 +549,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn29.HeaderText" xml:space="preserve">
     <value>Amount</value>
-  </data>
-  <data name="gridCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
-  <data name="tabCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
   </data>
   <data name="tabCompSolid.Text" xml:space="preserve">
     <value>Solid</value>
@@ -637,12 +580,6 @@
   <data name="DataGridViewTextBoxColumn37.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
-  <data name="gridCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
-  </data>
-  <data name="TabCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
-  </data>
   <data name="TabCompPropLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
   </data>
@@ -652,12 +589,6 @@
   <data name="DataGridViewTextBoxColumn39.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
-  <data name="gridCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
-  </data>
-  <data name="TabCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
-  </data>
   <data name="TabCompPropLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
   </data>
@@ -666,12 +597,6 @@
   </data>
   <data name="DataGridViewTextBoxColumn41.HeaderText" xml:space="preserve">
     <value>Property</value>
-  </data>
-  <data name="gridCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
-  </data>
-  <data name="TabCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
   </data>
   <data name="TabCompPropSolid.Text" xml:space="preserve">
     <value>Solid</value>

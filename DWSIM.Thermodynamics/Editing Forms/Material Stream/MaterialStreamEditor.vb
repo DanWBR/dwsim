@@ -669,42 +669,20 @@ Public Class MaterialStreamEditor
 
                     'molarity = mol solute per liter solution
                     Dim n As Integer = MatStream.Phases(0).Compounds.Count
-                    Dim liqdens(n - 1), nbp(n - 1) As Double
-                    Dim ipp As New Thermodynamics.PropertyPackages.RaoultPropertyPackage()
-                    ipp.CurrentMaterialStream = MatStream
                     Dim i As Integer = 0
-                    For Each s In MatStream.Phases(0).Compounds.Values
-                        nbp(i) = s.ConstantProperties.Normal_Boiling_Point
-                        If 298.15 > nbp(i) Then
-                            liqdens(i) = ipp.AUX_LIQDENSi(s, nbp(i))
-                        Else
-                            liqdens(i) = ipp.AUX_LIQDENSi(s, 298.15)
-                        End If
-                        i += 1
-                    Next
+
+                    Dim V = MatStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
                     Dim total As Double = 0
-                    Dim val As Double = 0
-                    i = 0
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(0).Value.ToString.Contains("Water") Then
-                            total += row.Cells(1).Value / 1000 * liqdens(i) / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000
-                        Else
-                            total += row.Cells(1).Value
-                        End If
-                        i += 1
+                        total += row.Cells(1).Value * V * 1000 ' mol/L * m3 * 1000 L / m3 = mol
                     Next
 
                     Q = total
 
                     i = 0
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(0).Value.ToString.Contains("Water") Then
-                            MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / 1000 * liqdens(i) / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000 / total
-                        Else
-                            MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / total
-                        End If
-                        i += 1
+                        MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value * V * 1000 / total
                     Next
 
                     For Each comp In MatStream.Phases(0).Compounds.Values
@@ -719,16 +697,20 @@ Public Class MaterialStreamEditor
                     MatStream.Phases(0).Properties.molarflow = Q
                     MatStream.Phases(0).Properties.massflow = W
 
-                    ipp = Nothing
-
                 Case 6
 
-                    'molarity = mol solute per kg solvent
+                    'molality = mol solute per kg solvent
+
+                    Dim refsolv = ""
+
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        If row.Cells(2).Value = True Then refsolv = row.Cells(0).Value.ToString
+                    Next
 
                     Dim total As Double = 0
                     Dim val As Double = 0
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(0).Value.ToString.Contains("Water") Then
+                        If row.Cells(0).Value.ToString.Contains(refsolv) Then
                             total += row.Cells(1).Value / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000
                         Else
                             total += row.Cells(1).Value
@@ -738,7 +720,7 @@ Public Class MaterialStreamEditor
                     Q = total
 
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(0).Value.ToString.Contains("Water") Then
+                        If row.Cells(0).Value.ToString.Contains(refsolv) Then
                             MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000 / total
                         Else
                             MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / total
@@ -823,6 +805,8 @@ Public Class MaterialStreamEditor
 
         UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
 
+        colsolv.ReadOnly = Not cbCompBasis.SelectedIndex.Equals(6)
+
     End Sub
 
     Sub UpdateCompBasis(cb As ComboBox, grid As DataGridView, phase As Interfaces.IPhase)
@@ -858,11 +842,11 @@ Public Class MaterialStreamEditor
                 Next
                 suffix = "mol/L"
             Case 6
-                'molality = mol solute per kg water
+                'molality = mol solute per kg solvent
                 For Each row As DataGridViewRow In grid.Rows
                     row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molality
                 Next
-                suffix = "mol/kg Water"
+                suffix = "mol/kg solv."
             Case 4
                 'liquid vol. frac
                 Dim n As Integer = phase.Compounds.Count
