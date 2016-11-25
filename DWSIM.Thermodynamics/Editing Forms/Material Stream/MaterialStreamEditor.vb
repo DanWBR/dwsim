@@ -133,7 +133,7 @@ Public Class MaterialStreamEditor
             gridInputComposition.Rows.Clear()
             gridInputComposition.Columns(1).CellTemplate.Style.Format = nff
             For Each comp In .Phases(0).Compounds.Values
-                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault, comp.Name.Equals(MatStream.ReferenceSolvent)})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
 
             Dim sum As Double = 0.0#
@@ -590,6 +590,9 @@ Public Class MaterialStreamEditor
 
         Dim W, Q As Double
 
+
+        MatStream.PropertyPackage.CurrentMaterialStream = MatStream
+
         If Me.ValidateData() Then
 
             Dim mmtotal As Double = 0
@@ -667,39 +670,65 @@ Public Class MaterialStreamEditor
 
                 Case 5
 
-                    'molarity = mol solute per liter solution
-                    Dim n As Integer = MatStream.Phases(0).Compounds.Count
-                    Dim i As Integer = 0
+                    Dim refsolv = ""
 
-                    Dim V = MatStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        If row.Cells(2).Value = True Then refsolv = row.Cells(0).Value.ToString
+                    Next
+
+                    MatStream.ReferenceSolvent = refsolv
+
+                    Dim T As Double = MatStream.Phases(0).Properties.temperature.GetValueOrDefault
+
+                    'molarity = mol solute per liter solution
+
+                    Dim V = MatStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault * 1000 'L
+
+                    Dim comp As Interfaces.ICompound
 
                     Dim total As Double = 0
+                    Dim vs As Double = 0.0#
+                    Dim liqdens = 0.0#
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        total += row.Cells(1).Value * V * 1000 ' mol/L * m3 * 1000 L / m3 = mol
+                        If Not row.Cells(0).Value.ToString.Contains(refsolv) Then
+                            comp = MatStream.Phases(0).Compounds(row.Cells(0).Value.ToString)
+                            total += row.Cells(1).Value * V 'mol
+                            liqdens = MatStream.PropertyPackage.AUX_LIQDENSi(comp, T)
+                            vs += row.Cells(1).Value * V * comp.ConstantProperties.Molar_Weight / 1000 / liqdens * 1000
+                        End If
+                    Next
+                    comp = MatStream.Phases(0).Compounds(refsolv)
+                    Dim solvent_amount As Double = (V - vs) / 1000 * MatStream.PropertyPackage.AUX_LIQDENSi(comp, T) / comp.ConstantProperties.Molar_Weight * 1000 / V
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        If row.Cells(0).Value.ToString.Contains(refsolv) Then
+                            row.Cells(1).Value = solvent_amount.ToString(nff)
+                        End If
                     Next
 
+                    total += solvent_amount * V
                     Q = total
 
-                    i = 0
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value * V * 1000 / total
+                        MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value * V / total
                     Next
 
+                    mtotal = 0.0#
                     For Each comp In MatStream.Phases(0).Compounds.Values
                         mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                     Next
 
-                    W = 0
                     For Each comp In MatStream.Phases(0).Compounds.Values
                         comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
-                        W += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                     Next
+
                     MatStream.Phases(0).Properties.molarflow = Q
-                    MatStream.Phases(0).Properties.massflow = W
+                    MatStream.Phases(0).Properties.massflow = Q / 1000 * MatStream.PropertyPackage.AUX_MMM(PropertyPackages.Phase.Mixture)
 
                 Case 6
 
                     'molality = mol solute per kg solvent
+
+                    W = MatStream.Phases(0).Properties.massflow.GetValueOrDefault
 
                     Dim refsolv = ""
 
@@ -707,37 +736,43 @@ Public Class MaterialStreamEditor
                         If row.Cells(2).Value = True Then refsolv = row.Cells(0).Value.ToString
                     Next
 
-                    Dim total As Double = 0
-                    Dim val As Double = 0
+                    MatStream.ReferenceSolvent = refsolv
+
+                    Dim comp As Interfaces.ICompound
+
+                    Dim Ws As Double = 0
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        If Not row.Cells(0).Value.ToString.Contains(refsolv) Then
+                            comp = MatStream.Phases(0).Compounds(row.Cells(0).Value.ToString)
+                            Ws += row.Cells(1).Value * comp.ConstantProperties.Molar_Weight / 1000 'total kg solute / kg solvent
+                        End If
+                    Next
+                    Dim solvent_amount As Double = W / (Ws + 1)
+                    comp = MatStream.Phases(0).Compounds(refsolv)
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         If row.Cells(0).Value.ToString.Contains(refsolv) Then
-                            total += row.Cells(1).Value / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000
-                        Else
-                            total += row.Cells(1).Value
+                            row.Cells(1).Value = (1000 / comp.ConstantProperties.Molar_Weight).ToString(nff)
                         End If
                     Next
 
-                    Q = total
+                    Q = 0.0#
+                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
+                        Q += row.Cells(1).Value * solvent_amount
+                    Next
 
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(0).Value.ToString.Contains(refsolv) Then
-                            MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / MatStream.Phases(0).Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight * 1000 / total
-                        Else
-                            MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value / total
-                        End If
+                        MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value * solvent_amount / Q
                     Next
 
                     For Each comp In MatStream.Phases(0).Compounds.Values
                         mtotal += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight
                     Next
 
-                    W = 0
                     For Each comp In MatStream.Phases(0).Compounds.Values
                         comp.MassFraction = comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / mtotal
-                        W += comp.MoleFraction.GetValueOrDefault * comp.ConstantProperties.Molar_Weight / 1000 * Q
                     Next
+
                     MatStream.Phases(0).Properties.molarflow = Q
-                    MatStream.Phases(0).Properties.massflow = W
 
                 Case 4
 
@@ -805,7 +840,7 @@ Public Class MaterialStreamEditor
 
         UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
 
-        colsolv.ReadOnly = Not cbCompBasis.SelectedIndex.Equals(6)
+        colsolv.ReadOnly = Not cbCompBasis.SelectedIndex.Equals(6) AndAlso Not cbCompBasis.SelectedIndex.Equals(5)
 
     End Sub
 
@@ -1035,20 +1070,25 @@ Public Class MaterialStreamEditor
     Private Sub gridInputComposition_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellValueChanged
 
         If Loaded Then
-            Try
-                Dim sum As Double = 0.0#
-                For Each row As DataGridViewRow In gridInputComposition.Rows
-                    sum += Double.Parse(row.Cells(1).Value)
-                Next
-                lblInputAmount.Text = "Total: " & sum.ToString(nf)
-                Me.lblInputAmount.ForeColor = Drawing.Color.Blue
-                If Not dontshowtooltip Then
-                    ToolTip2.Show(ToolTip1.GetToolTip(btnCompAcceptChanges), btnCompAcceptChanges, 2000)
-                    dontshowtooltip = True
-                End If
-            Catch ex As Exception
-                Me.lblInputAmount.ForeColor = Drawing.Color.Red
-            End Try
+            If e.ColumnIndex = 1 Then
+                Try
+                    Dim sum As Double = 0.0#
+                    For Each row As DataGridViewRow In gridInputComposition.Rows
+                        sum += Double.Parse(row.Cells(1).Value)
+                    Next
+                    lblInputAmount.Text = "Total: " & sum.ToString(nf)
+                    Me.lblInputAmount.ForeColor = Drawing.Color.Blue
+                    If Not dontshowtooltip Then
+                        ToolTip2.Show(ToolTip1.GetToolTip(btnCompAcceptChanges), btnCompAcceptChanges, 2000)
+                        dontshowtooltip = True
+                    End If
+
+                Catch ex As Exception
+                    Me.lblInputAmount.ForeColor = Drawing.Color.Red
+                End Try
+            ElseIf e.ColumnIndex = 2 Then
+                gridInputComposition.Rows(e.RowIndex).Cells(1).ReadOnly = Convert.ToBoolean(gridInputComposition.Rows(e.RowIndex).Cells(2).Value)
+            End If
         End If
 
     End Sub

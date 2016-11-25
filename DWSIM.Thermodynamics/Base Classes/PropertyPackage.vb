@@ -1112,8 +1112,8 @@ Namespace PropertyPackages
 
             For PhaseID = 0 To Me.CurrentMaterialStream.Phases.Count - 1
                 VF = Me.CurrentMaterialStream.Phases(PhaseID).Properties.volumetric_flow.GetValueOrDefault
-                If Me.CurrentMaterialStream.Phases(PhaseID).Compounds.ContainsKey("Water") Then
-                    MF = Me.CurrentMaterialStream.Phases(PhaseID).Compounds("Water").MassFraction.GetValueOrDefault * Me.CurrentMaterialStream.Phases(PhaseID).Properties.massflow.GetValueOrDefault
+                If Me.CurrentMaterialStream.Phases(PhaseID).Compounds.ContainsKey(Me.CurrentMaterialStream.ReferenceSolvent) Then
+                    MF = Me.CurrentMaterialStream.Phases(PhaseID).Compounds(Me.CurrentMaterialStream.ReferenceSolvent).MassFraction.GetValueOrDefault * Me.CurrentMaterialStream.Phases(PhaseID).Properties.massflow.GetValueOrDefault
                 End If
 
                 For Each C In Me.CurrentMaterialStream.Phases(PhaseID).Compounds.Values
@@ -1126,7 +1126,7 @@ Namespace PropertyPackages
                         C.Molarity = 0
                     End If
 
-                    'Molality = mol solute per 1000 g of water
+                    'Molality = mol solute per 1000 g of solvent
                     If MF > 0 Then
                         C.Molality = CF / MF
                     Else
