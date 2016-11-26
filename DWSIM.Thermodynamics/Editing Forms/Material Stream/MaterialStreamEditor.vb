@@ -132,6 +132,8 @@ Public Class MaterialStreamEditor
 
             gridInputComposition.Rows.Clear()
             gridInputComposition.Columns(1).CellTemplate.Style.Format = nff
+            gridInputComposition.Columns(2).Visible = False
+
             For Each comp In .Phases(0).Compounds.Values
                 gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault, comp.Name.Equals(MatStream.ReferenceSolvent)})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
@@ -840,7 +842,30 @@ Public Class MaterialStreamEditor
 
         UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
 
-        colsolv.ReadOnly = Not cbCompBasis.SelectedIndex.Equals(6) AndAlso Not cbCompBasis.SelectedIndex.Equals(5)
+        If cbCompBasis.SelectedIndex = 5 Or cbCompBasis.SelectedIndex = 6 Then
+            gridInputComposition.Columns(2).Visible = True
+            For i = 0 To gridInputComposition.RowCount - 1
+                If gridInputComposition.Rows(i).Cells(0).Value = MatStream.ReferenceSolvent Then
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(2).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                ElseIf MatStream.ReferenceSolvent = "" Then
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                Else
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = False
+                    gridInputComposition.Rows(i).Cells(2).ReadOnly = False
+                End If
+
+            Next
+        Else
+            gridInputComposition.Columns(2).Visible = False
+            gridInputComposition.Columns(1).ReadOnly = False
+            For i = 0 To gridInputComposition.RowCount - 1
+                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
+            Next
+        End If
 
     End Sub
 
@@ -1086,11 +1111,29 @@ Public Class MaterialStreamEditor
                 Catch ex As Exception
                     Me.lblInputAmount.ForeColor = Drawing.Color.Red
                 End Try
-            ElseIf e.ColumnIndex = 2 Then
-                gridInputComposition.Rows(e.RowIndex).Cells(1).ReadOnly = Convert.ToBoolean(gridInputComposition.Rows(e.RowIndex).Cells(2).Value)
+
             End If
         End If
 
+    End Sub
+    Private Sub gridInputComposition_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellContentClick
+
+        If e.ColumnIndex = 2 Then
+            For i = 0 To gridInputComposition.RowCount - 1
+                If i <> e.RowIndex Then
+                    gridInputComposition.Rows(i).Cells(2).Value = False
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = False
+                    gridInputComposition.Rows(i).Cells(2).ReadOnly = False
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
+                Else
+                    'gridInputComposition.Rows(i).Cells(2).Value = True
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(2).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                    MatStream.ReferenceSolvent = gridInputComposition.Rows(i).Cells(0).Value
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub cbInlet_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbInlet.SelectedIndexChanged
@@ -1374,6 +1417,5 @@ Public Class MaterialStreamEditor
         If cb Is cbCompoundPhaseProperties Then lblCompPropUnits.Text = suffix
 
     End Sub
-
 
 End Class
