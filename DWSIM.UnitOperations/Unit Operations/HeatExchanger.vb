@@ -641,7 +641,7 @@ Namespace UnitOperations
 
                     StInHot.PropertyPackage.CurrentMaterialStream = StInHot
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate hot stream outlet enthalpy... P = {0} Pa, T = K", Ph2, Th2))
-                    Dim tmp = StInHot.PropertyPackage.DW_CalcEquilibrio_ISOL(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P, Th2, Ph2, 0)
+                    Dim tmp = StInHot.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, Ph2, Th2, 0.0#)
                     Hh2 = tmp.CalculatedEnthalpy
                     Q = -Wh * (Hh2 - Hh1)
 

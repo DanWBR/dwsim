@@ -288,22 +288,22 @@ Namespace Streams
             Select Case phasename
                 Case "Vapor"
                     Return Phases(2)
-                Case "LiquidMixture", "OverallLiquid"
+                Case "LiquidMixture", "OverallLiquid", "Líquido (Mistura)"
                     Return Phases(1)
-                Case "Liquid1"
+                Case "Liquid1", "Líquido 1"
                     Return Phases(3)
-                Case "Liquid2"
+                Case "Liquid2", "Líquido 2"
                     Return Phases(4)
-                Case "Liquid3"
+                Case "Liquid3", "Líquido 3"
                     Return Phases(5)
-                Case "Aqueous"
+                Case "Aqueous", "Phase Aquosa"
                     Return Phases(6)
-                Case "Solid"
+                Case "Solid", "Sólida"
                     Return Phases(7)
-                Case "Mixture"
+                Case "Mixture", "Mistura"
                     Return Phases(0)
                 Case Else
-                    Throw New ArgumentException("Unknown phase name")
+                    Return Phases(0)
             End Select
         End Function
 

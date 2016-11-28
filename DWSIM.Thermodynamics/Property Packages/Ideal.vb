@@ -608,7 +608,7 @@ Namespace PropertyPackages
                     Next
                 Case Phase.Vapor
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
-                        subst.PartialVolume = subst.MoleFraction.GetValueOrDefault * 8.314 * T / P
+                        subst.PartialVolume = 8.314 * T / P
                     Next
             End Select
 

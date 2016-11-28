@@ -787,6 +787,8 @@ Namespace PropertyPackages
                 Case Phase.Vapor
                     partvol = Me.m_pr.CalcPartialVolume(T, P, RET_VMOL(phase), RET_VKij(), RET_VKij2(), RET_KAPPA1, RET_KAPPA2, RET_KAPPA3, RET_VTC(), RET_VPC(), RET_VW(), RET_VTB(), "V", 0.01)
                     key = "2"
+                Case PropertyPackages.Phase.Solid
+                    partvol = RET_NullVector()
             End Select
 
             i = 0
