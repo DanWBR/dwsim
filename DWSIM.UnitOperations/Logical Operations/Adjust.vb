@@ -318,6 +318,10 @@ Namespace SpecialOps
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
+            If m_ManipulatedObjectData Is Nothing Then m_ManipulatedObjectData = New Helpers.SpecialOpObjectInfo()
+            If m_ControlledObjectData Is Nothing Then m_ControlledObjectData = New Helpers.SpecialOpObjectInfo()
+            If m_ReferencedObjectData Is Nothing Then m_ReferencedObjectData = New Helpers.SpecialOpObjectInfo()
+
             If m_ManipulatedObjectData.ObjectType = Nothing Then m_ManipulatedObjectData.ObjectType = ""
             If m_ControlledObjectData.ObjectType = Nothing Then m_ControlledObjectData.ObjectType = ""
             If m_ReferencedObjectData.ObjectType = Nothing Then m_ReferencedObjectData.ObjectType = ""
