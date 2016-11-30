@@ -134,6 +134,10 @@
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.HeaterGraphic"
         ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic") Then
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.CompressorGraphic"
+        ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.RigorousColumnGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic"
+        ElseIf xel.Value.Equals("PortableFlowsheetDrawing.GraphicObjects.Shapes.AbsorptionColumnGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.AbsorptionColumnGraphic"
         End If
 
         If xel.Value.StartsWith("PortableFlowsheetDrawing.GraphicObjects.Shapes") And xel.Name = "Type" Then
@@ -189,6 +193,10 @@
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.TurbineGraphic") Then
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.RigorousColumnGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.AbsorptionColumnGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.AbsorptionColumnGraphic"
         End If
 
         If xel.Value.StartsWith("DWSIM.Thermodynamics.PropertyPackages") And xel.Name = "Type" Then
