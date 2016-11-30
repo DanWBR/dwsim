@@ -623,6 +623,11 @@ out:        Return New Object() {L, V, Vx, Vy, 1, 0.0#, PP.RET_NullVector, 0.0#,
             End Get
         End Property
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

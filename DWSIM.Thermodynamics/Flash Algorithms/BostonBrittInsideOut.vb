@@ -2300,6 +2300,11 @@ final:      d2 = Date.Now
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

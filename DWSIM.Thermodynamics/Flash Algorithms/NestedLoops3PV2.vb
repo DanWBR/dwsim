@@ -1907,6 +1907,11 @@ out:        Return New Object() {L1, V, Vx1, Vy, P, ecount, Ki1, L2, Vx2, 0.0#, 
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

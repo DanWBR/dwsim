@@ -951,7 +951,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vx(n), Vy(n), Vp(n), gamma(n), Vcalc, Vspec, T, x, x0, x00, fx, fx0, fx00, Pcalc As Double
 
             Dim nl As New NestedLoops
-        
+
             ecount = 0
             Vspec = V
             x = Tref
@@ -1136,6 +1136,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Overrides ReadOnly Property Name As String
             Get
                 Return "Electrolyte SVLE"
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
             End Get
         End Property
     End Class

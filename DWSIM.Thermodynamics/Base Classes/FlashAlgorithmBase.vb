@@ -1092,6 +1092,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property Tag As String = "" Implements Interfaces.IFlashAlgorithm.Tag
 
+        Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements Interfaces.IFlashAlgorithm.MobileCompatible
+
     End Class
 
     ''' <summary>

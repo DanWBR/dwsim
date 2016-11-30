@@ -1100,6 +1100,7 @@ Public Class FormMain
         Next
 
         Dim form As FormFlowsheet = New FormFlowsheet() With {.MobileCompatibilityMode = True}
+        form.PanelMobileCompatMode.Visible = True
 
         Settings.CAPEOPENMode = False
         My.Application.ActiveSimulation = form

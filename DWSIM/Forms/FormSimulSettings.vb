@@ -131,16 +131,28 @@ Public Class FormSimulSettings
 
             'Me.TextBox1.AutoCompleteCustomSource = ACSC1
 
+            Dim addobj As Boolean = True
+
             'property packages
             Me.DataGridViewPP.Rows.Clear()
             For Each pp2 As PropertyPackages.PropertyPackage In FormMain.PropertyPackages.Values
-                Me.DataGridViewPP.Rows.Add(New String() {pp2.ComponentName, pp2.ComponentName, pp2.ComponentDescription})
+                If Not FrmChild.MobileCompatibilityMode Then
+                    addobj = True
+                Else
+                    addobj = pp2.MobileCompatible
+                End If
+                If addobj Then Me.DataGridViewPP.Rows.Add(New String() {pp2.ComponentName, pp2.ComponentName, pp2.ComponentDescription})
             Next
 
             'flash algorithms
             Me.dgvAvailableFlashAlgos.Rows.Clear()
             For Each fa In FormMain.FlashAlgorithms.Values
-                Me.dgvAvailableFlashAlgos.Rows.Add(New String() {fa.Name, fa.Description})
+                If Not FrmChild.MobileCompatibilityMode Then
+                    addobj = True
+                Else
+                    addobj = fa.MobileCompatible
+                End If
+                If addobj Then Me.dgvAvailableFlashAlgos.Rows.Add(New String() {fa.Name, fa.Description})
             Next
 
         Else

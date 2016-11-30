@@ -836,7 +836,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid) * proppack.AUX_MMM(Vx2)
             eberror = Hf - V * Hv - L1 * Hl1 - L2 * Hl2
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -906,7 +906,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Hl2 = proppack.DW_CalcEnthalpy(Vx2, T, Pf, State.Liquid) * proppack.AUX_MMM(Vx2)
             eberror = Hf - V * Hv - L1 * Hl1 - L2 * Hl2
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -974,7 +974,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim eberror As Double = Sf - V * Sv - L1 * Sl1 - L2 * Sl2
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -1042,7 +1042,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim eberror As Double = Sf - V * Sv - L1 * Sl1 - L2 * Sl2
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return Abs(eberror)
 
@@ -1549,7 +1549,7 @@ restart:    Do
 
         Private Function EntropyBalanceSPL(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim Sl1, Sl2, balerror As Double
 
@@ -1568,7 +1568,7 @@ restart:    Do
 
         Private Function EntropyBalanceSPV(ByVal T As Double, ByVal otherargs As Object) As Double
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Dim SV, balerror As Double
 
@@ -2366,7 +2366,7 @@ out:
 
             Dim eberror As Double = (L1 + L2) - Lf
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2422,7 +2422,7 @@ out:
 
             Dim eberror As Double = (L1 + L2) - Lf
 
-            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not proppack.CurrentMaterialStream.Flowsheet Is Nothing Then proppack.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return eberror
 
@@ -2442,6 +2442,11 @@ out:
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

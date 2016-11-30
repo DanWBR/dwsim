@@ -1567,6 +1567,11 @@ alt:
             Return _nl3p.Flash_TV(Vz, T, Vspec, Pref, PP, ReuseKI, PrevKi)
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
     Public Class GibbsProblem

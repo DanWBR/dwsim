@@ -1664,6 +1664,11 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Return OBJ_FUNC_PS_FLASH(type, X, P, Vz, PP)
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

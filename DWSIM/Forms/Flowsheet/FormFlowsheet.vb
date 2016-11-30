@@ -666,6 +666,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #Region "    Click Event Handlers "
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
+    End Sub
+
     Private Sub UtilitiesTSMI_Click(sender As Object, e As EventArgs) Handles UtilitiesTSMI.DropDownOpening
 
         UtilitiesTSMI.DropDownItems.Clear()

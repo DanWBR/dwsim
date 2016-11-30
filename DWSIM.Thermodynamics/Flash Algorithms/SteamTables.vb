@@ -114,7 +114,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Else
                     vf = (H - Hl) / (Hv - Hl)
                 End If
-              
+
                 If vf <> 0.0# And vf <> 1.0# Then
                     T = .tSatW(P / 100000)
                 Else
@@ -199,6 +199,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

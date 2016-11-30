@@ -406,7 +406,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim kr As New List(Of Double)
 
             For Each r In Reactions
-                kr.Add(r.EvaluateK(T, PP))
+                kr.Add(r.EvaluateK(T, pp))
             Next
 
             'loop: assume a concentration of H2NCOO- 
@@ -1235,6 +1235,11 @@ fallback:           Vx = Vz.Clone
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

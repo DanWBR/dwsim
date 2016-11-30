@@ -841,7 +841,7 @@ Namespace PropertyPackages
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get
-                Return True
+                Return False
             End Get
         End Property
     End Class

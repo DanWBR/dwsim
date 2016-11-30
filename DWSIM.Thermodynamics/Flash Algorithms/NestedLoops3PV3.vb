@@ -48,7 +48,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim DSv, DSl, DSl1, DSl2, Sv0, Svid, Slid1, Slid2, Sm, Sv, Sl1, Sl2 As Double
         Dim Pb, Pd, Pmin, Pmax, Px, soma_x, soma_x1, soma_y, soma_x2 As Double
         Dim proppack As PropertyPackages.PropertyPackage
-     
+
         Sub New()
             MyBase.New()
         End Sub
@@ -1717,6 +1717,11 @@ out:        L1 = L1 * (1 - V) 'calculate global phase fractions
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

@@ -13,6 +13,7 @@
     Property Tag As String
 
     ReadOnly Property InternalUseOnly As Boolean
+    ReadOnly Property MobileCompatible As Boolean
 
 End Interface
 

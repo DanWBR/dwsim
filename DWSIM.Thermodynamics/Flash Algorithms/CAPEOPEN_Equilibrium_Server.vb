@@ -250,7 +250,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 End If
 
                 _coes = CType(_coppm, ICapeThermoPropertyPackageManager).GetPropertyPackage(_esname)
-                
+
                 If _istres IsNot Nothing Then
                     Dim myuo As Interfaces2.IPersistStreamInit = TryCast(_coes, Interfaces2.IPersistStreamInit)
                     If Not myuo Is Nothing Then
@@ -572,6 +572,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Property
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

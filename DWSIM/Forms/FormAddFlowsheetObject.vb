@@ -17,12 +17,21 @@ Public Class FormAddFlowsheetObject
         availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
         availableTypes.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
+        Dim add As Boolean = True
+
         For Each item In availableTypes
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
-                obj.SetFlowsheet(Flowsheet)
-                objlist.Add(obj.GetDisplayName, obj)
-                ListBox1.Items.Add(obj.GetDisplayName)
+                If Not Flowsheet.MobileCompatibilityMode Then
+                    add = True
+                Else
+                    add = obj.MobileCompatible
+                End If
+                If add Then
+                    obj.SetFlowsheet(Flowsheet)
+                    objlist.Add(obj.GetDisplayName, obj)
+                    ListBox1.Items.Add(obj.GetDisplayName)
+                End If
             End If
         Next
 

@@ -22,25 +22,34 @@ Public Class SimulationObjectsPanel
         availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
         availableTypes.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
+        Dim add As Boolean = True
+
         For Each item In availableTypes.OrderBy(Function(x) x.Name)
             If Not item.IsAbstract Then
                 Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
-                obj.SetFlowsheet(Flowsheet)
-                Dim li As New ListItem
-                li.lblName.Text = obj.GetDisplayName
-                li.lblDescription.Text = obj.GetDisplayDescription
-                li.Image.Image = obj.GetIconBitmap
-                li.ObjectTypeInfo = obj.GetType
-                If item.Name.Contains("Stream") Then
-                    PanelStreams.Controls.Add(li)
-                ElseIf item.Name.Contains("Flowsheet") Or item.Name.Contains("Custom") Or item.Name.Contains("Excel") Or item.Name.Contains("CapeOpen") Then
-                    PanelCustomOps.Controls.Add(li)
-                ElseIf item.Name.Contains("Recycle") Or item.Name.Contains("Spec") Or item.Name.Contains("Adjust") Then
-                    PanelLogicalOps.Controls.Add(li)
+                If Not Flowsheet.MobileCompatibilityMode Then
+                    add = True
                 Else
-                    PanelUnitOps.Controls.Add(li)
+                    add = obj.MobileCompatible
                 End If
-                obj = Nothing
+                If add Then
+                    obj.SetFlowsheet(Flowsheet)
+                    Dim li As New ListItem
+                    li.lblName.Text = obj.GetDisplayName
+                    li.lblDescription.Text = obj.GetDisplayDescription
+                    li.Image.Image = obj.GetIconBitmap
+                    li.ObjectTypeInfo = obj.GetType
+                    If item.Name.Contains("Stream") Then
+                        PanelStreams.Controls.Add(li)
+                    ElseIf item.Name.Contains("Flowsheet") Or item.Name.Contains("Custom") Or item.Name.Contains("Excel") Or item.Name.Contains("CapeOpen") Then
+                        PanelCustomOps.Controls.Add(li)
+                    ElseIf item.Name.Contains("Recycle") Or item.Name.Contains("Spec") Or item.Name.Contains("Adjust") Then
+                        PanelLogicalOps.Controls.Add(li)
+                    Else
+                        PanelUnitOps.Controls.Add(li)
+                    End If
+                    obj = Nothing
+                End If
             End If
         Next
 
