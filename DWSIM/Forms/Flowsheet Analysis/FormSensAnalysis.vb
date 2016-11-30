@@ -33,7 +33,7 @@ Public Class FormSensAnalysis
     Public form As FormFlowsheet
 
     Public abortCalc As Boolean = False
-    Public selectedindex As Integer = 0
+    Public selectedindex As Integer = -1
     Public selectedsacase As SensitivityAnalysisCase
     Private selected As Boolean = False
     Private EnableAutoSave As Boolean = True
@@ -260,8 +260,8 @@ Public Class FormSensAnalysis
                     btnRun.Enabled = False
                     chkIndVar2.Enabled = False
                 End If
-                Me.tbLowerLimIndVar1.Text = .lowerlimit.GetValueOrDefault
-                Me.tbUpperLimIndVar1.Text = .upperlimit.GetValueOrDefault
+                Me.tbLowerLimIndVar1.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(Me.tbUnitIndVar1.Text, .lowerlimit.GetValueOrDefault)
+                Me.tbUpperLimIndVar1.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(Me.tbUnitIndVar1.Text, .upperlimit.GetValueOrDefault)
                 Me.nuNumPointsIndVar1.Value = .points
             End With
             With sacase.iv2
@@ -274,8 +274,8 @@ Public Class FormSensAnalysis
                     Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
                     Me.cbPropIndVar2.SelectedItem = DWSIM.App.GetPropertyName(.propID)
                 End If
-                Me.tbLowerLimIndVar2.Text = .lowerlimit.GetValueOrDefault
-                Me.tbUpperLimIndVar2.Text = .upperlimit.GetValueOrDefault
+                Me.tbLowerLimIndVar2.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(Me.tbUnitIndVar2.Text, .lowerlimit.GetValueOrDefault)
+                Me.tbUpperLimIndVar2.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(Me.tbUnitIndVar2.Text, .upperlimit.GetValueOrDefault)
                 Me.nuNumPointsIndVar2.Value = .points
             End With
             Me.dgDepVariables.Rows.Clear()
@@ -332,32 +332,36 @@ Public Class FormSensAnalysis
 
     Private Sub lbCases_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbCases.SelectedIndexChanged
 
-        Me.selectedindex = Me.lbCases.SelectedIndex
+        If Me.selectedindex <> Me.lbCases.SelectedIndex Then
 
-        If Not Me.lbCases.SelectedItem Is Nothing Then
-            For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
-                If sacase.name = Me.lbCases.SelectedItem.ToString Then
-                    Me.selectedsacase = sacase
-                    Me.PopulateForm(sacase)
-                    Exit For
-                End If
-            Next
-            'TabPage2.Enabled = True
-            'TabPage3.Enabled = True
-            GroupBox8.Enabled = True
-            GroupBox9.Enabled = True
-            btnRun.Enabled = True
-            'gbExp.Enabled = True
-        Else
-            'TabPage2.Enabled = False
-            'TabPage3.Enabled = False
-            'gbExp.Enabled = False
-            GroupBox8.Enabled = False
-            GroupBox9.Enabled = False
-            btnRun.Enabled = False
+            Me.selectedindex = Me.lbCases.SelectedIndex
+
+            If Not Me.lbCases.SelectedItem Is Nothing Then
+                For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+                    If sacase.name = Me.lbCases.SelectedItem.ToString Then
+                        Me.selectedsacase = sacase
+                        Me.PopulateForm(sacase)
+                        Exit For
+                    End If
+                Next
+                'TabPage2.Enabled = True
+                'TabPage3.Enabled = True
+                GroupBox8.Enabled = True
+                GroupBox9.Enabled = True
+                btnRun.Enabled = True
+                'gbExp.Enabled = True
+            Else
+                'TabPage2.Enabled = False
+                'TabPage3.Enabled = False
+                'gbExp.Enabled = False
+                GroupBox8.Enabled = False
+                GroupBox9.Enabled = False
+                btnRun.Enabled = False
+            End If
+
+            selected = True
+
         End If
-
-        selected = True
 
     End Sub
 
@@ -408,10 +412,10 @@ Public Class FormSensAnalysis
                         .propID = prop
                     End If
                 Next
-                .lowerlimit = Me.tbLowerLimIndVar1.Text
-                .upperlimit = Me.tbUpperLimIndVar1.Text
-                .points = Me.nuNumPointsIndVar1.Value
                 .unit = Me.tbUnitIndVar1.Text
+                .lowerlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbLowerLimIndVar1.Text))
+                .upperlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbUpperLimIndVar1.Text))
+                .points = Me.nuNumPointsIndVar1.Value
             End With
             If Me.chkIndVar2.Checked And cbPropIndVar2.SelectedItem <> Nothing Then
                 With sacase.iv2

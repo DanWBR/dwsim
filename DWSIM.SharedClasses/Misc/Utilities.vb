@@ -191,6 +191,10 @@
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic"
         End If
 
+        If xel.Value.StartsWith("DWSIM.Thermodynamics.PropertyPackages") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Thermodynamics.PropertyPackages", "PortableDTL.DTL.SimulationObjects.PropertyPackages")
+        End If
+
         If xel.Value.StartsWith("DWSIM.DrawingTools.GraphicObjects") And xel.Name = "Type" Then
             xel.Value = xel.Value.Replace("DWSIM.DrawingTools.GraphicObjects", "PortableFlowsheetDrawing.GraphicObjects.Shapes")
         End If
@@ -200,7 +204,9 @@
 
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Vessel") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Separator"
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Compressor") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.AdiabaticExpanderCompressor"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Expander") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.AdiabaticExpanderCompressor"
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Heater") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.HeaterCooler"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Cooler") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.HeaterCooler"
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.HeatExchanger") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.HeatExchanger"
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Mixer") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Mixer"
         If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Splitter") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Splitter"
