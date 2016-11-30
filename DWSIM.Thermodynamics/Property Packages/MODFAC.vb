@@ -40,7 +40,6 @@ Namespace PropertyPackages
             End Set
         End Property
 
-
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
             Me.m_act = New Auxiliary.Modfac

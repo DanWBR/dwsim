@@ -33,6 +33,12 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "519EB917-0B2E-4ac1-9AF2-2D1A2A55067F"
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
+
         Public Property m_uni As Auxiliary.NISTMFAC
             Get
                 Return m_act

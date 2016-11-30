@@ -10638,6 +10638,7 @@ Final3:
             End Set
         End Property
 
+        Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements IPropertyPackage.MobileCompatible
 
     End Class
 

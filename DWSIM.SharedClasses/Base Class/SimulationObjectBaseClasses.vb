@@ -625,6 +625,8 @@ Namespace UnitOperations
 
         Public MustOverride Sub CloseEditForm() Implements ISimulationObject.CloseEditForm
 
+        Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements ISimulationObject.MobileCompatible
+
     End Class
 
 End Namespace

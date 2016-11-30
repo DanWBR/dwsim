@@ -916,6 +916,11 @@ Namespace UnitOperations
             End If
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
     <Serializable()> Public Class AbsorptionColumn
@@ -1069,6 +1074,11 @@ Namespace UnitOperations
             End If
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
     <Serializable()> Public Class ReboiledAbsorber
@@ -1217,6 +1227,11 @@ Namespace UnitOperations
             End If
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
     <Serializable()> Public Class RefluxedAbsorber
@@ -1371,6 +1386,11 @@ Namespace UnitOperations
             End If
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
     <System.Serializable()> Public MustInherit Class Column

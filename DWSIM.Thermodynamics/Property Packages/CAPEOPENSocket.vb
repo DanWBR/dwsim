@@ -675,7 +675,7 @@ Namespace PropertyPackages
 
             If _coversion = "1.0" Then
                 If myphase <> "Overall" And myphase <> "" Then
-                    If Phase <> PropertyPackages.Phase.Liquid Then
+                    If phase <> PropertyPackages.Phase.Liquid Then
                         proplist = Me.GetPropList
                         For i = 0 To UBound(proplist) - 1
                             If Not proplist(i).ToLower.Contains(".d") Then
@@ -1702,6 +1702,11 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

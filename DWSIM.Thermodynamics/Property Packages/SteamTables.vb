@@ -624,9 +624,9 @@ FINAL:
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case Phase.Vapor
+                Case phase.Vapor
                     state = "V"
-                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3
+                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3
                     state = "L"
             End Select
 
@@ -1108,6 +1108,11 @@ FINAL:
             Return New Double() {1.0#}
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

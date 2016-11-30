@@ -1397,13 +1397,13 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case Phase.Vapor
+                Case phase.Vapor
                     state = "V"
                     fstate = PropertyPackages.State.Vapor
-                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
+                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
                     state = "L"
                     fstate = PropertyPackages.State.Liquid
-                Case Phase.Solid
+                Case phase.Solid
                     state = "S"
                     fstate = PropertyPackages.State.Solid
             End Select
@@ -1563,6 +1563,11 @@ Namespace PropertyPackages
 
 #End Region
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

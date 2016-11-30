@@ -462,7 +462,7 @@ Namespace Reactors
                     Rxi.Clear()
 
                     'SOLVE ODEs
-                    
+
                     Me.activeAL = Me.ReactionsSequence.IndexOfValue(ar)
 
                     Dim vc(N.Count - 1), vc0(N.Count - 1) As Double
@@ -656,7 +656,7 @@ Namespace Reactors
 
                     'has catalyst, use Ergun equation for pressure drop in reactor beds
 
-                    Dim vel As Double = q / (PI * diameter ^ 2 / 4)
+                    Dim vel As Double = Q / (PI * diameter ^ 2 / 4)
                     Dim L As Double = Me.dV * Me.Length
                     Dim dp As Double = Me.CatalystParticleDiameter
                     Dim ev As Double = Me.CatalystVoidFraction
@@ -959,6 +959,11 @@ Namespace Reactors
             End If
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

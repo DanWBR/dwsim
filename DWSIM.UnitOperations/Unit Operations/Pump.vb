@@ -1005,6 +1005,11 @@ Namespace UnitOperations
             End If
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

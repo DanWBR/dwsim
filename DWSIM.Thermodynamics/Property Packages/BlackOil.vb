@@ -111,11 +111,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case Phase.Vapor
+                Case phase.Vapor
                     state = "V"
-                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
+                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
                     state = "L"
-                Case Phase.Solid
+                Case phase.Solid
                     state = "S"
             End Select
 
@@ -142,9 +142,9 @@ Namespace PropertyPackages
 
             Select Case phase
 
-                Case Phase.Vapor
+                Case phase.Vapor
 
-                    Dim bof As BlackOilFluid = CalcBOFluid(RET_VMOL(Phase.Vapor), DW_GetConstantProperties())
+                    Dim bof As BlackOilFluid = CalcBOFluid(RET_VMOL(phase.Vapor), DW_GetConstantProperties())
 
                     Select Case [property].ToLower
                         Case "compressibilityfactor"
@@ -157,12 +157,12 @@ Namespace PropertyPackages
                             result = bop.VaporCv(T, P, bof.SGG, bof.SGO)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                         Case "enthalpy", "enthalpynf"
-                            result = Me.DW_CalcEnthalpy(RET_VMOL(Phase.Vapor), T, P, PropertyPackages.State.Vapor)
+                            result = Me.DW_CalcEnthalpy(RET_VMOL(phase.Vapor), T, P, PropertyPackages.State.Vapor)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                         Case "entropy", "entropynf"
-                            result = Me.DW_CalcEntropy(RET_VMOL(Phase.Vapor), T, P, PropertyPackages.State.Vapor)
+                            result = Me.DW_CalcEntropy(RET_VMOL(phase.Vapor), T, P, PropertyPackages.State.Vapor)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -194,9 +194,9 @@ Namespace PropertyPackages
                             ThrowCAPEException(ex, "Error", ex.Message, "ICapeThermoMaterial", ex.Source, ex.StackTrace, "CalcSinglePhaseProp/CalcTwoPhaseProp/CalcProp", ex.GetHashCode)
                     End Select
 
-                Case Phase.Liquid1
+                Case phase.Liquid1
 
-                    Dim bof As BlackOilFluid = CalcBOFluid(RET_VMOL(Phase.Liquid1), DW_GetConstantProperties())
+                    Dim bof As BlackOilFluid = CalcBOFluid(RET_VMOL(phase.Liquid1), DW_GetConstantProperties())
 
                     Select Case [property].ToLower
                         Case "compressibilityfactor"
@@ -209,12 +209,12 @@ Namespace PropertyPackages
                             result = bop.LiquidCv(T, P, bof.SGG, bof.SGO, bof.BSW)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.heatCapacityCv = result
                         Case "enthalpy", "enthalpynf"
-                            result = Me.DW_CalcEnthalpy(RET_VMOL(Phase.Liquid1), T, P, PropertyPackages.State.Liquid)
+                            result = Me.DW_CalcEnthalpy(RET_VMOL(phase.Liquid1), T, P, PropertyPackages.State.Liquid)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_enthalpy = result
                         Case "entropy", "entropynf"
-                            result = Me.DW_CalcEntropy(RET_VMOL(Phase.Liquid1), T, P, PropertyPackages.State.Liquid)
+                            result = Me.DW_CalcEntropy(RET_VMOL(phase.Liquid1), T, P, PropertyPackages.State.Liquid)
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy = result
                             result = Me.CurrentMaterialStream.Phases(phaseID).Properties.entropy.GetValueOrDefault * Me.CurrentMaterialStream.Phases(phaseID).Properties.molecularWeight.GetValueOrDefault
                             Me.CurrentMaterialStream.Phases(phaseID).Properties.molar_entropy = result
@@ -779,6 +779,11 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

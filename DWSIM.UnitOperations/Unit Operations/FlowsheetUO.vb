@@ -189,7 +189,7 @@ Namespace UnitOperations
             Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
 
             AddGraphicObjects(fs, data, excs)
-    
+
             data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
             Dim complist As New Concurrent.ConcurrentBag(Of ConstantProperties)
@@ -673,7 +673,7 @@ Namespace UnitOperations
 
             Fsheet.MasterFlowsheet = Me.FlowSheet
             Fsheet.RedirectMessages = Me.RedirectOutput
-            
+
             Select Case Settings.SolverMode
                 Case 0, 3, 4
                     DWSIM.FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Fsheet, 0, Settings.TaskCancellationTokenSource)
@@ -993,6 +993,11 @@ Namespace UnitOperations
             End If
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

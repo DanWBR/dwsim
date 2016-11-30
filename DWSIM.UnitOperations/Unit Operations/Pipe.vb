@@ -521,7 +521,7 @@ Namespace UnitOperations
                             oms.Phases(0).Properties.enthalpy = Hout
 
                             oms.SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                            
+
                             oms.Calculate(True, True)
 
                             With oms
@@ -1613,6 +1613,12 @@ Final3:     T = bbb
                 End If
             End If
         End Sub
+
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

@@ -31,6 +31,12 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "B20E8A1D-6CB5-43a1-87E2-148EBB25235A"
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
+
         Public Property m_uni As Auxiliary.Unifac
             Get
                 Return m_act

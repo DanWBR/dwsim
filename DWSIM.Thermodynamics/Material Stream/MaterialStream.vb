@@ -574,7 +574,7 @@ Namespace Streams
                     If DebugMode Then AppendDebugLine(String.Format("Material Stream calculated succesfully."))
 
                 End If
-                
+
                 .CurrentMaterialStream = Nothing
 
             End With
@@ -832,7 +832,7 @@ Namespace Streams
             If val0 Is Nothing Then
 
                 If su Is Nothing Then su = New SystemsOfUnits.SI
-               Dim value As Object = ""
+                Dim value As Object = ""
                 Dim sname As String = ""
 
                 If prop.StartsWith("PROP_MS") Then
@@ -5746,6 +5746,11 @@ Namespace Streams
 
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+
+            End Get
+        End Property
     End Class
 
 End Namespace

@@ -41,6 +41,12 @@ Namespace PropertyPackages
 
         Public Property LiquidPhaseMoleAmount As Double = 0.0#
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
+
         Public Sub New(ByVal comode As Boolean)
 
             MyBase.New(comode)

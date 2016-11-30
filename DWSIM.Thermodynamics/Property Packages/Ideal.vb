@@ -44,7 +44,7 @@ Namespace PropertyPackages
             MyBase.New()
 
             Me.IsConfigurable = True
-           Me._packagetype = PropertyPackages.PackageType.VaporPressure
+            Me._packagetype = PropertyPackages.PackageType.VaporPressure
 
         End Sub
 
@@ -107,11 +107,11 @@ Namespace PropertyPackages
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
 
             Select Case phase
-                Case Phase.Vapor
+                Case phase.Vapor
                     state = "V"
-                Case Phase.Liquid, Phase.Liquid1, Phase.Liquid2, Phase.Liquid3, Phase.Aqueous
+                Case phase.Liquid, phase.Liquid1, phase.Liquid2, phase.Liquid3, phase.Aqueous
                     state = "L"
-                Case Phase.Solid
+                Case phase.Solid
                     state = "S"
             End Select
 
@@ -586,27 +586,27 @@ Namespace PropertyPackages
         Public Overrides Sub DW_CalcCompPartialVolume(ByVal phase As Phase, ByVal T As Double, ByVal P As Double)
 
             Select Case phase
-                Case Phase.Liquid
+                Case phase.Liquid
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case Phase.Aqueous
+                Case phase.Aqueous
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(6).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case Phase.Liquid1
+                Case phase.Liquid1
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(3).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case Phase.Liquid2
+                Case phase.Liquid2
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(4).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case Phase.Liquid3
+                Case phase.Liquid3
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(5).Compounds.Values
                         subst.PartialVolume = subst.ConstantProperties.Molar_Weight / AUX_LIQDENSi(subst, T)
                     Next
-                Case Phase.Vapor
+                Case phase.Vapor
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                         subst.PartialVolume = 8.314 * T / P
                     Next
@@ -680,6 +680,11 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

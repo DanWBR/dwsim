@@ -398,7 +398,7 @@ Namespace UnitOperations
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
-       
+
             If prop.StartsWith("SepSpecValue_") Then
 
                 Dim compound As String = prop.Split("_")(1)
@@ -562,6 +562,11 @@ Namespace UnitOperations
             End If
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace

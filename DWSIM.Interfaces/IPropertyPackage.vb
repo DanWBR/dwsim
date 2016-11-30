@@ -34,6 +34,8 @@
 
     Sub CalcAdditionalPhaseProperties()
 
+    ReadOnly Property MobileCompatible As Boolean
+
 End Interface
 
 Public Interface IPhaseEnvelopeOptions

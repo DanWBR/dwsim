@@ -26,6 +26,8 @@
 
     Function GetVersion() As Version
 
+    ReadOnly Property MobileCompatible As Boolean
+
     Sub Validate()
 
     ''' <summary>

@@ -440,6 +440,11 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
             End If
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return False
+            End Get
+        End Property
     End Class
 
 End Namespace

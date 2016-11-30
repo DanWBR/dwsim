@@ -354,7 +354,7 @@ Namespace Reactors
 
                 W = ims.Phases(0).Properties.massflow.GetValueOrDefault
                 Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
-               
+
                 PropertyPackage.CurrentMaterialStream = ims
                 ims.SetPropertyPackage(PropertyPackage)
                 ims.SetFlowsheet(Me.FlowSheet)
@@ -903,6 +903,11 @@ Namespace Reactors
             End If
         End Sub
 
+        Public Overrides ReadOnly Property MobileCompatible As Boolean
+            Get
+                Return True
+            End Get
+        End Property
     End Class
 
 End Namespace
