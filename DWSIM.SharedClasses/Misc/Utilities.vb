@@ -100,7 +100,7 @@
 
     End Sub
 
-    Shared Sub UpdateElementForMobileXML(xel As XElement)
+    Shared Sub UpdateElementForMobileXMLLoading(xel As XElement)
 
         If xel.Name = "TipoObjeto" Then xel.Name = "ObjectType"
         If xel.Name = "Nome" Then xel.Name = "Name"
@@ -167,5 +167,92 @@
 
     End Sub
 
+    Shared Sub UpdateElementForMobileXMLSaving(xel As XElement)
+
+        If xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ReactorEquilibriumGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.EquilibriumReactorGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ReactorConversionGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.ConversionReactorGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ReactorCSTRGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CSTRGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ReactorPFRGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.PFRGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.NodeInGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.MixerGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.NodeOutGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.SplitterGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.HeaterGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.HeaterCoolerGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.CoolerGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.HeaterCoolerGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.CompressorGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.TurbineGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CompressorExpanderGraphic"
+        End If
+
+        If xel.Value.StartsWith("DWSIM.DrawingTools.GraphicObjects") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.DrawingTools.GraphicObjects", "PortableFlowsheetDrawing.GraphicObjects.Shapes")
+        End If
+
+        If xel.Value.Equals("DWSIM.Thermodynamics.Streams.MaterialStream") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Streams.MaterialStream"
+        If xel.Value.Equals("DWSIM.UnitOperations.Streams.EnergyStream") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Streams.EnergyStream"
+
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Vessel") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Separator"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Compressor") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.AdiabaticExpanderCompressor"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Heater") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.HeaterCooler"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.HeatExchanger") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.HeatExchanger"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Mixer") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Mixer"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Splitter") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Splitter"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.ComponentSeparator") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.ComponentSeparator"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.ShortcutColumn") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.ShortcutColumn"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Valve") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Valve"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Pump") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Pump"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.Pipe") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Pipe"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.DistillationColumn") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.DistillationColumn"
+        If xel.Value.Equals("DWSIM.UnitOperations.UnitOperations.AbsorptionColumn") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.AbsorptionColumn"
+
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Conversion") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Conversion"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Equilibrium") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Equilibrium"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_PFR") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_PFR"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_CSTR") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_CSTR"
+
+        If xel.Value.Equals("DWSIM.UnitOperations.SpecialOps.Adjust") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Adjust"
+        If xel.Value.Equals("DWSIM.UnitOperations.SpecialOps.Recycle") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Recycle"
+
+    End Sub
+
+    Shared Function CheckSimulationForMobileCompatibility(fs As IFlowsheet) As String
+
+        Dim report As String = ""
+
+        Dim unsupp_uocount = fs.SimulationObjects.Values.Where(Function(x) Not x.MobileCompatible).Count
+        Dim unsupp_ppcount = fs.PropertyPackages.Values.Where(Function(x) Not x.MobileCompatible).Count
+        Dim unsupp_fscount = fs.FlowsheetOptions.FlashAlgorithms.Where(Function(x) Not x.MobileCompatible).Count
+
+        If unsupp_uocount > 0 Then
+            report += "Unsupported Unit Operations: "
+            For Each obj In fs.SimulationObjects.Values.Where(Function(x) Not x.MobileCompatible).ToList
+                report += obj.GraphicObject.Tag + ", "
+            Next
+        End If
+
+        If unsupp_ppcount > 0 Then
+            report += "Unsupported Property Packages: "
+            For Each obj In fs.PropertyPackages.Values.Where(Function(x) Not x.MobileCompatible).ToList
+                report += obj.Tag + " (" + obj.Name + ")" + ", "
+            Next
+        End If
+
+        If unsupp_fscount > 0 Then
+            report += "Unsupported Flash Algorithms: "
+            For Each obj In fs.FlowsheetOptions.FlashAlgorithms.Where(Function(x) Not x.MobileCompatible).ToList
+                report += obj.Tag + " (" + obj.Name + ")" + ", "
+            Next
+        End If
+
+        Return report
+
+    End Function
 
 End Class

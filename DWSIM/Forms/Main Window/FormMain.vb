@@ -1096,7 +1096,7 @@ Public Class FormMain
         End Using
 
         For Each xel1 As XElement In xdoc.Descendants
-            SharedClasses.Utility.UpdateElementForMobileXML(xel1)
+            SharedClasses.Utility.UpdateElementForMobileXMLLoading(xel1)
         Next
 
         Dim form As FormFlowsheet = New FormFlowsheet() With {.MobileCompatibilityMode = True}
@@ -1740,6 +1740,150 @@ Public Class FormMain
 
     End Sub
 
+    Sub SaveMobileXML(ByVal path As String, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
+
+        Dim compatmessage As String = SharedClasses.Utility.CheckSimulationForMobileCompatibility(form)
+
+        If compatmessage <> "" Then
+            Throw New NotSupportedException(compatmessage)
+        End If
+
+        If simulationfilename = "" Then simulationfilename = path
+
+        Dim xdoc As New XDocument()
+        Dim xel As XElement
+
+        Dim ci As CultureInfo = CultureInfo.InvariantCulture
+
+        xdoc.Add(New XElement("DWSIM_Simulation_Data"))
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GeneralInfo"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("GeneralInfo")
+
+        xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
+        xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
+        xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+        xel.Add(New XElement("SavedOn", Date.Now))
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("SimulationObjects")
+
+        For Each so As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
+            If TypeOf so Is Cooler Then
+                DirectCast(so, Cooler).DeltaQ = -DirectCast(so, Cooler).DeltaQ
+            ElseIf TypeOf so Is Expander Then
+                DirectCast(so, Expander).DeltaP = -DirectCast(so, Expander).DeltaP
+            End If
+            so.SetFlowsheet(form)
+            xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
+            If TypeOf so Is Cooler Then
+                DirectCast(so, Cooler).DeltaQ = -DirectCast(so, Cooler).DeltaQ
+            ElseIf TypeOf so Is Expander Then
+                DirectCast(so, Expander).DeltaP = -DirectCast(so, Expander).DeltaP
+            End If
+        Next
+
+        'update the flowsheet key for usage in server solution storage. 
+
+        'if the key doesn't change, it means that the flowsheet data wasn't modified 
+        'and a previous solution stored in the server may be returned instead of recalculating 
+        'the entire flowsheet, saving time and resources.
+
+        Dim hash As String = ""
+        Using sha1 As System.Security.Cryptography.SHA1CryptoServiceProvider = System.Security.Cryptography.SHA1CryptoServiceProvider.Create()
+            hash = BitConverter.ToString(sha1.ComputeHash(Encoding.UTF8.GetBytes(xel.ToString)))
+        End Using
+
+        form.Options.Key = hash.Replace("-", "")
+
+        'save settings 
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Settings"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("Settings")
+
+        xel.Add(form.Options.SaveData().ToArray())
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
+
+        For Each go As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
+            If Not go.IsConnector Then xel.Add(New XElement("GraphicObject", go.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PropertyPackages"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages")
+
+        For Each pp As KeyValuePair(Of String, PropertyPackage) In form.Options.PropertyPackages
+            Dim createdms As Boolean = False
+            If pp.Value.CurrentMaterialStream Is Nothing Then
+                Dim ms As New Streams.MaterialStream("", "", form, pp.Value)
+                form.AddComponentsRows(ms)
+                pp.Value.CurrentMaterialStream = ms
+                createdms = True
+            End If
+            xel.Add(New XElement("PropertyPackage", {New XElement("ID", pp.Key),
+                                                     pp.Value.SaveData().ToArray()}))
+            If createdms Then pp.Value.CurrentMaterialStream = Nothing
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Compounds"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds")
+
+        For Each cp As ConstantProperties In form.Options.SelectedComponents.Values
+            xel.Add(New XElement("Compound", cp.SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ReactionSets"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets")
+
+        For Each pp As KeyValuePair(Of String, Interfaces.IReactionSet) In form.Options.ReactionSets
+            xel.Add(New XElement("ReactionSet", DirectCast(pp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Reactions"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions")
+
+        For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In form.Options.Reactions
+            xel.Add(New XElement("Reaction", {DirectCast(pp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases")
+
+        For Each pp As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
+            xel.Add(New XElement("OptimizationCase", {pp.SaveData().ToArray()}))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SensitivityAnalysis"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis")
+
+        For Each pp As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+            xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
+        Next
+
+        For Each xel1 As XElement In xdoc.Descendants
+            SharedClasses.Utility.UpdateElementForMobileXMLSaving(xel1)
+        Next
+
+        xdoc.Save(path)
+
+        Me.UIThread(New Action(Sub()
+                                   Dim mypath As String = simulationfilename
+                                   If mypath = "" Then mypath = [path]
+                                   'process recent files list
+                                   If Not My.Settings.MostRecentFiles.Contains(mypath) Then
+                                       My.Settings.MostRecentFiles.Add(mypath)
+                                       If Not My.Application.CommandLineArgs.Count > 1 Then Me.UpdateMRUList()
+                                   End If
+                                   form.Options.FilePath = Me.filename
+                                   form.UpdateFormText()
+                                   form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+                                   Me.ToolStripStatusLabel1.Text = ""
+                               End Sub))
+
+        Application.DoEvents()
+
+    End Sub
+
     Sub SaveXML(ByVal path As String, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
 
         If simulationfilename = "" Then simulationfilename = path
@@ -2171,6 +2315,11 @@ ruf:                Application.DoEvents()
                                                                                                               Me.ToolStripStatusLabel1.Text = ""
                                                                                                               If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                           End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                    ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
+                        Task.Factory.StartNew(Sub() SaveMobileXML(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
+                                                                                                                    Me.ToolStripStatusLabel1.Text = ""
+                                                                                                                    If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                                End Sub, TaskContinuationOptions.ExecuteSynchronously)
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
                         Task.Factory.StartNew(Sub() SaveXMLZIP(Me.filename, Me.ActiveMdiChild)).ContinueWith(Sub(t)
                                                                                                                  Me.ToolStripStatusLabel1.Text = ""
@@ -2436,6 +2585,10 @@ ruf:                Application.DoEvents()
                                 Task.Factory.StartNew(Sub() SaveXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
                                                                                                                      form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                  End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
+                            ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".xml" Then
+                                Task.Factory.StartNew(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                           form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                                       End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                             ElseIf Path.GetExtension(form2.Options.FilePath).ToLower = ".dwxmz" Then
                                 Task.Factory.StartNew(Sub() SaveXMLZIP(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
                                                                                                                         form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
@@ -2461,6 +2614,10 @@ ruf:                Application.DoEvents()
                                         Task.Factory.StartNew(Sub() SaveXML(myStream.Name, form2)).ContinueWith(Sub(t)
                                                                                                                     form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
                                                                                                                 End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
+                                    ElseIf Path.GetExtension(myStream.Name).ToLower = ".xml" Then
+                                        Task.Factory.StartNew(Sub() SaveMobileXML(myStream.Name, form2)).ContinueWith(Sub(t)
+                                                                                                                          form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                                      End Sub, TaskContinuationOptions.OnlyOnFaulted).ContinueWith(Sub() Me.ToolStripStatusLabel1.Text = "", TaskContinuationOptions.ExecuteSynchronously)
                                     ElseIf Path.GetExtension(myStream.Name).ToLower = ".dwxmz" Then
                                         Task.Factory.StartNew(Sub() SaveXMLZIP(myStream.Name, form2)).ContinueWith(Sub(t)
                                                                                                                        form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
@@ -2541,6 +2698,16 @@ ruf:                Application.DoEvents()
                                                                                                              End Sub, TaskContinuationOptions.ExecuteSynchronously)
                         Else
                             SaveXML(form2.Options.FilePath, form2)
+                            Me.ToolStripStatusLabel1.Text = ""
+                        End If
+                    ElseIf Path.GetExtension(Me.filename).ToLower = ".xml" Then
+                        If saveasync Then
+                            Task.Factory.StartNew(Sub() SaveMobileXML(form2.Options.FilePath, form2)).ContinueWith(Sub(t)
+                                                                                                                       Me.ToolStripStatusLabel1.Text = ""
+                                                                                                                       If Not t.Exception Is Nothing Then form2.WriteToLog(DWSIM.App.GetLocalString("Erroaosalvararquivo") & t.Exception.ToString, Color.Red, MessageType.GeneralError)
+                                                                                                                   End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                        Else
+                            SaveMobileXML(form2.Options.FilePath, form2)
                             Me.ToolStripStatusLabel1.Text = ""
                         End If
                     ElseIf Path.GetExtension(Me.filename).ToLower = ".dwxmz" Then
