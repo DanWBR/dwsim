@@ -847,22 +847,22 @@ Namespace UnitOperations
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = -1
-            Integer.TryParse(prop.Split("_")(2), propidx)
 
-            Select Case propidx
-
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 2
-                    'PROP_DC_2	Condenser Pressure Drop
-                    Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
-
-            End Select
+            If prop.Contains("PROP_DC") Then
+                Dim propidx As Integer = -1
+                Integer.TryParse(prop.Split("_")(2), propidx)
+                Select Case propidx
+                    Case 0
+                        'PROP_DC_0	Condenser Pressure
+                        Me.CondenserPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Case 1
+                        'PROP_DC_1	Reboiler Pressure
+                        Me.ReboilerPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Case 2
+                        'PROP_DC_2	Condenser Pressure Drop
+                        Me.CondenserDeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
+                End Select
+            End If
 
             Select Case prop
                 Case "Condenser_Specification_Value"

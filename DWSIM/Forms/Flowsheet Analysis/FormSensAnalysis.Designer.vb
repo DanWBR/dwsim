@@ -24,11 +24,11 @@ Partial Class FormSensAnalysis
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSensAnalysis))
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnRun = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbObjIndVar1 = New System.Windows.Forms.ComboBox()
@@ -96,6 +96,10 @@ Partial Class FormSensAnalysis
         Me.Label17 = New System.Windows.Forms.Label()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.dgDepVariables = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
@@ -127,10 +131,6 @@ Partial Class FormSensAnalysis
         Me.DockTopAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DockBottomAutoHideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewComboBoxColumn1 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewComboBoxColumn3 = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         CType(Me.dgvResults, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -170,10 +170,10 @@ Partial Class FormSensAnalysis
         '
         'cbObjIndVar1
         '
-        resources.ApplyResources(Me.cbObjIndVar1, "cbObjIndVar1")
         Me.cbObjIndVar1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjIndVar1.DropDownWidth = 250
         Me.cbObjIndVar1.FormattingEnabled = True
+        resources.ApplyResources(Me.cbObjIndVar1, "cbObjIndVar1")
         Me.cbObjIndVar1.Name = "cbObjIndVar1"
         '
         'GroupBox1
@@ -199,19 +199,19 @@ Partial Class FormSensAnalysis
         '
         'dgvResults
         '
-        resources.ApplyResources(Me.dgvResults, "dgvResults")
         Me.dgvResults.AllowUserToAddRows = False
         Me.dgvResults.AllowUserToDeleteRows = False
+        resources.ApplyResources(Me.dgvResults, "dgvResults")
         Me.dgvResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvResults.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvResults.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvResults.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
         Me.dgvResults.Name = "dgvResults"
@@ -222,28 +222,28 @@ Partial Class FormSensAnalysis
         '
         'Column1
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
         'Column2
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle3
         resources.ApplyResources(Me.Column2, "Column2")
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.btnDeleteCase)
         Me.GroupBox2.Controls.Add(Me.btnSaveCase)
         Me.GroupBox2.Controls.Add(Me.btnCopyCase)
         Me.GroupBox2.Controls.Add(Me.btnNewCase)
         Me.GroupBox2.Controls.Add(Me.lbCases)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -273,8 +273,8 @@ Partial Class FormSensAnalysis
         '
         'lbCases
         '
-        resources.ApplyResources(Me.lbCases, "lbCases")
         Me.lbCases.FormattingEnabled = True
+        resources.ApplyResources(Me.lbCases, "lbCases")
         Me.lbCases.Name = "lbCases"
         '
         'GroupBox3
@@ -309,7 +309,6 @@ Partial Class FormSensAnalysis
         '
         'gbIndVar1
         '
-        resources.ApplyResources(Me.gbIndVar1, "gbIndVar1")
         Me.gbIndVar1.Controls.Add(Me.tbUpperLimIndVar1)
         Me.gbIndVar1.Controls.Add(Me.Label8)
         Me.gbIndVar1.Controls.Add(Me.tbUnitIndVar1)
@@ -322,6 +321,7 @@ Partial Class FormSensAnalysis
         Me.gbIndVar1.Controls.Add(Me.Label5)
         Me.gbIndVar1.Controls.Add(Me.cbObjIndVar1)
         Me.gbIndVar1.Controls.Add(Me.Label3)
+        resources.ApplyResources(Me.gbIndVar1, "gbIndVar1")
         Me.gbIndVar1.Name = "gbIndVar1"
         Me.gbIndVar1.TabStop = False
         '
@@ -371,10 +371,10 @@ Partial Class FormSensAnalysis
         '
         'cbPropIndVar1
         '
-        resources.ApplyResources(Me.cbPropIndVar1, "cbPropIndVar1")
         Me.cbPropIndVar1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropIndVar1.DropDownWidth = 250
         Me.cbPropIndVar1.FormattingEnabled = True
+        resources.ApplyResources(Me.cbPropIndVar1, "cbPropIndVar1")
         Me.cbPropIndVar1.Name = "cbPropIndVar1"
         '
         'Label5
@@ -384,7 +384,6 @@ Partial Class FormSensAnalysis
         '
         'gbIndVar2
         '
-        resources.ApplyResources(Me.gbIndVar2, "gbIndVar2")
         Me.gbIndVar2.Controls.Add(Me.Label14)
         Me.gbIndVar2.Controls.Add(Me.cbObjIndVar2)
         Me.gbIndVar2.Controls.Add(Me.tbUpperLimIndVar2)
@@ -397,6 +396,7 @@ Partial Class FormSensAnalysis
         Me.gbIndVar2.Controls.Add(Me.tbUnitIndVar2)
         Me.gbIndVar2.Controls.Add(Me.Label10)
         Me.gbIndVar2.Controls.Add(Me.Label12)
+        resources.ApplyResources(Me.gbIndVar2, "gbIndVar2")
         Me.gbIndVar2.Name = "gbIndVar2"
         Me.gbIndVar2.TabStop = False
         '
@@ -407,10 +407,10 @@ Partial Class FormSensAnalysis
         '
         'cbObjIndVar2
         '
-        resources.ApplyResources(Me.cbObjIndVar2, "cbObjIndVar2")
         Me.cbObjIndVar2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjIndVar2.DropDownWidth = 250
         Me.cbObjIndVar2.FormattingEnabled = True
+        resources.ApplyResources(Me.cbObjIndVar2, "cbObjIndVar2")
         Me.cbObjIndVar2.Name = "cbObjIndVar2"
         '
         'tbUpperLimIndVar2
@@ -440,10 +440,10 @@ Partial Class FormSensAnalysis
         '
         'cbPropIndVar2
         '
-        resources.ApplyResources(Me.cbPropIndVar2, "cbPropIndVar2")
         Me.cbPropIndVar2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropIndVar2.DropDownWidth = 250
         Me.cbPropIndVar2.FormattingEnabled = True
+        resources.ApplyResources(Me.cbPropIndVar2, "cbPropIndVar2")
         Me.cbPropIndVar2.Name = "cbPropIndVar2"
         '
         'nuNumPointsIndVar2
@@ -500,7 +500,6 @@ Partial Class FormSensAnalysis
         '
         'dgVariables
         '
-        resources.ApplyResources(Me.dgVariables, "dgVariables")
         Me.dgVariables.AllowUserToAddRows = False
         Me.dgVariables.AllowUserToDeleteRows = False
         Me.dgVariables.AllowUserToResizeRows = False
@@ -508,15 +507,16 @@ Partial Class FormSensAnalysis
         Me.dgVariables.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.dgVariables.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.dgVariables.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        Me.dgVariables.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.dgVariables.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgVariables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgVariables.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column8, Me.DataGridViewTextBoxColumn1, Me.DataGridViewComboBoxColumn2, Me.Column4, Me.Column10, Me.Column9})
+        resources.ApplyResources(Me.dgVariables, "dgVariables")
         Me.dgVariables.Name = "dgVariables"
         Me.dgVariables.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         '
@@ -566,23 +566,23 @@ Partial Class FormSensAnalysis
         '
         'ToolStrip1
         '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAddVar, Me.tsbDelVar})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'tsbAddVar
         '
-        resources.ApplyResources(Me.tsbAddVar, "tsbAddVar")
         Me.tsbAddVar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbAddVar.Image = Global.DWSIM.My.Resources.Resources.add
+        resources.ApplyResources(Me.tsbAddVar, "tsbAddVar")
         Me.tsbAddVar.Name = "tsbAddVar"
         '
         'tsbDelVar
         '
-        resources.ApplyResources(Me.tsbDelVar, "tsbDelVar")
         Me.tsbDelVar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.tsbDelVar.Image = Global.DWSIM.My.Resources.Resources.delete1
+        resources.ApplyResources(Me.tsbDelVar, "tsbDelVar")
         Me.tsbDelVar.Name = "tsbDelVar"
         '
         'GroupBox8
@@ -642,7 +642,6 @@ Partial Class FormSensAnalysis
         '
         'dgDepVariables
         '
-        resources.ApplyResources(Me.dgDepVariables, "dgDepVariables")
         Me.dgDepVariables.AllowUserToAddRows = False
         Me.dgDepVariables.AllowUserToDeleteRows = False
         Me.dgDepVariables.AllowUserToResizeRows = False
@@ -650,233 +649,18 @@ Partial Class FormSensAnalysis
         Me.dgDepVariables.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.dgDepVariables.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.dgDepVariables.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        Me.dgDepVariables.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.dgDepVariables.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgDepVariables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgDepVariables.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.DataGridViewComboBoxColumn1, Me.DataGridViewComboBoxColumn3, Me.DataGridViewTextBoxColumn5})
+        resources.ApplyResources(Me.dgDepVariables, "dgDepVariables")
         Me.dgDepVariables.Name = "dgDepVariables"
         Me.dgDepVariables.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        '
-        'ToolStrip2
-        '
-        resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
-        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
-        Me.ToolStrip2.Name = "ToolStrip2"
-        '
-        'ToolStripButton1
-        '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.add
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        '
-        'ToolStripButton2
-        '
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.delete1
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        '
-        'btnRegressData
-        '
-        resources.ApplyResources(Me.btnRegressData, "btnRegressData")
-        Me.btnRegressData.Name = "btnRegressData"
-        Me.btnRegressData.UseVisualStyleBackColor = True
-        '
-        'btnAbort
-        '
-        resources.ApplyResources(Me.btnAbort, "btnAbort")
-        Me.btnAbort.Name = "btnAbort"
-        Me.btnAbort.UseVisualStyleBackColor = True
-        '
-        'TabControl1
-        '
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Controls.Add(Me.TabPage5)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        '
-        'TabPage1
-        '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
-        Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage1.Controls.Add(Me.GroupBox2)
-        Me.TabPage1.Controls.Add(Me.GroupBox3)
-        Me.TabPage1.Name = "TabPage1"
-        '
-        'TabPage2
-        '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage2.Controls.Add(Me.gbIndVar1)
-        Me.TabPage2.Controls.Add(Me.gbIndVar2)
-        Me.TabPage2.Controls.Add(Me.chkIndVar2)
-        Me.TabPage2.Name = "TabPage2"
-        '
-        'TabPage3
-        '
-        resources.ApplyResources(Me.TabPage3, "TabPage3")
-        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage3.Controls.Add(Me.rbExp)
-        Me.TabPage3.Controls.Add(Me.rbVar)
-        Me.TabPage3.Controls.Add(Me.GroupBox9)
-        Me.TabPage3.Controls.Add(Me.GroupBox8)
-        Me.TabPage3.Controls.Add(Me.GroupBox10)
-        Me.TabPage3.Name = "TabPage3"
-        '
-        'TabPage4
-        '
-        resources.ApplyResources(Me.TabPage4, "TabPage4")
-        Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage4.Controls.Add(Me.btnRegressData)
-        Me.TabPage4.Controls.Add(Me.GroupBox1)
-        Me.TabPage4.Controls.Add(Me.btnRun)
-        Me.TabPage4.Controls.Add(Me.btnAbort)
-        Me.TabPage4.Name = "TabPage4"
-        '
-        'TabPage5
-        '
-        resources.ApplyResources(Me.TabPage5, "TabPage5")
-        Me.TabPage5.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage5.Controls.Add(Me.Panel1)
-        Me.TabPage5.Controls.Add(Me.graph)
-        Me.TabPage5.Name = "TabPage5"
-        '
-        'Panel1
-        '
-        resources.ApplyResources(Me.Panel1, "Panel1")
-        Me.Panel1.Controls.Add(Me.CbCrtPar)
-        Me.Panel1.Controls.Add(Me.LblParam)
-        Me.Panel1.Controls.Add(Me.BtnDrawChart)
-        Me.Panel1.Controls.Add(Me.CbCrtY)
-        Me.Panel1.Controls.Add(Me.Label18)
-        Me.Panel1.Controls.Add(Me.CbCrtX)
-        Me.Panel1.Controls.Add(Me.Label16)
-        Me.Panel1.Name = "Panel1"
-        '
-        'CbCrtPar
-        '
-        resources.ApplyResources(Me.CbCrtPar, "CbCrtPar")
-        Me.CbCrtPar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CbCrtPar.DropDownWidth = 250
-        Me.CbCrtPar.FormattingEnabled = True
-        Me.CbCrtPar.Name = "CbCrtPar"
-        '
-        'LblParam
-        '
-        resources.ApplyResources(Me.LblParam, "LblParam")
-        Me.LblParam.Name = "LblParam"
-        '
-        'BtnDrawChart
-        '
-        resources.ApplyResources(Me.BtnDrawChart, "BtnDrawChart")
-        Me.BtnDrawChart.Image = Global.DWSIM.My.Resources.Resources.chart_curve
-        Me.BtnDrawChart.Name = "BtnDrawChart"
-        Me.BtnDrawChart.UseVisualStyleBackColor = True
-        '
-        'CbCrtY
-        '
-        resources.ApplyResources(Me.CbCrtY, "CbCrtY")
-        Me.CbCrtY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CbCrtY.DropDownWidth = 250
-        Me.CbCrtY.FormattingEnabled = True
-        Me.CbCrtY.Name = "CbCrtY"
-        '
-        'Label18
-        '
-        resources.ApplyResources(Me.Label18, "Label18")
-        Me.Label18.Name = "Label18"
-        '
-        'CbCrtX
-        '
-        resources.ApplyResources(Me.CbCrtX, "CbCrtX")
-        Me.CbCrtX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CbCrtX.DropDownWidth = 250
-        Me.CbCrtX.FormattingEnabled = True
-        Me.CbCrtX.Name = "CbCrtX"
-        '
-        'Label16
-        '
-        resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.Name = "Label16"
-        '
-        'graph
-        '
-        resources.ApplyResources(Me.graph, "graph")
-        Me.graph.Name = "graph"
-        Me.graph.ScrollGrace = 0.0R
-        Me.graph.ScrollMaxX = 0.0R
-        Me.graph.ScrollMaxY = 0.0R
-        Me.graph.ScrollMaxY2 = 0.0R
-        Me.graph.ScrollMinX = 0.0R
-        Me.graph.ScrollMinY = 0.0R
-        Me.graph.ScrollMinY2 = 0.0R
-        '
-        'dckMenu
-        '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
-        Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
-        Me.dckMenu.Name = "dckMenu"
-        '
-        'FloatToolStripMenuItem
-        '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
-        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
-        '
-        'DockLeftToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
-        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
-        '
-        'DockRightToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
-        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
-        '
-        'DockTopToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
-        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
-        '
-        'DockBottomToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
-        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
-        '
-        'DockLeftAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
-        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
-        '
-        'DockRightAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
-        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
-        '
-        'DockTopAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
-        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
-        '
-        'DockBottomAutoHideToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
-        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
-        '
-        'DocumentToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
-        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
         '
         'DataGridViewTextBoxColumn2
         '
@@ -912,6 +696,223 @@ Partial Class FormSensAnalysis
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
         Me.DataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2})
+        resources.ApplyResources(Me.ToolStrip2, "ToolStrip2")
+        Me.ToolStrip2.Name = "ToolStrip2"
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.add
+        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.delete1
+        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        '
+        'btnRegressData
+        '
+        resources.ApplyResources(Me.btnRegressData, "btnRegressData")
+        Me.btnRegressData.Name = "btnRegressData"
+        Me.btnRegressData.UseVisualStyleBackColor = True
+        '
+        'btnAbort
+        '
+        resources.ApplyResources(Me.btnAbort, "btnAbort")
+        Me.btnAbort.Name = "btnAbort"
+        Me.btnAbort.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
+        resources.ApplyResources(Me.TabControl1, "TabControl1")
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.GroupBox2)
+        Me.TabPage1.Controls.Add(Me.GroupBox3)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
+        Me.TabPage1.Name = "TabPage1"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage2.Controls.Add(Me.gbIndVar1)
+        Me.TabPage2.Controls.Add(Me.gbIndVar2)
+        Me.TabPage2.Controls.Add(Me.chkIndVar2)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Name = "TabPage2"
+        '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage3.Controls.Add(Me.rbExp)
+        Me.TabPage3.Controls.Add(Me.rbVar)
+        Me.TabPage3.Controls.Add(Me.GroupBox9)
+        Me.TabPage3.Controls.Add(Me.GroupBox8)
+        Me.TabPage3.Controls.Add(Me.GroupBox10)
+        resources.ApplyResources(Me.TabPage3, "TabPage3")
+        Me.TabPage3.Name = "TabPage3"
+        '
+        'TabPage4
+        '
+        Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage4.Controls.Add(Me.btnRegressData)
+        Me.TabPage4.Controls.Add(Me.GroupBox1)
+        Me.TabPage4.Controls.Add(Me.btnRun)
+        Me.TabPage4.Controls.Add(Me.btnAbort)
+        resources.ApplyResources(Me.TabPage4, "TabPage4")
+        Me.TabPage4.Name = "TabPage4"
+        '
+        'TabPage5
+        '
+        Me.TabPage5.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage5.Controls.Add(Me.Panel1)
+        Me.TabPage5.Controls.Add(Me.graph)
+        resources.ApplyResources(Me.TabPage5, "TabPage5")
+        Me.TabPage5.Name = "TabPage5"
+        '
+        'Panel1
+        '
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.CbCrtPar)
+        Me.Panel1.Controls.Add(Me.LblParam)
+        Me.Panel1.Controls.Add(Me.BtnDrawChart)
+        Me.Panel1.Controls.Add(Me.CbCrtY)
+        Me.Panel1.Controls.Add(Me.Label18)
+        Me.Panel1.Controls.Add(Me.CbCrtX)
+        Me.Panel1.Controls.Add(Me.Label16)
+        Me.Panel1.Name = "Panel1"
+        '
+        'CbCrtPar
+        '
+        Me.CbCrtPar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CbCrtPar.DropDownWidth = 250
+        Me.CbCrtPar.FormattingEnabled = True
+        resources.ApplyResources(Me.CbCrtPar, "CbCrtPar")
+        Me.CbCrtPar.Name = "CbCrtPar"
+        '
+        'LblParam
+        '
+        resources.ApplyResources(Me.LblParam, "LblParam")
+        Me.LblParam.Name = "LblParam"
+        '
+        'BtnDrawChart
+        '
+        resources.ApplyResources(Me.BtnDrawChart, "BtnDrawChart")
+        Me.BtnDrawChart.Image = Global.DWSIM.My.Resources.Resources.chart_curve
+        Me.BtnDrawChart.Name = "BtnDrawChart"
+        Me.BtnDrawChart.UseVisualStyleBackColor = True
+        '
+        'CbCrtY
+        '
+        Me.CbCrtY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CbCrtY.DropDownWidth = 250
+        Me.CbCrtY.FormattingEnabled = True
+        resources.ApplyResources(Me.CbCrtY, "CbCrtY")
+        Me.CbCrtY.Name = "CbCrtY"
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
+        'CbCrtX
+        '
+        Me.CbCrtX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CbCrtX.DropDownWidth = 250
+        Me.CbCrtX.FormattingEnabled = True
+        resources.ApplyResources(Me.CbCrtX, "CbCrtX")
+        Me.CbCrtX.Name = "CbCrtX"
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        '
+        'graph
+        '
+        resources.ApplyResources(Me.graph, "graph")
+        Me.graph.IsShowCopyMessage = False
+        Me.graph.Name = "graph"
+        Me.graph.ScrollGrace = 0.0R
+        Me.graph.ScrollMaxX = 0.0R
+        Me.graph.ScrollMaxY = 0.0R
+        Me.graph.ScrollMaxY2 = 0.0R
+        Me.graph.ScrollMinX = 0.0R
+        Me.graph.ScrollMinY = 0.0R
+        Me.graph.ScrollMinY2 = 0.0R
+        '
+        'dckMenu
+        '
+        Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
+        Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
+        '
+        'FloatToolStripMenuItem
+        '
+        Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
+        '
+        'DockLeftToolStripMenuItem
+        '
+        Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
+        '
+        'DockRightToolStripMenuItem
+        '
+        Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
+        '
+        'DockTopToolStripMenuItem
+        '
+        Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
+        '
+        'DockBottomToolStripMenuItem
+        '
+        Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
+        '
+        'DockLeftAutoHideToolStripMenuItem
+        '
+        Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
+        '
+        'DockRightAutoHideToolStripMenuItem
+        '
+        Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
+        '
+        'DockTopAutoHideToolStripMenuItem
+        '
+        Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
+        '
+        'DockBottomAutoHideToolStripMenuItem
+        '
+        Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
+        '
+        'DocumentToolStripMenuItem
+        '
+        Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
+        '
         'FormSensAnalysis
         '
         resources.ApplyResources(Me, "$this")
@@ -920,7 +921,7 @@ Partial Class FormSensAnalysis
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "FormSensAnalysis"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
+        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.TabPageContextMenuStrip = Me.dckMenu
