@@ -85,24 +85,24 @@ Public Class EditingForm_Recycle
             'parameters
 
             cbT.Items.Clear()
-            cbT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature).ToArray)
-            cbT.SelectedItem = units.temperature
+            cbT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
+            cbT.SelectedItem = units.deltaT
 
             cbW.Items.Clear()
             cbW.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow).ToArray)
             cbW.SelectedItem = units.massflow
 
             cbP.Items.Clear()
-            cbP.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
-            cbP.SelectedItem = units.pressure
+            cbP.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
+            cbP.SelectedItem = units.deltaP
 
-            tbTT.Text = su.Converter.ConvertFromSI(units.temperature, .ConvergenceParameters.Temperatura).ToString(nf)
+            tbTT.Text = su.Converter.ConvertFromSI(units.deltaT, .ConvergenceParameters.Temperatura).ToString(nf)
             tbWT.Text = su.Converter.ConvertFromSI(units.massflow, .ConvergenceParameters.VazaoMassica).ToString(nf)
-            tbPT.Text = su.Converter.ConvertFromSI(units.pressure, .ConvergenceParameters.Pressao).ToString(nf)
+            tbPT.Text = su.Converter.ConvertFromSI(units.deltaP, .ConvergenceParameters.Pressao).ToString(nf)
 
-            tbTE.Text = su.Converter.ConvertFromSI(units.temperature, .ConvergenceHistory.TemperaturaE).ToString(nf)
+            tbTE.Text = su.Converter.ConvertFromSI(units.deltaT, .ConvergenceHistory.TemperaturaE).ToString(nf)
             tbWE.Text = su.Converter.ConvertFromSI(units.massflow, .ConvergenceHistory.VazaoMassicaE).ToString(nf)
-            tbPE.Text = su.Converter.ConvertFromSI(units.pressure, .ConvergenceHistory.PressaoE).ToString(nf)
+            tbPE.Text = su.Converter.ConvertFromSI(units.deltaP, .ConvergenceHistory.PressaoE).ToString(nf)
 
             If .AccelerationMethod = Enums.AccelMethod.GlobalBroyden Then chkGlobalBroyden.Checked = True Else chkGlobalBroyden.Checked = False
 

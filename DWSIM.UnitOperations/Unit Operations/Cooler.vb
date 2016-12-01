@@ -171,6 +171,7 @@ Namespace UnitOperations
                     T2 = tmp.CalculatedTemperature
                     CheckSpec(T2, True, "outlet temperature")
                     Me.DeltaT = T2 - Ti
+                    OutletTemperature = T2
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
@@ -210,6 +211,7 @@ Namespace UnitOperations
                     H2 = tmp.CalculatedEnthalpy
                     CheckSpec(H2, False, "outlet enthalpy")
                     Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
+                    OutletTemperature = T2
 
                     'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
                     With esout
@@ -231,6 +233,7 @@ Namespace UnitOperations
                     CheckSpec(T2, True, "outlet temperature")
                     Me.DeltaT = T2 - Ti
                     Me.DeltaQ = -(H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
+                    OutletTemperature = T2
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 

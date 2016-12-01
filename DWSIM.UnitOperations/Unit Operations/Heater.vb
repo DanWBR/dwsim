@@ -183,6 +183,8 @@ Namespace UnitOperations
                     T2 = tmp.CalculatedTemperature
                     Me.DeltaT = T2 - Ti
 
+                    OutletTemperature = T2
+
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
                     'Corrente de EnergyFlow - atualizar valor da potencia (kJ/s)
@@ -213,7 +215,7 @@ Namespace UnitOperations
 
                     T2 = Ti + Me.DeltaT.GetValueOrDefault
 
-                    Me.OutletTemperature = T2
+                    OutletTemperature = T2
 
                     If DebugMode Then AppendDebugLine(String.Format("Doing a PT flash to calculate outlet enthalpy... P = {0} Pa, T = {1} K", P2, T2))
 
@@ -240,6 +242,8 @@ Namespace UnitOperations
                     CheckSpec(T2, True, "outlet temperature")
                     Me.DeltaT = T2 - Ti
 
+                    OutletTemperature = T2
+
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
                 Case CalculationMode.OutletVaporFraction
@@ -255,6 +259,7 @@ Namespace UnitOperations
                     CheckSpec(T2, True, "outlet temperature")
                     Me.DeltaT = T2 - Ti
                     Me.DeltaQ = (H2 - Hi) / (Me.Eficiencia.GetValueOrDefault / 100) * Wi
+                    OutletTemperature = T2
 
                     If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
