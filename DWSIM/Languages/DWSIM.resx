@@ -5442,4 +5442,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="HeatCapacityRatio" xml:space="preserve">
     <value>Cp/Cv</value>
   </data>
+  <data name="CommitChangesWarning" xml:space="preserve">
+    <value>Existem alterações não salvas de composição. Clique em 'Aceitar Alterações' para atualizar.</value>
+  </data>
 </root>

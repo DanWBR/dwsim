@@ -12,14 +12,51 @@ Public Class MaterialStreamEditor
 
     Public Loaded As Boolean = False
 
-    Private dontshowtooltip As Boolean = False
-
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf, nff As String
+
 
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         UpdateInfo()
+
+        'restore view state
+
+        Dim vs As New Streams.Editors.MaterialStreamEditorState
+
+        vs = Newtonsoft.Json.JsonConvert.DeserializeObject(Of Streams.Editors.MaterialStreamEditorState)(MatStream.EditorState)
+
+        With vs
+            TabControlMain.SelectedIndex = .MainSelectedTab
+            cbCompBasis.SelectedIndex = .InputCompositionBasis
+            TabControlCompound.SelectedIndex = .CompoundsSelectedTab
+            cbCalculatedAmountsBasis.SelectedIndex = .CompoundsAmountBasis
+            cbCompoundPhaseProperties.SelectedIndex = .CompoundsProperty
+            TabPhaseComps.SelectedIndex = .CompoundsAmountSelectedTab
+            TabCompoundPhaseProps.SelectedIndex = .CompoundsPropertySelectedTab
+            TabPhaseProps.SelectedIndex = .PhasePropsSelectedTab
+        End With
+
+    End Sub
+
+    Private Sub MaterialStreamEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        'save view state
+
+        Dim vs As New Streams.Editors.MaterialStreamEditorState
+
+        With vs
+            .MainSelectedTab = TabControlMain.SelectedIndex
+            .InputCompositionBasis = cbCompBasis.SelectedIndex
+            .CompoundsSelectedTab = TabControlCompound.SelectedIndex
+            .CompoundsAmountBasis = cbCalculatedAmountsBasis.SelectedIndex
+            .CompoundsProperty = cbCompoundPhaseProperties.SelectedIndex
+            .CompoundsAmountSelectedTab = TabPhaseComps.SelectedIndex
+            .CompoundsPropertySelectedTab = TabCompoundPhaseProps.SelectedIndex
+            .PhasePropsSelectedTab = TabPhaseProps.SelectedIndex
+        End With
+
+        MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
 
     End Sub
 
@@ -126,16 +163,26 @@ Public Class MaterialStreamEditor
                 tbFracSpec.Text = .Phases(7).Properties.molarfraction.GetValueOrDefault.ToString(nf)
             End If
 
+            'reference solvent
+
+            Dim complist As List(Of String) = .FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToList
+
+            complist.Insert(0, "")
+
+            cbSolvent.Items.Clear()
+            cbSolvent.Items.AddRange(complist.ToArray)
+
+            cbSolvent.SelectedItem = MatStream.ReferenceSolvent
+
             'composition
 
             cbCompBasis.SelectedIndex = 0
 
             gridInputComposition.Rows.Clear()
             gridInputComposition.Columns(1).CellTemplate.Style.Format = nff
-            gridInputComposition.Columns(2).Visible = False
 
             For Each comp In .Phases(0).Compounds.Values
-                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault, comp.Name.Equals(MatStream.ReferenceSolvent)})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                gridInputComposition.Rows(gridInputComposition.Rows.Add(New Object() {comp.Name, comp.MoleFraction.GetValueOrDefault})).Cells(0).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
             Next
 
             Dim sum As Double = 0.0#
@@ -573,6 +620,7 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = row.Cells(1).Value / total
         Next
+        ShowUncommittedChangesWarning()
     End Sub
 
     Private Sub btnEqualizeInput_Click(sender As Object, e As EventArgs) Handles btnEqualizeInput.Click
@@ -580,18 +628,21 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 1.0# / gridInputComposition.Rows.Count
         Next
+        ShowUncommittedChangesWarning()
     End Sub
 
     Private Sub btnEraseInput_Click(sender As Object, e As EventArgs) Handles btnEraseInput.Click
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 0.0#
         Next
+        ShowUncommittedChangesWarning()
     End Sub
 
     Private Sub btnCompAcceptChanges_Click(sender As Object, e As EventArgs) Handles btnCompAcceptChanges.Click
 
-        Dim W, Q As Double
+        CommitWarningImg.Visible = False
 
+        Dim W, Q As Double
 
         MatStream.PropertyPackage.CurrentMaterialStream = MatStream
 
@@ -672,11 +723,7 @@ Public Class MaterialStreamEditor
 
                 Case 5
 
-                    Dim refsolv = ""
-
-                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(2).Value = True Then refsolv = row.Cells(0).Value.ToString
-                    Next
+                    Dim refsolv = cbSolvent.SelectedItem.ToString
 
                     MatStream.ReferenceSolvent = refsolv
 
@@ -732,11 +779,7 @@ Public Class MaterialStreamEditor
 
                     W = MatStream.Phases(0).Properties.massflow.GetValueOrDefault
 
-                    Dim refsolv = ""
-
-                    For Each row As DataGridViewRow In Me.gridInputComposition.Rows
-                        If row.Cells(2).Value = True Then refsolv = row.Cells(0).Value.ToString
-                    Next
+                    Dim refsolv = cbSolvent.SelectedItem.ToString
 
                     MatStream.ReferenceSolvent = refsolv
 
@@ -823,10 +866,6 @@ Public Class MaterialStreamEditor
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-    End Sub
-
     Function ValidateData() As Boolean
 
         For Each row As DataGridViewRow In Me.gridInputComposition.Rows
@@ -843,11 +882,10 @@ Public Class MaterialStreamEditor
         UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
 
         If cbCompBasis.SelectedIndex = 5 Or cbCompBasis.SelectedIndex = 6 Then
-            gridInputComposition.Columns(2).Visible = True
+            cbSolvent.Enabled = True
             For i = 0 To gridInputComposition.RowCount - 1
                 If gridInputComposition.Rows(i).Cells(0).Value = MatStream.ReferenceSolvent Then
                     gridInputComposition.Rows(i).Cells(1).ReadOnly = True
-                    gridInputComposition.Rows(i).Cells(2).ReadOnly = True
                     gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
                 ElseIf MatStream.ReferenceSolvent = "" Then
                     gridInputComposition.Rows(i).Cells(1).ReadOnly = True
@@ -855,12 +893,11 @@ Public Class MaterialStreamEditor
                 Else
                     gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
                     gridInputComposition.Rows(i).Cells(1).ReadOnly = False
-                    gridInputComposition.Rows(i).Cells(2).ReadOnly = False
                 End If
 
             Next
         Else
-            gridInputComposition.Columns(2).Visible = False
+            cbSolvent.Enabled = False
             gridInputComposition.Columns(1).ReadOnly = False
             For i = 0 To gridInputComposition.RowCount - 1
                 gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
@@ -1092,6 +1129,10 @@ Public Class MaterialStreamEditor
 
     End Sub
 
+    Private Sub gridInputComposition_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellEndEdit
+        ShowUncommittedChangesWarning()
+    End Sub
+
     Private Sub gridInputComposition_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellValueChanged
 
         If Loaded Then
@@ -1103,11 +1144,6 @@ Public Class MaterialStreamEditor
                     Next
                     lblInputAmount.Text = "Total: " & sum.ToString(nf)
                     Me.lblInputAmount.ForeColor = Drawing.Color.Blue
-                    If Not dontshowtooltip Then
-                        ToolTip2.Show(ToolTip1.GetToolTip(btnCompAcceptChanges), btnCompAcceptChanges, 2000)
-                        dontshowtooltip = True
-                    End If
-
                 Catch ex As Exception
                     Me.lblInputAmount.ForeColor = Drawing.Color.Red
                 End Try
@@ -1416,6 +1452,35 @@ Public Class MaterialStreamEditor
 
         If cb Is cbCompoundPhaseProperties Then lblCompPropUnits.Text = suffix
 
+    End Sub
+
+    Private Sub cbSolvent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolvent.SelectedIndexChanged
+
+        MatStream.ReferenceSolvent = cbSolvent.SelectedItem.ToString
+
+        UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
+
+        cbSolvent.Enabled = True
+        For i = 0 To gridInputComposition.RowCount - 1
+            If gridInputComposition.Rows(i).Cells(0).Value = MatStream.ReferenceSolvent Then
+                gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+            ElseIf MatStream.ReferenceSolvent = "" Then
+                gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+            Else
+                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
+                gridInputComposition.Rows(i).Cells(1).ReadOnly = False
+            End If
+
+        Next
+
+    End Sub
+
+    Private Sub ShowUncommittedChangesWarning()
+        CommitWarningImg.Visible = True
+        ToolTip1.ToolTipTitle = MatStream.FlowSheet.GetTranslatedString("Ateno2")
+        ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChangesWarning"), CommitWarningImg, 3000)
     End Sub
 
 End Class

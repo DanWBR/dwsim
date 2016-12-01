@@ -129,7 +129,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnUtils.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 19</value>
+    <value>347, 19</value>
   </data>
   <data name="btnUtils.Size" type="System.Drawing.Size, System.Drawing">
     <value>20, 20</value>
@@ -137,12 +137,6 @@
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnUtils.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
-  </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>158, 17</value>
-  </metadata>
-  <data name="btnUtils.ToolTip" xml:space="preserve">
-    <value>Adicionar/Ver Utilidades</value>
   </data>
   <data name="&gt;&gt;btnUtils.Name" xml:space="preserve">
     <value>btnUtils</value>
@@ -163,7 +157,7 @@
     <value>115, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 20</value>
+    <value>225, 20</value>
   </data>
   <data name="lblTag.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -193,16 +187,13 @@
     <value>NoControl</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 43</value>
+    <value>346, 43</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
-  </data>
-  <data name="chkActive.ToolTip" xml:space="preserve">
-    <value>Ativar/Desativar</value>
   </data>
   <data name="&gt;&gt;chkActive.Name" xml:space="preserve">
     <value>chkActive</value>
@@ -376,7 +367,7 @@
     <value>6, 5</value>
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 98</value>
+    <value>380, 98</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -427,16 +418,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnDisconnectO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 49</value>
+    <value>346, 49</value>
   </data>
   <data name="btnDisconnectO.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="btnDisconnectO.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
-  </data>
-  <data name="btnDisconnectO.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnectO.Name" xml:space="preserve">
     <value>btnDisconnectO</value>
@@ -478,16 +466,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnDisconnectI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 23</value>
+    <value>346, 23</value>
   </data>
   <data name="btnDisconnectI.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="btnDisconnectI.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
-  </data>
-  <data name="btnDisconnectI.ToolTip" xml:space="preserve">
-    <value>Desconectar</value>
   </data>
   <data name="&gt;&gt;btnDisconnectI.Name" xml:space="preserve">
     <value>btnDisconnectI</value>
@@ -508,7 +493,7 @@
     <value>118, 49</value>
   </data>
   <data name="cbOutlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 21</value>
+    <value>222, 21</value>
   </data>
   <data name="cbOutlet.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -562,7 +547,7 @@
     <value>118, 23</value>
   </data>
   <data name="cbInlet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 21</value>
+    <value>222, 21</value>
   </data>
   <data name="cbInlet.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -613,7 +598,7 @@
     <value>6, 105</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 86</value>
+    <value>380, 86</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -646,16 +631,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 53</value>
+    <value>346, 53</value>
   </data>
   <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="btnConfigureFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
-  </data>
-  <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
-    <value>Configurar Algoritmo Flash</value>
   </data>
   <data name="&gt;&gt;btnConfigureFlashAlg.Name" xml:space="preserve">
     <value>btnConfigureFlashAlg</value>
@@ -679,16 +661,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 26</value>
+    <value>346, 26</value>
   </data>
   <data name="btnConfigurePP.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="btnConfigurePP.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
-  </data>
-  <data name="btnConfigurePP.ToolTip" xml:space="preserve">
-    <value>Configurar Pacote de Propriedades</value>
   </data>
   <data name="&gt;&gt;btnConfigurePP.Name" xml:space="preserve">
     <value>btnConfigurePP</value>
@@ -709,7 +688,7 @@
     <value>135, 53</value>
   </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
+    <value>205, 21</value>
   </data>
   <data name="cbFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -763,7 +742,7 @@
     <value>135, 26</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
+    <value>205, 21</value>
   </data>
   <data name="cbPropPack.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -814,7 +793,7 @@
     <value>6, 771</value>
   </data>
   <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 88</value>
+    <value>380, 88</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -841,7 +820,7 @@
     <value>114, 218</value>
   </data>
   <data name="tbFracSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 20</value>
+    <value>126, 20</value>
   </data>
   <data name="tbFracSpec.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -871,7 +850,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbSpecSolid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 243</value>
+    <value>250, 243</value>
   </data>
   <data name="rbSpecSolid.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 17</value>
@@ -904,7 +883,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbSpecLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 220</value>
+    <value>308, 220</value>
   </data>
   <data name="rbSpecLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 17</value>
@@ -937,7 +916,7 @@
     <value>NoControl</value>
   </data>
   <data name="rbSpecVapor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 220</value>
+    <value>250, 220</value>
   </data>
   <data name="rbSpecVapor.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 17</value>
@@ -993,38 +972,113 @@
   <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="CommitWarningImg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Button1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
+  <data name="CommitWarningImg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 224</value>
   </data>
-  <data name="Button1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 176</value>
-  </data>
-  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="CommitWarningImg.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="Button1.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+  <data name="CommitWarningImg.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
   </data>
-  <data name="Button1.ToolTip" xml:space="preserve">
-    <value>Desfazer Alterações</value>
+  <data name="CommitWarningImg.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
   </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
+  <data name="CommitWarningImg.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;CommitWarningImg.Name" xml:space="preserve">
+    <value>CommitWarningImg</value>
   </data>
-  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;CommitWarningImg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CommitWarningImg.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;CommitWarningImg.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="cbSolvent.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="cbSolvent.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cbSolvent.Items" xml:space="preserve">
+    <value>Frações Molares</value>
+  </data>
+  <data name="cbSolvent.Items1" xml:space="preserve">
+    <value>Frações Mássicas</value>
+  </data>
+  <data name="cbSolvent.Items2" xml:space="preserve">
+    <value>Vazões Molares</value>
+  </data>
+  <data name="cbSolvent.Items3" xml:space="preserve">
+    <value>Vazões Mássicas</value>
+  </data>
+  <data name="cbSolvent.Items4" xml:space="preserve">
+    <value>Vazões de Líquido na Condição Padrão (CNTP)</value>
+  </data>
+  <data name="cbSolvent.Items5" xml:space="preserve">
+    <value>Molaridades</value>
+  </data>
+  <data name="cbSolvent.Items6" xml:space="preserve">
+    <value>Molalidades</value>
+  </data>
+  <data name="cbSolvent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 44</value>
+  </data>
+  <data name="cbSolvent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 21</value>
+  </data>
+  <data name="cbSolvent.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;cbSolvent.Name" xml:space="preserve">
+    <value>cbSolvent</value>
+  </data>
+  <data name="&gt;&gt;cbSolvent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbSolvent.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
+  </data>
+  <data name="&gt;&gt;cbSolvent.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSolvent.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSolvent.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSolvent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 49</value>
+  </data>
+  <data name="lblSolvent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="lblSolvent.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lblSolvent.Text" xml:space="preserve">
+    <value>Solvente</value>
+  </data>
+  <data name="&gt;&gt;lblSolvent.Name" xml:space="preserve">
+    <value>lblSolvent</value>
+  </data>
+  <data name="&gt;&gt;lblSolvent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSolvent.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
+  </data>
+  <data name="&gt;&gt;lblSolvent.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="btnCompAcceptChanges.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1036,16 +1090,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnCompAcceptChanges.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 149</value>
+    <value>336, 152</value>
   </data>
   <data name="btnCompAcceptChanges.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
   <data name="btnCompAcceptChanges.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
-  </data>
-  <data name="btnCompAcceptChanges.ToolTip" xml:space="preserve">
-    <value>Aceitar Alterações</value>
   </data>
   <data name="&gt;&gt;btnCompAcceptChanges.Name" xml:space="preserve">
     <value>btnCompAcceptChanges</value>
@@ -1057,7 +1108,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;btnCompAcceptChanges.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lblInputAmount.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -1090,7 +1141,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;lblInputAmount.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="btnEraseInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1102,7 +1153,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnEraseInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 122</value>
+    <value>336, 125</value>
   </data>
   <data name="btnEraseInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1112,9 +1163,6 @@
   </data>
   <data name="btnEraseInput.Text" xml:space="preserve">
     <value>A</value>
-  </data>
-  <data name="btnEraseInput.ToolTip" xml:space="preserve">
-    <value>Apagar</value>
   </data>
   <data name="&gt;&gt;btnEraseInput.Name" xml:space="preserve">
     <value>btnEraseInput</value>
@@ -1126,7 +1174,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;btnEraseInput.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btnEqualizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1138,7 +1186,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnEqualizeInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 95</value>
+    <value>336, 98</value>
   </data>
   <data name="btnEqualizeInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1148,9 +1196,6 @@
   </data>
   <data name="btnEqualizeInput.Text" xml:space="preserve">
     <value>E</value>
-  </data>
-  <data name="btnEqualizeInput.ToolTip" xml:space="preserve">
-    <value>Equalizar</value>
   </data>
   <data name="&gt;&gt;btnEqualizeInput.Name" xml:space="preserve">
     <value>btnEqualizeInput</value>
@@ -1162,7 +1207,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;btnEqualizeInput.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btnNormalizeInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1174,7 +1219,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnNormalizeInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 68</value>
+    <value>336, 71</value>
   </data>
   <data name="btnNormalizeInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1184,9 +1229,6 @@
   </data>
   <data name="btnNormalizeInput.Text" xml:space="preserve">
     <value>N</value>
-  </data>
-  <data name="btnNormalizeInput.ToolTip" xml:space="preserve">
-    <value>Normalizar</value>
   </data>
   <data name="&gt;&gt;btnNormalizeInput.Name" xml:space="preserve">
     <value>btnNormalizeInput</value>
@@ -1198,7 +1240,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;btnNormalizeInput.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="gridInputComposition.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1215,20 +1257,11 @@
   <data name="compamount.HeaderText" xml:space="preserve">
     <value>Quantidade</value>
   </data>
-  <metadata name="colsolv.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colsolv.HeaderText" xml:space="preserve">
-    <value>S</value>
-  </data>
-  <data name="colsolv.ToolTipText" xml:space="preserve">
-    <value>Solvente (p/ Molalidade)</value>
-  </data>
   <data name="gridInputComposition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 46</value>
+    <value>13, 71</value>
   </data>
   <data name="gridInputComposition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 199</value>
+    <value>317, 174</value>
   </data>
   <data name="gridInputComposition.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1243,7 +1276,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;gridInputComposition.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cbCompBasis.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1273,7 +1306,7 @@
     <value>109, 19</value>
   </data>
   <data name="cbCompBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 21</value>
+    <value>221, 21</value>
   </data>
   <data name="cbCompBasis.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1288,7 +1321,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;cbCompBasis.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="Label16.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1297,7 +1330,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 24</value>
+    <value>12, 24</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 13</value>
@@ -1318,7 +1351,7 @@
     <value>GroupBox6</value>
   </data>
   <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="GroupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 266</value>
@@ -1327,7 +1360,7 @@
     <value>320, 270</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>328, 277</value>
+    <value>363, 277</value>
   </data>
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1360,7 +1393,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 192</value>
+    <value>250, 192</value>
   </data>
   <data name="cbUnitsS.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1387,7 +1420,7 @@
     <value>115, 192</value>
   </data>
   <data name="tbEntr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbEntr.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1450,7 +1483,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsH.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 166</value>
+    <value>250, 166</value>
   </data>
   <data name="cbUnitsH.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1477,7 +1510,7 @@
     <value>115, 166</value>
   </data>
   <data name="tbEnth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbEnth.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1540,7 +1573,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsQ.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 139</value>
+    <value>250, 139</value>
   </data>
   <data name="cbUnitsQ.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1567,7 +1600,7 @@
     <value>115, 140</value>
   </data>
   <data name="tbVolFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbVolFlow.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1600,7 +1633,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 113</value>
+    <value>250, 113</value>
   </data>
   <data name="cbUnitsM.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1627,7 +1660,7 @@
     <value>115, 114</value>
   </data>
   <data name="tbMoleFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbMoleFlow.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -1660,7 +1693,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 87</value>
+    <value>250, 87</value>
   </data>
   <data name="cbUnitsW.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1687,7 +1720,7 @@
     <value>115, 88</value>
   </data>
   <data name="tbMassFlow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbMassFlow.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1720,7 +1753,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 61</value>
+    <value>250, 61</value>
   </data>
   <data name="cbUnitsP.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1747,7 +1780,7 @@
     <value>115, 62</value>
   </data>
   <data name="tbPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbPressure.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1840,7 +1873,7 @@
     <value>Máxima das Entradas</value>
   </data>
   <data name="cbUnitsT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 35</value>
+    <value>250, 35</value>
   </data>
   <data name="cbUnitsT.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 21</value>
@@ -1867,7 +1900,7 @@
     <value>115, 36</value>
   </data>
   <data name="tbTemp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 20</value>
+    <value>125, 20</value>
   </data>
   <data name="tbTemp.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -2002,7 +2035,7 @@
     <value>115, 9</value>
   </data>
   <data name="cbSpec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 21</value>
+    <value>239, 21</value>
   </data>
   <data name="cbSpec.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -2110,7 +2143,7 @@
     <value>0, 0</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
+    <value>372, 549</value>
   </data>
   <data name="rtbAnnotations.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2152,7 +2185,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridPropertiesMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="gridPropertiesMixture.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2173,7 +2206,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPropsMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="tabPropsMix.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2218,7 +2251,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridPropertiesVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="gridPropertiesVapor.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2242,7 +2275,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="tabPropsVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="tabPropsVapor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2287,7 +2320,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridPropertiesLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="gridPropertiesLiqMix.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2308,7 +2341,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPropsLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="tabPropsLiqMix.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2353,7 +2386,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridPropertiesLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="gridPropertiesLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2374,7 +2407,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPropsLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="tabPropsLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2419,7 +2452,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridPropertiesLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="gridPropertiesLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2440,7 +2473,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPropsLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="tabPropsLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2485,7 +2518,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridPropertiesSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="gridPropertiesSolid.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2506,7 +2539,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabPropsSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
+    <value>364, 523</value>
   </data>
   <data name="tabPropsSolid.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2533,7 +2566,7 @@
     <value>0, 0</value>
   </data>
   <data name="TabPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
+    <value>372, 549</value>
   </data>
   <data name="TabPhaseProps.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2560,7 +2593,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAmountTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 15</value>
+    <value>260, 15</value>
   </data>
   <data name="lblAmountTotal.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -2611,7 +2644,7 @@
     <value>43, 12</value>
   </data>
   <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 21</value>
+    <value>211, 21</value>
   </data>
   <data name="cbCalculatedAmountsBasis.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2680,7 +2713,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="gridCompMixture.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -2701,7 +2734,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="tabCompMix.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2740,7 +2773,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="gridCompVapor.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2761,7 +2794,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="tabCompVapor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2800,7 +2833,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="gridCompLiqMix.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2821,7 +2854,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="tabCompLiqMix.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2860,7 +2893,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="gridCompLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2881,7 +2914,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="tabCompLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2920,7 +2953,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="gridCompLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2941,7 +2974,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="tabCompLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2980,7 +3013,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="gridCompSolid.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -3001,7 +3034,7 @@
     <value>4, 22</value>
   </data>
   <data name="tabCompSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
+    <value>348, 444</value>
   </data>
   <data name="tabCompSolid.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3025,7 +3058,7 @@
     <value>0, 44</value>
   </data>
   <data name="TabPhaseComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 470</value>
+    <value>356, 470</value>
   </data>
   <data name="TabPhaseComps.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3052,7 +3085,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
+    <value>372, 549</value>
   </data>
   <data name="TabPageInput.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3079,7 +3112,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 517</value>
+    <value>358, 517</value>
   </data>
   <data name="TabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3094,7 +3127,7 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+    <value>TabControlCompound</value>
   </data>
   <data name="&gt;&gt;TabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -3109,7 +3142,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCompPropUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 15</value>
+    <value>243, 15</value>
   </data>
   <data name="lblCompPropUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -3184,7 +3217,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="gridCompPropVapor.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -3205,7 +3238,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="TabCompPropVapor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3244,7 +3277,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="gridCompPropLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -3265,7 +3298,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="TabCompPropLiq1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3304,7 +3337,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="gridCompPropLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -3325,7 +3358,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="TabCompPropLiq2.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3364,7 +3397,7 @@
     <value>0, 0</value>
   </data>
   <data name="gridCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="gridCompPropSolid.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -3385,7 +3418,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 447</value>
+    <value>348, 447</value>
   </data>
   <data name="TabCompPropSolid.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3409,7 +3442,7 @@
     <value>0, 44</value>
   </data>
   <data name="TabCompoundPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 473</value>
+    <value>356, 473</value>
   </data>
   <data name="TabCompoundPhaseProps.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -3451,7 +3484,7 @@
     <value>76, 12</value>
   </data>
   <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 21</value>
+    <value>161, 21</value>
   </data>
   <data name="cbCompoundPhaseProperties.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -3475,7 +3508,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 517</value>
+    <value>358, 517</value>
   </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3490,33 +3523,33 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>TabControl1</value>
+    <value>TabControlCompound</value>
   </data>
   <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="TabControlCompound.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TabControlCompound.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 543</value>
+  <data name="TabControlCompound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>366, 543</value>
   </data>
-  <data name="TabControl1.TabIndex" type="System.Int32, mscorlib">
+  <data name="TabControlCompound.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Name" xml:space="preserve">
-    <value>TabControl1</value>
+  <data name="&gt;&gt;TabControlCompound.Name" xml:space="preserve">
+    <value>TabControlCompound</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Type" xml:space="preserve">
+  <data name="&gt;&gt;TabControlCompound.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabControl1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabControlCompound.Parent" xml:space="preserve">
     <value>TabPageResultsComp</value>
   </data>
-  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TabControlCompound.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="TabPageResultsComp.Location" type="System.Drawing.Point, System.Drawing">
@@ -3526,7 +3559,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPageResultsComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
+    <value>372, 549</value>
   </data>
   <data name="TabPageResultsComp.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3550,7 +3583,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageResultsProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
+    <value>372, 549</value>
   </data>
   <data name="TabPageResultsProps.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3574,7 +3607,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPageAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
+    <value>372, 549</value>
   </data>
   <data name="TabPageAnnotations.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3598,7 +3631,7 @@
     <value>6, 194</value>
   </data>
   <data name="TabControlMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 575</value>
+    <value>380, 575</value>
   </data>
   <data name="TabControlMain.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -3615,8 +3648,8 @@
   <data name="&gt;&gt;TabControlMain.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="ToolTip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>257, 17</value>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>158, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3631,13 +3664,25 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>355, 862</value>
+    <value>390, 862</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>MaterialStreamEditor</value>
+  </data>
+  <data name="&gt;&gt;compname.Name" xml:space="preserve">
+    <value>compname</value>
+  </data>
+  <data name="&gt;&gt;compname.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;compamount.Name" xml:space="preserve">
+    <value>compamount</value>
+  </data>
+  <data name="&gt;&gt;compamount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;AddUtilityTSMI.Name" xml:space="preserve">
     <value>AddUtilityTSMI</value>
@@ -3861,12 +3906,6 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn29.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
-    <value>ToolTip1</value>
-  </data>
-  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn32.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn32</value>
   </data>
@@ -3915,29 +3954,11 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn41.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolTip2.Name" xml:space="preserve">
-    <value>ToolTip2</value>
+  <data name="&gt;&gt;ToolTip1.Name" xml:space="preserve">
+    <value>ToolTip1</value>
   </data>
-  <data name="&gt;&gt;ToolTip2.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;compname.Name" xml:space="preserve">
-    <value>compname</value>
-  </data>
-  <data name="&gt;&gt;compname.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;compamount.Name" xml:space="preserve">
-    <value>compamount</value>
-  </data>
-  <data name="&gt;&gt;compamount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colsolv.Name" xml:space="preserve">
-    <value>colsolv</value>
-  </data>
-  <data name="&gt;&gt;colsolv.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MaterialStreamEditor</value>

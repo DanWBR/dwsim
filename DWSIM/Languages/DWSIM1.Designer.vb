@@ -1892,6 +1892,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Existem alterações não salvas de composição. Clique em &apos;Aceitar Alterações&apos; para atualizar..
+        '''</summary>
+        Friend Shared ReadOnly Property CommitChangesWarning() As String
+            Get
+                Return ResourceManager.GetString("CommitChangesWarning", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Já existe um componente com este nome na simulação atual..
         '''</summary>
         Friend Shared ReadOnly Property CompAlrPresent() As String

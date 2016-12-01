@@ -24,6 +24,7 @@ Partial Class MaterialStreamEditor
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MaterialStreamEditor))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -40,7 +41,6 @@ Partial Class MaterialStreamEditor
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btnUtils = New System.Windows.Forms.Button()
         Me.lblTag = New System.Windows.Forms.TextBox()
@@ -70,13 +70,17 @@ Partial Class MaterialStreamEditor
         Me.rbSpecVapor = New System.Windows.Forms.RadioButton()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.CommitWarningImg = New System.Windows.Forms.PictureBox()
+        Me.cbSolvent = New System.Windows.Forms.ComboBox()
+        Me.lblSolvent = New System.Windows.Forms.Label()
         Me.btnCompAcceptChanges = New System.Windows.Forms.Button()
         Me.lblInputAmount = New System.Windows.Forms.Label()
         Me.btnEraseInput = New System.Windows.Forms.Button()
         Me.btnEqualizeInput = New System.Windows.Forms.Button()
         Me.btnNormalizeInput = New System.Windows.Forms.Button()
         Me.gridInputComposition = New System.Windows.Forms.DataGridView()
+        Me.compname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.compamount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cbCompBasis = New System.Windows.Forms.ComboBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbUnitsS = New System.Windows.Forms.ComboBox()
@@ -170,11 +174,10 @@ Partial Class MaterialStreamEditor
         Me.gridCompSolid = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn28 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn29 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.TabControlMain = New System.Windows.Forms.TabControl()
         Me.TabPageInput = New System.Windows.Forms.TabPage()
         Me.TabPageResultsComp = New System.Windows.Forms.TabPage()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabControlCompound = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.lblCompPropUnits = New System.Windows.Forms.Label()
@@ -199,14 +202,12 @@ Partial Class MaterialStreamEditor
         Me.cbCompoundPhaseProperties = New System.Windows.Forms.ComboBox()
         Me.TabPageResultsProps = New System.Windows.Forms.TabPage()
         Me.TabPageAnnotations = New System.Windows.Forms.TabPage()
-        Me.ToolTip2 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.compname = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.compamount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.colsolv = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        CType(Me.CommitWarningImg, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridInputComposition, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.UtilitiesCtxMenu.SuspendLayout()
         Me.TabPhaseProps.SuspendLayout()
@@ -238,7 +239,7 @@ Partial Class MaterialStreamEditor
         Me.TabControlMain.SuspendLayout()
         Me.TabPageInput.SuspendLayout()
         Me.TabPageResultsComp.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
+        Me.TabControlCompound.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TabCompoundPhaseProps.SuspendLayout()
@@ -273,7 +274,6 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.btnUtils, "btnUtils")
         Me.btnUtils.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_sparkle
         Me.btnUtils.Name = "btnUtils"
-        Me.ToolTip1.SetToolTip(Me.btnUtils, resources.GetString("btnUtils.ToolTip"))
         Me.btnUtils.UseVisualStyleBackColor = True
         '
         'lblTag
@@ -286,7 +286,6 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.chkActive, "chkActive")
         Me.chkActive.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_tick
         Me.chkActive.Name = "chkActive"
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
         Me.chkActive.UseVisualStyleBackColor = True
         '
         'lblConnectedTo
@@ -330,14 +329,12 @@ Partial Class MaterialStreamEditor
         '
         resources.ApplyResources(Me.btnDisconnectO, "btnDisconnectO")
         Me.btnDisconnectO.Name = "btnDisconnectO"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectO, resources.GetString("btnDisconnectO.ToolTip"))
         Me.btnDisconnectO.UseVisualStyleBackColor = True
         '
         'btnDisconnectI
         '
         resources.ApplyResources(Me.btnDisconnectI, "btnDisconnectI")
         Me.btnDisconnectI.Name = "btnDisconnectI"
-        Me.ToolTip1.SetToolTip(Me.btnDisconnectI, resources.GetString("btnDisconnectI.ToolTip"))
         Me.btnDisconnectI.UseVisualStyleBackColor = True
         '
         'cbOutlet
@@ -381,7 +378,6 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.btnConfigureFlashAlg, "btnConfigureFlashAlg")
         Me.btnConfigureFlashAlg.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.btnConfigureFlashAlg.Name = "btnConfigureFlashAlg"
-        Me.ToolTip1.SetToolTip(Me.btnConfigureFlashAlg, resources.GetString("btnConfigureFlashAlg.ToolTip"))
         Me.btnConfigureFlashAlg.UseVisualStyleBackColor = True
         '
         'btnConfigurePP
@@ -389,7 +385,6 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.btnConfigurePP, "btnConfigurePP")
         Me.btnConfigurePP.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.cog
         Me.btnConfigurePP.Name = "btnConfigurePP"
-        Me.ToolTip1.SetToolTip(Me.btnConfigurePP, resources.GetString("btnConfigurePP.ToolTip"))
         Me.btnConfigurePP.UseVisualStyleBackColor = True
         '
         'cbFlashAlg
@@ -449,7 +444,9 @@ Partial Class MaterialStreamEditor
         'GroupBox6
         '
         resources.ApplyResources(Me.GroupBox6, "GroupBox6")
-        Me.GroupBox6.Controls.Add(Me.Button1)
+        Me.GroupBox6.Controls.Add(Me.CommitWarningImg)
+        Me.GroupBox6.Controls.Add(Me.cbSolvent)
+        Me.GroupBox6.Controls.Add(Me.lblSolvent)
         Me.GroupBox6.Controls.Add(Me.btnCompAcceptChanges)
         Me.GroupBox6.Controls.Add(Me.lblInputAmount)
         Me.GroupBox6.Controls.Add(Me.btnEraseInput)
@@ -461,20 +458,31 @@ Partial Class MaterialStreamEditor
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
         '
-        'Button1
+        'CommitWarningImg
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_cross
-        Me.Button1.Name = "Button1"
-        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.CommitWarningImg, "CommitWarningImg")
+        Me.CommitWarningImg.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.emblem_important
+        Me.CommitWarningImg.Name = "CommitWarningImg"
+        Me.CommitWarningImg.TabStop = False
+        '
+        'cbSolvent
+        '
+        resources.ApplyResources(Me.cbSolvent, "cbSolvent")
+        Me.cbSolvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSolvent.FormattingEnabled = True
+        Me.cbSolvent.Items.AddRange(New Object() {resources.GetString("cbSolvent.Items"), resources.GetString("cbSolvent.Items1"), resources.GetString("cbSolvent.Items2"), resources.GetString("cbSolvent.Items3"), resources.GetString("cbSolvent.Items4"), resources.GetString("cbSolvent.Items5"), resources.GetString("cbSolvent.Items6")})
+        Me.cbSolvent.Name = "cbSolvent"
+        '
+        'lblSolvent
+        '
+        resources.ApplyResources(Me.lblSolvent, "lblSolvent")
+        Me.lblSolvent.Name = "lblSolvent"
         '
         'btnCompAcceptChanges
         '
         resources.ApplyResources(Me.btnCompAcceptChanges, "btnCompAcceptChanges")
         Me.btnCompAcceptChanges.BackgroundImage = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_tick
         Me.btnCompAcceptChanges.Name = "btnCompAcceptChanges"
-        Me.ToolTip1.SetToolTip(Me.btnCompAcceptChanges, resources.GetString("btnCompAcceptChanges.ToolTip"))
         Me.btnCompAcceptChanges.UseVisualStyleBackColor = True
         '
         'lblInputAmount
@@ -486,21 +494,18 @@ Partial Class MaterialStreamEditor
         '
         resources.ApplyResources(Me.btnEraseInput, "btnEraseInput")
         Me.btnEraseInput.Name = "btnEraseInput"
-        Me.ToolTip1.SetToolTip(Me.btnEraseInput, resources.GetString("btnEraseInput.ToolTip"))
         Me.btnEraseInput.UseVisualStyleBackColor = True
         '
         'btnEqualizeInput
         '
         resources.ApplyResources(Me.btnEqualizeInput, "btnEqualizeInput")
         Me.btnEqualizeInput.Name = "btnEqualizeInput"
-        Me.ToolTip1.SetToolTip(Me.btnEqualizeInput, resources.GetString("btnEqualizeInput.ToolTip"))
         Me.btnEqualizeInput.UseVisualStyleBackColor = True
         '
         'btnNormalizeInput
         '
         resources.ApplyResources(Me.btnNormalizeInput, "btnNormalizeInput")
         Me.btnNormalizeInput.Name = "btnNormalizeInput"
-        Me.ToolTip1.SetToolTip(Me.btnNormalizeInput, resources.GetString("btnNormalizeInput.ToolTip"))
         Me.btnNormalizeInput.UseVisualStyleBackColor = True
         '
         'gridInputComposition
@@ -509,9 +514,24 @@ Partial Class MaterialStreamEditor
         resources.ApplyResources(Me.gridInputComposition, "gridInputComposition")
         Me.gridInputComposition.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridInputComposition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridInputComposition.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.compname, Me.compamount, Me.colsolv})
+        Me.gridInputComposition.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.compname, Me.compamount})
         Me.gridInputComposition.Name = "gridInputComposition"
         Me.gridInputComposition.RowHeadersVisible = False
+        '
+        'compname
+        '
+        Me.compname.FillWeight = 60.0!
+        resources.ApplyResources(Me.compname, "compname")
+        Me.compname.Name = "compname"
+        Me.compname.ReadOnly = True
+        '
+        'compamount
+        '
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.compamount.DefaultCellStyle = DataGridViewCellStyle1
+        Me.compamount.FillWeight = 30.0!
+        resources.ApplyResources(Me.compamount, "compamount")
+        Me.compamount.Name = "compamount"
         '
         'cbCompBasis
         '
@@ -1223,18 +1243,18 @@ Partial Class MaterialStreamEditor
         '
         'TabPageResultsComp
         '
-        Me.TabPageResultsComp.Controls.Add(Me.TabControl1)
+        Me.TabPageResultsComp.Controls.Add(Me.TabControlCompound)
         resources.ApplyResources(Me.TabPageResultsComp, "TabPageResultsComp")
         Me.TabPageResultsComp.Name = "TabPageResultsComp"
         Me.TabPageResultsComp.UseVisualStyleBackColor = True
         '
-        'TabControl1
+        'TabControlCompound
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        resources.ApplyResources(Me.TabControl1, "TabControl1")
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
+        Me.TabControlCompound.Controls.Add(Me.TabPage1)
+        Me.TabControlCompound.Controls.Add(Me.TabPage2)
+        resources.ApplyResources(Me.TabControlCompound, "TabControlCompound")
+        Me.TabControlCompound.Name = "TabControlCompound"
+        Me.TabControlCompound.SelectedIndex = 0
         '
         'TabPage1
         '
@@ -1422,31 +1442,9 @@ Partial Class MaterialStreamEditor
         Me.TabPageAnnotations.Name = "TabPageAnnotations"
         Me.TabPageAnnotations.UseVisualStyleBackColor = True
         '
-        'ToolTip2
+        'ToolTip1
         '
-        Me.ToolTip2.IsBalloon = True
-        '
-        'compname
-        '
-        Me.compname.FillWeight = 60.0!
-        resources.ApplyResources(Me.compname, "compname")
-        Me.compname.Name = "compname"
-        Me.compname.ReadOnly = True
-        '
-        'compamount
-        '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.compamount.DefaultCellStyle = DataGridViewCellStyle1
-        Me.compamount.FillWeight = 30.0!
-        resources.ApplyResources(Me.compamount, "compamount")
-        Me.compamount.Name = "compamount"
-        '
-        'colsolv
-        '
-        Me.colsolv.FillWeight = 10.0!
-        resources.ApplyResources(Me.colsolv, "colsolv")
-        Me.colsolv.Name = "colsolv"
-        Me.colsolv.ReadOnly = True
+        Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning
         '
         'MaterialStreamEditor
         '
@@ -1466,6 +1464,7 @@ Partial Class MaterialStreamEditor
         Me.GroupBox3.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        CType(Me.CommitWarningImg, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.gridInputComposition, System.ComponentModel.ISupportInitialize).EndInit()
         Me.UtilitiesCtxMenu.ResumeLayout(False)
         Me.TabPhaseProps.ResumeLayout(False)
@@ -1498,7 +1497,7 @@ Partial Class MaterialStreamEditor
         Me.TabPageInput.ResumeLayout(False)
         Me.TabPageInput.PerformLayout()
         Me.TabPageResultsComp.ResumeLayout(False)
-        Me.TabControl1.ResumeLayout(False)
+        Me.TabControlCompound.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
@@ -1604,8 +1603,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents gridPropertiesVapor As System.Windows.Forms.DataGridView
     Friend WithEvents gridPropertiesLiqMix As System.Windows.Forms.DataGridView
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents btnCompAcceptChanges As System.Windows.Forms.Button
     Friend WithEvents lblAmountTotal As System.Windows.Forms.Label
     Friend WithEvents UtilitiesCtxMenu As System.Windows.Forms.ContextMenuStrip
@@ -1624,7 +1621,6 @@ Partial Class MaterialStreamEditor
     Friend WithEvents TabPageResultsComp As System.Windows.Forms.TabPage
     Friend WithEvents TabPageResultsProps As System.Windows.Forms.TabPage
     Friend WithEvents TabPageAnnotations As System.Windows.Forms.TabPage
-    Friend WithEvents ToolTip2 As System.Windows.Forms.ToolTip
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1655,7 +1651,7 @@ Partial Class MaterialStreamEditor
     Friend WithEvents DataGridViewTextBoxColumn27 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn28 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn29 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabControlCompound As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents Label18 As System.Windows.Forms.Label
@@ -1678,7 +1674,10 @@ Partial Class MaterialStreamEditor
     Friend WithEvents DataGridViewTextBoxColumn40 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn41 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblCompPropUnits As System.Windows.Forms.Label
+    Friend WithEvents cbSolvent As System.Windows.Forms.ComboBox
+    Friend WithEvents lblSolvent As System.Windows.Forms.Label
     Friend WithEvents compname As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents compamount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colsolv As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents CommitWarningImg As System.Windows.Forms.PictureBox
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
 End Class

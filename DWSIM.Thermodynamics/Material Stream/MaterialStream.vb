@@ -5678,6 +5678,8 @@ Namespace Streams
             End If
         End Sub
 
+        Public Property EditorState As String = "{}"
+
         Public Overrides Function GetIconBitmap() As Object
             Return My.Resources.stream_mat_32
         End Function
@@ -5751,6 +5753,23 @@ Namespace Streams
                 Return True
             End Get
         End Property
+    End Class
+
+End Namespace
+
+Namespace Streams.Editors
+
+    Public Class MaterialStreamEditorState
+
+        Public Property MainSelectedTab As Integer = 0
+        Public Property InputCompositionBasis As Integer = 0
+        Public Property CompoundsSelectedTab As Integer = 0
+        Public Property CompoundsAmountBasis As Integer = 0
+        Public Property CompoundsProperty As Integer = 0
+        Public Property CompoundsAmountSelectedTab As Integer = 0
+        Public Property CompoundsPropertySelectedTab As Integer = 0
+        Public Property PhasePropsSelectedTab As Integer = 0
+
     End Class
 
 End Namespace
