@@ -1892,6 +1892,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Pressione ENTER para aceitar o novo valor..
+        '''</summary>
+        Friend Shared ReadOnly Property CommitChanges() As String
+            Get
+                Return ResourceManager.GetString("CommitChanges", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Existem alterações não salvas de composição. Clique em &apos;Aceitar Alterações&apos; para atualizar..
         '''</summary>
         Friend Shared ReadOnly Property CommitChangesWarning() As String

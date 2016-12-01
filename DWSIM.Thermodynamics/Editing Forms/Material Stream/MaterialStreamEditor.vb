@@ -41,22 +41,7 @@ Public Class MaterialStreamEditor
 
     Private Sub MaterialStreamEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
 
-        'save view state
-
-        Dim vs As New Streams.Editors.MaterialStreamEditorState
-
-        With vs
-            .MainSelectedTab = TabControlMain.SelectedIndex
-            .InputCompositionBasis = cbCompBasis.SelectedIndex
-            .CompoundsSelectedTab = TabControlCompound.SelectedIndex
-            .CompoundsAmountBasis = cbCalculatedAmountsBasis.SelectedIndex
-            .CompoundsProperty = cbCompoundPhaseProperties.SelectedIndex
-            .CompoundsAmountSelectedTab = TabPhaseComps.SelectedIndex
-            .CompoundsPropertySelectedTab = TabCompoundPhaseProps.SelectedIndex
-            .PhasePropsSelectedTab = TabPhaseProps.SelectedIndex
-        End With
-
-        MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
+        SaveViewState()
 
     End Sub
 
@@ -620,7 +605,7 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = row.Cells(1).Value / total
         Next
-        ShowUncommittedChangesWarning()
+        ShowUncommittedChangesWarning(btnNormalizeInput)
     End Sub
 
     Private Sub btnEqualizeInput_Click(sender As Object, e As EventArgs) Handles btnEqualizeInput.Click
@@ -628,19 +613,17 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 1.0# / gridInputComposition.Rows.Count
         Next
-        ShowUncommittedChangesWarning()
+        ShowUncommittedChangesWarning(btnEqualizeInput)
     End Sub
 
     Private Sub btnEraseInput_Click(sender As Object, e As EventArgs) Handles btnEraseInput.Click
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = 0.0#
         Next
-        ShowUncommittedChangesWarning()
+        ShowUncommittedChangesWarning(btnEraseInput)
     End Sub
 
     Private Sub btnCompAcceptChanges_Click(sender As Object, e As EventArgs) Handles btnCompAcceptChanges.Click
-
-        CommitWarningImg.Visible = False
 
         Dim W, Q As Double
 
@@ -1101,6 +1084,7 @@ Public Class MaterialStreamEditor
 
     Sub RequestCalc()
 
+        SaveViewState()
         MatStream.FlowSheet.RequestCalculation(MatStream)
 
     End Sub
@@ -1114,6 +1098,12 @@ Public Class MaterialStreamEditor
             tbox.ForeColor = Drawing.Color.Blue
         Else
             tbox.ForeColor = Drawing.Color.Red
+        End If
+
+        If Loaded Then
+            ToolTip1.ToolTipTitle = MatStream.FlowSheet.GetTranslatedString("Informao")
+            ToolTip1.ToolTipIcon = ToolTipIcon.Info
+            ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChanges"), tbox, 0, tbox.Height + 4, 2000)
         End If
 
     End Sub
@@ -1130,7 +1120,7 @@ Public Class MaterialStreamEditor
     End Sub
 
     Private Sub gridInputComposition_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellEndEdit
-        ShowUncommittedChangesWarning()
+        ShowUncommittedChangesWarning(lblInputAmount)
     End Sub
 
     Private Sub gridInputComposition_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridInputComposition.CellValueChanged
@@ -1477,10 +1467,31 @@ Public Class MaterialStreamEditor
 
     End Sub
 
-    Private Sub ShowUncommittedChangesWarning()
-        CommitWarningImg.Visible = True
+    Private Sub ShowUncommittedChangesWarning(ctrl As Control)
         ToolTip1.ToolTipTitle = MatStream.FlowSheet.GetTranslatedString("Ateno2")
-        ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChangesWarning"), CommitWarningImg, 3000)
+        ToolTip1.ToolTipIcon = ToolTipIcon.Warning
+        ToolTip1.Show(MatStream.FlowSheet.GetTranslatedString("CommitChangesWarning"), ctrl, 0, ctrl.Height + 4, 3000)
+    End Sub
+
+    Private Sub SaveViewState()
+
+        'save view state
+
+        Dim vs As New Streams.Editors.MaterialStreamEditorState
+
+        With vs
+            .MainSelectedTab = TabControlMain.SelectedIndex
+            .InputCompositionBasis = cbCompBasis.SelectedIndex
+            .CompoundsSelectedTab = TabControlCompound.SelectedIndex
+            .CompoundsAmountBasis = cbCalculatedAmountsBasis.SelectedIndex
+            .CompoundsProperty = cbCompoundPhaseProperties.SelectedIndex
+            .CompoundsAmountSelectedTab = TabPhaseComps.SelectedIndex
+            .CompoundsPropertySelectedTab = TabCompoundPhaseProps.SelectedIndex
+            .PhasePropsSelectedTab = TabPhaseProps.SelectedIndex
+        End With
+
+        MatStream.EditorState = Newtonsoft.Json.JsonConvert.SerializeObject(vs)
+
     End Sub
 
 End Class

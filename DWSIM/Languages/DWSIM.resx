@@ -5445,4 +5445,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CommitChangesWarning" xml:space="preserve">
     <value>Existem alterações não salvas de composição. Clique em 'Aceitar Alterações' para atualizar.</value>
   </data>
+  <data name="CommitChanges" xml:space="preserve">
+    <value>Pressione ENTER para aceitar o novo valor.</value>
+  </data>
 </root>
