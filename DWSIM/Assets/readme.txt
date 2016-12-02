@@ -66,6 +66,16 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
 
+Version 4.1
+
+- [NEW] Added the ability to load, edit and save simulations created on mobile devices (Android/iOS)
+- [NEW] Material Stream editor enhancements
+- [NEW] Biodiesel production sample
+- [NEW] Added more thermophysical phase properties: Isothermal Compressibility, Bulk Modulus, Joule-Thomson Coefficient, Speed of Sound, Internal Energy, Gibbs Free Energy and Helmholtz Free Energy 
+- [NEW] New Compound properties menu in Material Stream editor, added Infinite Dilution Diffusivity Coefficients
+- [CHG] Updated Molarity/Molality input mechanism
+- [FIX] General bug fixes
+
 Version 4.0 Update 35
 
 - [FIX] Fixed bugs with the Rigorous Column model
