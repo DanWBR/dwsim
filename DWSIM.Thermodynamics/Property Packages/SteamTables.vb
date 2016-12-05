@@ -990,10 +990,6 @@ FINAL:
             End Select
         End Function
 
-        Public Overrides Function DW_CalcKvalue(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double) As Double()
-            Return New Double() {1.0#}
-        End Function
-
         Public Overrides Function DW_CalcEnthalpyDeparture(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
             Return Me.m_iapws97.enthalpyW(T, P / 100000) - Me.RET_Hid(298.15, T, Vx)
         End Function
@@ -1105,7 +1101,20 @@ FINAL:
         End Function
 
         Public Overrides Function DW_CalcFugCoeff(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double()
-            Return New Double() {1.0#}
+            Dim n As Integer = Vx.Length - 1
+            Dim i As Integer
+            Dim fugcoeff(n) As Double
+
+            If st = State.Liquid Then
+                For i = 0 To n
+                    fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                Next
+            Else
+                For i = 0 To n
+                    fugcoeff(i) = 1
+                Next
+            End If
+            Return fugcoeff
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean

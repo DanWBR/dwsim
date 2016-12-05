@@ -87,7 +87,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End With
             lf = 1 - vf
 
-            Return New Object() {lf, vf, New Double() {1.0#}, New Double() {1.0#}, 0, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {lf, vf, Vz.Clone, Vz.Clone, 0, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
@@ -127,7 +127,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             lf = 1 - vf
 
-            Return New Object() {lf, vf, New Double() {1.0#}, New Double() {1.0#}, T, 0, New Double() {1.0#}, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {lf, vf, Vz.Clone, Vz.Clone, T, 0.0#, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
@@ -165,7 +165,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             lf = 1 - vf
 
-            Return New Object() {lf, vf, New Double() {1.0#}, New Double() {1.0#}, T, 0, New Double() {1.0#}, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {lf, vf, Vz.Clone, Vz.Clone, T, 0, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
@@ -180,7 +180,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End With
             lf = 1 - vf
 
-            Return New Object() {lf, vf, New Double() {1.0#}, New Double() {1.0#}, P, 0, New Double() {1.0#}, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {lf, vf, Vz.Clone, Vz.Clone, P, 0, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
@@ -195,7 +195,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             End With
             lf = 1 - V
 
-            Return New Object() {lf, V, New Double() {1.0#}, New Double() {1.0#}, T, 0, New Double() {1.0#}, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {lf, V, Vz.Clone, Vz.Clone, T, 0, Vz.Clone, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
