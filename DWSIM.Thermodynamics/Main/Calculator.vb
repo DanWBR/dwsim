@@ -97,11 +97,13 @@ Public Class Calculator
             If Settings.gpumod Is Nothing Then
                 Select Case Settings.CudafyTarget
                     Case 0, 1
-                        Settings.gpumod = CudafyModule.TryDeserialize("cudacode.cdfy")
+                        Dim errmsg As String = ""
+                        Settings.gpumod = CudafyModule.TryDeserialize("cudacode.cdfy", errmsg)
+                        If errmsg <> "" Then Throw New CudafyException(errmsg)
                     Case 2
                         'OpenCL code is device-specific and must be compiled on each initialization
                 End Select
-                If Settings.gpumod Is Nothing OrElse Not Settings.gpumod.TryVerifyChecksums() Then
+                If Settings.gpumod Is Nothing Then
                     Select Case Settings.CudafyTarget
                         Case 0
                             Settings.gpumod = CudafyTranslator.Cudafy(GetType(PropertyPackages.Auxiliary.LeeKeslerPlocker), _
