@@ -897,11 +897,11 @@ Public Class MaterialStreamEditor
         Select Case cb.SelectedIndex
             Case 0
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault
                 Next
             Case 1
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MassFraction.GetValueOrDefault
                 Next
             Case 2
                 For Each row As DataGridViewRow In grid.Rows
@@ -917,14 +917,14 @@ Public Class MaterialStreamEditor
                 'molarity = mol solute per liter solution
                 Dim i As Integer = 0
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molarity / 1000
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molarity.GetValueOrDefault / 1000
                     i += 1
                 Next
                 suffix = "mol/L"
             Case 6
                 'molality = mol solute per kg solvent
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molality
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).Molality.GetValueOrDefault
                 Next
                 suffix = "mol/kg solv."
             Case 4
@@ -947,7 +947,7 @@ Public Class MaterialStreamEditor
                 Next
                 i = 0
                 For Each row As DataGridViewRow In grid.Rows
-                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction * phase.Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
+                    row.Cells(1).Value = phase.Compounds(row.Cells(0).Value).MoleFraction.GetValueOrDefault * phase.Compounds(row.Cells(0).Value).ConstantProperties.Molar_Weight / liqdens(i) / totalvol
                     i += 1
                 Next
                 ipp = Nothing

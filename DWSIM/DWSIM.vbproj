@@ -942,6 +942,7 @@
     <None Include="Assets\7zip\linux\7za" />
     <None Include="Assets\7zip\linux\7zCon.sfx" />
     <None Include="Assets\7zip\linux\7zr" />
+    <None Include="Assets\cudacode.cdfy" />
     <None Include="Assets\default.ini" />
     <None Include="Assets\docs\tech_manual.pdf" />
     <None Include="Assets\docs\User_Guide.pdf" />
@@ -1621,6 +1622,10 @@
     <Content Include="Assets\7zip\windows\history.txt" />
     <Content Include="Assets\7zip\windows\License.txt" />
     <Content Include="Assets\7zip\windows\readme.txt" />
+    <Content Include="Assets\appbar.information.circle.png" />
+    <Content Include="Assets\appbar.office.excel.png" />
+    <Content Include="Assets\appbar.question.png" />
+    <Content Include="Assets\appbar.settings.png" />
     <Content Include="Assets\data\unifac\1,2-Dimethylpiperidine.png" />
     <Content Include="Assets\data\unifac\1-1-1-Trifluoroethane.png" />
     <Content Include="Assets\data\unifac\1-1-Dichloroethane.png" />

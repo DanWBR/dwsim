@@ -299,6 +299,8 @@ Public Module SIMDExtenders
         Dim vector0(vector.Length - 1) As Double
         Dim sum As Double = vector.SumY
 
+        If sum = 0.0# Then sum = 1.0# 'to handle null vectors
+
         If Settings.UseSIMDExtensions Then
             Yeppp.Core.Multiply_V64fS64f_V64f(vector, 0, 1 / sum, vector0, 0, vector.Length)
         Else

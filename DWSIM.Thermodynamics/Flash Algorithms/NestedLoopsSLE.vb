@@ -321,7 +321,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
             Hf = PP.RET_VHF 'Enthalpy of fusion
             Tc = PP.RET_VTC 'Critical Temperature
 
-            If Vz.MaxY = 1 Then 'only a single component
+            If Vz.MaxY = 1.0# Then 'only a single component
                 ecount = 0
                 For i = 0 To n
                     If Vz(i) = 1 Then
