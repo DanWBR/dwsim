@@ -398,6 +398,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                 SLP = VnL.SumY 'Sum moles of components in liquid phase
                 SF = Vx.SumY 'Sum mole fractions of components fixed by max solubility
+                If 1 - SLP < 0.00000001 Then SLP = 1
                 L = SLP / (1 - SF)
 
                 If L >= 1 Then
