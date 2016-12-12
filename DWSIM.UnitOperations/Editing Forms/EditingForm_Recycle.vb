@@ -150,7 +150,7 @@ Public Class EditingForm_Recycle
 
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbWT.TextChanged, tbTT.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbWT.TextChanged, tbTT.TextChanged, tbPT.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -162,7 +162,7 @@ Public Class EditingForm_Recycle
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbWT.KeyDown, tbTT.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbWT.KeyDown, tbTT.KeyDown, tbPT.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
