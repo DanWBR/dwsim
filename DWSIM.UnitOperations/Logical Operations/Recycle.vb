@@ -211,7 +211,7 @@ Namespace SpecialOps
                     .Phases(0).Properties.enthalpy = Values("Enthalpy")
 
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = msfrom.Phases(0).Compounds(comp.Name).MoleFraction
+                        comp.MoleFraction = msfrom.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
                     Next
 
                     .CalcOverallCompMassFractions()
@@ -242,17 +242,25 @@ Namespace SpecialOps
 
             Dim Wsum As Double = v1.Sum
             Dim Wsum2 As Double = v2.Sum
-            Dim Werr As Double = (v1.SubtractY(v2).SumY ^ 2) ^ 0.5
+            Dim Werr As Double = 0.0#
+            Dim i As Integer
+            For i = 0 To v1.Length - 1
+                If v1(i) <> 0.0# Then
+                    Werr += (v1(i) - v2(i)) / v1(i)
+                Else
+                    Werr += (v1(i) - v2(i))
+                End If
+            Next
 
             With ems.Phases(0).Properties
+
+                Me.ConvergenceHistory.TemperaturaE0 = Me.ConvergenceHistory.TemperaturaE
+                Me.ConvergenceHistory.PressaoE0 = Me.ConvergenceHistory.PressaoE
+                Me.ConvergenceHistory.VazaoMassicaE0 = Me.ConvergenceHistory.VazaoMassicaE
 
                 Me.ConvergenceHistory.TemperaturaE = .temperature.GetValueOrDefault - Me.ConvergenceHistory.Temperatura
                 Me.ConvergenceHistory.PressaoE = .pressure.GetValueOrDefault - Me.ConvergenceHistory.Pressao
                 Me.ConvergenceHistory.VazaoMassicaE = Werr
-
-                Me.ConvergenceHistory.TemperaturaE0 = Me.ConvergenceHistory.Temperatura - Me.ConvergenceHistory.Temperatura0
-                Me.ConvergenceHistory.PressaoE0 = Me.ConvergenceHistory.Pressao - Me.ConvergenceHistory.Pressao0
-                Me.ConvergenceHistory.VazaoMassicaE0 = Me.ConvergenceHistory.VazaoMassica - Me.ConvergenceHistory.VazaoMassica0
 
                 Me.ConvergenceHistory.Temperatura0 = Me.ConvergenceHistory.Temperatura
                 Me.ConvergenceHistory.Pressao0 = Me.ConvergenceHistory.Pressao
@@ -480,19 +488,19 @@ Namespace SpecialOps
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica)
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ConvergenceParameters.Temperatura)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceParameters.Temperatura)
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ConvergenceParameters.Pressao)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceParameters.Pressao)
                 Case 4
                     'PROP_RY_4	Mass Flow Error
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE)
                 Case 5
                     'PROP_RY_5	Temperature Error
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ConvergenceHistory.TemperaturaE)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE)
                 Case 6
                     'PROP_RY_6	Pressure Error
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ConvergenceHistory.PressaoE)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE)
             End Select
 
             Return value
@@ -541,10 +549,10 @@ Namespace SpecialOps
                     Me.ConvergenceParameters.VazaoMassica = SystemsOfUnits.Converter.ConvertToSI(su.massflow, propval)
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    Me.ConvergenceParameters.Temperatura = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                    Me.ConvergenceParameters.Temperatura = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval)
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    Me.ConvergenceParameters.Pressao = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Me.ConvergenceParameters.Pressao = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
 
             End Select
             Return 1
@@ -566,10 +574,10 @@ Namespace SpecialOps
                     value = su.massflow
                 Case 2
                     'PROP_RY_2	Temperature Tolerance
-                    value = su.temperature
+                    value = su.deltaT
                 Case 3
                     'PROP_RY_3	Pressure Tolerance
-                    value = su.pressure
+                    value = su.deltaP
                 Case 4
                     'PROP_RY_4	Mass Flow Error
                     value = su.massflow
