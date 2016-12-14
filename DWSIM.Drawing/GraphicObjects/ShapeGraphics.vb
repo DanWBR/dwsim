@@ -1502,6 +1502,9 @@ Namespace GraphicObjects
 
         Public Property AttachedToEnergy As Boolean = False Implements Interfaces.IConnectorGraphicObject.AttachedToEnergy
 
+        Public Property AttachedFromInput As Boolean Implements Interfaces.IConnectorGraphicObject.AttachedFromInput
+
+        Public Property AttachedToOutput As Boolean Implements Interfaces.IConnectorGraphicObject.AttachedToOutput
     End Class
 
     <Serializable()> Public Class NodeInGraphic

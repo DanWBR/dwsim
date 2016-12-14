@@ -410,6 +410,7 @@ Namespace Enums.GraphicObjects
         Inactive
         Idle
         NotCalculated
+        Modified
     End Enum
 
 End Namespace

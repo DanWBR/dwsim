@@ -34,6 +34,9 @@ Namespace GraphicObjects
 
         Public Property Position As Interfaces.IPoint = New DrawingTools.Point() Implements Interfaces.IConnectionPoint.Position
 
+        Public Property Active As Boolean Implements Interfaces.IConnectionPoint.Active
+
+        Public Property IsEnergyConnector As Boolean Implements Interfaces.IConnectionPoint.IsEnergyConnector
     End Class
 
 End Namespace

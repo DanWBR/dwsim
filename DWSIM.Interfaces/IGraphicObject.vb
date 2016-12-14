@@ -62,6 +62,8 @@ Public Interface IGraphicObject
 
     Property Owner As ISimulationObject
 
+    Function HitTest(zoomedSelection As Object) As Boolean
+
 End Interface
 
 Public Interface IConnectionPoint
@@ -82,6 +84,10 @@ Public Interface IConnectionPoint
 
     Property Position As IPoint
 
+    Property IsEnergyConnector As Boolean
+
+    Property Active As Boolean
+
 End Interface
 
 Public Interface IConnectorGraphicObject
@@ -97,5 +103,9 @@ Public Interface IConnectorGraphicObject
     Property AttachedFrom() As IGraphicObject
 
     Property AttachedTo() As IGraphicObject
+
+    Property AttachedToOutput() As Boolean
+
+    Property AttachedFromInput() As Boolean
 
 End Interface

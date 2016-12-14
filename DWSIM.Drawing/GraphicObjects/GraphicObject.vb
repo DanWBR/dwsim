@@ -455,6 +455,12 @@ Namespace GraphicObjects
             End Set
         End Property
 
+        Public Function HitTest1(zoomedSelection As Object) As Boolean Implements IGraphicObject.HitTest
+
+            Return HitTest(zoomedSelection)
+
+        End Function
+
     End Class
 
 End Namespace

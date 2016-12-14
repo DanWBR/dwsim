@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.DotNumerics",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.ZedGraph", "ZedGraph\DWSIM.Controls.ZedGraph.csproj", "{2541686B-1673-43BF-AF89-3163945DB009}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.DrawingTools.SkiaSharp", "DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj", "{77040ECC-07B9-4B21-8B1F-7E45764E35F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -501,6 +503,19 @@ Global
 		{2541686B-1673-43BF-AF89-3163945DB009}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2541686B-1673-43BF-AF89-3163945DB009}.x86|Mixed Platforms.Build.0 = Release|Any CPU
 		{2541686B-1673-43BF-AF89-3163945DB009}.x86|x86.ActiveCfg = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.Release|x86.ActiveCfg = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.x86|Any CPU.Build.0 = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{77040ECC-07B9-4B21-8B1F-7E45764E35F0}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
