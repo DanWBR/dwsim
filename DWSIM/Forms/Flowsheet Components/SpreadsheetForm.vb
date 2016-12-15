@@ -715,7 +715,7 @@ Public Class SpreadsheetForm
     Public Sub WriteAll()
 
         Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
-        Dim su As SystemsOfUnits.Units = My.Application.ActiveSimulation.Options.SelectedUnitSystem
+        Dim su As SystemsOfUnits.Units = formc.Options.SelectedUnitSystem
         For Each r As DataGridViewRow In Me.DataGridView1.Rows
             For Each ce As DataGridViewCell In r.Cells
                 ccparams = ce.Tag

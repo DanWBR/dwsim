@@ -3046,7 +3046,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Sub WriteSpreadsheetVariables() Implements IFlowsheet.WriteSpreadsheetVariables
         Me.UIThread(Sub()
-                        If FormSpreadsheet IsNot Nothing Then Me.FormSpreadsheet.WriteAll()
+                        If FormSpreadsheet IsNot Nothing Then
+                            Me.FormSpreadsheet.formc = Me
+                            Me.FormSpreadsheet.WriteAll()
+                        End If
                     End Sub)
     End Sub
 
