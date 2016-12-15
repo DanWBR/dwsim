@@ -479,6 +479,10 @@ Public Class EditingForm_FlowsheetUO
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             TbFileName.Text = OpenFileDialog1.FileName
+            If SimObject.SimulationFile = OpenFileDialog1.FileName Then
+                SimObject.Initialized = False
+            End If
+            SimObject.SimulationFile = OpenFileDialog1.FileName
         End If
     End Sub
 

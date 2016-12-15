@@ -145,8 +145,45 @@ Namespace UnitOperations
 
         End Sub
 
-        Public Shared Function InitializeFlowsheet(path As String, form As IFlowsheet) As IFlowsheetBag
-            Return InitializeFlowsheetInternal(XDocument.Load(path), form)
+        Shared Function ExtractXML(ByVal zippath As String) As String
+
+            Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+            Dim fullname As String = ""
+
+            Using stream As ICSharpCode.SharpZipLib.Zip.ZipInputStream = New ICSharpCode.SharpZipLib.Zip.ZipInputStream(File.OpenRead(zippath))
+                stream.Password = ""
+                Dim entry As ICSharpCode.SharpZipLib.Zip.ZipEntry
+Label_00CC:
+                entry = stream.GetNextEntry()
+                Do While (Not entry Is Nothing)
+                    Dim fileName As String = Path.GetFileName(entry.Name)
+                    If (fileName <> String.Empty) Then
+                        Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                            Dim count As Integer = 2048
+                            Dim buffer As Byte() = New Byte(2048) {}
+                            Do While True
+                                count = stream.Read(buffer, 0, buffer.Length)
+                                If (count <= 0) Then
+                                    fullname = pathtosave + Path.GetFileName(entry.Name)
+                                    GoTo Label_00CC
+                                End If
+                                stream2.Write(buffer, 0, count)
+                            Loop
+                        End Using
+                    End If
+                    entry = stream.GetNextEntry
+                Loop
+            End Using
+            Return fullname
+
+        End Function
+
+        Public Shared Function InitializeFlowsheet(fpath As String, form As IFlowsheet) As IFlowsheetBag
+            If Path.GetExtension(fpath).ToLower.Equals(".dwxml") Then
+                Return InitializeFlowsheetInternal(XDocument.Load(fpath), form)
+            Else 'dwxmz
+                Return InitializeFlowsheetInternal(XDocument.Load(ExtractXML(fpath)), form)
+            End If
         End Function
 
         Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet) As IFlowsheetBag
@@ -562,7 +599,7 @@ Namespace UnitOperations
 
         Public Overrides Sub Calculate(Optional args As Object = Nothing)
 
-            'Validate()
+            If Initialized Then InitializeMappings()
 
             Me.Fsheet.MasterUnitOp = Me
 

@@ -2084,7 +2084,7 @@ Public Class FormMain
 
     End Sub
 
-    Private Function IsZipFilePasswordProtected(ByVal ZipFile As String) As Boolean
+    Shared Function IsZipFilePasswordProtected(ByVal ZipFile As String) As Boolean
         Using fsIn As New FileStream(ZipFile, FileMode.Open, FileAccess.Read)
             Using zipInStream As New ZipInputStream(fsIn)
                 Dim zEntry As ZipEntry = zipInStream.GetNextEntry()
