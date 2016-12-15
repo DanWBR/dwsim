@@ -307,7 +307,7 @@ Namespace UnitOperations
             Dim HL1, HL2, W1, W2, WL1, WL2, WS As Double
             WL1 = mix.Phases(3).Properties.massflow.GetValueOrDefault
             WL2 = mix.Phases(4).Properties.massflow.GetValueOrDefault
-            If WL2 > 0 Then
+            If WL2 > 0# Then
                 SR = WL1 / (WL1 + WL2)
             Else
                 SR = 1
@@ -396,28 +396,26 @@ Namespace UnitOperations
                 End With
             End If
 
-            If mix.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then
-                cp = Me.GraphicObject.OutputConnectors(2) 'liquid 2
-                If cp.IsAttached Then
-                    ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
-                    With ms
-                        .ClearAllProps()
-                        .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
-                        .Phases(0).Properties.temperature = T
-                        .Phases(0).Properties.pressure = P
-                        If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
-                        .Phases(0).Properties.enthalpy = HL2
-                        Dim comp As BaseClasses.Compound
-                        i = 0
-                        For Each comp In .Phases(0).Compounds.Values
-                            comp.MoleFraction = VnL2(i)
-                            comp.MassFraction = VmL2(i)
-                            i += 1
-                        Next
-                    End With
-                Else
-                    Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
-                End If
+            cp = Me.GraphicObject.OutputConnectors(2) 'liquid 2
+            If cp.IsAttached Then
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                With ms
+                    .ClearAllProps()
+                    .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
+                    .Phases(0).Properties.temperature = T
+                    .Phases(0).Properties.pressure = P
+                    If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
+                    .Phases(0).Properties.enthalpy = HL2
+                    Dim comp As BaseClasses.Compound
+                    i = 0
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.MoleFraction = VnL2(i)
+                        comp.MassFraction = VmL2(i)
+                        i += 1
+                    Next
+                End With
+            Else
+                If mix.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
             End If
 
             Hf = mix.Phases(0).Properties.enthalpy.GetValueOrDefault * W
