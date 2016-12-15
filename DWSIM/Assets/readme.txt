@@ -66,6 +66,10 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
 
+Version 4.1 Update 5
+
+- [FIX] Fixed bugs with Flowsheet and Gas-Liquid Separator Unit Operations
+
 Version 4.1 Update 4
 
 - [FIX] Fixed Recycle convergence issues
