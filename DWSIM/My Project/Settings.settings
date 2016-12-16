@@ -48,7 +48,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="EnableParallelProcessing" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="MaxDegreeOfParallelism" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
@@ -72,7 +72,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SolverMode" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ServiceBusConnectionString" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -108,7 +108,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="UseSIMDExtensions" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ShowSimulationToolStrip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
