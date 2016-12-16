@@ -868,15 +868,15 @@ Namespace GraphicObjects
 
         End Sub
 
-
         Public Overloads Overrides Function HitTest(ByVal pt As System.Drawing.Point) As Boolean
-            Dim gp As New Drawing2D.GraphicsPath()
-            Dim myMatrix As New Drawing2D.Matrix()
-            Dim myPen As New Pen(Me.LineColor, Me.LineWidth)
-            gp.AddLine(X, Y, X + Width, Y + Height)
-            myMatrix.RotateAt(Me.Rotation, New PointF(X + Width / 2, Y + Height / 2), Drawing.Drawing2D.MatrixOrder.Append)
-            gp.Transform(myMatrix)
-            Return gp.IsOutlineVisible(pt, myPen)
+            'Dim gp As New Drawing2D.GraphicsPath()
+            'Dim myMatrix As New Drawing2D.Matrix()
+            'Dim myPen As New Pen(Me.LineColor, Me.LineWidth)
+            'gp.AddLine(X, Y, X + Width, Y + Height)
+            'myMatrix.RotateAt(Me.Rotation, New PointF(X + Width / 2, Y + Height / 2), Drawing.Drawing2D.MatrixOrder.Append)
+            'gp.Transform(myMatrix)
+            'Return gp.IsOutlineVisible(pt, myPen)
+            Return pt.X >= X And pt.Y >= Y And pt.X <= X + Width And pt.Y <= Y + Height
         End Function
 
         Public Function GetStartPosition() As Point
