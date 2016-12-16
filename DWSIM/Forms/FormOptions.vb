@@ -124,10 +124,14 @@ Public Class FormOptions
                                   Catch ex As Exception
 
                                   End Try
-                                  CudafyModes.Target = eGPUType.OpenCL
-                                  For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
-                                      list.Add("OpenCL | " & prop.Name & " (" & prop.DeviceId & ")")
-                                  Next
+                                  Try
+                                      CudafyModes.Target = eGPUType.OpenCL
+                                      For Each prop As GPGPUProperties In CudafyHost.GetDeviceProperties(CudafyModes.Target, False)
+                                          list.Add("OpenCL | " & prop.Name & " (" & prop.DeviceId & ")")
+                                      Next
+                                  Catch ex As Exception
+
+                                  End Try
                                   Return list
                               End Function).ContinueWith(Sub(t)
                                                              Me.chkEnableGPUProcessing.Enabled = t.Result.Count > 0
