@@ -287,6 +287,8 @@ Public Class FormSimulSettings
 
     Public Sub ComboBox2_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox2.SelectedIndexChanged
 
+        My.Application.PushUndoRedoAction = False
+
         FrmChild.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(ComboBox2.SelectedItem.ToString)
         Dim su As SystemsOfUnits.Units = FrmChild.Options.SelectedUnitSystem
 
@@ -626,6 +628,8 @@ Public Class FormSimulSettings
 
         FrmChild.UpdateOpenEditForms()
 
+        My.Application.PushUndoRedoAction = True
+
     End Sub
 
     Private Sub DataGridView1_CellValueChanged1(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
@@ -793,7 +797,7 @@ Public Class FormSimulSettings
                     su.jouleThomsonCoefficient = cell.Value
             End Select
 
-            If initialized And Not DWSIM.App.IsRunningOnMono Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
+            If initialized And Not DWSIM.App.IsRunningOnMono And My.Application.PushUndoRedoAction Then FrmChild.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsChanged,
                          .ObjID = su.Name,
                          .ObjID2 = member,
                          .NewValue = cell.Value,

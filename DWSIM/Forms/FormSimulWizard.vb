@@ -35,11 +35,7 @@ Public Class FormSimulWizard
 
     Private Sub FormConfigWizard_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
-        If DWSIM.App.IsRunningOnMono Then
-            Me.ListViewPP.View = View.List
-        Else
-            Me.ListViewPP.View = View.Tile
-        End If
+        Me.ListViewPP.View = View.List
 
         Me.StepWizardControl1.FinishButtonText = DWSIM.App.GetLocalString("FinishText")
         Me.StepWizardControl1.CancelButtonText = DWSIM.App.GetLocalString("CancelText")
