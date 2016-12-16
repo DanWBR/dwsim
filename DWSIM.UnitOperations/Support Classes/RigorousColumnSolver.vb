@@ -25,6 +25,7 @@ Imports System.Threading.Tasks
 Imports System.Linq
 Imports DWSIM.Thermodynamics
 Imports DWSIM.SharedClasses
+Imports Cureos.Numerics
 
 Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
@@ -1461,7 +1462,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 'update inner loop parameters
 
-                Dim lnSbj_ant(ns), lnRvj_ant(ns), lnRlj_ant(ns), df, df_ant, xlowbound As Double
+                Dim lnSbj_ant(ns), lnRvj_ant(ns), lnRlj_ant(ns), df, df_ant As Double
 
                 df_ant = df
 
@@ -1549,112 +1550,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 ic0 = 0
 
-                'first run (to initialize variables)
-                'fx = Me.FunctionValue(xvar)
+                'solve inner loop with simplex optimization algorithm
 
-                Do
+                Dim splx As New DotNumerics.Optimization.Simplex
 
-restart:            fx = Me.FunctionValue(xvar)
-                    If UseNewtonUpdate Then
-                        dfdx_ant = dfdx
-                        dfdx = Me.FunctionGradient(xvar)
-                        Dim success As Boolean
-                        success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, el + 1, dx)
-                        If Not success Then
-                            dfdx = dfdx_ant
-                            success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, el + 1, dx)
-                        End If
-                        For i = 0 To el
-                            dx(i) = -dx(i)
-                        Next
-                        _bx = xvar.Clone
-                        _dbx = dx.Clone
-                    Else
-                        If ic = 0 Then
-                            If UseIJ Then
-                                For i = 0 To el
-                                    For j = 0 To el
-                                        If i = j Then hes(i, j) = 1 Else hes(i, j) = 0
-                                    Next
-                                Next
-                            Else
-                                dfdx = Me.FunctionGradient(xvar)
-                                For i = 0 To el
-                                    For j = 0 To el
-                                        jac(i, j) = dfdx(i, j)
-                                    Next
-                                Next
-                                hesm = jac.Inverse
-                                For i = 0 To el
-                                    For j = 0 To el
-                                        hes(i, j) = hesm(i, j)
-                                    Next
-                                Next
-                            End If
-                            bx = xvar
-                            bf = fx
-                            Broyden.broydn(el, bx, bf, bp, bxb, bfb, hes, 0)
-                            dx = bp
-                        Else
-                            bx = xvar
-                            bf = fx
-                            Broyden.broydn(el, bx, bf, bp, bxb, bfb, hes, 1)
-                            dx = bp
-                        End If
-                        _bx = xvar.Clone
-                        _dbx = bp.Clone
-                    End If
+                Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
+                For Each var In xvar
+                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable(var))
+                Next
 
-                    'this call to the brent solver calculates the damping factor which minimizes the error (fval).
-                    itol = tol(0) * ns
-                    df = 1
-                    If UseDampingFactor Then fval = brentsolver.brentoptimize(dfmin, dfmax, tol(0), df)
-
-                    perturb = False
-                    bypass = False
-                    xlowbound = 0.1
-                    For i = 0 To el
-                        xvar_ant(i) = xvar(i)
-                        xvar(i) += dx(i) * df
-
-                        If Abs((dx(i) * df) / xvar_ant(i)) > 10 Then
-                            'perturb = True
-                            'xvar(i) = xvar_ant(i) - df * (xvar_ant(i) - xlowbound) * 0.5
-                            xvar(i) = xvar_ant(i) * (1 + Math.Sign(dx(i)))
-                        End If
-                        If Double.IsNaN(dx(i)) Or Double.IsInfinity(dx(i)) Then
-                            bypass = True
-                        End If
-
-                    Next
-
-                    If bypass Then
-                        For i = 0 To el
-                            xvar(i) = xvar_ant(i) * 0.95
-                        Next
-                    End If
-
-                    il_err_ant = il_err
-
-                    il_err = 0
-                    For i = 0 To el
-                        il_err += fx(i) ^ 2
-                    Next
-
-                    ic += 1
-                    ic0 += 1
-
-                    'If bypass Then GoTo restart
-
-                    If ic0 >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
-                    If Double.IsNaN(il_err) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
-                    If MathEx.Common.AbsSum(dx) = 0.0# Or Abs((il_err - il_err_ant) / il_err) < itol Then Exit Do
-
-                    Calculator.WriteToConsole("Inside-Out solver internal loop error = " & il_err, 1)
-
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                Loop Until il_err < itol
+                splx.Tolerance = itol
+                splx.MaxFunEvaluations = 1000
+                xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars).AbsSqrSumY, bvars.ToArray)
 
                 For i = 0 To ns
                     If i = 0 And _condtype <> Column.condtype.Full_Reflux Then
@@ -1752,12 +1659,12 @@ restart:            fx = Me.FunctionValue(xvar)
 
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                              Sub(ipar)
-                                                                 If llextr Then
-                                                                     tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
-                                                                 Else
-                                                                     tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
-                                                                 End If
-                                                             End Sub),
+                                                                     If llextr Then
+                                                                         tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                                     Else
+                                                                         tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                     End If
+                                                                 End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
                                                       Settings.AppTaskScheduler)
@@ -1770,10 +1677,6 @@ restart:            fx = Me.FunctionValue(xvar)
                         Kbj_ant(i) = Kbj(i)
                     Next
 
-                    'If Settings.EnableGPUProcessing Then
-                    '    Settings.gpu.DisableMultithreading()
-                    '    Settings.gpu.FreeAll()
-                    'End If
                 Else
                     For i = 0 To ns
                         If llextr Then
@@ -1794,7 +1697,6 @@ restart:            fx = Me.FunctionValue(xvar)
                 Else
                     Kbj1 = CalcKbj2(ns, nc, K, zc, yc, Tj1, P, pp)
                 End If
-                'Kbj1 = Kbj
                 Kbj = Kbj1
 
                 'update relative volatilities
@@ -1824,9 +1726,6 @@ restart:            fx = Me.FunctionValue(xvar)
 
                 If doparallel Then
 
-                    If Settings.EnableGPUProcessing Then
-                        ' Settings.gpu.EnableMultithreading()
-                    End If
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                              Sub(ipar)
                                                                  'new Ks
@@ -1842,11 +1741,6 @@ restart:            fx = Me.FunctionValue(xvar)
                             If Double.IsNaN(K2(i)(j)) Or Double.IsInfinity(K2(i)(j)) Then K2(i)(j) = pp.AUX_PVAPi(j, Tj(i)) / P(i)
                         Next
                     Next
-
-                    'If Settings.EnableGPUProcessing Then
-                    '    Settings.gpu.DisableMultithreading()
-                    '    Settings.gpu.FreeAll()
-                    'End If
                 Else
                     For i = 0 To ns
 
@@ -1863,9 +1757,6 @@ restart:            fx = Me.FunctionValue(xvar)
 
                 If doparallel Then
 
-                    If Settings.EnableGPUProcessing Then
-                        'Settings.gpu.EnableMultithreading()
-                    End If
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                               Sub(ipar)
                                                                   'enthalpies
@@ -1884,10 +1775,6 @@ restart:            fx = Me.FunctionValue(xvar)
                                                       Settings.AppTaskScheduler)
                     task1.Wait()
 
-                    'If Settings.EnableGPUProcessing Then
-                    '    Settings.gpu.DisableMultithreading()
-                    '    Settings.gpu.FreeAll()
-                    'End If
                 Else
                     For i = 0 To ns
 
@@ -1940,13 +1827,15 @@ restart:            fx = Me.FunctionValue(xvar)
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver external loop error = " & il_err, IFlowsheet.MessageType.GeneralError)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver external loop error = " & el_err, IFlowsheet.MessageType.Information)
 
             Loop Until Abs(el_err) < tol(1) * el
 
-            If Abs(il_err) > tol(0) * ns Then
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", IFlowsheet.MessageType.Other)
-            End If
+            'il_err = FunctionValue(xvar).AbsSqrSumY
+
+            'If Abs(il_err) > tol(0) * ns Then
+            '    pp.CurrentMaterialStream.Flowsheet.ShowMessage("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", IFlowsheet.MessageType.Other)
+            'End If
 
             ' finished, de-normalize and return arrays
 
@@ -1963,19 +1852,19 @@ restart:            fx = Me.FunctionValue(xvar)
                 Q(i) = Q(i) * maxF
             Next
 
-            If Not UseNewtonUpdate Then
-                For i = 0 To el
-                    For j = 0 To el
-                        hesm(i, j) = hes(i, j)
-                    Next
-                Next
-                jac = hesm.Inverse
-                For i = 0 To el
-                    For j = 0 To el
-                        dfdx(i, j) = jac(i, j)
-                    Next
-                Next
-            End If
+            'If Not UseNewtonUpdate Then
+            '    For i = 0 To el
+            '        For j = 0 To el
+            '            hesm(i, j) = hes(i, j)
+            '        Next
+            '    Next
+            '    jac = hesm.Inverse
+            '    For i = 0 To el
+            '        For j = 0 To el
+            '            dfdx(i, j) = jac(i, j)
+            '        Next
+            '    Next
+            'End If
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, il_err, ec, el_err, dfdx}
 
@@ -2839,7 +2728,7 @@ restart:            fx = Me.FunctionValue(xvar)
         Dim _Kval()() As Double
         Dim _maxT, _maxvc, _maxlc As Double
 
-        Public Function FunctionValue(ByVal x() As Double) As Double()
+        Public Function FunctionValue(ByVal x() As Double) As Double
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
@@ -3171,14 +3060,14 @@ restart:            fx = Me.FunctionValue(xvar)
                 H(i) /= (Hv(i) - Hl(i))
                 Select Case coltype
                     Case Column.ColType.DistillationColumn
-                        If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1
-                        H(ns) = spfval2
+                        If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1 / 10
+                        H(ns) = spfval2 / 10
                     Case Column.ColType.AbsorptionColumn
                         'do nothing
                     Case Column.ColType.ReboiledAbsorber
-                        H(ns) = spfval2
+                        H(ns) = spfval2 / 10
                     Case Column.ColType.RefluxedAbsorber
-                        H(0) = spfval1
+                        H(0) = spfval1 / 10
                 End Select
             Next
 
@@ -3207,387 +3096,33 @@ restart:            fx = Me.FunctionValue(xvar)
                 Next
             Next
 
-            Return errors
+            Return errors.AbsSqrSumY
 
         End Function
 
-        Public Function MinimizeError(ByVal t As Double) As Double
+        Private Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim nc, ns As Integer
-            Dim i, j As Integer
-            Dim VSS, LSS, F, Q, P, HF, eff As Double()
-            Dim fc()() As Double
-            Dim spval1, spval2, spfval1, spfval2, maxF As Double
-            Dim spci1, spci2 As Integer
-            Dim coltype As Column.ColType = _coltype
+            Dim epsilon As Double = 0.0000000001
 
-            F = _F
-            Q = _Q
-            P = _P
-            HF = _HF
-            eff = _eff
-            fc = _fc
-            maxF = _maxF
+            Dim f2, f3 As Double
+            Dim g(x.Length - 1), x1(x.Length - 1) As Double
+            Dim j, k As Integer
 
-            spval1 = _spval1
-            spval2 = _spval2
-            spci1 = _spci1
-            spci2 = _spci2
-
-            VSS = _VSS
-            LSS = _LSS
-
-            nc = _nc
-            ns = _ns
-
-            Dim Sl(ns), Sv(ns) As Double
-            Dim sumF As Double = 0
-            Dim sumLSS As Double = 0
-            Dim sumVSS As Double = 0
-            Dim Tj(ns), vc(ns)(), lc(ns)(), zc(ns)(), Vj(ns), Lj(ns), xc(ns)(), yc(ns)(), Kval(ns)() As Double
-
-            For i = 0 To ns
-                Array.Resize(lc(i), nc)
-                Array.Resize(vc(i), nc)
-                Array.Resize(zc(i), nc)
-                Array.Resize(xc(i), nc)
-                Array.Resize(yc(i), nc)
-                Array.Resize(Kval(i), nc)
-            Next
-
-            For i = 0 To ns
-                If _bx(i * (2 * nc + 1)) + t * _dbx(i * (2 * nc + 1)) < 0 Then
-                    Tj(i) = _bx(i * (2 * nc + 1)) * Exp(t * _dbx(i * (2 * nc + 1))) / _bx(i * (2 * nc + 1))
-                Else
-                    Tj(i) = _bx(i * (2 * nc + 1)) + t * _dbx(i * (2 * nc + 1))
-                End If
-                For j = 0 To nc - 1
-                    If _bx(i * (2 * nc + 1) + j + 1) + t * _dbx(i * (2 * nc + 1) + j + 1) < 0 Then
-                        vc(i)(j) = _bx(i * (2 * nc + 1) + j + 1) * Exp(t * _dbx(i * (2 * nc + 1) + j + 1) / _bx(i * (2 * nc + 1) + j + 1))
-                    Else
-                        vc(i)(j) = _bx(i * (2 * nc + 1) + j + 1) + t * _dbx(i * (2 * nc + 1) + j + 1)
-                    End If
-                    If _bx(i * (2 * nc + 1) + j + 1 + nc) + t * _dbx(i * (2 * nc + 1) + j + 1 + nc) < 0 Then
-                        lc(i)(j) = _bx(i * (2 * nc + 1) + j + 1 + nc) * Exp(t * _dbx(i * (2 * nc + 1) + j + 1 + nc) / _bx(i * (2 * nc + 1) + j + 1 + nc))
-                    Else
-                        lc(i)(j) = _bx(i * (2 * nc + 1) + j + 1 + nc) + t * _dbx(i * (2 * nc + 1) + j + 1 + nc)
-                    End If
-                Next
-            Next
-
-            Dim VSSj(ns), LSSj(ns), Hv(ns), Hl(ns), Hv0(ns), Hl0(ns) As Double
-            Dim sumvkj(ns), sumlkj(ns) As Double
-            Dim Fxvar((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim xvar((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim dFdXvar((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
-
-            Dim f1((ns + 1) * (2 * nc + 1) - 1), f2((ns + 1) * (2 * nc + 1) - 1), f3((ns + 1) * (2 * nc + 1) - 1), f4((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim u As Integer = 0
-
-            Dim hesm As New Mapack.Matrix((ns + 1) * (2 * nc + 1), (ns + 1) * (2 * nc + 1))
-            Dim dX As New Mapack.Matrix((ns + 1) * (2 * nc + 1), 1)
-            Dim fX As New Mapack.Matrix((ns + 1) * (2 * nc + 1), 1)
-            Dim inv As New Mapack.Matrix((ns + 1) * (2 * nc + 1), (ns + 1) * (2 * nc + 1))
-            Dim num, denom, x0, fx0 As New ArrayList
-
-            Dim hes((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim bx((ns + 1) * (2 * nc + 1) - 1), bx_ant((ns + 1) * (2 * nc + 1) - 1), bxb((ns + 1) * (2 * nc + 1) - 1), bf((ns + 1) * (2 * nc + 1) - 1), bfb((ns + 1) * (2 * nc + 1) - 1), bp((ns + 1) * (2 * nc + 1) - 1), bp_ant((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim M(ns, nc - 1), E(ns, nc - 1), H(ns) As Double
-            Dim M_ant(ns, nc - 1), E_ant(ns, nc - 1), H_ant(ns) As Double
-
-            For i = 0 To ns
-                VSSj(i) = VSS(i)
-                If i > 0 Then LSSj(i) = LSS(i)
-            Next
-
-            For i = 0 To ns
-                sumvkj(i) = 0
-                sumlkj(i) = 0
-                For j = 0 To nc - 1
-                    sumvkj(i) += vc(i)(j)
-                    sumlkj(i) += lc(i)(j)
-                Next
-                Vj(i) = sumvkj(i)
-                Lj(i) = sumlkj(i)
-            Next
-
-            For i = 0 To ns
-                For j = 0 To nc - 1
-                    xc(i)(j) = lc(i)(j) / sumlkj(i)
-                Next
-                For j = 0 To nc - 1
-                    yc(i)(j) = vc(i)(j) / sumvkj(i)
-                Next
-            Next
-
-            For i = 0 To ns
-                For j = 0 To nc - 1
-                    zc(i)(j) = (lc(i)(j) + vc(i)(j))
-                Next
-            Next
-
-            sumF = 0
-            sumLSS = 0
-            For i = 0 To ns
-                sumVSS += VSSj(i)
-            Next
-            For i = 1 To ns
-                sumLSS += LSSj(i)
-            Next
-            LSSj(0) = 1 - Lj(ns) - sumLSS - sumVSS - Vj(0)
-
-            For i = 0 To ns
-                If Vj(i) <> 0 Then Sv(i) = VSSj(i) / Vj(i) Else Sv(i) = 0
-                If Lj(i) <> 0 Then Sl(i) = LSSj(i) / Lj(i) Else Sl(i) = 0
-            Next
-
-            'calculate K-values
-            Dim tmp0 As Object
-
-            For i = 0 To ns
-                If llextr Then
-                    tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
-                Else
-                    tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
-                End If
-                For j = 0 To nc - 1
-                    Kval(i)(j) = tmp0(j)
-                Next
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-            Next
-
-            'calculate enthalpies
-
-            For i = 0 To ns
-                If Vj(i) <> 0 Then
-                    If llextr Then
-                        Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(i)) / 1000
-                    Else
-                        Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * _pp.AUX_MMM(yc(i)) / 1000
-                    End If
-                Else
-                    Hv(i) = 0
-                End If
-                If Lj(i) <> 0 Then
-                    Hl(i) = _pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(xc(i)) / 1000
-                Else
-                    Hl(i) = 0
-                End If
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-            Next
-
-            'reboiler and condenser heat duties
-
-            Select Case coltype
-                Case Column.ColType.DistillationColumn
-                    If Not _specs("C").SType = ColumnSpec.SpecType.Heat_Duty Then
-                        i = 0
-                        Q(0) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i))
-                        Q(0) = -Q(0)
-                    End If
-                    If Not _specs("R").SType = ColumnSpec.SpecType.Heat_Duty Then
-                        i = ns
-                        Q(ns) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i))
-                        Q(ns) = -Q(ns)
-                    End If
-                Case Column.ColType.AbsorptionColumn
-                    'use provided values
-                Case Column.ColType.RefluxedAbsorber
-                    If Not _specs("C").SType = ColumnSpec.SpecType.Heat_Duty Then
-                        i = 0
-                        Q(0) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i))
-                        Q(0) = -Q(0)
-                    End If
-                Case Column.ColType.ReboiledAbsorber
-                    If Not _specs("R").SType = ColumnSpec.SpecType.Heat_Duty Then
-                        i = ns
-                        Q(ns) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i))
-                        Q(ns) = -Q(ns)
-                    End If
-            End Select
-
-            'handle user specs
-
-            Select Case _specs("C").SType
-                Case ColumnSpec.SpecType.Component_Fraction
-                    If _specs("C").SpecUnit = "M" Then
-                        spfval1 = xc(0)(spci1) - spval1
-                    Else 'W
-                        spfval1 = _pp.AUX_CONVERT_MOL_TO_MASS(xc(0))(spci1) - spval1
-                    End If
-                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                    spfval1 = LSSj(0) * xc(0)(spci1) - spval1 / _pp.RET_VMM()(spci1) * 1000 / maxF
-                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                    spfval1 = LSSj(0) * xc(0)(spci1) - spval1 / maxF
-                Case ColumnSpec.SpecType.Component_Recovery
-                    Dim rec As Double = spval1 / 100
-                    Dim sumc As Double = 0
-                    For j = 0 To ns
-                        sumc += fc(j)(spci1)
-                    Next
-                    sumc *= rec
-                    If _specs("C").SpecUnit = "% M/M" Then
-                        spfval1 = xc(0)(spci1) * LSSj(0) - sumc
-                    Else '% W/W
-                        spfval1 = _pp.RET_VMM()(spci1) * 1000 * (xc(0)(spci1) * LSSj(0) - sumc)
-                    End If
-                Case ColumnSpec.SpecType.Heat_Duty
-                    Q(0) = spval1 / maxF
-                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                    spfval1 = LSSj(0) - spval1 / _pp.AUX_MMM(xc(0)) * 1000 / maxF
-                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                    spfval1 = LSSj(0) - spval1 / maxF
-                Case ColumnSpec.SpecType.Stream_Ratio
-                    spfval1 = Lj(0) - spval1 * (LSSj(0))
-                Case ColumnSpec.SpecType.Temperature
-                    spfval1 = Tj(0) - spval1
-            End Select
-
-            Select Case _specs("R").SType
-                Case ColumnSpec.SpecType.Component_Fraction
-                    If _specs("R").SpecUnit = "M" Then
-                        spfval2 = xc(ns)(spci2) - spval2
-                    Else 'W
-                        spfval2 = _pp.AUX_CONVERT_MOL_TO_MASS(xc(ns))(spci2) - spval2
-                    End If
-                Case ColumnSpec.SpecType.Component_Mass_Flow_Rate
-                    spfval2 = Lj(ns) * xc(ns)(spci2) - spval2 / _pp.RET_VMM()(spci2) * 1000 / maxF
-                Case ColumnSpec.SpecType.Component_Molar_Flow_Rate
-                    spfval2 = Lj(ns) * xc(ns)(spci2) - spval2 / maxF
-                Case ColumnSpec.SpecType.Component_Recovery
-                    Dim rec As Double = spval2 / 100
-                    Dim sumc As Double = 0
-                    For j = 0 To ns
-                        sumc += fc(j)(spci2)
-                    Next
-                    sumc *= rec
-                    If _specs("R").SpecUnit = "% M/M" Then
-                        spfval2 = lc(ns)(spci2) - sumc
-                    Else '% W/W
-                        spfval2 = _pp.RET_VMM()(spci2) * 1000 * (xc(0)(spci1) * Lj(ns) - sumc)
-                    End If
-                Case ColumnSpec.SpecType.Heat_Duty
-                    Q(ns) = spval2 / maxF
-                Case ColumnSpec.SpecType.Product_Mass_Flow_Rate
-                    spfval2 = Lj(ns) - spval2 / _pp.AUX_MMM(xc(ns)) * 1000 / maxF
-                Case ColumnSpec.SpecType.Product_Molar_Flow_Rate
-                    spfval2 = Lj(ns) - spval2 / maxF
-                Case ColumnSpec.SpecType.Stream_Ratio
-                    spfval2 = Vj(ns) - spval2 * (Lj(ns))
-                Case ColumnSpec.SpecType.Temperature
-                    spfval2 = Tj(ns) - spval2
-            End Select
-
-
-            For i = 0 To ns
-                For j = 0 To nc - 1
-                    M_ant(i, j) = M(i, j)
-                    E_ant(i, j) = E(i, j)
-                    H_ant(i) = H(i)
-                    If i = 0 Then
-                        M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - vc(i + 1)(j) - fc(i)(j)
-                        E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
-                    ElseIf i = ns Then
-                        M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - lc(i - 1)(j) - fc(i)(j)
-                        E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j)
-                    Else
-                        M(i, j) = lc(i)(j) * (1 + Sl(i)) + vc(i)(j) * (1 + Sv(i)) - lc(i - 1)(j) - vc(i + 1)(j) - fc(i)(j)
-                        E(i, j) = eff(i) * Kval(i)(j) * lc(i)(j) * sumvkj(i) / sumlkj(i) - vc(i)(j) + (1 - eff(i)) * vc(i + 1)(j) * sumvkj(i) / sumvkj(i + 1)
-                    End If
-                Next
-                If i = 0 Then
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i)) / (Hv(i) - Hl(i))
-                ElseIf i = ns Then
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i) - Q(i)) / (Hv(i) - Hl(i))
-                Else
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i)) / (Hv(i) - Hl(i))
-                End If
-                H(i) /= (Hv(i) - Hl(i))
-                Select Case coltype
-                    Case Column.ColType.DistillationColumn
-                        H(0) = spfval1
-                        H(ns) = spfval2
-                    Case Column.ColType.AbsorptionColumn
-                        'do nothing
-                    Case Column.ColType.ReboiledAbsorber
-                        H(ns) = spfval2
-                    Case Column.ColType.RefluxedAbsorber
-                        H(0) = spfval1
-                End Select
-            Next
-
-            If _condtype = Column.condtype.Total_Condenser Then
-                Dim sum1 As Double = 0
-                For j = 0 To nc - 1
-                    sum1 += Kval(0)(j) * xc(0)(j)
-                Next
-                i = 0
-                For j = 0 To nc - 1
-                    If j = 0 Then
-                        E(i, j) = 1 - sum1
-                    Else
-                        E(i, j) = xc(i)(j) - yc(i)(j)
-                    End If
-                Next
-            End If
-
-            Dim errors(_bx.Length - 1) As Double
-
-            For i = 0 To ns
-                errors(i * (2 * nc + 1)) = H(i)
-                For j = 0 To nc - 1
-                    errors(i * (2 * nc + 1) + j + 1) = M(i, j)
-                    errors(i * (2 * nc + 1) + j + 1 + nc) = E(i, j)
-                Next
-            Next
-
-            Dim errt As Double = 0
-            For i = 0 To UBound(errors) - 1
-                errt += errors(i) ^ 2
-            Next
-
-            Return errt
-
-        End Function
-
-        Private Function FunctionGradient(ByVal x() As Double) As Double(,)
-
-            Dim epsilon As Double = ndeps
-
-            Dim f2(), f3() As Double
-            Dim g(x.Length - 1, x.Length - 1), x1(x.Length - 1), x2(x.Length - 1), x3(x.Length - 1), x4(x.Length - 1) As Double
-            Dim i, j, k As Integer
-
-            For i = 0 To x.Length - 1
-                For j = 0 To x.Length - 1
-                    If i <> j Then
-                        'x1(j) = x(j)
-                        x2(j) = x(j)
-                        x3(j) = x(j)
-                        'x4(j) = x(j)
-                    Else
-                        If x(j) <> 0.0# Then
-                            'x1(j) = x(j) + 2 * epsilon
-                            x2(j) = x(j) * (1 + epsilon)
-                            x3(j) = x(j) * (1 - epsilon)
-                            'x4(j) = x(j) - 2 * epsilon
-                        Else
-                            'x1(j) = x(j) + 2 * epsilon
-                            x2(j) = x(j) + epsilon
-                            x3(j) = x(j)
-                            'x4(j) = x(j) - 2 * epsilon
-                        End If
-                    End If
-                Next
-                'f1 = FunctionValue(x1)
-                f2 = FunctionValue(x2)
-                f3 = FunctionValue(x3)
-                'f4 = FunctionValue(x4)
+            f2 = FunctionValue(x)
+            For j = 0 To x.Length - 1
                 For k = 0 To x.Length - 1
-                    g(k, i) = (f2(k) - f3(k)) / (x2(i) - x3(i))
+                    x1(k) = x(k)
                 Next
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                If x(j) <> 0.0# Then
+                    x1(j) = x(j) * (1 + epsilon)
+                Else
+                    x1(j) = x(j) + epsilon
+                End If
+                f3 = FunctionValue(x1)
+                g(j) = (f2 - f3) / (x(j) - x1(j))
             Next
+
+            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return g
 
@@ -3616,9 +3151,6 @@ restart:            fx = Me.FunctionValue(xvar)
             llextr = LLEX 'liquid-liquid extractor
 
             ndeps = epsilon
-
-            Dim brentsolver As New BrentOpt.BrentMinimize
-            brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
 
             Dim cv As New SystemsOfUnits.Converter
             Dim spval1, spval2 As Double
@@ -3677,6 +3209,9 @@ restart:            fx = Me.FunctionValue(xvar)
                 Sl(i) = LSS(i) / L(i)
             Next
 
+            If specs("C").SType = ColumnSpec.SpecType.Temperature Then Tj(0) = spval1
+            If specs("R").SType = ColumnSpec.SpecType.Temperature Then Tj(ns) = spval2
+
             'step1
 
             Dim sumF As Double = 0
@@ -3722,8 +3257,7 @@ restart:            fx = Me.FunctionValue(xvar)
             Dim dxvar((ns + 1) * (2 * nc + 1) - 1) As Double
             Dim dFdXvar((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
             Dim hes((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim fval As Double
-
+         
             Dim bx((ns + 1) * (2 * nc + 1) - 1), bx_ant((ns + 1) * (2 * nc + 1) - 1), bxb((ns + 1) * (2 * nc + 1) - 1), bf((ns + 1) * (2 * nc + 1) - 1), bfb((ns + 1) * (2 * nc + 1) - 1), bp((ns + 1) * (2 * nc + 1) - 1), bp_ant((ns + 1) * (2 * nc + 1) - 1) As Double
 
             For i = 0 To ns
@@ -3731,7 +3265,7 @@ restart:            fx = Me.FunctionValue(xvar)
                 LSSj(i) = LSS(i)
             Next
 
-            'solve using newton's method
+            'solve using IPOPT
 
             _nc = nc
             _ns = ns
@@ -3769,95 +3303,42 @@ restart:            fx = Me.FunctionValue(xvar)
                 Next
             Next
 
-            'first run (to initialize variables)
+            'enhance initial estimates with simplex optimization algorithm
 
-            'fxvar = Me.FunctionValue(xvar)
+            Dim splx As New DotNumerics.Optimization.Simplex
 
-            Dim jac As New Mapack.Matrix(xvar.Length, xvar.Length), hesm As New Mapack.Matrix(xvar.Length, xvar.Length)
+            Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
+            For Each var In xvar
+                bvars.Add(New DotNumerics.Optimization.OptBoundVariable(var))
+            Next
 
-            Do
+            splx.Tolerance = tol(1)
+            splx.MaxFunEvaluations = 1000
+            xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars), bvars.ToArray)
 
-                fxvar = Me.FunctionValue(xvar)
+            Dim obj As Double
+            Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
 
-                il_err_ant = il_err
-                il_err = 0
-                For i = 0 To xvar.Length - 1
-                    il_err += fxvar(i) ^ 2
-                Next
+            Dim initval(xvar.Length - 1) As Double
+            Dim lconstr(xvar.Length - 1) As Double
+            Dim uconstr(xvar.Length - 1) As Double
 
-                If il_err < tol(1) Then Exit Do
+            For i = 0 To xvar.Length - 1
+                initval(i) = xvar(i)
+                lconstr(i) = 0.0#
+                uconstr(i) = 2.0#
+            Next
 
-                If UseNewtonUpdate Then
-                    dFdXvar = Me.FunctionGradient(xvar)
-                    Dim success = MathEx.SysLin.rsolve.rmatrixsolve(dFdXvar, fxvar, xvar.Length, dxvar)
-                    For i = 0 To xvar.Length - 1
-                        dxvar(i) = -dxvar(i)
-                    Next
-                    _bx = xvar.Clone
-                    _dbx = dxvar.Clone
-                Else
-                    If ic = 0 Then
-                        dFdXvar = Me.FunctionGradient(xvar)
-                        For i = 0 To xvar.Length - 1
-                            For j = 0 To xvar.Length - 1
-                                jac(i, j) = dFdXvar(i, j)
-                            Next
-                        Next
-                        'Console.WriteLine(jac.ToString())
-                        hesm = jac.Inverse
-                        For i = 0 To xvar.Length - 1
-                            For j = 0 To xvar.Length - 1
-                                hes(i, j) = hesm(i, j)
-                            Next
-                        Next
-                        bx = xvar
-                        bf = fxvar
-                        Broyden.broydn(xvar.Length - 1, bx, bf, bp, bxb, bfb, hes, 0)
-                        dxvar = bp
-                    Else
-                        bx = xvar
-                        bf = fxvar
-                        Broyden.broydn(xvar.Length - 1, bx, bf, bp, bxb, bfb, hes, 1)
-                        dxvar = bp
-                    End If
-                    _bx = xvar.Clone
-                    _dbx = bp.Clone
-                End If
-
-                'this call to the brent solver calculates the damping factor which minimizes the error (fval).
-                df = 1
-                If UseDampingFactor Then fval = brentsolver.brentoptimize(0, 2, tol(0), df)
-
-                Dim tmultpl As Double = 1.0#, dampenT As Boolean = False
-
-                For i = 0 To xvar.Length - 1
-                    If i = i * (2 * nc + 1) Then
-                        If Abs(dxvar(i) * df) > maxtc / _maxT Then
-                            dampenT = True
-                            If tmultpl > maxtc / _maxT / Abs(dxvar(i) * df) Then tmultpl = maxtc / _maxT / Abs(dxvar(i) * df)
-                        End If
-                    End If
-                Next
-
-                For i = 0 To xvar.Length - 1
-                    If xvar(i) + dxvar(i) * df < 0 Then
-                        xvar(i) = xvar(i) * Exp(df * dxvar(i) * tmultpl / xvar(i))
-                    Else
-                        xvar(i) += dxvar(i) * df * tmultpl
-                    End If
-                Next
-
-                ic += 1
-
-                If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
-                If Double.IsNaN(il_err) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
-                If Abs(MathEx.Common.AbsSum(dxvar)) < tol(0) Then Exit Do
-
-                pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                Calculator.WriteToConsole("Full Newton solver loop error = " & il_err, 1)
-
-            Loop
+            Calculator.CheckParallelPInvoke()
+            Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing, _
+                   0, 0, AddressOf eval_f, AddressOf eval_g, _
+                   AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                problem.AddOption("tol", tol(1))
+                problem.AddOption("max_iter", maxits * 10)
+                problem.AddOption("mu_strategy", "adaptive")
+                problem.AddOption("hessian_approximation", "limited-memory")
+                status = problem.SolveProblem(xvar, obj, Nothing, Nothing, Nothing, Nothing)
+            End Using
 
             ec = ic
 
@@ -3923,6 +3404,32 @@ restart:            fx = Me.FunctionValue(xvar)
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ec, il_err, ic, el_err, dFdXvar}
 
+        End Function
+
+       Public Function eval_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef obj_value As Double) As Boolean
+            Dim fval As Double = FunctionValue(x)
+            obj_value = fval
+            Return True
+        End Function
+
+        Public Function eval_grad_f(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByRef grad_f As Double()) As Boolean
+            Dim g As Double() = FunctionGradient(x)
+            grad_f = g
+            Return True
+        End Function
+
+        Public Function eval_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByRef g As Double()) As Boolean
+            Return True
+        End Function
+
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+         ByRef jCol As Integer(), ByRef values As Double()) As Boolean
+            Return False
+        End Function
+
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+         ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
+            Return False
         End Function
 
     End Class

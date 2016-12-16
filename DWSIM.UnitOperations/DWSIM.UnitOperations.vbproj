@@ -57,6 +57,10 @@
     <Reference Include="Ciloci.Flee">
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
+    <Reference Include="Cureos.Numerics, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelApi">
       <HintPath>..\DWSIM\References\ExcelApi.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
