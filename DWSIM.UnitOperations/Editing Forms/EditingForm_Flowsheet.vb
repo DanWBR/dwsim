@@ -191,6 +191,8 @@ Public Class EditingForm_FlowsheetUO
     Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectInlet2.Click,
                                                                                             btnCreateAndConnectInlet3.Click, btnCreateAndConnectInlet4.Click,
                                                                                             btnCreateAndConnectInlet5.Click, btnCreateAndConnectInlet6.Click,
+                                                                                            btnCreateAndConnectInlet7.Click, btnCreateAndConnectInlet8.Click,
+                                                                                            btnCreateAndConnectInlet9.Click, btnCreateAndConnectInlet10.Click,
                                                                                             btnCreateAndConnectOutlet1.Click, btnCreateAndConnectOutlet2.Click,
                                                                                             btnCreateAndConnectOutlet3.Click, btnCreateAndConnectOutlet4.Click,
                                                                                             btnCreateAndConnectOutlet5.Click, btnCreateAndConnectOutlet6.Click,
@@ -254,7 +256,7 @@ Public Class EditingForm_FlowsheetUO
 
         End If
 
-        If oidx > 0 Then
+        If oidx >= 0 Then
 
             Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(oidx).Position.X + 30, sgobj.OutputConnectors(oidx).Position.Y, "")
 
@@ -269,6 +271,7 @@ Public Class EditingForm_FlowsheetUO
     End Sub
 
     Private Sub btnDisconnect_Click(sender As Object, e As EventArgs) Handles btnDisconnect1.Click, btnDisconnect2.Click, btnDisconnect3.Click, btnDisconnect4.Click, btnDisconnect5.Click, btnDisconnect6.Click,
+                                                                              btnDisconnect7.Click, btnDisconnect8.Click, btnDisconnect9.Click, btnDisconnect10.Click,
                                                                               btnDisconnectOutlet1.Click, btnDisconnectOutlet2.Click, btnDisconnectOutlet3.Click, btnDisconnectOutlet4.Click, btnDisconnectOutlet5.Click, btnDisconnectOutlet6.Click,
                                                                               btnDisconnectOutlet7.Click, btnDisconnectOutlet8.Click, btnDisconnectOutlet9.Click, btnDisconnectOutlet10.Click
 
@@ -403,7 +406,7 @@ Public Class EditingForm_FlowsheetUO
 
         If text <> "" Then
 
-            Dim index As Integer = Convert.ToInt32(cb.Name.Substring(7))
+            Dim index As Integer = Convert.ToInt32(cb.Name.Substring(7)) - 1
 
             Dim gobj = SimObject.GraphicObject
             Dim flowsheet = SimObject.FlowSheet
@@ -426,7 +429,7 @@ Public Class EditingForm_FlowsheetUO
 
         If text <> "" Then
 
-            Dim index As Integer = Convert.ToInt32(cb.Name.Substring(8))
+            Dim index As Integer = Convert.ToInt32(cb.Name.Substring(8)) - 1
 
             Dim gobj = SimObject.GraphicObject
             Dim flowsheet = SimObject.FlowSheet
@@ -436,8 +439,8 @@ Public Class EditingForm_FlowsheetUO
                 Exit Sub
             End If
 
-            If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-            flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+            If gobj.OutputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(index).AttachedConnector.AttachedTo)
+            flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
         End If
 

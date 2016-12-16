@@ -158,7 +158,7 @@ Public Class EditingForm_Column
             cbCondSpecUnits.Items.Clear()
             cbCondSpecUnits.Items.AddRange(cunits)
             cbCondSpecUnits.SelectedItem = .Specs("C").SpecUnit
-            tbCondSpec.Text = su.Converter.ConvertFromSI(.Specs("C").SpecUnit, .Specs("C").SpecValue).ToString(nf)
+            tbCondSpec.Text = .Specs("C").SpecValue.ToString(nf)
             cbCondVapFlowUnits.Items.Clear()
             cbCondVapFlowUnits.Items.AddRange(New String() {"mol/s", "lbmol/h", "mol/h", "mol/d", "kmol/s", "kmol/h", "kmol/d", "m3/d @ BR", "m3/d @ NC", "m3/d @ CNTP", "m3/d @ SC", "m3/d @ 0 C, 1 atm", "m3/d @ 15.56 C, 1 atm", "m3/d @ 20 C, 1 atm", "ft3/d @ 60 F, 14.7 psia", "ft3/d @ 0 C, 1 atm"})
             cbCondVapFlowUnits.SelectedItem = .VaporFlowRateUnit
@@ -199,7 +199,7 @@ Public Class EditingForm_Column
             cbRebSpecUnits.Items.Clear()
             cbRebSpecUnits.Items.AddRange(cunits)
             cbRebSpecUnits.SelectedItem = .Specs("R").SpecUnit
-            tbRebSpecValue.Text = su.Converter.ConvertFromSI(.Specs("R").SpecUnit, .Specs("R").SpecValue).ToString(nf)
+            tbRebSpecValue.Text = .Specs("R").SpecValue.ToString(nf)
 
             cbCondComp.Items.Clear()
             cbCondComp.Items.AddRange(SimObject.FlowSheet.SelectedCompounds.Values.Select(Function(x) x.Name).ToArray)
@@ -424,7 +424,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.MaxIterations = tbMaxIt.Text
+            SimObject.MaxIterations = Convert.ToInt32(Double.Parse(tbMaxIt.Text))
             RequestCalc()
 
         End If
@@ -435,8 +435,8 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.ExternalLoopTolerance = tbMaxIt.Text
-            SimObject.InternalLoopTolerance = tbMaxIt.Text
+            SimObject.ExternalLoopTolerance = Double.Parse(tbConvTol.Text)
+            SimObject.InternalLoopTolerance = Double.Parse(tbConvTol.Text)
             RequestCalc()
 
         End If
@@ -565,7 +565,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.Specs("C").SpecValue = su.Converter.ConvertToSI(SimObject.Specs("C").SpecUnit, tbCondSpec.Text)
+            SimObject.Specs("C").SpecValue = Double.Parse(tbCondSpec.Text)
 
             RequestCalc()
 
@@ -666,7 +666,7 @@ Public Class EditingForm_Column
 
         If Loaded And e.KeyCode = Keys.Enter Then
 
-            SimObject.Specs("R").SpecValue = su.Converter.ConvertToSI(SimObject.Specs("R").SpecUnit, tbRebSpecValue.Text)
+            SimObject.Specs("R").SpecValue = Double.Parse(tbRebSpecValue.Text)
 
             RequestCalc()
 

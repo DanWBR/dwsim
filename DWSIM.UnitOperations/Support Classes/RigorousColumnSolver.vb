@@ -403,6 +403,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     If Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then
                         If i > 0 Then _Tj(i) = _Tj_ant(i - 1)
                     End If
+                    If Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then Throw New Exception(_pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
                 End If
             Next
@@ -2286,6 +2287,7 @@ restart:            fx = Me.FunctionValue(xvar)
                 For i = 0 To ns
                     dTj(i) = Tj(i) - Tj_ant(i)
                     If Abs(dTj(i)) > 10 Then Tj(i) = Math.Sign(dTj(i)) * 10 + Tj_ant(i)
+                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 Next
 
                 For i = 0 To ns
@@ -2762,7 +2764,7 @@ restart:            fx = Me.FunctionValue(xvar)
                     Else
                         Tj(i) = Tj(i) + xth(i)
                     End If
-                    'If Tj(i) < 0 Then Tj(i) = Tj_ant(i)
+                    If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                     If llextr Then
                         tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
                     Else
@@ -2887,6 +2889,7 @@ restart:            fx = Me.FunctionValue(xvar)
 
             For i = 0 To ns
                 Tj(i) = x(i * (2 * nc + 1)) * _maxT
+                If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(_pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 For j = 0 To nc - 1
                     vc(i)(j) = x(i * (2 * nc + 1) + j + 1) * _maxvc
                     lc(i)(j) = x(i * (2 * nc + 1) + j + 1 + nc) * _maxlc

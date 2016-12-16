@@ -391,6 +391,7 @@ Namespace PropertyPackages.ThermoPlugs
             Dim _zarray As List(Of Double), _mingz As Object, Z As Double
 
             _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
+            If _zarray.Count = 0 Then Throw New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T={0}, P={1}, C={2}]", T.ToString, P.ToString, Vx.ToArrayString))
             If forcephase <> "" Then
                 If forcephase = "L" Then
                     Z = Common.Min(_zarray.ToArray())
