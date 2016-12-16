@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.1 Update 6 - December 2016
+Version 4.1 Update 7 - December 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.1 Update 7
+
+- [NEW] Enhanced compatibility with Wine on Linux/macOS
+- [CHG] Changed default solver settings
+- [FIX] Fixed issues with Flowsheet Block and Rigorous Column editors
+- [FIX] Minor bug fixes and enhancements
 
 Version 4.1 Update 6
 
