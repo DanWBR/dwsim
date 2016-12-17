@@ -209,13 +209,13 @@ Public Class EditingForm_Column
 
             tbBPStopAtIter.Text = .StopAtIterationNumber
 
-            tb_NS_LowerBound.Text = .NS_LowerBound
-            tb_NS_UpperBound.Text = .NS_UpperBound
+            tb_NS_LowerBound.Text = .NS_LowerBound.ToString(nf)
+            tb_NS_UpperBound.Text = .NS_UpperBound.ToString(nf)
             cbMinMethodNS.SelectedIndex = .NS_Solver
             cbNSPreconditioning.Checked = .NS_SimplexPreconditioning
 
-            tb_IO_LowerBound.Text = .IO_LowerBound
-            tb_IO_UpperBound.Text = .IO_UpperBound
+            tb_IO_LowerBound.Text = .IO_LowerBound.ToString(nf)
+            tb_IO_UpperBound.Text = .IO_UpperBound.ToString(nf)
             cbMinMethodIO.SelectedIndex = .IO_Solver
             chkIOAdjustSb.Checked = .AdjustSb
             chkIOAverageKb.Checked = .KbjWeightedAverage

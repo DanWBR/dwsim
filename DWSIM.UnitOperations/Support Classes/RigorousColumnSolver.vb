@@ -645,6 +645,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If optsolver IsNot Nothing Then
                 _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             End If
 
             Return errors.AbsSqrSumY
@@ -1209,14 +1210,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 xvar = initval
 
-                il_err = FunctionValue(xvar)
-
-                If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
-                    Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
-                ElseIf Abs(il_err) > tol(1) Then
-                    Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
-                End If
-
                 For i = 0 To ns
                     If i = 0 And _condtype <> Column.condtype.Full_Reflux Then
                         lnRlj_ant(i) = lnRlj(i)
@@ -1555,6 +1548,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                              ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                              ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
             _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
+            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return True
         End Function
 
@@ -2811,6 +2805,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             If optsolver IsNot Nothing Then
                 _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Newton solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             End If
 
             Return errors.AbsSqrSumY
@@ -3218,6 +3213,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                              ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                              ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
             _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
+            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return True
         End Function
 
@@ -3299,6 +3295,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
             _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
+            _gf._pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
 
@@ -3380,6 +3377,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
             _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
+            _gf._pp.CurrentMaterialStream.Flowsheet.CheckStatus()
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
 
