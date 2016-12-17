@@ -3060,14 +3060,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 H(i) /= (Hv(i) - Hl(i))
                 Select Case coltype
                     Case Column.ColType.DistillationColumn
-                        If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1 / 10
-                        H(ns) = spfval2 / 10
+                        If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1
+                        H(ns) = spfval2
                     Case Column.ColType.AbsorptionColumn
                         'do nothing
                     Case Column.ColType.ReboiledAbsorber
-                        H(ns) = spfval2 / 10
+                        H(ns) = spfval2
                     Case Column.ColType.RefluxedAbsorber
-                        H(0) = spfval1 / 10
+                        H(0) = spfval1
                 End Select
             Next
 
@@ -3102,7 +3102,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Private Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.0000000001
+            Dim epsilon As Double = 0.00000001
 
             Dim f2, f3 As Double
             Dim g(x.Length - 1), x1(x.Length - 1) As Double
@@ -3313,7 +3313,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
 
             splx.Tolerance = tol(1)
-            splx.MaxFunEvaluations = 1000
+            splx.MaxFunEvaluations = 3000
             xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars), bvars.ToArray)
 
             Dim obj As Double
@@ -3325,7 +3325,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To xvar.Length - 1
                 initval(i) = xvar(i)
-                lconstr(i) = 0.0#
+                lconstr(i) = -2.0#
                 uconstr(i) = 2.0#
             Next
 
@@ -3334,9 +3334,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                    0, 0, AddressOf eval_f, AddressOf eval_g, _
                    AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                 problem.AddOption("tol", tol(1))
-                problem.AddOption("max_iter", maxits * 10)
+                problem.AddOption("max_iter", maxits)
                 problem.AddOption("mu_strategy", "adaptive")
                 problem.AddOption("hessian_approximation", "limited-memory")
+                problem.SetIntermediateCallback(AddressOf intermediate)
                 status = problem.SolveProblem(xvar, obj, Nothing, Nothing, Nothing, Nothing)
             End Using
 
@@ -3430,6 +3431,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
+        End Function
+
+        Public Function intermediate(ByVal alg_mod As IpoptAlgorithmMode, ByVal iter_count As Integer, ByVal obj_value As Double,
+                             ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
+                             ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
+                             ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
+            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
+            Return True
         End Function
 
     End Class
