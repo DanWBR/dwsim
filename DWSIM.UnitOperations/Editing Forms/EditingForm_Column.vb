@@ -106,14 +106,6 @@ Public Class EditingForm_Column
             cbCondPDropUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
             cbCondPDropUnits.SelectedItem = units.deltaP
 
-            cbIOTempPerturbationUnits.Items.Clear()
-            cbIOTempPerturbationUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
-            cbIOTempPerturbationUnits.SelectedItem = units.deltaT
-
-            cbNSMaximumDeltaT.Items.Clear()
-            cbNSMaximumDeltaT.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaT).ToArray)
-            cbNSMaximumDeltaT.SelectedItem = units.deltaT
-
             tbNStages.Text = .NumberOfStages
 
             If TypeOf SimObject Is AbsorptionColumn Then cbAbsorberMode.SelectedIndex = DirectCast(SimObject, AbsorptionColumn).OperationMode Else cbAbsorberMode.Enabled = False
@@ -216,22 +208,18 @@ Public Class EditingForm_Column
             chkUseIE_C.Checked = .UseCompositionEstimates
 
             tbBPStopAtIter.Text = .StopAtIterationNumber
-            tbNSMaximumDeltaT.Text = su.Converter.ConvertFromSI(units.deltaT, .SC_MaximumTemperatureChange).ToString(nf)
-            tbNSNumericalDerivativeStep.Text = .SC_NumericalDerivativeStep
-            chkNSJacobian.Checked = .StoreAndReuseJacobian
-            chkNSUseDampingFactor.Checked = .UseDampingFactor
-            chkNSUseNewton.Checked = .UseNewtonUpdate
 
-            tbIONumericalDerivativeStep.Text = .IO_NumericalDerivativeStep
-            tbIOTempPerturbation.Text = su.Converter.ConvertFromSI(units.deltaT, .IO_ExtLoop_DeltaT).ToString(nf)
-            tbIOMinDamping.Text = .IO_DampingFactorMin
-            tbIOMaxDamping.Text = .IO_DampingFactorMax
+            tb_NS_LowerBound.Text = .NS_LowerBound
+            tb_NS_UpperBound.Text = .NS_UpperBound
+            cbMinMethodNS.SelectedIndex = .NS_Solver
+            cbNSPreconditioning.Checked = .NS_SimplexPreconditioning
+
+            tb_IO_LowerBound.Text = .IO_LowerBound
+            tb_IO_UpperBound.Text = .IO_UpperBound
+            cbMinMethodIO.SelectedIndex = .IO_Solver
             chkIOAdjustSb.Checked = .AdjustSb
             chkIOAverageKb.Checked = .KbjWeightedAverage
-            chkIOJacobian.Checked = .StoreAndReuseJacobian
-            chkIONewton.Checked = .UseNewtonUpdate
-            chkIOUseDampingFactor.Checked = .UseDampingFactor
-
+            
             'tabs
 
             TabStages.Controls.Clear()
@@ -708,66 +696,6 @@ Public Class EditingForm_Column
         End If
     End Sub
 
-    Private Sub tbNSNumericalDerivativeStep_TextChanged(sender As Object, e As KeyEventArgs) Handles tbNSNumericalDerivativeStep.KeyDown
-        If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.SC_NumericalDerivativeStep = tbNSNumericalDerivativeStep.Text
-        End If
-    End Sub
-
-    Private Sub tbIONumericalDerivativeStep_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIONumericalDerivativeStep.KeyDown
-        If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_NumericalDerivativeStep = tbIONumericalDerivativeStep.Text
-        End If
-    End Sub
-
-    Private Sub tbNSMaximumDeltaT_TextChanged(sender As Object, e As KeyEventArgs) Handles tbNSMaximumDeltaT.KeyDown
-        If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.SC_MaximumTemperatureChange = su.Converter.ConvertToSI(units.temperature, tbNSMaximumDeltaT.Text)
-        End If
-    End Sub
-
-    Private Sub chkNSUseDampingFactor_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSUseDampingFactor.CheckedChanged
-        SimObject.UseDampingFactor = chkNSUseDampingFactor.Checked
-    End Sub
-
-    Private Sub chkNSUseNewton_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSUseNewton.CheckedChanged
-        SimObject.UseNewtonUpdate = chkNSUseNewton.Checked
-    End Sub
-
-    Private Sub chkNSJacobian_CheckedChanged(sender As Object, e As EventArgs) Handles chkNSJacobian.CheckedChanged
-        SimObject.StoreAndReuseJacobian = chkNSJacobian.Checked
-    End Sub
-
-    Private Sub tbIOTempPerturbation_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIOTempPerturbation.KeyDown
-        If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_ExtLoop_DeltaT = su.Converter.ConvertToSI(units.temperature, tbIOTempPerturbation.Text)
-        End If
-    End Sub
-
-    Private Sub tbIOMinDamping_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIOMinDamping.KeyDown
-        If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_DampingFactorMin = tbIOMinDamping.Text
-        End If
-    End Sub
-
-    Private Sub tbIOMaxDamping_TextChanged(sender As Object, e As KeyEventArgs) Handles tbIOMaxDamping.KeyDown
-        If Loaded And e.KeyCode = Keys.Enter Then
-            SimObject.IO_DampingFactorMax = tbIOMaxDamping.Text
-        End If
-    End Sub
-
-    Private Sub chkIOUseDampingFactor_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOUseDampingFactor.CheckedChanged
-        SimObject.UseDampingFactor = chkIOUseDampingFactor.Checked
-    End Sub
-
-    Private Sub chkIONewton_CheckedChanged(sender As Object, e As EventArgs) Handles chkIONewton.CheckedChanged
-        SimObject.UseNewtonUpdate = chkIONewton.Checked
-    End Sub
-
-    Private Sub chkIOJacobian_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOJacobian.CheckedChanged
-        SimObject.StoreAndReuseJacobian = chkIOJacobian.Checked
-    End Sub
-
     Private Sub chkIOAdjustSb_CheckedChanged(sender As Object, e As EventArgs) Handles chkIOAdjustSb.CheckedChanged
         SimObject.AdjustSb = chkIOAdjustSb.Checked
     End Sub
@@ -786,6 +714,42 @@ Public Class EditingForm_Column
         If Loaded Then
             Me.SimObject.Specs("R").ComponentID = cbRebComp.SelectedItem.ToString
         End If
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMinMethodIO.SelectedIndexChanged
+        If Loaded Then SimObject.IO_Solver = cbMinMethodIO.SelectedIndex
+    End Sub
+
+    Private Sub cbMinMethodNS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMinMethodNS.SelectedIndexChanged
+        If Loaded Then SimObject.NS_Solver = cbMinMethodNS.SelectedIndex
+    End Sub
+
+    Private Sub tb_NS_LowerBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_NS_LowerBound.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.NS_LowerBound = tb_NS_LowerBound.Text
+        End If
+    End Sub
+
+    Private Sub tb_NS_UpperBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_NS_UpperBound.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.NS_UpperBound = tb_NS_UpperBound.Text
+        End If
+    End Sub
+
+    Private Sub tb_IO_LowerBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_IO_LowerBound.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_LowerBound = tb_IO_LowerBound.Text
+        End If
+    End Sub
+
+    Private Sub tb_IO_UpperBound_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_IO_UpperBound.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_UpperBound = tb_IO_UpperBound.Text
+        End If
+    End Sub
+
+    Private Sub cbNSPreconditioning_CheckedChanged(sender As Object, e As EventArgs) Handles cbNSPreconditioning.CheckedChanged
+        SimObject.NS_SimplexPreconditioning = cbNSPreconditioning.Checked
     End Sub
 
 End Class

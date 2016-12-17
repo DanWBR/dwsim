@@ -1443,6 +1443,17 @@ Namespace UnitOperations
         Private _iodfmax As Double = 2.0#
         Private _iodeltat_el As Double = 0.01#
 
+        'new solver parameters
+
+        Public Property NS_Solver As OptimizationMethod = OptimizationMethod.GradientDescent
+        Public Property NS_SimplexPreconditioning As Boolean = True
+        Public Property NS_LowerBound As Double = 0.0#
+        Public Property NS_UpperBound As Double = 2.0#
+
+        Public Property IO_Solver As OptimizationMethod = OptimizationMethod.Simplex
+        Public Property IO_LowerBound As Double = -100.0#
+        Public Property IO_UpperBound As Double = 100.0#
+
         'general variables
 
         Private _nst As Integer = 12
@@ -2600,7 +2611,7 @@ Namespace UnitOperations
             Select Case Me.SolvingMethod
                 Case 2 'IO 
                     Dim rm As New SolvingMethods.RussellMethod
-                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.UseDampingFactor, Me.UseNewtonUpdate, Me.AdjustSb, Me.UseIdentityAsJacobianInverse, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, Me.StoreAndReuseJacobian, Me.JacobianMatrix, Me.IO_NumericalDerivativeStep, Me.IO_MaxVarChgFac, Me.IO_DampingFactorMin, Me.IO_DampingFactorMax, Me.IO_ExtLoop_DeltaT, llextractor)
+                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, llextractor)
                     ic = result(9)
                     ec = result(11)
                 Case 0 'BP
@@ -2611,7 +2622,7 @@ Namespace UnitOperations
                     ic = result(9)
                 Case 1 'SC
                     Dim scm As New SolvingMethods.NaphtaliSandholmMethod
-                    result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.UseDampingFactor, Me.UseNewtonUpdate, Me.UseIdentityAsJacobianInverse, Me.ColumnType, pp, Me.Specs, Me.StoreAndReuseJacobian, Me.JacobianMatrix, Me.SC_DampingFactor, Me.SC_MaximumTemperatureChange, Me.SC_NumericalDerivativeStep, Me.SC_MaxVarChgFac, llextractor)
+                    result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, llextractor)
                     ec = result(11)
                 Case Else
                     result = Nothing
