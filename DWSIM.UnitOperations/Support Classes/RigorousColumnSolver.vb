@@ -611,14 +611,14 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Select Case _coltype
                 Case Column.ColType.DistillationColumn
-                    entbal(0) = spfval1
-                    entbal(_ns) = spfval2
+                    entbal(0) = spfval1 / spval1
+                    entbal(_ns) = spfval2 / spval2
                 Case Column.ColType.AbsorptionColumn
                     'do nothing
                 Case Column.ColType.ReboiledAbsorber
-                    entbal(_ns) = spfval2
+                    entbal(_ns) = spfval2 / spval2
                 Case Column.ColType.RefluxedAbsorber
-                    entbal(0) = spfval1
+                    entbal(0) = spfval1 / spval1
             End Select
 
             For i = 0 To x.Length - 1
@@ -1146,7 +1146,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Case OptimizationMethod.Limited_Memory_BGFS
                         Dim variables(n) As OptBoundVariable
                         For i = 0 To n
-                            variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
+                            variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i))
                         Next
                         Dim _solver As New L_BFGS_B
                         _solver.Tolerance = tol(1)
@@ -1157,7 +1157,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Case OptimizationMethod.Truncated_Newton
                         Dim variables(n) As OptBoundVariable
                         For i = 0 To n
-                            variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
+                            variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i))
                         Next
                         Dim _solver As New TruncatedNewton
                         _solver.Tolerance = tol(1)
@@ -1168,7 +1168,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Case OptimizationMethod.Simplex
                         Dim variables(n) As OptBoundVariable
                         For i = 0 To n
-                            variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i), False, lconstr(i), uconstr(i))
+                            variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval(i))
                         Next
                         Dim _solver As New Simplex
                         _solver.Tolerance = tol(1)
@@ -2764,17 +2764,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Else
                     H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i)) '/ (Hv(i) - Hl(i))
                 End If
-                H(i) /= (Hv(i) - Hl(i))
+                H(i) /= (Hv(i) - Hl(i)) / 1000
                 Select Case coltype
                     Case Column.ColType.DistillationColumn
-                        If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1
-                        H(ns) = spfval2
+                        If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1 / spval1
+                        H(ns) = spfval2 / spval2
                     Case Column.ColType.AbsorptionColumn
                         'do nothing
                     Case Column.ColType.ReboiledAbsorber
-                        H(ns) = spfval2
+                        H(ns) = spfval2 / spval2
                     Case Column.ColType.RefluxedAbsorber
-                        H(0) = spfval1
+                        H(0) = spfval1 / spval1
                 End Select
             Next
 
