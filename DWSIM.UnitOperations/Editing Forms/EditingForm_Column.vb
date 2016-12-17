@@ -413,7 +413,6 @@ Public Class EditingForm_Column
         If Loaded And e.KeyCode = Keys.Enter Then
 
             SimObject.MaxIterations = Convert.ToInt32(Double.Parse(tbMaxIt.Text))
-            RequestCalc()
 
         End If
 
@@ -425,7 +424,6 @@ Public Class EditingForm_Column
 
             SimObject.ExternalLoopTolerance = Double.Parse(tbConvTol.Text)
             SimObject.InternalLoopTolerance = Double.Parse(tbConvTol.Text)
-            RequestCalc()
 
         End If
 
@@ -752,4 +750,16 @@ Public Class EditingForm_Column
         SimObject.NS_SimplexPreconditioning = cbNSPreconditioning.Checked
     End Sub
 
+
+
+    Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tb_IO_LowerBound.TextChanged, tb_IO_UpperBound.TextChanged, tb_NS_LowerBound.TextChanged, tb_NS_UpperBound.TextChanged,
+                                                                                tbBPStopAtIter.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
+                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged
+        Dim tbox = DirectCast(sender, TextBox)
+        If Loaded Then
+            ToolTip1.ToolTipTitle = SimObject.FlowSheet.GetTranslatedString("Informao")
+            ToolTip1.ToolTipIcon = ToolTipIcon.Info
+            ToolTip1.Show(SimObject.FlowSheet.GetTranslatedString("CommitChanges"), tbox, 0, tbox.Height + 4, 2000)
+        End If
+    End Sub
 End Class

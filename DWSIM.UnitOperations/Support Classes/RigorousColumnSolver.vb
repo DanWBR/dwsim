@@ -166,13 +166,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _fc, _xc, _yc, _lc, _vc, _zc As Double()()
         Dim _Kbj As Object()
         Dim _rr, _Sb, _maxF As Double
-        Dim _pp As PropertyPackages.PropertyPackage
+        Public _pp As PropertyPackages.PropertyPackage
         Dim _coltype As Column.ColType
         Dim _condtype As Column.condtype
         Dim _bx, _dbx As Double()
         Dim _vcnt, _lcnt As Integer
         Dim _specs As Dictionary(Of String, SepOps.ColumnSpec)
         Dim llextr As Boolean = False
+
+        Private optsolver As Object
 
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
@@ -641,13 +643,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
             If _condtype = Column.condtype.Partial_Condenser Then errors(_el) = (_Vj(0) - Vjj(0))
 
+            If optsolver IsNot Nothing Then
+                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
+            End If
+
             Return errors.AbsSqrSumY
 
         End Function
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = ndeps
+            Dim epsilon As Double = 0.0000000001
 
             Dim f2, f3 As Double
             Dim g(x.Length - 1), x1(x.Length - 1) As Double
@@ -1134,6 +1140,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim n As Integer = xvar.Length - 1
 
+                optsolver = Nothing
                 Select Case Solver
                     Case OptimizationMethod.Limited_Memory_BGFS
                         Dim variables(n) As OptBoundVariable
@@ -1143,6 +1150,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New L_BFGS_B
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
+                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                         Solver = Nothing
                     Case OptimizationMethod.Truncated_Newton
@@ -1153,6 +1161,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New TruncatedNewton
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
+                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                         _solver = Nothing
                     Case OptimizationMethod.Simplex
@@ -1163,6 +1172,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New Simplex
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
+                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                         _solver = Nothing
                     Case OptimizationMethod.IPOPT
@@ -1183,9 +1193,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
 
                         Dim sproblem As New Russell_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "NS"}
-                        sproblem.MaxIterations = maxits * initval.Length * 10
-                        sproblem.MinIterations = maxits * 10
-                        sproblem.Tolerance = 0.0000000000000001
+                        sproblem.MaxIterations = maxits
+                        sproblem.MinIterations = 10
+                        sproblem.Tolerance = tol(1)
                         Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                         opt.Problem = sproblem
                         opt.RequireFeasible = True
@@ -2389,7 +2399,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Sub
 
-        Dim ndeps As Double = 0.1
+        Dim ndeps As Double = 0.000001
 
         Dim _nc, _ns As Integer
         Dim _VSS, _LSS As Double()
@@ -2397,7 +2407,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _spci1, _spci2 As Integer
         Dim _eff, _F, _Q, _P, _HF As Double()
         Dim _fc()(), _maxF As Double
-        Dim _pp As PropertyPackages.PropertyPackage
+        Public _pp As PropertyPackages.PropertyPackage
         Dim _coltype As Column.ColType
         Dim _specs As Dictionary(Of String, SepOps.ColumnSpec)
         Dim _bx, _dbx As Double()
@@ -2405,6 +2415,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim llextr As Boolean = False
         Dim _Kval()() As Double
         Dim _maxT, _maxvc, _maxlc As Double
+
+        Private optsolver As Object
 
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
@@ -2797,13 +2809,17 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
+            If optsolver IsNot Nothing Then
+                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Newton solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
+            End If
+
             Return errors.AbsSqrSumY
 
         End Function
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = ndeps
+            Dim epsilon As Double = 0.0000000001
 
             Dim f2, f3 As Double
             Dim g(x.Length - 1), x1(x.Length - 1) As Double
@@ -3034,6 +3050,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim n As Integer = xvar.Length - 1
 
+            optsolver = Nothing
             Select Case Solver
                 Case OptimizationMethod.Limited_Memory_BGFS
                     Dim variables(n) As OptBoundVariable
@@ -3043,6 +3060,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New L_BFGS_B
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
+                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     Solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
@@ -3053,6 +3071,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New TruncatedNewton
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
+                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     _solver = Nothing
                 Case OptimizationMethod.Simplex
@@ -3063,6 +3082,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New Simplex
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
+                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                     _solver = Nothing
                 Case OptimizationMethod.IPOPT
@@ -3083,9 +3103,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
 
                     Dim sproblem As New NaphtaliSandholm_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "NS"}
-                    sproblem.MaxIterations = maxits * initval.Length * 10
-                    sproblem.MinIterations = maxits * 10
-                    sproblem.Tolerance = 0.0000000000000001
+                    sproblem.MaxIterations = maxits
+                    sproblem.MinIterations = 10
+                    sproblem.Tolerance = tol(1)
                     Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                     opt.Problem = sproblem
                     opt.RequireFeasible = True
@@ -3277,6 +3297,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
+        Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
+            _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
+            Return MyBase.[Continue](iterations, fitness, feasible)
+        End Function
+
     End Class
 
     Public Class NaphtaliSandholm_ColumnProblem
@@ -3351,6 +3376,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Return _gf.FunctionValue(parameters)
 
+        End Function
+
+        Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
+            _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
+            Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
 
     End Class

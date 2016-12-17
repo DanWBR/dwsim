@@ -3575,6 +3575,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to não foi possível encontrar uma solução que atenda à tolerância especificada..
+        '''</summary>
+        Friend Shared ReadOnly Property DCErrorStillHigh() As String
+            Get
+                Return ResourceManager.GetString("DCErrorStillHigh", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Perturbação da temperatura no loop externo (K).
         '''</summary>
         Friend Shared ReadOnly Property DCExtLoopDeltaT() As String

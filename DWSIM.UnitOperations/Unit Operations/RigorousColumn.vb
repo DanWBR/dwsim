@@ -1451,8 +1451,8 @@ Namespace UnitOperations
         Public Property NS_UpperBound As Double = 2.0#
 
         Public Property IO_Solver As OptimizationMethod = OptimizationMethod.Simplex
-        Public Property IO_LowerBound As Double = -100.0#
-        Public Property IO_UpperBound As Double = 100.0#
+        Public Property IO_LowerBound As Double = Log(1.0E-40)
+        Public Property IO_UpperBound As Double = Log(5.0#)
 
         'general variables
 

@@ -5436,4 +5436,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CommitChanges" xml:space="preserve">
     <value>Pressione ENTER para aceitar o novo valor.</value>
   </data>
+  <data name="DCErrorStillHigh" xml:space="preserve">
+    <value>não foi possível encontrar uma solução que atenda à tolerância especificada.</value>
+  </data>
 </root>
