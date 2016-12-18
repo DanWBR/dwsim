@@ -40,7 +40,7 @@ Namespace Reactors
         Dim C As Dictionary(Of String, Double)
         Dim Ri As Dictionary(Of String, Double)
         Dim Kf, Kr As ArrayList
-        Dim N00 As Dictionary(Of String, Double)
+        Dim N00, N0 As Dictionary(Of String, Double)
         Dim Rxi As New Dictionary(Of String, Double)
         Public RxiT As New Dictionary(Of String, Double)
         Public DHRi As New Dictionary(Of String, Double)
@@ -86,6 +86,7 @@ Namespace Reactors
             Me.ComponentDescription = description
 
             N00 = New Dictionary(Of String, Double)
+            N0 = New Dictionary(Of String, Double)
             C0 = New Dictionary(Of String, Double)
             C = New Dictionary(Of String, Double)
             Ri = New Dictionary(Of String, Double)
@@ -249,6 +250,287 @@ Namespace Reactors
         End Function
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
+            NewCalculate(args)
+            'OldCalculate(args)
+        End Sub
+        Public Sub NewCalculate(Optional ByVal args As Object = Nothing)
+
+            'This ims-stream (internal material stream) during internal calculations
+            'Clone inlet stream as initial estimation
+            ims = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
+
+            PropertyPackage.CurrentMaterialStream = ims
+            ims.SetPropertyPackage(PropertyPackage)
+            ims.SetFlowsheet(Me.FlowSheet)
+            ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
+
+            'N00 = New Dictionary(Of String, Double) 'inlet mole flows
+            N0 = New Dictionary(Of String, Double) 'inlet mole flows
+            C0 = New Dictionary(Of String, Double) 'inlet mole concentrations
+            C = New Dictionary(Of String, Double) 'current mole concentrations
+            Ri = New Dictionary(Of String, Double) 'compound consumption rates
+
+            DHRi = New Dictionary(Of String, Double) 'reaction heats
+            Kf = New ArrayList 'K forward reaction
+            Kr = New ArrayList 'K reverse reaction
+            Rxi = New Dictionary(Of String, Double)
+            Dim BC As String = "" 'Base Component of Reaction
+
+            'conversion factors for different basis other than molar concentrations
+            Dim convfactors As New Dictionary(Of String, Double)
+
+            'scBC = stoichiometric coeff of the base comp
+            'DHr = reaction heat (total)
+            'Hr = reactant enthalpy
+            'Hr0 = initial reactant enthalpy
+            'Hp = products enthalpy
+            Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Q, QL, QS, QV, Qr, m0, Rx, IErr, OErr As Double
+            Dim RP As Integer 'Reaction phase ID
+            Dim DF As Double = 0.1 'Damping Factor for iterations
+            Dim dT As Double 'Time step in seconds
+            Dim i, NIter As Integer
+            Dim NC As Integer = ims.Phases(0).Compounds.Count 'Number of components
+            Dim CompNames(NC - 1) As String 'ComponentNames
+            Dim MM(NC - 1) As Double 'Mol masses of components
+            Dim LC(NC - 1) As Double 'Composition of last iteration
+            Dim Nin(NC - 1), Nout(NC - 1), NReac(NC - 1), Mout(NC - 1), RComp(NC - 1), dB(NC - 1), dN(NC - 1), dRT(NC - 1), Y(NC - 1), M(NC - 1) As Double
+
+
+            m_conversions = New Dictionary(Of String, Double) 'Conversion of reactions
+            m_componentconversions = New Dictionary(Of String, Double) 'Conversion of components
+
+            Dim conv As New SystemsOfUnits.Converter
+            Dim rxn As Reaction
+
+            If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac16"))
+            ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac15"))
+            ElseIf Not Me.GraphicObject.InputConnectors(1).IsAttached Then
+                Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
+            End If
+
+            'Initialisations
+            Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
+            ResidenceTime = Volume / Q
+            dT = ResidenceTime / 10 'initial time step
+
+            i = 0
+            For Each comp In ims.Phases(0).Compounds.Values
+                'N00.Add(comp.Name, comp.MolarFlow)
+                Nin(i) = comp.MolarFlow
+                Nout(i) = comp.MolarFlow
+                NReac(i) = Me.Volume * comp.Molarity  'total number of moles in reactor
+                i += 1
+            Next
+
+            CompNames = ims.PropertyPackage.RET_VNAMES 'Component names
+            MM = ims.PropertyPackage.RET_VMM 'Component molar wheights
+            LC = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture) 'Component molar fractions
+
+            T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            P0 = ims.Phases(0).Properties.pressure.GetValueOrDefault
+            P = P0 - DeltaP.GetValueOrDefault
+            ims.Phases(0).Properties.pressure = P
+
+            IErr = 1
+
+            '====================================================
+            '==== Start of iteration loop =======================
+            '====================================================
+            'Assume output composition as input composition initially
+            'Then do molar balances for every component for small time steps until composition becomes stable
+            'Teme step: Moles in reactor(t+dT)= Moles in reactor (t) + Feed - consumption (composition,temperature) - Output(composition) 
+
+            Do
+                'initialise component reaction rates
+                Ri.Clear()
+                For Each comp In ims.Phases(0).Compounds.Values
+                    Ri.Add(comp.Name, 0)
+                Next
+
+                RxiT.Clear()
+
+                Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
+                QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
+                QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Vapour
+                QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
+                ResidenceTime = Volume / Q
+
+                'Run through all reactions of Reaction Set to calculate component consumption/production rates at actual
+                'composition and temperature.
+                For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                    rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                    BC = rxn.BaseReactant
+
+                    If rxn.ReactionType = ReactionType.Kinetic Then
+                        convfactors = Me.GetConvFactors(rxn, ims)
+
+                        'Qr = volume of reaction of actual reaction phase
+                        Select Case rxn.ReactionPhase
+                            Case PhaseName.Liquid
+                                RP = 1 'overall Liquid
+                                Qr = QL / Q * Me.Volume
+                            Case PhaseName.Vapor
+                                RP = 2
+                                Qr = QV / Q * Me.Volume
+                            Case PhaseName.Mixture
+                                RP = 0
+                                Qr = Me.Volume
+                            Case PhaseName.Solid
+                                RP = 7
+                                Qr = QS / Q * Me.Volume
+                        End Select
+
+                        C.Clear()
+                        For Each comp As Compound In ims.Phases(RP).Compounds.Values
+                            C.Add(comp.Name, comp.Molarity)
+                        Next
+
+                        'calculate reaction constants
+                        Dim kxf As Double = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
+                        Dim kxr As Double = rxn.A_Reverse * Exp(-rxn.E_Reverse / (8.314 * T))
+
+                        If T < rxn.Tmin Or T > rxn.Tmax Then
+                            kxf = 0.0#
+                            kxr = 0.0#
+                        End If
+
+                        Dim rxf As Double = 1.0#
+                        Dim rxr As Double = 1.0#
+
+                        'kinetic expression
+                        For Each sb As ReactionStoichBase In rxn.Components.Values
+                            rxf *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.DirectOrder
+                            rxr *= (C(sb.CompName) * convfactors(sb.CompName)) ^ sb.ReverseOrder
+                        Next
+
+                        'calculate total reaction rate (units of reaction definition)
+                        Rx = kxf * rxf - kxr * rxr
+
+                        'convert to internal SI units - RxiT: mol/s
+                        Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, Rx)
+                        RxiT.Add(rxn.ID, Rxi(rxn.ID) / Math.Abs(rxn.Components(BC).StoichCoeff) * Qr)
+
+                        'calculate total compound production rates - Ri: mol/s
+                        For Each sb As ReactionStoichBase In rxn.Components.Values
+                            If rxn.ReactionType = ReactionType.Kinetic Then
+                                Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / Math.Abs(rxn.Components(BC).StoichCoeff) * Qr
+                            ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
+                                Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / Math.Abs(rxn.Components(BC).StoichCoeff) * Me.CatalystAmount * Qr
+                            End If
+                        Next
+
+
+                    End If
+                Next
+
+                'Calculate composition of mixture in reactor
+                Ri.Values.CopyTo(RComp, 0)
+
+                'Doing molar balance, calculate new component inventory of reactor after time step
+                dB = Nin.AddY(RComp).SubtractY(Nout)
+
+                'Limit time step for fast reactions
+                For i = 0 To NC - 1
+                    If dB(i) < 0 Then
+                        'reaction step is limited to consumption of 50% of component amount in reactor
+                        dRT(i) = -NReac(i) / dB(i) * 0.8
+                        If dRT(i) < dT Then dT = dRT(i)
+                    Else
+                        dRT(i) = 0
+                    End If
+                Next
+
+                dN = dB.MultiplyConstY(dT) 'amount of component change due to reaction during time step dN: mol
+                NReac = NReac.AddY(dN)
+
+                'Time step is over! Now calculate new compositions
+                Y = NReac.NormalizeY 'molar fraction
+                M = Y.MultiplyY(MM).NormalizeY 'mass fraction
+                Mout = M.MultiplyConstY(ims.Phases(0).Properties.massflow) 'total massflow is constant!
+                Nout = Mout.DivideY(MM).MultiplyConstY(1000) 'total molar flow
+
+                'Update iteration variables
+                OErr = IErr
+                IErr = Y.SubtractY(LC).AbsSumY
+                Y.CopyTo(LC, 0)
+                NIter += 1
+
+                dT *= 1.1
+                If dT > ResidenceTime Then dT = ResidenceTime
+
+                'Transfer calculation results to IMS-stream and recalculate stream
+                i = 0
+                For Each Comp In ims.Phases(0).Compounds
+                    Comp.Value.MoleFraction = Y(i)
+                    Comp.Value.MassFraction = M(i)
+                    i += 1
+                Next
+                ims.Phases(0).Properties.molarflow = Nout.SumY
+                ims.Phases(0).Properties.temperature = T
+                ims.Phases(0).Properties.pressure = P
+                ims.SpecType = StreamSpec.Temperature_and_Pressure
+                ims.Calculate(True, True)
+
+
+
+            Loop Until IErr < 0.0000001
+
+            '====================================================
+            '==== Transfer information to output stream =========
+            '====================================================
+            Dim ms As MaterialStream
+            Dim cp As ConnectionPoint
+
+            cp = Me.GraphicObject.OutputConnectors(0)
+            If cp.IsAttached Then
+                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
+                With ms
+                    .SpecType = ims.SpecType
+                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.massfraction = 1
+                    .Phases(0).Properties.temperature = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                    .Phases(0).Properties.pressure = ims.Phases(0).Properties.pressure.GetValueOrDefault
+                    .Phases(0).Properties.enthalpy = ims.Phases(0).Properties.enthalpy.GetValueOrDefault
+
+                    'Dim comp As BaseClasses.Compound
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.MoleFraction = ims.Phases(0).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                        comp.MassFraction = ims.Phases(0).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                        comp.MassFlow = comp.MassFraction.GetValueOrDefault * .Phases(0).Properties.massflow.GetValueOrDefault
+                        comp.MolarFlow = comp.MoleFraction.GetValueOrDefault * .Phases(0).Properties.molarflow.GetValueOrDefault
+                    Next
+
+                    .Phases(0).Properties.pressure = P
+                End With
+            End If
+
+            ResidenceTime = Volume / Q
+
+            'Calculate component conversions
+            For i = 0 To NC - 1
+                If Nin(i) > 0 Then
+                    ComponentConversions(CompNames(i)) = (Nin(i) - Nout(i)) / Nin(i)
+                Else
+                    ComponentConversions(CompNames(i)) = 0
+                End If
+
+            Next
+
+            'Calculate reaction heat of all reactions
+            For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                BC = rxn.BaseReactant
+
+                'calculate heat of reaction
+                'kW (kJ/s) = kJ/kmol * kmol/s
+                DHRi.Add(rxn.ID, rxn.ReactionHeat * RxiT(rxn.ID))
+            Next
+
+        End Sub
+        Public Sub OldCalculate(Optional ByVal args As Object = Nothing)
+
 
             'initial mole flows
             N00 = New Dictionary(Of String, Double)
