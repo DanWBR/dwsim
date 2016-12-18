@@ -126,8 +126,15 @@
   <data name="Button2.ToolTip" xml:space="preserve">
     <value>Load estimates from selected file</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 20</value>
+  </data>
   <data name="Button1.ToolTip" xml:space="preserve">
     <value>Open file with initial estimates</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>378, 51</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>File</value>
@@ -156,6 +163,9 @@
   <data name="ToolStripButton26.ToolTipText" xml:space="preserve">
     <value>Interpolate Liquid Flow (empty cells)</value>
   </data>
+  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 118</value>
+  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
@@ -168,17 +178,14 @@
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Liquid Flow</value>
   </data>
+  <data name="dgvv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>343, 118</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 118</value>
+  </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Variables</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Compositions (Liquid Phase)</value>
-  </data>
-  <data name="FaTabStripItem5.Title" xml:space="preserve">
-    <value>Compositions (Vapor Phase)</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Estimates</value>
   </data>
   <data name="ToolStripButton3.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -198,6 +205,13 @@
   <data name="Column5.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Column5.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Compositions (Liquid Phase)</value>
+  </data>
   <data name="ToolStripButton21.ToolTipText" xml:space="preserve">
     <value>Copy</value>
   </data>
@@ -216,8 +230,20 @@
   <data name="DataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
-  <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Variables</value>
+  <data name="DataGridViewTextBoxColumn6.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="FaTabStripItem5.Title" xml:space="preserve">
+    <value>Compositions (Vapor Phase)</value>
+  </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 139</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>378, 158</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Estimates</value>
   </data>
   <data name="ToolStripButton11.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -246,8 +272,8 @@
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>Steam Flow</value>
   </data>
-  <data name="FaTabStripItem4.Title" xml:space="preserve">
-    <value>Compositions</value>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Variables</value>
   </data>
   <data name="ToolStripButton16.ToolTipText" xml:space="preserve">
     <value>Copy</value>
@@ -267,6 +293,12 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Stage</value>
   </data>
+  <data name="DataGridViewTextBoxColumn5.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="FaTabStripItem4.Title" xml:space="preserve">
+    <value>Compositions</value>
+  </data>
   <data name="sfd1.Filter" xml:space="preserve">
     <value>Distillation Column Initial Estimates File|*.dwcdi</value>
   </data>
@@ -279,7 +311,7 @@
   <data name="ofd1.Title" xml:space="preserve">
     <value>Load Initial Estimates File</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Initial Estimates</value>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 213</value>
   </data>
 </root>
