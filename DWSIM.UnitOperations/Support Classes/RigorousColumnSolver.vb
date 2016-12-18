@@ -1153,7 +1153,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         _solver.MaxFunEvaluations = maxits
                         optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                        Solver = Nothing
+                        _solver = Nothing
                     Case OptimizationMethod.Truncated_Newton
                         Dim variables(n) As OptBoundVariable
                         For i = 0 To n
@@ -3012,11 +3012,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'enhance initial estimates with simplex optimization algorithm
 
-            optsolver = Nothing
             If SimplexPreconditioning Then
 
                 Dim splx As New DotNumerics.Optimization.Simplex
-                optsolver = splx
 
                 Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
                 For Each var In xvar
@@ -3026,6 +3024,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 splx.Tolerance = tol(1)
                 splx.MaxFunEvaluations = 1000
                 xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars), bvars.ToArray)
+
+                splx = Nothing
 
             End If
 
@@ -3056,7 +3056,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     _solver.MaxFunEvaluations = maxits
                     optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                    Solver = Nothing
+                    _solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
                     Dim variables(n) As OptBoundVariable
                     For i = 0 To n

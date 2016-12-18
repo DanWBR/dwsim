@@ -2799,8 +2799,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Sub CheckStatus() Implements Interfaces.IFlowsheet.CheckStatus, IFlowsheetGUI.CheckStatus
-        Application.DoEvents()
-        FlowsheetSolver.FlowsheetSolver.CheckCalculatorStatus()
+        Me.UIThread(Sub()
+                        Application.DoEvents()
+                        FlowsheetSolver.FlowsheetSolver.CheckCalculatorStatus()
+                    End Sub)
     End Sub
 
     Public Function GetTranslatedString(text As String, locale As String) As String Implements Interfaces.IFlowsheet.GetTranslatedString, IFlowsheetGUI.GetTranslatedString
