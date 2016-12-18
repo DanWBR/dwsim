@@ -114,7 +114,7 @@ Public Class EditingForm_ReactorCSTR
 
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
             tbVol.Text = su.Converter.ConvertFromSI(units.volume, .Volume).ToString(nf)
-            tbPDrop.Text = su.Converter.ConvertFromSI(units.distance, .DeltaP.GetValueOrDefault).ToString(nf)
+            tbPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf)
             tbCatLoad.Text = su.Converter.ConvertFromSI(units.mass, .CatalystAmount).ToString(nf)
         
             Dim rsets As String() = .FlowSheet.ReactionSets.Values.Select(Function(m) m.Name).ToArray
