@@ -174,8 +174,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _specs As Dictionary(Of String, SepOps.ColumnSpec)
         Dim llextr As Boolean = False
 
-        Private optsolver As Object
-
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
             Select Case solver
@@ -642,11 +640,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End If
             Next
             If _condtype = Column.condtype.Partial_Condenser Then errors(_el) = (_Vj(0) - Vjj(0))
-
-            If optsolver IsNot Nothing Then
-                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-            End If
 
             Return errors.AbsSqrSumY
 
@@ -1141,7 +1134,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim n As Integer = xvar.Length - 1
 
-                optsolver = Nothing
                 Select Case Solver
                     Case OptimizationMethod.Limited_Memory_BGFS
                         Dim variables(n) As OptBoundVariable
@@ -1151,7 +1143,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New L_BFGS_B
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
-                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                         _solver = Nothing
                     Case OptimizationMethod.Truncated_Newton
@@ -1162,7 +1153,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New TruncatedNewton
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
-                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                         _solver = Nothing
                     Case OptimizationMethod.Simplex
@@ -1173,13 +1163,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New Simplex
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
-                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                         _solver = Nothing
                     Case OptimizationMethod.IPOPT
                         Calculator.CheckParallelPInvoke()
-                        Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing, _
-                        0, 0, AddressOf eval_f, AddressOf eval_g, _
+                        Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
+                        0, 0, AddressOf eval_f, AddressOf eval_g,
                         AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                             problem.AddOption("tol", tol(1))
                             problem.AddOption("max_iter", maxits)
@@ -1206,6 +1195,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End Select
 
                 xvar = initval
+
+                il_err = FunctionValue(xvar)
+
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: inner loop error value = " & il_err, IFlowsheet.MessageType.Information)
 
                 For i = 0 To ns
                     If i = 0 And _condtype <> Column.condtype.Full_Reflux Then
@@ -1471,7 +1464,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver external loop error = " & el_err, IFlowsheet.MessageType.Information)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: outer loop error value = " & el_err, IFlowsheet.MessageType.Information)
 
             Loop Until Abs(el_err) < tol(1) * el
 
@@ -1544,8 +1537,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                              ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
                              ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                              ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
-            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
-            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
             Return True
         End Function
 
@@ -2407,8 +2399,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _Kval()() As Double
         Dim _maxT, _maxvc, _maxlc As Double
 
-        Private optsolver As Object
-
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
             Select Case solver
@@ -2800,11 +2790,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
-            If optsolver IsNot Nothing Then
-                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Newton solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-            End If
-
             Return errors.AbsSqrSumY
 
         End Function
@@ -3044,7 +3029,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim n As Integer = xvar.Length - 1
 
-            optsolver = Nothing
             Select Case Solver
                 Case OptimizationMethod.Limited_Memory_BGFS
                     Dim variables(n) As OptBoundVariable
@@ -3054,7 +3038,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New L_BFGS_B
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
-                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     _solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
@@ -3065,7 +3048,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New TruncatedNewton
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
-                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     _solver = Nothing
                 Case OptimizationMethod.Simplex
@@ -3076,7 +3058,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New Simplex
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
-                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                     _solver = Nothing
                 Case OptimizationMethod.IPOPT
@@ -3114,6 +3095,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             xvar = initval
 
             il_err = FunctionValue(xvar)
+
+            pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
 
             If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
@@ -3211,8 +3194,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                              ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
                              ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                              ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
-            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
-            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
             Return True
         End Function
 
@@ -3293,8 +3275,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
-            _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
-            _gf._pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
 
@@ -3375,8 +3356,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
-            _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
-            _gf._pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
 
