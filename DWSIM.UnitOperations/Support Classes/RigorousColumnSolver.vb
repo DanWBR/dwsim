@@ -1193,16 +1193,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                         SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
 
-                        Dim sproblem As New Russell_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "NS"}
+                        Dim sproblem As New Russell_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "IO"}
                         sproblem.MaxIterations = maxits
                         sproblem.MinIterations = 10
                         sproblem.Tolerance = tol(1)
                         Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                         opt.Problem = sproblem
-                        opt.RequireFeasible = True
                         Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                        If Not sresult.Feasible Then Throw New Exception("Inside-Out: feasible solution not found after " & sresult.Iterations & " iterations.")
 
                         initval = sresult.Parameters
 
@@ -3015,9 +3012,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'enhance initial estimates with simplex optimization algorithm
 
+            optsolver = Nothing
             If SimplexPreconditioning Then
 
                 Dim splx As New DotNumerics.Optimization.Simplex
+                optsolver = splx
 
                 Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
                 For Each var In xvar
@@ -3257,7 +3256,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Overrides ReadOnly Property MinFitness As Double
             Get
-                Return Double.MinValue
+                Return 0.0#
             End Get
         End Property
 
@@ -3339,7 +3338,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Overrides ReadOnly Property MinFitness As Double
             Get
-                Return Double.MinValue
+                Return 0.0#
             End Get
         End Property
 

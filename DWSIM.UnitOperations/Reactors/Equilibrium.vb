@@ -752,18 +752,19 @@ Namespace Reactors
 
                     'Products Enthalpy (kJ/kg * kg/s = kW)
                     Hp = Hr0 + DHr
+                    Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                    tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault, 0)
-                    Dim Tout As Double = tmp.CalculatedTemperature
-
-                    Me.DeltaT = Tout - T
-                    ims.Phases(0).Properties.temperature = Tout
-                    T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                    ims.Phases(0).Properties.enthalpy = Hp
+                    ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
                     ims.Calculate(True, True)
 
+                    Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                    Me.DeltaT = Tout - T
+
                 Case OperationMode.Isothermic
 
+                    ims.SpecType = StreamSpec.Temperature_and_Pressure
                     ims.Calculate(True, True)
 
                     'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -781,6 +782,8 @@ Namespace Reactors
                     Me.DeltaT = Tout - T
 
                     ims.Phases(0).Properties.temperature = Tout
+
+                    ims.SpecType = StreamSpec.Temperature_and_Pressure
 
                     ims.Calculate(True, True)
 

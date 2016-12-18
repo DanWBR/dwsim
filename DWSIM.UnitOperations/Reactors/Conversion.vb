@@ -98,13 +98,11 @@ Namespace Reactors
 
             Dim ims As MaterialStream = DirectCast(FlowSheet.SimulationObjects(Me.GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Name), MaterialStream).Clone
             Dim pp = Me.PropertyPackage
-            Dim ppr As New PropertyPackages.RaoultPropertyPackage()
 
             ims.SetFlowsheet(Me.FlowSheet)
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             pp.CurrentMaterialStream = ims
-            ppr.CurrentMaterialStream = ims
 
             Dim DN As New Dictionary(Of String, Double)
             Dim N0 As New Dictionary(Of String, Double)
@@ -332,22 +330,23 @@ Namespace Reactors
 
                     Case OperationMode.Adiabatic
 
-                        Me.DeltaQ = GetInletEnergyStream(1).EnergyFlow.GetValueOrDefault
+                        Me.DeltaQ = 0.0#
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
                         Hp = Me.DeltaQ.GetValueOrDefault + Hr + Hid_p - Hid_r - DHr
                         Hp = Hp / W
 
-                        tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, Pout, Hp, Tin)
-                        Dim Tout As Double = tmp.CalculatedTemperature
-                        Me.DeltaT = Tout - Tin
-
-                        ims.Phases(0).Properties.temperature = Tout
+                        ims.Phases(0).Properties.enthalpy = Hp
+                        ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
                         ims.Calculate(True, True)
 
+                        Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                        Me.DeltaT = Tout - Tin
+
                     Case OperationMode.Isothermic
 
+                        ims.SpecType = StreamSpec.Temperature_and_Pressure
                         ims.Calculate(True, True)
 
                         'Products Enthalpy (kJ/kg * kg/s = kW)
@@ -365,6 +364,7 @@ Namespace Reactors
                         Me.DeltaT = Tout - Tin
 
                         ims.Phases(0).Properties.temperature = Tout
+                        ims.SpecType = StreamSpec.Temperature_and_Pressure
 
                         ims.Calculate(True, True)
 
@@ -424,6 +424,7 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     Dim comp As BaseClasses.Compound
@@ -443,6 +444,7 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     Dim comp As BaseClasses.Compound

@@ -1089,63 +1089,20 @@ Namespace Reactors
 
                             'Products Enthalpy (kJ/kg * kg/s = kW)
                             Dim Hp = Hr0 - DHr
+                            Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-                            tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault, 0)
-                            Dim Tout As Double = tmp.CalculatedTemperature
+                            ims.Phases(0).Properties.enthalpy = Hp
+                            ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
+                            ims.Calculate(True, True)
+
+                            Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
                             Me.DeltaT = Tout - T
-                            ims.Phases(0).Properties.temperature = Tout
-                            T = ims.Phases(0).Properties.temperature.GetValueOrDefault
-
-                            With pp
-                                .CurrentMaterialStream = ims
-                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                                If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                                Else
-                                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                                End If
-                                If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                Else
-                                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                End If
-                                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                                .DW_CalcOverallProps()
-                                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                                .DW_CalcCompMassFlow(-1)
-                                .DW_CalcCompMolarFlow(-1)
-                                .DW_CalcCompVolFlow(-1)
-                                .DW_CalcVazaoVolumetrica()
-
-                            End With
 
                         Case OperationMode.Isothermic
 
-                            With pp
-                                .CurrentMaterialStream = ims
-                                'Calcular corrente de materia com T e P
-                                '.DW_CalcVazaoMolar()
-                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                                If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                                Else
-                                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                                End If
-                                If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                Else
-                                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                End If
-                                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                                .DW_CalcOverallProps()
-                                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                                .DW_CalcCompMassFlow(-1)
-                                .DW_CalcCompMolarFlow(-1)
-                                .DW_CalcCompVolFlow(-1)
-                                .DW_CalcVazaoVolumetrica()
-
-                            End With
+                            ims.SpecType = StreamSpec.Temperature_and_Pressure
+                            ims.Calculate(True, True)
 
                             'Products Enthalpy (kJ/kg * kg/s = kW)
                             Dim Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
@@ -1163,30 +1120,9 @@ Namespace Reactors
 
                             ims.Phases(0).Properties.temperature = Tout
 
-                            With pp
-                                .CurrentMaterialStream = ims
-                                'Calcular corrente de materia com T e P
-                                '.DW_CalcVazaoMolar()
-                                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                                If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                                Else
-                                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                                End If
-                                If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                Else
-                                    .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                End If
-                                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                                .DW_CalcOverallProps()
-                                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                                .DW_CalcCompMassFlow(-1)
-                                .DW_CalcCompMolarFlow(-1)
-                                .DW_CalcCompVolFlow(-1)
-                                .DW_CalcVazaoVolumetrica()
+                            ims.SpecType = StreamSpec.Temperature_and_Pressure
 
-                            End With
+                            ims.Calculate(True, True)
 
                             'Products Enthalpy (kJ/kg * kg/s = kW)
                             Dim Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
