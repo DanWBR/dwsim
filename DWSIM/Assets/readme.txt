@@ -70,6 +70,8 @@ Version 4.1 Update 7
 
 - [NEW] Enhanced compatibility with Wine on Linux/macOS
 - [CHG] Changed default solver settings
+- [CHG] Rewritten Simultaneous Correction and Inside-Out column solvers
+- [FIX] Fixed heat balance of Conversion, Equilibrium and Gibbs reactors in Adiabatic Mode
 - [FIX] Fixed issues with Flowsheet Block and Rigorous Column editors
 - [FIX] Minor bug fixes and enhancements
 

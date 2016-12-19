@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head>
 
+
 <script src="ContentScripts.js"></script>
 
 <link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
@@ -40,6 +41,8 @@ All of them share the same basic interface, with the following characteristics:
 <li>Supports energy streams representing heat exchangers on each stage</li>
 <li>Definition of pressure and efficiency by stage</li>
 </ul>
+<h3>Solving methods</h3>
+<ul><li>Bubble-Point (BP) method of Wang and Henke (distillation column only) [1]</li><li>Sum-Rates (SR) method of Burningham and Otto (absorption column only)[1]</li><li>Russell&#8217;s Inside-Out (IO) method (all column types)[1]</li><li>Simultaneous Correction (SC) method of Naphtali and Sandholm (all column types)[1]</li></ul>
 <h3>Configuration options
 </h3>
 <br>
@@ -59,20 +62,8 @@ The following table describes the configuration options for each solving method.
  <td>-1 (disabled)</td>
  <td>You can use this option to generate initial estimates for the IO and SC methods.</td>
 </tr>
-<tr>
- <td>IO/SC</td>
- <td>Step for numerical derivatives</td>
- <td>1E-3 to 1E-12</td>
- <td>1E-5</td>
- <td>Controls the value of change in variables in order to calculate the numerical derivatives.</td>
-</tr>
-<tr>
- <td>IO/SC</td>
- <td>Maximum variable change factor</td>
- <td>1</td>
- <td>10</td>
- <td>Limits the changes in variables so the maximum variable change will be (newvalue/oldvalue) = factor.</td>
-</tr>
+
+
 <tr>
  <td>IO</td>
  <td>Adjust Sb scaling factor</td>
@@ -93,69 +84,14 @@ the Kb (reference K) factor for each stage by using the weighted
 average method as suggested by Russell. If this option is set to false,
 the highest K-value is used for the relative volatility calculation for
 each component on each stage.</td>
-</tr>
-<tr>
- <td>IO</td>
- <td>Use identity matrix as the first jacobian inverse</td>
- <td>True/False</td>
- <td>False</td>
- <td>If
-True, tells DWSIM to use an identity matrix as the first estimate of
-the Jacobian inverse, which by its turn is used to update each
-independent variable. If set to False, the first Jacobian is calculated
-using numerical derivatives.</td>
-</tr>
-<tr>
- <td>IO</td>
- <td>Use damping factor</td>
- <td>True/False</td>
- <td>True</td>
- <td>Set this option to True to use a damping factor, which helps to minimize the error on each inner loop iteration.</td>
-</tr>
-<tr>
- <td>SC/IO</td>
- <td>Use Newton&#8217;s method to update variables</td>
- <td>True/False</td>
- <td>False</td>
- <td>The
-variables are normally updated by Broyden&#8217;s method, but setting this
-option to True helps to stabilize the algorithm on hard-to-converge
-situations.</td>
-</tr>
-<tr>
- <td>SC/IO</td>
- <td>Store and reuse jacobian matrix</td>
- <td>True/False</td>
- <td>True</td>
- <td>This
-option is useful when the column must be solved multiple times without
-significant changes in variables, i. e. when using recycled streams as
-column feeds.</td>
-</tr>
-<tr>
- <td>SC</td>
- <td>Damping factor</td>
- <td>0 to 2</td>
- <td>0.5</td>
- <td>Set the damping factor which limits the changes to variables as predicted by the Newton (or Broyden) step.</td>
-</tr>
-<tr>
- <td>SC</td>
- <td>Maximum allowed stage temperature change</td>
- <td>0</td>
- <td>10 K</td>
- <td>Sets the maximum allowable stage temperature change between iterations. Changes higher than this value will not be considered.</td>
-</tr>
-</tbody></table>
+</tr><tr><td>IO/SC</td><td>Optimization Solver</td><td>various</td><td>Simplex (IO), IPOPT (SC)</td><td>Defines the optimization solver to converge the heat and mass balances of the column.</td></tr><tr><td>IO/SC</td><td>Variable Lower/Upper Bound</td><td>-infinite to +infinite</td><td>Log(1E-40) to Log(2) (IO), <br>0 to 2 (SC)</td><td>Defines the bounds for the variables used by the optimization solver.</td></tr><tr><td>SC</td><td>Enable Variable Preconditioning</td><td>True/False</td><td>True</td><td>Performs an early optimization of the variables to be used by the main optimization solver, using the Simplex algorithm;</td></tr>
 
-<br>
-<h3>Solving methods</h3>
-<ul>
-<li>Bubble-Point method of Wang and Henke (distillation column only) [1]</li>
-<li>Sum-Rates method of Burningham and Otto (absorption column only)[1]</li>
-<li>Russell&#8217;s Inside-Out method (all column types)[1]</li>
-<li>Simultaneous Correction method of Naphtali and Sandholm (all column types)[1]</li>
-</ul>
+
+
+
+
+
+</tbody></table>
 
 <br>
 <h3>Results</h3>
