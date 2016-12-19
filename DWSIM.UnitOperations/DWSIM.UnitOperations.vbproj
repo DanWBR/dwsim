@@ -555,6 +555,12 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Pump.de.resx">
       <DependentUpon>EditingForm_Pump.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorConvEqGibbs.de.resx">
+      <DependentUpon>EditingForm_ReactorConvEqGibbs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.de.resx">
+      <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.de.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
@@ -746,6 +752,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Flowsheet_Viewer.en.resx">
       <DependentUpon>EditingForm_Flowsheet_Viewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_ElementMatrixEditor.de.resx">
+      <DependentUpon>EditingForm_Gibbs_ElementMatrixEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.de.resx">
+      <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_HeatExchanger_ViewProfile.de.resx">
       <DependentUpon>EditingForm_HeatExchanger_ViewProfile.vb</DependentUpon>

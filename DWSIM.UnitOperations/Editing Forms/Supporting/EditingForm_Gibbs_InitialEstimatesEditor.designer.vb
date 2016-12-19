@@ -127,7 +127,7 @@ Partial Class EditingForm_Gibbs_InitialEstimatesEditor
     Public WithEvents grid As System.Windows.Forms.DataGridView
     Public WithEvents Button2 As System.Windows.Forms.Button
     Public WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
     Friend WithEvents col1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
 End Class

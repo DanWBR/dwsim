@@ -46,9 +46,9 @@ Partial Class EditingForm_Gibbs_ElementMatrixEditor
         '
         'grid
         '
+        resources.ApplyResources(Me.grid, "grid")
         Me.grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.grid, "grid")
         Me.grid.Name = "grid"
         '
         'Button1
