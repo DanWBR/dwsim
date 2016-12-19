@@ -174,8 +174,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _specs As Dictionary(Of String, SepOps.ColumnSpec)
         Dim llextr As Boolean = False
 
-        Private optsolver As Object
-
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
             Select Case solver
@@ -642,11 +640,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End If
             Next
             If _condtype = Column.condtype.Partial_Condenser Then errors(_el) = (_Vj(0) - Vjj(0))
-
-            If optsolver IsNot Nothing Then
-                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-            End If
 
             Return errors.AbsSqrSumY
 
@@ -1141,7 +1134,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim n As Integer = xvar.Length - 1
 
-                optsolver = Nothing
                 Select Case Solver
                     Case OptimizationMethod.Limited_Memory_BGFS
                         Dim variables(n) As OptBoundVariable
@@ -1151,9 +1143,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New L_BFGS_B
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
-                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                        Solver = Nothing
+                        _solver = Nothing
                     Case OptimizationMethod.Truncated_Newton
                         Dim variables(n) As OptBoundVariable
                         For i = 0 To n
@@ -1162,7 +1153,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New TruncatedNewton
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
-                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                         _solver = Nothing
                     Case OptimizationMethod.Simplex
@@ -1173,13 +1163,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Dim _solver As New Simplex
                         _solver.Tolerance = tol(1)
                         _solver.MaxFunEvaluations = maxits
-                        optsolver = _solver
                         initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                         _solver = Nothing
                     Case OptimizationMethod.IPOPT
                         Calculator.CheckParallelPInvoke()
-                        Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing, _
-                        0, 0, AddressOf eval_f, AddressOf eval_g, _
+                        Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
+                        0, 0, AddressOf eval_f, AddressOf eval_g,
                         AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                             problem.AddOption("tol", tol(1))
                             problem.AddOption("max_iter", maxits)
@@ -1195,8 +1184,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                         Dim sproblem As New Russell_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "IO"}
                         sproblem.MaxIterations = maxits
-                        sproblem.MinIterations = 10
+                        sproblem.MinIterations = maxits / 2
                         sproblem.Tolerance = tol(1)
+                        sproblem.RequireFeasible = True
                         Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                         opt.Problem = sproblem
                         Dim sresult = opt.Optimize(opt.DefaultParameters)
@@ -1206,6 +1196,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 End Select
 
                 xvar = initval
+
+                il_err = FunctionValue(xvar)
+
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: inner loop error value = " & il_err, IFlowsheet.MessageType.Information)
 
                 For i = 0 To ns
                     If i = 0 And _condtype <> Column.condtype.Full_Reflux Then
@@ -1471,15 +1465,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
-                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver external loop error = " & el_err, IFlowsheet.MessageType.Information)
+                pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: outer loop error value = " & el_err, IFlowsheet.MessageType.Information)
 
-            Loop Until Abs(el_err) < tol(1) * el
+            Loop Until Abs(el_err) < tol(1)
 
-            'il_err = FunctionValue(xvar).AbsSqrSumY
+            il_err = FunctionValue(xvar)
 
-            'If Abs(il_err) > tol(0) * ns Then
-            '    pp.CurrentMaterialStream.Flowsheet.ShowMessage("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", IFlowsheet.MessageType.Other)
-            'End If
+            If Abs(il_err) > tol(0) Then
+                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
+            End If
 
             ' finished, de-normalize and return arrays
 
@@ -1495,20 +1489,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 VSS(i) = VSS(i) * maxF
                 Q(i) = Q(i) * maxF
             Next
-
-            'If Not UseNewtonUpdate Then
-            '    For i = 0 To el
-            '        For j = 0 To el
-            '            hesm(i, j) = hes(i, j)
-            '        Next
-            '    Next
-            '    jac = hesm.Inverse
-            '    For i = 0 To el
-            '        For j = 0 To el
-            '            dfdx(i, j) = jac(i, j)
-            '        Next
-            '    Next
-            'End If
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, il_err, ec, el_err, dfdx}
 
@@ -1544,8 +1524,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                              ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
                              ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                              ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
-            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
-            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
             Return True
         End Function
 
@@ -2407,8 +2386,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _Kval()() As Double
         Dim _maxT, _maxvc, _maxlc As Double
 
-        Private optsolver As Object
-
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
             Select Case solver
@@ -2800,11 +2777,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
-            If optsolver IsNot Nothing Then
-                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Newton solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
-                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-            End If
-
             Return errors.AbsSqrSumY
 
         End Function
@@ -2837,19 +2809,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer, _
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array, _
-                                ByVal Q As Array, ByVal L As Array, _
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double, _
-                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double, _
-                                ByVal fc()() As Double, _
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array, _
-                                ByVal condt As DistillationColumn.condtype, _
-                                ByVal eff() As Double, _
-                                ByVal coltype As Column.ColType, _
-                                ByVal pp As PropertyPackages.PropertyPackage, _
-                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec), _
-                                ByVal epsilon As Double, _
+        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
+                                ByVal Q As Array, ByVal L As Array,
+                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal eff() As Double,
+                                ByVal coltype As Column.ColType,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal epsilon As Double,
                                 ByVal Solver As OptimizationMethod,
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal SimplexPreconditioning As Boolean,
@@ -3012,11 +2984,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             'enhance initial estimates with simplex optimization algorithm
 
-            optsolver = Nothing
             If SimplexPreconditioning Then
 
                 Dim splx As New DotNumerics.Optimization.Simplex
-                optsolver = splx
 
                 Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
                 For Each var In xvar
@@ -3026,6 +2996,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 splx.Tolerance = tol(1)
                 splx.MaxFunEvaluations = 1000
                 xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars), bvars.ToArray)
+
+                splx = Nothing
 
             End If
 
@@ -3044,7 +3016,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Dim n As Integer = xvar.Length - 1
 
-            optsolver = Nothing
             Select Case Solver
                 Case OptimizationMethod.Limited_Memory_BGFS
                     Dim variables(n) As OptBoundVariable
@@ -3054,9 +3025,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New L_BFGS_B
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
-                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                    Solver = Nothing
+                    _solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
                     Dim variables(n) As OptBoundVariable
                     For i = 0 To n
@@ -3065,7 +3035,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New TruncatedNewton
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
-                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     _solver = Nothing
                 Case OptimizationMethod.Simplex
@@ -3076,13 +3045,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New Simplex
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
-                    optsolver = _solver
                     initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                     _solver = Nothing
                 Case OptimizationMethod.IPOPT
                     Calculator.CheckParallelPInvoke()
-                    Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing, _
-                    0, 0, AddressOf eval_f, AddressOf eval_g, _
+                    Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
+                    0, 0, AddressOf eval_f, AddressOf eval_g,
                     AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                         problem.AddOption("tol", tol(1))
                         problem.AddOption("max_iter", maxits)
@@ -3098,14 +3066,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim sproblem As New NaphtaliSandholm_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "NS"}
                     sproblem.MaxIterations = maxits
-                    sproblem.MinIterations = 10
+                    sproblem.MinIterations = maxits / 2
                     sproblem.Tolerance = tol(1)
                     Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                     opt.Problem = sproblem
                     opt.RequireFeasible = True
                     Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                    If Not sresult.Feasible Then Throw New Exception("Napthali-Sandholm: feasible solution not found after " & sresult.Iterations & " iterations.")
 
                     initval = sresult.Parameters
 
@@ -3115,10 +3081,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             il_err = FunctionValue(xvar)
 
+            pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
+
             If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
             ElseIf Abs(il_err) > tol(1) Then
-                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 
             For i = 0 To ns
@@ -3197,12 +3165,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Return True
         End Function
 
-        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
          ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
         End Function
 
-        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
         End Function
@@ -3211,8 +3179,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                              ByVal inf_pr As Double, ByVal inf_du As Double, ByVal mu As Double,
                              ByVal d_norm As Double, ByVal regularization_size As Double, ByVal alpha_du As Double,
                              ByVal alpha_pr As Double, ByVal ls_trials As Integer) As Boolean
-            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
-            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iter_count & ": current objective function (error) value = " & obj_value, IFlowsheet.MessageType.Information)
             Return True
         End Function
 
@@ -3293,10 +3260,21 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
-            _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
-            _gf._pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Russell Inside-Out solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
+
+        Public Overrides ReadOnly Property AcceptableFitness As Double
+            Get
+                Return 0.01
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MaxFitness As Double
+            Get
+                Return 10000
+            End Get
+        End Property
 
     End Class
 
@@ -3375,10 +3353,21 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         End Function
 
         Public Overrides Function [Continue](iterations As Integer, fitness As Double, feasible As Boolean) As Boolean
-            _gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
-            _gf._pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
+
+        Public Overrides ReadOnly Property AcceptableFitness As Double
+            Get
+                Return 0.01
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MaxFitness As Double
+            Get
+                Return 10000
+            End Get
+        End Property
 
     End Class
 
