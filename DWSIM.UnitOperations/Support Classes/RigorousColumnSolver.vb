@@ -1467,13 +1467,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 pp.CurrentMaterialStream.Flowsheet.ShowMessage("Inside-Out solver: outer loop error value = " & el_err, IFlowsheet.MessageType.Information)
 
-            Loop Until Abs(el_err) < tol(1) * el
+            Loop Until Abs(el_err) < tol(1)
 
-            'il_err = FunctionValue(xvar).AbsSqrSumY
+            il_err = FunctionValue(xvar)
 
-            'If Abs(il_err) > tol(0) * ns Then
-            '    pp.CurrentMaterialStream.Flowsheet.ShowMessage("The sum of squared absolute errors (internal loop) isn't changing anymore. Final value is " & il_err & ".", IFlowsheet.MessageType.Other)
-            'End If
+            If Abs(il_err) > tol(0) Then
+                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
+            End If
 
             ' finished, de-normalize and return arrays
 
@@ -1489,20 +1489,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 VSS(i) = VSS(i) * maxF
                 Q(i) = Q(i) * maxF
             Next
-
-            'If Not UseNewtonUpdate Then
-            '    For i = 0 To el
-            '        For j = 0 To el
-            '            hesm(i, j) = hes(i, j)
-            '        Next
-            '    Next
-            '    jac = hesm.Inverse
-            '    For i = 0 To el
-            '        For j = 0 To el
-            '            dfdx(i, j) = jac(i, j)
-            '        Next
-            '    Next
-            'End If
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, il_err, ec, el_err, dfdx}
 
@@ -3100,7 +3086,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
             ElseIf Abs(il_err) > tol(1) Then
-                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
+                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 
             For i = 0 To ns
