@@ -1184,8 +1184,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                         Dim sproblem As New Russell_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "IO"}
                         sproblem.MaxIterations = maxits
-                        sproblem.MinIterations = 10
+                        sproblem.MinIterations = maxits / 2
                         sproblem.Tolerance = tol(1)
+                        sproblem.RequireFeasible = True
                         Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                         opt.Problem = sproblem
                         Dim sresult = opt.Optimize(opt.DefaultParameters)
@@ -2822,19 +2823,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer, _
-                                ByVal tol As Array, ByVal F As Array, ByVal V As Array, _
-                                ByVal Q As Array, ByVal L As Array, _
-                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double, _
-                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double, _
-                                ByVal fc()() As Double, _
-                                ByVal HF As Array, ByVal T As Array, ByVal P As Array, _
-                                ByVal condt As DistillationColumn.condtype, _
-                                ByVal eff() As Double, _
-                                ByVal coltype As Column.ColType, _
-                                ByVal pp As PropertyPackages.PropertyPackage, _
-                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec), _
-                                ByVal epsilon As Double, _
+        Public Function Solve(ByVal nc As Integer, ByVal ns As Integer, ByVal maxits As Integer,
+                                ByVal tol As Array, ByVal F As Array, ByVal V As Array,
+                                ByVal Q As Array, ByVal L As Array,
+                                ByVal VSS As Array, ByVal LSS As Array, ByVal Kval()() As Double,
+                                ByVal x()() As Double, ByVal y()() As Double, ByVal z()() As Double,
+                                ByVal fc()() As Double,
+                                ByVal HF As Array, ByVal T As Array, ByVal P As Array,
+                                ByVal condt As DistillationColumn.condtype,
+                                ByVal eff() As Double,
+                                ByVal coltype As Column.ColType,
+                                ByVal pp As PropertyPackages.PropertyPackage,
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal epsilon As Double,
                                 ByVal Solver As OptimizationMethod,
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal SimplexPreconditioning As Boolean,
@@ -3062,8 +3063,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     _solver = Nothing
                 Case OptimizationMethod.IPOPT
                     Calculator.CheckParallelPInvoke()
-                    Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing, _
-                    0, 0, AddressOf eval_f, AddressOf eval_g, _
+                    Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
+                    0, 0, AddressOf eval_f, AddressOf eval_g,
                     AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
                         problem.AddOption("tol", tol(1))
                         problem.AddOption("max_iter", maxits)
@@ -3079,14 +3080,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim sproblem As New NaphtaliSandholm_ColumnProblem(Me) With {._Dim = initval.Length, ._LB = lconstr, ._UB = uconstr, ._INIT = initval, ._Name = "NS"}
                     sproblem.MaxIterations = maxits
-                    sproblem.MinIterations = 10
+                    sproblem.MinIterations = maxits / 2
                     sproblem.Tolerance = tol(1)
                     Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
                     opt.Problem = sproblem
                     opt.RequireFeasible = True
                     Dim sresult = opt.Optimize(opt.DefaultParameters)
-
-                    If Not sresult.Feasible Then Throw New Exception("Napthali-Sandholm: feasible solution not found after " & sresult.Iterations & " iterations.")
 
                     initval = sresult.Parameters
 
@@ -3180,12 +3179,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Return True
         End Function
 
-        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(), _
+        Public Function eval_jac_g(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal m As Integer, ByVal nele_jac As Integer, ByRef iRow As Integer(),
          ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
         End Function
 
-        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(), _
+        Public Function eval_h(ByVal n As Integer, ByVal x As Double(), ByVal new_x As Boolean, ByVal obj_factor As Double, ByVal m As Integer, ByVal lambda As Double(),
          ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer(), ByRef jCol As Integer(), ByRef values As Double()) As Boolean
             Return False
         End Function
@@ -3279,6 +3278,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
 
+        Public Overrides ReadOnly Property AcceptableFitness As Double
+            Get
+                Return 0.01
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MaxFitness As Double
+            Get
+                Return 10000
+            End Get
+        End Property
+
     End Class
 
     Public Class NaphtaliSandholm_ColumnProblem
@@ -3359,6 +3370,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             '_gf._pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver iteration #" & iterations & ": current objective function (error) value = " & fitness, IFlowsheet.MessageType.Information)
             Return MyBase.[Continue](iterations, fitness, feasible)
         End Function
+
+        Public Overrides ReadOnly Property AcceptableFitness As Double
+            Get
+                Return 0.01
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MaxFitness As Double
+            Get
+                Return 10000
+            End Get
+        End Property
 
     End Class
 
