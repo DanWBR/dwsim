@@ -561,6 +561,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_ReactorCSTR.de.resx">
       <DependentUpon>EditingForm_ReactorCSTR.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ReactorPFR.de.resx">
+      <DependentUpon>EditingForm_ReactorPFR.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.de.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
