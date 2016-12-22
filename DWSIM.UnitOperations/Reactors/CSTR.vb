@@ -34,6 +34,7 @@ Namespace Reactors
         Inherits Reactor
 
         Protected m_vol As Double
+        Protected m_headspace As Double
         Protected m_isotemp As Double
 
         Dim C0 As Dictionary(Of String, Double)
@@ -51,7 +52,8 @@ Namespace Reactors
 
         <System.NonSerialized()> Dim ims As MaterialStream
 
-        Public Property ResidenceTime As Double = 0.0#
+        Public Property ResidenceTimeL As Double = 0.0# 'Liquid/Solid residence time
+        Public Property ResidenceTimeV As Double = 0.0# 'Vapour residence time
 
         Public Property IsothermalTemperature() As Double
             Get
@@ -68,6 +70,15 @@ Namespace Reactors
             End Get
             Set(ByVal value As Double)
                 m_vol = value
+            End Set
+        End Property
+
+        Public Property Headspace() As Double
+            Get
+                Return m_headspace
+            End Get
+            Set(ByVal value As Double)
+                m_headspace = value
             End Set
         End Property
 
@@ -113,7 +124,7 @@ Namespace Reactors
             'calculate concentrations in mol/m3 = mol/s * s/m3
             j = 0
             For Each s As String In N00.Keys
-                C(s) = y(j) * ResidenceTime / Volume
+                C(s) = y(j) * ResidenceTimeL / Volume
                 j = j + 1
             Next
 
@@ -284,6 +295,7 @@ Namespace Reactors
             'Hr0 = initial reactant enthalpy
             'Hp = products enthalpy
             Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Q, QL, QS, QV, Qr, m0, Rx, IErr, OErr As Double
+            Dim ReactorMode As Integer = 0 'ReactorMode: 0=no vapour outlet; 1=with vapour outlet
             Dim RP As Integer 'Reaction phase ID
             Dim dT As Double 'Time step in seconds
             Dim i, NIter As Integer
@@ -307,10 +319,17 @@ Namespace Reactors
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
 
+            'Check reactor mode.
+            'Mode 0 (without vapour outlet):    Complete output is leaving through Outlet Stream 1. Phase volumes for reactions depend on phase volumetric fractions.
+            '                                   Residence time liquid (and vapour) is Volume (without head space) divided by total volume flow.
+            'Mode 1 (with vapour outlet):       Vapour phase reactions take place in headspace volume only. Reactor volume is volume of liquid+solid phases
+            '                                   Residence time is calculated for reactor volume and headspace separately
+            If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = 1
+
             'Initialisations
             Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
-            ResidenceTime = Volume / Q
-            dT = ResidenceTime / 10 'initial time step
+            ResidenceTimeL = Volume / Q
+            dT = ResidenceTimeL / 10 'initial time step
 
             i = 0
             For Each comp In ims.Phases(0).Compounds.Values
@@ -361,9 +380,26 @@ Namespace Reactors
 
                 Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
                 QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
-                QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Vapour
+                QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
                 QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
-                ResidenceTime = Volume / Q
+
+                If ReactorMode = 0 Then
+                    ResidenceTimeL = Volume / Q
+                    ResidenceTimeV = ResidenceTimeL
+                Else
+                    If QL + QS > 0 Then
+                        ResidenceTimeL = Volume / (QL + QS)
+                    Else
+                        ResidenceTimeL = 0
+                    End If
+
+                    If QV > 0 Then
+                        ResidenceTimeV = Headspace / QV
+                    Else
+                        ResidenceTimeV = 0
+                    End If
+                End If
+
 
                 DHr = 0.0# 'Enthalpy change due to reactions
                 DHRi.Clear()
@@ -378,20 +414,36 @@ Namespace Reactors
                     If rxn.ReactionType = ReactionType.Kinetic Then
                         convfactors = Me.GetConvFactors(rxn, ims)
 
-                        'Qr = volume of reaction of actual reaction phase
+                        'Qr = volume of reaction of within phase of actual reaction
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Liquid
-                                RP = 1 'overall Liquid
-                                Qr = QL / Q * Me.Volume
+                                RP = 1 'reacting phase = overall Liquid
+                                If ReactorMode = 0 Then
+                                    Qr = QL / Q * Me.Volume
+                                Else
+                                    Qr = QL / (QL + QS) * Me.Volume
+                                End If
+
                             Case PhaseName.Vapor
                                 RP = 2
-                                Qr = QV / Q * Me.Volume
+                                If ReactorMode = 0 Then
+                                    Qr = QV / Q * Me.Volume
+                                Else
+                                    Qr = Me.Headspace
+                                End If
+
                             Case PhaseName.Mixture
                                 RP = 0
-                                Qr = Me.Volume
+                                Qr = Me.Volume + Me.Headspace
+
                             Case PhaseName.Solid
                                 RP = 7
-                                Qr = QS / Q * Me.Volume
+                                If ReactorMode = 0 Then
+                                    Qr = QS / Q * Me.Volume
+                                Else
+                                    Qr = QS / (QL + QS) * Me.Volume
+                                End If
+
                         End Select
 
                         C.Clear()
@@ -478,7 +530,7 @@ Namespace Reactors
 
                 'Accelerate calculations by increasing time step up to residence time as maximum
                 dT *= 1.1
-                If dT > ResidenceTime Then dT = ResidenceTime
+                If dT > ResidenceTimeL Then dT = ResidenceTimeL
 
                 'Transfer calculation results to IMS-stream and recalculate stream
                 i = 0
@@ -512,13 +564,11 @@ Namespace Reactors
             '====================================================
             '==== Transfer information to output stream =========
             '====================================================
-            Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim ms1, ms2 As MaterialStream
 
-            cp = Me.GraphicObject.OutputConnectors(0)
-            If cp.IsAttached Then
-                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
-                With ms
+            If ReactorMode = 0 Then 'only a single outlet
+                ms1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                With ms1
                     .SpecType = ims.SpecType
                     .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault
                     .Phases(0).Properties.massfraction = 1
@@ -535,9 +585,72 @@ Namespace Reactors
 
                     .Phases(0).Properties.pressure = P
                 End With
+            Else
+                'two outlets: Liquid+Solid->Outlet1 / Vapour->Outlet2
+                ms1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
+                ms2 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Name)
+
+                'Vapour outlet
+                With ms2
+                    .SpecType = ims.SpecType
+                    .Phases(0).Properties.massflow = ims.Phases(2).Properties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.massfraction = 1
+                    .Phases(0).Properties.temperature = T
+                    .Phases(0).Properties.pressure = P
+                    .Phases(0).Properties.enthalpy = ims.Phases(2).Properties.enthalpy.GetValueOrDefault
+
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.MoleFraction = ims.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                        comp.MassFraction = ims.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                        comp.MassFlow = comp.MassFraction.GetValueOrDefault * .Phases(2).Properties.massflow.GetValueOrDefault
+                        comp.MolarFlow = comp.MoleFraction.GetValueOrDefault * .Phases(2).Properties.molarflow.GetValueOrDefault
+                    Next
+
+                    .Phases(0).Properties.pressure = P
+                End With
+
+                'Liquid/Solid outlet
+                With ms1
+                    .SpecType = ims.SpecType
+                    .Phases(0).Properties.massflow = ims.Phases(0).Properties.massflow.GetValueOrDefault - ims.Phases(2).Properties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.molarflow = ims.Phases(0).Properties.molarflow.GetValueOrDefault - ims.Phases(2).Properties.molarflow.GetValueOrDefault
+
+                    .Phases(0).Properties.massfraction = 1
+                    .Phases(0).Properties.temperature = T
+                    .Phases(0).Properties.pressure = P
+                    Hp = ims.Phases(3).Properties.enthalpy.GetValueOrDefault * ims.Phases(3).Properties.massflow.GetValueOrDefault
+                    Hp += ims.Phases(7).Properties.enthalpy.GetValueOrDefault * ims.Phases(7).Properties.massflow.GetValueOrDefault
+                    Hp /= .Phases(0).Properties.massflow
+                    .Phases(0).Properties.enthalpy = Hp
+
+                    For Each comp In .Phases(0).Compounds.Values
+                        comp.MassFlow = ims.Phases(0).Compounds(comp.Name).MassFlow - ims.Phases(2).Compounds(comp.Name).MassFlow
+                        comp.MolarFlow = ims.Phases(0).Compounds(comp.Name).MolarFlow - ims.Phases(2).Compounds(comp.Name).MolarFlow
+                        comp.MoleFraction = comp.MolarFlow / ms1.Phases(0).Properties.molarflow
+                        comp.MassFraction = comp.MassFlow / ms1.Phases(0).Properties.massflow
+                    Next
+
+                    .Phases(0).Properties.pressure = P
+                End With
             End If
 
-            ResidenceTime = Volume / Q
+            If ReactorMode = 0 Then
+                ResidenceTimeL = Volume / Q
+                ResidenceTimeV = ResidenceTimeL
+            Else
+                If QL + QS > 0 Then
+                    ResidenceTimeL = Volume / (QL + QS)
+                Else
+                    ResidenceTimeL = 0
+                End If
+
+                If QV > 0 Then
+                    ResidenceTimeV = Headspace / QV
+                Else
+                    ResidenceTimeV = 0
+                End If
+            End If
+
             DeltaT = T - T0
 
             'Calculate component conversions
@@ -755,7 +868,7 @@ Namespace Reactors
                             End Select
                         End If
 
-                        ResidenceTime = Volume / Q
+                        ResidenceTimeL = Volume / Q
 
                         'initial mole flows & concentrations
 
@@ -819,7 +932,7 @@ Namespace Reactors
                     C.Clear()
                     i = 0
                     For Each sb As KeyValuePair(Of String, Double) In C0
-                        C(sb.Key) = vc(i) * ResidenceTime / (Volume)
+                        C(sb.Key) = vc(i) * ResidenceTimeL / (Volume)
                         i = i + 1
                     Next
 
@@ -1092,7 +1205,7 @@ Namespace Reactors
                 Case 0
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
                 Case 1
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTime)
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTimeL)
                 Case 2
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume)
                 Case 3
@@ -1134,7 +1247,7 @@ Namespace Reactors
                 Case 0
                     Me.DeltaP = SystemsOfUnits.Converter.ConvertToSI(su.deltaP, propval)
                 Case 1
-                    Me.ResidenceTime = SystemsOfUnits.Converter.ConvertToSI(su.time, propval)
+                    Me.ResidenceTimeL = SystemsOfUnits.Converter.ConvertToSI(su.time, propval)
                 Case 2
                     Me.Volume = SystemsOfUnits.Converter.ConvertToSI(su.volume, propval)
                 Case 3

@@ -75,8 +75,13 @@ Public Class EditingForm_ReactorCSTR
             cbOutlet1.Items.Clear()
             cbOutlet1.Items.AddRange(mslist)
 
+            cbOutlet2.Items.Clear()
+            cbOutlet2.Items.AddRange(mslist)
+
             If .GraphicObject.InputConnectors(0).IsAttached Then cbInlet1.SelectedItem = .GraphicObject.InputConnectors(0).AttachedConnector.AttachedFrom.Tag
             If .GraphicObject.OutputConnectors(0).IsAttached Then cbOutlet1.SelectedItem = .GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.OutputConnectors(1).IsAttached Then cbOutlet2.SelectedItem = .GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo.Tag
+
 
             Dim eslist As String() = .FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.ObjectType = ObjectType.EnergyStream).Select(Function(m) m.GraphicObject.Tag).ToArray
 
@@ -94,6 +99,10 @@ Public Class EditingForm_ReactorCSTR
             cbVol.Items.Clear()
             cbVol.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.volume).ToArray)
             cbVol.SelectedItem = units.volume
+
+            cbHeadspace.Items.Clear()
+            cbHeadspace.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.volume).ToArray)
+            cbHeadspace.SelectedItem = units.volume
 
             cbPDrop.Items.Clear()
             cbPDrop.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.deltaP).ToArray)
@@ -114,6 +123,7 @@ Public Class EditingForm_ReactorCSTR
 
             tbOutletTemperature.Text = su.Converter.ConvertFromSI(units.temperature, .OutletTemperature).ToString(nf)
             tbVol.Text = su.Converter.ConvertFromSI(units.volume, .Volume).ToString(nf)
+            tbHeadspace.Text = su.Converter.ConvertFromSI(units.volume, .Headspace).ToString(nf)
             tbPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .DeltaP.GetValueOrDefault).ToString(nf)
             tbCatLoad.Text = su.Converter.ConvertFromSI(units.mass, .CatalystAmount).ToString(nf)
         
@@ -131,7 +141,7 @@ Public Class EditingForm_ReactorCSTR
 
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("DeltaT"), su.Converter.ConvertFromSI(units.deltaT, .DeltaT.GetValueOrDefault).ToString(nf), units.deltaT})
             gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RConvPGridItem3"), su.Converter.ConvertFromSI(units.heatflow, .DeltaQ.GetValueOrDefault).ToString(nf), units.heatflow})
-            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTime).ToString(nf), units.time})
+            gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("TKResTime"), su.Converter.ConvertFromSI(units.time, .ResidenceTimeL).ToString(nf), units.time})
       
             'reaction props
 
@@ -216,7 +226,12 @@ Public Class EditingForm_ReactorCSTR
             cbOutlet1.SelectedItem = Nothing
         End If
     End Sub
-
+    Private Sub btnDisconnectOutlet2_Click(sender As Object, e As EventArgs) Handles btnDisconnectOutlet2.Click
+        If cbOutlet2.SelectedItem IsNot Nothing Then
+            SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject, SimObject.GraphicObject.OutputConnectors(1).AttachedConnector.AttachedTo)
+            cbOutlet2.SelectedItem = Nothing
+        End If
+    End Sub
     Private Sub btnDisconnectEnergy_Click(sender As Object, e As EventArgs) Handles btnDisconnectEnergy.Click
         If cbEnergy.SelectedItem IsNot Nothing Then
             SimObject.FlowSheet.DisconnectObjects(SimObject.GraphicObject.InputConnectors(1).AttachedConnector.AttachedFrom, SimObject.GraphicObject)
@@ -295,7 +310,31 @@ Public Class EditingForm_ReactorCSTR
         End If
 
     End Sub
+    Private Sub cbOutlet2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbOutlet2.SelectedIndexChanged
 
+        If Loaded Then
+
+            Dim text As String = cbOutlet2.Text
+
+            If text <> "" Then
+
+                Dim index As Integer = 0
+
+                Dim gobj = SimObject.GraphicObject
+                Dim flowsheet = SimObject.FlowSheet
+
+                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
+                    MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+                If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
+                flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+
+            End If
+
+        End If
+
+    End Sub
     Private Sub cbEnergy_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergy.SelectedIndexChanged
 
         If Loaded Then
@@ -331,7 +370,7 @@ Public Class EditingForm_ReactorCSTR
         If Loaded Then SimObject.GraphicObject.Active = chkActive.Checked
     End Sub
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbCatLoad.TextChanged, tbPDrop.TextChanged, tbVol.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbOutletTemperature.TextChanged, tbCatLoad.TextChanged, tbPDrop.TextChanged, tbVol.TextChanged, tbHeadspace.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -343,7 +382,7 @@ Public Class EditingForm_ReactorCSTR
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbCatLoad.KeyDown, tbPDrop.KeyDown, tbVol.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbCatLoad.KeyDown, tbPDrop.KeyDown, tbVol.KeyDown, tbHeadspace.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -359,6 +398,7 @@ Public Class EditingForm_ReactorCSTR
 
         If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
         If sender Is tbVol Then SimObject.Volume = su.Converter.ConvertToSI(cbVol.SelectedItem.ToString, tbVol.Text)
+        If sender Is tbHeadspace Then SimObject.Headspace = su.Converter.ConvertToSI(cbHeadspace.SelectedItem.ToString, tbHeadspace.Text)
         If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text)
         If sender Is tbCatLoad Then SimObject.CatalystAmount = su.Converter.ConvertToSI(cbCatLoad.SelectedItem.ToString, tbCatLoad.Text)
       
@@ -393,7 +433,7 @@ Public Class EditingForm_ReactorCSTR
 
     End Sub
 
-    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectEnergy.Click
+    Private Sub btnCreateAndConnectInlet1_Click(sender As Object, e As EventArgs) Handles btnCreateAndConnectInlet1.Click, btnCreateAndConnectOutlet1.Click, btnCreateAndConnectEnergy.Click, btnCreateAndConnectOutlet2.Click
 
         Dim sgobj = SimObject.GraphicObject
         Dim fs = SimObject.FlowSheet
@@ -412,6 +452,13 @@ Public Class EditingForm_ReactorCSTR
             If sgobj.OutputConnectors(0).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(0).AttachedConnector.AttachedTo)
             fs.ConnectObjects(sgobj, obj.GraphicObject, 0, 0)
 
+        ElseIf sender Is btnCreateAndConnectOutlet2 Then
+
+            Dim obj = fs.AddObject(ObjectType.MaterialStream, sgobj.OutputConnectors(1).Position.X + 30, sgobj.OutputConnectors(1).Position.Y - 50, "")
+
+            If sgobj.OutputConnectors(1).IsAttached Then fs.DisconnectObjects(sgobj, sgobj.OutputConnectors(1).AttachedConnector.AttachedTo)
+            fs.ConnectObjects(sgobj, obj.GraphicObject, 1, 0)
+
         ElseIf sender Is btnCreateAndConnectEnergy Then
 
             Dim obj = fs.AddObject(ObjectType.EnergyStream, sgobj.InputConnectors(1).Position.X - 50, sgobj.InputConnectors(1).Position.Y + 50, "")
@@ -426,7 +473,7 @@ Public Class EditingForm_ReactorCSTR
 
     End Sub
 
-    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTemp.SelectedIndexChanged, cbCatLoad.SelectedIndexChanged, cbVol.SelectedIndexChanged, cbPDrop.SelectedIndexChanged
+    Private Sub cbTemp_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbTemp.SelectedIndexChanged, cbCatLoad.SelectedIndexChanged, cbVol.SelectedIndexChanged, cbPDrop.SelectedIndexChanged, cbHeadspace.SelectedIndexChanged
 
         If Loaded Then
             Try
@@ -438,6 +485,10 @@ Public Class EditingForm_ReactorCSTR
                     tbVol.Text = su.Converter.Convert(cbVol.SelectedItem.ToString, units.volume, Double.Parse(tbVol.Text)).ToString(nf)
                     cbVol.SelectedItem = units.volume
                     UpdateProps(tbVol)
+                ElseIf sender Is cbHeadspace Then
+                    tbHeadspace.Text = su.Converter.Convert(cbHeadspace.SelectedItem.ToString, units.volume, Double.Parse(tbHeadspace.Text)).ToString(nf)
+                    cbHeadspace.SelectedItem = units.volume
+                    UpdateProps(tbHeadspace)
                 ElseIf sender Is cbPDrop Then
                     tbPDrop.Text = su.Converter.Convert(cbPDrop.SelectedItem.ToString, units.deltaP, Double.Parse(tbPDrop.Text)).ToString(nf)
                     cbPDrop.SelectedItem = units.deltaP
@@ -454,4 +505,5 @@ Public Class EditingForm_ReactorCSTR
 
     End Sub
 
+   
 End Class
