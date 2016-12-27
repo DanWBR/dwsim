@@ -1446,24 +1446,28 @@ Public Class MaterialStreamEditor
 
     Private Sub cbSolvent_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSolvent.SelectedIndexChanged
 
-        MatStream.ReferenceSolvent = cbSolvent.SelectedItem.ToString
+        If Loaded Then
 
-        UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
+            MatStream.ReferenceSolvent = cbSolvent.SelectedItem.ToString
 
-        cbSolvent.Enabled = True
-        For i = 0 To gridInputComposition.RowCount - 1
-            If gridInputComposition.Rows(i).Cells(0).Value = MatStream.ReferenceSolvent Then
-                gridInputComposition.Rows(i).Cells(1).ReadOnly = True
-                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
-            ElseIf MatStream.ReferenceSolvent = "" Then
-                gridInputComposition.Rows(i).Cells(1).ReadOnly = True
-                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
-            Else
-                gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
-                gridInputComposition.Rows(i).Cells(1).ReadOnly = False
-            End If
+            UpdateCompBasis(cbCompBasis, gridInputComposition, MatStream.Phases(0))
 
-        Next
+            cbSolvent.Enabled = True
+            For i = 0 To gridInputComposition.RowCount - 1
+                If gridInputComposition.Rows(i).Cells(0).Value = MatStream.ReferenceSolvent Then
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                ElseIf MatStream.ReferenceSolvent = "" Then
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = True
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Drawing.Color.FromKnownColor(Drawing.KnownColor.Control)
+                Else
+                    gridInputComposition.Rows(i).Cells(1).Style.BackColor = Nothing
+                    gridInputComposition.Rows(i).Cells(1).ReadOnly = False
+                End If
+
+            Next
+
+        End If
 
     End Sub
 

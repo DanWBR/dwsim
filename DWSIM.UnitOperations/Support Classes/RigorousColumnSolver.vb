@@ -2738,7 +2738,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Else
                     H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i)) '/ (Hv(i) - Hl(i))
                 End If
-                H(i) /= (Hv(i) - Hl(i)) / 1000
+                'H(i) /= (Hv(i) - Hl(i)) / 1000
                 Select Case coltype
                     Case Column.ColType.DistillationColumn
                         If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1 / spval1
@@ -2776,6 +2776,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     errors(i * (2 * nc + 1) + j + 1 + nc) = E(i, j)
                 Next
             Next
+
+            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("NS solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
+            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
 
             Return errors.AbsSqrSumY
 
