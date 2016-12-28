@@ -4562,7 +4562,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
         End Sub
 
-        Public Sub DW_ZerarPhaseProps(ByVal Phase As Phase)
+        Public Sub DW_ZerarPhaseProps(ByVal Phase As Phase, Optional ByVal CalculatedOnly As Boolean = False)
 
             Dim phaseID As Integer
 
@@ -4632,8 +4632,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.viscosity = Nothing
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.kinematic_viscosity = Nothing
 
-                    Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = Nothing
-                    Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = Nothing
+                    If Not CalculatedOnly Then
+                        Me.CurrentMaterialStream.Phases(phaseID).Properties.molarflow = Nothing
+                        Me.CurrentMaterialStream.Phases(phaseID).Properties.massflow = Nothing
+                    End If
 
                 End If
 

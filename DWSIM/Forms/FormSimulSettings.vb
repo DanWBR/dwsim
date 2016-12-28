@@ -1186,9 +1186,27 @@ Public Class FormSimulSettings
         Dim proplist As New ArrayList
 
         For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
+            Dim amount As Double = 0#
+            If ms.Phases(0).Properties.massflow.HasValue Then
+                amount = ms.Phases(0).Compounds(tmpcomp.Name).MassFlow.GetValueOrDefault
+                ms.Phases(0).Properties.massflow -= amount
+            End If
+            If ms.Phases(0).Properties.molarflow.HasValue Then
+                amount = ms.Phases(0).Compounds(tmpcomp.Name).MolarFlow.GetValueOrDefault
+                ms.Phases(0).Properties.molarflow -= amount
+            End If
+            If ms.Phases(0).Properties.volumetric_flow.HasValue Then
+                amount = ms.Phases(0).Compounds(tmpcomp.Name).VolumetricFlow.GetValueOrDefault
+                ms.Phases(0).Properties.volumetric_flow -= amount
+            End If
             For Each phase In ms.Phases.Values
                 phase.Compounds.Remove(tmpcomp.Name)
             Next
+            ms.ClearCalculatedProps()
+            ms.NormalizeOverallMoleComposition()
+            ms.NormalizeOverallMassComposition()
+            ms.Calculated = False
+            ms.GraphicObject.Calculated = False
         Next
 
         FrmChild.UpdateOpenEditForms()

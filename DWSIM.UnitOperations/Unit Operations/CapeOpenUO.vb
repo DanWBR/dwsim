@@ -1089,6 +1089,7 @@ Namespace UnitOperations
                         Next
                         Dim ecu As CapeOpen.ECapeUser = myuo
                         Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
+                        Throw ex
                     End Try
                 Else
                     Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": CO Unit not validated. Reason: " + msg, IFlowsheet.MessageType.GeneralError)

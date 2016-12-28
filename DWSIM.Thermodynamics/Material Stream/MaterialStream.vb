@@ -713,6 +713,29 @@ Namespace Streams
         End Sub
 
         ''' <summary>
+        ''' Clear all calculated props on this stream.
+        ''' </summary>
+        Public Sub ClearCalculatedProps()
+            Me.PropertyPackage.CurrentMaterialStream = Me
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid1)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid2)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid3)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Aqueous)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Solid)
+            Me.PropertyPackage.DW_ZerarPhaseProps(PropertyPackages.Phase.Mixture, True)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Vapor)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Liquid)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Liquid1)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Liquid2)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Liquid3)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Aqueous)
+            Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Solid)
+        End Sub
+
+
+        ''' <summary>
         ''' Sets the overall molar composition of the mixture.
         ''' </summary>
         ''' <param name="Vx"></param>
