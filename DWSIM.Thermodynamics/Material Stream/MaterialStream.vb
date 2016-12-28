@@ -1366,7 +1366,7 @@ Namespace Streams
                                     value = Me.Phases(7).Compounds(sname).MassFraction.GetValueOrDefault
                                 End If
                             Else
-                                value = 0
+                                value = Double.MinValue
                             End If
                         Case 102, 106, 107, 108, 109, 110, 149
                             If Me.Phases(0).Compounds.ContainsKey(sname) Then
@@ -1386,7 +1386,7 @@ Namespace Streams
                                     value = Me.Phases(7).Compounds(sname).MoleFraction.GetValueOrDefault
                                 End If
                             Else
-                                value = 0
+                                value = Double.MinValue
                             End If
                         Case 104, 116, 117, 118, 119, 151
                             If Me.Phases(0).Compounds.ContainsKey(sname) Then
@@ -1406,7 +1406,7 @@ Namespace Streams
                                     value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Phases(7).Compounds(sname).MolarFlow.GetValueOrDefault)
                                 End If
                             Else
-                                value = 0
+                                value = Double.MinValue
                             End If
                         Case 105, 121, 122, 123, 124, 125, 152
                             If Me.Phases(0).Compounds.ContainsKey(sname) Then
@@ -1426,7 +1426,7 @@ Namespace Streams
                                     value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Phases(7).Compounds(sname).MassFlow.GetValueOrDefault)
                                 End If
                             Else
-                                value = 0
+                                value = Double.MinValue
                             End If
                         Case 126
                             value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Phases(0).Properties.bubblePressure.GetValueOrDefault)
@@ -1696,7 +1696,7 @@ Namespace Streams
                                     value = Me.Phases(7).Compounds(sname).Molality.GetValueOrDefault
                                 End If
                             Else
-                                value = 0
+                                value = Double.MinValue
                             End If
                         Case 239, 240, 241, 242, 243, 244, 245
                             'Molarities
@@ -1717,7 +1717,7 @@ Namespace Streams
                                     value = cv.ConvertFromSI(su.molar_conc, Me.Phases(7).Compounds(sname).Molarity.GetValueOrDefault)
                                 End If
                             Else
-                                value = 0
+                                value = Double.MinValue
                             End If
                     End Select
 

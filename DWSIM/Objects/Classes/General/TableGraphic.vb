@@ -343,7 +343,7 @@ Namespace GraphicObjects
 
             m_items = New Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
 
-            Dim objectstoremove As New ArrayList
+            Dim objectstoremove, propstoremove As New List(Of String)
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
                 If Flowsheet.GetFlowsheetSimulationObject(kvp.Key) Is Nothing Then
@@ -354,6 +354,25 @@ Namespace GraphicObjects
             For i As Integer = 0 To objectstoremove.Count - 1
                 m_objectlist.Remove(objectstoremove(i))
             Next
+
+            If m_objectfamily = ObjectType.MaterialStream AndAlso m_objectlist.Count > 0 Then
+                For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
+                    If kvp.Value = True Then
+                        Dim myobj As SharedClasses.UnitOperations.BaseClass = Flowsheet.GetFlowsheetSimulationObject(kvp.Key)
+                        If TypeOf myobj Is Thermodynamics.Streams.MaterialStream Then
+                            For Each kvp2 As KeyValuePair(Of String, Boolean) In m_propertylist
+                                If kvp2.Value = True AndAlso myobj.GetPropertyValue(kvp2.Key).Equals(Double.MinValue) Then
+                                    propstoremove.Add(kvp2.Key)
+                                End If
+                            Next
+                        End If
+                        For i As Integer = 0 To propstoremove.Count - 1
+                            m_propertylist.Remove(propstoremove(i))
+                        Next
+                        Exit For
+                    End If
+                Next
+            End If
 
             For Each kvp As KeyValuePair(Of String, Boolean) In m_objectlist
                 If kvp.Value = True Then
@@ -394,7 +413,7 @@ Namespace GraphicObjects
                     If m_sortedlist.Contains(objectstoremove(i)) Then m_sortedlist.Remove(objectstoremove(i))
                 Next
 
-                objectstoremove = New ArrayList
+                objectstoremove = New List(Of String)
 
                 For Each s As String In m_sortedlist
                     If m_objectlist(s) = False Then objectstoremove.Add(s)
@@ -515,6 +534,8 @@ Namespace GraphicObjects
         End Sub
 
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
+
+            Update()
 
             Dim iopacity As Integer
             If SemiTransparent Then
@@ -1000,6 +1021,22 @@ Namespace GraphicObjects
                 VisibleProperties.Remove(item)
             Next
 
+            Dim propstoremove As New List(Of String)
+
+            For Each item In VisibleProperties
+                Dim obj = Flowsheet.SimulationObjects(item.Key)
+                If TypeOf obj Is Streams.MaterialStream Then
+                    For Each p In item.Value
+                        If obj.GetPropertyValue(p).Equals(Double.MinValue) Then
+                            propstoremove.Add(p)
+                        End If
+                    Next
+                    For i As Integer = 0 To propstoremove.Count - 1
+                        item.Value.Remove(propstoremove(i))
+                    Next
+                End If
+            Next
+
             toremove.Clear()
             toremove = Nothing
 
@@ -1337,6 +1374,19 @@ Namespace GraphicObjects
                     Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
 
                     If TypeOf Owner Is CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
+
+                    Dim propstoremove As New List(Of String)
+
+                    If TypeOf Owner Is Streams.MaterialStream Then
+                        For Each p In props
+                            If Owner.GetPropertyValue(p).Equals(Double.MinValue) Then
+                                propstoremove.Add(p)
+                            End If
+                        Next
+                        For i As Integer = 0 To propstoremove.Count - 1
+                            props.Remove(propstoremove(i))
+                        Next
+                    End If
 
                     Dim propstring, propval, propunit As String, pval0 As Object
 

@@ -1704,14 +1704,6 @@ Public Class FormMain
 
         form.FrmStSim1.Init(True)
 
-        'Master Property Tables
-
-        For Each g As GraphicObject In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
-            If g.ObjectType = ObjectType.GO_MasterTable Then
-                CType(g, MasterTableGraphic).Update()
-            End If
-        Next
-
         Try
             form.FormSpreadsheet.EvaluateAll()
             form.FormSpreadsheet.EvaluateAll()

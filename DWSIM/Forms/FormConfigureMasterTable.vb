@@ -4,10 +4,6 @@
 
     Private Loaded As Boolean = False
 
-    Private Sub FormConfigureMasterTable_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        Table.Update()
-    End Sub
-
     Private Sub FormConfigureMasterTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cbObjectType.Items.AddRange([Enum].GetNames(Table.ObjectType.GetType))

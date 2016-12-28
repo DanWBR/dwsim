@@ -3012,12 +3012,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
                             Me.FormWatch.UpdateList()
 
-                            For Each g As IGraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects
-                                If g.ObjectType = ObjectType.GO_MasterTable Then
-                                    CType(g, MasterTableGraphic).Update()
-                                End If
-                            Next
-
                             If Not Me.FormSpreadsheet Is Nothing Then
                                 If Me.FormSpreadsheet.chkUpdate.Checked Then
                                     Me.FormSpreadsheet.EvaluateAll()
