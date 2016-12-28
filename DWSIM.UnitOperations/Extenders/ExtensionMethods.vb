@@ -1,6 +1,6 @@
 Module Extensions
 
-    <System.Runtime.CompilerServices.Extension()> _
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToArrayString(vector As Double()) As String
 
         Dim retstr As String = "{ "

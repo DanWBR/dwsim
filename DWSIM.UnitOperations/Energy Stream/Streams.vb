@@ -32,11 +32,14 @@ Imports DWSIM.SharedClasses
 
 Namespace Streams
 
-    <System.Serializable()> Public Class EnergyStream
+    <System.Serializable()> <ComVisible(True)> Public Class EnergyStream
 
         Inherits BaseClass
 
         Implements ICapeIdentification, ICapeCollection
+
+        'CAPE-OPEN Error Interfaces
+        Implements ECapeUser, ECapeUnknown, ECapeRoot
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_EnergyStream
 
@@ -83,7 +86,7 @@ Namespace Streams
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overrides Property EnergyFlow() As Nullable(Of Double)
+        Public Overrides Property EnergyFlow() As Double?
 
         Public Sub Assign(ByVal ASource As EnergyStream)
 
@@ -245,6 +248,69 @@ Namespace Streams
                 Return True
             End Get
         End Property
+
+#Region "    CAPE-OPEN Error Interfaces"
+
+        Sub ThrowCAPEException(ByRef ex As Exception, ByVal name As String, ByVal description As String, ByVal interf As String, ByVal moreinfo As String, ByVal operation As String, ByVal scope As String, ByVal code As Integer)
+
+            _code = code
+            _description = description
+            _interfacename = interf
+            _moreinfo = moreinfo
+            _operation = operation
+            _scope = scope
+
+            Throw New CapeComputationException(ex.Message.ToString, ex)
+
+        End Sub
+
+        Private _description, _interfacename, _moreinfo, _operation, _scope As String, _code As Integer
+
+        Public ReadOnly Property Name2() As String Implements CapeOpen.ECapeRoot.Name
+            Get
+                Return Me.Name
+            End Get
+        End Property
+
+        Public ReadOnly Property code() As Integer Implements CapeOpen.ECapeUser.code
+            Get
+                Return _code
+            End Get
+        End Property
+
+        Public ReadOnly Property description() As String Implements CapeOpen.ECapeUser.description
+            Get
+                Return _description
+            End Get
+        End Property
+
+        Public ReadOnly Property interfaceName() As String Implements CapeOpen.ECapeUser.interfaceName
+            Get
+                Return _interfacename
+            End Get
+        End Property
+
+        Public ReadOnly Property moreInfo() As String Implements CapeOpen.ECapeUser.moreInfo
+            Get
+                Return _moreinfo
+            End Get
+        End Property
+
+        Public ReadOnly Property operation() As String Implements CapeOpen.ECapeUser.operation
+            Get
+                Return _operation
+            End Get
+        End Property
+
+        Public ReadOnly Property scope() As String Implements CapeOpen.ECapeUser.scope
+            Get
+                Return _scope
+            End Get
+        End Property
+
+#End Region
+
+
     End Class
 
 End Namespace

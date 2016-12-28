@@ -293,7 +293,7 @@
     <value>Condenser Pressure</value>
   </data>
   <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 218</value>
+    <value>413, 218</value>
   </data>
   <data name="TabCondenser.Text" xml:space="preserve">
     <value>Condenser</value>
@@ -344,7 +344,7 @@
     <value>Reboiler Pressure</value>
   </data>
   <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 218</value>
+    <value>413, 218</value>
   </data>
   <data name="TabReboiler.Text" xml:space="preserve">
     <value>Reboiler</value>
@@ -365,7 +365,7 @@
     <value>Connections</value>
   </data>
   <data name="TabStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 256</value>
+    <value>413, 256</value>
   </data>
   <data name="TabStages.Text" xml:space="preserve">
     <value>Stages</value>
@@ -398,7 +398,7 @@
     <value>Use initial estimates for stage temperature</value>
   </data>
   <data name="TabInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 256</value>
+    <value>413, 256</value>
   </data>
   <data name="TabInitialEstimates.Text" xml:space="preserve">
     <value>Initial Estimates</value>
@@ -410,7 +410,7 @@
     <value>Stop at Iteration #</value>
   </data>
   <data name="TabSolverBP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 256</value>
+    <value>413, 256</value>
   </data>
   <data name="cbMinMethodNS.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 21</value>
@@ -440,7 +440,7 @@
     <value>Variable Lower Bound</value>
   </data>
   <data name="TabSolverNS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 256</value>
+    <value>413, 256</value>
   </data>
   <data name="cbMinMethodIO.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 21</value>
@@ -476,7 +476,7 @@
     <value>Adjust Sb Scaling Factor</value>
   </data>
   <data name="TabSolverIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 256</value>
+    <value>413, 256</value>
   </data>
   <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
     <value>404, 282</value>
@@ -486,6 +486,10 @@
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Column Configuration</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GroupBox6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="btnResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 30</value>
@@ -521,6 +525,6 @@
     <value>Results</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 878</value>
+    <value>439, 765</value>
   </data>
 </root>

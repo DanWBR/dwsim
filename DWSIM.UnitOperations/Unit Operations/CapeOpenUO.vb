@@ -1131,13 +1131,30 @@ Namespace UnitOperations
             If Not Me._params Is Nothing Then
                 For Each p As ICapeIdentification In Me._params
                     If p.ComponentName = prop Then
-                        Return CType(p, ICapeParameter).value
-                        Exit Function
-                    End If
+                        Dim val As Object = Nothing
+                        If TypeOf p Is Auxiliary.CapeOpen.CapeArrayParameter Then
+                            val = DirectCast(p, Auxiliary.CapeOpen.CapeArrayParameter).value
+                        Else
+                            val = DirectCast(p, ICapeParameter).value
+                        End If
+                        If Not val Is Nothing Then
+                            If TypeOf p Is Auxiliary.CapeOpen.CapeArrayParameter Then
+                                If TryCast(val, Object()) IsNot Nothing Then
+                                    Return DirectCast(val, Object()).ToArrayString
+                                Else
+                                    Return val.ToString
+                                End If
+                            Else
+                                Return CType(p, ICapeParameter).value.ToString
+                            End If
+                        Else
+                            Return ""
+                            End If
+                        End If
                 Next
-                Return Nothing
+                Return ""
             Else
-                Return Nothing
+                Return ""
             End If
         End Function
 
