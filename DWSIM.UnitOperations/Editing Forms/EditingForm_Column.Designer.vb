@@ -915,6 +915,7 @@ Partial Class EditingForm_Column
         Me.TabPage1.ResumeLayout(False)
         CType(Me.gridResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox

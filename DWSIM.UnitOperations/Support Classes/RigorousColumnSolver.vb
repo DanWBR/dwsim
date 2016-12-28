@@ -2411,6 +2411,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionValue(ByVal x() As Double) As Double
 
+            If x.Where(Function(xi) xi < 0#).Count > 0 Then
+                Return x.AbsSqrSumY * 100
+            End If
+
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
 
@@ -2786,7 +2790,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.0000000001
+            Dim epsilon As Double = 0.01
 
             Dim f2, f3 As Double
             Dim g(x.Length - 1), x1(x.Length - 1) As Double
@@ -2935,7 +2939,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim VSSj(ns), LSSj(ns), Hv(ns), Hl(ns), Hv0(ns), Hl0(ns) As Double
             Dim sumvkj(ns), sumlkj(ns) As Double
             Dim fxvar((ns + 1) * (2 * nc + 1) - 1) As Double
-            Dim xvar((ns + 1) * (2 * nc + 1) - 1) As Double
+            Dim xvar((ns + 1) * (2 * nc + 1) - 1), lb((ns + 1) * (2 * nc + 1) - 1), ub((ns + 1) * (2 * nc + 1) - 1) As Double
             Dim dxvar((ns + 1) * (2 * nc + 1) - 1) As Double
             Dim dFdXvar((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
             Dim hes((ns + 1) * (2 * nc + 1) - 1, (ns + 1) * (2 * nc + 1) - 1) As Double
@@ -2979,9 +2983,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To ns
                 xvar(i * (2 * nc + 1)) = Tj(i) / _maxT
+                lb(i * (2 * nc + 1)) = 0.3
+                ub(i * (2 * nc + 1)) = 2.0
                 For j = 0 To nc - 1
                     xvar(i * (2 * nc + 1) + j + 1) = vc(i)(j) / _maxvc
+                    lb(i * (2 * nc + 1) + j + 1) = LowerBound
+                    ub(i * (2 * nc + 1) + j + 1) = UpperBound
                     xvar(i * (2 * nc + 1) + j + 1 + nc) = lc(i)(j) / _maxlc
+                    lb(i * (2 * nc + 1) + j + 1 + nc) = LowerBound
+                    ub(i * (2 * nc + 1) + j + 1 + nc) = UpperBound
                 Next
             Next
 
@@ -2992,8 +3002,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Dim splx As New DotNumerics.Optimization.Simplex
 
                 Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
-                For Each var In xvar
-                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable(var, LowerBound, UpperBound))
+                For i = 0 To xvar.Length - 1
+                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable(xvar(i), lb(i), ub(i)))
                 Next
 
                 splx.Tolerance = tol(1)
@@ -3013,8 +3023,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             For i = 0 To xvar.Length - 1
                 initval(i) = xvar(i)
-                lconstr(i) = LowerBound
-                uconstr(i) = UpperBound
+                lconstr(i) = lb(i)
+                uconstr(i) = ub(i)
             Next
 
             Dim n As Integer = xvar.Length - 1
