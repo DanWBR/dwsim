@@ -43,7 +43,9 @@ Namespace Streams
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_EnergyStream
 
-        Protected WithEvents m_work As CapeOpen.RealParameter
+        Private WithEvents m_work As CapeOpen.RealParameter
+
+        Private initialized As Boolean = False
 
 #Region "   CAPE-OPEN ICapeIdentification"
 
@@ -71,6 +73,7 @@ Namespace Streams
         Sub Init()
 
             If Type.GetType("Mono.Runtime") Is Nothing Then CreateParamCol()
+            initialized = True
 
         End Sub
 
@@ -183,6 +186,7 @@ Namespace Streams
         End Function
 
         Public Function Item(ByVal index As Object) As Object Implements CapeOpen.ICapeCollection.Item
+            If Not initialized Then Init()
             Return m_work
         End Function
 
