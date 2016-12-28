@@ -950,9 +950,7 @@ Public Class FormPureComp
 
         For Each mat As Streams.MaterialStream In Me.Flowsheet.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
             For Each p As BaseClasses.Phase In mat.Phases.Values
-                For Each subst As BaseClasses.Compound In p.Compounds.Values
-                    subst.ConstantProperties = constprop
-                Next
+                p.Compounds(constprop.Name).ConstantProperties = constprop
             Next
         Next
 
