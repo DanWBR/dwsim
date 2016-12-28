@@ -102,8 +102,6 @@ Public Class FormDataRegression
 
         Dim mycase As New RegressionCase
 
-        Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.CurrentUICulture
-
         With mycase
             .comp1 = Me.cbCompound1.SelectedItem.ToString
             .comp2 = Me.cbCompound2.SelectedItem.ToString
@@ -124,14 +122,14 @@ Public Class FormDataRegression
             For Each r As DataGridViewRow In Me.GridExpData.Rows
                 If r.Index < Me.GridExpData.Rows.Count - 1 Then
                     If r.Cells("check").Value Then .checkp.Add(True) Else .checkp.Add(False)
-                    If Double.TryParse(r.Cells("colx1").Value, New Double) Then .x1p.Add(Double.Parse(r.Cells("colx1").Value, ci)) Else .x1p.Add(0.0#)
-                    If Double.TryParse(r.Cells("colx2").Value, New Double) Then .x2p.Add(Double.Parse(r.Cells("colx2").Value, ci)) Else .x2p.Add(0.0#)
-                    If Double.TryParse(r.Cells("coly1").Value, New Double) Then .yp.Add(Double.Parse(r.Cells("coly1").Value, ci)) Else .yp.Add(0.0#)
-                    If Double.TryParse(r.Cells("colt").Value, New Double) Then .tp.Add(Double.Parse(r.Cells("colt").Value, ci)) Else .tp.Add(0.0#)
-                    If Double.TryParse(r.Cells("colp").Value, New Double) Then .pp.Add(Double.Parse(r.Cells("colp").Value, ci)) Else .pp.Add(0.0#)
+                    If Double.TryParse(r.Cells("colx1").Value, New Double) Then .x1p.Add(Double.Parse(r.Cells("colx1").Value)) Else .x1p.Add(0.0#)
+                    If Double.TryParse(r.Cells("colx2").Value, New Double) Then .x2p.Add(Double.Parse(r.Cells("colx2").Value)) Else .x2p.Add(0.0#)
+                    If Double.TryParse(r.Cells("coly1").Value, New Double) Then .yp.Add(Double.Parse(r.Cells("coly1").Value)) Else .yp.Add(0.0#)
+                    If Double.TryParse(r.Cells("colt").Value, New Double) Then .tp.Add(Double.Parse(r.Cells("colt").Value)) Else .tp.Add(0.0#)
+                    If Double.TryParse(r.Cells("colp").Value, New Double) Then .pp.Add(Double.Parse(r.Cells("colp").Value)) Else .pp.Add(0.0#)
                     Try
-                        If Double.TryParse(r.Cells("colts").Value, New Double) Then .ts.Add(Double.Parse(r.Cells("colts").Value, ci)) Else .ts.Add(0.0#)
-                        If Double.TryParse(r.Cells("coltl").Value, New Double) Then .tl.Add(Double.Parse(r.Cells("coltl").Value, ci)) Else .tl.Add(0.0#)
+                        If Double.TryParse(r.Cells("colts").Value, New Double) Then .ts.Add(Double.Parse(r.Cells("colts").Value)) Else .ts.Add(0.0#)
+                        If Double.TryParse(r.Cells("coltl").Value, New Double) Then .tl.Add(Double.Parse(r.Cells("coltl").Value)) Else .tl.Add(0.0#)
                     Catch ex As Exception
                         .ts.Add(0.0#)
                         .tl.Add(0.0#)
