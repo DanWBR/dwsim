@@ -2386,6 +2386,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _Kval()() As Double
         Dim _maxT, _maxvc, _maxlc As Double
 
+        Private grad As Boolean = False
+
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
             Select Case solver
@@ -2409,7 +2411,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         End Function
 
-        Public Function FunctionValue(ByVal x() As Double) As Double
+        Public Function FunctionValue(ByVal xl() As Double) As Double
+
+            Dim x As Double() = xl.ExpY
 
             If x.Where(Function(xi) xi < 0#).Count > 0 Then
                 Return x.AbsSqrSumY * 100
@@ -2497,7 +2501,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     yc(i)(j) = vc(i)(j) / sumvkj(i)
                 Next
                 For j = 0 To nc - 1
-                    If sumlkj(i) > 0 Then xc(i)(j) = lc(i)(j) / sumlkj(i) Else xc(i)(j) = yc(i)(j) / (_pp.AUX_PVAPi(j, Tj(i)) / P(i))
+                    If sumlkj(i) > 0.0# Then xc(i)(j) = lc(i)(j) / sumlkj(i) Else xc(i)(j) = yc(i)(j) / (_pp.AUX_PVAPi(j, Tj(i)) / P(i))
                 Next
             Next
 
@@ -2573,19 +2577,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                          Sub(ipar)
-                                                             If Vj(ipar) <> 0 Then
+                                                             If Vj(ipar) <> 0# Then
                                                                  If llextr Then
                                                                      Hv(ipar) = _pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(ipar)) / 1000
                                                                  Else
                                                                      Hv(ipar) = _pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * _pp.AUX_MMM(yc(ipar)) / 1000
                                                                  End If
                                                              Else
-                                                                 Hv(ipar) = 0
+                                                                 Hv(ipar) = 0#
                                                              End If
                                                              If Lj(ipar) <> 0 Then
                                                                  Hl(ipar) = _pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _pp.AUX_MMM(xc(ipar)) / 1000
                                                              Else
-                                                                 Hl(ipar) = 0
+                                                                 Hl(ipar) = 0#
                                                              End If
                                                          End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
@@ -2736,13 +2740,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     End If
                 Next
                 If i = 0 Then
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i)) '/ (Hv(i) - Hl(i))
+                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i))
                 ElseIf i = ns Then
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i) - Q(i)) '/ (Hv(i) - Hl(i))
+                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - HF(i) * F(i) - Q(i))
                 Else
-                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i)) '/ (Hv(i) - Hl(i))
+                    H(i) = (Hl(i) * (1 + Sl(i)) * sumlkj(i) + Hv(i) * (1 + Sv(i)) * sumvkj(i) - Hl(i - 1) * sumlkj(i - 1) - Hv(i + 1) * sumvkj(i + 1) - HF(i) * F(i) - Q(i))
                 End If
-                'H(i) /= (Hv(i) - Hl(i)) / 1000
+                H(i) /= 1000
                 Select Case coltype
                     Case Column.ColType.DistillationColumn
                         If _condtype <> Column.condtype.Full_Reflux Then H(0) = spfval1 / spval1
@@ -2776,13 +2780,19 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             For i = 0 To ns
                 errors(i * (2 * nc + 1)) = H(i)
                 For j = 0 To nc - 1
-                    errors(i * (2 * nc + 1) + j + 1) = M(i, j)
+                    errors(i * (2 * nc + 1) + j + 1) = M(i, j) / zc(i).SumY
                     errors(i * (2 * nc + 1) + j + 1 + nc) = E(i, j)
                 Next
             Next
 
-            _pp.CurrentMaterialStream.Flowsheet.ShowMessage("NS solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
-            _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            If Not grad Then
+                _pp.CurrentMaterialStream.Flowsheet.ShowMessage("NS solver: current objective function (error) value = " & errors.AbsSqrSumY, IFlowsheet.MessageType.Information)
+                _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+            End If
+
+            For i = 0 To errors.Length - 1
+                If Double.IsNaN(errors(i)) Or Double.IsInfinity(errors(i)) Then errors(i) = 10000000000.0
+            Next
 
             Return errors.AbsSqrSumY
 
@@ -2790,7 +2800,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.01
+            grad = True
+
+            Dim epsilon As Double = 0.00000001
 
             Dim f2, f3 As Double
             Dim g(x.Length - 1), x1(x.Length - 1) As Double
@@ -2811,6 +2823,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Next
 
             _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+
+            grad = False
 
             Return g
 
@@ -2981,6 +2995,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 If MathEx.Common.Max(lc(i)) > _maxlc Then _maxlc = MathEx.Common.Max(lc(i))
             Next
 
+            If LowerBound = 0# Then LowerBound = 1.0E-20
+            If UpperBound = 0# Then UpperBound = 1.0E-20
+
             For i = 0 To ns
                 xvar(i * (2 * nc + 1)) = Tj(i) / _maxT
                 lb(i * (2 * nc + 1)) = 0.3
@@ -2995,6 +3012,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
             Next
 
+            grad = False
+
             'enhance initial estimates with simplex optimization algorithm
 
             If SimplexPreconditioning Then
@@ -3003,12 +3022,12 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim bvars As New List(Of DotNumerics.Optimization.OptBoundVariable)
                 For i = 0 To xvar.Length - 1
-                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable(xvar(i), lb(i), ub(i)))
+                    bvars.Add(New DotNumerics.Optimization.OptBoundVariable(Log(xvar(i)), Log(lb(i)), Log(ub(i))))
                 Next
 
                 splx.Tolerance = tol(1)
                 splx.MaxFunEvaluations = 1000
-                xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars), bvars.ToArray)
+                xvar = splx.ComputeMin(Function(xvars() As Double) FunctionValue(xvars), bvars.ToArray).ExpY
 
                 splx = Nothing
 
@@ -3022,9 +3041,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim uconstr(xvar.Length - 1) As Double
 
             For i = 0 To xvar.Length - 1
-                initval(i) = xvar(i)
-                lconstr(i) = lb(i)
-                uconstr(i) = ub(i)
+                initval(i) = Log(xvar(i))
+                lconstr(i) = Log(lb(i))
+                uconstr(i) = Log(ub(i))
             Next
 
             Dim n As Integer = xvar.Length - 1
@@ -3090,15 +3109,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             End Select
 
-            xvar = initval
+            xvar = initval.ExpY
 
-            il_err = FunctionValue(xvar)
+            il_err = FunctionValue(xvar.LogY)
 
             pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
 
-            If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
-                Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
-            ElseIf Abs(il_err) > tol(1) Then
+            If Abs(il_err) > tol(1) Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 

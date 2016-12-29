@@ -1445,7 +1445,7 @@ Namespace UnitOperations
 
         'new solver parameters
 
-        Public Property NS_Solver As OptimizationMethod = OptimizationMethod.IPOPT
+        Public Property NS_Solver As OptimizationMethod = OptimizationMethod.Truncated_Newton
         Public Property NS_SimplexPreconditioning As Boolean = True
         Public Property NS_LowerBound As Double = 0.0#
         Public Property NS_UpperBound As Double = 2.0#
