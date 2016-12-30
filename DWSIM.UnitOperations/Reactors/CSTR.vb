@@ -28,10 +28,15 @@ Imports DWSIM.Thermodynamics
 Imports DWSIM.MathOps
 
 Namespace Reactors
-
+    
     <System.Serializable()> Public Class Reactor_CSTR
 
         Inherits Reactor
+
+        Public Enum EReactorMode
+            SingleOutlet
+            TwoOutlets
+        End Enum
 
         Protected m_vol As Double
         Protected m_headspace As Double
@@ -295,15 +300,16 @@ Namespace Reactors
             'Hr0 = initial reactant enthalpy
             'Hp = products enthalpy
             Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Q, QL, QS, QV, Qr, m0, Rx, IErr, OErr As Double
-            Dim ReactorMode As Integer = 0 'ReactorMode: 0=no vapour outlet; 1=with vapour outlet
+            Dim ReactorMode As EReactorMode = EReactorMode.SingleOutlet
             Dim RP As Integer 'Reaction phase ID
-            Dim dT As Double 'Time step in seconds
+            Dim dT, MaxChange As Double 'Time step in seconds; MaxChange = max relative change of a component
             Dim i, NIter As Integer
             Dim NC As Integer = ims.Phases(0).Compounds.Count 'Number of components
             Dim CompNames(NC - 1) As String 'ComponentNames
             Dim MM(NC - 1) As Double 'Mol masses of components
             Dim LC(NC - 1) As Double 'Composition of last iteration
             Dim Nin(NC - 1), Nout(NC - 1), NReac(NC - 1), Mout(NC - 1), RComp(NC - 1), dB(NC - 1), dN(NC - 1), dRT(NC - 1), Y(NC - 1), M(NC - 1) As Double
+            Dim TR(NC - 1) As Double
 
             m_conversions = New Dictionary(Of String, Double) 'Conversion of reactions
             m_componentconversions = New Dictionary(Of String, Double) 'Conversion of components
@@ -311,6 +317,7 @@ Namespace Reactors
             Dim conv As New SystemsOfUnits.Converter
             Dim rxn As Reaction
 
+            'Check streams beeing attached
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedematriac16"))
             ElseIf Not Me.GraphicObject.OutputConnectors(0).IsAttached Then
@@ -319,31 +326,61 @@ Namespace Reactors
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
 
+            'Check Basecomponents and reaction volume
+            i = 0
+            For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                BC = rxn.BaseReactant
+                If BC = "" Then Throw New Exception("No Base Component defined for reaction " & rxn.Name)
+
+                'Check if reaction has a volume 
+                If rxn.ReactionPhase = PhaseName.Liquid And Volume > 0 Then i = 1
+                If rxn.ReactionPhase = PhaseName.Vapor And Headspace > 0 Then i = 1
+                If rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace > 0 Then i = 1
+            Next
+            If i = 0 Then Throw New Exception("No reactor volume defined")
+
             'Check reactor mode.
             'Mode 0 (without vapour outlet):    Complete output is leaving through Outlet Stream 1. Phase volumes for reactions depend on phase volumetric fractions.
             '                                   Residence time liquid (and vapour) is Volume (without head space) divided by total volume flow.
             'Mode 1 (with vapour outlet):       Vapour phase reactions take place in headspace volume only. Reactor volume is volume of liquid+solid phases
             '                                   Residence time is calculated for reactor volume and headspace separately
-            If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = 1
+            If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = EReactorMode.TwoOutlets
 
             'Initialisations
             Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
-            ResidenceTimeL = Volume / Q
-            dT = ResidenceTimeL / 10 'initial time step
+            QV = ims.Phases(2).Properties.volumetric_flow.GetValueOrDefault 'Vapour
+            QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
+            QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
-            i = 0
-            For Each comp In ims.Phases(0).Compounds.Values
-                'N00.Add(comp.Name, comp.MolarFlow)
-                Nin(i) = comp.MolarFlow
-                Nout(i) = comp.MolarFlow
-                NReac(i) = Me.Volume * comp.Molarity  'total number of moles in reactor
-                i += 1
-            Next
+            If QL > 0 Then
+                ResidenceTimeL = Volume / QL
+            Else
+                ResidenceTimeL = 0
+            End If
+            If ReactorMode = EReactorMode.TwoOutlets And QV > 0 Then
+                ResidenceTimeV = Headspace / QV
+            Else
+                ResidenceTimeV = ResidenceTimeL
+            End If
+            dT = ResidenceTimeL / 10 'initial time step
 
             CompNames = ims.PropertyPackage.RET_VNAMES 'Component names
             MM = ims.PropertyPackage.RET_VMM 'Component molar wheights
             LC = ims.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture) 'Component molar fractions
 
+            'Calculate initial inventory of components in reactor
+            For i = 0 To NC - 1
+                Nin(i) = ims.Phases(0).Compounds(CompNames(i)).MolarFlow
+                Nout(i) = Nin(i)
+                If ReactorMode = EReactorMode.SingleOutlet Then
+                    NReac(i) = Me.Volume * ims.Phases(0).Compounds(CompNames(i)).Molarity 'global composition; headspace is ignored
+                Else
+                    NReac(i) = Me.Headspace * ims.Phases(2).Compounds(CompNames(i)).Molarity 'vapour in headspace
+                    NReac(i) += Volume * QL / (QL + QS) * ims.Phases(1).Compounds(CompNames(i)).Molarity 'liqud phase
+                    NReac(i) += Volume * QS / (QL + QS) * ims.Phases(7).Compounds(CompNames(i)).Molarity 'liqud phase
+                End If
+            Next
 
             P0 = ims.Phases(0).Properties.pressure.GetValueOrDefault
             P = P0 - DeltaP.GetValueOrDefault
@@ -367,7 +404,7 @@ Namespace Reactors
             '====================================================
             'Assume output composition as input composition initially
             'Then do molar balances for every component for small time steps until composition becomes stable
-            'Teme step: Moles in reactor(t+dT)= Moles in reactor (t) + Feed - consumption (composition,temperature) - Output(composition) 
+            'Time step: Moles in reactor(t+dT)= Moles in reactor (t) + Feed - consumption (composition,temperature) - Output(composition) 
 
             Do
                 'initialise component reaction rates
@@ -383,7 +420,7 @@ Namespace Reactors
                 QL = ims.Phases(3).Properties.volumetric_flow.GetValueOrDefault 'Liquid
                 QS = ims.Phases(7).Properties.volumetric_flow.GetValueOrDefault 'Solid
 
-                If ReactorMode = 0 Then
+                If ReactorMode = EReactorMode.SingleOutlet Then
                     ResidenceTimeL = Volume / Q
                     ResidenceTimeV = ResidenceTimeL
                 Else
@@ -400,13 +437,13 @@ Namespace Reactors
                     End If
                 End If
 
-
                 DHr = 0.0# 'Enthalpy change due to reactions
                 DHRi.Clear()
 
                 'Run through all reactions of Reaction Set to calculate component consumption/production rates at actual
                 'composition and temperature.
                 For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+                    If rxnsb.IsActive = False Then Continue For
                     rxn = FlowSheet.Reactions(rxnsb.ReactionID)
                     BC = rxn.BaseReactant
                     scBC = Math.Abs(rxn.Components(BC).StoichCoeff)
@@ -414,11 +451,11 @@ Namespace Reactors
                     If rxn.ReactionType = ReactionType.Kinetic Then
                         convfactors = Me.GetConvFactors(rxn, ims)
 
-                        'Qr = volume of reaction of within phase of actual reaction
+                        'Qr = reaction volume where actual reaction takes place
                         Select Case rxn.ReactionPhase
                             Case PhaseName.Liquid
-                                RP = 1 'reacting phase = overall Liquid
-                                If ReactorMode = 0 Then
+                                RP = 1 'reacting phase ID = overall Liquid
+                                If ReactorMode = EReactorMode.SingleOutlet Then
                                     Qr = QL / Q * Me.Volume
                                 Else
                                     Qr = QL / (QL + QS) * Me.Volume
@@ -426,7 +463,7 @@ Namespace Reactors
 
                             Case PhaseName.Vapor
                                 RP = 2
-                                If ReactorMode = 0 Then
+                                If ReactorMode = EReactorMode.SingleOutlet Then
                                     Qr = QV / Q * Me.Volume
                                 Else
                                     Qr = Me.Headspace
@@ -438,7 +475,7 @@ Namespace Reactors
 
                             Case PhaseName.Solid
                                 RP = 7
-                                If ReactorMode = 0 Then
+                                If ReactorMode = EReactorMode.SingleOutlet Then
                                     Qr = QS / Q * Me.Volume
                                 Else
                                     Qr = QS / (QL + QS) * Me.Volume
@@ -446,9 +483,10 @@ Namespace Reactors
 
                         End Select
 
+                        'Read component concentrations in phase of reaction 
                         C.Clear()
                         For Each comp As Compound In ims.Phases(RP).Compounds.Values
-                            C.Add(comp.Name, comp.Molarity)
+                            C.Add(comp.Name, comp.Molarity) 'C: mol/m³
                         Next
 
                         'calculate reaction constants
@@ -504,7 +542,7 @@ Namespace Reactors
                 'Limit time step for fast reactions
                 For i = 0 To NC - 1
                     If dB(i) < 0 Then
-                        'reaction step is limited to consumption of 50% of component amount in reactor
+                        'reaction step is limited to consumption of 80% of component amount in reactor
                         dRT(i) = -NReac(i) / dB(i) * 0.8
                         If dRT(i) < dT Then dT = dRT(i)
                     Else
@@ -514,6 +552,7 @@ Namespace Reactors
 
                 'amount of component change due to reactions during time step dN: mol
                 dN = dB.MultiplyConstY(dT)
+                TR = dN.DivideY(NReac.AddConstY(0.001)) 'Calculate relative consumption of components
                 NReac = NReac.AddY(dN) 'calculate new inventory of components in reactor
 
                 'Time step is over! Now calculate new compositions
@@ -524,13 +563,17 @@ Namespace Reactors
 
                 'Update iteration variables
                 OErr = IErr
-                IErr = Y.SubtractY(LC).AbsSumY
-                Y.CopyTo(LC, 0)
+                IErr = Y.SubtractY(LC).AbsSumY 'Calculate difference to last composition
+                Y.CopyTo(LC, 0) 'Save composition as last composition (LC) for next iteration
                 NIter += 1
 
                 'Accelerate calculations by increasing time step up to residence time as maximum
-                dT *= 1.1
-                If dT > ResidenceTimeL Then dT = ResidenceTimeL
+
+                MaxChange = -TR.MinY
+                If MaxChange < 0.3 Then
+                    dT *= 1.2
+                End If
+                If dT > 0.2 * ResidenceTimeL Then dT = 0.2 * ResidenceTimeL
 
                 'Transfer calculation results to IMS-stream and recalculate stream
                 i = 0
@@ -559,14 +602,16 @@ Namespace Reactors
 
                 T = ims.Phases(0).Properties.temperature 'read temperature -> PH-Flash
 
-            Loop Until IErr < 0.0000001 'repeat until composition changes are nearly constant
+                If NIter > 100 Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+
+            Loop Until IErr < 0.000001 Or MaxChange < 0.0001 'repeat until composition is constant
 
             '====================================================
             '==== Transfer information to output stream =========
             '====================================================
-            Dim ms1, ms2 As MaterialStream
+out:        Dim ms1, ms2 As MaterialStream
 
-            If ReactorMode = 0 Then 'only a single outlet
+            If ReactorMode = EReactorMode.SingleOutlet Then 'only a single outlet
                 ms1 = FlowSheet.SimulationObjects(Me.GraphicObject.OutputConnectors(0).AttachedConnector.AttachedTo.Name)
                 With ms1
                     .SpecType = ims.SpecType
@@ -634,7 +679,7 @@ Namespace Reactors
                 End With
             End If
 
-            If ReactorMode = 0 Then
+            If ReactorMode = EReactorMode.SingleOutlet Then
                 ResidenceTimeL = Volume / Q
                 ResidenceTimeV = ResidenceTimeL
             Else
@@ -655,7 +700,7 @@ Namespace Reactors
 
             'Calculate component conversions
             For i = 0 To NC - 1
-                If Nin(i) > 0 Then
+                If Nin(i) > 0 And Nin(i) > Nout(i) Then
                     ComponentConversions(CompNames(i)) = (Nin(i) - Nout(i)) / Nin(i)
                 Else
                     ComponentConversions(CompNames(i)) = 0
