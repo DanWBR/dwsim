@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.1 Update 7 - December 2016
+Version 4.1 Update 8 - December 2016
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.1 Update 8
+
+- [NEW] Updated CSTR model, now supports multiple phases and adds vapor outlet
+- [CHG] Update Material Stream flow and composition after removing a compound
+- [FIX] Fixed CAPE-OPEN UO Energy Stream connection
+- [FIX] Fixed CAPE-OPEN UO error not breaking flowsheet calculation
+- [FIX] Fixed CAPE-OPEN UO Array property handling
+- [FIX] Fixed data storage for regression case
+- [FIX] Fixed display of missing properties on tables
+- [FIX] Minor bug fixes and enhancements
 
 Version 4.1 Update 7
 
