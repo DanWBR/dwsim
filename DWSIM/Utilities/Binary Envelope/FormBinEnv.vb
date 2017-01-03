@@ -190,7 +190,7 @@ Public Class FormBinEnv
                 Settings.gpu.EnableMultithreading()
             End If
 
-            Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked})
+            Me.BackgroundWorker1.RunWorkerAsync(New Object() {tipocalc, P, T, chkVLE.Checked, lle, chkSLE.Checked, chkCritical.Checked, rbSolidSolution.Checked, chkCompareModels.Checked, cbPropPack.SelectedIndex})
 
             Me.bw = Me.BackgroundWorker1
 
@@ -209,6 +209,7 @@ Public Class FormBinEnv
     Private Sub BackgroundWorker1_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
         Dim compare As Boolean = e.Argument(8)
+        Dim ppidx = e.Argument(9)
 
         Dim k As Integer
         Dim pp As PropertyPackages.PropertyPackage = Nothing
@@ -218,7 +219,7 @@ Public Class FormBinEnv
         If Not compare Then
 
             For Each pp1 As PropertyPackage In Flowsheet.PropertyPackages.Values
-                If k = cbPropPack.SelectedIndex Then pp = pp1
+                If k = ppidx Then pp = pp1
                 k += 1
             Next
 
@@ -229,7 +230,6 @@ Public Class FormBinEnv
         Else
 
             ' get results from all property packages
-
 
             For Each pp1 As PropertyPackage In Flowsheet.PropertyPackages.Values
                 mat.SetFlowsheet(Flowsheet)

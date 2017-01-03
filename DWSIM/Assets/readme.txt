@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.1 Update 8 - December 2016
+Version 4.1 Update 9 - January 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.1 Update 9
+
+- [FIX] Fixed a bug regression in binary envelope utility
+- [FIX] Fixed PH-Flash with Raoult's Law Property Package
+- [CHG] CSTR model updates
 
 Version 4.1 Update 8
 
