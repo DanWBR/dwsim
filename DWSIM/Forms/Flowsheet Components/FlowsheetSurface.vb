@@ -199,14 +199,6 @@ Public Class FlowsheetSurface
 
         End If
 
-        If My.Settings.CloseFormsOnDeselecting Then
-            For Each obj In Flowsheet.SimulationObjects.Values
-                If Not obj.GraphicObject Is FlowsheetDesignSurface.SelectedObject Then
-                    obj.CloseEditForm()
-                End If
-            Next
-        End If
-
     End Sub
 
     Private Sub ToolStripMenuItem6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem6.Click
@@ -408,6 +400,14 @@ Public Class FlowsheetSurface
 
                 FlowsheetDesignSurface.dragging = False
                 FlowsheetDesignSurface.selectiondragging = False
+
+                If My.Settings.CloseFormsOnDeselecting Then
+                    For Each obj In Flowsheet.SimulationObjects.Values
+                        If Not obj.GraphicObject Is FlowsheetDesignSurface.SelectedObject Then
+                            obj.CloseEditForm()
+                        End If
+                    Next
+                End If
 
                 If Flowsheet.SimulationObjects.ContainsKey(Me.FlowsheetDesignSurface.SelectedObject.Name) Then
 
