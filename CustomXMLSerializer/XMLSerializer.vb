@@ -415,7 +415,7 @@ Public Class XMLSerializer
             Dim myarr As New ArrayList
 
             For Each s As String In values
-                If Double.TryParse(s, New Double) Then
+                If Double.TryParse(s, NumberStyles.Any, ci, New Double) Then
                     myarr.Add(Double.Parse(s, ci))
                 Else
                     myarr.Add(s)
@@ -434,7 +434,7 @@ Public Class XMLSerializer
             Dim myarr As New ArrayList
 
             For Each s As String In values
-                If Double.TryParse(s, New Double) Then
+                If Double.TryParse(s, NumberStyles.Any, ci, New Double) Then
                     myarr.Add(Double.Parse(s, ci))
                 Else
                     myarr.Add(s)
