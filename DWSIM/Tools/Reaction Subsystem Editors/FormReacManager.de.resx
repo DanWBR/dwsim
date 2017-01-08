@@ -154,28 +154,28 @@
     <value>Gleichung</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ConversãoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ConversaoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
-  <data name="ConversãoToolStripMenuItem.Text" xml:space="preserve">
+  <data name="ConversaoToolStripMenuItem.Text" xml:space="preserve">
     <value>Konversion</value>
   </data>
-  <data name="EquilíbrioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="EquilibrioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
-  <data name="EquilíbrioToolStripMenuItem.Text" xml:space="preserve">
+  <data name="EquilibrioToolStripMenuItem.Text" xml:space="preserve">
     <value>Gleichgewicht</value>
   </data>
-  <data name="CinéticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="CineticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
-  <data name="CinéticaToolStripMenuItem.Text" xml:space="preserve">
+  <data name="CineticaToolStripMenuItem.Text" xml:space="preserve">
     <value>Kinetik</value>
   </data>
-  <data name="HeterogêneaCatalíticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="HeterogeneaCataliticaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 22</value>
   </data>
-  <data name="HeterogêneaCatalíticaToolStripMenuItem.Text" xml:space="preserve">
+  <data name="HeterogeneaCataliticaToolStripMenuItem.Text" xml:space="preserve">
     <value>Heterogene Katalyse</value>
   </data>
   <data name="ToolStripDropDownButton1.Text" xml:space="preserve">
@@ -213,6 +213,45 @@
   </data>
   <data name="SaveFileDialog1.Title" xml:space="preserve">
     <value>Reaktionen in Datei speichern</value>
+  </data>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 25</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Docking</value>
+  </data>
+  <data name="tsbDockingLeft.Text" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
+    <value>Links automatisch ausblenden</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
+    <value>Rechts automatisch ausblenden</value>
+  </data>
+  <data name="tsbDockingRight.Text" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="tsbDockingTop.Text" xml:space="preserve">
+    <value>Oben</value>
+  </data>
+  <data name="tsbDockingBottom.Text" xml:space="preserve">
+    <value>Unten</value>
+  </data>
+  <data name="tsbDockingDocument.Text" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="tsbDockingFloat.Text" xml:space="preserve">
+    <value>Schwebend</value>
+  </data>
+  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 25</value>
+  </data>
+  <data name="tsbClose.Text" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="tsbClose.ToolTipText" xml:space="preserve">
+    <value>Schliessen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM - Chemische Reaktionen</value>

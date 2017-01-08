@@ -112,41 +112,35 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Interaktionsparameter</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Allgemeine Einstellungen</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Interaktionsparameter</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+    <value>73, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Abschätzung:</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 13</value>
+    <value>341, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Werte durch Klicken mit der linken Maustaste auf die Zelle bearbeiten.</value>
   </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Interaktionsparameter</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 13</value>
+    <value>120, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Aktion wird ausgeführt.</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Allgemeine Einstellungen</value>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Interaktionsparameter</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Parameter</value>
@@ -154,7 +148,13 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Wert</value>
   </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Allgemeine Einstellungen</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Allgemeine Einstellungen</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Thermodynamisches Paket konfigurieren</value>
+    <value>Konfiguration Lee-Kesler-Plöcker (LKP)-Thermodynamikpaket</value>
   </data>
 </root>

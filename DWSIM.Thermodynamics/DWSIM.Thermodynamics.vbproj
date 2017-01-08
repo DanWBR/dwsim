@@ -321,11 +321,17 @@
     <Compile Include="Property Packages\UNIQUAC.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.de.resx">
+      <DependentUpon>AboutForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.resx">
       <DependentUpon>AboutForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Excel Interface\SettingsForm.resx">
       <DependentUpon>SettingsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.de.resx">
+      <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.en.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
@@ -333,11 +339,17 @@
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.resx">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.de.resx">
+      <DependentUpon>FormSelectCOPP.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.en.resx">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPP.resx">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.de.resx">
+      <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Flash Algorithms\FormSelectCOPPM.en.resx">
       <DependentUpon>FormSelectCOPPM.vb</DependentUpon>
@@ -356,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Material Stream\MaterialStreamEditor.resx">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.de.resx">
+      <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.de.resx">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
@@ -419,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.de.resx">
+      <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.en.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>

@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
   </data>
@@ -152,10 +152,10 @@
     <value>Paket</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 13</value>
+    <value>162, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Thermo-Server / Prop. Paket-Manager</value>
+    <value>Thermo-Server / Paket-Manager</value>
   </data>
   <data name="btnEditPropPack.Text" xml:space="preserve">
     <value>Bearbeiten</value>
@@ -166,55 +166,56 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Provider-Auswahl</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>CAPE-OPEN-Version</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>CAPE-OPEN Thermo-Schnittstellenversion</value>
   </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>CAPE-OPEN-Version</value>
+  </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Thermo &amp; Eigenschaften</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Compound/Komponent Mapping</value>
-  </data>
-  <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>PhasenKartierung</value>
-  </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>Abbrechen</value>
   </data>
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
   <data name="col1.HeaderText" xml:space="preserve">
-    <value>Komponente/Verbindung (DWSIM)</value>
+    <value>Komponente (DWSIM)</value>
   </data>
   <data name="col2.HeaderText" xml:space="preserve">
-    <value>CAPE-OPEN PP Äquivalent</value>
+    <value>CAPE-OPEN Äquivalent</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 13</value>
+    <value>534, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Konfigurieren Sie die Komponente/Verbindung Zuordnung von DWSIM zu den CAPE-OPEN-Paket.</value>
+    <value>Konfigurieren Sie die Zuordnung von DWSIM-Komponenten zu den entsprechenden CAPE-OPEN Komponenten</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Komponenten-Mapping</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
-    <value>DWSIM Phase ID</value>
+    <value>DWSIM Phase</value>
   </data>
   <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
-    <value>CAPE-OPEN Paket ID</value>
+    <value>CAPE-OPEN Äquivalent</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>381, 13</value>
+    <value>431, 26</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Konfigurieren Sie die Phase Zuordnung von DWSIM zu den CAPE-OPEN-Paket.</value>
+    <value>Konfigurieren Sie die Zuordnung der Phasen von DWSIM zu denen im CAPE-OPEN-Paket.
+.</value>
+  </data>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Phasen-Mapping</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>CAPE-OPEN Eigenschaft Paketkonfiguration</value>
+    <value>Konfiguration CAPE-OPEN -Thermodynamikpaket</value>
   </data>
 </root>

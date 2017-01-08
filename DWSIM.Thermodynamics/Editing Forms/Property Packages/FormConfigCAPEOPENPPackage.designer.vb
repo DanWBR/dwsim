@@ -24,7 +24,7 @@ Partial Class FormConfigCAPEOPENPPackage
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormConfigCAPEOPENPPackage))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -108,23 +108,27 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'FaTabStrip1
         '
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem7, Me.FaTabStripItem6})
         Me.FaTabStrip1.Name = "FaTabStrip1"
-        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem7
+        Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
+        Me.ToolTip1.SetToolTip(Me.FaTabStrip1, resources.GetString("FaTabStrip1.ToolTip"))
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
+        Me.FaTabStripItem1.Selected = True
+        Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'GroupBox2
         '
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.GroupBox4)
         Me.GroupBox2.Controls.Add(Me.Button11)
         Me.GroupBox2.Controls.Add(Me.Button10)
@@ -132,16 +136,17 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.GroupBox2.Controls.Add(Me.TextBox1)
         Me.GroupBox2.Controls.Add(Me.Label3)
         Me.GroupBox2.Controls.Add(Me.ogc1)
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.ListViewA)
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.ListViewA)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'ListViewA
         '
@@ -153,6 +158,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.ListViewA.ShowGroups = False
         Me.ListViewA.ShowItemToolTips = True
         Me.ListViewA.TileSize = New System.Drawing.Size(150, 20)
+        Me.ToolTip1.SetToolTip(Me.ListViewA, resources.GetString("ListViewA.ToolTip"))
         Me.ListViewA.UseCompatibleStateImageBehavior = False
         Me.ListViewA.View = System.Windows.Forms.View.List
         '
@@ -160,49 +166,55 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         resources.ApplyResources(Me.Button11, "Button11")
         Me.Button11.Name = "Button11"
+        Me.ToolTip1.SetToolTip(Me.Button11, resources.GetString("Button11.ToolTip"))
         Me.Button11.UseVisualStyleBackColor = True
         '
         'Button10
         '
         resources.ApplyResources(Me.Button10, "Button10")
         Me.Button10.Name = "Button10"
+        Me.ToolTip1.SetToolTip(Me.Button10, resources.GetString("Button10.ToolTip"))
         Me.Button10.UseVisualStyleBackColor = True
         '
         'Button7
         '
         resources.ApplyResources(Me.Button7, "Button7")
         Me.Button7.Name = "Button7"
+        Me.ToolTip1.SetToolTip(Me.Button7, resources.GetString("Button7.ToolTip"))
         Me.Button7.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
+        Me.ToolTip1.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'ogc1
         '
+        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.Column7, Me.Column9})
-        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.Name = "ogc1"
         Me.ogc1.RowHeadersVisible = False
         Me.ogc1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.ogc1.ShowCellErrors = False
         Me.ogc1.ShowEditingIcon = False
         Me.ogc1.ShowRowErrors = False
+        Me.ToolTip1.SetToolTip(Me.ogc1, resources.GetString("ogc1.ToolTip"))
         '
         'Column11
         '
@@ -233,16 +245,17 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         'FaTabStripItem7
         '
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.CanClose = False
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        Me.FaTabStripItem7.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
+        Me.ToolTip1.SetToolTip(Me.FaTabStripItem7, resources.GetString("FaTabStripItem7.ToolTip"))
         '
         'GroupBox5
         '
+        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Controls.Add(Me.PictureBox5)
         Me.GroupBox5.Controls.Add(Me.PictureBox4)
         Me.GroupBox5.Controls.Add(Me.btnConfigFlashAlg)
@@ -250,22 +263,22 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.GroupBox5.Controls.Add(Me.ComboBoxFlashAlg)
         Me.GroupBox5.Controls.Add(Me.Button3)
         Me.GroupBox5.Controls.Add(Me.Label1)
-        resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'PictureBox5
         '
-        Me.PictureBox5.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox5, "PictureBox5")
+        Me.PictureBox5.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox5, resources.GetString("PictureBox5.ToolTip"))
         '
         'PictureBox4
         '
-        Me.PictureBox4.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox4, "PictureBox4")
+        Me.PictureBox4.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox4, resources.GetString("PictureBox4.ToolTip"))
@@ -274,6 +287,7 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         resources.ApplyResources(Me.btnConfigFlashAlg, "btnConfigFlashAlg")
         Me.btnConfigFlashAlg.Name = "btnConfigFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.btnConfigFlashAlg, resources.GetString("btnConfigFlashAlg.ToolTip"))
         Me.btnConfigFlashAlg.UseVisualStyleBackColor = True
         '
         'Label4
@@ -281,19 +295,22 @@ Partial Class FormConfigCAPEOPENPPackage
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'ComboBoxFlashAlg
         '
-        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.ComboBoxFlashAlg, "ComboBoxFlashAlg")
+        Me.ComboBoxFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxFlashAlg.FormattingEnabled = True
         Me.ComboBoxFlashAlg.Items.AddRange(New Object() {resources.GetString("ComboBoxFlashAlg.Items"), resources.GetString("ComboBoxFlashAlg.Items1"), resources.GetString("ComboBoxFlashAlg.Items2"), resources.GetString("ComboBoxFlashAlg.Items3"), resources.GetString("ComboBoxFlashAlg.Items4"), resources.GetString("ComboBoxFlashAlg.Items5"), resources.GetString("ComboBoxFlashAlg.Items6"), resources.GetString("ComboBoxFlashAlg.Items7"), resources.GetString("ComboBoxFlashAlg.Items8")})
         Me.ComboBoxFlashAlg.Name = "ComboBoxFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.ComboBoxFlashAlg, resources.GetString("ComboBoxFlashAlg.ToolTip"))
         '
         'Button3
         '
         resources.ApplyResources(Me.Button3, "Button3")
         Me.Button3.Name = "Button3"
+        Me.ToolTip1.SetToolTip(Me.Button3, resources.GetString("Button3.ToolTip"))
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Label1
@@ -301,6 +318,7 @@ Partial Class FormConfigCAPEOPENPPackage
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'GroupBox7
         '
@@ -318,11 +336,12 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.GroupBox7.Controls.Add(Me.chkEnableParallelCalcs)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox7, resources.GetString("GroupBox7.ToolTip"))
         '
         'PictureBox3
         '
-        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox3, "PictureBox3")
+        Me.PictureBox3.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox3, resources.GetString("PictureBox3.ToolTip"))
@@ -331,74 +350,84 @@ Partial Class FormConfigCAPEOPENPPackage
         '
         resources.ApplyResources(Me.cbSIMD, "cbSIMD")
         Me.cbSIMD.Name = "cbSIMD"
+        Me.ToolTip1.SetToolTip(Me.cbSIMD, resources.GetString("cbSIMD.ToolTip"))
         '
         'PictureBox2
         '
-        Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox2, "PictureBox2")
+        Me.PictureBox2.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox2, resources.GetString("PictureBox2.ToolTip"))
         '
         'GroupBox8
         '
-        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
         resources.ApplyResources(Me.GroupBox8, "GroupBox8")
+        Me.GroupBox8.Controls.Add(Me.tbGPUCaps)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox8, resources.GetString("GroupBox8.ToolTip"))
         '
         'tbGPUCaps
         '
         resources.ApplyResources(Me.tbGPUCaps, "tbGPUCaps")
         Me.tbGPUCaps.Name = "tbGPUCaps"
         Me.tbGPUCaps.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.tbGPUCaps, resources.GetString("tbGPUCaps.ToolTip"))
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
+        Me.PictureBox1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.information
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         Me.ToolTip1.SetToolTip(Me.PictureBox1, resources.GetString("PictureBox1.ToolTip"))
         '
         'cbGPU
         '
-        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbGPU, "cbGPU")
+        Me.cbGPU.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGPU.FormattingEnabled = True
         Me.cbGPU.Name = "cbGPU"
+        Me.ToolTip1.SetToolTip(Me.cbGPU, resources.GetString("cbGPU.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'chkEnableGPUProcessing
         '
         resources.ApplyResources(Me.chkEnableGPUProcessing, "chkEnableGPUProcessing")
         Me.chkEnableGPUProcessing.Name = "chkEnableGPUProcessing"
+        Me.ToolTip1.SetToolTip(Me.chkEnableGPUProcessing, resources.GetString("chkEnableGPUProcessing.ToolTip"))
         '
         'cbParallelism
         '
-        Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbParallelism, "cbParallelism")
+        Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbParallelism.FormattingEnabled = True
         Me.cbParallelism.Name = "cbParallelism"
+        Me.ToolTip1.SetToolTip(Me.cbParallelism, resources.GetString("cbParallelism.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'chkEnableParallelCalcs
         '
         resources.ApplyResources(Me.chkEnableParallelCalcs, "chkEnableParallelCalcs")
         Me.chkEnableParallelCalcs.Name = "chkEnableParallelCalcs"
+        Me.ToolTip1.SetToolTip(Me.chkEnableParallelCalcs, resources.GetString("chkEnableParallelCalcs.ToolTip"))
         '
         'FaTabStripItem6
         '
+        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         Me.FaTabStripItem6.CanClose = False
         Me.FaTabStripItem6.Controls.Add(Me.lblDescription)
         Me.FaTabStripItem6.Controls.Add(Me.Label5)
@@ -407,95 +436,109 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.FaTabStripItem6.Controls.Add(Me.Label8)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
-        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
+        Me.ToolTip1.SetToolTip(Me.FaTabStripItem6, resources.GetString("FaTabStripItem6.ToolTip"))
         '
         'lblDescription
         '
-        Me.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.System
         resources.ApplyResources(Me.lblDescription, "lblDescription")
+        Me.lblDescription.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblDescription.Name = "lblDescription"
+        Me.ToolTip1.SetToolTip(Me.lblDescription, resources.GetString("lblDescription.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.tbErrorLog)
         resources.ApplyResources(Me.GroupBox3, "GroupBox3")
+        Me.GroupBox3.Controls.Add(Me.tbErrorLog)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'tbErrorLog
         '
         resources.ApplyResources(Me.tbErrorLog, "tbErrorLog")
         Me.tbErrorLog.Name = "tbErrorLog"
         Me.tbErrorLog.ReadOnly = True
+        Me.ToolTip1.SetToolTip(Me.tbErrorLog, resources.GetString("tbErrorLog.ToolTip"))
         '
         'lblName
         '
         resources.ApplyResources(Me.lblName, "lblName")
         Me.lblName.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.lblName.Name = "lblName"
+        Me.ToolTip1.SetToolTip(Me.lblName, resources.GetString("lblName.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'FaTabStripItem5
         '
+        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         Me.FaTabStripItem5.Controls.Add(Me.GroupBox11)
         Me.FaTabStripItem5.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
+        Me.ToolTip1.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
         '
         'GroupBox11
         '
+        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
         Me.GroupBox11.Controls.Add(Me.cbudb)
         Me.GroupBox11.Controls.Add(Me.Button1)
         Me.GroupBox11.Controls.Add(Me.Button2)
-        resources.ApplyResources(Me.GroupBox11, "GroupBox11")
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox11, resources.GetString("GroupBox11.ToolTip"))
         '
         'cbudb
         '
         resources.ApplyResources(Me.cbudb, "cbudb")
         Me.cbudb.Name = "cbudb"
+        Me.ToolTip1.SetToolTip(Me.cbudb, resources.GetString("cbudb.ToolTip"))
         Me.cbudb.UseVisualStyleBackColor = True
         '
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
+        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
         resources.ApplyResources(Me.Button2, "Button2")
         Me.Button2.Name = "Button2"
+        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
         Me.Button2.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.dgvdb)
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'dgvdb
         '
+        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AllowUserToAddRows = False
         Me.dgvdb.AllowUserToDeleteRows = False
         Me.dgvdb.AllowUserToResizeColumns = False
@@ -507,7 +550,6 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.dgvdb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvdb.ColumnHeadersVisible = False
         Me.dgvdb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column13, Me.Column14, Me.Column15, Me.Column1})
-        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.GridColor = System.Drawing.SystemColors.Control
         Me.dgvdb.Name = "dgvdb"
         Me.dgvdb.ReadOnly = True
@@ -516,6 +558,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.dgvdb.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
         Me.dgvdb.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvdb.ShowCellErrors = False
+        Me.ToolTip1.SetToolTip(Me.dgvdb, resources.GetString("dgvdb.ToolTip"))
         '
         'Column12
         '
@@ -572,6 +615,7 @@ Partial Class FormConfigCAPEOPENPPackage
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormConfigCAPEOPENPPackage"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
@@ -652,14 +696,14 @@ Partial Class FormConfigCAPEOPENPPackage
     Public WithEvents cbSIMD As System.Windows.Forms.CheckBox
     Friend WithEvents lblDescription As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents PictureBox5 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents Column11 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column9 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

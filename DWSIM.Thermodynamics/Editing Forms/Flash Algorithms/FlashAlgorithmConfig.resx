@@ -155,6 +155,10 @@
   <data name="tbFlashValidationTolerance.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkDoPhaseId.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
@@ -179,8 +183,8 @@
   <data name="&gt;&gt;cbMinMethodGM.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="TabPageNL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="cbMinMethodGM.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 21</value>
@@ -194,7 +198,6 @@
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label13.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
@@ -212,6 +215,9 @@
   </data>
   <data name="&gt;&gt;chkFastModeNL.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label17.Name" xml:space="preserve">
+    <value>Label17</value>
   </data>
   <data name="Label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -234,8 +240,8 @@
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Flash PH/PS - número máximo de iterações no loop interno</value>
+  <data name="&gt;&gt;TabPageIO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label17.Text" xml:space="preserve">
     <value>Descrição:</value>
@@ -245,9 +251,6 @@
   </data>
   <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
     <value>GroupBox3</value>
-  </data>
-  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="chkValidateEqCalc.Text" xml:space="preserve">
     <value>Validar o resultado dos cálculos de equilíbrio</value>
@@ -330,8 +333,8 @@
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;TabPageNL.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="cbMinMethodGM.Items7" xml:space="preserve">
+    <value>Differential Evolution</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -417,9 +420,6 @@
   <data name="tbPHExtMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 20</value>
   </data>
-  <data name="lblAuthorURL2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;Label20.Name" xml:space="preserve">
     <value>Label20</value>
   </data>
@@ -501,9 +501,6 @@
   <data name="Button1.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
   <data name="TabPageIO.Size" type="System.Drawing.Size, System.Drawing">
     <value>630, 274</value>
   </data>
@@ -515,9 +512,6 @@
   </data>
   <data name="rbHigh.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 233</value>
-  </data>
-  <data name="TabPageConvPars.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;Label4.Name" xml:space="preserve">
     <value>Label4</value>
@@ -543,6 +537,9 @@
   <data name="tbPTExtMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="lblAbout2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 193</value>
+  </data>
   <data name="&gt;&gt;tbPHExtMaxIt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -555,14 +552,11 @@
   <data name="TabPageVLLE.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="tbPTExtTol.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="tbPTIntTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -576,8 +570,8 @@
   <data name="lblAuthorURL2.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 13</value>
   </data>
-  <data name="tbPHExtMaxIt.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="TabPageNL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -590,9 +584,6 @@
   </data>
   <data name="chkUseBroydenIO.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="lvKeyComp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 43</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
@@ -629,9 +620,6 @@
   </data>
   <data name="Label17.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 131</value>
-  </data>
-  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>URL do Autor:</value>
@@ -729,8 +717,11 @@
   <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
   </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 6</value>
+  </data>
+  <data name="&gt;&gt;tbPHintMaxTol.Name" xml:space="preserve">
+    <value>tbPHintMaxTol</value>
   </data>
   <data name="&gt;&gt;lblDesc2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -738,8 +729,8 @@
   <data name="TabPageNL.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbFlashValidationTolerance.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;rbMedium.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -759,11 +750,14 @@
   <data name="&gt;&gt;rbMedium.Name" xml:space="preserve">
     <value>rbMedium</value>
   </data>
-  <data name="tbPHExtMaxTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
+  <data name="lblAuthorURL2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
+  </data>
+  <data name="btnEditThermoServer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>438, 16</value>
   </data>
   <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -804,9 +798,6 @@
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="tbPTExtTol.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Nome:</value>
   </data>
@@ -834,11 +825,14 @@
   <data name="&gt;&gt;tbPHIntMaxIt.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnEditThermoServer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>438, 16</value>
+  <data name="rbLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="&gt;&gt;TabPageNL.Name" xml:space="preserve">
     <value>TabPageNL</value>
+  </data>
+  <data name="&gt;&gt;tbPTExtTol.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="tbPHintMaxTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 20</value>
@@ -864,9 +858,6 @@
   <data name="btnEditThermoServer.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label18.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="tbPTExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 101</value>
   </data>
@@ -885,14 +876,11 @@
   <data name="TabPageCOES.Size" type="System.Drawing.Size, System.Drawing">
     <value>630, 298</value>
   </data>
-  <data name="&gt;&gt;TabPageConvPars.Name" xml:space="preserve">
-    <value>TabPageConvPars</value>
+  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 52</value>
   </data>
   <data name="rbLow.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 17</value>
@@ -936,9 +924,6 @@
   <data name="cbMinMethodGM.Items4" xml:space="preserve">
     <value>Particle Swarm</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Opções Gerais</value>
-  </data>
   <data name="&gt;&gt;Label15.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -948,8 +933,8 @@
   <data name="&gt;&gt;tbPTIntTol.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+  <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="rbLow.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -966,9 +951,6 @@
   <data name="tbPTintMaxIt.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;TabPageGeneral.Name" xml:space="preserve">
-    <value>TabPageGeneral</value>
-  </data>
   <data name="tbPHIntMaxIt.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 20</value>
   </data>
@@ -978,8 +960,8 @@
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 13</value>
   </data>
-  <data name="&gt;&gt;Label17.Name" xml:space="preserve">
-    <value>Label17</value>
+  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
+    <value>Label10</value>
   </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1026,17 +1008,17 @@
   <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblAbout2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 193</value>
+  <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
+    <value>GroupBox11</value>
+  </data>
+  <data name="Label6.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;chkFastModeNL.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label18.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -1065,8 +1047,11 @@
   <data name="rbHigh.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="lblAbout2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 52</value>
+  </data>
+  <data name="&gt;&gt;btnSearch.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1092,8 +1077,8 @@
   <data name="chkReplaceFlashPT.Text" xml:space="preserve">
     <value>Substituir Flash PT por Flash PH</value>
   </data>
-  <data name="&gt;&gt;lblDesc2.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="&gt;&gt;tbPTExtMaxIt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1101,8 +1086,8 @@
   <data name="btnEditThermoServer.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 6</value>
+  <data name="chkCalcBubbleDew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 17</value>
   </data>
   <data name="&gt;&gt;chkCalcBubbleDew.Parent" xml:space="preserve">
     <value>GroupBox4</value>
@@ -1125,14 +1110,17 @@
   <data name="&gt;&gt;lblName2.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="lblDesc2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 132</value>
+  </data>
   <data name="Label19.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
   </data>
   <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1170,8 +1158,8 @@
   <data name="TabPageCOES.Text" xml:space="preserve">
     <value>Servidor de Equilíbrio CAPE-OPEN</value>
   </data>
-  <data name="&gt;&gt;tbPTExtTol.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="lblVersion2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1179,14 +1167,11 @@
   <data name="cbMinMethodGM.Items10" xml:space="preserve">
     <value>Mesh</value>
   </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 13</value>
-  </data>
   <data name="chkCalcBubbleDew.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="chkCalcBubbleDew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 17</value>
+  <data name="&gt;&gt;lblDesc2.Name" xml:space="preserve">
+    <value>lblDesc2</value>
   </data>
   <data name="tbPHIntMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 179</value>
@@ -1194,11 +1179,11 @@
   <data name="&gt;&gt;rbLow.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnEditThermoServer.Name" xml:space="preserve">
-    <value>btnEditThermoServer</value>
+  <data name="&gt;&gt;TabPageNL.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
-    <value>GroupBox11</value>
+  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
+    <value>btnSearch</value>
   </data>
   <data name="&gt;&gt;Label20.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1215,8 +1200,8 @@
   <data name="tbSelectedES.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;tbFlashValidationTolerance.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Opções Gerais</value>
   </data>
   <data name="&gt;&gt;tbFlashValidationTolerance.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1227,6 +1212,9 @@
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>608, 263</value>
   </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Flash PT/PV - tolerância para convergência do loop externo</value>
+  </data>
   <data name="chkUseBroydenIO.Text" xml:space="preserve">
     <value>Usar método de Broyden para acelerar convergência</value>
   </data>
@@ -1236,8 +1224,8 @@
   <data name="lblDesc2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 13</value>
+  <data name="tbPHExtMaxTol.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1257,8 +1245,8 @@
   <data name="TabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="tbPHintMaxTol.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;TabPageGeneral.Name" xml:space="preserve">
+    <value>TabPageGeneral</value>
   </data>
   <data name="btnEditThermoServer.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1329,8 +1317,8 @@
   <data name="&gt;&gt;lblDesc2.Parent" xml:space="preserve">
     <value>GroupBox6</value>
   </data>
-  <data name="&gt;&gt;btnSearch.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 25</value>
   </data>
   <data name="&gt;&gt;Label12.Parent" xml:space="preserve">
     <value>GroupBox4</value>
@@ -1344,14 +1332,14 @@
   <data name="chkDoPhaseId.Text" xml:space="preserve">
     <value>Aplicar algoritmo de identificação de fases após o cálculo de equilíbrio</value>
   </data>
-  <data name="&gt;&gt;btnSearch.Name" xml:space="preserve">
-    <value>btnSearch</value>
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Geral</value>
   </data>
   <data name="Label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;btnEditThermoServer.Name" xml:space="preserve">
+    <value>btnEditThermoServer</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 50</value>
@@ -1391,6 +1379,9 @@
   </data>
   <data name="GroupBox11.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 5</value>
+  </data>
+  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 13</value>
   </data>
   <data name="GroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1440,8 +1431,8 @@
   <data name="Label16.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
   </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 13</value>
+  <data name="TabPageConvPars.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;TabPageGM.Parent" xml:space="preserve">
     <value>TabControl1</value>
@@ -1518,8 +1509,8 @@
   <data name="chkReplaceFlashPT.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="&gt;&gt;TabPageIO.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1551,8 +1542,14 @@
   <data name="tbPHExtMaxIt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
-    <value>GroupBox6</value>
+  <data name="TabPageVLLE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>630, 274</value>
+  </data>
+  <data name="Label18.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbPTIntTol.Location" type="System.Drawing.Point, System.Drawing">
+    <value>373, 23</value>
   </data>
   <data name="TabPageConvPars.Text" xml:space="preserve">
     <value>Convergência</value>
@@ -1572,8 +1569,8 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Componentes-chave para a segunda fase líquida:</value>
   </data>
-  <data name="&gt;&gt;Label10.Name" xml:space="preserve">
-    <value>Label10</value>
+  <data name="&gt;&gt;lblDesc2.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="chkValidateEqCalc.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -1587,8 +1584,8 @@
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="tbPTIntTol.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 23</value>
+  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>Mapeamento</value>
@@ -1602,8 +1599,8 @@
   <data name="&gt;&gt;GroupBox5.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cbMinMethodGM.Items7" xml:space="preserve">
-    <value>Differential Evolution</value>
+  <data name="&gt;&gt;chkUseBroydenIO.Parent" xml:space="preserve">
+    <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;rbHigh.Parent" xml:space="preserve">
     <value>GroupBox11</value>
@@ -1617,14 +1614,14 @@
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
     <value>TabPageGM</value>
   </data>
-  <data name="&gt;&gt;lblDesc2.Name" xml:space="preserve">
-    <value>lblDesc2</value>
+  <data name="tbPHExtMaxIt.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
   <data name="TabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Flash PT/PV - tolerância para convergência do loop externo</value>
+  <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="tbPHExtMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 205</value>
@@ -1671,17 +1668,17 @@
   <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
     <value>GroupBox1</value>
   </data>
-  <data name="TabPageVLLE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>630, 274</value>
+  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;lblAbout2.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
-    <value>GroupBox11</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Flash PH/PS - tolerância para convergência do loop interno</value>
@@ -1698,6 +1695,9 @@
   <data name="rbLow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 13</value>
+  </data>
   <data name="&gt;&gt;chkCalcBubbleDew.Name" xml:space="preserve">
     <value>chkCalcBubbleDew</value>
   </data>
@@ -1710,8 +1710,8 @@
   <data name="&gt;&gt;TabPageIO.Name" xml:space="preserve">
     <value>TabPageIO</value>
   </data>
-  <data name="&gt;&gt;rbMedium.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblAbout2.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -1746,8 +1746,8 @@
   <data name="tbPTExtTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 20</value>
   </data>
-  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>285, 13</value>
   </data>
   <data name="chkDoPhaseId.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 123</value>
@@ -1758,8 +1758,8 @@
   <data name="tbPHExtMaxTol.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="lblVersion2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+  <data name="&gt;&gt;rbLow.Name" xml:space="preserve">
+    <value>rbLow</value>
   </data>
   <data name="tbPHExtMaxTol.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 153</value>
@@ -1767,14 +1767,14 @@
   <data name="&gt;&gt;tbPTintMaxIt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblDesc2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 132</value>
+  <data name="lvKeyComp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 43</value>
   </data>
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>9</value>
+  <data name="&gt;&gt;rbMedium.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkCalcBubbleDew.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1788,8 +1788,8 @@
   <data name="&gt;&gt;tbPHExtMaxIt.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 25</value>
+  <data name="lblAbout2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;lblAuthorURL2.Parent" xml:space="preserve">
     <value>GroupBox6</value>
@@ -1842,8 +1842,8 @@
   <data name="&gt;&gt;Label16.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label20.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
   </data>
   <data name="tbPTExtMaxIt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1851,8 +1851,8 @@
   <data name="rbHigh.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="chkDoPhaseId.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
   <data name="chkUseBroydenIO.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 25</value>
@@ -1860,11 +1860,11 @@
   <data name="&gt;&gt;TabPageGM.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;chkUseBroydenIO.Parent" xml:space="preserve">
-    <value>GroupBox5</value>
+  <data name="tbPHintMaxTol.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="rbLow.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="&gt;&gt;Label10.Parent" xml:space="preserve">
+    <value>GroupBox11</value>
   </data>
   <data name="chkReplaceFlashPT.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1872,8 +1872,8 @@
   <data name="&gt;&gt;tbPHIntMaxIt.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbPHintMaxTol.Name" xml:space="preserve">
-    <value>tbPHintMaxTol</value>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Flash PH/PS - número máximo de iterações no loop interno</value>
   </data>
   <data name="TabPageGeneral.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1917,14 +1917,14 @@
   <data name="&gt;&gt;Label17.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
+    <value>GroupBox6</value>
+  </data>
   <data name="&gt;&gt;chkReplaceFlashPT.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
     <value>519, 16</value>
-  </data>
-  <data name="&gt;&gt;rbLow.Name" xml:space="preserve">
-    <value>rbLow</value>
   </data>
   <data name="&gt;&gt;TabPageCOES.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -1935,13 +1935,10 @@
   <data name="chkValidateEqCalc.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 71</value>
   </data>
-  <data name="&gt;&gt;TabControl1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;TabPageConvPars.Name" xml:space="preserve">
+    <value>TabPageConvPars</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
   </metadata>
 </root>

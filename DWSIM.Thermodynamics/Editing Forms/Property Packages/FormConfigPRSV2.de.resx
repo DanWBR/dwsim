@@ -117,27 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Modell</value>
+  </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Allgemeine Optionen</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Modellparameter</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>445, 17</value>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 13</value>
   </data>
-  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 23</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Alle Änderungen in dieser Tabelle werden nur in dieser Simulation verwendet.</value>
   </data>
-  <data name="Button3.Text" xml:space="preserve">
-    <value>Abschätzen</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Komponente</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Interaktionsparameter</value>
+    <value>Wechselwirkungsparameter</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 13</value>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 13</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Aktion wird ausgeführt.</value>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Alle Änderungen in dieser Tabelle werden nur in dieser Simulation verwendet.</value>
   </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Interaktionsparameter</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Allgemeine Optionen</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Parameter</value>
@@ -145,13 +154,7 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Wert</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Allgemeine Einstellungen</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Allgemeine Einstellungen</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Thermodynamikpaket konfigurieren</value>
+    <value>Konfiguration PRSV-Thermodynamikpaket</value>
   </data>
 </root>
