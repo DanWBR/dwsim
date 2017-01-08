@@ -3,6 +3,37 @@ Imports System.Globalization
 
 Public Module General
 
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Sub ValidateCellForDouble(dgv As DataGridView, e As DataGridViewCellValidatingEventArgs)
+
+        Dim cell As DataGridViewCell = dgv.Rows(e.RowIndex).Cells(e.ColumnIndex)
+
+        If cell.FormattedValue = e.FormattedValue Then Exit Sub
+
+        e.Cancel = Not e.FormattedValue.ToString.IsValidDouble
+
+        If e.Cancel Then
+            If Not dgv.EditingControl Is Nothing Then dgv.EditingControl.ForeColor = Drawing.Color.Red
+            My.Computer.Audio.PlaySystemSound(Media.SystemSounds.Exclamation)
+        Else
+            cell.Style.ForeColor = Drawing.Color.Blue
+        End If
+
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function IsValidDouble(obj As Object) As Boolean
+
+        Return Double.TryParse(obj.ToString, New Double)
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()> _
+    Public Function IsValidDouble(str As String) As Boolean
+
+        Return Double.TryParse(str, New Double)
+
+    End Function
 
     <System.Runtime.CompilerServices.Extension()> _
     Public Function ToString(sourcearray As String(), ci As CultureInfo) As String

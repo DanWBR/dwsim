@@ -132,4 +132,7 @@ Public Class EditingForm_Column_Stages
         Next
     End Sub
 
+    Private Sub dgv1_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgv1.CellValidating
+        If e.ColumnIndex > 1 Then DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
 End Class

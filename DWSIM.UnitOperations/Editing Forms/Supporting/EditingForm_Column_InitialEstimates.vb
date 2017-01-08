@@ -228,6 +228,10 @@ Public Class EditingForm_Column_InitialEstimates
         End If
     End Sub
 
+    Private Sub dgvcl_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvcl.CellValidating
+        If e.ColumnIndex > 0 Then dgvcl.ValidateCellForDouble(e)
+    End Sub
+
     Private Sub dgvc_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvcl.CellValueChanged
         If loaded Then
             Dim value As Object = dgvcl.Rows(e.RowIndex).Cells(e.ColumnIndex).Value
@@ -277,6 +281,10 @@ Public Class EditingForm_Column_InitialEstimates
             dgvcv.SelectedCells(0).Tag = ""
             dgvcv.SelectedCells(0).Style.BackColor = Color.White
         End If
+    End Sub
+
+    Private Sub dgvcv_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvcv.CellValidating
+        If e.ColumnIndex > 0 Then dgvcv.ValidateCellForDouble(e)
     End Sub
 
     Private Sub dgvcv_CellValueChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvcv.CellValueChanged
@@ -429,5 +437,9 @@ Public Class EditingForm_Column_InitialEstimates
             If c.Value Is Nothing And c.ColumnIndex = 3 Then c.Value = DWSIM.MathOps.MathEx.Interpolation.polinterpolation.nevilleinterpolation(px.ToArray(Type.GetType("System.Double")), py.ToArray(Type.GetType("System.Double")), px.Count, c.RowIndex)
         Next
 
+    End Sub
+
+    Private Sub dgvv_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvv.CellValidating
+        If e.ColumnIndex > 0 Then dgvv.ValidateCellForDouble(e)
     End Sub
 End Class

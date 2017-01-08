@@ -3193,6 +3193,33 @@ Public Class FormCompoundCreator
 
     End Sub
 
+    Private Sub GridExpDataPVAP_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataPVAP.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub GridExpDataCPIG_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataCPIG.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub GridExpDataCPLiquid_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataCPLiquid.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub GridExpDataLIQDENS_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataLIQDENS.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub GridExpDataLIQVISC_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataLIQVISC.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub GridExpDataRoS_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataRoS.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub GridExpDataCpS_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataCpS.CellValidating
+        DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
 End Class
 
 <System.Serializable()> Public Class CompoundGeneratorCase

@@ -49,10 +49,10 @@ Partial Class EditingForm_Gibbs_InitialEstimatesEditor
         '
         'FlowLayoutPanel1
         '
-        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
         Me.FlowLayoutPanel1.Controls.Add(Me.Button4)
         Me.FlowLayoutPanel1.Controls.Add(Me.Button2)
         Me.FlowLayoutPanel1.Controls.Add(Me.Button1)
+        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         '
         'Button4
@@ -82,12 +82,12 @@ Partial Class EditingForm_Gibbs_InitialEstimatesEditor
         '
         'grid
         '
-        resources.ApplyResources(Me.grid, "grid")
         Me.grid.AllowUserToAddRows = False
         Me.grid.AllowUserToDeleteRows = False
         Me.grid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col1, Me.col3})
+        resources.ApplyResources(Me.grid, "grid")
         Me.grid.Name = "grid"
         Me.grid.RowHeadersVisible = False
         '

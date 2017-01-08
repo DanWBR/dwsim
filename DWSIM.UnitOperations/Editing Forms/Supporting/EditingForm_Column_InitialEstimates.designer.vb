@@ -407,6 +407,7 @@ Partial Class EditingForm_Column_InitialEstimates
         Me.FaTabStripItem5.CanClose = False
         Me.FaTabStripItem5.Controls.Add(Me.ToolStrip5)
         Me.FaTabStripItem5.Controls.Add(Me.dgvcv)
+        Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem5, resources.GetString("FaTabStripItem5.ToolTip"))
         '

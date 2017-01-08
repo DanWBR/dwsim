@@ -89,4 +89,7 @@ Public Class EditingForm_Gibbs_InitialEstimatesEditor
         Next
     End Sub
 
+    Private Sub grid_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles grid.CellValidating
+        If e.ColumnIndex > 0 Then DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
 End Class

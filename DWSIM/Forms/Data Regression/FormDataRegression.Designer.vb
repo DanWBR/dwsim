@@ -168,6 +168,7 @@ Partial Class FormDataRegression
         'graph
         '
         resources.ApplyResources(Me.graph, "graph")
+        Me.graph.IsShowCopyMessage = False
         Me.graph.Name = "graph"
         Me.graph.ScrollGrace = 0.0R
         Me.graph.ScrollMaxX = 0.0R
@@ -188,6 +189,7 @@ Partial Class FormDataRegression
         'graph2
         '
         resources.ApplyResources(Me.graph2, "graph2")
+        Me.graph2.IsShowCopyMessage = False
         Me.graph2.Name = "graph2"
         Me.graph2.ScrollGrace = 0.0R
         Me.graph2.ScrollMaxX = 0.0R

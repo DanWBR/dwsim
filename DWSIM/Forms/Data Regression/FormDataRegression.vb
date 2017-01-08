@@ -3747,6 +3747,9 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         End Select
     End Sub
 
+    Private Sub GridExpData_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpData.CellValidating
+        If e.ColumnIndex > 0 Then DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
 End Class
 
 Public Class RegressionProblem
