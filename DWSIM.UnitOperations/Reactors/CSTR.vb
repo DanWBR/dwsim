@@ -299,7 +299,7 @@ Namespace Reactors
             'Hr = reaction enthalpy
             'Hr0 = initial reactant enthalpy
             'Hp = products enthalpy
-            Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Q, QL, QS, QV, Qr, m0, Rx, IErr, OErr As Double
+            Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, W, Q, QL, QS, QV, Qr, Rx, IErr, OErr As Double
             Dim ReactorMode As EReactorMode = EReactorMode.SingleOutlet
             Dim RP As Integer 'Reaction phase ID
             Dim dT, MaxChange As Double 'Time step in seconds; MaxChange = max relative change of a component

@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.1 Update 9 - January 2017
+Version 4.1 Update 10 - January 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.1 Update 10
+
+- [FIX] Implemented data validation for input tables (issue #147 https://sourceforge.net/p/dwsim/tickets/147/)
+- [FIX] Fixed unwanted object dragging when 'Close Editors on Deselecting' is enabled (issue #154 https://sourceforge.net/p/dwsim/tickets/154/)
+- [FIX] Fixed double array value check on XML serialization (issue #155 https://sourceforge.net/p/dwsim/tickets/155/)
 
 Version 4.1 Update 9
 
