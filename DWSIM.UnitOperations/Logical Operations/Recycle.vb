@@ -624,19 +624,11 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Bloco para conexão de Correntes de Matéria de corte"
-            Else
-                Return "Block for connecting tear Material Streams"
-            End If
+            Return FlowSheet.GetTranslatedString("MRECY_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Reciclo"
-            Else
-                Return "Recycle Block"
-            End If
+            Return FlowSheet.GetTranslatedString("MRECY_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

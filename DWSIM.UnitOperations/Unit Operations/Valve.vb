@@ -338,19 +338,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de válvula com expansão isentálpica"
-            Else
-                Return "Isenthalpic Valve model"
-            End If
+            Return FlowSheet.GetTranslatedString("VALVE_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Válvula"
-            Else
-                Return "Valve"
-            End If
+            Return FlowSheet.GetTranslatedString("VALVE_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

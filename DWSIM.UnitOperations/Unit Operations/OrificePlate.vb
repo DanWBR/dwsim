@@ -456,19 +456,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Dimensiona ou avalia uma placa de orifício"
-            Else
-                Return "Sizes or evaluates an orifice plate"
-            End If
+            Return FlowSheet.GetTranslatedString("ORIF_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Placa de Orifício"
-            Else
-                Return "Orifice Plate"
-            End If
+            Return FlowSheet.GetTranslatedString("ORIF_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

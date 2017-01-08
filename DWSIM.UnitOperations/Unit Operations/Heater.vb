@@ -478,19 +478,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de aquecedor simples"
-            Else
-                Return "Simple heater model"
-            End If
+            Return FlowSheet.GetTranslatedString("HEAT_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Aquecedor"
-            Else
-                Return "Heater"
-            End If
+            Return FlowSheet.GetTranslatedString("HEAT_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

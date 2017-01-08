@@ -588,19 +588,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Separador de fases fluidas (vapor/líquido)"
-            Else
-                Return "Fluid phase separator (vapor/liquid)"
-            End If
+            Return FlowSheet.GetTranslatedString("VESSEL_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Vaso Separador Gás-Líquido"
-            Else
-                Return "Gas-Liquid Separator"
-            End If
+            Return FlowSheet.GetTranslatedString("VESSEL_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

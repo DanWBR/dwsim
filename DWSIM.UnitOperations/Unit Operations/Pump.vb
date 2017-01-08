@@ -981,19 +981,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de bomba centrífuga"
-            Else
-                Return "Centrifugal Pump model"
-            End If
+            Return FlowSheet.GetTranslatedString("PUMP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Bomba Centrífuga"
-            Else
-                Return "Centrifugal Pump"
-            End If
+            Return FlowSheet.GetTranslatedString("PUMP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

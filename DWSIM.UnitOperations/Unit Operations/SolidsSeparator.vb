@@ -294,19 +294,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Separa a fase sólida das demais em uma Corrente de Matéria"
-            Else
-                Return "Separates a solid phase from the others in a Material Stream"
-            End If
+            Return FlowSheet.GetTranslatedString("SSEP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Separador de Sólidos"
-            Else
-                Return "Solids Separator"
-            End If
+            Return FlowSheet.GetTranslatedString("SSEP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

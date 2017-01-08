@@ -1724,19 +1724,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Calcula o equilíbrio químico de átomos em uma Corrente de Matéria"
-            Else
-                Return "Calculates chemical/atomic equilibrium for a Material Stream"
-            End If
+            Return FlowSheet.GetTranslatedString("GIBBS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Reator de Gibbs"
-            Else
-                Return "Gibbs Reactor"
-            End If
+            Return FlowSheet.GetTranslatedString("GIBBS_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

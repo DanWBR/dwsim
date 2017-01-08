@@ -1232,19 +1232,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para simulação de operações unitárias CAPE-OPEN"
-            Else
-                Return "Model for utilization of a CAPE-OPEN Unit Operation in the flowsheet"
-            End If
+            Return FlowSheet.GetTranslatedString("COUO_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Operação Unitária CAPE-OPEN"
-            Else
-                Return "CAPE-OPEN Unit Operation"
-            End If
+            Return FlowSheet.GetTranslatedString("COUO_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

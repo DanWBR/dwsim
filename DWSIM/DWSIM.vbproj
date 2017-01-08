@@ -408,6 +408,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DWSIM.resx</DependentUpon>
     </Compile>
+    <Compile Include="Languages\UnitOps.es.Designer.vb">
+      <DependentUpon>UnitOps.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Languages\UnitOps.en.Designer.vb">
+      <DependentUpon>UnitOps.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Languages\UnitOps.de.Designer.vb">
+      <DependentUpon>UnitOps.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Languages\UnitOps.Designer.vb">
+      <DependentUpon>UnitOps.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Languages\Tips.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -917,6 +937,26 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SplashScreen.de.resx">
       <DependentUpon>SplashScreen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\UnitOps.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitOps.es.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\UnitOps.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitOps.en.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\UnitOps.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitOps.de.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\UnitOps.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitOps.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Languages\Tips.de.resx" />
     <EmbeddedResource Include="Languages\Tips.en.resx" />

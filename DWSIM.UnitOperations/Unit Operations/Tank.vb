@@ -295,19 +295,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo simplificado de tanque de armazenamento"
-            Else
-                Return "Simple Tank model"
-            End If
+            Return FlowSheet.GetTranslatedString("TANK_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Tanque"
-            Else
-                Return "Tank"
-            End If
+            Return FlowSheet.GetTranslatedString("TANK_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

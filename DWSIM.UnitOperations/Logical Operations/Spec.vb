@@ -504,19 +504,11 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Define uma variável como função de outra"
-            Else
-                Return "Defines a dependent variable/object from other variables/objects"
-            End If
+            Return FlowSheet.GetTranslatedString("SPEC_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Especificação"
-            Else
-                Return "Specification Block"
-            End If
+            Return FlowSheet.GetTranslatedString("SPEC_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

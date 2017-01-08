@@ -356,19 +356,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Operação unitária definida por um script IronPython"
-            Else
-                Return "IronPython script-defined Unit Operation"
-            End If
+            Return FlowSheet.GetTranslatedString("IPUO_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Script IronPython"
-            Else
-                Return "IronPython Script"
-            End If
+            Return FlowSheet.GetTranslatedString("IPUO_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

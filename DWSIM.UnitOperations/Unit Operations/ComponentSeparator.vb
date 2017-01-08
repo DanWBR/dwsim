@@ -540,19 +540,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para separação hipotética de substâncias"
-            Else
-                Return "Model for a hypothetical compound separation process"
-            End If
+            Return FlowSheet.GetTranslatedString("CSEP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Separador de Substâncias"
-            Else
-                Return "Compound Separator"
-            End If
+            Return FlowSheet.GetTranslatedString("CSEP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -1507,19 +1507,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de trocador de calor rigoroso"
-            Else
-                Return "Rigorous Heat Exchanger model"
-            End If
+            Return FlowSheet.GetTranslatedString("HEXCH_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Trocador de Calor Rigoroso"
-            Else
-                Return "Heat Exchanger"
-            End If
+            Return FlowSheet.GetTranslatedString("HEXCH_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

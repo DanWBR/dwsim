@@ -653,19 +653,11 @@ restart:    B = F - D
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para dimensionamento rápido de colunas de destilação"
-            Else
-                Return "Model for quick sizing of distillation columns"
-            End If
+            Return FlowSheet.GetTranslatedString("CSC_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Coluna Shortcut"
-            Else
-                Return "Shortcut Column"
-            End If
+            Return FlowSheet.GetTranslatedString("CSC_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

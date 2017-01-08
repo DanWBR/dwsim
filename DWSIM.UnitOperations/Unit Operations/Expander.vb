@@ -452,19 +452,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para um expansor isentrópico"
-            Else
-                Return "Model for an adiabatic (isentropic) expander"
-            End If
+            Return FlowSheet.GetTranslatedString("EXP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Expansor Adiabático"
-            Else
-                Return "Adiabatic Expander"
-            End If
+            Return FlowSheet.GetTranslatedString("EXP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

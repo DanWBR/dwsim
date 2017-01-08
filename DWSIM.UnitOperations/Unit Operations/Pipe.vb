@@ -1590,19 +1590,11 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Define um segmento de tubulação e acessórios para cálculo de perda de carga"
-            Else
-                Return "Defines a piping segment for pressure drop calculations"
-            End If
+            Return FlowSheet.GetTranslatedString("PIPE_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Segmento de Tubulação"
-            Else
-                Return "Piping Segment"
-            End If
+            Return FlowSheet.GetTranslatedString("PIPE_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

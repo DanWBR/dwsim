@@ -718,19 +718,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para utilização de uma planilha como um bloco no fluxograma"
-            Else
-                Return "Use a spreadsheet file as a flowsheet block"
-            End If
+            Return FlowSheet.GetTranslatedString("EXLUO_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Planilha"
-            Else
-                Return "Spreadsheet"
-            End If
+            Return FlowSheet.GetTranslatedString("EXLUO_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

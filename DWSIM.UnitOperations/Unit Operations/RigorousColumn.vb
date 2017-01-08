@@ -901,19 +901,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo rigoroso para simulação de colunas de destilação"
-            Else
-                Return "Rigorous model for simulation of distillation columns"
-            End If
+            Return FlowSheet.GetTranslatedString("CDEST_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Coluna de Destilação"
-            Else
-                Return "Distillation Column"
-            End If
+            Return FlowSheet.GetTranslatedString("CDEST_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -1059,19 +1051,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para simulação rigorosa de colunas de absorção"
-            Else
-                Return "Model for rigorous simulation of absorption columns"
-            End If
+            Return FlowSheet.GetTranslatedString("CABS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Coluna de Absorção"
-            Else
-                Return "Absorption Column"
-            End If
+            Return FlowSheet.GetTranslatedString("CABS_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -1212,19 +1196,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo rigoroso de absorvedora com refervedor"
-            Else
-                Return "Rigorous reboiled absorber model"
-            End If
+            Return FlowSheet.GetTranslatedString("CRABS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Absorvedora com Refervedor"
-            Else
-                Return "Reboiled Absorber"
-            End If
+            Return FlowSheet.GetTranslatedString("CRABS_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -1371,19 +1347,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo rigoroso de uma coluna de absorção com refluxo"
-            Else
-                Return "Rigorous Refluxed Absorber model"
-            End If
+            Return FlowSheet.GetTranslatedString("CRFABS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Absorvedora com Refluxo"
-            Else
-                Return "Refluxed Absorber"
-            End If
+            Return FlowSheet.GetTranslatedString("CRFABS_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean

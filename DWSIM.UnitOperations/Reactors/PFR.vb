@@ -935,19 +935,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de um PFR, suporta reações Cinéticas e Catalíticas Heterogêneas"
-            Else
-                Return "Plug-Flow Reactor model, supports Kinetic and HetCat reactions"
-            End If
+            Return FlowSheet.GetTranslatedString("PFR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Reator Plug-Flow (PFR)"
-            Else
-                Return "Plug-Flow Reactor (PFR)"
-            End If
+            Return FlowSheet.GetTranslatedString("PFR_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

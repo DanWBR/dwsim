@@ -627,19 +627,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Suporta reações definidas por uma taxa de conversão de reagentes"
-            Else
-                Return "Supports reactions defined by amounts of reactant converted as a function of temperature"
-            End If
+            Return FlowSheet.GetTranslatedString("CONV_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Reator de Conversão"
-            Else
-                Return "Conversion Reactor"
-            End If
+            Return FlowSheet.GetTranslatedString("CONV_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

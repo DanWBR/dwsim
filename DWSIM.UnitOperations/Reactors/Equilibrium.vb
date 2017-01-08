@@ -1053,19 +1053,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Suporta reações definidas por constantes de equilíbrio"
-            Else
-                Return "Supports equilibrium constant-defined reactions"
-            End If
+            Return FlowSheet.GetTranslatedString("EQUIL_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Reator de Equilíbrio"
-            Else
-                Return "Equilibrium Reactor"
-            End If
+            Return FlowSheet.GetTranslatedString("EQUIL_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

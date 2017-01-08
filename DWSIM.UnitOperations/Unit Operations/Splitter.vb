@@ -434,19 +434,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Divide uma Corrente de Matéria em outras correntes"
-            Else
-                Return "Splits a single Material Stream into multiple ones"
-            End If
+            Return FlowSheet.GetTranslatedString("SPLIT_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Divisor de Correntes"
-            Else
-                Return "Stream Splitter"
-            End If
+            Return FlowSheet.GetTranslatedString("SPLIT_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

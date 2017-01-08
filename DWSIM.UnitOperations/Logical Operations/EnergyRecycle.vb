@@ -416,19 +416,11 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Bloco lógico para reciclo de correntes de energia"
-            Else
-                Return "Logical block for Energy Streams"
-            End If
+            Return FlowSheet.GetTranslatedString("ERECY_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Reciclo de Energia"
-            Else
-                Return "Energy Recycle Block"
-            End If
+            Return FlowSheet.GetTranslatedString("ERECY_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

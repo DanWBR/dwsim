@@ -1354,19 +1354,11 @@ out:        Dim ms1, ms2 As MaterialStream
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de um CSTR, suporta reações Cinéticas e Catalíticas Heterogêneas"
-            Else
-                Return "CSTR model, supports Kinetic and HetCat reactions"
-            End If
+            Return FlowSheet.GetTranslatedString("CSTR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Continous Stirred Tank Reactor (CSTR)"
-            Else
-                Return "Continous Stirred Tank Reactor (CSTR)"
-            End If
+            Return FlowSheet.GetTranslatedString("CSTR_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

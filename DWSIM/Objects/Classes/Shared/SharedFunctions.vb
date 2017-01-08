@@ -78,6 +78,28 @@ Namespace DWSIM
             End If
         End Function
 
+        Public Shared Function GetLocalUnitOpString(ByVal id As String) As String
+
+            If My.Application._HelpManager Is Nothing Then
+
+                'loads the current language
+                My.Application._CultureInfo = New Globalization.CultureInfo(My.Settings.CultureInfo)
+                My.Application.ChangeUICulture(My.Settings.CultureInfo)
+
+                'loads the resource manager
+                My.Application._UnitOpResManager = New System.Resources.ResourceManager("DWSIM.UnitOps", System.Reflection.Assembly.GetExecutingAssembly())
+
+            End If
+
+            If id <> "" Then
+                Dim retstr As String
+                retstr = My.Application._UnitOpResManager.GetString(id, My.Application._CultureInfo)
+                If retstr Is Nothing Then Return id Else Return retstr
+            Else
+                Return ""
+            End If
+        End Function
+
 
         Public Shared Function GetLocalString(ByVal id As String) As String
 

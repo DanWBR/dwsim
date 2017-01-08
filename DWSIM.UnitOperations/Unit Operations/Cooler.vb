@@ -453,19 +453,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de resfriador simples"
-            Else
-                Return "Simple cooler model"
-            End If
+            Return FlowSheet.GetTranslatedString("COOL_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Resfriador"
-            Else
-                Return "Cooler"
-            End If
+            Return FlowSheet.GetTranslatedString("COOL_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

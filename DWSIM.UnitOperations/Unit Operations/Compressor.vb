@@ -515,19 +515,11 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para um compressor isentrópico"
-            Else
-                Return "Model for an adiabatic (isentropic) compressor"
-            End If
+            Return FlowSheet.GetTranslatedString("COMP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Compressor Adiabático"
-            Else
-                Return "Adiabatic Compressor"
-            End If
+            Return FlowSheet.GetTranslatedString("COMP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

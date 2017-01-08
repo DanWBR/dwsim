@@ -5708,19 +5708,11 @@ Namespace Streams
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Carrega informações sobre substâncias e condições de fluxo de matéria"
-            Else
-                Return "Contains information about compounds flowing at specified state conditions"
-            End If
+            Return FlowSheet.GetTranslatedString("MSTR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Corrente de Matéria"
-            Else
-                Return "Material Stream"
-            End If
+            Return FlowSheet.GetTranslatedString("MSTR_Name")
         End Function
 
         Public Overrides Function GetDefaultProperties() As String()

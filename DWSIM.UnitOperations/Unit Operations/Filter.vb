@@ -432,19 +432,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo de filtro de sólidos"
-            Else
-                Return "Solids Filter model"
-            End If
+            Return FlowSheet.GetTranslatedString("FILTER_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Filtro"
-            Else
-                Return "Filter"
-            End If
+            Return FlowSheet.GetTranslatedString("FILTER_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

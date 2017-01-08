@@ -223,19 +223,11 @@ Namespace Streams
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Representa o fluxo de energia entrando e saindo das operações unitárias"
-            Else
-                Return "Energy flow from/to Unit Operations"
-            End If
+            Return FlowSheet.GetTranslatedString("ESTR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Corrente de Energia"
-            Else
-                Return "Energy Stream"
-            End If
+            Return FlowSheet.GetTranslatedString("ESTR_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

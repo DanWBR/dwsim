@@ -1006,19 +1006,11 @@ Label_00CC:
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Modelo para utilização de uma simulação existente como um bloco no fluxograma"
-            Else
-                Return "Model for using an existing simulation as a flowsheet block"
-            End If
+            Return FlowSheet.GetTranslatedString("FLOWS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Fluxograma"
-            Else
-                Return "Flowsheet"
-            End If
+            Return FlowSheet.GetTranslatedString("FLOWS_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

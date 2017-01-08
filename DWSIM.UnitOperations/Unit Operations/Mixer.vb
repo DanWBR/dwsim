@@ -238,19 +238,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Mistura múltiplas Correntes de Matéria em uma"
-            Else
-                Return "Mixes multiple Material Streams into a single one"
-            End If
+            Return FlowSheet.GetTranslatedString("MIX_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                Return "Misturador de Correntes"
-            Else
-                Return "Stream Mixer"
-            End If
+            Return FlowSheet.GetTranslatedString("MIX_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()
