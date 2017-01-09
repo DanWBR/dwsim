@@ -631,6 +631,7 @@ Partial Class EditingForm_Pump_Curves
         resources.ApplyResources(Me.chart1, "chart1")
         Me.chart1.IsAntiAlias = True
         Me.chart1.IsAutoScrollRange = True
+        Me.chart1.IsShowCopyMessage = False
         Me.chart1.Name = "chart1"
         Me.chart1.ScrollGrace = 0.0R
         Me.chart1.ScrollMaxX = 0.0R

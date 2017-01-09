@@ -144,7 +144,7 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;GraphControl.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.0.32336, Culture=neutral, PublicKeyToken=02a83cbd123fcd60</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.31453, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -165,9 +165,6 @@
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;Grid1.Name" xml:space="preserve">
     <value>Grid1</value>
   </data>
@@ -177,17 +174,11 @@
   <data name="ToolStrip1.Text" xml:space="preserve">
     <value>ToolStrip1</value>
   </data>
-  <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
-  </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="&gt;&gt;tbErro.Parent" xml:space="preserve">
     <value>GroupBox3</value>
-  </data>
-  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
-    <value>ToolStrip1</value>
   </data>
   <data name="GroupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -219,8 +210,8 @@
   <data name="tbMaxIt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="rbSecante.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 17</value>
+  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -233,6 +224,9 @@
   </data>
   <data name="&gt;&gt;FaTabStrip1.Parent" xml:space="preserve">
     <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;tsbDockingRight.Name" xml:space="preserve">
+    <value>tsbDockingRight</value>
   </data>
   <data name="&gt;&gt;tbStep.Name" xml:space="preserve">
     <value>tbStep</value>
@@ -258,6 +252,9 @@
   <data name="btnIniciar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="tsbClose.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -272,6 +269,9 @@
   </data>
   <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
     <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
+    <value>lblStatus</value>
   </data>
   <data name="&gt;&gt;tbErro.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -306,12 +306,6 @@
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 105</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Encaixe</value>
-  </data>
   <data name="rbSecante.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -321,11 +315,11 @@
   <data name="tbMax.Text" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
-    <value>lblStatus</value>
+  <data name="tsbDockingLeft.Text" xml:space="preserve">
+    <value>Esquerda</value>
   </data>
-  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
-    <value>Label8</value>
+  <data name="&gt;&gt;ToolStrip1.Name" xml:space="preserve">
+    <value>ToolStrip1</value>
   </data>
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -360,14 +354,17 @@
   <data name="&gt;&gt;FaTabStrip1.Name" xml:space="preserve">
     <value>FaTabStrip1</value>
   </data>
-  <data name="tsbDockingTop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 25</value>
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
+  </data>
+  <data name="tsbDockingTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 25</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>WeifenLuo.WinFormsUI.Docking.DockContent, WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=null</value>
@@ -429,8 +426,8 @@
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="tbAjuste.Text" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lblItXdeY.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -498,17 +495,14 @@
   <data name="tsbDockingLeft.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="tbStep.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
   <data name="tbAjuste.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
   </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt</value>
   </data>
   <data name="ToolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -555,8 +549,8 @@
   <data name="rbBrent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="FaTabStrip1.Text" xml:space="preserve">
+    <value>FaTabStrip1</value>
   </data>
   <data name="KryptonLabel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 26</value>
@@ -591,6 +585,9 @@
   <data name="GraphControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="rbSecante.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 17</value>
+  </data>
   <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
@@ -600,11 +597,11 @@
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>500, 246</value>
   </data>
-  <data name="tbAjuste.Text" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tsbDockingFloat.Text" xml:space="preserve">
     <value>Janela Flutuante</value>
@@ -622,19 +619,16 @@
     <value>1</value>
   </data>
   <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6103.37915, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6218.31453, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;tsbDockingRight.Name" xml:space="preserve">
-    <value>tsbDockingRight</value>
+  <data name="&gt;&gt;tbMaxIt.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
-  </data>
-  <data name="FaTabStrip1.Text" xml:space="preserve">
-    <value>FaTabStrip1</value>
   </data>
   <data name="&gt;&gt;btnIniciar.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -665,6 +659,9 @@
   </data>
   <data name="rbSecante.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 53</value>
   </data>
   <data name="&gt;&gt;Grid1.Parent" xml:space="preserve">
     <value>FaTabStripItem2</value>
@@ -744,14 +741,20 @@
   <data name="&gt;&gt;GraphControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 13</value>
+  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Tolerância</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>516, 135</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>EditingForm_Adjust_ControlPanel</value>
+  <data name="&gt;&gt;tbErro.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tbMin.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -769,10 +772,7 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6103.37915, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="FaTabStrip1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6218.31453, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
@@ -782,6 +782,9 @@
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 25</value>
+  </data>
+  <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 50</value>
   </data>
   <data name="&gt;&gt;tsbDockingBottom.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -808,7 +811,7 @@
     <value>5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6103.37915, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6218.31453, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnParar.Parent" xml:space="preserve">
     <value>GroupBox2</value>
@@ -825,14 +828,14 @@
   <data name="btnParar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Valor de ajuste</value>
+  </data>
   <data name="rbSecante.Text" xml:space="preserve">
     <value>Secante</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Limites Min/Max</value>
-  </data>
-  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -849,14 +852,14 @@
   <data name="&gt;&gt;tsbDockingRight.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 53</value>
+  <data name="GraphControl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8.25pt</value>
   </data>
   <data name="btnParar.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="tbTol.Text" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>EditingForm_Adjust_ControlPanel</value>
   </data>
   <data name="tbErro.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -876,8 +879,8 @@
   <data name="&gt;&gt;tbAjuste.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tbErro.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;KryptonLabel1.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -896,6 +899,9 @@
   </data>
   <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
     <value>GroupBox2</value>
+  </data>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tbTol.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -921,7 +927,7 @@
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>294, 26</value>
   </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+  <data name="tbTol.Text" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
@@ -930,11 +936,8 @@
   <data name="tbErro.Location" type="System.Drawing.Point, System.Drawing">
     <value>384, 48</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Valor de ajuste</value>
-  </data>
-  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 246</value>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Encaixe</value>
   </data>
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
@@ -945,17 +948,20 @@
   <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;tsbDockingTop.Name" xml:space="preserve">
     <value>tsbDockingTop</value>
   </data>
-  <data name="tsbClose.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="GraphControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tbMax.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
+  <data name="tsbDockingRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;tbAjuste.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -963,8 +969,8 @@
   <data name="&gt;&gt;ToolStripLabel1.Name" xml:space="preserve">
     <value>ToolStripLabel1</value>
   </data>
-  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 13</value>
+  <data name="tbStep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
   </data>
   <data name="tbMaxIt.Location" type="System.Drawing.Point, System.Drawing">
     <value>196, 50</value>
@@ -996,8 +1002,8 @@
   <data name="tbMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
   </data>
-  <data name="btnIniciar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 50</value>
+  <data name="GraphControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>500, 246</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 13</value>
@@ -1050,9 +1056,6 @@
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>507, 267</value>
   </data>
-  <data name="&gt;&gt;tbMaxIt.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Número máximo de iterações</value>
   </data>
@@ -1065,11 +1068,8 @@
   <data name="tbStep.Text" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="tsbDockingRight.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="tsbDockingLeft.Text" xml:space="preserve">
-    <value>Esquerda</value>
+  <data name="tbMax.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="btnIniciar.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

@@ -189,6 +189,7 @@ Partial Class EditingForm_Adjust_ControlPanel
         Me.GraphControl.BackColor = System.Drawing.Color.WhiteSmoke
         Me.GraphControl.IsAntiAlias = True
         Me.GraphControl.IsAutoScrollRange = True
+        Me.GraphControl.IsShowCopyMessage = False
         Me.GraphControl.Name = "GraphControl"
         Me.GraphControl.ScrollGrace = 0.0R
         Me.GraphControl.ScrollMaxX = 0.0R

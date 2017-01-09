@@ -117,110 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="btnParar.Text" xml:space="preserve">
-    <value>Anhalten</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Nr. Stufe</value>
   </data>
-  <data name="btnIniciar.Text" xml:space="preserve">
-    <value>Initialisiere Anpassung</value>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>Strom</value>
   </data>
-  <data name="rbSecante.Text" xml:space="preserve">
-    <value>Sekante</value>
+  <data name="ToolStripButton1.ToolTipText" xml:space="preserve">
+    <value>Hinzufügen</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+  <data name="ToolStripButton2.ToolTipText" xml:space="preserve">
+    <value>Entfernen</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Limit Min/Max</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Feeds</value>
   </data>
-  <data name="KryptonLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 13</value>
+  <data name="DataGridViewComboBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Position</value>
   </data>
-  <data name="KryptonLabel1.Text" xml:space="preserve">
-    <value>Konvergenzmethode</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Miximale Iterationen</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Toleranz</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Start-Delta (Schrittgröße)</value>
+  <data name="DataGridViewComboBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Strom</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parameter</value>
+    <value>Produkte</value>
   </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Diagramm</value>
+  <data name="DataGridViewComboBoxColumn2.HeaderText" xml:space="preserve">
+    <value>Von Stufe</value>
   </data>
-  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 246</value>
+  <data name="DataGridViewComboBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Strom</value>
   </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 246</value>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Typ</value>
   </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Tabelle</value>
+  <data name="Column7.HeaderText" xml:space="preserve">
+    <value>Ausgang</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 13</value>
+  <data name="ToolStripButton3.ToolTipText" xml:space="preserve">
+    <value>Hinzufügen</value>
   </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>Aktueller Fehler</value>
-  </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Anpassungswert</value>
+  <data name="ToolStripButton4.ToolTipText" xml:space="preserve">
+    <value>Entfernen</value>
   </data>
   <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Ergebnisse</value>
+    <value>Seitenabzüge</value>
   </data>
-  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 25</value>
+  <data name="DataGridViewComboBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Position</value>
   </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Docking</value>
+  <data name="DataGridViewComboBoxColumn6.HeaderText" xml:space="preserve">
+    <value>Strom</value>
   </data>
-  <data name="tsbDockingLeft.Text" xml:space="preserve">
-    <value>Links</value>
+  <data name="ToolStripButton5.ToolTipText" xml:space="preserve">
+    <value>Hinzufügen</value>
   </data>
-  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
-    <value>Links Auto-Hide</value>
+  <data name="ToolStripButton6.ToolTipText" xml:space="preserve">
+    <value>Entfernen</value>
   </data>
-  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
-    <value>Rechts Auto-Hide</value>
-  </data>
-  <data name="tsbDockingRight.Text" xml:space="preserve">
-    <value>Rechts</value>
-  </data>
-  <data name="tsbDockingTop.Text" xml:space="preserve">
-    <value>Oben</value>
-  </data>
-  <data name="tsbDockingBottom.Text" xml:space="preserve">
-    <value>Unten</value>
-  </data>
-  <data name="tsbDockingDocument.Text" xml:space="preserve">
-    <value>Dokument</value>
-  </data>
-  <data name="tsbDockingFloat.Text" xml:space="preserve">
-    <value>Schwebend</value>
-  </data>
-  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 25</value>
-  </data>
-  <data name="tsbClose.Text" xml:space="preserve">
-    <value>Schließen</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Energieströme</value>
   </data>
 </root>

@@ -126,39 +126,39 @@ Partial Class EditingForm_Column_Results
         '
         'Content
         '
-        Me.Content.AlwaysShowClose = False
         resources.ApplyResources(Me.Content, "Content")
+        Me.Content.AlwaysShowClose = False
         Me.Content.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2, Me.FaTabStripItem3, Me.FaTabStripItem20})
         Me.Content.Name = "Content"
         Me.Content.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.FaTabStrip2)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'FaTabStrip2
         '
+        resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
         Me.FaTabStrip2.AlwaysShowClose = False
         Me.FaTabStrip2.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem4, Me.FaTabStripItem5})
         Me.FaTabStrip2.Name = "FaTabStrip2"
         Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem4
         '
         'FaTabStripItem4
         '
+        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
         Me.FaTabStripItem4.CanClose = False
         Me.FaTabStripItem4.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem4.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem4.IsDrawn = True
         Me.FaTabStripItem4.Name = "FaTabStripItem4"
         Me.FaTabStripItem4.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem4, "FaTabStripItem4")
         '
         'GroupBox2
         '
@@ -185,6 +185,7 @@ Partial Class EditingForm_Column_Results
         resources.ApplyResources(Me.GraphTP, "GraphTP")
         Me.GraphTP.IsAntiAlias = True
         Me.GraphTP.IsAutoScrollRange = True
+        Me.GraphTP.IsShowCopyMessage = False
         Me.GraphTP.IsShowPointValues = True
         Me.GraphTP.Name = "GraphTP"
         Me.GraphTP.ScrollGrace = 0.0R
@@ -197,11 +198,11 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem5
         '
+        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         Me.FaTabStripItem5.CanClose = False
         Me.FaTabStripItem5.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem5.IsDrawn = True
         Me.FaTabStripItem5.Name = "FaTabStripItem5"
-        resources.ApplyResources(Me.FaTabStripItem5, "FaTabStripItem5")
         '
         'GroupBox3
         '
@@ -212,6 +213,7 @@ Partial Class EditingForm_Column_Results
         '
         'TableTP
         '
+        resources.ApplyResources(Me.TableTP, "TableTP")
         Me.TableTP.AllowUserToAddRows = False
         Me.TableTP.AllowUserToDeleteRows = False
         Me.TableTP.AllowUserToOrderColumns = True
@@ -236,7 +238,6 @@ Partial Class EditingForm_Column_Results
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.TableTP.DefaultCellStyle = DataGridViewCellStyle3
-        resources.ApplyResources(Me.TableTP, "TableTP")
         Me.TableTP.Name = "TableTP"
         Me.TableTP.ReadOnly = True
         Me.TableTP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -244,30 +245,30 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem2
         '
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.FaTabStrip3)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'FaTabStrip3
         '
+        resources.ApplyResources(Me.FaTabStrip3, "FaTabStrip3")
         Me.FaTabStrip3.AlwaysShowClose = False
         Me.FaTabStrip3.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip3, "FaTabStrip3")
         Me.FaTabStrip3.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem6, Me.FaTabStripItem7})
         Me.FaTabStrip3.Name = "FaTabStrip3"
         Me.FaTabStrip3.SelectedItem = Me.FaTabStripItem6
         '
         'FaTabStripItem6
         '
+        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         Me.FaTabStripItem6.CanClose = False
         Me.FaTabStripItem6.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem6.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
         Me.FaTabStripItem6.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         '
         'GroupBox4
         '
@@ -294,6 +295,7 @@ Partial Class EditingForm_Column_Results
         resources.ApplyResources(Me.GraphVL, "GraphVL")
         Me.GraphVL.IsAntiAlias = True
         Me.GraphVL.IsAutoScrollRange = True
+        Me.GraphVL.IsShowCopyMessage = False
         Me.GraphVL.IsShowPointValues = True
         Me.GraphVL.Name = "GraphVL"
         Me.GraphVL.ScrollGrace = 0.0R
@@ -306,11 +308,11 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem7
         '
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.CanClose = False
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         '
         'GroupBox6
         '
@@ -321,6 +323,7 @@ Partial Class EditingForm_Column_Results
         '
         'TableVL
         '
+        resources.ApplyResources(Me.TableVL, "TableVL")
         Me.TableVL.AllowUserToAddRows = False
         Me.TableVL.AllowUserToDeleteRows = False
         Me.TableVL.AllowUserToOrderColumns = True
@@ -345,7 +348,6 @@ Partial Class EditingForm_Column_Results
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.TableVL.DefaultCellStyle = DataGridViewCellStyle6
-        resources.ApplyResources(Me.TableVL, "TableVL")
         Me.TableVL.Name = "TableVL"
         Me.TableVL.ReadOnly = True
         Me.TableVL.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -353,30 +355,30 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem3
         '
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.CanClose = False
         Me.FaTabStripItem3.Controls.Add(Me.FaTabStrip4)
         Me.FaTabStripItem3.IsDrawn = True
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         '
         'FaTabStrip4
         '
+        resources.ApplyResources(Me.FaTabStrip4, "FaTabStrip4")
         Me.FaTabStrip4.AlwaysShowClose = False
         Me.FaTabStrip4.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip4, "FaTabStrip4")
         Me.FaTabStrip4.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem8, Me.FaTabStripItem9})
         Me.FaTabStrip4.Name = "FaTabStrip4"
         Me.FaTabStrip4.SelectedItem = Me.FaTabStripItem8
         '
         'FaTabStripItem8
         '
+        resources.ApplyResources(Me.FaTabStripItem8, "FaTabStripItem8")
         Me.FaTabStripItem8.CanClose = False
         Me.FaTabStripItem8.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem8.Controls.Add(Me.GroupBox8)
         Me.FaTabStripItem8.IsDrawn = True
         Me.FaTabStripItem8.Name = "FaTabStripItem8"
         Me.FaTabStripItem8.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem8, "FaTabStripItem8")
         '
         'GroupBox7
         '
@@ -412,6 +414,7 @@ Partial Class EditingForm_Column_Results
         resources.ApplyResources(Me.GraphCP, "GraphCP")
         Me.GraphCP.IsAntiAlias = True
         Me.GraphCP.IsAutoScrollRange = True
+        Me.GraphCP.IsShowCopyMessage = False
         Me.GraphCP.IsShowPointValues = True
         Me.GraphCP.Name = "GraphCP"
         Me.GraphCP.ScrollGrace = 0.0R
@@ -424,11 +427,11 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem9
         '
+        resources.ApplyResources(Me.FaTabStripItem9, "FaTabStripItem9")
         Me.FaTabStripItem9.CanClose = False
         Me.FaTabStripItem9.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem9.IsDrawn = True
         Me.FaTabStripItem9.Name = "FaTabStripItem9"
-        resources.ApplyResources(Me.FaTabStripItem9, "FaTabStripItem9")
         '
         'GroupBox9
         '
@@ -439,6 +442,7 @@ Partial Class EditingForm_Column_Results
         '
         'TableCP
         '
+        resources.ApplyResources(Me.TableCP, "TableCP")
         Me.TableCP.AllowUserToAddRows = False
         Me.TableCP.AllowUserToDeleteRows = False
         Me.TableCP.AllowUserToOrderColumns = True
@@ -463,7 +467,6 @@ Partial Class EditingForm_Column_Results
         DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.TableCP.DefaultCellStyle = DataGridViewCellStyle9
-        resources.ApplyResources(Me.TableCP, "TableCP")
         Me.TableCP.Name = "TableCP"
         Me.TableCP.ReadOnly = True
         Me.TableCP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -471,30 +474,30 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem20
         '
+        resources.ApplyResources(Me.FaTabStripItem20, "FaTabStripItem20")
         Me.FaTabStripItem20.CanClose = False
         Me.FaTabStripItem20.Controls.Add(Me.FaTabStrip9)
         Me.FaTabStripItem20.IsDrawn = True
         Me.FaTabStripItem20.Name = "FaTabStripItem20"
-        resources.ApplyResources(Me.FaTabStripItem20, "FaTabStripItem20")
         '
         'FaTabStrip9
         '
+        resources.ApplyResources(Me.FaTabStrip9, "FaTabStrip9")
         Me.FaTabStrip9.AlwaysShowClose = False
         Me.FaTabStrip9.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip9, "FaTabStrip9")
         Me.FaTabStrip9.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem21, Me.FaTabStripItem22})
         Me.FaTabStrip9.Name = "FaTabStrip9"
         Me.FaTabStrip9.SelectedItem = Me.FaTabStripItem21
         '
         'FaTabStripItem21
         '
+        resources.ApplyResources(Me.FaTabStripItem21, "FaTabStripItem21")
         Me.FaTabStripItem21.CanClose = False
         Me.FaTabStripItem21.Controls.Add(Me.GroupBox21)
         Me.FaTabStripItem21.Controls.Add(Me.GroupBox22)
         Me.FaTabStripItem21.IsDrawn = True
         Me.FaTabStripItem21.Name = "FaTabStripItem21"
         Me.FaTabStripItem21.Selected = True
-        resources.ApplyResources(Me.FaTabStripItem21, "FaTabStripItem21")
         '
         'GroupBox21
         '
@@ -514,6 +517,7 @@ Partial Class EditingForm_Column_Results
         resources.ApplyResources(Me.GraphConc, "GraphConc")
         Me.GraphConc.IsAntiAlias = True
         Me.GraphConc.IsAutoScrollRange = True
+        Me.GraphConc.IsShowCopyMessage = False
         Me.GraphConc.IsShowPointValues = True
         Me.GraphConc.Name = "GraphConc"
         Me.GraphConc.ScrollGrace = 0.0R
@@ -526,11 +530,11 @@ Partial Class EditingForm_Column_Results
         '
         'FaTabStripItem22
         '
+        resources.ApplyResources(Me.FaTabStripItem22, "FaTabStripItem22")
         Me.FaTabStripItem22.CanClose = False
         Me.FaTabStripItem22.Controls.Add(Me.GroupBox23)
         Me.FaTabStripItem22.IsDrawn = True
         Me.FaTabStripItem22.Name = "FaTabStripItem22"
-        resources.ApplyResources(Me.FaTabStripItem22, "FaTabStripItem22")
         '
         'GroupBox23
         '
@@ -541,6 +545,7 @@ Partial Class EditingForm_Column_Results
         '
         'DataGridView4
         '
+        resources.ApplyResources(Me.DataGridView4, "DataGridView4")
         Me.DataGridView4.AllowUserToAddRows = False
         Me.DataGridView4.AllowUserToDeleteRows = False
         Me.DataGridView4.AllowUserToOrderColumns = True
@@ -565,7 +570,6 @@ Partial Class EditingForm_Column_Results
         DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView4.DefaultCellStyle = DataGridViewCellStyle12
-        resources.ApplyResources(Me.DataGridView4, "DataGridView4")
         Me.DataGridView4.Name = "DataGridView4"
         Me.DataGridView4.ReadOnly = True
         Me.DataGridView4.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -573,44 +577,44 @@ Partial Class EditingForm_Column_Results
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSB_Print, Me.TSB_PrinterSetup, Me.TSB_PageSetup, Me.TSB_Preview, Me.TSB_Copy})
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSB_Print, Me.TSB_PrinterSetup, Me.TSB_PageSetup, Me.TSB_Preview, Me.TSB_Copy})
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         '
         'TSB_Print
         '
+        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Print.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.printer
-        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.Name = "TSB_Print"
         '
         'TSB_PrinterSetup
         '
+        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_PrinterSetup.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.printer_add
-        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.Name = "TSB_PrinterSetup"
         '
         'TSB_PageSetup
         '
+        resources.ApplyResources(Me.TSB_PageSetup, "TSB_PageSetup")
         Me.TSB_PageSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_PageSetup.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.page_white_gear
-        resources.ApplyResources(Me.TSB_PageSetup, "TSB_PageSetup")
         Me.TSB_PageSetup.Name = "TSB_PageSetup"
         '
         'TSB_Preview
         '
+        resources.ApplyResources(Me.TSB_Preview, "TSB_Preview")
         Me.TSB_Preview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Preview.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.page_white_magnify
-        resources.ApplyResources(Me.TSB_Preview, "TSB_Preview")
         Me.TSB_Preview.Name = "TSB_Preview"
         '
         'TSB_Copy
         '
+        resources.ApplyResources(Me.TSB_Copy, "TSB_Copy")
         Me.TSB_Copy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Copy.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.copy
-        resources.ApplyResources(Me.TSB_Copy, "TSB_Copy")
         Me.TSB_Copy.Name = "TSB_Copy"
         '
         'PrintDialog1
