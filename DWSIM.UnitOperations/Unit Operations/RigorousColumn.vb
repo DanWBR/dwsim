@@ -1403,8 +1403,8 @@ Namespace UnitOperations
         Private _stopatiter As Integer = -1
         Private _scdf As Double = 0.5
         Private _scmaxtc As Double = 10.0#
-        Private _scnderivstep As Double = 0.1
-        Private _ionderivstep As Double = 0.01
+        Private _scnderivstep As Double = 0.0000000001
+        Private _ionderivstep As Double = 0.0000000001
         Private _iomaxvarchgfac As Integer = 10
         Private _scmaxvarchgfac As Integer = 10
         Private _iodfmin As Double = 0.1#

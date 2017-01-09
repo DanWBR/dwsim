@@ -647,24 +647,27 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = 0.0000000001
+            Dim epsilon As Double = Math.Pow(2, -30)
 
-            Dim f2, f3 As Double
-            Dim g(x.Length - 1), x1(x.Length - 1) As Double
+            Dim f1, f2 As Double
+            Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
             Dim j, k As Integer
 
-            f2 = FunctionValue(x)
             For j = 0 To x.Length - 1
                 For k = 0 To x.Length - 1
                     x1(k) = x(k)
+                    x2(k) = x(k)
                 Next
                 If x(j) <> 0.0# Then
-                    x1(j) = x(j) * (1 + epsilon)
+                    x1(j) = x(j) * (1.0# + epsilon)
+                    x2(j) = x(j) * (1.0# - epsilon)
                 Else
                     x1(j) = x(j) + epsilon
+                    x2(j) = x(j) - epsilon
                 End If
-                f3 = FunctionValue(x1)
-                g(j) = (f2 - f3) / (x(j) - x1(j))
+                f1 = FunctionValue(x1)
+                f2 = FunctionValue(x2)
+                g(j) = (f2 - f1) / (x2(j) - x1(j))
             Next
 
             _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
@@ -2802,24 +2805,27 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             grad = True
 
-            Dim epsilon As Double = 0.00000001
+            Dim epsilon As Double = Math.Pow(2, -30)
 
-            Dim f2, f3 As Double
-            Dim g(x.Length - 1), x1(x.Length - 1) As Double
+            Dim f1, f2 As Double
+            Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
             Dim j, k As Integer
 
-            f2 = FunctionValue(x)
             For j = 0 To x.Length - 1
                 For k = 0 To x.Length - 1
                     x1(k) = x(k)
+                    x2(k) = x(k)
                 Next
                 If x(j) <> 0.0# Then
-                    x1(j) = x(j) * (1 + epsilon)
+                    x1(j) = x(j) * (1.0# + epsilon)
+                    x2(j) = x(j) * (1.0# - epsilon)
                 Else
                     x1(j) = x(j) + epsilon
+                    x2(j) = x(j) - epsilon
                 End If
-                f3 = FunctionValue(x1)
-                g(j) = (f2 - f3) / (x(j) - x1(j))
+                f1 = FunctionValue(x1)
+                f2 = FunctionValue(x2)
+                g(j) = (f2 - f1) / (x2(j) - x1(j))
             Next
 
             _pp.CurrentMaterialStream.Flowsheet.CheckStatus()
@@ -2995,8 +3001,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 If MathEx.Common.Max(lc(i)) > _maxlc Then _maxlc = MathEx.Common.Max(lc(i))
             Next
 
-            If LowerBound = 0# Then LowerBound = 1.0E-20
-            If UpperBound = 0# Then UpperBound = 1.0E-20
+            If LowerBound = 0.0# Then LowerBound = 1.0E-20
+            If UpperBound = 0.0# Then UpperBound = 1.0E-20
 
             For i = 0 To ns
                 xvar(i * (2 * nc + 1)) = Tj(i) / _maxT
@@ -3057,6 +3063,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New L_BFGS_B
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
+                    _solver.AccuracyFactor = 10000000.0
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     _solver = Nothing
                 Case OptimizationMethod.Truncated_Newton
@@ -3067,6 +3074,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim _solver As New TruncatedNewton
                     _solver.Tolerance = tol(1)
                     _solver.MaxFunEvaluations = maxits
+                    _solver.SearchSeverity = 0.75
+                    _solver.MaximunStep = 50
                     initval = _solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
                     _solver = Nothing
                 Case OptimizationMethod.Simplex

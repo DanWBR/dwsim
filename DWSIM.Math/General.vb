@@ -180,9 +180,10 @@ Namespace MathEx
         End Function
 
         Shared Function SumSqr(ByVal vx() As Double) As Double
+
             Dim n = UBound(vx)
             Dim i As Integer
-            Dim sumv As Double = 0
+            Dim sumv As Double = 0.0#
 
             For i = 0 To n
                 sumv += vx(i) ^ 2
