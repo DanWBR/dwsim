@@ -36,18 +36,18 @@ Partial Class ScriptEditorControlMono
         '
         'Panel1
         '
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.cbLinkedEvent)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.cbLinkedObject)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.chkLink)
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'cbLinkedEvent
         '
-        Me.cbLinkedEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbLinkedEvent, "cbLinkedEvent")
+        Me.cbLinkedEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLinkedEvent.FormattingEnabled = True
         Me.cbLinkedEvent.Name = "cbLinkedEvent"
         '
@@ -58,8 +58,8 @@ Partial Class ScriptEditorControlMono
         '
         'cbLinkedObject
         '
-        Me.cbLinkedObject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         resources.ApplyResources(Me.cbLinkedObject, "cbLinkedObject")
+        Me.cbLinkedObject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLinkedObject.FormattingEnabled = True
         Me.cbLinkedObject.Name = "cbLinkedObject"
         '
@@ -76,8 +76,8 @@ Partial Class ScriptEditorControlMono
         '
         'treeViewItems
         '
-        Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         resources.ApplyResources(Me.treeViewItems, "treeViewItems")
+        Me.treeViewItems.LineColor = System.Drawing.Color.Empty
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."
         '

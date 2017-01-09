@@ -117,148 +117,128 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Daten Viskosität</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 25</value>
+  <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 13</value>
   </data>
-  <data name="ToolStripLabel1.Text" xml:space="preserve">
-    <value>Docking</value>
+  <data name="Label16.Text" xml:space="preserve">
+    <value>Siedetemperatur Mittelwert</value>
   </data>
-  <data name="tsbDockingLeft.Text" xml:space="preserve">
-    <value>Links</value>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
   </data>
-  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
-    <value>Links Auto-Hide</value>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Absolute Dichte (d60/60)</value>
   </data>
-  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
-    <value>Rechts Auto-Hide</value>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
   </data>
-  <data name="tsbDockingRight.Text" xml:space="preserve">
-    <value>Rechts</value>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>Molmasse</value>
   </data>
-  <data name="tsbDockingTop.Text" xml:space="preserve">
-    <value>Oben</value>
+  <data name="GroupBoxBulk.Text" xml:space="preserve">
+    <value>Rohdaten</value>
   </data>
-  <data name="tsbDockingBottom.Text" xml:space="preserve">
-    <value>Unten</value>
+  <data name="GroupBoxCurves.Text" xml:space="preserve">
+    <value>Kurvendaten</value>
   </data>
-  <data name="tsbDockingDocument.Text" xml:space="preserve">
-    <value>Dokument</value>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Allgemein</value>
   </data>
-  <data name="tsbDockingFloat.Text" xml:space="preserve">
-    <value>Schwebend</value>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Kurven</value>
   </data>
-  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 25</value>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
   </data>
-  <data name="tsbClose.Text" xml:space="preserve">
-    <value>Schliessen</value>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Kurven</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PGEx2.DocCommentDescription.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 17</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+  <data name="CheckBox1.Text" xml:space="preserve">
+    <value>Siedetemperatur</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PGEx2.DocCommentDescription.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="CheckBoxMW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 17</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
+  <data name="CheckBoxMW.Text" xml:space="preserve">
+    <value>Molmasse</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="CheckBoxSG.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 17</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="CheckBoxSG.Text" xml:space="preserve">
+    <value>Dichte</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="Label44.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.ImageIndex" type="System.Int32, mscorlib">
-    <value>-1</value>
+  <data name="Label44.Text" xml:space="preserve">
+    <value>Molmasse</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.ImageKey" xml:space="preserve">
-    <value />
+  <data name="CheckBoxVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 17</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
+  <data name="CheckBoxVISC.Text" xml:space="preserve">
+    <value>Viskosität bei zwei Temperaturen</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
+  <data name="Label43.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
+  <data name="Label43.Text" xml:space="preserve">
+    <value>Dichte API</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Label38.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 13</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Label38.Text" xml:space="preserve">
+    <value>Mittelwerte Eigenschaften</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+  <data name="Label42.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="Label42.Text" xml:space="preserve">
+    <value>Kurvenbasis</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
+  <data name="temp.HeaderText" xml:space="preserve">
+    <value>Temperatur</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="mm.HeaderText" xml:space="preserve">
+    <value>Molmasse</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="dens.HeaderText" xml:space="preserve">
+    <value>Dichte</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.ImageIndex" type="System.Int32, mscorlib">
-    <value>-1</value>
+  <data name="visc1.HeaderText" xml:space="preserve">
+    <value>Viskosität 1</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.ImageKey" xml:space="preserve">
-    <value />
+  <data name="visc2.HeaderText" xml:space="preserve">
+    <value>Viskosität 2</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Analysen</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
+  <data name="ToolStripButton3.Text" xml:space="preserve">
+    <value>Kopieren</value>
   </data>
-  <data name="PGEx2.DocCommentTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
+  <data name="ToolStripButton4.Text" xml:space="preserve">
+    <value>Löschen</value>
   </data>
-  <data name="PGEx2.SelectedObject" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAEVQcm9wZXJ0eUdyaWRFeCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwFAQAAACdQcm9wZXJ0eUdyaWRFeC5DdXN0b21Q
-        cm9wZXJ0eUNvbGxlY3Rpb24BAAAAE0NvbGxlY3Rpb25CYXNlK2xpc3QDHFN5c3RlbS5Db2xsZWN0aW9u
-        cy5BcnJheUxpc3QCAAAACQMAAAAEAwAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0AwAAAAZf
-        aXRlbXMFX3NpemUIX3ZlcnNpb24FAAAICAkEAAAAAAAAAAAAAAAQBAAAAAAAAAAL
-</value>
+  <data name="ToolStripButton1.Text" xml:space="preserve">
+    <value>Aus Archiv importieren</value>
   </data>
-  <data name="PGEx2.ToolStrip.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="ToolStripButton2.Text" xml:space="preserve">
+    <value>In Archiv exportieren</value>
   </data>
-  <data name="PGEx2.ToolStrip.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="PGEx2.ToolStrip.BackgroundImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="PGEx2.ToolStrip.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
-  </data>
-  <data name="PGEx2.ToolStrip.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="PGEx2.ToolStrip.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PGEx2.ToolStrip.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Abbruch</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Aussehen des Objekts bearbeiten</value>
+    <value>Ölanalysen-Manager</value>
   </data>
 </root>

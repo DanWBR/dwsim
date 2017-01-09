@@ -140,21 +140,21 @@
     <value>Löschen</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+    <value>31, 13</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Typ Hilfsmittel:</value>
+    <value>Tool:</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Objekt:</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 13</value>
+    <value>308, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
-    <value>Ein Hilfsmittel hinzufügen und mit einem Flowsheet-Objet verknüpfen.</value>
+    <value>Ein Tool hinzufügen und mit einem Flowsheet-Objet verknüpfen.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Hilfsmittel hinzufügen</value>
+    <value>Tool hinzufügen</value>
   </data>
 </root>

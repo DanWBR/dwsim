@@ -120,18 +120,20 @@
   <data name="&gt;&gt;ColumnHeader2.Name" xml:space="preserve">
     <value>ColumnHeader2</value>
   </data>
+  <data name="ColumnHeader1.Text" xml:space="preserve">
+    <value>Objeto</value>
+  </data>
   <data name="&gt;&gt;lvProps.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lvObjects.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ColumnHeader2.Width" type="System.Int32, mscorlib">
-    <value>266</value>
-  </data>
   <data name="&gt;&gt;ColumnHeader1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Configurar Tabela de Propriedades</value>
   </data>
   <data name="&gt;&gt;TextBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -146,8 +148,12 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>493, 357</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 13</value>
@@ -161,8 +167,11 @@
   <data name="&gt;&gt;ColumnHeader2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>493, 357</value>
+  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>389, 20</value>
+  </data>
+  <data name="&gt;&gt;ColumnHeader1.Name" xml:space="preserve">
+    <value>ColumnHeader1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
@@ -174,8 +183,8 @@
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lvProps.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;lvProps.Name" xml:space="preserve">
+    <value>lvProps</value>
   </data>
   <data name="lvObjects.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -183,14 +192,8 @@
   <data name="&gt;&gt;lvProps.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;TextBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="lvProps.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormConfigurePropertyTable</value>
@@ -198,8 +201,8 @@
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ColumnHeader1.Text" xml:space="preserve">
-    <value>Objeto</value>
+  <data name="lvProps.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Título da Tabela</value>
@@ -213,14 +216,11 @@
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <data name="TextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 20</value>
-  </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;lvProps.Name" xml:space="preserve">
-    <value>lvProps</value>
+  <data name="&gt;&gt;lvProps.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="lvProps.Size" type="System.Drawing.Size, System.Drawing">
     <value>290, 314</value>
@@ -240,17 +240,17 @@
   <data name="lvObjects.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 36</value>
   </data>
-  <data name="&gt;&gt;ColumnHeader1.Name" xml:space="preserve">
-    <value>ColumnHeader1</value>
+  <data name="TextBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="ColumnHeader2.Width" type="System.Int32, mscorlib">
+    <value>266</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Configurar Tabela de Propriedades</value>
+  <data name="&gt;&gt;TextBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

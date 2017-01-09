@@ -1189,7 +1189,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click
+    Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click, tsbConfigSimulation.Click
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)

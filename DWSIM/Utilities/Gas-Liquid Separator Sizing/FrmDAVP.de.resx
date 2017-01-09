@@ -137,7 +137,7 @@
     <value>Abscheider</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Konfigurieration</value>
+    <value>Konfiguration</value>
   </data>
   <data name="Label41.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 13</value>
@@ -170,16 +170,16 @@
     <value>151, 16</value>
   </data>
   <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 13</value>
+    <value>130, 13</value>
   </data>
   <data name="Label46.Text" xml:space="preserve">
-    <value>Flüssigkeitsaustrittsstutzen</value>
+    <value>Austrittsstutzen Flüssigkeit</value>
   </data>
   <data name="Label47.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
+    <value>112, 13</value>
   </data>
   <data name="Label47.Text" xml:space="preserve">
-    <value>Dämpfeaustrittsstutzen</value>
+    <value>Austrittsstutzen Dampf</value>
   </data>
   <data name="Label48.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -269,10 +269,10 @@
     <value>Max. Geschwindigkeitskonstante (K)</value>
   </data>
   <data name="Label35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 13</value>
+    <value>114, 13</value>
   </data>
   <data name="Label35.Text" xml:space="preserve">
-    <value>Dämpfegeschwindigkeit</value>
+    <value>Dampfgeschwindigkeit</value>
   </data>
   <data name="Label36.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 13</value>

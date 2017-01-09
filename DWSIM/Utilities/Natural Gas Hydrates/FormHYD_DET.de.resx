@@ -175,18 +175,6 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Allgemeine Info</value>
   </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Individuelle Phasenzusammensetzung, in Molanteilen</value>
-  </data>
-  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 483</value>
-  </data>
-  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 13</value>
-  </data>
-  <data name="Label23.Text" xml:space="preserve">
-    <value>* Relativ zum van der Waals - Modell - repräsentiert das chemische Potential von Wasser.</value>
-  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Komponente</value>
   </data>
@@ -205,6 +193,18 @@
   </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Hydrat</value>
+  </data>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Individuelle Phasenzusammensetzung, in Molanteilen</value>
+  </data>
+  <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 483</value>
+  </data>
+  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>429, 13</value>
+  </data>
+  <data name="Label23.Text" xml:space="preserve">
+    <value>* Relativ zum van der Waals - Modell - repräsentiert das chemische Potential von Wasser.</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -632,6 +632,6 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Hydratdissoziationshilfsmittel: Details</value>
+    <value>Hydratdissoziations-Tool: Details</value>
   </data>
 </root>

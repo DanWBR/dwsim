@@ -161,7 +161,7 @@
     <value>216, 22</value>
   </data>
   <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
-    <value>Frei schwebend</value>
+    <value>Schwebend</value>
   </data>
   <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 22</value>

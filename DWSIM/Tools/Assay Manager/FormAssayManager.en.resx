@@ -112,15 +112,15 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Viscosity Data</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
   </data>
@@ -141,15 +141,6 @@
   </data>
   <data name="GroupBoxBulk.Text" xml:space="preserve">
     <value>Bulk Properties</value>
-  </data>
-  <data name="GroupBoxCurves.Text" xml:space="preserve">
-    <value>Distillation Properties</value>
-  </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Curves</value>
   </data>
   <data name="TextBoxKAPI.Location" type="System.Drawing.Point, System.Drawing">
     <value>330, 35</value>
@@ -223,6 +214,9 @@
   <data name="RadioButtonD60.Text" xml:space="preserve">
     <value>60/60</value>
   </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>General</value>
+  </data>
   <data name="temp.HeaderText" xml:space="preserve">
     <value>Temperature</value>
   </data>
@@ -238,9 +232,15 @@
   <data name="visc2.HeaderText" xml:space="preserve">
     <value>Viscosity 2</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gridcurves.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Curves</value>
+  </data>
+  <data name="GroupBoxCurves.Text" xml:space="preserve">
+    <value>Distillation Properties</value>
   </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Copy</value>

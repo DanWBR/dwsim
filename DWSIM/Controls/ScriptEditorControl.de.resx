@@ -117,20 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColumnHeader2.Text" xml:space="preserve">
-    <value>Eigenschaft</value>
-  </data>
-  <data name="ColumnHeader1.Text" xml:space="preserve">
-    <value>Objekt</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 13</value>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Event</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Titel</value>
+    <value>Objekt</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Konfiguration Eigenschaftentabelle</value>
+  <data name="chkLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 17</value>
+  </data>
+  <data name="chkLink.Text" xml:space="preserve">
+    <value>Link</value>
   </data>
 </root>

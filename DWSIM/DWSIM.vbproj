@@ -744,6 +744,9 @@
     <EmbeddedResource Include="Controls\ListItem.resx">
       <DependentUpon>ListItem.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControl.de.resx">
+      <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ScriptEditorControl.en.resx">
       <DependentUpon>ScriptEditorControl.vb</DependentUpon>
     </EmbeddedResource>
@@ -752,6 +755,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ScriptEditorControl.resx">
       <DependentUpon>ScriptEditorControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ScriptEditorControlMono.de.resx">
+      <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ScriptEditorControlMono.en.resx">
       <DependentUpon>ScriptEditorControlMono.vb</DependentUpon>
@@ -1307,6 +1313,9 @@
       <LastGenOutput>DWSIM1.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.de.resx">
+      <DependentUpon>FormAssayManager.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tools\Assay Manager\FormAssayManager.es.resx">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </EmbeddedResource>
@@ -1359,6 +1368,9 @@
     <EmbeddedResource Include="Tools\Reaction Subsystem Editors\FormReacSetEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormReacSetEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.de.resx">
+      <DependentUpon>AttachedUtilityClass.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\Base Class\AttachedUtilityClass.en.resx">
       <DependentUpon>AttachedUtilityClass.vb</DependentUpon>

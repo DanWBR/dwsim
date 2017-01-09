@@ -128,10 +128,10 @@
     <value>Links</value>
   </data>
   <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
-    <value>Links Auto-Hide</value>
+    <value>Links automatisch ausblenden</value>
   </data>
   <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
-    <value>Rechts Auto-Hide</value>
+    <value>Rechts automatisch ausblenden</value>
   </data>
   <data name="tsbDockingRight.Text" xml:space="preserve">
     <value>Rechts</value>
@@ -149,116 +149,36 @@
     <value>Schwebend</value>
   </data>
   <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 25</value>
+    <value>78, 25</value>
   </data>
   <data name="tsbClose.Text" xml:space="preserve">
-    <value>Schliessen</value>
+    <value>Schließen</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PGEx2.DocCommentDescription.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 17</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
+  <data name="chkAutoUpdate.Text" xml:space="preserve">
+    <value>Automatisch aktualisieren</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="PGEx2.DocCommentDescription.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="tbAttachedTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 67</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
+  <data name="tbAttachedTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 20</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Verbunden mit</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+  <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 38</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.ImageIndex" type="System.Int32, mscorlib">
-    <value>-1</value>
+  <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>701, 20</value>
   </data>
-  <data name="PGEx2.DocCommentDescription.ImageKey" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PGEx2.DocCommentDescription.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PGEx2.DocCommentDescription.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="PGEx2.DocCommentDescription.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="PGEx2.DocCommentTitle.AccessibleName" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="PGEx2.DocCommentTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.ImageIndex" type="System.Int32, mscorlib">
-    <value>-1</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.ImageKey" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PGEx2.DocCommentTitle.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="PGEx2.DocCommentTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
-  </data>
-  <data name="PGEx2.SelectedObject" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAEVQcm9wZXJ0eUdyaWRFeCwgVmVyc2lvbj0xLjAuMC4wLCBDdWx0
-        dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwFAQAAACdQcm9wZXJ0eUdyaWRFeC5DdXN0b21Q
-        cm9wZXJ0eUNvbGxlY3Rpb24BAAAAE0NvbGxlY3Rpb25CYXNlK2xpc3QDHFN5c3RlbS5Db2xsZWN0aW9u
-        cy5BcnJheUxpc3QCAAAACQMAAAAEAwAAABxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0AwAAAAZf
-        aXRlbXMFX3NpemUIX3ZlcnNpb24FAAAICAkEAAAAAAAAAAAAAAAQBAAAAAAAAAAL
-</value>
-  </data>
-  <data name="PGEx2.ToolStrip.AccessibleDescription" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="PGEx2.ToolStrip.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left</value>
-  </data>
-  <data name="PGEx2.ToolStrip.BackgroundImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="PGEx2.ToolStrip.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Tile</value>
-  </data>
-  <data name="PGEx2.ToolStrip.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="PGEx2.ToolStrip.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="PGEx2.ToolStrip.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Inherit</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Aussehen des Objekts bearbeiten</value>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Name</value>
   </data>
 </root>

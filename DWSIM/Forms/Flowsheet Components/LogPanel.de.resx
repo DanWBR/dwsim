@@ -112,26 +112,29 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ToolStripButton5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
+  <data name="Data.HeaderText" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Tipo.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Tipo.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="Mensagem.HeaderText" xml:space="preserve">
+    <value>Meldung</value>
   </data>
   <data name="ToolStripButton5.Text" xml:space="preserve">
     <value>Meldungen</value>
   </data>
-  <data name="ToolStripButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 22</value>
-  </data>
   <data name="ToolStripButton3.Text" xml:space="preserve">
     <value>Fehler</value>
-  </data>
-  <data name="ToolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 22</value>
   </data>
   <data name="ToolStripButton1.Text" xml:space="preserve">
     <value>Warnungen</value>
@@ -139,30 +142,69 @@
   <data name="ToolStripButton2.Text" xml:space="preserve">
     <value>Liste Löschen</value>
   </data>
-  <data name="SaveFileDialog1.Title" xml:space="preserve">
-    <value>Meldungen speichern</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Imagem.Width" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
+    <value>Schwebend</value>
   </data>
-  <data name="Indice.Width" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
   </data>
-  <data name="Data.HeaderText" xml:space="preserve">
-    <value>Datum</value>
+  <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
+    <value>Links andocken</value>
   </data>
-  <data name="Data.Width" type="System.Int32, mscorlib">
-    <value>63</value>
+  <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
   </data>
-  <data name="Tipo.HeaderText" xml:space="preserve">
-    <value>Typ</value>
+  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rechts andocken</value>
   </data>
-  <data name="Tipo.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
   </data>
-  <data name="Mensagem.HeaderText" xml:space="preserve">
-    <value>Meldung</value>
+  <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
+    <value>Oben andocken</value>
+  </data>
+  <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
+    <value>Unten andocken</value>
+  </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Links andocken Auto-Hide</value>
+  </data>
+  <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rechts andocken Auto-Hide</value>
+  </data>
+  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Oben andocken Auto-Hide</value>
+  </data>
+  <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Unten andocken Auto-Hide</value>
+  </data>
+  <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 224</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -206,7 +206,7 @@
     <value>Massenanteil</value>
   </data>
   <data name="cbXAxisBasis.Items2" xml:space="preserve">
-    <value>Molprozentsatz</value>
+    <value>Molprozent</value>
   </data>
   <data name="cbXAxisBasis.Items3" xml:space="preserve">
     <value>Massenprozent</value>
@@ -217,11 +217,8 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>X-Achse Basis</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
-  </data>
   <data name="Label2.Text" xml:space="preserve">
-    <value>Komponent 2</value>
+    <value>Komponente 2</value>
   </data>
   <data name="RadioButton4.Text" xml:space="preserve">
     <value>(P)xy</value>
@@ -244,11 +241,8 @@
   <data name="Button1.Text" xml:space="preserve">
     <value>Berechnen</value>
   </data>
-  <data name="Label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
-  </data>
   <data name="Label23.Text" xml:space="preserve">
-    <value>Komponent 1</value>
+    <value>Komponente 1</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Diagramm-Einstellungen</value>
@@ -256,20 +250,14 @@
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Graph</value>
   </data>
-  <data name="GridExpData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 466</value>
-  </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 466</value>
-  </data>
   <data name="FaTabStripItem3.Title" xml:space="preserve">
     <value>Exp. Daten</value>
   </data>
   <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 466</value>
+    <value>611, 467</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>601, 466</value>
+    <value>611, 467</value>
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Tabelle</value>
@@ -291,5 +279,68 @@
   </data>
   <data name="TSB_Copy.Text" xml:space="preserve">
     <value>Kopiere Diagramm in Zwischenablage</value>
+  </data>
+  <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="FloatToolStripMenuItem.Text" xml:space="preserve">
+    <value>Schwebend</value>
+  </data>
+  <data name="DockLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockLeftToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Links</value>
+  </data>
+  <data name="DockRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockRightToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Rechts</value>
+  </data>
+  <data name="DockTopToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockTopToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Oben</value>
+  </data>
+  <data name="DockBottomToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockBottomToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Unten</value>
+  </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockLeftAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Links Auto-Hide</value>
+  </data>
+  <data name="DockRightAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockRightAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Rechts Auto-Hide</value>
+  </data>
+  <data name="DockTopAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockTopAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Oben Auto-Hide</value>
+  </data>
+  <data name="DockBottomAutoHideToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DockBottomAutoHideToolStripMenuItem.Text" xml:space="preserve">
+    <value>Docking Unten Auto-Hide</value>
+  </data>
+  <data name="DocumentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 22</value>
+  </data>
+  <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 224</value>
   </data>
 </root>

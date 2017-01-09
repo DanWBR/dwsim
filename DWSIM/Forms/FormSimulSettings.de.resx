@@ -139,11 +139,29 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Verschiedenes</value>
   </data>
+  <data name="TBdesc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 116</value>
+  </data>
+  <data name="TBdesc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>663, 183</value>
+  </data>
   <data name="TBdesc.Text" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
+  <data name="TBaut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 72</value>
+  </data>
+  <data name="TBaut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>663, 20</value>
+  </data>
   <data name="TBaut.Text" xml:space="preserve">
     <value>Autor</value>
+  </data>
+  <data name="TBtit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 28</value>
+  </data>
+  <data name="TBtit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>663, 20</value>
   </data>
   <data name="TBtit.Text" xml:space="preserve">
     <value>Titel</value>
@@ -201,7 +219,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAdQBCgHUAQoBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAeQBCgHkAQoBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -416,6 +434,14 @@
   </data>
   <data name="Button3.Text" xml:space="preserve">
     <value>Ölanalyse Manager öffnen</value>
+  </data>
+  <data name="btnInfoRight.ToolTip" xml:space="preserve">
+    <value>Informationen zur Komponente anzeigen, 
+welche in der rechten Tabelle markiert ist.</value>
+  </data>
+  <data name="btnInfoLeft.ToolTip" xml:space="preserve">
+    <value>Informationen zur Komponente anzeigen, 
+welche in der linken Tabelle markiert ist.</value>
   </data>
   <data name="Button12.Text" xml:space="preserve">
     <value>x Reinigen</value>
@@ -641,13 +667,52 @@
     <value>Objekttyp</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>577, 13</value>
+    <value>570, 13</value>
   </data>
   <data name="Label14.Text" xml:space="preserve">
-    <value>Wählen Sie die Eigenschaften, welche in Eigenschaften-Tabellen entsprechend des Objekttyps angezeigt werden sollen.</value>
+    <value>Wählen Sie die Eigenschaften, welche in Eigenschaftentabellen entsprechend des Objekttyps angezeigt werden sollen.</value>
+  </data>
+  <data name="GroupBox14.Text" xml:space="preserve">
+    <value>Eigenschaftentabellen</value>
   </data>
   <data name="TabPage6.Text" xml:space="preserve">
     <value>Eigenschaften-Tabellen</value>
+  </data>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 25</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Docking</value>
+  </data>
+  <data name="tsbDockingLeft.Text" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="tsbDockingLeftAutoHide.Text" xml:space="preserve">
+    <value>Links Auto-Hide</value>
+  </data>
+  <data name="tsbDockingRightAutoHide.Text" xml:space="preserve">
+    <value>Rechts Auto-Hide</value>
+  </data>
+  <data name="tsbDockingRight.Text" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="tsbDockingTop.Text" xml:space="preserve">
+    <value>Oben</value>
+  </data>
+  <data name="tsbDockingBottom.Text" xml:space="preserve">
+    <value>Unten</value>
+  </data>
+  <data name="tsbDockingDocument.Text" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="tsbDockingFloat.Text" xml:space="preserve">
+    <value>Schwebend</value>
+  </data>
+  <data name="tsbClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 25</value>
+  </data>
+  <data name="tsbClose.Text" xml:space="preserve">
+    <value>Schließen</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

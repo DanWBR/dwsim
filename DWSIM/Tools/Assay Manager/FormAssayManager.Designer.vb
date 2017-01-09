@@ -22,78 +22,78 @@ Partial Class FormAssayManager
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormAssayManager))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.GroupBoxBulk = New System.Windows.Forms.GroupBox
-        Me.LabelNBP = New System.Windows.Forms.Label
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.LabelV2 = New System.Windows.Forms.Label
-        Me.LabelV1 = New System.Windows.Forms.Label
-        Me.LabelT2 = New System.Windows.Forms.Label
-        Me.LabelT1 = New System.Windows.Forms.Label
-        Me.tb_v2 = New System.Windows.Forms.TextBox
-        Me.tb_v1 = New System.Windows.Forms.TextBox
-        Me.tb_t2 = New System.Windows.Forms.TextBox
-        Me.tb_t1 = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.tb_wk = New System.Windows.Forms.TextBox
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.tb_sg = New System.Windows.Forms.TextBox
-        Me.tb_mw = New System.Windows.Forms.TextBox
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.GroupBoxCurves = New System.Windows.Forms.GroupBox
-        Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip
-        Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem
-        Me.TextBoxKAPI = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label45 = New System.Windows.Forms.Label
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox
-        Me.TextBoxBulkMW = New System.Windows.Forms.TextBox
-        Me.CheckBoxMW = New System.Windows.Forms.CheckBox
-        Me.TextBoxBulkD = New System.Windows.Forms.TextBox
-        Me.CheckBoxSG = New System.Windows.Forms.CheckBox
-        Me.Label44 = New System.Windows.Forms.Label
-        Me.CheckBoxVISC = New System.Windows.Forms.CheckBox
-        Me.Label43 = New System.Windows.Forms.Label
-        Me.ComboBoxDistMethod = New System.Windows.Forms.ComboBox
-        Me.Label38 = New System.Windows.Forms.Label
-        Me.Label39 = New System.Windows.Forms.Label
-        Me.ComboBoxBasis = New System.Windows.Forms.ComboBox
-        Me.TextBoxVT1 = New System.Windows.Forms.TextBox
-        Me.Label42 = New System.Windows.Forms.Label
-        Me.Label40 = New System.Windows.Forms.Label
-        Me.RadioButtonD20 = New System.Windows.Forms.RadioButton
-        Me.TextBoxVT2 = New System.Windows.Forms.TextBox
-        Me.RadioButtonD60 = New System.Windows.Forms.RadioButton
-        Me.LabelT3 = New System.Windows.Forms.Label
-        Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem
-        Me.gridcurves = New System.Windows.Forms.DataGridView
-        Me.vap = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.temp = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.mm = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.dens = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.visc1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.visc2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.gridassays = New System.Windows.Forms.DataGridView
-        Me.colid = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.colname = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.GroupBoxBulk = New System.Windows.Forms.GroupBox()
+        Me.LabelNBP = New System.Windows.Forms.Label()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.LabelV2 = New System.Windows.Forms.Label()
+        Me.LabelV1 = New System.Windows.Forms.Label()
+        Me.LabelT2 = New System.Windows.Forms.Label()
+        Me.LabelT1 = New System.Windows.Forms.Label()
+        Me.tb_v2 = New System.Windows.Forms.TextBox()
+        Me.tb_v1 = New System.Windows.Forms.TextBox()
+        Me.tb_t2 = New System.Windows.Forms.TextBox()
+        Me.tb_t1 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.tb_wk = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.tb_sg = New System.Windows.Forms.TextBox()
+        Me.tb_mw = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.GroupBoxCurves = New System.Windows.Forms.GroupBox()
+        Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
+        Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
+        Me.TextBoxKAPI = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.TextBoxBulkMW = New System.Windows.Forms.TextBox()
+        Me.CheckBoxMW = New System.Windows.Forms.CheckBox()
+        Me.TextBoxBulkD = New System.Windows.Forms.TextBox()
+        Me.CheckBoxSG = New System.Windows.Forms.CheckBox()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.CheckBoxVISC = New System.Windows.Forms.CheckBox()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.ComboBoxDistMethod = New System.Windows.Forms.ComboBox()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.ComboBoxBasis = New System.Windows.Forms.ComboBox()
+        Me.TextBoxVT1 = New System.Windows.Forms.TextBox()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.RadioButtonD20 = New System.Windows.Forms.RadioButton()
+        Me.TextBoxVT2 = New System.Windows.Forms.TextBox()
+        Me.RadioButtonD60 = New System.Windows.Forms.RadioButton()
+        Me.LabelT3 = New System.Windows.Forms.Label()
+        Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
+        Me.gridcurves = New System.Windows.Forms.DataGridView()
+        Me.vap = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.temp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.mm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dens = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.visc1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.visc2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.gridassays = New System.Windows.Forms.DataGridView()
+        Me.colid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tipo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBoxBulk.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBoxCurves.SuspendLayout()
@@ -109,11 +109,8 @@ Partial Class FormAssayManager
         '
         'GroupBoxBulk
         '
-        Me.GroupBoxBulk.AccessibleDescription = Nothing
-        Me.GroupBoxBulk.AccessibleName = Nothing
         resources.ApplyResources(Me.GroupBoxBulk, "GroupBoxBulk")
         Me.GroupBoxBulk.BackColor = System.Drawing.Color.Transparent
-        Me.GroupBoxBulk.BackgroundImage = Nothing
         Me.GroupBoxBulk.Controls.Add(Me.LabelNBP)
         Me.GroupBoxBulk.Controls.Add(Me.GroupBox5)
         Me.GroupBoxBulk.Controls.Add(Me.tb_wk)
@@ -124,24 +121,17 @@ Partial Class FormAssayManager
         Me.GroupBoxBulk.Controls.Add(Me.Label19)
         Me.GroupBoxBulk.Controls.Add(Me.Label20)
         Me.GroupBoxBulk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBoxBulk.Font = Nothing
         Me.GroupBoxBulk.Name = "GroupBoxBulk"
         Me.GroupBoxBulk.TabStop = False
         '
         'LabelNBP
         '
-        Me.LabelNBP.AccessibleDescription = Nothing
-        Me.LabelNBP.AccessibleName = Nothing
         resources.ApplyResources(Me.LabelNBP, "LabelNBP")
-        Me.LabelNBP.Font = Nothing
         Me.LabelNBP.Name = "LabelNBP"
         '
         'GroupBox5
         '
-        Me.GroupBox5.AccessibleDescription = Nothing
-        Me.GroupBox5.AccessibleName = Nothing
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
-        Me.GroupBox5.BackgroundImage = Nothing
         Me.GroupBox5.Controls.Add(Me.LabelV2)
         Me.GroupBox5.Controls.Add(Me.LabelV1)
         Me.GroupBox5.Controls.Add(Me.LabelT2)
@@ -155,195 +145,122 @@ Partial Class FormAssayManager
         Me.GroupBox5.Controls.Add(Me.Label9)
         Me.GroupBox5.Controls.Add(Me.Label10)
         Me.GroupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.GroupBox5.Font = Nothing
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
         '
         'LabelV2
         '
-        Me.LabelV2.AccessibleDescription = Nothing
-        Me.LabelV2.AccessibleName = Nothing
         resources.ApplyResources(Me.LabelV2, "LabelV2")
-        Me.LabelV2.Font = Nothing
         Me.LabelV2.Name = "LabelV2"
         '
         'LabelV1
         '
-        Me.LabelV1.AccessibleDescription = Nothing
-        Me.LabelV1.AccessibleName = Nothing
         resources.ApplyResources(Me.LabelV1, "LabelV1")
-        Me.LabelV1.Font = Nothing
         Me.LabelV1.Name = "LabelV1"
         '
         'LabelT2
         '
-        Me.LabelT2.AccessibleDescription = Nothing
-        Me.LabelT2.AccessibleName = Nothing
         resources.ApplyResources(Me.LabelT2, "LabelT2")
-        Me.LabelT2.Font = Nothing
         Me.LabelT2.Name = "LabelT2"
         '
         'LabelT1
         '
-        Me.LabelT1.AccessibleDescription = Nothing
-        Me.LabelT1.AccessibleName = Nothing
         resources.ApplyResources(Me.LabelT1, "LabelT1")
-        Me.LabelT1.Font = Nothing
         Me.LabelT1.Name = "LabelT1"
         '
         'tb_v2
         '
-        Me.tb_v2.AccessibleDescription = Nothing
-        Me.tb_v2.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_v2, "tb_v2")
-        Me.tb_v2.BackgroundImage = Nothing
-        Me.tb_v2.Font = Nothing
         Me.tb_v2.Name = "tb_v2"
         '
         'tb_v1
         '
-        Me.tb_v1.AccessibleDescription = Nothing
-        Me.tb_v1.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_v1, "tb_v1")
-        Me.tb_v1.BackgroundImage = Nothing
-        Me.tb_v1.Font = Nothing
         Me.tb_v1.Name = "tb_v1"
         '
         'tb_t2
         '
-        Me.tb_t2.AccessibleDescription = Nothing
-        Me.tb_t2.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_t2, "tb_t2")
-        Me.tb_t2.BackgroundImage = Nothing
-        Me.tb_t2.Font = Nothing
         Me.tb_t2.Name = "tb_t2"
         '
         'tb_t1
         '
-        Me.tb_t1.AccessibleDescription = Nothing
-        Me.tb_t1.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_t1, "tb_t1")
-        Me.tb_t1.BackgroundImage = Nothing
-        Me.tb_t1.Font = Nothing
         Me.tb_t1.Name = "tb_t1"
         '
         'Label11
         '
-        Me.Label11.AccessibleDescription = Nothing
-        Me.Label11.AccessibleName = Nothing
         resources.ApplyResources(Me.Label11, "Label11")
-        Me.Label11.Font = Nothing
         Me.Label11.Name = "Label11"
         '
         'Label8
         '
-        Me.Label8.AccessibleDescription = Nothing
-        Me.Label8.AccessibleName = Nothing
         resources.ApplyResources(Me.Label8, "Label8")
-        Me.Label8.Font = Nothing
         Me.Label8.Name = "Label8"
         '
         'Label9
         '
-        Me.Label9.AccessibleDescription = Nothing
-        Me.Label9.AccessibleName = Nothing
         resources.ApplyResources(Me.Label9, "Label9")
-        Me.Label9.Font = Nothing
         Me.Label9.Name = "Label9"
         '
         'Label10
         '
-        Me.Label10.AccessibleDescription = Nothing
-        Me.Label10.AccessibleName = Nothing
         resources.ApplyResources(Me.Label10, "Label10")
-        Me.Label10.Font = Nothing
         Me.Label10.Name = "Label10"
         '
         'tb_wk
         '
-        Me.tb_wk.AccessibleDescription = Nothing
-        Me.tb_wk.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_wk, "tb_wk")
-        Me.tb_wk.BackgroundImage = Nothing
-        Me.tb_wk.Font = Nothing
         Me.tb_wk.Name = "tb_wk"
         '
         'Label16
         '
-        Me.Label16.AccessibleDescription = Nothing
-        Me.Label16.AccessibleName = Nothing
         resources.ApplyResources(Me.Label16, "Label16")
-        Me.Label16.Font = Nothing
         Me.Label16.Name = "Label16"
         '
         'Label17
         '
-        Me.Label17.AccessibleDescription = Nothing
-        Me.Label17.AccessibleName = Nothing
         resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Font = Nothing
         Me.Label17.Name = "Label17"
         '
         'tb_sg
         '
-        Me.tb_sg.AccessibleDescription = Nothing
-        Me.tb_sg.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_sg, "tb_sg")
-        Me.tb_sg.BackgroundImage = Nothing
-        Me.tb_sg.Font = Nothing
         Me.tb_sg.Name = "tb_sg"
         '
         'tb_mw
         '
-        Me.tb_mw.AccessibleDescription = Nothing
-        Me.tb_mw.AccessibleName = Nothing
         resources.ApplyResources(Me.tb_mw, "tb_mw")
-        Me.tb_mw.BackgroundImage = Nothing
-        Me.tb_mw.Font = Nothing
         Me.tb_mw.Name = "tb_mw"
         '
         'Label19
         '
-        Me.Label19.AccessibleDescription = Nothing
-        Me.Label19.AccessibleName = Nothing
         resources.ApplyResources(Me.Label19, "Label19")
-        Me.Label19.Font = Nothing
         Me.Label19.Name = "Label19"
         '
         'Label20
         '
-        Me.Label20.AccessibleDescription = Nothing
-        Me.Label20.AccessibleName = Nothing
         resources.ApplyResources(Me.Label20, "Label20")
-        Me.Label20.Font = Nothing
         Me.Label20.Name = "Label20"
         '
         'GroupBoxCurves
         '
-        Me.GroupBoxCurves.AccessibleDescription = Nothing
-        Me.GroupBoxCurves.AccessibleName = Nothing
         resources.ApplyResources(Me.GroupBoxCurves, "GroupBoxCurves")
-        Me.GroupBoxCurves.BackgroundImage = Nothing
         Me.GroupBoxCurves.Controls.Add(Me.FaTabStrip1)
-        Me.GroupBoxCurves.Font = Nothing
         Me.GroupBoxCurves.Name = "GroupBoxCurves"
         Me.GroupBoxCurves.TabStop = False
         '
         'FaTabStrip1
         '
-        Me.FaTabStrip1.AccessibleDescription = Nothing
-        Me.FaTabStrip1.AccessibleName = Nothing
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        Me.FaTabStripItem1.AccessibleDescription = Nothing
-        Me.FaTabStripItem1.AccessibleName = Nothing
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.TextBoxKAPI)
@@ -374,211 +291,132 @@ Partial Class FormAssayManager
         '
         'TextBoxKAPI
         '
-        Me.TextBoxKAPI.AccessibleDescription = Nothing
-        Me.TextBoxKAPI.AccessibleName = Nothing
         resources.ApplyResources(Me.TextBoxKAPI, "TextBoxKAPI")
-        Me.TextBoxKAPI.BackgroundImage = Nothing
-        Me.TextBoxKAPI.Font = Nothing
         Me.TextBoxKAPI.Name = "TextBoxKAPI"
         '
         'Label7
         '
-        Me.Label7.AccessibleDescription = Nothing
-        Me.Label7.AccessibleName = Nothing
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
         '
         'Label45
         '
-        Me.Label45.AccessibleDescription = Nothing
-        Me.Label45.AccessibleName = Nothing
         resources.ApplyResources(Me.Label45, "Label45")
-        Me.Label45.Font = Nothing
         Me.Label45.Name = "Label45"
         '
         'CheckBox1
         '
-        Me.CheckBox1.AccessibleDescription = Nothing
-        Me.CheckBox1.AccessibleName = Nothing
         resources.ApplyResources(Me.CheckBox1, "CheckBox1")
-        Me.CheckBox1.BackgroundImage = Nothing
         Me.CheckBox1.Checked = True
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox1.Font = Nothing
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'TextBoxBulkMW
         '
-        Me.TextBoxBulkMW.AccessibleDescription = Nothing
-        Me.TextBoxBulkMW.AccessibleName = Nothing
         resources.ApplyResources(Me.TextBoxBulkMW, "TextBoxBulkMW")
-        Me.TextBoxBulkMW.BackgroundImage = Nothing
-        Me.TextBoxBulkMW.Font = Nothing
         Me.TextBoxBulkMW.Name = "TextBoxBulkMW"
         '
         'CheckBoxMW
         '
-        Me.CheckBoxMW.AccessibleDescription = Nothing
-        Me.CheckBoxMW.AccessibleName = Nothing
         resources.ApplyResources(Me.CheckBoxMW, "CheckBoxMW")
-        Me.CheckBoxMW.BackgroundImage = Nothing
-        Me.CheckBoxMW.Font = Nothing
         Me.CheckBoxMW.Name = "CheckBoxMW"
         Me.CheckBoxMW.UseVisualStyleBackColor = True
         '
         'TextBoxBulkD
         '
-        Me.TextBoxBulkD.AccessibleDescription = Nothing
-        Me.TextBoxBulkD.AccessibleName = Nothing
         resources.ApplyResources(Me.TextBoxBulkD, "TextBoxBulkD")
-        Me.TextBoxBulkD.BackgroundImage = Nothing
-        Me.TextBoxBulkD.Font = Nothing
         Me.TextBoxBulkD.Name = "TextBoxBulkD"
         '
         'CheckBoxSG
         '
-        Me.CheckBoxSG.AccessibleDescription = Nothing
-        Me.CheckBoxSG.AccessibleName = Nothing
         resources.ApplyResources(Me.CheckBoxSG, "CheckBoxSG")
-        Me.CheckBoxSG.BackgroundImage = Nothing
-        Me.CheckBoxSG.Font = Nothing
         Me.CheckBoxSG.Name = "CheckBoxSG"
         Me.CheckBoxSG.UseVisualStyleBackColor = True
         '
         'Label44
         '
-        Me.Label44.AccessibleDescription = Nothing
-        Me.Label44.AccessibleName = Nothing
         resources.ApplyResources(Me.Label44, "Label44")
-        Me.Label44.Font = Nothing
         Me.Label44.Name = "Label44"
         '
         'CheckBoxVISC
         '
-        Me.CheckBoxVISC.AccessibleDescription = Nothing
-        Me.CheckBoxVISC.AccessibleName = Nothing
         resources.ApplyResources(Me.CheckBoxVISC, "CheckBoxVISC")
-        Me.CheckBoxVISC.BackgroundImage = Nothing
-        Me.CheckBoxVISC.Font = Nothing
         Me.CheckBoxVISC.Name = "CheckBoxVISC"
         Me.CheckBoxVISC.UseVisualStyleBackColor = True
         '
         'Label43
         '
-        Me.Label43.AccessibleDescription = Nothing
-        Me.Label43.AccessibleName = Nothing
         resources.ApplyResources(Me.Label43, "Label43")
-        Me.Label43.Font = Nothing
         Me.Label43.Name = "Label43"
         '
         'ComboBoxDistMethod
         '
-        Me.ComboBoxDistMethod.AccessibleDescription = Nothing
-        Me.ComboBoxDistMethod.AccessibleName = Nothing
         resources.ApplyResources(Me.ComboBoxDistMethod, "ComboBoxDistMethod")
-        Me.ComboBoxDistMethod.BackgroundImage = Nothing
         Me.ComboBoxDistMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxDistMethod.Font = Nothing
         Me.ComboBoxDistMethod.FormattingEnabled = True
         Me.ComboBoxDistMethod.Items.AddRange(New Object() {resources.GetString("ComboBoxDistMethod.Items"), resources.GetString("ComboBoxDistMethod.Items1"), resources.GetString("ComboBoxDistMethod.Items2"), resources.GetString("ComboBoxDistMethod.Items3")})
         Me.ComboBoxDistMethod.Name = "ComboBoxDistMethod"
         '
         'Label38
         '
-        Me.Label38.AccessibleDescription = Nothing
-        Me.Label38.AccessibleName = Nothing
         resources.ApplyResources(Me.Label38, "Label38")
         Me.Label38.Name = "Label38"
         '
         'Label39
         '
-        Me.Label39.AccessibleDescription = Nothing
-        Me.Label39.AccessibleName = Nothing
         resources.ApplyResources(Me.Label39, "Label39")
-        Me.Label39.Font = Nothing
         Me.Label39.Name = "Label39"
         '
         'ComboBoxBasis
         '
-        Me.ComboBoxBasis.AccessibleDescription = Nothing
-        Me.ComboBoxBasis.AccessibleName = Nothing
         resources.ApplyResources(Me.ComboBoxBasis, "ComboBoxBasis")
-        Me.ComboBoxBasis.BackgroundImage = Nothing
         Me.ComboBoxBasis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxBasis.Font = Nothing
         Me.ComboBoxBasis.FormattingEnabled = True
         Me.ComboBoxBasis.Items.AddRange(New Object() {resources.GetString("ComboBoxBasis.Items"), resources.GetString("ComboBoxBasis.Items1"), resources.GetString("ComboBoxBasis.Items2")})
         Me.ComboBoxBasis.Name = "ComboBoxBasis"
         '
         'TextBoxVT1
         '
-        Me.TextBoxVT1.AccessibleDescription = Nothing
-        Me.TextBoxVT1.AccessibleName = Nothing
         resources.ApplyResources(Me.TextBoxVT1, "TextBoxVT1")
-        Me.TextBoxVT1.BackgroundImage = Nothing
-        Me.TextBoxVT1.Font = Nothing
         Me.TextBoxVT1.Name = "TextBoxVT1"
         '
         'Label42
         '
-        Me.Label42.AccessibleDescription = Nothing
-        Me.Label42.AccessibleName = Nothing
         resources.ApplyResources(Me.Label42, "Label42")
-        Me.Label42.Font = Nothing
         Me.Label42.Name = "Label42"
         '
         'Label40
         '
-        Me.Label40.AccessibleDescription = Nothing
-        Me.Label40.AccessibleName = Nothing
         resources.ApplyResources(Me.Label40, "Label40")
-        Me.Label40.Font = Nothing
         Me.Label40.Name = "Label40"
         '
         'RadioButtonD20
         '
-        Me.RadioButtonD20.AccessibleDescription = Nothing
-        Me.RadioButtonD20.AccessibleName = Nothing
         resources.ApplyResources(Me.RadioButtonD20, "RadioButtonD20")
-        Me.RadioButtonD20.BackgroundImage = Nothing
-        Me.RadioButtonD20.Font = Nothing
         Me.RadioButtonD20.Name = "RadioButtonD20"
         Me.RadioButtonD20.UseVisualStyleBackColor = True
         '
         'TextBoxVT2
         '
-        Me.TextBoxVT2.AccessibleDescription = Nothing
-        Me.TextBoxVT2.AccessibleName = Nothing
         resources.ApplyResources(Me.TextBoxVT2, "TextBoxVT2")
-        Me.TextBoxVT2.BackgroundImage = Nothing
-        Me.TextBoxVT2.Font = Nothing
         Me.TextBoxVT2.Name = "TextBoxVT2"
         '
         'RadioButtonD60
         '
-        Me.RadioButtonD60.AccessibleDescription = Nothing
-        Me.RadioButtonD60.AccessibleName = Nothing
         resources.ApplyResources(Me.RadioButtonD60, "RadioButtonD60")
-        Me.RadioButtonD60.BackgroundImage = Nothing
         Me.RadioButtonD60.Checked = True
-        Me.RadioButtonD60.Font = Nothing
         Me.RadioButtonD60.Name = "RadioButtonD60"
         Me.RadioButtonD60.TabStop = True
         Me.RadioButtonD60.UseVisualStyleBackColor = True
         '
         'LabelT3
         '
-        Me.LabelT3.AccessibleDescription = Nothing
-        Me.LabelT3.AccessibleName = Nothing
         resources.ApplyResources(Me.LabelT3, "LabelT3")
-        Me.LabelT3.Font = Nothing
         Me.LabelT3.Name = "LabelT3"
         '
         'FaTabStripItem2
         '
-        Me.FaTabStripItem2.AccessibleDescription = Nothing
-        Me.FaTabStripItem2.AccessibleName = Nothing
         resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.gridcurves)
@@ -587,20 +425,16 @@ Partial Class FormAssayManager
         '
         'gridcurves
         '
-        Me.gridcurves.AccessibleDescription = Nothing
-        Me.gridcurves.AccessibleName = Nothing
+        resources.ApplyResources(Me.gridcurves, "gridcurves")
         Me.gridcurves.AllowUserToAddRows = False
         Me.gridcurves.AllowUserToDeleteRows = False
         Me.gridcurves.AllowUserToResizeRows = False
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
         Me.gridcurves.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
-        resources.ApplyResources(Me.gridcurves, "gridcurves")
         Me.gridcurves.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridcurves.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.gridcurves.BackgroundImage = Nothing
         Me.gridcurves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridcurves.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.vap, Me.temp, Me.mm, Me.dens, Me.visc1, Me.visc2})
-        Me.gridcurves.Font = Nothing
         Me.gridcurves.Name = "gridcurves"
         Me.gridcurves.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.gridcurves.RowHeadersVisible = False
@@ -639,32 +473,24 @@ Partial Class FormAssayManager
         '
         'GroupBox2
         '
-        Me.GroupBox2.AccessibleDescription = Nothing
-        Me.GroupBox2.AccessibleName = Nothing
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.BackgroundImage = Nothing
         Me.GroupBox2.Controls.Add(Me.gridassays)
         Me.GroupBox2.Controls.Add(Me.ToolStrip1)
-        Me.GroupBox2.Font = Nothing
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
         'gridassays
         '
-        Me.gridassays.AccessibleDescription = Nothing
-        Me.gridassays.AccessibleName = Nothing
+        resources.ApplyResources(Me.gridassays, "gridassays")
         Me.gridassays.AllowUserToAddRows = False
         Me.gridassays.AllowUserToDeleteRows = False
         Me.gridassays.AllowUserToResizeColumns = False
         Me.gridassays.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.gridassays, "gridassays")
         Me.gridassays.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.gridassays.BackgroundImage = Nothing
         Me.gridassays.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.gridassays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridassays.ColumnHeadersVisible = False
         Me.gridassays.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colid, Me.colname, Me.tipo})
-        Me.gridassays.Font = Nothing
         Me.gridassays.MultiSelect = False
         Me.gridassays.Name = "gridassays"
         Me.gridassays.RowHeadersVisible = False
@@ -689,74 +515,50 @@ Partial Class FormAssayManager
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.AccessibleDescription = Nothing
-        Me.ToolStrip1.AccessibleName = Nothing
         resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
-        Me.ToolStrip1.BackgroundImage = Nothing
-        Me.ToolStrip1.Font = Nothing
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton3, Me.ToolStripButton4, Me.ToolStripButton1, Me.ToolStripButton2})
         Me.ToolStrip1.Name = "ToolStrip1"
         '
         'ToolStripButton3
         '
-        Me.ToolStripButton3.AccessibleDescription = Nothing
-        Me.ToolStripButton3.AccessibleName = Nothing
         resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
-        Me.ToolStripButton3.BackgroundImage = Nothing
         Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton3.Image = Global.DWSIM.My.Resources.Resources.copy
         Me.ToolStripButton3.Name = "ToolStripButton3"
         '
         'ToolStripButton4
         '
-        Me.ToolStripButton4.AccessibleDescription = Nothing
-        Me.ToolStripButton4.AccessibleName = Nothing
         resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
-        Me.ToolStripButton4.BackgroundImage = Nothing
         Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton4.Image = Global.DWSIM.My.Resources.Resources.cross
         Me.ToolStripButton4.Name = "ToolStripButton4"
         '
         'ToolStripButton1
         '
-        Me.ToolStripButton1.AccessibleDescription = Nothing
-        Me.ToolStripButton1.AccessibleName = Nothing
-        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
-        Me.ToolStripButton1.BackgroundImage = Nothing
+        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.arrow_down1
         Me.ToolStripButton1.Name = "ToolStripButton1"
         '
         'ToolStripButton2
         '
-        Me.ToolStripButton2.AccessibleDescription = Nothing
-        Me.ToolStripButton2.AccessibleName = Nothing
-        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
-        Me.ToolStripButton2.BackgroundImage = Nothing
+        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.arrow_up1
         Me.ToolStripButton2.Name = "ToolStripButton2"
         '
         'Button1
         '
-        Me.Button1.AccessibleDescription = Nothing
-        Me.Button1.AccessibleName = Nothing
         resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.BackgroundImage = Nothing
-        Me.Button1.Font = Nothing
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
-        Me.Button2.AccessibleDescription = Nothing
-        Me.Button2.AccessibleName = Nothing
         resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.BackgroundImage = Nothing
         Me.Button2.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Button2.Font = Nothing
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
@@ -773,20 +575,15 @@ Partial Class FormAssayManager
         'FormAssayManager
         '
         Me.AcceptButton = Me.Button1
-        Me.AccessibleDescription = Nothing
-        Me.AccessibleName = Nothing
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Nothing
         Me.CancelButton = Me.Button2
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBoxCurves)
         Me.Controls.Add(Me.GroupBoxBulk)
-        Me.Font = Nothing
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Icon = Nothing
         Me.Name = "FormAssayManager"
         Me.ShowInTaskbar = False
         Me.GroupBoxBulk.ResumeLayout(False)
@@ -867,14 +664,14 @@ Partial Class FormAssayManager
     Friend WithEvents tipo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
+    Public WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
+    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents vap As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents temp As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents mm As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents dens As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents visc1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents visc2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
-    Public WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-    Public WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class
