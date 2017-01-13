@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.1 Update 10 - January 2017
+Version 4.1 Update 11 - January 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.1 Update 11
+
+- [NEW] More German translations
+- [CHG] Updated Rigorous Column solvers (NS/IO)
+- [FIX] Fixed CSTR editor issue
 
 Version 4.1 Update 10
 
