@@ -136,10 +136,10 @@
     <value>Coluna de Destilação</value>
   </data>
   <data name="COMP_Desc" xml:space="preserve">
-    <value>Model for an adiabatic (isentropic) compressor</value>
+    <value>Modelo para um compressor isentrópico</value>
   </data>
   <data name="COMP_Name" xml:space="preserve">
-    <value>Adiabatic Compressor</value>
+    <value>Compressor Adiabático</value>
   </data>
   <data name="CONV_Desc" xml:space="preserve">
     <value>Suporta reações definidas por uma taxa de conversão de reagentes</value>

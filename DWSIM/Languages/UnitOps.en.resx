@@ -136,10 +136,10 @@
     <value>Distillation Column</value>
   </data>
   <data name="COMP_Desc" xml:space="preserve">
-    <value>Modelo para um compressor isentrópico</value>
+    <value>Model for an adiabatic (isentropic) compressor</value>
   </data>
   <data name="COMP_Name" xml:space="preserve">
-    <value>Compressor Adiabático</value>
+    <value>Adiabatic Compressor</value>
   </data>
   <data name="CONV_Desc" xml:space="preserve">
     <value>Supports reactions defined by amounts of reactant converted as a function of temperature</value>

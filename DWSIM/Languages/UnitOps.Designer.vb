@@ -72,7 +72,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ADJ_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Controlador.
         '''</summary>
@@ -81,7 +81,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ADJ_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para simulação rigorosa de colunas de absorção.
         '''</summary>
@@ -90,7 +90,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CABS_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Coluna de Absorção.
         '''</summary>
@@ -99,7 +99,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CABSC_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo rigoroso para simulação de colunas de destilação.
         '''</summary>
@@ -108,7 +108,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CDEST_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Coluna de Destilação.
         '''</summary>
@@ -117,25 +117,25 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CDEST_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
-        '''  Looks up a localized string similar to Model for an adiabatic (isentropic) compressor.
+        '''  Looks up a localized string similar to Modelo para um compressor isentrópico.
         '''</summary>
         Friend Shared ReadOnly Property COMP_Desc() As String
             Get
                 Return ResourceManager.GetString("COMP_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
-        '''  Looks up a localized string similar to Adiabatic Compressor.
+        '''  Looks up a localized string similar to Compressor Adiabático.
         '''</summary>
         Friend Shared ReadOnly Property COMP_Name() As String
             Get
                 Return ResourceManager.GetString("COMP_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Suporta reações definidas por uma taxa de conversão de reagentes.
         '''</summary>
@@ -144,7 +144,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CONV_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Reator de Conversão.
         '''</summary>
@@ -153,7 +153,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CONV_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de resfriador simples.
         '''</summary>
@@ -162,7 +162,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("COOL_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Resfriador.
         '''</summary>
@@ -171,7 +171,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("COOL_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para simulação de operações unitárias CAPE-OPEN.
         '''</summary>
@@ -180,7 +180,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("COUO_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Operação Unitária CAPE-OPEN.
         '''</summary>
@@ -189,7 +189,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("COUO_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo rigoroso de absorvedora com refervedor.
         '''</summary>
@@ -198,7 +198,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CRABS_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Absorvedora com Refervedor.
         '''</summary>
@@ -207,7 +207,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CRABS_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo rigoroso de uma coluna de absorção com refluxo.
         '''</summary>
@@ -216,7 +216,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CRFABS_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Absorvedora com Refluxo.
         '''</summary>
@@ -225,7 +225,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CRFABS_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para dimensionamento rápido de colunas de destilação.
         '''</summary>
@@ -234,7 +234,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CSC_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Coluna Shortcut.
         '''</summary>
@@ -243,7 +243,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CSC_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para separação hipotética de substâncias.
         '''</summary>
@@ -252,7 +252,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CSEP_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Separador de Substâncias.
         '''</summary>
@@ -261,7 +261,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CSEP_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de um CSTR, suporta reações Cinéticas e Catalíticas Heterogêneas.
         '''</summary>
@@ -270,7 +270,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CSTR_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Continous Stirred Tank Reactor (CSTR).
         '''</summary>
@@ -279,7 +279,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("CSTR_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Suporta reações definidas por constantes de equilíbrio.
         '''</summary>
@@ -288,7 +288,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("EQUIL_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Reator de Equilíbrio.
         '''</summary>
@@ -297,7 +297,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("EQUIL_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Bloco lógico para reciclo de correntes de energia.
         '''</summary>
@@ -306,7 +306,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ERECY_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Reciclo de Energia.
         '''</summary>
@@ -315,7 +315,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ERECY_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Representa o fluxo de energia entrando e saindo das operações unitárias.
         '''</summary>
@@ -324,7 +324,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ESTR_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Corrente de Energia.
         '''</summary>
@@ -333,7 +333,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ESTR_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para utilização de uma planilha como um bloco no fluxograma.
         '''</summary>
@@ -342,7 +342,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("EXLUO_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Planilha.
         '''</summary>
@@ -351,7 +351,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("EXLUO_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para um expansor isentrópico.
         '''</summary>
@@ -360,7 +360,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("EXP_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Expansor Adiabático.
         '''</summary>
@@ -369,7 +369,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("EXP_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de filtro de sólidos.
         '''</summary>
@@ -378,7 +378,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("FILTER_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Filtro.
         '''</summary>
@@ -387,7 +387,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("FILTER_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo para utilização de uma simulação existente como um bloco no fluxograma.
         '''</summary>
@@ -396,7 +396,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("FLOWS_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Fluxograma.
         '''</summary>
@@ -405,7 +405,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("FLOWS_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Calcula o equilíbrio químico de átomos em uma Corrente de Matéria.
         '''</summary>
@@ -414,7 +414,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("GIBBS_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Reator de Gibbs.
         '''</summary>
@@ -423,7 +423,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("GIBBS_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de aquecedor simples.
         '''</summary>
@@ -432,7 +432,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("HEAT_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Aquecedor.
         '''</summary>
@@ -441,7 +441,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("HEAT_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de trocador de calor rigoroso.
         '''</summary>
@@ -450,7 +450,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("HEXCH_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Trocador de Calor Rigoroso.
         '''</summary>
@@ -459,7 +459,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("HEXCH_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Operação unitária definida por um script IronPython.
         '''</summary>
@@ -468,7 +468,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("IPUO_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Script IronPython.
         '''</summary>
@@ -477,7 +477,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("IPUO_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Mistura múltiplas Correntes de Matéria em uma.
         '''</summary>
@@ -486,7 +486,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("MIX_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Misturador de Correntes.
         '''</summary>
@@ -495,7 +495,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("MIX_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Bloco para conexão de Correntes de Matéria de corte.
         '''</summary>
@@ -504,7 +504,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("MRECY_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Reciclo.
         '''</summary>
@@ -513,7 +513,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("MRECY_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Carrega informações sobre substâncias e condições de fluxo de matéria.
         '''</summary>
@@ -522,7 +522,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("MSTR_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Corrente de Matéria.
         '''</summary>
@@ -531,7 +531,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("MSTR_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Dimensiona ou avalia uma placa de orifício.
         '''</summary>
@@ -540,7 +540,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ORIF_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Placa de Orifício.
         '''</summary>
@@ -549,7 +549,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("ORIF_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de um PFR, suporta reações Cinéticas e Catalíticas Heterogêneas.
         '''</summary>
@@ -558,7 +558,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("PFR_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Reator Plug-Flow (PFR).
         '''</summary>
@@ -567,7 +567,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("PFR_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Define um segmento de tubulação e acessórios para cálculo de perda de carga.
         '''</summary>
@@ -576,7 +576,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("PIPE_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Segmento de Tubulação.
         '''</summary>
@@ -585,7 +585,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("PIPE_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de bomba centrífuga.
         '''</summary>
@@ -594,7 +594,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("PUMP_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Bomba Centrífuga.
         '''</summary>
@@ -603,7 +603,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("PUMP_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Define uma variável como função de outra.
         '''</summary>
@@ -612,7 +612,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SPEC_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Especificação.
         '''</summary>
@@ -621,7 +621,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SPEC_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Divide uma Corrente de Matéria em outras correntes.
         '''</summary>
@@ -630,7 +630,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SPLIT_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Divisor de Correntes.
         '''</summary>
@@ -639,7 +639,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SPLIT_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Separa a fase sólida das demais em uma Corrente de Matéria.
         '''</summary>
@@ -648,7 +648,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SSEP_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Separador de Sólidos.
         '''</summary>
@@ -657,7 +657,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("SSEP_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo simplificado de tanque de armazenamento.
         '''</summary>
@@ -666,7 +666,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("TANK_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Tanque.
         '''</summary>
@@ -675,7 +675,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("TANK_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Modelo de válvula com expansão isentálpica.
         '''</summary>
@@ -684,7 +684,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("VALVE_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Válvula.
         '''</summary>
@@ -693,7 +693,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("VALVE_Name", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Separador de fases fluidas (vapor/líquido).
         '''</summary>
@@ -702,7 +702,7 @@ Namespace My.Resources
                 Return ResourceManager.GetString("VESSEL_Desc", resourceCulture)
             End Get
         End Property
-
+        
         '''<summary>
         '''  Looks up a localized string similar to Vaso Separador Gás-Líquido.
         '''</summary>
