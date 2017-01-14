@@ -193,6 +193,9 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Eigensch.</value>
   </data>
+  <data name="gbIndVar1.Text" xml:space="preserve">
+    <value>Unabhänige Variable 1</value>
+  </data>
   <data name="Label14.Text" xml:space="preserve">
     <value>Objekt</value>
   </data>
