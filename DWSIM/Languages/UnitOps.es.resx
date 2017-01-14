@@ -123,11 +123,11 @@
   <data name="ADJ_Name" xml:space="preserve">
     <value>Controlador</value>
   </data>
-  <data name="CABSC_Name" xml:space="preserve">
-    <value>Coluna de Absorção</value>
-  </data>
   <data name="CABS_Desc" xml:space="preserve">
     <value>Modelo para simulação rigorosa de colunas de absorção</value>
+  </data>
+  <data name="CABS_Name" xml:space="preserve">
+    <value>Coluna de Absorção</value>
   </data>
   <data name="CDEST_Desc" xml:space="preserve">
     <value>Modelo rigoroso para simulação de colunas de destilação</value>
@@ -187,7 +187,7 @@
     <value>Modelo de um CSTR, suporta reações Cinéticas e Catalíticas Heterogêneas</value>
   </data>
   <data name="CSTR_Name" xml:space="preserve">
-    <value>Continous Stirred Tank Reactor (CSTR)</value>
+    <value>Reactor de tanque contínuo (CSTR)</value>
   </data>
   <data name="EQUIL_Desc" xml:space="preserve">
     <value>Suporta reações definidas por constantes de equilíbrio</value>

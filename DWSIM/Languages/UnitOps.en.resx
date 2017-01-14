@@ -123,11 +123,11 @@
   <data name="ADJ_Name" xml:space="preserve">
     <value>Controller Block</value>
   </data>
-  <data name="CABSC_Name" xml:space="preserve">
-    <value>Absorption Column</value>
-  </data>
   <data name="CABS_Desc" xml:space="preserve">
     <value>Model for rigorous simulation of absorption columns</value>
+  </data>
+  <data name="CABS_Name" xml:space="preserve">
+    <value>Absorption Column</value>
   </data>
   <data name="CDEST_Desc" xml:space="preserve">
     <value>Rigorous model for simulation of distillation columns</value>

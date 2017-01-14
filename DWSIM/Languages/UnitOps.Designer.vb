@@ -94,9 +94,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Coluna de Absorção.
         '''</summary>
-        Friend Shared ReadOnly Property CABSC_Name() As String
+        Friend Shared ReadOnly Property CABS_Name() As String
             Get
-                Return ResourceManager.GetString("CABSC_Name", resourceCulture)
+                Return ResourceManager.GetString("CABS_Name", resourceCulture)
             End Get
         End Property
         
@@ -272,7 +272,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Continous Stirred Tank Reactor (CSTR).
+        '''  Looks up a localized string similar to Reactor de tanque contínuo (CSTR).
         '''</summary>
         Friend Shared ReadOnly Property CSTR_Name() As String
             Get
