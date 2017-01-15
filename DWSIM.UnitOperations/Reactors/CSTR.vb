@@ -326,26 +326,30 @@ Namespace Reactors
                 Throw New Exception(FlowSheet.GetTranslatedString("Nohcorrentedeenerg17"))
             End If
 
-            'Check Basecomponents and reaction volume
-            i = 0
+            'Check Reaction type, Base components and reaction volume
+            If FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Count = 0 Then Throw New Exception("No reaction defined")
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 rxn = FlowSheet.Reactions(rxnsb.ReactionID)
-                BC = rxn.BaseReactant
-                If BC = "" Then Throw New Exception("No Base Component defined for reaction " & rxn.Name)
+                If (rxn.ReactionType = ReactionType.Kinetic Or rxn.ReactionType = ReactionType.Heterogeneous_Catalytic) And rxnsb.IsActive Then
+                    BC = rxn.BaseReactant
+                    If BC = "" Then Throw New Exception("No Base Component defined for reaction " & rxn.Name)
 
-                'Check if reaction has a volume 
-                If rxn.ReactionPhase = PhaseName.Liquid And Volume > 0 Then i = 1
-                If rxn.ReactionPhase = PhaseName.Vapor And Headspace > 0 Then i = 1
-                If rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace > 0 Then i = 1
+                    'Check if reaction has a volume 
+                    If (rxn.ReactionPhase = PhaseName.Liquid And Volume <= 0) Or
+                        (rxn.ReactionPhase = PhaseName.Vapor And Headspace <= 0) Or
+                        (rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace <= 0) Then Throw New Exception("No reactor volume defined")
+
+                    GoTo init 'at least one well defined reaction found - go on
+                End If
             Next
-            If i = 0 Then Throw New Exception("No reactor volume defined")
+            Throw New Exception("No kinetic or catalytic reaction found")
 
             'Check reactor mode.
             'Mode 0 (without vapour outlet):    Complete output is leaving through Outlet Stream 1. Phase volumes for reactions depend on phase volumetric fractions.
             '                                   Residence time liquid (and vapour) is Volume (without head space) divided by total volume flow.
             'Mode 1 (with vapour outlet):       Vapour phase reactions take place in headspace volume only. Reactor volume is volume of liquid+solid phases
             '                                   Residence time is calculated for reactor volume and headspace separately
-            If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = EReactorMode.TwoOutlets
+init:       If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = EReactorMode.TwoOutlets
 
             'Initialisations
             Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
