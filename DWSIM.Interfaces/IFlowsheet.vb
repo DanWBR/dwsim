@@ -82,6 +82,8 @@
 
     Property MobileCompatibilityMode As Boolean
 
+    Event StatusChanged()
+
 End Interface
 
 Public Interface IFlowsheetBag

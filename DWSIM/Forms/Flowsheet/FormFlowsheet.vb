@@ -2759,6 +2759,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #Region "    IFlowsheet Implementation"
 
+    Public Event StatusChanged() Implements IFlowsheet.StatusChanged
+
     Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
             Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
