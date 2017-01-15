@@ -290,6 +290,7 @@ Namespace Reactors
             Kr = New ArrayList 'K reverse reaction
             Rxi = New Dictionary(Of String, Double)
             Dim BC As String = "" 'Base Component of Reaction
+            Dim ErrCode As String
 
             'conversion factors for different basis other than molar concentrations
             Dim convfactors As New Dictionary(Of String, Double)
@@ -328,21 +329,28 @@ Namespace Reactors
 
             'Check Reaction type, Base components and reaction volume
             If FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Count = 0 Then Throw New Exception("No reaction defined")
+            ErrCode = "No kinetic or catalytic reaction found"
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 rxn = FlowSheet.Reactions(rxnsb.ReactionID)
                 If (rxn.ReactionType = ReactionType.Kinetic Or rxn.ReactionType = ReactionType.Heterogeneous_Catalytic) And rxnsb.IsActive Then
                     BC = rxn.BaseReactant
-                    If BC = "" Then Throw New Exception("No Base Component defined for reaction " & rxn.Name)
+                    If BC = "" Then
+                        ErrCode = "No Base Component defined for reaction " & rxn.Name
+                        Exit For
+                    End If
 
                     'Check if reaction has a volume 
                     If (rxn.ReactionPhase = PhaseName.Liquid And Volume <= 0) Or
                         (rxn.ReactionPhase = PhaseName.Vapor And Headspace <= 0) Or
-                        (rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace <= 0) Then Throw New Exception("No reactor volume defined")
-
-                    GoTo init 'at least one well defined reaction found - go on
+                        (rxn.ReactionPhase = PhaseName.Mixture And Volume + Headspace <= 0) Then
+                        ErrCode = "No reactor volume defined"
+                    Else
+                        ErrCode = ""
+                    End If
+                    Exit For
                 End If
             Next
-            Throw New Exception("No kinetic or catalytic reaction found")
+            If ErrCode <> "" Then Throw New Exception(ErrCode)
 
             'Check reactor mode.
             'Mode 0 (without vapour outlet):    Complete output is leaving through Outlet Stream 1. Phase volumes for reactions depend on phase volumetric fractions.
@@ -449,6 +457,8 @@ init:       If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode 
                 For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                     If rxnsb.IsActive = False Then Continue For
                     rxn = FlowSheet.Reactions(rxnsb.ReactionID)
+                    If rxn.ReactionType <> ReactionType.Kinetic And rxn.ReactionType <> ReactionType.Heterogeneous_Catalytic Then Continue For
+
                     BC = rxn.BaseReactant
                     scBC = Math.Abs(rxn.Components(BC).StoichCoeff)
 
