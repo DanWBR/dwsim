@@ -357,7 +357,7 @@ Namespace Reactors
             '                                   Residence time liquid (and vapour) is Volume (without head space) divided by total volume flow.
             'Mode 1 (with vapour outlet):       Vapour phase reactions take place in headspace volume only. Reactor volume is volume of liquid+solid phases
             '                                   Residence time is calculated for reactor volume and headspace separately
-init:       If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = EReactorMode.TwoOutlets
+            If Me.GraphicObject.OutputConnectors(1).IsAttached Then ReactorMode = EReactorMode.TwoOutlets
 
             'Initialisations
             Q = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault 'Mixture
