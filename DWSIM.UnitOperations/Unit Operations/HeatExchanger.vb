@@ -1507,11 +1507,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("HEXCH_Desc")
+            Return ResMan.GetLocalString("HEXCH_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("HEXCH_Name")
+            Return ResMan.GetLocalString("HEXCH_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -901,11 +901,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CDEST_Desc")
+            Return ResMan.GetLocalString("CDEST_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CDEST_Name")
+            Return ResMan.GetLocalString("CDEST_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -1051,11 +1051,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CABS_Desc")
+            Return ResMan.GetLocalString("CABS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CABS_Name")
+            Return ResMan.GetLocalString("CABS_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -1196,11 +1196,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CRABS_Desc")
+            Return ResMan.GetLocalString("CRABS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CRABS_Name")
+            Return ResMan.GetLocalString("CRABS_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
@@ -1347,11 +1347,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CRFABS_Desc")
+            Return ResMan.GetLocalString("CRFABS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CRFABS_Name")
+            Return ResMan.GetLocalString("CRFABS_Name")
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean

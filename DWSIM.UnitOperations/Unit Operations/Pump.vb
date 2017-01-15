@@ -981,11 +981,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("PUMP_Desc")
+            Return ResMan.GetLocalString("PUMP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("PUMP_Name")
+            Return ResMan.GetLocalString("PUMP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -456,11 +456,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("ORIF_Desc")
+            Return ResMan.GetLocalString("ORIF_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("ORIF_Name")
+            Return ResMan.GetLocalString("ORIF_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

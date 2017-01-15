@@ -588,11 +588,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("VESSEL_Desc")
+            Return ResMan.GetLocalString("VESSEL_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("VESSEL_Name")
+            Return ResMan.GetLocalString("VESSEL_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

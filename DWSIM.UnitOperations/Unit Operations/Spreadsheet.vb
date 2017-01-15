@@ -718,11 +718,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("EXLUO_Desc")
+            Return ResMan.GetLocalString("EXLUO_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("EXLUO_Name")
+            Return ResMan.GetLocalString("EXLUO_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

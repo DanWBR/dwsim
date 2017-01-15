@@ -238,11 +238,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("MIX_Desc")
+            Return ResMan.GetLocalString("MIX_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("MIX_Name")
+            Return ResMan.GetLocalString("MIX_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

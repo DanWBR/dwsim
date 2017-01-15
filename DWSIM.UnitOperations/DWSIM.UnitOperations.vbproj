@@ -436,6 +436,31 @@
     <Compile Include="Extenders\ExtensionMethods.vb" />
     <Compile Include="Extenders\ScintillaExtender.vb" />
     <Compile Include="Extenders\StreamListExtender.vb" />
+    <Compile Include="Languages\Strings.de.Designer.vb">
+      <DependentUpon>Strings.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Languages\Strings.Designer.vb">
+      <DependentUpon>Strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Languages\Strings.en.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Languages\UnitOps.en.Designer.vb">
+      <DependentUpon>Strings.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Languages\Strings.es.Designer.vb">
+      <DependentUpon>Strings.es.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Logical Operations\Adjust.vb" />
     <Compile Include="Logical Operations\EnergyRecycle.vb" />
     <Compile Include="Logical Operations\Recycle.vb" />
@@ -461,6 +486,7 @@
     <Compile Include="Reactors\Equilibrium.vb" />
     <Compile Include="Reactors\Gibbs.vb" />
     <Compile Include="Reactors\PFR.vb" />
+    <Compile Include="Resource Manager\ResMan.vb" />
     <Compile Include="Support Classes\PipeThermalProfile.vb" />
     <Compile Include="Support Classes\RigorousColumnSolver.vb" />
     <Compile Include="Support Classes\ComboBoxColumnTemplates.vb" />
@@ -956,6 +982,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Supporting\EditingForm_Gibbs_InitialEstimatesEditor.resx">
       <DependentUpon>EditingForm_Gibbs_InitialEstimatesEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Strings.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.de.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Strings.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Strings.en.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Strings.es.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.es.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Languages\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

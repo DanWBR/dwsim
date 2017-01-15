@@ -478,11 +478,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("HEAT_Desc")
+            Return ResMan.GetLocalString("HEAT_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("HEAT_Name")
+            Return ResMan.GetLocalString("HEAT_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

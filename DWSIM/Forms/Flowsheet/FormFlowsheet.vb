@@ -2828,8 +2828,6 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         returntext = DWSIM.App.GetPropertyName(text)
         If returntext <> text Then Return returntext
         returntext = DWSIM.App.GetLocalTipString(text)
-        If returntext <> text Then Return returntext
-        returntext = DWSIM.App.GetLocalUnitOpString(text)
         Return returntext
     End Function
 

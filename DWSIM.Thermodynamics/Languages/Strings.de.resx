@@ -227,6 +227,18 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DescUPP" xml:space="preserve">
     <value>Property Package that uses the UNIFAC Group Contribution Method for equilibrium calculations. Recommended for use with Hypotheticals.</value>
   </data>
+  <data name="ErrorInvalidFlashSpecValue" xml:space="preserve">
+    <value>One or more flash specification values are invalid. Please check the associated Unit Operation or Material Stream for incorrect specifications or miscalculated values.</value>
+  </data>
+  <data name="MSTR_Desc" xml:space="preserve">
+    <value>Enthält Informationen über Komponenten bei den spezifizierten Bedingungen</value>
+  </data>
+  <data name="MSTR_Name" xml:space="preserve">
+    <value>Materialstrom</value>
+  </data>
+  <data name="ParallelPInvokeError" xml:space="preserve">
+    <value>This feature uses a platform-specific, unmanaged (non-.NET) native library, which doesn't work with CPU Parallel Processing enabled. Please disable CPU Parallel Processing and try again.</value>
+  </data>
   <data name="PP_ENTH_CP_CALC_METHOD" xml:space="preserve">
     <value>Enthalpy/Entropy/Cp calculation method (0 = Lee-Kesler, 1 = Ideal, 2 = Excess)</value>
   </data>
@@ -247,6 +259,9 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PP_IGNORE_SALINITY_LIMIT" xml:space="preserve">
     <value>Ignore maximum salinity limit</value>
+  </data>
+  <data name="PP_IGNORE_VAPOR_FRACTION_LIMIT" xml:space="preserve">
+    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations</value>
   </data>
   <data name="PP_PHFELT" xml:space="preserve">
     <value>PH Flash - External Loop Tolerance</value>
@@ -298,9 +313,6 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PP_USE_EOS_VOLUME_SHIFT" xml:space="preserve">
     <value>Use Peneloux Volume Translation correction (0 = Disable, 1 = Enable)</value>
-  </data>
-  <data name="ParallelPInvokeError" xml:space="preserve">
-    <value>This feature uses a platform-specific, unmanaged (non-.NET) native library, which doesn't work with CPU Parallel Processing enabled. Please disable CPU Parallel Processing and try again.</value>
   </data>
   <data name="PropPack_FlashError" xml:space="preserve">
     <value>Phase equilibria calculation error.</value>
@@ -355,17 +367,5 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   </data>
   <data name="PropPack_ZError" xml:space="preserve">
     <value>Error calculating compressibility factor.</value>
-  </data>
-  <data name="ErrorInvalidFlashSpecValue" xml:space="preserve">
-    <value>One or more flash specification values are invalid. Please check the associated Unit Operation or Material Stream for incorrect specifications or miscalculated values.</value>
-  </data>
-  <data name="PP_IGNORE_VAPOR_FRACTION_LIMIT" xml:space="preserve">
-    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations</value>
-  </data>
-  <data name="MSTR_Desc" xml:space="preserve">
-    <value>Contains information about compounds flowing at specified state conditions</value>
-  </data>
-  <data name="MSTR_Name" xml:space="preserve">
-    <value>Material Stream</value>
   </data>
 </root>

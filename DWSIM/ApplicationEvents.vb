@@ -21,8 +21,6 @@ Namespace My
 
         Public _HelpManager As System.Resources.ResourceManager
 
-        Public _UnitOpResManager As System.Resources.ResourceManager
-
         Public _PropertyNameManager As System.Resources.ResourceManager
 
         Public _CultureInfo As System.Globalization.CultureInfo
@@ -101,9 +99,6 @@ Namespace My
             'loads the property name manager
             _PropertyNameManager = New System.Resources.ResourceManager("DWSIM.Properties", System.Reflection.Assembly.GetExecutingAssembly())
 
-            'loads the UnitOperations name manager
-            _UnitOpResManager = New System.Resources.ResourceManager("DWSIM.UnitOps", System.Reflection.Assembly.GetExecutingAssembly())
-
             For Each s As String In My.Application.CommandLineArgs
                 If s.ToLower = "-commandline" Then
                     'Stop the start form from loading.
@@ -135,6 +130,10 @@ Namespace My
         End Sub
 
         Public Sub InitializeSettings()
+
+            'set language
+            GlobalSettings.Settings.CultureInfo = My.Settings.CultureInfo
+            GlobalSettings.Settings.CurrentCulture = My.Settings.CultureInfo
 
             'set CUDA params
             CudafyModes.Compiler = eGPUCompiler.All

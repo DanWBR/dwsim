@@ -504,11 +504,11 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("SPEC_Desc")
+            Return ResMan.GetLocalString("SPEC_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("SPEC_Name")
+            Return ResMan.GetLocalString("SPEC_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -515,11 +515,11 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("COMP_Desc")
+            Return ResMan.GetLocalString("COMP_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("COMP_Name")
+            Return ResMan.GetLocalString("COMP_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

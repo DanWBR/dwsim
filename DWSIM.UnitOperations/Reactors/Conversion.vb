@@ -627,11 +627,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CONV_Desc")
+            Return ResMan.GetLocalString("CONV_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CONV_Name")
+            Return ResMan.GetLocalString("CONV_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -356,11 +356,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("IPUO_Desc")
+            Return ResMan.GetLocalString("IPUO_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("IPUO_Name")
+            Return ResMan.GetLocalString("IPUO_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

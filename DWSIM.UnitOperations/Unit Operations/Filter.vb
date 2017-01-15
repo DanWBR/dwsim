@@ -432,11 +432,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("FILTER_Desc")
+            Return ResMan.GetLocalString("FILTER_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("FILTER_Name")
+            Return ResMan.GetLocalString("FILTER_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -453,11 +453,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("COOL_Desc")
+            Return ResMan.GetLocalString("COOL_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("COOL_Name")
+            Return ResMan.GetLocalString("COOL_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

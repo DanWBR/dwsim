@@ -935,11 +935,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("PFR_Desc")
+            Return ResMan.GetLocalString("PFR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("PFR_Name")
+            Return ResMan.GetLocalString("PFR_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

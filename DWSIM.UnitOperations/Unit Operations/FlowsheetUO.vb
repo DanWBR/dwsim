@@ -1006,11 +1006,11 @@ Label_00CC:
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("FLOWS_Desc")
+            Return ResMan.GetLocalString("FLOWS_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("FLOWS_Name")
+            Return ResMan.GetLocalString("FLOWS_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

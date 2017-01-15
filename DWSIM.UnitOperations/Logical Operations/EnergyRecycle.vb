@@ -416,11 +416,11 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("ERECY_Desc")
+            Return ResMan.GetLocalString("ERECY_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("ERECY_Name")
+            Return ResMan.GetLocalString("ERECY_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -653,11 +653,11 @@ restart:    B = F - D
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CSC_Desc")
+            Return ResMan.GetLocalString("CSC_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CSC_Name")
+            Return ResMan.GetLocalString("CSC_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

@@ -1232,11 +1232,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("COUO_Desc")
+            Return ResMan.GetLocalString("COUO_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("COUO_Name")
+            Return ResMan.GetLocalString("COUO_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

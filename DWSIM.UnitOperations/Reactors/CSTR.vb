@@ -1354,11 +1354,11 @@ out:        Dim ms1, ms2 As MaterialStream
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("CSTR_Desc")
+            Return ResMan.GetLocalString("CSTR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("CSTR_Name")
+            Return ResMan.GetLocalString("CSTR_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

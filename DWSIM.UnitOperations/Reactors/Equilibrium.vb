@@ -1053,11 +1053,11 @@ Namespace Reactors
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("EQUIL_Desc")
+            Return ResMan.GetLocalString("EQUIL_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("EQUIL_Name")
+            Return ResMan.GetLocalString("EQUIL_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

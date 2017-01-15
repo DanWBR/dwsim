@@ -338,11 +338,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("VALVE_Desc")
+            Return ResMan.GetLocalString("VALVE_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("VALVE_Name")
+            Return ResMan.GetLocalString("VALVE_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

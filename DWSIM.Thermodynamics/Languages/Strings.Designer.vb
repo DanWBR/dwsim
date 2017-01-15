@@ -352,6 +352,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Carrega informações sobre substâncias e condições de fluxo de matéria.
+        '''</summary>
+        Friend Shared ReadOnly Property MSTR_Desc() As String
+            Get
+                Return ResourceManager.GetString("MSTR_Desc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Corrente de Matéria.
+        '''</summary>
+        Friend Shared ReadOnly Property MSTR_Name() As String
+            Get
+                Return ResourceManager.GetString("MSTR_Name", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Este recurso utiliza uma biblioteca nativa (não-.NET) da plataforma em execução, e não funciona com o modo de cálculo em paralelo na CPU ativado. por favor desative esse recurso e tente novamente..
         '''</summary>
         Friend Shared ReadOnly Property ParallelPInvokeError() As String

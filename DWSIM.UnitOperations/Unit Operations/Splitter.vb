@@ -434,11 +434,11 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("SPLIT_Desc")
+            Return ResMan.GetLocalString("SPLIT_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("SPLIT_Name")
+            Return ResMan.GetLocalString("SPLIT_Name")
         End Function
 
         Public Overrides Sub CloseEditForm()

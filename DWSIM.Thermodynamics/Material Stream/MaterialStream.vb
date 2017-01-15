@@ -5708,11 +5708,11 @@ Namespace Streams
         End Function
 
         Public Overrides Function GetDisplayDescription() As String
-            Return FlowSheet.GetTranslatedString("MSTR_Desc")
+            Return Calculator.GetLocalString("MSTR_Desc")
         End Function
 
         Public Overrides Function GetDisplayName() As String
-            Return FlowSheet.GetTranslatedString("MSTR_Name")
+            Return Calculator.GetLocalString("MSTR_Name")
         End Function
 
         Public Overrides Function GetDefaultProperties() As String()
