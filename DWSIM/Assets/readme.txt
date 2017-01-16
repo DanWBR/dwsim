@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.1 Update 11 - January 2017
+Version 4.1 Update 12 - January 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.1 Update 12
+
+- [FIX] Fixed translation issues
+- [FIX] Fixed PH/PS Flash calculation through the Excel interface
 
 Version 4.1 Update 11
 
