@@ -317,7 +317,7 @@ Namespace PropertyPackages
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As PropertyPackages.Phase)
 
             Dim result As Double
-            Dim resultObj As Object
+            Dim resultObj As Object = Nothing
             Dim dwpl As Phase
 
             Dim T, P As Double

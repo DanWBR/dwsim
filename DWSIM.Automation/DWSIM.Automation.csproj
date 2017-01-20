@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BB36089-89F6-4BBF-A39C-1D0A3F232F07}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DWSIM.Automation</RootNamespace>
+    <AssemblyName>DWSIM.Automation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\DWSIM\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\DWSIM\bin\Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CapeOpen">
+      <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interface.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
+      <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
+      <Name>DWSIM.XMLSerializer</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Drawing\DWSIM.DrawingTools.vbproj">
+      <Project>{ae695e9d-cfdf-4c8f-83cc-f5264de69fc4}</Project>
+      <Name>DWSIM.DrawingTools</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
+      <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
+      <Name>DWSIM.FlowsheetSolver</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
+      <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
+      <Name>DWSIM.Thermodynamics</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
+      <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
+      <Name>DWSIM.UnitOperations</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM\DWSIM.vbproj">
+      <Project>{34be2d2d-9b3c-4c12-8c90-732e21cd7cb1}</Project>
+      <Name>DWSIM</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

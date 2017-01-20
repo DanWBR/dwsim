@@ -84,6 +84,8 @@
 
     Event StatusChanged()
 
+    Sub SetMessageListener(act As Action(Of String))
+
 End Interface
 
 Public Interface IFlowsheetBag

@@ -1318,7 +1318,7 @@ Public Class FormMain
 
     End Sub
 
-    Sub LoadXML(ByVal path As String, Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False)
+    Public Function LoadXML(ByVal path As String, Optional ByVal simulationfilename As String = "", Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
         My.Application.PushUndoRedoAction = False
 
@@ -1730,7 +1730,9 @@ Public Class FormMain
 
         Application.DoEvents()
 
-    End Sub
+        Return form
+
+    End Function
 
     Sub SaveMobileXML(ByVal path As String, ByVal form As FormFlowsheet, Optional ByVal simulationfilename As String = "")
 

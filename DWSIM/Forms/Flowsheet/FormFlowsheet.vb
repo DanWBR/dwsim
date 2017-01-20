@@ -100,6 +100,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     Public UndoStack As New Stack(Of UndoRedoAction)
     Public RedoStack As New Stack(Of UndoRedoAction)
 
+    Private listeningaction As Action(Of String)
+
 #End Region
 
 #Region "    Form Event Handlers "
@@ -581,6 +583,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 texto = "[" & Me.MasterUnitOp.GraphicObject.Tag & "] " & texto
             Else
                 frsht = Me
+            End If
+
+            If listeningaction IsNot Nothing Then
+                listeningaction(texto)
             End If
 
             If frsht.Visible Then
@@ -3047,6 +3053,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                             Me.FormSpreadsheet.WriteAll()
                         End If
                     End Sub)
+    End Sub
+
+    Public Sub SetMessageListener(act As Action(Of String)) Implements IFlowsheet.SetMessageListener
+        listeningaction = act
     End Sub
 
     Public Property MobileCompatibilityMode As Boolean = False Implements IFlowsheet.MobileCompatibilityMode
