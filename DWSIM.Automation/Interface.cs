@@ -9,12 +9,22 @@ using System.Runtime.InteropServices;
 
 namespace DWSIM.Automation
 {
-    [ComVisible(true)]public class Interface
+
+    [Guid("ed615e8f-da69-4c24-80e2-bfe342168060")]
+    public interface AutomationInterface
+    {
+        Interfaces.IFlowsheet LoadFlowsheet(string filepath);
+        void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed);
+        void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender = null);
+    }
+
+    [Guid("37437090-e541-4f2c-9856-d1e27df32ecb"), ClassInterface(ClassInterfaceType.None)]
+    public class Automation: AutomationInterface
     {
 
-        FormMain fm;
+        FormMain fm = null;
 
-        public Interface()
+        public Automation()
         {
             FormMain fm = new FormMain();
         }
