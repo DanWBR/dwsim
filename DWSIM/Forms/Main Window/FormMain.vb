@@ -2087,7 +2087,7 @@ Public Class FormMain
         End Using
     End Function
 
-    Function LoadAndExtractXMLZIP(ByVal caminho As String) As Boolean
+    Function LoadAndExtractXMLZIP(ByVal caminho As String, Optional ByVal forcommandline As Boolean = False) As Interfaces.IFlowsheet
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
@@ -2125,12 +2125,12 @@ Label_00CC:
                     entry = stream.GetNextEntry
                 Loop
             End Using
-            LoadXML(fullname, caminho)
+            Dim fs As Interfaces.IFlowsheet = LoadXML(fullname, caminho, forcommandline)
             File.Delete(fullname)
-            Return True
+            Return fs
         Catch ex As Exception
             MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
+            Return Nothing
         End Try
 
     End Function

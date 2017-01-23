@@ -26,12 +26,19 @@ namespace DWSIM.Automation
 
         public Automation()
         {
-            FormMain fm = new FormMain();
+            fm = new FormMain();
         }
 
         public Interfaces.IFlowsheet LoadFlowsheet(string filepath)
         {
-            return fm.LoadXML(filepath, "", true);            
+            if (System.IO.Path.GetExtension(filepath).ToLower().Contains("dwxmz"))
+            {
+                return fm.LoadAndExtractXMLZIP(filepath, true);
+            }
+            else
+            {
+                return fm.LoadXML(filepath, "", true);
+            }
         }
 
         public void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed)

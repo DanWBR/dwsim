@@ -33,7 +33,7 @@ Namespace PropertyPackages
 
         Inherits PropertyPackages.ElectrolyteBasePropertyPackage
 
-        Public Shadows Const ClassId As String = "f3eeff51-eccd-4c15-b4b0-1eb4d13c61f3"
+        Public Shadows Const ClassId As String = "f3eeff51-eccd-4c15-b4b0-1eb4d13c61f8"
 
         Private m_props As New PropertyPackages.Auxiliary.PROPS
         Public m_uni As New PropertyPackages.Auxiliary.ExUNIQUAC

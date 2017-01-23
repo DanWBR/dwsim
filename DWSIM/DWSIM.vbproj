@@ -967,7 +967,8 @@
     <None Include="Assets\data\licenses\WindowsAzureClientLibraries_License.rtf" />
     <None Include="Assets\data\reactions\Sour Water Reaction Set.dwrxm" />
     <None Include="Assets\data\reactions\Water Self-Ionization.dwrxm" />
-    <None Include="Assets\register_automation.bat" />
+    <None Include="Assets\automation_unreg.bat" />
+    <None Include="Assets\automation_reg.bat" />
     <None Include="Assets\registry\CO_register_admin.reg" />
     <None Include="Assets\registry\CO_register_user.reg" />
     <None Include="Assets\registry\CO_unregister_admin.reg" />

@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM Shared Class Definitions")> 
-<Assembly: AssemblyDescription("Shared Class Library for DWSIM Simulator")> 
+<Assembly: AssemblyTitle("DWSIM.Automation.Tests")> 
+<Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.SharedClasses")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 
+<Assembly: AssemblyProduct("DWSIM.Automation.Tests")> 
+<Assembly: AssemblyCopyright("Copyright ©  2017")> 
 <Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(True)> 
+<Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("da36d744-3c39-490b-9350-d9161731df69")> 
+<Assembly: Guid("b40c1f2e-ae33-4ba0-a81b-d0d4c66f875a")> 
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,4 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("4.1.*")> 
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> 
