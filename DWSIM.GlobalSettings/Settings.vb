@@ -52,6 +52,7 @@ Public Class Settings
     Public Shared Property HideSolidPhaseFromCAPEOPENComponents As Boolean = False
 
     Public Shared Property DrawingAntiAlias As Boolean = True
+    Public Shared Property AutomationMode As Boolean
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 

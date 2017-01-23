@@ -28,8 +28,8 @@ Imports DWSIM.Interfaces
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(LIQUAC2PropertyPackage.ClassId)> _
-<System.Serializable()> Public Class ExUNIQUACPropertyPackage
+    <System.Runtime.InteropServices.Guid(ExUNIQUACPropertyPackage.ClassId)>
+    <System.Serializable()> Public Class ExUNIQUACPropertyPackage
 
         Inherits PropertyPackages.ElectrolyteBasePropertyPackage
 

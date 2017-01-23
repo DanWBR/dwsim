@@ -1,4 +1,4 @@
-﻿Public Interface ICompoundConstantProperties
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ICompoundConstantProperties
 
     Property Name As String
     Property CAS_Number As String

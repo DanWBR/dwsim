@@ -1,4 +1,4 @@
-﻿Public Interface IReactionSet
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IReactionSet
 
     Property ID() As String
 

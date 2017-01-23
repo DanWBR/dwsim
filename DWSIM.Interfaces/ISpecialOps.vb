@@ -1,4 +1,4 @@
-﻿Public Interface IRecycle
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IRecycle
 
     ReadOnly Property Errors As Dictionary(Of String, Double)
     ReadOnly Property Values As Dictionary(Of String, Double)
@@ -9,7 +9,7 @@
 
 End Interface
 
-Public Interface IRecycleConvergenceHistory
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IRecycleConvergenceHistory
 
     Property Temperatura As Double
     Property Pressao As Double
@@ -35,11 +35,11 @@ Public Interface IRecycleConvergenceHistory
 
 End Interface
 
-Public Interface ISpec
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ISpec
 
 End Interface
 
-Public Interface IAdjust
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IAdjust
 
     Property SimultaneousAdjust As Boolean
 
@@ -55,7 +55,7 @@ Public Interface IAdjust
 
 End Interface
 
-Public Interface ISpecialOpObjectInfo
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ISpecialOpObjectInfo
 
     Property Type As String
     Property Name As String

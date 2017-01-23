@@ -25,12 +25,9 @@ Imports System.Linq
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(SteamTablesPropertyPackage.ClassId)> _
-<System.Serializable()> Public Class SeawaterPropertyPackage
+    <System.Serializable()> Public Class SeawaterPropertyPackage
 
         Inherits PropertyPackages.PropertyPackage
-
-        Public Shadows Const ClassId As String = "170D6E8A-8880-4bf9-B7A0-E4A3FDBFD145"
 
         Protected m_iapws97 As New IAPWS_IF97
 

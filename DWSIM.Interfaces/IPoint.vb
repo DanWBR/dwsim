@@ -1,4 +1,4 @@
-﻿Public Interface IPoint
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPoint
 
     Property X As Double
     Property Y As Double

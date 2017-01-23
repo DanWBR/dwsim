@@ -1,4 +1,4 @@
-﻿Public Interface ICompound
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ICompound
 
     Property ConstantProperties As ICompoundConstantProperties
 

@@ -13,9 +13,9 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.FlowsheetSolver")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("cbc19328-7808-49f7-8bb7-fc786b85d653")> 

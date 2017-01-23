@@ -1,4 +1,4 @@
-﻿Public Interface IReactionStoichBase
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IReactionStoichBase
 
     Property CompName() As String
 

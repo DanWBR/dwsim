@@ -1,6 +1,6 @@
 ﻿Imports DWSIM.Interfaces.Enums.GraphicObjects
 
-Public Interface IGraphicObject
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IGraphicObject
 
     Sub Draw(surface As Object)
 
@@ -66,7 +66,7 @@ Public Interface IGraphicObject
 
 End Interface
 
-Public Interface IConnectionPoint
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint
 
     Property X() As Integer
 
@@ -90,7 +90,7 @@ Public Interface IConnectionPoint
 
 End Interface
 
-Public Interface IConnectorGraphicObject
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectorGraphicObject
 
     Property AttachedFromConnectorIndex() As Integer
 

@@ -737,7 +737,6 @@ Partial Class FormMain
     Public WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Public WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
 
-
     Public WithEvents PreferenciasDoDWSIMToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents TimerBackup As System.Windows.Forms.Timer
     Public WithEvents bgSaveBackup As System.ComponentModel.BackgroundWorker
@@ -859,7 +858,7 @@ Partial Class FormMain
 
         pathsep = Path.DirectorySeparatorChar
 
-        If Not Settings.CAPEOPENMode Then
+        If Not Settings.CAPEOPENMode AndAlso Not Settings.AutomationMode Then
             AddPropPacks()
             AddFlashAlgorithms()
             GetComponents()

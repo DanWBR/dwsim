@@ -1,4 +1,4 @@
-﻿Public Interface ISimulationObject
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ISimulationObject
 
     Property AttachedUtilities As List(Of IAttachedUtility)
 

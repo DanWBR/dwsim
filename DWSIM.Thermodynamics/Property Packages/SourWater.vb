@@ -32,12 +32,9 @@ Imports System.Math
 
 Namespace PropertyPackages
 
-    <System.Runtime.InteropServices.Guid(SteamTablesPropertyPackage.ClassId)> _
-<System.Serializable()> Public Class SourWaterPropertyPackage
+    <System.Serializable()> Public Class SourWaterPropertyPackage
 
         Inherits ActivityCoefficientPropertyPackage
-
-        Public Shadows Const ClassId As String = "79aefcf3-6c17-4e44-91d4-b70b7642bb78"
 
         Public Property LiquidPhaseMoleAmount As Double = 0.0#
 

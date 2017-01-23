@@ -1,4 +1,4 @@
-﻿Public Interface IFlowsheet
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheet
 
     Enum MessageType
         Information
@@ -84,11 +84,15 @@
 
     Event StatusChanged()
 
+    Event NewMessageSent()
+
+    Property Message As String
+
     Sub SetMessageListener(act As Action(Of String))
 
 End Interface
 
-Public Interface IFlowsheetBag
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetBag
 
     ReadOnly Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
@@ -110,7 +114,7 @@ Public Interface IFlowsheetBag
 
 End Interface
 
-Public Interface IFlowsheetGUI
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetGUI
 
     Sub ShowMessage(ByVal text As String, ByVal mtype As IFlowsheet.MessageType)
 
@@ -128,16 +132,16 @@ Public Interface IFlowsheetGUI
 
     Sub UpdateInformation()
 
- 
+
 End Interface
 
-Public Interface IFlowsheetCalculationQueue
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetCalculationQueue
 
     Property CalculationQueue As Queue(Of ICalculationArgs)
 
 End Interface
 
-Public Interface ICalculationArgs
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ICalculationArgs
 
     Property Sender As String
     Property Calculated As Boolean

@@ -13,9 +13,9 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.GlobalSettings")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("06c19304-88a6-4d2c-b01e-c5d489b1e12a")> 

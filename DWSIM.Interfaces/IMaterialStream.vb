@@ -1,4 +1,4 @@
-﻿Public Interface IMaterialStream
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IMaterialStream
 
     Property SpecType As Enums.StreamSpec
 

@@ -1,4 +1,4 @@
-﻿Public Interface IUndoRedoAction
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IUndoRedoAction
 
     Property ID As String
     Property Name As String

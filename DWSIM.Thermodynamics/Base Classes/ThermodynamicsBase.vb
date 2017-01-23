@@ -378,7 +378,7 @@ Namespace BaseClasses
         End Function
     End Class
 
-    <System.Serializable()> Public Class ReactionSet
+    <Runtime.InteropServices.ComVisible(False)> <System.Serializable()> Public Class ReactionSet
 
         Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
 

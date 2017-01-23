@@ -1,4 +1,4 @@
-﻿Public Interface IPropertyPackage
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPropertyPackage
 
     Property UniqueID As String
 
@@ -38,7 +38,7 @@
 
 End Interface
 
-Public Interface IPhaseEnvelopeOptions
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseEnvelopeOptions
 
     Property QualityLine As Boolean
     Property QualityValue As Double

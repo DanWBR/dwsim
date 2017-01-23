@@ -15,7 +15,7 @@ namespace DWSIM.Automation
     {
         Interfaces.IFlowsheet LoadFlowsheet(string filepath);
         void SaveFlowsheet(IFlowsheet flowsheet, string filepath, bool compressed);
-        void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender = null);
+        void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender);
     }
 
     [Guid("37437090-e541-4f2c-9856-d1e27df32ecb"), ClassInterface(ClassInterfaceType.None)]
@@ -26,6 +26,7 @@ namespace DWSIM.Automation
 
         public Automation()
         {
+            GlobalSettings.Settings.AutomationMode = true;
             fm = new FormMain();
         }
 
@@ -51,7 +52,7 @@ namespace DWSIM.Automation
             }
         }
 
-        public void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender = null)
+        public void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender)
         {
             if ((sender != null))
             {

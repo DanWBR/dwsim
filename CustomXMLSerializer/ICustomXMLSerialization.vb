@@ -20,6 +20,7 @@ Imports System.Xml.Linq
 
 Namespace Interfaces
 
+    <Runtime.InteropServices.InterfaceType(Runtime.InteropServices.ComInterfaceType.InterfaceIsIDispatch)>
     Public Interface ICustomXMLSerialization
 
         Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)

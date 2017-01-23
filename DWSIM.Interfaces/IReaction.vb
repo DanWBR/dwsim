@@ -1,4 +1,4 @@
-﻿Public Interface IReaction
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IReaction
 
     ReadOnly Property Components() As Dictionary(Of String, IReactionStoichBase)
 

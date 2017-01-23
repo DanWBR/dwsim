@@ -589,6 +589,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 listeningaction(texto)
             End If
 
+            Message = texto
+
+            RaiseEvent NewMessageSent()
+
             If frsht.Visible Then
 
                 frsht.UIThread(New System.Action(Sub()
@@ -2766,6 +2770,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 #Region "    IFlowsheet Implementation"
 
     Public Event StatusChanged() Implements IFlowsheet.StatusChanged
+    Public Event NewMessageSent() Implements IFlowsheet.NewMessageSent
 
     Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
@@ -3060,6 +3065,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
     End Sub
 
     Public Property MobileCompatibilityMode As Boolean = False Implements IFlowsheet.MobileCompatibilityMode
+
+    Public Property Message As String = "" Implements IFlowsheet.Message
 
 #End Region
 

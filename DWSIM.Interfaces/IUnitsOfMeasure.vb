@@ -1,4 +1,4 @@
-﻿Public Interface IUnitsOfMeasure
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IUnitsOfMeasure
 
     Function GetUnitSet(measureID As Enums.UnitOfMeasure) As List(Of String)
 

@@ -1,4 +1,4 @@
-﻿Public Interface IFlowsheetOptions
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetOptions
 
     Property NumberFormat As String
     Property FractionNumberFormat As String

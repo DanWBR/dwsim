@@ -1,4 +1,4 @@
-﻿Public Interface IAttachedUtility
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IAttachedUtility
 
     Property ID As Integer
 

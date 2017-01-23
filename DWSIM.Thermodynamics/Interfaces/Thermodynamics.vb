@@ -101,7 +101,7 @@ Namespace CalculatorInterface
         ''' </summary>
         ''' <param name="level">Debug level: 0 = none, 1 = low, 2 = medium, 3 = high</param>
         ''' <remarks></remarks>
-        <Runtime.InteropServices.DispId(38)> Public Sub SetDebugLevel(level As Integer)
+        <Runtime.InteropServices.DispId(50)> Public Sub SetDebugLevel(level As Integer)
 
             GlobalSettings.Settings.DebugLevel = level
 
@@ -111,7 +111,7 @@ Namespace CalculatorInterface
         ''' Activates CPU-accelerated SIMD vector operations.
         ''' </summary>
         ''' <remarks>This uses the routines implemented in the Yeppp! (http://www.yeppp.info) library, which must be in the same directory as DTL's.</remarks>
-        <Runtime.InteropServices.DispId(40)> Public Sub EnableSIMDExtensions()
+        <Runtime.InteropServices.DispId(51)> Public Sub EnableSIMDExtensions()
             GlobalSettings.Settings.UseSIMDExtensions = True
         End Sub
 
@@ -119,7 +119,7 @@ Namespace CalculatorInterface
         ''' Deactivates CPU-accelerated SIMD vector operations.
         ''' </summary>
         ''' <remarks>This uses the routines implemented in the Yeppp! (http://www.yeppp.info) library, which must be in the same directory as DTL's.</remarks>
-        <Runtime.InteropServices.DispId(41)> Public Sub DisableSIMDExtensions()
+        <Runtime.InteropServices.DispId(52)> Public Sub DisableSIMDExtensions()
             GlobalSettings.Settings.UseSIMDExtensions = False
         End Sub
 
@@ -2787,7 +2787,7 @@ Namespace CalculatorInterface
         ''' <param name="compounds">Compounds to add</param>
         ''' <param name="molefractions">Compound mole fractions</param>
         ''' <remarks></remarks>
-        <Runtime.InteropServices.DispId(40)> Public Sub SetupPropertyPackage(
+        <Runtime.InteropServices.DispId(42)> Public Sub SetupPropertyPackage(
             ByVal proppack As PropertyPackage,
             ByVal compounds As String(),
             ByVal molefractions As Double())
@@ -2824,7 +2824,7 @@ Namespace CalculatorInterface
         ''' <param name="compounds">Compounds to add</param>
         ''' <param name="molefractions">Compound mole fractions</param>
         ''' <remarks></remarks>
-        <Runtime.InteropServices.DispId(40)> Public Function CreateMaterialStream(
+        <Runtime.InteropServices.DispId(41)> Public Function CreateMaterialStream(
             ByVal compounds As String(),
             ByVal molefractions As Double()) As Streams.MaterialStream
 

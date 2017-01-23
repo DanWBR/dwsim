@@ -1,4 +1,4 @@
-﻿Public Interface IPhaseProperties
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseProperties
 
     Property osmoticCoefficient As Nullable(Of Double)
     Property freezingPointDepression As Nullable(Of Double)

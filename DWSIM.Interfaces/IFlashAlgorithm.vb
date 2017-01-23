@@ -1,4 +1,4 @@
-﻿Public Interface IFlashAlgorithm
+﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlashAlgorithm
 
     Property FlashSettings As Dictionary(Of Enums.FlashSetting, String)
 
@@ -17,7 +17,7 @@
 
 End Interface
 
-Public Interface IFlashCalculationResult
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlashCalculationResult
 
     Property BaseMoleAmount As Double
     Property Kvalues As List(Of Double)

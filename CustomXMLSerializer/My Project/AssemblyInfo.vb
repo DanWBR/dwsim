@@ -13,9 +13,9 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("CustomXMLSerializer")> 
 <Assembly: AssemblyCopyright("Copyright ©  2012-2016 Daniel Medeiros")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("7ce68ff8-8b9d-4db7-8cd9-e204f11e231b")> 
