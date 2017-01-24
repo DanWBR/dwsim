@@ -379,7 +379,7 @@ Namespace Reactors
             Next
 
             'Copy results to upstream MS
-            Dim xl, xv, xs, T, P, H, S, wtotalx, wtotaly, wtotalS As Double
+            Dim xl, xv, xs, T, P, H, S, wtotalx, wtotaly, wtotalS, wl, wv, ws As Double
             Dim nc As Integer = ims.Phases(0).Compounds.Count - 1
             pp.CurrentMaterialStream = ims
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
@@ -388,6 +388,9 @@ Namespace Reactors
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
             xs = tmp.GetSolidPhaseMoleFraction
+            wl = tmp.GetLiquidPhase1MassFraction
+            wv = tmp.GetVaporPhaseMassFraction
+            ws = tmp.GetSolidPhaseMassFraction
             T = tmp.CalculatedTemperature
             P = tmp.CalculatedPressure
             H = tmp.CalculatedEnthalpy
@@ -434,9 +437,9 @@ Namespace Reactors
                         comp.MassFraction = Vwy(j)
                         j += 1
                     Next
-                    .Phases(0).Properties.massflow = W * (wtotaly * xv / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Phases(0).Properties.massfraction = (wtotaly * xv / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Phases(0).Properties.molarfraction = 1
+                    .Phases(0).Properties.massflow = W * wv
+                    .Phases(0).Properties.massfraction = 1.0#
+                    .Phases(0).Properties.molarfraction = 1.0#
                 End With
             End If
 
@@ -455,9 +458,9 @@ Namespace Reactors
                         j += 1
                     Next
                     j = 0
-                    .Phases(0).Properties.massflow = W * ((wtotalx * xl + wtotalS * xs) / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Phases(0).Properties.massfraction = ((wtotalx * xl + wtotalS * xs) / (wtotaly * xv + wtotalx * xl + wtotalS * xs))
-                    .Phases(0).Properties.molarfraction = 1
+                    .Phases(0).Properties.massflow = W * wl
+                    .Phases(0).Properties.massfraction = 1.0#
+                    .Phases(0).Properties.molarfraction = 1.0#
                 End With
             End If
 

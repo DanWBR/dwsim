@@ -711,7 +711,7 @@ FINAL:
 
             Dim result As Double
 
-            Dim T, P As Double
+            Dim T, Tsat, P As Double
             Dim composition As Object = Nothing
             Dim phasemolarfrac As Double = Nothing
             Dim overallmolarflow As Double = Nothing
@@ -719,6 +719,8 @@ FINAL:
             Dim phaseID As Integer
             T = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
             P = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+
+            Tsat = m_iapws97.tSatW(P / 100000)
 
             Select Case Phase
                 Case PropertyPackages.Phase.Mixture
@@ -752,7 +754,7 @@ FINAL:
 
             If phaseID = 3 Then
 
-                result = Me.m_iapws97.densSatLiqPW(P / 100000)
+                result = Me.m_iapws97.densSatLiqTW(T)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
                 result = DW_CalcEnthalpy(RET_VMOL(Phase), T, P, State.Liquid)
                 Me.CurrentMaterialStream.Phases(phaseID).Properties.enthalpy = result
@@ -778,7 +780,7 @@ FINAL:
 
             ElseIf phaseID = 2 Then
 
-                If T <= m_iapws97.tSatW(P / 100000) Then
+                If T <= Tsat Then
 
                     result = Me.m_iapws97.densSatVapTW(T)
                     Me.CurrentMaterialStream.Phases(phaseID).Properties.density = result
@@ -835,7 +837,6 @@ FINAL:
             ElseIf phaseID = 1 Then
 
                 DW_CalcLiqMixtureProps()
-
 
             Else
 
