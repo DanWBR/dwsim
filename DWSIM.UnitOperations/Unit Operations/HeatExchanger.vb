@@ -743,25 +743,44 @@ Namespace UnitOperations
                     Dim Tc2_ant, Th2_ant As Double
                     Dim Ud, Ur, U_ant, Rf, fx, Fant, F As Double
                     Dim DTm, Tcm, Thm, R, Sf, P As Double
-                    Dim cph0, cpc0, x0, q0 As Double
-                    cph0 = StInHot.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
-                    cpc0 = StInCold.Phases(0).Properties.heatCapacityCp.GetValueOrDefault
-                    x0 = Wh * cph0 / (Wc * cpc0)
+
                     If CalculationMode = HeatExchangerCalcMode.ShellandTube_Rating Then
-                        Tc2 = (Tc1 + x0 * Th1) / (1 + x0)
-                        q0 = Wc * cpc0 * (Tc2 - Tc1)
-                        Tc2 = 0.3 * q0 / Wc / cpc0 + Tc1
-                        Th2 = -0.3 * q0 / Wh / cph0 + Th1
+
+                        'initial estimates for R and P to calculate outlet temperatures
+
+                        R = 0.4
+                        P = 0.6
+
+                        If STProperties.Tube_Fluid = 0 Then
+                            'cold
+                            Tc2 = P * (Th1 - Tc1) + Tc1
+                            Th2 = Th1 - R * (Tc2 - Tc1)
+                        Else
+                            'hot
+                            Th2 = P * (Tc1 - Th1) + Th1
+                            Tc2 = Tc1 - R * (Th2 - Th1)
+                        End If
+
+                        If Th2 <= Tc2 Then Th2 = Tc2 * 1.2
+
                     Else
+
                         Tc2 = TempColdOut
                         Th2 = TempHotOut
+
                     End If
+
                     Pc2 = Pc1
                     Ph2 = Ph1
                     F = 1.0#
                     U = 500.0#
+
+                    Dim rhoc, muc, kc, rhoh, muh, kh, rs, rt, Atc, Nc, di, de, pitch, L, n, hi, nt, vt, Ret, Prt As Double
+
                     Dim icnt As Integer = 0
+
                     Do
+
                         Select Case Me.FlowDir
                             Case FlowDirection.CoCurrent
                                 LMTD = ((Th1 - Tc1) - (Th2 - Tc2)) / Math.Log((Th1 - Tc1) / (Th2 - Tc2))
@@ -771,7 +790,6 @@ Namespace UnitOperations
 
                         If Not IgnoreLMTDError Then If Double.IsNaN(LMTD) Or Double.IsInfinity(LMTD) Then Throw New Exception(FlowSheet.GetTranslatedString("HXCalcError"))
 
-                        Dim rhoc, muc, kc, rhoh, muh, kh, rs, rt, Atc, Nc, di, de, pitch, L, n, hi, nt, vt, Ret, Prt As Double
                         If STProperties.Tube_Fluid = 0 Then
                             'cold
                             R = (Th1 - Th2) / (Tc2 - Tc1)
@@ -779,9 +797,11 @@ Namespace UnitOperations
                         Else
                             'hot
                             R = (Tc1 - Tc2) / (Th2 - Th1)
-                            P = (Th2 - Tc2) / (Tc1 - Th1)
+                            P = (Th2 - Th1) / (Tc1 - Th1)
                         End If
+
                         Fant = F
+
                         If R <> 1.0# Then
                             Dim alpha As Double
                             alpha = ((1 - R * P) / (1 - P)) ^ (1 / Me.STProperties.Shell_NumberOfPasses)
@@ -872,6 +892,9 @@ Namespace UnitOperations
                         nt = n / STProperties.Tube_PassesPerShell
                         A = n * Math.PI * de * (L - 2 * de)
                         Atc = A / Nc
+
+                        If pitch < de Then Throw New Exception("Invalid input: tube spacing (pitch) is smaller than the tube's external diameter.")
+
                         If CalculationMode = HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor Then
                             Ud = Q * 1000 / (A * DTm)
                         End If

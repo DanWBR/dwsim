@@ -199,7 +199,7 @@ Public Class FormConfigPropertyPackage
 
     Private Sub FormConfigPR_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.Text += " (" & _pp.Tag & ")"
+        Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         With Me.KryptonDataGridView1.Rows
             .Clear()

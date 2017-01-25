@@ -3256,9 +3256,11 @@ Public Class FlowsheetSurface
                 Task.Factory.StartNew(Function()
                                           Return myobj.GetDebugReport()
                                       End Function).ContinueWith(Sub(t)
-                                                                     frm.TextBox1.Text = t.Result
-                                                                     frm.TextBox1.SelectionStart = 0
-                                                                     frm.TextBox1.SelectionLength = 0
+                                                                     frm.UIThread(Sub()
+                                                                                      frm.TextBox1.Text = t.Result
+                                                                                      frm.TextBox1.SelectionStart = 0
+                                                                                      frm.TextBox1.SelectionLength = 0
+                                                                                  End Sub)
                                                                  End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
             End If

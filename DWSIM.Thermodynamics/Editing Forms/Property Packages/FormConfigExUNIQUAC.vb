@@ -33,7 +33,7 @@ Public Class FormConfigExUNIQUAC
 
         Loaded = False
 
-        Me.Text += " (" & _pp.Tag & ")"
+        Me.Text += " (" & _pp.Tag & ") [" + _pp.ComponentName + "]"
 
         With Me.KryptonDataGridView1.Rows
             .Clear()

@@ -946,6 +946,7 @@ FINAL:
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
+            Dim Tbound = 1073.15
             Dim Tmin = 273.15
             Select Case st
                 Case State.Liquid
@@ -968,7 +969,21 @@ FINAL:
                         Return Me.m_iapws97.enthalpyW(T, P / 100000)
                     End If
                 Case State.Vapor
-                    If T > Tsat Then
+                    If T > Tbound Then
+                        CurrentMaterialStream.Flowsheet.ShowMessage(String.Format("Steam Tables Enthalpy Calculation: Temperature outside valid range ({0} > {1}), extrapolating calculated values...", T, Tbound), Interfaces.IFlowsheet.MessageType.Warning)
+                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                        x1 = Tcrit + (Tbound - Tcrit) * 0.2
+                        x2 = Tcrit + (Tbound - Tcrit) * 0.4
+                        x3 = Tcrit + (Tbound - Tcrit) * 0.6
+                        x4 = Tcrit + (Tbound - Tcrit) * 0.8
+                        x5 = Tcrit + (Tbound - Tcrit) * 0.9
+                        p1 = Me.m_iapws97.enthalpyW(x1, P / 100000)
+                        p2 = Me.m_iapws97.enthalpyW(x2, P / 100000)
+                        p3 = Me.m_iapws97.enthalpyW(x3, P / 100000)
+                        p4 = Me.m_iapws97.enthalpyW(x4, P / 100000)
+                        p5 = Me.m_iapws97.enthalpyW(x5, P / 100000)
+                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    ElseIf T > Tsat Then
                         Return Me.m_iapws97.enthalpyW(T, P / 100000)
                     ElseIf Math.Abs(T - Tsat) < 0.001 Then
                         Return Me.m_iapws97.enthalpySatVapTW(T)
@@ -1052,7 +1067,8 @@ FINAL:
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
             Dim Tsat As Double = m_iapws97.tSatW(P / 100000)
             Dim Tcrit As Double = 374.0 + 273.15
-            Dim Tmin = 273.15
+            Dim Tmin As Double = 273.15
+            Dim Tbound As Double = 1073.15
             Select Case st
                 Case State.Liquid
                     If T > Tsat Then
@@ -1074,7 +1090,21 @@ FINAL:
                         Return Me.m_iapws97.entropyW(T, P / 100000)
                     End If
                 Case State.Vapor
-                    If T > Tsat Then
+                    If T > Tbound Then
+                        CurrentMaterialStream.Flowsheet.ShowMessage(String.Format("Steam Tables Entropy Calculation: Temperature outside valid range ({0} > {1}), extrapolating calculated values...", T, Tbound), Interfaces.IFlowsheet.MessageType.Warning)
+                        Dim x1, x2, x3, x4, x5, p1, p2, p3, p4, p5 As Double
+                        x1 = Tcrit + (Tbound - Tcrit) * 0.2
+                        x2 = Tcrit + (Tbound - Tcrit) * 0.4
+                        x3 = Tcrit + (Tbound - Tcrit) * 0.6
+                        x4 = Tcrit + (Tbound - Tcrit) * 0.8
+                        x5 = Tcrit + (Tbound - Tcrit) * 0.9
+                        p1 = Me.m_iapws97.entropyW(x1, P / 100000)
+                        p2 = Me.m_iapws97.entropyW(x2, P / 100000)
+                        p3 = Me.m_iapws97.entropyW(x3, P / 100000)
+                        p4 = Me.m_iapws97.entropyW(x4, P / 100000)
+                        p5 = Me.m_iapws97.entropyW(x5, P / 100000)
+                        Return Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
+                    ElseIf T > Tsat Then
                         Return Me.m_iapws97.entropyW(T, P / 100000)
                     ElseIf Math.Abs(T - Tsat) < 0.001 Then
                         Return Me.m_iapws97.entropySatVapTW(T)

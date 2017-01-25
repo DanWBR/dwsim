@@ -1270,7 +1270,7 @@
             ''
         End Function
 
-        Private Function tBound(ByRef pressure As Object) As Object
+        Public Function tBound(ByRef pressure As Object) As Object
             '
             ' boundary temperature between regions 2 and 3
             ' tBound in K
