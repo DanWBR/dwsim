@@ -350,6 +350,10 @@ Namespace Streams
                 comp += subs.MoleFraction.GetValueOrDefault
             Next
 
+            'update mass fractions, just to make sure they're there.
+
+            CalcOverallCompMassFractions()
+
             If DebugMode Then AppendDebugLine(String.Format("Checking mixture composition. Sum must be higher than zero. Sum = {0}", comp))
 
             Dim foption As Integer
@@ -792,7 +796,11 @@ Namespace Streams
                 mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
             Next
             For Each sub1 In Phases(0).Compounds.Values
-                sub1.MassFraction = sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
+                If mol_x_mm > 0# Then
+                    sub1.MassFraction = sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
+                Else
+                    sub1.MassFraction = 0#
+                End If
             Next
 
         End Sub
