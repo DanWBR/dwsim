@@ -41,6 +41,10 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CustomUO
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Private engine As ScriptEngine
+
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Private scope As Object
+
         Private _scripttext As String = ""
         Private _includes() As String
         Private _fontname As String = "Courier New"
@@ -103,9 +107,6 @@ Namespace UnitOperations
             Me.ComponentName = name
             Me.ComponentDescription = description
         End Sub
-
-        Private Property engine As ScriptEngine
-        Private Property scope As Object
 
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
