@@ -3068,6 +3068,42 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Property Message As String = "" Implements IFlowsheet.Message
 
+    Public ReadOnly Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
+        Get
+            Return SimulationObjects.Values.ToArray
+        End Get
+    End Property
+
+    Public ReadOnly Property GraphicObjectsArray As IGraphicObject() Implements IFlowsheetBag.GraphicObjectsArray
+        Get
+            Return GraphicObjects.Values.ToArray
+        End Get
+    End Property
+
+    Public ReadOnly Property CompoundsArray As ICompoundConstantProperties() Implements IFlowsheetBag.CompoundsArray
+        Get
+            Return SelectedCompounds.Values.ToArray
+        End Get
+    End Property
+
+    Public ReadOnly Property PropertyPackagesArray As IPropertyPackage() Implements IFlowsheetBag.PropertyPackagesArray
+        Get
+            Return PropertyPackages.Values.ToArray
+        End Get
+    End Property
+
+    Public ReadOnly Property ReactionsArray As IReaction() Implements IFlowsheetBag.ReactionsArray
+        Get
+            Return Reactions.Values.ToArray
+        End Get
+    End Property
+
+    Public ReadOnly Property ReactionSetsArray As IReactionSet() Implements IFlowsheetBag.ReactionSetsArray
+        Get
+            Return ReactionSets.Values.ToArray
+        End Get
+    End Property
+
 #End Region
 
 End Class

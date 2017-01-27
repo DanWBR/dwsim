@@ -65,6 +65,42 @@
             End Get
         End Property
 
+        Public ReadOnly Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
+            Get
+                Return _so.Values.ToArray
+            End Get
+        End Property
+
+        Public ReadOnly Property GraphicObjectsArray As IGraphicObject() Implements IFlowsheetBag.GraphicObjectsArray
+            Get
+                Return _go.Values.ToArray
+            End Get
+        End Property
+
+        Public ReadOnly Property CompoundsArray As ICompoundConstantProperties() Implements IFlowsheetBag.CompoundsArray
+            Get
+                Return _co.Values.ToArray
+            End Get
+        End Property
+
+        Public ReadOnly Property PropertyPackagesArray As IPropertyPackage() Implements IFlowsheetBag.PropertyPackagesArray
+            Get
+                Return _pp.Values.ToArray
+            End Get
+        End Property
+
+        Public ReadOnly Property ReactionsArray As IReaction() Implements IFlowsheetBag.ReactionsArray
+            Get
+                Return _re.Values.ToArray
+            End Get
+        End Property
+
+        Public ReadOnly Property ReactionSetsArray As IReactionSet() Implements IFlowsheetBag.ReactionSetsArray
+            Get
+                Return _rs.Values.ToArray
+            End Get
+        End Property
+
         Public Overridable Sub SaveToXML(xfile As String) Implements IFlowsheetBag.SaveToXML
             Throw New NotImplementedException
         End Sub

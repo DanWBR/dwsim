@@ -112,6 +112,20 @@ End Interface
 
     Function GetSurface() As Object
 
+    'For COM compatibility
+
+    ReadOnly Property SimulationObjectsArray As ISimulationObject()
+
+    ReadOnly Property GraphicObjectsArray As IGraphicObject()
+
+    ReadOnly Property CompoundsArray As ICompoundConstantProperties()
+
+    ReadOnly Property PropertyPackagesArray As IPropertyPackage()
+
+    ReadOnly Property ReactionsArray As IReaction()
+
+    ReadOnly Property ReactionSetsArray As IReactionSet()
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetGUI
