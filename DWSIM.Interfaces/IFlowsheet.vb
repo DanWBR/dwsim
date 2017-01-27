@@ -82,12 +82,6 @@
 
     Property MobileCompatibilityMode As Boolean
 
-    Event StatusChanged()
-
-    Event NewMessageSent()
-
-    Property Message As String
-
     Sub SetMessageListener(act As Action(Of String))
 
 End Interface

@@ -37,17 +37,18 @@ Imports DWSIM.GraphicObjects
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports System.Runtime.InteropServices
 
-<System.Serializable()> Public Class FormFlowsheet
+<ComSourceInterfaces(GetType(Interfaces.IFlowsheetEvents))> <System.Serializable()> Public Class FormFlowsheet
 
     Inherits Form
 
     'CAPE-OPEN PME/COSE Interfaces
-    Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic,  _
+    Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic,
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
     'DWSIM IFlowsheet interface
-    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue
+    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue, Interfaces.IFlowsheetEvents
 
 #Region "    Variable Declarations "
 
@@ -2769,8 +2770,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 #Region "    IFlowsheet Implementation"
 
-    Public Event StatusChanged() Implements IFlowsheet.StatusChanged
-    Public Event NewMessageSent() Implements IFlowsheet.NewMessageSent
+    Public Event StatusChanged() Implements IFlowsheetEvents.StatusChanged
+    Public Event NewMessageSent() Implements IFlowsheetEvents.NewMessageSent
 
     Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
@@ -3066,7 +3067,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Public Property MobileCompatibilityMode As Boolean = False Implements IFlowsheet.MobileCompatibilityMode
 
-    Public Property Message As String = "" Implements IFlowsheet.Message
+    Public Property Message As String = "" Implements IFlowsheetEvents.Message
 
     Public ReadOnly Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
         Get
