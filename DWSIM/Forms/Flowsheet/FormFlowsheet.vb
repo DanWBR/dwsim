@@ -593,7 +593,9 @@ Public Class FormFlowsheet
 
             Message = texto
 
-            RaiseEvent NewMessageSent()
+            frsht.UIThread(New System.Action(Sub()
+                                                 RaiseEvent NewMessageSent(texto)
+                                             End Sub))
 
             If frsht.Visible Then
 
@@ -2771,10 +2773,9 @@ Public Class FormFlowsheet
 
 #Region "    IFlowsheet Implementation"
 
-    Private Delegate Sub NewMessageSentHandler()
-    Private Event NewMessageSent As NewMessageSentHandler
-
-    Protected Event StatusChanged()
+    Private Delegate Sub NewMessageSentEventHandler(ByVal message As String)
+    Private Event NewMessageSent As NewMessageSentEventHandler
+    Public Event StatusChanged()
 
     Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
