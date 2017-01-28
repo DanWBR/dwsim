@@ -16,19 +16,13 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports DWSIM.DrawingTools.GraphicObjects
-Imports System.Collections.Generic
 Imports System.ComponentModel
 Imports WeifenLuo.WinFormsUI
-Imports System.Drawing
 Imports System.Linq
 Imports System.IO
-Imports DWSIM.FlowsheetSolver
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
-Imports Microsoft.Win32
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports System.Runtime.Serialization.Formatters.Binary
 Imports DWSIM.DWSIM.Flowsheet
-Imports DWSIM.DWSIM.Extras
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Globalization
 Imports DWSIM.DrawingTools
@@ -36,10 +30,12 @@ Imports System.Reflection
 Imports DWSIM.GraphicObjects
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
-Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports System.Runtime.InteropServices
 
-<ComSourceInterfaces(GetType(Interfaces.IFlowsheetEvents))> <System.Serializable()> Public Class FormFlowsheet
+<ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
+<System.Serializable()>
+<Guid(FormFlowsheet.ClassId)>
+Public Class FormFlowsheet
 
     Inherits Form
 
@@ -48,7 +44,12 @@ Imports System.Runtime.InteropServices
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
     'DWSIM IFlowsheet interface
-    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue, Interfaces.IFlowsheetEvents
+    Implements Interfaces.IFlowsheet, Interfaces.IFlowsheetBag, Interfaces.IFlowsheetGUI, Interfaces.IFlowsheetCalculationQueue
+
+    Public Shadows Const ClassId As String = "0294AA84-9269-46CE-A854-BEF64539287B"
+    Public Shadows Const InterfaceId As String = "F405F679-7C8F-4737-BE58-738624220B7D"
+    Public Shadows Const EventsId As String = "5E0BA6EE-9025-4C33-A896-E061F32E93BF"
+
 
 #Region "    Variable Declarations "
 
@@ -971,10 +972,10 @@ Imports System.Runtime.InteropServices
     End Sub
 
     Private Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSBTexto.Click, TextoToolStripMenuItem.Click
-        Dim myTextObject As New TextGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
-            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
-            DWSIM.App.GetLocalString("caixa_de_texto"), _
-            System.Drawing.SystemFonts.DefaultFont, _
+        Dim myTextObject As New TextGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
+            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
+            DWSIM.App.GetLocalString("caixa_de_texto"),
+            System.Drawing.SystemFonts.DefaultFont,
             Color.Black)
         Dim gObj As GraphicObject = Nothing
         gObj = myTextObject
@@ -988,7 +989,7 @@ Imports System.Runtime.InteropServices
     End Sub
 
     Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton19.Click, TabelaDePropriedatesMestraToolStripMenuItem.Click
-        Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+        Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
         myMasterTable.Flowsheet = Me
@@ -1030,7 +1031,7 @@ Imports System.Runtime.InteropServices
                 Dim img = System.Drawing.Image.FromFile(.FileName)
                 Dim gObj As GraphicObject = Nothing
                 If Not img Is Nothing Then
-                    Dim myEmbeddedImage As New EmbeddedImageGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom, _
+                    Dim myEmbeddedImage As New EmbeddedImageGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom,
                                     -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom, img)
                     gObj = myEmbeddedImage
                     gObj.Tag = DWSIM.App.GetLocalString("FIGURA") & Guid.NewGuid.ToString
@@ -1320,7 +1321,7 @@ Imports System.Runtime.InteropServices
 
 
     Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click, TabelaDePropriedadesToolStripMenuItem.Click
-        Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+        Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
         myPropertyTable.Flowsheet = Me
@@ -1333,7 +1334,7 @@ Imports System.Runtime.InteropServices
     End Sub
 
     Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click, RectangleToolStripMenuItem.Click
-        Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30, _
+        Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
           -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
         myobj.Name = "RECT-" & Guid.NewGuid.ToString
         myobj.Tag = "RECT" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Rectangle).Count + 1).ToString
@@ -1611,11 +1612,11 @@ Imports System.Runtime.InteropServices
 
         Me.WriteToLog(DWSIM.App.GetLocalTipString("FLSH007"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
-        If gObjFrom.ObjectType <> ObjectType.GO_Image And gObjFrom.ObjectType <> ObjectType.GO_Table And _
-        gObjFrom.ObjectType <> ObjectType.GO_Table And gObjFrom.ObjectType <> ObjectType.GO_FloatingTable And _
-        gObjFrom.ObjectType <> ObjectType.Nenhum And _
-        gObjTo.ObjectType <> ObjectType.GO_Image And gObjTo.ObjectType <> ObjectType.GO_Table And _
-        gObjTo.ObjectType <> ObjectType.GO_Table And gObjTo.ObjectType <> ObjectType.GO_FloatingTable And _
+        If gObjFrom.ObjectType <> ObjectType.GO_Image And gObjFrom.ObjectType <> ObjectType.GO_Table And
+        gObjFrom.ObjectType <> ObjectType.GO_Table And gObjFrom.ObjectType <> ObjectType.GO_FloatingTable And
+        gObjFrom.ObjectType <> ObjectType.Nenhum And
+        gObjTo.ObjectType <> ObjectType.GO_Image And gObjTo.ObjectType <> ObjectType.GO_Table And
+        gObjTo.ObjectType <> ObjectType.GO_Table And gObjTo.ObjectType <> ObjectType.GO_FloatingTable And
         gObjTo.ObjectType <> ObjectType.Nenhum And gObjTo.ObjectType <> ObjectType.GO_MasterTable Then
 
             Dim con1OK As Boolean = False
@@ -1872,9 +1873,9 @@ Imports System.Runtime.InteropServices
                 .AutoToolTip = False
             End With
             With icomo
-                tsmi.ToolTipText = "TypeName: " & vbTab & .TypeName & vbCrLf & _
-                                    "Version: " & vbTab & vbTab & .Version & vbCrLf & _
-                                    "Vendor URL: " & vbTab & .VendorURL & vbCrLf & _
+                tsmi.ToolTipText = "TypeName: " & vbTab & .TypeName & vbCrLf &
+                                    "Version: " & vbTab & vbTab & .Version & vbCrLf &
+                                    "Vendor URL: " & vbTab & .VendorURL & vbCrLf &
                                     "About: " & vbTab & vbTab & .AboutInfo
             End With
             Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem.DropDownItems.Add(tsmi)
@@ -2770,8 +2771,10 @@ Imports System.Runtime.InteropServices
 
 #Region "    IFlowsheet Implementation"
 
-    Public Event StatusChanged() Implements IFlowsheetEvents.StatusChanged
-    Public Event NewMessageSent() Implements IFlowsheetEvents.NewMessageSent
+    Private Delegate Sub NewMessageSentHandler()
+    Private Event NewMessageSent As NewMessageSentHandler
+
+    Protected Event StatusChanged()
 
     Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
@@ -3067,7 +3070,7 @@ Imports System.Runtime.InteropServices
 
     Public Property MobileCompatibilityMode As Boolean = False Implements IFlowsheet.MobileCompatibilityMode
 
-    Public Property Message As String = "" Implements IFlowsheetEvents.Message
+    Public Property Message As String = "" Implements IFlowsheet.Message
 
     Public ReadOnly Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
         Get

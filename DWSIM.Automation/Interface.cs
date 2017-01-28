@@ -54,12 +54,17 @@ namespace DWSIM.Automation
 
         public void CalculateFlowsheet(IFlowsheet flowsheet, ISimulationObject sender)
         {
+            GlobalSettings.Settings.SolverBreakOnException = true;
+            GlobalSettings.Settings.SolverMode = 0;
+            GlobalSettings.Settings.SolverTimeoutSeconds = 120;
+            GlobalSettings.Settings.EnableGPUProcessing = false;
+            GlobalSettings.Settings.EnableParallelProcessing = true;
             if ((sender != null))
             {
-                FlowsheetSolver.FlowsheetSolver.CalculateObject(this, sender.Name);
+                FlowsheetSolver.FlowsheetSolver.CalculateObject(flowsheet, sender.Name);
             }
             else {
-                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(this, GlobalSettings.Settings.SolverMode);
+                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(flowsheet, GlobalSettings.Settings.SolverMode);
             }
         }
 

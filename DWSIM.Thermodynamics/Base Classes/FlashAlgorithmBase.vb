@@ -1068,13 +1068,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Function Clone() As Interfaces.IFlashAlgorithm Implements Interfaces.IFlashAlgorithm.Clone
 
-            Using objMemStream As New MemoryStream()
-                Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
-                objBinaryFormatter.Serialize(objMemStream, Me)
-                objMemStream.Seek(0, SeekOrigin.Begin)
-                Clone = objBinaryFormatter.Deserialize(objMemStream)
-            End Using
-            'Return Me.MemberwiseClone()
+            If GlobalSettings.Settings.AutomationMode Then
+                'Dim savedata As String = Newtonsoft.Json.JsonConvert.SerializeObject(Me)
+                'Return Newtonsoft.Json.JsonConvert.DeserializeObject(savedata, Me.GetType)
+                Return Me.MemberwiseClone()
+            Else
+                Using objMemStream As New MemoryStream()
+                    Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
+                    objBinaryFormatter.Serialize(objMemStream, Me)
+                    objMemStream.Seek(0, SeekOrigin.Begin)
+                    objBinaryFormatter.AssemblyFormat = Formatters.FormatterAssemblyStyle.Simple
+                    Clone = objBinaryFormatter.Deserialize(objMemStream)
+                End Using
+            End If
 
         End Function
 

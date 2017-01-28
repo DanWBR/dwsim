@@ -81,7 +81,7 @@
     Sub WriteSpreadsheetVariables()
 
     Property MobileCompatibilityMode As Boolean
-
+    Property Message As String
     Sub SetMessageListener(act As Action(Of String))
 
 End Interface

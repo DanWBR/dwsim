@@ -3,6 +3,7 @@ Imports Nini.Config
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Linq
+Imports Cudafy
 
 '    Shared Functions
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
@@ -25,6 +26,51 @@ Imports System.Linq
 Namespace DWSIM
 
     <System.Serializable()> Public Class App
+
+        Public Shared Function InitializeSettings() As List(Of Exception)
+
+            'set language
+            GlobalSettings.Settings.CultureInfo = My.Settings.CultureInfo
+            GlobalSettings.Settings.CurrentCulture = My.Settings.CultureInfo
+
+            'set CUDA params
+            CudafyModes.Compiler = eGPUCompiler.All
+            CudafyModes.Target = My.Settings.CudafyTarget
+
+            'set global settings
+            GlobalSettings.Settings.SolverMode = My.Settings.SolverMode
+            GlobalSettings.Settings.SolverTimeoutSeconds = My.Settings.SolverTimeoutSeconds
+            GlobalSettings.Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
+            GlobalSettings.Settings.TaskScheduler = My.Settings.TaskScheduler
+            GlobalSettings.Settings.MaxThreadMultiplier = My.Settings.MaxThreadMultiplier
+            GlobalSettings.Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
+            GlobalSettings.Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
+            GlobalSettings.Settings.EnableGPUProcessing = My.Settings.EnableGPUProcessing
+            GlobalSettings.Settings.CudafyTarget = My.Settings.CudafyTarget
+            GlobalSettings.Settings.CudafyDeviceID = My.Settings.CudafyDeviceID
+            GlobalSettings.Settings.UseSIMDExtensions = My.Settings.UseSIMDExtensions
+            GlobalSettings.Settings.DebugLevel = My.Settings.DebugLevel
+            GlobalSettings.Settings.DefaultEditFormLocation = My.Settings.DefaultEditorLocation
+
+            GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
+
+            GlobalSettings.Settings.CalculatorActivated = True
+
+            GlobalSettings.Settings.UserInteractionsDatabases.Clear()
+            If My.Settings.UserInteractionsDatabases Is Nothing Then My.Settings.UserInteractionsDatabases = New Specialized.StringCollection
+            For Each item In My.Settings.UserInteractionsDatabases
+                GlobalSettings.Settings.UserInteractionsDatabases.Add(item)
+            Next
+
+            Try
+                If GlobalSettings.Settings.EnableGPUProcessing Then Calculator.InitComputeDevice()
+            Catch ex As Exception
+                MessageBox.Show("GPU initialization failed: " & ex.Message)
+            End Try
+
+            Return Thermodynamics.NativeLibraries.Files.InitLibraries()
+
+        End Function
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)
 

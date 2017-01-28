@@ -8,8 +8,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM Shared Class Definitions")> 
-<Assembly: AssemblyDescription("Shared Class Library for DWSIM Simulator")> 
+<Assembly: AssemblyTitle("DWSIM Shared Class Definitions")>
+<Assembly: AssemblyDescription("DWSIM Simulator Shared Class Library")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.SharedClasses")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 

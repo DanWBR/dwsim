@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DWSIM Automation")]
-[assembly: AssemblyDescription("DWSIM Automation Interface")]
+[assembly: AssemblyDescription("DWSIM Simulator Automation Interface")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DWSIM Project")]
 [assembly: AssemblyProduct("DWSIM.Automation")]
