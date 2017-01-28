@@ -868,6 +868,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 Exit Sub
             End If
 
+            fs.Solved = False
+            fs.ErrorMessage = ""
+
             'adds a message to the log window to indicate that the flowsheet started solving
 
             fgui.ShowMessage(fgui.GetTranslatedString("FSstartedsolving"), IFlowsheet.MessageType.Information)
@@ -1212,6 +1215,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingok"), IFlowsheet.MessageType.Information)
                 fgui.ShowMessage(fgui.GetTranslatedString("Runtime") & ": " & (Date.Now - d1).ToString("g"), IFlowsheet.MessageType.Information)
 
+                fs.ErrorMessage = ""
+                fs.Solved = True
+
             Else
 
                 Dim baseexception As Exception = Nothing
@@ -1235,6 +1241,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError)
                     End If
                 Next
+
+                fs.Solved = False
+                If baseexception IsNot Nothing Then fs.ErrorMessage = baseexception.ToString
 
                 age = Nothing
 

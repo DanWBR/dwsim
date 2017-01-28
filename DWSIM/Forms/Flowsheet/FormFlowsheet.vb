@@ -3109,6 +3109,10 @@ Public Class FormFlowsheet
         End Get
     End Property
 
+    Public Property Solved As Boolean = False Implements IFlowsheet.Solved
+
+    Public Property ErrorMessage As String = "" Implements IFlowsheet.ErrorMessage
+
 #End Region
 
 End Class

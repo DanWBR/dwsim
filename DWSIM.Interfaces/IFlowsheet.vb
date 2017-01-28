@@ -84,6 +84,10 @@
     Property Message As String
     Sub SetMessageListener(act As Action(Of String))
 
+    Property Solved As Boolean
+
+    Property ErrorMessage As String
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetBag
