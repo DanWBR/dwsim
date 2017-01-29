@@ -796,10 +796,10 @@ Namespace Streams
                 mol_x_mm += sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight
             Next
             For Each sub1 In Phases(0).Compounds.Values
-                If mol_x_mm > 0# Then
+                If mol_x_mm > 0.0# Then
                     sub1.MassFraction = sub1.MoleFraction.GetValueOrDefault * sub1.ConstantProperties.Molar_Weight / mol_x_mm
                 Else
-                    sub1.MassFraction = 0#
+                    sub1.MassFraction = 0.0#
                 End If
             Next
 
