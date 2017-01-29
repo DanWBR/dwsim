@@ -980,6 +980,7 @@
     <None Include="Assets\samples\2,3-Dimethylbutane-Chloroform-PRSV2_VL.dwrsd" />
     <None Include="Assets\samples\Acetonitrile-Nitromethane-PRSV2-VL.dwrsd" />
     <None Include="Assets\samples\Ammonia-Water-NRTL.dwrsd" />
+    <None Include="Assets\samples\Automation Sample.xlsm" />
     <None Include="Assets\samples\Benzene-Cyclopentane-PR.dwrsd" />
     <None Include="Assets\samples\Benzene-m-Xylene-SLE.dwrsd" />
     <None Include="Assets\samples\Benzene-p-Xylene-SLE.dwrsd" />
