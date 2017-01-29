@@ -200,6 +200,10 @@ Namespace PropertyPackages
 
                 Me.LoadCPDB()
 
+                'load User databases
+
+                Me.LoadUserDBs()
+
             End If
 
             Initialize()
@@ -225,7 +229,6 @@ Namespace PropertyPackages
                 If Not _availablecomps.ContainsKey(cp.Name) Then _availablecomps.Add(cp.Name, cp)
             Next
         End Sub
-
 
         Public Sub LoadBDDB()
             Dim bddb As New Databases.Biodiesel
@@ -262,6 +265,28 @@ Namespace PropertyPackages
                 Next
             Catch ex As Exception
             End Try
+        End Sub
+
+        Public Sub LoadUserDBs()
+
+            If GlobalSettings.Settings.UserDatabases IsNot Nothing Then
+                'load user databases
+                For Each fpath As String In GlobalSettings.Settings.UserDatabases
+                    Try
+                        Dim componentes As BaseClasses.ConstantProperties()
+                        componentes = Databases.UserDB.ReadComps(fpath)
+                        If componentes.Length > 0 Then
+                            For Each c As BaseClasses.ConstantProperties In componentes
+                                If Not _availablecomps.ContainsKey(c.Name) Then
+                                    _availablecomps.Add(c.Name, c)
+                                End If
+                            Next
+                        End If
+                    Catch ex As Exception
+                    End Try
+                Next
+            End If
+
         End Sub
 
         Public Shared Function ReturnInstance(typename As String) As Object

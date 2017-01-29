@@ -32,7 +32,7 @@ Namespace ExcelAddIn
 
 #Region "Information Procedures"
 
-        <ExcelFunction(description:="Returns a list of compound constants and their values from the corresponding loaded database.", HelpTopic:="ExcelAddInHelp.chm!1")> _
+        <ExcelFunction(Description:="Returns a list of compound constants and their values from the corresponding loaded database.", HelpTopic:="ExcelAddInHelp.chm!1")>
         Public Shared Function GetCompoundConstants(<ExcelArgument("Compound name.")> ByVal compound As String) As Object(,)
 
             Try
@@ -94,11 +94,11 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a single property value for a compound. For a constant property, set T = 0 and P = 0. For a T-dep property, set P = 0. For a P-dep property, set T = 0.", HelpTopic:="ExcelAddInHelp.chm!2")> _
-        Public Shared Function GetCompoundProp( _
-            <ExcelArgument("Compound name.")> ByVal compound As String, _
-            <ExcelArgument("Property identifier.")> ByVal prop As String, _
-            <ExcelArgument("Temperature in K, if needed. Set as zero for a constant or P-dep property.")> ByVal temperature As Double, _
+        <ExcelFunction(Description:="Returns a single property value for a compound. For a constant property, set T = 0 and P = 0. For a T-dep property, set P = 0. For a P-dep property, set T = 0.", HelpTopic:="ExcelAddInHelp.chm!2")>
+        Public Shared Function GetCompoundProp(
+            <ExcelArgument("Compound name.")> ByVal compound As String,
+            <ExcelArgument("Property identifier.")> ByVal prop As String,
+            <ExcelArgument("Temperature in K, if needed. Set as zero for a constant or P-dep property.")> ByVal temperature As Double,
             <ExcelArgument("Pressure in Pa, if needed. Set as zero for a constant or T-dep property.")> ByVal pressure As Double) As Object
 
             Settings.ExcelMode = True
@@ -164,7 +164,7 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a list of the available single compound properties.", HelpTopic:="ExcelAddInHelp.chm!3")> _
+        <ExcelFunction(Description:="Returns a list of the available single compound properties.", HelpTopic:="ExcelAddInHelp.chm!3")>
         Public Shared Function GetCompoundPropList() As Object(,)
 
             Settings.ExcelMode = True
@@ -196,7 +196,7 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a list of the available Property Packages.", HelpTopic:="ExcelAddInHelp.chm!4")> _
+        <ExcelFunction(Description:="Returns a list of the available Property Packages.", HelpTopic:="ExcelAddInHelp.chm!4")>
         Public Shared Function GetPropPackList() As Object(,)
 
             Settings.ExcelMode = True
@@ -219,7 +219,7 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a list of the thermodynamic models.", HelpTopic:="ExcelAddInHelp.chm!5")> _
+        <ExcelFunction(Description:="Returns a list of the thermodynamic models.", HelpTopic:="ExcelAddInHelp.chm!5")>
         Public Shared Function GetModelList() As Object(,)
 
             Dim modellist As New ArrayList
@@ -243,7 +243,7 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns the interaction parameters stored in DWSIM's database for a given binary/model combination.", HelpTopic:="ExcelAddInHelp.chm!6")> _
+        <ExcelFunction(Description:="Returns the interaction parameters stored in DWSIM's database for a given binary/model combination.", HelpTopic:="ExcelAddInHelp.chm!6")>
         Public Shared Function GetInteractionParameterSet(
             <ExcelArgument("Thermodynamic Model (use 'GetModelList' to get a list of available models).")> ByVal Model As String,
             <ExcelArgument("The name of the first compound.")> ByVal Compound1 As String,
@@ -467,7 +467,7 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns the interaction parameters stored in user databases for a given binary/model combination.", HelpTopic:="ExcelAddInHelp.chm!7")> _
+        <ExcelFunction(Description:="Returns the interaction parameters stored in user databases for a given binary/model combination.", HelpTopic:="ExcelAddInHelp.chm!7")>
         Public Shared Function GetUserInteractionParameterSet(
             <ExcelArgument("Thermodynamic Model (use 'GetModelList' to get a list of available models).")> ByVal Model As String,
             <ExcelArgument("The name of the first compound.")> ByVal Compound1 As String,
@@ -527,8 +527,8 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a list of the available properties.", HelpTopic:="ExcelAddInHelp.chm!8")> _
-        Public Shared Function GetPropList( _
+        <ExcelFunction(Description:="Returns a list of the available properties.", HelpTopic:="ExcelAddInHelp.chm!8")>
+        Public Shared Function GetPropList(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
             Settings.ExcelMode = True
@@ -556,8 +556,8 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a list of the available phases.", HelpTopic:="ExcelAddInHelp.chm!9")> _
-        Public Shared Function GetPhaseList( _
+        <ExcelFunction(Description:="Returns a list of the available phases.", HelpTopic:="ExcelAddInHelp.chm!9")>
+        Public Shared Function GetPhaseList(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
             Settings.ExcelMode = True
@@ -585,8 +585,8 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Returns a list of the available compounds.", HelpTopic:="ExcelAddInHelp.chm!10")> _
-        Public Shared Function GetCompoundList( _
+        <ExcelFunction(Description:="Returns a list of the available compounds.", HelpTopic:="ExcelAddInHelp.chm!10")>
+        Public Shared Function GetCompoundList(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
             Settings.ExcelMode = True
@@ -627,23 +627,23 @@ Namespace ExcelAddIn
 
 #Region "Property Calculation Function"
 
-        <ExcelFunction(description:="Calculates properties using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!11")> _
-        Public Shared Function CalcProp( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("The property to calculate.")> ByVal prop As String, _
-        <ExcelArgument("The returning basis of the properties: Mole, Mass or UNDEFINED.")> ByVal basis As String, _
-        <ExcelArgument("The name of the phase to calculate properties from.")> ByVal phaselabel As String, _
-        <ExcelArgument("The list of compounds to include.")> ByVal compounds As Object(), _
-        <ExcelArgument("Temperature in K.")> ByVal temperature As Double, _
-        <ExcelArgument("Pressure in Pa.")> ByVal pressure As Double, _
-        <ExcelArgument("*Normalized* mole fractions of the compounds in the mixture.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
+        <ExcelFunction(Description:="Calculates properties using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!11")>
+        Public Shared Function CalcProp(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("The property to calculate.")> ByVal prop As String,
+        <ExcelArgument("The returning basis of the properties: Mole, Mass or UNDEFINED.")> ByVal basis As String,
+        <ExcelArgument("The name of the phase to calculate properties from.")> ByVal phaselabel As String,
+        <ExcelArgument("The list of compounds to include.")> ByVal compounds As Object(),
+        <ExcelArgument("Temperature in K.")> ByVal temperature As Double,
+        <ExcelArgument("Pressure in Pa.")> ByVal pressure As Double,
+        <ExcelArgument("*Normalized* mole fractions of the compounds in the mixture.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Settings.ExcelMode = True
@@ -771,21 +771,21 @@ Namespace ExcelAddIn
 
 #Region "Flash Calculation Routines, v1"
 
-        <ExcelFunction(description:="Calculates a Pressure / Temperature Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!12")> _
-        Public Shared Function PTFlash( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Temperature in K.")> ByVal T As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Temperature Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!12")>
+        Public Shared Function PTFlash(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Temperature in K.")> ByVal T As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Settings.ExcelMode = True
@@ -944,84 +944,84 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!13")> _
-        Public Shared Function PHFlash( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!13")>
+        Public Shared Function PHFlash(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Return PHFlash2(proppack, flashalg, P, H, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, 0.0#)
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Pressure / Entropy Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!14")> _
-        Public Shared Function PSFlash( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Entropy Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!14")>
+        Public Shared Function PSFlash(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Return PSFlash2(proppack, flashalg, P, S, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, 0.0#)
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!15")> _
-        Public Shared Function PVFFlash( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!15")>
+        Public Shared Function PVFFlash(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Return PVFFlash2(proppack, flashalg, P, VF, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, 0.0#)
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!16")> _
-        Public Shared Function TVFFlash( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Temperature in K.")> ByVal T As Double, _
-        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
+        <ExcelFunction(Description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!16")>
+        Public Shared Function TVFFlash(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Temperature in K.")> ByVal T As Double,
+        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Return TVFFlash2(proppack, flashalg, T, VF, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, 0.0#)
@@ -1032,22 +1032,22 @@ Namespace ExcelAddIn
 
 #Region "Flash Calculation Routines, v2 (accept an initial estimate)"
 
-        <ExcelFunction(description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!17")> _
-        Public Shared Function PHFlash2( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
-        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!17")>
+        Public Shared Function PHFlash2(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
+        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
@@ -1210,22 +1210,22 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Pressure / Entropy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!18")> _
-        Public Shared Function PSFlash2( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
-        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Entropy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!18")>
+        Public Shared Function PSFlash2(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
+        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
@@ -1388,22 +1388,22 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!19")> _
-        Public Shared Function PVFFlash2( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Pressure in Pa.")> ByVal P As Double, _
-        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
-        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
+        <ExcelFunction(Description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!19")>
+        Public Shared Function PVFFlash2(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
+        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
@@ -1566,22 +1566,22 @@ Namespace ExcelAddIn
 
         End Function
 
-        <ExcelFunction(description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the pressure search.", HelpTopic:="ExcelAddInHelp.chm!20")> _
-        Public Shared Function TVFFlash2( _
-        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String, _
-        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer, _
-        <ExcelArgument("Temperature in K.")> ByVal T As Double, _
-        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double, _
-        <ExcelArgument("Compound names.")> ByVal compounds As Object(), _
-        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(), _
-        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object, _
-        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object, _
-        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object, _
-        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object, _
-        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object, _
-        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object, _
-        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object, _
-        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object, _
+        <ExcelFunction(Description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the pressure search.", HelpTopic:="ExcelAddInHelp.chm!20")>
+        Public Shared Function TVFFlash2(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Flash Algorithm (0 or 2 = Nested Loops VLE, 1 = Inside-Out VLE, 3 = Inside-Out VLLE, 4 = Gibbs VLE, 5 = Gibbs VLLE, 6 = Nested-Loops VLLE, 7 = Nested-Loops SLE, 8 = Nested-Loops Immisc., 9 = Simple LLE)")> ByVal flashalg As Integer,
+        <ExcelArgument("Temperature in K.")> ByVal T As Double,
+        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Interaction Parameters Set #1.")> ByVal ip1 As Object,
+        <ExcelArgument("Interaction Parameters Set #2.")> ByVal ip2 As Object,
+        <ExcelArgument("Interaction Parameters Set #3.")> ByVal ip3 As Object,
+        <ExcelArgument("Interaction Parameters Set #4.")> ByVal ip4 As Object,
+        <ExcelArgument("Interaction Parameters Set #5.")> ByVal ip5 As Object,
+        <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
+        <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
+        <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
@@ -2076,20 +2076,20 @@ Namespace ExcelAddIn
 
 #Region "Fast Functions"
 
-        Public Shared Function PTFlash( _
-               ByVal proppack As PropertyPackage, _
-               ByVal flashalg As Integer, _
-               ByVal P As Double, _
-               ByVal T As Double, _
-               ByVal compounds As Object(), _
-               ByVal molefractions As Double(), _
-               ByVal ip1 As Object, _
-               ByVal ip2 As Object, _
-               ByVal ip3 As Object, _
-               ByVal ip4 As Object, _
-                ByVal ip5 As Object, _
-                ByVal ip6 As Object, _
-                ByVal ip7 As Object, _
+        Public Shared Function PTFlash(
+               ByVal proppack As PropertyPackage,
+               ByVal flashalg As Integer,
+               ByVal P As Double,
+               ByVal T As Double,
+               ByVal compounds As Object(),
+               ByVal molefractions As Double(),
+               ByVal ip1 As Object,
+               ByVal ip2 As Object,
+               ByVal ip3 As Object,
+               ByVal ip4 As Object,
+                ByVal ip5 As Object,
+                ByVal ip6 As Object,
+                ByVal ip7 As Object,
                 ByVal ip8 As Object) As Object(,)
 
             Try
@@ -2211,20 +2211,20 @@ Namespace ExcelAddIn
 
         End Function
 
-        Public Shared Function PHFlash( _
-            ByVal proppack As PropertyPackage, _
-            ByVal flashalg As Integer, _
-            ByVal P As Double, _
-            ByVal H As Double, _
-            ByVal compounds As Object(), _
-            ByVal molefractions As Double(), _
-            ByVal ip1 As Object, _
-            ByVal ip2 As Object, _
-            ByVal ip3 As Object, _
-            ByVal ip4 As Object, _
-            ByVal ip5 As Object, _
-            ByVal ip6 As Object, _
-            ByVal ip7 As Object, _
+        Public Shared Function PHFlash(
+            ByVal proppack As PropertyPackage,
+            ByVal flashalg As Integer,
+            ByVal P As Double,
+            ByVal H As Double,
+            ByVal compounds As Object(),
+            ByVal molefractions As Double(),
+            ByVal ip1 As Object,
+            ByVal ip2 As Object,
+            ByVal ip3 As Object,
+            ByVal ip4 As Object,
+            ByVal ip5 As Object,
+            ByVal ip6 As Object,
+            ByVal ip7 As Object,
             ByVal ip8 As Object) As Object(,)
 
             Try
@@ -2348,20 +2348,20 @@ Namespace ExcelAddIn
 
         End Function
 
-        Public Shared Function PSFlash( _
-            ByVal proppack As PropertyPackage, _
-            ByVal flashalg As Integer, _
-            ByVal P As Double, _
-            ByVal S As Double, _
-            ByVal compounds As Object(), _
-            ByVal molefractions As Double(), _
-            ByVal ip1 As Object, _
-            ByVal ip2 As Object, _
-            ByVal ip3 As Object, _
-            ByVal ip4 As Object, _
-            ByVal ip5 As Object, _
-            ByVal ip6 As Object, _
-            ByVal ip7 As Object, _
+        Public Shared Function PSFlash(
+            ByVal proppack As PropertyPackage,
+            ByVal flashalg As Integer,
+            ByVal P As Double,
+            ByVal S As Double,
+            ByVal compounds As Object(),
+            ByVal molefractions As Double(),
+            ByVal ip1 As Object,
+            ByVal ip2 As Object,
+            ByVal ip3 As Object,
+            ByVal ip4 As Object,
+            ByVal ip5 As Object,
+            ByVal ip6 As Object,
+            ByVal ip7 As Object,
             ByVal ip8 As Object) As Object(,)
 
             Try
@@ -2485,20 +2485,20 @@ Namespace ExcelAddIn
 
         End Function
 
-        Public Shared Function PVFFlash( _
-            ByVal proppack As PropertyPackage, _
-            ByVal flashalg As Integer, _
-            ByVal P As Double, _
-            ByVal VF As Double, _
-            ByVal compounds As Object(), _
-            ByVal molefractions As Double(), _
-            ByVal ip1 As Object, _
-            ByVal ip2 As Object, _
-            ByVal ip3 As Object, _
-            ByVal ip4 As Object, _
-            ByVal ip5 As Object, _
-            ByVal ip6 As Object, _
-            ByVal ip7 As Object, _
+        Public Shared Function PVFFlash(
+            ByVal proppack As PropertyPackage,
+            ByVal flashalg As Integer,
+            ByVal P As Double,
+            ByVal VF As Double,
+            ByVal compounds As Object(),
+            ByVal molefractions As Double(),
+            ByVal ip1 As Object,
+            ByVal ip2 As Object,
+            ByVal ip3 As Object,
+            ByVal ip4 As Object,
+            ByVal ip5 As Object,
+            ByVal ip6 As Object,
+            ByVal ip7 As Object,
             ByVal ip8 As Object) As Object(,)
 
             Try
@@ -2622,20 +2622,20 @@ Namespace ExcelAddIn
 
         End Function
 
-        Public Shared Function TVFFlash( _
-                ByVal proppack As PropertyPackage, _
-                ByVal flashalg As Integer, _
-                ByVal T As Double, _
-                ByVal VF As Double, _
-                ByVal compounds As Object(), _
-                ByVal molefractions As Double(), _
-                ByVal ip1 As Object, _
-                ByVal ip2 As Object, _
-                ByVal ip3 As Object, _
-                ByVal ip4 As Object, _
-                ByVal ip5 As Object, _
-                ByVal ip6 As Object, _
-                ByVal ip7 As Object, _
+        Public Shared Function TVFFlash(
+                ByVal proppack As PropertyPackage,
+                ByVal flashalg As Integer,
+                ByVal T As Double,
+                ByVal VF As Double,
+                ByVal compounds As Object(),
+                ByVal molefractions As Double(),
+                ByVal ip1 As Object,
+                ByVal ip2 As Object,
+                ByVal ip3 As Object,
+                ByVal ip4 As Object,
+                ByVal ip5 As Object,
+                ByVal ip6 As Object,
+                ByVal ip7 As Object,
                 ByVal ip8 As Object) As Object(,)
 
             Try

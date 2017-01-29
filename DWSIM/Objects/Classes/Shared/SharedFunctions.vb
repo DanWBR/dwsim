@@ -56,6 +56,12 @@ Namespace DWSIM
 
             GlobalSettings.Settings.CalculatorActivated = True
 
+            GlobalSettings.Settings.UserDatabases.Clear()
+            If My.Settings.UserDatabases Is Nothing Then My.Settings.UserDatabases = New Specialized.StringCollection
+            For Each item In My.Settings.UserDatabases
+                GlobalSettings.Settings.UserDatabases.Add(item)
+            Next
+
             GlobalSettings.Settings.UserInteractionsDatabases.Clear()
             If My.Settings.UserInteractionsDatabases Is Nothing Then My.Settings.UserInteractionsDatabases = New Specialized.StringCollection
             For Each item In My.Settings.UserInteractionsDatabases

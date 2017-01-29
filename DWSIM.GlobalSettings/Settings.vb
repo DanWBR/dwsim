@@ -48,6 +48,7 @@ Public Class Settings
     Public Shared Property ExcelFlashSettings As String = ""
 
     Public Shared Property UserInteractionsDatabases As New List(Of String)
+    Public Shared Property UserDatabases As New List(Of String)
 
     Public Shared Property HideSolidPhaseFromCAPEOPENComponents As Boolean = False
 
@@ -61,6 +62,25 @@ Public Class Settings
 
         Dim doc As New Nini.Ini.IniDocument(configfile, Nini.Ini.IniFileType.WindowsStyle)
         Dim source As New IniConfigSource(doc)
+        Dim col As String()
+
+        UserDatabases.Clear()
+
+        With source
+            col = .Configs("UserDatabases").GetValues()
+            For Each str As String In col
+                UserDatabases.Add(str)
+            Next
+        End With
+
+        UserInteractionsDatabases.Clear()
+
+        With source
+            col = .Configs("UserInteractionsDatabases").GetValues()
+            For Each str As String In col
+                UserInteractionsDatabases.Add(str)
+            Next
+        End With
 
         Settings.EnableParallelProcessing = source.Configs("Misc").GetBoolean("EnableParallelProcessing", False)
         Settings.MaxDegreeOfParallelism = source.Configs("Misc").GetInt("MaxDegreeOfParallelism", -1)
