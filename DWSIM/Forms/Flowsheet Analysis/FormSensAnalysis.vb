@@ -224,12 +224,28 @@ Public Class FormSensAnalysis
             If EnableAutoSave Then SaveForm(selectedsacase)
         End If
     End Sub
+    Private Function GetNameIndex(ByVal N As String) As Integer
+        Dim i As Integer
+
+        For Each s As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
+            If s.name = N Then Return i
+            i += 1
+        Next
+        Return -1
+
+    End Function
 
     Private Sub btnNewCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewCase.Click
 
         Dim sacase As New DWSIM.Optimization.SensitivityAnalysisCase
+        Dim n As Integer = form.Collections.OPT_SensAnalysisCollection.Count
 
-        sacase.name = "SACase" & form.Collections.OPT_SensAnalysisCollection.Count
+        Do
+            If GetNameIndex("SACase" & n) < 0 Then Exit Do
+            n += 1
+        Loop
+       
+        sacase.name = "SACase" & n
 
         form.Collections.OPT_SensAnalysisCollection.Add(sacase)
 
@@ -248,6 +264,10 @@ Public Class FormSensAnalysis
                     If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                         Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag)
                         Me.cbPropIndVar1.SelectedIndex = Me.cbPropIndVar1.Items.IndexOf(DWSIM.App.GetPropertyName(.propID))
+                    Else
+                        Me.cbObjIndVar1.SelectedIndex = -1
+                        Me.cbPropIndVar1.SelectedIndex = -1
+                        Me.tbUnitIndVar1.Text = ""
                     End If
                 Else
                     Me.cbObjIndVar1.SelectedIndex = Me.cbObjIndVar1.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
@@ -269,6 +289,10 @@ Public Class FormSensAnalysis
                     If form.Collections.FlowsheetObjectCollection.ContainsKey(.objectID) Then
                         Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(form.Collections.FlowsheetObjectCollection(.objectID).GraphicObject.Tag)
                         Me.cbPropIndVar2.SelectedIndex = Me.cbPropIndVar2.Items.IndexOf(DWSIM.App.GetPropertyName(.propID))
+                    Else
+                        Me.cbObjIndVar2.SelectedIndex = -1
+                        Me.cbPropIndVar2.SelectedIndex = -1
+                        Me.tbUnitIndVar2.Text = ""
                     End If
                 Else
                     Me.cbObjIndVar2.SelectedIndex = Me.cbObjIndVar2.Items.IndexOf(DWSIM.App.GetLocalString("SpreadsheetCell"))
@@ -399,19 +423,27 @@ Public Class FormSensAnalysis
             sacase.name = Me.tbCaseName.Text
             sacase.description = Me.tbCaseDesc.Text
             With sacase.iv1
-                If Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
+                If Me.cbObjIndVar1.SelectedItem Is Nothing Then
+                    .objectTAG = ""
+                    .objectID = ""
+                ElseIf Me.cbObjIndVar1.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                     .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
                     .objectID = CType(FormFlowsheet.SearchSurfaceObjectsByTag(.objectTAG, form.FormSurface.FlowsheetDesignSurface), DrawingTools.GraphicObjects.GraphicObject).Name
                 Else
                     .objectTAG = Me.cbObjIndVar1.SelectedItem.ToString
                     .objectID = "SpreadsheetCell"
                 End If
-                Dim props As String() = Me.ReturnProperties(.objectTAG, False)
-                For Each prop As String In props
-                    If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar1.SelectedItem.ToString Then
-                        .propID = prop
-                    End If
-                Next
+                If .objectTAG <> "" Then
+                    Dim props As String() = Me.ReturnProperties(.objectTAG, False)
+                    For Each prop As String In props
+                        If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar1.SelectedItem.ToString Then
+                            .propID = prop
+                            Exit For
+                        End If
+                    Next
+                Else
+                    .propID = ""
+                End If
                 .unit = Me.tbUnitIndVar1.Text
                 .lowerlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbLowerLimIndVar1.Text))
                 .upperlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbUpperLimIndVar1.Text))
@@ -419,19 +451,28 @@ Public Class FormSensAnalysis
             End With
             If Me.chkIndVar2.Checked And cbPropIndVar2.SelectedItem <> Nothing Then
                 With sacase.iv2
-                    If Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
+                    If Me.cbObjIndVar2.SelectedItem Is Nothing Then
+                        .objectTAG = ""
+                        .objectID = ""
+                    ElseIf Me.cbObjIndVar2.SelectedItem.ToString <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                         .objectTAG = Me.cbObjIndVar2.SelectedItem
                         .objectID = CType(FormFlowsheet.SearchSurfaceObjectsByTag(.objectTAG, form.FormSurface.FlowsheetDesignSurface), DrawingTools.GraphicObjects.GraphicObject).Name
                     Else
                         .objectTAG = Me.cbObjIndVar2.SelectedItem.ToString
                         .objectID = "SpreadsheetCell"
                     End If
-                    Dim props As String() = Me.ReturnProperties(.objectTAG, False)
-                    For Each prop As String In props
-                        If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar2.SelectedItem.ToString Then
-                            .propID = prop
-                        End If
-                    Next
+                    If .objectTAG <> "" Then
+                        Dim props As String() = Me.ReturnProperties(.objectTAG, False)
+                        For Each prop As String In props
+                            If DWSIM.App.GetPropertyName(prop) = Me.cbPropIndVar2.SelectedItem.ToString Then
+                                .propID = prop
+                                Exit For
+                            End If
+                        Next
+                    Else
+                        .propID = ""
+                    End If
+                    
                     .lowerlimit = Me.tbLowerLimIndVar2.Text
                     .upperlimit = Me.tbUpperLimIndVar2.Text
                     .points = Me.nuNumPointsIndVar2.Value
@@ -445,13 +486,17 @@ Public Class FormSensAnalysis
                     Dim var As New SAVariable
                     With var
                         .id = dgrow.Cells(0).Value
-                        If dgrow.Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
+                        If dgrow.Cells(1).Value = Nothing Then
+                            .objectTAG = ""
+                            .objectID = ""
+                        ElseIf dgrow.Cells(1).Value <> DWSIM.App.GetLocalString("SpreadsheetCell") Then
                             .objectTAG = dgrow.Cells(1).Value
                             .objectID = Me.ReturnObject(dgrow.Cells(1).Value).Name
                         Else
                             .objectTAG = dgrow.Cells(1).Value
                             .objectID = "SpreadsheetCell"
                         End If
+
                         .propID = Me.ReturnPropertyID(.objectID, dgrow.Cells(2).Value)
                         .unit = dgrow.Cells(3).Value
                     End With
@@ -859,7 +904,7 @@ Public Class FormSensAnalysis
 
         If objectID = "SpreadsheetCell" Then
             Return propTAG
-        Else
+        ElseIf objectID <> "" Then
             Dim props As String() = form.Collections.FlowsheetObjectCollection(objectID).GetProperties(Interfaces.Enums.PropertyType.ALL)
             For Each prop As String In props
                 If DWSIM.App.GetPropertyName(prop) = propTAG Then
