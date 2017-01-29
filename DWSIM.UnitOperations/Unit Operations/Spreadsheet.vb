@@ -51,6 +51,7 @@ Namespace UnitOperations
         Protected m_FileName As String = ""
         Protected m_InputParams As New Dictionary(Of String, ExcelParameter)
         Protected m_OutputParams As New Dictionary(Of String, ExcelParameter)
+        Public ParamsLoaded As Boolean = False
 
         Public Property InputParams() As Dictionary(Of String, ExcelParameter)
             Get
@@ -129,8 +130,6 @@ Namespace UnitOperations
                         End If
                     Next
 
-                    'xcl.Visible = True 'uncomment for debugging
-
                     Dim mybook As Excel.Workbook
                     Dim AppPath = Application.StartupPath
 
@@ -143,6 +142,7 @@ Namespace UnitOperations
                         Throw New Exception("Definition file '" & Filename & "' :" & FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"))
                     End If
 
+                    'xcl.Visible = True 'uncomment for debugging
                     xcl.Calculation = XlCalculation.xlCalculationManual
 
                     Dim mysheetIn As Excel.Worksheet = mybook.Sheets("Input")
@@ -305,7 +305,29 @@ Namespace UnitOperations
                         .GraphicObject.Calculated = True
                     End With
 
-                    '======== read output parameters from Excel table =========================================
+                    '======== read input/output parameters from Excel table =========================================
+                    k = 0
+                    InputParams.Clear()
+                    Do
+                        Dim ExlPar As New ExcelParameter
+
+                        ParName = mysheetIn.Cells(5 + k, 7).Value
+                        If ParName <> "" Then
+                            ExlPar.Name = ParName
+                            Try
+                                ExlPar.Value = mysheetIn.Cells(5 + k, 8).Value
+                            Catch ex As Exception
+                                ExlPar.Value = Nothing
+                            End Try
+
+                            ExlPar.Unit = mysheetIn.Cells(5 + k, 9).Value
+                            ExlPar.Annotation = mysheetIn.Cells(5 + k, 10).Value
+                            InputParams.Add(ExlPar.Name, ExlPar)
+
+                            k += 1
+                        End If
+                    Loop While ParName <> ""
+
                     k = 0
                     OutputParams.Clear()
                     Do
@@ -314,7 +336,11 @@ Namespace UnitOperations
                         ParName = mysheetOut.Cells(5 + k, 7).Value
                         If ParName <> "" Then
                             ExlPar.Name = ParName
-                            ExlPar.Value = mysheetOut.Cells(5 + k, 8).Value
+                            Try
+                                ExlPar.Value = mysheetOut.Cells(5 + k, 8).Value
+                            Catch ex As Exception
+                                ExlPar.Value = Nothing
+                            End Try
                             ExlPar.Unit = mysheetOut.Cells(5 + k, 9).Value
                             ExlPar.Annotation = mysheetOut.Cells(5 + k, 10).Value
                             OutputParams.Add(ExlPar.Name, ExlPar)
@@ -322,7 +348,7 @@ Namespace UnitOperations
                             k += 1
                         End If
                     Loop While ParName <> ""
-
+                    ParamsLoaded = True
 
                     '=============== clean up Excel stuff ================================================================
                     mybook.Close(saveChanges:=True)
@@ -590,7 +616,152 @@ Namespace UnitOperations
             End If
 
         End Sub
+        Public Sub ReadExcelParams()
 
+            'read input and output parameters from associated Excel table 
+            If Filename <> "" And Not ParamsLoaded Then
+
+                Dim excelType As Type = Nothing
+                If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
+
+                If Not Calculator.IsRunningOnMono And Not excelType Is Nothing Then
+                    Dim excelProxy As Object = Activator.CreateInstance(excelType)
+
+                    Using xcl As New Excel.Application(Nothing, excelProxy)
+
+                        For Each CurrAddin As Excel.AddIn In xcl.AddIns
+                            If CurrAddin.Installed Then
+                                CurrAddin.Installed = False
+                                CurrAddin.Installed = True
+                            End If
+                        Next
+
+                        Dim mybook As Excel.Workbook
+                        Dim AppPath = Application.StartupPath
+                        Dim ParName As String
+                        Dim i As Integer
+
+                        'Load Excel definition file
+                        If My.Computer.FileSystem.FileExists(Filename) Then
+                            mybook = xcl.Workbooks.Open(Filename, True, True)
+                            Dim mysheetIn As Excel.Worksheet = mybook.Sheets("Input")
+                            Dim mysheetOut As Excel.Worksheet = mybook.Sheets("Output")
+
+                            'xcl.Visible = True 'uncomment for debugging
+
+                            InputParams.Clear()
+                            i = 0
+                            Do
+                                Dim ExlPar As New ExcelParameter
+
+                                ParName = mysheetIn.Cells(5 + i, 7).Value
+                                If ParName <> "" Then
+                                    ExlPar.Name = ParName
+                                    Try
+                                        ExlPar.Value = mysheetIn.Cells(5 + i, 8).Value
+                                    Catch ex As Exception
+                                        ExlPar.Value = Nothing
+                                    End Try
+
+                                    ExlPar.Unit = mysheetIn.Cells(5 + i, 9).Value
+                                    ExlPar.Annotation = mysheetIn.Cells(5 + i, 10).Value
+                                    InputParams.Add(ExlPar.Name, ExlPar)
+
+                                    i += 1
+                                End If
+                            Loop While ParName <> ""
+
+                            OutputParams.Clear()
+                            i = 0
+                            Do
+                                Dim ExlPar As New ExcelParameter
+
+                                ParName = mysheetOut.Cells(5 + i, 7).Value
+                                If ParName <> "" Then
+                                    ExlPar.Name = ParName
+                                    Try
+                                        ExlPar.Value = mysheetOut.Cells(5 + i, 8).Value
+                                    Catch ex As Exception
+                                        ExlPar.Value = Nothing
+                                    End Try
+
+                                    ExlPar.Unit = mysheetOut.Cells(5 + i, 9).Value
+                                    ExlPar.Annotation = mysheetOut.Cells(5 + i, 10).Value
+                                    OutputParams.Add(ExlPar.Name, ExlPar)
+
+                                    i += 1
+                                End If
+                            Loop While ParName <> ""
+
+                            mybook.Close(False)
+
+                        End If
+
+                        xcl.Quit()
+                        xcl.Dispose()
+
+                    End Using
+
+                Else
+
+                    'use GemBox to read and write data
+
+                    GS.SpreadsheetInfo.SetLicense("FREE-LIMITED-KEY")
+
+                    Dim xcl As GS.ExcelFile = Nothing
+
+                    Dim AppPath = Application.StartupPath
+                    Dim ParName As String
+                    Dim i As Integer
+
+                    'Load Excel definition file
+                    If My.Computer.FileSystem.FileExists(Filename) Then
+                        xcl = GS.ExcelFile.Load(Filename)
+                        Dim mysheetIn As GS.ExcelWorksheet = xcl.Worksheets("Input")
+                        Dim mysheetOut As GS.ExcelWorksheet = xcl.Worksheets("Output")
+
+                        InputParams.Clear()
+                        i = 0
+                        Do
+                            Dim ExlPar As New ExcelParameter
+
+                            ParName = mysheetIn.Cells(4 + i, 6).Value
+                            If ParName <> "" Then
+                                ExlPar.Name = ParName
+                                ExlPar.Value = mysheetIn.Cells(4 + i, 7).Value
+                                ExlPar.Unit = mysheetIn.Cells(4 + i, 8).Value
+                                ExlPar.Annotation = mysheetIn.Cells(4 + i, 9).Value
+                                InputParams.Add(ExlPar.Name, ExlPar)
+
+                                i += 1
+                            End If
+                        Loop While ParName <> ""
+
+                        OutputParams.Clear()
+                        i = 0
+                        Do
+                            Dim ExlPar As New ExcelParameter
+
+                            ParName = mysheetOut.Cells(5 + i, 7).Value
+                            If ParName <> "" Then
+                                ExlPar.Name = ParName
+                                ExlPar.Value = mysheetIn.Cells(4 + i, 7).Value
+                                ExlPar.Unit = mysheetIn.Cells(4 + i, 8).Value
+                                ExlPar.Annotation = mysheetIn.Cells(4 + i, 9).Value
+                                OutputParams.Add(ExlPar.Name, ExlPar)
+
+                                i += 1
+                            End If
+                        Loop While ParName <> ""
+
+                    End If
+
+
+                End If
+                ParamsLoaded = True
+            End If
+
+        End Sub
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
             If su Is Nothing Then su = New SystemsOfUnits.SI

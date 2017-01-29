@@ -3,6 +3,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.SharedClasses.UnitOperations
 Imports su = DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.UnitOperations.UnitOperations
+Imports DWSIM.UnitOperations.UnitOperations.Auxiliary
 
 Public Class EditingForm_SpreadsheetUO
 
@@ -107,15 +108,18 @@ Public Class EditingForm_SpreadsheetUO
             TbFileName.Text = .Filename
 
             'parameters
+            .ReadExcelParams()
 
             dgvinputvars.Rows.Clear()
             For Each par In .InputParams
-                dgvinputvars.Rows.Add(New Object() {par.Value.Name, par.Value.Value.ToString(nf), par.Value.Unit})
+                Dim I As Integer = dgvinputvars.Rows.Add(New Object() {par.Value.Name, par.Value.Value.ToString(nf), par.Value.Unit})
+                dgvinputvars.Rows(I).Cells(0).ToolTipText = par.Value.Annotation
             Next
 
             dgvoutputvars.Rows.Clear()
             For Each par In .OutputParams
-                dgvoutputvars.Rows.Add(New Object() {par.Value.Name, par.Value.Value.ToString(nf), par.Value.Unit})
+                Dim I As Integer = dgvoutputvars.Rows.Add(New Object() {par.Value.Name, par.Value.Value.ToString(nf), par.Value.Unit})
+                dgvoutputvars.Rows(I).Cells(0).ToolTipText = par.Value.Annotation
             Next
 
             'property package
@@ -136,7 +140,6 @@ Public Class EditingForm_SpreadsheetUO
         Loaded = True
 
     End Sub
-
     Private Sub btnConfigurePP_Click(sender As Object, e As EventArgs) Handles btnConfigurePP.Click
         SimObject.FlowSheet.PropertyPackages.Values.Where(Function(x) x.Tag = cbPropPack.SelectedItem.ToString).SingleOrDefault.DisplayEditingForm()
     End Sub
@@ -423,6 +426,8 @@ Public Class EditingForm_SpreadsheetUO
 
         If OpenFileDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             TbFileName.Text = OpenFileDialog1.FileName
+            SimObject.ParamsLoaded = False
+
         End If
     End Sub
 
@@ -437,6 +442,7 @@ Public Class EditingForm_SpreadsheetUO
             Else
                 MessageBox.Show(SimObject.FlowSheet.GetTranslatedString("Oarquivonoexisteoufo"), SimObject.FlowSheet.GetTranslatedString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
+            SimObject.ParamsLoaded = False
         End If
     End Sub
 
@@ -461,6 +467,8 @@ Public Class EditingForm_SpreadsheetUO
                 FileCopy(My.Application.Info.DirectoryPath & IO.Path.DirectorySeparatorChar & "TemplateExcelUO.xlsx", s)
             End If
             TbFileName.Text = s
+            SimObject.ParamsLoaded = False
+
         End If
     End Sub
 
