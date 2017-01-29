@@ -70,6 +70,7 @@
     <Compile Include="ICompoundConstantProperties.vb" />
     <Compile Include="IFlashAlgorithm.vb" />
     <Compile Include="IFlowsheet.vb" />
+    <Compile Include="IFlowsheetEvents.vb" />
     <Compile Include="IFlowsheetOptions.vb" />
     <Compile Include="IGraphicObject.vb" />
     <Compile Include="IMaterialStream.vb" />

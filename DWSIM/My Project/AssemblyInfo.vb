@@ -10,8 +10,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM")> 
-<Assembly: AssemblyDescription("DWSIM - Open Source Chemical Process Simulator")> 
+<Assembly: AssemblyTitle("DWSIM")>
+<Assembly: AssemblyDescription("DWSIM Simulator Main Executable")>
 <Assembly: AssemblyCompany("DWSIM Project")> 
 <Assembly: AssemblyProduct("DWSIM")> 
 <Assembly: AssemblyCopyright("Copyright © 2007-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon")> 

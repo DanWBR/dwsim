@@ -8,8 +8,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("XML Serializer")> 
-<Assembly: AssemblyDescription("Custom XML Serializer for DWSIM")> 
+<Assembly: AssemblyTitle("XML Serializer")>
+<Assembly: AssemblyDescription("DWSIM Simulator Custom XML Serializer Library")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("CustomXMLSerializer")> 
 <Assembly: AssemblyCopyright("Copyright ©  2012-2016 Daniel Medeiros")> 

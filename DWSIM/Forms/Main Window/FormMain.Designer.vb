@@ -761,36 +761,40 @@ Partial Class FormMain
             Process.GetCurrentProcess.Kill()
         End If
 
-        If DWSIM.App.IsRunningOnMono Then
+        If DWSIM.App.IsRunningOnMono Or GlobalSettings.Settings.AutomationMode Then
 
-            'handler for unhandled exceptions (!)
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
-            AddHandler Application.ThreadException, AddressOf MyApplication_UnhandledException
-            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf MyApplication_UnhandledException2
-            My.Application.UtilityPlugins = New Dictionary(Of String, Interfaces.IUtilityPlugin)
+            If DWSIM.App.IsRunningOnMono Then
+
+                'handler for unhandled exceptions (!)
+                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+                AddHandler Application.ThreadException, AddressOf MyApplication_UnhandledException
+                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf MyApplication_UnhandledException2
+                My.Application.UtilityPlugins = New Dictionary(Of String, Interfaces.IUtilityPlugin)
+
+                'remove user.config file
+                Try
+                    Dim config = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoaming)
+                    If File.Exists(config.FilePath) Then File.Delete(config.FilePath)
+                Catch ex As Exception
+
+                End Try
+
+            End If
 
             'settings workaround for Mono
             'load settings from INI file
             DWSIM.App.LoadSettings()
 
-            'remove user.config file
-            Try
-                Dim config = System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoaming)
-                If File.Exists(config.FilePath) Then File.Delete(config.FilePath)
-            Catch ex As Exception
+                DWSIM.App.InitializeSettings()
 
-            End Try
+                'loads the current language
+                My.Application.ChangeUICulture(My.Settings.CultureInfo)
 
-            My.Application.InitializeSettings()
+            End If
 
-            'loads the current language
-            My.Application.ChangeUICulture(My.Settings.CultureInfo)
+            ' This call is required by the Windows Form Designer.
 
-        End If
-
-        ' This call is required by the Windows Form Designer.
-
-        If Not My.Application.CommandLineMode Or Not Settings.CAPEOPENMode Then
+            If Not My.Application.CommandLineMode Or Not Settings.CAPEOPENMode Then
             InitializeComponent()
         End If
 

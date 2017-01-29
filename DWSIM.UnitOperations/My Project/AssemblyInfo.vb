@@ -10,8 +10,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM Unit Operations")> 
-<Assembly: AssemblyDescription("Unit Operations Library for DWSIM Simulator")> 
+<Assembly: AssemblyTitle("DWSIM Unit Operations")>
+<Assembly: AssemblyDescription("DWSIM Simulator Unit Operations Library")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.UnitOperations")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 

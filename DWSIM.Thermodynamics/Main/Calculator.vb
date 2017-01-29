@@ -39,7 +39,6 @@ Public Class Calculator
 
     End Function
 
-
     Public Shared Sub CheckParallelPInvoke()
 
         If Settings.EnableParallelProcessing Then Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
@@ -185,6 +184,5 @@ Public Class Calculator
         End If
 
     End Sub
-
 
 End Class

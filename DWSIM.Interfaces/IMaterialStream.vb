@@ -12,6 +12,10 @@
 
     ReadOnly Property Phases() As Dictionary(Of Integer, IPhase)
 
+    ReadOnly Property PhasesArray As IPhase()
+
+    Function GetPhase(ByVal phasename As String) As IPhase
+
     Property AtEquilibrium As Boolean
 
     Sub SetPhaseComposition(Vx As Array, phs As Integer)

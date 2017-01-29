@@ -81,14 +81,12 @@
     Sub WriteSpreadsheetVariables()
 
     Property MobileCompatibilityMode As Boolean
-
-    Event StatusChanged()
-
-    Event NewMessageSent()
-
     Property Message As String
-
     Sub SetMessageListener(act As Action(Of String))
+
+    Property Solved As Boolean
+
+    Property ErrorMessage As String
 
 End Interface
 
@@ -111,6 +109,20 @@ End Interface
     Sub UpdateProcessData(xdoc As XDocument)
 
     Function GetSurface() As Object
+
+    'For COM compatibility
+
+    ReadOnly Property SimulationObjectsArray As ISimulationObject()
+
+    ReadOnly Property GraphicObjectsArray As IGraphicObject()
+
+    ReadOnly Property CompoundsArray As ICompoundConstantProperties()
+
+    ReadOnly Property PropertyPackagesArray As IPropertyPackage()
+
+    ReadOnly Property ReactionsArray As IReaction()
+
+    ReadOnly Property ReactionSetsArray As IReactionSet()
 
 End Interface
 

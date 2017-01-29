@@ -5771,9 +5771,19 @@ Namespace Streams
 
         End Sub
 
+        Private Function GetPhase2(phasename As String) As IPhase Implements IMaterialStream.GetPhase
+            Return GetPhase(phasename)
+        End Function
+
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get
                 Return True
+            End Get
+        End Property
+
+        Public ReadOnly Property PhasesArray As IPhase() Implements IMaterialStream.PhasesArray
+            Get
+                Return Phases.Values.ToArray
             End Get
         End Property
     End Class
