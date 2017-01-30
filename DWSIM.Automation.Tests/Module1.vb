@@ -10,7 +10,7 @@
         'load Cavett's Problem simulation file
         sim = interf.LoadFlowsheet("samples\Cavett's Problem.dwxml")
 
-        'set a listener to flowsheet sovler messages
+        'set a listener to catch solver messages
         'sim.SetMessageListener(Sub(msg As String)
         '                           Console.WriteLine(msg)
         '                       End Sub)
@@ -33,7 +33,7 @@
         'vapor and liquid flows
         Dim vflow, lflow As Double
 
-        For i = 0 To 3
+        For i = 0 To flows.Length - 1
             'set feed mass flow
             feed.SetProp("totalflow", "overall", Nothing, "", "mass", New Double() {flows(i)})
             'calculate the flowsheet (run the simulation)
@@ -51,7 +51,7 @@
             Console.WriteLine("Simulation run #" & (i + 1) & " results:" & vbCrLf & "Feed: " & flows(i) & ", Vapor: " & vflow & ", Liquid: " & lflow & " kg/s" & vbCrLf & "Mass balance error: " & (flows(i) - vflow - lflow) & " kg/s")
         Next
 
-        Console.WriteLine("Finished OK!")
+        Console.WriteLine("Finished OK! Press any key to close.")
         Console.ReadKey()
 
     End Sub
