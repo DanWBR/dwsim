@@ -135,7 +135,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAawBAQGsAQEBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAbQBAQG0AQEBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -224,9 +224,6 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>View Samples</value>
   </data>
-  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 40</value>
-  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 13</value>
   </data>
@@ -281,14 +278,11 @@
   <data name="Label14.Text" xml:space="preserve">
     <value>View Documentation</value>
   </data>
-  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 96</value>
-  </data>
   <data name="LabelWithDivider12.Text" xml:space="preserve">
     <value>Support the Project</value>
   </data>
   <data name="Label15.Text" xml:space="preserve">
-    <value>Support the project by donating through PayPal or by downloading DWSIM-derived mobile apps.</value>
+    <value>Support maintenance tasks and future developments by making a donation through DonorBox or Paypal.</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 19</value>
@@ -314,11 +308,24 @@
   <data name="Button7.Text" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 40</value>
+  </data>
   <data name="Label17.Text" xml:space="preserve">
-    <value>DWSIM is also available on Android and iOS platforms! Click on the buttons to download through the appropriate stores.</value>
+    <value>DWSIM is also available on Android and iOS platforms.</value>
   </data>
   <data name="LabelWithDivider1.Text" xml:space="preserve">
     <value>DWSIM for Android, iPhone and iPad</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>654, 40</value>
+  </data>
+  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>654, 96</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Welcome to DWSIM</value>

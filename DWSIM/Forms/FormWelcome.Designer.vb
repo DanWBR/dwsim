@@ -27,38 +27,39 @@ Partial Class FormWelcome
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.lvlatest = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.LabelWithDivider12 = New System.Windows.Forms.LabelWithDivider()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lvlatestfolders = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label11
@@ -96,6 +97,14 @@ Partial Class FormWelcome
         Me.lvlatest.UseCompatibleStateImageBehavior = False
         Me.lvlatest.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader1
+        '
+        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
+        '
+        'ColumnHeader2
+        '
+        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
+        '
         'ImageList1
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -119,16 +128,6 @@ Partial Class FormWelcome
         Me.Label8.BackColor = System.Drawing.Color.Transparent
         Me.Label8.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label8.Name = "Label8"
-        '
-        'Button4
-        '
-        Me.Button4.BackgroundImage = Global.DWSIM.My.Resources.Resources.Services
-        resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button4.Name = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -172,16 +171,6 @@ Partial Class FormWelcome
         Me.Label3.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label3.Name = "Label3"
         '
-        'Button1
-        '
-        Me.Button1.BackgroundImage = Global.DWSIM.My.Resources.Resources.document_open
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button1.Name = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
@@ -195,16 +184,6 @@ Partial Class FormWelcome
         Me.Label14.BackColor = System.Drawing.Color.Transparent
         Me.Label14.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label14.Name = "Label14"
-        '
-        'Button6
-        '
-        Me.Button6.BackgroundImage = Global.DWSIM.My.Resources.Resources.text_x_generic_template
-        resources.ApplyResources(Me.Button6, "Button6")
-        Me.Button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button6.Name = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
         '
         'LabelWithDivider12
         '
@@ -220,45 +199,6 @@ Partial Class FormWelcome
         Me.Label15.ForeColor = System.Drawing.Color.SteelBlue
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
-        '
-        'Button8
-        '
-        Me.Button8.BackgroundImage = Global.DWSIM.My.Resources.Resources.paypal_donate
-        resources.ApplyResources(Me.Button8, "Button8")
-        Me.Button8.FlatAppearance.BorderSize = 0
-        Me.Button8.ForeColor = System.Drawing.Color.Black
-        Me.Button8.Name = "Button8"
-        Me.Button8.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.BackgroundImage = Global.DWSIM.My.Resources.Resources.accessories_text_editor
-        resources.ApplyResources(Me.Button5, "Button5")
-        Me.Button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button5.Name = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.BackgroundImage = Global.DWSIM.My.Resources.Resources.Lab_icon
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.BackgroundImage = Global.DWSIM.My.Resources.Resources.document_new
-        resources.ApplyResources(Me.Button2, "Button2")
-        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button2.Name = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -302,6 +242,10 @@ Partial Class FormWelcome
         Me.lvlatestfolders.UseCompatibleStateImageBehavior = False
         Me.lvlatestfolders.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader3
+        '
+        resources.ApplyResources(Me.ColumnHeader3, "ColumnHeader3")
+        '
         'Button7
         '
         resources.ApplyResources(Me.Button7, "Button7")
@@ -312,6 +256,30 @@ Partial Class FormWelcome
         Me.Button7.ForeColor = System.Drawing.Color.White
         Me.Button7.Name = "Button7"
         Me.Button7.UseVisualStyleBackColor = False
+        '
+        'Label17
+        '
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.Label17.ForeColor = System.Drawing.Color.SteelBlue
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        '
+        'LabelWithDivider1
+        '
+        Me.LabelWithDivider1.BackColor = System.Drawing.Color.Transparent
+        resources.ApplyResources(Me.LabelWithDivider1, "LabelWithDivider1")
+        Me.LabelWithDivider1.ForeColor = System.Drawing.Color.SteelBlue
+        Me.LabelWithDivider1.Gap = 5
+        Me.LabelWithDivider1.Name = "LabelWithDivider1"
+        '
+        'Button9
+        '
+        Me.Button9.BackgroundImage = Global.DWSIM.My.Resources.Resources.button_medium_blue
+        resources.ApplyResources(Me.Button9, "Button9")
+        Me.Button9.FlatAppearance.BorderSize = 0
+        Me.Button9.ForeColor = System.Drawing.Color.Black
+        Me.Button9.Name = "Button9"
+        Me.Button9.UseVisualStyleBackColor = True
         '
         'Button11
         '
@@ -333,38 +301,81 @@ Partial Class FormWelcome
         Me.Button12.Name = "Button12"
         Me.Button12.UseVisualStyleBackColor = False
         '
-        'Label17
+        'Button4
         '
-        Me.Label17.BackColor = System.Drawing.Color.Transparent
-        Me.Label17.ForeColor = System.Drawing.Color.SteelBlue
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Name = "Label17"
+        Me.Button4.BackgroundImage = Global.DWSIM.My.Resources.Resources.Services
+        resources.ApplyResources(Me.Button4, "Button4")
+        Me.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
+        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button4.Name = "Button4"
+        Me.Button4.UseVisualStyleBackColor = True
         '
-        'LabelWithDivider1
+        'Button1
         '
-        Me.LabelWithDivider1.BackColor = System.Drawing.Color.Transparent
-        resources.ApplyResources(Me.LabelWithDivider1, "LabelWithDivider1")
-        Me.LabelWithDivider1.ForeColor = System.Drawing.Color.SteelBlue
-        Me.LabelWithDivider1.Gap = 5
-        Me.LabelWithDivider1.Name = "LabelWithDivider1"
+        Me.Button1.BackgroundImage = Global.DWSIM.My.Resources.Resources.document_open
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'ColumnHeader1
+        'Button6
         '
-        resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
+        Me.Button6.BackgroundImage = Global.DWSIM.My.Resources.Resources.text_x_generic_template
+        resources.ApplyResources(Me.Button6, "Button6")
+        Me.Button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
+        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button6.Name = "Button6"
+        Me.Button6.UseVisualStyleBackColor = True
         '
-        'ColumnHeader2
+        'Button8
         '
-        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
+        Me.Button8.BackgroundImage = Global.DWSIM.My.Resources.Resources.paypal_donate
+        resources.ApplyResources(Me.Button8, "Button8")
+        Me.Button8.FlatAppearance.BorderSize = 0
+        Me.Button8.ForeColor = System.Drawing.Color.Black
+        Me.Button8.Name = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
         '
-        'ColumnHeader3
+        'Button5
         '
-        resources.ApplyResources(Me.ColumnHeader3, "ColumnHeader3")
+        Me.Button5.BackgroundImage = Global.DWSIM.My.Resources.Resources.accessories_text_editor
+        resources.ApplyResources(Me.Button5, "Button5")
+        Me.Button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
+        Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button5.Name = "Button5"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.BackgroundImage = Global.DWSIM.My.Resources.Resources.Lab_icon
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
+        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.BackgroundImage = Global.DWSIM.My.Resources.Resources.document_new
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
+        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button2.Name = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Label17)
@@ -441,4 +452,5 @@ Partial Class FormWelcome
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Public WithEvents Button9 As Button
 End Class

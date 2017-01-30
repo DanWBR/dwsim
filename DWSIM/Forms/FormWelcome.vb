@@ -233,4 +233,8 @@ Public Class FormWelcome
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
         Process.Start("https://play.google.com/store/apps/details?id=com.danielmedeiros.dwsim_simulator")
     End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Process.Start("https://donorbox.org/1ea2ceb3-776d-497f-8100-5e07dbd5259d")
+    End Sub
 End Class
