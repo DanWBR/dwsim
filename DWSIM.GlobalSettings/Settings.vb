@@ -122,6 +122,20 @@ Public Class Settings
         source.Configs("ExcelAddIn").Set("ExcelErrorHandlingMode", Settings.ExcelErrorHandlingMode)
         source.Configs("ExcelAddIn").Set("ExcelFlashSettings", Settings.ExcelFlashSettings)
 
+        Try
+            For Each spath In UserDatabases
+                source.Configs("UserDatabases").Set(IO.Path.GetFileNameWithoutExtension(spath), spath)
+            Next
+        Catch ex As Exception
+        End Try
+
+        Try
+            For Each spath In UserInteractionsDatabases
+                source.Configs("UserInteractionsDatabases").Set(IO.Path.GetFileNameWithoutExtension(spath), spath)
+            Next
+        Catch ex As Exception
+        End Try
+
         source.Save(configfile)
 
     End Sub

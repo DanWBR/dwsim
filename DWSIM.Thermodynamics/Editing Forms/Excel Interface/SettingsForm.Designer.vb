@@ -23,6 +23,8 @@ Partial Class SettingsForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -39,12 +41,27 @@ Partial Class SettingsForm
         Me.chkEnableGPUProcessing = New System.Windows.Forms.CheckBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.dgvdb = New System.Windows.Forms.DataGridView()
+        Me.Column12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column13 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.dgvIPDB = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.cbErrorHandlingMode = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbConfigFilePath = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -52,6 +69,10 @@ Partial Class SettingsForm
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox8.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage5.SuspendLayout()
+        CType(Me.dgvIPDB, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -59,6 +80,8 @@ Partial Class SettingsForm
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
@@ -97,7 +120,7 @@ Partial Class SettingsForm
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox3.TabIndex = 11
         Me.PictureBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " & _
+        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " &
         "a GPGPU device.")
         '
         'PictureBox2
@@ -120,7 +143,7 @@ Partial Class SettingsForm
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 9
         Me.PictureBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" & _
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" &
         " cores to be used at the same time.")
         '
         'GroupBox8
@@ -236,6 +259,194 @@ Partial Class SettingsForm
         Me.Button1.Text = "Configure Flash Algorithm Settings"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.dgvdb)
+        Me.TabPage2.Controls.Add(Me.Button7)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Size = New System.Drawing.Size(588, 272)
+        Me.TabPage2.TabIndex = 4
+        Me.TabPage2.Text = "User Compounds"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'dgvdb
+        '
+        Me.dgvdb.AllowUserToAddRows = False
+        Me.dgvdb.AllowUserToDeleteRows = False
+        Me.dgvdb.AllowUserToResizeColumns = False
+        Me.dgvdb.AllowUserToResizeRows = False
+        Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgvdb.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvdb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvdb.ColumnHeadersVisible = False
+        Me.dgvdb.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column12, Me.Column14, Me.Column15, Me.Column13})
+        Me.dgvdb.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvdb.GridColor = System.Drawing.SystemColors.Control
+        Me.dgvdb.Location = New System.Drawing.Point(0, 0)
+        Me.dgvdb.Name = "dgvdb"
+        Me.dgvdb.ReadOnly = True
+        Me.dgvdb.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvdb.RowHeadersVisible = False
+        Me.dgvdb.RowHeadersWidth = 4
+        Me.dgvdb.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvdb.RowTemplate.Height = 38
+        Me.dgvdb.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvdb.ShowCellErrors = False
+        Me.dgvdb.Size = New System.Drawing.Size(588, 249)
+        Me.dgvdb.TabIndex = 0
+        '
+        'Column12
+        '
+        Me.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column12.FillWeight = 10.0!
+        Me.Column12.HeaderText = "ID"
+        Me.Column12.Name = "Column12"
+        Me.Column12.ReadOnly = True
+        Me.Column12.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column12.Width = 5
+        '
+        'Column14
+        '
+        Me.Column14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Column14.FillWeight = 30.0!
+        Me.Column14.HeaderText = "Database"
+        Me.Column14.Name = "Column14"
+        Me.Column14.ReadOnly = True
+        Me.Column14.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column14.Width = 5
+        '
+        'Column15
+        '
+        Me.Column15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Column15.HeaderText = "Path"
+        Me.Column15.Name = "Column15"
+        Me.Column15.ReadOnly = True
+        Me.Column15.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'Column13
+        '
+        Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle3
+        Me.Column13.FillWeight = 10.0!
+        Me.Column13.HeaderText = "Button"
+        Me.Column13.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_cross
+        Me.Column13.MinimumWidth = 50
+        Me.Column13.Name = "Column13"
+        Me.Column13.ReadOnly = True
+        Me.Column13.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.Column13.Width = 50
+        '
+        'Button7
+        '
+        Me.Button7.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button7.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button7.Location = New System.Drawing.Point(0, 249)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(588, 23)
+        Me.Button7.TabIndex = 0
+        Me.Button7.Text = "Add User Dataset"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.dgvIPDB)
+        Me.TabPage5.Controls.Add(Me.Button4)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(588, 272)
+        Me.TabPage5.TabIndex = 5
+        Me.TabPage5.Text = "User Interaction Parameters"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button4.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button4.Location = New System.Drawing.Point(0, 249)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(588, 23)
+        Me.Button4.TabIndex = 1
+        Me.Button4.Text = "Add User IP Dataset"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'dgvIPDB
+        '
+        Me.dgvIPDB.AllowUserToAddRows = False
+        Me.dgvIPDB.AllowUserToDeleteRows = False
+        Me.dgvIPDB.AllowUserToResizeColumns = False
+        Me.dgvIPDB.AllowUserToResizeRows = False
+        Me.dgvIPDB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvIPDB.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.dgvIPDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgvIPDB.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
+        Me.dgvIPDB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvIPDB.ColumnHeadersVisible = False
+        Me.dgvIPDB.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewImageColumn1})
+        Me.dgvIPDB.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvIPDB.GridColor = System.Drawing.SystemColors.Control
+        Me.dgvIPDB.Location = New System.Drawing.Point(0, 0)
+        Me.dgvIPDB.Name = "dgvIPDB"
+        Me.dgvIPDB.ReadOnly = True
+        Me.dgvIPDB.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgvIPDB.RowHeadersVisible = False
+        Me.dgvIPDB.RowHeadersWidth = 4
+        Me.dgvIPDB.RowTemplate.DefaultCellStyle.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvIPDB.RowTemplate.Height = 38
+        Me.dgvIPDB.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvIPDB.ShowCellErrors = False
+        Me.dgvIPDB.Size = New System.Drawing.Size(588, 249)
+        Me.dgvIPDB.TabIndex = 1
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.DataGridViewTextBoxColumn1.FillWeight = 10.0!
+        Me.DataGridViewTextBoxColumn1.HeaderText = "ID"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn1.Width = 5
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.DataGridViewTextBoxColumn2.FillWeight = 30.0!
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Database"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewTextBoxColumn2.Width = 5
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Path"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        '
+        'DataGridViewImageColumn1
+        '
+        Me.DataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DataGridViewImageColumn1.FillWeight = 10.0!
+        Me.DataGridViewImageColumn1.HeaderText = "Button"
+        Me.DataGridViewImageColumn1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_cross
+        Me.DataGridViewImageColumn1.MinimumWidth = 50
+        Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
+        Me.DataGridViewImageColumn1.ReadOnly = True
+        Me.DataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewImageColumn1.Width = 50
+        '
         'TabPage4
         '
         Me.TabPage4.Controls.Add(Me.cbErrorHandlingMode)
@@ -291,6 +502,12 @@ Partial Class SettingsForm
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Information"
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.Filter = "XML File|*.xml"
+        Me.OpenFileDialog1.SupportMultiDottedExtensions = True
+        Me.OpenFileDialog1.Title = "Add User Database"
+        '
         'SettingsForm
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
@@ -309,11 +526,15 @@ Partial Class SettingsForm
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.dgvdb, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage5.ResumeLayout(False)
+        CType(Me.dgvIPDB, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.ResumeLayout(False)
 
-End Sub
+    End Sub
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
@@ -336,4 +557,19 @@ End Sub
     Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPage5 As TabPage
+    Public WithEvents dgvdb As DataGridView
+    Public WithEvents Button7 As Button
+    Public WithEvents Button4 As Button
+    Public WithEvents dgvIPDB As DataGridView
+    Public WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents Column13 As DataGridViewImageColumn
+    Friend WithEvents Column15 As DataGridViewTextBoxColumn
+    Friend WithEvents Column14 As DataGridViewTextBoxColumn
+    Friend WithEvents Column12 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewImageColumn1 As DataGridViewImageColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
 End Class

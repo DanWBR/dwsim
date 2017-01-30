@@ -60,6 +60,27 @@ Public Class SettingsForm
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Me.chkEnableSIMD.Checked = GlobalSettings.Settings.UseSIMDExtensions
 
+        'user databases
+
+        If Not GlobalSettings.Settings.UserDatabases Is Nothing Then
+            For Each str As String In GlobalSettings.Settings.UserDatabases
+                If File.Exists(str) Then
+                    Me.dgvdb.Rows.Add(New Object() {dgvdb.Rows.Count + 1, Path.GetFileNameWithoutExtension(str), str, My.Resources.bullet_cross})
+                    Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(3).ToolTipText = "Remove"
+                    i = i + 1
+                End If
+            Next
+        End If
+
+        If Not GlobalSettings.Settings.UserInteractionsDatabases Is Nothing Then
+            For Each str As String In GlobalSettings.Settings.UserInteractionsDatabases
+                If File.Exists(str) Then
+                    Me.dgvIPDB.Rows.Add(New Object() {dgvIPDB.Rows.Count + 1, Path.GetFileNameWithoutExtension(str), str, My.Resources.bullet_cross})
+                    Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ToolTipText = "Remove"
+                End If
+            Next
+        End If
+
         Me.cbGPU.Items.Clear()
 
         Task.Factory.StartNew(Function()
@@ -211,6 +232,60 @@ Public Class SettingsForm
         f.Dispose()
         f = Nothing
 
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Dim path = Me.OpenFileDialog1.FileName
+            Try
+                Me.AddDatabase(IO.Path.GetFileNameWithoutExtension(path), path)
+            Catch ex As System.Runtime.Serialization.SerializationException
+                MessageBox.Show(ex.Message, "Error reading XML file", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'Add interaction parameter user database
+        If Me.OpenFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Dim path = Me.OpenFileDialog1.FileName
+            If Not GlobalSettings.Settings.UserInteractionsDatabases.Contains(path) Then
+                GlobalSettings.Settings.UserInteractionsDatabases.Add(path)
+                Me.dgvIPDB.Rows.Add(New Object() {dgvIPDB.Rows.Count + 1, IO.Path.GetFileNameWithoutExtension(path), path, My.Resources.bullet_cross})
+                Me.dgvIPDB.Rows(Me.dgvIPDB.Rows.Count - 1).Cells(3).ToolTipText = "Remove"
+            End If
+        End If
+    End Sub
+
+    Sub AddDatabase(ByVal name As String, ByVal path As String)
+        If Not GlobalSettings.Settings.UserDatabases.Contains(path) And File.Exists(path) Then
+            GlobalSettings.Settings.UserDatabases.Add(path)
+            Me.dgvdb.Rows.Add(New Object() {dgvdb.Rows.Count + 1, name, path, My.Resources.bullet_cross})
+            Me.dgvdb.Rows(Me.dgvdb.Rows.Count - 1).Cells(3).ToolTipText = "Remove"
+        End If
+    End Sub
+
+    Private Sub dgvdb_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvdb.CellContentClick
+        'remove component database
+        If e.ColumnIndex = 3 Then
+            Dim result = MessageBox.Show("Remove dataset " & dgvdb.Rows(e.RowIndex).Cells(1).Value & "?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If result = DialogResult.Yes Then
+                'remove user database
+                Settings.UserDatabases.Remove(Me.dgvdb.Rows(e.RowIndex).Cells(2).Value)
+                Me.dgvdb.Rows.RemoveAt(e.RowIndex)
+            End If
+        End If
+    End Sub
+
+    Private Sub dgvIPDB_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvIPDB.CellContentClick
+        'remove user interactions database
+        If e.ColumnIndex = 3 Then
+            Dim result = MessageBox.Show("Remove dataset " & dgvIPDB.Rows(e.RowIndex).Cells(1).Value & "?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If result = DialogResult.Yes Then
+                Settings.UserInteractionsDatabases.Remove(Me.dgvIPDB.Rows(e.RowIndex).Cells(2).Value)
+                Me.dgvIPDB.Rows.RemoveAt(e.RowIndex)
+            End If
+        End If
     End Sub
 
 End Class

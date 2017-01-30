@@ -391,9 +391,9 @@ Public Class FormOptions
             Dim result = MessageBox.Show("Delete database " & dgvdb.Rows(e.RowIndex).Cells(1).Value & "?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)
             If result = DialogResult.OK Then
                 'remove user database
-                    My.Settings.UserDatabases.Remove(Me.dgvdb.Rows(e.RowIndex).Cells(2).Value)
-                    Me.dgvdb.Rows.RemoveAt(e.RowIndex)
-                    MessageBox.Show(DWSIM.App.GetLocalString("UDBRemoved"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
+                My.Settings.UserDatabases.Remove(Me.dgvdb.Rows(e.RowIndex).Cells(2).Value)
+                Me.dgvdb.Rows.RemoveAt(e.RowIndex)
+                MessageBox.Show(DWSIM.App.GetLocalString("UDBRemoved"), DWSIM.App.GetLocalString("Informao"), MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         End If
 
@@ -405,6 +405,7 @@ Public Class FormOptions
             End If
         End If
     End Sub
+
     Private Sub dgvIPDB_CellContentClick(sender As System.Object, e As System.Windows.Forms.DataGridViewCellEventArgs) Handles dgvIPDB.CellContentClick
 
         'remove user interactions database
