@@ -57,7 +57,6 @@ Namespace UnitOperations
 
         Public Overridable Property ComponentName() As String = ""
 
-
 #Region "    ISimulationObject"
 
         Public Overridable Function GetVersion() As Version Implements ISimulationObject.GetVersion
@@ -334,6 +333,14 @@ Namespace UnitOperations
             Return FlowSheet
         End Function
 
+        Public MustOverride Sub CloseEditForm() Implements ISimulationObject.CloseEditForm
+
+        Public MustOverride Function CloneXML() As Object Implements ISimulationObject.CloneXML
+
+        Public MustOverride Function CloneJSON() As Object Implements ISimulationObject.CloneJSON
+
+        Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements ISimulationObject.MobileCompatible
+
 #End Region
 
 #Region "    ICloneable"
@@ -346,14 +353,13 @@ Namespace UnitOperations
         Public Overridable Function Clone() As Object Implements System.ICloneable.Clone
 
             Return ObjectCopy(Me)
-            'Return Me.MemberwiseClone()
 
         End Function
 
         Function ObjectCopy(ByVal obj As UnitOperations.BaseClass) As Object
 
             If GlobalSettings.Settings.AutomationMode Then
-                Return Me.MemberwiseClone()
+                Return Me.CloneXML
             Else
                 Using objMemStream As New MemoryStream()
                     Dim objBinaryFormatter As New BinaryFormatter(Nothing, New StreamingContext(StreamingContextStates.Clone))
@@ -623,10 +629,6 @@ Namespace UnitOperations
         End Property
 
 #End Region
-
-        Public MustOverride Sub CloseEditForm() Implements ISimulationObject.CloseEditForm
-
-        Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements ISimulationObject.MobileCompatible
 
     End Class
 

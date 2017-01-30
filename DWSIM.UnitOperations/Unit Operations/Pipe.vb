@@ -198,6 +198,14 @@ Namespace UnitOperations
             Me.ComponentDescription = description
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New Pipe().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Pipe)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Me.GraphicObject.EnergyConnector.IsAttached Then

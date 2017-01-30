@@ -62,6 +62,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New OrificePlate().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of OrificePlate)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Property OrifType() As OrificeType
             Get
                 Return _orificetype

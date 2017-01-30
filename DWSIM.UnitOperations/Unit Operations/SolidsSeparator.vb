@@ -61,6 +61,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New SolidsSeparator().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of SolidsSeparator)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Sub Calculate(Optional ByVal args As Object = Nothing)
 
             If Not Me.GraphicObject.InputConnectors(0).IsAttached Then

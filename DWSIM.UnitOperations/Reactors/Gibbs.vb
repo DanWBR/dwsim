@@ -69,6 +69,14 @@ Namespace Reactors
             MyBase.New()
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New Reactor_Gibbs().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Reactor_Gibbs)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)

@@ -84,6 +84,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New Cooler().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Cooler)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Property Eficiencia() As Nullable(Of Double)
             Get
                 Return m_eta

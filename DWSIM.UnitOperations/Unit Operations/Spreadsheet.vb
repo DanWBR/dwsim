@@ -88,6 +88,13 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New ExcelUO().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of ExcelUO)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
         Public Property DeltaQ() As Nullable(Of Double)
             Get
                 Return m_DQ

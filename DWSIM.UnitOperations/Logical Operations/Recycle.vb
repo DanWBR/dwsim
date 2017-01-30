@@ -67,6 +67,14 @@ Namespace SpecialOps
             End Get
         End Property
 
+        Public Overrides Function CloneXML() As Object
+            Return New Recycle().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Recycle)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture

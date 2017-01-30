@@ -111,6 +111,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New Flowsheet().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Flowsheet)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Sub InitializeMappings()
 
             If CompoundMappings Is Nothing Then CompoundMappings = New Dictionary(Of String, String)

@@ -139,4 +139,8 @@
 
     Sub CloseEditForm()
 
+    Function CloneXML() As Object
+
+    Function CloneJSON() As Object
+
 End Interface

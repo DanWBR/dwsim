@@ -104,6 +104,14 @@ Namespace UnitOperations
         Protected _compsepspeccollection As New Dictionary(Of String, ComponentSeparationSpec)
         Protected _streamindex As Byte = 0
 
+        Public Overrides Function CloneXML() As Object
+            Return New ComponentSeparator().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of ComponentSeparator)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)

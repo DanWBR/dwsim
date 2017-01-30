@@ -163,6 +163,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New CapeOpenUO().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of CapeOpenUO)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
 #Region "    CAPE-OPEN Specifics"
 
         Sub PersistLoad(ByVal context As System.Runtime.Serialization.StreamingContext)

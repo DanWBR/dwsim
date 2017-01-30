@@ -697,6 +697,14 @@ Namespace UnitOperations
             Next
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New DistillationColumn().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of DistillationColumn)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
@@ -959,6 +967,14 @@ Namespace UnitOperations
             Next
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New AbsorptionColumn().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of AbsorptionColumn)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
@@ -1094,6 +1110,14 @@ Namespace UnitOperations
                 Me.Stages(k2).P = 101325
             Next
         End Sub
+
+        Public Overrides Function CloneXML() As Object
+            Return New ReboiledAbsorber().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of ReboiledAbsorber)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
@@ -1239,6 +1263,14 @@ Namespace UnitOperations
                 Me.Stages(k2).P = 101325
             Next
         End Sub
+
+        Public Overrides Function CloneXML() As Object
+            Return New RefluxedAbsorber().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of RefluxedAbsorber)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0

@@ -158,6 +158,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New HeatExchanger().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of HeatExchanger)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Property CalculationMode() As HeatExchangerCalcMode
             Get
                 Return Me.CalcMode

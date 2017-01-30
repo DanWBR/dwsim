@@ -64,6 +64,14 @@ Namespace SpecialOps
         Protected cv As New SystemsOfUnits.Converter
         Protected nf As String = ""
 
+        Public Overrides Function CloneXML() As Object
+            Return New Spec().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Spec)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Property CalculateTargetObject() As Boolean
             Get
                 Return Me.m_CalculateTargetObject

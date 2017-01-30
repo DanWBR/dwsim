@@ -412,6 +412,14 @@ Namespace Reactors
 
 #End Region
 
+        Public Overrides Function CloneXML() As Object
+            Return New Reactor_Equilibrium().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Reactor_Equilibrium)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Sub New()
             MyBase.New()
         End Sub

@@ -201,6 +201,14 @@ Namespace UnitOperations
 
         Property OutletTemperature As Double = 0.0#
 
+        Public Overrides Function CloneXML() As Object
+            Return New Pump().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Pump)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             MyBase.LoadData(data)

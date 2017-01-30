@@ -46,6 +46,14 @@ Namespace UnitOperations
 
         Public Property OperationMode As OpMode = OpMode.SplitRatios
 
+        Public Overrides Function CloneXML() As Object
+            Return New Splitter().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Splitter)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture

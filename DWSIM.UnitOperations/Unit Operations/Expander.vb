@@ -90,8 +90,15 @@ Namespace UnitOperations
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-
         End Sub
+
+        Public Overrides Function CloneXML() As Object
+            Return New Expander().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Expander)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
 
         Public Property EficienciaPolitropica() As Nullable(Of Double)
             Get

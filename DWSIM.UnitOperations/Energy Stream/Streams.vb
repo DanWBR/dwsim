@@ -192,6 +192,14 @@ Namespace Streams
 
 #End Region
 
+        Public Overrides Function CloneXML() As Object
+            Return New EnergyStream().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of EnergyStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Overrides Sub DisplayEditForm()
 
             If f Is Nothing Then

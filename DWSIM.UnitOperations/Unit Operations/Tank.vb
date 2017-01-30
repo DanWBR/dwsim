@@ -58,6 +58,14 @@ Namespace UnitOperations
 
         End Sub
 
+        Public Overrides Function CloneXML() As Object
+            Return New Tank().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Tank)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Property Volume() As Double
             Get
                 Return m_vol

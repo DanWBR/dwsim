@@ -672,6 +672,7 @@ Namespace Streams
                     Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow
                     Phases(i).Properties.massfraction = ASource.Phases(i).Properties.massfraction
                     Phases(i).Properties.molarfraction = ASource.Phases(i).Properties.molarfraction
+                    Phases(i).Properties.bulk_modulus = ASource.Phases(i).Properties.bulk_modulus
 
                 End If
 
@@ -5773,6 +5774,20 @@ Namespace Streams
 
         Private Function GetPhase2(phasename As String) As IPhase Implements IMaterialStream.GetPhase
             Return GetPhase(phasename)
+        End Function
+
+        Public Overrides Function CloneXML() As Object
+            Dim ms As New MaterialStream("", "", FlowSheet, PropertyPackage)
+            FlowSheet.AddCompoundsToMaterialStream(ms)
+            ms.Assign(Me)
+            ms.AssignProps(Me)
+            Return ms
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Dim settings As New Newtonsoft.Json.JsonSerializerSettings
+            settings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of MaterialStream)(Newtonsoft.Json.JsonConvert.SerializeObject(Me), settings)
         End Function
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean

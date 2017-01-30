@@ -66,6 +66,14 @@ Namespace SpecialOps
         Protected m_maxVal As Nullable(Of Double) = Nothing
         Protected m_initialEstimate As Nullable(Of Double) = Nothing
 
+        Public Overrides Function CloneXML() As Object
+            Return New Adjust().LoadData(Me.SaveData)
+        End Function
+
+        Public Overrides Function CloneJSON() As Object
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of Adjust)(Newtonsoft.Json.JsonConvert.SerializeObject(Me))
+        End Function
+
         Public Property SimultaneousAdjust() As Boolean Implements Interfaces.IAdjust.SimultaneousAdjust
             Get
                 Return m_IsSimultAdjustEnabled
