@@ -1,4 +1,26 @@
-﻿<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheet
+﻿'    DWSIM Interface definitions
+'    Copyright 2010-2017 Daniel Wagner O. de Medeiros
+'
+'    This file is part of DWSIM.
+'
+'    DWSIM is free software: you can redistribute it and/or modify
+'    it under the terms of the GNU General Public License as published by
+'    the Free Software Foundation, either version 3 of the License, or
+'    (at your option) any later version.
+'
+'    DWSIM is distributed in the hope that it will be useful,
+'    but WITHOUT ANY WARRANTY; without even the implied warranty of
+'    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+'    GNU General Public License for more details.
+'
+'    You should have received a copy of the GNU General Public License
+'    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
+
+''' <summary>
+''' The IFlowsheet interface is the main interface which should be implemented by the Flowsheet class. 
+''' It provides direct access to the various flowsheet components and helper functions to manipulate objects.
+''' </summary>
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheet
 
     Enum MessageType
         Information
@@ -90,6 +112,9 @@
 
 End Interface
 
+''' <summary>
+''' This is an interface which provides direct access to collections of flowsheet objects.
+''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetBag
 
     ReadOnly Property SimulationObjects As Dictionary(Of String, ISimulationObject)
@@ -126,6 +151,9 @@ End Interface
 
 End Interface
 
+''' <summary>
+''' This is an interface which defines helper functions to a Flowsheet GUI implementation.
+''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetGUI
 
     Sub ShowMessage(ByVal text As String, ByVal mtype As IFlowsheet.MessageType)
@@ -147,6 +175,9 @@ End Interface
 
 End Interface
 
+''' <summary>
+''' This interface defines the calculation queue to be used by the flowsheet solver.
+''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetCalculationQueue
 
     Property CalculationQueue As Queue(Of ICalculationArgs)
