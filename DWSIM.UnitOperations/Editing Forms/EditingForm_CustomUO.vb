@@ -126,6 +126,11 @@ Public Class EditingForm_CustomUO
                 dgvinputvars.Rows.Add(New Object() {item.Key, item.Value})
             Next
 
+            dgvinputstringvars.Rows.Clear()
+            For Each item In .InputStringVariables
+                dgvinputstringvars.Rows.Add(New Object() {item.Key, item.Value})
+            Next
+
             dgvoutputvars.Rows.Clear()
             For Each item In .OutputVariables
                 dgvoutputvars.Rows.Add(New Object() {item.Key, item.Value})
@@ -551,7 +556,7 @@ Public Class EditingForm_CustomUO
 
     Private Sub btnRemoveInputStringVar_Click(sender As Object, e As EventArgs) Handles btnRemoveInputStringVar.Click
         dgvinputstringvars.Rows.Remove(dgvinputstringvars.SelectedCells(0).OwningRow)
-        UpdateInputVars()
+        UpdateInputStringVars()
     End Sub
 
     Private Sub UpdateInputStringVars()
@@ -570,4 +575,5 @@ Public Class EditingForm_CustomUO
     Private Sub dgvinputstringvars_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvinputstringvars.CellValueChanged
         UpdateInputStringVars()
     End Sub
+
 End Class

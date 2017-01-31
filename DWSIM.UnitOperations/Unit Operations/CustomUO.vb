@@ -53,9 +53,9 @@ Namespace UnitOperations
         Public Property HighlightSpaces As Boolean = False
         Public Property HighlightTabs As Boolean = False
 
-        Public Property InputStringVariables As Dictionary(Of String, String)
-        Public Property InputVariables As Dictionary(Of String, Double)
-        Public Property OutputVariables As Dictionary(Of String, Double)
+        Public Property InputStringVariables As New Dictionary(Of String, String)
+        Public Property InputVariables As New Dictionary(Of String, Double)
+        Public Property OutputVariables As New Dictionary(Of String, Double)
 
         Public Property FontName() As String
             Get
@@ -98,12 +98,14 @@ Namespace UnitOperations
             ComponentName = "IronPython UO"
             ComponentDescription = "IronPython Scripting Unit Operation"
             InputVariables = New Dictionary(Of String, Double)
+            InputStringVariables = New Dictionary(Of String, String)
             OutputVariables = New Dictionary(Of String, Double)
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
             MyBase.CreateNew()
             InputVariables = New Dictionary(Of String, Double)
+            InputStringVariables = New Dictionary(Of String, String)
             OutputVariables = New Dictionary(Of String, Double)
             Me.ComponentName = name
             Me.ComponentDescription = description

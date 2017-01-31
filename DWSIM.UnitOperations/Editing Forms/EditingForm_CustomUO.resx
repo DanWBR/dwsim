@@ -1579,7 +1579,7 @@
     <value>0, 25</value>
   </data>
   <data name="dgvinputstringvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 125</value>
+    <value>392, 125</value>
   </data>
   <data name="dgvinputstringvars.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1624,7 +1624,7 @@
     <value>0, 0</value>
   </data>
   <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 25</value>
+    <value>392, 25</value>
   </data>
   <data name="ToolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1648,7 +1648,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 150</value>
+    <value>392, 150</value>
   </data>
   <data name="TabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1687,7 +1687,7 @@
     <value>3, 3</value>
   </data>
   <data name="dgvoutputvars.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 144</value>
+    <value>386, 144</value>
   </data>
   <data name="dgvoutputvars.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1711,7 +1711,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 150</value>
+    <value>392, 150</value>
   </data>
   <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
