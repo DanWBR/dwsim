@@ -2263,6 +2263,7 @@
     <None Include="Resources\arrow_divide.png" />
     <None Include="Resources\arrow_join.png" />
     <None Include="Resources\button-medium-blue.png" />
+    <None Include="Resources\209x48-doar-azul-assina.gif" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />

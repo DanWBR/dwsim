@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _209x48_doar_azul_assina() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("209x48-doar-azul-assina", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property _280px_python_logo_2() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("280px-python_logo_2", resourceCulture)
