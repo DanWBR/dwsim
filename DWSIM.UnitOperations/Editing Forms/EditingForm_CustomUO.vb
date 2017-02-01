@@ -126,6 +126,11 @@ Public Class EditingForm_CustomUO
                 dgvinputvars.Rows.Add(New Object() {item.Key, item.Value})
             Next
 
+            dgvinputstringvars.Rows.Clear()
+            For Each item In .InputStringVariables
+                dgvinputstringvars.Rows.Add(New Object() {item.Key, item.Value})
+            Next
+
             dgvoutputvars.Rows.Clear()
             For Each item In .OutputVariables
                 dgvoutputvars.Rows.Add(New Object() {item.Key, item.Value})
@@ -542,4 +547,33 @@ Public Class EditingForm_CustomUO
             SimObject.FlowSheet.DisplayForm(f)
         End If
     End Sub
+
+    Private Sub btnAddInputStringVar_Click(sender As Object, e As EventArgs) Handles btnAddInputStringVar.Click
+
+        dgvinputstringvars.Rows.Add(New Object() {"var" + (SimObject.InputStringVariables.Count + 1).ToString, "myvar"})
+
+    End Sub
+
+    Private Sub btnRemoveInputStringVar_Click(sender As Object, e As EventArgs) Handles btnRemoveInputStringVar.Click
+        dgvinputstringvars.Rows.Remove(dgvinputstringvars.SelectedCells(0).OwningRow)
+        UpdateInputStringVars()
+    End Sub
+
+    Private Sub UpdateInputStringVars()
+        If Loaded Then
+            SimObject.InputStringVariables.Clear()
+            For Each row As DataGridViewRow In dgvinputstringvars.Rows
+                Try
+                    SimObject.InputStringVariables.Add(row.Cells(0).Value, row.Cells(1).Value)
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message)
+                End Try
+            Next
+        End If
+    End Sub
+
+    Private Sub dgvinputstringvars_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvinputstringvars.CellValueChanged
+        UpdateInputStringVars()
+    End Sub
+
 End Class

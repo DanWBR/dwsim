@@ -537,6 +537,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.de.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_CustomUO.de.resx">
+      <DependentUpon>EditingForm_CustomUO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_EnergyRecycle.de.resx">
       <DependentUpon>EditingForm_EnergyRecycle.vb</DependentUpon>
     </EmbeddedResource>

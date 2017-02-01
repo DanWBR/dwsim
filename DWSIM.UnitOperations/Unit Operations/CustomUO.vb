@@ -43,7 +43,7 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Private engine As ScriptEngine
 
-        <NonSerialized> <Xml.Serialization.XmlIgnore> Private scope As Object
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Private scope As ScriptScope
 
         Private _scripttext As String = ""
         Private _includes() As String
@@ -53,8 +53,9 @@ Namespace UnitOperations
         Public Property HighlightSpaces As Boolean = False
         Public Property HighlightTabs As Boolean = False
 
-        Public Property InputVariables As Dictionary(Of String, Double)
-        Public Property OutputVariables As Dictionary(Of String, Double)
+        Public Property InputStringVariables As New Dictionary(Of String, String)
+        Public Property InputVariables As New Dictionary(Of String, Double)
+        Public Property OutputVariables As New Dictionary(Of String, Double)
 
         Public Property FontName() As String
             Get
@@ -97,12 +98,14 @@ Namespace UnitOperations
             ComponentName = "IronPython UO"
             ComponentDescription = "IronPython Scripting Unit Operation"
             InputVariables = New Dictionary(Of String, Double)
+            InputStringVariables = New Dictionary(Of String, String)
             OutputVariables = New Dictionary(Of String, Double)
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
             MyBase.CreateNew()
             InputVariables = New Dictionary(Of String, Double)
+            InputStringVariables = New Dictionary(Of String, String)
             OutputVariables = New Dictionary(Of String, Double)
             Me.ComponentName = name
             Me.ComponentDescription = description
@@ -201,6 +204,10 @@ Namespace UnitOperations
             scope.SetVariable("Flowsheet", FlowSheet)
             scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
             scope.SetVariable("Me", Me)
+
+            For Each variable In InputStringVariables
+                scope.SetVariable(variable.Key, variable.Value)
+            Next
 
             For Each variable In InputVariables
                 scope.SetVariable(variable.Key, variable.Value)
@@ -302,6 +309,11 @@ Namespace UnitOperations
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
+            Me.InputStringVariables.Clear()
+            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InputStringVariables").Elements.ToList
+                Me.InputStringVariables.Add(xel.@Key, xel.@Value)
+            Next
+
             Me.InputVariables.Clear()
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InputVariables").Elements.ToList
                 Me.InputVariables.Add(xel.@Key, Double.Parse(xel.@Value, ci))
@@ -320,6 +332,10 @@ Namespace UnitOperations
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
+                .Add(New XElement("InputStringVariables"))
+                For Each p In InputStringVariables
+                    .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value)))
+                Next
                 .Add(New XElement("InputVariables"))
                 For Each p In InputVariables
                     .Item(.Count - 1).Add(New XElement("Variable", New XAttribute("Key", p.Key), New XAttribute("Value", p.Value.ToString(ci))))
