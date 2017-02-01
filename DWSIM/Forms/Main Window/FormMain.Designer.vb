@@ -890,7 +890,7 @@ Partial Class FormMain
 
         End With
 
-        If DWSIM.App.IsRunningOnMono() Then
+        If DWSIM.App.IsRunningOnMono And Not GlobalSettings.Settings.AutomationMode Then
             Using spsh As New SplashScreen
                 spsh.Show()
                 Application.DoEvents()
