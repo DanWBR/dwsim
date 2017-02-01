@@ -23,7 +23,7 @@
         liq_out = sim.GetFlowsheetSimulationObject1("18")
 
         'mass flow rate values in kg/s
-        Dim flows(4) As Double
+        Dim flows(3) As Double
 
         flows(0) = 170.0#
         flows(1) = 180.0#
