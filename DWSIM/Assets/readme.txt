@@ -66,6 +66,17 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
 
+Version 4.2
+
+- [NEW] Added support for COM/.NET Automation
+- [NEW] Added string variable support to Script UO
+- [CHG] Manage user databases directly from Excel Add-In Options window
+- [FIX] Fixed Spreadsheet UO not reading input variables
+- [FIX] Fixed issues with Steam Tables Enthalpy/Entropy calculations
+- [FIX] Fixed Steam Tables liquid density calculation
+- [FIX] Fixed a bug with Heat Exchanger Shell & Tube calculation mode
+- [FIX] Other bug fixes and enhancements
+
 Version 4.1 Update 12
 
 - [FIX] Fixed translation issues
