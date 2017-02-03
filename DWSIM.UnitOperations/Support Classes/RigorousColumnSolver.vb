@@ -2093,10 +2093,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Lj(i) = L(i)
                 Vj(i) = V(i)
                 Tj(i) = T(i)
-                K(i) = Kval(i)
                 Fj(i) = F(i)
                 Hfj(i) = HF(i) / 1000
                 fcj(i) = fc(i)
+            Next
+
+            For i = 0 To ns
+                For j = 0 To nc - 1
+                    K(i)(j) = Kval(i)(j)
+                    If Double.IsNaN(K(i)(j)) Or Double.IsInfinity(K(i)(j)) Or K(i)(j) = 0# Then K(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
+                Next
             Next
 
             'step3
