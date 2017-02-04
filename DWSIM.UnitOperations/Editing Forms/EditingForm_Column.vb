@@ -113,6 +113,17 @@ Public Class EditingForm_Column
             tbMaxIt.Text = .MaxIterations
             tbConvTol.Text = .ExternalLoopTolerance
 
+            Select Case SimObject.SolverScheme
+                Case SolvingScheme.Ideal_K_Init
+                    cbSolverScheme.SelectedIndex = 1
+                Case SolvingScheme.Ideal_Enthalpy_Init
+                    cbSolverScheme.SelectedIndex = 2
+                Case SolvingScheme.Ideal_K_and_Enthalpy_Init
+                    cbSolverScheme.SelectedIndex = 3
+                Case SolvingScheme.Direct
+                    cbSolverScheme.SelectedIndex = 0
+            End Select
+
             cbCondType.SelectedIndex = .CondenserType
             tbCondPressure.Text = su.Converter.ConvertFromSI(units.pressure, .CondenserPressure).ToString(nf)
             tbCondPDrop.Text = su.Converter.ConvertFromSI(units.deltaP, .CondenserDeltaP).ToString(nf)
@@ -756,10 +767,26 @@ Public Class EditingForm_Column
                                                                                 tbBPStopAtIter.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
                                                                                 tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
+
         If Loaded Then
             ToolTip1.ToolTipTitle = SimObject.FlowSheet.GetTranslatedString("Informao")
             ToolTip1.ToolTipIcon = ToolTipIcon.Info
             ToolTip1.Show(SimObject.FlowSheet.GetTranslatedString("CommitChanges"), tbox, 0, tbox.Height + 4, 2000)
         End If
+
     End Sub
+
+    Private Sub cbSolverScheme_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbSolverScheme.SelectedIndexChanged
+        Select Case cbSolverScheme.SelectedIndex
+            Case 0
+                SimObject.SolverScheme = SolvingScheme.Direct
+            Case 1
+                SimObject.SolverScheme = SolvingScheme.Ideal_K_Init
+            Case 2
+                SimObject.SolverScheme = SolvingScheme.Ideal_Enthalpy_Init
+            Case 3
+                SimObject.SolverScheme = SolvingScheme.Ideal_K_and_Enthalpy_Init
+        End Select
+    End Sub
+
 End Class

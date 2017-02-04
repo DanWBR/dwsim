@@ -167,12 +167,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _Kbj As Object()
         Dim _rr, _Sb, _maxF As Double
         Public _pp As PropertyPackages.PropertyPackage
+        Public _ppr As PropertyPackages.RaoultPropertyPackage
         Dim _coltype As Column.ColType
         Dim _condtype As Column.condtype
         Dim _bx, _dbx As Double()
         Dim _vcnt, _lcnt As Integer
         Dim _specs As Dictionary(Of String, SepOps.ColumnSpec)
         Dim llextr As Boolean = False
+
+        Private ik, ih As Boolean
 
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
@@ -423,8 +426,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 _Tj(i) = _Bj(i) / (_Aj(i) - Log(_Kbj(i)))
                 If Abs(_Tj(i) - _Tj_ant(i)) > 100 Or Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then
                     'switch to a bubble point temperature calculation...
-                    Dim tmp = _pp.DW_CalcBubT(_xc(i), _P(i), _Tj(i), Nothing, False)
-                    _Tj(i) = tmp(4)
+                    If ik Then
+                        Dim tmp = _ppr.DW_CalcBubT(_xc(i), _P(i), _Tj(i), Nothing, False)
+                        _Tj(i) = tmp(4)
+                    Else
+                        Dim tmp = _pp.DW_CalcBubT(_xc(i), _P(i), _Tj(i), Nothing, False)
+                        _Tj(i) = tmp(4)
+                    End If
                     If Double.IsNaN(_Tj(i)) Or Double.IsInfinity(_Tj(i)) Then
                         If i > 0 Then _Tj(i) = _Tj_ant(i - 1)
                     End If
@@ -692,7 +700,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal epsilon As Double, _
                                 ByVal Solver As OptimizationMethod,
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal llex As Boolean = False) As Object
+
+            ik = IdealK
+            ih = IdealH
+
+            If ik Or ih Then
+                _ppr = New PropertyPackages.RaoultPropertyPackage
+                _ppr.CurrentMaterialStream = pp.CurrentMaterialStream
+            End If
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
@@ -796,7 +813,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim tmp0 As Object = Nothing
 
             For i = 0 To ns
-                If Not llextr Then tmp0 = pp.DW_CalcKvalue(z(i), T(i), P(i))
+                If ik Then
+                    If Not llextr Then tmp0 = _ppr.DW_CalcKvalue(z(i), T(i), P(i))
+                Else
+                    If Not llextr Then tmp0 = pp.DW_CalcKvalue(z(i), T(i), P(i))
+                End If
                 For j = 0 To nc - 1
                     If Not llextr Then K(i, j) = tmp0(j) Else K(i, j) = Kval(i)(j)
                     If Double.IsNaN(K(i, j)) Or Double.IsInfinity(K(i, j)) Or K(i, j) = 0 Then K(i, j) = pp.AUX_PVAPi(j, T(i)) / P(i)
@@ -837,17 +858,31 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Tj2(i) = T(i) + 1
                 Kbj1(i) = Kbj(i)
                 'new Ks
-                If llextr Then
-                    K2(i) = pp.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i), "LL")
-                    Hv1(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
-                    Hv2(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
+                If ih Then
+                    If llextr Then
+                        K2(i) = _ppr.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i), "LL")
+                        Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                        Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
+                    Else
+                        K2(i) = _ppr.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i))
+                        Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                        Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
+                    End If
+                    Hl1(i) = _ppr.DW_CalcEnthalpyDeparture(x(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                    Hl2(i) = _ppr.DW_CalcEnthalpyDeparture(x(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                 Else
-                    K2(i) = pp.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i))
-                    Hv1(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
-                    Hv2(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
+                    If llextr Then
+                        K2(i) = pp.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i), "LL")
+                        Hv1(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                        Hv2(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
+                    Else
+                        K2(i) = pp.DW_CalcKvalue(x(i), y(i), Tj2(i), P(i))
+                        Hv1(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                        Hv2(i) = pp.DW_CalcEnthalpyDeparture(y(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
+                    End If
+                    Hl1(i) = pp.DW_CalcEnthalpyDeparture(x(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                    Hl2(i) = pp.DW_CalcEnthalpyDeparture(x(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                 End If
-                Hl1(i) = pp.DW_CalcEnthalpyDeparture(x(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
-                Hl2(i) = pp.DW_CalcEnthalpyDeparture(x(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                 For j = 0 To nc - 1
                     K2j(i, j) = K2(i)(j)
                     If Double.IsNaN(K2(i)(j)) Or Double.IsInfinity(K2(i)(j)) Then K2(i)(j) = pp.AUX_PVAPi(j, T(i)) / P(i)
@@ -1300,10 +1335,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                              Sub(ipar)
-                                                                 If llextr Then
-                                                                     tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                                 If ik Then
+                                                                     If llextr Then
+                                                                         tmp(ipar) = _ppr.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                                     Else
+                                                                         tmp(ipar) = _ppr.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                     End If
                                                                  Else
-                                                                     tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                     If llextr Then
+                                                                         tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                                     Else
+                                                                         tmp(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                     End If
                                                                  End If
                                                              End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
@@ -1320,10 +1363,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Else
                     For i = 0 To ns
-                        If llextr Then
-                            tmp(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        If ik Then
+                            If llextr Then
+                                tmp(i) = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                            Else
+                                tmp(i) = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         Else
-                            tmp(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            If llextr Then
+                                tmp(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                            Else
+                                tmp(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                            End If
                         End If
                         For j = 0 To nc - 1
                             K_ant(i, j) = K(i, j)
@@ -1370,7 +1421,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                              Sub(ipar)
                                                                  'new Ks
-                                                                 K2(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj2(ipar), P(ipar))
+                                                                 If ik Then
+                                                                     K2(ipar) = _ppr.DW_CalcKvalue(xc(ipar), yc(ipar), Tj2(ipar), P(ipar))
+                                                                 Else
+                                                                     K2(ipar) = pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj2(ipar), P(ipar))
+                                                                 End If
                                                              End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
@@ -1386,7 +1441,11 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     For i = 0 To ns
 
                         'new Ks
-                        K2(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj2(i), P(i))
+                        If ik Then
+                            K2(i) = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj2(i), P(i))
+                        Else
+                            K2(i) = pp.DW_CalcKvalue(xc(i), yc(i), Tj2(i), P(i))
+                        End If
 
                         For j = 0 To nc - 1
                             K2j(i, j) = K2(i)(j)
@@ -1401,15 +1460,27 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                               Sub(ipar)
                                                                   'enthalpies
-                                                                  If llextr Then
-                                                                      Hv1(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
-                                                                      Hv2(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                  If ih Then
+                                                                      If llextr Then
+                                                                          Hv1(ipar) = _ppr.DW_CalcEnthalpyDeparture(yc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                          Hv2(ipar) = _ppr.DW_CalcEnthalpyDeparture(yc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                      Else
+                                                                          Hv1(ipar) = _ppr.DW_CalcEnthalpyDeparture(yc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Vapor)
+                                                                          Hv2(ipar) = _ppr.DW_CalcEnthalpyDeparture(yc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Vapor)
+                                                                      End If
+                                                                      Hl1(ipar) = _ppr.DW_CalcEnthalpyDeparture(xc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                      Hl2(ipar) = _ppr.DW_CalcEnthalpyDeparture(xc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
                                                                   Else
-                                                                      Hv1(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Vapor)
-                                                                      Hv2(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Vapor)
+                                                                      If llextr Then
+                                                                          Hv1(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                          Hv2(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                      Else
+                                                                          Hv1(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Vapor)
+                                                                          Hv2(ipar) = pp.DW_CalcEnthalpyDeparture(yc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Vapor)
+                                                                      End If
+                                                                      Hl1(ipar) = pp.DW_CalcEnthalpyDeparture(xc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
+                                                                      Hl2(ipar) = pp.DW_CalcEnthalpyDeparture(xc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
                                                                   End If
-                                                                  Hl1(ipar) = pp.DW_CalcEnthalpyDeparture(xc(ipar), Tj1(ipar), P(ipar), PropertyPackages.State.Liquid)
-                                                                  Hl2(ipar) = pp.DW_CalcEnthalpyDeparture(xc(ipar), Tj2(ipar), P(ipar), PropertyPackages.State.Liquid)
                                                               End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
@@ -1420,15 +1491,27 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     For i = 0 To ns
 
                         'enthalpies
-                        If llextr Then
-                            Hv1(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
-                            Hv2(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
+                        If ih Then
+                            If llextr Then
+                                Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                                Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
+                            Else
+                                Hv1(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                                Hv2(i) = _ppr.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
+                            End If
+                            Hl1(i) = _ppr.DW_CalcEnthalpyDeparture(xc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                            Hl2(i) = _ppr.DW_CalcEnthalpyDeparture(xc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                         Else
-                            Hv1(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
-                            Hv2(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
+                            If llextr Then
+                                Hv1(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                                Hv2(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
+                            Else
+                                Hv1(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj1(i), P(i), PropertyPackages.State.Vapor)
+                                Hv2(i) = pp.DW_CalcEnthalpyDeparture(yc(i), Tj2(i), P(i), PropertyPackages.State.Vapor)
+                            End If
+                            Hl1(i) = pp.DW_CalcEnthalpyDeparture(xc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
+                            Hl2(i) = pp.DW_CalcEnthalpyDeparture(xc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
                         End If
-                        Hl1(i) = pp.DW_CalcEnthalpyDeparture(xc(i), Tj1(i), P(i), PropertyPackages.State.Liquid)
-                        Hl2(i) = pp.DW_CalcEnthalpyDeparture(xc(i), Tj2(i), P(i), PropertyPackages.State.Liquid)
 
                     Next
                 End If
@@ -1460,7 +1543,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 ec += 1
 
-                If ec >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                If ec >= maxits And Not IdealK And Not IdealH Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
                 If Double.IsNaN(el_err) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
 
                 If AdjustSb Then SbOK = False
@@ -1474,7 +1557,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             il_err = FunctionValue(xvar)
 
-            If Abs(il_err) > tol(0) Then
+            If Abs(il_err) > tol(0) And Not IdealK And Not IdealH Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 
@@ -1547,7 +1630,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal eff() As Double, _
                                 ByVal coltype As Column.ColType, _
                                 ByVal pp As PropertyPackages.PropertyPackage, _
-                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec)) As Object
+                                ByVal specs As Dictionary(Of String, SepOps.ColumnSpec),
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean) As Object
+
+            Dim ppr As PropertyPackages.RaoultPropertyPackage = Nothing
+
+            If IdealK Or IdealH Then
+                ppr = New PropertyPackages.RaoultPropertyPackage
+                ppr.CurrentMaterialStream = pp.CurrentMaterialStream
+            End If
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism, .TaskScheduler = Settings.AppTaskScheduler}
@@ -1632,8 +1723,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                          Sub(ipar)
-                                                             Hl(ipar) = pp.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(ipar)) / 1000
-                                                             Hv(ipar) = pp.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(ipar)) / 1000
+                                                             If IdealH Then
+                                                                 Hl(ipar) = ppr.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(x(ipar)) / 1000
+                                                                 Hv(ipar) = ppr.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(y(ipar)) / 1000
+                                                             Else
+                                                                 Hl(ipar) = pp.DW_CalcEnthalpy(x(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(ipar)) / 1000
+                                                                 Hv(ipar) = pp.DW_CalcEnthalpy(y(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(ipar)) / 1000
+                                                             End If
                                                          End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
@@ -1642,9 +1738,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Else
                 For i = 0 To ns
-                    pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                    Hl(i) = pp.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(i)) / 1000
-                    Hv(i) = pp.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(i)) / 1000
+                    If IdealH Then
+                        ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Hl(i) = ppr.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(x(i)) / 1000
+                        Hv(i) = ppr.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(y(i)) / 1000
+                    Else
+                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Hl(i) = pp.DW_CalcEnthalpy(x(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(x(i)) / 1000
+                        Hv(i) = pp.DW_CalcEnthalpy(y(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(y(i)) / 1000
+                    End If
                 Next
             End If
 
@@ -1659,7 +1761,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     rr = spval1
                 Case ColumnSpec.SpecType.Heat_Duty
                     Q(0) = spval1
-                    'Q(0) = (Vj(1) * Hv(1) + F(0) * Hfj(0) - (Lj(0) + LSSj(0)) * Hl(0) - (Vj(0) + VSSj(0)) * Hv(0))
                     LSSj(0) = -Lj(0) - (Q(0) - Vj(1) * Hv(1) - F(0) * Hfj(0) + (Vj(0) + VSSj(0)) * Hv(0)) / Hl(0)
                     rr = (Lj(0) + LSSj(0)) / LSSj(0)
             End Select
@@ -1763,8 +1864,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, nc, poptions,
                                                                  Sub(ipar)
-                                                                     xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
-                                                                 End Sub),
+                                                                         xt(ipar) = Tomich.TDMASolve(at(ipar), bt(ipar), ct(ipar), dt(ipar))
+                                                                     End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
                                                       Settings.AppTaskScheduler)
@@ -1811,23 +1912,32 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Next
 
                 If doparallel Then
-
                     Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                                  Sub(ipar)
-                                                                     Dim tmpvar As Object = pp.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
-                                                                     Tj(ipar) = tmpvar(4)
-                                                                     K(ipar) = tmpvar(6)
+                                                                     If IdealK Then
+                                                                         Dim tmpvar As Object = ppr.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
+                                                                         Tj(ipar) = tmpvar(4)
+                                                                         K(ipar) = tmpvar(6)
+                                                                     Else
+                                                                         Dim tmpvar As Object = pp.DW_CalcBubT(xc(ipar), P(ipar), Tj(ipar), K(ipar), True)
+                                                                         Tj(ipar) = tmpvar(4)
+                                                                         K(ipar) = tmpvar(6)
+                                                                     End If
                                                                      If Tj(ipar) < 0 Or Double.IsNaN(Tj(ipar)) Then Tj(ipar) = Tj_ant(ipar)
                                                                  End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
                                                       Settings.AppTaskScheduler)
                     t1.Wait()
-
                 Else
                     For i = 0 To ns
-                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                        tmp = pp.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                        If IdealK Then
+                            ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            tmp = ppr.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                        Else
+                            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            tmp = pp.DW_CalcBubT(xc(i), P(i), Tj(i), K(i), True)
+                        End If
                         Tj(i) = tmp(4)
                         K(i) = tmp(6)
                         If Tj(i) < 0 Or Double.IsNaN(Tj(i)) Then Tj(i) = Tj_ant(i)
@@ -1875,8 +1985,13 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim t1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                                                      Sub(ipar)
-                                                                                         Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                                         Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                                         If IdealH Then
+                                                                                             Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                                             Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                                         Else
+                                                                                             Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                                             Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                                         End If
                                                                                      End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
                                                       TaskCreationOptions.None,
@@ -1885,9 +2000,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Else
                     For i = 0 To ns
-                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                        Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
-                        Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                        If IdealH Then
+                            ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                        Else
+                            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                            Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                        End If
                     Next
                 End If
 
@@ -2025,7 +2146,9 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 ic = ic + 1
 
-                If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                If Not IdealH And Not IdealK Then
+                    If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                End If
                 If Double.IsNaN(t_error) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 If ic = stopatitnumber - 1 Then Exit Do
 
@@ -2035,7 +2158,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             Loop Until t_error < tol(1)
 
-            ' finished, return arrays
+            'finished, return arrays
 
             Return New Object() {Tj, Vj, Lj, VSSj, LSSj, yc, xc, K, Q, ic, t_error}
 
@@ -2056,7 +2179,15 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal eff() As Double, _
                                 ByVal pp As PropertyPackages.PropertyPackage, _
                                 ByVal specs As Dictionary(Of String, SepOps.ColumnSpec), _
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal llextr As Boolean = False) As Object
+
+            Dim ppr As PropertyPackages.RaoultPropertyPackage = Nothing
+
+            If IdealK Or IdealH Then
+                ppr = New PropertyPackages.RaoultPropertyPackage
+                ppr.CurrentMaterialStream = pp.CurrentMaterialStream
+            End If
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
             Dim poptions As New ParallelOptions() With {.MaxDegreeOfParallelism = Settings.MaxDegreeOfParallelism}
@@ -2241,14 +2372,26 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                              Sub(ipar)
-                                                                 Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                 dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
-                                                                 If llextr Then
-                                                                     Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
-                                                                     dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                 If IdealH Then
+                                                                     Hl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl(ipar) = ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                     If llextr Then
+                                                                         Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                     Else
+                                                                         Hv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
                                                                  Else
-                                                                     Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
-                                                                     dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     Hl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                     dHl(ipar) = pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(ipar)) / 1000
+                                                                     If llextr Then
+                                                                         Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     Else
+                                                                         Hv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                         dHv(ipar) = pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar) - 1, P(ipar), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
                                                                  End If
                                                              End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
@@ -2257,18 +2400,33 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                     task1.Wait(30000)
                 Else
-                    For i = 0 To ns
-                        Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
-                        dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
-                        If llextr Then
-                            Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
-                            dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
-                        Else
-                            Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
-                            dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
-                        End If
-                        pp.CurrentMaterialStream.Flowsheet.CheckStatus()
-                    Next
+                    If IdealH Then
+                        For i = 0 To ns
+                            Hl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            dHl(i) = ppr.DW_CalcEnthalpy(xc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(xc(i)) / 1000
+                            If llextr Then
+                                Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * ppr.AUX_MMM(yc(i)) / 1000
+                            Else
+                                Hv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = ppr.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Vapor) * ppr.AUX_MMM(yc(i)) / 1000
+                            End If
+                            ppr.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Next
+                    Else
+                        For i = 0 To ns
+                            Hl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            dHl(i) = pp.DW_CalcEnthalpy(xc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(xc(i)) / 1000
+                            If llextr Then
+                                Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Liquid) * pp.AUX_MMM(yc(i)) / 1000
+                            Else
+                                Hv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                                dHv(i) = pp.DW_CalcEnthalpy(yc(i), Tj(i) - 1, P(i), PropertyPackages.State.Vapor) * pp.AUX_MMM(yc(i)) / 1000
+                            End If
+                            pp.CurrentMaterialStream.Flowsheet.CheckStatus()
+                        Next
+                    End If
                 End If
 
                 For i = 0 To ns
@@ -2315,10 +2473,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         Tj(i) = Tj(i) + xth(i)
                     End If
                     If Double.IsNaN(Tj(i)) Or Double.IsInfinity(Tj(i)) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
-                    If llextr Then
-                        tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                    If IdealK Then
+                        If llextr Then
+                            tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        Else
+                            tmp = ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
                     Else
-                        tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        If llextr Then
+                            tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        Else
+                            tmp = pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
                     End If
                     sumy(i) = 0
                     For j = 0 To nc - 1
@@ -2347,7 +2513,10 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 ic = ic + 1
 
-                If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                If Not IdealH And Not IdealK Then
+                    If ic >= maxits Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCMaxIterationsReached"))
+                End If
+
                 If Double.IsNaN(t_error) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
                 If Double.IsNaN(comperror) Then Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCGeneralError"))
 
@@ -2381,6 +2550,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _eff, _F, _Q, _P, _HF As Double()
         Dim _fc()(), _maxF As Double
         Public _pp As PropertyPackages.PropertyPackage
+        Public _ppr As PropertyPackages.RaoultPropertyPackage
         Dim _coltype As Column.ColType
         Dim _specs As Dictionary(Of String, SepOps.ColumnSpec)
         Dim _bx, _dbx As Double()
@@ -2390,6 +2560,8 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
         Dim _maxT, _maxvc, _maxlc As Double
 
         Private grad As Boolean = False
+
+        Private ik, ih As Boolean
 
         Private Function GetSolver(solver As OptimizationMethod) As SwarmOps.Optimizer
 
@@ -2542,10 +2714,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                 Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                          Sub(ipar)
                                                              Dim tmp0 As Object
-                                                             If llextr Then
-                                                                 tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                             If ik Then
+                                                                 If llextr Then
+                                                                     tmp0 = _ppr.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                                 Else
+                                                                     tmp0 = _ppr.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                 End If
                                                              Else
-                                                                 tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                 If llextr Then
+                                                                     tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar), "LL")
+                                                                 Else
+                                                                     tmp0 = _pp.DW_CalcKvalue(xc(ipar), yc(ipar), Tj(ipar), P(ipar))
+                                                                 End If
                                                              End If
                                                              Dim jj As Integer
                                                              For jj = 0 To nc - 1
@@ -2560,10 +2740,18 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Else
                 Dim tmp0 As Object
                 For i = 0 To ns
-                    If llextr Then
-                        tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                    If ik Then
+                        If llextr Then
+                            tmp0 = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        Else
+                            tmp0 = _ppr.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
                     Else
-                        tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        If llextr Then
+                            tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i), "LL")
+                        Else
+                            tmp0 = _pp.DW_CalcKvalue(xc(i), yc(i), Tj(i), P(i))
+                        End If
                     End If
                     For j = 0 To nc - 1
                         Kval(i)(j) = tmp0(j)
@@ -2580,19 +2768,31 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
                 Dim task1 As Task = Task.Factory.StartNew(Sub() Parallel.For(0, ns + 1, poptions,
                                                          Sub(ipar)
-                                                             If Vj(ipar) <> 0# Then
-                                                                 If llextr Then
-                                                                     Hv(ipar) = _pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(ipar)) / 1000
+                                                             If Vj(ipar) <> 0.0# Then
+                                                                 If ih Then
+                                                                     If llextr Then
+                                                                         Hv(ipar) = _ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                     Else
+                                                                         Hv(ipar) = _ppr.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * _ppr.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
                                                                  Else
-                                                                     Hv(ipar) = _pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * _pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     If llextr Then
+                                                                         Hv(ipar) = _pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     Else
+                                                                         Hv(ipar) = _pp.DW_CalcEnthalpy(yc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Vapor) * _pp.AUX_MMM(yc(ipar)) / 1000
+                                                                     End If
                                                                  End If
                                                              Else
-                                                                 Hv(ipar) = 0#
+                                                                 Hv(ipar) = 0.0#
                                                              End If
                                                              If Lj(ipar) <> 0 Then
-                                                                 Hl(ipar) = _pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _pp.AUX_MMM(xc(ipar)) / 1000
+                                                                 If ih Then
+                                                                     Hl(ipar) = _ppr.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _ppr.AUX_MMM(xc(ipar)) / 1000
+                                                                 Else
+                                                                     Hl(ipar) = _pp.DW_CalcEnthalpy(xc(ipar), Tj(ipar), P(ipar), PropertyPackages.State.Liquid) * _pp.AUX_MMM(xc(ipar)) / 1000
+                                                                 End If
                                                              Else
-                                                                 Hl(ipar) = 0#
+                                                                 Hl(ipar) = 0.0#
                                                              End If
                                                          End Sub),
                                                       Settings.TaskCancellationTokenSource.Token,
@@ -2603,16 +2803,28 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Else
                 For i = 0 To ns
                     If Vj(i) <> 0 Then
-                        If llextr Then
-                            Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(i)) / 1000
+                        If ih Then
+                            If llextr Then
+                                Hv(i) = _ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _ppr.AUX_MMM(yc(i)) / 1000
+                            Else
+                                Hv(i) = _ppr.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * _ppr.AUX_MMM(yc(i)) / 1000
+                            End If
                         Else
-                            Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * _pp.AUX_MMM(yc(i)) / 1000
+                            If llextr Then
+                                Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(yc(i)) / 1000
+                            Else
+                                Hv(i) = _pp.DW_CalcEnthalpy(yc(i), Tj(i), P(i), PropertyPackages.State.Vapor) * _pp.AUX_MMM(yc(i)) / 1000
+                            End If
                         End If
                     Else
                         Hv(i) = 0
                     End If
                     If Lj(i) <> 0 Then
-                        Hl(i) = _pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(xc(i)) / 1000
+                        If ih Then
+                            Hl(i) = _ppr.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _ppr.AUX_MMM(xc(i)) / 1000
+                        Else
+                            Hl(i) = _pp.DW_CalcEnthalpy(xc(i), Tj(i), P(i), PropertyPackages.State.Liquid) * _pp.AUX_MMM(xc(i)) / 1000
+                        End If
                     Else
                         Hl(i) = 0
                     End If
@@ -2852,7 +3064,16 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                                 ByVal Solver As OptimizationMethod,
                                 ByVal LowerBound As Double, ByVal UpperBound As Double,
                                 ByVal SimplexPreconditioning As Boolean,
+                                ByVal IdealK As Boolean, ByVal IdealH As Boolean,
                                 Optional ByVal LLEX As Boolean = False) As Object
+
+            ik = IdealK
+            ih = IdealH
+
+            If ik Or ih Then
+                _ppr = New PropertyPackages.RaoultPropertyPackage
+                _ppr.CurrentMaterialStream = pp.CurrentMaterialStream
+            End If
 
             llextr = LLEX 'liquid-liquid extractor
 
@@ -3124,7 +3345,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             pp.CurrentMaterialStream.Flowsheet.ShowMessage("Naphtali-Sandholm solver: final objective function (error) value = " & il_err, IFlowsheet.MessageType.Information)
 
-            If Abs(il_err) > tol(1) Then
+            If Abs(il_err) > tol(1) And Not IdealK And Not IdealH Then
                 Throw New Exception(pp.CurrentMaterialStream.Flowsheet.GetTranslatedString("DCErrorStillHigh"))
             End If
 

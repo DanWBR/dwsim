@@ -1406,6 +1406,13 @@ Namespace UnitOperations
             RefluxedAbsorber = 3
         End Enum
 
+        Public Enum SolvingScheme
+            Ideal_K_Init = 0
+            Ideal_Enthalpy_Init = 1
+            Ideal_K_and_Enthalpy_Init = 2
+            Direct = 3
+        End Enum
+
         'column type
         Private _type As ColType = Column.ColType.DistillationColumn
 
@@ -1446,13 +1453,15 @@ Namespace UnitOperations
         'new solver parameters
 
         Public Property NS_Solver As OptimizationMethod = OptimizationMethod.Truncated_Newton
-        Public Property NS_SimplexPreconditioning As Boolean = True
+        Public Property NS_SimplexPreconditioning As Boolean = False
         Public Property NS_LowerBound As Double = 0.0#
         Public Property NS_UpperBound As Double = 2.0#
 
         Public Property IO_Solver As OptimizationMethod = OptimizationMethod.Simplex
         Public Property IO_LowerBound As Double = Log(1.0E-40)
         Public Property IO_UpperBound As Double = Log(5.0#)
+
+        Public Property SolverScheme As SolvingScheme = SolvingScheme.Direct
 
         'general variables
 
@@ -2606,23 +2615,40 @@ Namespace UnitOperations
                 End If
             Next
 
+            Dim idealk0, idealh0 As Boolean
+
+            Select Case SolverScheme
+                Case SolvingScheme.Direct
+                    idealk0 = False
+                    idealh0 = False
+                Case SolvingScheme.Ideal_K_Init
+                    idealk0 = True
+                    idealh0 = False
+                Case SolvingScheme.Ideal_Enthalpy_Init
+                    idealk0 = False
+                    idealh0 = True
+                Case SolvingScheme.Ideal_K_and_Enthalpy_Init
+                    idealk0 = True
+                    idealh0 = True
+            End Select
+
             Dim result As Object
 
             Select Case Me.SolvingMethod
                 Case 2 'IO 
                     Dim rm As New SolvingMethods.RussellMethod
-                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, llextractor)
+                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, idealk0, idealh0, llextractor)
                     ic = result(9)
                     ec = result(11)
                 Case 0 'BP
-                    result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs)
+                    result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs, idealk0, idealh0)
                     ic = result(9)
                 Case 3 'SR
-                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, llextractor)
+                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
                     ic = result(9)
                 Case 1 'SC
                     Dim scm As New SolvingMethods.NaphtaliSandholmMethod
-                    result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, llextractor)
+                    result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, idealk0, idealh0, llextractor)
                     ec = result(11)
                 Case Else
                     result = Nothing
@@ -2640,16 +2666,20 @@ Namespace UnitOperations
             For i = 0 To ns
                 yf.Add(result(5)(i))
                 xf.Add(result(6)(i))
+                x(i) = result(5)(i)
+                y(i) = result(6)(i)
                 If Me.SolvingMethod = SolvingMethods.ColSolvingMethod.Russell_InsideOut Or _
                    Me.SolvingMethod = SolvingMethods.ColSolvingMethod.NaphtaliSandholm_SimultaneousCorrection Then
                     Dim obj(nc - 1) As Double
                     For j = 0 To nc - 1
                         obj(j) = result(7)(i, j)
                     Next
+                    Kval(i) = obj
                     Kf.Add(obj)
                     Me.JacobianMatrix = result(13)
                 Else
                     Kf.Add(result(7)(i))
+                    Kval(i) = result(7)(i)
                 End If
             Next
             Tf = result(0)
@@ -2658,6 +2688,29 @@ Namespace UnitOperations
             VSSf = result(3)
             LSSf = result(4)
             Q = result(8)
+
+            If SolverScheme <> SolvingScheme.Direct Then
+                're-run solver using refined initial estimates from last run with ideal properties
+                Select Case Me.SolvingMethod
+                    Case 2 'IO 
+                        Dim rm As New SolvingMethods.RussellMethod
+                        result = rm.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, Tf, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, False, False, llextractor)
+                        ic = result(9)
+                        ec = result(11)
+                    Case 0 'BP
+                        result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs, False, False)
+                        ic = result(9)
+                    Case 3 'SR
+                        result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, False, False, llextractor)
+                        ic = result(9)
+                    Case 1 'SC
+                        Dim scm As New SolvingMethods.NaphtaliSandholmMethod
+                        result = scm.Solve(nc, ns, maxits, tol, F, Vf, Q, Lf, VSSf, LSSf, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, False, False, llextractor)
+                        ec = result(11)
+                    Case Else
+                        result = Nothing
+                End Select
+            End If
 
             'if enabled, auto update initial estimates
 
@@ -2696,10 +2749,12 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.Distillate
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .Phases(0).Properties.massflow = LSSf(0) * pp.AUX_MMM(xf(0)) / 1000
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0) - Me.CondenserDeltaP
+                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(0), Tf(0), P(0), PropertyPackages.State.Liquid)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = xf(0)(i)
@@ -2714,9 +2769,11 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.OverheadVapor
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
+                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(0), Tf(0), P(0), PropertyPackages.State.Vapor)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = yf(0)(i)
@@ -2731,9 +2788,11 @@ Namespace UnitOperations
                     Case StreamInformation.Behavior.BottomsLiquid
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         With msm
+                            .SpecType = StreamSpec.Pressure_and_Enthalpy
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
+                            .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(ns), Tf(ns), P(ns), PropertyPackages.State.Liquid)
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = xf(ns)(i)
@@ -2750,9 +2809,11 @@ Namespace UnitOperations
                         msm = FlowSheet.SimulationObjects(sinf.StreamID)
                         If sinf.StreamPhase = StreamInformation.Phase.L Then
                             With msm
+                                .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(xf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Liquid)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = xf(sidx)(i)
@@ -2766,9 +2827,11 @@ Namespace UnitOperations
                             End With
                         ElseIf sinf.StreamPhase = StreamInformation.Phase.V Then
                             With msm
+                                .SpecType = StreamSpec.Pressure_and_Enthalpy
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
+                                .Phases(0).Properties.enthalpy = pp.DW_CalcEnthalpy(yf(sidx), Tf(sidx), P(sidx), PropertyPackages.State.Vapor)
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = yf(sidx)(i)

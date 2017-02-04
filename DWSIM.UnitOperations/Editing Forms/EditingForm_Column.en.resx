@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
-  </data>
-  <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 43</value>
-  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
   </data>
@@ -136,32 +130,17 @@
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
-  <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 98</value>
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
-  </data>
-  <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 187</value>
   </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 160</value>
-  </data>
   <data name="btnConfigurePP.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
-  <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 21</value>
-  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Flash Algorithm</value>
-  </data>
-  <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 21</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -169,17 +148,29 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
-  <data name="cbSolvingMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 21</value>
+  <data name="cbSolverScheme.Items" xml:space="preserve">
+    <value>Direct Rigorous</value>
+  </data>
+  <data name="cbSolverScheme.Items1" xml:space="preserve">
+    <value>Ideal K first, then Rigorous</value>
+  </data>
+  <data name="cbSolverScheme.Items2" xml:space="preserve">
+    <value>Ideal H first, then Rigorous</value>
+  </data>
+  <data name="cbSolverScheme.Items3" xml:space="preserve">
+    <value>Ideal K+H first, then Rigorous</value>
+  </data>
+  <data name="Label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 13</value>
+  </data>
+  <data name="Label27.Text" xml:space="preserve">
+    <value>Solving Scheme</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Convergence Tolerance</value>
-  </data>
-  <data name="tbConvTol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 20</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 13</value>
@@ -193,12 +184,6 @@
   <data name="cbAbsorberMode.Items1" xml:space="preserve">
     <value>Liquid-Liquid Extractor</value>
   </data>
-  <data name="cbAbsorberMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 21</value>
-  </data>
-  <data name="tbMaxIt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 20</value>
-  </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 13</value>
   </data>
@@ -211,17 +196,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Number of Stages</value>
   </data>
-  <data name="tbNStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 20</value>
-  </data>
-  <data name="TabGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 218</value>
-  </data>
   <data name="TabGeneral.Text" xml:space="preserve">
     <value>General</value>
-  </data>
-  <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 119</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -292,9 +268,6 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Condenser Pressure</value>
   </data>
-  <data name="TabCondenser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 218</value>
-  </data>
   <data name="TabCondenser.Text" xml:space="preserve">
     <value>Condenser</value>
   </data>
@@ -344,34 +317,22 @@
     <value>Reboiler Pressure</value>
   </data>
   <data name="TabReboiler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 218</value>
+    <value>385, 255</value>
   </data>
   <data name="TabReboiler.Text" xml:space="preserve">
     <value>Reboiler</value>
   </data>
-  <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 244</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 263</value>
-  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Column Specs</value>
-  </data>
-  <data name="TabConnections.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 256</value>
   </data>
   <data name="TabConnections.Text" xml:space="preserve">
     <value>Connections</value>
   </data>
   <data name="TabStages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 256</value>
+    <value>385, 256</value>
   </data>
   <data name="TabStages.Text" xml:space="preserve">
     <value>Stages</value>
-  </data>
-  <data name="InitialEstimatesPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 250</value>
   </data>
   <data name="chkUseIE_C.ToolTip" xml:space="preserve">
     <value>Use initial estimates for stage mixture molar compositions</value>
@@ -398,7 +359,7 @@
     <value>Use initial estimates for stage temperature</value>
   </data>
   <data name="TabInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 256</value>
+    <value>385, 256</value>
   </data>
   <data name="TabInitialEstimates.Text" xml:space="preserve">
     <value>Initial Estimates</value>
@@ -410,10 +371,7 @@
     <value>Stop at Iteration #</value>
   </data>
   <data name="TabSolverBP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 256</value>
-  </data>
-  <data name="cbMinMethodNS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 21</value>
+    <value>385, 256</value>
   </data>
   <data name="Label25.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -440,10 +398,7 @@
     <value>Variable Lower Bound</value>
   </data>
   <data name="TabSolverNS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 256</value>
-  </data>
-  <data name="cbMinMethodIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 21</value>
+    <value>385, 256</value>
   </data>
   <data name="Label26.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -476,23 +431,10 @@
     <value>Adjust Sb Scaling Factor</value>
   </data>
   <data name="TabSolverIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 256</value>
-  </data>
-  <data name="TabControl2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 282</value>
-  </data>
-  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 301</value>
+    <value>385, 256</value>
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Column Configuration</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="btnResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 30</value>
   </data>
   <data name="btnResults.Text" xml:space="preserve">
     <value>View Temperature, Pressure and Composition Profiles</value>
@@ -506,25 +448,10 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 113</value>
-  </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 152</value>
-  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>423, 178</value>
-  </data>
-  <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>429, 197</value>
-  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Results</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>439, 765</value>
   </data>
 </root>
