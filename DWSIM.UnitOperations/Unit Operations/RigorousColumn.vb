@@ -2700,6 +2700,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.molarflow = LSSf(0)
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0) - Me.CondenserDeltaP
+                            .SpecType = StreamSpec.Temperature_and_Pressure
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = xf(0)(i)
@@ -2717,6 +2718,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = Vf(0) * pp.AUX_MMM(yf(0)) / 1000
                             .Phases(0).Properties.temperature = Tf(0)
                             .Phases(0).Properties.pressure = P(0)
+                            .SpecType = StreamSpec.Temperature_and_Pressure
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = yf(0)(i)
@@ -2734,6 +2736,7 @@ Namespace UnitOperations
                             .Phases(0).Properties.massflow = Lf(ns) * pp.AUX_MMM(xf(ns)) / 1000
                             .Phases(0).Properties.temperature = Tf(ns)
                             .Phases(0).Properties.pressure = P(ns)
+                            .SpecType = StreamSpec.Temperature_and_Pressure
                             i = 0
                             For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                 subst.MoleFraction = xf(ns)(i)
@@ -2753,6 +2756,7 @@ Namespace UnitOperations
                                 .Phases(0).Properties.massflow = LSSf(sidx) * pp.AUX_MMM(xf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
+                                .SpecType = StreamSpec.Temperature_and_Pressure
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = xf(sidx)(i)
@@ -2769,6 +2773,7 @@ Namespace UnitOperations
                                 .Phases(0).Properties.massflow = VSSf(sidx) * pp.AUX_MMM(yf(sidx)) / 1000
                                 .Phases(0).Properties.temperature = Tf(sidx)
                                 .Phases(0).Properties.pressure = P(sidx)
+                                .SpecType = StreamSpec.Temperature_and_Pressure
                                 i = 0
                                 For Each subst As BaseClasses.Compound In .Phases(0).Compounds.Values
                                     subst.MoleFraction = yf(sidx)(i)
