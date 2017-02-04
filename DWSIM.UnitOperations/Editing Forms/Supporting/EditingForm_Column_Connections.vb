@@ -413,12 +413,14 @@ Public Class EditingForm_Column_Connections
         Dim id As String = dgv2.Rows(dgv2.SelectedCells(0).RowIndex).Cells(5).Value
         Dim sid As String = dc.MaterialStreams(id).StreamID
         With Me.dgv2.Rows
-            If Not id = "" Then
-                Dim idx As Integer = form.SimulationObjects(sid).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
-                 'dc.GraphicObject.OutputConnectors.RemoveAt(idx)
-                dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
-                dc.GraphicObject.OutputConnectors(idx).IsAttached = False
-                form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
+            If Not id = "" And Not sid = "" Then
+                Dim obj = form.SimulationObjects(sid).GraphicObject
+                If Not obj Is Nothing Then
+                    Dim idx As Integer = form.SimulationObjects(sid).GraphicObject.InputConnectors(0).AttachedConnector.AttachedFromConnectorIndex
+                    dc.GraphicObject.OutputConnectors(idx).AttachedConnector = Nothing
+                    dc.GraphicObject.OutputConnectors(idx).IsAttached = False
+                    form.DisconnectObjects(dc.GraphicObject, form.SimulationObjects(sid).GraphicObject)
+                End If
             End If
             If dc.MaterialStreams.ContainsKey(id) Then dc.MaterialStreams.Remove(id)
             .RemoveAt(dgv2.SelectedCells(0).RowIndex)
