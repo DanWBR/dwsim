@@ -3099,7 +3099,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
             Dim Lj(ns), Vj(ns), xc(ns)(), yc(ns)(), lc(ns)(), vc(ns)(), zc(ns)() As Double
             Dim Tj0(ns), lc0(ns)(), vc0(ns)(), Kval0(ns)() As Double
             Dim i, j As Integer
-            Dim BuildingJacobian As Boolean = False
 
             For i = 0 To ns
                 Array.Resize(xc(i), nc)
