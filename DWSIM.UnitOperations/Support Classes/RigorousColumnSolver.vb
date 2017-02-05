@@ -655,7 +655,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
         Public Function FunctionGradient(ByVal x() As Double) As Double()
 
-            Dim epsilon As Double = Math.Pow(2, -30)
+            Dim epsilon As Double = ndeps
 
             Dim f1, f2 As Double
             Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
@@ -3023,7 +3023,7 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
 
             grad = True
 
-            Dim epsilon As Double = Math.Pow(2, -30)
+            Dim epsilon As Double = ndeps
 
             Dim f1, f2 As Double
             Dim g(x.Length - 1), x1(x.Length - 1), x2(x.Length - 1) As Double
@@ -3389,6 +3389,21 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     K(i, j) = _Kval(i)(j)
                 Next
             Next
+
+            sumLSS = 0.0#
+            sumVSS = 0.0#
+            For i = 0 To ns
+                sumVSS += VSSj(i)
+            Next
+            For i = 1 To ns
+                sumLSS += LSSj(i)
+            Next
+            If condt = Column.condtype.Full_Reflux Then
+                Vj(0) = 1.0# - Lj(ns) - sumLSS - sumVSS
+                LSSj(0) = 0.0#
+            Else
+                LSSj(0) = 1.0# - Lj(ns) - sumLSS - sumVSS - Vj(0)
+            End If
 
             For i = 0 To ns
                 If Vj(i) <> 0 Then Sv(i) = VSSj(i) / Vj(i) Else Sv(i) = 0

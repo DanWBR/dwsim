@@ -111,7 +111,7 @@ Public Class EditingForm_Column
             If TypeOf SimObject Is AbsorptionColumn Then cbAbsorberMode.SelectedIndex = DirectCast(SimObject, AbsorptionColumn).OperationMode Else cbAbsorberMode.Enabled = False
             cbSolvingMethod.SelectedIndex = .SolvingMethod
             tbMaxIt.Text = .MaxIterations
-            tbConvTol.Text = .ExternalLoopTolerance
+            tbConvTol.Text = .ExternalLoopTolerance.ToString("R")
 
             Select Case SimObject.SolverScheme
                 Case SolvingScheme.Ideal_K_Init
@@ -200,7 +200,7 @@ Public Class EditingForm_Column
                     cbRebComp.Enabled = False
             End Select
             cbRebSpecUnits.Items.Clear()
-            cbRebSpecUnits.Items.AddRange(cunits)
+            cbRebSpecUnits.Items.AddRange(runits)
             cbRebSpecUnits.SelectedItem = .Specs("R").SpecUnit
             tbRebSpecValue.Text = .Specs("R").SpecValue.ToString(nf)
 
@@ -225,12 +225,16 @@ Public Class EditingForm_Column
             cbMinMethodNS.SelectedIndex = .NS_Solver
             cbNSPreconditioning.Checked = .NS_SimplexPreconditioning
 
+            tb_NS_NumDeriv.Text = .SC_NumericalDerivativeStep.ToString("R")
+
             tb_IO_LowerBound.Text = .IO_LowerBound.ToString(nf)
             tb_IO_UpperBound.Text = .IO_UpperBound.ToString(nf)
             cbMinMethodIO.SelectedIndex = .IO_Solver
             chkIOAdjustSb.Checked = .AdjustSb
             chkIOAverageKb.Checked = .KbjWeightedAverage
-            
+
+            tb_IO_NumDeriv.Text = .IO_NumericalDerivativeStep.ToString("R")
+
             'tabs
 
             TabStages.Controls.Clear()
@@ -761,11 +765,9 @@ Public Class EditingForm_Column
         SimObject.NS_SimplexPreconditioning = cbNSPreconditioning.Checked
     End Sub
 
-
-
     Private Sub tbNStages_TextChanged(sender As Object, e As EventArgs) Handles tbNStages.TextChanged, tb_IO_LowerBound.TextChanged, tb_IO_UpperBound.TextChanged, tb_NS_LowerBound.TextChanged, tb_NS_UpperBound.TextChanged,
                                                                                 tbBPStopAtIter.TextChanged, tbCondPDrop.TextChanged, tbCondPressure.TextChanged, tbCondSpec.TextChanged, tbCondVapFlow.TextChanged,
-                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged
+                                                                                tbConvTol.TextChanged, tbMaxIt.TextChanged, tbNStages.TextChanged, tbRebPressure.TextChanged, tbRebSpecValue.TextChanged, tb_IO_NumDeriv.TextChanged, tb_NS_NumDeriv.TextChanged
         Dim tbox = DirectCast(sender, TextBox)
 
         If Loaded Then
@@ -787,6 +789,18 @@ Public Class EditingForm_Column
             Case 3
                 SimObject.SolverScheme = SolvingScheme.Ideal_K_and_Enthalpy_Init
         End Select
+    End Sub
+
+    Private Sub tb_IO_NumDeriv_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_IO_NumDeriv.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.IO_NumericalDerivativeStep = tb_IO_NumDeriv.Text
+        End If
+    End Sub
+
+    Private Sub tb_NS_NumDeriv_KeyDown(sender As Object, e As KeyEventArgs) Handles tb_NS_NumDeriv.KeyDown
+        If Loaded And e.KeyCode = Keys.Enter Then
+            SimObject.SC_NumericalDerivativeStep = tb_NS_NumDeriv.Text
+        End If
     End Sub
 
 End Class
