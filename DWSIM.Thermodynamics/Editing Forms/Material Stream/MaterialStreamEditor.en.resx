@@ -133,7 +133,7 @@
     <value />
   </data>
   <data name="chkActive.ToolTip1" xml:space="preserve">
-    <value />
+    <value>Activate/Deactivate</value>
   </data>
   <data name="lblConnectedTo.ToolTip" xml:space="preserve">
     <value />
@@ -733,9 +733,6 @@
   <data name="UtilitiesCtxMenu.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
-  </data>
   <data name="rtbAnnotations.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -751,17 +748,11 @@
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
-  <data name="gridPropertiesMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
-  </data>
   <data name="gridPropertiesMixture.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridPropertiesMixture.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="tabPropsMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 523</value>
   </data>
   <data name="tabPropsMix.Text" xml:space="preserve">
     <value>Mixture</value>
@@ -781,11 +772,17 @@
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridPropertiesVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
+  </data>
   <data name="gridPropertiesVapor.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridPropertiesVapor.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabPropsVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
   </data>
   <data name="tabPropsVapor.Text" xml:space="preserve">
     <value>Vapor</value>
@@ -805,11 +802,17 @@
   <data name="DataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridPropertiesLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
+  </data>
   <data name="gridPropertiesLiqMix.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridPropertiesLiqMix.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabPropsLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
   </data>
   <data name="tabPropsLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
@@ -829,11 +832,17 @@
   <data name="DataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridPropertiesLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
+  </data>
   <data name="gridPropertiesLiq1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridPropertiesLiq1.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabPropsLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
   </data>
   <data name="tabPropsLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
@@ -853,11 +862,17 @@
   <data name="DataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridPropertiesLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
+  </data>
   <data name="gridPropertiesLiq2.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridPropertiesLiq2.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabPropsLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
   </data>
   <data name="tabPropsLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
@@ -877,11 +892,17 @@
   <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="gridPropertiesSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
+  </data>
   <data name="gridPropertiesSolid.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridPropertiesSolid.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabPropsSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 523</value>
   </data>
   <data name="tabPropsSolid.Text" xml:space="preserve">
     <value>Solid</value>
@@ -892,17 +913,11 @@
   <data name="tabPropsSolid.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
-  </data>
   <data name="TabPhaseProps.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="TabPhaseProps.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="lblAmountTotal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 15</value>
   </data>
   <data name="lblAmountTotal.ToolTip" xml:space="preserve">
     <value />
@@ -931,9 +946,6 @@
   <data name="cbCalculatedAmountsBasis.Items6" xml:space="preserve">
     <value>Molalities</value>
   </data>
-  <data name="cbCalculatedAmountsBasis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 21</value>
-  </data>
   <data name="cbCalculatedAmountsBasis.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -958,17 +970,11 @@
   <data name="DataGridViewTextBoxColumn19.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
-  <data name="gridCompMixture.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
-  </data>
   <data name="gridCompMixture.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompMixture.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="tabCompMix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 444</value>
   </data>
   <data name="tabCompMix.Text" xml:space="preserve">
     <value>Mixture</value>
@@ -985,11 +991,17 @@
   <data name="DataGridViewTextBoxColumn21.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="gridCompVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
+  </data>
   <data name="gridCompVapor.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompVapor.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabCompVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
   </data>
   <data name="tabCompVapor.Text" xml:space="preserve">
     <value>Vapor</value>
@@ -1006,11 +1018,17 @@
   <data name="DataGridViewTextBoxColumn23.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="gridCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
+  </data>
   <data name="gridCompLiqMix.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompLiqMix.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabCompLiqMix.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
   </data>
   <data name="tabCompLiqMix.Text" xml:space="preserve">
     <value>Overall Liquid</value>
@@ -1027,11 +1045,17 @@
   <data name="DataGridViewTextBoxColumn25.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="gridCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
+  </data>
   <data name="gridCompLiq1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompLiq1.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabCompLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
   </data>
   <data name="tabCompLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
@@ -1048,11 +1072,17 @@
   <data name="DataGridViewTextBoxColumn27.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="gridCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
+  </data>
   <data name="gridCompLiq2.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompLiq2.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabCompLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
   </data>
   <data name="tabCompLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
@@ -1069,11 +1099,17 @@
   <data name="DataGridViewTextBoxColumn29.HeaderText" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="gridCompSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
+  </data>
   <data name="gridCompSolid.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompSolid.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="tabCompSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 444</value>
   </data>
   <data name="tabCompSolid.Text" xml:space="preserve">
     <value>Solid</value>
@@ -1083,9 +1119,6 @@
   </data>
   <data name="tabCompSolid.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="TabPhaseComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>321, 470</value>
   </data>
   <data name="TabPhaseComps.ToolTip" xml:space="preserve">
     <value />
@@ -1102,9 +1135,6 @@
   <data name="TabPageInput.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 517</value>
-  </data>
   <data name="TabPage1.Text" xml:space="preserve">
     <value>Amounts</value>
   </data>
@@ -1113,6 +1143,9 @@
   </data>
   <data name="TabPage1.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="lblCompPropUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>208, 15</value>
   </data>
   <data name="lblCompPropUnits.ToolTip" xml:space="preserve">
     <value />
@@ -1138,11 +1171,17 @@
   <data name="DataGridViewTextBoxColumn33.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
+  <data name="gridCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
+  </data>
   <data name="gridCompPropVapor.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompPropVapor.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabCompPropVapor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
   </data>
   <data name="TabCompPropVapor.Text" xml:space="preserve">
     <value>Vapor</value>
@@ -1159,11 +1198,17 @@
   <data name="DataGridViewTextBoxColumn37.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
+  <data name="gridCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
+  </data>
   <data name="gridCompPropLiq1.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompPropLiq1.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabCompPropLiq1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
   </data>
   <data name="TabCompPropLiq1.Text" xml:space="preserve">
     <value>Liquid 1</value>
@@ -1180,11 +1225,17 @@
   <data name="DataGridViewTextBoxColumn39.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
+  <data name="gridCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
+  </data>
   <data name="gridCompPropLiq2.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompPropLiq2.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabCompPropLiq2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
   </data>
   <data name="TabCompPropLiq2.Text" xml:space="preserve">
     <value>Liquid 2</value>
@@ -1201,11 +1252,17 @@
   <data name="DataGridViewTextBoxColumn41.HeaderText" xml:space="preserve">
     <value>Property</value>
   </data>
+  <data name="gridCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
+  </data>
   <data name="gridCompPropSolid.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="gridCompPropSolid.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabCompPropSolid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 447</value>
   </data>
   <data name="TabCompPropSolid.Text" xml:space="preserve">
     <value>Solid</value>
@@ -1215,6 +1272,9 @@
   </data>
   <data name="TabCompPropSolid.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabCompoundPhaseProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 473</value>
   </data>
   <data name="TabCompoundPhaseProps.ToolTip" xml:space="preserve">
     <value />
@@ -1240,11 +1300,17 @@
   <data name="cbCompoundPhaseProperties.Items5" xml:space="preserve">
     <value>Infinite Dilution Diffusion Coefficients</value>
   </data>
+  <data name="cbCompoundPhaseProperties.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
   <data name="cbCompoundPhaseProperties.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="cbCompoundPhaseProperties.ToolTip1" xml:space="preserve">
     <value />
+  </data>
+  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>323, 517</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Properties</value>
@@ -1255,17 +1321,11 @@
   <data name="TabPage2.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="TabControlCompound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 543</value>
-  </data>
   <data name="TabControlCompound.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="TabControlCompound.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="TabPageResultsComp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
   </data>
   <data name="TabPageResultsComp.Text" xml:space="preserve">
     <value>Compounds</value>
@@ -1276,9 +1336,6 @@
   <data name="TabPageResultsComp.ToolTip1" xml:space="preserve">
     <value />
   </data>
-  <data name="TabPageResultsProps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
-  </data>
   <data name="TabPageResultsProps.Text" xml:space="preserve">
     <value>Phase Properties</value>
   </data>
@@ -1287,9 +1344,6 @@
   </data>
   <data name="TabPageResultsProps.ToolTip1" xml:space="preserve">
     <value />
-  </data>
-  <data name="TabPageAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>337, 549</value>
   </data>
   <data name="TabPageAnnotations.Text" xml:space="preserve">
     <value>Annotations</value>
