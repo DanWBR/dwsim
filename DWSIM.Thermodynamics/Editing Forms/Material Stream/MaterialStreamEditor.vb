@@ -15,6 +15,7 @@ Public Class MaterialStreamEditor
     Dim units As SharedClasses.SystemsOfUnits.Units
     Dim nf, nff As String
 
+    Private committing As Boolean = False
 
     Private Sub MaterialStreamEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -605,7 +606,7 @@ Public Class MaterialStreamEditor
         For Each row As DataGridViewRow In gridInputComposition.Rows
             row.Cells(1).Value = row.Cells(1).Value / total
         Next
-        ShowUncommittedChangesWarning(btnNormalizeInput)
+        If Not committing Then ShowUncommittedChangesWarning(btnNormalizeInput)
     End Sub
 
     Private Sub btnEqualizeInput_Click(sender As Object, e As EventArgs) Handles btnEqualizeInput.Click
@@ -625,6 +626,7 @@ Public Class MaterialStreamEditor
 
     Private Sub btnCompAcceptChanges_Click(sender As Object, e As EventArgs) Handles btnCompAcceptChanges.Click
 
+
         Dim W, Q As Double
 
         MatStream.PropertyPackage.CurrentMaterialStream = MatStream
@@ -638,7 +640,9 @@ Public Class MaterialStreamEditor
 
                 Case 0
 
+                    committing = True
                     btnNormalizeInput_Click(sender, e)
+                    committing = False
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         MatStream.Phases(0).Compounds(row.Cells(0).Value).MoleFraction = row.Cells(1).Value
                     Next
@@ -651,7 +655,9 @@ Public Class MaterialStreamEditor
 
                 Case 1
 
+                    committing = True
                     btnNormalizeInput_Click(sender, e)
+                    committing = False
                     For Each row As DataGridViewRow In Me.gridInputComposition.Rows
                         MatStream.Phases(0).Compounds(row.Cells(0).Value).MassFraction = row.Cells(1).Value
                     Next
