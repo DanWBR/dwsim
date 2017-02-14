@@ -504,8 +504,7 @@ namespace ZedGraph
 		/// Bitmap file.
 		/// </summary>
 		/// <remarks>
-		/// Note that this handler saves as a bitmap only.  The default handler is
-		/// <see cref="SaveAs()" />, which allows for Bitmap or EMF formats
+		/// Note that this handler saves as a bitmap only.
 		/// </remarks>
 		public void SaveAsBitmap(int scale)
 		{
@@ -546,8 +545,7 @@ namespace ZedGraph
 		/// Emf format file.
 		/// </summary>
 		/// <remarks>
-		/// Note that this handler saves as an Emf format only.  The default handler is
-		/// <see cref="SaveAs()" />, which allows for Bitmap or EMF formats.
+		/// Note that this handler saves as an Emf format only.
 		/// </remarks>
 		public void SaveAsEmf()
 		{
@@ -573,8 +571,7 @@ namespace ZedGraph
 		/// See <see cref="SaveAsEmf()" /> for public access.
 		/// </summary>
 		/// <remarks>
-		/// Note that this handler saves as an Emf format only.  The default handler is
-		/// <see cref="SaveAs()" />, which allows for Bitmap or EMF formats.
+		/// Note that this handler saves as an Emf format only.
 		/// </remarks>
 		internal void SaveEmfFile( string fileName )
 		{

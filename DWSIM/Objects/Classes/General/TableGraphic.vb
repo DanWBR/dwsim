@@ -1335,6 +1335,98 @@ Namespace GraphicObjects
 
 #End Region
 
+        Public Sub UpdateSize(ByVal g As System.Drawing.Graphics)
+
+            Dim maxL1, maxL2, maxL3, count As Integer
+            Dim maxH As Integer
+
+            Me.HeaderFont = New Font("Arial", 11 / Me.AdditionalInfo, FontStyle.Regular, GraphicsUnit.Pixel, 0, False)
+
+            g.TextRenderingHint = Text.TextRenderingHint.SystemDefault
+
+            'determinar comprimento das colunas e altura das linhas
+
+            maxL1 = 0
+            maxL2 = 0
+            maxL3 = 0
+            maxH = 0
+            count = 1
+
+            Dim size, size2 As SizeF
+
+            size = g.MeasureString(Me.Owner.GraphicObject.Tag.ToUpper, New Font(Me.HeaderFont, FontStyle.Bold))
+            If size.Width > maxL1 Then maxL1 = size.Width
+            If size.Height > maxH Then maxH = size.Height
+
+            Dim fs = Owner.GetFlowsheet
+            Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
+
+            If TypeOf Owner Is CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
+
+            Dim propstoremove As New List(Of String)
+
+            If TypeOf Owner Is Streams.MaterialStream Then
+                For Each p In props
+                    If Owner.GetPropertyValue(p).Equals(Double.MinValue) Then
+                        propstoremove.Add(p)
+                    End If
+                Next
+                For i As Integer = 0 To propstoremove.Count - 1
+                    props.Remove(propstoremove(i))
+                Next
+            End If
+
+            Dim propstring, propval, propunit As String, pval0 As Object
+
+            For Each prop In props
+                propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
+                pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                If pval0 Is Nothing Then Exit For
+                If TypeOf pval0 Is Double Then
+                    propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
+                Else
+                    propval = pval0.ToString
+                End If
+                propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                size = g.MeasureString(propstring, New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                If size.Width > maxL1 Then maxL1 = size.Width
+                If size.Height > maxH Then maxH = size.Height
+                size = g.MeasureString(propval, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.DirectionRightToLeft, 0))
+                If size.Width > maxL2 Then maxL2 = size.Width
+                If size.Height > maxH Then maxH = size.Height
+                size = g.MeasureString(propunit, New Font(Me.HeaderFont, FontStyle.Bold), New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+                If size.Width > maxL3 Then maxL3 = size.Width
+                If size.Height > maxH Then maxH = size.Height
+                count += 1
+            Next
+
+            If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
+
+            If maxH = 0 Then maxH = 20
+
+            Me.Height = (count + 1) * (maxH + 2 * Me.Padding)
+
+            size = g.MeasureString(Me.HeaderText, Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+            size2 = g.MeasureString(DWSIM.App.GetLocalString(Me.Owner.GraphicObject.Description), Me.HeaderFont, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+
+            If size.Width > size2.Width Then
+                If size.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
+                    Me.Width = 2 * Me.Padding + size.Width
+                Else
+                    Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+                End If
+            Else
+                If size2.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
+                    Me.Width = 2 * Me.Padding + size2.Width
+                Else
+                    Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
+                End If
+            End If
+
+            Me.Width += 6
+
+        End Sub
+
         Public Overrides Sub Draw(ByVal g As System.Drawing.Graphics)
 
             If Not Me.Owner Is Nothing Then

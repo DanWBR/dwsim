@@ -923,6 +923,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                         If obj.GraphicObject.Active Then
                             obj.GraphicObject.Calculated = False
                         Else
+                            fgui.ShowMessage(obj.GraphicObject.Tag & ": " & fgui.GetTranslatedString("ObjDeactivated"), IFlowsheet.MessageType.Warning)
                             obj.GraphicObject.Status = Status.Inactive
                         End If
                     End If

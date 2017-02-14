@@ -491,6 +491,7 @@ Public Class FlowsheetSurface
                             tabela.HeaderText = gobj.Tag
                             tabela.AdditionalInfo = Me.FlowsheetDesignSurface.Zoom
                             Me.m_qt = tabela
+                            tabela.UpdateSize(Me.FlowsheetDesignSurface.CreateGraphics)
                             If Not Me.m_qt Is Nothing Then
                                 If FlowsheetDesignSurface.AutoScrollPosition.X + px2.X * FlowsheetDesignSurface.Zoom + m_qt.Width * FlowsheetDesignSurface.Zoom > FlowsheetDesignSurface.ClientRectangle.Width Then
                                     px2.X -= 50 + m_qt.Width / FlowsheetDesignSurface.Zoom
