@@ -36,17 +36,17 @@ Imports DWSIM.SharedClasses.UnitOperations
 Namespace UnitOperations.Auxiliary
 
     <System.Serializable()> Public Class FlowsheetUOParameter
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
         Public Property ID As String = ""
         Public Property ObjectID As String = ""
         Public Property ObjectProperty As String = ""
         'Public Property Value As Object = Nothing
         'Public Property Unit As String = ""
-        Public Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As List(Of XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Return True
         End Function
-        Public Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As List(Of XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
             Return XMLSerializer.XMLSerializer.Serialize(Me)
         End Function
     End Class
@@ -519,7 +519,7 @@ Label_00CC:
                 Try
                     Dim id As String = xel.<Name>.Value
                     Dim obj = form.SimulationObjects(id)
-                    DirectCast(obj, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
+                    DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                     If TypeOf obj Is MaterialStream Then
                         For Each phase As BaseClasses.Phase In DirectCast(obj, MaterialStream).Phases.Values
                             For Each c As ConstantProperties In form.Compounds.Values

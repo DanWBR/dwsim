@@ -27,7 +27,7 @@ Namespace DWSIM.Utilities.Spreadsheet
 
     <System.Serializable()> Public Class SpreadsheetCellParameters
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, Interfaces.ICustomXMLSerialization
 
         Public CellType As VarType = VarType.Expression
         Public RelativeTolerance As Double = 0.01
@@ -63,11 +63,11 @@ Namespace DWSIM.Utilities.Spreadsheet
 
         End Function
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
             If Expression <> "" Then
                 Return XMLSerializer.XMLSerializer.Serialize(Me, True)
             Else

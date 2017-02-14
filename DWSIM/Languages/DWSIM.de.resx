@@ -5402,4 +5402,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DCErrorStillHigh" xml:space="preserve">
     <value>couldn't find a solution within the specified tolerance.</value>
   </data>
+  <data name="ObjActivated" xml:space="preserve">
+    <value>object is active</value>
+  </data>
+  <data name="ObjDeactivated" xml:space="preserve">
+    <value>object is inactive</value>
+  </data>
 </root>

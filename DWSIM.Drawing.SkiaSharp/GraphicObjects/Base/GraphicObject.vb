@@ -3,7 +3,6 @@ Imports System.Linq
 Imports System.Xml.Linq
 Imports DWSIM.Interfaces
 Imports Interfaces = DWSIM.Interfaces
-Imports XMLSerializer.Interfaces
 
 Namespace GraphicObjects
 

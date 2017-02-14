@@ -39,7 +39,7 @@ Namespace UnitOperations.Auxiliary.PumpOps
 
     <System.Serializable()> Public Class Curve
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Protected _x As ArrayList
         Protected _y As ArrayList
@@ -145,13 +145,13 @@ Namespace UnitOperations.Auxiliary.PumpOps
             End Set
         End Property
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 

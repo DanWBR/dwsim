@@ -80,7 +80,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim data As List(Of XElement) = xdoc.Element("DWSIM_Reaction_Data").Elements.ToList
                 For Each xel As XElement In data
                     Dim obj As New BaseClasses.Reaction()
-                    DirectCast(obj, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
+                    DirectCast(obj, Interfaces.ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                     Reactions.Add(obj)
                 Next
             End Using

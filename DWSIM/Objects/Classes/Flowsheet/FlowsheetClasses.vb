@@ -57,7 +57,7 @@ Namespace DWSIM.Flowsheet
 
     <System.Serializable()> Public Class FlowsheetVariables
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Implements Interfaces.IFlowsheetOptions
 
@@ -110,7 +110,7 @@ Namespace DWSIM.Flowsheet
 
         End Sub
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "VisibleProperties").SingleOrDefault
 
@@ -145,7 +145,7 @@ Namespace DWSIM.Flowsheet
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
 
@@ -162,7 +162,7 @@ Namespace DWSIM.Flowsheet
             elements.Add(New XElement("FlashAlgorithms"))
 
             For Each fa In FlashAlgorithms
-                elements(elements.Count - 1).Add(New XElement("FlashAlgorithm", {New XElement("ID", fa.Tag), DirectCast(fa, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+                elements(elements.Count - 1).Add(New XElement("FlashAlgorithm", {New XElement("ID", fa.Tag), DirectCast(fa, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
             Next
 
             Return elements

@@ -116,7 +116,7 @@ Namespace DWSIM.Extras
 
     <System.Serializable()> Public Class WatchItem
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Public ObjID As String = ""
         Public PropID As String = ""
@@ -132,11 +132,11 @@ Namespace DWSIM.Extras
             ROnly = ro
         End Sub
 
-        Public Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As List(Of XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
         End Function
 
-        Public Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As List(Of XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
             Return XMLSerializer.XMLSerializer.Serialize(Me, True)
         End Function
 

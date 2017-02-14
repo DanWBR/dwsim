@@ -1269,7 +1269,7 @@ Namespace UnitOperations.Auxiliary.CapeOpen
 
     <System.Serializable()> Public Class CapeOpenUnitOpInfo
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Public TypeName As String = ""
         Public Version As String = ""
@@ -1282,12 +1282,12 @@ Namespace UnitOperations.Auxiliary.CapeOpen
         Public Name As String = ""
         Public ImplementedCategory As String = ""
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
             Return True
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
             Return XMLSerializer.XMLSerializer.Serialize(Me, True)
         End Function
 

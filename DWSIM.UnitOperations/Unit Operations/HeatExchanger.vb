@@ -1567,7 +1567,7 @@ Namespace UnitOperations.Auxiliary.HeatExchanger
 
     <System.Serializable()> Public Class STHXProperties
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         'number of shells in series, integer
         Public Shell_NumberOfShellsInSeries As Integer = 1
@@ -1620,14 +1620,14 @@ Namespace UnitOperations.Auxiliary.HeatExchanger
         'Reynold numbers, only as calculation results
         Public ReT, ReS As Double
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
             Return True
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me, True)
 

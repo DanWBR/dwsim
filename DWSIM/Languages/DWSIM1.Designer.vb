@@ -9937,6 +9937,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to objeto está ativo.
+        '''</summary>
+        Friend Shared ReadOnly Property ObjActivated() As String
+            Get
+                Return ResourceManager.GetString("ObjActivated", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to objeto está inativo.
+        '''</summary>
+        Friend Shared ReadOnly Property ObjDeactivated() As String
+            Get
+                Return ResourceManager.GetString("ObjDeactivated", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Objeto.
         '''</summary>
         Friend Shared ReadOnly Property Objeto() As String

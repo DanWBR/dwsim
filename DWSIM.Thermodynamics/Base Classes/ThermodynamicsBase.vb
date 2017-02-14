@@ -32,7 +32,7 @@ Namespace BaseClasses
 
     <System.Serializable()> Public Class Compound
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization, CapeOpen.ICapeIdentification, Interfaces.ICompound
+        Implements Interfaces.ICustomXMLSerialization, CapeOpen.ICapeIdentification, Interfaces.ICompound
 
         Public Sub New(ByVal name As String, ByVal description As String)
 
@@ -42,11 +42,11 @@ Namespace BaseClasses
 
         End Sub
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 
@@ -95,7 +95,7 @@ Namespace BaseClasses
 
     <System.Serializable()> Public Class Phase
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Implements Interfaces.IPhase
 
@@ -109,7 +109,7 @@ Namespace BaseClasses
 
         End Sub
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
@@ -131,7 +131,7 @@ Namespace BaseClasses
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As New List(Of System.Xml.Linq.XElement)
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
@@ -141,7 +141,7 @@ Namespace BaseClasses
                 .Add(New XElement("Compounds"))
 
                 For Each kvp As KeyValuePair(Of String, Interfaces.ICompound) In Me.Compounds
-                    elements(elements.Count - 1).Add(New XElement("Compound", DirectCast(kvp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
+                    elements(elements.Count - 1).Add(New XElement("Compound", DirectCast(kvp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
                 Next
 
                 Dim props As PropertyInfo() = Me.GetType.GetProperties()
@@ -182,7 +182,7 @@ Namespace BaseClasses
     <System.Serializable()> <XmlRoot(ElementName:="Reaction")> _
     Public Class Reaction
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, Interfaces.ICustomXMLSerialization
 
         Implements Interfaces.IReaction
 
@@ -277,7 +277,7 @@ Namespace BaseClasses
 
 #End Region
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
@@ -288,7 +288,7 @@ Namespace BaseClasses
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
@@ -380,7 +380,7 @@ Namespace BaseClasses
 
     <Runtime.InteropServices.ComVisible(False)> <System.Serializable()> Public Class ReactionSet
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, Interfaces.ICustomXMLSerialization
 
         'CAPE-OPEN Reaction Package Interfaces
         Implements CapeOpen.ICapeIdentification
@@ -979,7 +979,7 @@ Namespace BaseClasses
 
 #End Region
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Me.ID = (From xel As XElement In data Select xel Where xel.Name = "ID").SingleOrDefault.Value
             Me.Name = (From xel As XElement In data Select xel Where xel.Name = "Name").SingleOrDefault.Value
@@ -991,7 +991,7 @@ Namespace BaseClasses
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As New List(Of System.Xml.Linq.XElement)
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
@@ -1193,7 +1193,7 @@ Namespace BaseClasses
 
     <System.Serializable()> Public Class InteractionParameter
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, Interfaces.ICustomXMLSerialization
         Public Comp1 As String = ""
         Public Comp2 As String = ""
         Public Model As String = ""
@@ -1225,14 +1225,14 @@ Namespace BaseClasses
 
         End Function
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
             Return True
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me, True)
             Dim ci As CultureInfo = CultureInfo.InvariantCulture
@@ -1245,7 +1245,7 @@ Namespace BaseClasses
 
     <System.Serializable()> Public Class ConstantProperties
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization, Interfaces.ICompoundConstantProperties
+        Implements ICloneable, Interfaces.ICustomXMLSerialization, Interfaces.ICompoundConstantProperties
 
         Public Sub New()
 
@@ -1272,7 +1272,7 @@ Namespace BaseClasses
 
         End Function
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
@@ -1312,7 +1312,7 @@ Namespace BaseClasses
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim xelements As List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As CultureInfo = CultureInfo.InvariantCulture

@@ -97,7 +97,7 @@ Namespace Streams
                 .Add(New XElement("PropertyPackage", ppid))
                 .Add(New XElement("Phases"))
                 For Each kvp As KeyValuePair(Of Integer, IPhase) In m_Phases
-                    .Item(.Count - 1).Add(New XElement("Phase", {New XElement("ID", kvp.Key), DirectCast(kvp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+                    .Item(.Count - 1).Add(New XElement("Phase", {New XElement("ID", kvp.Key), DirectCast(kvp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
                 Next
             End With
 

@@ -34,7 +34,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
     <System.Serializable()> Public Class Parameter
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Enum ParameterType
             Fixed
@@ -85,14 +85,14 @@ Namespace UnitOperations.Auxiliary.SepOps
             Return Me.Value.ToString
         End Function
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Return True
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 
@@ -102,7 +102,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
     <System.Serializable()> Public Class Stage
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Private _f, _lin, _vin, _lout, _vout, _lss, _vss, _q As New Parameter
         Private _eff As Double = 1.0#
@@ -257,7 +257,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         End Sub
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Dim fields As Reflection.PropertyInfo() = Me.GetType.GetProperties()
@@ -278,7 +278,7 @@ Namespace UnitOperations.Auxiliary.SepOps
             Return True
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
@@ -303,7 +303,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
     <System.Serializable()> Public Class InitialEstimates
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Private _liqcompositions As New List(Of Dictionary(Of String, Parameter))
         Private _vapcompositions As New List(Of Dictionary(Of String, Parameter))
@@ -311,7 +311,7 @@ Namespace UnitOperations.Auxiliary.SepOps
         Private _liqmolflows As New List(Of Parameter)
         Private _vapmolflows As New List(Of Parameter)
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "LiquidCompositions").SingleOrDefault.Elements.ToList
                 Dim var As New Dictionary(Of String, Parameter)
@@ -353,7 +353,7 @@ Namespace UnitOperations.Auxiliary.SepOps
             Return True
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As New List(Of System.Xml.Linq.XElement)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
@@ -435,7 +435,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
     <System.Serializable()> Public Class StreamInformation
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Public Enum Type
             Material = 0
@@ -471,7 +471,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         Public Property StreamID As String = ""
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Dim xel = (From xe In data Select xe Where xe.Name = "Name").SingleOrDefault
 
@@ -484,7 +484,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 
@@ -570,7 +570,7 @@ Namespace UnitOperations.Auxiliary.SepOps
 
     <System.Serializable()> Public Class ColumnSpec
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Public Enum SpecType
             Heat_Duty = 0
@@ -591,13 +591,13 @@ Namespace UnitOperations.Auxiliary.SepOps
         Private m_value As Double = 0.0#
         Private m_unit As String = ""
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 

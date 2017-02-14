@@ -69,6 +69,7 @@
     <Compile Include="IAttachedUtility.vb" />
     <Compile Include="ICompound.vb" />
     <Compile Include="ICompoundConstantProperties.vb" />
+    <Compile Include="ICustomXMLSerialization.vb" />
     <Compile Include="IFlashAlgorithm.vb" />
     <Compile Include="IFlowsheet.vb" />
     <Compile Include="IFlowsheetEvents.vb" />

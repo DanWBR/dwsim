@@ -26,7 +26,7 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Assay
 
     <System.Serializable()> Public Class Assay
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, Interfaces.ICustomXMLSerialization
 
         Private _name As String = ""
         Private _isbulk As Boolean = False
@@ -350,13 +350,13 @@ Namespace DWSIM.Utilities.PetroleumCharacterization.Assay
 
         End Function
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 

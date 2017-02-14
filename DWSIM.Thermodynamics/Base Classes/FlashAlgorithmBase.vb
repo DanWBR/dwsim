@@ -33,7 +33,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
     ''' <remarks></remarks>
     <System.Serializable()> Public MustInherit Class FlashAlgorithm
 
-        Implements Interfaces.IFlashAlgorithm, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.IFlashAlgorithm, Interfaces.ICustomXMLSerialization
 
         Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String) Implements Interfaces.IFlashAlgorithm.FlashSettings
 
@@ -1031,7 +1031,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
 #Region "XML Serialization"
 
-        Public Overridable Function LoadData(data As List(Of XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Overridable Function LoadData(data As List(Of XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Dim el = (From xel As XElement In data Select xel Where xel.Name = "FlashSettings").SingleOrDefault
 
@@ -1050,7 +1050,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Function
 
-        Public Overridable Function SaveData() As List(Of XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Overridable Function SaveData() As List(Of XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
 

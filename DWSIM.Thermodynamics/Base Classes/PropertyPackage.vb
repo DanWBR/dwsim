@@ -129,7 +129,7 @@ Namespace PropertyPackages
         Implements IDisposable
 
         'DWSIM XML support
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         'DWSIM IPropertyPackage
         Implements IPropertyPackage
@@ -9759,7 +9759,7 @@ Final3:
                 Dim xmldoc = XDocument.Parse(myarr(6))
                 Dim fadata As List(Of XElement) = xmldoc.Element("Data").Elements.ToList
                 _FlashAlgorithm = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(fadata.Where(Function(x) x.Name = "Type").FirstOrDefault.Value)
-                DirectCast(_FlashAlgorithm, XMLSerializer.Interfaces.ICustomXMLSerialization).LoadData(fadata)
+                DirectCast(_FlashAlgorithm, Interfaces.ICustomXMLSerialization).LoadData(fadata)
 
                 Select Case Me.ComponentName
                     Case "PC-SAFT"
@@ -9833,7 +9833,7 @@ Final3:
 
                     Dim xdata As New XDocument()
                     xdata.AddFirst(New XElement("Data"))
-                    xdata.Element("Data").Add(DirectCast(FlashBase, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData())
+                    xdata.Element("Data").Add(DirectCast(FlashBase, Interfaces.ICustomXMLSerialization).SaveData())
 
                     .Add(xdata.ToString)
 
@@ -10024,7 +10024,7 @@ Final3:
 
 #Region "   XML data persistence"
 
-        Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
@@ -10322,7 +10322,7 @@ Final3:
 
         End Function
 
-        Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As New System.Collections.Generic.List(Of System.Xml.Linq.XElement)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture

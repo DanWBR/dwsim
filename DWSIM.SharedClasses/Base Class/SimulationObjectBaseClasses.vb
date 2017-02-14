@@ -33,7 +33,7 @@ Namespace UnitOperations
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class BaseClass
 
-        Implements ICloneable, IDisposable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, IDisposable, Interfaces.ICustomXMLSerialization
 
         Implements Interfaces.ISimulationObject
 
@@ -400,7 +400,7 @@ Namespace UnitOperations
         ''' <param name="data"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Overridable Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
@@ -434,7 +434,7 @@ Namespace UnitOperations
         ''' </summary>
         ''' <returns>A List of XML elements containing object data.</returns>
         ''' <remarks></remarks>
-        Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Overridable Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
 

@@ -19,6 +19,7 @@
 Imports System.Globalization
 Imports System.Reflection
 Imports System.Drawing
+Imports DWSIM.Interfaces
 
 Public Class XMLSerializer
 
@@ -51,11 +52,11 @@ Public Class XMLSerializer
                     Next
                     If Not skip Then
                         If obj.GetType.GetProperty(prop.Name) IsNot Nothing Then
-                            If TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Interfaces.ICustomXMLSerialization Then
+                            If TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ICustomXMLSerialization Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As List(Of XElement) = xel.Descendants.ToList()
-                                    DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Interfaces.ICustomXMLSerialization).LoadData(val)
+                                    DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), ICustomXMLSerialization).LoadData(val)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Single Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
@@ -159,11 +160,11 @@ Public Class XMLSerializer
                 Next
                 If Not skip Then
                     If obj.GetType.GetField(prop.Name) IsNot Nothing Then
-                        If TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Interfaces.ICustomXMLSerialization Then
+                        If TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ICustomXMLSerialization Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As List(Of XElement) = xel.Descendants.ToList()
-                                DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Interfaces.ICustomXMLSerialization).LoadData(val)
+                                DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), ICustomXMLSerialization).LoadData(val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Single Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
@@ -275,8 +276,8 @@ Public Class XMLSerializer
                     Next
                     If Not skip Then
                         If prop.CanRead Then
-                            If TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Interfaces.ICustomXMLSerialization Then
-                                .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), Interfaces.ICustomXMLSerialization).SaveData.ToArray()))
+                            If TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ICustomXMLSerialization Then
+                                .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), ICustomXMLSerialization).SaveData.ToArray()))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is ArrayList Then
                                 .Add(New XElement(prop.Name, ArrayToString(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing), ci)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Single Then
@@ -323,8 +324,8 @@ Public Class XMLSerializer
                         End If
                     Next
                     If Not skip Then
-                        If TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Interfaces.ICustomXMLSerialization Then
-                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), Interfaces.ICustomXMLSerialization).SaveData.ToArray()))
+                        If TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ICustomXMLSerialization Then
+                            .Add(New XElement(prop.Name, DirectCast(obj.GetType.GetField(prop.Name).GetValue(obj), ICustomXMLSerialization).SaveData.ToArray()))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is ArrayList Then
                             .Add(New XElement(prop.Name, ArrayToString(obj.GetType.GetField(prop.Name).GetValue(obj), ci)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Single Then

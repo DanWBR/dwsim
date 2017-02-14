@@ -22,7 +22,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
     <System.Serializable()> Public Class PipeProfile
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Protected m_collection As New Generic.SortedDictionary(Of Integer, PipeSection)
         Protected m_status As PipeEditorStatus = PipeEditorStatus.Definir
@@ -49,7 +49,7 @@ Namespace UnitOperations.Auxiliary.Pipe
             End Set
         End Property
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
@@ -71,7 +71,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As New System.Collections.Generic.List(Of System.Xml.Linq.XElement)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
@@ -92,7 +92,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
     <System.Serializable()> Public Class PipeSection
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Protected m_index As Integer
         Protected m_tipo As String = ""
@@ -104,7 +104,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
         Protected m_results As New System.Collections.Generic.List(Of PipeResults)
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
@@ -118,7 +118,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = XMLSerializer.XMLSerializer.Serialize(Me)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
@@ -245,7 +245,7 @@ Namespace UnitOperations.Auxiliary.Pipe
 
     <System.Serializable()> Public Class PipeResults
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Protected m_Pi As Nullable(Of Double)
         Protected m_Ti As Nullable(Of Double)
@@ -554,13 +554,13 @@ Namespace UnitOperations.Auxiliary.Pipe
         Public Property HTC_insulation As Double = 0.0#
         Public Property HTC_external As Double = 0.0#
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
             Return True
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Return XMLSerializer.XMLSerializer.Serialize(Me)
 

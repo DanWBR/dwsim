@@ -1839,14 +1839,14 @@ Public Class FormMain
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets")
 
         For Each pp As KeyValuePair(Of String, Interfaces.IReactionSet) In form.Options.ReactionSets
-            xel.Add(New XElement("ReactionSet", DirectCast(pp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
+            xel.Add(New XElement("ReactionSet", DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Reactions"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions")
 
         For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In form.Options.Reactions
-            xel.Add(New XElement("Reaction", {DirectCast(pp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+            xel.Add(New XElement("Reaction", {DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))
@@ -1977,14 +1977,14 @@ Public Class FormMain
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets")
 
         For Each pp As KeyValuePair(Of String, Interfaces.IReactionSet) In form.Options.ReactionSets
-            xel.Add(New XElement("ReactionSet", DirectCast(pp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
+            xel.Add(New XElement("ReactionSet", DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("Reactions"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("Reactions")
 
         For Each pp As KeyValuePair(Of String, Interfaces.IReaction) In form.Options.Reactions
-            xel.Add(New XElement("Reaction", {DirectCast(pp.Value, XMLSerializer.Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
+            xel.Add(New XElement("Reaction", {DirectCast(pp.Value, Interfaces.ICustomXMLSerialization).SaveData().ToArray()}))
         Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))

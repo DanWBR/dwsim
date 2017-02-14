@@ -29,7 +29,7 @@ Namespace DWSIM.Optimization
 
     <System.Serializable()> Public Class OptimizationCase
 
-        Implements ICloneable, XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements ICloneable, Interfaces.ICustomXMLSerialization
 
         Public name As String = ""
         Public description As String = ""
@@ -96,7 +96,7 @@ Namespace DWSIM.Optimization
 
         End Function
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
 
@@ -108,7 +108,7 @@ Namespace DWSIM.Optimization
 
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
 
             Dim elements As List(Of XElement) = XMLSerializer.XMLSerializer.Serialize(Me, True)
 
@@ -127,7 +127,7 @@ Namespace DWSIM.Optimization
 
     <System.Serializable()> Public Class OPTVariable
 
-        Implements XMLSerializer.Interfaces.ICustomXMLSerialization
+        Implements Interfaces.ICustomXMLSerialization
 
         Public objectID As String = ""
         Public objectTAG As String = ""
@@ -146,11 +146,11 @@ Namespace DWSIM.Optimization
 
         End Sub
 
-        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements XMLSerializer.Interfaces.ICustomXMLSerialization.LoadData
+        Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
         End Function
 
-        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements XMLSerializer.Interfaces.ICustomXMLSerialization.SaveData
+        Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
             Return XMLSerializer.XMLSerializer.Serialize(Me, True)
         End Function
 
