@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.2 Update 1 - February 2017
+Version 4.2 Update 2 - February 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.2 Update 2
+
+- [FIX] Fixed outlet temperature in Gibbs/Equilibrium reactors
+- [FIX] Fixed experimental regression data values not updating when changing units on Compound Creator
+- [FIX] Fixed floating table positioning when close to flowsheet borders
 
 Version 4.2 Update 1
 

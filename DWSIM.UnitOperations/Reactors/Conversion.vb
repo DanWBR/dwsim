@@ -399,10 +399,10 @@ Namespace Reactors
             wl = tmp.GetLiquidPhase1MassFraction
             wv = tmp.GetVaporPhaseMassFraction
             ws = tmp.GetSolidPhaseMassFraction
-            T = tmp.CalculatedTemperature
-            P = tmp.CalculatedPressure
-            H = tmp.CalculatedEnthalpy
-            S = tmp.CalculatedEntropy
+            T = tmp.CalculatedTemperature.GetValueOrDefault
+            P = tmp.CalculatedPressure.GetValueOrDefault
+            H = tmp.CalculatedEnthalpy.GetValueOrDefault
+            S = tmp.CalculatedEntropy.GetValueOrDefault
             Vx = tmp.GetLiquidPhase1MoleFractions
             Vy = tmp.GetVaporPhaseMoleFractions
             Vs = tmp.GetSolidPhaseMoleFractions
