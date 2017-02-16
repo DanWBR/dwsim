@@ -814,8 +814,8 @@ Namespace Reactors
             Dim Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1) As Double
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
-            'T = tmp.CalculatedTemperature
-            'P = tmp.CalculatedPressure
+            T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             H = tmp.CalculatedEnthalpy
             S = tmp.CalculatedEntropy
             Vx = tmp.GetLiquidPhase1MoleFractions
