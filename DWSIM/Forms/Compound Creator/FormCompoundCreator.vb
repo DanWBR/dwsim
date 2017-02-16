@@ -2813,11 +2813,54 @@ Public Class FormCompoundCreator
             su = CType(Me.MdiParent, FormMain).AvailableUnitSystems(cbUnits.SelectedItem.ToString)
         End If
         If loaded Then
+            Try
+                UpdateRegressionDataUnits(mycase.su, su)
+            Catch ex As Exception
+            End Try
             mycase.su = su
             UpdateUnits()
             WriteData()
             SetCompCreatorSaveStatus(False)
         End If
+    End Sub
+
+    Sub UpdateRegressionDataUnits(prevsu As Interfaces.IUnitsOfMeasure, newsu As Interfaces.IUnitsOfMeasure)
+
+        For Each row As DataGridViewRow In GridExpDataPVAP.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.pressure, newsu.pressure, row.Cells(1).Value)
+        Next
+
+        For Each row As DataGridViewRow In GridExpDataCPIG.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.heatCapacityCp, newsu.heatCapacityCp, row.Cells(1).Value)
+        Next
+
+        For Each row As DataGridViewRow In GridExpDataCPLiquid.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.heatCapacityCp, newsu.heatCapacityCp, row.Cells(1).Value)
+        Next
+
+        For Each row As DataGridViewRow In GridExpDataCpS.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.heatCapacityCp, newsu.heatCapacityCp, row.Cells(1).Value)
+        Next
+
+        For Each row As DataGridViewRow In GridExpDataLIQVISC.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.viscosity, newsu.viscosity, row.Cells(1).Value)
+        Next
+
+        For Each row As DataGridViewRow In GridExpDataLIQDENS.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.density, newsu.density, row.Cells(1).Value)
+        Next
+
+        For Each row As DataGridViewRow In GridExpDataRoS.Rows
+            row.Cells(0).Value = SystemsOfUnits.Converter.Convert(prevsu.temperature, newsu.temperature, row.Cells(0).Value)
+            row.Cells(1).Value = SystemsOfUnits.Converter.Convert(prevsu.density, newsu.density, row.Cells(1).Value)
+        Next
+
     End Sub
 
     Sub RenderSMILES()
