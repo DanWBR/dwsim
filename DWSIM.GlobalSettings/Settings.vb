@@ -55,6 +55,10 @@ Public Class Settings
     Public Shared Property DrawingAntiAlias As Boolean = True
     Public Shared Property AutomationMode As Boolean
 
+    Public Shared Property OctavePath As String = ""
+
+    Public Shared Property OctaveFileTempDir As String = ""
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

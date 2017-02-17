@@ -1,31 +1,78 @@
-﻿using System;
+﻿// DWSIM Advanced EOS Model Library
+// Based on http://hpp.uva.es/open-source-software-eos/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
+using System.IO;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS
 {
-    class AdvEOSPropertyPackageBase: PropertyPackages.PropertyPackage
+
+    public enum Model
+    { 
+        //EOS
+        PRBM, //PR-Boston-Mathias
+        PRWS, //PR-Wong-Sandler
+        PT, //Patel-Teja
+        VPT, //Valderrama-Patel-Teja
+
+        //Predictive EOS
+        PSRK,
+        GC,
+
+        // Chain
+        PHSC,
+
+        //SAFT
+        SAFT,
+        PC_SAFT  
+    }
+
+    public enum ThermoProperty
+    { 
+        CompressibilityCoeff,
+        FugacityCoeff,
+        Density,
+        Enthalpy,
+        VaporPressure,
+        BubblePoint,
+        DewPoint,
+        IsothermalFlash,
+        SolidSolubility,
+        GibbsMin
+    }
+
+    public abstract class AdvEOSPropertyPackageBase: PropertyPackages.PropertyPackage
     {
 
-        void test()
+        public Octave GetOctaveInstance()
         { 
         
-            var octave = new Octave(@"C:\Users\ptc0\Documents\Octave-4.0.3\bin\");
+            var octave = new Octave(GlobalSettings.Settings.OctavePath);
 
-            //octave.ExecuteCommand("addpath('ECE')");
-            //octave.ExecuteCommand("ECE/Examples'");
-            //octave.ExecuteCommand("PCSAFTExample");
-            //double[] K = octave.GetVector("K");
+            octave.ExecuteCommand("addpath('" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + Path.DirectorySeparatorChar + "ECE')");
+            octave.ExecuteCommand("cd '" + GlobalSettings.Settings.OctaveFileTempDir + "'");
+
+            return octave;
 
         }
-        
-        public override double AUX_VAPDENS(double T, double P)
+      
+        public override bool MobileCompatible
         {
-            throw new NotImplementedException();
+            get { return false; }
         }
 
-        public override void DW_CalcCompPartialVolume(PropertyPackages.Phase phase, double T, double P)
+        public override bool SupportsComponent(Interfaces.ICompoundConstantProperties comp)
+        {
+            return true;
+        }
+
+        #region legacy
+
+        public override double DW_CalcEnergyFlowMistura_ISOL(double T, double P)
         {
             throw new NotImplementedException();
         }
@@ -36,31 +83,6 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         }
 
         public override double DW_CalcCv_ISOL(PropertyPackages.Phase Phase1, double T, double P)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double DW_CalcEnergyFlowMistura_ISOL(double T, double P)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double DW_CalcEnthalpy(Array Vx, double T, double P, PropertyPackages.State st)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double DW_CalcEnthalpyDeparture(Array Vx, double T, double P, PropertyPackages.State st)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double DW_CalcEntropy(Array Vx, double T, double P, PropertyPackages.State st)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double DW_CalcEntropyDeparture(Array Vx, double T, double P, PropertyPackages.State st)
         {
             throw new NotImplementedException();
         }
@@ -90,16 +112,6 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             throw new NotImplementedException();
         }
 
-        public override void DW_CalcPhaseProps(PropertyPackages.Phase Phase)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void DW_CalcProp(string property, PropertyPackages.Phase phase)
-        {
-            throw new NotImplementedException();
-        }
-
         public override double DW_CalcTensaoSuperficial_ISOL(PropertyPackages.Phase Phase1, double T, double P)
         {
             throw new NotImplementedException();
@@ -110,15 +122,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             throw new NotImplementedException();
         }
 
-        public override bool MobileCompatible
-        {
-            get { throw new NotImplementedException(); }
-        }
 
-        public override bool SupportsComponent(Interfaces.ICompoundConstantProperties comp)
-        {
-            throw new NotImplementedException();
-        }
+#endregion
 
     }
 }
