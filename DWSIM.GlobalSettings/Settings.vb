@@ -53,6 +53,7 @@ Public Class Settings
     Public Shared Property HideSolidPhaseFromCAPEOPENComponents As Boolean = False
 
     Public Shared Property DrawingAntiAlias As Boolean = True
+
     Public Shared Property AutomationMode As Boolean
 
     Public Shared Property OctavePath As String = ""
