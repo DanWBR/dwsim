@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TabPage1.Text" xml:space="preserve">
+    <value>Flowsheet</value>
+  </data>
+  <data name="FaTabStripItem3.Text" xml:space="preserve">
+    <value>User-Defined Datasets</value>
+  </data>
+  <data name="FaTabStripItem2.Text" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="FaTabStripItem7.Text" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Solver Options</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkStorePreviousSolutions.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 17</value>
@@ -166,6 +181,9 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Calculation Mode</value>
   </data>
+  <data name="GroupBoxBGThreadConfig.Text" xml:space="preserve">
+    <value>Additional Settings</value>
+  </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
   </data>
@@ -196,8 +214,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Maximum parallel threads</value>
   </data>
-  <data name="GroupBoxBGThreadConfig.Text" xml:space="preserve">
-    <value>Additional Settings</value>
+  <data name="GroupBoxAzureConfig.Text" xml:space="preserve">
+    <value>Azure Service Bus Settings</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -205,8 +223,8 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Connection String</value>
   </data>
-  <data name="GroupBoxAzureConfig.Text" xml:space="preserve">
-    <value>Azure Service Bus Settings</value>
+  <data name="GroupBoxNetworkComputerConfig.Text" xml:space="preserve">
+    <value>Network Computer connection settings</value>
   </data>
   <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 13</value>
@@ -220,11 +238,8 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>IP Address</value>
   </data>
-  <data name="GroupBoxNetworkComputerConfig.Text" xml:space="preserve">
-    <value>Network Computer connection settings</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Solver Options</value>
+  <data name="GroupBox7.Text" xml:space="preserve">
+    <value>Local Calculation Engine Settings</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
@@ -265,8 +280,8 @@
   <data name="chkEnableParallelCalcs.Text" xml:space="preserve">
     <value>Enable CPU Parallel Processing</value>
   </data>
-  <data name="GroupBox7.Text" xml:space="preserve">
-    <value>Local Calculation Engine Settings</value>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Cut/Copy/Paste Flowsheet Objects</value>
   </data>
   <data name="ComboBoxPropPackCopyMode.Items" xml:space="preserve">
     <value>Do not copy, use default</value>
@@ -292,8 +307,8 @@
   <data name="Label5.Text" xml:space="preserve">
     <value>Compounds</value>
   </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Cut/Copy/Paste Flowsheet Objects</value>
+  <data name="GroupBox12.Text" xml:space="preserve">
+    <value>Flowsheet Object Editors</value>
   </data>
   <data name="chkEnableMultipleEditors.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 17</value>
@@ -313,8 +328,8 @@
   <data name="chkCloseFormsOnDeselect.Text" xml:space="preserve">
     <value>Close editors on deselecting</value>
   </data>
-  <data name="GroupBox12.Text" xml:space="preserve">
-    <value>Flowsheet Object Editors</value>
+  <data name="GroupBox11.Text" xml:space="preserve">
+    <value>Undo/Redo</value>
   </data>
   <data name="CheckBoxUndoRedoRecalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 17</value>
@@ -322,11 +337,8 @@
   <data name="CheckBoxUndoRedoRecalc.Text" xml:space="preserve">
     <value>Recalculate flowsheet when undoing/redoing actions</value>
   </data>
-  <data name="GroupBox11.Text" xml:space="preserve">
-    <value>Undo/Redo</value>
-  </data>
-  <data name="TabPage1.Text" xml:space="preserve">
-    <value>Flowsheet</value>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>User Compound Datasets</value>
   </data>
   <data name="cbudb.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 17</value>
@@ -334,7 +346,7 @@
   <data name="cbudb.Text" xml:space="preserve">
     <value>Replace compounds with equal names</value>
   </data>
-  <data name="DataGridViewCellStyle1.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DataGridViewCellStyle4.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -351,7 +363,7 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="DataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DataGridViewCellStyle5.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -371,13 +383,13 @@
   <data name="Button7.Text" xml:space="preserve">
     <value>Add User Dataset</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>User Compound Datasets</value>
+  <data name="GroupBox10.Text" xml:space="preserve">
+    <value>User-Defined Interaction Parameter Datasets</value>
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Add User IP Dataset</value>
   </data>
-  <data name="DataGridViewCellStyle3.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="DataGridViewCellStyle6.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         Qk32AgAAAAAAADYAAAAoAAAADgAAABAAAAABABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEgoTGw8bGw8bGw8bGw8bGw8bGw8bG
@@ -394,11 +406,8 @@
         hIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEhIKEAAA=
 </value>
   </data>
-  <data name="GroupBox10.Text" xml:space="preserve">
-    <value>User-Defined Interaction Parameter Datasets</value>
-  </data>
-  <data name="FaTabStripItem3.Text" xml:space="preserve">
-    <value>User-Defined Datasets</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Backup Copies</value>
   </data>
   <data name="chkSaveBackupFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 17</value>
@@ -433,20 +442,38 @@
   <data name="KryptonCheckBox6.Text" xml:space="preserve">
     <value>Enable backup copies</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Backup Copies</value>
+  <data name="GroupBox16.Text" xml:space="preserve">
+    <value>DWSIM/Octave bridge settings</value>
   </data>
-  <data name="FaTabStripItem2.Text" xml:space="preserve">
-    <value>Backups</value>
+  <data name="btnSelectOctaveTempPath.Text" xml:space="preserve">
+    <value>Select</value>
   </data>
-  <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
-    <value>Ignore compound constant properties stored in the simulation file during loading</value>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 13</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>Temporary Octave Scripts Folder:</value>
+  </data>
+  <data name="btnSelectOctavePath.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 13</value>
+  </data>
+  <data name="Label19.Text" xml:space="preserve">
+    <value>Octave Binaries Path:</value>
   </data>
   <data name="GroupBox15.Text" xml:space="preserve">
     <value>Compound Constant Properties</value>
   </data>
+  <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
+    <value>Ignore compound constant properties stored in the simulation file during loading</value>
+  </data>
   <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
     <value>Remove Solid Phase from the list of present phases for external components</value>
+  </data>
+  <data name="GroupBox13.Text" xml:space="preserve">
+    <value>Updates</value>
   </data>
   <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -460,8 +487,8 @@
   <data name="chkUpdates.Text" xml:space="preserve">
     <value>Check for Updates on Startup</value>
   </data>
-  <data name="GroupBox13.Text" xml:space="preserve">
-    <value>Updates</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>UI Language</value>
   </data>
   <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
     <value>79, 25</value>
@@ -475,8 +502,8 @@
   <data name="Label3.Text" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>UI Language</value>
+  <data name="GroupBox9.Text" xml:space="preserve">
+    <value>Messages</value>
   </data>
   <data name="chkShowWhatsNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 17</value>
@@ -490,8 +517,8 @@
   <data name="KryptonCheckBox1.Text" xml:space="preserve">
     <value>Show Tips</value>
   </data>
-  <data name="GroupBox9.Text" xml:space="preserve">
-    <value>Messages</value>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Debug Mode</value>
   </data>
   <data name="cbDebugLevel.Items" xml:space="preserve">
     <value>None</value>
@@ -523,18 +550,12 @@
   <data name="chkconsole.Text" xml:space="preserve">
     <value>Redirect Console Output</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Debug Mode</value>
-  </data>
-  <data name="FaTabStripItem7.Text" xml:space="preserve">
-    <value>Other</value>
-  </data>
   <data name="ImageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAATgBCAE4AQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAUgBCAFIAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

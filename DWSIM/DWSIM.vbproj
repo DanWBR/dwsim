@@ -1117,6 +1117,10 @@
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS\DWSIM.Thermodynamics.AdvancedEOS.csproj">
+      <Project>{dc5b9572-697e-485a-b659-fdc65956611f}</Project>
+      <Name>DWSIM.Thermodynamics.AdvancedEOS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.NativeLibraries\DWSIM.Thermodynamics.NativeLibraries.vbproj">
       <Project>{33336b05-116e-4582-896a-a3dfc796e0c3}</Project>
       <Name>DWSIM.Thermodynamics.NativeLibraries</Name>
@@ -2803,8 +2807,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"C:\Program Files (x86)\Git\bin\git.exe" rev-parse --short HEAD &gt; "$(ProjectDir)version.txt"
-Exit 0</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(ProjectDir)Assets" "$(TargetDir)" /E /Y /F /D</PostBuildEvent>

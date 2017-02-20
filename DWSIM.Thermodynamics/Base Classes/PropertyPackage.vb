@@ -9601,7 +9601,9 @@ Final3:
 
             Dim HenryLines() As String
 
-            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.henry.txt")
+            Dim t0 As Type = Type.GetType("DWSIM.Thermodynamics.PropertyPackages.PropertyPackage")
+
+            Using filestr As Stream = Assembly.GetAssembly(t0).GetManifestResourceStream("DWSIM.Thermodynamics.henry.txt")
                 Using t As New StreamReader(filestr)
                     HenryLines = t.ReadToEnd().Split(vbLf)
                 End Using

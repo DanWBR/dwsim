@@ -23,7 +23,7 @@ using System.Globalization;
 
     public class Octave
     {
-        Process OctaveProcess { get; set; }
+        public Process OctaveProcess { get; set; }
         private string OctaveEchoString { get; set; }
         public Octave(string PathToOctaveBinaries)
         {
@@ -65,7 +65,7 @@ using System.Globalization;
         public double GetScalar(string scalar)
         {
             string rasp = ExecuteCommand(scalar, 30000);
-            string val = rasp.Substring(rasp.LastIndexOf("\\") + 1).Trim();
+            string val = rasp.Replace(scalar + " = ","").Substring(rasp.LastIndexOf("\\") + 1).Trim();
             return double.Parse(val, CultureInfo.InvariantCulture);
         }
 
@@ -76,20 +76,15 @@ using System.Globalization;
             int i = 0;
             //catam urmatorul entry
             List<double> data = new List<double>();
-            while (i != lines.Length)
+            while (i < lines.Length - 1)
             {
-                string line = lines[i];
-                if (line.Contains("Column ") || line.Contains("Columns "))
-                {
-                    i++;
-                    line = lines[i];
-                    string[] dataS = line.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                    for (int k = 0; k < dataS.Length; k++)
-                    {
-                        data.Add(double.Parse(dataS[k], CultureInfo.InvariantCulture));
-                    }
-                }
                 i++;
+                string line = lines[i];
+                string[] dataS = line.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int k = 0; k < dataS.Length; k++)
+                {
+                    data.Add(double.Parse(dataS[k], CultureInfo.InvariantCulture));
+                }
             }
             //caz special in care a pus toate rezultatele pe o singura linie
             if (data.Count == 0)

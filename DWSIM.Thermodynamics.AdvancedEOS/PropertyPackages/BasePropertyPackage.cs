@@ -51,7 +51,15 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
     public abstract class AdvEOSPropertyPackageBase: PropertyPackages.PropertyPackage
     {
 
+        Random random = new Random();
+
         public Model PropertyPackageModel = Model.PRBM;
+
+        public static new object ReturnInstance(string typename)
+        {
+            Type t = Type.GetType(typename, false);
+            return Activator.CreateInstance(t);
+        }
 
         private Octave GetOctaveInstance()
         { 
@@ -70,9 +78,33 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public Object CalculateProperty(ThermoProperty prop, double[] vx, string state, Double param1, Double param2, Double param3, Double param4)
         {
 
+            if (param1 <= 0 || param2 <= 0 || vx.Sum() == 0f) {
+                switch (prop)
+                {
+                    case ThermoProperty.CompressibilityCoeff:
+                    case ThermoProperty.Density:
+                    case ThermoProperty.Enthalpy:
+                        return 0d;
+                    case ThermoProperty.FugacityCoeff:
+                        return RET_NullVector();
+                    default:
+                        return 0d;
+                }
+            }
+ 
             // PARAM order: T, P, H, S
 
-            string filename = GlobalSettings.Settings.OctaveFileTempDir + Path.DirectorySeparatorChar + Path.GetRandomFileName();
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            var stringChars = new char[8];
+           
+            for (int j = 0; j < stringChars.Length; j++)
+            {
+                stringChars[j] = chars[random.Next(chars.Length)];
+            }
+
+            var finalString = new String(stringChars);
+
+            string filename = GlobalSettings.Settings.OctaveFileTempDir + Path.DirectorySeparatorChar + finalString + ".m";
 
             StringWriter contents = new StringWriter();
 
@@ -82,8 +114,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
             {
                 string cname = "comp" + i.ToString();
-                contents.WriteLine(cname + " = cSubstance");
-                contents.WriteLine(cname + ".Name = '" + c.ConstantProperties.Name + "';");
+                contents.WriteLine(cname + " = cSubstance;");
+                contents.WriteLine(cname + ".name = '" + c.ConstantProperties.Name + "';");
                 contents.WriteLine(cname + ".MW = " + c.ConstantProperties.Molar_Weight.ToString(ci) + ";");
                 contents.WriteLine(cname + ".Tc = " + c.ConstantProperties.Critical_Temperature.ToString(ci) + ";");
                 contents.WriteLine(cname + ".Pc = " + c.ConstantProperties.Critical_Pressure.ToString(ci) + ";");
@@ -92,21 +124,21 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 i += 1;
             }
 
-            contents.WriteLine("mix = CMixture;");
+            contents.WriteLine("mix = cMixture;");
             i = 1;
             foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
             {
-                string cname = "comp" + i.ToString();
+                string cname = "comp" + (i-1).ToString();
                 contents.WriteLine("mix.comp(" + i.ToString() + ") = " + cname + ";");
-                contents.WriteLine("");
                 i += 1;
             }
 
-            contents.WriteLine("mix.x = [");
+            contents.Write("mix.x = [");
             i = 0;
             foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
             {
                 contents.Write(vx[i].ToString(ci) + " ");
+                i += 1;
             }
             contents.WriteLine("];");
             contents.WriteLine("");
@@ -145,46 +177,47 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 default:
                     break;
             }
+            contents.WriteLine("");
 
             switch (prop)
             { 
                 case ThermoProperty.CompressibilityCoeff:
                     if (state == "L")
                     {
-                        contents.WriteLine("Z = compr(EoS," + param1.ToString(ci) + ", " + param2.ToString(ci)  + ",mix,'liq')");
+                        contents.WriteLine("Z = compr(EoS," + param1.ToString(ci) + "," + param2.ToString(ci)  + ",mix,'liq')");
                     }
                     else {
-                        contents.WriteLine("Z = compr(EoS," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",mix,'gas')");
+                        contents.WriteLine("Z = compr(EoS," + param1.ToString(ci) + "," + param2.ToString(ci) + ",mix,'gas')");
                     }
                     break;
                 case ThermoProperty.Density:
                     if (state == "L")
                     {
-                        contents.WriteLine("[denMass,denMol,Z,EoS] = Density(EoS," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",mix,'liq')");
+                        contents.WriteLine("[denMass,denMol,Z,EoS] = Density(EoS,mix," + param1.ToString(ci) + "," + param2.ToString(ci) + ",'liq')");
                     }
                     else
                     {
-                        contents.WriteLine("[denMass,denMol,Z,EoS] = Density(EoS," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",mix,'gas')");
+                        contents.WriteLine("[denMass,denMol,Z,EoS] = Density(EoS,mix," + param1.ToString(ci) + "," + param2.ToString(ci) + ",'gas')");
                     }
                     break;
                 case ThermoProperty.Enthalpy:
                     if (state == "L")
                     {
-                        contents.WriteLine("[Hres,EoS] = Enthalpy(EoS,mix," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",'liq')");
+                        contents.WriteLine("[Hres,EoS] = Enthalpy(EoS,mix," + param1.ToString(ci) + "," + param2.ToString(ci) + ",'liq')");
                     }
                     else
                     {
-                        contents.WriteLine("[Hres,EoS] = Enthalpy(EoS,mix," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",'gas')");
+                        contents.WriteLine("[Hres,EoS] = Enthalpy(EoS,mix," + param1.ToString(ci) + "," + param2.ToString(ci) + ",'gas')");
                     }
                     break;
                 case ThermoProperty.FugacityCoeff:
                     if (state == "L")
                     {
-                        contents.WriteLine("f = fugF(EoS," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",mix,'liq')");
+                        contents.WriteLine("f = fugF(EoS," + param1.ToString(ci) + "," + param2.ToString(ci) + ",mix,'liq')");
                     }
                     else
                     {
-                        contents.WriteLine("f = fugF(EoS," + param1.ToString(ci) + ", " + param2.ToString(ci) + ",mix,'gas')");
+                        contents.WriteLine("f = fugF(EoS," + param1.ToString(ci) + "," + param2.ToString(ci) + ",mix,'gas')");
                     }
                     break;
                 default:
@@ -194,18 +227,32 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             File.WriteAllText(filename, contents.ToString());
 
             var octave = GetOctaveInstance();
-            octave.ExecuteCommand(Path.GetFileName(filename), 120000);
+            octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), 120000);
+
+            Object result = null;
 
             switch (prop)
             {
                 case ThermoProperty.CompressibilityCoeff:
-                    return octave.GetScalar("Z");
+                    result = octave.GetScalar("Z");
+                    octave.OctaveProcess.Kill();
+                    octave = null;
+                    return result;
                 case ThermoProperty.Density:
-                    return octave.GetScalar("denMass");
+                    result = octave.GetScalar("denMass");
+                    octave.OctaveProcess.Kill();
+                    octave = null;
+                    return result;
                 case ThermoProperty.Enthalpy:
-                    return octave.GetScalar("Hres") + RET_Hid(298.15, param1, vx);
+                    result = octave.GetScalar("Hres") + RET_Hid(298.15, param1, vx);
+                    octave.OctaveProcess.Kill();
+                    octave = null;
+                    return result;
                 case ThermoProperty.FugacityCoeff:
-                    return octave.GetVector("f");
+                    result = octave.GetVector("f");
+                    octave.OctaveProcess.Kill();
+                    octave = null;
+                    return result;
                 default:
                     return null;
             }
@@ -287,7 +334,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 case PropertyPackages.State.Vapor:
                     return (double[])CalculateProperty(ThermoProperty.FugacityCoeff, vz, "V", T, P, 0, 0);
                 default:
-                    return null;
+                    return RET_NullVector();
             }
         }
 
@@ -300,8 +347,10 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     return (double)CalculateProperty(ThermoProperty.Enthalpy, vz, "L", T, P, 0, 0);
                 case PropertyPackages.State.Vapor:
                     return (double)CalculateProperty(ThermoProperty.Enthalpy, vz, "V", T, P, 0, 0);
+                case PropertyPackages.State.Solid:
+                    return (double)CalculateProperty(ThermoProperty.Enthalpy, vz, "L", T, P, 0, 0) - RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(vz),T);
                 default:
-                    return 0f;
+                    return 0d;
             }
         }
 
@@ -319,8 +368,10 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     return (double)CalculateProperty(ThermoProperty.Enthalpy, vz, "L", T, P, 0, 0)/T;
                 case PropertyPackages.State.Vapor:
                     return (double)CalculateProperty(ThermoProperty.Enthalpy, vz, "V", T, P, 0, 0)/T;
+                case PropertyPackages.State.Solid:
+                    return (double)CalculateProperty(ThermoProperty.Enthalpy, vz, "L", T, P, 0, 0)/T - RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(vz), T)/T;
                 default:
-                    return 0f;
+                    return 0d;
             }
         }
 
@@ -331,13 +382,13 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
         public override void DW_CalcPhaseProps(PropertyPackages.Phase Phase)
         {
-            double result = 0f;
+            double result = 0d;
             Phase dwpl = default(Phase);
 
-            double T = 0f;
-            double P = 0f;
-            double phasemolarfrac = 0f;
-            double overallmolarflow = 0f;
+            double T = 0d;
+            double P = 0d;
+            double phasemolarfrac = 0d;
+            double overallmolarflow = 0d;
 
             int phaseID = 0;
             T = this.CurrentMaterialStream.Phases[0].Properties.temperature.GetValueOrDefault();
@@ -529,13 +580,13 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public override void DW_CalcProp(string property, PropertyPackages.Phase phase)
         {
 
-            double result = 0.0;
+            double result = 0.0d;
             int phaseID = -1;
             string state = "";
             State pstate = default(State);
 
-            double T = 0;
-            double P = 0;
+            double T = 0d;
+            double P = 0d;
             T = this.CurrentMaterialStream.Phases[0].Properties.temperature.GetValueOrDefault();
             P = this.CurrentMaterialStream.Phases[0].Properties.pressure.GetValueOrDefault();
 
@@ -712,5 +763,16 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         {
             //do nothing
         }
+
+        public override bool LoadData(List<System.Xml.Linq.XElement> data)
+        {
+            return base.LoadData(data);
+        }
+
+        public override List<System.Xml.Linq.XElement> SaveData()
+        {
+            return base.SaveData();
+        }
+
     }
 }

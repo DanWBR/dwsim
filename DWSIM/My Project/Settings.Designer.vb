@@ -694,6 +694,30 @@ Namespace My
                 Me("IgnoreCompoundPropertiesOnLoad") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property OctavePath() As String
+            Get
+                Return CType(Me("OctavePath"),String)
+            End Get
+            Set
+                Me("OctavePath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property OctaveTempPath() As String
+            Get
+                Return CType(Me("OctaveTempPath"),String)
+            End Get
+            Set
+                Me("OctaveTempPath") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

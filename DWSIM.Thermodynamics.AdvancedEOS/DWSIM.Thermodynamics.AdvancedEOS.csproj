@@ -37,6 +37,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,7 @@
     <Compile Include="PropertyPackages\PRWS.cs" />
     <Compile Include="PropertyPackages\PSRK.cs" />
     <Compile Include="PropertyPackages\SAFT.cs" />
+    <Compile Include="PropertyPackages\VPT.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ECE\%40cGCEoS\cGCEoS.m" />
@@ -253,7 +255,13 @@
       <Name>DWSIM.Thermodynamics</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EditingForms\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)Assets" "$(SolutionDir)DWSIM\bin\$(ConfigurationName)\" /E /Y /F /D</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

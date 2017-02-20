@@ -583,6 +583,44 @@ Public Class FormMain
         BOPP.ComponentName = "Black Oil"
         BOPP.ComponentDescription = DWSIM.App.GetLocalString("DescBOPP")
 
+        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+
+        Dim PCSAFT2PP As Global.DWSIM.Thermodynamics.AdvancedEOS.PCSAFTPropertyPackage = New Global.DWSIM.Thermodynamics.AdvancedEOS.PCSAFTPropertyPackage()
+        PCSAFT2PP.ComponentName = "PC-SAFT (with Association Support)"
+        PCSAFT2PP.ComponentDescription = DWSIM.App.GetLocalString("DescPCSAFT2PP")
+
+        PropertyPackages.Add(PCSAFT2PP.ComponentName.ToString, PCSAFT2PP)
+
+        Dim SAFTPP As Global.DWSIM.Thermodynamics.AdvancedEOS.SAFTPropertyPackage = New Global.DWSIM.Thermodynamics.AdvancedEOS.SAFTPropertyPackage()
+        SAFTPP.ComponentName = "Statistical Associating Fluid Theory (SAFT)"
+        SAFTPP.ComponentDescription = DWSIM.App.GetLocalString("DescSAFTPP")
+
+        PropertyPackages.Add(SAFTPP.ComponentName.ToString, SAFTPP)
+
+        Dim PHSCPP As Global.DWSIM.Thermodynamics.AdvancedEOS.PHSCPropertyPackage = New Global.DWSIM.Thermodynamics.AdvancedEOS.PHSCPropertyPackage()
+        PHSCPP.ComponentName = "Perturbed Hard Sphere Chain (PHSC)"
+        PHSCPP.ComponentDescription = DWSIM.App.GetLocalString("DescPHSCPP")
+
+        PropertyPackages.Add(PHSCPP.ComponentName.ToString, PHSCPP)
+
+        Dim PSRKPP As Global.DWSIM.Thermodynamics.AdvancedEOS.PSRKPropertyPackage = New Global.DWSIM.Thermodynamics.AdvancedEOS.PSRKPropertyPackage()
+        PSRKPP.ComponentName = "Predictive Soave-Redlich-Kwong (PSRK)"
+        PSRKPP.ComponentDescription = DWSIM.App.GetLocalString("DescPSRKPP")
+
+        PropertyPackages.Add(PSRKPP.ComponentName.ToString, PSRKPP)
+
+        Dim PRWSPP As Global.DWSIM.Thermodynamics.AdvancedEOS.PRWSPropertyPackage = New Global.DWSIM.Thermodynamics.AdvancedEOS.PRWSPropertyPackage()
+        PRWSPP.ComponentName = "Peng-Robinson w/ Wong-Sandler Mixing Rules (PRWS)"
+        PRWSPP.ComponentDescription = DWSIM.App.GetLocalString("DescPRWSPP")
+
+        PropertyPackages.Add(PRWSPP.ComponentName.ToString, PRWSPP)
+
+        Dim VPTPP As Global.DWSIM.Thermodynamics.AdvancedEOS.VPTPropertyPackage = New Global.DWSIM.Thermodynamics.AdvancedEOS.VPTPropertyPackage()
+        VPTPP.ComponentName = "Valderrama-Patel-Teja EOS (VPT)"
+        VPTPP.ComponentDescription = DWSIM.App.GetLocalString("DescVPTPP")
+
+        PropertyPackages.Add(VPTPP.ComponentName.ToString, VPTPP)
+
         'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.
         If Not DWSIM.App.IsRunningOnMono Then
 
@@ -593,8 +631,6 @@ Public Class FormMain
             PropertyPackages.Add(COPP.ComponentName.ToString, COPP)
 
         End If
-
-        PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
     End Sub
 
@@ -1391,7 +1427,12 @@ Public Class FormMain
         For Each xel As XElement In data
             Try
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
-                Dim obj As PropertyPackage = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                Dim obj As PropertyPackage = Nothing
+                If xel.Element("Type").Value.Contains("AdvancedEOS") Then
+                    obj = AdvancedEOS.AdvEOSPropertyPackageBase.ReturnInstance(xel.Element("Type").Value)
+                Else
+                    obj = PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                End If
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If form.Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID

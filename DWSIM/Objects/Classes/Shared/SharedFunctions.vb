@@ -54,6 +54,9 @@ Namespace DWSIM
 
             GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
 
+            GlobalSettings.Settings.OctavePath = My.Settings.OctavePath
+            GlobalSettings.Settings.OctaveFileTempDir = My.Settings.OctaveTempPath
+
             GlobalSettings.Settings.CalculatorActivated = True
 
             GlobalSettings.Settings.UserDatabases.Clear()

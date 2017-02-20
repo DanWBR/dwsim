@@ -112,6 +112,9 @@ Public Class FormOptions
         ComboBoxPropPackCopyMode.SelectedIndex = My.Settings.ClipboardCopyMode_PropertyPackages
         CheckBoxUndoRedoRecalc.Checked = My.Settings.UndoRedo_RecalculateFlowsheet
 
+        tbOctavePath.Text = My.Settings.OctavePath
+        tbOctaveTempPath.Text = My.Settings.OctaveTempPath
+
         Me.cbGPU.Items.Clear()
 
         Task.Factory.StartNew(Function()
@@ -664,5 +667,23 @@ Public Class FormOptions
 
     Private Sub chkIgnoreCompConstData_CheckedChanged(sender As Object, e As EventArgs) Handles chkIgnoreCompConstData.CheckedChanged
         My.Settings.IgnoreCompoundPropertiesOnLoad = Me.chkIgnoreCompConstData.Checked
+    End Sub
+
+    Private Sub btnSelectOctavePath_Click(sender As Object, e As EventArgs) Handles btnSelectOctavePath.Click
+        FolderBrowserDialog1.SelectedPath = tbOctavePath.Text
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            tbOctavePath.Text = FolderBrowserDialog1.SelectedPath
+            My.Settings.OctavePath = tbOctavePath.Text
+            GlobalSettings.Settings.OctavePath = tbOctavePath.Text
+        End If
+    End Sub
+
+    Private Sub btnSelectOctaveTempPath_Click(sender As Object, e As EventArgs) Handles btnSelectOctaveTempPath.Click
+        FolderBrowserDialog1.SelectedPath = tbOctaveTempPath.Text
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            tbOctaveTempPath.Text = FolderBrowserDialog1.SelectedPath
+            My.Settings.OctaveTempPath = tbOctaveTempPath.Text
+            GlobalSettings.Settings.OctaveFileTempDir = tbOctaveTempPath.Text
+        End If
     End Sub
 End Class
