@@ -1510,11 +1510,11 @@
     <value>Liquids Separation Efficiency</value>
   </data>
   <data name="PROP_SV_0" xml:space="preserve">
-    <value>Separation Temperature</value>
+    <value>Separation Temperature (if overriden)</value>
     <comment>1</comment>
   </data>
   <data name="PROP_SV_1" xml:space="preserve">
-    <value>Separation Pressure</value>
+    <value>Separation Pressure (if overriden)</value>
     <comment>1</comment>
   </data>
   <data name="PROP_TK_0" xml:space="preserve">

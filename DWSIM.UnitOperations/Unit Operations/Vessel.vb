@@ -175,15 +175,15 @@ Namespace UnitOperations
                     ms.Validate()
                     If Me.PressureCalculation = PressureBehavior.Minimum Then
                         If ms.Phases(0).Properties.pressure.GetValueOrDefault < P Then
-                            P = ms.Phases(0).Properties.pressure
+                            P = ms.Phases(0).Properties.pressure.GetValueOrDefault
                         ElseIf P = 0 Then
-                            P = ms.Phases(0).Properties.pressure
+                            P = ms.Phases(0).Properties.pressure.GetValueOrDefault
                         End If
                     ElseIf Me.PressureCalculation = PressureBehavior.Maximum Then
                         If ms.Phases(0).Properties.pressure.GetValueOrDefault > P Then
-                            P = ms.Phases(0).Properties.pressure
+                            P = ms.Phases(0).Properties.pressure.GetValueOrDefault
                         ElseIf P = 0 Then
-                            P = ms.Phases(0).Properties.pressure
+                            P = ms.Phases(0).Properties.pressure.GetValueOrDefault
                         End If
                     Else
                         P = P + ms.Phases(0).Properties.pressure.GetValueOrDefault
@@ -267,6 +267,7 @@ Namespace UnitOperations
                 W = mix.Phases(0).Properties.massflow.GetValueOrDefault
 
                 If nstr = 1 And E0 = 0.0# Then
+
                     'no need to perform flash if there's only one stream and no heat added
                     For Each cp In Me.GraphicObject.InputConnectors
                         If cp.IsAttached And cp.Type = GraphicObjects.ConType.ConIn Then
@@ -276,10 +277,13 @@ Namespace UnitOperations
                             Exit For
                         End If
                     Next
+
                 Else
+
                     mix.PropertyPackage = Me.PropertyPackage
                     mix.SpecType = StreamSpec.Pressure_and_Enthalpy
                     mix.Calculate(True, True)
+
                 End If
 
                 T = mix.Phases(0).Properties.temperature.GetValueOrDefault
@@ -374,12 +378,12 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = mix.Phases(2).Properties.enthalpy
-                    .Phases(0).Properties.massflow = mix.Phases(2).Properties.massflow
+                    .Phases(0).Properties.enthalpy = mix.Phases(2).Properties.enthalpy.GetValueOrDefault
+                    .Phases(0).Properties.massflow = mix.Phases(2).Properties.massflow.GetValueOrDefault
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = mix.Phases(2).Compounds(comp.Name).MoleFraction
-                        comp.MassFraction = mix.Phases(2).Compounds(comp.Name).MassFraction
+                        comp.MoleFraction = mix.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                        comp.MassFraction = mix.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault
                     Next
                 End With
             End If
@@ -392,6 +396,7 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
+                    .Phases(0).Properties.enthalpy = mix.Phases(3).Properties.enthalpy.GetValueOrDefault
                     If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
                     .Phases(0).Properties.enthalpy = HL1
                     Dim comp As BaseClasses.Compound
@@ -412,6 +417,7 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
+                    .Phases(0).Properties.enthalpy = mix.Phases(3).Properties.enthalpy.GetValueOrDefault
                     If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
                     .Phases(0).Properties.enthalpy = HL2
                     Dim comp As BaseClasses.Compound

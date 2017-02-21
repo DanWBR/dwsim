@@ -1510,11 +1510,11 @@
     <value>Flüssigkeitsabscheidegrad</value>
   </data>
   <data name="PROP_SV_0" xml:space="preserve">
-    <value>Separatortemperatur</value>
+    <value>Separatortemperatur (Wenn sie überschrieben wird)</value>
     <comment>1</comment>
   </data>
   <data name="PROP_SV_1" xml:space="preserve">
-    <value>Separatordruck</value>
+    <value>Separatordruck (Wenn sie überschrieben wird)</value>
     <comment>1</comment>
   </data>
   <data name="PROP_TK_0" xml:space="preserve">

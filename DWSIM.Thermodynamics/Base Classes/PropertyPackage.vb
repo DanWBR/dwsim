@@ -428,6 +428,7 @@ Namespace PropertyPackages
                 Return m_ms
             End Get
             Set(ByVal MatStr As Interfaces.IMaterialStream)
+                m_ms = Nothing
                 m_ms = MatStr
             End Set
         End Property

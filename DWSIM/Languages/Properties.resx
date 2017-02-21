@@ -1142,11 +1142,11 @@
     <value>Eficiência de Separação de Líquidos</value>
   </data>
   <data name="PROP_SV_0" xml:space="preserve">
-    <value>Temperatura de Separação</value>
+    <value>Temperatura de Separação (se forçada)</value>
     <comment>1</comment>
   </data>
   <data name="PROP_SV_1" xml:space="preserve">
-    <value>Pressão de Separação</value>
+    <value>Pressão de Separação (se forçada)</value>
     <comment>1</comment>
   </data>
   <data name="PROP_TK_0" xml:space="preserve">

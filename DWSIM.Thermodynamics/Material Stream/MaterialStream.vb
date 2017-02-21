@@ -362,8 +362,6 @@ Namespace Streams
 
                 .CurrentMaterialStream = Me
 
-                .Flowsheet = Me.FlowSheet
-
                 If W.HasValue Then
                     If DebugMode Then AppendDebugLine(String.Format("Checking flow definition. Mass flow specified, will calculate molar and volumetric flow."))
                     foption = 0
@@ -590,9 +588,11 @@ Namespace Streams
         ''' </summary>
         ''' <param name="ASource">Stream to be used as the source</param>
         ''' <remarks>Properties copied: phase temperature, pressure, enthalpy and mole/mass flows.</remarks>
-        Public Sub Assign(ByVal ASource As MaterialStream)
+        Public Sub Assign(ByVal ASource As IMaterialStream)
 
             Me.AtEquilibrium = ASource.AtEquilibrium
+
+            SpecType = ASource.SpecType
 
             'Copy properties from the ASource stream.
 
@@ -602,26 +602,22 @@ Namespace Streams
 
                 If ASource.Phases.ContainsKey(i) Then
 
-                    Phases(i).Properties.temperature = ASource.Phases(i).Properties.temperature
-                    Phases(i).Properties.pressure = ASource.Phases(i).Properties.pressure
-                    Phases(i).Properties.enthalpy = ASource.Phases(i).Properties.enthalpy
+                    Phases(i).Properties.temperature = ASource.Phases(i).Properties.temperature.GetValueOrDefault
+                    Phases(i).Properties.pressure = ASource.Phases(i).Properties.pressure.GetValueOrDefault
+                    Phases(i).Properties.enthalpy = ASource.Phases(i).Properties.enthalpy.GetValueOrDefault
 
-                    'Copy component properties.
-                    Dim comp As BaseClasses.Compound
-
-                    For Each comp In Phases(i).Compounds.Values
-                        comp.MoleFraction = ASource.Phases(i).Compounds(comp.Name).MoleFraction
-                        comp.MassFraction = ASource.Phases(i).Compounds(comp.Name).MassFraction
-                        comp.MassFlow = ASource.Phases(i).Compounds(comp.Name).MassFlow
-                        comp.MolarFlow = ASource.Phases(i).Compounds(comp.Name).MolarFlow
+                    For Each comp As BaseClasses.Compound In Phases(i).Compounds.Values
+                        comp.MoleFraction = ASource.Phases(i).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                        comp.MassFraction = ASource.Phases(i).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                        comp.MassFlow = ASource.Phases(i).Compounds(comp.Name).MassFlow.GetValueOrDefault
+                        comp.MolarFlow = ASource.Phases(i).Compounds(comp.Name).MolarFlow.GetValueOrDefault
                     Next
 
-                    'Should be defined after concentrations?!?! [yes, no, maybe... whatever]
-                    Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow
-                    Phases(i).Properties.molarflow = ASource.Phases(i).Properties.molarflow
+                    Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow.GetValueOrDefault
+                    Phases(i).Properties.molarflow = ASource.Phases(i).Properties.molarflow.GetValueOrDefault
 
-                    Phases(i).Properties.massfraction = ASource.Phases(i).Properties.massfraction
-                    Phases(i).Properties.molarfraction = ASource.Phases(i).Properties.molarfraction
+                    Phases(i).Properties.massfraction = ASource.Phases(i).Properties.massfraction.GetValueOrDefault
+                    Phases(i).Properties.molarfraction = ASource.Phases(i).Properties.molarfraction.GetValueOrDefault
 
                 End If
 
@@ -634,7 +630,7 @@ Namespace Streams
         ''' </summary>
         ''' <param name="ASource">Source stream</param>
         ''' <remarks></remarks>
-        Public Sub AssignProps(ByVal ASource As MaterialStream)
+        Public Sub AssignProps(ByVal ASource As IMaterialStream)
 
             'Copy properties from the ASource stream.
 
@@ -644,35 +640,35 @@ Namespace Streams
 
                 If ASource.Phases.ContainsKey(i) Then
 
-                    Phases(i).Properties.temperature = ASource.Phases(i).Properties.temperature
-                    Phases(i).Properties.pressure = ASource.Phases(i).Properties.pressure
-                    Phases(i).Properties.density = ASource.Phases(i).Properties.density
-                    Phases(i).Properties.enthalpy = ASource.Phases(i).Properties.enthalpy
-                    Phases(i).Properties.entropy = ASource.Phases(i).Properties.entropy
-                    Phases(i).Properties.molar_enthalpy = ASource.Phases(i).Properties.molar_enthalpy
-                    Phases(i).Properties.molar_entropy = ASource.Phases(i).Properties.molar_entropy
-                    Phases(i).Properties.compressibilityFactor = ASource.Phases(i).Properties.compressibilityFactor
-                    Phases(i).Properties.heatCapacityCp = ASource.Phases(i).Properties.heatCapacityCp
-                    Phases(i).Properties.heatCapacityCv = ASource.Phases(i).Properties.heatCapacityCv
-                    Phases(i).Properties.molecularWeight = ASource.Phases(i).Properties.molecularWeight
-                    Phases(i).Properties.thermalConductivity = ASource.Phases(i).Properties.thermalConductivity
-                    Phases(i).Properties.speedOfSound = ASource.Phases(i).Properties.speedOfSound
-                    Phases(i).Properties.volumetric_flow = ASource.Phases(i).Properties.volumetric_flow
-                    Phases(i).Properties.jouleThomsonCoefficient = ASource.Phases(i).Properties.jouleThomsonCoefficient
-                    Phases(i).Properties.excessEnthalpy = ASource.Phases(i).Properties.excessEnthalpy
-                    Phases(i).Properties.excessEntropy = ASource.Phases(i).Properties.excessEntropy
-                    Phases(i).Properties.compressibility = ASource.Phases(i).Properties.compressibility
-                    Phases(i).Properties.bubbleTemperature = ASource.Phases(i).Properties.bubbleTemperature
-                    Phases(i).Properties.bubblePressure = ASource.Phases(i).Properties.bubblePressure
-                    Phases(i).Properties.dewTemperature = ASource.Phases(i).Properties.dewTemperature
-                    Phases(i).Properties.dewPressure = ASource.Phases(i).Properties.dewPressure
-                    Phases(i).Properties.viscosity = ASource.Phases(i).Properties.viscosity
-                    Phases(i).Properties.kinematic_viscosity = ASource.Phases(i).Properties.kinematic_viscosity
-                    Phases(i).Properties.molarflow = ASource.Phases(i).Properties.molarflow
-                    Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow
-                    Phases(i).Properties.massfraction = ASource.Phases(i).Properties.massfraction
-                    Phases(i).Properties.molarfraction = ASource.Phases(i).Properties.molarfraction
-                    Phases(i).Properties.bulk_modulus = ASource.Phases(i).Properties.bulk_modulus
+                    Phases(i).Properties.temperature = ASource.Phases(i).Properties.temperature.GetValueOrDefault
+                    Phases(i).Properties.pressure = ASource.Phases(i).Properties.pressure.GetValueOrDefault
+                    Phases(i).Properties.density = ASource.Phases(i).Properties.density.GetValueOrDefault
+                    Phases(i).Properties.enthalpy = ASource.Phases(i).Properties.enthalpy.GetValueOrDefault
+                    Phases(i).Properties.entropy = ASource.Phases(i).Properties.entropy.GetValueOrDefault
+                    Phases(i).Properties.molar_enthalpy = ASource.Phases(i).Properties.molar_enthalpy.GetValueOrDefault
+                    Phases(i).Properties.molar_entropy = ASource.Phases(i).Properties.molar_entropy.GetValueOrDefault
+                    Phases(i).Properties.compressibilityFactor = ASource.Phases(i).Properties.compressibilityFactor.GetValueOrDefault
+                    Phases(i).Properties.heatCapacityCp = ASource.Phases(i).Properties.heatCapacityCp.GetValueOrDefault
+                    Phases(i).Properties.heatCapacityCv = ASource.Phases(i).Properties.heatCapacityCv.GetValueOrDefault
+                    Phases(i).Properties.molecularWeight = ASource.Phases(i).Properties.molecularWeight.GetValueOrDefault
+                    Phases(i).Properties.thermalConductivity = ASource.Phases(i).Properties.thermalConductivity.GetValueOrDefault
+                    Phases(i).Properties.speedOfSound = ASource.Phases(i).Properties.speedOfSound.GetValueOrDefault
+                    Phases(i).Properties.volumetric_flow = ASource.Phases(i).Properties.volumetric_flow.GetValueOrDefault
+                    Phases(i).Properties.jouleThomsonCoefficient = ASource.Phases(i).Properties.jouleThomsonCoefficient.GetValueOrDefault
+                    Phases(i).Properties.excessEnthalpy = ASource.Phases(i).Properties.excessEnthalpy.GetValueOrDefault
+                    Phases(i).Properties.excessEntropy = ASource.Phases(i).Properties.excessEntropy.GetValueOrDefault
+                    Phases(i).Properties.compressibility = ASource.Phases(i).Properties.compressibility.GetValueOrDefault
+                    Phases(i).Properties.bubbleTemperature = ASource.Phases(i).Properties.bubbleTemperature.GetValueOrDefault
+                    Phases(i).Properties.bubblePressure = ASource.Phases(i).Properties.bubblePressure.GetValueOrDefault
+                    Phases(i).Properties.dewTemperature = ASource.Phases(i).Properties.dewTemperature.GetValueOrDefault
+                    Phases(i).Properties.dewPressure = ASource.Phases(i).Properties.dewPressure.GetValueOrDefault
+                    Phases(i).Properties.viscosity = ASource.Phases(i).Properties.viscosity.GetValueOrDefault
+                    Phases(i).Properties.kinematic_viscosity = ASource.Phases(i).Properties.kinematic_viscosity.GetValueOrDefault
+                    Phases(i).Properties.molarflow = ASource.Phases(i).Properties.molarflow.GetValueOrDefault
+                    Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow.GetValueOrDefault
+                    Phases(i).Properties.massfraction = ASource.Phases(i).Properties.massfraction.GetValueOrDefault
+                    Phases(i).Properties.molarfraction = ASource.Phases(i).Properties.molarfraction.GetValueOrDefault
+                    Phases(i).Properties.bulk_modulus = ASource.Phases(i).Properties.bulk_modulus.GetValueOrDefault
 
                 End If
 
@@ -3938,6 +3934,7 @@ Namespace Streams
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Aqueous)
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Solid)
             Me.PropertyPackage.DW_ZerarComposicoes(PropertyPackages.Phase.Mixture)
+            Me.PropertyPackage.CurrentMaterialStream = Nothing
         End Sub
 
         ''' <summary>

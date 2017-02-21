@@ -279,7 +279,7 @@ Public Class MaterialStreamEditor
                 TabPhaseProps.TabPages.Clear()
                 TabPhaseProps.TabPages.Add(tabPropsMix)
 
-                MatStream.PropertyPackage.CurrentMaterialStream = MatStream
+                'MatStream.PropertyPackage.CurrentMaterialStream = MatStream
 
                 PopulatePropGrid(gridPropertiesMixture, .Phases(0))
                 If .Phases(2).Properties.molarfraction.HasValue Then
@@ -473,18 +473,24 @@ Public Class MaterialStreamEditor
 
             End If
 
-            If MatStream.PropertyPackage.FlashBase.FlashSettings(Interfaces.Enums.FlashSetting.CalculateBubbleAndDewPoints) = True And p.Name = "Mixture" Then
-                refval = p.Properties.bubblePressure.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
+            refval = p.Properties.bubblePressure
+            If refval.HasValue Then
+                val = Converter.ConvertFromSI(units.pressure, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubblePress"), val, units.pressure})
-                refval = p.Properties.dewPressure.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.pressure, refval)
+            End If
+            refval = p.Properties.dewPressure
+            If refval.HasValue Then
+                val = Converter.ConvertFromSI(units.pressure, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewPress"), val, units.pressure})
-                refval = p.Properties.bubbleTemperature.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.temperature, refval)
+            End If
+            refval = p.Properties.bubbleTemperature
+            If refval.HasValue Then
+                val = Converter.ConvertFromSI(units.temperature, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("BubbleTemp"), val, units.pressure})
-                refval = p.Properties.dewTemperature.GetValueOrDefault
-                If refval.HasValue Then val = Converter.ConvertFromSI(units.temperature, refval)
+            End If
+            refval = p.Properties.dewTemperature
+            If refval.HasValue Then
+                val = Converter.ConvertFromSI(units.temperature, refval)
                 .Add(New Object() {MatStream.FlowSheet.GetTranslatedString("DewTemp"), val, units.pressure})
             End If
 
