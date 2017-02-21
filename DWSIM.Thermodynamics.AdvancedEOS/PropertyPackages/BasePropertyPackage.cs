@@ -62,8 +62,10 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         }
 
         private Octave GetOctaveInstance()
-        { 
-        
+        {
+
+            if (GlobalSettings.Settings.OctavePath == "") { throw new Exception("Octave binaries path not set (go to 'Edit' > 'General Settings' > 'Other').");}
+           
             var octave = new Octave(GlobalSettings.Settings.OctavePath);
 
             octave.ExecuteCommand("addpath('" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + Path.DirectorySeparatorChar + "ECE')");
@@ -77,6 +79,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
         public Object CalculateProperty(ThermoProperty prop, double[] vx, string state, Double param1, Double param2, Double param3, Double param4)
         {
+
+            if (GlobalSettings.Settings.OctaveFileTempDir == "") { throw new Exception("Temporary Octave scripts path not set (go to 'Edit' > 'General Settings' > 'Other')."); }
 
             if (param1 <= 0 || param2 <= 0 || vx.Sum() == 0f) {
                 switch (prop)
@@ -151,9 +155,11 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                  contents.WriteLine("EoS = cGCEoS;");
                    break;
                 case Model.PC_SAFT:
+                   Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                    contents.WriteLine("EoS = cPCSAFTEoS;");
                     break;
                 case Model.PHSC:
+                    Flowsheet.ShowMessage("PHSC calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     contents.WriteLine("EoS = cPHSCEoS;");
                     break;
                 case Model.PRBM:
@@ -169,6 +175,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     contents.WriteLine("EoS = cPTEoS;");
                     break;
                 case Model.SAFT:
+                    Flowsheet.ShowMessage("SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     contents.WriteLine("EoS = cSAFTEoS;");
                     break;
                 case Model.VPT:
@@ -319,9 +326,25 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
 #endregion
 
+        public double CalcCp(double[] Vx, double T, double P, State st)
+        {
+
+            double h1, h2;
+            h1 = DW_CalcEnthalpy(Vx, T, P, st);
+            h2 = DW_CalcEnthalpy(Vx, T + 0.01, P, st);
+
+            return (h2 - h1) / 0.01;
+        
+        }
+
         public override double AUX_VAPDENS(double T, double P)
         {
             return (double)CalculateProperty(ThermoProperty.Density, RET_VMOL(PropertyPackages.Phase.Vapor), "V", T, P, 0, 0);
+        }
+
+        public override double AUX_LIQDENS(double T, Array Vx, double P = 0, double Pvp = 0, bool FORCE_EOS = false)
+        {
+            return (double)CalculateProperty(ThermoProperty.Density, Vx.Cast<double>().ToArray(), "L", T, P, 0, 0);
         }
 
         public override double[] DW_CalcFugCoeff(Array Vx, double T, double P, PropertyPackages.State st)
@@ -454,71 +477,139 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             if (phaseID == 3 | phaseID == 4 | phaseID == 5 | phaseID == 6)
             {
-                
-                result = this.AUX_LIQDENS(T, P, 0.0, phaseID, false);
 
-                this.CurrentMaterialStream.Phases[phaseID].Properties.density = result;
-                
-                this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy = this.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid);
-                
-                this.CurrentMaterialStream.Phases[phaseID].Properties.entropy = this.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Liquid);
+                if (!GlobalSettings.Settings.EnableParallelProcessing)
+                {
+                    result = this.AUX_LIQDENS(T, RET_VMOL(dwpl), P);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.density = result;
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.compressibilityFactor = P / result * AUX_MMM(dwpl) / 1000 / 8.314 / T;
+                    
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy = this.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.entropy = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() / T;
 
-                result = (double)CalculateProperty(ThermoProperty.CompressibilityCoeff, RET_VMOL(dwpl), "L", T, P, 0, 0);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.compressibilityFactor = result;
-                
-                //Ideal
-                result = this.AUX_LIQCPm(T, phaseID);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = result;
-                this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCv = result;
-                   
-                result = this.AUX_MMM(Phase);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight = result;
-                
-                result = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
-                this.CurrentMaterialStream.Phases[phaseID].Properties.molar_enthalpy = result;
-                
-                result = this.CurrentMaterialStream.Phases[phaseID].Properties.entropy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
-                this.CurrentMaterialStream.Phases[phaseID].Properties.molar_entropy = result;
-                
-                result = this.AUX_CONDTL(T);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.thermalConductivity = result;
-                
-                result = this.AUX_LIQVISCm(T);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.viscosity = result;
-                this.CurrentMaterialStream.Phases[phaseID].Properties.kinematic_viscosity = result / this.CurrentMaterialStream.Phases[phaseID].Properties.density.Value;
+                    result = this.CalcCp(RET_VMOL(dwpl), T, P, State.Liquid);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = result;
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCv = result;
+
+                    result = this.AUX_MMM(Phase);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight = result;
+
+                    result = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molar_enthalpy = result;
+
+                    result = this.CurrentMaterialStream.Phases[phaseID].Properties.entropy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molar_entropy = result;
+
+                    result = this.AUX_CONDTL(T);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.thermalConductivity = result;
+
+                    result = this.AUX_LIQVISCm(T);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.viscosity = result;
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.kinematic_viscosity = result / this.CurrentMaterialStream.Phases[phaseID].Properties.density.Value;
+
+                }
+                else {
+
+                    result = this.AUX_MMM(Phase);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight = result;
+
+                    Task t1, t2, t3, t4;
+                    t1 = Task.Factory.StartNew(() =>
+                    {
+                        var res = this.AUX_LIQDENS(T, P, 0.0, phaseID, false);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.density = res;
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.compressibilityFactor = P / res * AUX_MMM(dwpl) / 1000 / 8.314 / T;
+                        res = this.AUX_LIQVISCm(T);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.viscosity = res;
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.kinematic_viscosity = res / this.CurrentMaterialStream.Phases[phaseID].Properties.density.GetValueOrDefault();
+                    });
+                    t2 = Task.Factory.StartNew(() =>
+                    {
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy = this.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Liquid);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.entropy = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() / T;
+                        var res = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.molar_enthalpy = res;
+                        res = this.CurrentMaterialStream.Phases[phaseID].Properties.entropy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.molar_entropy = res;
+                    });
+                    t3 = Task.Factory.StartNew(() =>
+                    {
+                        var res = this.CalcCp(RET_VMOL(dwpl), T, P, State.Liquid);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = res;
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCv = res;
+                    });
+                    t4 = Task.Factory.StartNew(() =>
+                    {
+                        var res = this.AUX_CONDTL(T);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.thermalConductivity = res;
+                    });
+                    Task.WaitAll(t1, t2, t3, t4);
+
+                }
+
                 
             }
             else if (phaseID == 2)
             {
 
-                result = this.AUX_VAPDENS(T, P);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.density = result;
-                this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy = this.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.entropy = this.DW_CalcEntropy(RET_VMOL(dwpl), T, P, State.Vapor);
+                if (!GlobalSettings.Settings.EnableParallelProcessing)
+                {
+                    result = this.AUX_VAPDENS(T, P);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.density = result;
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy = this.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.entropy = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() / T;
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.compressibilityFactor = P / result * AUX_MMM(dwpl) / 1000 / 8.314 / T;
+                    result = this.CalcCp(RET_VMOL(dwpl), T, P, State.Vapor);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = AUX_CPm(PropertyPackages.Phase.Vapor, T);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCv = AUX_CPm(PropertyPackages.Phase.Vapor, T);
+                    result = this.AUX_MMM(Phase);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight = result;
+                    result = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molar_enthalpy = result;
+                    result = this.CurrentMaterialStream.Phases[phaseID].Properties.entropy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molar_entropy = result;
+                    result = this.AUX_CONDTG(T, P);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.thermalConductivity = result;
+                    result = this.AUX_VAPVISCm(T, this.CurrentMaterialStream.Phases[phaseID].Properties.density.GetValueOrDefault(), this.AUX_MMM(Phase));
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.viscosity = result;
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.kinematic_viscosity = result / this.CurrentMaterialStream.Phases[phaseID].Properties.density.Value;
+                }
+                else {
+                    result = this.AUX_MMM(Phase);
+                    this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight = result;
 
-                result = (double)CalculateProperty(ThermoProperty.CompressibilityCoeff, RET_VMOL(dwpl), "V", T, P, 0, 0);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.compressibilityFactor = result;
-                
-                result = this.AUX_CPm(PropertyPackages.Phase.Vapor, T);
-                
-                this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = AUX_CPm(PropertyPackages.Phase.Vapor, T);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCv = AUX_CPm(PropertyPackages.Phase.Vapor, T);
-
-                result = this.AUX_MMM(Phase);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight = result;
-                
-                result = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
-                this.CurrentMaterialStream.Phases[phaseID].Properties.molar_enthalpy = result;
-                
-                result = this.CurrentMaterialStream.Phases[phaseID].Properties.entropy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
-                this.CurrentMaterialStream.Phases[phaseID].Properties.molar_entropy = result;
-                
-                result = this.AUX_CONDTG(T, P);
-                this.CurrentMaterialStream.Phases[phaseID].Properties.thermalConductivity = result;
-                
-                result = this.AUX_VAPVISCm(T, this.CurrentMaterialStream.Phases[phaseID].Properties.density.GetValueOrDefault(), this.AUX_MMM(Phase));
-                this.CurrentMaterialStream.Phases[phaseID].Properties.viscosity = result;
-                this.CurrentMaterialStream.Phases[phaseID].Properties.kinematic_viscosity = result / this.CurrentMaterialStream.Phases[phaseID].Properties.density.Value;
+                    Task t1, t2, t3, t4;
+                    t1 = Task.Factory.StartNew(() =>
+                    {
+                        var res = this.AUX_VAPDENS(T, P);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.density = res;
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.compressibilityFactor = P / res * AUX_MMM(dwpl) / 1000 / 8.314 / T;
+                        res = this.AUX_VAPVISCm(T, this.CurrentMaterialStream.Phases[phaseID].Properties.density.GetValueOrDefault(), this.AUX_MMM(Phase));
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.viscosity = res;
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.kinematic_viscosity = res / this.CurrentMaterialStream.Phases[phaseID].Properties.density.Value;
+                    });
+                    t2 = Task.Factory.StartNew(() =>
+                    {
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy = this.DW_CalcEnthalpy(RET_VMOL(dwpl), T, P, State.Vapor);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.entropy = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() / T;
+                        var res = this.CurrentMaterialStream.Phases[phaseID].Properties.enthalpy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.molar_enthalpy = res;
+                        res = this.CurrentMaterialStream.Phases[phaseID].Properties.entropy.GetValueOrDefault() * this.CurrentMaterialStream.Phases[phaseID].Properties.molecularWeight.GetValueOrDefault();
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.molar_entropy = res;
+                    });
+                    t3 = Task.Factory.StartNew(() =>
+                    {
+                        var res = this.CalcCp(RET_VMOL(dwpl), T, P, State.Vapor);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = res;
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCv = res;
+                    });
+                    t4 = Task.Factory.StartNew(() =>
+                    {
+                        var res = this.AUX_CONDTG(T, P);
+                        this.CurrentMaterialStream.Phases[phaseID].Properties.thermalConductivity = res;
+                    });
+                    Task.WaitAll(t1, t2, t3, t4, t4);
+                }
 
             }
             else if (phaseID == 7)
@@ -648,28 +739,14 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     break;
                 case "heatcapacity":
                 case "heatcapacitycp":
-                    if (state == "V")
-                    {
-                        result = this.AUX_CPm(phase, T);
-                    }
-                    else
-                    {
-                        //Ideal
-                        result = this.AUX_LIQCPm(T, phaseID);
-                        break;
-                    }
-                    this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = result;
-                    break;
                 case "heatcapacitycv":
                     if (state == "V")
                     {
-                        result = this.AUX_CPm(phase, T);
+                        result = this.CalcCp(RET_VMOL(phase), T, P, State.Vapor);
                     }
                     else
                     {
-                        //Ideal
-                        result = this.AUX_LIQCPm(T, phaseID);
-                        break;
+                        result = this.CalcCp(RET_VMOL(phase), T, P, State.Liquid);
                     }
                     this.CurrentMaterialStream.Phases[phaseID].Properties.heatCapacityCp = result;
                     break;

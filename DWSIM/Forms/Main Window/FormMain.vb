@@ -1932,14 +1932,12 @@ Public Class FormMain
 
         If simulationfilename = "" Then simulationfilename = path
 
-        If (From f As DockContent In form.dckPanel.Documents Select f Where f.Name = "FormScript").Count > 0 Then
-            Dim f As FormScript = (From fs As DockContent In form.dckPanel.Documents Select fs Where fs.Name = "FormScript").First
-            f.UpdateScripts()
-        End If
-
-        If Not IO.Path.GetExtension(path).ToLower.Contains("dwbcs") Then
-            form.ProcessScripts(Scripts.EventType.SimulationSaved, Scripts.ObjectType.Simulation, "")
-        End If
+        UIThread(Sub()
+                     If (From f As DockContent In form.dckPanel.Documents Select f Where f.Name = "FormScript").Count > 0 Then
+                         Dim f As FormScript = (From fs As DockContent In form.dckPanel.Documents Select fs Where fs.Name = "FormScript").First
+                         f.UpdateScripts()
+                     End If
+                 End Sub)
 
         Dim xdoc As New XDocument()
         Dim xel As XElement
@@ -2113,6 +2111,10 @@ Public Class FormMain
                                        form.WriteToLog(DWSIM.App.GetLocalString("Arquivo") & Me.filename & DWSIM.App.GetLocalString("salvocomsucesso"), Color.Blue, DWSIM.Flowsheet.MessageType.Information)
                                        Me.ToolStripStatusLabel1.Text = ""
                                    End Sub))
+        End If
+
+        If Not IO.Path.GetExtension(path).ToLower.Contains("dwbcs") Then
+            form.ProcessScripts(Scripts.EventType.SimulationSaved, Scripts.ObjectType.Simulation, "")
         End If
 
         Application.DoEvents()
