@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliary\PHSC_IP.cs" />
+    <Compile Include="Auxiliary\PHSC_Param.cs" />
+    <Compile Include="Auxiliary\VPT_IP.cs" />
     <Compile Include="EditingForms\PCSAFT_Editor.cs">
       <SubType>Form</SubType>
     </Compile>

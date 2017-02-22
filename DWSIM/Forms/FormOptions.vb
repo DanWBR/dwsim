@@ -542,6 +542,7 @@ Public Class FormOptions
 
     Private Sub tbServiceBusNamespace_TextChanged(sender As Object, e As EventArgs) Handles tbServiceBusNamespace.TextChanged
         My.Settings.ServiceBusConnectionString = tbServiceBusNamespace.Text
+        GlobalSettings.Settings.ServiceBusConnectionString = My.Settings.ServiceBusConnectionString
     End Sub
 
     Private Sub cbDebugLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDebugLevel.SelectedIndexChanged
@@ -552,15 +553,18 @@ Public Class FormOptions
     Private Sub tbSolverTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbSolverTimeout.TextChanged
         If Integer.TryParse(tbSolverTimeout.Text, New Integer) Then
             My.Settings.SolverTimeoutSeconds = Integer.Parse(tbSolverTimeout.Text)
+            GlobalSettings.Settings.SolverTimeoutSeconds = My.Settings.SolverTimeoutSeconds
         End If
     End Sub
 
     Private Sub tbServerIP_TextChanged(sender As Object, e As EventArgs) Handles tbServerIP.TextChanged
         My.Settings.ServerIPAddress = tbServerIP.Text
+        GlobalSettings.Settings.ServerIPAddress = My.Settings.ServerIPAddress
     End Sub
 
     Private Sub tbServerPort_TextChanged(sender As Object, e As EventArgs) Handles tbServerPort.TextChanged
         My.Settings.ServerPort = tbServerPort.Text
+        GlobalSettings.Settings.ServerPort = My.Settings.ServerPort
     End Sub
 
     Private Sub FormOptions_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested

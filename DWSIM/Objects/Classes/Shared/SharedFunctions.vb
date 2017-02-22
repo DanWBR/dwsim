@@ -41,7 +41,16 @@ Namespace DWSIM
             GlobalSettings.Settings.SolverMode = My.Settings.SolverMode
             GlobalSettings.Settings.SolverTimeoutSeconds = My.Settings.SolverTimeoutSeconds
             GlobalSettings.Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
+
+            GlobalSettings.Settings.ServerIPAddress = My.Settings.ServerIPAddress
+            Try
+                GlobalSettings.Settings.ServerPort = Integer.Parse(My.Settings.ServerPort)
+            Catch ex As Exception
+            End Try
+            GlobalSettings.Settings.ServiceBusConnectionString = My.Settings.ServiceBusConnectionString
+
             GlobalSettings.Settings.TaskScheduler = My.Settings.TaskScheduler
+
             GlobalSettings.Settings.MaxThreadMultiplier = My.Settings.MaxThreadMultiplier
             GlobalSettings.Settings.MaxDegreeOfParallelism = My.Settings.MaxDegreeOfParallelism
             GlobalSettings.Settings.EnableParallelProcessing = My.Settings.EnableParallelProcessing
