@@ -517,6 +517,7 @@ Namespace UnitOperations
                     A = Area
                     U = OverallCoefficient
                     Qi = MaxHeatExchange
+                    Q_old = 10000000000.0
 
                     If DebugMode Then AppendDebugLine(String.Format("Start with Max Heat Exchange Q = {0} KW", Qi))
 
@@ -538,6 +539,8 @@ Namespace UnitOperations
                         Th2 = tmp.CalculatedTemperature
                         PIh2 = (1 + tmp.GetLiquidPhase1MoleFraction) * (1 + tmp.GetVaporPhaseMoleFraction * (1 + tmp.GetSolidPhaseMoleFraction)) 'phase indicator hot stream
                         If DebugMode Then AppendDebugLine(String.Format("Doing a PH flash to calculate hot stream outlet temperature... P = {0} Pa, H = {1} kJ/[kg.K]  ===> Th2 = {2} K", Ph2, Hh2, Th2))
+
+                        If Abs((Qi - Q_old) / Q_old) < 0.001 Or count > 100 Then Exit Do
 
                         WWc = Wc * (Hc2 - Hc1) / (Tc2 - Tc1) * 1000 'Heat Capacity Rate cold side
                         WWh = Wh * (Hh2 - Hh1) / (Th2 - Th1) * 1000 'Heat Capacity Rate hot side
@@ -596,11 +599,16 @@ Namespace UnitOperations
 
                         count += 1
 
-                    Loop Until Abs((Qi - Q_old) / Q_old) < 0.001 Or count > 100
+                    Loop
+
+                    ColdSideOutletTemperature = tc2
+
                     Q = Qi
-                    If count > 100 Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " KW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ", IFlowsheet.MessageType.Warning)
-                    PIc1 = (1 + StInCold.Phases("1").Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases("2").Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases("7").Properties.molarfraction.GetValueOrDefault)
-                    PIh1 = (1 + StInHot.Phases("1").Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases("2").Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases("7").Properties.molarfraction.GetValueOrDefault)
+
+                    If count > 100 Then Throw New Exception("Reached maximum number of iterations! Final Q change: " & Qi - Q_old & " kW ; " & Abs((Qi - Q_old) / Q_old * 100) & " % ")
+
+                    PIc1 = (1 + StInCold.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + StInCold.Phases(7).Properties.molarfraction.GetValueOrDefault)
+                    PIh1 = (1 + StInHot.Phases(1).Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases(2).Properties.molarfraction.GetValueOrDefault) * (1 + StInHot.Phases(7).Properties.molarfraction.GetValueOrDefault)
 
                     If (PIc1 = 2 And PIc2 > 2) Or (PIc1 > 2 And PIc2 = 2) Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Phase change in cold stream detected! Heat exchange result is an aproximation.", IFlowsheet.MessageType.Warning)
                     If (PIh1 = 2 And PIh2 > 2) Or (PIh1 > 2 And PIh2 = 2) Then FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": Phase change in hot stream detected! Heat exchange result is an aproximation.", IFlowsheet.MessageType.Warning)
