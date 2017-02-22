@@ -58,6 +58,8 @@
 
     ReadOnly Property MobileCompatible As Boolean
 
+    Function ReturnInstance(typename As String) As Object
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IPhaseEnvelopeOptions

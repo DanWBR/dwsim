@@ -2206,6 +2206,8 @@ Public Class FormFlowsheet
 
         FormMain.AddGraphicObjects(Me, data, excs, pkey, 40, True)
 
+        Dim pp As New PropertyPackages.RaoultPropertyPackage()
+
         If My.Settings.ClipboardCopyMode_Compounds = 1 Then
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
@@ -2246,7 +2248,7 @@ Public Class FormFlowsheet
 
             For Each xel As XElement In data
                 Try
-                    Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                    Dim obj As Thermodynamics.PropertyPackages.PropertyPackage = pp.ReturnInstance(xel.Element("Type").Value)
                     obj.LoadData(xel.Elements.ToList)
                     obj.UniqueID = pkey & obj.UniqueID
                     obj.Tag = obj.Tag & " (C)"
@@ -2271,7 +2273,7 @@ Public Class FormFlowsheet
             Dim id As String = pkey & xel.<Name>.Value
             Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
             If xel.Element("Type").Value.Contains("MaterialStream") Then
-                obj = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                obj = pp.ReturnInstance(xel.Element("Type").Value)
             Else
                 obj = UnitOperations.Resolver.ReturnInstance(xel.Element("Type").Value)
             End If
@@ -2320,6 +2322,9 @@ Public Class FormFlowsheet
             Next
 
         End If
+
+        pp.Dispose()
+        pp = Nothing
 
         FormMain.AddSimulationObjects(Me, objlist, excs, pkey)
 

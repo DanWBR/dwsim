@@ -216,11 +216,13 @@ Label_00CC:
 
             Dim excs As New Concurrent.ConcurrentBag(Of Exception)
 
+            Dim pp As New Thermodynamics.PropertyPackages.RaoultPropertyPackage()
+
             Try
                 Dim el = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Element("FlashAlgorithms")
                 If Not el Is Nothing Then
                     For Each xel As XElement In el.Elements
-                        Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                        Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = pp.ReturnInstance(xel.Element("Type").Value)
                         obj.LoadData(xel.Elements.ToList)
                         fs.FlowsheetOptions.FlashAlgorithms.Add(obj)
                     Next
@@ -263,7 +265,7 @@ Label_00CC:
             For Each xel As XElement In data
                 Try
                     xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
-                    Dim obj As PropertyPackage = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                    Dim obj As PropertyPackage = pp.ReturnInstance(xel.Element("Type").Value)
                     obj.LoadData(xel.Elements.ToList)
                     Dim newID As String = Guid.NewGuid.ToString
                     If fs.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
@@ -282,7 +284,7 @@ Label_00CC:
                     Dim id As String = xel.<Name>.Value
                     Dim obj As SharedClasses.UnitOperations.BaseClass = Nothing
                     If xel.Element("Type").Value.Contains("MaterialStream") Then
-                        obj = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                        obj = pp.ReturnInstance(xel.Element("Type").Value)
                     Else
                         obj = Resolver.ReturnInstance(xel.Element("Type").Value)
                     End If
@@ -304,6 +306,8 @@ Label_00CC:
                     excs.Add(New Exception("Error Loading Unit Operation Information", ex))
                 End Try
             Next
+
+            pp = Nothing
 
             For Each obj In objlist
                 fs.AddSimulationObject(obj)

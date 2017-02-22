@@ -289,14 +289,6 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Shared Function ReturnInstance(typename As String) As Object
-
-            If typename.StartsWith("PropertyPackage") Then typename = typename.Insert(0, "DWSIM.Thermodynamics.")
-            Dim t As Type = Type.GetType(typename, False)
-            Return Activator.CreateInstance(t)
-
-        End Function
-
         Public Overridable Sub ConfigParameters()
             m_par = New System.Collections.Generic.Dictionary(Of String, Double)
             With Me.Parameters
@@ -9761,7 +9753,7 @@ Final3:
 
                 Dim xmldoc = XDocument.Parse(myarr(6))
                 Dim fadata As List(Of XElement) = xmldoc.Element("Data").Elements.ToList
-                _FlashAlgorithm = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(fadata.Where(Function(x) x.Name = "Type").FirstOrDefault.Value)
+                _FlashAlgorithm = ReturnInstance(fadata.Where(Function(x) x.Name = "Type").FirstOrDefault.Value)
                 DirectCast(_FlashAlgorithm, Interfaces.ICustomXMLSerialization).LoadData(fadata)
 
                 Select Case Me.ComponentName
@@ -10669,6 +10661,12 @@ Final3:
         End Property
 
         Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements IPropertyPackage.MobileCompatible
+
+        Public Function ReturnInstance(typename As String) As Object Implements IPropertyPackage.ReturnInstance
+            If typename.StartsWith("PropertyPackage") Then typename = typename.Insert(0, "DWSIM.Thermodynamics.")
+            Dim t As Type = Type.GetType(typename, False)
+            Return Activator.CreateInstance(t)
+        End Function
 
     End Class
 

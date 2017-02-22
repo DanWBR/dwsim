@@ -133,7 +133,7 @@ Namespace DWSIM.Flowsheet
 
             If Not el Is Nothing Then
                 For Each xel As XElement In el.Elements
-                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = Thermodynamics.PropertyPackages.PropertyPackage.ReturnInstance(xel.Element("Type").Value)
+                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value)
                     obj.LoadData(xel.Elements.ToList)
                     FlashAlgorithms.Add(obj)
                 Next

@@ -5,6 +5,9 @@
         public SAFTPropertyPackage()
         {
             PropertyPackageModel = Model.SAFT;
+            ComponentName = "Statistical Associating Fluid Theory (SAFT)";
+            ComponentDescription = "";
+            IsConfigurable = true;
         }
         
         protected override string GetModelSpecificParameters()

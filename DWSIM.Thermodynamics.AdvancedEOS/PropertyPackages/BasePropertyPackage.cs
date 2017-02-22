@@ -21,11 +21,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         PRWS,   //PR-Wong-Sandler
         PT,     //Patel-Teja
         VPT,    //Valderrama-Patel-Teja
-
-        //Predictive EOS
-        PSRK,   //Predictive Soave-Redlich-Kwong
-        GC,     //Group Contribution
-
+        
         // Chain
         PHSC,   //Perturbed Hard Sphere Chain
 
@@ -55,7 +51,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
         public Model PropertyPackageModel = Model.PRBM;
 
-        public static new object ReturnInstance(string typename)
+        public new object ReturnInstance(string typename)
         {
             Type t = Type.GetType(typename, false);
             return Activator.CreateInstance(t);
@@ -151,9 +147,6 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             switch (PropertyPackageModel)
             {
-                case Model.GC:
-                 contents.WriteLine("EoS = cGCEoS;");
-                   break;
                 case Model.PC_SAFT:
                    Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                    contents.WriteLine("EoS = cPCSAFTEoS;");
@@ -167,9 +160,6 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     break;
                 case Model.PRWS:
                     contents.WriteLine("EoS = cPRWSEoS;");
-                    break;
-                case Model.PSRK:
-                    contents.WriteLine("EoS = cPSRKEoS;");
                     break;
                 case Model.PT:
                     contents.WriteLine("EoS = cPTEoS;");

@@ -5,6 +5,10 @@
         public PHSCPropertyPackage()
         {
             PropertyPackageModel = Model.PHSC;
+            ComponentName = "Perturbed Hard Sphere Chain (PHSC)";
+            ComponentDescription = "";
+            IsConfigurable = true;
+
         }
 
         protected override string GetModelSpecificParameters()

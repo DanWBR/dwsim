@@ -1117,10 +1117,6 @@
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Thermodynamics.AdvancedEOS\DWSIM.Thermodynamics.AdvancedEOS.csproj">
-      <Project>{dc5b9572-697e-485a-b659-fdc65956611f}</Project>
-      <Name>DWSIM.Thermodynamics.AdvancedEOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.NativeLibraries\DWSIM.Thermodynamics.NativeLibraries.vbproj">
       <Project>{33336b05-116e-4582-896a-a3dfc796e0c3}</Project>
       <Name>DWSIM.Thermodynamics.NativeLibraries</Name>

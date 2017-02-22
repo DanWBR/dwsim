@@ -5,6 +5,9 @@
         public VPTPropertyPackage()
         {
             PropertyPackageModel = Model.VPT;
+            ComponentName = "Valderrama-Patel-Teja EOS (VPT)";
+            ComponentDescription = "";
+            IsConfigurable = true;
         }
 
         protected override string GetModelSpecificParameters()
