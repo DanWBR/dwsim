@@ -1,7 +1,11 @@
-﻿namespace DWSIM.Thermodynamics.AdvancedEOS
+﻿using System.Collections.Generic;
+using DWSIM.Thermodynamics.PropertyPackages.Auxiliary;
+
+namespace DWSIM.Thermodynamics.AdvancedEOS
 {
-    public class SAFTPropertyPackage: AdvEOSPropertyPackageBase
+    public class SAFTPropertyPackage: BaseSAFTPropertyPackage
     {
+
         public SAFTPropertyPackage()
         {
             PropertyPackageModel = Model.SAFT;
@@ -9,10 +13,6 @@
             ComponentDescription = "";
             IsConfigurable = true;
         }
-        
-        protected override string GetModelSpecificParameters()
-        {
-            return "";
-        }
+
     }
 }

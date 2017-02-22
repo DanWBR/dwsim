@@ -32,6 +32,7 @@ Namespace PropertyPackages.Auxiliary
         Public epsilon As Double = 0.0#
         <FieldNullValue(0.0#)> Public kAiBi As Double = 0.0#
         <FieldNullValue(0.0#)> Public epsilon2 As Double = 0.0#
+        <FieldHidden()> Public associationparams As String = ""
 
     End Class
 

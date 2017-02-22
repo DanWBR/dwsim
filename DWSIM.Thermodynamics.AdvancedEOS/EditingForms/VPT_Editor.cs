@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 {
-    public partial class VPT : Form
+    public partial class VPT_Editor : Form
     {
-        public VPT()
+        public VPT_Editor()
         {
             InitializeComponent();
         }

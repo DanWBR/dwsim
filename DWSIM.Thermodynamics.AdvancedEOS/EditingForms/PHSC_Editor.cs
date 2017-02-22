@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 {
-    public partial class PHSC : Form
+    public partial class PHSC_Editor : Form
     {
-        public PHSC()
+        public PHSC_Editor()
         {
             InitializeComponent();
         }

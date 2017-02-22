@@ -1,6 +1,6 @@
 ﻿namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 {
-    partial class PHSC
+    partial class PHSC_Editor
     {
         /// <summary>
         /// Required designer variable.

@@ -1,7 +1,15 @@
-﻿namespace DWSIM.Thermodynamics.AdvancedEOS
+﻿using System.Collections.Generic;
+using DWSIM.Thermodynamics.PropertyPackages.Auxiliary;
+using System.IO;
+using System.Reflection;
+using FileHelpers;
+using DWSIM.Thermodynamics.AdvancedEOS.EditingForms;
+
+namespace DWSIM.Thermodynamics.AdvancedEOS
 {
-    public class PCSAFTPropertyPackage : AdvEOSPropertyPackageBase
+    public class PCSAFTPropertyPackage : BaseSAFTPropertyPackage
     {
+
         public PCSAFTPropertyPackage()
         {
             PropertyPackageModel = Model.PC_SAFT;
@@ -11,12 +19,10 @@
 
             IsConfigurable = true;
 
+            ReadParameters();
+
         }
 
-        protected override string GetModelSpecificParameters()
-        {
-            return "";
-        }
     }
 }
 
