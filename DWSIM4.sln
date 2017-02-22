@@ -3,6 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM", "DWSIM\DWSIM.vbproj", "{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DC5B9572-697E-485A-B659-FDC65956611F} = {DC5B9572-697E-485A-B659-FDC65956611F}
+	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Plugins.NaturalGas", "NaturalGas\DWSIM.Plugins.NaturalGas.vbproj", "{B8715C47-862B-46CF-8784-573B40407E4D}"
 EndProject

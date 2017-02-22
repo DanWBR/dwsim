@@ -56,6 +56,7 @@ Namespace DWSIM
 
             GlobalSettings.Settings.OctavePath = My.Settings.OctavePath
             GlobalSettings.Settings.OctaveFileTempDir = My.Settings.OctaveTempPath
+            GlobalSettings.Settings.OctaveTimeoutInMinutes = My.Settings.OctaveProcessTimeout
 
             GlobalSettings.Settings.CalculatorActivated = True
 

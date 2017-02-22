@@ -10662,7 +10662,7 @@ Final3:
 
         Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements IPropertyPackage.MobileCompatible
 
-        Public Function ReturnInstance(typename As String) As Object Implements IPropertyPackage.ReturnInstance
+        Public Overridable Function ReturnInstance(typename As String) As Object Implements IPropertyPackage.ReturnInstance
             If typename.StartsWith("PropertyPackage") Then typename = typename.Insert(0, "DWSIM.Thermodynamics.")
             Dim t As Type = Type.GetType(typename, False)
             Return Activator.CreateInstance(t)

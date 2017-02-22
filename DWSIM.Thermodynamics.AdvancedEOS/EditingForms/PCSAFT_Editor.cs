@@ -47,10 +47,12 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                                         PP.InteractionParameters[cp.CAS_Number].Add(cp2.CAS_Number, new PCSIP());
                                         double a12 = PP.InteractionParameters[cp.CAS_Number][cp2.CAS_Number].kij;
                                         dgvkij.Rows.Add(new object[] {
-								cp.Name,
-								cp2.Name,
-								a12
-							});
+								            cp.Name,
+								            cp2.Name,
+								            a12
+							            });
+                                        dgvkij.Rows[dgvkij.Rows.Count - 1].Cells[0].Tag = cp.CAS_Number;
+                                        dgvkij.Rows[dgvkij.Rows.Count - 1].Cells[1].Tag = cp2.CAS_Number;
                                     }
                                 }
                             }
@@ -99,6 +101,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 			                    cp.Name,
 			                    assocpar
 		                    });
+                    dgvparama.Rows[dgvparama.Rows.Count - 1].Cells[0].Tag = cp.CAS_Number;
                 }
                 else
                 {
@@ -116,13 +119,12 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
             if (Loaded)
             {
-                double value = (double)dgvkij.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 string id1 = dgvkij.Rows[e.RowIndex].Cells[0].Tag.ToString();
                 string id2 = dgvkij.Rows[e.RowIndex].Cells[1].Tag.ToString();
                 switch (e.ColumnIndex)
                 {
                     case 2:
-                        PP.InteractionParameters[id1][id2].kij = value;
+                        double.TryParse(dgvkij.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out PP.InteractionParameters[id1][id2].kij);
                         break;
                 }
             }
@@ -135,7 +137,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
             if (Loaded)
             {
-                double value = (double)dgvparams.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                double value;
+                double.TryParse(dgvparams.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out value);
                 string id = dgvparams.Rows[e.RowIndex].Cells[1].Value.ToString();
                 switch (e.ColumnIndex)
                 {
@@ -154,11 +157,10 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
         private void dgvparama_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-
             if (Loaded)
             {
                 string value = dgvparama.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                string id = dgvparama.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string id = dgvparama.Rows[e.RowIndex].Cells[0].Tag.ToString();
                 switch (e.ColumnIndex)
                 {
                     case 1:

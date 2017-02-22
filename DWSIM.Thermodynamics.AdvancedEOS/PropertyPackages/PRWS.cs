@@ -14,6 +14,11 @@
         {
             return "";
         }
+
+        protected override string GetModelInteractionParameters()
+        {
+            return "";
+        }
     }
 }
 

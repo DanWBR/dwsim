@@ -114,6 +114,7 @@ Public Class FormOptions
 
         tbOctavePath.Text = My.Settings.OctavePath
         tbOctaveTempPath.Text = My.Settings.OctaveTempPath
+        tbOctaveTimeout.Text = My.Settings.OctaveProcessTimeout
 
         Me.cbGPU.Items.Clear()
 
@@ -685,5 +686,13 @@ Public Class FormOptions
             My.Settings.OctaveTempPath = tbOctaveTempPath.Text
             GlobalSettings.Settings.OctaveFileTempDir = tbOctaveTempPath.Text
         End If
+    End Sub
+
+    Private Sub tbOctaveTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbOctaveTimeout.TextChanged
+        Try
+            GlobalSettings.Settings.OctaveTimeoutInMinutes = tbOctaveTimeout.Text
+            My.Settings.OctaveProcessTimeout = tbOctaveTimeout.Text
+        Catch ex As Exception
+        End Try
     End Sub
 End Class
