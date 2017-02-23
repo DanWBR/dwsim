@@ -41,7 +41,6 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 string cname = "comp" + i.ToString();
                 contents.WriteLine(cname + ".EoSParam(1) = " + c.ConstantProperties.Critical_Compressibility.ToString(ci) + ";");
-                contents.WriteLine("");
                 i += 1;
             }
 
@@ -55,47 +54,27 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
 
-            int i = 1;
-            int j = 1;
-            double k1, k2, k3;
-            string k1s, k2s, k3s;
-            k1s = "mix.k1 = [";
-            k2s = "mix.k2 = [";
-            k3s = "mix.k3 = [";
-            foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
+            var compounds = CurrentMaterialStream.Phases[0].Compounds.Values.Select(x => x.ConstantProperties.Name).ToList();
+
+            foreach (string c1 in compounds)
             {
-                foreach (ICompound c2 in CurrentMaterialStream.Phases[0].Compounds.Values)
+                foreach (string c2 in compounds)
                 {
-                    if (InteractionParameters.ContainsKey(c.ConstantProperties.Name))
+                    if (InteractionParameters.ContainsKey(c1))
                     {
-                        if (InteractionParameters[c.ConstantProperties.Name].ContainsKey(c2.ConstantProperties.Name))
+                        if (InteractionParameters[c1].ContainsKey(c2))
                         {
-                            k1 = InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].k1;
-                            k2 = InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].k2;
-                            k3 = InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].k3;
-                            if (i != j)
-                            {
-                                k1s += k1.ToString(ci) + " ";
-                                k2s += k2s + k2.ToString(ci) + " ";
-                                k3s += k3s + k3.ToString(ci) + " ";
-                            }
+                            contents.WriteLine("mix.k1(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParameters[c1][c2].k1.ToString(ci) + "';");
+                            contents.WriteLine("mix.k1(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParameters[c1][c2].k1.ToString(ci) + "';");
+                            contents.WriteLine("mix.k2(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParameters[c1][c2].k1.ToString(ci) + "';");
+                            contents.WriteLine("mix.k2(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParameters[c1][c2].k1.ToString(ci) + "';");
+                            contents.WriteLine("mix.k3(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParameters[c1][c2].k1.ToString(ci) + "';");
+                            contents.WriteLine("mix.k3(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParameters[c1][c2].k1.ToString(ci) + "';");
                         }
                     }
-                    j += 1;
-                    k1s = k1s.TrimEnd() + ";";
-                    k2s = k3s.TrimEnd() + ";";
-                    k3s = k3s.TrimEnd() + ";";
+
                 }
-                i += 1;
             }
-            k1s = k1s.TrimEnd(new char[] { ';' }) + "];";
-            k2s = k3s.TrimEnd(new char[] { ';' }) + "];";
-            k3s = k3s.TrimEnd(new char[]{';'}) + "];";
-
-            contents.WriteLine(k1s);
-            contents.WriteLine(k2s);
-            contents.WriteLine(k3s);
-
             contents.WriteLine("");
 
             return contents.ToString();

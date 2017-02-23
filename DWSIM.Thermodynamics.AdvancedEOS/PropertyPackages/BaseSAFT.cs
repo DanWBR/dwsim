@@ -44,7 +44,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 if (pcsaftdata.kAiBi != 0d)
                 {
-                    pcsaftdata.associationparams = "2\n[0 " + pcsaftdata.kAiBi + "; " + pcsaftdata.kAiBi + " 0]\n[0 " + pcsaftdata.epsilon2 + "; " + pcsaftdata.epsilon2 + " 0]"; 
+                    pcsaftdata.associationparams = "2\n[0 " + pcsaftdata.kAiBi + "; " + pcsaftdata.kAiBi + " 0]\n[0 " + pcsaftdata.epsilon2 + "; " + pcsaftdata.epsilon2 + " 0]";
                 }
                 if (!CompoundParameters.ContainsKey(pcsaftdata.casno))
                     CompoundParameters.Add(pcsaftdata.casno, pcsaftdata);
@@ -123,7 +123,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     contents.WriteLine(cname + ".EoSParam(3) = " + CompoundParameters[c.ConstantProperties.CAS_Number].epsilon.ToString(ci) + ";");
                     if (CompoundParameters[c.ConstantProperties.CAS_Number].associationparams != "")
                     {
-                        string[] split = new string[] { System.Environment.NewLine };
+                        string[] split = new string[] { "\n" };
                         contents.WriteLine(cname + ".EoSParam(4) = " + CompoundParameters[c.ConstantProperties.CAS_Number].associationparams.Split(split, System.StringSplitOptions.RemoveEmptyEntries)[0] + ";");
                         contents.WriteLine(cname + ".EoSParam(5) = " + CompoundParameters[c.ConstantProperties.CAS_Number].associationparams.Split(split, System.StringSplitOptions.RemoveEmptyEntries)[1] + ";");
                         contents.WriteLine(cname + ".EoSParam(6) = " + CompoundParameters[c.ConstantProperties.CAS_Number].associationparams.Split(split, System.StringSplitOptions.RemoveEmptyEntries)[2] + ";");
@@ -144,26 +144,22 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
 
-            int i = 1;
-            int j = 1;
-            foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
+            var compounds = CurrentMaterialStream.Phases[0].Compounds.Values.Select(x => x.ConstantProperties.CAS_Number).ToList();
+
+            foreach (string c1 in compounds)
             {
-                foreach (ICompound c2 in CurrentMaterialStream.Phases[0].Compounds.Values)
+                foreach (string c2 in compounds)
                 {
-                    if (InteractionParameters.ContainsKey(c.ConstantProperties.CAS_Number))
+                    if (InteractionParameters.ContainsKey(c1))
                     {
-                        if (InteractionParameters[c.ConstantProperties.CAS_Number].ContainsKey(c2.ConstantProperties.CAS_Number))
+                        if (InteractionParameters[c1].ContainsKey(c2))
                         {
-                            if (i != j)
-                            {
-                                contents.WriteLine("mix.k(" + i + "," + j + ") = '" + InteractionParameters[c.ConstantProperties.CAS_Number][c2.ConstantProperties.CAS_Number].kij.ToString(ci) + "';");
-                                contents.WriteLine("mix.k(" + j + "," + i + ") = '" + InteractionParameters[c.ConstantProperties.CAS_Number][c2.ConstantProperties.CAS_Number].kij.ToString(ci) + "';");
-                            }
+                            contents.WriteLine("mix.k(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParameters[c1][c2].kij.ToString(ci) + "';");
+                            contents.WriteLine("mix.k(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParameters[c1][c2].kij.ToString(ci) + "';");
                         }
                     }
-                    j += 1;
+
                 }
-                i += 1;
             }
             contents.WriteLine("");
 
@@ -257,8 +253,9 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 {
                     this.CompoundParameters.Add(xel.Attribute("CAS_ID").Value, param);
                 }
-                else {
-                    this.CompoundParameters[xel.Attribute("CAS_ID").Value] =  param;
+                else
+                {
+                    this.CompoundParameters[xel.Attribute("CAS_ID").Value] = param;
                 }
             }
 

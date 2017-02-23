@@ -63,26 +63,22 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
 
-            int i = 1;
-            int j = 1;
-            foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
+            var compounds = CurrentMaterialStream.Phases[0].Compounds.Values.Select(x => x.ConstantProperties.Name).ToList();
+
+            foreach (string c1 in compounds)
             {
-                foreach (ICompound c2 in CurrentMaterialStream.Phases[0].Compounds.Values)
+                foreach (string c2 in compounds)
                 {
-                    if (InteractionParameters.ContainsKey(c.ConstantProperties.Name))
+                    if (InteractionParameters.ContainsKey(c1))
                     {
-                        if (InteractionParameters[c.ConstantProperties.Name].ContainsKey(c2.ConstantProperties.Name))
+                        if (InteractionParameters[c1].ContainsKey(c2))
                         {
-                            if (i != j)
-                            {
-                                contents.WriteLine("mix.k(" + i + "," + j + ") = '" + InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].kij.ToString(ci) + "';");
-                                contents.WriteLine("mix.k(" + j + "," + i + ") = '" + InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].kij.ToString(ci) + "';");
-                            }
+                            contents.WriteLine("mix.k(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParameters[c1][c2].kij.ToString(ci) + "';");
+                            contents.WriteLine("mix.k(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParameters[c1][c2].kij.ToString(ci) + "';");
                         }
                     }
-                    j += 1;
+
                 }
-                i += 1;
             }
             contents.WriteLine("");
 

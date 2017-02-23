@@ -231,44 +231,43 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             var octave = GetOctaveInstance();
 
+            Object result = null;
+                
             try
             {
                 octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), GlobalSettings.Settings.OctaveTimeoutInMinutes * 60 * 1000);
-                Object result = null;
-
                 switch (prop)
                 {
                     case ThermoProperty.CompressibilityCoeff:
                         result = octave.GetScalar("Z");
-                        octave.OctaveProcess.Kill();
-                        octave = null;
-                        return result;
+                        break;
                     case ThermoProperty.Density:
                         result = octave.GetScalar("denMass");
-                        octave.OctaveProcess.Kill();
-                        octave = null;
-                        return result;
+                        break;
                     case ThermoProperty.Enthalpy:
-                        result = octave.GetScalar("Hres") + RET_Hid(298.15, param1, vx);
-                        octave.OctaveProcess.Kill();
-                        octave = null;
-                        return result;
+                        result = octave.GetScalar("Hres") / AUX_MMM(vx) + RET_Hid(298.15, param1, vx);
+                        break;
                     case ThermoProperty.FugacityCoeff:
                         result = octave.GetVector("f");
-                        octave.OctaveProcess.Kill();
-                        octave = null;
-                        return result;
+                        break;
                     default:
-                        return null;
+                        break;
                 }
             }
             catch (Exception ex)
             {
+                File.Delete(filename);
                 octave.OctaveProcess.Kill();
                 octave = null;
                 throw ex;
             }
+            finally {
+                File.Delete(filename);
+                octave.OctaveProcess.Kill();
+                octave = null;
+            }
 
+            return result;
 
         }
 

@@ -214,72 +214,57 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             System.Globalization.CultureInfo ci = System.Globalization.CultureInfo.InvariantCulture;
 
-            int i = 1;
-            int j = 1;
-            foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
+            var compounds = CurrentMaterialStream.Phases[0].Compounds.Values.Select(x => x.ConstantProperties.Name).ToList();
+
+            foreach (string c1 in compounds)
             {
-                foreach (ICompound c2 in CurrentMaterialStream.Phases[0].Compounds.Values)
+                foreach (string c2 in compounds)
                 {
-                    if (InteractionParameters.ContainsKey(c.ConstantProperties.Name))
+                    if (InteractionParameters.ContainsKey(c1))
                     {
-                        if (InteractionParameters[c.ConstantProperties.Name].ContainsKey(c2.ConstantProperties.Name))
+                        if (InteractionParameters[c1].ContainsKey(c2))
                         {
-                            if (i != j)
-                            {
-                                contents.WriteLine("mix.k1(" + i + "," + j + ") = '" + InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].kij.ToString(ci) + "';");
-                                contents.WriteLine("mix.k1(" + j + "," + i + ") = '" + InteractionParameters[c.ConstantProperties.Name][c2.ConstantProperties.Name].kij.ToString(ci) + "';");
-                            }
+                            contents.WriteLine("mix.k1(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParameters[c1][c2].kij.ToString(ci) + "';");
+                            contents.WriteLine("mix.k1(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParameters[c1][c2].kij.ToString(ci) + "';");
                         }
                     }
-                    j += 1;
-                }
-                i += 1;
-            }
 
-            i = 1;
-            j = 1;
-            foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
+                }
+            }
+            contents.WriteLine("");
+
+            foreach (string c1 in compounds)
             {
-                foreach (ICompound c2 in CurrentMaterialStream.Phases[0].Compounds.Values)
+                foreach (string c2 in compounds)
                 {
-                    if (InteractionParameters.ContainsKey(c.ConstantProperties.Name))
+                    if (InteractionParametersNRTL.ContainsKey(c1))
                     {
-                        if (InteractionParameters[c.ConstantProperties.Name].ContainsKey(c2.ConstantProperties.Name))
+                        if (InteractionParametersNRTL[c1].ContainsKey(c2))
                         {
-                            if (i != j)
-                            {
-                                contents.WriteLine("mix.k2(" + i + "," + j + ") = '" + InteractionParametersNRTL[c.ConstantProperties.Name][c2.ConstantProperties.Name].alpha12.ToString(ci) + "';");
-                                contents.WriteLine("mix.k2(" + j + "," + i + ") = '" + InteractionParametersNRTL[c.ConstantProperties.Name][c2.ConstantProperties.Name].alpha12.ToString(ci) + "';");
-                            }
+                            contents.WriteLine("mix.k2(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParametersNRTL[c1][c2].alpha12.ToString(ci) + "';");
+                            contents.WriteLine("mix.k2(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParametersNRTL[c1][c2].alpha12.ToString(ci) + "';");
                         }
                     }
-                    j += 1;
-                }
-                i += 1;
-            }
 
-            i = 1;
-            j = 1;
-            foreach (ICompound c in CurrentMaterialStream.Phases[0].Compounds.Values)
+                }
+            }
+            contents.WriteLine("");
+
+            foreach (string c1 in compounds)
             {
-                foreach (ICompound c2 in CurrentMaterialStream.Phases[0].Compounds.Values)
+                foreach (string c2 in compounds)
                 {
-                    if (InteractionParameters.ContainsKey(c.ConstantProperties.Name))
+                    if (InteractionParametersNRTL.ContainsKey(c1))
                     {
-                        if (InteractionParameters[c.ConstantProperties.Name].ContainsKey(c2.ConstantProperties.Name))
+                        if (InteractionParametersNRTL[c1].ContainsKey(c2))
                         {
-                            if (i != j)
-                            {
-                                contents.WriteLine("mix.k3(" + i + "," + j + ") = '" + InteractionParametersNRTL[c.ConstantProperties.Name][c2.ConstantProperties.Name].A12.ToString(ci) + "';");
-                                contents.WriteLine("mix.k3(" + j + "," + i + ") = '" + InteractionParametersNRTL[c.ConstantProperties.Name][c2.ConstantProperties.Name].A21.ToString(ci) + "';");
-                            }
+                            contents.WriteLine("mix.k3(" + (compounds.IndexOf(c1) + 1) + "," + (compounds.IndexOf(c2) + 1) + ") = '" + InteractionParametersNRTL[c1][c2].A12.ToString(ci) + "';");
+                            contents.WriteLine("mix.k3(" + (compounds.IndexOf(c2) + 1) + "," + (compounds.IndexOf(c1) + 1) + ") = '" + InteractionParametersNRTL[c1][c2].A21.ToString(ci) + "';");
                         }
                     }
-                    j += 1;
-                }
-                i += 1;
-            }
 
+                }
+            }
             contents.WriteLine("");
 
             return contents.ToString();

@@ -43,10 +43,7 @@ Namespace DWSIM
             GlobalSettings.Settings.SolverBreakOnException = My.Settings.SolverBreakOnException
 
             GlobalSettings.Settings.ServerIPAddress = My.Settings.ServerIPAddress
-            Try
-                GlobalSettings.Settings.ServerPort = Integer.Parse(My.Settings.ServerPort)
-            Catch ex As Exception
-            End Try
+            Integer.TryParse(My.Settings.ServerPort, GlobalSettings.Settings.ServerPort)
             GlobalSettings.Settings.ServiceBusConnectionString = My.Settings.ServiceBusConnectionString
 
             GlobalSettings.Settings.TaskScheduler = My.Settings.TaskScheduler
