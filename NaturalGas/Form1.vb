@@ -195,10 +195,10 @@ Public Class Form1
                 '           After calculating Pisat (water partial vapor pressure), use the AUX_TSATi function 
                 '           to return the saturation temperature (dew point).
                 Dim wdp, hdp, iwdp, wc0, wc15, wc20, wcb, wdp1, iwdp1, hdp1 As Double
-                Dim fa As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV2
-                Dim fa2 As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV2
+                Dim fa As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3
+                Dim fa2 As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3
                 fa.StabSearchCompIDs = New String() {"Agua", "Water"}
-                fa.StabSearchSeverity = 2
+                fa.StabSearchSeverity = 0
 
                 Dim pp1 As PropertyPackage = tmpms.PropertyPackage
                 Dim pp2 As PropertyPackage = tmpms.PropertyPackage.Clone
@@ -213,20 +213,17 @@ Public Class Form1
                                                                        Dim result As Object = pp1.FlashBase.Flash_PV(vx, tmpms.Phases(0).Properties.pressure, 1, 250, pp1)
                                                                        iwdp = pp1.AUX_TSATi(vx(iw) * tmpms.Phases(0).Properties.pressure.GetValueOrDefault, iw)
                                                                        hdp = pp1.FlashBase.Flash_PV(vxnw, tmpms.Phases(0).Properties.pressure, 1, result(4), pp1)(4)
-                                                                       wdp = fa.Flash_PV_3P(vx, 0.999, 0.0000000001, 0.001, result(3), result(2), vxw, tmpms.Phases(0).Properties.pressure, 0.999, iwdp, pp1)(4)
+                                                                       wdp = fa.Flash_PV_3P(vx, 1.0#, 0.0#, 0.01, result(3), result(2), vxw, tmpms.Phases(0).Properties.pressure, 1.0#, iwdp, pp1)(4)
 
                                                                    End Sub)
                             Dim t2 As Task = Task.Factory.StartNew(Sub()
                                                                        Dim result As Object = pp2.FlashBase.Flash_PV(vx, 101325, 1, 250, pp2)
                                                                        iwdp1 = pp2.AUX_TSATi(vx(iw) * 101325, iw)
                                                                        hdp1 = pp2.FlashBase.Flash_PV(vxnw, 101325, 1, result(4), pp2)(4)
-                                                                       wdp1 = fa2.Flash_PV_3P(vx, 0.999, 0.0000000001, 0.001, result(3), result(2), vxw, 101325, 0.999, iwdp1, pp2)(4)
+                                                                       wdp1 = fa2.Flash_PV_3P(vx, 1.0#, 0.0#, 0.01, result(3), result(2), vxw, 101325, 1.0#, iwdp1, pp2)(4)
                                                                    End Sub)
                             Threading.Thread.Sleep(500)
-                            While t1.Status = TaskStatus.Running Or t2.Status = TaskStatus.Running
-                                Threading.Thread.Sleep(500)
-                                Application.DoEvents()
-                            End While
+                            Task.WaitAll(t1, t2)
                         End If
                     Else
                         wdp = -1.0E+20

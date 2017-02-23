@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS.Auxiliary
 {
-    class VPT_IP
+    public class VPT_IP
     {
 
         public string Compound1 = "";
@@ -14,7 +14,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.Auxiliary
         public double k2 = 0d;
         public double k3 = 0d;
 
-        public void VPT_IP()
+        public VPT_IP()
         { 
         }
 

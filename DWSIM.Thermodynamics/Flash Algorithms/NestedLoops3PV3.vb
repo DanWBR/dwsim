@@ -1511,13 +1511,19 @@ alt:
 
             ecount = 0
 
-            L1 = L1est / (1 - V)
-            L2 = L2est / (1 - V)
+            If V < 1.0# Then L1 = L1est / (1 - V)
+            If V < 1.0# Then L2 = L2est / (1 - V)
 
             'VL: composition of total liquid -> VX for LLE flash
             For i = 0 To n
-                VL(i) = (L1 * Vx1(i) + L2 * Vx2(i)) / (L1 + L2)
+                If L1 = 0.0# Or L2 = 0.0# Then
+                    VL(i) = (Vx1(i) + Vx2(i))
+                Else
+                    VL(i) = (L1 * Vx1(i) + L2 * Vx2(i)) / (L1 + L2)
+                End If
             Next
+
+            VL.NormalizeY()
 
             Do
                 L1ant = L1

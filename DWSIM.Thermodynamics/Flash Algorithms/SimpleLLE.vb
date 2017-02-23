@@ -96,7 +96,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         If InitialEstimatesForPhase1(i) = InitialEstimatesForPhase2(i) Then
                             L1 += 0.5
                         Else
-                            L1 += (Vz(i) - InitialEstimatesForPhase2(i)) / (InitialEstimatesForPhase1(i) - InitialEstimatesForPhase2(i))
+                            Dim diff As Double = (InitialEstimatesForPhase1(i) - InitialEstimatesForPhase2(i))
+                            If diff > 0.0# Then L1 += Abs((Vz(i) - InitialEstimatesForPhase2(i)) / diff)
                         End If
                     End If
                 Next

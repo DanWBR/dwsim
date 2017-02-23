@@ -5,14 +5,14 @@ using System.Text;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS.Auxiliary
 {
-    class PHSC_IP
+    public class PHSC_IP
     {
 
         public string Compound1 = "";
         public string Compound2 = "";
         public double kij = 0d;
 
-        public void PHSC_IP()
+        public PHSC_IP()
         {
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DWSIM.Thermodynamics.AdvancedEOS.Auxiliary
 {
-    class PHSC_Param
+    public class PHSC_Param
     {
 
         public string Compound = "";
@@ -14,7 +14,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.Auxiliary
         public double A = 0d;
         public double E = 0d;
 
-        public void PHSC_Param()
+        public PHSC_Param()
         { 
         }
 
