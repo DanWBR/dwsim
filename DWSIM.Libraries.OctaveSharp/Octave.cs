@@ -46,7 +46,13 @@ using System.Globalization;
             ProcessStartInfo pi = new ProcessStartInfo();
             if (PathToOctaveBinaries[PathToOctaveBinaries.Length - 1] != '\\')
                 PathToOctaveBinaries = PathToOctaveBinaries + Path.DirectorySeparatorChar;
-            pi.FileName = PathToOctaveBinaries + "octave-cli.exe";
+            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                pi.FileName = PathToOctaveBinaries + "octave";
+            }
+            else {
+                pi.FileName = PathToOctaveBinaries + "octave-cli.exe";
+            }
             pi.RedirectStandardInput = true;
             pi.RedirectStandardOutput = true;
             pi.RedirectStandardError = true;
