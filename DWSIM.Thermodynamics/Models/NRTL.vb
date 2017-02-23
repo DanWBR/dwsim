@@ -152,14 +152,14 @@ Namespace PropertyPackages.Auxiliary
                         Interactions = Databases.UserIPDB.ReadInteractions(IPDBPath, "NRTL")
                         For Each IP In Interactions
                             Dim IPD As New NRTL_IPData
-                            IPD.A12 = IP.Parameters.Item("A12")
-                            IPD.A21 = IP.Parameters.Item("A21")
-                            IPD.alpha12 = IP.Parameters.Item("alpha12")
+                            IPD.A12 = Convert.ToDouble(IP.Parameters.Item("A12"), System.Globalization.CultureInfo.InvariantCulture)
+                            IPD.A21 = Convert.ToDouble(IP.Parameters.Item("A21"), System.Globalization.CultureInfo.InvariantCulture)
+                            IPD.alpha12 = Convert.ToDouble(IP.Parameters.Item("alpha12"), System.Globalization.CultureInfo.InvariantCulture)
                             IPD.comment = IP.Description
-                            If IP.Parameters.ContainsKey("B12") Then IPD.B12 = IP.Parameters.Item("B12")
-                            If IP.Parameters.ContainsKey("B21") Then IPD.B21 = IP.Parameters.Item("B21")
-                            If IP.Parameters.ContainsKey("C12") Then IPD.C12 = IP.Parameters.Item("C12")
-                            If IP.Parameters.ContainsKey("C21") Then IPD.C21 = IP.Parameters.Item("C21")
+                            If IP.Parameters.ContainsKey("B12") Then IPD.B12 = Convert.ToDouble(IP.Parameters.Item("B12"), System.Globalization.CultureInfo.InvariantCulture)
+                            If IP.Parameters.ContainsKey("B21") Then IPD.B21 = Convert.ToDouble(IP.Parameters.Item("B21"), System.Globalization.CultureInfo.InvariantCulture)
+                            If IP.Parameters.ContainsKey("C12") Then IPD.C12 = Convert.ToDouble(IP.Parameters.Item("C12"), System.Globalization.CultureInfo.InvariantCulture)
+                            If IP.Parameters.ContainsKey("C21") Then IPD.C21 = Convert.ToDouble(IP.Parameters.Item("C21"), System.Globalization.CultureInfo.InvariantCulture)
 
                             If Me.InteractionParameters.ContainsKey(IP.Comp1) Then
                                 If Me.InteractionParameters(IP.Comp1).ContainsKey(IP.Comp2) Then

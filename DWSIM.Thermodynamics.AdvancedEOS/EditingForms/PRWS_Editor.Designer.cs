@@ -38,12 +38,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dgvu1 = new System.Windows.Forms.DataGridView();
-            this.KryptonDataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvkij = new System.Windows.Forms.DataGridView();
             this.DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dgvnrtl = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,9 +51,9 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvkij)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvu1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.KryptonDataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvnrtl)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -69,7 +69,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.KryptonDataGridView2);
+            this.tabPage1.Controls.Add(this.dgvkij);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -78,67 +78,32 @@
             this.tabPage1.Text = "Peng-Robinson Interaction Parameters";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // dgvkij
             // 
-            this.tabPage2.Controls.Add(this.dgvu1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(654, 347);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "NRTL Interaction Parameters";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dgvu1
-            // 
-            this.dgvu1.AllowUserToAddRows = false;
-            this.dgvu1.AllowUserToDeleteRows = false;
-            this.dgvu1.AllowUserToResizeColumns = false;
-            this.dgvu1.AllowUserToResizeRows = false;
-            this.dgvu1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvu1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvu1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7});
-            this.dgvu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvu1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvu1.Location = new System.Drawing.Point(3, 3);
-            this.dgvu1.MultiSelect = false;
-            this.dgvu1.Name = "dgvu1";
-            this.dgvu1.RowHeadersVisible = false;
-            this.dgvu1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvu1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvu1.Size = new System.Drawing.Size(648, 341);
-            this.dgvu1.TabIndex = 6;
-            // 
-            // KryptonDataGridView2
-            // 
-            this.KryptonDataGridView2.AllowUserToAddRows = false;
-            this.KryptonDataGridView2.AllowUserToDeleteRows = false;
-            this.KryptonDataGridView2.AllowUserToResizeColumns = false;
-            this.KryptonDataGridView2.AllowUserToResizeRows = false;
-            this.KryptonDataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.KryptonDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.KryptonDataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvkij.AllowUserToAddRows = false;
+            this.dgvkij.AllowUserToDeleteRows = false;
+            this.dgvkij.AllowUserToResizeColumns = false;
+            this.dgvkij.AllowUserToResizeRows = false;
+            this.dgvkij.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvkij.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvkij.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DataGridViewTextBoxColumn1,
             this.DataGridViewTextBoxColumn2,
             this.DataGridViewTextBoxColumn3});
-            this.KryptonDataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.KryptonDataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.KryptonDataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.KryptonDataGridView2.MultiSelect = false;
-            this.KryptonDataGridView2.Name = "KryptonDataGridView2";
-            this.KryptonDataGridView2.RowHeadersVisible = false;
-            this.KryptonDataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvkij.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvkij.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvkij.Location = new System.Drawing.Point(3, 3);
+            this.dgvkij.MultiSelect = false;
+            this.dgvkij.Name = "dgvkij";
+            this.dgvkij.RowHeadersVisible = false;
+            this.dgvkij.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle3.Format = "N5";
-            this.KryptonDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.KryptonDataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.KryptonDataGridView2.Size = new System.Drawing.Size(648, 341);
-            this.KryptonDataGridView2.TabIndex = 6;
+            this.dgvkij.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvkij.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvkij.Size = new System.Drawing.Size(648, 341);
+            this.dgvkij.TabIndex = 6;
+            this.dgvkij.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvkij_CellEndEdit);
             // 
             // DataGridViewTextBoxColumn1
             // 
@@ -160,6 +125,43 @@
             // 
             this.DataGridViewTextBoxColumn3.HeaderText = "kij";
             this.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvnrtl);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(654, 347);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "NRTL Interaction Parameters";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgvnrtl
+            // 
+            this.dgvnrtl.AllowUserToAddRows = false;
+            this.dgvnrtl.AllowUserToDeleteRows = false;
+            this.dgvnrtl.AllowUserToResizeColumns = false;
+            this.dgvnrtl.AllowUserToResizeRows = false;
+            this.dgvnrtl.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvnrtl.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvnrtl.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7});
+            this.dgvnrtl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvnrtl.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvnrtl.Location = new System.Drawing.Point(3, 3);
+            this.dgvnrtl.MultiSelect = false;
+            this.dgvnrtl.Name = "dgvnrtl";
+            this.dgvnrtl.RowHeadersVisible = false;
+            this.dgvnrtl.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvnrtl.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dgvnrtl.Size = new System.Drawing.Size(648, 341);
+            this.dgvnrtl.TabIndex = 6;
+            this.dgvnrtl.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvnrtl_CellEndEdit);
             // 
             // Column3
             // 
@@ -207,20 +209,22 @@
             this.Column7.HeaderText = "alpha12";
             this.Column7.Name = "Column7";
             // 
-            // PRWS
+            // PRWS_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(662, 373);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.Name = "PRWS";
+            this.Name = "PRWS_Editor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Peng-Robinson Wong-Sandler Property Package";
+            this.Load += new System.EventHandler(this.PRWS_Editor_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvkij)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvu1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.KryptonDataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvnrtl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -230,8 +234,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        public System.Windows.Forms.DataGridView dgvu1;
-        public System.Windows.Forms.DataGridView KryptonDataGridView2;
+        public System.Windows.Forms.DataGridView dgvnrtl;
+        public System.Windows.Forms.DataGridView dgvkij;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxColumn3;

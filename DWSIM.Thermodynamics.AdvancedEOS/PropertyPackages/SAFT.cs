@@ -12,6 +12,9 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             ComponentName = "Statistical Associating Fluid Theory (SAFT)";
             ComponentDescription = "";
             IsConfigurable = true;
+
+            ReadParameters();
+
         }
 
     }

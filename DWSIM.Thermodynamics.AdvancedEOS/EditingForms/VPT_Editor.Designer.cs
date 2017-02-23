@@ -142,6 +142,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "VPT_Editor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit VPT Property Package";
             this.Load += new System.EventHandler(this.VPT_Editor_Load);
             this.tabControl1.ResumeLayout(false);

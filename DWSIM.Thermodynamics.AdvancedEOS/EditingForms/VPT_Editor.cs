@@ -75,6 +75,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                 }
             }
 
+            Loaded = true;
+
         }
 
         private void dgvkij_CellEndEdit(object sender, DataGridViewCellEventArgs e)

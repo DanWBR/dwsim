@@ -36,11 +36,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dgvparams = new System.Windows.Forms.DataGridView();
@@ -52,13 +52,13 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dgvparama = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvkij = new System.Windows.Forms.DataGridView();
             this.DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvparams)).BeginInit();
@@ -206,6 +206,27 @@
             this.dgvparama.TabIndex = 6;
             this.dgvparama.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvparama_CellEndEdit);
             // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewTextBoxColumn4.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "Compound";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewTextBoxColumn7.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "Association Parameters";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ToolTipText = "First line: Number of association sites, Second line: Effective association volum" +
+    "e matrix, Third line: Association energy (K) matrix";
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvkij);
@@ -265,27 +286,6 @@
             this.DataGridViewTextBoxColumn3.HeaderText = "kij";
             this.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3";
             // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewTextBoxColumn4.FillWeight = 30F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Compound";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle9;
-            this.dataGridViewTextBoxColumn7.FillWeight = 70F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "Association Parameters";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ToolTipText = "First line: Number of association sites, Second line: Effective association volum" +
-    "e matrix, Third line: Association energy (K) matrix";
-            // 
             // PCSAFT_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,6 +294,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "PCSAFT_Editor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit SAFT/PC-SAFT Property Package";
             this.Load += new System.EventHandler(this.PCSAFT_Editor_Load);
             this.tabControl1.ResumeLayout(false);

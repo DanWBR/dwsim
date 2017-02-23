@@ -105,6 +105,7 @@
             this.dgvparams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvparams.Size = new System.Drawing.Size(855, 359);
             this.dgvparams.TabIndex = 5;
+            this.dgvparams.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvparams_CellEndEdit);
             // 
             // Column3
             // 
@@ -184,6 +185,7 @@
             this.dgvkij.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvkij.Size = new System.Drawing.Size(855, 359);
             this.dgvkij.TabIndex = 7;
+            this.dgvkij.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvkij_CellEndEdit);
             // 
             // DataGridViewTextBoxColumn1
             // 
@@ -214,6 +216,7 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "PHSC_Editor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit Perturbed Hard-Sphere Chain Property Package";
             this.Load += new System.EventHandler(this.PHSC_Editor_Load);
             this.tabControl1.ResumeLayout(false);

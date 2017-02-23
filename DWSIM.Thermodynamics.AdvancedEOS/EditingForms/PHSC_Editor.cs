@@ -47,7 +47,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                                     {
                                         PP.InteractionParameters[cp.Name].Add(cp2.Name, new PHSC_IP());
                                         double a12 = PP.InteractionParameters[cp.Name][cp2.Name].kij;
-                                        dgvparams.Rows.Add(new object[] {
+                                        dgvkij.Rows.Add(new object[] {
 								            cp.Name,
 								            cp2.Name,
 								            a12
@@ -58,13 +58,13 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
                             else
                             {
                                 double a12 = PP.InteractionParameters[cp.Name][cp2.Name].kij;
-                                dgvparams.Rows.Add(new object[] {
+                                dgvkij.Rows.Add(new object[] {
 						            cp.Name,
 						            cp2.Name,
 						            a12
 					            });
-                                dgvparams.Rows[dgvparams.Rows.Count - 1].Cells[0].Tag = cp.Name;
-                                dgvparams.Rows[dgvparams.Rows.Count - 1].Cells[1].Tag = cp2.Name;
+                                dgvkij.Rows[dgvkij.Rows.Count - 1].Cells[0].Tag = cp.Name;
+                                dgvkij.Rows[dgvkij.Rows.Count - 1].Cells[1].Tag = cp2.Name;
                             }
                         }
                     }
@@ -110,12 +110,12 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
             if (Loaded)
             {
-                string id1 = dgvparams.Rows[e.RowIndex].Cells[0].Value.ToString();
-                string id2 = dgvparams.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string id1 = dgvkij.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string id2 = dgvkij.Rows[e.RowIndex].Cells[1].Value.ToString();
                 switch (e.ColumnIndex)
                 {
                     case 2:
-                        double.TryParse(dgvparams.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out PP.InteractionParameters[id1][id2].kij);
+                        double.TryParse(dgvkij.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out PP.InteractionParameters[id1][id2].kij);
                         break;
                 }
             }
@@ -130,7 +130,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
             {
                 double value;
                 double.TryParse(dgvparams.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out value);
-                string id = dgvparams.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string id = dgvparams.Rows[e.RowIndex].Cells[0].Value.ToString();
                 switch (e.ColumnIndex)
                 {
                     case 2:
