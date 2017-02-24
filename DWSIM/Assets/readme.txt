@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.2 Update 2 - February 2017
+Version 4.2 Update 3 - February 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.2 Update 3
+
+- [NEW] Added support for the Advanced EOS Library
+- [FIX] Fixed issue with flowsheet calculation when a Material Stream editor window is opened
+- [FIX] Fixed issue when saving a simulation with scripts
+- [FIX] Fixed issue with the Heat Exchanger model
+- [FIX] Fixed a bug with the Simple LLE flash algorithm
+- [CHG] Natural Gas plugin Water Dew Point calculation enhancements
 
 Version 4.2 Update 2
 
