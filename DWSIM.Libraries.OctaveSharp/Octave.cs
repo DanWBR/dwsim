@@ -48,7 +48,7 @@ using System.Globalization;
                 PathToOctaveBinaries = PathToOctaveBinaries + Path.DirectorySeparatorChar;
             if (System.Environment.OSVersion.Platform == PlatformID.Unix)
             {
-                pi.FileName = "octave-cli";
+                pi.FileName = "/usr/bin/octave-cli";
             }
             else {
                 pi.FileName = PathToOctaveBinaries + "octave-cli.exe";
