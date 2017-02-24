@@ -10,7 +10,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         {
             PropertyPackageModel = Model.SAFT;
             ComponentName = "Statistical Associating Fluid Theory (SAFT)";
-            ComponentDescription = "";
+            ComponentDescription = "Based on the Statistical Associating Fluid Theory (SAFT), an equation-of-state model has been developed for predicting phase equilibria. The agreement with molecular simulation data has been found to be excellent for associating spheres, mixtures of associating spheres, and non-associating chains.";
             IsConfigurable = true;
 
             ReadParameters();

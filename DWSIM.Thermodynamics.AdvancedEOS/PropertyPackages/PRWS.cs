@@ -22,7 +22,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         {
             PropertyPackageModel = Model.PRWS;
             ComponentName = "Peng-Robinson w/ Wong-Sandler Mixing Rules (PRWS)";
-            ComponentDescription = "";
+            ComponentDescription = "Uses the Peng-Robinson EOS with Wong-Sandler mixing rules. The excess Gibbs energy (GE/RT) is calculated with the NRTL model. Recommended for use with binary or ternary mixtures of polar components at high pressures and temperatures.";
             IsConfigurable = true;
             ReadParameters();
         }

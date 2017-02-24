@@ -15,7 +15,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             PropertyPackageModel = Model.PC_SAFT;
 
             ComponentName = "PC-SAFT (with Association Support)";
-            ComponentDescription = "";
+            ComponentDescription = "The Perturbed Chain SAFT model is a state-of-the-art, engineering-like equation of state. It is designed for modelling mixtures of all types of substances: gases, solvents and polymers.";
 
             IsConfigurable = true;
 

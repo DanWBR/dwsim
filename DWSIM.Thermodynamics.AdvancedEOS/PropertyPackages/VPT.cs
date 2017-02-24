@@ -20,7 +20,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         {
             PropertyPackageModel = Model.VPT;
             ComponentName = "Valderrama-Patel-Teja EOS (VPT)";
-            ComponentDescription = "";
+            ComponentDescription = "Valderrama's modification of the Patel-Teja three-parameter cubic equation of state (EOS) provides a good representation of vapor-liquid equilibrium (VLE) for several mixtures.";
             IsConfigurable = true;
         }
 

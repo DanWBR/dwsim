@@ -20,8 +20,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public PHSCPropertyPackage()
         {
             PropertyPackageModel = Model.PHSC;
-            ComponentName = "Perturbed Hard Sphere Chain (PHSC)";
-            ComponentDescription = "";
+            ComponentName = "Perturbed Hard-Sphere-Chain (PHSC)";
+            ComponentDescription = "The perturbed hard-sphere-chain (PHSC) equation of state was developed for normal fluids and polymers, including their mixtures.";
             IsConfigurable = true;
         }
 
