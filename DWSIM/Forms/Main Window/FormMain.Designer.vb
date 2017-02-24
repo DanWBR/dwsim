@@ -785,16 +785,16 @@ Partial Class FormMain
             'load settings from INI file
             DWSIM.App.LoadSettings()
 
-                DWSIM.App.InitializeSettings()
+            DWSIM.App.InitializeSettings()
 
-                'loads the current language
-                My.Application.ChangeUICulture(My.Settings.CultureInfo)
+            'loads the current language
+            My.Application.ChangeUICulture(My.Settings.CultureInfo)
 
-            End If
+        End If
 
-            ' This call is required by the Windows Form Designer.
+        ' This call is required by the Windows Form Designer.
 
-            If Not My.Application.CommandLineMode Or Not Settings.CAPEOPENMode Then
+        If Not My.Application.CommandLineMode Or Not Settings.CAPEOPENMode Then
             InitializeComponent()
         End If
 

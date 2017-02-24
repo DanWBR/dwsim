@@ -350,6 +350,10 @@ Namespace DWSIM
             My.Settings.HideSolidPhase_CO = source.Configs("Misc").GetBoolean("HideSolidPhase_COInterface", False)
             My.Settings.IgnoreCompoundPropertiesOnLoad = source.Configs("Misc").GetBoolean("IgnoreCompoundConstantPropertyDatainXMLFile", False)
 
+            My.Settings.OctavePath = source.Configs("OctaveBridge").GetString("OctavePath", "")
+            My.Settings.OctaveTempPath = source.Configs("OctaveBridge").GetString("OctaveTempPath", "")
+            My.Settings.OctaveProcessTimeout = source.Configs("OctaveBridge").GetInt("OctaveProcessTimeout", 15)
+
         End Sub
 
         Shared Sub SaveSettings(Optional ByVal configfile As String = "")
@@ -423,6 +427,10 @@ Namespace DWSIM
 
             source.Configs("Misc").Set("HideSolidPhase_COInterface", My.Settings.HideSolidPhase_CO)
             source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", My.Settings.IgnoreCompoundPropertiesOnLoad)
+
+            source.Configs("OctaveBridge").Set("OctavePath", My.Settings.OctavePath)
+            source.Configs("OctaveBridge").Set("OctaveTempPath", My.Settings.OctaveTempPath)
+            source.Configs("OctaveBridge").Set("OctaveProcessTimeout", My.Settings.OctaveProcessTimeout)
 
             source.Save(configfile)
 

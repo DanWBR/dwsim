@@ -29,6 +29,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
             Loaded = false;
 
+            chkUseLK.Checked = PP.UseLeeKeslerEnthalpy;
+
             foreach (ICompoundConstantProperties cp in PP.Flowsheet.SelectedCompounds.Values)
             {
             gt0:
@@ -101,6 +103,11 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
             }
 
 
+        }
+
+        private void chkUseLK_CheckedChanged(object sender, EventArgs e)
+        {
+            PP.UseLeeKeslerEnthalpy = chkUseLK.Checked;
         }
 
     }
