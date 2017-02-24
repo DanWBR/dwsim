@@ -60,7 +60,9 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         private Octave GetOctaveInstance()
         {
 
-            if (GlobalSettings.Settings.OctavePath == "") { throw new Exception("Octave binaries path not set (go to 'Edit' > 'General Settings' > 'Other')."); }
+            if (GlobalSettings.Settings.OctavePath == "" && Environment.OSVersion.Platform == PlatformID.Win32NT) { throw new Exception("Octave binaries path not set (go to 'Edit' > 'General Settings' > 'Other' > 'DWSIM/Octave bridge settings')."); }
+
+            if (GlobalSettings.Settings.OctaveFileTempDir == "") { GlobalSettings.Settings.OctaveFileTempDir = Path.GetTempPath(); }
 
             var octave = new Octave(GlobalSettings.Settings.OctavePath);
 
@@ -77,9 +79,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
         public Object CalculateProperty(ThermoProperty prop, double[] vx, string state, Double param1, Double param2, Double param3, Double param4)
         {
-
-            if (GlobalSettings.Settings.OctaveFileTempDir == "") { throw new Exception("Temporary Octave scripts path not set (go to 'Edit' > 'General Settings' > 'Other')."); }
-
+                        
             if (param1 <= 0 || param2 <= 0 || vx.Sum() == 0f)
             {
                 switch (prop)
