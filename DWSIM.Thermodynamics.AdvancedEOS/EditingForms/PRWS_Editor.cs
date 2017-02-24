@@ -21,6 +21,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
         public PRWS_Editor()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
 
         }

@@ -20,6 +20,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
         public VPT_Editor()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
         }
 
