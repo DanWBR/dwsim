@@ -97,6 +97,8 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public Object CalculateProperty(ThermoProperty prop, double[] vx, string state, Double param1, Double param2, Double param3, Double param4)
         {
 
+            // PARAM order: T, P, H, S
+
             string model = "", propname = "";
 
             if (param1 <= 0 || param2 <= 0 || vx.Sum() == 0f)
@@ -113,9 +115,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                         return 0d;
                 }
             }
-
-            // PARAM order: T, P, H, S
-
+            
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             var stringChars = new char[8];
 
@@ -295,17 +295,17 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             }
             catch (Exception ex)
             {
-                File.Delete(filename);
                 CurrentMaterialStream.Flowsheet.ShowMessage("Octave process with ID " + octave.OctaveProcess.Id + " finished with errors.", IFlowsheet.MessageType.GeneralError);
                 octave.OctaveProcess.Kill();
                 octave = null;
+                File.Delete(filename);
                 throw ex;
             }
             finally
             {
-                File.Delete(filename);
                 octave.OctaveProcess.Kill();
                 octave = null;
+                File.Delete(filename);
             }
 
             return result;

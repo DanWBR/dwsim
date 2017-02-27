@@ -428,6 +428,8 @@ Namespace DWSIM
             source.Configs("Misc").Set("HideSolidPhase_COInterface", My.Settings.HideSolidPhase_CO)
             source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", My.Settings.IgnoreCompoundPropertiesOnLoad)
 
+            If Not source.Configs.Contains("OctaveBridge") Then source.Configs.Add("OctaveBridge")
+
             source.Configs("OctaveBridge").Set("OctavePath", My.Settings.OctavePath)
             source.Configs("OctaveBridge").Set("OctaveTempPath", My.Settings.OctaveTempPath)
             source.Configs("OctaveBridge").Set("OctaveProcessTimeout", My.Settings.OctaveProcessTimeout)
