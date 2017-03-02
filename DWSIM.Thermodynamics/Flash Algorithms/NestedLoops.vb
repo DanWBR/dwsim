@@ -1113,7 +1113,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     Dim K1(n), K2(n), dKdP(n) As Double
 
-                    K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                    K1 = Ki.Clone
                     K2 = PP.DW_CalcKvalue(Vx, Vy, T, P * 1.001)
 
                     For i = 0 To n
@@ -1208,7 +1208,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                         Dim K1(n), K2(n), dKdP(n) As Double
 
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        K1 = Ki.Clone
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T, P * 1.001)
 
                         For i = 0 To n
@@ -1233,7 +1233,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                         Dim K1(n), K2(n), dKdP(n) As Double
 
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        K1 = Ki.Clone
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T, P * 1.001)
 
                         For i = 0 To n
@@ -1448,7 +1448,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                     Dim K1(n), K2(n), dKdT(n) As Double
 
-                    K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                    K1 = Ki.Clone
                     K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                     dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
@@ -1516,7 +1516,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                         Dim K1(n), K2(n), dKdT(n) As Double
 
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        K1 = Ki.Clone
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
@@ -1529,7 +1529,7 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
 
                         Dim K1(n), K2(n), dKdT(n) As Double
 
-                        K1 = PP.DW_CalcKvalue(Vx, Vy, T, P)
+                        K1 = Ki.Clone
                         K2 = PP.DW_CalcKvalue(Vx, Vy, T + 0.01, P)
 
                         dKdT = K2.SubtractY(K1).MultiplyConstY(1 / 0.01)
