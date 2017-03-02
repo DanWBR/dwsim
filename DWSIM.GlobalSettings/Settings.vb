@@ -62,6 +62,10 @@ Public Class Settings
 
     Public Shared Property OctaveTimeoutInMinutes As Integer = 5
 
+    Public Shared Property CurrentEnvironment As Integer = 0
+
+    Public Shared Property CurrentPlatform As String = ""
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

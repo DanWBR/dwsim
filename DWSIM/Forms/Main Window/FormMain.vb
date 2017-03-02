@@ -144,36 +144,23 @@ Public Class FormMain
 
         If Not e.Cancel Then
 
-            'Check if DWSIM is running in Portable/Mono mode, then save settings to file.
-            If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "default.ini") Or DWSIM.App.IsRunningOnMono Then
+            'Check if DWSIM is running in Mono mode, then save settings to file.
+            If DWSIM.App.IsRunningOnMono Then
                 Try
                     DWSIM.App.SaveSettings()
                 Catch ex As UnauthorizedAccessException
                     MessageBox.Show(DWSIM.App.GetLocalString("UnauthorizedAccessError"), DWSIM.App.GetLocalString("Erroaosalvararquivo") & " dwsim.ini", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
-                If DWSIM.App.IsRunningOnMono Then
-                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
-                End If
-            End If
-            If Not DWSIM.App.IsRunningOnMono Then
+                Thermodynamics.NativeLibraries.Files.RemoveLibraries()
+            Else
                 My.Application.SaveMySettingsOnExit = True
                 My.Settings.Save()
             End If
-            'save an ini file for Excel/CAPE-OPEN compatibility purposes
-            'Try
-            '    If Not Directory.Exists(My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data") Then
-            '        Directory.CreateDirectory(My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data")
-            '    End If
-            '    DWSIM.App.SaveSettings(My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini")
-            'Catch ex As Exception
-            '    Console.WriteLine(ex.ToString)
-            'End Try
 
             'release yeppp! resources
             Try
                 If My.Settings.UseSIMDExtensions Then Yeppp.Library.Release()
             Catch ex As Exception
-
             End Try
 
         End If

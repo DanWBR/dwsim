@@ -64,6 +64,9 @@ Namespace DWSIM
             GlobalSettings.Settings.OctaveFileTempDir = My.Settings.OctaveTempPath
             GlobalSettings.Settings.OctaveTimeoutInMinutes = My.Settings.OctaveProcessTimeout
 
+            GlobalSettings.Settings.CurrentPlatform = My.Settings.CurrentPlatform
+            GlobalSettings.Settings.CurrentEnvironment = My.Settings.CurrentEnvironment
+
             GlobalSettings.Settings.CalculatorActivated = True
 
             GlobalSettings.Settings.UserDatabases.Clear()
@@ -256,7 +259,11 @@ Namespace DWSIM
 
         Shared Sub LoadSettings(Optional ByVal configfile As String = "")
 
-            If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
+            Dim configfiledir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+
+            If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
+
+            If configfile = "" Then configfile = +"dwsim.ini"
             If Not File.Exists(configfile) Then File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "default.ini", configfile)
 
             Dim source As New IniConfigSource(configfile)
@@ -354,12 +361,19 @@ Namespace DWSIM
             My.Settings.OctaveTempPath = source.Configs("OctaveBridge").GetString("OctaveTempPath", "")
             My.Settings.OctaveProcessTimeout = source.Configs("OctaveBridge").GetInt("OctaveProcessTimeout", 15)
 
+            My.Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
+            My.Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
+
         End Sub
 
         Shared Sub SaveSettings(Optional ByVal configfile As String = "")
 
+            Dim configfiledir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+
+            If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
+
             If configfile = "" Then
-                configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
+                configfile = configfiledir + "dwsim.ini"
                 File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "default.ini", configfile, True)
             Else
                 File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "excelcompat.ini", configfile, True)
@@ -433,6 +447,11 @@ Namespace DWSIM
             source.Configs("OctaveBridge").Set("OctavePath", My.Settings.OctavePath)
             source.Configs("OctaveBridge").Set("OctaveTempPath", My.Settings.OctaveTempPath)
             source.Configs("OctaveBridge").Set("OctaveProcessTimeout", My.Settings.OctaveProcessTimeout)
+
+            If Not source.Configs.Contains("OSInfo") Then source.Configs.Add("OSInfo")
+
+            source.Configs("OSInfo").Set("Platform", My.Settings.CurrentPlatform)
+            source.Configs("OSInfo").Set("Environment", My.Settings.CurrentEnvironment)
 
             source.Save(configfile)
 

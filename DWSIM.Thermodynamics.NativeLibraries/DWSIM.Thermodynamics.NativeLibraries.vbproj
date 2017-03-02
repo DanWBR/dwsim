@@ -155,6 +155,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Unmanaged Libraries\Windows\64-bit\W64_PetAz.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -2,10 +2,6 @@
 
 Public Class Files
 
-    Public Shared Function IsRunningOnMono() As Boolean
-        Return Not Type.GetType("Mono.Runtime") Is Nothing
-    End Function
-
     Public Enum Platform
         Windows
         Linux
@@ -29,34 +25,48 @@ Public Class Files
         End Select
     End Function
 
+    Shared Function GetEnvironment() As Integer
+
+        If Environment.Is64BitProcess Then
+            Return 64
+        Else
+            Return 32
+        End If
+
+    End Function
+
+    Shared Function GetPlatform() As String
+
+        If RunningPlatform() = Platform.Windows Then
+            Return "Windows"
+        ElseIf RunningPlatform() = Platform.Linux Then
+            Return "Linux"
+        Else
+            Return "None"
+        End If
+
+    End Function
+    Public Shared Function IsRunningOnMono() As Boolean
+        Return Not Type.GetType("Mono.Runtime") Is Nothing
+    End Function
+
     Shared Function InitLibraries() As List(Of Exception)
 
         Dim plat As String, envir As Integer
 
-        If Environment.Is64BitProcess Then
-            envir = 64
-        Else
-            envir = 32
-        End If
-
-        If RunningPlatform() = Platform.Windows Then
-            plat = "Windows"
-        ElseIf RunningPlatform() = Platform.Linux Then
-            plat = "Linux"
-        Else
-            plat = "None"
-        End If
+        plat = GetPlatform()
+        envir = GetEnvironment()
 
         Dim copyfiles As Boolean = False
 
-        If My.Settings.CurrentEnvironment <> envir Then
+        If GlobalSettings.Settings.CurrentEnvironment <> envir Then
             copyfiles = True
-            My.Settings.CurrentEnvironment = envir
+            GlobalSettings.Settings.CurrentEnvironment = envir
         End If
 
-        If My.Settings.CurrentPlatform <> plat Then
+        If GlobalSettings.Settings.CurrentPlatform <> plat Then
             copyfiles = True
-            My.Settings.CurrentPlatform = plat
+            GlobalSettings.Settings.CurrentPlatform = plat
         End If
 
         Dim exlist As New List(Of Exception)
@@ -117,14 +127,11 @@ Public Class Files
 
             For i As Integer = 0 To dlist.Count - 1
 
-                ' Get the embedded resource stream that holds the Internal DLL in this assembly.
-                ' The name looks funny because it must be the default namespace of this project
-                ' (MyAssembly.) plus the name of the Properties subdirectory where the
-                ' embedded resource resides (Properties.) plus the name of the file.
                 Using stm As Stream = Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("DWSIM.Thermodynamics.NativeLibraries." + alist(i))
                     ' Copy the assembly to the temporary file
                     Try
-                        Using outFile As Stream = File.Create(Path.Combine(Environment.CurrentDirectory, dlist(i)))
+                        Dim fname As String = Path.Combine(Environment.CurrentDirectory, dlist(i))
+                        Using outFile As Stream = File.Create(fname, 4 * 1024, FileOptions.None, New System.Security.AccessControl.FileSecurity(fname, Security.AccessControl.AccessControlSections.Owner))
                             Const sz As Integer = 4096
                             Dim buf As Byte() = New Byte(sz - 1) {}
                             While True
@@ -153,23 +160,12 @@ Public Class Files
 
         Dim plat As String, envir As Integer
 
-        If Environment.Is64BitProcess Then
-            envir = 64
-        Else
-            envir = 32
-        End If
-
-        If RunningPlatform() = Platform.Windows Then
-            plat = "Windows"
-        ElseIf RunningPlatform() = Platform.Linux Then
-            plat = "Linux"
-        Else
-            plat = "None"
-        End If
+        plat = GetPlatform()
+        envir = GetEnvironment()
 
         Dim deletefiles As Boolean = False
 
-        If My.Settings.CurrentEnvironment = envir And My.Settings.CurrentPlatform = plat Then deletefiles = True
+        If GlobalSettings.Settings.CurrentEnvironment = envir And GlobalSettings.Settings.CurrentPlatform = plat Then deletefiles = False
 
         Dim exlist As New List(Of Exception)
 
