@@ -5,6 +5,12 @@ Imports System.IO
 
 Public Class Settings
 
+    Public Enum Platform
+        Windows
+        Linux
+        Mac
+    End Enum
+
     Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
     Public Shared Property gpu As Cudafy.Host.GPGPU
     Public Shared Property gpumod As CudafyModule
@@ -107,6 +113,9 @@ Public Class Settings
         Settings.ExcelErrorHandlingMode = source.Configs("ExcelAddIn").GetInt("ExcelErrorHandlingMode", 0)
         Settings.ExcelFlashSettings = source.Configs("ExcelAddIn").GetString("ExcelFlashSettings", "")
 
+        Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
+        Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
+
     End Sub
 
     Shared Sub SaveExcelSettings(Optional ByVal configfile As String = "")
@@ -133,6 +142,11 @@ Public Class Settings
         source.Configs("ExcelAddIn").Set("ExcelErrorHandlingMode", Settings.ExcelErrorHandlingMode)
         source.Configs("ExcelAddIn").Set("ExcelFlashSettings", Settings.ExcelFlashSettings)
 
+        If Not source.Configs.Contains("OSInfo") Then source.Configs.Add("OSInfo")
+
+        source.Configs("OSInfo").Set("Platform", GetPlatform)
+        source.Configs("OSInfo").Set("Environment", GetEnvironment)
+
         Try
             For Each spath In UserDatabases
                 source.Configs("UserDatabases").Set(IO.Path.GetFileNameWithoutExtension(spath), spath)
@@ -150,6 +164,49 @@ Public Class Settings
         source.Save(configfile)
 
     End Sub
+
+    Public Shared Function GetEnvironment() As Integer
+
+        If Environment.Is64BitProcess Then
+            Return 64
+        Else
+            Return 32
+        End If
+
+    End Function
+
+    Public Shared Function GetPlatform() As String
+
+        If RunningPlatform() = Platform.Windows Then
+            Return "Windows"
+        ElseIf RunningPlatform() = Platform.Linux Then
+            Return "Linux"
+        Else
+            Return "None"
+        End If
+
+    End Function
+
+    Public Shared Function RunningPlatform() As Platform
+        Select Case Environment.OSVersion.Platform
+            Case PlatformID.Unix
+                ' Well, there are chances MacOSX is reported as Unix instead of MacOSX.
+                ' Instead of platform check, we'll do a feature checks (Mac specific root folders)
+                If Directory.Exists("/Applications") And Directory.Exists("/System") And Directory.Exists("/Users") And Directory.Exists("/Volumes") Then
+                    Return Platform.Mac
+                Else
+                    Return Platform.Linux
+                End If
+            Case PlatformID.MacOSX
+                Return Platform.Mac
+            Case Else
+                Return Platform.Windows
+        End Select
+    End Function
+
+    Public Shared Function IsRunningOnMono() As Boolean
+        Return Not Type.GetType("Mono.Runtime") Is Nothing
+    End Function
 
 End Class
 

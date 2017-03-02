@@ -1,54 +1,7 @@
 ﻿Imports System.IO
+Imports DWSIM.GlobalSettings.Settings
 
 Public Class Files
-
-    Public Enum Platform
-        Windows
-        Linux
-        Mac
-    End Enum
-
-    Public Shared Function RunningPlatform() As Platform
-        Select Case Environment.OSVersion.Platform
-            Case PlatformID.Unix
-                ' Well, there are chances MacOSX is reported as Unix instead of MacOSX.
-                ' Instead of platform check, we'll do a feature checks (Mac specific root folders)
-                If Directory.Exists("/Applications") And Directory.Exists("/System") And Directory.Exists("/Users") And Directory.Exists("/Volumes") Then
-                    Return Platform.Mac
-                Else
-                    Return Platform.Linux
-                End If
-            Case PlatformID.MacOSX
-                Return Platform.Mac
-            Case Else
-                Return Platform.Windows
-        End Select
-    End Function
-
-    Shared Function GetEnvironment() As Integer
-
-        If Environment.Is64BitProcess Then
-            Return 64
-        Else
-            Return 32
-        End If
-
-    End Function
-
-    Shared Function GetPlatform() As String
-
-        If RunningPlatform() = Platform.Windows Then
-            Return "Windows"
-        ElseIf RunningPlatform() = Platform.Linux Then
-            Return "Linux"
-        Else
-            Return "None"
-        End If
-
-    End Function
-    Public Shared Function IsRunningOnMono() As Boolean
-        Return Not Type.GetType("Mono.Runtime") Is Nothing
-    End Function
 
     Shared Function InitLibraries() As List(Of Exception)
 
