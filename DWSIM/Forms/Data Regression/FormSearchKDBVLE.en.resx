@@ -144,6 +144,6 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Search Experimental Data on KDB/CHERIC Online Thermo Database</value>
+    <value>Search Experimental Data at KDB/CHERIC Online Thermo Database</value>
   </data>
 </root>

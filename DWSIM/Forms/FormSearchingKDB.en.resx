@@ -118,11 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 78</value>
+  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 13</value>
+    <value>308, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Searching Online on KDB/CHERIC Thermo Database...</value>
+    <value>Searching Online for Data at KDB/CHERIC Thermo Database...</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
