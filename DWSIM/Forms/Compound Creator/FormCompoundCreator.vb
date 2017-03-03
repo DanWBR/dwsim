@@ -2569,29 +2569,29 @@ Public Class FormCompoundCreator
 
     End Function
 
-    Private Sub rbCoeffPVAP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub rbCoeffPVAP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbCoeffPVAP.CheckedChanged
         mycase.EqPVAP = rbCoeffPVAP.Checked
     End Sub
 
-    Private Sub rbCoeffCPIG_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub rbCoeffCPIG_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbCoeffCPIG.CheckedChanged
         mycase.EqCPIG = rbCoeffCPIG.Checked
     End Sub
 
-    Private Sub rbCoeffLIQDENS_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub rbCoeffLIQDENS_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbCoeffLIQDENS.CheckedChanged
         mycase.EqLDENS = rbCoeffLIQDENS.Checked
     End Sub
 
-    Private Sub rbCoeffLIQVISC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub rbCoeffLIQVISC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbCoeffLIQVISC.CheckedChanged
         mycase.EqLVISC = rbCoeffLIQVISC.Checked
     End Sub
-    Private Sub cbEqCpS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cbEqCpS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqCpS.SelectedIndexChanged
         If mycase.EqCpS Then mycase.cp.SolidHeatCapacityEquation = cbEqCpS.SelectedItem.ToString.Split(":")(0)
         If loaded Then
             SetCompCreatorSaveStatus(False)
             SetUserDBSaveStatus(False)
         End If
     End Sub
-    Private Sub cbEqSolidDENS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub cbEqSolidDENS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqSolidDENS.SelectedIndexChanged
         If mycase.EqSDens Then mycase.cp.SolidDensityEquation = cbEqSolidDENS.SelectedItem.ToString.Split(":")(0)
         If loaded Then
             SetCompCreatorSaveStatus(False)
@@ -2849,7 +2849,7 @@ Public Class FormCompoundCreator
         loaded = True
     End Sub
 
-    Private Sub cbUnits_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub cbUnits_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cbUnits.SelectedIndexChanged
         If loaded Then
             StoreData()
         End If
@@ -2942,7 +2942,7 @@ Public Class FormCompoundCreator
         End If
     End Sub
 
-    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkReplaceComps.CheckStateChanged
         If loaded Then
             SetCompCreatorSaveStatus(False)
         End If
@@ -3240,7 +3240,7 @@ Public Class FormCompoundCreator
 
     End Sub
 
-    Private Sub tbDBPath_TextChanged(sender As Object, e As EventArgs)
+    Private Sub tbDBPath_TextChanged(sender As Object, e As EventArgs) Handles tbDBPath.TextChanged
         If tbDBPath.Text <> "" Then SalvarNoBancoDeDadosToolStripMenuItem.Enabled = True Else SalvarNoBancoDeDadosToolStripMenuItem.Enabled = False
     End Sub
 
