@@ -43,7 +43,7 @@ Public Class KDBParser
         Next
 
         If exact Then
-            Return results.Where(Function(x) x(1).ToLower.Equals(searchstring)).ToList
+            Return results.Where(Function(x) x(1).ToLower.Equals(searchstring.ToLower)).ToList
         Else
             Return results
         End If

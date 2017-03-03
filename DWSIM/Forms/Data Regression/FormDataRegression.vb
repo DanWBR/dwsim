@@ -28,6 +28,7 @@ Imports DWSIM.Thermodynamics.PropertyPackages
 Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.IO
+Imports DWSIM.Thermodynamics.Databases.KDBLink
 
 Public Class FormDataRegression
 
@@ -56,7 +57,7 @@ Public Class FormDataRegression
 
     Private Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-         IP = New InteractionParameter
+        IP = New InteractionParameter
 
         'get list of compounds
         Dim compounds As New ArrayList
@@ -3750,6 +3751,84 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
     Private Sub GridExpData_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpData.CellValidating
         If e.ColumnIndex > 0 Then DirectCast(sender, DataGridView).ValidateCellForDouble(e)
     End Sub
+
+    Private Sub btnSearchKDB_Click(sender As Object, e As EventArgs) Handles btnSearchKDB.Click
+
+        Dim fsearch As New FormSearchingKDB()
+
+        Dim fresult As New FormSearchKDBVLE()
+
+        Dim comp1, comp2 As String
+
+        comp1 = cbCompound1.SelectedItem.ToString
+        comp2 = cbCompound2.SelectedItem.ToString
+
+        fresult.Show()
+        fresult.Enabled = False
+        fsearch.Show()
+
+        Dim sets As New List(Of String())
+
+        Dim tcs As New Threading.CancellationTokenSource()
+
+        Dim t As New Task(Of List(Of String()))(Function()
+                                                    Dim id1 = KDBParser.GetCompoundIDs(comp1, True)
+                                                    Dim id2 = KDBParser.GetCompoundIDs(comp2, True)
+                                                    Return KDBParser.GetBinaryVLESetIDs(id1(0)(0), id2(0)(0))
+                                                End Function, tcs.Token)
+
+        t.ContinueWith(Sub()
+                           fsearch.Close()
+                           fresult.Enabled = True
+                           fresult.ListBox1.Items.Clear()
+                           sets = t.Result
+                           fresult.lblRecords.Text = t.Result.Count
+                           For Each item In t.Result
+                               fresult.ListBox1.Items.Add(item(0).PadRight(10) + item(1))
+                           Next
+                           If t.Result.Count = 0 Then
+                               fresult.Button1.Enabled = False
+                           Else
+                               fresult.Button1.Enabled = True
+                           End If
+                       End Sub, TaskContinuationOptions.ExecuteSynchronously)
+
+        AddHandler fsearch.btnCancel.Click, Sub()
+                                                fsearch.Close()
+                                                fresult.Close()
+                                                tcs.Cancel()
+                                            End Sub
+
+        t.Start()
+
+        AddHandler fresult.Button1.Click, Sub()
+                                              Dim tcs2 As New Threading.CancellationTokenSource()
+                                              Dim vleid As Integer = sets(fresult.ListBox1.SelectedIndex)(0)
+                                              Dim t2 As New Task(Of KDBVLEDataSet)(Function() KDBParser.GetVLEData(vleid), tcs2.Token)
+                                              Dim fsearch2 As New FormSearchingKDB()
+                                              AddHandler fsearch2.btnCancel.Click, Sub()
+                                                                                       fsearch2.Close()
+                                                                                       tcs2.Cancel()
+                                                                                   End Sub
+                                              t2.ContinueWith(Sub()
+                                                                  fsearch2.Close()
+                                                                  If Not t2.Result Is Nothing Then
+                                                                      Me.GridExpData.Rows.Clear()
+                                                                      For Each record In t2.Result.Data
+                                                                          Me.GridExpData.Rows.Add(True, record.X, "", record.Y, record.T, "", "", record.P)
+                                                                      Next
+                                                                      cbTunit.SelectedItem = t2.Result.Tunits
+                                                                      cbPunit.SelectedItem = t2.Result.Punits
+                                                                  End If
+                                                              End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                                              t2.Start()
+                                              fresult.Close()
+                                              fsearch2.Show()
+                                          End Sub
+
+
+    End Sub
+
 End Class
 
 Public Class RegressionProblem
@@ -3837,7 +3916,7 @@ Namespace DWSIM.Optimization.DatRegression
         Public filename As String = ""
         Public databasepath As String = ""
         Public model As String = "Peng-Robinson"
-        Public datatype As DataType = DataType.Pxy
+        Public datatype As DataType = datatype.Pxy
         Public tp, x1p, x2p, yp, pp, calct, calcp, calcy, calcx1l1, calcx1l2, checkp, ts, tl, calcts, calctl As New ArrayList
         Public method As String = "Local Unimodal Sampling"
         Public objfunction As String = "Least Squares (min T/P)"

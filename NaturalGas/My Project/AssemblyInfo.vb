@@ -12,10 +12,10 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Natural Gas Properties Plugin for DWSIM")> 
 <Assembly: AssemblyCompany("Daniel Medeiros")> 
 <Assembly: AssemblyProduct("NaturalGas")> 
-<Assembly: AssemblyCopyright("Copyright © 2010-2012 Daniel Medeiros")> 
+<Assembly: AssemblyCopyright("Copyright © 2010-2017 Daniel Medeiros")> 
 <Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(True)> 
+<Assembly: ComVisible(False)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("bda46174-42c1-4864-9db2-1691e563a854")> 
@@ -31,4 +31,4 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.*")> 
+<Assembly: AssemblyVersion("4.3.*")> 

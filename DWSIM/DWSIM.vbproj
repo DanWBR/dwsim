@@ -295,6 +295,12 @@
     <Compile Include="Controls\ScriptEditorControlMono.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Data Regression\FormSearchKDBVLE.Designer.vb">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Data Regression\FormSearchKDBVLE.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </Compile>
@@ -335,6 +341,12 @@
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormEditGraphicObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingKDB.Designer.vb">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingKDB.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSimulWizard.Designer.vb">
@@ -754,6 +766,12 @@
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.en.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\SimulationObjectsPanel.de.resx">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </EmbeddedResource>
@@ -844,6 +862,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.en.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSimulWizard.de.resx">
       <DependentUpon>FormSimulWizard.vb</DependentUpon>
@@ -1116,6 +1140,10 @@
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.KDBLink\DWSIM.Thermodynamics.Databases.KDBLink.vbproj">
+      <Project>{fea05ae3-5ee2-4a7b-88b3-1a4f9000ea08}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.KDBLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.NativeLibraries\DWSIM.Thermodynamics.NativeLibraries.vbproj">
       <Project>{33336b05-116e-4582-896a-a3dfc796e0c3}</Project>
@@ -2280,6 +2308,8 @@
     <None Include="Resources\col_dc_16.png" />
     <None Include="Resources\col_sc_16.png" />
     <None Include="Resources\Configure alt 3.png" />
+    <None Include="Resources\chericlogo.jpg" />
+    <None Include="Resources\cheric_big.jpg" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <Content Include="Resources\de.png" />
