@@ -5,15 +5,54 @@ Imports System.Text
 
 Public Class KDBParser
 
-    Public Enum SearchType
-        Name
-        CAS
-        Formula
-    End Enum
+    Shared Function GetCompoundIDs(searchstring As String, exact As Boolean) As List(Of String())
+
+        Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+
+        Dim website As String = "http://www.cheric.org/research/kdb/hcprop/listcmp.php?componentsearch=" + searchstring
+
+        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
+        proxyObj.Credentials = CredentialCache.DefaultCredentials
+
+        Dim handler As New HttpClientHandler()
+        handler.Proxy = proxyObj
+        Dim http As New HttpClient(handler)
+
+        Dim response = http.GetByteArrayAsync(website)
+        response.Wait()
+
+        Dim source As [String] = Encoding.GetEncoding("utf-8").GetString(response.Result, 0, response.Result.Length - 1)
+        source = WebUtility.HtmlDecode(source)
+
+        Dim htmlpage As New HtmlDocument()
+
+        htmlpage.LoadHtml(source)
+
+        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
+
+        Dim results As New List(Of String())
+
+        For Each r In rows
+            Dim id As String = ""
+            Dim name As String = ""
+            Dim formula As String = ""
+            id = r.ChildNodes(1).InnerText
+            name = ci.TextInfo.ToTitleCase(r.ChildNodes(3).InnerText.ToLower)
+            formula = r.ChildNodes(5).InnerText
+            results.Add(New String() {id, name, formula})
+        Next
+
+        If exact Then
+            Return results.Where(Function(x) x(1).ToLower.Equals(searchstring)).ToList
+        Else
+            Return results
+        End If
+
+    End Function
 
     Shared Function GetCompoundData(cid As Integer) As BaseClasses.ConstantProperties
 
-        Dim ci As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+        Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
         Dim website As String = "http://www.cheric.org/research/kdb/hcprop/showprop.php?cmpid=" + cid.ToString
 
@@ -44,7 +83,7 @@ Public Class KDBParser
 
         Dim element = htmlpage.DocumentNode.Descendants("tr").Where(Function(x) x.InnerText.Contains("Name")).FirstOrDefault.ChildNodes(3)
 
-        comp.Name = ci.TextInfo.ToTitleCase(element.InnerText)
+        comp.Name = ci.TextInfo.ToTitleCase(element.InnerText.ToLower)
 
         element = htmlpage.DocumentNode.Descendants("tr").Where(Function(x) x.InnerText.Contains("CAS No.")).FirstOrDefault.ChildNodes(3)
 
@@ -559,9 +598,11 @@ Public Class KDBParser
 
     End Function
 
-    Shared Function GetVLEData(uri As String) As List(Of List(Of Double))
+    Shared Function GetVLEData(vleid As Integer) As KDBVLEDataSet
 
-        Dim ci As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+        Dim uri = "http://www.cheric.org/research/kdb/hcvle/showvle.php?vleid=" + vleid.ToString
+
+        Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
         Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(uri)))
         proxyObj.Credentials = CredentialCache.DefaultCredentials
@@ -580,9 +621,20 @@ Public Class KDBParser
 
         htmlpage.LoadHtml(source)
 
-        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
+        Dim result As New KDBVLEDataSet
 
-        Dim results As New List(Of List(Of Double))
+        Dim description = htmlpage.DocumentNode.Descendants("h5").FirstOrDefault.Descendants("strong").ToList
+
+        result.Description = description(0).InnerText
+
+        Dim method = htmlpage.DocumentNode.Descendants("h5").FirstOrDefault.Descendants("strong").ToList
+
+        Dim head = htmlpage.DocumentNode.Descendants("thead").FirstOrDefault.Descendants("th").ToList
+
+        result.Tunits = head(0).InnerText.Split(", ")(1).Replace("deg.C", "C").Trim
+        result.Punits = head(1).InnerText.Split(", ")(1).Trim
+
+        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
 
         For Each r In rows
             Dim T, P, X, Y As Double
@@ -590,11 +642,67 @@ Public Class KDBParser
             Double.TryParse(r.ChildNodes(3).InnerText, Globalization.NumberStyles.Any, ci, P)
             Double.TryParse(r.ChildNodes(5).InnerText, Globalization.NumberStyles.Any, ci, X)
             Double.TryParse(r.ChildNodes(7).InnerText, Globalization.NumberStyles.Any, ci, Y)
-            results.Add(New List(Of Double)({T, P, X, Y}))
+            result.Data.Add(New KDBVLEDataPoint With {.T = T, .P = P, .X = X, .Y = Y})
+        Next
+
+        Return result
+
+    End Function
+
+    Shared Function GetBinaryVLESetIDs(cid1 As Integer, cid2 As Integer) As List(Of String())
+
+        Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+
+        Dim website As String = "http://www.cheric.org/research/kdb/hcvle/listvle.php?cno1=" + cid1.ToString + "&cno2=" + cid2.ToString
+
+        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
+        proxyObj.Credentials = CredentialCache.DefaultCredentials
+
+        Dim handler As New HttpClientHandler()
+        handler.Proxy = proxyObj
+        Dim http As New HttpClient(handler)
+
+        Dim response = http.GetByteArrayAsync(website)
+        response.Wait()
+
+        Dim source As [String] = Encoding.GetEncoding("utf-8").GetString(response.Result, 0, response.Result.Length - 1)
+        source = WebUtility.HtmlDecode(source)
+
+        Dim htmlpage As New HtmlDocument()
+
+        htmlpage.LoadHtml(source)
+
+        Dim rows = htmlpage.DocumentNode.Descendants("tbody").FirstOrDefault.Descendants("tr").ToList
+
+        Dim results As New List(Of String())
+
+        For Each r In rows
+            Dim id As String = ""
+            Dim description As String = ""
+            id = r.ChildNodes(1).InnerText
+            description = r.ChildNodes(3).InnerText
+            results.Add(New String() {id, description})
         Next
 
         Return results
 
     End Function
+
+End Class
+
+Public Class KDBVLEDataSet
+
+    Public Data As New List(Of KDBVLEDataPoint)
+
+    Public Tunits As String = ""
+    Public Punits As String = ""
+
+    Public Description As String = ""
+
+End Class
+
+Public Class KDBVLEDataPoint
+
+    Public X, Y, T, P As Double
 
 End Class

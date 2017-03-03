@@ -4,7 +4,12 @@
 
         'KDBParser.GetCompoundData(1)
 
-        KDBParser.GetVLEData("http://www.cheric.org/research/kdb/hcvle/showvle.php?vleid=2806")
+        Dim id1 = KDBParser.GetCompoundIDs("ethanol", True)
+        Dim id2 = KDBParser.GetCompoundIDs("water", True)
+
+        Dim sets = KDBParser.GetBinaryVLESetIDs(id1(0)(0), id2(0)(0))
+
+        Dim vledata = KDBParser.GetVLEData(784)
 
     End Sub
 
