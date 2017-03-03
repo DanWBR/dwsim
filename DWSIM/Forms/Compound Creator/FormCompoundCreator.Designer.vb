@@ -25,46 +25,39 @@ Partial Class FormCompoundCreator
         Me.components = New System.ComponentModel.Container()
         Dim ToolStripLabel2 As System.Windows.Forms.ToolStripStatusLabel
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCompoundCreator))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.chkReplaceComps = New System.Windows.Forms.CheckBox()
-        Me.tbDBPath = New System.Windows.Forms.TextBox()
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnCreateNewDB = New System.Windows.Forms.Button()
-        Me.btnSaveToDB = New System.Windows.Forms.Button()
+        Dim DataGridViewCellStyle103 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle104 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle105 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle106 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle107 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle108 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle109 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle110 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle111 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle112 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle113 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle114 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle115 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle116 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle117 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle118 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle119 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle120 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle121 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle122 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle123 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle124 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle125 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle126 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle100 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle101 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle102 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle127 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle128 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle129 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle130 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle131 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle132 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
@@ -279,6 +272,7 @@ Partial Class FormCompoundCreator
         Me.Label64 = New System.Windows.Forms.Label()
         Me.Label63 = New System.Windows.Forms.Label()
         Me.FaTabStripItem7 = New FarsiLibrary.Win.FATabStripItem()
+        Me.tbUserDefEqPVAP = New System.Windows.Forms.TextBox()
         Me.Label43 = New System.Windows.Forms.Label()
         Me.rbEstimatePVAP = New System.Windows.Forms.RadioButton()
         Me.tbPVAP_E = New System.Windows.Forms.TextBox()
@@ -304,6 +298,7 @@ Partial Class FormCompoundCreator
         Me.Label29 = New System.Windows.Forms.Label()
         Me.FaTabStripItem8 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.tbUserDefCPLEq = New System.Windows.Forms.TextBox()
         Me.Label86 = New System.Windows.Forms.Label()
         Me.Label87 = New System.Windows.Forms.Label()
         Me.tbStatusCPLiquid = New System.Windows.Forms.TextBox()
@@ -327,6 +322,7 @@ Partial Class FormCompoundCreator
         Me.rbRegressCPLiquid = New System.Windows.Forms.RadioButton()
         Me.tbCPLiquid_C = New System.Windows.Forms.TextBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.tbUserDefCPIGEq = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label44 = New System.Windows.Forms.Label()
         Me.rbEstimateCPIG = New System.Windows.Forms.RadioButton()
@@ -351,6 +347,7 @@ Partial Class FormCompoundCreator
         Me.rbRegressCPIG = New System.Windows.Forms.RadioButton()
         Me.tbCPIG_C = New System.Windows.Forms.TextBox()
         Me.FaTabStripItem9 = New FarsiLibrary.Win.FATabStripItem()
+        Me.tbUserDefDensLiqEq = New System.Windows.Forms.TextBox()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.rbEstimateLIQDENS = New System.Windows.Forms.RadioButton()
         Me.tbLIQDENS_E = New System.Windows.Forms.TextBox()
@@ -375,6 +372,7 @@ Partial Class FormCompoundCreator
         Me.Label36 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.FaTabStripItem10 = New FarsiLibrary.Win.FATabStripItem()
+        Me.tbUserDefLiqViscEq = New System.Windows.Forms.TextBox()
         Me.Label46 = New System.Windows.Forms.Label()
         Me.rbEstimateLIQVISC = New System.Windows.Forms.RadioButton()
         Me.tbLIQVISC_E = New System.Windows.Forms.TextBox()
@@ -459,9 +457,6 @@ Partial Class FormCompoundCreator
         Me.lblMeltingTemp = New System.Windows.Forms.Label()
         Me.CheckBoxMeltingTemp = New System.Windows.Forms.CheckBox()
         Me.TextBoxID = New System.Windows.Forms.TextBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.cbUnits = New System.Windows.Forms.ComboBox()
         Me.DBOpenDlg = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -470,8 +465,19 @@ Partial Class FormCompoundCreator
         Me.ToolStripSpace1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUserDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.BancoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tbDBPath = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CriarNovoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DefinirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkReplaceComps = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComponenteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalvarNoBancoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportarDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BancoDeDadosKDBCHERICToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SistemasDeUnidadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cbUnits = New System.Windows.Forms.ToolStripComboBox()
         ToolStripLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip2.SuspendLayout()
@@ -516,8 +522,8 @@ Partial Class FormCompoundCreator
         CType(Me.GridExpDataCpS, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSolidDens.SuspendLayout()
         CType(Me.GridExpDataRoS, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox3.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripLabel2
@@ -525,62 +531,9 @@ Partial Class FormCompoundCreator
         ToolStripLabel2.Name = "ToolStripLabel2"
         resources.ApplyResources(ToolStripLabel2, "ToolStripLabel2")
         '
-        'GroupBox1
-        '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.Controls.Add(Me.chkReplaceComps)
-        Me.GroupBox1.Controls.Add(Me.tbDBPath)
-        Me.GroupBox1.Controls.Add(Me.btnSearch)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.btnCreateNewDB)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.TabStop = False
-        '
-        'chkReplaceComps
-        '
-        resources.ApplyResources(Me.chkReplaceComps, "chkReplaceComps")
-        Me.chkReplaceComps.Checked = True
-        Me.chkReplaceComps.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkReplaceComps.Name = "chkReplaceComps"
-        Me.chkReplaceComps.UseVisualStyleBackColor = True
-        '
-        'tbDBPath
-        '
-        resources.ApplyResources(Me.tbDBPath, "tbDBPath")
-        Me.tbDBPath.Name = "tbDBPath"
-        Me.tbDBPath.ReadOnly = True
-        '
-        'btnSearch
-        '
-        resources.ApplyResources(Me.btnSearch, "btnSearch")
-        Me.btnSearch.Image = Global.DWSIM.My.Resources.Resources.folder_go
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'btnCreateNewDB
-        '
-        resources.ApplyResources(Me.btnCreateNewDB, "btnCreateNewDB")
-        Me.btnCreateNewDB.Image = Global.DWSIM.My.Resources.Resources.page_white
-        Me.btnCreateNewDB.Name = "btnCreateNewDB"
-        Me.btnCreateNewDB.UseVisualStyleBackColor = True
-        '
-        'btnSaveToDB
-        '
-        resources.ApplyResources(Me.btnSaveToDB, "btnSaveToDB")
-        Me.btnSaveToDB.Image = Global.DWSIM.My.Resources.Resources.disk
-        Me.btnSaveToDB.Name = "btnSaveToDB"
-        Me.btnSaveToDB.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.RadioButton3)
-        Me.GroupBox2.Controls.Add(Me.btnSaveToDB)
         Me.GroupBox2.Controls.Add(Me.RadioButton2)
         Me.GroupBox2.Controls.Add(Me.Label16)
         Me.GroupBox2.Controls.Add(Me.Label17)
@@ -589,6 +542,7 @@ Partial Class FormCompoundCreator
         Me.GroupBox2.Controls.Add(Me.Label54)
         Me.GroupBox2.Controls.Add(Me.FaTabStrip2)
         Me.GroupBox2.Controls.Add(Me.TextBoxID)
+        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         '
@@ -639,7 +593,7 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.FaTabStrip2, "FaTabStrip2")
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItemBO, Me.FaTabStripItemEL, Me.FaTabStripItem2, Me.FaTabStripItem5, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4, Me.FaTabStripItem7, Me.FaTabStripItem8, Me.FaTabStripItem9, Me.FaTabStripItem10, Me.FaTabStripItem11})
         Me.FaTabStrip2.Name = "FaTabStrip2"
-        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
+        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem10
         '
         'FaTabStripItem1
         '
@@ -662,7 +616,6 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem1.Controls.Add(Me.CheckBoxMW)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
-        Me.FaTabStripItem1.Selected = True
         resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'TextBoxComments
@@ -1284,10 +1237,10 @@ Partial Class FormCompoundCreator
         '
         'Column4
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle1.Format = "N0"
-        DataGridViewCellStyle1.NullValue = "0"
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle103.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle103.Format = "N0"
+        DataGridViewCellStyle103.NullValue = "0"
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle103
         resources.ApplyResources(Me.Column4, "Column4")
         Me.Column4.MaxInputLength = 2
         Me.Column4.Name = "Column4"
@@ -1350,26 +1303,26 @@ Partial Class FormCompoundCreator
         '
         'MainGroup
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.MainGroup.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle104.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.MainGroup.DefaultCellStyle = DataGridViewCellStyle104
         resources.ApplyResources(Me.MainGroup, "MainGroup")
         Me.MainGroup.Name = "MainGroup"
         Me.MainGroup.ReadOnly = True
         '
         'SubGroup
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.SubGroup.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle105.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.SubGroup.DefaultCellStyle = DataGridViewCellStyle105
         resources.ApplyResources(Me.SubGroup, "SubGroup")
         Me.SubGroup.Name = "SubGroup"
         Me.SubGroup.ReadOnly = True
         '
         'DataGridViewTextBoxColumn13
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N0"
-        DataGridViewCellStyle4.NullValue = "0"
-        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle106.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle106.Format = "N0"
+        DataGridViewCellStyle106.NullValue = "0"
+        Me.DataGridViewTextBoxColumn13.DefaultCellStyle = DataGridViewCellStyle106
         resources.ApplyResources(Me.DataGridViewTextBoxColumn13, "DataGridViewTextBoxColumn13")
         Me.DataGridViewTextBoxColumn13.MaxInputLength = 2
         Me.DataGridViewTextBoxColumn13.Name = "DataGridViewTextBoxColumn13"
@@ -1427,26 +1380,26 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn16
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle107.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.DataGridViewTextBoxColumn16.DefaultCellStyle = DataGridViewCellStyle107
         resources.ApplyResources(Me.DataGridViewTextBoxColumn16, "DataGridViewTextBoxColumn16")
         Me.DataGridViewTextBoxColumn16.Name = "DataGridViewTextBoxColumn16"
         Me.DataGridViewTextBoxColumn16.ReadOnly = True
         '
         'DataGridViewTextBoxColumn17
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle108.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.DataGridViewTextBoxColumn17.DefaultCellStyle = DataGridViewCellStyle108
         resources.ApplyResources(Me.DataGridViewTextBoxColumn17, "DataGridViewTextBoxColumn17")
         Me.DataGridViewTextBoxColumn17.Name = "DataGridViewTextBoxColumn17"
         Me.DataGridViewTextBoxColumn17.ReadOnly = True
         '
         'DataGridViewTextBoxColumn18
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N0"
-        DataGridViewCellStyle7.NullValue = "0"
-        Me.DataGridViewTextBoxColumn18.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle109.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle109.Format = "N0"
+        DataGridViewCellStyle109.NullValue = "0"
+        Me.DataGridViewTextBoxColumn18.DefaultCellStyle = DataGridViewCellStyle109
         resources.ApplyResources(Me.DataGridViewTextBoxColumn18, "DataGridViewTextBoxColumn18")
         Me.DataGridViewTextBoxColumn18.MaxInputLength = 2
         Me.DataGridViewTextBoxColumn18.Name = "DataGridViewTextBoxColumn18"
@@ -1495,8 +1448,8 @@ Partial Class FormCompoundCreator
         'Atom
         '
         Me.Atom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.Atom.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle110.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.Atom.DefaultCellStyle = DataGridViewCellStyle110
         resources.ApplyResources(Me.Atom, "Atom")
         Me.Atom.Name = "Atom"
         Me.Atom.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -1532,8 +1485,8 @@ Partial Class FormCompoundCreator
         'ColAtom
         '
         Me.ColAtom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ColAtom.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle111.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ColAtom.DefaultCellStyle = DataGridViewCellStyle111
         resources.ApplyResources(Me.ColAtom, "ColAtom")
         Me.ColAtom.Name = "ColAtom"
         Me.ColAtom.ReadOnly = True
@@ -1542,8 +1495,8 @@ Partial Class FormCompoundCreator
         'ColCount
         '
         Me.ColCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ColCount.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle112.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ColCount.DefaultCellStyle = DataGridViewCellStyle112
         resources.ApplyResources(Me.ColCount, "ColCount")
         Me.ColCount.Name = "ColCount"
         Me.ColCount.ReadOnly = True
@@ -1586,8 +1539,8 @@ Partial Class FormCompoundCreator
         'ColumnGroupName
         '
         Me.ColumnGroupName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ColumnGroupName.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle113.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ColumnGroupName.DefaultCellStyle = DataGridViewCellStyle113
         resources.ApplyResources(Me.ColumnGroupName, "ColumnGroupName")
         Me.ColumnGroupName.Name = "ColumnGroupName"
         Me.ColumnGroupName.ReadOnly = True
@@ -1596,8 +1549,8 @@ Partial Class FormCompoundCreator
         '
         'ColumnCountUNIFAC
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.ColumnCountUNIFAC.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle114.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.ColumnCountUNIFAC.DefaultCellStyle = DataGridViewCellStyle114
         resources.ApplyResources(Me.ColumnCountUNIFAC, "ColumnCountUNIFAC")
         Me.ColumnCountUNIFAC.Name = "ColumnCountUNIFAC"
         Me.ColumnCountUNIFAC.ReadOnly = True
@@ -2109,6 +2062,7 @@ Partial Class FormCompoundCreator
         'FaTabStripItem7
         '
         Me.FaTabStripItem7.CanClose = False
+        Me.FaTabStripItem7.Controls.Add(Me.tbUserDefEqPVAP)
         Me.FaTabStripItem7.Controls.Add(Me.Label43)
         Me.FaTabStripItem7.Controls.Add(Me.rbEstimatePVAP)
         Me.FaTabStripItem7.Controls.Add(Me.tbPVAP_E)
@@ -2133,6 +2087,12 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem7.IsDrawn = True
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
+        '
+        'tbUserDefEqPVAP
+        '
+        Me.tbUserDefEqPVAP.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbUserDefEqPVAP, "tbUserDefEqPVAP")
+        Me.tbUserDefEqPVAP.Name = "tbUserDefEqPVAP"
         '
         'Label43
         '
@@ -2166,8 +2126,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataPVAP
         '
-        DataGridViewCellStyle13.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataPVAP.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle115.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataPVAP.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle115
         Me.GridExpDataPVAP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataPVAP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataPVAP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2})
@@ -2177,16 +2137,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn1
         '
-        DataGridViewCellStyle14.NullValue = "0"
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle116.NullValue = "0"
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle116
         resources.ApplyResources(Me.DataGridViewTextBoxColumn1, "DataGridViewTextBoxColumn1")
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         '
         'DataGridViewTextBoxColumn2
         '
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle15.NullValue = "0"
-        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle117.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle117.NullValue = "0"
+        Me.DataGridViewTextBoxColumn2.DefaultCellStyle = DataGridViewCellStyle117
         resources.ApplyResources(Me.DataGridViewTextBoxColumn2, "DataGridViewTextBoxColumn2")
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         '
@@ -2260,7 +2220,7 @@ Partial Class FormCompoundCreator
         Me.cbEqPVAP.DropDownWidth = 500
         Me.cbEqPVAP.FormattingEnabled = True
         resources.ApplyResources(Me.cbEqPVAP, "cbEqPVAP")
-        Me.cbEqPVAP.Items.AddRange(New Object() {resources.GetString("cbEqPVAP.Items"), resources.GetString("cbEqPVAP.Items1"), resources.GetString("cbEqPVAP.Items2"), resources.GetString("cbEqPVAP.Items3"), resources.GetString("cbEqPVAP.Items4"), resources.GetString("cbEqPVAP.Items5"), resources.GetString("cbEqPVAP.Items6"), resources.GetString("cbEqPVAP.Items7"), resources.GetString("cbEqPVAP.Items8"), resources.GetString("cbEqPVAP.Items9"), resources.GetString("cbEqPVAP.Items10"), resources.GetString("cbEqPVAP.Items11"), resources.GetString("cbEqPVAP.Items12"), resources.GetString("cbEqPVAP.Items13"), resources.GetString("cbEqPVAP.Items14"), resources.GetString("cbEqPVAP.Items15"), resources.GetString("cbEqPVAP.Items16"), resources.GetString("cbEqPVAP.Items17"), resources.GetString("cbEqPVAP.Items18"), resources.GetString("cbEqPVAP.Items19"), resources.GetString("cbEqPVAP.Items20"), resources.GetString("cbEqPVAP.Items21"), resources.GetString("cbEqPVAP.Items22"), resources.GetString("cbEqPVAP.Items23"), resources.GetString("cbEqPVAP.Items24"), resources.GetString("cbEqPVAP.Items25"), resources.GetString("cbEqPVAP.Items26"), resources.GetString("cbEqPVAP.Items27"), resources.GetString("cbEqPVAP.Items28"), resources.GetString("cbEqPVAP.Items29"), resources.GetString("cbEqPVAP.Items30"), resources.GetString("cbEqPVAP.Items31"), resources.GetString("cbEqPVAP.Items32"), resources.GetString("cbEqPVAP.Items33"), resources.GetString("cbEqPVAP.Items34"), resources.GetString("cbEqPVAP.Items35"), resources.GetString("cbEqPVAP.Items36"), resources.GetString("cbEqPVAP.Items37"), resources.GetString("cbEqPVAP.Items38"), resources.GetString("cbEqPVAP.Items39")})
+        Me.cbEqPVAP.Items.AddRange(New Object() {resources.GetString("cbEqPVAP.Items"), resources.GetString("cbEqPVAP.Items1"), resources.GetString("cbEqPVAP.Items2"), resources.GetString("cbEqPVAP.Items3"), resources.GetString("cbEqPVAP.Items4"), resources.GetString("cbEqPVAP.Items5"), resources.GetString("cbEqPVAP.Items6"), resources.GetString("cbEqPVAP.Items7"), resources.GetString("cbEqPVAP.Items8"), resources.GetString("cbEqPVAP.Items9"), resources.GetString("cbEqPVAP.Items10"), resources.GetString("cbEqPVAP.Items11"), resources.GetString("cbEqPVAP.Items12"), resources.GetString("cbEqPVAP.Items13"), resources.GetString("cbEqPVAP.Items14"), resources.GetString("cbEqPVAP.Items15"), resources.GetString("cbEqPVAP.Items16"), resources.GetString("cbEqPVAP.Items17"), resources.GetString("cbEqPVAP.Items18"), resources.GetString("cbEqPVAP.Items19"), resources.GetString("cbEqPVAP.Items20"), resources.GetString("cbEqPVAP.Items21"), resources.GetString("cbEqPVAP.Items22"), resources.GetString("cbEqPVAP.Items23"), resources.GetString("cbEqPVAP.Items24"), resources.GetString("cbEqPVAP.Items25"), resources.GetString("cbEqPVAP.Items26"), resources.GetString("cbEqPVAP.Items27"), resources.GetString("cbEqPVAP.Items28"), resources.GetString("cbEqPVAP.Items29"), resources.GetString("cbEqPVAP.Items30"), resources.GetString("cbEqPVAP.Items31"), resources.GetString("cbEqPVAP.Items32"), resources.GetString("cbEqPVAP.Items33"), resources.GetString("cbEqPVAP.Items34"), resources.GetString("cbEqPVAP.Items35"), resources.GetString("cbEqPVAP.Items36"), resources.GetString("cbEqPVAP.Items37"), resources.GetString("cbEqPVAP.Items38"), resources.GetString("cbEqPVAP.Items39"), resources.GetString("cbEqPVAP.Items40")})
         Me.cbEqPVAP.Name = "cbEqPVAP"
         '
         'tbPVAP_A
@@ -2290,6 +2250,7 @@ Partial Class FormCompoundCreator
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.tbUserDefCPLEq)
         Me.GroupBox5.Controls.Add(Me.Label86)
         Me.GroupBox5.Controls.Add(Me.Label87)
         Me.GroupBox5.Controls.Add(Me.tbStatusCPLiquid)
@@ -2313,6 +2274,12 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.GroupBox5, "GroupBox5")
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        '
+        'tbUserDefCPLEq
+        '
+        Me.tbUserDefCPLEq.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbUserDefCPLEq, "tbUserDefCPLEq")
+        Me.tbUserDefCPLEq.Name = "tbUserDefCPLEq"
         '
         'Label86
         '
@@ -2365,7 +2332,7 @@ Partial Class FormCompoundCreator
         Me.cbEqCPLiquid.DropDownWidth = 500
         Me.cbEqCPLiquid.FormattingEnabled = True
         resources.ApplyResources(Me.cbEqCPLiquid, "cbEqCPLiquid")
-        Me.cbEqCPLiquid.Items.AddRange(New Object() {resources.GetString("cbEqCPLiquid.Items"), resources.GetString("cbEqCPLiquid.Items1"), resources.GetString("cbEqCPLiquid.Items2"), resources.GetString("cbEqCPLiquid.Items3"), resources.GetString("cbEqCPLiquid.Items4"), resources.GetString("cbEqCPLiquid.Items5"), resources.GetString("cbEqCPLiquid.Items6"), resources.GetString("cbEqCPLiquid.Items7"), resources.GetString("cbEqCPLiquid.Items8"), resources.GetString("cbEqCPLiquid.Items9"), resources.GetString("cbEqCPLiquid.Items10"), resources.GetString("cbEqCPLiquid.Items11"), resources.GetString("cbEqCPLiquid.Items12"), resources.GetString("cbEqCPLiquid.Items13"), resources.GetString("cbEqCPLiquid.Items14"), resources.GetString("cbEqCPLiquid.Items15"), resources.GetString("cbEqCPLiquid.Items16"), resources.GetString("cbEqCPLiquid.Items17"), resources.GetString("cbEqCPLiquid.Items18"), resources.GetString("cbEqCPLiquid.Items19"), resources.GetString("cbEqCPLiquid.Items20"), resources.GetString("cbEqCPLiquid.Items21"), resources.GetString("cbEqCPLiquid.Items22"), resources.GetString("cbEqCPLiquid.Items23"), resources.GetString("cbEqCPLiquid.Items24"), resources.GetString("cbEqCPLiquid.Items25"), resources.GetString("cbEqCPLiquid.Items26"), resources.GetString("cbEqCPLiquid.Items27"), resources.GetString("cbEqCPLiquid.Items28"), resources.GetString("cbEqCPLiquid.Items29"), resources.GetString("cbEqCPLiquid.Items30"), resources.GetString("cbEqCPLiquid.Items31"), resources.GetString("cbEqCPLiquid.Items32"), resources.GetString("cbEqCPLiquid.Items33"), resources.GetString("cbEqCPLiquid.Items34"), resources.GetString("cbEqCPLiquid.Items35"), resources.GetString("cbEqCPLiquid.Items36"), resources.GetString("cbEqCPLiquid.Items37"), resources.GetString("cbEqCPLiquid.Items38"), resources.GetString("cbEqCPLiquid.Items39")})
+        Me.cbEqCPLiquid.Items.AddRange(New Object() {resources.GetString("cbEqCPLiquid.Items"), resources.GetString("cbEqCPLiquid.Items1"), resources.GetString("cbEqCPLiquid.Items2"), resources.GetString("cbEqCPLiquid.Items3"), resources.GetString("cbEqCPLiquid.Items4"), resources.GetString("cbEqCPLiquid.Items5"), resources.GetString("cbEqCPLiquid.Items6"), resources.GetString("cbEqCPLiquid.Items7"), resources.GetString("cbEqCPLiquid.Items8"), resources.GetString("cbEqCPLiquid.Items9"), resources.GetString("cbEqCPLiquid.Items10"), resources.GetString("cbEqCPLiquid.Items11"), resources.GetString("cbEqCPLiquid.Items12"), resources.GetString("cbEqCPLiquid.Items13"), resources.GetString("cbEqCPLiquid.Items14"), resources.GetString("cbEqCPLiquid.Items15"), resources.GetString("cbEqCPLiquid.Items16"), resources.GetString("cbEqCPLiquid.Items17"), resources.GetString("cbEqCPLiquid.Items18"), resources.GetString("cbEqCPLiquid.Items19"), resources.GetString("cbEqCPLiquid.Items20"), resources.GetString("cbEqCPLiquid.Items21"), resources.GetString("cbEqCPLiquid.Items22"), resources.GetString("cbEqCPLiquid.Items23"), resources.GetString("cbEqCPLiquid.Items24"), resources.GetString("cbEqCPLiquid.Items25"), resources.GetString("cbEqCPLiquid.Items26"), resources.GetString("cbEqCPLiquid.Items27"), resources.GetString("cbEqCPLiquid.Items28"), resources.GetString("cbEqCPLiquid.Items29"), resources.GetString("cbEqCPLiquid.Items30"), resources.GetString("cbEqCPLiquid.Items31"), resources.GetString("cbEqCPLiquid.Items32"), resources.GetString("cbEqCPLiquid.Items33"), resources.GetString("cbEqCPLiquid.Items34"), resources.GetString("cbEqCPLiquid.Items35"), resources.GetString("cbEqCPLiquid.Items36"), resources.GetString("cbEqCPLiquid.Items37"), resources.GetString("cbEqCPLiquid.Items38"), resources.GetString("cbEqCPLiquid.Items39"), resources.GetString("cbEqCPLiquid.Items40")})
         Me.cbEqCPLiquid.Name = "cbEqCPLiquid"
         '
         'btnViewCPLiquid
@@ -2415,8 +2382,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataCPLiquid
         '
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataCPLiquid.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle118.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataCPLiquid.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle118
         Me.GridExpDataCPLiquid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataCPLiquid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataCPLiquid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15})
@@ -2426,16 +2393,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn14
         '
-        DataGridViewCellStyle17.NullValue = "0"
-        Me.DataGridViewTextBoxColumn14.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle119.NullValue = "0"
+        Me.DataGridViewTextBoxColumn14.DefaultCellStyle = DataGridViewCellStyle119
         resources.ApplyResources(Me.DataGridViewTextBoxColumn14, "DataGridViewTextBoxColumn14")
         Me.DataGridViewTextBoxColumn14.Name = "DataGridViewTextBoxColumn14"
         '
         'DataGridViewTextBoxColumn15
         '
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle18.NullValue = "0"
-        Me.DataGridViewTextBoxColumn15.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle120.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle120.NullValue = "0"
+        Me.DataGridViewTextBoxColumn15.DefaultCellStyle = DataGridViewCellStyle120
         resources.ApplyResources(Me.DataGridViewTextBoxColumn15, "DataGridViewTextBoxColumn15")
         Me.DataGridViewTextBoxColumn15.Name = "DataGridViewTextBoxColumn15"
         '
@@ -2453,6 +2420,7 @@ Partial Class FormCompoundCreator
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.tbUserDefCPIGEq)
         Me.GroupBox4.Controls.Add(Me.Label3)
         Me.GroupBox4.Controls.Add(Me.Label44)
         Me.GroupBox4.Controls.Add(Me.rbEstimateCPIG)
@@ -2477,6 +2445,12 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        '
+        'tbUserDefCPIGEq
+        '
+        Me.tbUserDefCPIGEq.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbUserDefCPIGEq, "tbUserDefCPIGEq")
+        Me.tbUserDefCPIGEq.Name = "tbUserDefCPIGEq"
         '
         'Label3
         '
@@ -2537,7 +2511,7 @@ Partial Class FormCompoundCreator
         Me.cbEqCPIG.DropDownWidth = 500
         Me.cbEqCPIG.FormattingEnabled = True
         resources.ApplyResources(Me.cbEqCPIG, "cbEqCPIG")
-        Me.cbEqCPIG.Items.AddRange(New Object() {resources.GetString("cbEqCPIG.Items"), resources.GetString("cbEqCPIG.Items1"), resources.GetString("cbEqCPIG.Items2"), resources.GetString("cbEqCPIG.Items3"), resources.GetString("cbEqCPIG.Items4"), resources.GetString("cbEqCPIG.Items5"), resources.GetString("cbEqCPIG.Items6"), resources.GetString("cbEqCPIG.Items7"), resources.GetString("cbEqCPIG.Items8"), resources.GetString("cbEqCPIG.Items9"), resources.GetString("cbEqCPIG.Items10"), resources.GetString("cbEqCPIG.Items11"), resources.GetString("cbEqCPIG.Items12"), resources.GetString("cbEqCPIG.Items13"), resources.GetString("cbEqCPIG.Items14"), resources.GetString("cbEqCPIG.Items15"), resources.GetString("cbEqCPIG.Items16"), resources.GetString("cbEqCPIG.Items17"), resources.GetString("cbEqCPIG.Items18"), resources.GetString("cbEqCPIG.Items19"), resources.GetString("cbEqCPIG.Items20"), resources.GetString("cbEqCPIG.Items21"), resources.GetString("cbEqCPIG.Items22"), resources.GetString("cbEqCPIG.Items23"), resources.GetString("cbEqCPIG.Items24"), resources.GetString("cbEqCPIG.Items25"), resources.GetString("cbEqCPIG.Items26"), resources.GetString("cbEqCPIG.Items27"), resources.GetString("cbEqCPIG.Items28"), resources.GetString("cbEqCPIG.Items29"), resources.GetString("cbEqCPIG.Items30"), resources.GetString("cbEqCPIG.Items31"), resources.GetString("cbEqCPIG.Items32"), resources.GetString("cbEqCPIG.Items33"), resources.GetString("cbEqCPIG.Items34"), resources.GetString("cbEqCPIG.Items35"), resources.GetString("cbEqCPIG.Items36"), resources.GetString("cbEqCPIG.Items37"), resources.GetString("cbEqCPIG.Items38"), resources.GetString("cbEqCPIG.Items39")})
+        Me.cbEqCPIG.Items.AddRange(New Object() {resources.GetString("cbEqCPIG.Items"), resources.GetString("cbEqCPIG.Items1"), resources.GetString("cbEqCPIG.Items2"), resources.GetString("cbEqCPIG.Items3"), resources.GetString("cbEqCPIG.Items4"), resources.GetString("cbEqCPIG.Items5"), resources.GetString("cbEqCPIG.Items6"), resources.GetString("cbEqCPIG.Items7"), resources.GetString("cbEqCPIG.Items8"), resources.GetString("cbEqCPIG.Items9"), resources.GetString("cbEqCPIG.Items10"), resources.GetString("cbEqCPIG.Items11"), resources.GetString("cbEqCPIG.Items12"), resources.GetString("cbEqCPIG.Items13"), resources.GetString("cbEqCPIG.Items14"), resources.GetString("cbEqCPIG.Items15"), resources.GetString("cbEqCPIG.Items16"), resources.GetString("cbEqCPIG.Items17"), resources.GetString("cbEqCPIG.Items18"), resources.GetString("cbEqCPIG.Items19"), resources.GetString("cbEqCPIG.Items20"), resources.GetString("cbEqCPIG.Items21"), resources.GetString("cbEqCPIG.Items22"), resources.GetString("cbEqCPIG.Items23"), resources.GetString("cbEqCPIG.Items24"), resources.GetString("cbEqCPIG.Items25"), resources.GetString("cbEqCPIG.Items26"), resources.GetString("cbEqCPIG.Items27"), resources.GetString("cbEqCPIG.Items28"), resources.GetString("cbEqCPIG.Items29"), resources.GetString("cbEqCPIG.Items30"), resources.GetString("cbEqCPIG.Items31"), resources.GetString("cbEqCPIG.Items32"), resources.GetString("cbEqCPIG.Items33"), resources.GetString("cbEqCPIG.Items34"), resources.GetString("cbEqCPIG.Items35"), resources.GetString("cbEqCPIG.Items36"), resources.GetString("cbEqCPIG.Items37"), resources.GetString("cbEqCPIG.Items38"), resources.GetString("cbEqCPIG.Items39"), resources.GetString("cbEqCPIG.Items40")})
         Me.cbEqCPIG.Name = "cbEqCPIG"
         '
         'btnViewCPIG
@@ -2587,8 +2561,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataCPIG
         '
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataCPIG.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle121.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataCPIG.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle121
         Me.GridExpDataCPIG.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataCPIG.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataCPIG.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
@@ -2598,16 +2572,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn3
         '
-        DataGridViewCellStyle20.NullValue = "0"
-        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle122.NullValue = "0"
+        Me.DataGridViewTextBoxColumn3.DefaultCellStyle = DataGridViewCellStyle122
         resources.ApplyResources(Me.DataGridViewTextBoxColumn3, "DataGridViewTextBoxColumn3")
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         '
         'DataGridViewTextBoxColumn4
         '
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle21.NullValue = "0"
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle123.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle123.NullValue = "0"
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle123
         resources.ApplyResources(Me.DataGridViewTextBoxColumn4, "DataGridViewTextBoxColumn4")
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
@@ -2626,6 +2600,7 @@ Partial Class FormCompoundCreator
         'FaTabStripItem9
         '
         Me.FaTabStripItem9.CanClose = False
+        Me.FaTabStripItem9.Controls.Add(Me.tbUserDefDensLiqEq)
         Me.FaTabStripItem9.Controls.Add(Me.Label45)
         Me.FaTabStripItem9.Controls.Add(Me.rbEstimateLIQDENS)
         Me.FaTabStripItem9.Controls.Add(Me.tbLIQDENS_E)
@@ -2650,6 +2625,12 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem9.IsDrawn = True
         Me.FaTabStripItem9.Name = "FaTabStripItem9"
         resources.ApplyResources(Me.FaTabStripItem9, "FaTabStripItem9")
+        '
+        'tbUserDefDensLiqEq
+        '
+        Me.tbUserDefDensLiqEq.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbUserDefDensLiqEq, "tbUserDefDensLiqEq")
+        Me.tbUserDefDensLiqEq.Name = "tbUserDefDensLiqEq"
         '
         'Label45
         '
@@ -2683,8 +2664,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataLIQDENS
         '
-        DataGridViewCellStyle22.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataLIQDENS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle124.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataLIQDENS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle124
         Me.GridExpDataLIQDENS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataLIQDENS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataLIQDENS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6})
@@ -2694,16 +2675,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn5
         '
-        DataGridViewCellStyle23.NullValue = "0"
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle125.NullValue = "0"
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle125
         resources.ApplyResources(Me.DataGridViewTextBoxColumn5, "DataGridViewTextBoxColumn5")
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
         'DataGridViewTextBoxColumn6
         '
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle24.NullValue = "0"
-        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle126.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle126.NullValue = "0"
+        Me.DataGridViewTextBoxColumn6.DefaultCellStyle = DataGridViewCellStyle126
         resources.ApplyResources(Me.DataGridViewTextBoxColumn6, "DataGridViewTextBoxColumn6")
         Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
         '
@@ -2799,6 +2780,7 @@ Partial Class FormCompoundCreator
         'FaTabStripItem10
         '
         Me.FaTabStripItem10.CanClose = False
+        Me.FaTabStripItem10.Controls.Add(Me.tbUserDefLiqViscEq)
         Me.FaTabStripItem10.Controls.Add(Me.Label46)
         Me.FaTabStripItem10.Controls.Add(Me.rbEstimateLIQVISC)
         Me.FaTabStripItem10.Controls.Add(Me.tbLIQVISC_E)
@@ -2822,7 +2804,14 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem10.Controls.Add(Me.Label41)
         Me.FaTabStripItem10.IsDrawn = True
         Me.FaTabStripItem10.Name = "FaTabStripItem10"
+        Me.FaTabStripItem10.Selected = True
         resources.ApplyResources(Me.FaTabStripItem10, "FaTabStripItem10")
+        '
+        'tbUserDefLiqViscEq
+        '
+        Me.tbUserDefLiqViscEq.BackColor = System.Drawing.Color.White
+        resources.ApplyResources(Me.tbUserDefLiqViscEq, "tbUserDefLiqViscEq")
+        Me.tbUserDefLiqViscEq.Name = "tbUserDefLiqViscEq"
         '
         'Label46
         '
@@ -2856,8 +2845,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataLIQVISC
         '
-        DataGridViewCellStyle25.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataLIQVISC.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle100.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataLIQVISC.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle100
         Me.GridExpDataLIQVISC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataLIQVISC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataLIQVISC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
@@ -2867,16 +2856,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn7
         '
-        DataGridViewCellStyle26.NullValue = "0"
-        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle101.NullValue = "0"
+        Me.DataGridViewTextBoxColumn7.DefaultCellStyle = DataGridViewCellStyle101
         resources.ApplyResources(Me.DataGridViewTextBoxColumn7, "DataGridViewTextBoxColumn7")
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
         '
         'DataGridViewTextBoxColumn8
         '
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle27.NullValue = "0"
-        Me.DataGridViewTextBoxColumn8.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle102.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle102.NullValue = "0"
+        Me.DataGridViewTextBoxColumn8.DefaultCellStyle = DataGridViewCellStyle102
         resources.ApplyResources(Me.DataGridViewTextBoxColumn8, "DataGridViewTextBoxColumn8")
         Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
         '
@@ -3061,8 +3050,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataCpS
         '
-        DataGridViewCellStyle28.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataCpS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle28
+        DataGridViewCellStyle127.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataCpS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle127
         Me.GridExpDataCpS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataCpS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataCpS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
@@ -3072,16 +3061,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn9
         '
-        DataGridViewCellStyle29.NullValue = "0"
-        Me.DataGridViewTextBoxColumn9.DefaultCellStyle = DataGridViewCellStyle29
+        DataGridViewCellStyle128.NullValue = "0"
+        Me.DataGridViewTextBoxColumn9.DefaultCellStyle = DataGridViewCellStyle128
         resources.ApplyResources(Me.DataGridViewTextBoxColumn9, "DataGridViewTextBoxColumn9")
         Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
         '
         'DataGridViewTextBoxColumn10
         '
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle30.NullValue = "0"
-        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle30
+        DataGridViewCellStyle129.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle129.NullValue = "0"
+        Me.DataGridViewTextBoxColumn10.DefaultCellStyle = DataGridViewCellStyle129
         resources.ApplyResources(Me.DataGridViewTextBoxColumn10, "DataGridViewTextBoxColumn10")
         Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
         '
@@ -3243,8 +3232,8 @@ Partial Class FormCompoundCreator
         '
         'GridExpDataRoS
         '
-        DataGridViewCellStyle31.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.GridExpDataRoS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle130.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.GridExpDataRoS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle130
         Me.GridExpDataRoS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridExpDataRoS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridExpDataRoS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
@@ -3254,16 +3243,16 @@ Partial Class FormCompoundCreator
         '
         'DataGridViewTextBoxColumn11
         '
-        DataGridViewCellStyle32.NullValue = "0"
-        Me.DataGridViewTextBoxColumn11.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle131.NullValue = "0"
+        Me.DataGridViewTextBoxColumn11.DefaultCellStyle = DataGridViewCellStyle131
         resources.ApplyResources(Me.DataGridViewTextBoxColumn11, "DataGridViewTextBoxColumn11")
         Me.DataGridViewTextBoxColumn11.Name = "DataGridViewTextBoxColumn11"
         '
         'DataGridViewTextBoxColumn12
         '
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle33.NullValue = "0"
-        Me.DataGridViewTextBoxColumn12.DefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle132.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle132.NullValue = "0"
+        Me.DataGridViewTextBoxColumn12.DefaultCellStyle = DataGridViewCellStyle132
         resources.ApplyResources(Me.DataGridViewTextBoxColumn12, "DataGridViewTextBoxColumn12")
         Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
         '
@@ -3405,29 +3394,6 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.TextBoxID, "TextBoxID")
         Me.TextBoxID.Name = "TextBoxID"
         '
-        'GroupBox3
-        '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.cbUnits)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.TabStop = False
-        '
-        'Label15
-        '
-        resources.ApplyResources(Me.Label15, "Label15")
-        Me.Label15.Name = "Label15"
-        '
-        'cbUnits
-        '
-        Me.cbUnits.BackColor = System.Drawing.Color.White
-        Me.cbUnits.DropDownHeight = 200
-        Me.cbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbUnits.DropDownWidth = 300
-        Me.cbUnits.FormattingEnabled = True
-        resources.ApplyResources(Me.cbUnits, "cbUnits")
-        Me.cbUnits.Name = "cbUnits"
-        '
         'DBOpenDlg
         '
         Me.DBOpenDlg.CheckFileExists = False
@@ -3474,17 +3440,97 @@ Partial Class FormCompoundCreator
         Me.ComboBox1.Items.AddRange(New Object() {resources.GetString("ComboBox1.Items"), resources.GetString("ComboBox1.Items1"), resources.GetString("ComboBox1.Items2"), resources.GetString("ComboBox1.Items3"), resources.GetString("ComboBox1.Items4"), resources.GetString("ComboBox1.Items5"), resources.GetString("ComboBox1.Items6"), resources.GetString("ComboBox1.Items7"), resources.GetString("ComboBox1.Items8"), resources.GetString("ComboBox1.Items9"), resources.GetString("ComboBox1.Items10"), resources.GetString("ComboBox1.Items11"), resources.GetString("ComboBox1.Items12"), resources.GetString("ComboBox1.Items13"), resources.GetString("ComboBox1.Items14"), resources.GetString("ComboBox1.Items15"), resources.GetString("ComboBox1.Items16"), resources.GetString("ComboBox1.Items17"), resources.GetString("ComboBox1.Items18"), resources.GetString("ComboBox1.Items19"), resources.GetString("ComboBox1.Items20"), resources.GetString("ComboBox1.Items21"), resources.GetString("ComboBox1.Items22"), resources.GetString("ComboBox1.Items23"), resources.GetString("ComboBox1.Items24"), resources.GetString("ComboBox1.Items25"), resources.GetString("ComboBox1.Items26"), resources.GetString("ComboBox1.Items27"), resources.GetString("ComboBox1.Items28"), resources.GetString("ComboBox1.Items29"), resources.GetString("ComboBox1.Items30"), resources.GetString("ComboBox1.Items31"), resources.GetString("ComboBox1.Items32")})
         Me.ComboBox1.Name = "ComboBox1"
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.AllowItemReorder = True
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BancoDeDadosToolStripMenuItem, Me.ComponenteToolStripMenuItem, Me.SistemasDeUnidadesToolStripMenuItem})
+        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Stretch = False
+        '
+        'BancoDeDadosToolStripMenuItem
+        '
+        Me.BancoDeDadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbDBPath, Me.CriarNovoToolStripMenuItem, Me.DefinirToolStripMenuItem, Me.chkReplaceComps})
+        Me.BancoDeDadosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.BancoDeDadosToolStripMenuItem.MergeIndex = 2
+        Me.BancoDeDadosToolStripMenuItem.Name = "BancoDeDadosToolStripMenuItem"
+        resources.ApplyResources(Me.BancoDeDadosToolStripMenuItem, "BancoDeDadosToolStripMenuItem")
+        '
+        'tbDBPath
+        '
+        resources.ApplyResources(Me.tbDBPath, "tbDBPath")
+        Me.tbDBPath.Name = "tbDBPath"
+        '
+        'CriarNovoToolStripMenuItem
+        '
+        Me.CriarNovoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white
+        Me.CriarNovoToolStripMenuItem.Name = "CriarNovoToolStripMenuItem"
+        resources.ApplyResources(Me.CriarNovoToolStripMenuItem, "CriarNovoToolStripMenuItem")
+        '
+        'DefinirToolStripMenuItem
+        '
+        Me.DefinirToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.folder_go
+        Me.DefinirToolStripMenuItem.Name = "DefinirToolStripMenuItem"
+        resources.ApplyResources(Me.DefinirToolStripMenuItem, "DefinirToolStripMenuItem")
+        '
+        'chkReplaceComps
+        '
+        Me.chkReplaceComps.Checked = True
+        Me.chkReplaceComps.CheckOnClick = True
+        Me.chkReplaceComps.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkReplaceComps.Name = "chkReplaceComps"
+        resources.ApplyResources(Me.chkReplaceComps, "chkReplaceComps")
+        '
+        'ComponenteToolStripMenuItem
+        '
+        Me.ComponenteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarNoBancoDeDadosToolStripMenuItem, Me.ImportarDadosToolStripMenuItem})
+        Me.ComponenteToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.ComponenteToolStripMenuItem.MergeIndex = 3
+        Me.ComponenteToolStripMenuItem.Name = "ComponenteToolStripMenuItem"
+        resources.ApplyResources(Me.ComponenteToolStripMenuItem, "ComponenteToolStripMenuItem")
+        '
+        'SalvarNoBancoDeDadosToolStripMenuItem
+        '
+        Me.SalvarNoBancoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.disk
+        Me.SalvarNoBancoDeDadosToolStripMenuItem.Name = "SalvarNoBancoDeDadosToolStripMenuItem"
+        resources.ApplyResources(Me.SalvarNoBancoDeDadosToolStripMenuItem, "SalvarNoBancoDeDadosToolStripMenuItem")
+        '
+        'ImportarDadosToolStripMenuItem
+        '
+        Me.ImportarDadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BancoDeDadosKDBCHERICToolStripMenuItem})
+        Me.ImportarDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
+        Me.ImportarDadosToolStripMenuItem.Name = "ImportarDadosToolStripMenuItem"
+        resources.ApplyResources(Me.ImportarDadosToolStripMenuItem, "ImportarDadosToolStripMenuItem")
+        '
+        'BancoDeDadosKDBCHERICToolStripMenuItem
+        '
+        Me.BancoDeDadosKDBCHERICToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
+        Me.BancoDeDadosKDBCHERICToolStripMenuItem.Name = "BancoDeDadosKDBCHERICToolStripMenuItem"
+        resources.ApplyResources(Me.BancoDeDadosKDBCHERICToolStripMenuItem, "BancoDeDadosKDBCHERICToolStripMenuItem")
+        '
+        'SistemasDeUnidadesToolStripMenuItem
+        '
+        Me.SistemasDeUnidadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cbUnits})
+        Me.SistemasDeUnidadesToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.SistemasDeUnidadesToolStripMenuItem.MergeIndex = 4
+        Me.SistemasDeUnidadesToolStripMenuItem.Name = "SistemasDeUnidadesToolStripMenuItem"
+        resources.ApplyResources(Me.SistemasDeUnidadesToolStripMenuItem, "SistemasDeUnidadesToolStripMenuItem")
+        '
+        'cbUnits
+        '
+        Me.cbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbUnits.Name = "cbUnits"
+        resources.ApplyResources(Me.cbUnits, "cbUnits")
+        '
         'FormCompoundCreator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormCompoundCreator"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3551,23 +3597,16 @@ Partial Class FormCompoundCreator
         Me.gbSolidDens.ResumeLayout(False)
         Me.gbSolidDens.PerformLayout()
         CType(Me.GridExpDataRoS, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents tbDBPath As System.Windows.Forms.TextBox
-    Friend WithEvents btnSearch As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents btnCreateNewDB As System.Windows.Forms.Button
-    Friend WithEvents chkReplaceComps As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents DBOpenDlg As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents btnSaveToDB As System.Windows.Forms.Button
     Public WithEvents GridUNIFAC As System.Windows.Forms.DataGridView
     Public WithEvents TextBoxID As System.Windows.Forms.TextBox
     Public WithEvents Label16 As System.Windows.Forms.Label
@@ -3719,8 +3758,6 @@ Partial Class FormCompoundCreator
     Public WithEvents Label36 As System.Windows.Forms.Label
     Public WithEvents cbEqLIQDENS As System.Windows.Forms.ComboBox
     Friend WithEvents rbCoeffLIQDENS As System.Windows.Forms.RadioButton
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Public WithEvents cbUnits As System.Windows.Forms.ComboBox
     Friend WithEvents Label51 As System.Windows.Forms.Label
     Friend WithEvents Label47 As System.Windows.Forms.Label
     Friend WithEvents pbRender As System.Windows.Forms.PictureBox
@@ -3742,7 +3779,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents FaTabStripItem8 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents FaTabStripItem9 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents FaTabStripItem10 As FarsiLibrary.Win.FATabStripItem
-    Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents FaTabStripItem3 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents GridJoback As System.Windows.Forms.DataGridView
     Public WithEvents Label57 As System.Windows.Forms.Label
@@ -3971,4 +4007,21 @@ Partial Class FormCompoundCreator
     Public WithEvents Label118 As System.Windows.Forms.Label
     Public WithEvents tbElecIonCharge As System.Windows.Forms.TextBox
     Public WithEvents Label127 As System.Windows.Forms.Label
+    Public WithEvents tbUserDefEqPVAP As System.Windows.Forms.TextBox
+    Public WithEvents tbUserDefCPLEq As System.Windows.Forms.TextBox
+    Public WithEvents tbUserDefCPIGEq As System.Windows.Forms.TextBox
+    Public WithEvents tbUserDefDensLiqEq As System.Windows.Forms.TextBox
+    Public WithEvents tbUserDefLiqViscEq As System.Windows.Forms.TextBox
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents BancoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CriarNovoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DefinirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tbDBPath As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ComponenteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalvarNoBancoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents chkReplaceComps As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SistemasDeUnidadesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cbUnits As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents ImportarDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BancoDeDadosKDBCHERICToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

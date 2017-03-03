@@ -315,7 +315,7 @@ Public Class FormCompoundCreator
             If Not isUserDBSaved Then
                 Dim y = MessageBox.Show(DWSIM.App.GetLocalString("DesejaSalvaroUserDB"), DWSIM.App.GetLocalString("Fechando") & " " & DWSIM.App.GetLocalString("BancodeDados"), MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
                 If y = MsgBoxResult.Yes Then
-                    btnSaveToDB_Click(sender, e)
+                    SalvarNoBancoDeDadosToolStripMenuItem_Click(sender, e)
                 ElseIf y = MsgBoxResult.Cancel Then
                     e.Cancel = True
                 End If
@@ -471,6 +471,7 @@ Public Class FormCompoundCreator
                 TextBoxMeltingTemp.Text = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, .cp.TemperatureOfFusion)
                 TextBoxEnthOfFusion.Text = SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, .cp.EnthalpyOfFusionAtTf)
                 TextBoxSMILES.Text = .cp.SMILES
+
                 If Not .cp.SMILES = "" Then
                     RenderSMILES()
                 End If
@@ -511,40 +512,60 @@ Public Class FormCompoundCreator
                     AtomDataGrid.Rows.Add(New Object() {.cp.Elements.GetKey(i), .cp.Elements.GetByIndex(i)})
                 Next
 
-                For Each it As Object In cbEqPVAP.Items
-                    If it.ToString.Split(":")(0) = .cp.VaporPressureEquation Then
-                        cbEqPVAP.SelectedIndex = cbEqPVAP.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
+                If Integer.TryParse(.cp.VaporPressureEquation, New Integer) Then
+                    For Each it As Object In cbEqPVAP.Items
+                        If it.ToString.Split(":")(0) = .cp.VaporPressureEquation Then
+                            cbEqPVAP.SelectedIndex = cbEqPVAP.Items.IndexOf(it)
+                            Exit For
+                        End If
+                    Next
+                Else
+                    cbEqPVAP.SelectedIndex = cbEqPVAP.Items.Count - 1
+                End If
 
-                For Each it As Object In cbEqCPIG.Items
-                    If it.ToString.Split(":")(0) = .cp.IdealgasCpEquation Then
-                        cbEqCPIG.SelectedIndex = cbEqCPIG.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
+                If Integer.TryParse(.cp.IdealgasCpEquation, New Integer) Then
+                    For Each it As Object In cbEqCPIG.Items
+                        If it.ToString.Split(":")(0) = .cp.IdealgasCpEquation Then
+                            cbEqCPIG.SelectedIndex = cbEqCPIG.Items.IndexOf(it)
+                            Exit For
+                        End If
+                    Next
+                Else
+                    cbEqCPIG.SelectedIndex = cbEqCPIG.Items.Count - 1
+                End If
 
-                For Each it As Object In cbEqCPLiquid.Items
-                    If it.ToString.Split(":")(0) = .cp.LiquidHeatCapacityEquation Then
-                        cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
+                If Integer.TryParse(.cp.LiquidHeatCapacityEquation, New Integer) Then
+                    For Each it As Object In cbEqCPLiquid.Items
+                        If it.ToString.Split(":")(0) = .cp.LiquidHeatCapacityEquation Then
+                            cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.IndexOf(it)
+                            Exit For
+                        End If
+                    Next
+                Else
+                    cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.Count - 1
+                End If
 
-                For Each it As Object In cbEqLIQDENS.Items
-                    If it.ToString.Split(":")(0) = .cp.LiquidDensityEquation Then
-                        cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
+                If Integer.TryParse(.cp.LiquidDensityEquation, New Integer) Then
+                    For Each it As Object In cbEqLIQDENS.Items
+                        If it.ToString.Split(":")(0) = .cp.LiquidDensityEquation Then
+                            cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.IndexOf(it)
+                            Exit For
+                        End If
+                    Next
+                Else
+                    cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.Count - 1
+                End If
 
-                For Each it As Object In cbEqLIQVISC.Items
-                    If it.ToString.Split(":")(0) = .cp.LiquidViscosityEquation Then
-                        cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.IndexOf(it)
-                        Exit For
-                    End If
-                Next
+                If Integer.TryParse(.cp.LiquidViscosityEquation, New Integer) Then
+                    For Each it As Object In cbEqLIQVISC.Items
+                        If it.ToString.Split(":")(0) = .cp.LiquidViscosityEquation Then
+                            cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.IndexOf(it)
+                            Exit For
+                        End If
+                    Next
+                Else
+                    cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.Count - 1
+                End If
 
                 For Each it As Object In cbEqCpS.Items
                     If it.ToString.Split(":")(0) = .cp.SolidHeatCapacityEquation Then
@@ -805,12 +826,22 @@ Public Class FormCompoundCreator
                 .CalcEM = CheckBoxEnthOfFusion.Checked
 
                 .cp.VaporPressureEquation = cbEqPVAP.SelectedItem.ToString.Split(":")(0)
+                If .cp.VaporPressureEquation = "1000" Then .cp.VaporPressureEquation = tbUserDefEqPVAP.Text
+
                 .cp.LiquidDensityEquation = cbEqLIQDENS.SelectedItem.ToString.Split(":")(0)
+                If .cp.LiquidDensityEquation = "1000" Then .cp.LiquidDensityEquation = tbUserDefDensLiqEq.Text
+
                 .cp.LiquidViscosityEquation = cbEqLIQVISC.SelectedItem.ToString.Split(":")(0)
+                If .cp.LiquidViscosityEquation = "1000" Then .cp.LiquidViscosityEquation = tbUserDefLiqViscEq.Text
+
                 .cp.SolidHeatCapacityEquation = cbEqCpS.SelectedIndex.ToString.Split(":")(0)
                 .cp.SolidDensityEquation = cbEqSolidDENS.SelectedIndex.ToString.Split(":")(0)
+
                 .cp.IdealgasCpEquation = cbEqCPIG.SelectedItem.ToString.Split(":")(0)
+                If .cp.IdealgasCpEquation = "1000" Then .cp.IdealgasCpEquation = tbUserDefCPIGEq.Text
+
                 .cp.LiquidHeatCapacityEquation = cbEqCPLiquid.SelectedItem.ToString.Split(":")(0)
+                If .cp.LiquidHeatCapacityEquation = "1000" Then .cp.LiquidHeatCapacityEquation = tbUserDefCPLEq.Text
 
                 .cp.Solid_Heat_Capacity_Const_A = CheckEmptyCell(tbCpS_A.Text)
                 .cp.Solid_Heat_Capacity_Const_B = CheckEmptyCell(tbCpS_B.Text)
@@ -1852,21 +1883,6 @@ Public Class FormCompoundCreator
 
     End Sub
 
-    Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Me.tbDBPath.Text = Me.DBOpenDlg.FileName
-            SetCompCreatorSaveStatus(False)
-        End If
-    End Sub
-
-    Private Sub btnCreateNewDB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCreateNewDB.Click
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            If Not File.Exists(Me.DBOpenDlg.FileName) Then File.Create(Me.DBOpenDlg.FileName)
-            Me.tbDBPath.Text = Me.DBOpenDlg.FileName
-            SetCompCreatorSaveStatus(False)
-        End If
-    End Sub
-
     Private Sub rbEstimatePVAP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbEstimatePVAP.CheckedChanged
         If rbEstimatePVAP.Checked Then
             mycase.cp.VaporPressureEquation = 0
@@ -2583,7 +2599,14 @@ Public Class FormCompoundCreator
         End If
     End Sub
     Private Sub cbEqPVAP_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqPVAP.SelectedIndexChanged
-        If mycase.EqPVAP Then mycase.cp.VaporPressureEquation = cbEqPVAP.SelectedItem.ToString.Split(":")(0)
+        If mycase.EqPVAP Then
+            mycase.cp.VaporPressureEquation = cbEqPVAP.SelectedItem.ToString.Split(":")(0)
+            If mycase.cp.VaporPressureEquation = "1000" Then
+                tbUserDefEqPVAP.Enabled = True
+            Else
+                tbUserDefEqPVAP.Enabled = False
+            End If
+        End If
         If loaded Then
             SetCompCreatorSaveStatus(False)
             SetUserDBSaveStatus(False)
@@ -2591,7 +2614,14 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub cbEqCPIG_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqCPIG.SelectedIndexChanged
-        If mycase.EqCPIG Then mycase.cp.IdealgasCpEquation = cbEqCPIG.SelectedItem.ToString.Split(":")(0)
+        If mycase.EqCPIG Then
+            mycase.cp.IdealgasCpEquation = cbEqCPIG.SelectedItem.ToString.Split(":")(0)
+            If mycase.cp.IdealgasCpEquation = "1000" Then
+                tbUserDefCPIGEq.Enabled = True
+            Else
+                tbUserDefCPIGEq.Enabled = False
+            End If
+        End If
         If loaded Then
             SetCompCreatorSaveStatus(False)
             SetUserDBSaveStatus(False)
@@ -2607,7 +2637,14 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub cbEqLIQDENS_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqLIQDENS.SelectedIndexChanged
-        If mycase.EqLDENS Then mycase.cp.LiquidDensityEquation = cbEqLIQDENS.SelectedItem.ToString.Split(":")(0)
+        If mycase.EqLDENS Then
+            mycase.cp.LiquidDensityEquation = cbEqLIQDENS.SelectedItem.ToString.Split(":")(0)
+            If mycase.cp.LiquidDensityEquation = "1000" Then
+                tbUserDefDensLiqEq.Enabled = True
+            Else
+                tbUserDefDensLiqEq.Enabled = False
+            End If
+        End If
         If loaded Then
             SetCompCreatorSaveStatus(False)
             SetUserDBSaveStatus(False)
@@ -2615,7 +2652,14 @@ Public Class FormCompoundCreator
     End Sub
 
     Private Sub cbEqLIQVISC_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbEqLIQVISC.SelectedIndexChanged
-        If mycase.EqLVISC Then mycase.cp.LiquidViscosityEquation = cbEqLIQVISC.SelectedItem.ToString.Split(":")(0)
+        If mycase.EqLVISC Then
+            mycase.cp.LiquidViscosityEquation = cbEqLIQVISC.SelectedItem.ToString.Split(":")(0)
+            If mycase.cp.LiquidViscosityEquation = "1000" Then
+                tbUserDefLiqViscEq.Enabled = True
+            Else
+                tbUserDefLiqViscEq.Enabled = False
+            End If
+        End If
         If loaded Then
             SetCompCreatorSaveStatus(False)
             SetUserDBSaveStatus(False)
@@ -2805,7 +2849,7 @@ Public Class FormCompoundCreator
         loaded = True
     End Sub
 
-    Private Sub cbUnits_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cbUnits.SelectedIndexChanged
+    Private Sub cbUnits_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs)
         If loaded Then
             StoreData()
         End If
@@ -2898,32 +2942,7 @@ Public Class FormCompoundCreator
         End If
     End Sub
 
-    Private Sub btnSaveToDB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveToDB.Click
-        If tbDBPath.Text = "" Then
-            MessageBox.Show(DWSIM.App.GetLocalString("NoDatabaseDefined"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
-        End If
-        Try
-            StoreData()
-
-            'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
-            'Delete UNIFAC groups to prevent wrong calculations.
-            If Not PureUNIFACCompound Then
-                mycase.cp.UNIFACGroups.Clear()
-                mycase.cp.MODFACGroups.Clear()
-                mycase.cp.NISTMODFACGroups.Clear()
-            End If
-
-            mycase.cp.OriginalDB = "User"
-            mycase.cp.CurrentDB = "User"
-
-            Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
-            SetUserDBSaveStatus(True)
-        Catch ex As Exception
-            MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkReplaceComps.CheckStateChanged
+    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If loaded Then
             SetCompCreatorSaveStatus(False)
         End If
@@ -3221,8 +3240,8 @@ Public Class FormCompoundCreator
 
     End Sub
 
-    Private Sub tbDBPath_TextChanged(sender As Object, e As EventArgs) Handles tbDBPath.TextChanged
-        If tbDBPath.Text <> "" Then btnSaveToDB.Enabled = True Else btnSaveToDB.Enabled = False
+    Private Sub tbDBPath_TextChanged(sender As Object, e As EventArgs)
+        If tbDBPath.Text <> "" Then SalvarNoBancoDeDadosToolStripMenuItem.Enabled = True Else SalvarNoBancoDeDadosToolStripMenuItem.Enabled = False
     End Sub
 
     Private Sub rbIon_CheckedChanged(sender As Object, e As EventArgs) Handles rbIon.CheckedChanged, rbSalt.CheckedChanged, rbHydratedSalt.CheckedChanged
@@ -3262,6 +3281,67 @@ Public Class FormCompoundCreator
 
     Private Sub GridExpDataCpS_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles GridExpDataCpS.CellValidating
         DirectCast(sender, DataGridView).ValidateCellForDouble(e)
+    End Sub
+
+    Private Sub tbUserDefEqPVAP_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefEqPVAP.TextChanged
+        If loaded Then mycase.cp.VaporPressureEquation = tbUserDefEqPVAP.Text
+    End Sub
+
+    Private Sub tbUserDefCPIGEq_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefCPIGEq.TextChanged
+        If loaded Then mycase.cp.IdealgasCpEquation = tbUserDefCPIGEq.Text
+    End Sub
+
+    Private Sub tbUserDefCPLEq_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefCPLEq.TextChanged
+        If loaded Then mycase.cp.LiquidHeatCapacityEquation = tbUserDefCPLEq.Text
+    End Sub
+
+    Private Sub tbUserDefDensLiqEq_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefDensLiqEq.TextChanged
+        If loaded Then mycase.cp.LiquidDensityEquation = tbUserDefDensLiqEq.Text
+    End Sub
+
+    Private Sub tbUserDefLiqViscEq_TextChanged(sender As Object, e As EventArgs) Handles tbUserDefLiqViscEq.TextChanged
+        If loaded Then mycase.cp.LiquidViscosityEquation = tbUserDefLiqViscEq.Text
+    End Sub
+
+    Private Sub CriarNovoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarNovoToolStripMenuItem.Click
+        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            If Not File.Exists(Me.DBOpenDlg.FileName) Then File.Create(Me.DBOpenDlg.FileName)
+            Me.tbDBPath.Text = Me.DBOpenDlg.FileName
+            SetCompCreatorSaveStatus(False)
+        End If
+    End Sub
+
+    Private Sub DefinirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefinirToolStripMenuItem.Click
+        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Me.tbDBPath.Text = Me.DBOpenDlg.FileName
+            SetCompCreatorSaveStatus(False)
+        End If
+    End Sub
+
+    Private Sub SalvarNoBancoDeDadosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalvarNoBancoDeDadosToolStripMenuItem.Click
+        If tbDBPath.Text = "" Then
+            MessageBox.Show(DWSIM.App.GetLocalString("NoDatabaseDefined"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Exit Sub
+        End If
+        Try
+            StoreData()
+
+            'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
+            'Delete UNIFAC groups to prevent wrong calculations.
+            If Not PureUNIFACCompound Then
+                mycase.cp.UNIFACGroups.Clear()
+                mycase.cp.MODFACGroups.Clear()
+                mycase.cp.NISTMODFACGroups.Clear()
+            End If
+
+            mycase.cp.OriginalDB = "User"
+            mycase.cp.CurrentDB = "User"
+
+            Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
+            SetUserDBSaveStatus(True)
+        Catch ex As Exception
+            MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
 
