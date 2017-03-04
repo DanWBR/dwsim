@@ -84,7 +84,7 @@ Public Class Files
                     ' Copy the assembly to the temporary file
                     Try
                         Dim fname As String = Path.Combine(Environment.CurrentDirectory, dlist(i))
-                        Using outFile As Stream = File.Create(fname, 4 * 1024, FileOptions.None, New System.Security.AccessControl.FileSecurity(fname, Security.AccessControl.AccessControlSections.Owner))
+                        Using outFile As Stream = New FileStream(fname, FileMode.CreateNew, FileAccess.ReadWrite)
                             Const sz As Integer = 4096
                             Dim buf As Byte() = New Byte(sz - 1) {}
                             While True

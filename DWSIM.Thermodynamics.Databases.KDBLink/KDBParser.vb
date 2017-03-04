@@ -42,11 +42,22 @@ Public Class KDBParser
             results.Add(New String() {id, name, formula})
         Next
 
-        If exact Then
-            Return results.Where(Function(x) x(1).ToLower.Equals(searchstring.ToLower)).ToList
-        Else
-            Return results
-        End If
+        If results.Count > 0 Then
+            If exact Then
+                Dim match = results.Where(Function(x) x(1).ToLower.Equals(searchstring.ToLower)).ToList
+                If match.Count > 0 Then
+                    Return match
+                Else
+                    Dim list As New List(Of String())
+                    list.Add(results(0))
+                    Return list
+                End If
+            Else
+                Return results
+            End If
+            Else
+                Throw New Exception("No matching compounds found.")
+            End If
 
     End Function
 

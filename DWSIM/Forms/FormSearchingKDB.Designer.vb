@@ -65,6 +65,9 @@ Partial Class FormSearchingKDB
         Me.Controls.Add(Me.PictureBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FormSearchingKDB"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
+        Me.TopMost = True
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -3343,6 +3343,11 @@ Public Class FormCompoundCreator
             MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Sub BancoDeDadosKDBCHERICToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosKDBCHERICToolStripMenuItem.Click
+
+    End Sub
+
 End Class
 
 <System.Serializable()> Public Class CompoundGeneratorCase

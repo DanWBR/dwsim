@@ -3794,7 +3794,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                End If
                            Else
                                fresult.Close()
-                               MessageBox.Show(t.Exception.Message, DWSIM.App.GetLocalString("Erro"))
+                               MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
                            End If
                        End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
@@ -3819,15 +3819,17 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                                                   fsearch2.Close()
                                                                   If t2.Exception Is Nothing Then
                                                                       If Not t2.Result Is Nothing Then
-                                                                          Me.GridExpData.Rows.Clear()
-                                                                          For Each record In t2.Result.Data
-                                                                              Me.GridExpData.Rows.Add(True, record.X, "", record.Y, record.T, "", "", record.P)
-                                                                          Next
-                                                                          cbTunit.SelectedItem = t2.Result.Tunits
-                                                                          cbPunit.SelectedItem = t2.Result.Punits
+                                                                          UIThread(Sub()
+                                                                                       Me.GridExpData.Rows.Clear()
+                                                                                       For Each record In t2.Result.Data
+                                                                                           Me.GridExpData.Rows.Add(True, record.X, "", record.Y, record.T, "", "", record.P)
+                                                                                       Next
+                                                                                       cbTunit.SelectedItem = t2.Result.Tunits
+                                                                                       cbPunit.SelectedItem = t2.Result.Punits
+                                                                                   End Sub)
                                                                       End If
                                                                   Else
-                                                                      MessageBox.Show(t2.Exception.Message, DWSIM.App.GetLocalString("Erro"))
+                                                                      MessageBox.Show(t2.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
                                                                   End If
                                                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
                                               t2.Start()

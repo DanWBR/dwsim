@@ -76,6 +76,9 @@ Partial Class FormSearchKDBVLE
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormSearchKDBVLE"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
+        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

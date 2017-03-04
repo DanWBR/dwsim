@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="graph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>658, 499</value>
+  </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>658, 499</value>
   </data>
@@ -126,18 +129,6 @@
   </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>y-x chart</value>
-  </data>
-  <data name="FaTabStripItem3.Title" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>660, 520</value>
-  </data>
-  <data name="graph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 499</value>
-  </data>
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 158</value>
   </data>
   <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 22</value>
@@ -181,6 +172,18 @@
   <data name="ToolStripMenuItem7.Text" xml:space="preserve">
     <value>Generate Points (PRSV2-VL)</value>
   </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 158</value>
+  </data>
+  <data name="FaTabStripItem3.Title" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>660, 520</value>
+  </data>
+  <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>654, 128</value>
+  </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>491, 615</value>
   </data>
@@ -190,9 +193,6 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Regression Results</value>
   </data>
-  <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>654, 128</value>
-  </data>
   <data name="btnDoReg.Location" type="System.Drawing.Point, System.Drawing">
     <value>135, 613</value>
   </data>
@@ -200,7 +200,7 @@
     <value>Run Regression</value>
   </data>
   <data name="btnSearchKDB.Text" xml:space="preserve">
-    <value>Search for Data at Online KDB Thermo Database</value>
+    <value>Search Online for VLE Data at KDB Thermo Database</value>
   </data>
   <data name="chkDoTDepRegression.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 562</value>
@@ -376,12 +376,6 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Regression Information</value>
   </data>
-  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>926, 81</value>
-  </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Information</value>
-  </data>
   <data name="BtnSelectIPDB.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 45</value>
   </data>
@@ -426,6 +420,12 @@
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>926, 81</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Information</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1155, 774</value>
@@ -1873,10 +1873,6 @@
         AAAAAAAAAAAAAAAAAAD8PzV78A8AAMADAACAAcADgAGAAQAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAIAB
         AACAAYABwAOAAeAHwAP4HwAE
 </value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Data Regression</value>
