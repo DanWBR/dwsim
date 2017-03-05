@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.Advanc
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Databases.KDBLink", "DWSIM.Thermodynamics.Databases.KDBLink\DWSIM.Thermodynamics.Databases.KDBLink.vbproj", "{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Databases.ChemeoLink", "DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj", "{EDB0B095-FF87-4B07-A06F-E314C45D73D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -609,6 +611,21 @@ Global
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}.x86|Mixed Platforms.Build.0 = Release|Any CPU
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}.x86|x86.ActiveCfg = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.x86|Any CPU.Build.0 = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{EDB0B095-FF87-4B07-A06F-E314C45D73D4}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

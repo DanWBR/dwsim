@@ -446,6 +446,21 @@ Public Class FormCompoundCreator
 
                 RadioButton1.Checked = True
 
+                CheckBoxMW.Checked = .CalcMW
+                CheckBoxNBP.Checked = .CalcNBP
+                CheckBoxAF.Checked = .CalcAF
+                CheckBoxCSAF.Checked = .CalcCSAF
+                CheckBoxCSLV.Checked = .CalcCSMV
+                CheckBoxCSSP.Checked = .CalcCSSP
+                CheckBoxTc.Checked = .CalcTC
+                CheckBoxPc.Checked = .CalcPC
+                CheckBoxZc.Checked = .CalcZC
+                CheckBoxZRa.Checked = .CalcZRA
+                CheckBoxDHF.Checked = .CalcHF
+                CheckBoxDGF.Checked = .CalcGF
+                CheckBoxMeltingTemp.Checked = .CalcMP
+                CheckBoxEnthOfFusion.Checked = .CalcEM
+
                 'tbDBPath.Text = .database
                 TextBoxAF.Text = .cp.Acentric_Factor
                 TextBoxCAS.Text = .cp.CAS_Number
@@ -492,21 +507,6 @@ Public Class FormCompoundCreator
                 If .EqCpS Then rbCoeffSolidCp.Checked = True
                 If .EqSDens Then rbCoeffSolidDens.Checked = True
 
-                CheckBoxMW.Checked = .CalcMW
-                CheckBoxNBP.Checked = .CalcNBP
-                CheckBoxAF.Checked = .CalcAF
-                CheckBoxCSAF.Checked = .CalcCSAF
-                CheckBoxCSLV.Checked = .CalcCSMV
-                CheckBoxCSSP.Checked = .CalcCSSP
-                CheckBoxTc.Checked = .CalcTC
-                CheckBoxPc.Checked = .CalcPC
-                CheckBoxZc.Checked = .CalcZC
-                CheckBoxZRa.Checked = .CalcZRA
-                CheckBoxDHF.Checked = .CalcHF
-                CheckBoxDGF.Checked = .CalcGF
-                CheckBoxMeltingTemp.Checked = .CalcMP
-                CheckBoxEnthOfFusion.Checked = .CalcEM
-
                 AtomDataGrid.Rows.Clear()
                 For i = 0 To .cp.Elements.Count - 1
                     AtomDataGrid.Rows.Add(New Object() {.cp.Elements.GetKey(i), .cp.Elements.GetByIndex(i)})
@@ -521,6 +521,7 @@ Public Class FormCompoundCreator
                     Next
                 Else
                     cbEqPVAP.SelectedIndex = cbEqPVAP.Items.Count - 1
+                    tbUserDefEqPVAP.Text = .cp.VaporPressureEquation
                 End If
 
                 If Integer.TryParse(.cp.IdealgasCpEquation, New Integer) Then
@@ -532,6 +533,7 @@ Public Class FormCompoundCreator
                     Next
                 Else
                     cbEqCPIG.SelectedIndex = cbEqCPIG.Items.Count - 1
+                    tbUserDefCPIGEq.Text = .cp.IdealgasCpEquation
                 End If
 
                 If Integer.TryParse(.cp.LiquidHeatCapacityEquation, New Integer) Then
@@ -543,6 +545,7 @@ Public Class FormCompoundCreator
                     Next
                 Else
                     cbEqCPLiquid.SelectedIndex = cbEqCPLiquid.Items.Count - 1
+                    tbUserDefCPLEq.Text = .cp.LiquidHeatCapacityEquation
                 End If
 
                 If Integer.TryParse(.cp.LiquidDensityEquation, New Integer) Then
@@ -554,6 +557,7 @@ Public Class FormCompoundCreator
                     Next
                 Else
                     cbEqLIQDENS.SelectedIndex = cbEqLIQDENS.Items.Count - 1
+                    tbUserDefDensLiqEq.Text = .cp.LiquidDensityEquation
                 End If
 
                 If Integer.TryParse(.cp.LiquidViscosityEquation, New Integer) Then
@@ -565,6 +569,7 @@ Public Class FormCompoundCreator
                     Next
                 Else
                     cbEqLIQVISC.SelectedIndex = cbEqLIQVISC.Items.Count - 1
+                    tbUserDefLiqViscEq.Text = .cp.LiquidViscosityEquation
                 End If
 
                 For Each it As Object In cbEqCpS.Items

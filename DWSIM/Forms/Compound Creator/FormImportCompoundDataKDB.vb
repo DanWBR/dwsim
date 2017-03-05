@@ -47,6 +47,8 @@ Public Class FormImportCompoundDataKDB
 
                 Dim searchtext As String = tbSearchString.Text
 
+                Me.Enabled = False
+
                 fsearch.Show()
 
                 Dim t As New Task(Of List(Of String()))(Function()
@@ -56,6 +58,7 @@ Public Class FormImportCompoundDataKDB
                 t.ContinueWith(Sub()
                                    fsearch.Close()
                                    UIThread(Sub()
+                                                Me.Enabled = True
                                                 If t.Exception Is Nothing Then
                                                     compounds = t.Result
                                                     For Each item In t.Result
@@ -89,6 +92,10 @@ Public Class FormImportCompoundDataKDB
 
                 Dim id As String = compounds(lbFoundItems.SelectedIndex)(0)
 
+                Me.dgResults.Rows.Clear()
+
+                Me.Enabled = False
+
                 fsearch.Show()
 
                 Dim t As New Task(Of Global.DWSIM.Thermodynamics.BaseClasses.ConstantProperties)(Function()
@@ -97,14 +104,16 @@ Public Class FormImportCompoundDataKDB
 
                 t.ContinueWith(Sub()
                                    fsearch.Close()
-                                   If t.Exception Is Nothing Then
-                                       compound = t.Result
-                                       UIThread(Sub()
+                                   UIThread(Sub()
+                                                Me.Enabled = True
+                                                If t.Exception Is Nothing Then
+                                                    compound = t.Result
                                                     AddPropertiesToGrid()
-                                                End Sub)
-                                   Else
-                                       MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
-                                   End If
+                                                Else
+                                                    MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                End If
+
+                                            End Sub)
                                End Sub, TaskContinuationOptions.ExecuteSynchronously)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
@@ -130,8 +139,6 @@ Public Class FormImportCompoundDataKDB
     End Sub
 
     Sub AddPropertiesToGrid()
-
-        Me.dgResults.Rows.Clear()
 
         Dim okimg = My.Resources.accept
         Dim noimg = My.Resources.cross
