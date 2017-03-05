@@ -5457,4 +5457,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ObjDeactivated" xml:space="preserve">
     <value>objeto está inativo</value>
   </data>
+  <data name="Import" xml:space="preserve">
+    <value>Importar</value>
+  </data>
+  <data name="NextButton" xml:space="preserve">
+    <value>Próximo &gt;</value>
+  </data>
 </root>

@@ -295,6 +295,12 @@
     <Compile Include="Controls\ScriptEditorControlMono.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Compound Creator\FormImportCompoundDataKDB.Designer.vb">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Compound Creator\FormImportCompoundDataKDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Data Regression\FormSearchKDBVLE.Designer.vb">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </Compile>
@@ -765,6 +771,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.en.resx">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.resx">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.en.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>

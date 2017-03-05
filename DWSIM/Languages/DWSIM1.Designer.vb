@@ -7885,6 +7885,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Importar.
+        '''</summary>
+        Friend Shared ReadOnly Property Import() As String
+            Get
+                Return ResourceManager.GetString("Import", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Inativo.
         '''</summary>
         Friend Shared ReadOnly Property Inativo() As String
@@ -9429,6 +9438,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property NewVersionAvailable() As String
             Get
                 Return ResourceManager.GetString("NewVersionAvailable", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Próximo &gt;.
+        '''</summary>
+        Friend Shared ReadOnly Property NextButton() As String
+            Get
+                Return ResourceManager.GetString("NextButton", resourceCulture)
             End Get
         End Property
         

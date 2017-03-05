@@ -340,7 +340,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 276</value>
+    <value>85, 407</value>
   </data>
   <data name="TextBoxComments.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -349,7 +349,7 @@
     <value>Vertical</value>
   </data>
   <data name="TextBoxComments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1166, 111</value>
+    <value>1153, 111</value>
   </data>
   <data name="TextBoxComments.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -376,7 +376,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label94.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 276</value>
+    <value>10, 407</value>
   </data>
   <data name="Label94.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -649,7 +649,7 @@
     <value>252, 68</value>
   </data>
   <data name="pbRender.Size" type="System.Drawing.Size, System.Drawing">
-    <value>999, 199</value>
+    <value>986, 330</value>
   </data>
   <data name="pbRender.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>CenterImage</value>
@@ -790,7 +790,7 @@
     <value>15</value>
   </data>
   <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1260, 396</value>
+    <value>1247, 527</value>
   </data>
   <data name="FaTabStripItem1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -802,7 +802,7 @@
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -1675,7 +1675,7 @@
     <value>FaTabStripItemBO</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2800,7 +2800,7 @@
     <value>FaTabStripItemEL</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2992,7 +2992,7 @@
     <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3181,7 +3181,7 @@
     <value>FaTabStripItem5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3304,7 +3304,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -3619,7 +3619,7 @@
     <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -5644,7 +5644,7 @@
     <value>55</value>
   </data>
   <data name="FaTabStripItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1232, 396</value>
+    <value>1247, 527</value>
   </data>
   <data name="FaTabStripItem4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5656,7 +5656,7 @@
     <value>FaTabStripItem4</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -6412,7 +6412,7 @@
     <value>21</value>
   </data>
   <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1232, 475</value>
+    <value>1247, 527</value>
   </data>
   <data name="FaTabStripItem7.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -6424,7 +6424,7 @@
     <value>FaTabStripItem7</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -7945,7 +7945,7 @@
     <value>1</value>
   </data>
   <data name="FaTabStripItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1232, 396</value>
+    <value>1247, 527</value>
   </data>
   <data name="FaTabStripItem8.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -7957,7 +7957,7 @@
     <value>FaTabStripItem8</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -8601,6 +8601,9 @@
   <data name="cbEqLIQDENS.Items39" xml:space="preserve">
     <value>231: B - C / (T - D) ^ 2</value>
   </data>
+  <data name="cbEqLIQDENS.Items40" xml:space="preserve">
+    <value>1000: User-Defined</value>
+  </data>
   <data name="cbEqLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
     <value>317, 41</value>
   </data>
@@ -8710,7 +8713,7 @@
     <value>21</value>
   </data>
   <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1232, 396</value>
+    <value>1247, 527</value>
   </data>
   <data name="FaTabStripItem9.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -8722,7 +8725,7 @@
     <value>FaTabStripItem9</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -9366,6 +9369,9 @@
   <data name="cbEqLIQVISC.Items39" xml:space="preserve">
     <value>231: B - C / (T - D) ^ 2</value>
   </data>
+  <data name="cbEqLIQVISC.Items40" xml:space="preserve">
+    <value>1000: User-Defined</value>
+  </data>
   <data name="cbEqLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
     <value>317, 41</value>
   </data>
@@ -9487,7 +9493,7 @@
     <value>FaTabStripItem10</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -11221,7 +11227,7 @@
     <value>FaTabStripItem11</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -11242,7 +11248,7 @@
     <value>FaTabStrip2</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6272.32005, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6268.20026, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Parent" xml:space="preserve">
     <value>GroupBox2</value>

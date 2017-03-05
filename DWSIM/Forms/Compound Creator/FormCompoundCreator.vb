@@ -3346,6 +3346,26 @@ Public Class FormCompoundCreator
 
     Private Sub BancoDeDadosKDBCHERICToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosKDBCHERICToolStripMenuItem.Click
 
+        Dim f As New FormImportCompoundDataKDB
+        StoreData()
+        f.BaseCompound = mycase.cp
+        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+
+            mycase.CalcMW = False
+            mycase.CalcNBP = False
+            mycase.CalcAF = False
+            mycase.CalcCSSP = False
+            mycase.CalcTC = False
+            mycase.CalcPC = False
+            mycase.CalcZC = False
+            mycase.CalcZRA = False
+            mycase.CalcHF = False
+            mycase.CalcGF = False
+
+            WriteData()
+
+        End If
+
     End Sub
 
 End Class

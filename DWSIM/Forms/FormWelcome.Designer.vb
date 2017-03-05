@@ -306,7 +306,7 @@ Partial Class FormWelcome
         'Button4
         '
         resources.ApplyResources(Me.Button4, "Button4")
-        Me.Button4.BackgroundImage = Global.DWSIM.My.Resources.Resources.Services
+        Me.Button4.BackgroundImage = Global.DWSIM.My.Resources.Resources.document_open
         Me.Button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
         Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
