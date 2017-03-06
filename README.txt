@@ -21,12 +21,12 @@ DWSIM.Controls.PropertyGridEx				Extended Property Grid Control
 DWSIM.Controls.TabStrip					TabStrip control
 DWSIM.Controls.ZedGraph					Custom ZedGraph Library
 DWSIM.DrawingTools					Flowsheet Drawing Tools
-DWSIM.DrawingTools.SkiaSharp					Flowsheet Drawing Tools (SkiaSharp)
+DWSIM.DrawingTools.SkiaSharp				Flowsheet Drawing Tools (SkiaSharp)
 DWSIM.FileDownloader					File downloader for automatic updates
 DWSIM.FlowsheetSolver					Flowsheet Solver library
 DWSIM.GlobalSettings					Shared global settings
 DWSIM.Interfaces					Interface definitions
-DWSIM.Libraries.OctaveSharp					Octave interface 
+DWSIM.Libraries.OctaveSharp				Octave interface 
 DWSIM.MathOps						Math library
 DWSIM.MathOps.RandomOps					Random number generator library
 DWSIM.MathOps.SwarmOps					Optimization library
