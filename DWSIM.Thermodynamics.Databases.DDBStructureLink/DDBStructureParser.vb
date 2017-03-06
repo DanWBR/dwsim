@@ -20,7 +20,6 @@ Public Class DDBStructureParser
         content.Add(New StringContent("DDBSearch"), """selection""")
         content.Add(New StringContent(CAS), """casn""")
         content.Add(New StringContent("Search"), """search_cas""")
-        'content.Add(New StringContent("Assign Groups"), """Assign""")
 
         Dim result = client.PostAsync("http://ddbonline.ddbst.com/OnlinePropertyEstimation/OnlineUNIFACGroupAssignmentSA.exe", content)
         result.Wait()
@@ -103,7 +102,7 @@ Public Class DDBStructureParser
 
             Dim list As New List(Of String())
 
-            'get unifac structure info
+            'get modfac structure info
             Dim rows = status.NextSibling.Descendants("tr").Where(Function(x) Not x.InnerHtml.Contains("Count"))
             For Each row In rows
                 Dim count = row.Descendants("td")(0).InnerText

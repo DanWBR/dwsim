@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DWSIM.Thermodynamics.Databases.DDBStructureLink")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("DWSIM Simulator - DDB UNIFAC/MODFAC Structure Database Linker/Parser")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Thermodynamics.Databases.DDBStructureLink")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017")> 
+<Assembly: AssemblyCopyright("Copyright ©  2017 DWSIM Project")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

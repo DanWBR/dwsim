@@ -5,12 +5,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FFF180F2-BA11-4028-BF82-A737B56999DE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <StartupObject>DWSIM.Thermodynamics.Databases.DDBStructureLink.Module1</StartupObject>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
     <RootNamespace>DWSIM.Thermodynamics.Databases.DDBStructureLink</RootNamespace>
     <AssemblyName>DWSIM.Thermodynamics.Databases.DDBStructureLink</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Console</MyType>
+    <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -73,7 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DDBStructureParser.vb" />
-    <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

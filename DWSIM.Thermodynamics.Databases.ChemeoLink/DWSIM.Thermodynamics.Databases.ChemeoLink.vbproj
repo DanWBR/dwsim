@@ -5,12 +5,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EDB0B095-FF87-4B07-A06F-E314C45D73D4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <StartupObject>DWSIM.Thermodynamics.Databases.ChemeoLink.Module1</StartupObject>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
     <RootNamespace>DWSIM.Thermodynamics.Databases.ChemeoLink</RootNamespace>
     <AssemblyName>DWSIM.Thermodynamics.Databases.ChemeoLink</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>Console</MyType>
+    <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -71,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChemeoParser.vb" />
-    <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
