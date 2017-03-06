@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("DWSIM.Thermodynamics.Databases.ChemeoLink")> 
-<Assembly: AssemblyDescription("DWSIM Simulator - Cheméo Database Linker/Parser")> 
+<Assembly: AssemblyTitle("DWSIM.Thermodynamics.Databases.DDBStructureLink")> 
+<Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("DWSIM.Thermodynamics.Databases.ChemeoLink")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017 DWSIM Project")> 
+<Assembly: AssemblyProduct("DWSIM.Thermodynamics.Databases.DDBStructureLink")> 
+<Assembly: AssemblyCopyright("Copyright ©  2017")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("1dc8a51d-0f36-4a33-b266-6605b7a24a8d")> 
+<Assembly: Guid("d60626cb-54ea-41dc-92d8-828a82be29dc")> 
 
 ' Version information for an assembly consists of the following four values:
 '

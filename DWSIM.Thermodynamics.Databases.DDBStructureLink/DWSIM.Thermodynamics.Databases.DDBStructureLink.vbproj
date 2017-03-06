@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EDB0B095-FF87-4B07-A06F-E314C45D73D4}</ProjectGuid>
+    <ProjectGuid>{FFF180F2-BA11-4028-BF82-A737B56999DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>DWSIM.Thermodynamics.Databases.ChemeoLink.Module1</StartupObject>
-    <RootNamespace>DWSIM.Thermodynamics.Databases.ChemeoLink</RootNamespace>
-    <AssemblyName>DWSIM.Thermodynamics.Databases.ChemeoLink</AssemblyName>
+    <StartupObject>DWSIM.Thermodynamics.Databases.DDBStructureLink.Module1</StartupObject>
+    <RootNamespace>DWSIM.Thermodynamics.Databases.DDBStructureLink</RootNamespace>
+    <AssemblyName>DWSIM.Thermodynamics.Databases.DDBStructureLink</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -20,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>DWSIM.Thermodynamics.Databases.ChemeoLink.xml</DocumentationFile>
+    <DocumentationFile>DWSIM.Thermodynamics.Databases.DDBStructureLink.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -30,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>DWSIM.Thermodynamics.Databases.ChemeoLink.xml</DocumentationFile>
+    <DocumentationFile>DWSIM.Thermodynamics.Databases.DDBStructureLink.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -68,9 +69,10 @@
     <Import Include="System.Diagnostics" />
     <Import Include="System.Linq" />
     <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChemeoParser.vb" />
+    <Compile Include="DDBStructureParser.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -106,6 +108,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -116,7 +119,6 @@
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

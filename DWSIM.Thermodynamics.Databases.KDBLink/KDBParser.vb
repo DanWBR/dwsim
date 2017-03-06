@@ -55,9 +55,9 @@ Public Class KDBParser
             Else
                 Return results
             End If
-            Else
-                Throw New Exception("No matching compounds found.")
-            End If
+        Else
+            Throw New Exception("No matching compounds found.")
+        End If
 
     End Function
 
