@@ -33,9 +33,9 @@ DWSIM.MathOps.SwarmOps					Optimization library
 DWSIM.Plugins.NaturalGas				Natural Gas Properties Plugin
 DWSIM.SharedClasses					Shared/Base class definitions
 DWSIM.Thermodynamics					Thermo library
-DWSIM.Thermodynamics.Databases.ChemeoLink		DWSIM Simulator - Cheméo Database Linker/Parser
-DWSIM.Thermodynamics.Databases.DDBStructureLink		DWSIM Simulator - DDB UNIFAC/MODFAC Structure Database Linker/Parser
-DWSIM.Thermodynamics.Databases.KDBLink			DWSIM Simulator - KDB Database Linker/Parser
+DWSIM.Thermodynamics.Databases.ChemeoLink		Cheméo Database Linker/Parser
+DWSIM.Thermodynamics.Databases.DDBStructureLink		DDB UNIFAC/MODFAC Structure Database Linker/Parser
+DWSIM.Thermodynamics.Databases.KDBLink			KDB Database Linker/Parser
 DWSIM.Thermodynamics.CoolPropInterface			Interface for CoolProp native library
 DWSIM.Thermodynamics.NativeLibraries			x86/x86-64 Windows/Linux native libraries package
 DWSIM.UnitOperations					Unit Operations library
