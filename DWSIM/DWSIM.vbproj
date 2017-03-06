@@ -2322,8 +2322,10 @@
     <None Include="Resources\Configure alt 3.png" />
     <None Include="Resources\chericlogo.jpg" />
     <None Include="Resources\cheric_big.jpg" />
+    <None Include="Resources\chemeo.png" />
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
+    <None Include="Resources\ddbsearch.jpg" />
     <Content Include="Resources\de.png" />
     <None Include="Resources\emblem-symbolic-link.png" />
     <None Include="Resources\de1.png" />
