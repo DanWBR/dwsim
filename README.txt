@@ -6,7 +6,7 @@ Supported Operating Systems
 Windows with .NET Framework 4.0 or newer
 Linux with Mono 4.0 or newer
 
-Project Name				Description
+Project Name						Description
 
 DWSIM							Main DWSIM GUI with Tools and Utilities
 DWSIM.Apps.AzureServer					Azure Solver Server 
@@ -14,7 +14,7 @@ DWSIM.Apps.RunAsx86					Runs DWSIM in 32-bit mode
 DWSIM.Apps.TCPServer					TCP/IP Solver Server
 DWSIM.Apps.Updater					Updater Application
 DWSIM.Automation					Automation Library
-DWSIM.Automation.Tests			Automation Tests Application
+DWSIM.Automation.Tests					Automation Tests Application
 DWSIM.Controls.DockPanel				DockPanel control
 DWSIM.Controls.DockPanel.ThemeVS2012			Theme for DockPanel control
 DWSIM.Controls.PropertyGridEx				Extended Property Grid Control
@@ -33,8 +33,8 @@ DWSIM.MathOps.SwarmOps					Optimization library
 DWSIM.Plugins.NaturalGas				Natural Gas Properties Plugin
 DWSIM.SharedClasses					Shared/Base class definitions
 DWSIM.Thermodynamics					Thermo library
-DWSIM.Thermodynamics.Databases.ChemeoLink			DWSIM Simulator - Cheméo Database Linker/Parser
-DWSIM.Thermodynamics.Databases.DDBStructureLink			DWSIM Simulator - DDB UNIFAC/MODFAC Structure Database Linker/Parser
+DWSIM.Thermodynamics.Databases.ChemeoLink		DWSIM Simulator - Cheméo Database Linker/Parser
+DWSIM.Thermodynamics.Databases.DDBStructureLink		DWSIM Simulator - DDB UNIFAC/MODFAC Structure Database Linker/Parser
 DWSIM.Thermodynamics.Databases.KDBLink			DWSIM Simulator - KDB Database Linker/Parser
 DWSIM.Thermodynamics.CoolPropInterface			Interface for CoolProp native library
 DWSIM.Thermodynamics.NativeLibraries			x86/x86-64 Windows/Linux native libraries package
