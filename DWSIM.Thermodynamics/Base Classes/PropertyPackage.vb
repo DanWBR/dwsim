@@ -36,6 +36,8 @@ Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports DWSIM.Thermodynamics.Streams
 
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+
 Namespace PropertyPackages
 
 #Region "    Global Enumerations"
@@ -164,6 +166,8 @@ Namespace PropertyPackages
         Public Property ExceptionLog As String = ""
 
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
+
+        <System.NonSerialized()> Private parser As New YAMP.Parser
 
 #Region "   Constructor"
 
@@ -4979,7 +4983,11 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_D
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
                     '<rppc name="Ideal gas heat capacity (RPP)"  units="J/kmol/K" >
-                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
+                    If Integer.TryParse(eqno, New Integer) Then
+                        result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
+                    Else
+                        result = Me.ParseEquation(eqno, A, B, C, D, E, T)
+                    End If
                     Return result
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Then
                     Dim A, B, C, D, E, result As Double
@@ -5002,6 +5010,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
                     Return result
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
+                    Dim A, B, C, D, E As Double
+                    Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
+                    A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
+                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_B
+                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_C
+                    D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_D
+                    E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
+                    Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
+                    Return Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
                 Else
                     Return 0
                 End If
@@ -5102,7 +5120,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Return result
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
-                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Then
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporPressureEquation
                     Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
@@ -5112,11 +5131,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Vapor_Pressure_Constant_D
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Vapor_Pressure_Constant_E
                     '<vp_c name="Vapour pressure"  units="Pa" >
-                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa
                     If eqno = "0" Then
                         With Me.CurrentMaterialStream.Phases(0).Compounds(sub1)
                             result = Auxiliary.PROPS.Pvp_leekesler(T, .ConstantProperties.Critical_Temperature, .ConstantProperties.Critical_Pressure, .ConstantProperties.Acentric_Factor)
                         End With
+                    Else
+                        If Integer.TryParse(eqno, New Integer) Then
+                            result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa
+                        Else
+                            result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa
+                        End If
                     End If
                     Return result
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
@@ -5422,9 +5446,14 @@ Final3:
                 End If
             ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CheResources" Or _
             Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
-           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Then
+           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
+           Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                 Dim tr1 As Double
-                tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
+                    tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_B / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                Else
+                    tr1 = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
+                End If
                 If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = 0.0# Then
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A = New Utilities.Hypos.Methods.HYP().DHvb_Vetere(Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Pressure, Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Normal_Boiling_Point)
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.HVap_A /= Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
@@ -5480,7 +5509,8 @@ Final3:
                         Return result
                     ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
-                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Then
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                         Dim A, B, C, D, E, result As Double
                         Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
                         Dim mw As Double = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
@@ -5490,7 +5520,6 @@ Final3:
                         D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_D
                         E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Liquid_Viscosity_Const_E
                         '<lvsc name="Liquid viscosity"  units="Pa.s" >
-                        result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
                         If eqno = "0" Or eqno = "" Then
                             Dim Tc, Pc, w As Double
                             Tc = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Critical_Temperature
@@ -5498,6 +5527,12 @@ Final3:
                             w = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Acentric_Factor
                             mw = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight
                             result = Auxiliary.PROPS.viscl_letsti(T, Tc, Pc, w, mw)
+                        Else
+                            If Integer.TryParse(eqno, New Integer) Then
+                                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa.s
+                            Else
+                                result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa.s
+                            End If
                         End If
                         Return result
                     ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "Biodiesel" Then
@@ -5579,8 +5614,6 @@ Final3:
 
         Public Overridable Function AUX_SURFTi(ByVal constprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
-
-
             Dim val As Double = 0
             Dim nbp As Double
             Dim ftotal As Double = 1
@@ -5612,14 +5645,18 @@ Final3:
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 If subst.ConstantProperties.LiquidThermalConductivityEquation <> "" Then
-                    vcl(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                    If Integer.TryParse(subst.ConstantProperties.VaporThermalConductivityEquation, New Integer) Then
+                        vcl(i) = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                    Else
+                        vcl(i) = Me.ParseEquation(subst.ConstantProperties.LiquidThermalConductivityEquation, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_A, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_B, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_C, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_D, subst.ConstantProperties.Liquid_Thermal_Conductivity_Const_E, T)
+                    End If
                 ElseIf subst.ConstantProperties.IsIon Or subst.ConstantProperties.IsSalt Then
                     vcl(i) = 0.0#
                 Else
                     vcl(i) = Auxiliary.PROPS.condl_latini(T, subst.ConstantProperties.Normal_Boiling_Point, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Molar_Weight, "")
                 End If
 
-                i = i + 1
+                    i = i + 1
             Next
             val = Auxiliary.PROPS.condlm_li(Me.RET_VVC, vcl, Me.RET_VMOL(Me.RET_PHASECODE(phaseid)))
             Return val
@@ -5633,7 +5670,11 @@ Final3:
             Dim i As Integer = 0
             For Each subst In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If subst.ConstantProperties.VaporThermalConductivityEquation <> "" Then
-                    val += subst.MoleFraction.GetValueOrDefault * Me.CalcCSTDepProp(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                    If Integer.TryParse(subst.ConstantProperties.VaporThermalConductivityEquation, New Integer) Then
+                        val += subst.MoleFraction.GetValueOrDefault * Me.CalcCSTDepProp(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                    Else
+                        val += subst.MoleFraction.GetValueOrDefault * ParseEquation(subst.ConstantProperties.VaporThermalConductivityEquation, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_A, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_B, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_C, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_D, subst.ConstantProperties.Vapor_Thermal_Conductivity_Const_E, T)
+                    End If
                 Else
                     val += subst.MoleFraction.GetValueOrDefault * Auxiliary.PROPS.condtg_elyhanley(T, Me.AUX_TCM(Phase.Vapor), Me.AUX_VCM(Phase.Vapor), Me.AUX_ZCM(Phase.Vapor), Me.AUX_WM(Phase.Vapor), Me.AUX_MMM(Phase.Vapor), Me.DW_CalcCv_ISOL(Phase.Vapor, T, P) * Me.AUX_MMM(Phase.Vapor))
                 End If
@@ -5695,7 +5736,11 @@ Final3:
             Dim val As Double
 
             If cprop.VaporViscosityEquation <> "" And cprop.VaporViscosityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                val = Me.CalcCSTDepProp(cprop.VaporViscosityEquation, cprop.Vapor_Viscosity_Const_A, cprop.Vapor_Viscosity_Const_B, cprop.Vapor_Viscosity_Const_C, cprop.Vapor_Viscosity_Const_D, cprop.Vapor_Viscosity_Const_E, T, cprop.Critical_Temperature)
+                If Integer.TryParse(cprop.VaporViscosityEquation, New Integer) Then
+                    val = Me.CalcCSTDepProp(cprop.VaporViscosityEquation, cprop.Vapor_Viscosity_Const_A, cprop.Vapor_Viscosity_Const_B, cprop.Vapor_Viscosity_Const_C, cprop.Vapor_Viscosity_Const_D, cprop.Vapor_Viscosity_Const_E, T, cprop.Critical_Temperature)
+                Else
+                    val = Me.ParseEquation(cprop.VaporViscosityEquation, cprop.Vapor_Viscosity_Const_A, cprop.Vapor_Viscosity_Const_B, cprop.Vapor_Viscosity_Const_C, cprop.Vapor_Viscosity_Const_D, cprop.Vapor_Viscosity_Const_E, T)
+                End If
             ElseIf cprop.IsIon Or cprop.IsSalt Then
                 val = 0.0#
             Else
@@ -6080,7 +6125,11 @@ Final3:
             Dim val As Double
 
             If subst.ConstantProperties.LiquidDensityEquation <> "" And subst.ConstantProperties.LiquidDensityEquation <> "0" And Not subst.ConstantProperties.IsIon And Not subst.ConstantProperties.IsSalt Then
-                val = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                If Integer.TryParse(subst.ConstantProperties.LiquidDensityEquation, New Integer) Then
+                    val = Me.CalcCSTDepProp(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T, subst.ConstantProperties.Critical_Temperature)
+                Else
+                    val = Me.ParseEquation(subst.ConstantProperties.LiquidDensityEquation, subst.ConstantProperties.Liquid_Density_Const_A, subst.ConstantProperties.Liquid_Density_Const_B, subst.ConstantProperties.Liquid_Density_Const_C, subst.ConstantProperties.Liquid_Density_Const_D, subst.ConstantProperties.Liquid_Density_Const_E, T)
+                End If
                 If subst.ConstantProperties.OriginalDB <> "CoolProp" And subst.ConstantProperties.OriginalDB <> "User" Then val = subst.ConstantProperties.Molar_Weight * val
             Else
                 val = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure, subst.ConstantProperties.Acentric_Factor, subst.ConstantProperties.Molar_Weight, subst.ConstantProperties.Z_Rackett, 101325, Me.AUX_PVAPi(subst.Name, T))
@@ -6095,7 +6144,11 @@ Final3:
             Dim val As Double
 
             If cprop.LiquidDensityEquation <> "" And cprop.LiquidDensityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                val = Me.CalcCSTDepProp(cprop.LiquidDensityEquation, cprop.Liquid_Density_Const_A, cprop.Liquid_Density_Const_B, cprop.Liquid_Density_Const_C, cprop.Liquid_Density_Const_D, cprop.Liquid_Density_Const_E, T, cprop.Critical_Temperature)
+                If Integer.TryParse(cprop.LiquidDensityEquation, New Integer) Then
+                    val = Me.CalcCSTDepProp(cprop.LiquidDensityEquation, cprop.Liquid_Density_Const_A, cprop.Liquid_Density_Const_B, cprop.Liquid_Density_Const_C, cprop.Liquid_Density_Const_D, cprop.Liquid_Density_Const_E, T, cprop.Critical_Temperature)
+                Else
+                    val = Me.ParseEquation(cprop.LiquidDensityEquation, cprop.Liquid_Density_Const_A, cprop.Liquid_Density_Const_B, cprop.Liquid_Density_Const_C, cprop.Liquid_Density_Const_D, cprop.Liquid_Density_Const_E, T)
+                End If
                 If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "User" Then val = cprop.Molar_Weight * val
             Else
                 val = Auxiliary.PROPS.liq_dens_rackett(T, cprop.Critical_Temperature, cprop.Critical_Pressure, cprop.Acentric_Factor, cprop.Molar_Weight, cprop.Z_Rackett, 101325, Me.AUX_PVAPi(cprop.Name, T))
@@ -6128,7 +6181,11 @@ Final3:
                 If cprop.OriginalDB <> "CoolProp" Then val = val / 1000 / cprop.Molar_Weight 'kJ/kg.K
             Else
                 If cprop.LiquidHeatCapacityEquation <> "" And cprop.LiquidHeatCapacityEquation <> "0" And Not cprop.IsIon And Not cprop.IsSalt Then
-                    val = Me.CalcCSTDepProp(cprop.LiquidHeatCapacityEquation, cprop.Liquid_Heat_Capacity_Const_A, cprop.Liquid_Heat_Capacity_Const_B, cprop.Liquid_Heat_Capacity_Const_C, cprop.Liquid_Heat_Capacity_Const_D, cprop.Liquid_Heat_Capacity_Const_E, T, cprop.Critical_Temperature)
+                    If Integer.TryParse(cprop.LiquidHeatCapacityEquation, New Integer) Then
+                        val = Me.CalcCSTDepProp(cprop.LiquidHeatCapacityEquation, cprop.Liquid_Heat_Capacity_Const_A, cprop.Liquid_Heat_Capacity_Const_B, cprop.Liquid_Heat_Capacity_Const_C, cprop.Liquid_Heat_Capacity_Const_D, cprop.Liquid_Heat_Capacity_Const_E, T, cprop.Critical_Temperature)
+                    Else
+                        val = Me.ParseEquation(cprop.LiquidHeatCapacityEquation, cprop.Liquid_Heat_Capacity_Const_A, cprop.Liquid_Heat_Capacity_Const_B, cprop.Liquid_Heat_Capacity_Const_C, cprop.Liquid_Heat_Capacity_Const_D, cprop.Liquid_Heat_Capacity_Const_E, T) / cprop.Molar_Weight
+                    End If
                     If cprop.OriginalDB <> "CoolProp" Then val = val / 1000 / cprop.Molar_Weight 'kJ/kg.K
                 Else
                     'estimate using Rownlinson/Bondi correlation
@@ -7347,6 +7404,59 @@ Final3:
 
         End Function
 
+        Function ParseEquation(ByVal expression As String, ByVal A As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal E As Double, ByVal T As Double) As Double
+
+            Dim lterm As String = ""
+            Dim rterm As String = ""
+
+            If expression.Contains("=") Then
+                lterm = expression.Split("=")(0).Replace(" ", "")
+                rterm = expression.Split("=")(1).TrimEnd(".")
+            Else
+                rterm = expression.TrimEnd(".")
+            End If
+
+            Dim numexp As String = ""
+            Dim yunit As String = ""
+            Dim xunit As String = ""
+
+            If expression.Contains("where") Then
+                numexp = rterm.Split("where")(0).Replace(" ", "").Replace("ln", "log")
+                Dim unit1, unit2 As String
+                unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
+                unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                If unit1.Contains("T in") Then
+                    xunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    yunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                Else
+                    xunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    yunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                End If
+            Else
+                numexp = rterm.Replace(" ", "").Replace("ln", "log")
+            End If
+
+            If lterm.Contains("ln") Then
+                numexp = "exp(" + numexp + ")"
+            End If
+
+            Dim vars As New Dictionary(Of String, YAMP.Value)
+
+            vars.Add("T", New YAMP.ScalarValue((cv.ConvertToSI(xunit, T))))
+            vars.Add("A", New YAMP.ScalarValue(A))
+            vars.Add("B", New YAMP.ScalarValue(B))
+            vars.Add("C", New YAMP.ScalarValue(C))
+            vars.Add("D", New YAMP.ScalarValue(D))
+            vars.Add("E", New YAMP.ScalarValue(E))
+            vars.Add("F", New YAMP.ScalarValue(0.0#))
+            vars.Add("G", New YAMP.ScalarValue(0.0#))
+            vars.Add("H", New YAMP.ScalarValue(0.0#))
+            Dim result = DirectCast(parser.Evaluate(numexp, vars), YAMP.ScalarValue).Value
+
+            Return cv.ConvertToSI(yunit, result)
+
+        End Function
+
 #End Region
 
 #Region "   CAPE-OPEN 1.0 Methods and Properties"
@@ -7524,7 +7634,7 @@ Final3:
         ''' casno argument wherever available.</remarks>
         Public Overridable Sub GetComponentList(ByRef compIds As Object, ByRef formulae As Object, ByRef names As Object, ByRef boilTemps As Object, ByRef molWt As Object, ByRef casNo As Object) Implements CapeOpen.ICapeThermoPropertyPackage.GetComponentList
 
-              Dim ids, formulas, nms, casnos As New List(Of String), bts, molws As New List(Of Double)
+            Dim ids, formulas, nms, casnos As New List(Of String), bts, molws As New List(Of Double)
 
             If Settings.CAPEOPENMode Then
                 For Each c As Interfaces.ICompoundConstantProperties In _selectedcomps.Values
