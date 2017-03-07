@@ -52,7 +52,7 @@ Public Class FormImportCompoundDataChemeo
                 fsearch.Show()
 
                 Dim t As New Task(Of List(Of String()))(Function()
-                                                            Return ChemeoParser.GetCompoundCASNos(searchtext, False)
+                                                            Return ChemeoParser.GetCompoundIDs(searchtext, False)
                                                         End Function, tcs.Token)
 
                 t.ContinueWith(Sub()
@@ -62,6 +62,7 @@ Public Class FormImportCompoundDataChemeo
                                                 Focus()
                                                 If t.Exception Is Nothing Then
                                                     compounds = t.Result
+                                                    lbFoundItems.Items.Clear()
                                                     For Each item In t.Result
                                                         lbFoundItems.Items.Add(item(0).PadRight(10) + item(1))
                                                     Next

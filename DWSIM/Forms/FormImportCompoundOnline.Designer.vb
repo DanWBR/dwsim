@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormImportCompoundKDB
+Partial Class FormImportCompoundOnline
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -25,6 +25,11 @@ Partial Class FormImportCompoundKDB
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundOnline))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel2 = New System.Windows.Forms.LinkLabel()
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbSearchString = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -39,9 +44,9 @@ Partial Class FormImportCompoundKDB
         Me.dgResults = New System.Windows.Forms.DataGridView()
         Me.Column2 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -52,17 +57,50 @@ Partial Class FormImportCompoundKDB
         'PictureBox1
         '
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.cheric_big
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.Lab_icon
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.LinkLabel3)
+        Me.Panel1.Controls.Add(Me.LinkLabel2)
+        Me.Panel1.Controls.Add(Me.LinkLabel1)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.tbSearchString)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Name = "Panel1"
+        '
+        'LinkLabel3
+        '
+        resources.ApplyResources(Me.LinkLabel3, "LinkLabel3")
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.TabStop = True
+        '
+        'LinkLabel2
+        '
+        resources.ApplyResources(Me.LinkLabel2, "LinkLabel2")
+        Me.LinkLabel2.Name = "LinkLabel2"
+        Me.LinkLabel2.TabStop = True
+        '
+        'LinkLabel1
+        '
+        resources.ApplyResources(Me.LinkLabel1, "LinkLabel1")
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.TabStop = True
+        '
+        'Label9
+        '
+        resources.ApplyResources(Me.Label9, "Label9")
+        Me.Label9.Name = "Label9"
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
         '
         'Label2
         '
@@ -137,7 +175,7 @@ Partial Class FormImportCompoundKDB
         Me.dgResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgResults.ColumnHeadersVisible = False
-        Me.dgResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column1, Me.Column3})
+        Me.dgResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column1})
         Me.dgResults.Name = "dgResults"
         Me.dgResults.RowHeadersVisible = False
         '
@@ -155,12 +193,6 @@ Partial Class FormImportCompoundKDB
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
-        'Column3
-        '
-        Me.Column3.FillWeight = 10.0!
-        resources.ApplyResources(Me.Column3, "Column3")
-        Me.Column3.Name = "Column3"
-        '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
@@ -171,11 +203,17 @@ Partial Class FormImportCompoundKDB
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
-        'FormImportCompoundDataKDB
+        'Label7
+        '
+        resources.ApplyResources(Me.Label7, "Label7")
+        Me.Label7.Name = "Label7"
+        '
+        'FormImportCompoundOnline
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.btnPrev)
         Me.Controls.Add(Me.btnCancel)
@@ -184,7 +222,7 @@ Partial Class FormImportCompoundKDB
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FormImportCompoundDataKDB"
+        Me.Name = "FormImportCompoundOnline"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -196,6 +234,7 @@ Partial Class FormImportCompoundKDB
         Me.Panel3.PerformLayout()
         CType(Me.dgResults, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
@@ -214,7 +253,12 @@ Partial Class FormImportCompoundKDB
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents dgResults As System.Windows.Forms.DataGridView
     Friend WithEvents lbFoundItems As System.Windows.Forms.ListBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
+    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class

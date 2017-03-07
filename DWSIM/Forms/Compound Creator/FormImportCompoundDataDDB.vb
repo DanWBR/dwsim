@@ -107,8 +107,8 @@ Public Class FormImportCompoundDataDDB
     Private Sub CopySelectedData()
 
         With BaseCompound
-            If .UNIFACGroups Is Nothing Then .UNIFACGroups = New SortedList
             If dgResults.Rows(0).Cells(2).Value = True Then
+                If .UNIFACGroups Is Nothing Then .UNIFACGroups = New SortedList
                 .UNIFACGroups.Clear()
                 For Each item In data("Original")
                     .UNIFACGroups.Add(item(1), item(2))

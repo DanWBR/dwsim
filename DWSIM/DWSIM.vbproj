@@ -361,6 +361,12 @@
     <Compile Include="Forms\FormEditGraphicObject.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormImportCompoundOnline.Designer.vb">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormImportCompoundOnline.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </Compile>
@@ -371,6 +377,12 @@
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormSearchingDDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingOnline.Designer.vb">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingOnline.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSearchingKDB.Designer.vb">
@@ -419,12 +431,6 @@
       <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormConfigurePropertyTable.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormState.Designer.vb">
-      <DependentUpon>FormState.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormState.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormTextBox.Designer.vb">
@@ -507,12 +513,6 @@
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\Flowsheet Analysis\FormSensAnalysis.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormTemplateSelect.Designer.vb">
-      <DependentUpon>FormTemplateSelect.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FormTemplateSelect.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormWelcome.Designer.vb">
@@ -908,6 +908,12 @@
     <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportCompoundOnline.resx">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
     </EmbeddedResource>
@@ -922,6 +928,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingDDB.resx">
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingOnline.en.resx">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingOnline.resx">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingKDB.en.resx">
       <DependentUpon>FormSearchingKDB.vb</DependentUpon>
@@ -973,16 +985,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigurePropertyTable.resx">
       <DependentUpon>FormConfigurePropertyTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormState.de.resx">
-      <DependentUpon>FormState.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormState.es.resx">
-      <DependentUpon>FormState.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormTemplateSelect.es.resx">
-      <DependentUpon>FormTemplateSelect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormTextBox.resx">
       <DependentUpon>FormTextBox.vb</DependentUpon>
@@ -2639,24 +2641,12 @@
     <EmbeddedResource Include="Forms\Flowsheet Analysis\FormSensAnalysis.resx">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormState.en.resx">
-      <DependentUpon>FormState.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormState.resx">
-      <DependentUpon>FormState.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSimulSettings.de.resx">
       <DependentUpon>FormSimulSettings.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSimulSettings.es.resx">
       <DependentUpon>FormSimulSettings.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormTemplateSelect.de.resx">
-      <DependentUpon>FormTemplateSelect.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormTemplateSelect.resx">
-      <DependentUpon>FormTemplateSelect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormWelcome.de.resx">
       <DependentUpon>FormWelcome.vb</DependentUpon>

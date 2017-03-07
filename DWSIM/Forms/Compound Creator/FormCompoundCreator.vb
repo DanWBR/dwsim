@@ -3335,7 +3335,7 @@ Public Class FormCompoundCreator
 
     Private Sub BancoDeDadosKDBCHERICToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosKDBCHERICToolStripMenuItem.Click
 
-        Dim f As New FormImportCompoundDataKDB
+        Dim f As New FormImportCompoundOnline
         StoreData()
         f.BaseCompound = mycase.cp
         f.tbSearchString.Text = TextBoxName.Text

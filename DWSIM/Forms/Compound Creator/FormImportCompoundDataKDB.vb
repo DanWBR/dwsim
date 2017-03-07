@@ -1,7 +1,7 @@
 ﻿Imports System.Threading.Tasks
 Imports DWSIM.Thermodynamics.Databases.KDBLink
 
-Public Class FormImportCompoundDataKDB
+Public Class FormImportCompoundKDB
 
     Private CurrentPanel As String = ""
     Private compounds As New List(Of String())
@@ -62,6 +62,7 @@ Public Class FormImportCompoundDataKDB
                                                 Focus()
                                                 If t.Exception Is Nothing Then
                                                     compounds = t.Result
+                                                    lbFoundItems.Items.Clear()
                                                     For Each item In t.Result
                                                         lbFoundItems.Items.Add(item(0).PadRight(10) + item(1))
                                                     Next

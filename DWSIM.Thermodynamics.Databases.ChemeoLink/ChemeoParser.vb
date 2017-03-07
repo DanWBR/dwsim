@@ -8,7 +8,7 @@ Imports System.Web
 
 Public Class ChemeoParser
 
-    Shared Function GetCompoundCASNos(searchstring As String, exact As Boolean) As List(Of String())
+    Shared Function GetCompoundIDs(searchstring As String, exact As Boolean) As List(Of String())
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
@@ -77,11 +77,11 @@ Public Class ChemeoParser
 
     End Function
 
-    Shared Function GetCompoundData(CAS As String) As BaseClasses.ConstantProperties
+    Shared Function GetCompoundData(ID As String) As BaseClasses.ConstantProperties
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim website As String = "https://www.chemeo.com/cid/" + CAS
+        Dim website As String = "https://www.chemeo.com/cid/" + ID
 
         Dim proxyObj = Net.WebRequest.DefaultWebProxy
         proxyObj.Credentials = CredentialCache.DefaultCredentials
