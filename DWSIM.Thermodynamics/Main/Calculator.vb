@@ -28,6 +28,11 @@ Public Class Calculator
 
         If text <> "" Then
 
+            Dim cultureinfo As String = If(Settings.ExcelMode, "en", GlobalSettings.Settings.CultureInfo)
+            If My.Application.UICulture.Name <> cultureinfo Then
+                My.Application.ChangeUICulture(cultureinfo)
+            End If
+
             Dim retstr As String = _ResourceManager.GetString(text, My.Application.UICulture)
             If retstr Is Nothing Then Return text Else Return retstr
 
