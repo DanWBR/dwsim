@@ -4,51 +4,21 @@ Imports System.Net
 Imports System.Text
 Imports System.Collections.Specialized
 Imports System.IO
+Imports System.Web
 
 Public Class ChemeoParser
-
-    Shared Function GetData()
-
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://ddbonline.ddbst.com/OnlinePropertyEstimation/OnlineUNIFACGroupAssignmentSA.exe")))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
-
-        Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
-
-        Dim client = New HttpClient(handler)
-        Dim content = New MultipartFormDataContent("----WebKitFormBoundary" + New Guid().ToString)
-        content.Add(New StringContent("DDBSearch"), """selection""")
-        content.Add(New StringContent("7732-18-5"), """casn""")
-        content.Add(New StringContent("Search"), """search_cas""")
-        'content.Add(New StringContent("Assign Groups"), """Assign""")
-
-        Dim result = client.PostAsync("http://ddbonline.ddbst.com/OnlinePropertyEstimation/OnlineUNIFACGroupAssignmentSA.exe", content)
-        result.Wait()
-        Dim t1 = result.Result.Content.ReadAsByteArrayAsync()
-        t1.Wait()
-        Dim bytes = t1.Result
-        Dim source As [String] = Encoding.GetEncoding("utf-8").GetString(bytes, 0, bytes.Length - 1)
-        source = WebUtility.HtmlDecode(source)
-
-        Dim htmlpage As New HtmlDocument()
-
-        htmlpage.LoadHtml(source)
-
-
-
-    End Function
 
     Shared Function GetCompoundCASNos(searchstring As String, exact As Boolean) As List(Of String())
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim website As String = "https://www.chemeo.com/search?q=" + searchstring
+        Dim website As String = "https://www.chemeo.com/search?q=" + HttpUtility.UrlEncode(searchstring)
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        'Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br/")))
+        'proxyObj.Credentials = CredentialCache.DefaultCredentials
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+        'handler.Proxy = proxyObj
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
@@ -69,7 +39,7 @@ Public Class ChemeoParser
             Dim link As String = exactmatch.Descendants("a").SingleOrDefault.Attributes("href").Value
             Dim splittedstr = link.Split("/".ToCharArray, StringSplitOptions.RemoveEmptyEntries)
             Dim id As String = splittedstr(1)
-            Dim name As String = splittedstr(2)
+            Dim name As String = HttpUtility.UrlDecode(splittedstr(2))
             results.Add(New String() {id, name})
         End If
 
@@ -77,11 +47,14 @@ Public Class ChemeoParser
 
         For Each r In rows
             If Not r.InnerHtml.Contains("CAS") And Not r.InnerHtml.Contains("Next Results") Then
-                Dim id As String = ""
-                Dim name As String = ""
-                id = r.Descendants("a")(0).InnerText
-                name = r.Descendants("a")(2).InnerText
-                results.Add(New String() {id, name})
+                Try
+                    Dim id As String = ""
+                    Dim name As String = ""
+                    id = r.Descendants("a")(0).InnerText
+                    name = r.Descendants("a")(2).InnerText
+                    results.Add(New String() {id, name})
+                Catch ex As Exception
+                End Try
             End If
         Next
 
@@ -110,11 +83,11 @@ Public Class ChemeoParser
 
         Dim website As String = "https://www.chemeo.com/cid/" + CAS
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        'Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://wsim.inforside.com.br")))
+        'proxyObj.Credentials = CredentialCache.DefaultCredentials
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+        'handler.Proxy = proxyObj
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
@@ -206,11 +179,11 @@ Public Class ChemeoParser
         If Not element Is Nothing Then
             If element.Descendants("td")(1).InnerText.Contains("[") Then
                 Dim text = element.Descendants("td")(1).InnerText.Trim(New Char() {"[", "]"})
-                comp.Critical_Pressure = Double.Parse(text.Split("; ")(0), ci)
+                comp.Critical_Pressure = Double.Parse(text.Split("; ")(0), ci) * 1000
             ElseIf element.Descendants("td")(1).InnerText.Contains("±") Then
-                comp.Critical_Pressure = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci)
+                comp.Critical_Pressure = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci) * 1000
             Else
-                comp.Critical_Pressure = Double.Parse(element.Descendants("td")(1).InnerText, ci)
+                comp.Critical_Pressure = Double.Parse(element.Descendants("td")(1).InnerText, ci) * 1000
             End If
         End If
 

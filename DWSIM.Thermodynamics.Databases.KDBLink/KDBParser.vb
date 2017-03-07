@@ -2,6 +2,7 @@
 Imports System.Net.Http
 Imports System.Net
 Imports System.Text
+Imports System.Web
 
 Public Class KDBParser
 
@@ -9,7 +10,7 @@ Public Class KDBParser
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim website As String = "http://www.cheric.org/research/kdb/hcprop/listcmp.php?componentsearch=" + searchstring
+        Dim website As String = "http://www.cheric.org/research/kdb/hcprop/listcmp.php?componentsearch=" + HttpUtility.UrlEncode(searchstring)
 
         Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
         proxyObj.Credentials = CredentialCache.DefaultCredentials

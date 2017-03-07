@@ -295,6 +295,12 @@
     <Compile Include="Controls\ScriptEditorControlMono.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Forms\Compound Creator\FormImportCompoundDataChemeo.Designer.vb">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Compound Creator\FormImportCompoundDataChemeo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Compound Creator\FormImportCompoundDataKDB.Designer.vb">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </Compile>
@@ -347,6 +353,12 @@
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormEditGraphicObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSearchingChemeo.Designer.vb">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSearchingChemeo.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSearchingKDB.Designer.vb">
@@ -772,6 +784,12 @@
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataChemeo.en.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataChemeo.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.en.resx">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </EmbeddedResource>
@@ -874,6 +892,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.en.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingKDB.en.resx">
       <DependentUpon>FormSearchingKDB.vb</DependentUpon>
@@ -1152,6 +1176,14 @@
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
+      <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.ChemeoLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.DDBStructureLink\DWSIM.Thermodynamics.Databases.DDBStructureLink.vbproj">
+      <Project>{fff180f2-ba11-4028-bf82-a737b56999de}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.DDBStructureLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.KDBLink\DWSIM.Thermodynamics.Databases.KDBLink.vbproj">
       <Project>{fea05ae3-5ee2-4a7b-88b3-1a4f9000ea08}</Project>

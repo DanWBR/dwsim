@@ -59,6 +59,7 @@ Public Class FormImportCompoundDataKDB
                                    fsearch.Close()
                                    UIThread(Sub()
                                                 Me.Enabled = True
+                                                Focus()
                                                 If t.Exception Is Nothing Then
                                                     compounds = t.Result
                                                     For Each item In t.Result
@@ -75,6 +76,7 @@ Public Class FormImportCompoundDataKDB
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Focus()
                                                         tcs.Cancel()
                                                     End Sub
 
@@ -106,6 +108,7 @@ Public Class FormImportCompoundDataKDB
                                    fsearch.Close()
                                    UIThread(Sub()
                                                 Me.Enabled = True
+                                                Focus()
                                                 If t.Exception Is Nothing Then
                                                     compound = t.Result
                                                     AddPropertiesToGrid()
@@ -118,6 +121,7 @@ Public Class FormImportCompoundDataKDB
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Focus()
                                                         tcs.Cancel()
                                                     End Sub
 

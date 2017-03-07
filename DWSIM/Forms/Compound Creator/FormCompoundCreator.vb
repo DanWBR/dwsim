@@ -3354,6 +3354,7 @@ Public Class FormCompoundCreator
         Dim f As New FormImportCompoundDataKDB
         StoreData()
         f.BaseCompound = mycase.cp
+        f.tbSearchString.Text = TextBoxName.Text
         If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
 
             mycase.CalcMW = False
@@ -3373,6 +3374,26 @@ Public Class FormCompoundCreator
 
     End Sub
 
+    Private Sub BancoDeDadosChemeoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosChemeoToolStripMenuItem.Click
+
+        Dim f As New FormImportCompoundDataChemeo
+        StoreData()
+        f.BaseCompound = mycase.cp
+        f.tbSearchString.Text = TextBoxName.Text
+        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+
+            mycase.CalcMW = False
+            mycase.CalcNBP = False
+            mycase.CalcTC = False
+            mycase.CalcPC = False
+            mycase.CalcHF = False
+            mycase.CalcGF = False
+
+            WriteData()
+
+        End If
+
+    End Sub
 End Class
 
 <System.Serializable()> Public Class CompoundGeneratorCase

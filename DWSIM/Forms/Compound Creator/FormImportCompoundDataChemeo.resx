@@ -134,8 +134,8 @@
   <data name="&gt;&gt;tbSearchString.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
-    <value>Panel3</value>
+  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;btnNext.Name" xml:space="preserve">
     <value>btnNext</value>
@@ -146,6 +146,9 @@
   <data name="&gt;&gt;lbFoundItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Label6.Text" xml:space="preserve">
+    <value>Selecione os items que deseja importar e clique em "Importar" para finalizar.</value>
+  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Propriedade</value>
   </data>
@@ -153,8 +156,8 @@
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 13</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Passo 3 - Revisar Dados</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>555, 422</value>
   </data>
   <data name="btnNext.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -165,20 +168,23 @@
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Passo 3 - Revisar Dados</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 92</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Importar Componente do Banco de Dados KDB</value>
+    <value>Importar Informações do Banco de Dados Cheméo</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;dgResults.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -225,9 +231,6 @@
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 22</value>
   </data>
-  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 63</value>
-  </data>
   <data name="&gt;&gt;PictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -256,7 +259,7 @@
     <value />
   </data>
   <data name="Panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 309</value>
+    <value>555, 271</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 13</value>
@@ -298,7 +301,7 @@
     <value>Panel1</value>
   </data>
   <data name="Panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 309</value>
+    <value>555, 271</value>
   </data>
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Check</value>
@@ -314,6 +317,9 @@
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -361,7 +367,7 @@
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 309</value>
+    <value>555, 271</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -424,7 +430,7 @@
     <value>363, 13</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 63</value>
+    <value>0, 101</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -439,7 +445,7 @@
     <value>18, 70</value>
   </data>
   <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 57</value>
+    <value>555, 98</value>
   </data>
   <data name="&gt;&gt;btnNext.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -477,8 +483,8 @@
   <data name="btnNext.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="Label4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
+    <value>Panel3</value>
   </data>
   <data name="tbSearchString.Size" type="System.Drawing.Size, System.Drawing">
     <value>368, 20</value>
@@ -495,20 +501,17 @@
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>Panel3</value>
-  </data>
   <data name="&gt;&gt;lbFoundItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 13</value>
   </data>
-  <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>Panel3</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>555, 422</value>
+  <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Passo 1 - Procurar Substância</value>
@@ -547,19 +550,16 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormImportCompoundDataKDB</value>
+    <value>FormImportCompoundDataChemeo</value>
   </data>
-  <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 101</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 63</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Selecione os items que deseja importar e clique em "Importar" para finalizar.</value>
+    <value>0, 101</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

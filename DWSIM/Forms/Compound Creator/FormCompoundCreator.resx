@@ -538,7 +538,7 @@
     <value>16, 167</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label29.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -577,7 +577,7 @@
     <value>210: 10 ^ (A + B / T + C * T + D * T ^ 2)</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tbEsteqCoeffPosIon.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -647,6 +647,9 @@
   </data>
   <data name="&gt;&gt;CheckBoxMW.Parent" xml:space="preserve">
     <value>FaTabStripItem1</value>
+  </data>
+  <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn10.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -2211,6 +2214,9 @@
   <data name="rbIon.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
   </data>
+  <data name="&gt;&gt;EstruturaUNIFACMODFACDDBToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;TextBoxCAS.Parent" xml:space="preserve">
     <value>FaTabStripItem1</value>
   </data>
@@ -3520,7 +3526,7 @@
     <value>117, 21</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 22</value>
+    <value>253, 22</value>
   </data>
   <data name="&gt;&gt;Label94.Name" xml:space="preserve">
     <value>Label94</value>
@@ -3891,6 +3897,9 @@
   <data name="tbPVAP_E.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
+  <data name="&gt;&gt;BancoDeDadosChemeoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tbElecEnthForm.Parent" xml:space="preserve">
     <value>GroupBox9</value>
   </data>
@@ -4051,7 +4060,10 @@
     <value>166</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;EstruturaUNIFACMODFACDDBToolStripMenuItem.Name" xml:space="preserve">
+    <value>EstruturaUNIFACMODFACDDBToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -5054,6 +5066,9 @@
   </data>
   <data name="tbBOV1.Location" type="System.Drawing.Point, System.Drawing">
     <value>197, 24</value>
+  </data>
+  <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
+    <value>Estrutura UNIFAC/MODFAC (DDB)</value>
   </data>
   <data name="rbRegressSolidCp.Text" xml:space="preserve">
     <value>Regressão de Dados Experimentais</value>
@@ -6184,7 +6199,7 @@
     <value>GroupBox4</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tbLIQVISC_A.Text" xml:space="preserve">
     <value>0</value>
@@ -8416,6 +8431,9 @@
   <data name="Label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="BancoDeDadosChemeoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Banco de Dados Cheméo</value>
+  </data>
   <data name="&gt;&gt;Label118.Parent" xml:space="preserve">
     <value>GroupBox10</value>
   </data>
@@ -9186,6 +9204,9 @@
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BancoDeDadosChemeoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 22</value>
   </data>
   <data name="tbLIQVISC_B.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 21</value>
@@ -12022,6 +12043,9 @@
   <data name="Label101.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
   </data>
+  <data name="&gt;&gt;BancoDeDadosChemeoToolStripMenuItem.Name" xml:space="preserve">
+    <value>BancoDeDadosChemeoToolStripMenuItem</value>
+  </data>
   <data name="btnRegressPVAP.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -13322,7 +13346,7 @@
     <value>46</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblEnthOfFusion.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -13346,7 +13370,7 @@
     <value>255, 52</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;tbBOPNAA.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -13382,7 +13406,7 @@
     <value>GroupBox5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cbEqCPIG.Items27" xml:space="preserve">
     <value>116: A + B * (1 - Tr) ^ 0.35 + C * (1 - Tr) ^ (2 / 3) + D * (1 - Tr) + E * (1 - Tr) ^ (4 / 3)</value>
@@ -13427,7 +13451,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label109.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -13487,7 +13511,7 @@
     <value>16, 140</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label86.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 278</value>
@@ -13556,7 +13580,7 @@
     <value>* Cp em J/[kmol.K], T em K</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="TextBoxNBP.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 21</value>
@@ -13586,7 +13610,7 @@
     <value>FaTabStripItem9</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label48.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -13640,7 +13664,7 @@
     <value />
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label38.Parent" xml:space="preserve">
     <value>FaTabStripItem10</value>
@@ -13649,7 +13673,7 @@
     <value />
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TextBoxZc.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -13742,7 +13766,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6272.37798, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6274.36225, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label83.Text" xml:space="preserve">
     <value>Status:</value>

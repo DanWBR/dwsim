@@ -475,6 +475,8 @@ Partial Class FormCompoundCreator
         Me.SalvarNoBancoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportarDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BancoDeDadosKDBCHERICToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BancoDeDadosChemeoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EstruturaUNIFACMODFACDDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SistemasDeUnidadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbUnits = New System.Windows.Forms.ToolStripComboBox()
         ToolStripLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -3847,7 +3849,7 @@ Partial Class FormCompoundCreator
         'ImportarDadosToolStripMenuItem
         '
         resources.ApplyResources(Me.ImportarDadosToolStripMenuItem, "ImportarDadosToolStripMenuItem")
-        Me.ImportarDadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BancoDeDadosKDBCHERICToolStripMenuItem})
+        Me.ImportarDadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BancoDeDadosKDBCHERICToolStripMenuItem, Me.BancoDeDadosChemeoToolStripMenuItem, Me.EstruturaUNIFACMODFACDDBToolStripMenuItem})
         Me.ImportarDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
         Me.ImportarDadosToolStripMenuItem.Name = "ImportarDadosToolStripMenuItem"
         '
@@ -3856,6 +3858,18 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.BancoDeDadosKDBCHERICToolStripMenuItem, "BancoDeDadosKDBCHERICToolStripMenuItem")
         Me.BancoDeDadosKDBCHERICToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
         Me.BancoDeDadosKDBCHERICToolStripMenuItem.Name = "BancoDeDadosKDBCHERICToolStripMenuItem"
+        '
+        'BancoDeDadosChemeoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.BancoDeDadosChemeoToolStripMenuItem, "BancoDeDadosChemeoToolStripMenuItem")
+        Me.BancoDeDadosChemeoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
+        Me.BancoDeDadosChemeoToolStripMenuItem.Name = "BancoDeDadosChemeoToolStripMenuItem"
+        '
+        'EstruturaUNIFACMODFACDDBToolStripMenuItem
+        '
+        resources.ApplyResources(Me.EstruturaUNIFACMODFACDDBToolStripMenuItem, "EstruturaUNIFACMODFACDDBToolStripMenuItem")
+        Me.EstruturaUNIFACMODFACDDBToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
+        Me.EstruturaUNIFACMODFACDDBToolStripMenuItem.Name = "EstruturaUNIFACMODFACDDBToolStripMenuItem"
         '
         'SistemasDeUnidadesToolStripMenuItem
         '
@@ -4374,4 +4388,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents cbUnits As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents ImportarDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BancoDeDadosKDBCHERICToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BancoDeDadosChemeoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EstruturaUNIFACMODFACDDBToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

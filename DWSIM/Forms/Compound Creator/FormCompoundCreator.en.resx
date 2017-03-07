@@ -2226,10 +2226,22 @@
     <value>Save Data to XML Database</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 22</value>
+    <value>300, 22</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Text" xml:space="preserve">
     <value>KDB/CHERIC Thermo Database</value>
+  </data>
+  <data name="BancoDeDadosChemeoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 22</value>
+  </data>
+  <data name="BancoDeDadosChemeoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cheméo Database</value>
+  </data>
+  <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 22</value>
+  </data>
+  <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
+    <value>DDB UNIFAC/MODFAC Structure Database </value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Import Data from Online Sources</value>
