@@ -124,17 +124,11 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Step 1 - Search Compound</value>
   </data>
-  <data name="tbSearchString.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 89</value>
-  </data>
-  <data name="tbSearchString.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 20</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 13</value>
+    <value>42, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Name, CAS ID or Formula</value>
+    <value>CAS ID</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -144,9 +138,6 @@
   </data>
   <data name="btnNext.Text" xml:space="preserve">
     <value>Next &gt;</value>
-  </data>
-  <data name="lbFoundItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 186</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 13</value>
@@ -160,14 +151,17 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>Select an item from the list to collect its data.</value>
   </data>
-  <data name="dgResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 186</value>
+  <data name="CheckBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>311, 17</value>
+  </data>
+  <data name="CheckBox1.Text" xml:space="preserve">
+    <value>Copy MODFAC (Dortmund) structure info to MODFAC (NIST)</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
-    <value>Step 3 - Review Collected Data</value>
+    <value>Step 2 - Review Collected Data</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 13</value>
@@ -176,6 +170,6 @@
     <value>Select the data items to import and click "Import" to finish.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Import Compound Data from Cheméo Online Database</value>
+    <value>Import UNIFAC/MODFAC Structure Information from DDB Online Database</value>
   </data>
 </root>

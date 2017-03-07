@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormImportCompoundDataChemeo
+Partial Class FormImportCompoundDataDDB
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class FormImportCompoundDataChemeo
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundDataChemeo))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundDataDDB))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -31,11 +31,8 @@ Partial Class FormImportCompoundDataChemeo
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnPrev = New System.Windows.Forms.Button()
         Me.btnNext = New System.Windows.Forms.Button()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.lbFoundItems = New System.Windows.Forms.ListBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.dgResults = New System.Windows.Forms.DataGridView()
         Me.Column2 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,15 +41,15 @@ Partial Class FormImportCompoundDataChemeo
         Me.Label6 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.dgResults, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PictureBox1
         '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Maroon
         resources.ApplyResources(Me.PictureBox1, "PictureBox1")
-        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.chemeo
+        Me.PictureBox1.Image = Global.DWSIM.My.Resources.Resources.ddbsearch
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.TabStop = False
         '
@@ -97,37 +94,22 @@ Partial Class FormImportCompoundDataChemeo
         Me.btnNext.Name = "btnNext"
         Me.btnNext.UseVisualStyleBackColor = True
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.lbFoundItems)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.Label4)
-        resources.ApplyResources(Me.Panel2, "Panel2")
-        Me.Panel2.Name = "Panel2"
-        '
-        'lbFoundItems
-        '
-        Me.lbFoundItems.FormattingEnabled = True
-        resources.ApplyResources(Me.lbFoundItems, "lbFoundItems")
-        Me.lbFoundItems.Name = "lbFoundItems"
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
-        '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.CheckBox1)
         Me.Panel3.Controls.Add(Me.dgResults)
         Me.Panel3.Controls.Add(Me.Label5)
         Me.Panel3.Controls.Add(Me.Label6)
         resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Name = "Panel3"
+        '
+        'CheckBox1
+        '
+        resources.ApplyResources(Me.CheckBox1, "CheckBox1")
+        Me.CheckBox1.Checked = True
+        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'dgResults
         '
@@ -171,7 +153,7 @@ Partial Class FormImportCompoundDataChemeo
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
-        'FormImportCompoundDataChemeo
+        'FormImportCompoundDataDDB
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -181,17 +163,14 @@ Partial Class FormImportCompoundDataChemeo
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FormImportCompoundDataChemeo"
+        Me.Name = "FormImportCompoundDataDDB"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.dgResults, System.ComponentModel.ISupportInitialize).EndInit()
@@ -206,15 +185,12 @@ Partial Class FormImportCompoundDataChemeo
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents tbSearchString As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents dgResults As System.Windows.Forms.DataGridView
-    Friend WithEvents lbFoundItems As System.Windows.Forms.ListBox
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
 End Class

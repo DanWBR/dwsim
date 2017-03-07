@@ -7,7 +7,7 @@ Imports System.IO
 
 Public Class DDBStructureParser
 
-    Shared Function GetID(CAS As String)
+    Shared Function GetID(CAS As String) As String
 
         Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://ddbonline.ddbst.com/OnlinePropertyEstimation/OnlineUNIFACGroupAssignmentSA.exe")))
         proxyObj.Credentials = CredentialCache.DefaultCredentials

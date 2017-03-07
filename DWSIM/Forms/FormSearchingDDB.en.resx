@@ -117,65 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PictureBox1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="PictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 13</value>
+  <data name="PictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 135</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Step 1 - Search Compound</value>
+  <data name="PictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>CenterImage</value>
   </data>
-  <data name="tbSearchString.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 89</value>
-  </data>
-  <data name="tbSearchString.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 20</value>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 28</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 13</value>
+    <value>264, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Name, CAS ID or Formula</value>
+    <value>Searching Online for Data at DDB Thermo Database...</value>
+  </data>
+  <data name="ProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 58</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 88</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="btnPrev.Text" xml:space="preserve">
-    <value>&lt; Previous</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>465, 135</value>
   </data>
-  <data name="btnNext.Text" xml:space="preserve">
-    <value>Next &gt;</value>
-  </data>
-  <data name="lbFoundItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 186</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 13</value>
-  </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>Step 2 - Select Compound ID</value>
-  </data>
-  <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 13</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Select an item from the list to collect its data.</value>
-  </data>
-  <data name="dgResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 186</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 13</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Step 3 - Review Collected Data</value>
-  </data>
-  <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 13</value>
-  </data>
-  <data name="Label6.Text" xml:space="preserve">
-    <value>Select the data items to import and click "Import" to finish.</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Import Compound Data from Cheméo Online Database</value>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
 </root>

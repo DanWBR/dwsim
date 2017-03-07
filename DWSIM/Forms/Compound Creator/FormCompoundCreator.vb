@@ -3389,6 +3389,16 @@ Public Class FormCompoundCreator
             End Try
         End If
     End Sub
+
+    Private Sub EstruturaUNIFACMODFACDDBToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EstruturaUNIFACMODFACDDBToolStripMenuItem.Click
+        Dim f As New FormImportCompoundDataDDB
+        StoreData()
+        f.BaseCompound = mycase.cp
+        f.tbSearchString.Text = TextBoxCAS.Text
+        If f.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            WriteData()
+        End If
+    End Sub
 End Class
 
 <System.Serializable()> Public Class CompoundGeneratorCase
