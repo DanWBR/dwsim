@@ -195,7 +195,7 @@ Public Class KDBParser
         element = htmlpage.DocumentNode.Descendants("tr").Where(Function(x) x.InnerText.Contains("Solubility Parameters (SOLP)")).FirstOrDefault.ChildNodes(3)
 
         If Not element.InnerText.Contains("NA") Then
-            comp.Chao_Seader_Solubility_Parameter = Double.Parse(element.InnerText.Split(" ")(0), ci)
+            comp.Chao_Seader_Solubility_Parameter = Double.Parse(element.InnerText.Split(" ")(0), ci) * (1 / 4.16) ^ 0.5
         End If
 
         'get vapor pressure coefficients
