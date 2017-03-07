@@ -466,19 +466,17 @@ Partial Class FormCompoundCreator
         Me.ToolStripStatusUserDB = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.BancoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tbDBPath = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CriarNovoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DefinirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.chkReplaceComps = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComponenteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalvarNoBancoDeDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportarDadosParaArquivoJSONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImportarDadosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BancoDeDadosKDBCHERICToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BancoDeDadosChemeoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SistemasDeUnidadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cbUnits = New System.Windows.Forms.ToolStripComboBox()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
         ToolStripLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.GroupBox2.SuspendLayout()
         CType(Me.FaTabStrip2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3794,48 +3792,15 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BancoDeDadosToolStripMenuItem, Me.ComponenteToolStripMenuItem, Me.SistemasDeUnidadesToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComponenteToolStripMenuItem, Me.SistemasDeUnidadesToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Stretch = False
         Me.ToolTip1.SetToolTip(Me.MenuStrip1, resources.GetString("MenuStrip1.ToolTip"))
         '
-        'BancoDeDadosToolStripMenuItem
-        '
-        resources.ApplyResources(Me.BancoDeDadosToolStripMenuItem, "BancoDeDadosToolStripMenuItem")
-        Me.BancoDeDadosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbDBPath, Me.CriarNovoToolStripMenuItem, Me.DefinirToolStripMenuItem, Me.chkReplaceComps})
-        Me.BancoDeDadosToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.BancoDeDadosToolStripMenuItem.MergeIndex = 2
-        Me.BancoDeDadosToolStripMenuItem.Name = "BancoDeDadosToolStripMenuItem"
-        '
-        'tbDBPath
-        '
-        resources.ApplyResources(Me.tbDBPath, "tbDBPath")
-        Me.tbDBPath.Name = "tbDBPath"
-        '
-        'CriarNovoToolStripMenuItem
-        '
-        resources.ApplyResources(Me.CriarNovoToolStripMenuItem, "CriarNovoToolStripMenuItem")
-        Me.CriarNovoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.page_white
-        Me.CriarNovoToolStripMenuItem.Name = "CriarNovoToolStripMenuItem"
-        '
-        'DefinirToolStripMenuItem
-        '
-        resources.ApplyResources(Me.DefinirToolStripMenuItem, "DefinirToolStripMenuItem")
-        Me.DefinirToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.folder_go
-        Me.DefinirToolStripMenuItem.Name = "DefinirToolStripMenuItem"
-        '
-        'chkReplaceComps
-        '
-        resources.ApplyResources(Me.chkReplaceComps, "chkReplaceComps")
-        Me.chkReplaceComps.Checked = True
-        Me.chkReplaceComps.CheckOnClick = True
-        Me.chkReplaceComps.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkReplaceComps.Name = "chkReplaceComps"
-        '
         'ComponenteToolStripMenuItem
         '
         resources.ApplyResources(Me.ComponenteToolStripMenuItem, "ComponenteToolStripMenuItem")
-        Me.ComponenteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarNoBancoDeDadosToolStripMenuItem, Me.ImportarDadosToolStripMenuItem})
+        Me.ComponenteToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarNoBancoDeDadosToolStripMenuItem, Me.ExportarDadosParaArquivoJSONToolStripMenuItem, Me.ImportarDadosToolStripMenuItem})
         Me.ComponenteToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
         Me.ComponenteToolStripMenuItem.MergeIndex = 3
         Me.ComponenteToolStripMenuItem.Name = "ComponenteToolStripMenuItem"
@@ -3843,8 +3808,14 @@ Partial Class FormCompoundCreator
         'SalvarNoBancoDeDadosToolStripMenuItem
         '
         resources.ApplyResources(Me.SalvarNoBancoDeDadosToolStripMenuItem, "SalvarNoBancoDeDadosToolStripMenuItem")
-        Me.SalvarNoBancoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.disk
+        Me.SalvarNoBancoDeDadosToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.database_save1
         Me.SalvarNoBancoDeDadosToolStripMenuItem.Name = "SalvarNoBancoDeDadosToolStripMenuItem"
+        '
+        'ExportarDadosParaArquivoJSONToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ExportarDadosParaArquivoJSONToolStripMenuItem, "ExportarDadosParaArquivoJSONToolStripMenuItem")
+        Me.ExportarDadosParaArquivoJSONToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.card_export
+        Me.ExportarDadosParaArquivoJSONToolStripMenuItem.Name = "ExportarDadosParaArquivoJSONToolStripMenuItem"
         '
         'ImportarDadosToolStripMenuItem
         '
@@ -3884,6 +3855,16 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.cbUnits, "cbUnits")
         Me.cbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbUnits.Name = "cbUnits"
+        '
+        'SaveFileDialog1
+        '
+        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
+        Me.SaveFileDialog1.RestoreDirectory = True
+        '
+        'SaveFileDialog2
+        '
+        resources.ApplyResources(Me.SaveFileDialog2, "SaveFileDialog2")
+        Me.SaveFileDialog2.RestoreDirectory = True
         '
         'FormCompoundCreator
         '
@@ -4377,17 +4358,15 @@ Partial Class FormCompoundCreator
     Public WithEvents tbUserDefDensLiqEq As System.Windows.Forms.TextBox
     Public WithEvents tbUserDefLiqViscEq As System.Windows.Forms.TextBox
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Friend WithEvents BancoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CriarNovoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DefinirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tbDBPath As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ComponenteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SalvarNoBancoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents chkReplaceComps As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SistemasDeUnidadesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cbUnits As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents ImportarDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BancoDeDadosKDBCHERICToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BancoDeDadosChemeoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EstruturaUNIFACMODFACDDBToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExportarDadosParaArquivoJSONToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents SaveFileDialog2 As System.Windows.Forms.SaveFileDialog
 End Class

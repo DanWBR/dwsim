@@ -132,6 +132,9 @@
 
 Click "Next" to continue.</value>
   </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Import (JSON) &gt;</value>
+  </data>
   <data name="btnInfoRight.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the right-hand list.</value>
   </data>
@@ -410,13 +413,6 @@ Click "Next" to continue.</value>
   <data name="Button8.Text" xml:space="preserve">
     <value>Add</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ListViewPP.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="ListViewPP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 262</value>
-  </data>
   <data name="Column16.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -444,5 +440,11 @@ Click "Next" to continue.</value>
   <data name="Label7.Text" xml:space="preserve">
     <value>Select the desired System of Units for your simulation. You can change the units of existing systems, include new systems and perform other operations in the simulation setup window anytime after finishing this wizard.
 Click "Finish" to exit the wizard and start simulating.</value>
+  </data>
+  <data name="OpenFileDialog1.Filter" xml:space="preserve">
+    <value>JSON Files|*.json</value>
+  </data>
+  <data name="OpenFileDialog1.Title" xml:space="preserve">
+    <value>Import Compound from JSON File</value>
   </data>
 </root>

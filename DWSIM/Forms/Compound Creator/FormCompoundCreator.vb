@@ -355,11 +355,6 @@ Public Class FormCompoundCreator
 
         With mycase
 
-            If File.Exists(.database) Then
-                Me.tbDBPath.Text = .database
-            Else
-                Me.tbDBPath.Text = ""
-            End If
             Me.Text = .Filename
             If .su.temperature IsNot Nothing Then
                 Me.su = .su
@@ -763,7 +758,6 @@ Public Class FormCompoundCreator
         With mycase
 
             .su = Me.su
-            .database = tbDBPath.Text
 
             .cp.ID = TextBoxID.Text
             .cp.Name = TextBoxName.Text
@@ -2947,7 +2941,7 @@ Public Class FormCompoundCreator
         End If
     End Sub
 
-    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkReplaceComps.CheckStateChanged
+    Private Sub chkReplaceComps_CheckStateChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If loaded Then
             SetCompCreatorSaveStatus(False)
         End If
@@ -3245,10 +3239,6 @@ Public Class FormCompoundCreator
 
     End Sub
 
-    Private Sub tbDBPath_TextChanged(sender As Object, e As EventArgs) Handles tbDBPath.TextChanged
-        If tbDBPath.Text <> "" Then SalvarNoBancoDeDadosToolStripMenuItem.Enabled = True Else SalvarNoBancoDeDadosToolStripMenuItem.Enabled = False
-    End Sub
-
     Private Sub rbIon_CheckedChanged(sender As Object, e As EventArgs) Handles rbIon.CheckedChanged, rbSalt.CheckedChanged, rbHydratedSalt.CheckedChanged
 
         tbHydrNumber.Enabled = rbHydratedSalt.Checked
@@ -3308,45 +3298,39 @@ Public Class FormCompoundCreator
         If loaded Then mycase.cp.LiquidViscosityEquation = tbUserDefLiqViscEq.Text
     End Sub
 
-    Private Sub CriarNovoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CriarNovoToolStripMenuItem.Click
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            If Not File.Exists(Me.DBOpenDlg.FileName) Then File.Create(Me.DBOpenDlg.FileName)
-            Me.tbDBPath.Text = Me.DBOpenDlg.FileName
-            SetCompCreatorSaveStatus(False)
-        End If
-    End Sub
-
-    Private Sub DefinirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefinirToolStripMenuItem.Click
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Me.tbDBPath.Text = Me.DBOpenDlg.FileName
-            SetCompCreatorSaveStatus(False)
-        End If
-    End Sub
-
     Private Sub SalvarNoBancoDeDadosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalvarNoBancoDeDadosToolStripMenuItem.Click
-        If tbDBPath.Text = "" Then
-            MessageBox.Show(DWSIM.App.GetLocalString("NoDatabaseDefined"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Exit Sub
+
+        SaveFileDialog2.FileName = mycase.database
+
+        If SaveFileDialog2.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Try
+                StoreData()
+
+                mycase.database = SaveFileDialog2.FileName
+
+                'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
+                'Delete UNIFAC groups to prevent wrong calculations.
+                If Not PureUNIFACCompound Then
+                    mycase.cp.UNIFACGroups.Clear()
+                    mycase.cp.MODFACGroups.Clear()
+                    mycase.cp.NISTMODFACGroups.Clear()
+                End If
+
+                mycase.cp.OriginalDB = "User"
+                mycase.cp.CurrentDB = "User"
+
+                Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, SaveFileDialog2.FileName, True)
+
+                SetUserDBSaveStatus(True)
+
+            Catch ex As Exception
+
+                MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+
         End If
-        Try
-            StoreData()
 
-            'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
-            'Delete UNIFAC groups to prevent wrong calculations.
-            If Not PureUNIFACCompound Then
-                mycase.cp.UNIFACGroups.Clear()
-                mycase.cp.MODFACGroups.Clear()
-                mycase.cp.NISTMODFACGroups.Clear()
-            End If
-
-            mycase.cp.OriginalDB = "User"
-            mycase.cp.CurrentDB = "User"
-
-            Global.DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {mycase.cp}, tbDBPath.Text, chkReplaceComps.Checked)
-            SetUserDBSaveStatus(True)
-        Catch ex As Exception
-            MessageBox.Show(DWSIM.App.GetLocalString("ErroCompSaveDB") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
     End Sub
 
     Private Sub BancoDeDadosKDBCHERICToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BancoDeDadosKDBCHERICToolStripMenuItem.Click
@@ -3393,6 +3377,17 @@ Public Class FormCompoundCreator
 
         End If
 
+    End Sub
+
+    Private Sub ExportarDadosParaArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarDadosParaArquivoJSONToolStripMenuItem.Click
+        If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Try
+                File.WriteAllText(Me.SaveFileDialog1.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(mycase.cp, Newtonsoft.Json.Formatting.Indented))
+                MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
     End Sub
 End Class
 

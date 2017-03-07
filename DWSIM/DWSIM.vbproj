@@ -2336,6 +2336,7 @@
     <None Include="Resources\arrow_join.png" />
     <None Include="Resources\button-medium-blue.png" />
     <None Include="Resources\209x48-doar-azul-assina.gif" />
+    <None Include="Resources\card_export.png" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2358,6 +2359,8 @@
     <Content Include="Resources\control_equalizer_blue.png" />
     <None Include="Resources\cut.png" />
     <None Include="Resources\ddbsearch.jpg" />
+    <None Include="Resources\database_save.jpg" />
+    <None Include="Resources\database_save1.png" />
     <Content Include="Resources\de.png" />
     <None Include="Resources\emblem-symbolic-link.png" />
     <None Include="Resources\de1.png" />
@@ -2374,6 +2377,8 @@
     <None Include="Resources\DownloadFromAppStore.png" />
     <None Include="Resources\En-play-badge.png" />
     <None Include="Resources\Default.png" />
+    <None Include="Resources\document_export.jpg" />
+    <None Include="Resources\document_export1.jpg" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />

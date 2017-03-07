@@ -5463,4 +5463,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NextButton" xml:space="preserve">
     <value>Próximo &gt;</value>
   </data>
+  <data name="CompoundExists" xml:space="preserve">
+    <value>O componente já está adicionado à simulação. Importação cancelada.</value>
+  </data>
 </root>

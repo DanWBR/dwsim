@@ -2099,6 +2099,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O componente já está adicionado à simulação. Importação cancelada..
+        '''</summary>
+        Friend Shared ReadOnly Property CompoundExists() As String
+            Get
+                Return ResourceManager.GetString("CompoundExists", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to substância não encontrada no banco de dados..
         '''</summary>
         Friend Shared ReadOnly Property CompoundNotFound() As String

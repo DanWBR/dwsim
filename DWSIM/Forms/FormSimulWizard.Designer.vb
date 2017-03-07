@@ -24,14 +24,15 @@ Partial Class FormSimulWizard
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSimulWizard))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.StepWizardControl1 = New AeroWizard.StepWizardControl()
         Me.WizardPage1 = New AeroWizard.WizardPage()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.WizardPage2 = New AeroWizard.WizardPage()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.btnInfoRight = New System.Windows.Forms.Button()
         Me.btnInfoLeft = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -82,6 +83,7 @@ Partial Class FormSimulWizard
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.WizardPage1.SuspendLayout()
         Me.WizardPage2.SuspendLayout()
@@ -106,29 +108,35 @@ Partial Class FormSimulWizard
         Me.StepWizardControl1.Pages.Add(Me.WizardPage4)
         Me.StepWizardControl1.Pages.Add(Me.WizardPage5)
         Me.StepWizardControl1.ShowProgressInTaskbarIcon = True
+        Me.ToolTip1.SetToolTip(Me.StepWizardControl1, resources.GetString("StepWizardControl1.ToolTip"))
         '
         'WizardPage1
         '
+        resources.ApplyResources(Me.WizardPage1, "WizardPage1")
         Me.WizardPage1.AllowBack = False
         Me.WizardPage1.Controls.Add(Me.Button1)
         Me.WizardPage1.Controls.Add(Me.Label1)
         Me.WizardPage1.Name = "WizardPage1"
         Me.WizardPage1.NextPage = Me.WizardPage2
-        resources.ApplyResources(Me.WizardPage1, "WizardPage1")
+        Me.ToolTip1.SetToolTip(Me.WizardPage1, resources.GetString("WizardPage1.ToolTip"))
         '
         'Button1
         '
         resources.ApplyResources(Me.Button1, "Button1")
         Me.Button1.Name = "Button1"
+        Me.ToolTip1.SetToolTip(Me.Button1, resources.GetString("Button1.ToolTip"))
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'WizardPage2
         '
+        resources.ApplyResources(Me.WizardPage2, "WizardPage2")
+        Me.WizardPage2.Controls.Add(Me.Button2)
         Me.WizardPage2.Controls.Add(Me.btnInfoRight)
         Me.WizardPage2.Controls.Add(Me.btnInfoLeft)
         Me.WizardPage2.Controls.Add(Me.TextBox1)
@@ -141,48 +149,58 @@ Partial Class FormSimulWizard
         Me.WizardPage2.Controls.Add(Me.Button7)
         Me.WizardPage2.Name = "WizardPage2"
         Me.WizardPage2.NextPage = Me.WizardPage3
-        resources.ApplyResources(Me.WizardPage2, "WizardPage2")
+        Me.ToolTip1.SetToolTip(Me.WizardPage2, resources.GetString("WizardPage2.ToolTip"))
+        '
+        'Button2
+        '
+        resources.ApplyResources(Me.Button2, "Button2")
+        Me.Button2.Name = "Button2"
+        Me.ToolTip1.SetToolTip(Me.Button2, resources.GetString("Button2.ToolTip"))
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'btnInfoRight
         '
-        Me.btnInfoRight.Image = Global.DWSIM.My.Resources.Resources.information
         resources.ApplyResources(Me.btnInfoRight, "btnInfoRight")
+        Me.btnInfoRight.Image = Global.DWSIM.My.Resources.Resources.information
         Me.btnInfoRight.Name = "btnInfoRight"
         Me.ToolTip1.SetToolTip(Me.btnInfoRight, resources.GetString("btnInfoRight.ToolTip"))
         Me.btnInfoRight.UseVisualStyleBackColor = True
         '
         'btnInfoLeft
         '
-        Me.btnInfoLeft.Image = Global.DWSIM.My.Resources.Resources.information
         resources.ApplyResources(Me.btnInfoLeft, "btnInfoLeft")
+        Me.btnInfoLeft.Image = Global.DWSIM.My.Resources.Resources.information
         Me.btnInfoLeft.Name = "btnInfoLeft"
         Me.ToolTip1.SetToolTip(Me.btnInfoLeft, resources.GetString("btnInfoLeft.ToolTip"))
         Me.btnInfoLeft.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
+        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.TextBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
+        Me.ToolTip1.SetToolTip(Me.TextBox1, resources.GetString("TextBox1.ToolTip"))
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.ListViewA)
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Controls.Add(Me.ListViewA)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
         '
         'ListViewA
         '
-        Me.ListViewA.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
         resources.ApplyResources(Me.ListViewA, "ListViewA")
+        Me.ListViewA.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
         Me.ListViewA.FullRowSelect = True
         Me.ListViewA.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
         Me.ListViewA.HideSelection = False
         Me.ListViewA.Name = "ListViewA"
         Me.ListViewA.ShowGroups = False
         Me.ListViewA.TileSize = New System.Drawing.Size(184, 16)
+        Me.ToolTip1.SetToolTip(Me.ListViewA, resources.GetString("ListViewA.ToolTip"))
         Me.ListViewA.UseCompatibleStateImageBehavior = False
         Me.ListViewA.View = System.Windows.Forms.View.List
         '
@@ -194,35 +212,39 @@ Partial Class FormSimulWizard
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'Button11
         '
         resources.ApplyResources(Me.Button11, "Button11")
         Me.Button11.Name = "Button11"
+        Me.ToolTip1.SetToolTip(Me.Button11, resources.GetString("Button11.ToolTip"))
         Me.Button11.UseVisualStyleBackColor = True
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'Button10
         '
         resources.ApplyResources(Me.Button10, "Button10")
         Me.Button10.Name = "Button10"
+        Me.ToolTip1.SetToolTip(Me.Button10, resources.GetString("Button10.ToolTip"))
         Me.Button10.UseVisualStyleBackColor = True
         '
         'ogc1
         '
+        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.AllowUserToAddRows = False
         Me.ogc1.AllowUserToDeleteRows = False
         Me.ogc1.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
-        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.ogc1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.ogc1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.ogc1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.ogc1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column11, Me.Column6, Me.casno, Me.Column8, Me.Column9, Me.Column7, Me.Column5, Me.Column10})
-        resources.ApplyResources(Me.ogc1, "ogc1")
         Me.ogc1.Name = "ogc1"
         Me.ogc1.ReadOnly = True
         Me.ogc1.RowHeadersVisible = False
@@ -230,6 +252,7 @@ Partial Class FormSimulWizard
         Me.ogc1.ShowCellErrors = False
         Me.ogc1.ShowEditingIcon = False
         Me.ogc1.ShowRowErrors = False
+        Me.ToolTip1.SetToolTip(Me.ogc1, resources.GetString("ogc1.ToolTip"))
         '
         'Column11
         '
@@ -299,10 +322,12 @@ Partial Class FormSimulWizard
         '
         resources.ApplyResources(Me.Button7, "Button7")
         Me.Button7.Name = "Button7"
+        Me.ToolTip1.SetToolTip(Me.Button7, resources.GetString("Button7.ToolTip"))
         Me.Button7.UseVisualStyleBackColor = True
         '
         'WizardPage3
         '
+        resources.ApplyResources(Me.WizardPage3, "WizardPage3")
         Me.WizardPage3.Controls.Add(Me.LinkLabel2)
         Me.WizardPage3.Controls.Add(Me.LinkLabelPropertyMethods)
         Me.WizardPage3.Controls.Add(Me.GroupBox6)
@@ -310,7 +335,7 @@ Partial Class FormSimulWizard
         Me.WizardPage3.Controls.Add(Me.Label4)
         Me.WizardPage3.Name = "WizardPage3"
         Me.WizardPage3.NextPage = Me.WizardPage4
-        resources.ApplyResources(Me.WizardPage3, "WizardPage3")
+        Me.ToolTip1.SetToolTip(Me.WizardPage3, resources.GetString("WizardPage3.ToolTip"))
         '
         'LinkLabel2
         '
@@ -318,6 +343,7 @@ Partial Class FormSimulWizard
         Me.LinkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
         Me.LinkLabel2.Name = "LinkLabel2"
         Me.LinkLabel2.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.LinkLabel2, resources.GetString("LinkLabel2.ToolTip"))
         '
         'LinkLabelPropertyMethods
         '
@@ -325,14 +351,16 @@ Partial Class FormSimulWizard
         Me.LinkLabelPropertyMethods.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
         Me.LinkLabelPropertyMethods.Name = "LinkLabelPropertyMethods"
         Me.LinkLabelPropertyMethods.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.LinkLabelPropertyMethods, resources.GetString("LinkLabelPropertyMethods.ToolTip"))
         '
         'GroupBox6
         '
+        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Controls.Add(Me.ListViewPP)
         Me.GroupBox6.Controls.Add(Me.Button8)
-        resources.ApplyResources(Me.GroupBox6, "GroupBox6")
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'ListViewPP
         '
@@ -344,6 +372,7 @@ Partial Class FormSimulWizard
         Me.ListViewPP.ShowGroups = False
         Me.ListViewPP.ShowItemToolTips = True
         Me.ListViewPP.TileSize = New System.Drawing.Size(312, 16)
+        Me.ToolTip1.SetToolTip(Me.ListViewPP, resources.GetString("ListViewPP.ToolTip"))
         Me.ListViewPP.UseCompatibleStateImageBehavior = False
         Me.ListViewPP.View = System.Windows.Forms.View.List
         '
@@ -351,17 +380,20 @@ Partial Class FormSimulWizard
         '
         resources.ApplyResources(Me.Button8, "Button8")
         Me.Button8.Name = "Button8"
+        Me.ToolTip1.SetToolTip(Me.Button8, resources.GetString("Button8.ToolTip"))
         Me.Button8.UseVisualStyleBackColor = True
         '
         'GroupBox12
         '
-        Me.GroupBox12.Controls.Add(Me.dgvpp)
         resources.ApplyResources(Me.GroupBox12, "GroupBox12")
+        Me.GroupBox12.Controls.Add(Me.dgvpp)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox12, resources.GetString("GroupBox12.ToolTip"))
         '
         'dgvpp
         '
+        resources.ApplyResources(Me.dgvpp, "dgvpp")
         Me.dgvpp.AllowUserToAddRows = False
         Me.dgvpp.AllowUserToDeleteRows = False
         Me.dgvpp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -369,13 +401,13 @@ Partial Class FormSimulWizard
         Me.dgvpp.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgvpp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvpp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column18, Me.Column16, Me.Column17, Me.Column12})
-        resources.ApplyResources(Me.dgvpp, "dgvpp")
         Me.dgvpp.MultiSelect = False
         Me.dgvpp.Name = "dgvpp"
         Me.dgvpp.ReadOnly = True
         Me.dgvpp.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.dgvpp.RowHeadersVisible = False
         Me.dgvpp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.ToolTip1.SetToolTip(Me.dgvpp, resources.GetString("dgvpp.ToolTip"))
         '
         'Column18
         '
@@ -409,9 +441,11 @@ Partial Class FormSimulWizard
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'WizardPage4
         '
+        resources.ApplyResources(Me.WizardPage4, "WizardPage4")
         Me.WizardPage4.Controls.Add(Me.lblFlashAlgoDesc)
         Me.WizardPage4.Controls.Add(Me.Label9)
         Me.WizardPage4.Controls.Add(Me.ListBoxPP)
@@ -420,29 +454,33 @@ Partial Class FormSimulWizard
         Me.WizardPage4.Controls.Add(Me.Label5)
         Me.WizardPage4.Name = "WizardPage4"
         Me.WizardPage4.NextPage = Me.WizardPage5
-        resources.ApplyResources(Me.WizardPage4, "WizardPage4")
+        Me.ToolTip1.SetToolTip(Me.WizardPage4, resources.GetString("WizardPage4.ToolTip"))
         '
         'lblFlashAlgoDesc
         '
         resources.ApplyResources(Me.lblFlashAlgoDesc, "lblFlashAlgoDesc")
         Me.lblFlashAlgoDesc.Name = "lblFlashAlgoDesc"
+        Me.ToolTip1.SetToolTip(Me.lblFlashAlgoDesc, resources.GetString("lblFlashAlgoDesc.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'ListBoxPP
         '
-        Me.ListBoxPP.FormattingEnabled = True
         resources.ApplyResources(Me.ListBoxPP, "ListBoxPP")
+        Me.ListBoxPP.FormattingEnabled = True
         Me.ListBoxPP.Items.AddRange(New Object() {resources.GetString("ListBoxPP.Items"), resources.GetString("ListBoxPP.Items1"), resources.GetString("ListBoxPP.Items2"), resources.GetString("ListBoxPP.Items3"), resources.GetString("ListBoxPP.Items4"), resources.GetString("ListBoxPP.Items5"), resources.GetString("ListBoxPP.Items6"), resources.GetString("ListBoxPP.Items7"), resources.GetString("ListBoxPP.Items8")})
         Me.ListBoxPP.Name = "ListBoxPP"
+        Me.ToolTip1.SetToolTip(Me.ListBoxPP, resources.GetString("ListBoxPP.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'LinkLabel1
         '
@@ -450,14 +488,17 @@ Partial Class FormSimulWizard
         Me.LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.LinkLabel1, resources.GetString("LinkLabel1.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'WizardPage5
         '
+        resources.ApplyResources(Me.WizardPage5, "WizardPage5")
         Me.WizardPage5.AllowCancel = False
         Me.WizardPage5.Controls.Add(Me.DataGridView1)
         Me.WizardPage5.Controls.Add(Me.ComboBox2)
@@ -465,10 +506,11 @@ Partial Class FormSimulWizard
         Me.WizardPage5.Controls.Add(Me.Label7)
         Me.WizardPage5.IsFinishPage = True
         Me.WizardPage5.Name = "WizardPage5"
-        resources.ApplyResources(Me.WizardPage5, "WizardPage5")
+        Me.ToolTip1.SetToolTip(Me.WizardPage5, resources.GetString("WizardPage5.ToolTip"))
         '
         'DataGridView1
         '
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
@@ -478,16 +520,16 @@ Partial Class FormSimulWizard
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+        Me.ToolTip1.SetToolTip(Me.DataGridView1, resources.GetString("DataGridView1.ToolTip"))
         '
         'Column1
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle5
         resources.ApplyResources(Me.Column1, "Column1")
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
@@ -503,8 +545,8 @@ Partial Class FormSimulWizard
         '
         'Column3
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.Gainsboro
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gainsboro
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle6
         resources.ApplyResources(Me.Column3, "Column3")
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
@@ -520,26 +562,33 @@ Partial Class FormSimulWizard
         '
         'ComboBox2
         '
+        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox2.DropDownWidth = 205
-        resources.ApplyResources(Me.ComboBox2, "ComboBox2")
         Me.ComboBox2.Name = "ComboBox2"
+        Me.ToolTip1.SetToolTip(Me.ComboBox2, resources.GetString("ComboBox2.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'ToolTip1
         '
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.ToolTip1.ToolTipTitle = "Help"
+        '
+        'OpenFileDialog1
+        '
+        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
         '
         'FormSimulWizard
         '
@@ -551,6 +600,7 @@ Partial Class FormSimulWizard
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormSimulWizard"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         CType(Me.StepWizardControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.WizardPage1.ResumeLayout(False)
         Me.WizardPage2.ResumeLayout(False)
@@ -626,4 +676,6 @@ Partial Class FormSimulWizard
     Public WithEvents btnInfoLeft As System.Windows.Forms.Button
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Public WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

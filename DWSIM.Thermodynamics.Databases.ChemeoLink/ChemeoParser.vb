@@ -14,11 +14,11 @@ Public Class ChemeoParser
 
         Dim website As String = "https://www.chemeo.com/search?q=" + HttpUtility.UrlEncode(searchstring)
 
-        'Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br/")))
-        'proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim proxyObj = Net.WebRequest.DefaultWebProxy
+        proxyObj.Credentials = CredentialCache.DefaultCredentials
 
         Dim handler As New HttpClientHandler()
-        'handler.Proxy = proxyObj
+        handler.Proxy = proxyObj
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
@@ -83,11 +83,11 @@ Public Class ChemeoParser
 
         Dim website As String = "https://www.chemeo.com/cid/" + CAS
 
-        'Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://wsim.inforside.com.br")))
-        'proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim proxyObj = Net.WebRequest.DefaultWebProxy
+        proxyObj.Credentials = CredentialCache.DefaultCredentials
 
         Dim handler As New HttpClientHandler()
-        'handler.Proxy = proxyObj
+        handler.Proxy = proxyObj
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)

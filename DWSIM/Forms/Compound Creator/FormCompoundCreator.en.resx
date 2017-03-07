@@ -2192,56 +2192,38 @@
   <data name="ComboBox1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tbDBPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
-  </data>
-  <data name="tbDBPath.Text" xml:space="preserve">
-    <value>[Undefined XML database]</value>
-  </data>
-  <data name="CriarNovoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
-  </data>
-  <data name="CriarNovoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Create New</value>
-  </data>
-  <data name="DefinirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
-  </data>
-  <data name="DefinirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Search for an Existing Database</value>
-  </data>
-  <data name="chkReplaceComps.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 22</value>
-  </data>
-  <data name="chkReplaceComps.Text" xml:space="preserve">
-    <value>Replace compounds with the same ID</value>
-  </data>
-  <data name="BancoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
-  </data>
-  <data name="BancoDeDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>XML Database</value>
+  <data name="SalvarNoBancoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 22</value>
   </data>
   <data name="SalvarNoBancoDeDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save Data to XML Database</value>
+    <value>Export Data to XML Database</value>
+  </data>
+  <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 22</value>
+  </data>
+  <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export Data to JSON File</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+    <value>302, 22</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Text" xml:space="preserve">
     <value>KDB/CHERIC Thermo Database</value>
   </data>
   <data name="BancoDeDadosChemeoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+    <value>302, 22</value>
   </data>
   <data name="BancoDeDadosChemeoToolStripMenuItem.Text" xml:space="preserve">
     <value>Cheméo Database</value>
   </data>
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 22</value>
+    <value>302, 22</value>
   </data>
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
     <value>DDB UNIFAC/MODFAC Structure Database </value>
+  </data>
+  <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 22</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Import Data from Online Sources</value>
@@ -2266,6 +2248,18 @@
   </data>
   <data name="MenuStrip1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="SaveFileDialog1.Filter" xml:space="preserve">
+    <value>JSON Files|*.json</value>
+  </data>
+  <data name="SaveFileDialog1.Title" xml:space="preserve">
+    <value>Export Compound Data to JSON</value>
+  </data>
+  <data name="SaveFileDialog2.Filter" xml:space="preserve">
+    <value>XML Database Files|*.xml</value>
+  </data>
+  <data name="SaveFileDialog2.Title" xml:space="preserve">
+    <value>Export Compound to XML Database</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1346, 560</value>
