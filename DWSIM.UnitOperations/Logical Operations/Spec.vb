@@ -460,25 +460,42 @@ Namespace SpecialOps
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            Return 0
-
+            Select Case prop
+                Case "SpecMin"
+                    Return MinVal
+                Case "SpecMax"
+                    Return MaxVal
+                Case "Expression"
+                    Return Expression
+                Case Else
+                    Return Nothing
+            End Select
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            proplist.Add("SpecMin")
+            proplist.Add("SpecMax")
+            proplist.Add("Expression")
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
-            Return 0
-
+            Select Case prop
+                Case "SpecMin"
+                    MinVal = propval
+                Case "SpecMax"
+                    MaxVal = propval
+                Case "Expression"
+                    Expression = propval
+            End Select
+            Return True
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            Return 0
-
+            Return ""
         End Function
 
         Public Overrides Sub DisplayEditForm()

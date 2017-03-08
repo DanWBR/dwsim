@@ -369,22 +369,57 @@ Namespace SpecialOps
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            Return 0
+            Select Case prop
+                Case "MinVal"
+                    Return MinVal
+                Case "MaxVal"
+                    Return MaxVal
+                Case "AdjustValue"
+                    Return AdjustValue
+                Case "Tolerance"
+                    Return Tolerance
+                Case "StepSize"
+                    Return StepSize
+                Case "MaximumIterations"
+                    Return MaximumIterations
+                Case Else
+                    Return Nothing
+            End Select
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            proplist.Add("MinVal")
+            proplist.Add("MaxVal")
+            proplist.Add("AdjustValue")
+            proplist.Add("Tolerance")
+            proplist.Add("StepSize")
+            proplist.Add("MaximumIterations")
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
-            Return 0
+            Select Case prop
+                Case "MinVal"
+                    MinVal = propval
+                Case "MaxVal"
+                    MaxVal = propval
+                Case "AdjustValue"
+                    AdjustValue = propval
+                Case "Tolerance"
+                    Tolerance = propval
+                Case "StepSize"
+                    StepSize = propval
+                Case "MaximumIterations"
+                    MaximumIterations = propval
+            End Select
+            Return True
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            Return 0
+            Return ""
         End Function
 
         Public Overrides Sub DisplayEditForm()
