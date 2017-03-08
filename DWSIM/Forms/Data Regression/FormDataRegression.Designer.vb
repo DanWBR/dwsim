@@ -123,16 +123,16 @@ Partial Class FormDataRegression
         Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
         Me.LabelWithDivider2 = New System.Windows.Forms.LabelWithDivider()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.BtnSelectIPDB = New System.Windows.Forms.Button()
-        Me.BtnSaveIPDB = New System.Windows.Forms.Button()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.tbIPDBName = New System.Windows.Forms.TextBox()
-        Me.BtnNewIPDB = New System.Windows.Forms.Button()
         Me.tbDescription = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.tbTitle = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.DBOpenDlg = New System.Windows.Forms.OpenFileDialog()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.tbParam = New System.Windows.Forms.TextBox()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ParâmetrosDeInteraçãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalvarEmBancoDeDadosXMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -146,6 +146,8 @@ Partial Class FormDataRegression
         CType(Me.gridInEst, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridExpData, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'FaTabStrip1
@@ -812,48 +814,12 @@ Partial Class FormDataRegression
         'GroupBox4
         '
         resources.ApplyResources(Me.GroupBox4, "GroupBox4")
-        Me.GroupBox4.Controls.Add(Me.BtnSelectIPDB)
-        Me.GroupBox4.Controls.Add(Me.BtnSaveIPDB)
-        Me.GroupBox4.Controls.Add(Me.Label12)
-        Me.GroupBox4.Controls.Add(Me.tbIPDBName)
-        Me.GroupBox4.Controls.Add(Me.BtnNewIPDB)
         Me.GroupBox4.Controls.Add(Me.tbDescription)
         Me.GroupBox4.Controls.Add(Me.Label11)
         Me.GroupBox4.Controls.Add(Me.tbTitle)
         Me.GroupBox4.Controls.Add(Me.Label10)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
-        '
-        'BtnSelectIPDB
-        '
-        resources.ApplyResources(Me.BtnSelectIPDB, "BtnSelectIPDB")
-        Me.BtnSelectIPDB.Image = Global.DWSIM.My.Resources.Resources.folder_go
-        Me.BtnSelectIPDB.Name = "BtnSelectIPDB"
-        Me.BtnSelectIPDB.UseVisualStyleBackColor = True
-        '
-        'BtnSaveIPDB
-        '
-        resources.ApplyResources(Me.BtnSaveIPDB, "BtnSaveIPDB")
-        Me.BtnSaveIPDB.Image = Global.DWSIM.My.Resources.Resources.disk
-        Me.BtnSaveIPDB.Name = "BtnSaveIPDB"
-        Me.BtnSaveIPDB.UseVisualStyleBackColor = True
-        '
-        'Label12
-        '
-        resources.ApplyResources(Me.Label12, "Label12")
-        Me.Label12.Name = "Label12"
-        '
-        'tbIPDBName
-        '
-        resources.ApplyResources(Me.tbIPDBName, "tbIPDBName")
-        Me.tbIPDBName.Name = "tbIPDBName"
-        '
-        'BtnNewIPDB
-        '
-        resources.ApplyResources(Me.BtnNewIPDB, "BtnNewIPDB")
-        Me.BtnNewIPDB.Image = Global.DWSIM.My.Resources.Resources.page_white
-        Me.BtnNewIPDB.Name = "BtnNewIPDB"
-        Me.BtnNewIPDB.UseVisualStyleBackColor = True
         '
         'tbDescription
         '
@@ -875,19 +841,54 @@ Partial Class FormDataRegression
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
         '
-        'DBOpenDlg
+        'GroupBox3
         '
-        Me.DBOpenDlg.CheckFileExists = False
-        resources.ApplyResources(Me.DBOpenDlg, "DBOpenDlg")
+        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
+        Me.GroupBox3.Controls.Add(Me.tbParam)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.TabStop = False
+        '
+        'tbParam
+        '
+        resources.ApplyResources(Me.tbParam, "tbParam")
+        Me.tbParam.Name = "tbParam"
+        Me.tbParam.ReadOnly = True
+        '
+        'MenuStrip1
+        '
+        resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ParâmetrosDeInteraçãoToolStripMenuItem})
+        Me.MenuStrip1.Name = "MenuStrip1"
+        '
+        'ParâmetrosDeInteraçãoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.ParâmetrosDeInteraçãoToolStripMenuItem, "ParâmetrosDeInteraçãoToolStripMenuItem")
+        Me.ParâmetrosDeInteraçãoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalvarEmBancoDeDadosXMLToolStripMenuItem})
+        Me.ParâmetrosDeInteraçãoToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
+        Me.ParâmetrosDeInteraçãoToolStripMenuItem.MergeIndex = 2
+        Me.ParâmetrosDeInteraçãoToolStripMenuItem.Name = "ParâmetrosDeInteraçãoToolStripMenuItem"
+        '
+        'SalvarEmBancoDeDadosXMLToolStripMenuItem
+        '
+        resources.ApplyResources(Me.SalvarEmBancoDeDadosXMLToolStripMenuItem, "SalvarEmBancoDeDadosXMLToolStripMenuItem")
+        Me.SalvarEmBancoDeDadosXMLToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.database_save1
+        Me.SalvarEmBancoDeDadosXMLToolStripMenuItem.Name = "SalvarEmBancoDeDadosXMLToolStripMenuItem"
+        '
+        'SaveFileDialog1
+        '
+        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
         '
         'FormDataRegression
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.FaTabStrip1)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox4)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormDataRegression"
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
@@ -905,7 +906,12 @@ Partial Class FormDataRegression
         CType(Me.GridExpData, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -997,12 +1003,6 @@ Partial Class FormDataRegression
     Friend WithEvents colts As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colP As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents chkDoTDepRegression As System.Windows.Forms.CheckBox
-    Friend WithEvents BtnNewIPDB As System.Windows.Forms.Button
-    Friend WithEvents BtnSaveIPDB As System.Windows.Forms.Button
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents tbIPDBName As System.Windows.Forms.TextBox
-    Friend WithEvents BtnSelectIPDB As System.Windows.Forms.Button
-    Friend WithEvents DBOpenDlg As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents colpar As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1011,4 +1011,10 @@ Partial Class FormDataRegression
     Friend WithEvents colmax As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents cf As System.Windows.Forms.DataGridViewCheckBoxColumn
     Friend WithEvents btnSearchKDB As System.Windows.Forms.Button
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents tbParam As System.Windows.Forms.TextBox
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents ParâmetrosDeInteraçãoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SalvarEmBancoDeDadosXMLToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 End Class

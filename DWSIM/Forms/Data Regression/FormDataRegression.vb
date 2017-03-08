@@ -57,6 +57,8 @@ Public Class FormDataRegression
 
     Private Sub FormDataRegression_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Me.MenuStrip1.Visible = False
+
         IP = New InteractionParameter
 
         'get list of compounds
@@ -118,7 +120,6 @@ Public Class FormDataRegression
             .title = tbTitle.Text
             .description = tbDescription.Text
             .results = tbRegResults.Text
-            .databasepath = tbIPDBName.Text
             .filename = currcase.filename
             For Each r As DataGridViewRow In Me.GridExpData.Rows
                 If r.Index < Me.GridExpData.Rows.Count - 1 Then
@@ -239,7 +240,6 @@ Public Class FormDataRegression
             Me.cbPunit.SelectedItem = .punit
             Me.tbTitle.Text = .title
             Me.tbDescription.Text = .description
-            Me.tbIPDBName.Text = .databasepath
 
             Dim val0 As Boolean, val1, val2, val3, val4, val5, val6, val7 As String, i As Integer
 
@@ -1447,6 +1447,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             output = True
 
             If Not chkDoTDepRegression.Checked Then
+
                 DoRegression(initval)
 
                 Dim k As Integer
@@ -1454,6 +1455,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 For k = 0 To regressedparameters.Count - 1
                     IP.Parameters(regressedparameters.Keys(k)) = regressedparameters.Values(k)
                 Next
+
             Else
 
                 'get initial list of included parameters.
@@ -1575,6 +1577,14 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
                 tbRegResults.AppendText("done")
 
+            End If
+
+            If IP IsNot Nothing Then
+                tbParam.Text = ""
+                tbParam.AppendText("Model: " + currcase.model + vbCrLf)
+                For Each param In IP.Parameters
+                    tbParam.AppendText(param.Key + ": " + param.Value.ToString() + vbCrLf)
+                Next
             End If
 
         Catch ex As Exception
@@ -3682,46 +3692,6 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     End Sub
 
-    Private Sub BtnNewIPDB_Click(sender As System.Object, e As System.EventArgs) Handles BtnNewIPDB.Click
-        'Create new Interaction Parameter User Database
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            If Not File.Exists(Me.DBOpenDlg.FileName) Then File.Create(Me.DBOpenDlg.FileName)
-            Me.tbIPDBName.Text = Me.DBOpenDlg.FileName
-        End If
-    End Sub
-
-    Private Sub BtnSaveIPDB_Click(sender As System.Object, e As System.EventArgs) Handles BtnSaveIPDB.Click
-        'Save Regression results to database
-        If IP.Parameters.Count > 0 Then
-            With currcase
-                IP.Comp1 = .comp1
-                IP.Comp2 = .comp2
-                IP.Model = .model
-                IP.DataType = [Enum].GetName(GetType(DataType), .datatype)
-                IP.Description = .description
-                IP.RegressionFile = .filename
-            End With
-            If Me.tbIPDBName.Text <> "" Then
-                Try
-                    Global.DWSIM.Thermodynamics.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, tbIPDBName.Text, True)
-                    MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
-                Catch ex As Exception
-                    MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            End If
-        Else
-            MessageBox.Show(DWSIM.App.GetLocalString("NoRegParmsAvail"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End If
-
-    End Sub
-
-    Private Sub BtnSelectIPDB_Click(sender As System.Object, e As System.EventArgs) Handles BtnSelectIPDB.Click
-        'Select Interaction user database
-        If Me.DBOpenDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Me.tbIPDBName.Text = Me.DBOpenDlg.FileName
-        End If
-    End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Select Case cbModel.SelectedItem.ToString
             Case "NRTL"
@@ -3847,6 +3817,36 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                               fsearch2.Show()
                                           End Sub
 
+
+    End Sub
+
+    Private Sub SalvarEmBancoDeDadosXMLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalvarEmBancoDeDadosXMLToolStripMenuItem.Click
+
+        Me.SaveFileDialog1.FileName = currcase.databasepath
+        If Me.SaveFileDialog1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            'Save Regression results to database
+            If IP.Parameters.Count > 0 Then
+                With currcase
+                    IP.Comp1 = .comp1
+                    IP.Comp2 = .comp2
+                    IP.Model = .model
+                    IP.DataType = [Enum].GetName(GetType(DataType), .datatype)
+                    IP.Description = .description
+                    IP.RegressionFile = .filename
+                End With
+                If Me.SaveFileDialog1.FileName <> "" Then
+                    currcase.databasepath = Me.SaveFileDialog1.FileName
+                    Try
+                        Global.DWSIM.Thermodynamics.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, Me.SaveFileDialog1.FileName, True)
+                        MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
+                    Catch ex As Exception
+                        MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") & ex.Message.ToString, DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End If
+            Else
+                MessageBox.Show(DWSIM.App.GetLocalString("NoRegParmsAvail"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        End If
 
     End Sub
 
