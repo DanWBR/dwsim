@@ -456,9 +456,6 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormDataRegression</value>
   </data>
-  <data name="&gt;&gt;cbCompound1.Name" xml:space="preserve">
-    <value>cbCompound1</value>
-  </data>
   <data name="&gt;&gt;graph.Name" xml:space="preserve">
     <value>graph</value>
   </data>
@@ -744,8 +741,8 @@
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>Gerar Pontos (UNIQUAC)</value>
   </data>
-  <data name="&gt;&gt;colval.Name" xml:space="preserve">
-    <value>colval</value>
+  <data name="&gt;&gt;cbCompound1.Name" xml:space="preserve">
+    <value>cbCompound1</value>
   </data>
   <data name="&gt;&gt;chkIdealVaporPhase.Name" xml:space="preserve">
     <value>chkIdealVaporPhase</value>
@@ -1677,8 +1674,8 @@
   <data name="gridstats.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 249</value>
+  <data name="&gt;&gt;colval.Name" xml:space="preserve">
+    <value>colval</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -3628,6 +3625,9 @@
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 249</value>
+  </data>
   <data name="&gt;&gt;cbTunit.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
@@ -3679,9 +3679,6 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Estimativas Iniciais</value>
   </data>
-  <metadata name="colx1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="colT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -3730,8 +3727,11 @@
   <metadata name="colx2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>290, 8</value>
+  <metadata name="coly1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tcalc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="dpp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3748,8 +3748,8 @@
   <metadata name="dxx2p.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="coly1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>290, 8</value>
   </metadata>
   <metadata name="dyy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3793,7 +3793,7 @@
   <metadata name="dx2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="tcalc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colpar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="dp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3808,7 +3808,7 @@
   <metadata name="y1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="colpar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colx1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="x1l1calc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

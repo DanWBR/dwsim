@@ -50,6 +50,8 @@ Public Class FormCompoundCreator
 
     Private Sub FormCompoundCreator_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Me.MenuStrip1.Visible = False
+
         'Grid UNIFAC
 
         Dim pathsep = System.IO.Path.DirectorySeparatorChar
@@ -3304,9 +3306,12 @@ Public Class FormCompoundCreator
 
         If SaveFileDialog2.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
+
                 StoreData()
 
                 mycase.database = SaveFileDialog2.FileName
+
+                If Not File.Exists(SaveFileDialog2.FileName) Then File.WriteAllText(SaveFileDialog2.FileName, "")
 
                 'In case of additionalt Joback groups no UNIFAC calculation is possible anymore.
                 'Delete UNIFAC groups to prevent wrong calculations.

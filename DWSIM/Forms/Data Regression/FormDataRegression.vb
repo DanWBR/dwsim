@@ -3836,6 +3836,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 End With
                 If Me.SaveFileDialog1.FileName <> "" Then
                     currcase.databasepath = Me.SaveFileDialog1.FileName
+                    If Not File.Exists(SaveFileDialog1.FileName) Then File.WriteAllText(SaveFileDialog1.FileName, "")
                     Try
                         Global.DWSIM.Thermodynamics.Databases.UserIPDB.AddInteractionParameters(New InteractionParameter() {IP}, Me.SaveFileDialog1.FileName, True)
                         MessageBox.Show(DWSIM.App.GetLocalString("ParametrosAdicionadosComSucesso"))
