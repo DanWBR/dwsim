@@ -34,7 +34,7 @@ Namespace Utilities.Hypos.Methods
 
             'Load Elements data
             m_JElements = New System.Collections.Generic.Dictionary(Of String, Element)
- 
+
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.Elements.txt")
                 Using parser As New TextFieldParser(filestr)
                     While Not parser.EndOfData
@@ -57,7 +57,7 @@ Namespace Utilities.Hypos.Methods
 
             'Load Joback-groups data
             m_Jgroups = New System.Collections.Generic.Dictionary(Of Integer, JobackGroup)
-     
+
             Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.JobackGroups.txt")
                 Using parser As New TextFieldParser(filestr)
                     While Not parser.EndOfData

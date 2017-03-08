@@ -188,10 +188,10 @@
     <value>The list below contains the best matches for the searched text. Select the item which you want to import data from and click "Next".</value>
   </data>
   <data name="dgResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 110</value>
+    <value>18, 146</value>
   </data>
   <data name="dgResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 175</value>
+    <value>525, 139</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 13</value>
@@ -203,12 +203,15 @@
     <value>18, 31</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 69</value>
+    <value>516, 112</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Review a summary of the imported data:
-- Minimum set of required data: Molecular Weight, Critical Temperature, Critical Pressure and Acentric Factor.
-- Properties not found will be estimated whenever possible.
+
+- Minimum set of required data: Molecular Weight, Critical Temperature, Critical Pressure, Acentric Factor and Ideal Gas Heat Capacity data.
+
+- All remaining properties will be estimated whenever possible.
+
 If everything is ok, click "Finish" to add the imported compound to the simulation.</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">

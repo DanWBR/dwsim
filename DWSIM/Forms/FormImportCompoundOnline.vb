@@ -161,7 +161,8 @@ Public Class FormImportCompoundOnline
                                                                                  If compoundk.Molar_Weight > 0.0# And
                                                                                      compoundk.Critical_Temperature > 0.0# And
                                                                                      compoundk.Critical_Pressure > 0.0# And
-                                                                                     compoundk.Acentric_Factor > 0.0# Then
+                                                                                     compoundk.Acentric_Factor > 0.0# And
+                                                                                     compoundk.IdealgasCpEquation <> "" Then
                                                                                      btnNext.Enabled = True
                                                                                  Else
                                                                                      btnNext.Enabled = False

@@ -4944,9 +4944,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
             If Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IsPF = 1 Then
 
                 With Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties
-
                     Return Auxiliary.PROPS.Cpig_lk(.PF_Watson_K, .Acentric_Factor, T) '* .Molar_Weight
-
                 End With
 
             Else
@@ -4982,11 +4980,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_C
                     D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_D
                     E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
-                    '<rppc name="Ideal gas heat capacity (RPP)"  units="J/kmol/K" >
                     If Integer.TryParse(eqno, New Integer) Then
                         result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
                     Else
-                        result = Me.ParseEquation(eqno, A, B, C, D, E, T)
+                        result = Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
                     Return result
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Then
@@ -5139,7 +5136,13 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                         If Integer.TryParse(eqno, New Integer) Then
                             result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'Pa
                         Else
-                            result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa
+                            If eqno = "" Then
+                                With Me.CurrentMaterialStream.Phases(0).Compounds(sub1)
+                                    result = Auxiliary.PROPS.Pvp_leekesler(T, .ConstantProperties.Critical_Temperature, .ConstantProperties.Critical_Pressure, .ConstantProperties.Acentric_Factor)
+                                End With
+                            Else
+                                result = Me.ParseEquation(eqno, A, B, C, D, E, T) 'Pa
+                            End If
                         End If
                     End If
                     Return result
@@ -7406,54 +7409,62 @@ Final3:
 
         Function ParseEquation(ByVal expression As String, ByVal A As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal E As Double, ByVal T As Double) As Double
 
-            Dim lterm As String = ""
-            Dim rterm As String = ""
+            Try
 
-            If expression.Contains("=") Then
-                lterm = expression.Split("=")(0).Replace(" ", "")
-                rterm = expression.Split("=")(1).TrimEnd(".")
-            Else
-                rterm = expression.TrimEnd(".")
-            End If
+                Dim lterm As String = ""
+                Dim rterm As String = ""
 
-            Dim numexp As String = ""
-            Dim yunit As String = ""
-            Dim xunit As String = ""
-
-            If expression.Contains("where") Then
-                numexp = rterm.Split("where")(0).Replace(" ", "").Replace("ln", "log")
-                Dim unit1, unit2 As String
-                unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
-                unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                If unit1.Contains("T in") Then
-                    xunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                    yunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                If expression.Contains("=") Then
+                    lterm = expression.Split("=")(0).Replace(" ", "")
+                    rterm = expression.Split("=")(1).TrimEnd(".")
                 Else
-                    xunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
-                    yunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    rterm = expression.TrimEnd(".")
                 End If
-            Else
-                numexp = rterm.Replace(" ", "").Replace("ln", "log")
-            End If
 
-            If lterm.Contains("ln") Then
-                numexp = "exp(" + numexp + ")"
-            End If
+                Dim numexp As String = ""
+                Dim yunit As String = ""
+                Dim xunit As String = ""
 
-            Dim vars As New Dictionary(Of String, YAMP.Value)
+                If expression.Contains("where") Then
+                    numexp = rterm.Split("where")(0).Replace(" ", "").Replace("ln", "log")
+                    Dim unit1, unit2 As String
+                    unit1 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(0).Trim
+                    unit2 = rterm.Split(New String() {"where"}, StringSplitOptions.RemoveEmptyEntries)(1).Split(New String() {"and", ","}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    If unit1.Contains("T in") Then
+                        xunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    Else
+                        xunit = unit2.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                        yunit = unit1.Split(New String() {"in"}, StringSplitOptions.RemoveEmptyEntries)(1).Trim
+                    End If
+                Else
+                    numexp = rterm.Replace(" ", "").Replace("ln", "log")
+                End If
 
-            vars.Add("T", New YAMP.ScalarValue((cv.ConvertToSI(xunit, T))))
-            vars.Add("A", New YAMP.ScalarValue(A))
-            vars.Add("B", New YAMP.ScalarValue(B))
-            vars.Add("C", New YAMP.ScalarValue(C))
-            vars.Add("D", New YAMP.ScalarValue(D))
-            vars.Add("E", New YAMP.ScalarValue(E))
-            vars.Add("F", New YAMP.ScalarValue(0.0#))
-            vars.Add("G", New YAMP.ScalarValue(0.0#))
-            vars.Add("H", New YAMP.ScalarValue(0.0#))
-            Dim result = DirectCast(parser.Evaluate(numexp, vars), YAMP.ScalarValue).Value
+                If lterm.Contains("ln") Then
+                    numexp = "exp(" + numexp + ")"
+                End If
 
-            Return cv.ConvertToSI(yunit, result)
+                Dim vars As New Dictionary(Of String, YAMP.Value)
+
+                vars.Add("T", New YAMP.ScalarValue((cv.ConvertToSI(xunit, T))))
+                vars.Add("A", New YAMP.ScalarValue(A))
+                vars.Add("B", New YAMP.ScalarValue(B))
+                vars.Add("C", New YAMP.ScalarValue(C))
+                vars.Add("D", New YAMP.ScalarValue(D))
+                vars.Add("E", New YAMP.ScalarValue(E))
+                vars.Add("F", New YAMP.ScalarValue(0.0#))
+                vars.Add("G", New YAMP.ScalarValue(0.0#))
+                vars.Add("H", New YAMP.ScalarValue(0.0#))
+                Dim result = DirectCast(parser.Evaluate(numexp, vars), YAMP.ScalarValue).Value
+
+                Return cv.ConvertToSI(yunit, result)
+
+            Catch ex As Exception
+
+                Throw New Exception("Error parsing string for numerical expression: '" + expression + "'. Check temperature-dependent property expressions for the selected compounds and try again.")
+
+            End Try
 
         End Function
 
