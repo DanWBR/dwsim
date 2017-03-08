@@ -56,8 +56,12 @@ Public Class FormImportCompoundDataChemeo
                                                         End Function, tcs.Token)
 
                 t.ContinueWith(Sub()
-                                   fsearch.Close()
                                    UIThread(Sub()
+                                                fsearch.Close()
+                                                If DWSIM.App.IsRunningOnMono Then
+                                                    fsearch.Hide()
+                                                    fsearch.Close()
+                                                End If
                                                 Enabled = True
                                                 Focus()
                                                 If t.Exception Is Nothing Then
@@ -73,7 +77,7 @@ Public Class FormImportCompoundDataChemeo
                                                     MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
                                                 End If
                                             End Sub)
-                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                               End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
@@ -106,8 +110,12 @@ Public Class FormImportCompoundDataChemeo
                                                                                                  End Function, tcs.Token)
 
                 t.ContinueWith(Sub()
-                                   fsearch.Close()
                                    UIThread(Sub()
+                                                fsearch.Close()
+                                                If DWSIM.App.IsRunningOnMono Then
+                                                    fsearch.Hide()
+                                                    fsearch.Close()
+                                                End If
                                                 Enabled = True
                                                 Focus()
                                                 If t.Exception Is Nothing Then
@@ -118,7 +126,7 @@ Public Class FormImportCompoundDataChemeo
                                                 End If
 
                                             End Sub)
-                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                               End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()

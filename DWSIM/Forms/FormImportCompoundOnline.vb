@@ -60,9 +60,15 @@ Public Class FormImportCompoundOnline
                                                             Return ChemeoParser.GetCompoundIDs(searchtext, False)
                                                         End Function, tcs.Token)
 
+                t.Start()
+
                 t.ContinueWith(Sub()
-                                   fsearch.Close()
                                    UIThread(Sub()
+                                                fsearch.Close()
+                                                If DWSIM.App.IsRunningOnMono Then
+                                                    fsearch.Hide()
+                                                    fsearch.Close()
+                                                End If
                                                 Me.Enabled = True
                                                 Focus()
                                                 If t.Exception Is Nothing Then
@@ -78,7 +84,7 @@ Public Class FormImportCompoundOnline
                                                     MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
                                                 End If
                                             End Sub)
-                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                               End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
@@ -86,7 +92,6 @@ Public Class FormImportCompoundOnline
                                                         tcs.Cancel()
                                                     End Sub
 
-                t.Start()
 
             Case "Panel2"
 
@@ -133,8 +138,12 @@ Public Class FormImportCompoundOnline
                                               Task.WaitAll(t1, t2, t3)
                                           End If
                                       End Sub).ContinueWith(Sub()
-                                                                fsearch.Close()
                                                                 UIThread(Sub()
+                                                                             fsearch.Close()
+                                                                             If DWSIM.App.IsRunningOnMono Then
+                                                                                 fsearch.Hide()
+                                                                                 fsearch.Close()
+                                                                             End If
                                                                              Me.Enabled = True
                                                                              Focus()
                                                                              If Not t1.Status = TaskStatus.WaitingToRun AndAlso t1.Exception Is Nothing Then
@@ -159,7 +168,7 @@ Public Class FormImportCompoundOnline
                                                                                  End If
                                                                              End If
                                                                          End Sub)
-                                                            End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                                                            End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()

@@ -3778,25 +3778,31 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                                 End Function, tcs.Token)
 
         t.ContinueWith(Sub()
-                           fsearch.Close()
-                           If t.Exception Is Nothing Then
-                               fresult.Enabled = True
-                               fresult.ListBox1.Items.Clear()
-                               sets = t.Result
-                               fresult.lblRecords.Text = t.Result.Count
-                               For Each item In t.Result
-                                   fresult.ListBox1.Items.Add(item(0).PadRight(10) + item(1))
-                               Next
-                               If t.Result.Count = 0 Then
-                                   fresult.Button1.Enabled = False
-                               Else
-                                   fresult.Button1.Enabled = True
-                               End If
-                           Else
-                               fresult.Close()
-                               MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
-                           End If
-                       End Sub, TaskContinuationOptions.ExecuteSynchronously)
+                           UIThread(Sub()
+                                        fsearch.Close()
+                                        If DWSIM.App.IsRunningOnMono Then
+                                            fsearch.Hide()
+                                            fsearch.Close()
+                                        End If
+                                        If t.Exception Is Nothing Then
+                                            fresult.Enabled = True
+                                            fresult.ListBox1.Items.Clear()
+                                            sets = t.Result
+                                            fresult.lblRecords.Text = t.Result.Count
+                                            For Each item In t.Result
+                                                fresult.ListBox1.Items.Add(item(0).PadRight(10) + item(1))
+                                            Next
+                                            If t.Result.Count = 0 Then
+                                                fresult.Button1.Enabled = False
+                                            Else
+                                                fresult.Button1.Enabled = True
+                                            End If
+                                        Else
+                                            fresult.Close()
+                                            MessageBox.Show(t.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                        End If
+                                    End Sub)
+                       End Sub)
 
         AddHandler fsearch.btnCancel.Click, Sub()
                                                 fsearch.Close()
@@ -3816,21 +3822,25 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                                                                        tcs2.Cancel()
                                                                                    End Sub
                                               t2.ContinueWith(Sub()
-                                                                  fsearch2.Close()
-                                                                  If t2.Exception Is Nothing Then
-                                                                      If Not t2.Result Is Nothing Then
-                                                                          UIThread(Sub()
+                                                                  UIThread(Sub()
+                                                                               fsearch2.Close()
+                                                                               If DWSIM.App.IsRunningOnMono Then
+                                                                                   fsearch2.Hide()
+                                                                                   fsearch2.Close()
+                                                                               End If
+                                                                               If t2.Exception Is Nothing Then
+                                                                                   If Not t2.Result Is Nothing Then
                                                                                        Me.GridExpData.Rows.Clear()
                                                                                        For Each record In t2.Result.Data
                                                                                            Me.GridExpData.Rows.Add(True, record.X, "", record.Y, record.T, "", "", record.P)
                                                                                        Next
                                                                                        cbTunit.SelectedItem = t2.Result.Tunits
                                                                                        cbPunit.SelectedItem = t2.Result.Punits
-                                                                                   End Sub)
-                                                                      End If
-                                                                  Else
-                                                                      MessageBox.Show(t2.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
-                                                                  End If
+                                                                                   End If
+                                                                               Else
+                                                                                   MessageBox.Show(t2.Exception.GetBaseException.Message, DWSIM.App.GetLocalString("Erro"))
+                                                                               End If
+                                                                           End Sub)
                                                               End Sub, TaskContinuationOptions.ExecuteSynchronously)
                                               t2.Start()
                                               fresult.Close()

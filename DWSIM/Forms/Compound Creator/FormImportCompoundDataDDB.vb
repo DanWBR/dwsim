@@ -54,8 +54,8 @@ Public Class FormImportCompoundDataDDB
                                                                                End Function, tcs.Token)
 
                 t.ContinueWith(Sub()
-                                   fsearch.Close()
                                    UIThread(Sub()
+                                                fsearch.Close()
                                                 Enabled = True
                                                 Focus()
                                                 If t.Exception Is Nothing Then

@@ -266,7 +266,7 @@ Namespace DWSIM
 
             If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 
-            If configfile = "" Then configfile = +"dwsim.ini"
+            If configfile = "" Then configfile = configfiledir & "dwsim.ini"
             If Not File.Exists(configfile) Then File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "default.ini", configfile)
 
             Dim source As New IniConfigSource(configfile)
@@ -376,7 +376,7 @@ Namespace DWSIM
             If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 
             If configfile = "" Then
-                configfile = configfiledir + "dwsim.ini"
+                configfile = configfiledir & "dwsim.ini"
                 File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "default.ini", configfile, True)
             Else
                 File.Copy(My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "excelcompat.ini", configfile, True)
@@ -445,13 +445,9 @@ Namespace DWSIM
             source.Configs("Misc").Set("HideSolidPhase_COInterface", My.Settings.HideSolidPhase_CO)
             source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", My.Settings.IgnoreCompoundPropertiesOnLoad)
 
-            If Not source.Configs.Contains("OctaveBridge") Then source.Configs.Add("OctaveBridge")
-
             source.Configs("OctaveBridge").Set("OctavePath", My.Settings.OctavePath)
             source.Configs("OctaveBridge").Set("OctaveTempPath", My.Settings.OctaveTempPath)
             source.Configs("OctaveBridge").Set("OctaveProcessTimeout", My.Settings.OctaveProcessTimeout)
-
-            If Not source.Configs.Contains("OSInfo") Then source.Configs.Add("OSInfo")
 
             source.Configs("OSInfo").Set("Platform", My.Settings.CurrentPlatform)
             source.Configs("OSInfo").Set("Environment", My.Settings.CurrentEnvironment)
