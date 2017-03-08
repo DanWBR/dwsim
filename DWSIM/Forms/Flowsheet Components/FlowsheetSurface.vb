@@ -2680,93 +2680,98 @@ Public Class FlowsheetSurface
             Else
                 obj = e.Data.GetData("System.RuntimeType")
             End If
-            Dim tobj As ObjectType = ObjectType.Nenhum
+
             Dim p As Drawing.Point = Me.FlowsheetDesignSurface.PointToClient(New Drawing.Point(e.X, e.Y))
             Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(p.X, p.Y)
             Dim mpx = mousePT.X - 40
             Dim mpy = mousePT.Y - 40
-            Select Case obj.Name
-                Case "Adjust"
-                    tobj = ObjectType.OT_Adjust
-                Case "Spec"
-                    tobj = ObjectType.OT_Spec
-                Case "Recycle"
-                    tobj = ObjectType.OT_Recycle
-                Case "EnergyRecycle"
-                    tobj = ObjectType.OT_EnergyRecycle
-                Case "Mixer"
-                    tobj = ObjectType.NodeIn
-                Case "Splitter"
-                    tobj = ObjectType.NodeOut
-                Case "Pump"
-                    tobj = ObjectType.Pump
-                Case "Tank"
-                    tobj = ObjectType.Tank
-                Case "Vessel"
-                    tobj = ObjectType.Vessel
-                Case "MaterialStream"
-                    tobj = ObjectType.MaterialStream
-                Case "EnergyStream"
-                    tobj = ObjectType.EnergyStream
-                Case "Compressor"
-                    tobj = ObjectType.Compressor
-                Case "Expander"
-                    tobj = ObjectType.Expander
-                Case "Cooler"
-                    tobj = ObjectType.Cooler
-                Case "Heater"
-                    tobj = ObjectType.Heater
-                Case "Pipe"
-                    tobj = ObjectType.Pipe
-                Case "Valve"
-                    tobj = ObjectType.Valve
-                Case "Reactor_Conversion"
-                    tobj = ObjectType.RCT_Conversion
-                Case "Reactor_Equilibrium"
-                    tobj = ObjectType.RCT_Equilibrium
-                Case "Reactor_Gibbs"
-                    tobj = ObjectType.RCT_Gibbs
-                Case "Reactor_CSTR"
-                    tobj = ObjectType.RCT_CSTR
-                Case "Reactor_PFR"
-                    tobj = ObjectType.RCT_PFR
-                Case "HeatExchanger"
-                    tobj = ObjectType.HeatExchanger
-                Case "ShortcutColumn"
-                    tobj = ObjectType.ShortcutColumn
-                Case "DistillationColumn"
-                    tobj = ObjectType.DistillationColumn
-                Case "AbsorptionColumn"
-                    tobj = ObjectType.AbsorptionColumn
-                Case "ReboiledAbsorber"
-                    tobj = ObjectType.ReboiledAbsorber
-                Case "RefluxedAbsorber"
-                    tobj = ObjectType.RefluxedAbsorber
-                Case "ComponentSeparator"
-                    tobj = ObjectType.ComponentSeparator
-                Case "OrificePlate"
-                    tobj = ObjectType.OrificePlate
-                Case "CustomUO"
-                    tobj = ObjectType.CustomUO
-                Case "ExcelUO"
-                    tobj = ObjectType.ExcelUO
-                Case "CapeOpenUO"
-                    tobj = ObjectType.CapeOpenUO
-                Case "SolidsSeparator"
-                    tobj = ObjectType.SolidSeparator
-                Case "Filter"
-                    tobj = ObjectType.Filter
-                Case "Flowsheet"
-                    tobj = ObjectType.FlowsheetUO
-            End Select
 
-            AddObjectToSurface(tobj, mpx, mpy)
-
-            If tobj = ObjectType.MaterialStream And Not My.Computer.Keyboard.ShiftKeyDown Then
-
-            End If
+            AddObject(obj.Name, mpx, mpy)
 
         End If
+
+    End Sub
+
+    Sub AddObject(objname As String, x As Integer, y As Integer)
+
+        Dim tobj As ObjectType = ObjectType.Nenhum
+
+        Select Case objname
+            Case "Adjust"
+                tobj = ObjectType.OT_Adjust
+            Case "Spec"
+                tobj = ObjectType.OT_Spec
+            Case "Recycle"
+                tobj = ObjectType.OT_Recycle
+            Case "EnergyRecycle"
+                tobj = ObjectType.OT_EnergyRecycle
+            Case "Mixer"
+                tobj = ObjectType.NodeIn
+            Case "Splitter"
+                tobj = ObjectType.NodeOut
+            Case "Pump"
+                tobj = ObjectType.Pump
+            Case "Tank"
+                tobj = ObjectType.Tank
+            Case "Vessel"
+                tobj = ObjectType.Vessel
+            Case "MaterialStream"
+                tobj = ObjectType.MaterialStream
+            Case "EnergyStream"
+                tobj = ObjectType.EnergyStream
+            Case "Compressor"
+                tobj = ObjectType.Compressor
+            Case "Expander"
+                tobj = ObjectType.Expander
+            Case "Cooler"
+                tobj = ObjectType.Cooler
+            Case "Heater"
+                tobj = ObjectType.Heater
+            Case "Pipe"
+                tobj = ObjectType.Pipe
+            Case "Valve"
+                tobj = ObjectType.Valve
+            Case "Reactor_Conversion"
+                tobj = ObjectType.RCT_Conversion
+            Case "Reactor_Equilibrium"
+                tobj = ObjectType.RCT_Equilibrium
+            Case "Reactor_Gibbs"
+                tobj = ObjectType.RCT_Gibbs
+            Case "Reactor_CSTR"
+                tobj = ObjectType.RCT_CSTR
+            Case "Reactor_PFR"
+                tobj = ObjectType.RCT_PFR
+            Case "HeatExchanger"
+                tobj = ObjectType.HeatExchanger
+            Case "ShortcutColumn"
+                tobj = ObjectType.ShortcutColumn
+            Case "DistillationColumn"
+                tobj = ObjectType.DistillationColumn
+            Case "AbsorptionColumn"
+                tobj = ObjectType.AbsorptionColumn
+            Case "ReboiledAbsorber"
+                tobj = ObjectType.ReboiledAbsorber
+            Case "RefluxedAbsorber"
+                tobj = ObjectType.RefluxedAbsorber
+            Case "ComponentSeparator"
+                tobj = ObjectType.ComponentSeparator
+            Case "OrificePlate"
+                tobj = ObjectType.OrificePlate
+            Case "CustomUO"
+                tobj = ObjectType.CustomUO
+            Case "ExcelUO"
+                tobj = ObjectType.ExcelUO
+            Case "CapeOpenUO"
+                tobj = ObjectType.CapeOpenUO
+            Case "SolidsSeparator"
+                tobj = ObjectType.SolidSeparator
+            Case "Filter"
+                tobj = ObjectType.Filter
+            Case "Flowsheet"
+                tobj = ObjectType.FlowsheetUO
+        End Select
+
+        AddObjectToSurface(tobj, x, y)
 
     End Sub
 
@@ -3428,6 +3433,20 @@ Public Class FlowsheetSurface
         Finally
             My.Application.PushUndoRedoAction = True
         End Try
+
+    End Sub
+
+    Private Sub CMS_NoSel_Opened(sender As Object, e As EventArgs) Handles CMS_NoSel.Opened
+
+        Dim currposx = Me.FlowsheetDesignSurface.PointToClient(MousePosition).X
+        Dim currposy = Me.FlowsheetDesignSurface.PointToClient(MousePosition).Y
+        AddNewTSMI.DropDownItems.Clear()
+        For Each item In Flowsheet.FormObjects.ObjectList
+            AddNewTSMI.DropDownItems.Add(item.GetDisplayName, item.GetIconBitmap, Sub()
+                                                                                      Dim pos = FlowsheetDesignSurface.gscTogoc(currposx, currposy)
+                                                                                      AddObject(item.GetType.Name, pos.X, pos.Y)
+                                                                                  End Sub)
+        Next
 
     End Sub
 

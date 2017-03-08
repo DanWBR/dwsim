@@ -25,6 +25,8 @@ Partial Class FlowsheetSurface
         Me.CMS_NoSel = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AddNewTSMI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiarParaAareaDeTransferenciaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -101,6 +103,7 @@ Partial Class FlowsheetSurface
         resources.ApplyResources(Me.FlowsheetDesignSurface, "FlowsheetDesignSurface")
         Me.FlowsheetDesignSurface.AllowDrop = True
         Me.FlowsheetDesignSurface.BackColor = System.Drawing.Color.White
+        Me.FlowsheetDesignSurface.Editor = Nothing
         Me.FlowsheetDesignSurface.GridColor = System.Drawing.Color.GhostWhite
         Me.FlowsheetDesignSurface.GridLineWidth = 1
         Me.FlowsheetDesignSurface.GridSize = 25.0!
@@ -123,7 +126,7 @@ Partial Class FlowsheetSurface
         'CMS_NoSel
         '
         resources.ApplyResources(Me.CMS_NoSel, "CMS_NoSel")
-        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem5, Me.CopiarParaAareaDeTransferenciaToolStripMenuItem, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem})
+        Me.CMS_NoSel.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem3, Me.ToolStripSeparator1, Me.AddNewTSMI, Me.ToolStripSeparator9, Me.ToolStripMenuItem2, Me.ToolStripMenuItem5, Me.CopiarParaAareaDeTransferenciaToolStripMenuItem, Me.ExibirTudoToolStripMenuItem, Me.ZoomPadrao100ToolStripMenuItem, Me.CentralizarToolStripMenuItem})
         Me.CMS_NoSel.Name = "ContextMenuStrip1"
         '
         'ToolStripMenuItem3
@@ -135,6 +138,17 @@ Partial Class FlowsheetSurface
         '
         resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        '
+        'AddNewTSMI
+        '
+        resources.ApplyResources(Me.AddNewTSMI, "AddNewTSMI")
+        Me.AddNewTSMI.Image = Global.DWSIM.My.Resources.Resources.add
+        Me.AddNewTSMI.Name = "AddNewTSMI"
+        '
+        'ToolStripSeparator9
+        '
+        resources.ApplyResources(Me.ToolStripSeparator9, "ToolStripSeparator9")
+        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
         '
         'ToolStripMenuItem2
         '
@@ -584,4 +598,6 @@ Partial Class FlowsheetSurface
     Friend WithEvents SplitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MergeStreamsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents AddNewTSMI As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
 End Class

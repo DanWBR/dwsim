@@ -7,6 +7,8 @@ Public Class SimulationObjectsPanel
 
     Public Flowsheet As Interfaces.IFlowsheet
 
+    Public ObjectList As New List(Of Interfaces.ISimulationObject)
+
     Private Sub Simulation_Objects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Me.AutoHidePortion = 580
@@ -33,6 +35,7 @@ Public Class SimulationObjectsPanel
                     add = obj.MobileCompatible
                 End If
                 If add Then
+                    ObjectList.Add(obj)
                     obj.SetFlowsheet(Flowsheet)
                     Dim li As New ListItem
                     li.lblName.Text = obj.GetDisplayName
