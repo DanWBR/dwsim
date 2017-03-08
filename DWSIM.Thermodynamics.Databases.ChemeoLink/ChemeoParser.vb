@@ -102,6 +102,8 @@ Public Class ChemeoParser
 
         Dim comp As New BaseClasses.ConstantProperties
 
+        comp.Comments = website
+
         comp.OriginalDB = "Cheméo"
 
         comp.CurrentDB = "Cheméo"

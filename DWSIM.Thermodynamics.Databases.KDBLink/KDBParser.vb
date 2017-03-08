@@ -87,6 +87,8 @@ Public Class KDBParser
 
         Dim comp As New BaseClasses.ConstantProperties
 
+        comp.Comments = website
+
         comp.OriginalDB = "KDB"
 
         comp.CurrentDB = "KDB"

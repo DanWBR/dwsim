@@ -184,6 +184,7 @@ Public Class FormImportCompoundOnline
                 If Not compoundc Is Nothing Then
                     BaseCompound.InChI = compoundc.InChI
                     BaseCompound.SMILES = compoundc.SMILES
+                    BaseCompound.Comments += vbCrLf + compoundc.Comments
                 End If
 
                 If Not structuredata Is Nothing Then
