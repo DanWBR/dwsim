@@ -361,8 +361,12 @@ Public Class SpreadsheetForm
         For i As Integer = 0 To dt2.GetUpperBound(0)
             For j As Integer = 0 To dt1.GetUpperBound(1)
                 If Not dt2(i, j) Is Nothing Then
-                    Dim xel As New XElement("dummy", DirectCast(dt2(i, j), SpreadsheetCellParameters).SaveData.ToArray)
-                    text += xel.ToString + ";"
+                    Try
+                        Dim xel As New XElement("dummy", DirectCast(dt2(i, j), SpreadsheetCellParameters).SaveData.ToArray)
+                        text += xel.ToString + ";"
+                    Catch ex As Exception
+                        text += " ;"
+                    End Try
                 Else
                     text += " ;"
                 End If
@@ -382,14 +386,17 @@ Public Class SpreadsheetForm
         Dim m As Integer = 0
         If n > 0 And m > 0 Then
             Dim elm(n, m) As Object
-            For i As Integer = 0 To n
-                If n > 0 Then
-                    m = rows(i).Split(";").Length - 1
-                End If
-                For j As Integer = 0 To m
-                    elm(i, j) = Double.Parse(rows(i).Split(";")(j))
+            Try
+                For i As Integer = 0 To n
+                    If n > 0 Then
+                        m = rows(i).Split(";").Length - 1
+                    End If
+                    For j As Integer = 0 To m
+                        elm(i, j) = Double.Parse(rows(i).Split(";")(j))
+                    Next
                 Next
-            Next
+            Catch ex As Exception
+            End Try
             dt1 = elm
         End If
 
