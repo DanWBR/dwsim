@@ -600,6 +600,7 @@ Partial Class FormSimulWizard
         'OpenFileDialog1
         '
         resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
+        Me.OpenFileDialog1.Multiselect = True
         '
         'FormSimulWizard
         '

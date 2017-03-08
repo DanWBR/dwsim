@@ -484,25 +484,27 @@ Public Class FormSimulWizard
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If Me.OpenFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Try
-                Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(Me.OpenFileDialog1.FileName))
-                If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
-                    Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
-                    Dim ms As Streams.MaterialStream
-                    Dim proplist As New ArrayList
-                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
-                        For Each phase As BaseClasses.Phase In ms.Phases.Values
-                            phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
-                            phase.Compounds(comp.Name).ConstantProperties = comp
+            For Each fn In Me.OpenFileDialog1.FileNames
+                Try
+                    Dim comp = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BaseClasses.ConstantProperties)(File.ReadAllText(fn))
+                    If Not Me.FrmChild.Options.SelectedComponents.ContainsKey(comp.Name) Then
+                        Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
+                        Dim ms As Streams.MaterialStream
+                        Dim proplist As New ArrayList
+                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                            For Each phase As BaseClasses.Phase In ms.Phases.Values
+                                phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
+                                phase.Compounds(comp.Name).ConstantProperties = comp
+                            Next
                         Next
-                    Next
-                    Me.ListViewA.Items.Add(comp.Name, comp.Name & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
-                Else
-                    MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            Catch ex As Exception
-                MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+                        Me.ListViewA.Items.Add(comp.Name, comp.Name & " (" & comp.OriginalDB & ")", 0).Tag = comp.Name
+                    Else
+                        MessageBox.Show(DWSIM.App.GetLocalString("CompoundExists"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show(DWSIM.App.GetLocalString("Erro") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            Next
         End If
     End Sub
 

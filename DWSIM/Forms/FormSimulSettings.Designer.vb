@@ -1248,6 +1248,7 @@ Partial Class FormSimulSettings
         'OpenFileDialog3
         '
         resources.ApplyResources(Me.OpenFileDialog3, "OpenFileDialog3")
+        Me.OpenFileDialog3.Multiselect = True
         '
         'FormSimulSettings
         '
