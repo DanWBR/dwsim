@@ -96,7 +96,6 @@ Public Class Files
                             End While
                         End Using
                     Catch ex As Exception
-                        Console.WriteLine(dlist(i) & ": " & ex.Message.ToString)
                         exlist.Add(ex)
                     End Try
                 End Using
@@ -161,7 +160,6 @@ Public Class Files
                 Try
                     File.Delete(Path.Combine(Environment.CurrentDirectory, dlist(i)))
                 Catch ex As Exception
-                    Console.WriteLine(dlist(i) & ": " & ex.Message.ToString)
                     exlist.Add(ex)
                 End Try
 
