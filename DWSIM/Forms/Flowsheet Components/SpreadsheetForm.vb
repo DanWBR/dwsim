@@ -24,7 +24,9 @@ Public Class SpreadsheetForm
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Public OldValue As String = ""
-    Public OldTag As String = ""
+    Public OldTag As Object
+    Public NewValue As String = ""
+    Public NewTag As Object
 
     Public formc As FormFlowsheet
     Public loaded As Boolean = False
@@ -36,6 +38,8 @@ Public Class SpreadsheetForm
 
     Public dt1(99, 25) As Object
     Public dt2(99, 25) As Object
+
+    Dim oldval, newval As Object
 
     Public Property Expr() As IGenericExpression(Of Object)
         Get
@@ -218,7 +222,7 @@ Public Class SpreadsheetForm
 
         Me.OldValue = Cell.Value
         ccparams = Cell.Tag
-        Me.OldTag = ccparams.Expression
+        Me.OldTag = ccparams.Clone
 
         Cell.Value = ccparams.Expression
         Me.tbValue.Text = ccparams.Expression
@@ -239,6 +243,15 @@ Public Class SpreadsheetForm
         UpdateValue(Cell, expression)
 
         If chkUpdate.Checked Then EvaluateAll()
+
+        NewValue = Cell.Value
+        NewTag = DirectCast(Cell.Tag, SpreadsheetCellParameters).Clone
+
+        Me.formc.AddUndoRedoAction(New UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SpreadsheetCellChanged,
+                                                                .ObjID = GetCellString(Cell),
+                                                                .OldValue = New Object() {OldValue, OldTag},
+                                                                .NewValue = New Object() {NewValue, NewTag},
+                                                                .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SpreadsheetCellChanged"), GetCellString(Cell))})
 
         Cell = Nothing
 
@@ -700,27 +713,39 @@ Public Class SpreadsheetForm
     ''' Evaluates all the cells in the spreadsheet, reading and writing the values to/from the flowsheet accordingly.
     ''' </summary>
     ''' <remarks></remarks>
-    Public Sub EvaluateAll()
+    Public Sub EvaluateAll(Optional ByVal cell As DataGridViewCell = Nothing)
 
-        Try
-            If Not formc Is Nothing Then
-                If GlobalSettings.Settings.CalculatorActivated Then
-                    For Each r As DataGridViewRow In Me.DataGridView1.Rows
-                        For Each ce As DataGridViewCell In r.Cells
-                            ccparams = ce.Tag
-                            If Not ccparams Is Nothing Then
-                                If ccparams.Expression <> "" Then
-                                    ccparams.PrevVal = ce.Value
-                                    UpdateValue(ce, ccparams.Expression)
-                                    ccparams.CurrVal = ce.Value
+        If cell Is Nothing Then
+            Try
+                If Not formc Is Nothing Then
+                    If GlobalSettings.Settings.CalculatorActivated Then
+                        For Each r As DataGridViewRow In Me.DataGridView1.Rows
+                            For Each ce As DataGridViewCell In r.Cells
+                                ccparams = ce.Tag
+                                If Not ccparams Is Nothing Then
+                                    If ccparams.Expression <> "" Then
+                                        ccparams.PrevVal = ce.Value
+                                        UpdateValue(ce, ccparams.Expression)
+                                        ccparams.CurrVal = ce.Value
+                                    End If
                                 End If
-                            End If
+                            Next
                         Next
-                    Next
+                    End If
+                End If
+            Catch ex As Exception
+            End Try
+        Else
+            ccparams = cell.Tag
+            If Not ccparams Is Nothing Then
+                If ccparams.Expression <> "" Then
+                    ccparams.PrevVal = cell.Value
+                    UpdateValue(cell, ccparams.Expression)
+                    ccparams.CurrVal = cell.Value
                 End If
             End If
-        Catch ex As Exception
-        End Try
+        End If
+
 
     End Sub
 

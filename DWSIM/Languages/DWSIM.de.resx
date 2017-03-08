@@ -5414,4 +5414,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NextButton" xml:space="preserve">
     <value>Next &gt;</value>
   </data>
+  <data name="UndoRedo_SpreadsheetCellChanged" xml:space="preserve">
+    <value>Spreadsheet cell value changed: {0}</value>
+  </data>
 </root>

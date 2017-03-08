@@ -14680,6 +14680,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Planilha de Cálculo: modificada a célula {0} .
+        '''</summary>
+        Friend Shared ReadOnly Property UndoRedo_SpreadsheetCellChanged() As String
+            Get
+                Return ResourceManager.GetString("UndoRedo_SpreadsheetCellChanged", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Sistema de Unidades adicionado: {0}.
         '''</summary>
         Friend Shared ReadOnly Property UndoRedo_SystemOfUnitsAdded() As String

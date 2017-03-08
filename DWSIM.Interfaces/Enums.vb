@@ -71,6 +71,7 @@ Namespace Enums
         PropertyPackageRemoved = 13
         CutObjects = 14
         PasteObjects = 15
+        SpreadsheetCellChanged = 16
     End Enum
 
     Public Enum FlowsheetUtility

@@ -2589,6 +2589,18 @@ Public Class FormFlowsheet
                         PasteObjects(False)
                     End If
 
+                Case UndoRedoActionType.SpreadsheetCellChanged
+
+                    Dim cell = FormSpreadsheet.GetCellValue(act.ObjID)
+                    If undo Then
+                        cell.Value = act.OldValue(0)
+                        cell.Tag = act.OldValue(1)
+                    Else
+                        cell.Value = act.NewValue(0)
+                        cell.Tag = act.NewValue(1)
+                    End If
+                    FormSpreadsheet.EvaluateAll(cell)
+
             End Select
 
             Me.FormSurface.UpdateSelectedObject()

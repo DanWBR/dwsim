@@ -5466,4 +5466,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CompoundExists" xml:space="preserve">
     <value>O componente já está adicionado à simulação. Importação cancelada.</value>
   </data>
+  <data name="UndoRedo_SpreadsheetCellChanged" xml:space="preserve">
+    <value>Planilha de Cálculo: modificada a célula {0} </value>
+  </data>
 </root>
