@@ -336,12 +336,16 @@ Public Class SpreadsheetForm
         For i As Integer = 0 To dt1.GetUpperBound(0)
             For j As Integer = 0 To dt1.GetUpperBound(1)
                 If Double.TryParse(dt1(i, j), Globalization.NumberStyles.Any, ci, New Double) Then
-                    text += Double.Parse(dt1(i, j), ci).ToString + ";"
+                    text += Double.Parse(dt1(i, j), ci).ToString & ";"
                 Else
-                    text += dt1(i, j) + ";"
+                    If dt1(i, j) IsNot Nothing Then
+                        text += dt1(i, j).ToString() & ";"
+                    Else
+                        text += ";"
+                    End If
                 End If
             Next
-            text = text.TrimEnd(";") + "|"
+            text = text.TrimEnd(";") & "|"
         Next
         text = text.TrimEnd("|")
 
@@ -404,15 +408,20 @@ Public Class SpreadsheetForm
             For i As Integer = 0 To n
                 For j As Integer = 0 To m
                     Dim scp As New SpreadsheetCellParameters()
-                    Dim element As New XElement("dummy")
-                    Dim xmltext As String = rows(i).Split(";")(j)
-                    If xmltext <> " " Then
-                        element = XElement.Parse(xmltext)
-                        scp.LoadData(element.Elements.ToList)
-                        elm(i, j) = scp
-                    Else
-                        elm(i, j) = scp
-                    End If
+                    Try
+                        Dim element As New XElement("dummy")
+                        Dim text0 = rows(i).Replace("&gt;", "greater_than").Replace("&lt;", "less_than")
+                        Dim xmltext As String = text0.Split(";")(j)
+                        If xmltext <> " " Then
+                            Dim text1 = xmltext.Replace("greater_than", "&gt;").Replace("less_than", "&lt;")
+                            element = XElement.Parse(text1)
+                            scp.LoadData(element.Elements.ToList)
+                            elm(i, j) = scp
+                        Else
+                            elm(i, j) = scp
+                        End If
+                    Catch ex As Exception
+                    End Try
                 Next
             Next
             dt2 = elm
