@@ -709,18 +709,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property OctaveTempPath() As String
-            Get
-                Return CType(Me("OctaveTempPath"),String)
-            End Get
-            Set
-                Me("OctaveTempPath") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
         Public Property OctaveProcessTimeout() As Integer
             Get
@@ -752,6 +740,30 @@ Namespace My
             End Get
             Set
                 Me("CurrentEnvironment") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property PythonPath() As String
+            Get
+                Return CType(Me("PythonPath"),String)
+            End Get
+            Set
+                Me("PythonPath") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property PythonProcessTimeout() As Integer
+            Get
+                Return CType(Me("PythonProcessTimeout"),Integer)
+            End Get
+            Set
+                Me("PythonProcessTimeout") = value
             End Set
         End Property
     End Class

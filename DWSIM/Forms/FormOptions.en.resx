@@ -439,26 +439,41 @@
   <data name="FaTabStripItem2.Text" xml:space="preserve">
     <value>Backups</value>
   </data>
+  <data name="tbPythonTimeout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 80</value>
+  </data>
+  <data name="tbPythonTimeout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 21</value>
+  </data>
+  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 13</value>
+  </data>
+  <data name="Label17.Text" xml:space="preserve">
+    <value>Python process timeout (minutes)</value>
+  </data>
+  <data name="btnSelectPythonPath.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 13</value>
+  </data>
+  <data name="Label18.Text" xml:space="preserve">
+    <value>Python Binaries Path (Windows only):</value>
+  </data>
+  <data name="GroupBox17.Text" xml:space="preserve">
+    <value>Python brigde settings</value>
+  </data>
   <data name="tbOctaveTimeout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>182, 145</value>
+    <value>191, 83</value>
   </data>
   <data name="tbOctaveTimeout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>52, 21</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 13</value>
   </data>
   <data name="Label20.Text" xml:space="preserve">
     <value>Octave process timeout (minutes)</value>
-  </data>
-  <data name="btnSelectOctaveTempPath.Text" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 13</value>
-  </data>
-  <data name="Label17.Text" xml:space="preserve">
-    <value>Temporary Octave Scripts Folder:</value>
   </data>
   <data name="btnSelectOctavePath.Text" xml:space="preserve">
     <value>Select</value>
@@ -470,7 +485,7 @@
     <value>Octave Binaries Path (Windows only):</value>
   </data>
   <data name="GroupBox16.Text" xml:space="preserve">
-    <value>DWSIM/Octave bridge settings</value>
+    <value>Octave bridge settings</value>
   </data>
   <data name="chkIgnoreCompConstData.Text" xml:space="preserve">
     <value>Ignore compound constant properties stored in the simulation file during loading</value>
@@ -567,7 +582,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAVgBCAFYAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAWgBCAFoAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

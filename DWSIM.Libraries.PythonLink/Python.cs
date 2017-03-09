@@ -11,6 +11,22 @@ namespace DWSIM.Libraries.PythonLink
 {
     public class Python
     {
+
+        static void Main()
+        {
+
+            var python = new Python(@"C:\Users\ptc0\Downloads\python_thermo\python-2.7.13.amd64\", false);
+
+            python.ExecuteCommand("import sys", true);
+
+            python.ExecuteCommand("from thermo.chemical import Chemical", true);
+
+            python.ExecuteCommand("tol = Chemical('toluene')", true);
+
+            var results = python.GetVector("tol.Tm, tol.Tc, tol.Pc");
+
+        }
+
         public Process PythonProcess { get; set; }
         private string PythonEchoString { get; set; }
         public Python(string PathToPythonBinaries)
@@ -40,7 +56,7 @@ namespace DWSIM.Libraries.PythonLink
             {
                 if (PathToPythonBinaries[PathToPythonBinaries.Length - 1] != '\\')
                     PathToPythonBinaries = PathToPythonBinaries + Path.DirectorySeparatorChar;
-                pi.FileName = PathToPythonBinaries + "py.exe";
+                pi.FileName = PathToPythonBinaries + "python.exe";
             }
             pi.RedirectStandardInput = true;
             pi.RedirectStandardOutput = true;
@@ -48,78 +64,59 @@ namespace DWSIM.Libraries.PythonLink
             pi.UseShellExecute = false;
             pi.CreateNoWindow = !CreateWindow;
             pi.Verb = "open";
+            pi.Arguments = "-i";
             //
             pi.WorkingDirectory = ".";
             PythonProcess.StartInfo = pi;
             PythonProcess.Start();
             PythonProcess.OutputDataReceived += new DataReceivedEventHandler(PythonProcess_OutputDataReceived);
             PythonProcess.BeginOutputReadLine();
-            PythonEntryText = ExecuteCommand(null);
+            PythonEntryText = ExecuteCommand("echo = '" + PythonEchoString + "'", true);
         }
 
-        public double GetScalar(string scalar)
+        public double GetScalar(string command)
         {
-            return double.Parse(scalar, CultureInfo.InvariantCulture);
+            string rasp = ExecuteCommand(command, false);
+            return double.Parse(rasp, CultureInfo.InvariantCulture);
         }
 
-        public double[] GetVector(string vector)
+        public double[] GetVector(string command)
         {
-            string rasp = ExecuteCommand(vector, 30000);
+            string rasp = ExecuteCommand(command, false);
             return rasp.TrimStart(new char[] { '(' }).TrimEnd(new char[] { ')' }).Trim().Split(new char[] { ',' }).Select((item) => Double.Parse(item, CultureInfo.InvariantCulture)).ToArray();
         }
-        
+
         StringBuilder SharedBuilder = new StringBuilder();
 
         ManualResetEvent PythonDoneEvent = new ManualResetEvent(false);
-      
+
         public string PythonEntryText { get; internal set; }
 
         public void WorkThread(object o)
         {
-            string command = (string)o;
+            string command = (string)((object[])o)[0];
             SharedBuilder.Clear();
             PythonDoneEvent.Reset();
             if (command != null)
             {
                 PythonProcess.StandardInput.WriteLine(command);
             }
-            //ca sa avem referinta pentru output
-            PythonProcess.StandardInput.WriteLine("\"" + PythonEchoString + "\"");
+            if ((bool)((object[])o)[1]) 
+                PythonProcess.StandardInput.WriteLine("echo");
+            else
+                PythonProcess.StandardInput.WriteLine("sys.stdout.flush()");
             PythonDoneEvent.WaitOne();
         }
-        public string ExecuteCommand(string command, int timeout)
-        {
-            if (PythonProcess.HasExited)
-            {
-                StartPython(ptob, cw);
-                if (PythonRestarted != null) PythonRestarted(this, EventArgs.Empty);
-            }
-            exitError = false;
 
-            Thread tmp = new Thread(new ParameterizedThreadStart(WorkThread));
-            tmp.Start(command);
-
-            if (!tmp.Join(timeout))
-            {
-                tmp.Abort();
-                throw new Exception("Python timeout");
-            }
-            if (exitError)
-            {
-                throw new Exception(errorMessage);
-            }
-            return SharedBuilder.ToString();
-        }
-        public string ExecuteCommand(string command)
+        public string ExecuteCommand(string command, bool writeecho)
         {
             Thread tmp = new Thread(new ParameterizedThreadStart(WorkThread));
-            tmp.Start(command);
+            tmp.Start(new object[] { command, writeecho });
 
             tmp.Join();
 
             return SharedBuilder.ToString();
         }
-        bool exitError = false;
         string errorMessage = null;
         void PythonProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
@@ -128,16 +125,18 @@ namespace DWSIM.Libraries.PythonLink
                 SharedBuilder.Clear();
                 errorMessage = PythonProcess.StandardError.ReadToEnd();
                 SharedBuilder.Append("Python has exited with the following error message: \r\n" + errorMessage);
-                exitError = true;
                 PythonDoneEvent.Set();
                 return;
             }
-            if (e.Data.Trim() == "ans = " + PythonEchoString)
+            if (e.Data.Trim() == "'" + PythonEchoString + "'")
                 PythonDoneEvent.Set();
             else
-                SharedBuilder.Append(e.Data + "\r\n");
+            {
+                SharedBuilder.Append(e.Data);
+                PythonDoneEvent.Set();
+            }
+
         }
-        public event PythonRestartedEventHandler PythonRestarted;
         public delegate void PythonRestartedEventHandler(object sender, EventArgs e);
     }
 }

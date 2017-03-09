@@ -64,13 +64,14 @@ Public Class Settings
 
     Public Shared Property OctavePath As String = ""
 
-    Public Shared Property OctaveFileTempDir As String = ""
-
     Public Shared Property OctaveTimeoutInMinutes As Integer = 5
 
     Public Shared Property CurrentEnvironment As Integer = 0
 
     Public Shared Property CurrentPlatform As String = ""
+
+    Public Shared Property PythonPath As String = ""
+    Public Shared Property PythonTimeoutInMinutes As Integer = 5
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 

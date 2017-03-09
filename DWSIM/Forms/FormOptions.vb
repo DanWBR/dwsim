@@ -113,8 +113,10 @@ Public Class FormOptions
         CheckBoxUndoRedoRecalc.Checked = My.Settings.UndoRedo_RecalculateFlowsheet
 
         tbOctavePath.Text = My.Settings.OctavePath
-        tbOctaveTempPath.Text = My.Settings.OctaveTempPath
         tbOctaveTimeout.Text = My.Settings.OctaveProcessTimeout
+
+        tbPythonPath.Text = My.Settings.PythonPath
+        tbPythonTimeout.Text = My.Settings.PythonProcessTimeout
 
         Me.cbGPU.Items.Clear()
 
@@ -683,19 +685,27 @@ Public Class FormOptions
         End If
     End Sub
 
-    Private Sub btnSelectOctaveTempPath_Click(sender As Object, e As EventArgs) Handles btnSelectOctaveTempPath.Click
-        FolderBrowserDialog1.SelectedPath = tbOctaveTempPath.Text
-        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
-            tbOctaveTempPath.Text = FolderBrowserDialog1.SelectedPath
-            My.Settings.OctaveTempPath = tbOctaveTempPath.Text
-            GlobalSettings.Settings.OctaveFileTempDir = tbOctaveTempPath.Text
-        End If
-    End Sub
-
     Private Sub tbOctaveTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbOctaveTimeout.TextChanged
         Try
             GlobalSettings.Settings.OctaveTimeoutInMinutes = tbOctaveTimeout.Text
             My.Settings.OctaveProcessTimeout = tbOctaveTimeout.Text
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub btnSelectPythonPath_Click(sender As Object, e As EventArgs) Handles btnSelectPythonPath.Click
+        FolderBrowserDialog1.SelectedPath = tbPythonPath.Text
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            tbOctavePath.Text = FolderBrowserDialog1.SelectedPath
+            My.Settings.PythonPath = tbPythonPath.Text
+            GlobalSettings.Settings.PythonPath = tbPythonPath.Text
+        End If
+    End Sub
+
+    Private Sub tbPythonTimeout_TextChanged(sender As Object, e As EventArgs) Handles tbPythonTimeout.TextChanged
+        Try
+            GlobalSettings.Settings.PythonTimeoutInMinutes = tbPythonTimeout.Text
+            My.Settings.PythonProcessTimeout = tbPythonTimeout.Text
         Catch ex As Exception
         End Try
     End Sub

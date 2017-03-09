@@ -103,12 +103,15 @@ Partial Class FormOptions
         Me.KryptonLabel1 = New System.Windows.Forms.Label()
         Me.KryptonCheckBox6 = New System.Windows.Forms.CheckBox()
         Me.FaTabStripItem7 = New System.Windows.Forms.TabPage()
+        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.tbPythonTimeout = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.btnSelectPythonPath = New System.Windows.Forms.Button()
+        Me.tbPythonPath = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox16 = New System.Windows.Forms.GroupBox()
         Me.tbOctaveTimeout = New System.Windows.Forms.TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.btnSelectOctaveTempPath = New System.Windows.Forms.Button()
-        Me.tbOctaveTempPath = New System.Windows.Forms.TextBox()
-        Me.Label17 = New System.Windows.Forms.Label()
         Me.btnSelectOctavePath = New System.Windows.Forms.Button()
         Me.tbOctavePath = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -154,6 +157,7 @@ Partial Class FormOptions
         Me.GroupBox3.SuspendLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem7.SuspendLayout()
+        Me.GroupBox17.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
@@ -738,6 +742,7 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
+        Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox15)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox14)
@@ -747,14 +752,49 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         '
+        'GroupBox17
+        '
+        resources.ApplyResources(Me.GroupBox17, "GroupBox17")
+        Me.GroupBox17.Controls.Add(Me.tbPythonTimeout)
+        Me.GroupBox17.Controls.Add(Me.Label17)
+        Me.GroupBox17.Controls.Add(Me.btnSelectPythonPath)
+        Me.GroupBox17.Controls.Add(Me.tbPythonPath)
+        Me.GroupBox17.Controls.Add(Me.Label18)
+        Me.GroupBox17.Name = "GroupBox17"
+        Me.GroupBox17.TabStop = False
+        '
+        'tbPythonTimeout
+        '
+        resources.ApplyResources(Me.tbPythonTimeout, "tbPythonTimeout")
+        Me.tbPythonTimeout.Name = "tbPythonTimeout"
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        '
+        'btnSelectPythonPath
+        '
+        resources.ApplyResources(Me.btnSelectPythonPath, "btnSelectPythonPath")
+        Me.btnSelectPythonPath.Name = "btnSelectPythonPath"
+        Me.btnSelectPythonPath.UseVisualStyleBackColor = True
+        '
+        'tbPythonPath
+        '
+        resources.ApplyResources(Me.tbPythonPath, "tbPythonPath")
+        Me.tbPythonPath.Name = "tbPythonPath"
+        Me.tbPythonPath.ReadOnly = True
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        '
         'GroupBox16
         '
         resources.ApplyResources(Me.GroupBox16, "GroupBox16")
         Me.GroupBox16.Controls.Add(Me.tbOctaveTimeout)
         Me.GroupBox16.Controls.Add(Me.Label20)
-        Me.GroupBox16.Controls.Add(Me.btnSelectOctaveTempPath)
-        Me.GroupBox16.Controls.Add(Me.tbOctaveTempPath)
-        Me.GroupBox16.Controls.Add(Me.Label17)
         Me.GroupBox16.Controls.Add(Me.btnSelectOctavePath)
         Me.GroupBox16.Controls.Add(Me.tbOctavePath)
         Me.GroupBox16.Controls.Add(Me.Label19)
@@ -770,23 +810,6 @@ Partial Class FormOptions
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
-        '
-        'btnSelectOctaveTempPath
-        '
-        resources.ApplyResources(Me.btnSelectOctaveTempPath, "btnSelectOctaveTempPath")
-        Me.btnSelectOctaveTempPath.Name = "btnSelectOctaveTempPath"
-        Me.btnSelectOctaveTempPath.UseVisualStyleBackColor = True
-        '
-        'tbOctaveTempPath
-        '
-        resources.ApplyResources(Me.tbOctaveTempPath, "tbOctaveTempPath")
-        Me.tbOctaveTempPath.Name = "tbOctaveTempPath"
-        Me.tbOctaveTempPath.ReadOnly = True
-        '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.Name = "Label17"
         '
         'btnSelectOctavePath
         '
@@ -983,6 +1006,8 @@ Partial Class FormOptions
         Me.GroupBox3.PerformLayout()
         CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem7.ResumeLayout(False)
+        Me.GroupBox17.ResumeLayout(False)
+        Me.GroupBox17.PerformLayout()
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
@@ -1096,12 +1121,15 @@ Partial Class FormOptions
     Public WithEvents GroupBox15 As System.Windows.Forms.GroupBox
     Public WithEvents chkIgnoreCompConstData As System.Windows.Forms.CheckBox
     Public WithEvents GroupBox16 As System.Windows.Forms.GroupBox
-    Public WithEvents btnSelectOctaveTempPath As System.Windows.Forms.Button
-    Public WithEvents tbOctaveTempPath As System.Windows.Forms.TextBox
-    Public WithEvents Label17 As System.Windows.Forms.Label
     Public WithEvents btnSelectOctavePath As System.Windows.Forms.Button
     Public WithEvents tbOctavePath As System.Windows.Forms.TextBox
     Public WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents tbOctaveTimeout As System.Windows.Forms.TextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
+    Public WithEvents GroupBox17 As System.Windows.Forms.GroupBox
+    Friend WithEvents tbPythonTimeout As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Public WithEvents btnSelectPythonPath As System.Windows.Forms.Button
+    Public WithEvents tbPythonPath As System.Windows.Forms.TextBox
+    Public WithEvents Label18 As System.Windows.Forms.Label
 End Class

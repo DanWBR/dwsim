@@ -61,8 +61,10 @@ Namespace DWSIM
             GlobalSettings.Settings.HideSolidPhaseFromCAPEOPENComponents = My.Settings.HideSolidPhase_CO
 
             GlobalSettings.Settings.OctavePath = My.Settings.OctavePath
-            GlobalSettings.Settings.OctaveFileTempDir = My.Settings.OctaveTempPath
             GlobalSettings.Settings.OctaveTimeoutInMinutes = My.Settings.OctaveProcessTimeout
+
+            GlobalSettings.Settings.PythonPath = My.Settings.PythonPath
+            GlobalSettings.Settings.PythonTimeoutInMinutes = My.Settings.PythonProcessTimeout
 
             GlobalSettings.Settings.CurrentPlatform = My.Settings.CurrentPlatform
             GlobalSettings.Settings.CurrentEnvironment = My.Settings.CurrentEnvironment
@@ -361,8 +363,10 @@ Namespace DWSIM
             My.Settings.IgnoreCompoundPropertiesOnLoad = source.Configs("Misc").GetBoolean("IgnoreCompoundConstantPropertyDatainXMLFile", False)
 
             My.Settings.OctavePath = source.Configs("OctaveBridge").GetString("OctavePath", "")
-            My.Settings.OctaveTempPath = source.Configs("OctaveBridge").GetString("OctaveTempPath", "")
             My.Settings.OctaveProcessTimeout = source.Configs("OctaveBridge").GetInt("OctaveProcessTimeout", 15)
+
+            My.Settings.PythonPath = source.Configs("PythonBridge").GetString("PythonPath", "")
+            My.Settings.PythonProcessTimeout = source.Configs("PythonBridge").GetInt("PythonProcessTimeout", 15)
 
             My.Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
             My.Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
@@ -446,8 +450,10 @@ Namespace DWSIM
             source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", My.Settings.IgnoreCompoundPropertiesOnLoad)
 
             source.Configs("OctaveBridge").Set("OctavePath", My.Settings.OctavePath)
-            source.Configs("OctaveBridge").Set("OctaveTempPath", My.Settings.OctaveTempPath)
             source.Configs("OctaveBridge").Set("OctaveProcessTimeout", My.Settings.OctaveProcessTimeout)
+
+            source.Configs("PythonBridge").Set("PythonPath", My.Settings.PythonPath)
+            source.Configs("PythonBridge").Set("PythonProcessTimeout", My.Settings.PythonProcessTimeout)
 
             source.Configs("OSInfo").Set("Platform", My.Settings.CurrentPlatform)
             source.Configs("OSInfo").Set("Environment", My.Settings.CurrentEnvironment)
