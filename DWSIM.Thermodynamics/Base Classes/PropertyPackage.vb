@@ -10181,22 +10181,26 @@ Final3:
 
                 Case "Peng-Robinson (PR)"
 
-                    Dim pp As PengRobinsonPropertyPackage = Me
-                    'pp.m_pr.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                    Try
+                        Dim pp As PengRobinsonPropertyPackage = Me
+                        'pp.m_pr.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
                             Else
-                                pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
+
+                    Catch ex As Exception
+                    End Try
 
                 Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
 
@@ -10238,22 +10242,26 @@ Final3:
 
                 Case "Soave-Redlich-Kwong (SRK)"
 
-                    Dim pp As SRKPropertyPackage = Me
-                    'pp.m_pr.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                    Try
+                        Dim pp As SRKPropertyPackage = Me
+                        'pp.m_pr.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
                             Else
-                                pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
+
+                    Catch ex As Exception
+                    End Try
 
                 Case "Peng-Robinson / Lee-Kesler (PR/LK)"
 
@@ -10315,79 +10323,89 @@ Final3:
 
                 Case "NRTL"
 
-                    Dim pp As NRTLPropertyPackage = Me
-                    'pp.m_pr.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_PR").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                    Try
+                        Dim pp As NRTLPropertyPackage = Me
+                        'pp.m_pr.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_PR").SingleOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
                             Else
-                                pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
 
-                    'pp.m_uni.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_NRTL").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.NRTL_IPData() With {.ID1 = xel.@ID1, .ID2 = xel.@ID2, .A12 = Double.Parse(xel.@A12, ci), .A21 = Double.Parse(xel.@A21, ci),
-                                                                    .B12 = Double.Parse(xel.@B12, ci), .B21 = Double.Parse(xel.@B21, ci),
-                                                                    .C12 = Double.Parse(xel.@C12, ci), .C21 = Double.Parse(xel.@C21, ci),
-                                                                    .alpha12 = Double.Parse(xel.@alpha12, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.NRTL_IPData)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_uni.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_uni.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_uni.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_uni.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                        'pp.m_uni.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_NRTL").SingleOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.NRTL_IPData() With {.ID1 = xel.@ID1, .ID2 = xel.@ID2, .A12 = Double.Parse(xel.@A12, ci), .A21 = Double.Parse(xel.@A21, ci),
+                                                                        .B12 = Double.Parse(xel.@B12, ci), .B21 = Double.Parse(xel.@B21, ci),
+                                                                        .C12 = Double.Parse(xel.@C12, ci), .C21 = Double.Parse(xel.@C21, ci),
+                                                                        .alpha12 = Double.Parse(xel.@alpha12, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.NRTL_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_uni.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_uni.InteractionParameters.Add(xel.@Compound1, dic)
                             Else
-                                pp.m_uni.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                If Not pp.m_uni.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_uni.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_uni.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
+
+                    Catch ex As Exception
+
+                    End Try
 
                 Case "UNIQUAC"
 
-                    Dim pp As UNIQUACPropertyPackage = Me
+                    Try
+                        Dim pp As UNIQUACPropertyPackage = Me
 
-                    'pp.m_pr.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_PR").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                        'pp.m_pr.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_PR").SingleOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.PR_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.PR_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
                             Else
-                                pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
 
-                    'pp.m_uni.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_UNIQUAC").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.UNIQUAC_IPData() With {.ID1 = xel.@ID1, .ID2 = xel.@ID2, .A12 = Double.Parse(xel.@A12, ci), .A21 = Double.Parse(xel.@A21, ci),
-                                                                       .B12 = Double.Parse(xel.@B12, ci), .B21 = Double.Parse(xel.@B21, ci),
-                                                                       .C12 = Double.Parse(xel.@C12, ci), .C21 = Double.Parse(xel.@C21, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.UNIQUAC_IPData)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_uni.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_uni.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_uni.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_uni.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                        'pp.m_uni.InteractionParameters.Clear()
+                        For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters_UNIQUAC").SingleOrDefault.Elements.ToList
+                            Dim ip As New Auxiliary.UNIQUAC_IPData() With {.ID1 = xel.@ID1, .ID2 = xel.@ID2, .A12 = Double.Parse(xel.@A12, ci), .A21 = Double.Parse(xel.@A21, ci),
+                                                                           .B12 = Double.Parse(xel.@B12, ci), .B21 = Double.Parse(xel.@B21, ci),
+                                                                           .C12 = Double.Parse(xel.@C12, ci), .C21 = Double.Parse(xel.@C21, ci)}
+                            Dim dic As New Dictionary(Of String, Auxiliary.UNIQUAC_IPData)
+                            dic.Add(xel.@Compound2, ip)
+                            If Not pp.m_uni.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                pp.m_uni.InteractionParameters.Add(xel.@Compound1, dic)
                             Else
-                                pp.m_uni.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                If Not pp.m_uni.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                    pp.m_uni.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                Else
+                                    pp.m_uni.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                End If
                             End If
-                        End If
-                    Next
+                        Next
+
+                    Catch ex As Exception
+
+                    End Try
 
                 Case "Modified UNIFAC (Dortmund)"
 
@@ -10410,29 +10428,34 @@ Final3:
 
                 Case "Lee-Kesler-Plöcker"
 
-                    Dim pp As LKPPropertyPackage = Me
-                    'pp.m_pr.InteractionParameters.Clear()
+                    Try
+                        Dim pp As LKPPropertyPackage = Me
+                        'pp.m_pr.InteractionParameters.Clear()
 
-                    Dim el = (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault
+                        Dim el = (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault
 
-                    If Not el Is Nothing Then
+                        If Not el Is Nothing Then
 
-                        For Each xel As XElement In el.Elements.ToList
-                            Dim ip As New Auxiliary.LKP_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
-                            Dim dic As New Dictionary(Of String, Auxiliary.LKP_IPData)
-                            dic.Add(xel.@Compound2, ip)
-                            If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                                pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
-                            Else
-                                If Not pp.m_lk.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                    pp.m_lk.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                            For Each xel As XElement In el.Elements.ToList
+                                Dim ip As New Auxiliary.LKP_IPData() With {.kij = Double.Parse(xel.@Value, ci)}
+                                Dim dic As New Dictionary(Of String, Auxiliary.LKP_IPData)
+                                dic.Add(xel.@Compound2, ip)
+                                If Not pp.m_lk.InteractionParameters.ContainsKey(xel.@Compound1) Then
+                                    pp.m_lk.InteractionParameters.Add(xel.@Compound1, dic)
                                 Else
-                                    pp.m_lk.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                    If Not pp.m_lk.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
+                                        pp.m_lk.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
+                                    Else
+                                        pp.m_lk.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
+                                    End If
                                 End If
-                            End If
-                        Next
+                            Next
 
-                    End If
+                        End If
+
+                    Catch ex As Exception
+
+                    End Try
 
             End Select
 
@@ -10785,6 +10808,7 @@ Final3:
 
         Public Overridable Function ReturnInstance(typename As String) As Object Implements IPropertyPackage.ReturnInstance
             If typename.StartsWith("PropertyPackage") Then typename = typename.Insert(0, "DWSIM.Thermodynamics.")
+            typename = typename.Replace("SoaveRedlichKwong", "SRK")
             Dim t As Type = Type.GetType(typename, False)
             Return Activator.CreateInstance(t)
         End Function
