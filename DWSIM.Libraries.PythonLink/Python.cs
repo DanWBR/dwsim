@@ -59,55 +59,15 @@ namespace DWSIM.Libraries.PythonLink
 
         public double GetScalar(string scalar)
         {
-            string rasp = ExecuteCommand(scalar, 30000);
-            string val = rasp.Replace(scalar + " = ", "").Substring(rasp.LastIndexOf("\\") + 1).Trim();
-            return double.Parse(val, CultureInfo.InvariantCulture);
+            return double.Parse(scalar, CultureInfo.InvariantCulture);
         }
 
         public double[] GetVector(string vector)
         {
             string rasp = ExecuteCommand(vector, 30000);
-            string[] lines = rasp.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            int i = 0;
-            //catam urmatorul entry
-            List<double> data = new List<double>();
-            while (i < lines.Length - 1)
-            {
-                i++;
-                string line = lines[i];
-                string[] dataS = line.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                for (int k = 0; k < dataS.Length; k++)
-                {
-                    data.Add(double.Parse(dataS[k], CultureInfo.InvariantCulture));
-                }
-            }
-            //caz special in care a pus toate rezultatele pe o singura linie
-            if (data.Count == 0)
-            {
-                string[] dataS = lines[lines.Length - 1].Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
-                if (dataS.Length != 0)
-                    for (int k = 0; k < dataS.Length; k++)
-                    {
-                        data.Add(double.Parse(dataS[k], CultureInfo.InvariantCulture));
-                    }
-            }
-            return data.ToArray();
+            return rasp.TrimStart(new char[] { '(' }).TrimEnd(new char[] { ')' }).Trim().Split(new char[] { ',' }).Select((item) => Double.Parse(item, CultureInfo.InvariantCulture)).ToArray();
         }
-
-        public double[][] GetMatrix(string matrix)
-        {
-            //string rasp = ExecuteCommand(matrix);
-            //aflam numarul de randuri
-            string rasp = ExecuteCommand(matrix + "(:,1)", 30000);
-            string[] lines = rasp.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            double[][] mat = new double[lines.Length - 1][];
-            for (int i = 0; i < mat.Length; i++)
-            {
-                mat[i] = GetVector(matrix + "(" + (i + 1) + ",:)");
-            }
-            return mat;
-        }
-
+        
         StringBuilder SharedBuilder = new StringBuilder();
 
         ManualResetEvent PythonDoneEvent = new ManualResetEvent(false);
