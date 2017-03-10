@@ -696,7 +696,7 @@ Public Class FormOptions
     Private Sub btnSelectPythonPath_Click(sender As Object, e As EventArgs) Handles btnSelectPythonPath.Click
         FolderBrowserDialog1.SelectedPath = tbPythonPath.Text
         If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
-            tbOctavePath.Text = FolderBrowserDialog1.SelectedPath
+            tbPythonPath.Text = FolderBrowserDialog1.SelectedPath
             My.Settings.PythonPath = tbPythonPath.Text
             GlobalSettings.Settings.PythonPath = tbPythonPath.Text
         End If

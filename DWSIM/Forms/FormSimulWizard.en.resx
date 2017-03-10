@@ -132,14 +132,51 @@
 
 Click "Next" to continue.</value>
   </data>
+  <data name="Button4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 221</value>
+  </data>
+  <data name="Button4.Text" xml:space="preserve">
+    <value>Import
+(ChEDL Thermo)</value>
+  </data>
+  <data name="Button3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 283</value>
+  </data>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 52</value>
+  </data>
   <data name="Button3.Text" xml:space="preserve">
-    <value>Import (Online) &gt;</value>
+    <value>Import (Online)</value>
+  </data>
+  <data name="Button3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>BottomCenter</value>
+  </data>
+  <data name="Button2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 341</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 54</value>
   </data>
   <data name="Button2.Text" xml:space="preserve">
-    <value>Import (JSON) &gt;</value>
+    <value>Import (JSON)</value>
+  </data>
+  <data name="btnInfoRight.Text" xml:space="preserve">
+    <value>View Data &gt;</value>
   </data>
   <data name="btnInfoRight.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the right-hand list.</value>
+  </data>
+  <data name="btnInfoLeft.Text" xml:space="preserve">
+    <value>&lt; View Data</value>
   </data>
   <data name="btnInfoLeft.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the left-hand list.</value>
@@ -192,17 +229,8 @@ Click "Next" to continue.</value>
   <data name="LinkLabelPropertyMethods.Text" xml:space="preserve">
     <value>Click here to learn which methods and correlations are being used by the packages to calculate fluid properties.</value>
   </data>
-  <data name="Button8.Text" xml:space="preserve">
-    <value>Add</value>
-  </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Available Property Packages</value>
-  </data>
-  <data name="Column16.HeaderText" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Column17.HeaderText" xml:space="preserve">
-    <value>Type</value>
   </data>
   <data name="GroupBox12.Text" xml:space="preserve">
     <value>Added Property Packages</value>
@@ -276,28 +304,6 @@ Click "Next" to continue.</value>
 Select a Default Flash Algorithm for your simulation. If your system can show instabilities in the liquid phase (immiscible compounds), select an algorithm to predict the equilibrium with two liquid phases (VLLE). To calculate equilibrium including a solid phase, select the corresponding algorithm. For complex systems, use one of the two Gibbs Minimization algorithms.
 
 Click "Next" to continue.</value>
-  </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column2.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Property</value>
-  </data>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Unit</value>
-  </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 15</value>
-  </data>
-  <data name="Label8.Text" xml:space="preserve">
-    <value>System of Units</value>
-  </data>
-  <data name="Label7.Text" xml:space="preserve">
-    <value>Select the desired System of Units for your simulation. You can change the units of existing systems, include new systems and perform other operations in the simulation setup window anytime after finishing this wizard.
-Click "Finish" to exit the wizard and start simulating.</value>
   </data>
   <data name="WizardPage5.Text" xml:space="preserve">
     <value>System of Units</value>
@@ -443,6 +449,37 @@ Click "Finish" to exit the wizard and start simulating.</value>
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
+  </data>
+  <data name="Button8.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Column16.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Column17.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column2.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 15</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>System of Units</value>
+  </data>
+  <data name="Label7.Text" xml:space="preserve">
+    <value>Select the desired System of Units for your simulation. You can change the units of existing systems, include new systems and perform other operations in the simulation setup window anytime after finishing this wizard.
+Click "Finish" to exit the wizard and start simulating.</value>
   </data>
   <data name="OpenFileDialog1.Filter" xml:space="preserve">
     <value>JSON Files|*.json</value>

@@ -104,7 +104,7 @@ namespace DWSIM.Libraries.PythonLink
             if ((bool)((object[])o)[1]) 
                 PythonProcess.StandardInput.WriteLine("echo");
             else
-                //PythonProcess.StandardInput.WriteLine("sys.stdout.flush()");
+                PythonProcess.StandardInput.WriteLine("sys.stdout.flush()");
             PythonDoneEvent.WaitOne();
         }
 
@@ -128,14 +128,11 @@ namespace DWSIM.Libraries.PythonLink
             return SharedBuilder.ToString();
         }
 
-        string errorMessage = null;
         void PythonProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             if (e.Data == null)
             {
                 SharedBuilder.Clear();
-                errorMessage = PythonProcess.StandardError.ReadToEnd();
-                SharedBuilder.Append("Python has exited with the following error message: \r\n" + errorMessage);
                 PythonDoneEvent.Set();
                 return;
             }
@@ -151,9 +148,10 @@ namespace DWSIM.Libraries.PythonLink
 
         void PythonProcess_ErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
-            if (e.Data != null && !e.Data.Contains("Python") && !e.Data.Contains("for more information"))
+            if (e.Data != null)
             {
-                throw new Exception(e.Data);
+                Console.WriteLine(e.Data);
+                //throw new Exception(e.Data);
             }
 
         }

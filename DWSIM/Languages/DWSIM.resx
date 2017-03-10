@@ -5469,4 +5469,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="UndoRedo_SpreadsheetCellChanged" xml:space="preserve">
     <value>Planilha de Cálculo: modificada a célula {0} </value>
   </data>
+  <data name="ChEDLThermoError" xml:space="preserve">
+    <value>Você precisa definir o caminho para uma instalação válida do Python (Configurações Gerais &gt;Outros &gt; Configurações da Ponte DWSIM/Python) com a biblioteca 'thermo' já instalada (comando do PIP: pip install thermo).</value>
+  </data>
 </root>

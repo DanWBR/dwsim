@@ -38,7 +38,7 @@ Public Class ChEDLThermoParser
 
     End Function
 
-    Shared Function SearchCompound(searchstring As String) As List(Of String)
+    Shared Function SearchCompound(searchstring As String) As List(Of String())
 
         Dim python = GetPythonInstance()
 
@@ -54,11 +54,11 @@ Public Class ChEDLThermoParser
 
         python.ExecuteCommand(command, True)
         Dim results = python.ExecuteCommand("if len(valid_CASs) > 0: print c.synonyms" + System.Environment.NewLine + "", False).Replace(", ", "|").TrimStart("[").TrimEnd("]").Split("|")
-
+        Dim cas = python.ExecuteCommand("print c.CAS", False)
         python.PythonProcess.Kill()
         python = Nothing
 
-        Return New List(Of String)(results.Select(Function(x) System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x)))
+        Return New List(Of String())(results.Select(Function(x) New String() {cas, System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x).Trim("'")}))
 
     End Function
 

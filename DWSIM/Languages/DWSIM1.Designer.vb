@@ -1622,6 +1622,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Você precisa definir o caminho para uma instalação válida do Python (Configurações Gerais &gt;Outros &gt; Configurações da Ponte DWSIM/Python) com a biblioteca &apos;thermo&apos; já instalada (comando do PIP: pip install thermo)..
+        '''</summary>
+        Friend Shared ReadOnly Property ChEDLThermoError() As String
+            Get
+                Return ResourceManager.GetString("ChEDLThermoError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Conectado ao servidor na rede..
         '''</summary>
         Friend Shared ReadOnly Property ClientConnected() As String

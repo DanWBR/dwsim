@@ -364,6 +364,12 @@
     <Compile Include="Forms\FormEditGraphicObject.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormImportCompoundChEDLThermo.Designer.vb">
+      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormImportCompoundChEDLThermo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormImportCompoundOnline.Designer.vb">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </Compile>
@@ -380,6 +386,12 @@
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormSearchingDDB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormRunningPythonLink.Designer.vb">
+      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormRunningPythonLink.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FormSearchingOnline.Designer.vb">
@@ -911,6 +923,12 @@
     <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.en.resx">
+      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.resx">
+      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
@@ -931,6 +949,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingDDB.resx">
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRunningPythonLink.en.resx">
+      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormRunningPythonLink.resx">
+      <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingOnline.en.resx">
       <DependentUpon>FormSearchingOnline.vb</DependentUpon>
@@ -1205,6 +1229,10 @@
     <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
       <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
       <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj">
+      <Project>{77a58441-0cf0-4dea-b1f7-7723368f693f}</Project>
+      <Name>DWSIM.Thermodynamics.Databases.ChEDLThermoLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics.Databases.ChemeoLink\DWSIM.Thermodynamics.Databases.ChemeoLink.vbproj">
       <Project>{edb0b095-ff87-4b07-a06f-e314c45d73d4}</Project>
@@ -2463,6 +2491,8 @@
     <None Include="Resources\no.png" />
     <None Include="Resources\rewind.png" />
     <None Include="Resources\page_world.png" />
+    <None Include="Resources\python_icon.png" />
+    <None Include="Resources\python-logo.png" />
     <Content Include="Resources\ru.png" />
     <None Include="Resources\zoom.png" />
     <None Include="Resources\Services.png" />
