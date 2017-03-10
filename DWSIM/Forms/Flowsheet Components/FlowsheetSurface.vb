@@ -3441,11 +3441,15 @@ Public Class FlowsheetSurface
         Dim currposx = Me.FlowsheetDesignSurface.PointToClient(MousePosition).X
         Dim currposy = Me.FlowsheetDesignSurface.PointToClient(MousePosition).Y
         AddNewTSMI.DropDownItems.Clear()
+        Dim add As Boolean = True
         For Each item In Flowsheet.FormObjects.ObjectList
-            AddNewTSMI.DropDownItems.Add(item.GetDisplayName, item.GetIconBitmap, Sub()
-                                                                                      Dim pos = FlowsheetDesignSurface.gscTogoc(currposx, currposy)
-                                                                                      AddObject(item.GetType.Name, pos.X, pos.Y)
-                                                                                  End Sub)
+            If Flowsheet.MobileCompatibilityMode Then add = item.MobileCompatible Else add = True
+            If add Then
+                AddNewTSMI.DropDownItems.Add(item.GetDisplayName, item.GetIconBitmap, Sub()
+                                                                                          Dim pos = FlowsheetDesignSurface.gscTogoc(currposx, currposy)
+                                                                                          AddObject(item.GetType.Name, pos.X, pos.Y)
+                                                                                      End Sub)
+            End If
         Next
 
     End Sub

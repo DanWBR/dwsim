@@ -27,12 +27,14 @@ DWSIM.FlowsheetSolver					Flowsheet Solver library
 DWSIM.GlobalSettings					Shared global settings
 DWSIM.Interfaces					Interface definitions
 DWSIM.Libraries.OctaveSharp				Octave interface 
+DWSIM.Libraries.PythonLink				Python interface 
 DWSIM.MathOps						Math library
 DWSIM.MathOps.RandomOps					Random number generator library
 DWSIM.MathOps.SwarmOps					Optimization library
 DWSIM.Plugins.NaturalGas				Natural Gas Properties Plugin
 DWSIM.SharedClasses					Shared/Base class definitions
 DWSIM.Thermodynamics					Thermo library
+DWSIM.Thermodynamics.Databases.ChEDLThermoLink		ChEDL Thermo Python Library Database Linker/Parser
 DWSIM.Thermodynamics.Databases.ChemeoLink		Cheméo Database Linker/Parser
 DWSIM.Thermodynamics.Databases.DDBStructureLink		DDB UNIFAC/MODFAC Structure Database Linker/Parser
 DWSIM.Thermodynamics.Databases.KDBLink			KDB Database Linker/Parser
