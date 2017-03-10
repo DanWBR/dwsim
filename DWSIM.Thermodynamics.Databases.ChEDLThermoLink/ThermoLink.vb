@@ -29,7 +29,7 @@ Public Class ChEDLThermoParser
                         "for CAS in set(TRC_gas_data.index):" + System.Environment.NewLine +
                         "   try:" + System.Environment.NewLine +
                         "       c = Chemical(CAS)" + System.Environment.NewLine +
-                        "       if c.Tc is not None and c.Pc is not None and c.omega is not None:" + System.Environment.NewLine +
+                        "       if c.Tc is not None and c.Pc is not None and c.omega is not None and c.Cpgm is not None  and c.Psat is not None:" + System.Environment.NewLine +
                         "           valid_CASs.append(CAS)" + System.Environment.NewLine +
                         "   except:" + System.Environment.NewLine +
                         "       pass" + System.Environment.NewLine + ""
