@@ -31,6 +31,9 @@ Public Class ChEDLThermoParser
         python.ExecuteCommand(command, True)
         Dim results = python.ExecuteCommand("print valid_CASs", False).Replace(", ", "|").TrimStart("[").TrimEnd("]").Split("|")
 
+        python.PythonProcess.Kill()
+        python = Nothing
+
         Return New List(Of String)(results)
 
     End Function
@@ -52,13 +55,16 @@ Public Class ChEDLThermoParser
         python.ExecuteCommand(command, True)
         Dim results = python.ExecuteCommand("if len(valid_CASs) > 0: print c.synonyms" + System.Environment.NewLine + "", False).Replace(", ", "|").TrimStart("[").TrimEnd("]").Split("|")
 
+        python.PythonProcess.Kill()
+        python = Nothing
+
         Return New List(Of String)(results.Select(Function(x) System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(x)))
 
     End Function
 
     Shared Function GetCompoundData(id As String) As BaseClasses.ConstantProperties
 
-        Dim python = GetPythonInstance()
+        Dim python = GetPythonInstance("C:\Users\ptc0\Downloads\python_thermo\python-2.7.13.amd64")
 
         Dim command = "from thermo import *" + System.Environment.NewLine +
               "c = Chemical('" + id + "')"
@@ -605,6 +611,9 @@ Public Class ChEDLThermoParser
             comp.Comments += "Surface Tension data unavailable, will be estimated." + vbCrLf
 
         End If
+
+        python.PythonProcess.Kill()
+        python = Nothing
 
         Return comp
 
