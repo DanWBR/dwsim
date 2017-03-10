@@ -2,7 +2,7 @@
 
     Sub Main()
 
-        ChEDLThermoParser.GetSupportedCompounds()
+        ChEDLThermoParser.GetCompoundData("water")
 
     End Sub
 

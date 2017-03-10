@@ -4971,6 +4971,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     result = A + B * T + C * T ^ 2 + D * T ^ 3
                     Return result / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight * 4.1868 'kJ/kg.K
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or _
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
@@ -4985,6 +4986,16 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Else
                         result = Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
+                    Return result
+                ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
+                    A = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_A
+                    B = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_B
+                    C = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_C
+                    D = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_D
+                    E = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Ideal_Gas_Heat_Capacity_Const_E
+                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
                     Return result
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Then
                     Dim A, B, C, D, E, result As Double
@@ -5118,6 +5129,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
+                Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or _
                 Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporPressureEquation
@@ -5467,6 +5479,10 @@ Final3:
                 Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporizationEnthalpyEquation
                 result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, T / Tr) / Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.Molar_Weight / 1000 'kJ/kg
                 Return result
+            ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Then
+                Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.VaporizationEnthalpyEquation
+                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, T / Tr) 'kJ/kg
+                Return result
             Else
                 Return 0.0#
             End If
@@ -5513,6 +5529,7 @@ Final3:
                     ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChemSep" Or _
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "CoolProp" Or _
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "User" Or _
+                    Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Or _
                     Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "KDB" Then
                         Dim A, B, C, D, E, result As Double
                         Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.LiquidViscosityEquation
@@ -5775,6 +5792,16 @@ Final3:
                     E = subst.ConstantProperties.Solid_Density_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
                     val += subst.MassFraction.GetValueOrDefault * 1 / (result * mw)
+                ElseIf db = "ChEDL Thermo" And subst.ConstantProperties.SolidDensityEquation <> "" Then
+                    Dim A, B, C, D, E, result As Double
+                    Dim eqno As String = subst.ConstantProperties.SolidDensityEquation
+                    A = subst.ConstantProperties.Solid_Density_Const_A
+                    B = subst.ConstantProperties.Solid_Density_Const_B
+                    C = subst.ConstantProperties.Solid_Density_Const_C
+                    D = subst.ConstantProperties.Solid_Density_Const_D
+                    E = subst.ConstantProperties.Solid_Density_Const_E
+                    result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                    val += subst.MassFraction.GetValueOrDefault * 1 / (result)
                 Else
                     If subst.ConstantProperties.SolidDensityAtTs <> 0.0# Then
                         val += subst.MassFraction.GetValueOrDefault * 1 / subst.ConstantProperties.SolidDensityAtTs
@@ -5804,6 +5831,16 @@ Final3:
                 E = cprop.Solid_Density_Const_E
                 result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
                 val = 1 / (result * mw)
+            ElseIf cprop.OriginalDB = "ChEDL Thermo" Then
+                Dim A, B, C, D, E, result As Double
+                Dim eqno As String = cprop.SolidDensityEquation
+                A = cprop.Solid_Density_Const_A
+                B = cprop.Solid_Density_Const_B
+                C = cprop.Solid_Density_Const_C
+                D = cprop.Solid_Density_Const_D
+                E = cprop.Solid_Density_Const_E
+                result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kg/m3
+                val = 1 / (result)
             Else
                 If cprop.SolidDensityAtTs <> 0.0# Then
                     val = 1 / cprop.SolidDensityAtTs
@@ -5831,6 +5868,15 @@ Final3:
                 E = cprop.Solid_Heat_Capacity_Const_E
                 result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'J/kmol/K
                 val = result / 1000 / mw 'kJ/kg.K
+            ElseIf cprop.OriginalDB = "ChEDL Thermo" Then
+                Dim A, B, C, D, E As Double
+                Dim eqno As String = cprop.SolidHeatCapacityEquation
+                A = cprop.Solid_Heat_Capacity_Const_A
+                B = cprop.Solid_Heat_Capacity_Const_B
+                C = cprop.Solid_Heat_Capacity_Const_C
+                D = cprop.Solid_Heat_Capacity_Const_D
+                E = cprop.Solid_Heat_Capacity_Const_E
+                val = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg/K
             Else
                 val = 3 ' replacement if no params available
             End If
@@ -6152,7 +6198,7 @@ Final3:
                 Else
                     val = Me.ParseEquation(cprop.LiquidDensityEquation, cprop.Liquid_Density_Const_A, cprop.Liquid_Density_Const_B, cprop.Liquid_Density_Const_C, cprop.Liquid_Density_Const_D, cprop.Liquid_Density_Const_E, T)
                 End If
-                If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "User" Then val = cprop.Molar_Weight * val
+                If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "User" And cprop.OriginalDB <> "ChEDL Thermo" Then val = cprop.Molar_Weight * val
             Else
                 val = Auxiliary.PROPS.liq_dens_rackett(T, cprop.Critical_Temperature, cprop.Critical_Pressure, cprop.Acentric_Factor, cprop.Molar_Weight, cprop.Z_Rackett, 101325, Me.AUX_PVAPi(cprop.Name, T))
             End If
@@ -6189,7 +6235,7 @@ Final3:
                     Else
                         val = Me.ParseEquation(cprop.LiquidHeatCapacityEquation, cprop.Liquid_Heat_Capacity_Const_A, cprop.Liquid_Heat_Capacity_Const_B, cprop.Liquid_Heat_Capacity_Const_C, cprop.Liquid_Heat_Capacity_Const_D, cprop.Liquid_Heat_Capacity_Const_E, T) / cprop.Molar_Weight
                     End If
-                    If cprop.OriginalDB <> "CoolProp" Then val = val / 1000 / cprop.Molar_Weight 'kJ/kg.K
+                    If cprop.OriginalDB <> "CoolProp" And cprop.OriginalDB <> "ChEDL Thermo" Then val = val / 1000 / cprop.Molar_Weight 'kJ/kg.K
                 Else
                     'estimate using Rownlinson/Bondi correlation
                     val = Auxiliary.PROPS.Cpl_rb(AUX_CPi(cprop.Name, T), T, cprop.Critical_Temperature, cprop.Acentric_Factor, cprop.Molar_Weight) 'kJ/kg.K
@@ -6537,6 +6583,24 @@ Final3:
                                 HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
                                 HS -= VMF(i) * Cpi * (298.15 - T)
                             End If
+                        ElseIf cprops(i).OriginalDB = "ChEDL Thermo" Then
+                            Dim A, B, C, D, E As Double
+                            Dim mw As Double = cprops(i).Molar_Weight
+                            Dim eqno As String = cprops(i).SolidHeatCapacityEquation
+                            A = cprops(i).Solid_Heat_Capacity_Const_A
+                            B = cprops(i).Solid_Heat_Capacity_Const_B
+                            C = cprops(i).Solid_Heat_Capacity_Const_C
+                            D = cprops(i).Solid_Heat_Capacity_Const_D
+                            E = cprops(i).Solid_Heat_Capacity_Const_E
+                            Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
+                            If cprops(i).TemperatureOfFusion < 298.15 Then
+                                HS += VMF(i) * Me.AUX_INT_CPDTi_L(298.15, cprops(i).TemperatureOfFusion, cprops(i).Name)
+                                HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
+                                HS -= VMF(i) * Cpi * (cprops(i).TemperatureOfFusion - T)
+                            Else
+                                HS -= VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / mw
+                                HS -= VMF(i) * Cpi * (298.15 - T)
+                            End If
 
                         ElseIf cprops(i).TemperatureOfFusion <> 0.0# Then
                             HS += -VMF(i) * cprops(i).EnthalpyOfFusionAtTf * 1000 / cprops(i).Molar_Weight
@@ -6577,6 +6641,16 @@ Final3:
                         E = cprops(i).Solid_Heat_Capacity_Const_E
                         '<SolidHeatCapacityCp name="Solid heat capacity"  units="J/kmol/K" >
                         Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) / 1000 / mw 'kJ/kg.K
+                        Cp += VMF(i) * Cpi
+                    ElseIf cprops(i).OriginalDB = "ChEDL Thermo" Then
+                        Dim A, B, C, D, E As Double
+                        Dim eqno As String = cprops(i).SolidHeatCapacityEquation
+                        A = cprops(i).Solid_Heat_Capacity_Const_A
+                        B = cprops(i).Solid_Heat_Capacity_Const_B
+                        C = cprops(i).Solid_Heat_Capacity_Const_C
+                        D = cprops(i).Solid_Heat_Capacity_Const_D
+                        E = cprops(i).Solid_Heat_Capacity_Const_E
+                        Cpi = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kJ/kg.K
                         Cp += VMF(i) * Cpi
                     End If
                 End If

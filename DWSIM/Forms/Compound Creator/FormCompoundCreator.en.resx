@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1346, 560</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Compound Properties</value>
-  </data>
   <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
     <value>249, 20</value>
   </data>
@@ -210,25 +204,106 @@
     <value>General Properties</value>
   </data>
   <data name="FaTabStripItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
+    <value>1332, 486</value>
   </data>
   <data name="FaTabStripItem7.Title" xml:space="preserve">
     <value>Vapor Pressure</value>
   </data>
   <data name="FaTabStripItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
+    <value>1332, 486</value>
   </data>
   <data name="FaTabStripItem8.Title" xml:space="preserve">
     <value>Heat Capacity</value>
   </data>
   <data name="FaTabStripItem9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
+    <value>1332, 486</value>
   </data>
   <data name="FaTabStripItem9.Title" xml:space="preserve">
     <value>Liquid Density</value>
   </data>
+  <data name="tbUserDefLiqViscEq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 69</value>
+  </data>
+  <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 229</value>
+  </data>
+  <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="Label46.Text" xml:space="preserve">
+    <value>* Visc in Pa.s, T in K</value>
+  </data>
+  <data name="rbEstimateLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
+  </data>
+  <data name="rbEstimateLIQVISC.Text" xml:space="preserve">
+    <value>Estimate (Letsou-Stiel)</value>
+  </data>
+  <data name="tbLIQVISC_E.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 201</value>
+  </data>
+  <data name="rbRegressLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 17</value>
+  </data>
+  <data name="rbRegressLIQVISC.Text" xml:space="preserve">
+    <value>Regress Experimental Data</value>
+  </data>
+  <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 204</value>
+  </data>
+  <data name="tbLIQVISC_D.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 175</value>
+  </data>
+  <data name="btnRegressLIQVISC.Text" xml:space="preserve">
+    <value>Regress Data</value>
+  </data>
+  <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 178</value>
+  </data>
+  <data name="btnViewLIQVISC.Text" xml:space="preserve">
+    <value>View Regression</value>
+  </data>
+  <data name="tbLIQVISC_C.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 149</value>
+  </data>
+  <data name="Label39.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 152</value>
+  </data>
+  <data name="tbLIQVISC_B.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 123</value>
+  </data>
+  <data name="rbCoeffLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 16</value>
+  </data>
+  <data name="rbCoeffLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 17</value>
+  </data>
+  <data name="rbCoeffLIQVISC.Text" xml:space="preserve">
+    <value>Insert Equation Coefficients *</value>
+  </data>
+  <data name="Label40.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 126</value>
+  </data>
+  <data name="cbEqLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 41</value>
+  </data>
+  <data name="tbLIQVISC_A.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 97</value>
+  </data>
+  <data name="Label42.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 44</value>
+  </data>
+  <data name="Label42.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="Label42.Text" xml:space="preserve">
+    <value>Equation</value>
+  </data>
+  <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
+    <value>234, 100</value>
+  </data>
   <data name="FaTabStripItem10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1317, 396</value>
+    <value>1332, 486</value>
   </data>
   <data name="FaTabStripItem10.Title" xml:space="preserve">
     <value>Liquid Viscosity</value>
@@ -241,6 +316,15 @@
   </data>
   <data name="FaTabStrip2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1334, 507</value>
+  </data>
+  <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>385, 18</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1346, 560</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Compound Properties</value>
   </data>
   <data name="TextBoxComments.Location" type="System.Drawing.Point, System.Drawing">
     <value>85, 497</value>
@@ -971,87 +1055,6 @@
   <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 99</value>
   </data>
-  <data name="tbUserDefLiqViscEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 69</value>
-  </data>
-  <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 229</value>
-  </data>
-  <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
-  </data>
-  <data name="Label46.Text" xml:space="preserve">
-    <value>* Visc in Pa.s, T in K</value>
-  </data>
-  <data name="rbEstimateLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 17</value>
-  </data>
-  <data name="rbEstimateLIQVISC.Text" xml:space="preserve">
-    <value>Estimate (Letsou-Stiel)</value>
-  </data>
-  <data name="tbLIQVISC_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 201</value>
-  </data>
-  <data name="rbRegressLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 17</value>
-  </data>
-  <data name="rbRegressLIQVISC.Text" xml:space="preserve">
-    <value>Regress Experimental Data</value>
-  </data>
-  <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 204</value>
-  </data>
-  <data name="tbLIQVISC_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 175</value>
-  </data>
-  <data name="btnRegressLIQVISC.Text" xml:space="preserve">
-    <value>Regress Data</value>
-  </data>
-  <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 178</value>
-  </data>
-  <data name="btnViewLIQVISC.Text" xml:space="preserve">
-    <value>View Regression</value>
-  </data>
-  <data name="tbLIQVISC_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 149</value>
-  </data>
-  <data name="Label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 152</value>
-  </data>
-  <data name="tbLIQVISC_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 123</value>
-  </data>
-  <data name="rbCoeffLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 16</value>
-  </data>
-  <data name="rbCoeffLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 17</value>
-  </data>
-  <data name="rbCoeffLIQVISC.Text" xml:space="preserve">
-    <value>Insert Equation Coefficients *</value>
-  </data>
-  <data name="Label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 126</value>
-  </data>
-  <data name="cbEqLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 41</value>
-  </data>
-  <data name="tbLIQVISC_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 97</value>
-  </data>
-  <data name="Label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 44</value>
-  </data>
-  <data name="Label42.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
-  </data>
-  <data name="Label42.Text" xml:space="preserve">
-    <value>Equation</value>
-  </data>
-  <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 100</value>
-  </data>
   <data name="LabelWithDivider7.Text" xml:space="preserve">
     <value>Density and Heat Capacity</value>
   </data>
@@ -1132,9 +1135,6 @@
   </data>
   <data name="Label55.Text" xml:space="preserve">
     <value>Enthalpy of fusion</value>
-  </data>
-  <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>385, 18</value>
   </data>
   <data name="DBOpenDlg.Filter" xml:space="preserve">
     <value>XML Files|*.xml</value>

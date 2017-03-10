@@ -54,15 +54,21 @@ namespace DWSIM.Libraries.PythonLink
             pi.WorkingDirectory = ".";
             PythonProcess.StartInfo = pi;
             PythonProcess.Start();
+            PythonProcess.ErrorDataReceived += new DataReceivedEventHandler(PythonProcess_ErrorDataReceived);
             PythonProcess.OutputDataReceived += new DataReceivedEventHandler(PythonProcess_OutputDataReceived);
             PythonProcess.BeginOutputReadLine();
+            PythonProcess.BeginErrorReadLine();
             PythonEntryText = ExecuteCommand("echo = '" + PythonEchoString + "'", true);
         }
 
         public double GetScalar(string command)
         {
             string rasp = ExecuteCommand(command, false);
-            return double.Parse(rasp, CultureInfo.InvariantCulture);
+            if (rasp == "None"){
+                return 0.0d;
+            }else{
+                return double.Parse(rasp, CultureInfo.InvariantCulture);
+            }
         }
 
         public double[] GetVector(string command)
@@ -98,7 +104,7 @@ namespace DWSIM.Libraries.PythonLink
             if ((bool)((object[])o)[1]) 
                 PythonProcess.StandardInput.WriteLine("echo");
             else
-                PythonProcess.StandardInput.WriteLine("sys.stdout.flush()");
+                //PythonProcess.StandardInput.WriteLine("sys.stdout.flush()");
             PythonDoneEvent.WaitOne();
         }
 
@@ -142,6 +148,16 @@ namespace DWSIM.Libraries.PythonLink
             }
 
         }
+
+        void PythonProcess_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null && !e.Data.Contains("Python") && !e.Data.Contains("for more information"))
+            {
+                throw new Exception(e.Data);
+            }
+
+        }
+
         public delegate void PythonRestartedEventHandler(object sender, EventArgs e);
     }
 }

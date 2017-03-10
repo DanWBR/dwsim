@@ -65,6 +65,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LM.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="ThermoLink.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -114,6 +115,10 @@
     <ProjectReference Include="..\DWSIM.Libraries.PythonLink\DWSIM.Libraries.PythonLink.csproj">
       <Project>{3a73164c-c190-4d33-ae6c-a3bc69873e73}</Project>
       <Name>DWSIM.Libraries.PythonLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
+      <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
+      <Name>DWSIM.MathOps</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
