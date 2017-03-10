@@ -48,6 +48,7 @@ Partial Class FormPureComp
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.LblModified = New System.Windows.Forms.Label()
         Me.BtnRestaurar = New System.Windows.Forms.Button()
         Me.chkEnableEdit = New System.Windows.Forms.CheckBox()
@@ -139,6 +140,7 @@ Partial Class FormPureComp
         Me.FaTabStripItem2 = New FarsiLibrary.Win.FATabStripItem()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.TextBoxComments = New System.Windows.Forms.TextBox()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.GroupBox1.SuspendLayout()
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
@@ -183,6 +185,7 @@ Partial Class FormPureComp
         'GroupBox1
         '
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
+        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.LblModified)
         Me.GroupBox1.Controls.Add(Me.BtnRestaurar)
         Me.GroupBox1.Controls.Add(Me.chkEnableEdit)
@@ -191,6 +194,13 @@ Partial Class FormPureComp
         Me.GroupBox1.Controls.Add(Me.FaTabStrip1)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'Button1
+        '
+        resources.ApplyResources(Me.Button1, "Button1")
+        Me.Button1.Image = Global.DWSIM.My.Resources.Resources.card_export
+        Me.Button1.Name = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'LblModified
         '
@@ -1095,6 +1105,11 @@ Partial Class FormPureComp
         Me.TextBoxComments.Name = "TextBoxComments"
         Me.TextBoxComments.ReadOnly = True
         '
+        'SaveFileDialog1
+        '
+        resources.ApplyResources(Me.SaveFileDialog1, "SaveFileDialog1")
+        Me.SaveFileDialog1.RestoreDirectory = True
+        '
         'FormPureComp
         '
         resources.ApplyResources(Me, "$this")
@@ -1240,4 +1255,6 @@ Partial Class FormPureComp
     Friend WithEvents FaTabStripItem2 As FarsiLibrary.Win.FATabStripItem
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents TextBoxComments As System.Windows.Forms.TextBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 End Class

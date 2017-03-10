@@ -138,9 +138,6 @@
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="LinkLabel3.Text" xml:space="preserve">
     <value>http://www.ddbst.com/unifacga.html</value>
   </data>
@@ -149,6 +146,9 @@
   </data>
   <data name="&gt;&gt;Panel3.Name" xml:space="preserve">
     <value>Panel3</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 13</value>
   </data>
   <data name="&gt;&gt;btnNext.Name" xml:space="preserve">
     <value>btnNext</value>
@@ -168,9 +168,6 @@
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
@@ -179,6 +176,9 @@
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>289, 13</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>Passo 3 - Revisar Dados e Adicionar Componente</value>
   </data>
   <data name="btnNext.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -189,17 +189,20 @@
   <data name="Label8.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>Passo 3 - Revisar Dados e Adicionar Componente</value>
+  <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 99</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Importar Componente de Fontes Online</value>
+    <value>Importar Componente da biblioteca ChEDL Thermo</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;dgResults.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -210,17 +213,17 @@
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
-  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 13</value>
+  <data name="&gt;&gt;btnPrev.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
+    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;lbFoundItems.Parent" xml:space="preserve">
     <value>Panel2</value>
   </data>
-  <data name="tbSearchString.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -236,6 +239,9 @@
   </data>
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>390, 55</value>
@@ -258,14 +264,11 @@
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 9</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 133</value>
   </data>
   <data name="&gt;&gt;PictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="btnPrev.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;btnPrev.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -278,6 +281,9 @@
   </data>
   <data name="&gt;&gt;LinkLabel3.Parent" xml:space="preserve">
     <value>Panel1</value>
+  </data>
+  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="LinkLabel3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -327,9 +333,6 @@
   <data name="PictureBox1.ImageLocation" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnPrev.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;Label3.Name" xml:space="preserve">
     <value>Label3</value>
   </data>
@@ -351,11 +354,8 @@
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Panel2.Name" xml:space="preserve">
-    <value>Panel2</value>
-  </data>
-  <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;tbSearchString.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -369,8 +369,8 @@
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
-  <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="btnPrev.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="Label3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -408,9 +408,6 @@
   <data name="&gt;&gt;Label2.Name" xml:space="preserve">
     <value>Label2</value>
   </data>
-  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
@@ -422,6 +419,9 @@
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="LinkLabel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>178, 224</value>
@@ -438,8 +438,14 @@
   <data name="lbFoundItems.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>555, 299</value>
+  </data>
   <data name="LinkLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 13</value>
+  </data>
+  <data name="Label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="btnPrev.Location" type="System.Drawing.Point, System.Drawing">
     <value>387, 438</value>
@@ -450,8 +456,8 @@
   <data name="&gt;&gt;dgResults.Parent" xml:space="preserve">
     <value>Panel3</value>
   </data>
-  <data name="&gt;&gt;Label7.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 224</value>
@@ -471,8 +477,8 @@
   <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="Panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>555, 299</value>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Passo 1 - Procurar Substância</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -516,8 +522,8 @@
   <data name="PictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Nome, Número CAS ou Fórmula</value>
@@ -527,9 +533,6 @@
   </data>
   <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
-    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -555,7 +558,7 @@
   <data name="&gt;&gt;Panel3.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
+  <data name="LinkLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="&gt;&gt;Panel3.Type" xml:space="preserve">
@@ -599,6 +602,9 @@
   </data>
   <data name="&gt;&gt;LinkLabel1.Name" xml:space="preserve">
     <value>LinkLabel1</value>
+  </data>
+  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="Panel2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -645,14 +651,14 @@
   <data name="&gt;&gt;Panel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>555, 472</value>
-  </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>Passo 1 - Procurar Substância</value>
+  <data name="&gt;&gt;Label4.Parent" xml:space="preserve">
+    <value>Panel2</value>
   </data>
   <data name="&gt;&gt;Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbSearchString.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;LinkLabel3.Type" xml:space="preserve">
     <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -660,14 +666,11 @@
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 37</value>
   </data>
-  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>A lista abaixo contém os registros encontrados para a substância pesquisada. Selecione o item que deseja usar como nome da substância a adicionar e clique em "Próximo" para importar os dados.</value>
   </data>
   <data name="&gt;&gt;Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>A lista abaixo contém os registros encontrados para a substância pesquisada. Selecione o item que deseja usar como nome da substância a adicionar e clique em "Próximo" para importar os dados.</value>
   </data>
   <data name="btnPrev.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -684,8 +687,8 @@
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>306, 438</value>
   </data>
-  <data name="LinkLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;btnPrev.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -693,11 +696,11 @@
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>555, 472</value>
+  </data>
   <data name="Label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="Panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 133</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormImportCompoundChEDLThermo</value>
@@ -707,9 +710,6 @@
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnPrev.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="Panel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 133</value>
@@ -731,6 +731,9 @@
   </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -1027,4 +1027,15 @@ Public Class FormPureComp
         chkEnableEdit.Enabled = Added
 
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Try
+                File.WriteAllText(Me.SaveFileDialog1.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(constprop, Newtonsoft.Json.Formatting.Indented))
+                MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
 End Class

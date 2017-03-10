@@ -211,6 +211,6 @@
 ChEDL Thermo Library (Python)</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Import Compound from Online Sources</value>
+    <value>Import Compound from ChEDL Thermo Library</value>
   </data>
 </root>

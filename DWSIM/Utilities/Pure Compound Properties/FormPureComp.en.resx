@@ -117,12 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Button1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Button1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>611, 431</value>
+  </data>
+  <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 23</value>
+  </data>
+  <data name="Button1.Text" xml:space="preserve">
+    <value>Export Data to JSON File</value>
+  </data>
+  <data name="BtnRestaurar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="BtnRestaurar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>199, 431</value>
+  </data>
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Restore Defaults</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkEnableEdit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="chkEnableEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>502, 18</value>
+    <value>12, 435</value>
   </data>
   <data name="chkEnableEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 17</value>
@@ -131,10 +160,10 @@
     <value>Enable Constant Property Editing</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Component</value>
+    <value>Compound</value>
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -145,8 +174,17 @@
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Unit</value>
   </data>
+  <data name="GridProps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>736, 330</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>742, 350</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Properties</value>
+  </data>
+  <data name="FaTabStripItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>757, 364</value>
   </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Constants</value>
@@ -286,8 +324,23 @@
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Comments</value>
   </data>
+  <data name="FaTabStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>759, 385</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>766, 458</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>View</value>
+  </data>
+  <data name="SaveFileDialog1.Filter" xml:space="preserve">
+    <value>JSON Files|*.json</value>
+  </data>
+  <data name="SaveFileDialog1.Title" xml:space="preserve">
+    <value>Export Compound Data to JSON File</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>766, 458</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pure Compound Properties</value>
