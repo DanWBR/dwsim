@@ -195,7 +195,7 @@ Public Class ChEDLThermoParser
         coeffs(3) = -0.000000384
         coeffs(4) = 0.000000000129
 
-        obj = lmfit.GetCoeffs(TrangeL.ToArray, CpIG.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+        obj = lmfit.GetCoeffs(TrangeV.ToArray, CpIG.ToArray, coeffs.Clone, ChEDLThermoLink.LMFit.FitType.Cp, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
         fitcoeffs = obj(0)
         r_fit = obj(2)
         n_fit = obj(3)
@@ -244,7 +244,7 @@ Public Class ChEDLThermoParser
             comp.Comments += vbCrLf
             comp.Comments += "Liquid Heat Capacity regression residual = " + r_fit.ToString(ci) + vbCrLf
             comp.Comments += "Regressed Data Table" + vbCrLf
-            comp.Comments += GetTable(TrangeV, CpL, "T (K)", "Cp (kJ/kg.K)")
+            comp.Comments += GetTable(TrangeL, CpL, "T (K)", "Cp (kJ/kg.K)")
 
         Else
 
