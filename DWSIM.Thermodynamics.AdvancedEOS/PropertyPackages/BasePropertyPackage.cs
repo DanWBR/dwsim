@@ -79,12 +79,10 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             if (GlobalSettings.Settings.OctavePath == "" && Environment.OSVersion.Platform == PlatformID.Win32NT) { throw new Exception("Octave binaries path not set (go to 'Edit' > 'General Settings' > 'Other' > 'DWSIM/Octave bridge settings')."); }
 
-            if (GlobalSettings.Settings.OctaveFileTempDir == "") { GlobalSettings.Settings.OctaveFileTempDir = Path.GetTempPath(); }
-
             var octave = new Octave(GlobalSettings.Settings.OctavePath);
 
             octave.ExecuteCommand("addpath('" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + Path.DirectorySeparatorChar + "ECE')");
-            octave.ExecuteCommand("cd '" + GlobalSettings.Settings.OctaveFileTempDir + "'");
+            octave.ExecuteCommand("cd '" + Path.GetTempPath() + Path.DirectorySeparatorChar + "'");
 
             return octave;
 
@@ -126,7 +124,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             var finalString = new String(stringChars);
 
-            string filename = GlobalSettings.Settings.OctaveFileTempDir + Path.DirectorySeparatorChar + finalString + ".m";
+            string filename = Path.GetTempPath() + Path.DirectorySeparatorChar + finalString + ".m";
 
             StringWriter contents = new StringWriter();
 

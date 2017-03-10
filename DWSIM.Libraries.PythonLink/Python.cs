@@ -12,21 +12,6 @@ namespace DWSIM.Libraries.PythonLink
     public class Python
     {
 
-        static void Main()
-        {
-
-            var python = new Python(@"C:\Users\ptc0\Downloads\python_thermo\python-2.7.13.amd64\", false);
-
-            python.ExecuteCommand("import sys", true);
-
-            python.ExecuteCommand("from thermo.chemical import Chemical", true);
-
-            python.ExecuteCommand("tol = Chemical('toluene')", true);
-
-            var results = python.GetVector("tol.Tm, tol.Tc, tol.Pc");
-            
-        }
-
         public Process PythonProcess { get; set; }
         private string PythonEchoString { get; set; }
         public Python(string PathToPythonBinaries)
@@ -94,12 +79,21 @@ namespace DWSIM.Libraries.PythonLink
 
         public void WorkThread(object o)
         {
-            string command = (string)((object[])o)[0];
+            var command = ((object[])o)[0];
             SharedBuilder.Clear();
             PythonDoneEvent.Reset();
             if (command != null)
             {
-                PythonProcess.StandardInput.WriteLine(command);
+                if (command is string)
+                {
+                    PythonProcess.StandardInput.WriteLine((string)command);
+                }
+                else {
+                    foreach (string s in (string[])((object[])o)[0])
+                    {
+                        PythonProcess.StandardInput.WriteLine(s);
+                    }
+                }
             }
             if ((bool)((object[])o)[1]) 
                 PythonProcess.StandardInput.WriteLine("echo");
@@ -117,6 +111,17 @@ namespace DWSIM.Libraries.PythonLink
 
             return SharedBuilder.ToString();
         }
+
+        public string ExecuteMultilineCommand(string[] command, bool writeecho)
+        {
+            Thread tmp = new Thread(new ParameterizedThreadStart(WorkThread));
+            tmp.Start(new object[] { command, writeecho });
+
+            tmp.Join();
+
+            return SharedBuilder.ToString();
+        }
+
         string errorMessage = null;
         void PythonProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
