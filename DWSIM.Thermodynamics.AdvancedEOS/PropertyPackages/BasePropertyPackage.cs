@@ -264,7 +264,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             try
             {
                 CurrentMaterialStream.Flowsheet.ShowMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]", IFlowsheet.MessageType.Information);
-                octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), GlobalSettings.Settings.OctaveTimeoutInMinutes * 60 * 1000);
+                octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), (int)(GlobalSettings.Settings.OctaveTimeoutInMinutes * 60 * 1000));
                 CurrentMaterialStream.Flowsheet.ShowMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s", IFlowsheet.MessageType.Information);
                 switch (prop)
                 {

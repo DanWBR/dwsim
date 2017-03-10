@@ -363,10 +363,10 @@ Namespace DWSIM
             My.Settings.IgnoreCompoundPropertiesOnLoad = source.Configs("Misc").GetBoolean("IgnoreCompoundConstantPropertyDatainXMLFile", False)
 
             My.Settings.OctavePath = source.Configs("OctaveBridge").GetString("OctavePath", "")
-            My.Settings.OctaveProcessTimeout = source.Configs("OctaveBridge").GetInt("OctaveProcessTimeout", 15)
+            My.Settings.OctaveProcessTimeout = source.Configs("OctaveBridge").GetFloat("OctaveProcessTimeout", 15)
 
             My.Settings.PythonPath = source.Configs("PythonBridge").GetString("PythonPath", "")
-            My.Settings.PythonProcessTimeout = source.Configs("PythonBridge").GetInt("PythonProcessTimeout", 15)
+            My.Settings.PythonProcessTimeout = source.Configs("PythonBridge").GetFloat("PythonProcessTimeout", 1)
 
             My.Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
             My.Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)

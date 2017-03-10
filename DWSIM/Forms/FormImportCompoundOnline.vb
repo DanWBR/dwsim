@@ -88,6 +88,7 @@ Public Class FormImportCompoundOnline
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Me.Enabled = True
                                                         Focus()
                                                         tcs.Cancel()
                                                     End Sub
@@ -173,6 +174,7 @@ Public Class FormImportCompoundOnline
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Me.Enabled = True
                                                         Focus()
                                                         tcs.Cancel()
                                                     End Sub

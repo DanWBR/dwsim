@@ -168,8 +168,8 @@
     <Setting Name="OctavePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="OctaveProcessTimeout" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="OctaveProcessTimeout" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="CurrentPlatform" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -180,8 +180,8 @@
     <Setting Name="PythonPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="PythonProcessTimeout" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="PythonProcessTimeout" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

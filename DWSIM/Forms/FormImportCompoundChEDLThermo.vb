@@ -65,6 +65,13 @@ Public Class FormImportCompoundChEDLThermo
                 t.Start()
 
                 t.ContinueWith(Sub()
+                                   If Not ChEDLThermoParser.PythonInstance Is Nothing Then
+                                       Try
+                                           ChEDLThermoParser.PythonInstance.PythonProcess.Kill()
+                                           ChEDLThermoParser.PythonInstance = Nothing
+                                       Catch ex As Exception
+                                       End Try
+                                   End If
                                    UIThread(Sub()
                                                 fsearch.Close()
                                                 If DWSIM.App.IsRunningOnMono Then
@@ -90,6 +97,7 @@ Public Class FormImportCompoundChEDLThermo
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Me.Enabled = True
                                                         Focus()
                                                         tcs.Cancel()
                                                     End Sub
@@ -126,6 +134,13 @@ Public Class FormImportCompoundChEDLThermo
                                           t3.Start()
                                           Task.WaitAll(t1, t3)
                                       End Sub).ContinueWith(Sub()
+                                                                If Not ChEDLThermoParser.PythonInstance Is Nothing Then
+                                                                    Try
+                                                                        ChEDLThermoParser.PythonInstance.PythonProcess.Kill()
+                                                                        ChEDLThermoParser.PythonInstance = Nothing
+                                                                    Catch ex As Exception
+                                                                    End Try
+                                                                End If
                                                                 UIThread(Sub()
                                                                              fsearch.Close()
                                                                              If DWSIM.App.IsRunningOnMono Then
@@ -147,6 +162,7 @@ Public Class FormImportCompoundChEDLThermo
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Me.Enabled = True
                                                         Focus()
                                                         tcs.Cancel()
                                                     End Sub

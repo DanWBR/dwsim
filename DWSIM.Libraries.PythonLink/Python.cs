@@ -64,9 +64,12 @@ namespace DWSIM.Libraries.PythonLink
         public double GetScalar(string command)
         {
             string rasp = ExecuteCommand(command, false);
-            if (rasp == "None"){
+            if (rasp == "None")
+            {
                 return 0.0d;
-            }else{
+            }
+            else
+            {
                 return double.Parse(rasp, CultureInfo.InvariantCulture);
             }
         }
@@ -94,14 +97,15 @@ namespace DWSIM.Libraries.PythonLink
                 {
                     PythonProcess.StandardInput.WriteLine((string)command);
                 }
-                else {
+                else
+                {
                     foreach (string s in (string[])((object[])o)[0])
                     {
                         PythonProcess.StandardInput.WriteLine(s);
                     }
                 }
             }
-            if ((bool)((object[])o)[1]) 
+            if ((bool)((object[])o)[1])
                 PythonProcess.StandardInput.WriteLine("echo");
             else
                 PythonProcess.StandardInput.WriteLine("sys.stdout.flush()");
@@ -113,7 +117,11 @@ namespace DWSIM.Libraries.PythonLink
             Thread tmp = new Thread(new ParameterizedThreadStart(WorkThread));
             tmp.Start(new object[] { command, writeecho });
 
-            tmp.Join();
+            if (!tmp.Join((int)(GlobalSettings.Settings.PythonTimeoutInMinutes * 60 * 1000)))
+            {
+                tmp.Abort();
+                throw new Exception("Python timeout");
+            }
 
             return SharedBuilder.ToString();
         }
@@ -123,7 +131,11 @@ namespace DWSIM.Libraries.PythonLink
             Thread tmp = new Thread(new ParameterizedThreadStart(WorkThread));
             tmp.Start(new object[] { command, writeecho });
 
-            tmp.Join();
+            if (!tmp.Join((int)(GlobalSettings.Settings.PythonTimeoutInMinutes * 60 * 1000)))
+            {
+                tmp.Abort();
+                throw new Exception("Python timeout");
+            }
 
             return SharedBuilder.ToString();
         }

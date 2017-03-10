@@ -709,10 +709,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property OctaveProcessTimeout() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("15")>  _
+        Public Property OctaveProcessTimeout() As Double
             Get
-                Return CType(Me("OctaveProcessTimeout"),Integer)
+                Return CType(Me("OctaveProcessTimeout"),Double)
             End Get
             Set
                 Me("OctaveProcessTimeout") = value
@@ -757,10 +757,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property PythonProcessTimeout() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property PythonProcessTimeout() As Double
             Get
-                Return CType(Me("PythonProcessTimeout"),Integer)
+                Return CType(Me("PythonProcessTimeout"),Double)
             End Get
             Set
                 Me("PythonProcessTimeout") = value

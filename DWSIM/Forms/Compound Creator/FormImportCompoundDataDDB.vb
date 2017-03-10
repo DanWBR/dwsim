@@ -70,6 +70,7 @@ Public Class FormImportCompoundDataDDB
 
                 AddHandler fsearch.btnCancel.Click, Sub()
                                                         fsearch.Close()
+                                                        Me.Enabled = True
                                                         Focus()
                                                         tcs.Cancel()
                                                     End Sub

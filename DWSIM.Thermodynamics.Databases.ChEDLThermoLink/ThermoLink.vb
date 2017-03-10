@@ -3,6 +3,8 @@ Imports DWSIM.Libraries.PythonLink
 
 Public Class ChEDLThermoParser
 
+    Shared Property PythonInstance As Python
+
     Shared Function GetPythonInstance(Optional ByVal ppath As String = "") As Python
 
         If ppath = "" Then
@@ -16,6 +18,8 @@ Public Class ChEDLThermoParser
     Shared Function GetSupportedCompounds() As List(Of String)
 
         Dim python = GetPythonInstance()
+
+        PythonInstance = python
 
         Dim command = "from thermo import *" + System.Environment.NewLine +
                         "valid_CASs = [] " + System.Environment.NewLine +
@@ -42,6 +46,8 @@ Public Class ChEDLThermoParser
 
         Dim python = GetPythonInstance()
 
+        PythonInstance = python
+
         Dim command = "from thermo import *" + System.Environment.NewLine +
                         "valid_CASs = []" + System.Environment.NewLine +
                         "c = None" + System.Environment.NewLine +
@@ -65,6 +71,8 @@ Public Class ChEDLThermoParser
     Shared Function GetCompoundData(id As String) As BaseClasses.ConstantProperties
 
         Dim python = GetPythonInstance("C:\Users\ptc0\Downloads\python_thermo\python-2.7.13.amd64")
+
+        PythonInstance = python
 
         Dim command = "from thermo import *" + System.Environment.NewLine +
               "c = Chemical('" + id + "')"
