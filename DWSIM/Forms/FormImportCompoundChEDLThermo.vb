@@ -65,13 +65,7 @@ Public Class FormImportCompoundChEDLThermo
                 t.Start()
 
                 t.ContinueWith(Sub()
-                                   If Not ChEDLThermoParser.PythonInstance Is Nothing Then
-                                       Try
-                                           ChEDLThermoParser.PythonInstance.PythonProcess.Kill()
-                                           ChEDLThermoParser.PythonInstance = Nothing
-                                       Catch ex As Exception
-                                       End Try
-                                   End If
+                                   KillPythonInstance()
                                    UIThread(Sub()
                                                 fsearch.Close()
                                                 If DWSIM.App.IsRunningOnMono Then
@@ -96,6 +90,7 @@ Public Class FormImportCompoundChEDLThermo
                                End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
+                                                        KillPythonInstance()
                                                         fsearch.Close()
                                                         Me.Enabled = True
                                                         Focus()
@@ -134,13 +129,7 @@ Public Class FormImportCompoundChEDLThermo
                                           t3.Start()
                                           Task.WaitAll(t1, t3)
                                       End Sub).ContinueWith(Sub()
-                                                                If Not ChEDLThermoParser.PythonInstance Is Nothing Then
-                                                                    Try
-                                                                        ChEDLThermoParser.PythonInstance.PythonProcess.Kill()
-                                                                        ChEDLThermoParser.PythonInstance = Nothing
-                                                                    Catch ex As Exception
-                                                                    End Try
-                                                                End If
+                                                                KillPythonInstance()
                                                                 UIThread(Sub()
                                                                              fsearch.Close()
                                                                              If DWSIM.App.IsRunningOnMono Then
@@ -161,6 +150,7 @@ Public Class FormImportCompoundChEDLThermo
                                                             End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
+                                                        KillPythonInstance()
                                                         fsearch.Close()
                                                         Me.Enabled = True
                                                         Focus()
@@ -290,6 +280,16 @@ Public Class FormImportCompoundChEDLThermo
 
     Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
         Process.Start("http://www.ddbst.com/unifacga.html")
+    End Sub
+
+    Sub KillPythonInstance()
+        If Not ChEDLThermoParser.PythonInstance Is Nothing Then
+            Try
+                ChEDLThermoParser.PythonInstance.PythonProcess.Kill()
+                ChEDLThermoParser.PythonInstance = Nothing
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 
 End Class

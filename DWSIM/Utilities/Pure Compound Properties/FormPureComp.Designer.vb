@@ -56,7 +56,6 @@ Partial Class FormPureComp
         Me.Label1 = New System.Windows.Forms.Label()
         Me.FaTabStrip1 = New FarsiLibrary.Win.FATabStrip()
         Me.FaTabStripItem1 = New FarsiLibrary.Win.FATabStripItem()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.GridProps = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -145,7 +144,6 @@ Partial Class FormPureComp
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         CType(Me.GridProps, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem6.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -184,7 +182,6 @@ Partial Class FormPureComp
         '
         'GroupBox1
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.LblModified)
         Me.GroupBox1.Controls.Add(Me.BtnRestaurar)
@@ -192,6 +189,7 @@ Partial Class FormPureComp
         Me.GroupBox1.Controls.Add(Me.ComboBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.FaTabStrip1)
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
@@ -204,9 +202,9 @@ Partial Class FormPureComp
         '
         'LblModified
         '
-        resources.ApplyResources(Me.LblModified, "LblModified")
         Me.LblModified.BackColor = System.Drawing.Color.Lime
         Me.LblModified.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.LblModified, "LblModified")
         Me.LblModified.ForeColor = System.Drawing.Color.Black
         Me.LblModified.Name = "LblModified"
         '
@@ -224,9 +222,9 @@ Partial Class FormPureComp
         '
         'ComboBox1
         '
-        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBox1.DropDownWidth = 300
+        resources.ApplyResources(Me.ComboBox1, "ComboBox1")
         Me.ComboBox1.Name = "ComboBox1"
         '
         'Label1
@@ -236,31 +234,23 @@ Partial Class FormPureComp
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem6, Me.FaTabStripItem16, Me.FaTabStripItem17, Me.FaTabStripItem18, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
-        Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
+        Me.FaTabStripItem1.Controls.Add(Me.GridProps)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
-        '
-        'GroupBox2
-        '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
-        Me.GroupBox2.Controls.Add(Me.GridProps)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.TabStop = False
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GridProps
         '
-        resources.ApplyResources(Me.GridProps, "GridProps")
         Me.GridProps.AllowUserToAddRows = False
         Me.GridProps.AllowUserToDeleteRows = False
         Me.GridProps.AllowUserToResizeColumns = False
@@ -268,6 +258,7 @@ Partial Class FormPureComp
         Me.GridProps.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GridProps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridProps.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3})
+        resources.ApplyResources(Me.GridProps, "GridProps")
         Me.GridProps.Name = "GridProps"
         Me.GridProps.RowHeadersVisible = False
         Me.GridProps.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -306,12 +297,12 @@ Partial Class FormPureComp
         '
         'FaTabStripItem6
         '
-        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         Me.FaTabStripItem6.CanClose = False
         Me.FaTabStripItem6.Controls.Add(Me.GroupBox3)
         Me.FaTabStripItem6.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem6.IsDrawn = True
         Me.FaTabStripItem6.Name = "FaTabStripItem6"
+        resources.ApplyResources(Me.FaTabStripItem6, "FaTabStripItem6")
         '
         'GroupBox3
         '
@@ -412,34 +403,34 @@ Partial Class FormPureComp
         '
         'FaTabStripItem16
         '
-        resources.ApplyResources(Me.FaTabStripItem16, "FaTabStripItem16")
         Me.FaTabStripItem16.CanClose = False
         Me.FaTabStripItem16.Controls.Add(Me.FaTabStripLiq)
         Me.FaTabStripItem16.IsDrawn = True
         Me.FaTabStripItem16.Name = "FaTabStripItem16"
+        resources.ApplyResources(Me.FaTabStripItem16, "FaTabStripItem16")
         '
         'FaTabStripLiq
         '
-        resources.ApplyResources(Me.FaTabStripLiq, "FaTabStripLiq")
         Me.FaTabStripLiq.AlwaysShowClose = False
         Me.FaTabStripLiq.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStripLiq, "FaTabStripLiq")
         Me.FaTabStripLiq.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPLIQ, Me.FaTabStripItemHVAP, Me.FaTabStripItemPVAP, Me.FaTabStripItemSURFT, Me.FaTabStripItemLIQVISC, Me.FaTabStripItemLIQDENS, Me.FaTabStripItemLIQTCOND, Me.FaTabStripItemTabLiq})
         Me.FaTabStripLiq.Name = "FaTabStripLiq"
         Me.FaTabStripLiq.SelectedItem = Me.FaTabStripItemCPLIQ
         '
         'FaTabStripItemCPLIQ
         '
-        resources.ApplyResources(Me.FaTabStripItemCPLIQ, "FaTabStripItemCPLIQ")
         Me.FaTabStripItemCPLIQ.CanClose = False
         Me.FaTabStripItemCPLIQ.Controls.Add(Me.GraphLiqCp)
         Me.FaTabStripItemCPLIQ.IsDrawn = True
         Me.FaTabStripItemCPLIQ.Name = "FaTabStripItemCPLIQ"
         Me.FaTabStripItemCPLIQ.Selected = True
+        resources.ApplyResources(Me.FaTabStripItemCPLIQ, "FaTabStripItemCPLIQ")
         '
         'GraphLiqCp
         '
-        resources.ApplyResources(Me.GraphLiqCp, "GraphLiqCp")
         Me.GraphLiqCp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphLiqCp, "GraphLiqCp")
         Me.GraphLiqCp.IsAntiAlias = True
         Me.GraphLiqCp.IsAutoScrollRange = True
         Me.GraphLiqCp.IsShowCopyMessage = False
@@ -455,16 +446,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemHVAP
         '
-        resources.ApplyResources(Me.FaTabStripItemHVAP, "FaTabStripItemHVAP")
         Me.FaTabStripItemHVAP.CanClose = False
         Me.FaTabStripItemHVAP.Controls.Add(Me.GraphDHVAP)
         Me.FaTabStripItemHVAP.IsDrawn = True
         Me.FaTabStripItemHVAP.Name = "FaTabStripItemHVAP"
+        resources.ApplyResources(Me.FaTabStripItemHVAP, "FaTabStripItemHVAP")
         '
         'GraphDHVAP
         '
-        resources.ApplyResources(Me.GraphDHVAP, "GraphDHVAP")
         Me.GraphDHVAP.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphDHVAP, "GraphDHVAP")
         Me.GraphDHVAP.IsAntiAlias = True
         Me.GraphDHVAP.IsAutoScrollRange = True
         Me.GraphDHVAP.IsShowCopyMessage = False
@@ -480,16 +471,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemPVAP
         '
-        resources.ApplyResources(Me.FaTabStripItemPVAP, "FaTabStripItemPVAP")
         Me.FaTabStripItemPVAP.CanClose = False
         Me.FaTabStripItemPVAP.Controls.Add(Me.GraphPvap)
         Me.FaTabStripItemPVAP.IsDrawn = True
         Me.FaTabStripItemPVAP.Name = "FaTabStripItemPVAP"
+        resources.ApplyResources(Me.FaTabStripItemPVAP, "FaTabStripItemPVAP")
         '
         'GraphPvap
         '
-        resources.ApplyResources(Me.GraphPvap, "GraphPvap")
         Me.GraphPvap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphPvap, "GraphPvap")
         Me.GraphPvap.IsAntiAlias = True
         Me.GraphPvap.IsAutoScrollRange = True
         Me.GraphPvap.IsShowCopyMessage = False
@@ -505,16 +496,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemSURFT
         '
-        resources.ApplyResources(Me.FaTabStripItemSURFT, "FaTabStripItemSURFT")
         Me.FaTabStripItemSURFT.CanClose = False
         Me.FaTabStripItemSURFT.Controls.Add(Me.GraphSurfT)
         Me.FaTabStripItemSURFT.IsDrawn = True
         Me.FaTabStripItemSURFT.Name = "FaTabStripItemSURFT"
+        resources.ApplyResources(Me.FaTabStripItemSURFT, "FaTabStripItemSURFT")
         '
         'GraphSurfT
         '
-        resources.ApplyResources(Me.GraphSurfT, "GraphSurfT")
         Me.GraphSurfT.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphSurfT, "GraphSurfT")
         Me.GraphSurfT.IsAntiAlias = True
         Me.GraphSurfT.IsAutoScrollRange = True
         Me.GraphSurfT.IsShowCopyMessage = False
@@ -530,16 +521,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemLIQVISC
         '
-        resources.ApplyResources(Me.FaTabStripItemLIQVISC, "FaTabStripItemLIQVISC")
         Me.FaTabStripItemLIQVISC.CanClose = False
         Me.FaTabStripItemLIQVISC.Controls.Add(Me.GraphVisc)
         Me.FaTabStripItemLIQVISC.IsDrawn = True
         Me.FaTabStripItemLIQVISC.Name = "FaTabStripItemLIQVISC"
+        resources.ApplyResources(Me.FaTabStripItemLIQVISC, "FaTabStripItemLIQVISC")
         '
         'GraphVisc
         '
-        resources.ApplyResources(Me.GraphVisc, "GraphVisc")
         Me.GraphVisc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphVisc, "GraphVisc")
         Me.GraphVisc.IsAntiAlias = True
         Me.GraphVisc.IsAutoScrollRange = True
         Me.GraphVisc.IsShowCopyMessage = False
@@ -555,16 +546,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemLIQDENS
         '
-        resources.ApplyResources(Me.FaTabStripItemLIQDENS, "FaTabStripItemLIQDENS")
         Me.FaTabStripItemLIQDENS.CanClose = False
         Me.FaTabStripItemLIQDENS.Controls.Add(Me.GraphLiqDens)
         Me.FaTabStripItemLIQDENS.IsDrawn = True
         Me.FaTabStripItemLIQDENS.Name = "FaTabStripItemLIQDENS"
+        resources.ApplyResources(Me.FaTabStripItemLIQDENS, "FaTabStripItemLIQDENS")
         '
         'GraphLiqDens
         '
-        resources.ApplyResources(Me.GraphLiqDens, "GraphLiqDens")
         Me.GraphLiqDens.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphLiqDens, "GraphLiqDens")
         Me.GraphLiqDens.IsAntiAlias = True
         Me.GraphLiqDens.IsAutoScrollRange = True
         Me.GraphLiqDens.IsShowCopyMessage = False
@@ -580,16 +571,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemLIQTCOND
         '
-        resources.ApplyResources(Me.FaTabStripItemLIQTCOND, "FaTabStripItemLIQTCOND")
         Me.FaTabStripItemLIQTCOND.CanClose = False
         Me.FaTabStripItemLIQTCOND.Controls.Add(Me.GraphLiqThermCond)
         Me.FaTabStripItemLIQTCOND.IsDrawn = True
         Me.FaTabStripItemLIQTCOND.Name = "FaTabStripItemLIQTCOND"
+        resources.ApplyResources(Me.FaTabStripItemLIQTCOND, "FaTabStripItemLIQTCOND")
         '
         'GraphLiqThermCond
         '
-        resources.ApplyResources(Me.GraphLiqThermCond, "GraphLiqThermCond")
         Me.GraphLiqThermCond.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphLiqThermCond, "GraphLiqThermCond")
         Me.GraphLiqThermCond.IsAntiAlias = True
         Me.GraphLiqThermCond.IsAutoScrollRange = True
         Me.GraphLiqThermCond.IsShowCopyMessage = False
@@ -605,14 +596,13 @@ Partial Class FormPureComp
         '
         'FaTabStripItemTabLiq
         '
-        resources.ApplyResources(Me.FaTabStripItemTabLiq, "FaTabStripItemTabLiq")
         Me.FaTabStripItemTabLiq.Controls.Add(Me.DataTableLiquid)
         Me.FaTabStripItemTabLiq.IsDrawn = True
         Me.FaTabStripItemTabLiq.Name = "FaTabStripItemTabLiq"
+        resources.ApplyResources(Me.FaTabStripItemTabLiq, "FaTabStripItemTabLiq")
         '
         'DataTableLiquid
         '
-        resources.ApplyResources(Me.DataTableLiquid, "DataTableLiquid")
         Me.DataTableLiquid.AllowUserToAddRows = False
         Me.DataTableLiquid.AllowUserToDeleteRows = False
         Me.DataTableLiquid.AllowUserToResizeColumns = False
@@ -620,6 +610,7 @@ Partial Class FormPureComp
         Me.DataTableLiquid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataTableLiquid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataTableLiquid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17, Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25, Me.DataGridViewTextBoxColumn26})
+        resources.ApplyResources(Me.DataTableLiquid, "DataTableLiquid")
         Me.DataTableLiquid.Name = "DataTableLiquid"
         Me.DataTableLiquid.RowHeadersVisible = False
         Me.DataTableLiquid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -775,34 +766,34 @@ Partial Class FormPureComp
         '
         'FaTabStripItem17
         '
-        resources.ApplyResources(Me.FaTabStripItem17, "FaTabStripItem17")
         Me.FaTabStripItem17.CanClose = False
         Me.FaTabStripItem17.Controls.Add(Me.FaTabStripVap)
         Me.FaTabStripItem17.IsDrawn = True
         Me.FaTabStripItem17.Name = "FaTabStripItem17"
+        resources.ApplyResources(Me.FaTabStripItem17, "FaTabStripItem17")
         '
         'FaTabStripVap
         '
-        resources.ApplyResources(Me.FaTabStripVap, "FaTabStripVap")
         Me.FaTabStripVap.AlwaysShowClose = False
         Me.FaTabStripVap.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStripVap, "FaTabStripVap")
         Me.FaTabStripVap.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPIG, Me.FaTabStripItemVAPVISC, Me.FaTabStripItemVAPTCOND, Me.FaTabStripItemDataTab})
         Me.FaTabStripVap.Name = "FaTabStripVap"
         Me.FaTabStripVap.SelectedItem = Me.FaTabStripItemCPIG
         '
         'FaTabStripItemCPIG
         '
-        resources.ApplyResources(Me.FaTabStripItemCPIG, "FaTabStripItemCPIG")
         Me.FaTabStripItemCPIG.CanClose = False
         Me.FaTabStripItemCPIG.Controls.Add(Me.GraphCp)
         Me.FaTabStripItemCPIG.IsDrawn = True
         Me.FaTabStripItemCPIG.Name = "FaTabStripItemCPIG"
         Me.FaTabStripItemCPIG.Selected = True
+        resources.ApplyResources(Me.FaTabStripItemCPIG, "FaTabStripItemCPIG")
         '
         'GraphCp
         '
-        resources.ApplyResources(Me.GraphCp, "GraphCp")
         Me.GraphCp.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphCp, "GraphCp")
         Me.GraphCp.IsAntiAlias = True
         Me.GraphCp.IsAutoScrollRange = True
         Me.GraphCp.IsEnableSelection = True
@@ -820,16 +811,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemVAPVISC
         '
-        resources.ApplyResources(Me.FaTabStripItemVAPVISC, "FaTabStripItemVAPVISC")
         Me.FaTabStripItemVAPVISC.CanClose = False
         Me.FaTabStripItemVAPVISC.Controls.Add(Me.GraphVapVisc)
         Me.FaTabStripItemVAPVISC.IsDrawn = True
         Me.FaTabStripItemVAPVISC.Name = "FaTabStripItemVAPVISC"
+        resources.ApplyResources(Me.FaTabStripItemVAPVISC, "FaTabStripItemVAPVISC")
         '
         'GraphVapVisc
         '
-        resources.ApplyResources(Me.GraphVapVisc, "GraphVapVisc")
         Me.GraphVapVisc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphVapVisc, "GraphVapVisc")
         Me.GraphVapVisc.IsAntiAlias = True
         Me.GraphVapVisc.IsAutoScrollRange = True
         Me.GraphVapVisc.IsEnableSelection = True
@@ -847,16 +838,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemVAPTCOND
         '
-        resources.ApplyResources(Me.FaTabStripItemVAPTCOND, "FaTabStripItemVAPTCOND")
         Me.FaTabStripItemVAPTCOND.CanClose = False
         Me.FaTabStripItemVAPTCOND.Controls.Add(Me.GraphVapThermCond)
         Me.FaTabStripItemVAPTCOND.IsDrawn = True
         Me.FaTabStripItemVAPTCOND.Name = "FaTabStripItemVAPTCOND"
+        resources.ApplyResources(Me.FaTabStripItemVAPTCOND, "FaTabStripItemVAPTCOND")
         '
         'GraphVapThermCond
         '
-        resources.ApplyResources(Me.GraphVapThermCond, "GraphVapThermCond")
         Me.GraphVapThermCond.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphVapThermCond, "GraphVapThermCond")
         Me.GraphVapThermCond.IsAntiAlias = True
         Me.GraphVapThermCond.IsAutoScrollRange = True
         Me.GraphVapThermCond.IsEnableSelection = True
@@ -874,14 +865,13 @@ Partial Class FormPureComp
         '
         'FaTabStripItemDataTab
         '
-        resources.ApplyResources(Me.FaTabStripItemDataTab, "FaTabStripItemDataTab")
         Me.FaTabStripItemDataTab.Controls.Add(Me.DataTableVapour)
         Me.FaTabStripItemDataTab.IsDrawn = True
         Me.FaTabStripItemDataTab.Name = "FaTabStripItemDataTab"
+        resources.ApplyResources(Me.FaTabStripItemDataTab, "FaTabStripItemDataTab")
         '
         'DataTableVapour
         '
-        resources.ApplyResources(Me.DataTableVapour, "DataTableVapour")
         Me.DataTableVapour.AllowUserToAddRows = False
         Me.DataTableVapour.AllowUserToDeleteRows = False
         Me.DataTableVapour.AllowUserToResizeColumns = False
@@ -889,6 +879,7 @@ Partial Class FormPureComp
         Me.DataTableVapour.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataTableVapour.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataTableVapour.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn27, Me.DataGridViewTextBoxColumn28, Me.DataGridViewTextBoxColumn29, Me.DataGridViewTextBoxColumn30, Me.DataGridViewTextBoxColumn31, Me.DataGridViewTextBoxColumn32})
+        resources.ApplyResources(Me.DataTableVapour, "DataTableVapour")
         Me.DataTableVapour.Name = "DataTableVapour"
         Me.DataTableVapour.RowHeadersVisible = False
         Me.DataTableVapour.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -964,33 +955,33 @@ Partial Class FormPureComp
         '
         'FaTabStripItem18
         '
-        resources.ApplyResources(Me.FaTabStripItem18, "FaTabStripItem18")
         Me.FaTabStripItem18.CanClose = False
         Me.FaTabStripItem18.Controls.Add(Me.FaTabStripSolid)
         Me.FaTabStripItem18.IsDrawn = True
         Me.FaTabStripItem18.Name = "FaTabStripItem18"
+        resources.ApplyResources(Me.FaTabStripItem18, "FaTabStripItem18")
         '
         'FaTabStripSolid
         '
-        resources.ApplyResources(Me.FaTabStripSolid, "FaTabStripSolid")
         Me.FaTabStripSolid.AlwaysShowClose = False
         Me.FaTabStripSolid.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStripSolid, "FaTabStripSolid")
         Me.FaTabStripSolid.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItemCPSOLID, Me.FaTabStripItemSOLIDDENS, Me.FaTabStripItemTabela})
         Me.FaTabStripSolid.Name = "FaTabStripSolid"
         Me.FaTabStripSolid.SelectedItem = Me.FaTabStripItemCPSOLID
         '
         'FaTabStripItemCPSOLID
         '
-        resources.ApplyResources(Me.FaTabStripItemCPSOLID, "FaTabStripItemCPSOLID")
         Me.FaTabStripItemCPSOLID.Controls.Add(Me.GraphCpSolid)
         Me.FaTabStripItemCPSOLID.IsDrawn = True
         Me.FaTabStripItemCPSOLID.Name = "FaTabStripItemCPSOLID"
         Me.FaTabStripItemCPSOLID.Selected = True
+        resources.ApplyResources(Me.FaTabStripItemCPSOLID, "FaTabStripItemCPSOLID")
         '
         'GraphCpSolid
         '
-        resources.ApplyResources(Me.GraphCpSolid, "GraphCpSolid")
         Me.GraphCpSolid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphCpSolid, "GraphCpSolid")
         Me.GraphCpSolid.IsAntiAlias = True
         Me.GraphCpSolid.IsAutoScrollRange = True
         Me.GraphCpSolid.IsShowCopyMessage = False
@@ -1006,16 +997,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItemSOLIDDENS
         '
-        resources.ApplyResources(Me.FaTabStripItemSOLIDDENS, "FaTabStripItemSOLIDDENS")
         Me.FaTabStripItemSOLIDDENS.CanClose = False
         Me.FaTabStripItemSOLIDDENS.Controls.Add(Me.GraphSolidDens)
         Me.FaTabStripItemSOLIDDENS.IsDrawn = True
         Me.FaTabStripItemSOLIDDENS.Name = "FaTabStripItemSOLIDDENS"
+        resources.ApplyResources(Me.FaTabStripItemSOLIDDENS, "FaTabStripItemSOLIDDENS")
         '
         'GraphSolidDens
         '
-        resources.ApplyResources(Me.GraphSolidDens, "GraphSolidDens")
         Me.GraphSolidDens.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.GraphSolidDens, "GraphSolidDens")
         Me.GraphSolidDens.IsAntiAlias = True
         Me.GraphSolidDens.IsAutoScrollRange = True
         Me.GraphSolidDens.IsShowCopyMessage = False
@@ -1031,14 +1022,13 @@ Partial Class FormPureComp
         '
         'FaTabStripItemTabela
         '
-        resources.ApplyResources(Me.FaTabStripItemTabela, "FaTabStripItemTabela")
         Me.FaTabStripItemTabela.Controls.Add(Me.DataTableSolid)
         Me.FaTabStripItemTabela.IsDrawn = True
         Me.FaTabStripItemTabela.Name = "FaTabStripItemTabela"
+        resources.ApplyResources(Me.FaTabStripItemTabela, "FaTabStripItemTabela")
         '
         'DataTableSolid
         '
-        resources.ApplyResources(Me.DataTableSolid, "DataTableSolid")
         Me.DataTableSolid.AllowUserToAddRows = False
         Me.DataTableSolid.AllowUserToDeleteRows = False
         Me.DataTableSolid.AllowUserToResizeColumns = False
@@ -1046,6 +1036,7 @@ Partial Class FormPureComp
         Me.DataTableSolid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataTableSolid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataTableSolid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn21, Me.DataGridViewTextBoxColumn22})
+        resources.ApplyResources(Me.DataTableSolid, "DataTableSolid")
         Me.DataTableSolid.Name = "DataTableSolid"
         Me.DataTableSolid.RowHeadersVisible = False
         Me.DataTableSolid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -1086,16 +1077,16 @@ Partial Class FormPureComp
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'GroupBox4
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Controls.Add(Me.TextBoxComments)
+        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.TabStop = False
         '
@@ -1123,7 +1114,6 @@ Partial Class FormPureComp
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStrip1.ResumeLayout(False)
         Me.FaTabStripItem1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
         CType(Me.GridProps, System.ComponentModel.ISupportInitialize).EndInit()
         Me.FaTabStripItem6.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
@@ -1171,7 +1161,6 @@ Partial Class FormPureComp
     Public WithEvents FaTabStripItemCPIG As FarsiLibrary.Win.FATabStripItem
     Public WithEvents FaTabStripItemPVAP As FarsiLibrary.Win.FATabStripItem
     Public WithEvents FaTabStripItemLIQVISC As FarsiLibrary.Win.FATabStripItem
-    Public WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Public WithEvents GridProps As System.Windows.Forms.DataGridView
     Public WithEvents GraphCp As ZedGraph.ZedGraphControl
     Public WithEvents GraphPvap As ZedGraph.ZedGraphControl

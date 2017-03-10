@@ -36,6 +36,10 @@ Public Class FormPureComp
     Public Added As Boolean = False
     Public Loaded As Boolean = False
 
+    Private ind As Indigo
+    Private mol As IndigoObject
+    Private renderer As IndigoRenderer
+
     Dim vxCp, vyCp, vxPvap, vyPvap, vxVisc, vyVisc, vxDHvap, vyDHvap, vxLD, vyLD, vxSD, vySD, vxSCP, vySCP, vxVapVisc,
         vyVapVisc, vxVapThCond, vyVapThCond, vxLiqThCond, vyLiqThCond, vxSurfTens, vySurfTens, vxLiqCp, vyLiqCp As New ArrayList
     Public constprop As BaseClasses.ConstantProperties
@@ -652,9 +656,9 @@ Public Class FormPureComp
 
                     'definition available, render molecule
                     Try
-                        Dim ind As New Indigo()
-                        Dim mol As IndigoObject = ind.loadMolecule(constprop.SMILES)
-                        Dim renderer As New IndigoRenderer(ind)
+                        ind = New Indigo()
+                        mol = ind.loadMolecule(constprop.SMILES)
+                        renderer = New IndigoRenderer(ind)
 
                         If constprop.InChI = "" Then
                             Dim ii As New IndigoInchi(ind)
@@ -1036,6 +1040,18 @@ Public Class FormPureComp
             Catch ex As Exception
                 MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+        End If
+    End Sub
+
+    Private Sub FormPureComp_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+        If Not DWSIM.App.IsRunningOnMono Then
+            If Not renderer Is Nothing Then
+                ind.setOption("render-image-size", pbRender.Width, pbRender.Height)
+                ind.setOption("render-margins", 15, 15)
+                ind.setOption("render-coloring", True)
+                ind.setOption("render-background-color", Color.White)
+                pbRender.Image = renderer.renderToBitmap(mol)
+            End If
         End If
     End Sub
 End Class
