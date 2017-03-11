@@ -811,6 +811,12 @@
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataChemeo.de.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataDDB.de.resx">
+      <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataDDB.en.resx">
       <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
     </EmbeddedResource>
@@ -822,6 +828,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataChemeo.resx">
       <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.de.resx">
+      <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.en.resx">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
@@ -941,11 +950,17 @@
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.de.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.en.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingDDB.de.resx">
+      <DependentUpon>FormSearchingDDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingDDB.en.resx">
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>

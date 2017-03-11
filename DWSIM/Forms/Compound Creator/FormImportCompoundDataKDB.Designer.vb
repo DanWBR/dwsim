@@ -22,7 +22,7 @@ Partial Class FormImportCompoundKDB
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundOnline))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundKDB))
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -171,20 +171,20 @@ Partial Class FormImportCompoundKDB
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
-        'FormImportCompoundDataKDB
+        'FormImportCompoundKDB
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.btnPrev)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Name = "FormImportCompoundDataKDB"
+        Me.Name = "FormImportCompoundKDB"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

@@ -146,9 +146,6 @@
   <data name="&gt;&gt;lbFoundItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Column1.HeaderText" xml:space="preserve">
-    <value>Propriedade</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 13</value>
@@ -163,7 +160,7 @@
     <value>Passo 2 - Selecionar Substância</value>
   </data>
   <data name="&gt;&gt;Panel1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;dgResults.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -277,7 +274,7 @@
     <value>0</value>
   </data>
   <data name="&gt;&gt;btnPrev.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -307,22 +304,25 @@
     <value>Column1</value>
   </data>
   <data name="&gt;&gt;PictureBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="Label3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
+  <data name="Column1.HeaderText" xml:space="preserve">
+    <value>Propriedade</value>
   </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnPrev.Name" xml:space="preserve">
     <value>btnPrev</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -442,7 +442,7 @@
     <value>555, 57</value>
   </data>
   <data name="&gt;&gt;btnNext.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 13</value>
@@ -529,7 +529,7 @@
     <value>75, 23</value>
   </data>
   <data name="&gt;&gt;Panel2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>1</value>
   </data>
   <data name="tbSearchString.Location" type="System.Drawing.Point, System.Drawing">
     <value>175, 89</value>
@@ -547,7 +547,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormImportCompoundDataKDB</value>
+    <value>FormImportCompoundKDB</value>
   </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -576,9 +576,6 @@
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>Panel3</value>
   </data>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

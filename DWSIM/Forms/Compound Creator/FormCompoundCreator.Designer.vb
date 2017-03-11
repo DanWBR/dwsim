@@ -601,7 +601,7 @@ Partial Class FormCompoundCreator
         Me.FaTabStrip2.AlwaysShowClose = False
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItemBO, Me.FaTabStripItemEL, Me.FaTabStripItem2, Me.FaTabStripItem5, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4, Me.FaTabStripItem7, Me.FaTabStripItem8, Me.FaTabStripItem9, Me.FaTabStripItem10, Me.FaTabStripItem11})
         Me.FaTabStrip2.Name = "FaTabStrip2"
-        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem10
+        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
         Me.ToolTip1.SetToolTip(Me.FaTabStrip2, resources.GetString("FaTabStrip2.ToolTip"))
         '
         'FaTabStripItem1
@@ -626,6 +626,7 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem1.Controls.Add(Me.CheckBoxMW)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'TextBoxComments
@@ -3073,7 +3074,6 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem10.Controls.Add(Me.Label41)
         Me.FaTabStripItem10.IsDrawn = True
         Me.FaTabStripItem10.Name = "FaTabStripItem10"
-        Me.FaTabStripItem10.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem10, resources.GetString("FaTabStripItem10.ToolTip"))
         '
         'tbUserDefLiqViscEq
