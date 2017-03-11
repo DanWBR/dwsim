@@ -24,6 +24,7 @@ Partial Class FormImportCompoundChEDLThermo
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormImportCompoundChEDLThermo))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
@@ -56,6 +57,7 @@ Partial Class FormImportCompoundChEDLThermo
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.LinkLabel3)
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Controls.Add(Me.LinkLabel1)
@@ -64,6 +66,11 @@ Partial Class FormImportCompoundChEDLThermo
         Me.Panel1.Controls.Add(Me.tbSearchString)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Name = "Panel1"
+        '
+        'Label10
+        '
+        resources.ApplyResources(Me.Label10, "Label10")
+        Me.Label10.Name = "Label10"
         '
         'LinkLabel3
         '
@@ -251,4 +258,5 @@ Partial Class FormImportCompoundChEDLThermo
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
     Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
 End Class

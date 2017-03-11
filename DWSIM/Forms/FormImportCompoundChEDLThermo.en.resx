@@ -118,8 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 149</value>
+  </data>
+  <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>525, 34</value>
+  </data>
+  <data name="Label10.Text" xml:space="preserve">
+    <value>This data importer requires a Python distribution with the 'thermo' package installed in your computer. If a Python installation is found but the 'thermo' package is not installed, the tool will not work correctly.</value>
+  </data>
+  <data name="LinkLabel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>178, 245</value>
+  </data>
   <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 224</value>
+    <value>14, 245</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 13</value>
@@ -127,8 +139,11 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>UNIFAC/MODFAC Structure:</value>
   </data>
+  <data name="LinkLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>178, 213</value>
+  </data>
   <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 192</value>
+    <value>14, 213</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 13</value>
