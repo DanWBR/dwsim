@@ -829,6 +829,9 @@
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.resx">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.de.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.en.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </EmbeddedResource>
@@ -955,6 +958,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRunningPythonLink.resx">
       <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.de.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingOnline.en.resx">
       <DependentUpon>FormSearchingOnline.vb</DependentUpon>

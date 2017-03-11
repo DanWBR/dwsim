@@ -193,8 +193,8 @@
   <data name="btnDoReg.Text" xml:space="preserve">
     <value>Regression starten</value>
   </data>
-  <data name="Button5.Text" xml:space="preserve">
-    <value>Search Online on KDB/CHERIC Thermo Database</value>
+  <data name="btnSearchKDB.Text" xml:space="preserve">
+    <value>Suche in Online-Datenbank KDB/CHERIC</value>
   </data>
   <data name="chkDoTDepRegression.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 563</value>
@@ -382,27 +382,6 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Regression Informationen</value>
   </data>
-  <data name="BtnSelectIPDB.Text" xml:space="preserve">
-    <value>Suchen</value>
-  </data>
-  <data name="BtnSaveIPDB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 24</value>
-  </data>
-  <data name="BtnSaveIPDB.Text" xml:space="preserve">
-    <value>Speichern</value>
-  </data>
-  <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Datenbank</value>
-  </data>
-  <data name="BtnNewIPDB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 24</value>
-  </data>
-  <data name="BtnNewIPDB.Text" xml:space="preserve">
-    <value>Neu</value>
-  </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 13</value>
   </data>
@@ -418,11 +397,23 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Information</value>
   </data>
-  <data name="DBOpenDlg.Filter" xml:space="preserve">
-    <value>Archiv XML|*.xml</value>
+  <data name="SalvarEmBancoDeDadosXMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 22</value>
   </data>
-  <data name="DBOpenDlg.Title" xml:space="preserve">
-    <value>Öffne/Erzeuge Parameter-Datenbank</value>
+  <data name="SalvarEmBancoDeDadosXMLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Speichere in XML-Datenbank</value>
+  </data>
+  <data name="ParâmetrosDeInteraçãoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="ParâmetrosDeInteraçãoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Interaktionskoeffizenten</value>
+  </data>
+  <data name="SaveFileDialog1.Filter" xml:space="preserve">
+    <value>XML Archiv|*xml</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1122, 750</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
