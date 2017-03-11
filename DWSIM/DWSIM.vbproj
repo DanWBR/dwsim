@@ -811,6 +811,12 @@
     <EmbeddedResource Include="Forms\AboutBox.es.resx">
       <DependentUpon>AboutBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataChemeo.de.resx">
+      <DependentUpon>FormImportCompoundDataChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataDDB.de.resx">
+      <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataDDB.en.resx">
       <DependentUpon>FormImportCompoundDataDDB.vb</DependentUpon>
     </EmbeddedResource>
@@ -828,6 +834,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormImportCompoundDataKDB.resx">
       <DependentUpon>FormImportCompoundDataKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.de.resx">
+      <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Data Regression\FormSearchKDBVLE.en.resx">
       <DependentUpon>FormSearchKDBVLE.vb</DependentUpon>
@@ -923,11 +932,17 @@
     <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.de.resx">
+      <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.en.resx">
       <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.resx">
       <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormImportCompoundOnline.de.resx">
+      <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundOnline.en.resx">
       <DependentUpon>FormImportCompoundOnline.vb</DependentUpon>
@@ -938,11 +953,17 @@
     <EmbeddedResource Include="Forms\FormPassword.de.resx">
       <DependentUpon>FormPassword.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingChemeo.de.resx">
+      <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.en.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingChemeo.resx">
       <DependentUpon>FormSearchingChemeo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingDDB.de.resx">
+      <DependentUpon>FormSearchingDDB.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingDDB.en.resx">
       <DependentUpon>FormSearchingDDB.vb</DependentUpon>
@@ -955,6 +976,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormRunningPythonLink.resx">
       <DependentUpon>FormRunningPythonLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingKDB.de.resx">
+      <DependentUpon>FormSearchingKDB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSearchingOnline.de.resx">
+      <DependentUpon>FormSearchingOnline.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormSearchingOnline.en.resx">
       <DependentUpon>FormSearchingOnline.vb</DependentUpon>

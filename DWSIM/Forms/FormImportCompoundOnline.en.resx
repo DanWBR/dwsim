@@ -187,12 +187,6 @@
   <data name="Label4.Text" xml:space="preserve">
     <value>The list below contains the best matches for the searched text. Select the item which you want to import data from and click "Next".</value>
   </data>
-  <data name="dgResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 146</value>
-  </data>
-  <data name="dgResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 139</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 13</value>
   </data>

@@ -35,15 +35,15 @@ Partial Class FormImportCompoundChEDLThermo
         Me.btnPrev = New System.Windows.Forms.Button()
         Me.btnNext = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.lbFoundItems = New System.Windows.Forms.ListBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.dgResults = New System.Windows.Forms.DataGridView()
         Me.Column2 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.lbFoundItems = New System.Windows.Forms.ListBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
@@ -123,26 +123,12 @@ Partial Class FormImportCompoundChEDLThermo
         'Panel2
         '
         resources.ApplyResources(Me.Panel2, "Panel2")
+        Me.Panel2.Controls.Add(Me.Panel1)
         Me.Panel2.Controls.Add(Me.lbFoundItems)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.Panel3)
         Me.Panel2.Name = "Panel2"
-        '
-        'lbFoundItems
-        '
-        resources.ApplyResources(Me.lbFoundItems, "lbFoundItems")
-        Me.lbFoundItems.FormattingEnabled = True
-        Me.lbFoundItems.Name = "lbFoundItems"
-        '
-        'Label3
-        '
-        resources.ApplyResources(Me.Label3, "Label3")
-        Me.Label3.Name = "Label3"
-        '
-        'Label4
-        '
-        resources.ApplyResources(Me.Label4, "Label4")
-        Me.Label4.Name = "Label4"
         '
         'Panel3
         '
@@ -188,6 +174,22 @@ Partial Class FormImportCompoundChEDLThermo
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
         '
+        'lbFoundItems
+        '
+        resources.ApplyResources(Me.lbFoundItems, "lbFoundItems")
+        Me.lbFoundItems.FormattingEnabled = True
+        Me.lbFoundItems.Name = "lbFoundItems"
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        Me.Label4.Name = "Label4"
+        '
         'Label7
         '
         resources.ApplyResources(Me.Label7, "Label7")
@@ -210,9 +212,7 @@ Partial Class FormImportCompoundChEDLThermo
         Me.Controls.Add(Me.btnPrev)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FormImportCompoundChEDLThermo"
         Me.ShowIcon = False

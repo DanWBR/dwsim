@@ -59,6 +59,8 @@ Partial Class FormCompoundCreator
         Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbUnitSystem = New System.Windows.Forms.ComboBox()
         Me.RadioButton3 = New System.Windows.Forms.RadioButton()
         Me.RadioButton2 = New System.Windows.Forms.RadioButton()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -473,8 +475,6 @@ Partial Class FormCompoundCreator
         Me.BancoDeDadosKDBCHERICToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BancoDeDadosChemeoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SistemasDeUnidadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cbUnits = New System.Windows.Forms.ToolStripComboBox()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.SaveFileDialog2 = New System.Windows.Forms.SaveFileDialog()
         ToolStripLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
@@ -534,6 +534,8 @@ Partial Class FormCompoundCreator
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.cbUnitSystem)
         Me.GroupBox2.Controls.Add(Me.RadioButton3)
         Me.GroupBox2.Controls.Add(Me.RadioButton2)
         Me.GroupBox2.Controls.Add(Me.Label16)
@@ -546,6 +548,20 @@ Partial Class FormCompoundCreator
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.Label1.Tag = "xxx"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
+        '
+        'cbUnitSystem
+        '
+        resources.ApplyResources(Me.cbUnitSystem, "cbUnitSystem")
+        Me.cbUnitSystem.FormattingEnabled = True
+        Me.cbUnitSystem.Name = "cbUnitSystem"
+        Me.ToolTip1.SetToolTip(Me.cbUnitSystem, resources.GetString("cbUnitSystem.ToolTip"))
         '
         'RadioButton3
         '
@@ -601,7 +617,7 @@ Partial Class FormCompoundCreator
         Me.FaTabStrip2.AlwaysShowClose = False
         Me.FaTabStrip2.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItemBO, Me.FaTabStripItemEL, Me.FaTabStripItem2, Me.FaTabStripItem5, Me.FaTabStripItem6, Me.FaTabStripItem3, Me.FaTabStripItem4, Me.FaTabStripItem7, Me.FaTabStripItem8, Me.FaTabStripItem9, Me.FaTabStripItem10, Me.FaTabStripItem11})
         Me.FaTabStrip2.Name = "FaTabStrip2"
-        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem10
+        Me.FaTabStrip2.SelectedItem = Me.FaTabStripItem1
         Me.ToolTip1.SetToolTip(Me.FaTabStrip2, resources.GetString("FaTabStrip2.ToolTip"))
         '
         'FaTabStripItem1
@@ -626,6 +642,7 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem1.Controls.Add(Me.CheckBoxMW)
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
+        Me.FaTabStripItem1.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem1, resources.GetString("FaTabStripItem1.ToolTip"))
         '
         'TextBoxComments
@@ -3073,7 +3090,6 @@ Partial Class FormCompoundCreator
         Me.FaTabStripItem10.Controls.Add(Me.Label41)
         Me.FaTabStripItem10.IsDrawn = True
         Me.FaTabStripItem10.Name = "FaTabStripItem10"
-        Me.FaTabStripItem10.Selected = True
         Me.ToolTip1.SetToolTip(Me.FaTabStripItem10, resources.GetString("FaTabStripItem10.ToolTip"))
         '
         'tbUserDefLiqViscEq
@@ -3792,7 +3808,7 @@ Partial Class FormCompoundCreator
         '
         resources.ApplyResources(Me.MenuStrip1, "MenuStrip1")
         Me.MenuStrip1.AllowItemReorder = True
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComponenteToolStripMenuItem, Me.SistemasDeUnidadesToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComponenteToolStripMenuItem})
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Stretch = False
         Me.ToolTip1.SetToolTip(Me.MenuStrip1, resources.GetString("MenuStrip1.ToolTip"))
@@ -3841,20 +3857,6 @@ Partial Class FormCompoundCreator
         resources.ApplyResources(Me.EstruturaUNIFACMODFACDDBToolStripMenuItem, "EstruturaUNIFACMODFACDDBToolStripMenuItem")
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.world_connect
         Me.EstruturaUNIFACMODFACDDBToolStripMenuItem.Name = "EstruturaUNIFACMODFACDDBToolStripMenuItem"
-        '
-        'SistemasDeUnidadesToolStripMenuItem
-        '
-        resources.ApplyResources(Me.SistemasDeUnidadesToolStripMenuItem, "SistemasDeUnidadesToolStripMenuItem")
-        Me.SistemasDeUnidadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cbUnits})
-        Me.SistemasDeUnidadesToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.Insert
-        Me.SistemasDeUnidadesToolStripMenuItem.MergeIndex = 4
-        Me.SistemasDeUnidadesToolStripMenuItem.Name = "SistemasDeUnidadesToolStripMenuItem"
-        '
-        'cbUnits
-        '
-        resources.ApplyResources(Me.cbUnits, "cbUnits")
-        Me.cbUnits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbUnits.Name = "cbUnits"
         '
         'SaveFileDialog1
         '
@@ -4256,14 +4258,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents DataGridViewTextBoxColumn15 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents rbRegressCPLiquid As System.Windows.Forms.RadioButton
     Public WithEvents tbCPLiquid_C As System.Windows.Forms.TextBox
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents UNIFACImageColumn As System.Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents MainGroup As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents SubGroup As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn13 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MODFACImageColumn As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents PicMODFAC As System.Windows.Forms.PictureBox
     Friend WithEvents PicUNIFAC As System.Windows.Forms.PictureBox
     Friend WithEvents TBUnifac As System.Windows.Forms.TextBox
@@ -4273,10 +4267,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents TbNISTMODFAC As System.Windows.Forms.TextBox
     Friend WithEvents PicNISTMODFAC As System.Windows.Forms.PictureBox
     Public WithEvents GridNISTMODFAC As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn16 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn17 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn18 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewImageColumn1 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
     Friend WithEvents Label54 As System.Windows.Forms.Label
@@ -4363,8 +4353,6 @@ Partial Class FormCompoundCreator
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents ComponenteToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SalvarNoBancoDeDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SistemasDeUnidadesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents cbUnits As System.Windows.Forms.ToolStripComboBox
     Friend WithEvents ImportarDadosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BancoDeDadosKDBCHERICToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BancoDeDadosChemeoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -4372,4 +4360,18 @@ Partial Class FormCompoundCreator
     Friend WithEvents ExportarDadosParaArquivoJSONToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
     Friend WithEvents SaveFileDialog2 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UNIFACImageColumn As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents MainGroup As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents SubGroup As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn13 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MODFACImageColumn As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents DataGridViewTextBoxColumn16 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn17 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn18 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewImageColumn1 As System.Windows.Forms.DataGridViewImageColumn
+    Public WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents cbUnitSystem As System.Windows.Forms.ComboBox
 End Class

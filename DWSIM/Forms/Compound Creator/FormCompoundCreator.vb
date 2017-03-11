@@ -281,13 +281,13 @@ Public Class FormCompoundCreator
         cbEqSolidDENS.SelectedIndex = 0
         cbEqCpS.SelectedIndex = 0
 
-        Me.cbUnits.Items.Clear()
+        cbUnitSystem.Items.Clear()
 
         For Each su2 In CType(Me.MdiParent, FormMain).AvailableUnitSystems.Values
-            Me.cbUnits.Items.Add(su2.Name)
+            cbUnitSystem.Items.Add(su2.Name)
         Next
 
-        Me.cbUnits.SelectedIndex = 0
+        cbUnitSystem.SelectedIndex = 0
 
         Me.RadioButton1.Checked = True
 
@@ -366,17 +366,17 @@ Public Class FormCompoundCreator
                         TypeOf .su Is SystemsOfUnits.English Then
                         CType(Me.MdiParent, FormMain).AvailableUnitSystems.Add(.su.Name, .su)
                     End If
-                    Me.cbUnits.Items.Add(mycase.su.Name)
+                    Me.cbUnitSystem.Items.Add(mycase.su.Name)
                 Else
                     UpdateUnits()
                 End If
             Else
                 .su = Me.su
             End If
-            If cbUnits.Items.Contains(.su.Name) Then
-                cbUnits.SelectedIndex = cbUnits.Items.IndexOf(.su.Name)
+            If cbUnitSystem.Items.Contains(.su.Name) Then
+                cbUnitSystem.SelectedIndex = cbUnitSystem.Items.IndexOf(.su.Name)
             Else
-                cbUnits.SelectedIndex = 0
+                cbUnitSystem.SelectedIndex = 0
             End If
 
             UpdateUnits()
@@ -2850,12 +2850,12 @@ Public Class FormCompoundCreator
         loaded = True
     End Sub
 
-    Private Sub cbUnits_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cbUnits.SelectedIndexChanged
+    Private Sub cbUnitSystem_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cbUnitSystem.SelectedIndexChanged
         If loaded Then
             StoreData()
         End If
-        If CType(Me.MdiParent, FormMain).AvailableUnitSystems.ContainsKey(cbUnits.SelectedItem.ToString) Then
-            su = CType(Me.MdiParent, FormMain).AvailableUnitSystems(cbUnits.SelectedItem.ToString)
+        If CType(Me.MdiParent, FormMain).AvailableUnitSystems.ContainsKey(cbUnitSystem.SelectedItem.ToString) Then
+            su = CType(Me.MdiParent, FormMain).AvailableUnitSystems(cbUnitSystem.SelectedItem.ToString)
         End If
         If loaded Then
             Try
@@ -3404,6 +3404,7 @@ Public Class FormCompoundCreator
             WriteData()
         End If
     End Sub
+
 End Class
 
 <System.Serializable()> Public Class CompoundGeneratorCase

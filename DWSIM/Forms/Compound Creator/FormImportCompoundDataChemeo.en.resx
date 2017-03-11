@@ -145,9 +145,6 @@
   <data name="btnNext.Text" xml:space="preserve">
     <value>Next &gt;</value>
   </data>
-  <data name="lbFoundItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 186</value>
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 13</value>
   </data>
@@ -159,9 +156,6 @@
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Select an item from the list to collect its data.</value>
-  </data>
-  <data name="dgResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 186</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 13</value>
