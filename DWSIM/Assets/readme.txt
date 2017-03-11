@@ -1,6 +1,6 @@
 ==================================================
 DWSIM - Open Source Process Simulator
-Version 4.2 Update 3 - February 2017
+Version 4.3 - March 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
 ==================================================
 
@@ -65,6 +65,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3
+
+- [NEW] Import Compound from Online Databases (KDB, Cheméo, DDB GC Structure Info)
+- [NEW] Import Compound from ChEDL Thermo Python Library (https://github.com/CalebBell/thermo)
+- [NEW] Data Regression Tool: Import VLE data from Online KDB Database
+- [NEW] Export/Import Compound data to/from JSON file format
+- [NEW] Add objects to the flowsheet from the context menu
+- [NEW] Spreadsheet Undo/Redo
+- [NEW] Exposing Spec/Adjust properties
+- [CHG] Data Regression Tool/Compound Creator UI design enhancements
+- [CHG] Changed location of settings file for Mono environments to Documents Folder -> DWSIM Application Data
+- [FIX] Fixed Spreadsheet data saving/loading when cell formula contains '>' or '<'
+- [FIX] Fixed native libraries extraction procedures
+- [FIX] Minor fixes and enhancements
 
 Version 4.2 Update 3
 
