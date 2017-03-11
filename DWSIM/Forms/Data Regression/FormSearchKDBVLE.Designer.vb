@@ -43,8 +43,8 @@ Partial Class FormSearchKDBVLE
         '
         'ListBox1
         '
-        Me.ListBox1.FormattingEnabled = True
         resources.ApplyResources(Me.ListBox1, "ListBox1")
+        Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Name = "ListBox1"
         '
         'Label2

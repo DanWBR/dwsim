@@ -118,14 +118,53 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1076, 22</value>
+  <data name="chkReplaceComps.Location" type="System.Drawing.Point, System.Drawing">
+    <value>818, 22</value>
+  </data>
+  <data name="chkReplaceComps.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 17</value>
+  </data>
+  <data name="chkReplaceComps.Text" xml:space="preserve">
+    <value>Ersetze Komponente mit selber ID</value>
+  </data>
+  <data name="tbDBPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>43, 21</value>
+  </data>
+  <data name="tbDBPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>554, 20</value>
+  </data>
+  <data name="btnSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 17</value>
+  </data>
+  <data name="btnSearch.Text" xml:space="preserve">
+    <value>Suche</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
+    <value>29, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Einheitensystem</value>
+    <value>Pfad</value>
+  </data>
+  <data name="btnCreateNewDB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>688, 17</value>
+  </data>
+  <data name="btnCreateNewDB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 26</value>
+  </data>
+  <data name="btnCreateNewDB.Text" xml:space="preserve">
+    <value>Neue Datenbank</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Komponentendatenbank</value>
+  </data>
+  <data name="btnSaveToDB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1054, 15</value>
+  </data>
+  <data name="btnSaveToDB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="btnSaveToDB.Text" xml:space="preserve">
+    <value>Speichere Komponente in Datenbank</value>
   </data>
   <data name="RadioButton3.Location" type="System.Drawing.Point, System.Drawing">
     <value>199, 20</value>
@@ -265,9 +304,6 @@
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Benötigte Daten</value>
   </data>
-  <data name="FaTabStripItemBO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
-  </data>
   <data name="Label125.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
   </data>
@@ -371,7 +407,7 @@
     <value>Molekül</value>
   </data>
   <data name="FaTabStripItemEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
+    <value>895, 431</value>
   </data>
   <data name="FaTabStripItemEL.Title" xml:space="preserve">
     <value>Elektrolyt/Salz</value>
@@ -385,38 +421,11 @@
   <data name="Label60.Text" xml:space="preserve">
     <value>Tragen Sie die Anzahl aller UNIFAC Gruppen der Komponentenstruktur ein, falls vorhanden.</value>
   </data>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Hauptgruppe</value>
-  </data>
-  <data name="Column5.HeaderText" xml:space="preserve">
-    <value>Untergruppe</value>
-  </data>
   <data name="Column4.HeaderText" xml:space="preserve">
     <value>Anzahl</value>
   </data>
-  <data name="UNIFACImageColumn.HeaderText" xml:space="preserve">
-    <value>Beispiel</value>
-  </data>
-  <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 476</value>
-  </data>
-  <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
-  </data>
-  <data name="MainGroup.HeaderText" xml:space="preserve">
-    <value>Hauptgruppe</value>
-  </data>
-  <data name="SubGroup.HeaderText" xml:space="preserve">
-    <value>Untergruppe</value>
-  </data>
   <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
     <value>Anzahl</value>
-  </data>
-  <data name="MODFACImageColumn.HeaderText" xml:space="preserve">
-    <value>Beispiel</value>
-  </data>
-  <data name="GridMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 476</value>
   </data>
   <data name="Label85.Size" type="System.Drawing.Size, System.Drawing">
     <value>451, 13</value>
@@ -424,26 +433,8 @@
   <data name="Label85.Text" xml:space="preserve">
     <value>Tragen Sie die Anzahl aller MODFAC Gruppen der Komponentenstruktur ein, falls vorhanden.</value>
   </data>
-  <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
-    <value>Hauptgruppe</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
-    <value>Untergruppe</value>
-  </data>
-  <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
-    <value>Anzahl</value>
-  </data>
   <data name="DataGridViewImageColumn1.HeaderText" xml:space="preserve">
     <value>Beispiel</value>
-  </data>
-  <data name="GridNISTMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 476</value>
-  </data>
-  <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
   </data>
   <data name="Label58.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 13</value>
@@ -456,9 +447,6 @@
   </data>
   <data name="Count.HeaderText" xml:space="preserve">
     <value>Anzahl</value>
-  </data>
-  <data name="AddAtomDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 431</value>
   </data>
   <data name="TextBox1.Text" xml:space="preserve">
     <value>Achtung! Die Definition von zusätzlichen Jobackgruppen oder Atomen wird die  Verwendung der UNIFAC/MODFAC Pakete verhindern!</value>
@@ -474,9 +462,6 @@
   </data>
   <data name="ColCount.HeaderText" xml:space="preserve">
     <value>Anzahl</value>
-  </data>
-  <data name="AtomDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 431</value>
   </data>
   <data name="LinkLabel3.ToolTip" xml:space="preserve">
     <value>Aufruf der Chemeo-Dataenbank zur Unterstützung bei der Joback-Gruppenzuordnung.</value>
@@ -511,12 +496,6 @@
   </data>
   <data name="ColumnCountJoback.ToolTipText" xml:space="preserve">
     <value>Anzahl zusätzlicher Joback-Gruppen welche nicht bereits als UNIFAC-Untergruppe definiert sind.</value>
-  </data>
-  <data name="GridJoback.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 431</value>
-  </data>
-  <data name="FaTabStripItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
   </data>
   <data name="LabelWithDivider8.Text" xml:space="preserve">
     <value>Attraktions-Parameter</value>
@@ -608,11 +587,8 @@
   <data name="FaTabStripItem4.Title" xml:space="preserve">
     <value>Eigenschaften</value>
   </data>
-  <data name="tbUserDefEqPVAP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 65</value>
-  </data>
   <data name="Label43.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 224</value>
+    <value>237, 197</value>
   </data>
   <data name="Label43.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
@@ -627,7 +603,7 @@
     <value>Schätze (Lee Kesler)</value>
   </data>
   <data name="tbPVAP_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 196</value>
+    <value>257, 169</value>
   </data>
   <data name="rbRegressPVAP.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -636,28 +612,28 @@
     <value>Regression Versuchsdaten</value>
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 199</value>
+    <value>239, 172</value>
   </data>
   <data name="tbPVAP_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 170</value>
+    <value>257, 143</value>
   </data>
   <data name="btnRegressPVAP.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 173</value>
+    <value>239, 146</value>
   </data>
   <data name="btnViewPVAP.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
   <data name="tbPVAP_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 144</value>
+    <value>257, 117</value>
   </data>
   <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 147</value>
+    <value>239, 120</value>
   </data>
   <data name="tbPVAP_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 118</value>
+    <value>257, 91</value>
   </data>
   <data name="rbCoeffPVAP.Location" type="System.Drawing.Point, System.Drawing">
     <value>242, 16</value>
@@ -669,7 +645,7 @@
     <value>Eingabe der Koeffizienten *</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 121</value>
+    <value>239, 94</value>
   </data>
   <data name="cbEqPVAP.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 38</value>
@@ -678,7 +654,7 @@
     <value>146, 21</value>
   </data>
   <data name="tbPVAP_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 92</value>
+    <value>257, 65</value>
   </data>
   <data name="Label30.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 41</value>
@@ -690,16 +666,10 @@
     <value>Gleichung</value>
   </data>
   <data name="Label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 95</value>
+    <value>239, 68</value>
   </data>
   <data name="FaTabStripItem7.Title" xml:space="preserve">
     <value>Dampfdruck</value>
-  </data>
-  <data name="tbUserDefCPLEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 70</value>
-  </data>
-  <data name="Label87.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 229</value>
   </data>
   <data name="Label87.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
@@ -707,41 +677,14 @@
   <data name="Label87.Text" xml:space="preserve">
     <value>* Cp in J/[kmol.K], T in K</value>
   </data>
-  <data name="Label88.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 100</value>
-  </data>
-  <data name="tbCPLiquid_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 201</value>
-  </data>
-  <data name="Label89.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 42</value>
-  </data>
   <data name="Label89.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
   </data>
   <data name="Label89.Text" xml:space="preserve">
     <value>Gleichung</value>
   </data>
-  <data name="tbCPLiquid_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 97</value>
-  </data>
-  <data name="Label90.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 204</value>
-  </data>
-  <data name="cbEqCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 39</value>
-  </data>
   <data name="btnViewCPLiquid.Text" xml:space="preserve">
     <value>Diagramm</value>
-  </data>
-  <data name="Label91.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 126</value>
-  </data>
-  <data name="tbCPLiquid_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 175</value>
-  </data>
-  <data name="rbCoeffCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 16</value>
   </data>
   <data name="rbCoeffCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 17</value>
@@ -752,41 +695,17 @@
   <data name="btnRegressCPLiquid.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
-  <data name="tbCPLiquid_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 123</value>
-  </data>
-  <data name="Label92.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 178</value>
-  </data>
-  <data name="Label93.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 152</value>
-  </data>
-  <data name="GridExpDataCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 70</value>
-  </data>
-  <data name="GridExpDataCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 170</value>
-  </data>
-  <data name="rbRegressCPLiquid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 47</value>
-  </data>
   <data name="rbRegressCPLiquid.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
   </data>
   <data name="rbRegressCPLiquid.Text" xml:space="preserve">
     <value>Regression Versuchsdaten</value>
   </data>
-  <data name="tbCPLiquid_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 149</value>
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>Cp (Flüssigkeit)</value>
   </data>
-  <data name="tbUserDefCPIGEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 70</value>
-  </data>
   <data name="Label44.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 229</value>
+    <value>237, 203</value>
   </data>
   <data name="Label44.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 13</value>
@@ -801,10 +720,10 @@
     <value>Schätze (Joback/UNIFAC)</value>
   </data>
   <data name="Label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 100</value>
+    <value>238, 74</value>
   </data>
   <data name="tbCPIG_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 201</value>
+    <value>257, 175</value>
   </data>
   <data name="Label28.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 42</value>
@@ -816,10 +735,10 @@
     <value>Gleichung</value>
   </data>
   <data name="tbCPIG_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 97</value>
+    <value>257, 71</value>
   </data>
   <data name="Label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 204</value>
+    <value>238, 178</value>
   </data>
   <data name="cbEqCPIG.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 39</value>
@@ -831,10 +750,10 @@
     <value>Diagramm</value>
   </data>
   <data name="Label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 126</value>
+    <value>238, 100</value>
   </data>
   <data name="tbCPIG_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 175</value>
+    <value>257, 149</value>
   </data>
   <data name="rbCoeffCPIG.Location" type="System.Drawing.Point, System.Drawing">
     <value>240, 16</value>
@@ -849,13 +768,13 @@
     <value>Datenregression</value>
   </data>
   <data name="tbCPIG_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 123</value>
+    <value>257, 97</value>
   </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 178</value>
+    <value>238, 152</value>
   </data>
   <data name="Label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 152</value>
+    <value>238, 126</value>
   </data>
   <data name="rbRegressCPIG.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -864,7 +783,7 @@
     <value>Regression Versuchsdaten</value>
   </data>
   <data name="tbCPIG_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 149</value>
+    <value>257, 123</value>
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Cp (Ideales Gas)</value>
@@ -872,11 +791,8 @@
   <data name="FaTabStripItem8.Title" xml:space="preserve">
     <value>Wärmekapazität</value>
   </data>
-  <data name="tbUserDefDensLiqEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 66</value>
-  </data>
   <data name="Label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 225</value>
+    <value>241, 203</value>
   </data>
   <data name="Label45.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -891,7 +807,7 @@
     <value>Schätze (Rackett)</value>
   </data>
   <data name="tbLIQDENS_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 197</value>
+    <value>259, 175</value>
   </data>
   <data name="rbRegressLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -900,31 +816,31 @@
     <value>Regression Versuchsdaten</value>
   </data>
   <data name="Label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 202</value>
+    <value>238, 180</value>
   </data>
   <data name="GridExpDataLIQDENS.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 170</value>
   </data>
   <data name="tbLIQDENS_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 171</value>
+    <value>259, 149</value>
   </data>
   <data name="btnRegressLIQDENS.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
   <data name="Label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 176</value>
+    <value>238, 154</value>
   </data>
   <data name="btnViewLIQDENS.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
   <data name="tbLIQDENS_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 145</value>
+    <value>259, 123</value>
   </data>
   <data name="Label33.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 150</value>
+    <value>238, 128</value>
   </data>
   <data name="tbLIQDENS_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 119</value>
+    <value>259, 97</value>
   </data>
   <data name="rbCoeffLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
     <value>241, 16</value>
@@ -936,7 +852,7 @@
     <value>Eingabe der Koeffizienten *</value>
   </data>
   <data name="Label34.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 124</value>
+    <value>238, 102</value>
   </data>
   <data name="cbEqLIQDENS.Location" type="System.Drawing.Point, System.Drawing">
     <value>300, 39</value>
@@ -945,7 +861,7 @@
     <value>146, 21</value>
   </data>
   <data name="tbLIQDENS_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 93</value>
+    <value>259, 71</value>
   </data>
   <data name="Label36.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 42</value>
@@ -957,16 +873,13 @@
     <value>Gleichung</value>
   </data>
   <data name="Label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 98</value>
+    <value>238, 76</value>
   </data>
   <data name="FaTabStripItem9.Title" xml:space="preserve">
     <value>Flüssigkeitsdichte</value>
   </data>
-  <data name="tbUserDefLiqViscEq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 65</value>
-  </data>
   <data name="Label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 224</value>
+    <value>237, 202</value>
   </data>
   <data name="Label46.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -981,7 +894,7 @@
     <value>Schätze (Letsou-Stiel)</value>
   </data>
   <data name="tbLIQVISC_E.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 196</value>
+    <value>257, 174</value>
   </data>
   <data name="rbRegressLIQVISC.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -990,28 +903,28 @@
     <value>Regression Versuchsdaten</value>
   </data>
   <data name="Label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 202</value>
+    <value>237, 180</value>
   </data>
   <data name="tbLIQVISC_D.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 170</value>
+    <value>257, 148</value>
   </data>
   <data name="btnRegressLIQVISC.Text" xml:space="preserve">
     <value>Datenregression</value>
   </data>
   <data name="Label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 176</value>
+    <value>237, 154</value>
   </data>
   <data name="btnViewLIQVISC.Text" xml:space="preserve">
     <value>Diagramm</value>
   </data>
   <data name="tbLIQVISC_C.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 144</value>
+    <value>257, 122</value>
   </data>
   <data name="Label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 150</value>
+    <value>237, 128</value>
   </data>
   <data name="tbLIQVISC_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 118</value>
+    <value>257, 96</value>
   </data>
   <data name="rbCoeffLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
     <value>240, 16</value>
@@ -1023,7 +936,7 @@
     <value>Eingabe der Koeffizienten *</value>
   </data>
   <data name="Label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 124</value>
+    <value>237, 102</value>
   </data>
   <data name="cbEqLIQVISC.Location" type="System.Drawing.Point, System.Drawing">
     <value>298, 38</value>
@@ -1032,7 +945,7 @@
     <value>146, 21</value>
   </data>
   <data name="tbLIQVISC_A.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 92</value>
+    <value>257, 70</value>
   </data>
   <data name="Label42.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 41</value>
@@ -1044,7 +957,7 @@
     <value>Gleichung</value>
   </data>
   <data name="Label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 98</value>
+    <value>237, 76</value>
   </data>
   <data name="FaTabStripItem10.Title" xml:space="preserve">
     <value>Viskositat Flüssigkeit</value>
@@ -1052,8 +965,15 @@
   <data name="LabelWithDivider7.Text" xml:space="preserve">
     <value>Dichte / Wärmekapazität</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnRegressSolidCp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnRegressSolidCp.Text" xml:space="preserve">
     <value>Datenregression</value>
+  </data>
+  <data name="btnViewSolidCp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnViewSolidCp.Text" xml:space="preserve">
     <value>Diagramm</value>
@@ -1082,8 +1002,14 @@
   <data name="rbEstimateSolidDens.Text" xml:space="preserve">
     <value>Schätze (DWSIM)</value>
   </data>
+  <data name="btnRegressSolidDens.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="btnRegressSolidDens.Text" xml:space="preserve">
     <value>Datenregression</value>
+  </data>
+  <data name="btnViewSolidDens.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="btnViewSolidDens.Text" xml:space="preserve">
     <value>Diagramm</value>
@@ -1121,9 +1047,6 @@
   <data name="Label55.Text" xml:space="preserve">
     <value>Schmelzenthalpie</value>
   </data>
-  <data name="FaTabStripItem11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
-  </data>
   <data name="FaTabStripItem11.Title" xml:space="preserve">
     <value>Feststoff</value>
   </data>
@@ -1133,59 +1056,29 @@
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Komponenten Eigenschaften</value>
   </data>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Einheitensystem:</value>
+  </data>
+  <data name="cbUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 20</value>
+  </data>
+  <data name="cbUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 21</value>
+  </data>
+  <data name="cbUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Einheitensystem</value>
+  </data>
   <data name="DBOpenDlg.Filter" xml:space="preserve">
     <value>XML Files|*.xml</value>
   </data>
   <data name="DBOpenDlg.Title" xml:space="preserve">
     <value>Öffne/Erzeuge Database</value>
-  </data>
-  <data name="SalvarNoBancoDeDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 22</value>
-  </data>
-  <data name="SalvarNoBancoDeDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export zu XML-Datenbank</value>
-  </data>
-  <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 22</value>
-  </data>
-  <data name="ExportarDadosParaArquivoJSONToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export zu JSON-Archiv</value>
-  </data>
-  <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
-  </data>
-  <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Text" xml:space="preserve">
-    <value>Datenbank KDB/CHERIC</value>
-  </data>
-  <data name="BancoDeDadosChemeoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
-  </data>
-  <data name="BancoDeDadosChemeoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Datenbank Cheméo</value>
-  </data>
-  <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 22</value>
-  </data>
-  <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
-    <value>UNIFAC/MODFAC Struktur (DDB)</value>
-  </data>
-  <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 22</value>
-  </data>
-  <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import aus Online-Datenbank</value>
-  </data>
-  <data name="ComponenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
-  </data>
-  <data name="ComponenteToolStripMenuItem.Text" xml:space="preserve">
-    <value>Komponente</value>
-  </data>
-  <data name="SaveFileDialog1.Filter" xml:space="preserve">
-    <value>JSON-Archiv|*.json</value>
-  </data>
-  <data name="SaveFileDialog2.Filter" xml:space="preserve">
-    <value>XML-Archiv|*.xml</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2632,6 +2525,6 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Komponente</value>
+    <value>Komponente / Komponentenmanager</value>
   </data>
 </root>

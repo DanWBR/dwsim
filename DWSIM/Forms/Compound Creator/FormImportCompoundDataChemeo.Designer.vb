@@ -58,10 +58,10 @@ Partial Class FormImportCompoundDataChemeo
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.tbSearchString)
         Me.Panel1.Controls.Add(Me.Label1)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'Label2
@@ -99,16 +99,16 @@ Partial Class FormImportCompoundDataChemeo
         '
         'Panel2
         '
-        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Controls.Add(Me.lbFoundItems)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label4)
+        resources.ApplyResources(Me.Panel2, "Panel2")
         Me.Panel2.Name = "Panel2"
         '
         'lbFoundItems
         '
-        resources.ApplyResources(Me.lbFoundItems, "lbFoundItems")
         Me.lbFoundItems.FormattingEnabled = True
+        resources.ApplyResources(Me.lbFoundItems, "lbFoundItems")
         Me.lbFoundItems.Name = "lbFoundItems"
         '
         'Label3
@@ -123,21 +123,21 @@ Partial Class FormImportCompoundDataChemeo
         '
         'Panel3
         '
-        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Controls.Add(Me.dgResults)
         Me.Panel3.Controls.Add(Me.Label5)
         Me.Panel3.Controls.Add(Me.Label6)
+        resources.ApplyResources(Me.Panel3, "Panel3")
         Me.Panel3.Name = "Panel3"
         '
         'dgResults
         '
-        resources.ApplyResources(Me.dgResults, "dgResults")
         Me.dgResults.AllowUserToAddRows = False
         Me.dgResults.AllowUserToDeleteRows = False
         Me.dgResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgResults.ColumnHeadersVisible = False
         Me.dgResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column2, Me.Column1, Me.Column3})
+        resources.ApplyResources(Me.dgResults, "dgResults")
         Me.dgResults.Name = "dgResults"
         Me.dgResults.RowHeadersVisible = False
         '
