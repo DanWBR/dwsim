@@ -70,7 +70,7 @@ Public Class ChEDLThermoParser
 
     Shared Function GetCompoundData(id As String) As BaseClasses.ConstantProperties
 
-        Dim python = GetPythonInstance("C:\Users\ptc0\Downloads\python_thermo\python-2.7.13.amd64")
+        Dim python = GetPythonInstance()
 
         PythonInstance = python
 
