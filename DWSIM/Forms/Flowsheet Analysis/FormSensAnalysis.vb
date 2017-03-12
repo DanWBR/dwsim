@@ -473,8 +473,8 @@ Public Class FormSensAnalysis
                         .propID = ""
                     End If
                     
-                    .lowerlimit = Me.tbLowerLimIndVar2.Text
-                    .upperlimit = Me.tbUpperLimIndVar2.Text
+                    .lowerlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbLowerLimIndVar2.Text))
+                    .upperlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbUpperLimIndVar2.Text))
                     .points = Me.nuNumPointsIndVar2.Value
                     .unit = Me.tbUnitIndVar2.Text
                 End With
