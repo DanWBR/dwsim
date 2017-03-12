@@ -3730,6 +3730,10 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
         Dim comp1, comp2 As String
 
+        Dim swap, replace As Boolean
+        swap = False
+        replace = False
+
         comp1 = cbCompound1.SelectedItem.ToString
         comp2 = cbCompound2.SelectedItem.ToString
 
@@ -3793,6 +3797,8 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                                                                    End Sub
                                               t2.ContinueWith(Sub()
                                                                   UIThread(Sub()
+                                                                               swap = fresult.CheckBox1.Checked
+                                                                               replace = fresult.CheckBox2.Checked
                                                                                fsearch2.Close()
                                                                                If DWSIM.App.IsRunningOnMono Then
                                                                                    fsearch2.Hide()
@@ -3800,9 +3806,13 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                                                                                End If
                                                                                If t2.Exception Is Nothing Then
                                                                                    If Not t2.Result Is Nothing Then
-                                                                                       Me.GridExpData.Rows.Clear()
+                                                                                       If replace Then Me.GridExpData.Rows.Clear()
                                                                                        For Each record In t2.Result.Data
-                                                                                           Me.GridExpData.Rows.Add(True, record.X, "", record.Y, record.T, "", "", record.P)
+                                                                                           If swap Then
+                                                                                               Me.GridExpData.Rows.Add(True, 1.0# - record.X, "", 1.0# - record.Y, record.T, "", "", record.P)
+                                                                                           Else
+                                                                                               Me.GridExpData.Rows.Add(True, record.X, "", record.Y, record.T, "", "", record.P)
+                                                                                           End If
                                                                                        Next
                                                                                        cbTunit.SelectedItem = t2.Result.Tunits
                                                                                        cbPunit.SelectedItem = t2.Result.Punits
