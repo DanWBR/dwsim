@@ -362,11 +362,17 @@ Namespace DWSIM
             My.Settings.HideSolidPhase_CO = source.Configs("Misc").GetBoolean("HideSolidPhase_COInterface", False)
             My.Settings.IgnoreCompoundPropertiesOnLoad = source.Configs("Misc").GetBoolean("IgnoreCompoundConstantPropertyDatainXMLFile", False)
 
+            If source.Configs("OctaveBridge") Is Nothing Then source.AddConfig("OctaveBridge")
+
             My.Settings.OctavePath = source.Configs("OctaveBridge").GetString("OctavePath", "")
             My.Settings.OctaveProcessTimeout = source.Configs("OctaveBridge").GetFloat("OctaveProcessTimeout", 15)
 
+            If source.Configs("PythonBridge") Is Nothing Then source.AddConfig("PythonBridge")
+
             My.Settings.PythonPath = source.Configs("PythonBridge").GetString("PythonPath", "")
             My.Settings.PythonProcessTimeout = source.Configs("PythonBridge").GetFloat("PythonProcessTimeout", 1)
+
+            If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
 
             My.Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
             My.Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
