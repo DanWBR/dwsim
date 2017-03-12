@@ -1,7 +1,7 @@
-==================================================
+ï»¿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.2 Update 3 - February 2017
-Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo León
+Version 4.3 - March 2017
+Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leï¿½n
 ==================================================
 
 DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
@@ -65,6 +65,21 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3
+
+- [NEW] Import Compound from Online Databases (KDB, Chemeo, DDB GC Structure Info)
+- [NEW] Import Compound from ChEDL Thermo Python Library (https://github.com/CalebBell/thermo)
+- [NEW] Data Regression Tool: Import VLE data from Online KDB Database
+- [NEW] Export/Import Compound data to/from JSON file format
+- [NEW] Add objects to the flowsheet from the context menu
+- [NEW] Spreadsheet Undo/Redo
+- [NEW] Exposing Spec/Adjust properties
+- [CHG] Data Regression Tool/Compound Creator UI design enhancements
+- [CHG] Changed location of settings file for Mono environments to Documents Folder -> DWSIM Application Data
+- [FIX] Fixed Spreadsheet data saving/loading when cell formula contains '>' or '<'
+- [FIX] Fixed native libraries extraction procedures
+- [FIX] Minor fixes and enhancements
 
 Version 4.2 Update 3
 
@@ -1039,7 +1054,7 @@ Version 1.8 Build 3908
 
 Version 1.7 Build 3875
 
-- [NEW] Added German translation by Rainer Göllnitz
+- [NEW] Added German translation by Rainer Gollnitz
 
 Version 1.7 Build 3868
 
@@ -1049,7 +1064,7 @@ Version 1.7 Build 3868
 
 Version 1.7 Build 3850
 
-- [NEW] Lee-Kesler-Plöcker Property Package
+- [NEW] Lee-Kesler-Plï¿½cker Property Package
 - [FIX] Fixed K-value calculation call in the Sum Rates method for solving Absorption Columns
 - [FIX] Fixed IO Flash calculation in single phase region
 - [FIX] Fixed Critical Point calculation with PR and SRK Equations of State
@@ -1109,7 +1124,7 @@ Version 1.6 Build 3618
 
 Version 1.6 Build 3605
 
-- [NEW] Added Spanish GUI translation (many thanks to Abad Lira and Gustavo León!)
+- [NEW] Added Spanish GUI translation (many thanks to Abad Lira and Gustavo Leï¿½n!)
 - [NEW] Added a Multivariate, Constrained Optimization utility
 - [NEW] Added a Sensitivity Analysis utility supporting up to 2 independent variables
 - [NEW] Added "command-line run mode" (read the documentation for more details)
