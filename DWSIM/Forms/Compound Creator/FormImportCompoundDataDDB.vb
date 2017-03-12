@@ -97,6 +97,7 @@ Public Class FormImportCompoundDataDDB
         Dim okimg = My.Resources.accept
         Dim noimg = My.Resources.cross
 
+        Me.dgResults.Rows.Clear()
         With compound
             Me.dgResults.Rows.Add(New Object() {If(data.ContainsKey("Original"), okimg, noimg), "Original UNIFAC Structure Data", If(data.ContainsKey("Original"), True, False)})
             Me.dgResults.Rows.Add(New Object() {If(data.ContainsKey("Modified"), okimg, noimg), "Modified UNIFAC (Dortmund) Structure Data", If(data.ContainsKey("Modified"), True, False)})

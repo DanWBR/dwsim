@@ -80,6 +80,8 @@ Public Class DDBStructureParser
 
         If status.InnerText.Contains("Group assignment successful") Then
 
+            Dim unifac As New Thermodynamics.PropertyPackages.Auxiliary.Unifac
+
             Dim list As New List(Of String())
 
             'get unifac structure info
@@ -87,7 +89,7 @@ Public Class DDBStructureParser
             For Each row In rows
                 Dim count = row.Descendants("td")(0).InnerText
                 Dim maingroup = row.Descendants("td")(2).InnerText
-                Dim subgroup = row.Descendants("td")(1).InnerText
+                Dim subgroup = unifac.Group2ID(row.Descendants("td")(3).InnerText)
                 list.Add(New String() {maingroup, subgroup, count})
             Next
 
@@ -100,6 +102,8 @@ Public Class DDBStructureParser
 
         If status.InnerText.Contains("Group assignment successful") Then
 
+            Dim modfac As New Thermodynamics.PropertyPackages.Auxiliary.Modfac
+
             Dim list As New List(Of String())
 
             'get modfac structure info
@@ -107,7 +111,9 @@ Public Class DDBStructureParser
             For Each row In rows
                 Dim count = row.Descendants("td")(0).InnerText
                 Dim maingroup = row.Descendants("td")(2).InnerText
-                Dim subgroup = row.Descendants("td")(1).InnerText
+                Dim gname As String = row.Descendants("td")(3).InnerText.Replace(" ", "")
+                If gname = "OH(p)" Then gname = "OH"
+                Dim subgroup = modfac.Group2ID(gname)
                 list.Add(New String() {maingroup, subgroup, count})
             Next
 
