@@ -1,6 +1,7 @@
 ﻿Imports System.Text
 Imports DWSIM.Libraries.PythonLink
 
+
 Public Class ChEDLThermoParser
 
     Shared Property PythonInstance As Python
@@ -14,6 +15,17 @@ Public Class ChEDLThermoParser
         End If
 
     End Function
+
+    Shared Sub KillPythonProcess()
+        If Not PythonInstance Is Nothing Then
+            If Not PythonInstance.PythonProcess.HasExited Then
+                Try
+                    PythonInstance.PythonProcess.Kill()
+                Catch ex As Exception
+                End Try
+            End If
+        End If
+    End Sub
 
     Shared Function GetSupportedCompounds() As List(Of String)
 
