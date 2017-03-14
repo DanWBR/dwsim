@@ -176,7 +176,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Next
 
                 err_ant = err
-                
+
                 err = Vx1.MultiplyY(gamma1).SubtractY(Vx2.MultiplyY(gamma2)).AbsSumY()
                 e1 = Vx1_ant.NegateY.AddY(Vx1).AbsSumY
                 e2 = Vx2_ant.NegateY.AddY(Vx2).AbsSumY
@@ -184,10 +184,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 If Double.IsNaN(err) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
-                If ecount > 0 And (Abs(err) < 0.00001 Or L1 < 0.0001 Or L2 < 0.0001 Or S < 0.0001) Then Exit Do
+                If ecount > 0 And (Abs(err) < 0.000001 Or L1 < 0.0001 Or L2 < 0.0001 Or S < 0.0001) Then Exit Do
+                If Abs(L1_ant - L1) + Abs(L2_ant - L2) < 0.0000001 Then Exit Do
 
                 Vn1 = Vz.DivideY(gamma1.MultiplyConstY(L2).DivideY(gamma2.MultiplyConstY(L1)).AddConstY(1))
                 Vn2 = Vz.SubtractY(Vn1)
+
+                L1_ant = L1
+                L2_ant = L2
 
                 L1 = Vn1.Sum
                 L2 = 1 - L1
