@@ -63,9 +63,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Public Overrides ReadOnly Property Description As String
             Get
                 If GlobalSettings.Settings.CurrentCulture = "pt-BR" Then
-                    Return "Algoritmo Flash para sistemas Sólido-Líquido"
+                    If SolidSolution Then
+                        Return "Algoritmo Flash para sistemas Sólido-Líquido (ESL)"
+                    Else
+                        Return "Algoritmo Flash para sistemas Sólido-Líquido-Vapor (ESLV)"
+                    End If
                 Else
-                    Return "Flash Algorithm for Solid-Liquid systems"
+                    If SolidSolution Then
+                        Return "Flash Algorithm for Solid-Liquid (SLE) systems"
+                    Else
+                        Return "Flash Algorithm for Vapor-Solid-Liquid (VSLE) systems"
+                    End If
                 End If
             End Get
         End Property
@@ -75,7 +83,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If SolidSolution Then
                     Return "Nested Loops (SLE - Solid Solution)"
                 Else
-                    Return "Nested Loops (SLE - Eutectic)"
+                    Return "Nested Loops (SVLE - Eutectic)"
                 End If
             End Get
         End Property
@@ -124,6 +132,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Vp(i) = PP.AUX_PVAPi(i, T)
                 If CompoundProperties(i).TemperatureOfFusion <> 0.0# Then
                     Ki(i) = Exp(-CompoundProperties(i).EnthalpyOfFusionAtTf / (0.00831447 * T) * (1 - T / CompoundProperties(i).TemperatureOfFusion))
+                    If Ki(i) = 0.0# Then Ki(i) = 1.0E+20
                 Else
                     Ki(i) = 1.0E+20
                 End If
@@ -138,6 +147,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Do
                 If Vz(i) <> 0.0# Then
                     Vx(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * L + 1)
+                    If Double.IsNaN(Vx(i)) Then Vx(i) = 0.0#
                     If Ki(i) <> 0 Then Vs(i) = Vx(i) / Ki(i) Else Vs(i) = Vz(i)
                     If Vs(i) < 0 Then Vs(i) = 0
                     If Vx(i) < 0 Then Vx(i) = 0
@@ -159,8 +169,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Loop Until i = n + 1
             i = 0
             Do
-                Vx(i) = Vx(i) / soma_x
-                Vs(i) = Vs(i) / soma_s
+                If soma_x > 0.0# Then Vx(i) = Vx(i) / soma_x
+                If soma_s > 0.0# Then Vs(i) = Vs(i) / soma_s
                 i = i + 1
             Loop Until i = n + 1
 
@@ -175,9 +185,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 activcoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid)
 
                 For i = 0 To n
+                    If Double.IsNaN(activcoeff(i)) Then activcoeff(i) = 1.0#
+                Next
+
+                For i = 0 To n
                     If Not CompoundProperties(i).IsSalt Then activcoeff(i) = activcoeff(i) * P / Vp(i)
                     If CompoundProperties(i).TemperatureOfFusion <> 0.0# Then
                         Ki(i) = (1 / activcoeff(i)) * Exp(-CompoundProperties(i).EnthalpyOfFusionAtTf / (0.00831447 * T) * (1 - T / CompoundProperties(i).TemperatureOfFusion))
+                        If Ki(i) = 0.0# Then Ki(i) = 1.0E+20
                     Else
                         Ki(i) = 1.0E+20
                     End If
@@ -189,7 +204,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vs_ant(i) = Vs(i)
                         Vx_ant(i) = Vx(i)
                         Vx(i) = Vz(i) * Ki(i) / ((Ki(i) - 1) * L + 1)
-                        Vs(i) = Vx(i) / Ki(i)
+                        If Double.IsNaN(Vx(i)) Then Vx(i) = 0.0#
+                        If Ki(i) <> 0 Then Vs(i) = Vx(i) / Ki(i) Else Vs(i) = Vz(i)
                     Else
                         Vy(i) = 0
                         Vx(i) = 0
@@ -207,8 +223,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Loop Until i = n + 1
                 i = 0
                 Do
-                    Vx(i) = Vx(i) / soma_x
-                    Vs(i) = Vs(i) / soma_s
+                    If soma_x > 0.0# Then Vx(i) = Vx(i) / soma_x
+                    If soma_s > 0.0# Then Vs(i) = Vs(i) / soma_s
                     i = i + 1
                 Loop Until i = n + 1
 

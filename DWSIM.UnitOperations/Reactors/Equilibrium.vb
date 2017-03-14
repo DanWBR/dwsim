@@ -811,9 +811,10 @@ Namespace Reactors
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
             'Return New Object() {xl, xv, T, P, H, S, 1, 1, Vx, Vy}
-            Dim Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1) As Double
+            Dim wv, Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1) As Double
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
+            wv = tmp.GetVaporPhaseMassFraction
             T = ims.Phases(0).Properties.temperature.GetValueOrDefault
             P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             H = tmp.CalculatedEnthalpy
@@ -847,7 +848,7 @@ Namespace Reactors
                 With ms
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H * (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.enthalpy = H * wv
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -861,13 +862,13 @@ Namespace Reactors
                         comp.MassFraction = Vwy(j)
                         j += 1
                     Next
-                    .Phases(0).Properties.massflow = W * (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
-                    .Phases(0).Properties.massfraction = (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
-                    .Phases(0).Properties.molarfraction = 1
+                    .Phases(0).Properties.massflow = W * wv
+                    .Phases(0).Properties.massfraction = 1.0#
+                    .Phases(0).Properties.molarfraction = 1.0#
                     .Phases(3).Properties.massfraction = 0
                     .Phases(3).Properties.molarfraction = 0
-                    .Phases(2).Properties.massfraction = 1
-                    .Phases(2).Properties.molarfraction = 1
+                    .Phases(2).Properties.massfraction = 1.0#
+                    .Phases(2).Properties.molarfraction = 1.0#
                 End With
             End If
 
@@ -877,7 +878,7 @@ Namespace Reactors
                 With ms
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H * (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.enthalpy = H * (1 - wv)
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -891,8 +892,8 @@ Namespace Reactors
                         comp.MassFraction = Vwx(j)
                         j += 1
                     Next
-                    .Phases(0).Properties.massflow = W * (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
-                    .Phases(0).Properties.massfraction = (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.massflow = W * (1 - wv)
+                    .Phases(0).Properties.massfraction = 1.0#
                     .Phases(0).Properties.molarfraction = 1
                     .Phases(3).Properties.massfraction = 1
                     .Phases(3).Properties.molarfraction = 1

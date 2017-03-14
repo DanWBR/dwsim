@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 - March 2017
+Version 4.3 Update 1 - March 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 1
+
+- [FIX] Fixed issues with solid calculations
+- [CHG] Moved Compound Data XML Exporting function to Pure Compound Property Viewer
 
 Version 4.3
 

@@ -1054,4 +1054,17 @@ Public Class FormPureComp
             End If
         End If
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim comps As New List(Of ConstantProperties)
+        If Me.sfdxml1.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Try
+                If Not File.Exists(sfdxml1.FileName) Then File.Create(sfdxml1.FileName).Close()
+                Databases.UserDB.AddCompounds(New BaseClasses.ConstantProperties() {constprop}, sfdxml1.FileName, True)
+                MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show(DWSIM.App.GetLocalString("Erroaosalvararquivo") + ex.Message.ToString, "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
 End Class

@@ -255,12 +255,6 @@ Public Class FormSimulSettings
 
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Me.Close()
-
-    End Sub
-
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         FrmChild.Options.NumberFormat = Me.ComboBox1.SelectedItem
         FrmChild.UpdateOpenEditForms()
@@ -1291,36 +1285,6 @@ Public Class FormSimulSettings
         FrmChild.Options.Password = tbPassword.Text
     End Sub
 
-    Private Sub Button3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
-        Dim myStream As System.IO.FileStream
-        Dim cp As ConstantProperties
-        Dim col As New BaseClasses.ConstantPropertiesCollection
-        Dim col2 As New ArrayList
-
-        Dim dbid As String = "User_" & Guid.NewGuid().ToString
-
-        For Each r As DataGridViewRow In Me.ogc1.SelectedRows
-            cp = FrmChild.Options.NotSelectedComponents(r.Cells(0).Value)
-            cp.CurrentDB = dbid
-            col2.Add(cp)
-        Next
-
-        col.Collection = col2.ToArray(Type.GetType("DWSIM.BaseClasses.ConstantProperties"))
-
-        If Me.sfdxml1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            myStream = Me.sfdxml1.OpenFile()
-            Dim filename As String = myStream.Name
-            myStream.Close()
-            Dim x As Serialization.XmlSerializer = New Serialization.XmlSerializer(GetType(BaseClasses.ConstantPropertiesCollection))
-            Dim writer As IO.TextWriter = New IO.StreamWriter(filename)
-            x.Serialize(writer, col)
-            writer.Close()
-
-        End If
-
-    End Sub
-
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewDataErrorEventArgs) Handles DataGridView1.DataError
 
     End Sub
@@ -1344,17 +1308,6 @@ Public Class FormSimulSettings
     Private Sub ListViewPP_DoubleClick(sender As Object, e As EventArgs) Handles DataGridViewPP.DoubleClick
         If Me.DataGridViewPP.SelectedRows.Count = 1 Then
             Button8.PerformClick()
-        End If
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim comps As New List(Of ConstantProperties)
-        If Me.sfdxml1.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            If Not File.Exists(sfdxml1.FileName) Then File.Create(sfdxml1.FileName).Close()
-            For Each lvi As ListViewItem In Me.ListViewA.SelectedItems
-                comps.Add(FrmChild.Options.SelectedComponents(lvi.Tag))
-            Next
-            Databases.UserDB.AddCompounds(comps.ToArray, sfdxml1.FileName, True)
         End If
     End Sub
 

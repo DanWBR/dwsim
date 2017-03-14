@@ -117,6 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>550, 428</value>
+  </data>
+  <data name="Button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>155, 23</value>
+  </data>
+  <data name="Button2.Text" xml:space="preserve">
+    <value>Export to XML Database</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -125,15 +135,14 @@
   <data name="Button1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>685, 428</value>
+    <value>711, 428</value>
   </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>125, 23</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
-    <value>Export Data to JSON File</value>
+    <value>Export to JSON File</value>
   </data>
   <data name="LblModified.Location" type="System.Drawing.Point, System.Drawing">
     <value>405, 15</value>
@@ -153,9 +162,6 @@
   <data name="BtnRestaurar.Text" xml:space="preserve">
     <value>Standardwerte rücksetzen</value>
   </data>
-  <data name="chkEnableEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 432</value>
-  </data>
   <data name="chkEnableEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 17</value>
   </data>
@@ -168,33 +174,6 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Komponente</value>
   </data>
-  <data name="FaTabStripItem1.Title" xml:space="preserve">
-    <value>Konstanten</value>
-  </data>
-  <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="FaTabStripItem6.Title" xml:space="preserve">
-    <value>Molekül</value>
-  </data>
-  <data name="FaTabStripItem16.Title" xml:space="preserve">
-    <value>Eigenschaften Flüssigkeit</value>
-  </data>
-  <data name="FaTabStripItem17.Title" xml:space="preserve">
-    <value>Eigenschaften Dampf</value>
-  </data>
-  <data name="FaTabStripItem18.Title" xml:space="preserve">
-    <value>Eigenschaften Feststoff</value>
-  </data>
-  <data name="FaTabStripItem2.Title" xml:space="preserve">
-    <value>Bemerkungen</value>
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Anzeige</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Eigenschaften</value>
-  </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Eigenschaft</value>
   </data>
@@ -204,11 +183,11 @@
   <data name="Column3.HeaderText" xml:space="preserve">
     <value>Einheit</value>
   </data>
+  <data name="FaTabStripItem1.Title" xml:space="preserve">
+    <value>Konstanten</value>
+  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>2D Darstellung</value>
-  </data>
-  <data name="GroupBox5.Text" xml:space="preserve">
-    <value>Molekülstruktur</value>
   </data>
   <data name="tbMODFACNIST.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 104</value>
@@ -282,6 +261,15 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Formel</value>
   </data>
+  <data name="GroupBox5.Text" xml:space="preserve">
+    <value>Molekülstruktur</value>
+  </data>
+  <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="FaTabStripItem6.Title" xml:space="preserve">
+    <value>Molekül</value>
+  </data>
   <data name="FaTabStripItemCPLIQ.Title" xml:space="preserve">
     <value>Wärmekapazität</value>
   </data>
@@ -306,6 +294,9 @@
   <data name="FaTabStripItemTabLiq.Title" xml:space="preserve">
     <value>Datentabelle</value>
   </data>
+  <data name="FaTabStripItem16.Title" xml:space="preserve">
+    <value>Eigenschaften Flüssigkeit</value>
+  </data>
   <data name="FaTabStripItemCPIG.Title" xml:space="preserve">
     <value>Cp ideales Gas</value>
   </data>
@@ -318,6 +309,9 @@
   <data name="FaTabStripItemDataTab.Title" xml:space="preserve">
     <value>Datentabelle</value>
   </data>
+  <data name="FaTabStripItem17.Title" xml:space="preserve">
+    <value>Eigenschaften Dampf</value>
+  </data>
   <data name="FaTabStripItemCPSOLID.Title" xml:space="preserve">
     <value>Wärmekapazität</value>
   </data>
@@ -327,8 +321,23 @@
   <data name="FaTabStripItemTabela.Title" xml:space="preserve">
     <value>Datentabelle</value>
   </data>
+  <data name="FaTabStripItem18.Title" xml:space="preserve">
+    <value>Eigenschaften Feststoff</value>
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Bemerkungen</value>
+  </data>
+  <data name="FaTabStripItem2.Title" xml:space="preserve">
+    <value>Bemerkungen</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Anzeige</value>
+  </data>
+  <data name="sfdxml1.Filter" xml:space="preserve">
+    <value>XML Files|*.xml</value>
+  </data>
+  <data name="sfdxml1.Title" xml:space="preserve">
+    <value>Save to XML Database</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DWSIM: Eigenschaften reiner Komponenten</value>

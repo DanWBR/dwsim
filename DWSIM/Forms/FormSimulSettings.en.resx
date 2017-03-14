@@ -219,7 +219,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAARgBCwEYAQsBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAASABCwEgAQsBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -463,13 +463,13 @@
     <value>Import (JSON) &gt;</value>
   </data>
   <data name="btnInfoRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 245</value>
+    <value>547, 216</value>
   </data>
   <data name="btnInfoRight.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the right-hand list.</value>
   </data>
   <data name="btnInfoLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 216</value>
+    <value>547, 187</value>
   </data>
   <data name="btnInfoLeft.ToolTip" xml:space="preserve">
     <value>Click to view information about the compound selected on the left-hand list.</value>
@@ -481,16 +481,10 @@
     <value>x Clear</value>
   </data>
   <data name="Button5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 187</value>
+    <value>547, 158</value>
   </data>
   <data name="Button5.Text" xml:space="preserve">
     <value>Replace &gt;&gt;</value>
-  </data>
-  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>547, 158</value>
-  </data>
-  <data name="Button4.Text" xml:space="preserve">
-    <value>Export ^</value>
   </data>
   <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
     <value>547, 129</value>
@@ -735,12 +729,6 @@
   </data>
   <data name="ofdcs.Title" xml:space="preserve">
     <value>Load Database ChemSep (XML)</value>
-  </data>
-  <data name="sfdxml1.Filter" xml:space="preserve">
-    <value>XML Files|*.xml</value>
-  </data>
-  <data name="sfdxml1.Title" xml:space="preserve">
-    <value>Save XML File</value>
   </data>
   <data name="TabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>918, 525</value>

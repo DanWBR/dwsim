@@ -624,7 +624,7 @@ Public Class FormMain
                     DirectCast(obj2, Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
                     FlashAlgorithms.Add(obj2.Name, obj2)
                 End If
-                If obj.Name.Contains("SLE") Then
+                If TypeOf obj Is Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
                     Dim obj2 = obj.Clone
                     DirectCast(obj2, Auxiliary.FlashAlgorithms.NestedLoopsSLE).SolidSolution = True
                     FlashAlgorithms.Add(obj2.Name, obj2)

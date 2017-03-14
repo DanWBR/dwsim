@@ -438,6 +438,7 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
+                    .Phases(0).Properties.enthalpy = H * wv
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -458,6 +459,7 @@ Namespace Reactors
                     .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
+                    .Phases(0).Properties.enthalpy = H * (1 - wv)
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -466,7 +468,7 @@ Namespace Reactors
                         j += 1
                     Next
                     j = 0
-                    .Phases(0).Properties.massflow = W * wl
+                    .Phases(0).Properties.massflow = W * (1 - wv)
                     .Phases(0).Properties.massfraction = 1.0#
                     .Phases(0).Properties.molarfraction = 1.0#
                 End With
