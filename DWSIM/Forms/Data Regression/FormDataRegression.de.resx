@@ -187,17 +187,11 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Regression Ergebnisse</value>
   </data>
-  <data name="btnDoReg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 613</value>
-  </data>
   <data name="btnDoReg.Text" xml:space="preserve">
     <value>Regression starten</value>
   </data>
   <data name="btnSearchKDB.Text" xml:space="preserve">
     <value>Suche in Online-Datenbank KDB/CHERIC</value>
-  </data>
-  <data name="chkDoTDepRegression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 563</value>
   </data>
   <data name="chkDoTDepRegression.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 17</value>
@@ -247,9 +241,6 @@
   <data name="cf.HeaderText" xml:space="preserve">
     <value>Fixiert</value>
   </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 613</value>
-  </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Abbruch</value>
   </data>
@@ -265,32 +256,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>T Einheit</value>
   </data>
-  <data name="btnCalcOnce.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 613</value>
-  </data>
   <data name="btnCalcOnce.Text" xml:space="preserve">
     <value>Berechnung einmal</value>
-  </data>
-  <data name="cbObjFunc.Items" xml:space="preserve">
-    <value>Kleinste Quadrate (min T/P+y/x)</value>
-  </data>
-  <data name="cbObjFunc.Items1" xml:space="preserve">
-    <value>Kleinste Quadrate (min T/P)</value>
-  </data>
-  <data name="cbObjFunc.Items2" xml:space="preserve">
-    <value>Kleinste Quadrate (min y/x)</value>
-  </data>
-  <data name="cbObjFunc.Items3" xml:space="preserve">
-    <value>Gewichtete kleinste Quadrate (min T/P+y/x)</value>
-  </data>
-  <data name="cbObjFunc.Items4" xml:space="preserve">
-    <value>Gewichtete kleinste Quadrate (min T/P)</value>
-  </data>
-  <data name="cbObjFunc.Items5" xml:space="preserve">
-    <value>Gewichtete kleinste Quadrate (min y/x)</value>
-  </data>
-  <data name="cbObjFunc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 586</value>
   </data>
   <data name="LabelWithDivider12.Size" type="System.Drawing.Size, System.Drawing">
     <value>400, 18</value>
@@ -299,7 +266,7 @@
     <value>Komponenten</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 589</value>
+    <value>209, 596</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
@@ -314,19 +281,13 @@
     <value>Komponente 1</value>
   </data>
   <data name="cbRegMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 586</value>
-  </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 590</value>
+    <value>66, 593</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Methode</value>
-  </data>
-  <data name="LabelWithDivider3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 543</value>
   </data>
   <data name="LabelWithDivider3.Text" xml:space="preserve">
     <value>Regression Parameter</value>
@@ -411,9 +372,6 @@
   </data>
   <data name="SaveFileDialog1.Filter" xml:space="preserve">
     <value>XML Archiv|*xml</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1122, 750</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

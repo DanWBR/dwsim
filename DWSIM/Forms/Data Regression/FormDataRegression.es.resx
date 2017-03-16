@@ -123,17 +123,66 @@
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Gráfica y-x </value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Generar Puntos (UNIFAC)</value>
+  </data>
+  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
+    <value>Generar Puntos (NRTL)</value>
+  </data>
+  <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem3.Text" xml:space="preserve">
+    <value>Generar Puntos (UNIQUAC)</value>
+  </data>
+  <data name="ToolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem4.Text" xml:space="preserve">
+    <value>Generar Puntos (PR)</value>
+  </data>
+  <data name="ToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem5.Text" xml:space="preserve">
+    <value>Generar Puntos (SRK)</value>
+  </data>
+  <data name="ToolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem6.Text" xml:space="preserve">
+    <value>Generar Puntos (PRSV2-M)</value>
+  </data>
+  <data name="ToolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 22</value>
+  </data>
+  <data name="ToolStripMenuItem7.Text" xml:space="preserve">
+    <value>Generar Puntos (PRSV2-VL)</value>
+  </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 158</value>
+  </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Resultados de la Regresión</value>
   </data>
   <data name="btnDoReg.Text" xml:space="preserve">
     <value>Efectuar Regresión</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Configuración</value>
+  <data name="chkDoTDepRegression.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 17</value>
   </data>
   <data name="chkDoTDepRegression.Text" xml:space="preserve">
     <value>Obtener dependencia de los parámetros con la temperatura</value>
+  </data>
+  <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 13</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Estimados Iniciales:</value>
@@ -144,11 +193,17 @@
   <data name="btnCalcOnce.Text" xml:space="preserve">
     <value>Actualizar</value>
   </data>
+  <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Función Objetivo</value>
   </data>
   <data name="LabelWithDivider3.Text" xml:space="preserve">
     <value>Parámetros de Regresión</value>
+  </data>
+  <data name="check.ToolTipText" xml:space="preserve">
+    <value>Incluir en Regresión</value>
   </data>
   <data name="LabelWithDivider1.Text" xml:space="preserve">
     <value>Modelo Termodinámico</value>
@@ -156,25 +211,18 @@
   <data name="LabelWithDivider2.Text" xml:space="preserve">
     <value>Datos Experimentales</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Información</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Configuración</value>
   </data>
-  <data name="BtnSelectIPDB.Text" xml:space="preserve">
-    <value>Buscar</value>
-  </data>
-  <data name="BtnSaveIPDB.Text" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="Label12.Text" xml:space="preserve">
-    <value>Base de datos</value>
-  </data>
-  <data name="BtnNewIPDB.Text" xml:space="preserve">
-    <value>Nueva</value>
+  <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Descripción</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Información</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAICAAAAEACACoCAAAZgAAABAQAAABAAgAaAUAAA4JAACAgAAAAQAgACgIAQB2DgAAMDAAAAEA
@@ -1621,35 +1669,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Regresión de Datos</value>
-  </data>
-  <data name="DBOpenDlg.Filter" xml:space="preserve">
-    <value>Archivos XML|*.xml</value>
-  </data>
-  <data name="DBOpenDlg.Title" xml:space="preserve">
-    <value>Abrir/Crear Banco de Parámetros</value>
-  </data>
-  <data name="ToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Generar Puntos (UNIFAC)</value>
-  </data>
-  <data name="ToolStripMenuItem2.Text" xml:space="preserve">
-    <value>Generar Puntos (NRTL)</value>
-  </data>
-  <data name="ToolStripMenuItem3.Text" xml:space="preserve">
-    <value>Generar Puntos (UNIQUAC)</value>
-  </data>
-  <data name="ToolStripMenuItem4.Text" xml:space="preserve">
-    <value>Generar Puntos (PR)</value>
-  </data>
-  <data name="ToolStripMenuItem5.Text" xml:space="preserve">
-    <value>Generar Puntos (SRK)</value>
-  </data>
-  <data name="ToolStripMenuItem6.Text" xml:space="preserve">
-    <value>Generar Puntos (PRSV2-M)</value>
-  </data>
-  <data name="ToolStripMenuItem7.Text" xml:space="preserve">
-    <value>Generar Puntos (PRSV2-VL)</value>
-  </data>
-  <data name="check.ToolTipText" xml:space="preserve">
-    <value>Incluir en Regresión</value>
   </data>
 </root>
