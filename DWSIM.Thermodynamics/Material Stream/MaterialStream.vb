@@ -5657,7 +5657,11 @@ Namespace Streams
         Public Property CompositionBasis As CompositionBasis Implements IMaterialStream.CompositionBasis
 
         Public Function Clone1() As IMaterialStream Implements IMaterialStream.Clone
-            Return Me.Clone()
+            Return ShallowClone()
+        End Function
+
+        Public Overrides Function Clone() As Object
+            Return ShallowClone()
         End Function
 
         Public Function ShallowClone() As Streams.MaterialStream

@@ -114,6 +114,8 @@ Public Class Settings
         Settings.ExcelErrorHandlingMode = source.Configs("ExcelAddIn").GetInt("ExcelErrorHandlingMode", 0)
         Settings.ExcelFlashSettings = source.Configs("ExcelAddIn").GetString("ExcelFlashSettings", "")
 
+        If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
+
         Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
         Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
 
@@ -143,7 +145,7 @@ Public Class Settings
         source.Configs("ExcelAddIn").Set("ExcelErrorHandlingMode", Settings.ExcelErrorHandlingMode)
         source.Configs("ExcelAddIn").Set("ExcelFlashSettings", Settings.ExcelFlashSettings)
 
-        If Not source.Configs.Contains("OSInfo") Then source.Configs.Add("OSInfo")
+        If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
 
         source.Configs("OSInfo").Set("Platform", GetPlatform)
         source.Configs("OSInfo").Set("Environment", GetEnvironment)

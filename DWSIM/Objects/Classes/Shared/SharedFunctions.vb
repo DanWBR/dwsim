@@ -455,11 +455,17 @@ Namespace DWSIM
             source.Configs("Misc").Set("HideSolidPhase_COInterface", My.Settings.HideSolidPhase_CO)
             source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", My.Settings.IgnoreCompoundPropertiesOnLoad)
 
+            If source.Configs("OctaveBridge") Is Nothing Then source.AddConfig("OctaveBridge")
+
             source.Configs("OctaveBridge").Set("OctavePath", My.Settings.OctavePath)
             source.Configs("OctaveBridge").Set("OctaveProcessTimeout", My.Settings.OctaveProcessTimeout)
 
+            If source.Configs("PythonBridge") Is Nothing Then source.AddConfig("PythonBridge")
+
             source.Configs("PythonBridge").Set("PythonPath", My.Settings.PythonPath)
             source.Configs("PythonBridge").Set("PythonProcessTimeout", My.Settings.PythonProcessTimeout)
+
+            If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
 
             source.Configs("OSInfo").Set("Platform", My.Settings.CurrentPlatform)
             source.Configs("OSInfo").Set("Environment", My.Settings.CurrentEnvironment)
