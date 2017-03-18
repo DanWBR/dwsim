@@ -855,7 +855,7 @@ Partial Class MaterialStreamEditor
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowOpen = False
         Me.rtbAnnotations.ShowRedo = False
@@ -1666,7 +1666,7 @@ Partial Class MaterialStreamEditor
         'ToolTip2
         '
         Me.ToolTip2.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-        Me.ToolTip2.ToolTipTitle = "Tip"
+        Me.ToolTip2.ToolTipTitle = "Tipp"
         '
         'MaterialStreamEditor
         '
@@ -1888,6 +1888,13 @@ Partial Class MaterialStreamEditor
     Friend WithEvents TabCompPropSolid As System.Windows.Forms.TabPage
     Friend WithEvents gridCompPropSolid As System.Windows.Forms.DataGridView
     Friend WithEvents cbCompoundPhaseProperties As System.Windows.Forms.ComboBox
+    Friend WithEvents lblCompPropUnits As System.Windows.Forms.Label
+    Friend WithEvents cbSolvent As System.Windows.Forms.ComboBox
+    Friend WithEvents lblSolvent As System.Windows.Forms.Label
+    Friend WithEvents compname As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents compamount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents ToolTip2 As System.Windows.Forms.ToolTip
     Friend WithEvents DataGridViewTextBoxColumn32 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn33 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn36 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1896,11 +1903,4 @@ Partial Class MaterialStreamEditor
     Friend WithEvents DataGridViewTextBoxColumn39 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn40 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn41 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents lblCompPropUnits As System.Windows.Forms.Label
-    Friend WithEvents cbSolvent As System.Windows.Forms.ComboBox
-    Friend WithEvents lblSolvent As System.Windows.Forms.Label
-    Friend WithEvents compname As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents compamount As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
-    Friend WithEvents ToolTip2 As System.Windows.Forms.ToolTip
 End Class
