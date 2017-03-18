@@ -166,7 +166,7 @@
     <value>93, 24</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6284.32645, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6286.25206, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -189,8 +189,8 @@
   <data name="cbTunit.Items3" xml:space="preserve">
     <value>R</value>
   </data>
-  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="dt.HeaderText" xml:space="preserve">
+    <value>dT</value>
   </data>
   <data name="colpar.HeaderText" xml:space="preserve">
     <value>Parâmetro</value>
@@ -222,6 +222,9 @@
   <data name="&gt;&gt;ToolStripMenuItem6.Name" xml:space="preserve">
     <value>ToolStripMenuItem6</value>
   </data>
+  <data name="btnTransfere.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cbRegMethod.Items" xml:space="preserve">
     <value>Limited Memory BFGS</value>
   </data>
@@ -229,7 +232,7 @@
     <value>7</value>
   </data>
   <data name="&gt;&gt;graph2.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.32645, Culture=neutral, PublicKeyToken=null</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.25206, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gridInEst.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -265,13 +268,10 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkIdealVaporPhase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Tipo</value>
-  </data>
-  <data name="cbTunit.Items" xml:space="preserve">
-    <value>C</value>
   </data>
   <data name="tbDescription.Location" type="System.Drawing.Point, System.Drawing">
     <value>349, 16</value>
@@ -280,7 +280,7 @@
     <value>coltl</value>
   </data>
   <data name="&gt;&gt;cbTunit.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="Button2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -319,7 +319,7 @@
     <value>kPa</value>
   </data>
   <data name="&gt;&gt;chkTL.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btnCalcOnce.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -348,6 +348,9 @@
   <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
+  <data name="btnDoReg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 23</value>
+  </data>
   <data name="Button1.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 24</value>
   </data>
@@ -362,9 +365,6 @@
   </data>
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
-  </data>
-  <data name="cbRegMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 21</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Unid. P</value>
@@ -384,8 +384,8 @@
   <data name="&gt;&gt;btnDoReg.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbTunit.Items" xml:space="preserve">
+    <value>C</value>
   </data>
   <data name="&gt;&gt;dxx2.Name" xml:space="preserve">
     <value>dxx2</value>
@@ -414,8 +414,8 @@
   <data name="&gt;&gt;tbDescription.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;colts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;colx1.Name" xml:space="preserve">
+    <value>colx1</value>
   </data>
   <data name="cbPunit.Items18" xml:space="preserve">
     <value>psig</value>
@@ -465,8 +465,8 @@
   <data name="&gt;&gt;graph.Name" xml:space="preserve">
     <value>graph</value>
   </data>
-  <data name="coly1.HeaderText" xml:space="preserve">
-    <value>y1</value>
+  <data name="LabelWithDivider3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cbTunit.Items1" xml:space="preserve">
     <value>K</value>
@@ -504,26 +504,26 @@
   <data name="btnSearchKDB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;cbObjFunc.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
   <data name="gridInEst.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 106</value>
   </data>
   <data name="cbRegMethod.Items1" xml:space="preserve">
     <value>Truncated Newton</value>
   </data>
+  <data name="&gt;&gt;x1l2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dpp.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Modelo</value>
   </data>
   <data name="&gt;&gt;cbModel.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>30</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancelar</value>
@@ -531,8 +531,14 @@
   <data name="Label1.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 82</value>
+  <data name="&gt;&gt;cbModel.Name" xml:space="preserve">
+    <value>cbModel</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;cbObjFunc.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="&gt;&gt;colx2.Name" xml:space="preserve">
     <value>colx2</value>
@@ -592,13 +598,13 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="chkTS.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="&gt;&gt;Label7.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="dtt.HeaderText" xml:space="preserve">
     <value>dT/T</value>
@@ -631,7 +637,7 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6284.32645, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6286.25206, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cbDataType.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 21</value>
@@ -682,7 +688,7 @@
     <value>dT/T (%)</value>
   </data>
   <data name="&gt;&gt;cbCompound2.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="&gt;&gt;MenuStrip1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -744,6 +750,9 @@
   <data name="&gt;&gt;chkIdealVaporPhase.Name" xml:space="preserve">
     <value>chkIdealVaporPhase</value>
   </data>
+  <data name="coly1.HeaderText" xml:space="preserve">
+    <value>y1</value>
+  </data>
   <data name="&gt;&gt;LabelWithDivider3.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
@@ -777,11 +786,17 @@
   <data name="graph.Size" type="System.Drawing.Size, System.Drawing">
     <value>625, 538</value>
   </data>
+  <data name="btnTransfere.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
   <data name="cbPunit.Items1" xml:space="preserve">
     <value>atm</value>
   </data>
   <data name="dxx1.HeaderText" xml:space="preserve">
     <value>dx1'/x1'</value>
+  </data>
+  <data name="chkTL.Text" xml:space="preserve">
+    <value>Liq.</value>
   </data>
   <data name="Label10.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -790,7 +805,7 @@
     <value>IPOPT</value>
   </data>
   <data name="&gt;&gt;cbPunit.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="cbPunit.Items" xml:space="preserve">
     <value>Pa</value>
@@ -841,10 +856,7 @@
     <value>Tahoma, 8.25pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;colP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>8</value>
   </data>
   <data name="MenuStrip1.Text" xml:space="preserve">
     <value>MenuStrip1</value>
@@ -867,9 +879,6 @@
   <data name="x1l1.ToolTipText" xml:space="preserve">
     <value>Compound 1 Mole Fraction in Liquid Phase 1</value>
   </data>
-  <data name="LabelWithDivider12.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
   <data name="&gt;&gt;ParâmetrosDeInteraçãoToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -880,13 +889,10 @@
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;graph.Type" xml:space="preserve">
-    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.32645, Culture=neutral, PublicKeyToken=null</value>
+    <value>ZedGraph.ZedGraphControl, ZedGraph, Version=5.1.5.25206, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="LabelWithDivider3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt, style=Bold</value>
-  </data>
-  <data name="&gt;&gt;x1l1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="chkIdealVaporPhase.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -906,8 +912,8 @@
   <data name="colmax.HeaderText" xml:space="preserve">
     <value>Máximo</value>
   </data>
-  <data name="colx1.ToolTipText" xml:space="preserve">
-    <value>Compound 1 Mole Fraction in Liquid Phase 1</value>
+  <data name="tcalc.HeaderText" xml:space="preserve">
+    <value>T calc</value>
   </data>
   <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>491, 618</value>
@@ -919,10 +925,13 @@
     <value>Dados</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider1.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>32</value>
   </data>
   <data name="cbRegMethod.Items7" xml:space="preserve">
     <value>Differential Evolution</value>
+  </data>
+  <data name="&gt;&gt;colts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider2.Type" xml:space="preserve">
     <value>System.Windows.Forms.LabelWithDivider, LabelWithDivider, Version=1.1.0.1, Culture=neutral, PublicKeyToken=null</value>
@@ -934,7 +943,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;Label11.Parent" xml:space="preserve">
     <value>GroupBox4</value>
@@ -949,16 +958,22 @@
     <value>tcalc</value>
   </data>
   <data name="&gt;&gt;btnCalcOnce.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;colpar.Name" xml:space="preserve">
     <value>colpar</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider3.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;cbCompound2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>881, 464</value>
+  </data>
+  <data name="Label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkDoTDepRegression.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -996,8 +1011,8 @@
   <data name="&gt;&gt;gridstats.Parent" xml:space="preserve">
     <value>FaTabStripItem3</value>
   </data>
-  <data name="LabelWithDivider12.Text" xml:space="preserve">
-    <value>Componentes</value>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 82</value>
   </data>
   <data name="&gt;&gt;tbParam.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1024,7 +1039,10 @@
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
+  </data>
+  <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="cbDataType.Location" type="System.Drawing.Point, System.Drawing">
     <value>45, 246</value>
@@ -1050,9 +1068,6 @@
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
   </data>
-  <data name="LabelWithDivider12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="&gt;&gt;Label9.Name" xml:space="preserve">
     <value>Label9</value>
   </data>
@@ -1061,6 +1076,9 @@
   </data>
   <data name="&gt;&gt;graph2.Parent" xml:space="preserve">
     <value>FaTabStripItem2</value>
+  </data>
+  <data name="btnTransfere.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="cbCompound2.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 30</value>
@@ -1073,6 +1091,9 @@
   </data>
   <data name="&gt;&gt;btnDoReg.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnTransfere.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 23</value>
   </data>
   <data name="btnSearchKDB.Size" type="System.Drawing.Size, System.Drawing">
     <value>431, 37</value>
@@ -1088,6 +1109,12 @@
   </data>
   <data name="&gt;&gt;GridExpData.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTransfere.Parent" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;colmax.Name" xml:space="preserve">
     <value>colmax</value>
@@ -1106,9 +1133,6 @@
   </data>
   <data name="btnCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="graph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
   </data>
   <data name="FaTabStrip1.Text" xml:space="preserve">
     <value>FaTabStrip1</value>
@@ -1138,16 +1162,13 @@
     <value>Particle Swarm Optimization</value>
   </data>
   <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;t.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Name" xml:space="preserve">
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;GridExpData.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="&gt;&gt;GridExpData.Name" xml:space="preserve">
     <value>GridExpData</value>
@@ -1188,14 +1209,23 @@
   <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="colx1.ToolTipText" xml:space="preserve">
+    <value>Compound 1 Mole Fraction in Liquid Phase 1</value>
+  </data>
   <data name="FaTabStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="cbObjFunc.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
+  <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6286.25206, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;LabelWithDivider3.Name" xml:space="preserve">
+    <value>LabelWithDivider3</value>
+  </data>
   <data name="&gt;&gt;gridInEst.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Name" xml:space="preserve">
     <value>FaTabStripItem2</value>
@@ -1254,14 +1284,17 @@
   <data name="cbDataType.Items5" xml:space="preserve">
     <value>TPxx (ELL)</value>
   </data>
-  <data name="cbDataType.Items2" xml:space="preserve">
-    <value>TPxy (ELV)</value>
+  <data name="&gt;&gt;t.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbDataType.Items3" xml:space="preserve">
     <value>Txx (ELL)</value>
   </data>
   <data name="cbDataType.Items1" xml:space="preserve">
     <value>Pxy (ELV)</value>
+  </data>
+  <data name="&gt;&gt;dxxp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkTL.Name" xml:space="preserve">
     <value>chkTL</value>
@@ -1306,7 +1339,7 @@
     <value>Panel1</value>
   </data>
   <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="cbRegMethod.Items10" xml:space="preserve">
     <value>Mesh</value>
@@ -1351,7 +1384,7 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="gridInEst.Size" type="System.Drawing.Size, System.Drawing">
     <value>335, 114</value>
@@ -1404,9 +1437,6 @@
   <data name="&gt;&gt;cbPunit.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6284.32645, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="tbRegResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>377, 100</value>
   </data>
@@ -1427,6 +1457,9 @@
   </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="tbDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
     <value>UNIFAC</value>
@@ -1450,7 +1483,7 @@
     <value>3</value>
   </data>
   <data name="&gt;&gt;cbDataType.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>29</value>
   </data>
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 249</value>
@@ -1497,8 +1530,14 @@
   <data name="cbPunit.Items13" xml:space="preserve">
     <value>mH2O</value>
   </data>
+  <data name="btnTransfere.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 564</value>
+  </data>
   <data name="graph.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="btnTransfere.Text" xml:space="preserve">
+    <value>-&gt; Parâmetros iniciais</value>
   </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1519,7 +1558,7 @@
     <value>Liquidus</value>
   </data>
   <data name="&gt;&gt;cbCompound1.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="&gt;&gt;dx2.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1554,9 +1593,6 @@
   <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnCalcOnce.Name" xml:space="preserve">
-    <value>btnCalcOnce</value>
-  </data>
   <data name="chkTS.Text" xml:space="preserve">
     <value>Sol.</value>
   </data>
@@ -1571,6 +1607,9 @@
   </data>
   <data name="&gt;&gt;colT.Name" xml:space="preserve">
     <value>colT</value>
+  </data>
+  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1591,7 +1630,7 @@
     <value>True</value>
   </data>
   <data name="&gt;&gt;btnDoReg.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;colmin.Name" xml:space="preserve">
     <value>colmin</value>
@@ -1633,16 +1672,13 @@
     <value>Parâmetros mais recentes</value>
   </data>
   <data name="&gt;&gt;Label9.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="chkTL.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 248</value>
   </data>
-  <data name="&gt;&gt;colx1.Name" xml:space="preserve">
-    <value>colx1</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6284.32645, Culture=neutral, PublicKeyToken=null</value>
+  <data name="LabelWithDivider12.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 8.25pt, style=Bold</value>
   </data>
   <data name="Label9.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -1695,9 +1731,6 @@
   <data name="&gt;&gt;x1l1calc.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cbModel.Parent" xml:space="preserve">
-    <value>Panel1</value>
-  </data>
   <data name="Button1.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1710,11 +1743,14 @@
   <data name="btnCalcOnce.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 620</value>
   </data>
+  <data name="chkTS.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="tbParam.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Estimativas Iniciais</value>
+  <data name="LabelWithDivider12.Text" xml:space="preserve">
+    <value>Componentes</value>
   </data>
   <data name="Panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
@@ -3229,17 +3265,11 @@
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Resultados da Regressão</value>
   </data>
-  <data name="tcalc.HeaderText" xml:space="preserve">
-    <value>T calc</value>
-  </data>
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;MenuStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="chkTS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 248</value>
   </data>
   <data name="graph2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -3247,8 +3277,8 @@
   <data name="&gt;&gt;tbDescription.Name" xml:space="preserve">
     <value>tbDescription</value>
   </data>
-  <data name="ParâmetrosDeInteraçãoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Parâmetros de Interação</value>
+  <data name="chkTS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>174, 248</value>
   </data>
   <data name="&gt;&gt;Panel1.Name" xml:space="preserve">
     <value>Panel1</value>
@@ -3263,13 +3293,13 @@
     <value>PC-SAFT</value>
   </data>
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="cbRegMethod.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="&gt;&gt;chkDoTDepRegression.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;cbCompound2.Parent" xml:space="preserve">
     <value>Panel1</value>
@@ -3296,13 +3326,10 @@
     <value>dppp</value>
   </data>
   <data name="&gt;&gt;chkTS.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <data name="cbRegMethod.Items6" xml:space="preserve">
-    <value>Gradient Descent</value>
-  </data>
-  <data name="dt.HeaderText" xml:space="preserve">
-    <value>dT</value>
+  <data name="&gt;&gt;graph.Parent" xml:space="preserve">
+    <value>FaTabStripItem1</value>
   </data>
   <data name="chkTL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3314,7 +3341,7 @@
     <value>52</value>
   </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="&gt;&gt;gridstats.Name" xml:space="preserve">
     <value>gridstats</value>
@@ -3335,7 +3362,7 @@
     <value>38</value>
   </data>
   <data name="&gt;&gt;btnSearchKDB.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="LabelWithDivider12.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 8</value>
@@ -3348,6 +3375,9 @@
   </data>
   <data name="&gt;&gt;dp.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTransfere.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbModel.Items1" xml:space="preserve">
     <value>PRSV2-M</value>
@@ -3366,9 +3396,6 @@
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip1</value>
-  </data>
-  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 111</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 52</value>
@@ -3393,6 +3420,9 @@
   </data>
   <data name="&gt;&gt;cbPunit.Parent" xml:space="preserve">
     <value>Panel1</value>
+  </data>
+  <data name="cbDataType.Items2" xml:space="preserve">
+    <value>TPxy (ELV)</value>
   </data>
   <data name="&gt;&gt;Label9.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3421,6 +3451,9 @@
   <data name="&gt;&gt;ToolStripMenuItem7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dyy.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -3433,17 +3466,17 @@
   <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
     <value>Panel1</value>
   </data>
-  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="LabelWithDivider12.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="chkTL.Text" xml:space="preserve">
-    <value>Liq.</value>
+  <data name="&gt;&gt;x1l1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbRegMethod.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="&gt;&gt;colval.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3466,11 +3499,8 @@
   <data name="tbParam.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 100</value>
   </data>
-  <data name="LabelWithDivider3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LabelWithDivider12.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 8.25pt, style=Bold</value>
+  <data name="LabelWithDivider12.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="cbPunit.Items6" xml:space="preserve">
     <value>kPag</value>
@@ -3506,13 +3536,16 @@
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbObjFunc.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;t.Name" xml:space="preserve">
     <value>t</value>
   </data>
   <data name="&gt;&gt;dyy.Name" xml:space="preserve">
     <value>dyy</value>
+  </data>
+  <data name="ParâmetrosDeInteraçãoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Parâmetros de Interação</value>
   </data>
   <data name="&gt;&gt;x1l2calc.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3544,17 +3577,17 @@
   <data name="&gt;&gt;colval.Name" xml:space="preserve">
     <value>colval</value>
   </data>
-  <data name="&gt;&gt;cbCompound2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbRegMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 21</value>
   </data>
   <data name="&gt;&gt;LabelWithDivider2.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>33</value>
   </data>
   <data name="&gt;&gt;SalvarEmBancoDeDadosXMLToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="graph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;colmin.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -3574,14 +3607,11 @@
   <data name="tbRegResults.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider12.ZOrder" xml:space="preserve">
-    <value>17</value>
+  <data name="Label9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 111</value>
   </data>
-  <data name="&gt;&gt;dxxp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbModel.Parent" xml:space="preserve">
+    <value>Panel1</value>
   </data>
   <data name="chkDoTDepRegression.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3601,8 +3631,8 @@
   <data name="cbTunit.Items2" xml:space="preserve">
     <value>F</value>
   </data>
-  <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;LabelWithDivider12.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="GridExpData.Size" type="System.Drawing.Size, System.Drawing">
     <value>431, 219</value>
@@ -3616,8 +3646,8 @@
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>879, 618</value>
   </data>
-  <data name="btnDoReg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 23</value>
+  <data name="&gt;&gt;colP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Label10.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -3631,20 +3661,17 @@
   <data name="btnCalcOnce.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
   </data>
-  <data name="&gt;&gt;LabelWithDivider3.Name" xml:space="preserve">
-    <value>LabelWithDivider3</value>
+  <data name="cbRegMethod.Items6" xml:space="preserve">
+    <value>Gradient Descent</value>
   </data>
-  <data name="&gt;&gt;graph.Parent" xml:space="preserve">
-    <value>FaTabStripItem1</value>
-  </data>
-  <data name="tbDescription.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;btnCalcOnce.Name" xml:space="preserve">
+    <value>btnCalcOnce</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 4</value>
   </data>
-  <data name="&gt;&gt;cbModel.Name" xml:space="preserve">
-    <value>cbModel</value>
+  <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6286.25206, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="btnDoReg.Location" type="System.Drawing.Point, System.Drawing">
     <value>135, 620</value>
@@ -3655,8 +3682,8 @@
   <data name="x1l1calc.HeaderText" xml:space="preserve">
     <value>x1' calc</value>
   </data>
-  <data name="&gt;&gt;x1l2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnTransfere.Name" xml:space="preserve">
+    <value>btnTransfere</value>
   </data>
   <data name="cbPunit.Items14" xml:space="preserve">
     <value>mmH2O</value>
@@ -3676,8 +3703,11 @@
   <data name="cbPunit.Items4" xml:space="preserve">
     <value>lbf/ft2</value>
   </data>
-  <data name="chkTS.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Estimativas Iniciais</value>
+  </data>
+  <data name="&gt;&gt;btnTransfere.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="colT.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3685,10 +3715,13 @@
   <metadata name="x1l2calc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="colpar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="pcalc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="coltl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="p.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3704,6 +3737,9 @@
     <value>True</value>
   </metadata>
   <metadata name="colval.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cf.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="dt.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3724,29 +3760,29 @@
   <metadata name="coly1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="colts.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="tcalc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>37</value>
+  <metadata name="dpp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="dxx2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="cf.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>22, 5</value>
+  </metadata>
+  <metadata name="dx1l1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="dyp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dxx2p.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>290, 8</value>
   </metadata>
   <metadata name="dyy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="ContextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>22, 5</value>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>37</value>
   </metadata>
   <metadata name="dppp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3760,7 +3796,7 @@
   <metadata name="dtt.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="dxx2p.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="coltl.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="dxx1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -3775,43 +3811,37 @@
   <metadata name="colmin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="colP.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>405, 8</value>
   </metadata>
-  <metadata name="dx1l1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colP.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="dx2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="tcalc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="MenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>290, 8</value>
   </metadata>
   <metadata name="dp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="dpp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colts.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="t.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="x1l1calc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="y1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="colpar.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="colx1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="dy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="x1l1calc.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dyp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
 </root>

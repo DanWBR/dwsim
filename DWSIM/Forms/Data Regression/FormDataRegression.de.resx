@@ -190,6 +190,9 @@
   <data name="btnDoReg.Text" xml:space="preserve">
     <value>Regression starten</value>
   </data>
+  <data name="btnTransfere.Text" xml:space="preserve">
+    <value>-&gt; Startwerte</value>
+  </data>
   <data name="btnSearchKDB.Text" xml:space="preserve">
     <value>Suche in Online-Datenbank KDB/CHERIC</value>
   </data>

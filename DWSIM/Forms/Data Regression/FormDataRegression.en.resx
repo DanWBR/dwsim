@@ -199,6 +199,9 @@
   <data name="btnDoReg.Text" xml:space="preserve">
     <value>Run Regression</value>
   </data>
+  <data name="btnTransfere.Text" xml:space="preserve">
+    <value>-&gt; Initial Parameters</value>
+  </data>
   <data name="btnSearchKDB.Text" xml:space="preserve">
     <value>Search Online for VLE Data at KDB Thermo Database</value>
   </data>

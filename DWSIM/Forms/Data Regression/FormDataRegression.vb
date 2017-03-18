@@ -531,7 +531,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4")
                             vartext += "}"
                             regressedparameters.Add("kij", x(0))
@@ -589,7 +589,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4")
                             vartext += "}"
@@ -649,7 +649,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4") & ", "
                             vartext += "kji = " & x(1).ToString("N4")
                             vartext += "}"
@@ -709,7 +709,7 @@ Public Class FormDataRegression
                                     Next
                                 End If
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4") & ", "
                             vartext += "alpha12 = " & x(2).ToString("N4")
@@ -789,7 +789,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2)(0)
                                 Vx2c(i) = result(6)(0)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4") & ", "
                             vartext += "kji = " & x(1).ToString("N4")
                             vartext += "}"
@@ -811,7 +811,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2)(0)
                                 Vx2c(i) = result(6)(0)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4")
                             vartext += "}"
@@ -833,7 +833,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2)(0)
                                 Vx2c(i) = result(6)(0)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4") & ", "
                             vartext += "alpha12 = " & x(2).ToString("N4")
@@ -853,7 +853,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2)(0)
                                 Vx2c(i) = result(6)(0)
                             Next
-                            vartext = ", Interaction parameters = {kij = "
+                            vartext = ", Parameters = {kij = "
                             For i = 0 To x.Length - 1
                                 vartext += x(i).ToString("N4")
                             Next
@@ -925,7 +925,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4") & ", "
                             vartext += "kji = " & x(1).ToString("N4")
                             vartext += "}"
@@ -937,7 +937,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4") & ", "
                             vartext += "kji = " & x(1).ToString("N4")
                             vartext += "}"
@@ -949,7 +949,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4")
                             vartext += "}"
@@ -961,7 +961,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4") & ", "
                             vartext += "alpha12 = " & x(2).ToString("N4")
@@ -975,7 +975,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {kij = "
+                            vartext = ", Parameters = {kij = "
                             For i = 0 To x.Length - 1
                                 vartext += x(i).ToString("N4")
                             Next
@@ -987,7 +987,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {kij = "
+                            vartext = ", Parameters = {kij = "
                             For i = 0 To x.Length - 1
                                 vartext += x(i).ToString("N4")
                             Next
@@ -999,7 +999,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {kij = "
+                            vartext = ", Parameters = {kij = "
                             For i = 0 To x.Length - 1
                                 vartext += x(i).ToString("N4")
                             Next
@@ -1011,7 +1011,7 @@ Public Class FormDataRegression
                                 Vx1c(i) = result(2, 1)
                                 Vx2c(i) = result(2, 2)
                             Next
-                            vartext = ", Interaction parameters = {kij = "
+                            vartext = ", Parameters = {kij = "
                             For i = 0 To x.Length - 1
                                 vartext += x(i).ToString("N4")
                             Next
@@ -1098,7 +1098,7 @@ Public Class FormDataRegression
                                     Application.DoEvents()
                                 Next
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4")
                             vartext += "}"
                             regressedparameters.Add("kij", x(0))
@@ -1145,7 +1145,7 @@ Public Class FormDataRegression
                                     Application.DoEvents()
                                 Next
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4")
                             vartext += "}"
@@ -1194,7 +1194,7 @@ Public Class FormDataRegression
                                     Application.DoEvents()
                                 Next
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "kij = " & x(0).ToString("N4") & ", "
                             vartext += "kji = " & x(1).ToString("N4")
                             vartext += "}"
@@ -1243,7 +1243,7 @@ Public Class FormDataRegression
                                     Application.DoEvents()
                                 Next
                             End If
-                            vartext = ", Interaction parameters = {"
+                            vartext = ", Parameters = {"
                             vartext += "A12 = " & x(0).ToString("N4") & ", "
                             vartext += "A21 = " & x(1).ToString("N4") & ", "
                             vartext += "alpha12 = " & x(2).ToString("N4")
@@ -1585,6 +1585,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 For Each param In IP.Parameters
                     tbParam.AppendText(param.Key + ": " + param.Value.ToString() + vbCrLf)
                 Next
+                btnTransfere.Enabled = True
             End If
 
         Catch ex As Exception
@@ -3861,6 +3862,18 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     End Sub
 
+    Private Sub btnTransfere_Click(sender As Object, e As EventArgs) Handles btnTransfere.Click
+        If IP IsNot Nothing Then
+            Dim i As Integer
+
+            For Each param In IP.Parameters
+                gridInEst.Rows(i).Cells(2).Value = param.Value
+                i += 1
+            Next
+
+            btnTransfere.Enabled = False
+        End If
+    End Sub
 End Class
 
 Public Class RegressionProblem

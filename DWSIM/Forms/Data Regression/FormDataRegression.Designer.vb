@@ -77,6 +77,7 @@ Partial Class FormDataRegression
         Me.btnDoReg = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnTransfere = New System.Windows.Forms.Button()
         Me.btnSearchKDB = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.chkDoTDepRegression = New System.Windows.Forms.CheckBox()
@@ -464,6 +465,7 @@ Partial Class FormDataRegression
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.btnTransfere)
         Me.Panel1.Controls.Add(Me.btnSearchKDB)
         Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.chkDoTDepRegression)
@@ -498,6 +500,12 @@ Partial Class FormDataRegression
         Me.Panel1.Controls.Add(Me.LabelWithDivider1)
         Me.Panel1.Controls.Add(Me.LabelWithDivider2)
         Me.Panel1.Name = "Panel1"
+        '
+        'btnTransfere
+        '
+        resources.ApplyResources(Me.btnTransfere, "btnTransfere")
+        Me.btnTransfere.Name = "btnTransfere"
+        Me.btnTransfere.UseVisualStyleBackColor = True
         '
         'btnSearchKDB
         '
@@ -1022,4 +1030,5 @@ Partial Class FormDataRegression
     Friend WithEvents ParâmetrosDeInteraçãoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SalvarEmBancoDeDadosXMLToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents btnTransfere As System.Windows.Forms.Button
 End Class
