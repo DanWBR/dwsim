@@ -1147,7 +1147,7 @@ Namespace Databases
                             Case "IG_Gibbs_Energy_of_Formation_25C"
                                 .IG_Gibbs_Energy_of_Formation_25C = Double.Parse(node2.InnerText, nf)
                             Case "Vapor_Pressure_Constant_EqNo"
-                                If node2.InnerText <> "" Then .VaporPressureEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .VaporPressureEquation = node2.InnerText
                             Case "Vapor_Pressure_Constant_A"
                                 .Vapor_Pressure_Constant_A = Double.Parse(node2.InnerText, nf)
                             Case "Vapor_Pressure_Constant_B"
