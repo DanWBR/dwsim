@@ -836,6 +836,6 @@ Public Class SpreadsheetForm
     End Sub
 
     Private Sub chkUseRegionalSeparator_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseRegionalSeparator.CheckedChanged
-        formc.Options.SpreadsheetUseRegionalSeparator = chkUseRegionalSeparator.Checked
+        If loaded Then formc.Options.SpreadsheetUseRegionalSeparator = chkUseRegionalSeparator.Checked
     End Sub
 End Class
