@@ -284,6 +284,12 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Identification</value>
   </data>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 13</value>
+  </data>
+  <data name="Label2.Text" xml:space="preserve">
+    <value>Use '.' as the decimal separator on math expressions.</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Heterogeneous Catalytic Reaction</value>
   </data>

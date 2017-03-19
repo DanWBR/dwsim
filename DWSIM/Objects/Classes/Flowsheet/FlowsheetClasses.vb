@@ -214,6 +214,8 @@ Namespace DWSIM.Flowsheet
 
         Public Property SimultaneousAdjustSolverEnabled As Boolean = True Implements Interfaces.IFlowsheetOptions.SimultaneousAdjustSolverEnabled
 
+        Public Property SpreadsheetUseRegionalSeparator As Boolean = False Implements Interfaces.IFlowsheetOptions.SpreadsheetUseRegionalSeparator
+
     End Class
 
 End Namespace

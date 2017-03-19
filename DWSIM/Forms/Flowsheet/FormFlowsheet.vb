@@ -173,6 +173,8 @@ Public Class FormFlowsheet
 
         If Me.ScriptCollection Is Nothing Then Me.ScriptCollection = New Dictionary(Of String, Script)
 
+        My.Application.ActiveSimulation = Me
+
         If Not Me.m_IsLoadedFromFile Then
 
             Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
@@ -331,8 +333,6 @@ Public Class FormFlowsheet
             FormMain.ToolStripButton1.Enabled = True
             FormMain.CloseAllToolstripMenuItem.Enabled = True
         End If
-
-        My.Application.ActiveSimulation = Me
 
         Me.ProcessScripts(Scripts.EventType.SimulationOpened, Scripts.ObjectType.Simulation, "")
 

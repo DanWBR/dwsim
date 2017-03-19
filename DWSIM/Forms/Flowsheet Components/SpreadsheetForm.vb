@@ -68,6 +68,8 @@ Public Class SpreadsheetForm
 
         formc = My.Application.ActiveSimulation
 
+        chkUseRegionalSeparator.Checked = formc.Options.SpreadsheetUseRegionalSeparator
+
         If Me.loaded = False Then
             Me.DataGridView1.Rows.Add(100)
             CopyFromDT()
@@ -549,8 +551,11 @@ Public Class SpreadsheetForm
                 End If
                 If expression <> "" Then
                     If expression.Substring(0, 1) = "=" Then
-                        Me.ExpContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture
-                        Me.ExpContext.ParserOptions.DecimalSeparator = "."
+                        If chkUseRegionalSeparator.Checked Then
+                            Me.ExpContext.Options.ParseCulture = My.Computer.Info.InstalledUICulture
+                        Else
+                            Me.ExpContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture
+                        End If
                         Me.ExpContext.ParserOptions.FunctionArgumentSeparator = ";"
                         Me.Expr = Me.ExpContext.CompileGeneric(Of Object)(expression.Substring(1))
                         cell.Value = Expr.Evaluate
@@ -828,5 +833,9 @@ Public Class SpreadsheetForm
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Clipboard.SetDataObject(Me.DataGridView1.GetClipboardContent)
+    End Sub
+
+    Private Sub chkUseRegionalSeparator_CheckedChanged(sender As Object, e As EventArgs) Handles chkUseRegionalSeparator.CheckedChanged
+        formc.Options.SpreadsheetUseRegionalSeparator = chkUseRegionalSeparator.Checked
     End Sub
 End Class

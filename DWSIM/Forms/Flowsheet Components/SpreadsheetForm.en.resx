@@ -119,52 +119,52 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 170</value>
+    <value>287, 170</value>
   </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="CelulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Cell</value>
   </data>
   <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 6</value>
+    <value>283, 6</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="AvaliarFormulaToolStripMenuItem.Text" xml:space="preserve">
     <value>Evaluate Formula</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="ImportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Import Value from Flowsheet</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="ExportarDadosToolStripMenuItem.Text" xml:space="preserve">
     <value>Export Value to Flowsheet Object</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 6</value>
+    <value>283, 6</value>
   </data>
   <data name="LimparToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="LimparToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear</value>
   </data>
   <data name="CopiarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="CopiarToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="ColarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 22</value>
+    <value>286, 22</value>
   </data>
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Paste</value>
@@ -175,17 +175,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Value</value>
   </data>
-  <data name="chkWriteMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 17</value>
-  </data>
-  <data name="chkWriteMode.Text" xml:space="preserve">
-    <value>Toggle Write Mode</value>
-  </data>
   <data name="chkUpdate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 17</value>
+    <value>144, 17</value>
   </data>
   <data name="chkUpdate.Text" xml:space="preserve">
-    <value>Toggle Automatic Update</value>
+    <value>Toggle automatic update</value>
   </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>675, 503</value>
@@ -195,6 +189,12 @@
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Copy data to Clipboard</value>
+  </data>
+  <data name="chkUseRegionalSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 17</value>
+  </data>
+  <data name="chkUseRegionalSeparator.Text" xml:space="preserve">
+    <value>Use system-defined decimal separator for expressions/formulas</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

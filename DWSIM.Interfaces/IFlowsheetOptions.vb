@@ -52,4 +52,6 @@
 
     Property SimultaneousAdjustSolverEnabled As Boolean
 
+    Property SpreadsheetUseRegionalSeparator As Boolean
+
 End Interface

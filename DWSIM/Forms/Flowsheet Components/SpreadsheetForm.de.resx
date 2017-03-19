@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>313, 170</value>
+  </data>
   <data name="CelulaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>312, 22</value>
   </data>
@@ -166,9 +169,6 @@
   <data name="ColarToolStripMenuItem.Text" xml:space="preserve">
     <value>Einfügen</value>
   </data>
-  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 170</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
@@ -180,6 +180,9 @@
   </data>
   <data name="chkUpdate.Text" xml:space="preserve">
     <value>Automatisch neu berechnen</value>
+  </data>
+  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 224</value>
   </data>
   <data name="FloatToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 22</value>
@@ -241,9 +244,6 @@
   <data name="DocumentToolStripMenuItem.Text" xml:space="preserve">
     <value>Dokument</value>
   </data>
-  <data name="dckMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 224</value>
-  </data>
   <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
     <value>619, 503</value>
   </data>
@@ -252,6 +252,15 @@
   </data>
   <data name="Button4.Text" xml:space="preserve">
     <value>Daten in Zwischenablage kopieren</value>
+  </data>
+  <data name="chkUseRegionalSeparator.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 508</value>
+  </data>
+  <data name="chkUseRegionalSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>321, 17</value>
+  </data>
+  <data name="chkUseRegionalSeparator.Text" xml:space="preserve">
+    <value>Use system-defined decimal separator for expressions/formulas</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

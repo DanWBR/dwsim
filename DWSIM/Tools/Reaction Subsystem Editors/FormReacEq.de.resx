@@ -143,13 +143,13 @@
     <value>Konstante</value>
   </data>
   <data name="rbKeqGibbs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 19</value>
+    <value>276, 17</value>
   </data>
   <data name="rbKeqGibbs.Text" xml:space="preserve">
     <value>Berechnung aus der Gibbs'schen Reaktionsenthalpie</value>
   </data>
   <data name="rbKeqfT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 19</value>
+    <value>137, 17</value>
   </data>
   <data name="rbKeqfT.Text" xml:space="preserve">
     <value>T-Funktion.: ln K [f(T)] =</value>
@@ -185,7 +185,7 @@
     <value>Partialdampfdruck</value>
   </data>
   <data name="KryptonLabel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 19</value>
+    <value>37, 13</value>
   </data>
   <data name="KryptonLabel6.Text" xml:space="preserve">
     <value>Phase</value>
@@ -255,6 +255,12 @@
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Identifikation</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>256, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Use '.' as the decimal separator on math expressions.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Gleichgewichtsreaktion</value>
