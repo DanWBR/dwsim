@@ -1160,7 +1160,7 @@ Namespace Databases
                                 .Vapor_Pressure_Constant_E = Double.Parse(node2.InnerText, nf)
 
                             Case "Vapor_Viscosity_EqNo"
-                                If node2.InnerText <> "" Then .VaporViscosityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .VaporViscosityEquation = node2.InnerText
                             Case "Vapor_Viscosity_Const_A"
                                 .Vapor_Viscosity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Vapor_Viscosity_Const_B"
@@ -1173,7 +1173,7 @@ Namespace Databases
                                 .Vapor_Viscosity_Const_E = Double.Parse(node2.InnerText, nf)
 
                             Case "Vapor_Thermal_Conductivity_EqNo"
-                                If node2.InnerText <> "" Then .VaporThermalConductivityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .VaporThermalConductivityEquation = node2.InnerText
                             Case "Vapor_Thermal_Conductivity_Const_A"
                                 .Vapor_Thermal_Conductivity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Vapor_Thermal_Conductivity_Const_B"
@@ -1186,7 +1186,7 @@ Namespace Databases
                                 .Vapor_Thermal_Conductivity_Const_E = Double.Parse(node2.InnerText, nf)
 
                             Case "Liquid_Thermal_Conductivity_EqNo"
-                                If node2.InnerText <> "" Then .LiquidThermalConductivityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .LiquidThermalConductivityEquation = node2.InnerText
                             Case "Liquid_Thermal_Conductivity_Const_A"
                                 .Liquid_Thermal_Conductivity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Thermal_Conductivity_Const_B"
@@ -1199,7 +1199,7 @@ Namespace Databases
                                 .Liquid_Thermal_Conductivity_Const_E = Double.Parse(node2.InnerText, nf)
 
                             Case "Ideal_Gas_Heat_Capacity_EqNo"
-                                If node2.InnerText <> "" Then .IdealgasCpEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .IdealgasCpEquation = node2.InnerText
                             Case "Ideal_Gas_Heat_Capacity_Const_A"
                                 .Ideal_Gas_Heat_Capacity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Ideal_Gas_Heat_Capacity_Const_B"
@@ -1211,7 +1211,7 @@ Namespace Databases
                             Case "Ideal_Gas_Heat_Capacity_Const_E"
                                 .Ideal_Gas_Heat_Capacity_Const_E = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Viscosity_EqNo"
-                                If node2.InnerText <> "" Then .LiquidViscosityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .LiquidViscosityEquation = node2.InnerText
                             Case "Liquid_Viscosity_Const_A"
                                 .Liquid_Viscosity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Viscosity_Const_B"
@@ -1223,7 +1223,7 @@ Namespace Databases
                             Case "Liquid_Viscosity_Const_E"
                                 .Liquid_Viscosity_Const_E = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Density_EqNo"
-                                If node2.InnerText <> "" Then .LiquidDensityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .LiquidDensityEquation = node2.InnerText
                             Case "Liquid_Density_Const_A"
                                 .Liquid_Density_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Density_Const_B"
@@ -1235,7 +1235,7 @@ Namespace Databases
                             Case "Liquid_Density_Const_E"
                                 .Liquid_Density_Const_E = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Heat_Capacity_EqNo"
-                                If node2.InnerText <> "" Then .LiquidHeatCapacityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .LiquidHeatCapacityEquation = node2.InnerText
                             Case "Liquid_Heat_Capacity_Const_A"
                                 .Liquid_Heat_Capacity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Liquid_Heat_Capacity_Const_B"
@@ -1251,7 +1251,7 @@ Namespace Databases
                             Case "Liquid_Heat_Capacity_TMax"
                                 .Liquid_Heat_Capacity_Tmax = Double.Parse(node2.InnerText, nf)
                             Case "Solid_Heat_Capacity_EqNo"
-                                If node2.InnerText <> "" Then .SolidHeatCapacityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .SolidHeatCapacityEquation = node2.InnerText
                             Case "Solid_Heat_Capacity_Constant_A"
                                 .Solid_Heat_Capacity_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Solid_Heat_Capacity_Constant_B"
@@ -1267,7 +1267,7 @@ Namespace Databases
                             Case "Solid_Heat_Capacity_TMax"
                                 .Solid_Heat_Capacity_Tmax = Double.Parse(node2.InnerText, nf)
                             Case "Solid_Density_EqNo"
-                                If node2.InnerText <> "" Then .SolidDensityEquation = Integer.Parse(node2.InnerText, nf)
+                                If node2.InnerText <> "" Then .SolidDensityEquation = node2.InnerText
                             Case "Solid_Density_Constant_A"
                                 .Solid_Density_Const_A = Double.Parse(node2.InnerText, nf)
                             Case "Solid_Density_Constant_B"
