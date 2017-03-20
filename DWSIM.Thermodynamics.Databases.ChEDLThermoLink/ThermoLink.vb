@@ -4,9 +4,9 @@ Imports DWSIM.Libraries.PythonLink
 
 Public Class ChEDLThermoParser
 
-    Shared Property PythonInstance As Python
+    Property PythonInstance As Python
 
-    Shared Function GetPythonInstance(Optional ByVal ppath As String = "") As Python
+    Function GetPythonInstance(Optional ByVal ppath As String = "") As Python
 
         If ppath = "" Then
             Return New Python(Global.DWSIM.GlobalSettings.Settings.PythonPath, False)
@@ -16,7 +16,7 @@ Public Class ChEDLThermoParser
 
     End Function
 
-    Shared Sub KillPythonProcess()
+    Sub KillPythonProcess()
         If Not PythonInstance Is Nothing Then
             If Not PythonInstance.PythonProcess.HasExited Then
                 Try
@@ -27,7 +27,7 @@ Public Class ChEDLThermoParser
         End If
     End Sub
 
-    Shared Function GetSupportedCompounds() As List(Of String)
+    Function GetSupportedCompounds() As List(Of String)
 
         Dim python = GetPythonInstance()
 
@@ -54,7 +54,7 @@ Public Class ChEDLThermoParser
 
     End Function
 
-    Shared Function SearchCompound(searchstring As String) As List(Of String())
+    Function SearchCompound(searchstring As String) As List(Of String())
 
         Dim python = GetPythonInstance()
 
@@ -80,7 +80,7 @@ Public Class ChEDLThermoParser
 
     End Function
 
-    Shared Function GetCompoundData(id As String) As BaseClasses.ConstantProperties
+    Function GetCompoundData(id As String) As BaseClasses.ConstantProperties
 
         Dim python = GetPythonInstance()
 
@@ -131,10 +131,14 @@ Public Class ChEDLThermoParser
         comp.NBP = comp.Normal_Boiling_Point
         comp.TemperatureOfFusion = python.GetScalar("print c.Tm")
 
-        comp.EnthalpyOfFusionAtTf = python.GetScalar("print c.Hfus") / 1000
+        comp.EnthalpyOfFusionAtTf = python.GetScalar("print c.Hfusm") / 1000
         comp.IG_Enthalpy_of_Formation_25C = python.GetScalar("print c.Hf") / comp.Molar_Weight
 
         comp.Dipole_Moment = python.GetScalar("print c.dipole")
+
+        'model-specific
+        comp.UNIQUAC_R = python.GetScalar("print c.UNIFAC_R")
+        comp.UNIQUAC_Q = python.GetScalar("print c.UNIFAC_Q")
 
         'temperature-dependent data setup
 
@@ -144,6 +148,8 @@ Public Class ChEDLThermoParser
         Tmin = comp.TemperatureOfFusion
         Tb = comp.Normal_Boiling_Point
         Tmax = comp.Critical_Temperature
+
+        If Tmin = 0.0# Then Tmin = Tb * 0.3
 
         For Tx = Tmin * 0.5 To Tmin Step (0.5 * Tmin) / 25
             TrangeS.Add(Tx)

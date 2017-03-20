@@ -88,6 +88,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Libraries.PythonLink"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Thermodynamics.Databases.ChEDLThermoLink", "DWSIM.Thermodynamics.Databases.ChEDLThermoLink\DWSIM.Thermodynamics.Databases.ChEDLThermoLink.vbproj", "{77A58441-0CF0-4DEA-B1F7-7723368F693F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3214CDEB-5764-4DA2-B4CB-D923463D0386}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

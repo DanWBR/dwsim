@@ -162,7 +162,7 @@ namespace DWSIM.Libraries.PythonLink
         {
             if (e.Data != null)
             {
-                Console.WriteLine(e.Data);
+                //Console.WriteLine(e.Data);
                 //throw new Exception(e.Data);
             }
 

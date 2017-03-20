@@ -58,14 +58,16 @@ Public Class FormImportCompoundChEDLThermo
 
                 fsearch.Show()
 
+                Dim parser = New ChEDLThermoParser()
                 Dim t As New Task(Of List(Of String()))(Function()
-                                                            Return ChEDLThermoParser.SearchCompound(searchtext)
+                                                            Return parser.SearchCompound(searchtext)
                                                         End Function, tcs.Token)
 
                 t.Start()
 
                 t.ContinueWith(Sub()
-                                   KillPythonInstance()
+                                   parser.KillPythonProcess()
+                                   parser = Nothing
                                    UIThread(Sub()
                                                 fsearch.Close()
                                                 If DWSIM.App.IsRunningOnMono Then
@@ -90,7 +92,8 @@ Public Class FormImportCompoundChEDLThermo
                                End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
-                                                        KillPythonInstance()
+                                                        parser.KillPythonProcess()
+                                                        parser = Nothing
                                                         fsearch.Close()
                                                         Me.Enabled = True
                                                         Focus()
@@ -116,8 +119,10 @@ Public Class FormImportCompoundChEDLThermo
 
                 fsearch.Show()
 
+                Dim parser = New ChEDLThermoParser()
+
                 Dim t1 As New Task(Of Global.DWSIM.Thermodynamics.BaseClasses.ConstantProperties)(Function()
-                                                                                                      Return ChEDLThermoParser.GetCompoundData(casid)
+                                                                                                      Return parser.GetCompoundData(casid)
                                                                                                   End Function, tcs.Token)
                 Dim t3 As New Task(Of Dictionary(Of String, List(Of String())))(Function()
                                                                                     Return DDBStructureParser.GetData(DDBStructureParser.GetID(casid))
@@ -129,7 +134,8 @@ Public Class FormImportCompoundChEDLThermo
                                           t3.Start()
                                           Task.WaitAll(t1, t3)
                                       End Sub).ContinueWith(Sub()
-                                                                KillPythonInstance()
+                                                                parser.KillPythonProcess()
+                                                                parser = Nothing
                                                                 UIThread(Sub()
                                                                              fsearch.Close()
                                                                              If DWSIM.App.IsRunningOnMono Then
@@ -150,7 +156,8 @@ Public Class FormImportCompoundChEDLThermo
                                                             End Sub)
 
                 AddHandler fsearch.btnCancel.Click, Sub()
-                                                        KillPythonInstance()
+                                                        parser.KillPythonProcess()
+                                                        parser = Nothing
                                                         fsearch.Close()
                                                         Me.Enabled = True
                                                         Focus()
@@ -280,16 +287,6 @@ Public Class FormImportCompoundChEDLThermo
 
     Private Sub LinkLabel3_LinkClicked_1(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
         Process.Start("http://www.ddbst.com/unifacga.html")
-    End Sub
-
-    Sub KillPythonInstance()
-        If Not ChEDLThermoParser.PythonInstance Is Nothing Then
-            Try
-                ChEDLThermoParser.PythonInstance.PythonProcess.Kill()
-                ChEDLThermoParser.PythonInstance = Nothing
-            Catch ex As Exception
-            End Try
-        End If
     End Sub
 
 End Class
