@@ -611,6 +611,15 @@ Namespace Streams
                         comp.MassFraction = ASource.Phases(i).Compounds(comp.Name).MassFraction.GetValueOrDefault
                         comp.MassFlow = ASource.Phases(i).Compounds(comp.Name).MassFlow.GetValueOrDefault
                         comp.MolarFlow = ASource.Phases(i).Compounds(comp.Name).MolarFlow.GetValueOrDefault
+                        comp.Molality = ASource.Phases(i).Compounds(comp.Name).Molality.GetValueOrDefault
+                        comp.Molarity = ASource.Phases(i).Compounds(comp.Name).Molarity.GetValueOrDefault
+                        comp.PartialPressure = ASource.Phases(i).Compounds(comp.Name).PartialPressure.GetValueOrDefault
+                        comp.PartialVolume = ASource.Phases(i).Compounds(comp.Name).PartialVolume.GetValueOrDefault
+                        comp.VolumetricFlow = ASource.Phases(i).Compounds(comp.Name).VolumetricFlow.GetValueOrDefault
+                        comp.VolumetricFraction = ASource.Phases(i).Compounds(comp.Name).VolumetricFraction.GetValueOrDefault
+                        comp.Kvalue = ASource.Phases(i).Compounds(comp.Name).Kvalue
+                        comp.ActivityCoeff = ASource.Phases(i).Compounds(comp.Name).ActivityCoeff.GetValueOrDefault
+                        comp.FugacityCoeff = ASource.Phases(i).Compounds(comp.Name).FugacityCoeff.GetValueOrDefault
                     Next
 
                     Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow.GetValueOrDefault
