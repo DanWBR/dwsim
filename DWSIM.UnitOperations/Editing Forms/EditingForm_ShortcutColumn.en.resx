@@ -122,7 +122,7 @@
     <value>155, 19</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 20</value>
+    <value>182, 20</value>
   </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
@@ -145,9 +145,6 @@
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Property Package Settings</value>
-  </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configure</value>
   </data>
@@ -163,8 +160,8 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Property Package</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Calculation Parameters</value>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Property Package Settings</value>
   </data>
   <data name="rbPartialCond.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 152</value>
@@ -182,13 +179,13 @@
     <value>155, 204</value>
   </data>
   <data name="tbRebPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 20</value>
+    <value>85, 20</value>
   </data>
   <data name="tbCondPressure.Location" type="System.Drawing.Point, System.Drawing">
     <value>155, 178</value>
   </data>
   <data name="tbCondPressure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 20</value>
+    <value>85, 20</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 13</value>
@@ -212,7 +209,7 @@
     <value>155, 46</value>
   </data>
   <data name="cbHKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 21</value>
+    <value>182, 21</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
@@ -260,7 +257,7 @@
     <value>155, 19</value>
   </data>
   <data name="cbLKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 21</value>
+    <value>182, 21</value>
   </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 13</value>
@@ -268,8 +265,8 @@
   <data name="Label8.Text" xml:space="preserve">
     <value>Light Key Compound (LK)</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Connections</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Calculation Parameters</value>
   </data>
   <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -281,7 +278,7 @@
     <value>155, 135</value>
   </data>
   <data name="cbEnergy2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.ToolTip" xml:space="preserve">
     <value>Create and Connect</value>
@@ -299,13 +296,13 @@
     <value>155, 108</value>
   </data>
   <data name="cbEnergy1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="cbOutlet2.Location" type="System.Drawing.Point, System.Drawing">
     <value>155, 79</value>
   </data>
   <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 13</value>
@@ -332,13 +329,13 @@
     <value>155, 52</value>
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>155, 23</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -346,8 +343,8 @@
   <data name="Label19.Text" xml:space="preserve">
     <value>Feed Stream</value>
   </data>
-  <data name="GroupBox6.Text" xml:space="preserve">
-    <value>Results</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Connections</value>
   </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Property</value>
@@ -357,5 +354,8 @@
   </data>
   <data name="Column1.HeaderText" xml:space="preserve">
     <value>Units</value>
+  </data>
+  <data name="GroupBox6.Text" xml:space="preserve">
+    <value>Results</value>
   </data>
 </root>

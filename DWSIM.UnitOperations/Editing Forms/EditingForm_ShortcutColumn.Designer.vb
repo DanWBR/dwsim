@@ -623,13 +623,13 @@ Partial Class EditingForm_ShortcutColumn
     Friend WithEvents cbHKey As System.Windows.Forms.ComboBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents gridResults As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents rbPartialCond As System.Windows.Forms.RadioButton
     Friend WithEvents rbTotalCond As System.Windows.Forms.RadioButton
     Friend WithEvents btnCreateAndConnectEnergy2 As System.Windows.Forms.Button
     Friend WithEvents btnDisconnectEnergy2 As System.Windows.Forms.Button
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents cbEnergy2 As System.Windows.Forms.ComboBox
+    Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

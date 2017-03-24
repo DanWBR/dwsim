@@ -606,6 +606,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_Recycle.de.resx">
       <DependentUpon>EditingForm_Recycle.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.de.resx">
+      <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ShortcutColumn.en.resx">
       <DependentUpon>EditingForm_ShortcutColumn.vb</DependentUpon>
     </EmbeddedResource>

@@ -312,8 +312,8 @@ Public Class EditingForm_Pipe_ResultsChart
                             Next
                         Else
                             For Each res In ps.Resultados
-                                i += 1
                                 vy(i) = cv.ConvertFromSI(su.velocity, res.VapVel)
+                                i += 1
                             Next
                         End If
                     Next
