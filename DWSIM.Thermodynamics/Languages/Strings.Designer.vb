@@ -487,6 +487,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Usar fator de correção de Poynting para a fugacidade dos componentes na fase líquida (0 = Desativar, 1 = Ativar).
+        '''</summary>
+        Friend Shared ReadOnly Property PP_POYNTING() As String
+            Get
+                Return ResourceManager.GetString("PP_POYNTING", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Flash PS - Tolerância do Loop Externo.
         '''</summary>
         Friend Shared ReadOnly Property PP_PSFELT() As String

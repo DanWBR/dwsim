@@ -56,6 +56,7 @@ Namespace PropertyPackages
                 .Add("PP_USE_EOS_LIQDENS", 0)
                 .Add("PP_IDEAL_VAPOR_PHASE_FUG", 1)
                 .Add("PP_ENTH_CP_CALC_METHOD", 1)
+                .Add("PP_POYNTING", 1)
             End With
         End Sub
 
@@ -440,38 +441,60 @@ Namespace PropertyPackages
             Calculator.WriteToConsole("Compounds: " & Me.RET_VNAMES.ToArrayString, 2)
             Calculator.WriteToConsole("Mole fractions: " & Vx.ToArrayString(), 2)
 
-            Dim prn As New PropertyPackages.ThermoPlugs.PR
-
             Dim n As Integer = Vx.Length - 1
             Dim lnfug(n), ativ(n) As Double
-            Dim fugcoeff(n) As Double
+            Dim fugcoeff(n), poy(n) As Double
             Dim i As Integer
 
             Dim Tc As Object = Me.RET_VTC()
             Dim Tr As Double
             If st = State.Liquid Then
+
+                If Not Me.Parameters.ContainsKey("PP_POYNTING") Then Me.Parameters.Add("PP_POYNTING", 1)
+                If Me.Parameters("PP_POYNTING") = 1 Then
+                    Dim constprop = Me.DW_GetConstantProperties
+                    Dim Psati, vli As Double
+                    For i = 0 To n
+                        vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
+                        If Double.IsNaN(vli) Then
+                            vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
+                        End If
+                        Psati = AUX_PVAPi(i, T)
+                        poy(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
+                    Next
+                Else
+                    For i = 0 To n
+                        poy(i) = 1.0#
+                    Next
+                End If
+
                 ativ = Me.m_act.CalcActivityCoefficients(T, Vx, Me.GetArguments())
+
                 For i = 0 To n
                     Tr = T / Tc(i)
                     If Tr >= 1.02 Then
-                        lnfug(i) = Math.Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P)
+                        lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P) + Log(poy(i))
                     ElseIf Tr < 0.98 Then
-                        lnfug(i) = Math.Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P))
+                        lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
                     Else 'do interpolation at proximity of critical point
                         Dim a2 As Double = AUX_KHenry(Me.RET_VNAMES(i), 1.02 * Tc(i))
                         Dim a1 As Double = ativ(i) * Me.AUX_PVAPi(i, 0.98 * Tc(i))
-                        lnfug(i) = Math.Log(((Tr - 0.98) / (1.02 - 0.98) * (a2 - a1) + a1) / P)
+                        lnfug(i) = Math.Log(((Tr - 0.98) / (1.02 - 0.98) * (a2 - a1) + a1) / P) + Log(poy(i))
                     End If
                 Next
+
             Else
+
                 If Not Me.Parameters.ContainsKey("PP_IDEAL_VAPOR_PHASE_FUG") Then Me.Parameters.Add("PP_IDEAL_VAPOR_PHASE_FUG", 0)
                 If Me.Parameters("PP_IDEAL_VAPOR_PHASE_FUG") = 1 Then
                     For i = 0 To n
                         lnfug(i) = 0.0#
                     Next
                 Else
+                    Dim prn As New PropertyPackages.ThermoPlugs.PR
                     lnfug = prn.CalcLnFug(T, P, Vx, Me.RET_VKij, Me.RET_VTC, Me.RET_VPC, Me.RET_VW, Nothing, "V")
                 End If
+
             End If
 
             For i = 0 To n

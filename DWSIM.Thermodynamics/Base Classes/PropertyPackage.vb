@@ -6188,6 +6188,12 @@ Final3:
 
         End Function
 
+        Public Function AUX_LIQDENSi(idx As Integer, T As Double) As Double
+
+            Return AUX_LIQDENSi(Me.CurrentMaterialStream.Phases(0).Compounds.Values.ToArray().ElementAt(idx), T)
+
+        End Function
+
         Public Overridable Function AUX_LIQDENSi(ByVal cprop As Interfaces.ICompoundConstantProperties, ByVal T As Double) As Double
 
             Dim val As Double
