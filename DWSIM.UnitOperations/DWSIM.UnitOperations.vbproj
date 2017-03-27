@@ -537,6 +537,9 @@
     <EmbeddedResource Include="Editing Forms\EditingForm_CAPEOPENUO.resx">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\EditingForm_Column.de.resx">
+      <DependentUpon>EditingForm_Column.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\EditingForm_ComprExpndr.de.resx">
       <DependentUpon>EditingForm_ComprExpndr.vb</DependentUpon>
     </EmbeddedResource>
