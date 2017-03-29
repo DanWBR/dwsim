@@ -500,4 +500,16 @@ Public Class EditingForm_FlowsheetUO
 
     End Sub
 
+    Private Sub chkRedirect_CheckedChanged(sender As Object, e As EventArgs) Handles chkRedirect.CheckedChanged
+        SimObject.RedirectOutput = chkRedirect.Checked
+    End Sub
+
+    Private Sub chkInitialize_CheckedChanged(sender As Object, e As EventArgs) Handles chkInitialize.CheckedChanged
+        SimObject.InitializeOnLoad = chkInitialize.Checked
+    End Sub
+
+    Private Sub chkUpdateProcessData_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdateProcessData.CheckedChanged
+        SimObject.UpdateOnSave = chkUpdateProcessData.Checked
+    End Sub
+
 End Class
