@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 3 - March 2017
+Version 4.3 Update 4 - March 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 4
+
+- [NEW] Implemented Poynting Correction Factor for activity coefficient models, enabled by default
+- [NEW] More German translations 
+- [FIX] Fixed an issue with Nested-Loops immiscible flash algorithm
+- [FIX] Fixed flowsheet drag-and-drop when running on Mono
+- [FIX] Fixed solver deactivation after an infinite loop error message
 
 Version 4.3 Update 3
 
