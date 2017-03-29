@@ -668,6 +668,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     End If
                     If lists.Count > 10000 Then
                         lists.Clear()
+                        GlobalSettings.Settings.CalculatorBusy = False
                         Throw New Exception("Infinite loop detected while obtaining flowsheet object calculation order. Please insert recycle blocks where needed.")
                     End If
                 Loop

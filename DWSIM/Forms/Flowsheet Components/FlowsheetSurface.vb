@@ -2674,12 +2674,8 @@ Public Class FlowsheetSurface
     Private Sub FlowsheetDesignSurface_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles FlowsheetDesignSurface.DragDrop
 
         If e.Effect = DragDropEffects.All Then
-            Dim obj As Type = Nothing
-            If DWSIM.App.IsRunningOnMono Then
-                obj = e.Data.GetData("System.MonoType")
-            Else
-                obj = e.Data.GetData("System.RuntimeType")
-            End If
+
+            Dim obj As Type = e.Data.GetData(DataFormats.Serializable)
 
             Dim p As Drawing.Point = Me.FlowsheetDesignSurface.PointToClient(New Drawing.Point(e.X, e.Y))
             Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(p.X, p.Y)
