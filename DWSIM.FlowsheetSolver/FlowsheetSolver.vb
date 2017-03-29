@@ -1148,7 +1148,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                     'disposes the cancellation token source.
 
-                    ts.Dispose()
+                    If fs.MasterFlowsheet Is Nothing Then ts.Dispose()
 
                     GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
 
