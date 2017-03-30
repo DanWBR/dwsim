@@ -941,12 +941,14 @@ Namespace UnitOperations
 
             Dim elements As List(Of XElement) = MyBase.SaveData()
             With elements
-                .Add(New XElement("CAPEOPEN_Object_Info", _seluo.SaveData().ToArray))
-                Me.PersistSave(Nothing)
-                If Not _istr Is Nothing Then .Add(New XElement("PersistedData", Convert.ToBase64String(CType(_istr.baseStream, MemoryStream).ToArray())))
-                Dim b As New BinaryFormatter, m As New MemoryStream()
-                b.Serialize(m, _params)
-                .Add(New XElement("ParameterData", Convert.ToBase64String(m.ToArray)))
+                If Not _seluo Is Nothing Then
+                    .Add(New XElement("CAPEOPEN_Object_Info", _seluo.SaveData().ToArray))
+                    Me.PersistSave(Nothing)
+                    If Not _istr Is Nothing Then .Add(New XElement("PersistedData", Convert.ToBase64String(CType(_istr.baseStream, MemoryStream).ToArray())))
+                    Dim b As New BinaryFormatter, m As New MemoryStream()
+                    b.Serialize(m, _params)
+                    .Add(New XElement("ParameterData", Convert.ToBase64String(m.ToArray)))
+                End If
             End With
 
             Return elements

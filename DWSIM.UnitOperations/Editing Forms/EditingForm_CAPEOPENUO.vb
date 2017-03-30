@@ -69,9 +69,15 @@ Public Class EditingForm_CAPEOPENUO
 
             'cape-open info
 
-            lblCOName.Text = ._seluo.Name
-            lblCODesc.Text = ._seluo.Description
-            lblCOVer.Text = ._seluo.Version & " / " & ._seluo.CapeVersion
+            If Not ._seluo Is Nothing Then
+                lblCOName.Text = ._seluo.Name
+                lblCODesc.Text = ._seluo.Description
+                lblCOVer.Text = ._seluo.Version & " / " & ._seluo.CapeVersion
+            Else
+                lblCOName.Text = "N/A"
+                lblCODesc.Text = "N/A"
+                lblCOVer.Text = "N/A"
+            End If
 
             'connections
 
