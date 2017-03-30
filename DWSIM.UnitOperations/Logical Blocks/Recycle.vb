@@ -254,9 +254,9 @@ Namespace SpecialOps
             Dim i As Integer
             For i = 0 To v1.Length - 1
                 If v1(i) <> 0.0# Then
-                    Werr += (v1(i) - v2(i)) / v1(i)
+                    Werr += (v1(i) - v2(i)) / v1(i) * (v2(i) / Wsum2)
                 Else
-                    Werr += (v1(i) - v2(i))
+                    Werr += (v1(i) - v2(i)) * (v2(i) / Wsum2)
                 End If
             Next
 

@@ -468,10 +468,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Logical Operations\Adjust.vb" />
-    <Compile Include="Logical Operations\EnergyRecycle.vb" />
-    <Compile Include="Logical Operations\Recycle.vb" />
-    <Compile Include="Logical Operations\Spec.vb" />
+    <Compile Include="Logical Blocks\Adjust.vb" />
+    <Compile Include="Logical Blocks\EnergyRecycle.vb" />
+    <Compile Include="Logical Blocks\Recycle.vb" />
+    <Compile Include="Logical Blocks\Spec.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
