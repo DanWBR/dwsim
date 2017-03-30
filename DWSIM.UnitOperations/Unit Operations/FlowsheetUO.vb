@@ -266,6 +266,7 @@ Label_00CC:
                 Try
                     xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
                     Dim obj As PropertyPackage = pp.ReturnInstance(xel.Element("Type").Value)
+                    obj.Flowsheet = fs
                     obj.LoadData(xel.Elements.ToList)
                     Dim newID As String = Guid.NewGuid.ToString
                     If fs.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
@@ -576,7 +577,7 @@ Label_00CC:
 
                 Try
 
-                    Dim xdoc As XDocument = XDocument.Load(path)
+                    Dim xdoc As XDocument = XDocument.Load(If(path.ToLower.Contains("dwxml"), path, ExtractXML(path)))
 
                     Dim xel As XElement
 
@@ -595,7 +596,56 @@ Label_00CC:
                         xel.Add(New XElement("SimulationObject", {so.SaveData().ToArray()}))
                     Next
 
-                    xdoc.Save(path)
+                    If path.ToLower.Contains("dwxml") Then
+
+                        xdoc.Save(path)
+
+                    Else
+
+                        Dim xmlfile As String = IO.Path.ChangeExtension(My.Computer.FileSystem.GetTempFileName, "xml")
+
+                        xdoc.Save(xmlfile)
+
+                        Dim i_Files As ArrayList = New ArrayList()
+                        If File.Exists(xmlfile) Then i_Files.Add(xmlfile)
+
+                        Dim astrFileNames() As String = i_Files.ToArray(GetType(String))
+                        Dim strmZipOutputStream As ICSharpCode.SharpZipLib.Zip.ZipOutputStream
+
+                        strmZipOutputStream = New ICSharpCode.SharpZipLib.Zip.ZipOutputStream(File.Create(path))
+
+                        ' Compression Level: 0-9
+                        ' 0: no(Compression)
+                        ' 9: maximum compression
+                        strmZipOutputStream.SetLevel(9)
+
+                        'save with password, if set
+                        If Fsheet.Options.UsePassword Then strmZipOutputStream.Password = Fsheet.Options.Password
+
+                        Dim strFile As String
+
+                        For Each strFile In astrFileNames
+
+                            Dim strmFile As FileStream = File.OpenRead(strFile)
+                            Dim abyBuffer(strmFile.Length - 1) As Byte
+
+                            strmFile.Read(abyBuffer, 0, abyBuffer.Length)
+                            Dim objZipEntry As New ICSharpCode.SharpZipLib.Zip.ZipEntry(IO.Path.GetFileName(strFile))
+
+                            objZipEntry.DateTime = DateTime.Now
+                            objZipEntry.Size = strmFile.Length
+                            strmFile.Close()
+                            strmZipOutputStream.PutNextEntry(objZipEntry)
+                            strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length)
+
+                        Next
+
+                        strmZipOutputStream.Finish()
+                        strmZipOutputStream.Close()
+
+                        File.Delete(xmlfile)
+
+                    End If
 
                     FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": " & FlowSheet.GetTranslatedString("SubFSUpdateSuccess"), IFlowsheet.MessageType.Information)
 
