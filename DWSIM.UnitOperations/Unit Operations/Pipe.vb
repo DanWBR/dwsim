@@ -771,8 +771,8 @@ Namespace UnitOperations
             End With
             segmento.Resultados.Add(results)
 
-            Me.DeltaP = -(PinP - Pout)
-            Me.DeltaT = -(TinP - Tout)
+            Me.DeltaP = (PinP - Pout)
+            Me.DeltaT = (TinP - Tout)
             Me.DeltaQ = -(HinP - Hout) * Win
 
             'Atribuir valores a corrente de materia conectada a jusante
