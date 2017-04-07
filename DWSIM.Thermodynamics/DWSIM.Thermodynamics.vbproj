@@ -101,10 +101,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="YAMP, Version=1.6.0.40202, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YAMP.1.6.0.40202\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\YAMP.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Yeppp.CLR.Bundle, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Yeppp.CLR.Bundle.1.0.1-prerelease\lib\net20\Yeppp.CLR.Bundle.dll</HintPath>

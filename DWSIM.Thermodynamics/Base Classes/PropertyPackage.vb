@@ -167,8 +167,6 @@ Namespace PropertyPackages
 
         <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
-        <System.NonSerialized()> Private parser As New YAMP.Parser
-
 #Region "   Constructor"
 
         Sub New()
@@ -7525,18 +7523,22 @@ Final3:
                     numexp = "exp(" + numexp + ")"
                 End If
 
-                Dim vars As New Dictionary(Of String, YAMP.Value)
+                Dim ec = New Ciloci.Flee.ExpressionContext
+                ec.Imports.AddType(GetType(System.Math))
+                ec.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
 
-                vars.Add("T", New YAMP.ScalarValue((cv.ConvertToSI(xunit, T))))
-                vars.Add("A", New YAMP.ScalarValue(A))
-                vars.Add("B", New YAMP.ScalarValue(B))
-                vars.Add("C", New YAMP.ScalarValue(C))
-                vars.Add("D", New YAMP.ScalarValue(D))
-                vars.Add("E", New YAMP.ScalarValue(E))
-                vars.Add("F", New YAMP.ScalarValue(0.0#))
-                vars.Add("G", New YAMP.ScalarValue(0.0#))
-                vars.Add("H", New YAMP.ScalarValue(0.0#))
-                Dim result = DirectCast(parser.Evaluate(numexp, vars), YAMP.ScalarValue).Value
+                ec.Variables.Clear()
+                ec.Variables.Add("T", cv.ConvertToSI(xunit, T))
+                ec.Variables.Add("A", A)
+                ec.Variables.Add("B", B)
+                ec.Variables.Add("C", C)
+                ec.Variables.Add("D", D)
+                ec.Variables.Add("E", E)
+                ec.Variables.Add("F", 0.0#)
+                ec.Variables.Add("G", 0.0#)
+                ec.Variables.Add("H", 0.0#)
+
+                Dim result As Double = ec.CompileGeneric(Of Double)(numexp).Evaluate()
 
                 Return cv.ConvertToSI(yunit, result)
 
