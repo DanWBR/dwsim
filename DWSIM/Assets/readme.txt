@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 4 - March 2017
+Version 4.3 Update 5 - March 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 5
+
+- [NEW] Added 'Commercial Copper' to Pipe UO wall material selection
+- [CHG] Changed Recycle mass flow error calculation
+- [FIX] Fixed heat balance for the Conversion Reactor
+- [FIX] Fixed initialization issues on Windows XP
+- [FIX] Fixed bugs on CAPE-OPEN UO
+- [FIX] Fixed bugs on Flowsheet UO
+- [FIX] Fixed a bug on the Flowsheet Solver
+- [FIX] Fixed a bug with the Orifice Plate UO Editor
 
 Version 4.3 Update 4
 

@@ -113,6 +113,7 @@ Imports System.Drawing
             .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoInoxidvel"))
             .Items.Add("PVC")
             .Items.Add("PVC+PFRV")
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
             .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
         End With
 
@@ -168,6 +169,7 @@ Imports System.Drawing
             .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoInoxidvel"))
             .Items.Add("PVC")
             .Items.Add("PVC+PFRV")
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
             .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
         End With
 
@@ -270,6 +272,7 @@ Imports System.Drawing
                 .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoInoxidvel"))
                 .Items.Add("PVC")
                 .Items.Add("PVC+PFRV")
+                .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
                 .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
             End With
 
@@ -1233,6 +1236,7 @@ Imports System.Drawing
             .Items.Add(PipeOp.FlowSheet.GetTranslatedString("AoInoxidvel"))
             .Items.Add("PVC")
             .Items.Add("PVC+PFRV")
+            .Items.Add(PipeOp.FlowSheet.GetTranslatedString("CommercialCopper"))
             .Style.Alignment = DataGridViewContentAlignment.MiddleLeft
         End With
 

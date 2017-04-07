@@ -1050,6 +1050,7 @@ Namespace UnitOperations
             If material = FlowSheet.GetTranslatedString("AoInoxidvel") Then epsilon = 0.000045
             If material = "PVC" Then epsilon = 0.0000015
             If material = "PVC+PFRV" Then epsilon = 0.0000015
+            If material = FlowSheet.GetTranslatedString("CommercialCopper") Then epsilon = 0.0000015
 
             rugosidade = epsilon
 
@@ -1066,6 +1067,7 @@ Namespace UnitOperations
             If material = FlowSheet.GetTranslatedString("AoInoxidvel") Then kp = 14.6 + 0.0127 * (T - 273.15)
             If material = "PVC" Then kp = 0.16
             If material = "PVC+PFRV" Then kp = 0.16
+            If material = FlowSheet.GetTranslatedString("CommercialCopper") Then kp = 420.75 - 0.068493 * T
 
             k_parede = kp   'W/m.K
 

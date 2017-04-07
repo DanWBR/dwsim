@@ -5456,4 +5456,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ChEDLThermoError" xml:space="preserve">
     <value>A valid Python installation is required (set path on 'General Settings &gt;Other &gt;DWSIM/Python bridge settings) with the 'thermo' library already installed (PIP command: 'pip install thermo').</value>
   </data>
+  <data name="CommercialCopper" xml:space="preserve">
+    <value>Commercial Copper</value>
+  </data>
 </root>

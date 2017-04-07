@@ -5445,4 +5445,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="ObjDeactivated" xml:space="preserve">
     <value>objecto inactivo</value>
   </data>
+  <data name="CommercialCopper" xml:space="preserve">
+    <value>Cobre Comercial</value>
+  </data>
 </root>

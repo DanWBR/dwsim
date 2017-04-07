@@ -1901,6 +1901,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Cobre Comercial.
+        '''</summary>
+        Friend Shared ReadOnly Property CommercialCopper() As String
+            Get
+                Return ResourceManager.GetString("CommercialCopper", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Pressione ENTER para aceitar o novo valor..
         '''</summary>
         Friend Shared ReadOnly Property CommitChanges() As String

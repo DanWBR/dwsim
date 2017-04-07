@@ -128,8 +128,8 @@ Public Class EditingForm_OrificePlate
                     rbRadius.Checked = True
             End Select
 
-            tbOrificeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.OrificeDiameter.ToString(nf))
-            tbIntPipeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.InternalPipeDiameter.ToString(nf))
+            tbOrificeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.OrificeDiameter).ToString(nf)
+            tbIntPipeDiameter.Text = su.Converter.ConvertFromSI(units.diameter, uobj.InternalPipeDiameter).ToString(nf)
             tbBeta.Text = .Beta.ToString(nf)
             tbCorrF.Text = .CorrectionFactor.ToString(nf)
         
