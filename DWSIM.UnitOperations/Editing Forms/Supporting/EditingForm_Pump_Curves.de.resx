@@ -280,6 +280,66 @@
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Grafische Darstellung</value>
   </data>
+  <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 22</value>
+  </data>
+  <data name="ToolStripLabel1.Text" xml:space="preserve">
+    <value>Pumpentyp:</value>
+  </data>
+  <data name="TSBtnSaveToDB.Text" xml:space="preserve">
+    <value>Speichere in Datanbank</value>
+  </data>
+  <data name="TSBtnSaveToDB.ToolTipText" xml:space="preserve">
+    <value>Speichere in Datenbank</value>
+  </data>
+  <data name="TSBtnDeletePump.ToolTipText" xml:space="preserve">
+    <value>Lösche aus Datenbank</value>
+  </data>
+  <data name="ToolStripLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
+  </data>
+  <data name="ToolStripLabel2.Text" xml:space="preserve">
+    <value>Datenbank:</value>
+  </data>
+  <data name="TSBtnConnectDB.ToolTipText" xml:space="preserve">
+    <value>Verbinde Datenbank</value>
+  </data>
+  <data name="TSBtnDisconnectDB.ToolTipText" xml:space="preserve">
+    <value>Datenbank abkoppeln</value>
+  </data>
+  <data name="TSBtnNewDB.ToolTipText" xml:space="preserve">
+    <value>Neue Pumpen-Datenbank erzeugen</value>
+  </data>
+  <data name="TSTBStatus.Text" xml:space="preserve">
+    <value>Gespeichert</value>
+  </data>
+  <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
+    <value>558, 9</value>
+  </data>
+  <data name="TBImpellerSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>452, 6</value>
+  </data>
+  <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>397, 9</value>
+  </data>
+  <data name="Label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="Label21.Text" xml:space="preserve">
+    <value>Drehzahl</value>
+  </data>
+  <data name="CBDiameterUnit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 6</value>
+  </data>
+  <data name="TBImpellerDiam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 6</value>
+  </data>
+  <data name="Label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 13</value>
+  </data>
+  <data name="Label20.Text" xml:space="preserve">
+    <value>Laufraddurchmesser</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pumpenkennlinien-Editor</value>
   </data>

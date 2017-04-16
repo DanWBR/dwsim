@@ -288,8 +288,29 @@
   <data name="PUMP_Desc" xml:space="preserve">
     <value>Modelo de bomba centrífuga</value>
   </data>
+  <data name="PUMP_Err1" xml:space="preserve">
+    <value>Nenhum tipo de bomba definido!</value>
+  </data>
+  <data name="PUMP_Err2" xml:space="preserve">
+    <value>Banco de dados já existe!</value>
+  </data>
+  <data name="PUMP_Err3" xml:space="preserve">
+    <value>Banco de dados não encontrado!</value>
+  </data>
+  <data name="PUMP_Modified" xml:space="preserve">
+    <value>Modificada</value>
+  </data>
+  <data name="PUMP_Msg1" xml:space="preserve">
+    <value> criado.</value>
+  </data>
+  <data name="PUMP_Msg2" xml:space="preserve">
+    <value>Substituir ?</value>
+  </data>
   <data name="PUMP_Name" xml:space="preserve">
     <value>Bomba Centrífuga</value>
+  </data>
+  <data name="PUMP_Saved" xml:space="preserve">
+    <value>Salvo</value>
   </data>
   <data name="SPEC_Desc" xml:space="preserve">
     <value>Define uma variável como função de outra</value>

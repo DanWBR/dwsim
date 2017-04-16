@@ -150,6 +150,7 @@
   <ItemGroup>
     <Compile Include="Base Classes\CapeOpen.vb" />
     <Compile Include="Base Classes\UnitOperations.vb" />
+    <Compile Include="Databases\PumpDatabase.vb" />
     <Compile Include="Editing Forms\EditingForm_CAPEOPENUO.Designer.vb">
       <DependentUpon>EditingForm_CAPEOPENUO.vb</DependentUpon>
     </Compile>
@@ -1435,6 +1436,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connect1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

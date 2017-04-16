@@ -97,6 +97,28 @@ Partial Class EditingForm_Pump_Curves
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbflowunit = New System.Windows.Forms.ComboBox()
         Me.chart1 = New ZedGraph.ZedGraphControl()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.TSCBTypes = New System.Windows.Forms.ToolStripComboBox()
+        Me.TSBtnSaveToDB = New System.Windows.Forms.ToolStripButton()
+        Me.TSBtnDeletePump = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.TsTBDatabase = New System.Windows.Forms.ToolStripTextBox()
+        Me.TSBtnConnectDB = New System.Windows.Forms.ToolStripButton()
+        Me.TSBtnDisconnectDB = New System.Windows.Forms.ToolStripButton()
+        Me.TSBtnNewDB = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TSTBStatus = New System.Windows.Forms.ToolStripTextBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TBImpellerSpeed = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.CBDiameterUnit = New System.Windows.Forms.ComboBox()
+        Me.TBImpellerDiam = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.FaTabStrip1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStrip1.SuspendLayout()
         Me.FaTabStripItem1.SuspendLayout()
@@ -112,20 +134,21 @@ Partial Class EditingForm_Pump_Curves
         CType(Me.dgv1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.FaTabStripItem2.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'FaTabStrip1
         '
-        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.AlwaysShowClose = False
         Me.FaTabStrip1.AlwaysShowMenuGlyph = False
+        resources.ApplyResources(Me.FaTabStrip1, "FaTabStrip1")
         Me.FaTabStrip1.Items.AddRange(New FarsiLibrary.Win.FATabStripItem() {Me.FaTabStripItem1, Me.FaTabStripItem2})
         Me.FaTabStrip1.Name = "FaTabStrip1"
         Me.FaTabStrip1.SelectedItem = Me.FaTabStripItem1
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.CanClose = False
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox5)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox4)
@@ -135,6 +158,7 @@ Partial Class EditingForm_Pump_Curves
         Me.FaTabStripItem1.IsDrawn = True
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         Me.FaTabStripItem1.Selected = True
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         '
         'GroupBox5
         '
@@ -178,11 +202,11 @@ Partial Class EditingForm_Pump_Curves
         '
         'dgv5
         '
-        resources.ApplyResources(Me.dgv5, "dgv5")
         Me.dgv5.AllowDrop = True
         Me.dgv5.AllowUserToResizeRows = False
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke
         Me.dgv5.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        resources.ApplyResources(Me.dgv5, "dgv5")
         Me.dgv5.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv5.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -245,10 +269,10 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb9
         '
-        resources.ApplyResources(Me.cb9, "cb9")
         Me.cb9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb9.FormattingEnabled = True
         Me.cb9.Items.AddRange(New Object() {resources.GetString("cb9.Items"), resources.GetString("cb9.Items1"), resources.GetString("cb9.Items2"), resources.GetString("cb9.Items3"), resources.GetString("cb9.Items4")})
+        resources.ApplyResources(Me.cb9, "cb9")
         Me.cb9.Name = "cb9"
         '
         'ch4
@@ -259,19 +283,19 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb4
         '
-        resources.ApplyResources(Me.cb4, "cb4")
         Me.cb4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb4.FormattingEnabled = True
         Me.cb4.Items.AddRange(New Object() {resources.GetString("cb4.Items"), resources.GetString("cb4.Items1"), resources.GetString("cb4.Items2"), resources.GetString("cb4.Items3"), resources.GetString("cb4.Items4"), resources.GetString("cb4.Items5"), resources.GetString("cb4.Items6"), resources.GetString("cb4.Items7"), resources.GetString("cb4.Items8"), resources.GetString("cb4.Items9"), resources.GetString("cb4.Items10"), resources.GetString("cb4.Items11"), resources.GetString("cb4.Items12"), resources.GetString("cb4.Items13"), resources.GetString("cb4.Items14")})
+        resources.ApplyResources(Me.cb4, "cb4")
         Me.cb4.Name = "cb4"
         '
         'dgv4
         '
-        resources.ApplyResources(Me.dgv4, "dgv4")
         Me.dgv4.AllowDrop = True
         Me.dgv4.AllowUserToResizeRows = False
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke
         Me.dgv4.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle2
+        resources.ApplyResources(Me.dgv4, "dgv4")
         Me.dgv4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv4.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -328,18 +352,18 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb8
         '
-        resources.ApplyResources(Me.cb8, "cb8")
         Me.cb8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb8.FormattingEnabled = True
         Me.cb8.Items.AddRange(New Object() {resources.GetString("cb8.Items"), resources.GetString("cb8.Items1")})
+        resources.ApplyResources(Me.cb8, "cb8")
         Me.cb8.Name = "cb8"
         '
         'cb3
         '
-        resources.ApplyResources(Me.cb3, "cb3")
         Me.cb3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb3.FormattingEnabled = True
         Me.cb3.Items.AddRange(New Object() {resources.GetString("cb3.Items"), resources.GetString("cb3.Items1"), resources.GetString("cb3.Items2"), resources.GetString("cb3.Items3"), resources.GetString("cb3.Items4"), resources.GetString("cb3.Items5"), resources.GetString("cb3.Items6"), resources.GetString("cb3.Items7"), resources.GetString("cb3.Items8"), resources.GetString("cb3.Items9"), resources.GetString("cb3.Items10"), resources.GetString("cb3.Items11"), resources.GetString("cb3.Items12"), resources.GetString("cb3.Items13"), resources.GetString("cb3.Items14")})
+        resources.ApplyResources(Me.cb3, "cb3")
         Me.cb3.Name = "cb3"
         '
         'ch3
@@ -350,11 +374,11 @@ Partial Class EditingForm_Pump_Curves
         '
         'dgv3
         '
-        resources.ApplyResources(Me.dgv3, "dgv3")
         Me.dgv3.AllowDrop = True
         Me.dgv3.AllowUserToResizeRows = False
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke
         Me.dgv3.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        resources.ApplyResources(Me.dgv3, "dgv3")
         Me.dgv3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -411,10 +435,10 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb7
         '
-        resources.ApplyResources(Me.cb7, "cb7")
         Me.cb7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb7.FormattingEnabled = True
         Me.cb7.Items.AddRange(New Object() {resources.GetString("cb7.Items"), resources.GetString("cb7.Items1"), resources.GetString("cb7.Items2"), resources.GetString("cb7.Items3"), resources.GetString("cb7.Items4"), resources.GetString("cb7.Items5"), resources.GetString("cb7.Items6"), resources.GetString("cb7.Items7"), resources.GetString("cb7.Items8"), resources.GetString("cb7.Items9")})
+        resources.ApplyResources(Me.cb7, "cb7")
         Me.cb7.Name = "cb7"
         '
         'ch2
@@ -425,19 +449,19 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb2
         '
-        resources.ApplyResources(Me.cb2, "cb2")
         Me.cb2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb2.FormattingEnabled = True
         Me.cb2.Items.AddRange(New Object() {resources.GetString("cb2.Items"), resources.GetString("cb2.Items1"), resources.GetString("cb2.Items2"), resources.GetString("cb2.Items3"), resources.GetString("cb2.Items4"), resources.GetString("cb2.Items5"), resources.GetString("cb2.Items6"), resources.GetString("cb2.Items7"), resources.GetString("cb2.Items8"), resources.GetString("cb2.Items9"), resources.GetString("cb2.Items10"), resources.GetString("cb2.Items11"), resources.GetString("cb2.Items12"), resources.GetString("cb2.Items13"), resources.GetString("cb2.Items14")})
+        resources.ApplyResources(Me.cb2, "cb2")
         Me.cb2.Name = "cb2"
         '
         'dgv2
         '
-        resources.ApplyResources(Me.dgv2, "dgv2")
         Me.dgv2.AllowDrop = True
         Me.dgv2.AllowUserToResizeRows = False
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke
         Me.dgv2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        resources.ApplyResources(Me.dgv2, "dgv2")
         Me.dgv2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -494,19 +518,19 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb6
         '
-        resources.ApplyResources(Me.cb6, "cb6")
         Me.cb6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb6.FormattingEnabled = True
         Me.cb6.Items.AddRange(New Object() {resources.GetString("cb6.Items"), resources.GetString("cb6.Items1"), resources.GetString("cb6.Items2"), resources.GetString("cb6.Items3"), resources.GetString("cb6.Items4")})
+        resources.ApplyResources(Me.cb6, "cb6")
         Me.cb6.Name = "cb6"
         '
         'dgv1
         '
-        resources.ApplyResources(Me.dgv1, "dgv1")
         Me.dgv1.AllowDrop = True
         Me.dgv1.AllowUserToResizeRows = False
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke
         Me.dgv1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        resources.ApplyResources(Me.dgv1, "dgv1")
         Me.dgv1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgv1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -540,10 +564,10 @@ Partial Class EditingForm_Pump_Curves
         '
         'cb1
         '
-        resources.ApplyResources(Me.cb1, "cb1")
         Me.cb1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cb1.FormattingEnabled = True
         Me.cb1.Items.AddRange(New Object() {resources.GetString("cb1.Items"), resources.GetString("cb1.Items1"), resources.GetString("cb1.Items2"), resources.GetString("cb1.Items3"), resources.GetString("cb1.Items4"), resources.GetString("cb1.Items5"), resources.GetString("cb1.Items6"), resources.GetString("cb1.Items7"), resources.GetString("cb1.Items8"), resources.GetString("cb1.Items9"), resources.GetString("cb1.Items10"), resources.GetString("cb1.Items11"), resources.GetString("cb1.Items12"), resources.GetString("cb1.Items13"), resources.GetString("cb1.Items14")})
+        resources.ApplyResources(Me.cb1, "cb1")
         Me.cb1.Name = "cb1"
         '
         'Label6
@@ -553,11 +577,11 @@ Partial Class EditingForm_Pump_Curves
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.CanClose = False
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox7)
         Me.FaTabStripItem2.IsDrawn = True
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         '
         'GroupBox7
         '
@@ -586,10 +610,10 @@ Partial Class EditingForm_Pump_Curves
         '
         'cbeffunit
         '
-        resources.ApplyResources(Me.cbeffunit, "cbeffunit")
         Me.cbeffunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbeffunit.FormattingEnabled = True
         Me.cbeffunit.Items.AddRange(New Object() {resources.GetString("cbeffunit.Items"), resources.GetString("cbeffunit.Items1")})
+        resources.ApplyResources(Me.cbeffunit, "cbeffunit")
         Me.cbeffunit.Name = "cbeffunit"
         '
         'Label19
@@ -599,18 +623,18 @@ Partial Class EditingForm_Pump_Curves
         '
         'cbpowerunit
         '
-        resources.ApplyResources(Me.cbpowerunit, "cbpowerunit")
         Me.cbpowerunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbpowerunit.FormattingEnabled = True
         Me.cbpowerunit.Items.AddRange(New Object() {resources.GetString("cbpowerunit.Items"), resources.GetString("cbpowerunit.Items1"), resources.GetString("cbpowerunit.Items2"), resources.GetString("cbpowerunit.Items3"), resources.GetString("cbpowerunit.Items4"), resources.GetString("cbpowerunit.Items5"), resources.GetString("cbpowerunit.Items6"), resources.GetString("cbpowerunit.Items7"), resources.GetString("cbpowerunit.Items8"), resources.GetString("cbpowerunit.Items9")})
+        resources.ApplyResources(Me.cbpowerunit, "cbpowerunit")
         Me.cbpowerunit.Name = "cbpowerunit"
         '
         'cbheadunit
         '
-        resources.ApplyResources(Me.cbheadunit, "cbheadunit")
         Me.cbheadunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbheadunit.FormattingEnabled = True
         Me.cbheadunit.Items.AddRange(New Object() {resources.GetString("cbheadunit.Items"), resources.GetString("cbheadunit.Items1"), resources.GetString("cbheadunit.Items2"), resources.GetString("cbheadunit.Items3"), resources.GetString("cbheadunit.Items4")})
+        resources.ApplyResources(Me.cbheadunit, "cbheadunit")
         Me.cbheadunit.Name = "cbheadunit"
         '
         'Label16
@@ -620,10 +644,10 @@ Partial Class EditingForm_Pump_Curves
         '
         'cbflowunit
         '
-        resources.ApplyResources(Me.cbflowunit, "cbflowunit")
         Me.cbflowunit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbflowunit.FormattingEnabled = True
         Me.cbflowunit.Items.AddRange(New Object() {resources.GetString("cbflowunit.Items"), resources.GetString("cbflowunit.Items1"), resources.GetString("cbflowunit.Items2"), resources.GetString("cbflowunit.Items3"), resources.GetString("cbflowunit.Items4"), resources.GetString("cbflowunit.Items5"), resources.GetString("cbflowunit.Items6"), resources.GetString("cbflowunit.Items7"), resources.GetString("cbflowunit.Items8"), resources.GetString("cbflowunit.Items9"), resources.GetString("cbflowunit.Items10"), resources.GetString("cbflowunit.Items11"), resources.GetString("cbflowunit.Items12"), resources.GetString("cbflowunit.Items13"), resources.GetString("cbflowunit.Items14")})
+        resources.ApplyResources(Me.cbflowunit, "cbflowunit")
         Me.cbflowunit.Name = "cbflowunit"
         '
         'chart1
@@ -641,10 +665,141 @@ Partial Class EditingForm_Pump_Curves
         Me.chart1.ScrollMinY = 0.0R
         Me.chart1.ScrollMinY2 = 0.0R
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripLabel1, Me.TSCBTypes, Me.TSBtnSaveToDB, Me.TSBtnDeletePump, Me.ToolStripSeparator1, Me.ToolStripLabel2, Me.TsTBDatabase, Me.TSBtnConnectDB, Me.TSBtnDisconnectDB, Me.TSBtnNewDB, Me.ToolStripSeparator2, Me.TSTBStatus})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
+        Me.ToolStrip1.Name = "ToolStrip1"
+        '
+        'ToolStripLabel1
+        '
+        Me.ToolStripLabel1.Name = "ToolStripLabel1"
+        resources.ApplyResources(Me.ToolStripLabel1, "ToolStripLabel1")
+        '
+        'TSCBTypes
+        '
+        Me.TSCBTypes.Name = "TSCBTypes"
+        resources.ApplyResources(Me.TSCBTypes, "TSCBTypes")
+        '
+        'TSBtnSaveToDB
+        '
+        Me.TSBtnSaveToDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TSBtnSaveToDB.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disk
+        resources.ApplyResources(Me.TSBtnSaveToDB, "TSBtnSaveToDB")
+        Me.TSBtnSaveToDB.Name = "TSBtnSaveToDB"
+        '
+        'TSBtnDeletePump
+        '
+        Me.TSBtnDeletePump.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TSBtnDeletePump.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.delete
+        resources.ApplyResources(Me.TSBtnDeletePump, "TSBtnDeletePump")
+        Me.TSBtnDeletePump.Name = "TSBtnDeletePump"
+        '
+        'ToolStripSeparator1
+        '
+        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        '
+        'ToolStripLabel2
+        '
+        Me.ToolStripLabel2.Name = "ToolStripLabel2"
+        resources.ApplyResources(Me.ToolStripLabel2, "ToolStripLabel2")
+        '
+        'TsTBDatabase
+        '
+        Me.TsTBDatabase.Name = "TsTBDatabase"
+        Me.TsTBDatabase.ReadOnly = True
+        resources.ApplyResources(Me.TsTBDatabase, "TsTBDatabase")
+        '
+        'TSBtnConnectDB
+        '
+        Me.TSBtnConnectDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TSBtnConnectDB.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.connect
+        resources.ApplyResources(Me.TSBtnConnectDB, "TSBtnConnectDB")
+        Me.TSBtnConnectDB.Name = "TSBtnConnectDB"
+        '
+        'TSBtnDisconnectDB
+        '
+        Me.TSBtnDisconnectDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TSBtnDisconnectDB.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.disconnect
+        resources.ApplyResources(Me.TSBtnDisconnectDB, "TSBtnDisconnectDB")
+        Me.TSBtnDisconnectDB.Name = "TSBtnDisconnectDB"
+        '
+        'TSBtnNewDB
+        '
+        Me.TSBtnNewDB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.TSBtnNewDB.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.add
+        resources.ApplyResources(Me.TSBtnNewDB, "TSBtnNewDB")
+        Me.TSBtnNewDB.Name = "TSBtnNewDB"
+        '
+        'ToolStripSeparator2
+        '
+        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        '
+        'TSTBStatus
+        '
+        resources.ApplyResources(Me.TSTBStatus, "TSTBStatus")
+        Me.TSTBStatus.BackColor = System.Drawing.Color.Lime
+        Me.TSTBStatus.Name = "TSTBStatus"
+        Me.TSTBStatus.ReadOnly = True
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label22)
+        Me.Panel1.Controls.Add(Me.TBImpellerSpeed)
+        Me.Panel1.Controls.Add(Me.Label21)
+        Me.Panel1.Controls.Add(Me.CBDiameterUnit)
+        Me.Panel1.Controls.Add(Me.TBImpellerDiam)
+        Me.Panel1.Controls.Add(Me.Label20)
+        resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Name = "Panel1"
+        '
+        'Label22
+        '
+        resources.ApplyResources(Me.Label22, "Label22")
+        Me.Label22.Name = "Label22"
+        '
+        'TBImpellerSpeed
+        '
+        resources.ApplyResources(Me.TBImpellerSpeed, "TBImpellerSpeed")
+        Me.TBImpellerSpeed.Name = "TBImpellerSpeed"
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        '
+        'CBDiameterUnit
+        '
+        Me.CBDiameterUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBDiameterUnit.FormattingEnabled = True
+        Me.CBDiameterUnit.Items.AddRange(New Object() {resources.GetString("CBDiameterUnit.Items"), resources.GetString("CBDiameterUnit.Items1"), resources.GetString("CBDiameterUnit.Items2"), resources.GetString("CBDiameterUnit.Items3"), resources.GetString("CBDiameterUnit.Items4")})
+        resources.ApplyResources(Me.CBDiameterUnit, "CBDiameterUnit")
+        Me.CBDiameterUnit.Name = "CBDiameterUnit"
+        '
+        'TBImpellerDiam
+        '
+        resources.ApplyResources(Me.TBImpellerDiam, "TBImpellerDiam")
+        Me.TBImpellerDiam.Name = "TBImpellerDiam"
+        '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.DefaultExt = "*.pxml"
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        resources.ApplyResources(Me.OpenFileDialog1, "OpenFileDialog1")
+        '
         'EditingForm_Pump_Curves
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.FaTabStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Name = "EditingForm_Pump_Curves"
@@ -670,7 +825,12 @@ Partial Class EditingForm_Pump_Curves
         Me.FaTabStripItem2.ResumeLayout(False)
         Me.GroupBox7.ResumeLayout(False)
         Me.GroupBox7.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Public WithEvents FaTabStrip1 As FarsiLibrary.Win.FATabStrip
@@ -741,4 +901,26 @@ Partial Class EditingForm_Pump_Curves
     Friend WithEvents temp As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn8 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents ToolStripLabel1 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents TSCBTypes As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents TSBtnSaveToDB As System.Windows.Forms.ToolStripButton
+    Friend WithEvents TSBtnDeletePump As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripLabel2 As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents TsTBDatabase As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents TSBtnConnectDB As System.Windows.Forms.ToolStripButton
+    Friend WithEvents TSBtnDisconnectDB As System.Windows.Forms.ToolStripButton
+    Friend WithEvents TSBtnNewDB As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents TSTBStatus As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents TBImpellerSpeed As System.Windows.Forms.TextBox
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents TBImpellerDiam As System.Windows.Forms.TextBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Public WithEvents CBDiameterUnit As System.Windows.Forms.ComboBox
 End Class

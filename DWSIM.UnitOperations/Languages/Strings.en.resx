@@ -288,8 +288,29 @@
   <data name="PUMP_Desc" xml:space="preserve">
     <value>Centrifugal Pump model</value>
   </data>
+  <data name="PUMP_Err1" xml:space="preserve">
+    <value>No Pump type defined!</value>
+  </data>
+  <data name="PUMP_Err2" xml:space="preserve">
+    <value>Pump database already existing!</value>
+  </data>
+  <data name="PUMP_Err3" xml:space="preserve">
+    <value>Database not found!</value>
+  </data>
+  <data name="PUMP_Modified" xml:space="preserve">
+    <value>Modified</value>
+  </data>
+  <data name="PUMP_Msg1" xml:space="preserve">
+    <value> created.</value>
+  </data>
+  <data name="PUMP_Msg2" xml:space="preserve">
+    <value>Overwrite ?</value>
+  </data>
   <data name="PUMP_Name" xml:space="preserve">
     <value>Centrifugal Pump</value>
+  </data>
+  <data name="PUMP_Saved" xml:space="preserve">
+    <value>Saved</value>
   </data>
   <data name="SPEC_Desc" xml:space="preserve">
     <value>Defines a dependent variable/object from other variables/objects</value>

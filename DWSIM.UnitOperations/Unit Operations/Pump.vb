@@ -190,6 +190,12 @@ Namespace UnitOperations
         Protected m_FixOnDeltaP As Boolean = True
         Protected m_cmode As CalculationMode = CalculationMode.Delta_P
 
+        Property PumpType As String = ""
+        Property PumpDB As String = ""
+        Property ImpellerDiameter As Double = 200
+        Property ImpellerSpeed As Double = 1450
+        Property DiameterUnit As String = "mm"
+
         Protected m_curves As New Dictionary(Of String, PumpOps.Curve)
 
         Protected _curvehead As Double
@@ -199,7 +205,7 @@ Namespace UnitOperations
         Protected _curvesyshead As Double
         Protected _curveflow As Double
 
-        Property OutletTemperature As Double = 0.0#
+        Property OutletTemperature As Double = 298.15#
 
         Public Overrides Function CloneXML() As Object
             Return New Pump().LoadData(Me.SaveData)

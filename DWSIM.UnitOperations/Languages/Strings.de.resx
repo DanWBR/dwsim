@@ -288,8 +288,29 @@
   <data name="PUMP_Desc" xml:space="preserve">
     <value>Modell einer Kreiselpumpe</value>
   </data>
+  <data name="PUMP_Err1" xml:space="preserve">
+    <value>Kein Pumpentyp definiert!</value>
+  </data>
+  <data name="PUMP_Err12" xml:space="preserve">
+    <value>Datenbank existiiert bereits!</value>
+  </data>
+  <data name="PUMP_Err3" xml:space="preserve">
+    <value>Datenbank nicht gefunden!</value>
+  </data>
+  <data name="PUMP_Modified" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="PUMP_Msg1" xml:space="preserve">
+    <value> angelegt.</value>
+  </data>
+  <data name="PUMP_Msg2" xml:space="preserve">
+    <value>Ersetzen ?</value>
+  </data>
   <data name="PUMP_Name" xml:space="preserve">
     <value>Pumpe</value>
+  </data>
+  <data name="PUMP_Saved" xml:space="preserve">
+    <value>Gespeichert</value>
   </data>
   <data name="SPEC_Desc" xml:space="preserve">
     <value>Definiert eine Objektvariable welche von einer anderen Objektvariable abhängt</value>
