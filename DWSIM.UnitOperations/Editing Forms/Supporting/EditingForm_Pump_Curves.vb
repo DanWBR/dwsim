@@ -11,7 +11,7 @@ Public Class EditingForm_Pump_Curves
     Public loaded As Boolean = False
     Public DatabaseFileName As String
 
-    Private Sub PumpCurvesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub PumpCurvesEditorForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Shown
 
         Dim curve As UnitOperations.Auxiliary.PumpOps.Curve
         Dim i As Integer = 0
@@ -144,11 +144,16 @@ Public Class EditingForm_Pump_Curves
             cbeffunit.SelectedIndex = 0
             cbpowerunit.SelectedIndex = 0
         Catch ex As Exception
-            'MsgBox(ex.Message)
+
+        End Try
+
+        Try
+            DrawChart()
+        Catch ex As Exception
+
         End Try
 
         loaded = True
-        DrawChart()
 
     End Sub
 

@@ -227,6 +227,8 @@ Namespace UnitOperations
                 m_curves.Add(cv.Name, cv)
             Next
 
+            If Curves.Count = 0 Then CreateCurves()
+
             Return True
 
         End Function
@@ -351,16 +353,18 @@ Namespace UnitOperations
         End Property
 
         Public Sub New()
-
+            Me.CreateCurves()
         End Sub
 
         Public Sub New(ByVal name As String, ByVal description As String)
+
             MyBase.CreateNew()
+
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-
             Me.CreateCurves()
+
         End Sub
 
         Public Property NPSH() As Nullable(Of Double)
