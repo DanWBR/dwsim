@@ -754,7 +754,7 @@ Namespace UnitOperations
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
+            Dim value As Object = Nothing
             Dim propidx As Integer = -1
             Integer.TryParse(prop.Split("_")(2), propidx)
 
@@ -769,6 +769,12 @@ Namespace UnitOperations
                 Case 2
                     'PROP_DC_2	Condenser Pressure Drop
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
+                Case 3
+                    'reflux ratio
+                    value = Me.RefluxRatio
+                Case 4
+                    'distillate molar flow
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
                 Case 5
                     'PROP_DC_5	Condenser Duty
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
@@ -802,7 +808,7 @@ Namespace UnitOperations
                 If Me.Stages.Count >= stageindex Then value = Me.Stages(stageindex - 1).Efficiency
             End If
 
-            If prop.Contains("Global_Stage_Efficiency") Then value = -1
+            If prop.Contains("Global_Stage_Efficiency") Then value = "N/D"
 
             Return value
 
@@ -826,6 +832,8 @@ Namespace UnitOperations
                 Case 2
                     'PROP_DC_2	Condenser Pressure Drop
                     value = su.deltaP
+                Case 4
+                    value = su.molarflow
                 Case 5
                     'PROP_DC_5	Condenser Duty
                     value = su.heatflow
@@ -844,9 +852,9 @@ Namespace UnitOperations
                     value = Me.Specs("R").SpecUnit
             End Select
 
-            If prop.Contains("Stage_Pressure_") Then value = su.pressure
-            If prop.Contains("Stage_Temperature_") Then value = su.temperature
-            If prop.Contains("Stage_Efficiency_") Then value = ""
+            If prop.Contains("Stage_Pressure") Then value = su.pressure
+            If prop.Contains("Stage_Temperature") Then value = su.temperature
+            If prop.Contains("Stage_Efficiency") Then value = ""
 
             Return value
 
@@ -1298,7 +1306,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
+
             Dim cv As New SystemsOfUnits.Converter
             Dim value As Double = 0
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -1314,6 +1324,12 @@ Namespace UnitOperations
                 Case 2
                     'PROP_DC_2	Condenser Pressure Drop
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
+                Case 3
+                    'reflux ratio
+                    value = Me.RefluxRatio
+                Case 4
+                    'distillate molar flow
+                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
                 Case 5
                     'PROP_DC_5	Condenser Duty
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
@@ -1323,6 +1339,7 @@ Namespace UnitOperations
             End Select
 
             Return value
+
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
@@ -1342,6 +1359,8 @@ Namespace UnitOperations
                 Case 2
                     'PROP_DC_2	Condenser Pressure Drop
                     value = su.deltaP
+                Case 4
+                    value = su.molarflow
                 Case 5
                     'PROP_DC_5	Condenser Duty
                     value = su.heatflow
@@ -2733,9 +2752,14 @@ Namespace UnitOperations
             End If
 
             'update stage temperatures
+
             For i = 0 To Me.Stages.Count - 1
                 Me.Stages(i).T = Tf(i)
             Next
+
+            'update reflux ratio
+
+            RefluxRatio = Lf(0) / (LSSf(0) + Vf(0))
 
             'copy results to output streams
 
