@@ -1574,7 +1574,7 @@ Public Class FormSimulSettings
                         Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
                         Dim ms As Streams.MaterialStream
                         Dim proplist As New ArrayList
-                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                        For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                             For Each phase As BaseClasses.Phase In ms.Phases.Values
                                 phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                                 phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1600,7 +1600,7 @@ Public Class FormSimulSettings
                     Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp
@@ -1625,7 +1625,7 @@ Public Class FormSimulSettings
                     Me.FrmChild.Options.SelectedComponents.Add(comp.Name, comp)
                     Dim ms As Streams.MaterialStream
                     Dim proplist As New ArrayList
-                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values
+                    For Each ms In FrmChild.Collections.FlowsheetObjectCollection.Values.Where(Function(x) TypeOf x Is Streams.MaterialStream)
                         For Each phase As BaseClasses.Phase In ms.Phases.Values
                             phase.Compounds.Add(comp.Name, New BaseClasses.Compound(comp.Name, ""))
                             phase.Compounds(comp.Name).ConstantProperties = comp
