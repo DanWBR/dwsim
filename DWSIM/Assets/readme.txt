@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 5 - March 2017
+Version 4.3 Update 6 - April 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 6
+
+- [NEW] Pump Curve database system
+- [FIX] Fixed Flowsheet Object cloning
+- [FIX] Fixed issues when adding external compounds to existing simulations
+- [FIX] Fixed issues with expression parsing for KDB compounds
 
 Version 4.3 Update 5
 
