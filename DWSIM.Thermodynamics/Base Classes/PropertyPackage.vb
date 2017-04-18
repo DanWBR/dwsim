@@ -7533,12 +7533,12 @@ Final3:
                 ec.Variables.Add("B", B)
                 ec.Variables.Add("C", C)
                 ec.Variables.Add("D", D)
-                ec.Variables.Add("E", E)
+                ec.Variables.Add("K", E)
                 ec.Variables.Add("F", 0.0#)
                 ec.Variables.Add("G", 0.0#)
                 ec.Variables.Add("H", 0.0#)
 
-                Dim result As Double = ec.CompileGeneric(Of Double)(numexp).Evaluate()
+                Dim result As Double = ec.CompileGeneric(Of Double)(numexp.Replace("E", "K").Replace("kexp", "exp").Trim).Evaluate()
 
                 Return cv.ConvertToSI(yunit, result)
 
