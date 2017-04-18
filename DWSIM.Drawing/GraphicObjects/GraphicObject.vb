@@ -431,7 +431,7 @@ Namespace GraphicObjects
         Public Property Position As IPoint = New Point() Implements IGraphicObject.Position
 
         Public Function Clone() As IGraphicObject Implements IGraphicObject.Clone
-            Dim instance As Interfaces.ICustomXMLSerialization = Activator.CreateInstance(Me.GetType)
+            Dim instance As GraphicObject = Activator.CreateInstance(Me.GetType)
             instance.LoadData(Me.SaveData)
             Return instance
         End Function

@@ -775,6 +775,8 @@ Public Class FlowsheetSurface
         Dim obj As SharedClasses.UnitOperations.BaseClass = Flowsheet.Collections.FlowsheetObjectCollection(gobj.Name)
         Dim newobj As SharedClasses.UnitOperations.BaseClass = obj.Clone
 
+        newobj.GraphicObject = gobj.Clone
+
         Dim searchtext As String = gobj.Tag.Split("(")(0).Trim()
 
         Dim objcount As Integer = (From go As GraphicObject In Me.FlowsheetDesignSurface.DrawingObjects Select go Where go.Tag.Contains(searchtext)).Count
