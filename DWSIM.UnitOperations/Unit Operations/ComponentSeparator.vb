@@ -119,7 +119,7 @@ Namespace UnitOperations
             Me.ComponentSepSpecs = New Dictionary(Of String, ComponentSeparationSpec)
 
             For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "SeparationSpecs").SingleOrDefault.Elements.ToList
-                Dim spec As New ComponentSeparationSpec With {.ComponentID = xel.@CompID, .SepSpec = [Enum].Parse(New ComponentSeparationSpec().SepSpec.GetType, xel.@SepSpec), .SpecUnit = xel.@SpecUnit, .SpecValue = xel.@SpecValue}
+                Dim spec As New ComponentSeparationSpec With {.ComponentID = xel.@CompID, .SepSpec = [Enum].Parse(New ComponentSeparationSpec().SepSpec.GetType, xel.@SepSpec), .SpecUnit = xel.@SpecUnit, .SpecValue = xel.@SpecValue.ToDoubleFromInvariant}
                 _compsepspeccollection.Add(xel.@ID, spec)
             Next
             Return True

@@ -117,16 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>STREAMS</value>
+    <value>Filter List</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
-    <value>UNIT OPERATIONS</value>
+  <data name="tbFilterList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 6</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>LOGICAL BLOCKS</value>
+  <data name="tbFilterList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 20</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>CUSTOM BLOCKS</value>
+  <data name="$this.TabText" xml:space="preserve">
+    <value>Flowsheet Objects</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Flowsheet Objects</value>
   </data>
 </root>

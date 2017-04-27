@@ -198,7 +198,7 @@ Public Class EditingForm_Vessel
                 MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
-            If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
+            If gobj.OutputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(index).AttachedConnector.AttachedTo)
             flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
         End If
@@ -249,12 +249,12 @@ Public Class EditingForm_Vessel
                     cbOutlet1.SelectedItem = Nothing
                 End If
             Case "btnDisconnectOutlet2"
-                If cbOutlet1.SelectedItem.ToString <> "" Then
+                If cbOutlet2.SelectedItem.ToString <> "" Then
                     oindex = 1
                     cbOutlet2.SelectedItem = Nothing
                 End If
             Case "btnDisconnectOutlet3"
-                If cbOutlet1.SelectedItem.ToString <> "" Then
+                If cbOutlet3.SelectedItem.ToString <> "" Then
                     oindex = 2
                     cbOutlet3.SelectedItem = Nothing
                 End If

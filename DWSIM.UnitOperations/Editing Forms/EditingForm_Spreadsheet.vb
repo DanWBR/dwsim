@@ -101,7 +101,7 @@ Public Class EditingForm_SpreadsheetUO
             cbEnergyE.Items.Clear()
             cbEnergyE.Items.AddRange(eslist)
 
-            If .GraphicObject.InputConnectors(4).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.InputConnectors(4).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.InputConnectors(4).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.InputConnectors(4).AttachedConnector.AttachedFrom.Tag
 
             'file
 
@@ -409,8 +409,8 @@ Public Class EditingForm_SpreadsheetUO
                 MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
-            If gobj.OutputConnectors(0).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(0).AttachedConnector.AttachedTo)
-            flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, 0, 0)
+            If gobj.OutputConnectors(index).IsAttached Then flowsheet.DisconnectObjects(gobj, gobj.OutputConnectors(index).AttachedConnector.AttachedTo)
+            flowsheet.ConnectObjects(gobj, flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, index, 0)
 
         End If
 

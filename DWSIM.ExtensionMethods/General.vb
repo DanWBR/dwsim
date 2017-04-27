@@ -182,6 +182,15 @@ Public Module General
     End Function
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Function ToDoubleFromCurrent(s As String) As Double
+
+        Dim ci As CultureInfo = CultureInfo.InstalledUICulture
+
+        Return Double.Parse(s, ci)
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToArrayString(vector As Double(), ByVal ci As System.Globalization.CultureInfo) As String
 
         If vector.Length > 1 Then

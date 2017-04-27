@@ -168,7 +168,7 @@ Public Class EditingForm_CompoundSeparator
                             SimObject.ComponentSepSpecs(compid).SepSpec = Auxiliary.SeparationSpec.PercentInletMolarFlow
                     End Select
                 Case 3
-                    SimObject.ComponentSepSpecs(compid).SpecValue = newval
+                    SimObject.ComponentSepSpecs(compid).SpecValue = newval.ToString.ToDoubleFromCurrent
                 Case 4
                     SimObject.ComponentSepSpecs(compid).SpecUnit = newval
             End Select

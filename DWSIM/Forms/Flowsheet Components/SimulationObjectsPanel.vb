@@ -13,10 +13,6 @@ Public Class SimulationObjectsPanel
 
         Me.AutoHidePortion = 580
 
-        SplitContainer1.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance1
-        SplitContainer2.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance2
-        SplitContainer3.SplitterDistance = My.Settings.ObjectSelectorSplitterDistance3
-
         Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
         Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
         Dim availableTypes As New List(Of Type)()
@@ -25,6 +21,8 @@ Public Class SimulationObjectsPanel
         availableTypes.AddRange(unitopassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing, True, False)))
 
         Dim add As Boolean = True
+
+        Dim litems As New List(Of ListItem)
 
         For Each item In availableTypes.OrderBy(Function(x) x.Name)
             If Not item.IsAbstract Then
@@ -42,26 +40,26 @@ Public Class SimulationObjectsPanel
                     li.lblDescription.Text = obj.GetDisplayDescription
                     li.Image.Image = obj.GetIconBitmap
                     li.ObjectTypeInfo = obj.GetType
-                    If item.Name.Contains("Stream") Then
-                        PanelStreams.Controls.Add(li)
-                    ElseIf item.Name.Contains("Flowsheet") Or item.Name.Contains("Custom") Or item.Name.Contains("Excel") Or item.Name.Contains("CapeOpen") Then
-                        PanelCustomOps.Controls.Add(li)
-                    ElseIf item.Name.Contains("Recycle") Or item.Name.Contains("Spec") Or item.Name.Contains("Adjust") Then
-                        PanelLogicalOps.Controls.Add(li)
-                    Else
-                        PanelUnitOps.Controls.Add(li)
-                    End If
+                    litems.Add(li)
                     obj = Nothing
                 End If
             End If
         Next
 
+        Me.PanelItems.Controls.AddRange(litems.OrderBy(Function(x) x.lblName.Text).ToArray)
+
     End Sub
 
-    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As SplitterEventArgs) Handles SplitContainer1.SplitterMoved, SplitContainer2.SplitterMoved, SplitContainer3.SplitterMoved
-        My.Settings.ObjectSelectorSplitterDistance1 = SplitContainer1.SplitterDistance
-        My.Settings.ObjectSelectorSplitterDistance2 = SplitContainer2.SplitterDistance
-        My.Settings.ObjectSelectorSplitterDistance3 = SplitContainer3.SplitterDistance
+    Private Sub tbFilterList_TextChanged(sender As Object, e As EventArgs) Handles tbFilterList.TextChanged
+        If tbFilterList.Text = "" Then
+            For Each item As ListItem In Me.PanelItems.Controls
+                item.Visible = True
+            Next
+        Else
+            For Each item As ListItem In Me.PanelItems.Controls
+                item.Visible = item.lblName.Text.ToLower.Contains(tbFilterList.Text.ToLower) Or item.lblDescription.Text.ToLower.Contains(tbFilterList.Text.ToLower)
+            Next
+        End If
     End Sub
 
 End Class
