@@ -474,20 +474,9 @@ Namespace Reactors
 
             tms.Phases(0).Properties.massflow = sumw
 
-            With pp
-                .CurrentMaterialStream = tms
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                .DW_CalcCompMolarFlow(-1)
-                .DW_CalcCompMassFlow(-1)
-                .DW_CalcCompVolFlow(-1)
-                .DW_CalcOverallProps()
-                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                .DW_CalcVazaoVolumetrica()
-                .DW_CalcKvalue()
-            End With
+            pp.CurrentMaterialStream = tms
+            tms.Calculate(True, True)
+            pp.CurrentMaterialStream = tms
 
             Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
             Dim f(x.Length - 1) As Double
@@ -883,25 +872,21 @@ Namespace Reactors
 
                     'estimate initial values by solving linear problem using lp_solve
 
-                    Calculator.CheckParallelPInvoke()
+                    'Calculator.CheckParallelPInvoke()
 
-                    Dim lp As Integer
-                    Dim release, Major, Minor, build As Integer
+                    'Dim lp As Integer
 
                     Dim re(c) As Double
 
-                    lpsolve55.Init(".")
-                    lp = lpsolve55.make_lp(e, c)
-                    lpsolve55.version(Major, Minor, release, build)
+                    'lpsolve55.Init(".")
+                    'lp = lpsolve55.make_lp(e, c)
 
-                    'lpsolve55.print_str(lp, "lp_solve " & Major & "." & Minor & "." & release & "." & build & " demo" & vbLf & vbLf)
-
-                    For i = 0 To e
-                        For j = 0 To c
-                            re(j) = Me.ElementMatrix(i, j)
-                        Next
-                        lpsolve55.add_constraint(lp, re, lpsolve55.lpsolve_constr_types.EQ, Me.TotalElements(i))
-                    Next
+                    'For i = 0 To e
+                    '    For j = 0 To c
+                    '        re(j) = Me.ElementMatrix(i, j)
+                    '    Next
+                    '    lpsolve55.add_constraint(lp, re, lpsolve55.lpsolve_constr_types.EQ, Me.TotalElements(i) / N0.Values.Sum)
+                    'Next
 
                     'calculate ideal gas gibbs energy values
 
@@ -911,21 +896,62 @@ Namespace Reactors
 
                     For i = 0 To c
                         igge(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0)
-                        'igge(i) = igge(i) / (8.314 * T)
-                        lpsolve55.set_lowbo(lp, i, 0)
+                        'lpsolve55.set_lowbo(lp, i, 0)
                     Next
 
-                    lpsolve55.set_obj_fn(lp, igge)
-                    lpsolve55.set_minim(lp)
-                    lpsolve55.solve(lp)
+                    'lpsolve55.set_obj_fn(lp, igge)
+                    'lpsolve55.set_minim(lp)
+                    'lpsolve55.solve(lp)
 
                     'the linear problem solution consists of only 'e' molar flows higher than zero.
 
-                    Dim resc(c) As Double
+                    Dim resc(c), resc2(c), inval(c), topvals(e) As Double
 
-                    lpsolve55.get_variables(lp, resc)
+                    'lpsolve55.get_variables(lp, resc)
 
-                    lpsolve55.delete_lp(lp)
+                    'lpsolve55.delete_lp(lp)
+
+                    For i = 0 To c
+                        inval(i) = N0(Me.ComponentIDs(i)) / N0.Values.Sum
+                    Next
+
+                    Dim ovars As New List(Of DotNumerics.Optimization.OptSimplexBoundVariable)
+                    For j = 0 To c
+                        ovars.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(inval(j), 0.0#, 10000000000.0))
+                    Next
+
+                    Dim opt As New DotNumerics.Optimization.Simplex()
+                    opt.MaxFunEvaluations = 100000
+                    opt.Tolerance = 1.0E-30
+                    Dim vars = opt.ComputeMin(Function(myv() As Double)
+                                                  Dim objf, objfs As Double
+                                                  e = Me.Elements.Length - 1
+                                                  c = Me.ComponentIDs.Count - 1
+                                                  objf = 0.0#
+                                                  For i = 0 To e
+                                                      objfs = 0.0#
+                                                      For j = 0 To c
+                                                          objfs += Me.ElementMatrix(i, j) * myv(j)
+                                                      Next
+                                                      objfs -= Me.TotalElements(i) / N0.Values.Sum
+                                                      objf += objfs ^ 2
+                                                  Next
+                                                  For j = 0 To c
+                                                      objf += igge(j) * myv(j)
+                                                  Next
+                                                  Return objf
+                                              End Function, ovars.ToArray)
+
+                    'get the first e molar amounts
+
+                    topvals = vars.OrderByDescending(Function(d) d).Take(e + 1).ToArray
+
+                    Dim idx As Integer
+
+                    For i = 0 To e
+                        idx = vars.ToList.IndexOf(topvals(i))
+                        resc2(idx) = vars(idx)
+                    Next
 
                     'estimate lagrange multipliers
 
@@ -940,7 +966,7 @@ Namespace Reactors
                     For i = 0 To e
                         k = 0
                         For j = 0 To c
-                            If resc(j) > 0 Then
+                            If resc2(j) > 0.0# Then
                                 mymat(i, k) = Me.ElementMatrix(i, j)
                                 mypot(k, 0) = igge(j)
                                 k += 1
@@ -1033,6 +1059,8 @@ Namespace Reactors
                         End If
 
                         If Double.IsNaN(Sum(fx)) Then Throw New Exception("Calculation error")
+
+                        FlowSheet.CheckStatus()
 
                     Loop Until MathEx.Common.AbsSum(fx) < 0.001 Or niter > 249
 
