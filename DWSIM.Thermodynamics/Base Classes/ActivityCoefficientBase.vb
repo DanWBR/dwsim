@@ -455,12 +455,14 @@ Namespace PropertyPackages
                     Dim constprop = Me.DW_GetConstantProperties
                     Dim Psati, vli As Double
                     For i = 0 To n
-                        vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
-                        If Double.IsNaN(vli) Then
-                            vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
+                        If T < 0.98 * Tc(i) Then
+                            vli = 1 / AUX_LIQDENSi(constprop(i), T) * constprop(i).Molar_Weight
+                            If Double.IsNaN(vli) Then
+                                vli = 1 / AUX_LIQDENSi(constprop(i), constprop(i).Normal_Boiling_Point) * constprop(i).Molar_Weight
+                            End If
+                            Psati = AUX_PVAPi(i, T)
+                            poy(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
                         End If
-                        Psati = AUX_PVAPi(i, T)
-                        poy(i) = Math.Exp(vli * Abs(P - Psati) / (8314.47 * T))
                     Next
                 Else
                     For i = 0 To n
@@ -473,13 +475,13 @@ Namespace PropertyPackages
                 For i = 0 To n
                     Tr = T / Tc(i)
                     If Tr >= 1.02 Then
-                        lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P) + Log(poy(i))
+                        lnfug(i) = Log(AUX_KHenry(Me.RET_VNAMES(i), T) / P)
                     ElseIf Tr < 0.98 Then
                         lnfug(i) = Log(ativ(i) * Me.AUX_PVAPi(i, T) / (P)) + Log(poy(i))
                     Else 'do interpolation at proximity of critical point
                         Dim a2 As Double = AUX_KHenry(Me.RET_VNAMES(i), 1.02 * Tc(i))
                         Dim a1 As Double = ativ(i) * Me.AUX_PVAPi(i, 0.98 * Tc(i))
-                        lnfug(i) = Math.Log(((Tr - 0.98) / (1.02 - 0.98) * (a2 - a1) + a1) / P) + Log(poy(i))
+                        lnfug(i) = Math.Log(((Tr - 0.98) / (1.02 - 0.98) * (a2 - a1) + a1) / P)
                     End If
                 Next
 
