@@ -175,16 +175,16 @@ Public Class EditingForm_ReactorConvEqGibbs
 
                 Dim robj = DirectCast(SimObject, Reactors.Reactor_Gibbs)
 
-                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGInitialG"), su.Converter.ConvertFromSI(units.molar_enthalpy, robj.InitialGibbsEnergy).ToString(nf), units.molar_enthalpy})
-                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGFinalG"), su.Converter.ConvertFromSI(units.molar_enthalpy, robj.FinalGibbsEnergy).ToString(nf), units.molar_enthalpy})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGInitialG"), su.Converter.ConvertFromSI(units.heatflow, robj.InitialGibbsEnergy).ToString(nf), units.heatflow})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGFinalG"), su.Converter.ConvertFromSI(units.heatflow, robj.FinalGibbsEnergy).ToString(nf), units.heatflow})
                 gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGElementBalance"), robj.ElementBalance.ToString("E"), ""})
 
             ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
 
                 Dim robj = DirectCast(SimObject, Reactors.Reactor_Equilibrium)
 
-                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGInitialG"), su.Converter.ConvertFromSI(units.molar_enthalpy, robj.InitialGibbsEnergy).ToString(nf), units.molar_enthalpy})
-                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGFinalG"), su.Converter.ConvertFromSI(units.molar_enthalpy, robj.FinalGibbsEnergy).ToString(nf), units.molar_enthalpy})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGInitialG"), su.Converter.ConvertFromSI(units.heatflow, robj.InitialGibbsEnergy).ToString(nf), units.heatflow})
+                gridResults.Rows.Add(New Object() {.FlowSheet.GetTranslatedString("RGFinalG"), su.Converter.ConvertFromSI(units.heatflow, robj.FinalGibbsEnergy).ToString(nf), units.heatflow})
 
 
             End If

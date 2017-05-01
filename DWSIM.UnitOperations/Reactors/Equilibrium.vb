@@ -290,7 +290,7 @@ Namespace Reactors
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
 
-            Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault
+            Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
 
         End Function
 
