@@ -54,6 +54,7 @@ Namespace Reactors
         Private _elements As String() = {}
         Private _totalelements As Double() = {}
         Private _ige, _fge, _elbal As Double
+        Private igcp() As Double
 
         Dim tmpx As Double(), tmpdx As Double()
 
@@ -290,7 +291,7 @@ Namespace Reactors
 
         End Function
 
-        Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
+        Private Function FunctionGradient2N(ByVal x() As Double, fugacities As Dictionary(Of String, Double())) As Double(,)
 
             Dim epsilon As Double = 0.0001
 
@@ -298,16 +299,20 @@ Namespace Reactors
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
             Dim i, j, k As Integer
 
-            f1 = FunctionValue2N(x)
+            f1 = FunctionValue2N(x, fugacities)
             For i = 0 To x.Length - 1
                 For j = 0 To x.Length - 1
                     If i <> j Then
                         x2(j) = x(j)
                     Else
-                        x2(j) = x(j) * (1 + epsilon)
+                        If x(j) = 0.0# Then
+                            x2(j) = x(j) + 0.000001
+                        Else
+                            x2(j) = x(j) * (1 + epsilon)
+                        End If
                     End If
                 Next
-                f2 = FunctionValue2N(x2)
+                f2 = FunctionValue2N(x2, fugacities)
                 For k = 0 To x.Length - 1
                     g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
                 Next
@@ -424,127 +429,52 @@ Namespace Reactors
 
         End Function
 
-        Private Function FunctionValue2N(ByVal x() As Double) As Double()
+        Private Function FunctionValue2N(ByVal x() As Double, fugacities As Dictionary(Of String, Double())) As Double()
 
-            Dim i As Integer
+            Dim i, j, n, c As Integer
 
-            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
+            n = x.Length - 5
+            c = Me.ComponentIDs.Count - 1
 
-            i = 0
-            For Each s As String In N.Keys
-                DN(s) = x(i) - N0(s)
-                i += 1
-            Next
+            Dim lagm(n), xv(c), xl1(c), xl2(c), xs(c), nv, nl1, nl2, ns As Double
 
-            i = 0
-            For Each s As String In DN.Keys
-                N(s) = x(i)
-                i += 1
-            Next
-
-            Dim fw(comps), fm(comps), sumfm, sum1, sumn, sumw As Double
-
-            N.Values.CopyTo(fm, 0)
-
-            sumfm = Sum(fm) + Ninerts
-
-            sum1 = 0
-            sumn = 0
-            For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Name) Then
-                    s.MolarFlow = N(s.Name)
-                    s.MoleFraction = N(s.Name) / sumfm
-                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
-                Else
-                    s.MoleFraction = s.MolarFlow / sumfm
-                End If
-                sumn += s.MolarFlow
-            Next
-
-            tms.Phases(0).Properties.molarflow = sumn
-
-            sumw = 0
-            For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Name) Then
-                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
-                End If
-                s.MassFraction = s.MassFlow / (sum1 + Winerts)
-                sumw += s.MassFlow
-            Next
-
-            tms.Phases(0).Properties.massflow = sumw
-
-            pp.CurrentMaterialStream = tms
-            tms.Calculate(True, True)
-            pp.CurrentMaterialStream = tms
-
-            Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
             Dim f(x.Length - 1) As Double
-            Dim DGf As Double
 
-            'CP is the chemical potential
+            Dim sum As Double
 
-            Dim fugs(tms.Phases(0).Compounds.Count - 1) As Double
+            lagm = x.Take(n + 1).ToArray
+            nv = x(n + 1)
+            nl1 = x(n + 2)
+            nl2 = x(n + 3)
+            ns = x(n + 4)
 
-            i = 0
-            For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.MoleFraction > 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = (DGf + Log(fugs(i) * s.MoleFraction * P / P0))
-                Else
-                    CP(i) = 0
-                End If
-                i += 1
-            Next
-
-            Dim pen_val As Double = ReturnPenaltyValue()
-
-            Dim gibbs As Double = MathEx.Common.Sum(CP)
-
-            Dim sumel(els), sumeli(comps), totalsum As Double
-
-            totalsum = 0
-            For i = 0 To els
-                sumel(i) = 0
-                For j = 0 To comps
-                    sumel(i) += Me.ElementMatrix(i, j) * x(j)
+            For i = 0 To c
+                sum = 0.0#
+                For j = 0 To n
+                    sum += ElementMatrix(j, i) * lagm(j)
                 Next
-                'sumel(i) -= Me.TotalElements(i)
-                'sumel(i) *= x(comps + i + 1)
-                totalsum += sumel(i)
+                xv(i) = Exp(sum - (igcp(i) + Log(fugacities("V")(i) * P / 101325)))
+                xl1(i) = Exp(sum - (igcp(i) + Log(fugacities("L1")(i) * P / 101325)))
+                xl2(i) = Exp(sum - (igcp(i) + Log(fugacities("L2")(i) * P / 101325)))
+                xs(i) = Exp(sum - (igcp(i) + Log(fugacities("S")(i) * P / 101325)))
             Next
 
-            For j = 0 To comps
-                sumeli(j) = 0
-                For i = 0 To els
-                    sumeli(j) += Me.ElementMatrix(i, j) * x(comps + i + 1)
+            For i = 0 To n
+                sum = 0
+                For j = 0 To c
+                    sum += ElementMatrix(i, j) * xv(j) * nv
+                    sum += ElementMatrix(i, j) * xl1(j) * nl1
+                    sum += ElementMatrix(i, j) * xl2(j) * nl2
+                    sum += ElementMatrix(i, j) * xs(j) * ns
                 Next
+                f(i) = sum - TotalElements(i)
             Next
-
-            For i = 0 To x.Length - 1
-                If i <= comps Then
-                    f(i) = CP(i) - sumeli(i) + pen_val
-                Else
-                    f(i) = -sumel(i - comps - 1) + Me.TotalElements(i - comps - 1)
-                End If
-            Next
+            f(n + 1) = nv * (xv.SumY - 1)
+            f(n + 2) = nl1 * (xl1.SumY - 1)
+            f(n + 3) = nl2 * (xl2.SumY - 1)
+            f(n + 4) = ns * (xs.SumY - 1)
 
             Return f
-
-        End Function
-
-        Public Function MinimizeError(ByVal t As Double) As Double
-
-            Dim tmpx0 As Double() = tmpx.Clone
-
-            For i = 0 To comps + els + 1
-                tmpx0(i) -= tmpdx(i) * t
-                'If tmpx0(i) < 0 And i <= comps Then tmpx0(i) = 0.000001
-            Next
-
-            Dim abssum0 = AbsSum(FunctionValue2N(tmpx0))
-            Return abssum0
 
         End Function
 
@@ -895,9 +825,11 @@ Namespace Reactors
                     pp.CurrentMaterialStream = ims
 
                     For i = 0 To c
-                        igge(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0)
+                        igge(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0)) / (8.314 * T)
                         'lpsolve55.set_lowbo(lp, i, 0)
                     Next
+
+                    igcp = igge.Clone
 
                     'lpsolve55.set_obj_fn(lp, igge)
                     'lpsolve55.set_minim(lp)
@@ -942,7 +874,9 @@ Namespace Reactors
                                                   Return objf
                                               End Function, ovars.ToArray)
 
-                    'get the first e molar amounts
+                    'normalize and get the first e molar amounts
+
+                    vars = vars.Select(Function(d) If(d > 0, d, 0.0#)).ToArray
 
                     topvals = vars.OrderByDescending(Function(d) d).Take(e + 1).ToArray
 
@@ -1011,60 +945,137 @@ Namespace Reactors
 
                     Me.InitialGibbsEnergy = g0
 
-                    'solve using newton's method
+                    'estimate initial distribution between phases and fugacity coefficients
 
-                    Dim fx(c + e + 1), dfdx(c + e + 1, c + e + 1), dx(c + e + 1), x(c + e + 1), df, fval As Double
-                    Dim brentsolver As New BrentOpt.BrentMinimize
-                    brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
+                    Dim xm0(ims.Phases(0).Compounds.Count - 1) As Double, ids As New List(Of String)
 
-                    Dim niter As Integer
+                    ids = N0.Keys.ToList
 
-                    x = ies
-                    niter = 0
+                    i = 0
+                    For Each id In ComponentIDs
+                        xm0(ids.IndexOf(id)) = vars(i)
+                        i += 1
+                    Next
+
+                    pp.CurrentMaterialStream = ims
+
+                    Dim xv_0, xl1_0, xl2_0, xs_0, fv_0, fl1_0, fl2_0, fs_0 As Double(), nv, nl1, nl2, ns As Double
+
+                    Dim flashresults = pp.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.T, P, T, pp, xm0, Nothing, 0)
+
+                    With flashresults
+                        xv_0 = .GetVaporPhaseMoleFractions
+                        xl1_0 = .GetLiquidPhase1MoleFractions
+                        xl2_0 = .GetLiquidPhase2MoleFractions
+                        xs_0 = .GetSolidPhaseMoleFractions
+                        fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        nv = .GetVaporPhaseMoleFraction
+                        nl1 = .GetLiquidPhase1MoleFraction
+                        nl2 = .GetLiquidPhase2MoleFraction
+                        ns = .GetSolidPhaseMoleFraction
+                    End With
+
+                    Dim fugacities As New Dictionary(Of String, Double())
+
+                    fugacities.Add("V", fv_0)
+                    fugacities.Add("L1", fl1_0)
+                    fugacities.Add("L2", fl2_0)
+                    fugacities.Add("S", fs_0)
+
+                    'outer loop for converging fugacity coefficients
+
+                    Dim sumerr As Double = 0.0#
+
+                    Dim fx(e + 1 + 4), dfdx(e + 1 + 4, e + 1 + 4), dx(e + 1 + 4), x(e + 1 + 4), px(e + 1 + 4) As Double
+
+                    Dim ni_int, ni_ext As Integer
+
+                    ni_ext = 0
+
                     Do
 
-                        tms = ims.Clone()
-                        tms.SetFlowsheet(ims.FlowSheet)
+                        'solve using newton's method
+                        ni_int = 0
 
-                        fx = Me.FunctionValue2N(x)
-                        dfdx = Me.FunctionGradient2N(x)
+                        x = lagrm.Concat({nv, nl1, nl2, ns}).ToArray
 
-                        Dim success As Boolean
-                        success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, c + e + 2, dx)
+                        px = x.Clone
 
-                        tmpx = x
-                        tmpdx = dx
-                        df = 1.0#
+                        Do
 
-                        'this call to the brent solver calculates the damping factor which minimizes the error (fval).
+                            tms = ims.Clone()
+                            tms.SetFlowsheet(ims.FlowSheet)
 
-                        fval = 0.0# 'brentsolver.brentoptimize(0.01#, 2.0#, 0.0001, df)
+                            fx = Me.FunctionValue2N(x, fugacities)
+                            dfdx = Me.FunctionGradient2N(x, fugacities)
 
-                        Dim multipl As Double = 1.0#
-                        'For i = 0 To c + e + 1
-                        '    If i <= c And x(i) - dx(i) * df < 0 Then
-                        '        If x(i) / (dx(i) * df) < multipl Then multipl = x(i) / (dx(i) * df)
-                        '    End If
-                        'Next
+                            Dim success As Boolean
+                            success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
-                        For i = 0 To c + e + 1
-                            x(i) -= dx(i) * df * multipl
-                            If x(i) <= 0 And i <= c Then x(i) = 0.000001 * N0tot
-                        Next
+                            For i = 0 To x.Length - 1
+                                'If Abs(dx(i) / x(i)) < 1.0# Then
+                                x(i) -= 0.1 * dx(i)
+                                'Else
+                                '    x(i) -= Sign(dx(i)) * 0.1 * x(i)
+                                'End If
+                            Next
 
-                        niter += 1
+                            ni_int += 1
 
-                        If AbsSum(dx) = 0.0# Then
-                            Throw New Exception("No solution found - reached a stationary point of the objective function (singular gradient matrix).")
+                            If AbsSum(dx) = 0.0# Then
+                                Throw New Exception("No solution found - reached a stationary point of the objective function (singular gradient matrix).")
+                            End If
+
+                            If Double.IsNaN(Sum(fx)) Then Throw New Exception("Calculation error")
+
+                            FlowSheet.CheckStatus()
+
+                        Loop Until MathEx.Common.AbsSum(fx) < 0.0000000001 Or ni_int > 1000
+
+                        If ni_int > 1000 Then
+                            Throw New Exception("Reached the maximum number of iterations without converging.")
                         End If
 
-                        If Double.IsNaN(Sum(fx)) Then Throw New Exception("Calculation error")
+                        Dim sumx As Double
 
-                        FlowSheet.CheckStatus()
+                        lagrm = x.Take(e + 1).ToArray
 
-                    Loop Until MathEx.Common.AbsSum(fx) < 0.001 Or niter > 249
+                        nv = x(e + 1)
+                        nl1 = x(e + 2)
+                        nl2 = x(e + 3)
+                        ns = x(e + 4)
 
-                    If niter > 249 Then
+                        For i = 0 To c
+                            sumx = 0.0#
+                            For j = 0 To e
+                                sumx += ElementMatrix(j, i) * lagrm(j)
+                            Next
+                            xv_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("V")(i) * P / 101325)))
+                            xl1_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("L1")(i) * P / 101325)))
+                            xl2_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("L2")(i) * P / 101325)))
+                            xs_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("S")(i) * P / 101325)))
+                        Next
+
+                        fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+                        fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
+
+                        fugacities("V") = fv_0
+                        fugacities("L1") = fl1_0
+                        fugacities("L2") = fl2_0
+                        fugacities("S") = fs_0
+
+                        sumerr = px.SubtractY(x).AbsSqrSumY
+
+                        ni_ext += 1
+
+                    Loop Until sumerr < 0.000000000001 Or ni_ext > 50
+
+                    If ni_ext > 50 Then
                         Throw New Exception("Reached the maximum number of iterations without converging.")
                     End If
 
@@ -1072,13 +1083,18 @@ Namespace Reactors
 
                     'this call to FunctionValue2G returns the final gibbs energy in kJ/s.
 
-                    g1 = FunctionValue2G(x)
+                    For i = 0 To c
+                        N(ids(i)) = nv * xv_0(i) + nl1 * xl1_0(i) + nl2 * xl2_0(i) + ns * xs_0(i)
+                        DN(ids(i)) = N(ids(i)) - N0(ids(i))
+                    Next
+
+                    g1 = FunctionValue2G(N.Values.ToArray)
 
                     Me.FinalGibbsEnergy = g1
 
                     'this call to FunctionValue2FC returns the element material balance - should be very very close to zero.
 
-                    _elbal = Me.FunctionValue2FC(x)
+                    _elbal = Me.FunctionValue2FC(N.Values.ToArray)
 
                     'calculate component conversions.
 
