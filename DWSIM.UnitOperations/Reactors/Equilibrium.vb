@@ -286,48 +286,11 @@ Namespace Reactors
 
             tms.Phases(0).Properties.massflow = sumw
 
-            With pp
-                .CurrentMaterialStream = tms
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-            End With
+            pp.CurrentMaterialStream = tms
+            tms.Calculate(True, True)
+            pp.CurrentMaterialStream = tms
 
-            Dim fugv(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim CPv(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim fugl(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim CPl(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim DGf, xv, xl As Double
-
-            i = 0
-            xv = tms.Phases(2).Properties.molarfraction.GetValueOrDefault
-            For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.MoleFraction <> 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugv(i) = s.FugacityCoeff.GetValueOrDefault
-                    CPv(i) = s.MoleFraction * (DGf + Log(fugv(i) * s.MoleFraction.GetValueOrDefault * P / P0))
-                Else
-                    CPv(i) = 0.0#
-                End If
-                i += 1
-            Next
-
-            i = 0
-            xl = tms.Phases(3).Properties.molarfraction.GetValueOrDefault
-            For Each s As Compound In tms.Phases(3).Compounds.Values
-                If s.MoleFraction <> 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugl(i) = s.FugacityCoeff.GetValueOrDefault
-                    CPl(i) = s.MoleFraction * (DGf + Log(fugl(i) * s.MoleFraction.GetValueOrDefault))
-                Else
-                    CPl(i) = 0.0#
-                End If
-                i += 1
-            Next
-
-            Dim pen_val As Double = ReturnPenaltyValue()
-
-            Dim gibbs As Double = (xv * Sum(CPv) + xl * Sum(CPl)) * sumn * 8.314 * T
-
-            Return gibbs
+            Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
         End Function
 

@@ -55,6 +55,7 @@ Namespace Reactors
         Private _totalelements As Double() = {}
         Private _ige, _fge, _elbal As Double
         Private igcp() As Double
+        Private fugacities As New Dictionary(Of String, Double())
 
         Dim tmpx As Double(), tmpdx As Double()
 
@@ -291,7 +292,7 @@ Namespace Reactors
 
         End Function
 
-        Private Function FunctionGradient2N(ByVal x() As Double, fugacities As Dictionary(Of String, Double())) As Double(,)
+        Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
             Dim epsilon As Double = 0.0001
 
@@ -299,7 +300,7 @@ Namespace Reactors
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
             Dim i, j, k As Integer
 
-            f1 = FunctionValue2N(x, fugacities)
+            f1 = FunctionValue2N(x)
             For i = 0 To x.Length - 1
                 For j = 0 To x.Length - 1
                     If i <> j Then
@@ -312,7 +313,7 @@ Namespace Reactors
                         End If
                     End If
                 Next
-                f2 = FunctionValue2N(x2, fugacities)
+                f2 = FunctionValue2N(x2)
                 For k = 0 To x.Length - 1
                     g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
                 Next
@@ -429,7 +430,20 @@ Namespace Reactors
 
         End Function
 
-        Private Function FunctionValue2N(ByVal x() As Double, fugacities As Dictionary(Of String, Double())) As Double()
+        Public Function MinimizeError(ByVal t As Double) As Double
+
+            Dim tmpx0 As Double() = tmpx.Clone
+
+            For i = 0 To tmpx.Length - 1
+                tmpx0(i) -= tmpdx(i) * t
+            Next
+
+            Dim abssum0 = AbsSum(FunctionValue2N(tmpx0))
+            Return abssum0
+
+        End Function
+
+        Private Function FunctionValue2N(ByVal x() As Double) As Double()
 
             Dim i, j, n, c As Integer
 
@@ -528,41 +542,11 @@ Namespace Reactors
             Next
 
             tms.Phases(0).Properties.massflow = sumw
+            pp.CurrentMaterialStream = tms
+            tms.Calculate(True, True)
+            pp.CurrentMaterialStream = tms
 
-            With pp
-                .CurrentMaterialStream = tms
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                .DW_CalcCompMolarFlow(-1)
-                .DW_CalcCompMassFlow(-1)
-                .DW_CalcCompVolFlow(-1)
-                .DW_CalcOverallProps()
-                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                .DW_CalcVazaoVolumetrica()
-                .DW_CalcKvalue()
-            End With
-
-            Dim fugs(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim DGf As Double
-
-            i = 0
-            For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.MoleFraction > 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    CP(i) = s.MoleFraction * (DGf + Log(fugs(i) * s.MoleFraction.GetValueOrDefault * P / P0))
-                Else
-                    CP(i) = 0
-                End If
-                i += 1
-            Next
-
-            Dim gibbs As Double = MathEx.Common.Sum(CP) * 8.314 * T * sumn
-
-            Return gibbs
+            Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault
 
         End Function
 
@@ -978,7 +962,7 @@ Namespace Reactors
                         ns = .GetSolidPhaseMoleFraction
                     End With
 
-                    Dim fugacities As New Dictionary(Of String, Double())
+                    fugacities = New Dictionary(Of String, Double())
 
                     fugacities.Add("V", fv_0)
                     fugacities.Add("L1", fl1_0)
@@ -989,7 +973,10 @@ Namespace Reactors
 
                     Dim sumerr As Double = 0.0#
 
-                    Dim fx(e + 1 + 4), dfdx(e + 1 + 4, e + 1 + 4), dx(e + 1 + 4), x(e + 1 + 4), px(e + 1 + 4) As Double
+                    Dim fx(e + 1 + 4), dfdx(e + 1 + 4, e + 1 + 4), dx(e + 1 + 4), x(e + 1 + 4), px(e + 1 + 4), df, fval As Double
+
+                    Dim brentsolver As New BrentOpt.BrentMinimize
+                    brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
 
                     Dim ni_int, ni_ext As Integer
 
@@ -1009,18 +996,20 @@ Namespace Reactors
                             tms = ims.Clone()
                             tms.SetFlowsheet(ims.FlowSheet)
 
-                            fx = Me.FunctionValue2N(x, fugacities)
-                            dfdx = Me.FunctionGradient2N(x, fugacities)
+                            fx = Me.FunctionValue2N(x)
+                            dfdx = Me.FunctionGradient2N(x)
 
                             Dim success As Boolean
                             success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
+                            'this call to the brent solver calculates the damping factor which minimizes the error (fval).
+
+                            tmpx = x.Clone
+                            tmpdx = dx.Clone
+                            fval = brentsolver.brentoptimize(0.01#, 2.0#, 0.0001, df)
+
                             For i = 0 To x.Length - 1
-                                'If Abs(dx(i) / x(i)) < 1.0# Then
-                                x(i) -= 0.1 * dx(i)
-                                'Else
-                                '    x(i) -= Sign(dx(i)) * 0.1 * x(i)
-                                'End If
+                                x(i) -= df * dx(i)
                             Next
 
                             ni_int += 1
