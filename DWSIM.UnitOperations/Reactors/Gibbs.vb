@@ -789,7 +789,7 @@ Namespace Reactors
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim tmp As IFlashCalculationResult
-            Dim xl, xv, H, S, wtotalx, wtotaly As Double
+            Dim xl, xv, xs, H, S As Double
             pp.CurrentMaterialStream = ims
 
             'read temperature and pressure from inlet stream.
@@ -1572,35 +1572,26 @@ Namespace Reactors
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
             'Return New Object() {xl, xv, T, P, H, S, 1, 1, Vx, Vy}
-            Dim Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1) As Double
+            Dim wl, wv, ws, Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vs(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1), Vws(ims.Phases(0).Compounds.Count - 1) As Double
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
+            xs = tmp.GetSolidPhaseMoleFraction
             T = ims.Phases(0).Properties.temperature.GetValueOrDefault
             P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             H = tmp.CalculatedEnthalpy
             S = tmp.CalculatedEntropy
             Vx = tmp.GetLiquidPhase1MoleFractions
             Vy = tmp.GetVaporPhaseMoleFractions
+            Vs = tmp.GetSolidPhaseMoleFractions
+            Vwx = tmp.GetLiquidPhase1MassFractions
+            Vwy = tmp.GetVaporPhaseMassFractions
+            Vws = tmp.GetSolidPhaseMassFractions
+            wl = tmp.GetLiquidPhase1MassFraction
+            wv = tmp.GetVaporPhaseMassFraction
+            ws = tmp.GetSolidPhaseMassFraction
 
             Dim ms As MaterialStream
             Dim cp As ConnectionPoint
-            cp = Me.GraphicObject.InputConnectors(0)
-            If cp.IsAttached Then
-                ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
-                Dim comp As BaseClasses.Compound
-                i = 0
-                For Each comp In ms.Phases(0).Compounds.Values
-                    wtotalx += Vx(i) * comp.ConstantProperties.Molar_Weight
-                    wtotaly += Vy(i) * comp.ConstantProperties.Molar_Weight
-                    i += 1
-                Next
-                i = 0
-                For Each comp In ms.Phases(0).Compounds.Values
-                    Vwx(i) = Vx(i) * comp.ConstantProperties.Molar_Weight / wtotalx
-                    Vwy(i) = Vy(i) * comp.ConstantProperties.Molar_Weight / wtotaly
-                    i += 1
-                Next
-            End If
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
@@ -1609,7 +1600,7 @@ Namespace Reactors
                     .ClearAllProps()
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H * (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.enthalpy = H * wv
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
@@ -1617,7 +1608,7 @@ Namespace Reactors
                         comp.MassFraction = Vwy(j)
                         j += 1
                     Next
-                    .Phases(0).Properties.massflow = W * (wtotaly * xv / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.massflow = W * wv
                 End With
             End If
 
@@ -1628,15 +1619,15 @@ Namespace Reactors
                     .ClearAllProps()
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = H * (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.enthalpy = H * (1 - wv)
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = Vx(j)
-                        comp.MassFraction = Vwx(j)
+                        comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (1 - xv)
+                        comp.MassFraction = (Vwx(j) * wl + Vws(j) * ws) / (1 - wv)
                         j += 1
                     Next
-                    .Phases(0).Properties.massflow = W * (wtotalx * xl / (wtotaly * xv + wtotalx * xl))
+                    .Phases(0).Properties.massflow = W * (1 - wv)
                 End With
             End If
 
