@@ -50,12 +50,13 @@ Namespace Reactors
         Private _rex_iest As New ArrayList
         Private _el_mat As Double(,) = New Double(,) {}
         Private _components As New List(Of String)
+        Private _components_re As New List(Of String)
         Private _initialestimates As New List(Of Double)
         Private _elements As String() = {}
         Private _totalelements As Double() = {}
         Private _ige, _fge, _elbal As Double
         Private igcp() As Double
-        Private fugcoeffs As New Dictionary(Of String, Double())
+        Private xv_0, xl1_0, xl2_0, xs_0, fv_0, fl1_0, fl2_0, fs_0 As Double()
 
         Dim tmpx As Double(), tmpdx As Double()
 
@@ -218,6 +219,15 @@ Namespace Reactors
             End Get
         End Property
 
+        Public Property ComponentIDs_RE() As List(Of String)
+            Set(value As List(Of String))
+                _components_re = value
+            End Set
+            Get
+                Return _components_re
+            End Get
+        End Property
+
         Public Property InitialEstimates() As List(Of Double)
             Set(value As List(Of Double))
                 _initialestimates = value
@@ -357,7 +367,7 @@ Namespace Reactors
             sum1 = 0
             sumn = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Name) Then
+                If Me.ComponentIDs_RE.Contains(s.Name) Then
                     s.MolarFlow = N(s.Name)
                     s.MoleFraction = N(s.Name) / sumfm
                     sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
@@ -371,7 +381,7 @@ Namespace Reactors
 
             sumw = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
-                If Me.ComponentIDs.Contains(s.Name) Then
+                If Me.ComponentIDs_RE.Contains(s.Name) Then
                     s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
                 End If
                 s.MassFraction = s.MassFlow / (sum1 + Winerts)
@@ -450,7 +460,7 @@ Namespace Reactors
             n = x.Length - 5
             c = Me.ComponentIDs.Count - 1
 
-            Dim lagm(n), xv(c), xl1(c), xl2(c), xs(c), nv, nl1, nl2, ns, nt As Double
+            Dim lagm(n), nv, nl1, nl2, ns, nt As Double
 
             Dim f(x.Length - 1) As Double
 
@@ -468,26 +478,26 @@ Namespace Reactors
                 For j = 0 To n
                     sum += ElementMatrix(j, i) * lagm(j)
                 Next
-                xv(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("V")(i) * P / 101325)))
-                xl1(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("L1")(i) * P / 101325)))
-                xl2(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("L2")(i) * P / 101325)))
-                xs(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("S")(i) * P / 101325)))
+                xv_0(i) = Exp(sum - (igcp(i) + Log(fv_0(i) * P / 101325)))
+                xl1_0(i) = Exp(sum - (igcp(i) + Log(fl1_0(i) * P / 101325)))
+                xl2_0(i) = Exp(sum - (igcp(i) + Log(fl2_0(i) * P / 101325)))
+                xs_0(i) = Exp(sum - (igcp(i) + Log(fs_0(i) * P / 101325)))
             Next
 
             For i = 0 To n
                 sum = 0
                 For j = 0 To c
-                    sum += ElementMatrix(i, j) * xv(j) * nv
-                    sum += ElementMatrix(i, j) * xl1(j) * nl1
-                    sum += ElementMatrix(i, j) * xl2(j) * nl2
-                    sum += ElementMatrix(i, j) * xs(j) * ns
+                    sum += ElementMatrix(i, j) * xv_0(j) * nv
+                    sum += ElementMatrix(i, j) * xl1_0(j) * nl1
+                    sum += ElementMatrix(i, j) * xl2_0(j) * nl2
+                    sum += ElementMatrix(i, j) * xs_0(j) * ns
                 Next
                 f(i) = sum - TotalElements(i)
             Next
-            f(n + 1) = nv * (xv.SumY - 1)
-            f(n + 2) = nl1 * (xl1.SumY - 1)
-            f(n + 3) = nl2 * (xl2.SumY - 1)
-            f(n + 4) = ns * (xs.SumY - 1)
+            f(n + 1) = nv * (xv_0.SumY - 1)
+            f(n + 2) = nl1 * (xl1_0.SumY - 1)
+            f(n + 3) = nl2 * (xl2_0.SumY - 1)
+            f(n + 4) = ns * (xs_0.SumY - 1)
 
             Return f
 
@@ -543,6 +553,65 @@ Namespace Reactors
             Next
 
             tms.Phases(0).Properties.massflow = sumw
+            pp.CurrentMaterialStream = tms
+            tms.Calculate(True, True)
+            pp.CurrentMaterialStream = tms
+
+            Return tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
+
+        End Function
+
+        Private Function FunctionValue2G_RE(ByVal x() As Double) As Double
+
+            Dim i As Integer
+
+            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
+
+            i = 0
+            For Each s As String In N.Keys
+                DN(s) = 0
+                For j = 0 To r
+                    DN(s) += E(i, j) * x(j)
+                Next
+                i += 1
+            Next
+
+            For Each s As String In DN.Keys
+                N(s) = N0(s) + DN(s)
+            Next
+
+            Dim fw(c), fm(c), sumfm, sum1, sumn, sumw As Double
+
+            N.Values.CopyTo(fm, 0)
+
+            sumfm = Sum(fm) + Ninerts
+
+            sum1 = 0
+            sumn = 0
+            For Each s As Compound In tms.Phases(0).Compounds.Values
+                If Me.ComponentIDs_RE.Contains(s.Name) Then
+                    s.MolarFlow = N(s.Name)
+                    s.MoleFraction = N(s.Name) / sumfm
+                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
+                Else
+                    s.MoleFraction = s.MolarFlow / sumfm
+                End If
+                sumn += s.MolarFlow
+            Next
+
+            tms.Phases(0).Properties.molarflow = sumn
+
+            sumw = 0
+            For Each s As Compound In tms.Phases(0).Compounds.Values
+                If Me.ComponentIDs_RE.Contains(s.Name) Then
+                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
+                End If
+                s.MassFraction = s.MassFlow / (sum1 + Winerts)
+                sumw += s.MassFlow
+            Next
+
+            tms.Phases(0).Properties.massflow = sumw
+
             pp.CurrentMaterialStream = tms
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
@@ -934,7 +1003,7 @@ Namespace Reactors
 
                     pp.CurrentMaterialStream = ims
 
-                    Dim xv_0, xl1_0, xl2_0, xs_0, fv_0, fl1_0, fl2_0, fs_0 As Double(), nv, nl1, nl2, ns As Double
+                    Dim nv, nl1, nl2, ns As Double
 
                     Dim flashresults = pp.FlashBase.CalculateEquilibrium(PropertyPackages.FlashSpec.P, PropertyPackages.FlashSpec.T, P, T, pp, xm0, Nothing, 0)
 
@@ -952,13 +1021,6 @@ Namespace Reactors
                         nl2 = .GetLiquidPhase2MoleFraction
                         ns = .GetSolidPhaseMoleFraction
                     End With
-
-                    fugcoeffs = New Dictionary(Of String, Double())
-
-                    fugcoeffs.Add("V", fv_0)
-                    fugcoeffs.Add("L1", fl1_0)
-                    fugcoeffs.Add("L2", fl2_0)
-                    fugcoeffs.Add("S", fs_0)
 
                     'outer loop for converging fugacity coefficients
 
@@ -988,6 +1050,9 @@ Namespace Reactors
                             tms.SetFlowsheet(ims.FlowSheet)
 
                             fx = Me.FunctionValue2N(x)
+
+                            If MathEx.Common.AbsSum(fx) < 0.0000000001 Then Exit Do
+
                             dfdx = Me.FunctionGradient2N(x)
 
                             Dim success As Boolean
@@ -1013,13 +1078,11 @@ Namespace Reactors
 
                             FlowSheet.CheckStatus()
 
-                        Loop Until MathEx.Common.AbsSum(fx) < 0.0000000001 Or ni_int > 1000
+                        Loop Until ni_int > 1000
 
                         If ni_int > 1000 Then
                             Throw New Exception("Reached the maximum number of iterations without converging.")
                         End If
-
-                        Dim sumx As Double
 
                         lagrm = x.Take(e + 1).ToArray
 
@@ -1028,26 +1091,10 @@ Namespace Reactors
                         nl2 = x(e + 3)
                         ns = x(e + 4)
 
-                        For i = 0 To c
-                            sumx = 0.0#
-                            For j = 0 To e
-                                sumx += ElementMatrix(j, i) * lagrm(j)
-                            Next
-                            xv_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("V")(i) * P / 101325)))
-                            xl1_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("L1")(i) * P / 101325)))
-                            xl2_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("L2")(i) * P / 101325)))
-                            xs_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("S")(i) * P / 101325)))
-                        Next
-
                         fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
-
-                        fugcoeffs("V") = fv_0
-                        fugcoeffs("L1") = fl1_0
-                        fugcoeffs("L2") = fl2_0
-                        fugcoeffs("S") = fs_0
 
                         sumerr = px.SubtractY(x).AbsSqrSumY
 
@@ -1201,7 +1248,7 @@ Namespace Reactors
                     tms = ims.Clone()
 
                     Me.ComponentConversions.Clear()
-                    Me.ComponentIDs.Clear()
+                    Me.ComponentIDs_RE.Clear()
 
                     'r: number of reactions
                     'c: number of components
@@ -1212,8 +1259,8 @@ Namespace Reactors
                         rx = FlowSheet.Reactions(rxid)
                         j = 0
                         For Each comp As ReactionStoichBase In rx.Components.Values
-                            If Not Me.ComponentIDs.Contains(comp.CompName) Then
-                                Me.ComponentIDs.Add(comp.CompName)
+                            If Not Me.ComponentIDs_RE.Contains(comp.CompName) Then
+                                Me.ComponentIDs_RE.Add(comp.CompName)
                                 Me.ComponentConversions.Add(comp.CompName, 0)
                             End If
                             j += 1
@@ -1222,7 +1269,7 @@ Namespace Reactors
                     Next
 
                     r = Me.Reactions.Count - 1
-                    c = Me.ComponentIDs.Count - 1
+                    c = Me.ComponentIDs_RE.Count - 1
                     comps = c
 
                     ReDim E(c, r)
@@ -1234,7 +1281,7 @@ Namespace Reactors
                     For Each rxid As String In Me.Reactions
                         rx = FlowSheet.Reactions(rxid)
                         j = 0
-                        For Each cname As String In Me.ComponentIDs
+                        For Each cname As String In Me.ComponentIDs_RE
                             If rx.Components.ContainsKey(cname) Then
                                 E(j, i) = rx.Components(cname).StoichCoeff
                             Else
@@ -1259,7 +1306,7 @@ Namespace Reactors
 
                     'store initial mole flows
 
-                    For Each cname As String In Me.ComponentIDs
+                    For Each cname As String In Me.ComponentIDs_RE
                         N0.Add(cname, ims.Phases(0).Compounds(cname).MolarFlow.GetValueOrDefault)
                         DN.Add(cname, 0)
                         N.Add(cname, ims.Phases(0).Compounds(cname).MolarFlow.GetValueOrDefault)
@@ -1309,14 +1356,17 @@ Namespace Reactors
                     Dim g0, g1 As Double
 
                     'this call to FunctionValue returns the initial gibbs energy of the system.
-                    g0 = FunctionValue(REx)
+                    g0 = FunctionValue2G_RE(REx)
                     Me.InitialGibbsEnergy = g0
 
-
                     Dim CalcFinished As Boolean = False
+
                     Dim TLast As Double = T0 'remember T for iteration loops
+
                     Do
+
                         'use my own solver
+
                         cnt = 0
 
                         'use the Simplex solver to solve the minimization problem.
@@ -1329,7 +1379,7 @@ Namespace Reactors
 
                         'reevaluate function
                         'this call to FunctionValue returns the final gibbs energy of the system.
-                        g1 = FunctionValue(REx)
+                        g1 = FunctionValue2G_RE(REx)
                         Me.FinalGibbsEnergy = g1
 
                         i = 0
