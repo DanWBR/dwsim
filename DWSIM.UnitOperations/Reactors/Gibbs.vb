@@ -55,7 +55,7 @@ Namespace Reactors
         Private _totalelements As Double() = {}
         Private _ige, _fge, _elbal As Double
         Private igcp() As Double
-        Private fugacities As New Dictionary(Of String, Double())
+        Private fugcoeffs As New Dictionary(Of String, Double())
 
         Dim tmpx As Double(), tmpdx As Double()
 
@@ -450,7 +450,7 @@ Namespace Reactors
             n = x.Length - 5
             c = Me.ComponentIDs.Count - 1
 
-            Dim lagm(n), xv(c), xl1(c), xl2(c), xs(c), nv, nl1, nl2, ns As Double
+            Dim lagm(n), xv(c), xl1(c), xl2(c), xs(c), nv, nl1, nl2, ns, nt As Double
 
             Dim f(x.Length - 1) As Double
 
@@ -461,16 +461,17 @@ Namespace Reactors
             nl1 = x(n + 2)
             nl2 = x(n + 3)
             ns = x(n + 4)
+            nt = nv + nl1 + nl2 + ns
 
             For i = 0 To c
                 sum = 0.0#
                 For j = 0 To n
                     sum += ElementMatrix(j, i) * lagm(j)
                 Next
-                xv(i) = Exp(sum - (igcp(i) + Log(fugacities("V")(i) * P / 101325)))
-                xl1(i) = Exp(sum - (igcp(i) + Log(fugacities("L1")(i) * P / 101325)))
-                xl2(i) = Exp(sum - (igcp(i) + Log(fugacities("L2")(i) * P / 101325)))
-                xs(i) = Exp(sum - (igcp(i) + Log(fugacities("S")(i) * P / 101325)))
+                xv(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("V")(i) * P / 101325)))
+                xl1(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("L1")(i) * P / 101325)))
+                xl2(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("L2")(i) * P / 101325)))
+                xs(i) = Exp(sum - (igcp(i) + Log(fugcoeffs("S")(i) * P / 101325)))
             Next
 
             For i = 0 To n
@@ -903,23 +904,13 @@ Namespace Reactors
                         Next
                     End Try
 
-                    'now setup optimization problem.
-                    'the variables are molar flows and lagrange multipliers.
-                    'define variable bounds.
-
-                    Dim g0, g1, result(c + e + 1), ies(c + e + 1) As Double
-                    Dim variables(c + e + 1) As OptBoundVariable
+                    Dim g0, g1, result(c + e + 1) As Double
 
                     For i = 0 To c + e + 1
                         If i <= c Then
-                            variables(i) = New OptBoundVariable("var" & CStr(i + 1), Me.InitialEstimates(i), 0.0000000001, 1.0E+20)
                             result(i) = N0(Me.ComponentIDs(i))
-                            ies(i) = Me.InitialEstimates(i)
-                            If ies(i) = 0 Then ies(i) = 0.00001 * N0tot
                         Else
-                            variables(i) = New OptBoundVariable("var" & CStr(i + 1), lagrm(i - c - 1), -1.0E+20, 1.0E+20)
-                            result(i) = variables(i).InitialGuess
-                            ies(i) = variables(i).InitialGuess
+                            result(i) = lagrm(i - c - 1)
                         End If
                     Next
 
@@ -962,12 +953,12 @@ Namespace Reactors
                         ns = .GetSolidPhaseMoleFraction
                     End With
 
-                    fugacities = New Dictionary(Of String, Double())
+                    fugcoeffs = New Dictionary(Of String, Double())
 
-                    fugacities.Add("V", fv_0)
-                    fugacities.Add("L1", fl1_0)
-                    fugacities.Add("L2", fl2_0)
-                    fugacities.Add("S", fs_0)
+                    fugcoeffs.Add("V", fv_0)
+                    fugcoeffs.Add("L1", fl1_0)
+                    fugcoeffs.Add("L2", fl2_0)
+                    fugcoeffs.Add("S", fs_0)
 
                     'outer loop for converging fugacity coefficients
 
@@ -1042,10 +1033,10 @@ Namespace Reactors
                             For j = 0 To e
                                 sumx += ElementMatrix(j, i) * lagrm(j)
                             Next
-                            xv_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("V")(i) * P / 101325)))
-                            xl1_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("L1")(i) * P / 101325)))
-                            xl2_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("L2")(i) * P / 101325)))
-                            xs_0(i) = Exp(sumx - (igcp(i) + Log(fugacities("S")(i) * P / 101325)))
+                            xv_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("V")(i) * P / 101325)))
+                            xl1_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("L1")(i) * P / 101325)))
+                            xl2_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("L2")(i) * P / 101325)))
+                            xs_0(i) = Exp(sumx - (igcp(i) + Log(fugcoeffs("S")(i) * P / 101325)))
                         Next
 
                         fv_0 = pp.DW_CalcFugCoeff(xv_0, T, P, PropertyPackages.State.Vapor).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
@@ -1053,10 +1044,10 @@ Namespace Reactors
                         fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
 
-                        fugacities("V") = fv_0
-                        fugacities("L1") = fl1_0
-                        fugacities("L2") = fl2_0
-                        fugacities("S") = fs_0
+                        fugcoeffs("V") = fv_0
+                        fugcoeffs("L1") = fl1_0
+                        fugcoeffs("L2") = fl2_0
+                        fugcoeffs("S") = fs_0
 
                         sumerr = px.SubtractY(x).AbsSqrSumY
 
