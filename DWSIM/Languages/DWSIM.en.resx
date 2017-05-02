@@ -5459,4 +5459,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="CommercialCopper" xml:space="preserve">
     <value>Commercial Copper</value>
   </data>
+  <data name="GibbsLocalEquilibrium" xml:space="preserve">
+    <value>System is at local equilibrium - reactions may not be spontaneous at the given temperature and pressure.</value>
+  </data>
 </root>

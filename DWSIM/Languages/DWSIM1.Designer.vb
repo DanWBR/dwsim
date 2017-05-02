@@ -7309,6 +7309,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O sistema está em equilíbrio local - as reações podem não ser espontâneas nas condições de T e P especificadas..
+        '''</summary>
+        Friend Shared ReadOnly Property GibbsLocalEquilibrium() As String
+            Get
+                Return ResourceManager.GetString("GibbsLocalEquilibrium", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Gradiente?.
         '''</summary>
         Friend Shared ReadOnly Property Gradiente() As String

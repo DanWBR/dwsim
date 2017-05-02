@@ -269,39 +269,6 @@ Namespace Reactors
 
 #Region "Auxiliary Functions"
 
-        Private Function FunctionGradient(ByVal x() As Double) As Double()
-
-            Dim epsilon As Double = 0.0001
-
-            Dim f1, f2 As Double
-            Dim g(x.Length - 1), x2(x.Length - 1) As Double
-            Dim i, j As Integer
-
-            For i = 0 To x.Length - 1
-                f1 = FunctionValue(x)
-                For j = 0 To x.Length - 1
-                    If x(j) = 0 Then
-                        If i <> j Then
-                            x2(j) = (x(j) + 0.000001)
-                        Else
-                            x2(j) = (x(j) + 0.000001) * (1 + epsilon)
-                        End If
-                    Else
-                        If i <> j Then
-                            x2(j) = x(j)
-                        Else
-                            x2(j) = x(j) * (1 + epsilon)
-                        End If
-                    End If
-                Next
-                f2 = FunctionValue(x2)
-                g(i) = (f2 - f1) / (x2(i) - x(i))
-            Next
-
-            Return g
-
-        End Function
-
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
             Dim epsilon As Double = 0.0001
@@ -676,6 +643,33 @@ Namespace Reactors
 
         End Function
 
+        Private Function FixFugCoeff(fc() As Double, T As Double, st As PropertyPackages.State) As Double()
+
+            Dim newfc(fc.Length - 1) As Double, i As Integer
+
+            newfc = fc.Clone
+
+            Dim Tf As Double() = Me.PropertyPackage.CurrentMaterialStream.Phases(0).Compounds.Values.Select(Function(c) c.ConstantProperties.TemperatureOfFusion).ToArray
+
+            Select Case st
+                Case PropertyPackages.State.Vapor, PropertyPackages.State.Liquid
+                    For i = 0 To fc.Length - 1
+                        If Tf(i) > T Then
+                            newfc(i) = 1.0E+30
+                        End If
+                    Next
+                Case PropertyPackages.State.Solid
+                    For i = 0 To fc.Length - 1
+                        If Tf(i) < T Then
+                            newfc(i) = 1.0E+30
+                        End If
+                    Next
+            End Select
+
+            Return newfc
+
+        End Function
+
 #End Region
 
 #Region "Auxiliary Subs"
@@ -1022,6 +1016,11 @@ Namespace Reactors
                         ns = .GetSolidPhaseMoleFraction + 0.1
                     End With
 
+                    fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
+                    fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)
+                    fl2_0 = FixFugCoeff(fl2_0, T, PropertyPackages.State.Liquid)
+                    fs_0 = FixFugCoeff(fs_0, T, PropertyPackages.State.Solid)
+
                     'outer loop for converging fugacity coefficients
 
                     Dim sumerr As Double = 0.0#
@@ -1096,6 +1095,11 @@ Namespace Reactors
                         fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
 
+                        fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
+                        fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)
+                        fl2_0 = FixFugCoeff(fl2_0, T, PropertyPackages.State.Liquid)
+                        fs_0 = FixFugCoeff(fs_0, T, PropertyPackages.State.Solid)
+
                         sumerr = px.SubtractY(x).AbsSqrSumY
 
                         ni_ext += 1
@@ -1116,6 +1120,8 @@ Namespace Reactors
                     Next
 
                     g1 = FunctionValue2G(N.Values.ToArray)
+
+                    If (g1 > g0) Then FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": " + FlowSheet.GetTranslatedString("GibbsLocalEquilibrium"), IFlowsheet.MessageType.Warning)
 
                     Me.FinalGibbsEnergy = g1
 
