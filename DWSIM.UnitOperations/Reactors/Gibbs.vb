@@ -1016,10 +1016,10 @@ Namespace Reactors
                         fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
-                        nv = .GetVaporPhaseMoleFraction
-                        nl1 = .GetLiquidPhase1MoleFraction
-                        nl2 = .GetLiquidPhase2MoleFraction
-                        ns = .GetSolidPhaseMoleFraction
+                        nv = .GetVaporPhaseMoleFraction + 0.1
+                        nl1 = .GetLiquidPhase1MoleFraction + 0.1
+                        nl2 = .GetLiquidPhase2MoleFraction + 0.1
+                        ns = .GetSolidPhaseMoleFraction + 0.1
                     End With
 
                     'outer loop for converging fugacity coefficients

@@ -667,18 +667,36 @@ Namespace PropertyPackages
             Dim i As Integer
             Dim fugcoeff(n) As Double
 
+            Dim Tf As Double() = Me.RET_VTF()
+
             If st = State.Liquid Then
                 Dim Tc As Object = Me.RET_VTC()
                 For i = 0 To n
                     If T / Tc(i) >= 1 Then
                         fugcoeff(i) = AUX_KHenry(Me.RET_VNAMES(i), T) / P
                     Else
-                        fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                        If T < Tf(i) Then
+                            fugcoeff(i) = 1.0E+20
+                        Else
+                            fugcoeff(i) = Me.AUX_PVAPi(i, T) / P
+                        End If
+                    End If
+                Next
+            ElseIf st = State.Vapor Then
+                For i = 0 To n
+                    If T < Tf(i) Then
+                        fugcoeff(i) = 1.0E+20
+                    Else
+                        fugcoeff(i) = 1
                     End If
                 Next
             Else
                 For i = 0 To n
-                    fugcoeff(i) = 1
+                    If T > Tf(i) Then
+                        fugcoeff(i) = 1.0E+20
+                    Else
+                        fugcoeff(i) = 1
+                    End If
                 Next
             End If
 
