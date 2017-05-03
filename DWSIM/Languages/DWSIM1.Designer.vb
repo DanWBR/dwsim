@@ -2576,6 +2576,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Erro de convergência.
+        '''</summary>
+        Friend Shared ReadOnly Property ConvergenceError() As String
+            Get
+                Return ResourceManager.GetString("ConvergenceError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Coordenada horizontal do objeto no fluxograma, em pixels.
         '''</summary>
         Friend Shared ReadOnly Property Coordenadahorizontal() As String
@@ -9465,6 +9474,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property NestePacotedeProprie() As String
             Get
                 Return ResourceManager.GetString("NestePacotedeProprie", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Não foi possível encontrar uma solução usando o método de Newton - a matrix de gradientes é singular.
+        '''</summary>
+        Friend Shared ReadOnly Property NewtonUpdateError() As String
+            Get
+                Return ResourceManager.GetString("NewtonUpdateError", resourceCulture)
             End Get
         End Property
         

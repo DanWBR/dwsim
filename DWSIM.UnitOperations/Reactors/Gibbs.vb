@@ -271,7 +271,7 @@ Namespace Reactors
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
-            Dim epsilon As Double = 0.0001
+            Dim epsilon As Double = 0.000001
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
@@ -433,6 +433,8 @@ Namespace Reactors
 
             Dim sum As Double
 
+            Dim RT As Double = 8.314 * T
+
             lagm = x.Take(n + 1).ToArray
             nv = x(n + 1)
             nl1 = x(n + 2)
@@ -465,6 +467,21 @@ Namespace Reactors
             f(n + 2) = nl1 * (xl1_0.SumY - 1)
             f(n + 3) = nl2 * (xl2_0.SumY - 1)
             f(n + 4) = ns * (xs_0.SumY - 1)
+
+            'penalty value for negative mole flows
+
+            Dim penval As Double = 0.0#
+
+            If nv < 0.0# Then penval += nv ^ 2
+            If nl1 < 0.0# Then penval += nl1 ^ 2
+            If nl2 < 0.0# Then penval += nl2 ^ 2
+            If ns < 0.0# Then penval += ns ^ 2
+
+            If penval > 0.0# Then
+                For i = 0 To x.Length - 1
+                    f(i) += penval * (i + 1) ^ 2
+                Next
+            End If
 
             Return f
 
@@ -873,7 +890,7 @@ Namespace Reactors
                     pp.CurrentMaterialStream = ims
 
                     For i = 0 To c
-                        igge(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0)) / (8.314 * T)
+                        igge(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0)) '/ (8.314 * T)
                         'lpsolve55.set_lowbo(lp, i, 0)
                     Next
 
@@ -1034,9 +1051,32 @@ Namespace Reactors
 
                     ni_ext = 0
 
+                    'optimization of initial values for the lagrange multipliers
+
+                    Dim variables As New List(Of DotNumerics.Optimization.OptSimplexBoundVariable)
+                    For i = 0 To e
+                        variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(0, -1000, 1000))
+                    Next
+                    variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(nv, True))
+                    variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(nl1, True))
+                    variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(nl2, True))
+                    variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(ns, True))
+
+                    Dim solver As New DotNumerics.Optimization.Simplex, smplres As Double()
+                    solver.MaxFunEvaluations = 5000
+                    solver.Tolerance = 0.0000000001
+                    smplres = solver.ComputeMin(Function(x1)
+                                                    Return FunctionValue2N(x1).AbsSqrSumY
+                                                End Function, variables.ToArray)
+
+                    lagrm = smplres.Take(e + 1).ToArray
+
+                    'convergence of the material balance + gibbs minimization using Newton's method
+                    'external loop: fugacity coefficient calculation/update
+                    'internal loop: material balance convergence
+
                     Do
 
-                        'solve using newton's method
                         ni_int = 0
 
                         x = lagrm.Concat({nv, nl1, nl2, ns}).ToArray
@@ -1061,7 +1101,7 @@ Namespace Reactors
 
                             tmpx = x.Clone
                             tmpdx = dx.Clone
-                            fval = brentsolver.brentoptimize(0.01#, 2.0#, 0.0001, df)
+                            fval = brentsolver.brentoptimize(0.01#, 1.0#, 0.0001, df)
 
                             For i = 0 To x.Length - 1
                                 x(i) -= df * dx(i)
@@ -1070,17 +1110,17 @@ Namespace Reactors
                             ni_int += 1
 
                             If AbsSum(dx) = 0.0# Then
-                                Throw New Exception("No solution found - reached a stationary point of the objective function (singular gradient matrix).")
+                                Throw New Exception(FlowSheet.GetTranslatedString("NewtonUpdateError"))
                             End If
 
-                            If Double.IsNaN(Sum(fx)) Then Throw New Exception("Calculation error")
+                            If Double.IsNaN(Sum(fx)) Then Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
 
                             FlowSheet.CheckStatus()
 
                         Loop Until ni_int > 1000
 
                         If ni_int > 1000 Then
-                            Throw New Exception("Reached the maximum number of iterations without converging.")
+                            Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                         End If
 
                         lagrm = x.Take(e + 1).ToArray
@@ -1107,7 +1147,7 @@ Namespace Reactors
                     Loop Until sumerr < 0.000000000001 Or ni_ext > 50
 
                     If ni_ext > 50 Then
-                        Throw New Exception("Reached the maximum number of iterations without converging.")
+                        Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                     End If
 
                     'reevaluate function

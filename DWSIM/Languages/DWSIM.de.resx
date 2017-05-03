@@ -5423,4 +5423,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="GibbsLocalEquilibrium" xml:space="preserve">
     <value>System is at local equilibrium - reactions may not be spontaneous at the given temperature and pressure.</value>
   </data>
+  <data name="ConvergenceError" xml:space="preserve">
+    <value>Convergence error</value>
+  </data>
+  <data name="NewtonUpdateError" xml:space="preserve">
+    <value>No solution found - reached a stationary point of the objective function (singular gradient matrix).</value>
+  </data>
 </root>
