@@ -1090,7 +1090,7 @@ Namespace Reactors
 
                             fx = Me.FunctionValue2N(x)
 
-                            If MathEx.Common.AbsSum(fx) < 0.0000000001 Then Exit Do
+                            If fx.AbsSqrSumY < 0.0000000001 Then Exit Do
 
                             dfdx = Me.FunctionGradient2N(x)
 
@@ -1101,7 +1101,7 @@ Namespace Reactors
 
                             tmpx = x.Clone
                             tmpdx = dx.Clone
-                            fval = brentsolver.brentoptimize(0.01#, 1.0#, 0.0001, df)
+                            fval = brentsolver.brentoptimize(0.001#, 2.0#, 0.0001, df)
 
                             For i = 0 To x.Length - 1
                                 x(i) -= df * dx(i)
@@ -1117,9 +1117,9 @@ Namespace Reactors
 
                             FlowSheet.CheckStatus()
 
-                        Loop Until ni_int > 1000
+                        Loop Until ni_int > 20000
 
-                        If ni_int > 1000 Then
+                        If ni_int > 20000 Then
                             Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                         End If
 
@@ -1618,7 +1618,7 @@ Namespace Reactors
             tmp = pp.CalculateEquilibrium2(FlashCalculationType.PressureTemperature, ims.Phases(0).Properties.pressure.GetValueOrDefault, ims.Phases(0).Properties.temperature.GetValueOrDefault, 0)
 
             'Return New Object() {xl, xv, T, P, H, S, 1, 1, Vx, Vy}
-            Dim wl, wv, ws, Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vs(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1), Vws(ims.Phases(0).Compounds.Count - 1) As Double
+            Dim wl, wv, ws, Ki(ims.Phases(0).Compounds.Count - 1), Vx(ims.Phases(0).Compounds.Count - 1), Vy(ims.Phases(0).Compounds.Count - 1), Vs(ims.Phases(0).Compounds.Count - 1), Vwx(ims.Phases(0).Compounds.Count - 1), Vwy(ims.Phases(0).Compounds.Count - 1), Vws(ims.Phases(0).Compounds.Count - 1) As Double
             xl = tmp.GetLiquidPhase1MoleFraction
             xv = tmp.GetVaporPhaseMoleFraction
             xs = tmp.GetSolidPhaseMoleFraction
@@ -1635,6 +1635,7 @@ Namespace Reactors
             wl = tmp.GetLiquidPhase1MassFraction
             wv = tmp.GetVaporPhaseMassFraction
             ws = tmp.GetSolidPhaseMassFraction
+            Ki = tmp.Kvalues.ToArray
 
             Dim ms As MaterialStream
             Dim cp As ConnectionPoint
@@ -1644,14 +1645,20 @@ Namespace Reactors
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
+                    .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H * wv
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = Vy(j)
-                        comp.MassFraction = Vwy(j)
+                        If xv = 0.0# Then
+                            comp.MoleFraction = 0.0#
+                            comp.MassFraction = 0.0#
+                        Else
+                            comp.MoleFraction = Vy(j)
+                            comp.MassFraction = Vwy(j)
+                        End If
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * wv
@@ -1663,14 +1670,20 @@ Namespace Reactors
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
                     .ClearAllProps()
+                    .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H * (1 - wv)
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (1 - xv)
-                        comp.MassFraction = (Vwx(j) * wl + Vws(j) * ws) / (1 - wv)
+                        If (1 - xv) = 0.0# Then
+                            comp.MoleFraction = 0.0#
+                            comp.MassFraction = 0.0#
+                        Else
+                            comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (1 - xv)
+                            comp.MassFraction = (Vwx(j) * wl + Vws(j) * ws) / (1 - wv)
+                        End If
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * (1 - wv)

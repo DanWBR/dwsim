@@ -432,8 +432,13 @@ Namespace Reactors
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = Vy(j)
-                        comp.MassFraction = Vwy(j)
+                        If xv = 0.0# Then
+                            comp.MoleFraction = 0.0#
+                            comp.MassFraction = 0.0#
+                        Else
+                            comp.MoleFraction = Vy(j)
+                            comp.MassFraction = Vwy(j)
+                        End If
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * wv
@@ -453,8 +458,13 @@ Namespace Reactors
                     Dim comp As BaseClasses.Compound
                     j = 0
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (xl + xs)
-                        comp.MassFraction = (Vwx(j) * wtotalx + Vws(j) * wtotalS) / (wtotalx + wtotalS)
+                        If (xl + xs) = 0.0# Then
+                            comp.MoleFraction = 0.0#
+                            comp.MassFraction = 0.0#
+                        Else
+                            comp.MoleFraction = (Vx(j) * xl + Vs(j) * xs) / (xl + xs)
+                            comp.MassFraction = (Vwx(j) * wtotalx + Vws(j) * wtotalS) / (wtotalx + wtotalS)
+                        End If
                         j += 1
                     Next
                     j = 0

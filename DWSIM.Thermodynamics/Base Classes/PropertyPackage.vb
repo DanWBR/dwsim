@@ -2771,6 +2771,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
         Public Sub DW_CalcVazaoMolar()
             With Me.CurrentMaterialStream
                 .Phases(0).Properties.molarflow = .Phases(0).Properties.massflow.GetValueOrDefault / Me.AUX_MMM(Phase.Mixture) * 1000
+                If Double.IsNaN(.Phases(0).Properties.molarflow) Then .Phases(0).Properties.molarflow = 0.0#
             End With
         End Sub
 
