@@ -227,10 +227,10 @@ Namespace UnitOperations
                     With specstr.Phases(0).Compounds(cs.ComponentID)
                         Select Case cs.SepSpec
                             Case SeparationSpec.MassFlow
-                                .MassFlow = SystemsOfUnits.Converter.ConvertToSI(su.massflow, cs.SpecValue)
+                                .MassFlow = SystemsOfUnits.Converter.ConvertToSI(cs.SpecUnit, cs.SpecValue)
                                 .MolarFlow = .MassFlow / .ConstantProperties.Molar_Weight * 1000
                             Case SeparationSpec.MolarFlow
-                                .MolarFlow = SystemsOfUnits.Converter.ConvertToSI(su.molarflow, cs.SpecValue)
+                                .MolarFlow = SystemsOfUnits.Converter.ConvertToSI(cs.SpecUnit, cs.SpecValue)
                                 .MassFlow = .MolarFlow * .ConstantProperties.Molar_Weight / 1000
                             Case SeparationSpec.PercentInletMassFlow
                                 Dim mf As Double = instr.Phases(0).Compounds(cs.ComponentID).MassFlow.GetValueOrDefault
