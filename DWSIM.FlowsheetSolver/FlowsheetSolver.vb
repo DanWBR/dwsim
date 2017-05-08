@@ -26,6 +26,7 @@ Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.GlobalSettings
+Imports DWSIM.ExtensionMethods
 
 'custom event handler declaration
 Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventArgs, ByVal extrainfo As Object)
@@ -1448,15 +1449,17 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                     n -= 1
 
                     Dim i As Integer = 0
-                    Dim dfdx(n, n), dx(n), fx(n), x(n) As Double
+                    Dim dfdx(n, n), dx(n), fx(n), x(n), tols(n) As Double
                     Dim il_err_ant As Double = 10000000000.0
                     Dim il_err As Double = 10000000000.0
                     Dim ic As Integer
+                    Dim converged As Boolean = False
 
                     i = 0
                     For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
                         If adj.SimultaneousAdjust Then
                             x(i) = GetMnpVarValue(fobj, adj)
+                            tols(i) = adj.Tolerance
                             i += 1
                         End If
                     Next
@@ -1466,15 +1469,22 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                         fx = FunctionValueSync(fobj, x)
 
+                        converged = False
+
                         il_err_ant = il_err
-                        il_err = 0
+                        il_err = fx.AbsSqrSumY
                         For i = 0 To x.Length - 1
-                            il_err += (fx(i)) ^ 2
+                            If Math.Abs(fx(i)) < tols(i) Then
+                                converged = True
+                            Else
+                                converged = False
+                                Exit Do
+                            End If
                         Next
 
                         fgui.ShowMessage(fgui.GetTranslatedString("SimultaneousAdjust") & ": Iteration #" & ic + 1 & ", NSSE: " & il_err, IFlowsheet.MessageType.Information)
 
-                        If il_err < 0.0000000001 Then Exit Do
+                        If converged Then Exit Do
 
                         dfdx = FunctionGradientSync(fobj, x)
 
@@ -1536,15 +1546,17 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 n -= 1
 
                 Dim i As Integer = 0
-                Dim dfdx(n, n), dx(n), fx(n), x(n) As Double
+                Dim dfdx(n, n), dx(n), fx(n), x(n), tols(n) As Double
                 Dim il_err_ant As Double = 10000000000.0
                 Dim il_err As Double = 10000000000.0
                 Dim ic As Integer
+                Dim converged As Boolean = False
 
                 i = 0
                 For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
                     If adj.SimultaneousAdjust Then
                         x(i) = GetMnpVarValue(fobj, adj)
+                        tols(i) = adj.Tolerance
                         i += 1
                     End If
                 Next
@@ -1554,15 +1566,22 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
                     fx = FunctionValueAsync(fobj, x, ct)
 
+                    converged = False
+
                     il_err_ant = il_err
-                    il_err = 0
+                    il_err = fx.AbsSqrSumY
                     For i = 0 To x.Length - 1
-                        il_err += (fx(i)) ^ 2
+                        If Math.Abs(fx(i)) < tols(i) Then
+                            converged = True
+                        Else
+                            converged = False
+                            Exit Do
+                        End If
                     Next
 
                     fgui.ShowMessage(fgui.GetTranslatedString("SimultaneousAdjust") & ": Iteration #" & ic + 1 & ", NSSE: " & il_err, IFlowsheet.MessageType.Information)
 
-                    If il_err < 0.0000000001 Then Exit Do
+                    If converged Then Exit Do
 
                     dfdx = FunctionGradientAsync(fobj, x, ct)
 

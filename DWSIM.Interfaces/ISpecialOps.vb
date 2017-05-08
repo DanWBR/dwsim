@@ -59,6 +59,8 @@ End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IAdjust
 
+    Property Tolerance As Double
+
     Property SimultaneousAdjust As Boolean
 
     Property Referenced As Boolean

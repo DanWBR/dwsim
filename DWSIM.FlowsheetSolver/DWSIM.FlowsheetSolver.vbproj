@@ -118,6 +118,10 @@
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>

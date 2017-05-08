@@ -254,7 +254,7 @@ Namespace SpecialOps
             End Set
         End Property
 
-        Public Property Tolerance() As Double
+        Public Property Tolerance() As Double Implements IAdjust.Tolerance
             Get
                 Return Me.m_Tolerance
             End Get
