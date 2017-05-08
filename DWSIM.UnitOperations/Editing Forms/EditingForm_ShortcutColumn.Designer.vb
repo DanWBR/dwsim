@@ -109,11 +109,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.GroupBox5.Controls.Add(Me.Label11)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox5, resources.GetString("GroupBox5.ToolTip"))
         '
         'lblTag
         '
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
+        Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
         '
         'chkActive
         '
@@ -127,26 +129,31 @@ Partial Class EditingForm_ShortcutColumn
         '
         resources.ApplyResources(Me.lblConnectedTo, "lblConnectedTo")
         Me.lblConnectedTo.Name = "lblConnectedTo"
+        Me.ToolTip1.SetToolTip(Me.lblConnectedTo, resources.GetString("lblConnectedTo.ToolTip"))
         '
         'lblStatus
         '
         resources.ApplyResources(Me.lblStatus, "lblStatus")
         Me.lblStatus.Name = "lblStatus"
+        Me.ToolTip1.SetToolTip(Me.lblStatus, resources.GetString("lblStatus.ToolTip"))
         '
         'Label13
         '
         resources.ApplyResources(Me.Label13, "Label13")
         Me.Label13.Name = "Label13"
+        Me.ToolTip1.SetToolTip(Me.Label13, resources.GetString("Label13.ToolTip"))
         '
         'Label12
         '
         resources.ApplyResources(Me.Label12, "Label12")
         Me.Label12.Name = "Label12"
+        Me.ToolTip1.SetToolTip(Me.Label12, resources.GetString("Label12.ToolTip"))
         '
         'Label11
         '
         resources.ApplyResources(Me.Label11, "Label11")
         Me.Label11.Name = "Label11"
+        Me.ToolTip1.SetToolTip(Me.Label11, resources.GetString("Label11.ToolTip"))
         '
         'GroupBox3
         '
@@ -159,6 +166,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.GroupBox3.Controls.Add(Me.Label9)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
         '
         'btnConfigureFlashAlg
         '
@@ -182,11 +190,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbFlashAlg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbFlashAlg.FormattingEnabled = True
         Me.cbFlashAlg.Name = "cbFlashAlg"
+        Me.ToolTip1.SetToolTip(Me.cbFlashAlg, resources.GetString("cbFlashAlg.ToolTip"))
         '
         'Label10
         '
         resources.ApplyResources(Me.Label10, "Label10")
         Me.Label10.Name = "Label10"
+        Me.ToolTip1.SetToolTip(Me.Label10, resources.GetString("Label10.ToolTip"))
         '
         'cbPropPack
         '
@@ -194,11 +204,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
         Me.cbPropPack.Name = "cbPropPack"
+        Me.ToolTip1.SetToolTip(Me.cbPropPack, resources.GetString("cbPropPack.ToolTip"))
         '
         'Label9
         '
         resources.ApplyResources(Me.Label9, "Label9")
         Me.Label9.Name = "Label9"
+        Me.ToolTip1.SetToolTip(Me.Label9, resources.GetString("Label9.ToolTip"))
         '
         'GroupBox2
         '
@@ -224,12 +236,14 @@ Partial Class EditingForm_ShortcutColumn
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
         '
         'rbPartialCond
         '
         resources.ApplyResources(Me.rbPartialCond, "rbPartialCond")
         Me.rbPartialCond.Name = "rbPartialCond"
         Me.rbPartialCond.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbPartialCond, resources.GetString("rbPartialCond.ToolTip"))
         Me.rbPartialCond.UseVisualStyleBackColor = True
         '
         'rbTotalCond
@@ -237,6 +251,7 @@ Partial Class EditingForm_ShortcutColumn
         resources.ApplyResources(Me.rbTotalCond, "rbTotalCond")
         Me.rbTotalCond.Name = "rbTotalCond"
         Me.rbTotalCond.TabStop = True
+        Me.ToolTip1.SetToolTip(Me.rbTotalCond, resources.GetString("rbTotalCond.ToolTip"))
         Me.rbTotalCond.UseVisualStyleBackColor = True
         '
         'cbRebPressureUnits
@@ -246,11 +261,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbRebPressureUnits.FormattingEnabled = True
         Me.cbRebPressureUnits.Items.AddRange(New Object() {resources.GetString("cbRebPressureUnits.Items"), resources.GetString("cbRebPressureUnits.Items1"), resources.GetString("cbRebPressureUnits.Items2")})
         Me.cbRebPressureUnits.Name = "cbRebPressureUnits"
+        Me.ToolTip1.SetToolTip(Me.cbRebPressureUnits, resources.GetString("cbRebPressureUnits.ToolTip"))
         '
         'tbRebPressure
         '
         resources.ApplyResources(Me.tbRebPressure, "tbRebPressure")
         Me.tbRebPressure.Name = "tbRebPressure"
+        Me.ToolTip1.SetToolTip(Me.tbRebPressure, resources.GetString("tbRebPressure.ToolTip"))
         '
         'cbCondPressureUnits
         '
@@ -259,26 +276,31 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbCondPressureUnits.FormattingEnabled = True
         Me.cbCondPressureUnits.Items.AddRange(New Object() {resources.GetString("cbCondPressureUnits.Items"), resources.GetString("cbCondPressureUnits.Items1"), resources.GetString("cbCondPressureUnits.Items2")})
         Me.cbCondPressureUnits.Name = "cbCondPressureUnits"
+        Me.ToolTip1.SetToolTip(Me.cbCondPressureUnits, resources.GetString("cbCondPressureUnits.ToolTip"))
         '
         'tbCondPressure
         '
         resources.ApplyResources(Me.tbCondPressure, "tbCondPressure")
         Me.tbCondPressure.Name = "tbCondPressure"
+        Me.ToolTip1.SetToolTip(Me.tbCondPressure, resources.GetString("tbCondPressure.ToolTip"))
         '
         'Label16
         '
         resources.ApplyResources(Me.Label16, "Label16")
         Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'Label15
         '
         resources.ApplyResources(Me.Label15, "Label15")
         Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
         '
         'Label14
         '
         resources.ApplyResources(Me.Label14, "Label14")
         Me.Label14.Name = "Label14"
+        Me.ToolTip1.SetToolTip(Me.Label14, resources.GetString("Label14.ToolTip"))
         '
         'cbHKey
         '
@@ -287,41 +309,49 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbHKey.FormattingEnabled = True
         Me.cbHKey.Items.AddRange(New Object() {resources.GetString("cbHKey.Items"), resources.GetString("cbHKey.Items1")})
         Me.cbHKey.Name = "cbHKey"
+        Me.ToolTip1.SetToolTip(Me.cbHKey, resources.GetString("cbHKey.ToolTip"))
         '
         'Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
         Me.Label5.Name = "Label5"
+        Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'tbRefluxRatio
         '
         resources.ApplyResources(Me.tbRefluxRatio, "tbRefluxRatio")
         Me.tbRefluxRatio.Name = "tbRefluxRatio"
+        Me.ToolTip1.SetToolTip(Me.tbRefluxRatio, resources.GetString("tbRefluxRatio.ToolTip"))
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
         Me.Label4.Name = "Label4"
+        Me.ToolTip1.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'tbHKmolfrac
         '
         resources.ApplyResources(Me.tbHKmolfrac, "tbHKmolfrac")
         Me.tbHKmolfrac.Name = "tbHKmolfrac"
+        Me.ToolTip1.SetToolTip(Me.tbHKmolfrac, resources.GetString("tbHKmolfrac.ToolTip"))
         '
         'Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
         Me.Label2.Name = "Label2"
+        Me.ToolTip1.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'tbLKmolfrac
         '
         resources.ApplyResources(Me.tbLKmolfrac, "tbLKmolfrac")
         Me.tbLKmolfrac.Name = "tbLKmolfrac"
+        Me.ToolTip1.SetToolTip(Me.tbLKmolfrac, resources.GetString("tbLKmolfrac.ToolTip"))
         '
         'Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
         Me.Label3.Name = "Label3"
+        Me.ToolTip1.SetToolTip(Me.Label3, resources.GetString("Label3.ToolTip"))
         '
         'cbLKey
         '
@@ -330,11 +360,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbLKey.FormattingEnabled = True
         Me.cbLKey.Items.AddRange(New Object() {resources.GetString("cbLKey.Items"), resources.GetString("cbLKey.Items1"), resources.GetString("cbLKey.Items2"), resources.GetString("cbLKey.Items3"), resources.GetString("cbLKey.Items4"), resources.GetString("cbLKey.Items5"), resources.GetString("cbLKey.Items6"), resources.GetString("cbLKey.Items7")})
         Me.cbLKey.Name = "cbLKey"
+        Me.ToolTip1.SetToolTip(Me.cbLKey, resources.GetString("cbLKey.ToolTip"))
         '
         'Label8
         '
         resources.ApplyResources(Me.Label8, "Label8")
         Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
         '
         'GroupBox1
         '
@@ -361,6 +393,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
         '
         'btnCreateAndConnectEnergy2
         '
@@ -382,6 +415,7 @@ Partial Class EditingForm_ShortcutColumn
         '
         resources.ApplyResources(Me.Label20, "Label20")
         Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
         '
         'cbEnergy2
         '
@@ -389,6 +423,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbEnergy2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEnergy2.FormattingEnabled = True
         Me.cbEnergy2.Name = "cbEnergy2"
+        Me.ToolTip1.SetToolTip(Me.cbEnergy2, resources.GetString("cbEnergy2.ToolTip"))
         '
         'btnCreateAndConnectEnergy1
         '
@@ -426,6 +461,7 @@ Partial Class EditingForm_ShortcutColumn
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'cbEnergy1
         '
@@ -433,6 +469,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbEnergy1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEnergy1.FormattingEnabled = True
         Me.cbEnergy1.Name = "cbEnergy1"
+        Me.ToolTip1.SetToolTip(Me.cbEnergy1, resources.GetString("cbEnergy1.ToolTip"))
         '
         'cbOutlet2
         '
@@ -440,11 +477,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbOutlet2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet2.FormattingEnabled = True
         Me.cbOutlet2.Name = "cbOutlet2"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet2, resources.GetString("cbOutlet2.ToolTip"))
         '
         'Label6
         '
         resources.ApplyResources(Me.Label6, "Label6")
         Me.Label6.Name = "Label6"
+        Me.ToolTip1.SetToolTip(Me.Label6, resources.GetString("Label6.ToolTip"))
         '
         'btnCreateAndConnectOutlet1
         '
@@ -482,6 +521,7 @@ Partial Class EditingForm_ShortcutColumn
         '
         resources.ApplyResources(Me.Label7, "Label7")
         Me.Label7.Name = "Label7"
+        Me.ToolTip1.SetToolTip(Me.Label7, resources.GetString("Label7.ToolTip"))
         '
         'cbOutlet1
         '
@@ -489,6 +529,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbOutlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOutlet1.FormattingEnabled = True
         Me.cbOutlet1.Name = "cbOutlet1"
+        Me.ToolTip1.SetToolTip(Me.cbOutlet1, resources.GetString("cbOutlet1.ToolTip"))
         '
         'cbInlet1
         '
@@ -496,11 +537,13 @@ Partial Class EditingForm_ShortcutColumn
         Me.cbInlet1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInlet1.FormattingEnabled = True
         Me.cbInlet1.Name = "cbInlet1"
+        Me.ToolTip1.SetToolTip(Me.cbInlet1, resources.GetString("cbInlet1.ToolTip"))
         '
         'Label19
         '
         resources.ApplyResources(Me.Label19, "Label19")
         Me.Label19.Name = "Label19"
+        Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
         'GroupBox6
         '
@@ -508,17 +551,19 @@ Partial Class EditingForm_ShortcutColumn
         Me.GroupBox6.Controls.Add(Me.gridResults)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GroupBox6, resources.GetString("GroupBox6.ToolTip"))
         '
         'gridResults
         '
+        resources.ApplyResources(Me.gridResults, "gridResults")
         Me.gridResults.AllowUserToAddRows = False
         Me.gridResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.gridResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridResults.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.Column1})
-        resources.ApplyResources(Me.gridResults, "gridResults")
         Me.gridResults.Name = "gridResults"
         Me.gridResults.ReadOnly = True
         Me.gridResults.RowHeadersVisible = False
+        Me.ToolTip1.SetToolTip(Me.gridResults, resources.GetString("gridResults.ToolTip"))
         '
         'DataGridViewTextBoxColumn1
         '
@@ -557,6 +602,7 @@ Partial Class EditingForm_ShortcutColumn
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Name = "EditingForm_ShortcutColumn"
+        Me.ToolTip1.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
