@@ -72,6 +72,8 @@ Public Class EditingForm_Adjust
 
             chkSolveGlobal.Checked = SimObject.SimultaneousAdjust
 
+            tbTolerance.Text = .Tolerance.ToString(nf)
+
             'annotation
 
             Try
@@ -256,9 +258,20 @@ Public Class EditingForm_Adjust
 
     End Sub
 
-    Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown
+    Private Sub tbSetPoint_KeyDown(sender As Object, e As KeyEventArgs) Handles tbSetPoint.KeyDown, tbTolerance.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded Then
+
+            Try
+                Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
+                SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text))
+            Catch ex As Exception
+            End Try
+
+            Try
+                SimObject.Tolerance = Double.Parse(tbTolerance.Text)
+            Catch ex As Exception
+            End Try
 
             UpdateInfo()
 
@@ -268,15 +281,14 @@ Public Class EditingForm_Adjust
 
     End Sub
 
-    Private Sub tbSetPoint_TextChanged(sender As Object, e As EventArgs) Handles tbSetPoint.TextChanged
+    Private Sub tbSetPoint_TextChanged(sender As Object, e As EventArgs) Handles tbSetPoint.TextChanged, tbTolerance.TextChanged
 
-        If Loaded Then
-            Try
-                Dim obj = Me.SimObject.FlowSheet.SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = cbTargetObj.SelectedItem.ToString).FirstOrDefault
-                SimObject.AdjustValue = su.Converter.ConvertToSI(obj.GetPropertyUnit(SimObject.ControlledObjectData.PropertyName, units), Double.Parse(tbSetPoint.Text))
-            Catch ex As Exception
+        Dim tbox = DirectCast(sender, TextBox)
 
-            End Try
+        If Double.TryParse(tbox.Text, New Double()) Then
+            tbox.ForeColor = Drawing.Color.Blue
+        Else
+            tbox.ForeColor = Drawing.Color.Red
         End If
 
     End Sub

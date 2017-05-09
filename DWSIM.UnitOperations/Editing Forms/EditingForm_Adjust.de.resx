@@ -129,10 +129,19 @@
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notizen</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tbTolerance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 73</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Tolerance</value>
+  </data>
   <data name="btnOpenControlPanel.Text" xml:space="preserve">
     <value>Öffne Kontrollpanel</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="tbSetPoint.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 47</value>
   </data>
@@ -189,9 +198,5 @@
   </data>
   <data name="GroupBox1.Text" xml:space="preserve">
     <value>Verknüpfte Objekte und Eigenschaften</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
 </root>

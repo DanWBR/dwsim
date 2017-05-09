@@ -117,75 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lblTag.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="chkActive.ToolTip" xml:space="preserve">
     <value>Active/Inactive</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Object</value>
   </data>
-  <data name="Label11.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>General Info</value>
-  </data>
-  <data name="GroupBox5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="rtbAnnotations.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Notes</value>
   </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Parameters</value>
   </data>
-  <data name="lblSPUnits.ToolTip" xml:space="preserve">
-    <value />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 13</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Tolerance (Maximum Error)</value>
   </data>
   <data name="btnOpenControlPanel.Text" xml:space="preserve">
     <value>Open Adjust Control Panel</value>
   </data>
-  <data name="btnOpenControlPanel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tbSetPoint.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Set-Point (Controlled Property)</value>
   </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="chkSolveGlobal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 17</value>
+    <value>93, 17</value>
   </data>
   <data name="chkSolveGlobal.Text" xml:space="preserve">
-    <value>Solve globally</value>
+    <value>Solve Globally</value>
   </data>
-  <data name="chkSolveGlobal.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Parameters</value>
-  </data>
-  <data name="GroupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblTargetVal.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="lblSourceVal.ToolTip" xml:space="preserve">
-    <value />
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Linked Objects</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -193,17 +163,11 @@
   <data name="Label6.Text" xml:space="preserve">
     <value>Value</value>
   </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Value</value>
-  </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
@@ -211,23 +175,11 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Property</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbTargetProp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbTargetObj.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Controlled Object</value>
-  </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
@@ -235,31 +187,10 @@
   <data name="Label7.Text" xml:space="preserve">
     <value>Property</value>
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbSourceProp.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbSourceObj.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Manipulated Object</value>
-  </data>
-  <data name="Label19.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Linked Objects</value>
-  </data>
-  <data name="GroupBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>

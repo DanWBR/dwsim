@@ -1,4 +1,4 @@
-﻿Imports DWSIM.SharedClasses.SystemsOfUnits.Converter
+﻿Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports System.Windows.Forms
 Imports System.Drawing
 
@@ -27,7 +27,7 @@ Public Class EditingForm_Adjust_ControlPanel
         Me.nf = myADJ.FlowSheet.FlowsheetOptions.NumberFormat
 
         With myADJ
-            Me.tbAjuste.Text = SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), .AdjustValue)
+            Me.tbAjuste.Text = cv.ConvertFromSI(myADJ.ControlledObject.GetPropertyUnit(myADJ.ControlledObjectData.PropertyName, su), .AdjustValue)
             Me.tbMaxIt.Text = .MaximumIterations
             Me.tbStep.Text = .StepSize
             Me.tbTol.Text = .Tolerance
@@ -88,20 +88,20 @@ Public Class EditingForm_Adjust_ControlPanel
         End If
         If myADJ.Referenced Then
             If formC.SimulationObjects(myADJ.ReferencedObjectData.ID).GraphicObject.Calculated Then
-                rfVal = Me.GetMnpVarValue()
+                rfVal = Me.GetRefVarValue()
             End If
         End If
         Dim tol, maxit, adjval, stepsize, max, min As Double
         With myADJ
             If myADJ.Referenced Then
                 If Not rfVal = Nothing Then
-                    adjval = rfVal + .AdjustValue
+                    adjval = rfVal + cv.ConvertFromSI(.ControlledObject.GetPropertyUnit(.ControlledObjectData.PropertyName, su), .AdjustValue)
                 Else
                     Me.btnIniciar.Enabled = True
                     Exit Sub
                 End If
             Else
-                adjval = .AdjustValue
+                adjval = cv.ConvertFromSI(.ControlledObject.GetPropertyUnit(.ControlledObjectData.PropertyName, su), .AdjustValue)
             End If
             maxit = .MaximumIterations
             stepsize = .StepSize
@@ -136,7 +136,7 @@ Public Class EditingForm_Adjust_ControlPanel
 
                 Me.lblStatus.Text = formC.GetTranslatedString("Ajustando")
                 Me.lblItXdeY.Text = formC.GetTranslatedString("Iterao") & " " & (cnt + 1) & " " & formC.GetTranslatedString("de") & " " & maxit
-                Me.tbErro.Text = fi
+                Me.tbErro.Text = fi.ToString("G")
 
                 If cnt <= 2 Then
                     varAnt2 = varAnt
@@ -528,7 +528,7 @@ Final3:
     Private Function GetCtlVarValue()
 
         With Me.myADJ.ControlledObjectData
-            Return formC.SimulationObjects(.ID).GetPropertyValue(.PropertyName)
+            Return formC.SimulationObjects(.ID).GetPropertyValue(.PropertyName, su)
         End With
 
     End Function

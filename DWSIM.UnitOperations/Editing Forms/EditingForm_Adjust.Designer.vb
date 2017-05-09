@@ -27,10 +27,13 @@ Partial Class EditingForm_Adjust
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditingForm_Adjust))
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.lblTag = New System.Windows.Forms.TextBox()
+        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.rtbAnnotations = New Extended.Windows.Forms.RichTextBoxExtended()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tbTolerance = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.lblSPUnits = New System.Windows.Forms.Label()
         Me.btnOpenControlPanel = New System.Windows.Forms.Button()
         Me.tbSetPoint = New System.Windows.Forms.TextBox()
@@ -50,7 +53,6 @@ Partial Class EditingForm_Adjust
         Me.cbSourceObj = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -72,6 +74,14 @@ Partial Class EditingForm_Adjust
         resources.ApplyResources(Me.lblTag, "lblTag")
         Me.lblTag.Name = "lblTag"
         Me.ToolTip1.SetToolTip(Me.lblTag, resources.GetString("lblTag.ToolTip"))
+        '
+        'chkActive
+        '
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
+        Me.chkActive.Name = "chkActive"
+        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
+        Me.chkActive.UseVisualStyleBackColor = True
         '
         'Label11
         '
@@ -100,6 +110,8 @@ Partial Class EditingForm_Adjust
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.tbTolerance)
+        Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.lblSPUnits)
         Me.GroupBox2.Controls.Add(Me.btnOpenControlPanel)
         Me.GroupBox2.Controls.Add(Me.tbSetPoint)
@@ -108,6 +120,18 @@ Partial Class EditingForm_Adjust
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        '
+        'tbTolerance
+        '
+        resources.ApplyResources(Me.tbTolerance, "tbTolerance")
+        Me.tbTolerance.Name = "tbTolerance"
+        Me.ToolTip1.SetToolTip(Me.tbTolerance, resources.GetString("tbTolerance.ToolTip"))
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        Me.ToolTip1.SetToolTip(Me.Label1, resources.GetString("Label1.ToolTip"))
         '
         'lblSPUnits
         '
@@ -240,14 +264,6 @@ Partial Class EditingForm_Adjust
         Me.Label19.Name = "Label19"
         Me.ToolTip1.SetToolTip(Me.Label19, resources.GetString("Label19.ToolTip"))
         '
-        'chkActive
-        '
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.chkActive.Image = Global.DWSIM.UnitOperations.My.Resources.Resources.bullet_tick
-        Me.chkActive.Name = "chkActive"
-        Me.ToolTip1.SetToolTip(Me.chkActive, resources.GetString("chkActive.ToolTip"))
-        Me.chkActive.UseVisualStyleBackColor = True
-        '
         'EditingForm_Adjust
         '
         resources.ApplyResources(Me, "$this")
@@ -294,4 +310,6 @@ Partial Class EditingForm_Adjust
     Friend WithEvents tbSetPoint As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents lblSPUnits As System.Windows.Forms.Label
+    Friend WithEvents tbTolerance As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

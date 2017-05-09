@@ -27,6 +27,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.GlobalSettings
 Imports DWSIM.ExtensionMethods
+Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 'custom event handler declaration
 Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventArgs, ByVal extrainfo As Object)
@@ -1478,7 +1479,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                                 converged = True
                             Else
                                 converged = False
-                                Exit Do
+                                Exit For
                             End If
                         Next
 
@@ -1575,7 +1576,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                             converged = True
                         Else
                             converged = False
-                            Exit Do
+                            Exit For
                         End If
                     Next
 
@@ -1620,8 +1621,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function FunctionValueSync(ByVal fobj As Object, ByVal x() As Double) As Double()
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         Dim i As Integer = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
@@ -1637,10 +1637,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         i = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
+                Dim adjvalue As Double = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
                 If adj.Referenced Then
-                    fx(i) = adj.AdjustValue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
+                    fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
                 Else
-                    fx(i) = adj.AdjustValue - GetCtlVarValue(fobj, adj)
+                    fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
                 End If
                 i += 1
             End If
@@ -1701,8 +1702,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function FunctionValueAsync(ByVal fobj As Object, ByVal x() As Double, ct As CancellationToken) As Double()
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         Dim i As Integer = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
@@ -1718,10 +1718,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
         i = 0
         For Each adj As IAdjust In fbag.SimulationObjects.Values.Where(Function(a) TypeOf a Is IAdjust)
             If adj.SimultaneousAdjust Then
+                Dim adjvalue As Double = cv.ConvertFromSI(fbag.SimulationObjects(adj.ControlledObjectData.ID).GetPropertyUnit(adj.ControlledObjectData.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem), adj.AdjustValue)
                 If adj.Referenced Then
-                    fx(i) = adj.AdjustValue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
+                    fx(i) = adjvalue + GetRefVarValue(fobj, adj) - GetCtlVarValue(fobj, adj)
                 Else
-                    fx(i) = adj.AdjustValue - GetCtlVarValue(fobj, adj)
+                    fx(i) = adjvalue - GetCtlVarValue(fobj, adj)
                 End If
                 i += 1
             End If
@@ -1782,10 +1783,10 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function GetCtlVarValue(ByVal fobj As Object, ByVal adj As IAdjust) As Double
 
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         With adj.ControlledObjectData
-            Return fbag.SimulationObjects(.ID).GetPropertyValue(.PropertyName)
+            Return fbag.SimulationObjects(.ID).GetPropertyValue(.PropertyName, fbag.FlowsheetOptions.SelectedUnitSystem)
         End With
 
     End Function
@@ -1835,11 +1836,11 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function GetRefVarValue(ByVal fobj As Object, ByVal adj As IAdjust) As Double
 
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         With adj.ManipulatedObjectData
             With adj.ControlledObjectData()
-                Return fbag.SimulationObjects(.ID).GetPropertyValue(.Name)
+                Return fbag.SimulationObjects(.ID).GetPropertyValue(.Name, fbag.FlowsheetOptions.SelectedUnitSystem)
             End With
         End With
 
