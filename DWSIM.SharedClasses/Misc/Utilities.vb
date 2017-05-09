@@ -181,6 +181,8 @@
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.CSTRGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ReactorPFRGraphic") Then
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.PFRGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ReactorGibbsGraphic") Then
+            xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.GibbsGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.NodeInGraphic") Then
             xel.Value = "PortableFlowsheetDrawing.GraphicObjects.Shapes.MixerGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.NodeOutGraphic") Then
@@ -230,6 +232,7 @@
         If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Equilibrium") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Equilibrium"
         If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_PFR") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_PFR"
         If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_CSTR") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_CSTR"
+        If xel.Value.Equals("DWSIM.UnitOperations.Reactors.Reactor_Gibbs") Then xel.Value = "PortableDTL.DTL.SimulationObjects.Reactors.Reactor_Gibbs"
 
         If xel.Value.Equals("DWSIM.UnitOperations.SpecialOps.Adjust") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Adjust"
         If xel.Value.Equals("DWSIM.UnitOperations.SpecialOps.Recycle") Then xel.Value = "PortableDTL.DTL.SimulationObjects.UnitOperations.Recycle"
