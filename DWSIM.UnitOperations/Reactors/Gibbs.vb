@@ -1874,9 +1874,10 @@ Namespace Reactors
 
         Public Overrides ReadOnly Property MobileCompatible As Boolean
             Get
-                Return False
+                Return True
             End Get
         End Property
+
     End Class
 
 End Namespace
