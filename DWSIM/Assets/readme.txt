@@ -66,7 +66,7 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
 
-Version 4.3 Update 8
+Version 4.3 Update 8/9
 
 - [CHG] Enhanced Gibbs Reactor model, now support multiphase chemical equilibrium
 - [CHG] Updated Simultaneous Adjust convergence criteria to compare against individual tolerances
