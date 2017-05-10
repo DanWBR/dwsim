@@ -77,6 +77,7 @@ Partial Class FormFlowsheet
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
         Me.ToolStripUnits = New System.Windows.Forms.ToolStrip()
         Me.ToolStripComboBoxUnitSystem = New System.Windows.Forms.ToolStripComboBox()
+        Me.tsbEditUnits = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripComboBoxNumberFormatting = New System.Windows.Forms.ToolStripComboBox()
@@ -551,7 +552,7 @@ Partial Class FormFlowsheet
         'ToolStripUnits
         '
         resources.ApplyResources(Me.ToolStripUnits, "ToolStripUnits")
-        Me.ToolStripUnits.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxUnitSystem, Me.ToolStripButton7, Me.ToolStripSeparator2, Me.ToolStripComboBoxNumberFormatting, Me.ToolStripSeparator3, Me.ToolStripComboBoxNumberFractionFormatting})
+        Me.ToolStripUnits.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxUnitSystem, Me.tsbEditUnits, Me.ToolStripButton7, Me.ToolStripSeparator2, Me.ToolStripComboBoxNumberFormatting, Me.ToolStripSeparator3, Me.ToolStripComboBoxNumberFractionFormatting})
         Me.ToolStripUnits.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.ToolStripUnits.Name = "ToolStripUnits"
         '
@@ -561,6 +562,13 @@ Partial Class FormFlowsheet
         Me.ToolStripComboBoxUnitSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ToolStripComboBoxUnitSystem.DropDownWidth = 60
         Me.ToolStripComboBoxUnitSystem.Name = "ToolStripComboBoxUnitSystem"
+        '
+        'tsbEditUnits
+        '
+        resources.ApplyResources(Me.tsbEditUnits, "tsbEditUnits")
+        Me.tsbEditUnits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbEditUnits.Image = Global.DWSIM.My.Resources.Resources.table_gear
+        Me.tsbEditUnits.Name = "tsbEditUnits"
         '
         'ToolStripButton7
         '
@@ -1274,4 +1282,5 @@ Partial Class FormFlowsheet
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents tsbConfigSimulation As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsbEditUnits As System.Windows.Forms.ToolStripButton
 End Class

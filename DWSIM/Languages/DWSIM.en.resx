@@ -5468,4 +5468,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NewtonUpdateError" xml:space="preserve">
     <value>No solution found - reached a stationary point of the objective function (singular gradient matrix).</value>
   </data>
+  <data name="EditUnitSystem" xml:space="preserve">
+    <value>Edit System of Units</value>
+  </data>
+  <data name="DiffusionCoefficient" xml:space="preserve">
+    <value>Diffusion Coefficient</value>
+  </data>
 </root>

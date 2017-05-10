@@ -22,50 +22,42 @@ Partial Class FormUnitGen
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUnitGen))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn
-        Me.TextBox1 = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.KryptonButton1 = New System.Windows.Forms.Button
-        Me.KryptonButton2 = New System.Windows.Forms.Button
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.KryptonButton1 = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
-        Me.GroupBox1.AccessibleDescription = Nothing
-        Me.GroupBox1.AccessibleName = Nothing
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
-        Me.GroupBox1.BackgroundImage = Nothing
         Me.GroupBox1.Controls.Add(Me.DataGridView1)
         Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Font = Nothing
+        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
         'DataGridView1
         '
-        Me.DataGridView1.AccessibleDescription = Nothing
-        Me.DataGridView1.AccessibleName = Nothing
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
         Me.DataGridView1.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.DataGridView1.BackgroundImage = Nothing
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2})
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
-        Me.DataGridView1.Font = Nothing
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -92,52 +84,32 @@ Partial Class FormUnitGen
         '
         'TextBox1
         '
-        Me.TextBox1.AccessibleDescription = Nothing
-        Me.TextBox1.AccessibleName = Nothing
         resources.ApplyResources(Me.TextBox1, "TextBox1")
-        Me.TextBox1.BackgroundImage = Nothing
-        Me.TextBox1.Font = Nothing
         Me.TextBox1.Name = "TextBox1"
         '
         'Label1
         '
-        Me.Label1.AccessibleDescription = Nothing
-        Me.Label1.AccessibleName = Nothing
         resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Font = Nothing
         Me.Label1.Name = "Label1"
         '
         'KryptonButton1
         '
-        Me.KryptonButton1.AccessibleDescription = Nothing
-        Me.KryptonButton1.AccessibleName = Nothing
         resources.ApplyResources(Me.KryptonButton1, "KryptonButton1")
-        Me.KryptonButton1.BackgroundImage = Nothing
-        Me.KryptonButton1.Font = Nothing
         Me.KryptonButton1.Name = "KryptonButton1"
         '
-        'KryptonButton2
+        'btnAdd
         '
-        Me.KryptonButton2.AccessibleDescription = Nothing
-        Me.KryptonButton2.AccessibleName = Nothing
-        resources.ApplyResources(Me.KryptonButton2, "KryptonButton2")
-        Me.KryptonButton2.BackgroundImage = Nothing
-        Me.KryptonButton2.Font = Nothing
-        Me.KryptonButton2.Name = "KryptonButton2"
+        resources.ApplyResources(Me.btnAdd, "btnAdd")
+        Me.btnAdd.Name = "btnAdd"
         '
         'FormUnitGen
         '
-        Me.AccessibleDescription = Nothing
-        Me.AccessibleName = Nothing
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Nothing
-        Me.Controls.Add(Me.KryptonButton2)
+        Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.KryptonButton1)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Font = Nothing
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Icon = Nothing
         Me.Name = "FormUnitGen"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -150,7 +122,7 @@ Partial Class FormUnitGen
     Public WithEvents Label1 As System.Windows.Forms.Label
     Public WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Public WithEvents KryptonButton1 As System.Windows.Forms.Button
-    Public WithEvents KryptonButton2 As System.Windows.Forms.Button
+    Public WithEvents btnAdd As System.Windows.Forms.Button
     Public WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Public WithEvents Column2 As System.Windows.Forms.DataGridViewComboBoxColumn
 End Class

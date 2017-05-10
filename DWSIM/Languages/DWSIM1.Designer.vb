@@ -4654,6 +4654,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Coeficiente de Difusão.
+        '''</summary>
+        Friend Shared ReadOnly Property DiffusionCoefficient() As String
+            Get
+                Return ResourceManager.GetString("DiffusionCoefficient", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Digite um valor entre 0 e 1..
         '''</summary>
         Friend Shared ReadOnly Property Digiteumvalorentre0e() As String
@@ -4938,6 +4947,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property EditordeComposies() As String
             Get
                 Return ResourceManager.GetString("EditordeComposies", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Editar Sistema de Unidades.
+        '''</summary>
+        Friend Shared ReadOnly Property EditUnitSystem() As String
+            Get
+                Return ResourceManager.GetString("EditUnitSystem", resourceCulture)
             End Get
         End Property
         

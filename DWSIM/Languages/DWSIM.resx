@@ -5484,4 +5484,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="NewtonUpdateError" xml:space="preserve">
     <value>Não foi possível encontrar uma solução usando o método de Newton - a matrix de gradientes é singular</value>
   </data>
+  <data name="EditUnitSystem" xml:space="preserve">
+    <value>Editar Sistema de Unidades</value>
+  </data>
+  <data name="DiffusionCoefficient" xml:space="preserve">
+    <value>Coeficiente de Difusão</value>
+  </data>
 </root>

@@ -1138,6 +1138,12 @@ Public Class FormFlowsheet
             Me.FormSurface.UpdateSelectedObject()
             Me.UpdateOpenEditForms()
 
+            If Me.ToolStripComboBoxUnitSystem.SelectedIndex > 2 Then
+                tsbEditUnits.Enabled = True
+            Else
+                tsbEditUnits.Enabled = False
+            End If
+
         Catch ex As Exception
 
         End Try
@@ -1146,6 +1152,11 @@ Public Class FormFlowsheet
 
     Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
         Dim frmUnit As New FormUnitGen
+        frmUnit.ShowDialog(Me)
+    End Sub
+
+    Private Sub ToolStripButton5_Click_1(sender As Object, e As EventArgs) Handles tsbEditUnits.Click
+        Dim frmUnit As New FormUnitGen With {.EditMode = True}
         frmUnit.ShowDialog(Me)
     End Sub
 

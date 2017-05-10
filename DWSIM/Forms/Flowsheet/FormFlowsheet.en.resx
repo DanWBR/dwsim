@@ -243,6 +243,17 @@
   <data name="ToolStripComboBoxUnitSystem.ToolTipText" xml:space="preserve">
     <value>System of Units</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tsbEditUnits.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsbEditUnits.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="tsbEditUnits.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="ToolStripButton7.Text" xml:space="preserve">
     <value>Add Unit System</value>
   </data>
@@ -255,7 +266,9 @@
   <data name="ToolStripComboBoxNumberFractionFormatting.ToolTipText" xml:space="preserve">
     <value>Composition/Fraction Number Formatting</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ToolStripUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 25</value>
+  </data>
   <data name="CloseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 22</value>
   </data>
@@ -547,7 +560,6 @@
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>This.toolStripMenuItem3</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dckPanel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>

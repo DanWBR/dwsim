@@ -25,16 +25,26 @@ Public Class FormUnitGen
 
     Dim frm As FormFlowsheet
 
+    Public EditMode As Boolean = False
+
     Private Sub FormUnitGen_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         frm = My.Application.ActiveSimulation
 
         Dim currentset As SystemsOfUnits.Units = frm.Options.SelectedUnitSystem
 
-        Dim rd As New Random
-        Me.TextBox1.Text = "UNID_" & rd.Next(1000, 9999)
+        If EditMode Then
+            btnAdd.Text = "OK"
+            Me.TextBox1.Text = currentset.Name
+            Me.TextBox1.Enabled = False
+            Me.Text = DWSIM.App.GetLocalString("EditUnitSystem")
+        Else
+            Dim rd As New Random
+            Me.TextBox1.Text = "UNID_" & rd.Next(1000, 9999)
+        End If
 
         Dim cb As DataGridViewComboBoxCell
+
         With Me.DataGridView1.Rows
             .Clear()
             cb = New DataGridViewComboBoxCell
@@ -261,11 +271,18 @@ Public Class FormUnitGen
         Me.Close()
     End Sub
 
-    Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KryptonButton2.Click
+    Private Sub KryptonButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
 
         If Me.TextBox1.Text <> "" Then
 
-            Dim su As New SystemsOfUnits.Units
+            Dim su As SystemsOfUnits.Units
+
+            If EditMode Then
+                su = frm.Options.SelectedUnitSystem
+            Else
+                su = New SystemsOfUnits.Units
+            End If
+
             With su
                 .Name = Me.TextBox1.Text
                 .pdp_boilingPointTemperature = Me.DataGridView1.Rows(0).Cells(1).Value
@@ -331,21 +348,21 @@ Public Class FormUnitGen
                 .foulingfactor = Me.DataGridView1.Rows(33).Cells(1).Value
             End With
 
-            If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
-
-                MessageBox.Show(DWSIM.App.GetLocalString("JexisteumSistemadeUn") & vbCrLf & DWSIM.App.GetLocalString("Porfavormodifiqueoet"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
-
+            If Not EditMode Then
+                If FormMain.AvailableUnitSystems.ContainsKey(su.Name) Then
+                    MessageBox.Show(DWSIM.App.GetLocalString("JexisteumSistemadeUn") & vbCrLf & DWSIM.App.GetLocalString("Porfavormodifiqueoet"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    frm.AddUnitSystem(su)
+                    frm.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
+                                             .NewValue = su,
+                                             .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), su.Name)})
+                    Me.Close()
+                End If
             Else
-
-                frm.AddUnitSystem(su)
-
-                frm.AddUndoRedoAction(New UndoRedoAction() With {.AType = UndoRedoActionType.SystemOfUnitsAdded,
-                                         .NewValue = su,
-                                         .Name = String.Format(DWSIM.App.GetLocalString("UndoRedo_SystemOfUnitsAdded"), su.Name)})
-
+                frm.UpdateOpenEditForms()
                 Me.Close()
-
             End If
+
         Else
 
             MessageBox.Show(DWSIM.App.GetLocalString("DefinaumnomeparaoSis"), DWSIM.App.GetLocalString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Information)
