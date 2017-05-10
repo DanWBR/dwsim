@@ -65,9 +65,11 @@ Namespace DWSIM.Utilities.Spreadsheet
 
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            ToolTipText = Xml.XmlConvert.DecodeName(ToolTipText)
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
+            ToolTipText = Xml.XmlConvert.EncodeName(ToolTipText)
             If Expression <> "" Then
                 Return XMLSerializer.XMLSerializer.Serialize(Me, True)
             Else

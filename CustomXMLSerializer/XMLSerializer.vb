@@ -102,7 +102,7 @@ Public Class XMLSerializer
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                                 If Not xel Is Nothing Then
                                     Dim val As Object = xel.Value
-                                    If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, Xml.XmlConvert.DecodeName(val), Nothing)
+                                    If Not val Is Nothing Then obj.GetType.GetProperty(prop.Name).SetValue(obj, val, Nothing)
                                 End If
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is [Enum] Then
                                 Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
@@ -199,7 +199,7 @@ Public Class XMLSerializer
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
                             If Not xel Is Nothing Then
                                 Dim val As String = xel.Value
-                                obj.GetType.GetField(prop.Name).SetValue(obj, Xml.XmlConvert.DecodeName(val))
+                                obj.GetType.GetField(prop.Name).SetValue(obj, val)
                             End If
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is [Enum] Then
                             Dim xel As XElement = (From xmlprop In xmlprops Select xmlprop Where xmlprop.Name = propname).FirstOrDefault
@@ -295,7 +295,7 @@ Public Class XMLSerializer
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Boolean Then
                                 .Add(New XElement(prop.Name, obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is String Then
-                                .Add(New XElement(prop.Name, Xml.XmlConvert.EncodeName(obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing).ToString)))
+                                .Add(New XElement(prop.Name, obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is [Enum] Then
                                 .Add(New XElement(prop.Name, obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing)))
                             ElseIf TypeOf obj.GetType.GetProperty(prop.Name).GetValue(obj, Nothing) Is Font Then
@@ -343,7 +343,7 @@ Public Class XMLSerializer
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Boolean Then
                             .Add(New XElement(prop.Name, obj.GetType.GetField(prop.Name).GetValue(obj)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is String Then
-                            .Add(New XElement(prop.Name, Xml.XmlConvert.EncodeName(obj.GetType.GetField(prop.Name).GetValue(obj).ToString)))
+                            .Add(New XElement(prop.Name, obj.GetType.GetField(prop.Name).GetValue(obj)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is [Enum] Then
                             .Add(New XElement(prop.Name, obj.GetType.GetField(prop.Name).GetValue(obj)))
                         ElseIf TypeOf obj.GetType.GetField(prop.Name).GetValue(obj) Is Font Then
