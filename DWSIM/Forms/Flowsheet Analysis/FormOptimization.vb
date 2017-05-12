@@ -851,6 +851,8 @@ Public Class FormOptimization
             Next
         End With
 
+        Dim exceptions As New List(Of Exception)
+
         'penalty function value
 
         Dim pen_val As Double
@@ -859,11 +861,12 @@ Public Class FormOptimization
         For i = 0 To Me.keysind.Count - 1
             If objID(i) <> "SpreadsheetCell" Then
                 form.Collections.FlowsheetObjectCollection(objID(i)).SetPropertyValue(objProp(i), x(i))
-                FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
+                exceptions = FlowsheetSolver.FlowsheetSolver.CalculateObject(form, objID(i))
             Else
                 form.FormSpreadsheet.SetCellValue(objProp(i), x(i))
-                FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
+                exceptions = FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(form, My.Settings.SolverMode)
             End If
+            If exceptions.Count > 0 Then Throw New AggregateException(exceptions)
             UpdateVariablesValues()
         Next
 

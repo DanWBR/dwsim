@@ -810,14 +810,14 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="mode">0 = Main Thread, 1 = Background Thread, 2 = Background Parallel Threads, 3 = Azure Service Bus, 4 = Network Computer</param>
     ''' <param name="ts">CancellationTokenSource instance from main flowsheet when calculating subflowsheets.</param>
     ''' <remarks></remarks>
-    Public Shared Sub SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False)
+    Public Shared Function SolveFlowsheet(ByVal fobj As Object, mode As Integer, Optional ByVal ts As CancellationTokenSource = Nothing, Optional frompgrid As Boolean = False, Optional Adjusting As Boolean = False) As List(Of Exception)
 
         If GlobalSettings.Settings.CalculatorActivated Then
 
             Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
             If Not fs Is Nothing Then
-                If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then Exit Sub
+                If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then Return New List(Of Exception)
             End If
 
             Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
@@ -868,7 +868,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             If objstack.Count = 0 Then
                 GlobalSettings.Settings.CalculatorBusy = False
-                Exit Sub
+                Return New List(Of Exception)
             End If
 
             fs.Solved = False
@@ -1249,8 +1249,6 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 fs.Solved = False
                 If baseexception IsNot Nothing Then fs.ErrorMessage = baseexception.ToString
 
-                age = Nothing
-
             End If
 
             'updates the flowsheet display information if the fobj is visible.
@@ -1266,9 +1264,19 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             RaiseEvent FlowsheetCalculationFinished(fobj, New System.EventArgs(), Nothing)
 
+            If age Is Nothing Then
+                Return New List(Of Exception)
+            Else
+                Return age.InnerExceptions.ToList()
+            End If
+
+        Else
+
+            Return New List(Of Exception)
+
         End If
 
-    End Sub
+    End Function
 
     ''' <summary>
     ''' Calculates a single object in the Flowsheet.
@@ -1276,7 +1284,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <param name="fobj">Flowsheet where the object belongs to.</param>
     ''' <param name="ObjID">Unique Id of the object ("Name" or "GraphicObject.Name" properties). This is not the object's Flowsheet display name ("Tag" property or its GraphicObject object).</param>
     ''' <remarks></remarks>
-    Public Shared Sub CalculateObject(ByVal fobj As Object, ByVal ObjID As String)
+    Public Shared Function CalculateObject(ByVal fobj As Object, ByVal ObjID As String) As List(Of Exception)
 
         Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
         Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
@@ -1296,11 +1304,15 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             fqueue.CalculationQueue.Enqueue(objargs)
 
-            SolveFlowsheet(fobj, Settings.SolverMode, , True)
+            Return SolveFlowsheet(fobj, Settings.SolverMode, , True)
+
+        Else
+
+            Return New List(Of Exception)
 
         End If
 
-    End Sub
+    End Function
 
     ''' <summary>
     ''' Calculates a single object in the Flowsheet.
@@ -1631,7 +1643,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             End If
         Next
 
-        SolveFlowsheet(fobj, Settings.SolverMode, Nothing, False, True)
+        Dim exceptions = SolveFlowsheet(fobj, Settings.SolverMode, Nothing, False, True)
+
+        If exceptions.Count > 0 Then Throw New AggregateException(exceptions)
 
         Dim fx(x.Length - 1) As Double
         i = 0
@@ -1712,7 +1726,9 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             End If
         Next
 
-        SolveFlowsheet(fobj, Settings.SolverMode, Nothing, False, True)
+        Dim exceptions = SolveFlowsheet(fobj, Settings.SolverMode, Nothing, False, True)
+
+        If exceptions.Count > 0 Then Throw New AggregateException(exceptions)
 
         Dim fx(x.Length - 1) As Double
         i = 0
