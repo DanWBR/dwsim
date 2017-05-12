@@ -2136,7 +2136,6 @@ Public Class FlowsheetSurface
 
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
                 Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("MSTR003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             Case ObjectType.EnergyStream
 

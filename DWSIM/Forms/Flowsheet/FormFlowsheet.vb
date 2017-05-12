@@ -680,6 +680,10 @@ Public Class FormFlowsheet
 
 #Region "    Click Event Handlers "
 
+    Private Sub ToolStripButton5_Click_2(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        Process.Start("https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx")
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
     End Sub
