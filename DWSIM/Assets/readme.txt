@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 8 - May 2017
+Version 4.3 Update 10 - May 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 10
+
+- [NEW] Quick-edit button for Systems of Units
+- [CHG] Changed default number formatting
+- [FIX] Flowsheet Solver fixes
 
 Version 4.3 Update 8/9
 
