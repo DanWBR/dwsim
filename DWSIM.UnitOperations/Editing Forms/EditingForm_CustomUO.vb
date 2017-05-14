@@ -119,6 +119,10 @@ Public Class EditingForm_CustomUO
 
             If .GraphicObject.OutputConnectors(3).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.OutputConnectors(3).AttachedConnector.AttachedTo.Tag
 
+            'exec engine
+
+            cbExecEngine.SelectedIndex = .ExecutionEngine
+
             'variables
 
             dgvinputvars.Rows.Clear()
@@ -576,4 +580,7 @@ Public Class EditingForm_CustomUO
         UpdateInputStringVars()
     End Sub
 
+    Private Sub cbExecEngine_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbExecEngine.SelectedIndexChanged
+        SimObject.ExecutionEngine = cbExecEngine.SelectedIndex
+    End Sub
 End Class

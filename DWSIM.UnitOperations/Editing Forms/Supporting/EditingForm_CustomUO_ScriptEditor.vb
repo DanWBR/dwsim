@@ -226,10 +226,16 @@ Imports System.Drawing
         btnUndo.Enabled = txtScript.CanUndo
         btnRedo.Enabled = txtScript.CanRedo
 
-        txtScript.ShowAutoComplete(CAPEOPEN)
-        txtScript.ShowToolTip(reader, CAPEOPEN)
+        Try
+            txtScript.ShowAutoComplete(CAPEOPEN)
+        Catch ex As Exception
+        End Try
+        Try
+            txtScript.ShowToolTip(reader, CAPEOPEN)
+        Catch ex As Exception
+        End Try
         If Not CAPEOPEN Then ScriptUO.ScriptText = txtScript.Text
-       
+
     End Sub
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles btnUndo.Click

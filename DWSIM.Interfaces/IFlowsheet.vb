@@ -103,12 +103,16 @@
     Sub WriteSpreadsheetVariables()
 
     Property MobileCompatibilityMode As Boolean
+
     Property Message As String
+
     Sub SetMessageListener(act As Action(Of String))
 
     Property Solved As Boolean
 
     Property ErrorMessage As String
+
+    Sub RunCodeOnUIThread(act As Action)
 
 End Interface
 

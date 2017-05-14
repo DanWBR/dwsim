@@ -124,6 +124,8 @@ Partial Class EditingForm_CustomUO
         Me.cbInlet1 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbExecEngine = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -907,9 +909,24 @@ Partial Class EditingForm_CustomUO
         'GroupBox2
         '
         resources.ApplyResources(Me.GroupBox2, "GroupBox2")
+        Me.GroupBox2.Controls.Add(Me.cbExecEngine)
+        Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.TabStop = False
+        '
+        'cbExecEngine
+        '
+        resources.ApplyResources(Me.cbExecEngine, "cbExecEngine")
+        Me.cbExecEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbExecEngine.FormattingEnabled = True
+        Me.cbExecEngine.Items.AddRange(New Object() {resources.GetString("cbExecEngine.Items"), resources.GetString("cbExecEngine.Items1")})
+        Me.cbExecEngine.Name = "cbExecEngine"
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
         '
         'Button1
         '
@@ -948,6 +965,7 @@ Partial Class EditingForm_CustomUO
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1046,4 +1064,6 @@ Partial Class EditingForm_CustomUO
     Public WithEvents btnRemoveInputStringVar As ToolStripButton
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents cbExecEngine As System.Windows.Forms.ComboBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
 End Class

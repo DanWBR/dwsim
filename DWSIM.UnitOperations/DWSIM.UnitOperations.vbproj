@@ -111,6 +111,9 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Python.Runtime">
+      <HintPath>..\DWSIM\References\Python.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="RichTextBoxExtended">
       <HintPath>..\DWSIM\References\RichTextBoxExtended.dll</HintPath>
     </Reference>

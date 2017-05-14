@@ -3145,6 +3145,10 @@ Public Class FormFlowsheet
 
     Public Property ErrorMessage As String = "" Implements IFlowsheet.ErrorMessage
 
+    Public Sub RunCodeOnUIThread(act As Action) Implements IFlowsheet.RunCodeOnUIThread
+        Invoke(act)
+    End Sub
+
 #End Region
 
 End Class

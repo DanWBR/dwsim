@@ -32,12 +32,18 @@ Imports System.Linq
 Imports System.ComponentModel
 Imports System.Drawing.Design
 Imports Microsoft.Scripting.Hosting
+Imports Python.Runtime
 
 Namespace UnitOperations
 
     <System.Serializable()> Public Class CustomUO
 
         Inherits UnitOperations.UnitOpBaseClass
+
+        Public Enum PythonExecutionEngine
+            IronPython = 0
+            PythonNET = 1
+        End Enum
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_CustomUO
 
@@ -56,6 +62,10 @@ Namespace UnitOperations
         Public Property InputStringVariables As New Dictionary(Of String, String)
         Public Property InputVariables As New Dictionary(Of String, Double)
         Public Property OutputVariables As New Dictionary(Of String, Double)
+
+        Private pyinitialized As Boolean = False
+
+        Public Property ExecutionEngine As PythonExecutionEngine = PythonExecutionEngine.IronPython
 
         Public Property FontName() As String
             Get
@@ -195,39 +205,6 @@ Namespace UnitOperations
                 oes1 = Nothing
             End If
 
-            engine = IronPython.Hosting.Python.CreateEngine()
-            engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
-            engine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
-            engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
-            engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
-            scope = engine.CreateScope()
-            scope.SetVariable("Flowsheet", FlowSheet)
-            scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
-            scope.SetVariable("Me", Me)
-
-            For Each variable In InputStringVariables
-                scope.SetVariable(variable.Key, variable.Value)
-            Next
-
-            For Each variable In InputVariables
-                scope.SetVariable(variable.Key, variable.Value)
-            Next
-
-            If Not ims1 Is Nothing Then scope.SetVariable("ims1", ims1)
-            If Not ims2 Is Nothing Then scope.SetVariable("ims2", ims2)
-            If Not ims3 Is Nothing Then scope.SetVariable("ims3", ims3)
-            If Not ims4 Is Nothing Then scope.SetVariable("ims4", ims4)
-            If Not ims5 Is Nothing Then scope.SetVariable("ims5", ims5)
-            If Not ims6 Is Nothing Then scope.SetVariable("ims6", ims6)
-            If Not oms1 Is Nothing Then scope.SetVariable("oms1", oms1)
-            If Not oms2 Is Nothing Then scope.SetVariable("oms2", oms2)
-            If Not oms3 Is Nothing Then scope.SetVariable("oms3", oms3)
-            If Not oms4 Is Nothing Then scope.SetVariable("oms4", oms4)
-            If Not oms5 Is Nothing Then scope.SetVariable("oms5", oms5)
-            If Not oms6 Is Nothing Then scope.SetVariable("oms6", oms6)
-            If Not ies1 Is Nothing Then scope.SetVariable("ies1", ies1)
-            If Not oes1 Is Nothing Then scope.SetVariable("oes1", oes1)
-
             Dim txtcode As String = ""
             If Not Includes Is Nothing Then
                 For Each fname As String In Me.Includes
@@ -235,27 +212,148 @@ Namespace UnitOperations
                 Next
             End If
             txtcode += Me.ScriptText
-            Dim source As Microsoft.Scripting.Hosting.ScriptSource = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
-            Try
-                Me.ErrorMessage = ""
-                source.Execute(Me.scope)
-                OutputVariables.Clear()
-                For Each variable In scope.GetVariableNames
-                    If TypeOf scope.GetVariable(variable) Is Double Or TypeOf scope.GetVariable(variable) Is Integer Then OutputVariables.Add(variable, scope.GetVariable(variable))
+
+            If ExecutionEngine = PythonExecutionEngine.IronPython Then
+
+                engine = IronPython.Hosting.Python.CreateEngine()
+                engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+                engine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
+                engine.Runtime.LoadAssembly(GetType(GraphicObject).Assembly)
+                engine.Runtime.LoadAssembly(GetType(GraphicsSurface).Assembly)
+                scope = engine.CreateScope()
+                scope.SetVariable("Flowsheet", FlowSheet)
+                scope.SetVariable("Plugins", FlowSheet.UtilityPlugins)
+                scope.SetVariable("Me", Me)
+
+                For Each variable In InputStringVariables
+                    scope.SetVariable(variable.Key, variable.Value)
                 Next
-            Catch ex As Exception
-                Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
-                Me.ErrorMessage = ops.FormatException(ex).ToString
-                Me.DeCalculate()
-                engine = Nothing
-                scope = Nothing
-                source = Nothing
-                Throw New Exception(Me.ErrorMessage, ex)
-            Finally
-                engine = Nothing
-                scope = Nothing
-                source = Nothing
-            End Try
+
+                For Each variable In InputVariables
+                    scope.SetVariable(variable.Key, variable.Value)
+                Next
+
+                If Not ims1 Is Nothing Then scope.SetVariable("ims1", ims1)
+                If Not ims2 Is Nothing Then scope.SetVariable("ims2", ims2)
+                If Not ims3 Is Nothing Then scope.SetVariable("ims3", ims3)
+                If Not ims4 Is Nothing Then scope.SetVariable("ims4", ims4)
+                If Not ims5 Is Nothing Then scope.SetVariable("ims5", ims5)
+                If Not ims6 Is Nothing Then scope.SetVariable("ims6", ims6)
+                If Not oms1 Is Nothing Then scope.SetVariable("oms1", oms1)
+                If Not oms2 Is Nothing Then scope.SetVariable("oms2", oms2)
+                If Not oms3 Is Nothing Then scope.SetVariable("oms3", oms3)
+                If Not oms4 Is Nothing Then scope.SetVariable("oms4", oms4)
+                If Not oms5 Is Nothing Then scope.SetVariable("oms5", oms5)
+                If Not oms6 Is Nothing Then scope.SetVariable("oms6", oms6)
+                If Not ies1 Is Nothing Then scope.SetVariable("ies1", ies1)
+                If Not oes1 Is Nothing Then scope.SetVariable("oes1", oes1)
+
+                Dim source As Microsoft.Scripting.Hosting.ScriptSource = Me.engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+                Try
+                    Me.ErrorMessage = ""
+                    source.Execute(Me.scope)
+                    OutputVariables.Clear()
+                    For Each variable In scope.GetVariableNames
+                        If TypeOf scope.GetVariable(variable) Is Double Or TypeOf scope.GetVariable(variable) Is Integer Then OutputVariables.Add(variable, scope.GetVariable(variable))
+                    Next
+                Catch ex As Exception
+                    Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
+                    Me.ErrorMessage = ops.FormatException(ex).ToString
+                    Me.DeCalculate()
+                    engine = Nothing
+                    scope = Nothing
+                    source = Nothing
+                    Throw New Exception(Me.ErrorMessage, ex)
+                Finally
+                    engine = Nothing
+                    scope = Nothing
+                    source = Nothing
+                End Try
+
+            Else
+
+                If Not pyinitialized Then
+
+                    Dim t As Task = Task.Factory.StartNew(Sub()
+                                                              FlowSheet.RunCodeOnUIThread(Sub()
+                                                                                              PythonEngine.PythonHome = "E:\Downloads\python_thermo\python-2.7.13.amd64"
+                                                                                              PythonEngine.Initialize()
+                                                                                              pyinitialized = True
+                                                                                          End Sub)
+                                                          End Sub)
+                    t.Wait()
+
+                    Dim t2 As Task = Task.Factory.StartNew(Sub()
+                                                               FlowSheet.RunCodeOnUIThread(Sub()
+                                                                                               PythonEngine.BeginAllowThreads()
+                                                                                           End Sub)
+                                                           End Sub)
+                    t2.Wait()
+
+                End If
+
+                Using Py.GIL
+
+                    Try
+
+                        Dim sys As Object = PythonEngine.ImportModule("sys")
+
+                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+
+                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+
+                        Me.ErrorMessage = ""
+
+                        Dim locals As New PyDict()
+
+                        locals.SetItem("Flowsheet", FlowSheet.ToPython)
+                        locals.SetItem("Plugins", FlowSheet.UtilityPlugins.ToPython)
+                        locals.SetItem("Me", Me.ToPython)
+
+                        For Each variable In InputStringVariables
+                            locals.SetItem(variable.Key, variable.Value.ToPython)
+                        Next
+
+                        For Each variable In InputVariables
+                            locals.SetItem(variable.Key, variable.Value.ToPython)
+                        Next
+
+                        If Not ims1 Is Nothing Then locals.SetItem("ims1", ims1.ToPython)
+                        If Not ims2 Is Nothing Then locals.SetItem("ims2", ims2.ToPython)
+                        If Not ims3 Is Nothing Then locals.SetItem("ims3", ims3.ToPython)
+                        If Not ims4 Is Nothing Then locals.SetItem("ims4", ims4.ToPython)
+                        If Not ims5 Is Nothing Then locals.SetItem("ims5", ims5.ToPython)
+                        If Not ims6 Is Nothing Then locals.SetItem("ims6", ims6.ToPython)
+                        If Not oms1 Is Nothing Then locals.SetItem("oms1", oms1.ToPython)
+                        If Not oms2 Is Nothing Then locals.SetItem("oms2", oms2.ToPython)
+                        If Not oms3 Is Nothing Then locals.SetItem("oms3", oms3.ToPython)
+                        If Not oms4 Is Nothing Then locals.SetItem("oms4", oms4.ToPython)
+                        If Not oms5 Is Nothing Then locals.SetItem("oms5", oms5.ToPython)
+                        If Not oms6 Is Nothing Then locals.SetItem("oms6", oms6.ToPython)
+                        If Not ies1 Is Nothing Then locals.SetItem("ies1", ies1.ToPython)
+                        If Not oes1 Is Nothing Then locals.SetItem("oes1", oes1.ToPython)
+
+                        PythonEngine.Exec(txtcode, Nothing, locals.Handle)
+
+                        FlowSheet.ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+
+                        OutputVariables.Clear()
+
+                    Catch ex As Exception
+
+                        Me.ErrorMessage = ex.Message
+
+                        Me.DeCalculate()
+
+                        Throw New Exception(Me.ErrorMessage, ex)
+
+                    Finally
+
+                    End Try
+
+                End Using
+
+            End If
 
             If Not oes1 Is Nothing Then
                 oes1.GraphicObject.Calculated = True
