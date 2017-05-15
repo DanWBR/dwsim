@@ -422,7 +422,7 @@ Namespace Reactors
 
         Private Function FunctionValue2N(ByVal x() As Double) As Double()
 
-            Dim i, j, n, c As Integer
+            Dim i, j, n, c, pos As Integer
 
             n = x.Length - 5
             c = Me.ComponentIDs.Count - 1
@@ -430,6 +430,8 @@ Namespace Reactors
             Dim lagm(n), nv, nl1, nl2, ns, nt As Double
 
             Dim f(x.Length - 1) As Double
+
+            Dim ids = ims.Phases(0).Compounds.Keys.ToList
 
             Dim sum As Double
 
@@ -447,19 +449,21 @@ Namespace Reactors
                 For j = 0 To n
                     sum += ElementMatrix(j, i) * lagm(j)
                 Next
-                xv_0(i) = Exp(sum - (igcp(i) + Log(fv_0(i) * P / 101325)))
-                xl1_0(i) = Exp(sum - (igcp(i) + Log(fl1_0(i) * P / 101325)))
-                xl2_0(i) = Exp(sum - (igcp(i) + Log(fl2_0(i) * P / 101325)))
-                xs_0(i) = Exp(sum - (igcp(i) + Log(fs_0(i) * P / 101325)))
+                pos = ids.IndexOf(ComponentIDs(i))
+                xv_0(pos) = Exp(sum - (igcp(i) + Log(fv_0(pos) * P / 101325)))
+                xl1_0(pos) = Exp(sum - (igcp(i) + Log(fl1_0(pos) * P / 101325)))
+                xl2_0(pos) = Exp(sum - (igcp(i) + Log(fl2_0(pos) * P / 101325)))
+                xs_0(pos) = Exp(sum - (igcp(i) + Log(fs_0(pos) * P / 101325)))
             Next
 
             For i = 0 To n
                 sum = 0
                 For j = 0 To c
-                    sum += ElementMatrix(i, j) * xv_0(j) * nv
-                    sum += ElementMatrix(i, j) * xl1_0(j) * nl1
-                    sum += ElementMatrix(i, j) * xl2_0(j) * nl2
-                    sum += ElementMatrix(i, j) * xs_0(j) * ns
+                    pos = ids.IndexOf(ComponentIDs(j))
+                    sum += ElementMatrix(i, j) * xv_0(pos) * nv
+                    sum += ElementMatrix(i, j) * xl1_0(pos) * nl1
+                    sum += ElementMatrix(i, j) * xl2_0(pos) * nl2
+                    sum += ElementMatrix(i, j) * xs_0(pos) * ns
                 Next
                 f(i) = sum - TotalElements(i)
             Next
@@ -1004,7 +1008,7 @@ Namespace Reactors
 
                     Dim xm0(ims.Phases(0).Compounds.Count - 1) As Double, ids As New List(Of String)
 
-                    ids = N0.Keys.ToList
+                    ids = ims.Phases(0).Compounds.Keys.ToList
 
                     i = 0
                     For Each id In ComponentIDs
@@ -1154,7 +1158,8 @@ Namespace Reactors
 
                     'this call to FunctionValue2G returns the final gibbs energy in kJ/s.
 
-                    For i = 0 To c
+                    For Each id In ComponentIDs
+                        i = ids.IndexOf(id)
                         N(ids(i)) = nv * xv_0(i) + nl1 * xl1_0(i) + nl2 * xl2_0(i) + ns * xs_0(i)
                         DN(ids(i)) = N(ids(i)) - N0(ids(i))
                     Next

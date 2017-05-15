@@ -91,6 +91,10 @@ Namespace Streams
         ''' <remarks></remarks>
         Public Overrides Property EnergyFlow() As Double?
 
+        Public Sub SetValue(ByVal energyflow_kW As Double)
+            EnergyFlow = energyflow_kW
+        End Sub
+
         Public Sub Assign(ByVal ASource As EnergyStream)
 
             'Copy properties from the ASource stream.

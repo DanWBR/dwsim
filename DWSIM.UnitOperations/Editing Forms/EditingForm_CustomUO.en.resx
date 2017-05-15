@@ -338,7 +338,7 @@
     <value>Python Execution Engine</value>
   </data>
   <data name="Button1.Text" xml:space="preserve">
-    <value>Open IronPython Script Editor</value>
+    <value>Open Python Script Editor</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>

@@ -112,7 +112,7 @@ Public Class EditingForm_CustomUO
             cbEnergyE.Items.Clear()
             cbEnergyE.Items.AddRange(eslist)
 
-            If .GraphicObject.InputConnectors(3).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.InputConnectors(3).AttachedConnector.AttachedTo.Tag
+            If .GraphicObject.InputConnectors(3).IsAttached Then cbEnergyE.SelectedItem = .GraphicObject.InputConnectors(3).AttachedConnector.AttachedFrom.Tag
 
             cbEnergyS.Items.Clear()
             cbEnergyS.Items.AddRange(eslist)
@@ -217,19 +217,19 @@ Public Class EditingForm_CustomUO
 
         If Loaded Then
 
-            Dim text As String = cbEnergyE.Text
+            Dim text As String = cbEnergyE.SelectedItem.ToString
 
             If text <> "" Then
 
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(3).IsAttached Then
+                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(0).IsAttached Then
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
 
-                If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(3).AttachedConnector.AttachedFrom, gobj)
+                If gobj.InputConnectors(3).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(3).AttachedConnector.AttachedFrom, gobj)
                 flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 3)
 
             End If
@@ -242,14 +242,14 @@ Public Class EditingForm_CustomUO
 
         If Loaded Then
 
-            Dim text As String = cbEnergyS.Text
+            Dim text As String = cbEnergyS.SelectedItem.ToString
 
             If text <> "" Then
 
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(3).IsAttached Then
+                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(0).IsAttached Then
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
