@@ -250,10 +250,10 @@
     <value>Wärmetauscher</value>
   </data>
   <data name="IPUO_Desc" xml:space="preserve">
-    <value>IronPython Unit Operation, welche per Script definiert wird</value>
+    <value>Python Unit Operation, welche per Script definiert wird</value>
   </data>
   <data name="IPUO_Name" xml:space="preserve">
-    <value>IronPython Script</value>
+    <value>Python Script</value>
   </data>
   <data name="MIX_Desc" xml:space="preserve">
     <value>Mischt mehrere Materialströme zu einem einzigen zusammen</value>

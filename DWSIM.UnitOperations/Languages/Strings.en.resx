@@ -250,10 +250,10 @@
     <value>Heat Exchanger</value>
   </data>
   <data name="IPUO_Desc" xml:space="preserve">
-    <value>IronPython script-defined Unit Operation</value>
+    <value>Python Script Unit Operation</value>
   </data>
   <data name="IPUO_Name" xml:space="preserve">
-    <value>IronPython Script</value>
+    <value>Python Script</value>
   </data>
   <data name="MIX_Desc" xml:space="preserve">
     <value>Mixes multiple Material Streams into a single one</value>

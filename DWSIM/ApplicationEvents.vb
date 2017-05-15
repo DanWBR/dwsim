@@ -3,6 +3,7 @@ Imports System.Linq
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Threading
+Imports System.Runtime.InteropServices
 
 Namespace My
 
@@ -14,6 +15,10 @@ Namespace My
     ' StartupNextInstance: Raised when launching a single-instance application and the application is already active. 
     ' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
     Partial Friend Class MyApplication
+
+        <DllImport("kernel32.dll", SetLastError:=True)> Private Shared Function SetDllDirectory(lpPathName As String) As Boolean
+
+        End Function
 
         Public Property InitializationExceptions As New List(Of Exception)
 
@@ -126,6 +131,10 @@ Namespace My
             End If
 
             InitializationExceptions = DWSIM.App.InitializeSettings()
+
+            If My.Settings.PythonPath <> "" Then
+                SetDllDirectory(My.Settings.PythonPath)
+            End If
 
         End Sub
 

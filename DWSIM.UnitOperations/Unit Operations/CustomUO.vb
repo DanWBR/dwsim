@@ -105,8 +105,8 @@ Namespace UnitOperations
 
         Public Sub New()
             MyBase.New()
-            ComponentName = "IronPython UO"
-            ComponentDescription = "IronPython Scripting Unit Operation"
+            ComponentName = "Python UO"
+            ComponentDescription = "Python Scripting Unit Operation"
             InputVariables = New Dictionary(Of String, Double)
             InputStringVariables = New Dictionary(Of String, String)
             OutputVariables = New Dictionary(Of String, Double)
@@ -276,7 +276,9 @@ Namespace UnitOperations
 
                     Dim t As Task = Task.Factory.StartNew(Sub()
                                                               FlowSheet.RunCodeOnUIThread(Sub()
-                                                                                              PythonEngine.PythonHome = "E:\Downloads\python_thermo\python-2.7.13.amd64"
+                                                                                              If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                                  PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                                              End If
                                                                                               PythonEngine.Initialize()
                                                                                               pyinitialized = True
                                                                                           End Sub)

@@ -250,10 +250,10 @@
     <value>Trocador de Calor Rigoroso</value>
   </data>
   <data name="IPUO_Desc" xml:space="preserve">
-    <value>Operação unitária definida por um script IronPython</value>
+    <value>Operação unitária definida por um script Python</value>
   </data>
   <data name="IPUO_Name" xml:space="preserve">
-    <value>Script IronPython</value>
+    <value>Script Python</value>
   </data>
   <data name="MIX_Desc" xml:space="preserve">
     <value>Mistura múltiplas Correntes de Matéria em uma</value>
