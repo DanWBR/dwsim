@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 10 - May 2017
+Version 4.3 Update 11 - May 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 11
+
+- [NEW] Python.NET is now an option to parse Python scripts on the Script Unit Operation - enables 
+        interoperability between DWSIM and a full Python 2.7 ecosystem
+- [NEW] New Sample: Cantera (https://github.com/Cantera/cantera/wiki) Integration with DWSIM
+- [FIX] Fixed a bug with the Gibbs Reactor
 
 Version 4.3 Update 10
 

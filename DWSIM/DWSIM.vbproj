@@ -1122,6 +1122,7 @@
     <None Include="Assets\samples\Benzene-m-Xylene-SLE.dwrsd" />
     <None Include="Assets\samples\Benzene-p-Xylene-SLE.dwrsd" />
     <None Include="Assets\samples\Biodiesel Production.dwxmz" />
+    <None Include="Assets\samples\Cantera Interop.dwxmz" />
     <None Include="Assets\samples\Carbon Combustion.dwxml" />
     <None Include="Assets\samples\Cavett%27s Problem.dwxml" />
     <None Include="Assets\samples\Cyclohexane-Aniline-NRTL.dwrsd" />
