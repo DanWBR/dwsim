@@ -416,6 +416,7 @@ Namespace Reactors
             Next
 
             Dim abssum0 = AbsSum(FunctionValue2N(tmpx0))
+            If Double.IsNaN(abssum0) Then abssum0 = Double.MaxValue
             Return abssum0
 
         End Function
@@ -676,7 +677,7 @@ Namespace Reactors
                 Case PropertyPackages.State.Vapor, PropertyPackages.State.Liquid
                     For i = 0 To fc.Length - 1
                         If Tf(i) > T Then
-                            newfc(i) = 1.0E+30
+                            'newfc(i) = 1.0E+30
                         End If
                     Next
                 Case PropertyPackages.State.Solid
@@ -1103,19 +1104,26 @@ Namespace Reactors
 
                             'this call to the brent solver calculates the damping factor which minimizes the error (fval).
 
-                            tmpx = x.Clone
-                            tmpdx = dx.Clone
-                            fval = brentsolver.brentoptimize(0.001#, 2.0#, 0.0001, df)
+                            If success Then
 
-                            For i = 0 To x.Length - 1
-                                x(i) -= df * dx(i)
-                            Next
+                                tmpx = x.Clone
+                                tmpdx = dx.Clone
+                                fval = brentsolver.brentoptimize(1.0E-20, 1.0#, 1.0E-30, df)
+
+                                For i = 0 To x.Length - 1
+                                    x(i) -= df * dx(i)
+                                Next
+
+                            Else
+
+                                For i = 0 To x.Length - 1
+                                    x(i) *= 0.99
+                                Next
+
+                            End If
+
 
                             ni_int += 1
-
-                            If AbsSum(dx) = 0.0# Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("NewtonUpdateError"))
-                            End If
 
                             If Double.IsNaN(Sum(fx)) Then Throw New Exception(FlowSheet.GetTranslatedString("ConvergenceError"))
 
