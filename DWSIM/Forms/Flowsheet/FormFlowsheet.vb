@@ -463,7 +463,11 @@ Public Class FormFlowsheet
                                             Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, MessageType.Information)
                                         End If
                                     End If
-                                    FormScript.RunScript(scr.ScriptText, Me)
+                                    If scr.PythonInterpreter = Scripts.Interpreter.IronPython Then
+                                        FormScript.RunScript_IronPython(scr.ScriptText, Me)
+                                    Else
+                                        FormScript.RunScript_PythonNET(scr.ScriptText, Me)
+                                    End If
                                 End If
                             Next
                         Else

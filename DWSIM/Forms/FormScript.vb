@@ -8,6 +8,8 @@ Imports System.ComponentModel
 Imports FarsiLibrary.Win
 Imports DWSIM.DWSIM.Extras
 Imports System.Threading
+Imports Python.Runtime
+Imports System.Threading.Tasks
 
 <System.Serializable()> Public Class FormScript
 
@@ -93,15 +95,27 @@ Imports System.Threading
         AbortScript = False
         If Not Me.TabStripScripts.SelectedItem Is Nothing Then
             If DWSIM.App.IsRunningOnMono Then
-                RunScript(DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text, fc)
+                Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
+                Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).cbPythonEngine.SelectedIndex
+                If interp = 0 Then
+                    RunScript_IronPython(script, fc)
+                Else
+                    RunScript_PythonNET(script, fc)
+                End If
             Else
-                RunScript(DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text, fc)
+                Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text
+                Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).cbPythonEngine.SelectedIndex
+                If interp = 0 Then
+                    RunScript_IronPython(script, fc)
+                Else
+                    RunScript_PythonNET(script, fc)
+                End If
             End If
         End If
 
     End Sub
 
-    Public Shared Sub RunScript(scripttext As String, fsheet As FormFlowsheet)
+    Public Shared Sub RunScript_IronPython(scripttext As String, fsheet As FormFlowsheet)
 
         Dim scope As Microsoft.Scripting.Hosting.ScriptScope
         Dim engine As Microsoft.Scripting.Hosting.ScriptEngine
@@ -155,6 +169,72 @@ Imports System.Threading
         End Try
 
     End Sub
+
+    Public Shared Sub RunScript_PythonNET(scripttext As String, fsheet As FormFlowsheet)
+
+        If Not Settings.PythonInitialized Then
+
+            Dim t As Task = Task.Factory.StartNew(Sub()
+                                                      fsheet.RunCodeOnUIThread(Sub()
+                                                                                   If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                       PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                                   End If
+                                                                                   PythonEngine.Initialize()
+                                                                                   Settings.PythonInitialized = True
+                                                                               End Sub)
+                                                  End Sub)
+            t.Wait()
+
+            Dim t2 As Task = Task.Factory.StartNew(Sub()
+                                                       fsheet.RunCodeOnUIThread(Sub()
+                                                                                    PythonEngine.BeginAllowThreads()
+                                                                                End Sub)
+                                                   End Sub)
+            t2.Wait()
+
+        End If
+
+        Using Py.GIL
+
+            Try
+
+                Dim sys As Object = PythonEngine.ImportModule("sys")
+
+                Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+
+                PythonEngine.RunSimpleString(codeToRedirectOutput)
+
+                Dim locals As New PyDict()
+
+                locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
+                locals.SetItem("Flowsheet", fsheet.ToPython)
+                locals.SetItem("AbortScript", AbortScript.ToPython)
+                locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.ToPython)
+                Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                locals.SetItem("Solver", Solver.ToPython)
+
+                PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+
+                fsheet.WriteToLog(sys.stdout.getvalue().ToString, Color.Blue, DWSIM.Flowsheet.MessageType.Information)
+
+            Catch ex As Exception
+
+                If My.Application.CommandLineMode Then
+                    Console.WriteLine()
+                    Console.WriteLine("Error running script: " & ex.ToString)
+                    Console.WriteLine()
+                Else
+                    fsheet.WriteToLog("Error running script: " & ex.Message.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
+                End If
+
+            Finally
+
+            End Try
+
+        End Using
+
+    End Sub
+
 
     Private Sub CutToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CutToolStripButton.Click
         If Not DWSIM.App.IsRunningOnMono Then
@@ -230,7 +310,8 @@ Imports System.Threading
                                 {.ID = Guid.NewGuid().ToString,
                                  .Title = tab.Title,
                                  .Linked = seditor.chkLink.Checked,
-                                .ScriptText = seditor.txtScript.Text}
+                                 .ScriptText = seditor.txtScript.Text,
+                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
                 Select Case seditor.cbLinkedObject.SelectedIndex
                     Case 0
                         scr.LinkedObjectType = Scripts.ObjectType.Simulation
@@ -282,7 +363,8 @@ Imports System.Threading
                                 {.ID = Guid.NewGuid().ToString,
                                  .Title = tab.Title,
                                  .Linked = seditor.chkLink.Checked,
-                                .ScriptText = seditor.txtScript.Text}
+                                 .ScriptText = seditor.txtScript.Text,
+                                 .PythonInterpreter = seditor.cbPythonEngine.SelectedIndex}
                 Select Case seditor.cbLinkedObject.SelectedIndex
                     Case 0
                         scr.LinkedObjectType = Scripts.ObjectType.Simulation
@@ -438,6 +520,8 @@ Imports System.Threading
                         .cbLinkedEvent.SelectedIndex = 7
                 End Select
 
+                .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
+
             End With
 
         Else
@@ -512,6 +596,8 @@ Imports System.Threading
                     Case Scripts.EventType.SimulationTimer60
                         .cbLinkedEvent.SelectedIndex = 7
                 End Select
+
+                .cbPythonEngine.SelectedIndex = scriptdata.PythonInterpreter
 
             End With
 

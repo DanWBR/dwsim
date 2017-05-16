@@ -118,6 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>776, 11</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 13</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>Python Interpreter</value>
+  </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
   </data>
@@ -126,6 +135,9 @@
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Object</value>
+  </data>
+  <data name="chkLink.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 10</value>
   </data>
   <data name="chkLink.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 17</value>

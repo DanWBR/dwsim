@@ -63,8 +63,6 @@ Namespace UnitOperations
         Public Property InputVariables As New Dictionary(Of String, Double)
         Public Property OutputVariables As New Dictionary(Of String, Double)
 
-        Private pyinitialized As Boolean = False
-
         Public Property ExecutionEngine As PythonExecutionEngine = PythonExecutionEngine.IronPython
 
         Public Property FontName() As String
@@ -272,7 +270,7 @@ Namespace UnitOperations
 
             Else
 
-                If Not pyinitialized Then
+                If Not Settings.PythonInitialized Then
 
                     Dim t As Task = Task.Factory.StartNew(Sub()
                                                               FlowSheet.RunCodeOnUIThread(Sub()
@@ -280,7 +278,7 @@ Namespace UnitOperations
                                                                                                   PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
                                                                                               End If
                                                                                               PythonEngine.Initialize()
-                                                                                              pyinitialized = True
+                                                                                              Settings.PythonInitialized = True
                                                                                           End Sub)
                                                           End Sub)
                     t.Wait()

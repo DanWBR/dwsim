@@ -24,6 +24,8 @@ Partial Class ScriptEditorControl
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ScriptEditorControl))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cbPythonEngine = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cbLinkedEvent = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbLinkedObject = New System.Windows.Forms.ComboBox()
@@ -37,12 +39,27 @@ Partial Class ScriptEditorControl
         'Panel1
         '
         resources.ApplyResources(Me.Panel1, "Panel1")
+        Me.Panel1.Controls.Add(Me.cbPythonEngine)
+        Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.cbLinkedEvent)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.cbLinkedObject)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.chkLink)
         Me.Panel1.Name = "Panel1"
+        '
+        'cbPythonEngine
+        '
+        resources.ApplyResources(Me.cbPythonEngine, "cbPythonEngine")
+        Me.cbPythonEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPythonEngine.FormattingEnabled = True
+        Me.cbPythonEngine.Items.AddRange(New Object() {resources.GetString("cbPythonEngine.Items"), resources.GetString("cbPythonEngine.Items1")})
+        Me.cbPythonEngine.Name = "cbPythonEngine"
+        '
+        'Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        Me.Label3.Name = "Label3"
         '
         'cbLinkedEvent
         '
@@ -113,5 +130,7 @@ Partial Class ScriptEditorControl
     Friend WithEvents chkLink As System.Windows.Forms.CheckBox
     Public WithEvents treeViewItems As System.Windows.Forms.TreeView
     Friend WithEvents txtScript As ScintillaNET.Scintilla
+    Friend WithEvents cbPythonEngine As System.Windows.Forms.ComboBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 
 End Class

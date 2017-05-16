@@ -29,6 +29,11 @@ Namespace Enums
 
     Public Class Scripts
 
+        Public Enum Interpreter
+            IronPython = 0
+            Python_NET = 1
+        End Enum
+
         Public Enum ObjectType
             Simulation = 0
             Solver = 1

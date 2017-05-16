@@ -73,6 +73,8 @@ Public Class Settings
     Public Shared Property PythonPath As String = ""
     Public Shared Property PythonTimeoutInMinutes As Double = 1
 
+    Public Shared Property PythonInitialized As Boolean = False
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

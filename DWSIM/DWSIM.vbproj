@@ -237,6 +237,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Nini.dll</HintPath>
     </Reference>
+    <Reference Include="Python.Runtime, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Python.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="ScintillaNET">
       <HintPath>..\packages\jacobslusser.ScintillaNET.3.5.1\lib\net40\ScintillaNET.dll</HintPath>
     </Reference>
