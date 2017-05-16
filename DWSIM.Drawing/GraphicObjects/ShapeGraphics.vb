@@ -7658,43 +7658,23 @@ Namespace GraphicObjects
 
             Dim myPenE As New Pen(Me.LineColor, Me.LineWidth)
             Dim myPen2 As New Pen(Color.White, 0)
-            Dim rect As New Rectangle(X, Y, Width, Height)
-
-            Dim gp As Drawing2D.GraphicsPath = New Drawing2D.GraphicsPath
-
-            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y))
-            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y), Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
-            gp.AddLine(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y + Height))
-            gp.AddLine(Convert.ToInt32(X), Convert.ToInt32(Y + Height), Convert.ToInt32(X), Convert.ToInt32(Y))
-
-            gp.CloseFigure()
-
-
-            g.DrawPath(myPenE, gp)
-
-
-
-            Dim pgb1 As New PathGradientBrush(gp)
-            pgb1.CenterColor = Me.GradientColor2
-            pgb1.SurroundColors = New Color() {Me.GradientColor1}
+            Dim rect As New Rectangle(X - 5, Y - 5, Width + 5, Height + 5)
 
             If Me.Fill Then
                 If Me.GradientMode = False Then
-                    g.FillPath(New SolidBrush(Me.FillColor), gp)
+                    DrawRoundRect(g, myPenE, X - 5, Y - 5, Width + 5, Height + 5, 5, New SolidBrush(Me.FillColor))
                 Else
-                    g.FillPath(pgb1, gp)
+                    DrawRoundRect(g, myPenE, X - 5, Y - 5, Width + 5, Height + 5, 5, New LinearGradientBrush(rect, GradientColor1, GradientColor2, 90))
                 End If
             End If
 
             Dim size As SizeF
-            Dim fontA As New Font("Arial", 10, 3, GraphicsUnit.Pixel, 0, False)
+            Dim fontA As New Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Pixel, 0, False)
             size = g.MeasureString("UO", fontA)
 
             Dim ax, ay As Integer
-            ax = Me.X + (Me.Width - size.Width) / 2
-            ay = Me.Y + (Me.Height - size.Height) / 2
-
-
+            ax = Me.X - 5 / 2 + (Me.Width - size.Width) / 2
+            ay = Me.Y - 5 / 2 + (Me.Height - size.Height) / 2
 
             g.DrawString("UO", fontA, New SolidBrush(Color.FromArgb(If(SemiTransparent, 50, 255), Color.Gray)), ax, ay)
 
