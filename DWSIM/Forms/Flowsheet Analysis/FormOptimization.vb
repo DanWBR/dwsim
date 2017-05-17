@@ -49,6 +49,8 @@ Public Class FormOptimization
     Public fmin As Double
     Public info As Integer
 
+    Private selected As Boolean = False
+
     Private _penval As Double = 0
 
     Private Sub FormOptimization_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -131,47 +133,36 @@ Public Class FormOptimization
     End Sub
 
     Private Sub btnDeleteCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteCase.Click
-        Dim idx As Integer = 0
-        For Each optcase As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
-            If optcase.name = Me.lbCases.SelectedItem.ToString Then
-                idx = form.Collections.OPT_OptimizationCollection.IndexOf(optcase)
-                Exit For
-            End If
-        Next
-        form.Collections.OPT_OptimizationCollection.RemoveAt(idx)
-        Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
-        Me.lbCases.SelectedIndex = Me.lbCases.Items.Count - 1
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+            form.Collections.OPT_OptimizationCollection.RemoveAt(lbCases.SelectedIndex)
+            Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
+            If lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub btnCopyCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyCase.Click
         Dim optcase2 As New DWSIM.Optimization.OptimizationCase
-        Dim found As Boolean = False
-        For Each optcase As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
-            If optcase.name = Me.lbCases.SelectedItem.ToString Then
-                optcase2 = optcase.Clone
-                optcase2.name = optcase.name & "_1"
-                found = True
-                Exit For
-            End If
-        Next
-        If found Then
-            Me.lbCases.Items.Add(optcase2.name)
-            Me.lbCases.SelectedItem = optcase2.name
-            form.Collections.OPT_OptimizationCollection.Add(optcase2)
-        End If
+        Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
+        optcase2 = optcase.Clone
+        optcase2.name = optcase.name & "_1"
+
+        Me.lbCases.Items.Add(optcase2.name)
+        Me.lbCases.SelectedItem = optcase2.name
+        form.Collections.OPT_OptimizationCollection.Add(optcase2)
     End Sub
 
     Private Sub btnSaveCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveCase.Click
 
-        If Me.lbCases.SelectedItems.Count > 0 Then
-            For Each optcase As DWSIM.Optimization.OptimizationCase In form.Collections.OPT_OptimizationCollection
-                If optcase.name = Me.lbCases.SelectedItem.ToString Then
-                    SaveForm(optcase)
-                End If
-            Next
-        Else
-            MsgBox("Please select an item from the list to save.")
-        End If
+        Dim prevselected = lbCases.SelectedIndex
+
+        For i As Integer = 0 To lbCases.Items.Count - 1
+            lbCases.SelectedIndex = i
+            Dim optcase = form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex)
+            SaveForm(optcase)
+        Next
+
+        lbCases.SelectedIndex = prevselected
+
     End Sub
 
     Private Sub btnNewCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewCase.Click
@@ -199,6 +190,8 @@ Public Class FormOptimization
                 End If
             Next
         End If
+
+        selected = True
 
     End Sub
 
@@ -459,7 +452,7 @@ Public Class FormOptimization
             form.WriteToLog("Optimization finished successfully.", Color.SeaGreen, DWSIM.Flowsheet.MessageType.Information)
         Catch ex As Exception
             form.WriteToLog("Optimization error: " & ex.Message, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
-       Finally
+        Finally
             Me.btnRun.Enabled = True
             Me.btnAbort.Enabled = False
             Me.btnRestore.Enabled = True
@@ -1600,5 +1593,16 @@ Public Class FormOptimization
 
     End Sub
 
+    Private Sub tbCaseName_TextChanged(sender As Object, e As EventArgs) Handles tbCaseName.TextChanged
+        If selected Then
+            Me.lbCases.Items(Me.lbCases.SelectedIndex) = Me.tbCaseName.Text
+            form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex).name = Me.tbCaseName.Text
+        End If
+    End Sub
 
+    Private Sub tbCaseDesc_TextChanged(sender As Object, e As EventArgs) Handles tbCaseDesc.TextChanged
+        If selected Then
+            form.Collections.OPT_OptimizationCollection(Me.lbCases.SelectedIndex).description = Me.tbCaseDesc.Text
+        End If
+    End Sub
 End Class

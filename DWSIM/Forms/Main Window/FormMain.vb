@@ -1376,6 +1376,7 @@ Public Class FormMain
 
         If simulationfilename <> "" Then Me.filename = simulationfilename Else Me.filename = path
 
+        form.FilePath = Me.filename
         form.Options.FilePath = Me.filename
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
@@ -2145,6 +2146,8 @@ Label_00CC:
             End Using
             Dim fs As Interfaces.IFlowsheet = LoadXML(fullname, caminho, forcommandline)
             File.Delete(fullname)
+            fs.FilePath = caminho
+            fs.Options.FilePath = caminho
             Return fs
         Catch ex As Exception
             MessageBox.Show(ex.Message, DWSIM.App.GetLocalString("Erroaoabrirarquivo"), MessageBoxButtons.OK, MessageBoxIcon.Error)

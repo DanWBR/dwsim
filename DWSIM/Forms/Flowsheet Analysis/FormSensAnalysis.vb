@@ -244,7 +244,7 @@ Public Class FormSensAnalysis
             If GetNameIndex("SACase" & n) < 0 Then Exit Do
             n += 1
         Loop
-       
+
         sacase.name = "SACase" & n
 
         form.Collections.OPT_SensAnalysisCollection.Add(sacase)
@@ -390,30 +390,30 @@ Public Class FormSensAnalysis
     End Sub
 
     Private Sub btnCopyCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopyCase.Click
+
         Dim sacase2 As New DWSIM.Optimization.SensitivityAnalysisCase
-        Dim found As Boolean = False
-        For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
-            If sacase.name = Me.lbCases.SelectedItem.ToString Then
-                sacase2 = sacase.Clone
-                sacase2.name = sacase.name & "_1"
-                found = True
-                Exit For
-            End If
-        Next
-        If found Then
-            Me.lbCases.Items.Add(sacase2.name)
-            Me.lbCases.SelectedItem = sacase2.name
-            form.Collections.OPT_SensAnalysisCollection.Add(sacase2)
-        End If
+        
+        Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
+        sacase2 = sacase.Clone
+        sacase2.name = sacase.name & "_1"
+        
+        Me.lbCases.Items.Add(sacase2.name)
+        Me.lbCases.SelectedItem = sacase2.name
+        form.Collections.OPT_SensAnalysisCollection.Add(sacase2)
+
     End Sub
 
     Private Sub btnSaveCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveCase.Click
 
-        For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
-            If sacase.name = Me.lbCases.SelectedItem.ToString Then
-                SaveForm(sacase)
-            End If
+        Dim prevselected = lbCases.SelectedIndex
+
+        For i As Integer = 0 To lbCases.Items.Count - 1
+            lbCases.SelectedIndex = i
+            Dim sacase = form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex)
+            SaveForm(sacase)
         Next
+
+        lbCases.SelectedIndex = prevselected
 
     End Sub
 
@@ -472,7 +472,7 @@ Public Class FormSensAnalysis
                     Else
                         .propID = ""
                     End If
-                    
+
                     .lowerlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbLowerLimIndVar2.Text))
                     .upperlimit = SharedClasses.SystemsOfUnits.Converter.ConvertToSI(.unit, Double.Parse(Me.tbUpperLimIndVar2.Text))
                     .points = Me.nuNumPointsIndVar2.Value
@@ -539,16 +539,11 @@ Public Class FormSensAnalysis
     End Sub
 
     Private Sub btnDeleteCase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteCase.Click
-        Dim idx As Integer = 0
-        For Each sacase As DWSIM.Optimization.SensitivityAnalysisCase In form.Collections.OPT_SensAnalysisCollection
-            If sacase.name = Me.lbCases.SelectedItem.ToString Then
-                idx = form.Collections.OPT_SensAnalysisCollection.IndexOf(sacase)
-                Exit For
-            End If
-        Next
-        form.Collections.OPT_SensAnalysisCollection.RemoveAt(idx)
-        Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
-        Me.lbCases.SelectedIndex = Me.lbCases.Items.Count - 1
+        If MessageBox.Show(DWSIM.App.GetLocalString("ConfirmOperation"), "DWSIM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
+            form.Collections.OPT_SensAnalysisCollection.RemoveAt(lbCases.SelectedIndex)
+            Me.lbCases.Items.Remove(Me.lbCases.SelectedItem)
+            If lbCases.Items.Count > 0 Then Me.lbCases.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub btnRun_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRun.Click
@@ -939,6 +934,7 @@ Public Class FormSensAnalysis
     Private Sub tbCaseName_TextChanged(sender As System.Object, e As System.EventArgs) Handles tbCaseName.TextChanged
         If selected Then
             Me.lbCases.Items(Me.lbCases.SelectedIndex) = Me.tbCaseName.Text
+            form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex).name = Me.tbCaseName.Text
         End If
     End Sub
 
@@ -969,7 +965,7 @@ Public Class FormSensAnalysis
     Private Sub FillChartData()
         Dim i As Integer
         Dim s As String
-        
+
         CbCrtX.Items.Clear()
         CbCrtY.Items.Clear()
         For i = 0 To dgvResults.ColumnCount - 1
@@ -995,14 +991,14 @@ Public Class FormSensAnalysis
 
         graph.GraphPane.CurveList.Clear()
     End Sub
-   
+
     Private Sub BtnDrawChart_Click(sender As System.Object, e As System.EventArgs) Handles BtnDrawChart.Click
         Dim px, py, IV2 As New ArrayList
         Dim k, j As Integer
         Dim x, y As Integer
         Dim v, vl As String
         Dim rnd As New System.Random
-        
+
 
         'find selected columns
         For k = 0 To dgvResults.ColumnCount - 1
@@ -1059,7 +1055,7 @@ Public Class FormSensAnalysis
 
                 End With
             Next
-          
+
             .AxisChange()
         End With
 
@@ -1106,5 +1102,10 @@ Public Class FormSensAnalysis
 
     End Sub
 
+    Private Sub tbCaseDesc_TextChanged(sender As Object, e As EventArgs) Handles tbCaseDesc.TextChanged
+        If selected Then
+            form.Collections.OPT_SensAnalysisCollection(Me.lbCases.SelectedIndex).description = Me.tbCaseDesc.Text
+        End If
+    End Sub
 
 End Class
