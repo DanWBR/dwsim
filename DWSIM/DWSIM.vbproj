@@ -1125,10 +1125,12 @@
     <None Include="Assets\samples\Benzene-Cyclopentane-PR.dwrsd" />
     <None Include="Assets\samples\Benzene-m-Xylene-SLE.dwrsd" />
     <None Include="Assets\samples\Benzene-p-Xylene-SLE.dwrsd" />
+    <None Include="Assets\samples\Biodiesel Combustion %28Cantera%29.dwxmz" />
     <None Include="Assets\samples\Biodiesel Production.dwxmz" />
     <None Include="Assets\samples\Cantera Interop.dwxmz" />
     <None Include="Assets\samples\Carbon Combustion.dwxml" />
     <None Include="Assets\samples\Cavett%27s Problem.dwxml" />
+    <None Include="Assets\samples\ChemDetailed.cti" />
     <None Include="Assets\samples\Cyclohexane-Aniline-NRTL.dwrsd" />
     <None Include="Assets\samples\DWSIM Add-In Sample.xlsx" />
     <None Include="Assets\samples\Electrolysis Cell with ExcelUO.dwxml" />
@@ -1138,11 +1140,13 @@
     <None Include="Assets\samples\Extractive Distillation.dwxml" />
     <None Include="Assets\samples\Flowsheet Unit Operation Sample.dwxml" />
     <None Include="Assets\samples\fstest_in.dwxml" />
+    <None Include="Assets\samples\Gasoline Combustion %28Cantera%29.dwxmz" />
     <None Include="Assets\samples\Gibbs and Equilibrium Reactors.dwxml" />
     <None Include="Assets\samples\Heat Exchanger Sizing and Design.dwxml" />
     <None Include="Assets\samples\Humid Air.dwxml" />
     <None Include="Assets\samples\Hydrocyclone Custom Unit Operation.dwxml" />
     <None Include="Assets\samples\Hydrogen production through Methane Catalytic Steam Reforming.dwxml" />
+    <None Include="Assets\samples\md-nc7_mech.cti" />
     <None Include="Assets\samples\Membrane Custom Unit Operation.dwxml" />
     <None Include="Assets\samples\Methanol-12-Dichloroethane-NRTL.dwrsd" />
     <None Include="Assets\samples\Natural Gas Processing Unit.dwxml" />
