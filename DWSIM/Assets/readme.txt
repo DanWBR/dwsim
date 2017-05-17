@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 11 - May 2017
+Version 4.3 Update 12 - May 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 12
+
+- [NEW] New samples: Gasoline & Biodiesel Combustion using Cantera
+- [NEW] Custom ordering of Master Property Table items
+- [NEW] Flowsheet Scripts now support Python.NET
+- [FIX] Fixed management of Optimization and Sensitivity Analysis cases
+- [FIX] Fixed a bug with the Gibbs Reactor solver 
 
 Version 4.3 Update 11
 
