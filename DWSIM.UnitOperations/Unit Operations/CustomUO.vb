@@ -345,7 +345,7 @@ Namespace UnitOperations
 
                         Me.DeCalculate()
 
-                        Throw New Exception(ex.Message & vbCrLf & ex.StackTrace, ex)
+                        Throw New Exception(ex.Message & vbCrLf & ex.StackTrace.Replace("\n", vbCrLf), ex)
 
                     Finally
 
