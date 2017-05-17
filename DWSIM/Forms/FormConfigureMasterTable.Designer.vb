@@ -34,6 +34,9 @@ Partial Class FormConfigureMasterTable
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.btnOrderUp = New System.Windows.Forms.Button()
+        Me.btnOrderDown = New System.Windows.Forms.Button()
+        Me.lblOrder = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -43,9 +46,9 @@ Partial Class FormConfigureMasterTable
         '
         'cbObjectType
         '
-        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbObjectType.FormattingEnabled = True
+        resources.ApplyResources(Me.cbObjectType, "cbObjectType")
         Me.cbObjectType.Name = "cbObjectType"
         '
         'Label2
@@ -55,10 +58,10 @@ Partial Class FormConfigureMasterTable
         '
         'lvProps
         '
-        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.CheckBoxes = True
         Me.lvProps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2})
         Me.lvProps.FullRowSelect = True
+        resources.ApplyResources(Me.lvProps, "lvProps")
         Me.lvProps.Name = "lvProps"
         Me.lvProps.UseCompatibleStateImageBehavior = False
         Me.lvProps.View = System.Windows.Forms.View.Details
@@ -74,17 +77,18 @@ Partial Class FormConfigureMasterTable
         '
         'cbOrderBy
         '
-        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbOrderBy.FormattingEnabled = True
+        resources.ApplyResources(Me.cbOrderBy, "cbOrderBy")
         Me.cbOrderBy.Name = "cbOrderBy"
         '
         'lvObjects
         '
-        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.CheckBoxes = True
         Me.lvObjects.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvObjects.FullRowSelect = True
+        Me.lvObjects.HideSelection = False
+        resources.ApplyResources(Me.lvObjects, "lvObjects")
         Me.lvObjects.MultiSelect = False
         Me.lvObjects.Name = "lvObjects"
         Me.lvObjects.ShowGroups = False
@@ -105,10 +109,30 @@ Partial Class FormConfigureMasterTable
         resources.ApplyResources(Me.TextBox1, "TextBox1")
         Me.TextBox1.Name = "TextBox1"
         '
+        'btnOrderUp
+        '
+        resources.ApplyResources(Me.btnOrderUp, "btnOrderUp")
+        Me.btnOrderUp.Name = "btnOrderUp"
+        Me.btnOrderUp.UseVisualStyleBackColor = True
+        '
+        'btnOrderDown
+        '
+        resources.ApplyResources(Me.btnOrderDown, "btnOrderDown")
+        Me.btnOrderDown.Name = "btnOrderDown"
+        Me.btnOrderDown.UseVisualStyleBackColor = True
+        '
+        'lblOrder
+        '
+        resources.ApplyResources(Me.lblOrder, "lblOrder")
+        Me.lblOrder.Name = "lblOrder"
+        '
         'FormConfigureMasterTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblOrder)
+        Me.Controls.Add(Me.btnOrderDown)
+        Me.Controls.Add(Me.btnOrderUp)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.lvObjects)
@@ -135,4 +159,7 @@ Partial Class FormConfigureMasterTable
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents btnOrderUp As System.Windows.Forms.Button
+    Friend WithEvents btnOrderDown As System.Windows.Forms.Button
+    Friend WithEvents lblOrder As System.Windows.Forms.Label
 End Class

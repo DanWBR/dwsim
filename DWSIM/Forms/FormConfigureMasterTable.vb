@@ -4,6 +4,17 @@
 
     Private Loaded As Boolean = False
 
+    Private Sub FormConfigureMasterTable_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+
+        Dim list As New List(Of String)
+        For Each lvi As ListViewItem In Me.lvObjects.Items
+            list.Add(lvi.Text)
+        Next
+
+        Table.SortedList = list
+
+    End Sub
+
     Private Sub FormConfigureMasterTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cbObjectType.Items.AddRange([Enum].GetNames(Table.ObjectType.GetType))
@@ -11,6 +22,16 @@
 
         cbObjectType.SelectedItem = Table.ObjectFamily.ToString
         cbOrderBy.SelectedItem = Table.SortBy
+
+        If Table.SortBy = "Custom" Then
+            lblOrder.Enabled = True
+            btnOrderDown.Enabled = True
+            btnOrderUp.Enabled = True
+        Else
+            lblOrder.Enabled = False
+            btnOrderDown.Enabled = False
+            btnOrderUp.Enabled = False
+        End If
 
         TextBox1.Text = Table.HeaderText
 
@@ -23,17 +44,36 @@
     Sub Populate()
 
         lvObjects.Items.Clear()
-        For Each obj In Table.Flowsheet.SimulationObjects.Values
-            If obj.GraphicObject.ObjectType = Table.ObjectFamily Then
-                If Not Table.ObjectList.ContainsKey(obj.GraphicObject.Tag) Then Table.ObjectList.Add(obj.GraphicObject.Tag, False)
-                Dim lvi As New ListViewItem(obj.GraphicObject.Tag)
-                lvi.Tag = "Object|" & obj.Name
-                If Table.ObjectList.ContainsKey(obj.GraphicObject.Tag) Then
-                    lvi.Checked = Table.ObjectList(obj.GraphicObject.Tag)
+
+        If Table.SortBy = "Custom" Then
+            For Each item In Table.SortedList
+                If Table.Flowsheet.GetFlowsheetSimulationObject(item) IsNot Nothing Then
+                    Dim lvi As New ListViewItem(item)
+                    lvi.Checked = True
+                    lvObjects.Items.Add(lvi)
                 End If
-                lvObjects.Items.Add(lvi)
-            End If
-        Next
+            Next
+            For Each obj In Table.Flowsheet.SimulationObjects.Values
+                If obj.GraphicObject.ObjectType = Table.ObjectFamily And Not Table.SortedList.Contains(obj.GraphicObject.Tag) Then
+                    If Not Table.ObjectList.ContainsKey(obj.GraphicObject.Tag) Then Table.ObjectList.Add(obj.GraphicObject.Tag, False)
+                    Dim lvi As New ListViewItem(obj.GraphicObject.Tag)
+                    lvi.Tag = "Object|" & obj.Name
+                    lvObjects.Items.Add(lvi)
+                End If
+            Next
+        Else
+            For Each obj In Table.Flowsheet.SimulationObjects.Values
+                If obj.GraphicObject.ObjectType = Table.ObjectFamily Then
+                    If Not Table.ObjectList.ContainsKey(obj.GraphicObject.Tag) Then Table.ObjectList.Add(obj.GraphicObject.Tag, False)
+                    Dim lvi As New ListViewItem(obj.GraphicObject.Tag)
+                    lvi.Tag = "Object|" & obj.Name
+                    If Table.ObjectList.ContainsKey(obj.GraphicObject.Tag) Then
+                        lvi.Checked = Table.ObjectList(obj.GraphicObject.Tag)
+                    End If
+                    lvObjects.Items.Add(lvi)
+                End If
+            Next
+        End If
 
         Dim props() As String = Nothing
 
@@ -73,6 +113,15 @@
 
         If Loaded Then
             Table.SortBy = cbOrderBy.SelectedItem.ToString
+            If Table.SortBy = "Custom" Then
+                lblOrder.Enabled = True
+                btnOrderDown.Enabled = True
+                btnOrderUp.Enabled = True
+            Else
+                lblOrder.Enabled = False
+                btnOrderDown.Enabled = False
+                btnOrderUp.Enabled = False
+            End If
             Populate()
         End If
 
@@ -100,5 +149,31 @@
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         Table.HeaderText = TextBox1.Text
+    End Sub
+
+    Private Sub btnOrderUp_Click(sender As Object, e As EventArgs) Handles btnOrderUp.Click
+        Dim index As Integer = 0
+        If Me.lvObjects.SelectedItems.Count > 0 Then
+            index = Me.lvObjects.SelectedItems(0).Index
+            If index <> 0 Then
+                Dim lvi As ListViewItem = Me.lvObjects.SelectedItems(0).Clone
+                Me.lvObjects.SelectedItems(0).Remove()
+                Me.lvObjects.Items.Insert(index - 1, lvi)
+                Me.lvObjects.Items(index - 1).Selected = True
+            End If
+        End If
+    End Sub
+
+    Private Sub btnOrderDown_Click(sender As Object, e As EventArgs) Handles btnOrderDown.Click
+        Dim index As Integer = 0
+        If Me.lvObjects.SelectedItems.Count > 0 Then
+            index = Me.lvObjects.SelectedItems(0).Index
+            If index <> Me.lvObjects.Items.Count - 1 Then
+                Dim lvi As ListViewItem = Me.lvObjects.SelectedItems(0).Clone
+                Me.lvObjects.SelectedItems(0).Remove()
+                Me.lvObjects.Items.Insert(index + 1, lvi)
+                Me.lvObjects.Items(index + 1).Selected = True
+            End If
+        End If
     End Sub
 End Class
