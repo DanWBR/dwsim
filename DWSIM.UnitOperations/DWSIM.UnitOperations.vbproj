@@ -499,7 +499,7 @@
     <Compile Include="Support Classes\ComboBoxColumnTemplates.vb" />
     <Compile Include="Type Resolver\Resolver.vb" />
     <Compile Include="CAPE-OPEN\CustomUO_CO.vb" />
-    <Compile Include="Unit Operations\CustomUO.vb" />
+    <Compile Include="Unit Operations\PythonScriptUO.vb" />
     <Compile Include="Unit Operations\FlowsheetUO.vb" />
     <Compile Include="Unit Operations\OrificePlate.vb" />
     <Compile Include="Fluid Flow Correlations\FlowPackageBaseClass.vb" />

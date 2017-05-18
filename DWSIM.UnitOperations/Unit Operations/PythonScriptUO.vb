@@ -272,6 +272,14 @@ Namespace UnitOperations
 
                 If Not Settings.PythonInitialized Then
 
+                    If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                        If Not Directory.Exists(GlobalSettings.Settings.PythonPath) Then
+                            Throw New Exception("Python Binaries Path doesn't exist.")
+                        ElseIf Not File.Exists(Path.Combine(GlobalSettings.Settings.PythonPath, "python27.dll")) Then
+                            Throw New Exception("'python27.dll' not found in Python Binaries Path.")
+                        End If
+                    End If
+
                     Dim t As Task = Task.Factory.StartNew(Sub()
                                                               FlowSheet.RunCodeOnUIThread(Sub()
                                                                                               If Not GlobalSettings.Settings.IsRunningOnMono() Then
@@ -338,6 +346,14 @@ Namespace UnitOperations
                         FlowSheet.ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
 
                         OutputVariables.Clear()
+                        Dim i As Integer = 0
+                        For Each variable As PyObject In locals.Items
+                            Dim val = locals.Values(i).ToString
+                            If Double.TryParse(val, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, New Double) Then
+                                OutputVariables.Add(locals.Keys(i).ToString, val.ToDoubleFromInvariant)
+                            End If
+                            i += 1
+                        Next
 
                     Catch ex As Exception
 
