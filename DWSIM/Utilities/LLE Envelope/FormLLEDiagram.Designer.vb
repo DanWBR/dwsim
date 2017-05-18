@@ -109,27 +109,26 @@ Partial Class FormLLEDiagram
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.PanelDiag)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'PanelDiag
         '
-        resources.ApplyResources(Me.PanelDiag, "PanelDiag")
         Me.PanelDiag.BackColor = System.Drawing.Color.WhiteSmoke
+        resources.ApplyResources(Me.PanelDiag, "PanelDiag")
         Me.PanelDiag.Name = "PanelDiag"
         '
         'TabPage2
         '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Controls.Add(Me.DataGridView1)
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.AllowUserToResizeColumns = False
@@ -137,6 +136,7 @@ Partial Class FormLLEDiagram
         Me.DataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.X11, Me.X12, Me.X21, Me.X22})
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         '
@@ -240,15 +240,15 @@ Partial Class FormLLEDiagram
         '
         'cbPropPack
         '
-        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPropPack.FormattingEnabled = True
+        resources.ApplyResources(Me.cbPropPack, "cbPropPack")
         Me.cbPropPack.Name = "cbPropPack"
         '
         'btnCalcDiagram
         '
-        resources.ApplyResources(Me.btnCalcDiagram, "btnCalcDiagram")
         Me.btnCalcDiagram.Image = Global.DWSIM.My.Resources.Resources.chart_LLE
+        resources.ApplyResources(Me.btnCalcDiagram, "btnCalcDiagram")
         Me.btnCalcDiagram.Name = "btnCalcDiagram"
         Me.btnCalcDiagram.UseVisualStyleBackColor = True
         '
@@ -284,23 +284,23 @@ Partial Class FormLLEDiagram
         '
         'cbComp3
         '
-        resources.ApplyResources(Me.cbComp3, "cbComp3")
         Me.cbComp3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp3.FormattingEnabled = True
+        resources.ApplyResources(Me.cbComp3, "cbComp3")
         Me.cbComp3.Name = "cbComp3"
         '
         'cbComp2
         '
-        resources.ApplyResources(Me.cbComp2, "cbComp2")
         Me.cbComp2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp2.FormattingEnabled = True
+        resources.ApplyResources(Me.cbComp2, "cbComp2")
         Me.cbComp2.Name = "cbComp2"
         '
         'cbComp1
         '
-        resources.ApplyResources(Me.cbComp1, "cbComp1")
         Me.cbComp1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbComp1.FormattingEnabled = True
+        resources.ApplyResources(Me.cbComp1, "cbComp1")
         Me.cbComp1.Name = "cbComp1"
         '
         'Label1
@@ -310,87 +310,87 @@ Partial Class FormLLEDiagram
         '
         'ToolStrip1
         '
-        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TSB_Print, Me.TSB_PrinterSetup, Me.TSB_CalcDiagr})
+        resources.ApplyResources(Me.ToolStrip1, "ToolStrip1")
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         '
         'TSB_Print
         '
-        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_Print.Image = Global.DWSIM.My.Resources.Resources.printer
+        resources.ApplyResources(Me.TSB_Print, "TSB_Print")
         Me.TSB_Print.Name = "TSB_Print"
         '
         'TSB_PrinterSetup
         '
-        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_PrinterSetup.Image = Global.DWSIM.My.Resources.Resources.printer_add
+        resources.ApplyResources(Me.TSB_PrinterSetup, "TSB_PrinterSetup")
         Me.TSB_PrinterSetup.Name = "TSB_PrinterSetup"
         '
         'TSB_CalcDiagr
         '
-        resources.ApplyResources(Me.TSB_CalcDiagr, "TSB_CalcDiagr")
         Me.TSB_CalcDiagr.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.TSB_CalcDiagr.Image = Global.DWSIM.My.Resources.Resources.chart_LLE
+        resources.ApplyResources(Me.TSB_CalcDiagr, "TSB_CalcDiagr")
         Me.TSB_CalcDiagr.Name = "TSB_CalcDiagr"
         '
         'dckMenu
         '
-        resources.ApplyResources(Me.dckMenu, "dckMenu")
         Me.dckMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FloatToolStripMenuItem, Me.DockLeftToolStripMenuItem, Me.DockRightToolStripMenuItem, Me.DockTopToolStripMenuItem, Me.DockBottomToolStripMenuItem, Me.DockLeftAutoHideToolStripMenuItem, Me.DockRightAutoHideToolStripMenuItem, Me.DockTopAutoHideToolStripMenuItem, Me.DockBottomAutoHideToolStripMenuItem, Me.DocumentToolStripMenuItem})
         Me.dckMenu.Name = "dckMenu"
+        resources.ApplyResources(Me.dckMenu, "dckMenu")
         '
         'FloatToolStripMenuItem
         '
-        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         Me.FloatToolStripMenuItem.Name = "FloatToolStripMenuItem"
+        resources.ApplyResources(Me.FloatToolStripMenuItem, "FloatToolStripMenuItem")
         '
         'DockLeftToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         Me.DockLeftToolStripMenuItem.Name = "DockLeftToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftToolStripMenuItem, "DockLeftToolStripMenuItem")
         '
         'DockRightToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         Me.DockRightToolStripMenuItem.Name = "DockRightToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightToolStripMenuItem, "DockRightToolStripMenuItem")
         '
         'DockTopToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         Me.DockTopToolStripMenuItem.Name = "DockTopToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopToolStripMenuItem, "DockTopToolStripMenuItem")
         '
         'DockBottomToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         Me.DockBottomToolStripMenuItem.Name = "DockBottomToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomToolStripMenuItem, "DockBottomToolStripMenuItem")
         '
         'DockLeftAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         Me.DockLeftAutoHideToolStripMenuItem.Name = "DockLeftAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockLeftAutoHideToolStripMenuItem, "DockLeftAutoHideToolStripMenuItem")
         '
         'DockRightAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         Me.DockRightAutoHideToolStripMenuItem.Name = "DockRightAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockRightAutoHideToolStripMenuItem, "DockRightAutoHideToolStripMenuItem")
         '
         'DockTopAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         Me.DockTopAutoHideToolStripMenuItem.Name = "DockTopAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockTopAutoHideToolStripMenuItem, "DockTopAutoHideToolStripMenuItem")
         '
         'DockBottomAutoHideToolStripMenuItem
         '
-        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         Me.DockBottomAutoHideToolStripMenuItem.Name = "DockBottomAutoHideToolStripMenuItem"
+        resources.ApplyResources(Me.DockBottomAutoHideToolStripMenuItem, "DockBottomAutoHideToolStripMenuItem")
         '
         'DocumentToolStripMenuItem
         '
-        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         Me.DocumentToolStripMenuItem.Name = "DocumentToolStripMenuItem"
+        resources.ApplyResources(Me.DocumentToolStripMenuItem, "DocumentToolStripMenuItem")
         '
         'FormLLEDiagram
         '

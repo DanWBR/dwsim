@@ -193,7 +193,7 @@
     <value>Berechnet Reaktionen über eine Gleichgewichtskonstante</value>
   </data>
   <data name="EQUIL_Name" xml:space="preserve">
-    <value>Gleichgewichts-Reactor</value>
+    <value>Gleichgewichts-Reaktor</value>
   </data>
   <data name="ERECY_Desc" xml:space="preserve">
     <value>Logikblock für Energieströme</value>
@@ -277,7 +277,7 @@
     <value>Rohrreaktormodell, unterstützt kinetische und heterogen-katalysierte Reaktionen</value>
   </data>
   <data name="PFR_Name" xml:space="preserve">
-    <value>Rohr-Reactor (PFR)</value>
+    <value>Rohr-Reaktor (PFR)</value>
   </data>
   <data name="PIPE_Desc" xml:space="preserve">
     <value>Definiert ein Rohrsegment zur Druckverlustberechnung</value>

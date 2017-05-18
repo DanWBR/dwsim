@@ -257,10 +257,10 @@
     <value>Identifikation</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 13</value>
+    <value>336, 13</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
-    <value>Use '.' as the decimal separator on math expressions.</value>
+    <value>Verwende '.' als Dezimaltrennzeichen in mathematischen Ausdrücken.</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Gleichgewichtsreaktion</value>
