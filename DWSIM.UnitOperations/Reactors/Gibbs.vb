@@ -271,7 +271,7 @@ Namespace Reactors
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
-            Dim epsilon As Double = 0.000001
+            Dim epsilon As Double = 0.1
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
@@ -284,7 +284,7 @@ Namespace Reactors
                         x2(j) = x(j)
                     Else
                         If x(j) = 0.0# Then
-                            x2(j) = x(j) + 0.000001
+                            x2(j) = x(j) + 0.1
                         Else
                             x2(j) = x(j) * (1 + epsilon)
                         End If
@@ -1108,7 +1108,7 @@ Namespace Reactors
 
                                 tmpx = x.Clone
                                 tmpdx = dx.Clone
-                                fval = brentsolver.brentoptimize(1.0E-20, 1.0#, 1.0E-30, df)
+                                fval = brentsolver.brentoptimize(0.01, 2.0#, 0.000001, df)
 
                                 For i = 0 To x.Length - 1
                                     x(i) -= df * dx(i)
