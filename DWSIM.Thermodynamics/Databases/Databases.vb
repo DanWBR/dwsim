@@ -129,7 +129,7 @@ Namespace Databases
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
             Dim unif As New PropertyPackages.Auxiliary.Unifac
@@ -532,7 +532,7 @@ Namespace Databases
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
             Dim unif As New PropertyPackages.Auxiliary.Unifac
@@ -712,7 +712,7 @@ Namespace Databases
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
             Dim i As Integer = 100000
             For Each node As XmlNode In xmldoc.ChildNodes(1)
@@ -837,7 +837,7 @@ Namespace Databases
                 reader.Read()
             End Try
 
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             xmldoc = New XmlDocument
             xmldoc.Load(reader)
@@ -1459,7 +1459,7 @@ Namespace Databases
                 reader.Read()
             End Try
 
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim p As Double
 
             xmldoc = New XmlDocument
@@ -1658,7 +1658,7 @@ Namespace Databases
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
             Dim i As Integer = 200000
             For Each node As XmlNode In xmldoc.ChildNodes(1)
@@ -1798,7 +1798,7 @@ Namespace Databases
 
             Dim cp As Thermodynamics.BaseClasses.ConstantProperties
             Dim cpa As New List(Of Thermodynamics.BaseClasses.ConstantProperties)
-            Dim cult As Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
+            Dim cult As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
             Dim nf As Globalization.NumberFormatInfo = cult.NumberFormat
 
             For Each node As XmlNode In xmldoc.ChildNodes(1)

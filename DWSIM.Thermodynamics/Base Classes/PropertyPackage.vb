@@ -7483,7 +7483,6 @@ Final3:
                     Return 0.0#
             End Select
 
-
         End Function
 
         Function ParseEquation(ByVal expression As String, ByVal A As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal E As Double, ByVal T As Double) As Double
