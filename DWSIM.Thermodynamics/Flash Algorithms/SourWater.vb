@@ -398,7 +398,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub CalculateEquilibriumConcentrations(T As Double, pp As PropertyPackage, conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), deltaconc As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
 
-            Dim nch, pch, pH, pH_old, pH_old0, errCN, totalC, totalC0, oldCN, fx, fx_old, fx_old0, Istr, k1, k5 As Double
+            Dim nch, pch, pH, pH_old, pH_old0, errCN, errCN0, totalC, totalC0, oldCN, fx, fx_old, fx_old0, Istr, k1, k5 As Double
             Dim icount, icount0 As Integer
 
             'calculate equilibrium constants (f(T))
@@ -425,6 +425,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 '    pH = -Log10(conc("H+"))
                 'Else
                 If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 12.0# Else pH = 7.0#
+                'pH = 7.0
                 conc("H+") = 10 ^ (-pH)
                 'End If
 
@@ -505,7 +506,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                     End If
 
-                    If Abs(fx) < 1.0E-20 Or Abs(fx - fx_old) < 1.0E-20 Then Exit Do
+                    If Abs(fx) < 0.000001 Then Exit Do
 
                     pH_old0 = pH_old
                     pH_old = pH
@@ -525,7 +526,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     icount += 1
 
-                    If icount > maxit_i * 10 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+                    If icount > 100000 Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
                 Loop
 
@@ -534,13 +535,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 oldCN = conc("H2NCOO-")
 
                 totalC0 = totalC
-                totalC = conc("CO2") + conc("HCO3-") + conc("CO3-2") + conc("H2NCOO-")
+                totalC = conc("CO2") + conc("HCO3-") + 2 * conc("CO3-2") + conc("H2NCOO-")
 
+                errCN0 = errCN
                 errCN = totalC - totalC0
 
                 If Math.Abs(errCN) < etol Then Exit Do
 
-                conc("H2NCOO-") *= totalC / totalC0
+                If icount0 <= 2 Then
+                    conc("H2NCOO-") *= 0.99
+                Else
+                    conc("H2NCOO-") = conc("H2NCOO-") - errCN * (conc("H2NCOO-") - oldCN) / (errCN - errCN0)
+                End If
+
+                conc("CO2") = conc0("CO2") - (conc("HCO3-") + 2 * conc("CO3-2") + conc("H2NCOO-"))
+                If conc("CO2") < 0.0# Then conc("CO2") = conc0("CO2") / 1000
 
                 icount0 += 1
 
