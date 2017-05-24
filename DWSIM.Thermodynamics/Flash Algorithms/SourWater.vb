@@ -38,6 +38,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim maxit_e As Integer = 100
         Dim Hv0, Hvid, Hlid, Hf, Hv, Hl, Hs As Double
         Dim Sv0, Svid, Slid, Sf, Sv, Sl, Ss As Double
+        Dim pH0 As Nullable(Of Double) = Nothing
+        Dim concHCO3 As Nullable(Of Double) = Nothing
 
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
@@ -98,7 +100,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         End Sub
 
-        Sub Setup(conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), deltaconc As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
+        Sub Setup(conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
 
             conc.Clear()
 
@@ -116,23 +118,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             conc.Add("S-2", 0.0#)
             conc.Add("NaOH", 0.0#)
             conc.Add("Na+", 0.0#)
-
-            deltaconc.Clear()
-
-            deltaconc.Add("H2O", 0.0#)
-            deltaconc.Add("H+", 0.0#)
-            deltaconc.Add("OH-", 0.0#)
-            deltaconc.Add("NH3", 0.0#)
-            deltaconc.Add("NH4+", 0.0#)
-            deltaconc.Add("CO2", 0.0#)
-            deltaconc.Add("HCO3-", 0.0#)
-            deltaconc.Add("CO3-2", 0.0#)
-            deltaconc.Add("H2NCOO-", 0.0#)
-            deltaconc.Add("H2S", 0.0#)
-            deltaconc.Add("HS-", 0.0#)
-            deltaconc.Add("S-2", 0.0#)
-            deltaconc.Add("NaOH", 0.0#)
-            deltaconc.Add("Na+", 0.0#)
 
             conc0.Clear()
 
@@ -215,7 +200,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
             Dim n As Integer = CompoundProperties.Count - 1
-            Dim pH, totalkg, totalkg1, merr As Double
+            Dim pH, totalkg As Double
             Dim ecount As Integer
 
             'Vnf = feed molar amounts (considering 1 mol of feed)
@@ -225,22 +210,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             'Vxv = vapor phase molar fractions
             'V, L = phase molar amounts (F = 1 = V + L)
 
-            Dim Vnf(n), deltaVnf(n), Vnl(n), Vxf(n), Vxl(n), Vxl_ant(n), Vns(n), Vnv(n), Vxv(n), Vxv0(n), F, V, L, Lold, Lold0, Vp(n), Ki(n), Pvap(n) As Double
+            Dim Vnf(n), deltaVnf(n), Vnl(n), Vxf(n), Vxl(n), Vxl_ant(n), Vns(n), Vnv(n), Vxv(n), fx, dfx, V, Vant, L, Ki(n), Pvap(n) As Double
             Dim sumN As Double = 0
-            Dim fx, fx0, fx00 As Double
-
+          
             Vnf = Vz.Clone
             Vxf = Vz.Clone
 
-            F = 1.0#
-            Lold = 0.0#
-
             'set up concentrations & ids
 
-            Dim conc, conc0, deltaconc As New Dictionary(Of String, Double)
+            Dim conc, conc0 As New Dictionary(Of String, Double)
             Dim id As New Dictionary(Of String, Integer)
 
-            Setup(conc, conc0, deltaconc, id)
+            Setup(conc, conc0, id)
 
             Dim nl As New NestedLoops() With {.LimitVaporFraction = True}
 
@@ -256,8 +237,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     If flashresult.ResultException IsNot Nothing Then Throw flashresult.ResultException
 
                     With flashresult
-                        L = .GetLiquidPhase1MoleFraction * F
-                        V = .GetVaporPhaseMoleFraction * F
+                        L = .GetLiquidPhase1MoleFraction
+                        V = .GetVaporPhaseMoleFraction
                         If L = 0.0# Then
                             Vxv = .GetVaporPhaseMoleFractions
                             Vxl = Vxv.DivideY(.Kvalues.ToArray)
@@ -279,6 +260,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     End With
 
                 End If
+
+                L = 1.0# - V
 
                 If L = 0.0# Then Exit Do
 
@@ -308,15 +291,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 End If
 
-                conc0("H2O") = conc("H2O")
-                conc0("CO2") = conc("CO2") + conc("HCO3-") + conc("CO3-2") + conc("H2NCOO-")
-                conc0("H2S") = conc("H2S") + conc("HS-") + conc("S-2")
-                conc0("NH3") = conc("NH3") + conc("NH4+") + conc("H2NCOO-")
-                conc0("NaOH") = conc("NaOH") + conc("Na+")
+                Vnv = Vxv.MultiplyConstY(V)
+
+                If id("H2O") > -1 Then conc0("H2O") = (Vnf(id("H2O")) - Vnv(id("H2O"))) / totalkg
+                If id("CO2") > -1 Then conc0("CO2") = (Vnf(id("CO2")) - Vnv(id("CO2"))) / totalkg
+                If id("H2S") > -1 Then conc0("H2S") = (Vnf(id("H2S")) - Vnv(id("H2S"))) / totalkg
+                If id("NH3") > -1 Then conc0("NH3") = (Vnf(id("NH3")) - Vnv(id("NH3"))) / totalkg
+                If id("NaOH") > -1 Then conc0("NaOH") = Vnf(id("NaOH"))
 
                 'equilibrium concentrations
 
-                CalculateEquilibriumConcentrations(T, PP, conc, conc0, deltaconc, id)
+                CalculateEquilibriumConcentrations(totalkg, T, PP, conc, conc0, id)
 
                 'mass balance
 
@@ -336,70 +321,48 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If id("H2S") > -1 Then Vnl(id("H2S")) = conc("H2S") * totalkg
                 If id("CO2") > -1 Then Vnl(id("CO2")) = conc("CO2") * totalkg
 
-                Vxl = Vnl.NormalizeY()
-
-                Vxv0 = Vxv.Clone
+                'Vxl = Vnl.NormalizeY
 
                 For i = 0 To n
                     Pvap(i) = DirectCast(PP, SourWaterPropertyPackage).AUX_PVAPi_SW(i, T, Vxl)
                 Next
 
-                If id("NH3") > -1 Then Vxv(id("NH3")) = Vnl(id("NH3")) / L * Pvap(id("NH3")) / P
-                If id("H2S") > -1 Then Vxv(id("H2S")) = Vnl(id("H2S")) / L * Pvap(id("H2S")) / P
-                If id("H2S") > -1 Then Vxv(id("CO2")) = Vnl(id("CO2")) / L * Pvap(id("CO2")) / P
-                If id("H2O") > -1 Then Vxv(id("H2O")) = Vnl(id("H2O")) / L * Pvap(id("H2O")) / P
+                If id("NH3") > -1 Then Vxv(id("NH3")) = Vxl(id("NH3")) * Pvap(id("NH3")) / P
+                If id("H2S") > -1 Then Vxv(id("H2S")) = Vxl(id("H2S")) * Pvap(id("H2S")) / P
+                If id("CO2") > -1 Then Vxv(id("CO2")) = Vxl(id("CO2")) * Pvap(id("CO2")) / P
+                If id("H2O") > -1 Then Vxv(id("H2O")) = Vxl(id("H2O")) * Pvap(id("H2O")) / P
 
-                fx00 = fx0
-                fx0 = fx
-                fx = Vxv.SubtractY(Vxv0).AbsSqrSumY
+                'Vxv = Vxv.NormalizeY
 
-                V = 1.0# - L
+                For i = 0 To n
+                    Ki(i) = Vxv(i) / Vxl(i)
+                Next
 
-                Vxv = Vxv.NormalizeY
-                Vnv = Vxv.MultiplyConstY(V)
-
-                If Abs(fx) < etol And ecount > 2 Then Exit Do
-
-                Lold0 = Lold
-                Lold = L
-
-                If ecount < 2 Then
-                    L *= 0.99
-                Else
-                    L = L - fx * (L - Lold0) / (fx - fx00)
-                    If L > 1.0# Then
-                        L = 1.0#
-                        V = 0.0#
-                        Vnl = Vnl.NormalizeY
-                        Vnv = Vnv.MultiplyConstY(0.0#)
-                    ElseIf L < 0.0# Then
-                        L = 0.0#
-                        V = 1.0#
-                        Vxv = Vz.Clone
-                        Vnl = Vnl.MultiplyConstY(0.0#)
-                        Vnv = Vxv.MultiplyConstY(1.0#)
-                    End If
+                If id("H+") = -1 Then
+                    'doesn't have ions
+                    Vnl(id("H2O")) = conc0("H2O") * totalkg
+                    If id("NaOH") > -1 Then Vnl(id("NaOH")) = conc0("NaOH") * totalkg
+                    If id("NH3") > -1 Then Vnl(id("NH3")) = conc0("NH3") * totalkg
+                    If id("H2S") > -1 Then Vnl(id("H2S")) = conc0("H2S") * totalkg
+                    If id("CO2") > -1 Then Vnl(id("CO2")) = conc0("CO2") * totalkg
                 End If
 
-                'check mass conservation
+                'Vxl = Vnl.NormalizeY
 
-                totalkg1 = L * PP.AUX_MMM(Vxl) / 1000 'kg solution
+                Vant = V
 
-                merr = (totalkg - totalkg1) / totalkg * 100
+                fx = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
+                dfx = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
 
-                'If merr > 5.0# Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
+                If Abs(fx) < etol / 100 Then Exit Do
+
+                V = -fx / dfx + Vant
 
                 ecount += 1
 
                 If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
-
-            Dim divider As Double
-
-            If L > 0.0# Then divider = L Else divider = 1.0#
-
-            F = Vnl.Sum + Vnv.Sum
 
             'return flash calculation results.
 
@@ -409,13 +372,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             WriteDebugInfo("PT Flash [Sour Water]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms. Calculated pH = " & pH)
 
-            Return New Object() {L / F, V / F, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector()}
+            Return New Object() {L, V, Vxl, Vxv, ecount, 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector()}
 
         End Function
 
-        Sub CalculateEquilibriumConcentrations(T As Double, pp As PropertyPackage, conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), deltaconc As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
+        Sub CalculateEquilibriumConcentrations(m As Double, T As Double, pp As PropertyPackage, conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
 
-            Dim nch, pch, pH, pH_old, pH_old0, errCN, errCN0, errCN00, totalC, totalC0, oldCN, oldCN0, fx, fx_old, fx_old0, Istr, k1, k5 As Double
+            Dim nch, pch, pH, pH_old, pH_old0, errCN, errCN0, errCN00, m0C, mC, oldCN, oldCN0, fx, fx_old, fx_old0, Istr, k1, k5 As Double
             Dim icount, icount0 As Integer
 
             'calculate equilibrium constants (f(T))
@@ -430,37 +393,44 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             icount0 = 0.0#
 
-            conc("H2NCOO-") = Math.Min(conc0("CO2") / 10000, conc0("NH3") / 10000)
+            If concHCO3.HasValue Then
+                conc("HCO3-") = concHCO3.Value
+            Else
+                conc("HCO3-") = Math.Min(conc0("CO2") / 1.0E+15, conc0("NH3") / 1.0E+15)
+            End If
 
-            totalC = conc0("CO2")
+            m0C = conc0("CO2") * m * 44.01 / 1000
 
             Do
 
                 'loop: pH convergence
 
-                'If conc("H+") > 0.0# Then
-                '    pH = -Log10(conc("H+"))
-                'Else
-                If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 12.0# Else pH = 7.0#
-                'pH = 7.0
-                conc("H+") = 10 ^ (-pH)
-                'End If
-
-                'calculate ionic strength
-
-                Istr = 1 ^ 2 * conc("H+") / 2
-                Istr += 1 ^ 2 * conc("OH-") / 2
-                Istr += 1 ^ 2 * conc("HCO3-") / 2
-                Istr += 2 ^ 2 * conc("CO3-2") / 2
-                Istr += 1 ^ 2 * conc("H2NCOO-") / 2
-                Istr += 1 ^ 2 * conc("NH4+") / 2
-                Istr += 1 ^ 2 * conc("HS-") / 2
-                Istr += 2 ^ 2 * conc("S-2") / 2
-                Istr += 1 ^ 2 * conc("Na+") / 2
+                If pH0.HasValue Then
+                    pH = pH0.Value
+                Else
+                    If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 9.0# Else pH = 7.0#
+                End If
 
                 icount = 0
 
                 Do
+
+                    conc("H2O") = conc0("H2O") - (conc("H+"))
+                    conc("H2S") = conc0("H2S") - (conc("HS-") + conc("S-2"))
+                    conc("NH3") = conc0("NH3") - (conc("NH4+") + conc("H2NCOO-"))
+                    conc("NaOH") = conc0("NaOH") - (conc("Na+"))
+
+                    'calculate ionic strength
+
+                    Istr = 1 ^ 2 * conc("H+") / 2
+                    Istr += 1 ^ 2 * conc("OH-") / 2
+                    Istr += 1 ^ 2 * conc("HCO3-") / 2
+                    Istr += 2 ^ 2 * conc("CO3-2") / 2
+                    Istr += 1 ^ 2 * conc("H2NCOO-") / 2
+                    Istr += 1 ^ 2 * conc("NH4+") / 2
+                    Istr += 1 ^ 2 * conc("HS-") / 2
+                    Istr += 2 ^ 2 * conc("S-2") / 2
+                    Istr += 1 ^ 2 * conc("Na+") / 2
 
                     'calculate liquid phase chemical equilibrium
 
@@ -472,18 +442,18 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     ' equilibrium constant ionic strength correction
 
                     k1 = Exp(Log(kr(0)) - 0.278 * conc("H2S") + (-1.32 + 1558.8 / (T * 1.8)) * Istr ^ 0.4)
+                    'k1 = Exp(Log(kr(0)) - 0.278 * conc("H2S"))
 
-                    conc("HCO3-") = k1 * conc("CO2") / conc("H+")
-                    deltaconc("HCO3-") = conc("HCO3-") - conc0("HCO3-")
+                    conc("CO2") = conc("HCO3-") * conc("H+") / k1
 
                     conc("CO3-2") = kr(1) * conc("HCO3-") / conc("H+")
-                    deltaconc("CO3-2") = conc("CO3-2") - conc0("CO3-2")
 
                     '   3   Ammonia ionization	            H+ + NH3 <--> NH4+ 
                     '   4   Carbamate production	        HCO3- + NH3 <--> H2NCOO- + H2O 
 
                     conc("NH4+") = kr(2) * conc("H+") * conc("NH3")
-                    deltaconc("NH4+") = conc("NH4+") - conc0("NH4+")
+
+                    conc("H2NCOO-") = kr(3) * conc("HCO3-") * conc("NH3")
 
                     '   5   H2S ionization	                H2S <--> HS- + H+ 
                     '   6   Sulfide production	            HS- <--> S-2 + H+ 
@@ -493,10 +463,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     k5 = Exp(Log(kr(4)) + 0.427 * conc("CO2"))
 
                     conc("HS-") = k5 * conc("H2S") / (conc("H+") + k5 + 2 * k5 * kr(5) / conc("H+"))
-                    deltaconc("HS-") = conc("HS-") - conc0("HS-")
 
                     conc("S-2") = kr(5) * conc("HS-") / conc("H+")
-                    deltaconc("S-2") = conc("S-2") - conc0("S-2")
 
                     '   7   Water self-ionization	        H2O <--> OH- + H+ 
                     '   8   Sodium Hydroxide dissociation   NaOH <--> OH- + Na+ 
@@ -506,9 +474,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     conc("Na+") = conc0("NaOH")
 
                     conc("OH-") = kr(6) / conc("H+") - conc("Na+")
-
-                    deltaconc("OH-") = conc("OH-") - conc0("OH-")
-                    deltaconc("Na+") = conc("Na+") - conc0("Na+")
 
                     'neutrality check
 
@@ -523,7 +488,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                     End If
 
-                    If Abs(fx) < 0.0001 Then Exit Do
+                    If Abs(fx) < 0.0000000001 Then Exit Do
 
                     pH_old0 = pH_old
                     pH_old = pH
@@ -531,9 +496,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     If icount <= 2 Then
                         pH += 0.001
                     Else
-                        pH = pH - fx * (pH - pH_old0) / (fx - fx_old0)
-                        If pH < 2.0# Then pH = 2.0# + icount / 100
-                        If pH > 14.0# Then pH = 14.0# - icount / 100
+                        pH = pH - 0.1 * fx * (pH - pH_old0) / (fx - fx_old0)
                         If Double.IsNaN(pH) Then
                             Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                         End If
@@ -547,28 +510,24 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Loop
 
-                If totalC = 0.0# Then Exit Do
-
                 oldCN0 = oldCN
-                oldCN = conc("H2NCOO-")
+                oldCN = conc("HCO3-")
 
-                totalC0 = totalC
-                totalC = conc("CO2") + conc("HCO3-") + 2 * conc("CO3-2") + conc("H2NCOO-")
+                mC = conc("CO2") * 44.01 + conc("HCO3-") * 61.0168 + conc("CO3-2") * 60.01 + conc("H2NCOO-") * 60.0321 / 2
 
                 errCN00 = errCN0
                 errCN0 = errCN
-                errCN = totalC - totalC0
+                errCN = mC - m0C
 
-                If Math.Abs(errCN) < etol Then Exit Do
+                If Math.Abs(errCN) < 0.0000000001 Then Exit Do
 
-                If icount0 <= 2 Then
-                    conc("H2NCOO-") *= 0.99
+                If icount0 <= 3 Then
+                    conc("HCO3-") *= 0.99
                 Else
-                    conc("H2NCOO-") = conc("H2NCOO-") - errCN * (conc("H2NCOO-") - oldCN0) / (errCN - errCN00)
+                    conc("HCO3-") = conc("HCO3-") - errCN * (conc("HCO3-") - oldCN0) / (errCN - errCN00)
                 End If
 
-                conc("CO2") = conc0("CO2") - (conc("HCO3-") + 2 * conc("CO3-2") + conc("H2NCOO-"))
-                If conc("CO2") < 0.0# Then conc("CO2") = conc0("CO2") / 1000
+                pH0 = pH
 
                 icount0 += 1
 
@@ -576,15 +535,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Loop
 
-            'conc("CO2") = conc0("CO2") - conc("HCO3-") - conc("CO3-2") - conc("H2NCOO-")
-            'conc("H2S") = conc0("H2S") - conc("HS-") - conc("S-2")
-            'conc("NH3") = conc0("NH3") - conc("NH4+") - conc("H2NCOO-")
-            'conc("NaOH") = conc0("NaOH") - conc("Na+")
-
-            'deltaconc("CO2") = -conc0("CO2") + conc("CO2")
-            'deltaconc("H2S") = -conc0("H2S") + conc("H2S")
-            'deltaconc("NH3") = -conc0("NH3") + conc("NH3")
-            'deltaconc("NaOH") = -conc0("NaOH") + conc("NaOH")
+            concHCO3 = conc("HCO3-")
 
         End Sub
 
@@ -1051,7 +1002,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 Dim conc, conc0, deltaconc As New Dictionary(Of String, Double)
                 Dim id As New Dictionary(Of String, Integer)
 
-                Setup(conc, conc0, deltaconc, id)
+                Setup(conc, conc0, id)
 
                 If (Vz(id("H2O")) + Vz(id("NH3"))) > 0.6 Then
 
@@ -1096,7 +1047,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         'equilibrium concentrations
 
-                        If T > 273.15 Then CalculateEquilibriumConcentrations(T, PP, conc, conc0, deltaconc, id)
+                        If T > 273.15 Then CalculateEquilibriumConcentrations(totalkg, T, PP, conc, conc0, id)
 
                         'mass balance
 
