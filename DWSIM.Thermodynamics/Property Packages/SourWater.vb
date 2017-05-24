@@ -213,6 +213,40 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Function AUX_PVAPi_SW(index As Integer, T As Double, Vx As Double()) As Double
+
+            Dim cprops = Me.DW_GetConstantProperties
+            Dim conc As New Dictionary(Of String, Double)
+            Dim CAS, CA, CC, CS As Double
+
+            Dim value As Double
+
+            Setup(conc, Vx, cprops)
+
+            CAS = conc("NH3")
+            CA = conc("NH3") + conc("NH4+") + conc("H2NCOO-")
+            CC = conc("CO2") + conc("HCO3-") + conc("CO3-2") + conc("H2NCOO-")
+            CS = conc("H2S") + conc("HS-") + conc("S-2")
+
+            If cprops(index).IsIon Then
+                Return 1.0E-20
+            ElseIf cprops(index).Name = "Sodium Hydroxide" Then
+                Return 1.0E-20
+            ElseIf cprops(index).Name = "Ammonia" Then
+                value = Exp(178.339 - 15517.91 / (T * 1.8) - 25.6767 * Log(T * 1.8) + 0.01966 * (T * 1.8) + (131.4 / (T * 1.8) - 0.1682) * CAS) + 0.06 * (2 * CC + CS) 'psia/[mol/kg]
+                Return value * conc("NH3") / 0.000145038
+            ElseIf cprops(index).Name = "Carbon dioxide" Then
+                value = Exp(18.33 - 24895.1 / (T * 1.8) + 22399600.0 / (T * 1.8) ^ 2 - 9091800000.0 / (T * 1.8) ^ 3 + 1260100000000.0 / (T * 1.8) ^ 4) 'psia/[mol/kg]
+                Return value * conc("CO2") / 0.000145038
+            ElseIf cprops(index).Name = "Hydrogen sulfide" Then
+                value = Exp(100.684 - 246254 / (T * 1.8) + 239029000.0 / (T * 1.8) ^ 2 - 101898000000.0 / (T * 1.8) ^ 3 + 15973400000000.0 / (T * 1.8) ^ 4 - 0.05 * CAS + (0.965 - 486 / (T * 1.8)) * CC) 'psia/[mol/kg]
+                Return value * conc("H2S") / 0.000145038
+            Else
+                Return MyBase.AUX_PVAPi(index, T)
+            End If
+
+        End Function
+
         Sub Setup(conc As Dictionary(Of String, Double), Vx As Double(), CompoundProperties As List(Of Interfaces.ICompoundConstantProperties))
 
             Dim wid As Integer = CompoundProperties.IndexOf((From c As Interfaces.ICompoundConstantProperties In CompoundProperties Select c Where c.CAS_Number = "7732-18-5").FirstOrDefault)
