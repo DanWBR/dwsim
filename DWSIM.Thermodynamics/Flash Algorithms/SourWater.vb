@@ -351,7 +351,14 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 fx00 = fx0
                 fx0 = fx
-                fx = Vxv.Sum - 1
+                fx = Vxv.SubtractY(Vxv0).AbsSqrSumY
+
+                V = 1.0# - L
+
+                Vxv = Vxv.NormalizeY
+                Vnv = Vxv.MultiplyConstY(V)
+
+                If Abs(fx) < etol And ecount > 2 Then Exit Do
 
                 Lold0 = Lold
                 Lold = L
@@ -360,22 +367,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     L *= 0.99
                 Else
                     L = L - fx * (L - Lold0) / (fx - fx00)
-                    If Pvap.Sum < P Then
+                    If L > 1.0# Then
                         L = 1.0#
-                        Vnl = Vnl.MultiplyConstY(L)
+                        V = 0.0#
+                        Vnl = Vnl.NormalizeY
                         Vnv = Vnv.MultiplyConstY(0.0#)
-                        Exit Do
-                    End If
-                    If Pvap.Sum > P Then
+                    ElseIf L < 0.0# Then
                         L = 0.0#
+                        V = 1.0#
                         Vxv = Vz.Clone
                         Vnl = Vnl.MultiplyConstY(0.0#)
                         Vnv = Vxv.MultiplyConstY(1.0#)
-                        Exit Do
                     End If
                 End If
-
-                If Abs(fx) < etol And ecount > 2 Then Exit Do
 
                 'check mass conservation
 
@@ -411,7 +415,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Sub CalculateEquilibriumConcentrations(T As Double, pp As PropertyPackage, conc As Dictionary(Of String, Double), conc0 As Dictionary(Of String, Double), deltaconc As Dictionary(Of String, Double), id As Dictionary(Of String, Integer))
 
-            Dim nch, pch, pH, pH_old, pH_old0, errCN, errCN0, errCN00, totalC, totalC0, totalC00, oldCN, oldCN0, fx, fx_old, fx_old0, Istr, k1, k5 As Double
+            Dim nch, pch, pH, pH_old, pH_old0, errCN, errCN0, errCN00, totalC, totalC0, oldCN, oldCN0, fx, fx_old, fx_old0, Istr, k1, k5 As Double
             Dim icount, icount0 As Integer
 
             'calculate equilibrium constants (f(T))
