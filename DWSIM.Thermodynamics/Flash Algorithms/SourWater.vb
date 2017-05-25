@@ -259,11 +259,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Vnv = Vxv.MultiplyConstY(V)
                     End With
 
+                    If L <= 0.0000000001 Then V = 1.0# - 1.0E-20
+
                 End If
 
                 L = 1.0# - V
-
-                If L = 0.0# Then Exit Do
 
                 If id("H+") > -1 Then Vxv(id("H+")) = 0.0#
                 If id("OH-") > -1 Then Vxv(id("OH-")) = 0.0#
@@ -301,7 +301,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 'equilibrium concentrations
 
-                CalculateEquilibriumConcentrations(totalkg, T, PP, conc, conc0, id)
+                If L > 0.0# Then CalculateEquilibriumConcentrations(totalkg, T, PP, conc, conc0, id)
 
                 'mass balance
 
@@ -321,8 +321,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If id("H2S") > -1 Then Vnl(id("H2S")) = conc("H2S") * totalkg
                 If id("CO2") > -1 Then Vnl(id("CO2")) = conc("CO2") * totalkg
 
-                'Vxl = Vnl.NormalizeY
-
                 For i = 0 To n
                     Pvap(i) = DirectCast(PP, SourWaterPropertyPackage).AUX_PVAPi_SW(i, T, Vxl)
                 Next
@@ -331,8 +329,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 If id("H2S") > -1 Then Vxv(id("H2S")) = Vxl(id("H2S")) * Pvap(id("H2S")) / P
                 If id("CO2") > -1 Then Vxv(id("CO2")) = Vxl(id("CO2")) * Pvap(id("CO2")) / P
                 If id("H2O") > -1 Then Vxv(id("H2O")) = Vxl(id("H2O")) * Pvap(id("H2O")) / P
-
-                'Vxv = Vxv.NormalizeY
 
                 For i = 0 To n
                     Ki(i) = Vxv(i) / Vxl(i)
@@ -358,11 +354,27 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 V = -fx / dfx + Vant
 
+                'If V < 0.0# Then V = 0.0#
+                'If V > 1.0# Then V = 1.0#
+
                 ecount += 1
 
                 If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
             Loop
+
+            If V <= 0.0# Then
+                V = 0.0#
+                L = 1.0#
+                Vxl = Vz
+                Vxv = Ki.MultiplyY(Vxl).NormalizeY
+            End If
+            If V >= 1.0# Then
+                V = 1.0#
+                L = 0.0#
+                Vxv = Vz
+                Vxl = Vxv.DivideY(Ki).NormalizeY
+            End If
 
             'return flash calculation results.
 
@@ -401,15 +413,15 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             m0C = conc0("CO2") * m * 44.01 / 1000
 
+            'loop: pH convergence
+
+            If pH0.HasValue Then
+                pH = pH0.Value
+            Else
+                If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 9.0# Else pH = 7.0#
+            End If
+
             Do
-
-                'loop: pH convergence
-
-                If pH0.HasValue Then
-                    pH = pH0.Value
-                Else
-                    If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 9.0# Else pH = 7.0#
-                End If
 
                 icount = 0
 
@@ -493,7 +505,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     pH_old0 = pH_old
                     pH_old = pH
 
-                    If icount <= 2 Then
+                    If icount < 2 Then
                         pH += 0.001
                     Else
                         pH = pH - 0.1 * fx * (pH - pH_old0) / (fx - fx_old0)
@@ -519,12 +531,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 errCN0 = errCN
                 errCN = mC - m0C
 
-                If Math.Abs(errCN) < 0.0000000001 Then Exit Do
+                If Math.Abs(errCN) < 0.000001 Then Exit Do
 
                 If icount0 <= 3 Then
                     conc("HCO3-") *= 0.99
                 Else
-                    conc("HCO3-") = conc("HCO3-") - errCN * (conc("HCO3-") - oldCN0) / (errCN - errCN00)
+                    conc("HCO3-") = conc("HCO3-") - 0.1 * errCN * (conc("HCO3-") - oldCN0) / (errCN - errCN00)
                 End If
 
                 pH0 = pH

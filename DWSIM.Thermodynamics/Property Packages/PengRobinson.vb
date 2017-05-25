@@ -38,7 +38,7 @@ Namespace PropertyPackages
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
         Public ip(,) As Double
-        Public ip_hash As Integer
+        <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = False
 
         Public Sub New(ByVal comode As Boolean)
 
@@ -634,10 +634,11 @@ Namespace PropertyPackages
         Public Overrides Function RET_VKij() As Double(,)
 
             Dim hash As Integer = m_pr.InteractionParameters.GetHashCode()
+
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
 
-            If ip_hash <> hash OrElse ip.Length <> (n + 1) * (n + 1) Then
+            If ip_changed Then
 
                 Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
                 Dim i As Integer = 0
@@ -650,7 +651,7 @@ Namespace PropertyPackages
                 Next
 
                 ip = val
-                ip_hash = hash
+                ip_changed = False
 
                 Return val
 
