@@ -3043,6 +3043,9 @@ Public Class FormFlowsheet
         End Get
     End Property
 
+    Public Function GetDockPanel() As Object Implements IFlowsheet.GetDockPanel
+        Return dckPanel
+    End Function
 
 
     Private Sub AdicionarUtilitárioToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TSMIAddUtility.Click

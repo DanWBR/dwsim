@@ -438,6 +438,9 @@
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackage.resx">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.resx">
+      <DependentUpon>FormConfigPropertyPackageBase.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Property Packages\FormConfigPRSV2.de.resx">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </EmbeddedResource>

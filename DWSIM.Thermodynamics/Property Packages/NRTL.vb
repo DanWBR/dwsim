@@ -59,10 +59,10 @@ Namespace PropertyPackages
 
             If GlobalSettings.Settings.CAPEOPENMode Then
                 Dim f As New FormConfigNRTL() With {._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
-                f.ShowDialog(Flowsheet)
+                                f.Show(Flowsheet.GetDockPanel)
             Else
                 Dim f As New FormConfigNRTL() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                f.ShowDialog(Flowsheet)
+                                f.Show(Flowsheet.GetDockPanel)
             End If
 
         End Sub

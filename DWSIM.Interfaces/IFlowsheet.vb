@@ -114,6 +114,8 @@
 
     Sub RunCodeOnUIThread(act As Action)
 
+    Function GetDockPanel() As Object
+
 End Interface
 
 ''' <summary>
