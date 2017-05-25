@@ -182,6 +182,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 ignorevfbounds = True
             End If
 
+            pH0 = Nothing
+            concHCO3 = Nothing
+
             Return Flash_PT_Internal(Vz, P, T, PP, ignorevfbounds, True)
 
         End Function
@@ -418,7 +421,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If pH0.HasValue Then
                 pH = pH0.Value
             Else
-                If (conc("NaOH") + conc("Na+") + conc("NH3")) > 0.0# Then pH = 9.0# Else pH = 7.0#
+                pH = 12.0#
             End If
 
             Do
@@ -508,7 +511,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     If icount < 2 Then
                         pH += 0.001
                     Else
-                        pH = pH - 0.1 * fx * (pH - pH_old0) / (fx - fx_old0)
+                        pH = pH - 0.01 * fx * (pH - pH_old0) / (fx - fx_old0)
                         If Double.IsNaN(pH) Then
                             Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                         End If
@@ -552,6 +555,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Sub
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            pH0 = Nothing
+            concHCO3 = Nothing
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
@@ -665,6 +671,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PS(ByVal Vz As Double(), ByVal P As Double, ByVal S As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            pH0 = Nothing
+            concHCO3 = Nothing
 
             Dim doparallel As Boolean = Settings.EnableParallelProcessing
 
@@ -870,6 +879,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
+            pH0 = Nothing
+            concHCO3 = Nothing
+
             Dim d1, d2 As Date, dt As TimeSpan
 
             d1 = Date.Now
@@ -915,6 +927,9 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         End Function
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+
+            pH0 = Nothing
+            concHCO3 = Nothing
 
             Dim d1, d2 As Date, dt As TimeSpan
 
