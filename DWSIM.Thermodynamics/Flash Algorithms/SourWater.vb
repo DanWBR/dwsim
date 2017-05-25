@@ -17,14 +17,12 @@
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Math
-
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.MathOps.MathEx.Common
-
 Imports System.Threading.Tasks
-
 Imports System.Linq
 Imports System.IO
+Imports DotNumerics.Optimization
 
 Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
@@ -870,359 +868,122 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Overrides Function Flash_TV(ByVal Vz As Double(), ByVal T As Double, ByVal V As Double, ByVal Pref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim n, ecount, i As Integer
             Dim d1, d2 As Date, dt As TimeSpan
 
             d1 = Date.Now
 
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
-            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
+            Dim P As Double = Pref
+            Dim Pmin, Pmax As Double, i, n As Integer
             n = Vz.Length - 1
+            Dim Vp(n) As Double
 
-            Dim Vx(n), Vy(n), Vp(n), L, Vcalc, Vspec, P, x, x0, x00, fx, fx0, fx00, Pmin, Pmax As Double
-            Dim result As Object
-
-            Dim nl As New NestedLoops With {.LimitVaporFraction = False}
-            Dim flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 0.0#, PP, Vz, Nothing, Pref)
-            If flashresult.ResultException IsNot Nothing Then
-                Pmax = 0.0#
-                For i = 0 To n
-                    Pmax += Vz(i) * PP.AUX_PVAPi(i, T)
-                Next
+            If Pref = 0.0# Then
+                i = 0
+                Do
+                    Vp(i) = PP.AUX_PVAPi(i, T)
+                    i += 1
+                Loop Until i = n + 1
+                Pmin = Vp.Max
+                Pmax = Vp.Min
+                Pref = Pmin + (1 - V) * (Pmax - Pmin)
             Else
-                Pmax = flashresult.CalculatedPressure
-            End If
-            flashresult = nl.CalculateEquilibrium(FlashSpec.T, FlashSpec.VAP, T, 1.0#, PP, Vz, Nothing, Pref)
-            If flashresult.ResultException IsNot Nothing Then
-                Pmin = 0.0#
-                For i = 0 To n
-                    Pmin += Vz(i) * PP.AUX_PVAPi(i, T)
-                Next
-            Else
-                Pmin = flashresult.CalculatedPressure
+                Pmin = Pref * 0.8
+                Pmax = Pref * 1.2
             End If
 
-            P = Pmin + (1 - V) * (Pmax - Pmin)
+            Dim solver As New Simplex
+            solver.MaxFunEvaluations = maxit_e
+            solver.Tolerance = etol
 
-            ecount = 0
-            Vspec = V
-            x = P
+            Dim variable As New OptBoundVariable(Pref, Pmin, Pmax)
 
-            Do
+            Dim result As Double() = solver.ComputeMin(Function(x)
+                                                           Try
+                                                               Return (V - Flash_PT(Vz, x(0), T, PP, ReuseKI, PrevKi)(1)) ^ 2
+                                                           Catch ex As Exception
+                                                               Return 1.0E+20 * (New Random().Next)
+                                                           End Try
+                                                       End Function, {variable})
 
-                result = Flash_PT(Vz, x, T, PP)
+            If solver.FunEvaluations = solver.MaxFunEvaluations Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-                If Pmax = Pmin Then
-                    x = P
-                    Exit Do
-                End If
+            P = result(0)
 
-                Vcalc = result(1)
+            Dim fresult As Object() = Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
 
-                fx00 = fx0
-                fx0 = fx
-
-                fx = Vspec - Vcalc
-
-                If Abs(fx) < etol Then Exit Do
-
-                x00 = x0
-                x0 = x
-
-                If ecount <= 1 Then
-                    x *= 0.99
-                Else
-                    x = x - fx * (x - x00) / (fx - fx00)
-                    If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
-                End If
-
-                ecount += 1
-
-                If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
-
-                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-            Loop
-
-            P = x
-
-            L = 1 - V
-            Vx = result(2)
-            Vy = result(3)
+            If Abs(V - fresult(1)) > etol Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
             d2 = Date.Now
 
             dt = d2 - d1
 
-            WriteDebugInfo("TV Flash [Sour Water]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+            WriteDebugInfo("TV Flash [Sour Water]: Converged in " & solver.FunEvaluations & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
-            Return New Object() {L, V, Vx, Vy, P, ecount, Vy.DivideY(Vx), 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {fresult(0), fresult(1), fresult(2), fresult(3), P, fresult(4), DirectCast(fresult(3), Double()).DivideY(DirectCast(fresult(2), Double())), 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
         Public Overrides Function Flash_PV(ByVal Vz As Double(), ByVal P As Double, ByVal V As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
-            Dim n, ecount As Integer
             Dim d1, d2 As Date, dt As TimeSpan
 
             d1 = Date.Now
 
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
-            itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
-            maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
+            Dim T As Double = Tref
+            Dim Tmin, Tmax As Double, i, n As Integer
             n = Vz.Length - 1
-
-            Dim Vx(n), Vnl(n), Vy(n), Vp(n), Ki(n), Hi(n), L, Vcalc, Vspec, T, T0, x, x0, x00, fx, fx0, fx00, Tmin, Tmax, totalkg, Pcalc, Pspec As Double
-
-            Dim result As Object
-
-            Dim nl As New NestedLoops With {.LimitVaporFraction = False}
+            Dim Vp(n) As Double
+            Dim VTc As Double() = PP.RET_VTC
 
             If Tref = 0.0# Then
-
-                Tmin = 273.15
-
-                Dim flashresult = nl.CalculateEquilibrium(FlashSpec.P, FlashSpec.VAP, P, 1.0#, PP, Vz, Nothing, 0.0#)
-
-                If flashresult.ResultException IsNot Nothing Then
-                    Tmax = PP.AUX_TSATi(P, "Water") + 50
-                Else
-                    Tmax = flashresult.CalculatedTemperature + 50
-                End If
-
-                T = Tmin + V * (Tmax - Tmin)
-
-            Else
-
-                T = Tref
-                Tmin = 273.15
-                Tmax = T + 100
-
-            End If
-
-            ecount = 0
-
-            If V = 0.0# Then
-
-                'set up concentrations & ids
-
-                Dim conc, conc0, deltaconc As New Dictionary(Of String, Double)
-                Dim id As New Dictionary(Of String, Integer)
-
-                Setup(conc, conc0, id)
-
-                If (Vz(id("H2O")) + Vz(id("NH3"))) > 0.6 Then
-
-                    Vx = Vz.Clone
-                    Vnl = Vx.Clone
-
-                    Pspec = P
-                    Pcalc = P
-
-                    'calculate solution amounts
-
-                    totalkg = PP.AUX_MMM(Vz) / 1000 'kg solution
-
-                    'estimate K-values
-
-                    Ki = PP.DW_CalcKvalue(Vz, T, P)
-
-                    Do
-
-                        'estimate K-values
-
-                        Vy = Ki.MultiplyY(Vx)
-                        Vy = Vy.NormalizeY
-
-                        'calculate concentrations
-
-                        If ecount = 0 Then
-
-                            If id("H2O") > -1 Then conc("H2O") = Vz(id("H2O")) / totalkg
-                            If id("CO2") > -1 Then conc("CO2") = Vz(id("CO2")) / totalkg
-                            If id("NH3") > -1 Then conc("NH3") = Vz(id("NH3")) / totalkg
-                            If id("H2S") > -1 Then conc("H2S") = Vz(id("H2S")) / totalkg
-                            If id("NaOH") > -1 Then conc("NaOH") = Vz(id("NaOH")) / totalkg
-
-                        End If
-
-                        conc0("H2O") = conc("H2O")
-                        conc0("CO2") = conc("CO2") + conc("HCO3-") + conc("CO3-2") + conc("H2NCOO-")
-                        conc0("H2S") = conc("H2S") + conc("HS-") + conc("S-2")
-                        conc0("NH3") = conc("NH3") + conc("NH4+") + conc("H2NCOO-")
-                        conc0("NaOH") = conc("NaOH") + conc("Na+")
-
-                        'equilibrium concentrations
-
-                        If T > 273.15 Then CalculateEquilibriumConcentrations(totalkg, T, PP, conc, conc0, id)
-
-                        'mass balance
-
-                        If id("H+") > -1 Then Vnl(id("H+")) = conc(("H+")) * totalkg
-                        If id("OH-") > -1 Then Vnl(id("OH-")) = conc(("OH-")) * totalkg
-                        If id("CO2") > -1 Then Vnl(id("CO2")) = conc(("CO2")) * totalkg
-                        If id("HCO3-") > -1 Then Vnl(id("HCO3-")) = conc(("HCO3-")) * totalkg
-                        If id("CO3-2") > -1 Then Vnl(id("CO3-2")) = conc(("CO3-2")) * totalkg
-                        If id("H2NCOO-") > -1 Then Vnl(id("H2NCOO-")) = conc(("H2NCOO-")) * totalkg
-                        If id("NH4+") > -1 Then Vnl(id("NH4+")) = conc(("NH4+")) * totalkg
-                        If id("HS-") > -1 Then Vnl(id("HS-")) = conc(("HS-")) * totalkg
-                        If id("S-2") > -1 Then Vnl(id("S-2")) = conc(("S-2")) * totalkg
-                        If id("Na+") > -1 Then Vnl(id("Na+")) = conc(("Na+")) * totalkg
-
-                        If id("NaOH") > -1 Then Vnl(id("NaOH")) = conc("NaOH") * totalkg
-                        If id("NH3") > -1 Then Vnl(id("NH3")) = conc("NH3") * totalkg
-                        If id("H2S") > -1 Then Vnl(id("H2S")) = conc("H2S") * totalkg
-                        If id("CO2") > -1 Then Vnl(id("CO2")) = conc("CO2") * totalkg
-
-                        Vx = Vnl.NormalizeY()
-
-                        'calculate equilibrium pressure
-
-                        Ki = PP.DW_CalcKvalue(Vx, Vy, T, P)
-
-                        Hi = DirectCast(PP, SourWaterPropertyPackage).CalcHenryConstants(Vx, Vy, T, P)
-
-                        Pcalc = 0.0#
-                        For i = 0 To n
-                            If Not id.Values.Contains(i) Then Pcalc += Vx(i) * Ki(i) * P
-                        Next
-                        If id("NH3") > -1 Then Pcalc += Hi(id("NH3")) * conc("NH3")
-                        If id("H2S") > -1 Then Pcalc += Hi(id("H2S")) * conc("H2S")
-                        If id("CO2") > -1 Then Pcalc += Hi(id("CO2")) * conc("CO2")
-                        If id("H2O") > -1 Then Pcalc += Ki(id("H2O")) * Vx(id("H2O")) * P
-
-                        fx0 = fx
-                        fx = Pspec - Pcalc
-
-                        If Abs(fx - fx0) < etol * 100 Then Exit Do
-                        If Abs(fx) < etol * 100 Then Exit Do
-
-                        T0 = T
-                        T = 1 / (1 / T - Log(Pspec / Pcalc) / 4500)
-
-                        If Double.IsNaN(T) Then
-                            T = Tref
-                            GoTo fallback
-                        End If
-
-                        ecount += 1
-
-                        If ecount > maxit_e * 10 Then
-                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
-                        End If
-
-                        If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                    Loop
-
-                    Vx = Vz.Clone
-
-                Else
-
-fallback:           Vx = Vz.Clone
-
-                    Pspec = P
-                    Pcalc = P
-
-                    Do
-
-                        Pcalc = 0.0#
-                        For i = 0 To n
-                            Pcalc += Vx(i) * PP.AUX_PVAPi(i, T)
-                            Vy(i) = PP.AUX_PVAPi(i, T) / P
-                        Next
-                        Vy = Vy.NormalizeY
-
-                        fx0 = fx
-                        fx = Pspec - Pcalc
-
-                        If Abs(fx - fx0) < etol * 100 Then Exit Do
-                        If Abs(fx) < etol * 100 Then Exit Do
-
-                        T0 = T
-                        T = 1 / (1 / T - Log(Pspec / Pcalc) / 4500)
-
-                        If Double.IsNaN(T) Then
-                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
-                        End If
-
-                        ecount += 1
-
-                        If ecount > maxit_e * 10 Then
-                            Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
-                        End If
-
-                        If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                    Loop
-
-                End If
-
-
-            ElseIf V = 1.0# Then
-
-                Return nl.Flash_PV(Vz, P, V, Tmax, PP, ReuseKI, PrevKi)
-
-            Else
-
-                If Vspec = 0.0# Then Vspec = 0.001
-                If Vspec = 1.0# Then Vspec = 0.999
-                x = T
-
+                i = 0
+                Tref = 0.0#
                 Do
-
-                    result = Flash_PT_Internal(Vz, P, x, PP, True)
-
-                    Vcalc = result(1)
-
-                    fx00 = fx0
-                    fx0 = fx
-
-                    fx = Vspec - Vcalc
-
-                    If Abs(fx) < etol Then Exit Do
-                    If Abs(fx - fx0) < etol Then Exit Do
-
-                    x00 = x0
-                    x0 = x
-
-                    If ecount <= 1 Then
-                        x += 1.0#
-                    Else
-                        x = x - 0.1 * fx * (x - x00) / (fx - fx00)
-                        If Double.IsNaN(x) Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
-                    End If
-
-                    ecount += 1
-
-                    If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
-
-                    If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
-
-                Loop
-
-                T = x
-
-                L = 1 - V
-                Vx = result(2)
-                Vy = result(3)
-
+                    Tref += Vz(i) * PP.AUX_TSATi(P, i)
+                    Tmin += 0.1 * Vz(i) * VTc(i)
+                    Tmax += 2.0 * Vz(i) * VTc(i)
+                    i += 1
+                Loop Until i = n + 1
+            Else
+                Tmin = Tref - 100
+                Tmax = Tref + 100
             End If
 
-            L = 1 - V
+            Dim variable As New OptBoundVariable(Tref, Tmin, Tmax)
 
+            Dim solver As New Simplex
+            solver.MaxFunEvaluations = maxit_e
+            solver.Tolerance = etol
+            Dim result As Double() = solver.ComputeMin(Function(x)
+                                                           Try
+                                                               Return (V - Flash_PT(Vz, P, x(0), PP, ReuseKI, PrevKi)(1)) ^ 2
+                                                           Catch ex As Exception
+                                                               Return 1.0E+20 * (New Random().Next)
+                                                           End Try
+                                                       End Function, {variable})
+
+            If solver.FunEvaluations = solver.MaxFunEvaluations Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
+
+            T = result(0)
+
+            Dim fresult As Object() = Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+
+            If Abs(V - fresult(1)) > etol Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
+
+            
             d2 = Date.Now
 
             dt = d2 - d1
 
-            WriteDebugInfo("PV Flash [Sour Water]: Converged in " & ecount & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
+            WriteDebugInfo("PV Flash [Sour Water]: Converged in " & solver.FunEvaluations & " iterations. Time taken: " & dt.TotalMilliseconds & " ms.")
 
-            Return New Object() {L, V, Vx, Vy, T, ecount, Vy.DivideY(Vx), 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
+            Return New Object() {fresult(0), fresult(1), fresult(2), fresult(3), T, fresult(4), DirectCast(fresult(3), Double()).DivideY(DirectCast(fresult(2), Double())), 0.0#, PP.RET_NullVector, 0.0#, PP.RET_NullVector}
 
         End Function
 
