@@ -182,11 +182,11 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 ignorevfbounds = True
             End If
 
-            Return Flash_PT_Internal(Vz, P, T, PP, ignorevfbounds)
+            Return Flash_PT_Internal(Vz, P, T, PP, ignorevfbounds, True)
 
         End Function
 
-        Public Function Flash_PT_Internal(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, LimitNLVF As Boolean) As Object
+        Public Function Flash_PT_Internal(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, LimitNLVF As Boolean, LimitVF As Boolean) As Object
 
             Dim d1, d2 As Date, dt As TimeSpan
 
@@ -210,7 +210,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Dim Vnf(n), deltaVnf(n), Vnl(n), Vxf(n), Vxl(n), Vxl_ant(n), Vns(n), Vnv(n), Vxv(n), fx, dfx, V, Vant, L, Ki(n), Pvap(n) As Double
             Dim sumN As Double = 0
-          
+
             Vnf = Vz.Clone
             Vxf = Vz.Clone
 
@@ -361,17 +361,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Loop
 
-            If V <= 0.0# Then
-                V = 0.0#
-                L = 1.0#
-                Vxl = Vz
-                Vxv = Ki.MultiplyY(Vxl).NormalizeY
-            End If
-            If V >= 1.0# Then
-                V = 1.0#
-                L = 0.0#
-                Vxv = Vz
-                Vxl = Vxv.DivideY(Ki).NormalizeY
+            If LimitVF Then
+                If V <= 0.0# Then
+                    V = 0.0#
+                    L = 1.0#
+                    Vxl = Vz
+                    Vxv = Ki.MultiplyY(Vxl).NormalizeY
+                End If
+                If V >= 1.0# Then
+                    V = 1.0#
+                    L = 0.0#
+                    Vxv = Vz
+                    Vxl = Vxv.DivideY(Ki).NormalizeY
+                End If
             End If
 
             'return flash calculation results.
@@ -876,33 +878,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             maxit_e = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_External_Iterations)
 
             Dim P As Double = Pref
-            Dim Pmin, Pmax As Double, i, n As Integer
-            n = Vz.Length - 1
-            Dim Vp(n) As Double
+            Dim Pmin, Pmax As Double
 
-            If Pref = 0.0# Then
-                i = 0
-                Do
-                    Vp(i) = PP.AUX_PVAPi(i, T)
-                    i += 1
-                Loop Until i = n + 1
-                Pmin = Vp.Max
-                Pmax = Vp.Min
-                Pref = Pmin + (1 - V) * (Pmax - Pmin)
-            Else
-                Pmin = Pref * 0.8
-                Pmax = Pref * 1.2
-            End If
+            Pmin = 1000.0#
+            Pmax = 1013250
+            Pref = 101325
 
             Dim solver As New Simplex
             solver.MaxFunEvaluations = maxit_e
-            solver.Tolerance = etol
-
+            solver.Tolerance = etol / 100
+            Dim fresult As Object() = Nothing
             Dim variable As New OptBoundVariable(Pref, Pmin, Pmax)
-
             Dim result As Double() = solver.ComputeMin(Function(x)
                                                            Try
-                                                               Return (V - Flash_PT(Vz, x(0), T, PP, ReuseKI, PrevKi)(1)) ^ 2
+                                                               fresult = Flash_PT_Internal(Vz, x(0), T, PP, False, False)
+                                                               Return (V - fresult(1)) ^ 2
                                                            Catch ex As Exception
                                                                Return 1.0E+20 * (New Random().Next)
                                                            End Try
@@ -912,9 +902,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             P = result(0)
 
-            Dim fresult As Object() = Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-
-            If Abs(V - fresult(1)) > etol Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
+            If Abs(P - Pmax) < etol OrElse fresult Is Nothing Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
             d2 = Date.Now
 
@@ -941,28 +929,26 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             Dim Vp(n) As Double
             Dim VTc As Double() = PP.RET_VTC
 
-            If Tref = 0.0# Then
-                i = 0
-                Tref = 0.0#
-                Do
-                    Tref += Vz(i) * PP.AUX_TSATi(P, i)
-                    Tmin += 0.1 * Vz(i) * VTc(i)
-                    Tmax += 2.0 * Vz(i) * VTc(i)
-                    i += 1
-                Loop Until i = n + 1
-            Else
-                Tmin = Tref - 100
-                Tmax = Tref + 100
-            End If
+            i = 0
+            Tref = 0.0#
+            Do
+                Vp(i) = PP.AUX_TSATi(P, i)
+                Tref += Vz(i) * Vp(i)
+                Tmin += 0.1 * Vz(i) * VTc(i)
+                Tmax += 2.0 * Vz(i) * VTc(i)
+                i += 1
+            Loop Until i = n + 1
 
             Dim variable As New OptBoundVariable(Tref, Tmin, Tmax)
 
             Dim solver As New Simplex
             solver.MaxFunEvaluations = maxit_e
-            solver.Tolerance = etol
+            solver.Tolerance = etol / 100
+            Dim fresult As Object() = Nothing
             Dim result As Double() = solver.ComputeMin(Function(x)
                                                            Try
-                                                               Return (V - Flash_PT(Vz, P, x(0), PP, ReuseKI, PrevKi)(1)) ^ 2
+                                                               fresult = Flash_PT_Internal(Vz, P, x(0), PP, False, False)
+                                                               Return (V - fresult(1)) ^ 2
                                                            Catch ex As Exception
                                                                Return 1.0E+20 * (New Random().Next)
                                                            End Try
@@ -972,11 +958,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             T = result(0)
 
-            Dim fresult As Object() = Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+            If fresult Is Nothing Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
 
-            If Abs(V - fresult(1)) > etol Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
-
-            
             d2 = Date.Now
 
             dt = d2 - d1
