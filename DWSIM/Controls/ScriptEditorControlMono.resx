@@ -187,10 +187,10 @@
     <value>False</value>
   </data>
   <data name="cbLinkedEvent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 7</value>
+    <value>319, 7</value>
   </data>
   <data name="cbLinkedEvent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 21</value>
+    <value>186, 21</value>
   </data>
   <data name="cbLinkedEvent.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 11</value>
+    <value>272, 11</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -247,7 +247,7 @@
     <value>124, 7</value>
   </data>
   <data name="cbLinkedObject.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 21</value>
+    <value>142, 21</value>
   </data>
   <data name="cbLinkedObject.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

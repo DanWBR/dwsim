@@ -38,7 +38,6 @@ Partial Class ScriptEditorControl
         '
         'Panel1
         '
-        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Controls.Add(Me.cbPythonEngine)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.cbLinkedEvent)
@@ -46,6 +45,7 @@ Partial Class ScriptEditorControl
         Me.Panel1.Controls.Add(Me.cbLinkedObject)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.chkLink)
+        resources.ApplyResources(Me.Panel1, "Panel1")
         Me.Panel1.Name = "Panel1"
         '
         'cbPythonEngine
@@ -63,8 +63,8 @@ Partial Class ScriptEditorControl
         '
         'cbLinkedEvent
         '
-        resources.ApplyResources(Me.cbLinkedEvent, "cbLinkedEvent")
         Me.cbLinkedEvent.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        resources.ApplyResources(Me.cbLinkedEvent, "cbLinkedEvent")
         Me.cbLinkedEvent.FormattingEnabled = True
         Me.cbLinkedEvent.Name = "cbLinkedEvent"
         '
@@ -75,8 +75,8 @@ Partial Class ScriptEditorControl
         '
         'cbLinkedObject
         '
-        resources.ApplyResources(Me.cbLinkedObject, "cbLinkedObject")
         Me.cbLinkedObject.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        resources.ApplyResources(Me.cbLinkedObject, "cbLinkedObject")
         Me.cbLinkedObject.FormattingEnabled = True
         Me.cbLinkedObject.Name = "cbLinkedObject"
         '
@@ -93,19 +93,19 @@ Partial Class ScriptEditorControl
         '
         'treeViewItems
         '
-        resources.ApplyResources(Me.treeViewItems, "treeViewItems")
         Me.treeViewItems.LineColor = System.Drawing.Color.Empty
+        resources.ApplyResources(Me.treeViewItems, "treeViewItems")
         Me.treeViewItems.Name = "treeViewItems"
         Me.treeViewItems.PathSeparator = "."
         '
         'txtScript
         '
-        resources.ApplyResources(Me.txtScript, "txtScript")
         Me.txtScript.AnnotationVisible = ScintillaNET.Annotation.Standard
         Me.txtScript.AutoCChooseSingle = True
         Me.txtScript.AutoCMaxHeight = 10
         Me.txtScript.AutoCOrder = ScintillaNET.Order.PerformSort
         Me.txtScript.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.txtScript, "txtScript")
         Me.txtScript.Lexer = ScintillaNET.Lexer.Python
         Me.txtScript.Name = "txtScript"
         Me.txtScript.UseTabs = False
