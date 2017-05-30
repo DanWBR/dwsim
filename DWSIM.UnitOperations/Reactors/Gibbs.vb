@@ -997,9 +997,9 @@ Namespace Reactors
 
                     Dim TLast As Double = T0 'remember T for iteration loops
 
-                    Do
+                    cnt = 0
 
-                        cnt = 0
+                    Do
 
                         'estimate initial distribution between phases and fugacity coefficients
 
