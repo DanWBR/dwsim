@@ -671,7 +671,7 @@ Namespace Reactors
                 Loop Until AbsSum(fx) < 0.00000001 Or niter > 249 Or AbsSum(dx) < 0.00000001
 
                 If niter > 249 Then
-                    Throw New Exception("Reached the maximum number of iterations without converging.")
+                    Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                 End If
 
                 'reevaluate function
@@ -797,8 +797,8 @@ Namespace Reactors
 
                 cnt += 1
 
-                If cnt > 249 Then
-                    Throw New Exception("Reached the maximum number of iterations without converging.")
+                If cnt > 50 Then
+                    Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                 End If
 
             Loop Until CalcFinished

@@ -999,6 +999,8 @@ Namespace Reactors
 
                     Do
 
+                        cnt = 0
+
                         'estimate initial distribution between phases and fugacity coefficients
 
                         Dim xm0(ims.Phases(0).Compounds.Count - 1) As Double, ids As New List(Of String)
@@ -1279,6 +1281,12 @@ Namespace Reactors
                                 CalcFinished = True
 
                         End Select
+
+                        cnt += 1
+
+                        If cnt > 50 Then
+                            Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                        End If
 
                     Loop Until CalcFinished
 
@@ -1612,6 +1620,12 @@ Namespace Reactors
 
                                 CalcFinished = True
                         End Select
+
+                        cnt += 1
+
+                        If cnt > 50 Then
+                            Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                        End If
 
                     Loop Until CalcFinished
 
