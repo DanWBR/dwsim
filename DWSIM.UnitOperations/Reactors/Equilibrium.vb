@@ -50,7 +50,7 @@ Namespace Reactors
         Dim N0 As New Dictionary(Of String, Double)
         Dim DN As New Dictionary(Of String, Double)
         Dim N As New Dictionary(Of String, Double)
-        Dim T, P, P0, Ninerts, Winerts, E(,) As Double
+        Dim T, T0, P, P0, Ninerts, Winerts, E(,) As Double
         Dim r, c, els, comps As Integer
 
 #Region "Properties"
@@ -327,10 +327,14 @@ Namespace Reactors
 
             For i = 0 To comps + els
                 tmpx0(i) -= tmpdx(i) * t
-                'If tmpx0(i) < 0 And i <= comps Then tmpx0(i) = 0.000001
             Next
 
-            Dim abssum0 = AbsSum(FunctionValue2N(tmpx0))
+            Dim abssum0 As Double
+            Try
+                abssum0 = AbsSum(FunctionValue2N(tmpx0))
+            Catch ex As Exception
+                abssum0 = New Random().Next * 1.0E+20
+            End Try
             Return abssum0
 
         End Function
@@ -452,9 +456,18 @@ Namespace Reactors
             Dim xl, xv, H, S, wtotalx, wtotaly As Double
             pp.CurrentMaterialStream = ims
 
-            T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+            T0 = ims.Phases(0).Properties.temperature.GetValueOrDefault
             P = ims.Phases(0).Properties.pressure.GetValueOrDefault
             P0 = 101325
+
+            Select Case Me.ReactorOperationMode
+                Case OperationMode.Adiabatic
+                    T = T0 'initial value only, final value will be calculated by an iterative procedure
+                Case OperationMode.Isothermic
+                    T = T0
+                Case OperationMode.OutletTemperature
+                    T = OutletTemperature
+            End Select
 
             Dim rxn As Reaction
 
@@ -498,10 +511,6 @@ Namespace Reactors
 
                 End If
             Next
-
-            T = ims.Phases(0).Properties.temperature.GetValueOrDefault
-            P = ims.Phases(0).Properties.pressure.GetValueOrDefault
-            P0 = 101325.0#
 
             pp.CurrentMaterialStream = ims
             ppr.CurrentMaterialStream = ims
@@ -599,7 +608,7 @@ Namespace Reactors
             Dim REx(r) As Double
 
             For i = 0 To r
-                REx(i) = (lbound(i) + ubound(i)) / 2 'Me.ReactionExtentsEstimates(i)
+                REx(i) = lbound(i) + 0.2 * (ubound(i) - lbound(i))
             Next
 
             Dim g0, g1 As Double
@@ -610,161 +619,189 @@ Namespace Reactors
 
             Me.InitialGibbsEnergy = g0
 
-            'solve using newton's method
+            Dim CalcFinished As Boolean = False
 
-            Dim fx(r), dfdx(r, r), dx(r), x(r), df, fval As Double
-            Dim brentsolver As New BrentOpt.BrentMinimize
-            brentsolver.DefineFuncDelegate(AddressOf MinimizeError)
+            Dim TLast As Double = T0 'remember T for iteration loops
+            Dim cnt As Integer = 0
 
-            Dim niter As Integer
-
-            x = REx
-            niter = 0
             Do
 
-                fx = Me.FunctionValue2N(x)
-                dfdx = Me.FunctionGradient2N(x)
+                'solve using newton's method
 
-                Dim success As Boolean
-                success = SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
+                Dim fx(r), dfdx(r, r), dx(r), x(r) As Double
 
-                tmpx = x
-                tmpdx = dx
-                df = 1
-                fval = brentsolver.brentoptimize(0.1, 1.5, 0.0001, df)
+                Dim niter As Integer
 
-                For i = 0 To r
-                    x(i) -= dx(i) * df
-                    If x(i) <= 0 And i <= c Then x(i) = 0.000001 * N0tot
+                x = REx
+                niter = 0
+                Do
+
+                    fx = Me.FunctionValue2N(x)
+                    dfdx = Me.FunctionGradient2N(x)
+
+                    Dim success As Boolean
+                    success = SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
+
+                    If success Then
+                        If niter = 0 Then
+                            For i = 0 To r
+                                x(i) *= 0.999
+                            Next
+                        ElseIf niter = 1 Then
+                            For i = 0 To r
+                                x(i) -= dx(i) * 0.01
+                            Next
+                        ElseIf niter = 2 Then
+                            For i = 0 To r
+                                x(i) -= dx(i) * 0.3
+                            Next
+                        ElseIf niter >= 3 Then
+                            For i = 0 To r
+                                x(i) -= dx(i)
+                            Next
+                        End If
+                    Else
+                        For i = 0 To r
+                            x(i) *= 0.999
+                        Next
+                    End If
+
+                    niter += 1
+
+                Loop Until AbsSum(fx) < 0.00000001 Or niter > 249 Or AbsSum(dx) < 0.00000001
+
+                If niter > 249 Then
+                    Throw New Exception("Reached the maximum number of iterations without converging.")
+                End If
+
+                'reevaluate function
+
+                g1 = FunctionValue2G(REx)
+
+                Me.FinalGibbsEnergy = g1
+
+                i = 0
+                For Each r As String In Me.Reactions
+                    Me.ReactionExtents(r) = REx(i)
+                    i += 1
                 Next
 
-                niter += 1
+                Dim DHr, Hp As Double
 
-                If AbsSum(dx) = 0.0# Then
-                    Throw New Exception("No solution found - reached a stationary point of the objective function (singular gradient matrix).")
-                End If
+                DHr = 0
 
-            Loop Until AbsSum(fx) < 0.00001 Or niter > 249
+                i = 0
+                Do
+                    'process reaction i
+                    rx = FlowSheet.Reactions(Me.Reactions(i))
 
-            If niter > 249 Then
-                Throw New Exception("Reached the maximum number of iterations without converging.")
-            End If
+                    Dim id(rx.Components.Count - 1) As String
+                    Dim stcoef(rx.Components.Count - 1) As Double
+                    Dim bcidx As Integer = 0
+                    j = 0
+                    For Each sb As ReactionStoichBase In rx.Components.Values
+                        id(j) = sb.CompName
+                        stcoef(j) = sb.StoichCoeff
+                        If sb.IsBaseReactant Then bcidx = j
+                        j += 1
+                    Next
 
-            'reevaluate function
+                    'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
+                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    'DHfT = pp.AUX_DELHig_RT(298.15, 298.15, id, stcoef, bcidx)
+                    'DHr += DHfT * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    i += 1
+                Loop Until i = Me.Reactions.Count
 
-            g1 = FunctionValue2G(REx)
+                'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
+                'Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
-            Me.FinalGibbsEnergy = g1
-
-            i = 0
-            For Each r As String In Me.Reactions
-                Me.ReactionExtents(r) = REx(i)
-                i += 1
-            Next
-
-            Dim DHr, Hp As Double
-
-            DHr = 0
-
-            i = 0
-            Do
-                'process reaction i
-                rx = FlowSheet.Reactions(Me.Reactions(i))
-
-                Dim id(rx.Components.Count - 1) As String
-                Dim stcoef(rx.Components.Count - 1) As Double
-                Dim bcidx As Integer = 0
-                j = 0
-                For Each sb As ReactionStoichBase In rx.Components.Values
-                    id(j) = sb.CompName
-                    stcoef(j) = sb.StoichCoeff
-                    If sb.IsBaseReactant Then bcidx = j
-                    j += 1
+                ' comp. conversions
+                For Each sb As Compound In ims.Phases(0).Compounds.Values
+                    If Me.ComponentConversions.ContainsKey(sb.Name) Then
+                        Me.ComponentConversions(sb.Name) = -DN(sb.Name) / N0(sb.Name)
+                    End If
                 Next
 
-                'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
-                'DHfT = pp.AUX_DELHig_RT(298.15, 298.15, id, stcoef, bcidx)
-                'DHr += DHfT * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
-                i += 1
-            Loop Until i = Me.Reactions.Count
+                'Check to see if are negative molar fractions.
+                Dim sum1 As Double = 0
+                For Each subst As Compound In tms.Phases(0).Compounds.Values
+                    If subst.MoleFraction.GetValueOrDefault < 0 Then
+                        subst.MolarFlow = 0
+                    Else
+                        sum1 += subst.MolarFlow.GetValueOrDefault
+                    End If
+                Next
+                For Each subst As Compound In tms.Phases(0).Compounds.Values
+                    subst.MoleFraction = subst.MolarFlow.GetValueOrDefault / sum1
+                Next
 
-            'Ideal Gas Reactants Enthalpy (kJ/kg * kg/s = kW)
-            'Hid_r += 0 'ppr.RET_Hid(298.15, ims.Phases(0).Properties.temperature.GetValueOrDefault, PropertyPackages.Phase.Mixture) * ims.Phases(0).Properties.massflow.GetValueOrDefault
+                ims = tms.Clone
+                ims.SetFlowsheet(tms.FlowSheet)
 
-            ' comp. conversions
-            For Each sb As Compound In ims.Phases(0).Compounds.Values
-                If Me.ComponentConversions.ContainsKey(sb.Name) Then
-                    Me.ComponentConversions(sb.Name) = -DN(sb.Name) / N0(sb.Name)
+                Select Case Me.ReactorOperationMode
+
+                    Case OperationMode.Adiabatic
+
+                        Me.DeltaQ = 0.0#
+
+                        'Products Enthalpy (kJ/kg * kg/s = kW)
+                        Hp = Hr0 + DHr
+                        Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                        ims.Phases(0).Properties.enthalpy = Hp
+                        ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+
+                        ims.Calculate(True, True)
+
+                        T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                        Me.DeltaT = T - T0
+
+                        If Math.Abs(T - TLast) < 0.5 Then CalcFinished = True
+                        TLast = T
+
+                    Case OperationMode.Isothermic
+
+                        ims.SpecType = StreamSpec.Temperature_and_Pressure
+                        ims.Calculate(True, True)
+
+                        'Products Enthalpy (kJ/kg * kg/s = kW)
+                        Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                        'Heat (kW)
+                        Me.DeltaQ = Hp - Hr0 - DHr
+
+                        Me.DeltaT = 0
+                        CalcFinished = True
+
+                    Case OperationMode.OutletTemperature
+
+                        Dim Tout As Double = Me.OutletTemperature
+
+                        Me.DeltaT = Tout - T
+
+                        ims.Phases(0).Properties.temperature = Tout
+
+                        ims.SpecType = StreamSpec.Temperature_and_Pressure
+
+                        ims.Calculate(True, True)
+
+                        'Products Enthalpy (kJ/kg * kg/s = kW)
+                        Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
+
+                        'Heat (kW)
+                        Me.DeltaQ = Hp - Hr0 - DHr
+                        CalcFinished = True
+
+                End Select
+
+                cnt += 1
+
+                If cnt > 249 Then
+                    Throw New Exception("Reached the maximum number of iterations without converging.")
                 End If
-            Next
 
-            'Check to see if are negative molar fractions.
-            Dim sum1 As Double = 0
-            For Each subst As Compound In tms.Phases(0).Compounds.Values
-                If subst.MoleFraction.GetValueOrDefault < 0 Then
-                    subst.MolarFlow = 0
-                Else
-                    sum1 += subst.MolarFlow.GetValueOrDefault
-                End If
-            Next
-            For Each subst As Compound In tms.Phases(0).Compounds.Values
-                subst.MoleFraction = subst.MolarFlow.GetValueOrDefault / sum1
-            Next
-
-            ims = tms.Clone
-            ims.SetFlowsheet(tms.FlowSheet)
-
-            Select Case Me.ReactorOperationMode
-
-                Case OperationMode.Adiabatic
-
-                    Me.DeltaQ = 0.0#
-
-                    'Products Enthalpy (kJ/kg * kg/s = kW)
-                    Hp = Hr0 + DHr
-                    Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                    ims.Phases(0).Properties.enthalpy = Hp
-                    ims.SpecType = StreamSpec.Pressure_and_Enthalpy
-
-                    ims.Calculate(True, True)
-
-                    Dim Tout As Double = ims.Phases(0).Properties.temperature.GetValueOrDefault
-                    Me.DeltaT = Tout - T
-
-                Case OperationMode.Isothermic
-
-                    ims.SpecType = StreamSpec.Temperature_and_Pressure
-                    ims.Calculate(True, True)
-
-                    'Products Enthalpy (kJ/kg * kg/s = kW)
-                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                    'Heat (kW)
-                    Me.DeltaQ = Hp - Hr0 - DHr
-
-                    Me.DeltaT = 0
-
-                Case OperationMode.OutletTemperature
-
-                    Dim Tout As Double = Me.OutletTemperature
-
-                    Me.DeltaT = Tout - T
-
-                    ims.Phases(0).Properties.temperature = Tout
-
-                    ims.SpecType = StreamSpec.Temperature_and_Pressure
-
-                    ims.Calculate(True, True)
-
-                    'Products Enthalpy (kJ/kg * kg/s = kW)
-                    Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
-
-                    'Heat (kW)
-                    Me.DeltaQ = Hp - Hr0 - DHr
-
-            End Select
+            Loop Until CalcFinished
 
             Dim W As Double = ims.Phases(0).Properties.massflow.GetValueOrDefault
 
@@ -809,6 +846,8 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .ClearAllProps()
+                    .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H * wv
@@ -826,12 +865,6 @@ Namespace Reactors
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * wv
-                    .Phases(0).Properties.massfraction = 1.0#
-                    .Phases(0).Properties.molarfraction = 1.0#
-                    .Phases(3).Properties.massfraction = 0
-                    .Phases(3).Properties.molarfraction = 0
-                    .Phases(2).Properties.massfraction = 1.0#
-                    .Phases(2).Properties.molarfraction = 1.0#
                 End With
             End If
 
@@ -839,6 +872,8 @@ Namespace Reactors
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
                 With ms
+                    .ClearAllProps()
+                    .SpecType = StreamSpec.Temperature_and_Pressure
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
                     .Phases(0).Properties.enthalpy = H * (1 - wv)
@@ -856,12 +891,6 @@ Namespace Reactors
                         j += 1
                     Next
                     .Phases(0).Properties.massflow = W * (1 - wv)
-                    .Phases(0).Properties.massfraction = 1.0#
-                    .Phases(0).Properties.molarfraction = 1
-                    .Phases(3).Properties.massfraction = 1
-                    .Phases(3).Properties.molarfraction = 1
-                    .Phases(2).Properties.massfraction = 0
-                    .Phases(2).Properties.molarfraction = 0
                 End With
             End If
 

@@ -38,7 +38,7 @@ Namespace PropertyPackages
         Public m_pr As New PropertyPackages.Auxiliary.PengRobinson
         Public prn As New PropertyPackages.ThermoPlugs.PR
         Public ip(,) As Double
-        <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = False
+        <Xml.Serialization.XmlIgnore> Public ip_changed As Boolean = True
 
         Public Sub New(ByVal comode As Boolean)
 

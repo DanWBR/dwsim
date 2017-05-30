@@ -1011,11 +1011,20 @@ Namespace Reactors
 
                     ids = ims.Phases(0).Compounds.Keys.ToList
 
-                    i = 0
-                    For Each id In ComponentIDs
-                        xm0(ids.IndexOf(id)) = vars(i)
-                        i += 1
-                    Next
+                    If Me.InitialEstimates.Sum > 0 Then
+                        i = 0
+                        For Each id In ComponentIDs
+                            xm0(ids.IndexOf(id)) = InitialEstimates(i) / InitialEstimates.Sum
+                            i += 1
+                        Next
+                    Else
+                        i = 0
+                        For Each id In ComponentIDs
+                            xm0(ids.IndexOf(id)) = vars(i)
+                            i += 1
+                        Next
+                    End If
+
 
                     pp.CurrentMaterialStream = ims
 
@@ -1032,10 +1041,10 @@ Namespace Reactors
                         fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                         fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
-                        nv = .GetVaporPhaseMoleFraction + 0.1
-                        nl1 = .GetLiquidPhase1MoleFraction + 0.1
-                        nl2 = .GetLiquidPhase2MoleFraction + 0.1
-                        ns = .GetSolidPhaseMoleFraction + 0.1
+                        nv = .GetVaporPhaseMoleFraction + 0.001
+                        nl1 = .GetLiquidPhase1MoleFraction + 0.001
+                        nl2 = .GetLiquidPhase2MoleFraction + 0.001
+                        ns = .GetSolidPhaseMoleFraction + 0.001
                     End With
 
                     fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
@@ -1068,7 +1077,7 @@ Namespace Reactors
                     variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(ns, True))
 
                     Dim solver As New DotNumerics.Optimization.Simplex, smplres As Double()
-                    solver.MaxFunEvaluations = 5000
+                    solver.MaxFunEvaluations = 50000
                     solver.Tolerance = 0.0000000001
                     smplres = solver.ComputeMin(Function(x1)
                                                     Return FunctionValue2N(x1).AbsSqrSumY
@@ -1102,26 +1111,25 @@ Namespace Reactors
                             Dim success As Boolean
                             success = MathEx.SysLin.rsolve.rmatrixsolve(dfdx, fx, x.Length, dx)
 
-                            'this call to the brent solver calculates the damping factor which minimizes the error (fval).
-
                             If success Then
+
+                                'this call to the brent solver calculates the damping factor which minimizes the error (fval).
 
                                 tmpx = x.Clone
                                 tmpdx = dx.Clone
-                                fval = brentsolver.brentoptimize(0.01, 2.0#, 0.000001, df)
+                                fval = brentsolver.brentoptimize(0.01, 2.0#, 0.0000000001, df)
 
                                 For i = 0 To x.Length - 1
-                                    x(i) -= df * dx(i)
+                                    x(i) -= dx(i) * df
                                 Next
 
                             Else
 
                                 For i = 0 To x.Length - 1
-                                    x(i) *= 0.99
+                                    x(i) *= 0.999
                                 Next
 
                             End If
-
 
                             ni_int += 1
 
