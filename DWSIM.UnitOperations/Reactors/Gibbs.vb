@@ -893,7 +893,7 @@ Namespace Reactors
                     pp.CurrentMaterialStream = ims
 
                     For i = 0 To c
-                        igge(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0)) '/ (8.314 * T)
+                        igge(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0))
                     Next
 
                     igcp = igge.Clone
@@ -1000,6 +1000,12 @@ Namespace Reactors
                     cnt = 0
 
                     Do
+
+                        pp.CurrentMaterialStream = ims
+
+                        For i = 0 To c
+                            igcp(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0))
+                        Next
 
                         'estimate initial distribution between phases and fugacity coefficients
 
@@ -1254,12 +1260,13 @@ Namespace Reactors
 
                                 ims.Calculate(True, True)
 
+                                TLast = T
                                 T = ims.Phases(0).Properties.temperature.GetValueOrDefault
                                 Me.DeltaT = T - T0
 
                                 If Abs(T - TLast) < 0.1 Then CalcFinished = True
 
-                                TLast = T
+                                T = (T + TLast) / 2
 
                             Case OperationMode.Isothermic
 
