@@ -271,7 +271,7 @@ Namespace Reactors
 
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
-            Dim epsilon As Double = 0.1
+            Dim epsilon As Double = 0.001
 
             Dim f1(), f2() As Double
             Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
@@ -284,7 +284,7 @@ Namespace Reactors
                         x2(j) = x(j)
                     Else
                         If x(j) = 0.0# Then
-                            x2(j) = x(j) + 0.1
+                            x2(j) = 0.001
                         Else
                             x2(j) = x(j) * (1 + epsilon)
                         End If
@@ -1007,20 +1007,31 @@ Namespace Reactors
 
                         ids = ims.Phases(0).Compounds.Keys.ToList
 
-                        If Me.InitialEstimates.Sum > 0 Then
-                            i = 0
-                            For Each id In ComponentIDs
-                                xm0(ids.IndexOf(id)) = InitialEstimates(i) / InitialEstimates.Sum
-                                i += 1
-                            Next
-                        Else
-                            i = 0
-                            For Each id In ComponentIDs
-                                xm0(ids.IndexOf(id)) = vars(i)
-                                i += 1
-                            Next
-                        End If
+                        If cnt = 0 Then
 
+                            If Me.InitialEstimates.Sum > 0 Then
+                                i = 0
+                                For Each id In ComponentIDs
+                                    xm0(ids.IndexOf(id)) = InitialEstimates(i) / InitialEstimates.Sum
+                                    i += 1
+                                Next
+                            Else
+                                i = 0
+                                For Each id In ComponentIDs
+                                    xm0(ids.IndexOf(id)) = vars(i)
+                                    i += 1
+                                Next
+                            End If
+
+                        Else
+
+                            For Each id In ComponentIDs
+                                xm0(ids.IndexOf(id)) = N(id) / N.Values.Sum
+                            Next
+
+                            xm0 = xm0.NormalizeY
+
+                        End If
 
                         pp.CurrentMaterialStream = ims
 
@@ -1037,11 +1048,16 @@ Namespace Reactors
                             fl1_0 = pp.DW_CalcFugCoeff(xl1_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                             fl2_0 = pp.DW_CalcFugCoeff(xl2_0, T, P, PropertyPackages.State.Liquid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
                             fs_0 = pp.DW_CalcFugCoeff(xs_0, T, P, PropertyPackages.State.Solid).Select(Function(d) If(Double.IsNaN(d), 1.0#, d)).ToArray
-                            nv = .GetVaporPhaseMoleFraction + 0.001
-                            nl1 = .GetLiquidPhase1MoleFraction + 0.001
-                            nl2 = .GetLiquidPhase2MoleFraction + 0.001
-                            ns = .GetSolidPhaseMoleFraction + 0.001
+                            nv = .GetVaporPhaseMoleFraction
+                            nl1 = .GetLiquidPhase1MoleFraction
+                            nl2 = .GetLiquidPhase2MoleFraction
+                            ns = .GetSolidPhaseMoleFraction
                         End With
+
+                        If nv > 0.0# Then nv *= W0tot / pp.AUX_MMM(xv_0) * 1000 Else nv = 0.0001 * N0tot
+                        If nl1 > 0.0# Then nl1 *= W0tot / pp.AUX_MMM(xl1_0) * 1000 Else nl1 = 0.0001 * N0tot
+                        If nl2 > 0.0# Then nl2 *= W0tot / pp.AUX_MMM(xl2_0) * 1000 Else nl2 = 0.0001 * N0tot
+                        If ns > 0.0# Then ns *= W0tot / pp.AUX_MMM(xs_0) * 1000 Else ns = 0.0001 * N0tot
 
                         fv_0 = FixFugCoeff(fv_0, T, PropertyPackages.State.Vapor)
                         fl1_0 = FixFugCoeff(fl1_0, T, PropertyPackages.State.Liquid)
@@ -1063,14 +1079,14 @@ Namespace Reactors
 
                         'optimization of initial values for the lagrange multipliers
 
-                        Dim variables As New List(Of DotNumerics.Optimization.OptSimplexBoundVariable)
+                        Dim variables As New List(Of DotNumerics.Optimization.OptBoundVariable)
                         For i = 0 To e
-                            variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(0, -1000, 1000))
+                            variables.Add(New DotNumerics.Optimization.OptBoundVariable(0.0#, -100.0#, 100.0#))
                         Next
-                        variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(nv, True))
-                        variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(nl1, True))
-                        variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(nl2, True))
-                        variables.Add(New DotNumerics.Optimization.OptSimplexBoundVariable(ns, True))
+                        variables.Add(New DotNumerics.Optimization.OptBoundVariable(nv, True))
+                        variables.Add(New DotNumerics.Optimization.OptBoundVariable(nl1, True))
+                        variables.Add(New DotNumerics.Optimization.OptBoundVariable(nl2, True))
+                        variables.Add(New DotNumerics.Optimization.OptBoundVariable(ns, True))
 
                         Dim solver As New DotNumerics.Optimization.Simplex, smplres As Double()
                         solver.MaxFunEvaluations = 50000
@@ -1113,7 +1129,7 @@ Namespace Reactors
 
                                     tmpx = x.Clone
                                     tmpdx = dx.Clone
-                                    fval = brentsolver.brentoptimize(0.001, 1.0#, 0.0000000001, df)
+                                    fval = brentsolver.brentoptimize(0.001#, 2.0#, 0.000001, df)
 
                                     For i = 0 To x.Length - 1
                                         x(i) -= dx(i) * df
