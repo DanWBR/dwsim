@@ -616,6 +616,9 @@ Namespace Reactors
                 Do
 
                     fx = Me.FunctionValue2N(x)
+
+                    If AbsSum(fx) < 0.00000001 Then Exit Do
+
                     dfdx = Me.FunctionGradient2N(x)
 
                     Dim success As Boolean
@@ -647,7 +650,7 @@ Namespace Reactors
 
                     niter += 1
 
-                Loop Until AbsSum(fx) < 0.00000001 Or niter > 249
+                Loop Until niter > 249
 
                 If niter > 249 Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
@@ -686,7 +689,7 @@ Namespace Reactors
                     Next
 
                     'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) / rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
 
                     i += 1
                 Loop Until i = Me.Reactions.Count

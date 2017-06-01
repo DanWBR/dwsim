@@ -922,11 +922,12 @@ Namespace Reactors
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
-            Dim Hr0 As Double
+            Dim Hr0, Hr0i, Hpi, Hp2 As Double
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim tmp As IFlashCalculationResult
             Dim xl, xv, xs, H, S As Double
+
             pp.CurrentMaterialStream = ims
 
             'read temperature and pressure from inlet stream.
@@ -941,6 +942,8 @@ Namespace Reactors
                 Case OperationMode.OutletTemperature
                     T = OutletTemperature
             End Select
+
+            Hr0i = pp.RET_Hid(298.15, T, pp.RET_VMOL(PropertyPackages.Phase.Mixture)) * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             ims.Phases(0).Properties.temperature = T
 
@@ -1014,7 +1017,7 @@ Namespace Reactors
                     pp.CurrentMaterialStream = ims
 
                     For i = 0 To c
-                        igge(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0))
+                        igge(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * T)
                     Next
 
                     igcp = igge.Clone
@@ -1066,37 +1069,9 @@ Namespace Reactors
                         resc2(idx) = vars(idx)
                     Next
 
-                    'estimate lagrange multipliers
+                    'lagrange multipliers
 
                     Dim lagrm(e) As Double
-
-                    Dim mymat As New Mapack.Matrix(e + 1, e + 1)
-                    Dim mypot As New Mapack.Matrix(e + 1, 1)
-                    Dim mylags As New Mapack.Matrix(e + 1, 1)
-
-                    Dim k As Integer = 0
-
-                    For i = 0 To e
-                        k = 0
-                        For j = 0 To c
-                            If resc2(j) > 0.0# Then
-                                mymat(i, k) = Me.ElementMatrix(i, j)
-                                mypot(k, 0) = igge(j)
-                                k += 1
-                            End If
-                        Next
-                    Next
-
-                    Try
-                        mylags = mymat.Solve(mypot.Multiply(-1))
-                        For i = 0 To e
-                            lagrm(i) = mylags(i, 0)
-                        Next
-                    Catch ex As Exception
-                        For i = 0 To e
-                            lagrm(i) = igge(i) + 0.01
-                        Next
-                    End Try
 
                     Dim g0, g1, result(c + e + 1) As Double
 
@@ -1125,7 +1100,7 @@ Namespace Reactors
                         pp.CurrentMaterialStream = tms
 
                         For i = 0 To c
-                            igcp(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0))
+                            igcp(i) = pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i), False) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0) / (8.314 * T)
                         Next
 
                         'estimate initial distribution between phases and fugacity coefficients
@@ -1368,16 +1343,21 @@ Namespace Reactors
                                 Me.DeltaQ = 0.0#
 
                                 'Products Enthalpy (kJ/kg * kg/s = kW)
+
                                 Dim Hp = Hr0 - DHr
+
                                 Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                                 ims.Phases(0).Properties.enthalpy = Hp
-                                ims.SpecType = StreamSpec.Pressure_and_Enthalpy
+                                
+                                pp.CurrentMaterialStream = ims
 
+                                ims.SpecType = StreamSpec.Pressure_and_Enthalpy
                                 ims.Calculate(True, True)
 
                                 TLast = T
-                                T = ims.Phases(0).Properties.temperature.GetValueOrDefault
+                                T = ims.Phases(0).Properties.temperature
+
                                 Me.DeltaT = T - T0
 
                                 If Abs(T - TLast) < 0.5 Then CalcFinished = True
@@ -1574,6 +1554,9 @@ Namespace Reactors
                         Do
 
                             fx = Me.FunctionValue2N_RE(x)
+
+                            If AbsSum(fx) < 0.00000001 Then Exit Do
+
                             dfdx = Me.FunctionGradient2N_RE(x)
 
                             Dim success As Boolean
@@ -1605,7 +1588,7 @@ Namespace Reactors
 
                             niter += 1
 
-                        Loop Until AbsSum(fx) < 0.00000001 Or niter > 249
+                        Loop Until niter > 249
 
                         If niter > 249 Then
                             Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
@@ -1642,7 +1625,7 @@ Namespace Reactors
                             Next
 
                             'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                            DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) / rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                            DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
 
                             i += 1
 
@@ -1680,6 +1663,7 @@ Namespace Reactors
 
                                 'Products Enthalpy (kJ/kg * kg/s = kW)
                                 Hp = Hr0 + DHr
+                                Hp = Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault
 
                                 ims.Phases(0).Properties.enthalpy = Hp
                                 ims.SpecType = StreamSpec.Pressure_and_Enthalpy
