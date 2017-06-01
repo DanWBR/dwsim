@@ -269,6 +269,163 @@ Namespace Reactors
 
 #Region "Auxiliary Functions"
 
+
+        Private Function FunctionValue2N_RE(ByVal x() As Double) As Double()
+
+            Dim i, j As Integer
+
+            Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
+
+            i = 0
+            For Each s As String In N.Keys
+                DN(s) = 0
+                For j = 0 To r
+                    DN(s) += E(i, j) * x(j)
+                Next
+                i += 1
+            Next
+
+            For Each s As String In DN.Keys
+                N(s) = N0(s) + DN(s)
+            Next
+
+            Dim fw(c), fm(c), sumfm, sum1, sumn, sumw As Double
+
+            N.Values.CopyTo(fm, 0)
+
+            sumfm = Sum(fm) + Ninerts
+
+            sum1 = 0.0#
+            sumn = 0.0#
+            For Each s As Compound In tms.Phases(0).Compounds.Values
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MolarFlow = N(s.Name)
+                    s.MoleFraction = N(s.Name) / sumfm
+                    sum1 += N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
+                Else
+                    s.MoleFraction = s.MolarFlow / sumfm
+                End If
+                sumn += s.MolarFlow
+            Next
+
+            tms.Phases(0).Properties.molarflow = sumn
+
+            sumw = 0.0#
+            For Each s As Compound In tms.Phases(0).Compounds.Values
+                If Me.ComponentIDs.Contains(s.Name) Then
+                    s.MassFlow = N(s.Name) * s.ConstantProperties.Molar_Weight / 1000
+                End If
+                s.MassFraction = s.MassFlow / (sum1 + Winerts)
+                sumw += s.MassFlow
+            Next
+
+            tms.Phases(0).Properties.massflow = sumw
+
+            pp.CurrentMaterialStream = tms
+
+            Dim cpv(tms.Phases(0).Compounds.Count - 1), cpl(tms.Phases(0).Compounds.Count - 1), basis(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim f(x.Length - 1) As Double
+
+            Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
+
+            Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
+
+            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
+
+            i = 0
+            For Each s As Compound In tms.Phases(0).Compounds.Values
+                If s.MoleFraction > 0.0# Then
+                    cpv(i) = (fugv(i) * Vz(i) * P / P0)
+                    cpl(i) = (fugl(i) * Vz(i))
+                Else
+                    cpv(i) = (fugv(i) * 0.01 * P / P0)
+                    cpl(i) = (fugl(i) * 0.01)
+                End If
+                i += 1
+            Next
+
+            For i = 0 To Me.Reactions.Count - 1
+                prod(i) = 1.0#
+                j = 0
+                For Each s As Compound In tms.Phases(0).Compounds.Values
+                    With FlowSheet.Reactions(Me.Reactions(i))
+                        If .ReactionPhase = PhaseName.Vapor AndAlso .Components.ContainsKey(s.Name) Then
+                            Select Case .ReactionBasis
+                                Case ReactionBasis.Activity, ReactionBasis.Fugacity
+                                    basis(j) = cpv(j)
+                                Case ReactionBasis.MassFrac
+                                    basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
+                                Case ReactionBasis.MolarFrac
+                                    basis(j) = Vz(j)
+                                Case ReactionBasis.PartialPress
+                                    basis(j) = Vz(j) * fugv(j) * P
+                                Case Else
+                                    Throw New Exception("Selected Reaction Basis is not supported.")
+                            End Select
+                            prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
+                        ElseIf .ReactionPhase = PhaseName.Liquid AndAlso .Components.ContainsKey(s.Name) Then
+                            Select Case .ReactionBasis
+                                Case ReactionBasis.Activity, ReactionBasis.Fugacity
+                                    basis(j) = cpl(j)
+                                Case ReactionBasis.MassFrac
+                                    basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
+                                Case ReactionBasis.MolarFrac
+                                    basis(j) = Vz(j)
+                                Case ReactionBasis.PartialPress
+                                    basis(j) = Vz(j) * fugl(j) * P
+                                Case Else
+                                    Throw New Exception("Selected Reaction Basis is not supported.")
+                            End Select
+                            prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
+                        End If
+                    End With
+                    j += 1
+                Next
+            Next
+
+            Dim pen_val As Double = ReturnPenaltyValue()
+
+            For i = 0 To Me.Reactions.Count - 1
+                With FlowSheet.Reactions(Me.Reactions(i))
+                    f(i) = prod(i) - .EvaluateK(T, pp) + pen_val
+                    If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Then
+                        f(i) = pen_val
+                    End If
+                End With
+            Next
+
+            Return f
+
+        End Function
+
+        Private Function FunctionGradient2N_RE(ByVal x() As Double) As Double(,)
+
+            Dim epsilon As Double = 0.0001
+
+            Dim f1(), f2() As Double
+            Dim g(x.Length - 1, x.Length - 1), x2(x.Length - 1) As Double
+            Dim i, j, k As Integer
+
+            f1 = FunctionValue2N_RE(x)
+            For i = 0 To x.Length - 1
+                For j = 0 To x.Length - 1
+                    If i <> j Then
+                        x2(j) = x(j)
+                    Else
+                        x2(j) = x(j) * (1 + epsilon)
+                    End If
+                Next
+                f2 = FunctionValue2N_RE(x2)
+                For k = 0 To x.Length - 1
+                    g(k, i) = (f2(k) - f1(k)) / (x2(i) - x(i))
+                Next
+            Next
+
+            Return g
+
+        End Function
+
         Private Function FunctionGradient2N(ByVal x() As Double) As Double(,)
 
             Dim epsilon As Double = 0.001
@@ -302,14 +459,14 @@ Namespace Reactors
 
         Private Function FunctionValue(ByVal x() As Double) As Double
 
-            tms = ims.Clone()
-            tms.SetFlowsheet(ims.FlowSheet)
-
-            Dim i As Integer
-
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
 
-            cnt += 1
+            tms = ims.Clone()
+            tms.SetFlowsheet(ims.FlowSheet)
+            tms.PropertyPackage = pp
+            pp.CurrentMaterialStream = tms
+
+            Dim i As Integer
 
             i = 0
             For Each s As String In N.Keys
@@ -322,7 +479,6 @@ Namespace Reactors
 
             For Each s As String In DN.Keys
                 N(s) = N0(s) + DN(s)
-                'If N(s) > -0.1 And N(s) < 0 Then N(s) = 0.0#
             Next
 
             Dim fw(comps), fm(comps), sumfm, sum1, sumn, sumw As Double
@@ -356,54 +512,19 @@ Namespace Reactors
             Next
 
             tms.Phases(0).Properties.massflow = sumw
-
-            With pp
-                .CurrentMaterialStream = tms
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                .DW_CalcCompMolarFlow(-1)
-                .DW_CalcCompMassFlow(-1)
-                .DW_CalcCompVolFlow(-1)
-                .DW_CalcOverallProps()
-                .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                .DW_CalcVazaoVolumetrica()
-                .DW_CalcKvalue()
-            End With
-
-            Dim fugs(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim CP(tms.Phases(0).Compounds.Count - 1) As Double
-            Dim DGf As Double
-
-            i = 0
-            For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.MoleFraction <> 0.0# Then
-                    DGf = pp.AUX_DELGF_T(298.15, T, s.Name) * s.ConstantProperties.Molar_Weight
-                    fugs(i) = s.FugacityCoeff.GetValueOrDefault
-                    'XC = s.MoleFraction.GetValueOrDefault
-                    If s.MoleFraction.GetValueOrDefault <= 0 Then
-                        'CP(i) = s.MoleFraction * DGf * 10
-                        CP(i) = s.MoleFraction * -200
-                    Else
-                        CP(i) = s.MoleFraction * (DGf + Log(fugs(i) * s.MoleFraction * P / P0))
-                    End If
-                Else
-                    CP(i) = 0
-                End If
-                i += 1
-            Next
+            tms.SpecType = StreamSpec.Temperature_and_Pressure
+            tms.Calculate(True, True)
+            pp.CurrentMaterialStream = tms
 
             Dim pen_val As Double = ReturnPenaltyValue()
 
-            Dim gibbs As Double = MathEx.Common.Sum(CP) * sumn * 8.314 * T
+            Dim gibbs As Double = tms.Phases(0).Properties.gibbs_free_energy.GetValueOrDefault * tms.Phases(0).Properties.molecularWeight.GetValueOrDefault * tms.Phases(0).Properties.molarflow.GetValueOrDefault / 1000
 
             If Double.IsNaN(gibbs) Or Double.IsInfinity(gibbs) Then
                 Return pen_val
             Else
                 Return gibbs + pen_val
             End If
-
 
         End Function
 
@@ -432,7 +553,7 @@ Namespace Reactors
 
             Dim f(x.Length - 1) As Double
 
-            Dim ids = ims.Phases(0).Compounds.Keys.ToList
+            Dim ids = tms.Phases(0).Compounds.Keys.ToList
 
             Dim sum As Double
 
@@ -782,7 +903,7 @@ Namespace Reactors
 
             Me.Validate()
 
-            Dim i, j, l, m As Integer
+            Dim i, j As Integer
 
             Me.Reactions.Clear()
             Me.ReactionExtents.Clear()
@@ -1001,7 +1122,7 @@ Namespace Reactors
 
                     Do
 
-                        pp.CurrentMaterialStream = ims
+                        pp.CurrentMaterialStream = tms
 
                         For i = 0 To c
                             igcp(i) = (pp.AUX_DELGF_T(298.15, T, Me.ComponentIDs(i)) * FlowSheet.SelectedCompounds(Me.ComponentIDs(i)).Molar_Weight + Log(P / P0))
@@ -1009,9 +1130,9 @@ Namespace Reactors
 
                         'estimate initial distribution between phases and fugacity coefficients
 
-                        Dim xm0(ims.Phases(0).Compounds.Count - 1) As Double, ids As New List(Of String)
+                        Dim xm0(tms.Phases(0).Compounds.Count - 1) As Double, ids As New List(Of String)
 
-                        ids = ims.Phases(0).Compounds.Keys.ToList
+                        ids = tms.Phases(0).Compounds.Keys.ToList
 
                         If cnt = 0 Then
 
@@ -1038,8 +1159,6 @@ Namespace Reactors
                             xm0 = xm0.NormalizeY
 
                         End If
-
-                        pp.CurrentMaterialStream = ims
 
                         Dim nv, nl1, nl2, ns As Double
 
@@ -1116,9 +1235,6 @@ Namespace Reactors
                             px = x.Clone
 
                             Do
-
-                                tms = ims.Clone()
-                                tms.SetFlowsheet(ims.FlowSheet)
 
                                 fx = Me.FunctionValue2N(x)
 
@@ -1264,9 +1380,12 @@ Namespace Reactors
                                 T = ims.Phases(0).Properties.temperature.GetValueOrDefault
                                 Me.DeltaT = T - T0
 
-                                If Abs(T - TLast) < 0.1 Then CalcFinished = True
+                                If Abs(T - TLast) < 0.5 Then CalcFinished = True
 
-                                T = (T + TLast) / 2
+                                T = TLast * 0.7 + T * 0.3
+
+                                ims.Phases(0).Properties.temperature = T
+                                tms.Phases(0).Properties.temperature = T
 
                             Case OperationMode.Isothermic
 
@@ -1329,7 +1448,6 @@ Namespace Reactors
                     pp.CurrentMaterialStream = ims
                     ppr.CurrentMaterialStream = ims
 
-
                     'initial estimates for reaction extents
                     tms = ims.Clone()
 
@@ -1378,12 +1496,6 @@ Namespace Reactors
                         i += 1
                     Next
 
-                    Dim REx(r) As Double
-
-                    For i = 0 To r
-                        REx(i) = 0 'Me.ReactionExtentsEstimates(i)
-                    Next
-
                     Dim fm0(c), N0tot, W0tot, wm0 As Double
 
                     N0.Clear()
@@ -1411,58 +1523,94 @@ Namespace Reactors
                     Dim ubound(Me.ReactionExtents.Count - 1) As Double
                     Dim var1 As Double
 
-                    'define bounds for the extents.
                     i = 0
                     For Each rxid As String In Me.Reactions
                         rx = FlowSheet.Reactions(rxid)
-                        l = 0
-                        m = 0
+                        j = 0
                         For Each comp As ReactionStoichBase In rx.Components.Values
                             var1 = -N0(comp.CompName) / comp.StoichCoeff
-
-                            If comp.StoichCoeff < 0 Then
-                                If var1 < ubound(i) Or l = 0 Then ubound(i) = var1
-                                l += 1
+                            If j = 0 Then
+                                lbound(i) = var1
+                                ubound(i) = var1
                             Else
-                                If var1 > lbound(i) Or m = 0 Then lbound(i) = var1
-                                m += 1
+                                If var1 < lbound(i) Then lbound(i) = var1
+                                If var1 > ubound(i) Then ubound(i) = var1
                             End If
-
+                            j += 1
                         Next
                         i += 1
                     Next
 
-                    'solve the minimization problem using reaction extents as variables.
-                    Dim variables(Me.ReactionExtents.Count - 1) As OptBoundVariable
-                    For i = 0 To Me.ReactionExtents.Count - 1
-                        variables(i) = New OptBoundVariable("ksi" & CStr(i + 1), 0, lbound(i), ubound(i))
-                    Next
-
                     Dim g0, g1 As Double
 
-                    'this call to FunctionValue returns the initial gibbs energy of the system.
+                    Dim REx(r) As Double
+
                     g0 = FunctionValue2G_RE(REx)
+
                     Me.InitialGibbsEnergy = g0
+
+                    For i = 0 To r
+                        REx(i) = lbound(i) + 0.2 * (ubound(i) - lbound(i))
+                    Next
+
+                    'this call to FunctionValue returns the initial gibbs energy of the system.
 
                     Dim CalcFinished As Boolean = False
 
                     Dim TLast As Double = T0 'remember T for iteration loops
 
+                    cnt = 0
+
                     Do
 
-                        'use my own solver
+                        'solve using newton's method
 
-                        cnt = 0
+                        Dim fx(r), dfdx(r, r), dx(r), x(r) As Double
 
-                        'use the Simplex solver to solve the minimization problem.
-                        Dim solver As New Simplex
-                        With solver
-                            .Tolerance = 0.01
-                            .MaxFunEvaluations = 1000
-                            REx = .ComputeMin(AddressOf FunctionValue, variables)
-                        End With
+                        Dim niter As Integer
 
-                        'reevaluate function
+                        x = REx
+                        niter = 0
+                        Do
+
+                            fx = Me.FunctionValue2N_RE(x)
+                            dfdx = Me.FunctionGradient2N_RE(x)
+
+                            Dim success As Boolean
+                            success = SysLin.rsolve.rmatrixsolve(dfdx, fx, r + 1, dx)
+
+                            If success Then
+                                If niter = 0 Then
+                                    For i = 0 To r
+                                        x(i) *= 0.999
+                                    Next
+                                ElseIf niter = 1 Then
+                                    For i = 0 To r
+                                        x(i) -= dx(i) * 0.01
+                                    Next
+                                ElseIf niter = 2 Then
+                                    For i = 0 To r
+                                        x(i) -= dx(i) * 0.3
+                                    Next
+                                ElseIf niter >= 3 Then
+                                    For i = 0 To r
+                                        x(i) -= dx(i)
+                                    Next
+                                End If
+                            Else
+                                For i = 0 To r
+                                    x(i) *= 0.999
+                                Next
+                            End If
+
+                            niter += 1
+
+                        Loop Until AbsSum(fx) < 0.00000001 Or niter > 249
+
+                        If niter > 249 Then
+                            Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
+                        End If
+
                         'this call to FunctionValue returns the final gibbs energy of the system.
                         g1 = FunctionValue2G_RE(REx)
                         Me.FinalGibbsEnergy = g1
@@ -1494,10 +1642,11 @@ Namespace Reactors
                             Next
 
                             'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                            DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
-                            i += 1
-                        Loop Until i = Me.Reactions.Count
+                            DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) / rx.Components(rx.BaseReactant).StoichCoeff / 1000
 
+                            i += 1
+
+                        Loop Until i = Me.Reactions.Count
 
                         ' comp. conversions
                         For Each sb As Compound In ims.Phases(0).Compounds.Values
@@ -1532,67 +1681,27 @@ Namespace Reactors
                                 'Products Enthalpy (kJ/kg * kg/s = kW)
                                 Hp = Hr0 + DHr
 
-                                tmp = Me.PropertyPackage.CalculateEquilibrium2(FlashCalculationType.PressureEnthalpy, P, Hp / ims.Phases(0).Properties.massflow.GetValueOrDefault, 0)
-                                T = tmp.CalculatedTemperature
+                                ims.Phases(0).Properties.enthalpy = Hp
+                                ims.SpecType = StreamSpec.Pressure_and_Enthalpy
 
-                                If Math.Abs(T - TLast) < 0.1 Then CalcFinished = True
+                                ims.Calculate(True, True)
+
                                 TLast = T
+                                T = ims.Phases(0).Properties.temperature
+
+                                If Math.Abs(T - TLast) < 0.5 Then CalcFinished = True
                                 Me.DeltaT = T - T0
 
+                                T = TLast * 0.7 + T * 0.3
+
                                 ims.Phases(0).Properties.temperature = T
-
-                                With pp
-                                    .CurrentMaterialStream = ims
-                                    'Calcular corrente de materia com T e P
-                                    '.DW_CalcVazaoMolar()
-                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                                    If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                                    Else
-                                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                                    End If
-                                    If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                    Else
-                                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                    End If
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                                    .DW_CalcOverallProps()
-                                    .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                                    .DW_CalcCompMassFlow(-1)
-                                    .DW_CalcCompMolarFlow(-1)
-                                    .DW_CalcCompVolFlow(-1)
-                                    .DW_CalcVazaoVolumetrica()
-
-                                End With
+                                tms.Phases(0).Properties.temperature = T
 
                             Case OperationMode.Isothermic
 
-                                With pp
-                                    .CurrentMaterialStream = ims
-                                    'Calcular corrente de materia com T e P
-                                    '.DW_CalcVazaoMolar()
-                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                                    If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                                    Else
-                                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                                    End If
-                                    If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
+                                ims.SpecType = StreamSpec.Temperature_and_Pressure
 
-                                        .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                    Else
-                                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                    End If
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                                    .DW_CalcOverallProps()
-                                    .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                                    .DW_CalcCompMassFlow(-1)
-                                    .DW_CalcCompMolarFlow(-1)
-                                    .DW_CalcCompVolFlow(-1)
-                                    .DW_CalcVazaoVolumetrica()
-
-                                End With
+                                ims.Calculate(True, True)
 
                                 'Products Enthalpy (kJ/kg * kg/s = kW)
                                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
@@ -1610,30 +1719,10 @@ Namespace Reactors
                                 Me.DeltaT = T - T0
 
                                 ims.Phases(0).Properties.temperature = OutletTemperature
-                                With pp
-                                    .CurrentMaterialStream = ims
-                                    'Calcular corrente de materia com T e P
-                                    '.DW_CalcVazaoMolar()
-                                    .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-                                    If ims.Phases(1).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
-                                    Else
-                                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
-                                    End If
-                                    If ims.Phases(2).Properties.molarfraction.GetValueOrDefault > 0 Then
-                                        .DW_CalcPhaseProps(PropertyPackages.Phase.Vapor)
-                                    Else
-                                        .DW_ZerarPhaseProps(PropertyPackages.Phase.Vapor)
-                                    End If
-                                    .DW_CalcPhaseProps(PropertyPackages.Phase.Mixture)
-                                    .DW_CalcOverallProps()
-                                    .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
-                                    .DW_CalcCompMassFlow(-1)
-                                    .DW_CalcCompMolarFlow(-1)
-                                    .DW_CalcCompVolFlow(-1)
-                                    .DW_CalcVazaoVolumetrica()
 
-                                End With
+                                ims.SpecType = StreamSpec.Temperature_and_Pressure
+
+                                ims.Calculate(True, True)
 
                                 'Products Enthalpy (kJ/kg * kg/s = kW)
                                 Hp = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
@@ -1642,6 +1731,7 @@ Namespace Reactors
                                 Me.DeltaQ = Hp - Hr0 - DHr
 
                                 CalcFinished = True
+
                         End Select
 
                         cnt += 1

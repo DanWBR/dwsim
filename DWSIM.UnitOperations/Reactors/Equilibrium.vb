@@ -171,35 +171,25 @@ Namespace Reactors
 
             tms.Phases(0).Properties.massflow = sumw
 
-            With pp
-                .CurrentMaterialStream = tms
-                .DW_CalcEquilibrium(PropertyPackages.FlashSpec.T, PropertyPackages.FlashSpec.P)
-            End With
+            pp.CurrentMaterialStream = tms
 
-            Dim cpv(tms.Phases(0).Compounds.Count - 1), cpl(tms.Phases(0).Compounds.Count - 1) As Double
+            Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
+
+            Dim cpv(tms.Phases(0).Compounds.Count - 1), cpl(tms.Phases(0).Compounds.Count - 1), basis(tms.Phases(0).Compounds.Count - 1) As Double
             Dim f(x.Length - 1) As Double
 
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-            i = 0
-            For Each s As Compound In tms.Phases(2).Compounds.Values
-                If s.MoleFraction > 0.0# Then
-                    fugv(i) = s.FugacityCoeff.GetValueOrDefault
-                    cpv(i) = (fugv(i) * s.MoleFraction.GetValueOrDefault * P / P0)
-                Else
-                    fugv(i) = s.FugacityCoeff.GetValueOrDefault
-                    cpv(i) = (fugv(i) * 0.01 * P / P0)
-                End If
-                i += 1
-            Next
+            fugv = pp.DW_CalcFugCoeff(pp.RET_VMOL(PropertyPackages.Phase.Mixture), T, P, PropertyPackages.State.Vapor)
+            fugl = pp.DW_CalcFugCoeff(pp.RET_VMOL(PropertyPackages.Phase.Mixture), T, P, PropertyPackages.State.Liquid)
 
             i = 0
-            For Each s As Compound In tms.Phases(3).Compounds.Values
+            For Each s As Compound In tms.Phases(0).Compounds.Values
                 If s.MoleFraction > 0.0# Then
-                    fugl(i) = s.FugacityCoeff.GetValueOrDefault
+                    cpv(i) = (fugv(i) * s.MoleFraction.GetValueOrDefault * P / P0)
                     cpl(i) = (fugl(i) * s.MoleFraction.GetValueOrDefault)
                 Else
-                    fugl(i) = s.FugacityCoeff.GetValueOrDefault
+                    cpv(i) = (fugv(i) * 0.01 * P / P0)
                     cpl(i) = (fugl(i) * 0.01)
                 End If
                 i += 1
@@ -208,12 +198,36 @@ Namespace Reactors
             For i = 0 To Me.Reactions.Count - 1
                 prod(i) = 1.0#
                 j = 0
-                For Each s As Compound In tms.Phases(2).Compounds.Values
+                For Each s As Compound In tms.Phases(0).Compounds.Values
                     With FlowSheet.Reactions(Me.Reactions(i))
                         If .ReactionPhase = PhaseName.Vapor AndAlso .Components.ContainsKey(s.Name) Then
-                            prod(i) *= cpv(j) ^ .Components(s.Name).StoichCoeff
+                            Select Case .ReactionBasis
+                                Case ReactionBasis.Activity, ReactionBasis.Fugacity
+                                    basis(j) = cpv(j)
+                                Case ReactionBasis.MassFrac
+                                    basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
+                                Case ReactionBasis.MolarFrac
+                                    basis(j) = Vz(j)
+                                Case ReactionBasis.PartialPress
+                                    basis(j) = Vz(j) * fugv(j) * P
+                                Case Else
+                                    Throw New Exception("Selected Reaction Basis is not supported.")
+                            End Select
+                            prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
                         ElseIf .ReactionPhase = PhaseName.Liquid AndAlso .Components.ContainsKey(s.Name) Then
-                            prod(i) *= cpl(j) ^ .Components(s.Name).StoichCoeff
+                            Select Case .ReactionBasis
+                                Case ReactionBasis.Activity, ReactionBasis.Fugacity
+                                    basis(j) = cpl(j)
+                                Case ReactionBasis.MassFrac
+                                    basis(j) = pp.AUX_CONVERT_MOL_TO_MASS(Vz)(j)
+                                Case ReactionBasis.MolarFrac
+                                    basis(j) = Vz(j)
+                                Case ReactionBasis.PartialPress
+                                    basis(j) = Vz(j) * fugl(j) * P
+                                Case Else
+                                    Throw New Exception("Selected Reaction Basis is not supported.")
+                            End Select
+                            prod(i) *= basis(j) ^ .Components(s.Name).StoichCoeff
                         End If
                     End With
                     j += 1
@@ -224,7 +238,7 @@ Namespace Reactors
 
             For i = 0 To Me.Reactions.Count - 1
                 With FlowSheet.Reactions(Me.Reactions(i))
-                    f(i) = prod(i) - .ConstantKeqValue + pen_val
+                    f(i) = prod(i) - .EvaluateK(T, pp) + pen_val
                     If Double.IsNaN(f(i)) Or Double.IsInfinity(f(i)) Then
                         f(i) = pen_val
                     End If
@@ -469,46 +483,11 @@ Namespace Reactors
                     T = OutletTemperature
             End Select
 
-            Dim rxn As Reaction
-
             'check active reactions (equilibrium only) in the reaction set
             For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                 If FlowSheet.Reactions(rxnsb.ReactionID).ReactionType = ReactionType.Equilibrium And rxnsb.IsActive Then
                     Me.Reactions.Add(rxnsb.ReactionID)
                     Me.ReactionExtents.Add(rxnsb.ReactionID, 0)
-
-                    rxn = FlowSheet.Reactions(rxnsb.ReactionID)
-
-                    'equilibrium constant calculation
-                    Select Case rxn.KExprType
-                        Case KOpt.Constant
-                            'rxn.ConstantKeqValue = rxn.ConstantKeqValue
-                        Case KOpt.Expression
-                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
-                            rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
-                            rxn.ExpContext.Variables.Add("T", T)
-                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.Expression)
-                            Try
-                                rxn.ConstantKeqValue = Exp(rxn.Expr.Evaluate)
-                            Catch ex As Exception
-                                Throw New Exception("Error evaluating equilibrium constant expression for reaction '" & rxn.Name & "': " & ex.Message.ToString)
-                            End Try
-                        Case KOpt.Gibbs
-                            Dim id(rxn.Components.Count - 1) As String
-                            Dim stcoef(rxn.Components.Count - 1) As Double
-                            Dim bcidx As Integer = 0
-                            j = 0
-                            For Each sb As ReactionStoichBase In rxn.Components.Values
-                                id(j) = sb.CompName
-                                stcoef(j) = sb.StoichCoeff
-                                If sb.IsBaseReactant Then bcidx = j
-                                j += 1
-                            Next
-                            Dim DelG_RT = pp.AUX_DELGig_RT(298.15, T, id, stcoef, bcidx)
-                            rxn.ConstantKeqValue = Exp(-DelG_RT)
-                    End Select
-
                 End If
             Next
 
@@ -668,7 +647,7 @@ Namespace Reactors
 
                     niter += 1
 
-                Loop Until AbsSum(fx) < 0.00000001 Or niter > 249 Or AbsSum(dx) < 0.00000001
+                Loop Until AbsSum(fx) < 0.00000001 Or niter > 249
 
                 If niter > 249 Then
                     Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
@@ -707,9 +686,8 @@ Namespace Reactors
                     Next
 
                     'Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
-                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
-                    'DHfT = pp.AUX_DELHig_RT(298.15, 298.15, id, stcoef, bcidx)
-                    'DHr += DHfT * Me.ReactionExtents(Me.Reactions(i)) * rx.Components(rx.BaseReactant).StoichCoeff / 1000
+                    DHr += rx.ReactionHeat * Me.ReactionExtents(Me.Reactions(i)) / rx.Components(rx.BaseReactant).StoichCoeff / 1000
+
                     i += 1
                 Loop Until i = Me.Reactions.Count
 
@@ -754,11 +732,15 @@ Namespace Reactors
 
                         ims.Calculate(True, True)
 
+                        TLast = T
                         T = ims.Phases(0).Properties.temperature.GetValueOrDefault
                         Me.DeltaT = T - T0
 
                         If Math.Abs(T - TLast) < 0.5 Then CalcFinished = True
-                        TLast = T
+
+                        T = 0.7 * TLast + 0.3 * T
+
+                        ims.Phases(0).Properties.temperature = T
 
                     Case OperationMode.Isothermic
 

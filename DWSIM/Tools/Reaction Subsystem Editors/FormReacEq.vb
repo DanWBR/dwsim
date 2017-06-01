@@ -53,6 +53,7 @@ Public Class FormReacEq
         Select Case mode
             Case "Add"
                 rc = New Reaction
+                rc.ReactionBasis = ReactionBasis.Fugacity
                 Me.Text = DWSIM.App.GetLocalString("AdicionarNovaReacaodeEquilibrio")
             Case "Edit"
                 Me.Text = DWSIM.App.GetLocalString("EditarReacaodeEquilibrio")

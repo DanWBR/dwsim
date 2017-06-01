@@ -120,12 +120,6 @@
   <data name="KryptonButton3.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Equilibrium Reaction Parameters</value>
-  </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Equilibrium Constant (Keq)</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="KryptonLabel12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -176,6 +170,9 @@
   <data name="rbKeqfT.Text" xml:space="preserve">
     <value>T-Function.: ln Keq [f(T)] =</value>
   </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Equilibrium Constant (Keq)</value>
+  </data>
   <data name="KryptonLabel9.Text" xml:space="preserve">
     <value>Approach (%)</value>
   </data>
@@ -222,13 +219,13 @@
     <value>Mass Concentration</value>
   </data>
   <data name="cbBase.Items4" xml:space="preserve">
-    <value>Molar fraction</value>
+    <value>Molar Fraction</value>
   </data>
   <data name="cbBase.Items5" xml:space="preserve">
-    <value>Mass fraction</value>
+    <value>Mass Fraction</value>
   </data>
   <data name="cbBase.Items6" xml:space="preserve">
-    <value>Vapor Pressure</value>
+    <value>Partial Pressure</value>
   </data>
   <data name="KryptonLabel6.Location" type="System.Drawing.Point, System.Drawing">
     <value>191, 21</value>
@@ -245,8 +242,8 @@
   <data name="tbPhase.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 17</value>
   </data>
-  <data name="GroupBox1.Text" xml:space="preserve">
-    <value>Components/Stoichiometry</value>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Equilibrium Reaction Parameters</value>
   </data>
   <data name="KryptonLabel3.Text" xml:space="preserve">
     <value>Equation</value>
@@ -278,8 +275,8 @@
   <data name="KryptonLabel1.Text" xml:space="preserve">
     <value>Stoichiometry</value>
   </data>
-  <data name="GroupBox4.Text" xml:space="preserve">
-    <value>Identification</value>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Components/Stoichiometry</value>
   </data>
   <data name="KryptonLabel10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -292,6 +289,9 @@
   </data>
   <data name="KryptonLabel11.Text" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Identification</value>
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 13</value>
