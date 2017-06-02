@@ -173,21 +173,21 @@ Namespace Reactors
 
             pp.CurrentMaterialStream = tms
 
-            Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
-
             Dim cpv(tms.Phases(0).Compounds.Count - 1), cpl(tms.Phases(0).Compounds.Count - 1), basis(tms.Phases(0).Compounds.Count - 1) As Double
             Dim f(x.Length - 1) As Double
 
+            Dim Vz As Double() = pp.RET_VMOL(PropertyPackages.Phase.Mixture)
+
             Dim fugv(tms.Phases(0).Compounds.Count - 1), fugl(tms.Phases(0).Compounds.Count - 1), prod(x.Length - 1) As Double
 
-            fugv = pp.DW_CalcFugCoeff(pp.RET_VMOL(PropertyPackages.Phase.Mixture), T, P, PropertyPackages.State.Vapor)
-            fugl = pp.DW_CalcFugCoeff(pp.RET_VMOL(PropertyPackages.Phase.Mixture), T, P, PropertyPackages.State.Liquid)
+            fugv = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Vapor)
+            fugl = pp.DW_CalcFugCoeff(Vz, T, P, PropertyPackages.State.Liquid)
 
             i = 0
             For Each s As Compound In tms.Phases(0).Compounds.Values
                 If s.MoleFraction > 0.0# Then
-                    cpv(i) = (fugv(i) * s.MoleFraction.GetValueOrDefault * P / P0)
-                    cpl(i) = (fugl(i) * s.MoleFraction.GetValueOrDefault)
+                    cpv(i) = (fugv(i) * Vz(i) * P / P0)
+                    cpl(i) = (fugl(i) * Vz(i))
                 Else
                     cpv(i) = (fugv(i) * 0.01 * P / P0)
                     cpl(i) = (fugl(i) * 0.01)
@@ -377,9 +377,9 @@ Namespace Reactors
                 delta1 = con_val(i) - con_lc(i)
                 delta2 = con_val(i) - con_uc(i)
                 If delta1 < 0 Then
-                    pen_val += -delta1 * 100000000000.0#
+                    pen_val += -delta1 * 1000000.0#
                 ElseIf delta2 > 1 Then
-                    pen_val += -delta2 * 100000000000.0#
+                    pen_val += -delta2 * 1000000.0#
                 Else
                     pen_val += 0.0#
                 End If
