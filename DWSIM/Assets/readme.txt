@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 12 - May 2017
+Version 4.3 Update 13 - June 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 13
+
+- [NEW] Added Peng-Robinson interaction parameters for H2O/NH3/CO2/H2S systems
+- [CHG] Updated Python Script subsystem
+- [FIX] Sour Water model bug fixes
+- [FIX] Fixed Equilibrium/Gibbs Reactor adiabatic calculation mode
+- [FIX] Compound database loading fix
+- [FIX] Fixed PR interaction parameter set retrieval
 
 Version 4.3 Update 12
 
