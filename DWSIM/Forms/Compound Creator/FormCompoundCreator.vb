@@ -3387,6 +3387,8 @@ Public Class FormCompoundCreator
     Private Sub ExportarDadosParaArquivoJSONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportarDadosParaArquivoJSONToolStripMenuItem.Click
         If Me.SaveFileDialog1.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
             Try
+                mycase.cp.OriginalDB = "User"
+                mycase.cp.CurrentDB = "User"
                 File.WriteAllText(Me.SaveFileDialog1.FileName, Newtonsoft.Json.JsonConvert.SerializeObject(mycase.cp, Newtonsoft.Json.Formatting.Indented))
                 MessageBox.Show(DWSIM.App.GetLocalString("FileSaved"), "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Catch ex As Exception

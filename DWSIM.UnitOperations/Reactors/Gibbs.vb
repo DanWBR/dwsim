@@ -171,6 +171,14 @@ Namespace Reactors
 
         Public Property DampingUpperLimit As Double = 2.0
 
+        Public MaximumInternalIterations As Integer = 20000
+
+        Public MaximumExternalIterations As Integer = 50
+
+        Public InternalTolerance As Double = 0.000001
+
+        Public ExternalTolerance As Double = 0.001
+
         Public Property InitialGibbsEnergy() As Double
             Get
                 Return _ige
@@ -670,6 +678,7 @@ Namespace Reactors
 
             tms.Phases(0).Properties.massflow = sumw
             pp.CurrentMaterialStream = tms
+            tms.SpecType = StreamSpec.Temperature_and_Pressure
             tms.Calculate(True, True)
             pp.CurrentMaterialStream = tms
 
@@ -1219,7 +1228,7 @@ Namespace Reactors
 
                                 fx = Me.FunctionValue2N(x)
 
-                                If fx.AbsSqrSumY < 0.0000000001 Then Exit Do
+                                If fx.AbsSqrSumY < InternalTolerance Then Exit Do
 
                                 dfdx = Me.FunctionGradient2N(x)
 
@@ -1260,9 +1269,9 @@ Namespace Reactors
 
                                 FlowSheet.CheckStatus()
 
-                            Loop Until ni_int > 20000
+                            Loop Until ni_int > MaximumInternalIterations
 
-                            If ni_int > 20000 Then
+                            If ni_int > MaximumInternalIterations Then
                                 Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                             End If
 
@@ -1287,9 +1296,9 @@ Namespace Reactors
 
                             ni_ext += 1
 
-                        Loop Until sumerr < 0.000000000001 Or ni_ext > 50
+                        Loop Until sumerr < ExternalTolerance Or ni_ext > MaximumExternalIterations
 
-                        If ni_ext > 50 Then
+                        If ni_ext > MaximumExternalIterations Then
                             Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
                         End If
 

@@ -71,6 +71,14 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageElements = New System.Windows.Forms.TabPage()
         Me.TabPageInitialEstimates = New System.Windows.Forms.TabPage()
         Me.TabPageGibbsParams = New System.Windows.Forms.TabPage()
+        Me.tbExtLoopTol = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.tbIntLoopTol = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.tbExtLoopMaxIts = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.tbIntLoopMaxIts = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.chkEnableDamping = New System.Windows.Forms.CheckBox()
         Me.txtDampingUpperLimit = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -424,6 +432,14 @@ Partial Class EditingForm_ReactorConvEqGibbs
         'TabPageGibbsParams
         '
         resources.ApplyResources(Me.TabPageGibbsParams, "TabPageGibbsParams")
+        Me.TabPageGibbsParams.Controls.Add(Me.tbExtLoopTol)
+        Me.TabPageGibbsParams.Controls.Add(Me.Label20)
+        Me.TabPageGibbsParams.Controls.Add(Me.tbIntLoopTol)
+        Me.TabPageGibbsParams.Controls.Add(Me.Label18)
+        Me.TabPageGibbsParams.Controls.Add(Me.tbExtLoopMaxIts)
+        Me.TabPageGibbsParams.Controls.Add(Me.Label17)
+        Me.TabPageGibbsParams.Controls.Add(Me.tbIntLoopMaxIts)
+        Me.TabPageGibbsParams.Controls.Add(Me.Label16)
         Me.TabPageGibbsParams.Controls.Add(Me.chkEnableDamping)
         Me.TabPageGibbsParams.Controls.Add(Me.txtDampingUpperLimit)
         Me.TabPageGibbsParams.Controls.Add(Me.Label8)
@@ -432,6 +448,54 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageGibbsParams.Name = "TabPageGibbsParams"
         Me.ToolTip1.SetToolTip(Me.TabPageGibbsParams, resources.GetString("TabPageGibbsParams.ToolTip"))
         Me.TabPageGibbsParams.UseVisualStyleBackColor = True
+        '
+        'tbExtLoopTol
+        '
+        resources.ApplyResources(Me.tbExtLoopTol, "tbExtLoopTol")
+        Me.tbExtLoopTol.Name = "tbExtLoopTol"
+        Me.ToolTip1.SetToolTip(Me.tbExtLoopTol, resources.GetString("tbExtLoopTol.ToolTip"))
+        '
+        'Label20
+        '
+        resources.ApplyResources(Me.Label20, "Label20")
+        Me.Label20.Name = "Label20"
+        Me.ToolTip1.SetToolTip(Me.Label20, resources.GetString("Label20.ToolTip"))
+        '
+        'tbIntLoopTol
+        '
+        resources.ApplyResources(Me.tbIntLoopTol, "tbIntLoopTol")
+        Me.tbIntLoopTol.Name = "tbIntLoopTol"
+        Me.ToolTip1.SetToolTip(Me.tbIntLoopTol, resources.GetString("tbIntLoopTol.ToolTip"))
+        '
+        'Label18
+        '
+        resources.ApplyResources(Me.Label18, "Label18")
+        Me.Label18.Name = "Label18"
+        Me.ToolTip1.SetToolTip(Me.Label18, resources.GetString("Label18.ToolTip"))
+        '
+        'tbExtLoopMaxIts
+        '
+        resources.ApplyResources(Me.tbExtLoopMaxIts, "tbExtLoopMaxIts")
+        Me.tbExtLoopMaxIts.Name = "tbExtLoopMaxIts"
+        Me.ToolTip1.SetToolTip(Me.tbExtLoopMaxIts, resources.GetString("tbExtLoopMaxIts.ToolTip"))
+        '
+        'Label17
+        '
+        resources.ApplyResources(Me.Label17, "Label17")
+        Me.Label17.Name = "Label17"
+        Me.ToolTip1.SetToolTip(Me.Label17, resources.GetString("Label17.ToolTip"))
+        '
+        'tbIntLoopMaxIts
+        '
+        resources.ApplyResources(Me.tbIntLoopMaxIts, "tbIntLoopMaxIts")
+        Me.tbIntLoopMaxIts.Name = "tbIntLoopMaxIts"
+        Me.ToolTip1.SetToolTip(Me.tbIntLoopMaxIts, resources.GetString("tbIntLoopMaxIts.ToolTip"))
+        '
+        'Label16
+        '
+        resources.ApplyResources(Me.Label16, "Label16")
+        Me.Label16.Name = "Label16"
+        Me.ToolTip1.SetToolTip(Me.Label16, resources.GetString("Label16.ToolTip"))
         '
         'chkEnableDamping
         '
@@ -879,4 +943,12 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents txtDampingLowerLimit As System.Windows.Forms.TextBox
+    Friend WithEvents tbExtLoopTol As System.Windows.Forms.TextBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents tbIntLoopTol As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents tbExtLoopMaxIts As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents tbIntLoopMaxIts As System.Windows.Forms.TextBox
+    Friend WithEvents Label16 As System.Windows.Forms.Label
 End Class

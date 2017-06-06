@@ -123,6 +123,11 @@ Public Class EditingForm_ReactorConvEqGibbs
                 txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
                 txtDampingUpperLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit.ToString("G")
 
+                tbExtLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations
+                tbIntLoopMaxIts.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations
+                tbExtLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance
+                tbIntLoopTol.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance
+
                 'key compounds
 
                 ListViewCompounds.Items.Clear()
@@ -466,7 +471,9 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged, txtDampingLowerLimit.TextChanged, txtDampingUpperLimit.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged,
+        txtDampingLowerLimit.TextChanged, txtDampingUpperLimit.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
+        tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -478,7 +485,10 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown, txtDampingLowerLimit.KeyDown, txtDampingUpperLimit.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown,
+        txtDampingLowerLimit.KeyDown, txtDampingUpperLimit.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
+        tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown
+
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -496,6 +506,10 @@ Public Class EditingForm_ReactorConvEqGibbs
         If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text)
         If sender Is txtDampingLowerLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit = txtDampingLowerLimit.Text
         If sender Is txtDampingUpperLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit = txtDampingUpperLimit.Text
+        If sender Is tbExtLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumExternalIterations = tbExtLoopMaxIts.Text
+        If sender Is tbIntLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations = tbIntLoopMaxIts.Text
+        If sender Is tbExtLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance = tbExtLoopTol.Text
+        If sender Is tbIntLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance = tbIntLoopTol.Text
 
         RequestCalc()
 

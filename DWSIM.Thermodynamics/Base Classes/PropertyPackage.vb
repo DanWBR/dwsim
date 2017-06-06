@@ -2144,7 +2144,7 @@ Namespace PropertyPackages
                                     Tsat += subst.MoleFraction * Me.AUX_TSATi(P, subst.Name)
                                     Tfus += subst.MoleFraction * subst.ConstantProperties.TemperatureOfFusion
                                 Next
-
+                                If Tsat = 0.0# Then Tsat = AUX_TBM(Phase.Mixture)
                                 hl = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Liquid)
                                 hv = Me.DW_CalcEnthalpy(vz, Tsat, P, State.Vapor)
                                 hs = Me.DW_CalcEnthalpy(vz, Tfus, P, State.Solid)
@@ -2153,7 +2153,7 @@ Namespace PropertyPackages
                                 sv = Me.DW_CalcEntropy(vz, Tsat, P, State.Vapor)
                                 ss = Me.DW_CalcEntropy(vz, Tfus, P, State.Vapor)
                                 slf = Me.DW_CalcEntropy(vz, Tfus, P, State.Liquid)
-                                If H <= hs Then
+                                If Abs(H - hs) < 0.00001 Then
                                     xs = 1.0#
                                     xv = 0.0#
                                 ElseIf H <= hlf Then
