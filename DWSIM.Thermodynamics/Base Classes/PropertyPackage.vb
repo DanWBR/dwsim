@@ -2153,9 +2153,10 @@ Namespace PropertyPackages
                                 sv = Me.DW_CalcEntropy(vz, Tsat, P, State.Vapor)
                                 ss = Me.DW_CalcEntropy(vz, Tfus, P, State.Vapor)
                                 slf = Me.DW_CalcEntropy(vz, Tfus, P, State.Liquid)
-                                If Abs(H - hs) < 0.00001 Then
+                                If H <= hs Then
                                     xs = 1.0#
                                     xv = 0.0#
+                                    LoopVarState = State.Solid
                                 ElseIf H <= hlf Then
                                     xv = 0.0#
                                     xs = (H - hs) / (hl - hs)
