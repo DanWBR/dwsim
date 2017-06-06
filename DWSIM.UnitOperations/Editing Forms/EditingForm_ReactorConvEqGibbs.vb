@@ -118,6 +118,11 @@ Public Class EditingForm_ReactorConvEqGibbs
                 cbGibbsMinMode.Enabled = True
                 cbGibbsMinMode.SelectedIndex = DirectCast(SimObject, Reactors.Reactor_Gibbs).SolvMethod
 
+                chkEnableDamping.Checked = DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping
+
+                txtDampingLowerLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit.ToString("G")
+                txtDampingUpperLimit.Text = DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit.ToString("G")
+
                 'key compounds
 
                 ListViewCompounds.Items.Clear()
@@ -153,6 +158,7 @@ Public Class EditingForm_ReactorConvEqGibbs
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
                 TabControlParameters.TabPages.Remove(TabPageElements)
                 TabControlParameters.TabPages.Remove(TabPageInitialEstimates)
+                TabControlParameters.TabPages.Remove(TabPageGibbsParams)
 
             End If
 
@@ -460,7 +466,7 @@ Public Class EditingForm_ReactorConvEqGibbs
     End Sub
 
 
-    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged
+    Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged, txtDampingLowerLimit.TextChanged, txtDampingUpperLimit.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -472,7 +478,7 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
-    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown
+    Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown, txtDampingLowerLimit.KeyDown, txtDampingUpperLimit.KeyDown
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
 
@@ -488,6 +494,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
         If sender Is tbOutletTemperature Then SimObject.OutletTemperature = su.Converter.ConvertToSI(cbTemp.SelectedItem.ToString, tbOutletTemperature.Text)
         If sender Is tbPDrop Then SimObject.DeltaP = su.Converter.ConvertToSI(cbPDrop.SelectedItem.ToString, tbPDrop.Text)
+        If sender Is txtDampingLowerLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingLowerLimit = txtDampingLowerLimit.Text
+        If sender Is txtDampingUpperLimit Then DirectCast(SimObject, Reactors.Reactor_Gibbs).DampingUpperLimit = txtDampingUpperLimit.Text
 
         RequestCalc()
 
@@ -572,4 +580,9 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     End Sub
 
+    Private Sub chkEnableDamping_CheckedChanged(sender As Object, e As EventArgs) Handles chkEnableDamping.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Gibbs Then
+            DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping = chkEnableDamping.Checked
+        End If
+    End Sub
 End Class

@@ -165,6 +165,12 @@ Namespace Reactors
 
 #Region "Properties"
 
+        Public Property EnableDamping As Boolean = True
+
+        Public Property DampingLowerLimit As Double = 0.001
+
+        Public Property DampingUpperLimit As Double = 2.0
+
         Public Property InitialGibbsEnergy() As Double
             Get
                 Return _ige
@@ -922,7 +928,7 @@ Namespace Reactors
             ims.PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
             'Reactants Enthalpy (kJ/kg * kg/s = kW) (ISOTHERMIC)
-            Dim Hr0, Hr0i, Hpi, Hp2 As Double
+            Dim Hr0, Hr0i As Double
             Hr0 = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * ims.Phases(0).Properties.massflow.GetValueOrDefault
 
             Dim tmp As IFlashCalculationResult
@@ -1224,9 +1230,17 @@ Namespace Reactors
 
                                     'this call to the brent solver calculates the damping factor which minimizes the error (fval).
 
-                                    tmpx = x.Clone
-                                    tmpdx = dx.Clone
-                                    fval = brentsolver.brentoptimize(0.001#, 2.0#, 0.000001, df)
+                                    If EnableDamping Then
+
+                                        tmpx = x.Clone
+                                        tmpdx = dx.Clone
+                                        fval = brentsolver.brentoptimize(DampingLowerLimit, DampingUpperLimit, DampingLowerLimit / 10.0#, df)
+
+                                    Else
+
+                                        df = 1.0#
+
+                                    End If
 
                                     For i = 0 To x.Length - 1
                                         x(i) -= dx(i) * df

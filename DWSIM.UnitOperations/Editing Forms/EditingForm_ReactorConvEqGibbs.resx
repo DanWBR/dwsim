@@ -127,19 +127,22 @@
   <data name="&gt;&gt;GroupBox5.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="TabPageGibbsParams.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbOutletTemperature.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>310, 88</value>
+  <data name="&gt;&gt;cbOutlet1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCreateAndConnectInlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 23</value>
+    <value>330, 23</value>
   </data>
   <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
     <value>GroupBox5</value>
@@ -156,11 +159,14 @@
   <data name="lblTag.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="Label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="&gt;&gt;Label9.Parent" xml:space="preserve">
     <value>GroupBox3</value>
   </data>
-  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
-    <value>TabPage1</value>
+  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn5.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn5</value>
@@ -178,19 +184,22 @@
     <value>19</value>
   </data>
   <data name="cbEnergy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 21</value>
+    <value>177, 21</value>
   </data>
   <data name="cbFlashAlg.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;tbOutletTemperature.Parent" xml:space="preserve">
-    <value>TabPageParams</value>
+  <data name="&gt;&gt;TabPageCompounds.Parent" xml:space="preserve">
+    <value>TabControlParameters</value>
   </data>
   <data name="gridResults.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;cbPropPack.Parent" xml:space="preserve">
     <value>GroupBox3</value>
+  </data>
+  <data name="&gt;&gt;cbReacSet.Parent" xml:space="preserve">
+    <value>TabPageParams</value>
   </data>
   <data name="Label7.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -201,8 +210,8 @@
   <data name="&gt;&gt;GroupBox6.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gridReactions.Parent" xml:space="preserve">
-    <value>TabPage2</value>
+  <data name="&gt;&gt;TabPageElements.Name" xml:space="preserve">
+    <value>TabPageElements</value>
   </data>
   <data name="cbEnergy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -214,7 +223,7 @@
     <value>Top, Right</value>
   </data>
   <data name="TabPageInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
+    <value>370, 242</value>
   </data>
   <data name="&gt;&gt;cbPDrop.Parent" xml:space="preserve">
     <value>TabPageParams</value>
@@ -222,8 +231,8 @@
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>331, 121</value>
   </data>
-  <data name="cbOutlet1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="TabPageInitialEstimates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="&gt;&gt;btnConfigurePP.Parent" xml:space="preserve">
     <value>GroupBox3</value>
@@ -235,7 +244,7 @@
     <value>Ativar/Desativar</value>
   </data>
   <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 166</value>
+    <value>384, 166</value>
   </data>
   <data name="&gt;&gt;rtbAnnotations.Type" xml:space="preserve">
     <value>Extended.Windows.Forms.RichTextBoxExtended, RichTextBoxExtended, Version=2.0.2954.894, Culture=neutral, PublicKeyToken=null</value>
@@ -245,6 +254,9 @@
   </data>
   <data name="&gt;&gt;cbOutlet1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;tbOutletTemperature.Parent" xml:space="preserve">
+    <value>TabPageParams</value>
   </data>
   <data name="GroupBox4.ToolTip" xml:space="preserve">
     <value />
@@ -259,10 +271,10 @@
     <value>GroupBox1</value>
   </data>
   <data name="cbGibbsMinMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>205, 21</value>
   </data>
   <data name="cbInlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 21</value>
+    <value>177, 21</value>
   </data>
   <data name="TabPageParams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
@@ -281,6 +293,9 @@
   </data>
   <data name="&gt;&gt;btnConfigurePP.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
+    <value>Label4</value>
   </data>
   <data name="&gt;&gt;Label12.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -319,7 +334,7 @@
     <value>GroupBox1</value>
   </data>
   <data name="tabstrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 147</value>
+    <value>378, 147</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectEnergy.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -342,8 +357,11 @@
   <data name="&gt;&gt;Label7.Name" xml:space="preserve">
     <value>Label7</value>
   </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Limite Mínimo</value>
+  </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 139</value>
+    <value>384, 139</value>
   </data>
   <data name="&gt;&gt;Label19.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -382,16 +400,19 @@
     <value>26</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 287</value>
+    <value>384, 287</value>
   </data>
   <data name="TabPageCompounds.Text" xml:space="preserve">
     <value>Componentes</value>
   </data>
   <data name="TabPageParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
+    <value>370, 242</value>
   </data>
   <data name="&gt;&gt;Label6.Parent" xml:space="preserve">
     <value>TabPageParams</value>
+  </data>
+  <data name="txtDampingUpperLimit.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;TabPageParams.Name" xml:space="preserve">
     <value>TabPageParams</value>
@@ -404,6 +425,12 @@
   </data>
   <data name="btnCreateAndConnectInlet1.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
+  </data>
+  <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 118</value>
+  </data>
+  <data name="Label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;cbEnergy.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -425,6 +452,9 @@
   </data>
   <data name="btnConfigureFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
+  </data>
+  <data name="&gt;&gt;txtDampingUpperLimit.Parent" xml:space="preserve">
+    <value>TabPageGibbsParams</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Corrente de Saída 2</value>
@@ -448,10 +478,10 @@
     <value>78, 13</value>
   </data>
   <data name="cbCalcMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
+    <value>205, 21</value>
   </data>
   <data name="gridResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 115</value>
+    <value>364, 115</value>
   </data>
   <data name="&gt;&gt;cbPDrop.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -459,29 +489,29 @@
   <data name="btnDisconnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
-  <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 115</value>
+  <data name="chkEnableDamping.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 17</value>
   </data>
   <data name="chkActive.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Label15.Name" xml:space="preserve">
+    <value>Label15</value>
+  </data>
+  <data name="Label4.Text" xml:space="preserve">
+    <value>Conjunto de Reações</value>
   </data>
   <data name="Label10.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="GroupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 98</value>
+    <value>384, 98</value>
   </data>
   <data name="cbTemp.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
   <data name="&gt;&gt;gridReactions.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 14</value>
   </data>
   <data name="&gt;&gt;cbEnergy.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -510,9 +540,6 @@
   <data name="btnConfigureFlashAlg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 13</value>
-  </data>
   <data name="&gt;&gt;cbCalcMode.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -520,7 +547,7 @@
     <value>4, 22</value>
   </data>
   <data name="GroupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 166</value>
+    <value>384, 166</value>
   </data>
   <data name="cbGibbsMinMode.Items1" xml:space="preserve">
     <value>Minimização Direta</value>
@@ -561,8 +588,14 @@
   <data name="TabPageInitialEstimates.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="&gt;&gt;TabPage1.Parent" xml:space="preserve">
     <value>tabstrip1</value>
+  </data>
+  <data name="&gt;&gt;txtDampingUpperLimit.Name" xml:space="preserve">
+    <value>txtDampingUpperLimit</value>
   </data>
   <data name="&gt;&gt;Label10.Name" xml:space="preserve">
     <value>Label10</value>
@@ -570,8 +603,8 @@
   <data name="&gt;&gt;chkActive.Parent" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="chkEnableDamping.Text" xml:space="preserve">
+    <value>Usar Fator de Suavização</value>
   </data>
   <data name="&gt;&gt;TabPageCompounds.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -625,7 +658,7 @@
     <value>True</value>
   </data>
   <data name="btnDisconnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 104</value>
+    <value>357, 104</value>
   </data>
   <data name="gridReactions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -633,20 +666,23 @@
   <data name="Label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 22</value>
   </data>
-  <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
-  <data name="btnConfigurePP.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="tbOutletTemperature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 20</value>
+  </data>
+  <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblConnectedTo.Text" xml:space="preserve">
     <value>Objeto</value>
   </data>
-  <data name="btnDisconnectOutlet2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;lblTag.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabPageElements.Name" xml:space="preserve">
-    <value>TabPageElements</value>
+  <data name="&gt;&gt;TabPageGibbsParams.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="&gt;&gt;tbOutletTemperature.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -672,6 +708,12 @@
   <data name="GroupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
+  <data name="&gt;&gt;Label8.Name" xml:space="preserve">
+    <value>Label8</value>
+  </data>
+  <data name="txtDampingUpperLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 20</value>
+  </data>
   <data name="Label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -693,6 +735,9 @@
   <data name="cbPDrop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="&gt;&gt;chkEnableDamping.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="TabPageCompounds.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -711,9 +756,6 @@
   <data name="lblStatus.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnDisconnect1.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Corrente de Saída 1</value>
   </data>
@@ -723,20 +765,20 @@
   <data name="&gt;&gt;btnDisconnect1.Name" xml:space="preserve">
     <value>btnDisconnect1</value>
   </data>
-  <data name="cbPDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 118</value>
+  <data name="&gt;&gt;btnDisconnectOutlet1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="Label15.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>EditingForm_ConvEqGibbs_Reactor</value>
-  </data>
-  <data name="&gt;&gt;cbInlet1.ZOrder" xml:space="preserve">
-    <value>14</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 80</value>
   </data>
   <data name="btnDisconnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 77</value>
+    <value>357, 77</value>
   </data>
   <data name="&gt;&gt;TabPageElements.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -753,11 +795,14 @@
   <data name="&gt;&gt;cbInlet1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;chkEnableDamping.Name" xml:space="preserve">
+    <value>chkEnableDamping</value>
   </data>
   <data name="rtbAnnotations.ToolTip" xml:space="preserve">
     <value />
@@ -813,8 +858,8 @@
   <data name="&gt;&gt;cbReacSet.Name" xml:space="preserve">
     <value>cbReacSet</value>
   </data>
-  <data name="cbCalcMode.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnCreateAndConnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 21</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -830,6 +875,9 @@
   </data>
   <data name="lblStatus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;gridReactions.Parent" xml:space="preserve">
+    <value>TabPage2</value>
   </data>
   <data name="btnConfigurePP.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -847,7 +895,7 @@
     <value>1</value>
   </data>
   <data name="cbFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 21</value>
+    <value>169, 21</value>
   </data>
   <data name="ListViewCompounds.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -900,6 +948,9 @@
   <data name="btnCreateAndConnectOutlet1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
+  <data name="&gt;&gt;txtDampingLowerLimit.Name" xml:space="preserve">
+    <value>txtDampingLowerLimit</value>
+  </data>
   <data name="&gt;&gt;TabControlParameters.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -915,14 +966,17 @@
   <data name="&gt;&gt;ListViewCompounds.Parent" xml:space="preserve">
     <value>TabPageCompounds</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>291, 92</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="txtDampingLowerLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 20</value>
+  </data>
   <data name="btnConfigureFlashAlg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 53</value>
+    <value>322, 53</value>
   </data>
   <data name="&gt;&gt;lblConnectedTo.Name" xml:space="preserve">
     <value>lblConnectedTo</value>
@@ -939,9 +993,6 @@
   <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnDisconnectEnergy.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="gridReactions.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -951,11 +1002,14 @@
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Conversões</value>
   </data>
+  <data name="&gt;&gt;Label8.Parent" xml:space="preserve">
+    <value>TabPageGibbsParams</value>
+  </data>
   <data name="&gt;&gt;lblTag.Name" xml:space="preserve">
     <value>lblTag</value>
   </data>
-  <data name="Label14.Text" xml:space="preserve">
-    <value>Corrente de Energia</value>
+  <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 14</value>
   </data>
   <data name="&gt;&gt;ListViewCompounds.Name" xml:space="preserve">
     <value>ListViewCompounds</value>
@@ -970,7 +1024,10 @@
     <value>34</value>
   </data>
   <data name="tbPDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
+    <value>134, 20</value>
+  </data>
+  <data name="Label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 79</value>
   </data>
   <data name="&gt;&gt;lblConnectedTo.Parent" xml:space="preserve">
     <value>GroupBox5</value>
@@ -980,6 +1037,9 @@
   </data>
   <data name="btnConfigureFlashAlg.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
+  </data>
+  <data name="&gt;&gt;txtDampingLowerLimit.Parent" xml:space="preserve">
+    <value>TabPageGibbsParams</value>
   </data>
   <data name="Label12.ToolTip" xml:space="preserve">
     <value />
@@ -993,11 +1053,17 @@
   <data name="Label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;TabControlParameters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 68</value>
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
+  </data>
+  <data name="Label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;Label15.Parent" xml:space="preserve">
+    <value>TabPageGibbsParams</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1017,8 +1083,17 @@
   <data name="btnCreateAndConnectOutlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="TabPageGibbsParams.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="Label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="Label8.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbCalcMode.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="rtbAnnotations.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 16</value>
@@ -1041,11 +1116,8 @@
   <data name="&gt;&gt;DataGridViewTextBoxColumn4.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn4</value>
   </data>
-  <data name="&gt;&gt;cbOutlet1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="btnDisconnect1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 23</value>
+    <value>357, 23</value>
   </data>
   <data name="&gt;&gt;GroupBox6.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1059,8 +1131,8 @@
   <data name="cbCalcMode.Items2" xml:space="preserve">
     <value>Definir Temperatura</value>
   </data>
-  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cbCalcMode.Items1" xml:space="preserve">
+    <value>Adiabático</value>
   </data>
   <data name="btnDisconnect1.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
@@ -1071,11 +1143,14 @@
   <data name="tbPDrop.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;cbGibbsMinMode.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;Label8.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;TabPageCompounds.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 13</value>
   </data>
   <data name="&gt;&gt;gridConversions.Name" xml:space="preserve">
     <value>gridConversions</value>
@@ -1089,8 +1164,8 @@
   <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;cbReacSet.Parent" xml:space="preserve">
-    <value>TabPageParams</value>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Limite Máximo</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1108,7 +1183,7 @@
     <value>$this</value>
   </data>
   <data name="TabPageElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
+    <value>370, 242</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1131,6 +1206,9 @@
   <data name="btnCreateAndConnectInlet1.ToolTip" xml:space="preserve">
     <value>Criar e Conectar</value>
   </data>
+  <data name="&gt;&gt;chkEnableDamping.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cbEnergy.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 104</value>
   </data>
@@ -1139,6 +1217,9 @@
   </data>
   <data name="cbGibbsMinMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;cbFlashAlg.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1149,8 +1230,8 @@
   <data name="btnDisconnect1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Column2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GroupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1164,14 +1245,11 @@
   <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;TabPageCompounds.Parent" xml:space="preserve">
-    <value>TabControlParameters</value>
-  </data>
   <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="TabPageCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
+    <value>370, 242</value>
   </data>
   <data name="tbOutletTemperature.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -1180,7 +1258,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 20</value>
+    <value>245, 20</value>
   </data>
   <data name="tbPDrop.ToolTip" xml:space="preserve">
     <value />
@@ -1215,8 +1293,8 @@
   <data name="cbInlet1.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 23</value>
   </data>
-  <data name="&gt;&gt;lblConnectedTo.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="cbOutlet1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnect1.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
@@ -1232,6 +1310,9 @@
   </data>
   <data name="GroupBox6.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="txtDampingLowerLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 49</value>
   </data>
   <data name="&gt;&gt;gridReactions.Name" xml:space="preserve">
     <value>gridReactions</value>
@@ -1257,9 +1338,6 @@
   <data name="DataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
     <value>Valor</value>
   </data>
-  <data name="Label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 68</value>
-  </data>
   <data name="cbOutlet2.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1275,11 +1353,17 @@
   <data name="&gt;&gt;Label6.Name" xml:space="preserve">
     <value>Label6</value>
   </data>
+  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
+    <value>TabPage3</value>
+  </data>
   <data name="Label2.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn3</value>
   </data>
   <data name="GroupBox1.ToolTip" xml:space="preserve">
     <value />
@@ -1296,11 +1380,17 @@
   <data name="&gt;&gt;TabPageElements.Parent" xml:space="preserve">
     <value>TabControlParameters</value>
   </data>
+  <data name="txtDampingUpperLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 75</value>
+  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Column2.HeaderText" xml:space="preserve">
     <value>Reação</value>
+  </data>
+  <data name="&gt;&gt;btnDisconnectOutlet1.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
   </data>
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1323,9 +1413,6 @@
   <data name="&gt;&gt;tabstrip1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;GroupBox5.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1338,14 +1425,14 @@
   <data name="Label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="btnDisconnectOutlet2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="cbOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 21</value>
+    <value>177, 21</value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 122</value>
+  <data name="chkEnableDamping.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 20</value>
   </data>
   <data name="&gt;&gt;TabPageInitialEstimates.Name" xml:space="preserve">
     <value>TabPageInitialEstimates</value>
@@ -1359,6 +1446,9 @@
   <data name="lblConnectedTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;txtDampingUpperLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;btnDisconnect1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1367,6 +1457,9 @@
   </data>
   <data name="GroupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
+  </data>
+  <data name="TabPageGibbsParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet2.Name" xml:space="preserve">
     <value>btnDisconnectOutlet2</value>
@@ -1383,17 +1476,20 @@
   <data name="TabPageParams.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="cbCalcMode.Items1" xml:space="preserve">
-    <value>Adiabático</value>
+  <data name="chkEnableDamping.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="cbOutlet1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 21</value>
+    <value>177, 21</value>
   </data>
-  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
   </data>
   <data name="&gt;&gt;lblTag.Parent" xml:space="preserve">
     <value>GroupBox5</value>
+  </data>
+  <data name="&gt;&gt;btnConfigureFlashAlg.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
   </data>
   <data name="&gt;&gt;Label19.Parent" xml:space="preserve">
     <value>GroupBox1</value>
@@ -1401,17 +1497,11 @@
   <data name="&gt;&gt;btnDisconnectEnergy.Name" xml:space="preserve">
     <value>btnDisconnectEnergy</value>
   </data>
-  <data name="btnCreateAndConnectOutlet2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 21</value>
-  </data>
   <data name="Label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;cbGibbsMinMode.Name" xml:space="preserve">
     <value>cbGibbsMinMode</value>
-  </data>
-  <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 21</value>
   </data>
   <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1419,14 +1509,20 @@
   <data name="&gt;&gt;btnCreateAndConnectInlet1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cbReacSet.Items1" xml:space="preserve">
+    <value>Adiabático</value>
+  </data>
   <data name="btnConfigureFlashAlg.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cbOutlet1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;TabPageInitialEstimates.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="Label6.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Configurações do Pacote de Propriedades</value>
   </data>
   <data name="TabPageInitialEstimates.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1437,6 +1533,9 @@
   <data name="&gt;&gt;cbTemp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;chkEnableDamping.Parent" xml:space="preserve">
+    <value>TabPageGibbsParams</value>
+  </data>
   <data name="Label2.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1446,8 +1545,8 @@
   <data name="&gt;&gt;cbTemp.Name" xml:space="preserve">
     <value>cbTemp</value>
   </data>
-  <data name="cbTemp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 92</value>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Corrente de Energia</value>
   </data>
   <data name="tbPDrop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1459,16 +1558,19 @@
     <value>Stretch</value>
   </data>
   <data name="btnCreateAndConnectOutlet2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 77</value>
+    <value>330, 77</value>
   </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn6.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;btnCreateAndConnectEnergy.Name" xml:space="preserve">
+    <value>btnCreateAndConnectEnergy</value>
+  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Algoritmo Flash</value>
   </data>
-  <data name="&gt;&gt;btnDisconnectOutlet1.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
+  <data name="TabPage3.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="Label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1481,6 +1583,12 @@
   </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="txtDampingLowerLimit.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="&gt;&gt;TabPageInitialEstimates.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;TabControlParameters.Name" xml:space="preserve">
     <value>TabControlParameters</value>
@@ -1497,8 +1605,8 @@
   <data name="cbTemp.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;TabPageInitialEstimates.Parent" xml:space="preserve">
-    <value>TabControlParameters</value>
+  <data name="txtDampingUpperLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
   </data>
   <data name="cbFlashAlg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1509,8 +1617,8 @@
   <data name="cbPDrop.Items" xml:space="preserve">
     <value>Mínima das Entradas</value>
   </data>
-  <data name="GroupBox3.Text" xml:space="preserve">
-    <value>Configurações do Pacote de Propriedades</value>
+  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectEnergy.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1521,8 +1629,14 @@
   <data name="lblConnectedTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 72</value>
   </data>
+  <data name="&gt;&gt;TabControlParameters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cbInlet1.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="&gt;&gt;Label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cbCalcMode.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1539,6 +1653,9 @@
   <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
     <value>GroupBox4</value>
   </data>
+  <data name="TabPageGibbsParams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
   <data name="GroupBox5.ToolTip" xml:space="preserve">
     <value />
   </data>
@@ -1551,11 +1668,20 @@
   <data name="&gt;&gt;cbPDrop.Name" xml:space="preserve">
     <value>cbPDrop</value>
   </data>
+  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 53</value>
+  </data>
+  <data name="txtDampingLowerLimit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
+  </data>
+  <data name="TabPageInitialEstimates.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btnConfigureFlashAlg.ToolTip" xml:space="preserve">
     <value>Configurar</value>
@@ -1564,7 +1690,7 @@
     <value>Top, Right</value>
   </data>
   <data name="cbPropPack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 21</value>
+    <value>169, 21</value>
   </data>
   <data name="Label3.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1587,6 +1713,9 @@
   <data name="cbFlashAlg.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="btnDisconnectOutlet2.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
@@ -1596,17 +1725,17 @@
   <data name="btnDisconnectEnergy.ToolTip" xml:space="preserve">
     <value>Desconectar</value>
   </data>
-  <data name="Label9.Text" xml:space="preserve">
-    <value>Pacote de Propriedades</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>355, 869</value>
+    <value>394, 869</value>
   </data>
   <data name="GroupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="&gt;&gt;TabPage3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtDampingLowerLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 56</value>
@@ -1615,16 +1744,13 @@
     <value>$this</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 43</value>
+    <value>357, 43</value>
   </data>
   <data name="&gt;&gt;btnCreateAndConnectOutlet1.Name" xml:space="preserve">
     <value>btnCreateAndConnectOutlet1</value>
   </data>
   <data name="&gt;&gt;tbOutletTemperature.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="cbTemp.Items" xml:space="preserve">
-    <value>Mínima das Entradas</value>
   </data>
   <data name="Label11.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1633,7 +1759,7 @@
     <value>cbCalcMode</value>
   </data>
   <data name="btnCreateAndConnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 50</value>
+    <value>330, 50</value>
   </data>
   <data name="cbGibbsMinMode.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -1641,8 +1767,8 @@
   <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 41</value>
   </data>
-  <data name="Label13.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>TabPageParams</value>
   </data>
   <data name="gridConversions.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1651,7 +1777,7 @@
     <value>4, 22</value>
   </data>
   <data name="TabControlParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 268</value>
+    <value>378, 268</value>
   </data>
   <data name="&gt;&gt;tbPDrop.Parent" xml:space="preserve">
     <value>TabPageParams</value>
@@ -1661,6 +1787,9 @@
   </data>
   <data name="cbCalcMode.Items" xml:space="preserve">
     <value>Isotérmico</value>
+  </data>
+  <data name="TabPageGibbsParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 242</value>
   </data>
   <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1677,11 +1806,14 @@
   <data name="tabstrip1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnCreateAndConnectEnergy.Name" xml:space="preserve">
-    <value>btnCreateAndConnectEnergy</value>
+  <data name="txtDampingLowerLimit.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btnDisconnectEnergy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;TabPageInitialEstimates.Parent" xml:space="preserve">
+    <value>TabControlParameters</value>
   </data>
   <data name="lblConnectedTo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1698,11 +1830,11 @@
   <data name="cbPDrop.Items2" xml:space="preserve">
     <value>Máxima das Entradas</value>
   </data>
-  <data name="TabPage3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tbOutletTemperature.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
+  </data>
+  <data name="&gt;&gt;txtDampingLowerLimit.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="btnConfigurePP.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -1716,8 +1848,11 @@
   <data name="&gt;&gt;Label7.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblConnectedTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 13</value>
+  <data name="&gt;&gt;TabPageGibbsParams.Parent" xml:space="preserve">
+    <value>TabControlParameters</value>
+  </data>
+  <data name="&gt;&gt;btnDisconnect1.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1728,6 +1863,9 @@
   <data name="&gt;&gt;Label6.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="txtDampingUpperLimit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Parâmetros de Cálculo</value>
   </data>
@@ -1737,8 +1875,8 @@
   <data name="&gt;&gt;cbEnergy.Name" xml:space="preserve">
     <value>cbEnergy</value>
   </data>
-  <data name="cbReacSet.Items1" xml:space="preserve">
-    <value>Adiabático</value>
+  <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>325, 115</value>
   </data>
   <data name="Label9.ToolTip" xml:space="preserve">
     <value />
@@ -1761,14 +1899,26 @@
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 21</value>
   </data>
+  <data name="txtDampingUpperLimit.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="gridReactions.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="btnCreateAndConnectOutlet1.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
+  <data name="TabPageGibbsParams.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="chkEnableDamping.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkEnableDamping.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
   </data>
   <data name="Label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 47</value>
+  </data>
+  <data name="Label8.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
   </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Unidade</value>
@@ -1794,6 +1944,12 @@
   <data name="TabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
+  <data name="Label14.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;TabPageGibbsParams.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Anotações Gerais</value>
   </data>
@@ -1810,10 +1966,7 @@
     <value>151, 38</value>
   </data>
   <data name="btnCreateAndConnectEnergy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>291, 104</value>
-  </data>
-  <data name="&gt;&gt;ToolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>330, 104</value>
   </data>
   <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 247</value>
@@ -1830,6 +1983,9 @@
   <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
     <value>tabstrip1</value>
   </data>
+  <data name="txtDampingLowerLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
   <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>132, 47</value>
   </data>
@@ -1840,7 +1996,7 @@
     <value>GroupBox2</value>
   </data>
   <data name="TabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 121</value>
+    <value>370, 121</value>
   </data>
   <data name="btnDisconnect1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1848,14 +2004,14 @@
   <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
     <value>TabPageParams</value>
   </data>
-  <data name="&gt;&gt;btnConfigureFlashAlg.Parent" xml:space="preserve">
-    <value>GroupBox3</value>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>349, 88</value>
   </data>
   <data name="Label5.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="&gt;&gt;btnDisconnectOutlet1.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
     <value>TabPage2</value>
@@ -1870,7 +2026,7 @@
     <value>NoControl</value>
   </data>
   <data name="rtbAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 147</value>
+    <value>378, 147</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Resultados</value>
@@ -1878,11 +2034,17 @@
   <data name="&gt;&gt;GroupBox5.Name" xml:space="preserve">
     <value>GroupBox5</value>
   </data>
-  <data name="&gt;&gt;Label4.Name" xml:space="preserve">
-    <value>Label4</value>
+  <data name="cbTemp.Items" xml:space="preserve">
+    <value>Mínima das Entradas</value>
+  </data>
+  <data name="Label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="rtbAnnotations.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="btnCreateAndConnectOutlet1.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
   </data>
   <data name="cbOutlet2.Location" type="System.Drawing.Point, System.Drawing">
     <value>147, 77</value>
@@ -1890,8 +2052,8 @@
   <data name="&gt;&gt;Label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TabPage3.Name" xml:space="preserve">
-    <value>TabPage3</value>
+  <data name="&gt;&gt;cbInlet1.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;btnDisconnectOutlet2.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1917,14 +2079,8 @@
   <data name="&gt;&gt;TabPage1.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Label4.Text" xml:space="preserve">
-    <value>Conjunto de Reações</value>
-  </data>
   <data name="btnCreateAndConnectOutlet2.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Zoom</value>
-  </data>
-  <data name="Label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="btnConfigurePP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1933,10 +2089,13 @@
     <value>40</value>
   </data>
   <data name="btnConfigurePP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 26</value>
+    <value>322, 26</value>
   </data>
-  <data name="&gt;&gt;tbPDrop.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="cbReacSet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 21</value>
+  </data>
+  <data name="&gt;&gt;Label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 13</value>
@@ -1947,14 +2106,11 @@
   <data name="ListViewCompounds.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;Label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="Label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="TabPageInitialEstimates.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;chkActive.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 53</value>
@@ -1966,6 +2122,15 @@
     <value>Propriedade</value>
   </data>
   <data name="Label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Label13.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;TabPage1.Name" xml:space="preserve">
+    <value>TabPage1</value>
+  </data>
+  <data name="Label15.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
@@ -1980,11 +2145,14 @@
   <data name="cbReacSet.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;Label15.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="&gt;&gt;DataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>DataGridViewTextBoxColumn1</value>
   </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn3.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn3</value>
+  <data name="&gt;&gt;cbGibbsMinMode.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 13</value>
@@ -1995,14 +2163,20 @@
   <data name="Label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 122</value>
   </data>
   <data name="&gt;&gt;tabstrip1.Name" xml:space="preserve">
     <value>tabstrip1</value>
   </data>
+  <data name="&gt;&gt;lblConnectedTo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="Label19.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 26</value>
+  </data>
+  <data name="&gt;&gt;txtDampingUpperLimit.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tbPDrop.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 119</value>
@@ -2012,6 +2186,9 @@
   </data>
   <data name="&gt;&gt;btnDisconnect1.Parent" xml:space="preserve">
     <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;tbPDrop.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="Label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2055,11 +2232,8 @@
   <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 145</value>
   </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>TabPageParams</value>
-  </data>
-  <data name="Label14.ToolTip" xml:space="preserve">
-    <value />
+  <data name="&gt;&gt;btnDisconnectEnergy.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="Label13.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -2076,6 +2250,9 @@
   <data name="Label19.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Label13.Name" xml:space="preserve">
     <value>Label13</value>
   </data>
@@ -2085,17 +2262,23 @@
   <data name="TabPageParams.ToolTip" xml:space="preserve">
     <value />
   </data>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
   <data name="cbPDrop.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
   <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 700</value>
   </data>
+  <data name="&gt;&gt;TabPageGibbsParams.Name" xml:space="preserve">
+    <value>TabPageGibbsParams</value>
+  </data>
   <data name="TabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="ListViewCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
+    <value>370, 242</value>
   </data>
   <data name="TabPage2.ToolTip" xml:space="preserve">
     <value />
@@ -2112,11 +2295,14 @@
   <data name="lblTag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="TabPageInitialEstimates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Label9.Text" xml:space="preserve">
+    <value>Pacote de Propriedades</value>
   </data>
   <data name="btnDisconnectOutlet1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 50</value>
+    <value>357, 50</value>
   </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2141,6 +2327,9 @@
   </metadata>
   <metadata name="DataGridViewTextBoxColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
   </metadata>
   <metadata name="DataGridViewTextBoxColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

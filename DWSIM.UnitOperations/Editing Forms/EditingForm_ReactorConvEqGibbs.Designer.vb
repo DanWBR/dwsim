@@ -70,6 +70,12 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.ListViewCompounds = New System.Windows.Forms.ListView()
         Me.TabPageElements = New System.Windows.Forms.TabPage()
         Me.TabPageInitialEstimates = New System.Windows.Forms.TabPage()
+        Me.TabPageGibbsParams = New System.Windows.Forms.TabPage()
+        Me.chkEnableDamping = New System.Windows.Forms.CheckBox()
+        Me.txtDampingUpperLimit = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtDampingLowerLimit = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
@@ -112,6 +118,7 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabControlParameters.SuspendLayout()
         Me.TabPageParams.SuspendLayout()
         Me.TabPageCompounds.SuspendLayout()
+        Me.TabPageGibbsParams.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
@@ -271,6 +278,7 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabControlParameters.Controls.Add(Me.TabPageCompounds)
         Me.TabControlParameters.Controls.Add(Me.TabPageElements)
         Me.TabControlParameters.Controls.Add(Me.TabPageInitialEstimates)
+        Me.TabControlParameters.Controls.Add(Me.TabPageGibbsParams)
         Me.TabControlParameters.Name = "TabControlParameters"
         Me.TabControlParameters.SelectedIndex = 0
         Me.ToolTip1.SetToolTip(Me.TabControlParameters, resources.GetString("TabControlParameters.ToolTip"))
@@ -412,6 +420,49 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageInitialEstimates.Name = "TabPageInitialEstimates"
         Me.ToolTip1.SetToolTip(Me.TabPageInitialEstimates, resources.GetString("TabPageInitialEstimates.ToolTip"))
         Me.TabPageInitialEstimates.UseVisualStyleBackColor = True
+        '
+        'TabPageGibbsParams
+        '
+        resources.ApplyResources(Me.TabPageGibbsParams, "TabPageGibbsParams")
+        Me.TabPageGibbsParams.Controls.Add(Me.chkEnableDamping)
+        Me.TabPageGibbsParams.Controls.Add(Me.txtDampingUpperLimit)
+        Me.TabPageGibbsParams.Controls.Add(Me.Label8)
+        Me.TabPageGibbsParams.Controls.Add(Me.Label15)
+        Me.TabPageGibbsParams.Controls.Add(Me.txtDampingLowerLimit)
+        Me.TabPageGibbsParams.Name = "TabPageGibbsParams"
+        Me.ToolTip1.SetToolTip(Me.TabPageGibbsParams, resources.GetString("TabPageGibbsParams.ToolTip"))
+        Me.TabPageGibbsParams.UseVisualStyleBackColor = True
+        '
+        'chkEnableDamping
+        '
+        resources.ApplyResources(Me.chkEnableDamping, "chkEnableDamping")
+        Me.chkEnableDamping.Name = "chkEnableDamping"
+        Me.ToolTip1.SetToolTip(Me.chkEnableDamping, resources.GetString("chkEnableDamping.ToolTip"))
+        Me.chkEnableDamping.UseVisualStyleBackColor = True
+        '
+        'txtDampingUpperLimit
+        '
+        resources.ApplyResources(Me.txtDampingUpperLimit, "txtDampingUpperLimit")
+        Me.txtDampingUpperLimit.Name = "txtDampingUpperLimit"
+        Me.ToolTip1.SetToolTip(Me.txtDampingUpperLimit, resources.GetString("txtDampingUpperLimit.ToolTip"))
+        '
+        'Label8
+        '
+        resources.ApplyResources(Me.Label8, "Label8")
+        Me.Label8.Name = "Label8"
+        Me.ToolTip1.SetToolTip(Me.Label8, resources.GetString("Label8.ToolTip"))
+        '
+        'Label15
+        '
+        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.Name = "Label15"
+        Me.ToolTip1.SetToolTip(Me.Label15, resources.GetString("Label15.ToolTip"))
+        '
+        'txtDampingLowerLimit
+        '
+        resources.ApplyResources(Me.txtDampingLowerLimit, "txtDampingLowerLimit")
+        Me.txtDampingLowerLimit.Name = "txtDampingLowerLimit"
+        Me.ToolTip1.SetToolTip(Me.txtDampingLowerLimit, resources.GetString("txtDampingLowerLimit.ToolTip"))
         '
         'GroupBox1
         '
@@ -736,6 +787,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageParams.ResumeLayout(False)
         Me.TabPageParams.PerformLayout()
         Me.TabPageCompounds.ResumeLayout(False)
+        Me.TabPageGibbsParams.ResumeLayout(False)
+        Me.TabPageGibbsParams.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -820,4 +873,10 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Friend WithEvents DataGridViewTextBoxColumn5 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn6 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn7 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabPageGibbsParams As System.Windows.Forms.TabPage
+    Friend WithEvents chkEnableDamping As System.Windows.Forms.CheckBox
+    Friend WithEvents txtDampingUpperLimit As System.Windows.Forms.TextBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txtDampingLowerLimit As System.Windows.Forms.TextBox
 End Class

@@ -202,26 +202,32 @@
   <data name="TabPageParams.Text" xml:space="preserve">
     <value>Parameters</value>
   </data>
-  <data name="ListViewCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
-  </data>
-  <data name="TabPageCompounds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
-  </data>
   <data name="TabPageCompounds.Text" xml:space="preserve">
     <value>Compounds</value>
-  </data>
-  <data name="TabPageElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
   </data>
   <data name="TabPageElements.Text" xml:space="preserve">
     <value>Elements</value>
   </data>
-  <data name="TabPageInitialEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 242</value>
-  </data>
   <data name="TabPageInitialEstimates.Text" xml:space="preserve">
     <value>Initial Estimates</value>
+  </data>
+  <data name="chkEnableDamping.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 17</value>
+  </data>
+  <data name="chkEnableDamping.Text" xml:space="preserve">
+    <value>Use Damping Factor (Newton's Method)</value>
+  </data>
+  <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="Label8.Text" xml:space="preserve">
+    <value>Lower Limit</value>
+  </data>
+  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 13</value>
+  </data>
+  <data name="Label15.Text" xml:space="preserve">
+    <value>Upper Limit</value>
   </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Calculation Parameters</value>
@@ -302,10 +308,10 @@
     <value>Units</value>
   </data>
   <data name="gridReactions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>325, 115</value>
+    <value>364, 115</value>
   </data>
   <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 121</value>
+    <value>370, 121</value>
   </data>
   <data name="TabPage2.Text" xml:space="preserve">
     <value>Reactions</value>
@@ -317,10 +323,10 @@
     <value>Conversion (%)</value>
   </data>
   <data name="gridConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 121</value>
+    <value>370, 121</value>
   </data>
   <data name="TabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 121</value>
+    <value>370, 121</value>
   </data>
   <data name="TabPage3.Text" xml:space="preserve">
     <value>Conversions</value>
