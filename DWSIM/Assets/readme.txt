@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 13 - June 2017
+Version 4.3 Update 14 - June 2017
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 4.3 Update 14
+
+- [NEW] Exposed Gibbs Reactor convergence parameters for fine-tuning
+- [FIX] Reactor model bug fixes
+- [FIX] Fixed Compound Creator JSON export
 
 Version 4.3 Update 13
 
