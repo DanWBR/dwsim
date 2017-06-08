@@ -455,8 +455,8 @@ Namespace Reactors
                     Next
 
                     Dim odesolver = New DotNumerics.ODE.OdeImplicitRungeKutta5()
-                    odesolver.RelTol = 0.000001
-                    odesolver.AbsTol = 0.0000000001
+                    'odesolver.RelTol = 0.000001
+                    'odesolver.AbsTol = 0.0000000001
                     odesolver.InitializeODEs(AddressOf ODEFunc, N.Count)
                     odesolver.Solve(vc, 0.0#, 0.05 * dV * Volume, dV * Volume, Sub(x As Double, y As Double()) vc = y)
 
@@ -505,6 +505,7 @@ Namespace Reactors
 
                         'Heat released (or absorbed) (kJ/s = kW)
                         DHr += rxn.ReactionHeat * (N0(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
+                        If Ri.Values.Sum = 0.0# Then DHr = 0.0#
 
                         i += 1
 
