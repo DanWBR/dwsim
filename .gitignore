@@ -101,3 +101,4 @@ TCPServer/bin/Debug/*
 /DWSIM.Thermodynamics.NativeLibraries/bin/Debug
 /packages/SkiaSharp.Views.1.55.1
 /packages/SkiaSharp.1.55.1
+/packages
