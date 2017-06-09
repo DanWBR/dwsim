@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 4.3 Update 14 - June 2017
+Version 5.0
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
 ==================================================
 
@@ -25,7 +25,7 @@ SOFTWARE/SYSTEM REQUIREMENTS
 ==================================================
 
 OS:               Windows XP/Vista/7/8/10 or Linux
-Software:         .NET Framework 4.0 / Mono 4.0 or newer
+Software:         .NET Framework 4.5 / Mono 4.0 or newer
 CPU:              1.0 GHz dual-core processor (minimum)
 GPU (optional):   CUDA 2.0 or OpenCL 1.1-enabled device
 Memory:           1 GB RAM
@@ -65,6 +65,8 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 5.0
 
 Version 4.3 Update 14
 

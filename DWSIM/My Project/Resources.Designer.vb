@@ -1333,6 +1333,36 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property DWSIM_ico() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DWSIM_ico", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property DWSIM_splash() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DWSIM_splash", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property DWSIM_splash_limpo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("DWSIM_splash_limpo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property dwsim_splash1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("dwsim_splash1", resourceCulture)

@@ -26,13 +26,18 @@ Public NotInheritable Class SplashScreen
     Private Sub SplashScreen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Dim updfile = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"
-        Version.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
+        lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
         If File.Exists(updfile) Then
             Dim vinfo As Integer = 0
             Integer.TryParse(File.ReadAllText(updfile), vinfo)
-            If vinfo > 0 Then Version.Text += " Update " & vinfo
+            If vinfo > 0 Then lblVersion.Text += " Update " & vinfo
         End If
-        If My.Settings.PreviewVersion <> "" Then Version.Text += " " & My.Settings.PreviewVersion
+        If My.Settings.PreviewVersion <> "" Then lblVersion.Text += " " & My.Settings.PreviewVersion
+
+        lblCopyright.Text = My.Application.Info.Copyright
+
+        lblAppVersion.Text = "Application Version: " + My.Application.Info.Version.ToString
+        lblFrameworkVersion.Text = "Framework Version: " + Environment.Version.ToString
 
     End Sub
 
@@ -42,7 +47,7 @@ Public NotInheritable Class SplashScreen
 
     Protected Overrides Sub OnPaintBackground(ByVal pevent As System.Windows.Forms.PaintEventArgs)
 
-        pevent.Graphics.DrawImage(My.Resources.splashScreen2, New Rectangle(0, 0, Me.Width, Me.Height))
+        pevent.Graphics.DrawImage(My.Resources.DWSIM_splash, New Rectangle(0, 0, Me.Width, Me.Height))
 
     End Sub
 

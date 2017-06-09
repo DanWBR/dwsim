@@ -23,33 +23,72 @@ Partial Class SplashScreen
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashScreen))
-        Me.Version = New System.Windows.Forms.Label()
+        Me.lblVersion = New System.Windows.Forms.Label()
         Me.LabelLicense = New System.Windows.Forms.Label()
+        Me.lblCopyright = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblAppVersion = New System.Windows.Forms.Label()
+        Me.lblFrameworkVersion = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
-        'Version
+        'lblVersion
         '
-        resources.ApplyResources(Me.Version, "Version")
-        Me.Version.BackColor = System.Drawing.Color.Transparent
-        Me.Version.ForeColor = System.Drawing.Color.White
-        Me.Version.Name = "Version"
+        resources.ApplyResources(Me.lblVersion, "lblVersion")
+        Me.lblVersion.BackColor = System.Drawing.Color.Transparent
+        Me.lblVersion.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
+        Me.lblVersion.Name = "lblVersion"
         '
         'LabelLicense
         '
         resources.ApplyResources(Me.LabelLicense, "LabelLicense")
         Me.LabelLicense.BackColor = System.Drawing.Color.Transparent
         Me.LabelLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.LabelLicense.ForeColor = System.Drawing.Color.White
+        Me.LabelLicense.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
         Me.LabelLicense.Name = "LabelLicense"
+        '
+        'lblCopyright
+        '
+        resources.ApplyResources(Me.lblCopyright, "lblCopyright")
+        Me.lblCopyright.BackColor = System.Drawing.Color.Transparent
+        Me.lblCopyright.ForeColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(114, Byte), Integer), CType(CType(166, Byte), Integer))
+        Me.lblCopyright.Name = "lblCopyright"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Name = "Label1"
+        '
+        'lblAppVersion
+        '
+        resources.ApplyResources(Me.lblAppVersion, "lblAppVersion")
+        Me.lblAppVersion.BackColor = System.Drawing.Color.Transparent
+        Me.lblAppVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblAppVersion.ForeColor = System.Drawing.Color.White
+        Me.lblAppVersion.Name = "lblAppVersion"
+        '
+        'lblFrameworkVersion
+        '
+        resources.ApplyResources(Me.lblFrameworkVersion, "lblFrameworkVersion")
+        Me.lblFrameworkVersion.BackColor = System.Drawing.Color.Transparent
+        Me.lblFrameworkVersion.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblFrameworkVersion.ForeColor = System.Drawing.Color.White
+        Me.lblFrameworkVersion.Name = "lblFrameworkVersion"
         '
         'SplashScreen
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.splashScreen2
+        Me.BackgroundImage = Global.DWSIM.My.Resources.Resources.DWSIM_splash
         Me.ControlBox = False
+        Me.Controls.Add(Me.lblFrameworkVersion)
+        Me.Controls.Add(Me.lblAppVersion)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblCopyright)
         Me.Controls.Add(Me.LabelLicense)
-        Me.Controls.Add(Me.Version)
+        Me.Controls.Add(Me.lblVersion)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -57,9 +96,14 @@ Partial Class SplashScreen
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-    Public WithEvents Version As System.Windows.Forms.Label
+    Public WithEvents lblVersion As System.Windows.Forms.Label
     Public WithEvents LabelLicense As System.Windows.Forms.Label
+    Public WithEvents lblCopyright As System.Windows.Forms.Label
+    Public WithEvents Label1 As System.Windows.Forms.Label
+    Public WithEvents lblAppVersion As System.Windows.Forms.Label
+    Public WithEvents lblFrameworkVersion As System.Windows.Forms.Label
 
 End Class

@@ -1126,4 +1126,13 @@
   <data name="python-logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\python-logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DWSIM_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DWSIM_ico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DWSIM_splash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DWSIM_splash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DWSIM_splash_limpo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DWSIM_splash_limpo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

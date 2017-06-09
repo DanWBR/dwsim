@@ -17,7 +17,7 @@
     </ManifestKeyFile>
     <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <ApplicationIcon>DWSIM4 icon.ico</ApplicationIcon>
+    <ApplicationIcon>DWSIM_ico.ico</ApplicationIcon>
     <TargetZone>LocalIntranet</TargetZone>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
@@ -2428,6 +2428,7 @@
     <None Include="Resources\button-medium-blue.png" />
     <None Include="Resources\209x48-doar-azul-assina.gif" />
     <None Include="Resources\card_export.png" />
+    <Content Include="DWSIM_ico.ico" />
     <Content Include="Resources\ch.png" />
     <None Include="Resources\clock_red.png" />
     <None Include="Resources\comp_separator.png" />
@@ -2470,6 +2471,9 @@
     <None Include="Resources\Default.png" />
     <None Include="Resources\document_export.jpg" />
     <None Include="Resources\document_export1.jpg" />
+    <None Include="Resources\DWSIM_splash_limpo.png" />
+    <None Include="Resources\DWSIM_splash.png" />
+    <None Include="Resources\DWSIM_ico.png" />
     <Content Include="Resources\es.png" />
     <None Include="Resources\Excel.png" />
     <None Include="Resources\Excel_copy1.jpg" />
