@@ -75,7 +75,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
-      <HintPath>..\packages\FileHelpers.3.1.5\lib\net40\FileHelpers.dll</HintPath>
+      <HintPath>..\packages\FileHelpers.3.1.5\lib\net45\FileHelpers.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Interop.CAPEOPEN110">
@@ -87,7 +87,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RichTextBoxExtended">
@@ -142,7 +142,9 @@
     <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.Designer.vb">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.vb" />
+    <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPP.Designer.vb">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </Compile>
@@ -158,43 +160,63 @@
     <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.Designer.vb">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb" />
+    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigLKP.designer.vb">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.designer.vb">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.designer.vb">
       <DependentUpon>FormConfigPropertyPackageBase.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.designer.vb">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.designer.vb">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.designer.vb">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb" />
+    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.designer.vb">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </Compile>
@@ -469,6 +491,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DWSIM.Thermodynamics-AddIn.dna">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Resources\information.png" />
     <None Include="Resources\help.png" />
     <None Include="Resources\DWSIM4 icon.png" />
@@ -503,7 +529,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj">
@@ -617,8 +642,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDna.xll" "$(TargetDir)DWSIM.Thermodynamics-AddIn.xll*" /C /Y
+xcopy "$(TargetDir)DWSIM.Thermodynamics-AddIn.dna*" "$(TargetDir)DWSIM.Thermodynamics-AddIn64.dna*" /C /Y
+xcopy "$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDna64.xll" "$(TargetDir)DWSIM.Thermodynamics-AddIn64.xll*" /C /Y
+"$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDnaPack.exe" "$(TargetDir)DWSIM.Thermodynamics-AddIn.dna" /Y
+"$(SolutionDir)\packages\ExcelDna.AddIn.0.33.9\tools\ExcelDnaPack.exe" "$(TargetDir)DWSIM.Thermodynamics-AddIn64.dna" /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
