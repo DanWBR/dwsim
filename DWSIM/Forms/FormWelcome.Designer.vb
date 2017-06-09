@@ -38,27 +38,22 @@ Partial Class FormWelcome
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.LabelWithDivider12 = New System.Windows.Forms.LabelWithDivider()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lvlatestfolders = New System.Windows.Forms.ListView()
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label11
@@ -170,28 +165,6 @@ Partial Class FormWelcome
         Me.Label3.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label3.Name = "Label3"
         '
-        'Label13
-        '
-        resources.ApplyResources(Me.Label13, "Label13")
-        Me.Label13.BackColor = System.Drawing.Color.Transparent
-        Me.Label13.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label13.Name = "Label13"
-        '
-        'Label14
-        '
-        resources.ApplyResources(Me.Label14, "Label14")
-        Me.Label14.BackColor = System.Drawing.Color.Transparent
-        Me.Label14.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label14.Name = "Label14"
-        '
-        'LabelWithDivider12
-        '
-        resources.ApplyResources(Me.LabelWithDivider12, "LabelWithDivider12")
-        Me.LabelWithDivider12.BackColor = System.Drawing.Color.Transparent
-        Me.LabelWithDivider12.ForeColor = System.Drawing.Color.SteelBlue
-        Me.LabelWithDivider12.Gap = 5
-        Me.LabelWithDivider12.Name = "LabelWithDivider12"
-        '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
@@ -238,32 +211,6 @@ Partial Class FormWelcome
         '
         resources.ApplyResources(Me.ColumnHeader3, "ColumnHeader3")
         '
-        'Button7
-        '
-        resources.ApplyResources(Me.Button7, "Button7")
-        Me.Button7.BackColor = System.Drawing.Color.Transparent
-        Me.Button7.FlatAppearance.BorderSize = 0
-        Me.Button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.Button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.Button7.ForeColor = System.Drawing.Color.White
-        Me.Button7.Name = "Button7"
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Label17
-        '
-        resources.ApplyResources(Me.Label17, "Label17")
-        Me.Label17.BackColor = System.Drawing.Color.Transparent
-        Me.Label17.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label17.Name = "Label17"
-        '
-        'LabelWithDivider1
-        '
-        resources.ApplyResources(Me.LabelWithDivider1, "LabelWithDivider1")
-        Me.LabelWithDivider1.BackColor = System.Drawing.Color.Transparent
-        Me.LabelWithDivider1.ForeColor = System.Drawing.Color.SteelBlue
-        Me.LabelWithDivider1.Gap = 5
-        Me.LabelWithDivider1.Name = "LabelWithDivider1"
-        '
         'Button11
         '
         resources.ApplyResources(Me.Button11, "Button11")
@@ -303,16 +250,6 @@ Partial Class FormWelcome
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        resources.ApplyResources(Me.Button6, "Button6")
-        Me.Button6.BackgroundImage = Global.DWSIM.My.Resources.Resources.text_x_generic_template
-        Me.Button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver
-        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button6.Name = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
         '
         'Button8
         '
@@ -360,16 +297,30 @@ Partial Class FormWelcome
         Me.Label15.ForeColor = System.Drawing.Color.SteelBlue
         Me.Label15.Name = "Label15"
         '
+        'Label13
+        '
+        resources.ApplyResources(Me.Label13, "Label13")
+        Me.Label13.BackColor = System.Drawing.Color.Transparent
+        Me.Label13.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label13.Name = "Label13"
+        '
+        'Label14
+        '
+        resources.ApplyResources(Me.Label14, "Label14")
+        Me.Label14.BackColor = System.Drawing.Color.Transparent
+        Me.Label14.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label14.Name = "Label14"
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
+        Me.Controls.Add(Me.Label14)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button12)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.LabelWithDivider1)
         Me.Controls.Add(Me.lvlatestfolders)
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label2)
@@ -378,10 +329,6 @@ Partial Class FormWelcome
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button8)
-        Me.Controls.Add(Me.LabelWithDivider12)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label12)
@@ -395,7 +342,6 @@ Partial Class FormWelcome
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Button7)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -419,10 +365,6 @@ Partial Class FormWelcome
     Public WithEvents Label7 As System.Windows.Forms.Label
     Public WithEvents Label11 As System.Windows.Forms.Label
     Public WithEvents Label12 As System.Windows.Forms.Label
-    Public WithEvents Label13 As System.Windows.Forms.Label
-    Public WithEvents Label14 As System.Windows.Forms.Label
-    Public WithEvents Button6 As System.Windows.Forms.Button
-    Public WithEvents LabelWithDivider12 As System.Windows.Forms.LabelWithDivider
     Public WithEvents Button8 As System.Windows.Forms.Button
     Public WithEvents Button5 As System.Windows.Forms.Button
     Public WithEvents Button3 As System.Windows.Forms.Button
@@ -432,13 +374,12 @@ Partial Class FormWelcome
     Public WithEvents Label16 As System.Windows.Forms.Label
     Friend WithEvents lvlatestfolders As System.Windows.Forms.ListView
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
-    Public WithEvents Button7 As System.Windows.Forms.Button
     Public WithEvents Button11 As System.Windows.Forms.Button
     Public WithEvents Button12 As System.Windows.Forms.Button
-    Public WithEvents Label17 As System.Windows.Forms.Label
-    Public WithEvents LabelWithDivider1 As System.Windows.Forms.LabelWithDivider
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Public WithEvents Label15 As System.Windows.Forms.Label
+    Public WithEvents Label13 As System.Windows.Forms.Label
+    Public WithEvents Label14 As System.Windows.Forms.Label
 End Class

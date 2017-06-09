@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 13</value>
+    <value>229, 14</value>
   </data>
   <data name="Label11.Text" xml:space="preserve">
     <value>Opens a new Data Regression Utility window.</value>
   </data>
   <data name="Label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 17</value>
+    <value>241, 16</value>
   </data>
   <data name="Label12.Text" xml:space="preserve">
     <value>Create a New Data Regression Study</value>
@@ -135,7 +135,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAD0
-        DwAAAk1TRnQBSQFMAgEBBQEAAdQBAQHUAQEBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        DwAAAk1TRnQBSQFMAgEBBQEAAUwBAgFMAQIBEAEAARABAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABIAMAAQEBAAEQBgABEP8AFQABeQF3ARMBcwFJAW4BJwFuAScBbgEnAW4BJwFuAScBbgEnAW4BJwFu
         AScBbgEnAW4BSAFuATUBc2QAAWoBbgG7AXsBdQF7AXMBewFyAXsBcQF7AVABewFPAXsBTwF7AU4BewFN
         AXsBLQF7AbgBfwFoAW5kAAFoAW4B/QF/AbQBfwGSAX8BkAF7AW4BewFsAXsBSgF7AUgBewFHAXsBJQF7
@@ -206,131 +206,86 @@
         AQMBwAEDCP8L
 </value>
   </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 64</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 13</value>
+    <value>270, 14</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Opens the 'Samples' folder located in DWSIM directory.</value>
   </data>
-  <data name="Label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 41</value>
-  </data>
   <data name="Label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 17</value>
+    <value>101, 16</value>
   </data>
   <data name="Label8.Text" xml:space="preserve">
     <value>Open Samples</value>
   </data>
   <data name="Label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 13</value>
+    <value>239, 14</value>
   </data>
   <data name="Label6.Text" xml:space="preserve">
     <value>Opens a new Compound Creator Utility window.</value>
   </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 17</value>
+    <value>155, 16</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Create New Compound</value>
   </data>
   <data name="Label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 13</value>
+    <value>196, 14</value>
   </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>Creates a new steady-state simulation.</value>
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 13</value>
+    <value>298, 14</value>
   </data>
   <data name="Label9.Text" xml:space="preserve">
     <value>Opens an existing simulation, compound or regression case.</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 17</value>
+    <value>155, 16</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Create New Simulation</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 17</value>
+    <value>155, 16</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Open Simulation/Study</value>
   </data>
-  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 120</value>
-  </data>
-  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 13</value>
-  </data>
-  <data name="Label13.Text" xml:space="preserve">
-    <value>DWSIM Documentation in Adobe PDF Format.</value>
-  </data>
-  <data name="Label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 97</value>
-  </data>
-  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 17</value>
-  </data>
-  <data name="Label14.Text" xml:space="preserve">
-    <value>View Documentation</value>
-  </data>
-  <data name="LabelWithDivider12.Text" xml:space="preserve">
-    <value>Support the Project, make a Donation</value>
-  </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 19</value>
+    <value>54, 19</value>
   </data>
   <data name="Label1.Text" xml:space="preserve">
     <value>Tasks</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 19</value>
+    <value>103, 19</value>
   </data>
   <data name="Label2.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 19</value>
+    <value>125, 19</value>
   </data>
   <data name="Label16.Text" xml:space="preserve">
     <value>Recent Folders</value>
   </data>
-  <data name="Button7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
-  </data>
-  <data name="Button7.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="Label17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 40</value>
-  </data>
-  <data name="Label17.Text" xml:space="preserve">
-    <value>DWSIM is also available on Android and iOS platforms.</value>
-  </data>
-  <data name="LabelWithDivider1.Text" xml:space="preserve">
-    <value>DWSIM for Android, iPhone and iPad</value>
-  </data>
-  <data name="Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 40</value>
-  </data>
-  <data name="Button6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 96</value>
-  </data>
-  <data name="Button8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 549</value>
-  </data>
-  <data name="Button8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 53</value>
-  </data>
-  <data name="Label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 40</value>
-  </data>
   <data name="Label15.Text" xml:space="preserve">
     <value>Donate to the project, supporting the developers and encouraging the development of new features!</value>
+  </data>
+  <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 19</value>
+  </data>
+  <data name="Label13.Text" xml:space="preserve">
+    <value>Support the Project</value>
+  </data>
+  <data name="Label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 19</value>
+  </data>
+  <data name="Label14.Text" xml:space="preserve">
+    <value>Mobile Versions</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Welcome to DWSIM</value>

@@ -36,7 +36,7 @@ Public Class FormWelcome
 
         For Each f As String In existingfiles
             If Path.GetExtension(f).ToLower <> ".dwbcs" Then
-                Me.lvlatest.Items.Add(f, 0).Tag = f
+                Me.lvlatest.Items.Add(Path.GetFileName(f), 0).Tag = f
                 Dim lvi = Me.lvlatest.Items(Me.lvlatest.Items.Count - 1)
                 lvi.ToolTipText = f
                 lvi.SubItems.Add(New ListViewItem.ListViewSubItem(lvi, File.GetLastWriteTime(f)))
@@ -64,7 +64,7 @@ Public Class FormWelcome
 
     End Sub
 
-    Private Sub KryptonButton3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+    Private Sub KryptonButton3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.Close()
     End Sub
 
@@ -206,7 +206,7 @@ Public Class FormWelcome
         NewMDIChild.MdiParent = Me.Owner
     End Sub
 
-    Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As System.Object, e As System.EventArgs)
         Me.Close()
         Application.DoEvents()
         Process.Start(My.Application.Info.DirectoryPath & "\docs\")
