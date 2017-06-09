@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.Thermodynamics</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -28,6 +28,7 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
     <RegisterForComInterop>false</RegisterForComInterop>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>Full</DebugType>
@@ -40,6 +41,7 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>true</RemoveIntegerChecks>
     <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -140,9 +142,7 @@
     <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.Designer.vb">
       <DependentUpon>FlashAlgorithmConfig.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Flash Algorithms\FlashAlgorithmConfig.vb" />
     <Compile Include="Editing Forms\Flash Algorithms\FormSelectCOPP.Designer.vb">
       <DependentUpon>FormSelectCOPP.vb</DependentUpon>
     </Compile>
@@ -158,63 +158,43 @@
     <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.Designer.vb">
       <DependentUpon>MaterialStreamEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Material Stream\MaterialStreamEditor.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPSocket.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPSocket.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.designer.vb">
       <DependentUpon>FormConfigCAPEOPENPPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigCAPEOPENPPackage.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.designer.vb">
       <DependentUpon>FormConfigExUNIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigExUNIQUAC.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigLKP.designer.vb">
       <DependentUpon>FormConfigLKP.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigLKP.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.designer.vb">
       <DependentUpon>FormConfigNRTL.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigNRTL.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.designer.vb">
       <DependentUpon>FormConfigPropertyPackageBase.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackageBase.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.designer.vb">
       <DependentUpon>FormConfigPropertyPackage.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPropertyPackage.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.designer.vb">
       <DependentUpon>FormConfigPRSV2.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigPRSV2.vb" />
     <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.designer.vb">
       <DependentUpon>FormConfigUNIQUAC.vb</DependentUpon>
     </Compile>
-    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Editing Forms\Property Packages\FormConfigUNIQUAC.vb" />
     <Compile Include="Editing Forms\Unhandled Exceptions\FormUnhandledException.designer.vb">
       <DependentUpon>FormUnhandledException.vb</DependentUpon>
     </Compile>

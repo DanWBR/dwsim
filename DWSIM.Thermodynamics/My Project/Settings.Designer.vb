@@ -54,26 +54,26 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("")> _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property CurrentPlatform() As String
             Get
-                Return CType(Me("CurrentPlatform"), String)
+                Return CType(Me("CurrentPlatform"),String)
             End Get
-            Set(value As String)
+            Set
                 Me("CurrentPlatform") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")> _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
         Public Property CurrentEnvironment() As Integer
             Get
-                Return CType(Me("CurrentEnvironment"), Integer)
+                Return CType(Me("CurrentEnvironment"),Integer)
             End Get
-            Set(value As Integer)
+            Set
                 Me("CurrentEnvironment") = value
             End Set
         End Property

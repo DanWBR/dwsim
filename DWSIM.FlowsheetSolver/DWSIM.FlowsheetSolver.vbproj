@@ -10,7 +10,7 @@
     <AssemblyName>DWSIM.FlowsheetSolver</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -21,6 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>DWSIM.FlowsheetSolver.xml</DocumentationFile>
     <NoWarn>41999,42016,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>Full</DebugType>
@@ -31,6 +32,7 @@
     <DocumentationFile>DWSIM.FlowsheetSolver.xml</DocumentationFile>
     <NoWarn>41999,42016,42020,42021,42022</NoWarn>
     <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>

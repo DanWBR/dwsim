@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("DWSIM Simulator Interface Definitions Library")>
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.Interfaces")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016 DWSIM Project")> 
+<Assembly: AssemblyCopyright("Copyright ©  2017 DWSIM Project")> 
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(True)>
@@ -31,4 +31,4 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("4.2.*")>
+<Assembly: AssemblyVersion("5.0.*")> 
