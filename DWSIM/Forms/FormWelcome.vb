@@ -39,7 +39,6 @@ Public Class FormWelcome
                 Me.lvlatest.Items.Add(Path.GetFileName(f), 0).Tag = f
                 Dim lvi = Me.lvlatest.Items(Me.lvlatest.Items.Count - 1)
                 lvi.ToolTipText = f
-                lvi.SubItems.Add(New ListViewItem.ListViewSubItem(lvi, File.GetLastWriteTime(f)))
                 Select Case Path.GetExtension(f).ToLower
                     Case ".dwsim"
                         lvi.ImageIndex = 0

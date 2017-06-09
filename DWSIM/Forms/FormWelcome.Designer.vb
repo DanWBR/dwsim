@@ -28,7 +28,6 @@ Partial Class FormWelcome
         Me.Label12 = New System.Windows.Forms.Label()
         Me.lvlatest = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -77,7 +76,7 @@ Partial Class FormWelcome
         Me.lvlatest.AutoArrange = False
         Me.lvlatest.BackColor = System.Drawing.Color.White
         Me.lvlatest.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.lvlatest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2})
+        Me.lvlatest.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
         Me.lvlatest.ForeColor = System.Drawing.Color.SteelBlue
         Me.lvlatest.FullRowSelect = True
         Me.lvlatest.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
@@ -94,10 +93,6 @@ Partial Class FormWelcome
         'ColumnHeader1
         '
         resources.ApplyResources(Me.ColumnHeader1, "ColumnHeader1")
-        '
-        'ColumnHeader2
-        '
-        resources.ApplyResources(Me.ColumnHeader2, "ColumnHeader2")
         '
         'ImageList1
         '
@@ -377,7 +372,6 @@ Partial Class FormWelcome
     Public WithEvents Button11 As System.Windows.Forms.Button
     Public WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
     Public WithEvents Label15 As System.Windows.Forms.Label
     Public WithEvents Label13 As System.Windows.Forms.Label
