@@ -49,8 +49,6 @@ Partial Class FormWelcome
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.LabelWithDivider1 = New System.Windows.Forms.LabelWithDivider()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -60,6 +58,7 @@ Partial Class FormWelcome
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label11
@@ -265,24 +264,6 @@ Partial Class FormWelcome
         Me.LabelWithDivider1.Gap = 5
         Me.LabelWithDivider1.Name = "LabelWithDivider1"
         '
-        'Button10
-        '
-        resources.ApplyResources(Me.Button10, "Button10")
-        Me.Button10.BackgroundImage = Global.DWSIM.My.Resources.Resources._209x48_doar_azul_assina
-        Me.Button10.FlatAppearance.BorderSize = 0
-        Me.Button10.ForeColor = System.Drawing.Color.Black
-        Me.Button10.Name = "Button10"
-        Me.Button10.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        resources.ApplyResources(Me.Button9, "Button9")
-        Me.Button9.BackgroundImage = Global.DWSIM.My.Resources.Resources.button_medium_blue
-        Me.Button9.FlatAppearance.BorderSize = 0
-        Me.Button9.ForeColor = System.Drawing.Color.Black
-        Me.Button9.Name = "Button9"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
         'Button11
         '
         resources.ApplyResources(Me.Button11, "Button11")
@@ -372,13 +353,19 @@ Partial Class FormWelcome
         Me.Button2.Name = "Button2"
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Label15
+        '
+        resources.ApplyResources(Me.Label15, "Label15")
+        Me.Label15.BackColor = System.Drawing.Color.Transparent
+        Me.Label15.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label15.Name = "Label15"
+        '
         'FormWelcome
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.Controls.Add(Me.Button10)
-        Me.Controls.Add(Me.Button9)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Label17)
@@ -453,6 +440,5 @@ Partial Class FormWelcome
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Public WithEvents Button9 As Button
-    Public WithEvents Button10 As System.Windows.Forms.Button
+    Public WithEvents Label15 As System.Windows.Forms.Label
 End Class

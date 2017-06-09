@@ -52,7 +52,7 @@ Public Class FormUnhandledException
         Me.TextBox2.Text = ex.ToString.Replace(mystring, "").Replace(mystring2, "")
         Button4.Enabled = False
         Try
-            Dim baseaddress As String = "https://github.com/DanWBR/dwsim4/blob/master/"
+            Dim baseaddress As String = "https://github.com/DanWBR/dwsim5/blob/master/"
             Dim st As New StackTrace(ex, True)
             Dim frame As StackFrame = st.GetFrame(0)
             Dim path As String = frame.GetFileName.Replace(mystring, baseaddress)
