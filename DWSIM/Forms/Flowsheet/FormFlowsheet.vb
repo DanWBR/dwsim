@@ -650,11 +650,8 @@ Public Class FormFlowsheet
                                                              .Unique = True
                                                          End With
 
-                                                         Dim statustext As String = If(texto.Length > 70, texto.Substring(0, 70) + "...", texto)
-
-                                                         tsbLogMessage.Text = statustext
+                                                         tsbLogMessage.Text = texto
                                                          tsbLogMessage.Image = img
-                                                         tsbLogMessage.ToolTipText = texto
 
                                                          frlog.GridDT.Rows.Add(New Object() {img, Date.Now, strtipo, texto, cor, frlog.GridDT.Rows.Count})
 
@@ -1075,8 +1072,9 @@ Public Class FormFlowsheet
                 Me.Options.SelectedUnitSystem = FormMain.AvailableUnitSystems.Item(Me.ToolStripComboBoxUnitSystem.SelectedItem.ToString)
             End If
 
-            Me.FormSurface.UpdateSelectedObject()
-            Me.UpdateOpenEditForms()
+            FormSurface.UpdateSelectedObject()
+            FormSurface.FlowsheetDesignSurface.Refresh()
+            UpdateOpenEditForms()
 
             If Me.ToolStripComboBoxUnitSystem.SelectedIndex > 2 Then
                 tsbEditUnits.Enabled = True
@@ -1088,16 +1086,6 @@ Public Class FormFlowsheet
 
         End Try
 
-    End Sub
-
-    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AdicionarToolStripMenuItem.Click
-        Dim frmUnit As New FormUnitGen
-        frmUnit.ShowDialog(Me)
-    End Sub
-
-    Private Sub ToolStripButton5_Click_1(sender As Object, e As EventArgs) Handles tsbEditUnits.Click
-        Dim frmUnit As New FormUnitGen With {.EditMode = True}
-        frmUnit.ShowDialog(Me)
     End Sub
 
     Private Sub IronRubyToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IronRubyToolStripMenuItem.Click
@@ -3031,7 +3019,7 @@ Public Class FormFlowsheet
             FormLog.VisibleState = prevlogview
         End If
 
-        tsbLogMessage.BackColor = If(FormLog.VisibleState <> DockState.Unknown, Color.FromKnownColor(KnownColor.Highlight), Color.FromKnownColor(KnownColor.Control))
+        tsbLogMessage.BackColor = If(FormLog.VisibleState <> DockState.Unknown, Color.FromKnownColor(KnownColor.GradientActiveCaption), Color.FromKnownColor(KnownColor.Control))
 
     End Sub
 
@@ -3064,16 +3052,6 @@ Public Class FormFlowsheet
         End If
     End Sub
 
-    Private Sub tsbmiUnits_Click(sender As Object, e As EventArgs) Handles tsbmiUnits.Click
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
-        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage4
-    End Sub
-
     Private Sub AjudaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AjudaToolStripMenuItem.Click
         Process.Start("https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx")
     End Sub
@@ -3086,16 +3064,6 @@ Public Class FormFlowsheet
     Private Sub AdicionarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdicionarToolStripMenuItem.Click
         Dim frmUnit As New FormUnitGen
         frmUnit.ShowDialog(Me)
-    End Sub
-
-    Private Sub FormataçãoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormataçãoToolStripMenuItem.Click
-        If DWSIM.App.IsRunningOnMono Then
-            Me.FrmStSim1 = New FormSimulSettings()
-            Me.FrmStSim1.Show(Me.dckPanel)
-        Else
-            Me.FrmStSim1.Show(Me.dckPanel)
-        End If
-        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage5
     End Sub
 
 End Class

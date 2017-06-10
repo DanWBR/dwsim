@@ -20,10 +20,10 @@ Partial Class FormFlowsheet
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormFlowsheet))
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
@@ -102,11 +102,6 @@ Partial Class FormFlowsheet
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.StatusStrip0 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.tsbAtivar = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsbCalc = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsbAbortCalc = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tsbSimultAdjustSolver = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.tsbmiCompounds = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsbmiModels = New System.Windows.Forms.ToolStripMenuItem()
@@ -121,6 +116,11 @@ Partial Class FormFlowsheet
         Me.FraçõesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripComboBoxNumberFractionFormatting = New System.Windows.Forms.ToolStripComboBox()
         Me.AjudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsbAtivar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbCalc = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbAbortCalc = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbSimultAdjustSolver = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsbUndo = New System.Windows.Forms.ToolStripSplitButton()
         Me.tsbRedo = New System.Windows.Forms.ToolStripSplitButton()
         Me.tsbLogMessage = New System.Windows.Forms.ToolStripDropDownButton()
@@ -136,33 +136,33 @@ Partial Class FormFlowsheet
         '
         'DataGridView1
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.DataGridView1, "DataGridView1")
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         '
         'TSTable
         '
@@ -674,51 +674,15 @@ Partial Class FormFlowsheet
         '
         'StatusStrip0
         '
-        Me.StatusStrip0.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton2, Me.ToolStripDropDownButton1, Me.tsbUndo, Me.tsbRedo, Me.tsbLogMessage})
-        Me.StatusStrip0.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         resources.ApplyResources(Me.StatusStrip0, "StatusStrip0")
+        Me.StatusStrip0.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.ToolStripDropDownButton2, Me.tsbUndo, Me.tsbRedo, Me.tsbLogMessage})
+        Me.StatusStrip0.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.StatusStrip0.Name = "StatusStrip0"
         Me.StatusStrip0.ShowItemToolTips = True
         Me.StatusStrip0.SizingGrip = False
         '
-        'ToolStripDropDownButton2
-        '
-        Me.ToolStripDropDownButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAtivar, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver})
-        Me.ToolStripDropDownButton2.Image = Global.DWSIM.My.Resources.Resources.calculator
-        resources.ApplyResources(Me.ToolStripDropDownButton2, "ToolStripDropDownButton2")
-        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
-        '
-        'tsbAtivar
-        '
-        Me.tsbAtivar.Checked = True
-        Me.tsbAtivar.CheckOnClick = True
-        Me.tsbAtivar.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.tsbAtivar.Name = "tsbAtivar"
-        resources.ApplyResources(Me.tsbAtivar, "tsbAtivar")
-        '
-        'tsbCalc
-        '
-        Me.tsbCalc.Image = Global.DWSIM.My.Resources.Resources.control_play_blue
-        Me.tsbCalc.Name = "tsbCalc"
-        resources.ApplyResources(Me.tsbCalc, "tsbCalc")
-        '
-        'tsbAbortCalc
-        '
-        Me.tsbAbortCalc.Image = Global.DWSIM.My.Resources.Resources.control_stop_blue
-        Me.tsbAbortCalc.Name = "tsbAbortCalc"
-        resources.ApplyResources(Me.tsbAbortCalc, "tsbAbortCalc")
-        '
-        'tsbSimultAdjustSolver
-        '
-        Me.tsbSimultAdjustSolver.Checked = True
-        Me.tsbSimultAdjustSolver.CheckOnClick = True
-        Me.tsbSimultAdjustSolver.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.tsbSimultAdjustSolver.Name = "tsbSimultAdjustSolver"
-        resources.ApplyResources(Me.tsbSimultAdjustSolver, "tsbSimultAdjustSolver")
-        '
         'ToolStripDropDownButton1
         '
-        Me.ToolStripDropDownButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbmiCompounds, Me.tsbmiModels, Me.tsbmiReactions, Me.tsbmiUnits, Me.FormataçãoToolStripMenuItem})
         Me.ToolStripDropDownButton1.Image = Global.DWSIM.My.Resources.Resources.cog
         resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
@@ -806,6 +770,41 @@ Partial Class FormFlowsheet
         Me.AjudaToolStripMenuItem.Name = "AjudaToolStripMenuItem"
         resources.ApplyResources(Me.AjudaToolStripMenuItem, "AjudaToolStripMenuItem")
         '
+        'ToolStripDropDownButton2
+        '
+        Me.ToolStripDropDownButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAtivar, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver})
+        Me.ToolStripDropDownButton2.Image = Global.DWSIM.My.Resources.Resources.calculator
+        resources.ApplyResources(Me.ToolStripDropDownButton2, "ToolStripDropDownButton2")
+        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
+        '
+        'tsbAtivar
+        '
+        Me.tsbAtivar.Checked = True
+        Me.tsbAtivar.CheckOnClick = True
+        Me.tsbAtivar.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tsbAtivar.Name = "tsbAtivar"
+        resources.ApplyResources(Me.tsbAtivar, "tsbAtivar")
+        '
+        'tsbCalc
+        '
+        Me.tsbCalc.Image = Global.DWSIM.My.Resources.Resources.control_play_blue
+        Me.tsbCalc.Name = "tsbCalc"
+        resources.ApplyResources(Me.tsbCalc, "tsbCalc")
+        '
+        'tsbAbortCalc
+        '
+        Me.tsbAbortCalc.Image = Global.DWSIM.My.Resources.Resources.control_stop_blue
+        Me.tsbAbortCalc.Name = "tsbAbortCalc"
+        resources.ApplyResources(Me.tsbAbortCalc, "tsbAbortCalc")
+        '
+        'tsbSimultAdjustSolver
+        '
+        Me.tsbSimultAdjustSolver.Checked = True
+        Me.tsbSimultAdjustSolver.CheckOnClick = True
+        Me.tsbSimultAdjustSolver.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tsbSimultAdjustSolver.Name = "tsbSimultAdjustSolver"
+        resources.ApplyResources(Me.tsbSimultAdjustSolver, "tsbSimultAdjustSolver")
+        '
         'tsbUndo
         '
         Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -836,23 +835,22 @@ Partial Class FormFlowsheet
         Me.Controls.Add(Me.QuestionBox_Panel)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.StatusStrip0)
-        Me.DoubleBuffered = true
+        Me.DoubleBuffered = True
         Me.Name = "FormFlowsheet"
-        Me.ShowIcon = false
-        CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TSTable.ResumeLayout(false)
-        Me.MenuStrip1.ResumeLayout(false)
-        Me.MenuStrip1.PerformLayout
-        Me.QuestionBox_Panel.ResumeLayout(false)
-        Me.QuestionBox_Panel.PerformLayout
-        CType(Me.QuestionBox_PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.PanelMobileCompatMode.ResumeLayout(false)
-        Me.PanelMobileCompatMode.PerformLayout
-        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.StatusStrip0.ResumeLayout(false)
-        Me.StatusStrip0.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.ShowIcon = False
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TSTable.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
+        Me.QuestionBox_Panel.ResumeLayout(False)
+        Me.QuestionBox_Panel.PerformLayout()
+        CType(Me.QuestionBox_PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelMobileCompatMode.ResumeLayout(False)
+        Me.PanelMobileCompatMode.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip0.ResumeLayout(False)
+        Me.StatusStrip0.PerformLayout()
+        Me.ResumeLayout(False)
 
 End Sub
     Public WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
