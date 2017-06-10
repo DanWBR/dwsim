@@ -24,66 +24,8 @@ Partial Class FormFlowsheet
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.ToolStripFlowsheet = New System.Windows.Forms.ToolStrip()
-        Me.tsbConfigSimulation = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbUndo = New System.Windows.Forms.ToolStripSplitButton()
-        Me.tsbRedo = New System.Windows.Forms.ToolStripSplitButton()
-        Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbCutObj = New System.Windows.Forms.ToolStripButton()
-        Me.tsbCopyObj = New System.Windows.Forms.ToolStripButton()
-        Me.tsbPasteObj = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator12 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton12 = New System.Windows.Forms.ToolStripButton()
-        Me.TSBtabela = New System.Windows.Forms.ToolStripButton()
-        Me.TSBTexto = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton6 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton19 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.TSTBZoom = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton20 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbResizeMode = New System.Windows.Forms.ToolStripButton()
-        Me.tsbResizeModeKeepAR = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton16 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton17 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButton18 = New System.Windows.Forms.ToolStripButton()
-        Me.tsbConfigPage = New System.Windows.Forms.ToolStripButton()
-        Me.tsbConfigPrinter = New System.Windows.Forms.ToolStripButton()
-        Me.tsbPrint = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbAlignLefts = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAlignCenters = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAlignRights = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAlignTops = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAlignMiddles = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAlignBottoms = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbAlignVertical = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAlignHorizontal = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripCalculator = New System.Windows.Forms.ToolStrip()
-        Me.tsbAtivar = New System.Windows.Forms.ToolStripButton()
-        Me.tsbCalc = New System.Windows.Forms.ToolStripButton()
-        Me.tsbAbortCalc = New System.Windows.Forms.ToolStripButton()
-        Me.tsbClearQueue = New System.Windows.Forms.ToolStripButton()
-        Me.tsbSimultAdjustSolver = New System.Windows.Forms.ToolStripButton()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.TSTable = New FarsiLibrary.Win.FATabStripItem()
-        Me.ToolStripUnits = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripComboBoxUnitSystem = New System.Windows.Forms.ToolStripComboBox()
-        Me.tsbEditUnits = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton7 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripComboBoxNumberFormatting = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripComboBoxNumberFractionFormatting = New System.Windows.Forms.ToolStripComboBox()
-        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ArquivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -143,7 +85,6 @@ Partial Class FormFlowsheet
         Me.BGLoadComp = New System.ComponentModel.BackgroundWorker()
         Me.bgCalc = New System.ComponentModel.BackgroundWorker()
         Me.dckPanel = New WeifenLuo.WinFormsUI.Docking.DockPanel()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.OpenFileName = New System.Windows.Forms.OpenFileDialog()
         Me.TimerScripts1 = New System.Windows.Forms.Timer(Me.components)
@@ -160,357 +101,38 @@ Partial Class FormFlowsheet
         Me.Button2 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ToolStripFlowsheet.SuspendLayout()
-        Me.ToolStripCalculator.SuspendLayout()
+        Me.StatusStrip0 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripDropDownButton2 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsbAtivar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbCalc = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbAbortCalc = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbSimultAdjustSolver = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsbmiCompounds = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbmiModels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbmiReactions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbmiUnits = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripComboBoxUnitSystem = New System.Windows.Forms.ToolStripComboBox()
+        Me.tsbEditUnits = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AdicionarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FormataçãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NúmerosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripComboBoxNumberFormatting = New System.Windows.Forms.ToolStripComboBox()
+        Me.FraçõesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripComboBoxNumberFractionFormatting = New System.Windows.Forms.ToolStripComboBox()
+        Me.AjudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsbUndo = New System.Windows.Forms.ToolStripSplitButton()
+        Me.tsbRedo = New System.Windows.Forms.ToolStripSplitButton()
+        Me.tsbLogMessage = New System.Windows.Forms.ToolStripDropDownButton()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TSTable.SuspendLayout()
-        Me.ToolStripUnits.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
-        Me.FlowLayoutPanel1.SuspendLayout()
         Me.QuestionBox_Panel.SuspendLayout()
         CType(Me.QuestionBox_PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelMobileCompatMode.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip0.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ToolStripFlowsheet
-        '
-        resources.ApplyResources(Me.ToolStripFlowsheet, "ToolStripFlowsheet")
-        Me.ToolStripFlowsheet.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbConfigSimulation, Me.ToolStripSeparator1, Me.tsbUndo, Me.tsbRedo, Me.ToolStripSeparator13, Me.tsbCutObj, Me.tsbCopyObj, Me.tsbPasteObj, Me.ToolStripSeparator12, Me.ToolStripButton12, Me.TSBtabela, Me.TSBTexto, Me.ToolStripButton4, Me.ToolStripButton6, Me.ToolStripButton19, Me.ToolStripSeparator5, Me.ToolStripButton1, Me.TSTBZoom, Me.ToolStripButton2, Me.ToolStripButton20, Me.ToolStripButton3, Me.ToolStripSeparator6, Me.tsbResizeMode, Me.tsbResizeModeKeepAR, Me.ToolStripSeparator7, Me.ToolStripButton16, Me.ToolStripButton17, Me.ToolStripSeparator4, Me.ToolStripButton18, Me.tsbConfigPage, Me.tsbConfigPrinter, Me.tsbPrint, Me.ToolStripSeparator8, Me.tsbAlignLefts, Me.tsbAlignCenters, Me.tsbAlignRights, Me.tsbAlignTops, Me.tsbAlignMiddles, Me.tsbAlignBottoms, Me.ToolStripSeparator9, Me.tsbAlignVertical, Me.tsbAlignHorizontal})
-        Me.ToolStripFlowsheet.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.ToolStripFlowsheet.Name = "ToolStripFlowsheet"
-        '
-        'tsbConfigSimulation
-        '
-        resources.ApplyResources(Me.tsbConfigSimulation, "tsbConfigSimulation")
-        Me.tsbConfigSimulation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbConfigSimulation.Image = Global.DWSIM.My.Resources.Resources.brick
-        Me.tsbConfigSimulation.Name = "tsbConfigSimulation"
-        '
-        'ToolStripSeparator1
-        '
-        resources.ApplyResources(Me.ToolStripSeparator1, "ToolStripSeparator1")
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        '
-        'tsbUndo
-        '
-        resources.ApplyResources(Me.tsbUndo, "tsbUndo")
-        Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbUndo.DropDownButtonWidth = 14
-        Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_161
-        Me.tsbUndo.Name = "tsbUndo"
-        '
-        'tsbRedo
-        '
-        resources.ApplyResources(Me.tsbRedo, "tsbRedo")
-        Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbRedo.DropDownButtonWidth = 14
-        Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_16
-        Me.tsbRedo.Name = "tsbRedo"
-        '
-        'ToolStripSeparator13
-        '
-        resources.ApplyResources(Me.ToolStripSeparator13, "ToolStripSeparator13")
-        Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        '
-        'tsbCutObj
-        '
-        resources.ApplyResources(Me.tsbCutObj, "tsbCutObj")
-        Me.tsbCutObj.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbCutObj.Image = Global.DWSIM.My.Resources.Resources.cut
-        Me.tsbCutObj.Name = "tsbCutObj"
-        '
-        'tsbCopyObj
-        '
-        resources.ApplyResources(Me.tsbCopyObj, "tsbCopyObj")
-        Me.tsbCopyObj.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbCopyObj.Image = Global.DWSIM.My.Resources.Resources.copy
-        Me.tsbCopyObj.Name = "tsbCopyObj"
-        '
-        'tsbPasteObj
-        '
-        resources.ApplyResources(Me.tsbPasteObj, "tsbPasteObj")
-        Me.tsbPasteObj.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbPasteObj.Image = Global.DWSIM.My.Resources.Resources.paste_plain
-        Me.tsbPasteObj.Name = "tsbPasteObj"
-        '
-        'ToolStripSeparator12
-        '
-        resources.ApplyResources(Me.ToolStripSeparator12, "ToolStripSeparator12")
-        Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        '
-        'ToolStripButton12
-        '
-        resources.ApplyResources(Me.ToolStripButton12, "ToolStripButton12")
-        Me.ToolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton12.Image = Global.DWSIM.My.Resources.Resources.shape_square
-        Me.ToolStripButton12.Name = "ToolStripButton12"
-        '
-        'TSBtabela
-        '
-        resources.ApplyResources(Me.TSBtabela, "TSBtabela")
-        Me.TSBtabela.CheckOnClick = True
-        Me.TSBtabela.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.TSBtabela.Image = Global.DWSIM.My.Resources.Resources.picture
-        Me.TSBtabela.Name = "TSBtabela"
-        '
-        'TSBTexto
-        '
-        resources.ApplyResources(Me.TSBTexto, "TSBTexto")
-        Me.TSBTexto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.TSBTexto.Image = Global.DWSIM.My.Resources.Resources.font
-        Me.TSBTexto.Name = "TSBTexto"
-        '
-        'ToolStripButton4
-        '
-        resources.ApplyResources(Me.ToolStripButton4, "ToolStripButton4")
-        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton4.Image = Global.DWSIM.My.Resources.Resources.table_relationship
-        Me.ToolStripButton4.Name = "ToolStripButton4"
-        '
-        'ToolStripButton6
-        '
-        resources.ApplyResources(Me.ToolStripButton6, "ToolStripButton6")
-        Me.ToolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton6.Image = Global.DWSIM.My.Resources.Resources.table_lightning
-        Me.ToolStripButton6.Name = "ToolStripButton6"
-        '
-        'ToolStripButton19
-        '
-        resources.ApplyResources(Me.ToolStripButton19, "ToolStripButton19")
-        Me.ToolStripButton19.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton19.Image = Global.DWSIM.My.Resources.Resources.table
-        Me.ToolStripButton19.Name = "ToolStripButton19"
-        '
-        'ToolStripSeparator5
-        '
-        resources.ApplyResources(Me.ToolStripSeparator5, "ToolStripSeparator5")
-        Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        '
-        'ToolStripButton1
-        '
-        resources.ApplyResources(Me.ToolStripButton1, "ToolStripButton1")
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = Global.DWSIM.My.Resources.Resources.zoom_out
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        '
-        'TSTBZoom
-        '
-        resources.ApplyResources(Me.TSTBZoom, "TSTBZoom")
-        Me.TSTBZoom.BackColor = System.Drawing.SystemColors.Control
-        Me.TSTBZoom.Name = "TSTBZoom"
-        '
-        'ToolStripButton2
-        '
-        resources.ApplyResources(Me.ToolStripButton2, "ToolStripButton2")
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.Image = Global.DWSIM.My.Resources.Resources.zoom_in
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        '
-        'ToolStripButton20
-        '
-        resources.ApplyResources(Me.ToolStripButton20, "ToolStripButton20")
-        Me.ToolStripButton20.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton20.Image = Global.DWSIM.My.Resources.Resources.zoom_extend
-        Me.ToolStripButton20.Name = "ToolStripButton20"
-        '
-        'ToolStripButton3
-        '
-        resources.ApplyResources(Me.ToolStripButton3, "ToolStripButton3")
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton3.Image = Global.DWSIM.My.Resources.Resources.zoom_refresh
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        '
-        'ToolStripSeparator6
-        '
-        resources.ApplyResources(Me.ToolStripSeparator6, "ToolStripSeparator6")
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        '
-        'tsbResizeMode
-        '
-        resources.ApplyResources(Me.tsbResizeMode, "tsbResizeMode")
-        Me.tsbResizeMode.CheckOnClick = True
-        Me.tsbResizeMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbResizeMode.Image = Global.DWSIM.My.Resources.Resources.shape_handles
-        Me.tsbResizeMode.Name = "tsbResizeMode"
-        '
-        'tsbResizeModeKeepAR
-        '
-        resources.ApplyResources(Me.tsbResizeModeKeepAR, "tsbResizeModeKeepAR")
-        Me.tsbResizeModeKeepAR.Checked = True
-        Me.tsbResizeModeKeepAR.CheckOnClick = True
-        Me.tsbResizeModeKeepAR.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.tsbResizeModeKeepAR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbResizeModeKeepAR.Image = Global.DWSIM.My.Resources.Resources.arrow_nw_se
-        Me.tsbResizeModeKeepAR.Name = "tsbResizeModeKeepAR"
-        '
-        'ToolStripSeparator7
-        '
-        resources.ApplyResources(Me.ToolStripSeparator7, "ToolStripSeparator7")
-        Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        '
-        'ToolStripButton16
-        '
-        resources.ApplyResources(Me.ToolStripButton16, "ToolStripButton16")
-        Me.ToolStripButton16.CheckOnClick = True
-        Me.ToolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton16.Image = Global.DWSIM.My.Resources.Resources.shading
-        Me.ToolStripButton16.Name = "ToolStripButton16"
-        '
-        'ToolStripButton17
-        '
-        resources.ApplyResources(Me.ToolStripButton17, "ToolStripButton17")
-        Me.ToolStripButton17.CheckOnClick = True
-        Me.ToolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton17.Image = Global.DWSIM.My.Resources.Resources.connect
-        Me.ToolStripButton17.Name = "ToolStripButton17"
-        '
-        'ToolStripSeparator4
-        '
-        resources.ApplyResources(Me.ToolStripSeparator4, "ToolStripSeparator4")
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        '
-        'ToolStripButton18
-        '
-        resources.ApplyResources(Me.ToolStripButton18, "ToolStripButton18")
-        Me.ToolStripButton18.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton18.Image = Global.DWSIM.My.Resources.Resources.images
-        Me.ToolStripButton18.Name = "ToolStripButton18"
-        '
-        'tsbConfigPage
-        '
-        resources.ApplyResources(Me.tsbConfigPage, "tsbConfigPage")
-        Me.tsbConfigPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbConfigPage.Image = Global.DWSIM.My.Resources.Resources.page_gear
-        Me.tsbConfigPage.Name = "tsbConfigPage"
-        '
-        'tsbConfigPrinter
-        '
-        resources.ApplyResources(Me.tsbConfigPrinter, "tsbConfigPrinter")
-        Me.tsbConfigPrinter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbConfigPrinter.Image = Global.DWSIM.My.Resources.Resources.printer
-        Me.tsbConfigPrinter.Name = "tsbConfigPrinter"
-        '
-        'tsbPrint
-        '
-        resources.ApplyResources(Me.tsbPrint, "tsbPrint")
-        Me.tsbPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbPrint.Image = Global.DWSIM.My.Resources.Resources.printer_add
-        Me.tsbPrint.Name = "tsbPrint"
-        '
-        'ToolStripSeparator8
-        '
-        resources.ApplyResources(Me.ToolStripSeparator8, "ToolStripSeparator8")
-        Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        '
-        'tsbAlignLefts
-        '
-        resources.ApplyResources(Me.tsbAlignLefts, "tsbAlignLefts")
-        Me.tsbAlignLefts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignLefts.Image = Global.DWSIM.My.Resources.Resources.shape_align_left
-        Me.tsbAlignLefts.Name = "tsbAlignLefts"
-        '
-        'tsbAlignCenters
-        '
-        resources.ApplyResources(Me.tsbAlignCenters, "tsbAlignCenters")
-        Me.tsbAlignCenters.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignCenters.Image = Global.DWSIM.My.Resources.Resources.shape_align_center
-        Me.tsbAlignCenters.Name = "tsbAlignCenters"
-        '
-        'tsbAlignRights
-        '
-        resources.ApplyResources(Me.tsbAlignRights, "tsbAlignRights")
-        Me.tsbAlignRights.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignRights.Image = Global.DWSIM.My.Resources.Resources.shape_align_right
-        Me.tsbAlignRights.Name = "tsbAlignRights"
-        '
-        'tsbAlignTops
-        '
-        resources.ApplyResources(Me.tsbAlignTops, "tsbAlignTops")
-        Me.tsbAlignTops.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignTops.Image = Global.DWSIM.My.Resources.Resources.shape_align_top
-        Me.tsbAlignTops.Name = "tsbAlignTops"
-        '
-        'tsbAlignMiddles
-        '
-        resources.ApplyResources(Me.tsbAlignMiddles, "tsbAlignMiddles")
-        Me.tsbAlignMiddles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignMiddles.Image = Global.DWSIM.My.Resources.Resources.shape_align_middle
-        Me.tsbAlignMiddles.Name = "tsbAlignMiddles"
-        '
-        'tsbAlignBottoms
-        '
-        resources.ApplyResources(Me.tsbAlignBottoms, "tsbAlignBottoms")
-        Me.tsbAlignBottoms.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignBottoms.Image = Global.DWSIM.My.Resources.Resources.shape_align_bottom
-        Me.tsbAlignBottoms.Name = "tsbAlignBottoms"
-        '
-        'ToolStripSeparator9
-        '
-        resources.ApplyResources(Me.ToolStripSeparator9, "ToolStripSeparator9")
-        Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        '
-        'tsbAlignVertical
-        '
-        resources.ApplyResources(Me.tsbAlignVertical, "tsbAlignVertical")
-        Me.tsbAlignVertical.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignVertical.Image = Global.DWSIM.My.Resources.Resources.shape_align_center1
-        Me.tsbAlignVertical.Name = "tsbAlignVertical"
-        '
-        'tsbAlignHorizontal
-        '
-        resources.ApplyResources(Me.tsbAlignHorizontal, "tsbAlignHorizontal")
-        Me.tsbAlignHorizontal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAlignHorizontal.Image = Global.DWSIM.My.Resources.Resources.shape_align_middle1
-        Me.tsbAlignHorizontal.Name = "tsbAlignHorizontal"
-        '
-        'ToolStripCalculator
-        '
-        resources.ApplyResources(Me.ToolStripCalculator, "ToolStripCalculator")
-        Me.ToolStripCalculator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAtivar, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbClearQueue, Me.tsbSimultAdjustSolver})
-        Me.ToolStripCalculator.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.ToolStripCalculator.Name = "ToolStripCalculator"
-        '
-        'tsbAtivar
-        '
-        resources.ApplyResources(Me.tsbAtivar, "tsbAtivar")
-        Me.tsbAtivar.Checked = True
-        Me.tsbAtivar.CheckOnClick = True
-        Me.tsbAtivar.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.tsbAtivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAtivar.Image = Global.DWSIM.My.Resources.Resources.accept
-        Me.tsbAtivar.Name = "tsbAtivar"
-        '
-        'tsbCalc
-        '
-        resources.ApplyResources(Me.tsbCalc, "tsbCalc")
-        Me.tsbCalc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbCalc.Image = Global.DWSIM.My.Resources.Resources.control_play_blue
-        Me.tsbCalc.Name = "tsbCalc"
-        '
-        'tsbAbortCalc
-        '
-        resources.ApplyResources(Me.tsbAbortCalc, "tsbAbortCalc")
-        Me.tsbAbortCalc.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbAbortCalc.Image = Global.DWSIM.My.Resources.Resources.control_stop_blue1
-        Me.tsbAbortCalc.Name = "tsbAbortCalc"
-        '
-        'tsbClearQueue
-        '
-        resources.ApplyResources(Me.tsbClearQueue, "tsbClearQueue")
-        Me.tsbClearQueue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbClearQueue.Image = Global.DWSIM.My.Resources.Resources.control_eject_blue
-        Me.tsbClearQueue.Name = "tsbClearQueue"
-        '
-        'tsbSimultAdjustSolver
-        '
-        resources.ApplyResources(Me.tsbSimultAdjustSolver, "tsbSimultAdjustSolver")
-        Me.tsbSimultAdjustSolver.Checked = True
-        Me.tsbSimultAdjustSolver.CheckOnClick = True
-        Me.tsbSimultAdjustSolver.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.tsbSimultAdjustSolver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbSimultAdjustSolver.Image = Global.DWSIM.My.Resources.Resources.control_equalizer
-        Me.tsbSimultAdjustSolver.Name = "tsbSimultAdjustSolver"
         '
         'DataGridView1
         '
@@ -549,67 +171,6 @@ Partial Class FormFlowsheet
         Me.TSTable.Controls.Add(Me.DataGridView1)
         Me.TSTable.IsDrawn = True
         Me.TSTable.Name = "TSTable"
-        '
-        'ToolStripUnits
-        '
-        resources.ApplyResources(Me.ToolStripUnits, "ToolStripUnits")
-        Me.ToolStripUnits.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxUnitSystem, Me.tsbEditUnits, Me.ToolStripButton7, Me.ToolStripSeparator2, Me.ToolStripComboBoxNumberFormatting, Me.ToolStripSeparator3, Me.ToolStripComboBoxNumberFractionFormatting, Me.ToolStripButton5})
-        Me.ToolStripUnits.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
-        Me.ToolStripUnits.Name = "ToolStripUnits"
-        '
-        'ToolStripComboBoxUnitSystem
-        '
-        resources.ApplyResources(Me.ToolStripComboBoxUnitSystem, "ToolStripComboBoxUnitSystem")
-        Me.ToolStripComboBoxUnitSystem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ToolStripComboBoxUnitSystem.DropDownWidth = 60
-        Me.ToolStripComboBoxUnitSystem.Name = "ToolStripComboBoxUnitSystem"
-        '
-        'tsbEditUnits
-        '
-        resources.ApplyResources(Me.tsbEditUnits, "tsbEditUnits")
-        Me.tsbEditUnits.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbEditUnits.Image = Global.DWSIM.My.Resources.Resources.table_gear
-        Me.tsbEditUnits.Name = "tsbEditUnits"
-        '
-        'ToolStripButton7
-        '
-        resources.ApplyResources(Me.ToolStripButton7, "ToolStripButton7")
-        Me.ToolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton7.Image = Global.DWSIM.My.Resources.Resources.add
-        Me.ToolStripButton7.Name = "ToolStripButton7"
-        '
-        'ToolStripSeparator2
-        '
-        resources.ApplyResources(Me.ToolStripSeparator2, "ToolStripSeparator2")
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        '
-        'ToolStripComboBoxNumberFormatting
-        '
-        resources.ApplyResources(Me.ToolStripComboBoxNumberFormatting, "ToolStripComboBoxNumberFormatting")
-        Me.ToolStripComboBoxNumberFormatting.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ToolStripComboBoxNumberFormatting.DropDownWidth = 50
-        Me.ToolStripComboBoxNumberFormatting.Items.AddRange(New Object() {resources.GetString("ToolStripComboBoxNumberFormatting.Items"), resources.GetString("ToolStripComboBoxNumberFormatting.Items1"), resources.GetString("ToolStripComboBoxNumberFormatting.Items2"), resources.GetString("ToolStripComboBoxNumberFormatting.Items3"), resources.GetString("ToolStripComboBoxNumberFormatting.Items4"), resources.GetString("ToolStripComboBoxNumberFormatting.Items5"), resources.GetString("ToolStripComboBoxNumberFormatting.Items6"), resources.GetString("ToolStripComboBoxNumberFormatting.Items7"), resources.GetString("ToolStripComboBoxNumberFormatting.Items8"), resources.GetString("ToolStripComboBoxNumberFormatting.Items9"), resources.GetString("ToolStripComboBoxNumberFormatting.Items10"), resources.GetString("ToolStripComboBoxNumberFormatting.Items11"), resources.GetString("ToolStripComboBoxNumberFormatting.Items12"), resources.GetString("ToolStripComboBoxNumberFormatting.Items13"), resources.GetString("ToolStripComboBoxNumberFormatting.Items14"), resources.GetString("ToolStripComboBoxNumberFormatting.Items15"), resources.GetString("ToolStripComboBoxNumberFormatting.Items16"), resources.GetString("ToolStripComboBoxNumberFormatting.Items17")})
-        Me.ToolStripComboBoxNumberFormatting.Name = "ToolStripComboBoxNumberFormatting"
-        '
-        'ToolStripSeparator3
-        '
-        resources.ApplyResources(Me.ToolStripSeparator3, "ToolStripSeparator3")
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        '
-        'ToolStripComboBoxNumberFractionFormatting
-        '
-        resources.ApplyResources(Me.ToolStripComboBoxNumberFractionFormatting, "ToolStripComboBoxNumberFractionFormatting")
-        Me.ToolStripComboBoxNumberFractionFormatting.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ToolStripComboBoxNumberFractionFormatting.DropDownWidth = 50
-        Me.ToolStripComboBoxNumberFractionFormatting.Items.AddRange(New Object() {resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items1"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items2"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items3"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items4"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items5"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items6"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items7"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items8"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items9"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items10"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items11"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items12"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items13"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items14"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items15"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items16"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items17")})
-        Me.ToolStripComboBoxNumberFractionFormatting.Name = "ToolStripComboBoxNumberFractionFormatting"
-        '
-        'ToolStripButton5
-        '
-        resources.ApplyResources(Me.ToolStripButton5, "ToolStripButton5")
-        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton5.Image = Global.DWSIM.My.Resources.Resources.icon_info
-        Me.ToolStripButton5.Name = "ToolStripButton5"
         '
         'MenuStrip1
         '
@@ -1016,14 +577,6 @@ Partial Class FormFlowsheet
         Me.dckPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
         Me.dckPanel.Name = "dckPanel"
         '
-        'FlowLayoutPanel1
-        '
-        resources.ApplyResources(Me.FlowLayoutPanel1, "FlowLayoutPanel1")
-        Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripCalculator)
-        Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripFlowsheet)
-        Me.FlowLayoutPanel1.Controls.Add(Me.ToolStripUnits)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        '
         'SaveFileDialog1
         '
         Me.SaveFileDialog1.DefaultExt = "png"
@@ -1123,39 +676,188 @@ Partial Class FormFlowsheet
         Me.Label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Label1.Name = "Label1"
         '
+        'StatusStrip0
+        '
+        resources.ApplyResources(Me.StatusStrip0, "StatusStrip0")
+        Me.StatusStrip0.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton2, Me.ToolStripDropDownButton1, Me.tsbUndo, Me.tsbRedo, Me.tsbLogMessage})
+        Me.StatusStrip0.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
+        Me.StatusStrip0.Name = "StatusStrip0"
+        Me.StatusStrip0.ShowItemToolTips = True
+        Me.StatusStrip0.SizingGrip = False
+        '
+        'ToolStripDropDownButton2
+        '
+        resources.ApplyResources(Me.ToolStripDropDownButton2, "ToolStripDropDownButton2")
+        Me.ToolStripDropDownButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbAtivar, Me.tsbCalc, Me.tsbAbortCalc, Me.tsbSimultAdjustSolver})
+        Me.ToolStripDropDownButton2.Image = Global.DWSIM.My.Resources.Resources.calculator
+        Me.ToolStripDropDownButton2.Name = "ToolStripDropDownButton2"
+        '
+        'tsbAtivar
+        '
+        resources.ApplyResources(Me.tsbAtivar, "tsbAtivar")
+        Me.tsbAtivar.Checked = True
+        Me.tsbAtivar.CheckOnClick = True
+        Me.tsbAtivar.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tsbAtivar.Name = "tsbAtivar"
+        '
+        'tsbCalc
+        '
+        resources.ApplyResources(Me.tsbCalc, "tsbCalc")
+        Me.tsbCalc.Image = Global.DWSIM.My.Resources.Resources.control_play_blue
+        Me.tsbCalc.Name = "tsbCalc"
+        '
+        'tsbAbortCalc
+        '
+        resources.ApplyResources(Me.tsbAbortCalc, "tsbAbortCalc")
+        Me.tsbAbortCalc.Image = Global.DWSIM.My.Resources.Resources.control_stop_blue
+        Me.tsbAbortCalc.Name = "tsbAbortCalc"
+        '
+        'tsbSimultAdjustSolver
+        '
+        resources.ApplyResources(Me.tsbSimultAdjustSolver, "tsbSimultAdjustSolver")
+        Me.tsbSimultAdjustSolver.Checked = True
+        Me.tsbSimultAdjustSolver.CheckOnClick = True
+        Me.tsbSimultAdjustSolver.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tsbSimultAdjustSolver.Name = "tsbSimultAdjustSolver"
+        '
+        'ToolStripDropDownButton1
+        '
+        resources.ApplyResources(Me.ToolStripDropDownButton1, "ToolStripDropDownButton1")
+        Me.ToolStripDropDownButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbmiCompounds, Me.tsbmiModels, Me.tsbmiReactions, Me.tsbmiUnits, Me.FormataçãoToolStripMenuItem})
+        Me.ToolStripDropDownButton1.Image = Global.DWSIM.My.Resources.Resources.cog
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        '
+        'tsbmiCompounds
+        '
+        resources.ApplyResources(Me.tsbmiCompounds, "tsbmiCompounds")
+        Me.tsbmiCompounds.Image = Global.DWSIM.My.Resources.Resources.wi0124_16
+        Me.tsbmiCompounds.Name = "tsbmiCompounds"
+        '
+        'tsbmiModels
+        '
+        resources.ApplyResources(Me.tsbmiModels, "tsbmiModels")
+        Me.tsbmiModels.Image = Global.DWSIM.My.Resources.Resources.book_open
+        Me.tsbmiModels.Name = "tsbmiModels"
+        '
+        'tsbmiReactions
+        '
+        resources.ApplyResources(Me.tsbmiReactions, "tsbmiReactions")
+        Me.tsbmiReactions.Image = Global.DWSIM.My.Resources.Resources.lightning
+        Me.tsbmiReactions.Name = "tsbmiReactions"
+        '
+        'tsbmiUnits
+        '
+        resources.ApplyResources(Me.tsbmiUnits, "tsbmiUnits")
+        Me.tsbmiUnits.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxUnitSystem, Me.tsbEditUnits, Me.AdicionarToolStripMenuItem})
+        Me.tsbmiUnits.Image = Global.DWSIM.My.Resources.Resources.text_letter_omega
+        Me.tsbmiUnits.Name = "tsbmiUnits"
+        '
+        'ToolStripComboBoxUnitSystem
+        '
+        resources.ApplyResources(Me.ToolStripComboBoxUnitSystem, "ToolStripComboBoxUnitSystem")
+        Me.ToolStripComboBoxUnitSystem.Name = "ToolStripComboBoxUnitSystem"
+        '
+        'tsbEditUnits
+        '
+        resources.ApplyResources(Me.tsbEditUnits, "tsbEditUnits")
+        Me.tsbEditUnits.Image = Global.DWSIM.My.Resources.Resources.table_gear
+        Me.tsbEditUnits.Name = "tsbEditUnits"
+        '
+        'AdicionarToolStripMenuItem
+        '
+        resources.ApplyResources(Me.AdicionarToolStripMenuItem, "AdicionarToolStripMenuItem")
+        Me.AdicionarToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.add
+        Me.AdicionarToolStripMenuItem.Name = "AdicionarToolStripMenuItem"
+        '
+        'FormataçãoToolStripMenuItem
+        '
+        resources.ApplyResources(Me.FormataçãoToolStripMenuItem, "FormataçãoToolStripMenuItem")
+        Me.FormataçãoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NúmerosToolStripMenuItem, Me.FraçõesToolStripMenuItem, Me.AjudaToolStripMenuItem})
+        Me.FormataçãoToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.textfield_rename
+        Me.FormataçãoToolStripMenuItem.Name = "FormataçãoToolStripMenuItem"
+        '
+        'NúmerosToolStripMenuItem
+        '
+        resources.ApplyResources(Me.NúmerosToolStripMenuItem, "NúmerosToolStripMenuItem")
+        Me.NúmerosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxNumberFormatting})
+        Me.NúmerosToolStripMenuItem.Name = "NúmerosToolStripMenuItem"
+        '
+        'ToolStripComboBoxNumberFormatting
+        '
+        resources.ApplyResources(Me.ToolStripComboBoxNumberFormatting, "ToolStripComboBoxNumberFormatting")
+        Me.ToolStripComboBoxNumberFormatting.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ToolStripComboBoxNumberFormatting.Items.AddRange(New Object() {resources.GetString("ToolStripComboBoxNumberFormatting.Items"), resources.GetString("ToolStripComboBoxNumberFormatting.Items1"), resources.GetString("ToolStripComboBoxNumberFormatting.Items2"), resources.GetString("ToolStripComboBoxNumberFormatting.Items3"), resources.GetString("ToolStripComboBoxNumberFormatting.Items4"), resources.GetString("ToolStripComboBoxNumberFormatting.Items5"), resources.GetString("ToolStripComboBoxNumberFormatting.Items6"), resources.GetString("ToolStripComboBoxNumberFormatting.Items7"), resources.GetString("ToolStripComboBoxNumberFormatting.Items8"), resources.GetString("ToolStripComboBoxNumberFormatting.Items9"), resources.GetString("ToolStripComboBoxNumberFormatting.Items10"), resources.GetString("ToolStripComboBoxNumberFormatting.Items11"), resources.GetString("ToolStripComboBoxNumberFormatting.Items12"), resources.GetString("ToolStripComboBoxNumberFormatting.Items13"), resources.GetString("ToolStripComboBoxNumberFormatting.Items14"), resources.GetString("ToolStripComboBoxNumberFormatting.Items15"), resources.GetString("ToolStripComboBoxNumberFormatting.Items16"), resources.GetString("ToolStripComboBoxNumberFormatting.Items17")})
+        Me.ToolStripComboBoxNumberFormatting.Name = "ToolStripComboBoxNumberFormatting"
+        '
+        'FraçõesToolStripMenuItem
+        '
+        resources.ApplyResources(Me.FraçõesToolStripMenuItem, "FraçõesToolStripMenuItem")
+        Me.FraçõesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBoxNumberFractionFormatting})
+        Me.FraçõesToolStripMenuItem.Name = "FraçõesToolStripMenuItem"
+        '
+        'ToolStripComboBoxNumberFractionFormatting
+        '
+        resources.ApplyResources(Me.ToolStripComboBoxNumberFractionFormatting, "ToolStripComboBoxNumberFractionFormatting")
+        Me.ToolStripComboBoxNumberFractionFormatting.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ToolStripComboBoxNumberFractionFormatting.Items.AddRange(New Object() {resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items1"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items2"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items3"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items4"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items5"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items6"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items7"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items8"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items9"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items10"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items11"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items12"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items13"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items14"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items15"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items16"), resources.GetString("ToolStripComboBoxNumberFractionFormatting.Items17")})
+        Me.ToolStripComboBoxNumberFractionFormatting.Name = "ToolStripComboBoxNumberFractionFormatting"
+        '
+        'AjudaToolStripMenuItem
+        '
+        resources.ApplyResources(Me.AjudaToolStripMenuItem, "AjudaToolStripMenuItem")
+        Me.AjudaToolStripMenuItem.Image = Global.DWSIM.My.Resources.Resources.help
+        Me.AjudaToolStripMenuItem.Name = "AjudaToolStripMenuItem"
+        '
+        'tsbUndo
+        '
+        resources.ApplyResources(Me.tsbUndo, "tsbUndo")
+        Me.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbUndo.Image = Global.DWSIM.My.Resources.Resources.undo_161
+        Me.tsbUndo.Name = "tsbUndo"
+        '
+        'tsbRedo
+        '
+        resources.ApplyResources(Me.tsbRedo, "tsbRedo")
+        Me.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbRedo.Image = Global.DWSIM.My.Resources.Resources.redo_16
+        Me.tsbRedo.Name = "tsbRedo"
+        '
+        'tsbLogMessage
+        '
+        resources.ApplyResources(Me.tsbLogMessage, "tsbLogMessage")
+        Me.tsbLogMessage.AutoToolTip = False
+        Me.tsbLogMessage.Name = "tsbLogMessage"
+        Me.tsbLogMessage.ShowDropDownArrow = False
+        '
         'FormFlowsheet
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.PanelMobileCompatMode)
         Me.Controls.Add(Me.dckPanel)
-        Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.QuestionBox_Panel)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.DoubleBuffered = True
+        Me.Controls.Add(Me.StatusStrip0)
+        Me.DoubleBuffered = true
         Me.Name = "FormFlowsheet"
-        Me.ToolStripFlowsheet.ResumeLayout(False)
-        Me.ToolStripFlowsheet.PerformLayout()
-        Me.ToolStripCalculator.ResumeLayout(False)
-        Me.ToolStripCalculator.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TSTable.ResumeLayout(False)
-        Me.ToolStripUnits.ResumeLayout(False)
-        Me.ToolStripUnits.PerformLayout()
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
-        Me.FlowLayoutPanel1.ResumeLayout(False)
-        Me.FlowLayoutPanel1.PerformLayout()
-        Me.QuestionBox_Panel.ResumeLayout(False)
-        Me.QuestionBox_Panel.PerformLayout()
-        CType(Me.QuestionBox_PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PanelMobileCompatMode.ResumeLayout(False)
-        Me.PanelMobileCompatMode.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.ShowIcon = false
+        CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TSTable.ResumeLayout(false)
+        Me.MenuStrip1.ResumeLayout(false)
+        Me.MenuStrip1.PerformLayout
+        Me.QuestionBox_Panel.ResumeLayout(false)
+        Me.QuestionBox_Panel.PerformLayout
+        CType(Me.QuestionBox_PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.PanelMobileCompatMode.ResumeLayout(false)
+        Me.PanelMobileCompatMode.PerformLayout
+        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.StatusStrip0.ResumeLayout(false)
+        Me.StatusStrip0.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
     Public WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
@@ -1168,92 +870,41 @@ Partial Class FormFlowsheet
     Public WithEvents bgCalc As System.ComponentModel.BackgroundWorker
     Public WithEvents OtimizaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents AnaliseDeSensibilidadeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ToolStripFlowsheet As System.Windows.Forms.ToolStrip
-    Public WithEvents TSBTexto As System.Windows.Forms.ToolStripButton
-    Public WithEvents TSBtabela As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripButton12 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripSeparator5 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
-    Public WithEvents TSTBZoom As System.Windows.Forms.ToolStripTextBox
-    Public WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents tsbConfigPage As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbConfigPrinter As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbPrint As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripCalculator As System.Windows.Forms.ToolStrip
-    Public WithEvents tsbAtivar As System.Windows.Forms.ToolStripButton
     Public WithEvents ArquivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CloseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents tsbCalc As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbAbortCalc As System.Windows.Forms.ToolStripButton
-    Public WithEvents tsbClearQueue As System.Windows.Forms.ToolStripButton
     Public WithEvents MultivariateOptimizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents dckPanel As WeifenLuo.WinFormsUI.Docking.DockPanel
     Public WithEvents FerramentasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CaracterizacaoDePetroleosFracoesC7ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents CaracterizacaoDePetroleosCurvasDeDestilacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents GerenciadorDeReacoesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Public WithEvents ToolStripUnits As System.Windows.Forms.ToolStrip
-    Public WithEvents ToolStripComboBoxUnitSystem As System.Windows.Forms.ToolStripComboBox
-    Public WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripComboBoxNumberFormatting As System.Windows.Forms.ToolStripComboBox
-    Public WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
-    Public WithEvents ToolStripComboBoxNumberFractionFormatting As System.Windows.Forms.ToolStripComboBox
-    Public WithEvents ToolStripButton7 As System.Windows.Forms.ToolStripButton
     Public WithEvents PluginsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ScriptsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents IronRubyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton16 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton17 As System.Windows.Forms.ToolStripButton
     Friend WithEvents CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents consoletsmi As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExibirListaDeItensACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents COObjTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ExibirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents varpaneltsmi As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripButton18 As System.Windows.Forms.ToolStripButton
     Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents ToolStripButton19 As System.Windows.Forms.ToolStripButton
-    Public WithEvents ToolStripButton20 As System.Windows.Forms.ToolStripButton
     Friend WithEvents GerenciadorDeAmostrasDePetroleoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tsbSimultAdjustSolver As System.Windows.Forms.ToolStripButton
-    Friend WithEvents FlowLayoutPanel1 As System.Windows.Forms.FlowLayoutPanel
-    Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
     Public WithEvents OpenFileName As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TimerScripts1 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts5 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts15 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts30 As System.Windows.Forms.Timer
     Friend WithEvents TimerScripts60 As System.Windows.Forms.Timer
-    Friend WithEvents ToolStripButton4 As System.Windows.Forms.ToolStripButton
     Friend WithEvents QuestionBox_Panel As System.Windows.Forms.Panel
     Friend WithEvents QuestionBox_Button2 As System.Windows.Forms.Button
     Friend WithEvents QuestionBox_Button1 As System.Windows.Forms.Button
     Friend WithEvents QuestionBox_PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents QuestionBox_Label1 As System.Windows.Forms.Label
-    Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbAlignLefts As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbAlignCenters As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbAlignRights As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbAlignTops As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbAlignMiddles As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbAlignBottoms As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbAlignVertical As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbAlignHorizontal As System.Windows.Forms.ToolStripButton
     Friend WithEvents ToolStripSeparator10 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents showflowsheettoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents showunitstoolstripmenuitem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator11 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents RestoreLayoutTSMI As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tsbCutObj As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbCopyObj As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbPasteObj As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator12 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbUndo As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents tsbRedo As System.Windows.Forms.ToolStripSplitButton
-    Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents EditarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmiUndo As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmiRedo As System.Windows.Forms.ToolStripMenuItem
@@ -1268,10 +919,6 @@ Partial Class FormFlowsheet
     Friend WithEvents ToolStripSeparator18 As System.Windows.Forms.ToolStripSeparator
     Public WithEvents tsmiConfigSimulation As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator15 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ToolStripButton6 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbResizeMode As System.Windows.Forms.ToolStripButton
-    Friend WithEvents tsbResizeModeKeepAR As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents InserirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents BlocoDeSimulacaoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TabelaDePropriedadesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1288,8 +935,27 @@ Partial Class FormFlowsheet
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents tsbConfigSimulation As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents tsbEditUnits As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripButton5 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents StatusStrip0 As System.Windows.Forms.StatusStrip
+    Friend WithEvents tsbLogMessage As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents ToolStripDropDownButton1 As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents tsbmiCompounds As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbmiModels As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbmiReactions As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbmiUnits As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripDropDownButton2 As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents tsbAtivar As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbCalc As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbAbortCalc As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbSimultAdjustSolver As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbUndo As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents tsbRedo As System.Windows.Forms.ToolStripSplitButton
+    Friend WithEvents FormataçãoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NúmerosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripComboBoxNumberFormatting As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents FraçõesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripComboBoxNumberFractionFormatting As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents AjudaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripComboBoxUnitSystem As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents tsbEditUnits As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AdicionarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

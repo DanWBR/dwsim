@@ -2323,6 +2323,8 @@
     <Content Include="Assets\help\UT_Triangular_LLE.htm" />
     <Content Include="Assets\help\UT_TrueCriticalPoint.htm" />
     <Content Include="Assets\help\UT_VesselSizing.htm" />
+    <None Include="Resources\textfield_rename.png" />
+    <None Include="Resources\text_letter_omega.png" />
     <None Include="Resources\Zoom Out.png" />
     <None Include="Resources\Zoom In.png" />
     <None Include="Resources\Search.png" />

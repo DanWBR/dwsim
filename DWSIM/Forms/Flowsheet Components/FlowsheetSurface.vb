@@ -102,9 +102,15 @@ Public Class FlowsheetSurface
         If e.KeyCode = Keys.E And e.Control Then
 
         ElseIf e.KeyCode = Keys.F5 Then
-            Flowsheet.tsbAtivar.Checked = True
-            GlobalSettings.Settings.CalculatorActivated = True
-            FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me.Flowsheet, My.Settings.SolverMode)
+            Flowsheet.tsbCalc_Click(sender, e)
+        ElseIf e.KeyCode = Keys.F6 Then
+            Flowsheet.tsbAtivar.Checked = Not Flowsheet.tsbAtivar.Checked
+            Flowsheet.tsbAtivar_Click(sender, e)
+        ElseIf e.KeyCode = Keys.F7 Then
+            Flowsheet.tsbSimultAdjustSolver.Checked = Not Flowsheet.tsbSimultAdjustSolver.Checked
+            Flowsheet.tsbSimultAdjustSolver_CheckedChanged(sender, e)
+        ElseIf e.KeyCode = Keys.Pause Then
+            Flowsheet.tsbAbortCalc_Click(sender, e)
         ElseIf e.KeyCode = Keys.X And e.Control Then
             Flowsheet.tsmiCut_Click(Me, New EventArgs)
         ElseIf e.KeyCode = Keys.C And e.Control Then
@@ -241,7 +247,7 @@ Public Class FlowsheetSurface
     End Sub
 
     Private Sub FlowsheetDesignSurface_StatusUpdate(ByVal sender As Object, ByVal e As DrawingTools.StatusUpdateEventArgs) Handles FlowsheetDesignSurface.StatusUpdate
-        Flowsheet.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
+        Flowsheet.FormSurface.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
     End Sub
 
     Private Sub FlowsheetDesignSurface_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles FlowsheetDesignSurface.MouseDown
@@ -3450,5 +3456,123 @@ Public Class FlowsheetSurface
         Next
 
     End Sub
+
+    Private Sub ToolStripButton16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton16.Click
+        Me.FlowsheetDesignSurface.SnapToGrid = ToolStripButton16.Checked
+        Flowsheet.Options.FlowsheetSnapToGrid = ToolStripButton16.Checked
+    End Sub
+
+    Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.Click
+        Me.FlowsheetDesignSurface.QuickConnect = ToolStripButton17.Checked
+        Flowsheet.Options.FlowsheetQuickConnect = ToolStripButton17.Checked
+    End Sub
+    Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
+        Me.FlowsheetDesignSurface.Zoom += 0.05
+        Me.TSTBZoom.Text = Format(Flowsheet.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
+        FlowsheetDesignSurface.Invalidate()
+    End Sub
+
+    Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
+        FlowsheetDesignSurface.Zoom -= 0.05
+        Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
+        FlowsheetDesignSurface.Invalidate()
+    End Sub
+
+    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton18.Click
+
+        If Flowsheet.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
+            Dim rect As Rectangle = New Rectangle(0, 0, FlowsheetDesignSurface.Width - 14, FlowsheetDesignSurface.Height - 14)
+            Dim img As Image = New Bitmap(rect.Width, rect.Height)
+            FlowsheetDesignSurface.DrawToBitmap(img, FlowsheetDesignSurface.Bounds)
+            img.Save(Flowsheet.SaveFileDialog1.FileName, Imaging.ImageFormat.Png)
+            img.Dispose()
+        End If
+
+    End Sub
+
+    Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
+        FlowsheetDesignSurface.ZoomAll()
+        Application.DoEvents()
+        FlowsheetDesignSurface.ZoomAll()
+        Application.DoEvents()
+        Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
+        FlowsheetDesignSurface.Zoom = 1
+        Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
+        FlowsheetDesignSurface.Invalidate()
+    End Sub
+
+    Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            FlowsheetDesignSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
+            Me.TSTBZoom.Text = Format(FlowsheetDesignSurface.Zoom, "#%")
+            FlowsheetDesignSurface.Invalidate()
+        End If
+    End Sub
+
+    Private Sub tsbResizeModeKeepAR_Click(sender As Object, e As EventArgs) Handles tsbResizeModeKeepAR.Click
+        FlowsheetDesignSurface.ResizingMode_KeepAR = tsbResizeModeKeepAR.Checked
+    End Sub
+
+    Private Sub tsbResizeMode_Click(sender As Object, e As EventArgs) Handles tsbResizeMode.Click
+        FlowsheetDesignSurface.ResizingMode = tsbResizeMode.Checked
+    End Sub
+
+    Private Sub ToolStripButton6_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbConfigPage.Click
+        pageSetup.ShowDialog()
+    End Sub
+
+    Private Sub ToolStripButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPrint.Click
+        PreviewDialog.ShowDialog()
+    End Sub
+
+    Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbConfigPrinter.Click
+        setupPrint.ShowDialog()
+    End Sub
+
+    Private Sub tsbAlign_Click(sender As Object, e As EventArgs) Handles tsbAlignBottoms.Click, tsbAlignCenters.Click, tsbAlignHorizontal.Click,
+                                                                        tsbAlignLefts.Click, tsbAlignMiddles.Click, tsbAlignRights.Click,
+                                                                        tsbAlignTops.Click, tsbAlignVertical.Click
+
+        Dim tsb As ToolStripButton = DirectCast(sender, ToolStripButton)
+
+        Dim direction As DrawingTools.GraphicsSurface.AlignDirection
+
+        If tsb.Name.Contains("Lefts") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.Lefts
+        ElseIf tsb.Name.Contains("Centers") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.Centers
+        ElseIf tsb.Name.Contains("Rights") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.Rights
+        ElseIf tsb.Name.Contains("Tops") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.Tops
+        ElseIf tsb.Name.Contains("Middles") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.Middles
+        ElseIf tsb.Name.Contains("Bottoms") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.Bottoms
+        ElseIf tsb.Name.Contains("Vertical") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.EqualizeVertical
+        ElseIf tsb.Name.Contains("Horizontal") Then
+            direction = DrawingTools.GraphicsSurface.AlignDirection.EqualizeHorizontal
+        End If
+
+        FlowsheetDesignSurface.AlignSelectedObjects(direction)
+
+    End Sub
+
+    Private Sub tsbCutObj_Click(sender As Object, e As EventArgs) Handles tsbCutObj.Click
+        Flowsheet.CutObjects()
+    End Sub
+
+    Private Sub tsbCopyObj_Click(sender As Object, e As EventArgs) Handles tsbCopyObj.Click
+        Flowsheet.CopyObjects()
+    End Sub
+
+    Private Sub tsbPasteObj_Click(sender As Object, e As EventArgs) Handles tsbPasteObj.Click
+        Flowsheet.PasteObjects()
+    End Sub
+
 
 End Class

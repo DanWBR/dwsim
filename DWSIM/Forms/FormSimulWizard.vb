@@ -149,7 +149,7 @@ Public Class FormSimulWizard
         FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(array1)
 
         FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
-        FrmChild.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
+        FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
         ComboBox2.SelectedIndex = 0
         FrmChild.ToolStripComboBoxUnitSystem.SelectedIndex = 0

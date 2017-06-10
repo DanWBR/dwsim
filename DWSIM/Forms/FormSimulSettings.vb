@@ -232,7 +232,7 @@ Public Class FormSimulSettings
         ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
         FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.NumberFormat
-        FrmChild.ToolStripComboBoxNumberFractionFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
+        FrmChild.ToolStripComboBoxNumberFormatting.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
 
         If Me.FrmChild.Options.SelectedUnitSystem.Name <> "" Then
             ComboBox2.SelectedItem = Me.FrmChild.Options.SelectedUnitSystem.Name

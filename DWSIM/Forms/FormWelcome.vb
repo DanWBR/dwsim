@@ -95,12 +95,12 @@ Public Class FormWelcome
             FormMain.filename = Me.lvlatest.SelectedItems(0).Tag
             Select Case Path.GetExtension(Me.lvlatest.SelectedItems(0).Tag).ToLower
                 Case ".dwxml"
-                    FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
                     FormMain.LoadXML(Me.lvlatest.SelectedItems(0).Tag)
                 Case ".dwxmz"
-                    FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
                     FormMain.LoadAndExtractXMLZIP(Me.lvlatest.SelectedItems(0).Tag)
@@ -110,7 +110,7 @@ Public Class FormWelcome
                     'Application.DoEvents()
                     'FormMain.LoadF(Me.lvlatest.SelectedItems(0).Tag)
                 Case ".xml"
-                    FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
+                    'FormMain.ToolStripStatusLabel1.Text = DWSIM.App.GetLocalString("Abrindosimulao") + " " + Me.lvlatest.SelectedItems(0).Tag + "..."
                     Application.DoEvents()
                     Application.DoEvents()
                     FormMain.LoadMobileXML(Me.lvlatest.SelectedItems(0).Tag)

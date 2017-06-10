@@ -119,13 +119,13 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="ToolStripMenuItem3.Text" xml:space="preserve">
     <value>Flowsheet</value>
   </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 6</value>
+    <value>167, 6</value>
   </data>
   <data name="AddNewTSMI.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 22</value>
@@ -134,49 +134,46 @@
     <value>Add New Object...</value>
   </data>
   <data name="ToolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 6</value>
+    <value>167, 6</value>
   </data>
   <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="ToolStripMenuItem2.Text" xml:space="preserve">
     <value>Configure Style</value>
   </data>
   <data name="ToolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="ToolStripMenuItem5.Text" xml:space="preserve">
     <value>Print</value>
   </data>
   <data name="CopiarParaAareaDeTransferenciaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="CopiarParaAareaDeTransferenciaToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy as Image</value>
   </data>
   <data name="ExibirTudoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="ExibirTudoToolStripMenuItem.Text" xml:space="preserve">
     <value>Zoom All</value>
   </data>
   <data name="ZoomPadrao100ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="ZoomPadrao100ToolStripMenuItem.Text" xml:space="preserve">
     <value>Default Zoom</value>
   </data>
   <data name="CentralizarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
     <value>Center</value>
   </data>
   <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 214</value>
-  </data>
-  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 376</value>
+    <value>171, 192</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
@@ -225,12 +222,6 @@
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 6</value>
-  </data>
-  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Rotate</value>
   </data>
   <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -322,6 +313,12 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
   <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
   </data>
@@ -379,6 +376,9 @@
   <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
     <value>Merge Streams</value>
   </data>
+  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 376</value>
+  </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
@@ -434,5 +434,251 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Flowsheet</value>
+  </data>
+  <data name="ExibirListaDeItensACalcularToolStripMenuItem.Text" xml:space="preserve">
+    <value>Calculation Queue</value>
+  </data>
+  <data name="FiguraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="GerarRelatorioToolStripMenuItem.Text" xml:space="preserve">
+    <value>Create Report</value>
+  </data>
+  <data name="GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Petroleum Assay Manager</value>
+  </data>
+  <data name="GerenciadorDeReacoesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reactions Manager</value>
+  </data>
+  <data name="IronRubyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Script Manager</value>
+  </data>
+  <data name="Label1.Text1" xml:space="preserve">
+    <value>This simulation is currently running in Mobile Compatibility Mode.</value>
+  </data>
+  <data name="MultivariateOptimizerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Multivariate Optimizer</value>
+  </data>
+  <data name="RectangleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
+  <data name="TabelaDePropriedadesPlanilhaToolStripMenuItem.Text" xml:space="preserve">
+    <value>Linked Spreadsheet Table</value>
+  </data>
+  <data name="TabelaDePropriedadesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Property Table</value>
+  </data>
+  <data name="TabelaDePropriedatesMestraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Master Property Table</value>
+  </data>
+  <data name="TextoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ToolStripButton1.Text" xml:space="preserve">
+    <value>Unzoom flowsheet</value>
+  </data>
+  <data name="ToolStripButton12.Text" xml:space="preserve">
+    <value>Insert Rectangle</value>
+  </data>
+  <data name="ToolStripButton12.ToolTipText" xml:space="preserve">
+    <value>Insert Rectangle</value>
+  </data>
+  <data name="ToolStripButton16.Text" xml:space="preserve">
+    <value>Snap Objects to Grid</value>
+  </data>
+  <data name="ToolStripButton17.Text" xml:space="preserve">
+    <value>Quick Connect Mode</value>
+  </data>
+  <data name="ToolStripButton18.Text" xml:space="preserve">
+    <value>Save as Image</value>
+  </data>
+  <data name="ToolStripButton19.Text" xml:space="preserve">
+    <value>Master Property Table</value>
+  </data>
+  <data name="ToolStripButton2.Text" xml:space="preserve">
+    <value>Zoom flowsheet</value>
+  </data>
+  <data name="ToolStripButton20.Text" xml:space="preserve">
+    <value>Zoom All</value>
+  </data>
+  <data name="ToolStripButton3.Text" xml:space="preserve">
+    <value>Default Zoom (100%)</value>
+  </data>
+  <data name="ToolStripButton4.Text" xml:space="preserve">
+    <value>Linked Spreadsheet Table</value>
+  </data>
+  <data name="ToolStripButton5.Text" xml:space="preserve">
+    <value>Help with Number Formats</value>
+  </data>
+  <data name="ToolStripButton6.Text" xml:space="preserve">
+    <value>Property Table</value>
+  </data>
+  <data name="ToolStripButton7.Text" xml:space="preserve">
+    <value>Add Unit System</value>
+  </data>
+  <data name="ToolStripButton7.ToolTipText" xml:space="preserve">
+    <value>Add System of Units</value>
+  </data>
+  <data name="ToolStripComboBoxNumberFormatting.ToolTipText" xml:space="preserve">
+    <value>Number Formatting</value>
+  </data>
+  <data name="ToolStripComboBoxNumberFractionFormatting.ToolTipText" xml:space="preserve">
+    <value>Composition/Fraction Number Formatting</value>
+  </data>
+  <data name="ToolStripComboBoxUnitSystem.ToolTipText" xml:space="preserve">
+    <value>System of Units</value>
+  </data>
+  <data name="ToolStripDropDownButton1.Text" xml:space="preserve">
+    <value>Simulation Settings</value>
+  </data>
+  <data name="ToolStripMenuItem3.Text1" xml:space="preserve">
+    <value>This.toolStripMenuItem3</value>
+  </data>
+  <data name="tsbAbortCalc.Text" xml:space="preserve">
+    <value>Abort Solver</value>
+  </data>
+  <data name="tsbAlignBottoms.Text" xml:space="preserve">
+    <value>Align bottoms</value>
+  </data>
+  <data name="tsbAlignCenters.Text" xml:space="preserve">
+    <value>Align centers</value>
+  </data>
+  <data name="tsbAlignHorizontal.Text" xml:space="preserve">
+    <value>Make horizontal spacing equal</value>
+  </data>
+  <data name="tsbAlignLefts.Text" xml:space="preserve">
+    <value>Align lefts</value>
+  </data>
+  <data name="tsbAlignMiddles.Text" xml:space="preserve">
+    <value>Align middles</value>
+  </data>
+  <data name="tsbAlignRights.Text" xml:space="preserve">
+    <value>Align rights</value>
+  </data>
+  <data name="tsbAlignTops.Text" xml:space="preserve">
+    <value>Align tops</value>
+  </data>
+  <data name="tsbAlignVertical.Text" xml:space="preserve">
+    <value>Make vertical spacing equal</value>
+  </data>
+  <data name="tsbAtivar.Text" xml:space="preserve">
+    <value>Enable/Disable Flowsheet Calculator</value>
+  </data>
+  <data name="tsbCalc.Text" xml:space="preserve">
+    <value>Solve Flowsheet</value>
+  </data>
+  <data name="tsbClearQueue.Text" xml:space="preserve">
+    <value>Clear Calculation Queue</value>
+  </data>
+  <data name="tsbConfigPage.Text" xml:space="preserve">
+    <value>Configure Page</value>
+  </data>
+  <data name="tsbConfigPrinter.Text" xml:space="preserve">
+    <value>Configure Printer</value>
+  </data>
+  <data name="tsbConfigSimulation.Text" xml:space="preserve">
+    <value>Simulation settings</value>
+  </data>
+  <data name="tsbCopyObj.Text" xml:space="preserve">
+    <value>Copy selected objects</value>
+  </data>
+  <data name="tsbCutObj.Text" xml:space="preserve">
+    <value>Cut selected objects</value>
+  </data>
+  <data name="tsbEditUnits.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="tsbmiCompounds.Text" xml:space="preserve">
+    <value>Compounds</value>
+  </data>
+  <data name="tsbmiModels.Text" xml:space="preserve">
+    <value>Basis</value>
+  </data>
+  <data name="tsbmiReactions.Text" xml:space="preserve">
+    <value>Reactions</value>
+  </data>
+  <data name="tsbmiUnits.Text" xml:space="preserve">
+    <value>System of Units</value>
+  </data>
+  <data name="tsbPasteObj.Text" xml:space="preserve">
+    <value>Paste objects</value>
+  </data>
+  <data name="tsbPrint.Text" xml:space="preserve">
+    <value>View and Print Flowsheet</value>
+  </data>
+  <data name="tsbRedo.Text" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="tsbResizeMode.Text" xml:space="preserve">
+    <value>Switch to/from Resize Object Mode</value>
+  </data>
+  <data name="tsbResizeModeKeepAR.Text" xml:space="preserve">
+    <value>Keep Aspect Ratio on Resizing</value>
+  </data>
+  <data name="tsbSimultAdjustSolver.Text" xml:space="preserve">
+    <value>Activate the Simultaneous Adjust Solver</value>
+  </data>
+  <data name="TSBtabela.Text" xml:space="preserve">
+    <value>Insert Image</value>
+  </data>
+  <data name="TSBtabela.ToolTipText" xml:space="preserve">
+    <value>Insert Image</value>
+  </data>
+  <data name="TSBTexto.Text" xml:space="preserve">
+    <value>Insert Text</value>
+  </data>
+  <data name="TSBTexto.ToolTipText" xml:space="preserve">
+    <value>Insert Text</value>
+  </data>
+  <data name="tsbUndo.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="TSMIAddUtility.Text" xml:space="preserve">
+    <value>Add Utility</value>
+  </data>
+  <data name="TSMIAddUtility.ToolTipText" xml:space="preserve">
+    <value>Add Utility</value>
+  </data>
+  <data name="tsmiCloneSelected.Text" xml:space="preserve">
+    <value>Clone selected objects</value>
+  </data>
+  <data name="tsmiCloseOpenedEditors.Text" xml:space="preserve">
+    <value>Close Opened Object Editors</value>
+  </data>
+  <data name="tsmiConfigSimulation.Text" xml:space="preserve">
+    <value>Simulation settings</value>
+  </data>
+  <data name="tsmiCopy.Text" xml:space="preserve">
+    <value>Copy selected objects</value>
+  </data>
+  <data name="tsmiCut.Text" xml:space="preserve">
+    <value>Cut selected objects</value>
+  </data>
+  <data name="tsmiExportData.Text" xml:space="preserve">
+    <value>Export data to Clipboard</value>
+  </data>
+  <data name="tsmiPaste.Text" xml:space="preserve">
+    <value>Paste objects</value>
+  </data>
+  <data name="tsmiRecalc.Text" xml:space="preserve">
+    <value>Recalculate object</value>
+  </data>
+  <data name="tsmiRedo.Text" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="tsmiRemoveSelected.Text" xml:space="preserve">
+    <value>Remove selected objects</value>
+  </data>
+  <data name="tsmiUndo.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="TSTBZoom.ToolTipText" xml:space="preserve">
+    <value>Zoom level flowchart</value>
+  </data>
+  <data name="UtilitiesTSMI.ToolTipText" xml:space="preserve">
+    <value>Displays a list of Utilities currently attached to Flowsheet Objects.</value>
+  </data>
+  <data name="varpaneltsmi.Text" xml:space="preserve">
+    <value>Watch Panel</value>
   </data>
 </root>

@@ -104,6 +104,8 @@ Public Class FormFlowsheet
 
     Private listeningaction As Action(Of String)
 
+    Private prevlogview As DockState
+
 #End Region
 
 #Region "    Form Event Handlers "
@@ -158,7 +160,7 @@ Public Class FormFlowsheet
 
         Me.CalculationQueue = New Generic.Queue(Of ICalculationArgs)
 
-        Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
+        Me.FormSurface.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
 
         If GlobalSettings.Settings.CalculatorActivated Then
             Me.tsbAtivar.Checked = True
@@ -168,8 +170,8 @@ Public Class FormFlowsheet
 
         Me.tsbSimultAdjustSolver.Checked = Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled
 
-        Me.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
-        Me.ToolStripButton17.Checked = Me.Options.FlowsheetQuickConnect
+        Me.FormSurface.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
+        Me.FormSurface.ToolStripButton17.Checked = Me.Options.FlowsheetQuickConnect
 
         If Me.ScriptCollection Is Nothing Then Me.ScriptCollection = New Dictionary(Of String, Script)
 
@@ -648,6 +650,12 @@ Public Class FormFlowsheet
                                                              .Unique = True
                                                          End With
 
+                                                         Dim statustext As String = If(texto.Length > 70, texto.Substring(0, 70) + "...", texto)
+
+                                                         tsbLogMessage.Text = statustext
+                                                         tsbLogMessage.Image = img
+                                                         tsbLogMessage.ToolTipText = texto
+
                                                          frlog.GridDT.Rows.Add(New Object() {img, Date.Now, strtipo, texto, cor, frlog.GridDT.Rows.Count})
 
                                                          If DWSIM.App.IsRunningOnMono Then
@@ -683,10 +691,6 @@ Public Class FormFlowsheet
 #End Region
 
 #Region "    Click Event Handlers "
-
-    Private Sub ToolStripButton5_Click_2(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
-        Process.Start("https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx")
-    End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Mobile_Compatibility_Mode")
@@ -917,71 +921,8 @@ Public Class FormFlowsheet
             WriteToLog("Error copying data to clipboard: " & ex.ToString, Color.Red, DWSIM.Flowsheet.MessageType.GeneralError)
         End Try
     End Sub
-    Private Sub tsbCutObj_Click(sender As Object, e As EventArgs) Handles tsbCutObj.Click
-        CutObjects()
-    End Sub
 
-    Private Sub tsbCopyObj_Click(sender As Object, e As EventArgs) Handles tsbCopyObj.Click
-        CopyObjects()
-    End Sub
-
-    Private Sub tsbPasteObj_Click(sender As Object, e As EventArgs) Handles tsbPasteObj.Click
-        PasteObjects()
-    End Sub
-
-    Private Sub showflowsheettoolstripmenuitem_Click(sender As Object, e As EventArgs) Handles showflowsheettoolstripmenuitem.Click
-        ToolStripFlowsheet.Visible = showflowsheettoolstripmenuitem.Checked
-        My.Settings.ShowFlowsheetToolStrip = showflowsheettoolstripmenuitem.Checked
-    End Sub
-
-    Private Sub showunitstoolstripmenuitem_Click(sender As Object, e As EventArgs) Handles showunitstoolstripmenuitem.Click
-        ToolStripUnits.Visible = showunitstoolstripmenuitem.Checked
-        My.Settings.ShowUnitsToolStrip = showunitstoolstripmenuitem.Checked
-    End Sub
-
-    Private Sub tsbAlign_Click(sender As Object, e As EventArgs) Handles tsbAlignLefts.Click, tsbAlignCenters.Click, tsbAlignRights.Click,
-                                                                        tsbAlignTops.Click, tsbAlignMiddles.Click, tsbAlignBottoms.Click,
-                                                                        tsbAlignVertical.Click, tsbAlignHorizontal.Click
-
-        Dim tsb As ToolStripButton = DirectCast(sender, ToolStripButton)
-
-        Dim direction As GraphicsSurface.AlignDirection
-
-        If tsb.Name.Contains("Lefts") Then
-            direction = GraphicsSurface.AlignDirection.Lefts
-        ElseIf tsb.Name.Contains("Centers") Then
-            direction = GraphicsSurface.AlignDirection.Centers
-        ElseIf tsb.Name.Contains("Rights") Then
-            direction = GraphicsSurface.AlignDirection.Rights
-        ElseIf tsb.Name.Contains("Tops") Then
-            direction = GraphicsSurface.AlignDirection.Tops
-        ElseIf tsb.Name.Contains("Middles") Then
-            direction = GraphicsSurface.AlignDirection.Middles
-        ElseIf tsb.Name.Contains("Bottoms") Then
-            direction = GraphicsSurface.AlignDirection.Bottoms
-        ElseIf tsb.Name.Contains("Vertical") Then
-            direction = GraphicsSurface.AlignDirection.EqualizeVertical
-        ElseIf tsb.Name.Contains("Horizontal") Then
-            direction = GraphicsSurface.AlignDirection.EqualizeHorizontal
-        End If
-
-        Me.FormSurface.FlowsheetDesignSurface.AlignSelectedObjects(direction)
-
-    End Sub
-
-    Private Sub ToolStripButton6_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbConfigPage.Click
-        Me.FormSurface.pageSetup.ShowDialog()
-    End Sub
-
-    Private Sub ToolStripButton10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbPrint.Click
-        Me.FormSurface.PreviewDialog.ShowDialog()
-    End Sub
-
-    Private Sub ToolStripButton11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbConfigPrinter.Click
-        Me.FormSurface.setupPrint.ShowDialog()
-    End Sub
-
-    Private Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSBTexto.Click, TextoToolStripMenuItem.Click
+    Private Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextoToolStripMenuItem.Click
         Dim myTextObject As New TextGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
             DWSIM.App.GetLocalString("caixa_de_texto"),
@@ -998,7 +939,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton19.Click, TabelaDePropriedatesMestraToolStripMenuItem.Click
+    Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabelaDePropriedatesMestraToolStripMenuItem.Click
         Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
@@ -1011,7 +952,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click, TabelaDePropriedadesPlanilhaToolStripMenuItem.Click
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesPlanilhaToolStripMenuItem.Click
         Dim mySpreadsheetTable As New SpreadsheetTableGraphic(
             Me.FormSpreadsheet,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
@@ -1027,7 +968,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub TSBtabela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TSBtabela.Click, FiguraToolStripMenuItem.Click
+    Private Sub TSBtabela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FiguraToolStripMenuItem.Click
         With Me.OpenFileName
             .CheckFileExists = True
             .CheckPathExists = True
@@ -1051,40 +992,31 @@ Public Class FormFlowsheet
                 Me.FormSurface.FlowsheetDesignSurface.Invalidate()
             End If
         End With
-        Me.TSBtabela.Checked = False
+        FormSurface.TSBtabela.Checked = False
     End Sub
 
-    Private Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
+    Public Sub tsbAtivar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsbAtivar.Click
         GlobalSettings.Settings.CalculatorActivated = tsbAtivar.Checked
         tsbCalc.Enabled = tsbAtivar.Checked
         tsbAbortCalc.Enabled = tsbAtivar.Checked
-        tsbClearQueue.Enabled = tsbAtivar.Checked
         tsbSimultAdjustSolver.Enabled = tsbAtivar.Checked
-    End Sub
-
-    Private Sub tsbDesat_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-
     End Sub
 
     Private Sub FecharSimulacaoAtualToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseToolStripMenuItem.Click
         Me.Close()
     End Sub
 
-    Private Sub ToolStripButton14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbAbortCalc.Click
+    Public Sub tsbAbortCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbAbortCalc.Click
         GlobalSettings.Settings.CalculatorStopRequested = True
         If GlobalSettings.Settings.TaskCancellationTokenSource IsNot Nothing Then
             GlobalSettings.Settings.TaskCancellationTokenSource.Cancel()
         End If
     End Sub
 
-    Private Sub ToolStripButton13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click
+    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
-    End Sub
-
-    Private Sub ToolStripButton15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbClearQueue.Click
-        Me.CalculationQueue.Clear()
     End Sub
 
     Private Sub AnaliseDeSensibilidadeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AnaliseDeSensibilidadeToolStripMenuItem.Click
@@ -1158,7 +1090,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton7.Click
+    Private Sub ToolStripButton7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AdicionarToolStripMenuItem.Click
         Dim frmUnit As New FormUnitGen
         frmUnit.ShowDialog(Me)
     End Sub
@@ -1201,42 +1133,15 @@ Public Class FormFlowsheet
         Me.Options.FlowsheetShowWatchWindow = varpaneltsmi.Checked
     End Sub
 
-    Private Sub ToolStripButton16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton16.CheckStateChanged
-        Me.FormSurface.FlowsheetDesignSurface.SnapToGrid = ToolStripButton16.Checked
-        Me.Options.FlowsheetSnapToGrid = ToolStripButton16.Checked
-    End Sub
 
-    Private Sub ToolStripButton17_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton17.CheckStateChanged
-        Me.FormSurface.FlowsheetDesignSurface.QuickConnect = ToolStripButton17.Checked
-        Me.Options.FlowsheetQuickConnect = ToolStripButton17.Checked
-    End Sub
-    Private Sub ToolStripButton2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton2.Click
-        Me.FormSurface.FlowsheetDesignSurface.Zoom += 0.05
-        Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
 
-    Private Sub ToolStripButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
-        Me.FormSurface.FlowsheetDesignSurface.Zoom -= 0.05
-        Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
-    Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click, tsbConfigSimulation.Click
+    Private Sub SimulationConfig_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsmiConfigSimulation.Click
         If DWSIM.App.IsRunningOnMono Then
             Me.FrmStSim1 = New FormSimulSettings()
             Me.FrmStSim1.Show(Me.dckPanel)
         Else
             Me.FrmStSim1.Show(Me.dckPanel)
         End If
-    End Sub
-
-    Private Sub ToolStripButton5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Call Me.SimulationConfig_Click(sender, e)
-    End Sub
-
-    Private Sub ToolStripButton8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Call Me.GerarRelatorioToolStripMenuItem_Click(sender, e)
     End Sub
 
     Private Sub GerarRelatorioToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerarRelatorioToolStripMenuItem.Click
@@ -1276,39 +1181,6 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub ToolStripButton18_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton18.Click
-
-        If Me.SaveFileDialog1.ShowDialog = Windows.Forms.DialogResult.OK Then
-            Dim rect As Rectangle = New Rectangle(0, 0, Me.FormSurface.FlowsheetDesignSurface.Width - 14, Me.FormSurface.FlowsheetDesignSurface.Height - 14)
-            Dim img As Image = New Bitmap(rect.Width, rect.Height)
-            Me.FormSurface.FlowsheetDesignSurface.DrawToBitmap(img, Me.FormSurface.FlowsheetDesignSurface.Bounds)
-            img.Save(Me.SaveFileDialog1.FileName, Imaging.ImageFormat.Png)
-            img.Dispose()
-        End If
-
-    End Sub
-
-    Private Sub ToolStripButton20_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton20.Click
-        Me.FormSurface.FlowsheetDesignSurface.ZoomAll()
-        Application.DoEvents()
-        Me.FormSurface.FlowsheetDesignSurface.ZoomAll()
-        Application.DoEvents()
-        Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-    End Sub
-
-    Private Sub ToolStripButton3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripButton3.Click
-        Me.FormSurface.FlowsheetDesignSurface.Zoom = 1
-        Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
-    Private Sub TSTBZoom_KeyPress(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TSTBZoom.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            Me.FormSurface.FlowsheetDesignSurface.Zoom = Convert.ToInt32(Me.TSTBZoom.Text.Replace("%", "")) / 100
-            Me.TSTBZoom.Text = Format(Me.FormSurface.FlowsheetDesignSurface.Zoom, "#%")
-            Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-        End If
-    End Sub
 
 
     Private Sub GerenciadorDeAmostrasDePetroleoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GerenciadorDeAmostrasDePetroleoToolStripMenuItem.Click
@@ -1321,7 +1193,7 @@ Public Class FormFlowsheet
         End Try
     End Sub
 
-    Private Sub tsbSimultAdjustSolver_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
+    Public Sub tsbSimultAdjustSolver_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbSimultAdjustSolver.CheckedChanged
         Me.FlowsheetOptions.SimultaneousAdjustSolverEnabled = tsbSimultAdjustSolver.Checked
     End Sub
 
@@ -1334,14 +1206,14 @@ Public Class FormFlowsheet
         tsmiCloneSelected.Enabled = status
         tsmiRemoveSelected.Enabled = status
         tsmiExportData.Enabled = status
-        tsbCutObj.Enabled = status
-        tsbCopyObj.Enabled = status
-        tsbPasteObj.Enabled = status
+        FormSurface.tsbCutObj.Enabled = status
+        FormSurface.tsbCopyObj.Enabled = status
+        FormSurface.tsbPasteObj.Enabled = status
 
     End Sub
 
 
-    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click, TabelaDePropriedadesToolStripMenuItem.Click
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesToolStripMenuItem.Click
         Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
@@ -1354,7 +1226,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click, RectangleToolStripMenuItem.Click
+    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
         Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
           -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
         myobj.Name = "RECT-" & Guid.NewGuid.ToString
@@ -1363,14 +1235,6 @@ Public Class FormFlowsheet
         myobj.Width = 200
         Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
-    End Sub
-
-    Private Sub tsbResizeModeKeepAR_Click(sender As Object, e As EventArgs) Handles tsbResizeModeKeepAR.Click
-        Me.FormSurface.FlowsheetDesignSurface.ResizingMode_KeepAR = tsbResizeModeKeepAR.Checked
-    End Sub
-
-    Private Sub tsbResizeMode_Click(sender As Object, e As EventArgs) Handles tsbResizeMode.Click
-        Me.FormSurface.FlowsheetDesignSurface.ResizingMode = tsbResizeMode.Checked
     End Sub
 
     Private Sub BlocoDeSimulacaoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlocoDeSimulacaoToolStripMenuItem.Click
@@ -2655,13 +2519,13 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Public Sub tsbUndo_Click(sender As Object, e As EventArgs) Handles tsbUndo.ButtonClick
+    Public Sub tsbUndo_Click(sender As Object, e As EventArgs) Handles tsbUndo.Click
 
         UndoActions(tsbUndo.DropDownItems(0), e)
 
     End Sub
 
-    Public Sub tsbRedo_Click(sender As Object, e As EventArgs) Handles tsbRedo.ButtonClick
+    Public Sub tsbRedo_Click(sender As Object, e As EventArgs) Handles tsbRedo.Click
 
         RedoActions(tsbRedo.DropDownItems(0), e)
 
@@ -2775,7 +2639,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs)
+    Private Sub tsbUndo_MouseEnter(sender As Object, e As EventArgs) Handles tsbUndo.MouseEnter
 
         If TypeOf sender Is ToolStripMenuItem Then
             Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
@@ -2790,7 +2654,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs)
+    Private Sub tsbRedo_MouseEnter(sender As Object, e As EventArgs) Handles tsbRedo.MouseEnter
 
         If TypeOf sender Is ToolStripMenuItem Then
             Dim hovereditem As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
@@ -3157,5 +3021,81 @@ Public Class FormFlowsheet
     End Sub
 
 #End Region
+
+    Private Sub tsbLogWindow_Click(sender As Object, e As EventArgs) Handles tsbLogMessage.Click
+
+        If FormLog.VisibleState <> DockState.Unknown Then
+            prevlogview = FormLog.VisibleState
+            FormLog.VisibleState = DockState.Unknown
+        Else
+            FormLog.VisibleState = prevlogview
+        End If
+
+        tsbLogMessage.BackColor = If(FormLog.VisibleState <> DockState.Unknown, Color.FromKnownColor(KnownColor.Highlight), Color.FromKnownColor(KnownColor.Control))
+
+    End Sub
+
+    Private Sub ToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles tsbmiCompounds.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage1
+    End Sub
+
+    Private Sub tsbmiModels_Click(sender As Object, e As EventArgs) Handles tsbmiModels.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage2
+    End Sub
+
+    Private Sub tsbmiReactions_Click(sender As Object, e As EventArgs) Handles tsbmiReactions.Click
+        If FrmReacMan Is Nothing OrElse FrmReacMan.IsDisposed Then
+            FrmReacMan = New FormReacManager
+            FrmReacMan.Show(Me.dckPanel)
+        Else
+            FrmReacMan.Activate()
+        End If
+    End Sub
+
+    Private Sub tsbmiUnits_Click(sender As Object, e As EventArgs) Handles tsbmiUnits.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage4
+    End Sub
+
+    Private Sub AjudaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AjudaToolStripMenuItem.Click
+        Process.Start("https://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx")
+    End Sub
+
+    Private Sub EditarSelecionadoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsbEditUnits.Click
+        Dim frmUnit As New FormUnitGen With {.EditMode = True}
+        frmUnit.ShowDialog(Me)
+    End Sub
+
+    Private Sub AdicionarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AdicionarToolStripMenuItem.Click
+        Dim frmUnit As New FormUnitGen
+        frmUnit.ShowDialog(Me)
+    End Sub
+
+    Private Sub FormataçãoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FormataçãoToolStripMenuItem.Click
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
+        Me.FrmStSim1.TabControl1.SelectedTab = Me.FrmStSim1.TabPage5
+    End Sub
 
 End Class
