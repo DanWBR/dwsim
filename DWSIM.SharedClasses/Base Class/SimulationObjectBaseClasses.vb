@@ -465,7 +465,7 @@ Namespace UnitOperations
                 .Add(New XElement("DynamicProperties"))
                 For Each item In DynamicProperties
                     Try
-                        .Item(.Count - 1).Add(New XElement("DynamicProperties", {New XElement("Name", item.Key),
+                        .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
                                                                                New XElement("PropertyType", item.Value.GetType.ToString),
                                                                                New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
                     Catch ex As Exception
