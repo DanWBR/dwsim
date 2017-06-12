@@ -685,7 +685,7 @@ Namespace UnitOperations
 
         Public Overrides Function TryInvokeMember(binder As InvokeMemberBinder, args As Object(), ByRef result As Object) As Boolean
             Dim method = DynamicProperties(binder.Name)
-            result = method(args(0).ToString(), args(1).ToString())
+            result = method(args)
             Return True
         End Function
 
