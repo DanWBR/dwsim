@@ -14,11 +14,17 @@ Public Class ChemeoParser
 
         Dim website As String = "https://www.chemeo.com/search?q=" + HttpUtility.UrlEncode(searchstring)
 
-        Dim proxyObj = Net.WebRequest.DefaultWebProxy
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            handler.Proxy = proxyObj
+        End If
+
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
@@ -83,11 +89,17 @@ Public Class ChemeoParser
 
         Dim website As String = "https://www.chemeo.com/cid/" + ID
 
-        Dim proxyObj = Net.WebRequest.DefaultWebProxy
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            handler.Proxy = proxyObj
+        End If
+
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)

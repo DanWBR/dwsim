@@ -12,11 +12,17 @@ Public Class KDBParser
 
         Dim website As String = "http://www.cheric.org/research/kdb/hcprop/listcmp.php?componentsearch=" + HttpUtility.UrlEncode(searchstring)
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            handler.Proxy = proxyObj
+        End If
+
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
@@ -68,11 +74,17 @@ Public Class KDBParser
 
         Dim website As String = "http://www.cheric.org/research/kdb/hcprop/showprop.php?cmpid=" + cid.ToString
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            handler.Proxy = proxyObj
+        End If
+
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
@@ -614,18 +626,24 @@ Public Class KDBParser
 
     Shared Function GetVLEData(vleid As Integer) As KDBVLEDataSet
 
-        Dim uri = "http://www.cheric.org/research/kdb/hcvle/showvle.php?vleid=" + vleid.ToString
+        Dim website = "http://www.cheric.org/research/kdb/hcvle/showvle.php?vleid=" + vleid.ToString
 
         Dim ci As System.Globalization.CultureInfo = New Globalization.CultureInfo("en-US")
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(uri)))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            handler.Proxy = proxyObj
+        End If
+
         Dim http As New HttpClient(handler)
 
-        Dim response = http.GetByteArrayAsync(uri)
+        Dim response = http.GetByteArrayAsync(website)
         response.Wait()
 
         Dim source As [String] = Encoding.GetEncoding("utf-8").GetString(response.Result, 0, response.Result.Length - 1)
@@ -669,11 +687,17 @@ Public Class KDBParser
 
         Dim website As String = "http://www.cheric.org/research/kdb/hcvle/listvle.php?cno1=" + cid1.ToString + "&cno2=" + cid2.ToString
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri(website)))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        Dim siteUri As Uri = New Uri(website)
+        Dim proxyUri As Uri = Net.WebRequest.GetSystemWebProxy.GetProxy(siteUri)
 
         Dim handler As New HttpClientHandler()
-        handler.Proxy = proxyObj
+
+        If Not siteUri.AbsolutePath = proxyUri.AbsolutePath Then
+            Dim proxyObj As New WebProxy(proxyUri)
+            proxyObj.Credentials = CredentialCache.DefaultCredentials
+            handler.Proxy = proxyObj
+        End If
+
         Dim http As New HttpClient(handler)
 
         Dim response = http.GetByteArrayAsync(website)
