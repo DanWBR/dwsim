@@ -9,7 +9,15 @@ namespace DWSIM.UI.Desktop
         [STAThread]
         public static void Main(string[] args)
         {
-            new Application(Platform.Detect).Run(new MainForm());
+
+            var plat = Platform.Detect;
+
+            if (plat.IsWpf)
+            {
+                DWSIM.UI.Desktop.WPF.StyleSetter.SetMainButtonStyle();
+            }
+
+            new Application().Run(new MainForm());
         }
     }
 }

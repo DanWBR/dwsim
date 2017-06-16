@@ -99,6 +99,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Forms", "DWSIM.UI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop", "DWSIM.UI.Desktop\DWSIM.UI.Desktop.csproj", "{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.WPF", "DWSIM.UI.Desktop.WPF\DWSIM.UI.Desktop.WPF.csproj", "{2FC4816C-796D-4366-98F6-C6E3D481E66D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -715,6 +717,21 @@ Global
 		{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}.x86|Mixed Platforms.Build.0 = Release|Any CPU
 		{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}.x86|x86.ActiveCfg = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.Release|x86.ActiveCfg = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.x86|Any CPU.Build.0 = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{2FC4816C-796D-4366-98F6-C6E3D481E66D}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace DWSIM.UI
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
             
             Title = "DWSIM Launcher";
-            ClientSize = new Size(490, 230);
+            ClientSize = new Size(490, 240);
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
