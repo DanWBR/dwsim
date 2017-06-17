@@ -1,11 +1,14 @@
 ﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
+using DWSIM.UI.Forms;
+using System.Threading;
 
 namespace DWSIM.UI
 {
     partial class MainForm : Form
     {
+
         void InitializeComponent()
         {
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
@@ -60,7 +63,19 @@ namespace DWSIM.UI
                 QuitItem = quitCommand,
                 AboutItem = aboutCommand
             };
-            
+
+            Shown += MainForm_Shown;
+                        
         }
+
+        void MainForm_Shown(object sender, EventArgs e)
+        {
+            Application.Instance.Invoke(() =>
+            {
+                var splash = new SplashScreen();
+                splash.Show();
+            });
+        }
+             
     }
 }

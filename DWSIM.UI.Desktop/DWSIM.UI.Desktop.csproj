@@ -35,9 +35,8 @@
       <HintPath>..\packages\Eto.Forms.2.3.0\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Gtk2, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Eto.Gtk2">
       <HintPath>..\packages\Eto.Platform.Gtk.2.3.0\lib\net45\Eto.Gtk2.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Eto.Gtk3, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Gtk3.2.3.0\lib\net45\Eto.Gtk3.dll</HintPath>
@@ -62,6 +61,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.GTK\DWSIM.UI.Desktop.GTK.csproj">
+      <Project>{67c35d45-f95a-4092-82e0-d9cf3b491d41}</Project>
+      <Name>DWSIM.UI.Desktop.GTK</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.UI.Desktop.WPF\DWSIM.UI.Desktop.WPF.csproj">
       <Project>{2fc4816c-796d-4366-98f6-c6e3d481e66d}</Project>
       <Name>DWSIM.UI.Desktop.WPF</Name>
@@ -76,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Mac\MyApp.app\Contents\Info.plist" />
     <None Include="Mac\MyApp.app\Contents\MacOS\Launcher.exec" />
     <None Include="Mac\MyApp.app\Contents\Resources\Icon.icns" />

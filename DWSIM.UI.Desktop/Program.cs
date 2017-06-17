@@ -14,7 +14,10 @@ namespace DWSIM.UI.Desktop
 
             if (plat.IsWpf)
             {
-                DWSIM.UI.Desktop.WPF.StyleSetter.SetMainButtonStyle();
+                DWSIM.UI.Desktop.WPF.StyleSetter.SetStyles();
+            }else if (plat.IsGtk)
+            {
+                DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
             }
 
             new Application().Run(new MainForm());

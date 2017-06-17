@@ -61,6 +61,10 @@
     <Compile Include="MainForm.eto.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="SplashScreen.eto.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

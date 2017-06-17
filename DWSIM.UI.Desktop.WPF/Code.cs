@@ -10,7 +10,7 @@ namespace DWSIM.UI.Desktop.WPF
     public static class StyleSetter
     {
 
-        public static void SetMainButtonStyle()
+        public static void SetStyles()
         {
 
             Eto.Style.Add<Eto.Forms.Button>("main", button =>
@@ -22,6 +22,14 @@ namespace DWSIM.UI.Desktop.WPF
                 var label = (Label)((Grid)wpfbutton.Content).Children[1];
                 label.HorizontalAlignment = HorizontalAlignment.Left;
                 TextOptions.SetTextRenderingMode(label, TextRenderingMode.Auto);
+            });
+
+            Eto.Style.Add<Eto.Forms.Panel>("transparent-form", control =>
+            {
+                var wpfwnd = (System.Windows.Window)control.ControlObject;
+                TextOptions.SetTextRenderingMode(wpfwnd, TextRenderingMode.Auto);
+                wpfwnd.AllowsTransparency = true;
+                wpfwnd.Background = Brushes.Transparent;
             });
         
         }
