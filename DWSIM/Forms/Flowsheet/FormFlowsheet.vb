@@ -2665,28 +2665,40 @@ Public Class FormFlowsheet
     Private Event NewMessageSent As NewMessageSentEventHandler
     Public Event StatusChanged()
 
-    Public ReadOnly Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
+    Public Property GraphicObjects As Dictionary(Of String, Interfaces.IGraphicObject) Implements Interfaces.IFlowsheet.GraphicObjects, IFlowsheetBag.GraphicObjects
         Get
             Return Collections.GraphicObjectCollection.ToDictionary(Of String, IGraphicObject)(Function(k) k.Key, Function(k) k.Value)
         End Get
+        Set(value As Dictionary(Of String, Interfaces.IGraphicObject))
+
+        End Set
     End Property
 
-    Public ReadOnly Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects, IFlowsheetBag.SimulationObjects
+    Public Property SimulationObjects As Dictionary(Of String, Interfaces.ISimulationObject) Implements Interfaces.IFlowsheet.SimulationObjects, IFlowsheetBag.SimulationObjects
         Get
             Return Collections.FlowsheetObjectCollection.ToDictionary(Of String, ISimulationObject)(Function(k) k.Key, Function(k) k.Value)
         End Get
+        Set(value As Dictionary(Of String, Interfaces.ISimulationObject))
+
+        End Set
     End Property
 
-    Public ReadOnly Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions, IFlowsheetBag.Reactions
+    Public Property Reactions As Dictionary(Of String, Interfaces.IReaction) Implements Interfaces.IFlowsheet.Reactions, IFlowsheetBag.Reactions
         Get
             Return Options.Reactions
         End Get
+        Set(value As Dictionary(Of String, Interfaces.IReaction))
+
+        End Set
     End Property
 
-    Public ReadOnly Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets, IFlowsheetBag.ReactionSets
+    Public Property ReactionSets As Dictionary(Of String, Interfaces.IReactionSet) Implements Interfaces.IFlowsheet.ReactionSets, IFlowsheetBag.ReactionSets
         Get
             Return Options.ReactionSets
         End Get
+        Set(value As Dictionary(Of String, Interfaces.IReactionSet))
+
+        End Set
     End Property
 
     Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType) Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
@@ -2737,20 +2749,26 @@ Public Class FormFlowsheet
         Return returntext
     End Function
 
-    Public ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages, IFlowsheetBag.PropertyPackages
+    Public Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.PropertyPackages, IFlowsheetBag.PropertyPackages
         Get
             Return Options.PropertyPackages.ToDictionary(Of String, IPropertyPackage)(Function(k) k.Key, Function(k) k.Value)
         End Get
+        Set(value As Dictionary(Of String, IPropertyPackage))
+
+        End Set
     End Property
 
     Public Function GetFlowsheetSimulationObject1(tag As String) As ISimulationObject Implements IFlowsheet.GetFlowsheetSimulationObject
         Return Me.GetFlowsheetSimulationObject(tag)
     End Function
 
-    Public ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds, IFlowsheetBag.Compounds
+    Public Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.SelectedCompounds, IFlowsheetBag.Compounds
         Get
             Return Options.SelectedComponents
         End Get
+        Set(value As Dictionary(Of String, ICompoundConstantProperties))
+
+        End Set
     End Property
 
     Public Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetSelectedFlowsheetSimulationObject
@@ -2964,40 +2982,58 @@ Public Class FormFlowsheet
 
     Public Property Message As String = "" Implements IFlowsheet.Message
 
-    Public ReadOnly Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
+    Public Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
         Get
             Return SimulationObjects.Values.ToArray
         End Get
+        Set(value As ISimulationObject())
+
+        End Set
     End Property
 
-    Public ReadOnly Property GraphicObjectsArray As IGraphicObject() Implements IFlowsheetBag.GraphicObjectsArray
+    Public Property GraphicObjectsArray As IGraphicObject() Implements IFlowsheetBag.GraphicObjectsArray
         Get
             Return GraphicObjects.Values.ToArray
         End Get
+        Set(value As IGraphicObject())
+
+        End Set
     End Property
 
-    Public ReadOnly Property CompoundsArray As ICompoundConstantProperties() Implements IFlowsheetBag.CompoundsArray
+    Public Property CompoundsArray As ICompoundConstantProperties() Implements IFlowsheetBag.CompoundsArray
         Get
             Return SelectedCompounds.Values.ToArray
         End Get
+        Set(value As ICompoundConstantProperties())
+
+        End Set
     End Property
 
-    Public ReadOnly Property PropertyPackagesArray As IPropertyPackage() Implements IFlowsheetBag.PropertyPackagesArray
+    Public Property PropertyPackagesArray As IPropertyPackage() Implements IFlowsheetBag.PropertyPackagesArray
         Get
             Return PropertyPackages.Values.ToArray
         End Get
+        Set(value As IPropertyPackage())
+
+        End Set
     End Property
 
-    Public ReadOnly Property ReactionsArray As IReaction() Implements IFlowsheetBag.ReactionsArray
+    Public Property ReactionsArray As IReaction() Implements IFlowsheetBag.ReactionsArray
         Get
             Return Reactions.Values.ToArray
         End Get
+        Set(value As IReaction())
+
+        End Set
     End Property
 
-    Public ReadOnly Property ReactionSetsArray As IReactionSet() Implements IFlowsheetBag.ReactionSetsArray
+    Public Property ReactionSetsArray As IReactionSet() Implements IFlowsheetBag.ReactionSetsArray
         Get
             Return ReactionSets.Values.ToArray
         End Get
+        Set(value As IReactionSet())
+
+        End Set
     End Property
 
     Public Property Solved As Boolean = False Implements IFlowsheet.Solved
@@ -3007,6 +3043,28 @@ Public Class FormFlowsheet
     Public Sub RunCodeOnUIThread(act As Action) Implements IFlowsheet.RunCodeOnUIThread
         Invoke(act)
     End Sub
+
+    Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
+
+    Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
+
+    End Sub
+
+    Public Sub Initialize() Implements IFlowsheet.Initialize
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub Reset() Implements IFlowsheet.Reset
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Function SaveToXML1() As XDocument Implements IFlowsheet.SaveToXML
+        Throw New NotImplementedException()
+    End Function
 
 #End Region
 

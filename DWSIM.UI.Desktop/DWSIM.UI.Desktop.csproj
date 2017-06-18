@@ -93,7 +93,9 @@
     <Content Include="Mac\MyApp.app\MacAppTemplate.app\Contents\MonoBundle\README.txt" />
     <Content Include="Mac\README.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Eto.Platform.Mac.Template.2.3.0\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.3.0\build\Eto.Platform.Mac.Template.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

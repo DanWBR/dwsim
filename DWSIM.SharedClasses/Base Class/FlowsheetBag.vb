@@ -29,76 +29,112 @@
 
         End Sub
 
-        Public ReadOnly Property SimulationObjects As Dictionary(Of String, ISimulationObject) Implements IFlowsheetBag.SimulationObjects
+        Public Property SimulationObjects As Dictionary(Of String, ISimulationObject) Implements IFlowsheetBag.SimulationObjects
             Get
                 Return _so
             End Get
+            Set(value As Dictionary(Of String, ISimulationObject))
+
+            End Set
         End Property
 
-        Public ReadOnly Property GraphicObjects As Dictionary(Of String, IGraphicObject) Implements IFlowsheetBag.GraphicObjects
+        Public Property GraphicObjects As Dictionary(Of String, IGraphicObject) Implements IFlowsheetBag.GraphicObjects
             Get
                 Return _go
             End Get
+            Set(value As Dictionary(Of String, IGraphicObject))
+
+            End Set
         End Property
 
-        Public ReadOnly Property Compounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheetBag.Compounds
+        Public Property Compounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheetBag.Compounds
             Get
                 Return _co
             End Get
+            Set(value As Dictionary(Of String, ICompoundConstantProperties))
+
+            End Set
         End Property
 
-        Public ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheetBag.PropertyPackages
+        Public Property PropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheetBag.PropertyPackages
             Get
                 Return _pp
             End Get
+            Set(value As Dictionary(Of String, IPropertyPackage))
+
+            End Set
         End Property
 
-        Public ReadOnly Property Reactions As Dictionary(Of String, IReaction) Implements IFlowsheetBag.Reactions
+        Public Property Reactions As Dictionary(Of String, IReaction) Implements IFlowsheetBag.Reactions
             Get
                 Return _re
             End Get
+            Set(value As Dictionary(Of String, IReaction))
+
+            End Set
         End Property
 
-        Public ReadOnly Property ReactionSets As Dictionary(Of String, IReactionSet) Implements IFlowsheetBag.ReactionSets
+        Public Property ReactionSets As Dictionary(Of String, IReactionSet) Implements IFlowsheetBag.ReactionSets
             Get
                 Return _rs
             End Get
+            Set(value As Dictionary(Of String, IReactionSet))
+
+            End Set
         End Property
 
-        Public ReadOnly Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
+        Public Property SimulationObjectsArray As ISimulationObject() Implements IFlowsheetBag.SimulationObjectsArray
             Get
                 Return _so.Values.ToArray
             End Get
+            Set(value As ISimulationObject())
+
+            End Set
         End Property
 
-        Public ReadOnly Property GraphicObjectsArray As IGraphicObject() Implements IFlowsheetBag.GraphicObjectsArray
+        Public Property GraphicObjectsArray As IGraphicObject() Implements IFlowsheetBag.GraphicObjectsArray
             Get
                 Return _go.Values.ToArray
             End Get
+            Set(value As IGraphicObject())
+
+            End Set
         End Property
 
-        Public ReadOnly Property CompoundsArray As ICompoundConstantProperties() Implements IFlowsheetBag.CompoundsArray
+        Public Property CompoundsArray As ICompoundConstantProperties() Implements IFlowsheetBag.CompoundsArray
             Get
                 Return _co.Values.ToArray
             End Get
+            Set(value As ICompoundConstantProperties())
+
+            End Set
         End Property
 
-        Public ReadOnly Property PropertyPackagesArray As IPropertyPackage() Implements IFlowsheetBag.PropertyPackagesArray
+        Public Property PropertyPackagesArray As IPropertyPackage() Implements IFlowsheetBag.PropertyPackagesArray
             Get
                 Return _pp.Values.ToArray
             End Get
+            Set(value As IPropertyPackage())
+
+            End Set
         End Property
 
-        Public ReadOnly Property ReactionsArray As IReaction() Implements IFlowsheetBag.ReactionsArray
+        Public Property ReactionsArray As IReaction() Implements IFlowsheetBag.ReactionsArray
             Get
                 Return _re.Values.ToArray
             End Get
+            Set(value As IReaction())
+
+            End Set
         End Property
 
-        Public ReadOnly Property ReactionSetsArray As IReactionSet() Implements IFlowsheetBag.ReactionSetsArray
+        Public Property ReactionSetsArray As IReactionSet() Implements IFlowsheetBag.ReactionSetsArray
             Get
                 Return _rs.Values.ToArray
             End Get
+            Set(value As IReactionSet())
+
+            End Set
         End Property
 
         Public Overridable Sub SaveToXML(xfile As String) Implements IFlowsheetBag.SaveToXML

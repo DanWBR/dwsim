@@ -30,17 +30,9 @@
         Other
     End Enum
 
-    ReadOnly Property Reactions As Dictionary(Of String, IReaction)
+    Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties)
 
-    ReadOnly Property ReactionSets As Dictionary(Of String, IReactionSet)
-
-    ReadOnly Property SimulationObjects As Dictionary(Of String, ISimulationObject)
-
-    ReadOnly Property GraphicObjects As Dictionary(Of String, IGraphicObject)
-
-    ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
-
-    ReadOnly Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties)
+    Function SaveToXML() As XDocument
 
     Property FilePath As String
 
@@ -49,6 +41,18 @@
     ReadOnly Property UtilityPlugins As Dictionary(Of String, IUtilityPlugin)
 
     Property MasterUnitOp As ISimulationObject
+
+    Property GraphicObjects As Dictionary(Of String, IGraphicObject)
+
+    Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
+
+    Property Reactions As Dictionary(Of String, IReaction)
+
+    Property ReactionSets As Dictionary(Of String, IReactionSet)
+
+    Property SelectedCompounds As Dictionary(Of String, ICompoundConstantProperties)
+
+    Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
     Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
 
@@ -116,6 +120,14 @@
 
     Function GetDockPanel() As Object
 
+    Sub LoadFromXML(xdoc As XDocument)
+
+    Sub Initialize()
+
+    Sub Reset()
+
+    Sub DeleteSelectedObject(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False)
+
 End Interface
 
 ''' <summary>
@@ -123,17 +135,17 @@ End Interface
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetBag
 
-    ReadOnly Property SimulationObjects As Dictionary(Of String, ISimulationObject)
+    Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
-    ReadOnly Property GraphicObjects As Dictionary(Of String, IGraphicObject)
+    Property GraphicObjects As Dictionary(Of String, IGraphicObject)
 
-    ReadOnly Property Compounds As Dictionary(Of String, ICompoundConstantProperties)
+    Property Compounds As Dictionary(Of String, ICompoundConstantProperties)
 
-    ReadOnly Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
+    Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
 
-    ReadOnly Property Reactions As Dictionary(Of String, IReaction)
+    Property Reactions As Dictionary(Of String, IReaction)
 
-    ReadOnly Property ReactionSets As Dictionary(Of String, IReactionSet)
+    Property ReactionSets As Dictionary(Of String, IReactionSet)
 
     Sub SaveToXML(file As String)
 
@@ -143,17 +155,17 @@ End Interface
 
     'For COM compatibility
 
-    ReadOnly Property SimulationObjectsArray As ISimulationObject()
+    Property SimulationObjectsArray As ISimulationObject()
 
-    ReadOnly Property GraphicObjectsArray As IGraphicObject()
+    Property GraphicObjectsArray As IGraphicObject()
 
-    ReadOnly Property CompoundsArray As ICompoundConstantProperties()
+    Property CompoundsArray As ICompoundConstantProperties()
 
-    ReadOnly Property PropertyPackagesArray As IPropertyPackage()
+    Property PropertyPackagesArray As IPropertyPackage()
 
-    ReadOnly Property ReactionsArray As IReaction()
+    Property ReactionsArray As IReaction()
 
-    ReadOnly Property ReactionSetsArray As IReactionSet()
+    Property ReactionSetsArray As IReactionSet()
 
 End Interface
 

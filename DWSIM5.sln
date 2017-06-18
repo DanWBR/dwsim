@@ -103,6 +103,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.WPF", "DWS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.GTK", "DWSIM.UI.Desktop.GTK\DWSIM.UI.Desktop.GTK.csproj", "{67C35D45-F95A-4092-82E0-D9CF3B491D41}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.FlowsheetBase", "DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj", "{AEA79E29-5DFF-4AA8-B431-087A67A1467B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -749,6 +751,21 @@ Global
 		{67C35D45-F95A-4092-82E0-D9CF3B491D41}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{67C35D45-F95A-4092-82E0-D9CF3B491D41}.x86|Mixed Platforms.Build.0 = Release|Any CPU
 		{67C35D45-F95A-4092-82E0-D9CF3B491D41}.x86|x86.ActiveCfg = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.Release|x86.ActiveCfg = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|Any CPU.Build.0 = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
