@@ -12,16 +12,16 @@ namespace DWSIM.UI.Forms.Controls
     {
         IFlowsheetSurface Handler { get { return (IFlowsheetSurface)base.Handler; } }
 
-        public SkiaSharp.SKSurface FlowsheetSurface
-        {
-            get { return Handler.FlowsheetSurface; }
-            set { Handler.FlowsheetSurface = value; }
-        }
+        //public SkiaSharp.SKSurface FlowsheetSurface
+        //{
+        //    get { return Handler.FlowsheetSurface; }
+        //    set { Handler.FlowsheetSurface = value; }
+        //}
 
         // interface to the platform implementations
-        public new interface IFlowsheetSurface : Eto.Forms.Control.IHandler
+        public interface IFlowsheetSurface : Eto.Forms.Control.IHandler
         {
-            SkiaSharp.SKSurface FlowsheetSurface { get; set; }
+            //SkiaSharp.SKSurface FlowsheetSurface { get; set; }
         }
     }
 }

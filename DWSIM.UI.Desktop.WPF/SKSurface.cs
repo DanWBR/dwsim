@@ -16,12 +16,25 @@ using DWSIM.UI.Forms.Controls;
 namespace DWSIM.UI.Desktop.WPF
 {
 
-    public class FlowsheetSurfaceControlHandler : Eto.Wpf.Forms.WpfControl<FrameworkElement, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
+    public class FlowsheetSurfaceControlHandler : Eto.Wpf.Forms.WpfFrameworkElement<FrameworkElement, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
         public FlowsheetSurfaceControlHandler(GraphicsSurface gsurf)
         {
             this.Control = new FlowsheetSurface_WPF(gsurf);
         }
+
+        public override Eto.Drawing.Color BackgroundColor
+        {
+            get
+            {
+                return Eto.Drawing.Colors.White;
+            }
+            set
+            {
+                return;
+            }
+        }
+
     }
 
     public class FlowsheetSurface_WPF : SkiaSharp.Views.WPF.SKElement

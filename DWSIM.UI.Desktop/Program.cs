@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using DWSIM.UI.Desktop.WPF;
+using DWSIM.UI.Forms.Controls;
 using Eto;
 using Eto.Forms;
 
@@ -7,14 +9,32 @@ namespace DWSIM.UI.Desktop
 {
     public class Program
     {
+       
         [STAThread]
         public static void Main(string[] args)
         {
-
+            
             if (RunningPlatform() == OSPlatform.Windows)
             {
                 DWSIM.UI.Desktop.WPF.StyleSetter.SetStyles();
-                new Application(Platforms.Wpf).Run(new MainForm());
+
+                var platform = new Eto.Wpf.Platform();
+
+                 public Flowsheet flowsheet = new Flowsheet();
+
+                // to register your custom control handler, call this before using your class:
+                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new FlowsheetSurfaceControlHandler();
+
+                // create application object, and run
+                new Application(platform).Run(
+                    new Form
+                    {
+                        Title = "Hello!",
+                        Content = new FlowsheetSurfaceControl()
+                    }
+                );
+
+                new Application(platform).Run(new MainForm());
             }
             else if (RunningPlatform() == OSPlatform.Linux)
             {

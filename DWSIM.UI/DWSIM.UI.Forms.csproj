@@ -111,9 +111,7 @@
     <EmbeddedResource Include="Resources\Icons\DWSIM_ico.ico" />
     <EmbeddedResource Include="Resources\Icons\DWSIM_ico_16.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FlowsheetBase\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
