@@ -16,12 +16,12 @@ namespace DWSIM.UI.Desktop
 
         public override Interfaces.IFlowsheet GetNewInstance()
         {
-            throw new NotImplementedException();
+            return new Flowsheet();
         }
 
         public override void ShowDebugInfo(string text, int level)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(text);
         }
 
         public override void ShowMessage(string text, Interfaces.IFlowsheet.MessageType mtype)
