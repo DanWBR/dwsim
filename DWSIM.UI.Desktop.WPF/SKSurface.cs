@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
 using System.Windows.Media;
@@ -51,7 +50,7 @@ namespace DWSIM.UI.Desktop.WPF
         protected override void OnRender(DrawingContext drawingContext)
         {
           
-            base.OnRender(drawingContext);
+            //base.OnRender(drawingContext);
 
             int width, height;
             double dpiX = 1.0;
