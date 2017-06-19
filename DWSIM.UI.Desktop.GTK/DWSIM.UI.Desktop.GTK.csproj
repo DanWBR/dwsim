@@ -12,7 +12,7 @@
     <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>b211a5d9</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>38566052</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +49,24 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -82,6 +100,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\gtk-sharp-2.0\gtk-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Cairo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Mono.Cairo\Mono.Cairo.dll</HintPath>
+    </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\gtk-sharp-2.0\pango-sharp.dll</HintPath>
@@ -96,6 +118,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Code.cs" />
+    <Compile Include="SKSurface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -116,6 +139,16 @@
     <None Include="Libraries\gtk-sharp-2.0\pango-sharp.pdb" />
     <None Include="Libraries\Mono.Cairo\Mono.Cairo.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
+      <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI\DWSIM.UI.Forms.csproj">
+      <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
+      <Name>DWSIM.UI.Forms</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -124,6 +157,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\Avalonia.Skia.Linux.Natives.1.57.1.4\build\net45\Avalonia.Skia.Linux.Natives.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Avalonia.Skia.Linux.Natives.1.57.1.4\build\net45\Avalonia.Skia.Linux.Natives.targets'))" />
   </Target>
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
+  <Import Project="..\packages\Avalonia.Skia.Linux.Natives.1.57.1.4\build\net45\Avalonia.Skia.Linux.Natives.targets" Condition="Exists('..\packages\Avalonia.Skia.Linux.Natives.1.57.1.4\build\net45\Avalonia.Skia.Linux.Natives.targets')" />
 </Project>

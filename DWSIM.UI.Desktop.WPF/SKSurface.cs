@@ -19,9 +19,9 @@ namespace DWSIM.UI.Desktop.WPF
 
     public class FlowsheetSurfaceControlHandler : Eto.Wpf.Forms.WpfFrameworkElement<FrameworkElement, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
-        public FlowsheetSurfaceControlHandler(GraphicsSurface gsurf)
+        public FlowsheetSurfaceControlHandler()
         {
-            this.Control = new FlowsheetSurface_WPF(gsurf);
+            this.Control = new FlowsheetSurface_WPF();
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -33,6 +33,18 @@ namespace DWSIM.UI.Desktop.WPF
             set
             {
                 return;
+            }
+        }
+
+        public GraphicsSurface FlowsheetSurface
+        {
+            get
+            {
+                return ((FlowsheetSurface_WPF)this.Control).fsurface;
+            }
+            set
+            {
+                ((FlowsheetSurface_WPF)this.Control).fsurface = value;
             }
         }
 
@@ -49,9 +61,8 @@ namespace DWSIM.UI.Desktop.WPF
 
         private GestureDetector _gestureDetector;
 
-        public FlowsheetSurface_WPF(GraphicsSurface gsurf)
+        public FlowsheetSurface_WPF()
         {
-            fsurface = gsurf;
             _gestureDetector = new GestureDetector(this);
         }
 
