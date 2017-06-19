@@ -11,6 +11,7 @@ using DWSIM.Drawing.SkiaSharp;
 using DWSIM.Interfaces;
 using System.Windows.Media.Imaging;
 using DWSIM.UI.Forms.Controls;
+using System.Windows.Threading;
 
 namespace DWSIM.UI.Desktop.WPF
 {
@@ -41,6 +42,9 @@ namespace DWSIM.UI.Desktop.WPF
 
         public GraphicsSurface fsurface;
         private WriteableBitmap bitmap;
+
+        private float _lastTouchX;
+        private float _lastTouchY;
 
         public FlowsheetSurface_WPF(GraphicsSurface gsurf)
         {
@@ -92,6 +96,46 @@ namespace DWSIM.UI.Desktop.WPF
             drawingContext.DrawImage(bitmap, new Rect(0, 0, ActualWidth, ActualHeight));
         }
 
+        protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            _lastTouchX = (int)e.GetPosition(this).X;
+            _lastTouchY = (int)e.GetPosition(this).Y;
+            fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
+            this.InvalidateVisual();
+        }
+
+        protected override void OnMouseUp(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            fsurface.InputRelease();
+            this.InvalidateVisual();
+        }
+
+        protected override void OnMouseMove(System.Windows.Input.MouseEventArgs e)
+        {
+            float x = (int)e.GetPosition(this).X;
+            float y = (int)e.GetPosition(this).Y;
+            _lastTouchX = x;
+            _lastTouchY = y;
+            fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
+            this.InvalidateVisual();
+        }
+
+        protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2) { 
+                fsurface.ZoomAll((int)this.ActualWidth, (int)this.ActualHeight); 
+                this.InvalidateVisual(); 
+            } 
+        }
+
+        protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
+        {
+
+            fsurface.Zoom += e.Delta / 4 / 100.0f;
+            this.InvalidateVisual();
+        }
+
 
     }
+  
 }
