@@ -109,6 +109,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.GTK", "DWS
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.FlowsheetBase", "DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj", "{AEA79E29-5DFF-4AA8-B431-087A67A1467B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Mac", "DWSIM.UI.Desktop.Mac\DWSIM.UI.Desktop.Mac.csproj", "{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1023,6 +1025,24 @@ Global
 		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|x64.ActiveCfg = Release|x64
 		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|x64.Build.0 = Release|x64
 		{AEA79E29-5DFF-4AA8-B431-087A67A1467B}.x86|x86.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.x86|Any CPU.Build.0 = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.x86|x64.ActiveCfg = Release|Any CPU
+		{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

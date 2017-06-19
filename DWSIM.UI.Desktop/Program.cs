@@ -87,7 +87,7 @@ namespace DWSIM.UI.Desktop
             }
             else if (RunningPlatform() == OSPlatform.Mac)
             {
-                new Application(Platforms.Mac64).Run(new MainForm());
+                new Application(Platforms.XamMac2).Run(new MainForm());
             }
                         
         }
