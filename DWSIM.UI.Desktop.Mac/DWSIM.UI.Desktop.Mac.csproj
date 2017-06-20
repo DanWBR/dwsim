@@ -42,6 +42,7 @@
     <Reference Include="Eto.Mac">
       <HintPath>..\packages\Eto.Platform.Mac.2.3.0\lib\net45\Eto.Mac.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoMac">
       <HintPath>..\packages\Eto.Platform.Mac.2.3.0\lib\net45\MonoMac.dll</HintPath>
     </Reference>
@@ -49,20 +50,13 @@
       <HintPath>..\packages\SkiaSharp.1.58.0\lib\net45\SkiaSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkiaSharp.Views.Desktop, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Views.1.58.0\lib\net45\SkiaSharp.Views.Desktop.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.WPF, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.Views.1.58.0\lib\net45\SkiaSharp.Views.WPF.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MyPanel.cs" />
+    <Compile Include="SKDrawable.cs" />
     <Compile Include="SKSurface.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,9 +67,9 @@
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.UI\DWSIM.UI.Forms.csproj">
-      <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
-      <Name>DWSIM.UI.Forms</Name>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.FlowsheetControl\DWSIM.UI.Desktop.FlowsheetControl.csproj">
+      <Project>{b534a564-a134-421c-abae-b37df535cc5b}</Project>
+      <Name>DWSIM.UI.Desktop.FlowsheetControl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

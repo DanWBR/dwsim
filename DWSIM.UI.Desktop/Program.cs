@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
-using DWSIM.UI.Forms.Controls;
-using Eto;
+using DWSIM.UI.Controls;
 using Eto.Forms;
 using SkiaSharp;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace DWSIM.UI.Desktop
@@ -52,17 +50,17 @@ namespace DWSIM.UI.Desktop
 
                 var platform = new Eto.Wpf.Platform();
 
-                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new DWSIM.UI.Desktop.WPF.FlowsheetSurfaceControlHandler());
+                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WPF.FlowsheetSurfaceControlHandler());
 
-                new Application(platform).Run(
-                    new Form
-                    {
-                        Title = "Hello!",
-                        Content = new FlowsheetSurfaceControl() { FlowsheetSurface = surface, Width = 1000, Height = 500 }
-                    }
-                );
+                //new Application(platform).Run(
+                //    new Form
+                //    {
+                //        Title = "Hello!",
+                //        Content = new FlowsheetSurfaceControl() { FlowsheetSurface = surface, Width = 1000, Height = 500 }
+                //    }
+                //);
 
-                //new Application(platform).Run(new MainForm());
+                new Application(platform).Run(new MainForm());
             }
             else if (RunningPlatform() == OSPlatform.Linux)
             {
@@ -71,25 +69,42 @@ namespace DWSIM.UI.Desktop
 
                 var platform = new Eto.GtkSharp.Platform();
 
-                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new DWSIM.UI.Desktop.GTK.FlowsheetSurfaceControlHandler());
+                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
       
-                new Application(platform).Run(
-                    new Form
-                    {
-                        Title = "Hello!",
-                        Content = new FlowsheetSurfaceControl() { FlowsheetSurface = surface, Width = 1000, Height = 500 }
-                    }
-                );
+                //new Application(platform).Run(
+                //    new Form
+                //    {
+                //        Title = "Hello!",
+                //        Content = new FlowsheetSurfaceControl() { FlowsheetSurface = surface, Width = 1000, Height = 500 }
+                //    }
+                //);
 
-                //new Application(platform).Run(new MainForm());
+                new Application(platform).Run(new MainForm());
             }
             else if (RunningPlatform() == OSPlatform.Mac)
             {
-                new Application(Platforms.Mac64).Run(new MainForm());
+
+                DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
+
+                var platform = new Eto.Mac.Platform();
+
+                //platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+
+                //new Application(platform).Run(
+                //    new Form
+                //    {
+                //        Title = "Hello!",
+                //        Content = new FlowsheetSurfaceControl() { FlowsheetSurface = surface, Width = 1000, Height = 500 }
+                //    }
+                //);
+
+                new Application(platform).Run(new MainForm());
+
             }
-                        
+
+
         }
-        
+
         public enum OSPlatform
         {
             Windows,

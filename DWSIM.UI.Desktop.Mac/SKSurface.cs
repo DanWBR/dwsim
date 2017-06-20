@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DWSIM.Drawing.SkiaSharp;
-using DWSIM.UI.Forms.Controls;
+﻿using DWSIM.Drawing.SkiaSharp;
+using DWSIM.UI.Controls;
+using MonoMac.AppKit;
+using MonoMac.CoreGraphics;
 using SkiaSharp;
+using System;
 
-namespace DWSIM.UI.Desktop.GTK
+namespace DWSIM.UI.Desktop.Mac
 {
-    public class FlowsheetSurfaceControlHandler : Eto.Mac.Forms.MacView< , FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
+    public class FlowsheetSurfaceControlHandler : Eto.Mac.Forms.MacView<NSView, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
+        
         public FlowsheetSurfaceControlHandler()
         {
             this.Control = new FlowsheetSurface_Mac();
+            
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -27,6 +27,16 @@ namespace DWSIM.UI.Desktop.GTK
                 return;
             }
         }
+
+        public override NSView ContainerControl
+        {
+            get
+            {
+                return Control;
+            }
+        }
+
+        public override bool Enabled { get; set; }
 
         public GraphicsSurface FlowsheetSurface
         {
@@ -43,13 +53,125 @@ namespace DWSIM.UI.Desktop.GTK
 
     }
 
-    public class FlowsheetSurface_Mac : SkiaSharp.Views.Desktop.SKControl
+    public class FlowsheetSurface_Mac : NSView
     {
+
+        private NSTrackingArea trackarea;
 
         public GraphicsSurface fsurface;
 
         private float _lastTouchX;
         private float _lastTouchY;
+
+        private SKDrawable drawable;
+
+        public FlowsheetSurface_Mac()
+        {
+            drawable = new SKDrawable();
+            BecomeFirstResponder();
+        }
+
+        public override CGRect Bounds
+        {
+            get
+            {
+                return base.Bounds;
+            }
+            set
+            {
+                base.Bounds = value;
+                UpdateTrackingAreas();
+            }
+        }
+
+        public override CGRect Frame
+        {
+            get
+            {
+                return base.Frame;
+            }
+
+            set
+            {
+                base.Frame = value;
+                UpdateTrackingAreas();
+            }
+        }
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+        }
+
+        public override void UpdateTrackingAreas()
+        {
+            if (trackarea != null){RemoveTrackingArea(trackarea);}
+            trackarea = new NSTrackingArea(Frame, NSTrackingAreaOptions.ActiveWhenFirstResponder | NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.InVisibleRect, this, null);
+            AddTrackingArea(trackarea);
+        }
+
+        public override void DrawRect(CGRect dirtyRect)
+        {
+            
+            base.DrawRect(dirtyRect);
+            
+            var ctx = NSGraphicsContext.CurrentContext.GraphicsPort;
+
+            // create the skia context
+            SKImageInfo info;
+            
+            var surface = drawable.CreateSurface(Bounds, 1.0f, out info);
+            
+            fsurface.UpdateSurface(surface);
+
+            Console.WriteLine("Redraw");
+
+            // draw the surface to the context
+            drawable.DrawSurface(ctx, Bounds, info, surface);
+            
+        }
+
+        public override void MouseDown(NSEvent theEvent)
+        {
+            base.MouseDown(theEvent);
+            if (theEvent.ClickCount == 2) {
+                fsurface.ZoomAll((int)this.Bounds.Width, (int)this.Bounds.Height);
+            }
+            else { 
+                _lastTouchX = theEvent.LocationInWindow.X;
+                _lastTouchY = Bounds.Height - theEvent.LocationInWindow.Y;
+                fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
+            }
+            this.NeedsDisplay = true;
+        }
+
+        public override void MouseMoved(NSEvent theEvent)
+        {
+            base.MouseMoved(theEvent);
+        }
+
+        public override void MouseDragged(NSEvent theEvent)
+        {
+            base.MouseDragged(theEvent);
+            _lastTouchX = theEvent.LocationInWindow.X;
+            _lastTouchY = Bounds.Height - theEvent.LocationInWindow.Y;
+            fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
+            this.NeedsDisplay = true;
+        }
+
+        public override void MouseUp(NSEvent theEvent)
+        {
+            base.MouseUp(theEvent);
+            fsurface.InputRelease();
+            this.NeedsDisplay = true;
+        }
+
+        public override void ScrollWheel(NSEvent theEvent)
+        {
+            var scroll = theEvent.ScrollingDeltaX;
+            fsurface.Zoom += scroll / 100.0f;
+            this.NeedsDisplay = true;
+        }
 
     }
 

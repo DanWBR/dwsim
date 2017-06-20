@@ -10,7 +10,7 @@ using System.Windows;
 using DWSIM.Drawing.SkiaSharp;
 using DWSIM.Interfaces;
 using System.Windows.Media.Imaging;
-using DWSIM.UI.Forms.Controls;
+using DWSIM.UI.Controls;
 using System.Windows.Threading;
 using System.Windows.Input;
 
@@ -127,10 +127,8 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseMove(System.Windows.Input.MouseEventArgs e)
         {
-            float x = (int)e.GetPosition(this).X;
-            float y = (int)e.GetPosition(this).Y;
-            _lastTouchX = x;
-            _lastTouchY = y;
+            _lastTouchX = (int)e.GetPosition(this).X;
+            _lastTouchY = (int)e.GetPosition(this).Y;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.InvalidateVisual();
         }

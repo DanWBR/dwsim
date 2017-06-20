@@ -109,7 +109,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.58.0\lib\net45\SkiaSharp.dll</HintPath>
       <Private>True</Private>
@@ -132,9 +134,17 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.FlowsheetControl\DWSIM.UI.Desktop.FlowsheetControl.csproj">
+      <Project>{b534a564-a134-421c-abae-b37df535cc5b}</Project>
+      <Name>DWSIM.UI.Desktop.FlowsheetControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.UI.Desktop.GTK\DWSIM.UI.Desktop.GTK.csproj">
       <Project>{67c35d45-f95a-4092-82e0-d9cf3b491d41}</Project>
       <Name>DWSIM.UI.Desktop.GTK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Mac\DWSIM.UI.Desktop.Mac.csproj">
+      <Project>{db4be4c5-cf84-48ae-aca0-3a275112e1db}</Project>
+      <Name>DWSIM.UI.Desktop.Mac</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.UI.Desktop.WPF\DWSIM.UI.Desktop.WPF.csproj">
       <Project>{2fc4816c-796d-4366-98f6-c6e3d481e66d}</Project>
@@ -165,9 +175,7 @@
     <Content Include="Mac\MyApp.app\MacAppTemplate.app\Contents\MonoBundle\README.txt" />
     <Content Include="Mac\README.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Eto.Platform.Mac.Template.2.3.0\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.3.0\build\Eto.Platform.Mac.Template.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -181,6 +189,6 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /R $(TargetDir)x86\libSkiaSharp.dll $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /R $(TargetDir)x64\libSkiaSharp.dll $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

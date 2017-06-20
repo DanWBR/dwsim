@@ -125,9 +125,9 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.UI\DWSIM.UI.Forms.csproj">
-      <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
-      <Name>DWSIM.UI.Forms</Name>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.FlowsheetControl\DWSIM.UI.Desktop.FlowsheetControl.csproj">
+      <Project>{b534a564-a134-421c-abae-b37df535cc5b}</Project>
+      <Name>DWSIM.UI.Desktop.FlowsheetControl</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

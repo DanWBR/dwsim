@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DWSIM.Drawing.SkiaSharp;
-using DWSIM.UI.Forms.Controls;
+using DWSIM.UI.Controls;
 using SkiaSharp;
 
 namespace DWSIM.UI.Desktop.GTK
