@@ -181,6 +181,6 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /R $(TargetDir)x64\libSkiaSharp.dll $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /R $(TargetDir)x86\libSkiaSharp.dll $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

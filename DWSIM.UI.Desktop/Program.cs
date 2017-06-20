@@ -52,7 +52,6 @@ namespace DWSIM.UI.Desktop
 
                 var platform = new Eto.Wpf.Platform();
 
-                //to register your custom control handler, call this before using your class:
                 platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new DWSIM.UI.Desktop.WPF.FlowsheetSurfaceControlHandler());
 
                 new Application(platform).Run(
@@ -72,7 +71,6 @@ namespace DWSIM.UI.Desktop
 
                 var platform = new Eto.GtkSharp.Platform();
 
-                //to register your custom control handler, call this before using your class:
                 platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new DWSIM.UI.Desktop.GTK.FlowsheetSurfaceControlHandler());
       
                 new Application(platform).Run(
@@ -87,7 +85,7 @@ namespace DWSIM.UI.Desktop
             }
             else if (RunningPlatform() == OSPlatform.Mac)
             {
-                new Application(Platforms.XamMac2).Run(new MainForm());
+                new Application(Platforms.Mac64).Run(new MainForm());
             }
                         
         }
