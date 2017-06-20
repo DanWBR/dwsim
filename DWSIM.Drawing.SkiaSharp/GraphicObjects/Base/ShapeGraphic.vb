@@ -154,7 +154,7 @@ Namespace GraphicObjects
 
             MyBase.New()
 
-            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Helvetica", SKTypefaceStyle.Bold)
+            Me.DefaultTypeFace = SKTypeface.FromFamilyName("Sans", SKTypefaceStyle.Bold)
 
         End Sub
 

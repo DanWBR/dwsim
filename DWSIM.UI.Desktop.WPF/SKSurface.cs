@@ -100,7 +100,7 @@ namespace DWSIM.UI.Desktop.WPF
             bitmap.Lock();
             using (var surface = SKSurface.Create(info, bitmap.BackBuffer, bitmap.BackBufferStride))
             {
-                fsurface.UpdateSurface(surface);
+                if (fsurface != null) fsurface.UpdateSurface(surface);
                 OnPaintSurface(new SKPaintSurfaceEventArgs(surface, info));
                 surface.Canvas.Flush();
             }

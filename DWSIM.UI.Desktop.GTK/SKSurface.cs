@@ -117,25 +117,30 @@ namespace DWSIM.UI.Desktop.GTK
             {
                 var area = evnt.Area;
 
-                using (var bitmap = new SKBitmap(rect.Width, rect.Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul))
+                using (var bitmap = new SKBitmap(rect.Width, rect.Height, SKColorType.Bgra8888, SKAlphaType.Premul))
                 {
                     IntPtr len;
-                    using (var skSurface = SKSurface.Create(bitmap.Info.Width, bitmap.Info.Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul, bitmap.GetPixels(out len), bitmap.Info.RowBytes))
+                    using (var skSurface = SKSurface.Create(bitmap.Info.Width, bitmap.Info.Height, SKColorType.Bgra8888, SKAlphaType.Premul, bitmap.GetPixels(out len), bitmap.Info.RowBytes))
                     {
 
-                        fsurface.UpdateSurface(skSurface);
+                        if (fsurface != null)  fsurface.UpdateSurface(skSurface);
+                        skSurface.Canvas.Flush();
 
                         Gdk.GC gc = new Gdk.GC ((Gdk.Drawable)base.GdkWindow);
 
+                        using (var cbit = bitmap.Copy(SKColorType.Rgba8888)) 
+                        { 
+
                         this.GdkWindow.Clear();
 
-                        var gdkpixbuf = new Gdk.Pixbuf(bitmap.Bytes, Gdk.Colorspace.Rgb, true, 8, rect.Width, rect.Height, bitmap.RowBytes);
-
+                        var gdkpixbuf = new Gdk.Pixbuf(cbit.Bytes, Gdk.Colorspace.Rgb, true, 8, rect.Width, rect.Height, cbit.RowBytes);
+                        
                         this.GdkWindow.DrawPixbuf(gc, gdkpixbuf, 0, 0, 0, 0, rect.Width, rect.Height, Gdk.RgbDither.Normal, 0, 0);
 
                         gdkpixbuf.Dispose();
                         gc.Dispose();
 
+                        }
                     }
                 }
 
