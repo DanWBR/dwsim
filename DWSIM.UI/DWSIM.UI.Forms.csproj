@@ -92,6 +92,10 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\About.cs" />
+    <Compile Include="Forms\About.eto.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Localization\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +106,7 @@
     <Compile Include="MainForm.eto.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Shared\Shared.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="SplashScreen.eto.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>

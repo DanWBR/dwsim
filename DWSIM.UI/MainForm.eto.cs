@@ -50,7 +50,7 @@ namespace DWSIM.UI
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
 
             var aboutCommand = new Command { MenuText = "About..." };
-            aboutCommand.Executed += (sender, e) => MessageBox.Show(this, "About my app...");
+            aboutCommand.Executed += (sender, e) => new About().Show();
 
             // create menu
             Menu = new MenuBar

@@ -55,7 +55,7 @@ namespace DWSIM.UI.Forms
 
             lbl4.TextColor = Colors.White;
 
-            var lbl5 = new Label { Style = "splashlabels1", Text = AssemblyCopyright };
+            var lbl5 = new Label { Style = "splashlabels1", Text = Shared.AssemblyCopyright };
 
             lbl5.TextColor = new Color(0.051f, 0.447f, 0.651f);
 
@@ -98,19 +98,6 @@ namespace DWSIM.UI.Forms
             Task.Factory.StartNew(() => {
                 Thread.Sleep(3000);
             }).ContinueWith((t) => Application.Instance.Invoke(() => this.Close()));
-        }
-
-        public string AssemblyCopyright
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-            }
         }
 
     }
