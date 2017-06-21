@@ -92,6 +92,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Common.cs" />
     <Compile Include="Forms\About.cs" />
     <Compile Include="Forms\About.eto.cs">
       <DependentUpon>About.cs</DependentUpon>
@@ -162,9 +163,7 @@
       <Name>DWSIM.GlobalSettings</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\TextFiles\gpl-3.0.txt" />
   </ItemGroup>

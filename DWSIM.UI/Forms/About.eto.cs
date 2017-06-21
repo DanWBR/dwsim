@@ -28,15 +28,8 @@ namespace DWSIM.UI.Forms
 
             string vtext = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
             string crtext = Shared.AssemblyCopyright;
-
-            if (Application.Instance.Platform.IsWpf)
-            {
-                layout.Add(new ImageView { Size = new Size(133, 133), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 10, 10);
-            }
-            else
-            {
-                layout.Add(new ImageView { Size = new Size(100, 100), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 10, 10);
-            }
+                       
+            layout.Add(new ImageView { Size = new Size(100, 100), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 10, 10);
             layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform UI)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 120, 10);
             layout.Add(new Label { Text = vtext, TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 120, 30);
             layout.Add(new Label { Text = crtext, TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 120, 50);

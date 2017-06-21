@@ -4,6 +4,8 @@ using Eto.Drawing;
 using DWSIM.UI.Forms;
 using System.Threading;
 using System.Diagnostics;
+using DWSIM.UI.Forms.Controls;
+using System.Linq;
 
 namespace DWSIM.UI
 {
@@ -35,7 +37,25 @@ namespace DWSIM.UI
             var btn6 = new Button(){ Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), 40, 40, ImageInterpolation.Default)};
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn8 = new Button() { Style = "main", Text = "Donate".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Donate_100px.png"), 40, 40, ImageInterpolation.Default) };
-            
+
+            btn1.Click += (sender, e) => {
+                var table = Common.GetDefaultContainer();
+                table.Tag = "Tab 1";
+                table.CreateAndAddLabelRow("Properties");
+                table.CreateAndAddLabelAndButtonRow("Test", "Button", imgprefix + "DWSIM_ico.png", null);
+                table.CreateAndAddEmptySpace();
+                var table2 = Common.GetDefaultContainer();
+                table2.Tag = "Tab 2";
+                table2.CreateAndAddStringEditorRow("Test", "Value", null);
+                table2.CreateAndAddEmptySpace();
+                var table3 = Common.GetDefaultContainer();
+                table3.Tag = "Tab 3";
+                table3.CreateAndAddCheckBoxRow("Test", true, null);
+                table3.CreateAndAddEmptySpace();
+                table3.CreateAndAddButtonRow("Button", null, null);
+                Common.GetDefaultTabbedForm("Editor", 400, 600, new []{table, table2, table3}).Show();
+            };
+
             btn7.Click += (sender, e) => new About().Show();
             btn8.Click += (sender, e) => Process.Start("http://sourceforge.net/p/dwsim/donate/");
 
