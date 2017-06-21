@@ -31,7 +31,7 @@ namespace DWSIM.UI.Forms
                 gpltext = reader.ReadToEnd();
             }
 
-            var textbox = new TextArea { Text = gpltext, Width = 780, Height = 420, ReadOnly = true};
+            var textbox = new TextArea { Text = gpltext, Width = 480, Height = 420, ReadOnly = true};
 
             layout.Add(textbox, 10, 120);
 
@@ -39,14 +39,14 @@ namespace DWSIM.UI.Forms
 
             okbutton.Click += (sender, e) => Close();
 
-            layout.Add(okbutton, 720, 600 - 55);
+            layout.Add(okbutton, 420, 600 - 55);
 
-            Width = 800;
+            Width = 500;
             Height = 600;
 
             layout.Width = Width;
             layout.Height = Height;
-
+            
             Content = layout;
             
         }
