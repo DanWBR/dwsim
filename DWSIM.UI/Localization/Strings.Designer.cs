@@ -59,5 +59,167 @@ namespace DWSIM.UI.Forms.Localization {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About DWSIM Simulator.
+        /// </summary>
+        internal static string AboutDWSIM {
+            get {
+                return ResourceManager.GetString("AboutDWSIM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Version: .
+        /// </summary>
+        internal static string ApplicationVersion {
+            get {
+                return ResourceManager.GetString("ApplicationVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Donate.
+        /// </summary>
+        internal static string Donate {
+            get {
+                return ResourceManager.GetString("Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DWSIM Launcher.
+        /// </summary>
+        internal static string DWSIMLauncher {
+            get {
+                return ResourceManager.GetString("DWSIMLauncher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DWSIM is released under the GPL v3 license:.
+        /// </summary>
+        internal static string DWSIMLicense {
+            get {
+                return ResourceManager.GetString("DWSIMLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Framework Version: .
+        /// </summary>
+        internal static string FrameworkVersion {
+            get {
+                return ResourceManager.GetString("FrameworkVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This software is released under the terms of the GNU General Public License (GPL) version 3. See specific licenses for external components on the &apos;About&apos; box..
+        /// </summary>
+        internal static string GPLNotice {
+            get {
+                return ResourceManager.GetString("GPLNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        internal static string Help {
+            get {
+                return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading Components....
+        /// </summary>
+        internal static string LoadingComponents {
+            get {
+                return ResourceManager.GetString("LoadingComponents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Compound.
+        /// </summary>
+        internal static string NewCompound {
+            get {
+                return ResourceManager.GetString("NewCompound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Data Regression.
+        /// </summary>
+        internal static string NewDataRegression {
+            get {
+                return ResourceManager.GetString("NewDataRegression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Simulation.
+        /// </summary>
+        internal static string NewSimulation {
+            get {
+                return ResourceManager.GetString("NewSimulation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Saved File.
+        /// </summary>
+        internal static string OpenSavedFile {
+            get {
+                return ResourceManager.GetString("OpenSavedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global Settings.
+        /// </summary>
+        internal static string Preferences {
+            get {
+                return ResourceManager.GetString("Preferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quit.
+        /// </summary>
+        internal static string Quit {
+            get {
+                return ResourceManager.GetString("Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
     }
 }

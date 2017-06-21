@@ -118,57 +118,57 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>About</value>
+    <value>Sobre</value>
   </data>
   <data name="AboutDWSIM" xml:space="preserve">
-    <value>About DWSIM Simulator</value>
+    <value>Sobre o DWSIM Simulator</value>
   </data>
   <data name="Donate" xml:space="preserve">
-    <value>Donate</value>
+    <value>Fazer uma Doação</value>
   </data>
   <data name="DWSIMLauncher" xml:space="preserve">
-    <value>DWSIM Launcher</value>
+    <value>DWSIM</value>
   </data>
   <data name="DWSIMLicense" xml:space="preserve">
-    <value>DWSIM is released under the GPL v3 license:</value>
+    <value>O DWSIM é distribuido sob a licença GPL v3:</value>
   </data>
   <data name="Help" xml:space="preserve">
-    <value>Help</value>
+    <value>Ajuda</value>
   </data>
   <data name="NewCompound" xml:space="preserve">
-    <value>New Compound</value>
+    <value>Nova Substância</value>
   </data>
   <data name="NewDataRegression" xml:space="preserve">
-    <value>New Data Regression</value>
+    <value>Regressão de Dados</value>
   </data>
   <data name="NewSimulation" xml:space="preserve">
-    <value>New Simulation</value>
+    <value>Nova Simulação</value>
   </data>
   <data name="OpenSavedFile" xml:space="preserve">
-    <value>Open Saved File</value>
+    <value>Abrir Arquivo</value>
   </data>
   <data name="Preferences" xml:space="preserve">
-    <value>Global Settings</value>
+    <value>Configurações Globais</value>
   </data>
   <data name="Quit" xml:space="preserve">
-    <value>Quit</value>
+    <value>Sair</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Configurações Globais</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>Version</value>
+    <value>Versão</value>
   </data>
   <data name="ApplicationVersion" xml:space="preserve">
-    <value>Application Version: </value>
+    <value>Versão do Aplicativo: </value>
   </data>
   <data name="FrameworkVersion" xml:space="preserve">
-    <value>Framework Version: </value>
+    <value>Versão do Framework: </value>
   </data>
   <data name="GPLNotice" xml:space="preserve">
-    <value>This software is released under the terms of the GNU General Public License (GPL) version 3. See specific licenses for external components on the 'About' box.</value>
+    <value>Este software é distribuido sob a licença GPL versão 3. Verifique a janela 'Sobre' para informações as licenças específicas dos demais componentes externos utilizados.</value>
   </data>
   <data name="LoadingComponents" xml:space="preserve">
-    <value>Loading Components...</value>
+    <value>Carregando...</value>
   </data>
 </root>
