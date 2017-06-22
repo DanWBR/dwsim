@@ -4,7 +4,6 @@ using Eto.Drawing;
 using DWSIM.UI.Forms;
 using System.Threading;
 using System.Diagnostics;
-using DWSIM.UI.Forms.Shared;
 using System.Linq;
 
 namespace DWSIM.UI

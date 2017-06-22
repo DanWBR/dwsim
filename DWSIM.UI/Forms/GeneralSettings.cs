@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DWSIM.UI.Shared;
 using Eto.Forms;
 using Settings = DWSIM.GlobalSettings.Settings;
-using DWSIM.UI.Forms.Controls;
 
 namespace DWSIM.UI.Forms.Forms
 {

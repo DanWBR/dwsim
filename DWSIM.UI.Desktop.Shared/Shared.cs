@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
 
-namespace DWSIM.UI.Forms.Shared
+namespace DWSIM.UI.Shared
 {
     public static class Common
     {
@@ -32,8 +32,7 @@ namespace DWSIM.UI.Forms.Shared
                 Maximizable = false,
                 Minimizable = false,
                 Topmost = true,
-                Resizable = true,
-                Icon = Eto.Drawing.Icon.FromResource("DWSIM.UI.Forms.Resources.Icons.DWSIM_ico.ico")
+                Resizable = true
             };
         }
 
@@ -58,8 +57,7 @@ namespace DWSIM.UI.Forms.Shared
                 Maximizable = false,
                 Minimizable = false,
                 Topmost = true,
-                Resizable = true,
-                Icon = Eto.Drawing.Icon.FromResource("DWSIM.UI.Forms.Resources.Icons.DWSIM_ico.ico")
+                Resizable = true
             };
 
             var tabctrl = new TabControl();
