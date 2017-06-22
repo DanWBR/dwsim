@@ -569,6 +569,19 @@ Namespace UnitOperations
                 Return True
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+            Return ""
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Specified Stream") Then
+                Return "Select the outlet stream to which the specified separation values will be applied to."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

@@ -938,6 +938,85 @@ Namespace Reactors
                 Return True
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            str.AppendLine("Reactor: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Calculation Parameters")
+            str.AppendLine()
+            str.AppendLine("    Calculation Mode: " & ReactorOperationMode.ToString)
+            str.AppendLine("    Reactor Volume: " & SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume).ToString(numberformat, ci) & " " & su.volume)
+            str.AppendLine("    Reactor Length: " & SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.Length).ToString(numberformat, ci) & " " & su.distance)
+            str.AppendLine("    Pressure Drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.DeltaP.GetValueOrDefault).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            Select Case Me.ReactorOperationMode
+                Case OperationMode.Adiabatic
+                    str.AppendLine("    Outlet Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                Case OperationMode.Isothermic
+                    str.AppendLine("    Heat Added/Removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
+                Case OperationMode.OutletTemperature
+                    str.AppendLine("    Outlet Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Heat Added/Removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
+            End Select
+            str.AppendLine("    Residence Time: " & SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTime).ToString(numberformat, ci) & " " & su.time)
+            str.AppendLine()
+            str.AppendLine("Reaction Extents")
+            str.AppendLine()
+            For Each dbl As KeyValuePair(Of String, Double) In Me.RxiT
+                str.AppendLine("    " & Me.GetFlowsheet.Reactions(dbl.Key).Name & ": " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, dbl.Value).ToString(numberformat, ci) & " " & su.molarflow)
+            Next
+            str.AppendLine()
+            str.AppendLine("Reaction Rates")
+            str.AppendLine()
+            For Each dbl As KeyValuePair(Of String, Double) In Me.RxiT
+                str.AppendLine("    " & Me.GetFlowsheet.Reactions(dbl.Key).Name & ": " & SystemsOfUnits.Converter.ConvertFromSI(su.reac_rate, (dbl.Value / Me.Volume)).ToString(numberformat, ci) & " " & su.reac_rate)
+            Next
+            str.AppendLine()
+            str.AppendLine("Reaction Heats")
+            str.AppendLine()
+            For Each dbl As KeyValuePair(Of String, Double) In Me.DHRi
+                str.AppendLine("    " & Me.GetFlowsheet.Reactions(dbl.Key).Name & ": " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, dbl.Value).ToString(numberformat, ci) & " " & su.heatflow)
+            Next
+            str.AppendLine()
+            str.AppendLine("Compound Conversions")
+            str.AppendLine()
+            For Each dbl As KeyValuePair(Of String, Double) In Me.ComponentConversions
+                If dbl.Value > 0 Then
+                    str.AppendLine("    " & dbl.Key & ": " & (dbl.Value * 100).ToString(numberformat, ci) & "%")
+                End If
+            Next
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Calculation Mode") Then
+                Return "Select the calculation mode of this reactor."
+            ElseIf p.Equals("Pressure Drop") Then
+                Return "Enter the desired pressure drop for this reactor."
+            ElseIf p.Equals("Outlet Temperature") Then
+                Return "If you chose 'Outlet Temperature' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
+            ElseIf p.Equals("Reactor Volume") Then
+                Return "Define the active volume of this reactor."
+            ElseIf p.Equals("Reactor Length") Then
+                Return "Define the active length of this reactor."
+            ElseIf p.Equals("Catalyst Loading") Then
+                Return "Enter the amount of catalyst per unit volume (for HetCat reactions only)."
+            ElseIf p.Equals("Catalyst Diameter") Then
+                Return "Enter the diameter of the catalyst sphere (for HetCat reactions only)."
+            ElseIf p.Equals("Catalyst Void Fraction") Then
+                Return "Enter the void fraction of the catalyst bed in the reactor (for HetCat reactions only)."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

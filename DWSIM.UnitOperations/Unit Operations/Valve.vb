@@ -38,6 +38,10 @@ Namespace UnitOperations
         Protected m_DQ As Nullable(Of Double)
         Protected m_Pout As Nullable(Of Double) = 101325.0#
         Protected m_cmode As CalculationMode = CalculationMode.DeltaP
+        Public Property Hinlet As Double
+        Public Property Houtlet As Double
+        Public Property Cv As Double
+        Public Property C1 As Double
 
         Public Enum CalculationMode
             DeltaP = 0
@@ -119,7 +123,7 @@ Namespace UnitOperations
                 Throw New Exception(FlowSheet.GetTranslatedString("Verifiqueasconexesdo"))
             End If
 
-            Dim Ti, Pi, Hi, Wi, ei, ein, T2, P2, H2, H2c As Double
+            Dim Ti, Pi, Hi, Wi, ei, ein, T2, P2, H2, H2c, rho, volf, vf As Double
 
             Dim ims As MaterialStream = Me.GetInletMaterialStream(0)
 
@@ -131,6 +135,8 @@ Namespace UnitOperations
             Wi = ims.Phases(0).Properties.massflow.GetValueOrDefault.ToString
             ei = Hi * Wi
             ein = ei
+            rho = ims.Phases(0).Properties.density.GetValueOrDefault
+            volf = ims.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             H2 = Hi '- Me.DeltaP.GetValueOrDefault / (rho_li * 1000)
 
@@ -155,6 +161,9 @@ Namespace UnitOperations
 
             If DebugMode Then AppendDebugLine(String.Format("Calculated outlet temperature T2 = {0} K", T2))
 
+            Houtlet = H2c
+            Hinlet = Hi
+
             'Dim htol As Double = Me.PropertyPackage.Parameters("PP_PHFELT")
             'Dim herr As Double = Math.Abs((H2c - H2) / H2)
 
@@ -162,6 +171,23 @@ Namespace UnitOperations
 
             Me.DeltaT = T2 - Ti
             Me.DeltaQ = 0
+
+            If vf = 0.0# Then
+                'size for liquid
+                Cv = (volf * 15850.3) / ((DeltaP * 0.000145038) / (rho / 1000)) ^ 0.5
+            ElseIf vf = 1.0# Then
+                'size for vapor
+                C1 = 20 '18 to 37
+                Dim f1 As Double = Math.Sin((3417 / C1) * (Math.Abs(DeltaP.GetValueOrDefault) / Pi) ^ 0.5 / 57.2958)
+                Cv = (Wi * 7936.64) / 1.06 / (rho * 0.062428 * Pi * 0.000145038) ^ 0.5 / f1
+            Else
+                'size for liquid
+                Cv = (1 - vf) * (volf * 15850.3) / ((DeltaP * 0.000145038) / (rho / 1000)) ^ 0.5
+                'size for vapor
+                C1 = 20 '18 to 37
+                Dim f1 As Double = Math.Sin((3417 / C1) * (Math.Abs(DeltaP.GetValueOrDefault) / Pi) ^ 0.5 / 57.2958)
+                Cv += vf * (Wi * 7936.64) / 1.06 / (rho * 0.062428 * Pi * 0.000145038) ^ 0.5 / f1
+            End If
 
             OutletTemperature = T2
 
@@ -367,6 +393,70 @@ Namespace UnitOperations
                 Return True
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Adiabatic Valve: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions")
+            str.AppendLine()
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Mole flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, istr.Phases(0).Properties.molarflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.molarflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Calculation mode: " & CalcMode.ToString)
+            Select Case Me.CalcMode
+                Case CalculationMode.DeltaP
+                    str.AppendLine("    Pressure decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP).ToString(numberformat, ci) & " " & su.deltaP)
+                Case CalculationMode.OutletPressure
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure).ToString(numberformat, ci) & " " & su.pressure)
+            End Select
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            Select Case Me.CalcMode
+                Case CalculationMode.DeltaP
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure).ToString(numberformat, ci) & " " & su.pressure)
+                Case CalculationMode.OutletPressure
+                    str.AppendLine("    Pressure decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP).ToString(numberformat, ci) & " " & su.deltaP)
+            End Select
+            str.AppendLine("    Inlet enthalpy: " & SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Hinlet).ToString(numberformat, ci) & " " & su.enthalpy)
+            str.AppendLine("    Outlet enthalpy: " & SystemsOfUnits.Converter.ConvertFromSI(su.enthalpy, Me.Houtlet).ToString(numberformat, ci) & " " & su.enthalpy)
+            str.AppendLine("    Temperature decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Cv (uncorrected): " & Me.Cv.ToString(numberformat, ci))
+
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Calculation Mode") Then
+                Return "Select the calculation mode of this valve."
+            ElseIf p.Equals("Pressure Drop") Then
+                Return "If you chose 'Pressure Drop' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
+            ElseIf p.Equals("Outlet Pressure") Then
+                Return "If you chose 'Outlet Pressure' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

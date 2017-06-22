@@ -64,6 +64,14 @@ Namespace UnitOperations
 
 #Region "    ISimulationObject"
 
+        Public Overridable Function GetPropertyDescription(prop As String) As String Implements ISimulationObject.GetPropertyDescription
+            Return "No description is available for this property."
+        End Function
+
+        Public Overridable Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String Implements ISimulationObject.GetReport
+            Return "No report is available for this object."
+        End Function
+
         Public Overridable Function GetVersion() As Version Implements ISimulationObject.GetVersion
             Return Me.GetType.Assembly.GetName.Version
         End Function

@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM", "DWSIM\DWSIM.vbproj", "{34BE2D2D-9B3C-4C12-8C90-732E21CD7CB1}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -112,6 +112,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Mac", "DWSIM.UI.Desktop.Mac\DWSIM.UI.Desktop.Mac.csproj", "{DB4BE4C5-CF84-48AE-ACA0-3A275112E1DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.FlowsheetControl", "DWSIM.UI.Desktop.FlowsheetControl\DWSIM.UI.Desktop.FlowsheetControl.csproj", "{B534A564-A134-421C-ABAE-B37DF535CC5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Editors", "DWSIM.UI.Desktop.Editors\DWSIM.UI.Desktop.Editors.csproj", "{BA99BA15-8C63-408E-B65F-1E7160F85E9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Shared", "DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj", "{2FFD2514-E4F9-4C19-B38E-B77560585D61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1075,6 +1079,42 @@ Global
 		{B534A564-A134-421C-ABAE-B37DF535CC5B}.x86|x64.Build.0 = Release|Any CPU
 		{B534A564-A134-421C-ABAE-B37DF535CC5B}.x86|x86.ActiveCfg = Release|Any CPU
 		{B534A564-A134-421C-ABAE-B37DF535CC5B}.x86|x86.Build.0 = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Release|x64.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.Release|x86.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.x86|Any CPU.Build.0 = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.x86|x64.ActiveCfg = Release|Any CPU
+		{BA99BA15-8C63-408E-B65F-1E7160F85E9C}.x86|x86.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Release|x64.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.Release|x86.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|Any CPU.Build.0 = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|x64.ActiveCfg = Release|Any CPU
+		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -544,6 +544,70 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
                 Return True
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Compressor/Expander: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions")
+            str.AppendLine()
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Calculation mode: " & CalcMode.ToString)
+            Select Case CalcMode
+                Case CalculationMode.Delta_P
+                    str.AppendLine("    Pressure increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
+                Case CalculationMode.OutletPressure
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+            End Select
+            str.AppendLine("    Efficiency: " & Convert.ToDouble(EficienciaAdiabatica).ToString(numberformat, ci))
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            Select Case CalcMode
+                Case CalculationMode.Delta_P
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+                Case CalculationMode.OutletPressure
+                    str.AppendLine("    Pressure increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
+            End Select
+            str.AppendLine("    Temperature increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Power required/generated: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ)).ToString(numberformat, ci) & " " & su.heatflow)
+
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Calculation Mode") Then
+                Return "Select the variable to specify for the calculation of the Compressor/Expander."
+            ElseIf p.Equals("Pressure Change (+)/(-)") Then
+                Return "If you chose the 'Pressure Variation' calculation mode, enter a positive value to simulate a compressor, or a negative one to simulate an expander."
+            ElseIf p.Equals("Outlet Pressure") Then
+                Return "If you chose the 'Outlet Pressure' calculation mode, enter the desired outlet pressure. Expansion or compression will be calculated accordingly."
+            ElseIf p.Equals("Efficiency (%)") Then
+                Return "Enter the isentropic efficiency of the compressor. 100% efficiency means a totally isentropic process."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

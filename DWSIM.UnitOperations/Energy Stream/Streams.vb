@@ -257,6 +257,22 @@ Namespace Streams
             End Get
         End Property
 
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            str.AppendLine("Energy Stream : " & Me.GraphicObject.Tag)
+            str.AppendLine()
+            str.AppendLine("Heat Flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyFlow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
+
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            Return "Amount of heat flow carried by this stream."
+        End Function
+
 #Region "    CAPE-OPEN Error Interfaces"
 
         Sub ThrowCAPEException(ByRef ex As Exception, ByVal name As String, ByVal description As String, ByVal interf As String, ByVal moreinfo As String, ByVal operation As String, ByVal scope As String, ByVal code As Integer)

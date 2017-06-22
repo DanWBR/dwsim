@@ -4,7 +4,7 @@ using Eto.Drawing;
 using DWSIM.UI.Forms;
 using System.Threading;
 using System.Diagnostics;
-using DWSIM.UI.Forms.Controls;
+using DWSIM.UI.Forms.Shared;
 using System.Linq;
 
 namespace DWSIM.UI
@@ -45,8 +45,8 @@ namespace DWSIM.UI
             btn1.Click += (sender, e) => {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File (DWSIM 5)".Localize(), new[] { ".dwxz5" }));
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File (DWSIM 4)".Localize(), new[] { ".dwxml", ".dwxmz" }));
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File v5".Localize(), new[] { ".dwxz5" }));
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File v4".Localize(), new[] { ".dwxml", ".dwxmz" }));
                 dialog.Filters.Add(new FileDialogFilter("Compound Creator Project".Localize(), new[] { ".dwcsd" }));
                 dialog.Filters.Add(new FileDialogFilter("Data Regression Project".Localize(), new[] { ".dwrsd" }));
                 dialog.MultiSelect = false;

@@ -32,6 +32,11 @@ Namespace UnitOperations
 
         Inherits UnitOperations.UnitOpBaseClass
 
+        Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double
+        Dim RLD, C, VGI, SURGE, TR, VMAX, K As Double
+        Dim BeH, BSGH, BSLH, AH, DH As Double
+        Dim BeV, BSGV, BSLV, AV, DV As Double
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Vessel
 
         Protected m_DQ As Nullable(Of Double)
@@ -444,6 +449,33 @@ Namespace UnitOperations
                 End With
             End If
 
+            'SIZING
+
+            Me.rhol = mix.Phases(1).Properties.density.GetValueOrDefault
+            Me.rhov = mix.Phases(2).Properties.density.GetValueOrDefault
+            Me.ql = mix.Phases(1).Properties.volumetric_flow.GetValueOrDefault
+            Me.qv = mix.Phases(2).Properties.volumetric_flow.GetValueOrDefault
+            Me.wl = mix.Phases(1).Properties.massflow.GetValueOrDefault
+            Me.wv = mix.Phases(2).Properties.massflow.GetValueOrDefault
+            Me.rhoe = mix.Phases(0).Properties.density.GetValueOrDefault
+            Me.qe = mix.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+
+            Me.RLD = 3
+            Me.C = 80
+            Me.VMAX = 2
+            Me.TR = 5
+            Me.K = 0.0692
+            Me.SURGE = 1.2
+            Me.VGI = 90
+
+            AppendDebugLine("Sizing horizontal separator...")
+
+            SizeHorizontal()
+
+            AppendDebugLine("Sizing vertical separator...")
+
+            SizeVertical()
+
         End Sub
 
         Public Overrides Sub DeCalculate()
@@ -623,6 +655,188 @@ Namespace UnitOperations
                 Return True
             End Get
         End Property
+
+        Private Sub SizeVertical()
+
+            Try
+
+                Dim qv As Double = Me.qv * Me.SURGE
+                Dim ql As Double = Me.ql * Me.SURGE
+
+                Dim tres As Double = Me.TR
+
+                Dim rho_ml As Double = Me.rhol
+                Dim rho_ns As Double = Me.rhoe
+
+                Dim vk As Double = Me.K * ((rho_ml - Me.rhov) / Me.rhov) ^ 0.5
+                Dim vp As Double = Me.VGI / 100 * vk
+                Dim At As Double = qv / vp
+
+                Dim dmin As Double = (4 * At / Math.PI) ^ 0.5
+                Dim lmin As Double = Me.RLD * dmin
+
+                'bocal de entrada
+                Dim vmaxbe As Double = Me.C / (rho_ns) ^ 0.5
+                Dim aminbe As Double = (qv + ql) / (vmaxbe)
+                Dim dminbe As Double = (4 * aminbe / Math.PI) ^ 0.5
+
+                'bocal de gas
+                Dim vmaxbg As Double = Me.C / (Me.rhov) ^ 0.5
+                Dim aminbg As Double = (qv) / (vmaxbg)
+                Dim dminbg As Double = (4 * aminbg / Math.PI) ^ 0.5
+
+                'bocal de liquido
+                Dim vmaxbl As Double = Me.VMAX
+                Dim aminbl2 As Double = (ql) / (vmaxbl)
+                Dim dminbl As Double = (4 * aminbl2 / Math.PI) ^ 0.5
+
+                BSLV = dminbl
+                BSGV = dminbg
+                BeV = dminbe
+
+                DV = dmin
+                AV = lmin
+
+            Catch ex As Exception
+
+            End Try
+
+        End Sub
+
+        Private Sub SizeHorizontal()
+
+            Try
+
+                Dim qv As Double = Me.qv * Me.SURGE
+                Dim ql As Double = Me.ql * Me.SURGE
+
+                Dim rho_ml As Double = Me.rhol
+                Dim rho_ns As Double = Me.rhoe
+
+                Dim x, y, l_d, dv, dl, vl1, vl2, cv As Double
+
+                Dim vk As Double = Me.K * ((rho_ml - Me.rhov) / Me.rhov) ^ 0.5
+                Dim vp As Double = Me.VGI / 100 * vk
+
+                'bocal de entrada
+                Dim vmaxbe As Double = Me.C / (rho_ns) ^ 0.5
+                Dim aminbe As Double = (qv + ql) / (vmaxbe)
+                Dim dminbe As Double = (4 * aminbe / Math.PI) ^ 0.5
+
+                'bocal de gas
+                Dim vmaxbg As Double = Me.C / (Me.rhov) ^ 0.5
+                Dim aminbg As Double = (qv) / (vmaxbg)
+                Dim dminbg As Double = (4 * aminbg / Math.PI) ^ 0.5
+
+                'bocal de liquido
+                Dim vmaxbl As Double = Me.VMAX
+                Dim aminbl2 As Double = (ql) / (vmaxbl)
+                Dim dminbl As Double = (4 * aminbl2 / Math.PI) ^ 0.5
+
+                'vaso
+                Dim tr As Double = Me.TR
+
+                l_d = Me.RLD
+
+                x = 0.01
+                Do
+                    y = (1 / Math.PI) * Math.Acos(1 - 2 * x) - (2 / Math.PI) * (1 - 2 * x) * (x * (1 - x)) ^ 0.5
+                    dv = (4 / Math.PI * qv / (vp)) ^ 0.5 * ((x / y) / l_d) ^ 0.5
+                    dl = ((4 / (Math.PI * l_d)) * (ql) * Convert.ToDouble(tr * 60) / (1 - y)) ^ (1 / 3)
+                    x += 0.0001
+                Loop Until Math.Abs(dv - dl) < 0.0001 Or x >= 0.5
+                vl1 = (ql) * tr / (1 / 60)
+                vl2 = (1 - y) * Math.PI * dl ^ 3 / 4 * l_d
+                If vl2 < vl1 Then
+                    Do
+                        vl2 = (1 - y) * Math.PI * dl ^ 3 / 4 * l_d
+                        dl = dl * 1.001
+                    Loop Until Math.Abs(vl2 - vl1) < 0.001
+                End If
+
+                Dim diam As Double
+                If dl > dv Then diam = dl
+                If dv > dl Then diam = dv
+
+                cv = l_d * diam
+
+                BSLH = dminbl
+                BSGH = dminbg
+                BeH = dminbe
+
+                DH = diam
+                AH = cv
+
+            Catch ex As Exception
+
+            End Try
+
+        End Sub
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Gas/Liquid Separator: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions")
+            str.AppendLine()
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Total mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Total volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Vapor mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(1).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Vapor volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(1).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Liquid mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(2).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Liquid volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(2).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Sizing parameters")
+            str.AppendLine()
+            str.AppendLine("    L/D ratio: " & RLD.ToString(numberformat, ci))
+            str.AppendLine("    Liquid residence time: " & SystemsOfUnits.Converter.ConvertFromSI(su.time, TR * 60).ToString(numberformat, ci) & " " & su.time)
+            str.AppendLine("    Surge factor: " & SURGE.ToString(numberformat, ci))
+            str.AppendLine()
+            str.AppendLine("Sizing results - vertical separator")
+            str.AppendLine()
+            str.AppendLine("    Inlet noozle diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, BeV).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Outlet gas noozle diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, BSGV).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Outlet liquid noozle diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, BSLV).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Separator diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, DV).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Separator height: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, AV).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine()
+            str.AppendLine("Sizing results - horizontal separator")
+            str.AppendLine()
+            str.AppendLine("    Inlet noozle diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, BeH).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Outlet gas noozle diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, BSGH).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Outlet liquid noozle diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, BSLH).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Separator diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, DH).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Separator length: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, AH).ToString(numberformat, ci) & " " & su.diameter)
+
+            Return str.ToString
+
+        End Function
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Override Separation Pressure") Then
+                Return "Overrides the separation pressure. Enabling this setting requires an energy stream connected to the separator."
+            ElseIf p.Equals("Separation Pressure") Then
+                Return "If the separation pressure is overriden, enter the desired value."
+            ElseIf p.Equals("Override Separation Temperature") Then
+                Return "Overrides the separation temperature. Enabling this setting requires an energy stream connected to the separator."
+            ElseIf p.Equals("Separation Temperature") Then
+                Return "If the separation temperature is overriden, enter the desired value."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

@@ -21,7 +21,7 @@ Module Extensions
 
             Dim retstr As String = "{"
             For Each d As Double In vector
-                retstr += d.ToString(ci) + "; "
+                retstr += d.ToString("G6", ci) + "; "
             Next
             retstr = retstr.TrimEnd(New Char() {";"c, " "c})
             retstr += "}"
@@ -30,7 +30,7 @@ Module Extensions
 
         ElseIf vector.Length > 0 Then
 
-            Return vector(0).ToString(ci)
+            Return vector(0).ToString("G6", ci)
 
         Else
 

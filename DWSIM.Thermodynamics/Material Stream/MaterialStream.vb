@@ -31,6 +31,7 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports System.Windows.Forms
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports System.Globalization
 
 Namespace Streams
 
@@ -5811,7 +5812,723 @@ Namespace Streams
                 Return Phases.Values.ToArray
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            PropertyPackage.CurrentMaterialStream = Me
+
+            Dim props As String() = PropertyPackage.GetSinglePhasePropList()
+            Dim overallprops As String() = PropertyPackage.GetOverallPropList()
+            Dim comps As String() = PropertyPackage.RET_VNAMES()
+
+            Dim units As IUnitsOfMeasure = GetFlowsheet().FlowsheetOptions.SelectedUnitSystem
+
+            Dim results As New CalculationResults
+
+            Dim ny, nl1, nl2, ns, vz(), wz(), vnz(), wnz() As Double, i As Integer
+
+            ny = Phases(2).Properties.molarfraction.GetValueOrDefault
+            nl1 = Phases(3).Properties.molarfraction.GetValueOrDefault
+            nl2 = Phases(4).Properties.molarfraction.GetValueOrDefault
+            ns = Phases(7).Properties.molarfraction.GetValueOrDefault
+
+            results.Data.Add("SPACE00", Nothing)
+            results.Data.Add("Stream Temperature", New List(Of Double) From {Me.Phases(0).Properties.temperature.GetValueOrDefault.ConvertFromSI(units.temperature)})
+            results.DataUnits.Add("Stream Temperature", GetPropUnits("temperature", "", units))
+            results.Data.Add("Stream Pressure", New List(Of Double) From {Me.Phases(0).Properties.pressure.GetValueOrDefault.ConvertFromSI(units.pressure)})
+            results.DataUnits.Add("Stream Pressure", GetPropUnits("pressure", "", units))
+            results.Data.Add("Stream Enthalpy", New List(Of Double) From {Me.Phases(0).Properties.enthalpy.GetValueOrDefault.ConvertFromSI(units.enthalpy)})
+            results.DataUnits.Add("Stream Enthalpy", GetPropUnits("enthalpy", "", units))
+            results.Data.Add("Stream Entropy", New List(Of Double) From {Me.Phases(0).Properties.entropy.GetValueOrDefault.ConvertFromSI(units.entropy)})
+            results.DataUnits.Add("Stream Entropy", GetPropUnits("entropy", "", units))
+            results.Data.Add("SPACE0010", Nothing)
+            results.Data.Add("Vapor Phase Molar Fraction", New List(Of Double) From {Me.Phases(2).Properties.molarfraction.GetValueOrDefault})
+            results.DataUnits.Add("Vapor Phase Molar Fraction", "")
+            results.Data.Add("Liquid Phase 1 Molar Fraction", New List(Of Double) From {Me.Phases(3).Properties.molarfraction.GetValueOrDefault})
+            results.DataUnits.Add("Liquid Phase 1 Molar Fraction", "")
+            results.Data.Add("Liquid Phase 2 Molar Fraction", New List(Of Double) From {Me.Phases(4).Properties.molarfraction.GetValueOrDefault})
+            results.DataUnits.Add("Liquid Phase 2 Molar Fraction", "")
+            results.Data.Add("Solid Phase Molar Fraction", New List(Of Double) From {Me.Phases(7).Properties.molarfraction.GetValueOrDefault})
+            results.DataUnits.Add("Solid Phase Molar Fraction", "")
+
+
+            If (ny > 0.0000000001# And ny < 0.9999999999#) OrElse nl2 > 0.000000001# OrElse ns > 0.0# Then
+
+                results.Data.Add("SPACE00000000", Nothing)
+                results.Data.Add("[Overall] Mass Flow", New List(Of Double) From {Me.Phases(0).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow)})
+                results.DataUnits.Add("[Overall] Mass Flow", GetPropUnits("flow", "mass", units))
+                results.Data.Add("[Overall] Molar Flow", New List(Of Double) From {Me.Phases(0).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow)})
+                results.DataUnits.Add("[Overall] Molar Flow", GetPropUnits("flow", "mole", units))
+                results.Data.Add("[Overall] Volumetric Flow", New List(Of Double) From {Me.Phases(0).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow)})
+                results.DataUnits.Add("[Overall] Volumetric Flow", units.volumetricFlow)
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Overall").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Overall").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Overall").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Overall").ConvertFromSI(units.massflow).ToArray
+
+                results.Data.Add("SPACE1", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Overall] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.DataUnits.Add("[Overall] " + comp + " Mole Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE2", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Overall] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.DataUnits.Add("[Overall] " + comp + " Mass Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE3", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Overall] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.DataUnits.Add("[Overall] " + comp + " Mole Flow", units.molarflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE4", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Overall] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.DataUnits.Add("[Overall] " + comp + " Mass Flow", units.massflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE5", Nothing)
+                For Each p As String In overallprops
+                    results.Data.Add("[Overall] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Overall").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Overall] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                Next
+
+            End If
+
+            If ny > 0.00001# Then
+                results.Data.Add("SPACE000", Nothing)
+                results.Data.Add("[Vapor Phase] Mass Flow", New List(Of Double) From {Me.Phases(2).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow)})
+                results.DataUnits.Add("[Vapor Phase] Mass Flow", GetPropUnits("flow", "mass", units))
+                results.Data.Add("[Vapor Phase] Molar Flow", New List(Of Double) From {Me.Phases(2).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow)})
+                results.DataUnits.Add("[Vapor Phase] Molar Flow", GetPropUnits("flow", "mole", units))
+                results.Data.Add("[Vapor Phase] Volumetric Flow", New List(Of Double) From {Me.Phases(2).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow)})
+                results.DataUnits.Add("[Vapor Phase] Volumetric Flow", units.volumetricFlow)
+                results.Data.Add("[Vapor Phase] Phase Mole Fraction", GetSinglePhaseProp2("phasefraction", "mole", "Vapor"))
+                results.DataUnits.Add("[Vapor Phase] Phase Mole Fraction", "")
+                results.Data.Add("[Vapor Phase] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Vapor"))
+                results.DataUnits.Add("[Vapor Phase] Phase Mass Fraction", "")
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Vapor").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Vapor").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Vapor").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Vapor").ConvertFromSI(units.massflow).ToArray
+
+                results.Data.Add("SPACE11", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Vapor Phase] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.DataUnits.Add("[Vapor Phase] " + comp + " Mole Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE21", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Vapor Phase] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.DataUnits.Add("[Vapor Phase] " + comp + " Mass Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE31", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Vapor Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.DataUnits.Add("[Vapor Phase] " + comp + " Mole Flow", units.molarflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE41", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Vapor Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.DataUnits.Add("[Vapor Phase] " + comp + " Mass Flow", units.massflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE51", Nothing)
+                For Each p As String In props
+                    results.Data.Add("[Vapor Phase] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Vapor").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Vapor Phase] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                Next
+
+            End If
+
+            If nl1 > 0.00001# Then
+                results.Data.Add("SPACE0000", Nothing)
+                results.Data.Add("[Liquid Phase] Mass Flow", New List(Of Double) From {Me.Phases(3).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow)})
+                results.DataUnits.Add("[Liquid Phase] Mass Flow", GetPropUnits("flow", "mass", units))
+                results.Data.Add("[Liquid Phase] Molar Flow", New List(Of Double) From {Me.Phases(3).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow)})
+                results.DataUnits.Add("[Liquid Phase] Molar Flow", GetPropUnits("flow", "mole", units))
+                results.Data.Add("[Liquid Phase] Volumetric Flow", New List(Of Double) From {Me.Phases(3).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow)})
+                results.DataUnits.Add("[Liquid Phase] Volumetric Flow", units.volumetricFlow)
+                results.Data.Add("[Liquid Phase] Phase Mole Fraction", GetSinglePhaseProp2("phasefraction", "mole", "Liquid"))
+                results.DataUnits.Add("[Liquid Phase] Phase Mole Fraction", "")
+                results.Data.Add("[Liquid Phase] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Liquid"))
+                results.DataUnits.Add("[Liquid Phase] Phase Mass Fraction", "")
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Liquid").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Liquid").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Liquid").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Liquid").ConvertFromSI(units.massflow).ToArray
+
+                results.Data.Add("SPACE12", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.DataUnits.Add("[Liquid Phase] " + comp + " Mole Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE22", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.DataUnits.Add("[Liquid Phase] " + comp + " Mass Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE32", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.DataUnits.Add("[Liquid Phase] " + comp + " Mole Flow", units.molarflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE42", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.DataUnits.Add("[Liquid Phase] " + comp + " Mass Flow", units.massflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE52", Nothing)
+                For Each p As String In props
+                    results.Data.Add("[Liquid Phase] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Liquid").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Liquid Phase] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                Next
+
+            End If
+
+
+            If nl2 > 0.00001# Then
+                results.Data.Add("SPACE00000", Nothing)
+                results.Data.Add("[Liquid Phase 2] Mass Flow", New List(Of Double) From {Me.Phases(4).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow)})
+                results.DataUnits.Add("[Liquid Phase 2] Mass Flow", GetPropUnits("flow", "mass", units))
+                results.Data.Add("[Liquid Phase 2] Molar Flow", New List(Of Double) From {Me.Phases(4).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow)})
+                results.DataUnits.Add("[Liquid Phase 2] Molar Flow", GetPropUnits("flow", "mole", units))
+                results.Data.Add("[Liquid Phase 2] Volumetric Flow", New List(Of Double) From {Me.Phases(4).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow)})
+                results.DataUnits.Add("[Liquid Phase 2] Volumetric Flow", units.volumetricFlow)
+                results.Data.Add("[Liquid Phase 2] Phase Mole Fraction", GetSinglePhaseProp2("phasefraction", "mole", "Liquid2"))
+                results.DataUnits.Add("[Liquid Phase 2] Phase Mole Fraction", "")
+                results.Data.Add("[Liquid Phase 2] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Liquid2"))
+                results.DataUnits.Add("[Liquid Phase 2] Phase Mass Fraction", "")
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Liquid2").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Liquid2").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Liquid2").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Liquid2").ConvertFromSI(units.massflow).ToArray
+
+                results.Data.Add("SPACE13", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mole Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE23", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mass Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE33", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mole Flow", units.molarflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE43", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Liquid Phase 2] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.DataUnits.Add("[Liquid Phase 2] " + comp + " Mass Flow", units.massflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE53", Nothing)
+                For Each p As String In props
+                    results.Data.Add("[Liquid Phase 2] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Liquid2").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Liquid Phase 2] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                Next
+
+            End If
+
+            If ns > 0.00001# Then
+                results.Data.Add("SPACE0000S", Nothing)
+                results.Data.Add("[Solid Phase] Mass Flow", New List(Of Double) From {Me.Phases(7).Properties.massflow.GetValueOrDefault.ConvertFromSI(units.massflow)})
+                results.DataUnits.Add("[Solid Phase] Mass Flow", GetPropUnits("flow", "mass", units))
+                results.Data.Add("[Solid Phase] Molar Flow", New List(Of Double) From {Me.Phases(7).Properties.molarflow.GetValueOrDefault.ConvertFromSI(units.molarflow)})
+                results.DataUnits.Add("[Solid Phase] Molar Flow", GetPropUnits("flow", "mole", units))
+                results.Data.Add("[Solid Phase] Volumetric Flow", New List(Of Double) From {Me.Phases(7).Properties.volumetric_flow.GetValueOrDefault.ConvertFromSI(units.volumetricFlow)})
+                results.DataUnits.Add("[Solid Phase] Volumetric Flow", units.volumetricFlow)
+                results.Data.Add("[Solid Phase] Phase Mole Fraction", GetSinglePhaseProp2("phasefraction", "mole", "Solid"))
+                results.DataUnits.Add("[Solid Phase] Phase Mole Fraction", "")
+                results.Data.Add("[Solid Phase] Phase Mass Fraction", GetSinglePhaseProp2("phasefraction", "mass", "Solid"))
+                results.DataUnits.Add("[Solid Phase] Phase Mass Fraction", "")
+
+                vz = GetSinglePhaseProp2("fraction", "mole", "Solid").ToArray
+                wz = GetSinglePhaseProp2("fraction", "mass", "Solid").ToArray
+                vnz = GetSinglePhaseProp2("flow", "mole", "Solid").ConvertFromSI(units.molarflow).ToArray
+                wnz = GetSinglePhaseProp2("flow", "mass", "Solid").ConvertFromSI(units.massflow).ToArray
+
+                results.Data.Add("SPACE12S", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Solid Phase] " + comp + " Mole Frac", New List(Of Double)({vz(i)}))
+                    results.DataUnits.Add("[Solid Phase] " + comp + " Mole Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE22S", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Solid Phase] " + comp + " Mass Frac", New List(Of Double)({wz(i)}))
+                    results.DataUnits.Add("[Solid Phase] " + comp + " Mass Frac", "")
+                    i += 1
+                Next
+                results.Data.Add("SPACE32S", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Solid Phase] " + comp + " Mole Flow", New List(Of Double)({vnz(i)}))
+                    results.DataUnits.Add("[Solid Phase] " + comp + " Mole Flow", units.molarflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE42S", Nothing)
+                i = 0
+                For Each comp As String In comps
+                    results.Data.Add("[Solid Phase] " + comp + " Mass Flow", New List(Of Double)({wnz(i)}))
+                    results.DataUnits.Add("[Solid Phase] " + comp + " Mass Flow", units.massflow)
+                    i += 1
+                Next
+                results.Data.Add("SPACE52SS", Nothing)
+                For Each p As String In props
+                    results.Data.Add("[Solid Phase] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Solid").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Solid Phase] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                Next
+
+            End If
+
+            results.TextOutput += "Calculation results for Material Stream " & Me.GraphicObject.Tag & vbCrLf & "Compounds: " & PropertyPackage.RET_VNAMES.ToArrayString & System.Environment.NewLine
+
+            Select Case Me.SpecType
+                Case Enums.StreamSpec.Temperature_and_Pressure
+                    results.TextOutput += "Specification: Temperature and Pressure" & System.Environment.NewLine
+                    results.TextOutput += "Temperature: " & Phases(0).Properties.temperature.GetValueOrDefault.ConvertFromSI(units.temperature).ToString & " " & units.temperature & System.Environment.NewLine
+                    results.TextOutput += "Pressure: " & Phases(0).Properties.pressure.GetValueOrDefault.ConvertFromSI(units.pressure).ToString & " " & units.pressure & System.Environment.NewLine
+                Case Enums.StreamSpec.Pressure_and_Enthalpy
+                    results.TextOutput += "Specification: Pressure and Enthalpy" & System.Environment.NewLine
+                    results.TextOutput += "Pressure: " & Phases(0).Properties.pressure.GetValueOrDefault.ConvertFromSI(units.pressure).ToString & " " & units.pressure & System.Environment.NewLine
+                    results.TextOutput += "Enthalpy: " & Phases(0).Properties.enthalpy.GetValueOrDefault.ConvertFromSI(units.enthalpy).ToString & " " & units.enthalpy & System.Environment.NewLine
+                Case Enums.StreamSpec.Pressure_and_Entropy
+                    results.TextOutput += "Specification: Pressure and Entropy" & System.Environment.NewLine
+                    results.TextOutput += "Pressure: " & Phases(0).Properties.pressure.GetValueOrDefault.ConvertFromSI(units.pressure).ToString & " " & units.pressure & System.Environment.NewLine
+                    results.TextOutput += "Entropy: " & Phases(0).Properties.entropy.GetValueOrDefault.ConvertFromSI(units.entropy).ToString & " " & units.entropy & System.Environment.NewLine
+                Case Enums.StreamSpec.Pressure_and_VaporFraction
+                    results.TextOutput += "Specification: Pressure and Vapor Fraction" & System.Environment.NewLine
+                    results.TextOutput += "Pressure: " & Phases(0).Properties.pressure.GetValueOrDefault.ConvertFromSI(units.pressure).ToString & " " & units.pressure & System.Environment.NewLine
+                    results.TextOutput += "Vapor Fraction: " & Phases(2).Properties.molarfraction.ToString & System.Environment.NewLine
+                Case Enums.StreamSpec.Temperature_and_VaporFraction
+                    results.TextOutput += "Specification: Temperature and Vapor Fraction" & System.Environment.NewLine
+                    results.TextOutput += "Temperature: " & Phases(0).Properties.temperature.GetValueOrDefault.ConvertFromSI(units.temperature).ToString & " " & units.temperature & System.Environment.NewLine
+                    results.TextOutput += "Vapor Fraction: " & Phases(2).Properties.molarfraction.ToString & System.Environment.NewLine
+            End Select
+
+            results.TextOutput += "Property Package: " & Me.PropertyPackage.Name & System.Environment.NewLine & System.Environment.NewLine
+
+            For Each d As KeyValuePair(Of String, List(Of Double)) In results.Data
+                Dim id As String = d.Key
+                If d.Key.Length > 36 Then id = d.Key.Substring(0, 36) & "..."
+                If d.Key.Contains("SPACE") Then
+                    results.TextOutput += System.Environment.NewLine
+                Else
+                    results.TextOutput += (id.PadRight(40) & d.Value.ToArray.ToArrayString(CultureInfo.CurrentUICulture).PadRight(10) & vbTab & results.DataUnits(d.Key)) & System.Environment.NewLine
+                End If
+            Next
+
+            Return results.TextOutput
+
+        End Function
+
+        Public Function GetSinglePhaseProp2(ByVal prop As String, ByVal basis As String, ByVal phaseLabel As String) As List(Of Double)
+            Dim results As Object = Nothing
+            Me.GetSinglePhaseProp(prop, phaseLabel, basis, results)
+            Return DirectCast(results, Double()).ToList
+        End Function
+
+        Public Shared Function GetPropUnits(prop As String, basis As String, su As IUnitsOfMeasure) As String
+
+            If prop.ToLower.Equals("criticalvolume") Then
+                Return su.spec_vol
+            ElseIf prop.ToLower.Equals("chemicalformula") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("structureformula") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("casregistrynumber") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("temperature") Then
+                Return su.temperature
+            ElseIf prop.ToLower.Equals("boilingpointtemperature") Then
+                Return su.temperature
+            ElseIf prop.ToLower.Equals("criticaltemperature") Then
+                Return su.temperature
+            ElseIf prop.ToLower.Equals("temperatureoffusion") Then
+                Return su.temperature
+            ElseIf prop.ToLower.Equals("enthalpyoffusion") Then
+                Return su.molar_enthalpy
+            ElseIf prop.ToLower.Equals("normalboilingpoint") Then
+                Return su.temperature
+            ElseIf prop.ToLower.Equals("boilingpointtemperature") Then
+                Return su.temperature
+            ElseIf prop.ToLower.Equals("pressure") Then
+                Return su.pressure
+            ElseIf prop.ToLower.Equals("vaporpressure") Then
+                Return su.pressure
+            ElseIf prop.ToLower.Equals("criticalpressure") Then
+                Return su.pressure
+            ElseIf prop.ToLower.Equals("flow") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.massflow
+                ElseIf basis.ToLower.Equals("mole") Then
+                    Return su.molarflow
+                Else
+                    Return su.volumetricFlow
+                End If
+            ElseIf prop.ToLower.Equals("compressibilityfactor") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("excessenthalpy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("enthalpy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("internalenergy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("gibbsenergy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("helmholtzenergy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("enthalpyf") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("enthalpynf") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("heatofvaporization") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("idealgasenthalpy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("idealgasenthalpyofformationat25c") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("idealgasgibbsfreeenergyofformationat25c") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.enthalpy
+                Else
+                    Return su.molar_enthalpy
+                End If
+            ElseIf prop.ToLower.Equals("excessentropy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("entropy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("entropyf") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("entropynf") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("idealgasentropy") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("heatcapacitycp") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("idealgasheatcapacity") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("heatcapacityofliquid") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("heatcapacityofsolid") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("heatcapacitycv") Then
+                If basis.ToLower.Equals("mass") Then
+                    Return su.entropy
+                Else
+                    Return su.molar_entropy
+                End If
+            ElseIf prop.ToLower.Equals("isothermalcompressibility") Then
+                Return su.compressibility
+            ElseIf prop.ToLower.Equals("bulkmodulus") Then
+                Return su.pressure
+            ElseIf prop.ToLower.Equals("joulethomsoncoefficient") Then
+                Return su.jouleThomsonCoefficient
+            ElseIf prop.ToLower.Equals("speedofsound") Then
+                Return su.speedOfSound
+            ElseIf prop.ToLower.Equals("viscosity") Then
+                Return su.viscosity
+            ElseIf prop.ToLower.Equals("viscosityofliquid") Then
+                Return su.viscosity
+            ElseIf prop.ToLower.Equals("viscosityofvapor") Then
+                Return su.viscosity
+            ElseIf prop.ToLower.Equals("thermalconductivity") Then
+                Return su.thermalConductivity
+            ElseIf prop.ToLower.Equals("thermalconductivityofliquid") Then
+                Return su.thermalConductivity
+            ElseIf prop.ToLower.Equals("thermalconductivityofvapor") Then
+                Return su.thermalConductivity
+            ElseIf prop.ToLower.Equals("fugacity") Then
+                Return su.pressure
+            ElseIf prop.ToLower.Equals("fugacitycoefficient") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("activitycoefficient") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("logfugacitycoefficient") Then
+                Return ""
+            ElseIf prop.ToLower.Equals("volume") Then
+                Return su.molar_volume
+            ElseIf prop.ToLower.Equals("density") Then
+                Return su.density
+            ElseIf prop.ToLower.Equals("densityofsolid") Then
+                Return su.density
+            ElseIf prop.ToLower.Equals("densityofliquid") Then
+                Return su.density
+            ElseIf prop.ToLower.Equals("molecularweight") Then
+                Return su.molecularWeight
+            Else
+                Return ""
+            End If
+
+        End Function
+
+
+        Public Function TranslateString(s As String) As String
+
+            If s.ToLower.Equals("criticalvolume") Then
+                Return "Critical Volume"
+            ElseIf s.ToLower.Equals("criticalcompressibilityfactor") Then
+                Return "Critical Compressibility Factor"
+            ElseIf s.ToLower.Equals("acentricfactor") Then
+                Return "Acentric Factor"
+            ElseIf s.ToLower.Equals("chemicalformula") Then
+                Return "Chemical Formula"
+            ElseIf s.ToLower.Equals("structureformula") Then
+                Return "Structure formula"
+            ElseIf s.ToLower.Equals("casregistrynumber") Then
+                Return "CAS Registry Number"
+            ElseIf s.ToLower.Equals("temperature") Then
+                Return "Temperature"
+            ElseIf s.ToLower.Equals("boilingpointtemperature") Then
+                Return "Boiling Point Temperature"
+            ElseIf s.ToLower.Equals("criticaltemperature") Then
+                Return "Critical Temperature"
+            ElseIf s.ToLower.Equals("normalboilingpoint") Then
+                Return "Normal Boiling Point"
+            ElseIf s.ToLower.Equals("boilingpointtemperature") Then
+                Return "Boiling Point Temperature"
+            ElseIf s.ToLower.Equals("pressure") Then
+                Return "Pressure"
+            ElseIf s.ToLower.Equals("vaporpressure") Then
+                Return "Vapor Pressure"
+            ElseIf s.ToLower.Equals("criticalpressure") Then
+                Return "Critical Pressure"
+            ElseIf s.ToLower.Equals("flow") Then
+                Return "Vazão"
+            ElseIf s.ToLower.Equals("compressibilityfactor") Then
+                Return "Compressibility Factor"
+            ElseIf s.ToLower.Equals("excessenthalpy") Then
+                Return "Excess Enthalpy"
+            ElseIf s.ToLower.Equals("enthalpy") Then
+                Return "Enthalpy"
+            ElseIf s.ToLower.Equals("heatofvaporization") Then
+                Return "Heat of Vaporization"
+            ElseIf s.ToLower.Equals("idealgasenthalpy") Then
+                Return "Ideal gas Enthalpy"
+            ElseIf s.ToLower.Equals("idealgasenthalpyofformationat25c") Then
+                Return "Ideal gas Enthalpy of Formation at 25 C"
+            ElseIf s.ToLower.Equals("idealgasgibbsfreeenergyofformationat25c") Then
+                Return "Ideal Gas Gibbs Free Energy of Formation at 25 C"
+            ElseIf s.ToLower.Equals("excessentropy") Then
+                Return "Excess Entropy"
+            ElseIf s.ToLower.Equals("entropy") Then
+                Return "Entropy"
+            ElseIf s.ToLower.Equals("idealgasentropy") Then
+                Return "Ideal Gas Entropy"
+            ElseIf s.ToLower.Equals("heatcapacitycp") Then
+                Return "Heat Capacity Cp"
+            ElseIf s.ToLower.Equals("idealgasheatcapacity") Then
+                Return "Ideal Gas Heat Capacity"
+            ElseIf s.ToLower.Equals("heatcapacityofliquid") Then
+                Return "Liquid Heat Capacity"
+            ElseIf s.ToLower.Equals("heatcapacityofsolid") Then
+                Return "Solid Heat Capacity"
+            ElseIf s.ToLower.Equals("heatcapacitycv") Then
+                Return "Heat Capacity Cv"
+            ElseIf s.ToLower.Equals("viscosity") Then
+                Return "Viscosity"
+            ElseIf s.ToLower.Equals("viscosityofliquid") Then
+                Return "Liquid Viscosity"
+            ElseIf s.ToLower.Equals("viscosityofvapor") Then
+                Return "Vapor Viscosity"
+            ElseIf s.ToLower.Equals("thermalconductivity") Then
+                Return "Thermal Conductivity"
+            ElseIf s.ToLower.Equals("thermalconductivityofliquid") Then
+                Return "Liquid Thermal Conductivity"
+            ElseIf s.ToLower.Equals("thermalconductivityofvapor") Then
+                Return "Vapor Thermal Conductivity"
+            ElseIf s.ToLower.Equals("fugacity") Then
+                Return "Fugacity"
+            ElseIf s.ToLower.Equals("fugacitycoefficient") Then
+                Return "Fugacity Coefficient"
+            ElseIf s.ToLower.Equals("activitycoefficient") Then
+                Return "Activity Coefficient"
+            ElseIf s.ToLower.Equals("logfugacitycoefficient") Then
+                Return "Log Fugacity Coefficient"
+            ElseIf s.ToLower.Equals("volume") Then
+                Return "Volume"
+            ElseIf s.ToLower.Equals("density") Then
+                Return "Density"
+            ElseIf s.ToLower.Equals("densityofsolid") Then
+                Return "Solid Density"
+            ElseIf s.ToLower.Equals("densityofliquid") Then
+                Return "Liquid Density"
+            ElseIf s.ToLower.Equals("molecularweight") Then
+                Return "Molecular Weight"
+            ElseIf s.ToLower.Equals("isothermalcompressibility") Then
+                Return "Isothermal Compressibility"
+            ElseIf s.ToLower.Equals("bulkmodulus") Then
+                Return "Bulk Modulus"
+            ElseIf s.ToLower.Equals("joulethomsoncoefficient") Then
+                Return "Joule Thomson Coefficient"
+            ElseIf s.ToLower.Equals("internalenergy") Then
+                Return "Internal Energy"
+            ElseIf s.ToLower.Equals("gibbsenergy") Then
+                Return "Gibbs Free Energy"
+            ElseIf s.ToLower.Equals("helmholtzenergy") Then
+                Return "Helmholtz Free Energy"
+            ElseIf s.ToLower.Equals("speedofsound") Then
+                Return "Speed of Sound"
+            ElseIf s.ToLower.Equals("smiles") Then
+                Return "SMILES"
+            ElseIf s.ToLower.Equals("inchi") Then
+                Return "InChI"
+            ElseIf s.ToLower.Equals("temperatureoffusion") Then
+                Return "Temperature of Fusion"
+            ElseIf s.ToLower.Equals("enthalpyoffusion") Then
+                Return "Enthalpy of Fusion"
+            ElseIf s.ToLower.Equals("uniquacr") Then
+                Return "UNIQUAC R"
+            ElseIf s.ToLower.Equals("uniquacq") Then
+                Return "UNIQUAC Q"
+            ElseIf s.ToLower.Equals("unifac_info") Then
+                Return "Has UNIFAC Structure Info"
+            ElseIf s.ToLower.Equals("modfac_info") Then
+                Return "Has Modified UNIFAC Structure Info"
+            Else
+                Return s
+            End If
+
+        End Function
+
+
     End Class
+
+    Public Class CalculationResults
+
+        Public Property Data As Dictionary(Of String, List(Of Double))
+        Public Property DataUnits As Dictionary(Of String, String)
+        Public Property CompoundData As Dictionary(Of String, Object)
+        Public Property TextOutput As String = ""
+        Public Property Units As SystemsOfUnits.Units
+        Public Property ExceptionResult As Exception
+        Public Property NumberFormat As String = "0.####"
+        Public Property Language As String = "en"
+
+        Sub New()
+            Data = New Dictionary(Of String, List(Of Double))
+            DataUnits = New Dictionary(Of String, String)
+            CompoundData = New Dictionary(Of String, Object)
+            Units = New SystemsOfUnits.SI
+        End Sub
+
+    End Class
+
 
 End Namespace
 

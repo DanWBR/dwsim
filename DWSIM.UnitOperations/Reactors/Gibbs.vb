@@ -2020,6 +2020,65 @@ Namespace Reactors
             End Get
         End Property
 
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            str.AppendLine("Reactor: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Calculation Parameters")
+            str.AppendLine()
+            str.AppendLine("    Calculation mode: " & ReactorOperationMode.ToString)
+            str.AppendLine("    Pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.DeltaP.GetValueOrDefault).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            Select Case Me.ReactorOperationMode
+                Case OperationMode.Adiabatic
+                    str.AppendLine("    Outlet Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                Case OperationMode.Isothermic
+                    str.AppendLine("    Heat added/removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
+                Case OperationMode.OutletTemperature
+                    str.AppendLine("    Outlet Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Heat added/removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
+            End Select
+            str.AppendLine("    Initial Gibbs Free Energy Value: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.InitialGibbsEnergy).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Final Gibbs Free Energy Value: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.FinalGibbsEnergy).ToString(numberformat, ci) & " " & su.heatflow)
+            If SolvMethod = SolvingMethod.DirectMinimization Then
+                str.AppendLine("    Element Balance: " & Me.ElementBalance.ToString("R"))
+            Else
+                str.AppendLine()
+                str.AppendLine("Reaction Extents")
+                str.AppendLine()
+                If Not Me.ReactionExtents Is Nothing Then
+                    For Each dbl As KeyValuePair(Of String, Double) In Me.ReactionExtents
+                        str.AppendLine("    " & Me.GetFlowsheet.Reactions(dbl.Key).Name & ": " & (dbl.Value * 100).ToString(numberformat, ci))
+                    Next
+                End If
+            End If
+            str.AppendLine()
+            str.AppendLine("Compound Conversions")
+            str.AppendLine()
+            For Each dbl As KeyValuePair(Of String, Double) In Me.ComponentConversions
+                If dbl.Value > 0.0# Then str.AppendLine("    " & dbl.Key & ": " & (dbl.Value * 100).ToString(numberformat, ci) & "%")
+            Next
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Calculation Mode") Then
+                Return "Select the calculation mode of this reactor."
+            ElseIf p.Equals("Pressure Drop") Then
+                Return "Enter the desired pressure drop for this reactor."
+            ElseIf p.Equals("Outlet Temperature") Then
+                Return "If you chose 'Outlet Temperature' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace

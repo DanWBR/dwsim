@@ -1567,6 +1567,113 @@ Namespace UnitOperations
                 Return True
             End Get
         End Property
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, istr2 As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            istr2 = Me.GetInletMaterialStream(1)
+
+            str.AppendLine("Heat Exchanger: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions (stream 1)")
+            str.AppendLine()
+            istr.PropertyPackage.CurrentMaterialStream = istr
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Inlet conditions (stream 2)")
+            str.AppendLine()
+            istr2.PropertyPackage.CurrentMaterialStream = istr2
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr2.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr2.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr2.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr2.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr2.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr2.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr2.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Exchanger type: " & Me.FlowDir.ToString)
+            Select Case Me.CalculationMode
+                Case HeatExchangerCalcMode.CalcTempColdOut
+                    str.AppendLine("    Hot fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.HotSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Exchange area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area).ToString(numberformat, ci) & " " & su.area)
+                Case HeatExchangerCalcMode.CalcTempHotOut
+                    str.AppendLine("    Cold fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ColdSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Exchange area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area).ToString(numberformat, ci) & " " & su.area)
+                Case HeatExchangerCalcMode.CalcBothTemp
+                    str.AppendLine("    Heat exchanged: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Exchange area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area).ToString(numberformat, ci) & " " & su.area)
+                Case HeatExchangerCalcMode.CalcArea
+                    str.AppendLine("    Overall heat transfer coefficient: " & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient).ToString(numberformat, ci) & " " & su.heat_transf_coeff)
+                    If Me.DefinedTemperature = SpecifiedTemperature.Cold_Fluid Then
+                        str.AppendLine("    Cold fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ColdSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    Else
+                        str.AppendLine("    Hot fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.HotSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    End If
+            End Select
+            str.AppendLine("    Hot fluid pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.HotSidePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine("    Cold fluid pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ColdSidePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            Select Case Me.CalculationMode
+                Case HeatExchangerCalcMode.CalcTempColdOut
+                    str.AppendLine("    Cold fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ColdSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Overall heat transfer coefficient: " & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient).ToString(numberformat, ci) & " " & su.heat_transf_coeff)
+                    str.AppendLine("    Heat exchanged: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q).ToString(numberformat, ci) & " " & su.heatflow)
+                Case HeatExchangerCalcMode.CalcTempHotOut
+                    str.AppendLine("    Hot fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.HotSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Overall heat transfer coefficient: " & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient).ToString(numberformat, ci) & " " & su.heat_transf_coeff)
+                    str.AppendLine("    Heat exchanged: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q).ToString(numberformat, ci) & " " & su.heatflow)
+                Case HeatExchangerCalcMode.CalcBothTemp
+                    str.AppendLine("    Cold fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ColdSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Hot fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.HotSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Overall heat transfer coefficient: " & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient).ToString(numberformat, ci) & " " & su.heat_transf_coeff)
+                Case HeatExchangerCalcMode.CalcArea
+                    str.AppendLine("    Heat exchanged: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Exchange area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area).ToString(numberformat, ci) & " " & su.area)
+            End Select
+            str.AppendLine("    Log mean temperature difference (LMTD): " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD).ToString(numberformat, ci) & " " & su.deltaT)
+
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Calculation Mode") Then
+                Return "Select the Heat Exchanger calculation mode."
+            ElseIf p.Equals("Flow Direction") Then
+                Return "Select the flow direction of the inlet streams."
+            ElseIf p.Equals("Defined Temperature (for Calc Area Mode)") Then
+                Return "Select which temperature you will define if you chose the 'Area' calculation mode."
+            ElseIf p.Equals("Pressure Drop (Hot Fluid)") Then
+                Return "Enter the pressure drop of the hot fluid."
+            ElseIf p.Equals("Pressure Drop (Cold Fluid)") Then
+                Return "Enter the pressure drop of the cold fluid."
+            ElseIf p.Equals("Outlet Temperature (Cold Fluid)") Then
+                Return "Enter the outlet temperature of the cold fluid, if required by the selected calculation mode."
+            ElseIf p.Equals("Outlet Temperature (Hot Fluid)") Then
+                Return "Enter the outlet temperature of the hot fluid, if required by the selected calculation mode."
+            ElseIf p.Equals("Overall HTC") Then
+                Return "Enter the overall Heat Exchange Coefficient, if required by the selected calculation mode."
+            ElseIf p.Equals("Heat Exchange Area") Then
+                Return "Enter the Heat Exchange Area, if required by the selected calculation mode."
+            ElseIf p.Equals("Heat Exchanged") Then
+                Return "Enter the Heat Exchanged, if required by the selected calculation mode."
+            Else
+                Return p
+            End If
+        End Function
     End Class
 
 End Namespace

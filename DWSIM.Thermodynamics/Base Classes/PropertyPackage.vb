@@ -10896,6 +10896,23 @@ Final3:
             Return Activator.CreateInstance(t)
         End Function
 
+        Public Shared Function GetOverallPropList() As String()
+            Dim arr As New List(Of String)
+            With arr
+                .Add("heatCapacityCp")
+                .Add("heatCapacityCv")
+                .Add("thermalConductivity")
+                .Add("volume")
+                .Add("density")
+                .Add("enthalpy")
+                .Add("entropy")
+                .Add("molecularWeight")
+            End With
+            Dim arr2(arr.Count - 1) As String
+            Array.Copy(arr.ToArray(), arr2, arr.Count)
+            Return arr2
+        End Function
+
     End Class
 
     ''' <summary>

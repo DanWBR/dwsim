@@ -164,4 +164,8 @@
 
     Function CloneJSON() As Object
 
+    Function GetPropertyDescription(prop As String) As String
+
+    Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
 End Interface

@@ -92,7 +92,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Common.cs" />
     <Compile Include="Forms\About.cs" />
     <Compile Include="Forms\About.eto.cs">
       <DependentUpon>About.cs</DependentUpon>
@@ -162,6 +161,10 @@
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj">
+      <Project>{2ffd2514-e4f9-4c19-b38e-b77560585d61}</Project>
+      <Name>DWSIM.UI.Desktop.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

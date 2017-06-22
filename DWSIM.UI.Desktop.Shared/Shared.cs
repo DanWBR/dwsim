@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
 
-namespace DWSIM.UI.Forms.Controls
+namespace DWSIM.UI.Forms.Shared
 {
-    static class Common
+    public static class Common
     {
 
         public static bool IsValidDouble(string s)
@@ -61,7 +61,7 @@ namespace DWSIM.UI.Forms.Controls
                 Resizable = true,
                 Icon = Eto.Drawing.Icon.FromResource("DWSIM.UI.Forms.Resources.Icons.DWSIM_ico.ico")
             };
-        
+
             var tabctrl = new TabControl();
             foreach (var tab in tabs)
             {
@@ -125,6 +125,21 @@ namespace DWSIM.UI.Forms.Controls
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
             var tr = new TableRow(txt, null, edittext);
+
+            container.AddRow(tr);
+
+            return edittext;
+
+        }
+
+        public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, Action<TextArea, EventArgs> command)
+        {
+
+            var edittext = new TextArea { Text = text, ReadOnly = ro};
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
+
+            var tr = new TableRow(edittext);
 
             container.AddRow(tr);
 
