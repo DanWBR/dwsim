@@ -18,9 +18,15 @@ namespace DWSIM.UI.Forms
         /// </summary>
         /// <param name="str">The string to be localized.</param>
         /// <returns>A localized version of the string.</returns>
-        public static string Localize(this String str)
+        public static string Localize(this String str, String prefix = null)
         {
-            return GetLocalizedString(str);
+            var translated = GetLocalizedString(prefix == null ? str.Replace(" ", string.Empty) : str.Replace(" ", string.Empty).Insert(0, prefix));
+            if (translated == str.Replace(" ", string.Empty)) {return str; } else {return translated;};
+        }
+
+        public static string GetLocalizationPrefix(this object obj)
+        {
+            return "Window_" + obj.GetType().Name + "_";
         }
 
         public static string GetLocalizedString(string text)
@@ -52,8 +58,7 @@ namespace DWSIM.UI.Forms
             }
 
         }
-
-
+        
         static public string AssemblyCopyright
         {
             get
@@ -67,7 +72,16 @@ namespace DWSIM.UI.Forms
             }
         }
 
+        public static bool IsValidDouble(this string s)
+        {
+            double d = 0;
+            return double.TryParse(s, out d);
+        }
 
+        public static double ToDouble(this string s)
+        {
+            return double.Parse(s);
+        }
 
     }
 }

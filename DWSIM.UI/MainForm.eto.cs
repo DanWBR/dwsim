@@ -38,22 +38,19 @@ namespace DWSIM.UI
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn8 = new Button() { Style = "main", Text = "Donate".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Donate_100px.png"), 40, 40, ImageInterpolation.Default) };
 
+            btn5.Click += (sender, e) => {
+                new Forms.Forms.GeneralSettings().GetForm().Show();
+            };
+
             btn1.Click += (sender, e) => {
-                var table = Common.GetDefaultContainer();
-                table.Tag = "Tab 1";
-                table.CreateAndAddLabelRow("Properties");
-                table.CreateAndAddLabelAndButtonRow("Test", "Button", imgprefix + "DWSIM_ico.png", null);
-                table.CreateAndAddEmptySpace();
-                var table2 = Common.GetDefaultContainer();
-                table2.Tag = "Tab 2";
-                table2.CreateAndAddStringEditorRow("Test", "Value", null);
-                table2.CreateAndAddEmptySpace();
-                var table3 = Common.GetDefaultContainer();
-                table3.Tag = "Tab 3";
-                table3.CreateAndAddCheckBoxRow("Test", true, null);
-                table3.CreateAndAddEmptySpace();
-                table3.CreateAndAddButtonRow("Button", null, null);
-                Common.GetDefaultTabbedForm("Editor", 400, 600, new []{table, table2, table3}).Show();
+                var dialog = new OpenFileDialog();
+                dialog.Title = "Open File".Localize();
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File (DWSIM 5)".Localize(), new[] { ".dwxz5" }));
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File (DWSIM 4)".Localize(), new[] { ".dwxml", ".dwxmz" }));
+                dialog.Filters.Add(new FileDialogFilter("Compound Creator Project".Localize(), new[] { ".dwcsd" }));
+                dialog.Filters.Add(new FileDialogFilter("Data Regression Project".Localize(), new[] { ".dwrsd" }));
+                dialog.MultiSelect = false;
+                dialog.ShowDialog(this);
             };
 
             btn7.Click += (sender, e) => new About().Show();

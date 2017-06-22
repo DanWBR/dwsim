@@ -221,5 +221,158 @@ namespace DWSIM.UI.Forms.Localization {
                 return ResourceManager.GetString("Version", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string Window_GeneralSettings_Backup {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_Backup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup Copies.
+        /// </summary>
+        internal static string Window_GeneralSettings_BackupCopies {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_BackupCopies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup Interval (minutes).
+        /// </summary>
+        internal static string Window_GeneralSettings_BackupInterval {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_BackupInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Break Solver on Calculation Error.
+        /// </summary>
+        internal static string Window_GeneralSettings_BreakOnException {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_BreakOnException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Control Options.
+        /// </summary>
+        internal static string Window_GeneralSettings_ControlOptions {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_ControlOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PFD Designer.
+        /// </summary>
+        internal static string Window_GeneralSettings_Designer {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_Designer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Anti-Aliasing.
+        /// </summary>
+        internal static string Window_GeneralSettings_EnableAntiAliasing {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_EnableAntiAliasing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Backup Copies.
+        /// </summary>
+        internal static string Window_GeneralSettings_EnableBackupCopies {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_EnableBackupCopies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable CPU Parallel Processing.
+        /// </summary>
+        internal static string Window_GeneralSettings_EnableCPUParallelProcessing {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_EnableCPUParallelProcessing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use CPU SIMD Instructions.
+        /// </summary>
+        internal static string Window_GeneralSettings_EnableCPUSIMDAccel {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_EnableCPUSIMDAccel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable GPU Parallel Processing.
+        /// </summary>
+        internal static string Window_GeneralSettings_EnableGPUAccel {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_EnableGPUAccel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flowsheet.
+        /// </summary>
+        internal static string Window_GeneralSettings_Flowsheet {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_Flowsheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Miscelaneous.
+        /// </summary>
+        internal static string Window_GeneralSettings_Misc {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_Misc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purge Backup Folder.
+        /// </summary>
+        internal static string Window_GeneralSettings_PurgeBackupFolder {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_PurgeBackupFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solver.
+        /// </summary>
+        internal static string Window_GeneralSettings_Solver {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_Solver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General Settings.
+        /// </summary>
+        internal static string Window_GeneralSettings_Title {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Compounds.
+        /// </summary>
+        internal static string Window_GeneralSettings_UserComps {
+            get {
+                return ResourceManager.GetString("Window_GeneralSettings_UserComps", resourceCulture);
+            }
+        }
     }
 }

@@ -75,6 +75,10 @@ Public Class Settings
 
     Public Shared Property PythonInitialized As Boolean = False
 
+    Public Shared Property EnableBackupCopies As Boolean = True
+    Public Shared Property SaveExistingFile As Boolean = True
+    Public Shared Property BackupInterval As Integer = 5
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"

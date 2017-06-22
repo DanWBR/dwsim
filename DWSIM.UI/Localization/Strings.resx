@@ -171,4 +171,55 @@
   <data name="LoadingComponents" xml:space="preserve">
     <value>Loading Components...</value>
   </data>
+  <data name="Window_GeneralSettings_Backup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="Window_GeneralSettings_BackupCopies" xml:space="preserve">
+    <value>Backup Copies</value>
+  </data>
+  <data name="Window_GeneralSettings_BackupInterval" xml:space="preserve">
+    <value>Backup Interval (minutes)</value>
+  </data>
+  <data name="Window_GeneralSettings_BreakOnException" xml:space="preserve">
+    <value>Break Solver on Calculation Error</value>
+  </data>
+  <data name="Window_GeneralSettings_ControlOptions" xml:space="preserve">
+    <value>Control Options</value>
+  </data>
+  <data name="Window_GeneralSettings_Designer" xml:space="preserve">
+    <value>PFD Designer</value>
+  </data>
+  <data name="Window_GeneralSettings_EnableAntiAliasing" xml:space="preserve">
+    <value>Enable Anti-Aliasing</value>
+  </data>
+  <data name="Window_GeneralSettings_EnableBackupCopies" xml:space="preserve">
+    <value>Enable Backup Copies</value>
+  </data>
+  <data name="Window_GeneralSettings_EnableCPUParallelProcessing" xml:space="preserve">
+    <value>Enable CPU Parallel Processing</value>
+  </data>
+  <data name="Window_GeneralSettings_EnableCPUSIMDAccel" xml:space="preserve">
+    <value>Use CPU SIMD Instructions</value>
+  </data>
+  <data name="Window_GeneralSettings_EnableGPUAccel" xml:space="preserve">
+    <value>Enable GPU Parallel Processing</value>
+  </data>
+  <data name="Window_GeneralSettings_Flowsheet" xml:space="preserve">
+    <value>Flowsheet</value>
+  </data>
+  <data name="Window_GeneralSettings_Misc" xml:space="preserve">
+    <value>Miscelaneous</value>
+  </data>
+  <data name="Window_GeneralSettings_PurgeBackupFolder" xml:space="preserve">
+    <value>Purge Backup Folder</value>
+  </data>
+  <data name="Window_GeneralSettings_Solver" xml:space="preserve">
+    <value>Solver</value>
+  </data>
+  <data name="Window_GeneralSettings_Title" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
+  <data name="Window_GeneralSettings_UserComps" xml:space="preserve">
+    <value>User Compounds</value>
+  </data>
 </root>

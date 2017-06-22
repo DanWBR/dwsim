@@ -83,12 +83,7 @@ namespace DWSIM.UI.Forms.Controls
             return content;
         }
 
-        public static void AddEmptyRow(this DynamicLayout tbl)
-        {
-            tbl.AddRow(null);
-        }
-
-        public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, int position, Action<object, EventArgs> command)
+        public static DropDown CreateAndAddDropDownRow(this DynamicLayout container, String text, List<String> options, int position, Action<DropDown, EventArgs> command)
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
@@ -101,7 +96,7 @@ namespace DWSIM.UI.Forms.Controls
 
             drop.SelectedIndex = position;
 
-            if (command != null) drop.SelectedIndexChanged += (sender, e) => command.Invoke(sender, e);
+            if (command != null) drop.SelectedIndexChanged += (sender, e) => command.Invoke((DropDown)sender, e);
 
             var tr = new TableRow(txt, null, drop);
 
@@ -114,20 +109,20 @@ namespace DWSIM.UI.Forms.Controls
         public static void CreateAndAddLabelRow(this DynamicLayout container, String text)
         {
             container.AddRow(new TableRow(new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word }));
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.AddRow(new TableRow(new Label { Text = "", Height = 10 }));
         }
         public static void CreateAndAddDescriptionRow(this DynamicLayout container, String text)
         {
             container.AddRow(new TableRow(new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
         }
 
-        public static TextBox CreateAndAddTextBoxRow(this DynamicLayout container, String numberformat, String text, Double currval, Action<object, EventArgs> command)
+        public static TextBox CreateAndAddTextBoxRow(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 100 };
 
-            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke(sender, e);
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
             var tr = new TableRow(txt, null, edittext);
 
@@ -137,13 +132,13 @@ namespace DWSIM.UI.Forms.Controls
 
         }
 
-        public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<object, EventArgs> command)
+        public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<TextBox, EventArgs> command)
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             var edittext = new TextBox { Text = currval, Width = 100 };
 
-            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke(sender, e);
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
             var tr = new TableRow(txt, null, edittext);
 
@@ -155,15 +150,15 @@ namespace DWSIM.UI.Forms.Controls
 
         public static void CreateAndAddEmptySpace(this DynamicLayout container)
         {
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.AddRow(new TableRow(new Label { Text = "", Height = 10 }));
         }
 
-        public static TextBox CreateAndAddFullTextBoxRow(this DynamicLayout container, String text, Action<object, EventArgs> command)
+        public static TextBox CreateAndAddFullTextBoxRow(this DynamicLayout container, String text, Action<TextBox, EventArgs> command)
         {
 
             var edittext = new TextBox { Text = text };
 
-            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke(sender, e);
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
             var tr = new TableRow(edittext);
 
@@ -173,7 +168,7 @@ namespace DWSIM.UI.Forms.Controls
 
         }
 
-        public static Button CreateAndAddLabelAndButtonRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, Action<object, EventArgs> command)
+        public static Button CreateAndAddLabelAndButtonRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
@@ -181,7 +176,7 @@ namespace DWSIM.UI.Forms.Controls
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
-            if (command != null) btn.Click += (sender, e) => command.Invoke(sender, e);
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
 
             var tr = new TableRow(txt, null, btn);
 
@@ -192,14 +187,14 @@ namespace DWSIM.UI.Forms.Controls
 
         }
 
-        public static Button CreateAndAddButtonRow(this DynamicLayout container, String buttonlabel, String imageResID, Action<object, EventArgs> command)
+        public static Button CreateAndAddButtonRow(this DynamicLayout container, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
         {
 
             var btn = new Button { Width = 100, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
-            if (command != null) btn.Click += (sender, e) => command.Invoke(sender, e);
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
 
             var tr = new TableRow(btn);
 
@@ -210,12 +205,12 @@ namespace DWSIM.UI.Forms.Controls
 
         }
 
-        public static CheckBox CreateAndAddCheckBoxRow(this DynamicLayout container, String text, bool value, Action<object, EventArgs> command)
+        public static CheckBox CreateAndAddCheckBoxRow(this DynamicLayout container, String text, bool value, Action<CheckBox, EventArgs> command)
         {
 
             var check = new CheckBox { Text = text, Checked = value };
 
-            if (command != null) check.CheckedChanged += (sender, e) => command.Invoke(sender, e);
+            if (command != null) check.CheckedChanged += (sender, e) => command.Invoke((CheckBox)sender, e);
 
             container.AddRow(new TableRow(check));
 
