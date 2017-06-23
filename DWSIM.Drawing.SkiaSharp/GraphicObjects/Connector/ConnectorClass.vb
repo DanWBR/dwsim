@@ -121,7 +121,7 @@ Namespace GraphicObjects
 
             'posicionar pontos nos primeiros slots livres
 
-            Dim StartPos, EndPos As New Point
+            Dim StartPos, EndPos As IPoint
 
             Dim StartDir, EndDir As ConDir
 

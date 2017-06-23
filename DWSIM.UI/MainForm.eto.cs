@@ -18,7 +18,7 @@ namespace DWSIM.UI
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
             Title = "DWSIMLauncher".Localize();
-            ClientSize = new Size(490, 260);
+            ClientSize = new Size(490, 210);
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
@@ -43,13 +43,18 @@ namespace DWSIM.UI
                 new Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
+            btn6.Click += (sender, e) =>
+            {
+                Process.Start("http://dwsim.inforside.com.br/docs/mobile/help/");
+            };
+
             btn1.Click += (sender, e) => {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
                 dialog.Filters.Add(new FileDialogFilter("XML Simulation File v5".Localize(), new[] { ".dwxz5" }));
                 dialog.Filters.Add(new FileDialogFilter("XML Simulation File v4".Localize(), new[] { ".dwxml", ".dwxmz" }));
-                dialog.Filters.Add(new FileDialogFilter("Compound Creator Project".Localize(), new[] { ".dwcsd" }));
-                dialog.Filters.Add(new FileDialogFilter("Data Regression Project".Localize(), new[] { ".dwrsd" }));
+                //dialog.Filters.Add(new FileDialogFilter("Compound Creator Project".Localize(), new[] { ".dwcsd" }));
+                //dialog.Filters.Add(new FileDialogFilter("Data Regression Project".Localize(), new[] { ".dwrsd" }));
                 dialog.MultiSelect = false;
                 dialog.CurrentFilterIndex = 1;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
@@ -86,7 +91,7 @@ namespace DWSIM.UI
                 Rows =
                 {
                     new TableRow(btn1, btn2, null),
-                    new TableRow(btn3, btn4, null),
+                    //new TableRow(btn3, btn4, null),
                     new TableRow(btn5, btn6, null),
                     new TableRow(btn7, btn8, null),
                     null

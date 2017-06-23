@@ -191,13 +191,13 @@ Public Module General
     End Function
 
     <System.Runtime.CompilerServices.Extension()>
-    Public Function ToArrayString(vector As Double(), ByVal ci As System.Globalization.CultureInfo) As String
+    Public Function ToArrayString(vector As Double(), ByVal ci As System.Globalization.CultureInfo, ByVal nf As String) As String
 
         If vector.Length > 1 Then
 
             Dim retstr As String = "{"
             For Each d As Double In vector
-                retstr += d.ToString(ci) + "; "
+                retstr += d.ToString(nf, ci) + "; "
             Next
             retstr = retstr.TrimEnd(New Char() {";"c, " "c})
             retstr += "}"
@@ -206,7 +206,7 @@ Public Module General
 
         ElseIf vector.Length > 0 Then
 
-            Return vector(0).ToString(ci)
+            Return vector(0).ToString(nf, ci)
 
         Else
 
