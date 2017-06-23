@@ -79,11 +79,38 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close DWSIM.
+        /// </summary>
+        internal static string AppExit {
+            get {
+                return ResourceManager.GetString("AppExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application Version: .
         /// </summary>
         internal static string ApplicationVersion {
             get {
                 return ResourceManager.GetString("ApplicationVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All opened flowsheets will be closed and you&apos;ll lose any unsaved work. Continue?.
+        /// </summary>
+        internal static string ConfirmAppExit {
+            get {
+                return ResourceManager.GetString("ConfirmAppExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ll lose any unsaved work. Continue?.
+        /// </summary>
+        internal static string ConfirmFlowsheetExit {
+            get {
+                return ResourceManager.GetString("ConfirmFlowsheetExit", resourceCulture);
             }
         }
         
@@ -111,6 +138,15 @@ namespace DWSIM.UI.Forms.Localization {
         internal static string DWSIMLicense {
             get {
                 return ResourceManager.GetString("DWSIMLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Flowsheet.
+        /// </summary>
+        internal static string FlowsheetExit {
+            get {
+                return ResourceManager.GetString("FlowsheetExit", resourceCulture);
             }
         }
         
@@ -205,7 +241,7 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to Global Settings.
         /// </summary>
         internal static string Settings {
             get {
@@ -358,7 +394,7 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to General Settings.
+        ///   Looks up a localized string similar to Global Settings.
         /// </summary>
         internal static string Window_GeneralSettings_Title {
             get {

@@ -16,9 +16,13 @@ namespace DWSIM.UI.Forms
         void InitializeComponent()
         {
 
+            string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
+
             FlowsheetObject = new Desktop.Shared.Flowsheet() { FlowsheetForm = this };
 
-            Title = "Flowsheet";
+            Title = "New Flowsheet";
+            
+            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var fsc = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
 
@@ -34,12 +38,24 @@ namespace DWSIM.UI.Forms
             var saveCommand = new Command { MenuText = "SaveFlowsheet".Localize() };
             
             var btnSave = new ButtonToolItem {Text = "Save"};
-            var btnSolve = new ButtonToolItem {Text = "Solve"};
+            var btnSaveAs = new ButtonToolItem { Text = "Save As" };
+            var btnComps = new ButtonToolItem { Text = "Compounds" };
+            var btnBasis = new ButtonToolItem { Text = "Basis" };
+            var btnObjects = new ButtonToolItem { Text = "Objects" };
+            var btnTools = new ButtonToolItem { Text = "Tools" };
+            var btnUtilities = new ButtonToolItem { Text = "Utilities" };
+            var btnScripts = new ButtonToolItem { Text = "Scripts" };
+            var btnReports = new ButtonToolItem { Text = "Reports" };
+            var btnOptions = new ButtonToolItem { Text = "Options" };
+
+            var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet" };
             btnSolve.Click += (sender, e) => {FlowsheetObject.SolveFlowsheet();};
 
             // create menu
             ToolBar = new ToolBar();
-            ToolBar.Items.AddRange(new[] { btnSave, btnSolve });
+            ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, new SeparatorToolItem(), btnSolve, new SeparatorToolItem(),
+                                           btnComps, btnBasis, btnObjects, new SeparatorToolItem(), btnTools, btnUtilities,
+                                           btnScripts, btnReports, btnOptions});
                  
             var outtxt = new TextArea { Text = "", ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size)};
 
@@ -91,6 +107,7 @@ namespace DWSIM.UI.Forms
                     new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
                 }
                 var form = UI.Shared.Common.GetDefaultEditorForm("Edit Properties", 500, 500, cont);
+                form.ShowInTaskbar = false;
                 form.Show();
             };
 
@@ -103,7 +120,8 @@ namespace DWSIM.UI.Forms
                 {
                     Title = "Results",
                     ClientSize = new Size(500, 600),
-                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size) } }
+                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size) } },
+                    ShowInTaskbar = false
                 };
                 form.Show();
             };
@@ -117,6 +135,17 @@ namespace DWSIM.UI.Forms
                 }
             };
 
+            Closing += Flowsheet_Closing;
+
         }
+
+        void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show(this, "ConfirmFlowsheetExit".Localize(), "FlowsheetExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
+            {
+                e.Cancel = true; 
+            }
+        }
+              
     }
 }

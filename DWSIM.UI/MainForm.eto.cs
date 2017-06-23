@@ -71,6 +71,7 @@ namespace DWSIM.UI
                     var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
                     form.Show();
                 }
                 
@@ -111,16 +112,33 @@ namespace DWSIM.UI
                 new Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
+            var hitem1 = new ButtonMenuItem { Text = "Help".Localize() };
+            hitem1.Click += (sender, e) =>
+            {
+                Process.Start("http://dwsim.inforside.com.br/docs/mobile/help/");
+            };
+
             // create menu
             Menu = new MenuBar
             {
                 ApplicationItems = {aitem1},
                 QuitItem = quitCommand,
+                HelpItems = {hitem1},
                 AboutItem = aboutCommand
             };
 
             Shown += MainForm_Shown;
+
+            Closing += MainForm_Closing;
                         
+        }
+
+        void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
+            {
+                e.Cancel = true; 
+            }
         }
 
         void MainForm_Shown(object sender, EventArgs e)

@@ -95,7 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3214CD
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Forms", "DWSIM.UI\DWSIM.UI.Forms.csproj", "{766C669B-91BD-4C62-A2AF-D3FB9C939715}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Forms", "DWSIM.UI\DWSIM.UI.Desktop.Forms.csproj", "{766C669B-91BD-4C62-A2AF-D3FB9C939715}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop", "DWSIM.UI.Desktop\DWSIM.UI.Desktop.csproj", "{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}"
 	ProjectSection(ProjectDependencies) = postProject

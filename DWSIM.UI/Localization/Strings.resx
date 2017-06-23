@@ -154,7 +154,7 @@
     <value>Quit</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Global Settings</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>
@@ -217,9 +217,21 @@
     <value>Solver</value>
   </data>
   <data name="Window_GeneralSettings_Title" xml:space="preserve">
-    <value>General Settings</value>
+    <value>Global Settings</value>
   </data>
   <data name="Window_GeneralSettings_UserComps" xml:space="preserve">
     <value>User Compounds</value>
+  </data>
+  <data name="AppExit" xml:space="preserve">
+    <value>Close DWSIM</value>
+  </data>
+  <data name="ConfirmAppExit" xml:space="preserve">
+    <value>All opened flowsheets will be closed and you'll lose any unsaved work. Continue?</value>
+  </data>
+  <data name="ConfirmFlowsheetExit" xml:space="preserve">
+    <value>You'll lose any unsaved work. Continue?</value>
+  </data>
+  <data name="FlowsheetExit" xml:space="preserve">
+    <value>Close Flowsheet</value>
   </data>
 </root>
