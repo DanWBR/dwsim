@@ -150,20 +150,6 @@ namespace DWSIM.UI.Controls
 
         }
 
-        protected override void OnKeyDown(Eto.Forms.KeyEventArgs e)
-        {
-            base.OnKeyDown(e);
-            if (e.Key == Keys.F5)
-            {
-                FlowsheetObject.SolveFlowsheet(false);
-            }
-        }
-
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            base.OnKeyUp(e);
-        }
-
         // interface to the platform implementations
         public interface IFlowsheetSurface : Eto.Forms.Control.IHandler
         {

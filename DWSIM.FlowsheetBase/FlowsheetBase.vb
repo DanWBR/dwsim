@@ -16,6 +16,8 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Thermodynamics
 Imports DWSIM.UnitOperations.Streams
 Imports DWSIM.Thermodynamics.Streams
+Imports ICSharpCode.SharpZipLib.Zip
+Imports System.IO
 
 Public MustInherit Class FlowsheetBase
 
@@ -210,7 +212,7 @@ Public MustInherit Class FlowsheetBase
     Public Function GetTranslatedString(text As String) As String Implements IFlowsheet.GetTranslatedString
 
         If rm Is Nothing Then
-            rm = New Resources.ResourceManager("PortableFlowsheetBase.Strings", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
+            rm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Strings", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
         End If
 
         Dim ttext As String = rm.GetString(text)
@@ -219,7 +221,7 @@ Public MustInherit Class FlowsheetBase
             Return ttext
         Else
             If prm Is Nothing Then
-                prm = New Resources.ResourceManager("PortableFlowsheetBase.Properties", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
+                prm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Properties", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
             End If
             Try
                 If text.Split("/").Length = 2 Then
@@ -1154,11 +1156,20 @@ Public MustInherit Class FlowsheetBase
                         If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     End If
                     If Not TypeOf obj Is TableGraphic Then
+
+                        With DirectCast(obj, DWSIM.Drawing.SkiaSharp.GraphicObjects.ShapeGraphic)
+                            .Fill = False
+                            .LineWidth = 1
+                            .GradientMode = False
+                        End With
+
                         If obj.Name = "" Then obj.Name = obj.Tag
                         obj.CreateConnectors(0, 0)
                         FlowsheetSurface.DrawingObjects.Add(obj)
                         GraphicObjects.Add(obj.Name, obj)
+
                     End If
+
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
@@ -1393,15 +1404,17 @@ Public MustInherit Class FlowsheetBase
 
     End Sub
 
-    Public Sub SetMessageListener(act As Action(Of String)) Implements IFlowsheet.SetMessageListener
-
-    End Sub
+    Public MustOverride Sub SetMessageListener(act As Action(Of String)) Implements IFlowsheet.SetMessageListener
 
     Public Property Solved As Boolean Implements IFlowsheet.Solved
 
     Public Sub UpdateSpreadsheet() Implements IFlowsheet.UpdateSpreadsheet
 
     End Sub
+
+    Public MustOverride Sub UpdateInformation() Implements IFlowsheet.UpdateInformation
+
+    Public MustOverride Sub UpdateInterface() Implements IFlowsheet.UpdateInterface
 
     Public ReadOnly Property UtilityPlugins As Dictionary(Of String, IUtilityPlugin) Implements IFlowsheet.UtilityPlugins
         Get
@@ -1412,5 +1425,63 @@ Public MustInherit Class FlowsheetBase
     Public Sub WriteSpreadsheetVariables() Implements IFlowsheet.WriteSpreadsheetVariables
 
     End Sub
+
+    Public Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String) Implements IFlowsheet.ProcessScripts
+
+    End Sub
+
+    Public Sub LoadZippedXML(pathtofile As String)
+
+        Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
+        Dim fullname As String = ""
+
+        'Dim pwd As String = Nothing
+        'If IsZipFilePasswordProtected(caminho) Then
+        '    Dim fp As New FormPassword
+        '    If fp.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        '        pwd = fp.tbPassword.Text
+        '    End If
+        'End If
+
+        Using stream As ZipInputStream = New ZipInputStream(File.OpenRead(pathtofile))
+            stream.Password = Nothing
+            Dim entry As ZipEntry
+Label_00CC:
+            entry = stream.GetNextEntry()
+            Do While (Not entry Is Nothing)
+                Dim fileName As String = Path.GetFileName(entry.Name)
+                If (fileName <> String.Empty) Then
+                    Using stream2 As FileStream = File.Create(pathtosave + Path.GetFileName(entry.Name))
+                        Dim count As Integer = 2048
+                        Dim buffer As Byte() = New Byte(2048) {}
+                        Do While True
+                            count = stream.Read(buffer, 0, buffer.Length)
+                            If (count <= 0) Then
+                                fullname = pathtosave + Path.GetFileName(entry.Name)
+                                GoTo Label_00CC
+                            End If
+                            stream2.Write(buffer, 0, count)
+                        Loop
+                    End Using
+                End If
+                entry = stream.GetNextEntry
+            Loop
+        End Using
+
+        LoadFromXML(XDocument.Load(fullname))
+        File.Delete(fullname)
+        FilePath = pathtofile
+        Options.FilePath = pathtofile
+
+    End Sub
+
+    Shared Function IsZipFilePasswordProtected(ByVal ZipFile As String) As Boolean
+        Using fsIn As New FileStream(ZipFile, FileMode.Open, FileAccess.Read)
+            Using zipInStream As New ZipInputStream(fsIn)
+                Dim zEntry As ZipEntry = zipInStream.GetNextEntry()
+                Return zEntry.IsCrypted
+            End Using
+        End Using
+    End Function
 
 End Class

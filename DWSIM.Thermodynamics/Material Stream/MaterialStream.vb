@@ -5897,8 +5897,8 @@ Namespace Streams
                 Next
                 results.Data.Add("SPACE5", Nothing)
                 For Each p As String In overallprops
-                    results.Data.Add("[Overall] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Overall").ConvertFromSI(GetPropUnits(p, "mass", units)))
-                    results.DataUnits.Add("[Overall] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                    results.Data.Add("[Overall] " & TranslateString(p), GetSinglePhaseProp2(p, "mass", "Overall").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Overall] " & TranslateString(p), GetPropUnits(p, "mass", units))
                 Next
 
             End If
@@ -5951,8 +5951,8 @@ Namespace Streams
                 Next
                 results.Data.Add("SPACE51", Nothing)
                 For Each p As String In props
-                    results.Data.Add("[Vapor Phase] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Vapor").ConvertFromSI(GetPropUnits(p, "mass", units)))
-                    results.DataUnits.Add("[Vapor Phase] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                    results.Data.Add("[Vapor Phase] " & TranslateString(p), GetSinglePhaseProp2(p, "mass", "Vapor").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Vapor Phase] " & TranslateString(p), GetPropUnits(p, "mass", units))
                 Next
 
             End If
@@ -6005,8 +6005,8 @@ Namespace Streams
                 Next
                 results.Data.Add("SPACE52", Nothing)
                 For Each p As String In props
-                    results.Data.Add("[Liquid Phase] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Liquid").ConvertFromSI(GetPropUnits(p, "mass", units)))
-                    results.DataUnits.Add("[Liquid Phase] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                    results.Data.Add("[Liquid Phase] " & TranslateString(p), GetSinglePhaseProp2(p, "mass", "Liquid").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Liquid Phase] " & TranslateString(p), GetPropUnits(p, "mass", units))
                 Next
 
             End If
@@ -6060,8 +6060,8 @@ Namespace Streams
                 Next
                 results.Data.Add("SPACE53", Nothing)
                 For Each p As String In props
-                    results.Data.Add("[Liquid Phase 2] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Liquid2").ConvertFromSI(GetPropUnits(p, "mass", units)))
-                    results.DataUnits.Add("[Liquid Phase 2] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                    results.Data.Add("[Liquid Phase 2] " & TranslateString(p), GetSinglePhaseProp2(p, "mass", "Liquid2").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Liquid Phase 2] " & TranslateString(p), GetPropUnits(p, "mass", units))
                 Next
 
             End If
@@ -6114,8 +6114,8 @@ Namespace Streams
                 Next
                 results.Data.Add("SPACE52SS", Nothing)
                 For Each p As String In props
-                    results.Data.Add("[Solid Phase] " & TranslateString(results.Language), GetSinglePhaseProp2(p, "mass", "Solid").ConvertFromSI(GetPropUnits(p, "mass", units)))
-                    results.DataUnits.Add("[Solid Phase] " & TranslateString(results.Language), GetPropUnits(p, "mass", units))
+                    results.Data.Add("[Solid Phase] " & TranslateString(p), GetSinglePhaseProp2(p, "mass", "Solid").ConvertFromSI(GetPropUnits(p, "mass", units)))
+                    results.DataUnits.Add("[Solid Phase] " & TranslateString(p), GetPropUnits(p, "mass", units))
                 Next
 
             End If

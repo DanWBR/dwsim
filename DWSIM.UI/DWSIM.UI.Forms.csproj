@@ -177,6 +177,14 @@
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Editors\DWSIM.UI.Desktop.Editors.csproj">
+      <Project>{ba99ba15-8c63-408e-b65f-1e7160f85e9c}</Project>
+      <Name>DWSIM.UI.Desktop.Editors</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj">
       <Project>{2ffd2514-e4f9-4c19-b38e-b77560585d61}</Project>
       <Name>DWSIM.UI.Desktop.Shared</Name>

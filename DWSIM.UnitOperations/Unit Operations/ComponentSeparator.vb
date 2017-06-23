@@ -350,7 +350,7 @@ Namespace UnitOperations
             Dim j As Integer = 0
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then

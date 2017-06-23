@@ -808,7 +808,7 @@ Namespace Reactors
             Vy = tmp.GetVaporPhaseMoleFractions
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
             cp = Me.GraphicObject.InputConnectors(0)
             If cp.IsAttached Then
                 ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
@@ -892,7 +892,7 @@ Namespace Reactors
             Dim j As Integer
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then

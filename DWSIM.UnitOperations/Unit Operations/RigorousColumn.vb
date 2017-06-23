@@ -2229,13 +2229,13 @@ Namespace UnitOperations
             Dim i As Integer = 0
             Dim obj1(Me.GraphicObject.InputConnectors.Count), obj2(Me.GraphicObject.InputConnectors.Count) As Double
             Dim obj3(Me.GraphicObject.OutputConnectors.Count), obj4(Me.GraphicObject.OutputConnectors.Count) As Double
-            For Each ic As ConnectionPoint In Me.GraphicObject.InputConnectors
+            For Each ic As IConnectionPoint In Me.GraphicObject.InputConnectors
                 obj1(i) = -Me.GraphicObject.X + ic.Position.X
                 obj2(i) = -Me.GraphicObject.Y + ic.Position.Y
                 i = i + 1
             Next
             i = 0
-            For Each oc As ConnectionPoint In Me.GraphicObject.OutputConnectors
+            For Each oc As IConnectionPoint In Me.GraphicObject.OutputConnectors
                 obj3(i) = -Me.GraphicObject.X + oc.Position.X
                 obj4(i) = -Me.GraphicObject.Y + oc.Position.Y
                 i = i + 1

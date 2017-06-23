@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DWSIM.Interfaces;
+using Eto.Forms;
 
 namespace DWSIM.UI.Desktop.Shared
 {
     public class Flowsheet : FlowsheetBase.FlowsheetBase
     {
+        private Action<string> listeningaction ;
 
-        private string backupfolder = "";
-        private bool backupbusy = false;
-
-        private bool eventattached = false;
         public bool optimizing = false;
         public bool supressmessages = false;
 
@@ -31,6 +29,19 @@ namespace DWSIM.UI.Desktop.Shared
             return new Flowsheet();
         }
 
+        public override void UpdateInformation()
+        {
+            UpdateInterface();
+        }
+
+        public override void UpdateInterface()
+        {
+            if (!supressmessages)
+            {
+               Application.Instance.Invoke(() => FlowsheetForm.Invalidate());                
+            }
+        }
+
         public override void ShowDebugInfo(string text, int level)
         {
             Console.WriteLine(text);
@@ -38,6 +49,7 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void ShowMessage(string text, IFlowsheet.MessageType mtype)
         {
+            if (listeningaction != null) listeningaction(text);
             Console.WriteLine(text);
         }
 
@@ -46,7 +58,7 @@ namespace DWSIM.UI.Desktop.Shared
             throw new NotImplementedException();
         }
 
-        public void SolveFlowsheet(bool wait)
+        public void SolveFlowsheet()
         {
 
             if (PropertyPackages.Count == 0)
@@ -68,8 +80,7 @@ namespace DWSIM.UI.Desktop.Shared
             GlobalSettings.Settings.SolverBreakOnException = true;
             Task st = new Task(() =>
             {
-                if (!wait)
-                {
+                
                     //AndroidHUD.AndHUD.Shared.Show(this, "Solving flowsheet model, please wait...\n\n(touch to abort calculation)", -1, AndroidHUD.MaskType.Black,
                     //                              null, () =>
                     //                              {
@@ -99,7 +110,7 @@ namespace DWSIM.UI.Desktop.Shared
                     //        });
                     //    };
                     //}
-                }
+
                 foreach (var sobj in SimulationObjects.Values)
                 {
                     //sobj.PropertyPackage.StabilityTestSeverity = 0;
@@ -123,10 +134,9 @@ namespace DWSIM.UI.Desktop.Shared
                 //AndroidHUD.AndHUD.Shared.Dismiss(this);
                 if (t.Exception == null)
                 {
-                    if (!wait)
-                    {
-                        //AndroidHUD.AndHUD.Shared.ShowSuccess(this, "Flowsheet model solved successfully.", AndroidHUD.MaskType.Black, TimeSpan.FromSeconds(2));
-                    }
+                    
+                    //AndroidHUD.AndHUD.Shared.ShowSuccess(this, "Flowsheet model solved successfully.", AndroidHUD.MaskType.Black, TimeSpan.FromSeconds(2));
+                    
                 }
                 else
                 {
@@ -176,42 +186,14 @@ namespace DWSIM.UI.Desktop.Shared
                     });
                 }
             });
-
-            if (wait)
-            {
-                try
-                {
-                    st.Start();
-                    st.Wait();
-                }
-                catch (AggregateException aex)
-                {
-                    foreach (Exception ex2 in aex.InnerExceptions)
-                    {
-                        if (!supressmessages)
-                        {
-                            //HandleException(ex2, "Error: " + ex2.Message);
-                        }
-                    }
-                    GlobalSettings.Settings.CalculatorBusy = false;
-                    GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
-                }
-                catch (Exception ex)
-                {
-                    if (!supressmessages)
-                    {
-                        //HandleException(ex, "Error: " + ex.Message);
-                    }
-                    GlobalSettings.Settings.CalculatorBusy = false;
-                    GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
-                }
-            }
-            else
-            {
-                st.Start();
-            }
+                 
+            st.Start();
 
         }
-             
+
+        public override void SetMessageListener(Action<string> act)
+        {
+            listeningaction = act;
+        }
     }
 }

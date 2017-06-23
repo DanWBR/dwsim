@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.UnitOperations.UnitOperations;
@@ -18,7 +15,7 @@ using DWSIM.Thermodynamics.Streams;
 using Eto.Forms;
 
 using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
-using s = DWSIM.UI.Forms.Shared.Common;
+using s = DWSIM.UI.Shared.Common;
 using Eto.Drawing;
 
 using StringResources = DWSIM.UI.Desktop.Shared.StringArrays;
@@ -63,7 +60,9 @@ namespace DWSIM.UI.Desktop.Editors
             }
             else
             {
-                var selectedpp = SimObject.PropertyPackage.Tag;
+                var pp = SimObject.PropertyPackage;
+                string selectedpp = "";
+                if (pp != null) selectedpp = pp.Tag;
                 s.CreateAndAddDropDownRow(container, "Property Package", proppacks, proppacks.IndexOf(selectedpp), (DropDown arg1, EventArgs ev) =>
                 {
                     SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();

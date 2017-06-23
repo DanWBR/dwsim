@@ -5,6 +5,8 @@ using DWSIM.UI.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.Linq;
+using DWSIM.UI.Forms.Forms;
+using System.Xml.Linq;
 
 namespace DWSIM.UI
 {
@@ -49,12 +51,29 @@ namespace DWSIM.UI
                 dialog.Filters.Add(new FileDialogFilter("Compound Creator Project".Localize(), new[] { ".dwcsd" }));
                 dialog.Filters.Add(new FileDialogFilter("Data Regression Project".Localize(), new[] { ".dwrsd" }));
                 dialog.MultiSelect = false;
-                dialog.ShowDialog(this);
+                dialog.CurrentFilterIndex = 1;
+                if (dialog.ShowDialog(this) == DialogResult.Ok)
+                {
+                    var form = new Forms.Flowsheet();
+                    if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxmz")
+                    {
+                        form.FlowsheetObject.LoadZippedXML(dialog.FileName);
+                    }
+                    else if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxml")
+                    {
+                        form.FlowsheetObject.LoadFromXML(XDocument.Load(dialog.FileName));
+                    }
+                    var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
+                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    form.Show();
+                }
+                
             };
 
             btn2.Click += (sender, e) =>
             {
-                new Forms.Forms.Flowsheet().Show();
+                new Forms.Flowsheet().Show();
             };
 
             btn7.Click += (sender, e) => new About().Show();
@@ -107,6 +126,6 @@ namespace DWSIM.UI
                 splash.Show();
             });
         }
-             
+
     }
 }

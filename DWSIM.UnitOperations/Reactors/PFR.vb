@@ -710,7 +710,7 @@ Namespace Reactors
             Next
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
             Dim mtotal, wtotal As Double
 
             cp = Me.GraphicObject.OutputConnectors(0)
@@ -753,7 +753,7 @@ Namespace Reactors
             Dim j As Integer = 0
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then

@@ -99,7 +99,8 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(txt, null, drop);
 
             container.AddRow(tr);
-
+            container.CreateAndAddEmptySpace();
+        
             return drop;
 
         }
@@ -107,11 +108,12 @@ namespace DWSIM.UI.Shared
         public static void CreateAndAddLabelRow(this DynamicLayout container, String text)
         {
             container.AddRow(new TableRow(new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word }));
-            container.AddRow(new TableRow(new Label { Text = "", Height = 10 }));
+            container.CreateAndAddEmptySpace();
         }
         public static void CreateAndAddDescriptionRow(this DynamicLayout container, String text)
         {
             container.AddRow(new TableRow(new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
+            container.CreateAndAddEmptySpace();
         }
 
         public static TextBox CreateAndAddTextBoxRow(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
@@ -125,6 +127,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(txt, null, edittext);
 
             container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
 
             return edittext;
 
@@ -140,6 +143,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(edittext);
 
             container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
 
             return edittext;
 
@@ -156,6 +160,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(txt, null, edittext);
 
             container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
 
             return edittext;
 
@@ -176,6 +181,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(edittext);
 
             container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
 
             return edittext;
 
@@ -194,7 +200,8 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(txt, null, btn);
 
             container.AddRow(tr);
-
+            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+        
             return btn;
 
 
@@ -212,7 +219,8 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(btn);
 
             container.AddRow(tr);
-
+            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+        
             return btn;
 
 
@@ -226,7 +234,8 @@ namespace DWSIM.UI.Shared
             if (command != null) check.CheckedChanged += (sender, e) => command.Invoke((CheckBox)sender, e);
 
             container.AddRow(new TableRow(check));
-
+            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+        
             return check;
         }
 

@@ -51,8 +51,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub CalculateObject(ByVal fobj As Object, ByVal objArgs As CalculationArgs, ByVal sender As Object, Optional ByVal OnlyMe As Boolean = False)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         RaiseEvent UnitOpCalculationStarted(fobj, New System.EventArgs(), objArgs)
 
@@ -173,8 +173,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub CalculateObjectAsync(ByVal fobj As Object, ByVal objArgs As CalculationArgs, ct As Threading.CancellationToken)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
 
@@ -216,8 +216,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub CalculateMaterialStream(ByVal fobj As Object, ByVal ms As ISimulationObject, Optional ByVal DoNotCalcFlash As Boolean = False, Optional ByVal OnlyMe As Boolean = False)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         ms.Calculated = False
 
@@ -259,8 +259,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub CalculateMaterialStreamAsync(ByVal fobj As Object, ByVal ms As ISimulationObject, ct As Threading.CancellationToken)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
 
@@ -325,8 +325,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function ProcessQueueInternal(ByVal fobj As Object, Optional ByVal Isolated As Boolean = False, Optional ByVal FlowsheetSolverMode As Boolean = False, Optional ByVal ct As Threading.CancellationToken = Nothing) As List(Of Exception)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         Dim d0 As Date = Date.Now
@@ -404,8 +404,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function ProcessQueueInternalAsync(ByVal fobj As Object, ByVal ct As Threading.CancellationToken) As List(Of Exception)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         Dim d0 As Date = Date.Now
@@ -469,8 +469,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function ProcessQueueInternalAsyncParallel(ByVal fobj As Object, ByVal orderedlist As Dictionary(Of Integer, List(Of CalculationArgs)), ct As Threading.CancellationToken) As List(Of Exception)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         Dim loopex As New Concurrent.ConcurrentBag(Of Exception)
@@ -573,8 +573,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Shared Sub UpdateDisplayStatus(fobj As Object, Optional ByVal ObjIDlist() As String = Nothing, Optional ByVal calculating As Boolean = False)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         If ObjIDlist Is Nothing Then
             For Each baseobj In fbag.SimulationObjects.Values
@@ -621,8 +621,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function GetSolvingList(fobj As Object, frompgrid As Boolean) As Object()
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         Dim obj As ISimulationObject
@@ -820,8 +820,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
                 If fs.MasterFlowsheet Is Nothing And Not Adjusting And GlobalSettings.Settings.CalculatorBusy Then Return New List(Of Exception)
             End If
 
-            Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-            Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+            Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+            Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
             Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
             'checks if the calculator is activated.
@@ -1286,8 +1286,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Function CalculateObject(ByVal fobj As Object, ByVal ObjID As String) As List(Of Exception)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         If fbag.SimulationObjects.ContainsKey(ObjID) Then
@@ -1322,8 +1322,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub CalculateObjectSync(ByVal fobj As Object, ByVal ObjID As String)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         If fbag.SimulationObjects.ContainsKey(ObjID) Then
@@ -1390,8 +1390,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Public Shared Sub CalculateObjectAsync(ByVal fobj As Object, ByVal ObjID As String, ByVal ct As CancellationToken)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
 
         If fbag.SimulationObjects.ContainsKey(ObjID) Then
@@ -1442,8 +1442,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks>Solves all marked Adjust objects in the flowsheet simultaneously using Netwon's method.</remarks>
     Private Shared Sub SolveSimultaneousAdjusts(ByVal fobj As Object)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
         Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
@@ -1539,8 +1539,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks>Solves all marked Adjust objects in the flowsheet simultaneously using Netwon's method.</remarks>
     Private Shared Sub SolveSimultaneousAdjustsAsync(ByVal fobj As Object, ct As CancellationToken)
 
-        Dim fgui As IFlowsheetGUI = TryCast(fobj, IFlowsheetGUI)
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fgui As IFlowsheet = TryCast(fobj, IFlowsheet)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
         Dim fqueue As IFlowsheetCalculationQueue = TryCast(fobj, IFlowsheetCalculationQueue)
         Dim fs As IFlowsheet = TryCast(fobj, IFlowsheet)
 
@@ -1816,7 +1816,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function GetMnpVarValue(ByVal fobj As Object, ByVal adj As IAdjust) As Double
 
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         With adj.ManipulatedObjectData
             Return fbag.SimulationObjects(.ID).GetPropertyValue(.PropertyName)
@@ -1833,7 +1833,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     ''' <remarks></remarks>
     Private Shared Function SetMnpVarValue(ByVal val As Nullable(Of Double), ByVal fobj As Object, ByVal adj As IAdjust)
 
-        Dim fbag As IFlowsheetBag = TryCast(fobj, IFlowsheetBag)
+        Dim fbag As IFlowsheet = TryCast(fobj, IFlowsheet)
 
         With adj.ManipulatedObjectData
             fbag.SimulationObjects(.ID).SetPropertyValue(.PropertyName, val)

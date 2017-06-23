@@ -574,12 +574,12 @@ Namespace UnitOperations
         Sub UpdateConnectors()
 
             ' disconnect existing connections
-            For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
+            For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.InputConnectors
                 If c.IsAttached Then
                     Me.FlowSheet.DisconnectObjects(FlowSheet.GraphicObjects(c.AttachedConnector.AttachedFrom.Name), Me.GraphicObject)
                 End If
             Next
-            For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+            For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                 If c.IsAttached Then
                     Me.FlowSheet.DisconnectObjects(Me.GraphicObject, FlowSheet.GraphicObjects(c.AttachedConnector.AttachedTo.Name))
                 End If
@@ -745,13 +745,13 @@ Namespace UnitOperations
             Dim i As Integer = 0
             Dim obj1(Me.GraphicObject.InputConnectors.Count), obj2(Me.GraphicObject.InputConnectors.Count) As Double
             Dim obj3(Me.GraphicObject.OutputConnectors.Count), obj4(Me.GraphicObject.OutputConnectors.Count) As Double
-            For Each ic As ConnectionPoint In Me.GraphicObject.InputConnectors
+            For Each ic As Interfaces.IConnectionPoint In Me.GraphicObject.InputConnectors
                 obj1(i) = -Me.GraphicObject.X + ic.Position.X
                 obj2(i) = -Me.GraphicObject.Y + ic.Position.Y
                 i = i + 1
             Next
             i = 0
-            For Each oc As ConnectionPoint In Me.GraphicObject.OutputConnectors
+            For Each oc As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                 obj3(i) = -Me.GraphicObject.X + oc.Position.X
                 obj4(i) = -Me.GraphicObject.Y + oc.Position.Y
                 i = i + 1
@@ -793,7 +793,7 @@ Namespace UnitOperations
         Sub UpdatePortsFromConnectors()
 
             Dim cnobj As Object = Nothing
-            For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
+            For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.InputConnectors
                 For Each p As UnitPort In _ports
                     Try
                         cnobj = p.connectedObject
@@ -810,7 +810,7 @@ Namespace UnitOperations
                 Next
             Next
 
-            For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+            For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                 For Each p As UnitPort In _ports
                     Try
                         cnobj = p.connectedObject
@@ -1030,7 +1030,7 @@ Namespace UnitOperations
             UpdatePortsFromConnectors()
 
             If Not _couo Is Nothing Then
-                For Each c As ConnectionPoint In Me.GraphicObject.InputConnectors
+                For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.InputConnectors
                     If c.IsAttached And c.Type = ConType.ConIn Then
                         Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedFrom.Name)
                         mat.SetFlowsheet(Me.FlowSheet)
@@ -1047,7 +1047,7 @@ Namespace UnitOperations
                         myruo.SetReactionObject(myset)
                     End If
                 Catch ex As Exception
-                    For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                         If c.Type = ConType.ConEn Then
                             If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
                         End If
@@ -1059,7 +1059,7 @@ Namespace UnitOperations
                 myuo.Validate(msg)
                 If myuo.ValStatus = CapeValidationStatus.CAPE_VALID Then
                     Try
-                        For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.IsAttached And c.Type = ConType.ConOut Then
                                 Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
                                 mat.ClearAllProps()
@@ -1068,7 +1068,7 @@ Namespace UnitOperations
                         RestorePorts()
                         myuo.Calculate()
                         UpdateParams()
-                        For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.IsAttached And c.Type = ConType.ConOut Then
                                 Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
                                 mat.PropertyPackage.CurrentMaterialStream = mat
@@ -1077,7 +1077,7 @@ Namespace UnitOperations
                                 Next
                             End If
                         Next
-                        For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn And c.IsAttached Then
                                 c.AttachedConnector.AttachedTo.Calculated = True
                             End If
@@ -1092,7 +1092,7 @@ Namespace UnitOperations
                             Next
                         End If
                     Catch ex As Exception
-                        For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn Then
                                 If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
                             End If
@@ -1103,7 +1103,7 @@ Namespace UnitOperations
                     End Try
                 Else
                     Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": CO Unit not validated. Reason: " + msg, IFlowsheet.MessageType.GeneralError)
-                    For Each c As ConnectionPoint In Me.GraphicObject.OutputConnectors
+                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                         If c.Type = ConType.ConEn Then
                             If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
                         End If

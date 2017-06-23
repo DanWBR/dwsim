@@ -84,7 +84,7 @@ Namespace UnitOperations
             P = 0
             Dim i As Integer = 1
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
             For Each cp In Me.GraphicObject.InputConnectors
                 If cp.IsAttached Then
                     If cp.AttachedConnector.AttachedFrom.Calculated = False Then Throw New Exception(FlowSheet.GetTranslatedString("Umaoumaiscorrentesna"))

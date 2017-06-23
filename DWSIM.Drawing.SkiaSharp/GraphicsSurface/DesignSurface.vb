@@ -253,7 +253,7 @@ Public Class GraphicsSurface
 
         Dim newzoom As Single = Math.Min(zoomx, zoomy)
 
-        If newzoom > 0 And newzoom < 10 Then
+        If newzoom > 0.0# And newzoom < 100.0# Then
 
             Zoom = newzoom
 
@@ -262,12 +262,9 @@ Public Class GraphicsSurface
             mindevx = 30
             mindevy = 30
 
-            Dim mingx As Integer = (From x In DrawingObjects).Select(Function(x) x.X).Min
-            Dim mingy As Integer = (From x In DrawingObjects).Select(Function(x) x.Y).Min
-
             Dim deltax, deltay As Integer
-            deltax = mindevx - mingx
-            deltay = mindevy - mingy
+            deltax = mindevx - minx
+            deltay = mindevy - miny
 
             For Each gobj As IGraphicObject In Me.DrawingObjects
                 If Not gobj.IsConnector Then

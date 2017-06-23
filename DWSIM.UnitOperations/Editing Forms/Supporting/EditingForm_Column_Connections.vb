@@ -39,13 +39,13 @@ Public Class EditingForm_Column_Connections
             Dim i As Integer = 0
             Dim obj1(dc.GraphicObject.InputConnectors.Count), obj2(dc.GraphicObject.InputConnectors.Count) As Double
             Dim obj3(dc.GraphicObject.OutputConnectors.Count), obj4(dc.GraphicObject.OutputConnectors.Count) As Double
-            For Each ic As ConnectionPoint In dc.GraphicObject.InputConnectors
+            For Each ic As IConnectionPoint In dc.GraphicObject.InputConnectors
                 obj1(i) = -dc.GraphicObject.X + ic.Position.X
                 obj2(i) = -dc.GraphicObject.Y + ic.Position.Y
                 i = i + 1
             Next
             i = 0
-            For Each oc As ConnectionPoint In dc.GraphicObject.OutputConnectors
+            For Each oc As IConnectionPoint In dc.GraphicObject.OutputConnectors
                 obj3(i) = -dc.GraphicObject.X + oc.Position.X
                 obj4(i) = -dc.GraphicObject.Y + oc.Position.Y
                 i = i + 1

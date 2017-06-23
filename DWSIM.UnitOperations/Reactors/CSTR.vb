@@ -1194,7 +1194,7 @@ out:        Dim ms1, ms2 As MaterialStream
             End If
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
             Dim mtotal, wtotal As Double
 
             cp = Me.GraphicObject.OutputConnectors(0)
@@ -1237,7 +1237,7 @@ out:        Dim ms1, ms2 As MaterialStream
             Dim j As Integer = 0
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then

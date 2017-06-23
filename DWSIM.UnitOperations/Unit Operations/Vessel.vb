@@ -169,7 +169,7 @@ Namespace UnitOperations
             FlowSheet.AddCompoundsToMaterialStream(mix)
             Dim ms As MaterialStream = Nothing
 
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             nstr = 0.0#
             For Each cp In Me.GraphicObject.InputConnectors
@@ -482,7 +482,7 @@ Namespace UnitOperations
 
             Dim j As Integer = 0
 
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then

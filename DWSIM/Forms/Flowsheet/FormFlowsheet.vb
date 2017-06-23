@@ -448,7 +448,7 @@ Public Class FormFlowsheet
         End If
     End Sub
 
-    Public Sub ProcessScripts(ByVal sourceevent As Scripts.EventType, ByVal sourceobj As Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheetGUI.ProcessScripts
+    Public Sub ProcessScripts(ByVal sourceevent As Scripts.EventType, ByVal sourceobj As Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheetGUI.ProcessScripts, IFlowsheet.ProcessScripts
 
         Me.UIThread(Sub()
                         If Not Me.ScriptCollection Is Nothing Then
@@ -2900,7 +2900,7 @@ Public Class FormFlowsheet
         Me.Options.PropertyPackages.Add(obj.UniqueID, obj)
     End Sub
 
-    Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface
+    Public Sub UpdateInterface() Implements IFlowsheetGUI.UpdateInterface, IFlowsheet.UpdateInterface
 
         Me.UIThread(Sub()
                         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
@@ -2931,7 +2931,7 @@ Public Class FormFlowsheet
         frmpc.ShowDialog(Me)
     End Sub
 
-    Public Sub UpdateInformation() Implements IFlowsheetGUI.UpdateInformation
+    Public Sub UpdateInformation() Implements IFlowsheetGUI.UpdateInformation, IFlowsheet.UpdateInformation
 
         Me.UIThread(Sub()
 

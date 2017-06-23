@@ -1780,7 +1780,7 @@ Namespace Reactors
             Ki = tmp.Kvalues.ToArray
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then
@@ -1845,7 +1845,7 @@ Namespace Reactors
             Dim j As Integer
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
 
             cp = Me.GraphicObject.OutputConnectors(0)
             If cp.IsAttached Then

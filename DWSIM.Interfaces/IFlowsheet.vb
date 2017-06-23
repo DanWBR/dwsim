@@ -128,6 +128,12 @@
 
     Sub DeleteSelectedObject(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False)
 
+    Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String)
+
+    Sub UpdateInterface()
+
+    Sub UpdateInformation()
+
 End Interface
 
 ''' <summary>

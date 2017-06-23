@@ -140,7 +140,7 @@ Namespace UnitOperations
 
                 Case OpMode.SplitRatios
 
-                    Dim cp As ConnectionPoint
+                    Dim cp As IConnectionPoint
                     For Each cp In Me.GraphicObject.OutputConnectors
                         If cp.IsAttached Then
                             ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
@@ -166,7 +166,7 @@ Namespace UnitOperations
 
                 Case OpMode.StreamMassFlowSpec
 
-                    Dim cp As ConnectionPoint
+                    Dim cp As IConnectionPoint
                     Dim w1, w2 As Double
 
                     Dim wn(OutCount) As Double
@@ -221,7 +221,7 @@ Namespace UnitOperations
 
                 Case OpMode.StreamMoleFlowSpec
 
-                    Dim cp As ConnectionPoint
+                    Dim cp As IConnectionPoint
                     Dim m1, m2 As Double
 
                     Dim mn(OutCount) As Double
@@ -286,7 +286,7 @@ Namespace UnitOperations
             Dim j As Integer = 0
 
             Dim ms As MaterialStream
-            Dim cp As ConnectionPoint
+            Dim cp As IConnectionPoint
             For Each cp In Me.GraphicObject.OutputConnectors
                 If cp.IsAttached Then
                     ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedTo.Name)
