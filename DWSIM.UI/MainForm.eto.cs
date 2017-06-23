@@ -52,6 +52,11 @@ namespace DWSIM.UI
                 dialog.ShowDialog(this);
             };
 
+            btn2.Click += (sender, e) =>
+            {
+                new Forms.Forms.Flowsheet().Show();
+            };
+
             btn7.Click += (sender, e) => new About().Show();
             btn8.Click += (sender, e) => Process.Start("http://sourceforge.net/p/dwsim/donate/");
 
@@ -76,17 +81,18 @@ namespace DWSIM.UI
             var aboutCommand = new Command { MenuText = "About".Localize() };
             aboutCommand.Executed += (sender, e) => new About().Show();
 
+            var aitem1 = new ButtonMenuItem { Text = "Preferences".Localize() };
+            aitem1.Click += (sender, e) =>
+            {
+                new Forms.Forms.GeneralSettings().GetForm().Show();
+            };
+
             // create menu
             Menu = new MenuBar
             {
-               ApplicationItems =
-                    {
-					    // application (OS X) or file menu (others)
-					    new ButtonMenuItem { Text = "Preferences".Localize() },
-                    },
+                ApplicationItems = {aitem1},
                 QuitItem = quitCommand,
                 AboutItem = aboutCommand
-
             };
 
             Shown += MainForm_Shown;

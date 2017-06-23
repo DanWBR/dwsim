@@ -49,8 +49,17 @@ namespace DWSIM.UI.Desktop.Mac
                 ((FlowsheetSurface_Mac)this.Control).fsurface = value;
             }
         }
-
-
+        public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject
+        {
+            get
+            {
+                return ((FlowsheetSurface_Mac)this.Control).fbase;
+            }
+            set
+            {
+                ((FlowsheetSurface_Mac)this.Control).fbase = value;
+            }
+        }
     }
 
     public class FlowsheetSurface_Mac : NSView
@@ -59,6 +68,7 @@ namespace DWSIM.UI.Desktop.Mac
         private NSTrackingArea trackarea;
 
         public GraphicsSurface fsurface;
+        public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
 
         private float _lastTouchX;
         private float _lastTouchY;

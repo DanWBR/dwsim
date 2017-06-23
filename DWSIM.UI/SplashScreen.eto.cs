@@ -98,7 +98,7 @@ namespace DWSIM.UI.Forms
         void SplashScreen_Shown(object sender, EventArgs e)
         {
             Task.Factory.StartNew(() => {
-                Thread.Sleep(3000);
+                Thread.Sleep(1000);
             }).ContinueWith((t) => Application.Instance.Invoke(() => this.Close()));
         }
 

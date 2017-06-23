@@ -10,9 +10,9 @@ using System.Windows;
 using DWSIM.Drawing.SkiaSharp;
 using DWSIM.Interfaces;
 using System.Windows.Media.Imaging;
-using DWSIM.UI.Controls;
 using System.Windows.Threading;
 using System.Windows.Input;
+using DWSIM.UI.Controls;
 
 namespace DWSIM.UI.Desktop.WPF
 {
@@ -48,12 +48,24 @@ namespace DWSIM.UI.Desktop.WPF
             }
         }
 
+        public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject
+        {
+            get
+            {
+                return ((FlowsheetSurface_WPF)this.Control).fbase;
+            }
+            set
+            {
+                ((FlowsheetSurface_WPF)this.Control).fbase = value;
+            }
+        }
     }
 
     public class FlowsheetSurface_WPF : SkiaSharp.Views.WPF.SKElement
     {
 
         public GraphicsSurface fsurface;
+        public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
         private WriteableBitmap bitmap;
 
         private float _lastTouchX;

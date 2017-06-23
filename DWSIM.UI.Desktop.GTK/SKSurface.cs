@@ -40,6 +40,17 @@ namespace DWSIM.UI.Desktop.GTK
             }
         }
 
+        public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject
+        {
+            get
+            {
+                return ((FlowsheetSurface_GTK)this.Control).fbase;
+            }
+            set
+            {
+                ((FlowsheetSurface_GTK)this.Control).fbase = value;
+            }
+        }
 
     }
 
@@ -47,6 +58,7 @@ namespace DWSIM.UI.Desktop.GTK
     {
 
         public GraphicsSurface fsurface;
+        public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
 
         private float _lastTouchX;
         private float _lastTouchY;

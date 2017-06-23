@@ -47,6 +47,8 @@ namespace DWSIM.UI.Desktop
 
                 var platform = new Eto.Mac.Platform();
 
+                platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+      
                 new Application(platform).Run(new MainForm());
 
             }

@@ -25,9 +25,9 @@ Public MustInherit Class FlowsheetBase
 
     Private FlowsheetSurface As New GraphicsSurface
 
-    Public SensitivityAnalysisCase As New SharedClasses.DWSIM.Optimization.SensitivityAnalysisCase
+    Public SensAnalysisCollection As New List(Of Optimization.SensitivityAnalysisCase)
 
-    Public OptimizationCase As New SharedClasses.DWSIM.Optimization.OptimizationCase
+    Public OptimizationCollection As New List(Of Optimization.OptimizationCase)
 
     Private loaded As Boolean = False
 
@@ -873,6 +873,11 @@ Public MustInherit Class FlowsheetBase
 
     Public Sub LoadFromXML(xdoc As XDocument) Implements IFlowsheet.LoadFromXML
 
+        For Each xel1 As XElement In xdoc.Descendants
+            SharedClasses.Utility.UpdateElement(xel1)
+            SharedClasses.Utility.UpdateElementForV5(xel1)
+        Next
+
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
 
         Dim excs As New Concurrent.ConcurrentBag(Of Exception)
@@ -984,23 +989,29 @@ Public MustInherit Class FlowsheetBase
             End Try
         Next
 
-        Try
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCase").Elements.ToList
-            Dim obj As New Optimization.OptimizationCase
-            obj.LoadData(data)
-            OptimizationCase = obj
-        Catch ex As Exception
-            'excs.Add(New Exception("Error Loading Optimization Case Information", ex))
-        End Try
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases").Elements.ToList
 
-        Try
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysisCase").Elements.ToList
-            Dim obj As New Optimization.SensitivityAnalysisCase
-            obj.LoadData(data)
-            SensitivityAnalysisCase = obj
-        Catch ex As Exception
-            'excs.Add(New Exception("Error Loading Sensitivity Analysis Case Information", ex))
-        End Try
+        For Each xel As XElement In data
+            Try
+                Dim obj As New Optimization.OptimizationCase
+                obj.LoadData(xel.Elements.ToList)
+                OptimizationCollection.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Optimization Case Information", ex))
+            End Try
+        Next
+
+        data = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis").Elements.ToList
+
+        For Each xel As XElement In data
+            Try
+                Dim obj As New Optimization.SensitivityAnalysisCase
+                obj.LoadData(xel.Elements.ToList)
+                SensAnalysisCollection.Add(obj)
+            Catch ex As Exception
+                excs.Add(New Exception("Error Loading Sensitivity Analysis Case Information", ex))
+            End Try
+        Next
 
         If excs.Count > 0 Then
             ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
@@ -1097,9 +1108,19 @@ Public MustInherit Class FlowsheetBase
 
         xel = xdoc.Element("DWSIM_Simulation_Data")
 
-        xel.Add(New XElement("OptimizationCase", {OptimizationCase.SaveData().ToArray()}))
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("OptimizationCases"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("OptimizationCases")
 
-        xel.Add(New XElement("SensitivityAnalysisCase", {SensitivityAnalysisCase.SaveData().ToArray()}))
+        For Each pp As Optimization.OptimizationCase In OptimizationCollection
+            xel.Add(New XElement("OptimizationCase", {pp.SaveData().ToArray()}))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SensitivityAnalysis"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("SensitivityAnalysis")
+
+        For Each pp As Optimization.SensitivityAnalysisCase In SensAnalysisCollection
+            xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
+        Next
 
         Return xdoc
 

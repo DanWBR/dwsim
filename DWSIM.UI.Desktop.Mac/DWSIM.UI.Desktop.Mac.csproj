@@ -67,9 +67,21 @@
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.UI.Desktop.FlowsheetControl\DWSIM.UI.Desktop.FlowsheetControl.csproj">
-      <Project>{b534a564-a134-421c-abae-b37df535cc5b}</Project>
-      <Name>DWSIM.UI.Desktop.FlowsheetControl</Name>
+    <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
+      <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
+      <Name>DWSIM.FlowsheetBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
+      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
+      <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj">
+      <Project>{2ffd2514-e4f9-4c19-b38e-b77560585d61}</Project>
+      <Name>DWSIM.UI.Desktop.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI\DWSIM.UI.Forms.csproj">
+      <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
+      <Name>DWSIM.UI.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
