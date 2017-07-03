@@ -1,9 +1,9 @@
 ﻿using DWSIM.Drawing.SkiaSharp;
-using DWSIM.UI.Controls;
 using MonoMac.AppKit;
 using MonoMac.CoreGraphics;
 using SkiaSharp;
 using System;
+using DWSIM.UI.Controls;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -13,7 +13,6 @@ namespace DWSIM.UI.Desktop.Mac
         public FlowsheetSurfaceControlHandler()
         {
             this.Control = new FlowsheetSurface_Mac();
-            
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -62,7 +61,7 @@ namespace DWSIM.UI.Desktop.Mac
         }
     }
 
-    public class FlowsheetSurface_Mac : NSView
+    public class FlowsheetSurface_Mac : NSView, Eto.Mac.Forms.IMacControl
     {
 
         private NSTrackingArea trackarea;
@@ -149,7 +148,7 @@ namespace DWSIM.UI.Desktop.Mac
             }
             else { 
                 _lastTouchX = theEvent.LocationInWindow.X;
-                _lastTouchY = Bounds.Height - theEvent.LocationInWindow.Y;
+                _lastTouchY = Frame.Height - theEvent.LocationInWindow.Y;
                 fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
             }
             this.NeedsDisplay = true;
@@ -164,7 +163,7 @@ namespace DWSIM.UI.Desktop.Mac
         {
             base.MouseDragged(theEvent);
             _lastTouchX = theEvent.LocationInWindow.X;
-            _lastTouchY = Bounds.Height - theEvent.LocationInWindow.Y;
+            _lastTouchY = Frame.Height - theEvent.LocationInWindow.Y;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.NeedsDisplay = true;
         }
@@ -182,6 +181,8 @@ namespace DWSIM.UI.Desktop.Mac
             fsurface.Zoom += scroll / 100.0f;
             this.NeedsDisplay = true;
         }
+
+        public WeakReference WeakHandler { get; set; }
 
     }
 
