@@ -36,26 +36,34 @@ namespace DWSIM.UI.Forms
             closeCommand.Executed += (sender, e) => Close();
 
             var saveCommand = new Command { MenuText = "SaveFlowsheet".Localize() };
-            
-            var btnSave = new ButtonToolItem {Text = "Save"};
-            var btnSaveAs = new ButtonToolItem { Text = "Save As" };
-            var btnComps = new ButtonToolItem { Text = "Compounds" };
-            var btnBasis = new ButtonToolItem { Text = "Basis" };
-            var btnObjects = new ButtonToolItem { Text = "Objects" };
-            var btnTools = new ButtonToolItem { Text = "Tools" };
-            var btnUtilities = new ButtonToolItem { Text = "Utilities" };
-            var btnScripts = new ButtonToolItem { Text = "Scripts" };
-            var btnReports = new ButtonToolItem { Text = "Reports" };
-            var btnOptions = new ButtonToolItem { Text = "Options" };
 
-            var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet" };
+            var btnSave = new ButtonToolItem { Text = "Save", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
+            var btnSaveAs = new ButtonToolItem { Text = "Save As", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")) };
+            var btnComps = new ButtonToolItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
+            var btnBasis = new ButtonToolItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
+            var btnObjects = new ButtonToolItem { Text = "Objects", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
+            var btnTools = new ButtonToolItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
+            var btnUtilities = new ButtonToolItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
+            var btnScripts = new ButtonToolItem { Text = "Scripts", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-property_script.png")) };
+            var btnReports = new ButtonToolItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
+            var btnOptions = new ButtonToolItem { Text = "Options", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+
+            var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             btnSolve.Click += (sender, e) => {FlowsheetObject.SolveFlowsheet();};
 
             // create menu
             ToolBar = new ToolBar();
-            ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, new SeparatorToolItem(), btnSolve, new SeparatorToolItem(),
+            if (Application.Instance.Platform.IsMac)
+            {
+                ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, btnSolve,
+                                           btnComps, btnBasis, btnObjects, btnTools, btnUtilities,
+                                           btnScripts, btnReports, btnOptions});
+            }
+            else {
+                ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, new SeparatorToolItem(), btnSolve, new SeparatorToolItem(),
                                            btnComps, btnBasis, btnObjects, new SeparatorToolItem(), btnTools, btnUtilities,
                                            btnScripts, btnReports, btnOptions});
+            }
                  
             var outtxt = new TextArea { Text = "", ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size)};
 

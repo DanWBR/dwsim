@@ -148,7 +148,7 @@ namespace DWSIM.UI.Desktop.Mac
             }
             else { 
                 _lastTouchX = theEvent.LocationInWindow.X;
-                _lastTouchY = Frame.Height - theEvent.LocationInWindow.Y;
+                _lastTouchY = Superview.Bounds.Height - theEvent.LocationInWindow.Y;
                 fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
             }
             this.NeedsDisplay = true;
@@ -163,7 +163,7 @@ namespace DWSIM.UI.Desktop.Mac
         {
             base.MouseDragged(theEvent);
             _lastTouchX = theEvent.LocationInWindow.X;
-            _lastTouchY = Frame.Height - theEvent.LocationInWindow.Y;
+            _lastTouchY = Superview.Bounds.Height - theEvent.LocationInWindow.Y;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.NeedsDisplay = true;
         }

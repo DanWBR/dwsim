@@ -85,7 +85,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var drop = new DropDown { Width = 100 };
+            var drop = new DropDown { Width = 200 };
 
             foreach (var item in options)
             {
@@ -120,7 +120,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 100 };
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200 };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -153,7 +153,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval, Width = 100 };
+            var edittext = new TextBox { Text = currval, Width = 200 };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -191,7 +191,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
-            var btn = new Button { Width = 100, Text = buttonlabel };
+            var btn = new Button { Width = 200, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
@@ -210,7 +210,7 @@ namespace DWSIM.UI.Shared
         public static Button CreateAndAddButtonRow(this DynamicLayout container, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
         {
 
-            var btn = new Button { Width = 100, Text = buttonlabel };
+            var btn = new Button { Width = 200, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 

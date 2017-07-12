@@ -190,9 +190,25 @@
       <Name>DWSIM.UI.Desktop.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-save.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-save_as.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\TextFiles\gpl-3.0.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-maintenance.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-math.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-play.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-property_script.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-report_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icons8-sorting_options.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-swiss_army_knife.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-thin_test_tube.png" />
+    <EmbeddedResource Include="Resources\Icons\icons8-workflow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -86,9 +86,9 @@ namespace DWSIM.UI.Desktop
                     //    }
                     //);
 
-                    //platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+                    platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
 
-                    //new Application(platform).Run(new MainForm());
+                    new Application(platform).Run(new MainForm());
                 
                 }
                 catch (Exception ex)
