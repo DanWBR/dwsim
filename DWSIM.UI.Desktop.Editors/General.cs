@@ -170,7 +170,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heat Flow"));
                     break;
-                case ObjectType.CompressorExpander:
+                case ObjectType.Compressor:
                     var ce = (Compressor)SimObject;
                     int pos1 = 0;
                     switch (ce.CalcMode)
@@ -196,7 +196,7 @@ namespace DWSIM.UI.Desktop.Editors
                     });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Calculation Mode"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Change (+)/(-) (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, ce.DeltaP.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Increase (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, ce.DeltaP.GetValueOrDefault()),
                                    (TextBox arg3, EventArgs ev) =>
                                    {
                                        if (Double.TryParse(arg3.Text.ToString(), out val))
@@ -210,7 +210,7 @@ namespace DWSIM.UI.Desktop.Editors
                                        }
                                    });
                     s.CreateAndAddDescriptionRow(container,
-                             SimObject.GetPropertyDescription("Pressure Change (+)/(-)"));
+                             SimObject.GetPropertyDescription("Pressure Increase"));
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, ce.POut.GetValueOrDefault()),
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -233,6 +233,78 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (SystemColors.ControlText);
                                ce.EficienciaAdiabatica = Double.Parse(arg3.Text.ToString());
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Efficiency (%)"));
+                    break;
+                case ObjectType.Expander:
+                    var xe = (UnitOperations.UnitOperations.Expander)SimObject;
+                    int pos1e = 0;
+                    switch (xe.CalcMode)
+                    {
+                        case UnitOperations.UnitOperations.Expander.CalculationMode.OutletPressure:
+                            pos1e = 0;
+                            break;
+                        case UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P:
+                            pos1e = 1;
+                            break;
+                    }
+                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.comprcalcmode().ToList(), pos1e, (DropDown arg3, EventArgs ev) =>
+                    {
+                        switch (arg3.SelectedIndex)
+                        {
+                            case 0:
+                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.OutletPressure;
+                                break;
+                            case 1:
+                                xe.CalcMode = UnitOperations.UnitOperations.Expander.CalculationMode.Delta_P;
+                                break;
+                        }
+                    });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Calculation Mode"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Decrease (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, xe.DeltaP.GetValueOrDefault()),
+                                   (TextBox arg3, EventArgs ev) =>
+                                   {
+                                       if (Double.TryParse(arg3.Text.ToString(), out val))
+                                       {
+                                           arg3.TextColor = (SystemColors.ControlText);
+                                           xe.DeltaP = cv.ConvertToSI(su.deltaP, Double.Parse(arg3.Text.ToString()));
+                                       }
+                                       else
+                                       {
+                                           arg3.TextColor = (Colors.Red);
+                                       }
+                                   });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Pressure Decrease"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, xe.POut.GetValueOrDefault()),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               xe.POut = cv.ConvertToSI(su.pressure, Double.Parse(arg3.Text.ToString()));
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Outlet Pressure"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", xe.EficienciaAdiabatica.GetValueOrDefault(),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               xe.EficienciaAdiabatica = Double.Parse(arg3.Text.ToString());
                            }
                            else
                            {
@@ -304,7 +376,7 @@ namespace DWSIM.UI.Desktop.Editors
                        });
                     s.CreateAndAddDescriptionRow(container,
                              SimObject.GetPropertyDescription("Outlet Temperature"));
-                    s.CreateAndAddTextBoxRow(container, nf, "Heat Added(+)/Removed(-) (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, hc.DeltaQ.GetValueOrDefault()),
+                    s.CreateAndAddTextBoxRow(container, nf, "Heat Added (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, hc.DeltaQ.GetValueOrDefault()),
                        (TextBox arg3, EventArgs ev) =>
                        {
                            if (Double.TryParse(arg3.Text.ToString(), out val))
@@ -318,7 +390,7 @@ namespace DWSIM.UI.Desktop.Editors
                            }
                        });
                     s.CreateAndAddDescriptionRow(container,
-                             SimObject.GetPropertyDescription("Heat Added(+)/Removed(-)"));
+                             SimObject.GetPropertyDescription("Heat Added"));
                     s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", hc.Eficiencia.GetValueOrDefault(),
                        (TextBox arg3, EventArgs ev) =>
                        {
@@ -341,6 +413,114 @@ namespace DWSIM.UI.Desktop.Editors
                            {
                                arg3.TextColor = (SystemColors.ControlText);
                                hc.OutletVaporFraction = Double.Parse(arg3.Text.ToString());
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                                                 SimObject.GetPropertyDescription("Outlet Vapor Fraction"));
+                    break;
+                case ObjectType.Cooler:
+                    var cc = (Cooler)SimObject;
+                    int pos3c = 0;
+                    switch (cc.CalcMode)
+                    {
+                        case Cooler.CalculationMode.HeatRemoved:
+                            pos3c = 0;
+                            break;
+                        case Cooler.CalculationMode.OutletTemperature:
+                            pos3c = 1;
+                            break;
+                        case Cooler.CalculationMode.OutletVaporFraction:
+                            pos3c = 2;
+                            break;
+                    }
+                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.heatercalcmode().ToList(), pos3c, (DropDown arg3, EventArgs ev) =>
+                    {
+                        switch (arg3.SelectedIndex)
+                        {
+                            case 0:
+                                cc.CalcMode = Cooler.CalculationMode.HeatRemoved;
+                                break;
+                            case 1:
+                                cc.CalcMode = Cooler.CalculationMode.OutletTemperature;
+                                break;
+                            case 2:
+                                cc.CalcMode = Cooler.CalculationMode.OutletVaporFraction;
+                                break;
+                        }
+                    });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Calculation Mode"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, cc.DeltaP.GetValueOrDefault()),
+                                   (TextBox arg3, EventArgs ev) =>
+                                   {
+                                       if (Double.TryParse(arg3.Text.ToString(), out val))
+                                       {
+                                           arg3.TextColor = (SystemColors.ControlText);
+                                           cc.DeltaP = cv.ConvertToSI(su.deltaP, Double.Parse(arg3.Text.ToString()));
+                                       }
+                                       else
+                                       {
+                                           arg3.TextColor = (Colors.Red);
+                                       }
+                                   });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Pressure Drop"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, cc.OutletTemperature.GetValueOrDefault()),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               cc.OutletTemperature = cv.ConvertToSI(su.temperature, Double.Parse(arg3.Text.ToString()));
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Outlet Temperature"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Heat Removed (" + su.heatflow + ")", cv.ConvertFromSI(su.heatflow, cc.DeltaQ.GetValueOrDefault()),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               cc.DeltaQ = cv.ConvertToSI(su.heatflow, Double.Parse(arg3.Text.ToString()));
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                             SimObject.GetPropertyDescription("Heat Removed"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Efficiency (%)", cc.Eficiencia.GetValueOrDefault(),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               cc.Eficiencia = Double.Parse(arg3.Text.ToString());
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                                                 SimObject.GetPropertyDescription("Efficiency (%)"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Outlet Vapor Fraction", cc.OutletVaporFraction.GetValueOrDefault(),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               cc.OutletVaporFraction = Double.Parse(arg3.Text.ToString());
                            }
                            else
                            {

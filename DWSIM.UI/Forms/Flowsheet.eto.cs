@@ -65,7 +65,7 @@ namespace DWSIM.UI.Forms
                                            btnScripts, btnReports, btnOptions});
             }
                  
-            var outtxt = new TextArea { Text = "", ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size)};
+            var outtxt = new TextArea { Text = "", ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
 
             var ctxmenu0 = new ContextMenu();
 
@@ -95,7 +95,7 @@ namespace DWSIM.UI.Forms
             split.Panel2 = outtxt;
             split.Orientation = Orientation.Vertical;
             split.FixedPanel = SplitterFixedPanel.Panel2;
-            split.Panel2.Height = 150;
+            split.Panel2.Height = 100;
 
             Content = split;
 

@@ -6377,7 +6377,6 @@ Namespace Streams
 
         End Function
 
-
         Public Function TranslateString(s As String) As String
 
             If s.ToLower.Equals("criticalvolume") Then
@@ -6506,6 +6505,27 @@ Namespace Streams
 
         End Function
 
+        Public Overrides Function GetPropertyDescription(p As String) As String
+
+            If p.Equals("Flash Specification") Then
+                Return "Select a pair of properties to specify the thermodynamic state of the stream's mixture."
+            ElseIf p.Equals("Temperature") Then
+                Return "Enter the temperature of the stream if the Flash Spec is T/P or T/VF, otherwise it will be calculated."
+            ElseIf p.Equals("Pressure") Then
+                Return "Enter the pressure of the stream if the Flash Spec is T/P or P/VF, otherwise it will be calculated."
+            ElseIf p.Equals("Mass Flow") Then
+                Return "Enter the Mass flow of the stream. Molar and Volumetric ones will be calculated to match this value."
+            ElseIf p.Equals("Molar Flow") Then
+                Return "Enter the Molar flow of the stream. Mass and Volumetric ones will be calculated to match this value."
+            ElseIf p.Equals("Volumetric Flow") Then
+                Return "Enter the Volumetric flow of the stream. Molar and Mass ones will be calculated to match this value."
+            ElseIf p.Equals("Vapor Phase Mole Fraction (spec)") Then
+                Return "If the Flash Spec is T/VF or P/VF, enter the vapor phase mole fraction (quality) of the stream, otherwise it will be calculated."
+            Else
+                Return p
+            End If
+
+        End Function
 
     End Class
 

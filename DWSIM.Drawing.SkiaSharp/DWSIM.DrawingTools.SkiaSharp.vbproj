@@ -121,11 +121,17 @@
     <Compile Include="GraphicObjects\Shapes\AbsorptionColumn.vb" />
     <Compile Include="GraphicObjects\Shapes\Adjust.vb" />
     <Compile Include="GraphicObjects\Shapes\ComponentSeparator.vb" />
+    <Compile Include="GraphicObjects\Shapes\Compressor.vb" />
     <Compile Include="GraphicObjects\Shapes\CompressorExpander.vb" />
     <Compile Include="GraphicObjects\Shapes\ConversionReactor.vb" />
+    <Compile Include="GraphicObjects\Shapes\Cooler.vb" />
     <Compile Include="GraphicObjects\Shapes\CSTR.vb" />
+    <Compile Include="GraphicObjects\Shapes\EnergyRecycle.vb" />
     <Compile Include="GraphicObjects\Shapes\EnergyStream.vb" />
     <Compile Include="GraphicObjects\Shapes\EquilibriumReactor.vb" />
+    <Compile Include="GraphicObjects\Shapes\Expander.vb" />
+    <Compile Include="GraphicObjects\Shapes\GibbsReactor.vb" />
+    <Compile Include="GraphicObjects\Shapes\Heater.vb" />
     <Compile Include="GraphicObjects\Shapes\HeaterCooler.vb" />
     <Compile Include="GraphicObjects\Shapes\HeatExchanger.vb" />
     <Compile Include="GraphicObjects\Shapes\MaterialStream.vb" />
@@ -137,6 +143,8 @@
     <Compile Include="GraphicObjects\Shapes\RigorousColumn.vb" />
     <Compile Include="GraphicObjects\Shapes\SeparatorVessel.vb" />
     <Compile Include="GraphicObjects\Shapes\ShortcutColumn.vb" />
+    <Compile Include="GraphicObjects\Shapes\SolidsSeparator.vb" />
+    <Compile Include="GraphicObjects\Shapes\Spec.vb" />
     <Compile Include="GraphicObjects\Shapes\Splitter.vb" />
     <Compile Include="GraphicObjects\Shapes\Valve.vb" />
     <Compile Include="GraphicObjects\Table\TableGraphic.vb" />

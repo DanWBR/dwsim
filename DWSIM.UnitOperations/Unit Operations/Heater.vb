@@ -517,7 +517,7 @@ Namespace UnitOperations
 
             istr.PropertyPackage.CurrentMaterialStream = istr
 
-            str.AppendLine("Heater/Cooler: " & Me.GraphicObject.Tag)
+            str.AppendLine("Heater: " & Me.GraphicObject.Tag)
             str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
             str.AppendLine()
             str.AppendLine("Inlet conditions")
@@ -535,14 +535,14 @@ Namespace UnitOperations
             str.AppendLine("    Calculation mode: " & CalcMode.ToString)
             Select Case Me.CalcMode
                 Case CalculationMode.HeatAdded
-                    str.AppendLine("    Heat added/removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Heat added: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ).ToString(numberformat, ci) & " " & su.heatflow)
                 Case CalculationMode.OutletTemperature
                     str.AppendLine("    Outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
                 Case CalculationMode.OutletVaporFraction
                     str.AppendLine("    Outlet vapor mole fraction: " & Me.OutletVaporFraction.GetValueOrDefault.ToString(numberformat, ci))
             End Select
             str.AppendLine("    Efficiency: " & Me.Eficiencia.GetValueOrDefault.ToString(numberformat, ci))
-            str.AppendLine("    Pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.DeltaP).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine("    Pressure drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.DeltaP.GetValueOrDefault).ToString(numberformat, ci) & " " & su.deltaP)
             str.AppendLine()
             str.AppendLine("Results")
             str.AppendLine()
@@ -552,10 +552,10 @@ Namespace UnitOperations
                     str.AppendLine("    Outlet vapor mole fraction: " & Me.OutletVaporFraction.GetValueOrDefault.ToString(numberformat, ci))
                 Case CalculationMode.OutletTemperature
                     str.AppendLine("    Outlet vapor mole fraction: " & Me.OutletVaporFraction.GetValueOrDefault.ToString(numberformat, ci))
-                    str.AppendLine("    Heat added/removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Heat added: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
                 Case CalculationMode.OutletVaporFraction
                     str.AppendLine("    Outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
-                    str.AppendLine("    Heat added/removed: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Heat added: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault).ToString(numberformat, ci) & " " & su.heatflow)
             End Select
 
             Return str.ToString
@@ -569,8 +569,8 @@ Namespace UnitOperations
                 Return "Enter the desired pressure drop of the heater/cooler."
             ElseIf p.Equals("Outlet Temperature") Then
                 Return "If you chose 'Outlet Temperature' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
-            ElseIf p.Equals("Heat Added(+)/Removed(-)") Then
-                Return "If you chose 'Heat Added/Removed' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
+            ElseIf p.Equals("Heat Added") Then
+                Return "If you chose 'Heat Added' as the calculation mode, enter the desired value. If you chose a different calculation mode, this parameter will be calculated."
             ElseIf p.Equals("Efficiency (%)") Then
                 Return "Enter the desired efficiency of the heating/cooling process. This defines how much energy flow is actually added or removed to/from the inlet stream."
             ElseIf p.Equals("Outlet Vapor Fraction") Then

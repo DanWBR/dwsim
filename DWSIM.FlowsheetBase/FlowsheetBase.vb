@@ -135,18 +135,17 @@ Public MustInherit Class FlowsheetBase
                             End Try
                         Next
 
-                        'If gobj.ObjectType = ObjectType.OT_Spec Then
-                        '    Dim specobj As PortableDTL.UnitOperati = Me.Collections.FlowsheetObjectCollection(namesel)
-                        '    If Me.SimulationObjects.ContainsKey(specobj.TargetObjectData.ID) Then
-                        '        Me.SimulationObjects(specobj.TargetObjectData.ID).IsSpecAttached = False
-                        '        Me.SimulationObjects(specobj.TargetObjectData.ID).AttachedSpecId = ""
-                        '    End If
-                        '    If Me.SimulationObjects.ContainsKey(specobj.SourceObjectData.ID) Then
-                        '        Me.SimulationObjects(specobj.SourceObjectData.ID).IsSpecAttached = False
-                        '        Me.SimulationObjects(specobj.SourceObjectData.ID).AttachedSpecId = ""
-                        '    End If
-                        'Else
-                        If gobj.ObjectType = ObjectType.OT_Adjust Then
+                        If gobj.ObjectType = ObjectType.OT_Spec Then
+                            Dim specobj As ISpec = SimulationObjects(namesel)
+                            If Me.SimulationObjects.ContainsKey(specobj.TargetObjectData.ID) Then
+                                Me.SimulationObjects(specobj.TargetObjectData.ID).IsSpecAttached = False
+                                Me.SimulationObjects(specobj.TargetObjectData.ID).AttachedSpecId = ""
+                            End If
+                            If Me.SimulationObjects.ContainsKey(specobj.SourceObjectData.ID) Then
+                                Me.SimulationObjects(specobj.SourceObjectData.ID).IsSpecAttached = False
+                                Me.SimulationObjects(specobj.SourceObjectData.ID).AttachedSpecId = ""
+                            End If
+                        ElseIf gobj.ObjectType = ObjectType.OT_Adjust Then
                             Dim adjobj As IAdjust = SimulationObjects(namesel)
                             If Me.SimulationObjects.ContainsKey(adjobj.ManipulatedObjectData.ID) Then
                                 Me.SimulationObjects(adjobj.ManipulatedObjectData.ID).IsAdjustAttached = False
@@ -325,22 +324,20 @@ Public MustInherit Class FlowsheetBase
                 SimulationObjects.Add(myNode.Name, myADJ)
                 'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("ADJT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
-                'Case ObjectType.OT_Spec
+            Case ObjectType.OT_Spec
 
-                '    Dim myNode As New SpecGraphic(mpx, mpy, 40, 40, 0)
-                '    myNode.LineWidth = 2
-                '    myNode.Fill = True
-                '    myNode.FillColor = fillclr
-                '    myNode.LineColor = lineclr
-                '    myNode.Tag = "SPEC-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myNode.Tag = tag
-                '    gObj = myNode
-                '    gObj.Name = "ES-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myNode)
-                '    Dim myADJ As Spec = New Spec(myNode.Name, "Especificao")
-                '    myADJ.GraphicObject = myNode
-                '    SimulationObjects.Add(myNode.Name, myADJ)
+                Dim myNode As New SpecGraphic(mpx, mpy, 40, 40)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "SPEC-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myNode.Tag = tag
+                gObj = myNode
+                gObj.Name = "SPEC-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myNode)
+                Dim myADJ As Spec = New Spec(myNode.Name, "Especificao")
+                myADJ.GraphicObject = myNode
+                SimulationObjects.Add(myNode.Name, myADJ)
 
             Case ObjectType.OT_Recycle
 
@@ -355,22 +352,20 @@ Public MustInherit Class FlowsheetBase
                 myADJ.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myADJ)
 
-                'Case ObjectType.OT_EnergyRecycle
+            Case ObjectType.OT_EnergyRecycle
 
-                '    Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 40, 40, 0)
-                '    myNode.LineWidth = 2
-                '    myNode.Fill = True
-                '    myNode.FillColor = fillclr
-                '    myNode.LineColor = lineclr
-                '    myNode.Tag = "EREC-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myNode.Tag = tag
-                '    gObj = myNode
-                '    gObj.Name = "EREC-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myNode)
-                '    Dim myADJ As EnergyRecycle = New EnergyRecycle(myNode.Name, "EnergyRecycle")
-                '    myADJ.GraphicObject = myNode
-                '    SimulationObjects.Add(myNode.Name, myADJ)
+                Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 40, 40)
+                myNode.LineWidth = 2
+                myNode.Fill = True
+                myNode.Tag = "EREC-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myNode.Tag = tag
+                gObj = myNode
+                gObj.Name = "EREC-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myNode)
+                Dim myADJ As EnergyRecycle = New EnergyRecycle(myNode.Name, "EnergyRecycle")
+                myADJ.GraphicObject = myNode
+                SimulationObjects.Add(myNode.Name, myADJ)
 
             Case ObjectType.NodeIn
 
@@ -434,10 +429,10 @@ Public MustInherit Class FlowsheetBase
             Case ObjectType.Vessel
 
                 Dim myVessel As New VesselGraphic(mpx, mpy, 50, 70)
-                myVessel.Tag = "SEP-" & SimulationObjects.Count.ToString("00#")
+                myVessel.Tag = "V-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myVessel.Tag = tag
                 gObj = myVessel
-                gObj.Name = "SEP-" & Guid.NewGuid.ToString
+                gObj.Name = "V-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myVessel)
                 'OBJETO DWSIM
@@ -448,10 +443,10 @@ Public MustInherit Class FlowsheetBase
             Case ObjectType.MaterialStream
 
                 Dim myMStr As New MaterialStreamGraphic(mpx, mpy, 30, 30)
-                myMStr.Tag = "MSTR-" & SimulationObjects.Count.ToString("00#")
+                myMStr.Tag = "MS-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
-                gObj.Name = "MSTR-" & Guid.NewGuid.ToString
+                gObj.Name = "MS-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
@@ -463,10 +458,10 @@ Public MustInherit Class FlowsheetBase
             Case ObjectType.EnergyStream
 
                 Dim myMStr As New EnergyStreamGraphic(mpx, mpy, 30, 30)
-                myMStr.Tag = "ESTR-" & SimulationObjects.Count.ToString("00#")
+                myMStr.Tag = "ES-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myMStr.Tag = tag
                 gObj = myMStr
-                gObj.Name = "ESTR-" & Guid.NewGuid.ToString
+                gObj.Name = "ES-" & Guid.NewGuid.ToString
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
@@ -488,6 +483,34 @@ Public MustInherit Class FlowsheetBase
                 myCOCP.GraphicObject = myComp
                 SimulationObjects.Add(myComp.Name, myCOCP)
 
+            Case ObjectType.Compressor
+
+                Dim myComp As New CompressorGraphic(mpx, mpy, 50, 50)
+                myComp.Tag = "C-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myComp.Tag = tag
+                gObj = myComp
+                gObj.Name = "C-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myComp)
+                'OBJETO DWSIM
+                Dim myCOCP As Compressor = New Compressor(myComp.Name, "")
+                myCOCP.GraphicObject = myComp
+                SimulationObjects.Add(myComp.Name, myCOCP)
+
+            Case ObjectType.Expander
+
+                Dim myComp As New ExpanderGraphic(mpx, mpy, 50, 50)
+                myComp.Tag = "X-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myComp.Tag = tag
+                gObj = myComp
+                gObj.Name = "X-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myComp)
+                'OBJETO DWSIM
+                Dim myCOCP As Expander = New Expander(myComp.Name, "")
+                myCOCP.GraphicObject = myComp
+                SimulationObjects.Add(myComp.Name, myCOCP)
+
             Case ObjectType.HeaterCooler
 
                 Dim myCool As New HeaterCoolerGraphic(mpx, mpy, 40, 40)
@@ -499,6 +522,34 @@ Public MustInherit Class FlowsheetBase
                 GraphicObjects.Add(gObj.Name, myCool)
                 'OBJETO DWSIM
                 Dim myCOCL As Heater = New Heater(myCool.Name, "")
+                myCOCL.GraphicObject = myCool
+                SimulationObjects.Add(myCool.Name, myCOCL)
+
+            Case ObjectType.Heater
+
+                Dim myCool As New HeaterGraphic(mpx, mpy, 40, 40)
+                myCool.Tag = "HT-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myCool.Tag = tag
+                gObj = myCool
+                gObj.Name = "HT-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myCool)
+                'OBJETO DWSIM
+                Dim myCOCL As Heater = New Heater(myCool.Name, "")
+                myCOCL.GraphicObject = myCool
+                SimulationObjects.Add(myCool.Name, myCOCL)
+
+            Case ObjectType.Cooler
+
+                Dim myCool As New CoolerGraphic(mpx, mpy, 40, 40)
+                myCool.Tag = "CL-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myCool.Tag = tag
+                gObj = myCool
+                gObj.Name = "CL-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myCool)
+                'OBJETO DWSIM
+                Dim myCOCL As Cooler = New Cooler(myCool.Name, "")
                 myCOCL.GraphicObject = myCool
                 SimulationObjects.Add(myCool.Name, myCOCL)
 
@@ -558,23 +609,21 @@ Public MustInherit Class FlowsheetBase
                 myCOREQ.GraphicObject = myReq
                 SimulationObjects.Add(myReq.Name, myCOREQ)
 
-                'Case ObjectType.RCT_Gibbs
+            Case ObjectType.RCT_Gibbs
 
-                '    Dim myRgibbs As New ReactorGibbsGraphic(mpx, mpy, 50, 50, 0)
-                '    myRgibbs.LineWidth = 2
-                '    myRgibbs.Fill = True
-                '    myRgibbs.FillColor = fillclr
-                '    myRgibbs.LineColor = lineclr
-                '    myRgibbs.Tag = "RG-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myRgibbs.Tag = tag
-                '    gObj = myRgibbs
-                '    gObj.Name = "RG-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myRgibbs)
-                '    'OBJETO DWSIM
-                '    Dim myCORGIBBS As Reactor_Gibbs = New Reactor_Gibbs(myRgibbs.Name, "ReatorGibbs")
-                '    myCORGIBBS.GraphicObject = myRgibbs
-                '    SimulationObjects.Add(myRgibbs.Name, myCORGIBBS)
+                Dim myRgibbs As New GibbsReactorGraphic(mpx, mpy, 50, 50)
+                myRgibbs.LineWidth = 2
+                myRgibbs.Fill = True
+                myRgibbs.Tag = "GR-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myRgibbs.Tag = tag
+                gObj = myRgibbs
+                gObj.Name = "GR-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myRgibbs)
+                'OBJETO DWSIM
+                Dim myCORGIBBS As Reactor_Gibbs = New Reactor_Gibbs(myRgibbs.Name, "ReatorGibbs")
+                myCORGIBBS.GraphicObject = myRgibbs
+                SimulationObjects.Add(myRgibbs.Name, myCORGIBBS)
 
             Case ObjectType.RCT_CSTR
 
@@ -726,23 +775,21 @@ Public MustInherit Class FlowsheetBase
                 myCOCSEP.GraphicObject = myCSep
                 SimulationObjects.Add(myCSep.Name, myCOCSEP)
 
-                'Case ObjectType.SolidSeparator
+            Case ObjectType.SolidSeparator
 
-                '    Dim myCSep As New SolidSeparatorGraphic(mpx, mpy, 50, 50, 0)
-                '    myCSep.LineWidth = 2
-                '    myCSep.Fill = True
-                '    myCSep.FillColor = fillclr
-                '    myCSep.LineColor = lineclr
-                '    myCSep.Tag = "SS-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myCSep.Tag = tag
-                '    gObj = myCSep
-                '    gObj.Name = "SS-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myCSep)
-                '    'OBJETO DWSIM
-                '    Dim myCOCSEP As SolidsSeparator = New SolidsSeparator(myCSep.Name, "SolidsSeparator")
-                '    myCOCSEP.GraphicObject = myCSep
-                '    SimulationObjects.Add(myCSep.Name, myCOCSEP)
+                Dim myCSep As New SolidsSeparatorGraphic(mpx, mpy, 50, 50)
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "SS-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myCSep.Tag = tag
+                gObj = myCSep
+                gObj.Name = "SS-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myCSep)
+                'OBJETO DWSIM
+                Dim myCOCSEP As SolidsSeparator = New SolidsSeparator(myCSep.Name, "SolidsSeparator")
+                myCOCSEP.GraphicObject = myCSep
+                SimulationObjects.Add(myCSep.Name, myCOCSEP)
 
                 'Case ObjectType.Filter
 
@@ -1313,21 +1360,21 @@ Public MustInherit Class FlowsheetBase
                         DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
                     End If
                 End If
-                'If TryCast(so, Spec) IsNot Nothing Then
-                '    Dim so2 As Spec = so
-                '    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.TargetObjectData.ID) Then
-                '        so2.TargetObject = form.Collections.FlowsheetObjectCollection(so2.TargetObjectData.ID)
-                '        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
-                '    End If
-                '    If form.Collections.FlowsheetObjectCollection.ContainsKey(so2.SourceObjectData.ID) Then
-                '        so2.SourceObject = form.Collections.FlowsheetObjectCollection(so2.SourceObjectData.ID)
-                '        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
-                '    End If
-                'End If
-                'If TryCast(so, CapeOpenUO) IsNot Nothing Then
-                '    DirectCast(so, CapeOpenUO).UpdateConnectors2()
-                '    DirectCast(so, CapeOpenUO).UpdatePortsFromConnectors()
-                'End If
+                If TryCast(so, Spec) IsNot Nothing Then
+                    Dim so2 As Spec = so
+                    If SimulationObjects.ContainsKey(so2.TargetObjectData.ID) Then
+                        so2.TargetObject = SimulationObjects(so2.TargetObjectData.ID)
+                        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
+                    End If
+                    If SimulationObjects.ContainsKey(so2.SourceObjectData.ID) Then
+                        so2.SourceObject = SimulationObjects(so2.SourceObjectData.ID)
+                        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
+                    End If
+                End If
+                If TryCast(so, CapeOpenUO) IsNot Nothing Then
+                    DirectCast(so, CapeOpenUO).UpdateConnectors2()
+                    DirectCast(so, CapeOpenUO).UpdatePortsFromConnectors()
+                End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Unit Operation Connection Information", ex))
             End Try

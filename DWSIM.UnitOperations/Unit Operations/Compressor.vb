@@ -555,7 +555,7 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
 
             istr.PropertyPackage.CurrentMaterialStream = istr
 
-            str.AppendLine("Compressor/Expander: " & Me.GraphicObject.Tag)
+            str.AppendLine("Compressor: " & Me.GraphicObject.Tag)
             str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
             str.AppendLine()
             str.AppendLine("Inlet conditions")
@@ -573,9 +573,9 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
             str.AppendLine("    Calculation mode: " & CalcMode.ToString)
             Select Case CalcMode
                 Case CalculationMode.Delta_P
-                    str.AppendLine("    Pressure increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
+                    str.AppendLine("    Pressure increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.deltaP)
                 Case CalculationMode.OutletPressure
-                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.pressure)
             End Select
             str.AppendLine("    Efficiency: " & Convert.ToDouble(EficienciaAdiabatica).ToString(numberformat, ci))
             str.AppendLine()
@@ -583,12 +583,12 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
             str.AppendLine()
             Select Case CalcMode
                 Case CalculationMode.Delta_P
-                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut)).ToString(numberformat, ci) & " " & su.pressure)
+                    str.AppendLine("    Outlet pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Convert.ToDouble(POut.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.pressure)
                 Case CalculationMode.OutletPressure
-                    str.AppendLine("    Pressure increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP)).ToString(numberformat, ci) & " " & su.deltaP)
+                    str.AppendLine("    Pressure increase: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Convert.ToDouble(DeltaP.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.deltaP)
             End Select
-            str.AppendLine("    Temperature increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
-            str.AppendLine("    Power required/generated: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ)).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Temperature increase/decrease: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, DeltaT.GetValueOrDefault).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Power required: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Convert.ToDouble(DeltaQ.GetValueOrDefault)).ToString(numberformat, ci) & " " & su.heatflow)
 
             Return str.ToString
 
@@ -597,8 +597,8 @@ fix:            Me.PropertyPackage.CurrentMaterialStream = msin
         Public Overrides Function GetPropertyDescription(p As String) As String
             If p.Equals("Calculation Mode") Then
                 Return "Select the variable to specify for the calculation of the Compressor/Expander."
-            ElseIf p.Equals("Pressure Change (+)/(-)") Then
-                Return "If you chose the 'Pressure Variation' calculation mode, enter a positive value to simulate a compressor, or a negative one to simulate an expander."
+            ElseIf p.Equals("Pressure Increase") Then
+                Return "If you chose the 'Pressure Variation' calculation mode, enter the desired value for the pressure increase."
             ElseIf p.Equals("Outlet Pressure") Then
                 Return "If you chose the 'Outlet Pressure' calculation mode, enter the desired outlet pressure. Expansion or compression will be calculated accordingly."
             ElseIf p.Equals("Efficiency (%)") Then
