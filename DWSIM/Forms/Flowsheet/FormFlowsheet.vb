@@ -104,8 +104,6 @@ Public Class FormFlowsheet
 
     Private listeningaction As Action(Of String)
 
-    Private prevlogview As DockState
-
 #End Region
 
 #Region "    Form Event Handlers "
@@ -650,7 +648,7 @@ Public Class FormFlowsheet
                                                              .Unique = True
                                                          End With
 
-                                                         tsbLogMessage.Text = texto
+                                                         tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto
                                                          tsbLogMessage.Image = img
 
                                                          frlog.GridDT.Rows.Add(New Object() {img, Date.Now, strtipo, texto, cor, frlog.GridDT.Rows.Count})
@@ -3071,10 +3069,9 @@ Public Class FormFlowsheet
     Private Sub tsbLogWindow_Click(sender As Object, e As EventArgs) Handles tsbLogMessage.Click
 
         If FormLog.VisibleState <> DockState.Unknown Then
-            prevlogview = FormLog.VisibleState
             FormLog.VisibleState = DockState.Unknown
         Else
-            FormLog.VisibleState = prevlogview
+            FormLog.VisibleState = DockState.DockBottom
         End If
 
         tsbLogMessage.BackColor = If(FormLog.VisibleState <> DockState.Unknown, Color.FromKnownColor(KnownColor.GradientActiveCaption), Color.FromKnownColor(KnownColor.Control))

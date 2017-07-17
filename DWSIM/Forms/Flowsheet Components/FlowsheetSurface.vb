@@ -2682,12 +2682,15 @@ Public Class FlowsheetSurface
 
         If e.Effect = DragDropEffects.All Then
 
-            Dim obj As Type = e.Data.GetData(DataFormats.Serializable)
+            Dim obj As Type = Nothing
+            obj = e.Data.GetData("System.RuntimeType")
 
             Dim p As Drawing.Point = Me.FlowsheetDesignSurface.PointToClient(New Drawing.Point(e.X, e.Y))
             Dim mousePT As Drawing.Point = Flowsheet.gscTogoc(p.X, p.Y)
             Dim mpx = mousePT.X - 40
             Dim mpy = mousePT.Y - 40
+
+            Console.WriteLine(obj.Name)
 
             AddObject(obj.Name, mpx, mpy)
 
