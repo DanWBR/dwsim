@@ -7,6 +7,8 @@ using System.Xml.Linq;
 using DWSIM.UI.Shared;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DWSIM.UI.Forms
 {
@@ -15,6 +17,8 @@ namespace DWSIM.UI.Forms
 
         public Desktop.Shared.Flowsheet FlowsheetObject;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
+
+        public List<Interfaces.ISimulationObject> ObjectList = new List<Interfaces.ISimulationObject>();
 
         void InitializeComponent()
         {
@@ -114,8 +118,8 @@ namespace DWSIM.UI.Forms
                     {
                         SetupSelectedContextMenu().Show(FlowsheetControl);
                     }
-                    else { 
-
+                    else {
+                        SetupDeselectedContextMenu().Show(FlowsheetControl);
                     }
                 }
             };
@@ -123,6 +127,8 @@ namespace DWSIM.UI.Forms
             Closing += Flowsheet_Closing;
 
             Shown += Flowsheet_Shown;
+
+            Task.Factory.StartNew(() => LoadObjects());
 
         }
 
@@ -192,6 +198,26 @@ namespace DWSIM.UI.Forms
                 FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
 
         
+        }
+
+        void LoadObjects() {
+
+            var calculatorassembly = System.Reflection.Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "DWSIM.Thermodynamics.dll"));
+            var unitopassembly = System.Reflection.Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "DWSIM.UnitOperations.dll"));
+            List<Type> availableTypes = new List<Type>();
+
+            availableTypes.AddRange(calculatorassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
+            availableTypes.AddRange(unitopassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
+
+            List<ListItem> litems = new List<ListItem>();
+
+            foreach (var item in availableTypes.OrderBy(x => x.Name)) {
+	            if (!item.IsAbstract) {
+		            var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
+			        ObjectList.Add(obj);
+	            }
+            }
+
         }
 
         Eto.Forms.Container SetupLogWindow()
@@ -350,6 +376,31 @@ namespace DWSIM.UI.Forms
 
             return ctxmenu;
         
+        }
+
+        Eto.Forms.ContextMenu SetupDeselectedContextMenu()
+        {
+
+            var ctxmenu = new ContextMenu();
+
+            var item0 = new ButtonMenuItem { Text = "Add New Object"};
+
+            int currposx = (int)Mouse.Position.X;
+            int currposy = (int)Mouse.Position.Y;
+            
+            foreach (var item in ObjectList) {
+                var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
+                menuitem.Click += (sender, e) =>
+                {
+                    FlowsheetObject.AddObject(item.GraphicObject.ObjectType, currposx, currposy, "");
+		        };
+                item0.Items.Add(menuitem);
+            }
+
+            ctxmenu.Items.AddRange(new MenuItem[] { item0 });
+
+            return ctxmenu;
+
         }
 
     }
