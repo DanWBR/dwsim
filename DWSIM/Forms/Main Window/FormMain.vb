@@ -1465,44 +1465,7 @@ Public Class FormMain
             End Try
         Next
 
-        'reorder compound lists in streams
-
-        'For Each obj In objlist
-        '    If TypeOf obj Is Streams.MaterialStream Then
-        '        Dim mstr As Streams.MaterialStream = DirectCast(obj, Streams.MaterialStream)
-        '        For Each p In mstr.Phases.Values
-        '            Dim clist = p.Compounds.Values.ToList().OrderBy(Function(o) o.ConstantProperties.Normal_Boiling_Point)
-        '            p.Compounds.Clear()
-        '            For Each c In clist
-        '                p.Compounds.Add(c.Name, c)
-        '            Next
-        '        Next
-        '    End If
-        'Next
-
         AddSimulationObjects(form, objlist, excs)
-
-        If Not forcommandline Then
-
-            data = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects").Elements.ToList
-
-            'For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.<Type>.Value.Equals("DWSIM.DWSIM.GraphicObjects.TableGraphic")).ToList
-            '    Try
-            '        Dim obj As GraphicObjects.GraphicObject = Nothing
-            '        Dim t As Type = Type.GetType(xel2.Element("Type").Value, False)
-            '        If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-            '        If obj Is Nothing Then
-            '            obj = GraphicObjects.GraphicObject.ReturnInstance(xel2.Element("Type").Value)
-            '        End If
-            '        obj.LoadData(xel2.Elements.ToList)
-            '        DirectCast(obj, TableGraphic).BaseOwner = form.Collections.FlowsheetObjectCollection(xel2.<Owner>.Value)
-            '        form.FormSurface.FlowsheetDesignSurface.drawingObjects.Add(obj)
-            '    Catch ex As Exception
-            '        excs.Add(New Exception("Error Loading Flowsheet Table Information", ex))
-            '    End Try
-            'Next
-
-        End If
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("ReactionSets").Elements.ToList
 

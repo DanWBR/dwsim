@@ -48,15 +48,11 @@ Namespace GraphicObjects.Shapes
             myOC1.Position = New Point(X + Width, Y + 0.5 * Height)
             myOC1.Type = ConType.ConOut
 
-            Dim myOC2 As New ConnectionPoint
-            myOC2.Position = New Point(X + 0.5 * Width, Y + Height)
-            myOC2.Type = ConType.ConEn
-
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
-            Me.EnergyConnector.Direction = ConDir.Up
+            Me.EnergyConnector.Direction = ConDir.Down
             Me.EnergyConnector.ConnectorName = "Energy Stream"
-            Me.EnergyConnector.Active = False
+            Me.EnergyConnector.Active = True
 
             With InputConnectors
 
@@ -79,18 +75,14 @@ Namespace GraphicObjects.Shapes
                 If .Count <> 0 Then
                     If Me.FlippedH Then
                         .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
                     Else
                         .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
                     End If
                 Else
                     .Add(myOC1)
-                    .Add(myOC2)
                 End If
 
                 .Item(0).ConnectorName = "Outlet"
-                .Item(1).ConnectorName = "Energy Stream"
 
             End With
 

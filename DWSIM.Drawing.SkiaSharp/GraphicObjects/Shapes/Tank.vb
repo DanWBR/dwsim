@@ -3,15 +3,15 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
 Namespace GraphicObjects.Shapes
 
-    Public Class EnergyRecycleGraphic
+    Public Class TankGraphic
 
         Inherits ShapeGraphic
 
 #Region "Constructors"
 
         Public Sub New()
-            Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle
-            Me.Description = "Energy Recycle Logical Op"
+            Me.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.Tank
+            Me.Description = "Liquid Storage Tank"
         End Sub
 
         Public Sub New(ByVal graphicPosition As SKPoint)
@@ -40,9 +40,7 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-            Me.EnergyConnector.Active = False
-
-            Dim myIC1 As New ConnectionPoint
+           Dim myIC1 As New ConnectionPoint
             myIC1.Position = New Point(X, Y + 0.5 * Height)
             myIC1.Type = ConType.ConIn
 
@@ -52,6 +50,7 @@ Namespace GraphicObjects.Shapes
 
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
+            Me.EnergyConnector.Active = False
 
             With InputConnectors
 
@@ -64,7 +63,6 @@ Namespace GraphicObjects.Shapes
                 Else
                     .Add(myIC1)
                 End If
-                .Item(0).ConnectorName = "Inlet"
 
             End With
 
@@ -79,7 +77,6 @@ Namespace GraphicObjects.Shapes
                 Else
                     .Add(myOC1)
                 End If
-                .Item(0).ConnectorName = "Outlet"
 
             End With
 
@@ -87,54 +84,28 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub Draw(ByVal g As Object)
 
-            Me.FlippedH = True
-
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            CreateConnectors(0, 0)
-
-            UpdateStatus()
             MyBase.Draw(g)
 
-
-            Dim myPen As New SKPaint()
-            With myPen
-                .Color = SKColors.LightYellow
-                .StrokeWidth = LineWidth
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
-            canvas.DrawOval(New SKRect(X, Y, X + Width, Y + Height), myPen)
+            PositionConnectors()
+            UpdateStatus()
 
             Dim myPen2 As New SKPaint()
             With myPen2
-                .Color = SKColors.Yellow
-                .StrokeWidth = LineWidth
+                .Color = LineColor
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .IsStroke = True
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .StrokeWidth = LineWidth
             End With
 
-            canvas.DrawOval(New SKRect(X, Y, X + Width, Y + Height), myPen2)
+            Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, 0.8 * Width, 0.8 * Height)
+            Dim rect2 As New SKRect(X + 0.1 * Width, Y, 0.8 * Width, 0.2 * Height)
+            Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, 0.8 * Width, 0.2 * Height)
 
-            Dim tpaint As New SKPaint()
-
-            With tpaint
-                .TextSize = 18.0#
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.Yellow
-                .IsStroke = False
-                .Typeface = DefaultTypeFace
-            End With
-
-            Dim trect As New SKRect(0, 0, 2, 2)
-            tpaint.GetTextPath("R", 0, 0).GetBounds(trect)
-
-            Dim ax, ay As Integer
-            ax = Me.X + (Me.Width - (trect.Right - trect.Left)) / 2
-            ay = Me.Y + (Me.Height - (trect.Top - trect.Bottom)) / 2
-
-            canvas.DrawText("R", ax, ay, tpaint)
+            canvas.DrawOval(rect1, myPen2)
+            canvas.DrawOval(rect2, myPen2)
+            canvas.DrawRect(rect3, myPen2)
 
         End Sub
 

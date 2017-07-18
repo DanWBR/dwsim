@@ -34,8 +34,6 @@ Namespace UnitOperations
 
     <System.Serializable()> <ComVisible(True)> Public MustInherit Class BaseClass
 
-        Inherits Dynamic.DynamicObject
-
         Implements ICloneable, IDisposable, Interfaces.ICustomXMLSerialization
 
         Implements Interfaces.ISimulationObject
@@ -44,7 +42,7 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
-        Private DynamicProperties As New Dictionary(Of String, Object)
+        Public Property ExtraProperties As New ExpandoObject
 
 #Region "    Constructors"
 
@@ -417,7 +415,7 @@ Namespace UnitOperations
 
             XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
-            DynamicProperties.Clear()
+            ExtraProperties = New ExpandoObject
 
             Dim xel_d = (From xel2 As XElement In data Select xel2 Where xel2.Name = "DynamicProperties")
 
@@ -429,7 +427,7 @@ Namespace UnitOperations
                         Dim proptype = xel.Element("PropertyType").Value
                         Dim ptype As Type = Type.GetType(proptype)
                         Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
-                        DynamicProperties.Add(propname, propval)
+                        DirectCast(ExtraProperties, IDictionary(Of String, Object))(propname) = propval
                     Catch ex As Exception
                     End Try
                 Next
@@ -471,7 +469,8 @@ Namespace UnitOperations
 
             With elements
                 .Add(New XElement("DynamicProperties"))
-                For Each item In DynamicProperties
+                Dim extraprops = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+                For Each item In extraprops
                     Try
                         .Item(.Count - 1).Add(New XElement("Property", {New XElement("Name", item.Key),
                                                                                New XElement("PropertyType", item.Value.GetType.ToString),
@@ -671,31 +670,6 @@ Namespace UnitOperations
                 End If
             End Get
         End Property
-
-#End Region
-
-#Region "    Dynamic Implementation"
-
-        Public Overrides Function TryGetMember(binder As GetMemberBinder, ByRef result As Object) As Boolean
-            If DynamicProperties.ContainsKey(binder.Name) Then
-                result = DynamicProperties(binder.Name)
-                Return True
-            Else
-                result = "Invalid Property!"
-                Return False
-            End If
-        End Function
-
-        Public Overrides Function TrySetMember(binder As SetMemberBinder, value As Object) As Boolean
-            DynamicProperties(binder.Name) = value
-            Return True
-        End Function
-
-        Public Overrides Function TryInvokeMember(binder As InvokeMemberBinder, args As Object(), ByRef result As Object) As Boolean
-            Dim method = DynamicProperties(binder.Name)
-            result = method(args)
-            Return True
-        End Function
 
 #End Region
 

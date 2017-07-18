@@ -102,7 +102,7 @@ Public Class FormFlowsheet
     Public UndoStack As New Stack(Of UndoRedoAction)
     Public RedoStack As New Stack(Of UndoRedoAction)
 
-    Private listeningaction As Action(Of String)
+    Private listeningaction As Action(Of String, Interfaces.IFlowsheet.MessageType)
 
 #End Region
 
@@ -592,7 +592,7 @@ Public Class FormFlowsheet
             End If
 
             If listeningaction IsNot Nothing Then
-                listeningaction(texto)
+                listeningaction(texto, tipo)
             End If
 
             Message = texto
@@ -2972,7 +2972,7 @@ Public Class FormFlowsheet
                     End Sub)
     End Sub
 
-    Public Sub SetMessageListener(act As Action(Of String)) Implements IFlowsheet.SetMessageListener
+    Public Sub SetMessageListener(act As Action(Of String, Interfaces.IFlowsheet.MessageType)) Implements IFlowsheet.SetMessageListener
         listeningaction = act
     End Sub
 

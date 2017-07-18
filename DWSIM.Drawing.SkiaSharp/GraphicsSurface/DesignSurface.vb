@@ -612,9 +612,9 @@ Public Class GraphicsSurface
                         End If
                     Else
                         Select Case gObjFrom.ObjectType
-                            Case ObjectType.HeaterCooler, ObjectType.Pipe, ObjectType.CompressorExpander, ObjectType.ShortcutColumn, ObjectType.DistillationColumn, ObjectType.AbsorptionColumn,
+                            Case ObjectType.HeaterCooler, ObjectType.Cooler, ObjectType.Pipe, ObjectType.CompressorExpander, ObjectType.ShortcutColumn, ObjectType.DistillationColumn, ObjectType.AbsorptionColumn,
                                 ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber, ObjectType.OT_EnergyRecycle, ObjectType.ComponentSeparator, ObjectType.SolidSeparator,
-                                ObjectType.Filter
+                                ObjectType.Filter, ObjectType.Expander
                                 GoTo 100
                             Case Else
                                 Throw New Exception("This connection is not allowed.")

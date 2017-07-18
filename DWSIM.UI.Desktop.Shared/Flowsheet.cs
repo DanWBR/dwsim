@@ -7,7 +7,7 @@ namespace DWSIM.UI.Desktop.Shared
 {
     public class Flowsheet : FlowsheetBase.FlowsheetBase
     {
-        private Action<string> listeningaction ;
+        private Action<string, IFlowsheet.MessageType> listeningaction ;
 
         public bool optimizing = false;
         public bool supressmessages = false;
@@ -49,7 +49,7 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void ShowMessage(string text, IFlowsheet.MessageType mtype)
         {
-            if (listeningaction != null) listeningaction(text);
+            if (listeningaction != null) listeningaction(text, mtype);
             Console.WriteLine(text);
         }
 
@@ -191,7 +191,7 @@ namespace DWSIM.UI.Desktop.Shared
 
         }
 
-        public override void SetMessageListener(Action<string> act)
+        public override void SetMessageListener(Action<string, IFlowsheet.MessageType> act)
         {
             listeningaction = act;
         }

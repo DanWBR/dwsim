@@ -65,19 +65,28 @@ namespace DWSIM.UI.Forms
                                            btnScripts, btnReports, btnOptions});
             }
                  
-            var outtxt = new TextArea { Text = "", ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
+            var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
 
             var ctxmenu0 = new ContextMenu();
 
-            var menuitem0 = new ButtonMenuItem { Text = "Clear" };
+            var menuitem0 = new ButtonMenuItem { Text = "Clear List" };
 
             menuitem0.Click += (sender, e) =>
             {
-                outtxt.Text = "";
+                outtxt.Items.Clear();
             };
 
             ctxmenu0.Items.Add(menuitem0);
 
+            var menuitem00 = new ButtonMenuItem { Text = "Copy Item Text to Clipboard" };
+
+            menuitem00.Click += (sender, e) =>
+            {
+                new Clipboard().Text = outtxt.Items[outtxt.SelectedIndex].Text;
+            };
+
+            ctxmenu0.Items.Add(menuitem00);
+            
             outtxt.MouseUp += (sender, e) =>
             {
                 if (e.Buttons == MouseButtons.Alternate)
@@ -86,8 +95,29 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            FlowsheetObject.SetMessageListener((string text) => {
-               Application.Instance.Invoke(() => outtxt.Append("[" + DateTime.Now.ToString() + "] " + text + "\n", true));
+            FlowsheetObject.SetMessageListener((string text, Interfaces.IFlowsheet.MessageType mtype) => {
+                var item = new ListItem { Text = "[" + DateTime.Now.ToString() + "] " + text };
+                switch (mtype)
+                { 
+                    case Interfaces.IFlowsheet.MessageType.Information:
+                        item.Text = "[INFO] " + item.Text; 
+                        break;
+                    case Interfaces.IFlowsheet.MessageType.GeneralError:
+                        item.Text = "[ERROR] " + item.Text; 
+                        break;
+                    case Interfaces.IFlowsheet.MessageType.Warning:
+                        item.Text = "[WARNING] " + item.Text; 
+                        break;
+                    case Interfaces.IFlowsheet.MessageType.Tip:
+                        item.Text = "[TIP] " + item.Text; 
+                        break;
+                    case Interfaces.IFlowsheet.MessageType.Other:
+                        item.Text = "[OTHER] " + item.Text; 
+                        break;
+                    default:
+                        break;
+                }
+               Application.Instance.Invoke(() => outtxt.Items.Add(item));
             });
 
             var split = new Splitter();

@@ -19,7 +19,7 @@ Imports DWSIM.Thermodynamics.Streams
 Imports ICSharpCode.SharpZipLib.Zip
 Imports System.IO
 
-Public MustInherit Class FlowsheetBase
+<System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
     Implements IFlowsheet, IFlowsheetCalculationQueue
 
@@ -791,23 +791,21 @@ Public MustInherit Class FlowsheetBase
                 myCOCSEP.GraphicObject = myCSep
                 SimulationObjects.Add(myCSep.Name, myCOCSEP)
 
-                'Case ObjectType.Filter
+            Case ObjectType.Filter
 
-                '    Dim myCSep As New FilterGraphic(mpx, mpy, 50, 50, 0)
-                '    myCSep.LineWidth = 2
-                '    myCSep.Fill = True
-                '    myCSep.FillColor = fillclr
-                '    myCSep.LineColor = lineclr
-                '    myCSep.Tag = "FT-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myCSep.Tag = tag
-                '    gObj = myCSep
-                '    gObj.Name = "FT-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myCSep)
-                '    'OBJETO DWSIM
-                '    Dim myCOCSEP As Filter = New Filter(myCSep.Name, "Filter")
-                '    myCOCSEP.GraphicObject = myCSep
-                '    SimulationObjects.Add(myCSep.Name, myCOCSEP)
+                Dim myCSep As New FilterGraphic(mpx, mpy, 50, 50)
+                myCSep.LineWidth = 2
+                myCSep.Fill = True
+                myCSep.Tag = "FT-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myCSep.Tag = tag
+                gObj = myCSep
+                gObj.Name = "FT-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myCSep)
+                'OBJETO DWSIM
+                Dim myCOCSEP As Filter = New Filter(myCSep.Name, "Filter")
+                myCOCSEP.GraphicObject = myCSep
+                SimulationObjects.Add(myCSep.Name, myCOCSEP)
 
                 'Case ObjectType.OrificePlate
 
@@ -865,23 +863,21 @@ Public MustInherit Class FlowsheetBase
                 '    myCOEUO.GraphicObject = myEUO
                 '    SimulationObjects.Add(myEUO.Name, myCOEUO)
 
-                'Case ObjectType.FlowsheetUO
+            Case ObjectType.FlowsheetUO
 
-                '    Dim myEUO As New FlowsheetUOGraphic(mpx, mpy, 25, 25, 0)
-                '    myEUO.LineWidth = 2
-                '    myEUO.Fill = True
-                '    myEUO.FillColor = fillclr
-                '    myEUO.LineColor = lineclr
-                '    myEUO.Tag = "FS-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myEUO.Tag = tag
-                '    gObj = myEUO
-                '    gObj.Name = "FS-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myEUO)
-                '    'OBJETO DWSIM
-                '    Dim myCOEUO As Flowsheet = New Flowsheet(myEUO.Name, "FlowsheetUnitOp")
-                '    myCOEUO.GraphicObject = myEUO
-                '    SimulationObjects.Add(myEUO.Name, myCOEUO)
+                Dim myEUO As New FlowsheetGraphic(mpx, mpy, 25, 25)
+                myEUO.LineWidth = 2
+                myEUO.Fill = True
+                myEUO.Tag = "FS-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myEUO.Tag = tag
+                gObj = myEUO
+                gObj.Name = "FS-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myEUO)
+                'OBJETO DWSIM
+                Dim myCOEUO As Flowsheet = New Flowsheet(myEUO.Name, "FlowsheetUnitOp")
+                myCOEUO.GraphicObject = myEUO
+                SimulationObjects.Add(myEUO.Name, myCOEUO)
 
                 'Case ObjectType.CapeOpenUO
 
@@ -909,11 +905,6 @@ Public MustInherit Class FlowsheetBase
             gObj.Owner = SimulationObjects(gObj.Name)
             SimulationObjects(gObj.Name).SetFlowsheet(Me)
             FlowsheetSurface.DrawingObjects.Add(gObj)
-            'If TypeOf gObj.Owner Is Streams.MaterialStream Then
-            '    gObj.CreateConnectors(1, 1)
-            '    FlowsheetSolver.CalculateObject(Me, gObj.Name)
-            'End If
-
         End If
 
         Return gObj.Name
@@ -934,7 +925,23 @@ Public MustInherit Class FlowsheetBase
         Dim data As List(Of XElement) = xdoc.Element("DWSIM_Simulation_Data").Element("Settings").Elements.ToList
 
         Try
+
             Options.LoadData(data)
+
+            Options.FlashAlgorithms.Clear()
+
+            Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
+
+            If Not el Is Nothing Then
+                For Each xel As XElement In el.Elements
+                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value)
+                    obj.LoadData(xel.Elements.ToList)
+                    Options.FlashAlgorithms.Add(obj)
+                Next
+            Else
+                Options.FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
+            End If
+
         Catch ex As Exception
             excs.Add(New Exception("Error Loading Flowsheet Settings", ex))
         End Try
@@ -1202,21 +1209,28 @@ Public MustInherit Class FlowsheetBase
                         objcount = (From go As GraphicObject In FlowsheetSurface.DrawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
                         If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     End If
+                    If TypeOf obj Is TableGraphic Then
+                        DirectCast(obj, TableGraphic).Flowsheet = Me
+                        'ElseIf TypeOf obj Is MasterTableGraphic Then
+                        '    DirectCast(obj, MasterTableGraphic).Flowsheet = Me
+                        'ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
+                        '    DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = Me
+                    ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
+                        obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
+                        obj.PositionConnectors()
+                    Else
+                        If obj.Name = "" Then obj.Name = obj.Tag
+                        obj.CreateConnectors(0, 0)
+                    End If
                     If Not TypeOf obj Is TableGraphic Then
-
                         With DirectCast(obj, DWSIM.Drawing.SkiaSharp.GraphicObjects.ShapeGraphic)
                             .Fill = False
                             .LineWidth = 1
                             .GradientMode = False
                         End With
-
-                        If obj.Name = "" Then obj.Name = obj.Tag
-                        obj.CreateConnectors(0, 0)
                         FlowsheetSurface.DrawingObjects.Add(obj)
                         GraphicObjects.Add(obj.Name, obj)
-
                     End If
-
                 End If
             Catch ex As Exception
                 excs.Add(New Exception("Error Loading Flowsheet Graphic Objects", ex))
@@ -1451,7 +1465,7 @@ Public MustInherit Class FlowsheetBase
 
     End Sub
 
-    Public MustOverride Sub SetMessageListener(act As Action(Of String)) Implements IFlowsheet.SetMessageListener
+    Public MustOverride Sub SetMessageListener(act As Action(Of String, IFlowsheet.MessageType)) Implements IFlowsheet.SetMessageListener
 
     Public Property Solved As Boolean Implements IFlowsheet.Solved
 

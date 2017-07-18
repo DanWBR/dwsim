@@ -110,7 +110,7 @@
 
     Property Message As String
 
-    Sub SetMessageListener(act As Action(Of String))
+    Sub SetMessageListener(act As Action(Of String, MessageType))
 
     Property Solved As Boolean
 

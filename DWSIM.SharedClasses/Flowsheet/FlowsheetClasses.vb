@@ -126,20 +126,6 @@ Namespace DWSIM.Flowsheet
 
             End If
 
-            FlashAlgorithms.Clear()
-
-            el = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
-
-            If Not el Is Nothing Then
-                For Each xel As XElement In el.Elements
-                    'Dim obj As IFlashAlgorithm = ReturnInstance(xel.Element("Type").Value)
-                    'obj.LoadData(xel.Elements.ToList)
-                    'FlashAlgorithms.Add(obj)
-                Next
-            Else
-                'FlashAlgorithms.Add(New Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops() With {.Tag = .Name})
-            End If
-
             Return XMLSerializer.XMLSerializer.Deserialize(Me, data)
 
         End Function
