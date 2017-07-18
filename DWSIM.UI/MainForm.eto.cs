@@ -8,6 +8,7 @@ using System.Linq;
 using DWSIM.UI.Forms.Forms;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DWSIM.UI
 {
@@ -35,13 +36,22 @@ namespace DWSIM.UI
             var btn2 = new Button(){ Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), 40, 40, ImageInterpolation.Default)};
             var btn3 = new Button(){ Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), 40, 40, ImageInterpolation.Default)};
             var btn4 =  new Button(){ Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), 40, 40, ImageInterpolation.Default)};
-            var btn5 = new Button() { Style = "main", Text = "Settings".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "VerticalSettingsMixer_100px.png"), 40, 40, ImageInterpolation.Default) };
+            var btn5 = new Button() { Style = "main", Text = "OpenSamples".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenBook_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn6 = new Button(){ Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), 40, 40, ImageInterpolation.Default)};
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn8 = new Button() { Style = "main", Text = "Donate".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Donate_100px.png"), 40, 40, ImageInterpolation.Default) };
 
             btn5.Click += (sender, e) => {
-                new Forms.Forms.GeneralSettings().GetForm().Show();
+                var dialog = new OpenFileDialog();
+                dialog.Title = "OpenSamples".Localize();
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
+                dialog.MultiSelect = false;
+                dialog.Directory = new Uri(Path.Combine(Directory.GetCurrentDirectory(), "samples"));
+                dialog.CurrentFilterIndex = 0;
+                if (dialog.ShowDialog(this) == DialogResult.Ok)
+                {
+                    LoadSimulation(dialog.FileName);
+                }
             };
 
             btn6.Click += (sender, e) =>
@@ -57,31 +67,7 @@ namespace DWSIM.UI
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
-                    var form = new Forms.Flowsheet();
-
-                    var loadingdialog = new LoadingData();
-                    loadingdialog.Show();
-
-                    Task.Factory.StartNew(() => {
-                        if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxmz")
-                        {
-                            form.FlowsheetObject.LoadZippedXML(dialog.FileName);
-                        }
-                        else if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxml")
-                        {
-                            form.FlowsheetObject.LoadFromXML(XDocument.Load(dialog.FileName));
-                        }
-                    }).ContinueWith((t) => {
-                        Application.Instance.Invoke(() => {
-                            loadingdialog.Close();
-                            var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
-                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                            form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
-                            form.Show();
-                        });
-                    });
-
+                    LoadSimulation(dialog.FileName);
                 }
                 
             };
@@ -156,6 +142,38 @@ namespace DWSIM.UI
             {
                 var splash = new SplashScreen();
                 splash.Show();
+            });
+        }
+
+        void LoadSimulation(string path)
+        {
+
+            var form = new Forms.Flowsheet();
+
+            var loadingdialog = new LoadingData();
+            loadingdialog.Show();
+
+            Task.Factory.StartNew(() =>
+            {
+                if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
+                {
+                    form.FlowsheetObject.LoadZippedXML(path);
+                }
+                else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
+                {
+                    form.FlowsheetObject.LoadFromXML(XDocument.Load(path));
+                }
+            }).ContinueWith((t) =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    loadingdialog.Close();
+                    var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
+                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
+                    form.Show();
+                });
             });
         }
 

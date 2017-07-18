@@ -237,4 +237,7 @@
   <data name="ConnectorsEditorDescription" xml:space="preserve">
     <value>Setup inlet and outlet port connections for the selected object. Select a blank item from the list to disconnect the port from the current connected object.</value>
   </data>
+  <data name="OpenSamples" xml:space="preserve">
+    <value>Open Samples</value>
+  </data>
 </root>

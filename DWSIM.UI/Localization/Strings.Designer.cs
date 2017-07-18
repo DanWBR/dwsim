@@ -223,6 +223,15 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Samples.
+        /// </summary>
+        internal static string OpenSamples {
+            get {
+                return ResourceManager.GetString("OpenSamples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Simulation.
         /// </summary>
         internal static string OpenSavedFile {
