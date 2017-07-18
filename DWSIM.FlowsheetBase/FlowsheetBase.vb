@@ -113,7 +113,6 @@ Imports System.IO
 
                     Else
 
-
                         Dim obj As ISimulationObject = Me.SimulationObjects(gobj.Name)
 
                         If gobj.EnergyConnector.IsAttached = True Then DisconnectObjects(gobj, gobj.EnergyConnector.AttachedConnector.AttachedTo)

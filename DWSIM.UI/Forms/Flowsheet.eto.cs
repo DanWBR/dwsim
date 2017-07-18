@@ -79,48 +79,17 @@ namespace DWSIM.UI.Forms
 
             Content = split;
 
-            var ctxmenu = new ContextMenu();
-
-            var menuitem1 = new ButtonMenuItem { Text = "Edit Properties" };
-            menuitem1.Click += (sender, e) =>
-            {
-                var cont = UI.Shared.Common.GetDefaultContainer();
-                var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
-                {
-                    new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
-                }
-                else
-                {
-                    new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
-                }
-                var form = UI.Shared.Common.GetDefaultEditorForm("Edit Properties", 500, 500, cont);
-                form.ShowInTaskbar = false;
-                form.Show();
-            };
-
-            var menuitem2 = new ButtonMenuItem { Text = "View Results" };
-            menuitem2.Click += (sender, e) =>
-            {
-                var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-                var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
-                var form = new Form
-                {
-                    Title = "Results",
-                    ClientSize = new Size(500, 600),
-                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size) } },
-                    ShowInTaskbar = false
-                };
-                form.Show();
-            };
-
-            ctxmenu.Items.AddRange(new[] { menuitem1, menuitem2 });
-
             FlowsheetControl.MouseUp += (sender, e) =>
             {
                 if (e.Buttons == MouseButtons.Alternate)
                 {
-                    ctxmenu.Show(FlowsheetControl);
+                    if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
+                    {
+                        SetupSelectedContextMenu().Show(FlowsheetControl);
+                    }
+                    else { 
+
+                    }
                 }
             };
 
@@ -215,6 +184,91 @@ namespace DWSIM.UI.Forms
             });
 
             return container;
+        
+        }
+
+        Eto.Forms.ContextMenu SetupSelectedContextMenu()
+        {
+
+            var ctxmenu = new ContextMenu();
+
+            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+
+            var item0 = new ButtonMenuItem { Text = obj.GraphicObject.Tag, Enabled = false };
+
+            var item1 = new CheckMenuItem { Text = "Toggle Active/Inactive", Checked = obj.GraphicObject.Active };
+
+            item1.CheckedChanged += (sender, e) =>
+            {
+                obj.GraphicObject.Active = item1.Checked;
+            };
+
+            var item2 = new ButtonMenuItem { Text = "Edit Connections" };
+            item2.Click += (sender, e) =>
+            {
+                var cont = UI.Shared.Common.GetDefaultContainer();
+                UI.Shared.Common.CreateAndAddLabelRow(cont, "Object Connections".Localize());
+                UI.Shared.Common.CreateAndAddDescriptionRow(cont, "ConnectorsEditorDescription".Localize());
+                new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Connections", 500, 500, cont);
+                form.ShowInTaskbar = false;
+                form.Show();
+            };
+
+            var item3 = new ButtonMenuItem { Text = "Calculate" };
+            item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(obj);
+
+            var item4 = new ButtonMenuItem { Text = "Debug" };
+
+            var menuitem1 = new ButtonMenuItem { Text = "Edit Properties" };
+            menuitem1.Click += (sender, e) =>
+            {
+                var cont = UI.Shared.Common.GetDefaultContainer();
+                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                {
+                    new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
+                }
+                else
+                {
+                    new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
+                }
+                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Properties", 500, 500, cont);
+                form.ShowInTaskbar = false;
+                form.Show();
+            };
+
+            var menuitem2 = new ButtonMenuItem { Text = "View Results" };
+            menuitem2.Click += (sender, e) =>
+            {
+                var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
+                var form = new Form
+                {
+                    Title = "Results",
+                    ClientSize = new Size(500, 600),
+                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size) } },
+                    ShowInTaskbar = false
+                };
+                form.Show();
+            };
+
+            var item5 = new ButtonMenuItem { Text = "Clone" };
+            item5.Click += (sender, e) => {
+                var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 50, obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
+                ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
+            };
+
+            var item6 = new ButtonMenuItem { Text = "Delete" };
+
+            item6.Click += (sender, e) => {
+                if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                {
+                    FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
+                }
+            };
+
+            ctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6});
+
+            return ctxmenu;
         
         }
 

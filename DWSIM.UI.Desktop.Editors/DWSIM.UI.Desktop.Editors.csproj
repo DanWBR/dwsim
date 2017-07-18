@@ -53,6 +53,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections.cs" />
     <Compile Include="General.cs" />
     <Compile Include="MaterialStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

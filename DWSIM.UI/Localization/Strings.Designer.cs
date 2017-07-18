@@ -115,6 +115,15 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setup inlet and outlet port connections for the selected object. Select a blank item from the list to disconnect the port from the current connected object..
+        /// </summary>
+        internal static string ConnectorsEditorDescription {
+            get {
+                return ResourceManager.GetString("ConnectorsEditorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Donate.
         /// </summary>
         internal static string Donate {
