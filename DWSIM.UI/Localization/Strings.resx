@@ -145,7 +145,7 @@
     <value>New Simulation</value>
   </data>
   <data name="OpenSavedFile" xml:space="preserve">
-    <value>Open Saved File</value>
+    <value>Open Simulation</value>
   </data>
   <data name="Preferences" xml:space="preserve">
     <value>Global Settings</value>

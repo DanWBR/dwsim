@@ -69,51 +69,20 @@ namespace DWSIM.UI.Desktop.Editors
                 });
             }
 
+            var flashalgos = MatStream.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
+            flashalgos.Insert(0, "Default");
 
-			int posf = 0;
-			switch (MatStream.PreferredFlashAlgorithmTag)
-			{
-				case "Default":
-				case "":
-					posf = 0;
-					break;
-				case "VLE":
-					posf = 1;
-					break;
-				case "VLLE":
-					posf = 2;
-					break;
-				case "LLE":
-					posf = 3;
-					break;
-				case "SVLE":
-				case "VSLE":
-				case "VLSE":
-					posf = 4;
-					break;
-			}
-			s.CreateAndAddDropDownRow(container, "Flash Algorithm", StringResources.flashalg().ToList(), posf, (DropDown arg3, EventArgs ev) =>
-						{
-							switch (arg3.SelectedIndex)
-							{
-								case 0:
-									MatStream.PreferredFlashAlgorithmTag = "Default";
-									break;
-								case 1:
-                                    MatStream.PreferredFlashAlgorithmTag = "VLE";
-									break;
-								case 2:
-                                    MatStream.PreferredFlashAlgorithmTag = "VLLE";
-									break;
-								case 3:
-                                    MatStream.PreferredFlashAlgorithmTag = "LLE";
-									break;
-								case 4:
-                                    MatStream.PreferredFlashAlgorithmTag = "SVLE";
-									break;
-							}
-						});
+            var cbFlashAlg = s.CreateAndAddDropDownRow(container, "Flash Algorithm", flashalgos, 0, null);
 
+            if (!string.IsNullOrEmpty(MatStream.PreferredFlashAlgorithmTag))
+                cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), MatStream.PreferredFlashAlgorithmTag);
+            else
+                cbFlashAlg.SelectedIndex = 0;
+
+            cbFlashAlg.SelectedIndexChanged += (sender, e) =>
+            {
+                MatStream.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
+            };
 
 			s.CreateAndAddLabelRow(container, "STREAM PROPERTIES");
 

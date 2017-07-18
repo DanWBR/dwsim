@@ -223,7 +223,7 @@ namespace DWSIM.UI.Forms.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Saved File.
+        ///   Looks up a localized string similar to Open Simulation.
         /// </summary>
         internal static string OpenSavedFile {
             get {

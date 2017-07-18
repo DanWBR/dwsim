@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using DWSIM.UI.Forms.Forms;
 using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace DWSIM.UI
 {
@@ -51,28 +52,36 @@ namespace DWSIM.UI
             btn1.Click += (sender, e) => {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File v5".Localize(), new[] { ".dwxz5" }));
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File v4".Localize(), new[] { ".dwxml", ".dwxmz" }));
-                //dialog.Filters.Add(new FileDialogFilter("Compound Creator Project".Localize(), new[] { ".dwcsd" }));
-                //dialog.Filters.Add(new FileDialogFilter("Data Regression Project".Localize(), new[] { ".dwrsd" }));
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
                 dialog.MultiSelect = false;
-                dialog.CurrentFilterIndex = 1;
+                dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
                     var form = new Forms.Flowsheet();
-                    if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxmz")
-                    {
-                        form.FlowsheetObject.LoadZippedXML(dialog.FileName);
-                    }
-                    else if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxml")
-                    {
-                        form.FlowsheetObject.LoadFromXML(XDocument.Load(dialog.FileName));
-                    }
-                    var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
-                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                    surface.ZoomAll(ClientSize.Width, ClientSize.Height);
-                    form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
-                    form.Show();
+
+                    var loadingdialog = new LoadingData();
+                    loadingdialog.Show();
+
+                    Task.Factory.StartNew(() => {
+                        if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxmz")
+                        {
+                            form.FlowsheetObject.LoadZippedXML(dialog.FileName);
+                        }
+                        else if (System.IO.Path.GetExtension(dialog.FileName).ToLower() == ".dwxml")
+                        {
+                            form.FlowsheetObject.LoadFromXML(XDocument.Load(dialog.FileName));
+                        }
+                    }).ContinueWith((t) => {
+                        Application.Instance.Invoke(() => {
+                            loadingdialog.Close();
+                            var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
+                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                            surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                            form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
+                            form.Show();
+                        });
+                    });
+
                 }
                 
             };

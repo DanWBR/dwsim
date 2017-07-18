@@ -5,6 +5,8 @@ using Eto.Drawing;
 using System.Xml;
 using System.Xml.Linq;
 using DWSIM.UI.Shared;
+using System.IO;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace DWSIM.UI.Forms
 {
@@ -52,8 +54,33 @@ namespace DWSIM.UI.Forms
             var btnOptions = new ButtonToolItem { Text = "Options", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
 
             var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            
             btnSolve.Click += (sender, e) => {FlowsheetObject.SolveFlowsheet();};
 
+            btnSave.Click += (sender, e) => {
+
+                if (FlowsheetObject.Options.FilePath != "")
+                {
+                    SaveSimulation(FlowsheetObject.Options.FilePath);
+                }
+                else {
+                    btnSaveAs.OnClick(new EventArgs());
+                }
+            
+            };
+
+            btnSaveAs.Click += (sender, e) => {
+
+                var dialog = new SaveFileDialog();
+                dialog.Title = "Save File".Localize();
+                dialog.Filters.Add(new FileDialogFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
+                dialog.CurrentFilterIndex = 0;
+                if (dialog.ShowDialog(this) == DialogResult.Ok)
+                {
+                    SaveSimulation(dialog.FileName);
+                }
+            
+            };
             // create menu
             ToolBar = new ToolBar();
             if (Application.Instance.Platform.IsMac)
@@ -112,6 +139,59 @@ namespace DWSIM.UI.Forms
             {
                 e.Cancel = true; 
             }
+        }
+
+        void SaveSimulation(string path)
+        {
+
+                FlowsheetObject.SaveToXML().Save(path);
+
+                string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
+
+                FlowsheetObject.SaveToXML().Save(xmlfile);
+
+                var i_Files = new List<string>();
+                if (File.Exists(xmlfile))
+                    i_Files.Add(xmlfile);
+
+                ZipOutputStream strmZipOutputStream = default(ZipOutputStream);
+
+                strmZipOutputStream = new ZipOutputStream(File.Create(path));
+
+                strmZipOutputStream.SetLevel(9);
+
+                if (FlowsheetObject.Options.UsePassword)
+                    strmZipOutputStream.Password = FlowsheetObject.Options.Password;
+
+                string strFile = null;
+
+                foreach (string strFile_loopVariable in i_Files)
+                {
+                    strFile = strFile_loopVariable;
+                    FileStream strmFile = File.OpenRead(strFile);
+                    byte[] abyBuffer = new byte[strmFile.Length];
+
+                    strmFile.Read(abyBuffer, 0, abyBuffer.Length);
+                    ZipEntry objZipEntry = new ZipEntry(Path.GetFileName(strFile));
+
+                    objZipEntry.DateTime = DateTime.Now;
+                    objZipEntry.Size = strmFile.Length;
+                    strmFile.Close();
+                    strmZipOutputStream.PutNextEntry(objZipEntry);
+                    strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length);
+
+                }
+
+                strmZipOutputStream.Finish();
+                strmZipOutputStream.Close();
+
+                File.Delete(xmlfile);
+
+                FlowsheetObject.Options.FilePath = path;
+
+                FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
+
+        
         }
 
         Eto.Forms.Container SetupLogWindow()

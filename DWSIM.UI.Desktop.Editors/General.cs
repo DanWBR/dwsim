@@ -70,49 +70,19 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
 
-            int posf = 0;
-            switch (SimObject.PreferredFlashAlgorithmTag)
-            {
-                case "Default":
-                case "":
-                    posf = 0;
-                    break;
-                case "VLE":
-                    posf = 1;
-                    break;
-                case "VLLE":
-                    posf = 2;
-                    break;
-                case "LLE":
-                    posf = 3;
-                    break;
-                case "SVLE":
-                case "VSLE":
-                case "VLSE":
-                    posf = 4;
-                    break;
-            }
-            s.CreateAndAddDropDownRow(container, "Flash Algorithm", StringResources.flashalg().ToList(), posf, (DropDown arg3, EventArgs ev) =>
-            {
-                switch (arg3.SelectedIndex)
-                {
-                    case 0:
-                        SimObject.PreferredFlashAlgorithmTag = "Default";
-                        break;
-                    case 1:
-                        SimObject.PreferredFlashAlgorithmTag = "VLE";
-                        break;
-                    case 2:
-                        SimObject.PreferredFlashAlgorithmTag = "VLLE";
-                        break;
-                    case 3:
-                        SimObject.PreferredFlashAlgorithmTag = "LLE";
-                        break;
-                    case 4:
-                        SimObject.PreferredFlashAlgorithmTag = "SVLE";
-                        break;
-                }
-            });
+            var flashalgos = SimObject.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
+            flashalgos.Insert(0, "Default");
+
+            var cbFlashAlg = s.CreateAndAddDropDownRow(container, "Flash Algorithm", flashalgos, 0, null);
+
+            if (!string.IsNullOrEmpty(SimObject.PreferredFlashAlgorithmTag))
+	            cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), SimObject.PreferredFlashAlgorithmTag);
+            else
+            	cbFlashAlg.SelectedIndex = 0;
+
+            cbFlashAlg.SelectedIndexChanged += (sender, e) =>{
+                SimObject.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
+            };
 
             s.CreateAndAddLabelRow(container, "OBJECT PROPERTIES");
 
