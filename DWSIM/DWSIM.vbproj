@@ -1118,6 +1118,8 @@
     <None Include="Assets\7zip\linux\7za" />
     <None Include="Assets\7zip\linux\7zCon.sfx" />
     <None Include="Assets\7zip\linux\7zr" />
+    <None Include="Assets\7zip\macos\lsar" />
+    <None Include="Assets\7zip\macos\unar" />
     <None Include="Assets\cudacode.cdfy" />
     <None Include="Assets\default.ini" />
     <None Include="Assets\docs\tech_manual.pdf" />
