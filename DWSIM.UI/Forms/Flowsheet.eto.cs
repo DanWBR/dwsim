@@ -12,9 +12,12 @@ namespace DWSIM.UI.Forms
     {
 
         public Desktop.Shared.Flowsheet FlowsheetObject;
+        private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
 
         void InitializeComponent()
         {
+
+            WindowState = Eto.Forms.WindowState.Maximized;
 
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -24,12 +27,12 @@ namespace DWSIM.UI.Forms
             
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
-            var fsc = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
+            FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
 
-            fsc.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
+            FlowsheetControl.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
 
-            fsc.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
-
+            FlowsheetControl.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
+            
             ClientSize = new Size(1024, 768);
 
             var closeCommand = new Command { MenuText = "Close".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
@@ -65,64 +68,11 @@ namespace DWSIM.UI.Forms
                                            btnScripts, btnReports, btnOptions});
             }
                  
-            var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
-
-            var ctxmenu0 = new ContextMenu();
-
-            var menuitem0 = new ButtonMenuItem { Text = "Clear List" };
-
-            menuitem0.Click += (sender, e) =>
-            {
-                outtxt.Items.Clear();
-            };
-
-            ctxmenu0.Items.Add(menuitem0);
-
-            var menuitem00 = new ButtonMenuItem { Text = "Copy Item Text to Clipboard" };
-
-            menuitem00.Click += (sender, e) =>
-            {
-                new Clipboard().Text = outtxt.Items[outtxt.SelectedIndex].Text;
-            };
-
-            ctxmenu0.Items.Add(menuitem00);
-            
-            outtxt.MouseUp += (sender, e) =>
-            {
-                if (e.Buttons == MouseButtons.Alternate)
-                {
-                    ctxmenu0.Show(outtxt);
-                }
-            };
-
-            FlowsheetObject.SetMessageListener((string text, Interfaces.IFlowsheet.MessageType mtype) => {
-                var item = new ListItem { Text = "[" + DateTime.Now.ToString() + "] " + text };
-                switch (mtype)
-                { 
-                    case Interfaces.IFlowsheet.MessageType.Information:
-                        item.Text = "[INFO] " + item.Text; 
-                        break;
-                    case Interfaces.IFlowsheet.MessageType.GeneralError:
-                        item.Text = "[ERROR] " + item.Text; 
-                        break;
-                    case Interfaces.IFlowsheet.MessageType.Warning:
-                        item.Text = "[WARNING] " + item.Text; 
-                        break;
-                    case Interfaces.IFlowsheet.MessageType.Tip:
-                        item.Text = "[TIP] " + item.Text; 
-                        break;
-                    case Interfaces.IFlowsheet.MessageType.Other:
-                        item.Text = "[OTHER] " + item.Text; 
-                        break;
-                    default:
-                        break;
-                }
-               Application.Instance.Invoke(() => outtxt.Items.Add(item));
-            });
+           
 
             var split = new Splitter();
-            split.Panel1 = fsc;
-            split.Panel2 = outtxt;
+            split.Panel1 = FlowsheetControl;
+            split.Panel2 = SetupLogWindow();
             split.Orientation = Orientation.Vertical;
             split.FixedPanel = SplitterFixedPanel.Panel2;
             split.Panel2.Height = 100;
@@ -166,15 +116,25 @@ namespace DWSIM.UI.Forms
 
             ctxmenu.Items.AddRange(new[] { menuitem1, menuitem2 });
 
-            fsc.MouseUp += (sender, e) => {
+            FlowsheetControl.MouseUp += (sender, e) =>
+            {
                 if (e.Buttons == MouseButtons.Alternate)
                 {
-                    ctxmenu.Show(fsc);
+                    ctxmenu.Show(FlowsheetControl);
                 }
             };
 
             Closing += Flowsheet_Closing;
 
+            Shown += Flowsheet_Shown;
+
+        }
+
+        void Flowsheet_Shown(object sender, EventArgs e)
+        {
+            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
+            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
+            FlowsheetControl.Invalidate();
         }
 
         void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -184,6 +144,79 @@ namespace DWSIM.UI.Forms
                 e.Cancel = true; 
             }
         }
-              
+
+        Eto.Forms.Container SetupLogWindow()
+        {
+
+            var label = new Label {Text = "  " + "Log Window", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center};
+
+            var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
+
+            var container = new TableLayout { Rows = { label, outtxt }, Spacing = new Size(5, 5)};
+
+            var ctxmenu0 = new ContextMenu();
+
+            var menuitem0 = new ButtonMenuItem { Text = "Clear List" };
+
+            menuitem0.Click += (sender, e) =>
+            {
+                outtxt.Items.Clear();
+            };
+
+            ctxmenu0.Items.Add(menuitem0);
+
+            var menuitem00 = new ButtonMenuItem { Text = "Copy Item Text to Clipboard" };
+
+            menuitem00.Click += (sender, e) =>
+            {
+                new Clipboard().Text = outtxt.Items[outtxt.SelectedIndex].Text;
+            };
+
+            ctxmenu0.Items.Add(menuitem00);
+
+            outtxt.MouseUp += (sender, e) =>
+            {
+                if (e.Buttons == MouseButtons.Alternate)
+                {
+                    ctxmenu0.Show(outtxt);
+                }
+            };
+
+            FlowsheetObject.SetMessageListener((string text, Interfaces.IFlowsheet.MessageType mtype) =>
+            {
+                Application.Instance.Invoke(() =>{
+                    
+                    var item = new ListItem { Text = "[" + DateTime.Now.ToString() + "] " + text };
+                    switch (mtype)
+                    {
+                        case Interfaces.IFlowsheet.MessageType.Information:
+                            item.Text = "[INFO] " + item.Text;
+                            break;
+                        case Interfaces.IFlowsheet.MessageType.GeneralError:
+                            item.Text = "[ERROR] " + item.Text;
+                            break;
+                        case Interfaces.IFlowsheet.MessageType.Warning:
+                            item.Text = "[WARNING] " + item.Text;
+                            break;
+                        case Interfaces.IFlowsheet.MessageType.Tip:
+                            item.Text = "[TIP] " + item.Text;
+                            break;
+                        case Interfaces.IFlowsheet.MessageType.Other:
+                            item.Text = "[OTHER] " + item.Text;
+                            break;
+                        default:
+                            break;
+                    }
+                
+                    outtxt.Items.Add(item);
+                    outtxt.SelectedIndex = outtxt.Items.Count - 1;
+                
+                });
+            });
+
+            return container;
+        
+        }
+
     }
 }
