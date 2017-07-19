@@ -130,6 +130,13 @@ namespace DWSIM.UI.Shared
             container.CreateAndAddEmptySpace();
         }
 
+        public static TableRow CreateAndAddControlRow(this DynamicLayout container, Control control)
+        {
+            var tr = new TableRow(control);
+            container.AddRow(tr);
+            return tr;
+        }
+
         public static TextBox CreateAndAddTextBoxRow(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
         {
 
@@ -198,6 +205,23 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddStringEditorRow2(this DynamicLayout container, String text, String placeholder, String currval, Action<TextBox, EventArgs> command)
+        {
+
+            var txt = new Label { Text = text + " ", VerticalAlignment = VerticalAlignment.Center };
+            var edittext = new TextBox { Text = currval, PlaceholderText = placeholder};
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+
+            var tr = new TableRow(txt, edittext);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
+
         public static void CreateAndAddEmptySpace(this DynamicLayout container)
         {
             container.AddRow(new TableRow(new Label { Text = "", Height = 10 }));
@@ -236,6 +260,27 @@ namespace DWSIM.UI.Shared
         
             return btn;
 
+
+        }
+
+        public static TableRow CreateAndAddLabelAndTwoButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
+        {
+
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
+            var btn = new Button { Width = 100, Text = buttonlabel };
+            var btn2 = new Button { Width = 100, Text = buttonlabel2 };
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+            if (imageResID2 != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
+
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+            if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, null, btn, btn2);
+            container.AddRow(tr);
+            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+
+            return tr;
 
         }
 

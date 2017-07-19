@@ -3121,4 +3121,22 @@ Public Class FormFlowsheet
         frmUnit.ShowDialog(Me)
     End Sub
 
+    Public Property AvailableFlashAlgorithms As Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Dictionary(Of String, IFlashAlgorithm))
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+    Public Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Dictionary(Of String, IPropertyPackage))
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
 End Class

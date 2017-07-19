@@ -46,6 +46,10 @@
 
     Property PropertyPackages As Dictionary(Of String, IPropertyPackage)
 
+    Property AvailablePropertyPackages As Dictionary(Of String, IPropertyPackage)
+
+    Property AvailableFlashAlgorithms As Dictionary(Of String, IFlashAlgorithm)
+
     Property Reactions As Dictionary(Of String, IReaction)
 
     Property ReactionSets As Dictionary(Of String, IReactionSet)

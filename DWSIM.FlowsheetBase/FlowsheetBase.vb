@@ -31,6 +31,10 @@ Imports System.IO
 
     Public OptimizationCollection As New List(Of Optimization.OptimizationCase)
 
+    Public Property AvailablePropertyPackages As New Dictionary(Of String, IPropertyPackage) Implements IFlowsheet.AvailablePropertyPackages
+
+    Public Property AvailableFlashAlgorithms As New Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
+
     Private loaded As Boolean = False
 
     Private rm, prm As Resources.ResourceManager
@@ -1478,6 +1482,8 @@ Imports System.IO
                                   For Each cp As ConstantProperties In cpa
                                       If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
+                                  AddPropPacks()
+                                  AddFlashAlgorithms()
                               End Sub)
 
     End Sub
@@ -1602,5 +1608,157 @@ Label_00CC:
             End Using
         End Using
     End Function
+
+    Sub AddPropPacks()
+
+        Dim FPP As FPROPSPropertyPackage = New FPROPSPropertyPackage()
+        FPP.ComponentName = "FPROPS"
+        AvailablePropertyPackages.Add(FPP.ComponentName.ToString, FPP)
+
+        Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
+        CPPP.ComponentName = "CoolProp"
+        AvailablePropertyPackages.Add(CPPP.ComponentName.ToString, CPPP)
+
+        Dim SWPP As New SourWaterPropertyPackage()
+        SWPP.ComponentName = "Sour Water"
+        AvailablePropertyPackages.Add(SWPP.ComponentName.ToString, SWPP)
+
+        Dim STPP As SteamTablesPropertyPackage = New SteamTablesPropertyPackage()
+        STPP.ComponentName = "Steam Tables (IAPWS-IF97)"
+        AvailablePropertyPackages.Add(STPP.ComponentName.ToString, STPP)
+
+        Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
+        SEAPP.ComponentName = "Seawater IAPWS-08"
+        AvailablePropertyPackages.Add(SEAPP.ComponentName.ToString, SEAPP)
+
+        Dim PCSAFTPP As PCSAFTPropertyPackage = New PCSAFTPropertyPackage()
+        PCSAFTPP.ComponentName = "PC-SAFT (Simple)"
+        AvailablePropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
+
+        Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
+        PRPP.ComponentName = "Peng-Robinson (PR)"
+        AvailablePropertyPackages.Add(PRPP.ComponentName.ToString, PRPP)
+
+        Dim PRSV2PP As PRSV2PropertyPackage = New PRSV2PropertyPackage()
+        PRSV2PP.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)"
+        AvailablePropertyPackages.Add(PRSV2PP.ComponentName.ToString, PRSV2PP)
+
+        Dim PRSV2PPVL As PRSV2VLPropertyPackage = New PRSV2VLPropertyPackage()
+        PRSV2PPVL.ComponentName = "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)"
+        AvailablePropertyPackages.Add(PRSV2PPVL.ComponentName.ToString, PRSV2PPVL)
+
+        Dim SRKPP As SRKPropertyPackage = New SRKPropertyPackage()
+        SRKPP.ComponentName = "Soave-Redlich-Kwong (SRK)"
+        AvailablePropertyPackages.Add(SRKPP.ComponentName.ToString, SRKPP)
+
+        Dim PRLKPP As PengRobinsonLKPropertyPackage = New PengRobinsonLKPropertyPackage()
+        PRLKPP.ComponentName = "Peng-Robinson / Lee-Kesler (PR/LK)"
+        AvailablePropertyPackages.Add(PRLKPP.ComponentName.ToString, PRLKPP)
+
+        Dim UPP As UNIFACPropertyPackage = New UNIFACPropertyPackage()
+        UPP.ComponentName = "UNIFAC"
+        AvailablePropertyPackages.Add(UPP.ComponentName.ToString, UPP)
+
+        Dim ULLPP As UNIFACLLPropertyPackage = New UNIFACLLPropertyPackage()
+        ULLPP.ComponentName = "UNIFAC-LL"
+        AvailablePropertyPackages.Add(ULLPP.ComponentName.ToString, ULLPP)
+
+        Dim MUPP As MODFACPropertyPackage = New MODFACPropertyPackage()
+        MUPP.ComponentName = "Modified UNIFAC (Dortmund)"
+        AvailablePropertyPackages.Add(MUPP.ComponentName.ToString, MUPP)
+
+        Dim NUPP As NISTMFACPropertyPackage = New NISTMFACPropertyPackage()
+        NUPP.ComponentName = "Modified UNIFAC (NIST)"
+        AvailablePropertyPackages.Add(NUPP.ComponentName.ToString, NUPP)
+
+        Dim NRTLPP As NRTLPropertyPackage = New NRTLPropertyPackage()
+        NRTLPP.ComponentName = "NRTL"
+        AvailablePropertyPackages.Add(NRTLPP.ComponentName.ToString, NRTLPP)
+
+        Dim UQPP As UNIQUACPropertyPackage = New UNIQUACPropertyPackage()
+        UQPP.ComponentName = "UNIQUAC"
+        AvailablePropertyPackages.Add(UQPP.ComponentName.ToString, UQPP)
+
+        Dim CSLKPP As ChaoSeaderPropertyPackage = New ChaoSeaderPropertyPackage()
+        CSLKPP.ComponentName = "Chao-Seader"
+        AvailablePropertyPackages.Add(CSLKPP.ComponentName.ToString, CSLKPP)
+
+        Dim GSLKPP As GraysonStreedPropertyPackage = New GraysonStreedPropertyPackage()
+        GSLKPP.ComponentName = "Grayson-Streed"
+        AvailablePropertyPackages.Add(GSLKPP.ComponentName.ToString, GSLKPP)
+
+        Dim RPP As RaoultPropertyPackage = New RaoultPropertyPackage()
+        RPP.ComponentName = "Ideal (Raoult's Law)"
+        AvailablePropertyPackages.Add(RPP.ComponentName.ToString, RPP)
+
+        Dim LKPPP As LKPPropertyPackage = New LKPPropertyPackage()
+        LKPPP.ComponentName = "Lee-Kesler-Plöcker"
+        AvailablePropertyPackages.Add(LKPPP.ComponentName.ToString, LKPPP)
+
+        Dim EUQPP As ExUNIQUACPropertyPackage = New ExUNIQUACPropertyPackage()
+        EUQPP.ComponentName = "Extended UNIQUAC (Aqueous Electrolytes)"
+        AvailablePropertyPackages.Add(EUQPP.ComponentName.ToString, EUQPP)
+
+        Dim BOPP As BlackOilPropertyPackage = New BlackOilPropertyPackage()
+        BOPP.ComponentName = "Black Oil"
+        AvailablePropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
+
+        Dim adveos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.AdvancedEOS.dll"
+        If File.Exists(adveos) Then
+            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(adveos))
+            For Each pp In pplist
+                AvailablePropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+            Next
+        End If
+
+        'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.
+        If Not GlobalSettings.Settings.IsRunningOnMono Then
+            Dim COPP As CAPEOPENPropertyPackage = New CAPEOPENPropertyPackage()
+            COPP.ComponentName = "CAPE-OPEN"
+            AvailablePropertyPackages.Add(COPP.ComponentName.ToString, COPP)
+        End If
+
+    End Sub
+
+    Function GetPropertyPackages(ByVal assmbly As Assembly) As List(Of Interfaces.IPropertyPackage)
+
+        Dim availableTypes As New List(Of Type)()
+
+        Try
+            availableTypes.AddRange(assmbly.GetTypes())
+        Catch ex As Exception
+        End Try
+
+        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
+
+        Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
+
+    End Function
+
+    Sub AddFlashAlgorithms()
+
+        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+        Dim availableTypes As New List(Of Type)()
+
+        availableTypes.AddRange(calculatorassembly.GetTypes().Where(Function(x) If(x.GetInterface("DWSIM.Interfaces.IFlashAlgorithm") IsNot Nothing, True, False)))
+
+        For Each item In availableTypes.OrderBy(Function(x) x.Name)
+            If Not item.IsAbstract Then
+                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.IFlashAlgorithm)
+                If Not obj.InternalUseOnly Then AvailableFlashAlgorithms.Add(obj.Name, obj)
+                If obj.Name.Contains("Gibbs") Then
+                    Dim obj2 = obj.Clone
+                    DirectCast(obj2, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.GibbsMinimization3P).ForceTwoPhaseOnly = True
+                    AvailableFlashAlgorithms.Add(obj2.Name, obj2)
+                End If
+                If TypeOf obj Is Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE Then
+                    Dim obj2 = obj.Clone
+                    DirectCast(obj2, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoopsSLE).SolidSolution = True
+                    AvailableFlashAlgorithms.Add(obj2.Name, obj2)
+                End If
+            End If
+        Next
+
+    End Sub
 
 End Class

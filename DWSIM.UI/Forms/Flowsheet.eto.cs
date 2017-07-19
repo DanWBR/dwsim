@@ -28,9 +28,10 @@ namespace DWSIM.UI.Forms
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
             FlowsheetObject = new Desktop.Shared.Flowsheet() { FlowsheetForm = this };
+            FlowsheetObject.Initialize();
 
             Title = "New Flowsheet";
-            
+
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
@@ -38,7 +39,7 @@ namespace DWSIM.UI.Forms
             FlowsheetControl.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
 
             FlowsheetControl.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
-            
+
             ClientSize = new Size(1024, 768);
 
             var closeCommand = new Command { MenuText = "Close".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
@@ -57,23 +58,43 @@ namespace DWSIM.UI.Forms
             var btnReports = new ButtonToolItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
             var btnOptions = new ButtonToolItem { Text = "Simulation Options", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
 
-            var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
-            
-            btnSolve.Click += (sender, e) => {FlowsheetObject.SolveFlowsheet();};
+            btnComps.Click += (sender, e) => {
+                var cont = UI.Shared.Common.GetDefaultContainer();
+                new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 500, 500, cont);
+                form.ShowInTaskbar = false;
+                form.Show();
+            };
 
-            btnSave.Click += (sender, e) => {
+            btnBasis.Click += (sender, e) =>
+            {
+                var cont = UI.Shared.Common.GetDefaultContainer();
+                new DWSIM.UI.Desktop.Editors.Models(FlowsheetObject, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Basis", 500, 500, cont);
+                form.ShowInTaskbar = false;
+                form.Show();
+            };
+
+            var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+
+            btnSolve.Click += (sender, e) => { FlowsheetObject.SolveFlowsheet(); };
+
+            btnSave.Click += (sender, e) =>
+            {
 
                 if (FlowsheetObject.Options.FilePath != "")
                 {
                     SaveSimulation(FlowsheetObject.Options.FilePath);
                 }
-                else {
+                else
+                {
                     btnSaveAs.OnClick(new EventArgs());
                 }
-            
+
             };
 
-            btnSaveAs.Click += (sender, e) => {
+            btnSaveAs.Click += (sender, e) =>
+            {
 
                 var dialog = new SaveFileDialog();
                 dialog.Title = "Save File".Localize();
@@ -83,7 +104,7 @@ namespace DWSIM.UI.Forms
                 {
                     SaveSimulation(dialog.FileName);
                 }
-            
+
             };
             // create menu
             ToolBar = new ToolBar();
@@ -93,13 +114,14 @@ namespace DWSIM.UI.Forms
                                            btnComps, btnBasis, btnObjects, btnTools, btnUtilities,
                                            btnScripts, btnReports, btnOptions});
             }
-            else {
+            else
+            {
                 ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, new SeparatorToolItem(), btnSolve, new SeparatorToolItem(),
                                            btnComps, btnBasis, btnObjects, new SeparatorToolItem(), btnTools, btnUtilities,
                                            btnScripts, btnReports, btnOptions});
             }
-                 
-           
+
+
 
             var split = new Splitter();
             split.Panel1 = FlowsheetControl;
@@ -118,7 +140,8 @@ namespace DWSIM.UI.Forms
                     {
                         SetupSelectedContextMenu().Show(FlowsheetControl);
                     }
-                    else {
+                    else
+                    {
                         SetupDeselectedContextMenu().Show(FlowsheetControl);
                     }
                 }
@@ -143,64 +166,65 @@ namespace DWSIM.UI.Forms
         {
             if (MessageBox.Show(this, "ConfirmFlowsheetExit".Localize(), "FlowsheetExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
             {
-                e.Cancel = true; 
+                e.Cancel = true;
             }
         }
 
         void SaveSimulation(string path)
         {
 
-                FlowsheetObject.SaveToXML().Save(path);
+            FlowsheetObject.SaveToXML().Save(path);
 
-                string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
+            string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
 
-                FlowsheetObject.SaveToXML().Save(xmlfile);
+            FlowsheetObject.SaveToXML().Save(xmlfile);
 
-                var i_Files = new List<string>();
-                if (File.Exists(xmlfile))
-                    i_Files.Add(xmlfile);
+            var i_Files = new List<string>();
+            if (File.Exists(xmlfile))
+                i_Files.Add(xmlfile);
 
-                ZipOutputStream strmZipOutputStream = default(ZipOutputStream);
+            ZipOutputStream strmZipOutputStream = default(ZipOutputStream);
 
-                strmZipOutputStream = new ZipOutputStream(File.Create(path));
+            strmZipOutputStream = new ZipOutputStream(File.Create(path));
 
-                strmZipOutputStream.SetLevel(9);
+            strmZipOutputStream.SetLevel(9);
 
-                if (FlowsheetObject.Options.UsePassword)
-                    strmZipOutputStream.Password = FlowsheetObject.Options.Password;
+            if (FlowsheetObject.Options.UsePassword)
+                strmZipOutputStream.Password = FlowsheetObject.Options.Password;
 
-                string strFile = null;
+            string strFile = null;
 
-                foreach (string strFile_loopVariable in i_Files)
-                {
-                    strFile = strFile_loopVariable;
-                    FileStream strmFile = File.OpenRead(strFile);
-                    byte[] abyBuffer = new byte[strmFile.Length];
+            foreach (string strFile_loopVariable in i_Files)
+            {
+                strFile = strFile_loopVariable;
+                FileStream strmFile = File.OpenRead(strFile);
+                byte[] abyBuffer = new byte[strmFile.Length];
 
-                    strmFile.Read(abyBuffer, 0, abyBuffer.Length);
-                    ZipEntry objZipEntry = new ZipEntry(Path.GetFileName(strFile));
+                strmFile.Read(abyBuffer, 0, abyBuffer.Length);
+                ZipEntry objZipEntry = new ZipEntry(Path.GetFileName(strFile));
 
-                    objZipEntry.DateTime = DateTime.Now;
-                    objZipEntry.Size = strmFile.Length;
-                    strmFile.Close();
-                    strmZipOutputStream.PutNextEntry(objZipEntry);
-                    strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length);
+                objZipEntry.DateTime = DateTime.Now;
+                objZipEntry.Size = strmFile.Length;
+                strmFile.Close();
+                strmZipOutputStream.PutNextEntry(objZipEntry);
+                strmZipOutputStream.Write(abyBuffer, 0, abyBuffer.Length);
 
-                }
+            }
 
-                strmZipOutputStream.Finish();
-                strmZipOutputStream.Close();
+            strmZipOutputStream.Finish();
+            strmZipOutputStream.Close();
 
-                File.Delete(xmlfile);
+            File.Delete(xmlfile);
 
-                FlowsheetObject.Options.FilePath = path;
+            FlowsheetObject.Options.FilePath = path;
 
-                FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
+            FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
 
-        
+
         }
 
-        void LoadObjects() {
+        void LoadObjects()
+        {
 
             var calculatorassembly = System.Reflection.Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "DWSIM.Thermodynamics.dll"));
             var unitopassembly = System.Reflection.Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "DWSIM.UnitOperations.dll"));
@@ -211,11 +235,13 @@ namespace DWSIM.UI.Forms
 
             List<ListItem> litems = new List<ListItem>();
 
-            foreach (var item in availableTypes.OrderBy(x => x.Name)) {
-	            if (!item.IsAbstract) {
-		            var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
-			        ObjectList.Add(obj);
-	            }
+            foreach (var item in availableTypes.OrderBy(x => x.Name))
+            {
+                if (!item.IsAbstract)
+                {
+                    var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
+                    ObjectList.Add(obj);
+                }
             }
 
         }
@@ -223,11 +249,11 @@ namespace DWSIM.UI.Forms
         Eto.Forms.Container SetupLogWindow()
         {
 
-            var label = new Label {Text = "  " + "Log Window", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center};
+            var label = new Label { Text = "  " + "Log Window", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center };
 
             var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
 
-            var container = new TableLayout { Rows = { label, outtxt }, Spacing = new Size(5, 5)};
+            var container = new TableLayout { Rows = { label, outtxt }, Spacing = new Size(5, 5) };
 
             var ctxmenu0 = new ContextMenu();
 
@@ -259,8 +285,9 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.SetMessageListener((string text, Interfaces.IFlowsheet.MessageType mtype) =>
             {
-                Application.Instance.Invoke(() =>{
-                    
+                Application.Instance.Invoke(() =>
+                {
+
                     var item = new ListItem { Text = "[" + DateTime.Now.ToString() + "] " + text };
                     switch (mtype)
                     {
@@ -282,15 +309,15 @@ namespace DWSIM.UI.Forms
                         default:
                             break;
                     }
-                
+
                     outtxt.Items.Add(item);
                     outtxt.SelectedIndex = outtxt.Items.Count - 1;
-                
+
                 });
             });
 
             return container;
-        
+
         }
 
         Eto.Forms.ContextMenu SetupSelectedContextMenu()
@@ -325,10 +352,11 @@ namespace DWSIM.UI.Forms
             item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(obj);
 
             var item4 = new ButtonMenuItem { Text = "Debug" };
-            item4.Click += (sender, e) => {
-                var txt = new TextArea { ReadOnly = true, Wrap = true};
+            item4.Click += (sender, e) =>
+            {
+                var txt = new TextArea { ReadOnly = true, Wrap = true };
                 txt.Text = "Please wait, debugging object...";
-                var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300); 
+                var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300);
                 Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);
                 form1.ShowModal(this);
             };
@@ -340,28 +368,28 @@ namespace DWSIM.UI.Forms
                 {
                     ((UnitOperations.UnitOperations.CapeOpenUO)obj).Edit();
                 }
-                else 
-                { 
-                var cont = UI.Shared.Common.GetDefaultContainer();
-                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
-                {
-                    new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
-                }
-                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
-                {
-                    new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
-                }
-                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
-                {
-                    new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
-                }
                 else
                 {
-                    new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
-                }
-                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Properties", 500, 500, cont);
-                form.ShowInTaskbar = false;
-                form.Show();
+                    var cont = UI.Shared.Common.GetDefaultContainer();
+                    if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                    {
+                        new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
+                    }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
+                    {
+                        new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
+                    }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
+                    {
+                        new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
+                    }
+                    else
+                    {
+                        new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
+                    }
+                    var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Properties", 500, 500, cont);
+                    form.ShowInTaskbar = false;
+                    form.Show();
                 }
             };
 
@@ -380,24 +408,26 @@ namespace DWSIM.UI.Forms
             };
 
             var item5 = new ButtonMenuItem { Text = "Clone" };
-            item5.Click += (sender, e) => {
+            item5.Click += (sender, e) =>
+            {
                 var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 50, obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
                 ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
             };
 
             var item6 = new ButtonMenuItem { Text = "Delete" };
 
-            item6.Click += (sender, e) => {
+            item6.Click += (sender, e) =>
+            {
                 if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
                 {
                     FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
                 }
             };
 
-            ctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6});
+            ctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
 
             return ctxmenu;
-        
+
         }
 
         Eto.Forms.ContextMenu SetupDeselectedContextMenu()
@@ -405,19 +435,20 @@ namespace DWSIM.UI.Forms
 
             var ctxmenu = new ContextMenu();
 
-            var item0 = new ButtonMenuItem { Text = "Add New Object"};
+            var item0 = new ButtonMenuItem { Text = "Add New Object" };
 
             int currposx = (int)Mouse.Position.X;
             int currposy = (int)Mouse.Position.Y;
-            
-            foreach (var item in ObjectList) {
+
+            foreach (var item in ObjectList)
+            {
                 var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
                 menuitem.Click += (sender, e) =>
                 {
                     var mp = this.PointFromScreen(new PointF(currposx, currposy));
                     var z = FlowsheetControl.FlowsheetSurface.Zoom;
                     FlowsheetObject.AddObject(item.GetDisplayName(), (int)(mp.X / z), (int)(mp.Y / z), "");
-		        };
+                };
                 item0.Items.Add(menuitem);
             }
 
