@@ -101,8 +101,8 @@ Namespace GraphicObjects.Shapes
                     End If
                     .Item(1).Position = New Point(X + Width, Y + 0.98 * Height)
                 End If
-                .Item(0).ConnectorName = "Distillate"
-                .Item(1).ConnectorName = "Bottoms"
+                .Item(0).ConnectorName = "Top Product"
+                .Item(1).ConnectorName = "Bottoms Product"
                 If FlippedH Then
                     For i As Integer = 2 To OutCount - 1
                         .Item(i).Position = New Point(X + Width, Y + (i + 1) / InCount * Height)

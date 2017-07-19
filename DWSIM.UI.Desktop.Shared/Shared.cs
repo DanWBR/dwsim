@@ -11,6 +11,8 @@ namespace DWSIM.UI.Shared
     public static class Common
     {
 
+        static string imgprefix = "DWSIM.UI.Desktop.Shared.Resources.Icons.";
+            
         public static bool IsValidDouble(string s)
         {
             double d = 0;
@@ -24,6 +26,7 @@ namespace DWSIM.UI.Shared
             content.Width = width - content.Padding.Value.Left * 2 - content.Padding.Value.Right * 2;
             return new Form()
             {
+                Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Content = new Scrollable { Content = content },
                 Title = title,
                 Width = width,
@@ -50,6 +53,7 @@ namespace DWSIM.UI.Shared
             }
             var form = new Form()
             {
+                Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
                 Width = width,
                 Height = height,
@@ -72,6 +76,16 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static Dialog CreateDialog(Control content, String title, int width = 0, int height = 0)
+        {
+            var alert = new Eto.Forms.Dialog();
+            alert.Content = content;
+            if (height != 0) alert.Height = height;
+            if (width != 0) alert.Width = width;
+            alert.Title = title;
+            alert.Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
+            return alert;
+        }
 
         public static DynamicLayout GetDefaultContainer()
         {
@@ -133,6 +147,24 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddDoubleTextBoxRow(this DynamicLayout container, String numberformat, String text, String currval1, Double currval2, Action<TextBox, EventArgs> command, Action<TextBox, EventArgs> command2)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            var edittext = new TextBox { Text = currval1, Width = 100 };
+            var edittext2 = new TextBox { Text = currval2.ToString(numberformat), Width = 100 };
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+            if (command2 != null) edittext2.TextChanged += (sender, e) => command2.Invoke((TextBox)sender, e);
+
+            var tr = new TableRow(txt, null, edittext, edittext2);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
         public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, Action<TextArea, EventArgs> command)
         {
 

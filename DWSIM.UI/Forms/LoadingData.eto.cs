@@ -10,7 +10,11 @@ namespace DWSIM.UI.Forms.Forms
         void InitializeComponent()
         {
 
-            Title = "Loading";
+            string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
+
+            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
+
+            Title = "Loading...";
 
             var progress = new ProgressBar { Indeterminate = true };
             
@@ -19,15 +23,18 @@ namespace DWSIM.UI.Forms.Forms
             label.VerticalAlignment = VerticalAlignment.Center;
             label.TextAlignment = TextAlignment.Center;
 
-            var container = new TableLayout { Rows = { progress, label }, Spacing = new Size(10, 10), Padding = new Padding(10, 10, 10, 10) };
+            var container = new TableLayout { Rows = { label, progress }, Spacing = new Size(10, 10), Padding = new Padding(10, 10, 10, 10) };
 
             Content = container;
 
-            WindowStyle = Eto.Forms.WindowStyle.None;
+            WindowStyle = Eto.Forms.WindowStyle.Default;
 
             Topmost = true;
 
             ShowInTaskbar = false;
+
+            Maximizable = false;
+            Minimizable = false;
 
             int w = 300;
             int h = 80;

@@ -529,7 +529,8 @@ Public Class GraphicsSurface
 
             'posicionar pontos nos primeiros slots livres
             Dim StartPos, EndPos As New Point
-            Dim InConSlot, OutConSlot As New ConnectionPoint
+            Dim InConSlot As IConnectionPoint = Nothing
+            Dim OutConSlot As IConnectionPoint = Nothing
             If Not gObjFrom Is Nothing Then
                 If Not gObjTo Is Nothing Then
                     If gObjFrom.ObjectType = ObjectType.MaterialStream And gObjTo.ObjectType = ObjectType.MaterialStream Then

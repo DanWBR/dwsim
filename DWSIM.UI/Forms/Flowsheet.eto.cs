@@ -325,14 +325,35 @@ namespace DWSIM.UI.Forms
             item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(obj);
 
             var item4 = new ButtonMenuItem { Text = "Debug" };
+            item4.Click += (sender, e) => {
+                var txt = new TextArea { ReadOnly = true, Wrap = true};
+                txt.Text = "Please wait, debugging object...";
+                var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300); 
+                Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);
+                form1.ShowModal(this);
+            };
 
             var menuitem1 = new ButtonMenuItem { Text = "Edit Properties" };
             menuitem1.Click += (sender, e) =>
             {
+                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO)
+                {
+                    ((UnitOperations.UnitOperations.CapeOpenUO)obj).Edit();
+                }
+                else 
+                { 
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
                 {
                     new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
+                {
+                    new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
+                }
+                else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
+                {
+                    new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
                 }
                 else
                 {
@@ -341,6 +362,7 @@ namespace DWSIM.UI.Forms
                 var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Properties", 500, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
+                }
             };
 
             var menuitem2 = new ButtonMenuItem { Text = "View Results" };

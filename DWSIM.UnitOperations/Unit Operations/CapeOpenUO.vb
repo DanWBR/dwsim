@@ -89,7 +89,7 @@ Namespace UnitOperations
 
         End Function
 
-        Public Sub New(ByVal name As String, ByVal description As String, ByVal gobj As GraphicObject)
+        Public Sub New(ByVal name As String, ByVal description As String, ByVal gobj As IGraphicObject)
 
             Me.New()
 
@@ -632,7 +632,7 @@ Namespace UnitOperations
                                 If cnobj IsNot Nothing Then
                                     objid = CType(cnobj, ICapeIdentification).ComponentName
                                     myport.Disconnect()
-                                    Dim gobj As GraphicObject = FlowSheet.GraphicObjects(objid)
+                                    Dim gobj As IGraphicObject = FlowSheet.GraphicObjects(objid)
                                     Select Case myport.portType
                                         Case CapePortType.CAPE_MATERIAL
                                             Me.FlowSheet.ConnectObjects(gobj, Me.GraphicObject, 0, Me.GraphicObject.InputConnectors.Count - 1)
@@ -661,7 +661,7 @@ Namespace UnitOperations
                                 If cnobj IsNot Nothing Then
                                     objid = CType(cnobj, ICapeIdentification).ComponentName
                                     myport.Disconnect()
-                                    Dim gobj As GraphicObject = FlowSheet.GraphicObjects(objid)
+                                    Dim gobj As IGraphicObject = FlowSheet.GraphicObjects(objid)
                                     Select Case myport.portType
                                         Case CapePortType.CAPE_MATERIAL
                                             Me.FlowSheet.ConnectObjects(Me.GraphicObject, gobj, Me.GraphicObject.OutputConnectors.Count - 1, 0)

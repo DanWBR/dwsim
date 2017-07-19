@@ -53,7 +53,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbsorptionColumn.cs" />
     <Compile Include="Connections.cs" />
+    <Compile Include="DistillationColumn.cs" />
     <Compile Include="General.cs" />
     <Compile Include="MaterialStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

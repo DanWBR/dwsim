@@ -14,6 +14,8 @@ namespace DWSIM.UI.Desktop
         public static void Main(string[] args)
         {
 
+            // set UI language to English
+
             GlobalSettings.Settings.CultureInfo = "en";
 
             if (RunningPlatform() == OSPlatform.Windows)

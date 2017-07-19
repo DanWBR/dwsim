@@ -43,14 +43,14 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = SimObject.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "OBJECT ID");
+            s.CreateAndAddLabelRow(container, "Object ID");
 
             s.CreateAndAddStringEditorRow(container, "Name", SimObject.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {
                 SimObject.GraphicObject.Tag = arg3.Text;
             });
 
-            s.CreateAndAddLabelRow(container, "PROPERTY PACKAGE");
+            s.CreateAndAddLabelRow(container, "Property Package");
 
             var proppacks = SimObject.GetFlowsheet().PropertyPackages.Values.Select((x) => x.Tag).ToList();
 
@@ -84,7 +84,7 @@ namespace DWSIM.UI.Desktop.Editors
                 SimObject.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
             };
 
-            s.CreateAndAddLabelRow(container, "OBJECT PROPERTIES");
+            s.CreateAndAddLabelRow(container, "Object Properties");
 
             double val;
             switch (SimObject.GraphicObject.ObjectType)

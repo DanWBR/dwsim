@@ -1,5 +1,6 @@
 ﻿Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Interfaces.Enums.GraphicObjects
+Imports DWSIM.Interfaces
 
 Namespace GraphicObjects.Shapes
 
@@ -51,12 +52,12 @@ Namespace GraphicObjects.Shapes
 
                 Try
                     Dim i As Integer = 0
-                    For Each ic As ConnectionPoint In Me.InputConnectors
+                    For Each ic As IConnectionPoint In Me.InputConnectors
                         ic.Position = New Point(Me.X + obj1(i), Me.Y + obj2(i))
                         i = i + 1
                     Next
                     i = 0
-                    For Each oc As ConnectionPoint In Me.OutputConnectors
+                    For Each oc As IConnectionPoint In Me.OutputConnectors
                         oc.Position = New Point(Me.X + obj3(i), Me.Y + obj4(i))
                         i = i + 1
                     Next
@@ -68,12 +69,12 @@ Namespace GraphicObjects.Shapes
 
                 Try
                     Dim i As Integer = 0
-                    For Each ic As ConnectionPoint In Me.InputConnectors
+                    For Each ic As IConnectionPoint In Me.InputConnectors
                         ic.Position = New Point(Me.X, Me.Y + (i + 1) / InputConnectors.Count * Height)
                         i = i + 1
                     Next
                     i = 0
-                    For Each oc As ConnectionPoint In Me.OutputConnectors
+                    For Each oc As IConnectionPoint In Me.OutputConnectors
                         oc.Position = New Point(Me.X + Width, Me.Y + (i + 1) / OutputConnectors.Count * Height)
                         i = i + 1
                     Next
