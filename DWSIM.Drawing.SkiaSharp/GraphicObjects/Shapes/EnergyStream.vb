@@ -98,7 +98,7 @@ Namespace GraphicObjects.Shapes
                 .StrokeWidth = LineWidth
                 .IsStroke = Not Fill
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .PathEffect = SKPathEffect.CreateCorner(2.0F)
+                .PathEffect = SKPathEffect.CreateCorner(1.0F)
             End With
 
             Dim gp As New SKPath()

@@ -301,6 +301,154 @@ Imports System.IO
 
     Public Property CalculationQueue As New Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
+    Public Function AddObject(ByVal typename As String, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "") As ISimulationObject
+
+        Select Case typename
+
+            Case "Controller Block"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Adjust, x, y, tag))
+
+            Case "Specification Block"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Spec, x, y, tag))
+
+            Case "Recycle Block"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_Recycle, x, y, tag))
+
+            Case "Energy Recycle Block"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OT_EnergyRecycle, x, y, tag))
+
+            Case "Stream Mixer"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeIn, x, y, tag))
+
+            Case "Stream Splitter"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.NodeOut, x, y, tag))
+
+            Case "Centrifugal Pump"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pump, x, y, tag))
+
+            Case "Tank"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Tank, x, y, tag))
+
+            Case "Gas-Liquid Separator"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Vessel, x, y, tag))
+
+            Case "Material Stream"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.MaterialStream, x, y, tag))
+
+            Case "Energy Stream"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.EnergyStream, x, y, tag))
+
+            Case "Adiabatic Compressor"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Compressor, x, y, tag))
+
+            Case "Adiabatic Expander"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Expander, x, y, tag))
+
+            Case "Heater"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Heater, x, y, tag))
+
+            Case "Cooler"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Cooler, x, y, tag))
+
+            Case "Piping Segment"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Pipe, x, y, tag))
+
+            Case "Valve"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Valve, x, y, tag))
+
+            Case "Conversion Reactor"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Conversion, x, y, tag))
+
+            Case "Equilibrium Reactor"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Equilibrium, x, y, tag))
+
+            Case "Gibbs Reactor"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_Gibbs, x, y, tag))
+
+            Case "Plug-Flow Reactor (PFR)"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_PFR, x, y, tag))
+
+            Case "Continous Stirred Tank Reactor (CSTR)"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.RCT_CSTR, x, y, tag))
+
+            Case "Heat Exchanger"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.HeatExchanger, x, y, tag))
+
+            Case "Shortcut Column"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ShortcutColumn, x, y, tag))
+
+            Case "Distillation Column"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.DistillationColumn, x, y, tag))
+
+            Case "Absorption Column"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.AbsorptionColumn, x, y, tag))
+
+            Case "Compound Separator"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ComponentSeparator, x, y, tag))
+
+            Case "Solids Separator"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.SolidSeparator, x, y, tag))
+
+            Case "Filter"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.Filter, x, y, tag))
+
+            Case "Orifice Plate"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.OrificePlate, x, y, tag))
+
+            Case "Python Script"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CustomUO, x, y, tag))
+
+            Case "Spreadsheet"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.ExcelUO, x, y, tag))
+
+            Case "Flowsheet"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.FlowsheetUO, x, y, tag))
+
+            Case "CAPE-OPEN Unit Operation"
+
+                Return Me.SimulationObjects(AddObjectToSurface(ObjectType.CapeOpenUO, x, y, tag))
+
+            Case Else
+
+                Return Nothing
+
+        End Select
+
+    End Function
+
     Public Function AddObjectToSurface(ByVal type As ObjectType, ByVal x As Integer, ByVal y As Integer, Optional ByVal tag As String = "", Optional ByVal id As String = "") As String
 
         Dim gObj As IGraphicObject = Nothing
@@ -321,13 +469,10 @@ Imports System.IO
                 Dim myADJ As Adjust = New Adjust(myNode.Name, "Ajuste")
                 myADJ.GraphicObject = myNode
                 SimulationObjects.Add(myNode.Name, myADJ)
-                'Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("ADJT001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             Case ObjectType.OT_Spec
 
                 Dim myNode As New SpecGraphic(mpx, mpy, 40, 40)
-                myNode.LineWidth = 2
-                myNode.Fill = True
                 myNode.Tag = "SPEC-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
@@ -354,8 +499,6 @@ Imports System.IO
             Case ObjectType.OT_EnergyRecycle
 
                 Dim myNode As New EnergyRecycleGraphic(mpx, mpy, 40, 40)
-                myNode.LineWidth = 2
-                myNode.Fill = True
                 myNode.Tag = "EREC-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myNode.Tag = tag
                 gObj = myNode
@@ -407,23 +550,19 @@ Imports System.IO
                 myCOSP.GraphicObject = myPump
                 SimulationObjects.Add(myPump.Name, myCOSP)
 
-                'Case ObjectType.Tank
+            Case ObjectType.Tank
 
-                '    Dim myTank As New TankGraphic(mpx, mpy, 50, 50, 0)
-                '    myTank.LineWidth = 2
-                '    myTank.Fill = True
-                '    myTank.FillColor = fillclr
-                '    myTank.LineColor = lineclr
-                '    myTank.Tag = "TANK-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myTank.Tag = tag
-                '    gObj = myTank
-                '    gObj.Name = "TQ-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myTank)
-                '    'OBJETO DWSIM
-                '    Dim myCOTK As Tank = New Tank(myTank.Name, "Tanque")
-                '    myCOTK.GraphicObject = myTank
-                '    SimulationObjects.Add(myTank.Name, myCOTK)
+                Dim myTank As New TankGraphic(mpx, mpy, 50, 50)
+                myTank.Tag = "TANK-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myTank.Tag = tag
+                gObj = myTank
+                gObj.Name = "TANK-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myTank)
+                'OBJETO DWSIM
+                Dim myCOTK As Tank = New Tank(myTank.Name, "Tanque")
+                myCOTK.GraphicObject = myTank
+                SimulationObjects.Add(myTank.Name, myCOTK)
 
             Case ObjectType.Vessel
 
@@ -611,8 +750,6 @@ Imports System.IO
             Case ObjectType.RCT_Gibbs
 
                 Dim myRgibbs As New GibbsReactorGraphic(mpx, mpy, 50, 50)
-                myRgibbs.LineWidth = 2
-                myRgibbs.Fill = True
                 myRgibbs.Tag = "GR-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myRgibbs.Tag = tag
                 gObj = myRgibbs
@@ -694,10 +831,6 @@ Imports System.IO
                 myCOSC.GraphicObject = myDC
                 SimulationObjects.Add(myDC.Name, myCOSC)
 
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-
             Case ObjectType.AbsorptionColumn
 
                 Dim myAC As New AbsorptionColumnGraphic(mpx, mpy, 144, 180)
@@ -711,54 +844,6 @@ Imports System.IO
                 Dim myCOSC As AbsorptionColumn = New AbsorptionColumn(myAC.Name, "AbsorptionColumn", Me)
                 myCOSC.GraphicObject = myAC
                 SimulationObjects.Add(myAC.Name, myCOSC)
-
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-
-                'Case ObjectType.ReboiledAbsorber
-
-                '    Dim mySC As New ReboiledAbsorberGraphic(mpx, mpy, 144, 180, 0)
-                '    mySC.LineWidth = 2
-                '    mySC.Fill = True
-                '    mySC.FillColor = fillclr
-                '    mySC.LineColor = lineclr
-                '    mySC.Tag = "RBA-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then mySC.Tag = tag
-                '    gObj = mySC
-                '    gObj.Name = "RBA-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, mySC)
-                '    'OBJETO DWSIM
-                '    Dim myCOSC As ReboiledAbsorber = New ReboiledAbsorber(mySC.Name, "ReboiledAbsorber", Flowsheet)
-                '    myCOSC.GraphicObject = mySC
-                '    SimulationObjects.Add(mySC.Name, myCOSC)
-
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-
-                'Case ObjectType.RefluxedAbsorber
-
-                '    Dim mySC As New RefluxedAbsorberGraphic(mpx, mpy, 144, 180, 0)
-                '    mySC.LineWidth = 2
-                '    mySC.Fill = True
-                '    mySC.FillColor = fillclr
-                '    mySC.LineColor = lineclr
-                '    mySC.Tag = "RFA-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then mySC.Tag = tag
-                '    gObj = mySC
-                '    gObj.Name = "RFA-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, mySC)
-                '    'OBJETO DWSIM
-                '    Dim myCOSC As RefluxedAbsorber = New RefluxedAbsorber(mySC.Name, "RefluxedAbsorber", Flowsheet)
-                '    myCOSC.GraphicObject = mySC
-                '    SimulationObjects.Add(mySC.Name, myCOSC)
-
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL002"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("DCOL003"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
 
             Case ObjectType.ComponentSeparator
 
@@ -777,8 +862,6 @@ Imports System.IO
             Case ObjectType.SolidSeparator
 
                 Dim myCSep As New SolidsSeparatorGraphic(mpx, mpy, 50, 50)
-                myCSep.LineWidth = 2
-                myCSep.Fill = True
                 myCSep.Tag = "SS-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
@@ -793,8 +876,6 @@ Imports System.IO
             Case ObjectType.Filter
 
                 Dim myCSep As New FilterGraphic(mpx, mpy, 50, 50)
-                myCSep.LineWidth = 2
-                myCSep.Fill = True
                 myCSep.Tag = "FT-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myCSep.Tag = tag
                 gObj = myCSep
@@ -806,67 +887,51 @@ Imports System.IO
                 myCOCSEP.GraphicObject = myCSep
                 SimulationObjects.Add(myCSep.Name, myCOCSEP)
 
-                'Case ObjectType.OrificePlate
+            Case ObjectType.OrificePlate
 
-                '    Dim myOPL As New OrificePlateGraphic(mpx, mpy, 25, 25, 0)
-                '    myOPL.LineWidth = 2
-                '    myOPL.Fill = True
-                '    myOPL.FillColor = fillclr
-                '    myOPL.LineColor = lineclr
-                '    myOPL.Tag = "OP-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myOPL.Tag = tag
-                '    gObj = myOPL
-                '    gObj.Name = "OP-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myOPL)
-                '    'OBJETO DWSIM
-                '    Dim myCOOPL As OrificePlate = New OrificePlate(myOPL.Name, "OrificePlate")
-                '    myCOOPL.GraphicObject = myOPL
-                '    SimulationObjects.Add(myOPL.Name, myCOOPL)
+                Dim myOPL As New OrificePlateGraphic(mpx, mpy, 25, 25)
+                myOPL.Tag = "OP-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myOPL.Tag = tag
+                gObj = myOPL
+                gObj.Name = "OP-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myOPL)
+                'OBJETO DWSIM
+                Dim myCOOPL As OrificePlate = New OrificePlate(myOPL.Name, "OrificePlate")
+                myCOOPL.GraphicObject = myOPL
+                SimulationObjects.Add(myOPL.Name, myCOOPL)
 
-                'Case ObjectType.CustomUO
+            Case ObjectType.CustomUO
 
-                '    Dim myCUO As New CustomUOGraphic(mpx, mpy, 25, 25, 0)
-                '    myCUO.LineWidth = 2
-                '    myCUO.Fill = True
-                '    myCUO.FillColor = fillclr
-                '    myCUO.LineColor = lineclr
-                '    myCUO.Tag = "UO-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myCUO.Tag = tag
-                '    gObj = myCUO
-                '    gObj.Name = "UO-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myCUO)
-                '    'OBJETO DWSIM
-                '    Dim myCOCUO As CustomUO = New CustomUO(myCUO.Name, "CustomUnitOp")
-                '    myCOCUO.GraphicObject = myCUO
-                '    SimulationObjects.Add(myCUO.Name, myCOCUO)
+                Dim myCUO As New ScriptGraphic(mpx, mpy, 25, 25)
+                myCUO.Tag = "UO-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myCUO.Tag = tag
+                gObj = myCUO
+                gObj.Name = "UO-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myCUO)
+                'OBJETO DWSIM
+                Dim myCOCUO As CustomUO = New CustomUO(myCUO.Name, "CustomUnitOp")
+                myCOCUO.GraphicObject = myCUO
+                SimulationObjects.Add(myCUO.Name, myCOCUO)
 
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CSUO001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+            Case ObjectType.ExcelUO
 
-                'Case ObjectType.ExcelUO
-
-                '    Dim myEUO As New ExcelUOGraphic(mpx, mpy, 25, 25, 0)
-                '    myEUO.LineWidth = 2
-                '    myEUO.Fill = True
-                '    myEUO.FillColor = fillclr
-                '    myEUO.LineColor = lineclr
-                '    myEUO.Tag = "EXL-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myEUO.Tag = tag
-                '    gObj = myEUO
-                '    gObj.Name = "EXL-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myEUO)
-                '    'OBJETO DWSIM
-                '    Dim myCOEUO As ExcelUO = New ExcelUO(myEUO.Name, "ExcelUnitOp")
-                '    myCOEUO.GraphicObject = myEUO
-                '    SimulationObjects.Add(myEUO.Name, myCOEUO)
+                Dim myEUO As New SpreadsheetGraphic(mpx, mpy, 25, 25)
+                myEUO.Tag = "EXL-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myEUO.Tag = tag
+                gObj = myEUO
+                gObj.Name = "EXL-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myEUO)
+                'OBJETO DWSIM
+                Dim myCOEUO As ExcelUO = New ExcelUO(myEUO.Name, "ExcelUnitOp")
+                myCOEUO.GraphicObject = myEUO
+                SimulationObjects.Add(myEUO.Name, myCOEUO)
 
             Case ObjectType.FlowsheetUO
 
                 Dim myEUO As New FlowsheetGraphic(mpx, mpy, 25, 25)
-                myEUO.LineWidth = 2
-                myEUO.Fill = True
                 myEUO.Tag = "FS-" & SimulationObjects.Count.ToString("00#")
                 If tag <> "" Then myEUO.Tag = tag
                 gObj = myEUO
@@ -878,25 +943,19 @@ Imports System.IO
                 myCOEUO.GraphicObject = myEUO
                 SimulationObjects.Add(myEUO.Name, myCOEUO)
 
-                'Case ObjectType.CapeOpenUO
+            Case ObjectType.CapeOpenUO
 
-                '    Dim myCUO As New CapeOpenUOGraphic(mpx, mpy, 40, 40, 0)
-                '    myCUO.LineWidth = 2
-                '    myCUO.Fill = True
-                '    myCUO.FillColor = fillclr
-                '    myCUO.LineColor = lineclr
-                '    myCUO.Tag = "COUO-" & SimulationObjects.Count.ToString("00#")
-                '    If tag <> "" Then myCUO.Tag = tag
-                '    gObj = myCUO
-                '    gObj.Name = "COUO-" & Guid.NewGuid.ToString
-                '    If id <> "" Then gObj.Name = id
-                '    GraphicObjects.Add(gObj.Name, myCUO)
-                '    'OBJETO DWSIM
-                '    Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
-                '    myCOCUO.GraphicObject = myCUO
-                '    SimulationObjects.Add(myCUO.Name, myCOCUO)
-
-                '    Flowsheet.WriteToLog(DWSIM.App.GetLocalTipString("CAPE001"), Color.Black, DWSIM.Flowsheet.MessageType.Tip)
+                Dim myCUO As New CAPEOPENGraphic(mpx, mpy, 40, 40)
+                myCUO.Tag = "COUO-" & SimulationObjects.Count.ToString("00#")
+                If tag <> "" Then myCUO.Tag = tag
+                gObj = myCUO
+                gObj.Name = "COUO-" & Guid.NewGuid.ToString
+                If id <> "" Then gObj.Name = id
+                GraphicObjects.Add(gObj.Name, myCUO)
+                'OBJETO DWSIM
+                Dim myCOCUO As CapeOpenUO = New CapeOpenUO(myCUO.Name, "CapeOpenUnitOperation", gObj)
+                myCOCUO.GraphicObject = myCUO
+                SimulationObjects.Add(myCUO.Name, myCOCUO)
 
         End Select
 

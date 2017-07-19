@@ -100,9 +100,9 @@ Namespace GraphicObjects.Shapes
                 .StrokeWidth = LineWidth
             End With
 
-            Dim rect As New SKRect(X, Y, Width, Height)
-            Dim rect2 As New SKRect(Convert.ToInt32(X + 0.3 * Width), Convert.ToInt32(Y + 0.3 * Height), Convert.ToInt32(0.4 * Width), Convert.ToInt32(0.4 * Height))
-            Dim rect3 As New SKRect(X + 0.4 * Width, Y - 0.3 * Height, 0.2 * Width, 0.3 * Height)
+            Dim rect As New SKRect(X, Y, X + Width, Y + Height)
+            Dim rect2 As New SKRect(X + 0.3 * Width, Y + 0.3 * Height, X + 0.7 * Width, Y + 0.7 * Height)
+            Dim rect3 As New SKRect(X + 0.4 * Width, Y - 0.3 * Height, X + 0.6 * Width, Y)
 
             canvas.DrawOval(rect, myPen2)
             canvas.DrawOval(rect2, myPen2)

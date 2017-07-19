@@ -96,9 +96,9 @@ Namespace GraphicObjects.Shapes
             With myPen
                 .Color = LineColor
                 .StrokeWidth = LineWidth
-                .IsStroke = Fill
+                .IsStroke = False
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .PathEffect = SKPathEffect.CreateCorner(2.0F)
+                .PathEffect = SKPathEffect.CreateCorner(1.0F)
             End With
 
             Dim gp As New SKPath()

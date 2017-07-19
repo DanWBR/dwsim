@@ -414,7 +414,9 @@ namespace DWSIM.UI.Forms
                 var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
                 menuitem.Click += (sender, e) =>
                 {
-                    FlowsheetObject.AddObject(item.GraphicObject.ObjectType, currposx, currposy, "");
+                    var mp = this.PointFromScreen(new PointF(currposx, currposy));
+                    var z = FlowsheetControl.FlowsheetSurface.Zoom;
+                    FlowsheetObject.AddObject(item.GetDisplayName(), (int)(mp.X / z), (int)(mp.Y / z), "");
 		        };
                 item0.Items.Add(menuitem);
             }
