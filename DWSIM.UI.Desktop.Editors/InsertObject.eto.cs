@@ -184,6 +184,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
 
                 Flowsheet.AddObject(tobj, 50, 50, "");
+                Flowsheet.UpdateInterface();
                 
                 this.Close();
 

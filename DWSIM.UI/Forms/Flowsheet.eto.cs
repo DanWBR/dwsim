@@ -70,6 +70,7 @@ namespace DWSIM.UI.Forms
                 var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 500, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
+                form.Width += 1;
             };
 
             btnBasis.Click += (sender, e) =>
@@ -79,6 +80,7 @@ namespace DWSIM.UI.Forms
                 var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Basis", 500, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
+                form.Width += 1;
             };
 
             btnOptions.Click += (sender, e) =>
@@ -88,6 +90,7 @@ namespace DWSIM.UI.Forms
                 var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Settings", 500, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
+                form.Width += 1;
             };
 
             var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
@@ -362,6 +365,7 @@ namespace DWSIM.UI.Forms
                 var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Connections", 500, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
+                form.Width += 1;
             };
 
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
@@ -412,6 +416,7 @@ namespace DWSIM.UI.Forms
                     var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Properties", 500, 500, cont);
                     form.ShowInTaskbar = false;
                     form.Show();
+                    form.Width += 1;
                 }
             };
 
@@ -459,17 +464,17 @@ namespace DWSIM.UI.Forms
 
             var item0 = new ButtonMenuItem { Text = "Add New Object" };
 
-            int currposx = (int)Mouse.Position.X;
-            int currposy = (int)Mouse.Position.Y;
+            int currposx = (int)Mouse.Position.X - Location.X;
+            int currposy = (int)Mouse.Position.Y - Location.Y;
 
             foreach (var item in ObjectList.Values)
             {
                 var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
-                menuitem.Click += (sender, e) =>
+                menuitem.Click += (sender2, e2) =>
                 {
-                    var mp = this.PointFromScreen(new PointF(currposx, currposy));
                     var z = FlowsheetControl.FlowsheetSurface.Zoom;
-                    FlowsheetObject.AddObject(item.GetDisplayName(), (int)(mp.X / z), (int)(mp.Y / z), "");
+                    FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                    FlowsheetControl.Invalidate();
                 };
                 item0.Items.Add(menuitem);
             }
