@@ -12,6 +12,10 @@ namespace DWSIM.UI.Desktop.Editors
 
         public Interfaces.IFlowsheet Flowsheet;
 
+        public int FlowsheetHeight = 400;
+
+        private bool initialized = false;
+
         private List<Type> typelist = new  List<Type>();
         public Dictionary<String, Interfaces.ISimulationObject> ObjList;   
 
@@ -180,7 +184,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
 
                 Flowsheet.AddObject(tobj, 50, 50, "");
-
+                
                 this.Close();
 
             };
@@ -207,25 +211,31 @@ namespace DWSIM.UI.Desktop.Editors
                     var li = new ListItem() { Text = item.Key };
                     list.Items.Add(li);
                 }
+
+                list.SelectedIndexChanged += (sender2, e2) =>
+                {
+
+                    if (!initialized) return;
+
+                    var obj = ObjList[list.SelectedValue.ToString()];
+
+                    var fi = FileVersionInfo.GetVersionInfo(obj.GetType().Assembly.Location);
+
+                    lblName.Text = obj.GetDisplayName();
+                    lblVersion.Text = obj.GetVersion().ToString();
+                    lblLib.Text = fi.OriginalFilename;
+                    lblLibVersion.Text = obj.GetType().Assembly.GetName().Version.ToString();
+
+                    lblDesc.Text = obj.GetDisplayDescription();
+
+                    lblAbout.Text = fi.FileDescription + "\n" + fi.Comments + "\n" + fi.LegalCopyright;
+
+                };
+                
                 list.SelectedIndex = 0;
             };
 
-            list.SelectedIndexChanged += (sender, e) => { 
-            
-                var obj = ObjList[list.SelectedValue.ToString()];
-
-                var fi = FileVersionInfo.GetVersionInfo(obj.GetType().Assembly.Location);
-
-                lblName.Text = obj.GetDisplayName();
-                lblVersion.Text = obj.GetVersion().ToString();
-                lblLib.Text = fi.OriginalFilename;
-                lblLibVersion.Text = obj.GetType().Assembly.GetName().Version.ToString();
-
-                lblDesc.Text = obj.GetDisplayDescription();
-
-                lblAbout.Text = fi.FileDescription + "\n" + fi.Comments + "\n" + fi.LegalCopyright;
-            
-            };
+            initialized = true;
 
         }
 

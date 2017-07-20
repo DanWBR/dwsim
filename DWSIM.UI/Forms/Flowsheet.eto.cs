@@ -60,7 +60,7 @@ namespace DWSIM.UI.Forms
 
 
             btnObjects.Click += (sender, e) => {
-                var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList };
+                var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl.Height };
                 insform.ShowModal(this);
             };
 
