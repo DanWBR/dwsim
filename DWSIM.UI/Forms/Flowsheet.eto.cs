@@ -364,6 +364,12 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
+            if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
+                obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
+            {
+                item2.Enabled = false;
+            }
+
             var item3 = new ButtonMenuItem { Text = "Calculate" };
             item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(obj);
 

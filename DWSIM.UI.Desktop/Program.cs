@@ -14,9 +14,10 @@ namespace DWSIM.UI.Desktop
         public static void Main(string[] args)
         {
 
-            // set UI language to English
+            // set global settings
 
             GlobalSettings.Settings.CultureInfo = "en";
+            GlobalSettings.Settings.EnableGPUProcessing = false;
 
             if (RunningPlatform() == OSPlatform.Windows)
             {

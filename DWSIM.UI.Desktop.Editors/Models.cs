@@ -85,7 +85,8 @@ namespace DWSIM.UI.Desktop.Editors
             "and one liquid phase, while others support another co-existing liquid and/or solid phase. As the amount of phases considered in "+ 
             "equilibrium increases, the calculation time/complexity also increases while the results' reliability decreases.\n\n" +
             "Some flash algorithms are more capable/reliable than others, depending on the mixture for which the flash calculation request is being " + 
-            "requested. DWSIM features a selection of flash algorithms that are capable of calculating VLE, VLLE and SLE)");
+            "requested. DWSIM features a selection of flash algorithms that are capable of calculating VLE, VLLE and SLE.\n\n" +
+            "The 'Nested Loops (VLE)' algorithm satisfies the requirements of most Vapor-Liquid Equilibria systems.");
 
             s.CreateAndAddDropDownRow(container, "Add New Flash Algorithm", flashalgos, 0, (sender, e) =>
             {
