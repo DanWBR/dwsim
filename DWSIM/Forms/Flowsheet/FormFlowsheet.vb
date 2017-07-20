@@ -3139,4 +3139,13 @@ Public Class FormFlowsheet
         End Set
     End Property
 
+    Public Property AvailableSystemsOfUnits As List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
+        Get
+            Return FormMain.AvailableUnitSystems.Values.Select(Function(x) DirectCast(x, IUnitsOfMeasure)).ToList()
+        End Get
+        Set(value As List(Of IUnitsOfMeasure))
+            Throw New NotImplementedException
+        End Set
+    End Property
+
 End Class

@@ -638,28 +638,28 @@ Namespace PropertyPackages
             Dim vn As String() = RET_VNAMES()
             Dim n As Integer = vn.Length - 1
 
-            If ip_changed Then
+            'If ip_changed Then
 
-                Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
-                Dim i As Integer = 0
-                Dim l As Integer = 0
+            Dim val(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1, Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
+            Dim i As Integer = 0
+            Dim l As Integer = 0
 
-                For i = 0 To n
-                    For l = 0 To n
-                        val(i, l) = Me.RET_KIJ(vn(i), vn(l))
-                    Next
+            For i = 0 To n
+                For l = 0 To n
+                    val(i, l) = Me.RET_KIJ(vn(i), vn(l))
                 Next
+            Next
 
-                ip = val
-                ip_changed = False
+            ip = val
+            ip_changed = False
 
-                Return val
+            Return val
 
-            Else
+            'Else
 
-                Return ip
+            '    Return ip
 
-            End If
+            'End If
 
         End Function
 

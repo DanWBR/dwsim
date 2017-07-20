@@ -19,9 +19,7 @@ namespace DWSIM.UI.Desktop.Editors
         public IFlowsheet flowsheet;
         public DynamicLayout container;
 
-        private TableLayout ppcontainer, facontainer;
-
-        private ObservableCollection<CompoundItem> obslist = new ObservableCollection<CompoundItem>();
+        private DynamicLayout ppcontainer, facontainer;
 
         public Models(IFlowsheet fs, DynamicLayout layout)
         {
@@ -33,24 +31,35 @@ namespace DWSIM.UI.Desktop.Editors
         void Initialize()
         {
 
-            ppcontainer = new TableLayout();
-            facontainer = new TableLayout();
+            ppcontainer = new DynamicLayout();
+            facontainer = new DynamicLayout();
 
             var proppacks = flowsheet.AvailablePropertyPackages.Keys.ToList();
 
             proppacks.Insert(0, "Select an item...");
 
-            s.CreateAndAddLabelRow(container, "Add Property Package");
+            s.CreateAndAddLabelRow(container, "Property Packages");
 
-            s.CreateAndAddDropDownRow(container, "Add New Property Package", proppacks, 0, (sender, e) => {
+            s.CreateAndAddDescriptionRow(container, "A Property Package is a set of " +
+                "models and methods/equations which are responsible for the calculation of compound and phase properties and for providing " +
+                "thermodynamic properties for Unit Operation calculations, like enthalpy and entropy.\n\n" + 
+                "You need to add at least one Property Package to your simulation.");
+
+            s.CreateAndAddDropDownRow(container, "Add New Property Package", proppacks, 0, (sender, e) =>
+            {
                 var item = sender.SelectedValue.ToString();
                 if (item != "Select an item...")
-                {                   
+                {
                     var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages[item].Clone();
                     pp.UniqueID = Guid.NewGuid().ToString();
                     pp.Tag = pp.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
                     flowsheet.AddPropertyPackage(pp);
-                    AddPropPackItem(pp);
+                    Application.Instance.AsyncInvoke(() =>
+                    {
+                        AddPropPackItem(pp);
+                        ppcontainer.Create();
+                        ppcontainer.Invalidate();
+                    });
                     sender.SelectedIndex = 0;
                 }
             });
@@ -64,11 +73,19 @@ namespace DWSIM.UI.Desktop.Editors
                 AddPropPackItem(pp);
             }
 
-            var flashalgos = flowsheet.AvailableFlashAlgorithms.Keys.ToList();
+            var flashalgos = flowsheet.AvailableFlashAlgorithms.Values.Where((x) => !x.InternalUseOnly).Select((x) => x.Name).ToList();
 
             flashalgos.Insert(0, "Select an item...");
 
-            s.CreateAndAddLabelRow(container, "Add Flash Algorithm");
+            s.CreateAndAddLabelRow(container, "Flash Algorithms");
+
+            s.CreateAndAddDescriptionRow(container, "The Flash Algorithms in DWSIM are the components responsible for determining a particular set " + 
+            "of phases at thermodynamic equilibrium, their amounts (and the amounts of the compounds on each phase) at the specified conditions like " + 
+            "Temperature, Pressure, Total Enthalpy and Total Entropy. Some Flash Algorithms are capable of predicting equilibrium between one vapor " +
+            "and one liquid phase, while others support another co-existing liquid and/or solid phase. As the amount of phases considered in "+ 
+            "equilibrium increases, the calculation time/complexity also increases while the results' reliability decreases.\n\n" +
+            "Some flash algorithms are more capable/reliable than others, depending on the mixture for which the flash calculation request is being " + 
+            "requested. DWSIM features a selection of flash algorithms that are capable of calculating VLE, VLLE and SLE)");
 
             s.CreateAndAddDropDownRow(container, "Add New Flash Algorithm", flashalgos, 0, (sender, e) =>
             {
@@ -78,7 +95,12 @@ namespace DWSIM.UI.Desktop.Editors
                     var fa = (IFlashAlgorithm)flowsheet.AvailableFlashAlgorithms[item].Clone();
                     fa.Tag = fa.Name + " (" + (flowsheet.FlowsheetOptions.FlashAlgorithms.Count + 1).ToString() + ")";
                     flowsheet.FlowsheetOptions.FlashAlgorithms.Add(fa);
-                    AddFlashAlgorithmItem(fa);
+                    Application.Instance.AsyncInvoke(() =>
+                    {
+                        AddFlashAlgorithmItem(fa);
+                        facontainer.Create();
+                        facontainer.Invalidate();
+                    });
                     sender.SelectedIndex = 0;
                 }
             });
@@ -101,6 +123,10 @@ namespace DWSIM.UI.Desktop.Editors
             tr = s.CreateAndAddLabelAndTwoButtonsRow(facontainer, fa.Tag, "Edit", null, "Remove", null,
                                                                (arg1, arg2) =>
                                                                {
+                                                                   fa.Tag = arg1.Text;
+                                                               },
+                                                               (arg1, arg2) =>
+                                                               {
                                                                    //var alert = new AlertDialog.Builder(this.Context);
                                                                    //var myview = new PropertyPackageSettingsView(this.Context, flowsheet, pp);
                                                                    //alert.SetView(myview);
@@ -108,7 +134,8 @@ namespace DWSIM.UI.Desktop.Editors
                                                                },
                                                                (arg1, arg2) =>
                                                                {
-                                                                   if (MessageBox.Show("Confirm removal?", "Remove Flash Algorithm", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes){
+                                                                   if (MessageBox.Show("Confirm removal?", "Remove Flash Algorithm", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                                                                   {
                                                                        facontainer.Remove(tr);
                                                                        flowsheet.FlowsheetOptions.FlashAlgorithms.Remove(fa);
                                                                    }
@@ -120,13 +147,17 @@ namespace DWSIM.UI.Desktop.Editors
 
             var tr = new TableRow();
             tr = s.CreateAndAddLabelAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
-                                                               (arg1, arg2) =>
-                                                               {
-                                                                   //var alert = new AlertDialog.Builder(this.Context);
-                                                                   //var myview = new PropertyPackageSettingsView(this.Context, flowsheet, pp);
-                                                                   //alert.SetView(myview);
-                                                                   //alert.Create().Show();
-                                                               },
+                                                                (arg1, arg2) =>
+                                                                {
+                                                                    pp.Tag = arg1.Text;
+                                                                },
+                                                                (arg1, arg2) =>
+                                                                {
+                                                                    //var alert = new AlertDialog.Builder(this.Context);
+                                                                    //var myview = new PropertyPackageSettingsView(this.Context, flowsheet, pp);
+                                                                    //alert.SetView(myview);
+                                                                    //alert.Create().Show();
+                                                                },
                                                                (arg1, arg2) =>
                                                                {
                                                                    if (MessageBox.Show("Confirm removal?", "Remove Property Package", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)

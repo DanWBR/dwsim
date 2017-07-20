@@ -35,6 +35,8 @@ Imports System.IO
 
     Public Property AvailableFlashAlgorithms As New Dictionary(Of String, IFlashAlgorithm) Implements IFlowsheet.AvailableFlashAlgorithms
 
+    Public Property AvailableSystemsOfUnits As New List(Of IUnitsOfMeasure) Implements IFlowsheet.AvailableSystemsOfUnits
+
     Private loaded As Boolean = False
 
     Private rm, prm As Resources.ResourceManager
@@ -592,7 +594,7 @@ Imports System.IO
                 If id <> "" Then gObj.Name = id
                 GraphicObjects.Add(gObj.Name, myMStr)
                 'OBJETO DWSIM
-                Dim myCOMS As MaterialStream = New MaterialStream(myMStr.Name, "CorrentedeMatria")
+                Dim myCOMS As MaterialStream = New MaterialStream(myMStr.Name, "CorrentedeMatria", Me, Nothing)
                 myCOMS.GraphicObject = myMStr
                 AddCompoundsToMaterialStream(myCOMS)
                 SimulationObjects.Add(myCOMS.Name, myCOMS)
@@ -991,6 +993,10 @@ Imports System.IO
             Options.LoadData(data)
 
             Options.FlashAlgorithms.Clear()
+
+            If Not AvailableSystemsOfUnits.Contains(Options.SelectedUnitSystem1) Then
+                AvailableSystemsOfUnits.Add(Options.SelectedUnitSystem1)
+            End If
 
             Dim el As XElement = (From xel As XElement In data Select xel Where xel.Name = "FlashAlgorithms").SingleOrDefault
 
@@ -1484,6 +1490,7 @@ Imports System.IO
                                   Next
                                   AddPropPacks()
                                   AddFlashAlgorithms()
+                                  AddSystemsOfUnits()
                               End Sub)
 
     End Sub
@@ -1761,4 +1768,31 @@ Label_00CC:
 
     End Sub
 
+    Private Sub AddSystemsOfUnits()
+
+        With Me.AvailableSystemsOfUnits
+
+            .Add(New SystemsOfUnits.SI)
+            .Add(New SystemsOfUnits.CGS)
+            .Add(New SystemsOfUnits.English)
+            .Add(New SystemsOfUnits.SIUnits_Custom1)
+            .Add(New SystemsOfUnits.SIUnits_Custom2)
+            .Add(New SystemsOfUnits.SIUnits_Custom3)
+            .Add(New SystemsOfUnits.SIUnits_Custom4)
+            .Add(New SystemsOfUnits.SIUnits_Custom5)
+
+            'If Not My.Application.UserUnitSystems Is Nothing Then
+            '    If My.Application.UserUnitSystems.Count > 0 Then
+            '        Dim su As New SystemsOfUnits.Units
+            '        For Each su In My.Application.UserUnitSystems.Values
+            '            If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
+            '        Next
+            '    End If
+            'End If
+
+        End With
+
+    End Sub
+
+    
 End Class

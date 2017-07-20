@@ -50,6 +50,8 @@
 
     Property AvailableFlashAlgorithms As Dictionary(Of String, IFlashAlgorithm)
 
+    Property AvailableSystemsOfUnits As List(Of IUnitsOfMeasure)
+
     Property Reactions As Dictionary(Of String, IReaction)
 
     Property ReactionSets As Dictionary(Of String, IReactionSet)

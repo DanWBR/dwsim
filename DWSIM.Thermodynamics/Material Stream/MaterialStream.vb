@@ -271,6 +271,11 @@ Namespace Streams
 
             End If
 
+            'assign default values for temperature, pressure and mass flow
+            Me.Phases(0).Properties.temperature = 298.15
+            Me.Phases(0).Properties.pressure = 101325
+            Me.Phases(0).Properties.massflow = 1
+
         End Sub
 
         ''' <summary>

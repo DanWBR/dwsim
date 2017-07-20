@@ -18,7 +18,7 @@ namespace DWSIM.UI.Forms
         public Desktop.Shared.Flowsheet FlowsheetObject;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
 
-        public List<Interfaces.ISimulationObject> ObjectList = new List<Interfaces.ISimulationObject>();
+        public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
 
         void InitializeComponent()
         {
@@ -56,7 +56,12 @@ namespace DWSIM.UI.Forms
             var btnUtilities = new ButtonToolItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnScripts = new ButtonToolItem { Text = "Script Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-property_script.png")) };
             var btnReports = new ButtonToolItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
-            var btnOptions = new ButtonToolItem { Text = "Simulation Options", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+            var btnOptions = new ButtonToolItem { Text = "Simulation Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+
+            btnObjects.Click += (sender, e) => {
+                var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList };
+                insform.ShowModal(this);
+            };
 
             btnComps.Click += (sender, e) => {
                 var cont = UI.Shared.Common.GetDefaultContainer();
@@ -71,6 +76,15 @@ namespace DWSIM.UI.Forms
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.Models(FlowsheetObject, cont);
                 var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Basis", 500, 500, cont);
+                form.ShowInTaskbar = false;
+                form.Show();
+            };
+
+            btnOptions.Click += (sender, e) =>
+            {
+                var cont = UI.Shared.Common.GetDefaultContainer();
+                new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Settings", 500, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
             };
@@ -100,6 +114,7 @@ namespace DWSIM.UI.Forms
                 dialog.Title = "Save File".Localize();
                 dialog.Filters.Add(new FileDialogFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
                 dialog.CurrentFilterIndex = 0;
+                dialog.FileName = FlowsheetObject.FlowsheetOptions.SimulationName;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
                     SaveSimulation(dialog.FileName);
@@ -240,7 +255,7 @@ namespace DWSIM.UI.Forms
                 if (!item.IsAbstract)
                 {
                     var obj = (Interfaces.ISimulationObject)Activator.CreateInstance(item);
-                    ObjectList.Add(obj);
+                    ObjectList.Add(obj.GetDisplayName(), obj);
                 }
             }
 
@@ -440,7 +455,7 @@ namespace DWSIM.UI.Forms
             int currposx = (int)Mouse.Position.X;
             int currposy = (int)Mouse.Position.Y;
 
-            foreach (var item in ObjectList)
+            foreach (var item in ObjectList.Values)
             {
                 var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
                 menuitem.Click += (sender, e) =>

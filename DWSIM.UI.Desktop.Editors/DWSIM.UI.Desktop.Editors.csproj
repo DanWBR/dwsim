@@ -58,10 +58,18 @@
     <Compile Include="Connections.cs" />
     <Compile Include="DistillationColumn.cs" />
     <Compile Include="General.cs" />
+    <Compile Include="InsertObject.cs">
+      <SubType>Eto.Forms</SubType>
+    </Compile>
+    <Compile Include="InsertObject.eto.cs">
+      <DependentUpon>InsertObject.cs</DependentUpon>
+      <SubType>Eto.Forms</SubType>
+    </Compile>
     <Compile Include="MaterialStream.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results.cs" />
+    <Compile Include="SimulationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,6 +95,9 @@
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\DWSIM_ico.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
