@@ -58,6 +58,7 @@ namespace DWSIM.UI.Forms
             var btnReports = new ButtonToolItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
             var btnOptions = new ButtonToolItem { Text = "Simulation Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
 
+
             btnObjects.Click += (sender, e) => {
                 var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList };
                 insform.ShowModal(this);
