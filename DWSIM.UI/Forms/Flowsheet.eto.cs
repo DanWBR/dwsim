@@ -428,7 +428,7 @@ namespace DWSIM.UI.Forms
                 {
                     Title = "Results",
                     ClientSize = new Size(500, 600),
-                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size) } },
+                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f) } },
                     ShowInTaskbar = false
                 };
                 form.Show();
