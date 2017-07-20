@@ -263,7 +263,7 @@ namespace DWSIM.UI.Shared
 
         }
 
-        public static TableRow CreateAndAddLabelAndTwoButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
+        public static TableRow CreateAndAddLabelAndTwoButtonsRow(this TableLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
@@ -277,9 +277,9 @@ namespace DWSIM.UI.Shared
             if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
 
             var tr = new TableRow(txt, null, btn, btn2);
-            container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
-
+            container.Rows.Add(tr);
+            container.Rows.Add(new TableRow(new Label { Text = "", Height = 5 }));
+            container.Update();
             return tr;
 
         }

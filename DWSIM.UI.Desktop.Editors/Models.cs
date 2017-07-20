@@ -19,7 +19,7 @@ namespace DWSIM.UI.Desktop.Editors
         public IFlowsheet flowsheet;
         public DynamicLayout container;
 
-        private DynamicLayout ppcontainer, facontainer;
+        private TableLayout ppcontainer, facontainer;
 
         private ObservableCollection<CompoundItem> obslist = new ObservableCollection<CompoundItem>();
 
@@ -33,14 +33,14 @@ namespace DWSIM.UI.Desktop.Editors
         void Initialize()
         {
 
-            ppcontainer = new DynamicLayout();
-            facontainer = new DynamicLayout();
+            ppcontainer = new TableLayout();
+            facontainer = new TableLayout();
 
             var proppacks = flowsheet.AvailablePropertyPackages.Keys.ToList();
 
             proppacks.Insert(0, "Select an item...");
 
-            s.CreateAndAddLabelRow(container, "Property Packages");
+            s.CreateAndAddLabelRow(container, "Add Property Package");
 
             s.CreateAndAddDropDownRow(container, "Add New Property Package", proppacks, 0, (sender, e) => {
                 var item = sender.SelectedValue.ToString();
@@ -48,12 +48,14 @@ namespace DWSIM.UI.Desktop.Editors
                 {                   
                     var pp = (PropertyPackage)flowsheet.AvailablePropertyPackages[item].Clone();
                     pp.UniqueID = Guid.NewGuid().ToString();
-                    pp.Tag = pp.Name;
+                    pp.Tag = pp.ComponentName + " (" + (flowsheet.PropertyPackages.Count + 1).ToString() + ")";
                     flowsheet.AddPropertyPackage(pp);
                     AddPropPackItem(pp);
                     sender.SelectedIndex = 0;
                 }
             });
+
+            s.CreateAndAddLabelRow(container, "Added Property Packages");
 
             s.CreateAndAddControlRow(container, ppcontainer);
 
@@ -66,9 +68,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             flashalgos.Insert(0, "Select an item...");
 
-            s.CreateAndAddLabelRow(container, "Flash Algorithms");
+            s.CreateAndAddLabelRow(container, "Add Flash Algorithm");
 
-            s.CreateAndAddDropDownRow(container, "Add New Flash Algorithm", proppacks, 0, (sender, e) =>
+            s.CreateAndAddDropDownRow(container, "Add New Flash Algorithm", flashalgos, 0, (sender, e) =>
             {
                 var item = sender.SelectedValue.ToString();
                 if (item != "Select an item...")
@@ -80,6 +82,8 @@ namespace DWSIM.UI.Desktop.Editors
                     sender.SelectedIndex = 0;
                 }
             });
+
+            s.CreateAndAddLabelRow(container, "Added Flash Algorithms");
 
             s.CreateAndAddControlRow(container, facontainer);
 
@@ -94,7 +98,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             var tr = new TableRow();
-            tr = s.CreateAndAddLabelAndTwoButtonsRow(ppcontainer, fa.Tag, "Edit", null, "Remove", null,
+            tr = s.CreateAndAddLabelAndTwoButtonsRow(facontainer, fa.Tag, "Edit", null, "Remove", null,
                                                                (arg1, arg2) =>
                                                                {
                                                                    //var alert = new AlertDialog.Builder(this.Context);
@@ -105,7 +109,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                                (arg1, arg2) =>
                                                                {
                                                                    if (MessageBox.Show("Confirm removal?", "Remove Flash Algorithm", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes){
-                                                                       ppcontainer.Remove(tr);
+                                                                       facontainer.Remove(tr);
                                                                        flowsheet.FlowsheetOptions.FlashAlgorithms.Remove(fa);
                                                                    }
                                                                });
@@ -115,7 +119,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             var tr = new TableRow();
-            tr = s.CreateAndAddLabelAndTwoButtonsRow(facontainer, pp.Tag, "Edit", null, "Remove", null,
+            tr = s.CreateAndAddLabelAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
                                                                (arg1, arg2) =>
                                                                {
                                                                    //var alert = new AlertDialog.Builder(this.Context);

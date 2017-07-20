@@ -106,6 +106,7 @@ namespace DWSIM.UI.Forms
                 }
 
             };
+
             // create menu
             ToolBar = new ToolBar();
             if (Application.Instance.Platform.IsMac)
@@ -120,8 +121,6 @@ namespace DWSIM.UI.Forms
                                            btnComps, btnBasis, btnObjects, new SeparatorToolItem(), btnTools, btnUtilities,
                                            btnScripts, btnReports, btnOptions});
             }
-
-
 
             var split = new Splitter();
             split.Panel1 = FlowsheetControl;
@@ -220,14 +219,15 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
 
-
         }
 
         void LoadObjects()
         {
 
-            var calculatorassembly = System.Reflection.Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "DWSIM.Thermodynamics.dll"));
-            var unitopassembly = System.Reflection.Assembly.LoadFile(Path.Combine(Directory.GetCurrentDirectory(), "DWSIM.UnitOperations.dll"));
+            var dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            var calculatorassembly = System.Reflection.Assembly.LoadFile(Path.Combine(dir, "DWSIM.Thermodynamics.dll"));
+            var unitopassembly = System.Reflection.Assembly.LoadFile(Path.Combine(dir, "DWSIM.UnitOperations.dll"));
             List<Type> availableTypes = new List<Type>();
 
             availableTypes.AddRange(calculatorassembly.GetTypes().Where(x => x.GetInterface("DWSIM.Interfaces.ISimulationObject") != null ? true : false));
