@@ -38,7 +38,17 @@ namespace DWSIM.UI.Forms.Forms
 
             var tab3 = Common.GetDefaultContainer();
             tab3.Tag = "UserComps".Localize(prefix);
-            
+
+            tab3.CreateAndAddLabelRow("User-Defined Compound Datasets");
+            tab3.CreateAndAddListBoxRow(200, new string[] { }, null);
+            tab3.CreateAndAddButtonRow("Add Dataset", null, null);
+            tab3.CreateAndAddButtonRow("Remove selected", null, null);
+
+            tab3.CreateAndAddLabelRow("User-Defined Interaction Parameter Datasets");
+            tab3.CreateAndAddListBoxRow(200, new string[] { }, null);
+            tab3.CreateAndAddButtonRow("Add Dataset", null, null);
+            tab3.CreateAndAddButtonRow("Remove selected", null, null);
+
             var tab4 = Common.GetDefaultContainer();
             tab4.Tag = "Backup".Localize(prefix);
 
@@ -52,6 +62,38 @@ namespace DWSIM.UI.Forms.Forms
 
             var tab5 = Common.GetDefaultContainer();
             tab5.Tag = "Misc".Localize(prefix);
+
+            tab5.CreateAndAddLabelRow("Octave Settings");
+            TextBox tbox = null;
+            tbox = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.OctavePath, "Search", null,
+                (sender, e) => GlobalSettings.Settings.OctavePath = sender.Text,
+                (sender, e) => {
+                    var searchdialog = new SelectFolderDialog() { Title = "Search", Directory = GlobalSettings.Settings.OctavePath };
+                    if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
+                    {
+                        tbox.Text = searchdialog.Directory;
+                    }
+                });
+            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.OctaveTimeoutInMinutes, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) GlobalSettings.Settings.OctaveTimeoutInMinutes = sender.Text.ToDouble();
+            });
+
+            tab5.CreateAndAddLabelRow("Python Settings");
+            TextBox tbox2 = null;
+            tbox2 = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.PythonPath, "Search", null,
+                (sender, e) => GlobalSettings.Settings.PythonPath = sender.Text,
+                (sender, e) =>
+                {
+                    var searchdialog = new SelectFolderDialog() { Title = "Search", Directory = GlobalSettings.Settings.PythonPath };
+                    if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
+                    {
+                        tbox2.Text = searchdialog.Directory;
+                    }
+                });
+            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.PythonTimeoutInMinutes, (sender, e) => {
+                if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
+            });
 
             return Common.GetDefaultTabbedForm("Title".Localize(prefix), 500, 400, new[] { tab1, tab2, tab3, tab4, tab5 });
         

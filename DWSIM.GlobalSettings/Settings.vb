@@ -43,11 +43,13 @@ Public Class Settings
     Public Shared Property CalculatorActivated As Boolean
     Public Shared Property CalculatorBusy As Boolean
     Public Shared Property ServerIPAddress As String = ""
-    Public Shared Property ServerPort As Integer
+    Public Shared Property ServerPort As Integer = 0
     Public Shared Property CurrentCulture As String = "en"
+
     Public Shared DefaultEditFormLocation As Integer = 8
+
     Public Shared SolverBreakOnException As Boolean = False
-    Public Shared Property SelectedGPU As String
+    Public Shared Property SelectedGPU As String = ""
     Public Shared Property CultureInfo As String = "en"
     Public Shared Property InitializedCOPPM As Boolean = False
     Public Shared Property ExcelErrorHandlingMode As Integer = 0
@@ -68,7 +70,7 @@ Public Class Settings
 
     Public Shared Property CurrentEnvironment As Integer = 0
 
-    Public Shared Property CurrentPlatform As String = ""
+    Public Shared Property CurrentPlatform As String = "Windows"
 
     Public Shared Property PythonPath As String = ""
     Public Shared Property PythonTimeoutInMinutes As Double = 1
@@ -78,6 +80,9 @@ Public Class Settings
     Public Shared Property EnableBackupCopies As Boolean = True
     Public Shared Property SaveExistingFile As Boolean = True
     Public Shared Property BackupInterval As Integer = 5
+
+    Public Shared Property UserUnits As String = "{ }"
+    Public Shared Property MostRecentFiles As New List(Of String)
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
@@ -190,6 +195,8 @@ Public Class Settings
             Return "Windows"
         ElseIf RunningPlatform() = Platform.Linux Then
             Return "Linux"
+        ElseIf RunningPlatform() = Platform.Mac Then
+            Return "Mac"
         Else
             Return "None"
         End If
@@ -216,6 +223,204 @@ Public Class Settings
     Public Shared Function IsRunningOnMono() As Boolean
         Return Not Type.GetType("Mono.Runtime") Is Nothing
     End Function
+
+    Shared Sub LoadSettings(Optional ByVal configfile As String = "")
+
+        Dim configfiledir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+
+        If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
+
+        If configfile = "" Then configfile = configfiledir & "dwsim.ini" Else configfile = configfiledir & configfile
+
+        If Not File.Exists(configfile) Then File.WriteAllText(configfile, "")
+
+        Dim source As New IniConfigSource(configfile)
+        Dim col() As String
+
+        MostRecentFiles = New List(Of String)
+
+        If source.Configs("RecentFiles") Is Nothing Then source.AddConfig("RecentFiles")
+
+        With source
+            col = .Configs("RecentFiles").GetValues()
+            For Each Str As String In col
+                MostRecentFiles.Add(Str)
+            Next
+        End With
+
+        UserDatabases = New List(Of String)
+
+        If source.Configs("UserDatabases") Is Nothing Then source.AddConfig("UserDatabases")
+
+        With source
+            col = .Configs("UserDatabases").GetValues()
+            For Each Str As String In col
+                UserDatabases.Add(Str)
+            Next
+        End With
+
+        UserInteractionsDatabases = New List(Of String)
+
+        If source.Configs("UserInteractionsDatabases") Is Nothing Then source.AddConfig("UserInteractionsDatabases")
+
+        With source
+            col = .Configs("UserInteractionsDatabases").GetValues()
+            For Each Str As String In col
+                UserInteractionsDatabases.Add(Str)
+            Next
+        End With
+
+        If source.Configs("Backup") Is Nothing Then source.AddConfig("Backup")
+
+        'BackupActivated = source.Configs("Backup").GetBoolean("BackupActivated", True)
+        'BackupFolder = source.Configs("Backup").Get("BackupFolder", My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar + "DWSIM")
+        'BackupInterval = source.Configs("Backup").GetInt("BackupInterval", 5)
+
+        If source.Configs("Localization") Is Nothing Then source.AddConfig("Localization")
+
+        CultureInfo = source.Configs("Localization").Get("CultureInfo", "en")
+
+        'ChemSepDatabasePath = source.Configs("Databases").Get("ChemSepDBPath", "")
+        'ReplaceComps = source.Configs("Databases").GetBoolean("ReplaceComps", True)
+
+        If source.Configs("UserUnits") Is Nothing Then source.AddConfig("UserUnits")
+
+        UserUnits = source.Configs("UserUnits").Get("UserUnits", "{ }")
+        'ShowTips = source.Configs("Misc").GetBoolean("ShowTips", True)
+        'RedirectOutput = source.Configs("Misc").GetBoolean("RedirectConsoleOutput", False)
+
+        If source.Configs("Misc") Is Nothing Then source.AddConfig("Misc")
+
+        EnableParallelProcessing = source.Configs("Misc").GetBoolean("EnableParallelProcessing", False)
+        MaxDegreeOfParallelism = source.Configs("Misc").GetInt("MaxDegreeOfParallelism", -1)
+        EnableGPUProcessing = source.Configs("Misc").GetBoolean("EnableGPUProcessing", False)
+        SelectedGPU = source.Configs("Misc").Get("SelectedGPU", "")
+        CudafyTarget = source.Configs("Misc").GetInt("CudafyTarget", 1)
+        CudafyDeviceID = source.Configs("Misc").GetInt("CudafyDeviceID", 0)
+
+        DebugLevel = source.Configs("Misc").GetInt("DebugLevel", 0)
+        SolverMode = source.Configs("Misc").GetInt("SolverMode", 0)
+        ServiceBusConnectionString = source.Configs("Misc").Get("ServiceBusConnectionString", "")
+        ServerIPAddress = source.Configs("Misc").Get("ServerIPAddress", "")
+        ServerPort = source.Configs("Misc").Get("ServerPort", 0)
+        SolverTimeoutSeconds = source.Configs("Misc").GetInt("SolverTimeoutSeconds", 300)
+
+        SaveExistingFile = source.Configs("Misc").GetBoolean("SaveBackupFile", True)
+        MaxThreadMultiplier = source.Configs("Misc").GetInt("MaxThreadMultiplier", 8)
+        TaskScheduler = source.Configs("Misc").GetInt("TaskScheduler", 0)
+        UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
+
+        'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
+
+        'AutomaticUpdates = source.Configs("Misc").GetBoolean("AutoUpdate", True)
+
+        'DefaultEditorLocation = source.Configs("Misc").GetInt("DefaultEditorLocation", 8)
+        'EnableMultipleObjectEditors = source.Configs("Misc").GetBoolean("EnableMultipleObjectEditors", True)
+        'SimulationUpgradeWarning = source.Configs("Misc").GetBoolean("SimulationUpgradeWarning", True)
+
+        HideSolidPhaseFromCAPEOPENComponents = source.Configs("Misc").GetBoolean("HideSolidPhase_COInterface", False)
+        'IgnoreCompoundPropertiesOnLoad = source.Configs("Misc").GetBoolean("IgnoreCompoundConstantPropertyDatainXMLFile", False)
+
+        If source.Configs("OctaveBridge") Is Nothing Then source.AddConfig("OctaveBridge")
+
+        OctavePath = source.Configs("OctaveBridge").GetString("OctavePath", "")
+        OctaveTimeoutInMinutes = source.Configs("OctaveBridge").GetFloat("OctaveProcessTimeout", 15)
+
+        If source.Configs("PythonBridge") Is Nothing Then source.AddConfig("PythonBridge")
+
+        PythonPath = source.Configs("PythonBridge").GetString("PythonPath", "")
+        PythonTimeoutInMinutes = source.Configs("PythonBridge").GetFloat("PythonProcessTimeout", 1)
+
+        If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
+
+        CurrentPlatform = source.Configs("OSInfo").GetString("Platform", GetPlatform())
+        CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", GetEnvironment())
+
+        source.Save()
+
+    End Sub
+
+    Shared Sub SaveSettings(Optional ByVal configfile As String = "")
+
+        Dim configfiledir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+
+        If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
+
+        If configfile = "" Then configfile = configfiledir & "dwsim.ini" Else configfile = configfiledir & configfile
+
+        Dim source As New IniConfigSource(configfile)
+
+        For Each Str As String In MostRecentFiles
+            source.Configs("RecentFiles").Set(MostRecentFiles.IndexOf(Str), Str)
+        Next
+
+        For Each Str As String In UserDatabases
+            source.Configs("UserDatabases").Set(UserDatabases.IndexOf(Str), Str)
+        Next
+
+        For Each Str As String In UserInteractionsDatabases
+            source.Configs("UserInteractionsDatabases").Set(UserInteractionsDatabases.IndexOf(Str), Str)
+        Next
+
+        'source.Configs("Backup").Set("BackupActivated", BackupActivated)
+        'source.Configs("Backup").Set("BackupFolder", BackupFolder)
+        source.Configs("Backup").Set("BackupInterval", BackupInterval)
+
+        source.Configs("Localization").Set("CultureInfo", CultureInfo)
+
+        'source.Configs("Databases").Set("ChemSepDBPath", ChemSepDatabasePath)
+        'source.Configs("Databases").Set("ReplaceComps", ReplaceComps)
+
+        'source.Configs("Misc").Set("ShowTips", ShowTips)
+        'source.Configs("Misc").Set("RedirectConsoleOutput", RedirectOutput)
+
+        source.Configs("Misc").Set("EnableParallelProcessing", EnableParallelProcessing)
+        source.Configs("Misc").Set("MaxDegreeOfParallelism", MaxDegreeOfParallelism)
+        source.Configs("Misc").Set("EnableGPUProcessing", EnableGPUProcessing)
+        source.Configs("Misc").Set("SelectedGPU", SelectedGPU)
+        source.Configs("Misc").Set("CudafyTarget", CudafyTarget)
+        source.Configs("Misc").Set("CudafyDeviceID", CudafyDeviceID)
+
+        source.Configs("Misc").Set("DebugLevel", DebugLevel)
+        source.Configs("Misc").Set("SolverMode", SolverMode)
+        source.Configs("Misc").Set("ServiceBusConnectionString", ServiceBusConnectionString)
+        source.Configs("Misc").Set("ServerIPAddress", ServerIPAddress)
+        source.Configs("Misc").Set("ServerPort", ServerPort)
+        source.Configs("Misc").Set("SolverTimeoutSeconds", SolverTimeoutSeconds)
+        source.Configs("Misc").Set("SaveBackupFile", SaveExistingFile)
+        source.Configs("Misc").Set("MaxThreadMultiplier", MaxThreadMultiplier)
+        source.Configs("Misc").Set("TaskScheduler", TaskScheduler)
+        source.Configs("Misc").Set("UseSIMDExtensions", UseSIMDExtensions)
+        'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
+        'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)
+
+        'source.Configs("Misc").Set("DefaultEditorLocation", DefaultEditorLocation)
+        'source.Configs("Misc").Set("EnableMultipleObjectEditors", EnableMultipleObjectEditors)
+        'source.Configs("Misc").Set("SimulationUpgradeWarning", SimulationUpgradeWarning)
+
+        'source.Configs("Misc").Set("HideSolidPhase_COInterface", HideSolidPhase_CO)
+        'source.Configs("Misc").Set("IgnoreCompoundConstantPropertyDatainXMLFile", IgnoreCompoundPropertiesOnLoad)
+
+        If source.Configs("OctaveBridge") Is Nothing Then source.AddConfig("OctaveBridge")
+
+        source.Configs("OctaveBridge").Set("OctavePath", OctavePath)
+        source.Configs("OctaveBridge").Set("OctaveProcessTimeout", OctaveTimeoutInMinutes)
+
+        If source.Configs("PythonBridge") Is Nothing Then source.AddConfig("PythonBridge")
+
+        source.Configs("PythonBridge").Set("PythonPath", PythonPath)
+        source.Configs("PythonBridge").Set("PythonProcessTimeout", PythonTimeoutInMinutes)
+
+        If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
+
+        source.Configs("OSInfo").Set("Platform", CurrentPlatform)
+        source.Configs("OSInfo").Set("Environment", CurrentEnvironment)
+
+        source.Configs("UserUnits").Set("UserUnits", UserUnits)
+
+        source.Save(configfile)
+
+    End Sub
 
 End Class
 

@@ -24,10 +24,11 @@ namespace DWSIM.UI.Shared
             content.CreateAndAddEmptySpace();
             content.EndVertical();
             content.Width = width - content.Padding.Value.Left * 2 - content.Padding.Value.Right * 2;
+            height += 10;
             return new Form()
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
-                Content = new Scrollable { Content = content },
+                Content = new Scrollable { Content = content, Border = BorderType.None },
                 Title = title,
                 Width = width,
                 Height = height,
@@ -49,8 +50,9 @@ namespace DWSIM.UI.Shared
                 content.CreateAndAddEmptySpace();
                 content.EndVertical();
                 content.Width = width - content.Padding.Value.Left * 2 - content.Padding.Value.Right * 2;
-                tabs.Add(new TabPage(content) { Text = (string)content.Tag });
+                tabs.Add(new TabPage(new Scrollable { Content = content, Border = BorderType.None }) { Text = (string)content.Tag });
             }
+
             var form = new Form()
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
@@ -146,7 +148,7 @@ namespace DWSIM.UI.Shared
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
             var tr = new TableRow(txt, null, edittext);
-
+            
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
 
@@ -188,6 +190,27 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static ListBox CreateAndAddListBoxRow(this DynamicLayout container, int height, String[] listitems, Action<ListBox, EventArgs> command)
+        {
+
+            var lbox = new ListBox { Height = height };
+
+            foreach (var item in listitems)
+            {
+                lbox.Items.Add(item);
+            }
+
+            if (command != null) lbox.SelectedIndexChanged += (sender, e) => command.Invoke((ListBox)sender, e);
+
+            var tr = new TableRow(lbox);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return lbox;
+
+        }
+
         public static TextBox CreateAndAddStringEditorRow(this DynamicLayout container, String text, String currval, Action<TextBox, EventArgs> command)
         {
 
@@ -208,12 +231,12 @@ namespace DWSIM.UI.Shared
         public static TextBox CreateAndAddStringEditorRow2(this DynamicLayout container, String text, String placeholder, String currval, Action<TextBox, EventArgs> command)
         {
 
-            var txt = new Label { Text = text + " ", VerticalAlignment = VerticalAlignment.Center };
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
             var edittext = new TextBox { Text = currval, PlaceholderText = placeholder};
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
-            var tr = new TableRow(txt, edittext);
+            var tr = new TableRow(txt, GetPlaceHolderLabel(), edittext);
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
@@ -263,6 +286,35 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static Label GetPlaceHolderLabel()
+        {
+            return new Label { Text = " " };
+        }
+
+        public static TextBox CreateAndAddLabelAndTextBoxAndButtonRow(this DynamicLayout container, String label, String textboxvalue, String buttonlabel, String imageResID, Action<TextBox, EventArgs> txteditcommand, Action<Button, EventArgs> command)
+        {
+
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
+            var tbox = new TextBox { Text = textboxvalue };
+            var btn = new Button { Width = 50, Text = buttonlabel };
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+
+            if (txteditcommand != null) tbox.TextChanged += (sender, e) => txteditcommand.Invoke((TextBox)sender, e);
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, GetPlaceHolderLabel(), tbox, GetPlaceHolderLabel(), btn);
+            
+            tr.Cells[2].ScaleWidth = true;
+
+            container.AddRow(tr);
+            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+
+            return tbox;
+
+
+        }
+
         public static TableRow CreateAndAddLabelAndTwoButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 
@@ -277,7 +329,7 @@ namespace DWSIM.UI.Shared
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
             if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
 
-            var tr = new TableRow(txt, null, btn, btn2);
+            var tr = new TableRow(txt, null, btn, GetPlaceHolderLabel(), btn2);
             container.AddRow(tr);
             container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
             return tr;

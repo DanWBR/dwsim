@@ -268,7 +268,7 @@ namespace DWSIM.UI.Forms
         Eto.Forms.Container SetupLogWindow()
         {
 
-            var label = new Label { Text = "  " + "Log Window", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center };
+            var label = new Label { Text = "  " + "Log Panel", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center };
 
             var outtxt = new ListBox(); //{ Font = Fonts.Monospace(SystemFonts.Default().Size - 1.0f)};
 
