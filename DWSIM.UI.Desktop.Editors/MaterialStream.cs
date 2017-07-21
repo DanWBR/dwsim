@@ -45,7 +45,9 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = MatStream.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = MatStream.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "Stream ID");
+            s.CreateAndAddLabelRow(container, "Material Stream Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", MatStream.GraphicObject.Active ? "Active" : "Inactive");
 
             s.CreateAndAddStringEditorRow(container, "Name", MatStream.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {

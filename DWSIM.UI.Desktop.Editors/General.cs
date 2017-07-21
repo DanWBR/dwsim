@@ -43,7 +43,11 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = SimObject.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "Object ID");
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Type", SimObject.GetDisplayName());
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", SimObject.GraphicObject.Active ? "Active" : "Inactive");
 
             s.CreateAndAddStringEditorRow(container, "Name", SimObject.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {
@@ -1015,6 +1019,10 @@ namespace DWSIM.UI.Desktop.Editors
                             pos10 = 2;
                             break;
                     }
+                    var rsets = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor.ReactionSetID)) reactor.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    var selname = SimObject.GetFlowsheet().ReactionSets[reactor.ReactionSetID].Name;
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets, rsets.IndexOf(selname), (sender, e) =>  reactor.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.rctcalcmode().ToList(), pos10, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
@@ -1065,6 +1073,10 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.RCT_Equilibrium:
                     var reactor2 = (Reactor_Equilibrium)SimObject;
+                    var rsets2 = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor2.ReactionSetID)) reactor2.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    var selname2 = SimObject.GetFlowsheet().ReactionSets[reactor2.ReactionSetID].Name;
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets2, rsets2.IndexOf(selname2), (sender, e) =>  reactor2.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
                     int pos11 = 0;
                     switch (reactor2.ReactorOperationMode)
                     {
@@ -1287,6 +1299,10 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;
+                    var rsets3 = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor3.ReactionSetID)) reactor3.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    var selname3 = SimObject.GetFlowsheet().ReactionSets[reactor3.ReactionSetID].Name;
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets3, rsets3.IndexOf(selname3), (sender, e) =>  reactor3.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
                     int pos12 = 0;
                     switch (reactor3.ReactorOperationMode)
                     {
@@ -1380,7 +1396,11 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.RCT_PFR:
                     var reactor4 = (Reactor_PFR)SimObject;
-                    int pos13 = 0;
+                    var rsets4 = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor4.ReactionSetID)) reactor4.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    var selname4 = SimObject.GetFlowsheet().ReactionSets[reactor4.ReactionSetID].Name;
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets4, rsets4.IndexOf(selname4), (sender, e) =>  reactor4.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
+                     int pos13 = 0;
                     switch (reactor4.ReactorOperationMode)
                     {
                         case OperationMode.Adiabatic:

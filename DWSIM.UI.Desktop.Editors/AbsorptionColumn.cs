@@ -46,7 +46,11 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = column.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = column.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "Object ID");
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Type", column.GetDisplayName());
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", column.GraphicObject.Active ? "Active" : "Inactive");
 
             s.CreateAndAddStringEditorRow(container, "Name", column.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
             {
