@@ -45,6 +45,10 @@
       <HintPath>..\packages\Eto.OxyPlot.1.2.0-beta\lib\net45\Eto.OxyPlot.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Interop.CAPEOPEN110">
+      <HintPath>..\DWSIM\References\Interop.CAPEOPEN110.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
       <Private>True</Private>
@@ -68,6 +72,12 @@
     <Compile Include="MaterialStream.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reactions\Conversion.cs" />
+    <Compile Include="Reactions\Equilibrium.cs" />
+    <Compile Include="Reactions\HetCat.cs" />
+    <Compile Include="Reactions\Kinetic.cs" />
+    <Compile Include="Reactions\ReactionSet.cs" />
+    <Compile Include="Reactions\ReactionsManager.cs" />
     <Compile Include="Results.cs" />
     <Compile Include="SimulationSettings.cs" />
   </ItemGroup>

@@ -121,7 +121,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             var tr = new TableRow();
-            tr = s.CreateAndAddLabelAndTwoButtonsRow(facontainer, fa.Tag, "Edit", null, "Remove", null,
+            tr = s.CreateAndAddTextBoxAndTwoButtonsRow(facontainer, fa.Tag, "Edit", null, "Remove", null,
                                                                (arg1, arg2) =>
                                                                {
                                                                    fa.Tag = arg1.Text;
@@ -147,7 +147,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             var tr = new TableRow();
-            tr = s.CreateAndAddLabelAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
+            tr = s.CreateAndAddTextBoxAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
                                                                 (arg1, arg2) =>
                                                                 {
                                                                     pp.Tag = arg1.Text;

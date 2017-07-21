@@ -188,8 +188,8 @@ Namespace BaseClasses
 
         Public _Components As Dictionary(Of String, Interfaces.IReactionStoichBase)
 
-        <XmlIgnore> Public Property ExpContext As Ciloci.Flee.ExpressionContext = New Ciloci.Flee.ExpressionContext
-        <XmlIgnore> Public Property Expr As Ciloci.Flee.IGenericExpression(Of Double)
+        <XmlIgnore> <NonSerialized> Public ExpContext As New Ciloci.Flee.ExpressionContext
+        <XmlIgnore> <NonSerialized> Public Expr As Ciloci.Flee.IGenericExpression(Of Double)
 
 #Region "    DWSIM Specific"
 

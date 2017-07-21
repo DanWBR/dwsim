@@ -75,12 +75,16 @@ namespace DWSIM.UI.Forms
 
             btnBasis.Click += (sender, e) =>
             {
-                var cont = UI.Shared.Common.GetDefaultContainer();
-                new DWSIM.UI.Desktop.Editors.Models(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Basis", 500, 500, cont);
+                var cont1 = UI.Shared.Common.GetDefaultContainer();
+                cont1.Tag = "Thermodynamics";
+                new DWSIM.UI.Desktop.Editors.Models(FlowsheetObject, cont1);
+                var cont2 = UI.Shared.Common.GetDefaultContainer();
+                cont2.Tag = "Reactions";
+                new DWSIM.UI.Desktop.Editors.ReactionsManager(FlowsheetObject, cont2);
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", 500, 500, new []{cont1, cont2});
                 form.ShowInTaskbar = false;
                 form.Show();
-                form.Width += 1;
+                form.Width += 10;
             };
 
             btnOptions.Click += (sender, e) =>
