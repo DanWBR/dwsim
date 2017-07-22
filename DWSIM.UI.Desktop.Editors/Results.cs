@@ -24,6 +24,8 @@ using DWSIM.Interfaces.Enums;
 using OxyPlot;
 using OxyPlot.Axes;
 
+using DWSIM.ExtensionMethods;
+
 namespace DWSIM.UI.Desktop.Editors
 {
     public class Results
@@ -47,6 +49,9 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
             var txtcontrol = s.CreateAndAddMultilineTextBoxRow(container, "", true, null);
+            txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f);
+            txtcontrol.ReadOnly = true;
+            txtcontrol.Height = 500;
 
             if (SimObject is Pipe)
             {
@@ -61,55 +66,46 @@ namespace DWSIM.UI.Desktop.Editors
                       
                 s.CreateAndAddButtonRow(container, "View Pipe Properties Profile", null, (Button arg1, EventArgs ev) =>
                 {
-                    //var sview = new ScrollView(this.Context);
-                    //var myview = new TextAndChartView(this.Context);
-                    //myview.Orientation = Orientation.Vertical;
-                    //myview.SetBackgroundColor(Color.ParseColor("#ff1e74c9"));
 
-                    //var chart = (PlotView)myview.FindViewById(Resource.IdSens.chartView);
-                    //chart.SetBackgroundColor(Color.White);
+                    var plotcontainer = s.GetDefaultContainer();
 
-                    ////chart.Visibility = ViewStates.Gone;
+                    var chart = new Eto.OxyPlot.Plot() { Height = 400, BackgroundColor = Colors.White };
 
-                    //var myl = new LinearLayout(this.Context);
-                    //myl.Orientation = Orientation.Vertical;
-                    //myl.Id = 1000;
-                    //List<double> px, py;
-                    //myview.AddView(myl, 0);
-                    //var txtres = (EditText)myview.FindViewById(Resource.IdSens.txtResults);
-                    //txtres.TextSize = float.Parse(fontsize1);
+                    chart.Visible = false;
 
-                    //s.CreateAndAddLabelBoxRow(myview, myl.Id, "PIPE SEGMENT PROFILE RESULTS: " + SimObject.GraphicObject.Tag);
-                    //var xsp = s.CreateAndAddSpinnerRow(myview, myl.Id, "X Axis Data", datatype, 0, (arg11, arg22, arg33) => { });
-                    //var ysp = s.CreateAndAddSpinnerRow(myview, myl.Id, "Y Axis Data", datatype, 2, (arg11, arg22, arg33) => { });
-                    //s.CreateAndAddButtonRow(myview, myl.Id, "Update Chart/Table", (arg11, arg22, arg33) =>
-                    //{
-                    //    px = PopulateData(pipe, xsp.SelectedItemPosition);
-                    //    py = PopulateData(pipe, ysp.SelectedItemPosition);
-                    //    var model = CreatePipeResultsModel(px.ToArray(), py.ToArray(),
-                    //                                       datatype[xsp.SelectedItemPosition] + " (" + units[xsp.SelectedItemPosition] + ")",
-                    //                                       datatype[ysp.SelectedItemPosition] + " (" + units[ysp.SelectedItemPosition] + ")");
-                    //    chart.Model = model;
-                    //    chart.Visibility = ViewStates.Visible;
-                    //    chart.LayoutParameters = paramc;
-                    //    chart.InvalidatePlot();
-                    //    int i = 0;
-                    //    var txt = new System.Text.StringBuilder();
-                    //    txt.AppendLine(datatype[xsp.SelectedItemPosition] + " (" + units[xsp.SelectedItemPosition] + ")\t\t" + datatype[ysp.SelectedItemPosition] + " (" + units[ysp.SelectedItemPosition] + ")");
-                    //    for (i = 0; i <= px.Count - 1; i++)
-                    //    {
-                    //        txt.AppendLine(px[i].ToString(nf) + "\t\t" + py[i].ToString(nf));
-                    //    }
-                    //    txtres.Text = txt.ToString();
-                    //});
-                    //var alert = new AlertDialog.Builder(this.Context);
-                    //var param = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                    //myview.LayoutParameters = param;
-                    //sview.VerticalScrollBarEnabled = true;
-                    //sview.ScrollbarFadingEnabled = false;
-                    //sview.AddView(myview);
-                    //alert.SetView(sview);
-                    //alert.Create().Show();
+                    List<double> px, py;
+
+                    var txtres = new TextArea { ReadOnly = true, Height = 300 };
+
+                    s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles: " + SimObject.GraphicObject.Tag);
+                    var xsp = s.CreateAndAddDropDownRow(plotcontainer, "X Axis Data", datatype.ToList(), 0, null);
+                    var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 2, null);
+                    s.CreateAndAddButtonRow(plotcontainer, "Update Chart/Table", null, (sender, e) =>
+                    {
+                        px = PopulateData(pipe, xsp.SelectedIndex);
+                        py = PopulateData(pipe, ysp.SelectedIndex);
+                        var model = CreatePipeResultsModel(px.ToArray(), py.ToArray(),
+                                                           datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")",
+                                                           datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
+                        chart.Model = model;
+                        chart.Visible = true;
+                        chart.Invalidate();
+                        int i = 0;
+                        var txt = new System.Text.StringBuilder();
+                        txt.AppendLine(datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")\t\t" + datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
+                        for (i = 0; i <= px.Count - 1; i++)
+                        {
+                            txt.AppendLine(px[i].ToString(nf) + "\t\t" + py[i].ToString(nf));
+                        }
+                        txtres.Text = txt.ToString();
+                    });
+                    s.CreateAndAddLabelRow(plotcontainer, "Results Chart");
+                    s.CreateAndAddControlRow(plotcontainer, chart);
+                    s.CreateAndAddLabelRow(plotcontainer, "Results Table");
+                    s.CreateAndAddControlRow(plotcontainer, txtres);
+                    var form = s.GetDefaultEditorForm("Pipe Properties Profile: " + SimObject.GraphicObject.Tag, 400, 500, plotcontainer);
+                    form.Topmost = true;
+                    form.Show();
                 });
             }
             else if (SimObject is Column)
@@ -147,16 +143,16 @@ namespace DWSIM.UI.Desktop.Editors
                     //var ysp = s.CreateAndAddSpinnerRow(myview, myl.Id, "Y Axis Data", datatype, 0, (arg11, arg22, arg33) => { });
                     //s.CreateAndAddButtonRow(myview, myl.Id, "Update Chart/Table", (arg11, arg22, arg33) =>
                     //{
-                    //    px = PopulateColumnData(column, xsp.SelectedItemPosition);
-                    //    py = PopulateColumnData(column, ysp.SelectedItemPosition);
+                    //    px = PopulateColumnData(column, xsp.SelectedIndex);
+                    //    py = PopulateColumnData(column, ysp.SelectedIndex);
                     //    string xunits, yunits;
-                    //    xunits = " (" + units[xsp.SelectedItemPosition] + ")";
-                    //    yunits = " (" + units[ysp.SelectedItemPosition] + ")";
-                    //    if (xsp.SelectedItemPosition == 0) { xunits = ""; }
-                    //    if (ysp.SelectedItemPosition == 0) { yunits = ""; }
+                    //    xunits = " (" + units[xsp.SelectedIndex] + ")";
+                    //    yunits = " (" + units[ysp.SelectedIndex] + ")";
+                    //    if (xsp.SelectedIndex == 0) { xunits = ""; }
+                    //    if (ysp.SelectedIndex == 0) { yunits = ""; }
                     //    var model = CreateColumnResultsModel(px.ToArray(), py.ToArray(),
-                    //                                       datatype[xsp.SelectedItemPosition] + xunits,
-                    //                                       datatype[ysp.SelectedItemPosition] + yunits);
+                    //                                       datatype[xsp.SelectedIndex] + xunits,
+                    //                                       datatype[ysp.SelectedIndex] + yunits);
                     //    chart.Model = model;
                     //    chart.Visibility = ViewStates.Visible;
                     //    chart.LayoutParameters = paramc;
@@ -228,10 +224,6 @@ namespace DWSIM.UI.Desktop.Editors
 
             try
             {
-                if (obj.PropertyPackage == null)
-                {
-                    obj.PropertyPackage = (PropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.First();
-                }
                 if (obj.Calculated)
                 {
                     txtcontrol.Text = "Object successfully calculated on " + obj.LastUpdated.ToString() + "\n\n";
@@ -430,7 +422,7 @@ namespace DWSIM.UI.Desktop.Editors
             model.LegendOrientation = LegendOrientation.Vertical;
             model.LegendPosition = LegendPosition.BottomCenter;
             model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView;
-            //model.AddLineSeries(x, y);
+            model.AddLineSeries(x, y);
 
             return model;
 
@@ -514,16 +506,16 @@ namespace DWSIM.UI.Desktop.Editors
             for (j = 0; j <= vn.Count - 1; j++)
             {
                 color = OxyColor.FromRgb(Convert.ToByte(new Random().Next(0, 255)), Convert.ToByte(new Random().Next(0, 255)), Convert.ToByte(new Random().Next(0, 255)));
-                //model.Series.Add(cv.ConvertArrayFromSI(su.volume, vx.ToArray()), cv.ConvertArrayFromSI(su.molar_conc, vya[j].ToArray()), color);
+                model.AddLineSeries(cv.ConvertArrayFromSI(su.volume, vx.ToArray()), cv.ConvertArrayFromSI(su.molar_conc, vya[j].ToArray()), color);
                 model.Series[model.Series.Count - 1].Title = vn[j];
                 ((OxyPlot.Series.LineSeries)(model.Series[model.Series.Count - 1])).YAxisKey = "conc";
             }
             color = OxyColor.FromRgb(Convert.ToByte(new Random().Next(0, 255)), Convert.ToByte(new Random().Next(0, 255)), Convert.ToByte(new Random().Next(0, 255)));
-            //model.AddLineSeries(cv.ConvertArrayFromSI(su.volume, vx.ToArray()), cv.ConvertArrayFromSI(su.temperature, vya[j].ToArray()), color);
+            model.AddLineSeries(cv.ConvertArrayFromSI(su.volume, vx.ToArray()), cv.ConvertArrayFromSI(su.temperature, vya[j].ToArray()), color);
             model.Series[model.Series.Count - 1].Title = "Temperature";
             ((OxyPlot.Series.LineSeries)(model.Series[model.Series.Count - 1])).YAxisKey = "temp";
             color = OxyColor.FromRgb(Convert.ToByte(new Random().Next(0, 255)), Convert.ToByte(new Random().Next(0, 255)), Convert.ToByte(new Random().Next(0, 255)));
-            //model.AddLineSeries(cv.ConvertArrayFromSI(su.volume, vx.ToArray()), cv.ConvertArrayFromSI(su.pressure, vya[j + 1].ToArray()), color);
+            model.AddLineSeries(cv.ConvertArrayFromSI(su.volume, vx.ToArray()), cv.ConvertArrayFromSI(su.pressure, vya[j + 1].ToArray()), color);
             model.Series[model.Series.Count - 1].Title = "Pressure";
             ((OxyPlot.Series.LineSeries)(model.Series[model.Series.Count - 1])).YAxisKey = "press";
 

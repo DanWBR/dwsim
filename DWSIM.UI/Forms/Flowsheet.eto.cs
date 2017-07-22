@@ -435,14 +435,12 @@ namespace DWSIM.UI.Forms
             menuitem2.Click += (sender, e) =>
             {
                 var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
-                var form = new Form
-                {
-                    Title = "Results",
-                    ClientSize = new Size(500, 600),
-                    Content = new Scrollable { Content = new TextArea { Text = report, ReadOnly = true, Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f) } },
-                    ShowInTaskbar = false
-                };
+                var container = UI.Shared.Common.GetDefaultContainer();
+                new DWSIM.UI.Desktop.Editors.Results(obj, container);
+                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container);
+                form.ShowInTaskbar = false;
                 form.Show();
+                form.Width += 1;
             };
 
             var item5 = new ButtonMenuItem { Text = "Clone" };

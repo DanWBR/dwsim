@@ -31,6 +31,7 @@ namespace DWSIM.UI.Desktop
                 var platform = new Eto.Wpf.Platform();
 
                 platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WPF.FlowsheetSurfaceControlHandler());
+                platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Wpf.PlotHandler());
 
                 new Application(platform).Run(new MainForm());
             }
@@ -41,6 +42,7 @@ namespace DWSIM.UI.Desktop
                 var platform = new Eto.GtkSharp.Platform();
 
                 platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
 
                 new Application(platform).Run(new MainForm());
             }
@@ -54,6 +56,7 @@ namespace DWSIM.UI.Desktop
                     var platform = new Eto.Mac.Platform();
 
                     platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+                    platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Mac.PlotHandler());
 
                     new Application(platform).Run(new MainForm());
                 }
