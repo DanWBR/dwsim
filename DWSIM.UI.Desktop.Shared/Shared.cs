@@ -22,16 +22,19 @@ namespace DWSIM.UI.Shared
         public static Form GetDefaultEditorForm(string title, int width, int height, DynamicLayout content)
         {
             content.CreateAndAddEmptySpace();
+            content.CreateAndAddEmptySpace();
+            content.CreateAndAddEmptySpace();
+            content.CreateAndAddEmptySpace();
+            content.CreateAndAddEmptySpace();
             content.EndVertical();
             content.Width = width - content.Padding.Value.Left * 2 - content.Padding.Value.Right * 2;
             height += 10;
             return new Form()
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
-                Content = new Scrollable { Content = content, Border = BorderType.None },
+                Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
-                Width = width,
-                Height = height,
+                ClientSize = new Size(width, height),
                 ShowInTaskbar = false,
                 Maximizable = false,
                 Minimizable = false,
@@ -57,8 +60,7 @@ namespace DWSIM.UI.Shared
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
-                Width = width,
-                Height = height,
+                ClientSize = new Size(width, height),
                 ShowInTaskbar = false,
                 Maximizable = false,
                 Minimizable = false,
@@ -183,11 +185,29 @@ namespace DWSIM.UI.Shared
             return edittext;
 
         }
-        public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, Action<TextArea, EventArgs> command)
+        public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, bool autosized, Action<TextArea, EventArgs> command)
         {
 
             var edittext = new TextArea { Text = text, ReadOnly = ro};
 
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
+
+            var tr = new TableRow(edittext);
+            tr.ScaleHeight = autosized;
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
+
+        public static TextArea CreateAndAddMultilineMonoSpaceTextBoxRow(this DynamicLayout container, String text, int height, bool ro, Action<TextArea, EventArgs> command)
+        {
+
+            var edittext = new TextArea { Text = text, ReadOnly = ro, Height = height };
+
+            edittext.Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f);
+            
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
 
             var tr = new TableRow(edittext);

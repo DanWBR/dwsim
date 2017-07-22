@@ -49,11 +49,6 @@ namespace DWSIM.UI.Desktop.Editors
             var su = SimObject.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
-            var txtcontrol = s.CreateAndAddMultilineTextBoxRow(container, "", true, null);
-            txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f);
-            txtcontrol.ReadOnly = true;
-            txtcontrol.Height = 500;
-
             if (SimObject is Pipe)
             {
                 var pipe = (Pipe)SimObject;
@@ -76,8 +71,8 @@ namespace DWSIM.UI.Desktop.Editors
 
                     List<double> px, py;
 
-                    var txtres = new TextArea { ReadOnly = true, Height = 300 };
-
+                    var txtres = s.CreateAndAddMultilineMonoSpaceTextBoxRow(plotcontainer, "", 400, true, null);
+            
                     s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles: " + SimObject.GraphicObject.Tag);
                     var xsp = s.CreateAndAddDropDownRow(plotcontainer, "X Axis Data", datatype.ToList(), 0, null);
                     var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 2, null);
@@ -102,6 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
                     });
                     s.CreateAndAddLabelRow(plotcontainer, "Results Chart");
                     s.CreateAndAddControlRow(plotcontainer, chart);
+                    s.CreateAndAddEmptySpace(plotcontainer);
                     s.CreateAndAddLabelRow(plotcontainer, "Results Table");
                     s.CreateAndAddControlRow(plotcontainer, txtres);
                     var form = s.GetDefaultEditorForm("Pipe Properties Profile: " + SimObject.GraphicObject.Tag, 400, 500, plotcontainer);
@@ -220,6 +216,9 @@ namespace DWSIM.UI.Desktop.Editors
                     });
                 }
             }
+
+            var txtcontrol = s.CreateAndAddMultilineTextBoxRow(container, "", true, true, null);
+            txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f);
 
             var obj = (ISimulationObject)SimObject;
 

@@ -223,11 +223,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddLabelRow2("Reaction Rate Numerator Expression:");
 
-            container.CreateAndAddMultilineTextBoxRow(rx.RateEquationNumerator, false, (sender, e) => rx.RateEquationNumerator = sender.Text);
+            container.CreateAndAddMultilineTextBoxRow(rx.RateEquationNumerator, false, false, (sender, e) => rx.RateEquationNumerator = sender.Text);
 
             container.CreateAndAddLabelRow2("Reaction Rate Denominator Expression:");
 
-            container.CreateAndAddMultilineTextBoxRow(rx.RateEquationDenominator, false, (sender, e) => rx.RateEquationDenominator = sender.Text);
+            container.CreateAndAddMultilineTextBoxRow(rx.RateEquationDenominator, false, false, (sender, e) => rx.RateEquationDenominator = sender.Text);
 
             container.CreateAndAddDescriptionRow("Reaction Rate (r) = f(T, Ri, Pi) = Numerator / Denominator");
 

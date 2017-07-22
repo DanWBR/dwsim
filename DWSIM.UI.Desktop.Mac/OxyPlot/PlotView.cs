@@ -299,6 +299,8 @@ namespace DWSIM.UI.Desktop.Mac
             if (this.model != null)
             {
                 var context = NSGraphicsContext.CurrentContext.GraphicsPort;
+                context.SetShouldAntialias(true);
+                context.SetShouldSmoothFonts(true);
                 context.TranslateCTM(0f, dirtyRect.Height);
                 context.ScaleCTM(1f, -1f);
                 // TODO: scale font matrix??
