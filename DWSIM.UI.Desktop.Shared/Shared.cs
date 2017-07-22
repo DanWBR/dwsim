@@ -382,7 +382,7 @@ namespace DWSIM.UI.Shared
         public static TableRow CreateAndAddLabelAndTwoButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 
-            var txt = new Label { Text = label };
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
             var btn = new Button { Width = 100, Text = buttonlabel };
             var btn2 = new Button { Width = 100, Text = buttonlabel2 };
 

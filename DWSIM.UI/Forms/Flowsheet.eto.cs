@@ -18,6 +18,8 @@ namespace DWSIM.UI.Forms
         public Desktop.Shared.Flowsheet FlowsheetObject;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
 
+        ContextMenu selctxmenu, deselctxmenu;
+
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
 
         void InitializeComponent()
@@ -154,17 +156,22 @@ namespace DWSIM.UI.Forms
 
             Content = split;
 
+            selctxmenu = new ContextMenu();
+            deselctxmenu = new ContextMenu();
+
             FlowsheetControl.MouseUp += (sender, e) =>
             {
                 if (e.Buttons == MouseButtons.Alternate)
                 {
                     if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
                     {
-                        SetupSelectedContextMenu().Show(FlowsheetControl);
+                        SetupSelectedContextMenu();
+                        selctxmenu.Show(FlowsheetControl);
                     }
                     else
                     {
-                        SetupDeselectedContextMenu().Show(FlowsheetControl);
+                        SetupDeselectedContextMenu();
+                        deselctxmenu.Show(FlowsheetControl);
                     }
                 }
             };
@@ -343,10 +350,10 @@ namespace DWSIM.UI.Forms
 
         }
 
-        Eto.Forms.ContextMenu SetupSelectedContextMenu()
+        void SetupSelectedContextMenu()
         {
 
-            var ctxmenu = new ContextMenu();
+            selctxmenu.Items.Clear();
 
             var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
 
@@ -455,16 +462,16 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            ctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
+            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
 
-            return ctxmenu;
+            return;
 
         }
 
-        Eto.Forms.ContextMenu SetupDeselectedContextMenu()
+        void SetupDeselectedContextMenu()
         {
 
-            var ctxmenu = new ContextMenu();
+            deselctxmenu.Items.Clear();
 
             var item0 = new ButtonMenuItem { Text = "Add New Object" };
 
@@ -483,9 +490,9 @@ namespace DWSIM.UI.Forms
                 item0.Items.Add(menuitem);
             }
 
-            ctxmenu.Items.AddRange(new MenuItem[] { item0 });
+            deselctxmenu.Items.AddRange(new MenuItem[] { item0 });
 
-            return ctxmenu;
+            return;
 
         }
 
