@@ -25,6 +25,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 
 using DWSIM.ExtensionMethods;
+using System.IO;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -71,7 +72,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     var chart = new Eto.OxyPlot.Plot() { Height = 400, BackgroundColor = Colors.White };
 
-                    chart.Visible = false;
+                    chart.Visible = true;
 
                     List<double> px, py;
 
@@ -82,22 +83,22 @@ namespace DWSIM.UI.Desktop.Editors
                     var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 2, null);
                     s.CreateAndAddButtonRow(plotcontainer, "Update Chart/Table", null, (sender, e) =>
                     {
-                        px = PopulateData(pipe, xsp.SelectedIndex);
-                        py = PopulateData(pipe, ysp.SelectedIndex);
-                        var model = CreatePipeResultsModel(px.ToArray(), py.ToArray(),
-                                                           datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")",
-                                                           datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
-                        chart.Model = model;
-                        chart.Visible = true;
-                        chart.Invalidate();
-                        int i = 0;
-                        var txt = new System.Text.StringBuilder();
-                        txt.AppendLine(datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")\t\t" + datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
-                        for (i = 0; i <= px.Count - 1; i++)
-                        {
-                            txt.AppendLine(px[i].ToString(nf) + "\t\t" + py[i].ToString(nf));
-                        }
-                        txtres.Text = txt.ToString();
+                            px = PopulateData(pipe, xsp.SelectedIndex);
+                            py = PopulateData(pipe, ysp.SelectedIndex);
+                            var model = CreatePipeResultsModel(px.ToArray(), py.ToArray(),
+                                                               datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")",
+                                                               datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
+                            chart.Model = model;
+                            chart.Visible = true;
+                            chart.Invalidate();
+                            int i = 0;
+                            var txt = new System.Text.StringBuilder();
+                            txt.AppendLine(datatype[xsp.SelectedIndex] + " (" + units[xsp.SelectedIndex] + ")\t\t" + datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
+                            for (i = 0; i <= px.Count - 1; i++)
+                            {
+                                txt.AppendLine(px[i].ToString(nf) + "\t\t" + py[i].ToString(nf));
+                            }
+                            txtres.Text = txt.ToString();
                     });
                     s.CreateAndAddLabelRow(plotcontainer, "Results Chart");
                     s.CreateAndAddControlRow(plotcontainer, chart);
@@ -396,9 +397,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         OxyPlot.PlotModel CreatePipeResultsModel(double[] x, double[] y, string xtitle, string ytitle)
         {
-
-
-            var model = new PlotModel() { Subtitle = "Properties Profile", Title = SimObject.GraphicObject.Tag };
+            var model = new global::OxyPlot.PlotModel() { Subtitle = "Properties Profile", Title = SimObject.GraphicObject.Tag };
             model.TitleFontSize = 18;
             model.SubtitleFontSize = 16;
             model.Axes.Add(new LinearAxis()
@@ -423,7 +422,7 @@ namespace DWSIM.UI.Desktop.Editors
             model.LegendPosition = LegendPosition.BottomCenter;
             model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView;
             model.AddLineSeries(x, y);
-
+                     
             return model;
 
         }

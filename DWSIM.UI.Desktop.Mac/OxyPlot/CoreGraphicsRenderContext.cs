@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.MonoMac
+namespace DWSIM.UI.Desktop.Mac
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace OxyPlot.MonoMac
     using global::MonoMac.CoreGraphics;
     using global::MonoMac.CoreText;
     using global::MonoMac.Foundation;
+    using OxyPlot;
 
     /// <summary>
     /// Implements a <see cref="IRenderContext"/> for CoreGraphics.
@@ -545,14 +546,13 @@ namespace OxyPlot.MonoMac
             this.gctx.SetStrokeColor(c.ToCGColor());
             this.gctx.SetLineWidth((float)thickness);
             this.gctx.SetLineJoin(lineJoin.Convert());
-            if (dashArray != null)
+            if (dashArray != null && dashArray.Length > 1)
             {
                 var lengths = dashArray.Select(d => (float)d).ToArray();
                 this.gctx.SetLineDash(0f, lengths);
             }
-            else
-            {
-                this.gctx.SetLineDash(0, null);
+            else {
+                this.gctx.SetLineDash(0f, new float[]{});    
             }
         }
 

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace OxyPlot.MonoMac
+namespace DWSIM.UI.Desktop.Mac
 {
     using System;
     using Eto.Drawing;

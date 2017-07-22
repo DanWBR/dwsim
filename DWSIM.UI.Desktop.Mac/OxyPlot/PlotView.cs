@@ -9,13 +9,13 @@
 
 using System;
 using Eto.Drawing;
-using global::MonoMac.Foundation;
-using global::MonoMac.AppKit;
+using MonoMac.Foundation;
+using MonoMac.AppKit;
 
 using OxyPlot;
 using MonoMac.CoreGraphics;
 
-namespace OxyPlot.MonoMac
+namespace DWSIM.UI.Desktop.Mac
 {
 
     /// <summary>

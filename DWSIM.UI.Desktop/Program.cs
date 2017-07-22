@@ -56,7 +56,7 @@ namespace DWSIM.UI.Desktop
                     var platform = new Eto.Mac.Platform();
 
                     platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
-                    platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Mac.PlotHandler());
+                    platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new DWSIM.UI.Desktop.Mac.PlotHandler());
 
                     new Application(platform).Run(new MainForm());
                 }
@@ -64,7 +64,7 @@ namespace DWSIM.UI.Desktop
                 {
                     File.WriteAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "log.txt"), ex.ToString());
                    
-                    if (ex.InnerException != null) File.WriteAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "log.txt"), ex.InnerException.ToString());
+                    if (ex.InnerException != null) File.WriteAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "log2.txt"), ex.InnerException.ToString());
                 }
 
             }
