@@ -435,7 +435,7 @@ namespace DWSIM.UI.Forms
             menuitem2.Click += (sender, e) =>
             {
                 var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
-                var container = UI.Shared.Common.GetDefaultContainer();
+                var container = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Results(obj, container);
                 var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container);
                 form.ShowInTaskbar = false;

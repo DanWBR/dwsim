@@ -32,11 +32,13 @@ namespace DWSIM.UI.Desktop.Editors
     public class Results
     {
 
+        static string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
+        
         public ISimulationObject SimObject;
 
-        public DynamicLayout container;
+        public TableLayout container;
 
-        public Results(ISimulationObject selectedobject, DynamicLayout layout)
+        public Results(ISimulationObject selectedobject, TableLayout layout)
         {
             SimObject = selectedobject;
             container = layout;
@@ -60,7 +62,9 @@ namespace DWSIM.UI.Desktop.Editors
 									su.heatflow, "", su.heat_transf_coeff, su.heat_transf_coeff, su.heat_transf_coeff,
 									su.heat_transf_coeff, su.heat_transf_coeff};
                       
-                s.CreateAndAddButtonRow(container, "View Pipe Properties Profile", null, (Button arg1, EventArgs ev) =>
+                var btn = new Button {Text = "View Pipe Properties Profile"};
+                container.Rows.Add(new TableRow(btn));
+                btn.Click += (sender, e) =>
                 {
 
                     var plotcontainer = s.GetDefaultContainer();
@@ -76,7 +80,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddLabelRow(plotcontainer, "Pipe Segment Profiles: " + SimObject.GraphicObject.Tag);
                     var xsp = s.CreateAndAddDropDownRow(plotcontainer, "X Axis Data", datatype.ToList(), 0, null);
                     var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 2, null);
-                    s.CreateAndAddButtonRow(plotcontainer, "Update Chart/Table", null, (sender, e) =>
+                    s.CreateAndAddButtonRow(plotcontainer, "Update Chart/Table", null, (sender2, e2) =>
                     {
                             px = PopulateData(pipe, xsp.SelectedIndex);
                             py = PopulateData(pipe, ysp.SelectedIndex);
@@ -103,7 +107,7 @@ namespace DWSIM.UI.Desktop.Editors
                     var form = s.GetDefaultEditorForm("Pipe Properties Profile: " + SimObject.GraphicObject.Tag, 400, 500, plotcontainer);
                     form.Topmost = true;
                     form.Show();
-                });
+                };
             }
             else if (SimObject is Column)
             {
@@ -112,113 +116,89 @@ namespace DWSIM.UI.Desktop.Editors
 
                 string[] units = { "", su.pressure, su.temperature, su.molarflow, su.molarflow };
 
-                s.CreateAndAddButtonRow(container, "View Column Profile", null, (Button arg1, EventArgs ev) =>
+                var btn = new Button {Text = "View Column Properties Profile"};
+                container.Rows.Add(new TableRow(btn));
+                btn.Click += (sender, e) =>
                 {
 
-                    //var sview = new ScrollView(this.Context);
-                    //var myview = new TextAndChartView(this.Context);
-                    //myview.Orientation = Orientation.Vertical;
-                    //myview.SetBackgroundColor(Color.ParseColor("#ff1e74c9"));
+                    var plotcontainer = s.GetDefaultContainer();
 
-                    //var chart = (PlotView)myview.FindViewById(Resource.IdSens.chartView);
-                    //chart.SetBackgroundColor(Color.White);
+                    var chart = new Eto.OxyPlot.Plot() { Height = 400, BackgroundColor = Colors.White };
+                    chart.Visible = true;
 
-                    ////chart.Visibility = ViewStates.Gone;
+                    List<double> px, py;
 
-                    //var myl = new LinearLayout(this.Context);
-                    //myl.Orientation = Orientation.Vertical;
-                    //myl.Id = 1000;
-                    //List<double> px, py;
-                    //myview.AddView(myl, 0);
-                    //var ll1 = (LinearLayout)myview.FindViewById(Resource.IdSens.linearLayoutET);
-                    //ll1.Visibility = ViewStates.Gone;
-                    //var ll2 = (LinearLayout)myview.FindViewById(Resource.IdSens.linearLayoutBTNS);
-                    //ll2.Visibility = ViewStates.Gone;
+                    s.CreateAndAddLabelRow(plotcontainer, "Column Profile Results: " + SimObject.GraphicObject.Tag);
+                    var xsp = s.CreateAndAddDropDownRow(plotcontainer, "X Axis Data", datatype.ToList(), 2, null);
+                    var ysp = s.CreateAndAddDropDownRow(plotcontainer, "Y Axis Data", datatype.ToList(), 0, null);
 
-                    //s.CreateAndAddLabelBoxRow(myview, myl.Id, "COLUMN PROFILE RESULTS: " + SimObject.GraphicObject.Tag);
-                    //var xsp = s.CreateAndAddSpinnerRow(myview, myl.Id, "X Axis Data", datatype, 2, (arg11, arg22, arg33) => { });
-                    //var ysp = s.CreateAndAddSpinnerRow(myview, myl.Id, "Y Axis Data", datatype, 0, (arg11, arg22, arg33) => { });
-                    //s.CreateAndAddButtonRow(myview, myl.Id, "Update Chart/Table", (arg11, arg22, arg33) =>
-                    //{
-                    //    px = PopulateColumnData(column, xsp.SelectedIndex);
-                    //    py = PopulateColumnData(column, ysp.SelectedIndex);
-                    //    string xunits, yunits;
-                    //    xunits = " (" + units[xsp.SelectedIndex] + ")";
-                    //    yunits = " (" + units[ysp.SelectedIndex] + ")";
-                    //    if (xsp.SelectedIndex == 0) { xunits = ""; }
-                    //    if (ysp.SelectedIndex == 0) { yunits = ""; }
-                    //    var model = CreateColumnResultsModel(px.ToArray(), py.ToArray(),
-                    //                                       datatype[xsp.SelectedIndex] + xunits,
-                    //                                       datatype[ysp.SelectedIndex] + yunits);
-                    //    chart.Model = model;
-                    //    chart.Visibility = ViewStates.Visible;
-                    //    chart.LayoutParameters = paramc;
-                    //    chart.InvalidatePlot();
-                    //});
-                    //var alert = new AlertDialog.Builder(this.Context);
-                    //var param = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                    //myview.LayoutParameters = param;
-                    //sview.VerticalScrollBarEnabled = true;
-                    //sview.ScrollbarFadingEnabled = false;
-                    //sview.AddView(myview);
-                    //alert.SetView(sview);
-                    //alert.Create().Show();
-                });
+                    s.CreateAndAddButtonRow(plotcontainer, "Update Chart", null, (sender2, e2) =>
+                    {
+                        px = PopulateColumnData(column, xsp.SelectedIndex);
+                        py = PopulateColumnData(column, ysp.SelectedIndex);
+                        string xunits, yunits;
+                        xunits = " (" + units[xsp.SelectedIndex] + ")";
+                        yunits = " (" + units[ysp.SelectedIndex] + ")";
+                        if (xsp.SelectedIndex == 0) { xunits = ""; }
+                        if (ysp.SelectedIndex == 0) { yunits = ""; }
+                        var model = CreateColumnResultsModel(px.ToArray(), py.ToArray(),
+                                                           datatype[xsp.SelectedIndex] + xunits,
+                                                           datatype[ysp.SelectedIndex] + yunits);
+                        chart.Model = model;
+                        chart.Visible = true;
+                        chart.Invalidate();
+                    });
+
+                    s.CreateAndAddLabelRow(plotcontainer, "Results Chart");
+                    s.CreateAndAddControlRow(plotcontainer, chart);
+                    s.CreateAndAddEmptySpace(plotcontainer);
+                    var form = s.GetDefaultEditorForm("Column Profile: " + SimObject.GraphicObject.Tag, 400, 500, plotcontainer);
+                    form.Topmost = true;
+                    form.Show();
+
+                };
             }
             else if (SimObject is Reactor_PFR)
             {
                 var reactor = (Reactor_PFR)SimObject;
 
-                if (reactor.points.Count > 0)
+                if (reactor.points != null && reactor.points.Count > 0)
                 {
-                    s.CreateAndAddButtonRow(container, "View Properties Profile", null, (Button arg1, EventArgs ev) =>
+
+                    var btn = new Button {Text = "View PFR Properties Profile"};
+                    container.Rows.Add(new TableRow(btn));
+                    btn.Click += (sender, e) =>
                     {
 
-                        //var sview = new ScrollView(this.Context);
-                        //var myview = new TextAndChartView(this.Context);
-                        //myview.Orientation = Orientation.Vertical;
-                        //myview.SetBackgroundColor(Color.ParseColor("#ff1e74c9"));
+                        var chart = new Eto.OxyPlot.Plot() { Height = 400, BackgroundColor = Colors.White };
+                        chart.Visible = true;
 
-                        //var chart = (PlotView)myview.FindViewById(Resource.IdSens.chartView);
-                        //chart.SetBackgroundColor(Color.White);
+                        var model = CreatePFRResultsModel(reactor);
+                        chart.Model = model;
+                        chart.Invalidate();
 
-                        ////chart.Visibility = ViewStates.Gone;
+                        var form = new Form()
+                        {
+                            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
+                            Content = new Scrollable { Content = chart, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
+                            Title = "PFR Profile: " + SimObject.GraphicObject.Tag,
+                            ClientSize = new Size(800, 600),
+                            ShowInTaskbar = false,
+                            Maximizable = false,
+                            Minimizable = false,
+                            Topmost = true,
+                            Resizable = true
+                        };
+                        form.Show();
 
-                        //var myl = new LinearLayout(this.Context);
-                        //myl.Orientation = Orientation.Vertical;
-                        //myl.Id = 1000;
-                        //myview.AddView(myl, 0);
-
-                        //var txtres = (EditText)myview.FindViewById(Resource.IdSens.txtResults);
-                        //txtres.Visibility = ViewStates.Gone;
-                        //var ll1 = (LinearLayout)myview.FindViewById(Resource.IdSens.linearLayoutET);
-                        //ll1.Visibility = ViewStates.Gone;
-                        //var ll2 = (LinearLayout)myview.FindViewById(Resource.IdSens.linearLayoutBTNS);
-                        //ll2.Visibility = ViewStates.Gone;
-
-                        //s.CreateAndAddLabelBoxRow(myview, myl.Id, "REACTOR PROFILE: " + SimObject.GraphicObject.Tag);
-
-                        //var model = CreatePFRResultsModel(reactor);
-                        //chart.Model = model;
-                        //chart.Visibility = ViewStates.Visible;
-                        //chart.LayoutParameters = paramc;
-                        //chart.InvalidatePlot();
-
-                        //var alert = new AlertDialog.Builder(this.Context);
-                        //var param = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                        //sview.LayoutParameters = param;
-                        //myview.LayoutParameters = param;
-                        //sview.VerticalScrollBarEnabled = true;
-                        //sview.ScrollbarFadingEnabled = false;
-                        //sview.AddView(myview);
-                        //alert.SetView(sview);
-                        //alert.Create().Show();
-                    });
+                    };
                 }
             }
 
-            var txtcontrol = s.CreateAndAddMultilineTextBoxRow(container, "", true, true, null);
+            var txtcontrol = new TextArea {ReadOnly = true};
             txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f);
+
+            container.Rows.Add(new TableRow(txtcontrol));
 
             var obj = (ISimulationObject)SimObject;
 
@@ -248,7 +228,6 @@ namespace DWSIM.UI.Desktop.Editors
                 txtcontrol.Text = "Report generation failed. Please recalculate the flowsheet and try again.";
                 txtcontrol.Text += "\n\nError details: " + ex.ToString();
             }
-
 
         }
 
@@ -467,7 +446,7 @@ namespace DWSIM.UI.Desktop.Editors
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Right,
                 FontSize = 16,
-                Title = "Pressre (" + su.pressure + ")",
+                Title = "Pressure (" + su.pressure + ")",
                 Key = "press",
                 PositionTier = 1
             });
@@ -489,7 +468,7 @@ namespace DWSIM.UI.Desktop.Editors
             int j;
             for (j = 1; j <= reactor.ComponentConversions.Count + 2; j++)
             {
-                vy.Clear();
+                vy = new List<double>();
                 foreach (var obj in reactor.points)
                 {
                     vy.Add(((double[])obj)[j]);
