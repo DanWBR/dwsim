@@ -63,6 +63,10 @@ namespace DWSIM.UI.Forms.Forms
             var tab5 = Common.GetDefaultContainer();
             tab5.Tag = "Misc".Localize(prefix);
 
+            tab5.CreateAndAddLabelRow("Reports");
+            var sizes = new[] {"6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" };
+            tab5.CreateAndAddDropDownRow("Font Size", sizes.ToList(), sizes.ToList().IndexOf(Settings.ResultsReportFontSize.ToString()), (DropDown sender, EventArgs obj) => { Settings.ResultsReportFontSize = int.Parse(sender.SelectedValue.ToString()); });
+
             tab5.CreateAndAddLabelRow("Octave Settings");
             TextBox tbox = null;
             tbox = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.OctavePath, "Search", null,

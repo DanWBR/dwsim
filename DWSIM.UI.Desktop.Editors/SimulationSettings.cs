@@ -28,7 +28,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Initialize()
         {
-            
+
             s.CreateAndAddLabelRow(container, "General");
 
             s.CreateAndAddStringEditorRow(container, "Simulation Name", flowsheet.FlowsheetOptions.SimulationName, (sender, e) => flowsheet.FlowsheetOptions.SimulationName = sender.Text);
@@ -62,7 +62,11 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             s.CreateAndAddDescriptionRow(container, "Select the formatting scheme for compound amounts in Material Stream reports.");
+           
+            s.CreateAndAddLabelRow(container, "Solver");
 
+            s.CreateAndAddCheckBoxRow(container, "Simultaneous Adjust Solver Active", flowsheet.FlowsheetOptions.SimultaneousAdjustSolverEnabled, (sender, e) => flowsheet.FlowsheetOptions.SimultaneousAdjustSolverEnabled = sender.Checked.GetValueOrDefault());
+           
         }
 
     }

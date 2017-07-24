@@ -82,7 +82,10 @@ Public Class Settings
     Public Shared Property BackupInterval As Integer = 5
 
     Public Shared Property UserUnits As String = "{ }"
+
     Public Shared Property MostRecentFiles As New List(Of String)
+
+    Public Shared Property ResultsReportFontSize As Integer = 10
 
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 

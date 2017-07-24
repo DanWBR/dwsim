@@ -196,7 +196,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             var txtcontrol = new TextArea {ReadOnly = true};
-            txtcontrol.Font = Fonts.Monospace(SystemFonts.Default().Size - 0.5f);
+            txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
 
             container.Rows.Add(new TableRow(txtcontrol));
 

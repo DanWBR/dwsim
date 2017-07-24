@@ -42,6 +42,8 @@ namespace DWSIM.UI.Forms
 
             FlowsheetControl.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
 
+            FlowsheetObject.FlowsheetControl = FlowsheetControl;
+
             ClientSize = new Size(1024, 768);
 
             var closeCommand = new Command { MenuText = "Close".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };

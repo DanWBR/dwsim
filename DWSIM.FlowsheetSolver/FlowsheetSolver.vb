@@ -31,6 +31,7 @@ Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 'custom event handler declaration
 Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventArgs, ByVal extrainfo As Object)
+Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
 <System.Serializable()> Public Class FlowsheetSolver
 
@@ -41,6 +42,7 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
     Public Shared Event FlowsheetCalculationFinished As CustomEvent
     Public Shared Event MaterialStreamCalculationStarted As CustomEvent
     Public Shared Event MaterialStreamCalculationFinished As CustomEvent
+    Public Shared Event CalculatingObject As CustomEvent2
 
     ''' <summary>
     ''' Flowsheet calculation routine 1. Calculates the object using information sent by the queue and updates the flowsheet.
@@ -339,6 +341,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
 
             Dim myinfo As CalculationArgs = fqueue.CalculationQueue.Peek()
 
+            RaiseEvent CalculatingObject(myinfo)
+
             If fbag.SimulationObjects.ContainsKey(myinfo.Name) Then
 
                 Dim myobj = fbag.SimulationObjects(myinfo.Name)
@@ -417,6 +421,8 @@ Public Delegate Sub CustomEvent(ByVal sender As Object, ByVal e As System.EventA
             If ct.IsCancellationRequested = True Then ct.ThrowIfCancellationRequested()
 
             Dim myinfo As CalculationArgs = fqueue.CalculationQueue.Peek()
+
+            RaiseEvent CalculatingObject(myinfo)
 
             'fobj.UIThread(Sub() UpdateDisplayStatus(fobj, New String() {myinfo.Name}, True))
             Dim myobj = fbag.SimulationObjects(myinfo.Name)
