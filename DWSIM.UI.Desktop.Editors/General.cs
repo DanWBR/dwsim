@@ -1263,9 +1263,9 @@ namespace DWSIM.UI.Desktop.Editors
                                            var els = arg3.Text.Trim().Split(' ');
                                            reactor2g.Elements = els;
                                        }
-                                       catch (Exception)
+                                       catch (Exception ex)
                                        {
-                                           //Toast.MakeText(this.Context, "Error parsing element list: " + ex.Message, ToastLength.Long).Show();
+                                           SimObject.GetFlowsheet().ShowMessage("Error parsing element list: " + ex.Message, IFlowsheet.MessageType.GeneralError);
                                        }
                                    });
                     txtel.PlaceholderText = "Enter the list of elements, separated by spaces";
@@ -1290,9 +1290,9 @@ namespace DWSIM.UI.Desktop.Editors
                                 i2 += 1;
                             }
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
-                            //Toast.MakeText(this.Context, "Error parsing element matrix: " + ex.Message, ToastLength.Long).Show();
+                            SimObject.GetFlowsheet().ShowMessage("Error parsing element matrix: " + ex.Message, IFlowsheet.MessageType.GeneralError);
                         }
                     });
                     txtelm.PlaceholderText = "Enter the matrix of element amounts, separated by spaces, one line for each compound";
@@ -1832,24 +1832,6 @@ namespace DWSIM.UI.Desktop.Editors
                     });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Include Joule-Thomson Effect"));
-                    s.CreateAndAddButtonRow(container, "Edit Hydraulic Profile", null, (Button arg1, EventArgs ev) =>
-                    {
-                        //var alert = new AlertDialog.Builder(this.Context);
-                        //var myview = new PipeHydraulicProfileView(this.Context, SimObject.GetFlowsheet(), pipe.Profile);
-                        //LayoutParams param = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                        //myview.LayoutParameters = param;
-                        //alert.SetView(myview);
-                        //alert.Create().Show();
-                    });
-                    s.CreateAndAddButtonRow(container, "Edit Thermal Profile", null, (Button arg1, EventArgs ev) =>
-                    {
-                        //var alert = new AlertDialog.Builder(this.Context);
-                        //var myview = new PipeThermalProfileView(this.Context, SimObject.GetFlowsheet(), pipe.ThermalProfile);
-                        //LayoutParams param = new LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                        //myview.LayoutParameters = param;
-                        //alert.SetView(myview);
-                        //alert.Create().Show();
-                    });
                     break;
                 case ObjectType.Vessel:
                     var vessel = (Vessel)SimObject;

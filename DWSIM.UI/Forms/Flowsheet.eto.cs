@@ -9,6 +9,7 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Linq;
 using System.Threading.Tasks;
+using DWSIM.UI.Desktop.Editors;
 
 namespace DWSIM.UI.Forms
 {
@@ -426,10 +427,25 @@ namespace DWSIM.UI.Forms
                     {
                         new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
                     }
-                    var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Properties", 500, 500, cont);
-                    form.ShowInTaskbar = false;
-                    form.Show();
-                    form.Width += 1;
+                    if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Pipe)
+                    {
+                        cont.Tag = "General";
+                        var cont2 = UI.Shared.Common.GetDefaultContainer();
+                        cont2.Tag = "Hydraulic Profile";
+                        new PipeHydraulicProfile(obj, cont2);
+                        var cont3 = UI.Shared.Common.GetDefaultContainer();
+                        cont3.Tag = "Thermal Profile";
+                        var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new []{cont, cont2, cont3});
+                        form.ShowInTaskbar = false;
+                        form.Show();
+                        form.Width += 1;
+                    }
+                    else {
+                        var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);
+                        form.ShowInTaskbar = false;
+                        form.Show();
+                        form.Width += 1;                    
+                    }
                 }
             };
 

@@ -3469,7 +3469,7 @@
     <value>Pipe Segment</value>
   </data>
   <data name="Tubulaosimples" xml:space="preserve">
-    <value>Straight tube</value>
+    <value>Straight Tube Section</value>
   </data>
   <data name="TurbinaAdiabtica" xml:space="preserve">
     <value>Adiabatic Expander</value>

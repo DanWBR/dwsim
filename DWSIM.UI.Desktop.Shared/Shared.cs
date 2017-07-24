@@ -183,6 +183,23 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TextBox CreateAndAddTextBoxRow2(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200 };
+
+            if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
+
+            var tr = new TableRow(txt, edittext);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return edittext;
+
+        }
+
         public static TextBox CreateAndAddDoubleTextBoxRow(this DynamicLayout container, String numberformat, String text, String currval1, Double currval2, Action<TextBox, EventArgs> command, Action<TextBox, EventArgs> command2)
         {
 
@@ -273,7 +290,7 @@ namespace DWSIM.UI.Shared
 
         }
 
-        public static void CreateAndAddTwoLabelsRow(this DynamicLayout container, String text1, String text2)
+        public static Label CreateAndAddTwoLabelsRow(this DynamicLayout container, String text1, String text2)
         {
 
             var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center };
@@ -284,7 +301,7 @@ namespace DWSIM.UI.Shared
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
 
-            return;
+            return txt2;
 
         }
 

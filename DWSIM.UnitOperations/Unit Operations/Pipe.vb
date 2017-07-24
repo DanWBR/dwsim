@@ -318,7 +318,7 @@ Namespace UnitOperations
 
                     segmento.Resultados.Clear()
 
-                    If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Then
+                    If segmento.TipoSegmento = "Tubulaosimples" Or segmento.TipoSegmento = "" Or segmento.TipoSegmento = "Straight Tube Section" Then
 
                         j = 0
                         nseg = segmento.Incrementos
