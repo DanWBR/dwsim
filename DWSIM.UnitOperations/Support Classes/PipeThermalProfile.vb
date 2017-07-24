@@ -58,20 +58,20 @@
             End Set
         End Property
 
-        Public Property Meio() As String
+        Public Property Meio() As Integer
             Get
                 Return m_meio
             End Get
-            Set(ByVal value As String)
+            Set(ByVal value As Integer)
                 m_meio = value
             End Set
         End Property
 
-        Public Property Material() As String
+        Public Property Material() As Integer
             Get
                 Return m_material
             End Get
-            Set(ByVal value As String)
+            Set(ByVal value As Integer)
                 m_material = value
             End Set
         End Property

@@ -435,7 +435,8 @@ namespace DWSIM.UI.Forms
                         new PipeHydraulicProfile(obj, cont2);
                         var cont3 = UI.Shared.Common.GetDefaultContainer();
                         cont3.Tag = "Thermal Profile";
-                        var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new []{cont, cont2, cont3});
+                        new PipeThermalProfile(obj, cont3);
+                        var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new[] { cont, cont2, cont3 });
                         form.ShowInTaskbar = false;
                         form.Show();
                         form.Width += 1;
