@@ -62,9 +62,9 @@ namespace DWSIM.UI.Desktop
                 }
                 catch (Exception ex)
                 {
-                    File.WriteAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "log.txt"), ex.ToString());
-                   
-                    if (ex.InnerException != null) File.WriteAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "log2.txt"), ex.InnerException.ToString());
+                    string configfiledir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + Path.DirectorySeparatorChar + "DWSIM Application Data" + Path.DirectorySeparatorChar;
+                    if (!Directory.Exists(configfiledir)) Directory.CreateDirectory(configfiledir);
+                    File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), ex.ToString());
                 }
 
             }
