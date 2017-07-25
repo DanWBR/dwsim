@@ -61,8 +61,6 @@ namespace DWSIM.UI.Forms
             var btnObjects = new ButtonMenuItem { Text = "Insert Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
             var btnTools = new ButtonMenuItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
-            var btnScripts = new ButtonMenuItem { Text = "Script Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-property_script.png")) };
-            var btnReports = new ButtonMenuItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
             var btnOptions = new ButtonMenuItem { Text = "Simulation Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             
@@ -77,11 +75,9 @@ namespace DWSIM.UI.Forms
             Menu.Items.Add(new ButtonMenuItem { Text = "Settings", Items = { btnComps, btnBasis, btnOptions } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-            Menu.Items.Add(new ButtonMenuItem { Text = "Scripts", Items = { btnScripts } });
-            Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnTools } });
-            Menu.Items.Add(new ButtonMenuItem { Text = "Results", Items = { btnReports } });
-
+            Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
+            
             btnClose.Click += (sender, e) => Close();
 
             btnObjects.Click += (sender, e) => {
@@ -119,7 +115,6 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-           
             btnSolve.Click += (sender, e) => { FlowsheetObject.SolveFlowsheet(); };
 
             this.KeyDown += (sender, e) =>
@@ -155,9 +150,16 @@ namespace DWSIM.UI.Forms
                 }
 
             };
-                     
+
+            var tabholder = new TabControl();
+            tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
+            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Material Streams" });
+            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Spreadsheet"});
+            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Scripts" });
+            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Results" });
+
             var split = new Eto.Forms.Splitter();
-            split.Panel1 = FlowsheetControl;
+            split.Panel1 = tabholder;
             split.Panel2 = SetupLogWindow();
             split.Orientation = Orientation.Vertical;
             split.FixedPanel = SplitterFixedPanel.Panel2;
