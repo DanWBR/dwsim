@@ -151,10 +151,12 @@ namespace DWSIM.UI.Forms
 
             };
 
+            var spreadsheet = DWSIM.UI.Desktop.Editors.Spreadsheet.GetGrid(FlowsheetObject);
+
             var tabholder = new TabControl();
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Material Streams" });
-            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Spreadsheet"});
+            tabholder.Pages.Add(new TabPage { Content = new Scrollable {Content = spreadsheet, Border = BorderType.None}, Text = "Spreadsheet"});
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Scripts" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Results" });
 
