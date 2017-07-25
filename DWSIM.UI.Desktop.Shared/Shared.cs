@@ -34,12 +34,12 @@ namespace DWSIM.UI.Shared
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
-                ClientSize = new Size(width, height),
-                ShowInTaskbar = false,
-                Maximizable = false,
-                Minimizable = false,
-                Topmost = true,
-                Resizable = true
+                ClientSize = new Size(width, height)
+                //ShowInTaskbar = false,
+                //Maximizable = true,
+                //Minimizable = false,
+                //Topmost = true,
+                //Resizable = true
             };
         }
 
@@ -50,12 +50,12 @@ namespace DWSIM.UI.Shared
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
-                ClientSize = new Size(width, height),
-                ShowInTaskbar = false,
-                Maximizable = false,
-                Minimizable = false,
-                Topmost = true,
-                Resizable = true
+                ClientSize = new Size(width, height)
+                //ShowInTaskbar = false,
+                //Maximizable = false,
+                //Minimizable = false,
+                //Topmost = true,
+                //Resizable = true
             };
         }
 
@@ -76,12 +76,12 @@ namespace DWSIM.UI.Shared
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
-                ClientSize = new Size(width, height),
-                ShowInTaskbar = false,
-                Maximizable = false,
-                Minimizable = false,
-                Topmost = true,
-                Resizable = true
+                ClientSize = new Size(width, height)
+                //ShowInTaskbar = false,
+                //Maximizable = false,
+                //Minimizable = false,
+                //Topmost = true,
+                //Resizable = true
             };
 
             var tabctrl = new TabControl();
