@@ -76,7 +76,7 @@ Namespace GraphicObjects.Shapes
 
             Dim aPen As New SKPaint()
             With aPen
-                .Color = SKColors.Red
+                .Color = SKColors.Blue
                 .StrokeWidth = LineWidth
                 .IsStroke = True
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias

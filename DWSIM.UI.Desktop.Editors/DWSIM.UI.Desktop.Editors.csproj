@@ -57,25 +57,27 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbsorptionColumn.cs" />
-    <Compile Include="Compounds.cs" />
-    <Compile Include="Connections.cs" />
-    <Compile Include="DistillationColumn.cs" />
-    <Compile Include="General.cs" />
-    <Compile Include="InsertObject.cs">
+    <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
+    <Compile Include="UnitOperations\AbsorptionColumn.cs" />
+    <Compile Include="Compounds\Compounds.cs" />
+    <Compile Include="General\Connections.cs" />
+    <Compile Include="UnitOperations\DistillationColumn.cs" />
+    <Compile Include="UnitOperations\General.cs" />
+    <Compile Include="General\InsertObject.cs">
       <SubType>Eto.Forms</SubType>
     </Compile>
-    <Compile Include="InsertObject.eto.cs">
+    <Compile Include="General\InsertObject.eto.cs">
       <DependentUpon>InsertObject.cs</DependentUpon>
       <SubType>Eto.Forms</SubType>
     </Compile>
-    <Compile Include="MaterialStream.cs" />
-    <Compile Include="Models.cs" />
-    <Compile Include="PipeHydraulicProfile.cs" />
-    <Compile Include="PipeSection.cs" />
-    <Compile Include="PipeThermalProfile.cs" />
+    <Compile Include="MaterialStream\MaterialStream.cs" />
+    <Compile Include="Thermo\Models.cs" />
+    <Compile Include="UnitOperations\PipeHydraulicProfile.cs" />
+    <Compile Include="UnitOperations\PipeSection.cs" />
+    <Compile Include="UnitOperations\PipeThermalProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reactions\Conversion.cs" />
     <Compile Include="Reactions\Equilibrium.cs" />
@@ -83,14 +85,18 @@
     <Compile Include="Reactions\Kinetic.cs" />
     <Compile Include="Reactions\ReactionSet.cs" />
     <Compile Include="Reactions\ReactionsManager.cs" />
-    <Compile Include="Results.cs" />
-    <Compile Include="SimulationSettings.cs" />
+    <Compile Include="General\Results.cs" />
+    <Compile Include="General\SimulationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
+      <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
+      <Name>DWSIM.DrawingTools.SkiaSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>

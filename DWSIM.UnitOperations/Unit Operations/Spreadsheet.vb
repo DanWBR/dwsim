@@ -626,7 +626,7 @@ Namespace UnitOperations
         Public Sub ReadExcelParams()
 
             'read input and output parameters from associated Excel table 
-            If Filename <> "" And Not ParamsLoaded Then
+            If IO.File.Exists(Filename) And Not ParamsLoaded Then
 
                 Dim excelType As Type = Nothing
                 If Not Calculator.IsRunningOnMono Then excelType = Type.GetTypeFromProgID("Excel.Application")
@@ -707,6 +707,8 @@ Namespace UnitOperations
                         xcl.Quit()
                         xcl.Dispose()
 
+                        ParamsLoaded = True
+
                     End Using
 
                 Else
@@ -723,6 +725,7 @@ Namespace UnitOperations
 
                     'Load Excel definition file
                     If My.Computer.FileSystem.FileExists(Filename) Then
+
                         xcl = GS.ExcelFile.Load(Filename)
                         Dim mysheetIn As GS.ExcelWorksheet = xcl.Worksheets("Input")
                         Dim mysheetOut As GS.ExcelWorksheet = xcl.Worksheets("Output")
@@ -761,11 +764,12 @@ Namespace UnitOperations
                             End If
                         Loop While ParName <> ""
 
+                        ParamsLoaded = True
+
                     End If
 
-
                 End If
-                ParamsLoaded = True
+
             End If
 
         End Sub

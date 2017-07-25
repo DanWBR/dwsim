@@ -34,6 +34,8 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             var profile = (PipeProfile)((Pipe)SimObject).Profile;
+            profile.Status = PipeEditorStatus.OK;
+
             var flowsheet = SimObject.GetFlowsheet();
 
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;

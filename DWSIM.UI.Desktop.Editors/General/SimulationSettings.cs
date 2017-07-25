@@ -63,10 +63,6 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "Select the formatting scheme for compound amounts in Material Stream reports.");
            
-            s.CreateAndAddLabelRow(container, "Solver");
-
-            s.CreateAndAddCheckBoxRow(container, "Simultaneous Adjust Solver Active", flowsheet.FlowsheetOptions.SimultaneousAdjustSolverEnabled, (sender, e) => flowsheet.FlowsheetOptions.SimultaneousAdjustSolverEnabled = sender.Checked.GetValueOrDefault());
-           
         }
 
     }

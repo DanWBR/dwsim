@@ -10,6 +10,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using System.Linq;
 using System.Threading.Tasks;
 using DWSIM.UI.Desktop.Editors;
+using DWSIM.UnitOperations.UnitOperations;
 
 namespace DWSIM.UI.Forms
 {
@@ -52,17 +53,36 @@ namespace DWSIM.UI.Forms
 
             var saveCommand = new Command { MenuText = "SaveFlowsheet".Localize() };
 
-            var btnSave = new ButtonToolItem { Text = "Save", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
-            var btnSaveAs = new ButtonToolItem { Text = "Save As", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")) };
-            var btnComps = new ButtonToolItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
-            var btnBasis = new ButtonToolItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
-            var btnObjects = new ButtonToolItem { Text = "Insert Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
-            var btnTools = new ButtonToolItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
-            var btnUtilities = new ButtonToolItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
-            var btnScripts = new ButtonToolItem { Text = "Script Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-property_script.png")) };
-            var btnReports = new ButtonToolItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
-            var btnOptions = new ButtonToolItem { Text = "Simulation Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+            var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
+            var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")) };
+            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet" };
+            var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
+            var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
+            var btnObjects = new ButtonMenuItem { Text = "Insert Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
+            var btnTools = new ButtonMenuItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
+            var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
+            var btnScripts = new ButtonMenuItem { Text = "Script Manager", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-property_script.png")) };
+            var btnReports = new ButtonMenuItem { Text = "Reports", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-report_card.png")) };
+            var btnOptions = new ButtonMenuItem { Text = "Simulation Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+            var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            
+            var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
+            chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
+            chkSimSolver.CheckedChanged += (sender, e) => {
+                FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = chkSimSolver.Checked;
+            };
 
+            Menu = new MenuBar();
+            Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Settings", Items = { btnComps, btnBasis, btnOptions } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Scripts", Items = { btnScripts } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnTools } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Results", Items = { btnReports } });
+
+            btnClose.Click += (sender, e) => Close();
 
             btnObjects.Click += (sender, e) => {
                 var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl.Height };
@@ -102,9 +122,13 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-            var btnSolve = new ButtonToolItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
-
+           
             btnSolve.Click += (sender, e) => { FlowsheetObject.SolveFlowsheet(); };
+
+            this.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Keys.F5) FlowsheetObject.SolveFlowsheet();
+            };
 
             btnSave.Click += (sender, e) =>
             {
@@ -115,7 +139,7 @@ namespace DWSIM.UI.Forms
                 }
                 else
                 {
-                    btnSaveAs.OnClick(new EventArgs());
+                    btnSaveAs.PerformClick();
                 }
 
             };
@@ -134,23 +158,8 @@ namespace DWSIM.UI.Forms
                 }
 
             };
-
-            // create menu
-            ToolBar = new ToolBar();
-            if (Application.Instance.Platform.IsMac)
-            {
-                ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, btnSolve,
-                                           btnComps, btnBasis, btnObjects, btnTools, btnUtilities,
-                                           btnScripts, btnReports, btnOptions});
-            }
-            else
-            {
-                ToolBar.Items.AddRange(new ToolItem[] { btnSave, btnSaveAs, new SeparatorToolItem(), btnSolve, new SeparatorToolItem(),
-                                           btnComps, btnBasis, btnObjects, new SeparatorToolItem(), btnTools, btnUtilities,
-                                           btnScripts, btnReports, btnOptions});
-            }
-
-            var split = new Splitter();
+                     
+            var split = new Eto.Forms.Splitter();
             split.Panel1 = FlowsheetControl;
             split.Panel2 = SetupLogWindow();
             split.Orientation = Orientation.Vertical;
@@ -423,6 +432,22 @@ namespace DWSIM.UI.Forms
                     {
                         new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
                     }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust)
+                    {
+                        DWSIM.UI.Desktop.Editors.LogicalBlocks.AdjustEditor.Populate(obj, cont);
+                    }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
+                    {
+                        DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
+                    }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Recycle)
+                    {
+                        DWSIM.UI.Desktop.Editors.LogicalBlocks.RecycleEditor.Populate(obj, cont);
+                    }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle)
+                    {
+                        DWSIM.UI.Desktop.Editors.LogicalBlocks.EnergyRecycleEditor.Populate(obj, cont);
+                    }
                     else
                     {
                         new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
@@ -437,13 +462,20 @@ namespace DWSIM.UI.Forms
                         cont3.Tag = "Thermal Profile";
                         new PipeThermalProfile(obj, cont3);
                         var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new[] { cont, cont2, cont3 });
-                        form.ShowInTaskbar = false;
+                        form.Show();
+                        form.Width += 1;
+                    }
+                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
+                    {
+                        cont.Tag = "General";
+                        var scripteditor = new TextArea() {Text = ((CustomUO)obj).ScriptText, Wrap = false, AcceptsReturn = true, AcceptsTab = true, SpellCheck = false, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize)};
+                        scripteditor.Tag = "Python Script";
+                        var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, scripteditor });
                         form.Show();
                         form.Width += 1;
                     }
                     else {
                         var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);
-                        form.ShowInTaskbar = false;
                         form.Show();
                         form.Width += 1;                    
                     }

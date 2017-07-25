@@ -186,15 +186,25 @@ Label_00CC:
 
         End Function
 
-        Public Shared Function InitializeFlowsheet(fpath As String, form As IFlowsheet) As IFlowsheetBag
+        Public Shared Function InitializeFlowsheet(fpath As String, form As IFlowsheet) As IFlowsheet
             If Path.GetExtension(fpath).ToLower.Equals(".dwxml") Then
-                Return InitializeFlowsheetInternal(XDocument.Load(fpath), form)
+                If GlobalSettings.Settings.OldUI Then
+                    Return InitializeFlowsheetInternal(XDocument.Load(fpath), form)
+                Else
+                    form.LoadFromXML(XDocument.Load(fpath))
+                    Return form
+                End If
             Else 'dwxmz
-                Return InitializeFlowsheetInternal(XDocument.Load(ExtractXML(fpath)), form)
+                If GlobalSettings.Settings.OldUI Then
+                    Return InitializeFlowsheetInternal(XDocument.Load(ExtractXML(fpath)), form)
+                Else
+                    form.LoadFromXML(XDocument.Load(ExtractXML(fpath)))
+                    Return form
+                End If
             End If
         End Function
 
-        Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet) As IFlowsheetBag
+        Public Shared Function InitializeFlowsheet(compressedstream As MemoryStream, form As IFlowsheet) As IFlowsheet
             Using decompressedstream As New IO.MemoryStream
                 compressedstream.Position = 0
                 Using gzs As New IO.BufferedStream(New Compression.GZipStream(compressedstream, Compression.CompressionMode.Decompress, True), 64 * 1024)

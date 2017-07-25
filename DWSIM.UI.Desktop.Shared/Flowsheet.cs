@@ -41,7 +41,7 @@ namespace DWSIM.UI.Desktop.Shared
         {
             if (!supressmessages)
             {
-               Application.Instance.Invoke(() => FlowsheetForm.Invalidate());                
+                Application.Instance.Invoke(() => { if (FlowsheetForm != null) FlowsheetForm.Invalidate(); });                
             }
         }
 

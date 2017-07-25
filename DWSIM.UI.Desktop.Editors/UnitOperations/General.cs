@@ -19,6 +19,10 @@ using s = DWSIM.UI.Shared.Common;
 using Eto.Drawing;
 
 using StringResources = DWSIM.UI.Desktop.Shared.StringArrays;
+using System.Diagnostics;
+using System.IO;
+
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -72,8 +76,7 @@ namespace DWSIM.UI.Desktop.Editors
                     SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
                 });
             }
-
-
+            
             var flashalgos = SimObject.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
             flashalgos.Insert(0, "Default");
 
@@ -1764,8 +1767,8 @@ namespace DWSIM.UI.Desktop.Editors
                                 break;
                         }
                     });
-                    s.CreateAndAddDescriptionRow(container,
-                                                 SimObject.GetPropertyDescription("Calculation Mode"));
+                    s.CreateAndAddDescriptionRow(container, SimObject.GetPropertyDescription("Calculation Mode"));
+                    s.CreateAndAddDropDownRow(container, "Pressure Drop Calculation Model", new List<string>() { "Beggs & Brill", "Lockhart & Martinelli", "Petalas & Aziz" }, (int)pipe.SelectedFlowPackage, (sender, e) => pipe.SelectedFlowPackage = (FlowPackage)sender.SelectedIndex);
                     s.CreateAndAddTextBoxRow(container, nf, "Outlet Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, pipe.OutletPressure),
                                 (TextBox arg3, EventArgs ev) =>
                                 {
@@ -1878,20 +1881,110 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Separation Temperature"));
                     break;
-                case ObjectType.DistillationColumn:
-                    //var editor = new DistillationColumnEditorView(this.Context, (DistillationColumn)SimObject);
-                    //var ll = (LinearLayout)FindViewById(Resource.IdEditors.inputPropertiesContainer);
-                    //ll.AddView(editor);
+                case ObjectType.CustomUO:
+                    var scriptuo = (CustomUO)SimObject; 
+                    s.CreateAndAddLabelRow(container, "Python Engine");
+                    s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET (Python 2.7)" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
                     break;
-                case ObjectType.AbsorptionColumn:
-                    //var editor2 = new AbsColumnEditorView(this.Context, (AbsorptionColumn)SimObject);
-                    //var ll2 = (LinearLayout)FindViewById(Resource.IdEditors.inputPropertiesContainer);
-                    //ll2.AddView(editor2);
+                case ObjectType.ExcelUO:
+                    var exceluo = (ExcelUO)SimObject; 
+                    s.CreateAndAddLabelRow(container, "Spreadsheet File");
+                    TextBox tbox = null;
+                    tbox = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Path", exceluo.Filename, "Search", null, (sender, e) => exceluo.Filename = sender.Text, (sender, e) => {
+                        var searchdialog = new OpenFileDialog() { Title = "Search", FileName = exceluo.Filename, MultiSelect = false };
+                        if (searchdialog.ShowDialog(container) == DialogResult.Ok)
+                        {
+                            tbox.Text = searchdialog.FileName;
+                        }
+                    });
+                    s.CreateAndAddButtonRow(container, "Edit Spreadsheet", null, (sender, e) => {
+                        if (!DWSIM.GlobalSettings.Settings.IsRunningOnMono()) {
+                            Process.Start(exceluo.Filename);
+                        } else {
+                            Process.Start(new ProcessStartInfo("xdg-open", exceluo.Filename) { UseShellExecute = false });
+                        }
+                    });
+                    s.CreateAndAddButtonRow(container, "Create New Spreadsheet", null, (sender, e) =>
+                    {
+                        var OpenFileDialog1 = new OpenFileDialog();
+                        OpenFileDialog1.Title = "New Spreadsheet";
+                        OpenFileDialog1.Filters.Add(new FileDialogFilter("Spreadsheet files", new string[]{"*.xlsx","*.xls","*.ods"}));
+                        OpenFileDialog1.CheckFileExists = false;
+                        OpenFileDialog1.Directory = new Uri(Path.GetDirectoryName(exceluo.Filename));
+
+                        if (OpenFileDialog1.ShowDialog(container) == DialogResult.Ok)
+                        {
+                            string str = OpenFileDialog1.FileName;
+                            if (Path.GetExtension(str).ToLower() == ".ods")
+                            {
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "TemplateExcelUO.ods", str);
+                            }
+                            else if (Path.GetExtension(str).ToLower() == ".xls")
+                            {
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "TemplateExcelUO.xls", str);
+                            }
+                            else
+                            {
+                                File.Copy(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "TemplateExcelUO.xlsx", str);
+                            }
+                            tbox.Text = str;
+                            exceluo.ParamsLoaded = false;
+                        }
+                    });
+                    exceluo.ReadExcelParams();
+                    s.CreateAndAddLabelRow(container, "Input Parameters");
+                    foreach (var par in exceluo.InputParams.Values)
+                    {
+                        s.CreateAndAddTextBoxRow(container, nf, par.Name + " (" + par.Unit + ")", par.Value, (sender, e) => { if (sender.Text.IsValidDouble()) par.Value = sender.Text.ToDoubleFromCurrent(); });
+                    }
                     break;
-                case ObjectType.OT_Adjust:
-                    //var editor3 = new AdjustEditorView(this.Context, (Adjust)SimObject);
-                    //var ll3 = (LinearLayout)FindViewById(Resource.IdEditors.inputPropertiesContainer);
-                    //ll3.AddView(editor3);
+                case ObjectType.Filter:
+                    var filter = (Filter)SimObject;
+                    s.CreateAndAddDropDownRow(container, "Calculation Mode", new List<string> { "Sizing", "Evaluation" }, (int)filter.CalcMode, (sender, e) => filter.CalcMode  = (Filter.CalculationMode)sender.SelectedIndex);
+                    s.CreateAndAddTextBoxRow(container, nf, "Medium Resistance (" + su.mediumresistance + ")", cv.ConvertFromSI(su.mediumresistance, filter.FilterMediumResistance), (sender, e) => { if (sender.Text.IsValidDouble()) filter.FilterMediumResistance = cv.ConvertToSI(su.mediumresistance, sender.Text.ToDoubleFromCurrent()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Cake Resistance (" + su.mediumresistance + ")", cv.ConvertFromSI(su.mediumresistance, filter.SpecificCakeResistance), (sender, e) => { if (sender.Text.IsValidDouble()) filter.SpecificCakeResistance = cv.ConvertToSI(su.mediumresistance, sender.Text.ToDoubleFromCurrent()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Cycle Time (" + su.time + ")", cv.ConvertFromSI(su.time, filter.FilterCycleTime), (sender, e) => { if (sender.Text.IsValidDouble()) filter.FilterCycleTime = cv.ConvertToSI(su.time, sender.Text.ToDoubleFromCurrent()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Total Filtering Area (" + su.area + ")", cv.ConvertFromSI(su.area, filter.TotalFilterArea), (sender, e) => { if (sender.Text.IsValidDouble()) filter.TotalFilterArea = cv.ConvertToSI(su.area, sender.Text.ToDoubleFromCurrent()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Pressure Drop (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, filter.PressureDrop), (sender, e) => { if (sender.Text.IsValidDouble()) filter.PressureDrop = cv.ConvertToSI(su.deltaP, sender.Text.ToDoubleFromCurrent()); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Cake Humidity (%)", filter.CakeRelativeHumidity, (sender, e) => { if (sender.Text.IsValidDouble()) filter.CakeRelativeHumidity = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Submerged Fraction", filter.SubmergedAreaFraction, (sender, e) => { if (sender.Text.IsValidDouble()) filter.SubmergedAreaFraction = sender.Text.ToDoubleFromCurrent(); });
+                    break;
+                case ObjectType.FlowsheetUO:
+                    var fsuo = (Flowsheet)SimObject; 
+                    TextBox tbox2 = null;
+                    tbox2 = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Flowsheet Path", fsuo.SimulationFile, "Search", null, (sender, e) => fsuo.SimulationFile = sender.Text, (sender, e) =>
+                    {
+                        var searchdialog = new OpenFileDialog() { Title = "Search", FileName = fsuo.SimulationFile, MultiSelect = false };
+                        if (searchdialog.ShowDialog(container) == DialogResult.Ok)
+                        {
+                            tbox2.Text = searchdialog.FileName;
+                        }
+                    });
+                    s.CreateAndAddCheckBoxRow(container, "Initialize on Load", fsuo.InitializeOnLoad, (sender, e) => fsuo.InitializeOnLoad = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddCheckBoxRow(container, "Update Process Data when Saving", fsuo.UpdateOnSave, (sender, e) => fsuo.UpdateOnSave = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddCheckBoxRow(container, "Redirect Flowsheet Calculator Messages", fsuo.RedirectOutput, (sender, e) => fsuo.RedirectOutput = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddButtonRow(container, "Open Control Panel", null, (sender, e) => {
+                        var editor = new DWSIM.UnitOperations.EditingForm_Flowsheet_Editor { fsuo = fsuo };
+                        editor.Show();
+                    });
+                    s.CreateAndAddLabelRow(container, "Linked Input Variables");
+                    foreach (var item in fsuo.InputParams) 
+                    {
+	                    if (fsuo.Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID)) {
+                            var name = fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].GraphicObject.Tag + ", " + fsuo.GetFlowsheet().GetTranslatedString(item.Value.ObjectProperty);
+                            var value = (double)fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].GetPropertyValue(item.Value.ObjectProperty, su);
+                            var units = fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].GetPropertyUnit(item.Value.ObjectProperty, su);
+                            s.CreateAndAddTextBoxRow(container, nf, name + " (" + units + ")", value, (sender, e) => {
+                                if (sender.Text.IsValidDouble()) {
+                                    fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].SetPropertyValue(item.Value.ObjectProperty, sender.Text.ToDoubleFromCurrent(), su);
+                                }; 
+                            });
+                        }
+                    }
+                    break;
+                case ObjectType.Tank:
+                    var tank = (Tank)SimObject;
+                    s.CreateAndAddTextBoxRow(container, nf, "Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, tank.Volume), (sender, e) => { if (sender.Text.IsValidDouble()) tank.Volume = cv.ConvertToSI(su.volume, sender.Text.ToDoubleFromCurrent()); });
                     break;
             }
         }

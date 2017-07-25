@@ -83,10 +83,10 @@ namespace DWSIM.UI.Desktop.Editors
             var spinnerMat = container.CreateAndAddDropDownRow("Material", materials, Array.IndexOf(materials.ToArray(), section.Material), (sender, e) => section.Material = materials[sender.SelectedIndex]);
 
             var txtIncrements = container.CreateAndAddTextBoxRow("N0", "Increments", section.Incrementos, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Incrementos = int.Parse(sender.Text.ToString());});
-            var txtLength = container.CreateAndAddTextBoxRow(nf, "Length" + " (" + su.distance + ")", section.Comprimento, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Comprimento = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
-            var txtElevation = container.CreateAndAddTextBoxRow(nf, "Elevation" + " (" + su.distance + ")", section.Elevacao, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Elevacao = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
-            var txtED = container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", section.DE, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DE = cv.ConvertToSI(su.diameter, double.Parse(sender.Text.ToString())); });
-            var txtID = container.CreateAndAddTextBoxRow(nf, "Internal Diameter" + " (" + su.diameter + ")", section.DI, (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DI = cv.ConvertToSI(su.diameter, double.Parse(sender.Text.ToString())); });
+            var txtLength = container.CreateAndAddTextBoxRow(nf, "Length" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Comprimento), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Comprimento = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
+            var txtElevation = container.CreateAndAddTextBoxRow(nf, "Elevation" + " (" + su.distance + ")", cv.ConvertFromSI(su.distance, section.Elevacao), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.Elevacao = cv.ConvertToSI(su.distance, double.Parse(sender.Text.ToString())); });
+            var txtED = container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, section.DE), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DE = cv.ConvertToSI(su.diameter, double.Parse(sender.Text.ToString())); });
+            var txtID = container.CreateAndAddTextBoxRow(nf, "Internal Diameter" + " (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, section.DI), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DI = cv.ConvertToSI(su.diameter, double.Parse(sender.Text.ToString())); });
      
         }
     }

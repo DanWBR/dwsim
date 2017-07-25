@@ -19,7 +19,7 @@ namespace DWSIM.UI.Desktop
 
             Settings.CultureInfo = "en";
             Settings.EnableGPUProcessing = false;
-
+            Settings.OldUI = false;
             Settings.LoadSettings("dwsim_newui.ini");
 
             if (Settings.RunningPlatform() == Settings.Platform.Windows)

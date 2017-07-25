@@ -50,8 +50,8 @@ namespace DWSIM.UI.Shared
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
-                ClientSize = new Size(width, height)
-                //ShowInTaskbar = false,
+                ClientSize = new Size(width, height),
+                ShowInTaskbar = true
                 //Maximizable = false,
                 //Minimizable = false,
                 //Topmost = true,
@@ -59,16 +59,20 @@ namespace DWSIM.UI.Shared
             };
         }
 
-        public static Form GetDefaultTabbedForm(string title, int width, int height, DynamicLayout[] contents)
+        public static Form GetDefaultTabbedForm(string title, int width, int height, Control[] contents)
         {
 
             List<TabPage> tabs = new List<TabPage>();
 
             foreach (var content in contents)
             {
-                content.CreateAndAddEmptySpace();
-                content.EndVertical();
-                content.Width = width - content.Padding.Value.Left * 2 - content.Padding.Value.Right * 2;
+                if (content is DynamicLayout)
+                {
+                    var dyncontent = (DynamicLayout)content;
+                    dyncontent.CreateAndAddEmptySpace();
+                    dyncontent.EndVertical();
+                    dyncontent.Width = width - dyncontent.Padding.Value.Left * 2 - dyncontent.Padding.Value.Right * 2;
+                }
                 tabs.Add(new TabPage(new Scrollable { Content = content, Border = BorderType.None }) { Text = (string)content.Tag });
             }
 
@@ -76,8 +80,8 @@ namespace DWSIM.UI.Shared
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
                 Title = title,
-                ClientSize = new Size(width, height)
-                //ShowInTaskbar = false,
+                ClientSize = new Size(width, height),
+                ShowInTaskbar = true
                 //Maximizable = false,
                 //Minimizable = false,
                 //Topmost = true,
@@ -139,10 +143,12 @@ namespace DWSIM.UI.Shared
 
         }
 
-        public static void CreateAndAddLabelRow(this DynamicLayout container, String text)
+        public static Label CreateAndAddLabelRow(this DynamicLayout container, String text)
         {
-            container.AddRow(new TableRow(new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word }));
+            var label = new Label { Text = text, Font = SystemFonts.Bold(null, FontDecoration.None), Wrap = WrapMode.Word };
+            container.AddRow(new TableRow(label));
             container.CreateAndAddEmptySpace();
+            return label;
         }
 
         public static Label CreateAndAddLabelRow2(this DynamicLayout container, String text)
@@ -356,7 +362,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(txt, null, btn);
 
             container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
         
             return btn;
 
@@ -373,7 +379,7 @@ namespace DWSIM.UI.Shared
 
             var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
             var tbox = new TextBox { Text = textboxvalue };
-            var btn = new Button { Width = 50, Text = buttonlabel };
+            var btn = new Button { Width = 80, Text = buttonlabel };
 
             if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
 
@@ -385,7 +391,7 @@ namespace DWSIM.UI.Shared
             tr.Cells[2].ScaleWidth = true;
 
             container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
 
             return tbox;
 
@@ -408,7 +414,7 @@ namespace DWSIM.UI.Shared
 
             var tr = new TableRow(txt, GetPlaceHolderLabel(), null, btn, GetPlaceHolderLabel(), btn2);
             container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
             return tr;
 
         }
@@ -427,7 +433,7 @@ namespace DWSIM.UI.Shared
 
             var tr = new TableRow(null, btn, GetPlaceHolderLabel(), btn2);
             container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
             return tr;
 
         }
@@ -447,7 +453,7 @@ namespace DWSIM.UI.Shared
 
             var tr = new TableRow(txt, null, btn, GetPlaceHolderLabel(), btn2);
             container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
             return tr;
 
         }
@@ -464,7 +470,7 @@ namespace DWSIM.UI.Shared
             var tr = new TableRow(btn);
 
             container.AddRow(tr);
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
         
             return btn;
 
@@ -479,7 +485,7 @@ namespace DWSIM.UI.Shared
             if (command != null) check.CheckedChanged += (sender, e) => command.Invoke((CheckBox)sender, e);
 
             container.AddRow(new TableRow(check));
-            container.AddRow(new TableRow(new Label { Text = "", Height = 5 }));
+            container.CreateAndAddEmptySpace();
         
             return check;
         }

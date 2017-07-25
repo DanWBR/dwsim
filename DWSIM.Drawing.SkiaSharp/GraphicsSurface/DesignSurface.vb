@@ -613,14 +613,14 @@ Public Class GraphicsSurface
                         End If
                     Else
                         Select Case gObjFrom.ObjectType
-                            Case ObjectType.HeaterCooler, ObjectType.Cooler, ObjectType.Pipe, ObjectType.CompressorExpander, ObjectType.ShortcutColumn, ObjectType.DistillationColumn, ObjectType.AbsorptionColumn,
+                            Case ObjectType.Cooler, ObjectType.Pipe, ObjectType.Expander, ObjectType.ShortcutColumn, ObjectType.DistillationColumn, ObjectType.AbsorptionColumn,
                                 ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber, ObjectType.OT_EnergyRecycle, ObjectType.ComponentSeparator, ObjectType.SolidSeparator,
-                                ObjectType.Filter, ObjectType.Expander
+                                ObjectType.Filter, ObjectType.CustomUO, ObjectType.CapeOpenUO, ObjectType.FlowsheetUO
                                 GoTo 100
                             Case Else
                                 Throw New Exception("This connection is not allowed.")
                         End Select
-100:                    If gObjFrom.ObjectType <> ObjectType.DistillationColumn _
+100:                    If gObjFrom.ObjectType <> ObjectType.CapeOpenUO And gObjFrom.ObjectType <> ObjectType.CustomUO And gObjFrom.ObjectType <> ObjectType.DistillationColumn _
                             And gObjFrom.ObjectType <> ObjectType.AbsorptionColumn And gObjFrom.ObjectType <> ObjectType.OT_EnergyRecycle _
                             And gObjFrom.ObjectType <> ObjectType.RefluxedAbsorber And gObjFrom.ObjectType <> ObjectType.ReboiledAbsorber Then
                             If Not gObjFrom.EnergyConnector.IsAttached Then

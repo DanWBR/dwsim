@@ -155,6 +155,7 @@ namespace DWSIM.UI
 
             Task.Factory.StartNew(() =>
             {
+                form.FlowsheetObject.FilePath = path;
                 if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
                 {
                     form.FlowsheetObject.LoadZippedXML(path);
