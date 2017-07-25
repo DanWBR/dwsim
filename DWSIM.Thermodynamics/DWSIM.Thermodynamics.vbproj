@@ -514,6 +514,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
     <None Include="packages.config" />
     <Content Include="DWSIM.Thermodynamics-AddIn.dna">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

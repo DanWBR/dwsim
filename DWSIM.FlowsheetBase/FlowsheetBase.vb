@@ -1488,6 +1488,12 @@ Imports System.IO
                                   For Each cp As ConstantProperties In cpa
                                       If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
+                                  Dim chedl As New Databases.ChEDL_Thermo
+                                  chedl.Load()
+                                  cpa = chedl.Transfer().ToArray()
+                                  For Each cp As ConstantProperties In cpa
+                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                  Next
                                   AddPropPacks()
                                   AddFlashAlgorithms()
                                   AddSystemsOfUnits()

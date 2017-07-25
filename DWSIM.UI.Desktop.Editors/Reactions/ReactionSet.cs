@@ -48,7 +48,7 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddLabelRow("Reaction Active in Set / Reaction Name / Sequence #)");
 
             var compcontainer = new DynamicLayout();
-            compcontainer.BackgroundColor = new Eto.Drawing.Color(compcontainer.BackgroundColor, 0.7f);
+            compcontainer.BackgroundColor = Colors.White;
 
             Double val;
 

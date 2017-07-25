@@ -11,6 +11,7 @@ using DWSIM.Thermodynamics.PropertyPackages;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
 using DWSIM.UI.Shared;
+using Eto.Drawing;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -35,8 +36,8 @@ namespace DWSIM.UI.Desktop.Editors
             rxcontainer = new DynamicLayout();
             rscontainer = new DynamicLayout();
 
-            rxcontainer.BackgroundColor = new Eto.Drawing.Color(rxcontainer.BackgroundColor, 0.7f);
-            rscontainer.BackgroundColor = new Eto.Drawing.Color(rscontainer.BackgroundColor, 0.7f);
+            rxcontainer.BackgroundColor = Colors.White;
+            rscontainer.BackgroundColor = Colors.White;
 
             if (flowsheet.ReactionSets.Count == 0) { flowsheet.ReactionSets.Add("DefaultSet", new ReactionSet("DefaultSet", "Default Set", "")); }
 

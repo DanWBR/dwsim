@@ -43,20 +43,23 @@ namespace DWSIM.UI.Shared
             };
         }
 
-        public static Form GetDefaultEditorForm(string title, int width, int height, TableLayout content)
+        public static Form GetDefaultEditorForm(string title, int width, int height, TableLayout content, bool scrollable)
         {
-            return new Form()
+            var form = new Form()
             {
                 Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
-                Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
                 Title = title,
                 ClientSize = new Size(width, height),
                 ShowInTaskbar = true
-                //Maximizable = false,
-                //Minimizable = false,
-                //Topmost = true,
-                //Resizable = true
             };
+            if (scrollable)
+            {
+                form.Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true };
+            }else{
+                form.Content = content;
+            }
+            return form;
+
         }
 
         public static Form GetDefaultTabbedForm(string title, int width, int height, Control[] contents)

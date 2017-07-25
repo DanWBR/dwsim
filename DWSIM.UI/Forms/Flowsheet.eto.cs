@@ -90,10 +90,9 @@ namespace DWSIM.UI.Forms
             };
 
             btnComps.Click += (sender, e) => {
-                var cont = UI.Shared.Common.GetDefaultContainer();
+                var cont = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 700, 500, cont);
-                form.ShowInTaskbar = false;
+                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 829, 500, cont, false);
                 form.Show();
                 form.Width += 1;
             };
@@ -107,7 +106,6 @@ namespace DWSIM.UI.Forms
                 cont2.Tag = "Reactions";
                 new DWSIM.UI.Desktop.Editors.ReactionsManager(FlowsheetObject, cont2);
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", 500, 500, new []{cont1, cont2});
-                form.ShowInTaskbar = false;
                 form.Show();
                 form.Width += 10;
             };
@@ -117,7 +115,6 @@ namespace DWSIM.UI.Forms
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
                 var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Settings", 500, 500, cont);
-                form.ShowInTaskbar = false;
                 form.Show();
                 form.Width += 1;
             };
@@ -488,7 +485,7 @@ namespace DWSIM.UI.Forms
                 var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
                 var container = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Results(obj, container);
-                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container);
+                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container, true);
                 form.ShowInTaskbar = false;
                 form.Show();
                 form.Width += 1;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.Thermodynamics.BaseClasses;
+using Eto.Drawing;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
 
@@ -16,11 +17,11 @@ namespace DWSIM.UI.Desktop.Editors
     {
 
         public IFlowsheet flowsheet;
-        public DynamicLayout container;
+        public TableLayout container;
 
         private ObservableCollection<CompoundItem> obslist = new ObservableCollection<CompoundItem>();
 
-        public Compounds(IFlowsheet fs, DynamicLayout layout)
+        public Compounds(IFlowsheet fs, TableLayout layout)
 		{
             flowsheet = fs;
             container = layout;
@@ -35,19 +36,28 @@ namespace DWSIM.UI.Desktop.Editors
             var newlist = new List<ICompoundConstantProperties>();
             var listitems = new List<CheckBox>();
 
-            s.CreateAndAddLabelRow(container, "Simulation Compounds");
+            container.Padding = 10;
 
-            s.CreateAndAddDescriptionRow(container, "Check compounds to add them to the simulation, uncheck to remove. You may have to double-click on the checkbox in order to change its state (checked/unchecked).");
+            container.Spacing = new Size(10, 10);
 
-            s.CreateAndAddDescriptionRow(container, "Number of available compounds: " + complist.Count().ToString());
+            container.Rows.Add(new TableRow(new Label { Text = "Simulation Compounds", Font = SystemFonts.Bold() }));
 
-            s.CreateAndAddStringEditorRow2(container, "Search", "Search by Name, Formula, CAS ID or Database", "", (sender, e) => { 
+            container.Rows.Add(new TableRow(new Label { Text = "Check compounds to add them to the simulation, uncheck to remove. You may have to double-click on the checkbox in order to change its state (checked/unchecked).", Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
+
+            container.Rows.Add(new TableRow(new Label { Text = "Number of compounds available: " + complist.Count().ToString(), Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
+
+            var searchcontainer = s.GetDefaultContainer();
+            searchcontainer.Padding = Padding.Empty;
+
+            s.CreateAndAddStringEditorRow2(searchcontainer, "Search", "Search by Name, Formula, CAS ID or Database", "", (sender, e) => { 
                 newlist = complist.Where((x) => x.Name.ToLower().Contains(sender.Text.ToLower()) ||
                                     x.Formula.ToLower().Contains(sender.Text.ToLower()) ||
                                     x.CAS_Number.ToLower().Contains(sender.Text.ToLower()) ||
                                     x.CurrentDB.ToLower().Contains(sender.Text.ToLower())).OrderBy((x) => x.Name).ToList();
                 Application.Instance.AsyncInvoke(() => UpdateList(newlist));
             });
+
+            container.Rows.Add(new TableRow(searchcontainer));
 
             UpdateList(complist);
 
@@ -71,13 +81,13 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
-            var listcontainer = new GridView { DataStore = obslist };
+            var listcontainer = new GridView { DataStore = obslist, RowHeight = 20 };
 
             var col2 = new GridColumn
             {
                 DataCell = new CheckBoxCell { Binding = Binding.Property<CompoundItem, bool?>(r => r.Check) },
                 HeaderText = "Added",
-                Editable = true,
+                Editable = true, 
             };
             col2.AutoSize = true;
 
@@ -117,9 +127,8 @@ namespace DWSIM.UI.Desktop.Editors
             col1c.AutoSize = true;
             listcontainer.Columns.Add(col1c);
 
-            var scroll = new Scrollable { Content = listcontainer, Height = 315 };
-            
-            s.CreateAndAddControlRow(container, scroll);
+            container.Rows.Add(new TableRow(new Scrollable { Content = listcontainer, Border = BorderType.None }));
+
         }
 
         void UpdateCompound(String name)

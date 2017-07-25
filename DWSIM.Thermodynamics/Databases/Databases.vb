@@ -2008,4 +2008,30 @@ Namespace Databases
 
     End Class
 
+
+    Public Class ChEDL_Thermo
+
+        Dim contents As String = ""
+
+        Public Sub Load()
+
+
+            Using filestr As Stream = Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.chedl_thermo.json")
+                Using t As New StreamReader(filestr)
+                    contents = t.ReadToEnd()
+                End Using
+            End Using
+
+        End Sub
+
+        Public Function Transfer() As List(Of Thermodynamics.BaseClasses.ConstantProperties)
+
+            Return Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Thermodynamics.BaseClasses.ConstantProperties))(contents)
+
+        End Function
+
+
+
+    End Class
+
 End Namespace
