@@ -33,6 +33,8 @@ Namespace SpecialOps
 
         Inherits UnitOperations.SpecialOpBaseClass
 
+        Implements ISpec
+
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Spec
 
         Protected m_SourceObjectData As New SpecialOps.Helpers.SpecialOpObjectInfo

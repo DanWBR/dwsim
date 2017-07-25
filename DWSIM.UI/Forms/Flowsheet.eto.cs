@@ -92,7 +92,7 @@ namespace DWSIM.UI.Forms
             btnComps.Click += (sender, e) => {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 500, 500, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 700, 500, cont);
                 form.ShowInTaskbar = false;
                 form.Show();
                 form.Width += 1;

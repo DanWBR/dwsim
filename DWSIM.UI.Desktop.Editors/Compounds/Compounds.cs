@@ -30,9 +30,9 @@ namespace DWSIM.UI.Desktop.Editors
         void Initialize()
         {
 
-            var complist = flowsheet.AvailableCompounds.Values.ToList().OrderBy(x => x.Name);
+            var complist = flowsheet.AvailableCompounds.Values.ToList().OrderBy(x => x.Name).ToList();
 
-            var newlist = new List<string>();
+            var newlist = new List<ICompoundConstantProperties>();
             var listitems = new List<CheckBox>();
 
             s.CreateAndAddLabelRow(container, "Simulation Compounds");
@@ -41,43 +41,38 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "Number of available compounds: " + complist.Count().ToString());
 
-            s.CreateAndAddStringEditorRow2(container, "Search", "Search by Name, CAS ID or Formula", "", (sender, e) => { 
+            s.CreateAndAddStringEditorRow2(container, "Search", "Search by Name, Formula, CAS ID or Database", "", (sender, e) => { 
                 newlist = complist.Where((x) => x.Name.ToLower().Contains(sender.Text.ToLower()) ||
                                     x.Formula.ToLower().Contains(sender.Text.ToLower()) ||
-                                    x.CurrentDB.ToLower().Contains(sender.Text.ToLower())).OrderBy((x) => x.Name.Length).Select((x) => x.Name).ToList();
+                                    x.CAS_Number.ToLower().Contains(sender.Text.ToLower()) ||
+                                    x.CurrentDB.ToLower().Contains(sender.Text.ToLower())).OrderBy((x) => x.Name).ToList();
                 Application.Instance.AsyncInvoke(() => UpdateList(newlist));
             });
 
-            UpdateList(complist.Select((x) => x.Name).ToList());
+            UpdateList(complist);
 
         }
 
-        void UpdateList(List<string> list)
+        void UpdateList(List<ICompoundConstantProperties> list)
         {
             obslist.Clear();
-            foreach (string cp in list)
+            foreach (var cp in list)
             {
-                if (flowsheet.SelectedCompounds.ContainsKey(cp))
+                if (flowsheet.SelectedCompounds.ContainsKey(cp.Name))
                 {
-                    obslist.Add(new CompoundItem { Text = cp, Check = true });
+                    obslist.Add(new CompoundItem { Text = cp.Name, Formula = cp.Formula, CAS = cp.CAS_Number, Database = cp.OriginalDB, Check = true });
                 }
             }
-            foreach (string cp in list)
+            foreach (var cp in list)
             {
-                if (!flowsheet.SelectedCompounds.ContainsKey(cp))
+                if (!flowsheet.SelectedCompounds.ContainsKey(cp.Name))
                 {
-                    obslist.Add(new CompoundItem { Text = cp, Check = false });
+                    obslist.Add(new CompoundItem { Text = cp.Name, Formula = cp.Formula, CAS = cp.CAS_Number, Database = cp.OriginalDB, Check = false });
                 }
             }
 
             var listcontainer = new GridView { DataStore = obslist };
-            var col1 = new GridColumn
-            {
-                DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Text) },
-                HeaderText = "Compound"
-            };
-            col1.AutoSize = true;
-            listcontainer.Columns.Add(col1);
+
             var col2 = new GridColumn
             {
                 DataCell = new CheckBoxCell { Binding = Binding.Property<CompoundItem, bool?>(r => r.Check) },
@@ -86,12 +81,42 @@ namespace DWSIM.UI.Desktop.Editors
             };
             col2.AutoSize = true;
 
-            listcontainer.CellEdited += (sender, e) => {
+            listcontainer.CellEdited += (sender, e) =>
+            {
                 UpdateCompound(((CompoundItem)e.Item).Text);
             };
 
             listcontainer.Columns.Add(col2);
-            
+
+            var col1 = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Text) },
+                HeaderText = "Compound"
+            };
+            col1.AutoSize = true;
+            listcontainer.Columns.Add(col1);
+            var col1a = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Formula) },
+                HeaderText = "Formula"
+            };
+            col1a.AutoSize = true;
+            listcontainer.Columns.Add(col1a);
+            var col1b = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.CAS) },
+                HeaderText = "CAS Number"
+            };
+            col1b.AutoSize = true;
+            listcontainer.Columns.Add(col1b);
+            var col1c = new GridColumn
+            {
+                DataCell = new TextBoxCell { Binding = Binding.Property<CompoundItem, string>(r => r.Database) },
+                HeaderText = "Database"
+            };
+            col1c.AutoSize = true;
+            listcontainer.Columns.Add(col1c);
+
             var scroll = new Scrollable { Content = listcontainer, Height = 315 };
             
             s.CreateAndAddControlRow(container, scroll);
@@ -132,6 +157,12 @@ namespace DWSIM.UI.Desktop.Editors
     {
     
         public string Text { get; set; }
+
+        public string Formula { get; set; }
+
+        public string CAS { get; set; }
+
+        public string Database { get; set; }
 
         public bool Check { get; set; }
 
