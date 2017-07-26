@@ -43,32 +43,32 @@ namespace DWSIM.UI.Desktop.Editors
             var grid = new GridView { DataStore = rowlist, RowHeight = 20 };
 
             grid.Columns.Add(new GridColumn { HeaderText = "#", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = true});
-            grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "C", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.C) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "D", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.D) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "E", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.E) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "F", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.F) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "G", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.G) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "H", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.H) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "I", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.I) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "J", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.J) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "K", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.K) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "L", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.L) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "M", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.M) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "N", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.N) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "O", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.O) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "P", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.P) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "Q", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Q) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "R", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.R) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "S", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.S) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "T", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.T) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "U", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.U) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "V", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.V) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "W", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.W) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "X", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.X) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "Y", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Y) }, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "Z", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Z) }, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "C", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.C) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "D", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.D) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "E", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.E) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "F", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.F) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "G", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.G) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "H", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.H) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "I", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.I) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "J", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.J) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "K", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.K) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "L", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.L) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "M", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.M) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "N", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.N) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "O", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.O) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "P", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.P) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "Q", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Q) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "R", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.R) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "S", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.S) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "T", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.T) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "U", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.U) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "V", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.V) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "W", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.W) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "X", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.X) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "Y", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Y) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "Z", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Z) }, AutoSize = false, Editable = true, Width = 80 });
 
             grid.AllowColumnReordering = false;
             grid.AllowMultipleSelection = false;
@@ -97,7 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
-        class RowItem
+        public class RowItem
         {
             public string index { get; set; }
             public string A { get; set; }
@@ -126,6 +126,37 @@ namespace DWSIM.UI.Desktop.Editors
             public string X { get; set; }
             public string Y { get; set; }
             public string Z { get; set; }
+
+            public RowItem()
+            {
+                index = "";
+                A = "";
+                B = "";
+                C = "";
+                D = "";
+                E = "";
+                F = "";
+                G = "";
+                H = "";
+                I = "";
+                J = "";
+                K = "";
+                L = "";
+                M = "";
+                N = "";
+                O = "";
+                P = "";
+                Q = "";
+                R = "";
+                S = "";
+                T = "";
+                U = "";
+                V = "";
+                W = "";
+                X = "";
+                Y = "";
+                Z = "";
+            }
         }
 
     }

@@ -146,9 +146,10 @@ namespace DWSIM.UI.Desktop.Mac
             if (theEvent.ClickCount == 2) {
                 fsurface.ZoomAll((int)this.Bounds.Width, (int)this.Bounds.Height);
             }
-            else { 
-                _lastTouchX = theEvent.LocationInWindow.X;
-                _lastTouchY = Superview.Bounds.Height - theEvent.LocationInWindow.Y;
+            else {
+                _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+                //_lastTouchY = Superview.Bounds.Height - theEvent.LocationInWindow.Y;
+                _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
                 fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
             }
             this.NeedsDisplay = true;
@@ -162,8 +163,9 @@ namespace DWSIM.UI.Desktop.Mac
         public override void MouseDragged(NSEvent theEvent)
         {
             base.MouseDragged(theEvent);
-            _lastTouchX = theEvent.LocationInWindow.X;
-            _lastTouchY = Superview.Bounds.Height - theEvent.LocationInWindow.Y;
+            _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+            //_lastTouchY = Superview.Bounds.Height - theEvent.LocationInWindow.Y;
+            _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.NeedsDisplay = true;
         }
