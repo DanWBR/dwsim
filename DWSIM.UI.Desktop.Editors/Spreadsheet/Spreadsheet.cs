@@ -278,8 +278,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             var cellcp = s.GetDefaultContainer();
 
-            var txtcell = new TextBox { Width = 80, ReadOnly = true };
-            var txttype = new TextBox { Width = 100, ReadOnly = true };
+            var txtcell = new TextBox { Width = 80, ReadOnly = true};
+            var txttype = new TextBox { Width = 100, ReadOnly = true};
             var txtformula = new TextBox() { PlaceholderText = "To enter a formula,  type '=' followed by the math expression using cell addresses as variables and press ENTER to commit changes." };
             var btnImport = new Button { Text = "Import" };
             var btnExport = new Button { Text = "Export" };
@@ -287,13 +287,15 @@ namespace DWSIM.UI.Desktop.Editors
             var btnEvaluateAll = new Button { Text = "Evaluate All" };
 
             var tr = new TableRow(new Label { Text = "Selected Cell", VerticalAlignment = VerticalAlignment.Center }, txtcell,
-                                    new Label { Text = "Status", VerticalAlignment = VerticalAlignment.Center }, txttype,
+                                    new Label { Text = "Type", VerticalAlignment = VerticalAlignment.Center }, txttype,
                                     new Label { Text = "Contents", VerticalAlignment = VerticalAlignment.Center }, txtformula,
                                     btnImport, btnExport, btnEvaluate, btnEvaluateAll);
 
             tr.Cells[5].ScaleWidth = true;
-            var tb = new TableLayout { Spacing = new Size(5, 5) };
+
+            var tb = new TableLayout {Spacing = new Size(5, 5) };
             tb.Rows.Add(tr);
+            
             cellcp.CreateAndAddControlRow(tb);
 
             table.Rows.Add(new TableRow(cellcp));
