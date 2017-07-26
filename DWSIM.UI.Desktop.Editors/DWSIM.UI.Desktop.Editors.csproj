@@ -37,6 +37,10 @@
     <Reference Include="CapeOpen">
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
     </Reference>
+    <Reference Include="Ciloci.Flee, Version=0.9.26.0, Culture=neutral, PublicKeyToken=c8526a021ef298ed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
+    </Reference>
     <Reference Include="Eto, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Forms.2.3.0\lib\net40\Eto.dll</HintPath>
       <Private>True</Private>

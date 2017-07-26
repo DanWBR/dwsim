@@ -717,7 +717,6 @@
     <Compile Include="Utilities\LLE Envelope\FormLLEDiagram.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Objects\Classes\Spreadsheet\SpreadsheetCell.vb" />
     <Compile Include="Forms\Flowsheet Components\SpreadsheetForm.Designer.vb">
       <DependentUpon>SpreadsheetForm.vb</DependentUpon>
     </Compile>

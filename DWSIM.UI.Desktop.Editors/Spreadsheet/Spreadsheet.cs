@@ -22,23 +22,219 @@ using System.IO;
 
 using DWSIM.ExtensionMethods;
 using DWSIM.UI.Shared;
+using s = DWSIM.UI.Shared.Common;
 using System.Collections.ObjectModel;
+
+using global::DWSIM.SharedClasses.Spreadsheet;
+using Ciloci.Flee;
 
 namespace DWSIM.UI.Desktop.Editors
 {
     public class Spreadsheet
     {
 
-        public static GridView GetGrid(IFlowsheet obj)
+        private IGenericExpression<Object> ExprObj ;
+        private ExpressionContext ExprContext = new ExpressionContext();
+
+        public string OldValue = "";
+        public object OldTag;
+        public string NewValue = "";
+        public object NewTag;
+
+        protected SpreadsheetCellParameters ccparams;
+        protected RowItem rowitem;
+        string selectedcell = "";
+
+        public object[,] dt1 = new object[100, 26];
+        public object[,] dt2 = new object[100, 26];
+
+        object oldval;
+        object newval;
+
+        private IFlowsheet flowsheet;
+
+        private GridView grid;
+
+        private ObservableCollection<RowItem> rowlist;
+        private bool loaded;
+
+        public Spreadsheet(IFlowsheet fs)
+        {
+            flowsheet = fs;
+        }
+
+        public void WriteAll()
         {
 
-            var rowlist = new ObservableCollection<RowItem>();
+            var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
 
-            var grid = new GridView { DataStore = rowlist, RowHeight = 20 };
+            foreach (var row in rowlist)
+            {
+                foreach (var cellparam in row.CellParams.Values)
+                {
+                    if ((cellparam != null))
+                    {
+                        if (cellparam.CellType == SharedClasses.Spreadsheet.VarType.Write)
+                        {
+                            var obj = flowsheet.SimulationObjects[ccparams.ObjectID];
+                            obj.SetPropertyValue(ccparams.PropID, cellparam.CurrVal, su);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        public void EvaluateAll(SpreadsheetCellParameters cell = null)
+        {
+            if (cell == null)
+            {
+                try
+                {
+                    if ((flowsheet != null))
+                    {
+                        if (GlobalSettings.Settings.CalculatorActivated)
+                        {
+                            foreach (var row in rowlist)
+                            {
+                                foreach (var cellparam in row.CellParams.Values)
+                                {
+                                    ccparams = cellparam;
+                                    if ((ccparams != null))
+                                    {
+                                        if (!string.IsNullOrEmpty(ccparams.Expression))
+                                        {
+                                            ccparams.PrevVal = ccparams.CurrVal;
+                                            UpdateValue(ccparams);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+            else
+            {
+                ccparams = cell;
+                if ((ccparams != null))
+                {
+                    if (!string.IsNullOrEmpty(ccparams.Expression))
+                    {
+                        ccparams.PrevVal = cell.CurrVal;
+                        UpdateValue(ccparams);
+                    }
+                }
+            }
+
+
+        }
+
+        public void UpdateValue(SpreadsheetCellParameters cell)
+        {
+
+            var expression = cell.Expression;
+
+            if (this.ExprContext == null)
+            {
+                this.ExprContext = new Ciloci.Flee.ExpressionContext();
+                this.ExprContext.Imports.AddType(typeof(System.Math));
+                this.ExprContext.Imports.AddType(typeof(System.String));
+            }
+
+            if (this.loaded == false) DefineVariables();
+
+            GetValues();
+
+            try
+            {
+                ccparams = cell;
+                if (!string.IsNullOrEmpty(expression))
+                {
+                    if (expression.Substring(0, 1) == "=")
+                    {
+                        this.ExprContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture;
+                        this.ExprContext.ParserOptions.FunctionArgumentSeparator = ';';
+                        this.ExprObj = this.ExprContext.CompileGeneric<object>(expression.Substring(1));
+                        cell.CurrVal = ExprObj.Evaluate().ToString();
+                    }
+                    else if (expression.Substring(0, 1) == ":")
+                    {
+                        string[] str = null;
+                        string obj = null;
+                        string prop = null;
+                        str = expression.Split(new char[] { ',' });
+                        obj = str[0].Substring(1);
+                        ccparams.ObjectID = obj;
+                        if (str.Length < 3)
+                        {
+                            prop = str[1];
+                        }
+                        else
+                        {
+                            prop = str[1] + "," + str[2];
+                        }
+                        ccparams.PropID = prop;
+                        cell.CurrVal = flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem).ToString();
+                        cell.ToolTipText = ccparams.ToolTipText;
+                    }
+                    else {
+                        cell.CurrVal = expression;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                cell.CurrVal = this.OldValue;
+                ccparams.ToolTipText = "";
+                flowsheet.ShowMessage(flowsheet.GetTranslatedString("Invalidexpressiononcell") + " " + GetCellString(cell) + " - " + ex.Message, IFlowsheet.MessageType.GeneralError);
+            }
+            
+        }
+
+        public string GetCellString(SpreadsheetCellParameters cell)
+        {
+            return cell.CellString;
+        }
+
+        public void DefineVariables()
+        {
+            foreach (var row in rowlist)
+            {
+                foreach (var ce in row.CellParams.Values)
+                {
+                    this.ExprContext.Variables.DefineVariable(this.GetCellString(ce), typeof(double));
+                }
+            }
+
+        }
+
+        public void GetValues()
+        {
+            foreach (var row in rowlist)
+            {
+                foreach (var ce in row.CellParams.Values)
+                {
+                    double val = 0;
+                    double.TryParse(ce.CurrVal, out val);
+                    this.ExprContext.Variables[this.GetCellString(ce)] = val;
+                }
+            }
+        }
+
+        public TableLayout GetSpreadsheet(IFlowsheet obj)
+        {
+
+            rowlist = new ObservableCollection<RowItem>();
+
+            grid = new GridView { DataStore = rowlist, RowHeight = 20 };
 
             if (GlobalSettings.Settings.RunningPlatform() != GlobalSettings.Settings.Platform.Windows)
             {
-                grid.Columns.Add(new GridColumn {HeaderText = "", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = false, Width = 50, Resizable = false});
+                grid.Columns.Add(new GridColumn { HeaderText = "", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = false, Width = 50, Resizable = false });
             }
             grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, AutoSize = false, Editable = true, Width = 80 });
             grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, AutoSize = false, Editable = true, Width = 80 });
@@ -75,88 +271,154 @@ namespace DWSIM.UI.Desktop.Editors
             int i;
             for (i = 0; i <= 50; i++)
             {
-                rowlist.Add(new RowItem { index = i.ToString() });
+                rowlist.Add(new RowItem((i + 1).ToString()));
             }
 
-            var ctxmenu = new ContextMenu();
+            var table = new TableLayout();
 
-            string selectedcell = "";            
+            var cellcp = s.GetDefaultContainer();
+
+            var txtcell = new TextBox { Width = 80, ReadOnly = true };
+            var txttype = new TextBox { Width = 100, ReadOnly = true };
+            var txtformula = new TextBox() { PlaceholderText = "To enter a formula,  type '=' followed by the math expression using cell addresses as variables and press ENTER to commit changes." };
+            var btnImport = new Button { Text = "Import" };
+            var btnExport = new Button { Text = "Export" };
+            var btnEvaluate = new Button { Text = "Evaluate" };
+            var btnEvaluateAll = new Button { Text = "Evaluate All" };
+
+            var tr = new TableRow(new Label { Text = "Selected Cell", VerticalAlignment = VerticalAlignment.Center }, txtcell,
+                                    new Label { Text = "Status", VerticalAlignment = VerticalAlignment.Center }, txttype,
+                                    new Label { Text = "Contents", VerticalAlignment = VerticalAlignment.Center }, txtformula,
+                                    btnImport, btnExport, btnEvaluate, btnEvaluateAll);
+
+            tr.Cells[5].ScaleWidth = true;
+            var tb = new TableLayout { Spacing = new Size(5, 5) };
+            tb.Rows.Add(tr);
+            cellcp.CreateAndAddControlRow(tb);
+
+            table.Rows.Add(new TableRow(cellcp));
+
+            txtformula.TextChanged += (sender, e) =>
+            {
+                rowitem.CellParams[selectedcell].Expression = txtformula.Text;
+            };
+
+            txtformula.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Keys.Enter)
+                {
+                    UpdateValue(rowitem.CellParams[selectedcell]);
+                    grid.ReloadData(int.Parse(rowitem.index) - 1);
+                }
+            };
 
             grid.CellClick += (sender, e) =>
             {
-                selectedcell = e.GridColumn.HeaderText + e.Row.ToString();
+                selectedcell = e.GridColumn.HeaderText + (e.Row + 1).ToString();
+                txtcell.Text = selectedcell;
+                rowitem = ((RowItem)e.Item);
+                var cellp = ((RowItem)e.Item).CellParams[selectedcell];
+                ccparams = cellp;
+                switch (cellp.CellType)
+                {
+                    case VarType.Expression:
+                        txttype.Text = "Expression";
+                        break;
+                    case VarType.Read:
+                        txttype.Text = "Imported Property";
+                        break;
+                    case VarType.Write:
+                        txttype.Text = "Exported Value/Expression";
+                        break;
+                    case VarType.None:
+                        txttype.Text = "Text";
+                        break;
+                }
+                txtformula.Text = cellp.Expression;
             };
 
-            ctxmenu.Opening += (sender, e) => {
-                ctxmenu.Items.Clear();
-                ctxmenu.Items.Add(new ButtonMenuItem {Text = "Selected Cell: " + selectedcell});                    
+            grid.CellEdited += (sender, e) => {
+                UpdateValue(rowitem.CellParams[selectedcell]);
             };
 
-            grid.ContextMenu = ctxmenu;
+            DefineVariables();
 
-            return grid;
+            loaded = true;
+
+            table.Rows.Add(new TableRow(new Scrollable { Content = grid, Border = BorderType.None }));
+
+            return table;
 
         }
 
         public class RowItem
         {
             public string index { get; set; }
-            public string A { get; set; }
-            public string B { get; set; }
-            public string C { get; set; }
-            public string D { get; set; }
-            public string E { get; set; }
-            public string F { get; set; }
-            public string G { get; set; }
-            public string H { get; set; }
-            public string I { get; set; }
-            public string J { get; set; }
-            public string K { get; set; }
-            public string L { get; set; }
-            public string M { get; set; }
-            public string N { get; set; }
-            public string O { get; set; }
-            public string P { get; set; }
-            public string Q { get; set; }
-            public string R { get; set; }
-            public string S { get; set; }
-            public string T { get; set; }
-            public string U { get; set; }
-            public string V { get; set; }
-            public string W { get; set; }
-            public string X { get; set; }
-            public string Y { get; set; }
-            public string Z { get; set; }
+            public string A { get { return CellParams["A" + index.ToString()].CurrVal; } set { CellParams["A" + index.ToString()].Expression = value; } }
+            public string B { get { return CellParams["B" + index.ToString()].CurrVal; } set { CellParams["B" + index.ToString()].Expression = value; } }
+            public string C { get { return CellParams["D" + index.ToString()].CurrVal; } set { CellParams["C" + index.ToString()].Expression = value; } }
+            public string D { get { return CellParams["D" + index.ToString()].CurrVal; } set { CellParams["D" + index.ToString()].Expression = value; } }
+            public string E { get { return CellParams["E" + index.ToString()].CurrVal; } set { CellParams["E" + index.ToString()].Expression = value; } }
+            public string F { get { return CellParams["F" + index.ToString()].CurrVal; } set { CellParams["F" + index.ToString()].Expression = value; } }
+            public string G { get { return CellParams["G" + index.ToString()].CurrVal; } set { CellParams["G" + index.ToString()].Expression = value; } }
+            public string H { get { return CellParams["H" + index.ToString()].CurrVal; } set { CellParams["H" + index.ToString()].Expression = value; } }
+            public string I { get { return CellParams["I" + index.ToString()].CurrVal; } set { CellParams["I" + index.ToString()].Expression = value; } }
+            public string J { get { return CellParams["J" + index.ToString()].CurrVal; } set { CellParams["J" + index.ToString()].Expression = value; } }
+            public string K { get { return CellParams["K" + index.ToString()].CurrVal; } set { CellParams["K" + index.ToString()].Expression = value; } }
+            public string L { get { return CellParams["L" + index.ToString()].CurrVal; } set { CellParams["L" + index.ToString()].Expression = value; } }
+            public string M { get { return CellParams["M" + index.ToString()].CurrVal; } set { CellParams["M" + index.ToString()].Expression = value; } }
+            public string N { get { return CellParams["N" + index.ToString()].CurrVal; } set { CellParams["N" + index.ToString()].Expression = value; } }
+            public string O { get { return CellParams["O" + index.ToString()].CurrVal; } set { CellParams["O" + index.ToString()].Expression = value; } }
+            public string P { get { return CellParams["P" + index.ToString()].CurrVal; } set { CellParams["P" + index.ToString()].Expression = value; } }
+            public string Q { get { return CellParams["Q" + index.ToString()].CurrVal; } set { CellParams["Q" + index.ToString()].Expression = value; } }
+            public string R { get { return CellParams["R" + index.ToString()].CurrVal; } set { CellParams["R" + index.ToString()].Expression = value; } }
+            public string S { get { return CellParams["S" + index.ToString()].CurrVal; } set { CellParams["S" + index.ToString()].Expression = value; } }
+            public string T { get { return CellParams["T" + index.ToString()].CurrVal; } set { CellParams["T" + index.ToString()].Expression = value; } }
+            public string U { get { return CellParams["U" + index.ToString()].CurrVal; } set { CellParams["U" + index.ToString()].Expression = value; } }
+            public string V { get { return CellParams["V" + index.ToString()].CurrVal; } set { CellParams["V" + index.ToString()].Expression = value; } }
+            public string W { get { return CellParams["W" + index.ToString()].CurrVal; } set { CellParams["W" + index.ToString()].Expression = value; } }
+            public string X { get { return CellParams["X" + index.ToString()].CurrVal; } set { CellParams["X" + index.ToString()].Expression = value; } }
+            public string Y { get { return CellParams["Y" + index.ToString()].CurrVal; } set { CellParams["Y" + index.ToString()].Expression = value; } }
+            public string Z { get { return CellParams["Z" + index.ToString()].CurrVal; } set { CellParams["Z" + index.ToString()].Expression = value; } }
 
-            public RowItem()
+            public Dictionary<string, SharedClasses.Spreadsheet.SpreadsheetCellParameters> CellParams = new Dictionary<string, SharedClasses.Spreadsheet.SpreadsheetCellParameters>();
+
+            public SharedClasses.Spreadsheet.SpreadsheetCellParameters GetCell(string cell)
             {
-                index = "";
-                A = "";
-                B = "";
-                C = "";
-                D = "";
-                E = "";
-                F = "";
-                G = "";
-                H = "";
-                I = "";
-                J = "";
-                K = "";
-                L = "";
-                M = "";
-                N = "";
-                O = "";
-                P = "";
-                Q = "";
-                R = "";
-                S = "";
-                T = "";
-                U = "";
-                V = "";
-                W = "";
-                X = "";
-                Y = "";
-                Z = "";
+                return CellParams[cell];
+            }
+
+            public RowItem(string idx)
+            {
+                index = idx;
+               
+                CellParams.Add("A" + index.ToString(), new SpreadsheetCellParameters() { CellString = "A" + index.ToString() });
+                CellParams.Add("B" + index.ToString(), new SpreadsheetCellParameters() { CellString = "B" + index.ToString() });
+                CellParams.Add("C" + index.ToString(), new SpreadsheetCellParameters() { CellString = "C" + index.ToString() });
+                CellParams.Add("D" + index.ToString(), new SpreadsheetCellParameters() { CellString = "D" + index.ToString() });
+                CellParams.Add("E" + index.ToString(), new SpreadsheetCellParameters() { CellString = "E" + index.ToString() });
+                CellParams.Add("F" + index.ToString(), new SpreadsheetCellParameters() { CellString = "F" + index.ToString() });
+                CellParams.Add("G" + index.ToString(), new SpreadsheetCellParameters() { CellString = "G" + index.ToString() });
+                CellParams.Add("H" + index.ToString(), new SpreadsheetCellParameters() { CellString = "H" + index.ToString() });
+                CellParams.Add("I" + index.ToString(), new SpreadsheetCellParameters() { CellString = "I" + index.ToString() });
+                CellParams.Add("J" + index.ToString(), new SpreadsheetCellParameters() { CellString = "J" + index.ToString() });
+                CellParams.Add("K" + index.ToString(), new SpreadsheetCellParameters() { CellString = "K" + index.ToString() });
+                CellParams.Add("L" + index.ToString(), new SpreadsheetCellParameters() { CellString = "L" + index.ToString() });
+                CellParams.Add("M" + index.ToString(), new SpreadsheetCellParameters() { CellString = "M" + index.ToString() });
+                CellParams.Add("N" + index.ToString(), new SpreadsheetCellParameters() { CellString = "N" + index.ToString() });
+                CellParams.Add("O" + index.ToString(), new SpreadsheetCellParameters() { CellString = "O" + index.ToString() });
+                CellParams.Add("P" + index.ToString(), new SpreadsheetCellParameters() { CellString = "P" + index.ToString() });
+                CellParams.Add("Q" + index.ToString(), new SpreadsheetCellParameters() { CellString = "Q" + index.ToString() });
+                CellParams.Add("R" + index.ToString(), new SpreadsheetCellParameters() { CellString = "R" + index.ToString() });
+                CellParams.Add("S" + index.ToString(), new SpreadsheetCellParameters() { CellString = "S" + index.ToString() });
+                CellParams.Add("T" + index.ToString(), new SpreadsheetCellParameters() { CellString = "T" + index.ToString() });
+                CellParams.Add("U" + index.ToString(), new SpreadsheetCellParameters() { CellString = "U" + index.ToString() });
+                CellParams.Add("V" + index.ToString(), new SpreadsheetCellParameters() { CellString = "V" + index.ToString() });
+                CellParams.Add("W" + index.ToString(), new SpreadsheetCellParameters() { CellString = "W" + index.ToString() });
+                CellParams.Add("X" + index.ToString(), new SpreadsheetCellParameters() { CellString = "X" + index.ToString() });
+                CellParams.Add("Y" + index.ToString(), new SpreadsheetCellParameters() { CellString = "Y" + index.ToString() });
+                CellParams.Add("Z" + index.ToString(), new SpreadsheetCellParameters() { CellString = "Z" + index.ToString() });
+
             }
         }
 

@@ -18,11 +18,13 @@ Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization
 
-Namespace DWSIM.Utilities.Spreadsheet
+Namespace Spreadsheet
+
     Public Enum VarType
         Read = 0
         Write = 1
         Expression = 2
+        None = 3
     End Enum
 
     <System.Serializable()> Public Class SpreadsheetCellParameters
@@ -40,6 +42,7 @@ Namespace DWSIM.Utilities.Spreadsheet
         Public CalcOrder As Integer = 0
         Public References As List(Of String)
         Public ToolTipText As String = ""
+        Public CellString As String = ""
 
         Sub New()
             References = New List(Of String)
@@ -66,6 +69,7 @@ Namespace DWSIM.Utilities.Spreadsheet
         Public Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
             ToolTipText = Xml.XmlConvert.DecodeName(ToolTipText)
+            Return True
         End Function
 
         Public Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement) Implements Interfaces.ICustomXMLSerialization.SaveData

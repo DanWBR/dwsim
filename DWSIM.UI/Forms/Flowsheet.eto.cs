@@ -18,6 +18,7 @@ namespace DWSIM.UI.Forms
     {
 
         public Desktop.Shared.Flowsheet FlowsheetObject;
+        public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
 
         ContextMenu selctxmenu, deselctxmenu;
@@ -151,12 +152,12 @@ namespace DWSIM.UI.Forms
 
             };
 
-            var spreadsheet = DWSIM.UI.Desktop.Editors.Spreadsheet.GetGrid(FlowsheetObject);
+            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject);
 
             var tabholder = new TabControl();
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Material Streams" });
-            tabholder.Pages.Add(new TabPage { Content = new Scrollable {Content = spreadsheet, Border = BorderType.None}, Text = "Spreadsheet"});
+            tabholder.Pages.Add(new TabPage { Content = Spreadsheet.GetSpreadsheet(FlowsheetObject), Text = "Spreadsheet" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Scripts" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Results" });
 

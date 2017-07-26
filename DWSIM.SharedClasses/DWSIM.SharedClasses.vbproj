@@ -122,6 +122,7 @@
     <Compile Include="Misc\ComIStreamWrapper.vb" />
     <Compile Include="Misc\ExtensionMethods.vb" />
     <Compile Include="Misc\MAPI.vb" />
+    <Compile Include="Misc\SpreadsheetCell.vb" />
     <Compile Include="Misc\UndoRedo.vb" />
     <Compile Include="Misc\Utilities.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

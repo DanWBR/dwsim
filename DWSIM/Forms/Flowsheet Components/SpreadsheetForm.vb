@@ -17,7 +17,6 @@
 
 
 Imports Ciloci.Flee
-Imports DWSIM.DWSIM.Utilities.Spreadsheet
 Imports System.Linq
 
 Public Class SpreadsheetForm
@@ -34,7 +33,7 @@ Public Class SpreadsheetForm
     Protected m_e As IGenericExpression(Of Object)
     Protected m_eopt As ExpressionContext
 
-    Protected ccparams As DWSIM.Utilities.Spreadsheet.SpreadsheetCellParameters
+    Protected ccparams As Global.DWSIM.SharedClasses.Spreadsheet.SpreadsheetCellParameters
 
     Public dt1(99, 25) As Object
     Public dt2(99, 25) As Object
@@ -247,7 +246,7 @@ Public Class SpreadsheetForm
         If chkUpdate.Checked Then EvaluateAll()
 
         NewValue = Cell.Value
-        NewTag = DirectCast(Cell.Tag, SpreadsheetCellParameters).Clone
+        NewTag = DirectCast(Cell.Tag, Spreadsheet.SpreadsheetCellParameters).Clone
 
         Me.formc.AddUndoRedoAction(New UndoRedoAction() With {.AType = Interfaces.Enums.UndoRedoActionType.SpreadsheetCellChanged,
                                                                 .ObjID = GetCellString(Cell),
@@ -377,7 +376,7 @@ Public Class SpreadsheetForm
             For j As Integer = 0 To dt1.GetUpperBound(1)
                 If Not dt2(i, j) Is Nothing Then
                     Try
-                        Dim xel As New XElement("dummy", DirectCast(dt2(i, j), SpreadsheetCellParameters).SaveData.ToArray)
+                        Dim xel As New XElement("dummy", DirectCast(dt2(i, j), Spreadsheet.SpreadsheetCellParameters).SaveData.ToArray)
                         text += xel.ToString + ";"
                     Catch ex As Exception
                         text += " ;"
@@ -429,7 +428,7 @@ Public Class SpreadsheetForm
             Dim elm(n, m) As Object
             For i As Integer = 0 To n
                 For j As Integer = 0 To m
-                    Dim scp As New SpreadsheetCellParameters()
+                    Dim scp As New Spreadsheet.SpreadsheetCellParameters()
                     Try
                         Dim element As New XElement("dummy")
                         Dim text0 = rows(i).Replace("&gt;", "greater_than").Replace("&lt;", "less_than")
@@ -461,22 +460,22 @@ Public Class SpreadsheetForm
             For Each ce As DataGridViewCell In r.Cells
                 ce.Value = dt1(i, j)
                 If dt2(i, j) Is Nothing Then
-                    ce.Tag = New DWSIM.Utilities.Spreadsheet.SpreadsheetCellParameters
-                ElseIf TypeOf dt2(i, j) Is SpreadsheetCellParameters Then
+                    ce.Tag = New Spreadsheet.SpreadsheetCellParameters
+                ElseIf TypeOf dt2(i, j) Is Spreadsheet.SpreadsheetCellParameters Then
                     ce.Tag = dt2(i, j)
                     ce.ToolTipText = dt2(i, j).ToolTipText
                 ElseIf TypeOf dt2(i, j) Is Object Then
-                    Dim cellparam As New SpreadsheetCellParameters
+                    Dim cellparam As New Spreadsheet.SpreadsheetCellParameters
                     With cellparam
                         .Expression = dt2(i, j)
                         If CStr(dt2(i, j)).StartsWith(":") Then
-                            .CellType = VarType.Read
+                            .CellType = Spreadsheet.VarType.Read
                             Dim str As String()
                             str = CStr(dt2(i, j)).Split(New Char() {","})
                             .ObjectID = str(0).Substring(1)
                             .PropID = str(1)
                         Else
-                            .CellType = VarType.Expression
+                            .CellType = Spreadsheet.VarType.Expression
                         End If
                     End With
                     ce.Tag = cellparam
@@ -537,14 +536,14 @@ Public Class SpreadsheetForm
             Try
                 ccparams = cell.Tag
                 ccparams.Expression = expression
-                If ccparams.CellType = VarType.Write Then
+                If ccparams.CellType = Spreadsheet.VarType.Write Then
                     If formc.Collections.FlowsheetObjectCollection.ContainsKey(ccparams.ObjectID) Then
                         ccparams.ToolTipText = DWSIM.App.GetLocalString("CellWillWrite") & vbCrLf & _
                         DWSIM.App.GetLocalString("Objeto") & ": " & formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID).GraphicObject.Tag & vbCrLf & _
                         DWSIM.App.GetLocalString("Propriedade") & ": " & DWSIM.App.GetPropertyName(ccparams.PropID)
                         cell.Style.BackColor = Color.LightBlue
                     Else
-                        ccparams.CellType = VarType.Expression
+                        ccparams.CellType = Spreadsheet.VarType.Expression
                         ccparams.ToolTipText = expression
                     End If
                     cell.ToolTipText = ccparams.ToolTipText
@@ -559,7 +558,7 @@ Public Class SpreadsheetForm
                         Me.ExpContext.ParserOptions.FunctionArgumentSeparator = ";"
                         Me.Expr = Me.ExpContext.CompileGeneric(Of Object)(expression.Substring(1))
                         cell.Value = Expr.Evaluate
-                        If Not ccparams.CellType = VarType.Write Then cell.Style.BackColor = Color.LightYellow
+                        If Not ccparams.CellType = Spreadsheet.VarType.Write Then cell.Style.BackColor = Color.LightYellow
                     ElseIf expression.Substring(0, 1) = ":" Then
                         Dim str As String()
                         Dim obj, prop As String
@@ -582,7 +581,7 @@ Public Class SpreadsheetForm
                         cell.Style.BackColor = Color.LightGreen
                     Else
                         cell.Value = expression
-                        If ccparams.CellType <> VarType.Write Then
+                        If ccparams.CellType <> Spreadsheet.VarType.Write Then
                             ccparams.ToolTipText = expression
                             cell.ToolTipText = ccparams.ToolTipText
                             cell.Style.BackColor = cell.OwningColumn.DefaultCellStyle.BackColor
@@ -621,7 +620,7 @@ Public Class SpreadsheetForm
                 Try
                     ccparams = cell.Tag
                     Dim expression = ccparams.Expression
-                    If ccparams.CellType = VarType.Write Then
+                    If ccparams.CellType = Spreadsheet.VarType.Write Then
                         cell.Style.BackColor = Color.LightBlue
                     End If
                     If expression <> "" Then
@@ -683,14 +682,14 @@ Public Class SpreadsheetForm
     End Sub
 
     Private Sub ColarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ColarToolStripMenuItem.Click
-        Me.DataGridView1.SelectedCells(0).Tag = CType(My.Computer.Clipboard.GetData("specialFormat"), SpreadsheetCellParameters)
-        UpdateValue(Me.DataGridView1.SelectedCells(0), CType(Me.DataGridView1.SelectedCells(0).Tag, SpreadsheetCellParameters).Expression)
+        Me.DataGridView1.SelectedCells(0).Tag = CType(My.Computer.Clipboard.GetData("specialFormat"), Spreadsheet.SpreadsheetCellParameters)
+        UpdateValue(Me.DataGridView1.SelectedCells(0), CType(Me.DataGridView1.SelectedCells(0).Tag, Spreadsheet.SpreadsheetCellParameters).Expression)
     End Sub
 
     Private Sub LimparToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LimparToolStripMenuItem.Click
         For Each sc In Me.DataGridView1.SelectedCells
             sc.Value = ""
-            sc.Tag = New SpreadsheetCellParameters
+            sc.Tag = New Spreadsheet.SpreadsheetCellParameters
             UpdateValue(sc, "")
         Next
     End Sub
@@ -766,7 +765,7 @@ Public Class SpreadsheetForm
             For Each ce As DataGridViewCell In r.Cells
                 ccparams = ce.Tag
                 If Not ccparams Is Nothing Then
-                    If ccparams.CellType = VarType.Write And Not ce.Value Is Nothing Then
+                    If ccparams.CellType = Spreadsheet.VarType.Write And Not ce.Value Is Nothing Then
                         obj = formc.Collections.FlowsheetObjectCollection(ccparams.ObjectID)
                         obj.SetPropertyValue(ccparams.PropID, ce.Value, su)
                     End If
