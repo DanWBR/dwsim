@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace DWSIM.UI.Desktop.WPF
@@ -32,6 +33,22 @@ namespace DWSIM.UI.Desktop.WPF
                 wpfwnd.AllowsTransparency = true;
                 wpfwnd.Background = Brushes.Transparent;
             });
+
+            Eto.Style.Add<Eto.Forms.GridView>("spreadsheet", control =>
+            {
+                var wpfgrid = (Eto.Wpf.Forms.Controls.EtoDataGrid)control.ControlObject;
+                wpfgrid.SelectionUnit = DataGridSelectionUnit.Cell;
+                var style = new Style(typeof(DataGridColumnHeader));
+                style.Setters.Add(new Setter(DataGrid.HorizontalContentAlignmentProperty, HorizontalAlignment.Center));
+                wpfgrid.ColumnHeaderStyle = style;
+                wpfgrid.HeadersVisibility = DataGridHeadersVisibility.All;
+                wpfgrid.RowHeaderWidth = 50;
+                wpfgrid.LoadingRow += (sender, e) =>
+                {
+                    e.Row.Header = e.Row.GetIndex().ToString();
+                };
+            });
+
 
         }
 

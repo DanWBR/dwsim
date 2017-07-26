@@ -34,15 +34,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             var rowlist = new ObservableCollection<RowItem>();
 
-            int i;
-            for (i = 0; i <= 50; i++)
-            {
-                rowlist.Add(new RowItem { index = i.ToString() });
-            }
-
             var grid = new GridView { DataStore = rowlist, RowHeight = 20 };
 
-            grid.Columns.Add(new GridColumn { HeaderText = "#", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = true});
+            //grid.Columns.Add(new GridColumn { HeaderText = "#", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = true});
             grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, AutoSize = false, Editable = true, Width = 80 });
             grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, AutoSize = false, Editable = true, Width = 80 });
             grid.Columns.Add(new GridColumn { HeaderText = "C", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.C) }, AutoSize = false, Editable = true, Width = 80 });
@@ -73,6 +67,13 @@ namespace DWSIM.UI.Desktop.Editors
             grid.AllowColumnReordering = false;
             grid.AllowMultipleSelection = false;
             grid.GridLines = GridLines.Both;
+            grid.Style = "spreadsheet";
+
+            int i;
+            for (i = 0; i <= 50; i++)
+            {
+                rowlist.Add(new RowItem { index = i.ToString() });
+            }
 
             var ctxmenu = new ContextMenu();
 
@@ -85,10 +86,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             ctxmenu.Opening += (sender, e) => {
                 ctxmenu.Items.Clear();
-                if (grid.SelectedItem!= null)
-                { 
-                    ctxmenu.Items.Add(new ButtonMenuItem {Text = "Selected Cell: " + selectedcell});                    
-                }
+                ctxmenu.Items.Add(new ButtonMenuItem {Text = "Selected Cell: " + selectedcell});                    
             };
 
             grid.ContextMenu = ctxmenu;
