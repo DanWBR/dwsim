@@ -34,6 +34,12 @@ namespace DWSIM.UI.Desktop.WPF
                 wpfwnd.Background = Brushes.Transparent;
             });
 
+            Eto.Style.Add<Eto.Forms.TextBox>("textbox-rightalign", control =>
+            {
+                var tbox = (System.Windows.Controls.TextBox)control.ControlObject;
+                tbox.TextAlignment = TextAlignment.Right;
+            });
+
             Eto.Style.Add<Eto.Forms.GridView>("spreadsheet", control =>
             {
                 var wpfgrid = (Eto.Wpf.Forms.Controls.EtoDataGrid)control.ControlObject;

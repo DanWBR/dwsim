@@ -179,7 +179,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200 };
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200, Style = "textbox-rightalign" };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -196,7 +196,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200 };
+            var edittext = new TextBox { Text = currval.ToString(numberformat), Width = 200, Style = "textbox-rightalign" };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 

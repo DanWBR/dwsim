@@ -36,7 +36,10 @@ namespace DWSIM.UI.Desktop.Editors
 
             var grid = new GridView { DataStore = rowlist, RowHeight = 20 };
 
-            //grid.Columns.Add(new GridColumn { HeaderText = "#", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = true});
+            if (GlobalSettings.Settings.RunningPlatform() != GlobalSettings.Settings.Platform.Windows)
+            {
+                grid.Columns.Add(new GridColumn {HeaderText = "", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = false, Width = 50, Resizable = false});
+            }
             grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, AutoSize = false, Editable = true, Width = 80 });
             grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, AutoSize = false, Editable = true, Width = 80 });
             grid.Columns.Add(new GridColumn { HeaderText = "C", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.C) }, AutoSize = false, Editable = true, Width = 80 });
