@@ -130,7 +130,7 @@
   <ItemGroup>
     <Compile Include="OxyPlot\PlotHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code.cs" />
+    <Compile Include="Styling.cs" />
     <Compile Include="SKSurface.cs" />
   </ItemGroup>
   <ItemGroup>

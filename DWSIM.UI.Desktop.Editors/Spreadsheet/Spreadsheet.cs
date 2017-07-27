@@ -33,6 +33,8 @@ namespace DWSIM.UI.Desktop.Editors
     public class Spreadsheet
     {
 
+        public Dictionary<String, Interfaces.ISimulationObject> ObjList;
+
         private IGenericExpression<Object> ExprObj ;
         private ExpressionContext ExprContext = new ExpressionContext();
 
@@ -47,10 +49,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public object[,] dt1 = new object[100, 26];
         public object[,] dt2 = new object[100, 26];
-
-        object oldval;
-        object newval;
-
+        
         private IFlowsheet flowsheet;
 
         private GridView grid;
@@ -279,17 +278,83 @@ namespace DWSIM.UI.Desktop.Editors
             var cellcp = new Panel();
 
             var txtcell = new TextBox { Width = 80, ReadOnly = true};
-            var txttype = new TextBox { Width = 100, ReadOnly = true};
-            var txtformula = new TextBox() { PlaceholderText = "To enter a formula,  type '=' followed by the math expression using cell addresses as variables and press ENTER to commit changes." };
+            var txttype = new TextBox { Width = 200, ReadOnly = true};
+            var txtformula = new TextBox() { PlaceholderText = "To enter a formula,  type '=' followed by the math expression and press ENTER to commit changes." };
             var btnImport = new Button { Text = "Import" };
             var btnExport = new Button { Text = "Export" };
+            var btnClear = new Button { Text = "Clear" };
             var btnEvaluate = new Button { Text = "Evaluate" };
             var btnEvaluateAll = new Button { Text = "Evaluate All" };
+
+            btnEvaluate.Click += (sender, e) => {
+                EvaluateAll(ccparams);
+                grid.ReloadData(int.Parse(rowitem.index) - 1);
+            };
+
+            btnEvaluateAll.Click += (sender, e) =>
+            {
+                EvaluateAll();
+                for (i = 0; i <= 50; i++)
+                {
+                    grid.ReloadData(i);
+                }
+            };
+
+
+            btnClear.Click += (sender, e) => {
+
+                ccparams.Expression = "";
+                ccparams.ObjectID = "";
+                ccparams.PropID = "";
+                ccparams.PropUnit = "";
+                ccparams.CurrVal = "";
+                ccparams.PrevVal = "";
+                ccparams.CellType = VarType.None;
+                UpdateValue(ccparams);
+                grid.ReloadData(int.Parse(rowitem.index) - 1);
+
+            };
+
+            btnImport.Click += (sender, e) => {
+                
+                var selector = new PropertySelector() { Flowsheet = flowsheet, ObjList = ObjList };
+
+                selector.btnOK.Click += (sender2, e2) => {
+
+                    ccparams.Expression = ":" + selector.list2.SelectedKey + "," + selector.list3.SelectedKey;
+                    ccparams.CellType = global::DWSIM.SharedClasses.Spreadsheet.VarType.Read;
+                    UpdateValue(ccparams);
+                    grid.ReloadData(int.Parse(rowitem.index) - 1);
+                    selector.Close();
+                
+                };
+
+                selector.ShowModal(grid);
+            };
+
+            btnExport.Click += (sender, e) =>
+            {
+                var selector = new PropertySelector() { Flowsheet = flowsheet, ObjList = ObjList, mode = 1 };
+
+                selector.btnOK.Click += (sender2, e2) =>
+                {
+
+                    ccparams.ObjectID = selector.list2.SelectedKey;
+                    ccparams.PropID = selector.list3.SelectedKey;
+                    ccparams.CellType = global::DWSIM.SharedClasses.Spreadsheet.VarType.Write;
+                    UpdateValue(ccparams);
+                    grid.ReloadData(int.Parse(rowitem.index) - 1);
+                    selector.Close();
+
+                };
+
+                selector.ShowModal(grid);
+            };
 
             var tr = new TableRow(new Label { Text = "Selected Cell", VerticalAlignment = VerticalAlignment.Center }, txtcell,
                                     new Label { Text = "Type", VerticalAlignment = VerticalAlignment.Center }, txttype,
                                     new Label { Text = "Contents", VerticalAlignment = VerticalAlignment.Center }, txtformula,
-                                    btnImport, btnExport, btnEvaluate, btnEvaluateAll);
+                                    btnImport, btnExport, btnClear, btnEvaluate, btnEvaluateAll);
 
             tr.Cells[5].ScaleWidth = true;
 
@@ -326,18 +391,24 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     case VarType.Expression:
                         txttype.Text = "Expression";
+                        txtformula.Enabled = true;
                         break;
                     case VarType.Read:
-                        txttype.Text = "Imported Property";
+                        txttype.Text = "Imported from " + flowsheet.SimulationObjects[ccparams.ObjectID].GraphicObject.Tag + ", " + flowsheet.GetTranslatedString(ccparams.PropID);
+                        txtformula.Enabled = false;
                         break;
                     case VarType.Write:
-                        txttype.Text = "Exported Value/Expression";
+                        txttype.Text = "Exported to " + flowsheet.SimulationObjects[ccparams.ObjectID].GraphicObject.Tag + ", " + flowsheet.GetTranslatedString(ccparams.PropID);
+                        txtformula.Enabled = false;
                         break;
                     case VarType.None:
                         txttype.Text = "Text";
+                        txtformula.Enabled = true;
                         break;
                 }
+                txttype.ToolTip = txttype.Text;
                 txtformula.Text = cellp.Expression;
+                txtformula.ToolTip = txtformula.Text;
             };
 
             grid.CellEdited += (sender, e) => {
@@ -395,32 +466,32 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 index = idx;
                
-                CellParams.Add("A" + index.ToString(), new SpreadsheetCellParameters() { CellString = "A" + index.ToString() });
-                CellParams.Add("B" + index.ToString(), new SpreadsheetCellParameters() { CellString = "B" + index.ToString() });
-                CellParams.Add("C" + index.ToString(), new SpreadsheetCellParameters() { CellString = "C" + index.ToString() });
-                CellParams.Add("D" + index.ToString(), new SpreadsheetCellParameters() { CellString = "D" + index.ToString() });
-                CellParams.Add("E" + index.ToString(), new SpreadsheetCellParameters() { CellString = "E" + index.ToString() });
-                CellParams.Add("F" + index.ToString(), new SpreadsheetCellParameters() { CellString = "F" + index.ToString() });
-                CellParams.Add("G" + index.ToString(), new SpreadsheetCellParameters() { CellString = "G" + index.ToString() });
-                CellParams.Add("H" + index.ToString(), new SpreadsheetCellParameters() { CellString = "H" + index.ToString() });
-                CellParams.Add("I" + index.ToString(), new SpreadsheetCellParameters() { CellString = "I" + index.ToString() });
-                CellParams.Add("J" + index.ToString(), new SpreadsheetCellParameters() { CellString = "J" + index.ToString() });
-                CellParams.Add("K" + index.ToString(), new SpreadsheetCellParameters() { CellString = "K" + index.ToString() });
-                CellParams.Add("L" + index.ToString(), new SpreadsheetCellParameters() { CellString = "L" + index.ToString() });
-                CellParams.Add("M" + index.ToString(), new SpreadsheetCellParameters() { CellString = "M" + index.ToString() });
-                CellParams.Add("N" + index.ToString(), new SpreadsheetCellParameters() { CellString = "N" + index.ToString() });
-                CellParams.Add("O" + index.ToString(), new SpreadsheetCellParameters() { CellString = "O" + index.ToString() });
-                CellParams.Add("P" + index.ToString(), new SpreadsheetCellParameters() { CellString = "P" + index.ToString() });
-                CellParams.Add("Q" + index.ToString(), new SpreadsheetCellParameters() { CellString = "Q" + index.ToString() });
-                CellParams.Add("R" + index.ToString(), new SpreadsheetCellParameters() { CellString = "R" + index.ToString() });
-                CellParams.Add("S" + index.ToString(), new SpreadsheetCellParameters() { CellString = "S" + index.ToString() });
-                CellParams.Add("T" + index.ToString(), new SpreadsheetCellParameters() { CellString = "T" + index.ToString() });
-                CellParams.Add("U" + index.ToString(), new SpreadsheetCellParameters() { CellString = "U" + index.ToString() });
-                CellParams.Add("V" + index.ToString(), new SpreadsheetCellParameters() { CellString = "V" + index.ToString() });
-                CellParams.Add("W" + index.ToString(), new SpreadsheetCellParameters() { CellString = "W" + index.ToString() });
-                CellParams.Add("X" + index.ToString(), new SpreadsheetCellParameters() { CellString = "X" + index.ToString() });
-                CellParams.Add("Y" + index.ToString(), new SpreadsheetCellParameters() { CellString = "Y" + index.ToString() });
-                CellParams.Add("Z" + index.ToString(), new SpreadsheetCellParameters() { CellString = "Z" + index.ToString() });
+                CellParams.Add("A" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "A" + index.ToString() });
+                CellParams.Add("B" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "B" + index.ToString() });
+                CellParams.Add("C" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "C" + index.ToString() });
+                CellParams.Add("D" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "D" + index.ToString() });
+                CellParams.Add("E" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "E" + index.ToString() });
+                CellParams.Add("F" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "F" + index.ToString() });
+                CellParams.Add("G" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "G" + index.ToString() });
+                CellParams.Add("H" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "H" + index.ToString() });
+                CellParams.Add("I" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "I" + index.ToString() });
+                CellParams.Add("J" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "J" + index.ToString() });
+                CellParams.Add("K" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "K" + index.ToString() });
+                CellParams.Add("L" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "L" + index.ToString() });
+                CellParams.Add("M" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "M" + index.ToString() });
+                CellParams.Add("N" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "N" + index.ToString() });
+                CellParams.Add("O" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "O" + index.ToString() });
+                CellParams.Add("P" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "P" + index.ToString() });
+                CellParams.Add("Q" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "Q" + index.ToString() });
+                CellParams.Add("R" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "R" + index.ToString() });
+                CellParams.Add("S" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "S" + index.ToString() });
+                CellParams.Add("T" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "T" + index.ToString() });
+                CellParams.Add("U" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "U" + index.ToString() });
+                CellParams.Add("V" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "V" + index.ToString() });
+                CellParams.Add("W" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "W" + index.ToString() });
+                CellParams.Add("X" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "X" + index.ToString() });
+                CellParams.Add("Y" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "Y" + index.ToString() });
+                CellParams.Add("Z" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "Z" + index.ToString() });
 
             }
         }

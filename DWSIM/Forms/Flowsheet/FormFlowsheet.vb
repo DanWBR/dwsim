@@ -2951,7 +2951,7 @@ Public Class FormFlowsheet
                     End Sub)
     End Sub
 
-    Public Sub UpdateSpreadsheet() Implements IFlowsheet.UpdateSpreadsheet
+    Public Sub UpdateSpreadsheet(act As Action) Implements IFlowsheet.UpdateSpreadsheet
 
         Try
             Me.UIThread(Sub()
@@ -2963,7 +2963,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Public Sub WriteSpreadsheetVariables() Implements IFlowsheet.WriteSpreadsheetVariables
+    Public Sub WriteSpreadsheetVariables(act As Action) Implements IFlowsheet.WriteSpreadsheetVariables
         Me.UIThread(Sub()
                         If FormSpreadsheet IsNot Nothing Then
                             Me.FormSpreadsheet.formc = Me

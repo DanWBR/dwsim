@@ -1546,8 +1546,8 @@ Imports System.IO
 
     Public Property Solved As Boolean Implements IFlowsheet.Solved
 
-    Public Sub UpdateSpreadsheet() Implements IFlowsheet.UpdateSpreadsheet
-
+    Public Sub UpdateSpreadsheet(act As Action) Implements IFlowsheet.UpdateSpreadsheet
+        If Not act Is Nothing Then act.Invoke()
     End Sub
 
     Public MustOverride Sub UpdateInformation() Implements IFlowsheet.UpdateInformation
@@ -1560,8 +1560,8 @@ Imports System.IO
         End Get
     End Property
 
-    Public Sub WriteSpreadsheetVariables() Implements IFlowsheet.WriteSpreadsheetVariables
-
+    Public Sub WriteSpreadsheetVariables(act As Action) Implements IFlowsheet.WriteSpreadsheetVariables
+        If Not act Is Nothing Then act.Invoke()
     End Sub
 
     Public Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String) Implements IFlowsheet.ProcessScripts

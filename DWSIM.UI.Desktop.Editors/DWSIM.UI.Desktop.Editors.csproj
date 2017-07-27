@@ -65,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
+    <Compile Include="Spreadsheet\PropSelection.cs">
+      <SubType>Eto.Forms</SubType>
+    </Compile>
     <Compile Include="Spreadsheet\Spreadsheet.cs" />
     <Compile Include="UnitOperations\AbsorptionColumn.cs" />
     <Compile Include="Compounds\Compounds.cs" />

@@ -890,8 +890,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             'call spreadsheet update to get values when in write mode
 
-            fs.UpdateSpreadsheet()
-            fs.WriteSpreadsheetVariables()
+            fs.UpdateSpreadsheet(Nothing)
+            fs.WriteSpreadsheetVariables(Nothing)
 
             RaiseEvent FlowsheetCalculationStarted(fobj, New System.EventArgs(), Nothing)
 
@@ -1259,8 +1259,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
             'updates the flowsheet display information if the fobj is visible.
 
-            fs.UpdateSpreadsheet()
-            fs.UpdateSpreadsheet()
+            fs.UpdateSpreadsheet(Nothing)
+            fs.UpdateSpreadsheet(Nothing)
 
             fgui.UpdateInformation()
 

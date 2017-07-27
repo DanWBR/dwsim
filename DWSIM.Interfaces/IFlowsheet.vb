@@ -108,9 +108,9 @@
 
     Sub AddUndoRedoAction(action As IUndoRedoAction)
 
-    Sub UpdateSpreadsheet()
+    Sub UpdateSpreadsheet(act As Action)
 
-    Sub WriteSpreadsheetVariables()
+    Sub WriteSpreadsheetVariables(act As Action)
 
     Property MobileCompatibilityMode As Boolean
 

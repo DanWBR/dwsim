@@ -51,7 +51,7 @@ namespace DWSIM.UI.Desktop.WPF
                 wpfgrid.RowHeaderWidth = 50;
                 wpfgrid.LoadingRow += (sender, e) =>
                 {
-                    e.Row.Header = e.Row.GetIndex().ToString();
+                    e.Row.Header = (e.Row.GetIndex() + 1).ToString();
                 };
             });
 

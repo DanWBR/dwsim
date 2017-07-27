@@ -71,7 +71,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code.cs" />
+    <Compile Include="Styling.cs" />
     <Compile Include="OxyPlot\ConverterExtensions.cs" />
     <Compile Include="OxyPlot\CoreGraphicsRenderContext.cs" />
     <Compile Include="OxyPlot\PlotHandler.cs" />

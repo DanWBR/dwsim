@@ -62,7 +62,7 @@ namespace DWSIM.UI.Forms
             var btnObjects = new ButtonMenuItem { Text = "Insert Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
             var btnTools = new ButtonMenuItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
-            var btnOptions = new ButtonMenuItem { Text = "Simulation Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
+            var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             
             var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
@@ -116,11 +116,31 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-            btnSolve.Click += (sender, e) => { FlowsheetObject.SolveFlowsheet(); };
+            btnSolve.Click += (sender, e) => { 
+                FlowsheetObject.UpdateSpreadsheet(() => {
+                    Spreadsheet.EvaluateAll();
+                    Spreadsheet.WriteAll();
+                });
+                FlowsheetObject.SolveFlowsheet(); 
+                FlowsheetObject.UpdateSpreadsheet(() => {
+                    Spreadsheet.EvaluateAll();
+                });
+            };
 
             this.KeyDown += (sender, e) =>
             {
-                if (e.Key == Keys.F5) FlowsheetObject.SolveFlowsheet();
+                if (e.Key == Keys.F5) {
+                    FlowsheetObject.UpdateSpreadsheet(() =>
+                    {
+                        Spreadsheet.EvaluateAll();
+                        Spreadsheet.WriteAll();
+                    });
+                    FlowsheetObject.SolveFlowsheet();
+                    FlowsheetObject.UpdateSpreadsheet(() =>
+                    {
+                        Spreadsheet.EvaluateAll();
+                    });
+                };
             };
 
             btnSave.Click += (sender, e) =>
@@ -152,7 +172,7 @@ namespace DWSIM.UI.Forms
 
             };
 
-            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject);
+            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject) {ObjList = ObjectList };
 
             var tabholder = new TabControl();
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
