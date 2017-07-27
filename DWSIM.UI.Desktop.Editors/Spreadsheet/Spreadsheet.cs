@@ -57,11 +57,28 @@ namespace DWSIM.UI.Desktop.Editors
         private GridView grid;
 
         private ObservableCollection<RowItem> rowlist;
-        private bool loaded;
+
+        private string nf;
 
         public Spreadsheet(IFlowsheet fs)
         {
             flowsheet = fs;
+            nf = flowsheet.FlowsheetOptions.NumberFormat;
+
+            this.ExprContext = new Ciloci.Flee.ExpressionContext();
+            this.ExprContext.Imports.AddType(typeof(System.Math));
+            this.ExprContext.Imports.AddType(typeof(System.String));
+
+            rowlist = new ObservableCollection<RowItem>();
+
+            int i;
+            for (i = 0; i < 100; i++)
+            {
+                rowlist.Add(new RowItem((i + 1).ToString()));
+            }
+
+            DefineVariables();
+
         }
 
         public void WriteAll()
@@ -94,28 +111,25 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     if ((flowsheet != null))
                     {
-                        if (GlobalSettings.Settings.CalculatorActivated)
+                        foreach (var row in rowlist)
                         {
-                            foreach (var row in rowlist)
+                            foreach (var cellparam in row.CellParams.Values)
                             {
-                                foreach (var cellparam in row.CellParams.Values)
+                                ccparams = cellparam;
+                                if ((ccparams != null))
                                 {
-                                    ccparams = cellparam;
-                                    if ((ccparams != null))
+                                    if (!string.IsNullOrEmpty(ccparams.Expression))
                                     {
-                                        if (!string.IsNullOrEmpty(ccparams.Expression))
-                                        {
-                                            ccparams.PrevVal = ccparams.CurrVal;
-                                            UpdateValue(ccparams);
-                                        }
+                                        ccparams.PrevVal = ccparams.CurrVal;
+                                        UpdateValue(ccparams);
                                     }
                                 }
                             }
-                            int i = 0;
-                            for (i = 0; i <= 50; i++)
-                            {
-                                grid.ReloadData(i);
-                            }
+                        }
+                        int i = 0;
+                        for (i = 0; i <= 100; i++)
+                        {
+                            grid.ReloadData(i);
                         }
                     }
                 }
@@ -142,13 +156,8 @@ namespace DWSIM.UI.Desktop.Editors
         public void UpdateValue(SpreadsheetCellParameters cell)
         {
 
+            nf = flowsheet.FlowsheetOptions.NumberFormat;
             var expression = cell.Expression;
-
-            this.ExprContext = new Ciloci.Flee.ExpressionContext();
-            this.ExprContext.Imports.AddType(typeof(System.Math));
-            this.ExprContext.Imports.AddType(typeof(System.String));
-
-            if (this.loaded == false) DefineVariables();
 
             GetValues();
 
@@ -162,7 +171,9 @@ namespace DWSIM.UI.Desktop.Editors
                         this.ExprContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture;
                         this.ExprContext.ParserOptions.FunctionArgumentSeparator = ';';
                         this.ExprObj = this.ExprContext.CompileGeneric<object>(expression.Substring(1));
-                        cell.CurrVal = ExprObj.Evaluate().ToString();
+                        double result = ((double)ExprObj.Evaluate());
+                        cell.RawValue = result;
+                        cell.CurrVal = result.ToString(nf);
                     }
                     else if (expression.Substring(0, 1) == ":")
                     {
@@ -181,11 +192,18 @@ namespace DWSIM.UI.Desktop.Editors
                             prop = str[1] + "," + str[2];
                         }
                         ccparams.PropID = prop;
-                        cell.CurrVal = flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem).ToString();
+                        double result = ((double)flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem)) ;
+                        cell.RawValue = result;
+                        cell.CurrVal = result.ToString(nf);
                         cell.ToolTipText = ccparams.ToolTipText;
                     }
                     else
                     {
+                        double d;
+                        if (double.TryParse(expression, out d))
+                        {
+                            cell.RawValue = double.Parse(expression);
+                        }
                         cell.CurrVal = expression;
                     }
                 }
@@ -222,9 +240,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 foreach (var ce in row.CellParams.Values)
                 {
-                    double val = 0;
-                    double.TryParse(ce.CurrVal, out val);
-                    this.ExprContext.Variables[this.GetCellString(ce)] = val;
+                    this.ExprContext.Variables[this.GetCellString(ce)] = ce.RawValue;
                 }
             }
         }
@@ -232,52 +248,44 @@ namespace DWSIM.UI.Desktop.Editors
         public TableLayout GetSpreadsheet(IFlowsheet obj)
         {
 
-            rowlist = new ObservableCollection<RowItem>();
-
             grid = new GridView { DataStore = rowlist, RowHeight = 20 };
 
             if (GlobalSettings.Settings.RunningPlatform() != GlobalSettings.Settings.Platform.Windows)
             {
                 grid.Columns.Add(new GridColumn { HeaderText = "", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.index) }, Editable = false, AutoSize = false, Width = 50, Resizable = false });
             }
-            grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "C", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.C) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "D", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.D) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "E", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.E) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "F", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.F) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "G", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.G) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "H", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.H) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "I", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.I) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "J", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.J) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "K", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.K) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "L", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.L) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "M", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.M) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "N", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.N) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "O", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.O) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "P", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.P) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "Q", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Q) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "R", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.R) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "S", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.S) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "T", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.T) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "U", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.U) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "V", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.V) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "W", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.W) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "X", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.X) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "Y", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Y) }, AutoSize = false, Editable = true, Width = 80 });
-            grid.Columns.Add(new GridColumn { HeaderText = "Z", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Z) }, AutoSize = false, Editable = true, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "A", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.A) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "B", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.B) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "C", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.C) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "D", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.D) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "E", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.E) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "F", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.F) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "G", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.G) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "H", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.H) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "I", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.I) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "J", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.J) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "K", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.K) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "L", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.L) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "M", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.M) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "N", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.N) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "O", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.O) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "P", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.P) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "Q", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Q) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "R", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.R) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "S", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.S) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "T", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.T) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "U", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.U) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "V", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.V) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "W", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.W) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "X", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.X) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "Y", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Y) }, AutoSize = false, Editable = false, Width = 80 });
+            grid.Columns.Add(new GridColumn { HeaderText = "Z", DataCell = new TextBoxCell { Binding = Binding.Property<RowItem, string>(r => r.Z) }, AutoSize = false, Editable = false, Width = 80 });
 
             grid.AllowColumnReordering = false;
             grid.AllowMultipleSelection = false;
             grid.GridLines = GridLines.Both;
             grid.Style = "spreadsheet";
 
-            int i;
-            for (i = 0; i <= 50; i++)
-            {
-                rowlist.Add(new RowItem((i + 1).ToString()));
-            }
-            
             var table = new TableLayout();
 
             var cellcp = new Panel();
@@ -305,7 +313,6 @@ namespace DWSIM.UI.Desktop.Editors
 
             btnClear.Click += (sender, e) =>
             {
-
                 ccparams.Expression = "";
                 ccparams.ObjectID = "";
                 ccparams.PropID = "";
@@ -315,7 +322,6 @@ namespace DWSIM.UI.Desktop.Editors
                 ccparams.CellType = VarType.None;
                 UpdateValue(ccparams);
                 grid.ReloadData(int.Parse(rowitem.index) - 1);
-
             };
 
             btnImport.Click += (sender, e) =>
@@ -420,11 +426,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 UpdateValue(rowitem.CellParams[selectedcell]);
             };
-
-            DefineVariables();
-
-            loaded = true;
-
+            
             table.Rows.Add(new TableRow(new Scrollable { Content = grid, Border = BorderType.None }));
 
             return table;
@@ -459,9 +461,9 @@ namespace DWSIM.UI.Desktop.Editors
             double val = 0;
 
             string text = "";
-            for (int i = 0; i <= dt1.GetUpperBound(0); i++)
+            for (int i = 0; i < dt1.GetUpperBound(0); i++)
             {
-                for (int j = 0; j <= dt1.GetUpperBound(1); j++)
+                for (int j = 0; j < dt1.GetUpperBound(1); j++)
                 {
                     if (double.TryParse(dt1[i, j].ToString(), NumberStyles.Any, ci, out val))
                     {
@@ -493,9 +495,9 @@ namespace DWSIM.UI.Desktop.Editors
             CultureInfo ci = CultureInfo.InvariantCulture;
 
             string text = "";
-            for (int i = 0; i <= dt2.GetUpperBound(0); i++)
+            for (int i = 0; i < dt2.GetUpperBound(0); i++)
             {
-                for (int j = 0; j <= dt1.GetUpperBound(1); j++)
+                for (int j = 0; j < dt1.GetUpperBound(1); j++)
                 {
                     if ((dt2[i, j] != null))
                     {
@@ -525,11 +527,11 @@ namespace DWSIM.UI.Desktop.Editors
         public void CopyDT1FromString(string text)
         {
             string[] rows = text.Split('|');
-            int n = rows.Length - 1;
-            int m = 0;
+            int n = 99;
+            int m = 25;
             if (n > 0 & m > 0)
             {
-                object[,] elm = new object[n + 1, m + 1];
+                object[,] elm = new object[100, 26];
                 try
                 {
                     for (int i = 0; i <= n; i++)
@@ -540,13 +542,12 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                         for (int j = 0; j <= m; j++)
                         {
-                            elm[i, j] = double.Parse(rows[i].Split(';')[j]);
+                            double d;
+                            if (double.TryParse(rows[i].Split(';')[j], out d)) elm[i, j] = double.Parse(rows[i].Split(';')[j]); else elm[i, j] = 0d;
                         }
                     }
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
                 dt1 = elm;
             }
 
@@ -555,15 +556,15 @@ namespace DWSIM.UI.Desktop.Editors
         public void CopyDT2FromString(string text)
         {
             string[] rows = text.Split('|');
-            int n = rows.Length - 1;
-            int m = 0;
+            int n = 99;
+            int m = 25;
             if (n > 0)
             {
                 m = rows[0].Split(';').Length - 1;
             }
             if (n > 0 & m > 0)
             {
-                object[,] elm = new object[n + 1, m + 1];
+                object[,] elm = new object[100, 26];
                 for (int i = 0; i <= n; i++)
                 {
                     for (int j = 0; j <= m; j++)
@@ -607,26 +608,30 @@ namespace DWSIM.UI.Desktop.Editors
                 j = 0;
                 foreach (var ce in row.CellParams.Values)
                 {
-                    if (dt2[i, j] is SpreadsheetCellParameters)
+                    try
                     {
-                        ce.LoadData(((SpreadsheetCellParameters)dt2[i, j]).SaveData());
-                    }
-                    else if (dt2[i, j] is object)
-                    {
-                        ce.Expression = dt2[i, j].ToString();
-                        if (Convert.ToString(dt2[i, j]).StartsWith(":"))
+                        if (dt2[i, j] is SpreadsheetCellParameters)
                         {
-                            ce.CellType = VarType.Read;
-                            string[] str = null;
-                            str = Convert.ToString(dt2[i, j]).Split(new char[] { ',' });
-                            ce.ObjectID = str[0].Substring(1);
-                            ce.PropID = str[1];
+                            ce.LoadData(((SpreadsheetCellParameters)dt2[i, j]).SaveData());
                         }
-                        else
+                        else if (dt2[i, j] is object)
                         {
-                            ce.CellType = VarType.Expression;
+                            ce.Expression = dt2[i, j].ToString();
+                            if (Convert.ToString(dt2[i, j]).StartsWith(":"))
+                            {
+                                ce.CellType = VarType.Read;
+                                string[] str = null;
+                                str = Convert.ToString(dt2[i, j]).Split(new char[] { ',' });
+                                ce.ObjectID = str[0].Substring(1);
+                                ce.PropID = str[1];
+                            }
+                            else
+                            {
+                                ce.CellType = VarType.Expression;
+                            }
                         }
                     }
+                    catch (Exception) { }
                     j = j + 1;
                 }
                 i = i + 1;
@@ -639,7 +644,7 @@ namespace DWSIM.UI.Desktop.Editors
             public string index { get; set; }
             public string A { get { return CellParams["A" + index.ToString()].CurrVal; } set { CellParams["A" + index.ToString()].Expression = value; } }
             public string B { get { return CellParams["B" + index.ToString()].CurrVal; } set { CellParams["B" + index.ToString()].Expression = value; } }
-            public string C { get { return CellParams["D" + index.ToString()].CurrVal; } set { CellParams["C" + index.ToString()].Expression = value; } }
+            public string C { get { return CellParams["C" + index.ToString()].CurrVal; } set { CellParams["C" + index.ToString()].Expression = value; } }
             public string D { get { return CellParams["D" + index.ToString()].CurrVal; } set { CellParams["D" + index.ToString()].Expression = value; } }
             public string E { get { return CellParams["E" + index.ToString()].CurrVal; } set { CellParams["E" + index.ToString()].Expression = value; } }
             public string F { get { return CellParams["F" + index.ToString()].CurrVal; } set { CellParams["F" + index.ToString()].Expression = value; } }

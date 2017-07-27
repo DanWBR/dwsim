@@ -159,12 +159,6 @@ namespace DWSIM.UI
                 if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
                 {
                     var xdoc = form.FlowsheetObject.LoadZippedXML(path);
-                    string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
-                    string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
-                    if (!string.IsNullOrEmpty(data1)) form.Spreadsheet.CopyDT1FromString(data1);
-                    if (!string.IsNullOrEmpty(data2)) form.Spreadsheet.CopyDT2FromString(data2);
-                    form.Spreadsheet.CopyFromDT();
-                    form.Spreadsheet.EvaluateAll();
                 }
                 else if (System.IO.Path.GetExtension(path).ToLower() == ".dwxml")
                 {

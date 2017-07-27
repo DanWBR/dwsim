@@ -42,7 +42,8 @@ Namespace Spreadsheet
         Public CalcOrder As Integer = 0
         Public References As List(Of String)
         Public ToolTipText As String = ""
-        Public CellString As String = ""
+        <Xml.Serialization.XmlIgnore> Public CellString As String = ""
+        Public RawValue As Double = 0.0#
 
         Sub New()
             References = New List(Of String)

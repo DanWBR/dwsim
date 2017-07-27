@@ -41,6 +41,8 @@ Imports System.IO
 
     Private rm, prm As Resources.ResourceManager
 
+    Public LoadSpreadsheetData, SaveSpreadsheetData As Action(Of XDocument)
+
     Public Sub AddCompoundsToMaterialStream(ms As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         For Each phase As IPhase In ms.Phases.Values
             For Each comp In Me.Options.SelectedComponents.Values
@@ -1137,6 +1139,8 @@ Imports System.IO
             End Try
         Next
 
+        If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
+
         If excs.Count > 0 Then
             ShowMessage("Some errors where found while parsing the XML file. The simulation might not work as expected. Please read the subsequent messages for more details.", IFlowsheet.MessageType.GeneralError)
             For Each ex As Exception In excs
@@ -1245,6 +1249,8 @@ Imports System.IO
         For Each pp As Optimization.SensitivityAnalysisCase In SensAnalysisCollection
             xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
         Next
+
+        If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
 
         Return xdoc
 

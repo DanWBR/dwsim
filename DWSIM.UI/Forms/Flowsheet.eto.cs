@@ -164,7 +164,6 @@ namespace DWSIM.UI.Forms
                 dialog.Title = "Save File".Localize();
                 dialog.Filters.Add(new FileDialogFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
                 dialog.CurrentFilterIndex = 0;
-                dialog.FileName = FlowsheetObject.FlowsheetOptions.SimulationName;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
                     SaveSimulation(dialog.FileName);
@@ -174,6 +173,27 @@ namespace DWSIM.UI.Forms
 
             Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject) {ObjList = ObjectList };
 
+            FlowsheetObject.LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
+            {
+                string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
+                string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
+                //if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
+                if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
+                Spreadsheet.CopyFromDT();
+                Spreadsheet.EvaluateAll();
+            });
+
+            FlowsheetObject.SaveSpreadsheetData = new Action<XDocument>((xdoc) =>
+            {
+                try{ Spreadsheet.CopyToDT();} catch (Exception){}
+                xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
+                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data1"));
+                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data2"));
+                Spreadsheet.CopyToDT();
+                //xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = Spreadsheet.CopyDT1ToString();
+                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = Spreadsheet.CopyDT2ToString();
+            });
+            
             var tabholder = new TabControl();
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Material Streams" });
