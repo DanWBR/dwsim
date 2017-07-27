@@ -177,7 +177,7 @@ namespace DWSIM.UI.Forms
             {
                 string data1 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value;
                 string data2 = xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value;
-                //if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
+                if (!string.IsNullOrEmpty(data1)) Spreadsheet.CopyDT1FromString(data1);
                 if (!string.IsNullOrEmpty(data2)) Spreadsheet.CopyDT2FromString(data2);
                 Spreadsheet.CopyFromDT();
                 Spreadsheet.EvaluateAll();
@@ -190,7 +190,7 @@ namespace DWSIM.UI.Forms
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data1"));
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data2"));
                 Spreadsheet.CopyToDT();
-                //xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = Spreadsheet.CopyDT1ToString();
+                xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = Spreadsheet.CopyDT1ToString();
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = Spreadsheet.CopyDT2ToString();
             });
             
