@@ -38,6 +38,17 @@ namespace DWSIM.UI.Desktop.GTK
                 gtkwnd.BorderWidth = 0;
             });
 
+            Eto.Style.Add<Eto.Forms.GridView>("spreadsheet", control =>
+            {
+                var gtkgrid = (Gtk.TreeView)((Gtk.ScrolledWindow)control.ControlObject).Child;
+                gtkgrid.Columns[0].Resizable = false;
+                gtkgrid.Columns[0].Clickable = false;
+                foreach (var column in gtkgrid.Columns)
+                {
+                    if (column.Widget != null) ((Gtk.Label)column.Widget).SetAlignment(0.5f, 0.5f);
+                }
+            });
+
         }
         
     }

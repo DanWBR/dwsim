@@ -276,7 +276,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var table = new TableLayout();
 
-            var cellcp = s.GetDefaultContainer();
+            var cellcp = new Panel();
 
             var txtcell = new TextBox { Width = 80, ReadOnly = true};
             var txttype = new TextBox { Width = 100, ReadOnly = true};
@@ -293,10 +293,10 @@ namespace DWSIM.UI.Desktop.Editors
 
             tr.Cells[5].ScaleWidth = true;
 
-            var tb = new TableLayout {Spacing = new Size(5, 5) };
+            var tb = new TableLayout {Spacing = new Size(5, 5), Padding = new Padding(10), Height = 44 };
             tb.Rows.Add(tr);
             
-            cellcp.CreateAndAddControlRow(tb);
+            cellcp.Content = tb;
 
             table.Rows.Add(new TableRow(cellcp));
 
@@ -316,6 +316,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             grid.CellClick += (sender, e) =>
             {
+                if (e.GridColumn.HeaderText == "") return;
                 selectedcell = e.GridColumn.HeaderText + (e.Row + 1).ToString();
                 txtcell.Text = selectedcell;
                 rowitem = ((RowItem)e.Item);
