@@ -226,6 +226,10 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
+            grid.CellDoubleClick += (sender, e) => {
+                if (txtformula.Enabled) txtformula.Focus();
+            };
+
             grid.CellClick += (sender, e) =>
             {
                 if (e.GridColumn.HeaderText == "") return;
