@@ -27,6 +27,8 @@ using System.Collections.ObjectModel;
 
 using global::DWSIM.SharedClasses.Spreadsheet;
 using Ciloci.Flee;
+using System.Globalization;
+using System.Xml.Linq;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -35,7 +37,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public Dictionary<String, Interfaces.ISimulationObject> ObjList;
 
-        private IGenericExpression<Object> ExprObj ;
+        private IGenericExpression<Object> ExprObj;
         private ExpressionContext ExprContext = new ExpressionContext();
 
         public string OldValue = "";
@@ -49,7 +51,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public object[,] dt1 = new object[100, 26];
         public object[,] dt2 = new object[100, 26];
-        
+
         private IFlowsheet flowsheet;
 
         private GridView grid;
@@ -109,6 +111,11 @@ namespace DWSIM.UI.Desktop.Editors
                                     }
                                 }
                             }
+                            int i = 0;
+                            for (i = 0; i <= 50; i++)
+                            {
+                                grid.ReloadData(i);
+                            }
                         }
                     }
                 }
@@ -137,12 +144,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             var expression = cell.Expression;
 
-            if (this.ExprContext == null)
-            {
-                this.ExprContext = new Ciloci.Flee.ExpressionContext();
-                this.ExprContext.Imports.AddType(typeof(System.Math));
-                this.ExprContext.Imports.AddType(typeof(System.String));
-            }
+            this.ExprContext = new Ciloci.Flee.ExpressionContext();
+            this.ExprContext.Imports.AddType(typeof(System.Math));
+            this.ExprContext.Imports.AddType(typeof(System.String));
 
             if (this.loaded == false) DefineVariables();
 
@@ -180,7 +184,8 @@ namespace DWSIM.UI.Desktop.Editors
                         cell.CurrVal = flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem).ToString();
                         cell.ToolTipText = ccparams.ToolTipText;
                     }
-                    else {
+                    else
+                    {
                         cell.CurrVal = expression;
                     }
                 }
@@ -191,7 +196,7 @@ namespace DWSIM.UI.Desktop.Editors
                 ccparams.ToolTipText = "";
                 flowsheet.ShowMessage(flowsheet.GetTranslatedString("Invalidexpressiononcell") + " " + GetCellString(cell) + " - " + ex.Message, IFlowsheet.MessageType.GeneralError);
             }
-            
+
         }
 
         public string GetCellString(SpreadsheetCellParameters cell)
@@ -272,13 +277,13 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 rowlist.Add(new RowItem((i + 1).ToString()));
             }
-
+            
             var table = new TableLayout();
 
             var cellcp = new Panel();
 
-            var txtcell = new TextBox { Width = 80, ReadOnly = true};
-            var txttype = new TextBox { Width = 200, ReadOnly = true};
+            var txtcell = new TextBox { Width = 80, ReadOnly = true };
+            var txttype = new TextBox { Width = 200, ReadOnly = true };
             var txtformula = new TextBox() { PlaceholderText = "To enter a formula,  type '=' followed by the math expression and press ENTER to commit changes." };
             var btnImport = new Button { Text = "Import" };
             var btnExport = new Button { Text = "Export" };
@@ -286,7 +291,8 @@ namespace DWSIM.UI.Desktop.Editors
             var btnEvaluate = new Button { Text = "Evaluate" };
             var btnEvaluateAll = new Button { Text = "Evaluate All" };
 
-            btnEvaluate.Click += (sender, e) => {
+            btnEvaluate.Click += (sender, e) =>
+            {
                 EvaluateAll(ccparams);
                 grid.ReloadData(int.Parse(rowitem.index) - 1);
             };
@@ -294,14 +300,11 @@ namespace DWSIM.UI.Desktop.Editors
             btnEvaluateAll.Click += (sender, e) =>
             {
                 EvaluateAll();
-                for (i = 0; i <= 50; i++)
-                {
-                    grid.ReloadData(i);
-                }
             };
 
 
-            btnClear.Click += (sender, e) => {
+            btnClear.Click += (sender, e) =>
+            {
 
                 ccparams.Expression = "";
                 ccparams.ObjectID = "";
@@ -315,18 +318,20 @@ namespace DWSIM.UI.Desktop.Editors
 
             };
 
-            btnImport.Click += (sender, e) => {
-                
+            btnImport.Click += (sender, e) =>
+            {
+
                 var selector = new PropertySelector() { Flowsheet = flowsheet, ObjList = ObjList };
 
-                selector.btnOK.Click += (sender2, e2) => {
+                selector.btnOK.Click += (sender2, e2) =>
+                {
 
                     ccparams.Expression = ":" + selector.list2.SelectedKey + "," + selector.list3.SelectedKey;
                     ccparams.CellType = global::DWSIM.SharedClasses.Spreadsheet.VarType.Read;
                     UpdateValue(ccparams);
                     grid.ReloadData(int.Parse(rowitem.index) - 1);
                     selector.Close();
-                
+
                 };
 
                 selector.ShowModal(grid);
@@ -358,9 +363,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             tr.Cells[5].ScaleWidth = true;
 
-            var tb = new TableLayout {Spacing = new Size(5, 5), Padding = new Padding(10), Height = 44 };
+            var tb = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(10), Height = 44 };
             tb.Rows.Add(tr);
-            
+
             cellcp.Content = tb;
 
             table.Rows.Add(new TableRow(cellcp));
@@ -411,7 +416,8 @@ namespace DWSIM.UI.Desktop.Editors
                 txtformula.ToolTip = txtformula.Text;
             };
 
-            grid.CellEdited += (sender, e) => {
+            grid.CellEdited += (sender, e) =>
+            {
                 UpdateValue(rowitem.CellParams[selectedcell]);
             };
 
@@ -422,6 +428,209 @@ namespace DWSIM.UI.Desktop.Editors
             table.Rows.Add(new TableRow(new Scrollable { Content = grid, Border = BorderType.None }));
 
             return table;
+
+        }
+
+        public void CopyToDT()
+        {
+            int i = 0;
+            int j = 0;
+
+            i = 0;
+            foreach (var row in rowlist)
+            {
+                j = 0;
+                foreach (var cellparam in row.CellParams.Values)
+                {
+                    dt1[i, j] = cellparam.CurrVal;
+                    dt2[i, j] = cellparam;
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+
+        }
+
+        public string CopyDT1ToString()
+        {
+
+            System.Globalization.CultureInfo ci = CultureInfo.InvariantCulture;
+
+            double val = 0;
+
+            string text = "";
+            for (int i = 0; i <= dt1.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= dt1.GetUpperBound(1); j++)
+                {
+                    if (double.TryParse(dt1[i, j].ToString(), NumberStyles.Any, ci, out val))
+                    {
+                        text += double.Parse(dt1[i, j].ToString(), ci).ToString() + ";";
+                    }
+                    else
+                    {
+                        if (dt1[i, j] != null)
+                        {
+                            text += dt1[i, j].ToString() + ";";
+                        }
+                        else
+                        {
+                            text += ";";
+                        }
+                    }
+                }
+                text = text.TrimEnd(';') + "|";
+            }
+            text = text.TrimEnd('|');
+
+            return text;
+
+        }
+
+        public string CopyDT2ToString()
+        {
+
+            CultureInfo ci = CultureInfo.InvariantCulture;
+
+            string text = "";
+            for (int i = 0; i <= dt2.GetUpperBound(0); i++)
+            {
+                for (int j = 0; j <= dt1.GetUpperBound(1); j++)
+                {
+                    if ((dt2[i, j] != null))
+                    {
+                        try
+                        {
+                            XElement xel = new XElement("dummy", ((ICustomXMLSerialization)dt2[i, j]).SaveData().ToArray());
+                            text += xel.ToString() + ";";
+                        }
+                        catch (Exception)
+                        {
+                            text += " ;";
+                        }
+                    }
+                    else
+                    {
+                        text += " ;";
+                    }
+                }
+                text = text.TrimEnd(';') + "|";
+            }
+            text = text.TrimEnd('|');
+
+            return text;
+
+        }
+
+        public void CopyDT1FromString(string text)
+        {
+            string[] rows = text.Split('|');
+            int n = rows.Length - 1;
+            int m = 0;
+            if (n > 0 & m > 0)
+            {
+                object[,] elm = new object[n + 1, m + 1];
+                try
+                {
+                    for (int i = 0; i <= n; i++)
+                    {
+                        if (n > 0)
+                        {
+                            m = rows[i].Split(';').Length - 1;
+                        }
+                        for (int j = 0; j <= m; j++)
+                        {
+                            elm[i, j] = double.Parse(rows[i].Split(';')[j]);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+                dt1 = elm;
+            }
+
+        }
+
+        public void CopyDT2FromString(string text)
+        {
+            string[] rows = text.Split('|');
+            int n = rows.Length - 1;
+            int m = 0;
+            if (n > 0)
+            {
+                m = rows[0].Split(';').Length - 1;
+            }
+            if (n > 0 & m > 0)
+            {
+                object[,] elm = new object[n + 1, m + 1];
+                for (int i = 0; i <= n; i++)
+                {
+                    for (int j = 0; j <= m; j++)
+                    {
+                        SpreadsheetCellParameters scp = new SpreadsheetCellParameters();
+                        try
+                        {
+                            XElement element = new XElement("dummy");
+                            string text0 = rows[i].Replace("&gt;", "greater_than").Replace("&lt;", "less_than");
+                            string xmltext = text0.Split(';')[j];
+                            if (xmltext != " ")
+                            {
+                                string text1 = xmltext.Replace("greater_than", "&gt;").Replace("less_than", "&lt;");
+                                element = XElement.Parse(text1);
+                                scp.LoadData(element.Elements().ToList());
+                                elm[i, j] = scp;
+                            }
+                            else
+                            {
+                                elm[i, j] = scp;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
+                dt2 = elm;
+            }
+
+        }
+
+        public void CopyFromDT()
+        {
+            int i = 0;
+            int j = 0;
+
+            i = 0;
+            foreach (var row in rowlist)
+            {
+                j = 0;
+                foreach (var ce in row.CellParams.Values)
+                {
+                    if (dt2[i, j] is SpreadsheetCellParameters)
+                    {
+                        ce.LoadData(((SpreadsheetCellParameters)dt2[i, j]).SaveData());
+                    }
+                    else if (dt2[i, j] is object)
+                    {
+                        ce.Expression = dt2[i, j].ToString();
+                        if (Convert.ToString(dt2[i, j]).StartsWith(":"))
+                        {
+                            ce.CellType = VarType.Read;
+                            string[] str = null;
+                            str = Convert.ToString(dt2[i, j]).Split(new char[] { ',' });
+                            ce.ObjectID = str[0].Substring(1);
+                            ce.PropID = str[1];
+                        }
+                        else
+                        {
+                            ce.CellType = VarType.Expression;
+                        }
+                    }
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
 
         }
 
@@ -465,7 +674,7 @@ namespace DWSIM.UI.Desktop.Editors
             public RowItem(string idx)
             {
                 index = idx;
-               
+
                 CellParams.Add("A" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "A" + index.ToString() });
                 CellParams.Add("B" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "B" + index.ToString() });
                 CellParams.Add("C" + index.ToString(), new SpreadsheetCellParameters() { CellType = VarType.None, CellString = "C" + index.ToString() });

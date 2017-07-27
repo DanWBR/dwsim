@@ -1568,7 +1568,7 @@ Imports System.IO
 
     End Sub
 
-    Public Sub LoadZippedXML(pathtofile As String)
+    Public Function LoadZippedXML(pathtofile As String) As XDocument
 
         Dim pathtosave As String = My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar
         Dim fullname As String = ""
@@ -1606,12 +1606,15 @@ Label_00CC:
             Loop
         End Using
 
-        LoadFromXML(XDocument.Load(fullname))
+        Dim xdoc = XDocument.Load(fullname)
+        LoadFromXML(xdoc)
         File.Delete(fullname)
         FilePath = pathtofile
         Options.FilePath = pathtofile
 
-    End Sub
+        Return xdoc
+
+    End Function
 
     Shared Function IsZipFilePasswordProtected(ByVal ZipFile As String) As Boolean
         Using fsIn As New FileStream(ZipFile, FileMode.Open, FileAccess.Read)
