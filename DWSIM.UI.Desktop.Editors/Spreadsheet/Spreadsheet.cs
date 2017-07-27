@@ -81,170 +81,6 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
-        public void WriteAll()
-        {
-
-            var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
-
-            foreach (var row in rowlist)
-            {
-                foreach (var cellparam in row.CellParams.Values)
-                {
-                    if ((cellparam != null))
-                    {
-                        if (cellparam.CellType == SharedClasses.Spreadsheet.VarType.Write)
-                        {
-                            var obj = flowsheet.SimulationObjects[ccparams.ObjectID];
-                            obj.SetPropertyValue(ccparams.PropID, cellparam.CurrVal, su);
-                        }
-                    }
-                }
-            }
-
-        }
-
-        public void EvaluateAll(SpreadsheetCellParameters cell = null)
-        {
-            if (cell == null)
-            {
-                try
-                {
-                    if ((flowsheet != null))
-                    {
-                        foreach (var row in rowlist)
-                        {
-                            foreach (var cellparam in row.CellParams.Values)
-                            {
-                                ccparams = cellparam;
-                                if ((ccparams != null))
-                                {
-                                    if (!string.IsNullOrEmpty(ccparams.Expression))
-                                    {
-                                        ccparams.PrevVal = ccparams.CurrVal;
-                                        UpdateValue(ccparams);
-                                    }
-                                }
-                            }
-                        }
-                        int i = 0;
-                        for (i = 0; i <= 100; i++)
-                        {
-                            grid.ReloadData(i);
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                }
-            }
-            else
-            {
-                ccparams = cell;
-                if ((ccparams != null))
-                {
-                    if (!string.IsNullOrEmpty(ccparams.Expression))
-                    {
-                        ccparams.PrevVal = cell.CurrVal;
-                        UpdateValue(ccparams);
-                    }
-                }
-            }
-
-
-        }
-
-        public void UpdateValue(SpreadsheetCellParameters cell)
-        {
-
-            nf = flowsheet.FlowsheetOptions.NumberFormat;
-            var expression = cell.Expression;
-
-            GetValues();
-
-            try
-            {
-                ccparams = cell;
-                if (!string.IsNullOrEmpty(expression))
-                {
-                    if (expression.Substring(0, 1) == "=")
-                    {
-                        this.ExprContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture;
-                        this.ExprContext.ParserOptions.FunctionArgumentSeparator = ';';
-                        this.ExprObj = this.ExprContext.CompileGeneric<object>(expression.Substring(1));
-                        double result = ((double)ExprObj.Evaluate());
-                        cell.RawValue = result;
-                        cell.CurrVal = result.ToString(nf);
-                    }
-                    else if (expression.Substring(0, 1) == ":")
-                    {
-                        string[] str = null;
-                        string obj = null;
-                        string prop = null;
-                        str = expression.Split(new char[] { ',' });
-                        obj = str[0].Substring(1);
-                        ccparams.ObjectID = obj;
-                        if (str.Length < 3)
-                        {
-                            prop = str[1];
-                        }
-                        else
-                        {
-                            prop = str[1] + "," + str[2];
-                        }
-                        ccparams.PropID = prop;
-                        double result = ((double)flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem)) ;
-                        cell.RawValue = result;
-                        cell.CurrVal = result.ToString(nf);
-                        cell.ToolTipText = ccparams.ToolTipText;
-                    }
-                    else
-                    {
-                        double d;
-                        if (double.TryParse(expression, out d))
-                        {
-                            cell.RawValue = double.Parse(expression);
-                        }
-                        cell.CurrVal = expression;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                cell.CurrVal = this.OldValue;
-                ccparams.ToolTipText = "";
-                flowsheet.ShowMessage(flowsheet.GetTranslatedString("Invalidexpressiononcell") + " " + GetCellString(cell) + " - " + ex.Message, IFlowsheet.MessageType.GeneralError);
-            }
-
-        }
-
-        public string GetCellString(SpreadsheetCellParameters cell)
-        {
-            return cell.CellString;
-        }
-
-        public void DefineVariables()
-        {
-            foreach (var row in rowlist)
-            {
-                foreach (var ce in row.CellParams.Values)
-                {
-                    this.ExprContext.Variables.DefineVariable(this.GetCellString(ce), typeof(double));
-                }
-            }
-
-        }
-
-        public void GetValues()
-        {
-            foreach (var row in rowlist)
-            {
-                foreach (var ce in row.CellParams.Values)
-                {
-                    this.ExprContext.Variables[this.GetCellString(ce)] = ce.RawValue;
-                }
-            }
-        }
-
         public TableLayout GetSpreadsheet(IFlowsheet obj)
         {
 
@@ -422,17 +258,176 @@ namespace DWSIM.UI.Desktop.Editors
                 txtformula.ToolTip = txtformula.Text;
             };
 
-            grid.CellEdited += (sender, e) =>
-            {
-                UpdateValue(rowitem.CellParams[selectedcell]);
-            };
-            
             table.Rows.Add(new TableRow(new Scrollable { Content = grid, Border = BorderType.None }));
 
             return table;
 
         }
 
+        public void WriteAll()
+        {
+
+            var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
+
+            foreach (var row in rowlist)
+            {
+                foreach (var cellparam in row.CellParams.Values)
+                {
+                    if ((cellparam != null))
+                    {
+                        if (cellparam.CellType == SharedClasses.Spreadsheet.VarType.Write)
+                        {
+                            var obj = flowsheet.SimulationObjects[ccparams.ObjectID];
+                            obj.SetPropertyValue(ccparams.PropID, cellparam.CurrVal, su);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        public void EvaluateAll(SpreadsheetCellParameters cell = null)
+        {
+            if (cell == null)
+            {
+                try
+                {
+                    if ((flowsheet != null))
+                    {
+                        foreach (var row in rowlist)
+                        {
+                            foreach (var cellparam in row.CellParams.Values)
+                            {
+                                ccparams = cellparam;
+                                if ((ccparams != null))
+                                {
+                                    if (!string.IsNullOrEmpty(ccparams.Expression))
+                                    {
+                                        ccparams.PrevVal = ccparams.CurrVal;
+                                        UpdateValue(ccparams);
+                                    }
+                                }
+                            }
+                        }
+                        int i = 0;
+                        for (i = 0; i <= 100; i++)
+                        {
+                            grid.ReloadData(i);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+            else
+            {
+                ccparams = cell;
+                if ((ccparams != null))
+                {
+                    if (!string.IsNullOrEmpty(ccparams.Expression))
+                    {
+                        ccparams.PrevVal = cell.CurrVal;
+                        UpdateValue(ccparams);
+                    }
+                }
+            }
+
+
+        }
+
+        public void UpdateValue(SpreadsheetCellParameters cell)
+        {
+
+            nf = flowsheet.FlowsheetOptions.NumberFormat;
+            var expression = cell.Expression;
+
+            GetValues();
+
+            try
+            {
+                ccparams = cell;
+                if (!string.IsNullOrEmpty(expression))
+                {
+                    if (expression.Substring(0, 1) == "=")
+                    {
+                        this.ExprContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture;
+                        this.ExprContext.ParserOptions.FunctionArgumentSeparator = ';';
+                        this.ExprObj = this.ExprContext.CompileGeneric<object>(expression.Substring(1));
+                        double result = ((double)ExprObj.Evaluate());
+                        cell.RawValue = result;
+                        cell.CurrVal = result.ToString(nf);
+                    }
+                    else if (expression.Substring(0, 1) == ":")
+                    {
+                        string[] str = null;
+                        string obj = null;
+                        string prop = null;
+                        str = expression.Split(new char[] { ',' });
+                        obj = str[0].Substring(1);
+                        ccparams.ObjectID = obj;
+                        if (str.Length < 3)
+                        {
+                            prop = str[1];
+                        }
+                        else
+                        {
+                            prop = str[1] + "," + str[2];
+                        }
+                        ccparams.PropID = prop;
+                        double result = ((double)flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem)) ;
+                        cell.RawValue = result;
+                        cell.CurrVal = result.ToString(nf);
+                        cell.ToolTipText = ccparams.ToolTipText;
+                    }
+                    else
+                    {
+                        double d;
+                        if (double.TryParse(expression, out d))
+                        {
+                            cell.RawValue = double.Parse(expression);
+                        }
+                        cell.CurrVal = expression;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                cell.CurrVal = this.OldValue;
+                ccparams.ToolTipText = "";
+                flowsheet.ShowMessage(flowsheet.GetTranslatedString("Invalidexpressiononcell") + " " + GetCellString(cell) + " - " + ex.Message, IFlowsheet.MessageType.GeneralError);
+            }
+
+        }
+
+        public string GetCellString(SpreadsheetCellParameters cell)
+        {
+            return cell.CellString;
+        }
+
+        public void DefineVariables()
+        {
+            foreach (var row in rowlist)
+            {
+                foreach (var ce in row.CellParams.Values)
+                {
+                    this.ExprContext.Variables.DefineVariable(this.GetCellString(ce), typeof(double));
+                }
+            }
+
+        }
+
+        public void GetValues()
+        {
+            foreach (var row in rowlist)
+            {
+                foreach (var ce in row.CellParams.Values)
+                {
+                    this.ExprContext.Variables[this.GetCellString(ce)] = ce.RawValue;
+                }
+            }
+        }
+        
         public void CopyToDT()
         {
             int i = 0;
