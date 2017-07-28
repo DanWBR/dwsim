@@ -6,7 +6,6 @@ Imports System.Drawing.Text
 Imports System.Reflection
 Imports System.ComponentModel
 Imports FarsiLibrary.Win
-Imports DWSIM.DWSIM.Extras
 Imports System.Threading
 Imports Python.Runtime
 Imports System.Threading.Tasks

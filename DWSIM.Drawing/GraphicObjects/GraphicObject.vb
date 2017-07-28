@@ -442,7 +442,7 @@ Namespace GraphicObjects
 
         Public Property Selected As Boolean = False Implements IGraphicObject.Selected
 
-        <Xml.Serialization.XmlIgnore> Property Owner As ISimulationObject Implements IGraphicObject.Owner
+        <Xml.Serialization.XmlIgnore> Public Property Owner As ISimulationObject Implements IGraphicObject.Owner
 
         <Xml.Serialization.XmlIgnore> <NonSerialized> Private _editorform As System.Windows.Forms.Form
 

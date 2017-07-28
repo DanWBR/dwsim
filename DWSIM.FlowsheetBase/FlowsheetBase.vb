@@ -43,6 +43,8 @@ Imports System.IO
 
     Public LoadSpreadsheetData, SaveSpreadsheetData As Action(Of XDocument)
 
+    Public RetrieveSpreadsheetData As Func(Of String, List(Of String()))
+
     Public Sub AddCompoundsToMaterialStream(ms As IMaterialStream) Implements IFlowsheet.AddCompoundsToMaterialStream
         For Each phase As IPhase In ms.Phases.Values
             For Each comp In Me.Options.SelectedComponents.Values
@@ -1809,5 +1811,11 @@ Label_00CC:
 
     End Sub
 
-    
+
+    Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
+
+        Return RetrieveSpreadsheetData.Invoke(range)
+
+    End Function
+
 End Class

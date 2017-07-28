@@ -19,9 +19,9 @@
 Imports System.Drawing
 Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Drawing.Drawing2D
-Imports DWSIM.DWSIM.Extras
 Imports System.Linq
 Imports DWSIM.DrawingTools
+Imports DWSIM.SharedClasses.Extras
 
 Namespace GraphicObjects
 
@@ -60,7 +60,7 @@ Namespace GraphicObjects
         Protected m_sortableitems As ArrayList
         Protected m_sortedlist As List(Of String)
 
-        Protected m_items As Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
+        Protected m_items As Dictionary(Of String, List(Of Extras.NodeItem))
 
         <Xml.Serialization.XmlIgnore> Public Property Flowsheet As Interfaces.IFlowsheet
 
@@ -341,7 +341,7 @@ Namespace GraphicObjects
             Dim su As SystemsOfUnits.Units = Flowsheet.FlowsheetOptions.SelectedUnitSystem
             Dim nf As String = Flowsheet.FlowsheetOptions.NumberFormat
 
-            m_items = New Dictionary(Of String, List(Of DWSIM.Extras.NodeItem))
+            m_items = New Dictionary(Of String, List(Of NodeItem))
 
             Dim objectstoremove, propstoremove As New List(Of String)
 

@@ -112,6 +112,8 @@
 
     Sub WriteSpreadsheetVariables(act As Action)
 
+    Function GetSpreadsheetData(range As String) As List(Of String())
+
     Property MobileCompatibilityMode As Boolean
 
     Property Message As String

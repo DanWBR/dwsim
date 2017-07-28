@@ -10,7 +10,7 @@ Public Class FormPropSelection
 
     Public ssmode As Boolean = True
 
-    Public wi As DWSIM.Extras.WatchItem
+    Public wi As Extras.WatchItem
 
     Public mode As Integer
 
@@ -264,9 +264,9 @@ Public Class FormPropSelection
             Else
                 Dim obj As SharedClasses.UnitOperations.BaseClass = formC.GetFlowsheetSimulationObject(Me.TreeView2.SelectedNode.Text)
                 If obj.GetProperties(Interfaces.Enums.PropertyType.RO).Contains(Me.TreeView3.SelectedNode.Tag) Then
-                    Me.wi = New DWSIM.Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, True)
+                    Me.wi = New Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, True)
                 Else
-                    Me.wi = New DWSIM.Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, False)
+                    Me.wi = New Extras.WatchItem(Me.TreeView2.SelectedNode.Tag, Me.TreeView3.SelectedNode.Tag, False)
                 End If
             End If
         End If

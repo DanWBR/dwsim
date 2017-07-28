@@ -154,7 +154,10 @@
     <Compile Include="GraphicObjects\Shapes\Spreadsheet.vb" />
     <Compile Include="GraphicObjects\Shapes\Tank.vb" />
     <Compile Include="GraphicObjects\Shapes\Valve.vb" />
-    <Compile Include="GraphicObjects\Table\TableGraphic.vb" />
+    <Compile Include="GraphicObjects\Table\FloatingTable.vb" />
+    <Compile Include="GraphicObjects\Table\MasterPropertyTable.vb" />
+    <Compile Include="GraphicObjects\Table\PropertyTable.vb" />
+    <Compile Include="GraphicObjects\Table\SpreadsheetTable.vb" />
     <Compile Include="GraphicObjects\Text\TextGraphic.vb" />
     <Compile Include="GraphicsSurface\DesignSurface.vb" />
     <Compile Include="GraphicsSurface\EventSupportClasses.vb" />
@@ -207,6 +210,10 @@
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
+      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
+      <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

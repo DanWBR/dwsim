@@ -581,7 +581,6 @@
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
-    <Compile Include="Objects\Classes\General\Generic.vb" />
     <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.Designer.vb">
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </Compile>

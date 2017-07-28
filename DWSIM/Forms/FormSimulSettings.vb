@@ -20,7 +20,6 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Runtime.Serialization.Formatters
 Imports System.IO
-Imports DWSIM.DWSIM.Extras
 Imports DWSIM.FlowsheetSolver
 Imports System.Linq
 Imports DWSIM.DWSIM.Flowsheet

@@ -3148,4 +3148,8 @@ Public Class FormFlowsheet
         End Set
     End Property
 
+    Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
+        Throw New NotImplementedException
+    End Function
+
 End Class

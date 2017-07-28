@@ -10,6 +10,41 @@ Namespace GraphicObjects
 
         Implements IGraphicObject, ICustomXMLSerialization
 
+        Public Function GetPaint(color As SKColor)
+
+            Dim p As New SKPaint
+
+            With p
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Color = color
+                .IsStroke = False
+            End With
+
+            Return p
+
+        End Function
+
+        Public Function GetStrokePaint(color As SKColor, StrokeWidth As Single)
+
+            Dim p As New SKPaint
+
+            With p
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Color = color
+                .IsStroke = True
+                .StrokeWidth = StrokeWidth
+            End With
+
+            Return p
+
+        End Function
+
+        Public Function GetRect(x As Single, y As Single, width As Single, height As Single)
+
+            Return New SKRect(x, y, x + width, y + height)
+
+        End Function
+
         Public Function MeasureString(text As String, paint As SKPaint) As SKSize
 
             Dim trect As New SKRect(0, 0, 2, 2)

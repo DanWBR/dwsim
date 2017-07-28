@@ -1,16 +1,16 @@
-﻿Imports DWSIM.DWSIM.Extras
+﻿Imports DWSIM.SharedClasses.Extras
 
 <System.Serializable()> Public Class WatchPanel
 
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
-    Public items As New Dictionary(Of Integer, DWSIM.Extras.WatchItem)
+    Public items As New Dictionary(Of Integer, Extras.WatchItem)
     Private updating As Boolean = False
     Private loaded As Boolean = False
 
     Private Sub frmWatch_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        If items Is Nothing Then items = New Dictionary(Of Integer, DWSIM.Extras.WatchItem)
+        If items Is Nothing Then items = New Dictionary(Of Integer, Extras.WatchItem)
 
     End Sub
 

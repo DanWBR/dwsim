@@ -16,13 +16,12 @@
 '    You should have received a copy of the GNU General Public License
 '    along with DWSIM.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Runtime.Serialization
 Imports System.Reflection
 Imports System.Linq
 Imports CapeOpen
 
-Namespace DWSIM.Extras
+Namespace Extras
 
     <CLSCompliant(True)> <System.Serializable()> Public Class NodeItem
 
@@ -134,6 +133,7 @@ Namespace DWSIM.Extras
 
         Public Function LoadData(data As List(Of XElement)) As Boolean Implements Interfaces.ICustomXMLSerialization.LoadData
             XMLSerializer.XMLSerializer.Deserialize(Me, data, True)
+            Return True
         End Function
 
         Public Function SaveData() As List(Of XElement) Implements Interfaces.ICustomXMLSerialization.SaveData
