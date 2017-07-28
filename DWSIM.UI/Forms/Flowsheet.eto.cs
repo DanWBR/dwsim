@@ -193,6 +193,11 @@ namespace DWSIM.UI.Forms
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data1").Value = Spreadsheet.CopyDT1ToString();
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = Spreadsheet.CopyDT2ToString();
             });
+
+            FlowsheetObject.RetrieveSpreadsheetData = new Func<string,List<string[]>>((range) => 
+            {
+                return Spreadsheet.GetDataFromRange(range);
+            });
             
             var tabholder = new TabControl();
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });

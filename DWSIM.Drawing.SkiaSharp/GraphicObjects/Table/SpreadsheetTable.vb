@@ -21,7 +21,7 @@ Imports DWSIM.Interfaces
 Imports System.Xml
 Imports DWSIM.SharedClasses.Extras
 
-Namespace GraphicObjects
+Namespace GraphicObjects.Tables
 
     <Serializable()> Public Class SpreadsheetTableGraphic
 
@@ -110,9 +110,9 @@ Namespace GraphicObjects
                 Dim size As SKSize
 
                 k = 0
-                For j = 0 To SpreadsheetData(0).Count
+                For j = 0 To SpreadsheetData(0).Count - 1
                     maxW.Add(10)
-                    For i = 0 To SpreadsheetData.Count
+                    For i = 0 To SpreadsheetData.Count - 1
                         size = MeasureString(SpreadsheetData(i)(j), tpaint)
                         If size.Width > maxW(k) Then maxW(k) = size.Width + 4 * Padding
                     Next
@@ -121,23 +121,23 @@ Namespace GraphicObjects
 
                 itemheight = MeasureString("AAA", tpaint).Height + 2 * Me.Padding
 
-                Me.Height = (SpreadsheetData.Count + 1) * itemheight
+                Me.Height = (SpreadsheetData.Count) * itemheight
                 Me.Width = maxW.Sum
 
                 Dim rect As SKRect = GetRect(X, Y, Width, Height)
-                g.FillRectangle(GetPaint(SKColors.White), rect)
+                canvas.DrawRect(rect, GetPaint(SKColors.White))
 
                 n = 0
                 leftmargin = 0
-                For j = 0 To SpreadsheetData(0).Count
+                For j = 0 To SpreadsheetData(0).Count - 1
                     m = 0
-                    For i = 0 To SpreadsheetData.Count
+                    For i = 0 To SpreadsheetData.Count - 1
                         canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight, tpaint)
                         If i < SpreadsheetData.Count Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
                         m += 1
                     Next
                     leftmargin += maxW(n)
-                    If j < SpreadsheetData(0).Count Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count + 1) * itemheight, bpaint)
+                    If j < SpreadsheetData(0).Count - 1 Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count + 1) * itemheight, bpaint)
                     n += 1
                 Next
 

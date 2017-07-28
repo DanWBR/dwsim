@@ -22,7 +22,7 @@ Imports System.Xml
 Imports DWSIM.SharedClasses.Extras
 Imports DWSIM.Interfaces.Enums
 
-Namespace GraphicObjects
+Namespace GraphicObjects.Tables
 
     <Serializable()> Public Class FloatingTableGraphic
 

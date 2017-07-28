@@ -226,7 +226,8 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            grid.CellDoubleClick += (sender, e) => {
+            grid.CellDoubleClick += (sender, e) =>
+            {
                 if (txtformula.Enabled) txtformula.Focus();
             };
 
@@ -316,7 +317,7 @@ namespace DWSIM.UI.Desktop.Editors
                         int i = 0;
                         for (i = 0; i <= 100; i++)
                         {
-                            grid.ReloadData(i);
+                           Application.Instance.AsyncInvoke(() => grid.ReloadData(i));
                         }
                     }
                 }
@@ -379,7 +380,7 @@ namespace DWSIM.UI.Desktop.Editors
                             prop = str[1] + "," + str[2];
                         }
                         ccparams.PropID = prop;
-                        double result = ((double)flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem)) ;
+                        double result = ((double)flowsheet.SimulationObjects[obj].GetPropertyValue(prop, flowsheet.FlowsheetOptions.SelectedUnitSystem));
                         cell.RawValue = result;
                         cell.CurrVal = result.ToString(nf);
                         cell.ToolTipText = ccparams.ToolTipText;
@@ -431,7 +432,137 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
         }
-        
+
+        public List<string[]> GetDataFromRange(string range)
+        {
+            string l1, l2;
+            int r1, r2, c1, c2;
+
+            l1 = range.Split(':')[0].Substring(1);
+            l2 = range.Split(':')[1].Substring(1);
+            r1 = int.Parse(l1);
+            r2 = int.Parse(l2);
+            c1 = GetColumnNumber(range.Split(':')[0]);
+            c2 = GetColumnNumber(range.Split(':')[1]);
+
+            var list = new List<string[]>();
+
+            int i, j;
+            i = r1 - 1;
+            for (i = r1 - 1; i < r2; i++ )
+            {
+                var sublist = new List<string>();
+                j = 1;
+                foreach (var cellparam in rowlist[i].CellParams.Values)
+                {
+                    if (j >= c1) {
+                        sublist.Add(cellparam.CurrVal);
+                    }
+                    j += 1;
+                    if (j > c2) break;
+                }
+                list.Add(sublist.ToArray());
+            }
+
+            return list;
+        }
+
+        public int GetColumnNumber(string cellname)
+        {
+
+            int column = 0;
+            string colLetra = null;
+
+            colLetra = cellname.Substring(0, 1);
+
+            switch (colLetra)
+            {
+                case "A":
+                    column = 0;
+                    break;
+                case "B":
+                    column = 1;
+                    break;
+                case "C":
+                    column = 2;
+                    break;
+                case "D":
+                    column = 3;
+                    break;
+                case "E":
+                    column = 4;
+                    break;
+                case "F":
+                    column = 5;
+                    break;
+                case "G":
+                    column = 6;
+                    break;
+                case "H":
+                    column = 7;
+                    break;
+                case "I":
+                    column = 8;
+                    break;
+                case "J":
+                    column = 9;
+                    break;
+                case "K":
+                    column = 10;
+                    break;
+                case "L":
+                    column = 11;
+                    break;
+                case "M":
+                    column = 12;
+                    break;
+                case "N":
+                    column = 13;
+                    break;
+                case "O":
+                    column = 14;
+                    break;
+                case "P":
+                    column = 15;
+                    break;
+                case "Q":
+                    column = 16;
+                    break;
+                case "R":
+                    column = 17;
+                    break;
+                case "S":
+                    column = 18;
+                    break;
+                case "T":
+                    column = 19;
+                    break;
+                case "U":
+                    column = 20;
+                    break;
+                case "V":
+                    column = 21;
+                    break;
+                case "W":
+                    column = 22;
+                    break;
+                case "X":
+                    column = 23;
+                    break;
+                case "Y":
+                    column = 24;
+                    break;
+                case "Z":
+                    column = 25;
+                    break;
+                default:
+                    return 0;
+            }
+
+            return column + 1;
+
+        }
+
         public void CopyToDT()
         {
             int i = 0;

@@ -21,7 +21,7 @@ Imports DWSIM.Interfaces
 Imports System.Xml
 Imports DWSIM.SharedClasses.Extras
 
-Namespace GraphicObjects
+Namespace GraphicObjects.Tables
 
     <Serializable()> Public Class MasterTableGraphic
 

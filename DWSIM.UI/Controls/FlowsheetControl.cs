@@ -136,7 +136,7 @@ namespace DWSIM.UI.Controls
                 }
                 else if (objtname == "Property Table")
                 {
-                    var gobj = new DWSIM.Drawing.SkiaSharp.GraphicObjects.TableGraphic(x, y);
+                    var gobj = new DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic(x, y);
                     gobj.Name = Guid.NewGuid().ToString();
                     gobj.Flowsheet = FlowsheetObject;
                     FlowsheetObject.AddGraphicObject(gobj);

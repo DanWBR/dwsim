@@ -19,7 +19,7 @@
 Imports System.Linq
 Imports DWSIM.Interfaces
 
-Namespace GraphicObjects
+Namespace GraphicObjects.Tables
 
     Public Class TableGraphic
 

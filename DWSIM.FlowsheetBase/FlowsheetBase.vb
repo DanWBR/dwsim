@@ -18,6 +18,7 @@ Imports DWSIM.UnitOperations.Streams
 Imports DWSIM.Thermodynamics.Streams
 Imports ICSharpCode.SharpZipLib.Zip
 Imports System.IO
+Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -1287,10 +1288,10 @@ Imports System.IO
                     End If
                     If TypeOf obj Is TableGraphic Then
                         DirectCast(obj, TableGraphic).Flowsheet = Me
-                        'ElseIf TypeOf obj Is MasterTableGraphic Then
-                        '    DirectCast(obj, MasterTableGraphic).Flowsheet = Me
-                        'ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
-                        '    DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = Me
+                    ElseIf TypeOf obj Is MasterTableGraphic Then
+                        DirectCast(obj, MasterTableGraphic).Flowsheet = Me
+                    ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
+                        DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = Me
                     ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                         obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
                         obj.PositionConnectors()
