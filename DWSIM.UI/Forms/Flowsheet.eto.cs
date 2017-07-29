@@ -56,17 +56,17 @@ namespace DWSIM.UI.Forms
 
             var saveCommand = new Command { MenuText = "SaveFlowsheet".Localize() };
 
-            var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
-            var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")) };
-            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
-            var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
-            var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
+            var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")), Shortcut = Keys.S | Keys.Control };
+            var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")), Shortcut = Keys.S | Keys.Control | Keys.Shift };
+            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")), Shortcut = Keys.Q | Keys.Control };
+            var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")), Shortcut = Keys.C | Keys.Control };
+            var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")), Shortcut = Keys.B | Keys.Control };
             var btnTools = new ButtonMenuItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
-            var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
-            var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
+            var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.M | Keys.Control };
+            var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 };
 
-            var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
+            var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")), Shortcut = Keys.A | Keys.Control };
             var btnInsertText = new ButtonMenuItem { Text = "Add New Text Block", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "TextWidth_96px.png")) };
             var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Grid_96px.png")) };
             var btnInsertMasterTable = new ButtonMenuItem { Text = "Add New Master Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "GridView_96px.png")) };
@@ -153,21 +153,21 @@ namespace DWSIM.UI.Forms
                 });
             };
 
-            this.KeyDown += (sender, e) =>
-            {
-                if (e.Key == Keys.F5) {
-                    FlowsheetObject.UpdateSpreadsheet(() =>
-                    {
-                        Spreadsheet.EvaluateAll();
-                        Spreadsheet.WriteAll();
-                    });
-                    FlowsheetObject.SolveFlowsheet();
-                    FlowsheetObject.UpdateSpreadsheet(() =>
-                    {
-                        Spreadsheet.EvaluateAll();
-                    });
-                };
-            };
+            //this.KeyDown += (sender, e) =>
+            //{
+            //    if (e.Key == Keys.F5) {
+            //        FlowsheetObject.UpdateSpreadsheet(() =>
+            //        {
+            //            Spreadsheet.EvaluateAll();
+            //            Spreadsheet.WriteAll();
+            //        });
+            //        FlowsheetObject.SolveFlowsheet();
+            //        FlowsheetObject.UpdateSpreadsheet(() =>
+            //        {
+            //            Spreadsheet.EvaluateAll();
+            //        });
+            //    };
+            //};
 
             btnSave.Click += (sender, e) =>
             {
