@@ -453,22 +453,22 @@ Namespace GraphicObjects.Tables
                 maxL3 = maxL3 + 2 * Padding
                 maxH = maxH + 2 * Padding
 
-                Dim rect As SKRect = GetRect(X, Y, Width, Height)
-                canvas.DrawRect(rect, GetPaint(SKColors.White))
+                'Dim rect As SKRect = GetRect(X, Y, Width, Height)
+                'canvas.DrawRect(rect, GetPaint(SKColors.White))
 
                 'desenhar textos e retangulos
-                canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding, tpaint)
+                canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
                 If Not m_items Is Nothing Then
                     If maxL2.Length > 0 Then
                         i = 0
                         If Not m_sortedlist Is Nothing Then
                             For Each s As String In m_sortedlist
-                                canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + Height, bpaint)
+                                canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + Padding, Y + Height, bpaint)
                                 n = 1
                                 For Each ni In m_items(s)
-                                    If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding, tpaint)
-                                    canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding, tpaint)
-                                    If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding, tpaint)
+                                    If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    canvas.DrawText(ni.Value, X + maxL1 + i * maxL2a + 2 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     n += 1
                                 Next
                                 i += 1
@@ -478,12 +478,12 @@ Namespace GraphicObjects.Tables
                             Next
                         Else
                             For Each s As String In m_items.Keys
-                                canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + 2 * Me.Padding, Y + Height, bpaint)
-                                n = 1
+                                canvas.DrawLine(X + maxL1 + (i + 1) * maxL2a + Padding, Y + maxH, X + maxL1 + (i + 1) * maxL2a + Padding, Y + Height, bpaint)
+                                n = 2
                                 For Each ni In m_items(s)
-                                    If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding, tpaint)
-                                    canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding, tpaint)
-                                    If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding, tpaint)
+                                    If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    canvas.DrawText(ni.Value, X + maxL1 + (i + 1) * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
+                                    If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     n += 1
                                 Next
                                 i += 1

@@ -108,7 +108,7 @@ Namespace GraphicObjects.Tables
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = BorderColor
                 .IsStroke = True
-                .StrokeWidth = LineWidth
+                .StrokeWidth = 1
             End With
 
             Dim maxL0, maxL1, maxL2, maxL3, count As Integer

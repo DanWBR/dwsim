@@ -62,7 +62,7 @@ Namespace GraphicObjects.Tables
 
 #Region "Properties"
 
-        Public Property Padding As Integer = 3
+        Public Property Padding As Integer = 4
 
         Public Property SpreadsheetCellRange As String = ""
 
@@ -96,6 +96,8 @@ Namespace GraphicObjects.Tables
                 .StrokeWidth = LineWidth
             End With
 
+            Padding = 4
+
             Dim maxW As New List(Of Integer)
 
             'find number of rows and columns by range
@@ -111,11 +113,12 @@ Namespace GraphicObjects.Tables
 
                 k = 0
                 For j = 0 To SpreadsheetData(0).Count - 1
-                    maxW.Add(10)
+                    maxW.Add(1)
                     For i = 0 To SpreadsheetData.Count - 1
                         size = MeasureString(SpreadsheetData(i)(j), tpaint)
-                        If size.Width > maxW(k) Then maxW(k) = size.Width + 4 * Padding
+                        If size.Width > maxW(k) Then maxW(k) = size.Width
                     Next
+                    maxW(k) += 4 * Padding
                     k += 1
                 Next
 
@@ -124,20 +127,20 @@ Namespace GraphicObjects.Tables
                 Me.Height = (SpreadsheetData.Count) * itemheight
                 Me.Width = maxW.Sum
 
-                Dim rect As SKRect = GetRect(X, Y, Width, Height)
-                canvas.DrawRect(rect, GetPaint(SKColors.White))
+                'Dim rect As SKRect = GetRect(X, Y, Width, Height)
+                'canvas.DrawRect(rect, GetPaint(SKColors.White))
 
                 n = 0
                 leftmargin = 0
                 For j = 0 To SpreadsheetData(0).Count - 1
                     m = 0
                     For i = 0 To SpreadsheetData.Count - 1
-                        canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight, tpaint)
-                        If i < SpreadsheetData.Count Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
+                        canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding / 2 + m * itemheight + size.Height, tpaint)
+                        If i < SpreadsheetData.Count - 1 Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
                         m += 1
                     Next
                     leftmargin += maxW(n)
-                    If j < SpreadsheetData(0).Count - 1 Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count + 1) * itemheight, bpaint)
+                    If j < SpreadsheetData(0).Count - 1 Then canvas.DrawLine(X + leftmargin, Y, X + leftmargin, Y + (SpreadsheetData.Count) * itemheight, bpaint)
                     n += 1
                 Next
 
