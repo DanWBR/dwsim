@@ -56,19 +56,19 @@ Namespace GraphicObjects
                 Height = 0
                 Width = 0
                 For Each l As String In lines
-                    canvas.DrawText(l, X, newy, tpaint)
                     Dim trect As New SKRect(0, 0, 2, 2)
                     tpaint.GetTextPath(Text.Replace("\n", vbCrLf), 0, 0).GetBounds(trect)
                     newy += trect.Height + 2
                     Height += trect.Height + 2
                     Width = Math.Max(Width, trect.Width / lines.Count)
+                    canvas.DrawText(l, X, newy + Height, tpaint)
                 Next
             Catch ex As Exception
-                canvas.DrawText(Text, X, Y, tpaint)
                 Dim trect As New SKRect(0, 0, 2, 2)
                 tpaint.GetTextPath(Text.Replace("\n", vbCrLf), 0, 0).GetBounds(trect)
                 Height = trect.Height
                 Width = trect.Width
+                canvas.DrawText(Text, X, Y + MeasureString(Text, tpaint).Height, tpaint)
             End Try
 
         End Sub

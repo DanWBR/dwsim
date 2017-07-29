@@ -505,7 +505,7 @@ Namespace GraphicObjects.Tables
             Else
 
                 Dim Size = MeasureString("Double-click to edit", tpaint)
-                g.DrawString("Double-click to edit", X + 10, Y + 40, tpaint)
+                canvas.DrawText("Double-click to edit", X + 10, Y + 40, tpaint)
 
                 Me.Width = 20 + Size.Width
                 Me.Height = 80 + Size.Height

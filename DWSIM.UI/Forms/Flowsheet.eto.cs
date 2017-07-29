@@ -21,6 +21,8 @@ namespace DWSIM.UI.Forms
         public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
 
+        string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
+
         ContextMenu selctxmenu, deselctxmenu;
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
@@ -29,9 +31,7 @@ namespace DWSIM.UI.Forms
         {
 
             WindowState = Eto.Forms.WindowState.Maximized;
-
-            string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
-
+                        
             FlowsheetObject = new Desktop.Shared.Flowsheet() { FlowsheetForm = this };
             FlowsheetObject.Initialize();
 
@@ -47,6 +47,8 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.FlowsheetControl = FlowsheetControl;
 
+            FlowsheetControl.FlowsheetObject = FlowsheetObject;
+
             ClientSize = new Size(1024, 768);
 
             var closeCommand = new Command { MenuText = "Close".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
@@ -56,15 +58,39 @@ namespace DWSIM.UI.Forms
 
             var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")) };
             var btnSaveAs = new ButtonMenuItem { Text = "Save As...", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save_as.png")) };
-            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet" };
+            var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
             var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")) };
             var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")) };
-            var btnObjects = new ButtonMenuItem { Text = "Insert Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
             var btnTools = new ButtonMenuItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
-            
+
+            var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
+            var btnInsertText = new ButtonMenuItem { Text = "Add New Text Block", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "TextWidth_96px.png")) };
+            var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Grid_96px.png")) };
+            var btnInsertMasterTable = new ButtonMenuItem { Text = "Add New Master Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "GridView_96px.png")) };
+            var btnInsertSpreadsheetTable = new ButtonMenuItem { Text = "Add New Linked Spreadsheet Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PivotTable_96px.png")) };
+
+            btnInsertText.Click += (sender, e) => {
+                FlowsheetControl.AddObject("Text", 50, 50);
+            };
+
+            btnInsertTable.Click += (sender, e) =>
+            {
+                FlowsheetControl.AddObject("Property Table", 50, 50);
+            };
+
+            btnInsertMasterTable.Click += (sender, e) =>
+            {
+                FlowsheetControl.AddObject("Master Property Table", 50, 50);
+            };
+
+            btnInsertSpreadsheetTable.Click += (sender, e) =>
+            {
+                FlowsheetControl.AddObject("Spreadsheet Table", 50, 50);
+            };
+
             var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
             chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
             chkSimSolver.CheckedChanged += (sender, e) => {
@@ -73,8 +99,8 @@ namespace DWSIM.UI.Forms
 
             Menu = new MenuBar();
             Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose } });
-            Menu.Items.Add(new ButtonMenuItem { Text = "Settings", Items = { btnComps, btnBasis, btnOptions } });
-            Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
+            Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnTools } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
@@ -111,7 +137,7 @@ namespace DWSIM.UI.Forms
             {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Settings", 500, 500, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm("Other Settings", 500, 500, cont);
                 form.Show();
                 form.Width += 1;
             };
@@ -374,7 +400,7 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.SetMessageListener((string text, Interfaces.IFlowsheet.MessageType mtype) =>
             {
-                Application.Instance.Invoke(() =>
+                Application.Instance.AsyncInvoke(() =>
                 {
 
                     var item = new ListItem { Text = "[" + DateTime.Now.ToString() + "] " + text };
@@ -425,7 +451,7 @@ namespace DWSIM.UI.Forms
                 obj.GraphicObject.Active = item1.Checked;
             };
 
-            var item2 = new ButtonMenuItem { Text = "Edit Connections" };
+            var item2 = new ButtonMenuItem { Text = "Edit Connections", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Electrical_96px.png")) };
             item2.Click += (sender, e) =>
             {
                 var cont = UI.Shared.Common.GetDefaultContainer();
@@ -444,10 +470,10 @@ namespace DWSIM.UI.Forms
                 item2.Enabled = false;
             }
 
-            var item3 = new ButtonMenuItem { Text = "Calculate" };
+            var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
             item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(obj);
 
-            var item4 = new ButtonMenuItem { Text = "Debug" };
+            var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Console_96px.png")) };
             item4.Click += (sender, e) =>
             {
                 var txt = new TextArea { ReadOnly = true, Wrap = true };
@@ -457,7 +483,7 @@ namespace DWSIM.UI.Forms
                 form1.ShowModal(this);
             };
 
-            var menuitem1 = new ButtonMenuItem { Text = "Edit Properties" };
+            var menuitem1 = new ButtonMenuItem { Text = "Edit Properties", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
             menuitem1.Click += (sender, e) =>
             {
                 if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO)
@@ -529,7 +555,7 @@ namespace DWSIM.UI.Forms
                 }
             };
 
-            var menuitem2 = new ButtonMenuItem { Text = "View Results" };
+            var menuitem2 = new ButtonMenuItem { Text = "View Results", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png")) };
             menuitem2.Click += (sender, e) =>
             {
                 var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
@@ -541,14 +567,14 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-            var item5 = new ButtonMenuItem { Text = "Clone" };
+            var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
             item5.Click += (sender, e) =>
             {
                 var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 50, obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
                 ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
             };
 
-            var item6 = new ButtonMenuItem { Text = "Delete" };
+            var item6 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
 
             item6.Click += (sender, e) =>
             {
@@ -569,7 +595,7 @@ namespace DWSIM.UI.Forms
 
             deselctxmenu.Items.Clear();
 
-            var item0 = new ButtonMenuItem { Text = "Add New Object" };
+            var item0 = new ButtonMenuItem { Text = "Add New Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")) };
 
             int currposx = (int)Mouse.Position.X - Location.X;
             int currposy = (int)Mouse.Position.Y - Location.Y;

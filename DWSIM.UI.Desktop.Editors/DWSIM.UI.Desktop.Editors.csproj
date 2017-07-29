@@ -42,7 +42,7 @@
       <HintPath>..\DWSIM\References\Ciloci.Flee.dll</HintPath>
     </Reference>
     <Reference Include="Eto, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.3.0\lib\net40\Eto.dll</HintPath>
+      <HintPath>..\packages\Eto.Forms.2.3.0\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
@@ -67,21 +67,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
-    <Compile Include="Spreadsheet\PropSelection.cs">
-      <SubType>Eto.Forms</SubType>
-    </Compile>
+    <Compile Include="Spreadsheet\PropSelection.cs" />
     <Compile Include="Spreadsheet\Spreadsheet.cs" />
     <Compile Include="UnitOperations\AbsorptionColumn.cs" />
     <Compile Include="Compounds\Compounds.cs" />
     <Compile Include="General\Connections.cs" />
     <Compile Include="UnitOperations\DistillationColumn.cs" />
     <Compile Include="UnitOperations\General.cs" />
-    <Compile Include="General\InsertObject.cs">
-      <SubType>Eto.Forms</SubType>
-    </Compile>
+    <Compile Include="General\InsertObject.cs" />
     <Compile Include="General\InsertObject.eto.cs">
       <DependentUpon>InsertObject.cs</DependentUpon>
-      <SubType>Eto.Forms</SubType>
     </Compile>
     <Compile Include="MaterialStream\MaterialStream.cs" />
     <Compile Include="Thermo\Models.cs" />

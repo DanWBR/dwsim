@@ -7,7 +7,7 @@ namespace DWSIM.UI.Controls
     [Eto.Handler(typeof(IFlowsheetSurface))]
     public class FlowsheetSurfaceControl : Eto.Forms.Control
     {
-        IFlowsheetSurface Handler { get { return (IFlowsheetSurface)base.Handler; } }
+        public new IFlowsheetSurface Handler { get { return (IFlowsheetSurface)base.Handler; } }
 
         public DWSIM.Drawing.SkiaSharp.GraphicsSurface FlowsheetSurface
         {
@@ -137,6 +137,20 @@ namespace DWSIM.UI.Controls
                 else if (objtname == "Property Table")
                 {
                     var gobj = new DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.TableGraphic(x, y);
+                    gobj.Name = Guid.NewGuid().ToString();
+                    gobj.Flowsheet = FlowsheetObject;
+                    FlowsheetObject.AddGraphicObject(gobj);
+                }
+                else if (objtname == "Spreadsheet Table")
+                {
+                    var gobj = new DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.SpreadsheetTableGraphic(x, y);
+                    gobj.Name = Guid.NewGuid().ToString();
+                    gobj.Flowsheet = FlowsheetObject;
+                    FlowsheetObject.AddGraphicObject(gobj);
+                }
+                else if (objtname == "Master Property Table")
+                {
+                    var gobj = new DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables.MasterTableGraphic(x, y);
                     gobj.Name = Guid.NewGuid().ToString();
                     gobj.Flowsheet = FlowsheetObject;
                     FlowsheetObject.AddGraphicObject(gobj);
