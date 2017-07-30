@@ -61,7 +61,7 @@ Namespace GraphicObjects
                     newy += trect.Height + 2
                     Height += trect.Height + 2
                     Width = Math.Max(Width, trect.Width / lines.Count)
-                    canvas.DrawText(l, X, newy + Height, tpaint)
+                    canvas.DrawText(l, X, newy, tpaint)
                 Next
             Catch ex As Exception
                 Dim trect As New SKRect(0, 0, 2, 2)

@@ -69,7 +69,9 @@
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Spreadsheet\PropSelection.cs" />
     <Compile Include="Spreadsheet\Spreadsheet.cs" />
+    <Compile Include="Tables\MasterPropertyTable.cs" />
     <Compile Include="Tables\PropertyTable.cs" />
+    <Compile Include="Tables\SpreadsheetTable.cs" />
     <Compile Include="UnitOperations\AbsorptionColumn.cs" />
     <Compile Include="Compounds\Compounds.cs" />
     <Compile Include="General\Connections.cs" />

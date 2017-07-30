@@ -18,19 +18,21 @@ using DWSIM.Interfaces.Enums;
 
 namespace DWSIM.UI.Desktop.Editors.Tables
 {
-    public class PropertyTableEditor : Dialog
+    public class MasterPropertyTableEditor : Dialog
     {
 
-        public TableGraphic Table;
+        public MasterTableGraphic Table;
 
         public int mode = 0;
 
         private bool initialized = false;
 
-        public Button btnOK;
+        public Dictionary<String, Interfaces.ISimulationObject> ObjList;
+
+        public Button btnOK, btnCancel;
         public ListBox lvObjects, lvProps, lvSelect;
 
-        public PropertyTableEditor()
+        public MasterPropertyTableEditor()
         {
             Init();
         }
@@ -46,7 +48,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
             Minimizable = false;
             WindowStyle = Eto.Forms.WindowStyle.Default;
 
-            Title = "Configure Property Table";
+            Title = "Configure Master Property Table";
 
             var container = new TableLayout();
 
@@ -80,7 +82,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
             centercontainer.Padding = new Padding(5, 5, 5, 5);
             centercontainer.Spacing = new Size(10, 10);
 
-            bottomcontainer.Rows.Add(new TableRow(null, btnOK));
+            bottomcontainer.Rows.Add(new TableRow(null, btnCancel, btnOK));
             bottomcontainer.Padding = new Padding(5, 5, 5, 5);
             bottomcontainer.Spacing = new Size(10, 10);
 
@@ -104,65 +106,66 @@ namespace DWSIM.UI.Desktop.Editors.Tables
                 }
             };
 
-            bool adding = false;
+            //bool adding = false;
 
             lvProps.SelectedIndexChanged += (sender, e) =>
             {
-                if (lvProps.SelectedValue != null)
-                {
-                    if (!Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
-                    {
-                        Table.VisibleProperties.Add(lvObjects.SelectedKey, new List<string>());
-                    }
-                    adding = true;
-                    lvSelect.Items.Clear();
-                    lvSelect.Items.Add("Show");
-                    lvSelect.Items.Add("Hide");
-                    adding = false;
-                    if (Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
-                    {
-                        if (Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
-                        {
-                            lvSelect.SelectedIndex = 0;
-                        }
-                        else
-                        {
-                            lvSelect.SelectedIndex = 1;
-                        }
-                    }
-                }
+                //if (lvProps.SelectedValue != null)
+                //{
+                //    if (!Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
+                //    {
+                //        Table.VisibleProperties.Add(lvObjects.SelectedKey, new List<string>());
+                //    }
+                //    adding = true;
+                //    lvSelect.Items.Clear();
+                //    lvSelect.Items.Add("Show");
+                //    lvSelect.Items.Add("Hide");
+                //    adding = false;
+                //    if (Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
+                //    {
+                //        if (Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
+                //        {
+                //            lvSelect.SelectedIndex = 0;
+                //        }
+                //        else
+                //        {
+                //            lvSelect.SelectedIndex = 1;
+                //        }
+                //    }
+                //}
             };
 
             lvSelect.SelectedIndexChanged += (sender, e) =>
             {
-                if (!adding)
-                {
-                    if (lvSelect.SelectedIndex == 0)
-                    {
-                        if (!Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
-                        {
-                            Table.VisibleProperties[lvObjects.SelectedKey].Add(lvProps.SelectedKey);
-                        }
-                    }
-                    else if (lvSelect.SelectedIndex == 1)
-                    {
-                        if (Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
-                        {
-                            Table.VisibleProperties[lvObjects.SelectedKey].Remove(lvProps.SelectedKey);
-                        }
-                    }
-                }
+                //if (!adding)
+                //{
+                //    if (lvSelect.SelectedIndex == 0)
+                //    {
+                //        if (!Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
+                //        {
+                //            Table.VisibleProperties[lvObjects.SelectedKey].Add(lvProps.SelectedKey);
+                //        }
+                //    }
+                //    else if (lvSelect.SelectedIndex == 1)
+                //    {
+                //        if (Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
+                //        {
+                //            Table.VisibleProperties[lvObjects.SelectedKey].Remove(lvProps.SelectedKey);
+                //        }
+                //    }
+                //}
             };
 
 
             Load += (sender, e) =>
             {
                 header.Text = Table.HeaderText;
-                lvObjects.Items.Clear();
-                foreach (var obj in Table.Flowsheet.SimulationObjects.Values)
-                {
-                    lvObjects.Items.Add(obj.GraphicObject.Tag, obj.Name);
-                }
+                
+                //lvObjects.Items.Clear();
+                //foreach (var obj in Table.Flowsheet.SimulationObjects.Values)
+                //{
+                //    lvObjects.Items.Add(obj.GraphicObject.Tag, obj.Name);
+                //}
 
             };
 

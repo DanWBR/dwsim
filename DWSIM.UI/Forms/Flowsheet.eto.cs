@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DWSIM.UI.Desktop.Editors;
 using DWSIM.UnitOperations.UnitOperations;
+using DWSIM.Drawing.SkiaSharp.GraphicObjects;
+using DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables;
 
 namespace DWSIM.UI.Forms
 {
@@ -91,6 +93,38 @@ namespace DWSIM.UI.Forms
             btnInsertSpreadsheetTable.Click += (sender, e) =>
             {
                 FlowsheetControl.AddObject("Spreadsheet Table", 50, 50);
+            };
+
+            FlowsheetControl.MouseDoubleClick += (sender, e) => {
+                var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                if (selobj != null) {
+                    if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
+                    {
+                        var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (TableGraphic)selobj };
+                        editor.ShowModalAsync(FlowsheetControl);
+                    } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable)
+                    {
+                        var editor = new DWSIM.UI.Desktop.Editors.Tables.SpreadsheetTableEditor { Table = (SpreadsheetTableGraphic)selobj };
+                        editor.ShowModalAsync(FlowsheetControl);
+                    } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable)
+                    {
+                        var editor = new DWSIM.UI.Desktop.Editors.Tables.MasterPropertyTableEditor { Table = (MasterTableGraphic)selobj };
+                        editor.ShowModalAsync(FlowsheetControl);
+                    } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
+                    {
+                        var txtobj = (TextGraphic)selobj;
+                        var container = new TableLayout();
+                        var txt = new TextArea { Text = txtobj.Text };
+                        txt.TextChanged += (sender2, e2) => {
+                            txtobj.Text = txt.Text;
+                        };
+                        container.Rows.Add(new TableRow(txt));
+                        var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 400, 400, container , false);
+                        editor.Show();
+                    }
+
+
+                }
             };
 
             var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
