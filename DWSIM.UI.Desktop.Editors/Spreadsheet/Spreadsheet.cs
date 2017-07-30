@@ -278,13 +278,10 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 foreach (var cellparam in row.CellParams.Values)
                 {
-                    if ((cellparam != null))
+                    if ((cellparam != null && cellparam.CellType == SharedClasses.Spreadsheet.VarType.Write))
                     {
-                        if (cellparam.CellType == SharedClasses.Spreadsheet.VarType.Write)
-                        {
-                            var obj = flowsheet.SimulationObjects[ccparams.ObjectID];
-                            obj.SetPropertyValue(ccparams.PropID, cellparam.CurrVal, su);
-                        }
+                        var obj = flowsheet.SimulationObjects[ccparams.ObjectID];
+                        obj.SetPropertyValue(ccparams.PropID, cellparam.CurrVal, su);
                     }
                 }
             }
@@ -293,31 +290,32 @@ namespace DWSIM.UI.Desktop.Editors
 
         public void EvaluateAll(SpreadsheetCellParameters cell = null)
         {
+            bool changed = false;
             if (cell == null)
             {
                 try
                 {
                     if ((flowsheet != null))
                     {
+                        int i = 0;
                         foreach (var row in rowlist)
                         {
+                            changed = false;
                             foreach (var cellparam in row.CellParams.Values)
                             {
                                 ccparams = cellparam;
-                                if ((ccparams != null))
+                                if ((ccparams != null && ccparams.CurrVal != "" && ccparams.Expression != ""))
                                 {
                                     if (!string.IsNullOrEmpty(ccparams.Expression))
                                     {
                                         ccparams.PrevVal = ccparams.CurrVal;
                                         UpdateValue(ccparams);
+                                        changed = true;
                                     }
                                 }
                             }
-                        }
-                        int i = 0;
-                        for (i = 0; i <= 100; i++)
-                        {
-                           Application.Instance.AsyncInvoke(() => grid.ReloadData(i));
+                            if (changed) Application.Instance.Invoke(() => grid.ReloadData(i));
+                            i += 1;
                         }
                     }
                 }

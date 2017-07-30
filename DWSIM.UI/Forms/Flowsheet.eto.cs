@@ -20,6 +20,8 @@ namespace DWSIM.UI.Forms
         public Desktop.Shared.Flowsheet FlowsheetObject;
         public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
+        private TableLayout SpreadsheetControl;
+        private TabPage TabPageSpreadsheet;
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -142,32 +144,17 @@ namespace DWSIM.UI.Forms
                 form.Width += 1;
             };
 
-            btnSolve.Click += (sender, e) => { 
-                FlowsheetObject.UpdateSpreadsheet(() => {
-                    Spreadsheet.EvaluateAll();
-                    Spreadsheet.WriteAll();
-                });
-                FlowsheetObject.SolveFlowsheet(); 
-                FlowsheetObject.UpdateSpreadsheet(() => {
-                    Spreadsheet.EvaluateAll();
-                });
+            btnSolve.Click += (sender, e) => {
+                SolveFlowsheet();
             };
 
-            //this.KeyDown += (sender, e) =>
-            //{
-            //    if (e.Key == Keys.F5) {
-            //        FlowsheetObject.UpdateSpreadsheet(() =>
-            //        {
-            //            Spreadsheet.EvaluateAll();
-            //            Spreadsheet.WriteAll();
-            //        });
-            //        FlowsheetObject.SolveFlowsheet();
-            //        FlowsheetObject.UpdateSpreadsheet(() =>
-            //        {
-            //            Spreadsheet.EvaluateAll();
-            //        });
-            //    };
-            //};
+            this.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Keys.F5)
+                {
+                    SolveFlowsheet();
+                };
+            };
 
             btnSave.Click += (sender, e) =>
             {
@@ -197,7 +184,7 @@ namespace DWSIM.UI.Forms
 
             };
 
-            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject) {ObjList = ObjectList };
+            Spreadsheet = new DWSIM.UI.Desktop.Editors.Spreadsheet(FlowsheetObject) { ObjList = ObjectList };
 
             FlowsheetObject.LoadSpreadsheetData = new Action<XDocument>((xdoc) =>
             {
@@ -211,7 +198,8 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.SaveSpreadsheetData = new Action<XDocument>((xdoc) =>
             {
-                try{ Spreadsheet.CopyToDT();} catch (Exception){}
+                try { Spreadsheet.CopyToDT(); }
+                catch (Exception) { }
                 xdoc.Element("DWSIM_Simulation_Data").Add(new XElement("Spreadsheet"));
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data1"));
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Add(new XElement("Data2"));
@@ -220,15 +208,18 @@ namespace DWSIM.UI.Forms
                 xdoc.Element("DWSIM_Simulation_Data").Element("Spreadsheet").Element("Data2").Value = Spreadsheet.CopyDT2ToString();
             });
 
-            FlowsheetObject.RetrieveSpreadsheetData = new Func<string,List<string[]>>((range) => 
+            FlowsheetObject.RetrieveSpreadsheetData = new Func<string, List<string[]>>((range) =>
             {
                 return Spreadsheet.GetDataFromRange(range);
             });
+
+            SpreadsheetControl =  Spreadsheet.GetSpreadsheet(FlowsheetObject);
             
             var tabholder = new TabControl();
+            TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Material Streams" });
-            tabholder.Pages.Add(new TabPage { Content = Spreadsheet.GetSpreadsheet(FlowsheetObject), Text = "Spreadsheet" });
+            tabholder.Pages.Add(TabPageSpreadsheet);
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Scripts" });
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Results" });
 
@@ -267,6 +258,22 @@ namespace DWSIM.UI.Forms
 
             Task.Factory.StartNew(() => LoadObjects());
 
+        }
+
+        private void SolveFlowsheet()
+        {
+            FlowsheetObject.UpdateSpreadsheet(() =>
+            {
+                Spreadsheet.EvaluateAll();
+                Spreadsheet.WriteAll();
+            });
+            Application.Instance.AsyncInvoke(() => TabPageSpreadsheet.Enabled = false);
+            FlowsheetObject.SolveFlowsheet();
+            Application.Instance.AsyncInvoke(() => TabPageSpreadsheet.Enabled = true);
+            FlowsheetObject.UpdateSpreadsheet(() =>
+            {
+                Spreadsheet.EvaluateAll();
+            });
         }
 
         void Flowsheet_Shown(object sender, EventArgs e)
