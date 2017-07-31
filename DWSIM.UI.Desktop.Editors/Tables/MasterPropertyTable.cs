@@ -54,8 +54,8 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             var tableleft = new TableLayout {Width = 200 };
 
-            btnOrderUp = new Button { Text = "˄", Width = 50 };
-            btnOrderDown = new Button { Text = "˅", Width = 50 };
+            btnOrderUp = new Button { Text = "˄", Width = 25 };
+            btnOrderDown = new Button { Text = "˅", Width = 25 };
 
             tableleft.Rows.Add(new TableRow(new Label { Text = "Show Objects/Properties:", VerticalAlignment = VerticalAlignment.Center }));
             tableleft.Rows.Add(null);

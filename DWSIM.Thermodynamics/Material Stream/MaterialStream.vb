@@ -4246,6 +4246,14 @@ Namespace Streams
             Select Case [property].ToLower
                 Case "compressibilityfactor"
                     res.Add(Me.Phases(f).Properties.compressibilityFactor.GetValueOrDefault)
+                Case "isothermalcompressibility"
+                    res.Add(Me.Phases(f).Properties.isothermal_compressibility.GetValueOrDefault)
+                Case "bulkmodulus"
+                    res.Add(Me.Phases(f).Properties.bulk_modulus.GetValueOrDefault)
+                Case "joulethomsoncoefficient"
+                    res.Add(Me.Phases(f).Properties.jouleThomsonCoefficient.GetValueOrDefault)
+                Case "speedofsound"
+                    res.Add(Me.Phases(f).Properties.speedOfSound.GetValueOrDefault)
                 Case "heatofvaporization"
                 Case "heatcapacity", "heatcapacitycp"
                     Select Case basis
@@ -4363,6 +4371,39 @@ Namespace Streams
                         Case "Mass", "mass"
                             res.Add(Me.Phases(f).Properties.entropy.GetValueOrDefault * 1000)
                     End Select
+                Case "internalenergy"
+                    If basis.Equals("mole") Then
+                        Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                        If val = 0.0# Then
+                            res.Add(Me.Phases(f).Properties.molar_internal_energy.GetValueOrDefault)
+                        Else
+                            res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault * val)
+                        End If
+                    Else
+                        res.Add(Me.Phases(f).Properties.internal_energy.GetValueOrDefault)
+                    End If
+                Case "gibbsenergy"
+                    If basis.Equals("mole") Then
+                        Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                        If val = 0.0# Then
+                            res.Add(Me.Phases(f).Properties.molar_gibbs_free_energy.GetValueOrDefault)
+                        Else
+                            res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault * val)
+                        End If
+                    Else
+                        res.Add(Me.Phases(f).Properties.gibbs_free_energy.GetValueOrDefault)
+                    End If
+                Case "helmholtzenergy"
+                    If basis.Equals("mole") Then
+                        Dim val As Double = Me.Phases(f).Properties.molecularWeight.GetValueOrDefault
+                        If val = 0.0# Then
+                            res.Add(Me.Phases(f).Properties.molar_helmholtz_energy.GetValueOrDefault)
+                        Else
+                            res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault * val)
+                        End If
+                    Else
+                        res.Add(Me.Phases(f).Properties.helmholtz_energy.GetValueOrDefault)
+                    End If
                 Case "moles"
                     res.Add(Me.Phases(f).Properties.molarflow.GetValueOrDefault)
                 Case "mass"

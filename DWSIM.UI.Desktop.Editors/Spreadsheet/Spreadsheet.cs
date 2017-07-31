@@ -212,6 +212,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             table.Rows.Add(new TableRow(cellcp));
 
+            var cnt = new DynamicLayout { Padding = new Padding(10, 0) };
+            s.CreateAndAddDescriptionRow(cnt, "Select cells by clicking or touching on them (using arrow keys on the keyboard won't change the currently selected data cell). After selecting the cell, edit its contents on the 'Contents' input box, or configure it to import or export data from/to the flowsheet by clicking on the corresponding buttons.");
+
+            table.Rows.Add(new TableRow(cnt));
+
             txtformula.TextChanged += (sender, e) =>
             {
                 rowitem.CellParams[selectedcell].Expression = txtformula.Text;
@@ -357,9 +362,10 @@ namespace DWSIM.UI.Desktop.Editors
                         this.ExprContext.Options.ParseCulture = System.Globalization.CultureInfo.InvariantCulture;
                         this.ExprContext.ParserOptions.FunctionArgumentSeparator = ';';
                         this.ExprObj = this.ExprContext.CompileGeneric<object>(expression.Substring(1));
-                        double result = ((double)ExprObj.Evaluate());
-                        cell.RawValue = result;
-                        cell.CurrVal = result.ToString(nf);
+                        var result = ExprObj.Evaluate();
+                        double dresult = double.Parse(result.ToString());
+                        cell.RawValue = dresult;
+                        cell.CurrVal = dresult.ToString(nf);
                     }
                     else if (expression.Substring(0, 1) == ":")
                     {
@@ -400,7 +406,6 @@ namespace DWSIM.UI.Desktop.Editors
                 ccparams.ToolTipText = "";
                 flowsheet.ShowMessage(flowsheet.GetTranslatedString("Invalidexpressiononcell") + " " + GetCellString(cell) + " - " + ex.Message, IFlowsheet.MessageType.GeneralError);
             }
-
         }
 
         public string GetCellString(SpreadsheetCellParameters cell)
@@ -447,13 +452,14 @@ namespace DWSIM.UI.Desktop.Editors
 
             int i, j;
             i = r1 - 1;
-            for (i = r1 - 1; i < r2; i++ )
+            for (i = r1 - 1; i < r2; i++)
             {
                 var sublist = new List<string>();
                 j = 1;
                 foreach (var cellparam in rowlist[i].CellParams.Values)
                 {
-                    if (j >= c1) {
+                    if (j >= c1)
+                    {
                         sublist.Add(cellparam.CurrVal);
                     }
                     j += 1;

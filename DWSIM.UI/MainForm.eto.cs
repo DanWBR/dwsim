@@ -15,12 +15,14 @@ namespace DWSIM.UI
     partial class MainForm : Form
     {
 
+        ListBox MostRecentList;
+
         void InitializeComponent()
         {
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
             Title = "DWSIMLauncher".Localize();
-            ClientSize = new Size(490, 210);
+            ClientSize = new Size(660, 390);
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
@@ -80,18 +82,39 @@ namespace DWSIM.UI
             btn7.Click += (sender, e) => new About().Show();
             btn8.Click += (sender, e) => Process.Start("http://sourceforge.net/p/dwsim/donate/");
 
+            var stack = new StackLayout { Orientation = Orientation.Vertical, Spacing = 5 };
+            stack.Items.Add(btn1);
+            stack.Items.Add(btn2);
+            stack.Items.Add(btn5);
+            stack.Items.Add(btn6);
+            stack.Items.Add(btn7);
+            stack.Items.Add(btn8);
+
+            var tableright = new TableLayout();
+            tableright.Padding = new Padding(5, 5, 5, 5);
+            tableright.Spacing = new Size(10, 10);
+
+            MostRecentList = new ListBox { BackgroundColor = bgcolor, TextColor = Colors.White };
+            
+            foreach (var item in GlobalSettings.Settings.MostRecentFiles)
+            {
+                if (File.Exists(item)) MostRecentList.Items.Add(new ListItem { Text = item, Key = item });
+            }
+
+            MostRecentList.SelectedIndexChanged += (sender, e) =>
+            {
+                LoadSimulation(MostRecentList.SelectedKey);
+            };
+
+
+            tableright.Rows.Add(new TableRow(new Label {Text = "Recent Files", Font = SystemFonts.Bold(), TextColor = Colors.White }));
+            tableright.Rows.Add(new TableRow(MostRecentList));
+
             Content = new TableLayout
             {
                 Padding = 10,
                 Spacing = new Size(5, 5),
-                Rows =
-                {
-                    new TableRow(btn1, btn2, null),
-                    //new TableRow(btn3, btn4, null),
-                    new TableRow(btn5, btn6, null),
-                    new TableRow(btn7, btn8, null),
-                    null
-                },
+                Rows = {new TableRow(stack, tableright)},
                 BackgroundColor = bgcolor,
             };
 
@@ -168,6 +191,11 @@ namespace DWSIM.UI
             {
                 Application.Instance.Invoke(() =>
                 {
+                    if (!GlobalSettings.Settings.MostRecentFiles.Contains(path)) 
+                    {
+                        MostRecentList.Items.Add(new ListItem { Text = path, Key = path });
+                        GlobalSettings.Settings.MostRecentFiles.Add(path); 
+                    }
                     loadingdialog.Close();
                     var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);

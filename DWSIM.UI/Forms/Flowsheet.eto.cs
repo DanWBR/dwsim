@@ -24,6 +24,7 @@ namespace DWSIM.UI.Forms
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
         private TableLayout SpreadsheetControl;
         private TabPage TabPageSpreadsheet;
+        private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -134,7 +135,7 @@ namespace DWSIM.UI.Forms
             };
 
             Menu = new MenuBar();
-            Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose } });
+            Menu.ApplicationItems.AddRange(new []{ btnSave, btnSaveAs, btnClose });
             Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
             Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
@@ -249,13 +250,17 @@ namespace DWSIM.UI.Forms
 
             SpreadsheetControl =  Spreadsheet.GetSpreadsheet(FlowsheetObject);
             
+            ResultsControl = new DWSIM.UI.Desktop.Editors.ResultsViewer(FlowsheetObject);
+
+            var MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
+
             var tabholder = new TabControl();
             TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
-            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Material Streams" });
+            tabholder.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
             tabholder.Pages.Add(TabPageSpreadsheet);
             tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Scripts" });
-            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Results" });
+            tabholder.Pages.Add(new TabPage { Content = ResultsControl, Text = "Results" });
 
             var split = new Eto.Forms.Splitter();
             split.Panel1 = tabholder;
@@ -275,7 +280,32 @@ namespace DWSIM.UI.Forms
                 {
                     if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
                     {
-                        SetupSelectedContextMenu();
+                        var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                        switch (obj.ObjectType)
+                        {
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
+                                selctxmenu.Items.Clear();
+                                var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
+                                selctxmenu.Items.Add(itemtype);
+                                var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+                                delitem.Click += (sender2, e2) =>
+                                {
+                                    if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                                    {
+                                        FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
+                                    }
+                                };
+                                selctxmenu.Items.Add(delitem);
+                                break;
+                            default:
+                                SetupSelectedContextMenu();
+                                break;
+                        }
+
                         selctxmenu.Show(FlowsheetControl);
                     }
                     else
@@ -308,6 +338,7 @@ namespace DWSIM.UI.Forms
             {
                 Spreadsheet.EvaluateAll();
             });
+            ResultsControl.UpdateList();
         }
 
         void Flowsheet_Shown(object sender, EventArgs e)

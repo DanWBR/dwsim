@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using DWSIM.Interfaces;
 using Eto.Forms;
+using iTextSharp.text;
 
 namespace DWSIM.UI.Desktop.Shared
 {
@@ -150,5 +153,73 @@ namespace DWSIM.UI.Desktop.Shared
         {
             listeningaction = act;
         }
+
+        public void GenerateReport(List<ISimulationObject> objects, string format, Stream ms)
+        {
+
+            string ptext = "";
+
+            switch (format)
+            {
+
+                case "PDF":
+
+                    iTextSharp.text.Document document = new iTextSharp.text.Document(PageSize.A4, 25, 25, 30, 30);
+                    var writer = iTextSharp.text.pdf.PdfWriter.GetInstance(document, ms);
+
+                    var bf = iTextSharp.text.pdf.BaseFont.CreateFont(iTextSharp.text.pdf.BaseFont.COURIER, iTextSharp.text.pdf.BaseFont.CP1252, true);
+
+                    var regfont = new Font(bf, 12, Font.NORMAL);
+                    var boldfont = new Font(bf, 12, Font.BOLD);
+
+                    document.Open();
+                    document.Add(new Paragraph("DWSIM Simulation Results Report", boldfont));
+                    document.Add(new Paragraph("Simulation Name: " + Options.SimulationName, boldfont));
+                    document.Add(new Paragraph("Date created: " + System.DateTime.Now.ToString() + "\n\n", boldfont));
+
+                    foreach (var obj in objects)
+                    {
+                        ptext = obj.GetDisplayName() + ": " + obj.GraphicObject.Tag + "\n\n";
+                        document.Add(new Paragraph(ptext, boldfont));
+                        ptext = obj.GetReport(Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, Options.NumberFormat);
+                        ptext += "\n";
+                        document.Add(new Paragraph(ptext, regfont));
+                    }
+
+                    document.Close();
+
+                    writer.Close();
+
+                    break;
+
+                case "TXT":
+
+                    string report = "";
+
+                    report += "DWSIM Simulation Results Report\nSimulation Name: " + Options.SimulationName + "\nDate created: " + System.DateTime.Now.ToString() + "\n\n";
+
+                    foreach (var obj in objects)
+                    {
+                        ptext = "";
+                        ptext += obj.GetDisplayName() + ": " + obj.GraphicObject.Tag + "\n\n";
+                        ptext += obj.GetReport(Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, Options.NumberFormat);
+                        ptext += "\n";
+                        report += ptext;
+                    }
+
+
+                    using (StreamWriter wr = new StreamWriter(ms))
+                    {
+                        wr.Write(report);
+                    }
+                    break;
+
+                default:
+
+                    throw new NotImplementedException("Sorry, this feature is not yet available.");
+            }
+
+        }
+
     }
 }
