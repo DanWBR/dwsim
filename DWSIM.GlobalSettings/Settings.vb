@@ -355,21 +355,31 @@ Public Class Settings
 
         Dim source As New IniConfigSource(configfile)
 
+        If source.Configs("RecentFiles") Is Nothing Then source.AddConfig("RecentFiles")
+
         For Each Str As String In MostRecentFiles
             source.Configs("RecentFiles").Set(MostRecentFiles.IndexOf(Str), Str)
         Next
+
+        If source.Configs("UserDatabases") Is Nothing Then source.AddConfig("UserDatabases")
 
         For Each Str As String In UserDatabases
             source.Configs("UserDatabases").Set(UserDatabases.IndexOf(Str), Str)
         Next
 
+        If source.Configs("UserInteractionsDatabases") Is Nothing Then source.AddConfig("UserInteractionsDatabases")
+
         For Each Str As String In UserInteractionsDatabases
             source.Configs("UserInteractionsDatabases").Set(UserInteractionsDatabases.IndexOf(Str), Str)
         Next
 
+        If source.Configs("Backup") Is Nothing Then source.AddConfig("Backup")
+
         'source.Configs("Backup").Set("BackupActivated", BackupActivated)
         'source.Configs("Backup").Set("BackupFolder", BackupFolder)
         source.Configs("Backup").Set("BackupInterval", BackupInterval)
+
+        If source.Configs("Localization") Is Nothing Then source.AddConfig("Localization")
 
         source.Configs("Localization").Set("CultureInfo", CultureInfo)
 
@@ -378,6 +388,10 @@ Public Class Settings
 
         'source.Configs("Misc").Set("ShowTips", ShowTips)
         'source.Configs("Misc").Set("RedirectConsoleOutput", RedirectOutput)
+
+        If source.Configs("Misc") Is Nothing Then source.AddConfig("Misc")
+
+        source.Configs("Misc").Set("Misc", CultureInfo)
 
         source.Configs("Misc").Set("EnableParallelProcessing", EnableParallelProcessing)
         source.Configs("Misc").Set("MaxDegreeOfParallelism", MaxDegreeOfParallelism)
@@ -420,6 +434,8 @@ Public Class Settings
 
         source.Configs("OSInfo").Set("Platform", CurrentPlatform)
         source.Configs("OSInfo").Set("Environment", CurrentEnvironment)
+
+        If source.Configs("UserUnits") Is Nothing Then source.AddConfig("UserUnits")
 
         source.Configs("UserUnits").Set("UserUnits", UserUnits)
 

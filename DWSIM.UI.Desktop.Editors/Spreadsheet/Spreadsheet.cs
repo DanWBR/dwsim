@@ -205,8 +205,9 @@ namespace DWSIM.UI.Desktop.Editors
 
             tr.Cells[5].ScaleWidth = true;
 
-            var tb = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(10), Height = 44 };
+            var tb = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(10) };
             tb.Rows.Add(tr);
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) tb.Height = 44;
 
             cellcp.Content = tb;
 

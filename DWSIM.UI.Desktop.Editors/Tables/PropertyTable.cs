@@ -91,6 +91,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvObjects.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvObjects.SelectedIndex < 0) return;
                 if (lvObjects.SelectedValue != null)
                 {
                     lvProps.Items.Clear();
@@ -105,6 +106,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvProps.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvProps.SelectedIndex < 0) return;
                 if (lvProps.SelectedValue != null)
                 {
                     if (!Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
@@ -132,6 +134,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvSelect.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvSelect.SelectedIndex < 0) return;
                 if (!adding)
                 {
                     if (lvSelect.SelectedIndex == 0)

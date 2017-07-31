@@ -155,7 +155,7 @@ namespace DWSIM.UI.Desktop.Editors
                 lblLastUpdate.Text = "Updated on: " + DateTime.Now.ToString();
             };
 
-            var txtpad = new TextBox{Text = PadSize.ToString()};
+            var txtpad = new TextBox{Text = PadSize.ToString(), Height = 40};
             txtpad.TextChanged += (sender, e) =>{
                 int ps = 0;
                 if (int.TryParse(txtpad.Text, out ps)) PadSize = int.Parse(txtpad.Text);
@@ -163,9 +163,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             lblLastUpdate = new Label { Text = "Updated on: ", VerticalAlignment = VerticalAlignment.Center };
 
-            topcontainer.Rows.Add(new TableRow(lblLastUpdate, null, new Label { Text = "Column Size", VerticalAlignment = VerticalAlignment.Center }, txtpad, btnUpdate));
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) topcontainer.Height = 36;
+
+            topcontainer.Rows.Add(new TableRow(lblLastUpdate, null, new Label { Text = "Column Size", VerticalAlignment = VerticalAlignment.Center }, txtpad, btnUpdate) { ScaleHeight = false });
 
             txtView = new TextArea { ReadOnly = true, Wrap = false, Font = Fonts.Monospace(SystemFonts.Default().Size) };
 
