@@ -36,7 +36,7 @@ Public NotInheritable Class SplashScreen
 
         lblCopyright.Text = My.Application.Info.Copyright
 
-        lblAppVersion.Text = "Application Version: " + My.Application.Info.Version.ToString
+        lblAppVersion.Text = "Application Version: " + My.Application.Info.Version.ToString + " (Old UI)"
         lblFrameworkVersion.Text = "Framework Version: " + Environment.Version.ToString
 
     End Sub

@@ -35,7 +35,7 @@ namespace DWSIM.UI.Forms
 
             ClientSize = new Size(w, h);
 
-            var lbl1 = new Label { Style = "splashlabels2", Text = "ApplicationVersion".Localize() + Assembly.GetExecutingAssembly().GetName().Version.ToString() };
+            var lbl1 = new Label { Style = "splashlabels2", Text = "ApplicationVersion".Localize() + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " (New UI)" };
 
             var lbl1a = new Label { Style = "splashlabels1", Text = "Version".Localize() + " " + Assembly.GetExecutingAssembly().GetName().Version.Major.ToString() + "." + Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString() };
 
@@ -98,7 +98,7 @@ namespace DWSIM.UI.Forms
         void SplashScreen_Shown(object sender, EventArgs e)
         {
             Task.Factory.StartNew(() => {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
             }).ContinueWith((t) => Application.Instance.Invoke(() => this.Close()));
         }
 
