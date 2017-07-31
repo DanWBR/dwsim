@@ -48,7 +48,7 @@ Namespace GraphicObjects
                 .IsStroke = False
             End With
 
-            Dim lines = Text.Split(Environment.NewLine)
+            Dim lines = Text.Split(vbLf)
 
             Dim newy As Integer = Y
 
@@ -57,10 +57,10 @@ Namespace GraphicObjects
                 Width = 0
                 For Each l As String In lines
                     Dim trect As New SKRect(0, 0, 2, 2)
-                    tpaint.GetTextPath(Text.Replace("\n", vbCrLf), 0, 0).GetBounds(trect)
+                    tpaint.GetTextPath(l, 0, 0).GetBounds(trect)
                     newy += trect.Height + 2
                     Height += trect.Height + 2
-                    Width = Math.Max(Width, trect.Width / lines.Count)
+                    Width = Math.Max(Width, trect.Width)
                     canvas.DrawText(l, X, newy, tpaint)
                 Next
             Catch ex As Exception

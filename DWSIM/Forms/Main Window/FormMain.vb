@@ -1346,6 +1346,7 @@ Public Class FormMain
 
         For Each xel1 As XElement In xdoc.Descendants
             SharedClasses.Utility.UpdateElement(xel1)
+            SharedClasses.Utility.UpdateElementFromNewUI(xel1)
         Next
 
         Try

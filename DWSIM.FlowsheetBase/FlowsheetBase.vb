@@ -984,7 +984,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
         For Each xel1 As XElement In xdoc.Descendants
             SharedClasses.Utility.UpdateElement(xel1)
-            SharedClasses.Utility.UpdateElementForV5(xel1)
+            SharedClasses.Utility.UpdateElementForNewUI(xel1)
         Next
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture

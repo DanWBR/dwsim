@@ -135,7 +135,7 @@ Namespace GraphicObjects.Tables
                 For j = 0 To SpreadsheetData(0).Count - 1
                     m = 0
                     For i = 0 To SpreadsheetData.Count - 1
-                        canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding / 2 + m * itemheight + size.Height, tpaint)
+                        canvas.DrawText(SpreadsheetData(i)(j), X + Padding + leftmargin, Y + Padding + m * itemheight + size.Height, tpaint)
                         If i < SpreadsheetData.Count - 1 Then canvas.DrawLine(X + leftmargin, Y + (m + 1) * itemheight, X + leftmargin + maxW(n), Y + (m + 1) * itemheight, bpaint)
                         m += 1
                     Next

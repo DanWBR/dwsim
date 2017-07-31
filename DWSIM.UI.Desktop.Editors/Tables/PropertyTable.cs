@@ -18,15 +18,11 @@ using DWSIM.Interfaces.Enums;
 
 namespace DWSIM.UI.Desktop.Editors.Tables
 {
-    public class PropertyTableEditor : Dialog
+    public class PropertyTableEditor : Form
     {
 
         public TableGraphic Table;
-
-        public int mode = 0;
-
-        private bool initialized = false;
-
+        
         public Button btnOK;
         public ListBox lvObjects, lvProps, lvSelect;
 
@@ -71,11 +67,11 @@ namespace DWSIM.UI.Desktop.Editors.Tables
                 Table.HeaderText = header.Text;
             };
 
-            topcontainer.Rows.Add(new TableRow(new Label { Text = "Table Header" }, header));
+            topcontainer.Rows.Add(new TableRow(new Label { Text = "Table Header", VerticalAlignment = VerticalAlignment.Center }, header));
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
 
-            centercontainer.Rows.Add(new TableRow(new Label { Text = "Object / Property / Show" }));
+            centercontainer.Rows.Add(new TableRow(new Label { Text = "Object / Property / Show", VerticalAlignment = VerticalAlignment.Center }));
             centercontainer.Rows.Add(new TableRow(lvObjects, lvProps, lvSelect));
             centercontainer.Padding = new Padding(5, 5, 5, 5);
             centercontainer.Spacing = new Size(10, 10);
@@ -87,6 +83,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
             container.Rows.Add(new TableRow(topcontainer));
             container.Rows.Add(new TableRow(centercontainer));
             container.Rows.Add(new TableRow(bottomcontainer));
+            container.Rows.Add(null);
 
             container.Padding = new Padding(5, 5, 5, 5);
 
@@ -165,10 +162,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
                 }
 
             };
-
-            initialized = true;
-
-
+            
         }
 
     }

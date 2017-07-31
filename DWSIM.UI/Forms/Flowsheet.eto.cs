@@ -101,15 +101,15 @@ namespace DWSIM.UI.Forms
                     if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
                     {
                         var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (TableGraphic)selobj };
-                        editor.ShowModalAsync(FlowsheetControl);
+                        editor.Show();
                     } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable)
                     {
                         var editor = new DWSIM.UI.Desktop.Editors.Tables.SpreadsheetTableEditor { Table = (SpreadsheetTableGraphic)selobj };
-                        editor.ShowModalAsync(FlowsheetControl);
+                        editor.Show();
                     } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable)
                     {
                         var editor = new DWSIM.UI.Desktop.Editors.Tables.MasterPropertyTableEditor { Table = (MasterTableGraphic)selobj };
-                        editor.ShowModalAsync(FlowsheetControl);
+                        editor.Show();
                     } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
                     {
                         var txtobj = (TextGraphic)selobj;

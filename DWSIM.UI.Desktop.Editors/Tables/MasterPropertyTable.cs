@@ -18,19 +18,14 @@ using DWSIM.Interfaces.Enums;
 
 namespace DWSIM.UI.Desktop.Editors.Tables
 {
-    public class MasterPropertyTableEditor : Dialog
+    public class MasterPropertyTableEditor : Form
     {
 
         public MasterTableGraphic Table;
 
-        public int mode = 0;
-
-        private bool initialized = false;
-
-        public Dictionary<String, Interfaces.ISimulationObject> ObjList;
-
-        public Button btnOK, btnCancel;
-        public ListBox lvObjects, lvProps, lvSelect;
+        public Button btnOK, btnOrderDown, btnOrderUp;
+        public ListBox lvObjects, lvProps, lvSelectObj, lvSelectProp;
+        public DropDown cbObjectType, cbOrderBy;
 
         public MasterPropertyTableEditor()
         {
@@ -53,124 +48,288 @@ namespace DWSIM.UI.Desktop.Editors.Tables
             var container = new TableLayout();
 
             var topcontainer = new TableLayout();
+            var topcontainer2 = new TableLayout();
             var centercontainer = new TableLayout();
             var bottomcontainer = new TableLayout();
 
-            lvObjects = new ListBox { Height = 300, Width = 250 };
-            lvProps = new ListBox { Height = 300, Width = 250 };
-            lvSelect = new ListBox { Height = 300, Width = 250 };
+            var tableleft = new TableLayout {Width = 200 };
+
+            btnOrderUp = new Button { Text = "˄", Width = 50 };
+            btnOrderDown = new Button { Text = "˅", Width = 50 };
+
+            tableleft.Rows.Add(new TableRow(new Label { Text = "Show Objects/Properties:", VerticalAlignment = VerticalAlignment.Center }));
+            tableleft.Rows.Add(null);
+            tableleft.Rows.Add(new TableRow(new Label { Text = "Order objects", VerticalAlignment = VerticalAlignment.Center }, null, btnOrderUp, btnOrderDown));
+
+            lvObjects = new ListBox { Height = 300, Width = 150 };
+            lvProps = new ListBox { Height = 300, Width = 150 };
+            lvSelectObj = new ListBox { Height = 300, Width = 75 };
+            lvSelectProp = new ListBox { Height = 300, Width = 75 };
 
             btnOK = new Button { Text = "Close", Enabled = true };
 
-            btnOK.Click += (sender, e) =>
-            {
-                Close();
-            };
+            btnOK.Click += (sender, e) => Close();
 
             var header = new TextBox();
-            header.TextChanged += (sender, e) =>
-            {
-                Table.HeaderText = header.Text;
-            };
+            header.TextChanged += (sender, e) => Table.HeaderText = header.Text;
 
-            topcontainer.Rows.Add(new TableRow(new Label { Text = "Table Header" }, header));
+            cbObjectType = new DropDown { Width = 300 };
+            cbOrderBy = new DropDown { Width = 200 };
+
+            topcontainer2.Rows.Add(new TableRow(new Label { Text = "Show Objects of Type", VerticalAlignment = VerticalAlignment.Center }, cbObjectType, null, new Label { Text = "Order Objects By", VerticalAlignment = VerticalAlignment.Center }, cbOrderBy));
+            topcontainer2.Padding = new Padding(5, 5, 5, 5);
+            topcontainer2.Spacing = new Size(10, 10);
+
+            topcontainer.Rows.Add(new TableRow(new Label { Text = "Table Header", VerticalAlignment = VerticalAlignment.Center }, header));
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
 
-            centercontainer.Rows.Add(new TableRow(new Label { Text = "Object / Property / Show" }));
-            centercontainer.Rows.Add(new TableRow(lvObjects, lvProps, lvSelect));
+            centercontainer.Rows.Add(new TableRow(tableleft, lvObjects, lvSelectObj, lvProps, lvSelectProp));
+            centercontainer.Rows.Last().Cells[3].ScaleWidth = true;
             centercontainer.Padding = new Padding(5, 5, 5, 5);
             centercontainer.Spacing = new Size(10, 10);
 
-            bottomcontainer.Rows.Add(new TableRow(null, btnCancel, btnOK));
+            bottomcontainer.Rows.Add(new TableRow(null, btnOK));
             bottomcontainer.Padding = new Padding(5, 5, 5, 5);
             bottomcontainer.Spacing = new Size(10, 10);
 
             container.Rows.Add(new TableRow(topcontainer));
+            container.Rows.Add(new TableRow(topcontainer2));
             container.Rows.Add(new TableRow(centercontainer));
             container.Rows.Add(new TableRow(bottomcontainer));
+            container.Rows.Add(null);
 
             container.Padding = new Padding(5, 5, 5, 5);
 
             Content = container;
 
+            cbObjectType.SelectedIndexChanged += (sender, e) =>
+            {
+                if (Loaded)
+                {
+                    Table.ObjectFamily = (Interfaces.Enums.GraphicObjects.ObjectType)Enum.Parse(Table.ObjectType.GetType(), cbObjectType.SelectedValue.ToString());
+                    Table.ObjectList.Clear();
+                    Table.SortedList.Clear();
+                    Table.PropertyList.Clear();
+                    Populate();
+                }
+            };
+
+            cbOrderBy.SelectedIndexChanged += (sender, e) =>
+            {
+                Table.SortBy = cbOrderBy.SelectedValue.ToString();
+                if (Table.SortBy == "Custom")
+                {
+                    btnOrderDown.Enabled = true;
+                    btnOrderUp.Enabled = true;
+                }
+                else
+                {
+                    btnOrderDown.Enabled = false;
+                    btnOrderUp.Enabled = false;
+                }
+                Populate();
+            };
+
+            bool adding = false;
+
             lvObjects.SelectedIndexChanged += (sender, e) =>
             {
                 if (lvObjects.SelectedValue != null)
                 {
-                    lvProps.Items.Clear();
-                    foreach (var item in Table.Flowsheet.SimulationObjects[lvObjects.SelectedKey].GetProperties(PropertyType.ALL))
+                    adding = true;
+                    lvSelectObj.Items.Clear();
+                    lvSelectObj.Items.Add("Show");
+                    lvSelectObj.Items.Add("Hide");
+                    adding = false;
+                    if (Table.ObjectList.ContainsKey(lvObjects.SelectedValue.ToString()))
                     {
-                        lvProps.Items.Add(Table.Flowsheet.GetTranslatedString(item), item);
+                        if (Table.ObjectList[lvObjects.SelectedValue.ToString()])
+                        {
+                            lvSelectObj.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            lvSelectObj.SelectedIndex = 1;
+                        }
                     }
                 }
             };
 
-            //bool adding = false;
 
             lvProps.SelectedIndexChanged += (sender, e) =>
             {
-                //if (lvProps.SelectedValue != null)
-                //{
-                //    if (!Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
-                //    {
-                //        Table.VisibleProperties.Add(lvObjects.SelectedKey, new List<string>());
-                //    }
-                //    adding = true;
-                //    lvSelect.Items.Clear();
-                //    lvSelect.Items.Add("Show");
-                //    lvSelect.Items.Add("Hide");
-                //    adding = false;
-                //    if (Table.VisibleProperties.ContainsKey(lvObjects.SelectedKey))
-                //    {
-                //        if (Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
-                //        {
-                //            lvSelect.SelectedIndex = 0;
-                //        }
-                //        else
-                //        {
-                //            lvSelect.SelectedIndex = 1;
-                //        }
-                //    }
-                //}
+                if (lvProps.SelectedValue != null)
+                {
+                    adding = true;
+                    lvSelectProp.Items.Clear();
+                    lvSelectProp.Items.Add("Show");
+                    lvSelectProp.Items.Add("Hide");
+                    adding = false;
+                    if (Table.PropertyList.ContainsKey(lvProps.SelectedKey))
+                    {
+                        if (Table.PropertyList[lvProps.SelectedKey])
+                        {
+                            lvSelectProp.SelectedIndex = 0;
+                        }
+                        else
+                        {
+                            lvSelectProp.SelectedIndex = 1;
+                        }
+                    }
+                }
             };
 
-            lvSelect.SelectedIndexChanged += (sender, e) =>
+            lvSelectObj.SelectedIndexChanged += (sender, e) =>
             {
-                //if (!adding)
-                //{
-                //    if (lvSelect.SelectedIndex == 0)
-                //    {
-                //        if (!Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
-                //        {
-                //            Table.VisibleProperties[lvObjects.SelectedKey].Add(lvProps.SelectedKey);
-                //        }
-                //    }
-                //    else if (lvSelect.SelectedIndex == 1)
-                //    {
-                //        if (Table.VisibleProperties[lvObjects.SelectedKey].Contains(lvProps.SelectedKey))
-                //        {
-                //            Table.VisibleProperties[lvObjects.SelectedKey].Remove(lvProps.SelectedKey);
-                //        }
-                //    }
-                //}
+                if (!adding)
+                {
+                    if (Table.ObjectList.ContainsKey(lvObjects.SelectedValue.ToString()))
+                    {
+                        Table.ObjectList[lvObjects.SelectedValue.ToString()] = lvSelectObj.SelectedIndex == 0 ? true : false;
+                    }
+                }
             };
 
+            lvSelectProp.SelectedIndexChanged += (sender, e) =>
+            {
+                if (!adding)
+                {
+                    if (Table.PropertyList.ContainsKey(lvProps.SelectedKey))
+                    {
+                        Table.PropertyList[lvProps.SelectedKey] = lvSelectProp.SelectedIndex == 0 ? true : false;
+                    }
+                }
+            };
+
+
+            btnOrderUp.Click += (sender, e) =>
+            {
+                int index = 0;
+                if (this.lvObjects.SelectedValue != null)
+                {
+                    index = this.lvObjects.SelectedIndex;
+                    if (index != 0)
+                    {
+                        ListItem lvi = new ListItem { Text = lvObjects.SelectedValue.ToString(), Key = lvObjects.SelectedKey };
+                        this.lvObjects.Items.RemoveAt(index);
+                        this.lvObjects.Items.Insert(index - 1, lvi);
+                        this.lvObjects.SelectedIndex = index - 1;
+                    }
+                }
+            };
+
+            btnOrderDown.Click += (sender, e) =>
+            {
+                int index = 0;
+                if (this.lvObjects.SelectedValue != null)
+                {
+                    index = this.lvObjects.SelectedIndex;
+                    if (index != lvObjects.Items.Count - 1)
+                    {
+                        ListItem lvi = new ListItem { Text = lvObjects.SelectedValue.ToString(), Key = lvObjects.SelectedKey };
+                        this.lvObjects.Items.RemoveAt(index);
+                        this.lvObjects.Items.Insert(index + 1, lvi);
+                        this.lvObjects.SelectedIndex = index + 1;
+                    }
+                }
+            };
 
             Load += (sender, e) =>
             {
                 header.Text = Table.HeaderText;
-                
-                //lvObjects.Items.Clear();
-                //foreach (var obj in Table.Flowsheet.SimulationObjects.Values)
-                //{
-                //    lvObjects.Items.Add(obj.GraphicObject.Tag, obj.Name);
-                //}
+
+                var names = Enum.GetNames(Table.ObjectType.GetType());
+                foreach (var name in names)
+                {
+                    cbObjectType.Items.Add(name);
+                }
+
+                var sitems = Table.SortableItems;
+                foreach (var item in sitems)
+                {
+                    cbOrderBy.Items.Add(item);
+                }
+
+                cbObjectType.SelectedIndex = names.ToList().IndexOf(Table.ObjectFamily.ToString());
+                cbOrderBy.SelectedIndex = sitems.ToList().IndexOf(Table.SortBy);
 
             };
 
-            initialized = true;
+            Closed += (sender, e) =>
+            {
 
+                List<string> list = new List<string>();
+                foreach (ListItem lvi in this.lvObjects.Items)
+                {
+                    list.Add(lvi.Text);
+                }
+                Table.SortedList = list;
+
+            };
+
+        }
+
+        public void Populate()
+        {
+            lvObjects.Items.Clear();
+
+            if (Table.SortBy == "Custom")
+            {
+                foreach (var item in Table.SortedList)
+                {
+                    if (Table.Flowsheet.GetFlowsheetSimulationObject(item) != null)
+                    {
+                        ListItem lvi = new ListItem { Text = item, Key = item };
+                        lvObjects.Items.Add(lvi);
+                    }
+                }
+                foreach (var obj in Table.Flowsheet.SimulationObjects.Values)
+                {
+                    if (obj.GraphicObject.ObjectType == Table.ObjectFamily & !Table.SortedList.Contains(obj.GraphicObject.Tag))
+                    {
+                        if (!Table.ObjectList.ContainsKey(obj.GraphicObject.Tag))
+                            Table.ObjectList.Add(obj.GraphicObject.Tag, false);
+                        ListItem lvi = new ListItem { Text = obj.GraphicObject.Tag };
+                        lvi.Key = "Object|" + obj.Name;
+                        lvObjects.Items.Add(lvi);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var obj in Table.Flowsheet.SimulationObjects.Values)
+                {
+                    if (obj.GraphicObject.ObjectType == Table.ObjectFamily)
+                    {
+                        if (!Table.ObjectList.ContainsKey(obj.GraphicObject.Tag))
+                            Table.ObjectList.Add(obj.GraphicObject.Tag, false);
+                        ListItem lvi = new ListItem { Text = obj.GraphicObject.Tag };
+                        lvi.Key = "Object|" + obj.Name;
+                        lvObjects.Items.Add(lvi);
+                    }
+                }
+            }
+
+            string[] props = null;
+
+            lvProps.Items.Clear();
+            if (Table.ObjectList.Count > 0)
+            {
+                foreach (string s in Table.ObjectList.Keys)
+                {
+                    props = Table.Flowsheet.GetFlowsheetSimulationObject(s).GetProperties(PropertyType.ALL);
+                    break;
+                }
+                foreach (string p in props)
+                {
+                    if (!Table.PropertyList.ContainsKey(p))
+                        Table.PropertyList.Add(p, false);
+                    ListItem lvi = new ListItem { Text = Table.Flowsheet.GetTranslatedString(p) };
+                    lvi.Key = p;
+                    lvProps.Items.Add(lvi);
+                }
+            }
 
         }
 

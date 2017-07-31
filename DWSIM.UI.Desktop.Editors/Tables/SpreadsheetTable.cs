@@ -18,15 +18,11 @@ using DWSIM.Interfaces.Enums;
 
 namespace DWSIM.UI.Desktop.Editors.Tables
 {
-    public class SpreadsheetTableEditor : Dialog
+    public class SpreadsheetTableEditor : Form
     {
 
         public SpreadsheetTableGraphic Table;
-
-        public int mode = 0;
-
-        private bool initialized = false;
-
+        
         public Button btnOK;
 
         public SpreadsheetTableEditor()
@@ -64,11 +60,12 @@ namespace DWSIM.UI.Desktop.Editors.Tables
                 Table.SpreadsheetCellRange = header.Text;
             };
 
-            topcontainer.Rows.Add(new TableRow(new Label { Text = "Cell Range" }, header));
+            topcontainer.Rows.Add(new TableRow(new Label { Text = "Cell Range", VerticalAlignment = VerticalAlignment.Center }, header));
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
 
             container.Rows.Add(new TableRow(topcontainer));
+            container.Rows.Add(null);
 
             container.Padding = new Padding(5, 5, 5, 5);
 
@@ -78,8 +75,6 @@ namespace DWSIM.UI.Desktop.Editors.Tables
             {
                 header.Text = Table.SpreadsheetCellRange;
             };
-
-            initialized = true;
 
 
         }
