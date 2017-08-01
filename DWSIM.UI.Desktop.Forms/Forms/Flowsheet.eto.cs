@@ -186,7 +186,6 @@ namespace DWSIM.UI.Forms
 
             btnBasis.Click += (sender, e) =>
             {
-                new Editors.Class1().Create();
                 var cont1 = UI.Shared.Common.GetDefaultContainer();
                 cont1.Tag = "Thermodynamics";
                 new DWSIM.UI.Desktop.Editors.Models(FlowsheetObject, cont1);
