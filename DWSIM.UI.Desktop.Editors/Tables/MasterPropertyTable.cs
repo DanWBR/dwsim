@@ -117,6 +117,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             cbOrderBy.SelectedIndexChanged += (sender, e) =>
             {
+                if (cbOrderBy.SelectedIndex < 0) return; 
                 Table.SortBy = cbOrderBy.SelectedValue.ToString();
                 if (Table.SortBy == "Custom")
                 {
@@ -135,6 +136,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvObjects.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvObjects.SelectedIndex < 0) return;
                 if (lvObjects.SelectedValue != null)
                 {
                     adding = true;
@@ -159,6 +161,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvProps.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvProps.SelectedIndex < 0) return;
                 if (lvProps.SelectedValue != null)
                 {
                     adding = true;
@@ -182,6 +185,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvSelectObj.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvSelectObj.SelectedIndex < 0) return;
                 if (!adding)
                 {
                     if (Table.ObjectList.ContainsKey(lvObjects.SelectedValue.ToString()))
@@ -193,6 +197,7 @@ namespace DWSIM.UI.Desktop.Editors.Tables
 
             lvSelectProp.SelectedIndexChanged += (sender, e) =>
             {
+                if (lvSelectProp.SelectedIndex < 0) return;
                 if (!adding)
                 {
                     if (Table.PropertyList.ContainsKey(lvProps.SelectedKey))

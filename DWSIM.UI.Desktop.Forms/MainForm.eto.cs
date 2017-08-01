@@ -22,7 +22,20 @@ namespace DWSIM.UI
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
             Title = "DWSIMLauncher".Localize();
-            ClientSize = new Size(660, 390);
+
+            switch (GlobalSettings.Settings.RunningPlatform())
+            { 
+                case GlobalSettings.Settings.Platform.Windows:
+                    ClientSize = new Size(660, 390);
+                    break;
+                case GlobalSettings.Settings.Platform.Linux:
+                    ClientSize = new Size(660, 365);
+                    break;
+                case GlobalSettings.Settings.Platform.Mac:
+                    ClientSize = new Size(660, 350);
+                    break;
+            }
+            
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
@@ -103,7 +116,7 @@ namespace DWSIM.UI
 
             MostRecentList.SelectedIndexChanged += (sender, e) =>
             {
-                LoadSimulation(MostRecentList.SelectedKey);
+               if (MostRecentList.SelectedIndex >= 0) LoadSimulation(MostRecentList.SelectedKey);
             };
 
 
@@ -191,17 +204,17 @@ namespace DWSIM.UI
             {
                 Application.Instance.Invoke(() =>
                 {
-                    if (!GlobalSettings.Settings.MostRecentFiles.Contains(path)) 
-                    {
-                        MostRecentList.Items.Add(new ListItem { Text = path, Key = path });
-                        GlobalSettings.Settings.MostRecentFiles.Add(path); 
-                    }
                     loadingdialog.Close();
                     var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);
                     form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
                     form.Show();
+                    if (!GlobalSettings.Settings.MostRecentFiles.Contains(path))
+                    {
+                        MostRecentList.Items.Add(new ListItem { Text = path, Key = path });
+                        GlobalSettings.Settings.MostRecentFiles.Add(path);
+                    }
                 });
             });
         }
