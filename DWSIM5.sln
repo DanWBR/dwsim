@@ -8,26 +8,26 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM", "DWSIM\DWSIM.vbproj
 		{FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08} = {FEA05AE3-5EE2-4A7B-88B3-1A4F9000EA08}
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Plugins.NaturalGas", "NaturalGas\DWSIM.Plugins.NaturalGas.vbproj", "{B8715C47-862B-46CF-8784-573B40407E4D}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Plugins.NaturalGas", "DWSIM.Plugins.NaturalGas\DWSIM.Plugins.NaturalGas.vbproj", "{B8715C47-862B-46CF-8784-573B40407E4D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.XMLSerializer", "CustomXMLSerializer\DWSIM.XMLSerializer.vbproj", "{6C232866-A87B-409A-8A02-39F2FF218561}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.XMLSerializer", "DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj", "{6C232866-A87B-409A-8A02-39F2FF218561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.CoolPropInterface", "CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj", "{A5F6E7CC-0710-4129-9FAA-9FBE9BC4FFCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Thermodynamics.CoolPropInterface", "DWSIM.Thermodynamics.CoolPropInterface\DWSIM.Thermodynamics.CoolPropInterface.csproj", "{A5F6E7CC-0710-4129-9FAA-9FBE9BC4FFCF}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Apps.AzureServer", "AzureServer\DWSIM.Apps.AzureServer.vbproj", "{A7FB4DBF-4EBF-4004-9819-F26E791AAA60}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Apps.AzureServer", "DWSIM.Apps.AzureServer\DWSIM.Apps.AzureServer.vbproj", "{A7FB4DBF-4EBF-4004-9819-F26E791AAA60}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Apps.TCPServer", "TCPServer\DWSIM.Apps.TCPServer.vbproj", "{DBB0E704-7E7B-4DDA-AAC2-A00F7168FDC3}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Apps.TCPServer", "DWSIM.Apps.TCPServer\DWSIM.Apps.TCPServer.vbproj", "{DBB0E704-7E7B-4DDA-AAC2-A00F7168FDC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.DockPanel", "DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj", "{C75532C4-765B-418E-B09B-46D36B2ABDB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.DockPanel", "DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj", "{C75532C4-765B-418E-B09B-46D36B2ABDB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.DockPanel.ThemeVS2012Light", "DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj", "{4ED4FDB5-9FD0-49E6-876D-1635F727C755}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.DockPanel.ThemeVS2012Light", "DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj", "{4ED4FDB5-9FD0-49E6-876D-1635F727C755}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1} = {C75532C4-765B-418E-B09B-46D36B2ABDB1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.TabStrip", "TabStrip\DWSIM.Controls.TabStrip.csproj", "{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.TabStrip", "DWSIM.Controls.TabStrip\DWSIM.Controls.TabStrip.csproj", "{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Apps.RunAsx86", "RunAsx86\DWSIM.Apps.RunAsx86.csproj", "{CAA85A70-4427-4075-A894-8EDDCA42DDD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Apps.RunAsx86", "DWSIM.Apps.RunAsx86\DWSIM.Apps.RunAsx86.csproj", "{CAA85A70-4427-4075-A894-8EDDCA42DDD4}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Interfaces", "DWSIM.Interfaces\DWSIM.Interfaces.vbproj", "{50BFD69A-487E-4B38-86EA-48ACD85A0EB1}"
 EndProject
@@ -45,11 +45,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.GlobalSettings", "DWS
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.MathOps", "DWSIM.Math\DWSIM.MathOps.vbproj", "{FDFB92DE-D189-49DC-91CC-60EE78D1356C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.SwarmOps", "SwarmOps\DWSIM.MathOps.SwarmOps.csproj", "{8F45EFAA-9EAC-403F-B2B0-123F0321056E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.SwarmOps", "DWSIM.Math.SwarmOps\DWSIM.MathOps.SwarmOps.csproj", "{8F45EFAA-9EAC-403F-B2B0-123F0321056E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.RandomOps", "RandomOps\DWSIM.MathOps.RandomOps.csproj", "{F5DFAFED-C786-4DC3-9818-16C992DE3990}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.RandomOps", "DWSIM.Math.RandomOps\DWSIM.MathOps.RandomOps.csproj", "{F5DFAFED-C786-4DC3-9818-16C992DE3990}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Controls.PropertyGridEx", "PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj", "{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.Controls.PropertyGridEx", "DWSIM.Controls.PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj", "{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.ExtensionMethods", "DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj", "{1E12C010-2661-4896-9C00-90F8B41ED10A}"
 EndProject
@@ -64,9 +64,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.txt = README.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.DotNumerics", "DotNumerics\DWSIM.MathOps.DotNumerics.csproj", "{48185EF1-B73B-457B-AA37-0BCE567C5AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.MathOps.DotNumerics", "DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj", "{48185EF1-B73B-457B-AA37-0BCE567C5AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.ZedGraph", "ZedGraph\DWSIM.Controls.ZedGraph.csproj", "{2541686B-1673-43BF-AF89-3163945DB009}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.ZedGraph", "DWSIM.Controls.ZedGraph\DWSIM.Controls.ZedGraph.csproj", "{2541686B-1673-43BF-AF89-3163945DB009}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DWSIM.DrawingTools.SkiaSharp", "DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj", "{77040ECC-07B9-4B21-8B1F-7E45764E35F0}"
 EndProject
@@ -95,7 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3214CD
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Forms", "DWSIM.UI\DWSIM.UI.Desktop.Forms.csproj", "{766C669B-91BD-4C62-A2AF-D3FB9C939715}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Forms", "DWSIM.UI.Desktop.Forms\DWSIM.UI.Desktop.Forms.csproj", "{766C669B-91BD-4C62-A2AF-D3FB9C939715}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop", "DWSIM.UI.Desktop\DWSIM.UI.Desktop.csproj", "{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}"
 	ProjectSection(ProjectDependencies) = postProject

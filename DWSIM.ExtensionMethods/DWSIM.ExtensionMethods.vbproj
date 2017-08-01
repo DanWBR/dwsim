@@ -142,7 +142,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+    <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
       <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
       <Name>DWSIM.MathOps.DotNumerics</Name>
     </ProjectReference>

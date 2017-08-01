@@ -136,7 +136,7 @@
       <Project>{2ffd2514-e4f9-4c19-b38e-b77560585d61}</Project>
       <Name>DWSIM.UI.Desktop.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.UI\DWSIM.UI.Desktop.Forms.csproj">
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Forms\DWSIM.UI.Desktop.Forms.csproj">
       <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
       <Name>DWSIM.UI.Desktop.Forms</Name>
     </ProjectReference>

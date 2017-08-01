@@ -1244,19 +1244,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
+    <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj">
       <Project>{4ed4fdb5-9fd0-49e6-876d-1635f727c755}</Project>
       <Name>DWSIM.Controls.DockPanel.ThemeVS2012Light</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+    <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
       <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
       <Name>DWSIM.MathOps.DotNumerics</Name>
     </ProjectReference>
@@ -1328,27 +1328,27 @@
       <Project>{f3be9782-dbf8-44ab-94df-1dde12d4208a}</Project>
       <Name>DWSIM.Apps.Updater</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
+    <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{B0BB47F2-21C4-41FC-B6E6-40757ADFC4A1}</Project>
       <Name>DWSIM.Controls.PropertyGridEx</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RandomOps\DWSIM.MathOps.RandomOps.csproj">
+    <ProjectReference Include="..\DWSIM.Math.RandomOps\DWSIM.MathOps.RandomOps.csproj">
       <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
       <Name>DWSIM.MathOps.RandomOps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RunAsx86\DWSIM.Apps.RunAsx86.csproj">
+    <ProjectReference Include="..\DWSIM.Apps.RunAsx86\DWSIM.Apps.RunAsx86.csproj">
       <Project>{caa85a70-4427-4075-a894-8eddca42ddd4}</Project>
       <Name>DWSIM.Apps.RunAsx86</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SwarmOps\DWSIM.MathOps.SwarmOps.csproj">
+    <ProjectReference Include="..\DWSIM.Math.SwarmOps\DWSIM.MathOps.SwarmOps.csproj">
       <Project>{8f45efaa-9eac-403f-b2b0-123f0321056e}</Project>
       <Name>DWSIM.MathOps.SwarmOps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TabStrip\DWSIM.Controls.TabStrip.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.TabStrip\DWSIM.Controls.TabStrip.csproj">
       <Project>{f929ca6a-87bd-42c8-8d0a-6455db6f55dc}</Project>
       <Name>DWSIM.Controls.TabStrip</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ZedGraph\DWSIM.Controls.ZedGraph.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.ZedGraph\DWSIM.Controls.ZedGraph.csproj">
       <Project>{2541686b-1673-43bf-af89-3163945db009}</Project>
       <Name>DWSIM.Controls.ZedGraph</Name>
     </ProjectReference>

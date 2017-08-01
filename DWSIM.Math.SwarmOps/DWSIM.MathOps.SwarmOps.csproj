@@ -166,7 +166,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RandomOps\DWSIM.MathOps.RandomOps.csproj">
+    <ProjectReference Include="..\DWSIM.Math.RandomOps\DWSIM.MathOps.RandomOps.csproj">
       <Project>{F5DFAFED-C786-4DC3-9818-16C992DE3990}</Project>
       <Name>DWSIM.MathOps.RandomOps</Name>
     </ProjectReference>

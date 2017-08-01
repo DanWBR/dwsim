@@ -170,12 +170,12 @@
     <None Include="Resources\pc_massico.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
+    <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\DockPanelSuite\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
       <Private>False</Private>
@@ -205,7 +205,7 @@
       <Name>DWSIM</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
+    <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
       <Name>DWSIM.Controls.PropertyGridEx</Name>
       <Private>False</Private>

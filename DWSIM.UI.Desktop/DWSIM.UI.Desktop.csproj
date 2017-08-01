@@ -141,7 +141,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomXMLSerializer\DWSIM.XMLSerializer.vbproj">
+    <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
     </ProjectReference>
@@ -181,7 +181,7 @@
       <Project>{2fc4816c-796d-4366-98f6-c6e3d481e66d}</Project>
       <Name>DWSIM.UI.Desktop.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.UI\DWSIM.UI.Desktop.Forms.csproj">
+    <ProjectReference Include="..\DWSIM.UI.Desktop.Forms\DWSIM.UI.Desktop.Forms.csproj">
       <Project>{766C669B-91BD-4C62-A2AF-D3FB9C939715}</Project>
       <Name>DWSIM.UI.Desktop.Forms</Name>
     </ProjectReference>
