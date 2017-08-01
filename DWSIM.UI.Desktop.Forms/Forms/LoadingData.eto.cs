@@ -7,6 +7,9 @@ namespace DWSIM.UI.Forms.Forms
 {
     partial class LoadingData : Form
     {
+
+        public Label loadingtext;
+
         void InitializeComponent()
         {
 
@@ -18,12 +21,12 @@ namespace DWSIM.UI.Forms.Forms
 
             var progress = new ProgressBar { Indeterminate = true};
 
-            var label = new Label { Text = "Please wait, loading data..." };
-            
-            label.VerticalAlignment = VerticalAlignment.Center;
-            label.TextAlignment = TextAlignment.Center;
+            loadingtext = new Label { Text = "Please wait, loading data..." };
 
-            var container = new TableLayout { Rows = { progress, label }, Spacing = new Size(5, 5), Padding = new Padding(5, 5, 5, 5) };
+            loadingtext.VerticalAlignment = VerticalAlignment.Center;
+            loadingtext.TextAlignment = TextAlignment.Center;
+
+            var container = new TableLayout { Rows = { progress, loadingtext }, Spacing = new Size(5, 5), Padding = new Padding(5, 5, 5, 5) };
 
             Content = container;
 
@@ -37,7 +40,7 @@ namespace DWSIM.UI.Forms.Forms
             Minimizable = false;
 
             int w = 300;
-            int h = 60;
+            int h = 100;
 
             var center = Screen.PrimaryScreen.WorkingArea.Center;
             center.X -= w / 2;

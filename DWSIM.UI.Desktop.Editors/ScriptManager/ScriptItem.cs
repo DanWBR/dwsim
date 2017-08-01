@@ -67,11 +67,11 @@ namespace DWSIM.UI.Desktop.Editors
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));
 
             var tr1 = new TableRow(chkLink, lbl1, cbLinkedObject, lbl2, cbLinkedEvent, null, lbl3, cbPythonInt);
-            var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(10) };
+            var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb1.Rows.Add(tr1);
 
             var tr2 = new TableRow(lbl4, txtName);
-            var tb2 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(10) };
+            var tb2 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb2.Rows.Add(tr2);
 
             cbLinkedObject.SelectedIndexChanged += (sender, e) =>
@@ -115,7 +115,7 @@ namespace DWSIM.UI.Desktop.Editors
             txtScript = new TextArea { Font = Fonts.Monospace(SystemFonts.Default().Size) };
 
             var tr3 = new TableRow(txtScript);
-            var tb3 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(10) };
+            var tb3 = new TableLayout { Spacing = new Size(5, 5) };
             tb3.Rows.Add(tr3);
             
             Rows.Add(new TableRow(tb1));

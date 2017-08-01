@@ -24,7 +24,7 @@ namespace DWSIM.UI
             Title = "DWSIMLauncher".Localize();
 
             switch (GlobalSettings.Settings.RunningPlatform())
-            { 
+            {
                 case GlobalSettings.Settings.Platform.Windows:
                     ClientSize = new Size(660, 390);
                     break;
@@ -35,28 +35,31 @@ namespace DWSIM.UI
                     ClientSize = new Size(660, 350);
                     break;
             }
-            
+
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
             var bgcolor = new Color(0.051f, 0.447f, 0.651f);
 
-            Eto.Style.Add<Button>("main", button => { button.BackgroundColor = bgcolor;
-                                                      button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
-                                                      button.TextColor = Colors.White;
-                                                      button.ImagePosition = ButtonImagePosition.Left;
-                                                      button.Width = 230;
-                                                    });
+            Eto.Style.Add<Button>("main", button =>
+            {
+                button.BackgroundColor = bgcolor;
+                button.Font = new Font(FontFamilies.Sans, 12f, FontStyle.None);
+                button.TextColor = Colors.White;
+                button.ImagePosition = ButtonImagePosition.Left;
+                button.Width = 230;
+            });
 
-            var btn1 = new Button(){ Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), 40, 40, ImageInterpolation.Default)};
-            var btn2 = new Button(){ Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), 40, 40, ImageInterpolation.Default)};
-            var btn3 = new Button(){ Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), 40, 40, ImageInterpolation.Default)};
-            var btn4 =  new Button(){ Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), 40, 40, ImageInterpolation.Default)};
+            var btn1 = new Button() { Style = "main", Text = "OpenSavedFile".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenFolder_100px.png"), 40, 40, ImageInterpolation.Default) };
+            var btn2 = new Button() { Style = "main", Text = "NewSimulation".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Workflow_100px.png"), 40, 40, ImageInterpolation.Default) };
+            var btn3 = new Button() { Style = "main", Text = "NewCompound".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Peptide_100px.png"), 40, 40, ImageInterpolation.Default) };
+            var btn4 = new Button() { Style = "main", Text = "NewDataRegression".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn5 = new Button() { Style = "main", Text = "OpenSamples".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "OpenBook_100px.png"), 40, 40, ImageInterpolation.Default) };
-            var btn6 = new Button(){ Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), 40, 40, ImageInterpolation.Default)};
+            var btn6 = new Button() { Style = "main", Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Help_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn7 = new Button() { Style = "main", Text = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Info_100px.png"), 40, 40, ImageInterpolation.Default) };
             var btn8 = new Button() { Style = "main", Text = "Donate".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Donate_100px.png"), 40, 40, ImageInterpolation.Default) };
 
-            btn5.Click += (sender, e) => {
+            btn5.Click += (sender, e) =>
+            {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "OpenSamples".Localize();
                 dialog.Filters.Add(new FileFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
@@ -74,7 +77,8 @@ namespace DWSIM.UI
                 Process.Start("http://dwsim.inforside.com.br/docs/mobile/help/");
             };
 
-            btn1.Click += (sender, e) => {
+            btn1.Click += (sender, e) =>
+            {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
                 dialog.Filters.Add(new FileFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
@@ -84,7 +88,7 @@ namespace DWSIM.UI
                 {
                     LoadSimulation(dialog.FileName);
                 }
-                
+
             };
 
             btn2.Click += (sender, e) =>
@@ -108,7 +112,7 @@ namespace DWSIM.UI
             tableright.Spacing = new Size(10, 10);
 
             MostRecentList = new ListBox { BackgroundColor = bgcolor, TextColor = Colors.White };
-            
+
             foreach (var item in GlobalSettings.Settings.MostRecentFiles)
             {
                 if (File.Exists(item)) MostRecentList.Items.Add(new ListItem { Text = item, Key = item });
@@ -116,18 +120,22 @@ namespace DWSIM.UI
 
             MostRecentList.SelectedIndexChanged += (sender, e) =>
             {
-               if (MostRecentList.SelectedIndex >= 0) LoadSimulation(MostRecentList.SelectedKey);
+                if (MostRecentList.SelectedIndex >= 0)
+                {
+                    LoadSimulation(MostRecentList.SelectedKey);
+                    MostRecentList.SelectedIndex = -1;
+                };
             };
 
 
-            tableright.Rows.Add(new TableRow(new Label {Text = "Recent Files", Font = SystemFonts.Bold(), TextColor = Colors.White }));
+            tableright.Rows.Add(new TableRow(new Label { Text = "Recent Files", Font = SystemFonts.Bold(), TextColor = Colors.White }));
             tableright.Rows.Add(new TableRow(MostRecentList));
 
             Content = new TableLayout
             {
                 Padding = 10,
                 Spacing = new Size(5, 5),
-                Rows = {new TableRow(stack, tableright)},
+                Rows = { new TableRow(stack, tableright) },
                 BackgroundColor = bgcolor,
             };
 
@@ -152,23 +160,23 @@ namespace DWSIM.UI
             // create menu
             Menu = new MenuBar
             {
-                ApplicationItems = {aitem1},
+                ApplicationItems = { aitem1 },
                 QuitItem = quitCommand,
-                HelpItems = {hitem1},
+                HelpItems = { hitem1 },
                 AboutItem = aboutCommand
             };
 
             Shown += MainForm_Shown;
 
             Closing += MainForm_Closing;
-                        
+
         }
 
         void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
             {
-                e.Cancel = true; 
+                e.Cancel = true;
             }
         }
 
@@ -187,6 +195,7 @@ namespace DWSIM.UI
             var form = new Forms.Flowsheet();
 
             var loadingdialog = new LoadingData();
+            loadingdialog.loadingtext.Text = "Please wait, loading data...\n(" + path + ")";
             loadingdialog.Show();
 
             Task.Factory.StartNew(() =>
