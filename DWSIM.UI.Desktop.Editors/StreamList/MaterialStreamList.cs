@@ -155,7 +155,7 @@ namespace DWSIM.UI.Desktop.Editors
                 lblLastUpdate.Text = "Updated on: " + DateTime.Now.ToString();
             };
 
-            var txtpad = new TextBox{Text = PadSize.ToString(), Height = 40};
+            var txtpad = new TextBox{Text = PadSize.ToString()};
             txtpad.TextChanged += (sender, e) =>{
                 int ps = 0;
                 if (int.TryParse(txtpad.Text, out ps)) PadSize = int.Parse(txtpad.Text);
