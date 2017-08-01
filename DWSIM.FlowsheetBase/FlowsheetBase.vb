@@ -19,6 +19,8 @@ Imports DWSIM.Thermodynamics.Streams
 Imports ICSharpCode.SharpZipLib.Zip
 Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
+Imports Python.Runtime
+Imports Microsoft.Scripting.Hosting
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -1142,6 +1144,26 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
             End Try
         Next
 
+        Scripts = New Dictionary(Of String, Interfaces.IScript)
+
+        If xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems").Elements.ToList
+
+            Dim i As Integer = 0
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New Script()
+                    obj.LoadData(xel.Elements.ToList)
+                    Scripts.Add(obj.ID, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Script Item Information", ex))
+                End Try
+                i += 1
+            Next
+
+        End If
+
         If LoadSpreadsheetData IsNot Nothing Then LoadSpreadsheetData.Invoke(xdoc)
 
         If excs.Count > 0 Then
@@ -1251,6 +1273,13 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 
         For Each pp As Optimization.SensitivityAnalysisCase In SensAnalysisCollection
             xel.Add(New XElement("SensitivityAnalysisCase", {pp.SaveData().ToArray()}))
+        Next
+
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("ScriptItems"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems")
+
+        For Each scr As Script In Scripts.Values
+            xel.Add(New XElement("ScriptItem", scr.SaveData().ToArray()))
         Next
 
         If SaveSpreadsheetData IsNot Nothing Then SaveSpreadsheetData.Invoke(xdoc)
@@ -1573,9 +1602,27 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
         If Not act Is Nothing Then act.Invoke()
     End Sub
 
-    Public Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String) Implements IFlowsheet.ProcessScripts
+    Public Sub ProcessScripts(ByVal sourceevent As Enums.Scripts.EventType, ByVal sourceobj As Enums.Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheet.ProcessScripts
+
+        Me.RunCodeOnUIThread(Sub()
+                                 For Each scr As Script In Scripts.Values
+                                     If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
+                                         If scr.LinkedObjectName <> "" Then
+                                             ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & SimulationObjects(scr.LinkedObjectName).GraphicObject.Tag & "'...", IFlowsheet.MessageType.Information)
+                                         Else
+                                             ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", IFlowsheet.MessageType.Information)
+                                         End If
+                                         If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+                                             RunScript_IronPython(scr.ScriptText)
+                                         Else
+                                             RunScript_PythonNET(scr.ScriptText)
+                                         End If
+                                     End If
+                                 Next
+                             End Sub)
 
     End Sub
+
 
     Public Function LoadZippedXML(pathtofile As String) As XDocument
 
@@ -1812,11 +1859,116 @@ Label_00CC:
 
     End Sub
 
-
     Public Function GetSpreadsheetData(range As String) As List(Of String()) Implements IFlowsheet.GetSpreadsheetData
 
         Return RetrieveSpreadsheetData.Invoke(range)
 
     End Function
+
+    Public Property Scripts As New Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
+
+    Public Sub RunScript(ScriptID As String)
+        Dim script = Scripts(ScriptID)
+        If script.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+            RunScript_IronPython(script.ScriptText)
+        Else
+            RunScript_PythonNET(script.ScriptText)
+        End If
+    End Sub
+
+    Private Sub RunScript_IronPython(scripttext As String)
+
+        Dim scope As Microsoft.Scripting.Hosting.ScriptScope
+        Dim engine As Microsoft.Scripting.Hosting.ScriptEngine
+
+        Dim opts As New Dictionary(Of String, Object)()
+        opts("Frames") = Microsoft.Scripting.Runtime.ScriptingRuntimeHelpers.True
+        engine = IronPython.Hosting.Python.CreateEngine(opts)
+        engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+        engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
+        engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicsSurface).Assembly)
+        'engine.Runtime.IO.SetOutput(, UTF8Encoding.UTF8)
+        scope = engine.CreateScope()
+        scope.SetVariable("Plugins", UtilityPlugins)
+        scope.SetVariable("Flowsheet", Me)
+        'scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
+        Dim Solver As New FlowsheetSolver.FlowsheetSolver
+        scope.SetVariable("Solver", Solver)
+        For Each obj As ISimulationObject In SimulationObjects.Values
+            scope.SetVariable(obj.GraphicObject.Tag.Replace("-", "_"), obj)
+        Next
+        Dim txtcode As String = scripttext
+        Dim source As Microsoft.Scripting.Hosting.ScriptSource = engine.CreateScriptSourceFromString(txtcode, Microsoft.Scripting.SourceCodeKind.Statements)
+        Try
+            source.Execute(scope)
+        Catch ex As Exception
+            Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
+            ShowMessage("Error running script: " & ops.FormatException(ex).ToString, IFlowsheet.MessageType.GeneralError)
+        Finally
+            engine.Runtime.Shutdown()
+            engine = Nothing
+            scope = Nothing
+            source = Nothing
+        End Try
+
+    End Sub
+
+    Private Sub RunScript_PythonNET(scripttext As String)
+
+        If Not GlobalSettings.Settings.PythonInitialized Then
+
+            Dim t As Task = Task.Factory.StartNew(Sub()
+                                                      RunCodeOnUIThread(Sub()
+                                                                            If Not GlobalSettings.Settings.IsRunningOnMono() Then
+                                                                                PythonEngine.PythonHome = GlobalSettings.Settings.PythonPath
+                                                                            End If
+                                                                            PythonEngine.Initialize()
+                                                                            GlobalSettings.Settings.PythonInitialized = True
+                                                                        End Sub)
+                                                  End Sub)
+            t.Wait()
+
+            Dim t2 As Task = Task.Factory.StartNew(Sub()
+                                                       RunCodeOnUIThread(Sub()
+                                                                             PythonEngine.BeginAllowThreads()
+                                                                         End Sub)
+                                                   End Sub)
+            t2.Wait()
+
+        End If
+
+        Using Py.GIL
+
+            Try
+
+                Dim sys As Object = PythonEngine.ImportModule("sys")
+
+                Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+
+                PythonEngine.RunSimpleString(codeToRedirectOutput)
+
+                Dim locals As New PyDict()
+
+                locals.SetItem("Plugins", UtilityPlugins.ToPython)
+                locals.SetItem("Flowsheet", Me.ToPython)
+                Dim Solver As New FlowsheetSolver.FlowsheetSolver
+                locals.SetItem("Solver", Solver.ToPython)
+
+                PythonEngine.Exec(scripttext, Nothing, locals.Handle)
+
+                ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+
+            Catch ex As Exception
+
+                ShowMessage("Error running script: " & ex.Message.ToString, IFlowsheet.MessageType.GeneralError)
+
+            Finally
+
+            End Try
+
+        End Using
+
+    End Sub
+
 
 End Class

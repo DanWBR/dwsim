@@ -53,12 +53,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Eto, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.3.0\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.3.6422.13819, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.4.0-build1068\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Wpf, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Wpf.2.3.0\lib\net45\Eto.Wpf.dll</HintPath>
+    <Reference Include="Eto.Wpf, Version=2.3.6422.13830, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Wpf.2.4.0-build1068\lib\net45\Eto.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SkiaSharp, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">

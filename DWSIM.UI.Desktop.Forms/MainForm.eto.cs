@@ -215,6 +215,7 @@ namespace DWSIM.UI
                         MostRecentList.Items.Add(new ListItem { Text = path, Key = path });
                         GlobalSettings.Settings.MostRecentFiles.Add(path);
                     }
+                    form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
                 });
             });
         }

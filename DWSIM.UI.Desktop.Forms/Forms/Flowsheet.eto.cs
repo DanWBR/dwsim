@@ -22,9 +22,16 @@ namespace DWSIM.UI.Forms
         public Desktop.Shared.Flowsheet FlowsheetObject;
         public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
+        
         private TableLayout SpreadsheetControl;
+        
         private TabPage TabPageSpreadsheet;
+        
         private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
+        
+        private DWSIM.UI.Desktop.Editors.MaterialStreamListViewer MaterialStreamListControl;
+
+        private DWSIM.UI.Desktop.Editors.ScriptManager ScriptListControl ;
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -272,14 +279,16 @@ namespace DWSIM.UI.Forms
             
             ResultsControl = new DWSIM.UI.Desktop.Editors.ResultsViewer(FlowsheetObject);
 
-            var MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
+            MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
+
+            ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
 
             var tabholder = new TabControl();
             TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
             tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
             tabholder.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
             tabholder.Pages.Add(TabPageSpreadsheet);
-            tabholder.Pages.Add(new TabPage { Content = new Panel(), Text = "Scripts" });
+            tabholder.Pages.Add(new TabPage { Content = ScriptListControl, Text = "Scripts" });
             tabholder.Pages.Add(new TabPage { Content = ResultsControl, Text = "Results" });
 
             var split = new Eto.Forms.Splitter();
@@ -338,6 +347,10 @@ namespace DWSIM.UI.Forms
 
             Closing += Flowsheet_Closing;
 
+            Closed += (sender, e) => {
+                FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationClosed, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+            };
+
             Shown += Flowsheet_Shown;
 
             Task.Factory.StartNew(() => LoadObjects());
@@ -366,6 +379,7 @@ namespace DWSIM.UI.Forms
             FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
             FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
             FlowsheetControl.Invalidate();
+            ScriptListControl.UpdateList();
         }
 
         void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -425,6 +439,8 @@ namespace DWSIM.UI.Forms
             FlowsheetObject.Options.FilePath = path;
 
             FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
+
+            FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationSaved, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
 
         }
 

@@ -1,0 +1,279 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Eto.Forms;
+using Eto.Drawing;
+
+using System.IO;
+
+using DWSIM.Interfaces;
+using DWSIM.ExtensionMethods;
+using DWSIM.UI.Shared;
+using s = DWSIM.UI.Shared.Common;
+using System.Collections.ObjectModel;
+
+using System.Globalization;
+using DWSIM.Interfaces.Enums;
+
+namespace DWSIM.UI.Desktop.Editors
+{
+    public class ScriptManager : TableLayout
+    {
+
+        private DWSIM.UI.Desktop.Shared.Flowsheet Flowsheet;
+
+        private ListBox lbScripts;
+        private ScriptItem ScriptEditor;
+
+        public ScriptManager(DWSIM.UI.Desktop.Shared.Flowsheet fs)
+        {
+            Flowsheet = fs;
+            Init();
+        }
+
+        void Init()
+        {
+
+            var topcontainer = new TableLayout();
+            var centercontainer = new TableLayout();
+
+            var btnNew = new Button { Text = "New Script"};
+            btnNew.Click += (sender, e) =>
+            {
+                var script = new DWSIM.FlowsheetSolver.Script { ID = Guid.NewGuid().ToString(), Title = "Script" + (Flowsheet.Scripts.Count + 1).ToString() };
+                Flowsheet.Scripts.Add(script.ID, script);
+                lbScripts.Items.Add(new ListItem { Key = script.ID, Text = script.Title });
+            };
+
+            lbScripts = new ListBox { Width = 200 };
+
+            lbScripts.SelectedIndexChanged += (sender, e) =>
+            {
+
+                if (lbScripts.SelectedIndex < 0) return;
+
+                var script = Flowsheet.Scripts[lbScripts.SelectedKey];
+
+                foreach (var obj in Flowsheet.SimulationObjects.Values)
+                {
+                    ScriptEditor.cbLinkedObject.Items.Add(obj.GraphicObject.Tag);
+                }
+
+                ScriptEditor.txtName.Text = script.Title;
+                ScriptEditor.txtScript.Text = script.ScriptText;
+                ScriptEditor.chkLink.Checked = script.Linked;
+
+                if (!string.IsNullOrEmpty(script.LinkedObjectName))
+                {
+                    ScriptEditor.cbLinkedObject.SelectedValue = Flowsheet.SimulationObjects[script.LinkedObjectName].GraphicObject.Tag;
+                }
+                else
+                {
+                    switch (script.LinkedObjectType)
+                    {
+                        case Scripts.ObjectType.Simulation:
+                            ScriptEditor.cbLinkedObject.SelectedIndex = 0;
+                            break;
+                        case Scripts.ObjectType.Solver:
+                            ScriptEditor.cbLinkedObject.SelectedIndex = 1;
+                            break;
+                    }
+                }
+
+                switch (script.LinkedEventType)
+                {
+                    case Scripts.EventType.ObjectCalculationStarted:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
+                        break;
+                    case Scripts.EventType.ObjectCalculationFinished:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                        break;
+                    case Scripts.EventType.ObjectCalculationError:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                        break;
+                    case Scripts.EventType.SimulationOpened:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
+                        break;
+                    case Scripts.EventType.SimulationSaved:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                        break;
+                    case Scripts.EventType.SimulationClosed:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                        break;
+                    case Scripts.EventType.SolverStarted:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
+                        break;
+                    case Scripts.EventType.SolverFinished:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 1;
+                        break;
+                    case Scripts.EventType.SolverRecycleLoop:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 2;
+                        break;
+                    case Scripts.EventType.SimulationTimer1:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 3;
+                        break;
+                    case Scripts.EventType.SimulationTimer5:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 4;
+                        break;
+                    case Scripts.EventType.SimulationTimer15:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 5;
+                        break;
+                    case Scripts.EventType.SimulationTimer30:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 6;
+                        break;
+                    case Scripts.EventType.SimulationTimer60:
+                        ScriptEditor.cbLinkedEvent.SelectedIndex = 7;
+                        break;
+                }
+
+                ScriptEditor.cbPythonInt.SelectedIndex = (int)script.PythonInterpreter;
+
+            };
+
+            var btnDelete = new Button { Text = "Remove Selected" };
+            btnDelete.Click += (sender, e) =>
+            {
+
+            };
+
+            var btnRun = new Button { Text = "Run Selected" };
+            btnRun.Click += (sender, e) =>
+            {
+                Flowsheet.RunScript(lbScripts.SelectedKey);
+            };
+
+            topcontainer.Rows.Add(new TableRow(btnNew, btnDelete, null, btnRun));
+            topcontainer.Padding = new Padding(5, 5, 5, 5);
+            topcontainer.Spacing = new Size(10, 10);
+
+            ScriptEditor = new ScriptItem();
+
+            ScriptEditor.chkLink.CheckedChanged += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.Scripts[lbScripts.SelectedKey].Linked = ScriptEditor.chkLink.Checked.GetValueOrDefault();
+            };
+
+            ScriptEditor.txtScript.TextChanged += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+            };
+
+            ScriptEditor.cbLinkedObject.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
+
+            ScriptEditor.cbLinkedEvent.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
+
+            ScriptEditor.txtName.TextChanged += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.Scripts[lbScripts.SelectedKey].Title = ScriptEditor.txtName.Text;
+                lbScripts.Items[lbScripts.SelectedIndex].Text = ScriptEditor.txtName.Text;
+            };
+
+            centercontainer.Rows.Add(new TableRow(lbScripts, ScriptEditor));
+            centercontainer.Padding = new Padding(5, 5, 5, 5);
+            centercontainer.Spacing = new Size(10, 10);
+
+            Rows.Add(new TableRow(topcontainer));
+            Rows.Add(new TableRow(centercontainer));
+
+        }
+
+        void cbLinkedObject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!Loaded) return;
+            if (lbScripts.SelectedIndex < 0) return;
+            var scr = Flowsheet.Scripts[lbScripts.SelectedKey];
+            switch (ScriptEditor.cbLinkedObject.SelectedIndex)
+            {
+                case 0:
+                    scr.LinkedObjectType = Scripts.ObjectType.Simulation;
+                    scr.LinkedObjectName = "";
+                    if (ScriptEditor.cbLinkedEvent.SelectedIndex == 0)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationOpened;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 1)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationSaved;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 2)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationClosed;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 3)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationTimer1;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 4)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationTimer5;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 5)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationTimer15;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 6)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationTimer30;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 7)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SimulationTimer60;
+                    }
+                    break;
+                case 1:
+                    scr.LinkedObjectType = Scripts.ObjectType.Solver;
+                    scr.LinkedObjectName = "";
+                    if (ScriptEditor.cbLinkedEvent.SelectedIndex == 0)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SolverStarted;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 1)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SolverFinished;
+                    }
+                    else
+                    {
+                        scr.LinkedEventType = Scripts.EventType.SolverRecycleLoop;
+                    }
+                    break;
+                default:
+                    if (ScriptEditor.chkLink.Checked.GetValueOrDefault())
+                    {
+                        scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject;
+                        scr.LinkedObjectName = Flowsheet.GetFlowsheetSimulationObject(ScriptEditor.cbLinkedObject.SelectedValue.ToString()).Name;
+                    }
+                    if (ScriptEditor.cbLinkedEvent.SelectedIndex == 0)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationStarted;
+                    }
+                    else if (ScriptEditor.cbLinkedEvent.SelectedIndex == 1)
+                    {
+                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationFinished;
+                    }
+                    else
+                    {
+                        scr.LinkedEventType = Scripts.EventType.ObjectCalculationError;
+                    }
+                    break;
+            }
+        }
+
+        public void UpdateList()
+        {
+
+            lbScripts.Items.Clear();
+            foreach (var s in Flowsheet.Scripts)
+            {
+                lbScripts.Items.Add(new ListItem { Key = s.Key, Text = s.Value.Title });
+            }
+
+        }
+
+    }
+}

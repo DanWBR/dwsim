@@ -12,6 +12,11 @@ namespace DWSIM.UI.Forms
     {
         void InitializeComponent()
         {
+
+            WindowStyle = Eto.Forms.WindowStyle.None;
+
+            Style = "transparent-form";
+
             Title = "DWSIM";
 
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
@@ -81,13 +86,9 @@ namespace DWSIM.UI.Forms
 
             Topmost = true;
 
-            WindowStyle = Eto.Forms.WindowStyle.None;
-
             img.BackgroundColor = Colors.Transparent;
             layout.BackgroundColor = Colors.Transparent;
             BackgroundColor = Colors.Transparent;
-
-            Style = "transparent-form";
 
             Shown += SplashScreen_Shown;
 

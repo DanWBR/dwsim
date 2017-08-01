@@ -1249,7 +1249,7 @@ Public Class FormMain
 
         End If
 
-        form.ScriptCollection = New Dictionary(Of String, Script)
+        form.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
 
         form.Options.NotSelectedComponents = New Dictionary(Of String, Interfaces.ICompoundConstantProperties)
 
@@ -1550,7 +1550,7 @@ Public Class FormMain
 
         End If
 
-        form.ScriptCollection = New Dictionary(Of String, Script)
+        form.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
 
         If xdoc.Element("DWSIM_Simulation_Data").Element("ScriptItems") IsNot Nothing Then
 

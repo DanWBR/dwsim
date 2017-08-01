@@ -138,6 +138,8 @@
 
     Sub ProcessScripts(eventType As Enums.Scripts.EventType, objectType As Enums.Scripts.ObjectType, obj As String)
 
+    Property Scripts As Dictionary(Of String, IScript)
+
     Sub UpdateInterface()
 
     Sub UpdateInformation()

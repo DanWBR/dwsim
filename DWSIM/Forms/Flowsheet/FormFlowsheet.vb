@@ -83,7 +83,7 @@ Public Class FormFlowsheet
 
     Public Property CalculationQueue As Generic.Queue(Of ICalculationArgs) Implements IFlowsheetCalculationQueue.CalculationQueue
 
-    Public ScriptCollection As Dictionary(Of String, Script)
+    Public ScriptCollection As Dictionary(Of String, IScript)
 
     Public CheckedToolstripButton As ToolStripButton
     Public ClickedToolStripMenuItem As ToolStripMenuItem
@@ -171,7 +171,7 @@ Public Class FormFlowsheet
         Me.FormSurface.ToolStripButton16.Checked = Me.Options.FlowsheetSnapToGrid
         Me.FormSurface.ToolStripButton17.Checked = Me.Options.FlowsheetQuickConnect
 
-        If Me.ScriptCollection Is Nothing Then Me.ScriptCollection = New Dictionary(Of String, Script)
+        If Me.ScriptCollection Is Nothing Then Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
 
         My.Application.ActiveSimulation = Me
 
@@ -334,7 +334,7 @@ Public Class FormFlowsheet
             FormMain.CloseAllToolstripMenuItem.Enabled = True
         End If
 
-        Me.ProcessScripts(Scripts.EventType.SimulationOpened, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationOpened, Enums.Scripts.ObjectType.Simulation, "")
 
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH003"), Color.Black, MessageType.Tip)
         WriteToLog(DWSIM.App.GetLocalTipString("FLSH001"), Color.Black, MessageType.Tip)
@@ -352,7 +352,7 @@ Public Class FormFlowsheet
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-        Me.ProcessScripts(Scripts.EventType.SimulationClosed, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationClosed, Enums.Scripts.ObjectType.Simulation, "")
 
         If My.Application.ActiveSimulation Is Me Then
             My.Application.ActiveSimulation = Nothing
@@ -463,7 +463,7 @@ Public Class FormFlowsheet
                                             Me.WriteToLog("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", Color.Blue, MessageType.Information)
                                         End If
                                     End If
-                                    If scr.PythonInterpreter = Scripts.Interpreter.IronPython Then
+                                    If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
                                         FormScript.RunScript_IronPython(scr.ScriptText, Me)
                                     Else
                                         FormScript.RunScript_PythonNET(scr.ScriptText, Me)
@@ -471,7 +471,7 @@ Public Class FormFlowsheet
                                 End If
                             Next
                         Else
-                            Me.ScriptCollection = New Dictionary(Of String, Script)
+                            Me.ScriptCollection = New Dictionary(Of String, Interfaces.IScript)
                         End If
                     End Sub)
 
@@ -1897,23 +1897,23 @@ Public Class FormFlowsheet
 #Region "    Script Timers"
 
     Private Sub TimerScripts1_Tick(sender As Object, e As EventArgs) Handles TimerScripts1.Tick
-        Me.ProcessScripts(Scripts.EventType.SimulationTimer1, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationTimer1, Enums.Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts5_Tick(sender As Object, e As EventArgs) Handles TimerScripts5.Tick
-        Me.ProcessScripts(Scripts.EventType.SimulationTimer5, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationTimer5, Enums.Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts15_Tick(sender As Object, e As EventArgs) Handles TimerScripts15.Tick
-        Me.ProcessScripts(Scripts.EventType.SimulationTimer15, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationTimer15, Enums.Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts30_Tick(sender As Object, e As EventArgs) Handles TimerScripts30.Tick
-        Me.ProcessScripts(Scripts.EventType.SimulationTimer30, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationTimer30, Enums.Scripts.ObjectType.Simulation, "")
     End Sub
 
     Private Sub TimerScripts60_Tick(sender As Object, e As EventArgs) Handles TimerScripts60.Tick
-        Me.ProcessScripts(Scripts.EventType.SimulationTimer60, Scripts.ObjectType.Simulation, "")
+        Me.ProcessScripts(Enums.Scripts.EventType.SimulationTimer60, Enums.Scripts.ObjectType.Simulation, "")
     End Sub
 
 #End Region
@@ -3145,6 +3145,15 @@ Public Class FormFlowsheet
         End Get
         Set(value As List(Of IUnitsOfMeasure))
             Throw New NotImplementedException
+        End Set
+    End Property
+
+    Public Property Scripts As Dictionary(Of String, IScript) Implements IFlowsheet.Scripts
+        Get
+            Return ScriptCollection
+        End Get
+        Set(value As Dictionary(Of String, IScript))
+            ScriptCollection = value
         End Set
     End Property
 
