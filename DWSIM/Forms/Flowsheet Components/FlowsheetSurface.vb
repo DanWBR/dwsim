@@ -3578,4 +3578,27 @@ Public Class FlowsheetSurface
     End Sub
 
 
+    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles ToolStripButton12.Click
+        Flowsheet.ToolStripButton12_Click(sender, e)
+    End Sub
+
+    Private Sub TSBtabela_Click(sender As Object, e As EventArgs) Handles TSBtabela.Click
+        Flowsheet.TSBtabela_Click(sender, e)
+    End Sub
+
+    Private Sub TSBTexto_Click(sender As Object, e As EventArgs) Handles TSBTexto.Click
+        Flowsheet.TSBTexto_Click(sender, e)
+    End Sub
+
+    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        Flowsheet.ToolStripButton4_Click(sender, e)
+    End Sub
+
+    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles ToolStripButton6.Click
+        Flowsheet.ToolStripButton6_Click(sender, e)
+    End Sub
+
+    Private Sub ToolStripButton19_Click(sender As Object, e As EventArgs) Handles ToolStripButton19.Click
+        Flowsheet.ToolStripButton19_Click(sender, e)
+    End Sub
 End Class

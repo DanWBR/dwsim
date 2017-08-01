@@ -917,7 +917,7 @@ Public Class FormFlowsheet
         End Try
     End Sub
 
-    Private Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextoToolStripMenuItem.Click
+    Public Sub TSBTexto_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextoToolStripMenuItem.Click
         Dim myTextObject As New TextGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
             DWSIM.App.GetLocalString("caixa_de_texto"),
@@ -934,7 +934,7 @@ Public Class FormFlowsheet
 
     End Sub
 
-    Private Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabelaDePropriedatesMestraToolStripMenuItem.Click
+    Public Sub ToolStripButton19_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabelaDePropriedatesMestraToolStripMenuItem.Click
         Dim myMasterTable As New MasterTableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
            -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
@@ -947,7 +947,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesPlanilhaToolStripMenuItem.Click
+    Public Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesPlanilhaToolStripMenuItem.Click
         Dim mySpreadsheetTable As New SpreadsheetTableGraphic(
             Me.FormSpreadsheet,
             -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
@@ -963,7 +963,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub TSBtabela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FiguraToolStripMenuItem.Click
+    Public Sub TSBtabela_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FiguraToolStripMenuItem.Click
         With Me.OpenFileName
             .CheckFileExists = True
             .CheckPathExists = True
@@ -1199,7 +1199,7 @@ Public Class FormFlowsheet
     End Sub
 
 
-    Private Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesToolStripMenuItem.Click
+    Public Sub ToolStripButton6_Click(sender As Object, e As EventArgs) Handles TabelaDePropriedadesToolStripMenuItem.Click
         Dim myPropertyTable As New TableGraphic(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
          -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30)
         Dim gObj As GraphicObject = Nothing
@@ -1212,7 +1212,7 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
 
-    Private Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
+    Public Sub ToolStripButton12_Click(sender As Object, e As EventArgs) Handles RectangleToolStripMenuItem.Click
         Dim myobj As New RectangleGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
           -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), DWSIM.App.GetLocalString("rectangletext"))
         myobj.Name = "RECT-" & Guid.NewGuid.ToString

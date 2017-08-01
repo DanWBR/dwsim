@@ -76,7 +76,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
             var dialog = new SaveFileDialog();
             dialog.Title = "Export Results to PDF";
-            dialog.Filters.Add(new FileDialogFilter("PDF File", new[] { ".pdf" }));
+            dialog.Filters.Add(new FileFilter("PDF File", new[] { ".pdf" }));
             dialog.CurrentFilterIndex = 0;
             if (dialog.ShowDialog(this) == DialogResult.Ok)
             {

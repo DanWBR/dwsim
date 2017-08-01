@@ -97,7 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddButtonRow(container, "Define Number of Stages", null, (arg1, e) =>
             {
 
-                var np = new Eto.Forms.NumericUpDown();
+                var np = new Eto.Forms.NumericStepper();
                 np.MinValue = 3;
                 np.MaxValue = 100;
                 np.MaximumDecimalPlaces = 0;

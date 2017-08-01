@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 192</value>
+  </data>
   <data name="ToolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 22</value>
   </data>
@@ -172,8 +175,8 @@
   <data name="CentralizarToolStripMenuItem.Text" xml:space="preserve">
     <value>Center</value>
   </data>
-  <data name="CMS_NoSel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 214</value>
+  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 376</value>
   </data>
   <data name="TSMI_Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
@@ -222,6 +225,12 @@
   </data>
   <data name="ToolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 6</value>
+  </data>
+  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 22</value>
+  </data>
+  <data name="TSMI_Girar.Text" xml:space="preserve">
+    <value>Rotate</value>
   </data>
   <data name="BToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -313,12 +322,6 @@
         srDnTkDWX/RpuzlDyY7pAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="TSMI_Girar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 22</value>
-  </data>
-  <data name="TSMI_Girar.Text" xml:space="preserve">
-    <value>Rotate</value>
-  </data>
   <data name="HorizontalmenteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>241, 22</value>
   </data>
@@ -375,9 +378,6 @@
   </data>
   <data name="MergeStreamsToolStripMenuItem.Text" xml:space="preserve">
     <value>Merge Streams</value>
-  </data>
-  <data name="CMS_Sel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 376</value>
   </data>
   <data name="PreviewDialog.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

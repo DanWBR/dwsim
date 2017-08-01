@@ -59,7 +59,7 @@ namespace DWSIM.UI
             btn5.Click += (sender, e) => {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "OpenSamples".Localize();
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
+                dialog.Filters.Add(new FileFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
                 dialog.MultiSelect = false;
                 dialog.Directory = new Uri(Path.Combine(Directory.GetCurrentDirectory(), "samples"));
                 dialog.CurrentFilterIndex = 0;
@@ -77,7 +77,7 @@ namespace DWSIM.UI
             btn1.Click += (sender, e) => {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Open File".Localize();
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
+                dialog.Filters.Add(new FileFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
                 dialog.MultiSelect = false;
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)

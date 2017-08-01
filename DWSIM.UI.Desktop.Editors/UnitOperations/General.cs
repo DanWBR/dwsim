@@ -1908,7 +1908,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         var OpenFileDialog1 = new OpenFileDialog();
                         OpenFileDialog1.Title = "New Spreadsheet";
-                        OpenFileDialog1.Filters.Add(new FileDialogFilter("Spreadsheet files", new string[]{"*.xlsx","*.xls","*.ods"}));
+                        OpenFileDialog1.Filters.Add(new FileFilter("Spreadsheet files", new string[] { "*.xlsx", "*.xls", "*.ods" }));
                         OpenFileDialog1.CheckFileExists = false;
                         OpenFileDialog1.Directory = new Uri(Path.GetDirectoryName(exceluo.Filename));
 

@@ -237,7 +237,7 @@ namespace DWSIM.UI.Forms
 
                 var dialog = new SaveFileDialog();
                 dialog.Title = "Save File".Localize();
-                dialog.Filters.Add(new FileDialogFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
+                dialog.Filters.Add(new FileFilter("XML Simulation File (Compressed)".Localize(), new[] { ".dwxmz" }));
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
