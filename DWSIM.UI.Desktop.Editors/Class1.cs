@@ -25,7 +25,7 @@ namespace Editors
                 "thermodynamic properties for Unit Operation calculations, like enthalpy and entropy.\n\n" +
                 "You need to add at least one Property Package to your simulation.");
 
-            CreateAndAddDropDownRow(container, "Add New Property Package", new List<string>(), 0, (sender, e) => { });
+            CreateAndAddDropDownRow(container, "Add New Property Package", new List<string>() {"item1", "item2" }, 0, (sender, e) => { });
 
             CreateAndAddLabelRow(container, "Added Property Packages");
 
