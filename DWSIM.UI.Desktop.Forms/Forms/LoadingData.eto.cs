@@ -39,8 +39,8 @@ namespace DWSIM.UI.Forms.Forms
             Maximizable = false;
             Minimizable = false;
 
-            int w = 300;
-            int h = 100;
+            int w = 400;
+            int h = 120;
 
             var center = Screen.PrimaryScreen.WorkingArea.Center;
             center.X -= w / 2;
