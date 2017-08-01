@@ -205,7 +205,7 @@
       <Name>DWSIM</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
+    <ProjectReference Include="..\DWSIM.Controls.PropertyGridEx\DWSIM.Controls.PropertyGridEx.vbproj">
       <Project>{b0bb47f2-21c4-41fc-b6e6-40757adfc4a1}</Project>
       <Name>DWSIM.Controls.PropertyGridEx</Name>
       <Private>False</Private>
