@@ -21,6 +21,7 @@ Imports System.IO
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports Python.Runtime
 Imports Microsoft.Scripting.Hosting
+Imports System.Text
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -1887,7 +1888,7 @@ Label_00CC:
         engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
         engine.Runtime.LoadAssembly(GetType(Thermodynamics.BaseClasses.ConstantProperties).Assembly)
         engine.Runtime.LoadAssembly(GetType(Drawing.SkiaSharp.GraphicsSurface).Assembly)
-        'engine.Runtime.IO.SetOutput(, UTF8Encoding.UTF8)
+        engine.Runtime.IO.SetOutput(New FlowsheetLogTextStream(Me), UTF8Encoding.UTF8)
         scope = engine.CreateScope()
         scope.SetVariable("Plugins", UtilityPlugins)
         scope.SetVariable("Flowsheet", Me)
@@ -1970,5 +1971,21 @@ Label_00CC:
 
     End Sub
 
+    Private Class FlowsheetLogTextStream
+
+        Inherits MemoryStream
+        Private target As FlowsheetBase
+
+        Public Sub New(ByVal target As FlowsheetBase)
+            Me.target = target
+        End Sub
+
+        Public Overrides Sub Write(ByVal buffer As Byte(), ByVal offset As Integer, ByVal count As Integer)
+            Dim output As String = Encoding.UTF8.GetString(buffer, offset, count)
+            target.ShowMessage(output, IFlowsheet.MessageType.Information)
+        End Sub
+
+    End Class
 
 End Class
+
