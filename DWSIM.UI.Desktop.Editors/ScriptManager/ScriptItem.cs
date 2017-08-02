@@ -38,7 +38,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public CheckBox chkLink;
         public DropDown cbLinkedObject, cbLinkedEvent, cbPythonInt;
-        public TextArea txtScript;
+        public DWSIM.UI.Controls.CodeEditorControl txtScript;
         public TextBox txtName;
 
         public ScriptItem()
@@ -112,7 +112,7 @@ namespace DWSIM.UI.Desktop.Editors
                 cbLinkedEvent.SelectedIndex = 0;
             };
 
-            txtScript = new TextArea { Font = Fonts.Monospace(SystemFonts.Default().Size) };
+            txtScript = new Controls.CodeEditorControl();
 
             var tr3 = new TableRow(txtScript);
             var tb3 = new TableLayout { Spacing = new Size(5, 5) };

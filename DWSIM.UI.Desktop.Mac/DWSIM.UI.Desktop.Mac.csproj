@@ -73,6 +73,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeEditor\CodeEditor.cs" />
     <Compile Include="Styling.cs" />
     <Compile Include="OxyPlot\ConverterExtensions.cs" />
     <Compile Include="OxyPlot\CoreGraphicsRenderContext.cs" />
@@ -112,9 +113,7 @@
       <Name>DWSIM.UI.Desktop.Forms</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CodeEditor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

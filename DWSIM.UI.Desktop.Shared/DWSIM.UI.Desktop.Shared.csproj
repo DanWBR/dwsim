@@ -48,6 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CodeEditorControl.cs" />
+    <Compile Include="Controls\FlowsheetControl.cs" />
     <Compile Include="Flowsheet\Flowsheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\Shared.cs" />

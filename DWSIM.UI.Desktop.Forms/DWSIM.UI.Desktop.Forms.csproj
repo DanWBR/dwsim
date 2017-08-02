@@ -94,7 +94,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\FlowsheetControl.cs" />
     <Compile Include="Forms\About.cs" />
     <Compile Include="Forms\About.eto.cs">
       <DependentUpon>About.cs</DependentUpon>
@@ -126,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using MonoMac.AppKit.TextKit.Formatter;
 
-namespace SourceWriter
+namespace DWSIM.UI.Controls.Mac
 {
 	/// <summary>
 	/// Defines the View Controller for a syntax highlighting text editor view.

@@ -163,11 +163,11 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.Scripts[lbScripts.SelectedKey].Linked = ScriptEditor.chkLink.Checked.GetValueOrDefault();
             };
 
-            ScriptEditor.txtScript.TextChanged += (sender, e) =>
-            {
-                if (lbScripts.SelectedIndex < 0) return;
-                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
-            };
+            //ScriptEditor.txtScript.TextChanged += (sender, e) =>
+            //{
+            //    if (lbScripts.SelectedIndex < 0) return;
+            //    Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+            //};
 
             ScriptEditor.cbLinkedObject.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;
 
