@@ -85,6 +85,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
 
             grid = new GridView { DataStore = rowlist, RowHeight = 20 };
+            if (Application.Instance.Platform.IsWinForms) grid.Height = 1100;
 
             if (GlobalSettings.Settings.RunningPlatform() != GlobalSettings.Settings.Platform.Windows)
             {
@@ -214,7 +215,7 @@ namespace DWSIM.UI.Desktop.Editors
             table.Rows.Add(new TableRow(cellcp));
 
             var cnt = new DynamicLayout { Padding = new Padding(10, 0) };
-            s.CreateAndAddDescriptionRow(cnt, "Select cells by clicking or touching on them (using arrow keys on the keyboard won't change the currently selected data cell). After selecting the cell, edit its contents on the 'Contents' input box, or configure it to import or export data from/to the flowsheet by clicking on the corresponding buttons.");
+            s.CreateAndAddDescriptionRow(cnt, "Select cells by clicking or touching on them (using arrow keys on the keyboard won't change the currently selected data cell). After selecting the cell, edit its contents on the 'Contents' input box, or configure it to import or export data from/to the flowsheet by clicking on the corresponding buttons.", true);
 
             table.Rows.Add(new TableRow(cnt));
 
@@ -239,6 +240,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             grid.CellClick += (sender, e) =>
             {
+                if (e.Item == null) return;
                 if (e.GridColumn.HeaderText == "") return;
                 selectedcell = e.GridColumn.HeaderText + (e.Row + 1).ToString();
                 txtcell.Text = selectedcell;

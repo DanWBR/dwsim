@@ -162,9 +162,21 @@ namespace DWSIM.UI.Shared
             return lbl;
         }
 
-        public static void CreateAndAddDescriptionRow(this DynamicLayout container, String text)
+        public static void CreateAndAddDescriptionRow(this DynamicLayout container, String text, bool forceLabel = false)
         {
-            container.AddRow(new TableRow(new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
+            if (Application.Instance.Platform.IsWinForms && !forceLabel)
+            {
+                var textarea = new TextArea { Text = text, ReadOnly = true, 
+                    Font = SystemFonts.Label(SystemFonts.Default().Size - 0.5f), 
+                    BackgroundColor = container.BackgroundColor,
+                    TextAlignment = Eto.Forms.TextAlignment.Left, Wrap = true };
+                textarea.Style = "labeldescription";
+                container.AddRow(new TableRow(textarea));
+            }
+            else {
+                var label = new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 1.0f) };
+                container.AddRow(new TableRow(label));
+            }
             container.CreateAndAddEmptySpace();
         }
 

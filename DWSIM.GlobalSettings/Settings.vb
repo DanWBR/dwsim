@@ -11,6 +11,31 @@ Public Class Settings
         Mac
     End Enum
 
+    Public Enum WindowsPlatformRenderer
+        WinForms = 0
+        WinForms_Direct2D = 1
+        WPF = 2
+    End Enum
+
+    Public Enum LinuxPlatformRenderer
+        Gtk2 = 0
+        Gtk3 = 1
+        WinForms = 2
+    End Enum
+
+    Public Enum MacOSPlatformRenderer
+        MonoMac = 0
+        Gtk2 = 1
+        Gtk3 = 2
+        WinForms = 3
+    End Enum
+
+    Public Shared Property WindowsRenderer As WindowsPlatformRenderer = WindowsPlatformRenderer.WinForms
+
+    Public Shared Property LinuxRenderer As LinuxPlatformRenderer = LinuxPlatformRenderer.Gtk2
+
+    Public Shared Property MacOSRenderer As MacOSPlatformRenderer = MacOSPlatformRenderer.MonoMac
+
     Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
     Public Shared Property gpu As Cudafy.Host.GPGPU
     Public Shared Property gpumod As CudafyModule

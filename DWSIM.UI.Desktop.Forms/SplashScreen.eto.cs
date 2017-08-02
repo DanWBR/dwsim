@@ -88,7 +88,13 @@ namespace DWSIM.UI.Forms
 
             img.BackgroundColor = Colors.Transparent;
             layout.BackgroundColor = Colors.Transparent;
-            BackgroundColor = Colors.Transparent;
+            if (Application.Instance.Platform.IsWinForms)
+            {
+                BackgroundColor = Colors.White;
+            }
+            else {
+                BackgroundColor = Colors.Transparent;
+            }
 
             Shown += SplashScreen_Shown;
 

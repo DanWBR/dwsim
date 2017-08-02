@@ -22,11 +22,11 @@ namespace DWSIM.UI.Desktop.Editors
         private ObservableCollection<CompoundItem> obslist = new ObservableCollection<CompoundItem>();
 
         public Compounds(IFlowsheet fs, TableLayout layout)
-		{
+        {
             flowsheet = fs;
             container = layout;
-			Initialize();
-		}
+            Initialize();
+        }
 
         void Initialize()
         {
@@ -49,13 +49,18 @@ namespace DWSIM.UI.Desktop.Editors
             var searchcontainer = s.GetDefaultContainer();
             searchcontainer.Padding = Padding.Empty;
 
-            s.CreateAndAddStringEditorRow2(searchcontainer, "Search", "Search by Name, Formula, CAS ID or Database", "", (sender, e) => { 
-                newlist = complist.Where((x) => x.Name.ToLower().Contains(sender.Text.ToLower()) ||
-                                    x.Formula.ToLower().Contains(sender.Text.ToLower()) ||
-                                    x.CAS_Number.ToLower().Contains(sender.Text.ToLower()) ||
-                                    x.CurrentDB.ToLower().Contains(sender.Text.ToLower())).OrderBy((x) => x.Name).ToList();
-                Application.Instance.AsyncInvoke(() => UpdateList(newlist));
-            });
+            var tb = s.CreateAndAddStringEditorRow2(searchcontainer, "Search", "Search by Name, Formula, CAS ID or Database (press ENTER to search)", "", null);
+            tb.KeyDown += (sender, e) =>
+            {
+                if (e.Key == Keys.Enter)
+                {
+                    newlist = complist.Where((x) => x.Name.ToLower().Contains(tb.Text.ToLower()) ||
+                                            x.Formula.ToLower().Contains(tb.Text.ToLower()) ||
+                                            x.CAS_Number.ToLower().Contains(tb.Text.ToLower()) ||
+                                            x.CurrentDB.ToLower().Contains(tb.Text.ToLower())).OrderBy((x) => x.Name).ToList();
+                    Application.Instance.AsyncInvoke(() => UpdateList(newlist));
+                }
+            };
 
             container.Rows.Add(new TableRow(searchcontainer));
 
@@ -83,11 +88,13 @@ namespace DWSIM.UI.Desktop.Editors
 
             var listcontainer = new GridView { DataStore = obslist, RowHeight = 20 };
 
+            if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 370;
+
             var col2 = new GridColumn
             {
                 DataCell = new CheckBoxCell { Binding = Binding.Property<CompoundItem, bool?>(r => r.Check) },
                 HeaderText = "Added",
-                Editable = true, 
+                Editable = true,
             };
             col2.AutoSize = true;
 
@@ -164,7 +171,7 @@ namespace DWSIM.UI.Desktop.Editors
 
     class CompoundItem
     {
-    
+
         public string Text { get; set; }
 
         public string Formula { get; set; }
