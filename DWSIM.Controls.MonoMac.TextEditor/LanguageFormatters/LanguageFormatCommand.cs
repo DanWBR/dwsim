@@ -18,28 +18,28 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// Gets or sets the title that will appear in the Formatting Menu.
 		/// </summary>
 		/// <value>The title.</value>
-		public string Title { get; set; } = "";
+		public string Title = "";
 
 		/// <summary>
 		/// Gets or sets the prefix that will be added to the start of the line (if no <c>Postfix</c> has been defines),
 		/// or that will be inserted to the start of the current selected text in the document editor.
 		/// </summary>
 		/// <value>The prefix.</value>
-		public string Prefix { get; set; } = "";
+		public string Prefix = "";
 
 		/// <summary>
 		/// Gets or sets the postfix that will added to the end of the selected text in the document editor. If empty
 		/// (""), the <c>Prefix</c> will be inserted at the start of the line that the cursor is on.
 		/// </summary>
 		/// <value>The postfix.</value>
-		public string Postfix { get; set; } = "";
+		public string Postfix = "";
 
 		/// <summary>
 		/// Gets or sets the sub <see cref="AppKit.TextKit.Formatter.LanguageFormatCommand"/> commands that will be
 		/// displayed under this item in the Formatting Menu.
 		/// </summary>
 		/// <value>The sub commands.</value>
-		public List<LanguageFormatCommand> SubCommands { get; set; } = new List<LanguageFormatCommand>();
+		public List<LanguageFormatCommand> SubCommands = new List<LanguageFormatCommand>();
 		#endregion
 
 		#region Constructors

@@ -17,26 +17,26 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// Gets or sets the <c>FormatDescriptorType</c> for this format descriptor.
 		/// </summary>
 		/// <value>The <c>FormatDescriptorType</c>.</value>
-		public FormatDescriptorType Type { get; set; } = FormatDescriptorType.Prefix;
+		public FormatDescriptorType Type = FormatDescriptorType.Prefix;
 
 		/// <summary>
 		/// Gets or sets the forground color that text matching this format will be set to.
 		/// </summary>
 		/// <value>The <c>NSColor</c>.</value>
-		public NSColor Color { get; set;} = NSColor.Gray;
+		public NSColor Color = NSColor.Gray;
 
 		/// <summary>
 		/// Gets or sets the character sequence that this format starts with.
 		/// </summary>
 		/// <value>The starting <c>string</c> sequence.</value>
-		public string StartsWith { get; set; } = "";
+		public string StartsWith = "";
 
 		/// <summary>
 		/// Gets or sets the character sequence that text matching this format ends with.
 		/// </summary>
 		/// <value>The ending <c>string</c> sequence.</value>
 		/// <remarks>This value will be an empty string ("") if the <c>Type</c> is a <c>Prefix</c> format.</remarks>
-		public string EndsWith { get; set; } = "";
+		public string EndsWith = "";
 
 		/// <summary>
 		/// Gets or sets the index of the last matching character within either the <c>StartsWith</c> or
@@ -44,7 +44,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// </summary>
 		/// <value>The index of the char.</value>
 		/// <remarks>This value should ONLY be changed by the <see cref="AppKit.TextKit.Formatter.LanguageFormatter"/>.</remarks>
-		public int CharIndex { get; set; } = 0;
+		public int CharIndex = 0;
 
 		/// <summary>
 		/// Gets or sets if this format has been "activated" (if the matching <c>StartsWith</c> character sequence
@@ -53,7 +53,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value><c>true</c> if the matching <c>StartsWith</c> character sequence
 		/// has been found; otherwise, <c>false</c>.</value>
 		/// <remarks>This value should ONLY be changed by the <see cref="AppKit.TextKit.Formatter.LanguageFormatter"/>.</remarks>
-		public bool Active { get; set; } = false;
+		public bool Active = false;
 
 		/// <summary>
 		/// Gets a value indicating whether this <see cref="AppKit.TextKit.Formatter.FormatDescriptor"/> is "triggered"

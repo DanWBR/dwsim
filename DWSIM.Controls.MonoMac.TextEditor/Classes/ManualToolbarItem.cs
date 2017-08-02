@@ -18,7 +18,7 @@ namespace MonoMac.AppKit
 		/// Gets or sets a value indicating whether this <see cref="AppKit.ManualToolbarItem"/> is disabled.
 		/// </summary>
 		/// <value><c>true</c> if disabled; otherwise, <c>false</c>.</value>
-		public bool Disabled { get; set; } = false;
+		public bool Disabled = false;
 		#endregion
 
 		#region Constructors

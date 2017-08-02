@@ -25,7 +25,7 @@ namespace SourceWriter
 		/// </summary>
 		/// <value>An integer representing the default language as: 0 - C#,
 		/// 1 - HTML, 2 - MarkDown, 3 - XML.</value>
-		public int DefaultLanguage { get; set; } = 0;
+		public int DefaultLanguage = 0;
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="SourceWriter.ViewController"/> document 
@@ -45,7 +45,7 @@ namespace SourceWriter
 			get { return TextEditorView; }
 		}
 
-        MonoMac.AppKit.TextKit.Formatter.SourceTextView TextEditorView { get; set; } = new SourceTextView();
+        MonoMac.AppKit.TextKit.Formatter.SourceTextView TextEditorView = new SourceTextView();
 
         /// <summary>
         /// Gets or sets the text for the <c>NSTextView</c> being used as a text editor
@@ -78,7 +78,7 @@ namespace SourceWriter
 		/// <value>The file path.</value>
 		/// <remarks>>The path will be the empty string ("") if the document has never
 		/// been saved to a file.</remarks>
-		public string FilePath { get; set; } = "";
+		public string FilePath = "";
 
 		/// <summary>
 		/// Gets or sets the info about the currently selected keyword.
@@ -95,7 +95,7 @@ namespace SourceWriter
 		/// Gets or sets the keyword that is currently selected.
 		/// </summary>
 		/// <value>The keyword.</value>
-		public string Keyword { get; set; } = "";
+		public string Keyword = "";
         
         public TextEditor()
         {

@@ -24,7 +24,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// Gets or sets the language separators for C#
 		/// </summary>
 		/// <value>The language separators.</value>
-		public override char[] LanguageSeparators { get; set; } = new char[]{'=','+','-','*','/','%','&','<','>',';',':','^','!','~','?','|',',','"','\'','(',')','[',']','{','}'};
+		public new char[] LanguageSeparators = new char[]{'=','+','-','*','/','%','&','<','>',';',':','^','!','~','?','|',',','"','\'','(',')','[',']','{','}'};
 		#endregion
 
 		#region Constructors

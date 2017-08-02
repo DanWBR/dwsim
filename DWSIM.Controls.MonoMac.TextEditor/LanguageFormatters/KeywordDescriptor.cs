@@ -15,20 +15,20 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// Gets or sets the <c>KeywordType</c>.
 		/// </summary>
 		/// <value>The type.</value>
-		public KeywordType Type { get; set; } = KeywordType.Keyword;
+		public KeywordType Type = KeywordType.Keyword;
 
 		/// <summary>
 		/// Gets or sets the <c>NSColor</c> that the <see cref="AppKit.TextKit.Formatter.LanguageFormatter"/>
 		/// will set this keyword to.
 		/// </summary>
 		/// <value>The <c>NSColor</c>.</value>
-		public NSColor Color { get; set;} = NSColor.Black;
+		public NSColor Color = NSColor.Black;
 
 		/// <summary>
 		/// Gets or sets the tooltip used to define this keyword.
 		/// </summary>
 		/// <value>The tooltip.</value>
-		public string Tooltip { get; set;} = "";
+		public string Tooltip = "";
 		#endregion
 
 		#region Constructors

@@ -37,19 +37,19 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// Gets or sets the newline character used to define a given line of text.
 		/// </summary>
 		/// <value>The newline character.</value>
-		public char Newline { get; set; } = '\n';
+		public char Newline = '\n';
 
 		/// <summary>
 		/// Gets or sets the Unitext line separator used to define a given line of text.
 		/// </summary>
 		/// <value>The line separator.</value>
-		public char LineSeparator { get; set; } = '\u2028';
+		public char LineSeparator = '\u2028';
 
 		/// <summary>
 		/// Gets or sets the Unitext paragraph separator used to define a given paragraph of text.
 		/// </summary>
 		/// <value>The paragraph separator.</value>
-		public char ParagraphSeparator { get; set; } = '\u2029';
+		public char ParagraphSeparator = '\u2029';
 
 		/// <summary>
 		/// Gets or sets the descriptor used to define the syntax highlighting rules for a given

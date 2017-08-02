@@ -31,7 +31,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// given language.
 		/// </summary>
 		/// <value>The language separators.</value>
-		public virtual char[] LanguageSeparators { get; set; } = new char[]{'.'};
+		public char[] LanguageSeparators = new char[]{'.'};
 
 		/// <summary>
 		/// Gets the escape character for the given language.
@@ -46,28 +46,28 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// the keywords for this language.
 		/// </summary>
 		/// <value>The keywords.</value>
-		public Dictionary<string, KeywordDescriptor> Keywords { get; set; } = new Dictionary<string, KeywordDescriptor>();
+		public Dictionary<string, KeywordDescriptor> Keywords  = new Dictionary<string, KeywordDescriptor>();
 
 		/// <summary>
 		/// Gets or sets the collection of <see cref="AppKit.TextKit.Formatter.FormatDescriptor"/> formats used to
 		/// syntax highlight this language.
 		/// </summary>
 		/// <value>The formats.</value>
-		public List<FormatDescriptor> Formats { get; set; } = new List<FormatDescriptor>();
+		public List<FormatDescriptor> Formats = new List<FormatDescriptor>();
 
 		/// <summary>
 		/// Gets or sets the collection of <see cref="AppKit.TextKit.Formatter.LanguageClosure"/> used to auto
 		/// complete to closure of text such as (), [], "" or ''.
 		/// </summary>
 		/// <value>The closures.</value>
-		public List<LanguageClosure> Closures { get; set; } = new List<LanguageClosure>();
+		public List<LanguageClosure> Closures = new List<LanguageClosure>();
 
 		/// <summary>
 		/// Gets or sets the formatting commands that can be added to the user interface for the 
 		/// user to select and apply to a selection of text in the editor.
 		/// </summary>
 		/// <value>The <see cref="AppKit.TextKit.Formatter.LanguageFormatCommand"/> items.</value>
-		public List<LanguageFormatCommand> FormattingCommands { get; set; } = new List<LanguageFormatCommand>();
+		public List<LanguageFormatCommand> FormattingCommands = new List<LanguageFormatCommand>();
 
 		/// <summary>
 		/// Gets or sets the color of generic keywords.
