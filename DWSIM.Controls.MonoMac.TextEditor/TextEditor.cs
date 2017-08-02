@@ -10,7 +10,7 @@ namespace DWSIM.UI.Controls.Mac
 	/// <summary>
 	/// Defines the View Controller for a syntax highlighting text editor view.
 	/// </summary>
-	public class TextEditor : NSView
+    public class TextEditor : SourceTextView
 	{
         		
 		/// <summary>
@@ -42,33 +42,20 @@ namespace DWSIM.UI.Controls.Mac
 		/// </summary>
 		/// <value>The <see cref="AppKit.TextKit.Formatter.SourceTextView"/> used to edit source.</value>
 		public SourceTextView Editor {
-			get { return TextEditorView; }
+			get { return this; }
 		}
-
-        MonoMac.AppKit.TextKit.Formatter.SourceTextView TextEditorView = new SourceTextView();
 
         /// <summary>
         /// Gets or sets the text for the <c>NSTextView</c> being used as a text editor
         /// </summary>
         /// <value>The string content of the <c>NSTextView</c>.</value>
         public string Text {
-			get { return TextEditorView.TextStorage.Value; }
+			get { return TextStorage.Value; }
 			set {
-                TextEditorView.Value = value;
+                Value = value;
 				Formatter.Reformat ();
 				DocumentEdited = false;
 			}
-		}
-
-		/// <summary>
-		/// Gets or sets the <see cref="AppKit.TextKit.Formatter.LanguageFormatter"/> used to perform
-		/// syntax highlighting on the <c>NSTextView</c> containing the contents of the document being
-		/// edited.
-		/// </summary>
-		/// <value>The <see cref="AppKit.TextKit.Formatter.LanguageFormatter"/> for the selected language.</value>
-		public LanguageFormatter Formatter {
-			get { return TextEditorView.Formatter; }
-			set { TextEditorView.Formatter = value; }
 		}
 
 		/// <summary>
@@ -97,7 +84,7 @@ namespace DWSIM.UI.Controls.Mac
 		/// <value>The keyword.</value>
 		public string Keyword = "";
         
-        public TextEditor()
+        public TextEditor(): base()
         {
             ConfigureEditor();
             Initialize();
@@ -105,9 +92,13 @@ namespace DWSIM.UI.Controls.Mac
 
         public TextEditor(MonoMac.CoreGraphics.CGRect frameRect) : base(frameRect)
         {
-            TextEditorView = new SourceTextView(frameRect);
             ConfigureEditor();
             Initialize();
+        }
+
+        public override void ViewWillDraw()
+        {
+            base.ViewWillDraw();
         }
 
         /// <summary>
@@ -116,44 +107,45 @@ namespace DWSIM.UI.Controls.Mac
         /// </summary>
         public void Initialize ()
 		{
+
+            Formatter = new LanguageFormatter(this, new CSharpDescriptor());
+
             // Configure editor from user preferences
             //ConfigureEditor ();
 
-            TextEditorView.Bounds = Bounds;
-
             // Highligh the syntax of the text after an edit has been made
-            TextEditorView.TextStorage.TextStorageDidProcessEditing += (sender, e) => {
+            TextStorage.TextStorageDidProcessEditing += (sender, e) => {
 				DocumentEdited = true;
-				Formatter.HighlightSyntaxRegion(TextEditorView.TextStorage.Value, TextEditorView.TextStorage.EditedRange);
+                Formatter.HighlightSyntaxRegion(TextStorage.Value, TextStorage.EditedRange);
 			};
 
             // If the text selection or cursor location changes, attempt to display the Tool Tip
             // for any keyword defined in the current language being syntax highlighted
-            TextEditorView.SourceSelectionChanged += (sender, e) => {
-				var range = Formatter.FindWordBoundries(TextEditorView.TextStorage.Value, TextEditorView.SelectedRange);
-				var word = TextEditorView.TextStorage.Value.Substring((int)range.Location, (int)range.Length);
+            //SourceSelectionChanged += (sender, e) => {
+            //    var range = Formatter.FindWordBoundries(TextStorage.Value, SelectedRange);
+            //    var word = TextStorage.Value.Substring((int)range.Location, (int)range.Length);
 
-                // Found a keyword?
-                KeywordDescriptor info;
-                if (Formatter.Language.Keywords.TryGetValue(word, out info))
-                {
+            //    // Found a keyword?
+            //    KeywordDescriptor info;
+            //    if (Formatter.Language.Keywords.TryGetValue(word, out info))
+            //    {
 
-                    // Display the tool tip
-                    //StatusText.StringValue = string.Format("{0}: {1}", info.Type, word);
-                    //StatusText.TextColor = info.Color;
-                    //StatusDesc.StringValue = info.Tooltip;
-                    Keyword = word;
-                    KeywordInfo = info;
-                }
-                else {
-                    // Display the currently selected text
-                    //StatusText.StringValue = "Selection:";
-                    //StatusText.TextColor = NSColor.Black;
-                    //StatusDesc.StringValue = word;
-                    Keyword = "";
-                    KeywordInfo = null;
-                }
-            };
+            //        // Display the tool tip
+            //        //StatusText.StringValue = string.Format("{0}: {1}", info.Type, word);
+            //        //StatusText.TextColor = info.Color;
+            //        //StatusDesc.StringValue = info.Tooltip;
+            //        Keyword = word;
+            //        KeywordInfo = info;
+            //    }
+            //    else {
+            //        // Display the currently selected text
+            //        //StatusText.StringValue = "Selection:";
+            //        //StatusText.TextColor = NSColor.Black;
+            //        //StatusDesc.StringValue = word;
+            //        Keyword = "";
+            //        KeywordInfo = null;
+            //    }
+            //};
 		}
         
 		/// <summary>
@@ -178,35 +170,39 @@ namespace DWSIM.UI.Controls.Mac
 		public void ConfigureEditor() {
 
             // General Preferences
-            TextEditorView.AutomaticLinkDetectionEnabled = true;
-            TextEditorView.AutomaticQuoteSubstitutionEnabled = false;
-            TextEditorView.AutomaticDashSubstitutionEnabled = false;
-            TextEditorView.AutomaticDataDetectionEnabled = false;
-            TextEditorView.AutomaticTextReplacementEnabled = false;
-            TextEditorView.SmartInsertDeleteEnabled = false;
-            TextEditorView.ContinuousSpellCheckingEnabled = false;
-            TextEditorView.AutomaticSpellingCorrectionEnabled = false;
-            TextEditorView.GrammarCheckingEnabled = false;
+            AutomaticLinkDetectionEnabled = true;
+            AutomaticQuoteSubstitutionEnabled = false;
+            AutomaticDashSubstitutionEnabled = false;
+            AutomaticDataDetectionEnabled = false;
+            AutomaticTextReplacementEnabled = false;
+            SmartInsertDeleteEnabled = false;
+            ContinuousSpellCheckingEnabled = false;
+            AutomaticSpellingCorrectionEnabled = false;
+            GrammarCheckingEnabled = false;
 
             // Editor Preferences
-            TextEditorView.RichText = true;
-            //TextEditorView.ImportsGraphics = App.Preferences.AllowGraphics;
-            //TextEditorView.AllowsImageEditing = App.Preferences.AllowImageEditing;
-            //TextEditorView.AllowsDocumentBackgroundColorChange = App.Preferences.AllowBackgroundColor;
-            //TextEditorView.BackgroundColor = App.Preferences.EditorBackgroundColor;
-            TextEditorView.UsesFontPanel = true;
-            TextEditorView.UsesRuler = true;
-            TextEditorView.CompleteClosures = true;
-            //TextEditorView.WrapClosures = App.Preferences.WrapClosures;
-            //TextEditorView.SelectAfterWrap = App.Preferences.SelectAfterWrap;
+            RichText = false;
+            ImportsGraphics = false;
+            //AllowsImageEditing = App.Preferences.AllowImageEditing;
+            //AllowsDocumentBackgroundColorChange = App.Preferences.AllowBackgroundColor;
+            //BackgroundColor = App.Preferences.EditorBackgroundColor;
+            UsesFontPanel = true;
+            UsesRuler = false;
+            CompleteClosures = true;
+            //WrapClosures = App.Preferences.WrapClosures;
+            //SelectAfterWrap = App.Preferences.SelectAfterWrap;
 
-
+            HorizontallyResizable = true;
+            VerticallyResizable = true;
+            MinSize = MonoMac.CoreGraphics.CGSize.Empty;
+            MaxSize = new MonoMac.CoreGraphics.CGSize(float.MaxValue, float.MaxValue);
+            TextContainer.WidthTracksTextView = true;
 
             // Auto Complete Preferences
-            TextEditorView.AllowAutoComplete = true;
-            TextEditorView.AutoCompleteKeywords = true;
-            TextEditorView.AutoCompleteKeywords = true;
-            TextEditorView.DefaultWordsOnlyIfKeywordsEmpty = true;
+            //AllowAutoComplete = true;
+            //AutoCompleteKeywords = true;
+            //AutoCompleteKeywords = true;
+            DefaultWordsOnlyIfKeywordsEmpty = true;
 
         }
 
@@ -282,7 +278,7 @@ namespace DWSIM.UI.Controls.Mac
 		public void PrintDocument(NSPrintInfo info) {
 
             // Configure print job
-            TextEditorView.Print (this);
+            Print (this);
 		}
         
 	}

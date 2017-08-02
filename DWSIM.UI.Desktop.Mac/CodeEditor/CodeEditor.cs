@@ -11,13 +11,17 @@ namespace DWSIM.UI.Desktop.Mac
     {
 
         DWSIM.UI.Controls.Mac.TextEditor te;
+        NSScrollView sv;
 
         public CodeEditorControlHandler()
         {
             te = new Controls.Mac.TextEditor();
-            te.SetLanguageToCSharp();
-            te.Editor.Font = NSFont.FromFontName("monospace", 12.0f);
-            this.Control = te;
+            te.Editor.Font = NSFont.FromFontName("Menlo", 12.0f);
+            te.Editable = true;
+            sv = new NSScrollView {AutoresizesSubviews = true, BorderType = NSBorderType.NoBorder, HasVerticalScroller = true, HasHorizontalScroller = true, AutoresizingMask = NSViewResizingMask.WidthSizable };
+            sv.DocumentView = te;
+            this.Control = sv;
+            te.BecomeFirstResponder();
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -52,6 +56,7 @@ namespace DWSIM.UI.Desktop.Mac
             set
             {
                 te.Text = value;
+                te.ReformatText(false);
             }
         }
     }

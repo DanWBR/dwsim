@@ -19,14 +19,15 @@ namespace DWSIM.UI.Forms.Forms
 
             Title = "Loading...";
 
-            var progress = new ProgressBar { Indeterminate = true};
+            var progressSpinner = new Spinner { Width = 80, Height = 80, Enabled = true };
 
             loadingtext = new Label { Text = "Please wait, loading data..." };
 
             loadingtext.VerticalAlignment = VerticalAlignment.Center;
             loadingtext.TextAlignment = TextAlignment.Center;
 
-            var container = new TableLayout { Rows = { progress, loadingtext }, Spacing = new Size(5, 5), Padding = new Padding(5, 5, 5, 5) };
+            var row1 = new TableLayout { Rows = { new TableRow(null, progressSpinner, null), null } };
+            var container = new TableLayout { Rows = { row1, loadingtext, null }, Spacing = new Size(5, 5), Padding = new Padding(25, 10, 25, 10) };
 
             Content = container;
 
@@ -40,7 +41,7 @@ namespace DWSIM.UI.Forms.Forms
             Minimizable = false;
 
             int w = 400;
-            int h = 120;
+            int h = 160;
 
             var center = Screen.PrimaryScreen.WorkingArea.Center;
             center.X -= w / 2;

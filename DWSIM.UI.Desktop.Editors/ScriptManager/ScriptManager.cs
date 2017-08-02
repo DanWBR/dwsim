@@ -40,7 +40,7 @@ namespace DWSIM.UI.Desktop.Editors
             var leftcontainer = new TableLayout();
             var rightcontainer = new TableLayout();
 
-            var btnNew = new Button { Text = "New Script"};
+            var btnNew = new Button { Text = "New Script" };
             btnNew.Click += (sender, e) =>
             {
                 var script = new DWSIM.FlowsheetSolver.Script { ID = Guid.NewGuid().ToString(), Title = "Script" + (Flowsheet.Scripts.Count + 1).ToString() };
@@ -146,8 +146,16 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.RunScript(lbScripts.SelectedKey);
             };
 
+            var btnUpdate = new Button { Text = "Update Selected" };
+            btnUpdate.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+            };
+
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = SystemFonts.Bold() });
             leftcontainer.Rows.Add(new TableRow(btnNew));
+            leftcontainer.Rows.Add(new TableRow(btnUpdate));
             leftcontainer.Rows.Add(new TableRow(btnRun));
             leftcontainer.Rows.Add(new TableRow(btnDelete));
             leftcontainer.Rows.Add(new TableRow(lbScripts));
@@ -179,7 +187,7 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.Scripts[lbScripts.SelectedKey].Title = ScriptEditor.txtName.Text;
                 lbScripts.Items[lbScripts.SelectedIndex].Text = ScriptEditor.txtName.Text;
             };
-            
+
             rightcontainer.Rows.Add(new Label { Text = "Selected Script", Font = SystemFonts.Bold() });
             rightcontainer.Rows.Add(new TableRow(ScriptEditor));
             rightcontainer.Padding = new Padding(5, 5, 5, 5);
