@@ -25,7 +25,13 @@ namespace DWSIM.UI.Desktop.WPF
 
         public CodeEditorControlHandler()
         {
+
             te = new ICSharpCode.AvalonEdit.TextEditor();
+
+            te.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+            te.ShowLineNumbers = true;
+            te.SyntaxHighlighting = ICSharpCode.AvalonEdit.Highlighting.HighlightingManager.Instance.GetDefinition("C#");
+
             this.Control = te;
         }
 

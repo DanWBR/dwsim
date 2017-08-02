@@ -15,6 +15,8 @@ namespace DWSIM.UI.Desktop.Mac
         public CodeEditorControlHandler()
         {
             te = new Controls.Mac.TextEditor();
+            te.SetLanguageToCSharp();
+            te.Editor.Font = NSFont.FromFontName("monospace", 12.0f);
             this.Control = te;
         }
 

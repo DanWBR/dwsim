@@ -99,7 +99,6 @@ namespace DWSIM.UI.Controls.Mac
         
         public TextEditor()
         {
-            SetLanguageToCSharp();
             ConfigureEditor();
             Initialize();
         }
@@ -107,7 +106,6 @@ namespace DWSIM.UI.Controls.Mac
         public TextEditor(MonoMac.CoreGraphics.CGRect frameRect) : base(frameRect)
         {
             TextEditorView = new SourceTextView(frameRect);
-            SetLanguageToCSharp();
             ConfigureEditor();
             Initialize();
         }
