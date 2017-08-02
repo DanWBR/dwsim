@@ -115,6 +115,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Editors", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Shared", "DWSIM.UI.Desktop.Shared\DWSIM.UI.Desktop.Shared.csproj", "{2FFD2514-E4F9-4C19-B38E-B77560585D61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.Controls.MonoMac.TextEditor", "DWSIM.Controls.MonoMac.TextEditor\DWSIM.Controls.MonoMac.TextEditor.csproj", "{922424D8-EB54-422F-A7D1-9EAD36F5481C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1084,6 +1086,24 @@ Global
 		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|Mixed Platforms.Build.0 = Release|Any CPU
 		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|x64.ActiveCfg = Release|Any CPU
 		{2FFD2514-E4F9-4C19-B38E-B77560585D61}.x86|x86.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Release|x64.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.Release|x86.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.x86|Any CPU.Build.0 = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.x86|x64.ActiveCfg = Release|Any CPU
+		{922424D8-EB54-422F-A7D1-9EAD36F5481C}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

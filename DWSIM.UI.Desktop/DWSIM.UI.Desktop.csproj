@@ -116,6 +116,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\gtk-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Mac.2.4.0-build1068\lib\net45\MonoMac.dll</HintPath>
       <Private>True</Private>

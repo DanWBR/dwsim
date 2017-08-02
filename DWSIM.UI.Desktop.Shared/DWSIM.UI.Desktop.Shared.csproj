@@ -48,14 +48,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flowsheet.cs" />
+    <Compile Include="Flowsheet\Flowsheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared.cs" />
-    <Compile Include="SolvingFlowsheet.cs" />
-    <Compile Include="SolvingFlowsheet.eto.cs">
+    <Compile Include="Controls\Shared.cs" />
+    <Compile Include="Controls\SolvingFlowsheet.cs" />
+    <Compile Include="Controls\SolvingFlowsheet.eto.cs">
       <DependentUpon>SolvingFlowsheet.cs</DependentUpon>
     </Compile>
-    <Compile Include="StringArrays.cs" />
+    <Compile Include="Strings\StringArrays.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
