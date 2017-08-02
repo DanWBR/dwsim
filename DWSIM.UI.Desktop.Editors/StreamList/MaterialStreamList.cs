@@ -165,7 +165,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
-            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) topcontainer.Height = 36;
+            if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) topcontainer.Height = 34;
 
             topcontainer.Rows.Add(new TableRow(lblLastUpdate, null, new Label { Text = "Column Size", VerticalAlignment = VerticalAlignment.Center }, txtpad, btnUpdate) { ScaleHeight = false });
 
