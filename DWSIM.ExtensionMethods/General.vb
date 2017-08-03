@@ -173,6 +173,16 @@ Public Module General
     End Function
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Function ToDoubleWithSeparator(s As String, sep As String) As Double
+        Dim nstring As String = s.Replace(sep, ".")
+        If Double.TryParse(nstring, Globalization.NumberStyles.Any, Globalization.CultureInfo.InvariantCulture, New Double) Then
+            Return Double.Parse(nstring, Globalization.CultureInfo.InvariantCulture)
+        Else
+            Return 0.0#
+        End If
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToDoubleFromInvariant(s As String) As Double
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture

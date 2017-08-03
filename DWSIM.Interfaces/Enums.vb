@@ -59,6 +59,12 @@ Namespace Enums
 
     End Class
 
+    Public Enum SampleType
+        Light = 0
+        Average = 1
+        Heavy = 2
+    End Enum
+
     Public Enum UndoRedoActionType
         SimulationObjectPropertyChanged = 0
         FlowsheetObjectPropertyChanged = 1

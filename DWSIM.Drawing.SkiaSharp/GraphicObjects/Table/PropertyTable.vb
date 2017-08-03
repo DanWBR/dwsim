@@ -214,7 +214,7 @@ Namespace GraphicObjects.Tables
                         propunit = Me.Flowsheet.SimulationObjects(item.Key).GetPropertyUnit(value, Me.Flowsheet.FlowsheetOptions.SelectedUnitSystem)
 
                         canvas.DrawText(propstring, X + maxL0 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                        canvas.DrawText(propval, X + maxL0 + maxL1 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL0 + maxL1 - Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawText(propunit, X + maxL0 + maxL1 + maxL2 + Padding, Y + n * maxH + Padding + size.Height, tpaint)
                         canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, bpaint)
 

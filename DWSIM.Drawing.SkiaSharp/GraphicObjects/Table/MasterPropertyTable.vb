@@ -467,7 +467,7 @@ Namespace GraphicObjects.Tables
                                 n = 1
                                 For Each ni In m_items(s)
                                     If i = 0 Then canvas.DrawText(Flowsheet.GetTranslatedString(ni.Text), X + Padding, Y + n * maxH + Padding + size.Height, tpaint)
-                                    canvas.DrawText(ni.Value, X + maxL1 + i * maxL2a + 2 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
+                                    canvas.DrawText(ni.Value, (maxL2a - MeasureString(ni.Value, tpaint).Width) + X + maxL1 + i * maxL2a, Y + n * maxH + Padding + size.Height, tpaint)
                                     If i = m_items.Count - 1 Then canvas.DrawText(ni.Unit, X + maxL1 + (i + 1) * maxL2a + 3 * Padding, Y + n * maxH + Padding + size.Height, tpaint)
                                     n += 1
                                 Next

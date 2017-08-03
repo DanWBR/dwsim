@@ -179,9 +179,15 @@ namespace DWSIM.UI.Forms
             btnComps.Click += (sender, e) => {
                 var cont = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Simulation Compounds", 829, 500, cont, false);
+                cont.Tag = "Simulation Compounds";
+
+                var cont2 = new Desktop.Editors.CompoundTools(FlowsheetObject);
+                cont2.Tag = "Compound Tools";
+
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 829, 500, new Control[]{cont, cont2});
                 form.Show();
                 form.Width += 1;
+
             };
 
             btnBasis.Click += (sender, e) =>
@@ -210,13 +216,13 @@ namespace DWSIM.UI.Forms
                 SolveFlowsheet();
             };
 
-            this.KeyDown += (sender, e) =>
-            {
-                if (e.Key == Keys.F5)
-                {
-                    SolveFlowsheet();
-                };
-            };
+            //this.KeyDown += (sender, e) =>
+            //{
+            //    if (e.Key == Keys.F5)
+            //    {
+            //        SolveFlowsheet();
+            //    };
+            //};
 
             btnSave.Click += (sender, e) =>
             {

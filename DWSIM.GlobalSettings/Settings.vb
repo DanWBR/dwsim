@@ -366,6 +366,12 @@ Public Class Settings
         CurrentPlatform = source.Configs("OSInfo").GetString("Platform", GetPlatform())
         CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", GetEnvironment())
 
+        If source.Configs("PlatformRenderers") Is Nothing Then source.AddConfig("PlatformRenderers")
+
+        WindowsRenderer = [Enum].Parse(WindowsRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Windows", "WPF"))
+        LinuxRenderer = [Enum].Parse(LinuxRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Linux", "Gtk2"))
+        MacOSRenderer = [Enum].Parse(MacOSRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Mac", "MonoMac"))
+
         source.Save()
 
     End Sub
@@ -463,6 +469,12 @@ Public Class Settings
         If source.Configs("UserUnits") Is Nothing Then source.AddConfig("UserUnits")
 
         source.Configs("UserUnits").Set("UserUnits", UserUnits)
+
+        If source.Configs("PlatformRenderers") Is Nothing Then source.AddConfig("PlatformRenderers")
+
+        source.Configs("PlatformRenderers").Set("Windows", WindowsRenderer)
+        source.Configs("PlatformRenderers").Set("Linux", LinuxRenderer)
+        source.Configs("PlatformRenderers").Set("Mac", MacOSRenderer)
 
         source.Save(configfile)
 

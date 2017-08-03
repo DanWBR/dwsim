@@ -174,7 +174,7 @@ namespace DWSIM.UI.Shared
                 container.AddRow(new TableRow(textarea));
             }
             else {
-                var label = new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 1.0f) };
+                var label = new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) };
                 container.AddRow(new TableRow(label));
             }
             container.CreateAndAddEmptySpace();

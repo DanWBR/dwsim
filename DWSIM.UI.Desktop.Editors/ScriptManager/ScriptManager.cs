@@ -143,6 +143,8 @@ namespace DWSIM.UI.Desktop.Editors
             var btnRun = new Button { Text = "Run Selected" };
             btnRun.Click += (sender, e) =>
             {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
                 Flowsheet.RunScript(lbScripts.SelectedKey);
             };
 
@@ -171,10 +173,17 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.Scripts[lbScripts.SelectedKey].Linked = ScriptEditor.chkLink.Checked.GetValueOrDefault();
             };
 
-            //ScriptEditor.txtScript.TextChanged += (sender, e) =>
+            //this.KeyDown += (sender, e) =>
             //{
-            //    if (lbScripts.SelectedIndex < 0) return;
-            //    Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+            //    switch (e.Key)
+            //    {
+            //        case Keys.F5 | Keys.Shift:
+            //            btnRun.PerformClick();
+            //            break;
+            //        case Keys.S | Keys.Shift:
+            //            btnUpdate.PerformClick();
+            //            break;
+            //    }
             //};
 
             ScriptEditor.cbLinkedObject.SelectedIndexChanged += cbLinkedObject_SelectedIndexChanged;

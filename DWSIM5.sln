@@ -96,6 +96,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3214CD
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop.Forms", "DWSIM.UI.Desktop.Forms\DWSIM.UI.Desktop.Forms.csproj", "{766C669B-91BD-4C62-A2AF-D3FB9C939715}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FDFB92DE-D189-49DC-91CC-60EE78D1356C} = {FDFB92DE-D189-49DC-91CC-60EE78D1356C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.UI.Desktop", "DWSIM.UI.Desktop\DWSIM.UI.Desktop.csproj", "{7E6FB1E7-1450-42FC-ADA4-A724FE43047B}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -277,7 +280,6 @@ Global
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|x64.Build.0 = Debug|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C75532C4-765B-418E-B09B-46D36B2ABDB1}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -320,7 +322,6 @@ Global
 		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Debug|x64.Build.0 = Debug|Any CPU
 		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F929CA6A-87BD-42C8-8D0A-6455DB6F55DC}.Release|Any CPU.Build.0 = Release|Any CPU
@@ -386,7 +387,6 @@ Global
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Debug|x64.Build.0 = Debug|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE695E9D-CFDF-4C8F-83CC-F5264DE69FC4}.Release|Any CPU.Build.0 = Release|Any CPU

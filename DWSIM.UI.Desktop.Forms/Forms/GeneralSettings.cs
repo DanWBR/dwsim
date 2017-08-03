@@ -18,10 +18,49 @@ namespace DWSIM.UI.Forms.Forms
             string prefix = this.GetLocalizationPrefix();
 
             var tab1 = Common.GetDefaultContainer();
-            tab1.Tag = "Flowsheet".Localize(prefix);
+            tab1.Tag = "User Interface";
 
-            tab1.CreateAndAddLabelRow("Designer".Localize(prefix));
+            tab1.CreateAndAddLabelRow("Renderer");
+
+            int currentrenderer = 0;
+            var renderers = new List<String>();
+
+            switch (GlobalSettings.Settings.RunningPlatform()){
+                case Settings.Platform.Windows:
+                    renderers.AddRange(Enum.GetNames(typeof(Settings.WindowsPlatformRenderer)));
+                    currentrenderer = (int)Settings.WindowsRenderer;
+                    break;
+                case Settings.Platform.Linux:
+                    renderers.AddRange(Enum.GetNames(typeof(Settings.LinuxPlatformRenderer)));
+                    currentrenderer = (int)Settings.LinuxRenderer;
+                    break;
+                case Settings.Platform.Mac:
+                    renderers.AddRange(Enum.GetNames(typeof(Settings.MacOSPlatformRenderer)));
+                    currentrenderer = (int)Settings.MacOSRenderer;
+                    break;
+            }
+
+            tab1.CreateAndAddDropDownRow("Platform Renderer", renderers, currentrenderer, (sender, e) => {
+                switch (GlobalSettings.Settings.RunningPlatform())
+                {
+                    case Settings.Platform.Windows:
+                        Settings.WindowsRenderer = (Settings.WindowsPlatformRenderer)sender.SelectedIndex;
+                        break;
+                    case Settings.Platform.Linux:
+                        Settings.LinuxRenderer = (Settings.LinuxPlatformRenderer)sender.SelectedIndex;
+                        break;
+                    case Settings.Platform.Mac:
+                        Settings.MacOSRenderer = (Settings.MacOSPlatformRenderer)sender.SelectedIndex;
+                        break;
+                }            
+            });
+
+            tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\nWindows: WPF (Windows Presentation Foundation)\nLinux: GTK 2\nmacOS: MonoMac");
+            tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
+
+            tab1.CreateAndAddLabelRow("Flowsheet Designer");
             tab1.CreateAndAddCheckBoxRow("EnableAntiAliasing".Localize(prefix), Settings.DrawingAntiAlias, (CheckBox sender, EventArgs obj) => { Settings.DrawingAntiAlias = sender.Checked.Value; });
+            tab1.CreateAndAddDescriptionRow("Sets anti-aliasing (edge smoothing) for the Flowsheet Designer.");
 
             var tab2 = Common.GetDefaultContainer();
             tab2.Tag = "Solver".Localize(prefix);

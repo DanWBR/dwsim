@@ -67,7 +67,7 @@
 
     Property gor As String
 
-    Property molar_enthalpy
+    Property molar_enthalpy As String
 
     Property molar_entropy As String
 

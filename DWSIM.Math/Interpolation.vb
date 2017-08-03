@@ -55,7 +55,7 @@ Namespace MathEx.Interpolation
         '         Copyright 28.05.2007 by Bochkanov Sergey
         '    ************************************************************************
 
-        Public Shared Function barycentricinterpolation(ByRef x As Double(), ByRef f As Double(), ByRef w As Double(), ByVal n As Integer, ByVal t As Double) As Double
+        Public Shared Function barycentricinterpolation(x As Double(), f As Double(), w As Double(), n As Integer, t As Double) As Double
             Dim result As Double = 0
             Dim s1 As Double = 0
             Dim s2 As Double = 0

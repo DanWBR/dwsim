@@ -113,7 +113,7 @@ Namespace SystemsOfUnits
 
         Public Property molar_conc As String Implements Interfaces.IUnitsOfMeasure.molar_conc
 
-        Public Property molar_enthalpy As Object Implements Interfaces.IUnitsOfMeasure.molar_enthalpy
+        Public Property molar_enthalpy As String Implements Interfaces.IUnitsOfMeasure.molar_enthalpy
 
         Public Property molar_entropy As String Implements Interfaces.IUnitsOfMeasure.molar_entropy
 

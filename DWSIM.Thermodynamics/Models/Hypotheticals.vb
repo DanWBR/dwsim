@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.VisualBasic.FileIO
+Imports System.IO
 
 '    Hypotheticals Calculation Routines 
 '    Copyright 2008/2013 Daniel Wagner O. de Medeiros
@@ -24,13 +25,33 @@ Namespace Utilities.Hypos.Methods
 
     <System.Serializable()> Public Class Joback
 
+        Public ElementLines, JOBACKlines, UNIFACLines, MODFACLines As New List(Of String)
+
         Protected m_Jgroups As System.Collections.Generic.Dictionary(Of Integer, JobackGroup)
         Protected m_JElements As System.Collections.Generic.Dictionary(Of String, Element)
         Sub New()
 
             Dim pathsep = System.IO.Path.DirectorySeparatorChar
-            Dim ElementLines, JOBACKlines As New List(Of String)
             Dim i As Integer
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.unifac.txt")
+                Using parser As New TextFieldParser(filestr)
+                    parser.ReadLine()
+                    parser.ReadLine()
+                    While Not parser.EndOfData
+                        UNIFACLines.Add(parser.ReadLine)
+                    End While
+                End Using
+            End Using
+
+            Using filestr As IO.Stream = System.Reflection.Assembly.GetAssembly(Me.GetType).GetManifestResourceStream("DWSIM.Thermodynamics.modfac.txt")
+                Using parser As New TextFieldParser(filestr)
+                    parser.ReadLine()
+                    While Not parser.EndOfData
+                        MODFACLines.Add(parser.ReadLine)
+                    End While
+                End Using
+            End Using
 
             'Load Elements data
             m_JElements = New System.Collections.Generic.Dictionary(Of String, Element)
@@ -111,6 +132,90 @@ Namespace Utilities.Hypos.Methods
                 CheckEmptyCell = Double.Parse(val, Globalization.CultureInfo.InvariantCulture)
             End If
         End Function
+
+
+
+        Public Function GetACLFromUNIFAC(unifac As Integer()) As Dictionary(Of String, Integer)
+
+            'fill Joback groups table with UNIFAC subgoups
+            Dim k, usgc, usgid As Integer
+            Dim JSG, JG2 As String, JG As New Dictionary(Of Integer, Integer)
+
+            For Each j As JobackGroup In JGroups.Values
+                JG.Add(j.ID, 0)
+            Next
+
+            Dim i As Integer = 0
+            For Each r As Integer In unifac
+                'Joback groups from UNIFAC subgroups
+                JG2 = UNIFACLines(i).Split(","c)(8) 'Joback Subgroup List
+                For k = 0 To 3
+                    JSG = JG2.Split("/"c)(k)
+                    If Not JSG = "" Then
+                        usgc = CInt(JSG.Split(":"c)(0)) 'Joback subgroup count
+                        usgid = CInt(JSG.Split(":"c)(1)) 'Joback subgroup ID
+                        JG(usgid) += usgc * r
+                    End If
+                Next
+                i += 1
+            Next
+
+            Dim ACL As New Dictionary(Of String, Integer) ' => Atom Count List
+            ACL = GetAtomCountList(JG.Values.ToArray) 'Atoms from Joback groups
+
+            Return ACL
+
+        End Function
+
+        Public Function GetJCFromUNIFAC(unifac As Integer()) As Integer()
+
+            'fill Joback groups table with UNIFAC subgoups
+            Dim k, usgc, usgid As Integer
+            Dim JSG, JG2 As String, JG As New Dictionary(Of Integer, Integer)
+
+            For Each j As JobackGroup In JGroups.Values
+                JG.Add(j.ID, 0)
+            Next
+
+            Dim i As Integer = 0
+            For Each r As Integer In unifac
+                'Joback groups from UNIFAC subgroups
+                JG2 = UNIFACLines(i).Split(","c)(8) 'Joback Subgroup List
+                For k = 0 To 3
+                    JSG = JG2.Split("/"c)(k)
+                    If Not JSG = "" Then
+                        usgc = CInt(JSG.Split(":"c)(0)) 'Joback subgroup count
+                        usgid = CInt(JSG.Split(":"c)(1)) 'Joback subgroup ID
+                        JG(usgid) += usgc * r
+                    End If
+                Next
+                i += 1
+            Next
+
+            Return JG.Values.ToArray
+
+        End Function
+
+        Public Function GetUNIFACList(groups As SortedList) As Integer()
+
+            Dim list(UNIFACLines.Count - 1) As Integer
+            Dim i As Integer = 0
+            For Each item As String In UNIFACLines
+                For Each item2 In groups
+                    If item2.Key = CInt(item.Split(","c)(1)) Then
+                        list(i) = item2.Value
+                        Exit For
+                    End If
+                Next
+                i += 1
+            Next
+
+            Return list
+
+        End Function
+
+
+
         Public Function CalcMW(ByVal ACL As System.Collections.Generic.Dictionary(Of String, Integer)) As Double
 
             Dim sum1 As Double

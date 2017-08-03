@@ -23,9 +23,7 @@ namespace DWSIM.UI.Desktop
             Settings.LoadSettings("dwsim_newui.ini");
 
             Eto.Platform platform = null;
-
-            Settings.WindowsRenderer = Settings.WindowsPlatformRenderer.WinForms_Direct2D;
-
+            
             if (Settings.RunningPlatform() == Settings.Platform.Windows)
             {
                 switch (GlobalSettings.Settings.WindowsRenderer)
