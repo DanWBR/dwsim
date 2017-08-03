@@ -31,7 +31,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
         /// <summary>
         /// Initializes a new instance of the <see cref="AppKit.TextKit.Formatter.CSharpDescriptor"/> class.
         /// </summary>
-        public CSharpDescriptor()
+        public CSharpDescriptor(): base()
         {
             LanguageSeparators = new char[] { '=', '+', '-', '*', '/', '%', '&', '<', '>', ';', ':', '^', '!', '~', '?', '|', ',', '"', '\'', '(', ')', '[', ']', '{', '}' };
         }
@@ -43,6 +43,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
         /// </summary>
         public override void Define()
         {
+
             // Call base class
             base.Define();
 

@@ -45,7 +45,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
         /// <summary>
         /// Initializes a new instance of the <see cref="AppKit.TextKit.Formatter.MarkDownDescriptor"/> class.
         /// </summary>
-        public MarkDownDescriptor()
+        public MarkDownDescriptor(): base()
         {
             LanguageSeparators = new char[] { '=', '+', '-', '*', '/', '%', '&', '<', '>', ';', ':', '^', '!', '~', '?', '|', ',', '"', '\'', '(', ')', '[', ']', '{', '}' };
         }

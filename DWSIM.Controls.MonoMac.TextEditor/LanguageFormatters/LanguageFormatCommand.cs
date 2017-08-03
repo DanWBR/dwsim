@@ -62,6 +62,9 @@ namespace MonoMac.AppKit.TextKit.Formatter
         {
             // Initialize
             this.Title = title;
+            Prefix = "";
+            Postfix = "";
+            SubCommands = new List<LanguageFormatCommand>();
         }
 
         /// <summary>
@@ -74,6 +77,8 @@ namespace MonoMac.AppKit.TextKit.Formatter
             // Initialize
             this.Title = title;
             this.Prefix = prefix;
+            Postfix = "";
+            SubCommands = new List<LanguageFormatCommand>();
         }
 
         /// <summary>
@@ -88,6 +93,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
             this.Title = title;
             this.Prefix = prefix;
             this.Postfix = postfix;
+            SubCommands = new List<LanguageFormatCommand>();
         }
         #endregion
     }
