@@ -68,8 +68,7 @@ namespace DWSIM.UI.Forms
             var btnClose = new ButtonMenuItem { Text = "Close Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")), Shortcut = Keys.Q | Application.Instance.CommonModifier };
             var btnComps = new ButtonMenuItem { Text = "Compounds", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-thin_test_tube.png")), Shortcut = Keys.C | Application.Instance.CommonModifier };
             var btnBasis = new ButtonMenuItem { Text = "Basis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-math.png")), Shortcut = Keys.B | Application.Instance.CommonModifier };
-            var btnTools = new ButtonMenuItem { Text = "Tools", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
-            var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
+            //var btnUtilities = new ButtonMenuItem { Text = "Utilities", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnOptions = new ButtonMenuItem { Text = "Settings", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")), Shortcut = Keys.M | Application.Instance.CommonModifier };
             var btnSolve = new ButtonMenuItem { Text = "Solve Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")), Shortcut = Keys.F5 };
 
@@ -78,6 +77,22 @@ namespace DWSIM.UI.Forms
             var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Grid_96px.png")) };
             var btnInsertMasterTable = new ButtonMenuItem { Text = "Add New Master Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "GridView_96px.png")) };
             var btnInsertSpreadsheetTable = new ButtonMenuItem { Text = "Add New Linked Spreadsheet Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PivotTable_96px.png")) };
+
+            var btnSensAnalysis = new ButtonMenuItem { Text = "Sensitivity Analysis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
+            var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
+
+            btnSensAnalysis.Click += (sender, e) => {
+                var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
+                var form = Common.GetDefaultEditorForm("Sensitivity Analysis", 500, 700, saeditor);
+                form.Show();
+            };
+
+            btnOptimization.Click += (sender, e) =>
+            {
+                var foeditor = new Desktop.Editors.OptimizerView(FlowsheetObject);
+                var form = Common.GetDefaultEditorForm("Flowsheet Optimizer", 500, 700, foeditor);
+                form.Show();
+            };
 
             btnInsertText.Click += (sender, e) => {
                 FlowsheetControl.AddObject("Text", 50, 50);
@@ -156,16 +171,16 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
                     Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
                     Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-                    Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnTools } });
-                    Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
+                    Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                    //Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
                 case GlobalSettings.Settings.Platform.Windows:
                     Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-                    Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnTools } });
-                    Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                    //Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
                     break;
             }
             

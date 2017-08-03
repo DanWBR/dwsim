@@ -11,7 +11,6 @@ Imports DWSIM.UnitOperations.SpecialOps
 Imports DWSIM.UnitOperations.UnitOperations
 Imports DWSIM.UnitOperations.Reactors
 Imports DWSIM.Thermodynamics.PropertyPackages
-Imports DWSIM.SharedClasses.DWSIM
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
 Imports DWSIM.Thermodynamics
 Imports DWSIM.UnitOperations.Streams
@@ -22,6 +21,7 @@ Imports DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables
 Imports Python.Runtime
 Imports Microsoft.Scripting.Hosting
 Imports System.Text
+Imports DWSIM.SharedClasses.Flowsheet
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 

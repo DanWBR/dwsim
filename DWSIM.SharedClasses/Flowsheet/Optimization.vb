@@ -23,7 +23,7 @@ Imports System.Runtime.Serialization
 Imports Ciloci.Flee
 Imports System.Linq
 
-Namespace DWSIM.Optimization
+Namespace Flowsheet.Optimization
 
     <System.Serializable()> Public Class OptimizationCase
 

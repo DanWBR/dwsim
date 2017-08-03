@@ -74,6 +74,8 @@
     <Compile Include="Compounds\CompoundCreator.cs" />
     <Compile Include="Compounds\DistCurves.cs" />
     <Compile Include="Compounds\Tools.cs" />
+    <Compile Include="FlowsheetAnalysis\Optimization.cs" />
+    <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Results\ResultsViewer.cs" />
     <Compile Include="ScriptManager\ScriptItem.cs" />
@@ -136,6 +138,10 @@
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
       <Name>DWSIM.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
+      <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>
+      <Name>DWSIM.MathOps.DotNumerics</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math\DWSIM.MathOps.vbproj">
       <Project>{fdfb92de-d189-49dc-91cc-60ee78d1356c}</Project>
