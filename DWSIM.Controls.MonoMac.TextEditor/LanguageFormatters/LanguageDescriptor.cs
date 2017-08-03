@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using MonoMac.Foundation;
 using MonoMac.AppKit;
 
-using nfloat = System.Double;
-using nint = System.Int64;
-using nuint = System.UInt64;
-
 namespace MonoMac.AppKit.TextKit.Formatter
 {
 	/// <summary>
@@ -31,7 +27,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// given language.
 		/// </summary>
 		/// <value>The language separators.</value>
-		public char[] LanguageSeparators {get; set;}
+		public virtual char[] LanguageSeparators { get; set; }
 
 		/// <summary>
 		/// Gets the escape character for the given language.
@@ -46,28 +42,28 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// the keywords for this language.
 		/// </summary>
 		/// <value>The keywords.</value>
-		public Dictionary<string, KeywordDescriptor> Keywords  = new Dictionary<string, KeywordDescriptor>();
+		public Dictionary<string, KeywordDescriptor> Keywords { get; set; }
 
 		/// <summary>
 		/// Gets or sets the collection of <see cref="AppKit.TextKit.Formatter.FormatDescriptor"/> formats used to
 		/// syntax highlight this language.
 		/// </summary>
 		/// <value>The formats.</value>
-		public List<FormatDescriptor> Formats = new List<FormatDescriptor>();
+		public List<FormatDescriptor> Formats { get; set; }
 
 		/// <summary>
 		/// Gets or sets the collection of <see cref="AppKit.TextKit.Formatter.LanguageClosure"/> used to auto
 		/// complete to closure of text such as (), [], "" or ''.
 		/// </summary>
 		/// <value>The closures.</value>
-		public List<LanguageClosure> Closures = new List<LanguageClosure>();
+		public List<LanguageClosure> Closures { get; set; }
 
 		/// <summary>
 		/// Gets or sets the formatting commands that can be added to the user interface for the 
 		/// user to select and apply to a selection of text in the editor.
 		/// </summary>
 		/// <value>The <see cref="AppKit.TextKit.Formatter.LanguageFormatCommand"/> items.</value>
-		public List<LanguageFormatCommand> FormattingCommands = new List<LanguageFormatCommand>();
+		public List<LanguageFormatCommand> FormattingCommands { get; set; }
 
 		/// <summary>
 		/// Gets or sets the color of generic keywords.
@@ -159,7 +155,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the selection statement.</value>
 		[Export("SelectionStatementColor")]
 		public NSColor SelectionStatementColor {
-			get { return LoadColor ("SelectionStatementColor", NSColor.FromCalibratedRgba(0.50f, 0.25f, 0f, 1.0f)); }
+			get { return LoadColor ("SelectionStatementColor", NSColor.FromCalibratedRgba (0.50f, 0.25f, 0f, 1.0f)); }
 			set {
 				WillChangeValue ("SelectionStatementColor");
 				SaveColor ("SelectionStatementColor", value, true);
@@ -173,7 +169,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the iteration statement.</value>
 		[Export("IterationStatementColor")]
 		public NSColor IterationStatementColor {
-			get { return LoadColor ("IterationStatementColor", NSColor.FromCalibratedRgba(0.50f, 0f, 0f, 1.0f)); }
+			get { return LoadColor ("IterationStatementColor", NSColor.FromCalibratedRgba (0.50f, 0f, 0f, 1.0f)); }
 			set {
 				WillChangeValue ("IterationStatementColor");
 				SaveColor ("IterationStatementColor", value, true);
@@ -187,7 +183,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the jump statement.</value>
 		[Export("JumpStatementColor")]
 		public NSColor JumpStatementColor {
-			get { return LoadColor ("JumpStatementColor", NSColor.FromCalibratedRgba(0.50f, 0.50f, 0.0f, 1.0f)); }
+			get { return LoadColor ("JumpStatementColor", NSColor.FromCalibratedRgba (0.50f, 0.50f, 0.0f, 1.0f)); }
 			set {
 				WillChangeValue ("JumpStatementColor");
 				SaveColor ("JumpStatementColor", value, true);
@@ -201,7 +197,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the exception handling.</value>
 		[Export("ExceptionHandlingColor")]
 		public NSColor ExceptionHandlingColor {
-			get { return LoadColor ("ExceptionHandlingColor", NSColor.FromCalibratedRgba(1f, 0f, 0f, 1.0f)); }
+			get { return LoadColor ("ExceptionHandlingColor", NSColor.FromCalibratedRgba (1f, 0f, 0f, 1.0f)); }
 			set {
 				WillChangeValue ("ExceptionHandlingColor");
 				SaveColor ("ExceptionHandlingColor", value, true);
@@ -215,7 +211,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the statement.</value>
 		[Export("StatementColor")]
 		public NSColor StatementColor {
-			get { return LoadColor ("StatementColor", NSColor.FromCalibratedRgba(1f, 0f, 0.50f, 1.0f)); }
+			get { return LoadColor ("StatementColor", NSColor.FromCalibratedRgba (1f, 0f, 0.50f, 1.0f)); }
 			set {
 				WillChangeValue ("StatementColor");
 				SaveColor ("StatementColor", value, true);
@@ -229,7 +225,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the method parameter.</value>
 		[Export("MethodParameterColor")]
 		public NSColor MethodParameterColor {
-			get { return LoadColor ("MethodParameterColor", NSColor.FromCalibratedRgba(0.06f, 0.52f, 0.50f, 1.0f)); }
+			get { return LoadColor ("MethodParameterColor", NSColor.FromCalibratedRgba (0.06f, 0.52f, 0.50f, 1.0f)); }
 			set {
 				WillChangeValue ("MethodParameterColor");
 				SaveColor ("MethodParameterColor", value, true);
@@ -243,7 +239,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the namespace.</value>
 		[Export("NamespaceColor")]
 		public NSColor NamespaceColor {
-			get { return LoadColor ("NamespaceColor", NSColor.FromCalibratedRgba(0.06f, 0.52f, 0.50f, 1.0f)); }
+			get { return LoadColor ("NamespaceColor", NSColor.FromCalibratedRgba (0.06f, 0.52f, 0.50f, 1.0f)); }
 			set {
 				WillChangeValue ("NamespaceColor");
 				SaveColor ("NamespaceColor", value, true);
@@ -257,7 +253,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the operator keyword.</value>
 		[Export("OperatorKeywordColor")]
 		public NSColor OperatorKeywordColor {
-			get { return LoadColor ("OperatorKeywordColor", NSColor.FromCalibratedRgba(0.80f, 0.40f, 1f, 1.0f)); }
+			get { return LoadColor ("OperatorKeywordColor", NSColor.FromCalibratedRgba (0.80f, 0.40f, 1f, 1.0f)); }
 			set {
 				WillChangeValue ("OperatorKeywordColor");
 				SaveColor ("OperatorKeywordColor", value, true);
@@ -313,7 +309,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the contextual keyword.</value>
 		[Export("ContextualKeywordColor")]
 		public NSColor ContextualKeywordColor {
-			get { return LoadColor ("ContextualKeywordColor", NSColor.FromCalibratedRgba(0f, 0.50f, 0.25f, 1.0f)); }
+			get { return LoadColor ("ContextualKeywordColor", NSColor.FromCalibratedRgba (0f, 0.50f, 0.25f, 1.0f)); }
 			set {
 				WillChangeValue ("ContextualKeywordColor");
 				SaveColor ("ContextualKeywordColor", value, true);
@@ -341,7 +337,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <value>The <c>NSColor</c> of the preprocessor directive.</value>
 		[Export("PreprocessorDirectiveColor")]
 		public NSColor PreprocessorDirectiveColor {
-			get { return LoadColor ("PreprocessorDirectiveColor", NSColor.FromCalibratedRgba(0.69f, 0.03f, 0.61f, 1.0f)); }
+			get { return LoadColor ("PreprocessorDirectiveColor", NSColor.FromCalibratedRgba (0.69f, 0.03f, 0.61f, 1.0f)); }
 			set {
 				WillChangeValue ("PreprocessorDirectiveColor");
 				SaveColor ("PreprocessorDirectiveColor", value, true);
@@ -384,7 +380,12 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// </summary>
 		public LanguageDescriptor ()
 		{
-            LanguageSeparators = new char[]{'.'};
+                LanguageSeparators = new char[] { '.' };
+            Formats = new List<FormatDescriptor>();
+            Closures = new List<LanguageClosure>();
+            FormattingCommands = new List<LanguageFormatCommand>();
+          Keywords   = new Dictionary<string, KeywordDescriptor>();
+
 		}
 		#endregion
 
@@ -500,7 +501,16 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <param name="key">The user default key for the color.</param>
 		/// <param name="defaultValue">The default <c>NSColor</c> value.</param>
 		public NSColor LoadColor(string key, NSColor defaultValue) {
+
+			// Attempt to read color, add the language ID to make unique
+			var hex = NSUserDefaults.StandardUserDefaults.StringForKey(LanguageIdentifier + key);
+
+			// Take action based on value
+			if (hex == null) {
 				return defaultValue;
+			} else {
+				return NSColorFromHexString (hex);
+			}
 		}
 
 		/// <summary>
@@ -511,8 +521,8 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <param name="sync">If set to <c>true</c> sync changes to preferences.</param>
 		public void SaveColor(string key, NSColor color, bool sync) {
 			// Save to default, add the language ID to make unique
-			//NSUserDefaults.StandardUserDefaults.SetString(NSColorToHexString(color,true), LanguageIdentifier + key);
-			//if (sync) NSUserDefaults.StandardUserDefaults.Synchronize ();
+			NSUserDefaults.StandardUserDefaults.SetString(NSColorToHexString(color,true), LanguageIdentifier + key);
+			if (sync) NSUserDefaults.StandardUserDefaults.Synchronize ();
 		}
 		#endregion
 	}

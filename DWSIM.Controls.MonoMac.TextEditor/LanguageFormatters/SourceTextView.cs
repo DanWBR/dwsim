@@ -384,7 +384,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 			TextStorage.BeginEditing();
 			Replace(range, output);
 			TextStorage.EndEditing ();
-			SelectedRange = new NSRange(range.Location, (uint)output.Length);
+			SelectedRange = new NSRange((int)range.Location, (int)output.Length);
 			Formatter.HighlightSyntaxRegion(TextStorage.Value, SelectedRange);
 		}
 
@@ -404,7 +404,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 			TextStorage.BeginEditing();
 			Replace(range, output);
 			TextStorage.EndEditing ();
-			SelectedRange = new NSRange(range.Location, (uint)output.Length);
+            SelectedRange = new NSRange((int)range.Location, (int)output.Length);
 			Formatter.HighlightSyntaxRegion(TextStorage.Value, SelectedRange);
 		}
 
@@ -414,7 +414,8 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		/// <param name="command">The <see cref="AppKit.TextKit.Formatter.LanguageFormatCommand"/> to apply.</param>
 		public void PerformFormattingCommand(LanguageFormatCommand command) {
 			NSRange range = SelectedRange;
-            // Apply to start of line?
+
+			// Apply to start of line?
 			if (command.Postfix == "") {
 				// Yes, find start
 				range = Formatter.FindLineBoundries(TextStorage.Value, SelectedRange);
@@ -432,6 +433,217 @@ namespace MonoMac.AppKit.TextKit.Formatter
 			Replace(range, output);
 			TextStorage.EndEditing ();
 			Formatter.HighlightSyntaxRegion(TextStorage.Value, range);
+		}
+		#endregion
+
+		#region Override Methods
+		/// <summary>
+		/// Look for special keys being pressed and does specific processing based on
+		/// the key.
+		/// </summary>
+		/// <param name="theEvent">The event.</param>
+		public override void KeyDown (NSEvent theEvent)
+		{
+			NSRange range = new NSRange(0, 0);
+			string line = "";
+			int indentLevel = 0;
+			bool consumeKeystroke = false;
+
+			// Avoid processing if no Formatter has been attached
+			if (Formatter == null) return;
+
+			// Trap all errors
+			try {
+				// Get the code of current character
+				var c = theEvent.Characters [0];
+				var charCode = (int)theEvent.Characters [0];
+
+				// Preprocess based on character code
+				switch(charCode) {
+				case EnterKey:
+					// Get the tab indent level
+					range = Formatter.FindLineBoundries(TextStorage.Value, SelectedRange);
+					line = TextStorage.Value.Substring((int)range.Location, (int)range.Length);
+					indentLevel = CalculateIndentLevel(line);
+					break;
+				case TabKey:
+					// Is a range selected?
+					if (SelectedRange.Length > 0 ) {
+						// Increase tab indent over the entire selection
+						IndentText();
+						consumeKeystroke = true;
+					}
+					break;
+				case ShiftTabKey:
+					// Is a range selected?
+					if (SelectedRange.Length > 0 ) {
+						// Increase tab indent over the entire selection
+						OutdentText();
+						consumeKeystroke = true;
+					}
+					break;
+				default:
+					// Are we completing closures
+					if (CompleteClosures) {
+						if (WrapClosures && SelectedRange.Length > 0) {
+							// Yes, see if we are starting a closure
+							foreach(LanguageClosure closure in Formatter.Language.Closures) {
+								// Found?
+								if (closure.StartingCharacter == c) {
+									// Yes, get selected text
+									var location = SelectedRange.Location;
+									line = TextStorage.Value.Substring((int)SelectedRange.Location, (int)SelectedRange.Length);
+									var output = "";
+									output += closure.StartingCharacter;
+									output += line;
+									output += closure.EndingCharacter;
+									TextStorage.BeginEditing();
+									Replace(SelectedRange, output);
+									TextStorage.EndEditing();
+									if (SelectAfterWrap) {
+                                        SelectedRange = new NSRange((int)location, output.Length);
+									}
+									consumeKeystroke = true;
+									Formatter.HighlightSyntaxRegion(TextStorage.Value, SelectedRange);
+								}
+							}
+						} else {
+							// Yes, see if we are in a language defined closure
+							foreach(LanguageClosure closure in Formatter.Language.Closures) {
+								// Found?
+								if (closure.StartingCharacter == c) {
+									// Is this a valid location for a completion?
+									if (Formatter.TrailingCharacterIsWhitespaceOrTerminator(TextStorage.Value, SelectedRange)) {
+										// Yes, complete closure
+										consumeKeystroke = true;
+										var output = "";
+										output += closure.StartingCharacter;
+										output += closure.EndingCharacter;
+										TextStorage.BeginEditing();
+										InsertText(new NSString(output));
+										TextStorage.EndEditing();
+										SelectedRange = new NSRange(SelectedRange.Location - 1, 0);
+									}
+								}
+							}
+						}
+					}
+					break;
+				}
+
+				// Call base to handle event
+				if (!consumeKeystroke)
+					base.KeyDown (theEvent);
+
+				// Post process based on character code
+				switch(charCode) {
+				case EnterKey:
+					// Tab indent the new line to the same level
+					if (indentLevel >0) {
+						var indent = TabIndent(indentLevel);
+						TextStorage.BeginEditing();
+						InsertText(new NSString(indent));
+						TextStorage.EndEditing();
+					}
+					break;
+				}
+			} catch {
+				// Call base to process on any error
+				base.KeyDown (theEvent);
+			}
+
+			//Console.WriteLine ("Key: {0}", (int)theEvent.Characters[0]);
+		}
+
+		/// <summary>
+		/// Called when a drag operation is started for this <see cref="AppKit.TextKit.Formatter.SourceTextView"/>.
+		/// </summary>
+		/// <returns>The entered.</returns>
+		/// <param name="sender">Sender.</param>
+		/// <remarks>
+		/// See Apple's drag and drop docs for more details (https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DragandDrop/DragandDrop.html)
+		/// </remarks>
+		public override NSDragOperation DraggingEntered (NSDraggingInfo sender)
+		{
+			// When we start dragging, inform the system that we will be handling this as
+			// a copy/paste
+			return NSDragOperation.Copy;
+		}
+
+		/// <summary>
+		/// Process any drag operations initialized by the user to this <see cref="AppKit.TextKit.Formatter.SourceTextView"/>.
+		/// If one or more files have dragged in, the contents of those files will be copied into the document at the 
+		/// current cursor location.
+		/// </summary>
+		/// <returns><c>true</c>, if drag operation was performed, <c>false</c> otherwise.</returns>
+		/// <param name="sender">The caller that initiated the drag operation.</param>
+		/// <remarks>
+		/// See Apple's drag and drop docs for more details (https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DragandDrop/DragandDrop.html)
+		/// </remarks>
+		public override bool PerformDragOperation (NSDraggingInfo sender)
+		{
+			// Attempt to read filenames from pasteboard
+			var plist = (NSArray) sender.DraggingPasteboard.GetPropertyListForType (NSPasteboard.NSFilenamesType);
+
+			// Was a list of files returned from Finder?
+			if (plist != null) {
+				// Yes, process list
+				for (uint n = 0; n < plist.Count; ++n) {
+					// Get the current file
+					var path = NSString.FromHandle(plist.ValueAt(n));
+					var url = NSUrl.FromString (path);
+					var contents = File.ReadAllText (path);
+
+					// Insert contents at cursor
+					NSRange range = SelectedRange;
+					TextStorage.BeginEditing ();
+					Replace (range, contents);
+					TextStorage.EndEditing ();
+
+					// Expand range to fully encompass new content and 
+					// reformat
+                    range = new NSRange((int)range.Location, contents.Length);
+					range = Formatter.FindLineBoundries (TextStorage.Value, range);
+					Formatter.HighlightSyntaxRegion (TextStorage.Value, range);
+				}
+
+				// Inform caller of success
+				return true;
+			} else {
+				// No, allow base class to handle
+				return base.PerformDragOperation (sender);
+			}
+		}
+
+		/// <summary>
+		/// Reads the selection from pasteboard.
+		/// </summary>
+		/// <returns><c>true</c>, if the selection was read from the pasteboard, <c>false</c> otherwise.</returns>
+		/// <param name="pboard">The pasteboard being read.</param>
+		/// <remarks>This method is overridden to update the formatting after the user pastes text
+		/// into the view.</remarks>
+		public override bool ReadSelectionFromPasteboard (NSPasteboard pboard)
+		{
+			// Console.WriteLine ("Read selection from pasteboard");
+			var result = base.ReadSelectionFromPasteboard (pboard);
+			if (Formatter !=null) Formatter.Reformat ();
+			return result;
+		}
+
+		/// <summary>
+		/// Reads the selection from pasteboard.
+		/// </summary>
+		/// <returns><c>true</c>, if the selection was read from the pasteboard, <c>false</c> otherwise.</returns>
+		/// <param name="pboard">The pasteboard being read.</param>
+		/// <param name="type">The type of data being read from the pasteboard.</param>
+		/// <remarks>This method is overridden to update the formatting after the user pastes text
+		/// into the view.</remarks>
+		public override bool ReadSelectionFromPasteboard (NSPasteboard pboard, string type)
+		{
+			// Console.WriteLine ("Read selection from pasteboard also");
+			var result = base.ReadSelectionFromPasteboard (pboard, type);
+			if (Formatter !=null) Formatter.Reformat ();
+			return result;
 		}
 		#endregion
 

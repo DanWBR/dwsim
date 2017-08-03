@@ -4,10 +4,6 @@ using MonoMac.Foundation;
 using MonoMac.AppKit;
 using MonoMac.CoreGraphics;
 
-using nfloat = System.Double;
-using nint = System.Int64;
-using nuint = System.UInt64;
-
 namespace MonoMac.AppKit.TextKit.Formatter
 {
 	/// <summary>
@@ -34,20 +30,20 @@ namespace MonoMac.AppKit.TextKit.Formatter
 			// Initialize
 			this.TextEditor = textEditor;
 		}
-        #endregion
+		#endregion
 
-        #region Override Methods
-        /// <summary>
-        /// Based on the user preferences set on the parent <see cref="AppKit.TextKit.Formatter.SourceTextView"/>, this
-        /// method returns the available list of partial word completions.
-        /// </summary>
-        /// <returns>The list of word completions that will be presented to the user.</returns>
-        /// <param name="textView">The source <see cref="AppKit.TextKit.Formatter.SourceTextView"/>.</param>
-        /// <param name="words">A list of default words automatically provided by OS X in the user's language.</param>
-        /// <param name="charRange">The cursor location where the partial word exists.</param>
-        /// <param name="index">The word that should be selected when the list is displayed (usually 0 meaning
-        /// the first item in the list). Pass -1 for no selected items.</param>
-        public override string[] GetCompletions(NSTextView textView, string[] words, NSRange charRange, int index)
+		#region Override Methods
+		/// <summary>
+		/// Based on the user preferences set on the parent <see cref="AppKit.TextKit.Formatter.SourceTextView"/>, this
+		/// method returns the available list of partial word completions.
+		/// </summary>
+		/// <returns>The list of word completions that will be presented to the user.</returns>
+		/// <param name="textView">The source <see cref="AppKit.TextKit.Formatter.SourceTextView"/>.</param>
+		/// <param name="words">A list of default words automatically provided by OS X in the user's language.</param>
+		/// <param name="charRange">The cursor location where the partial word exists.</param>
+		/// <param name="index">The word that should be selected when the list is displayed (usually 0 meaning
+		/// the first item in the list). Pass -1 for no selected items.</param>
+        public override string[] GetCompletions (NSTextView textView, string[] words, NSRange charRange, int index)
 		{
 			List<string> completions = new List<string> ();
 
@@ -105,20 +101,20 @@ namespace MonoMac.AppKit.TextKit.Formatter
 			TextEditor.RaiseSourceCellClicked(TextEditor, new NSTextViewClickedEventArgs(cell, cellFrame, charIndex));
 		}
 
-        /// <summary>
-        /// Called when the cell is double-clicked.
-        /// </summary>
-        /// <param name="textView">The <see cref="AppKit.TextKit.Formatter.SourceTextView"/>.</param>
-        /// <param name="cell">The cell being acted upon.</param>
-        /// <param name="cellFrame">The onscreen frame of the cell.</param>
-        /// <param name="charIndex">The index of the character clicked.</param>
-        /// <remarks>
-        /// Because a custom <c>Delegate</c> has been attached to the <c>NSTextView</c>, the normal events
-        /// will not work so we are using this method to call custom <see cref="AppKit.TextKit.Formatter.SourceTextView"/>
-        /// events instead.
-        /// </remarks>
-        public override void CellDoubleClicked(NSTextView textView, NSTextAttachmentCell cell, CGRect cellFrame, uint charIndex)
-        {
+		/// <summary>
+		/// Called when the cell is double-clicked.
+		/// </summary>
+		/// <param name="textView">The <see cref="AppKit.TextKit.Formatter.SourceTextView"/>.</param>
+		/// <param name="cell">The cell being acted upon.</param>
+		/// <param name="cellFrame">The onscreen frame of the cell.</param>
+		/// <param name="charIndex">The index of the character clicked.</param>
+		/// <remarks>
+		/// Because a custom <c>Delegate</c> has been attached to the <c>NSTextView</c>, the normal events
+		/// will not work so we are using this method to call custom <see cref="AppKit.TextKit.Formatter.SourceTextView"/>
+		/// events instead.
+		/// </remarks>
+		public override void CellDoubleClicked (NSTextView textView, NSTextAttachmentCell cell, CGRect cellFrame, uint charIndex)
+		{
 			// Pass through to Text Editor event
 			TextEditor.RaiseSourceCellDoubleClicked(TextEditor, new NSTextViewDoubleClickEventArgs(cell, cellFrame, charIndex));
 		}
