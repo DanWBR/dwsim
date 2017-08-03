@@ -16,10 +16,15 @@ namespace DWSIM.UI.Desktop.Mac
         public CodeEditorControlHandler()
         {
             te = new Controls.Mac.TextEditor();
-            te.Editor.Font = NSFont.FromFontName("Menlo", 12.0f);
+            te.Font = NSFont.FromFontName("Menlo", 11.0f);
             te.Editable = true;
+            te.Selectable = true;
+            te.AutoresizingMask = NSViewResizingMask.WidthSizable;
+            te.MaxSize = new CGSize(1000, 10000000);
             sv = new NSScrollView {AutoresizesSubviews = true, BorderType = NSBorderType.NoBorder, HasVerticalScroller = true, HasHorizontalScroller = true, AutoresizingMask = NSViewResizingMask.WidthSizable };
-            sv.DocumentView = te;
+            var cv = new NSClipView { AutoresizesSubviews = true};
+            cv.DocumentView = te;
+            sv.ContentView = cv;
             this.Control = sv;
             te.BecomeFirstResponder();
         }
@@ -52,11 +57,10 @@ namespace DWSIM.UI.Desktop.Mac
             {
                 return te.Text;
             }
-
             set
             {
+                te.Text = "";
                 te.Text = value;
-                te.ReformatText(false);
             }
         }
     }

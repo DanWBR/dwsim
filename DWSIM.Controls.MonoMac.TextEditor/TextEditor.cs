@@ -14,12 +14,6 @@ namespace DWSIM.UI.Controls.Mac
 	{
         		
 		/// <summary>
-		/// The information on the currently highlighted keyword.
-		/// </summary>
-		private KeywordDescriptor _keywordInfo = null;
-
-
-		/// <summary>
 		/// Gets or sets the default language that this <see cref="SourceWriter.ViewController"/> will
 		/// be editing.
 		/// </summary>
@@ -35,14 +29,6 @@ namespace DWSIM.UI.Controls.Mac
 		public bool DocumentEdited {
 			get { return Window.DocumentEdited; }
 			set { Window.DocumentEdited = value; }
-		}
-
-		/// <summary>
-		/// Gets the <see cref="AppKit.TextKit.Formatter.SourceTextView"/> attached to this view.
-		/// </summary>
-		/// <value>The <see cref="AppKit.TextKit.Formatter.SourceTextView"/> used to edit source.</value>
-		public SourceTextView Editor {
-			get { return this; }
 		}
 
         /// <summary>
@@ -68,17 +54,6 @@ namespace DWSIM.UI.Controls.Mac
 		public string FilePath = "";
 
 		/// <summary>
-		/// Gets or sets the info about the currently selected keyword.
-		/// </summary>
-		/// <value>The keyword info.</value>
-		public KeywordDescriptor KeywordInfo { 
-			get { return _keywordInfo; }
-			set {
-				_keywordInfo = value;
-			}
-		}
-
-		/// <summary>
 		/// Gets or sets the keyword that is currently selected.
 		/// </summary>
 		/// <value>The keyword.</value>
@@ -94,11 +69,6 @@ namespace DWSIM.UI.Controls.Mac
         {
             ConfigureEditor();
             Initialize();
-        }
-
-        public override void ViewWillDraw()
-        {
-            base.ViewWillDraw();
         }
 
         /// <summary>
@@ -246,40 +216,5 @@ namespace DWSIM.UI.Controls.Mac
 		//	PopulateFormattingMenu ();
 		//}
 
-		/// <summary>
-		/// Attempts to set the syntax highlighting language based on
-		/// the extension of the file being opened.
-		/// </summary>
-		/// <param name="path">Path.</param>
-		public void SetLanguageFromPath(string path) {
-
-			// Save path
-			FilePath = path;
-
-			// Attempt to set the language based on the file
-			// extension
-			if (path.EndsWith (".cs")) {
-				SetLanguageToCSharp ();
-			} else if (path.EndsWith (".htm")) {
-				//SetLanguageToHTML ();
-			} else if (path.EndsWith (".md")) {
-				SetLanguageToMarkDown ();
-			} else if (path.EndsWith (".xml")) {
-				//SetLanguageToXML ();
-			}
-
-		}
-
-		/// <summary>
-		/// Prints the document that is currently being edited.
-		/// </summary>
-		/// <param name="info">A <c>NSPrintInfo</c> object defining the page layout to use
-		/// while printing.</param>
-		public void PrintDocument(NSPrintInfo info) {
-
-            // Configure print job
-            Print (this);
-		}
-        
 	}
 }

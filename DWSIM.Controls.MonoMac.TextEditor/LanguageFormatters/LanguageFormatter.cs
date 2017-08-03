@@ -89,7 +89,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		public virtual void Reformat() {
 			// Reformat all text in the view control
 			var range =new NSRange(0, TextEditor.Value.Length);
-			TextEditor.LayoutManager.RemoveTemporaryAttribute(Eto.Mac.NSStringAttributeKey.ForegroundColor, range);
+			TextEditor.LayoutManager.RemoveTemporaryAttribute(NSAttributedString.ForegroundColorAttributeName, range);
 			HighlightSyntaxRegion(TextEditor.Value, range);
 			TextEditor.SetNeedsDisplay (TextEditor.Frame, false);
 		}
@@ -284,9 +284,9 @@ namespace MonoMac.AppKit.TextKit.Formatter
 				KeywordDescriptor info;
 				if (Language.Keywords.TryGetValue(word,out info)) {
 					// Yes, adjust attributes
-					TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(Eto.Mac.NSStringAttributeKey.ForegroundColor, info.Color),range);
+					TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(NSAttributedString.ForegroundColorAttributeName, info.Color),range);
 				} else {
-					TextEditor.LayoutManager.RemoveTemporaryAttribute(Eto.Mac.NSStringAttributeKey.ForegroundColor,range);
+					TextEditor.LayoutManager.RemoveTemporaryAttribute(NSAttributedString.ForegroundColorAttributeName,range);
 				}
 			} catch {
 				// Ignore any exceptions at this point
@@ -356,7 +356,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 							// At end of line?
 							if (c == Newline || c == LineSeparator || c == ParagraphSeparator) {
 								++segment.Length;
-								TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(Eto.Mac.NSStringAttributeKey.ForegroundColor,inFormat.Color),segment);
+								TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(NSAttributedString.ForegroundColorAttributeName,inFormat.Color),segment);
 								//Console.WriteLine ("Complete Prefix [{0}] = {1}", inFormat.StartsWith, segment);
 								location = (uint)(range.Location + n + 1);
 								word = "";
@@ -370,7 +370,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 							if (inFormat.MatchesCharacter (c)) {
 								if (inFormat.Triggered) {
 									++segment.Length;
-									TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(Eto.Mac.NSStringAttributeKey.ForegroundColor,inFormat.Color),segment);
+									TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(NSAttributedString.ForegroundColorAttributeName,inFormat.Color),segment);
 									//Console.WriteLine ("Complete Enclosure [{0}] = {1}", inFormat.EndsWith, segment);
 									inFormat = null;
 									Language.ClearFormats ();
@@ -411,7 +411,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 			// Finalize
 			if (inFormat != null) {
 				if (inFormat.Type == FormatDescriptorType.Prefix) {
-					TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(Eto.Mac.NSStringAttributeKey.ForegroundColor,inFormat.Color),segment);
+					TextEditor.LayoutManager.SetTemporaryAttributes(new NSDictionary(NSAttributedString.ForegroundColorAttributeName,inFormat.Color),segment);
 					//Console.WriteLine ("Finalize Prefix [{0}] = {1}", inFormat.StartsWith, segment);
 				}
 				inFormat = null;
