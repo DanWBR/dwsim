@@ -83,6 +83,10 @@
       <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.58.0\lib\net45\SkiaSharp.dll</HintPath>
       <Private>True</Private>
@@ -113,13 +117,13 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MainForm.cs" />
-    <Compile Include="MainForm.eto.cs">
+    <Compile Include="Forms\MainForm.cs" />
+    <Compile Include="Forms\MainForm.eto.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Shared\Shared.cs" />
-    <Compile Include="SplashScreen.cs" />
-    <Compile Include="SplashScreen.eto.cs">
+    <Compile Include="Forms\SplashScreen.cs" />
+    <Compile Include="Forms\SplashScreen.eto.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
   </ItemGroup>

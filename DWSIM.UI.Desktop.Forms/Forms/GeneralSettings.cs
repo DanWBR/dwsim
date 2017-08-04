@@ -25,7 +25,8 @@ namespace DWSIM.UI.Forms.Forms
             int currentrenderer = 0;
             var renderers = new List<String>();
 
-            switch (GlobalSettings.Settings.RunningPlatform()){
+            switch (GlobalSettings.Settings.RunningPlatform())
+            {
                 case Settings.Platform.Windows:
                     renderers.AddRange(Enum.GetNames(typeof(Settings.WindowsPlatformRenderer)));
                     currentrenderer = (int)Settings.WindowsRenderer;
@@ -40,7 +41,8 @@ namespace DWSIM.UI.Forms.Forms
                     break;
             }
 
-            tab1.CreateAndAddDropDownRow("Platform Renderer", renderers, currentrenderer, (sender, e) => {
+            tab1.CreateAndAddDropDownRow("Platform Renderer", renderers, currentrenderer, (sender, e) =>
+            {
                 switch (GlobalSettings.Settings.RunningPlatform())
                 {
                     case Settings.Platform.Windows:
@@ -52,7 +54,7 @@ namespace DWSIM.UI.Forms.Forms
                     case Settings.Platform.Mac:
                         Settings.MacOSRenderer = (Settings.MacOSPlatformRenderer)sender.SelectedIndex;
                         break;
-                }            
+                }
             });
 
             tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\n\nWindows: WPF (Windows Presentation Foundation)\n\nLinux: GTK 2\n\nmacOS: MonoMac");
@@ -70,25 +72,59 @@ namespace DWSIM.UI.Forms.Forms
             tab2.CreateAndAddDescriptionRow("Enables utilization of all CPU cores during flowsheet calculations.");
             tab2.CreateAndAddCheckBoxRow("EnableCPUSIMDAccel".Localize(prefix), Settings.UseSIMDExtensions, (CheckBox sender, EventArgs obj) => { Settings.UseSIMDExtensions = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("Enables utilization of special CPU instructions for accelerated math calculations.");
-            tab2.CreateAndAddEmptySpace();
             //tab2.CreateAndAddCheckBoxRow("EnableGPUAccel".Localize(prefix), Settings.EnableGPUProcessing, (CheckBox sender, EventArgs obj) => { Settings.EnableGPUProcessing = sender.Checked.Value; });
-            //tab2.CreateAndAddEmptySpace();
             tab2.CreateAndAddCheckBoxRow("BreakOnException".Localize(prefix), Settings.SolverBreakOnException, (CheckBox sender, EventArgs obj) => { Settings.SolverBreakOnException = sender.Checked.GetValueOrDefault(); });
             tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the claculation of an intermediate block/object.");
-            tab2.CreateAndAddEmptySpace();
 
             var tab3 = Common.GetDefaultContainer();
             tab3.Tag = "UserComps".Localize(prefix);
 
             tab3.CreateAndAddLabelRow("User-Defined Compound Datasets");
-            tab3.CreateAndAddListBoxRow(200, new string[] { }, null);
-            tab3.CreateAndAddButtonRow("Add Dataset", null, null);
-            tab3.CreateAndAddButtonRow("Remove selected", null, null);
+            var list1 = tab3.CreateAndAddListBoxRow(200, GlobalSettings.Settings.UserDatabases.ToArray(), null);
+            tab3.CreateAndAddButtonRow("Add Dataset", null, (sender, e) =>
+            {
+                var dialog = new OpenFileDialog();
+                dialog.Title = "Select File".Localize();
+                dialog.Filters.Add(new FileFilter("Compound dataset files", new[] { ".xml", ".json" }));
+                dialog.MultiSelect = false;
+                dialog.CurrentFilterIndex = 0;
+                if (dialog.ShowDialog(null) == DialogResult.Ok)
+                {
+                    if (!GlobalSettings.Settings.UserDatabases.Contains(dialog.FileName))
+                    {
+                        GlobalSettings.Settings.UserDatabases.Add(dialog.FileName);
+                        list1.Items.Add(dialog.FileName);
+                    }
+                }
+            });
+            tab3.CreateAndAddButtonRow("Remove selected", null, (sender, e) => {
+                GlobalSettings.Settings.UserDatabases.Remove(list1.SelectedValue.ToString());
+                list1.Items.RemoveAt(list1.SelectedIndex);
+            });
 
             tab3.CreateAndAddLabelRow("User-Defined Interaction Parameter Datasets");
-            tab3.CreateAndAddListBoxRow(200, new string[] { }, null);
-            tab3.CreateAndAddButtonRow("Add Dataset", null, null);
-            tab3.CreateAndAddButtonRow("Remove selected", null, null);
+            var list2 = tab3.CreateAndAddListBoxRow(200, GlobalSettings.Settings.UserInteractionsDatabases.ToArray(), null);
+            tab3.CreateAndAddButtonRow("Add Dataset", null, (sender, e) =>
+            {
+                var dialog = new OpenFileDialog();
+                dialog.Title = "Select File".Localize();
+                dialog.Filters.Add(new FileFilter("Interaction Parameter dataset files", new[] { ".xml"}));
+                dialog.MultiSelect = false;
+                dialog.CurrentFilterIndex = 0;
+                if (dialog.ShowDialog(null) == DialogResult.Ok)
+                {
+                    if (!GlobalSettings.Settings.UserInteractionsDatabases.Contains(dialog.FileName))
+                    {
+                        GlobalSettings.Settings.UserInteractionsDatabases.Add(dialog.FileName);
+                        list2.Items.Add(dialog.FileName);
+                    }
+                }
+            });
+            tab3.CreateAndAddButtonRow("Remove selected", null, (sender, e) =>
+            {
+                GlobalSettings.Settings.UserInteractionsDatabases.Remove(list2.SelectedValue.ToString());
+                list2.Items.RemoveAt(list2.SelectedIndex);
+            });
 
             var tab4 = Common.GetDefaultContainer();
             tab4.Tag = "Backup".Localize(prefix);
@@ -105,7 +141,7 @@ namespace DWSIM.UI.Forms.Forms
             tab5.Tag = "Misc".Localize(prefix);
 
             tab5.CreateAndAddLabelRow("Reports");
-            var sizes = new[] {"6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" };
+            var sizes = new[] { "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16" };
             tab5.CreateAndAddDropDownRow("Font Size", sizes.ToList(), sizes.ToList().IndexOf(Settings.ResultsReportFontSize.ToString()), (DropDown sender, EventArgs obj) => { Settings.ResultsReportFontSize = int.Parse(sender.SelectedValue.ToString()); });
 
             tab5.CreateAndAddLabelRow("Octave Settings");
@@ -113,7 +149,8 @@ namespace DWSIM.UI.Forms.Forms
             TextBox tbox = null;
             tbox = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.OctavePath, "Search", null,
                 (sender, e) => GlobalSettings.Settings.OctavePath = sender.Text,
-                (sender, e) => {
+                (sender, e) =>
+                {
                     var searchdialog = new SelectFolderDialog() { Title = "Search", Directory = GlobalSettings.Settings.OctavePath };
                     if (searchdialog.ShowDialog(tab5) == DialogResult.Ok)
                     {
@@ -138,12 +175,13 @@ namespace DWSIM.UI.Forms.Forms
                         tbox2.Text = searchdialog.Directory;
                     }
                 });
-            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.PythonTimeoutInMinutes, (sender, e) => {
+            tab5.CreateAndAddTextBoxRow("N0", "Calling Timeout (minutes)", GlobalSettings.Settings.PythonTimeoutInMinutes, (sender, e) =>
+            {
                 if (sender.Text.IsValidDouble()) GlobalSettings.Settings.PythonTimeoutInMinutes = sender.Text.ToDouble();
             });
 
             return Common.GetDefaultTabbedForm("Title".Localize(prefix), 500, 400, new[] { tab1, tab2, tab3, tab4, tab5 });
-        
+
         }
 
 

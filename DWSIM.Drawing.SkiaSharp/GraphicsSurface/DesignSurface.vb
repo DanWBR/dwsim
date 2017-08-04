@@ -143,7 +143,7 @@ Public Class GraphicsSurface
         text.AppendLine("5. Connect unit operation blocks to streams (select object, right-click, select 'Edit Connections')")
         text.AppendLine("6. Edit properties of the upstream Material Streams and all Unit Operations (select object, right-click, select 'Edit Properties')")
         text.AppendLine("7. Run the simulation (press F5)")
-        text.AppendLine("8. View results (go the 'Results' tab and select an object on the list to view its results report)")
+        text.AppendLine("8. To view the simulation results, go the 'Results' tab and select an object on the list.")
 
         Dim tpaint As New SKPaint()
         With tpaint

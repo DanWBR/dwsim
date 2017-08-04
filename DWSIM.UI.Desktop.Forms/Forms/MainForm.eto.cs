@@ -9,11 +9,15 @@ using DWSIM.UI.Forms.Forms;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.Generic;
+using DWSIM.Thermodynamics.BaseClasses;
 
 namespace DWSIM.UI
 {
     partial class MainForm : Form
     {
+
+        public List<ConstantProperties> UserCompounds;
 
         ListBox MostRecentList;
 
@@ -185,7 +189,7 @@ namespace DWSIM.UI
         {
             Application.Instance.Invoke(() =>
             {
-                var splash = new SplashScreen();
+                var splash = new SplashScreen { MainFrm = this };
                 splash.Show();
             });
         }
