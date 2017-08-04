@@ -52,6 +52,7 @@ namespace DWSIM.UI.Desktop
                         break;
                 }
                 new Application(platform).Run(new MainForm());
+                Settings.SaveSettings("dwsim_newui.ini");
             }
             else if (Settings.RunningPlatform() == Settings.Platform.Linux)
             {
@@ -72,31 +73,49 @@ namespace DWSIM.UI.Desktop
                         //platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Wpf.PlotHandler());
                         //platform.Add<CodeEditorControl.ICodeEditor>(() => new WPF.CodeEditorControlHandler());
                         break;
+                    case Settings.LinuxPlatformRenderer.WinForms:
+                        DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
+                        platform = new Eto.WinForms.Platform();
+                        platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                        platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
+                        platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
+                        break;
                 }
                 new Application(platform).Run(new MainForm());
+                Settings.SaveSettings("dwsim_newui.ini");
             }
             else if (Settings.RunningPlatform() == Settings.Platform.Mac)
             {
+                switch (GlobalSettings.Settings.MacOSRenderer)
+                {
+                    case Settings.MacOSPlatformRenderer.MonoMac:
+                        DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
+                        platform = new Eto.Mac.Platform();
+                        platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+                        platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
+                        platform.Add<CodeEditorControl.ICodeEditor>(() => new Mac.CodeEditorControlHandler());
+                        break;
+                    case Settings.MacOSPlatformRenderer.Gtk2:
+                        DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
+                        platform = new Eto.GtkSharp.Platform();
+                        platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                        platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
+                        platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
+                        break;
+                    case Settings.MacOSPlatformRenderer.WinForms:
+                        DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
+                        platform = new Eto.WinForms.Platform();
+                        platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                        platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
+                        platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
+                        break;
+                }
                 try
                 {
-                    switch (GlobalSettings.Settings.MacOSRenderer)
-                    {
-                        case Settings.MacOSPlatformRenderer.MonoMac:
-                            DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
-                            platform = new Eto.Mac.Platform();
-                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
-                            platform.Add<CodeEditorControl.ICodeEditor>(() => new Mac.CodeEditorControlHandler());
-                            break;
-                        case Settings.MacOSPlatformRenderer.Gtk2:
-                            DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
-                            platform = new Eto.GtkSharp.Platform();
-                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
-                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
-                            platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
-                            break;
-                    }
                     new Application(platform).Run(new MainForm());
+                    Application.Instance.Terminating += (sender, e) => {
+                        Settings.SaveSettings("dwsim_newui.ini");
+                    };
                 }
                 catch (Exception ex)
                 {
@@ -105,7 +124,6 @@ namespace DWSIM.UI.Desktop
                     File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), ex.ToString());
                 }
             }
-            Settings.SaveSettings("dwsim_newui.ini");
         }
 
     }

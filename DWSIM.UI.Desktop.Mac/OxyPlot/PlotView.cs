@@ -22,7 +22,7 @@ namespace DWSIM.UI.Desktop.Mac
     /// Provides a view that can show a <see cref="PlotModel" />. 
     /// </summary>
     [Register("PlotView")]
-    public class PlotView : NSControl, IPlotView
+    public class PlotView : NSControl, IPlotView, Eto.Mac.Forms.IMacControl
     {
         /// <summary>
         /// The current plot model.
@@ -391,5 +391,8 @@ namespace DWSIM.UI.Desktop.Mac
         {
             base.SwipeWithEvent(theEvent);
         }
+
+        public WeakReference WeakHandler { get; set; }
+
     }
 }

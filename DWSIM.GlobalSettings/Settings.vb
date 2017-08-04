@@ -256,7 +256,12 @@ Public Class Settings
 
     Shared Sub LoadSettings(Optional ByVal configfile As String = "")
 
-        Dim configfiledir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+        Dim configfiledir As String = ""
+        If Settings.RunningPlatform = Platform.Mac Then
+            configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data") & Path.DirectorySeparatorChar
+        Else
+            configfiledir = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+        End If
 
         If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 
@@ -321,7 +326,7 @@ Public Class Settings
 
         If source.Configs("Misc") Is Nothing Then source.AddConfig("Misc")
 
-        EnableParallelProcessing = source.Configs("Misc").GetBoolean("EnableParallelProcessing", False)
+        EnableParallelProcessing = source.Configs("Misc").GetBoolean("EnableParallelProcessing", True)
         MaxDegreeOfParallelism = source.Configs("Misc").GetInt("MaxDegreeOfParallelism", -1)
         EnableGPUProcessing = source.Configs("Misc").GetBoolean("EnableGPUProcessing", False)
         SelectedGPU = source.Configs("Misc").Get("SelectedGPU", "")
@@ -329,7 +334,7 @@ Public Class Settings
         CudafyDeviceID = source.Configs("Misc").GetInt("CudafyDeviceID", 0)
 
         DebugLevel = source.Configs("Misc").GetInt("DebugLevel", 0)
-        SolverMode = source.Configs("Misc").GetInt("SolverMode", 0)
+        SolverMode = source.Configs("Misc").GetInt("SolverMode", 1)
         ServiceBusConnectionString = source.Configs("Misc").Get("ServiceBusConnectionString", "")
         ServerIPAddress = source.Configs("Misc").Get("ServerIPAddress", "")
         ServerPort = source.Configs("Misc").Get("ServerPort", 0)
@@ -372,17 +377,25 @@ Public Class Settings
         LinuxRenderer = [Enum].Parse(LinuxRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Linux", "Gtk2"))
         MacOSRenderer = [Enum].Parse(MacOSRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Mac", "MonoMac"))
 
-        source.Save()
+        'source.Save()
 
     End Sub
 
     Shared Sub SaveSettings(Optional ByVal configfile As String = "")
 
-        Dim configfiledir As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+        Dim configfiledir As String = ""
+
+        If Settings.RunningPlatform = Platform.Mac Then
+            configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data") & Path.DirectorySeparatorChar
+        Else
+            configfiledir = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar
+        End If
 
         If Not Directory.Exists(configfiledir) Then Directory.CreateDirectory(configfiledir)
 
         If configfile = "" Then configfile = configfiledir & "dwsim.ini" Else configfile = configfiledir & configfile
+
+        If Not File.Exists(configfile) Then File.WriteAllText(configfile, "")
 
         Dim source As New IniConfigSource(configfile)
 
@@ -476,7 +489,7 @@ Public Class Settings
         source.Configs("PlatformRenderers").Set("Linux", LinuxRenderer)
         source.Configs("PlatformRenderers").Set("Mac", MacOSRenderer)
 
-        source.Save(configfile)
+        source.Save()
 
     End Sub
 

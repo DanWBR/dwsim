@@ -29,6 +29,9 @@ namespace DWSIM.UI.Desktop.Editors
 
         public DWSIM.SharedClasses.Flowsheet.Optimization.SensitivityAnalysisCase mycase;
 
+        private TextArea resulttextbox;
+        private Eto.OxyPlot.Plot resultschart;
+
         public SensAnalysisView(IFlowsheet fs)
             : base()
         {
@@ -152,8 +155,19 @@ namespace DWSIM.UI.Desktop.Editors
 
             var btnRun = s.CreateAndAddButtonRow(this, "Run Analysis", null, null);
 
-            var lresults = new DynamicLayout();
-            s.CreateAndAddControlRow(this, lresults);
+            resulttextbox = new TextArea {Height = 400, Text = "", Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize), ReadOnly = true };
+
+            s.CreateAndAddLabelRow(this, "Results Report");
+
+            s.CreateAndAddControlRow(this, resulttextbox);
+
+            s.CreateAndAddEmptySpace(this);
+
+            resultschart = new Eto.OxyPlot.Plot {Height = 400 };
+
+            s.CreateAndAddLabelRow(this, "Results Chart");
+
+            s.CreateAndAddControlRow(this, resultschart);
 
             btnRun.Click += (sender2, e2) =>
             {
@@ -173,6 +187,8 @@ namespace DWSIM.UI.Desktop.Editors
 
                 Application.Instance.Invoke(() =>
                  {
+                     resultschart.Enabled = false;
+                     resulttextbox.Enabled = false;
                      flowsheet.ShowMessage("Starting Sensitivity Analysis, please wait...", IFlowsheet.MessageType.Information);
                  });
 
@@ -215,6 +231,10 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         Application.Instance.Invoke(() =>
                          {
+ 
+                             resultschart.Enabled = true;
+                             resulttextbox.Enabled = true;
+
                              flowsheet.ShowMessage("Error: " + t.Exception.Message, IFlowsheet.MessageType.GeneralError);
                          });
                     }
@@ -222,6 +242,10 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         Application.Instance.Invoke(() =>
                          {
+
+                             resultschart.Enabled = true;
+                             resulttextbox.Enabled = true;
+
                              flowsheet.ShowMessage("Sensitivity Analysis finished successfully.", IFlowsheet.MessageType.Information);
                              if (t.Status == TaskStatus.RanToCompletion)
                              {
@@ -265,9 +289,7 @@ namespace DWSIM.UI.Desktop.Editors
                                      cnt += 1;
                                  }
 
-                                 lresults.RemoveAll();
-
-                                 var et = s.CreateAndAddMultilineMonoSpaceTextBoxRow(lresults, str.ToString(), 400, true, null);
+                                 Application.Instance.Invoke(() => resulttextbox.Text = str.ToString());
 
                                  var model = new PlotModel() { Subtitle = "Sensitivity Analysis Run Results", Title = flowsheet.FlowsheetOptions.SimulationName };
                                  model.TitleFontSize = 18;
@@ -304,10 +326,7 @@ namespace DWSIM.UI.Desktop.Editors
                                  model.LegendPosition = LegendPosition.BottomCenter;
                                  model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView;
 
-                                 var chart = new Eto.OxyPlot.Plot { Height = 400 };
-                                 chart.Model = model;
-
-                                 s.CreateAndAddControlRow(lresults, chart);
+                                 Application.Instance.Invoke(() => { resultschart.Model = model; resultschart.Invalidate(); });
 
                              }
                          });
