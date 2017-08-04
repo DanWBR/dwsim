@@ -36,6 +36,7 @@ namespace DWSIM.UI.Desktop.Editors
                 (sender, e) => {
                     var form = c.GetDefaultEditorForm("Compound Creator", 500, 600, new CompoundCreatorView(flowsheet));
                     form.Show();
+                    this.ParentWindow.Close();
                 });
 
             this.CreateAndAddLabelRow("Petroleum Characterization");
@@ -44,6 +45,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     var form = c.GetDefaultEditorForm("Bulk C7+ Petroleum Characterization Tool", 500, 600, new BulkC7PCharacterization(flowsheet));
                     form.Show();
+                    this.ParentWindow.Close();
                 });
 
             var btn2 = this.CreateAndAddLabelAndButtonRow("Create new compounds from Distillation Curves Petroleum Assay information", "Distillation Curves Petroleum Characterization", null,
@@ -51,6 +53,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 var form = c.GetDefaultEditorForm("Distillation Curves Petroleum Characterization Tool", 500, 600, new DistCurvePCharacterization(flowsheet));
                 form.Show();
+                this.ParentWindow.Close();
             });
 
             btn0.Width = 350;

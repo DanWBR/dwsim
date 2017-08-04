@@ -17,7 +17,7 @@ namespace DWSIM.UI
     partial class MainForm : Form
     {
 
-        public List<ConstantProperties> UserCompounds;
+        public List<ConstantProperties> UserCompounds = new List<ConstantProperties>();
 
         ListBox MostRecentList;
 
@@ -97,7 +97,9 @@ namespace DWSIM.UI
 
             btn2.Click += (sender, e) =>
             {
-                new Forms.Flowsheet().Show();
+                var form = new Forms.Flowsheet();
+                AddUserCompounds(form.FlowsheetObject);
+                form.Show();
             };
 
             btn7.Click += (sender, e) => new About().Show();
@@ -198,6 +200,7 @@ namespace DWSIM.UI
         {
 
             var form = new Forms.Flowsheet();
+            AddUserCompounds(form.FlowsheetObject);
 
             var loadingdialog = new LoadingData();
             loadingdialog.loadingtext.Text = "Please wait, loading data...\n(" + path + ")";
@@ -232,6 +235,16 @@ namespace DWSIM.UI
                     form.FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationOpened, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
                 });
             });
+        }
+
+        void AddUserCompounds(FlowsheetBase.FlowsheetBase flowsheet)
+        {
+
+            foreach (var compound in UserCompounds)
+            {
+                if (!flowsheet.AvailableCompounds.ContainsKey(compound.Name)) flowsheet.AvailableCompounds.Add(compound.Name, compound);
+            }
+        
         }
 
     }

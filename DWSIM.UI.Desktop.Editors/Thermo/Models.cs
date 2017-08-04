@@ -155,10 +155,9 @@ namespace DWSIM.UI.Desktop.Editors
                                                                 },
                                                                 (arg1, arg2) =>
                                                                 {
-                                                                    //var alert = new AlertDialog.Builder(this.Context);
-                                                                    //var myview = new PropertyPackageSettingsView(this.Context, flowsheet, pp);
-                                                                    //alert.SetView(myview);
-                                                                    //alert.Create().Show();
+                                                                    var cont = new PropertyPackageSettingsView(flowsheet, pp);
+                                                                    var form = s.GetDefaultEditorForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, cont);
+                                                                    form.Show();
                                                                 },
                                                                (arg1, arg2) =>
                                                                {

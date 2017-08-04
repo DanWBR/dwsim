@@ -5273,4 +5273,16 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="MultipleReactionPhasesNotSupported" xml:space="preserve">
     <value>Multiple reaction phases are not allowed in this reactor.</value>
   </data>
+  <data name="MSTR_Desc" xml:space="preserve">
+    <value>Contains information about compounds flowing at specified state conditions</value>
+  </data>
+  <data name="MSTR_Name" xml:space="preserve">
+    <value>Material Stream</value>
+  </data>
+  <data name="PP_IGNORE_VAPOR_FRACTION_LIMIT" xml:space="preserve">
+    <value>Ignore Vapor Fraction bounds (0 &lt;= VF &lt;= 1) on flash calculations</value>
+  </data>
+  <data name="PP_POYNTING" xml:space="preserve">
+    <value>Use Poynting Correction Factor for liquid phase compound fugacities (0 = Disable, 1 = Enable)</value>
+  </data>
 </root>

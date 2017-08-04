@@ -149,7 +149,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             var txtpseudomodedata = s.CreateAndAddFullTextBoxRow(this, "10", (arg3, arg2) => { });
 
-            s.CreateAndAddButtonRow(this, "Characterize Assay & Create Compounds", null, (arg3, arg2) =>
+            s.CreateAndAddButtonRow(this, "Characterize Assay and Create Compounds", null, (arg3, arg2) =>
             {
                 var comps = new Dictionary<string, Compound>();
 

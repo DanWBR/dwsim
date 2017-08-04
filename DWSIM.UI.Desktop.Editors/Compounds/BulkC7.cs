@@ -148,7 +148,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
             s.CreateAndAddDescriptionRow(this, "Specify the number of compounds to be generated that, together, will represent the assay. The generated compounds will be added to the simulation and a Material Stream will be created with distribution-defined amounts of these compounds.");
 
-            s.CreateAndAddButtonRow(this, "Characterize Assay & Create Compounds", null, (arg3, arg2) =>
+            s.CreateAndAddButtonRow(this, "Characterize Assay and Create Compounds", null, (arg3, arg2) =>
             {
 
                 var dialog = ProgressDialog.Show(this, "Petroleum C7+ Characterization", "Generating compounds, please wait...", false);

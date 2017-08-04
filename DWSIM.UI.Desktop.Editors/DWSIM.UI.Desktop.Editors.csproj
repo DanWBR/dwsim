@@ -91,6 +91,7 @@
     <Compile Include="Tables\MasterPropertyTable.cs" />
     <Compile Include="Tables\PropertyTable.cs" />
     <Compile Include="Tables\SpreadsheetTable.cs" />
+    <Compile Include="Thermo\EditPP.cs" />
     <Compile Include="UnitOperations\AbsorptionColumn.cs" />
     <Compile Include="Compounds\Compounds.cs" />
     <Compile Include="General\Connections.cs" />

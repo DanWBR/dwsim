@@ -121,6 +121,10 @@ namespace DWSIM.UI.Forms
 
         void PerformExtraTasks()
         {
+
+
+            //Read user compounds
+
             Application.Instance.AsyncInvoke(() => lblMessage.Text = "Reading User Compounds...");
 
             foreach (var path in GlobalSettings.Settings.UserDatabases)
