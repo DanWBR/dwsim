@@ -1657,9 +1657,9 @@ Namespace UnitOperations
             ElseIf p.Equals("Defined Temperature (for Calc Area Mode)") Then
                 Return "Select which temperature you will define if you chose the 'Area' calculation mode."
             ElseIf p.Equals("Pressure Drop (Hot Fluid)") Then
-                Return "Enter the pressure drop of the hot fluid."
+                Return "Enter the pressure drop of the hot fluid. Required for all calculation modes except Shell and Tube Design/Rating."
             ElseIf p.Equals("Pressure Drop (Cold Fluid)") Then
-                Return "Enter the pressure drop of the cold fluid."
+                Return "Enter the pressure drop of the cold fluid. Required for all calculation modes except Shell and Tube Design/Rating."
             ElseIf p.Equals("Outlet Temperature (Cold Fluid)") Then
                 Return "Enter the outlet temperature of the cold fluid, if required by the selected calculation mode."
             ElseIf p.Equals("Outlet Temperature (Hot Fluid)") Then

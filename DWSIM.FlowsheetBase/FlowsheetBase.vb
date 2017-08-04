@@ -1330,11 +1330,13 @@ Imports DWSIM.SharedClasses.Flowsheet
                         obj.CreateConnectors(0, 0)
                     End If
                     If Not TypeOf obj Is TableGraphic Then
-                        With DirectCast(obj, DWSIM.Drawing.SkiaSharp.GraphicObjects.ShapeGraphic)
-                            .Fill = False
-                            .LineWidth = 1
-                            .GradientMode = False
-                        End With
+                        If obj.ObjectType <> ObjectType.GO_Text Then
+                            With DirectCast(obj, DWSIM.Drawing.SkiaSharp.GraphicObjects.ShapeGraphic)
+                                .Fill = False
+                                .LineWidth = 1
+                                .GradientMode = False
+                            End With
+                        End If
                         FlowsheetSurface.DrawingObjects.Add(obj)
                         GraphicObjects.Add(obj.Name, obj)
                     End If

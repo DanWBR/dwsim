@@ -154,6 +154,8 @@
             xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.SpreadsheetGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.PipeGraphic") Then
             xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.PipeSegmentGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.TextGraphic") Then
+            xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.TextGraphic"
         End If
 
         If xel.Value.StartsWith("DWSIM.DrawingTools.GraphicObjects") And xel.Name = "Type" Then
@@ -204,6 +206,8 @@
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.ExcelUOGraphic"
         ElseIf xel.Value.Equals("DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.PipeSegmentGraphic") Then
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.PipeGraphic"
+        ElseIf xel.Value.Equals("DWSIM.Drawing.SkiaSharp.GraphicObjects.TextGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.TextGraphic"
         End If
 
         If xel.Value.StartsWith("DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes") And xel.Name = "Type" Then
