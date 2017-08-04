@@ -106,6 +106,8 @@ Public Class GraphicsSurface
 
         Dim objects = DrawingObjects.ToArray
 
+        If objects.Count = 0 Then DrawInstructions(DrawingCanvas)
+
         For Each dobj In objects
             If dobj Is SelectedObject Then
                 Dim sp, sp2 As New SKPaint
@@ -125,6 +127,41 @@ Public Class GraphicsSurface
                 DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
             End If
             dobj.Draw(DrawingCanvas)
+        Next
+
+    End Sub
+
+    Private Sub DrawInstructions(canvas As SKCanvas)
+
+        Dim text As New Text.StringBuilder
+
+        text.AppendLine("HOW TO CREATE AND RUN A NEW SIMULATION")
+        text.AppendLine("1. Select Compounds to add to the simulation ('Setup' > 'Compounds')")
+        text.AppendLine("2. Add at least one Property Package and one Flash Algorithm ('Setup' > 'Basis')")
+        text.AppendLine("3. Add Unit Operations to the Flowsheet ('Objects' > 'Add New Simulation Object')")
+        text.AppendLine("4. Add Material and Energy Streams to the Flowsheet ('Objects' > 'Add New Simulation Object')")
+        text.AppendLine("5. Connect unit operation blocks to streams (select object, right-click, select 'Edit Connections')")
+        text.AppendLine("6. Edit properties of the upstream Material Streams and all Unit Operations (select object, right-click, select 'Edit Properties')")
+        text.AppendLine("7. Run the simulation (press F5)")
+        text.AppendLine("8. View results (go the 'Results' tab and select an object on the list to view its results report)")
+
+        Dim tpaint As New SKPaint()
+        With tpaint
+            .TextSize = 20
+            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+            .Color = SKColors.DimGray
+            .IsStroke = False
+        End With
+
+        Dim lines = text.ToString().Split(vbLf)
+
+        Dim newy As Integer = 50
+
+        For Each l As String In lines
+            Dim trect As New SKRect(0, 0, 2, 2)
+            tpaint.GetTextPath(l, 0, 0).GetBounds(trect)
+            newy += trect.Height + 10
+            canvas.DrawText(l, 50, newy, tpaint)
         Next
 
     End Sub

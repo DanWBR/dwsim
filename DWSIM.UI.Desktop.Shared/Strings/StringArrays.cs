@@ -74,7 +74,14 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] hxcalcmode()
         {
-            return new String[] { "Calculate Cold Outlet Temperature", "Calculate Hot Outlet Temperature", "Calculate Both Temperatures", "Calculate Area" };
+            return new String[] { "Calculate Cold Outlet Temperature", 
+            "Calculate Hot Outlet Temperature",
+            "Calculate Both Temperatures", 
+            "Calculate Both Temperatures (UA)", 
+            "Calculate Area",
+            "Shell and Tube (Rating)",
+            "Shell and Tube (Design)",
+            "Pinch Point"}; 
         }
         public static String[] hxflowdir()
         {

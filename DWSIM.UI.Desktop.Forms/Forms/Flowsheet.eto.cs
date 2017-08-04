@@ -213,7 +213,7 @@ namespace DWSIM.UI.Forms
                 var cont2 = UI.Shared.Common.GetDefaultContainer();
                 cont2.Tag = "Reactions";
                 new DWSIM.UI.Desktop.Editors.ReactionsManager(FlowsheetObject, cont2);
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", 500, 500, new[] { cont1, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Simulation Basis", 800, 600, new[] { cont1, cont2 });
                 form.Show();
                 form.Width += 10;
             };
@@ -222,7 +222,7 @@ namespace DWSIM.UI.Forms
             {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Other Settings", 500, 500, cont);
+                var form = UI.Shared.Common.GetDefaultEditorForm("Misc Settings", 500, 500, cont);
                 form.Show();
                 form.Width += 1;
             };

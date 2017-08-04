@@ -48,6 +48,7 @@ namespace DWSIM.UI.Desktop.Editors
                 var ps = new PipeSection() { Indice = profile.Sections.Count + 1, Incrementos = 10, Comprimento = 1, Quantidade = 1 };
                 profile.Sections.Add(ps.Indice, ps);
                 var pscontainer = new DynamicLayout();
+                var slcontainer = new StackLayoutItem(pscontainer);
                 pscontainer.BackgroundColor = Eto.Drawing.Colors.White;
                 var editor = new PipeSectionEditor(flowsheet, profile.Sections[ps.Indice], pscontainer);
                 var btnRemove = s.CreateAndAddButtonRow(pscontainer, "Remove Segment", null, null);
@@ -56,10 +57,10 @@ namespace DWSIM.UI.Desktop.Editors
                     if (MessageBox.Show("Remove segment?", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
                     {
                         profile.Sections.Remove(ps.Indice);
-                        sectioncontainer.Remove(pscontainer);
+                        sectioncontainer.Items.Remove(slcontainer);
                     };
                 };
-                sectioncontainer.Items.Add(pscontainer);
+                sectioncontainer.Items.Add(slcontainer);
             });
 
             s.CreateAndAddButtonRow(container, "Remove All Segments", null, (arg1, arg2) =>
@@ -77,6 +78,7 @@ namespace DWSIM.UI.Desktop.Editors
             foreach (var section in profile.Sections.Values)
             {
                 var pscontainer = new DynamicLayout();
+                var slcontainer = new StackLayoutItem(pscontainer);
                 pscontainer.BackgroundColor = Eto.Drawing.Colors.White;
                 var editor = new PipeSectionEditor(flowsheet, section, pscontainer);
                 var btnRemove = s.CreateAndAddButtonRow(pscontainer, "Remove Segment", null, null);
@@ -85,10 +87,10 @@ namespace DWSIM.UI.Desktop.Editors
                     if (MessageBox.Show("Remove segment?", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
                     {
                         profile.Sections.Remove(section.Indice);
-                        sectioncontainer.Remove(pscontainer);
+                        sectioncontainer.Items.Remove(slcontainer);
                     };
                 };
-                sectioncontainer.Items.Add(pscontainer);
+                sectioncontainer.Items.Add(slcontainer);
             }
 
         }

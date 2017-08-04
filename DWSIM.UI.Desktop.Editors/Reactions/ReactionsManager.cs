@@ -47,7 +47,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddControlRow(rxcontainer);
 
-            var btnAddConv = container.CreateAndAddButtonRow("Add New Conversion Reaction", null, (sender, e) =>
+            var btnAddConv = container.CreateAndAddLabelAndButtonRow("Add New Conversion Reaction", "New Conversion Reaction", null, (sender, e) =>
             {
                 var _rx = new Reaction("NewConvReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Conversion };
                 var myview = s.GetDefaultContainer();
@@ -66,7 +66,7 @@ namespace DWSIM.UI.Desktop.Editors
                 alert.Show();
             });
 
-            var btnAddEq = container.CreateAndAddButtonRow("Add New Equilibrium Reaction", null, (sender, e) =>
+            var btnAddEq = container.CreateAndAddLabelAndButtonRow("Add New Equilibrium Reaction", "New Equilibrium Reaction", null, (sender, e) =>
             {
                 var _rx = new Reaction("NewEqReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Equilibrium };
                 var myview = s.GetDefaultContainer();
@@ -85,7 +85,7 @@ namespace DWSIM.UI.Desktop.Editors
                 alert.Show();
             });
 
-            var btnAddKin = container.CreateAndAddButtonRow("Add New Kinetic Reaction", null, (sender, e) =>
+            var btnAddKin = container.CreateAndAddLabelAndButtonRow("Add New Kinetic Reaction", "New Kinetic Reaction",null, (sender, e) =>
             {
                 var _rx = new Reaction("NewKinReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Kinetic };
                 var myview = s.GetDefaultContainer();
@@ -104,7 +104,7 @@ namespace DWSIM.UI.Desktop.Editors
                 alert.Show();
             });
 
-            var btnAddHC = container.CreateAndAddButtonRow("Add New Heterogeneous Catalytic Reaction", null, (sender, e) =>
+            var btnAddHC = container.CreateAndAddLabelAndButtonRow("Add New Heterogeneous Catalytic Reaction", "New HetCat Reaction", null, (sender, e) =>
             {
                 var _rx = new Reaction("NewHetCatReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Heterogeneous_Catalytic };
                 var myview = s.GetDefaultContainer();
@@ -129,7 +129,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddControlRow(rscontainer);
 
-            container.CreateAndAddButtonRow("Add New Reaction Set", null, (sender, e) =>
+            container.CreateAndAddLabelAndButtonRow("Add New Reaction Set", "New Reaction Set", null, (sender, e) =>
             {
                 var rsid = Guid.NewGuid().ToString();
                 flowsheet.ReactionSets.Add(rsid, new ReactionSet(rsid, "NewReactionSet", ""));

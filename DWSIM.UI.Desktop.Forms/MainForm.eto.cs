@@ -74,7 +74,7 @@ namespace DWSIM.UI
 
             btn6.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/docs/mobile/help/");
+                Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
             };
 
             btn1.Click += (sender, e) =>
@@ -142,19 +142,19 @@ namespace DWSIM.UI
             var quitCommand = new Command { MenuText = "Quit".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
 
-            var aboutCommand = new Command { MenuText = "About".Localize() };
+            var aboutCommand = new Command { MenuText = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "information.png")) };
             aboutCommand.Executed += (sender, e) => new About().Show();
 
-            var aitem1 = new ButtonMenuItem { Text = "Preferences".Localize() };
+            var aitem1 = new ButtonMenuItem { Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
             aitem1.Click += (sender, e) =>
             {
                 new Forms.Forms.GeneralSettings().GetForm().Show();
             };
 
-            var hitem1 = new ButtonMenuItem { Text = "Help".Localize() };
+            var hitem1 = new ButtonMenuItem { Text = "Help".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
             hitem1.Click += (sender, e) =>
             {
-                Process.Start("http://dwsim.inforside.com.br/docs/mobile/help/");
+                Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
             };
 
             // create menu

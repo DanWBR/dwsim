@@ -818,41 +818,83 @@ namespace DWSIM.UI.Desktop.Editors
                 case ObjectType.HeatExchanger:
                     var hx = (HeatExchanger)SimObject;
                     int pos7 = 0;
+
                     switch (hx.CalculationMode)
                     {
-                        case HeatExchangerCalcMode.CalcTempColdOut:
+                        case HeatExchangerCalcMode.CalcTempHotOut:
                             pos7 = 0;
                             break;
-                        case HeatExchangerCalcMode.CalcTempHotOut:
+                        case HeatExchangerCalcMode.CalcTempColdOut:
                             pos7 = 1;
                             break;
                         case HeatExchangerCalcMode.CalcBothTemp:
                             pos7 = 2;
                             break;
-                        case HeatExchangerCalcMode.CalcArea:
+                        case HeatExchangerCalcMode.CalcBothTemp_UA:
                             pos7 = 3;
                             break;
+                        case HeatExchangerCalcMode.CalcArea:
+                            pos7 = 4;
+                            break;
+                        case HeatExchangerCalcMode.ShellandTube_Rating:
+                            pos7 = 5;
+                            break;
+                        case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor:
+                            pos7 = 6;
+                            break;
+                        case HeatExchangerCalcMode.PinchPoint:
+                            pos7 = 7;
+                            break;
                     }
+
+                    Button btnST = null;
+                    
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.hxcalcmode().ToList(), pos7, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
-                                hx.CalculationMode = HeatExchangerCalcMode.CalcTempColdOut;
+                                hx.CalculationMode = HeatExchangerCalcMode.CalcTempHotOut;
+                                btnST.Enabled = false;
                                 break;
                             case 1:
-                                hx.CalculationMode = HeatExchangerCalcMode.CalcTempHotOut;
+                                hx.CalculationMode = HeatExchangerCalcMode.CalcTempColdOut;
+                                btnST.Enabled = false;
                                 break;
                             case 2:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcBothTemp;
+                                btnST.Enabled = false;
                                 break;
                             case 3:
+                                hx.CalculationMode = HeatExchangerCalcMode.CalcBothTemp_UA;
+                                btnST.Enabled = false;
+                                break;
+                            case 4:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcArea;
+                                btnST.Enabled = false;
+                                break;
+                            case 5:
+                                hx.CalculationMode = HeatExchangerCalcMode.ShellandTube_Rating;
+                                btnST.Enabled = true;
+                                break;
+                            case 6:
+                                hx.CalculationMode = HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor;
+                                btnST.Enabled = true;
+                                break;
+                            case 7:
+                                hx.CalculationMode = HeatExchangerCalcMode.PinchPoint;
+                                btnST.Enabled = false;
                                 break;
                         }
                     });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
+
+                    btnST = s.CreateAndAddButtonRow(container, "Edit Shell and Tube Properties", null, (sender, e) => { 
+                         var f = new DWSIM.UnitOperations.EditingForm_HeatExchanger_SHProperties {hx = hx};
+                         f.Show();
+                    });
+
                     int pos9 = 0;
                     switch (hx.FlowDir)
                     {
@@ -1006,6 +1048,24 @@ namespace DWSIM.UI.Desktop.Editors
                        });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Heat Exchanged"));
+                    s.CreateAndAddTextBoxRow(container, nf, "Minimum Temperature Difference (" + su.deltaT + ")", cv.ConvertFromSI(su.deltaT, hx.MITA),
+                       (TextBox arg3, EventArgs ev) =>
+                       {
+                           if (Double.TryParse(arg3.Text.ToString(), out val))
+                           {
+                               arg3.TextColor = (SystemColors.ControlText);
+                               hx.MITA = cv.ConvertToSI(su.deltaT, Double.Parse(arg3.Text.ToString()));
+                           }
+                           else
+                           {
+                               arg3.TextColor = (Colors.Red);
+                           }
+                       });
+                    s.CreateAndAddDescriptionRow(container,
+                                                 SimObject.GetPropertyDescription("MITA"));
+                    s.CreateAndAddCheckBoxRow(container, "Ignore LMTD Error", hx.IgnoreLMTDError, (sender, e) => { hx.IgnoreLMTDError = sender.Checked.GetValueOrDefault(); });
+                                                 s.CreateAndAddDescriptionRow(container,
+                                                 SimObject.GetPropertyDescription("Ignore LMTD Error"));
                     break;
                 case ObjectType.RCT_Conversion:
                     var reactor = (Reactor_Conversion)SimObject;

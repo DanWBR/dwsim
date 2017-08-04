@@ -129,12 +129,14 @@ namespace DWSIM.UI.Desktop.Editors
             container.BackgroundColor = Eto.Drawing.Colors.White;
             container.Tag = new Random().Next() + mycase.variables.Count + 1;
 
+            var slcontainer = new StackLayoutItem(container);
+
             s.CreateAndAddLabelRow(container, "Optimization Variable");
 
             var btnremove = s.CreateAndAddButtonRow(container, "Remove Variable", null, (arg1a, arg2a) =>
             {
                 mycase.variables.Remove(newiv.id);
-                ivcontainer.Remove(container);
+                ivcontainer.Items.Remove(slcontainer);
             });
 
             s.CreateAndAddLabelRow(container, "Definitions");
@@ -218,7 +220,7 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddDescriptionRow(container , "Set the initial value of the variable (IND only, other variable types will have their values read from the flowsheet).");
             tviv = s.CreateAndAddTextBoxRow(container, nf, "Initial Value", newiv.initialvalue, (arg3, arg2) => { newiv.initialvalue = arg3.Text.ToDoubleFromCurrent(); });
 
-            ivcontainer.Items.Add(container);
+            ivcontainer.Items.Add(slcontainer);
 
         }
 

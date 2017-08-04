@@ -55,7 +55,7 @@ namespace DWSIM.UI.Forms.Forms
                 }            
             });
 
-            tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\nWindows: WPF (Windows Presentation Foundation)\nLinux: GTK 2\nmacOS: MonoMac");
+            tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\n\nWindows: WPF (Windows Presentation Foundation)\n\nLinux: GTK 2\n\nmacOS: MonoMac");
             tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
 
             tab1.CreateAndAddLabelRow("Flowsheet Designer");
@@ -67,12 +67,14 @@ namespace DWSIM.UI.Forms.Forms
 
             tab2.CreateAndAddLabelRow("ControlOptions".Localize(prefix));
             tab2.CreateAndAddCheckBoxRow("EnableCPUParallelProcessing".Localize(prefix), Settings.EnableParallelProcessing, (CheckBox sender, EventArgs obj) => { Settings.EnableParallelProcessing = sender.Checked.GetValueOrDefault(); });
-            tab2.CreateAndAddEmptySpace();
+            tab2.CreateAndAddDescriptionRow("Enables utilization of all CPU cores during flowsheet calculations.");
             tab2.CreateAndAddCheckBoxRow("EnableCPUSIMDAccel".Localize(prefix), Settings.UseSIMDExtensions, (CheckBox sender, EventArgs obj) => { Settings.UseSIMDExtensions = sender.Checked.GetValueOrDefault(); });
+            tab2.CreateAndAddDescriptionRow("Enables utilization of special CPU instructions for accelerated math calculations.");
             tab2.CreateAndAddEmptySpace();
             //tab2.CreateAndAddCheckBoxRow("EnableGPUAccel".Localize(prefix), Settings.EnableGPUProcessing, (CheckBox sender, EventArgs obj) => { Settings.EnableGPUProcessing = sender.Checked.Value; });
             //tab2.CreateAndAddEmptySpace();
             tab2.CreateAndAddCheckBoxRow("BreakOnException".Localize(prefix), Settings.SolverBreakOnException, (CheckBox sender, EventArgs obj) => { Settings.SolverBreakOnException = sender.Checked.GetValueOrDefault(); });
+            tab2.CreateAndAddDescriptionRow("If activated, the solver won't calculate the rest of the flowsheet if an error occurs during the claculation of an intermediate block/object.");
             tab2.CreateAndAddEmptySpace();
 
             var tab3 = Common.GetDefaultContainer();
@@ -107,6 +109,7 @@ namespace DWSIM.UI.Forms.Forms
             tab5.CreateAndAddDropDownRow("Font Size", sizes.ToList(), sizes.ToList().IndexOf(Settings.ResultsReportFontSize.ToString()), (DropDown sender, EventArgs obj) => { Settings.ResultsReportFontSize = int.Parse(sender.SelectedValue.ToString()); });
 
             tab5.CreateAndAddLabelRow("Octave Settings");
+            tab5.CreateAndAddDescriptionRow("Setup the path for Octave binaries to enable integration with DWSIM.");
             TextBox tbox = null;
             tbox = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.OctavePath, "Search", null,
                 (sender, e) => GlobalSettings.Settings.OctavePath = sender.Text,
@@ -123,6 +126,7 @@ namespace DWSIM.UI.Forms.Forms
             });
 
             tab5.CreateAndAddLabelRow("Python Settings");
+            tab5.CreateAndAddDescriptionRow("Setup the path for Python binaries to enable integration with DWSIM.");
             TextBox tbox2 = null;
             tbox2 = tab5.CreateAndAddLabelAndTextBoxAndButtonRow("Binaries Path", GlobalSettings.Settings.PythonPath, "Search", null,
                 (sender, e) => GlobalSettings.Settings.PythonPath = sender.Text,

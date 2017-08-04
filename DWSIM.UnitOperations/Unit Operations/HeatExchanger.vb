@@ -1670,6 +1670,10 @@ Namespace UnitOperations
                 Return "Enter the Heat Exchange Area, if required by the selected calculation mode."
             ElseIf p.Equals("Heat Exchanged") Then
                 Return "Enter the Heat Exchanged, if required by the selected calculation mode."
+            ElseIf p.Equals("MITA") Then
+                Return "Enter the Mimimum Internal Temperature Approach (MITA) (for Pinch Point calculation mode only)."
+            ElseIf p.Equals("Ignore LMTD Error") Then
+                Return "If checked, continues solving even if the calculated LMTD is invalid."
             Else
                 Return p
             End If

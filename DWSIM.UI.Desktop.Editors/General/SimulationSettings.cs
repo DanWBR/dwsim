@@ -39,11 +39,47 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddLabelRow(container, "System of Units");
 
-            s.CreateAndAddDropDownRow(container, "System of Units", avunits, avunits.IndexOf(flowsheet.FlowsheetOptions.SelectedUnitSystem.Name), (sender, e) => {
-                flowsheet.FlowsheetOptions.SelectedUnitSystem = (IUnitsOfMeasure)Activator.CreateInstance(flowsheet.AvailableSystemsOfUnits.Where((x) => x.Name == avunits[sender.SelectedIndex]).FirstOrDefault().GetType());
+            Button btnEdit = null;
+            DropDown uselector = null;
+
+            uselector = s.CreateAndAddDropDownRow(container, "System of Units", avunits, avunits.IndexOf(flowsheet.FlowsheetOptions.SelectedUnitSystem.Name), (sender, e) => {
+                flowsheet.FlowsheetOptions.SelectedUnitSystem = flowsheet.AvailableSystemsOfUnits.Where((x) => x.Name == avunits[sender.SelectedIndex]).FirstOrDefault();
+                btnEdit.Enabled = !new string[]{"SI", "CGS", "ENG"}.Contains(uselector.SelectedValue.ToString());
             });
 
             s.CreateAndAddDescriptionRow(container, "Select the System of Units to be used on this simulation");
+
+            btnEdit = s.CreateAndAddLabelAndButtonRow(container, "Edit System of Units", "Edit Selected", null, (sender, e) =>
+            {
+                var editcontainer = new Editors.UnitSetEditorView((DWSIM.SharedClasses.SystemsOfUnits.Units)flowsheet.FlowsheetOptions.SelectedUnitSystem);
+                var form = s.GetDefaultEditorForm("Edit System of Units", 400, 600, editcontainer);
+                form.Closed += (sender2, e2) => {
+                    container.RemoveAll();
+                    container.Clear();
+                    Initialize();
+                    container.Create();
+                };
+                form.Show();
+            });
+
+            s.CreateAndAddLabelAndButtonRow(container, "Create New System of Units", "Create New", null, (sender, e) =>
+            {
+                var newsystem = new DWSIM.SharedClasses.SystemsOfUnits.SI { Name = "NewUnitSet" };
+                flowsheet.AvailableSystemsOfUnits.Add(newsystem);
+                flowsheet.FlowsheetOptions.SelectedUnitSystem = newsystem;
+                var editcontainer = new Editors.UnitSetEditorView(newsystem);
+                var form = s.GetDefaultEditorForm("Create New System of Units", 400, 600, editcontainer);
+                form.Closed += (sender2, e2) =>
+                {
+                    container.RemoveAll();
+                    container.Clear();
+                    Initialize();
+                    container.Create();
+                };
+                form.Show();
+            });
+
+            btnEdit.Enabled = !new string[] { "SI", "CGS", "ENG" }.Contains(uselector.SelectedValue.ToString());
 
             var nformats = new []{"F", "G","G2","G4","G6","G8","G10","N","N2","N4","N6","R","E","E1","E2","E3","E4","E6"};
 
@@ -62,7 +98,8 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             s.CreateAndAddDescriptionRow(container, "Select the formatting scheme for compound amounts in Material Stream reports.");
-           
+
+
         }
 
     }

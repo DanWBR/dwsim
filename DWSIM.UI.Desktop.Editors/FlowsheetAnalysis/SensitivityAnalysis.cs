@@ -343,6 +343,7 @@ namespace DWSIM.UI.Desktop.Editors
             List<string> proplist2 = new List<string>();
             var myview = new DynamicLayout { Padding = new Padding(5), Width = 300 };
             myview.BackgroundColor = Eto.Drawing.Colors.White;
+            var slcontainer = new StackLayoutItem(myview);
             var spinobj = s.CreateAndAddDropDownRow(myview, "Object", objlist, 0, null);
             var spinprop = s.CreateAndAddDropDownRow(myview, "Property", new List<string>(), 0, null);
            
@@ -378,10 +379,10 @@ namespace DWSIM.UI.Desktop.Editors
             btnremove.Click += (sender2, e2) =>
             {
                 mycase.depvariables.Remove(depvar.id);
-                container.Remove(myview);
+                container.Items.Remove(slcontainer);
             };
 
-            container.Items.Add(myview);
+            container.Items.Add(slcontainer);
 
         }
     }
