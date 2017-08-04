@@ -20,6 +20,7 @@ namespace DWSIM.UI.Desktop
             Settings.CultureInfo = "en";
             Settings.EnableGPUProcessing = false;
             Settings.OldUI = false;
+            
             Settings.LoadSettings("dwsim_newui.ini");
 
             Eto.Platform platform = null;
@@ -52,7 +53,6 @@ namespace DWSIM.UI.Desktop
                         break;
                 }
                 new Application(platform).Run(new MainForm());
-                Settings.SaveSettings("dwsim_newui.ini");
             }
             else if (Settings.RunningPlatform() == Settings.Platform.Linux)
             {
@@ -82,7 +82,6 @@ namespace DWSIM.UI.Desktop
                         break;
                 }
                 new Application(platform).Run(new MainForm());
-                Settings.SaveSettings("dwsim_newui.ini");
             }
             else if (Settings.RunningPlatform() == Settings.Platform.Mac)
             {
@@ -113,9 +112,6 @@ namespace DWSIM.UI.Desktop
                 try
                 {
                     new Application(platform).Run(new MainForm());
-                    Application.Instance.Terminating += (sender, e) => {
-                        Settings.SaveSettings("dwsim_newui.ini");
-                    };
                 }
                 catch (Exception ex)
                 {

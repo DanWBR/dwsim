@@ -178,6 +178,7 @@ namespace DWSIM.UI
             {
                 e.Cancel = true;
             }
+            DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
         }
 
         void MainForm_Shown(object sender, EventArgs e)

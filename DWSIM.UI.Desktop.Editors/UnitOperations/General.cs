@@ -76,18 +76,19 @@ namespace DWSIM.UI.Desktop.Editors
                     SimObject.PropertyPackage = (IPropertyPackage)SimObject.GetFlowsheet().PropertyPackages.Values.Where((x) => x.Tag == proppacks[arg1.SelectedIndex]).FirstOrDefault();
                 });
             }
-            
+
             var flashalgos = SimObject.GetFlowsheet().FlowsheetOptions.FlashAlgorithms.Select(x => x.Tag).ToList();
             flashalgos.Insert(0, "Default");
 
             var cbFlashAlg = s.CreateAndAddDropDownRow(container, "Flash Algorithm", flashalgos, 0, null);
 
             if (!string.IsNullOrEmpty(SimObject.PreferredFlashAlgorithmTag))
-	            cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), SimObject.PreferredFlashAlgorithmTag);
+                cbFlashAlg.SelectedIndex = Array.IndexOf(flashalgos.ToArray(), SimObject.PreferredFlashAlgorithmTag);
             else
-            	cbFlashAlg.SelectedIndex = 0;
+                cbFlashAlg.SelectedIndex = 0;
 
-            cbFlashAlg.SelectedIndexChanged += (sender, e) =>{
+            cbFlashAlg.SelectedIndexChanged += (sender, e) =>
+            {
                 SimObject.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
             };
 
@@ -164,10 +165,10 @@ namespace DWSIM.UI.Desktop.Editors
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
-                                ce.CalcMode =  Compressor.CalculationMode.OutletPressure;
+                                ce.CalcMode = Compressor.CalculationMode.OutletPressure;
                                 break;
                             case 1:
-                                ce.CalcMode =  Compressor.CalculationMode.Delta_P;
+                                ce.CalcMode = Compressor.CalculationMode.Delta_P;
                                 break;
                         }
                     });
@@ -848,7 +849,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
 
                     Button btnST = null;
-                    
+
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.hxcalcmode().ToList(), pos7, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
@@ -890,9 +891,17 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
 
-                    btnST = s.CreateAndAddButtonRow(container, "Edit Shell and Tube Properties", null, (sender, e) => { 
-                         var f = new DWSIM.UnitOperations.EditingForm_HeatExchanger_SHProperties {hx = hx};
-                         f.Show();
+                    btnST = s.CreateAndAddButtonRow(container, "Edit Shell and Tube Properties", null, (sender, e) =>
+                    {
+                        Application.Instance.Invoke(() =>
+                        {
+                            //System.Windows.Forms.Application.EnableVisualStyles();
+                            //System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+                            var f = new DWSIM.UnitOperations.EditingForm_HeatExchanger_SHProperties { hx = hx };
+                            f.ShowDialog();
+                            //System.Windows.Forms.Application.Run(f);
+                            //System.Windows.Forms.Application.ExitThread();
+                        });
                     });
 
                     int pos9 = 0;
@@ -1064,8 +1073,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("MITA"));
                     s.CreateAndAddCheckBoxRow(container, "Ignore LMTD Error", hx.IgnoreLMTDError, (sender, e) => { hx.IgnoreLMTDError = sender.Checked.GetValueOrDefault(); });
-                                                 s.CreateAndAddDescriptionRow(container,
-                                                 SimObject.GetPropertyDescription("Ignore LMTD Error"));
+                    s.CreateAndAddDescriptionRow(container,
+                    SimObject.GetPropertyDescription("Ignore LMTD Error"));
                     break;
                 case ObjectType.RCT_Conversion:
                     var reactor = (Reactor_Conversion)SimObject;
@@ -1083,9 +1092,9 @@ namespace DWSIM.UI.Desktop.Editors
                             break;
                     }
                     var rsets = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
-                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor.ReactionSetID)) reactor.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor.ReactionSetID)) reactor.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First();
                     var selname = SimObject.GetFlowsheet().ReactionSets[reactor.ReactionSetID].Name;
-                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets, rsets.IndexOf(selname), (sender, e) =>  reactor.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets, rsets.IndexOf(selname), (sender, e) => reactor.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.rctcalcmode().ToList(), pos10, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
@@ -1137,9 +1146,9 @@ namespace DWSIM.UI.Desktop.Editors
                 case ObjectType.RCT_Equilibrium:
                     var reactor2 = (Reactor_Equilibrium)SimObject;
                     var rsets2 = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
-                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor2.ReactionSetID)) reactor2.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor2.ReactionSetID)) reactor2.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First();
                     var selname2 = SimObject.GetFlowsheet().ReactionSets[reactor2.ReactionSetID].Name;
-                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets2, rsets2.IndexOf(selname2), (sender, e) =>  reactor2.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets2, rsets2.IndexOf(selname2), (sender, e) => reactor2.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
                     int pos11 = 0;
                     switch (reactor2.ReactorOperationMode)
                     {
@@ -1302,7 +1311,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                     comptext = comptext.TrimEnd(' ').TrimEnd(',');
                     foreach (string comp in compounds)
-                        s.CreateAndAddCheckBoxRow(container, 
+                        s.CreateAndAddCheckBoxRow(container,
                                                    comp,
                                                    reactor2g.ComponentIDs.Contains(comp),
                                                    (CheckBox arg2, EventArgs ev) =>
@@ -1363,9 +1372,9 @@ namespace DWSIM.UI.Desktop.Editors
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;
                     var rsets3 = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
-                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor3.ReactionSetID)) reactor3.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor3.ReactionSetID)) reactor3.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First();
                     var selname3 = SimObject.GetFlowsheet().ReactionSets[reactor3.ReactionSetID].Name;
-                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets3, rsets3.IndexOf(selname3), (sender, e) =>  reactor3.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets3, rsets3.IndexOf(selname3), (sender, e) => reactor3.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
                     int pos12 = 0;
                     switch (reactor3.ReactorOperationMode)
                     {
@@ -1460,10 +1469,10 @@ namespace DWSIM.UI.Desktop.Editors
                 case ObjectType.RCT_PFR:
                     var reactor4 = (Reactor_PFR)SimObject;
                     var rsets4 = SimObject.GetFlowsheet().ReactionSets.Values.Select((x) => x.Name).ToList();
-                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor4.ReactionSetID)) reactor4.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First(); 
+                    if (!SimObject.GetFlowsheet().ReactionSets.ContainsKey(reactor4.ReactionSetID)) reactor4.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Keys.First();
                     var selname4 = SimObject.GetFlowsheet().ReactionSets[reactor4.ReactionSetID].Name;
-                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets4, rsets4.IndexOf(selname4), (sender, e) =>  reactor4.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
-                     int pos13 = 0;
+                    s.CreateAndAddDropDownRow(container, "Reaction Set", rsets4, rsets4.IndexOf(selname4), (sender, e) => reactor4.ReactionSetID = SimObject.GetFlowsheet().ReactionSets.Values.Where((x) => x.Name == sender.SelectedValue.ToString()).FirstOrDefault().ID);
+                    int pos13 = 0;
                     switch (reactor4.ReactorOperationMode)
                     {
                         case OperationMode.Adiabatic:
@@ -1942,25 +1951,30 @@ namespace DWSIM.UI.Desktop.Editors
                                                  SimObject.GetPropertyDescription("Separation Temperature"));
                     break;
                 case ObjectType.CustomUO:
-                    var scriptuo = (CustomUO)SimObject; 
+                    var scriptuo = (CustomUO)SimObject;
                     s.CreateAndAddLabelRow(container, "Python Engine");
                     s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET (Python 2.7)" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
                     break;
                 case ObjectType.ExcelUO:
-                    var exceluo = (ExcelUO)SimObject; 
+                    var exceluo = (ExcelUO)SimObject;
                     s.CreateAndAddLabelRow(container, "Spreadsheet File");
                     TextBox tbox = null;
-                    tbox = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Path", exceluo.Filename, "Search", null, (sender, e) => exceluo.Filename = sender.Text, (sender, e) => {
+                    tbox = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Path", exceluo.Filename, "Search", null, (sender, e) => exceluo.Filename = sender.Text, (sender, e) =>
+                    {
                         var searchdialog = new OpenFileDialog() { Title = "Search", FileName = exceluo.Filename, MultiSelect = false };
                         if (searchdialog.ShowDialog(container) == DialogResult.Ok)
                         {
                             tbox.Text = searchdialog.FileName;
                         }
                     });
-                    s.CreateAndAddButtonRow(container, "Edit Spreadsheet", null, (sender, e) => {
-                        if (!DWSIM.GlobalSettings.Settings.IsRunningOnMono()) {
+                    s.CreateAndAddButtonRow(container, "Edit Spreadsheet", null, (sender, e) =>
+                    {
+                        if (!DWSIM.GlobalSettings.Settings.IsRunningOnMono())
+                        {
                             Process.Start(exceluo.Filename);
-                        } else {
+                        }
+                        else
+                        {
                             Process.Start(new ProcessStartInfo("xdg-open", exceluo.Filename) { UseShellExecute = false });
                         }
                     });
@@ -2000,7 +2014,7 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.Filter:
                     var filter = (Filter)SimObject;
-                    s.CreateAndAddDropDownRow(container, "Calculation Mode", new List<string> { "Sizing", "Evaluation" }, (int)filter.CalcMode, (sender, e) => filter.CalcMode  = (Filter.CalculationMode)sender.SelectedIndex);
+                    s.CreateAndAddDropDownRow(container, "Calculation Mode", new List<string> { "Sizing", "Evaluation" }, (int)filter.CalcMode, (sender, e) => filter.CalcMode = (Filter.CalculationMode)sender.SelectedIndex);
                     s.CreateAndAddTextBoxRow(container, nf, "Medium Resistance (" + su.mediumresistance + ")", cv.ConvertFromSI(su.mediumresistance, filter.FilterMediumResistance), (sender, e) => { if (sender.Text.IsValidDouble()) filter.FilterMediumResistance = cv.ConvertToSI(su.mediumresistance, sender.Text.ToDoubleFromCurrent()); });
                     s.CreateAndAddTextBoxRow(container, nf, "Cake Resistance (" + su.mediumresistance + ")", cv.ConvertFromSI(su.mediumresistance, filter.SpecificCakeResistance), (sender, e) => { if (sender.Text.IsValidDouble()) filter.SpecificCakeResistance = cv.ConvertToSI(su.mediumresistance, sender.Text.ToDoubleFromCurrent()); });
                     s.CreateAndAddTextBoxRow(container, nf, "Cycle Time (" + su.time + ")", cv.ConvertFromSI(su.time, filter.FilterCycleTime), (sender, e) => { if (sender.Text.IsValidDouble()) filter.FilterCycleTime = cv.ConvertToSI(su.time, sender.Text.ToDoubleFromCurrent()); });
@@ -2010,7 +2024,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddTextBoxRow(container, nf, "Submerged Fraction", filter.SubmergedAreaFraction, (sender, e) => { if (sender.Text.IsValidDouble()) filter.SubmergedAreaFraction = sender.Text.ToDoubleFromCurrent(); });
                     break;
                 case ObjectType.FlowsheetUO:
-                    var fsuo = (Flowsheet)SimObject; 
+                    var fsuo = (Flowsheet)SimObject;
                     TextBox tbox2 = null;
                     tbox2 = s.CreateAndAddLabelAndTextBoxAndButtonRow(container, "Flowsheet Path", fsuo.SimulationFile, "Search", null, (sender, e) => fsuo.SimulationFile = sender.Text, (sender, e) =>
                     {
@@ -2023,21 +2037,32 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddCheckBoxRow(container, "Initialize on Load", fsuo.InitializeOnLoad, (sender, e) => fsuo.InitializeOnLoad = sender.Checked.GetValueOrDefault());
                     s.CreateAndAddCheckBoxRow(container, "Update Process Data when Saving", fsuo.UpdateOnSave, (sender, e) => fsuo.UpdateOnSave = sender.Checked.GetValueOrDefault());
                     s.CreateAndAddCheckBoxRow(container, "Redirect Flowsheet Calculator Messages", fsuo.RedirectOutput, (sender, e) => fsuo.RedirectOutput = sender.Checked.GetValueOrDefault());
-                    s.CreateAndAddButtonRow(container, "Open Control Panel", null, (sender, e) => {
-                        var editor = new DWSIM.UnitOperations.EditingForm_Flowsheet_Editor { fsuo = fsuo };
-                        editor.Show();
+                    s.CreateAndAddButtonRow(container, "Open Control Panel", null, (sender, e) =>
+                    {
+                        Application.Instance.Invoke(() =>
+                        {
+                            //System.Windows.Forms.Application.EnableVisualStyles();
+                            //System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+                            var editor = new DWSIM.UnitOperations.EditingForm_Flowsheet_Editor { fsuo = fsuo };
+                            editor.ShowDialog();
+                            //System.Windows.Forms.Application.Run(editor);
+                            //System.Windows.Forms.Application.ExitThread();
+                        });
                     });
                     s.CreateAndAddLabelRow(container, "Linked Input Variables");
-                    foreach (var item in fsuo.InputParams) 
+                    foreach (var item in fsuo.InputParams)
                     {
-	                    if (fsuo.Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID)) {
+                        if (fsuo.Fsheet != null && fsuo.Fsheet.SimulationObjects.ContainsKey(item.Value.ObjectID))
+                        {
                             var name = fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].GraphicObject.Tag + ", " + fsuo.GetFlowsheet().GetTranslatedString(item.Value.ObjectProperty);
                             var value = (double)fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].GetPropertyValue(item.Value.ObjectProperty, su);
                             var units = fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].GetPropertyUnit(item.Value.ObjectProperty, su);
-                            s.CreateAndAddTextBoxRow(container, nf, name + " (" + units + ")", value, (sender, e) => {
-                                if (sender.Text.IsValidDouble()) {
+                            s.CreateAndAddTextBoxRow(container, nf, name + " (" + units + ")", value, (sender, e) =>
+                            {
+                                if (sender.Text.IsValidDouble())
+                                {
                                     fsuo.Fsheet.SimulationObjects[item.Value.ObjectID].SetPropertyValue(item.Value.ObjectProperty, sender.Text.ToDoubleFromCurrent(), su);
-                                }; 
+                                };
                             });
                         }
                     }
