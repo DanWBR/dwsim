@@ -140,6 +140,8 @@
             xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.CompressorGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ExpanderGraphic") Then
             xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.ExpanderGraphic"
+        ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.ShorcutColumnGraphic") Then
+            xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.ShortcutColumnGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic") Then
             xel.Value = "DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.RigorousColumnGraphic"
         ElseIf xel.Value.Equals("DWSIM.DrawingTools.GraphicObjects.AbsorptionColumnGraphic") Then
@@ -192,6 +194,8 @@
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.CompressorGraphic"
         ElseIf xel.Value.Equals("DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.ExpanderGraphic") Then
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.ExpanderGraphic"
+        ElseIf xel.Value.Equals("DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.ShortcutColumnGraphic") Then
+            xel.Value = "DWSIM.DrawingTools.GraphicObjects.ShorcutColumnGraphic"
         ElseIf xel.Value.Equals("DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.RigorousColumnGraphic") Then
             xel.Value = "DWSIM.DrawingTools.GraphicObjects.DistillationColumnGraphic"
         ElseIf xel.Value.Equals("DWSIM.Drawing.SkiaSharp.GraphicObjects.Shapes.AbsorptionColumnGraphic") Then

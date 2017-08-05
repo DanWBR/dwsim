@@ -682,6 +682,80 @@ restart:    B = F - D
                 Return True
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Shortcut Column: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions")
+            str.AppendLine()
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Condenser type: " & Me.condtype.ToString)
+            str.AppendLine("    Reflux ratio: " & Me.m_refluxratio.ToString(numberformat, ci))
+            str.AppendLine("    Light key: " & Me.m_lightkey.ToString)
+            str.AppendLine("    Light key mole fraction: " & Me.m_lightkeymolarfrac.ToString(numberformat, ci))
+            str.AppendLine("    Heavy key: " & Me.m_heavykey.ToString)
+            str.AppendLine("    Heavy key mole fraction: " & Me.m_heavykeymolarfrac.ToString(numberformat, ci))
+            str.AppendLine("    Condenser pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Reboiler pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            str.AppendLine("    Minimum reflux ratio: " & Me.m_Rmin.ToString(numberformat, ci))
+            str.AppendLine("    Minimum number of stages: " & Me.m_Nmin.ToString(numberformat, ci))
+            str.AppendLine("    Actual number of stages: " & Me.m_N.ToString(numberformat, ci))
+            str.AppendLine("    Optimum feed stage: " & Me.ofs.ToString(numberformat, ci))
+            str.AppendLine("    Condenser heat duty: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qc).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Reboiler heat duty: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qb).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Stripping liquid mole flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L_).ToString(numberformat, ci) & " " & su.molarflow)
+            str.AppendLine("    Rectifying liquid mole flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L).ToString(numberformat, ci) & " " & su.molarflow)
+            str.AppendLine("    Stripping vapor mole flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V_).ToString(numberformat, ci) & " " & su.molarflow)
+            str.AppendLine("    Rectifying liquid mole flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V).ToString(numberformat, ci) & " " & su.molarflow)
+
+            Return str.ToString
+
+        End Function
+
+        Public Overrides Function GetPropertyDescription(p As String) As String
+            If p.Equals("Light Key Compound") Then
+                Return "Select a compound that will be considered as the lightest one for specification purposes."
+            ElseIf p.Equals("Heavy Key Compound") Then
+                Return "Select a compound that will be considered as the heaviest one for specification purposes."
+            ElseIf p.Equals("LK Mole Fraction in Bottoms") Then
+                Return "Enter the mole fraction of the Light Key compound in the bottoms stream."
+            ElseIf p.Equals("HK Mole Fraction in Distillate") Then
+                Return "Enter the mole fraction of the Heavy Key compound in the distillate stream."
+            ElseIf p.Equals("Reflux Ratio") Then
+                Return "Specify the reflux ratio of this column."
+            ElseIf p.Equals("Condenser Pressure") Then
+                Return "Enter the pressure of the condenser on this column."
+            ElseIf p.Equals("Reboiler Pressure") Then
+                Return "Enter the pressure of the reboiler on this column."
+            ElseIf p.Equals("Condenser Type") Then
+                Return "Select the type of the condenser on this column."
+            Else
+                Return p
+            End If
+        End Function
+
     End Class
 
 End Namespace
