@@ -65,6 +65,7 @@ namespace DWSIM.UI.Desktop.GTK
 
         public FlowsheetSurface_GTK()
         {
+            this.AddEvents((int)Gdk.EventMask.PointerMotionMask);
             this.ButtonPressEvent += FlowsheetSurface_GTK_ButtonPressEvent;
             this.ButtonReleaseEvent += FlowsheetSurface_GTK_ButtonReleaseEvent;
             this.MotionNotifyEvent += FlowsheetSurface_GTK_MotionNotifyEvent;
