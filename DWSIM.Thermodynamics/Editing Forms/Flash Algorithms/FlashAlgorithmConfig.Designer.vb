@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FlashAlgorithmConfig
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -520,7 +520,6 @@ Partial Class FlashAlgorithmConfig
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "FlashAlgorithmConfig"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Float
         Me.ShowIcon = False
         Me.TabControl1.ResumeLayout(False)
         Me.TabPageGeneral.ResumeLayout(False)

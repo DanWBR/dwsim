@@ -43,7 +43,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "A Property Package is a set of " +
                 "models and methods/equations which are responsible for the calculation of compound and phase properties and for providing " +
-                "thermodynamic properties for Unit Operation calculations, like enthalpy and entropy.\n\n" + 
+                "thermodynamic properties for Unit Operation calculations, like enthalpy and entropy.\n\n" +
                 "You need to add at least one Property Package to your simulation.");
 
             s.CreateAndAddDropDownRow(container, "Add New Property Package", proppacks, 0, (sender, e) =>
@@ -80,12 +80,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddLabelRow(container, "Flash Algorithms");
 
-            s.CreateAndAddDescriptionRow(container, "The Flash Algorithms in DWSIM are the components responsible for determining a particular set " + 
-            "of phases at thermodynamic equilibrium, their amounts (and the amounts of the compounds on each phase) at the specified conditions like " + 
+            s.CreateAndAddDescriptionRow(container, "The Flash Algorithms in DWSIM are the components responsible for determining a particular set " +
+            "of phases at thermodynamic equilibrium, their amounts (and the amounts of the compounds on each phase) at the specified conditions like " +
             "Temperature, Pressure, Total Enthalpy and Total Entropy. Some Flash Algorithms are capable of predicting equilibrium between one vapor " +
-            "and one liquid phase, while others support another co-existing liquid and/or solid phase. As the amount of phases considered in "+ 
+            "and one liquid phase, while others support another co-existing liquid and/or solid phase. As the amount of phases considered in " +
             "equilibrium increases, the calculation time/complexity also increases while the results' reliability decreases.\n\n" +
-            "Some flash algorithms are more capable/reliable than others, depending on the mixture for which the flash calculation request is being " + 
+            "Some flash algorithms are more capable/reliable than others, depending on the mixture for which the flash calculation request is being " +
             "requested. DWSIM features a selection of flash algorithms that are capable of calculating VLE, VLLE and SLE.\n\n" +
             "The 'Nested Loops (VLE)' algorithm satisfies the requirements of most Vapor-Liquid Equilibria systems.");
 
@@ -129,10 +129,48 @@ namespace DWSIM.UI.Desktop.Editors
                                                                },
                                                                (arg1, arg2) =>
                                                                {
-                                                                   //var alert = new AlertDialog.Builder(this.Context);
-                                                                   //var myview = new PropertyPackageSettingsView(this.Context, flowsheet, pp);
-                                                                   //alert.SetView(myview);
-                                                                   //alert.Create().Show();
+                                                                   Application.Instance.Invoke(() =>
+                                                                   {
+                                                                       Thermodynamics.FlashAlgorithmConfig f = new Thermodynamics.FlashAlgorithmConfig
+                                                                       {
+                                                                           Settings = fa.FlashSettings,
+                                                                           AvailableCompounds = flowsheet.SelectedCompounds.Values.Select(x => x.Name).ToList(),
+                                                                           FlashAlgo = fa
+                                                                       };
+
+                                                                       if (fa is DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)
+                                                                       {
+                                                                           var coflash = (DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.CAPEOPEN_Equilibrium_Server)fa;
+
+                                                                           f._coes = coflash._coes;
+                                                                           f._coppm = coflash._coppm;
+                                                                           f._selppm = coflash._selppm;
+                                                                           f._esname = coflash._esname;
+                                                                           f._mappings = coflash._mappings;
+                                                                           f._phasemappings = coflash._phasemappings;
+
+                                                                           f.ShowDialog();
+
+                                                                           coflash._coes = f._coes;
+                                                                           coflash._coppm = f._coppm;
+                                                                           coflash._selppm = f._selppm;
+                                                                           coflash._esname = f._esname;
+                                                                           coflash._mappings = f._mappings;
+                                                                           coflash._phasemappings = f._phasemappings;
+
+                                                                           fa.FlashSettings = f.Settings;
+
+                                                                           f.Dispose();
+                                                                           f = null;
+                                                                       }
+                                                                       else
+                                                                       {
+                                                                           f.ShowDialog();
+                                                                           fa.FlashSettings = f.Settings;
+                                                                           f.Dispose();
+                                                                           f = null;
+                                                                       }
+                                                                   });
                                                                },
                                                                (arg1, arg2) =>
                                                                {

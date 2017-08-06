@@ -5,7 +5,7 @@ Imports CapeOpen
 
 Public Class FlashAlgorithmConfig
 
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits System.Windows.Forms.Form
 
     Public Property Settings As Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
