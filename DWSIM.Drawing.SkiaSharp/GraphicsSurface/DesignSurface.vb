@@ -41,6 +41,8 @@ Public Class GraphicsSurface
 
     Private _SelectedObject As IGraphicObject
 
+    Private _FloatingTable As Tables.FloatingTableGraphic
+
     Public Enum AlignDirection
         Lefts
         Centers
@@ -418,6 +420,73 @@ Public Class GraphicsSurface
                         selectionRect.Bottom = selectionRect.Top + Math.Abs(y1 - y0)
 
                     End If
+
+                End If
+
+                If Not dragging Then
+
+                    Dim gobj As GraphicObject = FindObjectAtPoint(New SKPoint(x, y))
+
+                    If Not gobj Is Nothing Then
+
+                        If _FloatingTable Is Nothing And Not _
+                                gobj.ObjectType = ObjectType.GO_FloatingTable And Not _
+                                gobj.ObjectType = ObjectType.GO_MasterTable And Not _
+                                gobj.ObjectType = ObjectType.GO_SpreadsheetTable And Not _
+                                gobj.ObjectType = ObjectType.GO_Table And Not _
+                                gobj.ObjectType = ObjectType.GO_Image And Not _
+                                gobj.ObjectType = ObjectType.GO_Text And Not _
+                                gobj.ObjectType = ObjectType.GO_Rectangle And Not _
+                                gobj.ObjectType = ObjectType.Nenhum Then
+
+                            Dim flowsheet = gobj.Owner.GetFlowsheet()
+
+                            If gobj.Calculated Then
+
+                                If flowsheet.SimulationObjects.ContainsKey(gobj.Name) Then
+
+                                    Dim obj = flowsheet.SimulationObjects(gobj.Name)
+
+                                    Dim tabela As New Tables.FloatingTableGraphic(obj, (x + 25) / Zoom, (y + 25) / Zoom)
+                                    tabela.Owner = obj
+                                    tabela.Tag = obj.Name
+                                    tabela.Name = "QTAB-" & Guid.NewGuid.ToString
+                                    tabela.HeaderText = gobj.Tag
+                                    tabela.AdditionalInfo = Zoom
+                                    _FloatingTable = tabela
+                                    tabela.UpdateSize()
+                                    DrawingObjects.Add(tabela)
+
+                                End If
+
+                            End If
+
+                        ElseIf gobj.ObjectType = ObjectType.GO_FloatingTable Then
+
+                            If DrawingObjects.Contains(_FloatingTable) Then DrawingObjects.Remove(_FloatingTable)
+                            _FloatingTable = Nothing
+
+                        End If
+
+                    Else
+
+                        Try
+                            If DrawingObjects.Contains(_FloatingTable) Then DrawingObjects.Remove(_FloatingTable)
+                            _FloatingTable = Nothing
+                        Catch ex As Exception
+                            Console.WriteLine(ex.Message)
+                        End Try
+
+                    End If
+
+                Else
+
+                    Try
+                        If DrawingObjects.Contains(_FloatingTable) Then DrawingObjects.Remove(_FloatingTable)
+                        _FloatingTable = Nothing
+                    Catch ex As Exception
+                        Console.WriteLine(ex.Message)
+                    End Try
 
                 End If
 

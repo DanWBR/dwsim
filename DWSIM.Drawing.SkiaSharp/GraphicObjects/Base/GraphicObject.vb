@@ -265,7 +265,7 @@ Namespace GraphicObjects
 
             Dim gp As SKPath = New SKPath()
 
-            gp.AddRoundedRect(New SKRect(x, y, x + width, x + height), radius, radius, SKPathDirection.Clockwise)
+            gp.AddRoundedRect(New SKRect(x, y, x + width, y + height), radius, radius, SKPathDirection.Clockwise)
 
             gp.Close()
 

@@ -157,6 +157,8 @@ Namespace GraphicObjects.Tables
 
         Public Overrides Sub Draw(ByVal g As Object)
 
+            Padding = 4
+
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             Dim tpaint As New SKPaint()
@@ -164,16 +166,26 @@ Namespace GraphicObjects.Tables
             With tpaint
                 .TextSize = FontSize
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
+                .Color = SKColors.White
                 .IsStroke = False
+            End With
+
+            Dim tbpaint As New SKPaint()
+
+            With tbpaint
+                .TextSize = FontSize
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .Color = SKColors.White
+                .IsStroke = False
+                .Typeface = SKTypeface.FromTypeface(DefaultTypeFace, SKTypefaceStyle.Bold)
             End With
 
             Dim bpaint As New SKPaint()
 
             With bpaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = BorderColor
-                .IsStroke = True
+                .Color = SKColors.SteelBlue
+                .IsStroke = False
                 .StrokeWidth = LineWidth
             End With
 
@@ -248,7 +260,7 @@ Namespace GraphicObjects.Tables
                         count += 1
                     Next
 
-                    If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
+                    'If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
 
                     If maxH = 0 Then maxH = 20
 
@@ -286,11 +298,11 @@ Namespace GraphicObjects.Tables
 
                     Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
-                    DrawRoundRect(g, X, Y, Width, Height, 6, GetPaint(SKColors.White))
+                    DrawRoundRect(g, X, Y, Width, Height, 6, bpaint)
 
                     'desenhar textos e retangulos
-                    canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3, Y + Padding, tpaint)
-                    canvas.DrawText(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3, Y + maxH, tpaint)
+                    canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3, Y + Padding + size.Height, tbpaint)
+                    canvas.DrawText(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), X + Padding + 3, Y + maxH + size.Height, tbpaint)
                     Dim n As Integer = 1
                     For Each prop In props
                         propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
@@ -302,10 +314,10 @@ Namespace GraphicObjects.Tables
                             propval = pval0.ToString
                         End If
                         propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                        canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding, tpaint)
-                        canvas.DrawText(propval, X + maxL1 + maxL2 + 3, Y + (n + 1) * maxH + Padding, tpaint)
-                        canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding, tpaint)
-                        'g.DrawLine(Me.m_BorderPen, X, Y + n * maxH, X + Width, Y + n * maxH)
+                        canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                        canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                        canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
+                        'canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, tpaint)
                         n += 1
                     Next
 
