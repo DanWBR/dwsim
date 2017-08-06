@@ -221,7 +221,7 @@ namespace DWSIM.UI.Forms
             {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
-                cont.Tag = "Misc Settings";
+                cont.Tag = "Settings";
                 var cont2 = new UI.Desktop.Editors.FloatingTablesView(FlowsheetObject);
                 cont2.Tag = "Floating Tables";
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new []{cont, cont2});
@@ -232,14 +232,6 @@ namespace DWSIM.UI.Forms
             btnSolve.Click += (sender, e) => {
                 SolveFlowsheet();
             };
-
-            //this.KeyDown += (sender, e) =>
-            //{
-            //    if (e.Key == Keys.F5)
-            //    {
-            //        SolveFlowsheet();
-            //    };
-            //};
 
             btnSave.Click += (sender, e) =>
             {
@@ -387,9 +379,9 @@ namespace DWSIM.UI.Forms
                 Spreadsheet.EvaluateAll();
                 Spreadsheet.WriteAll();
             });
-            Application.Instance.AsyncInvoke(() => TabPageSpreadsheet.Enabled = false);
+            Application.Instance.AsyncInvoke(() => SpreadsheetControl.SuspendLayout());
             FlowsheetObject.SolveFlowsheet();
-            Application.Instance.AsyncInvoke(() => TabPageSpreadsheet.Enabled = true);
+            Application.Instance.AsyncInvoke(() => SpreadsheetControl.ResumeLayout());
             FlowsheetObject.UpdateSpreadsheet(() =>
             {
                 Spreadsheet.EvaluateAll();

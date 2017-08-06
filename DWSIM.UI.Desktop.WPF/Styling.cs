@@ -49,6 +49,10 @@ namespace DWSIM.UI.Desktop.WPF
                 wpfgrid.ColumnHeaderStyle = style;
                 wpfgrid.HeadersVisibility = DataGridHeadersVisibility.All;
                 wpfgrid.RowHeaderWidth = 50;
+                wpfgrid.EnableColumnVirtualization = true;
+                wpfgrid.EnableRowVirtualization = true;
+                VirtualizingPanel.SetVirtualizationMode(wpfgrid, VirtualizationMode.Recycling);
+                VirtualizingStackPanel.SetIsVirtualizing(wpfgrid, true);
                 wpfgrid.LoadingRow += (sender, e) =>
                 {
                     e.Row.Header = (e.Row.GetIndex() + 1).ToString();

@@ -24,8 +24,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         private Dictionary<string, string[]> availableproperties = new Dictionary<string, string[]>();
         private List<Type> aTypeList = new List<Type>();
-        private Dictionary<string, string> aTypeRefs = new Dictionary<string, string>();
-
+      
         public FloatingTablesView(IFlowsheet fs)
         {
             flowsheet = fs;
@@ -75,8 +74,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             cbObjectType.Items.Clear();
             availableproperties.Clear();
-            aTypeRefs.Clear();
-
+            
             foreach (var item in aTypeList.OrderBy(x => x.Name))
             {
                 if (!item.IsAbstract)
@@ -85,7 +83,6 @@ namespace DWSIM.UI.Desktop.Editors
                     obj.SetFlowsheet(flowsheet);
                     cbObjectType.Items.Add(new ListItem{Key = item.Name, Text= obj.GetDisplayName()});
                     availableproperties.Add(item.Name, obj.GetProperties(DWSIM.Interfaces.Enums.PropertyType.ALL));
-                    aTypeRefs.Add(obj.GetDisplayName(), item.Name);
                     if (add) flowsheet.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties().ToList());
                     obj = null;
                 }
@@ -93,40 +90,41 @@ namespace DWSIM.UI.Desktop.Editors
 
             cbObjectType.SelectedIndex = 0;
 
-            var PropertyListView = new StackLayout { Height = 300 };
+            var PropertyListView = new StackLayout();
 
             cbObjectType.SelectedIndexChanged += (sender, e) =>
             {
                 if (cbObjectType.SelectedIndex < 0) return;
-                var selvalue = cbObjectType.SelectedKey.ToString();
-                this.SuspendLayout();
+                var selvalue = cbObjectType.SelectedValue.ToString();
+                var selkey = cbObjectType.SelectedKey;
+                PropertyListView.SuspendLayout();
                 PropertyListView.Items.Clear();
-                foreach (var item in availableproperties[selvalue])
+                foreach (var item in availableproperties[selkey])
                 {
-                    var check = new CheckBox {Text = flowsheet.GetTranslatedString(item), Tag = item, Checked = flowsheet.FlowsheetOptions.VisibleProperties[selvalue].Contains(item) };
+                    var check = new CheckBox {Text = flowsheet.GetTranslatedString(item), Tag = item, Checked = flowsheet.FlowsheetOptions.VisibleProperties[selkey].Contains(item) };
                     check.CheckedChanged += (sender2, e2) => {
                         if (check.Checked.GetValueOrDefault())
                         {
-                            if (!flowsheet.FlowsheetOptions.VisibleProperties[aTypeRefs[selvalue]].Contains(check.Tag.ToString()))
+                            if (!flowsheet.FlowsheetOptions.VisibleProperties[selkey].Contains(check.Tag.ToString()))
                             {
-                                flowsheet.FlowsheetOptions.VisibleProperties[aTypeRefs[selvalue]].Add(check.Tag.ToString());
+                                flowsheet.FlowsheetOptions.VisibleProperties[selkey].Add(check.Tag.ToString());
                             }
                         }
                         else
                         {
-                            if (flowsheet.FlowsheetOptions.VisibleProperties[aTypeRefs[selvalue]].Contains(check.Tag.ToString()))
+                            if (flowsheet.FlowsheetOptions.VisibleProperties[selkey].Contains(check.Tag.ToString()))
                             {
-                                flowsheet.FlowsheetOptions.VisibleProperties[aTypeRefs[selvalue]].Remove(check.Tag.ToString());
+                                flowsheet.FlowsheetOptions.VisibleProperties[selkey].Remove(check.Tag.ToString());
                             }
                         }
                     };
                     var newitem = new StackLayoutItem(check);
                     PropertyListView.Items.Add(newitem);
                 }
-                this.ResumeLayout();
+                PropertyListView.ResumeLayout();
             };
 
-            this.CreateAndAddControlRow(PropertyListView);
+            this.CreateAndAddControlRow(new Scrollable { Content = PropertyListView });
 
         }
     }

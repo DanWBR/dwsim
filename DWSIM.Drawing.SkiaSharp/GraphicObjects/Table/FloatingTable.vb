@@ -164,7 +164,7 @@ Namespace GraphicObjects.Tables
             Dim tpaint As New SKPaint()
 
             With tpaint
-                .TextSize = FontSize
+                .TextSize = FontSize - 1
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White
                 .IsStroke = False
@@ -173,7 +173,7 @@ Namespace GraphicObjects.Tables
             Dim tbpaint As New SKPaint()
 
             With tbpaint
-                .TextSize = FontSize
+                .TextSize = FontSize - 1
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White
                 .IsStroke = False
@@ -193,7 +193,7 @@ Namespace GraphicObjects.Tables
 
             With spaint
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = SKColors.Gray.WithAlpha(100)
+                .Color = SKColors.LightGray.WithAlpha(100)
                 .IsStroke = False
             End With
 
@@ -292,13 +292,13 @@ Namespace GraphicObjects.Tables
 
                     'draw shadow
 
-                    Me.DrawRoundRect(g, X + 4, Y + 4, Width, Height, 10, spaint)
+                    Me.DrawRoundRect(g, X + 4, Y + 4, Width, Height, 5, spaint)
                     Dim rect0 As SKRect = GetRect(X + 4, Y + 4, Width, Height)
 
 
                     Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
-                    DrawRoundRect(g, X, Y, Width, Height, 6, bpaint)
+                    DrawRoundRect(g, X, Y, Width, Height, 5, bpaint)
 
                     'desenhar textos e retangulos
                     canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3, Y + Padding + size.Height, tbpaint)
