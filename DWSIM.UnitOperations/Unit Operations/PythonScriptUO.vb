@@ -516,6 +516,48 @@ Namespace UnitOperations
                 Return False
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Python Script Block: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Python Interpreter: " & ExecutionEngine.ToString())
+            str.AppendLine()
+            str.AppendLine("Input String Variables")
+            str.AppendLine()
+            For Each par In InputStringVariables
+                str.AppendLine("    " + par.Key + ": " + par.Value)
+            Next
+            str.AppendLine()
+            str.AppendLine("Input Numeric Variables")
+            str.AppendLine()
+            For Each par In InputVariables
+                str.AppendLine("    " + par.Key + ": " + par.Value.ToString(numberformat))
+            Next
+            str.AppendLine()
+            str.AppendLine("Output Variables")
+            str.AppendLine()
+            For Each par In OutputVariables
+                str.AppendLine("    " + par.Key + ": " + par.Value.ToString(numberformat))
+            Next
+
+
+            Return str.ToString
+
+        End Function
+
     End Class
 
 End Namespace

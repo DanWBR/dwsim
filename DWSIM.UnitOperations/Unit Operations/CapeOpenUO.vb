@@ -1263,6 +1263,27 @@ Namespace UnitOperations
                 Return False
             End Get
         End Property
+
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim reports As New Text.StringBuilder
+
+            Dim ur As CapeOpen.ICapeUnitReport = _couo
+            If Not ur Is Nothing Then
+                Dim reps As String() = ur.reports
+                For Each r As String In reps
+                    ur.selectedReport = r
+                    Dim msg2 As String = ""
+                    ur.ProduceReport(msg2)
+                    reports.AppendLine(msg2)
+                Next
+            End If
+
+            Return reports.ToString
+
+        End Function
+
     End Class
 
 End Namespace

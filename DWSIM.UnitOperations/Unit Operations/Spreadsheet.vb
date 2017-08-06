@@ -921,6 +921,41 @@ Namespace UnitOperations
                 Return False
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Spreadsheet Block: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Spreadsheet Path: " & Filename)
+            str.AppendLine()
+            str.AppendLine("Input Parameters")
+            str.AppendLine()
+            For Each par In InputParams.Values
+                str.AppendLine("    " + par.Name + ": " + par.Value.ToString(numberformat) + " " + par.Unit)
+            Next
+            str.AppendLine()
+            str.AppendLine("Output Parameters")
+            str.AppendLine()
+            For Each par In OutputParams.Values
+                str.AppendLine("    " + par.Name + ": " + par.Value.ToString(numberformat) + " " + par.Unit)
+            Next
+
+            Return str.ToString
+
+        End Function
+
     End Class
 
 End Namespace

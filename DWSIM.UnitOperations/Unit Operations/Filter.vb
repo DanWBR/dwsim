@@ -461,6 +461,51 @@ Namespace UnitOperations
                 Return False
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Solids Filter: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions")
+            str.AppendLine()
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Mole flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, istr.Phases(0).Properties.molarflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.molarflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Parameters")
+            str.AppendLine()
+            str.AppendLine("    Calculation mode: " & CalcMode.ToString)
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            str.AppendLine("    Energy Balance: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Total Filter Area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.TotalFilterArea).ToString(numberformat, ci) & " " & su.area)
+            str.AppendLine("    Cake Relative Humidity (%): " & Me.CakeRelativeHumidity.ToString(numberformat, ci))
+            str.AppendLine("    Cycle Time: " & SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.FilterCycleTime).ToString(numberformat, ci) & " " & su.time)
+            str.AppendLine("    Filter Medium Resistance: " & SystemsOfUnits.Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance).ToString(numberformat, ci) & " " & su.mediumresistance)
+            str.AppendLine("    Specific Cake Resistance: " & SystemsOfUnits.Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance).ToString(numberformat, ci) & " " & su.cakeresistance)
+            str.AppendLine("    Submerged Area Fraction: " & Me.SubmergedAreaFraction.ToString(numberformat, ci))
+            str.AppendLine("    Total Pressure Drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.PressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
+
+            Return str.ToString
+
+        End Function
+
+
     End Class
 
 End Namespace

@@ -1099,6 +1099,48 @@ Label_00CC:
                 Return False
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Flowsheet Block: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Flowsheet Path: " & SimulationFile)
+            str.AppendLine("    Mass Transfer Option: " & MassTransferMode.ToString)
+            str.AppendLine()
+            str.AppendLine("Linked Input Variables")
+            str.AppendLine()
+            For Each par In InputParams.Values
+                str.AppendLine("    " + Fsheet.SimulationObjects(par.ObjectID).GraphicObject.Tag + ", " +
+                FlowSheet.GetTranslatedString(par.ObjectProperty) + ": " +
+                Fsheet.SimulationObjects(par.ObjectID).GetPropertyValue(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem).ToString() + " " +
+                Fsheet.SimulationObjects(par.ObjectID).GetPropertyUnit(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem))
+            Next
+            str.AppendLine()
+            str.AppendLine("Linked Output Variables")
+            str.AppendLine()
+            For Each par In OutputParams.Values
+                str.AppendLine("    " + Fsheet.SimulationObjects(par.ObjectID).GraphicObject.Tag + ", " +
+                FlowSheet.GetTranslatedString(par.ObjectProperty) + ": " +
+                Fsheet.SimulationObjects(par.ObjectID).GetPropertyValue(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem).ToString() + " " +
+                Fsheet.SimulationObjects(par.ObjectID).GetPropertyUnit(par.ObjectProperty, FlowSheet.FlowsheetOptions.SelectedUnitSystem))
+            Next
+
+            Return str.ToString
+
+        End Function
+
     End Class
 
 End Namespace

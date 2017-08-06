@@ -6199,7 +6199,7 @@ Namespace Streams
                 If d.Key.Contains("SPACE") Then
                     results.TextOutput += System.Environment.NewLine
                 Else
-                    results.TextOutput += (id.PadRight(40) & d.Value.ToArray.ToArrayString(CultureInfo.CurrentUICulture, numberformat).PadRight(10) & vbTab & results.DataUnits(d.Key)) & System.Environment.NewLine
+                    results.TextOutput += (id.PadRight(40) & d.Value.ToArray.ToArrayString(CultureInfo.CurrentUICulture, numberformat).PadRight(20) & vbTab & results.DataUnits(d.Key)) & System.Environment.NewLine
                 End If
             Next
 
