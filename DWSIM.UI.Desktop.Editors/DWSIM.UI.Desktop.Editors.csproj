@@ -80,6 +80,7 @@
     <Compile Include="Compounds\Tools.cs" />
     <Compile Include="FlowsheetAnalysis\Optimization.cs" />
     <Compile Include="FlowsheetAnalysis\SensitivityAnalysis.cs" />
+    <Compile Include="General\FloatingTables.cs" />
     <Compile Include="LogicalBlocks\LogicalBlocks.cs" />
     <Compile Include="Results\ResultsViewer.cs" />
     <Compile Include="ScriptManager\ScriptItem.cs" />

@@ -221,7 +221,10 @@ namespace DWSIM.UI.Forms
             {
                 var cont = UI.Shared.Common.GetDefaultContainer();
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm("Misc Settings", 500, 500, cont);
+                cont.Tag = "Misc Settings";
+                var cont2 = new UI.Desktop.Editors.FloatingTablesView(FlowsheetObject);
+                cont2.Tag = "Floating Tables";
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new []{cont, cont2});
                 form.Show();
                 form.Width += 1;
             };
