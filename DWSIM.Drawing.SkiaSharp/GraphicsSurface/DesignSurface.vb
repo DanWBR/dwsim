@@ -137,7 +137,8 @@ Public Class GraphicsSurface
 
         Dim text As New Text.StringBuilder
 
-        text.AppendLine("HOW TO CREATE AND RUN A NEW SIMULATION")
+        text.AppendLine("How to create and run a new simulation")
+        text.AppendLine("")
         text.AppendLine("1. Select Compounds to add to the simulation ('Setup' > 'Compounds')")
         text.AppendLine("2. Add at least one Property Package and one Flash Algorithm ('Setup' > 'Basis')")
         text.AppendLine("3. Add Unit Operations to the Flowsheet ('Objects' > 'Add New Simulation Object')")
@@ -146,12 +147,19 @@ Public Class GraphicsSurface
         text.AppendLine("6. Edit properties of the upstream Material Streams and all Unit Operations (select object, right-click, select 'Edit Properties')")
         text.AppendLine("7. Run the simulation (press F5)")
         text.AppendLine("8. To view the simulation results, go the 'Results' tab and select an object on the list.")
+        text.AppendLine("")
+        text.AppendLine("Useful shortcuts")
+        text.AppendLine("")
+        text.AppendLine("Double-click on selected object: edit properties")
+        text.AppendLine("SHIFT + Double-click on selected object: edit connections")
+        text.AppendLine("ALT + Double-click on selected object: view results")
+        text.AppendLine("CTRL + Double-click anywhere on flowsheet: zoom/fit to screen")
 
         Dim tpaint As New SKPaint()
         With tpaint
             .TextSize = 20
             .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            .Color = SKColors.DimGray
+            .Color = SKColors.LightSlateGray
             .IsStroke = False
         End With
 
