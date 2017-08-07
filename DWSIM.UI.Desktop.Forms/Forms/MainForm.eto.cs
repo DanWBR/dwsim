@@ -23,6 +23,13 @@ namespace DWSIM.UI
 
         void InitializeComponent()
         {
+
+            //exception handling
+
+            Application.Instance.UnhandledException += (sender, e) => {
+                new DWSIM.UI.Desktop.Editors.UnhandledExceptionView((Exception)e.ExceptionObject).ShowModalAsync();
+            };
+
             string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
             Title = "DWSIMLauncher".Localize();

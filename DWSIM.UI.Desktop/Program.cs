@@ -109,16 +109,7 @@ namespace DWSIM.UI.Desktop
                         platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
                         break;
                 }
-                try
-                {
-                    new Application(platform).Run(new MainForm());
-                }
-                catch (Exception ex)
-                {
-                    string configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data");
-                    if (!Directory.Exists(configfiledir)) Directory.CreateDirectory(configfiledir);
-                    File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), ex.ToString());
-                }
+                new Application(platform).Run(new MainForm());
             }
         }
 
