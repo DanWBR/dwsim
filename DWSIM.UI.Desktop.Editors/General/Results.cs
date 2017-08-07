@@ -579,7 +579,7 @@ namespace DWSIM.UI.Desktop.Editors
             model.LegendOrientation = LegendOrientation.Vertical;
             model.LegendPosition = LegendPosition.BottomCenter;
             model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView;
-            //model.AddLineSeries(x, y);
+            model.AddLineSeries(x, y);
 
             return model;
 
