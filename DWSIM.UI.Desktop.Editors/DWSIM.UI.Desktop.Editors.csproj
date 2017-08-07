@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Compounds\BulkC7.cs" />
     <Compile Include="Compounds\CompoundCreator.cs" />
+    <Compile Include="Compounds\CompoundViewer.cs" />
     <Compile Include="Compounds\DistCurves.cs" />
     <Compile Include="Compounds\Tools.cs" />
     <Compile Include="FlowsheetAnalysis\Optimization.cs" />

@@ -32,6 +32,16 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
+            string imgprefix = "DWSIM.UI.Desktop.Editors.Resources.Icons.";
+
+            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
+
+            Maximizable = false;
+            Minimizable = false;
+            WindowStyle = Eto.Forms.WindowStyle.Default;
+
+            Title = "Error";
+
             var mystring = SharedClasses.EncryptString.StringCipher.Decrypt("YEZeCozmw0l3XjOYI0EpOXHh1LK9as6Bi5Gwqr7pYZyXtcNYQyzayHXts6NjAJlpfixoim98NAwVHli/+h1fYk6g4W82ewXDxkLwzg5SFCCSS2W0K3TvGMgC0wQWuKfrut0QdnByVKZ4x+/svdQwwXsUkZdELOUtnWiOdeV6WIQ=", "dwsim000000");
             var mystring2 = SharedClasses.EncryptString.StringCipher.Decrypt("T+h/AQaXoM7xMDrov6dkD/82uHShQ6gX7MD+yyPG1ALdchPnpYsxHZWU8YcwP3jTPCZWRL9mmAWnQnWtp4ETyYh17Cgjt1EDYbEJJvh/PacWXami/6btnnbE0D5HBpnYrKamsf6qjjx9JbhQOZIvXJv6dIlJ7lMm5vWkhmLpNuc=", "dwsim000000");
 
@@ -52,7 +62,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
             }
 
-            var container = new TableLayout();
+            var container = new TableLayout() { Padding = new Padding(10), Spacing = new Size(5, 5) };
 
             container.Rows.Add(new TableRow(new Label { Text = "DWSIM generated an unhandled error/exception." }));
 

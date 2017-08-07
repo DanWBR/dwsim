@@ -61,6 +61,10 @@ namespace DWSIM.UI.Forms
 
             FlowsheetControl.FlowsheetObject = FlowsheetObject;
 
+            FlowsheetControl.KeyDown += (sender, e) => {
+                if (e.Key == Keys.Delete) DeleteObject();
+            };
+
             ClientSize = new Size(1024, 768);
 
             var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")), Shortcut = Keys.S | Application.Instance.AlternateModifier };
@@ -204,7 +208,7 @@ namespace DWSIM.UI.Forms
                 var cont2 = new Desktop.Editors.CompoundTools(FlowsheetObject);
                 cont2.Tag = "Compound Tools";
 
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 850, 500, new Control[] { cont, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 870, 500, new Control[] { cont, cont2 });
                 form.Show();
 
             };
@@ -630,10 +634,7 @@ namespace DWSIM.UI.Forms
 
             item6.Click += (sender, e) =>
             {
-                if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                {
-                    FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
-                }
+                DeleteObject();
             };
 
             selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
@@ -807,6 +808,16 @@ namespace DWSIM.UI.Forms
             form.Show();
             form.Width += 1;
 
+        }
+
+        private void DeleteObject()
+        {
+            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+            if (obj == null) return; 
+            if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+            {
+                FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
+            }
         }
 
     }

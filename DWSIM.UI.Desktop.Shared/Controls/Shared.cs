@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
 
+using DWSIM.ExtensionMethods;
+
 namespace DWSIM.UI.Shared
 {
     public static class Common
@@ -56,6 +58,27 @@ namespace DWSIM.UI.Shared
             {
                 form.Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true };
             }else{
+                form.Content = content;
+            }
+            return form;
+
+        }
+
+        public static Form GetDefaultEditorForm(string title, int width, int height, Control content, bool scrollable)
+        {
+            var form = new Form()
+            {
+                Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
+                Title = title,
+                ClientSize = new Size(width, height),
+                ShowInTaskbar = true
+            };
+            if (scrollable)
+            {
+                form.Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true };
+            }
+            else
+            {
                 form.Content = content;
             }
             return form;
@@ -505,6 +528,56 @@ namespace DWSIM.UI.Shared
             return check;
         }
 
+        public static OxyPlot.PlotModel CreatePlotModel(double[] x, double[] y, string title, string subtitle, string xtitle, string ytitle)
+        {
+
+            var model = new OxyPlot.PlotModel() { Subtitle = subtitle, Title = title };
+            model.TitleFontSize = 18;
+            model.SubtitleFontSize = 16;
+            model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+            {
+                MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                FontSize = 16,
+                Title = xtitle
+            });
+            if (Math.Abs(y[0] - 1.0f) < 0.0001)
+            {
+                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+                {
+                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                    Position = OxyPlot.Axes.AxisPosition.Left,
+                    FontSize = 16,
+                    Title = ytitle,
+                    StartPosition = 1,
+                    EndPosition = 0,
+                    MajorStep = 1.0f,
+                    MinorStep = 0.5f
+                });
+            }
+            else
+            {
+                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+                {
+                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                    Position = OxyPlot.Axes.AxisPosition.Left,
+                    FontSize = 16,
+                    Title = ytitle
+                });
+            }
+            model.LegendFontSize = 16;
+            model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
+            model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
+            model.LegendPosition = OxyPlot.LegendPosition.BottomCenter;
+            model.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinView;
+            model.AddLineSeries(x, y);
+
+            return model;
+
+        }
 
     }
 }

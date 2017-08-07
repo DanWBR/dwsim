@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
 using DWSIM.Thermodynamics.BaseClasses;
+using DWSIM.UI.Desktop.Shared;
 using Eto.Drawing;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
@@ -16,14 +17,16 @@ namespace DWSIM.UI.Desktop.Editors
     public class Compounds
     {
 
-        public IFlowsheet flowsheet;
+        public Flowsheet flowsheet;
         public TableLayout container;
 
         private ObservableCollection<CompoundItem> obslist = new ObservableCollection<CompoundItem>();
 
+        GridView listcontainer;
+
         public Compounds(IFlowsheet fs, TableLayout layout)
         {
-            flowsheet = fs;
+            flowsheet = (Flowsheet)fs;
             container = layout;
             Initialize();
         }
@@ -46,23 +49,44 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(new TableRow(new Label { Text = "Number of compounds available: " + complist.Count().ToString(), Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) }));
 
-            var searchcontainer = s.GetDefaultContainer();
-            searchcontainer.Padding = Padding.Empty;
+            var searchcontainer = new DynamicLayout();
 
-            var tb = s.CreateAndAddStringEditorRow2(searchcontainer, "Search", "Search by Name, Formula, CAS ID or Database (press ENTER to search)", "", null);
-            tb.KeyDown += (sender, e) =>
+            var txtsearch = new Label { Text = "Search  ", VerticalAlignment = VerticalAlignment.Center };
+            var edittext = new TextBox { Text = "", PlaceholderText = "Search by Name, Formula, CAS ID or Database (press ENTER to search)" };
+
+            var tr = new TableRow(txtsearch, edittext);
+
+            searchcontainer.AddRow(tr);
+
+            edittext.KeyDown += (sender, e) =>
             {
                 if (e.Key == Keys.Enter)
                 {
-                    newlist = complist.Where((x) => x.Name.ToLower().Contains(tb.Text.ToLower()) ||
-                                            x.Formula.ToLower().Contains(tb.Text.ToLower()) ||
-                                            x.CAS_Number.ToLower().Contains(tb.Text.ToLower()) ||
-                                            x.CurrentDB.ToLower().Contains(tb.Text.ToLower())).OrderBy((x) => x.Name).ToList();
+                    newlist = complist.Where((x) => x.Name.ToLower().Contains(edittext.Text.ToLower()) ||
+                                            x.Formula.ToLower().Contains(edittext.Text.ToLower()) ||
+                                            x.CAS_Number.ToLower().Contains(edittext.Text.ToLower()) ||
+                                            x.CurrentDB.ToLower().Contains(edittext.Text.ToLower())).OrderBy((x) => x.Name).ToList();
                     Application.Instance.AsyncInvoke(() => UpdateList(newlist));
                 }
             };
 
             container.Rows.Add(new TableRow(searchcontainer));
+
+            var txt = new Label { Text = "Click to view properties of the selected compound", VerticalAlignment = VerticalAlignment.Center };
+            var btn = new Button { Width = 200, Text = "View Properties" };
+
+            btn.Click += (sender, e) =>
+            {
+                if (listcontainer.SelectedItem == null) return;
+                var compound = ((CompoundItem)listcontainer.SelectedItem);
+                var form = s.GetDefaultEditorForm("Compound Properties: " + compound.Text, 800, 600, new CompoundViewer(flowsheet, flowsheet.AvailableCompounds[compound.Text]), false);
+                form.Show();
+            };
+
+            var cont = new DynamicLayout();
+            cont.AddRow(new TableRow(txt, null, btn));
+
+            container.Rows.Add(cont);
 
             UpdateList(complist);
 
@@ -86,7 +110,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
-            var listcontainer = new GridView { DataStore = obslist, RowHeight = 20 };
+            listcontainer = new GridView { DataStore = obslist, RowHeight = 20 };
 
             if (Application.Instance.Platform.IsWinForms) listcontainer.Height = 370;
 
