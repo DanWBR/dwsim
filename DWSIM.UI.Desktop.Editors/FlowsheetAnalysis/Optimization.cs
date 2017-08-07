@@ -25,7 +25,7 @@ using Ciloci.Flee;
 
 namespace DWSIM.UI.Desktop.Editors
 {
-    public class OptimizerView  : DynamicLayout
+    public class OptimizerView : DynamicLayout
     {
 
         public Flowsheet flowsheet;
@@ -34,7 +34,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         public DWSIM.SharedClasses.Flowsheet.Optimization.OptimizationCase mycase;
 
-        public OptimizerView (IFlowsheet fs)
+        public OptimizerView(IFlowsheet fs)
             : base()
         {
             flowsheet = (Flowsheet)fs;
@@ -58,12 +58,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             var objlist = flowsheet.SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
             objlist.Insert(0, "");
-            
+
             s.CreateAndAddDescriptionRow(this, "Use the optimizer to bring the flowsheet to a new 'state' regarding the maximum or minimum or value of a user-defined parameter.");
 
             s.CreateAndAddLabelRow(this, "Case Description:");
             var etdesc = s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
-            
+
             s.CreateAndAddDropDownRow(this, "Optimization Type", new[] { "Minimization", "Maximization" }.ToList(), (int)mycase.type, (arg3, arg2) => { mycase.type = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTType)arg3.SelectedIndex; });
             s.CreateAndAddDropDownRow(this, "Objective Function", new[] { "Variable", "Expression" }.ToList(), (int)mycase.objfunctype, (arg3, arg2) => { mycase.objfunctype = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTObjectiveFunctionType)arg3.SelectedIndex; });
 
@@ -71,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(this, nf, "Absolute Tolerance", mycase.tolerance, (arg3, arg2) => { mycase.tolerance = arg3.Text.ToDoubleFromCurrent(); });
 
             var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
-           
+
             s.CreateAndAddLabelAndButtonRow(this, "Variables", "Add Variable", null, (arg1, arg2) =>
             {
 
@@ -100,7 +100,9 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddFullTextBoxRow(this, mycase.expression, (arg3, arg2) => { mycase.expression = arg3.Text; });
 
             s.CreateAndAddLabelRow(this, "Optimization Control");
-            s.CreateAndAddDropDownRow(this, "Method", new[] { "Simplex", "LBFGS", "Truncated Newton", "Simplex (Bounded)", "LBFGS (Bounded)", "Truncated Newton (Bounded)" }.ToList(), (int)mycase.solvm, (arg3, arg2) => { mycase.solvm = (DWSIM.SharedClasses.Flowsheet.Optimization.OptimizationCase.SolvingMethod)arg3.SelectedIndex; });
+            int solvm = ((int)mycase.solvm - 5);
+            if (solvm < 0) solvm = 0;
+            s.CreateAndAddDropDownRow(this, "Method", new[] { "Simplex", "LBFGS", "Truncated Newton", "Simplex (Bounded)", "LBFGS (Bounded)", "Truncated Newton (Bounded)" }.ToList(), solvm, (arg3, arg2) => { mycase.solvm = (DWSIM.SharedClasses.Flowsheet.Optimization.OptimizationCase.SolvingMethod)(arg3.SelectedIndex + 5); });
             s.CreateAndAddTextBoxRow(this, "R", "Numerical derivative step", mycase.epsilon, (arg3, arg2) => { mycase.epsilon = arg3.Text.ToDoubleFromCurrent(); });
             s.CreateAndAddTextBoxRow(this, "R", "Barrier multiplier", mycase.barriermultiplier, (arg3, arg2) => { mycase.barriermultiplier = arg3.Text.ToDoubleFromCurrent(); });
 
@@ -157,9 +159,9 @@ namespace DWSIM.UI.Desktop.Editors
                 idx = objs.IndexOf(flowsheet.SimulationObjects[newiv.objectID].GraphicObject.Tag);
             }
 
-            s.CreateAndAddLabelRow(container , "Flowsheet Object Property Link");
+            s.CreateAndAddLabelRow(container, "Flowsheet Object Property Link");
 
-            s.CreateAndAddDropDownRow(container , "Object", objs, idx, (arg3c, arg2c) =>
+            s.CreateAndAddDropDownRow(container, "Object", objs, idx, (arg3c, arg2c) =>
             {
                 if (arg3c.SelectedIndex > 0)
                 {
@@ -175,9 +177,9 @@ namespace DWSIM.UI.Desktop.Editors
                     }
                     proplist.Insert(0, "");
                     proplist2 = proplist.Select(x => flowsheet.GetTranslatedString(x)).ToList();
-                    
+
                     spinprop.Items.Clear();
-                    spinprop.Items.AddRange(proplist2.Select((x) => new ListItem{Key = x, Text = x}));
+                    spinprop.Items.AddRange(proplist2.Select((x) => new ListItem { Key = x, Text = x }));
                 }
             });
 
@@ -200,7 +202,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             TextBox tviv = null;
-            spinprop = s.CreateAndAddDropDownRow(container , "Property", proplist2, idx2, (arg3c, arg2c) =>
+            spinprop = s.CreateAndAddDropDownRow(container, "Property", proplist2, idx2, (arg3c, arg2c) =>
             {
                 if (spinprop.SelectedIndex > 0)
                 {
@@ -211,13 +213,13 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             });
 
-            s.CreateAndAddLabelRow(container , "Variable Bounds");
-            s.CreateAndAddDescriptionRow(container , "Bounds will be taken into account only if you use a bounded solver.");
+            s.CreateAndAddLabelRow(container, "Variable Bounds");
+            s.CreateAndAddDescriptionRow(container, "Bounds will be taken into account only if you use a bounded solver.");
             s.CreateAndAddTextBoxRow(container, nf, "Lower Bound", newiv.lowerlimit.GetValueOrDefault(), (arg3, arg2) => { newiv.lowerlimit = arg3.Text.ToDoubleFromCurrent(); });
             s.CreateAndAddTextBoxRow(container, nf, "Upper Bound", newiv.upperlimit.GetValueOrDefault(), (arg3, arg2) => { newiv.upperlimit = arg3.Text.ToDoubleFromCurrent(); });
 
-            s.CreateAndAddLabelRow(container , "Initial Value");
-            s.CreateAndAddDescriptionRow(container , "Set the initial value of the variable (IND only, other variable types will have their values read from the flowsheet).");
+            s.CreateAndAddLabelRow(container, "Initial Value");
+            s.CreateAndAddDescriptionRow(container, "Set the initial value of the variable (IND only, other variable types will have their values read from the flowsheet).");
             tviv = s.CreateAndAddTextBoxRow(container, nf, "Initial Value", newiv.initialvalue, (arg3, arg2) => { newiv.initialvalue = arg3.Text.ToDoubleFromCurrent(); });
 
             ivcontainer.Items.Add(slcontainer);
@@ -232,64 +234,64 @@ namespace DWSIM.UI.Desktop.Editors
             GlobalSettings.Settings.SolverBreakOnException = true;
             Task st = new Task(() =>
             {
-                dialog = ProgressDialog.ShowWithAbort(this, "Optimizing flowsheet, please wait...","", true, "Abort",
-                                              (sender, e) =>
-                                              {
-                                                  dialog.Close();
-                                                  GlobalSettings.Settings.CalculatorStopRequested = true;
-                                                  if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
+
+                Application.Instance.Invoke(() =>
+                {
+                    dialog = ProgressDialog.ShowWithAbort(this, "Optimizing flowsheet, please wait...", "", false, "Abort",
+                                                  (sender, e) =>
                                                   {
-                                                      try
+                                                      dialog.Close();
+                                                      GlobalSettings.Settings.CalculatorStopRequested = true;
+                                                      if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
                                                       {
-                                                          GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
+                                                          try
+                                                          {
+                                                              GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
+                                                          }
+                                                          catch (Exception) { }
                                                       }
-                                                      catch (Exception) { }
-                                                  }
-                                              });
+                                                  });
+                });
 
                 RunOpt();
 
-            });
+            }, GlobalSettings.Settings.TaskCancellationTokenSource.Token);
 
             st.ContinueWith((t) =>
             {
                 flowsheet.optimizing = true;
-                dialog.Close();
+                Application.Instance.Invoke(() => dialog.Close());
                 if (t.Exception == null)
                 {
                     flowsheet.ShowMessage("Optimization finished successfully.", IFlowsheet.MessageType.Information);
                 }
                 else
                 {
-                    Application.Instance.Invoke(() =>
+                    if (!flowsheet.supressmessages)
                     {
-                        if (!flowsheet.supressmessages)
+                        foreach (Exception ex in t.Exception.InnerExceptions)
                         {
-                            foreach (Exception ex in t.Exception.InnerExceptions)
+                            Exception ex2 = ex.InnerException;
+                            if (ex2 != null)
                             {
-                                Exception ex2 = ex.InnerException;
-                                if (ex2 != null)
+                                while (ex2.InnerException != null)
                                 {
-                                    while (ex2.InnerException != null)
-                                    {
-                                        ex2 = ex2.InnerException;
-                                    }
-                                }
-                                else { ex2 = ex; }
-                                if (ex2 is System.OperationCanceledException)
-                                {
-                                    flowsheet.ShowMessage("Optimization aborted by the user.", IFlowsheet.MessageType.Information);
-                                }
-                                else
-                                {
-                                    flowsheet.ShowMessage("Error running optimization: " + ex2.Message, IFlowsheet.MessageType.GeneralError);
+                                    ex2 = ex2.InnerException;
                                 }
                             }
+                            else { ex2 = ex; }
+                            if (ex2 is System.OperationCanceledException)
+                            {
+                                flowsheet.ShowMessage("Optimization aborted by the user.", IFlowsheet.MessageType.Information);
+                            }
+                            else
+                            {
+                                flowsheet.ShowMessage("Error running optimization: " + ex2.Message, IFlowsheet.MessageType.GeneralError);
+                            }
                         }
-                        GlobalSettings.Settings.CalculatorStopRequested = false;
-                        GlobalSettings.Settings.CalculatorBusy = false;
-                        GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
-                    });
+                    }
+                    GlobalSettings.Settings.CalculatorStopRequested = false;
+                    GlobalSettings.Settings.CalculatorBusy = false;
                 }
             });
 
@@ -314,12 +316,15 @@ namespace DWSIM.UI.Desktop.Editors
             switch (mycase.solvm)
             {
                 case OptimizationCase.SolvingMethod.DN_NELDERMEAD_SIMPLEX:
+                case OptimizationCase.SolvingMethod.AL_BRENT:
+                case OptimizationCase.SolvingMethod.IPOPT:
                     var solver = new DotNumerics.Optimization.Simplex();
                     solver.Tolerance = mycase.tolerance;
                     solver.MaxFunEvaluations = mycase.maxits;
                     solver.ComputeMin(FunctionValue, unboundvars.ToArray());
                     break;
                 case OptimizationCase.SolvingMethod.DN_LBFGS:
+                case OptimizationCase.SolvingMethod.AL_LBFGS:
                     var solver2 = new DotNumerics.Optimization.L_BFGS_B();
                     solver2.Tolerance = mycase.tolerance;
                     solver2.MaxFunEvaluations = mycase.maxits;
@@ -332,12 +337,14 @@ namespace DWSIM.UI.Desktop.Editors
                     solver3.ComputeMin(FunctionValue, FunctionGradient, unboundvars.ToArray());
                     break;
                 case OptimizationCase.SolvingMethod.DN_NELDERMEAD_SIMPLEX_B:
+                case OptimizationCase.SolvingMethod.AL_BRENT_B:
                     var solver4 = new DotNumerics.Optimization.Simplex();
                     solver4.Tolerance = mycase.tolerance;
                     solver4.MaxFunEvaluations = mycase.maxits;
                     solver4.ComputeMin(FunctionValue, boundvars.ToArray());
                     break;
                 case OptimizationCase.SolvingMethod.DN_LBFGS_B:
+                case OptimizationCase.SolvingMethod.AL_LBFGS_B:
                     var solver5 = new DotNumerics.Optimization.L_BFGS_B();
                     solver5.Tolerance = mycase.tolerance;
                     solver5.MaxFunEvaluations = mycase.maxits;
@@ -377,9 +384,12 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 mycase.econtext = new ExpressionContext();
                 mycase.econtext.Imports.AddType(typeof(System.Math));
-                mycase.exbase = mycase.econtext.CompileGeneric<Double>(mycase.expression);
 
                 foreach (var item in indvars)
+                {
+                    mycase.econtext.Variables.Add(item.name, item.currentvalue);
+                }
+                foreach (var item in depvars)
                 {
                     mycase.econtext.Variables.Add(item.name, item.currentvalue);
                 }
@@ -387,6 +397,8 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     mycase.econtext.Variables.Add(item.name, item.currentvalue);
                 }
+
+                mycase.exbase = mycase.econtext.CompileGeneric<Double>(mycase.expression);
                 objval = mycase.exbase.Evaluate() + ReturnPenaltyValue();
             }
             else

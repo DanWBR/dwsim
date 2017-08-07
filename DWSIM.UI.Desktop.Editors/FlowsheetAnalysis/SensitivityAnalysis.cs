@@ -195,7 +195,7 @@ namespace DWSIM.UI.Desktop.Editors
                 Task.Factory.StartNew(() =>
                 {
 
-                    flowsheet.SolveFlowsheet();
+                    flowsheet.SolveFlowsheet(true);
 
                     iv1val0 = (double)flowsheet.SimulationObjects[iv1id].GetPropertyValue(iv1prop);
 
@@ -203,7 +203,7 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         iv1val = iv1ll + i * (iv1ul - iv1ll) / iv1np;
                         flowsheet.SimulationObjects[iv1id].SetPropertyValue(iv1prop, iv1val);
-                        flowsheet.SolveFlowsheet();
+                        flowsheet.SolveFlowsheet(true);
                         List<double> depvarvals = new List<double>();
                         foreach (var depvar in mycase.depvariables.Values)
                         {
@@ -221,7 +221,7 @@ namespace DWSIM.UI.Desktop.Editors
                     }
 
                     flowsheet.SimulationObjects[iv1id].SetPropertyValue(iv1prop, iv1val0);
-                    flowsheet.SolveFlowsheet();
+                    flowsheet.SolveFlowsheet(true);
 
                 }).ContinueWith((t) =>
                 {

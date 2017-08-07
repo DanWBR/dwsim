@@ -121,6 +121,8 @@ namespace DWSIM.UI.Desktop.Editors
                 container.Rows.Add(new TableRow(dyn6));
             }
 
+            Content = container;
+
         }
 
 

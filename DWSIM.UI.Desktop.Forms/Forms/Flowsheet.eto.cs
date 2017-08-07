@@ -380,7 +380,7 @@ namespace DWSIM.UI.Forms
                 Spreadsheet.WriteAll();
             });
             Application.Instance.AsyncInvoke(() => SpreadsheetControl.SuspendLayout());
-            FlowsheetObject.SolveFlowsheet();
+            FlowsheetObject.SolveFlowsheet(false);
             Application.Instance.AsyncInvoke(() => SpreadsheetControl.ResumeLayout());
             FlowsheetObject.UpdateSpreadsheet(() =>
             {
@@ -595,7 +595,7 @@ namespace DWSIM.UI.Forms
             }
 
             var item3 = new ButtonMenuItem { Text = "Calculate", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-play.png")) };
-            item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(obj);
+            item3.Click += (sender, e) => FlowsheetObject.SolveFlowsheet(false, obj);
 
             var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Console_96px.png")) };
             item4.Click += (sender, e) =>

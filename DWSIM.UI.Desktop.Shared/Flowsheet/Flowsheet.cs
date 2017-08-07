@@ -10,7 +10,7 @@ namespace DWSIM.UI.Desktop.Shared
 {
     public class Flowsheet : FlowsheetBase.FlowsheetBase
     {
-        private Action<string, IFlowsheet.MessageType> listeningaction ;
+        private Action<string, IFlowsheet.MessageType> listeningaction;
 
         public bool optimizing = false;
         public bool supressmessages = false;
@@ -44,7 +44,7 @@ namespace DWSIM.UI.Desktop.Shared
         {
             if (!supressmessages)
             {
-                Application.Instance.AsyncInvoke(() => { if (FlowsheetForm != null) FlowsheetForm.Invalidate(); });                
+                Application.Instance.AsyncInvoke(() => { if (FlowsheetForm != null) FlowsheetForm.Invalidate(); });
             }
         }
 
@@ -64,7 +64,7 @@ namespace DWSIM.UI.Desktop.Shared
             throw new NotImplementedException();
         }
 
-        public void SolveFlowsheet(ISimulationObject gobj = null)
+        public void SolveFlowsheet(bool wait, ISimulationObject gobj = null)
         {
 
             var surface = ((DWSIM.Drawing.SkiaSharp.GraphicsSurface)this.GetSurface());
@@ -85,26 +85,30 @@ namespace DWSIM.UI.Desktop.Shared
             GlobalSettings.Settings.SolverMode = 1;
             GlobalSettings.Settings.SolverBreakOnException = true;
 
-            solvform = new Forms.SolvingFlowsheet() ;
-            solvform.lblMessage.Text = "Solving flowsheet model, please wait...\n(touch to abort calculation)";
-            solvform.btnAbort.Click += (sender, e) => {
-                Application.Instance.AsyncInvoke(() =>
+            Application.Instance.AsyncInvoke(() =>
+            {
+                solvform = new Forms.SolvingFlowsheet();
+                solvform.lblMessage.Text = "Solving flowsheet model, please wait...\n(touch to abort calculation)";
+                solvform.btnAbort.Click += (sender, e) =>
                 {
-                    surface.BackgroundColor = SkiaSharp.SKColors.White;
-                    FlowsheetForm.Enabled = true;
-                    FlowsheetControl.Invalidate();
-                    solvform.Close();
-                });
-                GlobalSettings.Settings.CalculatorStopRequested = true;
-                if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
-                {
-                    try
+                    Application.Instance.AsyncInvoke(() =>
                     {
-                        GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
+                        surface.BackgroundColor = SkiaSharp.SKColors.White;
+                        FlowsheetForm.Enabled = true;
+                        FlowsheetControl.Invalidate();
+                        solvform.Close();
+                    });
+                    GlobalSettings.Settings.CalculatorStopRequested = true;
+                    if (GlobalSettings.Settings.TaskCancellationTokenSource != null)
+                    {
+                        try
+                        {
+                            GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
+                        }
+                        catch (Exception) { }
                     }
-                    catch (Exception) { }
-                }
-            };
+                };
+            });
 
             Task st = new Task(() =>
             {
@@ -139,13 +143,52 @@ namespace DWSIM.UI.Desktop.Shared
                 GlobalSettings.Settings.CalculatorBusy = false;
                 GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
             });
-                 
-            st.Start();
-            surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
-            FlowsheetForm.Enabled = false;
-            FlowsheetControl.Invalidate();
-            FlowsheetForm.Invalidate();
-            solvform.ShowModal(FlowsheetControl);
+
+
+            if (wait)
+            {
+                try
+                {
+                    st.Start();
+                    st.Wait();
+                }
+                catch (AggregateException aex)
+                {
+                    foreach (Exception ex2 in aex.InnerExceptions)
+                    {
+                        if (!supressmessages)
+                        {
+                            ShowMessage(ex2.ToString(), IFlowsheet.MessageType.GeneralError);
+                        }
+                    }
+                    GlobalSettings.Settings.CalculatorBusy = false;
+                    GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
+                }
+                catch (Exception ex)
+                {
+                    if (!supressmessages)
+                    {
+                        ShowMessage(ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                    }
+                    GlobalSettings.Settings.CalculatorBusy = false;
+                    GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
+                }
+            }
+            else
+            {
+
+                st.Start();
+
+                Application.Instance.AsyncInvoke(() =>
+                {
+                    surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
+                    FlowsheetForm.Enabled = false;
+                    FlowsheetControl.Invalidate();
+                    FlowsheetForm.Invalidate();
+                    solvform.ShowModal(FlowsheetControl);
+                });
+
+            }
 
         }
 
