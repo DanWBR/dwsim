@@ -387,6 +387,7 @@ namespace DWSIM.UI.Forms
                 Spreadsheet.EvaluateAll();
             });
             ResultsControl.UpdateList();
+            MaterialStreamListControl.UpdateList();
         }
 
         void Flowsheet_Shown(object sender, EventArgs e)

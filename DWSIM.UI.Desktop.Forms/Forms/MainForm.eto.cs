@@ -208,7 +208,6 @@ namespace DWSIM.UI
 
             Task.Factory.StartNew(() =>
             {
-                form.FlowsheetObject.FilePath = path;
                 if (System.IO.Path.GetExtension(path).ToLower() == ".dwxmz")
                 {
                     var xdoc = form.FlowsheetObject.LoadZippedXML(path);
@@ -217,6 +216,7 @@ namespace DWSIM.UI
                 {
                     form.FlowsheetObject.LoadFromXML(XDocument.Load(path));
                 }
+                form.FlowsheetObject.FilePath = path;
             }).ContinueWith((t) =>
             {
                 Application.Instance.Invoke(() =>

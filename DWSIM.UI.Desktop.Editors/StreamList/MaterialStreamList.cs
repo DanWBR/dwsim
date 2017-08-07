@@ -140,6 +140,8 @@ namespace DWSIM.UI.Desktop.Editors
 
             txtView.Text = textlist;
 
+            lblLastUpdate.Text = "Updated on: " + DateTime.Now.ToString();
+
         }
 
         void Init()
@@ -152,7 +154,6 @@ namespace DWSIM.UI.Desktop.Editors
             btnUpdate.Click += (sender, e) =>
             {
                 UpdateList();
-                lblLastUpdate.Text = "Updated on: " + DateTime.Now.ToString();
             };
 
             var txtpad = new TextBox{Text = PadSize.ToString()};
