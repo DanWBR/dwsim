@@ -148,10 +148,10 @@ namespace DWSIM.UI.Desktop.WPF
 
         protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 2) { 
-                fsurface.ZoomAll((int)this.ActualWidth, (int)this.ActualHeight); 
-                this.InvalidateVisual(); 
-            } 
+            //if (e.ClickCount == 2) { 
+            //    fsurface.ZoomAll((int)this.ActualWidth, (int)this.ActualHeight); 
+            //    this.InvalidateVisual(); 
+            //} 
         }
 
         protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)

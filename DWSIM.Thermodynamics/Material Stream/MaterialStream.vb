@@ -6195,11 +6195,11 @@ Namespace Streams
 
             For Each d As KeyValuePair(Of String, List(Of Double)) In results.Data
                 Dim id As String = d.Key
-                If d.Key.Length > 50 Then id = d.Key.Substring(0, 50) & "..."
+                If d.Key.Length > 36 Then id = d.Key.Substring(0, 36) & "..."
                 If d.Key.Contains("SPACE") Then
                     results.TextOutput += System.Environment.NewLine
                 Else
-                    results.TextOutput += (id.PadRight(60) & d.Value.ToArray.ToArrayString(CultureInfo.CurrentUICulture, numberformat).PadRight(20) & vbTab & results.DataUnits(d.Key)) & System.Environment.NewLine
+                    results.TextOutput += (id.PadRight(40) & d.Value.ToArray.ToArrayString(CultureInfo.CurrentUICulture, numberformat).PadRight(20) & vbTab & results.DataUnits(d.Key)) & System.Environment.NewLine
                 End If
             Next
 

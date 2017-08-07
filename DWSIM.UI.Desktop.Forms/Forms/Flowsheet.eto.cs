@@ -22,16 +22,16 @@ namespace DWSIM.UI.Forms
         public Desktop.Shared.Flowsheet FlowsheetObject;
         public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
         private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
-        
+
         private TableLayout SpreadsheetControl;
-        
+
         private TabPage TabPageSpreadsheet;
-        
+
         private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
-        
+
         private DWSIM.UI.Desktop.Editors.MaterialStreamListViewer MaterialStreamListControl;
 
-        private DWSIM.UI.Desktop.Editors.ScriptManager ScriptListControl ;
+        private DWSIM.UI.Desktop.Editors.ScriptManager ScriptListControl;
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -43,7 +43,7 @@ namespace DWSIM.UI.Forms
         {
 
             WindowState = Eto.Forms.WindowState.Maximized;
-                        
+
             FlowsheetObject = new Desktop.Shared.Flowsheet() { FlowsheetForm = this };
             FlowsheetObject.Initialize();
 
@@ -81,7 +81,8 @@ namespace DWSIM.UI.Forms
             var btnSensAnalysis = new ButtonMenuItem { Text = "Sensitivity Analysis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
 
-            btnSensAnalysis.Click += (sender, e) => {
+            btnSensAnalysis.Click += (sender, e) =>
+            {
                 var saeditor = new Desktop.Editors.SensAnalysisView(FlowsheetObject);
                 var form = Common.GetDefaultEditorForm("Sensitivity Analysis", 500, 700, saeditor);
                 form.Show();
@@ -94,7 +95,8 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            btnInsertText.Click += (sender, e) => {
+            btnInsertText.Click += (sender, e) =>
+            {
                 FlowsheetControl.AddObject("Text", 50, 50);
             };
 
@@ -113,53 +115,54 @@ namespace DWSIM.UI.Forms
                 FlowsheetControl.AddObject("Spreadsheet Table", 50, 50);
             };
 
-            FlowsheetControl.MouseDoubleClick += (sender, e) => {
-                var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                if (selobj != null) {
-                    if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
+            FlowsheetControl.MouseDoubleClick += (sender, e) =>
+            {
+                var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                if (e.Modifiers == Keys.Shift)
+                {
+                    if (obj == null) return;
+                    if (obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
+                        obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
                     {
-                        var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (TableGraphic)selobj };
-                        editor.Show();
-                    } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable)
-                    {
-                        var editor = new DWSIM.UI.Desktop.Editors.Tables.SpreadsheetTableEditor { Table = (SpreadsheetTableGraphic)selobj };
-                        editor.Show();
-                    } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable)
-                    {
-                        var editor = new DWSIM.UI.Desktop.Editors.Tables.MasterPropertyTableEditor { Table = (MasterTableGraphic)selobj };
-                        editor.Show();
-                    } else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
-                    {
-                        var txtobj = (TextGraphic)selobj;
-                        var container = new TableLayout();
-                        var txt = new TextArea { Text = txtobj.Text };
-                        txt.TextChanged += (sender2, e2) => {
-                            txtobj.Text = txt.Text;
-                        };
-                        container.Rows.Add(new TableRow(txt));
-                        var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 400, 400, container , false);
-                        editor.Show();
+                        return;
                     }
-
-
+                    EditConnections();
                 }
+                else if (e.Modifiers == Keys.Alt)
+                {
+                    if (obj == null) return;
+                    ViewSelectedObjectResults();
+                }
+                else if (e.Modifiers == Keys.Control)
+                {
+                    var surface = FlowsheetControl.FlowsheetSurface;
+                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
+                    FlowsheetControl.Invalidate();
+                }
+                else
+                {
+                    if (obj == null) return;
+                    EditSelectedObjectProperties();
+                }
+
             };
 
             var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
             chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
-            chkSimSolver.CheckedChanged += (sender, e) => {
+            chkSimSolver.CheckedChanged += (sender, e) =>
+            {
                 FlowsheetObject.Options.SimultaneousAdjustSolverEnabled = chkSimSolver.Checked;
             };
 
             Menu = new MenuBar();
             switch (GlobalSettings.Settings.RunningPlatform())
-            { 
+            {
                 case GlobalSettings.Settings.Platform.Mac:
                     var btnfile = (ButtonMenuItem)Menu.Items.Where((x) => x.Text == "&File").FirstOrDefault();
-                    btnfile.Items.AddRange( new []{ btnSave, btnSaveAs });
+                    btnfile.Items.AddRange(new[] { btnSave, btnSaveAs });
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose }});
+                    Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose } });
                     break;
                 case GlobalSettings.Settings.Platform.Windows:
                     Menu.ApplicationItems.AddRange(new[] { btnSave, btnSaveAs, btnClose });
@@ -183,15 +186,17 @@ namespace DWSIM.UI.Forms
                     //Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities } });
                     break;
             }
-            
+
             btnClose.Click += (sender, e) => Close();
 
-            btnObjects.Click += (sender, e) => {
+            btnObjects.Click += (sender, e) =>
+            {
                 var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl.Height };
                 insform.ShowModal(this);
             };
 
-            btnComps.Click += (sender, e) => {
+            btnComps.Click += (sender, e) =>
+            {
                 var cont = new TableLayout();
                 new DWSIM.UI.Desktop.Editors.Compounds(FlowsheetObject, cont);
                 cont.Tag = "Simulation Compounds";
@@ -199,7 +204,7 @@ namespace DWSIM.UI.Forms
                 var cont2 = new Desktop.Editors.CompoundTools(FlowsheetObject);
                 cont2.Tag = "Compound Tools";
 
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 850, 500, new Control[]{cont, cont2});
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 850, 500, new Control[] { cont, cont2 });
                 form.Show();
 
             };
@@ -224,12 +229,13 @@ namespace DWSIM.UI.Forms
                 cont.Tag = "Settings";
                 var cont2 = new UI.Desktop.Editors.FloatingTablesView(FlowsheetObject);
                 cont2.Tag = "Floating Tables";
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new []{cont, cont2});
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new[] { cont, cont2 });
                 form.Show();
                 form.Width += 1;
             };
 
-            btnSolve.Click += (sender, e) => {
+            btnSolve.Click += (sender, e) =>
+            {
                 SolveFlowsheet();
             };
 
@@ -290,8 +296,8 @@ namespace DWSIM.UI.Forms
                 return Spreadsheet.GetDataFromRange(range);
             });
 
-            SpreadsheetControl =  Spreadsheet.GetSpreadsheet(FlowsheetObject);
-            
+            SpreadsheetControl = Spreadsheet.GetSpreadsheet(FlowsheetObject);
+
             ResultsControl = new DWSIM.UI.Desktop.Editors.ResultsViewer(FlowsheetObject);
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
@@ -362,7 +368,8 @@ namespace DWSIM.UI.Forms
 
             Closing += Flowsheet_Closing;
 
-            Closed += (sender, e) => {
+            Closed += (sender, e) =>
+            {
                 FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationClosed, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
             };
 
@@ -578,14 +585,7 @@ namespace DWSIM.UI.Forms
             var item2 = new ButtonMenuItem { Text = "Edit Connections", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Electrical_96px.png")) };
             item2.Click += (sender, e) =>
             {
-                var cont = UI.Shared.Common.GetDefaultContainer();
-                UI.Shared.Common.CreateAndAddLabelRow(cont, "Object Connections".Localize());
-                UI.Shared.Common.CreateAndAddDescriptionRow(cont, "ConnectorsEditorDescription".Localize());
-                new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont);
-                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Connections", 500, 500, cont);
-                form.ShowInTaskbar = false;
-                form.Show();
-                form.Width += 1;
+                EditConnections();
             };
 
             if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
@@ -600,7 +600,7 @@ namespace DWSIM.UI.Forms
             var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Console_96px.png")) };
             item4.Click += (sender, e) =>
             {
-                var txt = new TextArea { ReadOnly = true, Wrap = true };
+                var txt = new TextArea { ReadOnly = true, Wrap = true, Font = Fonts.Monospace(SystemFonts.Default().Size) };
                 txt.Text = "Please wait, debugging object...";
                 var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300);
                 Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);
@@ -610,85 +610,13 @@ namespace DWSIM.UI.Forms
             var menuitem1 = new ButtonMenuItem { Text = "Edit Properties", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
             menuitem1.Click += (sender, e) =>
             {
-                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO)
-                {
-                    ((UnitOperations.UnitOperations.CapeOpenUO)obj).Edit();
-                }
-                else
-                {
-                    var cont = UI.Shared.Common.GetDefaultContainer();
-                    if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
-                    {
-                        new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
-                    {
-                        new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
-                    {
-                        new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust)
-                    {
-                        DWSIM.UI.Desktop.Editors.LogicalBlocks.AdjustEditor.Populate(obj, cont);
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
-                    {
-                        DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Recycle)
-                    {
-                        DWSIM.UI.Desktop.Editors.LogicalBlocks.RecycleEditor.Populate(obj, cont);
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle)
-                    {
-                        DWSIM.UI.Desktop.Editors.LogicalBlocks.EnergyRecycleEditor.Populate(obj, cont);
-                    }
-                    else
-                    {
-                        new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
-                    }
-                    if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Pipe)
-                    {
-                        cont.Tag = "General";
-                        var cont2 = UI.Shared.Common.GetDefaultContainer();
-                        cont2.Tag = "Hydraulic Profile";
-                        new PipeHydraulicProfile(obj, cont2);
-                        var cont3 = UI.Shared.Common.GetDefaultContainer();
-                        cont3.Tag = "Thermal Profile";
-                        new PipeThermalProfile(obj, cont3);
-                        var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new[] { cont, cont2, cont3 });
-                        form.Show();
-                        form.Width += 1;
-                    }
-                    else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
-                    {
-                        cont.Tag = "General";
-                        var scripteditor = new TextArea() {Text = ((CustomUO)obj).ScriptText, Wrap = false, AcceptsReturn = true, AcceptsTab = true, SpellCheck = false, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize)};
-                        scripteditor.Tag = "Python Script";
-                        var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, scripteditor });
-                        form.Show();
-                        form.Width += 1;
-                    }
-                    else {
-                        var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);
-                        form.Show();
-                        form.Width += 1;                    
-                    }
-                }
+                EditSelectedObjectProperties();
             };
 
             var menuitem2 = new ButtonMenuItem { Text = "View Results", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png")) };
             menuitem2.Click += (sender, e) =>
             {
-                var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
-                var container = new TableLayout();
-                new DWSIM.UI.Desktop.Editors.Results(obj, container);
-                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container, true);
-                form.ShowInTaskbar = false;
-                form.Show();
-                form.Width += 1;
+                ViewSelectedObjectResults();
             };
 
             var item5 = new ButtonMenuItem { Text = "Clone", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Copy_96px.png")) };
@@ -739,6 +667,145 @@ namespace DWSIM.UI.Forms
             deselctxmenu.Items.AddRange(new MenuItem[] { item0 });
 
             return;
+
+        }
+
+        void EditConnections()
+        {
+            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+            if (obj == null) return;
+            var cont = UI.Shared.Common.GetDefaultContainer();
+            UI.Shared.Common.CreateAndAddLabelRow(cont, "Object Connections".Localize());
+            UI.Shared.Common.CreateAndAddDescriptionRow(cont, "ConnectorsEditorDescription".Localize());
+            new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont);
+            var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Connections", 500, 500, cont);
+            form.ShowInTaskbar = false;
+            form.Show();
+            form.Width += 1;
+        }
+
+        private void EditSelectedObjectProperties()
+        {
+            var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+            if (selobj != null)
+            {
+                if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
+                {
+                    var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (TableGraphic)selobj };
+                    editor.Show();
+                }
+                else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable)
+                {
+                    var editor = new DWSIM.UI.Desktop.Editors.Tables.SpreadsheetTableEditor { Table = (SpreadsheetTableGraphic)selobj };
+                    editor.Show();
+                }
+                else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable)
+                {
+                    var editor = new DWSIM.UI.Desktop.Editors.Tables.MasterPropertyTableEditor { Table = (MasterTableGraphic)selobj };
+                    editor.Show();
+                }
+                else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
+                {
+                    var txtobj = (TextGraphic)selobj;
+                    var container = new TableLayout();
+                    var txt = new TextArea { Text = txtobj.Text };
+                    txt.TextChanged += (sender2, e2) =>
+                    {
+                        txtobj.Text = txt.Text;
+                    };
+                    container.Rows.Add(new TableRow(txt));
+                    var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 400, 400, container, false);
+                    editor.Show();
+                }
+                else
+                {
+                    var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+                    if (obj == null) return;
+                    if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO)
+                    {
+                        ((UnitOperations.UnitOperations.CapeOpenUO)obj).Edit();
+                    }
+                    else
+                    {
+                        var cont = UI.Shared.Common.GetDefaultContainer();
+                        if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                        {
+                            new DWSIM.UI.Desktop.Editors.MaterialStreamEditor(obj, cont);
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.DistillationColumn)
+                        {
+                            new DWSIM.UI.Desktop.Editors.DistillationColumnEditor(obj, cont);
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.AbsorptionColumn)
+                        {
+                            new DWSIM.UI.Desktop.Editors.AbsorptionColumnEditor(obj, cont);
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Adjust)
+                        {
+                            DWSIM.UI.Desktop.Editors.LogicalBlocks.AdjustEditor.Populate(obj, cont);
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Spec)
+                        {
+                            DWSIM.UI.Desktop.Editors.LogicalBlocks.SpecEditor.Populate(obj, cont);
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_Recycle)
+                        {
+                            DWSIM.UI.Desktop.Editors.LogicalBlocks.RecycleEditor.Populate(obj, cont);
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.OT_EnergyRecycle)
+                        {
+                            DWSIM.UI.Desktop.Editors.LogicalBlocks.EnergyRecycleEditor.Populate(obj, cont);
+                        }
+                        else
+                        {
+                            new DWSIM.UI.Desktop.Editors.GeneralEditors(obj, cont);
+                        }
+                        if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.Pipe)
+                        {
+                            cont.Tag = "General";
+                            var cont2 = UI.Shared.Common.GetDefaultContainer();
+                            cont2.Tag = "Hydraulic Profile";
+                            new PipeHydraulicProfile(obj, cont2);
+                            var cont3 = UI.Shared.Common.GetDefaultContainer();
+                            cont3.Tag = "Thermal Profile";
+                            new PipeThermalProfile(obj, cont3);
+                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new[] { cont, cont2, cont3 });
+                            form.Show();
+                            form.Width += 1;
+                        }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
+                        {
+                            cont.Tag = "General";
+                            var scripteditor = new TextArea() { Text = ((CustomUO)obj).ScriptText, Wrap = false, AcceptsReturn = true, AcceptsTab = true, SpellCheck = false, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize) };
+                            scripteditor.Tag = "Python Script";
+                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, scripteditor });
+                            form.Show();
+                            form.Width += 1;
+                        }
+                        else
+                        {
+                            var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);
+                            form.Show();
+                            form.Width += 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ViewSelectedObjectResults()
+        {
+
+            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+            if (obj == null) return;
+
+            var report = obj.GetReport(FlowsheetObject.Options.SelectedUnitSystem, System.Globalization.CultureInfo.CurrentCulture, FlowsheetObject.Options.NumberFormat);
+            var container = new TableLayout();
+            new DWSIM.UI.Desktop.Editors.Results(obj, container);
+            var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container, true);
+            form.ShowInTaskbar = false;
+            form.Show();
+            form.Width += 1;
 
         }
 

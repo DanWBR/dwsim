@@ -142,8 +142,8 @@ namespace DWSIM.UI.Desktop.WinForms
 
         protected override void OnMouseDoubleClick(MouseEventArgs e)
         {
-            fsurface.ZoomAll((int)this.Width, (int)this.Height);
-            this.Invalidate();
+            //fsurface.ZoomAll((int)this.Width, (int)this.Height);
+            //this.Invalidate();
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)

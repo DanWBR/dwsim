@@ -104,13 +104,13 @@ namespace DWSIM.UI.Desktop.GTK
         {
             if (args.Event.Type == Gdk.EventType.TwoButtonPress)
             {
-                if (args.Event.State == Gdk.ModifierType.ShiftMask)
-                {
-                    fsurface.Zoom = 1.0f;
-                }
-                else {
-                    fsurface.ZoomAll((int)this.Allocation.Width, (int)this.Allocation.Height);
-                }
+                //if (args.Event.State == Gdk.ModifierType.ShiftMask)
+                //{
+                //    fsurface.Zoom = 1.0f;
+                //}
+                //else {
+                //    fsurface.ZoomAll((int)this.Allocation.Width, (int)this.Allocation.Height);
+                //}
             }
             else {
                 _lastTouchX = (int)args.Event.X;

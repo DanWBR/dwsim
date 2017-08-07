@@ -144,7 +144,7 @@ namespace DWSIM.UI.Desktop.Mac
         {
             base.MouseDown(theEvent);
             if (theEvent.ClickCount == 2) {
-                fsurface.ZoomAll((int)this.Bounds.Width, (int)this.Bounds.Height);
+                //fsurface.ZoomAll((int)this.Bounds.Width, (int)this.Bounds.Height);
             }
             else {
                 _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
