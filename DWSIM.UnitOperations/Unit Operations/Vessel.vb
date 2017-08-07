@@ -33,7 +33,7 @@ Namespace UnitOperations
         Inherits UnitOperations.UnitOpBaseClass
 
         Dim rhol, rhov, ql, qv, qe, rhoe, wl, wv As Double
-        Dim RLD, C, VGI, SURGE, TR, VMAX, K As Double
+        Dim C, VGI, VMAX, K As Double
         Dim BeH, BSGH, BSLH, AH, DH As Double
         Dim BeV, BSGV, BSLV, AV, DV As Double
 
@@ -51,6 +51,12 @@ Namespace UnitOperations
             Maximum
             Minimum
         End Enum
+
+        Public Property DimensionRatio As Double = 3
+
+        Public Property SurgeFactor As Double = 1.2
+
+        Public Property ResidenceTime As Double = 5
 
         Protected m_pressurebehavior As PressureBehavior = PressureBehavior.Minimum
 
@@ -460,12 +466,9 @@ Namespace UnitOperations
             Me.rhoe = mix.Phases(0).Properties.density.GetValueOrDefault
             Me.qe = mix.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
-            Me.RLD = 3
             Me.C = 80
             Me.VMAX = 2
-            Me.TR = 5
             Me.K = 0.0692
-            Me.SURGE = 1.2
             Me.VGI = 90
 
             AppendDebugLine("Sizing horizontal separator...")
@@ -660,10 +663,10 @@ Namespace UnitOperations
 
             Try
 
-                Dim qv As Double = Me.qv * Me.SURGE
-                Dim ql As Double = Me.ql * Me.SURGE
+                Dim qv As Double = Me.qv * SurgeFactor
+                Dim ql As Double = Me.ql * SurgeFactor
 
-                Dim tres As Double = Me.TR
+                Dim tres As Double = ResidenceTime
 
                 Dim rho_ml As Double = Me.rhol
                 Dim rho_ns As Double = Me.rhoe
@@ -673,7 +676,7 @@ Namespace UnitOperations
                 Dim At As Double = qv / vp
 
                 Dim dmin As Double = (4 * At / Math.PI) ^ 0.5
-                Dim lmin As Double = Me.RLD * dmin
+                Dim lmin As Double = DimensionRatio * dmin
 
                 'bocal de entrada
                 Dim vmaxbe As Double = Me.C / (rho_ns) ^ 0.5
@@ -707,8 +710,8 @@ Namespace UnitOperations
 
             Try
 
-                Dim qv As Double = Me.qv * Me.SURGE
-                Dim ql As Double = Me.ql * Me.SURGE
+                Dim qv As Double = Me.qv * SurgeFactor
+                Dim ql As Double = Me.ql * SurgeFactor
 
                 Dim rho_ml As Double = Me.rhol
                 Dim rho_ns As Double = Me.rhoe
@@ -734,9 +737,9 @@ Namespace UnitOperations
                 Dim dminbl As Double = (4 * aminbl2 / Math.PI) ^ 0.5
 
                 'vaso
-                Dim tr As Double = Me.TR
+                Dim tr As Double = ResidenceTime
 
-                l_d = Me.RLD
+                l_d = DimensionRatio
 
                 x = 0.01
                 Do
@@ -800,9 +803,9 @@ Namespace UnitOperations
             str.AppendLine()
             str.AppendLine("Sizing parameters")
             str.AppendLine()
-            str.AppendLine("    L/D ratio: " & RLD.ToString(numberformat, ci))
-            str.AppendLine("    Liquid residence time: " & SystemsOfUnits.Converter.ConvertFromSI(su.time, TR * 60).ToString(numberformat, ci) & " " & su.time)
-            str.AppendLine("    Surge factor: " & SURGE.ToString(numberformat, ci))
+            str.AppendLine("    L/D ratio: " & DimensionRatio.ToString(numberformat, ci))
+            str.AppendLine("    Liquid residence time: " & SystemsOfUnits.Converter.ConvertFromSI(su.time, ResidenceTime * 60).ToString(numberformat, ci) & " " & su.time)
+            str.AppendLine("    Surge factor: " & SurgeFactor.ToString(numberformat, ci))
             str.AppendLine()
             str.AppendLine("Sizing results - vertical separator")
             str.AppendLine()

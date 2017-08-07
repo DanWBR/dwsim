@@ -1959,6 +1959,10 @@ namespace DWSIM.UI.Desktop.Editors
                                 });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Separation Temperature"));
+                    s.CreateAndAddLabelRow(container, "Sizing Parameters");
+                    s.CreateAndAddTextBoxRow(container, nf, "Length/Height over Diameter Ratio", vessel.DimensionRatio, (sender, e) => { if (sender.Text.IsValidDouble()) vessel.DimensionRatio = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Surge Factor", vessel.SurgeFactor, (sender, e) => { if (sender.Text.IsValidDouble()) vessel.SurgeFactor = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Liquid Residence Time (" + su.time + ")", cv.ConvertFromSI(su.time, vessel.ResidenceTime), (sender, e) => { if (sender.Text.IsValidDouble()) vessel.DimensionRatio = cv.ConvertToSI(su.time, sender.Text.ToDoubleFromCurrent()); });
                     break;
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
