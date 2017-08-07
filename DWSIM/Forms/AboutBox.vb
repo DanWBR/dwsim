@@ -29,7 +29,7 @@ Public Class AboutBox
             Version.Text += " " & My.Settings.PreviewVersion
         End If
 
-        lblCurrentVersion.Text = Version.Text
+        lblCurrentVersion.Text = Version.Text + " (Classic UI)"
 
         Copyright.Text = My.Application.Info.Copyright
 

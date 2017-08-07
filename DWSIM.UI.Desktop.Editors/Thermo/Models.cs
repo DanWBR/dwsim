@@ -184,7 +184,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         void AddPropPackItem(PropertyPackage pp)
         {
-
+            pp.Flowsheet = flowsheet;
             var tr = new TableRow();
             tr = s.CreateAndAddTextBoxAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
                                                                 (arg1, arg2) =>

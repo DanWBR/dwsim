@@ -454,7 +454,6 @@ Public Class GraphicsSurface
                                     tabela.HeaderText = gobj.Tag
                                     tabela.AdditionalInfo = Zoom
                                     _FloatingTable = tabela
-                                    tabela.UpdateSize()
                                     DrawingObjects.Add(tabela)
 
                                 End If

@@ -58,113 +58,18 @@ Namespace GraphicObjects.Tables
 
         Public Property HeaderText() As String = ""
 
-        Public Sub UpdateSize()
-
-            Dim tpaint As New SKPaint()
-
-            With tpaint
-                .TextSize = FontSize
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                .Color = TextColor
-                .IsStroke = False
-            End With
-
-            Dim maxL1, maxL2, maxL3, count As Integer
-            Dim maxH As Integer
-
-            'determinar comprimento das colunas e altura das linhas
-
-            maxL1 = 0
-            maxL2 = 0
-            maxL3 = 0
-            maxH = 0
-            count = 1
-
-            Dim size, size2 As SKSize
-
-            size = MeasureString(Me.Owner.GraphicObject.Tag.ToUpper, tpaint)
-            If size.Width > maxL1 Then maxL1 = size.Width
-            If size.Height > maxH Then maxH = size.Height
-
-            Dim fs = Owner.GetFlowsheet
-            Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
-
-            If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
-
-            Dim propstoremove As New List(Of String)
-
-            If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
-                For Each p In props
-                    If Owner.GetPropertyValue(p).Equals(Double.MinValue) Then
-                        propstoremove.Add(p)
-                    End If
-                Next
-                For i As Integer = 0 To propstoremove.Count - 1
-                    props.Remove(propstoremove(i))
-                Next
-            End If
-
-            Dim propstring, propval, propunit As String, pval0 As Object
-
-            For Each prop In props
-                propstring = Owner.GetFlowsheet.GetTranslatedString(prop)
-                pval0 = Owner.GetPropertyValue(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                If pval0 Is Nothing Then Exit For
-                If TypeOf pval0 Is Double Then
-                    propval = Convert.ToDouble(pval0).ToString(Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
-                Else
-                    propval = pval0.ToString
-                End If
-                propunit = Owner.GetPropertyUnit(prop, Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
-                size = MeasureString(propstring, tpaint)
-                If size.Width > maxL1 Then maxL1 = size.Width
-                If size.Height > maxH Then maxH = size.Height
-                size = MeasureString(propval, tpaint)
-                If size.Width > maxL2 Then maxL2 = size.Width
-                If size.Height > maxH Then maxH = size.Height
-                size = MeasureString(propunit, tpaint)
-                If size.Width > maxL3 Then maxL3 = size.Width
-                If size.Height > maxH Then maxH = size.Height
-                count += 1
-            Next
-
-            If Not Me.AdditionalInfo Is Nothing Then Me.Padding = 3 / Me.AdditionalInfo
-
-            If maxH = 0 Then maxH = 20
-
-            Me.Height = (count + 1) * (maxH + 2 * Me.Padding)
-
-            size = MeasureString(Me.HeaderText, tpaint)
-            size2 = MeasureString(Owner.GetFlowsheet.GetTranslatedString(Me.Owner.GraphicObject.Description), tpaint)
-
-            If size.Width > size2.Width Then
-                If size.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
-                    Me.Width = 2 * Me.Padding + size.Width
-                Else
-                    Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
-                End If
-            Else
-                If size2.Width > (2 * Me.Padding + maxL1 + maxL2 + maxL3) Then
-                    Me.Width = 2 * Me.Padding + size2.Width
-                Else
-                    Me.Width = 6 * Me.Padding + maxL1 + maxL2 + maxL3
-                End If
-            End If
-
-            Me.Width += 6
-
-        End Sub
-
         Public Overrides Sub Draw(ByVal g As Object)
 
-            Padding = 4
+            Dim zoom As Single = AdditionalInfo
+
+            Padding = 6 / zoom
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
             Dim tpaint As New SKPaint()
 
             With tpaint
-                .TextSize = FontSize - 1
+                .TextSize = (FontSize + 3) / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White
                 .IsStroke = False
@@ -173,7 +78,7 @@ Namespace GraphicObjects.Tables
             Dim tbpaint As New SKPaint()
 
             With tbpaint
-                .TextSize = FontSize - 1
+                .TextSize = (FontSize + 3) / zoom
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                 .Color = SKColors.White
                 .IsStroke = False
@@ -292,13 +197,13 @@ Namespace GraphicObjects.Tables
 
                     'draw shadow
 
-                    Me.DrawRoundRect(g, X + 4, Y + 4, Width, Height, 5, spaint)
-                    Dim rect0 As SKRect = GetRect(X + 4, Y + 4, Width, Height)
+                    Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
+                    Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
 
 
                     Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
-                    DrawRoundRect(g, X, Y, Width, Height, 5, bpaint)
+                    DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint)
 
                     'desenhar textos e retangulos
                     canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3, Y + Padding + size.Height, tbpaint)
