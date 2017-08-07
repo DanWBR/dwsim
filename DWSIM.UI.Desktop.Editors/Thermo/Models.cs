@@ -193,9 +193,17 @@ namespace DWSIM.UI.Desktop.Editors
                                                                 },
                                                                 (arg1, arg2) =>
                                                                 {
-                                                                    var cont = new PropertyPackageSettingsView(flowsheet, pp);
-                                                                    var form = s.GetDefaultEditorForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, cont);
-                                                                    form.Show();
+                                                                    var supported = new string[] { "NRTL", "UNIQUAC", "Peng-Robinson (PR)", "Soave-Redlich-Kwong (SRK)", "Lee-Kesler-Plöcker" };
+                                                                    if (supported.Contains(pp.ComponentName))
+                                                                    {
+                                                                        var cont = new PropertyPackageSettingsView(flowsheet, pp);
+                                                                        var form = s.GetDefaultEditorForm("Edit '" + pp.Tag + "' (" + pp.ComponentName + ")", 800, 500, cont);
+                                                                        form.Show();
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        pp.DisplayEditingForm();
+                                                                    }
                                                                 },
                                                                (arg1, arg2) =>
                                                                {
