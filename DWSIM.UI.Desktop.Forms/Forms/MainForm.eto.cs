@@ -17,6 +17,8 @@ namespace DWSIM.UI
     partial class MainForm : Form
     {
 
+        private int OpenForms = 0;
+
         public List<ConstantProperties> UserCompounds = new List<ConstantProperties>();
 
         ListBox MostRecentList;
@@ -26,7 +28,8 @@ namespace DWSIM.UI
 
             //exception handling
 
-            Application.Instance.UnhandledException += (sender, e) => {
+            Application.Instance.UnhandledException += (sender, e) =>
+            {
                 new DWSIM.UI.Desktop.Editors.UnhandledExceptionView((Exception)e.ExceptionObject).ShowModalAsync();
             };
 
@@ -106,6 +109,11 @@ namespace DWSIM.UI
             {
                 var form = new Forms.Flowsheet();
                 AddUserCompounds(form.FlowsheetObject);
+                OpenForms += 1;
+                form.Closed += (sender2, e2) =>
+                {
+                    OpenForms -= 1;
+                };
                 form.Show();
             };
 
@@ -187,9 +195,12 @@ namespace DWSIM.UI
 
         void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
+            if (OpenForms > 0)
             {
-                e.Cancel = true;
+                if (MessageBox.Show(this, "ConfirmAppExit".Localize(), "AppExit".Localize(), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
             }
             DWSIM.GlobalSettings.Settings.SaveSettings("dwsim_newui.ini");
         }
@@ -207,6 +218,13 @@ namespace DWSIM.UI
         {
 
             var form = new Forms.Flowsheet();
+
+            OpenForms += 1;
+            form.Closed += (sender2, e2) =>
+            {
+                OpenForms -= 1;
+            };
+
             AddUserCompounds(form.FlowsheetObject);
 
             var loadingdialog = new LoadingData();
@@ -251,7 +269,7 @@ namespace DWSIM.UI
             {
                 if (!flowsheet.AvailableCompounds.ContainsKey(compound.Name)) flowsheet.AvailableCompounds.Add(compound.Name, compound);
             }
-        
+
         }
 
     }
