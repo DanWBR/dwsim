@@ -208,7 +208,7 @@ namespace DWSIM.UI.Forms
                 var cont2 = new Desktop.Editors.CompoundTools(FlowsheetObject);
                 cont2.Tag = "Compound Tools";
 
-                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 870, 500, new Control[] { cont, cont2 });
+                var form = UI.Shared.Common.GetDefaultTabbedForm("Compounds", 920, 500, new Control[] { cont, cont2 });
                 form.Show();
 
             };

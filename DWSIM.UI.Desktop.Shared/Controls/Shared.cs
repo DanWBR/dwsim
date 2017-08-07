@@ -530,8 +530,9 @@ namespace DWSIM.UI.Shared
 
         public static OxyPlot.PlotModel CreatePlotModel(double[] x, double[] y, string title, string subtitle, string xtitle, string ytitle)
         {
-
+            
             var model = new OxyPlot.PlotModel() { Subtitle = subtitle, Title = title };
+            model.Background = OxyPlot.OxyColors.White;
             model.TitleFontSize = 18;
             model.SubtitleFontSize = 16;
             model.Axes.Add(new OxyPlot.Axes.LinearAxis()
