@@ -89,6 +89,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                                datatype[ysp.SelectedIndex] + " (" + units[ysp.SelectedIndex] + ")");
                             chart.Model = model;
                             chart.Visible = true;
+                            chart.Model.InvalidatePlot(true);
                             chart.Invalidate();
                             int i = 0;
                             var txt = new System.Text.StringBuilder();
@@ -146,6 +147,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                            datatype[ysp.SelectedIndex] + yunits);
                         chart.Model = model;
                         chart.Visible = true;
+                        chart.Model.InvalidatePlot(true);
                         chart.Invalidate();
                     });
 
@@ -175,6 +177,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                         var model = CreatePFRResultsModel(reactor);
                         chart.Model = model;
+                        chart.Model.InvalidatePlot(true);
                         chart.Invalidate();
 
                         var form = new Form()
