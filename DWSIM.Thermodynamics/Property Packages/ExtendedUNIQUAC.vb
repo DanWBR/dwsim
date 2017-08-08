@@ -59,7 +59,7 @@ Namespace PropertyPackages
 
             Else
                 Dim f As New FormConfigExUNIQUAC() With {._form = Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                                f.Show(Flowsheet.GetDockPanel)
+                f.ShowDialog()
             End If
 
         End Sub

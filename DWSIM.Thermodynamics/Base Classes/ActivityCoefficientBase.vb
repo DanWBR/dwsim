@@ -76,10 +76,10 @@ Namespace PropertyPackages
 
             If GlobalSettings.Settings.CAPEOPENMode Then
                 Dim f As New FormConfigPropertyPackage() With {._form = Me.Flowsheet, ._pp = Me, ._comps = _selectedcomps.ToDictionary(Of String, Interfaces.ICompoundConstantProperties)(Function(k) k.Key, Function(k) k.Value)}
-                                f.Show(Flowsheet.GetDockPanel)
+                                f.ShowDialog()
             Else
                 Dim f As New FormConfigPropertyPackage() With {._form = Me.Flowsheet, ._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                                f.Show(Flowsheet.GetDockPanel)
+                                f.ShowDialog()
             End If
 
         End Sub

@@ -57,7 +57,7 @@ Namespace PropertyPackages
         Public Overrides Sub DisplayEditingForm()
 
             Dim f As New FormConfigUNIQUAC() With {._pp = Me, ._comps = Flowsheet.SelectedCompounds}
-                            f.Show(Flowsheet.GetDockPanel)
+                            f.ShowDialog()
 
         End Sub
 

@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FormConfigPropertyPackageBase
-    Inherits WeifenLuo.WinFormsUI.Docking.DockContent
+    Inherits System.Windows.Forms.Form
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -31,7 +31,6 @@ Partial Class FormConfigPropertyPackageBase
         Me.ClientSize = New System.Drawing.Size(284, 262)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Name = "FormConfigPropertyPackageBase"
-        Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
         Me.ResumeLayout(False)
 
     End Sub

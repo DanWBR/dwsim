@@ -202,7 +202,7 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     }
                                                                     else
                                                                     {
-                                                                        pp.DisplayEditingForm();
+                                                                        Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
                                                                     }
                                                                 },
                                                                (arg1, arg2) =>

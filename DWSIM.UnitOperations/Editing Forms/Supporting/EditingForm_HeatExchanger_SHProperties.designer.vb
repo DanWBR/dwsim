@@ -447,7 +447,6 @@ Partial Class EditingForm_HeatExchanger_SHProperties
 
     End Sub
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents cbBaffleType As System.Windows.Forms.ComboBox
     Friend WithEvents tbShellsInSeries As System.Windows.Forms.TextBox
@@ -500,4 +499,5 @@ Partial Class EditingForm_HeatExchanger_SHProperties
     Friend WithEvents tbTubeThermalCond As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lbuTubeThermalCond As System.Windows.Forms.Label
+    Public WithEvents GroupBox1 As System.Windows.Forms.GroupBox
 End Class
