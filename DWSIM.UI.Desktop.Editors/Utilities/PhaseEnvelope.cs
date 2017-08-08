@@ -45,6 +45,8 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             mslist.Insert(0, "");
 
+            this.CreateAndAddDescriptionRow("The Phase Envelope utility calculates various VLE envelopes for mixtures.");
+
             var spinner = this.CreateAndAddDropDownRow("Material Stream", mslist, 0, (arg3, arg2) => { });
 
             var spinnerPE = this.CreateAndAddDropDownRow("Envelope Type", Shared.StringArrays.envelopetype().ToList(), 0, null);

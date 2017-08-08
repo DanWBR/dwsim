@@ -54,6 +54,11 @@ namespace DWSIM.UI.Desktop.Editors
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
 
+            s.CreateAndAddDescriptionRow(this, "Use the Sensitivity Analysis tool to study/analyze the influence of a process variable on other variables in the flowsheet.");
+
+            s.CreateAndAddLabelRow(this, "Case Description");
+            var etdesc = s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
+
             s.CreateAndAddLabelRow(this, "Independent Variable");
 
             var objlist = flowsheet.SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();

@@ -45,6 +45,8 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             complist.Insert(0, "");
 
+            this.CreateAndAddDescriptionRow("The Binary Envelope utility calculates Temperature and Pressure VLE/VLLE envelopes for binary mixtures.");
+
             var spinnerComp1 = this.CreateAndAddDropDownRow("Compound 1", complist, 0, null);
 
             var spinnerComp2 = this.CreateAndAddDropDownRow("Compound 2", complist, 0, null);

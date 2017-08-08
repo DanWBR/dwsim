@@ -1685,10 +1685,6 @@ Label_00CC:
 
     Sub AddPropPacks()
 
-        Dim FPP As FPROPSPropertyPackage = New FPROPSPropertyPackage()
-        FPP.ComponentName = "FPROPS"
-        AvailablePropertyPackages.Add(FPP.ComponentName.ToString, FPP)
-
         Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
         CPPP.ComponentName = "CoolProp"
         AvailablePropertyPackages.Add(CPPP.ComponentName.ToString, CPPP)
@@ -1704,10 +1700,6 @@ Label_00CC:
         Dim SEAPP As SeawaterPropertyPackage = New SeawaterPropertyPackage()
         SEAPP.ComponentName = "Seawater IAPWS-08"
         AvailablePropertyPackages.Add(SEAPP.ComponentName.ToString, SEAPP)
-
-        Dim PCSAFTPP As PCSAFTPropertyPackage = New PCSAFTPropertyPackage()
-        PCSAFTPP.ComponentName = "PC-SAFT (Simple)"
-        AvailablePropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
         Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
         PRPP.ComponentName = "Peng-Robinson (PR)"

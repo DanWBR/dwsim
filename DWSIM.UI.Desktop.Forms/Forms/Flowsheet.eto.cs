@@ -14,6 +14,7 @@ using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables;
 using System.Timers;
+using System.Diagnostics;
 
 namespace DWSIM.UI.Forms
 {
@@ -229,6 +230,14 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
                     break;
             }
+
+            var hitem1 = new ButtonMenuItem { Text = "Online Help", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
+            hitem1.Click += (sender, e) =>
+            {
+                Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
+            };
+
+            Menu.HelpItems.Add(hitem1);
 
             btnClose.Click += (sender, e) => Close();
 

@@ -61,7 +61,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(this, "Use the optimizer to bring the flowsheet to a new 'state' regarding the maximum or minimum or value of a user-defined parameter.");
 
-            s.CreateAndAddLabelRow(this, "Case Description:");
+            s.CreateAndAddLabelRow(this, "Case Description");
             var etdesc = s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
 
             s.CreateAndAddDropDownRow(this, "Optimization Type", new[] { "Minimization", "Maximization" }.ToList(), (int)mycase.type, (arg3, arg2) => { mycase.type = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTType)arg3.SelectedIndex; });
