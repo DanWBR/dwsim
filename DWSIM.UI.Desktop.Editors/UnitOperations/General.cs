@@ -1378,6 +1378,14 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     });
                     txtelm.PlaceholderText = "Enter the matrix of element amounts, separated by spaces, one line for each compound";
+                    s.CreateAndAddLabelRow(container, "Convergence Parameters");
+                    s.CreateAndAddCheckBoxRow(container, "Use Damping Factor", reactor2g.EnableDamping, (sender, e) => reactor2g.EnableDamping = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Minimum Value", reactor2g.DampingLowerLimit, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.DampingLowerLimit = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Maximum Value", reactor2g.DampingUpperLimit, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.DampingUpperLimit = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.InternalTolerance = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2g.ExternalTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.ExternalTolerance = sender.Text.ToDoubleFromCurrent(); });
                     break;
                 case ObjectType.RCT_CSTR:
                     var reactor3 = (Reactor_CSTR)SimObject;
@@ -1966,7 +1974,6 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.CustomUO:
                     var scriptuo = (CustomUO)SimObject;
-                    s.CreateAndAddLabelRow(container, "Python Engine");
                     s.CreateAndAddDropDownRow(container, "Python Interpreter", new List<string> { "IronPython", "Python.NET (Python 2.7)" }, (int)scriptuo.ExecutionEngine, (sender, e) => scriptuo.ExecutionEngine = (DWSIM.UnitOperations.UnitOperations.CustomUO.PythonExecutionEngine)sender.SelectedIndex);
                     break;
                 case ObjectType.ExcelUO:

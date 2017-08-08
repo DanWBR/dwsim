@@ -1580,9 +1580,7 @@ Imports DWSIM.SharedClasses.Flowsheet
 
     Public Property MobileCompatibilityMode As Boolean Implements IFlowsheet.MobileCompatibilityMode
 
-    Public Sub RunCodeOnUIThread(act As Action) Implements IFlowsheet.RunCodeOnUIThread
-
-    End Sub
+    Public MustOverride Sub RunCodeOnUIThread(act As Action) Implements IFlowsheet.RunCodeOnUIThread
 
     Public MustOverride Sub SetMessageListener(act As Action(Of String, IFlowsheet.MessageType)) Implements IFlowsheet.SetMessageListener
 

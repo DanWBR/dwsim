@@ -708,14 +708,18 @@ namespace DWSIM.UI.Forms
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
                 {
                     var txtobj = (TextGraphic)selobj;
-                    var container = new TableLayout();
+                    var dyn1 = new DynamicLayout();
+                    var fontsizes = new List<string>(){"6","7", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20", "22", "24"};
+                    dyn1.CreateAndAddDropDownRow("Font size", fontsizes, fontsizes.IndexOf(txtobj.Size.ToString("N0")), (sender, e) => txtobj.Size = double.Parse(fontsizes[sender.SelectedIndex]));
+                    var container = new TableLayout{Padding = new Padding(10), Spacing = new Size(5, 5)};
+                    container.Rows.Add(new TableRow(dyn1));
                     var txt = new TextArea { Text = txtobj.Text };
                     txt.TextChanged += (sender2, e2) =>
                     {
                         txtobj.Text = txt.Text;
                     };
                     container.Rows.Add(new TableRow(txt));
-                    var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 400, 400, container, false);
+                    var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 500, 500, container, false);
                     editor.Show();
                 }
                 else
@@ -777,9 +781,16 @@ namespace DWSIM.UI.Forms
                         else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
                         {
                             cont.Tag = "General";
-                            var scripteditor = new TextArea() { Text = ((CustomUO)obj).ScriptText, Wrap = false, AcceptsReturn = true, AcceptsTab = true, SpellCheck = false, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize) };
-                            scripteditor.Tag = "Python Script";
-                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, scripteditor });
+                            var cont2 = new TableLayout{Padding = new Padding(10), Spacing = new Size(5, 5)};
+                            cont2.Tag = "Python Script";
+                            var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
+                            var dyn1 = new DynamicLayout();
+                            dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) => {
+                                ((CustomUO)obj).ScriptText = scripteditor.Text;
+                            });
+                            cont2.Rows.Add(new TableRow(dyn1));
+                            cont2.Rows.Add(new TableRow(scripteditor));
+                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 800, 600, new Control[] { cont, cont2 });
                             form.Show();
                             form.Width += 1;
                         }

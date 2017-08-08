@@ -264,5 +264,10 @@ namespace DWSIM.UI.Desktop.Shared
 
         }
 
+        public override void RunCodeOnUIThread(Action act)
+        {
+            Application.Instance.Invoke(act);
+        }
+
     }
 }

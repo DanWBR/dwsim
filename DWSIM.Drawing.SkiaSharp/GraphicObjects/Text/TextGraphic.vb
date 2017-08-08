@@ -29,7 +29,7 @@ Namespace GraphicObjects
 
 #End Region
 
-        Public Property Text() As String = "TEXT"
+        Public Property Text() As String = "TEXT (dOuble-click to edit)"
 
         Public Property Size() As Double = 14.0#
 
