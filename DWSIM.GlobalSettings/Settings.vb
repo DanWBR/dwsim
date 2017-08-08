@@ -307,9 +307,8 @@ Public Class Settings
 
         If source.Configs("Backup") Is Nothing Then source.AddConfig("Backup")
 
-        'BackupActivated = source.Configs("Backup").GetBoolean("BackupActivated", True)
-        'BackupFolder = source.Configs("Backup").Get("BackupFolder", My.Computer.FileSystem.SpecialDirectories.Temp + Path.DirectorySeparatorChar + "DWSIM")
-        'BackupInterval = source.Configs("Backup").GetInt("BackupInterval", 5)
+        EnableBackupCopies = source.Configs("Backup").GetBoolean("EnableBackupCopies", True)
+        BackupInterval = source.Configs("Backup").GetInt("BackupInterval", 3)
 
         If source.Configs("Localization") Is Nothing Then source.AddConfig("Localization")
 
@@ -347,7 +346,7 @@ Public Class Settings
 
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
-        'AutomaticUpdates = source.Configs("Misc").GetBoolean("AutoUpdate", True)
+        'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
 
         'DefaultEditorLocation = source.Configs("Misc").GetInt("DefaultEditorLocation", 8)
         'EnableMultipleObjectEditors = source.Configs("Misc").GetBoolean("EnableMultipleObjectEditors", True)
@@ -370,6 +369,10 @@ Public Class Settings
 
         CurrentPlatform = source.Configs("OSInfo").GetString("Platform", GetPlatform())
         CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", GetEnvironment())
+
+        If source.Configs("UserUnits") Is Nothing Then source.AddConfig("UserUnits")
+
+        UserUnits = source.Configs("UserUnits").GetString("UserUnits", "{ }")
 
         If source.Configs("PlatformRenderers") Is Nothing Then source.AddConfig("PlatformRenderers")
 
@@ -419,8 +422,7 @@ Public Class Settings
 
         If source.Configs("Backup") Is Nothing Then source.AddConfig("Backup")
 
-        'source.Configs("Backup").Set("BackupActivated", BackupActivated)
-        'source.Configs("Backup").Set("BackupFolder", BackupFolder)
+        source.Configs("Backup").Set("EnableBackupCopies", EnableBackupCopies)
         source.Configs("Backup").Set("BackupInterval", BackupInterval)
 
         If source.Configs("Localization") Is Nothing Then source.AddConfig("Localization")

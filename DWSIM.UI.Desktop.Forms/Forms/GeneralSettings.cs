@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -134,7 +135,25 @@ namespace DWSIM.UI.Forms.Forms
             tab4.CreateAndAddEmptySpace();
             tab4.CreateAndAddTextBoxRow("N0", "BackupInterval".Localize(prefix), Settings.BackupInterval, (TextBox sender, EventArgs obj) => { Settings.BackupInterval = sender.Text.IsValidDouble() ? (int)sender.Text.ToDouble() : Settings.BackupInterval; });
             tab4.CreateAndAddEmptySpace();
-            tab4.CreateAndAddButtonRow("PurgeBackupFolder".Localize(prefix), null, null);
+            tab4.CreateAndAddButtonRow("PurgeBackupFolder".Localize(prefix), null, (sender, e) => {
+                string backupdir = "";
+                if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+                {
+                    backupdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data", "Backup") + Path.DirectorySeparatorChar;
+                }
+                else
+                {
+                    backupdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DWSIM Application Data", "Backup") + Path.DirectorySeparatorChar;
+                }
+                var files = Directory.GetFiles(backupdir);
+                foreach (var file in files)
+                {
+                    try {
+                        File.Delete(file);
+                    }
+                    catch { }
+                }
+            });
             tab4.CreateAndAddEmptySpace();
 
             var tab5 = Common.GetDefaultContainer();

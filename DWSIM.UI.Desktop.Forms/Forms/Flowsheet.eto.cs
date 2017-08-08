@@ -13,6 +13,7 @@ using DWSIM.UI.Desktop.Editors;
 using DWSIM.UnitOperations.UnitOperations;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables;
+using System.Timers;
 
 namespace DWSIM.UI.Forms
 {
@@ -35,12 +36,26 @@ namespace DWSIM.UI.Forms
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
+        private string backupfilename = "";
+
         ContextMenu selctxmenu, deselctxmenu;
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
 
         void InitializeComponent()
         {
+
+            // setup backup timer
+
+            backupfilename = DateTime.Now.ToString().Replace('-', '_').Replace(':', '_').Replace(' ', '_').Replace('/', '_') + ".dwxmz";
+
+            var BackupTimer = new Timer(GlobalSettings.Settings.BackupInterval * 60 * 1000);
+            BackupTimer.Elapsed += (sender, e) =>
+            {
+                Task.Factory.StartNew(() => SaveBackupCopy());
+            };
+            BackupTimer.Enabled = true;
+            BackupTimer.Start();
 
             WindowState = Eto.Forms.WindowState.Maximized;
 
@@ -61,7 +76,8 @@ namespace DWSIM.UI.Forms
 
             FlowsheetControl.FlowsheetObject = FlowsheetObject;
 
-            FlowsheetControl.KeyDown += (sender, e) => {
+            FlowsheetControl.KeyDown += (sender, e) =>
+            {
                 if (e.Key == Keys.Delete) DeleteObject();
             };
 
@@ -374,6 +390,7 @@ namespace DWSIM.UI.Forms
 
             Closed += (sender, e) =>
             {
+                SaveUserUnits();
                 FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationClosed, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
             };
 
@@ -417,7 +434,7 @@ namespace DWSIM.UI.Forms
             }
         }
 
-        void SaveSimulation(string path)
+        void SaveSimulation(string path, bool backup = false)
         {
 
             FlowsheetObject.SaveToXML().Save(path);
@@ -463,11 +480,16 @@ namespace DWSIM.UI.Forms
 
             File.Delete(xmlfile);
 
-            FlowsheetObject.Options.FilePath = path;
-
-            FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
-
-            FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationSaved, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+            if (!backup)
+            {
+                FlowsheetObject.Options.FilePath = path;
+                FlowsheetObject.ShowMessage("File saved successfully.", Interfaces.IFlowsheet.MessageType.Information);
+                FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationSaved, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
+            }
+            else
+            {
+                FlowsheetObject.ShowMessage("Backup file successfully saved to '" + path + "'.", Interfaces.IFlowsheet.MessageType.Information);
+            }
 
         }
 
@@ -709,9 +731,9 @@ namespace DWSIM.UI.Forms
                 {
                     var txtobj = (TextGraphic)selobj;
                     var dyn1 = new DynamicLayout();
-                    var fontsizes = new List<string>(){"6","7", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20", "22", "24"};
+                    var fontsizes = new List<string>() { "6", "7", "8", "9", "10", "11", "12", "13", "14", "16", "18", "20", "22", "24" };
                     dyn1.CreateAndAddDropDownRow("Font size", fontsizes, fontsizes.IndexOf(txtobj.Size.ToString("N0")), (sender, e) => txtobj.Size = double.Parse(fontsizes[sender.SelectedIndex]));
-                    var container = new TableLayout{Padding = new Padding(10), Spacing = new Size(5, 5)};
+                    var container = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
                     container.Rows.Add(new TableRow(dyn1));
                     var txt = new TextArea { Text = txtobj.Text };
                     txt.TextChanged += (sender2, e2) =>
@@ -781,11 +803,12 @@ namespace DWSIM.UI.Forms
                         else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.CustomUO)
                         {
                             cont.Tag = "General";
-                            var cont2 = new TableLayout{Padding = new Padding(10), Spacing = new Size(5, 5)};
+                            var cont2 = new TableLayout { Padding = new Padding(10), Spacing = new Size(5, 5) };
                             cont2.Tag = "Python Script";
                             var scripteditor = new DWSIM.UI.Controls.CodeEditorControl() { Text = ((CustomUO)obj).ScriptText };
                             var dyn1 = new DynamicLayout();
-                            dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) => {
+                            dyn1.CreateAndAddLabelAndButtonRow("Click to commit script changes", "Update", null, (sender, e) =>
+                            {
                                 ((CustomUO)obj).ScriptText = scripteditor.Text;
                             });
                             cont2.Rows.Add(new TableRow(dyn1));
@@ -824,11 +847,79 @@ namespace DWSIM.UI.Forms
         private void DeleteObject()
         {
             var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
-            if (obj == null) return; 
+            if (obj == null) return;
             if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
             {
                 FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj.GraphicObject, false, false);
             }
+        }
+
+        private void SaveBackupCopy()
+        {
+            try
+            {
+                string backupdir = "";
+                if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+                {
+                    backupdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data", "Backup") + Path.DirectorySeparatorChar;
+                }
+                else
+                {
+                    backupdir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DWSIM Application Data", "Backup") + Path.DirectorySeparatorChar;
+                }
+                if (!Directory.Exists(backupdir)) Directory.CreateDirectory(backupdir);
+                if (GlobalSettings.Settings.EnableBackupCopies)
+                {
+
+                    if (FlowsheetObject.Options.FilePath != "")
+                    {
+                        backupfilename = Path.GetFileName(FlowsheetObject.Options.FilePath);
+                    }
+                    var savefile = Path.Combine(backupdir, backupfilename);
+                    SaveSimulation(savefile, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                FlowsheetObject.ShowMessage("Error saving backup file: " + ex.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError);
+            }
+        }
+
+        private void SaveUserUnits()
+        {
+        
+            var userunits = new List<DWSIM.SharedClasses.SystemsOfUnits.Units>();
+            var toadd = new List<DWSIM.SharedClasses.SystemsOfUnits.Units>();
+
+            try {
+                userunits = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DWSIM.SharedClasses.SystemsOfUnits.Units>>(GlobalSettings.Settings.UserUnits);
+            }
+            catch { }
+
+            foreach (var unit in FlowsheetObject.AvailableSystemsOfUnits)
+            {
+                foreach (var unit2 in userunits)
+                {
+                    if (unit.Name == unit2.Name)
+                    {
+                        unit2.LoadData(((DWSIM.SharedClasses.SystemsOfUnits.Units)unit).SaveData());
+                    }
+                }
+            }
+
+            var names = userunits.Select((x) => x.Name).ToList();
+            var defaults = new string[] {"SI", "CGS", "ENG", "C1", "C2", "C3", "C4", "C5" };
+
+            foreach (var unit in FlowsheetObject.AvailableSystemsOfUnits)
+            {
+                if (!defaults.Contains(unit.Name) && !names.Contains(unit.Name))
+                {
+                    userunits.Add((DWSIM.SharedClasses.SystemsOfUnits.Units)unit);
+                }
+            }
+
+            GlobalSettings.Settings.UserUnits = Newtonsoft.Json.JsonConvert.SerializeObject(userunits, Newtonsoft.Json.Formatting.Indented).Replace("\"", "\'");
+        
         }
 
     }

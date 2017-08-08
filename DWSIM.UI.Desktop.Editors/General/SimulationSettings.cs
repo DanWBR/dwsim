@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DWSIM.Interfaces;
 using DWSIM.Interfaces.Enums.GraphicObjects;
+using DWSIM.SharedClasses.SystemsOfUnits;
 using DWSIM.Thermodynamics.BaseClasses;
 using DWSIM.Thermodynamics.PropertyPackages;
 using Eto.Forms;
@@ -28,7 +29,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Initialize()
         {
-
+            
             s.CreateAndAddLabelRow(container, "General");
 
             s.CreateAndAddStringEditorRow(container, "Simulation Name", flowsheet.FlowsheetOptions.SimulationName, (sender, e) => flowsheet.FlowsheetOptions.SimulationName = sender.Text);

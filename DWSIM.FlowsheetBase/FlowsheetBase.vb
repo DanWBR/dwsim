@@ -1848,14 +1848,17 @@ Label_00CC:
             .Add(New SystemsOfUnits.SIUnits_Custom4)
             .Add(New SystemsOfUnits.SIUnits_Custom5)
 
-            'If Not My.Application.UserUnitSystems Is Nothing Then
-            '    If My.Application.UserUnitSystems.Count > 0 Then
-            '        Dim su As New SystemsOfUnits.Units
-            '        For Each su In My.Application.UserUnitSystems.Values
-            '            If Not .ContainsKey(su.Name) Then .Add(su.Name, su)
-            '        Next
-            '    End If
-            'End If
+            Try
+                Dim options = New Newtonsoft.Json.JsonSerializerSettings
+                options.StringEscapeHandling = Newtonsoft.Json.StringEscapeHandling.EscapeHtml
+                Dim userunits = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of SystemsOfUnits.Units))(GlobalSettings.Settings.UserUnits, options)
+                Dim dontadd = New String() {"SI", "CGS", "ENG", "C1", "C2", "C3", "C4", "C5"}
+                For Each unit In userunits
+                    If Not dontadd.Contains(unit.Name) Then .Add(unit)
+                Next
+            Catch ex As Exception
+
+            End Try
 
         End With
 
