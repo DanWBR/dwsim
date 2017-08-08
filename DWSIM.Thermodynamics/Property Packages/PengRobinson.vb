@@ -921,6 +921,85 @@ Namespace PropertyPackages
                 Return True
             End Get
         End Property
+
+        Public Function ReturnCriticalPoints() As ArrayList
+
+            Dim cpc As New Utilities.TCP.Methods
+            Dim i, j, k, l As Integer
+            Dim n As Integer = Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1
+            Dim Vz(n) As Double
+            Dim comp As BaseClasses.Compound
+            i = 0
+            For Each comp In Me.CurrentMaterialStream.Phases(0).Compounds.Values
+                Vz(i) += comp.MoleFraction.GetValueOrDefault
+                i += 1
+            Next
+            i = 0
+            Do
+                If Vz(i) = 0 Then j += 1
+                i = i + 1
+            Loop Until i = n + 1
+            Dim VTc(n), Vpc(n), Vw(n), VVc(n), VKij(n, n) As Double
+            Dim Vm2(UBound(Vz) - j), VPc2(UBound(Vz) - j), VTc2(UBound(Vz) - j), VVc2(UBound(Vz) - j), Vw2(UBound(Vz) - j), VKij2(UBound(Vz) - j, UBound(Vz) - j) As Double
+            VTc = Me.RET_VTC()
+            Vpc = Me.RET_VPC()
+            VVc = Me.RET_VVC()
+            Vw = Me.RET_VW()
+            VKij = Me.RET_VKij
+            i = 0
+            k = 0
+            Do
+                If Vz(i) <> 0 Then
+                    Vm2(k) = Vz(i)
+                    VTc2(k) = VTc(i)
+                    VPc2(k) = Vpc(i)
+                    VVc2(k) = VVc(i)
+                    Vw2(k) = Vw(i)
+                    j = 0
+                    l = 0
+                    Do
+                        If Vz(l) <> 0 Then
+                            VKij2(k, j) = VKij(i, l)
+                            j = j + 1
+                        End If
+                        l = l + 1
+                    Loop Until l = n + 1
+                    k = k + 1
+                End If
+                i = i + 1
+            Loop Until i = n + 1
+
+            Dim TCR, PCR, VCR, real As Double
+
+            Dim CP, CP1 As New ArrayList()
+
+            If n > 0 Then
+                CP1 = cpc.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
+                If CP1.Count > 0 Then
+                    Dim cp0 As Double() = CP1(0)
+                    TCR = cp0(0)
+                    PCR = cp0(1)
+                    VCR = cp0(2)
+                    real = 1.0#
+                Else
+                    TCR = Me.AUX_TCM(Phase.Mixture)
+                    PCR = Me.AUX_PCM(Phase.Mixture)
+                    VCR = Me.AUX_VCM(Phase.Mixture)
+                    real = 0.0#
+                End If
+            Else
+                TCR = Me.AUX_TCM(Phase.Mixture)
+                PCR = Me.AUX_PCM(Phase.Mixture)
+                VCR = Me.AUX_VCM(Phase.Mixture)
+                real = 0.0#
+            End If
+
+            CP.Add(New Double() {TCR, PCR, VCR, real})
+
+            Return CP
+
+        End Function
+
     End Class
 
 End Namespace
