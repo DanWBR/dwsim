@@ -1535,6 +1535,12 @@ Imports DWSIM.SharedClasses.Flowsheet
                                   For Each cp As ConstantProperties In cpa
                                       If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
+                                  Dim elec As New Databases.Electrolyte
+                                  elec.Load()
+                                  cpa = elec.Transfer().ToArray()
+                                  For Each cp As ConstantProperties In cpa
+                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                  Next
                                   AddPropPacks()
                                   AddFlashAlgorithms()
                                   AddSystemsOfUnits()

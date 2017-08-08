@@ -64,132 +64,134 @@ namespace DWSIM.UI.Desktop.Editors
             SetupGraphicalData();
 
             var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
-         
-            var tabl = new TabControl();
-
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Heat Capacity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxLiqCp.ToArray(), vyLiqCp.ToArray(),
-                        "Heat Capacity", "", "Temperature" + " (" + su.temperature + ")", "Heat Capacity" + " (" + su.heatCapacityCp + ")")
-                }
-            });
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Vapor Pressure",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxPvap.ToArray(), vyPvap.ToArray(),
-                        "Vapor Pressure", "", "Temperature" + " (" + su.temperature + ")", "Vapor Pressure" + " (" + su.vaporPressure + ")")
-                }
-            });
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Heat of Vaporization",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxDHvap.ToArray(), vyDHvap.ToArray(),
-                        "Heat of Vaporization", "", "Temperature" + " (" + su.temperature + ")", "Heat of Vaporization" + " (" + su.enthalpy + ")")
-                }
-            });
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Density",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxLD.ToArray(), vyLD.ToArray(),
-                        "Density", "", "Temperature", "Density" + " (" + su.density + ")")
-                }
-            });
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Viscosity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxVisc.ToArray(), vyVisc.ToArray(),
-                        "Viscosity", "", "Temperature" + " (" + su.temperature + ")", "Viscosity" + " (" + su.viscosity + ")")
-                }
-            });
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Thermal Conductivity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxLiqThCond.ToArray(), vyLiqThCond.ToArray(),
-                        "Thermal Conductivity", "", "Temperature", "Thermal Conductivity" + " (" + su.thermalConductivity + ")")
-                }
-            });
-            tabl.Pages.Add(new TabPage
-            {
-                Text = "Surface Tension",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxSurfTens.ToArray(), vySurfTens.ToArray(),
-                        "Surface Tension", "", "Temperature" + " (" + su.temperature + ")", "Surface Tension" + " (" + su.surfaceTension + ")")
-                }
-            });
-
-            var tabv = new TabControl();
-
-            tabv.Pages.Add(new TabPage
-            {
-                Text = "Ideal Gas Heat Capacity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxCp.ToArray(), vyCp.ToArray(),
-                        "Ideal Gas Heat Capacity", "", "Temperature" + " (" + su.temperature + ")", "Ideal Gas Heat Capacity" + " (" + su.heatCapacityCp + ")")
-                }
-            });
-
-            tabv.Pages.Add(new TabPage
-            {
-                Text = "Viscosity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxVapVisc.ToArray(), vyVapVisc.ToArray(),
-                        "Viscosity", "", "Temperature" + " (" + su.temperature + ")", "Viscosity" + " (" + su.viscosity + ")")
-                }
-            });
-
-            tabv.Pages.Add(new TabPage
-            {
-                Text = "Thermal Conductivity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxVapThCond.ToArray(), vyVapThCond.ToArray(),
-                        "Thermal Conductivity", "", "Temperature" + " (" + su.temperature + ")", "Thermal Conductivity" + " (" + su.thermalConductivity + ")")
-                }
-            });
-
-            var tabs = new TabControl();
-
-            tabs.Pages.Add(new TabPage
-            {
-                Text = "Heat Capacity",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxSCP.ToArray(), vySCP.ToArray(),
-                        "Heat Capacity", "", "Temperature" + " (" + su.temperature + ")", "Heat Capacity" + " (" + su.heatCapacityCp + ")")
-                }
-            });
-
-            tabs.Pages.Add(new TabPage
-            {
-                Text = "Density",
-                Content = new Eto.OxyPlot.Plot
-                {
-                    Model = c.CreatePlotModel(vxSD.ToArray(), vySD.ToArray(),
-                        "Density", "", "Temperature" + " (" + su.temperature + ")", "Density" + " (" + su.density + ")")
-                }
-            });
 
             Pages.Add(new TabPage { Content = new Scrollable { Content = container1 }, Text = (string)container1.Tag });
             Pages.Add(new TabPage { Content = container2, Text = (string)container2.Tag });
-            Pages.Add(new TabPage { Content = tabl, Text = "Liquid" });
-            Pages.Add(new TabPage { Content = tabv, Text = "Vapor" });
-            Pages.Add(new TabPage { Content = tabs, Text = "Solid" });
+
+            if (!compound.IsSalt && !compound.IsIon && !compound.IsBlackOil)
+            {
+                var tabl = new TabControl();
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Heat Capacity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxLiqCp.ToArray(), vyLiqCp.ToArray(),
+                            "Heat Capacity", "", "Temperature" + " (" + su.temperature + ")", "Heat Capacity" + " (" + su.heatCapacityCp + ")")
+                    }
+                });
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Vapor Pressure",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxPvap.ToArray(), vyPvap.ToArray(),
+                            "Vapor Pressure", "", "Temperature" + " (" + su.temperature + ")", "Vapor Pressure" + " (" + su.vaporPressure + ")")
+                    }
+                });
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Heat of Vaporization",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxDHvap.ToArray(), vyDHvap.ToArray(),
+                            "Heat of Vaporization", "", "Temperature" + " (" + su.temperature + ")", "Heat of Vaporization" + " (" + su.enthalpy + ")")
+                    }
+                });
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Density",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxLD.ToArray(), vyLD.ToArray(),
+                            "Density", "", "Temperature", "Density" + " (" + su.density + ")")
+                    }
+                });
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Viscosity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxVisc.ToArray(), vyVisc.ToArray(),
+                            "Viscosity", "", "Temperature" + " (" + su.temperature + ")", "Viscosity" + " (" + su.viscosity + ")")
+                    }
+                });
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Thermal Conductivity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxLiqThCond.ToArray(), vyLiqThCond.ToArray(),
+                            "Thermal Conductivity", "", "Temperature", "Thermal Conductivity" + " (" + su.thermalConductivity + ")")
+                    }
+                });
+                tabl.Pages.Add(new TabPage
+                {
+                    Text = "Surface Tension",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxSurfTens.ToArray(), vySurfTens.ToArray(),
+                            "Surface Tension", "", "Temperature" + " (" + su.temperature + ")", "Surface Tension" + " (" + su.surfaceTension + ")")
+                    }
+                });
+
+                var tabv = new TabControl();
+
+                tabv.Pages.Add(new TabPage
+                {
+                    Text = "Ideal Gas Heat Capacity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxCp.ToArray(), vyCp.ToArray(),
+                            "Ideal Gas Heat Capacity", "", "Temperature" + " (" + su.temperature + ")", "Ideal Gas Heat Capacity" + " (" + su.heatCapacityCp + ")")
+                    }
+                });
+
+                tabv.Pages.Add(new TabPage
+                {
+                    Text = "Viscosity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxVapVisc.ToArray(), vyVapVisc.ToArray(),
+                            "Viscosity", "", "Temperature" + " (" + su.temperature + ")", "Viscosity" + " (" + su.viscosity + ")")
+                    }
+                });
+
+                tabv.Pages.Add(new TabPage
+                {
+                    Text = "Thermal Conductivity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxVapThCond.ToArray(), vyVapThCond.ToArray(),
+                            "Thermal Conductivity", "", "Temperature" + " (" + su.temperature + ")", "Thermal Conductivity" + " (" + su.thermalConductivity + ")")
+                    }
+                });
+
+                var tabs = new TabControl();
+
+                tabs.Pages.Add(new TabPage
+                {
+                    Text = "Heat Capacity",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxSCP.ToArray(), vySCP.ToArray(),
+                            "Heat Capacity", "", "Temperature" + " (" + su.temperature + ")", "Heat Capacity" + " (" + su.heatCapacityCp + ")")
+                    }
+                });
+
+                tabs.Pages.Add(new TabPage
+                {
+                    Text = "Density",
+                    Content = new Eto.OxyPlot.Plot
+                    {
+                        Model = c.CreatePlotModel(vxSD.ToArray(), vySD.ToArray(),
+                            "Density", "", "Temperature" + " (" + su.temperature + ")", "Density" + " (" + su.density + ")")
+                    }
+                });
+                Pages.Add(new TabPage { Content = tabl, Text = "Liquid" });
+                Pages.Add(new TabPage { Content = tabv, Text = "Vapor" });
+                Pages.Add(new TabPage { Content = tabs, Text = "Solid" });
+            }
 
         }
 
