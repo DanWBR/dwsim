@@ -533,14 +533,14 @@ namespace DWSIM.UI.Shared
             
             var model = new OxyPlot.PlotModel() { Subtitle = subtitle, Title = title };
             model.Background = OxyPlot.OxyColors.White;
-            model.TitleFontSize = 12;
-            model.SubtitleFontSize = 10;
+            model.TitleFontSize = 14;
+            model.SubtitleFontSize = 12;
             model.Axes.Add(new OxyPlot.Axes.LinearAxis()
             {
                 MajorGridlineStyle = OxyPlot.LineStyle.Dash,
                 MinorGridlineStyle = OxyPlot.LineStyle.Dot,
                 Position = OxyPlot.Axes.AxisPosition.Bottom,
-                FontSize = 10,
+                FontSize = 12,
                 Title = xtitle
             });
             if (Math.Abs(y[0] - 1.0f) < 0.0001)
@@ -550,7 +550,7 @@ namespace DWSIM.UI.Shared
                     MajorGridlineStyle = OxyPlot.LineStyle.Dash,
                     MinorGridlineStyle = OxyPlot.LineStyle.Dot,
                     Position = OxyPlot.Axes.AxisPosition.Left,
-                    FontSize = 10,
+                    FontSize = 12,
                     Title = ytitle,
                     StartPosition = 1,
                     EndPosition = 0,
@@ -565,11 +565,11 @@ namespace DWSIM.UI.Shared
                     MajorGridlineStyle = OxyPlot.LineStyle.Dash,
                     MinorGridlineStyle = OxyPlot.LineStyle.Dot,
                     Position = OxyPlot.Axes.AxisPosition.Left,
-                    FontSize = 10,
+                    FontSize = 12,
                     Title = ytitle
                 });
             }
-            model.LegendFontSize = 9;
+            model.LegendFontSize = 11;
             model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
             model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
             model.LegendPosition = OxyPlot.LegendPosition.BottomCenter;

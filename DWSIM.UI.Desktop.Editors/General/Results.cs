@@ -379,14 +379,14 @@ namespace DWSIM.UI.Desktop.Editors
         OxyPlot.PlotModel CreatePipeResultsModel(double[] x, double[] y, string xtitle, string ytitle)
         {
             var model = new global::OxyPlot.PlotModel() { Subtitle = "Properties Profile", Title = SimObject.GraphicObject.Tag };
-            model.TitleFontSize = 12;
-            model.SubtitleFontSize = 9;
+            model.TitleFontSize = 14;
+            model.SubtitleFontSize = 11;
             model.Axes.Add(new LinearAxis()
             {
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Bottom,
-                FontSize = 10,
+                FontSize = 12,
                 Title = xtitle
             });
             model.Axes.Add(new LinearAxis()
@@ -394,10 +394,10 @@ namespace DWSIM.UI.Desktop.Editors
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Left,
-                FontSize = 10,
+                FontSize = 12,
                 Title = ytitle
             });
-            model.LegendFontSize = 9;
+            model.LegendFontSize = 11;
             model.LegendPlacement = LegendPlacement.Outside;
             model.LegendOrientation = LegendOrientation.Vertical;
             model.LegendPosition = LegendPosition.BottomCenter;
@@ -414,14 +414,14 @@ namespace DWSIM.UI.Desktop.Editors
             var su = SimObject.GetFlowsheet().FlowsheetOptions.SelectedUnitSystem;
 
             var model = new PlotModel() { Subtitle = "Properties Profile", Title = SimObject.GraphicObject.Tag };
-            model.TitleFontSize = 12;
-            model.SubtitleFontSize = 9;
+            model.TitleFontSize = 14;
+            model.SubtitleFontSize = 11;
             model.Axes.Add(new LinearAxis()
             {
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Bottom,
-                FontSize = 10,
+                FontSize = 12,
                 Title = "Volume (" + su.volume + ")"
             });
             model.Axes.Add(new LinearAxis()
@@ -429,7 +429,7 @@ namespace DWSIM.UI.Desktop.Editors
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Left,
-                FontSize = 10,
+                FontSize = 12,
                 Title = "Concentration (" + su.molar_conc + ")",
                 Key = "conc"
             });
@@ -438,7 +438,7 @@ namespace DWSIM.UI.Desktop.Editors
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Right,
-                FontSize = 10,
+                FontSize = 12,
                 Title = "Temperature (" + su.temperature + ")",
                 Key = "temp",
                 PositionTier = 0
@@ -448,13 +448,13 @@ namespace DWSIM.UI.Desktop.Editors
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Right,
-                FontSize = 10,
+                FontSize = 12,
                 Title = "Pressure (" + su.pressure + ")",
                 Key = "press",
                 PositionTier = 1
             });
 
-            model.LegendFontSize = 9;
+            model.LegendFontSize = 11;
             model.LegendPlacement = LegendPlacement.Outside;
             model.LegendOrientation = LegendOrientation.Horizontal;
             model.LegendPosition = LegendPosition.BottomCenter;
@@ -538,14 +538,14 @@ namespace DWSIM.UI.Desktop.Editors
         OxyPlot.PlotModel CreateColumnResultsModel(double[] x, double[] y, string xtitle, string ytitle)
         {
             var model = new PlotModel() { Subtitle = "Column Profile", Title = SimObject.GraphicObject.Tag };
-            model.TitleFontSize = 12;
-            model.SubtitleFontSize = 9;
+            model.TitleFontSize = 14;
+            model.SubtitleFontSize = 11;
             model.Axes.Add(new LinearAxis()
             {
                 MajorGridlineStyle = LineStyle.Dash,
                 MinorGridlineStyle = LineStyle.Dot,
                 Position = AxisPosition.Bottom,
-                FontSize = 16,
+                FontSize = 12,
                 Title = xtitle
             });
             if (Math.Abs(y[0] - 1.0f) < 0.0001)
@@ -555,7 +555,7 @@ namespace DWSIM.UI.Desktop.Editors
                     MajorGridlineStyle = LineStyle.Dash,
                     MinorGridlineStyle = LineStyle.Dot,
                     Position = AxisPosition.Left,
-                    FontSize = 10,
+                    FontSize = 12,
                     Title = ytitle,
                     StartPosition = 1,
                     EndPosition = 0,
@@ -570,11 +570,11 @@ namespace DWSIM.UI.Desktop.Editors
                     MajorGridlineStyle = LineStyle.Dash,
                     MinorGridlineStyle = LineStyle.Dot,
                     Position = AxisPosition.Left,
-                    FontSize = 10,
+                    FontSize = 12,
                     Title = ytitle
                 });
             }
-            model.LegendFontSize = 9;
+            model.LegendFontSize = 11;
             model.LegendPlacement = LegendPlacement.Outside;
             model.LegendOrientation = LegendOrientation.Vertical;
             model.LegendPosition = LegendPosition.BottomCenter;

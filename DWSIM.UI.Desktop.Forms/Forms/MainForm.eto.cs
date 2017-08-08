@@ -178,12 +178,30 @@ namespace DWSIM.UI
                 Process.Start("http://dwsim.inforside.com.br/docs/crossplatform/help/");
             };
 
+            var hitem2 = new ButtonMenuItem { Text = "Discussion Forums".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
+            hitem2.Click += (sender, e) =>
+            {
+                Process.Start("http://sourceforge.net/p/dwsim/discussion/");
+            };
+
+            var hitem3 = new ButtonMenuItem { Text = "Report a Bug".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
+            hitem3.Click += (sender, e) =>
+            {
+                Process.Start("https://sourceforge.net/p/dwsim/tickets/");
+            };
+
+            var hitem4 = new ButtonMenuItem { Text = "Go to DWSIM's Website".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "help_browser.png")) };
+            hitem4.Click += (sender, e) =>
+            {
+                Process.Start("http://dwsim.inforside.com.br");
+            };
+
             // create menu
             Menu = new MenuBar
             {
                 ApplicationItems = { aitem1 },
                 QuitItem = quitCommand,
-                HelpItems = { hitem1 },
+                HelpItems = { hitem1, hitem4, hitem2, hitem3 },
                 AboutItem = aboutCommand
             };
 
