@@ -250,6 +250,7 @@ namespace DWSIM.UI
                     var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)form.FlowsheetObject.GetSurface();
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);
                     surface.ZoomAll(ClientSize.Width, ClientSize.Height);
+                    form.FlowsheetObject.UpdateInterface();
                     form.Title = form.FlowsheetObject.Options.SimulationName + " [" + form.FlowsheetObject.Options.FilePath + "]";
                     form.Show();
                     if (!GlobalSettings.Settings.MostRecentFiles.Contains(path))

@@ -43,7 +43,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             var button = this.CreateAndAddButtonRow("Calculate", null, (arg3, arg2) => { });
 
-            var txtResults = this.CreateAndAddMultilineMonoSpaceTextBoxRow("", 400, true, null);
+            var txtResults = this.CreateAndAddMultilineMonoSpaceTextBoxRow("", 150, true, null);
 
             button.Click += (sender, e) =>
             {
