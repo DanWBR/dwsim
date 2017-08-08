@@ -72,12 +72,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\gtk-sharp-2.0\atk-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="Eto, Version=2.3.6422.37856, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.0-build1070\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.3.6429.11781, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.4.0-build1087\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Gtk2, Version=2.3.6422.37863, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Gtk.2.4.0-build1070\lib\net45\Eto.Gtk2.dll</HintPath>
+    <Reference Include="Eto.Gtk2, Version=2.3.6429.11788, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Gtk.2.4.0-build1087\lib\net45\Eto.Gtk2.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
@@ -143,12 +143,12 @@
     <Reference Include="Mono.TextEditor">
       <HintPath>..\DWSIM\References\Mono.TextEditor.dll</HintPath>
     </Reference>
-    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
-      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable0956\lib\net45\OxyPlot.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OxyPlot.GtkSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
-      <HintPath>..\packages\OxyPlot.GtkSharp.1.0.0\lib\net45\OxyPlot.GtkSharp.dll</HintPath>
+    <Reference Include="OxyPlot.GtkSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.GtkSharp.2.0.0-unstable0956\lib\net45\OxyPlot.GtkSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
