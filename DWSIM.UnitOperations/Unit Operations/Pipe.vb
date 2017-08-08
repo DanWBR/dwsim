@@ -235,7 +235,6 @@ Namespace UnitOperations
                     fpp = New FlowPackages.LockhartMartinelli
                 Case FlowPackage.Petalas_Aziz
                     fpp = New FlowPackages.PetalasAziz
-                    'Calculator.CheckParallelPInvoke()
                 Case Else
                     fpp = New FlowPackages.BeggsBrill
             End Select
