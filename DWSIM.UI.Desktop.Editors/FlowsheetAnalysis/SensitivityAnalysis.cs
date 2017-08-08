@@ -292,14 +292,14 @@ namespace DWSIM.UI.Desktop.Editors
                                  Application.Instance.Invoke(() => resulttextbox.Text = str.ToString());
 
                                  var model = new PlotModel() { Subtitle = "Sensitivity Analysis Run Results", Title = flowsheet.FlowsheetOptions.SimulationName };
-                                 model.TitleFontSize = 18;
-                                 model.SubtitleFontSize = 16;
+                                 model.TitleFontSize = 12;
+                                 model.SubtitleFontSize = 9;
                                  model.Axes.Add(new LinearAxis()
                                  {
                                      MajorGridlineStyle = LineStyle.Dash,
                                      MinorGridlineStyle = LineStyle.Dot,
                                      Position = AxisPosition.Bottom,
-                                     FontSize = 16,
+                                     FontSize = 10,
                                      Title = mycase.iv1.objectTAG + " / " + flowsheet.GetTranslatedString(mycase.iv1.propID) + " (" + mycase.iv1.unit + ")"
                                  });
                                  int cnt2 = 0;
@@ -309,7 +309,7 @@ namespace DWSIM.UI.Desktop.Editors
                                      {
                                          MajorGridlineStyle = LineStyle.Dash,
                                          MinorGridlineStyle = LineStyle.Dot,
-                                         FontSize = 16,
+                                         FontSize = 10,
                                          Title = dvar.objectTAG + " / " + flowsheet.GetTranslatedString(dvar.propID) + " (" + dvar.unit + ")"
                                      });
                                      model.Axes[cnt2 + 1].Key = cnt2.ToString();
@@ -320,7 +320,7 @@ namespace DWSIM.UI.Desktop.Editors
                                      ((OxyPlot.Series.LineSeries)(model.Series[cnt2])).YAxisKey = cnt2.ToString();
                                      cnt2 += 1;
                                  }
-                                 model.LegendFontSize = 16;
+                                 model.LegendFontSize = 9;
                                  model.LegendPlacement = LegendPlacement.Outside;
                                  model.LegendOrientation = LegendOrientation.Vertical;
                                  model.LegendPosition = LegendPosition.BottomCenter;

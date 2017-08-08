@@ -8,6 +8,7 @@ Imports DWSIM.Thermodynamics.Streams
 Imports System.Globalization
 Imports DWSIM.SharedClasses.SystemsOfUnits
 Imports DWSIM.ExtensionMethods
+Imports System.Linq
 
 Namespace ShortcutUtilities
 
@@ -65,13 +66,17 @@ Namespace ShortcutUtilities
 
             Dim Compounds As String() = _MaterialStream.Phases(0).Compounds.Values.Select(Function(x) x.Name).ToArray()
             Dim pp As PropertyPackage = _MaterialStream.PropertyPackage
+            pp.CurrentMaterialStream = _MaterialStream
             Dim PropertyPackageName As String = pp.ComponentName
-            Dim MixName As String = _MaterialStream.GraphicObject.Tag
+            Dim MixName As String = ""
+            If _MaterialStream.GraphicObject IsNot Nothing Then
+                MixName = _MaterialStream.GraphicObject.Tag
+            End If
             Dim MixTemperature As Double = _MaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
             Dim MixPressure As Double = _MaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             Dim MixEnthalpy As Double = _MaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
             Dim MixEntropy As Double = _MaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
-            Dim FlashAlgorithm = pp.FlashAlgorithm.AlgoType
+            Dim FlashAlgorithm = pp.FlashBase.AlgoType
             Dim NumberFormat As String = _MaterialStream.FlowSheet.FlowsheetOptions.NumberFormat
             Dim Units As Units = _MaterialStream.FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
@@ -159,29 +164,29 @@ Namespace ShortcutUtilities
                             res = pp.DW_ReturnBinaryEnvelope(New Object() {"T-x-y", MixPressure, MixTemperature, True, True, True, True, True})
                         End If
 
-                        results.Data.Add("px", DirectCast(res(0), List(Of Double)))
+                        results.Data.Add("px", (DirectCast(res(0), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("px", "")
-                        results.Data.Add("py1", DirectCast(res(1), List(Of Double)).ConvertFromSI(Units.temperature))
+                        results.Data.Add("py1", (DirectCast(res(1), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("py1", Units.temperature)
-                        results.Data.Add("py2", DirectCast(res(2), List(Of Double)).ConvertFromSI(Units.temperature))
+                        results.Data.Add("py2", (DirectCast(res(2), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("py2", Units.temperature)
-                        results.Data.Add("px1l1", DirectCast(res(3), List(Of Double)))
+                        results.Data.Add("px1l1", (DirectCast(res(3), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("px1l1", "")
-                        results.Data.Add("px1l2", DirectCast(res(4), List(Of Double)))
+                        results.Data.Add("px1l2", (DirectCast(res(4), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("px1l2", "")
-                        results.Data.Add("py3", DirectCast(res(5), List(Of Double)).ConvertFromSI(Units.temperature))
+                        results.Data.Add("py3", (DirectCast(res(5), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("py3", Units.temperature)
-                        results.Data.Add("pxs1", DirectCast(res(6), List(Of Double)))
+                        results.Data.Add("pxs1", (DirectCast(res(6), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("pxs1", "")
-                        results.Data.Add("pys1", DirectCast(res(7), List(Of Double)).ConvertFromSI(Units.temperature))
+                        results.Data.Add("pys1", (DirectCast(res(7), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("pys1", Units.temperature)
-                        results.Data.Add("pxs2", DirectCast(res(8), List(Of Double)))
+                        results.Data.Add("pxs2", (DirectCast(res(8), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("pxs2", "")
-                        results.Data.Add("pys2", DirectCast(res(9), List(Of Double)).ConvertFromSI(Units.temperature))
+                        results.Data.Add("pys2", (DirectCast(res(9), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("pys2", Units.temperature)
-                        results.Data.Add("pxc", DirectCast(res(10), List(Of Double)))
+                        results.Data.Add("pxc", (DirectCast(res(10), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("pxc", "")
-                        results.Data.Add("pyc", DirectCast(res(11), List(Of Double)).ConvertFromSI(Units.temperature))
+                        results.Data.Add("pyc", (DirectCast(res(11), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                         results.DataUnits.Add("pyc", Units.temperature)
 
                         If results.Language.Equals("pt-BR") Then
@@ -288,17 +293,17 @@ Namespace ShortcutUtilities
 
                         Dim res As Object() = pp.DW_ReturnBinaryEnvelope(New Object() {"P-x-y", MixPressure, MixTemperature, True, False, False, False, False})
 
-                        results.Data.Add("px", DirectCast(res(0), List(Of Double)))
+                        results.Data.Add("px", (DirectCast(res(0), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("px", "")
-                        results.Data.Add("py1", DirectCast(res(1), List(Of Double)).ConvertFromSI(Units.pressure))
+                        results.Data.Add("py1", (DirectCast(res(1), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("py1", Units.pressure)
-                        results.Data.Add("py2", DirectCast(res(2), List(Of Double)).ConvertFromSI(Units.pressure))
+                        results.Data.Add("py2", (DirectCast(res(2), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("py2", Units.pressure)
-                        results.Data.Add("px1l1", DirectCast(res(3), List(Of Double)))
+                        results.Data.Add("px1l1", (DirectCast(res(3), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("px1l1", "")
-                        results.Data.Add("px1l2", DirectCast(res(4), List(Of Double)))
+                        results.Data.Add("px1l2", (DirectCast(res(4), ArrayList).ToDoubleList()))
                         results.DataUnits.Add("px1l2", "")
-                        results.Data.Add("py3", DirectCast(res(5), List(Of Double)).ConvertFromSI(Units.pressure))
+                        results.Data.Add("py3", (DirectCast(res(5), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                         results.DataUnits.Add("py3", Units.pressure)
 
                         If results.Language.Equals("pt-BR") Then
@@ -396,41 +401,41 @@ Namespace ShortcutUtilities
                             Dim res As Object()
 
                             'If pp.ComponentName.Equals("Peng-Robinson (PR)") Then
-                            res = DirectCast(pp, PengRobinsonPropertyPackage).DW_ReturnBinaryEnvelope(New Object() {0, False, False, False})
+                            res = DirectCast(pp, PengRobinsonPropertyPackage).DW_ReturnPhaseEnvelope(New PhaseEnvelopeOptions With {.OperatingPoint = True, .CheckLiquidInstability = True, .DewUseCustomParameters = False, .BubbleUseCustomParameters = False, .PhaseIdentificationCurve = False, .StabilityCurve = True})
                             'Else
                             'res = DirectCast(pp, SimulationObjects.PropertyPackages.SoaveRedlichKwongPropertyPackage).ReturnPhaseEnvelope(New Object() {0, False, False, False})
                             'End If
 
                             '{TVB, PB, HB, SB, VB, TVD, PO, HO, SO, VO, TE, PE, TH, PHsI, PHsII, CP, TQ, PQ, TI, PI, TOWF, POWF, HOWF, SOWF, VOWF}</returns>
 
-                            results.Data.Add("TB", DirectCast(res(0), List(Of Double)).ConvertFromSI(Units.temperature))
+                            results.Data.Add("TB", (DirectCast(res(0), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                             results.DataUnits.Add("TB", Units.temperature)
-                            results.Data.Add("PB", DirectCast(res(1), List(Of Double)).ConvertFromSI(Units.pressure))
+                            results.Data.Add("PB", (DirectCast(res(1), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                             results.DataUnits.Add("PB", Units.pressure)
-                            results.Data.Add("HB", DirectCast(res(2), List(Of Double)).ConvertFromSI(Units.enthalpy))
+                            results.Data.Add("HB", (DirectCast(res(2), ArrayList).ToDoubleList()).ConvertFromSI(Units.enthalpy))
                             results.DataUnits.Add("HB", Units.enthalpy)
-                            results.Data.Add("SB", DirectCast(res(3), List(Of Double)).ConvertFromSI(Units.entropy))
+                            results.Data.Add("SB", (DirectCast(res(3), ArrayList).ToDoubleList()).ConvertFromSI(Units.entropy))
                             results.DataUnits.Add("SB", Units.entropy)
-                            results.Data.Add("VB", DirectCast(res(4), List(Of Double)).ConvertFromSI(Units.molar_volume))
+                            results.Data.Add("VB", (DirectCast(res(4), ArrayList).ToDoubleList()).ConvertFromSI(Units.molar_volume))
                             results.DataUnits.Add("VB", Units.molar_volume)
 
-                            results.Data.Add("TD", DirectCast(res(5), List(Of Double)).ConvertFromSI(Units.temperature))
+                            results.Data.Add("TD", (DirectCast(res(5), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                             results.DataUnits.Add("TD", Units.temperature)
-                            results.Data.Add("PD", DirectCast(res(6), List(Of Double)).ConvertFromSI(Units.pressure))
+                            results.Data.Add("PD", (DirectCast(res(6), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                             results.DataUnits.Add("PD", Units.pressure)
-                            results.Data.Add("HD", DirectCast(res(7), List(Of Double)).ConvertFromSI(Units.enthalpy))
+                            results.Data.Add("HD", (DirectCast(res(7), ArrayList).ToDoubleList()).ConvertFromSI(Units.enthalpy))
                             results.DataUnits.Add("HD", Units.enthalpy)
-                            results.Data.Add("SD", DirectCast(res(8), List(Of Double)).ConvertFromSI(Units.entropy))
+                            results.Data.Add("SD", (DirectCast(res(8), ArrayList).ToDoubleList()).ConvertFromSI(Units.entropy))
                             results.DataUnits.Add("SD", Units.entropy)
-                            results.Data.Add("VD", DirectCast(res(9), List(Of Double)).ConvertFromSI(Units.molar_volume))
+                            results.Data.Add("VD", (DirectCast(res(9), ArrayList).ToDoubleList()).ConvertFromSI(Units.molar_volume))
                             results.DataUnits.Add("VD", Units.molar_volume)
 
-                            results.Data.Add("TE", DirectCast(res(10), List(Of Double)).ConvertFromSI(Units.temperature))
+                            results.Data.Add("TE", (DirectCast(res(10), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                             results.DataUnits.Add("TE", Units.temperature)
-                            results.Data.Add("PE", DirectCast(res(11), List(Of Double)).ConvertFromSI(Units.pressure))
+                            results.Data.Add("PE", (DirectCast(res(11), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                             results.DataUnits.Add("PE", Units.pressure)
 
-                            Dim cpdata As List(Of Double()) = DirectCast(res(15), List(Of Double()))
+                            Dim cpdata As Object = res(15)
 
                             results.Data.Add("CP", New List(Of Double) From {Convert.ToDouble(cpdata(0)(0).ToString).ConvertFromSI(Units.temperature),
                                                                              Convert.ToDouble(cpdata(0)(1).ToString).ConvertFromSI(Units.pressure),
@@ -438,9 +443,9 @@ Namespace ShortcutUtilities
 
                             results.DataUnits.Add("CP", "")
 
-                            results.Data.Add("TQ", DirectCast(res(16), List(Of Double)).ConvertFromSI(Units.temperature))
+                            results.Data.Add("TQ", (DirectCast(res(16), ArrayList).ToDoubleList()).ConvertFromSI(Units.temperature))
                             results.DataUnits.Add("TQ", Units.temperature)
-                            results.Data.Add("PQ", DirectCast(res(17), List(Of Double)).ConvertFromSI(Units.pressure))
+                            results.Data.Add("PQ", (DirectCast(res(17), ArrayList).ToDoubleList()).ConvertFromSI(Units.pressure))
                             results.DataUnits.Add("PQ", Units.pressure)
 
                             Select Case CalcType

@@ -95,6 +95,26 @@ namespace DWSIM.UI.Forms
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_PhaseEnvelope = new ButtonMenuItem { Text = "Phase Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
 
+            btnUtilities_TrueCriticalPoint.Click += (sender, e) => {
+                var tcp = new Desktop.Editors.Utilities.TrueCriticalPointView(FlowsheetObject);
+                var form = Common.GetDefaultEditorForm("True Critical Point", 500, 250, tcp);
+                form.Show();
+            };
+
+            btnUtilities_BinaryEnvelope.Click += (sender, e) =>
+            {
+                var bpe = new Desktop.Editors.Utilities.BinaryEnvelopeView(FlowsheetObject);
+                var form = Common.GetDefaultEditorForm("Binary Phase Envelope", 500, 750, bpe);
+                form.Show();
+            };
+
+            btnUtilities_PhaseEnvelope.Click += (sender, e) =>
+            {
+                var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
+                var form = Common.GetDefaultEditorForm("Phase Envelope", 500, 750, pe);
+                form.Show();
+            };
+
             var btnObjects = new ButtonMenuItem { Text = "Add New Simulation Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-workflow.png")), Shortcut = Keys.A | Application.Instance.AlternateModifier };
             var btnInsertText = new ButtonMenuItem { Text = "Add New Text Block", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "TextWidth_96px.png")) };
             var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Grid_96px.png")) };

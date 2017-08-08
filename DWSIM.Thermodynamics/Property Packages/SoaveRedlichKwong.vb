@@ -961,7 +961,7 @@ Namespace PropertyPackages
             If n > 0 Then
                 CP1 = cpc.CRITPT_PR(Vm2, VTc2, VPc2, VVc2, Vw2, VKij2)
                 If CP1.Count > 0 Then
-                    Dim cp0 As Double() = CP1(0)
+                    Dim cp0 As Object() = CP1(0)
                     TCR = cp0(0)
                     PCR = cp0(1)
                     VCR = cp0(2)

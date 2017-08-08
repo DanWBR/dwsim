@@ -69,8 +69,11 @@ namespace DWSIM.UI.Desktop.Editors
             var txt1 = new TextArea { Text = exc.Message.ToString(), ReadOnly = true };
             var txt2 = new TextArea { Text = exc.ToString(), ReadOnly = true };
 
-            var tab1 = new TabPage { Content = txt1, Text = "Error Message" };
-            var tab2 = new TabPage { Content = txt2, Text = "Details" };
+            var t1 = new TableLayout(new TableRow(txt1));
+            var t2 = new TableLayout(new TableRow(txt2));
+
+            var tab1 = new TabPage { Content = t1, Text = "Error Message" };
+            var tab2 = new TabPage { Content = t2, Text = "Details" };
 
             var tabc = new TabControl { Height = 300 };
             tabc.Pages.Add(tab1);
@@ -80,21 +83,21 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(new Label { Text = "Actions", Font = SystemFonts.Bold() });
 
-            var dyn1 = new DynamicLayout { Padding = new Padding(10) };
+            var dyn1 = new DynamicLayout { Padding = new Padding(0) };
             dyn1.CreateAndAddLabelAndButtonRow("Close this window.", "Continue", null, (sender, e) =>
             {
                 this.Close();
             });
             container.Rows.Add(new TableRow(dyn1));
 
-            var dyn2 = new DynamicLayout { Padding = new Padding(10) };
+            var dyn2 = new DynamicLayout { Padding = new Padding(0) };
             dyn2.CreateAndAddLabelAndButtonRow("Kill current DWSIM process. Unsaved changes will be lost.", "Kill", null, (sender, e) =>
             {
                 Process.GetCurrentProcess().Kill();
             });
             container.Rows.Add(new TableRow(dyn2));
 
-            var dyn3 = new DynamicLayout { Padding = new Padding(10) };
+            var dyn3 = new DynamicLayout { Padding = new Padding(0) };
             dyn3.CreateAndAddLabelAndButtonRow("Restart DWSIM", "Restart", null, (sender, e) =>
             {
                 Application.Instance.Restart();
@@ -103,7 +106,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.Rows.Add(new Label { Text = "Additional Support", Font = SystemFonts.Bold() });
 
-            var dyn4 = new DynamicLayout { Padding = new Padding(10) };
+            var dyn4 = new DynamicLayout { Padding = new Padding(0) };
             dyn4.CreateAndAddLabelAndButtonRow("Search DWSIM Forums for information about the current error.", "Search Forums", null, (sender, e) =>
             {
                 var baseaddress = "https://sourceforge.net/p/dwsim/search/?q=";
@@ -112,7 +115,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
             container.Rows.Add(new TableRow(dyn4));
 
-            var dyn5 = new DynamicLayout { Padding = new Padding(10) };
+            var dyn5 = new DynamicLayout { Padding = new Padding(0) };
             dyn5.CreateAndAddLabelAndButtonRow("Search DWSIM's Website for information about the current error.", "Search Website", null, (sender, e) =>
             {
                 var baseaddress = "http://dwsim.inforside.com.br/wiki/index.php?title=Special:Search&fulltext=Search&profile=all&redirs=1&search=";
@@ -123,7 +126,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             if (githublink != "")
             {
-                var dyn6 = new DynamicLayout { Padding = new Padding(10) };
+                var dyn6 = new DynamicLayout { Padding = new Padding(0) };
                 dyn6.CreateAndAddLabelAndButtonRow("View the code line where this error was raised/generated on DWSIM's GitHub repository.", "View code @ GitHub", null, (sender, e) =>
                 {
                     Process.Start(githublink);

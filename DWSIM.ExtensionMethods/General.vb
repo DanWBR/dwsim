@@ -4,6 +4,28 @@ Imports System.Globalization
 Public Module General
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Function ToDoubleArray(al As ArrayList) As Double()
+
+        Dim list As New List(Of Double)
+        For Each item In al
+            list.Add(Convert.ToDouble(item))
+        Next
+        Return list.ToArray()
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
+    Public Function ToDoubleList(al As ArrayList) As List(Of Double)
+
+        Dim list As New List(Of Double)
+        For Each item In al
+            list.Add(Convert.ToDouble(item))
+        Next
+        Return list
+
+    End Function
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ConvertFromSI(d As Double, units As String) As Double
 
         Return SharedClasses.SystemsOfUnits.Converter.ConvertFromSI(units, d)
