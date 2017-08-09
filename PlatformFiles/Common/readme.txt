@@ -1,7 +1,7 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
 Version 5.0
-Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Le�n
+Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
 DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
@@ -67,6 +67,14 @@ VERSION HISTORY / CHANGELOG
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
 
 Version 5.0
+
+- [NEW] New Cross-Platform User Interface (Windows/Linux/macOS)
+- [NEW] Simulation Objects now feature Dynamic Properties
+- [CHG] Reworked Classic interface to increase PFD area
+- [CHG] Native libraries are now included on each platform-specific installer/package
+- [FIX] Fixed Equation 107 in compound creator
+- [FIX] Fixed ODE solver in PFR code
+- [FIX] Various bug fixes and minor enhancements 
 
 Version 4.3 Update 14
 

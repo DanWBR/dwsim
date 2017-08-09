@@ -13,6 +13,8 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 - Linux with Mono 4.0 or newer
 - macOS with Mono 4.0 or newer
 
+### Project Details
+
 **Project Name** | **Description**
 ------------ | -------------
 **Shared Projects**
