@@ -66,4 +66,4 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 ### Compiling
 
-The whole DWSIM project can be compiled using Visual Studio 2013 or 2015, only on Windows.
+The whole DWSIM project can be compiled using Visual Studio 2013 or newer, only on Windows.
