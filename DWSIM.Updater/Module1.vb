@@ -36,6 +36,8 @@ Module Module1
 
             If RunningPlatform() = Platform.Linux Then
                 extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "linux" & sep & "7za"
+            ElseIf RunningPlatform() = Platform.Mac Then
+                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "mac" & sep & "unar"
             Else
                 extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "windows" & sep & "7za.exe"
             End If
@@ -69,7 +71,11 @@ Module Module1
                     Dim p As New Process
                     With p.StartInfo
                         .FileName = extrc
-                        .Arguments = "x " & Chr(34) & efile & Chr(34) & " -aoa -bb1 -r -o" & Chr(34) & My.Application.Info.DirectoryPath & Chr(34)
+                        If RunningPlatform() = Platform.Mac Then
+                            .Arguments = "-f " & Chr(34) & efile & Chr(34) & " -o" & Chr(34) & My.Application.Info.DirectoryPath & Chr(34)
+                        Else
+                            .Arguments = "x " & Chr(34) & efile & Chr(34) & " -aoa -bb1 -r -o" & Chr(34) & My.Application.Info.DirectoryPath & Chr(34)
+                        End If
                         .WorkingDirectory = My.Application.Info.DirectoryPath
                         .UseShellExecute = False
                     End With
@@ -89,32 +95,17 @@ Module Module1
 
                 Console.WriteLine()
 
-                If RunningPlatform() = Platform.Windows Then
-                    Console.WriteLine("DWSIM was updated successfully. Press any key to close the updater and launch DWSIM.")
-                    Console.ReadKey(True)
-                Else
-                    Console.WriteLine("DWSIM was updated successfully. Now closing the updater and launching DWSIM.")
-                End If
-
-                If RunningPlatform() = Platform.Linux Then
-                    Dim startInfo = New ProcessStartInfo("mono", My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.exe")
-                    startInfo.UseShellExecute = True
-                    Process.Start(startInfo)
-                Else
-                    Process.Start(My.Application.Info.DirectoryPath & sep & "DWSIM.exe")
-                End If
+                Console.WriteLine("DWSIM was updated successfully. Press any key to close the updater.")
+                Console.ReadKey(True)
 
             Catch ex As Exception
 
                 Console.WriteLine()
                 Console.WriteLine("Update failed: " & ex.Message.ToString)
                 Console.WriteLine()
-                If RunningPlatform() = Platform.Windows Then
-                    Console.WriteLine("DWSIM was not updated successfully. Press any key to close the updater.")
-                    Console.ReadKey(True)
-                Else
-                    Console.WriteLine("DWSIM was not updated successfully. Closing the updater...")
-                End If
+
+                Console.WriteLine("DWSIM was not updated successfully. Press any key to close the updater.")
+                Console.ReadKey(True)
 
             Finally
 

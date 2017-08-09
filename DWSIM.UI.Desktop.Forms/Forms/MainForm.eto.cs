@@ -23,6 +23,14 @@ namespace DWSIM.UI
 
         ListBox MostRecentList;
 
+        private Panel UpdatePanel;
+        private Label UpdateLabel;
+        private Button UpdateButton1, UpdateButton2;
+        private ProgressBar UpdateProgressBar;
+        private System.Timers.Timer timer1 = new System.Timers.Timer();
+
+        private TableLayout TableContainer;
+
         void InitializeComponent()
         {
 
@@ -40,13 +48,13 @@ namespace DWSIM.UI
             switch (GlobalSettings.Settings.RunningPlatform())
             {
                 case GlobalSettings.Settings.Platform.Windows:
-                    ClientSize = new Size(660, 390);
+                    ClientSize = new Size(690, 420);
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    ClientSize = new Size(660, 365);
+                    ClientSize = new Size(690, 395);
                     break;
                 case GlobalSettings.Settings.Platform.Mac:
-                    ClientSize = new Size(660, 350);
+                    ClientSize = new Size(690, 380);
                     break;
             }
 
@@ -152,13 +160,18 @@ namespace DWSIM.UI
             tableright.Rows.Add(new TableRow(new Label { Text = "Recent Files", Font = SystemFonts.Bold(), TextColor = Colors.White }));
             tableright.Rows.Add(new TableRow(MostRecentList));
 
-            Content = new TableLayout
+            var tl = new DynamicLayout();
+            tl.Add(new TableRow(stack, tableright));
+
+            TableContainer = new TableLayout
             {
                 Padding = 10,
                 Spacing = new Size(5, 5),
-                Rows = { new TableRow(stack, tableright) },
+                Rows = { new TableRow(tl) },
                 BackgroundColor = bgcolor,
             };
+
+            Content = TableContainer;
 
             var quitCommand = new Command { MenuText = "Quit".Localize(), Shortcut = Application.Instance.CommonModifier | Keys.Q };
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
@@ -208,6 +221,126 @@ namespace DWSIM.UI
             Shown += MainForm_Shown;
 
             Closing += MainForm_Closing;
+
+            //check for updates (automatic updater)
+
+            SetupUpdateItems();
+
+            if (GlobalSettings.Settings.AutomaticUpdates) Task.Factory.StartNew(() => LaunchUpdateProcess());
+
+        }
+
+        private void SetupUpdateItems()
+        {
+
+            timer1.Enabled = true;
+
+            UpdatePanel = new Panel { BackgroundColor = new Color(0.051f, 0.447f, 0.651f) };
+            UpdateLabel = new Label { TextColor = Colors.White, Text = "Downloading updates..." };
+            UpdateButton1 = new Button { Text = "Cancel" };
+            UpdateButton2 = new Button { Text = "Restart", Enabled = false };
+
+            UpdateButton2.Click += (sender, e) =>
+            {
+                try
+                {
+                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "update.run", "");
+                    Application.Instance.Restart();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Application restart failed. Please restart DWSIM manually.");
+                }
+            };
+
+            UpdateProgressBar = new ProgressBar { MinValue = 0, MaxValue = 100, Width = 200, Height = 10 };
+
+            var tr = new TableRow(UpdateLabel, null, UpdateProgressBar, UpdateButton1, UpdateButton2);
+            var tl = new TableLayout() { Padding = new Padding(0), Spacing = new Size(5, 0) };
+            tl.Rows.Add(tr);
+
+            UpdatePanel.Content = tl;
+            UpdatePanel.Visible = true;
+
+            TableContainer.Rows.Add(null);
+            TableContainer.Rows.Add(UpdatePanel);
+
+        }
+
+        private void LaunchUpdateProcess()
+        {
+
+            DWSIM.Updater.Updater updater = new DWSIM.Updater.Updater();
+
+            UpdateButton1.Click += (sender, e) =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    updater.Downloader.Stop(true);
+                    updater.DeleteFiles();
+                    UpdatePanel.Visible = false;
+                    timer1.Stop();
+                });
+            };
+
+            updater.BeginUpdater = () =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    UpdatePanel.Visible = true;
+                    UpdateLabel.Text = "Downloading updates...";
+                });
+            };
+
+            updater.UpdaterRunning = () =>
+            {
+                Application.Instance.Invoke(() =>
+                {
+                    timer1.Elapsed += (sender, e) =>
+                    {
+                        Application.Instance.Invoke(() =>
+                        {
+                            try
+                            {
+                                UpdateLabel.Text = "Downloading updates... " + updater.Downloader.CurrentFile.Name +
+                                    " (" + FileDownloader.FormatSizeBinary(updater.Downloader.CurrentFileProgress) +
+                                    "/" + FileDownloader.FormatSizeBinary(updater.Downloader.CurrentFileSize) + ")" +
+                                    ", " + string.Format("{0}/s", FileDownloader.FormatSizeBinary(updater.Downloader.DownloadSpeed));
+                                UpdateProgressBar.Value = (int)(updater.Downloader.TotalPercentage());
+                            }
+                            catch (Exception) { }
+                        });
+                    };
+                    timer1.Interval = 500;
+                    timer1.Start();
+                });
+            };
+
+            updater.Downloader.FileDownloadFailed += (s, e) =>
+                Application.Instance.Invoke(() =>
+            {
+                updater.DeleteFiles();
+                UpdatePanel.Visible = false;
+                timer1.Stop();
+            });
+
+            updater.Downloader.Canceled += (s2, e2) => Application.Instance.Invoke(() =>
+            {
+                updater.DeleteFiles();
+                UpdatePanel.Visible = false;
+                timer1.Stop();
+            });
+
+            updater.Downloader.Completed += (s3, e3) => Application.Instance.Invoke(() =>
+            {
+                UpdateLabel.Text = "Updates are ready to install. Click on 'Restart' to restart and update DWSIM.";
+                UpdateProgressBar.Visible = false;
+                UpdateButton1.Enabled = false;
+                UpdateButton2.Enabled = true;
+                timer1.Stop();
+            });
+
+            updater.LaunchUpdateProcess();
 
         }
 

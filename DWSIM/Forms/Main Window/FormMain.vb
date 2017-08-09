@@ -2992,14 +2992,17 @@ ruf:                Application.DoEvents()
 
         Dim updater As New Global.DWSIM.Updater.Updater()
 
+        AddHandler UpdateBox_Button1.Click, Sub() Me.UIThread(Sub()
+                                                                  updater.Downloader.Stop(True)
+                                                                  updater.DeleteFiles()
+                                                                  UpdateBox_Panel.Visible = False
+                                                                  timer1.Stop()
+                                                              End Sub)
+
         updater.BeginUpdater = Sub()
                                    Me.UIThread(Sub()
                                                    UpdateBox_Panel.Visible = True
                                                    UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "..."
-                                                   updater.Downloader.Stop(True)
-                                                   updater.DeleteFiles()
-                                                   UpdateBox_Panel.Visible = False
-                                                   timer1.Stop()
                                                End Sub)
                                End Sub
 

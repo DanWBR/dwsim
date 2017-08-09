@@ -173,6 +173,10 @@
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.FileDownloader\DWSIM.FileDownloader.csproj">
+      <Project>{a86c4bd5-88e7-4954-ae31-e4a597382b1a}</Project>
+      <Name>DWSIM.FileDownloader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
       <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
       <Name>DWSIM.FlowsheetBase</Name>
@@ -204,6 +208,10 @@
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>
       <Name>DWSIM.UnitOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.Updater\DWSIM.Apps.Updater.vbproj">
+      <Project>{f3be9782-dbf8-44ab-94df-1dde12d4208a}</Project>
+      <Name>DWSIM.Apps.Updater</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
