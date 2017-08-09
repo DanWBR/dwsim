@@ -53,6 +53,7 @@ DWSIM.Controls.ZedGraph|Custom ZedGraph Library
 DWSIM.DrawingTools|Flowsheet Drawing Tools
 DWSIM.Plugins.NaturalGas|Natural Gas Properties Plugin
 **Cross-Platform UI Projects**
+DWSIM.Controls.MonoMac.TextEditor|Control for script code editing on Mac platform
 DWSIM.DrawingTools.SkiaSharp|Flowsheet Drawing Tools (SkiaSharp-based)
 DWSIM.FlowsheetBase|Flowsheet Base Class for Cross-Platform UI
 DWSIM.UI.Desktop|Cross-Platform UI App Launcher

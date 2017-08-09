@@ -349,6 +349,21 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static Label CreateAndAddTwoLabelsRow2(this DynamicLayout container, String text1, String text2)
+        {
+
+            var txt = new Label { Text = text1, VerticalAlignment = VerticalAlignment.Center, Font = SystemFonts.Bold(null, FontDecoration.None) };
+            var txt2 = new Label { Text = text2, Width = 350, VerticalAlignment = VerticalAlignment.Center };
+
+            var tr = new TableRow(txt, null, txt2);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return txt2;
+
+        }
+
         public static TextBox CreateAndAddStringEditorRow2(this DynamicLayout container, String text, String placeholder, String currval, Action<TextBox, EventArgs> command)
         {
 

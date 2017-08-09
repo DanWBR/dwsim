@@ -98,10 +98,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\About.cs" />
-    <Compile Include="Forms\About.eto.cs">
-      <DependentUpon>About.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Forms\AboutBox.cs" />
     <Compile Include="Forms\Flowsheet.cs" />
     <Compile Include="Forms\Flowsheet.eto.cs">
       <DependentUpon>Flowsheet.cs</DependentUpon>

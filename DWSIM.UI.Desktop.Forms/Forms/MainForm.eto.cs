@@ -125,7 +125,7 @@ namespace DWSIM.UI
                 form.Show();
             };
 
-            btn7.Click += (sender, e) => new About().Show();
+            btn7.Click += (sender, e) => new AboutBox().Show();
             btn8.Click += (sender, e) => Process.Start("http://sourceforge.net/p/dwsim/donate/");
 
             var stack = new StackLayout { Orientation = Orientation.Vertical, Spacing = 5 };
@@ -177,7 +177,7 @@ namespace DWSIM.UI
             quitCommand.Executed += (sender, e) => Application.Instance.Quit();
 
             var aboutCommand = new Command { MenuText = "About".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "information.png")) };
-            aboutCommand.Executed += (sender, e) => new About().Show();
+            aboutCommand.Executed += (sender, e) => new AboutBox().Show();
 
             var aitem1 = new ButtonMenuItem { Text = "Preferences".Localize(), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-sorting_options.png")) };
             aitem1.Click += (sender, e) =>
