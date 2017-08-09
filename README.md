@@ -1,9 +1,15 @@
-# DWSIM - Open Source Process Simulator
+## DWSIM - Open Source Process Simulator
 Copyright 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo León
 
-# Supported Operating Systems
+DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
 
-- Windows with .NET Framework 4.0 or newer
+### License
+
+DWSIM is licensed under the GNU General Public License (GPL) Version 3.
+
+### Supported Operating Systems
+
+- Windows with .NET Framework 4.5 or newer
 - Linux with Mono 4.0 or newer
 - macOS with Mono 4.0 or newer
 
@@ -56,6 +62,6 @@ DWSIM.UI.Desktop.Shared|Cross-Platform UI shared code
 DWSIM.UI.Desktop.WinForms|Cross-Platform UI Windows Forms Platform-specific code
 DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Platform-specific code
 
-* Compiling
+### Compiling
 
 The whole DWSIM project can be compiled using Visual Studio 2013 or 2015, only on Windows.
