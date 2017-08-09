@@ -83,7 +83,7 @@ namespace DWSIM.UI.Forms.Forms
                 if (type != null)
                 {
                     MethodInfo dispalayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
-                    if (dispalayName != null) clrinfo = "Mono Framework version " + dispalayName.Invoke(null, null).ToString();
+                    if (dispalayName != null) clrinfo = "Mono Framework, Version " + dispalayName.Invoke(null, null).ToString();
                 }
             }
             else {
