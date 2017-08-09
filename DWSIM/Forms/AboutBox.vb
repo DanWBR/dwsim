@@ -151,7 +151,7 @@ Public Class AboutBox
 
         Dim assnames = New String() {"DWSIM.exe", "DWSIM.Automation.dll", "DWSIM.DrawingTools.dll", "DWSIM.ExtensionMethods.dll", "DWSIM.FileDownloader.dll",
                                      "DWSIM.FlowsheetSolver.dll", "DWSIM.GlobalSettings.dll", "DWSIM.Interfaces.dll", "DWSIM.MathOps.dll",
-                                     "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll", "DWSIM.Thermodynamics.NativeLibraries.dll",
+                                     "DWSIM.SharedClasses.dll", "DWSIM.Thermodynamics.dll",
                                      "DWSIM.UnitOperations.dll", "DWSIM.Updater.exe", "DWSIM.XMLSerializer.dll"}
 
         dgvDWSIMComponents.Rows.Clear()
