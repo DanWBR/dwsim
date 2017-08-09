@@ -69,14 +69,27 @@ namespace DWSIM.UI.Forms.Forms
             string crtext = Shared.AssemblyCopyright;
 
             layout.Add(new ImageView { Size = new Size(100, 100), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 0, 0);
-            layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform UI)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 110, 0);
+            layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform User Interface)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 110, 0);
             layout.Add(new Label { Text = vtext, TextAlignment = TextAlignment.Left}, 110, 20);
             layout.Add(new Label { Text = crtext, TextAlignment = TextAlignment.Left}, 110, 40);
 
-            string osinfo, clrinfo, meminfo;
+            string osinfo = "", clrinfo = "", meminfo = "";
 
             osinfo = Environment.OSVersion.ToString();
-            clrinfo = "Microsoft .NET Framework, Runtime Version " + System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion().ToString();
+
+            if (GlobalSettings.Settings.IsRunningOnMono())
+            {
+                Type type = Type.GetType("Mono.Runtime");
+                if (type != null)
+                {
+                    MethodInfo dispalayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+                    if (dispalayName != null) clrinfo = "Mono Framework version " + dispalayName.Invoke(null, null).ToString();
+                }
+            }
+            else {
+                clrinfo = "Microsoft .NET Framework, Runtime Version " + System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion().ToString();            
+            }
+            
             meminfo = (GC.GetTotalMemory(false) / 1024 / 1024).ToString("#") + " MB managed, " + (Environment.WorkingSet / 1024 / 1024).ToString("#") + " MB total";
 
             var container1 = new DynamicLayout() { Padding = new Padding(10) };
