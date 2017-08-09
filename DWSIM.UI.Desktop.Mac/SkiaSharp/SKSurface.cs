@@ -9,10 +9,29 @@ namespace DWSIM.UI.Desktop.Mac
 {
     public class FlowsheetSurfaceControlHandler : Eto.Mac.Forms.MacView<NSView, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
-        
+
+        private FlowsheetSurface_Mac nativecontrol;
+
         public FlowsheetSurfaceControlHandler()
         {
-            this.Control = new FlowsheetSurface_Mac();
+            nativecontrol = new FlowsheetSurface_Mac();
+            this.Control = nativecontrol;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+            Widget.MouseDown += (sender, e) =>
+            {
+                //nativecontrol._lastTouchX = nativecontrol.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+                //nativecontrol._lastTouchY = nativecontrol.Bounds.Height - nativecontrol.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+                nativecontrol._lastTouchX = e.Location.X;
+                nativecontrol._lastTouchY = e.Location.Y;
+                nativecontrol.fsurface.InputPress((int)(nativecontrol._lastTouchX), (int)(nativecontrol._lastTouchY));
+                nativecontrol.NeedsDisplay = true;
+            };
+        
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -69,8 +88,8 @@ namespace DWSIM.UI.Desktop.Mac
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
 
-        private float _lastTouchX;
-        private float _lastTouchY;
+        public float _lastTouchX;
+        public float _lastTouchY;
 
         private SKDrawable drawable;
 
@@ -114,44 +133,30 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void UpdateTrackingAreas()
         {
-            if (trackarea != null){RemoveTrackingArea(trackarea);}
+            if (trackarea != null) { RemoveTrackingArea(trackarea); }
             trackarea = new NSTrackingArea(Frame, NSTrackingAreaOptions.ActiveWhenFirstResponder | NSTrackingAreaOptions.MouseMoved | NSTrackingAreaOptions.InVisibleRect, this, null);
             AddTrackingArea(trackarea);
         }
 
         public override void DrawRect(CGRect dirtyRect)
         {
-            
+
             base.DrawRect(dirtyRect);
-            
+
             var ctx = NSGraphicsContext.CurrentContext.GraphicsPort;
 
             // create the skia context
             SKImageInfo info;
-            
+
             var surface = drawable.CreateSurface(Bounds, 1.0f, out info);
-            
+
             fsurface.UpdateSurface(surface);
 
             Console.WriteLine("Redraw");
 
             // draw the surface to the context
             drawable.DrawSurface(ctx, Bounds, info, surface);
-            
-        }
 
-        public override void MouseDown(NSEvent theEvent)
-        {
-            base.MouseDown(theEvent);
-            if (theEvent.ClickCount == 2) {
-                //fsurface.ZoomAll((int)this.Bounds.Width, (int)this.Bounds.Height);
-            }
-            else {
-                _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
-                _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
-                fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
-            }
-            this.NeedsDisplay = true;
         }
 
         public override void MouseMoved(NSEvent theEvent)

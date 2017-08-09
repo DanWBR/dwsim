@@ -235,10 +235,12 @@ namespace DWSIM.UI
 
             timer1.Enabled = true;
 
-            UpdatePanel = new Panel { BackgroundColor = new Color(0.051f, 0.447f, 0.651f) };
-            UpdateLabel = new Label { TextColor = Colors.White, Text = "Downloading updates..." };
+            UpdatePanel = new Panel { BackgroundColor = new Color(0.051f, 0.447f, 0.651f), Visible = false };
+            UpdateLabel = new Label { TextColor = Colors.White, Text = "Downloading updates...", TextAlignment = TextAlignment.Left, VerticalAlignment = VerticalAlignment.Center };
             UpdateButton1 = new Button { Text = "Cancel" };
+            if (Application.Instance.Platform.IsGtk) UpdateButton1.TextColor = Colors.White;
             UpdateButton2 = new Button { Text = "Restart", Enabled = false };
+            if (Application.Instance.Platform.IsGtk) UpdateButton2.TextColor = Colors.White;
 
             UpdateButton2.Click += (sender, e) =>
             {
@@ -260,7 +262,6 @@ namespace DWSIM.UI
             tl.Rows.Add(tr);
 
             UpdatePanel.Content = tl;
-            UpdatePanel.Visible = true;
 
             TableContainer.Rows.Add(null);
             TableContainer.Rows.Add(UpdatePanel);
