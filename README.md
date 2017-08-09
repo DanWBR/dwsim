@@ -9,9 +9,9 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 
 ### Supported Operating Systems
 
-- Windows with .NET Framework 4.5 or newer
-- Linux with Mono 4.0 or newer
-- macOS with Mono 4.0 or newer
+- 64-bit Windows with .NET Framework 4.5 or newer
+- 64-bit Linux with Mono 4.0 or newer
+- 64-bit macOS with Mono 4.0 or newer
 
 ### Project Details
 
@@ -66,5 +66,7 @@ DWSIM.UI.Desktop.WPF|Cross-Platform UI Windows Presentation Foundation (WPF) Pla
 
 ### Compiling
 
-The whole DWSIM project can be compiled using Visual Studio 2013 or newer, only on Windows.
-To get pre-release [Eto.Forms](https://github.com/picoe/Eto) packages, add https://www.myget.org/F/eto/ as a NuGet package source.
+- The whole DWSIM project can be compiled using Visual Studio 2013 or newer, only on Windows.
+- To get pre-release [Eto.Forms](https://github.com/picoe/Eto) packages, add https://www.myget.org/F/eto/ as a NuGet package source.
+- To compile the Classic UI executable ('DWSIM' project), change the Build target to 'Debug/Release' => 'Any CPU'.
+- To compile the Cross-Platform UI executable ('DWSIM.UI.Desktop' project), change the Build target to 'Debug/Release' => 'x64'.
