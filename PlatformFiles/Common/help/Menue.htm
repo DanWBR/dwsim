@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html><head>
+  
+  <style>
+div.heading1
+{
+  display:block;
+
+  border:1px white;
+  border-top-style:solid;
+
+  font-weight:bold;
+
+  color:#FFFFFF;
+
+  background-color:#228B22;
+
+  width:185px;
+
+  text-align:left;
+
+  text-decoration:none;
+  text-shadow: 2px 2px #000000;
+
+
+  font:15px arial,sans-serif;
+  margin:0px;
+
+  padding-left:5px;
+}
+div.heading2
+{
+  display:block;
+
+  border:1px white;
+  border-top-style:solid;
+
+  font-weight:bold;
+
+  color:#FFFFFF;
+
+  background-color:#98bf21;
+
+  width:180px;
+
+  text-align:left;
+
+  text-decoration:none;
+  text-shadow: 2px 2px #a0a0a0;
+
+  font:15px arial,sans-serif;
+  margin:0px;
+
+  padding-left:10px;
+}
+div.heading3
+{
+  display:block;
+
+  border:1px white;
+  border-top-style:solid;
+
+  font-weight:bold;
+
+  color:#FFFFFF;
+
+  background-color:#808080;
+
+  width:175px;
+
+  text-align:left;
+
+  text-decoration:none;
+  text-shadow: 2px 2px #000000;
+
+  font:15px arial,sans-serif;
+  margin:0px;
+
+  padding-left:15px;
+}
+
+
+a:link,a:visited
+
+{
+  display:block;
+  border:1px white;
+  border-top-style:solid;
+
+  font-weight:bold;
+
+  color:#FFFFFF;
+
+  background-color:#aaaaaa;
+
+  width:170px;
+
+  text-align:left;
+
+  text-decoration:none;
+
+  font:12px arial,sans-serif;
+  margin:0px;
+
+  padding-left:20px;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+
+a:hover,a:active
+
+{
+
+background-color:#7A991A;
+
+}
+
+  </style>
+  
+  <script>
+
+function Highlight()
+{
+   //This routine is called on loading the menu.
+   //if a specific topic file is specified ( added by a ?-sign to the filename) it will be highlighted.
+
+   var filename = location.href;
+   if (filename.split('?').length ==2)
+   {
+     //A topic file was found for highlighting
+     searchlink = filename.split('?')[1];
+     
+     //search parent folder of link for opening and highlight link
+     Linklist = document.getElementsByTagName("a");
+     for (var i = 0; i < Linklist.length; i++)
+     {
+       if (Linklist[i].href.search(searchlink)>=0)
+	  {Linklist[i].style.backgroundColor="crimson";
+
+	   //toggle all parent folders as "visible" to show selected topic
+  	   var par = Linklist[i].parentNode;
+	   do {
+	     par.style.display = '';
+ 	     par = par.parentNode; 
+	   }
+	   while (par.id !='');
+  	  }
+     }
+   }
+}
+
+function ToggleSubfolder(Subfolder) 
+{
+
+    //Routine to open and close subfolders when clicking onto a menu heading
+
+    if (document.getElementById(Subfolder).style.display == 'none')
+    {document.getElementById(Subfolder).style.display = '';}
+    else
+    {document.getElementById(Subfolder).style.display = 'none';}
+
+}
+
+
+function BGCol(ID) 
+{
+
+    Linklist = document.getElementsByTagName("a");
+    for (var i = 0; i < Linklist.length; i++)
+      {Linklist[i].style.backgroundColor="#aaaaaa";}
+
+    var x = document.getElementById(ID);
+    x.style.backgroundColor="crimson";
+}
+
+  </script>
+</head><body onload="Highlight()" style="background-color: rgb(238, 238, 238);">
+<div class="heading1" onclick="ToggleSubfolder('Legal')">Legal</div>
+
+<div id="Legal" style="display: none;">
+<a id="LG0" onclick="BGCol('LG0')" href="1%20Disclaimer.htm" target="content">Disclaimer</a>
+<a id="LG1" onclick="BGCol('LG1')" href="1%20GPL_v3_License.htm" target="content">GPL_v3_License</a>
+</div>
+
+<div class="heading1" onclick="ToggleSubfolder('Manuals')">Manuals</div>
+
+<div id="Manuals" style="display: none;">
+<a id="MA0" onclick="BGCol('MA0')" href="../docs/Tech_Manual.pdf" target="content">Technical Manual</a>
+<a id="MA1" onclick="BGCol('MA1')" href="../docs/User_Guide.pdf" target="content">User Guide</a>
+<a id="MA2" onclick="BGCol('MA2')" href="../docs/cape_open_reference3.pdf" target="content">Cape Open</a>
+<a id="MA3" onclick="BGCol('MA3')" href="../docs/command_line_mode.pdf" target="content">Command Line Mode</a>
+<a id="MA4" onclick="BGCol('MA4')" href="../docs/excel_addin_user_guide.pdf" target="content">Excel AddIn
+Guide</a>
+</div>
+
+<div class="heading1" onclick="ToggleSubfolder('SimObjects')">Simulation
+Objects</div>
+
+<div id="SimObjects" style="display: none;">
+<div class="heading2" onclick="ToggleSubfolder('Streams')">Streams</div>
+<div id="Streams" style="display: none;"> <a id="SO0" onclick="BGCol('SO0')" href="SO_Material_Stream.htm" target="content">Material
+Stream</a> <a id="SO1" onclick="BGCol('SO1')" href="SO_Energy_Stream.htm" target="content">Energy Stream</a> </div>
+<div class="heading2" onclick="ToggleSubfolder('UnitOps')">Unit
+Operations</div>
+<div id="UnitOps" style="display: none;"> <a id="SO2" onclick="BGCol('SO2')" href="SO_Mixer.htm" target="content">Mixer</a> <a id="SO3" onclick="BGCol('SO3')" href="SO_Splitter.htm" target="content">Splitter</a>
+<a id="SO4" onclick="BGCol('SO4')" href="SO_Separator.htm" target="content">Separator</a> <a id="SO5" onclick="BGCol('SO5')" href="SO_Tank.htm" target="content">Tank</a> <a id="SO6" onclick="BGCol('SO6')" href="SO_Pipe_Segment.htm" target="content">Pipe
+Segment</a> <a id="SO7" onclick="BGCol('SO7')" href="SO_Valve.htm" target="content">Valve</a> <a id="SO8" onclick="BGCol('SO8')" href="SO_Pump.htm" target="content">Pump</a> <a id="SO9" onclick="BGCol('SO9')" href="SO_Compressor.htm" target="content">Compressor</a>
+<a id="SO10" onclick="BGCol('SO10')" href="SO_Expander.htm" target="content">Expander</a> <a id="SO11" onclick="BGCol('SO11')" href="SO_Heater.htm" target="content">Heater</a> <a id="SO12" onclick="BGCol('SO12')" href="SO_Cooler.htm" target="content">Cooler</a>
+<a id="SO13" onclick="BGCol('SO13')" href="SO_Shortcut_Column.htm" target="content">Shortcut Column</a> <a id="SO14" onclick="BGCol('SO14')" href="SO_Rigorous_Column.htm" target="content">Rigorous
+Column</a> <a id="SO15" onclick="BGCol('SO15')" href="SO_Heatexchanger.htm" target="content">Heat Exchanger</a> <a id="SO16" onclick="BGCol('SO16')" href="SO_CompSep.htm" target="content">Component Separator</a> <a id="SO17" onclick="BGCol('SO17')" href="SO_OrificePlate.htm" target="content">Orifice
+Plate</a> <a id="SO18" onclick="BGCol('SO18')" href="SO_CustomUO.htm" target="content">Custom Unit Operation</a> <a id="SO19" onclick="BGCol('SO19')" href="SO_ExcelUO.htm" target="content">Excel
+Unit Operation</a> <a id="SO26" onclick="BGCol('SO26')" href="SO_FlowsheetUO.htm" target="content">Flowsheet Unit Operation</a>
+<a id="SO20" onclick="BGCol('SO20')" href="SO_SolidSeparator.htm" target="content">Solid Separator</a> <a id="SO21" onclick="BGCol('SO21')" href="SO_CakeFilter.htm" target="content">Continuous
+Cake Filter</a> <a id="SO22" onclick="BGCol('SO22')" href="SO_Reactor.htm" target="content">Reactor</a> </div>
+<div class="heading2" onclick="ToggleSubfolder('LogicalOps')">Logical
+Operations</div>
+<div id="LogicalOps" style="display: none;"> <a id="SO23" onclick="BGCol('SO23')" href="SO_Recycle.htm" target="content">Recycle</a>
+<a id="SO24" onclick="BGCol('SO24')" href="SO_Adjust.htm" target="content">Adjust</a> <a id="SO25" onclick="BGCol('SO25')" href="SO_Specification.htm" target="content">Specification</a> </div>
+<div class="heading2" onclick="ToggleSubfolder('GraphicObps')">Graphic
+Objects</div>
+<div id="GraphicObps" style="display: none;"> <a id="GO01" onclick="BGCol('GO01')" href="GO_Picture.htm" target="content">Picture</a>
+<a id="GO02" onclick="BGCol('GO02')" href="GO_Textbox.htm" target="content">Textbox</a> <a id="GO03" onclick="BGCol('GO03')" href="GO_SpreadsheetTable.htm" target="content">Linked Spreadsheet
+Table</a> <a id="GO04" onclick="BGCol('GO04')" href="GO_MasterPropertyTable.htm" target="content">Master Property
+Table</a> </div>
+</div>
+
+<div class="heading1" onclick="ToggleSubfolder('Settings')">Settings</div>
+
+<div id="Settings" style="display: none;"> <a id="CONF1" onclick="BGCol('CONF1')" href="CONF_DBManager.htm" target="content">Database
+Manager</a>
+<div class="heading2" onclick="ToggleSubfolder('GlobalSettings')">Global
+Settings</div>
+<div id="GlobalSettings" style="display: none;"> <a id="CONF0a" onclick="BGCol('CONF0a')" href="CONF_GlobalSettings1.htm" target="content">Solver Configuration</a> <a id="CONF0b" onclick="BGCol('CONF0b')" href="CONF_GlobalSettings2.htm" target="content">Component Databases</a> <a id="CONF0c" onclick="BGCol('CONF0c')" href="CONF_GlobalSettings3.htm" target="content">Interaction Parameters</a> <a id="CONF0e" onclick="BGCol('CONF0e')" href="CONF_GlobalSettings5.htm" target="content">Backups</a> <a id="CONF0f" onclick="BGCol('CONF0f')" href="CONF_GlobalSettings6.htm" target="content">Flowsheet</a> <a id="CONF0g" onclick="BGCol('CONF0g')" href="CONF_GlobalSettings7.htm" target="content">Other</a> </div>
+</div>
+
+<div class="heading1" onclick="ToggleSubfolder('Utilities')">Utilities</div>
+
+<div id="Utilities" style="display: none;"> <a id="UT0" onclick="BGCol('UT0')" href="UT_TrueCriticalPoint.htm" target="content">True
+Critical Point</a> <a id="UT1" onclick="BGCol('UT1')" href="UT_HydrateDissociation.htm" target="content">Hydrate Dissociation</a>
+<a id="UT2" onclick="BGCol('UT2')" href="UT_PureCompProps.htm" target="content">Pure Component Properties</a> <a id="UT3" onclick="BGCol('UT3')" href="UT_PhaseEnvelope.htm" target="content">Phase
+Envelope</a> <a id="UT4" onclick="BGCol('UT4')" href="UT_BinaryEnvelope.htm" target="content">Binary Envelope</a> <a id="UT5" onclick="BGCol('UT5')" href="UT_Triangular_LLE.htm" target="content">Triangular phase enveloupe (LLE)</a> <a id="UT6" onclick="BGCol('UT6')" href="UT_PSVSizing.htm" target="content">PSV
+Sizing</a> <a id="UT7" onclick="BGCol('UT7')" href="UT_VesselSizing.htm" target="content">Flash Vessel Sizing</a> <a id="UT8" onclick="BGCol('UT8')" href="UT_ColdFlowProps.htm" target="content">Cold Flow Properties</a>
+</div>
+
+<div class="heading1" onclick="ToggleSubfolder('Tools')">Tools</div>
+
+<div id="Tools" style="display: none;">
+<div class="heading2" onclick="ToggleSubfolder('CompCreator')">Component
+Creator</div>
+<div id="CompCreator" style="display: none;"> <a id="CC0" onclick="BGCol('CC0')" href="Component%20Creator.htm" target="content">Introduction</a>
+<a id="CC1" onclick="BGCol('CC1')" href="Component%20Creator%200.htm" target="content">Starting Component Creator</a> <a id="CC2" onclick="BGCol('CC2')" href="Component%20Creator%201.htm" target="content">Component Identification</a> <a id="CC3" onclick="BGCol('CC3')" href="Component%20Creator%202.htm" target="content">UNIFAC definition</a> <a id="CC4" onclick="BGCol('CC4')" href="Component%20Creator%203.htm" target="content">Joback definition</a> <a id="CC5" onclick="BGCol('CC5')" href="Component%20Creator%204.htm" target="content">Black-Oil Fluid Definition</a> </div>
+<div class="heading2" onclick="ToggleSubfolder('UNIFACIPRegr')">UNIFAC
+IP Regression</div>
+<div id="UNIFACIPRegr" style="display: none;"> <a id="UR0" onclick="BGCol('UR0')" href="UR_Introduction_0.htm" target="content">Introduction</a>
+<a id="UR1" onclick="BGCol('UR1')" href="UR_Case_Definition_1.htm" target="content">Case definition &amp; Database</a> <a id="UR2" onclick="BGCol('UR2')" href="UR_Model_Definition_2.htm" target="content">Model definition</a> <a id="UR3" onclick="BGCol('UR3')" href="UR_Data_Regression_3.htm" target="content">Data
+&amp; Regression</a> <a id="UR4" onclick="BGCol('UR4')" href="UR_Diagrams_4.htm" target="content">Diagrams</a> </div>
+<div class="heading2" onclick="ToggleSubfolder('ExcelAddin')">Excel
+Addin</div>
+<div id="ExcelAddin" style="display: none;"> <a id="EX0" onclick="BGCol('EX0')" href="ExcelAddInHelp/EX_Introduction_0.htm" target="content">Introduction</a> <a id="EX1" onclick="BGCol('EX1')" href="ExcelAddInHelp/EX_Installation_1.htm" target="content">Installation</a>
+<a id="EX2" onclick="BGCol('EX2')" href="ExcelAddInHelp/EX_Usage_2.htm" target="content">Usage</a> <a id="EX3" onclick="BGCol('EX3')" href="ExcelAddInHelp/EX_Overriding_IPs_3.htm" target="content">Overriding
+Interaction Parameters</a>
+<div class="heading3" onclick="ToggleSubfolder('Excelfunctions1')">Information
+functions</div>
+<div id="Excelfunctions1" style="display: none;"> <a id="EXF0" onclick="BGCol('EXF0')" href="ExcelAddInHelp/GetCompoundConstants.htm" target="content">GetCompoundConstants</a> <a id="EXF1" onclick="BGCol('EXF1')" href="ExcelAddInHelp/GetCompoundProp.htm" target="content">GetCompoundProp</a> <a id="EXF2" onclick="BGCol('EXF2')" href="ExcelAddInHelp/GetCompoundPropList.htm" target="content">GetCompoundPropList</a> <a id="EXF3" onclick="BGCol('EXF3')" href="ExcelAddInHelp/GetPropPackList.htm" target="content">GetPropPackList</a> <a id="EXF4" onclick="BGCol('EXF4')" href="ExcelAddInHelp/GetModelList.htm" target="content">GetModelList</a> <a id="EXF5" onclick="BGCol('EXF5')" href="ExcelAddInHelp/GetInteractionParameterSet.htm" target="content">GetInteractionParameterSet</a>
+<a id="EXF6" onclick="BGCol('EXF6')" href="ExcelAddInHelp/GetUserInteractionParameterSet.htm" target="content">GetUserInteractionParameterSet</a> <a id="EXF7" onclick="BGCol('EXF7')" href="ExcelAddInHelp/GetPropList.htm" target="content">GetPropList</a> <a id="EXF8" onclick="BGCol('EXF8')" href="ExcelAddInHelp/GetPhaseList.htm" target="content">GetPhaseList</a>
+<a id="EXF9" onclick="BGCol('EXF9')" href="ExcelAddInHelp/GetCompoundList.htm" target="content">GetCompoundList</a>
+</div>
+<div class="heading3" onclick="ToggleSubfolder('Excelfunctions2')">Property
+calculation</div>
+<div id="Excelfunctions2" style="display: none;"> <a id="EXF10" onclick="BGCol('EXF10')" href="ExcelAddInHelp/CalcProp.htm" target="content">CalcProp</a> </div>
+<div class="heading3" onclick="ToggleSubfolder('Excelfunctions3')">Flash
+functions</div>
+<div id="Excelfunctions3" style="display: none;"> <a id="EXF11" onclick="BGCol('EXF11')" href="ExcelAddInHelp/PHFlash.htm" target="content">PHFlash</a> <a id="EXF12" onclick="BGCol('EXF12')" href="ExcelAddInHelp/PHFlash2.htm" target="content">PHFlash2</a> <a id="EXF13" onclick="BGCol('EXF13')" href="ExcelAddInHelp/PSFlash.htm" target="content">PSFlash</a> <a id="EXF14" onclick="BGCol('EXF14')" href="ExcelAddInHelp/PSFlash2.htm" target="content">PSFlash2</a> <a id="EXF15" onclick="BGCol('EXF15')" href="ExcelAddInHelp/PTFlash.htm" target="content">PTFlash</a> <a id="EXF16" onclick="BGCol('EXF16')" href="ExcelAddInHelp/PVFFlash.htm" target="content">PVFFlash</a> <a id="EXF17" onclick="BGCol('EXF17')" href="ExcelAddInHelp/PVFFlash2.htm" target="content">PVFFlash2</a> <a id="EXF18" onclick="BGCol('EXF18')" href="ExcelAddInHelp/TVFFlash.htm" target="content">TVFFlash</a> <a id="EXF19" onclick="BGCol('EXF19')" href="ExcelAddInHelp/TVFFlash2.htm" target="content">TVFFlash2</a> </div>
+</div>
+</div>
+
+<div class="heading1" onclick="ToggleSubfolder('Online')">Online Content</div>
+
+<div id="Online" style="display: none;"> <a id="OL0" onclick="BGCol('OL0')" href="http://sourceforge.net/projects/dwsim/" target="NewWindow">SourceForge</a> <a id="OL1" onclick="BGCol('OL1')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Main_Page" target="content">WIKI Homepage</a> <a id="OL2" onclick="BGCol('OL2')" href="https://github.com/DanWBR/dwsim3" target="NewWindow">GitHub</a> <a id="OL3" onclick="BGCol('OL3')" href="http://dwsim.inforside.com.br/wiki/index.php?title=CAPE-OPEN" target="content">CAPE-OPEN</a> <a id="OL4" onclick="BGCol('OL4')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Command_Line_Mode" target="content">Command Line Mode</a> <a id="OL5" onclick="BGCol('OL5')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Excel_Add-In_for_Thermodynamic_Calculations" target="content">Excel Add-In</a> <a id="OL6" onclick="BGCol('OL6')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Setting_up_an_Electrolyte_Simulation" target="content">Aqueous Electrolyte Simulation</a> <a id="OL7" onclick="BGCol('OL7')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Using_the_Data_Regression_Utility" target="content">Data Regression</a> <a id="OL8" onclick="BGCol('OL8')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Category%3ATutorials" target="content">Tutorials</a> <a id="OL9" onclick="BGCol('OL9')" href="http://dwsim.inforside.com.br/wiki/index.php?title=Using_the_IronPython_Script_Manager" target="content">Script Manager</a>
+</div>
+
+</body></html>

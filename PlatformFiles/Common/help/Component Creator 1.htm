@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><script src="ContentScripts.js"></script>
+
+<title>Component Creator Identification</title><link rel="stylesheet" type="text/css" href="DWSIMstyle.css"></head>
+<body onload="LoadMenue()">
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ======================================= -->
+<!-- ================================================================================== -->
+
+<h3>Component Identifikation</h3>
+<a href="Component Creator 0.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="Component Creator 2.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<h4>Saving Component Creator Study</h4>
+To save the Component Creator Study you select from DWSIM menu of main program:<br>
+&nbsp;&nbsp; <i>File -&gt; Save</i><br> or<br>
+&nbsp;&nbsp; <i>File -&gt; Save as</i><br><br>
+Or you can click buttons in toolbar of main program with the same commands: <br><br><img src="Pictures/CompCreator1a.png" border="0">
+<hr>
+<h4>Component Creator Window</h4>
+The Component Creator Utility contains several tabs to define all necessary properties and a fixed upper part.<br><br>
+<img src="Pictures/CompCreator1.png" border="0"><br><span style="font-weight: bold;"><br></span><h3>Upper fixed part</h3>
+<ol>
+<li> <b>Path</b><br>Path and filename of user domponent database where the component will be saved to.<br>&nbsp;</li>
+<li> <b>Search</b><br>Displays file dialog to search for existing user database to save component into.<br>&nbsp;</li>
+<li> <b>Create New</b><br>Displays file dialog to define name for creating a new user database<br>&nbsp;</li>
+<li> <b>Replace components with same ID</b><br>Checking this box will
+cause replacing all data of a component with identical ID already
+existing in the database. This option is checked as standard and is
+usually used if you are updating the database with new parameters.<br>&nbsp;</li>
+<li> <b>Unit System</b><br>This dropdown field allows to select the
+unit system to display data. For instance if you have the boiling point
+in "K" you can select "SI-UNnits" and enter the value in K-units. Then
+you switch back to enter other parameters in other units like "°C".<br><br></li><li><span style="font-weight: bold;">Compound Type</span><br>Selects
+between a Standard-type fluid or Black-Oil type fluid. Black-oIl fluids
+are ones defined to work specifically with the Black-Oil Property
+Package.<br><br></li><li> <b>ID</b><br>Identification numer in database. It is only possible
+to have an ID once. If an existing ID is used this component will
+overwrite an existing component with the same ID if {4} is checked.<br>&nbsp;</li><li> <b>Name</b><br>Component name. This name will be displayed in component selection field of DWSIM.<br><br></li><li><b>Save component to database</b><br>Saves component parameters into defined database<br>&nbsp;</li>
+</ol>
+<hr>
+<h3>Component properties</h3>
+<h4>Identification</h4>
+This tab is used to define necessary information to identify the component.&nbsp;<ol start="1">
+<li><b>CAS-Number</b><br>CAS-Number of component. The blue label of
+that field is a link to the NIST-Webbook database and opens a page with
+available data of defined CAS-number.<br>&nbsp;</li>
+<li> <b>Mole Weight</b><br>Molecular weight of component. This font of
+this parameter is colored in light grey. This means it can't be edited
+as it is calculated automatically. See also following point {3}.<br>&nbsp;</li>
+<li> <b>Joback Calculation</b><br>Checkbox to toggle automatic
+calculation. Checking this box will cause Component Creator to
+calculate this parameter automatically from other available information
+(here: atom definition table). If box is not checked the molecular
+wheight can be edited by the user and will be fixed even if all
+parameters of that component are recalculated due to new informations
+beeing available. If the checkbox is rechecked again, editing will be
+disabled and the value is recalculated by automatic routines from
+Compound Creator. <br> All changes to a value will cause recalculation of other parameters depending on this parameter. <br>This is a general principal of compound creator valid for all parameters!<br>&nbsp;</li>
+<li> <b>Formula</b><br>Formula of component. This text is calculated automatically depending on definition of atoms.<br>&nbsp;</li>
+<li> <b>SMILES</b><br>The SMILES code is a standard code for representing the structure of any arbitrary chemical formula.<br>&nbsp;</li>
+<li> <b>PubChemEditor</b><br>This is a link to the PubChem Editor where
+you can construct the structure of your component. This Editor will
+give you the SMILES code of your new molecule. To get this even more
+simple you will find a so called InChi-Key on NIST-Webbook which is an
+alternative code to SMILES. This InChi-Key can be copied to PubChem
+editor to create that component and to get the SMILES code.<br>&nbsp;</li>
+<li> <b>SMILES Render</b><br>As soon as a SMILES code is available the molecule can be rendered and will be displayed in graphic box{8}.<br>&nbsp;</li>
+<li> <b>Graphic box</b><br>Graphic box containing rendered molecule from SMILES code. This is great for visualisation of molecular structure.<br>&nbsp;</li>
+<li> <b>DWSIM-File Status</b><br>This field shows saving status of
+Componet Creator Study File. This file contains all information for
+defining this component. This includes the parameters itself but
+additional informations like experimental data and whether a parameter
+is calculated automatically or edited manually. Every change of
+information will set saving status to "modified"&nbsp;<br><br></li><li><b>UserDB Status</b><br>This
+field shows saving status of componet in database. The database only
+stores the parameters of that component but no additional informations.
+Only changes to parameters will set saving status to "modified".</li></ol>
+
+<p></p>
+
+</body></html>

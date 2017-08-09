@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+
+<head>
+<title>Component Creator Start</title>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+<body onload="LoadMenue()">
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ======================================= -->
+<!-- ================================================================================== -->
+
+<H2>UNIFAC Interaction Parameter Regression </H2>
+<a href="UR_Diagrams_4.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="UR_Case_Definition_1.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+<H3>Introduction</H3>
+This tool is used to calculate missing group-group interaction parameters of the following property packages:
+<ol>
+<li> UNIFAC</li>
+<li> Modified UNIFAC (Dortmund)</li>
+<li> Modified UNIFAC (NIST)</li>
+</ol>
+
+<H3>Loading / Saving / Creating</H3>
+All informations defined in that tool, like experimental data, may be saved to a UNIFAC IP Regression 
+study file (*.dwruf) for later use. To save this study file you call command "Save active simulation" from main menue
+of DWSIM.<br>
+The main menue of DWSIM also holds a command to create a new study.
+
+<H3>Limitations</H3>
+This tool is still in development. Therefore it's capabilities are still limited:
+<ol>
+<li> Interaction parameters can only be calculated for existing groups.</li>
+<li> No new groups can be created yet.</li>
+<li> Only Liquid/Liquid equilibria data can be digested to calculate interaction parameters</li>
+<li> Calculated interaction parameters can be saved to a user database for utilisation in DWSIM simulations.</li>
+</ol>
+
+</BODY>
+</HTML>

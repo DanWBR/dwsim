@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>GetCompoundConstants</title>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+<body>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ============================================= -->
+<!-- ================================================================================== -->
+
+<H2>GetCompoundConstants</H2>
+<a href="TVFFlash2.htm" ><img src="pictures/arrow-up.gif"></a>
+<a href="GetCompoundProp.htm" ><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+Returns a list of compound constants and their values from the corresponding loaded database.<br><br>
+
+<H3>Input Parameters</H3>
+<ul>
+  <li><b>Compound name</b> - select from component list returned by function <a href="GetCompoundList.htm" >GetCompoundList</a></li>
+</ul>
+
+<H3>Result</H3>
+Result values are in SI units (K; Pa, m, s, ...)<br>
+The result is delivered as a two dimensional matrix with 2 columns and 18 rows. <br><br>
+
+The matrix is structured as follows:<br>
+<table class="LtGreyBG"  cellpadding="4" border=1>
+<tr>
+<td>
+<p><b>Property Name</b></p>
+</td>
+<td>
+<center><b>Property value</b></center>
+</td>
+</tr>
+</table>
+<br><br>
+<hr>
+
+
+<H3>Example:</h3>
+<i>Parameters: yellow  /  Results: grey</i><br><br>
+<table class="Parameters" cellpadding="4" border=1>
+<tr>
+<td><b>Compound name</b></td>
+<td>water</td>
+</tr>
+</table><br>
+<table class="LtGreyBG" cellpadding="4" border=1>
+<tr>
+<td><b>molecularweight</b></td>
+<td><b>18.015</b></td>
+</tr>
+<tr>
+<td><b>criticaltemperature</b></td>
+<td><b>647.14</b></td>
+</tr>
+<tr>
+<td><b>criticalpressure</b></td>
+<td><b>22064000</b></td>
+</tr>
+<tr>
+<td><b>....</b></td>
+<td><b>....</b></td>
+</tr>
+</table>
+
+</BODY>
+</HTML>

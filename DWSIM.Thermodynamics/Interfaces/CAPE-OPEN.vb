@@ -154,12 +154,6 @@ Public Class CAPEOPENManager
             Catch ex As Exception
             End Try
 
-            Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.InitLibraries()
-
-            'For Each ex In exlist
-            'Throw New CapeFailedInitialisationException(ex.Message.ToString, ex)
-            'Next
-
             Settings.InitializedCOPPM = True
 
         End If
@@ -217,8 +211,6 @@ Public Class CAPEOPENManager
     End Property
 
     Public Sub Terminate() Implements ICapeUtilities.Terminate
-
-        Dim exlist As List(Of Exception) = Thermodynamics.NativeLibraries.Files.RemoveLibraries()
 
         If Not _scontext Is Nothing Then
             If System.Runtime.InteropServices.Marshal.IsComObject(_scontext) Then

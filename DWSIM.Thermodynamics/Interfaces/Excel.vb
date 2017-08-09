@@ -648,10 +648,6 @@ Namespace ExcelAddIn
 
             Settings.ExcelMode = True
 
-            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Then
-                Thermodynamics.NativeLibraries.Files.InitLibraries()
-            End If
-
             Try
 
                 Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -756,12 +752,6 @@ Namespace ExcelAddIn
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
 
-            Finally
-
-                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Then
-                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
-                End If
-
             End Try
 
 
@@ -789,10 +779,6 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
 
             Settings.ExcelMode = True
-
-            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                Thermodynamics.NativeLibraries.Files.InitLibraries()
-            End If
 
             Try
 
@@ -934,12 +920,6 @@ Namespace ExcelAddIn
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
 
-            Finally
-
-                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                    Thermodynamics.NativeLibraries.Files.InitLibraries()
-                End If
-
             End Try
 
         End Function
@@ -1051,10 +1031,6 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
-
-            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                Thermodynamics.NativeLibraries.Files.InitLibraries()
-            End If
 
             Try
 
@@ -1200,12 +1176,6 @@ Namespace ExcelAddIn
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
 
-            Finally
-
-                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
-                End If
-
             End Try
 
         End Function
@@ -1229,10 +1199,6 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
-
-            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                Thermodynamics.NativeLibraries.Files.InitLibraries()
-            End If
 
             Try
 
@@ -1378,12 +1344,6 @@ Namespace ExcelAddIn
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
 
-            Finally
-
-                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
-                End If
-
             End Try
 
         End Function
@@ -1407,10 +1367,6 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
-
-            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                Thermodynamics.NativeLibraries.Files.InitLibraries()
-            End If
 
             Try
 
@@ -1556,12 +1512,6 @@ Namespace ExcelAddIn
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
 
-            Finally
-
-                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
-                End If
-
             End Try
 
         End Function
@@ -1585,10 +1535,6 @@ Namespace ExcelAddIn
         <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
 
             Settings.ExcelMode = True
-
-            If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                Thermodynamics.NativeLibraries.Files.InitLibraries()
-            End If
 
             Try
 
@@ -1733,12 +1679,6 @@ Namespace ExcelAddIn
                         frmEx.ShowDialog()
                         Return New Object(,) {{"Error"}, {""}}
                 End Select
-
-            Finally
-
-                If proppack = "PC-SAFT" Or proppack = "FPROPS" Or proppack = "CoolProp" Or flashalg = 4 Or flashalg = 5 Then
-                    Thermodynamics.NativeLibraries.Files.RemoveLibraries()
-                End If
 
             End Try
 

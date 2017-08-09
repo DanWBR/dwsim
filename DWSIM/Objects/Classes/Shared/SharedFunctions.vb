@@ -92,8 +92,6 @@ Namespace DWSIM
                 MessageBox.Show("GPU initialization failed: " & ex.Message)
             End Try
 
-            Return Thermodynamics.NativeLibraries.Files.InitLibraries()
-
         End Function
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)

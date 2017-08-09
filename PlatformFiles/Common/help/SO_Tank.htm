@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<script src="ContentScripts.js"></script>
+
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ==============================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
+
+<h2>Tank</h2>
+<a href="SO_Separator.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Pipe_Segment.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>In the current version of DWSIM, the Tank works like a fixed pressure drop for the process. 
+This model only works for liquids without a vapour phase.</p>
+
+<table>
+<tbody><tr>
+<td><br>
+</td>
+
+<td>
+
+
+<h3>Input Parameters</h3>
+<b>Pressure drop:</b> pressure difference between the outlet and inlet streams.<br>
+<b>Tank volume: </b>Volume of the fluid to calculate residence time.<br>
+
+<h3>Calculation method</h3>
+The outlet stream <b>pressure</b> is calculated from the inlet pressure and the
+pressure drop given.<br>
+The <b>temperature</b> remains the same. A TP Flash is done to calculate the
+properties of the outlet stream.<br>
+The <b>residence time</b> is calculated from liquid flow and volume of tank.
+<br>
+
+<h3>Output Parameters</h3>
+<b>Tank fluid residence time: </b>Residence time of fluid.
+</td>
+
+</tr>
+</tbody></table>
+
+<br><br>
+
+
+</body></html>

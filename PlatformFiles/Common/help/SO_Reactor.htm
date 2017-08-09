@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<script src="ContentScripts.js"></script>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ======================================= --><!-- ================================================================================== --></head><body onload="LoadMenue()">
+
+<h2>Reactors</h2>
+<a href="SO_CakeFilter.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Recycle.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>The reactors in DWSIM are specialized modules that solve a particular system of reactions of the same type in
+sequence or in parallel.</p>
+
+There are five different types of reactors available:<br>
+<table style="margin-left: 20px; width: 399px;">
+<tbody><tr><td style="width: 87px;"><b>Type   </b></td><td style="width: 222px;"><b>Description</b></td></tr>
+<tr><td style="width: 87px;">CSTR   </td><td style="width: 222px;"><b>C</b>ontinuous <b>S</b>tirred <b>T</b>ank <b>R</b>eactor</td></tr>
+<tr><td style="width: 87px;">PFR   </td><td style="width: 222px;"><b>P</b>lug <b>F</b>low <b>R</b>eactor</td></tr>
+<tr><td style="width: 87px;">Gibbs   </td><td style="width: 222px;">Gibbs Minimization Reactor</td></tr>
+<tr><td style="width: 87px;">Equilibrium   </td><td style="width: 222px;">Equilibrium Reactor</td></tr>
+<tr><td style="width: 87px;">Conversion   </td><td style="width: 222px;">Conversion Reactor</td></tr>
+</tbody></table>
+<br>
+To run a simulation of a reactor, the user needs to define the chemical reactions which will take place in the reactor.
+This is done through the&nbsp;<span style="font-weight: bold;">Reactions Manager, </span>accessible through <span style="font-weight: bold;">Simulation Settings &gt; Basis &gt; Open Chemical Reactions Manager</span> or <span style="font-weight: bold;">Tools &gt; Reactions Manager</span> menus (see separate documentation).<br><br>Reactions can be of&nbsp;<span style="font-weight: bold;">Equilibrium</span>,<span style="font-weight: bold;">&nbsp;Conversion</span>,<span style="font-weight: bold;">&nbsp;Kinetic</span> or&nbsp;<span style="font-weight: bold;">Heterogeneous Catalytic</span> types. One or more reactions can be&nbsp;combined to define
+a&nbsp;<span style="font-weight: bold;">Reaction Set</span>. The reactors then "see" the reactions through the reaction sets.
+<br><br><span style="font-weight: bold; font-style: italic;">Equilibrium</span>
+reactions are defined by an equilibrium constant (K). The source of
+information for the equilibrium constant can be a direct gibbs energy
+calculation, an expression defined by the user or a constant value.
+Equilibrium reactions can be used in Equilibrium and Gibbs reactors.<br><br><span style="font-weight: bold; font-style: italic;">Conversion</span>
+reactions are defined by the amount of a base compound which is
+consumed in the reaction. This amount can be a fixed value or a
+function of the system temperature. Conversion reactions are supported
+by the Conversion reactor.<br><br><span style="font-weight: bold; font-style: italic;">Kinetic</span> reactions are reactions defined by a kinetic expression. These reactions are supported by the PFR and CSTR reactors. <br><br><span style="font-weight: bold; font-style: italic;">Heterogeneous Catalytic</span> reactions&nbsp;in DWSIM must obey the <span style="font-style: italic;">Langmuir&#8211;Hinshelwood</span> 
+mechanism, where compounds react over a solid catalyst surface. In this 
+model, reaction rates are a function of catalyst amount (i.e. mol/kg 
+cat.s).
+ These reactions are supported by the PFR and CSTR reactors. <br><br>
+
+<table>
+<tbody><tr>
+<td><br>
+</td>
+
+<td>
+
+
+<h3>Input Parameters</h3><br>All reactors share the same basic interface. Properties that need to be set include 
+<ul>
+<li><b>Input and Output Streams</b></li>
+<li><b>Energy Streams</b> that represent the heat exchanged with the environment</li>
+<li><b>Reaction Set</b> to be used</li>
+<li><b>Operation</b> <span style="font-weight: bold;">Mode</span> (isothermal or adiabatic)</li>
+<li><b>Pressure Drop</b> through the reactor.</li>
+</ul>
+For the PFR and CSTR, it is also necessary to define:<br>
+<ul>
+<li><b>Volume</b> of the reaction medium</li><li><span style="font-weight: bold;">Catalyst loading</span>, <span style="font-weight: bold;">particle diameter</span> and <span style="font-weight: bold;">void fraction</span>,&nbsp;for Heterogeneus Catalytic reaction simulations only</li>
+</ul>
+For the Gibbs Reactor, you must select the calculation mode:<br>
+<ul>
+<li><b>Direct Minimization:&nbsp;</b>The equilibrium composition is found in such a way that the final gibbs energy is at is minimum. &nbsp;</li>
+<li><b>Reaction Extents:&nbsp;</b>Like in the Equilibrium Reactor, the equilibrium composition is found according to the reaction information in the reaction set.</li>
+</ul>
+
+
+<h3>Output Parameters</h3><br>The output of the reactor calculations
+includes conversions of the components involved in the reactions,
+the&nbsp;temperature change and the heat exchanged in the reactor,
+among other information..<br><br>
+
+For the <b>PFR</b>, the profiles of concentration of reactants and products is shown along the
+longitudinal axis of the reactor (assuming that the concentration does not vary radially).<br>
+
+</td>
+
+</tr>
+</tbody></table>
+
+<br><br>
+
+
+</body></html>

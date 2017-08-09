@@ -151,7 +151,6 @@ Public Class FormMain
                 Catch ex As UnauthorizedAccessException
                     MessageBox.Show(DWSIM.App.GetLocalString("UnauthorizedAccessError"), DWSIM.App.GetLocalString("Erroaosalvararquivo") & " dwsim.ini", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
-                Thermodynamics.NativeLibraries.Files.RemoveLibraries()
             Else
                 My.Application.SaveMySettingsOnExit = True
                 My.Settings.Save()

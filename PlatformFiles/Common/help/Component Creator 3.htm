@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<title>Component Creator Joback</title>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+
+</head>
+
+<body onload="LoadMenue()">
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ==============================================-->
+<!-- ================================================================================== -->
+
+<div id="winchm_template_content">
+<H3>Joback Group Definition</H3>
+<a href="Component Creator 2.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="Component Creator 4.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+
+The Joback group contribution method is used in DWSIM to estimate 9 important properties of pure components.
+Estimation of properties should be used if no measured data are available. If experimental or literature data are available they can be put into the corresponding field. Some parameters like normal boiling point and critical point are used to estimate other parameters. Therefore it is highliy recommendet to supply experimental data if available! 
+
+<p>
+<img src="Pictures/CompCreator3.png" border="0"><br><br>
+
+<h4>Joback definition table</h4>
+<ol>
+<li> <b>ID</b><br>Group ID number<br>&nbsp</li>
+<li> <b>Group type</b><br>Joback groups are assigned to a dedicated group type. Groups with the same name but in from different group types will give different results in property estimation.<br>&nbsp</li>
+<li> <b>Group Name</b><br>Name of Jobakc group<br>&nbsp</li>
+<li> <b>Count UNIFAC</b><br>This row contains the numer of Joback groups contained in the UNIFAC groups as subgoups. This column is calculated automatically and can't be edited.<br>&nbsp</li>
+<li> <b>Count Jobakc</b><br>This column allows to put in the number of Joback groups. If it is not possible to define the component completely by UNIFAC groups as a required group is missing, it is still possible to estimate the component properties and to use this component for simulations. The number of groups from both columns is added to estimate the properties. But as soon as you add extra Joback groups knows that the UNIFAC definition is not representing the molecule and no UNIFAC groups are stored to the database to avoid wrong calculations results. To use this component correctely for simulations you will have to use other methods like NRTL or UNIQUAC to calculate activity coefficient models.<br>&nbsp</li>
+</ol>
+
+<h4>Atom definition table</h4>
+Number and type of atoms are calculated automatically from UNIFAC / Joback group definition.
+<ol start=6>
+<li> <b>Atom</b><br>Name of Atom<br>&nbsp</li>
+<li> <b>Count</b><br>Number of Atoms in component. Atom name and count are used to calculate formula on identification tab.<br>&nbsp</li>
+<li> <b>Atom</b><br>Name of Atom<br>&nbsp</li>
+<li> <b>Count</b><br>Number of Atoms in component. Similar to the possibility to define a component by additional Joback groups it might be necessary to create a component where even no Joback group is available. Here you can enter the number of arbitrary elements for definition. But as soon as you enter any additional atomes here any available property calculation routine will collapse. You need to supply all required properties from other sources.<br>&nbsp</li>
+<li> <b>Chemeo Database</b><br>Link to Chemeo database. Here you can find Joback group definitions and  publicaly available component data of many components.<br>&nbsp</li>
+</ol>
+
+<hr>
+<h3>Literature</h3>
+Further information on Joback method can be found here: <br>
+<ul>
+<li><A href="http://en.wikipedia.org/wiki/Joback_method" title="Wikipedia">Wikipedia</a></li>
+</ul>
+
+</p>
+
+</BODY>
+</HTML>

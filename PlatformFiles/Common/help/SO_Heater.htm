@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<script src="ContentScripts.js"></script>
+
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ========================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
+
+<h2>Heater</h2>
+<a href="SO_Expander.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Cooler.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>The heater simulates a stream heating process.</p>
+
+<table>
+<tbody><tr>
+<td><br>
+</td>
+
+<td>
+
+
+<h3>Input Parameters</h3>
+
+<b>Pressure drop: </b>pressure drop in the heater.<br>
+<b>Efficiency: </b>heater efficiency.<br>
+<b>Calculation mode: </b>depending on calculation mode a dedicated parameter is specified:<br><br>
+<table style="margin-left: 50px;">
+<tbody><tr><td><b>Mode   </b></td><td><b>Parameter</b></td></tr>
+<tr><td>Heat added:   </td><td>Heat added</td></tr>
+<tr><td>Outlet temperature:   </td><td>Outlet temperature</td></tr>
+<tr><td>EnergyStream:   </td><td>Power for heating is taken from connected energy stream.</td></tr>
+<tr><td>Phase molar fraction:   </td><td>Molar fraction of vapour phase</td></tr>
+</tbody></table>
+
+<h3>Calculation</h3>
+The outlet stream temperature is calculated by doing a PH Flash, were
+the outlet stream enthalpy is calculated by a energy balance in the heater.<br><br>
+In calculation modes other than "EnergyStream" the transfered energy is written to the energy stream.
+
+
+<br><br>
+<h3>Output Parameters</h3>
+<b>Delta-T: </b>Temperature rise observed in the heating process.<br>
+<b>Heat added: </b>Heat added to the process.<br>
+</td>
+
+</tr>
+</tbody></table>
+
+<br><br>
+
+
+</body></html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<script src="ContentScripts.js"></script>
+
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css"><!-- ================================================================================== --><!-- ====================   Begin of content    ==============================================--><!-- ================================================================================== --></head><body onload="LoadMenue()">
+
+<h2>Pump</h2>
+<a href="SO_Valve.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="SO_Compressor.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+<hr>
+
+<p>The pump is used to provide energy to a liquid stream in the form of pressure. The process
+is isenthalpic, and the non-idealities are considered according to the pump efficiency, which is
+defined by the user</p>
+
+<table>
+<tbody><tr>
+<td><br>
+</td>
+
+<td>
+
+
+<h3>Input Parameters</h3>
+
+
+<b>Calculation mode: </b>Select one of the following modes. Depending on selected mode the 
+appropriate specification parameter will be displayed.<br>
+<ul>
+  <li><b>Delta_P: </b>specify required pressure difference from inlet to outlet.</li>
+  <li><b>OutletPressure: </b>specify outlet pressure.</li>
+  <li><b>Energy Stream: </b>Energy from connected stream will be used for calculation.</li>
+  <li><b>Curves: </b>Pump curves are specified via a special dialog. <br>
+       ==&gt;&gt; <a href="SO_PumpCurveEditor.htm" target="content">Pump Curve Editor</a>
+  </li>
+</ul>
+<br>
+<b>Efficiency: </b>pump adiabatic efficiency<br><br>
+<b>Ignore vapor in the input stream: </b>defines if the calculator should ignore any vapor in the
+inlet stream<br>
+
+</td></tr>
+</tbody></table>
+<hr>
+
+<h3>Calculation method</h3>
+The calculation method for the pump is different for the cases (when the provided delta-p, 
+outlet pressure or the potency of the energy stream is used). 
+
+<br><br>
+
+In the <b>first case</b> where pressure is defined, we have the following sequence:<br>
+
+<table>
+<tbody><tr><td style="vertical-align: middle;">1. Outlet stream enthalpy: </td><td><img src="pictures/SO_pump2.png"></td></tr>
+<tr><td style="vertical-align: middle;">2. Pump discharge pressure: </td><td><img src="pictures/SO_pump3.png"></td></tr>
+<tr><td style="vertical-align: middle;">3. Pump required power: </td><td><img src="pictures/SO_pump4.png"></td></tr>
+<tr><td style="vertical-align: middle;">4. Outlet temperature: </td><td>PH Flash (with P2 and H2).</td></tr>
+<tr><td style="vertical-align: middle;">5. NPSH available: </td><td><img src="pictures/SO_pump9.png"></td></tr>
+</tbody></table>
+where
+<table style="margin-left: 50px;">
+<tbody><tr><td>Pot: </td><td>Pump power</td></tr>
+<tr><td>W: </td><td>Mass flow</td></tr>
+<tr><td>H<sub>2</sub>: </td><td>outlet stream specific enthalpy</td></tr>
+<tr><td>H<sub>1</sub>: </td><td>inlet stream specific enthalpy</td></tr>
+<tr><td>&#951;: </td><td>pump efficiency</td></tr>
+<tr><td>&#929;: </td><td>liquid density</td></tr>
+<tr><td>NPSH<sub>available</sub>: </td><td>NPSH - Net positive suction head</td></tr>
+<tr><td>P<sub>Vap</sub>: </td><td>Vapour pressure at inlet condition</td></tr>
+</tbody></table>
+<hr>
+In the <b>second case</b> where power is defined, we have the following sequence:<br>
+<table>
+<tbody><tr><td style="vertical-align: middle;">1. Outlet stream enthalpy: </td><td><img src="pictures/SO_pump5.png"></td></tr>
+<tr><td style="vertical-align: middle;">2. Delta-P: </td><td><img src="pictures/SO_pump6.png"></td></tr>
+<tr><td style="vertical-align: middle;">3. Discharge pressure: </td><td><img src="pictures/SO_pump7.png"></td></tr>
+<tr><td style="vertical-align: middle;">4. Outlet temperature: </td><td>PH Flash.</td></tr>
+<tr><td style="vertical-align: middle;">5. NPSH available: </td><td><img src="pictures/SO_pump9.png"></td></tr>
+</tbody></table>
+
+In the <b>last case</b> of curve definition, calculations are done by interpolation of tabulated values.<br>
+
+<hr>
+<h3>Output Parameters</h3>
+<b>Delta-T: </b>temperature variation in the pumping process.<br><br>
+<b>Power required: </b>power required by the pump.<br><br>
+<b>NPSH availabe: </b>Available NPSH of pump.<br><br>
+
+<b>Pump curves: </b>In case of curve calculation mode the selected properties are calculated from definition tables.<br>
+A diagram with pump curves and actual operating point can be displayed:
+<img src="pictures/SO_pump10.png">
+<br><br>
+
+
+</body></html>

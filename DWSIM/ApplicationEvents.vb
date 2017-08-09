@@ -70,7 +70,6 @@ Namespace My
 
             If Not DWSIM.App.IsRunningOnMono Then
                 My.Settings.Save()
-                Thermodynamics.NativeLibraries.Files.RemoveLibraries()
             End If
 
         End Sub

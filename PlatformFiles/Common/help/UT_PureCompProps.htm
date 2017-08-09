@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<script src="ContentScripts.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="DWSIMstyle.css">
+</head>
+
+<!-- ================================================================================== -->
+<!-- ====================   Begin of content    ========================================-->
+<!-- ================================================================================== -->
+<body onload="LoadMenue()">
+
+<H2>Pure Component Properties Utility</H2>
+<a href="UT_HydrateDissociation.htm" target="_parent"><img src="pictures/arrow-up.gif"></a>
+<a href="UT_PhaseEnvelope.htm" target="_parent"><img src="pictures/arrow-down.gif"></a>
+
+<hr>
+<p>The Pure Component Properties utility is used to view and edit properties of pure components.
+This are view molecular properties and general temperature dependent properties like ideal gas Cp, vapor
+pressure, liquid viscosity and vaporization enthalpy.</p>
+<br>
+
+<h3>Editing of parameters</h3>
+<p>When you add a new component to your simulation all information upon that component are 
+copied to your simulation file from it's original database.<br>
+If you need to modify parameters you could do this by checking the "Enable Constant Property Editing" box.
+Parameters which are available for editing are colored in red. </p>
+
+
+To keep track of modified components, it's status is displayed as either:
+<ul style="margin-top: 5px;">
+
+   <li><b style="background-color: lime">&nbsp Original Data &nbsp</b></li>
+
+   <li style="padding-top: 5px;"><b style="background-color: red; color: white;">&nbsp Data modified &nbsp</b></li>
+
+</ul>
+ 
+
+<p>Your modified component parameters, together with modification status, is maintained on saving and reloading your simulation file.<br>
+If you want to restore parameters from original database you may use the button "Restore Defaults". 
+You also can do that if you updated informations of a component in a user database and want to synchronize your simulation now.
+
+<br><br>
+
+<img src="pictures/UT_PureCompProps1.png"><br><br>
+<img src="pictures/UT_PureCompProps2.png"><br><br>
+<img src="pictures/UT_PureCompProps3.png"><br><br>
+
+The temperature dependent properties of each phase are listed in a separate data table.
+<img src="pictures/UT_PureCompProps4.png"><br><br>
+
+</BODY>
+</HTML>
