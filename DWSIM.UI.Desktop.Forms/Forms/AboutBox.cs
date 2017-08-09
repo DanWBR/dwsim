@@ -68,10 +68,10 @@ namespace DWSIM.UI.Forms.Forms
             
             string crtext = Shared.AssemblyCopyright;
 
-            layout.Add(new ImageView { Size = new Size(100, 100), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 10, 10);
-            layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform UI)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 120, 10);
-            layout.Add(new Label { Text = vtext, TextAlignment = TextAlignment.Left}, 120, 30);
-            layout.Add(new Label { Text = crtext, TextAlignment = TextAlignment.Left}, 120, 50);
+            layout.Add(new ImageView { Size = new Size(100, 100), Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "DWSIM_ico.png")) }, 0, 0);
+            layout.Add(new Label { Text = "DWSIM Simulator (Cross-Platform UI)", TextAlignment = TextAlignment.Left, Font = SystemFonts.Bold(null, FontDecoration.None) }, 110, 0);
+            layout.Add(new Label { Text = vtext, TextAlignment = TextAlignment.Left}, 110, 20);
+            layout.Add(new Label { Text = crtext, TextAlignment = TextAlignment.Left}, 110, 40);
 
             string osinfo, clrinfo, meminfo;
 
@@ -81,7 +81,7 @@ namespace DWSIM.UI.Forms.Forms
 
             var container1 = new DynamicLayout() { Padding = new Padding(10) };
 
-            container1.CreateAndAddTwoLabelsRow2("Main Developer:", "Daniel Medeiros");
+            container1.CreateAndAddTwoLabelsRow2("Main Developer:", "Daniel Medeiros (dwsim@inforside.com.br)");
             container1.CreateAndAddTwoLabelsRow2("Contributors:", "Gregor Reichert, Gustavo León and others");
             container1.CreateAndAddTwoLabelsRow2("Splash Screen Design:", "Wendel Marcus (www.behance.net/wendelmarcus)");
             container1.CreateAndAddTwoLabelsRow2("OS Info:", osinfo);
