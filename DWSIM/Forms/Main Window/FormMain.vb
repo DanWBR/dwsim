@@ -704,30 +704,8 @@ Public Class FormMain
             OpenWelcomeScreen()
         End If
 
-        'check for updates (display information only)
-        If My.Settings.CheckForUpdates Then Me.bgUpdater.RunWorkerAsync()
-
         'check for updates (automatic updater)
         If My.Settings.AutomaticUpdates Then Task.Factory.StartNew(Sub() LaunchUpdateProcess())
-
-        'display initialization errors
-        If My.Application.InitializationExceptions.Count > 0 Then
-
-            ErrorBox_Panel.Visible = True
-            ErrorBox_Label1.Text = DWSIM.App.GetLocalString("NativeLibrariesExtractionError")
-
-            AddHandler ErrorBox_Button1.Click, Sub()
-
-                                                   Dim aex As New AggregateException(My.Application.InitializationExceptions)
-                                                   Dim f As New FormUnhandledException
-                                                   f.TextBox1.Text = aex.Flatten.Message
-                                                   f.ex = aex
-                                                   f.ShowDialog()
-                                                   ErrorBox_Panel.Visible = False
-
-                                               End Sub
-
-        End If
 
     End Sub
 
@@ -3010,202 +2988,65 @@ ruf:                Application.DoEvents()
         End If
     End Sub
 
-    Private Sub bgUpdater_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgUpdater.DoWork
+    Private Sub LaunchUpdateProcess()
 
-        Directory.CreateDirectory(My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM")
+        Dim updater As New Global.DWSIM.Updater.Updater()
 
-        Dim myfile As String = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM" & Path.DirectorySeparatorChar & "dwsim.txt"
-        Dim webcl As New System.Net.WebClient()
+        updater.BeginUpdater = Sub()
+                                   Me.UIThread(Sub()
+                                                   UpdateBox_Panel.Visible = True
+                                                   UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "..."
+                                                   updater.Downloader.Stop(True)
+                                                   updater.DeleteFiles()
+                                                   UpdateBox_Panel.Visible = False
+                                                   timer1.Stop()
+                                               End Sub)
+                               End Sub
 
-        Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br")))
-        proxyObj.Credentials = CredentialCache.DefaultCredentials
+        updater.UpdaterRunning = Sub()
+                                     Me.UIThread(Sub()
+                                                     AddHandler timer1.Tick, Sub()
+                                                                                 Me.UIThread(Sub()
+                                                                                                 Try
+                                                                                                     UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
+                                                                                                         updater.Downloader.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(updater.Downloader.CurrentFileProgress) & "/" &
+                                                                                                         FileDownloader.FormatSizeBinary(updater.Downloader.CurrentFileSize) & ")" & ", " &
+                                                                                                         String.Format("{0}/s", FileDownloader.FormatSizeBinary(updater.Downloader.DownloadSpeed))
+                                                                                                     UpdateBox_ProgressBar1.Value = updater.Downloader.TotalPercentage
+                                                                                                 Catch ex As Exception
+                                                                                                 End Try
+                                                                                             End Sub)
+                                                                             End Sub
+                                                     timer1.Interval = 500
+                                                     timer1.Start()
+                                                 End Sub)
+                                 End Sub
 
-        webcl.Proxy = proxyObj
+        AddHandler updater.Downloader.FileDownloadFailed, Sub() Me.UIThread(Sub()
+                                                                                updater.DeleteFiles()
+                                                                                UpdateBox_Panel.Visible = False
+                                                                                timer1.Stop()
+                                                                            End Sub)
 
-        webcl.DownloadFile("http://dwsim.inforside.com.br/dwsim.txt", myfile)
-        dlok = True
+        AddHandler updater.Downloader.Canceled, Sub() Me.UIThread(Sub()
+                                                                      updater.DeleteFiles()
+                                                                      UpdateBox_Panel.Visible = False
+                                                                      timer1.Stop()
+                                                                  End Sub)
 
-    End Sub
+        AddHandler updater.Downloader.Completed, Sub() Me.UIThread(Sub()
+                                                                       UpdateBox_Label1.Text = DWSIM.App.GetLocalString("UpdateReady")
+                                                                       UpdateBox_ProgressBar1.Visible = False
+                                                                       UpdateBox_Button1.Enabled = False
+                                                                       UpdateBox_Button2.Enabled = True
+                                                                       timer1.Stop()
+                                                                   End Sub)
 
-    Private Sub bgUpdater_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bgUpdater.RunWorkerCompleted
-        If dlok Then
-            Dim myfile As String = My.Computer.FileSystem.SpecialDirectories.Temp & Path.DirectorySeparatorChar & "DWSIM" & Path.DirectorySeparatorChar & "dwsim.txt"
-            If File.Exists(myfile) Then
-                Dim txt() As String = File.ReadAllLines(myfile)
-                Dim build As Integer
-                build = txt(0)
-                If My.Application.Info.Version.Build < Convert.ToInt32(build) Then
-                    'tslupd.Visible = True
-                    'tslupd.Text = DWSIM.App.GetLocalString("NewVersionAvailable")
-                End If
-            End If
-        End If
+        updater.LaunchUpdateProcess()
+
     End Sub
 
 #End Region
-
-    Private Sub LaunchUpdateProcess()
-
-        If CheckForUpdateFile() Then
-
-            Dim create As Boolean = False
-            Try
-                Directory.CreateDirectory(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update")
-                create = True
-            Catch ex As Exception
-            End Try
-
-            If create Then
-
-                Dim ok As Boolean = False
-                Dim updfile As String = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update" & Path.DirectorySeparatorChar & "update.txt"
-                Try
-                    Dim webcl As New System.Net.WebClient()
-                    Dim proxyObj As New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br")))
-                    proxyObj.Credentials = CredentialCache.DefaultCredentials
-                    webcl.Proxy = proxyObj
-                    webcl.DownloadFile("http://dwsim.inforside.com.br/update/update.txt", updfile)
-                    ok = True
-                Catch ex As Exception
-                End Try
-
-                If ok Then
-
-                    'check version
-
-                    Dim v As String, u As Integer, md5 As String, filep As String
-
-                    Dim appu As Integer
-                    If File.Exists(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info") Then
-                        appu = Convert.ToInt32(File.ReadAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "version.info"))
-                    Else
-                        appu = 0
-                    End If
-
-                    Dim filei As String() = File.ReadAllLines(updfile)
-                    Dim md5list, filelist As New List(Of String)
-
-                    For Each line In filei
-                        v = line.Split(vbTab)(1)
-                        u = line.Split(vbTab)(2)
-                        filep = line.Split(vbTab)(3)
-                        md5 = line.Split(vbTab)(4)
-                        If v = My.Application.Info.Version.Major.ToString & "." & My.Application.Info.Version.Minor And u > appu Then
-                            filelist.Add(filep)
-                            md5list.Add(md5)
-                        End If
-                    Next
-
-                    Try
-                        File.Delete(updfile)
-                    Catch ex As Exception
-                        Exit Sub
-                    End Try
-
-                    Dim dlder As New FileDownloader(True)
-
-                    Dim ftext As New StringBuilder
-                    Dim i As Integer
-                    If filelist.Count > 0 Then
-
-                        For i = 0 To filelist.Count - 1
-                            ftext.AppendLine(filelist(i) & vbTab & md5list(i))
-                            dlder.Files.Add(New FileDownloader.FileInfo("http://dwsim.inforside.com.br/update/" & filelist(i)))
-                        Next
-
-                        File.WriteAllText(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update" & Path.DirectorySeparatorChar & "filelist.txt", ftext.ToString)
-
-                        'download files
-
-                        Me.UIThread(Sub()
-                                        UpdateBox_Panel.Visible = True
-                                        UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "..."
-                                    End Sub)
-
-                        dlder.LocalDirectory = My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update"
-                        dlder.DeleteCompletedFilesAfterCancel = True
-
-                        Me.UIThread(Sub()
-                                        AddHandler timer1.Tick, Sub()
-                                                                    Me.UIThread(Sub()
-                                                                                    Try
-                                                                                        UpdateBox_Label1.Text = DWSIM.App.GetLocalString("DownloadingUpdates") & "... " &
-                                                                                            dlder.CurrentFile.Name & " (" & FileDownloader.FormatSizeBinary(dlder.CurrentFileProgress) & "/" &
-                                                                                            FileDownloader.FormatSizeBinary(dlder.CurrentFileSize) & ")" & ", " &
-                                                                                            String.Format("{0}/s", FileDownloader.FormatSizeBinary(dlder.DownloadSpeed))
-                                                                                        UpdateBox_ProgressBar1.Value = dlder.TotalPercentage
-                                                                                    Catch ex As Exception
-                                                                                    End Try
-                                                                                End Sub)
-                                                                End Sub
-                                        timer1.Interval = 500
-                                        timer1.Start()
-                                    End Sub)
-
-                        AddHandler UpdateBox_Button1.Click, Sub() Me.UIThread(Sub()
-                                                                                  dlder.Stop(True)
-                                                                                  DeleteFilesAndHidePanel()
-                                                                              End Sub)
-
-                        AddHandler dlder.FileDownloadFailed, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
-
-                        AddHandler dlder.Canceled, Sub() Me.UIThread(Sub() DeleteFilesAndHidePanel())
-
-                        AddHandler dlder.Completed, Sub() Me.UIThread(Sub()
-                                                                          UpdateBox_Label1.Text = DWSIM.App.GetLocalString("UpdateReady")
-                                                                          UpdateBox_ProgressBar1.Visible = False
-                                                                          UpdateBox_Button1.Enabled = False
-                                                                          UpdateBox_Button2.Enabled = True
-                                                                          timer1.Stop()
-                                                                      End Sub)
-
-                        Me.UIThread(Sub() dlder.Start())
-
-                    End If
-
-                End If
-
-            End If
-
-        End If
-
-    End Sub
-
-    Sub DeleteFilesAndHidePanel()
-
-        Dim files = Directory.GetFiles(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "update")
-        For Each f In files
-            Try
-                File.Delete(f)
-            Catch ex As Exception
-            End Try
-        Next
-        UpdateBox_Panel.Visible = False
-        timer1.Stop()
-
-    End Sub
-
-    Function CheckForUpdateFile()
-
-        Dim exists = False
-        Dim response As HttpWebResponse = Nothing
-        Dim request = WebRequest.Create("http://dwsim.inforside.com.br/update/update.txt")
-        request.Proxy = New WebProxy(Net.WebRequest.GetSystemWebProxy.GetProxy(New Uri("http://dwsim.inforside.com.br")))
-        request.Proxy.Credentials = CredentialCache.DefaultCredentials
-        request.Method = "HEAD"
-
-        Try
-            response = request.GetResponse()
-            exists = True
-        Catch ex As WebException
-            ' A WebException will be thrown if the status of the response is not `200 OK` */
-        Finally
-            If response IsNot Nothing Then response.Close()
-        End Try
-
-        Return exists
-
-    End Function
 
     Private Sub UpdateBox_Button2_Click(sender As Object, e As EventArgs) Handles UpdateBox_Button2.Click
         Try
@@ -3234,4 +3075,5 @@ ruf:                Application.DoEvents()
             Process.Start(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "docs" & Path.DirectorySeparatorChar & "user_guide" & Path.DirectorySeparatorChar & "user_guide.html")
         End If
     End Sub
+
 End Class

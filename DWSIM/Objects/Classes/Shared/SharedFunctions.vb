@@ -27,7 +27,7 @@ Namespace DWSIM
 
     <System.Serializable()> Public Class App
 
-        Public Shared Function InitializeSettings() As List(Of Exception)
+        Public Shared Sub InitializeSettings()
 
             'set language
             GlobalSettings.Settings.CultureInfo = My.Settings.CultureInfo
@@ -92,7 +92,7 @@ Namespace DWSIM
                 MessageBox.Show("GPU initialization failed: " & ex.Message)
             End Try
 
-        End Function
+        End Sub
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)
 

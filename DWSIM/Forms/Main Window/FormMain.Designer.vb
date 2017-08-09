@@ -96,7 +96,6 @@ Partial Class FormMain
         Me.TimerBackup = New System.Windows.Forms.Timer(Me.components)
         Me.bgSaveBackup = New System.ComponentModel.BackgroundWorker()
         Me.CultureManager1 = New Infralution.Localization.CultureManager(Me.components)
-        Me.bgUpdater = New System.ComponentModel.BackgroundWorker()
         Me.sfdUpdater = New System.Windows.Forms.SaveFileDialog()
         Me.SaveStudyDlg = New System.Windows.Forms.SaveFileDialog()
         Me.SaveRegStudyDlg = New System.Windows.Forms.SaveFileDialog()
@@ -535,9 +534,6 @@ Partial Class FormMain
         '
         Me.CultureManager1.ManagedControl = Me
         '
-        'bgUpdater
-        '
-        '
         'sfdUpdater
         '
         resources.ApplyResources(Me.sfdUpdater, "sfdUpdater")
@@ -880,7 +876,6 @@ Partial Class FormMain
     Public WithEvents ToolStripButton6 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton7 As System.Windows.Forms.ToolStripButton
     Public WithEvents ToolStripButton8 As System.Windows.Forms.ToolStripButton
-    Friend WithEvents bgUpdater As System.ComponentModel.BackgroundWorker
     Friend WithEvents sfdUpdater As System.Windows.Forms.SaveFileDialog
     Friend WithEvents NovoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

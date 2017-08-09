@@ -20,8 +20,6 @@ Namespace My
 
         End Function
 
-        Public Property InitializationExceptions As New List(Of Exception)
-
         Public _ResourceManager As System.Resources.ResourceManager
 
         Public _HelpManager As System.Resources.ResourceManager
@@ -129,7 +127,7 @@ Namespace My
                 Console.SetOut(standardOutput)
             End If
 
-            InitializationExceptions = DWSIM.App.InitializeSettings()
+            DWSIM.App.InitializeSettings()
 
             If My.Settings.PythonPath <> "" Then
                 SetDllDirectory(My.Settings.PythonPath)
