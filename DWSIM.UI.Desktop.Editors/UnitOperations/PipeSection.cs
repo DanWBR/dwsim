@@ -88,6 +88,8 @@ namespace DWSIM.UI.Desktop.Editors
             var txtED = container.CreateAndAddTextBoxRow(nf, "External Diameter" + " (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, section.DE), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DE = cv.ConvertToSI(su.diameter, double.Parse(sender.Text.ToString())); });
             var txtID = container.CreateAndAddTextBoxRow(nf, "Internal Diameter" + " (" + su.diameter + ")", cv.ConvertFromSI(su.diameter, section.DI), (sender, e) => { if (double.TryParse(sender.Text.ToString(), out dummy)) section.DI = cv.ConvertToSI(su.diameter, double.Parse(sender.Text.ToString())); });
      
+
+
         }
     }
 }

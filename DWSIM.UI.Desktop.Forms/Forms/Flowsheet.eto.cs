@@ -871,6 +871,15 @@ namespace DWSIM.UI.Forms
                             form.Show();
                             form.Width += 1;
                         }
+                        else if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.HeatExchanger)
+                        {
+                            cont.Tag = "General";
+                            var dyn1 = new UI.Desktop.Editors.ShellAndTubePropertiesView(obj);
+                            dyn1.Tag = "Shell and Tube Properties";
+                            var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, dyn1 });
+                            form.Show();
+                            form.Width += 1;
+                        }
                         else
                         {
                             var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);

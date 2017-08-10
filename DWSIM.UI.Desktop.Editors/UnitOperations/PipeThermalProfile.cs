@@ -218,6 +218,8 @@ namespace DWSIM.UI.Desktop.Editors
                      profile.Velocidade = double.Parse(sender.Text);
                  }
              });
+            s.CreateAndAddEmptySpace(container);
+            s.CreateAndAddEmptySpace(container);
         
         }
     }

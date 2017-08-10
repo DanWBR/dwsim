@@ -41,8 +41,8 @@ Public Module OxyPlot
     End Sub
 
     <System.Runtime.CompilerServices.Extension>
-    Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double))
-        model.AddLineSeries(xSeries, ySeries, OxyColors.Automatic)
+    Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), Optional ByVal title As String = Nothing)
+        model.AddLineSeries(xSeries, ySeries, OxyColors.Automatic, title)
     End Sub
 
     <System.Runtime.CompilerServices.Extension>
@@ -57,15 +57,15 @@ Public Module OxyPlot
     End Sub
 
     <System.Runtime.CompilerServices.Extension>
-    Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), color As OxyColor)
+    Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), color As OxyColor, Optional ByVal title As String = Nothing)
 
-        Dim lineSeries As LineSeries = New LineSeries()
+        Dim lineSeries As LineSeries = New LineSeries With {.Title = title}
 
         For i As Integer = 0 To xSeries.Count - 1
-            lineSeries.Points.Add(New DataPoint(xSeries(i), ySeries(i)))
+            LineSeries.Points.Add(New DataPoint(xSeries(i), ySeries(i)))
         Next
 
-        model.Series.Add(lineSeries)
+        model.Series.Add(LineSeries)
     End Sub
 
     <System.Runtime.CompilerServices.Extension>

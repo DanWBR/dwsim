@@ -58,7 +58,7 @@ namespace DWSIM.UI.Forms.Forms
                 }
             });
 
-            tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\n\nWindows: WPF (Windows Presentation Foundation)\n\nLinux: GTK 2\n\nmacOS: MonoMac");
+            tab1.CreateAndAddDescriptionRow("This sets the GUI Renderer for the current platform. Recommended renderers for each platform are:\nWindows: WPF (Windows Presentation Foundation)\nLinux: GTK 2\nmacOS: MonoMac");
             tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
 
             tab1.CreateAndAddLabelRow("Flowsheet Designer");

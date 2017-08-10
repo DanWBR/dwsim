@@ -595,5 +595,58 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static OxyPlot.PlotModel CreatePlotModel(double[] x, double[] y1, double[] y2, string title, string subtitle, string xtitle, string ytitle, string ytitle1, string ytitle2)
+        {
+
+            var model = new OxyPlot.PlotModel() { Subtitle = subtitle, Title = title };
+            model.Background = OxyPlot.OxyColors.White;
+            model.TitleFontSize = 14;
+            model.SubtitleFontSize = 12;
+            model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+            {
+                MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                Position = OxyPlot.Axes.AxisPosition.Bottom,
+                FontSize = 12,
+                Title = xtitle
+            });
+            if (Math.Abs(y1[0] - 1.0f) < 0.0001)
+            {
+                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+                {
+                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                    Position = OxyPlot.Axes.AxisPosition.Left,
+                    FontSize = 12,
+                    Title = ytitle,
+                    StartPosition = 1,
+                    EndPosition = 0,
+                    MajorStep = 1.0f,
+                    MinorStep = 0.5f
+                });
+            }
+            else
+            {
+                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
+                {
+                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                    Position = OxyPlot.Axes.AxisPosition.Left,
+                    FontSize = 12,
+                    Title = ytitle
+                });
+            }
+            model.LegendFontSize = 11;
+            model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
+            model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
+            model.LegendPosition = OxyPlot.LegendPosition.BottomCenter;
+            model.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinView;
+            model.AddLineSeries(x, y1, ytitle1);
+            model.AddLineSeries(x, y2, ytitle2);
+
+            return model;
+
+        }
+
     }
 }

@@ -1642,8 +1642,22 @@ Namespace UnitOperations
                 Case HeatExchangerCalcMode.CalcArea
                     str.AppendLine("    Heat exchanged: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q).ToString(numberformat, ci) & " " & su.heatflow)
                     str.AppendLine("    Exchange area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area).ToString(numberformat, ci) & " " & su.area)
+                Case HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor, HeatExchangerCalcMode.ShellandTube_Rating
+                    str.AppendLine("    Re Shell: " & STProperties.ReS.ToString(numberformat, ci))
+                    str.AppendLine("    Re Tube: " & STProperties.ReT.ToString(numberformat, ci))
+                    str.AppendLine("    F Shell: " & SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fs).ToString(numberformat, ci) & " " & su.foulingfactor)
+                    str.AppendLine("    F Tube: " & SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Ft).ToString(numberformat, ci) & " " & su.foulingfactor)
+                    str.AppendLine("    F Pipe: " & SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fc).ToString(numberformat, ci) & " " & su.foulingfactor)
+                    str.AppendLine("    F Fouling: " & SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Ff).ToString(numberformat, ci) & " " & su.foulingfactor)
+                    str.AppendLine("    Heat exchanged: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q).ToString(numberformat, ci) & " " & su.heatflow)
+                    str.AppendLine("    Exchange area: " & SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area).ToString(numberformat, ci) & " " & su.area)
+                    str.AppendLine("    Cold fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ColdSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Hot fluid outlet temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.HotSideOutletTemperature).ToString(numberformat, ci) & " " & su.temperature)
+                    str.AppendLine("    Overall heat transfer coefficient: " & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient).ToString(numberformat, ci) & " " & su.heat_transf_coeff)
             End Select
             str.AppendLine("    Log mean temperature difference (LMTD): " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Maximum Heat Exchange: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.MaxHeatExchange).ToString(numberformat, ci) & " " & su.heatflow)
+            str.AppendLine("    Thermal Efficiency (%): " & ThermalEfficiency.ToString(numberformat, ci))
 
             Return str.ToString
 

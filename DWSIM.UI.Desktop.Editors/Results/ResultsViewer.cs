@@ -39,7 +39,7 @@ namespace DWSIM.UI.Desktop.Editors
             var topcontainer = new TableLayout();
             var centercontainer = new TableLayout();
 
-            var lbl = new Label { Text = "Select Object / View Results Report", VerticalAlignment = VerticalAlignment.Center };
+            var lbl = new Label { Text = "Select Object / View Results Report", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center };
             
             var btnExport = new Button { Text = "Export to PDF" };
             btnExport.Click += (sender, e) => {
@@ -111,7 +111,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             lbObjects.SelectedIndexChanged += (sender, e) =>
             {
-                txtResults.Text = Flowsheet.SimulationObjects[lbObjects.SelectedKey].GetReport(Flowsheet.FlowsheetOptions.SelectedUnitSystem, CultureInfo.InvariantCulture, Flowsheet.FlowsheetOptions.NumberFormat);
+               if (lbObjects.SelectedKey != null) txtResults.Text = Flowsheet.SimulationObjects[lbObjects.SelectedKey].GetReport(Flowsheet.FlowsheetOptions.SelectedUnitSystem, CultureInfo.InvariantCulture, Flowsheet.FlowsheetOptions.NumberFormat);
             };
 
         }

@@ -47,6 +47,8 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = SimObject.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
+            s.CreateAndAddDescriptionRow(container, "Property values are updated/stored as they are changed/edited. There's no need to press ENTER to commit the changes.");
+
             s.CreateAndAddLabelRow(container, "Object Details");
 
             s.CreateAndAddTwoLabelsRow(container, "Type", SimObject.GetDisplayName());
@@ -848,43 +850,33 @@ namespace DWSIM.UI.Desktop.Editors
                             break;
                     }
 
-                    Button btnST = null;
-
                     s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.hxcalcmode().ToList(), pos7, (DropDown arg3, EventArgs ev) =>
                     {
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcTempHotOut;
-                                btnST.Enabled = false;
                                 break;
                             case 1:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcTempColdOut;
-                                btnST.Enabled = false;
                                 break;
                             case 2:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcBothTemp;
-                                btnST.Enabled = false;
                                 break;
                             case 3:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcBothTemp_UA;
-                                btnST.Enabled = false;
                                 break;
                             case 4:
                                 hx.CalculationMode = HeatExchangerCalcMode.CalcArea;
-                                btnST.Enabled = false;
                                 break;
                             case 5:
                                 hx.CalculationMode = HeatExchangerCalcMode.ShellandTube_Rating;
-                                btnST.Enabled = true;
                                 break;
                             case 6:
                                 hx.CalculationMode = HeatExchangerCalcMode.ShellandTube_CalcFoulingFactor;
-                                btnST.Enabled = true;
                                 break;
                             case 7:
                                 hx.CalculationMode = HeatExchangerCalcMode.PinchPoint;
-                                btnST.Enabled = false;
                                 break;
                         }
                     });
@@ -899,20 +891,11 @@ namespace DWSIM.UI.Desktop.Editors
                     strdescr.AppendLine("Outlet Temperatures (UA): Overall HTC and Area");
                     strdescr.AppendLine("Area: Overall HTC and Outlet Temperature for one of the fluids");
                     strdescr.AppendLine("Shell and Tube (Rating): Exchanger Geometry (input on separate window");
-                    strdescr.AppendLine("Shell and Tube (Design): Outlet Temperatures and Exchanger Geometry (input on separate window");
+                    strdescr.AppendLine("Shell and Tube (Design): Outlet Temperatures and Exchanger Geometry (input on separate tab)");
                     strdescr.AppendLine("Pinch Point: Overall HTC and MITA");
                     strdescr.AppendLine("*Pressure drop is required for both fluids except for Shell and Tube Rating mode.");
 
                     s.CreateAndAddDescriptionRow(container, strdescr.ToString());
-
-                    btnST = s.CreateAndAddButtonRow(container, "Edit Shell and Tube Properties", null, (sender, e) =>
-                    {
-                        Application.Instance.Invoke(() =>
-                        {
-                            var f = new DWSIM.UnitOperations.EditingForm_HeatExchanger_SHProperties { hx = hx };
-                            f.ShowDialog();
-                        });
-                    });
 
                     int pos9 = 0;
                     switch (hx.FlowDir)
@@ -2096,6 +2079,8 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddTextBoxRow(container, nf, "Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, tank.Volume), (sender, e) => { if (sender.Text.IsValidDouble()) tank.Volume = cv.ConvertToSI(su.volume, sender.Text.ToDoubleFromCurrent()); });
                     break;
             }
+            s.CreateAndAddEmptySpace(container);
+            s.CreateAndAddEmptySpace(container);
         }
 
     }

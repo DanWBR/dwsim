@@ -197,6 +197,48 @@ namespace DWSIM.UI.Desktop.Editors
                     };
                 }
             }
+            else if (SimObject is HeatExchanger)
+            {
+                var hx = (HeatExchanger)SimObject;
+
+                if (hx.CalculationMode == HeatExchangerCalcMode.PinchPoint && hx.HeatProfile.Length > 0)
+                {
+
+                    var btn = new Button { Text = "View Heat Exchanged Profile" };
+                    container.Rows.Add(new TableRow(btn));
+                    btn.Click += (sender, e) =>
+                    {
+
+                        var chart = new Eto.OxyPlot.Plot() { Height = 400, BackgroundColor = Colors.White };
+                        chart.Visible = true;
+
+                        var model = s.CreatePlotModel(hx.HeatProfile.ToList().ConvertFromSI(su.heatflow).ToArray(),
+                            hx.TemperatureProfileCold.ToList().ConvertFromSI(su.temperature).ToArray(),
+                            hx.TemperatureProfileHot.ToList().ConvertFromSI(su.temperature).ToArray(),
+                            "Heat Profile", hx.GraphicObject.Tag, "Heat Exchanged (" + su.heatflow + ")",
+                            "Temperature (" + su.temperature + ")",
+                            "Cold Fluid", "Hot Fluid");
+                        chart.Model = model;
+                        chart.Model.InvalidatePlot(true);
+                        chart.Invalidate();
+
+                        var form = new Form()
+                        {
+                            Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico"),
+                            Content = new Scrollable { Content = chart, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true },
+                            Title = "Heat Profile: " + SimObject.GraphicObject.Tag,
+                            ClientSize = new Size(800, 600),
+                            ShowInTaskbar = false,
+                            Maximizable = false,
+                            Minimizable = false,
+                            Topmost = true,
+                            Resizable = true
+                        };
+                        form.Show();
+
+                    };
+                }
+            }
 
             var txtcontrol = new TextArea {ReadOnly = true};
             txtcontrol.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
