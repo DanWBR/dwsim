@@ -35,11 +35,11 @@ Module Module1
             Dim ustring = "0"
 
             If RunningPlatform() = Platform.Linux Then
-                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "linux" & sep & "7za"
+                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "7za"
             ElseIf RunningPlatform() = Platform.Mac Then
-                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "mac" & sep & "unar"
+                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "unar"
             Else
-                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "windows" & sep & "7za.exe"
+                extrc = My.Application.Info.DirectoryPath & sep & "7zip" & sep & "7za.exe"
             End If
 
             If Directory.Exists(udir) Then
