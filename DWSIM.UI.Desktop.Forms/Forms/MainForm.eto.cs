@@ -86,7 +86,7 @@ namespace DWSIM.UI
                 dialog.Title = "OpenSamples".Localize();
                 dialog.Filters.Add(new FileFilter("XML Simulation File".Localize(), new[] { ".dwxml", ".dwxmz" }));
                 dialog.MultiSelect = false;
-                dialog.Directory = new Uri(Path.Combine(Directory.GetCurrentDirectory(), "samples"));
+                dialog.Directory = new Uri(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "samples"));
                 dialog.CurrentFilterIndex = 0;
                 if (dialog.ShowDialog(this) == DialogResult.Ok)
                 {
@@ -394,6 +394,7 @@ namespace DWSIM.UI
                     form.FlowsheetObject.LoadFromXML(XDocument.Load(path));
                 }
                 form.FlowsheetObject.FilePath = path;
+                form.FlowsheetObject.FlowsheetOptions.FilePath = path;
             }).ContinueWith((t) =>
             {
                 Application.Instance.Invoke(() =>

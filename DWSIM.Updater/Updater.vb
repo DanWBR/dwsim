@@ -4,7 +4,7 @@ Imports System.IO
 
 Public Class Updater
 
-    Public Downloader As FileDownloader
+    Public Downloader As New FileDownloader(True)
 
     Public BeginUpdater, UpdaterRunning As Action
 
@@ -65,8 +65,6 @@ Public Class Updater
                     Catch ex As Exception
                         Exit Sub
                     End Try
-
-                    Downloader = New FileDownloader(True)
 
                     Dim ftext As New StringBuilder
                     Dim i As Integer

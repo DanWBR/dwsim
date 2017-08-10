@@ -490,12 +490,13 @@ namespace DWSIM.UI.Forms
         void SaveSimulation(string path, bool backup = false)
         {
 
-            FlowsheetObject.SaveToXML().Save(path);
-
             string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
 
-            FlowsheetObject.SaveToXML().Save(xmlfile);
-
+            using (var fstream = new FileStream(xmlfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+                FlowsheetObject.SaveToXML().Save(fstream);
+            }
+            
             var i_Files = new List<string>();
             if (File.Exists(xmlfile))
                 i_Files.Add(xmlfile);
@@ -923,7 +924,6 @@ namespace DWSIM.UI.Forms
                 if (!Directory.Exists(backupdir)) Directory.CreateDirectory(backupdir);
                 if (GlobalSettings.Settings.EnableBackupCopies)
                 {
-
                     if (FlowsheetObject.Options.FilePath != "")
                     {
                         backupfilename = Path.GetFileName(FlowsheetObject.Options.FilePath);
