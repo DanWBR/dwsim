@@ -239,23 +239,36 @@ namespace DWSIM.UI
             UpdateLabel = new Label { TextColor = Colors.White, Text = "Downloading updates...", TextAlignment = TextAlignment.Left, VerticalAlignment = VerticalAlignment.Center };
             UpdateButton1 = new Button { Text = "Cancel" };
             if (Application.Instance.Platform.IsGtk) UpdateButton1.TextColor = Colors.White;
-            UpdateButton2 = new Button { Text = "Restart", Enabled = false };
+            UpdateButton2 = new Button { Text = "Update", Enabled = false };
             if (Application.Instance.Platform.IsGtk) UpdateButton2.TextColor = Colors.White;
 
             UpdateButton2.Click += (sender, e) =>
             {
-                try
-                {
                     File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "update.run", "");
-                    Application.Instance.Restart();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Application restart failed. Please restart DWSIM manually.");
-                }
+                    
+                    //launch updater
+                    if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Linux)
+                    {
+                        var startInfo = new ProcessStartInfo("mono", AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
+                        startInfo.UseShellExecute = true;
+                        Process.Start(startInfo);
+                    }
+                    else if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Windows)
+                    {
+                        var startInfo = new ProcessStartInfo(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
+                        startInfo.UseShellExecute = true;
+                        Process.Start(startInfo);
+                    }
+                    else
+                    {
+                        var startInfo = new ProcessStartInfo("mono", AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
+                        startInfo.UseShellExecute = true;
+                        Process.Start(startInfo);
+                    }
+                    Process.GetCurrentProcess().Kill();
             };
 
-            UpdateProgressBar = new ProgressBar { MinValue = 0, MaxValue = 100, Width = 200, Height = 10 };
+            UpdateProgressBar = new ProgressBar { MinValue = 0, MaxValue = 100, Width = 100, Height = 10 };
 
             var tr = new TableRow(UpdateLabel, null, UpdateProgressBar, UpdateButton1, UpdateButton2);
             var tl = new TableLayout() { Padding = new Padding(0), Spacing = new Size(5, 0) };
@@ -334,7 +347,7 @@ namespace DWSIM.UI
 
             updater.Downloader.Completed += (s3, e3) => Application.Instance.Invoke(() =>
             {
-                UpdateLabel.Text = "Updates are ready to install. Click on 'Restart' to restart and update DWSIM.";
+                UpdateLabel.Text = "Updates are ready to install. Click on 'Update' to close and update DWSIM.";
                 UpdateProgressBar.Visible = false;
                 UpdateButton1.Enabled = false;
                 UpdateButton2.Enabled = true;
