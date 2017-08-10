@@ -380,7 +380,7 @@ namespace DWSIM.UI
             AddUserCompounds(form.FlowsheetObject);
 
             var loadingdialog = new LoadingData();
-            loadingdialog.loadingtext.Text = "Please wait, loading data...\n(" + path + ")";
+            loadingdialog.loadingtext.Text = "Please wait, loading data...\n(" + Path.GetFileNameWithoutExtension(path) + ")";
             loadingdialog.Show();
 
             Task.Factory.StartNew(() =>

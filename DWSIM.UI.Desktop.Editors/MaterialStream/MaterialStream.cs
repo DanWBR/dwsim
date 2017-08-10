@@ -463,6 +463,8 @@ namespace DWSIM.UI.Desktop.Editors
 
                         s.CreateAndAddEmptySpace(container);
                         s.CreateAndAddEmptySpace(container);
+                        s.CreateAndAddEmptySpace(container);
+                        s.CreateAndAddEmptySpace(container);
 
                     }
                     break;
