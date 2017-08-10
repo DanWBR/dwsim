@@ -1353,7 +1353,7 @@ namespace DWSIM.UI.Desktop.Editors
                     txtel.PlaceholderText = "Enter the list of elements, separated by spaces";
                     s.CreateAndAddLabelRow(container, "Element Matrix");
                     s.CreateAndAddDescriptionRow(container, "Element Matrix for compounds in the following order: " + comptext);
-                    var txtelm = s.CreateAndAddFullTextBoxRow(container, elmatrix, (TextBox arg3, EventArgs ev) =>
+                    var txtelm = s.CreateAndAddMultilineTextBoxRow(container, elmatrix, false, true, (TextArea arg3, EventArgs ev) =>
                     {
                         try
                         {
@@ -1377,11 +1377,14 @@ namespace DWSIM.UI.Desktop.Editors
                             SimObject.GetFlowsheet().ShowMessage("Error parsing element matrix: " + ex.Message, IFlowsheet.MessageType.GeneralError);
                         }
                     });
-                    txtelm.PlaceholderText = "Enter the matrix of element amounts, separated by spaces, one line for each compound";
-                    s.CreateAndAddLabelRow(container, "Convergence Parameters");
+                    s.CreateAndAddDescriptionRow(container, "Enter the matrix of element amounts, separated by spaces, one line for each compound");
+                    s.CreateAndAddLabelRow(container, "Damping Factor");
+                    s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
                     s.CreateAndAddCheckBoxRow(container, "Use Damping Factor", reactor2g.EnableDamping, (sender, e) => reactor2g.EnableDamping = sender.Checked.GetValueOrDefault());
                     s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Minimum Value", reactor2g.DampingLowerLimit, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.DampingLowerLimit = sender.Text.ToDoubleFromCurrent(); });
                     s.CreateAndAddTextBoxRow(container, nf, "Damping Factor Maximum Value", reactor2g.DampingUpperLimit, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.DampingUpperLimit = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddLabelRow(container, "Convergence Parameters");
+                    s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); });
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); });
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.InternalTolerance = sender.Text.ToDoubleFromCurrent(); });

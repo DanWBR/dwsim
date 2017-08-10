@@ -76,9 +76,10 @@ namespace DWSIM.UI.Desktop.GTK
         {
             if (args.Event.Direction == Gdk.ScrollDirection.Down)
             {
-                fsurface.Zoom += -5 /100f;
+                fsurface.Zoom += -5 / 100f;
             }
-            else {
+            else
+            {
                 fsurface.Zoom += 5 / 100f;
             }
             this.QueueDraw();
@@ -112,13 +113,14 @@ namespace DWSIM.UI.Desktop.GTK
                 //    fsurface.ZoomAll((int)this.Allocation.Width, (int)this.Allocation.Height);
                 //}
             }
-            else {
+            else
+            {
                 _lastTouchX = (int)args.Event.X;
                 _lastTouchY = (int)args.Event.Y;
                 fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
             }
             this.QueueDraw();
-            
+
         }
 
         protected override bool OnExposeEvent(Gdk.EventExpose evnt)
@@ -129,30 +131,21 @@ namespace DWSIM.UI.Desktop.GTK
             if (rect.Width > 0 && rect.Height > 0)
             {
                 var area = evnt.Area;
-
-                using (var bitmap = new SKBitmap(rect.Width, rect.Height, SKColorType.Bgra8888, SKAlphaType.Premul))
+                using (Cairo.Context cr = Gdk.CairoHelper.Create(base.GdkWindow))
                 {
-                    IntPtr len;
-                    using (var skSurface = SKSurface.Create(bitmap.Info.Width, bitmap.Info.Height, SKColorType.Bgra8888, SKAlphaType.Premul, bitmap.GetPixels(out len), bitmap.Info.RowBytes))
+                    using (var bitmap = new SKBitmap(rect.Width, rect.Height, SKColorType.Bgra8888, SKAlphaType.Premul))
                     {
-
-                        if (fsurface != null)  fsurface.UpdateSurface(skSurface);
-                        skSurface.Canvas.Flush();
-
-                        Gdk.GC gc = new Gdk.GC ((Gdk.Drawable)base.GdkWindow);
-
-                        using (var cbit = bitmap.Copy(SKColorType.Rgba8888)) 
-                        { 
-
-                        this.GdkWindow.Clear();
-
-                        var gdkpixbuf = new Gdk.Pixbuf(cbit.Bytes, Gdk.Colorspace.Rgb, true, 8, rect.Width, rect.Height, cbit.RowBytes);
-                        
-                        this.GdkWindow.DrawPixbuf(gc, gdkpixbuf, 0, 0, 0, 0, rect.Width, rect.Height, Gdk.RgbDither.Normal, 0, 0);
-
-                        gdkpixbuf.Dispose();
-                        gc.Dispose();
-
+                        IntPtr len;
+                        using (var skSurface = SKSurface.Create(bitmap.Info.Width, bitmap.Info.Height, SKColorType.Bgra8888, SKAlphaType.Premul, bitmap.GetPixels(out len), bitmap.Info.RowBytes))
+                        {
+                            if (fsurface != null) fsurface.UpdateSurface(skSurface);
+                            skSurface.Canvas.Flush();
+                            using (Cairo.Surface surface = new Cairo.ImageSurface(bitmap.GetPixels(out len), Cairo.Format.Argb32, bitmap.Width, bitmap.Height, bitmap.Width * 4))
+                            {
+                                surface.MarkDirty();
+                                cr.SetSourceSurface(surface, 0, 0);
+                                cr.Paint();
+                            }
                         }
                     }
                 }

@@ -934,6 +934,7 @@ namespace DWSIM.UI.Forms
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Error saving backup file: " + ex.ToString());
                 FlowsheetObject.ShowMessage("Error saving backup file: " + ex.Message.ToString(), Interfaces.IFlowsheet.MessageType.GeneralError);
             }
         }
