@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.0
+Version 5.0 Update 1
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -65,6 +65,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 5.0 Update 1
+
+- [FIX] Fixed script selection/linking on new UI
+- [FIX] Added missing WriteMessage() function to Flowsheet class on new UI
+- [FIX] Fixed flowsheet mouse click issues on macOS platform
 
 Version 5.0
 
