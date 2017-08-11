@@ -161,6 +161,7 @@ namespace DWSIM.UI.Forms
 
             FlowsheetControl.MouseDoubleClick += (sender, e) =>
             {
+                if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
                 var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
                 if (e.Modifiers == Keys.Shift)
                 {
@@ -401,6 +402,7 @@ namespace DWSIM.UI.Forms
             {
                 if (e.Buttons == MouseButtons.Alternate)
                 {
+                    if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
                     if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
                     {
                         var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
