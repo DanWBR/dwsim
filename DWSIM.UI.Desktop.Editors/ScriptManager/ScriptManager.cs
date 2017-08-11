@@ -57,9 +57,12 @@ namespace DWSIM.UI.Desktop.Editors
 
                 var script = Flowsheet.Scripts[lbScripts.SelectedKey];
 
+                ScriptEditor.cbLinkedObject.Items.Clear();
+                ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Simulation", Key = "Simulation" });
+                ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = "Solver", Key = "Solver" });
                 foreach (var obj in Flowsheet.SimulationObjects.Values)
                 {
-                    ScriptEditor.cbLinkedObject.Items.Add(obj.GraphicObject.Tag);
+                    ScriptEditor.cbLinkedObject.Items.Add(new ListItem { Text = obj.GraphicObject.Tag, Key = obj.Name });
                 }
 
                 ScriptEditor.txtName.Text = script.Title;
@@ -68,7 +71,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                 if (!string.IsNullOrEmpty(script.LinkedObjectName))
                 {
-                    ScriptEditor.cbLinkedObject.SelectedValue = Flowsheet.SimulationObjects[script.LinkedObjectName].GraphicObject.Tag;
+                    if (Flowsheet.SimulationObjects.ContainsKey(script.LinkedObjectName)) ScriptEditor.cbLinkedObject.SelectedKey = script.LinkedObjectName;
                 }
                 else
                 {
@@ -268,8 +271,11 @@ namespace DWSIM.UI.Desktop.Editors
                 default:
                     if (ScriptEditor.chkLink.Checked.GetValueOrDefault())
                     {
-                        scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject;
-                        scr.LinkedObjectName = Flowsheet.GetFlowsheetSimulationObject(ScriptEditor.cbLinkedObject.SelectedValue.ToString()).Name;
+                        if (ScriptEditor.cbLinkedObject.SelectedValue != null)
+                        {
+                            scr.LinkedObjectType = Scripts.ObjectType.FlowsheetObject;
+                            scr.LinkedObjectName = Flowsheet.GetFlowsheetSimulationObject(ScriptEditor.cbLinkedObject.SelectedValue.ToString()).Name;
+                        }
                     }
                     if (ScriptEditor.cbLinkedEvent.SelectedIndex == 0)
                     {

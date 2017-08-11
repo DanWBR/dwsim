@@ -62,7 +62,6 @@ namespace DWSIM.UI.Desktop.Editors
             cbLinkedEvent = new DropDown();
             cbPythonInt = new DropDown();
 
-            cbLinkedObject.Items.AddRange(new String[] { "Simulation", "Solver" }.Select((x) => new ListItem { Key = x, Text = x }));
             cbLinkedEvent.Items.AddRange(new String[] { "Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer" }.Select((x) => new ListItem { Key = x, Text = x }));
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));
 
