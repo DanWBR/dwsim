@@ -59,6 +59,12 @@ namespace DWSIM.UI.Desktop.Shared
             Console.WriteLine(text);
         }
 
+        public void WriteMessage(string text)
+        {
+            if (listeningaction != null) listeningaction(text, IFlowsheet.MessageType.Information);
+            Console.WriteLine(text);        
+        }
+
         public override void UpdateOpenEditForms()
         {
             throw new NotImplementedException();
