@@ -306,9 +306,10 @@ Namespace UnitOperations
 
                         Dim sys As Object = PythonEngine.ImportModule("sys")
 
-                        Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
-
-                        PythonEngine.RunSimpleString(codeToRedirectOutput)
+                        If Not GlobalSettings.Settings.IsRunningOnMono Then
+                            Dim codeToRedirectOutput As String = "import sys" & vbCrLf + "from io import BytesIO as StringIO" & vbCrLf + "sys.stdout = mystdout = StringIO()" & vbCrLf + "sys.stdout.flush()" & vbCrLf + "sys.stderr = mystderr = StringIO()" & vbCrLf + "sys.stderr.flush()"
+                            PythonEngine.RunSimpleString(codeToRedirectOutput)
+                        End If
 
                         Me.ErrorMessage = ""
 
