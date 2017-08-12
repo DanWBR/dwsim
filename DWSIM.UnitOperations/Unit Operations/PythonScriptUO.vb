@@ -343,7 +343,9 @@ Namespace UnitOperations
 
                         PythonEngine.Exec(txtcode, Nothing, locals.Handle)
 
-                        FlowSheet.ShowMessage(sys.stdout.getvalue().ToString, IFlowsheet.MessageType.Information)
+                        If Not GlobalSettings.Settings.IsRunningOnMono Then
+                            FlowSheet.ShowMessage(sys.stdout.getvalue().ToString(), IFlowsheet.MessageType.Information)
+                        End If
 
                         OutputVariables.Clear()
                         Dim i As Integer = 0

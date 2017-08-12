@@ -30,7 +30,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public override void DisplayEditingForm()
         {
             PRWS_Editor editor = new PRWS_Editor() { PP = this };
-            editor.Show();
+            editor.ShowDialog();
         }
 
         private void ReadParameters()

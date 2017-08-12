@@ -19,7 +19,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public override void DisplayEditingForm()
         {
             PCSAFT_Editor editor = new PCSAFT_Editor() { PP = this };
-            editor.Show();
+            editor.ShowDialog();
         }
 
         protected void ReadParameters()

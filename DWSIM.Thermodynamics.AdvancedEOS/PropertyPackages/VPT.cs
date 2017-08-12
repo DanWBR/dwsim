@@ -27,7 +27,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public override void DisplayEditingForm()
         {
             VPT_Editor editor = new VPT_Editor() { PP = this };
-            editor.Show();
+            editor.ShowDialog();
         }
 
         protected override string GetModelSpecificParameters()

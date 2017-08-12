@@ -28,7 +28,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         public override void DisplayEditingForm()
         {
             PHSC_Editor editor = new PHSC_Editor() { PP = this };
-            editor.Show();
+            editor.ShowDialog();
         }
 
         protected override string GetModelSpecificParameters()
