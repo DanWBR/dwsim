@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.0 Update 1
+Version 5.0 Update 3
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -65,6 +65,13 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+
+Version 5.0 Update 2/3
+
+- [CHG] Updated Linux files
+- [FIX] Added missing Orifice Plate Editor/Results
+- [FIX] Fixed error on spreadsheet value writing
+- [FIX] Fixed an issue with the Python Script UO on Linux
 
 Version 5.0 Update 1
 

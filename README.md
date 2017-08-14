@@ -10,8 +10,8 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 ### Supported Operating Systems
 
 - 64-bit Windows with .NET Framework 4.5 or newer
-- 64-bit Linux with Mono 4.0 or newer
-- 64-bit macOS with Mono 4.0 or newer
+- 64-bit Linux with Mono 5.0 or newer
+- 64-bit macOS with Mono 5.0 or newer
 
 ### Project Details
 
