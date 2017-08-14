@@ -2078,6 +2078,21 @@ namespace DWSIM.UI.Desktop.Editors
                     var tank = (Tank)SimObject;
                     s.CreateAndAddTextBoxRow(container, nf, "Volume (" + su.volume + ")", cv.ConvertFromSI(su.volume, tank.Volume), (sender, e) => { if (sender.Text.IsValidDouble()) tank.Volume = cv.ConvertToSI(su.volume, sender.Text.ToDoubleFromCurrent()); });
                     break;
+                case ObjectType.OrificePlate:
+                    var op = (OrificePlate)SimObject;
+                    s.CreateAndAddDropDownRow(container, "Pressure Tappings", new List<string>() { "Corner", "Flange", "Radius" }, (int)op.OrifType, (sender, e) => {
+                        op.OrifType = (UnitOperations.UnitOperations.OrificePlate.OrificeType)sender.SelectedIndex;
+                    });
+                    s.CreateAndAddTextBoxRow(container, nf, "Orifice Diameter (" + su.diameter + ")", op.OrificeDiameter, (sender, e) => {
+                        if (sender.Text.IsValidDouble()) op.OrificeDiameter = sender.Text.ToDoubleFromCurrent();
+                    });
+                    s.CreateAndAddTextBoxRow(container, nf, "Internal Pipe Diameter (" + su.diameter + ")", op.InternalPipeDiameter, (sender, e) => {
+                        if (sender.Text.IsValidDouble()) op.InternalPipeDiameter = sender.Text.ToDoubleFromCurrent();
+                    });
+                    s.CreateAndAddTextBoxRow(container, nf, "Correction Factor", op.CorrectionFactor, (sender, e) => {
+                        if (sender.Text.IsValidDouble()) op.CorrectionFactor = sender.Text.ToDoubleFromCurrent();
+                    });
+                    break;
             }
             s.CreateAndAddEmptySpace(container);
             s.CreateAndAddEmptySpace(container);

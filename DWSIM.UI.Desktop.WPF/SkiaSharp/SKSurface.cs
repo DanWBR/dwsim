@@ -82,7 +82,7 @@ namespace DWSIM.UI.Desktop.WPF
         protected override void OnRender(DrawingContext drawingContext)
         {
           
-            //base.OnRender(drawingContext);
+            base.OnRender(drawingContext);
 
             int width, height;
             double dpiX = 1.0;

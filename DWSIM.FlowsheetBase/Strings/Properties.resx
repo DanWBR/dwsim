@@ -883,9 +883,52 @@
   <data name="PROP_MS_231" xml:space="preserve">
     <value>Molar Helmholtz Free Energy (Solid)</value>
   </data>
+  <data name="PROP_MS_232" xml:space="preserve">
+    <value>Molality (Mixture)</value>
+  </data>
+  <data name="PROP_MS_233" xml:space="preserve">
+    <value>Molality (Vapor Phase)</value>
+  </data>
+  <data name="PROP_MS_234" xml:space="preserve">
+    <value>Molality (Overall Liquid)</value>
+  </data>
+  <data name="PROP_MS_235" xml:space="preserve">
+    <value>Molality (Liquid Phase 1)</value>
+  </data>
+  <data name="PROP_MS_236" xml:space="preserve">
+    <value>Molality (Liquid Phase 2)</value>
+  </data>
+  <data name="PROP_MS_237" xml:space="preserve">
+    <value>Molality (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_238" xml:space="preserve">
+    <value>Molality (Solid Phase)</value>
+  </data>
+  <data name="PROP_MS_239" xml:space="preserve">
+    <value>Molarity (Mixture)</value>
+  </data>
   <data name="PROP_MS_24" xml:space="preserve">
     <value>Vapor Phase Molar Flow</value>
     <comment>0</comment>
+  </data>
+  <data name="PROP_MS_240" xml:space="preserve">
+    <value>Molarity (Vapor Phase)</value>
+  </data>
+  <data name="PROP_MS_241" xml:space="preserve">
+    <value>Molarity (Overall Liquid)</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_MS_242" xml:space="preserve">
+    <value>Molarity (Liquid Phase 1)</value>
+  </data>
+  <data name="PROP_MS_243" xml:space="preserve">
+    <value>Molarity (Liquid Phase 2)</value>
+  </data>
+  <data name="PROP_MS_244" xml:space="preserve">
+    <value>Molarity (Aqueous Phase)</value>
+  </data>
+  <data name="PROP_MS_245" xml:space="preserve">
+    <value>Molarity (Solid Phase)</value>
   </data>
   <data name="PROP_MS_25" xml:space="preserve">
     <value>Vapor Phase Volumetric Flow</value>
@@ -1240,6 +1283,10 @@
     <comment>0</comment>
   </data>
   <data name="PROP_OP_6" xml:space="preserve">
+    <value>Delta T</value>
+    <comment>0</comment>
+  </data>
+  <data name="PROP_OP_7" xml:space="preserve">
     <value>Delta T</value>
     <comment>0</comment>
   </data>

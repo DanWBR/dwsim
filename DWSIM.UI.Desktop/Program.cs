@@ -53,6 +53,13 @@ namespace DWSIM.UI.Desktop
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Wpf.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WPF.CodeEditorControlHandler());
                             break;
+                        case Settings.WindowsPlatformRenderer.Gtk2:
+                            DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
+                            platform = new Eto.GtkSharp.Platform();
+                            platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                            platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
+                            platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
+                            break;
                     }
                     new Application(platform).Run(new MainForm());
                 }
@@ -66,14 +73,6 @@ namespace DWSIM.UI.Desktop
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
-                            break;
-                        case Settings.LinuxPlatformRenderer.Gtk3:
-                            //DWSIM.UI.Desktop.WPF.StyleSetter.SetTheme("aero", "normalcolor");
-                            //DWSIM.UI.Desktop.WPF.StyleSetter.SetStyles();
-                            //platform = new Eto.Wpf.Platform();
-                            //platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WPF.FlowsheetSurfaceControlHandler());
-                            //platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Wpf.PlotHandler());
-                            //platform.Add<CodeEditorControl.ICodeEditor>(() => new WPF.CodeEditorControlHandler());
                             break;
                         case Settings.LinuxPlatformRenderer.WinForms:
                             DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();

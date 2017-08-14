@@ -485,6 +485,51 @@ Namespace UnitOperations
                 Return False
             End Get
         End Property
+
+        Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
+
+            Dim str As New Text.StringBuilder
+
+            Dim istr, ostr As MaterialStream
+            istr = Me.GetInletMaterialStream(0)
+            ostr = Me.GetOutletMaterialStream(0)
+
+            istr.PropertyPackage.CurrentMaterialStream = istr
+
+            str.AppendLine("Pump: " & Me.GraphicObject.Tag)
+            str.AppendLine("Property Package: " & Me.PropertyPackage.ComponentName)
+            str.AppendLine()
+            str.AppendLine("Inlet conditions")
+            str.AppendLine()
+            str.AppendLine("    Temperature: " & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, istr.Phases(0).Properties.temperature.GetValueOrDefault).ToString(numberformat, ci) & " " & su.temperature)
+            str.AppendLine("    Pressure: " & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, istr.Phases(0).Properties.pressure.GetValueOrDefault).ToString(numberformat, ci) & " " & su.pressure)
+            str.AppendLine("    Mass flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.massflow, istr.Phases(0).Properties.massflow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.massflow)
+            str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, istr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
+            str.AppendLine("    Vapor fraction: " & istr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
+            str.AppendLine("    Compounds: " & istr.PropertyPackage.RET_VNAMES.ToArrayString)
+            str.AppendLine("    Molar composition: " & istr.PropertyPackage.RET_VMOL(PropertyPackages.Phase.Mixture).ToArrayString(ci))
+            str.AppendLine()
+            str.AppendLine("Calculation parameters")
+            str.AppendLine()
+            str.AppendLine("    Pressure Tappings: " & OrifType.ToString)
+            str.AppendLine("    Orifice Diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Internal Pipe Diameter: " & SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.InternalPipeDiameter).ToString(numberformat, ci) & " " & su.diameter)
+            str.AppendLine("    Correction Factor: " & CorrectionFactor.ToString(numberformat))
+            str.AppendLine()
+            str.AppendLine("Results")
+            str.AppendLine()
+            str.AppendLine("    Orifice Pressure Drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine("    Overall Pressure Drop: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop).ToString(numberformat, ci) & " " & su.deltaP)
+            str.AppendLine("    Temperature change: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Temperature change: " & SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT).ToString(numberformat, ci) & " " & su.deltaT)
+            str.AppendLine("    Orifice Beta (d/D): " & Beta.ToString(numberformat))
+
+            Return str.ToString
+
+        End Function
+
+
+
     End Class
 
 End Namespace

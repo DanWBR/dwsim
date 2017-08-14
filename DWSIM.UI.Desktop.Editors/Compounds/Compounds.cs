@@ -65,7 +65,8 @@ namespace DWSIM.UI.Desktop.Editors
                     newlist = complist.Where((x) => x.Name.ToLower().Contains(edittext.Text.ToLower()) ||
                                             x.Formula.ToLower().Contains(edittext.Text.ToLower()) ||
                                             x.CAS_Number.ToLower().Contains(edittext.Text.ToLower()) ||
-                                            x.CurrentDB.ToLower().Contains(edittext.Text.ToLower())).OrderBy((x) => x.Name).ToList();
+                                            x.CurrentDB.ToLower().Contains(edittext.Text.ToLower()))
+                                            .ToList().OrderBy((x) => x.Name.Length).ToList();
                     Application.Instance.AsyncInvoke(() => UpdateList(newlist));
                 }
             };

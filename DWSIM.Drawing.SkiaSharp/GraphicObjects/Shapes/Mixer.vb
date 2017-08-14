@@ -136,6 +136,7 @@ Namespace GraphicObjects.Shapes
             CreateConnectors(0, 0)
 
             UpdateStatus()
+
             MyBase.Draw(g)
 
 

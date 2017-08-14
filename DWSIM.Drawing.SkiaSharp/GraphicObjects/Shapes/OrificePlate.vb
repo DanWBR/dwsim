@@ -43,10 +43,12 @@ Namespace GraphicObjects.Shapes
             Dim myIC1 As New ConnectionPoint
             myIC1.Position = New Point(X, Y + 0.5 * Height)
             myIC1.Type = ConType.ConIn
+            myIC1.ConnectorName = "Inlet Stream"
 
             Dim myOC1 As New ConnectionPoint
             myOC1.Position = New Point(X + Width, Y + 0.5 * Height)
             myOC1.Type = ConType.ConOut
+            myOC1.ConnectorName = "Outlet Stream"
 
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
@@ -87,10 +89,11 @@ Namespace GraphicObjects.Shapes
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            MyBase.Draw(g)
+            CreateConnectors(0, 0)
 
-            PositionConnectors()
             UpdateStatus()
+
+            MyBase.Draw(g)
 
             Dim myPen2 As New SKPaint()
             With myPen2

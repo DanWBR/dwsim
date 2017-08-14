@@ -693,7 +693,7 @@ namespace DWSIM.UI.Desktop.Editors
         public void CopyDT2FromString(string text)
         {
             string[] rows = text.Split('|');
-            int n = 99;
+            int n = 98;
             int m = 25;
             if (n > 0)
             {

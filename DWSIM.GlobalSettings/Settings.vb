@@ -15,19 +15,18 @@ Public Class Settings
         WinForms = 0
         WinForms_Direct2D = 1
         WPF = 2
+        Gtk2 = 3
     End Enum
 
     Public Enum LinuxPlatformRenderer
         Gtk2 = 0
-        Gtk3 = 1
-        WinForms = 2
+        WinForms = 1
     End Enum
 
     Public Enum MacOSPlatformRenderer
         MonoMac = 0
         Gtk2 = 1
-        Gtk3 = 2
-        WinForms = 3
+        WinForms = 2
     End Enum
 
     Public Shared Property WindowsRenderer As WindowsPlatformRenderer = WindowsPlatformRenderer.WinForms
