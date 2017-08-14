@@ -288,8 +288,8 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     if ((cellparam != null && cellparam.CellType == SharedClasses.Spreadsheet.VarType.Write))
                     {
-                        var obj = flowsheet.SimulationObjects[ccparams.ObjectID];
-                        obj.SetPropertyValue(ccparams.PropID, cellparam.CurrVal, su);
+                        var obj = flowsheet.SimulationObjects[cellparam.ObjectID];
+                        obj.SetPropertyValue(cellparam.PropID, cellparam.CurrVal, su);
                     }
                 }
             }
