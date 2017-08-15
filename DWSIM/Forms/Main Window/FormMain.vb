@@ -1495,17 +1495,21 @@ Public Class FormMain
             End Try
         Next
 
-        data = xdoc.Element("DWSIM_Simulation_Data").Element("PetroleumAssays").Elements.ToList
+        If xdoc.Element("DWSIM_Simulation_Data").Element("PetroleumAssays") IsNot Nothing Then
 
-        For Each xel As XElement In data
-            Try
-                Dim obj As New DWSIM.Utilities.PetroleumCharacterization.Assay.Assay()
-                obj.LoadData(xel.Elements.ToList)
-                form.Options.PetroleumAssays.Add(obj.Name, obj)
-            Catch ex As Exception
-                excs.Add(New Exception("Error Loading Petroleum Assay Information", ex))
-            End Try
-        Next
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("PetroleumAssays").Elements.ToList
+
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New DWSIM.Utilities.PetroleumCharacterization.Assay.Assay()
+                    obj.LoadData(xel.Elements.ToList)
+                    form.Options.PetroleumAssays.Add(obj.Name, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Petroleum Assay Information", ex))
+                End Try
+            Next
+
+        End If
 
         If xdoc.Element("DWSIM_Simulation_Data").Element("WatchItems") IsNot Nothing Then
 
