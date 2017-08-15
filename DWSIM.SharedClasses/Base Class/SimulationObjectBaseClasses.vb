@@ -42,7 +42,7 @@ Namespace UnitOperations
 
         <System.NonSerialized()> Protected Friend m_flowsheet As Interfaces.IFlowsheet
 
-        Public Property ExtraProperties As New ExpandoObject
+        Public Property ExtraProperties As New ExpandoObject Implements ISimulationObject.ExtraProperties
 
 #Region "    Constructors"
 
@@ -278,6 +278,12 @@ Namespace UnitOperations
 
             Dim proplist As New List(Of String)
 
+            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            For Each item In epcol
+                proplist.Add(item.Key)
+            Next
+
             For Each item In AttachedUtilities
                 proplist.AddRange(item.GetPropertyList().ConvertAll(New Converter(Of String, String)(Function(s As String)
                                                                                                          Return item.Name & ": " & s
@@ -289,6 +295,12 @@ Namespace UnitOperations
         End Function
 
         Public Overridable Function GetPropertyUnit(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As String Implements Interfaces.ISimulationObject.GetPropertyUnit
+
+            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            If epcol.ContainsKey(prop) Then
+                Return "NF"
+            End If
 
             For Each item In AttachedUtilities
                 If prop.StartsWith(item.Name) Then
@@ -304,6 +316,12 @@ Namespace UnitOperations
 
         Public Overridable Function GetPropertyValue(prop As String, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Object Implements Interfaces.ISimulationObject.GetPropertyValue
 
+            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            If epcol.ContainsKey(prop) Then
+                Return epcol(prop)
+            End If
+
             For Each item In AttachedUtilities
                 If prop.StartsWith(item.Name) Then
                     For Each prop1 In item.GetPropertyList()
@@ -318,6 +336,13 @@ Namespace UnitOperations
         End Function
 
         Public Overridable Function SetPropertyValue(prop As String, propval As Object, Optional su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean Implements Interfaces.ISimulationObject.SetPropertyValue
+
+            Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
+
+            If epcol.ContainsKey(prop) Then
+                epcol(prop) = propval
+                Return True
+            End If
 
             For Each item In AttachedUtilities
                 If prop.StartsWith(item.Name) Then

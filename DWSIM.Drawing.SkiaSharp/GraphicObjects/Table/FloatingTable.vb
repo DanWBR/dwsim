@@ -125,6 +125,7 @@ Namespace GraphicObjects.Tables
 
                     Dim fs = Owner.GetFlowsheet
                     Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
+                    props.AddRange(DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)))
 
                     If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
 

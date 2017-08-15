@@ -1784,6 +1784,11 @@ Namespace Streams
 
             Dim i As Integer = 0
             Dim proplist As New List(Of String)
+
+            Dim basecol = MyBase.GetProperties(proptype)
+
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
+
             Select Case proptype
                 Case PropertyType.RW
                     For i = 0 To 4

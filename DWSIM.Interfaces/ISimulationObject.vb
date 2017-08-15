@@ -21,6 +21,8 @@
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface ISimulationObject
 
+    Property ExtraProperties As Dynamic.ExpandoObject
+
     Property AttachedUtilities As List(Of IAttachedUtility)
 
     Sub DisplayEditForm()
