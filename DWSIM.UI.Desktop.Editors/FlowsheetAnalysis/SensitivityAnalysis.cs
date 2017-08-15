@@ -202,7 +202,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                     flowsheet.SolveFlowsheet(true);
 
-                    iv1val0 = (double)flowsheet.SimulationObjects[iv1id].GetPropertyValue(iv1prop);
+                    iv1val0 = Convert.ToDouble(flowsheet.SimulationObjects[iv1id].GetPropertyValue(iv1prop));
 
                     for (i = 0; i <= iv1np; i++)
                     {
@@ -212,7 +212,7 @@ namespace DWSIM.UI.Desktop.Editors
                         List<double> depvarvals = new List<double>();
                         foreach (var depvar in mycase.depvariables.Values)
                         {
-                            depvar.currentvalue = (double)flowsheet.SimulationObjects[depvar.objectID].GetPropertyValue(depvar.propID);
+                            depvar.currentvalue = Convert.ToDouble(flowsheet.SimulationObjects[depvar.objectID].GetPropertyValue(depvar.propID));
                             depvarvals.Add(depvar.currentvalue);
                         }
                         results.Add(depvarvals);

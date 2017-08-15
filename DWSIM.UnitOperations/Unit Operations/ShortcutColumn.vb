@@ -466,59 +466,64 @@ restart:    B = F - D
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
+                Select Case propidx
 
-                Case 0
-                    'PROP_SC_0	Reflux Ratio
-                    value = Me.m_refluxratio
-                Case 1
-                    'PROP_SC_1	Heavy Key Molar Fraction
-                    value = Me.m_heavykeymolarfrac
-                Case 2
-                    'PROP_SC_2	Light Key Molar Fraction
-                    value = Me.m_lightkeymolarfrac
-                Case 3
-                    'PROP_SC_3	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure)
-                Case 4
-                    'PROP_SC_4	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_boilerpressure)
-                Case 5
-                    'PROP_SC_5	Minimun Reflux Ratio
-                    value = Me.m_Rmin
-                Case 6
-                    'PROP_SC_6	Minimum Stages
-                    value = Me.m_Nmin
-                Case 7
-                    'PROP_SC_7	Optimal Feed Stage
-                    value = Me.ofs
-                Case 8
-                    'PROP_SC_8	Stripping Liquid Molar Flow
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L_)
-                Case 9
-                    'PROP_SC_9	Rectify Liquid Molar Flow
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L)
-                Case 10
-                    'PROP_SC_10	Stripping Vapor Molar Flow
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V_)
-                Case 11
-                    'PROP_SC_11	Rectify Vapor Molar Flow
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V)
-                Case 12
-                    'PROP_SC_12	Condenser Duty
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qc)
-                Case 13
-                    'PROP_SC_13	Reboiler Duty
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qb)
-            End Select
+                    Case 0
+                        'PROP_SC_0	Reflux Ratio
+                        value = Me.m_refluxratio
+                    Case 1
+                        'PROP_SC_1	Heavy Key Molar Fraction
+                        value = Me.m_heavykeymolarfrac
+                    Case 2
+                        'PROP_SC_2	Light Key Molar Fraction
+                        value = Me.m_lightkeymolarfrac
+                    Case 3
+                        'PROP_SC_3	Condenser Pressure
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_condenserpressure)
+                    Case 4
+                        'PROP_SC_4	Reboiler Pressure
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.m_boilerpressure)
+                    Case 5
+                        'PROP_SC_5	Minimun Reflux Ratio
+                        value = Me.m_Rmin
+                    Case 6
+                        'PROP_SC_6	Minimum Stages
+                        value = Me.m_Nmin
+                    Case 7
+                        'PROP_SC_7	Optimal Feed Stage
+                        value = Me.ofs
+                    Case 8
+                        'PROP_SC_8	Stripping Liquid Molar Flow
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L_)
+                    Case 9
+                        'PROP_SC_9	Rectify Liquid Molar Flow
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.L)
+                    Case 10
+                        'PROP_SC_10	Stripping Vapor Molar Flow
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V_)
+                    Case 11
+                        'PROP_SC_11	Rectify Vapor Molar Flow
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.V)
+                    Case 12
+                        'PROP_SC_12	Condenser Duty
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qc)
+                    Case 13
+                        'PROP_SC_13	Reboiler Duty
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.m_Qb)
+                End Select
 
-            Return value
+                Return value
+            End If
 
         End Function
 
@@ -526,6 +531,8 @@ restart:    B = F - D
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 5 To 13
@@ -549,6 +556,9 @@ restart:    B = F - D
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -576,58 +586,64 @@ restart:    B = F - D
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_SC_0	Reflux Ratio
-                    value = ""
-                Case 1
-                    'PROP_SC_1	Heavy Key Molar Fraction
-                    value = ""
-                Case 2
-                    'PROP_SC_2	Light Key Molar Fraction
-                    value = ""
-                Case 3
-                    'PROP_SC_3	Condenser Pressure
-                    value = su.pressure
-                Case 4
-                    'PROP_SC_4	Reboiler Pressure
-                    value = su.pressure
-                Case 5
-                    'PROP_SC_5	Minimun Reflux Ratio
-                    value = ""
-                Case 6
-                    'PROP_SC_6	Minimum Stages
-                    value = ""
-                Case 7
-                    'PROP_SC_7	Optimal Feed Stage
-                    value = ""
-                Case 8
-                    'PROP_SC_8	Stripping Liquid Molar Flow
-                    value = su.molarflow
-                Case 9
-                    'PROP_SC_9	Rectify Liquid Molar Flow
-                    value = su.molarflow
-                Case 10
-                    'PROP_SC_10	Stripping Vapor Molar Flow
-                    value = su.molarflow
-                Case 11
-                    'PROP_SC_11	Rectify Vapor Molar Flow
-                    value = su.molarflow
-                Case 12
-                    'PROP_SC_12	Condenser Duty
-                    value = su.heatflow
-                Case 13
-                    'PROP_SC_13	Reboiler Duty
-                    value = su.heatflow
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_SC_0	Reflux Ratio
+                        value = ""
+                    Case 1
+                        'PROP_SC_1	Heavy Key Molar Fraction
+                        value = ""
+                    Case 2
+                        'PROP_SC_2	Light Key Molar Fraction
+                        value = ""
+                    Case 3
+                        'PROP_SC_3	Condenser Pressure
+                        value = su.pressure
+                    Case 4
+                        'PROP_SC_4	Reboiler Pressure
+                        value = su.pressure
+                    Case 5
+                        'PROP_SC_5	Minimun Reflux Ratio
+                        value = ""
+                    Case 6
+                        'PROP_SC_6	Minimum Stages
+                        value = ""
+                    Case 7
+                        'PROP_SC_7	Optimal Feed Stage
+                        value = ""
+                    Case 8
+                        'PROP_SC_8	Stripping Liquid Molar Flow
+                        value = su.molarflow
+                    Case 9
+                        'PROP_SC_9	Rectify Liquid Molar Flow
+                        value = su.molarflow
+                    Case 10
+                        'PROP_SC_10	Stripping Vapor Molar Flow
+                        value = su.molarflow
+                    Case 11
+                        'PROP_SC_11	Rectify Vapor Molar Flow
+                        value = su.molarflow
+                    Case 12
+                        'PROP_SC_12	Condenser Duty
+                        value = su.heatflow
+                    Case 13
+                        'PROP_SC_13	Reboiler Duty
+                        value = su.heatflow
+                End Select
+
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

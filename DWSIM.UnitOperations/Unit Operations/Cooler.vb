@@ -312,43 +312,51 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            If Not val0 Is Nothing Then
 
-            Select Case propidx
+                Return val0
 
-                Case 0
-                    'PROP_HT_0	Pressure Drop
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-                Case 1
-                    'PROP_HT_1(Efficiency)
-                    value = Me.Eficiencia.GetValueOrDefault
-                Case 2
-                    'PROP_HT_2	Outlet Temperature
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature.GetValueOrDefault)
-                Case 3
-                    'PROP_CL_3	Heat Removed
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
-                Case 4
-                    'PROP_HT_4 Outlet Vapour fraction
-                    value = Me.OutletVaporFraction.GetValueOrDefault
-                Case 5
-                    'PROP_HT_5 DeltaT
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_HT_0	Pressure Drop
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    Case 1
+                        'PROP_HT_1(Efficiency)
+                        value = Me.Eficiencia.GetValueOrDefault
+                    Case 2
+                        'PROP_HT_2	Outlet Temperature
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature.GetValueOrDefault)
+                    Case 3
+                        'PROP_CL_3	Heat Removed
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                    Case 4
+                        'PROP_HT_4 Outlet Vapour fraction
+                        value = Me.OutletVaporFraction.GetValueOrDefault
+                    Case 5
+                        'PROP_HT_5 DeltaT
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
 
+                End Select
+
+                Return value
+            End If
         End Function
 
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 4 To 5
@@ -372,6 +380,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -399,35 +410,41 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_CL_0	Pressure Drop
-                    value = su.deltaP
-                Case 1
-                    'PROP_CL_1  Efficiency
-                    value = ""
-                Case 2
-                    'PROP_CL_2	Outlet Temperature
-                    value = su.temperature
-                Case 3
-                    'PROP_CL_3	Heat Added
-                    value = su.heatflow
-                Case 4
-                    'PROP_CL_4	Outlet Vapour Fraction
-                    value = ""
-                Case 5
-                    'PROP_CL_4  DeltaT
-                    value = su.deltaT
+                Select Case propidx
 
-            End Select
+                    Case 0
+                        'PROP_CL_0	Pressure Drop
+                        value = su.deltaP
+                    Case 1
+                        'PROP_CL_1  Efficiency
+                        value = ""
+                    Case 2
+                        'PROP_CL_2	Outlet Temperature
+                        value = su.temperature
+                    Case 3
+                        'PROP_CL_3	Heat Added
+                        value = su.heatflow
+                    Case 4
+                        'PROP_CL_4	Outlet Vapour Fraction
+                        value = ""
+                    Case 5
+                        'PROP_CL_4  DeltaT
+                        value = su.deltaT
 
-            Return value
+                End Select
+
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

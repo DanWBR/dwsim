@@ -194,25 +194,42 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            Return 0
+
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
+
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                Return 0
+            End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             Return 0
 
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            Return 0
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                Return 0
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

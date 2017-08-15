@@ -303,45 +303,52 @@ Namespace UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Select Case propidx
-                Case 0
-                    'PROP_OP_0	Orifice Type	1
-                    value = Me.OrifType
-                Case 1
-                    'PROP_OP_1	Orifice Diameter	1
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
-                Case 2
-                    'PROP_OP_2	Internal Pipe Diameter	1
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.InternalPipeDiameter)
-                Case 3
-                    'PROP_OP_3	Correction Factor	1
-                    value = Me.CorrectionFactor
-                Case 4
-                    'PROP_OP_4	Beta (d/D)	1
-                    value = Me.Beta
-                Case 5
-                    'PROP_OP_5	Overall Pressure Drop	0
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop)
-                Case 6
-                    'PROP_OP_6	Orifice Pressure Drop	0
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop)
-                Case 7
-                    'PROP_OP_7	Delta T	0
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
-            End Select
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Return value
+                Select Case propidx
+                    Case 0
+                        'PROP_OP_0	Orifice Type	1
+                        value = Me.OrifType
+                    Case 1
+                        'PROP_OP_1	Orifice Diameter	1
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.OrificeDiameter)
+                    Case 2
+                        'PROP_OP_2	Internal Pipe Diameter	1
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.InternalPipeDiameter)
+                    Case 3
+                        'PROP_OP_3	Correction Factor	1
+                        value = Me.CorrectionFactor
+                    Case 4
+                        'PROP_OP_4	Beta (d/D)	1
+                        value = Me.Beta
+                    Case 5
+                        'PROP_OP_5	Overall Pressure Drop	0
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OverallPressureDrop)
+                    Case 6
+                        'PROP_OP_6	Orifice Pressure Drop	0
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.OrificePressureDrop)
+                    Case 7
+                        'PROP_OP_7	Delta T	0
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                End Select
+                Return value
+            End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 4 To 7
@@ -374,6 +381,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -398,39 +408,42 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
-
-                Case 0
-                    'PROP_OP_0	Orifice Type	1
-                    value = ""
-                Case 1
-                    'PROP_OP_1	Orifice Diameter	1
-                    value = su.diameter
-                Case 2
-                    'PROP_OP_2	Internal Pipe Diameter
-                    value = su.diameter
-                Case 3
-                    'PROP_OP_3	Correction Factor	1
-                    value = ""
-                Case 4
-                    'PROP_OP_4	Beta (d/D)	1
-                    value = ""
-                Case 5
-                    'PROP_OP_4	Overall Pressure Drop	0
-                    value = su.deltaP
-                Case 6
-                    'PROP_OP_5	Orifice Pressure Drop	0
-                    value = su.deltaP
-                Case 7
-                    'PROP_OP_6	Delta T	0
-                    value = su.deltaT
-            End Select
-
-            Return value
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+                Select Case propidx
+                    Case 0
+                        'PROP_OP_0	Orifice Type	1
+                        value = ""
+                    Case 1
+                        'PROP_OP_1	Orifice Diameter	1
+                        value = su.diameter
+                    Case 2
+                        'PROP_OP_2	Internal Pipe Diameter
+                        value = su.diameter
+                    Case 3
+                        'PROP_OP_3	Correction Factor	1
+                        value = ""
+                    Case 4
+                        'PROP_OP_4	Beta (d/D)	1
+                        value = ""
+                    Case 5
+                        'PROP_OP_4	Overall Pressure Drop	0
+                        value = su.deltaP
+                    Case 6
+                        'PROP_OP_5	Orifice Pressure Drop	0
+                        value = su.deltaP
+                    Case 7
+                        'PROP_OP_6	Delta T	0
+                        value = su.deltaT
+                End Select
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

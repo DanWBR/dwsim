@@ -774,29 +774,37 @@ Namespace UnitOperations
 
         End Sub
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
 
-            Dim propType As String = prop.Split("_")(0)
-            Dim propID As String = prop.Split("_")(1)
+                Dim propType As String = prop.Split("_")(0)
+                Dim propID As String = prop.Split("_")(1)
 
-            Select Case propType
-                Case "Calc"
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, DeltaQ.GetValueOrDefault)
-                Case "In"
-                    value = InputParams(propID).Value
-                Case "Out"
-                    value = OutputParams(propID).Value
-            End Select
+                Select Case propType
+                    Case "Calc"
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, DeltaQ.GetValueOrDefault)
+                    Case "In"
+                        value = InputParams(propID).Value
+                    Case "Out"
+                        value = OutputParams(propID).Value
+                End Select
 
-            Return value
+                Return value
+            End If
+
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
 
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
 
             Select Case proptype
                 Case PropertyType.RO
@@ -831,6 +839,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
 
@@ -850,23 +861,29 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Dim propType As String = prop.Split("_")(0)
-            Dim propID As String = prop.Split("_")(1)
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
 
-            Select Case propType
-                Case "Calc"
-                    value = su.heatflow
-                Case "In"
-                    value = InputParams(propID).Unit
-                Case "Out"
-                    value = OutputParams(propID).Unit
-            End Select
+                Dim propType As String = prop.Split("_")(0)
+                Dim propID As String = prop.Split("_")(1)
 
-            Return value
+                Select Case propType
+                    Case "Calc"
+                        value = su.heatflow
+                    Case "In"
+                        value = InputParams(propID).Unit
+                    Case "Out"
+                        value = OutputParams(propID).Unit
+                End Select
+
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

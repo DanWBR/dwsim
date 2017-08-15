@@ -1477,37 +1477,44 @@ Final3:     T = bbb
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Select Case propidx
-                Case 0
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-                Case 1
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
-                Case 2
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
-                Case 3
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure)
-                Case 4
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
-                Case 5
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.ThermalProfile.CGTC_Definido)
-                Case 6
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ThermalProfile.Temp_amb_definir)
-                Case 7
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / SystemsOfUnits.Converter.ConvertFromSI(su.distance, 1.0#)
-            End Select
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Return value
+                Select Case propidx
+                    Case 0
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
+                    Case 1
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.DeltaT.GetValueOrDefault)
+                    Case 2
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.DeltaQ.GetValueOrDefault)
+                    Case 3
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.OutletPressure)
+                    Case 4
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.OutletTemperature)
+                    Case 5
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.ThermalProfile.CGTC_Definido)
+                    Case 6
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.ThermalProfile.Temp_amb_definir)
+                    Case 7
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / SystemsOfUnits.Converter.ConvertFromSI(su.distance, 1.0#)
+                End Select
+                Return value
+            End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             For i = 0 To 7
                 proplist.Add("PROP_PS_" + CStr(i))
             Next
@@ -1516,6 +1523,9 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -1541,31 +1551,36 @@ Final3:     T = bbb
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
-                Case 0
-                    value = su.deltaP
-                Case 1
-                    value = su.deltaT
-                Case 2
-                    value = su.heatflow
-                Case 3
-                    value = su.pressure
-                Case 4
-                    value = su.temperature
-                Case 5
-                    value = su.heat_transf_coeff
-                Case 6
-                    value = su.temperature
-                Case 7
-                    value = su.deltaT & "/" & su.distance
-            End Select
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Return value
+                Select Case propidx
+                    Case 0
+                        value = su.deltaP
+                    Case 1
+                        value = su.deltaT
+                    Case 2
+                        value = su.heatflow
+                    Case 3
+                        value = su.pressure
+                    Case 4
+                        value = su.temperature
+                    Case 5
+                        value = su.heat_transf_coeff
+                    Case 6
+                        value = su.temperature
+                    Case 7
+                        value = su.deltaT & "/" & su.distance
+                End Select
 
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

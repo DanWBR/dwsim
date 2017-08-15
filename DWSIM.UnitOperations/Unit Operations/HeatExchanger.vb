@@ -601,7 +601,7 @@ Namespace UnitOperations
 
                     Loop
 
-                    ColdSideOutletTemperature = tc2
+                    ColdSideOutletTemperature = Tc2
 
                     Q = Qi
 
@@ -1294,81 +1294,91 @@ Namespace UnitOperations
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Select Case propidx
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
 
-                Case 0
-                    'PROP_HX_0	Global Heat Transfer Coefficient (U)
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient.GetValueOrDefault)
-                Case 1
-                    'PROP_HX_1	Heat Exchange Area (A)
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area.GetValueOrDefault)
-                Case 2
-                    'PROP_HX_2	Heat Load
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q.GetValueOrDefault)
-                Case 3
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut)
-                Case 4
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut)
-                Case 5
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Shell_Di)
-                Case 6
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Shell_Fouling)
-                Case 7
-                    value = Me.STProperties.Shell_BaffleCut
-                Case 8
-                    value = Me.STProperties.Shell_NumberOfShellsInSeries
-                Case 9
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Shell_BaffleSpacing)
-                Case 10
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_Di)
-                Case 11
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_De)
-                Case 12
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.STProperties.Tube_Length)
-                Case 13
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Tube_Fouling)
-                Case 14
-                    value = Me.STProperties.Tube_PassesPerShell
-                Case 15
-                    value = Me.STProperties.Tube_NumberPerShell
-                Case 16
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Tube_Pitch)
-                Case 17
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
-                Case 18
-                    value = Me.LMTD_F
-                Case 19
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD)
-                Case 20
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Ft)
-                Case 21
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fc)
-                Case 22
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fs)
-                Case 23
-                    value = SystemsOfUnits.Converter.ConvertFromSI("", Me.STProperties.ReS)
-                Case 24
-                    value = SystemsOfUnits.Converter.ConvertFromSI("", Me.STProperties.ReT)
-                Case 25
-                    value = ThermalEfficiency
-                Case 26
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, MaxHeatExchange)
-                Case 27
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, MITA)
-            End Select
 
-            Return value
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+
+                    Case 0
+                        'PROP_HX_0	Global Heat Transfer Coefficient (U)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, Me.OverallCoefficient.GetValueOrDefault)
+                    Case 1
+                        'PROP_HX_1	Heat Exchange Area (A)
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.Area.GetValueOrDefault)
+                    Case 2
+                        'PROP_HX_2	Heat Load
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.Q.GetValueOrDefault)
+                    Case 3
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempColdOut)
+                    Case 4
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.TempHotOut)
+                    Case 5
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Shell_Di)
+                    Case 6
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Shell_Fouling)
+                    Case 7
+                        value = Me.STProperties.Shell_BaffleCut
+                    Case 8
+                        value = Me.STProperties.Shell_NumberOfShellsInSeries
+                    Case 9
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Shell_BaffleSpacing)
+                    Case 10
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_Di)
+                    Case 11
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.diameter, Me.STProperties.Tube_De)
+                    Case 12
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.distance, Me.STProperties.Tube_Length)
+                    Case 13
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Tube_Fouling)
+                    Case 14
+                        value = Me.STProperties.Tube_PassesPerShell
+                    Case 15
+                        value = Me.STProperties.Tube_NumberPerShell
+                    Case 16
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.thickness, Me.STProperties.Tube_Pitch)
+                    Case 17
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.OverallFoulingFactor)
+                    Case 18
+                        value = Me.LMTD_F
+                    Case 19
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.LMTD)
+                    Case 20
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Ft)
+                    Case 21
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fc)
+                    Case 22
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.foulingfactor, Me.STProperties.Fs)
+                    Case 23
+                        value = SystemsOfUnits.Converter.ConvertFromSI("", Me.STProperties.ReS)
+                    Case 24
+                        value = SystemsOfUnits.Converter.ConvertFromSI("", Me.STProperties.ReT)
+                    Case 25
+                        value = ThermalEfficiency
+                    Case 26
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, MaxHeatExchange)
+                    Case 27
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, MITA)
+                End Select
+
+                Return value
+            End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 2 To 4
@@ -1398,6 +1408,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -1450,69 +1463,75 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_HX_0	Global Heat Transfer Coefficient (U)
-                    value = su.heat_transf_coeff
-                Case 1
-                    'PROP_HX_1	Heat Exchange Area (A)
-                    value = su.area
-                Case 2
-                    'PROP_HX_2	Heat Load
-                    value = su.heatflow
-                Case 3
-                    'PROP_HX_3	
-                    value = su.temperature
-                Case 4
-                    'PROP_HX_4
-                    value = su.temperature
-                Case 5
-                    value = su.diameter
-                Case 6
-                    value = su.foulingfactor
-                Case 7
-                    value = "%"
-                Case 8
-                    value = ""
-                Case 9
-                    value = su.thickness
-                Case 10
-                    value = su.diameter
-                Case 11
-                    value = su.diameter
-                Case 12
-                    value = su.distance
-                Case 13
-                    value = su.foulingfactor
-                Case 14
-                    value = ""
-                Case 15
-                    value = ""
-                Case 16
-                    value = su.thickness
-                Case 17
-                    value = su.foulingfactor
-                Case 18
-                    value = ""
-                Case 19, 27
-                    value = su.deltaT
-                Case 20, 21, 22
-                    value = su.foulingfactor
-                Case 23, 24
-                    value = ""
-                Case 25
-                    value = "%"
-                Case 26
-                    value = su.heatflow
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_HX_0	Global Heat Transfer Coefficient (U)
+                        value = su.heat_transf_coeff
+                    Case 1
+                        'PROP_HX_1	Heat Exchange Area (A)
+                        value = su.area
+                    Case 2
+                        'PROP_HX_2	Heat Load
+                        value = su.heatflow
+                    Case 3
+                        'PROP_HX_3	
+                        value = su.temperature
+                    Case 4
+                        'PROP_HX_4
+                        value = su.temperature
+                    Case 5
+                        value = su.diameter
+                    Case 6
+                        value = su.foulingfactor
+                    Case 7
+                        value = "%"
+                    Case 8
+                        value = ""
+                    Case 9
+                        value = su.thickness
+                    Case 10
+                        value = su.diameter
+                    Case 11
+                        value = su.diameter
+                    Case 12
+                        value = su.distance
+                    Case 13
+                        value = su.foulingfactor
+                    Case 14
+                        value = ""
+                    Case 15
+                        value = ""
+                    Case 16
+                        value = su.thickness
+                    Case 17
+                        value = su.foulingfactor
+                    Case 18
+                        value = ""
+                    Case 19, 27
+                        value = su.deltaT
+                    Case 20, 21, 22
+                        value = su.foulingfactor
+                    Case 23, 24
+                        value = ""
+                    Case 25
+                        value = "%"
+                    Case 26
+                        value = su.heatflow
+                End Select
+
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

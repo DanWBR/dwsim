@@ -369,27 +369,35 @@ Namespace SpecialOps
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            Select Case prop
-                Case "MinVal"
-                    Return MinVal
-                Case "MaxVal"
-                    Return MaxVal
-                Case "AdjustValue"
-                    Return AdjustValue
-                Case "Tolerance"
-                    Return Tolerance
-                Case "StepSize"
-                    Return StepSize
-                Case "MaximumIterations"
-                    Return MaximumIterations
-                Case Else
-                    Return Nothing
-            End Select
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
+
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                Select Case prop
+                    Case "MinVal"
+                        Return MinVal
+                    Case "MaxVal"
+                        Return MaxVal
+                    Case "AdjustValue"
+                        Return AdjustValue
+                    Case "Tolerance"
+                        Return Tolerance
+                    Case "StepSize"
+                        Return StepSize
+                    Case "MaximumIterations"
+                        Return MaximumIterations
+                    Case Else
+                        Return Nothing
+                End Select
+            End If
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             proplist.Add("MinVal")
             proplist.Add("MaxVal")
             proplist.Add("AdjustValue")
@@ -401,6 +409,9 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             Select Case prop
                 Case "MinVal"
                     MinVal = propval
@@ -419,7 +430,13 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            Return ""
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
+
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                Return ""
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

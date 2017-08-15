@@ -891,24 +891,32 @@ Label_00CC:
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Try
-                If prop.Contains("[I]") Then
-                    Return Fsheet.SimulationObjects(InputParams(pkey).ObjectID).GetPropertyValue(InputParams(pkey).ObjectProperty, su)
-                Else
-                    Return Fsheet.SimulationObjects(OutputParams(pkey).ObjectID).GetPropertyValue(OutputParams(pkey).ObjectProperty, su)
-                End If
-            Catch ex As Exception
-                Return ex.ToString
-            End Try
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
+
+                Try
+                    If prop.Contains("[I]") Then
+                        Return Fsheet.SimulationObjects(InputParams(pkey).ObjectID).GetPropertyValue(InputParams(pkey).ObjectProperty, su)
+                    Else
+                        Return Fsheet.SimulationObjects(OutputParams(pkey).ObjectID).GetPropertyValue(OutputParams(pkey).ObjectProperty, su)
+                    End If
+                Catch ex As Exception
+                    Return ex.ToString
+                End Try
+            End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             If Initialized Then
                 Select Case proptype
                     Case Enums.PropertyType.ALL
@@ -933,6 +941,8 @@ Label_00CC:
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
@@ -944,18 +954,25 @@ Label_00CC:
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
+            If u0 <> "NF" Then
+                Return u0
+            Else
 
-            Try
-                If prop.Contains("[I]") Then
-                    Return Fsheet.SimulationObjects(InputParams(pkey).ObjectID).GetPropertyUnit(InputParams(pkey).ObjectProperty, su)
-                Else
-                    Return Fsheet.SimulationObjects(OutputParams(pkey).ObjectID).GetPropertyUnit(OutputParams(pkey).ObjectProperty, su)
-                End If
-            Catch ex As Exception
-                Return ex.ToString
-            End Try
+                Dim pkey As String = prop.Split("][")(1).TrimStart("[").TrimEnd("]")
+
+                Try
+                    If prop.Contains("[I]") Then
+                        Return Fsheet.SimulationObjects(InputParams(pkey).ObjectID).GetPropertyUnit(InputParams(pkey).ObjectProperty, su)
+                    Else
+                        Return Fsheet.SimulationObjects(OutputParams(pkey).ObjectID).GetPropertyUnit(OutputParams(pkey).ObjectProperty, su)
+                    End If
+                Catch ex As Exception
+                    Return ex.ToString
+                End Try
+
+            End If
 
         End Function
 

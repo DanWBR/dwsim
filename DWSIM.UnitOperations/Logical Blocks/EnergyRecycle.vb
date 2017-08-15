@@ -307,30 +307,38 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Select Case propidx
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_ER_0	Maximum Iterations
-                    value = Me.MaximumIterations
-                Case 1
-                    'PROP_ER_1	Power Tolerance
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ConvergenceParameters.Energy)
-                Case 2
-                    'PROP_ER_2	Power Error
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ConvergenceHistory.EnergyE)
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_ER_0	Maximum Iterations
+                        value = Me.MaximumIterations
+                    Case 1
+                        'PROP_ER_1	Power Tolerance
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ConvergenceParameters.Energy)
+                    Case 2
+                        'PROP_ER_2	Power Error
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ConvergenceHistory.EnergyE)
+                End Select
+
+                Return value
+            End If
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 2 To 2
@@ -354,6 +362,9 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -372,25 +383,31 @@ final:          Me.IterationsTaken = Me.IterationCount.ToString
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_ER_0	Maximum Iterations
-                    value = ""
-                Case 1
-                    'PROP_ER_1	Power Tolerance
-                    value = su.heatflow
-                Case 2
-                    'PROP_ER_2	Power Error
-                    value = su.heatflow
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_ER_0	Maximum Iterations
+                        value = ""
+                    Case 1
+                        'PROP_ER_1	Power Tolerance
+                        value = su.heatflow
+                    Case 2
+                        'PROP_ER_2	Power Error
+                        value = su.heatflow
+                End Select
+
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

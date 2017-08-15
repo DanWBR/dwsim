@@ -390,29 +390,49 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
+            Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.ALL
-                    Return Me.OutputVariables.Keys.ToArray.Union(Me.InputVariables.Keys.ToArray).ToArray
+                    proplist.AddRange(Me.OutputVariables.Keys.ToArray.Union(Me.InputVariables.Keys.ToArray).ToArray)
                 Case PropertyType.RO
-                    Return Me.OutputVariables.Keys.ToArray
+                    proplist.AddRange(Me.OutputVariables.Keys.ToArray)
                 Case PropertyType.WR
-                    Return Me.InputVariables.Keys.ToArray
+                    proplist.AddRange(Me.InputVariables.Keys.ToArray)
                 Case Else
-                    Return New String() {}
             End Select
+            Return proplist.ToArray(Type.GetType("System.String"))
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            Return ""
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
+
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                Return ""
+            End If
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If Me.OutputVariables.ContainsKey(prop) Then Return Me.OutputVariables(prop)
-            If Me.InputVariables.ContainsKey(prop) Then Return Me.InputVariables(prop)
-            Return Nothing
+
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
+
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If Me.OutputVariables.ContainsKey(prop) Then Return Me.OutputVariables(prop)
+                If Me.InputVariables.ContainsKey(prop) Then Return Me.InputVariables(prop)
+                Return Nothing
+            End If
+
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If Me.InputVariables.ContainsKey(prop) Then Me.InputVariables(prop) = propval
             Return Nothing
         End Function

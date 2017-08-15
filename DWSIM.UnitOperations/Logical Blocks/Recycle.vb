@@ -480,39 +480,43 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
+                Select Case propidx
 
-                Case 0
-                    'PROP_RY_0	Maximum Iterations
-                    value = Me.MaximumIterations
-                Case 1
-                    'PROP_RY_1	Mass Flow Tolerance
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica)
-                Case 2
-                    'PROP_RY_2	Temperature Tolerance
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceParameters.Temperatura)
-                Case 3
-                    'PROP_RY_3	Pressure Tolerance
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceParameters.Pressao)
-                Case 4
-                    'PROP_RY_4	Mass Flow Error
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE)
-                Case 5
-                    'PROP_RY_5	Temperature Error
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE)
-                Case 6
-                    'PROP_RY_6	Pressure Error
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE)
-            End Select
+                    Case 0
+                        'PROP_RY_0	Maximum Iterations
+                        value = Me.MaximumIterations
+                    Case 1
+                        'PROP_RY_1	Mass Flow Tolerance
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceParameters.VazaoMassica)
+                    Case 2
+                        'PROP_RY_2	Temperature Tolerance
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceParameters.Temperatura)
+                    Case 3
+                        'PROP_RY_3	Pressure Tolerance
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceParameters.Pressao)
+                    Case 4
+                        'PROP_RY_4	Mass Flow Error
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.ConvergenceHistory.VazaoMassicaE)
+                    Case 5
+                        'PROP_RY_5	Temperature Error
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ConvergenceHistory.TemperaturaE)
+                    Case 6
+                        'PROP_RY_6	Pressure Error
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.ConvergenceHistory.PressaoE)
+                End Select
 
-            Return value
-
+                Return value
+            End If
 
 
         End Function
@@ -520,6 +524,8 @@ Namespace SpecialOps
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 4 To 6
@@ -543,6 +549,9 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -567,38 +576,43 @@ Namespace SpecialOps
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_RY_0	Maximum Iterations
-                    value = ""
-                Case 1
-                    'PROP_RY_1	Mass Flow Tolerance
-                    value = su.massflow
-                Case 2
-                    'PROP_RY_2	Temperature Tolerance
-                    value = su.deltaT
-                Case 3
-                    'PROP_RY_3	Pressure Tolerance
-                    value = su.deltaP
-                Case 4
-                    'PROP_RY_4	Mass Flow Error
-                    value = su.massflow
-                Case 5
-                    'PROP_RY_5	Temperature Error
-                    value = su.deltaT
-                Case 6
-                    'PROP_RY_6	Pressure Error
-                    value = su.deltaP
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_RY_0	Maximum Iterations
+                        value = ""
+                    Case 1
+                        'PROP_RY_1	Mass Flow Tolerance
+                        value = su.massflow
+                    Case 2
+                        'PROP_RY_2	Temperature Tolerance
+                        value = su.deltaT
+                    Case 3
+                        'PROP_RY_3	Pressure Tolerance
+                        value = su.deltaP
+                    Case 4
+                        'PROP_RY_4	Mass Flow Error
+                        value = su.massflow
+                    Case 5
+                        'PROP_RY_5	Temperature Error
+                        value = su.deltaT
+                    Case 6
+                        'PROP_RY_6	Pressure Error
+                        value = su.deltaP
+                End Select
 
+                Return value
+            End If
         End Function
 
         Public Overrides Sub DisplayEditForm()

@@ -1943,7 +1943,7 @@ Namespace Streams
 
             If Not prop.StartsWith("PROP_MS") Then
 
-                MyBase.SetPropertyValue(prop, propval)
+                Return MyBase.SetPropertyValue(prop, propval)
 
             Else
 

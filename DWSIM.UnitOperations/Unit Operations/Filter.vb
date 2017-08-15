@@ -292,45 +292,56 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
-                Case 0
-                    'PROP_FT_0	Energy Balance	
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
-                Case 1
-                    'PROP_FT_1	Total Filter Area	
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.TotalFilterArea)
-                Case 2
-                    'PROP_FT_2	Cake Relative Humidity (%)	
-                    value = Me.CakeRelativeHumidity
-                Case 3
-                    'PROP_FT_3	Cycle Time	
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.FilterCycleTime)
-                Case 4
-                    'PROP_FT_4	Filter Medium Resistance	
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance)
-                Case 5
-                    'PROP_FT_5	Specific Cake Resistance	
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance)
-                Case 6
-                    'PROP_FT_6	Submerged Area Fraction	
-                    value = Me.SubmergedAreaFraction
-                Case 7
-                    'PROP_FT_7	Total Pressure Drop	
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.PressureDrop)
-            End Select
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Return value
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+                    Case 0
+                        'PROP_FT_0	Energy Balance	
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+                    Case 1
+                        'PROP_FT_1	Total Filter Area	
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.area, Me.TotalFilterArea)
+                    Case 2
+                        'PROP_FT_2	Cake Relative Humidity (%)	
+                        value = Me.CakeRelativeHumidity
+                    Case 3
+                        'PROP_FT_3	Cycle Time	
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.FilterCycleTime)
+                    Case 4
+                        'PROP_FT_4	Filter Medium Resistance	
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.mediumresistance, Me.FilterMediumResistance)
+                    Case 5
+                        'PROP_FT_5	Specific Cake Resistance	
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.cakeresistance, Me.SpecificCakeResistance)
+                    Case 6
+                        'PROP_FT_6	Submerged Area Fraction	
+                        value = Me.SubmergedAreaFraction
+                    Case 7
+                        'PROP_FT_7	Total Pressure Drop	
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.PressureDrop)
+                End Select
+
+                Return value
+
+            End If
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             For i = 0 To 7
                 proplist.Add("PROP_FT_" + CStr(i))
             Next
@@ -339,6 +350,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -374,39 +388,51 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
-                Case 0
-                    'PROP_FT_0	Energy Balance	
-                    value = su.heatflow
-                Case 1
-                    'PROP_FT_1	Total Filter Area	
-                    value = su.area
-                Case 2
-                    'PROP_FT_2	Cake Relative Humidity (%)	
-                    value = "%"
-                Case 3
-                    'PROP_FT_3	Cycle Time	
-                    value = su.time
-                Case 4
-                    'PROP_FT_4	Filter Medium Resistance	
-                    value = su.mediumresistance
-                Case 5
-                    'PROP_FT_5	Specific Cake Resistance	
-                    value = su.cakeresistance
-                Case 6
-                    'PROP_FT_6	Submerged Area Fraction	
-                    value = ""
-                Case 7
-                    'PROP_FT_7	Total Pressure Drop	
-                    value = su.deltaP
-            End Select
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Return value
+            If u0 <> "NF" Then
+
+                Return u0
+
+            Else
+
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                Select Case propidx
+                    Case 0
+                        'PROP_FT_0	Energy Balance	
+                        value = su.heatflow
+                    Case 1
+                        'PROP_FT_1	Total Filter Area	
+                        value = su.area
+                    Case 2
+                        'PROP_FT_2	Cake Relative Humidity (%)	
+                        value = "%"
+                    Case 3
+                        'PROP_FT_3	Cycle Time	
+                        value = su.time
+                    Case 4
+                        'PROP_FT_4	Filter Medium Resistance	
+                        value = su.mediumresistance
+                    Case 5
+                        'PROP_FT_5	Specific Cake Resistance	
+                        value = su.cakeresistance
+                    Case 6
+                        'PROP_FT_6	Submerged Area Fraction	
+                        value = ""
+                    Case 7
+                        'PROP_FT_7	Total Pressure Drop	
+                        value = su.deltaP
+                End Select
+
+                Return value
+
+            End If
+
         End Function
 
         Public Overrides Sub DisplayEditForm()

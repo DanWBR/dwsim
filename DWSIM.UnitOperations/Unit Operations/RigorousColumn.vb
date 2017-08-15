@@ -708,6 +708,8 @@ Namespace UnitOperations
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 5 To 7
@@ -751,116 +753,129 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Object = Nothing
-            Dim propidx As Integer = -1
-            Integer.TryParse(prop.Split("_")(2), propidx)
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Object = Nothing
+                Dim propidx As Integer = -1
+                Integer.TryParse(prop.Split("_")(2), propidx)
 
-            Select Case propidx
+                Select Case propidx
 
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
-                Case 2
-                    'PROP_DC_2	Condenser Pressure Drop
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
-                Case 3
-                    'reflux ratio
-                    value = Me.RefluxRatio
-                Case 4
-                    'distillate molar flow
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
-                Case 5
-                    'PROP_DC_5	Condenser Duty
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
-                Case 6
-                    'PROP_DC_6	Reboiler Duty
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ReboilerDuty)
-                Case 7
-                    'PROP_DC_7	Number of Stages
-                    value = Me.NumberOfStages
-            End Select
+                    Case 0
+                        'PROP_DC_0	Condenser Pressure
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
+                    Case 1
+                        'PROP_DC_1	Reboiler Pressure
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
+                    Case 2
+                        'PROP_DC_2	Condenser Pressure Drop
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.CondenserDeltaP)
+                    Case 3
+                        'reflux ratio
+                        value = Me.RefluxRatio
+                    Case 4
+                        'distillate molar flow
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
+                    Case 5
+                        'PROP_DC_5	Condenser Duty
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
+                    Case 6
+                        'PROP_DC_6	Reboiler Duty
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.ReboilerDuty)
+                    Case 7
+                        'PROP_DC_7	Number of Stages
+                        value = Me.NumberOfStages
+                End Select
 
-            Select Case prop
-                Case "Condenser_Specification_Value"
-                    value = Me.Specs("C").SpecValue
-                Case "Reboiler_Specification_Value"
-                    value = Me.Specs("R").SpecValue
-            End Select
+                Select Case prop
+                    Case "Condenser_Specification_Value"
+                        value = Me.Specs("C").SpecValue
+                    Case "Reboiler_Specification_Value"
+                        value = Me.Specs("R").SpecValue
+                End Select
 
-            If prop.Contains("Stage_Pressure_") Then
-                Dim stageindex As Integer = prop.Split("_")(2)
-                If Me.Stages.Count >= stageindex Then value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages(stageindex - 1).P)
+                If prop.Contains("Stage_Pressure_") Then
+                    Dim stageindex As Integer = prop.Split("_")(2)
+                    If Me.Stages.Count >= stageindex Then value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.Stages(stageindex - 1).P)
+                End If
+
+                If prop.Contains("Stage_Temperature_") Then
+                    Dim stageindex As Integer = prop.Split("_")(2)
+                    If Me.Stages.Count >= stageindex Then value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Stages(stageindex - 1).T)
+                End If
+
+                If prop.Contains("Stage_Efficiency_") Then
+                    Dim stageindex As Integer = prop.Split("_")(2)
+                    If Me.Stages.Count >= stageindex Then value = Me.Stages(stageindex - 1).Efficiency
+                End If
+
+                If prop.Contains("Global_Stage_Efficiency") Then value = "N/D"
+
+                Return value
             End If
-
-            If prop.Contains("Stage_Temperature_") Then
-                Dim stageindex As Integer = prop.Split("_")(2)
-                If Me.Stages.Count >= stageindex Then value = SystemsOfUnits.Converter.ConvertFromSI(su.temperature, Me.Stages(stageindex - 1).T)
-            End If
-
-            If prop.Contains("Stage_Efficiency_") Then
-                Dim stageindex As Integer = prop.Split("_")(2)
-                If Me.Stages.Count >= stageindex Then value = Me.Stages(stageindex - 1).Efficiency
-            End If
-
-            If prop.Contains("Global_Stage_Efficiency") Then value = "N/D"
-
-            Return value
 
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
-            Dim propidx As Integer = -1
-            Integer.TryParse(prop.Split("_")(2), propidx)
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            Select Case propidx
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
+                Dim propidx As Integer = -1
+                Integer.TryParse(prop.Split("_")(2), propidx)
 
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = su.pressure
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = su.pressure
-                Case 2
-                    'PROP_DC_2	Condenser Pressure Drop
-                    value = su.deltaP
-                Case 4
-                    value = su.molarflow
-                Case 5
-                    'PROP_DC_5	Condenser Duty
-                    value = su.heatflow
-                Case 6
-                    'PROP_DC_6	Reboiler Duty
-                    value = su.heatflow
-                Case 7
-                    'PROP_DC_7	Number of Stages
-                    value = ""
-            End Select
+                Select Case propidx
 
-            Select Case prop
-                Case "Condenser_Specification_Value"
-                    value = Me.Specs("C").SpecUnit
-                Case "Reboiler_Specification_Value"
-                    value = Me.Specs("R").SpecUnit
-            End Select
+                    Case 0
+                        'PROP_DC_0	Condenser Pressure
+                        value = su.pressure
+                    Case 1
+                        'PROP_DC_1	Reboiler Pressure
+                        value = su.pressure
+                    Case 2
+                        'PROP_DC_2	Condenser Pressure Drop
+                        value = su.deltaP
+                    Case 4
+                        value = su.molarflow
+                    Case 5
+                        'PROP_DC_5	Condenser Duty
+                        value = su.heatflow
+                    Case 6
+                        'PROP_DC_6	Reboiler Duty
+                        value = su.heatflow
+                    Case 7
+                        'PROP_DC_7	Number of Stages
+                        value = ""
+                End Select
 
-            If prop.Contains("Stage_Pressure") Then value = su.pressure
-            If prop.Contains("Stage_Temperature") Then value = su.temperature
-            If prop.Contains("Stage_Efficiency") Then value = ""
+                Select Case prop
+                    Case "Condenser_Specification_Value"
+                        value = Me.Specs("C").SpecUnit
+                    Case "Reboiler_Specification_Value"
+                        value = Me.Specs("R").SpecUnit
+                End Select
 
-            Return value
+                If prop.Contains("Stage_Pressure") Then value = su.pressure
+                If prop.Contains("Stage_Temperature") Then value = su.temperature
+                If prop.Contains("Stage_Efficiency") Then value = ""
 
+                Return value
+            End If
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
 
@@ -1032,6 +1047,8 @@ Namespace UnitOperations
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RO
                     For i = 2 To 2
@@ -1055,25 +1072,32 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-            Select Case propidx
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-                Case 0
-                    'PROP_DC_0	Condenser Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
-                Case 1
-                    'PROP_DC_1	Reboiler Pressure
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
-                Case 2
-                    'PROP_DC_7	Number of Stages
-                    value = Me.NumberOfStages
-            End Select
+                Select Case propidx
 
-            Return value
+                    Case 0
+                        'PROP_DC_0	Condenser Pressure
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.CondenserPressure)
+                    Case 1
+                        'PROP_DC_1	Reboiler Pressure
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.pressure, Me.ReboilerPressure)
+                    Case 2
+                        'PROP_DC_7	Number of Stages
+                        value = Me.NumberOfStages
+                End Select
+
+                Return value
+            End If
+
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
@@ -1099,6 +1123,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))

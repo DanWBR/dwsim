@@ -223,9 +223,11 @@ Namespace GraphicObjects.Tables
                         canvas.DrawText(propstring, X + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
                         canvas.DrawText(propval, (maxL2 - MeasureString(propval, tpaint).Width) + X + maxL1 + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
                         canvas.DrawText(propunit, X + maxL1 + maxL2 + Padding + 3, Y + (n + 1) * maxH + Padding + size.Height, tpaint)
-                        'canvas.DrawLine(X, Y + n * maxH, X + Width, Y + n * maxH, tpaint)
                         n += 1
                     Next
+
+                    props.Clear()
+                    props = Nothing
 
                 End If
 

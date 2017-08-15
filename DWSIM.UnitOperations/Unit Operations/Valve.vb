@@ -311,7 +311,7 @@ Namespace UnitOperations
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
 
-            MyBase.SetPropertyValue(prop, propval, su)
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter

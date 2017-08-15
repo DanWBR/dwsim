@@ -1123,12 +1123,14 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
+            Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             If Not Me._params Is Nothing Then
-                Dim props As New ArrayList
                 For Each p As ICapeIdentification In Me._params
-                    props.Add(p.ComponentName)
+                    proplist.Add(p.ComponentName)
                 Next
-                Return props.ToArray(Type.GetType("System.String"))
+                Return proplist.ToArray(Type.GetType("System.String"))
             Else
                 Return New String() {Nothing}
             End If
@@ -1139,37 +1141,52 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If Not Me._params Is Nothing Then
-                For Each p As ICapeIdentification In Me._params
-                    If p.ComponentName = prop Then
-                        Dim val As Object = Nothing
-                        If TypeOf p Is Auxiliary.CapeOpen.CapeArrayParameter Then
-                            val = DirectCast(p, Auxiliary.CapeOpen.CapeArrayParameter).value
-                        Else
-                            val = DirectCast(p, ICapeParameter).value
-                        End If
-                        If Not val Is Nothing Then
+
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
+
+            If Not val0 Is Nothing Then
+
+                Return val0
+
+            Else
+
+                If Not Me._params Is Nothing Then
+                    For Each p As ICapeIdentification In Me._params
+                        If p.ComponentName = prop Then
+                            Dim val As Object = Nothing
                             If TypeOf p Is Auxiliary.CapeOpen.CapeArrayParameter Then
-                                If TryCast(val, Object()) IsNot Nothing Then
-                                    Return DirectCast(val, Object()).ToArrayString
+                                val = DirectCast(p, Auxiliary.CapeOpen.CapeArrayParameter).value
+                            Else
+                                val = DirectCast(p, ICapeParameter).value
+                            End If
+                            If Not val Is Nothing Then
+                                If TypeOf p Is Auxiliary.CapeOpen.CapeArrayParameter Then
+                                    If TryCast(val, Object()) IsNot Nothing Then
+                                        Return DirectCast(val, Object()).ToArrayString
+                                    Else
+                                        Return val.ToString
+                                    End If
                                 Else
-                                    Return val.ToString
+                                    Return CType(p, ICapeParameter).value.ToString
                                 End If
                             Else
-                                Return CType(p, ICapeParameter).value.ToString
-                            End If
-                        Else
-                            Return ""
+                                Return ""
                             End If
                         End If
-                Next
-                Return ""
-            Else
-                Return ""
+                    Next
+                    Return ""
+                Else
+                    Return ""
+                End If
+
             End If
+
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             For Each p As ICapeIdentification In Me._params
                 If p.ComponentName = prop Then
                     CType(p, ICapeParameter).value = propval

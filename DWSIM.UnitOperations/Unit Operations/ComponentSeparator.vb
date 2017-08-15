@@ -405,43 +405,55 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
 
-            If prop.StartsWith("SepSpecValue_") Then
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
 
-                Dim compound As String = prop.Split("_")(1)
+            If Not val0 Is Nothing Then
 
-                If ComponentSepSpecs.ContainsKey(compound) Then
-                    Return ComponentSepSpecs(compound).SpecValue
-                End If
-
-            ElseIf prop.Equals("SpecifiedStreamIndex") Then
-
-                Return SpecifiedStreamIndex
+                Return val0
 
             Else
 
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
 
-                Select Case propidx
+                If prop.StartsWith("SepSpecValue_") Then
 
-                    Case 0
+                    Dim compound As String = prop.Split("_")(1)
 
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+                    If ComponentSepSpecs.ContainsKey(compound) Then
+                        Return ComponentSepSpecs(compound).SpecValue
+                    End If
 
-                End Select
+                ElseIf prop.Equals("SpecifiedStreamIndex") Then
 
+                    Return SpecifiedStreamIndex
+
+                Else
+
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                    Select Case propidx
+
+                        Case 0
+
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.EnergyImb)
+
+                    End Select
+
+                End If
+
+                Return value
             End If
-
-            Return value
 
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
             Select Case proptype
                 Case PropertyType.RW
                 Case PropertyType.WR
@@ -463,6 +475,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
 
@@ -486,34 +501,41 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As String = ""
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
 
-            If prop.StartsWith("SepSpecValue_") Then
+            If u0 <> "NF" Then
+                Return u0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As String = ""
 
-                Dim compound As String = prop.Split("_")(1)
+                If prop.StartsWith("SepSpecValue_") Then
 
-                If ComponentSepSpecs.ContainsKey(compound) Then
-                    Return ComponentSepSpecs(compound).SpecUnit
+                    Dim compound As String = prop.Split("_")(1)
+
+                    If ComponentSepSpecs.ContainsKey(compound) Then
+                        Return ComponentSepSpecs(compound).SpecUnit
+                    Else
+                        Return ""
+                    End If
+
+                ElseIf prop.Equals("SpecifiedStreamIndex") Then
+
                 Else
-                    Return ""
+
+                    Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+
+                    Select Case propidx
+                        Case 0
+                            value = su.heatflow
+                    End Select
+
                 End If
 
-            ElseIf prop.Equals("SpecifiedStreamIndex") Then
-
-            Else
-
-                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
-
-                Select Case propidx
-                    Case 0
-                        value = su.heatflow
-                End Select
+                Return value
 
             End If
-
-            Return value
 
         End Function
 

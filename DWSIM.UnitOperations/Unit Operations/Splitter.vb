@@ -312,34 +312,42 @@ Namespace UnitOperations
         End Sub
 
         Public Overrides Function GetPropertyValue(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Object
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim value As Double = 0
-            Select Case prop
-                Case "PROP_SP_1"
-                    If Me.OperationMode = OpMode.StreamMassFlowSpec Then
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec)
-                    Else
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec)
-                    End If
-                Case "PROP_SP_2"
-                    If Me.OperationMode = OpMode.StreamMassFlowSpec Then
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec)
-                    Else
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec)
-                    End If
-                Case "SR1"
-                    If Me.Ratios.Count > 0 Then value = Me.Ratios(0)
-                Case "SR2"
-                    If Me.Ratios.Count > 1 Then value = Me.Ratios(1)
-                Case "SR3"
-                    If Me.Ratios.Count > 2 Then value = Me.Ratios(2)
-            End Select
-            Return value
+            Dim val0 As Object = MyBase.GetPropertyValue(prop, su)
+
+            If Not val0 Is Nothing Then
+                Return val0
+            Else
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim value As Double = 0
+                Select Case prop
+                    Case "PROP_SP_1"
+                        If Me.OperationMode = OpMode.StreamMassFlowSpec Then
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.StreamFlowSpec)
+                        Else
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.StreamFlowSpec)
+                        End If
+                    Case "PROP_SP_2"
+                        If Me.OperationMode = OpMode.StreamMassFlowSpec Then
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.massflow, Me.Stream2FlowSpec)
+                        Else
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, Me.Stream2FlowSpec)
+                        End If
+                    Case "SR1"
+                        If Me.Ratios.Count > 0 Then value = Me.Ratios(0)
+                    Case "SR2"
+                        If Me.Ratios.Count > 1 Then value = Me.Ratios(1)
+                    Case "SR3"
+                        If Me.Ratios.Count > 2 Then value = Me.Ratios(2)
+                End Select
+                Return value
+            End If
         End Function
 
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim proplist As New ArrayList
+            Dim basecol = MyBase.GetProperties(proptype)
+            If basecol.Length > 0 Then proplist.AddRange(basecol)
 
             proplist.Add("PROP_SP_1")
             proplist.Add("PROP_SP_2")
@@ -365,6 +373,9 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function SetPropertyValue(ByVal prop As String, ByVal propval As Object, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As Boolean
+
+            If MyBase.SetPropertyValue(prop, propval, su) Then Return True
+
             If su Is Nothing Then su = New SystemsOfUnits.SI
             Dim cv As New SystemsOfUnits.Converter
             Select Case prop
@@ -396,19 +407,25 @@ Namespace UnitOperations
         End Function
 
         Public Overrides Function GetPropertyUnit(ByVal prop As String, Optional ByVal su As Interfaces.IUnitsOfMeasure = Nothing) As String
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim value As String = ""
-            If prop.StartsWith("P") Then
-                Select Case Me.OperationMode
-                    Case OpMode.StreamMassFlowSpec
-                        value = su.massflow
-                    Case OpMode.StreamMoleFlowSpec
-                        value = su.molarflow
-                End Select
+            Dim u0 As String = MyBase.GetPropertyUnit(prop, su)
+
+            If u0 <> "NF" Then
+                Return u0
             Else
-                value = ""
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim value As String = ""
+                If prop.StartsWith("P") Then
+                    Select Case Me.OperationMode
+                        Case OpMode.StreamMassFlowSpec
+                            value = su.massflow
+                        Case OpMode.StreamMoleFlowSpec
+                            value = su.molarflow
+                    End Select
+                Else
+                    value = ""
+                End If
+                Return value
             End If
-            Return value
         End Function
 
         Public Overrides Sub DisplayEditForm()
