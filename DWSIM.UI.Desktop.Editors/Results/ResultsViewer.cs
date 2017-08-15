@@ -40,9 +40,10 @@ namespace DWSIM.UI.Desktop.Editors
             var centercontainer = new TableLayout();
 
             var lbl = new Label { Text = "Select Object / View Results Report", Font = SystemFonts.Bold(), VerticalAlignment = VerticalAlignment.Center };
-            
-            var btnExport = new Button { Text = "Export to PDF" };
-            btnExport.Click += (sender, e) => {
+
+            var btnExport = new Button { Text = "Export Selected to PDF" };
+            btnExport.Click += (sender, e) =>
+            {
                 ExportReports(true);
             };
 
@@ -52,7 +53,19 @@ namespace DWSIM.UI.Desktop.Editors
                 ExportReports(false);
             };
 
-            topcontainer.Rows.Add(new TableRow(lbl, null, btnExport, btnExportAll));
+            var btnExportAllODS = new Button { Text = "Export All to ODS" };
+            btnExportAllODS.Click += (sender, e) =>
+            {
+                ExportODS();
+            };
+
+            var btnExportAllODT = new Button { Text = "Export All to ODT" };
+            btnExportAllODT.Click += (sender, e) =>
+            {
+                ExportODT();
+            };
+
+            topcontainer.Rows.Add(new TableRow(lbl, null, btnExport, btnExportAll, btnExportAllODS, btnExportAllODT));
             topcontainer.Padding = new Padding(5, 5, 5, 5);
             topcontainer.Spacing = new Size(10, 10);
 
@@ -91,13 +104,36 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         foreach (var item in lbObjects.Items)
                         {
-                            list.Add(Flowsheet.SimulationObjects[item.Key]);                        
+                            list.Add(Flowsheet.SimulationObjects[item.Key]);
                         }
                     }
                     Flowsheet.GenerateReport(list, "PDF", fs);
                 }
             }
-       }
+        }
+
+        public void ExportODS()
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Export Results to Spreadsheet (ODS)";
+            dialog.Filters.Add(new FileFilter("ODS File", new[] { ".ods" }));
+            dialog.CurrentFilterIndex = 0;
+            if (dialog.ShowDialog(this) == DialogResult.Ok)
+            {
+                new DWSIM.FlowsheetBase.ReportCreator(Flowsheet).CreateAndSaveODSFile(dialog.FileName);
+            }
+        }
+        public void ExportODT()
+        {
+            var dialog = new SaveFileDialog();
+            dialog.Title = "Export Results to Document (ODT)";
+            dialog.Filters.Add(new FileFilter("ODT File", new[] { ".odt" }));
+            dialog.CurrentFilterIndex = 0;
+            if (dialog.ShowDialog(this) == DialogResult.Ok)
+            {
+                new DWSIM.FlowsheetBase.ReportCreator(Flowsheet).CreateAndSaveODTFile(dialog.FileName);
+            }
+        }
 
         public void UpdateList()
         {
@@ -111,7 +147,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             lbObjects.SelectedIndexChanged += (sender, e) =>
             {
-               if (lbObjects.SelectedKey != null) txtResults.Text = Flowsheet.SimulationObjects[lbObjects.SelectedKey].GetReport(Flowsheet.FlowsheetOptions.SelectedUnitSystem, CultureInfo.InvariantCulture, Flowsheet.FlowsheetOptions.NumberFormat);
+                if (lbObjects.SelectedKey != null) txtResults.Text = Flowsheet.SimulationObjects[lbObjects.SelectedKey].GetReport(Flowsheet.FlowsheetOptions.SelectedUnitSystem, CultureInfo.InvariantCulture, Flowsheet.FlowsheetOptions.NumberFormat);
             };
 
         }

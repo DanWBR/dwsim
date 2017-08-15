@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("DWSIM.FlowsheetBase")> 
-<Assembly: AssemblyDescription("DWSIM Flowsheet Base CLass")> 
+<Assembly: AssemblyDescription("DWSIM Flowsheet Base Class")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("DWSIM.FlowsheetBase")> 
 <Assembly: AssemblyCopyright("Copyright © 2017 Daniel Medeiros")> 
