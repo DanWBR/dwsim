@@ -124,8 +124,8 @@ Namespace GraphicObjects.Tables
                     If size.Height > maxH Then maxH = size.Height
 
                     Dim fs = Owner.GetFlowsheet
-                    Dim props = fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name)
-                    props.AddRange(DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)))
+                    Dim props As New List(Of String)(fs.FlowsheetOptions.VisibleProperties(Owner.GetType.Name))
+                    props.AddRange(DirectCast(Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray)
 
                     If Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Then props = Owner.GetProperties(PropertyType.ALL).ToList
 

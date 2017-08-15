@@ -299,7 +299,7 @@ Namespace UnitOperations
             Dim epcol = DirectCast(ExtraProperties, IDictionary(Of String, Object))
 
             If epcol.ContainsKey(prop) Then
-                Return "NF"
+                Return ""
             End If
 
             For Each item In AttachedUtilities
