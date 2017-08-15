@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.0 Update 3
+Version 5.0 Update 4
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -24,47 +24,26 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 SOFTWARE/SYSTEM REQUIREMENTS
 ==================================================
 
-OS:               Windows XP/Vista/7/8/10 or Linux
-Software:         .NET Framework 4.5 / Mono 4.0 or newer
+OS:               Windows XP/Vista/7/8/10, Linux or macOS 
+Software:         .NET Framework 4.5 / Mono 5.0 or newer
 CPU:              1.0 GHz dual-core processor (minimum)
 GPU (optional):   CUDA 2.0 or OpenCL 1.1-enabled device
 Memory:           1 GB RAM
-HD space:         220 MB for program files.
+HD space:         250 MB for program files.
 Display:          A 1024x768 display resolution is recommended as a minimum.
-
-==================================================
-USAGE INFO (LINUX)
-==================================================
-
-To run DWSIM on Linux, open a terminal (console) window, point it to the folder which contains the DWSIM executable and execute the following command:
-
-mono DWSIM.exe
-
-To run in debug mode, include the '--debug' switch (when you encounter an unhandled exception, debug mode will include information about the source code file and line number where the exception was raised - helps to track bugs):
-
-mono --debug DWSIM.exe
-
-If you installed DWSIM through the Debian package, run DWSIM by typing "dwsim" on the terminal. To run it in debug mode, type "dwsim-debug".
-
-==================================================
-KNOWN ISSUES
-==================================================
-
-Known limitations of DWSIM when running on Mono:
-
-- Report Tool doesn't work. When the user clicks on the button to generate a report preview, a blank page appears;
-- DataGridViews don't display tooltips.
-- Floating windows don't display the docking toolstrip menu.
-- Copy image to clipboard functions don't work.
-- Flowsheet object rotation is disabled when running DWSIM on Mono.
-- Some of the flowsheet toolstrips might become invisible when resizing the window.
-- After closing a simulation, residual menu items will remain visible on the main DWSIM window.
 
 ==================================================
 VERSION HISTORY / CHANGELOG
 ==================================================
 
-The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim4/commits/master
+The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.0 Update 4
+
+- [NEW] Exposed Dynamic Properties to Sensitivity Analysis and Optimization utilities
+- [NEW] Added ODS/ODT results reporting (New UI)
+- [FIX] Load File/Spreadsheet fixes (Classic UI)
+- [FIX] Fixed an error with the Sensitivity Analysis utility (New UI)
 
 Version 5.0 Update 2/3
 
