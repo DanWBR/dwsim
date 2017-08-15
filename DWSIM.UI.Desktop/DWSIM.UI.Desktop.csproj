@@ -246,7 +246,8 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /R $(TargetDir)x64\libSkiaSharp.dll $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /R $(TargetDir)x64\libSkiaSharp.dll $(TargetDir)
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Eto.Platform.Mac.Template.2.4.0-build1087\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1087\build\Eto.Platform.Mac.Template.targets')" />
 </Project>
