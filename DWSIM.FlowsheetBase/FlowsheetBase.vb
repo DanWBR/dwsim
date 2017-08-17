@@ -1192,7 +1192,11 @@ Imports System.Dynamic
 
         xel.Add(New XElement("BuildVersion", My.Application.Info.Version.ToString))
         xel.Add(New XElement("BuildDate", CType("01/01/2000", DateTime).AddDays(My.Application.Info.Version.Build).AddSeconds(My.Application.Info.Version.Revision * 2)))
-        xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+        If GlobalSettings.Settings.RunningPlatform() = GlobalSettings.Settings.Platform.Mac Then
+            xel.Add(New XElement("OSInfo", "macOS " + Environment.OSVersion.ToString()))
+        Else
+            xel.Add(New XElement("OSInfo", My.Computer.Info.OSFullName & ", Version " & My.Computer.Info.OSVersion & ", " & My.Computer.Info.OSPlatform & " Platform"))
+        End If
         xel.Add(New XElement("SavedOn", Date.Now))
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("SimulationObjects"))
