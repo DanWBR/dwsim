@@ -17,8 +17,8 @@ Public Class ReportCreator
 
     Private Sub FillDataTable()
 
-        su = frm.Options.SelectedUnitSystem
-        nf = frm.Options.NumberFormat
+        su = CType(frm.FlowsheetOptions.SelectedUnitSystem, SystemsOfUnits.Units)
+        nf = frm.FlowsheetOptions.NumberFormat
 
         If Not DT.Columns.Contains(("Nome")) Then DT.Columns.Add(("Nome"), GetType(System.String))
         If Not DT.Columns.Contains(("Tipo")) Then DT.Columns.Add(("Tipo"), GetType(System.String))
@@ -43,108 +43,108 @@ Public Class ReportCreator
             objtype = baseobj.GraphicObject.ObjectType
             description = frm.GetTranslatedString(baseobj.GraphicObject.Description)
             If objtype = ObjectType.MaterialStream Then
-                Dim value As String
+                Dim value As Object
                 For propidx = 0 To r1 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    If Double.TryParse(value.ToString, New Double) Then
+                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                     Else
-                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                     End If
                 Next
                 For propidx = r1 To r2 - 1
                     value = baseobj.GetPropertyValue(properties(propidx), su)
-                    If Double.TryParse(value, New Double) Then
-                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                    If Double.TryParse(value.ToString, New Double) Then
+                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                     Else
-                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                        DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                     End If
                 Next
                 DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolarnaMistura"), "", ""})
-                For Each subst As ICompound In baseobj.Phases(0).Compounds.Values
+                For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(0).Compounds.Values
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                 Next
                 If DirectCast(baseobj, IMaterialStream).Phases(2).Properties.massflow.HasValue Then
                     For propidx = r2 To r3 - 1
                         value = baseobj.GetPropertyValue(properties(propidx), su)
-                        If Double.TryParse(value, New Double) Then
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        If Double.TryParse(value.ToString, New Double) Then
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                         Else
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolarnaPhaseVapor"), "", ""})
-                    For Each subst As ICompound In baseobj.Phases(2).Compounds.Values
+                    For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(2).Compounds.Values
                         DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                     Next
                 End If
                 If DirectCast(baseobj, IMaterialStream).Phases(1).Properties.massflow.HasValue Then
                     For propidx = r3 To r4 - 1
                         value = baseobj.GetPropertyValue(properties(propidx), su)
-                        If Double.TryParse(value, New Double) Then
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        If Double.TryParse(value.ToString, New Double) Then
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                         Else
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolarnaPhaseLquid"), "", ""})
-                    For Each subst As ICompound In baseobj.Phases(1).Compounds.Values
+                    For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(1).Compounds.Values
                         DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                     Next
                 End If
                 If DirectCast(baseobj, IMaterialStream).Phases(3).Properties.massflow.HasValue Then
                     For propidx = r4 To r5 - 1
                         value = baseobj.GetPropertyValue(properties(propidx), su)
-                        If Double.TryParse(value, New Double) Then
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        If Double.TryParse(value.ToString, New Double) Then
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                         Else
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolarnaPhaseLquid"), "", ""})
-                    For Each subst As ICompound In baseobj.Phases(3).Compounds.Values
+                    For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(3).Compounds.Values
                         DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                     Next
                 End If
                 If DirectCast(baseobj, IMaterialStream).Phases(4).Properties.massflow.HasValue Then
                     For propidx = r5 To r6 - 1
                         value = baseobj.GetPropertyValue(properties(propidx), su)
-                        If Double.TryParse(value, New Double) Then
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        If Double.TryParse(value.ToString, New Double) Then
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                         Else
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolarnaPhaseLquid"), "", ""})
-                    For Each subst As ICompound In baseobj.Phases(4).Compounds.Values
+                    For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(4).Compounds.Values
                         DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                     Next
                 End If
                 If DirectCast(baseobj, IMaterialStream).Phases(6).Properties.massflow.HasValue Then
                     For propidx = r6 To 101
                         value = baseobj.GetPropertyValue(properties(propidx), su)
-                        If Double.TryParse(value, New Double) Then
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        If Double.TryParse(value.ToString, New Double) Then
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                         Else
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolarnaPhaseLquid"), "", ""})
-                    For Each subst As ICompound In baseobj.Phases(6).Compounds.Values
+                    For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(6).Compounds.Values
                         DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                     Next
                 End If
                 If DirectCast(baseobj, IMaterialStream).Phases(7).Properties.massflow.HasValue Then
                     For propidx = 131 To 145
                         value = baseobj.GetPropertyValue(properties(propidx), su)
-                        If Double.TryParse(value, New Double) Then
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
+                        If Double.TryParse(value.ToString, New Double) Then
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), Format(Double.Parse(value.ToString), nf), baseobj.GetPropertyUnit(properties(propidx), su)})
                         Else
-                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value, baseobj.GetPropertyUnit(properties(propidx), su)})
+                            DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString(properties(propidx)), value.ToString, baseobj.GetPropertyUnit(properties(propidx), su)})
                         End If
                     Next
                     DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, frm.GetTranslatedString("FraomolardaPhase"), "", ""})
-                    For Each subst As ICompound In baseobj.Phases(7).Compounds.Values
+                    For Each subst As ICompound In DirectCast(baseobj, IMaterialStream).Phases(7).Compounds.Values
                         DT.Rows.Add(New String() {baseobj.GraphicObject.Tag, description, subst.Name, Format(subst.MoleFraction.GetValueOrDefault, nf), ""})
                     Next
                 End If
@@ -226,21 +226,21 @@ Public Class ReportCreator
                         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p1" + i.ToString() + j.ToString())
                         paragraph.ParagraphStyle.TextProperties.FontName = fname
                         paragraph.ParagraphStyle.TextProperties.FontSize = fsize
-                        paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(2)))
+                        paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(2).ToString))
                         table.Rows(j + 1).Cells(0).Content.Add(paragraph)
 
                         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p2" + i.ToString() + j.ToString())
                         paragraph.ParagraphStyle.ParagraphProperties.Alignment = "right"
                         paragraph.ParagraphStyle.TextProperties.FontName = fname
                         paragraph.ParagraphStyle.TextProperties.FontSize = fsize
-                        paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(3)))
+                        paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(3).ToString))
                         table.Rows(j + 1).Cells(1).Content.Add(paragraph)
 
                         paragraph = Content.Text.ParagraphBuilder.CreateParagraphWithCustomStyle(document, "p3" + i.ToString() + j.ToString())
                         paragraph.ParagraphStyle.ParagraphProperties.MarginLeft = "0.2cm"
                         paragraph.ParagraphStyle.TextProperties.FontName = fname
                         paragraph.ParagraphStyle.TextProperties.FontSize = fsize
-                        paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(4)))
+                        paragraph.TextContent.Add(New Content.Text.SimpleText(document, Me.DT.Rows(i).Item(4).ToString))
                         table.Rows(j + 1).Cells(2).Content.Add(paragraph)
 
                         i = i + 1
@@ -314,19 +314,19 @@ Public Class ReportCreator
                         Dim cell0 = mysheet.CreateCell()
                         cell0.OfficeValueType = "string"
                         Dim paragraph0 = Content.Text.ParagraphBuilder.CreateSpreadsheetParagraph(sheetdoc)
-                        paragraph0.TextContent.Add(New Content.Text.SimpleText(sheetdoc, Me.DT.Rows(i).Item(2)))
+                        paragraph0.TextContent.Add(New Content.Text.SimpleText(sheetdoc, Me.DT.Rows(i).Item(2).ToString))
                         cell0.Content.Add(paragraph0)
                         mysheet.InsertCellAt(j + 1, 0, cell0)
                         Dim cell1 = mysheet.CreateCell()
                         cell1.OfficeValueType = "string"
                         Dim paragraph1 = Content.Text.ParagraphBuilder.CreateSpreadsheetParagraph(sheetdoc)
-                        paragraph1.TextContent.Add(New Content.Text.SimpleText(sheetdoc, Me.DT.Rows(i).Item(3)))
+                        paragraph1.TextContent.Add(New Content.Text.SimpleText(sheetdoc, Me.DT.Rows(i).Item(3).ToString))
                         cell1.Content.Add(paragraph1)
                         mysheet.InsertCellAt(j + 1, 1, cell1)
                         Dim cell2 = mysheet.CreateCell()
                         cell2.OfficeValueType = "string"
                         Dim paragraph2 = Content.Text.ParagraphBuilder.CreateSpreadsheetParagraph(sheetdoc)
-                        paragraph2.TextContent.Add(New Content.Text.SimpleText(sheetdoc, Me.DT.Rows(i).Item(4)))
+                        paragraph2.TextContent.Add(New Content.Text.SimpleText(sheetdoc, Me.DT.Rows(i).Item(4).ToString))
                         cell2.Content.Add(paragraph2)
                         mysheet.InsertCellAt(j + 1, 2, cell2)
                         i = i + 1

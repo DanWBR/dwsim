@@ -22,6 +22,7 @@ Imports Python.Runtime
 Imports Microsoft.Scripting.Hosting
 Imports System.Text
 Imports DWSIM.SharedClasses.Flowsheet
+Imports System.Dynamic
 
 <System.Runtime.InteropServices.ComVisible(True)> Public MustInherit Class FlowsheetBase
 
@@ -58,8 +59,8 @@ Imports DWSIM.SharedClasses.Flowsheet
                 End With
             Next
         Next
-        ms.EqualizeOverallComposition()
-        ms.CalcOverallCompMassFractions()
+        DirectCast(ms, MaterialStream).EqualizeOverallComposition()
+        DirectCast(ms, MaterialStream).CalcOverallCompMassFractions()
     End Sub
 
     Public Sub AddGraphicObject(obj As IGraphicObject) Implements IFlowsheet.AddGraphicObject
@@ -85,11 +86,11 @@ Imports DWSIM.SharedClasses.Flowsheet
     End Sub
 
     Public Sub ConnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject, fromidx As Integer, toidx As Integer) Implements IFlowsheet.ConnectObjects
-        FlowsheetSurface.ConnectObject(gobjfrom, gobjto, fromidx, toidx)
+        FlowsheetSurface.ConnectObject(CType(gobjfrom, GraphicObject), CType(gobjto, GraphicObject), fromidx, toidx)
     End Sub
 
     Public Sub DisconnectObjects(gobjfrom As IGraphicObject, gobjto As IGraphicObject) Implements IFlowsheet.DisconnectObjects
-        FlowsheetSurface.DisconnectObject(gobjfrom, gobjto, False)
+        FlowsheetSurface.DisconnectObject(CType(gobjfrom, GraphicObject), CType(gobjto, GraphicObject), False)
     End Sub
 
     Public Sub DeleteSelectedObject(ByVal sender As System.Object, ByVal e As System.EventArgs, gobj As IGraphicObject, Optional ByVal confirmation As Boolean = True, Optional ByVal triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
@@ -149,7 +150,7 @@ Imports DWSIM.SharedClasses.Flowsheet
                         Next
 
                         If gobj.ObjectType = ObjectType.OT_Spec Then
-                            Dim specobj As ISpec = SimulationObjects(namesel)
+                            Dim specobj As Spec = CType(SimulationObjects(namesel), Spec)
                             If Me.SimulationObjects.ContainsKey(specobj.TargetObjectData.ID) Then
                                 Me.SimulationObjects(specobj.TargetObjectData.ID).IsSpecAttached = False
                                 Me.SimulationObjects(specobj.TargetObjectData.ID).AttachedSpecId = ""
@@ -159,7 +160,7 @@ Imports DWSIM.SharedClasses.Flowsheet
                                 Me.SimulationObjects(specobj.SourceObjectData.ID).AttachedSpecId = ""
                             End If
                         ElseIf gobj.ObjectType = ObjectType.OT_Adjust Then
-                            Dim adjobj As IAdjust = SimulationObjects(namesel)
+                            Dim adjobj As Adjust = CType(SimulationObjects(namesel), Adjust)
                             If Me.SimulationObjects.ContainsKey(adjobj.ManipulatedObjectData.ID) Then
                                 Me.SimulationObjects(adjobj.ManipulatedObjectData.ID).IsAdjustAttached = False
                                 Me.SimulationObjects(adjobj.ManipulatedObjectData.ID).AttachedAdjustId = ""
@@ -236,10 +237,10 @@ Imports DWSIM.SharedClasses.Flowsheet
                 prm = New Resources.ResourceManager("DWSIM.FlowsheetBase.Properties", MyBase.GetType.GetTypeInfo.BaseType.GetTypeInfo.Assembly)
             End If
             Try
-                If text.Split("/").Length = 2 Then
-                    Dim prop As String = text.Split("/")(0)
+                If text.Split("/"c).Length = 2 Then
+                    Dim prop As String = text.Split("/"c)(0)
                     Dim ttext2 As String = prm.GetString(prop)
-                    If ttext2 Is Nothing Then Return text Else Return ttext2 + " / " + text.Split("/")(1)
+                    If ttext2 Is Nothing Then Return text Else Return ttext2 + " / " + text.Split("/"c)(1)
                 Else
                     Dim ttext2 As String = prm.GetString(text)
                     If ttext2 Is Nothing Then Return text Else Return ttext2
@@ -1010,7 +1011,7 @@ Imports DWSIM.SharedClasses.Flowsheet
 
             If Not el Is Nothing Then
                 For Each xel As XElement In el.Elements
-                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value)
+                    Dim obj As PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm = CType(New PropertyPackages.RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
                     obj.LoadData(xel.Elements.ToList)
                     Options.FlashAlgorithms.Add(obj)
                 Next
@@ -1044,7 +1045,7 @@ Imports DWSIM.SharedClasses.Flowsheet
         For Each xel As XElement In data
             Try
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
-                Dim obj As PropertyPackage = New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value)
+                Dim obj As PropertyPackage = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
@@ -1064,11 +1065,11 @@ Imports DWSIM.SharedClasses.Flowsheet
                 Dim id As String = xel.<Name>.Value
                 Dim obj As ISimulationObject = Nothing
                 If xel.Element("Type").Value.Contains("MaterialStream") Then
-                    obj = New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value)
+                    obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), ISimulationObject)
                 Else
-                    obj = UnitOperations.ReturnInstance(xel.Element("Type").Value)
+                    obj = CType(UnitOperations.ReturnInstance(xel.Element("Type").Value), ISimulationObject)
                 End If
-                Dim gobj As GraphicObject = (From go As GraphicObject In
+                Dim gobj As IGraphicObject = (From go As IGraphicObject In
                                     FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                 obj.GraphicObject = gobj
                 gobj.Owner = obj
@@ -1307,16 +1308,16 @@ Imports DWSIM.SharedClasses.Flowsheet
                 xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("GO_Figura", "GO_Image")
                 Dim obj As GraphicObject = Nothing
                 Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                If Not t Is Nothing Then obj = Activator.CreateInstance(t)
-                If obj Is Nothing Then obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
+                If Not t Is Nothing Then obj = CType(Activator.CreateInstance(t), GraphicObject)
+                If obj Is Nothing Then obj = CType(GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
                 If Not obj Is Nothing Then
                     obj.LoadData(xel.Elements.ToList)
                     obj.Name = pkey & obj.Name
                     obj.X += shift
                     obj.Y += shift
                     If pkey <> "" Then
-                        searchtext = obj.Tag.Split("(")(0).Trim()
-                        objcount = (From go As GraphicObject In FlowsheetSurface.DrawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
+                        searchtext = obj.Tag.Split("("c)(0).Trim()
+                        objcount = (From go As IGraphicObject In FlowsheetSurface.DrawingObjects Select go Where go.Tag.Equals(obj.Tag)).Count
                         If objcount > 0 Then obj.Tag = searchtext & " (" & (objcount + 1).ToString & ")"
                     End If
                     If TypeOf obj Is TableGraphic Then
@@ -1353,22 +1354,22 @@ Imports DWSIM.SharedClasses.Flowsheet
             Try
                 Dim id As String = pkey & xel.Element("Name").Value
                 If id <> "" Then
-                    Dim obj As GraphicObject = (From go As GraphicObject In
+                    Dim obj As IGraphicObject = (From go As IGraphicObject In
                                                             FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
-                    If obj Is Nothing Then obj = (From go As GraphicObject In
+                    If obj Is Nothing Then obj = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel.Element("Name").Value).SingleOrDefault
                     If Not obj Is Nothing Then
                         Dim i As Integer = 0
                         For Each xel2 As XElement In xel.Element("InputConnectors").Elements
-                            If xel2.@IsAttached = True Then
+                            If CBool(xel2.@IsAttached) = True Then
                                 obj.InputConnectors(i).ConnectorName = pkey & xel2.@AttachedFromObjID & "|" & xel2.@AttachedFromConnIndex
-                                obj.InputConnectors(i).Type = [Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType)
+                                obj.InputConnectors(i).Type = CType([Enum].Parse(obj.InputConnectors(i).Type.GetType, xel2.@ConnType), ConType)
                                 If reconnectinlets Then
-                                    Dim objFrom As GraphicObject = (From go As GraphicObject In
+                                    Dim objFrom As IGraphicObject = (From go As IGraphicObject In
                                                                                    FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedFromObjID).SingleOrDefault
                                     If Not objFrom Is Nothing Then
-                                        If Not objFrom.OutputConnectors(xel2.@AttachedFromConnIndex).IsAttached Then
-                                            FlowsheetSurface.ConnectObject(objFrom, obj, xel2.@AttachedFromConnIndex, xel2.@AttachedToConnIndex)
+                                        If Not objFrom.OutputConnectors(CInt(xel2.@AttachedFromConnIndex)).IsAttached Then
+                                            FlowsheetSurface.ConnectObject(CType(objFrom, GraphicObject), CType(obj, GraphicObject), CInt(xel2.@AttachedFromConnIndex), CInt(xel2.@AttachedToConnIndex))
                                         End If
                                     End If
                                 End If
@@ -1390,7 +1391,7 @@ Imports DWSIM.SharedClasses.Flowsheet
                                                             FlowsheetSurface.DrawingObjects Where go.Name = id).SingleOrDefault
                     If Not obj Is Nothing Then
                         For Each xel2 As XElement In xel.Element("OutputConnectors").Elements
-                            If xel2.@IsAttached = True Then
+                            If CBool(xel2.@IsAttached) = True Then
                                 Dim objToID = pkey & xel2.@AttachedToObjID
                                 If objToID <> "" Then
                                     Dim objTo As IGraphicObject = (From go As IGraphicObject In
@@ -1398,24 +1399,24 @@ Imports DWSIM.SharedClasses.Flowsheet
                                     If objTo Is Nothing Then objTo = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
                                     Dim fromidx As Integer = -1
-                                    Dim cp As IConnectionPoint = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = obj.Name).SingleOrDefault
-                                    If cp Is Nothing Then cp = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|")(0) = xel2.@AttachedToObjID).SingleOrDefault
+                                    Dim cp As IConnectionPoint = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|"c)(0) = obj.Name).SingleOrDefault
+                                    If cp Is Nothing Then cp = (From cp2 As IConnectionPoint In objTo.InputConnectors Select cp2 Where cp2.ConnectorName.Split("|"c)(0) = xel2.@AttachedToObjID).SingleOrDefault
                                     If Not cp Is Nothing Then
-                                        fromidx = cp.ConnectorName.Split("|")(1)
+                                        fromidx = CInt(cp.ConnectorName.Split("|"c)(1))
                                     End If
-                                    If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(obj, objTo, fromidx, xel2.@AttachedToConnIndex)
+                                    If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(CType(obj, GraphicObject), CType(objTo, GraphicObject), fromidx, CInt(xel2.@AttachedToConnIndex))
                                 End If
                             End If
                         Next
                         For Each xel2 As XElement In xel.Element("EnergyConnector").Elements
-                            If xel2.@IsAttached = True Then
+                            If CBool(xel2.@IsAttached) = True Then
                                 Dim objToID = pkey & xel2.@AttachedToObjID
                                 If objToID <> "" Then
                                     Dim objTo As IGraphicObject = (From go As IGraphicObject In
                                                                                    FlowsheetSurface.DrawingObjects Where go.Name = objToID).SingleOrDefault
                                     If objTo Is Nothing Then obj = (From go As IGraphicObject In
                                                                                     FlowsheetSurface.DrawingObjects Where go.Name = xel2.@AttachedToObjID).SingleOrDefault
-                                    If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(obj, objTo, -1, xel2.@AttachedToConnIndex)
+                                    If Not obj Is Nothing And Not objTo Is Nothing Then FlowsheetSurface.ConnectObject(CType(obj, GraphicObject), CType(objTo, GraphicObject), -1, CInt(xel2.@AttachedToConnIndex))
                                 End If
                             End If
                         Next
@@ -1440,10 +1441,10 @@ Imports DWSIM.SharedClasses.Flowsheet
                 xel.Element("ObjectType").Value = xel.Element("ObjectType").Value.Replace("GO_Figura", "GO_Image")
                 Dim obj As IGraphicObject = Nothing
                 Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
-                If Not t Is Nothing Then obj = Activator.CreateInstance(t)
+                If Not t Is Nothing Then obj = CType(Activator.CreateInstance(t), IGraphicObject)
                 If obj Is Nothing Then obj = GraphicObject.ReturnInstance(xel.Element("Type").Value)
                 If Not obj Is Nothing Then
-                    obj.LoadData(xel.Elements.ToList)
+                    DirectCast(obj, ICustomXMLSerialization).LoadData(xel.Elements.ToList)
                     If TypeOf obj Is TableGraphic Then
                         DirectCast(obj, TableGraphic).Flowsheet = Me
                         If obj.Name = "" Then obj.Name = obj.Tag
@@ -1472,29 +1473,29 @@ Imports DWSIM.SharedClasses.Flowsheet
         For Each so As ISimulationObject In SimulationObjects.Values
             Try
                 If TryCast(so, Adjust) IsNot Nothing Then
-                    Dim so2 As Adjust = so
+                    Dim so2 As Adjust = CType(so, Adjust)
                     If SimulationObjects.ContainsKey(so2.ManipulatedObjectData.ID) Then
-                        so2.ManipulatedObject = SimulationObjects(so2.ManipulatedObjectData.ID)
-                        DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = so2.ManipulatedObject.GraphicObject
+                        so2.ManipulatedObject = CType(SimulationObjects(so2.ManipulatedObjectData.ID), SharedClasses.UnitOperations.BaseClass)
+                        DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToMv = CType(so2.ManipulatedObject.GraphicObject, GraphicObject)
                     End If
                     If SimulationObjects.ContainsKey(so2.ControlledObjectData.ID) Then
-                        so2.ControlledObject = SimulationObjects(so2.ControlledObjectData.ID)
-                        DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = so2.ControlledObject.GraphicObject
+                        so2.ControlledObject = CType(SimulationObjects(so2.ControlledObjectData.ID), SharedClasses.UnitOperations.BaseClass)
+                        DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToCv = CType(so2.ControlledObject.GraphicObject, GraphicObject)
                     End If
                     If SimulationObjects.ContainsKey(so2.ReferencedObjectData.ID) Then
-                        so2.ReferenceObject = SimulationObjects(so2.ReferencedObjectData.ID)
-                        DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = so2.ReferenceObject.GraphicObject
+                        so2.ReferenceObject = CType(SimulationObjects(so2.ReferencedObjectData.ID), SharedClasses.UnitOperations.BaseClass)
+                        DirectCast(so2.GraphicObject, AdjustGraphic).ConnectedToRv = CType(so2.ReferenceObject.GraphicObject, GraphicObject)
                     End If
                 End If
                 If TryCast(so, Spec) IsNot Nothing Then
-                    Dim so2 As Spec = so
+                    Dim so2 As Spec = CType(so, Spec)
                     If SimulationObjects.ContainsKey(so2.TargetObjectData.ID) Then
-                        so2.TargetObject = SimulationObjects(so2.TargetObjectData.ID)
-                        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = so2.TargetObject.GraphicObject
+                        so2.TargetObject = CType(SimulationObjects(so2.TargetObjectData.ID), SharedClasses.UnitOperations.BaseClass)
+                        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToTv = CType(so2.TargetObject.GraphicObject, GraphicObject)
                     End If
                     If SimulationObjects.ContainsKey(so2.SourceObjectData.ID) Then
-                        so2.SourceObject = SimulationObjects(so2.SourceObjectData.ID)
-                        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = so2.SourceObject.GraphicObject
+                        so2.SourceObject = CType(SimulationObjects(so2.SourceObjectData.ID), SharedClasses.UnitOperations.BaseClass)
+                        DirectCast(so2.GraphicObject, SpecGraphic).ConnectedToSv = CType(so2.SourceObject.GraphicObject, GraphicObject)
                     End If
                 End If
                 If TryCast(so, CapeOpenUO) IsNot Nothing Then
@@ -1574,7 +1575,7 @@ Imports DWSIM.SharedClasses.Flowsheet
     End Function
 
     Public Function GetFlowsheetBag() As IFlowsheetBag Implements IFlowsheet.GetFlowsheetBag
-        Return Me
+        Return CType(Me, IFlowsheetBag)
     End Function
 
     Public Function GetUtility(uttype As Enums.FlowsheetUtility) As IAttachedUtility Implements IFlowsheet.GetUtility
