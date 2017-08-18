@@ -315,16 +315,21 @@ namespace DWSIM.UI.Forms
 
             btnSave.Click += (sender, e) =>
             {
-
-                if (FlowsheetObject.Options.FilePath != "")
+                try
                 {
-                    SaveSimulation(FlowsheetObject.Options.FilePath);
+                    if (FlowsheetObject.Options.FilePath != "")
+                    {
+                        SaveSimulation(FlowsheetObject.Options.FilePath);
+                    }
+                    else
+                    {
+                        btnSaveAs.PerformClick();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    btnSaveAs.PerformClick();
+                    MessageBox.Show("Error saving file", ex.ToString(), MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
                 }
-
             };
 
             btnSaveAs.Click += (sender, e) =>
