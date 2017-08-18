@@ -74,7 +74,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                 gobj = myUnitOp.GraphicObject
                                 gobj.Calculated = False
                                 myUnitOp.Calculated = False
-                                myUnitOp.Calculate()
+                                myUnitOp.Solve()
 
                                 For Each utility In myUnitOp.AttachedUtilities
                                     If utility.AutoUpdate Then utility.Update()
@@ -104,7 +104,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         If objArgs.Calculated = True Then
                             myUnitOp.GraphicObject.Calculated = False
                             myUnitOp.Calculated = True
-                            myUnitOp.Calculate()
+                            myUnitOp.Solve()
 
                             For Each utility In myUnitOp.AttachedUtilities
                                 If utility.AutoUpdate Then utility.Update()
@@ -129,7 +129,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     myObj.GraphicObject.Calculated = False
                     myObj.Calculated = False
-                    myObj.Calculate()
+                    myObj.Solve()
 
                     For Each utility In myObj.AttachedUtilities
                         If utility.AutoUpdate Then utility.Update()
@@ -196,7 +196,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Case Else
                     Dim myObj As ISimulationObject = fbag.SimulationObjects(objArgs.Name)
                     RaiseEvent UnitOpCalculationStarted(fobj, New System.EventArgs(), objArgs)
-                    myObj.Calculate()
+                    myObj.Solve()
                     For Each utility In myObj.AttachedUtilities
                         If utility.AutoUpdate Then utility.Update()
                     Next
@@ -229,7 +229,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         ms.GraphicObject.Calculated = False
 
-        ms.Calculate()
+        ms.Solve()
 
         fgui.ShowMessage(ms.GraphicObject.Tag & ": " & fgui.GetTranslatedString("Calculadocomsucesso"), IFlowsheet.MessageType.Information)
 
@@ -272,7 +272,7 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationStarted, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
-        ms.Calculate()
+        ms.Solve()
 
         fgui.ProcessScripts(Scripts.EventType.ObjectCalculationFinished, Scripts.ObjectType.FlowsheetObject, ms.Name)
 
@@ -374,8 +374,15 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 Catch ex As AggregateException
                     myobj.ErrorMessage = ""
                     For Each iex In ex.InnerExceptions
-                        myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                        loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                        If TypeOf iex Is AggregateException Then
+                            For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
+                                myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                                loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                            Next
+                        Else
+                            myobj.ErrorMessage += iex.Message.ToString & vbCrLf
+                            loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                        End If
                     Next
                     If GlobalSettings.Settings.SolverBreakOnException Then Exit While
                 Catch ex As Exception
@@ -445,8 +452,15 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ""
                 For Each iex In ex.InnerExceptions
-                    myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                    loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                    If TypeOf iex Is AggregateException Then
+                        For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
+                            myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                            loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                        Next
+                    Else
+                        myobj.ErrorMessage += iex.Message.ToString & vbCrLf
+                        loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                    End If
                 Next
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Catch ex As Exception
@@ -523,8 +537,15 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ""
                                                          For Each iex In ex.InnerExceptions
-                                                             myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                                                             loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                                                             If TypeOf iex Is AggregateException Then
+                                                                 For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
+                                                                     myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                                                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                                                 Next
+                                                             Else
+                                                                 myobj.ErrorMessage += iex.Message.ToString & vbCrLf
+                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                                                             End If
                                                          Next
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Catch ex As Exception
@@ -1245,8 +1266,8 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         Next
                     Else
                         baseexception = ex
-                        While ex.InnerException IsNot Nothing
-                            baseexception = ex.InnerException
+                        While baseexception.InnerException IsNot Nothing
+                            baseexception = baseexception.InnerException
                         End While
                         fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError)
                     End If

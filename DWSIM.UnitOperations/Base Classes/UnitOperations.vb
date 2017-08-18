@@ -145,22 +145,6 @@ Namespace UnitOperations
         End Property
 
         ''' <summary>
-        ''' Calculates the object.
-        ''' </summary>
-        ''' <param name="args"></param>
-        ''' <remarks></remarks>
-        Public Sub Solve(Optional ByVal args As Object = Nothing)
-
-            Calculated = False
-
-            Calculate(args)
-
-            Calculated = True
-            LastUpdated = Date.Now
-
-        End Sub
-
-        ''' <summary>
         ''' Decalculates the object.
         ''' </summary>
         ''' <remarks></remarks>

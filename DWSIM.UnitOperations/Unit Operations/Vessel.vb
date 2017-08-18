@@ -39,6 +39,8 @@ Namespace UnitOperations
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_Vessel
 
+        <NonSerialized> <Xml.Serialization.XmlIgnore> Public MixedStream As MaterialStream
+
         Protected m_DQ As Nullable(Of Double)
 
         Protected m_overrideT As Boolean = False
@@ -171,8 +173,8 @@ Namespace UnitOperations
             Dim i As Integer = 1
             Dim nc As Integer = 0
 
-            Dim mix As New MaterialStream("", "", Me.FlowSheet, Me.PropertyPackage)
-            FlowSheet.AddCompoundsToMaterialStream(mix)
+            MixedStream = New MaterialStream("", "", Me.FlowSheet, Me.PropertyPackage)
+            FlowSheet.AddCompoundsToMaterialStream(MixedStream)
             Dim ms As MaterialStream = Nothing
 
             Dim cp As IConnectionPoint
@@ -241,7 +243,7 @@ Namespace UnitOperations
             CheckSpec(W, True, "mass flow")
             CheckSpec(P, True, "pressure")
 
-            With mix
+            With MixedStream
 
                 .PreferredFlashAlgorithmTag = Me.PreferredFlashAlgorithmTag
 
@@ -267,15 +269,15 @@ Namespace UnitOperations
                         sub1.MoleFraction = 0.0#
                     End If
                 Next
-                Me.PropertyPackage.CurrentMaterialStream = mix
-                mix.Phases(0).Properties.temperature = T
+                Me.PropertyPackage.CurrentMaterialStream = MixedStream
+                MixedStream.Phases(0).Properties.temperature = T
                 .Phases(0).Properties.molarflow = W / Me.PropertyPackage.AUX_MMM(PropertyPackages.Phase.Mixture) * 1000
 
             End With
 
             If Me.OverrideT = False And Me.OverrideP = False Then
 
-                W = mix.Phases(0).Properties.massflow.GetValueOrDefault
+                W = MixedStream.Phases(0).Properties.massflow.GetValueOrDefault
 
                 If nstr = 1 And E0 = 0.0# Then
 
@@ -283,44 +285,44 @@ Namespace UnitOperations
                     For Each cp In Me.GraphicObject.InputConnectors
                         If cp.IsAttached And cp.Type = GraphicObjects.ConType.ConIn Then
                             ms = FlowSheet.SimulationObjects(cp.AttachedConnector.AttachedFrom.Name)
-                            mix.Assign(ms)
-                            mix.AssignProps(ms)
+                            MixedStream.Assign(ms)
+                            MixedStream.AssignProps(ms)
                             Exit For
                         End If
                     Next
 
                 Else
 
-                    mix.PropertyPackage = Me.PropertyPackage
-                    mix.SpecType = StreamSpec.Pressure_and_Enthalpy
-                    mix.Calculate(True, True)
+                    MixedStream.PropertyPackage = Me.PropertyPackage
+                    MixedStream.SpecType = StreamSpec.Pressure_and_Enthalpy
+                    MixedStream.Calculate(True, True)
 
                 End If
 
-                T = mix.Phases(0).Properties.temperature.GetValueOrDefault
+                T = MixedStream.Phases(0).Properties.temperature.GetValueOrDefault
 
             Else
 
-                W = mix.Phases(0).Properties.massflow.GetValueOrDefault
+                W = MixedStream.Phases(0).Properties.massflow.GetValueOrDefault
 
                 If Me.OverrideP Then
                     P = Me.FlashPressure
-                    mix.Phases(0).Properties.pressure = P
+                    MixedStream.Phases(0).Properties.pressure = P
                 Else
-                    P = mix.Phases(0).Properties.pressure.GetValueOrDefault
+                    P = MixedStream.Phases(0).Properties.pressure.GetValueOrDefault
                 End If
                 If Me.OverrideT Then
                     T = Me.FlashTemperature
-                    mix.Phases(0).Properties.temperature = T
+                    MixedStream.Phases(0).Properties.temperature = T
                 Else
-                    T = mix.Phases(0).Properties.temperature.GetValueOrDefault
+                    T = MixedStream.Phases(0).Properties.temperature.GetValueOrDefault
                 End If
 
-                Me.PropertyPackage.CurrentMaterialStream = mix
+                Me.PropertyPackage.CurrentMaterialStream = MixedStream
 
-                mix.PropertyPackage = Me.PropertyPackage
-                mix.SpecType = StreamSpec.Temperature_and_Pressure
-                mix.Calculate(True, True)
+                MixedStream.PropertyPackage = Me.PropertyPackage
+                MixedStream.SpecType = StreamSpec.Temperature_and_Pressure
+                MixedStream.Calculate(True, True)
 
             End If
 
@@ -328,19 +330,19 @@ Namespace UnitOperations
             'Solids are distributed between liquid phases in the same ratio as the mass ratio of liquid phases
             Dim SR, VnL1(n - 1), VnL2(n - 1), VmL1(n - 1), VmL2(n - 1) As Double
             Dim HL1, HL2, W1, W2, WL1, WL2, WS As Double
-            WL1 = mix.Phases(3).Properties.massflow.GetValueOrDefault
-            WL2 = mix.Phases(4).Properties.massflow.GetValueOrDefault
-            If WL2 > 0# Then
+            WL1 = MixedStream.Phases(3).Properties.massflow.GetValueOrDefault
+            WL2 = MixedStream.Phases(4).Properties.massflow.GetValueOrDefault
+            If WL2 > 0.0# Then
                 SR = WL1 / (WL1 + WL2)
             Else
                 SR = 1
             End If
             i = 0
-            For Each comp In mix.Phases(0).Compounds.Values
-                VnL1(i) = mix.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault + SR * mix.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
-                VmL1(i) = mix.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault + SR * mix.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
-                VnL2(i) = mix.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
-                VmL2(i) = mix.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - SR) * mix.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
+            For Each comp In MixedStream.Phases(0).Compounds.Values
+                VnL1(i) = MixedStream.Phases(3).Compounds(comp.Name).MolarFlow.GetValueOrDefault + SR * MixedStream.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
+                VmL1(i) = MixedStream.Phases(3).Compounds(comp.Name).MassFlow.GetValueOrDefault + SR * MixedStream.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
+                VnL2(i) = MixedStream.Phases(4).Compounds(comp.Name).MolarFlow.GetValueOrDefault + (1 - SR) * MixedStream.Phases(7).Compounds(comp.Name).MolarFlow.GetValueOrDefault
+                VmL2(i) = MixedStream.Phases(4).Compounds(comp.Name).MassFlow.GetValueOrDefault + (1 - SR) * MixedStream.Phases(7).Compounds(comp.Name).MassFlow.GetValueOrDefault
                 i += 1
             Next
             Dim sum1, sum2, sum3, sum4 As Double
@@ -368,13 +370,13 @@ Namespace UnitOperations
                     VmL2(i) /= sum4
                 Next
             End If
-            WL1 = mix.Phases(3).Properties.massflow.GetValueOrDefault
-            WL2 = mix.Phases(4).Properties.massflow.GetValueOrDefault
-            WS = mix.Phases(7).Properties.massflow.GetValueOrDefault
+            WL1 = MixedStream.Phases(3).Properties.massflow.GetValueOrDefault
+            WL2 = MixedStream.Phases(4).Properties.massflow.GetValueOrDefault
+            WS = MixedStream.Phases(7).Properties.massflow.GetValueOrDefault
             W1 = WL1 + SR * WS
             W2 = WL2 + (1 - SR) * WS
-            HL1 = (WL1 * mix.Phases(3).Properties.enthalpy.GetValueOrDefault + WS * SR * mix.Phases(7).Properties.enthalpy.GetValueOrDefault) / (WL1 + WS * SR)
-            HL2 = (WL2 * mix.Phases(4).Properties.enthalpy.GetValueOrDefault + WS * (1 - SR) * mix.Phases(7).Properties.enthalpy.GetValueOrDefault) / (WL2 + WS * (1 - SR))
+            HL1 = (WL1 * MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault + WS * SR * MixedStream.Phases(7).Properties.enthalpy.GetValueOrDefault) / (WL1 + WS * SR)
+            HL2 = (WL2 * MixedStream.Phases(4).Properties.enthalpy.GetValueOrDefault + WS * (1 - SR) * MixedStream.Phases(7).Properties.enthalpy.GetValueOrDefault) / (WL2 + WS * (1 - SR))
 
             If Double.IsNaN(HL1) Then HL1 = 0.0#
             If Double.IsNaN(HL2) Then HL2 = 0.0#
@@ -389,12 +391,12 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = mix.Phases(2).Properties.enthalpy.GetValueOrDefault
-                    .Phases(0).Properties.massflow = mix.Phases(2).Properties.massflow.GetValueOrDefault
+                    .Phases(0).Properties.enthalpy = MixedStream.Phases(2).Properties.enthalpy.GetValueOrDefault
+                    .Phases(0).Properties.massflow = MixedStream.Phases(2).Properties.massflow.GetValueOrDefault
                     Dim comp As BaseClasses.Compound
                     For Each comp In .Phases(0).Compounds.Values
-                        comp.MoleFraction = mix.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault
-                        comp.MassFraction = mix.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault
+                        comp.MoleFraction = MixedStream.Phases(2).Compounds(comp.Name).MoleFraction.GetValueOrDefault
+                        comp.MassFraction = MixedStream.Phases(2).Compounds(comp.Name).MassFraction.GetValueOrDefault
                     Next
                 End With
             End If
@@ -407,7 +409,7 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = mix.Phases(3).Properties.enthalpy.GetValueOrDefault
+                    .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
                     If W1 > 0.0# Then .Phases(0).Properties.massflow = W1 Else .Phases(0).Properties.molarflow = 0.0#
                     .Phases(0).Properties.enthalpy = HL1
                     Dim comp As BaseClasses.Compound
@@ -428,7 +430,7 @@ Namespace UnitOperations
                     .SpecType = Interfaces.Enums.StreamSpec.Pressure_and_Enthalpy
                     .Phases(0).Properties.temperature = T
                     .Phases(0).Properties.pressure = P
-                    .Phases(0).Properties.enthalpy = mix.Phases(3).Properties.enthalpy.GetValueOrDefault
+                    .Phases(0).Properties.enthalpy = MixedStream.Phases(3).Properties.enthalpy.GetValueOrDefault
                     If W2 > 0.0# Then .Phases(0).Properties.massflow = W2 Else .Phases(0).Properties.molarflow = 0.0#
                     .Phases(0).Properties.enthalpy = HL2
                     Dim comp As BaseClasses.Compound
@@ -440,10 +442,10 @@ Namespace UnitOperations
                     Next
                 End With
             Else
-                If mix.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
+                If MixedStream.Phases(4).Properties.massflow.GetValueOrDefault > 0.0# Then Throw New Exception(FlowSheet.GetTranslatedString("SeparatorVessel_SecondLiquidPhaseFound"))
             End If
 
-            Hf = mix.Phases(0).Properties.enthalpy.GetValueOrDefault * W
+            Hf = MixedStream.Phases(0).Properties.enthalpy.GetValueOrDefault * W
 
             Me.DeltaQ = Hf - H0
 
@@ -457,14 +459,14 @@ Namespace UnitOperations
 
             'SIZING
 
-            Me.rhol = mix.Phases(1).Properties.density.GetValueOrDefault
-            Me.rhov = mix.Phases(2).Properties.density.GetValueOrDefault
-            Me.ql = mix.Phases(1).Properties.volumetric_flow.GetValueOrDefault
-            Me.qv = mix.Phases(2).Properties.volumetric_flow.GetValueOrDefault
-            Me.wl = mix.Phases(1).Properties.massflow.GetValueOrDefault
-            Me.wv = mix.Phases(2).Properties.massflow.GetValueOrDefault
-            Me.rhoe = mix.Phases(0).Properties.density.GetValueOrDefault
-            Me.qe = mix.Phases(0).Properties.volumetric_flow.GetValueOrDefault
+            Me.rhol = MixedStream.Phases(1).Properties.density.GetValueOrDefault
+            Me.rhov = MixedStream.Phases(2).Properties.density.GetValueOrDefault
+            Me.ql = MixedStream.Phases(1).Properties.volumetric_flow.GetValueOrDefault
+            Me.qv = MixedStream.Phases(2).Properties.volumetric_flow.GetValueOrDefault
+            Me.wl = MixedStream.Phases(1).Properties.massflow.GetValueOrDefault
+            Me.wv = MixedStream.Phases(2).Properties.massflow.GetValueOrDefault
+            Me.rhoe = MixedStream.Phases(0).Properties.density.GetValueOrDefault
+            Me.qe = MixedStream.Phases(0).Properties.volumetric_flow.GetValueOrDefault
 
             Me.C = 80
             Me.VMAX = 2

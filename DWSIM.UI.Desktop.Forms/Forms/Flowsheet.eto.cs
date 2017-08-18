@@ -492,6 +492,8 @@ namespace DWSIM.UI.Forms
         void SaveSimulation(string path, bool backup = false)
         {
 
+            path = Path.ChangeExtension(path, ".dwxmz");
+
             string xmlfile = Path.ChangeExtension(Path.GetTempFileName(), "xml");
 
             using (var fstream = new FileStream(xmlfile, FileMode.OpenOrCreate, FileAccess.ReadWrite))

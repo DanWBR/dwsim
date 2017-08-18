@@ -45,6 +45,8 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = MatStream.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = MatStream.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
+            s.CreateAndAddLabelRow(container, "Material Stream Properties");
+
             s.CreateAndAddDescriptionRow(container, "Except for compound amounts, property values are updated/stored as they are changed/edited. There's no need to press ENTER to commit the changes.");
 
             s.CreateAndAddLabelRow(container, "Material Stream Details");
@@ -88,7 +90,7 @@ namespace DWSIM.UI.Desktop.Editors
                 MatStream.PreferredFlashAlgorithmTag = cbFlashAlg.SelectedValue.ToString();
             };
 
-            s.CreateAndAddLabelRow(container, "Stream Properties");
+            s.CreateAndAddLabelRow(container, "Properties");
 
             switch (MatStream.GraphicObject.ObjectType)
             {
@@ -223,7 +225,7 @@ namespace DWSIM.UI.Desktop.Editors
 
                         s.CreateAndAddDescriptionRow(container, ms.GetPropertyDescription("Vapor Phase Mole Fraction (spec)"));
 
-                        s.CreateAndAddLabelRow(container, "Stream Composition");
+                        s.CreateAndAddLabelRow(container, "Composition");
 
                         s.CreateAndAddDescriptionRow(container, "Composition changes will only be committed after clicking on the 'Accept' button.");
 

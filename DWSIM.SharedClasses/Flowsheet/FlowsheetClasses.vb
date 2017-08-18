@@ -202,6 +202,14 @@ Namespace DWSIM.Flowsheet
 
         Public Property SpreadsheetUseRegionalSeparator As Boolean = False Implements Interfaces.IFlowsheetOptions.SpreadsheetUseRegionalSeparator
 
+        Public Property EnergyBalanceCheck As Enums.WarningType = Enums.WarningType.ShowWarning Implements IFlowsheetOptions.EnergyBalanceCheck
+
+        Public Property MassBalanceCheck As Enums.WarningType = Enums.WarningType.ShowWarning Implements IFlowsheetOptions.MassBalanceCheck
+
+        Public Property EnergyBalanceRelativeTolerance As Double = 0.01 Implements IFlowsheetOptions.EnergyBalanceRelativeTolerance
+
+        Public Property MassBalanceRelativeTolerance As Double = 0.01 Implements IFlowsheetOptions.MassBalanceRelativeTolerance
+
     End Class
 
 End Namespace

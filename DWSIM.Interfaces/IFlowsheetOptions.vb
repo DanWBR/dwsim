@@ -1,4 +1,6 @@
-﻿'    DWSIM Interface definitions
+﻿Imports DWSIM.Interfaces.Enums
+
+'    DWSIM Interface definitions
 '    Copyright 2010-2017 Daniel Wagner O. de Medeiros
 '
 '    This file is part of DWSIM.
@@ -53,5 +55,14 @@
     Property SimultaneousAdjustSolverEnabled As Boolean
 
     Property SpreadsheetUseRegionalSeparator As Boolean
+
+    Property MassBalanceCheck As WarningType
+
+    Property EnergyBalanceCheck As WarningType
+
+    Property MassBalanceRelativeTolerance As Double
+
+    Property EnergyBalanceRelativeTolerance As Double
+
 
 End Interface

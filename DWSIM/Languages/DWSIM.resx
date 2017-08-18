@@ -5490,4 +5490,10 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="DiffusionCoefficient" xml:space="preserve">
     <value>Coeficiente de Difusão</value>
   </data>
+  <data name="EnergyBalanceMessage" xml:space="preserve">
+    <value>O balanço de energia não está sendo obedecido.</value>
+  </data>
+  <data name="MassBalanceMessage" xml:space="preserve">
+    <value>O balanço de massa não está sendo obedecido.</value>
+  </data>
 </root>

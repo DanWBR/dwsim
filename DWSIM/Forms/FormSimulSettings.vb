@@ -250,6 +250,14 @@ Public Class FormSimulSettings
 
         If DWSIM.App.IsRunningOnMono Then btnConfigPP.Enabled = True
 
+        cbMassBalanceCheck.SelectedIndex = FrmChild.Options.MassBalanceCheck
+
+        cbEnergyBalanceCheck.SelectedIndex = FrmChild.Options.EnergyBalanceCheck
+
+        tbMassBalTol.Text = FrmChild.Options.MassBalanceRelativeTolerance.ToString()
+
+        tbEnergyBalTol.Text = FrmChild.Options.EnergyBalanceRelativeTolerance.ToString()
+
         Me.loaded = True
 
     End Sub
@@ -1639,4 +1647,21 @@ Public Class FormSimulSettings
             End Try
         End If
     End Sub
+
+    Private Sub cbMassBalanceCheck_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMassBalanceCheck.SelectedIndexChanged
+        FrmChild.Options.MassBalanceCheck = cbMassBalanceCheck.SelectedIndex
+    End Sub
+
+    Private Sub cbEnergyBalanceCheck_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEnergyBalanceCheck.SelectedIndexChanged
+        FrmChild.Options.EnergyBalanceCheck = cbEnergyBalanceCheck.SelectedIndex
+    End Sub
+
+    Private Sub tbMassBalTol_TextChanged(sender As Object, e As EventArgs) Handles tbMassBalTol.TextChanged
+        If tbMassBalTol.Text.IsValidDouble Then FrmChild.Options.MassBalanceRelativeTolerance = tbMassBalTol.Text.ToDoubleFromCurrent
+    End Sub
+
+    Private Sub tbEnergyBalTol_TextChanged(sender As Object, e As EventArgs) Handles tbEnergyBalTol.TextChanged
+        If tbEnergyBalTol.Text.IsValidDouble Then FrmChild.Options.EnergyBalanceRelativeTolerance = tbEnergyBalTol.Text.ToDoubleFromCurrent
+    End Sub
+
 End Class

@@ -1696,6 +1696,9 @@ Namespace PropertyPackages
                 Try
                     Me._tpseverity = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestSeverity)
                     Me._tpcompids = Me.FlashBase.FlashSettings(Enums.FlashSetting.ThreePhaseFlashStabTestCompIds).ToArray(Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
+                    Dim newlist = Me._tpcompids.ToList
+                    newlist.Remove("")
+                    Me._tpcompids = newlist.ToArray()
                 Catch ex As Exception
                     Me._tpseverity = 0
                     Me._tpcompids = New String() {}

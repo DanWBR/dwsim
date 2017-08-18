@@ -471,7 +471,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                         Dim vx2est(n), fcl(n), fcv(n) As Double
                         Dim m As Double = LBound(stresult(1), 1)
-                        Dim gl, gv, gli As Double
+                        Dim gl, gli As Double
 
                         If StabSearchSeverity = 2 Then
                             gli = 0
@@ -498,170 +498,157 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                             Next
                         End If
 
-                        fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                        fcv = PP.DW_CalcFugCoeff(vx2est, T, P, State.Vapor)
 
-                        gv = 0.0#
-                        gl = 0.0#
-                        For i = 0 To nc
-                            If vx2est(i) <> 0.0# Then gv += vx2est(i) * Log(fcv(i) * vx2est(i))
-                            If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
+                        Dim initval2(2 * n + 1) As Double
+                        Dim lconstr2(2 * n + 1) As Double
+                        Dim uconstr2(2 * n + 1) As Double
+                        Dim finalval2(2 * n + 1) As Double
+                        Dim glow(n), gup(n), g(n) As Double
+
+                        Dim maxl As Double = MathEx.Common.Max(vx2est)
+                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                        F = 1000.0#
+                        V = result(1)
+                        L2 = F * result(3)(imaxl)
+                        L1 = F - L2 - V
+
+                        If L1 < 0.0# Then
+                            L1 = Abs(L1)
+                            L2 = F - L1 - V
+                        End If
+
+                        If L2 < 0.0# Then
+                            V += L2
+                            L2 = Abs(L2)
+                        End If
+
+                        For i = 0 To n
+                            If Vz(i) <> 0 Then
+                                initval2(i) = Vy(i) * V - vx2est(i) * L2
+                                If initval2(i) < 0.0# Then initval2(i) = 0.0#
+                            Else
+                                initval2(i) = 0.0#
+                            End If
+                            lconstr2(i) = 0.0#
+                            uconstr2(i) = fi(i) * F
+                            glow(i) = 0.0#
+                            gup(i) = 1000.0#
+                            If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
+                        Next
+                        For i = n + 1 To 2 * n + 1
+                            If Vz(i - n - 1) <> 0 Then
+                                initval2(i) = (vx2est(i - n - 1) * L2)
+                                If initval2(i) < 0 Then initval2(i) = 0
+                            Else
+                                initval2(i) = 0.0#
+                            End If
+                            lconstr2(i) = 0.0#
+                            uconstr2(i) = fi(i - n - 1) * F
+                            If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
                         Next
 
-                        If gl < gv Then 'test phase is liquid-like.
+                        ecount = 0
 
-                            Dim initval2(2 * n + 1) As Double
-                            Dim lconstr2(2 * n + 1) As Double
-                            Dim uconstr2(2 * n + 1) As Double
-                            Dim finalval2(2 * n + 1) As Double
-                            Dim glow(n), gup(n), g(n) As Double
+                        ThreePhase = True
 
-                            Dim maxl As Double = MathEx.Common.Max(vx2est)
-                            Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+                        objval = 0.0#
+                        objval0 = 0.0#
 
-                            F = 1000.0#
-                            V = result(1)
-                            L2 = F * result(3)(imaxl)
-                            L1 = F - L2 - V
+                        status = IpoptReturnCode.Invalid_Problem_Definition
 
-                            If L1 < 0.0# Then
-                                L1 = Abs(L1)
-                                L2 = F - L1 - V
-                            End If
+                        Select Case Me.Solver
+                            Case OptimizationMethod.Limited_Memory_BGFS
+                                Dim variables(2 * n + 1) As OptBoundVariable
+                                For i = 0 To 2 * n + 1
+                                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
+                                Next
+                                Dim solver As New L_BFGS_B
+                                solver.Tolerance = etol
+                                solver.MaxFunEvaluations = maxit_e
+                                initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                                solver = Nothing
+                            Case OptimizationMethod.Truncated_Newton
+                                Dim variables(2 * n + 1) As OptBoundVariable
+                                For i = 0 To 2 * n + 1
+                                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
+                                Next
+                                Dim solver As New TruncatedNewton
+                                solver.Tolerance = etol
+                                solver.MaxFunEvaluations = maxit_e
+                                initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
+                                solver = Nothing
+                            Case OptimizationMethod.Simplex
+                                Dim variables(2 * n + 1) As OptBoundVariable
+                                For i = 0 To 2 * n + 1
+                                    variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
+                                Next
+                                Dim solver As New Simplex
+                                solver.Tolerance = etol
+                                solver.MaxFunEvaluations = maxit_e
+                                initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
+                                solver = Nothing
+                            Case OptimizationMethod.IPOPT
+                                Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0, _
+                                        AddressOf eval_f, AddressOf eval_g, _
+                                        AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
+                                    problem.AddOption("tol", etol)
+                                    problem.AddOption("max_iter", maxit_e)
+                                    problem.AddOption("mu_strategy", "adaptive")
+                                    'problem.AddOption("mehrotra_algorithm", "yes")
+                                    problem.AddOption("hessian_approximation", "limited-memory")
+                                    'problem.SetIntermediateCallback(AddressOf intermediate)
+                                    'solve the problem 
+                                    status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
+                                End Using
+                            Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
+                                    OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
 
-                            If L2 < 0.0# Then
-                                V += L2
-                                L2 = Abs(L2)
-                            End If
+                                SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
 
-                            For i = 0 To n
-                                If Vz(i) <> 0 Then
-                                    initval2(i) = Vy(i) * V - vx2est(i) * L2
-                                    If initval2(i) < 0.0# Then initval2(i) = 0.0#
-                                Else
-                                    initval2(i) = 0.0#
-                                End If
-                                lconstr2(i) = 0.0#
-                                uconstr2(i) = fi(i) * F
-                                glow(i) = 0.0#
-                                gup(i) = 1000.0#
-                                If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
-                            Next
-                            For i = n + 1 To 2 * n + 1
-                                If Vz(i - n - 1) <> 0 Then
-                                    initval2(i) = (vx2est(i - n - 1) * L2)
-                                    If initval2(i) < 0 Then initval2(i) = 0
-                                Else
-                                    initval2(i) = 0.0#
-                                End If
-                                lconstr2(i) = 0.0#
-                                uconstr2(i) = fi(i - n - 1) * F
-                                If initval2(i) > uconstr2(i) Then initval2(i) = uconstr2(i)
-                            Next
+                                Dim sproblem As New GibbsProblem(Me) With {._Dim = initval2.Length, ._LB = lconstr2, ._UB = uconstr2, ._INIT = initval2, ._Name = "Gibbs3P"}
+                                sproblem.MaxIterations = maxit_e * initval2.Length * 10
+                                sproblem.MinIterations = maxit_e * 10
+                                sproblem.Tolerance = 1.0E-20
+                                Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
+                                opt.Problem = sproblem
+                                opt.RequireFeasible = True
+                                Dim sresult = opt.Optimize(opt.DefaultParameters)
 
-                            ecount = 0
+                                If Not sresult.Feasible Or Not CheckSolution() Then Throw New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
 
-                            ThreePhase = True
+                                initval2 = sresult.Parameters
 
-                            objval = 0.0#
-                            objval0 = 0.0#
+                        End Select
 
-                            status = IpoptReturnCode.Invalid_Problem_Definition
+                        For i = 0 To initval2.Length - 1
+                            If Double.IsNaN(initval2(i)) Then initval2(i) = 0.0#
+                        Next
 
-                            Select Case Me.Solver
-                                Case OptimizationMethod.Limited_Memory_BGFS
-                                    Dim variables(2 * n + 1) As OptBoundVariable
-                                    For i = 0 To 2 * n + 1
-                                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                                    Next
-                                    Dim solver As New L_BFGS_B
-                                    solver.Tolerance = etol
-                                    solver.MaxFunEvaluations = maxit_e
-                                    initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                                    solver = Nothing
-                                Case OptimizationMethod.Truncated_Newton
-                                    Dim variables(2 * n + 1) As OptBoundVariable
-                                    For i = 0 To 2 * n + 1
-                                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                                    Next
-                                    Dim solver As New TruncatedNewton
-                                    solver.Tolerance = etol
-                                    solver.MaxFunEvaluations = maxit_e
-                                    initval2 = solver.ComputeMin(AddressOf FunctionValue, AddressOf FunctionGradient, variables)
-                                    solver = Nothing
-                                Case OptimizationMethod.Simplex
-                                    Dim variables(2 * n + 1) As OptBoundVariable
-                                    For i = 0 To 2 * n + 1
-                                        variables(i) = New OptBoundVariable("x" & CStr(i + 1), initval2(i), False, lconstr2(i), uconstr2(i))
-                                    Next
-                                    Dim solver As New Simplex
-                                    solver.Tolerance = etol
-                                    solver.MaxFunEvaluations = maxit_e
-                                    initval2 = solver.ComputeMin(AddressOf FunctionValue, variables)
-                                    solver = Nothing
-                                Case OptimizationMethod.IPOPT
-                                    Using problem As New Ipopt(initval2.Length, lconstr2, uconstr2, n + 1, glow, gup, (n + 1) * 2, 0, _
-                                            AddressOf eval_f, AddressOf eval_g, _
-                                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
-                                        problem.AddOption("tol", etol)
-                                        problem.AddOption("max_iter", maxit_e)
-                                        problem.AddOption("mu_strategy", "adaptive")
-                                        'problem.AddOption("mehrotra_algorithm", "yes")
-                                        problem.AddOption("hessian_approximation", "limited-memory")
-                                        'problem.SetIntermediateCallback(AddressOf intermediate)
-                                        'solve the problem 
-                                        status = problem.SolveProblem(initval2, obj, g, Nothing, Nothing, Nothing)
-                                    End Using
-                                Case OptimizationMethod.DifferentialEvolution, OptimizationMethod.GradientDescent, OptimizationMethod.LocalUnimodalSampling,
-                                        OptimizationMethod.ManyOptimizingLiaisons, OptimizationMethod.Mesh, OptimizationMethod.ParticleSwarm, OptimizationMethod.ParticleSwarmOptimization
+                        'check if maximum iterations exceeded.
+                        If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
+                            'retry with NL PT flash.
+                            WriteDebugInfo("PT Flash [GM]: Maximum iterations exceeded. Recalculating with Nested-Loops PT-Flash...")
+                            result = _nl3p.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
+                            Return result
+                        End If
 
-                                    SwarmOps.Globals.Random = New RandomOps.MersenneTwister()
+                        FunctionValue(initval2)
 
-                                    Dim sproblem As New GibbsProblem(Me) With {._Dim = initval2.Length, ._LB = lconstr2, ._UB = uconstr2, ._INIT = initval2, ._Name = "Gibbs3P"}
-                                    sproblem.MaxIterations = maxit_e * initval2.Length * 10
-                                    sproblem.MinIterations = maxit_e * 10
-                                    sproblem.Tolerance = 1.0E-20
-                                    Dim opt As SwarmOps.Optimizer = GetSolver(Solver)
-                                    opt.Problem = sproblem
-                                    opt.RequireFeasible = True
-                                    Dim sresult = opt.Optimize(opt.DefaultParameters)
+                        'order liquid phases by mixture NBP
+                        Dim VNBP = PP.RET_VTB()
+                        Dim nbp1 As Double = 0
+                        Dim nbp2 As Double = 0
 
-                                    If Not sresult.Feasible Or Not CheckSolution() Then Throw New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+                        For i = 0 To n
+                            nbp1 += Vx1(i) * VNBP(i)
+                            nbp2 += Vx2(i) * VNBP(i)
+                        Next
 
-                                    initval2 = sresult.Parameters
-
-                            End Select
-
-                            For i = 0 To initval2.Length - 1
-                                If Double.IsNaN(initval2(i)) Then initval2(i) = 0.0#
-                            Next
-
-                            'check if maximum iterations exceeded.
-                            If status = IpoptReturnCode.Maximum_Iterations_Exceeded Then
-                                'retry with NL PT flash.
-                                WriteDebugInfo("PT Flash [GM]: Maximum iterations exceeded. Recalculating with Nested-Loops PT-Flash...")
-                                result = _nl3p.Flash_PT(Vz, P, T, PP, ReuseKI, PrevKi)
-                                Return result
-                            End If
-
-                            FunctionValue(initval2)
-
-                            'order liquid phases by mixture NBP
-                            Dim VNBP = PP.RET_VTB()
-                            Dim nbp1 As Double = 0
-                            Dim nbp2 As Double = 0
-
-                            For i = 0 To n
-                                nbp1 += Vx1(i) * VNBP(i)
-                                nbp2 += Vx2(i) * VNBP(i)
-                            Next
-
-                            If nbp1 >= nbp2 Then
-                                result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, 0.0#, PP.RET_NullVector}
-                            Else
-                                result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}
-                            End If
-
+                        If nbp1 >= nbp2 Then
+                            result = New Object() {L1 / F, V / F, Vx1, Vy, ecount, L2 / F, Vx2, 0.0#, PP.RET_NullVector}
+                        Else
+                            result = New Object() {L2 / F, V / F, Vx2, Vy, ecount, L1 / F, Vx1, 0.0#, PP.RET_NullVector}
                         End If
 
                     End If
@@ -1652,7 +1639,7 @@ alt:
 
             Dim n = parameters.Length / 2 - 1
 
-            If _gf.threephase Then
+            If _gf.ThreePhase Then
                 Dim constraints(n) As Double
                 _gf.eval_g(n + 1, parameters, False, n + 1, constraints)
                 Dim valid As Boolean = True

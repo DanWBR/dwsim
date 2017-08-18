@@ -3070,8 +3070,10 @@ Public Class FormFlowsheet
 
         If FormLog.VisibleState <> DockState.Unknown Then
             FormLog.VisibleState = DockState.Unknown
+            FormLog.Hide()
         Else
             FormLog.VisibleState = DockState.DockBottom
+            FormLog.Show()
         End If
 
         tsbLogMessage.BackColor = If(FormLog.VisibleState <> DockState.Unknown, Color.FromKnownColor(KnownColor.GradientActiveCaption), Color.FromKnownColor(KnownColor.Control))

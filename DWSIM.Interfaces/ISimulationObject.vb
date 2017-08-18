@@ -148,6 +148,10 @@
 
     Sub DeCalculate(Optional ByVal args As Object = Nothing)
 
+    Sub Solve()
+
+    Sub PerformPostCalcValidation()
+
     Property PropertyPackage As IPropertyPackage
 
     Sub SetFlowsheet(fobj As Object)

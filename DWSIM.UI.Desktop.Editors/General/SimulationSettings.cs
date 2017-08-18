@@ -11,6 +11,7 @@ using DWSIM.Thermodynamics.BaseClasses;
 using DWSIM.Thermodynamics.PropertyPackages;
 using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -83,6 +84,26 @@ namespace DWSIM.UI.Desktop.Editors
             btnEdit.Enabled = !new string[] { "SI", "CGS", "ENG" }.Contains(uselector.SelectedValue.ToString());
 
             var nformats = new []{"F", "G","G2","G4","G6","G8","G10","N","N2","N4","N6","R","E","E1","E2","E3","E4","E6"};
+
+            s.CreateAndAddLabelRow(container, "Mass and Energy Balances");
+
+            s.CreateAndAddDropDownRow(container, "Flowsheet object mass balance check", new List<string>() { "Ignore", "Show Warning", "Throw Exception" }, (int)flowsheet.FlowsheetOptions.MassBalanceCheck, (sender, e) => {
+                flowsheet.FlowsheetOptions.MassBalanceCheck = (DWSIM.Interfaces.Enums.WarningType)sender.SelectedIndex;
+            });
+
+            s.CreateAndAddTextBoxRow(container, "G", "Mass balance relative tolerance", flowsheet.FlowsheetOptions.MassBalanceRelativeTolerance, (sender, e) => { 
+                if (sender.Text.IsValidDouble()) flowsheet.FlowsheetOptions.MassBalanceRelativeTolerance = sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddDropDownRow(container, "Flowsheet object energy balance check", new List<string>() { "Ignore", "Show Warning", "Throw Exception" }, (int)flowsheet.FlowsheetOptions.EnergyBalanceCheck, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.EnergyBalanceCheck = (DWSIM.Interfaces.Enums.WarningType)sender.SelectedIndex;
+            });
+
+            s.CreateAndAddTextBoxRow(container, "G", "Energy balance relative tolerance", flowsheet.FlowsheetOptions.EnergyBalanceRelativeTolerance, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) flowsheet.FlowsheetOptions.EnergyBalanceRelativeTolerance = sender.Text.ToDoubleFromCurrent();
+            });
 
             s.CreateAndAddLabelRow(container, "Number Formats");
 

@@ -5113,6 +5113,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O balanço de energia não está sendo obedecido..
+        '''</summary>
+        Friend Shared ReadOnly Property EnergyBalanceMessage() As String
+            Get
+                Return ResourceManager.GetString("EnergyBalanceMessage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to EnergyFlow.
         '''</summary>
         Friend Shared ReadOnly Property EnergyFlow() As String
@@ -8781,6 +8790,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property MassBalanceError() As String
             Get
                 Return ResourceManager.GetString("MassBalanceError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to O balanço de massa não está sendo obedecido..
+        '''</summary>
+        Friend Shared ReadOnly Property MassBalanceMessage() As String
+            Get
+                Return ResourceManager.GetString("MassBalanceMessage", resourceCulture)
             End Get
         End Property
         

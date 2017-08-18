@@ -332,6 +332,12 @@ Namespace Enums
         Constant
     End Enum
 
+    Public Enum WarningType
+        Ignore = 0
+        ShowWarning = 1
+        RaiseError = 2
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects
@@ -442,6 +448,7 @@ Namespace Enums.GraphicObjects
         NotCalculated
         Modified
     End Enum
+
 
 End Namespace
 

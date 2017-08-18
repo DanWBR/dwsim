@@ -134,7 +134,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim vx2est(nc), fcl(nc), fcv(nc) As Double
                     Dim m As Double = LBound(stresult(1), 1)
-                    Dim gl, gv, gli As Double
+                    Dim gl, gli As Double
 
                     If StabSearchSeverity = 2 Then
                         gli = 0
@@ -161,58 +161,45 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Next
                     End If
 
-                    fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                    fcv = PP.DW_CalcFugCoeff(vx2est, T, P, State.Vapor)
 
-                    gv = 0.0#
-                    gl = 0.0#
+                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+
+                    Dim maxl As Double = MathEx.Common.Max(vx2est)
+                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                    F = 1
+                    V = result(1)
+                    L2 = F * result(3)(imaxl)
+                    L1 = F - L2 - V
+
+                    If L1 < 0.0# Then
+                        L1 = Abs(L1)
+                        L2 = F - L1 - V
+                    End If
+
+                    If L2 < 0.0# Then
+                        V += L2
+                        L2 = Abs(L2)
+                    End If
+
                     For i = 0 To nc
-                        If vx2est(i) <> 0.0# Then gv += vx2est(i) * Log(fcv(i) * vx2est(i))
-                        If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
+                        If i <> imaxl Then
+                            vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
+                        Else
+                            vx1e(i) = Vz(i) * L2
+                        End If
                     Next
 
-                    If gl < gv Then 'test phase is liquid-like.
+                    Dim sumvx2 = 0.0#
+                    For i = 0 To nc
+                        sumvx2 += Abs(vx1e(i))
+                    Next
 
-                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+                    For i = 0 To nc
+                        vx1e(i) = Abs(vx1e(i)) / sumvx2
+                    Next
 
-                        Dim maxl As Double = MathEx.Common.Max(vx2est)
-                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                        F = 1
-                        V = result(1)
-                        L2 = F * result(3)(imaxl)
-                        L1 = F - L2 - V
-
-                        If L1 < 0.0# Then
-                            L1 = Abs(L1)
-                            L2 = F - L1 - V
-                        End If
-
-                        If L2 < 0.0# Then
-                            V += L2
-                            L2 = Abs(L2)
-                        End If
-
-                        For i = 0 To nc
-                            If i <> imaxl Then
-                                vx1e(i) = Vz(i) - V * result(3)(i) - L2 * vx2est(i)
-                            Else
-                                vx1e(i) = Vz(i) * L2
-                            End If
-                        Next
-
-                        Dim sumvx2 = 0.0#
-                        For i = 0 To nc
-                            sumvx2 += Abs(vx1e(i))
-                        Next
-
-                        For i = 0 To nc
-                            vx1e(i) = Abs(vx1e(i)) / sumvx2
-                        Next
-
-                        result = Flash_PT_3P(Vz, V, L1, L2, result(3), vx1e, vx2est, P, T, PP)
-
-                    End If
+                    result = Flash_PT_3P(Vz, V, L1, L2, result(3), vx1e, vx2est, P, T, PP)
 
                 End If
 
@@ -279,7 +266,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim vx2est(nc), fcl(nc), fcv(nc) As Double
                     Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gv, gli As Double
+                    Dim gl, gli As Double
 
                     If StabSearchSeverity = 2 Then
                         gli = 0
@@ -306,50 +293,37 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Next
                     End If
 
-                    fcl = PP.DW_CalcFugCoeff(vx2est, result(4), P, State.Liquid)
-                    fcv = PP.DW_CalcFugCoeff(vx2est, result(4), P, State.Vapor)
 
-                    gv = 0.0#
-                    gl = 0.0#
+                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+
+                    Dim maxl As Double = MathEx.Common.Max(vx2est)
+                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                    F = 1
+                    V = result(1)
+                    L1 = (F * Vz(imaxl) - result(3)(imaxl) - F * vx2est(imaxl) + V * vx2est(imaxl)) / (result(2)(imaxl) - vx2est(imaxl))
+                    L1 = L1 * (1 - result(2)(imaxl))
+                    L2 = F - L1 - V
+
+                    If L2 < 0.0# Then
+                        L2 = Abs(L2)
+                        L1 = F - L2 - V
+                    End If
+
                     For i = 0 To nc
-                        If vx2est(i) <> 0.0# Then gv += vx2est(i) * Log(fcv(i) * vx2est(i))
-                        If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
+                        vx1e(i) = (result(2)(i) * L1 - vx2est(i) * L2) / (L1 - L2)
                     Next
 
-                    If Abs((gl - gv) / gl) > 0.05 Then 'liquid-like
+                    Dim sumvx2 = 0.0#
+                    For i = 0 To nc
+                        sumvx2 += Abs(vx1e(i))
+                    Next
 
-                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+                    For i = 0 To nc
+                        vx1e(i) = Abs(vx1e(i)) / sumvx2
+                    Next
 
-                        Dim maxl As Double = MathEx.Common.Max(vx2est)
-                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                        F = 1
-                        V = result(1)
-                        L1 = (F * Vz(imaxl) - result(3)(imaxl) - F * vx2est(imaxl) + V * vx2est(imaxl)) / (result(2)(imaxl) - vx2est(imaxl))
-                        L1 = L1 * (1 - result(2)(imaxl))
-                        L2 = F - L1 - V
-
-                        If L2 < 0.0# Then
-                            L2 = Abs(L2)
-                            L1 = F - L2 - V
-                        End If
-
-                        For i = 0 To nc
-                            vx1e(i) = (result(2)(i) * L1 - vx2est(i) * L2) / (L1 - L2)
-                        Next
-
-                        Dim sumvx2 = 0.0#
-                        For i = 0 To nc
-                            sumvx2 += Abs(vx1e(i))
-                        Next
-
-                        For i = 0 To nc
-                            vx1e(i) = Abs(vx1e(i)) / sumvx2
-                        Next
-
-                        result = Flash_PH_3P(Vz, result(1), L1, L2, result(3), vx1e, vx2est, P, H, result(4), PP)
-
-                    End If
+                    result = Flash_PH_3P(Vz, result(1), L1, L2, result(3), vx1e, vx2est, P, H, result(4), PP)
 
                 End If
 
@@ -416,7 +390,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim vx2est(nc), fcl(nc), fcv(nc) As Double
                     Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gv, gli As Double
+                    Dim gl, gli As Double
 
                     If StabSearchSeverity = 2 Then
                         gli = 0
@@ -443,50 +417,37 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Next
                     End If
 
-                    fcl = PP.DW_CalcFugCoeff(vx2est, result(4), P, State.Liquid)
-                    fcv = PP.DW_CalcFugCoeff(vx2est, result(4), P, State.Vapor)
 
-                    gv = 0.0#
-                    gl = 0.0#
-                    For i = 0 To nc
-                        If vx2est(i) <> 0.0# Then gv += vx2est(i) * Log(fcv(i) * vx2est(i))
-                        If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
+                    Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+
+                    Dim maxl As Double = MathEx.Common.Max(vx2est)
+                    Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
+
+                    F = 1
+                    V = result(1)
+                    L1 = (F * Vz(imaxl) - result(3)(imaxl) - F * vx2est(imaxl) + V * vx2est(imaxl)) / (result(2)(imaxl) - vx2est(imaxl))
+                    L1 = L1 * (1 - result(2)(imaxl))
+                    L2 = F - L1 - V
+
+                    If L2 < 0 Then
+                        L2 = Abs(L2)
+                        L1 = F - L2 - V
+                    End If
+
+                    For i = 0 To n
+                        vx1e(i) = (result(2)(i) * L1 - vx2est(i) * L2) / (L1 - L2)
                     Next
 
-                    If Abs((gl - gv) / gl) > 0.05 Then 'liquid-like
+                    Dim sumvx2 = 0.0#
+                    For i = 0 To nc
+                        sumvx2 += Abs(vx1e(i))
+                    Next
 
-                        Dim vx1e(Vz.Length - 1), vx2e(Vz.Length - 1) As Double
+                    For i = 0 To nc
+                        vx1e(i) = Abs(vx1e(i)) / sumvx2
+                    Next
 
-                        Dim maxl As Double = MathEx.Common.Max(vx2est)
-                        Dim imaxl As Integer = Array.IndexOf(vx2est, maxl)
-
-                        F = 1
-                        V = result(1)
-                        L1 = (F * Vz(imaxl) - result(3)(imaxl) - F * vx2est(imaxl) + V * vx2est(imaxl)) / (result(2)(imaxl) - vx2est(imaxl))
-                        L1 = L1 * (1 - result(2)(imaxl))
-                        L2 = F - L1 - V
-
-                        If L2 < 0 Then
-                            L2 = Abs(L2)
-                            L1 = F - L2 - V
-                        End If
-
-                        For i = 0 To n
-                            vx1e(i) = (result(2)(i) * L1 - vx2est(i) * L2) / (L1 - L2)
-                        Next
-
-                        Dim sumvx2 = 0.0#
-                        For i = 0 To nc
-                            sumvx2 += Abs(vx1e(i))
-                        Next
-
-                        For i = 0 To nc
-                            vx1e(i) = Abs(vx1e(i)) / sumvx2
-                        Next
-
-                        result = Flash_PS_3P(Vz, result(1), L1, L2, result(3), vx1e, vx2est, P, S, result(4), PP)
-
-                    End If
+                    result = Flash_PS_3P(Vz, result(1), L1, L2, result(3), vx1e, vx2est, P, S, result(4), PP)
 
                 End If
 
@@ -555,7 +516,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim vx2est(nc), fcl(nc), fcv(nc) As Double
                     Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gv, gli As Double
+                    Dim gl, gli As Double
 
                     If StabSearchSeverity = 2 Then
                         gli = 0
@@ -582,30 +543,16 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Next
                     End If
 
-                    fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                    fcv = PP.DW_CalcFugCoeff(vx2est, T, P, State.Vapor)
+                    'do a simple LLE calculation to get initial estimates.
+                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                    Dim resultL As Object = slle.Flash_PT(Vz, P, T * 0.9, PP)
 
-                    gv = 0.0#
-                    gl = 0.0#
-                    For i = 0 To nc
-                        If vx2est(i) <> 0.0# Then gv += vx2est(i) * Log(fcv(i) * vx2est(i))
-                        If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                    Next
+                    L1 = resultL(0)
+                    L2 = resultL(5)
+                    Vx1 = resultL(2)
+                    Vx2 = resultL(6)
 
-                    If gl < gv Then 'liquid-like
-
-                        'do a simple LLE calculation to get initial estimates.
-                        Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
-                        Dim resultL As Object = slle.Flash_PT(Vz, P, T * 0.9, PP)
-
-                        L1 = resultL(0)
-                        L2 = resultL(5)
-                        Vx1 = resultL(2)
-                        Vx2 = resultL(6)
-
-                        result = Flash_TV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, T, V, result(4), PP)
-
-                    End If
+                    result = Flash_TV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, T, V, result(4), PP)
 
                 End If
 
@@ -674,7 +621,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                     Dim vx2est(nc), fcl(nc), fcv(nc) As Double
                     Dim m As Double = UBound(stresult(1), 1)
-                    Dim gl, gv, gli As Double
+                    Dim gl, gli As Double
 
                     If StabSearchSeverity = 2 Then
                         gli = 0
@@ -701,30 +648,17 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                         Next
                     End If
 
-                    fcl = PP.DW_CalcFugCoeff(vx2est, T, P, State.Liquid)
-                    fcv = PP.DW_CalcFugCoeff(vx2est, T, P, State.Vapor)
 
-                    gv = 0.0#
-                    gl = 0.0#
-                    For i = 0 To nc
-                        If vx2est(i) <> 0.0# Then gv += vx2est(i) * Log(fcv(i) * vx2est(i))
-                        If vx2est(i) <> 0.0# Then gl += vx2est(i) * Log(fcl(i) * vx2est(i))
-                    Next
+                    'do a simple LLE calculation to get initial estimates.
+                    Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
+                    Dim resultL As Object = slle.Flash_PT(Vz, P, T * 0.9, PP)
 
-                    If gl < gv Then 'liquid-like
+                    L1 = resultL(0)
+                    L2 = resultL(5)
+                    Vx1 = resultL(2)
+                    Vx2 = resultL(6)
 
-                        'do a simple LLE calculation to get initial estimates.
-                        Dim slle As New SimpleLLE() With {.InitialEstimatesForPhase1 = result(2), .InitialEstimatesForPhase2 = vx2est, .UseInitialEstimatesForPhase1 = True, .UseInitialEstimatesForPhase2 = True}
-                        Dim resultL As Object = slle.Flash_PT(Vz, P, T * 0.9, PP)
-
-                        L1 = resultL(0)
-                        L2 = resultL(5)
-                        Vx1 = resultL(2)
-                        Vx2 = resultL(6)
-
-                        result = Flash_PV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, P, V, T, PP)
-
-                    End If
+                    result = Flash_PV_3P(Vz, result(1), result(0) * L1, result(0) * L2, result(3), Vx1, Vx2, P, V, T, PP)
 
                 End If
 

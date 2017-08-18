@@ -333,8 +333,14 @@ Public Class SpreadsheetForm
         For Each r As DataGridViewRow In Me.DataGridView1.Rows
             j = 0
             For Each ce As DataGridViewCell In r.Cells
-                dt1(i, j) = ce.Value
-                dt2(i, j) = ce.Tag
+                Try
+                    dt1(i, j) = ce.Value
+                Catch ex As Exception
+                End Try
+                Try
+                    dt2(i, j) = ce.Tag
+                Catch ex As Exception
+                End Try
                 j = j + 1
             Next
             i = i + 1
@@ -349,13 +355,15 @@ Public Class SpreadsheetForm
         Dim text As String = ""
         For i As Integer = 0 To dt1.GetUpperBound(0)
             For j As Integer = 0 To dt1.GetUpperBound(1)
-                If Double.TryParse(dt1(i, j), Globalization.NumberStyles.Any, ci, New Double) Then
-                    text += Double.Parse(dt1(i, j), ci).ToString & ";"
-                Else
-                    If dt1(i, j) IsNot Nothing Then
-                        text += dt1(i, j).ToString() & ";"
+                If dt1.GetLength(0) - 1 >= i AndAlso dt1.GetLength(1) - 1 >= j Then
+                    If Double.TryParse(dt1(i, j), Globalization.NumberStyles.Any, ci, New Double) Then
+                        text += Double.Parse(dt1(i, j), ci).ToString & ";"
                     Else
-                        text += ";"
+                        If dt1(i, j) IsNot Nothing Then
+                            text += dt1(i, j).ToString() & ";"
+                        Else
+                            text += ";"
+                        End If
                     End If
                 End If
             Next
@@ -374,15 +382,17 @@ Public Class SpreadsheetForm
         Dim text As String = ""
         For i As Integer = 0 To dt2.GetUpperBound(0)
             For j As Integer = 0 To dt1.GetUpperBound(1)
-                If Not dt2(i, j) Is Nothing Then
-                    Try
-                        Dim xel As New XElement("dummy", DirectCast(dt2(i, j), Spreadsheet.SpreadsheetCellParameters).SaveData.ToArray)
-                        text += xel.ToString + ";"
-                    Catch ex As Exception
+                If dt2.GetLength(0) - 1 >= i AndAlso dt2.GetLength(1) - 1 >= j Then
+                    If Not dt2(i, j) Is Nothing Then
+                        Try
+                            Dim xel As New XElement("dummy", DirectCast(dt2(i, j), Spreadsheet.SpreadsheetCellParameters).SaveData.ToArray)
+                            text += xel.ToString + ";"
+                        Catch ex As Exception
+                            text += " ;"
+                        End Try
+                    Else
                         text += " ;"
-                    End Try
-                Else
-                    text += " ;"
+                    End If
                 End If
             Next
             text = text.TrimEnd(";") + "|"

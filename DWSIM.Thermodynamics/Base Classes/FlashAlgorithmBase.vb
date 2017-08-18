@@ -48,7 +48,10 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
         Public Property StabSearchCompIDs As String()
             Get
-                Return FlashSettings(ThreePhaseFlashStabTestCompIds).ToArray(System.Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
+                Dim list1 As String() = FlashSettings(ThreePhaseFlashStabTestCompIds).ToArray(System.Globalization.CultureInfo.CurrentCulture, Type.GetType("System.String"))
+                Dim list2 = list1.ToList()
+                list2.Remove("")
+                Return list2.ToArray
             End Get
             Set(value As String())
                 Dim comps As String = ""
