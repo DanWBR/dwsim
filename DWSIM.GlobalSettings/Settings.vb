@@ -29,11 +29,18 @@ Public Class Settings
         WinForms = 2
     End Enum
 
+    Public Enum SkiaCanvasRenderer
+        CPU = 0
+        OpenGL = 1
+    End Enum
+
     Public Shared Property WindowsRenderer As WindowsPlatformRenderer = WindowsPlatformRenderer.WinForms
 
     Public Shared Property LinuxRenderer As LinuxPlatformRenderer = LinuxPlatformRenderer.Gtk2
 
     Public Shared Property MacOSRenderer As MacOSPlatformRenderer = MacOSPlatformRenderer.MonoMac
+
+    Public Shared Property FlowsheetRenderer As SkiaCanvasRenderer = SkiaCanvasRenderer.CPU
 
     Public Shared Property AppTaskScheduler As TaskScheduler = Tasks.TaskScheduler.Default
     Public Shared Property gpu As Cudafy.Host.GPGPU
@@ -380,8 +387,7 @@ Public Class Settings
         WindowsRenderer = [Enum].Parse(WindowsRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Windows", "WPF"))
         LinuxRenderer = [Enum].Parse(LinuxRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Linux", "Gtk2"))
         MacOSRenderer = [Enum].Parse(MacOSRenderer.GetType(), source.Configs("PlatformRenderers").GetString("Mac", "MonoMac"))
-
-        'source.Save()
+        FlowsheetRenderer = [Enum].Parse(FlowsheetRenderer.GetType(), source.Configs("PlatformRenderers").GetString("FlowsheetRenderer", "CPU"))
 
     End Sub
 
@@ -491,6 +497,7 @@ Public Class Settings
         source.Configs("PlatformRenderers").Set("Windows", WindowsRenderer)
         source.Configs("PlatformRenderers").Set("Linux", LinuxRenderer)
         source.Configs("PlatformRenderers").Set("Mac", MacOSRenderer)
+        source.Configs("PlatformRenderers").Set("FlowsheetRenderer", FlowsheetRenderer)
 
         source.Save()
 

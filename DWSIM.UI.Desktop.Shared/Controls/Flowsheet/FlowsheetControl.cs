@@ -21,6 +21,16 @@ namespace DWSIM.UI.Controls
             set { Handler.FlowsheetObject = value; }
         }
 
+        // interface to the platform implementations
+
+        public interface IFlowsheetSurface : Eto.Forms.Control.IHandler
+        {
+            DWSIM.Drawing.SkiaSharp.GraphicsSurface FlowsheetSurface { get; set; }
+
+            DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject { get; set; }
+
+        }
+
         public void AddObject(string objtname, int x, int y)
         {
 
@@ -163,17 +173,6 @@ namespace DWSIM.UI.Controls
             Invalidate();
 
         }
-
-        // interface to the platform implementations
-        public interface IFlowsheetSurface : Eto.Forms.Control.IHandler
-        {
-            DWSIM.Drawing.SkiaSharp.GraphicsSurface FlowsheetSurface { get; set; }
-
-            DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject { get; set; }
-
-        }
-
-
     }
 }
 

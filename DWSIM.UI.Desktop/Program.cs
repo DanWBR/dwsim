@@ -15,6 +15,10 @@ namespace DWSIM.UI.Desktop
         public static void Main(string[] args)
         {
 
+            //initialize OpenTK
+
+            OpenTK.Toolkit.Init();
+
             // set global settings
 
             Settings.CultureInfo = "en";
@@ -35,6 +39,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
                             platform = new Eto.Direct2D.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
                             break;
@@ -50,6 +55,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.WPF.StyleSetter.SetStyles();
                             platform = new Eto.Wpf.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WPF.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WPF.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Wpf.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WPF.CodeEditorControlHandler());
                             break;

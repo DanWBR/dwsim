@@ -62,6 +62,12 @@ namespace DWSIM.UI.Forms.Forms
             tab1.CreateAndAddDescriptionRow("Changes to this setting will have effect upon application restart.");
 
             tab1.CreateAndAddLabelRow("Flowsheet Designer");
+
+            tab1.CreateAndAddDropDownRow("Flowsheet Renderer", new List<string>() {"CPU", "OpenGL" }, (int)Settings.FlowsheetRenderer, (sender, e) =>
+            {
+                Settings.FlowsheetRenderer = (Settings.SkiaCanvasRenderer)sender.SelectedIndex;
+            });
+
             tab1.CreateAndAddCheckBoxRow("EnableAntiAliasing".Localize(prefix), Settings.DrawingAntiAlias, (CheckBox sender, EventArgs obj) => { Settings.DrawingAntiAlias = sender.Checked.Value; });
             tab1.CreateAndAddDescriptionRow("Sets anti-aliasing (edge smoothing) for the Flowsheet Designer.");
 

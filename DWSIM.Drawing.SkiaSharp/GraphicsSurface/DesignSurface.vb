@@ -54,7 +54,7 @@ Public Class GraphicsSurface
         EqualizeVertical
     End Enum
 
-    Public Property BackgroundColor As SKColor = SKColors.Black
+    Public Property BackgroundColor As SKColor = SKColors.White
 
     Public Property ResizingMode As Boolean = False
 

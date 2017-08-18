@@ -65,6 +65,14 @@
       <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.GLControl.1.1.2349.61993\lib\NET40\OpenTK.GLControl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SkiaSharp, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.1.58.0\lib\net45\SkiaSharp.dll</HintPath>
       <Private>True</Private>
@@ -79,6 +87,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -90,13 +99,15 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeEditor\CodeEditor.cs" />
+    <Compile Include="SkiaSharp\CanvasControl_OpenGL.cs" />
     <Compile Include="Styling.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SkiaSharp\SKSurface.cs" />
+    <Compile Include="SkiaSharp\CanvasControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -117,6 +128,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -144,6 +156,10 @@
     <ProjectReference Include="..\DWSIM.UI.Desktop.Forms\DWSIM.UI.Desktop.Forms.csproj">
       <Project>{766c669b-91bd-4c62-a2af-d3fb9c939715}</Project>
       <Name>DWSIM.UI.Desktop.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.WinForms\DWSIM.UI.Desktop.WinForms.csproj">
+      <Project>{a4b56ff1-995e-4288-8801-7f086668c4a2}</Project>
+      <Name>DWSIM.UI.Desktop.WinForms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -23,7 +23,8 @@ namespace DWSIM.UI.Forms
 
         public Desktop.Shared.Flowsheet FlowsheetObject;
         public DWSIM.UI.Desktop.Editors.Spreadsheet Spreadsheet;
-        private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl;
+        private DWSIM.UI.Controls.FlowsheetSurfaceControl FlowsheetControl_CPU;
+        private DWSIM.UI.Controls.FlowsheetSurfaceControl_OpenGL FlowsheetControl_OpenGL;
 
         private TableLayout SpreadsheetControl;
 
@@ -67,20 +68,14 @@ namespace DWSIM.UI.Forms
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
-            FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
-
-            FlowsheetControl.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
-
-            FlowsheetControl.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
-
-            FlowsheetObject.FlowsheetControl = FlowsheetControl;
-
-            FlowsheetControl.FlowsheetObject = FlowsheetObject;
-
-            FlowsheetControl.KeyDown += (sender, e) =>
+            if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU)
             {
-                if (e.Key == Keys.Delete) DeleteObject();
-            };
+                FlowsheetControl_CPU = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
+            }
+            else
+            {
+                FlowsheetControl_OpenGL = new DWSIM.UI.Controls.FlowsheetSurfaceControl_OpenGL();
+            }
 
             ClientSize = new Size(1024, 768);
 
@@ -96,7 +91,8 @@ namespace DWSIM.UI.Forms
             var btnUtilities_BinaryEnvelope = new ButtonMenuItem { Text = "Binary Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
             var btnUtilities_PhaseEnvelope = new ButtonMenuItem { Text = "Phase Envelope", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-swiss_army_knife.png")) };
 
-            btnUtilities_TrueCriticalPoint.Click += (sender, e) => {
+            btnUtilities_TrueCriticalPoint.Click += (sender, e) =>
+            {
                 var tcp = new Desktop.Editors.Utilities.TrueCriticalPointView(FlowsheetObject);
                 var form = Common.GetDefaultEditorForm("True Critical Point", 500, 250, tcp);
                 form.Show();
@@ -139,58 +135,119 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            btnInsertText.Click += (sender, e) =>
-            {
-                FlowsheetControl.AddObject("Text", 50, 50);
-            };
-
-            btnInsertTable.Click += (sender, e) =>
-            {
-                FlowsheetControl.AddObject("Property Table", 50, 50);
-            };
-
-            btnInsertMasterTable.Click += (sender, e) =>
-            {
-                FlowsheetControl.AddObject("Master Property Table", 50, 50);
-            };
-
-            btnInsertSpreadsheetTable.Click += (sender, e) =>
-            {
-                FlowsheetControl.AddObject("Spreadsheet Table", 50, 50);
-            };
-
-            FlowsheetControl.MouseDoubleClick += (sender, e) =>
-            {
-                if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
-                var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                if (e.Modifiers == Keys.Shift)
+            if (FlowsheetControl_CPU != null) {
+                FlowsheetControl_CPU.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
+                FlowsheetControl_CPU.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
+                FlowsheetObject.FlowsheetControl = FlowsheetControl_CPU;
+                FlowsheetControl_CPU.FlowsheetObject = FlowsheetObject;
+                FlowsheetControl_CPU.KeyDown += (sender, e) =>
                 {
-                    if (obj == null) return;
-                    if (obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
-                        obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
+                    if (e.Key == Keys.Delete) DeleteObject();
+                };
+                btnInsertText.Click += (sender, e) =>
+                {
+                    FlowsheetControl_CPU.AddObject("Text", 50, 50);
+                };
+                btnInsertTable.Click += (sender, e) =>
+                {
+                    FlowsheetControl_CPU.AddObject("Property Table", 50, 50);
+                };
+                btnInsertMasterTable.Click += (sender, e) =>
+                {
+                    FlowsheetControl_CPU.AddObject("Master Property Table", 50, 50);
+                };
+                btnInsertSpreadsheetTable.Click += (sender, e) =>
+                {
+                    FlowsheetControl_CPU.AddObject("Spreadsheet Table", 50, 50);
+                };
+                FlowsheetControl_CPU.MouseDoubleClick += (sender, e) =>
+                {
+                    if (Application.Instance.Platform.IsMac) FlowsheetControl_CPU.FlowsheetSurface.InputRelease();
+                    var obj = FlowsheetControl_CPU.FlowsheetSurface.SelectedObject;
+                    if (e.Modifiers == Keys.Shift)
                     {
-                        return;
+                        if (obj == null) return;
+                        if (obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
+                            obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
+                        {
+                            return;
+                        }
+                        EditConnections();
                     }
-                    EditConnections();
-                }
-                else if (e.Modifiers == Keys.Alt)
+                    else if (e.Modifiers == Keys.Alt)
+                    {
+                        if (obj == null) return;
+                        ViewSelectedObjectResults();
+                    }
+                    else if (e.Modifiers == Keys.Control)
+                    {
+                        var surface = FlowsheetControl_CPU.FlowsheetSurface;
+                        surface.ZoomAll((int)FlowsheetControl_CPU.Width, (int)FlowsheetControl_CPU.Height);
+                        FlowsheetControl_CPU.Invalidate();
+                    }
+                    else
+                    {
+                        if (obj == null) return;
+                        EditSelectedObjectProperties();
+                    }
+                };
+            }else{
+                FlowsheetControl_OpenGL.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
+                FlowsheetControl_OpenGL.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
+                FlowsheetObject.FlowsheetControl = FlowsheetControl_OpenGL;
+                FlowsheetControl_OpenGL.FlowsheetObject = FlowsheetObject;
+                FlowsheetControl_OpenGL.KeyDown += (sender, e) =>
                 {
-                    if (obj == null) return;
-                    ViewSelectedObjectResults();
-                }
-                else if (e.Modifiers == Keys.Control)
+                    if (e.Key == Keys.Delete) DeleteObject();
+                };
+                btnInsertText.Click += (sender, e) =>
                 {
-                    var surface = FlowsheetControl.FlowsheetSurface;
-                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
-                    FlowsheetControl.Invalidate();
-                }
-                else
+                    FlowsheetControl_OpenGL.AddObject("Text", 50, 50);
+                };
+                btnInsertTable.Click += (sender, e) =>
                 {
-                    if (obj == null) return;
-                    EditSelectedObjectProperties();
-                }
-
-            };
+                    FlowsheetControl_OpenGL.AddObject("Property Table", 50, 50);
+                };
+                btnInsertMasterTable.Click += (sender, e) =>
+                {
+                    FlowsheetControl_OpenGL.AddObject("Master Property Table", 50, 50);
+                };
+                btnInsertSpreadsheetTable.Click += (sender, e) =>
+                {
+                    FlowsheetControl_OpenGL.AddObject("Spreadsheet Table", 50, 50);
+                };
+                FlowsheetControl_OpenGL.MouseDoubleClick += (sender, e) =>
+                {
+                    if (Application.Instance.Platform.IsMac) FlowsheetControl_OpenGL.FlowsheetSurface.InputRelease();
+                    var obj = FlowsheetControl_OpenGL.FlowsheetSurface.SelectedObject;
+                    if (e.Modifiers == Keys.Shift)
+                    {
+                        if (obj == null) return;
+                        if (obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream ||
+                            obj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.EnergyStream)
+                        {
+                            return;
+                        }
+                        EditConnections();
+                    }
+                    else if (e.Modifiers == Keys.Alt)
+                    {
+                        if (obj == null) return;
+                        ViewSelectedObjectResults();
+                    }
+                    else if (e.Modifiers == Keys.Control)
+                    {
+                        var surface = FlowsheetControl_OpenGL.FlowsheetSurface;
+                        surface.ZoomAll((int)FlowsheetControl_OpenGL.Width, (int)FlowsheetControl_OpenGL.Height);
+                        FlowsheetControl_OpenGL.Invalidate();
+                    }
+                    else
+                    {
+                        if (obj == null) return;
+                        EditSelectedObjectProperties();
+                    }
+                };
+            }
 
             var chkSimSolver = new CheckMenuItem { Text = "Simultaneous Adjust Solver Active" };
             chkSimSolver.Checked = FlowsheetObject.Options.SimultaneousAdjustSolverEnabled;
@@ -265,8 +322,14 @@ namespace DWSIM.UI.Forms
 
             btnObjects.Click += (sender, e) =>
             {
-                var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl.Height };
-                insform.ShowModal(this);
+                if (FlowsheetControl_CPU != null) {
+                    var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl_CPU.Height };
+                    insform.ShowModal(this);
+                }
+                else {
+                    var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl_OpenGL.Height };
+                    insform.ShowModal(this);
+                }
             };
 
             btnComps.Click += (sender, e) =>
@@ -385,7 +448,14 @@ namespace DWSIM.UI.Forms
 
             var tabholder = new TabControl();
             TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
-            tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
+            if (FlowsheetControl_CPU != null)
+            {
+                tabholder.Pages.Add(new TabPage { Content = FlowsheetControl_CPU, Text = "Flowsheet" });
+            }
+            else
+            {
+                tabholder.Pages.Add(new TabPage { Content = FlowsheetControl_OpenGL, Text = "Flowsheet" });
+            }
             tabholder.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
             tabholder.Pages.Add(TabPageSpreadsheet);
             tabholder.Pages.Add(new TabPage { Content = ScriptListControl, Text = "Scripts" });
@@ -403,48 +473,97 @@ namespace DWSIM.UI.Forms
             selctxmenu = new ContextMenu();
             deselctxmenu = new ContextMenu();
 
-            FlowsheetControl.MouseUp += (sender, e) =>
+            if (FlowsheetControl_CPU != null)
             {
-                if (e.Buttons == MouseButtons.Alternate)
+                FlowsheetControl_CPU.MouseUp += (sender, e) =>
                 {
-                    if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
-                    if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
+                    if (e.Buttons == MouseButtons.Alternate)
                     {
-                        var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                        switch (obj.ObjectType)
+                        if (Application.Instance.Platform.IsMac) FlowsheetControl_CPU.FlowsheetSurface.InputRelease();
+                        if (FlowsheetControl_CPU.FlowsheetSurface.SelectedObject != null)
                         {
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
-                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
-                                selctxmenu.Items.Clear();
-                                var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
-                                selctxmenu.Items.Add(itemtype);
-                                var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
-                                delitem.Click += (sender2, e2) =>
-                                {
-                                    if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                            var obj = FlowsheetControl_CPU.FlowsheetSurface.SelectedObject;
+                            switch (obj.ObjectType)
+                            {
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
+                                    selctxmenu.Items.Clear();
+                                    var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
+                                    selctxmenu.Items.Add(itemtype);
+                                    var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+                                    delitem.Click += (sender2, e2) =>
                                     {
-                                        FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
-                                    }
-                                };
-                                selctxmenu.Items.Add(delitem);
-                                break;
-                            default:
-                                SetupSelectedContextMenu();
-                                break;
-                        }
+                                        if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                                        {
+                                            FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
+                                        }
+                                    };
+                                    selctxmenu.Items.Add(delitem);
+                                    break;
+                                default:
+                                    SetupSelectedContextMenu();
+                                    break;
+                            }
 
-                        selctxmenu.Show(FlowsheetControl);
+                            selctxmenu.Show(FlowsheetControl_CPU);
+                        }
+                        else
+                        {
+                            SetupDeselectedContextMenu();
+                            deselctxmenu.Show(FlowsheetControl_CPU);
+                        }
                     }
-                    else
+                };
+            }
+            else
+            {
+                FlowsheetControl_OpenGL.MouseUp += (sender, e) =>
+                {
+                    if (e.Buttons == MouseButtons.Alternate)
                     {
-                        SetupDeselectedContextMenu();
-                        deselctxmenu.Show(FlowsheetControl);
+                        if (Application.Instance.Platform.IsMac) FlowsheetControl_OpenGL.FlowsheetSurface.InputRelease();
+                        if (FlowsheetControl_OpenGL.FlowsheetSurface.SelectedObject != null)
+                        {
+                            var obj = FlowsheetControl_OpenGL.FlowsheetSurface.SelectedObject;
+                            switch (obj.ObjectType)
+                            {
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
+                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
+                                    selctxmenu.Items.Clear();
+                                    var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
+                                    selctxmenu.Items.Add(itemtype);
+                                    var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+                                    delitem.Click += (sender2, e2) =>
+                                    {
+                                        if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                                        {
+                                            FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
+                                        }
+                                    };
+                                    selctxmenu.Items.Add(delitem);
+                                    break;
+                                default:
+                                    SetupSelectedContextMenu();
+                                    break;
+                            }
+
+                            selctxmenu.Show(FlowsheetControl_OpenGL);
+                        }
+                        else
+                        {
+                            SetupDeselectedContextMenu();
+                            deselctxmenu.Show(FlowsheetControl_OpenGL);
+                        }
                     }
-                }
-            };
+                };
+            }
+
 
             Closing += Flowsheet_Closing;
 
@@ -480,9 +599,17 @@ namespace DWSIM.UI.Forms
 
         void Flowsheet_Shown(object sender, EventArgs e)
         {
-            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
-            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
-            FlowsheetControl.Invalidate();
+            if (FlowsheetControl_CPU != null) {
+                FlowsheetControl_CPU.FlowsheetSurface.ZoomAll(FlowsheetControl_CPU.Width, FlowsheetControl_CPU.Height);
+                FlowsheetControl_CPU.FlowsheetSurface.ZoomAll(FlowsheetControl_CPU.Width, FlowsheetControl_CPU.Height);
+                FlowsheetControl_CPU.Invalidate();
+            }
+            else
+            {
+                FlowsheetControl_OpenGL.FlowsheetSurface.ZoomAll(FlowsheetControl_OpenGL.Width, FlowsheetControl_OpenGL.Height);
+                FlowsheetControl_OpenGL.FlowsheetSurface.ZoomAll(FlowsheetControl_OpenGL.Width, FlowsheetControl_OpenGL.Height);
+                FlowsheetControl_OpenGL.Invalidate();
+            }
             ScriptListControl.UpdateList();
         }
 
@@ -505,7 +632,7 @@ namespace DWSIM.UI.Forms
             {
                 FlowsheetObject.SaveToXML().Save(fstream);
             }
-            
+
             var i_Files = new List<string>();
             if (File.Exists(xmlfile))
                 i_Files.Add(xmlfile);
@@ -743,9 +870,18 @@ namespace DWSIM.UI.Forms
                 var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
                 menuitem.Click += (sender2, e2) =>
                 {
-                    var z = FlowsheetControl.FlowsheetSurface.Zoom;
-                    FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
-                    FlowsheetControl.Invalidate();
+                    if (FlowsheetControl_CPU != null)
+                    {
+                        var z = FlowsheetControl_CPU.FlowsheetSurface.Zoom;
+                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                        FlowsheetControl_CPU.Invalidate();
+                    }
+                    if (FlowsheetControl_OpenGL != null)
+                    {
+                        var z = FlowsheetControl_OpenGL.FlowsheetSurface.Zoom;
+                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                        FlowsheetControl_OpenGL.Invalidate();
+                    }
                 };
                 item0.Items.Add(menuitem);
             }
@@ -772,7 +908,15 @@ namespace DWSIM.UI.Forms
 
         private void EditSelectedObjectProperties()
         {
-            var selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+            Interfaces.IGraphicObject selobj;
+            if (FlowsheetControl_CPU != null)
+            {
+                selobj = FlowsheetControl_CPU.FlowsheetSurface.SelectedObject;
+            }
+            else
+            {
+                selobj = FlowsheetControl_OpenGL.FlowsheetSurface.SelectedObject;
+            }
             if (selobj != null)
             {
                 if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
@@ -959,11 +1103,12 @@ namespace DWSIM.UI.Forms
 
         private void SaveUserUnits()
         {
-        
+
             var userunits = new List<DWSIM.SharedClasses.SystemsOfUnits.Units>();
             var toadd = new List<DWSIM.SharedClasses.SystemsOfUnits.Units>();
 
-            try {
+            try
+            {
                 userunits = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DWSIM.SharedClasses.SystemsOfUnits.Units>>(GlobalSettings.Settings.UserUnits);
             }
             catch { }
@@ -980,7 +1125,7 @@ namespace DWSIM.UI.Forms
             }
 
             var names = userunits.Select((x) => x.Name).ToList();
-            var defaults = new string[] {"SI", "CGS", "ENG", "C1", "C2", "C3", "C4", "C5" };
+            var defaults = new string[] { "SI", "CGS", "ENG", "C1", "C2", "C3", "C4", "C5" };
 
             foreach (var unit in FlowsheetObject.AvailableSystemsOfUnits)
             {
@@ -991,7 +1136,7 @@ namespace DWSIM.UI.Forms
             }
 
             GlobalSettings.Settings.UserUnits = Newtonsoft.Json.JsonConvert.SerializeObject(userunits, Newtonsoft.Json.Formatting.Indented).Replace("\"", "\'");
-        
+
         }
 
     }

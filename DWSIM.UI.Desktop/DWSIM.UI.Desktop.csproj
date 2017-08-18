@@ -124,8 +124,13 @@
       <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Platform.Mac.2.4.0-build1087\lib\net45\MonoMac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
@@ -225,6 +230,7 @@
     <None Include="Mac\MyApp.app\MacAppTemplate.app\Contents\Info.plist" />
     <None Include="Mac\MyApp.app\MacAppTemplate.app\Contents\MacOS\Launcher.exec" />
     <None Include="Mac\MyApp.app\MacAppTemplate.app\Contents\Resources\Icon.icns" />
+    <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
