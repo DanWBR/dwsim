@@ -131,13 +131,18 @@ namespace DWSIM.UI.Desktop.GTK
             if (rect.Width > 0 && rect.Height > 0)
             {
                 var area = evnt.Area;
+                SKColorType ctype = SKColorType.Bgra8888;
+                if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) ctype = SKColorType.Rgba8888;
                 using (Cairo.Context cr = Gdk.CairoHelper.Create(base.GdkWindow))
                 {
-                    using (var bitmap = new SKBitmap(rect.Width, rect.Height, SKColorType.Bgra8888, SKAlphaType.Premul))
+                    if (cr == null) { Console.WriteLine("Cairo Context is null"); }
+                    using (var bitmap = new SKBitmap(rect.Width, rect.Height, ctype, SKAlphaType.Premul))
                     {
+                        if (bitmap == null) { Console.WriteLine("Bitmap is null"); }
                         IntPtr len;
-                        using (var skSurface = SKSurface.Create(bitmap.Info.Width, bitmap.Info.Height, SKColorType.Bgra8888, SKAlphaType.Premul, bitmap.GetPixels(out len), bitmap.Info.RowBytes))
+                        using (var skSurface = SKSurface.Create(bitmap.Info.Width, bitmap.Info.Height, ctype, SKAlphaType.Premul, bitmap.GetPixels(out len), bitmap.Info.RowBytes))
                         {
+                            if (skSurface == null) { Console.WriteLine("skSurface is null"); }
                             if (fsurface != null) fsurface.UpdateSurface(skSurface);
                             skSurface.Canvas.Flush();
                             using (Cairo.Surface surface = new Cairo.ImageSurface(bitmap.GetPixels(out len), Cairo.Format.Argb32, bitmap.Width, bitmap.Height, bitmap.Width * 4))

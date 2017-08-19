@@ -176,10 +176,10 @@
     <Compile Include="OxyPlot\PlotHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkiaSharp\CanvasControl_OpenGL.cs" />
-    <Compile Include="SkiaSharp\GLES.cs" />
-    <Compile Include="SkiaSharp\GLWIdget.cs" />
-    <Compile Include="SkiaSharp\XVisualInfo.cs" />
-    <Compile Include="SkiaSharp\XWindowInfoInitializer.cs" />
+    <Compile Include="SkiaSharp\OpenGL\GLES.cs" />
+    <Compile Include="SkiaSharp\OpenGL\GLWIdget.cs" />
+    <Compile Include="SkiaSharp\OpenGL\XVisualInfo.cs" />
+    <Compile Include="SkiaSharp\OpenGL\XWindowInfoInitializer.cs" />
     <Compile Include="Styling.cs" />
     <Compile Include="SkiaSharp\CanvasControl.cs" />
   </ItemGroup>
@@ -212,6 +212,10 @@
     <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
       <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
       <Name>DWSIM.FlowsheetBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
+      <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
+      <Name>DWSIM.GlobalSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
       <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>

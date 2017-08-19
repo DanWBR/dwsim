@@ -68,7 +68,8 @@ namespace DWSIM.UI.Forms
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
-            if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU)
+            if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU ||
+                Application.Instance.Platform.IsGtk)
             {
                 FlowsheetControl_CPU = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
             }
@@ -135,7 +136,8 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-            if (FlowsheetControl_CPU != null) {
+            if (FlowsheetControl_CPU != null)
+            {
                 FlowsheetControl_CPU.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
                 FlowsheetControl_CPU.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
                 FlowsheetObject.FlowsheetControl = FlowsheetControl_CPU;
@@ -191,7 +193,9 @@ namespace DWSIM.UI.Forms
                         EditSelectedObjectProperties();
                     }
                 };
-            }else{
+            }
+            else
+            {
                 FlowsheetControl_OpenGL.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
                 FlowsheetControl_OpenGL.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
                 FlowsheetObject.FlowsheetControl = FlowsheetControl_OpenGL;
@@ -257,27 +261,39 @@ namespace DWSIM.UI.Forms
             };
 
             Menu = new MenuBar();
-            switch (GlobalSettings.Settings.RunningPlatform())
+
+            if (Application.Instance.Platform.IsMac)
             {
-                case GlobalSettings.Settings.Platform.Mac:
-                    var btnfile = (ButtonMenuItem)Menu.Items.Where((x) => x.Text == "&File").FirstOrDefault();
-                    btnfile.Items.AddRange(new[] { btnSave, btnSaveAs });
-                    break;
-                case GlobalSettings.Settings.Platform.Linux:
-                    Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose } });
-                    break;
-                case GlobalSettings.Settings.Platform.Windows:
-                    Menu.ApplicationItems.AddRange(new[] { btnSave, btnSaveAs, btnClose });
-                    break;
+                var btnfile = (ButtonMenuItem)Menu.Items.Where((x) => x.Text == "&File").FirstOrDefault();
+                btnfile.Items.AddRange(new[] { btnSave, btnSaveAs });
             }
+            else if (Application.Instance.Platform.IsGtk)
+            {
+                Menu.Items.Add(new ButtonMenuItem { Text = "File", Items = { btnSave, btnSaveAs, btnClose } });
+            }
+            else if (Application.Instance.Platform.IsWinForms || Application.Instance.Platform.IsWpf)
+            {
+                Menu.ApplicationItems.AddRange(new[] { btnSave, btnSaveAs, btnClose });
+            }
+
             switch (GlobalSettings.Settings.RunningPlatform())
             {
                 case GlobalSettings.Settings.Platform.Mac:
-                    Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
-                    Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
-                    Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
-                    Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
-                    Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                    if (Application.Instance.Platform.IsMac)
+                    {
+                        Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
+                        Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
+                        Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
+                        Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                        Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                    }
+                    else {
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                    }
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
                 case GlobalSettings.Settings.Platform.Windows:
@@ -322,11 +338,13 @@ namespace DWSIM.UI.Forms
 
             btnObjects.Click += (sender, e) =>
             {
-                if (FlowsheetControl_CPU != null) {
+                if (FlowsheetControl_CPU != null)
+                {
                     var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl_CPU.Height };
                     insform.ShowModal(this);
                 }
-                else {
+                else
+                {
                     var insform = new DWSIM.UI.Desktop.Editors.InsertObject { Flowsheet = FlowsheetObject, ObjList = ObjectList, FlowsheetHeight = FlowsheetControl_OpenGL.Height };
                     insform.ShowModal(this);
                 }
@@ -599,7 +617,8 @@ namespace DWSIM.UI.Forms
 
         void Flowsheet_Shown(object sender, EventArgs e)
         {
-            if (FlowsheetControl_CPU != null) {
+            if (FlowsheetControl_CPU != null)
+            {
                 FlowsheetControl_CPU.FlowsheetSurface.ZoomAll(FlowsheetControl_CPU.Width, FlowsheetControl_CPU.Height);
                 FlowsheetControl_CPU.FlowsheetSurface.ZoomAll(FlowsheetControl_CPU.Width, FlowsheetControl_CPU.Height);
                 FlowsheetControl_CPU.Invalidate();
