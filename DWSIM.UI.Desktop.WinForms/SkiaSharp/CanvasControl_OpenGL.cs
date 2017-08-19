@@ -12,9 +12,9 @@ using Eto.WinForms;
 
 namespace DWSIM.UI.Desktop.WinForms
 {
-
     public class FlowsheetSurfaceControlHandler_OpenGL : Eto.WinForms.Forms.WindowsControl<GLControl, FlowsheetSurfaceControl_OpenGL, FlowsheetSurfaceControl_OpenGL.ICallback>, FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL
     {
+
         public FlowsheetSurfaceControlHandler_OpenGL()
         {
             this.Control = new FlowsheetSurface_WinForms_OpenGL();

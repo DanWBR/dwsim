@@ -24,7 +24,7 @@ namespace DWSIM.UI.Desktop
             Settings.CultureInfo = "en";
             Settings.EnableGPUProcessing = false;
             Settings.OldUI = false;
-            
+
             Settings.LoadSettings("dwsim_newui.ini");
 
             Eto.Platform platform = null;
@@ -63,6 +63,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
                             platform = new Eto.GtkSharp.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
                             break;
@@ -77,6 +78,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
                             platform = new Eto.GtkSharp.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
                             break;
@@ -107,6 +109,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.GTK.StyleSetter.SetStyles();
                             platform = new Eto.GtkSharp.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new GTK.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new GTK.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.Gtk.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new GTK.CodeEditorControlHandler());
                             break;
@@ -129,11 +132,12 @@ namespace DWSIM.UI.Desktop
                 {
                     configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data");
                 }
-                else {
+                else
+                {
                     configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "DWSIM Application Data");
                 }
                 if (!Directory.Exists(configfiledir)) Directory.CreateDirectory(configfiledir);
-                File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), "Output from last app crash:\n\n"+ ex.ToString());
+                File.WriteAllText(System.IO.Path.Combine(configfiledir, "lasterror.txt"), "Output from last app crash:\n\n" + ex.ToString());
             }
         }
 
