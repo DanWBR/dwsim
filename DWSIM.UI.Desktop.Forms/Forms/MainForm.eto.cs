@@ -140,7 +140,18 @@ namespace DWSIM.UI
             tableright.Padding = new Padding(5, 5, 5, 5);
             tableright.Spacing = new Size(10, 10);
 
-            MostRecentList = new ListBox { BackgroundColor = bgcolor, TextColor = Colors.White };
+            MostRecentList = new ListBox { BackgroundColor = bgcolor };
+
+            if (Application.Instance.Platform.IsGtk &&
+                GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
+            {
+                MostRecentList.TextColor = bgcolor;
+            }
+            else
+            {
+                MostRecentList.TextColor = Colors.White;
+            }
+
 
             foreach (var item in GlobalSettings.Settings.MostRecentFiles)
             {
@@ -244,28 +255,28 @@ namespace DWSIM.UI
 
             UpdateButton2.Click += (sender, e) =>
             {
-                    File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "update.run", "");
-                    
-                    //launch updater
-                    if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Linux)
-                    {
-                        var startInfo = new ProcessStartInfo("mono", AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
-                        startInfo.UseShellExecute = true;
-                        Process.Start(startInfo);
-                    }
-                    else if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Windows)
-                    {
-                        var startInfo = new ProcessStartInfo(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
-                        startInfo.UseShellExecute = true;
-                        Process.Start(startInfo);
-                    }
-                    else
-                    {
-                        var startInfo = new ProcessStartInfo("mono", AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
-                        startInfo.UseShellExecute = true;
-                        Process.Start(startInfo);
-                    }
-                    Process.GetCurrentProcess().Kill();
+                File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "update.run", "");
+
+                //launch updater
+                if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Linux)
+                {
+                    var startInfo = new ProcessStartInfo("mono", AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
+                    startInfo.UseShellExecute = true;
+                    Process.Start(startInfo);
+                }
+                else if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Windows)
+                {
+                    var startInfo = new ProcessStartInfo(AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
+                    startInfo.UseShellExecute = true;
+                    Process.Start(startInfo);
+                }
+                else
+                {
+                    var startInfo = new ProcessStartInfo("mono", AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar + "DWSIM.Updater.exe");
+                    startInfo.UseShellExecute = true;
+                    Process.Start(startInfo);
+                }
+                Process.GetCurrentProcess().Kill();
             };
 
             UpdateProgressBar = new ProgressBar { MinValue = 0, MaxValue = 100, Width = 100, Height = 10 };
