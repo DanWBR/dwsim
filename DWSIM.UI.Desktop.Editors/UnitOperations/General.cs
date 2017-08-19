@@ -47,7 +47,7 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = SimObject.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = SimObject.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "Object Properties");
+            s.CreateAndAddLabelRow(container, "Object Property Editor");
 
             s.CreateAndAddDescriptionRow(container, "Property values are updated/stored as they are changed/edited. There's no need to press ENTER to commit the changes.");
 

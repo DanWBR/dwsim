@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 using OpenTK;
+using Eto.WinForms;
 
 namespace DWSIM.UI.Desktop.WinForms
 {
@@ -60,6 +61,12 @@ namespace DWSIM.UI.Desktop.WinForms
     public class FlowsheetSurface_WinForms_OpenGL : SkiaSharp.Views.Desktop.SKGLControl
     {
 
+        public bool WPFHost = false;
+
+        public Action<Eto.Forms.MouseEventArgs> WPFMouseDown;
+        public Action<Eto.Forms.MouseEventArgs> WPFMouseUp;
+        public Action<Eto.Forms.MouseEventArgs> WPFMouseDoubleClick;
+
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
 
@@ -74,7 +81,7 @@ namespace DWSIM.UI.Desktop.WinForms
             ResizeRedraw = true;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
           
             //base.OnPaint(e);
@@ -146,21 +153,23 @@ namespace DWSIM.UI.Desktop.WinForms
             };
         }
 
-        protected override void OnMouseDown(MouseEventArgs e)
+        protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
         {
             _lastTouchX = e.X;
             _lastTouchY = e.Y;
             fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
             this.Invalidate();
+            if (WPFHost) WPFMouseDown.Invoke(e.ToEto(this));
         }
 
-        protected override void OnMouseUp(MouseEventArgs e)
+        protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
         {
             fsurface.InputRelease();
             this.Invalidate();
+            if (WPFHost) WPFMouseUp.Invoke(e.ToEto(this));
         }
 
-        protected override void OnMouseMove(MouseEventArgs e)
+        protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
         {
             _lastTouchX = e.X;
             _lastTouchY = e.Y;
@@ -168,13 +177,14 @@ namespace DWSIM.UI.Desktop.WinForms
             this.Invalidate();
         }
 
-        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        protected override void OnMouseDoubleClick(System.Windows.Forms.MouseEventArgs e)
         {
             //fsurface.ZoomAll((int)this.Width, (int)this.Height);
             //this.Invalidate();
+            if (WPFHost) WPFMouseDoubleClick.Invoke(e.ToEto(this));
         }
 
-        protected override void OnMouseWheel(MouseEventArgs e)
+        protected override void OnMouseWheel(System.Windows.Forms.MouseEventArgs e)
         {
             fsurface.Zoom += e.Delta / 4 / 100.0f;
             this.Invalidate();

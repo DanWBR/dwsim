@@ -45,7 +45,7 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = MatStream.GetFlowsheet().FlowsheetOptions.NumberFormat;
             var nff = MatStream.GetFlowsheet().FlowsheetOptions.FractionNumberFormat;
 
-            s.CreateAndAddLabelRow(container, "Material Stream Properties");
+            s.CreateAndAddLabelRow(container, "Material Stream Property Editor");
 
             s.CreateAndAddDescriptionRow(container, "Except for compound amounts, property values are updated/stored as they are changed/edited. There's no need to press ENTER to commit the changes.");
 

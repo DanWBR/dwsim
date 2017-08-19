@@ -63,7 +63,7 @@ namespace DWSIM.UI.Forms.Forms
 
             tab1.CreateAndAddLabelRow("Flowsheet Designer");
 
-            tab1.CreateAndAddDropDownRow("Flowsheet Renderer", new List<string>() {"CPU", "OpenGL" }, (int)Settings.FlowsheetRenderer, (sender, e) =>
+            tab1.CreateAndAddDropDownRow("Flowsheet Renderer", new List<string>() {"Software (CPU)", "Hardware (OpenGL)" }, (int)Settings.FlowsheetRenderer, (sender, e) =>
             {
                 Settings.FlowsheetRenderer = (Settings.SkiaCanvasRenderer)sender.SelectedIndex;
             });

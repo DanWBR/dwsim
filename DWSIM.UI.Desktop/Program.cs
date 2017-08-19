@@ -84,6 +84,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
                             platform = new Eto.WinForms.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
                             break;
@@ -98,6 +99,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.Mac.StyleSetter.SetStyles();
                             platform = new Eto.Mac.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new Mac.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new Mac.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Mac.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new Mac.CodeEditorControlHandler());
                             break;
@@ -112,6 +114,7 @@ namespace DWSIM.UI.Desktop
                             DWSIM.UI.Desktop.WinForms.StyleSetter.SetStyles();
                             platform = new Eto.WinForms.Platform();
                             platform.Add<FlowsheetSurfaceControl.IFlowsheetSurface>(() => new WinForms.FlowsheetSurfaceControlHandler());
+                            platform.Add<FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL>(() => new WinForms.FlowsheetSurfaceControlHandler_OpenGL());
                             platform.Add<Eto.OxyPlot.Plot.IHandler>(() => new Eto.OxyPlot.WinForms.PlotHandler());
                             platform.Add<CodeEditorControl.ICodeEditor>(() => new WinForms.CodeEditorControlHandler());
                             break;

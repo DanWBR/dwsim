@@ -73,6 +73,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeEditor\CodeEditor.cs" />
+    <Compile Include="SkiaSharp\CanvasControl_OpenGL.cs" />
+    <Compile Include="SkiaSharp\OpenGL\GLES.cs" />
+    <Compile Include="SkiaSharp\OpenGL\SKGLDrawable.cs" />
+    <Compile Include="SkiaSharp\OpenGL\SKGLView.cs" />
+    <Compile Include="SkiaSharp\OpenGL\SKPaintGLSurfaceEventArgs.cs" />
     <Compile Include="Styling.cs" />
     <Compile Include="OxyPlot\ConverterExtensions.cs" />
     <Compile Include="OxyPlot\CoreGraphicsRenderContext.cs" />
@@ -80,7 +85,7 @@
     <Compile Include="OxyPlot\PlotView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SkiaSharp\SKDrawable.cs" />
-    <Compile Include="SkiaSharp\SKSurface.cs" />
+    <Compile Include="SkiaSharp\CanvasControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

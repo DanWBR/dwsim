@@ -18,11 +18,39 @@ using System.Windows.Forms;
 namespace DWSIM.UI.Desktop.WPF
 {
 
-    public class FlowsheetSurfaceControlHandler_OpenGL : Eto.Wpf.Forms.WpfFrameworkElement<System.Windows.Controls.Grid, FlowsheetSurfaceControl_OpenGL, FlowsheetSurfaceControl_OpenGL.ICallback>, FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL
+    public class FlowsheetSurfaceControlHandler_OpenGL : Eto.Wpf.Forms.WpfFrameworkElement<FrameworkElement, FlowsheetSurfaceControl_OpenGL, FlowsheetSurfaceControl_OpenGL.ICallback>, FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL
     {
+
+        private FlowsheetSurface_WPF_OpenGL nativecontrol;
+
         public FlowsheetSurfaceControlHandler_OpenGL()
         {
-            this.Control = new FlowsheetSurface_WPF_OpenGL();
+            nativecontrol = new FlowsheetSurface_WPF_OpenGL();
+
+            // Create the winforms control.
+            nativecontrol.WinFormsControl = new WinForms.FlowsheetSurface_WinForms_OpenGL();
+
+            this.Control = nativecontrol;
+
+            nativecontrol.WinFormsControl.WPFMouseDown = ((e) => {
+               this.Callback.OnMouseDown(Widget, e);
+            });
+
+            nativecontrol.WinFormsControl.WPFMouseUp = ((e) =>
+            {
+                this.Callback.OnMouseUp(Widget, e);
+            });
+
+            nativecontrol.WinFormsControl.WPFMouseDoubleClick = ((e) =>
+            {
+                this.Callback.OnMouseDoubleClick(Widget, e);
+            });
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -72,80 +100,33 @@ namespace DWSIM.UI.Desktop.WPF
         private float _lastTouchX;
         private float _lastTouchY;
 
-        public DWSIM.UI.Desktop.WinForms.FlowsheetSurface_WinForms_OpenGL surface;
+        public DWSIM.UI.Desktop.WinForms.FlowsheetSurface_WinForms_OpenGL WinFormsControl;
 
         public FlowsheetSurface_WPF_OpenGL()
         {
             this.Loaded += Window_Loaded;
+
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host =
                 new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
-            surface = new  WinForms.FlowsheetSurface_WinForms_OpenGL();
+            WinFormsControl.fbase = fbase;
+            WinFormsControl.fsurface = fsurface;
 
-            surface.fbase = fbase;
-            surface.fsurface = fsurface;
+            WinFormsControl.WPFHost = true;
 
-            // Assign the MaskedTextBox control as the host control's child.
-            host.Child = surface;
+            // Assign the winforms control as the host control's child.
+            host.Child = WinFormsControl;
 
             // Add the interop host control to the Grid
             // control's collection of child controls.
             this.Children.Add(host);
 
-           
-        }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-
-            base.OnRender(drawingContext);
-
-            if (surface != null) surface.Invalidate();
-
-        }
-
-        protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
-        {
-            _lastTouchX = (int)e.GetPosition(this).X;
-            _lastTouchY = (int)e.GetPosition(this).Y;
-            fsurface.InputPress((int)_lastTouchX, (int)_lastTouchY);
-            this.InvalidateVisual();
-        }
-
-        protected override void OnMouseUp(System.Windows.Input.MouseButtonEventArgs e)
-        {
-            fsurface.InputRelease();
-            this.InvalidateVisual();
-        }
-
-        protected override void OnMouseMove(System.Windows.Input.MouseEventArgs e)
-        {
-            _lastTouchX = (int)e.GetPosition(this).X;
-            _lastTouchY = (int)e.GetPosition(this).Y;
-            fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
-            this.InvalidateVisual();
-        }
-
-        protected override void OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
-        {
-            //if (e.ClickCount == 2) { 
-            //    fsurface.ZoomAll((int)this.ActualWidth, (int)this.ActualHeight); 
-            //    this.InvalidateVisual(); 
-            //} 
-        }
-
-        protected override void OnMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
-        {
-
-            fsurface.Zoom += e.Delta / 4 / 100.0f;
-            this.InvalidateVisual();
         }
 
     }
