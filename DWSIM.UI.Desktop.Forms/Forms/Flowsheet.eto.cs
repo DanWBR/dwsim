@@ -68,8 +68,7 @@ namespace DWSIM.UI.Forms
 
             Icon = Eto.Drawing.Icon.FromResource(imgprefix + "DWSIM_ico.ico");
 
-            if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU ||
-                Application.Instance.Platform.IsGtk)
+            if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU)
             {
                 FlowsheetControl_CPU = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
             }
