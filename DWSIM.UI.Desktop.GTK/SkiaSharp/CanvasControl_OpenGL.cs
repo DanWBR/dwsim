@@ -152,12 +152,18 @@ namespace DWSIM.UI.Desktop.GTK
 
                 grContext = GRContext.Create(GRBackend.OpenGL, glInterface);
 
-                Console.WriteLine("Created Native Context");
+                Console.WriteLine("Created Native Context: " + grContext.ToString());
 
                 // get initial details
-                renderTarget = CreateRenderTarget();
+                try
+                {
+                    renderTarget = CreateRenderTarget();
+                    Console.WriteLine("Created Render Target: " + renderTarget.ToString());
+                }
+                catch (Exception ex) {
+                    Console.WriteLine("Error creating Render Target: " + ex.ToString());
+                }
 
-                Console.WriteLine("Created Render Target");
             }
 
             // update to the latest dimensions
@@ -203,6 +209,7 @@ namespace DWSIM.UI.Desktop.GTK
         
         public static GRBackendRenderTargetDesc CreateRenderTarget()
         {
+
             int framebuffer, stencil, samples;
             Gles.glGetIntegerv(Gles.GL_FRAMEBUFFER_BINDING, out framebuffer);
             Gles.glGetIntegerv(Gles.GL_STENCIL_BITS, out stencil);
