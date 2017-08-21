@@ -155,6 +155,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{A8AF483A-90B
 	ProjectSection(SolutionItems) = preProject
 		PlatformFiles\Common\readme.txt = PlatformFiles\Common\readme.txt
 		PlatformFiles\Common\version.info = PlatformFiles\Common\version.info
+		PlatformFiles\Common\whatsnew.txt = PlatformFiles\Common\whatsnew.txt
 	EndProjectSection
 EndProject
 Global

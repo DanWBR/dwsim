@@ -125,7 +125,18 @@ namespace DWSIM.UI.Forms
             {
                 Thread.Sleep(1000);
                 PerformExtraTasks();
-            }).ContinueWith((t) => Application.Instance.Invoke(() => this.Close()));
+            }).ContinueWith((t) => Application.Instance.Invoke(() =>
+            {
+                this.Close();
+                var currver = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                if (GlobalSettings.Settings.CurrentVersion != currver)
+                {
+                    GlobalSettings.Settings.CurrentVersion = currver;
+                    var wntext = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "whatsnew.txt"));
+                    MessageBox.Show(wntext, "What's New", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
+                }
+
+            }));
         }
 
         void PerformExtraTasks()

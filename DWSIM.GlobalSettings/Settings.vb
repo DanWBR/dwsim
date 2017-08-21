@@ -122,6 +122,8 @@ Public Class Settings
 
     Public Shared AutomaticUpdates As Boolean = True
 
+    Public Shared CurrentVersion As String = ""
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
@@ -352,6 +354,8 @@ Public Class Settings
         TaskScheduler = source.Configs("Misc").GetInt("TaskScheduler", 0)
         UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
 
+        CurrentVersion = source.Configs("Misc").Get("CurrentVersion", "")
+
         'CloseFormsOnDeselecting = source.Configs("Misc").GetBoolean("CloseFormsOnDeselecting", True)
 
         'autom = source.Configs("Misc").GetBoolean("AutoUpdate", True)
@@ -463,6 +467,9 @@ Public Class Settings
         source.Configs("Misc").Set("MaxThreadMultiplier", MaxThreadMultiplier)
         source.Configs("Misc").Set("TaskScheduler", TaskScheduler)
         source.Configs("Misc").Set("UseSIMDExtensions", UseSIMDExtensions)
+
+        source.Configs("Misc").Set("CurrentVersion", CurrentVersion)
+
         'source.Configs("Misc").Set("CloseFormsOnDeselecting", CloseFormsOnDeselecting)
         'source.Configs("Misc").Set("AutoUpdate", AutomaticUpdates)
 

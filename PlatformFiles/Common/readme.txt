@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.0 Update 5
+Version 5.0 Update 6
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -37,6 +37,17 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.0 Update 6
+
+- [NEW] Added hardware (OpenGL) renderer option for PFD area (accessible through 'Global Settings' > 'Flowsheet Renderer')
+- [NEW] Added Mass/Energy balance check to Unit Operations ('Simulation Setup' > 'Settings')
+- [FIX] Fixed new object placement on New UI
+- [FIX] Fixed file extension when saving a simulation on the New UI
+- [FIX] Fixed Log Window on Classic UI 
+- [FIX] Fixed GTK# renderer on macOS
+- [FIX] Reworked Sensitivity Analysis results viewing on New UI
+- [FIX] Fixed solver selection missing from Rigorous Column editors on New UI
 
 Version 5.0 Update 5
 
