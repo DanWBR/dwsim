@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DWSIM.Drawing.SkiaSharp;
 using DWSIM.UI.Controls;
 using SkiaSharp;
+using Eto.Forms;
 
 namespace DWSIM.UI.Desktop.GTK
 {
@@ -136,32 +137,23 @@ namespace DWSIM.UI.Desktop.GTK
             // create the contexts if not done already
             if (grContext == null)
             {
-
-                Console.WriteLine("Creating Render Target");
-
                 var glInterface = GRGlInterface.CreateNativeGlInterface();
 
                 if (glInterface == null)
                 {
-                    Console.WriteLine("glInterface is null");
-                    return;
-                }
-                else {
-                    Console.WriteLine("Created Native Interface: " + glInterface.Handle);
+                    MessageBox.Show("Error creating OpenGL ES interface. Check if you have OpenGL ES correctly installed and configured or change the PFD Renderer to 'Software (CPU)' on the Global Settings panel.", "Error Creating OpenGL ES interface", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                    Application.Instance.Restart();
                 }
 
                 grContext = GRContext.Create(GRBackend.OpenGL, glInterface);
 
-                Console.WriteLine("Created Native Context: " + grContext.ToString());
-
-                // get initial details
                 try
                 {
                     renderTarget = CreateRenderTarget();
-                    Console.WriteLine("Created Render Target: " + renderTarget.ToString());
                 }
                 catch (Exception ex) {
-                    Console.WriteLine("Error creating Render Target: " + ex.ToString());
+                    MessageBox.Show("Error creating OpenGL ES render target. Check if you have OpenGL ES correctly installed and configured or change the PFD Renderer to 'Software (CPU)' on the Global Settings panel.\nError message:\n" + ex.ToString(), "Error Creating OpenGL ES render target", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
+                    Application.Instance.Restart();                    
                 }
 
             }

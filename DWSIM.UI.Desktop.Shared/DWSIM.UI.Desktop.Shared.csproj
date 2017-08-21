@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\CodeEditorControl.cs" />
+    <Compile Include="Controls\Flowsheet\FlowsheetControlBase.cs" />
     <Compile Include="Controls\Flowsheet\FlowsheetControlGL.cs" />
     <Compile Include="Controls\Flowsheet\FlowsheetControl.cs" />
     <Compile Include="Controls\ProgressDialog.cs" />
