@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace DWSIM.UI.Desktop.WPF
 {
@@ -47,6 +48,7 @@ namespace DWSIM.UI.Desktop.WPF
                 var style = new Style(typeof(DataGridColumnHeader));
                 style.Setters.Add(new Setter(DataGrid.HorizontalContentAlignmentProperty, HorizontalAlignment.Center));
                 wpfgrid.ColumnHeaderStyle = style;
+                wpfgrid.ColumnWidth = new DataGridLength(100, DataGridLengthUnitType.Pixel);
                 wpfgrid.HeadersVisibility = DataGridHeadersVisibility.All;
                 wpfgrid.RowHeaderWidth = 50;
                 wpfgrid.EnableColumnVirtualization = true;
@@ -57,6 +59,7 @@ namespace DWSIM.UI.Desktop.WPF
                 {
                     e.Row.Header = (e.Row.GetIndex() + 1).ToString();
                 };
+                wpfgrid.UpdateLayout();
             });
 
 

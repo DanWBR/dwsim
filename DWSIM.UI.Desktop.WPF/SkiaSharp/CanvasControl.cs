@@ -19,9 +19,20 @@ namespace DWSIM.UI.Desktop.WPF
 
     public class FlowsheetSurfaceControlHandler : Eto.Wpf.Forms.WpfFrameworkElement<FrameworkElement, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
+        
+        private FlowsheetSurface_WPF nativecontrol;
+
         public FlowsheetSurfaceControlHandler()
         {
-            this.Control = new FlowsheetSurface_WPF();
+            nativecontrol = new FlowsheetSurface_WPF();
+            this.Control = nativecontrol;
+        }
+
+        public override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            nativecontrol.fbase = this.Widget.FlowsheetObject;
+            nativecontrol.fsurface = this.Widget.FlowsheetSurface;
         }
 
         public override Eto.Drawing.Color BackgroundColor

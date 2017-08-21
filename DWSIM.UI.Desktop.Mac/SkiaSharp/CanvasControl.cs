@@ -17,6 +17,12 @@ namespace DWSIM.UI.Desktop.Mac
             nativecontrol = new FlowsheetSurface_Mac();
             this.Control = nativecontrol;
         }
+        public override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            nativecontrol.fbase = this.Widget.FlowsheetObject;
+            nativecontrol.fsurface = this.Widget.FlowsheetSurface;
+        }
 
         protected override void Initialize()
         {

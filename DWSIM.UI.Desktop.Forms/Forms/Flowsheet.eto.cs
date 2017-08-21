@@ -28,6 +28,8 @@ namespace DWSIM.UI.Forms
         private TableLayout SpreadsheetControl;
 
         private TabPage TabPageSpreadsheet;
+        private TabControl TabContainer;
+        private bool TabSwitch = true;
 
         private DWSIM.UI.Desktop.Editors.ResultsViewer ResultsControl;
 
@@ -69,12 +71,14 @@ namespace DWSIM.UI.Forms
 
             if (GlobalSettings.Settings.FlowsheetRenderer == GlobalSettings.Settings.SkiaCanvasRenderer.CPU)
             {
-                FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl();
+                FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl() { FlowsheetObject = FlowsheetObject, FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface() };
             }
             else
             {
-                FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl_OpenGL();
+                FlowsheetControl = new DWSIM.UI.Controls.FlowsheetSurfaceControl_OpenGL() { FlowsheetObject = FlowsheetObject, FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface() };
             }
+
+            FlowsheetObject.FlowsheetControl = FlowsheetControl;
 
             ClientSize = new Size(1024, 768);
 
@@ -134,11 +138,7 @@ namespace DWSIM.UI.Forms
                 form.Show();
             };
 
-
-            FlowsheetControl.FlowsheetSurface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)FlowsheetObject.GetSurface();
             FlowsheetControl.FlowsheetSurface.BackgroundColor = SkiaSharp.SKColors.White;
-            FlowsheetObject.FlowsheetControl = FlowsheetControl;
-            FlowsheetControl.FlowsheetObject = FlowsheetObject;
             FlowsheetControl.KeyDown += (sender, e) =>
             {
                 if (e.Key == Keys.Delete) DeleteObject();
@@ -163,6 +163,12 @@ namespace DWSIM.UI.Forms
             {
                 if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
                 var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                if (obj == null) {
+                    var surface = FlowsheetControl.FlowsheetSurface;
+                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
+                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
+                    FlowsheetControl.Invalidate();
+                }
                 if (e.Modifiers == Keys.Shift)
                 {
                     if (obj == null) return;
@@ -180,9 +186,8 @@ namespace DWSIM.UI.Forms
                 }
                 else if (e.Modifiers == Keys.Control)
                 {
-                    var surface = FlowsheetControl.FlowsheetSurface;
-                    surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
-                    FlowsheetControl.Invalidate();
+                    if (obj == null) return;
+                    DebugObject();
                 }
                 else
                 {
@@ -397,16 +402,16 @@ namespace DWSIM.UI.Forms
 
             ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
 
-            var tabholder = new TabControl();
+            TabContainer = new TabControl();
             TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };
-            tabholder.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
-            tabholder.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
-            tabholder.Pages.Add(TabPageSpreadsheet);
-            tabholder.Pages.Add(new TabPage { Content = ScriptListControl, Text = "Scripts" });
-            tabholder.Pages.Add(new TabPage { Content = ResultsControl, Text = "Results" });
+            TabContainer.Pages.Add(new TabPage { Content = FlowsheetControl, Text = "Flowsheet" });
+            TabContainer.Pages.Add(new TabPage { Content = MaterialStreamListControl, Text = "Material Streams" });
+            TabContainer.Pages.Add(TabPageSpreadsheet);
+            TabContainer.Pages.Add(new TabPage { Content = ScriptListControl, Text = "Scripts" });
+            TabContainer.Pages.Add(new TabPage { Content = ResultsControl, Text = "Results" });
 
             var split = new Eto.Forms.Splitter();
-            split.Panel1 = tabholder;
+            split.Panel1 = TabContainer;
             split.Panel2 = SetupLogWindow();
             split.Orientation = Orientation.Vertical;
             split.FixedPanel = SplitterFixedPanel.Panel2;
@@ -417,50 +422,50 @@ namespace DWSIM.UI.Forms
             selctxmenu = new ContextMenu();
             deselctxmenu = new ContextMenu();
 
-            
-                FlowsheetControl.MouseUp += (sender, e) =>
-                {
-                    if (e.Buttons == MouseButtons.Alternate)
-                    {
-                        if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
-                        if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
-                        {
-                            var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                            switch (obj.ObjectType)
-                            {
-                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
-                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
-                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
-                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
-                                case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
-                                    selctxmenu.Items.Clear();
-                                    var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
-                                    selctxmenu.Items.Add(itemtype);
-                                    var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
-                                    delitem.Click += (sender2, e2) =>
-                                    {
-                                        if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
-                                        {
-                                            FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
-                                        }
-                                    };
-                                    selctxmenu.Items.Add(delitem);
-                                    break;
-                                default:
-                                    SetupSelectedContextMenu();
-                                    break;
-                            }
 
-                            selctxmenu.Show(FlowsheetControl);
-                        }
-                        else
+            FlowsheetControl.MouseUp += (sender, e) =>
+            {
+                if (e.Buttons == MouseButtons.Alternate)
+                {
+                    if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
+                    if (FlowsheetControl.FlowsheetSurface.SelectedObject != null)
+                    {
+                        var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+                        switch (obj.ObjectType)
                         {
-                            SetupDeselectedContextMenu();
-                            deselctxmenu.Show(FlowsheetControl);
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Text:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Image:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
+                                selctxmenu.Items.Clear();
+                                var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
+                                selctxmenu.Items.Add(itemtype);
+                                var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
+                                delitem.Click += (sender2, e2) =>
+                                {
+                                    if (MessageBox.Show(this, "Confirm object removal?", "Delete Object", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.No) == DialogResult.Yes)
+                                    {
+                                        FlowsheetObject.DeleteSelectedObject(this, new EventArgs(), obj, false, false);
+                                    }
+                                };
+                                selctxmenu.Items.Add(delitem);
+                                break;
+                            default:
+                                SetupSelectedContextMenu();
+                                break;
                         }
+
+                        selctxmenu.Show(FlowsheetControl);
                     }
-                };
-           
+                    else
+                    {
+                        SetupDeselectedContextMenu();
+                        deselctxmenu.Show(FlowsheetControl);
+                    }
+                }
+            };
+
             Closing += Flowsheet_Closing;
 
             Closed += (sender, e) =>
@@ -482,25 +487,54 @@ namespace DWSIM.UI.Forms
                 Spreadsheet.EvaluateAll();
                 Spreadsheet.WriteAll();
             });
-            Application.Instance.AsyncInvoke(() => SpreadsheetControl.SuspendLayout());
+            FlowsheetObject.FinishedSolving = (() =>
+            {
+                Application.Instance.AsyncInvoke(() =>
+                {
+                    ResultsControl.UpdateList();
+                    MaterialStreamListControl.UpdateList();
+                });
+            });
             FlowsheetObject.SolveFlowsheet(false);
-            Application.Instance.AsyncInvoke(() => SpreadsheetControl.ResumeLayout());
             FlowsheetObject.UpdateSpreadsheet(() =>
             {
                 Spreadsheet.EvaluateAll();
             });
-            ResultsControl.UpdateList();
-            MaterialStreamListControl.UpdateList();
         }
 
         void Flowsheet_Shown(object sender, EventArgs e)
         {
-            
-                FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
-                FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
-                FlowsheetControl.Invalidate();
-          
+
+            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
+            FlowsheetControl.FlowsheetSurface.ZoomAll(FlowsheetControl.Width, FlowsheetControl.Height);
+            FlowsheetControl.Invalidate();
+
             ScriptListControl.UpdateList();
+
+            if (Application.Instance.Platform.IsWpf)
+            {
+
+                TabContainer.SelectedIndexChanged += (sender2, e2) =>
+                {
+                    if (TabSwitch)
+                    {
+                        Task.Delay(100).ContinueWith((t) =>
+                        {
+                            TabSwitch = false;
+                            Application.Instance.Invoke(() =>
+                            {
+                                TabContainer.SelectedIndex = 0;
+                                this.Enabled = true;
+                            });
+                        });
+                    }
+                };
+
+                this.Enabled = false;
+                TabContainer.SelectedPage = TabPageSpreadsheet;
+
+            }
+
         }
 
         void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -706,11 +740,7 @@ namespace DWSIM.UI.Forms
             var item4 = new ButtonMenuItem { Text = "Debug", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Console_96px.png")) };
             item4.Click += (sender, e) =>
             {
-                var txt = new TextArea { ReadOnly = true, Wrap = true, Font = Fonts.Monospace(SystemFonts.Default().Size) };
-                txt.Text = "Please wait, debugging object...";
-                var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300);
-                Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);
-                form1.ShowModal(this);
+                DebugObject();
             };
 
             var menuitem1 = new ButtonMenuItem { Text = "Edit Properties", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
@@ -745,6 +775,17 @@ namespace DWSIM.UI.Forms
 
         }
 
+        private void DebugObject()
+        {
+            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+            if (obj == null) return;
+            var txt = new TextArea { ReadOnly = true, Wrap = true, Font = Fonts.Monospace(SystemFonts.Default().Size) };
+            txt.Text = "Please wait, debugging object...";
+            var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300);
+            Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);
+            form1.ShowModal(this);
+        }
+
         void SetupDeselectedContextMenu()
         {
 
@@ -760,9 +801,9 @@ namespace DWSIM.UI.Forms
                 var menuitem = new ButtonMenuItem { Text = item.GetDisplayName() };
                 menuitem.Click += (sender2, e2) =>
                 {
-                        var z = FlowsheetControl.FlowsheetSurface.Zoom;
-                        FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
-                        FlowsheetControl.Invalidate();
+                    var z = FlowsheetControl.FlowsheetSurface.Zoom;
+                    FlowsheetObject.AddObject(item.GetDisplayName(), (int)(currposx / z), (int)(currposy / z), "");
+                    FlowsheetControl.Invalidate();
                 };
                 item0.Items.Add(menuitem);
             }
@@ -790,9 +831,9 @@ namespace DWSIM.UI.Forms
         private void EditSelectedObjectProperties()
         {
             Interfaces.IGraphicObject selobj;
-           
-                selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-           
+
+            selobj = FlowsheetControl.FlowsheetSurface.SelectedObject;
+
             if (selobj != null)
             {
                 if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)

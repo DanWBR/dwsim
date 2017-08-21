@@ -128,7 +128,7 @@ namespace DWSIM.UI.Desktop
             catch (Exception ex)
             {
                 string configfiledir = "";
-                if (platform.IsMac)
+                if (GlobalSettings.Settings.RunningPlatform() == Settings.Platform.Mac)
                 {
                     configfiledir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Documents", "DWSIM Application Data");
                 }

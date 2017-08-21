@@ -153,11 +153,13 @@ Public Class GraphicsSurface
         text.AppendLine("Double-click on selected object: edit properties")
         text.AppendLine("SHIFT + Double-click on selected object: edit connections")
         text.AppendLine("ALT + Double-click on selected object: view results")
-        text.AppendLine("CTRL + Double-click anywhere on flowsheet: zoom/fit to screen")
+        text.AppendLine("CTRL + Double-click on selected object: debug object")
+        text.AppendLine("Double-click on blank area: zoom flowsheet to fit window")
+        text.AppendLine("Mouse wheel: zoom in/out")
 
         Dim tpaint As New SKPaint()
         With tpaint
-            .TextSize = 20
+            .TextSize = 16
             .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             .Color = SKColors.LightSlateGray
             .IsStroke = False

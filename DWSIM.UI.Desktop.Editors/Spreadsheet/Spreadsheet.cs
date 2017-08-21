@@ -54,7 +54,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         private IFlowsheet flowsheet;
 
-        private GridView grid;
+        public GridView grid;
 
         private ObservableCollection<RowItem> rowlist;
 

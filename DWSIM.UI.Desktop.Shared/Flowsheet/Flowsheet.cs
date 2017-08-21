@@ -11,6 +11,7 @@ namespace DWSIM.UI.Desktop.Shared
     public class Flowsheet : FlowsheetBase.FlowsheetBase
     {
         private Action<string, IFlowsheet.MessageType> listeningaction;
+        public Action FinishedSolving;
 
         public bool optimizing = false;
         public bool supressmessages = false;
@@ -62,7 +63,6 @@ namespace DWSIM.UI.Desktop.Shared
         public void WriteMessage(string text)
         {
             if (listeningaction != null) listeningaction(text, IFlowsheet.MessageType.Information);
-            Console.WriteLine(text);        
         }
 
         public override void UpdateOpenEditForms()
@@ -94,7 +94,7 @@ namespace DWSIM.UI.Desktop.Shared
             Application.Instance.AsyncInvoke(() =>
             {
                 solvform = new Forms.SolvingFlowsheet();
-                solvform.lblMessage.Text = "Solving flowsheet model, please wait...\n(touch to abort calculation)";
+                solvform.lblMessage.Text = "Solving flowsheet model, please wait...";
                 solvform.btnAbort.Click += (sender, e) =>
                 {
                     Application.Instance.AsyncInvoke(() =>
@@ -148,6 +148,9 @@ namespace DWSIM.UI.Desktop.Shared
                 GlobalSettings.Settings.CalculatorStopRequested = false;
                 GlobalSettings.Settings.CalculatorBusy = false;
                 GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
+
+                if (FinishedSolving != null) FinishedSolving.Invoke();
+
             });
 
 
@@ -191,7 +194,7 @@ namespace DWSIM.UI.Desktop.Shared
                     FlowsheetForm.Enabled = false;
                     FlowsheetControl.Invalidate();
                     FlowsheetForm.Invalidate();
-                    solvform.ShowModal(FlowsheetControl);
+                    solvform.ShowModalAsync(FlowsheetControl);
                 });
 
             }

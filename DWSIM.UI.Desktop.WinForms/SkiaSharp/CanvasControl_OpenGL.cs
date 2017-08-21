@@ -15,9 +15,19 @@ namespace DWSIM.UI.Desktop.WinForms
     public class FlowsheetSurfaceControlHandler_OpenGL : Eto.WinForms.Forms.WindowsControl<GLControl, FlowsheetSurfaceControl_OpenGL, FlowsheetSurfaceControl_OpenGL.ICallback>, FlowsheetSurfaceControl_OpenGL.IFlowsheetSurface_OpenGL
     {
 
+        private FlowsheetSurface_WinForms_OpenGL nativecontrol;
+
         public FlowsheetSurfaceControlHandler_OpenGL()
         {
-            this.Control = new FlowsheetSurface_WinForms_OpenGL();
+            nativecontrol = new FlowsheetSurface_WinForms_OpenGL();
+            this.Control = nativecontrol;
+        }
+
+        public override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            nativecontrol.fbase = this.Widget.FlowsheetObject;
+            nativecontrol.fsurface = this.Widget.FlowsheetSurface;
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -29,30 +39,6 @@ namespace DWSIM.UI.Desktop.WinForms
             set
             {
                 return;
-            }
-        }
-
-        public GraphicsSurface FlowsheetSurface
-        {
-            get
-            {
-                return ((FlowsheetSurface_WinForms_OpenGL)this.Control).fsurface;
-            }
-            set
-            {
-                ((FlowsheetSurface_WinForms_OpenGL)this.Control).fsurface = value;
-            }
-        }
-
-        public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject
-        {
-            get
-            {
-                return ((FlowsheetSurface_WinForms_OpenGL)this.Control).fbase;
-            }
-            set
-            {
-                ((FlowsheetSurface_WinForms_OpenGL)this.Control).fbase = value;
             }
         }
 

@@ -11,9 +11,19 @@ namespace DWSIM.UI.Desktop.GTK
 {
     public class FlowsheetSurfaceControlHandler : Eto.GtkSharp.Forms.GtkControl<Gtk.EventBox, FlowsheetSurfaceControl, FlowsheetSurfaceControl.ICallback>, FlowsheetSurfaceControl.IFlowsheetSurface
     {
-        public FlowsheetSurfaceControlHandler()
+       private FlowsheetSurface_GTK nativecontrol;
+
+       public FlowsheetSurfaceControlHandler()
         {
-            this.Control = new FlowsheetSurface_GTK();
+            nativecontrol = new FlowsheetSurface_GTK();
+            this.Control = nativecontrol;
+        }
+
+        public override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            nativecontrol.fbase = this.Widget.FlowsheetObject;
+            nativecontrol.fsurface = this.Widget.FlowsheetSurface;
         }
 
         public override Eto.Drawing.Color BackgroundColor

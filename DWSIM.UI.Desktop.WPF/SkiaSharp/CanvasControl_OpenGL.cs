@@ -32,8 +32,10 @@ namespace DWSIM.UI.Desktop.WPF
 
             this.Control = nativecontrol;
 
-            nativecontrol.WinFormsControl.WPFMouseDown = ((e) => {
-               this.Callback.OnMouseDown(Widget, e);
+            nativecontrol.WinFormsControl.WPFMouseDown = ((e) =>
+            {
+                this.Callback.OnMouseDown(Widget, e);
+                nativecontrol.WinFormsControl.Focus();
             });
 
             nativecontrol.WinFormsControl.WPFMouseUp = ((e) =>
@@ -45,12 +47,14 @@ namespace DWSIM.UI.Desktop.WPF
             {
                 this.Callback.OnMouseDoubleClick(Widget, e);
             });
+
         }
 
-        protected override void Initialize()
+        public override void OnLoadComplete(EventArgs e)
         {
-            base.Initialize();
-
+            base.OnLoadComplete(e);
+            nativecontrol.fbase = this.Widget.FlowsheetObject;
+            nativecontrol.fsurface = this.Widget.FlowsheetSurface;
         }
 
         public override Eto.Drawing.Color BackgroundColor
@@ -96,9 +100,6 @@ namespace DWSIM.UI.Desktop.WPF
 
         public GraphicsSurface fsurface;
         public DWSIM.UI.Desktop.Shared.Flowsheet fbase;
-
-        private float _lastTouchX;
-        private float _lastTouchY;
 
         public DWSIM.UI.Desktop.WinForms.FlowsheetSurface_WinForms_OpenGL WinFormsControl;
 

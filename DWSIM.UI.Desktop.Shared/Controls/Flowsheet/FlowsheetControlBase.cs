@@ -8,18 +8,9 @@ namespace DWSIM.UI.Controls
     public class FlowsheetSurfaceControlBase : Eto.Forms.Control
     {
 
-        public DWSIM.Drawing.SkiaSharp.GraphicsSurface FlowsheetSurface
-        {
-            get { return FlowsheetSurface; }
-            set { FlowsheetSurface = value; }
-        }
-
-        public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject
-        {
-            get { return FlowsheetObject; }
-            set { FlowsheetObject = value; }
-        }
-        
+        public DWSIM.Drawing.SkiaSharp.GraphicsSurface FlowsheetSurface;
+        public DWSIM.UI.Desktop.Shared.Flowsheet FlowsheetObject;
+                
         // interface to the platform implementations
 
         public interface IFlowsheetSurface : Eto.Forms.Control.IHandler

@@ -18,6 +18,12 @@ namespace DWSIM.UI.Desktop.Mac
             nativecontrol = new FlowsheetSurface_Mac_OpenGL();
             this.Control = nativecontrol;
         }
+        public override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            nativecontrol.fbase = this.Widget.FlowsheetObject;
+            nativecontrol.fsurface = this.Widget.FlowsheetSurface;
+        }
 
         protected override void Initialize()
         {
@@ -91,8 +97,6 @@ namespace DWSIM.UI.Desktop.Mac
 
         public float _lastTouchX;
         public float _lastTouchY;
-
-        private SKDrawable drawable;
 
         public FlowsheetSurface_Mac_OpenGL(): base()
         {
