@@ -376,8 +376,22 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                     For Each iex In ex.InnerExceptions
                         If TypeOf iex Is AggregateException Then
                             For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
-                                myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                                loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                If TypeOf iex2 Is AggregateException Then
+                                    For Each iex3 In DirectCast(iex2, AggregateException).InnerExceptions
+                                        If TypeOf iex3 Is AggregateException Then
+                                            For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
+                                                myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
+                                                loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message))
+                                            Next
+                                        Else
+                                            myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
+                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message))
+                                        End If
+                                    Next
+                                Else
+                                    myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                                    loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                End If
                             Next
                         Else
                             myobj.ErrorMessage += iex.Message.ToString & vbCrLf
@@ -454,8 +468,22 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 For Each iex In ex.InnerExceptions
                     If TypeOf iex Is AggregateException Then
                         For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
-                            myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                            loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                            If TypeOf iex2 Is AggregateException Then
+                                For Each iex3 In DirectCast(iex2, AggregateException).InnerExceptions
+                                    If TypeOf iex3 Is AggregateException Then
+                                        For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
+                                            myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
+                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message))
+                                        Next
+                                    Else
+                                        myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
+                                        loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message))
+                                    End If
+                                Next
+                            Else
+                                myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                                loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                            End If
                         Next
                     Else
                         myobj.ErrorMessage += iex.Message.ToString & vbCrLf
@@ -539,8 +567,22 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                          For Each iex In ex.InnerExceptions
                                                              If TypeOf iex Is AggregateException Then
                                                                  For Each iex2 In DirectCast(iex, AggregateException).InnerExceptions
-                                                                     myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                                                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                                                     If TypeOf iex2 Is AggregateException Then
+                                                                         For Each iex3 In DirectCast(iex2, AggregateException).InnerExceptions
+                                                                             If TypeOf iex3 Is AggregateException Then
+                                                                                 For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
+                                                                                     myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
+                                                                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message))
+                                                                                 Next
+                                                                             Else
+                                                                                 myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
+                                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message))
+                                                                             End If
+                                                                         Next
+                                                                     Else
+                                                                         myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
+                                                                         loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                                                     End If
                                                                  Next
                                                              Else
                                                                  myobj.ErrorMessage += iex.Message.ToString & vbCrLf
