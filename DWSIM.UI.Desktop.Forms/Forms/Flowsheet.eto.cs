@@ -80,6 +80,13 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.FlowsheetControl = FlowsheetControl;
 
+            FlowsheetControl.FlowsheetSurface.InvalidateCallback = (() => {
+                Application.Instance.Invoke(() =>
+                {
+                    FlowsheetControl.Invalidate();
+                });
+            });
+
             ClientSize = new Size(1024, 768);
 
             var btnSave = new ButtonMenuItem { Text = "Save Flowsheet", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-save.png")), Shortcut = Keys.S | Application.Instance.AlternateModifier };

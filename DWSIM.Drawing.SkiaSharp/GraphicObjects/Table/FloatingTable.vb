@@ -62,6 +62,8 @@ Namespace GraphicObjects.Tables
 
             Dim zoom As Single = AdditionalInfo
 
+            If zoom = 0 Then Exit Sub
+
             Padding = 6 / zoom
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)

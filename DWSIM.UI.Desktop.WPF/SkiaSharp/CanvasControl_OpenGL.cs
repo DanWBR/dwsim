@@ -130,6 +130,11 @@ namespace DWSIM.UI.Desktop.WPF
 
         }
 
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            WinFormsControl.Invalidate();
+        }
+
     }
 
 }

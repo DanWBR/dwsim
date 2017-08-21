@@ -43,6 +43,14 @@ Public Class GraphicsSurface
 
     Private _FloatingTable As Tables.FloatingTableGraphic
 
+    Private AnimationStart As DateTime
+    Private AddedObject As IGraphicObject
+    Private DrawAddedAnimation As Boolean = False
+    Private Tmax As Integer = 3000
+    Private Tfactor As Integer = 1000
+
+    Public InvalidateCallback As Action
+
     Public Enum AlignDirection
         Lefts
         Centers
@@ -78,6 +86,8 @@ Public Class GraphicsSurface
 
     Public Overridable Property GridSize() As Single
 
+    Public Property Size As SKSize = New SKSize(1024, 768)
+
     Public Property SelectedObject() As IGraphicObject
         Get
             Return _SelectedObject
@@ -110,17 +120,31 @@ Public Class GraphicsSurface
 
         If objects.Count = 0 Then DrawInstructions(DrawingCanvas)
 
+
+        If DrawAddedAnimation Then
+            Dim tstep = (Date.Now - AnimationStart).TotalMilliseconds
+            Dim sp As New SKPaint
+            With sp
+                Dim avalue As Integer = 255 - tstep / Tmax * 255
+                If avalue < 0 Then avalue = 0
+                .Color = SKColors.SteelBlue.WithAlpha(avalue)
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .IsStroke = False
+                .Shader = SKShader.CreateRadialGradient(New SKPoint(AddedObject.X + AddedObject.Width / 2, AddedObject.Y + AddedObject.Height / 2), Math.Max(AddedObject.Width * (1 + tstep / Tmax), AddedObject.Height * (1 + tstep / Tmax)), New SKColor() {SKColors.LightBlue, SKColors.Transparent}, New Single() {0.05, 0.95}, SKShaderTileMode.Clamp)
+            End With
+            DrawingCanvas.DrawRoundRect(New SKRect(AddedObject.X - 250 * tstep / Tfactor, AddedObject.Y - 250 * tstep / Tfactor, AddedObject.X + AddedObject.Width + 250 * tstep / Tfactor, AddedObject.Y + AddedObject.Height + 250 * tstep / Tfactor), 10, 10, sp)
+        End If
+
         For Each dobj In objects
             If dobj Is SelectedObject Then
                 Dim sp, sp2 As New SKPaint
                 With sp
-                    .Color = SKColors.LightBlue
+                    .Color = SKColors.LightBlue.WithAlpha(75)
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .IsStroke = False
-                    .Shader = SKShader.CreateRadialGradient(New SKPoint(dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2), Math.Max(dobj.Width, dobj.Height), New SKColor() {SKColors.LightBlue, SKColors.Transparent}, New Single() {0.05, 0.95}, SKShaderTileMode.Clamp)
                 End With
                 With sp2
-                    .Color = SKColors.LightBlue
+                    .Color = SKColors.LightBlue.WithAlpha(175)
                     .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
                     .IsStroke = True
                     .StrokeWidth = 2
@@ -271,6 +295,8 @@ Public Class GraphicsSurface
     End Sub
 
     Public Sub ZoomAll(viewwidth As Integer, viewheight As Integer)
+
+        Size = New SKSize(viewwidth, viewheight)
 
         Dim minx As Integer = Integer.MaxValue
         Dim miny As Integer = Integer.MaxValue
@@ -940,5 +966,48 @@ Public Class GraphicsSurface
         Dim myNewRect As New SKRect(originalRect.Left / Me.Zoom, originalRect.Top / Me.Zoom, (originalRect.Left + originalRect.Right) / Me.Zoom, (originalRect.Top + originalRect.Bottom) / Me.Zoom)
         Return myNewRect
     End Function
+
+    Public Sub AddObject(ByVal obj As IGraphicObject, Optional ByVal forceposition As Boolean = False)
+
+        'check if an existing object already exists on the desired insertion point
+
+        Dim dpoint = New SKPoint(obj.X, obj.Y)
+
+        Dim pobj = FindObjectAtPoint(dpoint)
+
+        While pobj IsNot Nothing
+            dpoint = New SKPoint(dpoint.X, dpoint.Y + pobj.Height + 30)
+            If dpoint.Y + obj.Height >= Size.Height Then
+                dpoint.Y = obj.Y
+                dpoint.X += pobj.Width + 30
+            End If
+            pobj = FindObjectAtPoint(dpoint)
+        End While
+
+        obj.X = dpoint.X
+        obj.Y = dpoint.Y
+
+        DrawingObjects.Add(obj)
+
+        AddedObject = obj
+
+        Dim t As New Timers.Timer(16)
+        t.Enabled = True
+
+        AnimationStart = Date.Now
+        DrawAddedAnimation = True
+
+        AddHandler t.Elapsed, Sub()
+                                  Dim tstep = (Date.Now - AnimationStart).TotalMilliseconds
+                                  If tstep > Tmax Then
+                                      t.Stop()
+                                      DrawAddedAnimation = True
+                                  Else
+                                      InvalidateCallback.Invoke()
+                                  End If
+                              End Sub
+        t.Start()
+
+    End Sub
 
 End Class

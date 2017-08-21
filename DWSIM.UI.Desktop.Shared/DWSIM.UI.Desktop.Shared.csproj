@@ -54,8 +54,8 @@
   <ItemGroup>
     <Compile Include="Controls\CodeEditorControl.cs" />
     <Compile Include="Controls\Flowsheet\FlowsheetControlBase.cs" />
-    <Compile Include="Controls\Flowsheet\FlowsheetControlGL.cs" />
-    <Compile Include="Controls\Flowsheet\FlowsheetControl.cs" />
+    <Compile Include="Controls\Flowsheet\FlowsheetControlOpenGL.cs" />
+    <Compile Include="Controls\Flowsheet\FlowsheetControlCPU.cs" />
     <Compile Include="Controls\ProgressDialog.cs" />
     <Compile Include="Flowsheet\Flowsheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -977,7 +977,7 @@ Imports System.Dynamic
         If Not gObj Is Nothing Then
             gObj.Owner = SimulationObjects(gObj.Name)
             SimulationObjects(gObj.Name).SetFlowsheet(Me)
-            FlowsheetSurface.DrawingObjects.Add(gObj)
+            FlowsheetSurface.AddObject(gObj)
         End If
 
         Return gObj.Name

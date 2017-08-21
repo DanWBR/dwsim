@@ -94,6 +94,19 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddLabelRow(container, "Object Properties");
 
+            var methods = new string[] { "Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)", "Burningham-Otto (Sum Rates) (Absorber Only)" };
+            var strategies = new string[] { "Direct Rigorous", "Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous" };
+
+            s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), (int)column.SolvingMethod, (sender, e) =>
+            {
+                column.SolvingMethod = sender.SelectedIndex;
+            });
+
+            s.CreateAndAddDropDownRow(container, "Solving Scheme", strategies.ToList(), (int)column.SolverScheme, (sender, e) =>
+            {
+                column.SolverScheme = (UnitOperations.UnitOperations.Column.SolvingScheme)sender.SelectedIndex;
+            });
+
             s.CreateAndAddButtonRow(container, "Define Number of Stages", null, (arg1, e) =>
             {
 
