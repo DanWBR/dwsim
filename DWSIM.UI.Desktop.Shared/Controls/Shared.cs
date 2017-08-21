@@ -207,6 +207,7 @@ namespace DWSIM.UI.Shared
         {
             var tr = new TableRow(control);
             container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
             return tr;
         }
 
@@ -417,6 +418,26 @@ namespace DWSIM.UI.Shared
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
         
+            return btn;
+
+
+        }
+
+        public static Button CreateAndAddBoldLabelAndButtonRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
+        {
+
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center, Font = SystemFonts.Bold() };
+            var btn = new Button { Width = 200, Text = buttonlabel };
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, null, btn);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
             return btn;
 
 

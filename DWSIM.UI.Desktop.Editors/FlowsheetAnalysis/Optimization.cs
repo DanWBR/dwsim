@@ -32,6 +32,8 @@ namespace DWSIM.UI.Desktop.Editors
         private bool ongradient = false;
         Dialog dialog = null;
 
+        private Task st;
+
         public DWSIM.SharedClasses.Flowsheet.Optimization.OptimizationCase mycase;
 
         public OptimizerView(IFlowsheet fs)
@@ -61,8 +63,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(this, "Use the optimizer to bring the flowsheet to a new 'state' regarding the maximum or minimum or value of a user-defined parameter.");
 
+            s.CreateAndAddLabelRow(this, "Case ID");
+            s.CreateAndAddFullTextBoxRow(this, mycase.name, (arg3, arg2) => { mycase.name = arg3.Text; });
+
             s.CreateAndAddLabelRow(this, "Case Description");
-            var etdesc = s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
+            s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
 
             s.CreateAndAddDropDownRow(this, "Optimization Type", new[] { "Minimization", "Maximization" }.ToList(), (int)mycase.type, (arg3, arg2) => { mycase.type = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTType)arg3.SelectedIndex; });
             s.CreateAndAddDropDownRow(this, "Objective Function", new[] { "Variable", "Expression" }.ToList(), (int)mycase.objfunctype, (arg3, arg2) => { mycase.objfunctype = (DWSIM.SharedClasses.Flowsheet.Optimization.OPTObjectiveFunctionType)arg3.SelectedIndex; });
@@ -70,9 +75,9 @@ namespace DWSIM.UI.Desktop.Editors
             s.CreateAndAddTextBoxRow(this, nf, "Maximum Iterations", (double)mycase.maxits, (arg3, arg2) => { mycase.maxits = (int)arg3.Text.ToDoubleFromCurrent(); });
             s.CreateAndAddTextBoxRow(this, nf, "Absolute Tolerance", mycase.tolerance, (arg3, arg2) => { mycase.tolerance = arg3.Text.ToDoubleFromCurrent(); });
 
-            var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
+            var varcontainer = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10, BackgroundColor = Colors.White };
 
-            s.CreateAndAddLabelAndButtonRow(this, "Variables", "Add Variable", null, (arg1, arg2) =>
+            s.CreateAndAddBoldLabelAndButtonRow(this, "Variables", "Add Variable", null, (arg1, arg2) =>
             {
 
                 var newiv = new DWSIM.SharedClasses.Flowsheet.Optimization.OPTVariable();
@@ -110,7 +115,7 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 StartTask();
             });
-
+            
         }
 
         void AddVariable(DWSIM.SharedClasses.Flowsheet.Optimization.OPTVariable newiv, StackLayout ivcontainer, List<string> objs)
@@ -232,12 +237,12 @@ namespace DWSIM.UI.Desktop.Editors
             GlobalSettings.Settings.CalculatorActivated = true;
             GlobalSettings.Settings.SolverMode = 1;
             GlobalSettings.Settings.SolverBreakOnException = true;
-            Task st = new Task(() =>
+            st = new Task(() =>
             {
 
                 Application.Instance.Invoke(() =>
                 {
-                    dialog = ProgressDialog.ShowWithAbort(this, "Optimizing flowsheet, please wait...", "", false, "Abort",
+                    dialog = ProgressDialog.ShowWithAbort(flowsheet.FlowsheetControl, "Optimizing flowsheet, please wait...", "", false, "Abort",
                                                   (sender, e) =>
                                                   {
                                                       dialog.Close();

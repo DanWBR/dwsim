@@ -55,9 +55,12 @@ namespace DWSIM.UI.Desktop.Editors
             var nf = flowsheet.FlowsheetOptions.NumberFormat;
 
             s.CreateAndAddDescriptionRow(this, "Use the Sensitivity Analysis tool to study/analyze the influence of a process variable on other variables in the flowsheet.");
+           
+            s.CreateAndAddLabelRow(this, "Case ID");
+            s.CreateAndAddFullTextBoxRow(this, mycase.name, (arg3, arg2) => { mycase.name = arg3.Text; });
 
             s.CreateAndAddLabelRow(this, "Case Description");
-            var etdesc = s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
+            s.CreateAndAddFullTextBoxRow(this, mycase.description, (arg3, arg2) => { mycase.description = arg3.Text; });
 
             s.CreateAndAddLabelRow(this, "Independent Variable");
 
@@ -138,9 +141,9 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             };
 
-            var btnAddDepVar = s.CreateAndAddLabelAndButtonRow(this, "Dependent Variables", "Add New", null, null);
-
-            var ll = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10 };
+            var btnAddDepVar = s.CreateAndAddBoldLabelAndButtonRow(this, "Dependent Variables", "Add New", null, null);
+           
+            var ll = new StackLayout { Orientation = Orientation.Horizontal, Padding = new Eto.Drawing.Padding(10), Spacing = 10, BackgroundColor = Colors.White };
             ll.RemoveAll();
 
             s.CreateAndAddControlRow(this, new Scrollable { Border = BorderType.None, Content = ll });
@@ -160,19 +163,29 @@ namespace DWSIM.UI.Desktop.Editors
 
             var btnRun = s.CreateAndAddButtonRow(this, "Run Analysis", null, null);
 
-            resulttextbox = new TextArea {Height = 400, Text = "", Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize), ReadOnly = true };
+            var btnAbort = s.CreateAndAddButtonRow(this, "Abort Run", null, null);
 
-            s.CreateAndAddLabelRow(this, "Results Report");
+            btnAbort.Enabled = false;
 
-            s.CreateAndAddControlRow(this, resulttextbox);
+            resulttextbox = new TextArea { Height = 400, Text = "", Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize), ReadOnly = true };
 
-            s.CreateAndAddEmptySpace(this);
+            s.CreateAndAddLabelRow(this, "Results");
 
-            resultschart = new Eto.OxyPlot.Plot {Height = 400 };
+            var btnrt = s.CreateAndAddLabelAndButtonRow(this, "View Results Report", "View Report", null, (sender, e) =>
+            {
+                var form = s.GetDefaultEditorForm("Sensitivity Analysis Report", 500, 500, resulttextbox, true);
+                form.Show();
+            });
+            btnrt.Enabled = false;
 
-            s.CreateAndAddLabelRow(this, "Results Chart");
+            resultschart = new Eto.OxyPlot.Plot { Height = 400 };
 
-            s.CreateAndAddControlRow(this, resultschart);
+            var btnrc = s.CreateAndAddLabelAndButtonRow(this, "View Results Chart", "View Chart", null, (sender, e) =>
+            {
+                var form = s.GetDefaultEditorForm("Sensitivity Analysis Result", 500, 500, resultschart, true);
+                form.Show();
+            });
+            btnrc.Enabled = false;
 
             btnRun.Click += (sender2, e2) =>
             {
@@ -191,13 +204,14 @@ namespace DWSIM.UI.Desktop.Editors
                 flowsheet.supressmessages = true;
 
                 Application.Instance.Invoke(() =>
-                 {
-                     resultschart.Enabled = false;
-                     resulttextbox.Enabled = false;
-                     flowsheet.ShowMessage("Starting Sensitivity Analysis, please wait...", IFlowsheet.MessageType.Information);
-                 });
+                {
+                    btnAbort.Enabled = true;
+                    btnrt.Enabled = false;
+                    btnrc.Enabled = false;
+                    flowsheet.ShowMessage("Starting Sensitivity Analysis, please wait...", IFlowsheet.MessageType.Information);
+                });
 
-                Task.Factory.StartNew(() =>
+                var task = new Task(() =>
                 {
 
                     flowsheet.SolveFlowsheet(true);
@@ -228,7 +242,9 @@ namespace DWSIM.UI.Desktop.Editors
                     flowsheet.SimulationObjects[iv1id].SetPropertyValue(iv1prop, iv1val0);
                     flowsheet.SolveFlowsheet(true);
 
-                }).ContinueWith((t) =>
+                }, GlobalSettings.Settings.TaskCancellationTokenSource.Token);
+                                
+                task.ContinueWith((t) =>
                 {
                     flowsheet.supressmessages = false;
 
@@ -236,9 +252,10 @@ namespace DWSIM.UI.Desktop.Editors
                     {
                         Application.Instance.Invoke(() =>
                          {
- 
-                             resultschart.Enabled = true;
-                             resulttextbox.Enabled = true;
+
+                             btnAbort.Enabled = false;
+                             btnrt.Enabled = false;
+                             btnrc.Enabled = false;
 
                              flowsheet.ShowMessage("Error: " + t.Exception.Message, IFlowsheet.MessageType.GeneralError);
                          });
@@ -248,8 +265,9 @@ namespace DWSIM.UI.Desktop.Editors
                         Application.Instance.Invoke(() =>
                          {
 
-                             resultschart.Enabled = true;
-                             resulttextbox.Enabled = true;
+                             btnAbort.Enabled = false;
+                             btnrt.Enabled = true;
+                             btnrc.Enabled = true;
 
                              flowsheet.ShowMessage("Sensitivity Analysis finished successfully.", IFlowsheet.MessageType.Information);
                              if (t.Status == TaskStatus.RanToCompletion)
@@ -280,14 +298,14 @@ namespace DWSIM.UI.Desktop.Editors
                                  }
                                  foreach (double[] res in mycase.results)
                                  {
-                                     var dv =  Converter.ConvertFromSI(mycase.iv1.unit, iv1ll + cnt * (iv1ul - iv1ll) / iv1np);
+                                     var dv = Converter.ConvertFromSI(mycase.iv1.unit, iv1ll + cnt * (iv1ul - iv1ll) / iv1np);
                                      px.Add(dv);
                                      string line = dv.ToString(nf) + "\t\t";
                                      int j = 0;
                                      foreach (var d in res)
                                      {
-                                         py[j].Add( Converter.ConvertFromSI(mycase.depvariables.Values.ElementAt(j).unit, d));
-                                         line +=  Converter.ConvertFromSI(mycase.depvariables.Values.ElementAt(j).unit, d).ToString(nf) + "\t\t";
+                                         py[j].Add(Converter.ConvertFromSI(mycase.depvariables.Values.ElementAt(j).unit, d));
+                                         line += Converter.ConvertFromSI(mycase.depvariables.Values.ElementAt(j).unit, d).ToString(nf) + "\t\t";
                                          j += 1;
                                      }
                                      str.AppendLine(line);
@@ -297,14 +315,14 @@ namespace DWSIM.UI.Desktop.Editors
                                  Application.Instance.Invoke(() => resulttextbox.Text = str.ToString());
 
                                  var model = new PlotModel() { Subtitle = "Sensitivity Analysis Run Results", Title = flowsheet.FlowsheetOptions.SimulationName };
-                                 model.TitleFontSize = 12;
-                                 model.SubtitleFontSize = 9;
+                                 model.TitleFontSize = 14;
+                                 model.SubtitleFontSize = 11;
                                  model.Axes.Add(new LinearAxis()
                                  {
                                      MajorGridlineStyle = LineStyle.Dash,
                                      MinorGridlineStyle = LineStyle.Dot,
                                      Position = AxisPosition.Bottom,
-                                     FontSize = 10,
+                                     FontSize = 12,
                                      Title = mycase.iv1.objectTAG + " / " + flowsheet.GetTranslatedString(mycase.iv1.propID) + " (" + mycase.iv1.unit + ")"
                                  });
                                  int cnt2 = 0;
@@ -314,7 +332,7 @@ namespace DWSIM.UI.Desktop.Editors
                                      {
                                          MajorGridlineStyle = LineStyle.Dash,
                                          MinorGridlineStyle = LineStyle.Dot,
-                                         FontSize = 10,
+                                         FontSize = 12,
                                          Title = dvar.objectTAG + " / " + flowsheet.GetTranslatedString(dvar.propID) + " (" + dvar.unit + ")"
                                      });
                                      model.Axes[cnt2 + 1].Key = cnt2.ToString();
@@ -325,7 +343,7 @@ namespace DWSIM.UI.Desktop.Editors
                                      ((OxyPlot.Series.LineSeries)(model.Series[cnt2])).YAxisKey = cnt2.ToString();
                                      cnt2 += 1;
                                  }
-                                 model.LegendFontSize = 9;
+                                 model.LegendFontSize = 11;
                                  model.LegendPlacement = LegendPlacement.Outside;
                                  model.LegendOrientation = LegendOrientation.Vertical;
                                  model.LegendPosition = LegendPosition.BottomCenter;
@@ -337,7 +355,16 @@ namespace DWSIM.UI.Desktop.Editors
                          });
                     }
                 });
+
+                btnAbort.Click += (sender, e) =>
+                {
+                    GlobalSettings.Settings.TaskCancellationTokenSource.Cancel();
+                };
+
+                task.Start();
+
             };
+
         }
 
         private void AddDepVar(StackLayout container, DWSIM.SharedClasses.Flowsheet.Optimization.SAVariable depvar, List<string> objlist)
@@ -351,7 +378,7 @@ namespace DWSIM.UI.Desktop.Editors
             var slcontainer = new StackLayoutItem(myview);
             var spinobj = s.CreateAndAddDropDownRow(myview, "Object", objlist, 0, null);
             var spinprop = s.CreateAndAddDropDownRow(myview, "Property", new List<string>(), 0, null);
-           
+
             spinobj.SelectedIndexChanged += (sender2, e2) =>
             {
                 if (spinobj.SelectedIndex > 0)
@@ -361,7 +388,7 @@ namespace DWSIM.UI.Desktop.Editors
                     proplist2 = flowsheet.GetFlowsheetSimulationObject(objlist[spinobj.SelectedIndex]).GetProperties(PropertyType.ALL).ToList();
                     proplist2.Insert(0, "");
                     spinprop.Items.Clear();
-                    spinprop.Items.AddRange(proplist2.Select(x => new ListItem{Key = x,Text = flowsheet.GetTranslatedString(x)}).ToList());
+                    spinprop.Items.AddRange(proplist2.Select(x => new ListItem { Key = x, Text = flowsheet.GetTranslatedString(x) }).ToList());
                     spinprop.SelectedIndex = (proplist2.IndexOf(depvar.propID));
                 }
             };
