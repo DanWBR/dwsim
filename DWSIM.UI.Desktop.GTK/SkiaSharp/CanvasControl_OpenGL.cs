@@ -78,7 +78,8 @@ namespace DWSIM.UI.Desktop.GTK
         private float _lastTouchX;
         private float _lastTouchY;
 
-        public FlowsheetSurface_GTK_OpenGL(): base()
+        public FlowsheetSurface_GTK_OpenGL()
+            : base()
         {
 
             this.AddEvents((int)Gdk.EventMask.PointerMotionMask);
@@ -152,40 +153,46 @@ namespace DWSIM.UI.Desktop.GTK
 
                 if (glInterface == null)
                 {
-                    MessageBox.Show("Error creating OpenGL ES interface. Check if you have OpenGL ES correctly installed and configured or change the PFD Renderer to 'Software (CPU)' on the Global Settings panel.", "Error Creating OpenGL ES interface", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
-                    Application.Instance.Restart();
+                    Console.WriteLine("Error creating OpenGL ES interface. Check if you have OpenGL ES correctly installed and configured or change the PFD Renderer to 'Software (CPU)' on the Global Settings panel.", "Error Creating OpenGL ES interface");
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
-
-                grContext = GRContext.Create(GRBackend.OpenGL, glInterface);
+                else
+                {
+                    grContext = GRContext.Create(GRBackend.OpenGL, glInterface);
+                }
 
                 try
                 {
                     renderTarget = CreateRenderTarget();
                 }
-                catch (Exception ex) {
-                    MessageBox.Show("Error creating OpenGL ES render target. Check if you have OpenGL ES correctly installed and configured or change the PFD Renderer to 'Software (CPU)' on the Global Settings panel.\nError message:\n" + ex.ToString(), "Error Creating OpenGL ES render target", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
-                    Application.Instance.Restart();                    
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error creating OpenGL ES render target. Check if you have OpenGL ES correctly installed and configured or change the PFD Renderer to 'Software (CPU)' on the Global Settings panel.\nError message:\n" + ex.ToString());
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
 
             }
 
-            // update to the latest dimensions
-            renderTarget.Width = rect.Width;
-            renderTarget.Height = rect.Height;
-
-            // create the surface
-            using (var surface = SKSurface.Create(grContext, renderTarget))
+            if (grContext != null)
             {
+                // update to the latest dimensions
+                renderTarget.Width = rect.Width;
+                renderTarget.Height = rect.Height;
 
-                surface.Canvas.Clear(SKColors.White);
+                // create the surface
+                using (var surface = SKSurface.Create(grContext, renderTarget))
+                {
 
-                // start drawing
-                if (fsurface != null) fsurface.UpdateSurface(surface);
+                    surface.Canvas.Clear(SKColors.White);
 
-                // start drawing
-                OnPaintSurface(new SKPaintGLSurfaceEventArgs(surface, renderTarget));
+                    // start drawing
+                    if (fsurface != null) fsurface.UpdateSurface(surface);
 
-                surface.Canvas.Flush();
+                    // start drawing
+                    OnPaintSurface(new SKPaintGLSurfaceEventArgs(surface, renderTarget));
+
+                    surface.Canvas.Flush();
+                }
             }
 
         }
@@ -206,10 +213,10 @@ namespace DWSIM.UI.Desktop.GTK
         public event EventHandler<SKPaintGLSurfaceEventArgs> PaintSurface;
 
         protected virtual void OnPaintSurface(SKPaintGLSurfaceEventArgs e)
-		{
+        {
             if (PaintSurface != null) PaintSurface.Invoke(this, e);
         }
-        
+
         public static GRBackendRenderTargetDesc CreateRenderTarget()
         {
 

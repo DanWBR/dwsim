@@ -149,6 +149,8 @@ namespace DWSIM.UI.Desktop.Mac
 
             base.DrawRect(dirtyRect);
 
+            if (fsurface == null) return;
+
             var ctx = NSGraphicsContext.CurrentContext.GraphicsPort;
 
             // create the skia context

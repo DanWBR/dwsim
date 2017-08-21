@@ -957,6 +957,35 @@ Public Class GraphicsSurface
 
     End Function
 
+    Public Function FindObjectAtBounds(x As Double, y As Double, w As Double, h As Double) As GraphicObject
+
+        Dim objlist As New List(Of GraphicObject)
+
+        Dim drawObj As GraphicObject
+        Dim i As Integer
+        If Me.DrawingObjects.Count > 0 Then
+            For i = Me.DrawingObjects.Count - 1 To 0 Step -1
+                drawObj = CType(Me.DrawingObjects(i), GraphicObject)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(x / Zoom, y / Zoom)) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint((x + w) / Zoom, y / Zoom)) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint(x / Zoom, (y + h) / Zoom)) Then objlist.Add(drawObj)
+                If Not drawObj.IsConnector AndAlso drawObj.HitTest(New SKPoint((x + w) / Zoom, (y + h) / Zoom)) Then objlist.Add(drawObj)
+            Next
+        End If
+
+        If objlist.Count > 1 Then
+            For Each obj In objlist
+                Return obj
+            Next
+        ElseIf objlist.Count = 1 Then
+            Return objlist(0)
+        Else
+            Return Nothing
+        End If
+        Return Nothing
+
+    End Function
+
     Protected Function ZoomRectangle(ByVal originalRect As SKRect) As SKRect
         Dim myNewRect As New SKRect(originalRect.Left * Me.Zoom, originalRect.Top * Me.Zoom, (originalRect.Left + originalRect.Right) * Me.Zoom, (originalRect.Top + originalRect.Bottom) * Me.Zoom)
         Return myNewRect
@@ -973,7 +1002,7 @@ Public Class GraphicsSurface
 
         Dim dpoint = New SKPoint(obj.X, obj.Y)
 
-        Dim pobj = FindObjectAtPoint(dpoint)
+        Dim pobj = FindObjectAtBounds(dpoint.X, dpoint.Y, obj.Width, obj.Height)
 
         While pobj IsNot Nothing
             dpoint = New SKPoint(dpoint.X, dpoint.Y + pobj.Height + 30)
@@ -981,7 +1010,7 @@ Public Class GraphicsSurface
                 dpoint.Y = obj.Y
                 dpoint.X += pobj.Width + 30
             End If
-            pobj = FindObjectAtPoint(dpoint)
+            pobj = FindObjectAtBounds(dpoint.X, dpoint.Y, obj.Width, obj.Height)
         End While
 
         obj.X = dpoint.X

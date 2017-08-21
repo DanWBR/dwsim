@@ -18,6 +18,7 @@ namespace DWSIM.UI.Desktop.Mac
             nativecontrol = new FlowsheetSurface_Mac_OpenGL();
             this.Control = nativecontrol;
         }
+
         public override void OnLoadComplete(EventArgs e)
         {
             base.OnLoadComplete(e);
@@ -144,7 +145,10 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void DrawRect(CGRect dirtyRect)
         {
+            
             base.DrawRect(dirtyRect);
+
+            if (fsurface == null) return;
 
             var size = ConvertSizeToBacking(Bounds.Size);
             renderTarget.Width = (int)size.Width;
