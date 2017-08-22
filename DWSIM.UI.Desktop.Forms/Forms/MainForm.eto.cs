@@ -51,10 +51,10 @@ namespace DWSIM.UI
                     ClientSize = new Size(690, 420);
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
-                    ClientSize = new Size(690, 395);
+                    ClientSize = new Size(690, 365);
                     break;
                 case GlobalSettings.Settings.Platform.Mac:
-                    ClientSize = new Size(690, 380);
+                    ClientSize = new Size(690, 350);
                     break;
             }
 
@@ -237,7 +237,9 @@ namespace DWSIM.UI
 
             SetupUpdateItems();
 
-            if (GlobalSettings.Settings.AutomaticUpdates) Task.Factory.StartNew(() => LaunchUpdateProcess());
+            if (GlobalSettings.Settings.AutomaticUpdates && 
+                GlobalSettings.Settings.RunningPlatform() == 
+                GlobalSettings.Settings.Platform.Windows) Task.Factory.StartNew(() => LaunchUpdateProcess());
 
         }
 
