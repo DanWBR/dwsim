@@ -1045,7 +1045,17 @@ Imports System.Dynamic
         For Each xel As XElement In data
             Try
                 xel.Element("Type").Value = xel.Element("Type").Value.Replace("DWSIM.DWSIM.SimulationObjects", "DWSIM.Thermodynamics")
-                Dim obj As PropertyPackage = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
+                Dim obj As PropertyPackage = Nothing
+                If xel.Element("Type").Value.Contains("AdvancedEOS") Then
+                    Dim adveoskey As String = "PC-SAFT (with Association Support)"
+                    If AvailablePropertyPackages.ContainsKey(adveoskey) Then
+                        obj = AvailablePropertyPackages(adveoskey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("Advanced EOS Property Package library not found. Please download and install it in order to run this simulation.")
+                    End If
+                Else
+                    obj = CType(New RaoultPropertyPackage().ReturnInstance(xel.Element("Type").Value), PropertyPackage)
+                End If
                 obj.LoadData(xel.Elements.ToList)
                 Dim newID As String = Guid.NewGuid.ToString
                 If Options.PropertyPackages.ContainsKey(obj.UniqueID) Then obj.UniqueID = newID
@@ -1517,6 +1527,9 @@ Imports System.Dynamic
 
     Public Sub Initialize() Implements IFlowsheet.Initialize
 
+        AddPropPacks()
+        AddFlashAlgorithms()
+
         Task.Factory.StartNew(Sub()
                                   Dim csdb As New Databases.ChemSep
                                   Dim cpa() As ConstantProperties
@@ -1549,8 +1562,6 @@ Imports System.Dynamic
                                   For Each cp As ConstantProperties In cpa
                                       If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
-                                  AddPropPacks()
-                                  AddFlashAlgorithms()
                                   AddSystemsOfUnits()
                                   AddDefaultProperties()
                               End Sub)
