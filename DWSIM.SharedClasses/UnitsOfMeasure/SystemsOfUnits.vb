@@ -254,6 +254,8 @@ Namespace SystemsOfUnits
                     units.AddRange(New String() {"K/Pa", "F/psi", "C/atm"})
                 Case Enums.UnitOfMeasure.compressibility
                     units.AddRange(New String() {"1/Pa", "1/atm", "1/kPa", "1/bar", "1/MPa", "1/psi"})
+                Case Enums.UnitOfMeasure.reac_rate_heterog
+                    units.AddRange(New String() {"kmol/[kg.s]", "kmol/[kg.min.]", "kmol/[kg.h]", "mol/[kg.s]", "mol/[kg.min.]", "mol/[kg.h]", "lbmol/[lbm.h]"})
             End Select
 
             Return units
