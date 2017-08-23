@@ -75,6 +75,7 @@
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\atk-sharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Eto, Version=2.3.6429.11781, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Eto.Forms.2.4.0-build1087\lib\net45\Eto.dll</HintPath>
@@ -111,14 +112,17 @@
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\gdk-sharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\glib-sharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\gtk-sharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -253,8 +257,42 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /R $(TargetDir)x64\libSkiaSharp.dll $(TargetDir)
-xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+
+xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Linux\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\macOS\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x64"
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x86"
+
+rmdir /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.UI.Desktop.app"
+rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x64"
+rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x86"
+
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x64"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x86"
+
+del "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll"
+del "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll"
+
+)
+else
+(
+
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
+
+)</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Eto.Platform.Mac.Template.2.4.0-build1087\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1087\build\Eto.Platform.Mac.Template.targets')" />
 </Project>
