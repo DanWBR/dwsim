@@ -1,3 +1,10 @@
+Update 7:
+
+- [FIX] Fixed loading Property Packages from the Advanced EOS Library on the new UI
+- [FIX] Fixed missing translations 
+
+Update 6:
+
 - [NEW] Added hardware (OpenGL) renderer option for PFD area (accessible through 'Global Settings' > 'Flowsheet Renderer')
 - [NEW] Added Mass/Energy balance check to Unit Operations ('Simulation Setup' > 'Settings')
 - [FIX] Fixed new object placement on New UI

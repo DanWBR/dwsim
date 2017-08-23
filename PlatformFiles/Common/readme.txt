@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.0 Update 6
+Version 5.0 Update 7
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -37,6 +37,11 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.0 Update 7
+
+- [FIX] Fixed loading Property Packages from the Advanced EOS Library on the new UI
+- [FIX] Fixed missing translations 
 
 Version 5.0 Update 6
 
