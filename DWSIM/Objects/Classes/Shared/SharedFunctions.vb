@@ -201,9 +201,12 @@ Namespace DWSIM
             If Not PropID Is Nothing Then
                 Dim prop As String = PropID.Split("/")(0)
                 Dim sname As String = ""
+                Dim pname As String = ""
                 If PropID.Split("/").Length = 2 Then
                     sname = PropID.Split("/")(1)
-                    retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo) + " / " + sname
+                    pname = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)
+                    If pname = "" Then pname = prop
+                    retstr = pname + " / " + sname
                     If retstr Is Nothing Then Return PropID Else Return retstr
                 Else
                     retstr = My.Application._PropertyNameManager.GetString(prop, My.Application._CultureInfo)

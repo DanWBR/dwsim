@@ -130,6 +130,8 @@ Namespace GraphicObjects.Tables
                 'Dim rect As SKRect = GetRect(X, Y, Width, Height)
                 'canvas.DrawRect(rect, GetPaint(SKColors.White))
 
+                size = MeasureString("MEASURE", tpaint)
+
                 n = 0
                 leftmargin = 0
                 For j = 0 To SpreadsheetData(0).Count - 1

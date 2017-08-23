@@ -203,10 +203,11 @@ Namespace GraphicObjects.Tables
                     Me.DrawRoundRect(g, X + 4 / zoom, Y + 4 / zoom, Width, Height, 5 / zoom, spaint)
                     Dim rect0 As SKRect = GetRect(X + 4 / zoom, Y + 4 / zoom, Width, Height)
 
-
                     Dim rect As SKRect = GetRect(X, Y, Width, Height)
 
                     DrawRoundRect(g, X, Y, Width, Height, 5 / zoom, bpaint)
+
+                    size = MeasureString("MEASURE", tpaint)
 
                     'desenhar textos e retangulos
                     canvas.DrawText(Me.Owner.GraphicObject.Tag.ToUpper, X + Padding + 3, Y + Padding + size.Height, tbpaint)

@@ -456,6 +456,8 @@ Namespace GraphicObjects.Tables
                 'Dim rect As SKRect = GetRect(X, Y, Width, Height)
                 'canvas.DrawRect(rect, GetPaint(SKColors.White))
 
+                size = MeasureString("MEASURE", tpaint)
+
                 'desenhar textos e retangulos
                 canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
                 If Not m_items Is Nothing Then

@@ -192,6 +192,8 @@ Namespace GraphicObjects.Tables
 
                 'desenhar textos e retangulos
 
+                size = MeasureString("MEASURE", tpaint)
+
                 canvas.DrawText(Me.HeaderText, X + Padding, Y + Padding + size.Height, tpaint)
                 Dim n As Integer = 1
 
