@@ -69,7 +69,9 @@ namespace DWSIM.UI.Desktop.WinForms
 
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
-          
+
+            this.MakeCurrent();
+
             //base.OnPaint(e);
 
             // create the contexts if not done already
@@ -80,6 +82,7 @@ namespace DWSIM.UI.Desktop.WinForms
 
                 // get initial details
                 renderTarget = CreateRenderTarget();
+            
             }
 
             // update to the latest dimensions
