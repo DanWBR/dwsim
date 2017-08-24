@@ -261,6 +261,8 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
                 txtvalue.Text = cv.ConvertFromSI(obj.GetPropertyUnit(adjust.ControlledObjectData.PropertyName, su), adjust.AdjustValue).ToString(nf);
             }
 
+            s.CreateAndAddCheckBoxRow(container, "Run with the Simultaneous Adjust Solver", adjust.SimultaneousAdjust, (sender, e) => adjust.SimultaneousAdjust = sender.Checked.GetValueOrDefault());
+
         }
     
     }
