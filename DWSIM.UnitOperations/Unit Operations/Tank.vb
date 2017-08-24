@@ -199,9 +199,11 @@ Namespace UnitOperations
                 Select Case propidx
 
                     Case 0
-                        'PROP_TK_0	Pressure Drop
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, Me.DeltaP.GetValueOrDefault)
-
+                    Case 1
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.volume, Me.Volume)
+                    Case 2
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.time, Me.ResidenceTime)
                 End Select
 
                 Return value
