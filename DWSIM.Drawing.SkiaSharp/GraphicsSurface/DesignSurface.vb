@@ -152,7 +152,12 @@ Public Class GraphicsSurface
                 DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
                 DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
             End If
-            dobj.Draw(DrawingCanvas)
+            If dobj.DrawOverride IsNot Nothing Then
+                dobj.DrawOverride.Invoke(DrawingCanvas)
+            Else
+                dobj.Draw(DrawingCanvas)
+            End If
+
         Next
 
     End Sub

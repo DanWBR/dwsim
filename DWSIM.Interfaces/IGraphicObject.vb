@@ -23,6 +23,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IGraphicObject
 
+    Property DrawOverride As Action(Of Object)
+
     Sub Draw(surface As Object)
 
     Property Editor As Object

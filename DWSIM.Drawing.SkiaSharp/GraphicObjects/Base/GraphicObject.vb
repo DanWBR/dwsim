@@ -370,6 +370,8 @@ Namespace GraphicObjects
         Public Property Editor As Object Implements IGraphicObject.Editor
 
         Public Property Rotation As Integer Implements IGraphicObject.Rotation
+
+        Public Property DrawOverride As Action(Of Object) Implements IGraphicObject.DrawOverride
     End Class
 
 End Namespace

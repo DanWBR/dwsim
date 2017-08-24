@@ -142,7 +142,11 @@ Namespace GraphicObjects
                                 .GradientColor2 = Color.FromArgb(50, .GradientColor2)
                             End With
                         End If
-                        drawObj.Draw(g)
+                        If drawObj.DrawOverride IsNot Nothing Then
+                            drawObj.DrawOverride.Invoke(g)
+                        Else
+                            drawObj.Draw(g)
+                        End If
                         If transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, RectangleGraphic)
                                 .LineColor = oldlinecolor
@@ -169,7 +173,13 @@ Namespace GraphicObjects
                                 .SemiTransparent = True
                             End With
                         End If
-                        If drawObj.ObjectType <> ObjectType.GO_Rectangle Then drawObj.Draw(g)
+                        If drawObj.ObjectType <> ObjectType.GO_Rectangle Then
+                            If drawObj.DrawOverride IsNot Nothing Then
+                                drawObj.DrawOverride.Invoke(g)
+                            Else
+                                drawObj.Draw(g)
+                            End If
+                        End If
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 .LineColor = oldlinecolor
@@ -193,7 +203,13 @@ Namespace GraphicObjects
                                 .SemiTransparent = True
                             End With
                         End If
-                        If drawObj.ObjectType <> ObjectType.GO_Rectangle Then drawObj.Draw(g)
+                        If drawObj.ObjectType <> ObjectType.GO_Rectangle Then
+                            If drawObj.DrawOverride IsNot Nothing Then
+                                drawObj.DrawOverride.Invoke(g)
+                            Else
+                                drawObj.Draw(g)
+                            End If
+                        End If
                         If TypeOf drawObj Is ShapeGraphic And transparent And Not drawObj.Selected Then
                             With DirectCast(drawObj, ShapeGraphic)
                                 .LineColor = oldlinecolor

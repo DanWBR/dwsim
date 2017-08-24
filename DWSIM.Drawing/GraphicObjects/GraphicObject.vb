@@ -461,6 +461,8 @@ Namespace GraphicObjects
 
         End Function
 
+        Public Property DrawOverride As Action(Of Object) Implements IGraphicObject.DrawOverride
+
     End Class
 
 End Namespace
