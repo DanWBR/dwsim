@@ -30,6 +30,8 @@
         Other
     End Enum
 
+    Property ExtraProperties As Dynamic.ExpandoObject
+
     Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties)
 
     Function SaveToXML() As XDocument

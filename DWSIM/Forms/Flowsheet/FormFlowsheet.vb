@@ -31,6 +31,7 @@ Imports DWSIM.GraphicObjects
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Interfaces2
 Imports System.Runtime.InteropServices
+Imports System.Dynamic
 
 <ComSourceInterfaces(GetType(Interfaces.IFlowsheetNewMessageSentEvent)), ClassInterface(ClassInterfaceType.AutoDual)>
 <System.Serializable()>
@@ -40,7 +41,7 @@ Public Class FormFlowsheet
     Inherits Form
 
     'CAPE-OPEN PME/COSE Interfaces
-    Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic,
+    Implements CapeOpen.ICapeCOSEUtilities, CapeOpen.ICapeMaterialTemplateSystem, CapeOpen.ICapeDiagnostic, 
                 CapeOpen.ICapeFlowsheetMonitoring, CapeOpen.ICapeSimulationContext, CapeOpen.ICapeIdentification
 
     'DWSIM IFlowsheet interface
@@ -52,6 +53,8 @@ Public Class FormFlowsheet
 
 
 #Region "    Variable Declarations "
+
+    Public Property ExtraProperties As New ExpandoObject Implements IFlowsheet.ExtraProperties
 
     Public Property MasterFlowsheet As IFlowsheet = Nothing Implements IFlowsheet.MasterFlowsheet
     <Xml.Serialization.XmlIgnore> Public Property MasterUnitOp As ISimulationObject = Nothing Implements IFlowsheet.MasterUnitOp

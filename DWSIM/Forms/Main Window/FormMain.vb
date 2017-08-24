@@ -43,6 +43,7 @@ Imports DWSIM.DrawingTools.GraphicObjects
 Imports System.Net
 Imports DWSIM.GraphicObjects
 Imports DWSIM.SharedClasses.Extras
+Imports System.Dynamic
 
 Public Class FormMain
 
@@ -1377,6 +1378,35 @@ Public Class FormMain
             End Try
         Next
 
+        If xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties") IsNot Nothing Then
+
+            data = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties").Elements.ToList
+
+            Try
+
+                form.ExtraProperties = New ExpandoObject
+
+                If Not data Is Nothing Then
+                    For Each xel As XElement In data
+                        Try
+                            Dim propname = xel.Element("Name").Value
+                            Dim proptype = xel.Element("PropertyType").Value
+                            Dim ptype As Type = Type.GetType(proptype)
+                            Dim propval = Newtonsoft.Json.JsonConvert.DeserializeObject(xel.Element("Data").Value, ptype)
+                            DirectCast(form.ExtraProperties, IDictionary(Of String, Object))(propname) = propval
+                        Catch ex As Exception
+                        End Try
+                    Next
+                End If
+
+            Catch ex As Exception
+
+                excs.Add(New Exception("Error Loading Dynamic Properties", ex))
+
+            End Try
+
+        End If
+
         Dim pp As New RaoultPropertyPackage
 
         data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
@@ -1903,6 +1933,18 @@ Public Class FormMain
 
         xel.Add(form.Options.SaveData().ToArray())
 
+        xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("DynamicProperties"))
+        xel = xdoc.Element("DWSIM_Simulation_Data").Element("DynamicProperties")
+
+        Dim extraprops = DirectCast(form.ExtraProperties, IDictionary(Of String, Object))
+        For Each item In extraprops
+            Try
+                xel.Add(New XElement("Property", {New XElement("Name", item.Key),
+                                                                       New XElement("PropertyType", item.Value.GetType.ToString),
+                                                                       New XElement("Data", Newtonsoft.Json.JsonConvert.SerializeObject(item.Value))}))
+            Catch ex As Exception
+            End Try
+        Next
 
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("GraphicObjects"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("GraphicObjects")
