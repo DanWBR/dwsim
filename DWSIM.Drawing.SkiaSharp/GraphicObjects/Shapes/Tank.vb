@@ -40,7 +40,7 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-           Dim myIC1 As New ConnectionPoint
+            Dim myIC1 As New ConnectionPoint
             myIC1.Position = New Point(X, Y + 0.5 * Height)
             myIC1.Type = ConType.ConIn
 
@@ -64,6 +64,8 @@ Namespace GraphicObjects.Shapes
                     .Add(myIC1)
                 End If
 
+                .Item(0).ConnectorName = "Inlet"
+
             End With
 
             With OutputConnectors
@@ -78,6 +80,8 @@ Namespace GraphicObjects.Shapes
                     .Add(myOC1)
                 End If
 
+                .Item(0).ConnectorName = "Outlet"
+
             End With
 
         End Sub
@@ -86,10 +90,10 @@ Namespace GraphicObjects.Shapes
 
             Dim canvas As SKCanvas = DirectCast(g, SKCanvas)
 
-            MyBase.Draw(g)
-
-            PositionConnectors()
+            CreateConnectors(0, 0)
             UpdateStatus()
+
+            MyBase.Draw(g)
 
             Dim myPen2 As New SKPaint()
             With myPen2
@@ -99,13 +103,34 @@ Namespace GraphicObjects.Shapes
                 .StrokeWidth = LineWidth
             End With
 
+            Dim myPen3 As New SKPaint()
+            With myPen3
+                .Color = SKColors.White
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .IsStroke = False
+            End With
+
+            'center
             Dim rect1 As New SKRect(X + 0.1 * Width, Y + 0.1 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+            'top
             Dim rect2 As New SKRect(X + 0.1 * Width, Y, X + 0.1 * Width + 0.8 * Width, Y + 0.2 * Height)
+            'bottom
             Dim rect3 As New SKRect(X + 0.1 * Width, Y + 0.8 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.8 * Height + 0.2 * Height)
 
-            canvas.DrawOval(rect2, myPen2)
-            canvas.DrawOval(rect3, myPen2)
             canvas.DrawRect(rect1, myPen2)
+            canvas.DrawRect(rect1, myPen3)
+
+            canvas.DrawOval(rect2, myPen3)
+
+            canvas.DrawOval(rect2, myPen3)
+            canvas.DrawOval(rect2, myPen2)
+
+            canvas.DrawOval(rect3, myPen3)
+            canvas.DrawOval(rect3, myPen2)
+
+            Dim rect4 As New SKRect(X + 0.1 * Width, Y + 0.5 * Height, X + 0.1 * Width + 0.8 * Width, Y + 0.1 * Height + 0.8 * Height)
+
+            canvas.DrawRect(rect4, myPen3)
 
         End Sub
 

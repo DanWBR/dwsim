@@ -40,6 +40,15 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             var nf = obj.GetFlowsheet().FlowsheetOptions.NumberFormat;
             
             var recycle = (Recycle)obj;
+            
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", obj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", obj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                obj.GraphicObject.Tag = arg3.Text;
+            });
 
             container.CreateAndAddLabelRow("Convergence Control");
             container.CreateAndAddCheckBoxRow("Converge using global solver", 
@@ -76,6 +85,15 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
 
             var recycle = (EnergyRecycle)obj;
 
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", obj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", obj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                obj.GraphicObject.Tag = arg3.Text;
+            });
+
             container.CreateAndAddLabelRow("Convergence Tolerances");
             container.CreateAndAddTextBoxRow(nf, "Energy Flow", cv.ConvertFromSI(su.heatflow, recycle.ConvergenceParameters.Energy),
                 (sender, e) =>
@@ -97,6 +115,15 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
             var adjust = (Adjust)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
 
             var objlist = adjust.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
             objlist.Insert(0, "");
@@ -248,6 +275,15 @@ namespace DWSIM.UI.Desktop.Editors.LogicalBlocks
             var nf = simobj.GetFlowsheet().FlowsheetOptions.NumberFormat;
 
             var spec = (Spec)simobj;
+
+            s.CreateAndAddLabelRow(container, "Object Details");
+
+            s.CreateAndAddTwoLabelsRow(container, "Status", simobj.GraphicObject.Active ? "Active" : "Inactive");
+
+            s.CreateAndAddStringEditorRow(container, "Name", simobj.GraphicObject.Tag, (TextBox arg3, EventArgs ev) =>
+            {
+                simobj.GraphicObject.Tag = arg3.Text;
+            });
 
             var objlist = spec.GetFlowsheet().SimulationObjects.Values.Select((x2) => x2.GraphicObject.Tag).ToList();
             objlist.Insert(0, "");

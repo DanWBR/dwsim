@@ -892,7 +892,7 @@ namespace DWSIM.UI.Desktop.Editors
                     strdescr.AppendLine("Outlet Temperatures: Area and Heat Exchanged");
                     strdescr.AppendLine("Outlet Temperatures (UA): Overall HTC and Area");
                     strdescr.AppendLine("Area: Overall HTC and Outlet Temperature for one of the fluids");
-                    strdescr.AppendLine("Shell and Tube (Rating): Exchanger Geometry (input on separate window");
+                    strdescr.AppendLine("Shell and Tube (Rating): Exchanger Geometry (input on separate window)");
                     strdescr.AppendLine("Shell and Tube (Design): Outlet Temperatures and Exchanger Geometry (input on separate tab)");
                     strdescr.AppendLine("Pinch Point: Overall HTC and MITA");
                     strdescr.AppendLine("*Pressure drop is required for both fluids except for Shell and Tube Rating mode.");
