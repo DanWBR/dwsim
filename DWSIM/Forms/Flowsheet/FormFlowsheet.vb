@@ -3166,4 +3166,8 @@ Public Class FormFlowsheet
         Throw New NotImplementedException
     End Function
 
+    Public Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject
+        Return My.Application
+    End Function
+
 End Class

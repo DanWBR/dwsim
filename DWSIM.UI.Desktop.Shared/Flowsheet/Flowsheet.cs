@@ -70,6 +70,11 @@ namespace DWSIM.UI.Desktop.Shared
             throw new NotImplementedException();
         }
 
+        public override object GetApplicationObject()
+        {
+            return Application.Instance;
+        }
+
         public void SolveFlowsheet(bool wait, ISimulationObject gobj = null)
         {
 

@@ -1674,22 +1674,20 @@ Imports System.Dynamic
 
     Public Sub ProcessScripts(ByVal sourceevent As Enums.Scripts.EventType, ByVal sourceobj As Enums.Scripts.ObjectType, ByVal sourceobjname As String) Implements IFlowsheet.ProcessScripts
 
-        Me.RunCodeOnUIThread(Sub()
-                                 For Each scr As Script In Scripts.Values
-                                     If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
-                                         If scr.LinkedObjectName <> "" Then
-                                             ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & SimulationObjects(scr.LinkedObjectName).GraphicObject.Tag & "'...", IFlowsheet.MessageType.Information)
-                                         Else
-                                             ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", IFlowsheet.MessageType.Information)
-                                         End If
-                                         If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
-                                             RunScript_IronPython(scr.ScriptText)
-                                         Else
-                                             RunScript_PythonNET(scr.ScriptText)
-                                         End If
-                                     End If
-                                 Next
-                             End Sub)
+        For Each scr As Script In Scripts.Values
+            If scr.Linked And scr.LinkedEventType = sourceevent And scr.LinkedObjectType = sourceobj And scr.LinkedObjectName = sourceobjname Then
+                If scr.LinkedObjectName <> "" Then
+                    ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "', linked to '" & SimulationObjects(scr.LinkedObjectName).GraphicObject.Tag & "'...", IFlowsheet.MessageType.Information)
+                Else
+                    ShowMessage("Running script '" & scr.Title & "' for event '" & scr.LinkedEventType.ToString & "'", IFlowsheet.MessageType.Information)
+                End If
+                If scr.PythonInterpreter = Enums.Scripts.Interpreter.IronPython Then
+                    RunScript_IronPython(scr.ScriptText)
+                Else
+                    RunScript_PythonNET(scr.ScriptText)
+                End If
+            End If
+        Next
 
     End Sub
 
@@ -1980,6 +1978,7 @@ Label_00CC:
         scope = engine.CreateScope()
         scope.SetVariable("Plugins", UtilityPlugins)
         scope.SetVariable("Flowsheet", Me)
+        scope.SetVariable("Application", GetApplicationObject)
         'scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
@@ -2042,6 +2041,7 @@ Label_00CC:
                 locals.SetItem("Flowsheet", Me.ToPython)
                 Dim Solver As New FlowsheetSolver.FlowsheetSolver
                 locals.SetItem("Solver", Solver.ToPython)
+                locals.SetItem("Application", GetApplicationObject.ToPython)
 
                 PythonEngine.Exec(scripttext, Nothing, locals.Handle)
 
@@ -2074,6 +2074,8 @@ Label_00CC:
         End Sub
 
     End Class
+
+    Public MustOverride Function GetApplicationObject() As Object Implements IFlowsheet.GetApplicationObject
 
 End Class
 

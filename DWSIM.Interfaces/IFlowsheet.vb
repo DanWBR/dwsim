@@ -32,6 +32,8 @@
 
     Property ExtraProperties As Dynamic.ExpandoObject
 
+    Function GetApplicationObject() As Object
+
     Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties)
 
     Function SaveToXML() As XDocument
