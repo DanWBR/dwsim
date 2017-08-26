@@ -163,6 +163,7 @@ namespace DWSIM.UI.Desktop.Editors
             btnRun.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "'...", IFlowsheet.MessageType.Information);
                 Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
                 Flowsheet.RunScript(lbScripts.SelectedKey);
             };
