@@ -30,6 +30,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         private bool adding = false;
 
+        private DWSIM.Interfaces.IScript selscript; 
+
         public ScriptManager_Mac(DWSIM.UI.Desktop.Shared.Flowsheet fs)
             : base()
         {
@@ -59,7 +61,9 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     if (lbScripts.SelectedIndex < 0) return;
 
-                    var script = Flowsheet.Scripts[lbScripts.SelectedKey];
+                    if (selscript != null) selscript.ScriptText = ScriptEditor.txtScript.Text;
+
+                    selscript = Flowsheet.Scripts[lbScripts.SelectedKey];
 
                     adding = true;
                     
@@ -75,18 +79,18 @@ namespace DWSIM.UI.Desktop.Editors
 
                     adding = false;
 
-                    ScriptEditor.txtName.Text = script.Title;
-                    ScriptEditor.txtScript.Text = script.ScriptText;
+                    ScriptEditor.txtName.Text = selscript.Title;
+                    ScriptEditor.txtScript.Text = selscript.ScriptText;
 
-                    ScriptEditor.chkLink.Checked = script.Linked;
+                    ScriptEditor.chkLink.Checked = selscript.Linked;
 
-                    if (!string.IsNullOrEmpty(script.LinkedObjectName))
+                    if (!string.IsNullOrEmpty(selscript.LinkedObjectName))
                     {
-                        ScriptEditor.cbLinkedObject.SelectedKey = Flowsheet.SimulationObjects[script.LinkedObjectName].Name;
+                        ScriptEditor.cbLinkedObject.SelectedKey = Flowsheet.SimulationObjects[selscript.LinkedObjectName].Name;
                     }
                     else
                     {
-                        switch (script.LinkedObjectType)
+                        switch (selscript.LinkedObjectType)
                         {
                             case Scripts.ObjectType.Simulation:
                                 ScriptEditor.cbLinkedObject.SelectedIndex = 0;
@@ -97,7 +101,7 @@ namespace DWSIM.UI.Desktop.Editors
                         }
                     }
 
-                    switch (script.LinkedEventType)
+                    switch (selscript.LinkedEventType)
                     {
                         case Scripts.EventType.ObjectCalculationStarted:
                             ScriptEditor.cbLinkedEvent.SelectedIndex = 0;
@@ -143,7 +147,7 @@ namespace DWSIM.UI.Desktop.Editors
                             break;
                     }
 
-                    ScriptEditor.cbPythonInt.SelectedIndex = (int)script.PythonInterpreter;
+                    ScriptEditor.cbPythonInt.SelectedIndex = (int)selscript.PythonInterpreter;
                 }
                 catch (Exception ex)
                 {
