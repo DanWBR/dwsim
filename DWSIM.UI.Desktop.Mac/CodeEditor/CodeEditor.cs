@@ -5,6 +5,7 @@ using SkiaSharp;
 using System;
 using DWSIM.UI.Controls;
 using System.IO;
+using MonoMac.AppKit.TextKit.Formatter;
 
 namespace DWSIM.UI.Desktop.Mac
 {
@@ -24,6 +25,7 @@ namespace DWSIM.UI.Desktop.Mac
                 te.Selectable = true;
                 te.AutoresizingMask = NSViewResizingMask.WidthSizable;
                 te.MaxSize = new CGSize(1000, 10000000);
+                te.Formatter = new LanguageFormatter(te, new CSharpDescriptor());
                 sv = new NSScrollView { AutoresizesSubviews = true, BorderType = NSBorderType.NoBorder, HasVerticalScroller = true, HasHorizontalScroller = true, AutoresizingMask = NSViewResizingMask.WidthSizable };
                 var cv = new NSClipView { AutoresizesSubviews = true };
                 cv.DocumentView = te;
@@ -65,12 +67,14 @@ namespace DWSIM.UI.Desktop.Mac
         {
             get
             {
-                return te.Text;
+                if (te != null) { return te.Text; } else { return ""; }
             }
             set
             {
-                te.Text = "";
-                te.Text = value;
+                if (te != null) {
+                    te.Text = "";
+                    te.Text = value;
+                }
             }
         }
     }

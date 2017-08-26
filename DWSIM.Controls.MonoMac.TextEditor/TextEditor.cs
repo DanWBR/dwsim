@@ -39,7 +39,7 @@ namespace DWSIM.UI.Controls.Mac
 			get { return TextStorage.Value; }
 			set {
                 Value = value;
-				Formatter.Reformat ();
+				if (Formatter != null) Formatter.Reformat ();
 				DocumentEdited = false;
 			}
 		}

@@ -35,7 +35,7 @@ namespace DWSIM.UI.Forms
 
         private DWSIM.UI.Desktop.Editors.MaterialStreamListViewer MaterialStreamListControl;
 
-        private DWSIM.UI.Desktop.Editors.ScriptManager ScriptListControl;
+        private DWSIM.UI.Desktop.Editors.ScriptManagerBase ScriptListControl;
 
         string imgprefix = "DWSIM.UI.Forms.Resources.Icons.";
 
@@ -407,7 +407,13 @@ namespace DWSIM.UI.Forms
 
             MaterialStreamListControl = new DWSIM.UI.Desktop.Editors.MaterialStreamListViewer(FlowsheetObject);
 
-            ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
+            if (Application.Instance.Platform.IsMac)
+            {
+                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
+            }
+            else {
+                ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
+            }
 
             TabContainer = new TabControl();
             TabPageSpreadsheet = new TabPage { Content = SpreadsheetControl, Text = "Spreadsheet" };

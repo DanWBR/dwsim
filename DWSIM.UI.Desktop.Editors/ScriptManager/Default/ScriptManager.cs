@@ -20,14 +20,14 @@ using DWSIM.Interfaces.Enums;
 
 namespace DWSIM.UI.Desktop.Editors
 {
-    public class ScriptManager : TableLayout
+    public class ScriptManager : ScriptManagerBase
     {
 
         private DWSIM.UI.Desktop.Shared.Flowsheet Flowsheet;
 
         private TabControl tabScripts;
 
-        public ScriptManager(DWSIM.UI.Desktop.Shared.Flowsheet fs)
+        public ScriptManager(DWSIM.UI.Desktop.Shared.Flowsheet fs): base()
         {
             Flowsheet = fs;
             Init();
@@ -44,9 +44,14 @@ namespace DWSIM.UI.Desktop.Editors
             var btnNew = new Button { Text = "New Script" };
             btnNew.Click += (sender, e) =>
             {
-                var script = new DWSIM.FlowsheetSolver.Script { ID = Guid.NewGuid().ToString(), Title = "Script" + (Flowsheet.Scripts.Count + 1).ToString() };
-                Flowsheet.Scripts.Add(script.ID, script);
-                AddScriptEditor(script);
+                try {
+                    var script = new DWSIM.FlowsheetSolver.Script { ID = Guid.NewGuid().ToString(), Title = "Script" + (Flowsheet.Scripts.Count + 1).ToString() };
+                    Flowsheet.Scripts.Add(script.ID, script);
+                    AddScriptEditor(script);
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.ToString());
+                }
             };
 
             var btnDelete = new Button { Text = "Remove Selected" };
@@ -92,7 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
             tabScripts.Pages.Add(tabc);
         }
 
-        public void UpdateList()
+        public override void UpdateList()
         {
             tabScripts.Pages.Clear();
             foreach (var script in Flowsheet.Scripts.Values)
@@ -101,7 +106,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
         }
 
-        public void UpdateScripts()
+        public override void UpdateScripts()
         {
             if (tabScripts.Pages.Count > 0)
             {
