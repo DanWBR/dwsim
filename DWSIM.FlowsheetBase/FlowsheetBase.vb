@@ -2070,6 +2070,7 @@ Label_00CC:
 
         Public Overrides Sub Write(ByVal buffer As Byte(), ByVal offset As Integer, ByVal count As Integer)
             Dim output As String = Encoding.UTF8.GetString(buffer, offset, count)
+            Console.WriteLine(output)
             target.ShowMessage(output, IFlowsheet.MessageType.Information)
         End Sub
 
