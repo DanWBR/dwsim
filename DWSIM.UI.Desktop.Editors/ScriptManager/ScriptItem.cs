@@ -218,6 +218,10 @@ namespace DWSIM.UI.Desktop.Editors
 
             cbPythonInt.SelectedIndex = (int)script.PythonInterpreter;
 
+            cbPythonInt.SelectedIndexChanged += (sender, e) => {
+                script.PythonInterpreter = (DWSIM.Interfaces.Enums.Scripts.Interpreter)cbPythonInt.SelectedIndex;
+            };
+
             chkLink.CheckedChanged += (sender, e) =>
             {
                 flowsheet.Scripts[scriptID].Linked = chkLink.Checked.GetValueOrDefault();
