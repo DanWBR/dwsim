@@ -41,6 +41,25 @@ Public Module OxyPlot
     End Sub
 
     <System.Runtime.CompilerServices.Extension>
+    Public Sub AddYAxis(model As PlotModel, title As String, key As String, position As AxisPosition, positiontier As Integer)
+        model.Axes.Add(New LinearAxis() With { _
+            .MajorGridlineStyle = LineStyle.Dash, _
+            .MinorGridlineStyle = LineStyle.Dot, _
+            .Position = position, _
+            .FontSize = 12, _
+            .Title = title, _
+            .Key = key, _
+            .PositionTier = positiontier _
+        })
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension>
+    Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), title As String, yaxiskey As String)
+        model.AddLineSeries(xSeries, ySeries, OxyColors.Automatic, title)
+        DirectCast(model.Series(model.Series.Count - 1), LineSeries).YAxisKey = yaxiskey
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension>
     Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), Optional ByVal title As String = Nothing)
         model.AddLineSeries(xSeries, ySeries, OxyColors.Automatic, title)
     End Sub
