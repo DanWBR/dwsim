@@ -610,7 +610,7 @@ namespace DWSIM.UI.Shared
             model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
             model.LegendPosition = OxyPlot.LegendPosition.BottomCenter;
             model.TitleHorizontalAlignment = OxyPlot.TitleHorizontalAlignment.CenteredWithinView;
-            model.AddLineSeries(x, y);
+            model.AddLineSeries(x, y, ytitle);
 
             return model;
 
