@@ -482,7 +482,9 @@ Public Class GraphicsSurface
 
                             Dim flowsheet = gobj.Owner.GetFlowsheet()
 
-                            If gobj.Calculated Then
+                            If gobj.Calculated Or gobj.ObjectType = ObjectType.OT_Adjust Or
+                                gobj.ObjectType = ObjectType.OT_Spec Or gobj.ObjectType = ObjectType.OT_Recycle Or
+                                gobj.ObjectType = ObjectType.OT_EnergyRecycle Then
 
                                 If flowsheet.SimulationObjects.ContainsKey(gobj.Name) Then
 

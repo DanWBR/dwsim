@@ -376,9 +376,9 @@ Namespace SpecialOps
             Else
                 Select Case prop
                     Case "MinVal"
-                        Return MinVal
+                        Return MinVal.GetValueOrDefault
                     Case "MaxVal"
-                        Return MaxVal
+                        Return MaxVal.GetValueOrDefault
                     Case "AdjustValue"
                         Return AdjustValue
                     Case "Tolerance"

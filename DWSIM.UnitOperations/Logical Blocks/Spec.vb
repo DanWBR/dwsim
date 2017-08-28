@@ -469,9 +469,9 @@ Namespace SpecialOps
             Else
                 Select Case prop
                     Case "SpecMin"
-                        Return MinVal
+                        Return MinVal.GetValueOrDefault
                     Case "SpecMax"
-                        Return MaxVal
+                        Return MaxVal.GetValueOrDefault
                     Case "Expression"
                         Return Expression
                     Case Else
