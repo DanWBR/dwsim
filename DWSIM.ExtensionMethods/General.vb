@@ -4,6 +4,12 @@ Imports System.Globalization
 Public Module General
 
     <System.Runtime.CompilerServices.Extension()>
+    Public Sub RemoveVariable(exobj As System.Dynamic.ExpandoObject, varname As String)
+        Dim collection = DirectCast(exobj, IDictionary(Of String, Object))
+        If collection.ContainsKey(varname) Then collection.Remove(varname)
+    End Sub
+
+    <System.Runtime.CompilerServices.Extension()>
     Public Function ToDoubleArray(al As ArrayList) As Double()
 
         Dim list As New List(Of Double)

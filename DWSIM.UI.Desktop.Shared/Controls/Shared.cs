@@ -14,7 +14,7 @@ namespace DWSIM.UI.Shared
     {
 
         static string imgprefix = "DWSIM.UI.Desktop.Shared.Resources.Icons.";
-            
+
         public static bool IsValidDouble(string s)
         {
             double d = 0;
@@ -57,7 +57,9 @@ namespace DWSIM.UI.Shared
             if (scrollable)
             {
                 form.Content = new Scrollable { Content = content, Border = BorderType.None, ExpandContentWidth = true, ExpandContentHeight = true };
-            }else{
+            }
+            else
+            {
                 form.Content = content;
             }
             return form;
@@ -164,7 +166,7 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
-        
+
             return drop;
 
         }
@@ -189,14 +191,20 @@ namespace DWSIM.UI.Shared
         {
             if (Application.Instance.Platform.IsWinForms && !forceLabel)
             {
-                var textarea = new TextArea { Text = text, ReadOnly = true, 
-                    Font = SystemFonts.Label(SystemFonts.Default().Size - 0.5f), 
+                var textarea = new TextArea
+                {
+                    Text = text,
+                    ReadOnly = true,
+                    Font = SystemFonts.Label(SystemFonts.Default().Size - 0.5f),
                     BackgroundColor = container.BackgroundColor,
-                    TextAlignment = Eto.Forms.TextAlignment.Left, Wrap = true };
+                    TextAlignment = Eto.Forms.TextAlignment.Left,
+                    Wrap = true
+                };
                 textarea.Style = "labeldescription";
                 container.AddRow(new TableRow(textarea));
             }
-            else {
+            else
+            {
                 var label = new Label { Text = text, Wrap = WrapMode.Word, Font = SystemFonts.Label(SystemFonts.Default().Size - 2.0f) };
                 container.AddRow(new TableRow(label));
             }
@@ -220,7 +228,7 @@ namespace DWSIM.UI.Shared
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
             var tr = new TableRow(txt, null, edittext);
-            
+
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
 
@@ -266,7 +274,7 @@ namespace DWSIM.UI.Shared
         public static TextArea CreateAndAddMultilineTextBoxRow(this DynamicLayout container, String text, bool ro, bool autosized, Action<TextArea, EventArgs> command)
         {
 
-            var edittext = new TextArea { Text = text, ReadOnly = ro};
+            var edittext = new TextArea { Text = text, ReadOnly = ro };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
 
@@ -285,7 +293,7 @@ namespace DWSIM.UI.Shared
             var edittext = new TextArea { Text = text, ReadOnly = ro, Height = height };
 
             edittext.Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize);
-            
+
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextArea)sender, e);
 
             var tr = new TableRow(edittext);
@@ -369,7 +377,7 @@ namespace DWSIM.UI.Shared
         {
 
             var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
-            var edittext = new TextBox { Text = currval, PlaceholderText = placeholder};
+            var edittext = new TextBox { Text = currval, PlaceholderText = placeholder };
 
             if (command != null) edittext.TextChanged += (sender, e) => command.Invoke((TextBox)sender, e);
 
@@ -417,7 +425,7 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
-        
+
             return btn;
 
 
@@ -461,7 +469,7 @@ namespace DWSIM.UI.Shared
             if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
 
             var tr = new TableRow(txt, GetPlaceHolderLabel(), tbox, GetPlaceHolderLabel(), btn);
-            
+
             tr.Cells[2].ScaleWidth = true;
 
             container.AddRow(tr);
@@ -545,7 +553,7 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(tr);
             container.CreateAndAddEmptySpace();
-        
+
             return btn;
 
 
@@ -560,13 +568,13 @@ namespace DWSIM.UI.Shared
 
             container.AddRow(new TableRow(check));
             container.CreateAndAddEmptySpace();
-        
+
             return check;
         }
 
         public static OxyPlot.PlotModel CreatePlotModel(double[] x, double[] y, string title, string subtitle, string xtitle, string ytitle)
         {
-            
+
             var model = new OxyPlot.PlotModel() { Subtitle = subtitle, Title = title };
             model.Background = OxyPlot.OxyColors.White;
             model.TitleFontSize = 14;
@@ -579,32 +587,14 @@ namespace DWSIM.UI.Shared
                 FontSize = 12,
                 Title = xtitle
             });
-            if (Math.Abs(y[0] - 1.0f) < 0.0001)
+            model.Axes.Add(new OxyPlot.Axes.LinearAxis()
             {
-                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
-                {
-                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
-                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
-                    Position = OxyPlot.Axes.AxisPosition.Left,
-                    FontSize = 12,
-                    Title = ytitle,
-                    StartPosition = 1,
-                    EndPosition = 0,
-                    MajorStep = 1.0f,
-                    MinorStep = 0.5f
-                });
-            }
-            else
-            {
-                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
-                {
-                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
-                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
-                    Position = OxyPlot.Axes.AxisPosition.Left,
-                    FontSize = 12,
-                    Title = ytitle
-                });
-            }
+                MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                FontSize = 12,
+                Title = ytitle
+            });
             model.LegendFontSize = 11;
             model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
             model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
@@ -631,32 +621,14 @@ namespace DWSIM.UI.Shared
                 FontSize = 12,
                 Title = xtitle
             });
-            if (Math.Abs(y1[0] - 1.0f) < 0.0001)
+            model.Axes.Add(new OxyPlot.Axes.LinearAxis()
             {
-                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
-                {
-                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
-                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
-                    Position = OxyPlot.Axes.AxisPosition.Left,
-                    FontSize = 12,
-                    Title = ytitle,
-                    StartPosition = 1,
-                    EndPosition = 0,
-                    MajorStep = 1.0f,
-                    MinorStep = 0.5f
-                });
-            }
-            else
-            {
-                model.Axes.Add(new OxyPlot.Axes.LinearAxis()
-                {
-                    MajorGridlineStyle = OxyPlot.LineStyle.Dash,
-                    MinorGridlineStyle = OxyPlot.LineStyle.Dot,
-                    Position = OxyPlot.Axes.AxisPosition.Left,
-                    FontSize = 12,
-                    Title = ytitle
-                });
-            }
+                MajorGridlineStyle = OxyPlot.LineStyle.Dash,
+                MinorGridlineStyle = OxyPlot.LineStyle.Dot,
+                Position = OxyPlot.Axes.AxisPosition.Left,
+                FontSize = 12,
+                Title = ytitle
+            });
             model.LegendFontSize = 11;
             model.LegendPlacement = OxyPlot.LegendPlacement.Outside;
             model.LegendOrientation = OxyPlot.LegendOrientation.Vertical;
