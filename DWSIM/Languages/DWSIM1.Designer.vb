@@ -14824,6 +14824,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to O método de resolução de colunas selecionado não é suportado por esta coluna..
+        '''</summary>
+        Friend Shared ReadOnly Property UnsupportedSolver() As String
+            Get
+                Return ResourceManager.GetString("UnsupportedSolver", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Scripts.
         '''</summary>
         Friend Shared ReadOnly Property UO_ScriptExtension() As String

@@ -5480,4 +5480,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="MassBalanceMessage" xml:space="preserve">
     <value>the mass balance did not converge within tolerance.</value>
   </data>
+  <data name="UnsupportedSolver" xml:space="preserve">
+    <value>The selected column solver is not supported by this object.</value>
+  </data>
 </root>

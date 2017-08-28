@@ -2767,21 +2767,23 @@ Namespace UnitOperations
             Dim result As Object
 
             Select Case Me.SolvingMethod
-                Case 2 'IO 
-                    Dim rm As New SolvingMethods.RussellMethod
-                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, idealk0, idealh0, llextractor)
-                    ic = result(9)
-                    ec = result(11)
                 Case 0 'BP
+                    If Not TypeOf Me Is DistillationColumn Then Throw New Exception(FlowSheet.GetTranslatedString("UnsupportedSolver"))
                     result = SolvingMethods.WangHenkeMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, Me.StopAtIterationNumber, eff, Me.ColumnType, pp, Me.Specs, idealk0, idealh0)
-                    ic = result(9)
-                Case 3 'SR
-                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
                     ic = result(9)
                 Case 1 'SC
                     Dim scm As New SolvingMethods.NaphtaliSandholmMethod
                     result = scm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.ColumnType, pp, Me.Specs, Me.SC_NumericalDerivativeStep, NS_Solver, NS_LowerBound, NS_UpperBound, NS_SimplexPreconditioning, idealk0, idealh0, llextractor)
                     ec = result(11)
+                Case 2 'IO 
+                    Dim rm As New SolvingMethods.RussellMethod
+                    result = rm.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.CondenserType, eff, Me.AdjustSb, Me.ColumnType, Me.KbjWeightedAverage, pp, Me.Specs, IO_NumericalDerivativeStep, IO_Solver, IO_LowerBound, IO_UpperBound, idealk0, idealh0, llextractor)
+                    ic = result(9)
+                    ec = result(11)
+                Case 3 'SR
+                    If Not TypeOf Me Is AbsorptionColumn Then Throw New Exception(FlowSheet.GetTranslatedString("UnsupportedSolver"))
+                    result = SolvingMethods.BurninghamOttoMethod.Solve(nc, ns, maxits, tol, F, V, Q, L, VSS, LSS, Kval, x, y, z, fc, HF, T, P, Me.StopAtIterationNumber, eff, pp, Me.Specs, idealk0, idealh0, llextractor)
+                    ic = result(9)
                 Case Else
                     result = Nothing
             End Select

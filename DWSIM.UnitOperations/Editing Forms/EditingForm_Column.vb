@@ -94,6 +94,26 @@ Public Class EditingForm_Column
 
             'parameters
 
+            cbSolvingMethod.Items.Clear()
+
+            Dim dcsolvers As String() = {"Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
+            Dim acsolvers As String() = {"Burningham-Otto (Sum Rates)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
+            Dim rrsolvers As String() = {"Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
+
+            Select Case .GraphicObject.ObjectType
+                Case ObjectType.AbsorptionColumn
+                    cbSolvingMethod.Items.AddRange(acsolvers)
+                    If .SolvingMethod = 0 Then .SolvingMethod = 3
+                Case ObjectType.DistillationColumn
+                    cbSolvingMethod.Items.AddRange(dcsolvers)
+                    If .SolvingMethod = 3 Then .SolvingMethod = 0
+                Case ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber
+                    cbSolvingMethod.Items.AddRange(rrsolvers)
+                    If .SolvingMethod = 0 Or .SolvingMethod = 3 Then .SolvingMethod = 1
+            End Select
+
+            cbSolvingMethod.SelectedIndex = .SolvingMethod
+
             cbCondPressureUnits.Items.Clear()
             cbCondPressureUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
             cbCondPressureUnits.SelectedItem = units.pressure
@@ -109,7 +129,7 @@ Public Class EditingForm_Column
             tbNStages.Text = .NumberOfStages
 
             If TypeOf SimObject Is AbsorptionColumn Then cbAbsorberMode.SelectedIndex = DirectCast(SimObject, AbsorptionColumn).OperationMode Else cbAbsorberMode.Enabled = False
-            cbSolvingMethod.SelectedIndex = .SolvingMethod
+
             tbMaxIt.Text = .MaxIterations
             tbConvTol.Text = .ExternalLoopTolerance.ToString("R")
 
@@ -458,7 +478,18 @@ Public Class EditingForm_Column
 
         If Loaded Then
 
-            SimObject.SolvingMethod = cbSolvingMethod.SelectedIndex
+            Select Case SimObject.GraphicObject.ObjectType
+                Case ObjectType.AbsorptionColumn
+                    If cbSolvingMethod.SelectedIndex = 0 Then
+                        SimObject.SolvingMethod = 3
+                    Else
+                        SimObject.SolvingMethod = cbSolvingMethod.SelectedIndex
+                    End If
+                Case ObjectType.DistillationColumn
+                    SimObject.SolvingMethod = cbSolvingMethod.SelectedIndex
+                Case ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber
+                    SimObject.SolvingMethod = cbSolvingMethod.SelectedIndex + 1
+            End Select
 
             If SimObject.SolvingMethod = 0 Then
                 If Not TabControl2.TabPages.Contains(TabSolverBP) Then TabControl2.TabPages.Add(TabSolverBP)

@@ -5496,4 +5496,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
   <data name="MassBalanceMessage" xml:space="preserve">
     <value>O balanço de massa não está sendo obedecido.</value>
   </data>
+  <data name="UnsupportedSolver" xml:space="preserve">
+    <value>O método de resolução de colunas selecionado não é suportado por esta coluna.</value>
+  </data>
 </root>
