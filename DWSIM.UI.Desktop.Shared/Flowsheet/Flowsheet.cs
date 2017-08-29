@@ -213,6 +213,69 @@ namespace DWSIM.UI.Desktop.Shared
 
         }
 
+        public void SolveFlowsheet2()
+        {
+
+            var surface = ((DWSIM.Drawing.SkiaSharp.GraphicsSurface)this.GetSurface());
+
+            if (PropertyPackages.Count == 0)
+            {
+                ShowMessage("Please select a Property Package before solving the flowsheet.", IFlowsheet.MessageType.GeneralError);
+                return;
+            }
+
+            if (SelectedCompounds.Count == 0)
+            {
+                ShowMessage("Please select a Compound before solving the flowsheet.", IFlowsheet.MessageType.GeneralError);
+                return;
+            }
+
+            GlobalSettings.Settings.CalculatorActivated = true;
+
+            Task st = new Task(() =>
+            {
+                RequestCalculation();
+            });
+
+            st.ContinueWith((t) =>
+            {
+                GlobalSettings.Settings.CalculatorStopRequested = false;
+                GlobalSettings.Settings.CalculatorBusy = false;
+                GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
+
+                if (FinishedSolving != null) FinishedSolving.Invoke();
+
+            });
+
+            try
+            {
+                st.Start();
+                st.Wait();
+            }
+            catch (AggregateException aex)
+            {
+                foreach (Exception ex2 in aex.InnerExceptions)
+                {
+                    if (!SupressMessages)
+                    {
+                        ShowMessage(ex2.ToString(), IFlowsheet.MessageType.GeneralError);
+                    }
+                }
+                GlobalSettings.Settings.CalculatorBusy = false;
+                GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
+            }
+            catch (Exception ex)
+            {
+                if (!SupressMessages)
+                {
+                    ShowMessage(ex.ToString(), IFlowsheet.MessageType.GeneralError);
+                }
+                GlobalSettings.Settings.CalculatorBusy = false;
+                GlobalSettings.Settings.TaskCancellationTokenSource = new System.Threading.CancellationTokenSource();
+            }
+
+        }
+
         public override void SetMessageListener(Action<string, IFlowsheet.MessageType> act)
         {
             listeningaction = act;
