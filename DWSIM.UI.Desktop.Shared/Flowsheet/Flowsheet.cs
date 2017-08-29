@@ -14,7 +14,7 @@ namespace DWSIM.UI.Desktop.Shared
         public Action FinishedSolving;
 
         public bool optimizing = false;
-        public bool supressmessages = false;
+        public bool SupressMessages = false;
         private bool eventattached = false;
 
         public Eto.Forms.Form FlowsheetForm;
@@ -43,7 +43,7 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void UpdateInterface()
         {
-            if (!supressmessages)
+            if (!SupressMessages)
             {
                 Application.Instance.AsyncInvoke(() => { if (FlowsheetForm != null) FlowsheetForm.Invalidate(); });
             }
@@ -56,14 +56,20 @@ namespace DWSIM.UI.Desktop.Shared
 
         public override void ShowMessage(string text, IFlowsheet.MessageType mtype)
         {
-            if (listeningaction != null) listeningaction(text, mtype);
-            Console.WriteLine(text);
+            if (!SupressMessages)
+            {
+                if (listeningaction != null) listeningaction(text, mtype);
+                Console.WriteLine(text);
+            }
         }
 
         public void WriteMessage(string text)
         {
-            if (listeningaction != null) listeningaction(text, IFlowsheet.MessageType.Information);
-            Console.WriteLine(text);
+            if (!SupressMessages)
+            {
+                if (listeningaction != null) listeningaction(text, IFlowsheet.MessageType.Information);
+                Console.WriteLine(text);
+            }
         }
 
         public override void UpdateOpenEditForms()
@@ -171,7 +177,7 @@ namespace DWSIM.UI.Desktop.Shared
                 {
                     foreach (Exception ex2 in aex.InnerExceptions)
                     {
-                        if (!supressmessages)
+                        if (!SupressMessages)
                         {
                             ShowMessage(ex2.ToString(), IFlowsheet.MessageType.GeneralError);
                         }
@@ -181,7 +187,7 @@ namespace DWSIM.UI.Desktop.Shared
                 }
                 catch (Exception ex)
                 {
-                    if (!supressmessages)
+                    if (!SupressMessages)
                     {
                         ShowMessage(ex.ToString(), IFlowsheet.MessageType.GeneralError);
                     }

@@ -201,7 +201,7 @@ namespace DWSIM.UI.Desktop.Editors
                 iv1id = mycase.iv1.objectID;
                 iv1prop = mycase.iv1.propID;
 
-                flowsheet.supressmessages = true;
+                flowsheet.SupressMessages = true;
 
                 Application.Instance.Invoke(() =>
                 {
@@ -246,7 +246,7 @@ namespace DWSIM.UI.Desktop.Editors
                                 
                 task.ContinueWith((t) =>
                 {
-                    flowsheet.supressmessages = false;
+                    flowsheet.SupressMessages = false;
 
                     if (t.Exception != null)
                     {

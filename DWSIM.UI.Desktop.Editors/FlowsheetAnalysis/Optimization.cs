@@ -272,7 +272,7 @@ namespace DWSIM.UI.Desktop.Editors
                 }
                 else
                 {
-                    if (!flowsheet.supressmessages)
+                    if (!flowsheet.SupressMessages)
                     {
                         foreach (Exception ex in t.Exception.InnerExceptions)
                         {
