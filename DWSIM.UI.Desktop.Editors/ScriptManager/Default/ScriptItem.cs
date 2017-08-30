@@ -99,7 +99,7 @@ namespace DWSIM.UI.Desktop.Editors
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));
 
             var tr1 = new TableRow(btn1, btn2, btn3, lbl4, txtName, chkLink, lbl1, cbLinkedObject, lbl2, cbLinkedEvent, lbl3, cbPythonInt);
-            tr1.Cells[3].ScaleWidth = true;
+            tr1.Cells[4].ScaleWidth = true;
             var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb1.Rows.Add(tr1);
 
