@@ -153,8 +153,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Me.Solver = [Enum].Parse(Me.Solver.GetType, Me.FlashSettings(FlashSetting.GM_OptimizationMethod))
 
-            If Me.Solver = OptimizationMethod.IPOPT Then Calculator.CheckParallelPInvoke()
-
             Dim i, j, k As Integer
 
             Dim d1, d2 As Date, dt As TimeSpan
@@ -366,7 +364,6 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     initval = solver.ComputeMin(AddressOf FunctionValue, variables)
                     solver = Nothing
                 Case OptimizationMethod.IPOPT
-                    Calculator.CheckParallelPInvoke()
                     Using problem As New Ipopt(initval.Length, lconstr, uconstr, 0, Nothing, Nothing, _
                            0, 0, AddressOf eval_f, AddressOf eval_g, _
                            AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)

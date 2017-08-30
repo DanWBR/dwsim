@@ -9964,8 +9964,6 @@ Final3:
                 DirectCast(_FlashAlgorithm, Interfaces.ICustomXMLSerialization).LoadData(fadata)
 
                 Select Case Me.ComponentName
-                    Case "PC-SAFT"
-                        CType(Me, PCSAFTPropertyPackage).m_pr = myarr(7)
                     Case "Peng-Robinson (PR)"
                         CType(Me, PengRobinsonPropertyPackage).m_pr = myarr(7)
                     Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
@@ -10040,8 +10038,6 @@ Final3:
                     .Add(xdata.ToString)
 
                     Select Case Me.ComponentName
-                        Case "PC-SAFT"
-                            .Add(CType(Me, PCSAFTPropertyPackage).m_pr)
                         Case "Peng-Robinson (PR)"
                             .Add(CType(Me, PengRobinsonPropertyPackage).m_pr)
                         Case "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2)"
@@ -10245,25 +10241,6 @@ Final3:
             Next
 
             Select Case Me.ComponentName
-
-                Case "PC-SAFT"
-
-                    Dim pp As PCSAFTPropertyPackage = Me
-                    'pp.m_pr.InteractionParameters.Clear()
-                    For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "InteractionParameters").SingleOrDefault.Elements.ToList
-                        Dim ip As New Auxiliary.PCSIP() With {.compound1 = xel.@Compound1, .compound2 = xel.@Compound2, .casno1 = xel.@Compound1, .casno2 = xel.@Compound2, .kij = Double.Parse(xel.@Value, ci)}
-                        Dim dic As New Dictionary(Of String, Auxiliary.PCSIP)
-                        dic.Add(xel.@Compound2, ip)
-                        If Not pp.m_pr.InteractionParameters.ContainsKey(xel.@Compound1) Then
-                            pp.m_pr.InteractionParameters.Add(xel.@Compound1, dic)
-                        Else
-                            If Not pp.m_pr.InteractionParameters(xel.@Compound1).ContainsKey(xel.@Compound2) Then
-                                pp.m_pr.InteractionParameters(xel.@Compound1).Add(xel.@Compound2, ip)
-                            Else
-                                pp.m_pr.InteractionParameters(xel.@Compound1)(xel.@Compound2) = ip
-                            End If
-                        End If
-                    Next
 
                 Case "Peng-Robinson (PR)"
 
@@ -10568,23 +10545,6 @@ Final3:
                 Next
 
                 Select Case Me.ComponentName
-
-                    Case "PC-SAFT"
-
-                        Dim pp As PCSAFTPropertyPackage = Me
-
-                        .Add(New XElement("InteractionParameters"))
-                        For Each kvp As KeyValuePair(Of String, Dictionary(Of String, Auxiliary.PCSIP)) In pp.m_pr.InteractionParameters
-                            For Each kvp2 As KeyValuePair(Of String, Auxiliary.PCSIP) In kvp.Value
-                                If Not Me.CurrentMaterialStream Is Nothing Then
-                                    If Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp.Key) And Me.CurrentMaterialStream.Phases(0).Compounds.ContainsKey(kvp2.Key) Then
-                                        .Item(.Count - 1).Add(New XElement("InteractionParameter", New XAttribute("Compound1", kvp.Key),
-                                                                           New XAttribute("Compound2", kvp2.Key),
-                                                                           New XAttribute("Value", kvp2.Value.kij.ToString(ci))))
-                                    End If
-                                End If
-                            Next
-                        Next
 
                     Case "Peng-Robinson (PR)"
 

@@ -371,25 +371,6 @@ Namespace ExcelAddIn
                     End If
                     pp.Dispose()
                     pp = Nothing
-                Case "PC-SAFT"
-                    Dim pp As New PCSAFTPropertyPackage(True)
-                    If pp.m_pr.InteractionParameters.ContainsKey(Compound1) Then
-                        If pp.m_pr.InteractionParameters(Compound1).ContainsKey(Compound2) Then
-                            ipdata(1, 2) = pp.m_pr.InteractionParameters(Compound1)(Compound2).kij
-                        Else
-                            If pp.m_pr.InteractionParameters.ContainsKey(Compound2) Then
-                                If pp.m_pr.InteractionParameters(Compound2).ContainsKey(Compound1) Then
-                                    ipdata(1, 2) = pp.m_pr.InteractionParameters(Compound2)(Compound1).kij
-                                End If
-                            End If
-                        End If
-                    ElseIf pp.m_pr.InteractionParameters.ContainsKey(Compound2) Then
-                        If pp.m_pr.InteractionParameters(Compound2).ContainsKey(Compound1) Then
-                            ipdata(1, 2) = pp.m_pr.InteractionParameters(Compound2)(Compound1).kij
-                        End If
-                    End If
-                    pp.Dispose()
-                    pp = Nothing
                 Case "NRTL"
                     Dim pp As New NRTLPropertyPackage(True)
                     If pp.m_uni.InteractionParameters.ContainsKey(Compound1) Then
@@ -1695,29 +1676,6 @@ Namespace ExcelAddIn
             Dim i, j As Integer
 
             Select Case proppack
-                Case "PC-SAFT"
-                    With CType(pp, PCSAFTPropertyPackage).m_pr.InteractionParameters
-                        If Not TypeOf ip1 Is ExcelMissing And Not ip1 Is Nothing Then
-                            .Clear()
-                            i = 0
-                            For Each c1 As String In compounds
-                                If Not .ContainsKey(pp._availablecomps(c1).CAS_Number) Then .Add(pp._availablecomps(c1).CAS_Number, New Dictionary(Of String, PCSIP))
-                                j = 0
-                                For Each c2 As String In compounds
-                                    If Not .Item(pp._availablecomps(c1).CAS_Number).ContainsKey(pp._availablecomps(c2).CAS_Number) Then .Item(pp._availablecomps(c1).CAS_Number).Add(pp._availablecomps(c2).CAS_Number, New PCSIP())
-                                    With .Item(pp._availablecomps(c1).CAS_Number).Item(pp._availablecomps(c2).CAS_Number)
-                                        .casno1 = pp._availablecomps(c1).CAS_Number
-                                        .casno2 = pp._availablecomps(c2).CAS_Number
-                                        .compound1 = c1
-                                        .compound2 = c2
-                                        .kij = ip1(i, j)
-                                    End With
-                                    j += 1
-                                Next
-                                i += 1
-                            Next
-                        End If
-                    End With
                 Case "Peng-Robinson (PR)"
                     With CType(pp, PengRobinsonPropertyPackage).m_pr.InteractionParameters
                         CType(pp, PengRobinsonPropertyPackage).ip_changed = True

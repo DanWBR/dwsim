@@ -319,7 +319,6 @@
     <Compile Include="Models\ChaoSeader.vb" />
     <Compile Include="Models\ExtendedUNIQUAC.vb" />
     <Compile Include="Property Packages\ExtendedUNIQUAC.vb" />
-    <Compile Include="Property Packages\FPROPS.vb" />
     <Compile Include="Models\FPROPS.vb" />
     <Compile Include="Property Packages\GraysonStreed.vb" />
     <Compile Include="Models\GraysonStreed.vb" />
@@ -337,7 +336,6 @@
     <Compile Include="Models\NRTL.vb" />
     <Compile Include="Property Packages\NRTL.vb" />
     <Compile Include="Models\PCSAFT.vb" />
-    <Compile Include="Property Packages\PCSAFT.vb" />
     <Compile Include="Models\PengRobinson.vb" />
     <Compile Include="Property Packages\PengRobinson.vb" />
     <Compile Include="Models\PengRobinson2.vb" />

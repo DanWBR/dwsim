@@ -91,7 +91,6 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function AUX_PVAPi(index As Integer, T As Double) As Double
-            Calculator.CheckParallelPInvoke()
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
@@ -116,7 +115,6 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
-            Calculator.CheckParallelPInvoke()
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
                 Tmin = CoolProp.Props1SI(sub1, "TMIN")
@@ -980,8 +978,6 @@ Namespace PropertyPackages
 
         Public Overrides Function DW_CalcEnthalpy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
 
-            Calculator.CheckParallelPInvoke()
-
             Dim val As Double
             Dim i As Integer
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
@@ -1082,8 +1078,6 @@ Namespace PropertyPackages
         End Function
 
         Public Overrides Function DW_CalcEntropy(ByVal Vx As System.Array, ByVal T As Double, ByVal P As Double, ByVal st As State) As Double
-
-            Calculator.CheckParallelPInvoke()
 
             Dim val As Double
             Dim i As Integer
@@ -1235,8 +1229,6 @@ Namespace PropertyPackages
 
         Public Overrides Sub DW_CalcPhaseProps(ByVal Phase As Phase)
 
-            Calculator.CheckParallelPInvoke()
-
             Dim result As Double
             Dim dwpl As Phase
 
@@ -1383,8 +1375,6 @@ Namespace PropertyPackages
         End Sub
 
         Public Overrides Sub DW_CalcProp(ByVal [property] As String, ByVal phase As Phase)
-
-            Calculator.CheckParallelPInvoke()
 
             Dim result As Double = 0.0#
             Dim resultObj As Object = Nothing

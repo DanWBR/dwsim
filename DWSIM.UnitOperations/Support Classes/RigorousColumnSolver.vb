@@ -1204,7 +1204,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                         initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                         _solver = Nothing
                     Case OptimizationMethod.IPOPT
-                        Calculator.CheckParallelPInvoke()
                         Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
                         0, 0, AddressOf eval_f, AddressOf eval_g,
                         AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)
@@ -3315,7 +3314,6 @@ Namespace UnitOperations.Auxiliary.SepOps.SolvingMethods
                     initval = _solver.ComputeMin(AddressOf FunctionValue, variables)
                     _solver = Nothing
                 Case OptimizationMethod.IPOPT
-                    Calculator.CheckParallelPInvoke()
                     Using problem As New Ipopt(xvar.Length, lconstr, uconstr, 0, Nothing, Nothing,
                     0, 0, AddressOf eval_f, AddressOf eval_g,
                     AddressOf eval_grad_f, AddressOf eval_jac_g, AddressOf eval_h)

@@ -459,11 +459,6 @@ Public Class FormMain
 
     Sub AddPropPacks()
 
-        Dim FPP As FPROPSPropertyPackage = New FPROPSPropertyPackage()
-        FPP.ComponentName = DWSIM.App.GetLocalString("FPP")
-        FPP.ComponentDescription = DWSIM.App.GetLocalString("DescFPP")
-        PropertyPackages.Add(FPP.ComponentName.ToString, FPP)
-
         Dim CPPP As CoolPropPropertyPackage = New CoolPropPropertyPackage()
         CPPP.ComponentName = "CoolProp"
         CPPP.ComponentDescription = DWSIM.App.GetLocalString("DescCPPP")
@@ -483,11 +478,6 @@ Public Class FormMain
         SEAPP.ComponentName = DWSIM.App.GetLocalString("SEAPP")
         SEAPP.ComponentDescription = DWSIM.App.GetLocalString("DescSEAPP")
         PropertyPackages.Add(SEAPP.ComponentName.ToString, SEAPP)
-
-        Dim PCSAFTPP As PCSAFTPropertyPackage = New PCSAFTPropertyPackage()
-        PCSAFTPP.ComponentName = "PC-SAFT"
-        PCSAFTPP.ComponentDescription = DWSIM.App.GetLocalString("DescPCSAFTPP")
-        PropertyPackages.Add(PCSAFTPP.ComponentName.ToString, PCSAFTPP)
 
         Dim PRPP As PengRobinsonPropertyPackage = New PengRobinsonPropertyPackage()
         PRPP.ComponentName = "Peng-Robinson (PR)"
@@ -790,7 +780,6 @@ Public Class FormMain
         csdb.Load()
         cpa = csdb.Transfer()
         For Each cp As BaseClasses.ConstantProperties In cpa
-            cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
                 Me.AvailableComponents.Add(cp.Name, cp)
             End If
@@ -804,7 +793,6 @@ Public Class FormMain
         dwdb.Load()
         cpa = dwdb.Transfer()
         For Each cp As BaseClasses.ConstantProperties In cpa
-            cp.IsFPROPSSupported = FPROPSPropertyPackage.SupportsCompound(cp.Name)
             If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
         Next
     End Sub

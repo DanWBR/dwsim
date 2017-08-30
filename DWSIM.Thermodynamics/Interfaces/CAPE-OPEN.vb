@@ -31,15 +31,9 @@ Public Class CAPEOPENManager
     Public Function GetPropertyPackage(ByVal PackageName As String) As Object Implements ICapeThermoPropertyPackageManager.GetPropertyPackage
         Dim pp As PropertyPackage = Nothing
         Select Case PackageName
-            Case "FPROPS"
-                pp = New FPROPSPropertyPackage(True)
-                pp.ComponentDescription = Calculator.GetLocalString("DescFPP")
             Case "CoolProp"
                 pp = New CoolPropPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescCPPP")
-            Case "PC-SAFT"
-                pp = New PCSAFTPropertyPackage(True)
-                pp.ComponentDescription = Calculator.GetLocalString("DescPCSAFTPP")
             Case "Peng-Robinson (PR)"
                 pp = New PengRobinsonPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescPengRobinsonPP")
@@ -102,7 +96,7 @@ Public Class CAPEOPENManager
     End Function
 
     Public Function GetPropertyPackageList() As Object Implements ICapeThermoPropertyPackageManager.GetPropertyPackageList
-        Return New String() {"FPROPS", "CoolProp", "PC-SAFT", "Peng-Robinson (PR)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)", _
+        Return New String() {"CoolProp", "Peng-Robinson (PR)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)", _
                              "UNIFAC", "UNIFAC-LL", "Modified UNIFAC (Dortmund)", "Modified UNIFAC (NIST)", "NRTL", "UNIQUAC", _
                             "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables", "IAPWS-08 Seawater", "Sour Water"}
     End Function
