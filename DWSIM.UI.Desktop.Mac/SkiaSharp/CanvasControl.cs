@@ -36,6 +36,8 @@ namespace DWSIM.UI.Desktop.Mac
                 nativecontrol._lastTouchY = e.Location.Y;
                 nativecontrol.fsurface.InputPress((int)(nativecontrol._lastTouchX), (int)(nativecontrol._lastTouchY));
                 nativecontrol.NeedsDisplay = true;
+                nativecontrol.BecomeFirstResponder();
+                nativecontrol.UpdateTrackingAreas();
             };
         
         }
@@ -114,6 +116,7 @@ namespace DWSIM.UI.Desktop.Mac
             set
             {
                 base.Bounds = value;
+                BecomeFirstResponder();
                 UpdateTrackingAreas();
             }
         }
