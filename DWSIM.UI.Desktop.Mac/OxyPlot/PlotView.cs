@@ -219,7 +219,7 @@ namespace DWSIM.UI.Desktop.Mac
 
             if (actualModel != null && !actualModel.Background.IsUndefined())
             {
-                // this.BackgroundColor = actualModel.Background.ToUIColor();
+                //this.BackgroundColor = actualModel.Background.ToUIColor();
             }
             else
             {
@@ -304,6 +304,8 @@ namespace DWSIM.UI.Desktop.Mac
                 context.TranslateCTM(0f, dirtyRect.Height);
                 context.ScaleCTM(1f, -1f);
                 // TODO: scale font matrix??
+                context.SetFillColorWithColor(new CGColor("White"));
+                context.FillRect(Bounds);
                 using (var renderer = new CoreGraphicsRenderContext(context))
                 {
                     ((IPlotModel)this.model).Render(renderer, dirtyRect.Width, dirtyRect.Height);
