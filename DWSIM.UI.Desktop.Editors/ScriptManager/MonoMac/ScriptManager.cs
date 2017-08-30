@@ -330,7 +330,9 @@ namespace DWSIM.UI.Desktop.Editors
 
         public override void UpdateScripts()
         {
-
+            if (lbScripts.SelectedIndex < 0) return; 
+            Flowsheet.ShowMessage("Storing updated scripts for saving...", IFlowsheet.MessageType.Information);
+            Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
         }
 
     }
