@@ -45,6 +45,8 @@ namespace DWSIM.UI.Desktop.Editors
             var leftcontainer = new TableLayout();
             var rightcontainer = new TableLayout();
 
+            ScriptEditor = new ScriptItem_Mac();
+
             var btnNew = new Button { Text = "New Script" };
             btnNew.Click += (sender, e) =>
             {
@@ -163,8 +165,7 @@ namespace DWSIM.UI.Desktop.Editors
                 lbScripts.Items.RemoveAt(lbScripts.SelectedIndex);
             };
 
-            var btnRun = new Button { Text = "Update/Run Selected" };
-            btnRun.Click += (sender, e) =>
+            ScriptEditor.btnRun.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "'...", IFlowsheet.MessageType.Information);
@@ -172,8 +173,15 @@ namespace DWSIM.UI.Desktop.Editors
                 Flowsheet.RunScript(lbScripts.SelectedKey);
             };
 
-            var btnUpdate = new Button { Text = "Update Selected" };
-            btnUpdate.Click += (sender, e) =>
+            ScriptEditor.btnRunAsync.Click += (sender, e) =>
+            {
+                if (lbScripts.SelectedIndex < 0) return;
+                Flowsheet.ShowMessage("Running script '" + Flowsheet.Scripts[lbScripts.SelectedKey].Title + "' asynchronously...", IFlowsheet.MessageType.Information);
+                Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
+                Flowsheet.RunScriptAsync(lbScripts.SelectedKey);
+            };
+
+            ScriptEditor.btnUpdate.Click += (sender, e) =>
             {
                 if (lbScripts.SelectedIndex < 0) return;
                 Flowsheet.Scripts[lbScripts.SelectedKey].ScriptText = ScriptEditor.txtScript.Text;
@@ -181,15 +189,11 @@ namespace DWSIM.UI.Desktop.Editors
 
             leftcontainer.Rows.Add(new Label { Text = "Script List", Font = SystemFonts.Bold() });
             leftcontainer.Rows.Add(new TableRow(btnNew));
-            leftcontainer.Rows.Add(new TableRow(btnUpdate));
-            leftcontainer.Rows.Add(new TableRow(btnRun));
             leftcontainer.Rows.Add(new TableRow(btnDelete));
             leftcontainer.Rows.Add(new TableRow(lbScripts));
             leftcontainer.Padding = new Padding(5, 5, 5, 5);
             leftcontainer.Spacing = new Size(0, 0);
             leftcontainer.Width = 200;
-
-            ScriptEditor = new ScriptItem_Mac();
 
             ScriptEditor.chkLink.CheckedChanged += (sender, e) =>
             {

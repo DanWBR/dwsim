@@ -54,9 +54,10 @@ Public Module OxyPlot
     End Sub
 
     <System.Runtime.CompilerServices.Extension>
-    Public Sub AddLineSeries(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), title As String, yaxiskey As String)
+    Public Sub AddLineSeriesWithKeys(model As PlotModel, xSeries As IEnumerable(Of Double), ySeries As IEnumerable(Of Double), title As String, yaxiskey As String, xaxiskey As String)
         model.AddLineSeries(xSeries, ySeries, OxyColors.Automatic, title)
         DirectCast(model.Series(model.Series.Count - 1), LineSeries).YAxisKey = yaxiskey
+        DirectCast(model.Series(model.Series.Count - 1), LineSeries).XAxisKey = xaxiskey
     End Sub
 
     <System.Runtime.CompilerServices.Extension>

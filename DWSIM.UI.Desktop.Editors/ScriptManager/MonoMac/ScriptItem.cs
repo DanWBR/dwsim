@@ -40,6 +40,7 @@ namespace DWSIM.UI.Desktop.Editors
         public DropDown cbLinkedObject, cbLinkedEvent, cbPythonInt;
         public DWSIM.UI.Controls.CodeEditorControl txtScript;
         public TextBox txtName;
+        public Button btnRun, btnUpdate, btnRunAsync;
 
         public ScriptItem_Mac()
         {
@@ -49,14 +50,14 @@ namespace DWSIM.UI.Desktop.Editors
         void Init()
         {
 
-            chkLink = new CheckBox { Text = "Link Script"};
+            chkLink = new CheckBox { Text = "Link Script", Height = 22};
 
             var lbl1 = new Label { Text = "Object", VerticalAlignment = VerticalAlignment.Center};
             var lbl2 = new Label { Text = "Event", VerticalAlignment = VerticalAlignment.Center };
             var lbl3 = new Label { Text = "Python Interpreter", VerticalAlignment = VerticalAlignment.Center };
 
-            var lbl4 = new Label { Text = "Script Name", VerticalAlignment = VerticalAlignment.Top };
-            txtName = new TextBox { Text = "Script Name" };
+            var lbl4 = new Label { Text = "Script Name", VerticalAlignment = VerticalAlignment.Center };
+            txtName = new TextBox { Text = "Script Name", Height = 22 };
 
             cbLinkedObject = new DropDown();
             cbLinkedEvent = new DropDown();
@@ -68,10 +69,16 @@ namespace DWSIM.UI.Desktop.Editors
             var tr1 = new TableRow(chkLink, lbl1, cbLinkedObject, lbl2, cbLinkedEvent, null, lbl3, cbPythonInt);
             var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb1.Rows.Add(tr1);
+            tb1.Height = 34;
 
-            var tr2 = new TableRow(lbl4, txtName);
+            btnRun = new Button { Text = "Store and Run" };
+            btnRunAsync = new Button { Text = "Store and Run Async" };
+            btnUpdate = new Button { Text = "Store Updated Script" };
+            
+            var tr2 = new TableRow(btnUpdate, btnRun, btnRunAsync, lbl4, txtName);
             var tb2 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb2.Rows.Add(tr2);
+            tb2.Height = 34;
 
             cbLinkedObject.SelectedIndexChanged += (sender, e) =>
             {

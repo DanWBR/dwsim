@@ -68,7 +68,8 @@ namespace DWSIM.UI.Desktop.Editors
             var lbl3 = new Label { Text = "Python Interpreter", VerticalAlignment = VerticalAlignment.Center };
 
             var btn1 = new Button {Text = "Update Script"};
-            var btn2 = new Button { Text = "Update Script and Run" };
+            var btn2 = new Button { Text = "Update and Run" };
+            var btn3 = new Button { Text = "Update and Run (Async)" };
 
             btn1.Click += (sender, e) => {
                 flowsheet.Scripts[scriptID].ScriptText = txtScript.Text;
@@ -78,6 +79,13 @@ namespace DWSIM.UI.Desktop.Editors
                 flowsheet.Scripts[scriptID].ScriptText = txtScript.Text;
                 flowsheet.ShowMessage("Running script '" + script.Title + "'...", IFlowsheet.MessageType.Information);
                 flowsheet.RunScript(scriptID);
+            };
+
+            btn3.Click += (sender, e) =>
+            {
+                flowsheet.Scripts[scriptID].ScriptText = txtScript.Text;
+                flowsheet.ShowMessage("Running script '" + script.Title + "' asynchronously...", IFlowsheet.MessageType.Information);
+                flowsheet.RunScriptAsync(scriptID);
             };
 
             var lbl4 = new Label { Text = "Script Name", VerticalAlignment = VerticalAlignment.Center };
@@ -90,7 +98,7 @@ namespace DWSIM.UI.Desktop.Editors
             cbLinkedEvent.Items.AddRange(new String[] { "Simulation Opened", "Simulation Saved", "Simulation Closed", "1 min. Timer", "5 min. Timer", "15 min. Timer", "30 min. Timer", "60 min. Timer" }.Select((x) => new ListItem { Key = x, Text = x }));
             cbPythonInt.Items.AddRange(new String[] { "IronPython", "Python.NET" }.Select((x) => new ListItem { Key = x, Text = x }));
 
-            var tr1 = new TableRow(btn1, btn2, lbl4, txtName, chkLink, lbl1, cbLinkedObject, lbl2, cbLinkedEvent, lbl3, cbPythonInt);
+            var tr1 = new TableRow(btn1, btn2, btn3, lbl4, txtName, chkLink, lbl1, cbLinkedObject, lbl2, cbLinkedEvent, lbl3, cbPythonInt);
             tr1.Cells[3].ScaleWidth = true;
             var tb1 = new TableLayout { Spacing = new Size(5, 5), Padding = new Padding(0, 0, 0, 10) };
             tb1.Rows.Add(tr1);

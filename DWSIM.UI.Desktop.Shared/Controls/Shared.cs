@@ -585,7 +585,8 @@ namespace DWSIM.UI.Shared
                 MinorGridlineStyle = OxyPlot.LineStyle.Dot,
                 Position = OxyPlot.Axes.AxisPosition.Bottom,
                 FontSize = 12,
-                Title = xtitle
+                Title = xtitle,
+                Key = "x",
             });
             model.Axes.Add(new OxyPlot.Axes.LinearAxis()
             {

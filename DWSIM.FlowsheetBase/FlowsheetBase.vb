@@ -1963,6 +1963,10 @@ Label_00CC:
         End If
     End Sub
 
+    Public Async Sub RunScriptAsync(ScriptID As String)
+        Await Task.Factory.StartNew(Sub() RunScript(ScriptID))
+    End Sub
+
     Private Sub RunScript_IronPython(scripttext As String)
 
         Dim scope As Microsoft.Scripting.Hosting.ScriptScope
