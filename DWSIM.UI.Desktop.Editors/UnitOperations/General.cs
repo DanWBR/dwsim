@@ -514,6 +514,8 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ObjectType.Pump:
                     var pump = (Pump)SimObject;
+                    Button btn1 = null;
+                    DropDown drop1 = null;
                     int pos4 = 0;
                     switch (pump.CalcMode)
                     {
@@ -529,9 +531,13 @@ namespace DWSIM.UI.Desktop.Editors
                         case Pump.CalculationMode.EnergyStream:
                             pos4 = 3;
                             break;
+                        case Pump.CalculationMode.Curves:
+                            pos4 = 4;
+                            break;
                     }
-                    s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.pumpcalcmode().ToList(), pos4, (DropDown arg3, EventArgs ev) =>
+                    drop1 = s.CreateAndAddDropDownRow(container, "Calculation Mode", StringResources.pumpcalcmode().ToList(), pos4, (DropDown arg3, EventArgs ev) =>
                     {
+                        btn1.Enabled = false;
                         switch (arg3.SelectedIndex)
                         {
                             case 0:
@@ -546,10 +552,24 @@ namespace DWSIM.UI.Desktop.Editors
                             case 3:
                                 pump.CalcMode = Pump.CalculationMode.EnergyStream;
                                 break;
+                            case 4:
+                                pump.CalcMode = Pump.CalculationMode.Curves;
+                                btn1.Enabled = true;
+                                break;
                         }
                     });
+
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Calculation Mode"));
+
+                    btn1 = s.CreateAndAddLabelAndButtonRow(container, "Pump Performance Curves", "Edit Curves", null, (sender, e) => {
+                        var editor = new DWSIM.UnitOperations.EditingForm_Pump_Curves { selectedpump = pump };
+                        editor.ShowDialog();                    
+                    });
+                    btn1.Enabled = drop1.SelectedIndex == 4;
+
+                    s.CreateAndAddDescriptionRow(container, "Pump Performance Curves need to be set only if you chose this calculation mode.");
+
                     s.CreateAndAddTextBoxRow(container, nf, "Pressure Increase (" + su.deltaP + ")", cv.ConvertFromSI(su.deltaP, pump.DeltaP.GetValueOrDefault()),
                                    (TextBox arg3, EventArgs ev) =>
                                    {

@@ -117,29 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tb5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label15.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb10.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="DataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="dgv5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label10.Text" xml:space="preserve">
     <value>System H.</value>
-  </data>
-  <data name="Label10.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ch5.Size" type="System.Drawing.Size, System.Drawing">
@@ -148,32 +130,14 @@
   <data name="ch5.Text" xml:space="preserve">
     <value>Enable</value>
   </data>
-  <data name="ch5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="Label5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox5.Text" xml:space="preserve">
     <value>System Head</value>
-  </data>
-  <data name="GroupBox5.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tb4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label14.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb9.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ch4.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -181,20 +145,8 @@
   <data name="ch4.Text" xml:space="preserve">
     <value>Enable</value>
   </data>
-  <data name="ch4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="DataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
-  </data>
-  <data name="dgv4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label8.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -202,26 +154,8 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="Label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox4.Text" xml:space="preserve">
     <value>Required NPSH</value>
-  </data>
-  <data name="GroupBox4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tb3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label13.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb8.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ch3.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -229,14 +163,8 @@
   <data name="ch3.Text" xml:space="preserve">
     <value>Enable</value>
   </data>
-  <data name="ch3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="DataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
-  </data>
-  <data name="dgv3.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -244,32 +172,14 @@
   <data name="Label9.Text" xml:space="preserve">
     <value>Efficiency</value>
   </data>
-  <data name="Label9.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="Label4.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox3.Text" xml:space="preserve">
     <value>Efficiency</value>
-  </data>
-  <data name="GroupBox3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tb2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label12.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb7.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ch2.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -277,20 +187,11 @@
   <data name="ch2.Text" xml:space="preserve">
     <value>Enable</value>
   </data>
-  <data name="ch2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="DataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
   <data name="DataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
     <value>Power</value>
-  </data>
-  <data name="dgv2.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -298,38 +199,17 @@
   <data name="Label2.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="Label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
   <data name="Label7.Text" xml:space="preserve">
     <value>Power</value>
   </data>
-  <data name="Label7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox2.Text" xml:space="preserve">
     <value>Power</value>
   </data>
-  <data name="GroupBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tb1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label11.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="vap.HeaderText" xml:space="preserve">
     <value>Flow Rate</value>
-  </data>
-  <data name="dgv1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ch1.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 17</value>
@@ -337,35 +217,14 @@
   <data name="ch1.Text" xml:space="preserve">
     <value>Enable</value>
   </data>
-  <data name="ch1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="Label3.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label6.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GroupBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem1.Title" xml:space="preserve">
     <value>Configure Curves</value>
-  </data>
-  <data name="FaTabStripItem1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Label17.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label18.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -373,26 +232,11 @@
   <data name="Label18.Text" xml:space="preserve">
     <value>Efficiency</value>
   </data>
-  <data name="Label18.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbeffunit.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label19.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
   </data>
   <data name="Label19.Text" xml:space="preserve">
     <value>Power</value>
-  </data>
-  <data name="Label19.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbpowerunit.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbheadunit.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -400,29 +244,11 @@
   <data name="Label16.Text" xml:space="preserve">
     <value>Flow Rate</value>
   </data>
-  <data name="Label16.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cbflowunit.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="chart1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="GroupBox7.Text" xml:space="preserve">
     <value>Graph</value>
   </data>
-  <data name="GroupBox7.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="FaTabStripItem2.Title" xml:space="preserve">
     <value>Graph</value>
-  </data>
-  <data name="FaTabStripItem2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FaTabStrip1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="ToolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>68, 22</value>
@@ -454,20 +280,11 @@
   <data name="TSTBStatus.Text" xml:space="preserve">
     <value>Saved</value>
   </data>
-  <data name="ToolStrip1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="Label22.Location" type="System.Drawing.Point, System.Drawing">
     <value>464, 10</value>
   </data>
-  <data name="Label22.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="TBImpellerSpeed.Location" type="System.Drawing.Point, System.Drawing">
     <value>358, 6</value>
-  </data>
-  <data name="TBImpellerSpeed.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label21.Location" type="System.Drawing.Point, System.Drawing">
     <value>289, 10</value>
@@ -478,20 +295,11 @@
   <data name="Label21.Text" xml:space="preserve">
     <value>Revolutions</value>
   </data>
-  <data name="Label21.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="CBDiameterUnit.Location" type="System.Drawing.Point, System.Drawing">
     <value>207, 6</value>
   </data>
-  <data name="CBDiameterUnit.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="TBImpellerDiam.Location" type="System.Drawing.Point, System.Drawing">
     <value>101, 6</value>
-  </data>
-  <data name="TBImpellerDiam.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="Label20.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 10</value>
@@ -502,17 +310,11 @@
   <data name="Label20.Text" xml:space="preserve">
     <value>Impeller diameter</value>
   </data>
-  <data name="Label20.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Panel1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
+  <data name="$this.Text" xml:space="preserve">
+    <value>Pump Performance Curves Editor</value>
   </data>
 </root>

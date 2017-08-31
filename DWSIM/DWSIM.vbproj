@@ -362,7 +362,9 @@
     <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.Designer.vb">
       <DependentUpon>SimulationObjectsPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.vb" />
+    <Compile Include="Forms\Flowsheet Components\SimulationObjectsPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormAddFlowsheetObject.Designer.vb">
       <DependentUpon>FormAddFlowsheetObject.vb</DependentUpon>
     </Compile>
@@ -396,7 +398,9 @@
     <Compile Include="Forms\FormEditGraphicObject.Designer.vb">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEditGraphicObject.vb" />
+    <Compile Include="Forms\FormEditGraphicObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormImportCompoundChEDLThermo.Designer.vb">
       <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
     </Compile>
@@ -530,19 +534,27 @@
     <Compile Include="Forms\Flowsheet Components\COReportsPanel.Designer.vb">
       <DependentUpon>COReportsPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\COReportsPanel.vb" />
+    <Compile Include="Forms\Flowsheet Components\COReportsPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\ConsoleOutput.Designer.vb">
       <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\ConsoleOutput.vb" />
+    <Compile Include="Forms\Flowsheet Components\ConsoleOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\WatchPanel.Designer.vb">
       <DependentUpon>WatchPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\WatchPanel.vb" />
+    <Compile Include="Forms\Flowsheet Components\WatchPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Analysis\FormOptimization.Designer.vb">
       <DependentUpon>FormOptimization.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Analysis\FormOptimization.vb" />
+    <Compile Include="Forms\Flowsheet Analysis\FormOptimization.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormReportConfig.designer.vb">
       <DependentUpon>FormReportConfig.vb</DependentUpon>
     </Compile>
@@ -552,7 +564,9 @@
     <Compile Include="Forms\Flowsheet Analysis\FormSensAnalysis.Designer.vb">
       <DependentUpon>FormSensAnalysis.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Analysis\FormSensAnalysis.vb" />
+    <Compile Include="Forms\Flowsheet Analysis\FormSensAnalysis.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormWelcome.Designer.vb">
       <DependentUpon>FormWelcome.vb</DependentUpon>
     </Compile>
@@ -562,14 +576,18 @@
     <Compile Include="Forms\FormScript.Designer.vb">
       <DependentUpon>FormScript.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormScript.vb" />
+    <Compile Include="Forms\FormScript.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Objects\Classes\Extenders\ScintillaExtender.vb" />
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Objects\Classes\General\TableGraphic.vb" />
     <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.Designer.vb">
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.vb" />
+    <Compile Include="Forms\Flowsheet Components\MaterialStreamPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormOptions.Designer.vb">
       <DependentUpon>FormOptions.vb</DependentUpon>
     </Compile>
@@ -585,16 +603,22 @@
     <Compile Include="Forms\FormSimulSettings.Designer.vb">
       <DependentUpon>FormSimulSettings.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormSimulSettings.vb" />
+    <Compile Include="Forms\FormSimulSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Objects\Classes\Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Forms\Flowsheet Components\LogPanel.Designer.vb">
       <DependentUpon>LogPanel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\LogPanel.vb" />
+    <Compile Include="Forms\Flowsheet Components\LogPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.Designer.vb">
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.vb" />
+    <Compile Include="Forms\Flowsheet Components\FlowsheetSurface.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\Flowsheet\FormFlowsheet.Designer.vb">
       <DependentUpon>FormFlowsheet.vb</DependentUpon>
     </Compile>
@@ -678,7 +702,9 @@
     <Compile Include="Tools\Distillation Curve Characterization\DCCharacterizationWizard.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Utilities\Base Class\AttachedUtilityClass.vb" />
+    <Compile Include="Utilities\Base Class\AttachedUtilityClass.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\Petroleum Cold Flow Properties\FrmColdProperties.Designer.vb">
       <DependentUpon>FrmColdProperties.vb</DependentUpon>
     </Compile>
@@ -694,7 +720,9 @@
     <Compile Include="Forms\Flowsheet Components\SpreadsheetForm.Designer.vb">
       <DependentUpon>SpreadsheetForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\SpreadsheetForm.vb" />
+    <Compile Include="Forms\Flowsheet Components\SpreadsheetForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utilities\Binary Envelope\FormBinEnv.Designer.vb">
       <DependentUpon>FormBinEnv.vb</DependentUpon>
     </Compile>
@@ -748,7 +776,9 @@
     <Compile Include="Tools\Reaction Subsystem Editors\FormReacManager.Designer.vb">
       <DependentUpon>FormReacManager.vb</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Reaction Subsystem Editors\FormReacManager.vb" />
+    <Compile Include="Tools\Reaction Subsystem Editors\FormReacManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tools\System of Units Creator\FormUnitGen.Designer.vb">
       <DependentUpon>FormUnitGen.vb</DependentUpon>
     </Compile>
@@ -1136,6 +1166,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>DWSIM.Controls.DockPanel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
@@ -1143,10 +1177,6 @@
     <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.ThemeVS2012Light.csproj">
       <Project>{4ed4fdb5-9fd0-49e6-876d-1635f727c755}</Project>
       <Name>DWSIM.Controls.DockPanel.ThemeVS2012Light</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Controls.DockPanel\WinFormsUI\DWSIM.Controls.DockPanel.csproj">
-      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
-      <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math.DotNumerics\DWSIM.MathOps.DotNumerics.csproj">
       <Project>{48185ef1-b73b-457b-aa37-0bce567c5ab1}</Project>

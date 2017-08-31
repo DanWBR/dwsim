@@ -17,8 +17,6 @@ Imports System.Threading.Tasks
     Public fc As FormFlowsheet
     Private reader As Jolt.XmlDocCommentReader
 
-    Public Shared Property AbortScript As Boolean
-
     Private Sub FormVBScript_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not DWSIM.App.IsRunningOnMono Then reader = New Jolt.XmlDocCommentReader(My.Application.Info.DirectoryPath & Path.DirectorySeparatorChar & "DWSIM.xml")
@@ -89,9 +87,8 @@ Imports System.Threading.Tasks
 
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripButton1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRun.Click
 
-        AbortScript = False
         If Not Me.TabStripScripts.SelectedItem Is Nothing Then
             If DWSIM.App.IsRunningOnMono Then
                 Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
@@ -140,7 +137,6 @@ Imports System.Threading.Tasks
         scope = engine.CreateScope()
         scope.SetVariable("Plugins", My.Application.UtilityPlugins)
         scope.SetVariable("Flowsheet", fsheet)
-        scope.SetVariable("AbortScript", AbortScript)
         scope.SetVariable("Spreadsheet", fsheet.FormSpreadsheet)
         Dim Solver As New FlowsheetSolver.FlowsheetSolver
         scope.SetVariable("Solver", Solver)
@@ -207,7 +203,6 @@ Imports System.Threading.Tasks
 
                 locals.SetItem("Plugins", My.Application.UtilityPlugins.ToPython)
                 locals.SetItem("Flowsheet", fsheet.ToPython)
-                locals.SetItem("AbortScript", AbortScript.ToPython)
                 locals.SetItem("Spreadsheet", fsheet.FormSpreadsheet.ToPython)
                 Dim Solver As New FlowsheetSolver.FlowsheetSolver
                 locals.SetItem("Solver", Solver.ToPython)
@@ -626,7 +621,8 @@ Imports System.Threading.Tasks
 
     Private Sub scriptcontrol_KeyDown(sender As Object, e As KeyEventArgs)
 
-        If e.KeyCode = Keys.F5 Then Button1_Click(sender, e)
+        If e.KeyCode = Keys.F5 Then btnRunAsync.PerformClick()
+        If e.KeyCode = Keys.F5 And e.Modifiers = Keys.Shift Then btnRun.PerformClick()
 
     End Sub
 
@@ -731,9 +727,28 @@ Imports System.Threading.Tasks
         End If
     End Sub
 
-    Private Sub ToolStripButton2_Click_2(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
-        AbortScript = True
-        Application.DoEvents()
+    Private Sub btnRunAsync_Click(sender As Object, e As EventArgs) Handles btnRunAsync.Click
+
+        If Not Me.TabStripScripts.SelectedItem Is Nothing Then
+            If DWSIM.App.IsRunningOnMono Then
+                Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).txtScript.Text
+                Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControlMono).cbPythonEngine.SelectedIndex
+                If interp = 0 Then
+                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc))
+                Else
+                    Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
+                End If
+            Else
+                Dim script = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).txtScript.Text
+                Dim interp = DirectCast(Me.TabStripScripts.SelectedItem.Controls(0).Controls(0), ScriptEditorControl).cbPythonEngine.SelectedIndex
+                If interp = 0 Then
+                    Task.Factory.StartNew(Sub() RunScript_IronPython(script, fc))
+                Else
+                    Task.Factory.StartNew(Sub() RunScript_PythonNET(script, fc))
+                End If
+            End If
+        End If
+
     End Sub
 
 End Class

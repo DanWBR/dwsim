@@ -23,6 +23,8 @@ using DWSIM.Thermodynamics.PropertyPackages;
 using DWSIM.Interfaces.Enums;
 using DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps;
 
+using DWSIM.ExtensionMethods;
+
 namespace DWSIM.UI.Desktop.Editors
 {
     public class DistillationColumnEditor
@@ -93,19 +95,6 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             s.CreateAndAddLabelRow(container, "Object Properties");
-
-            var methods = new string[] { "Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)", "Burningham-Otto (Sum Rates) (Absorber Only)" };
-            var strategies = new string[] { "Direct Rigorous", "Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous" };
-
-            s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), (int)column.SolvingMethod, (sender, e) =>
-            {
-                column.SolvingMethod = sender.SelectedIndex;
-            });
-
-            s.CreateAndAddDropDownRow(container, "Solving Scheme", strategies.ToList(), (int)column.SolverScheme, (sender, e) =>
-            {
-                column.SolverScheme = (UnitOperations.UnitOperations.Column.SolvingScheme)sender.SelectedIndex;
-            });
 
             s.CreateAndAddButtonRow(container, "Define Number of Stages", null, (arg1, e) =>
             {
@@ -485,7 +474,79 @@ namespace DWSIM.UI.Desktop.Editors
                                          column.Specs["R"].SpecUnit = units[arg1.SelectedIndex];
                                      });
 
+            s.CreateAndAddLabelRow(container, "Column Solver Selection");
 
+            var methods = new string[] { "Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)", "Burningham-Otto (Sum Rates) (Absorber Only)" };
+            var strategies = new string[] { "Direct Rigorous", "Ideal K first, then Rigorous", "Ideal H first, then Rigorous", "Ideal K+H first, then Rigorous" };
+
+            s.CreateAndAddDropDownRow(container, "Solving Method", methods.ToList(), (int)column.SolvingMethod, (sender, e) =>
+            {
+                column.SolvingMethod = sender.SelectedIndex;
+            });
+
+            s.CreateAndAddDropDownRow(container, "Solving Scheme", strategies.ToList(), (int)column.SolverScheme, (sender, e) =>
+            {
+                column.SolverScheme = (UnitOperations.UnitOperations.Column.SolvingScheme)sender.SelectedIndex;
+            });
+
+            s.CreateAndAddLabelRow(container, "Bubble Point Solver Settings");
+
+            s.CreateAndAddTextBoxRow(container, "N0", "Stop at iteration number", column.StopAtIterationNumber,
+                (sender, e) =>
+                {
+                    if (sender.Text.IsValidDouble()) column.StopAtIterationNumber = (int)sender.Text.ToDoubleFromCurrent();
+                });
+
+            s.CreateAndAddLabelRow(container, "Newton Solver Settings");
+
+            var solvers = new List<string>() { "Limited Memory BGFS", "Truncated Newton", "Simplex", "IPOPT", "Particle Swarm", "Local Unimodal Sampling", "Gradient Descent", "Differential Evolution", "Particle Swarm Optimization", "Many Optimizing Liaisons", "Mesh" };
+
+            s.CreateAndAddDropDownRow(container, "Non-Linear Solver", solvers, (int)column.NS_Solver, (sender, e) => column.NS_Solver = (DWSIM.Interfaces.Enums.OptimizationMethod)sender.SelectedIndex);
+
+            s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Lower Bound", column.NS_LowerBound, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.NS_LowerBound = (int)sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Upper Bound", column.NS_UpperBound, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.NS_UpperBound = (int)sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Derivative Perturbation", column.SC_NumericalDerivativeStep, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.SC_NumericalDerivativeStep = (int)sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Iteration Variables: Simplex Preconditioning", column.NS_SimplexPreconditioning, (sender, e) => column.NS_SimplexPreconditioning = sender.Checked.GetValueOrDefault());
+
+            s.CreateAndAddLabelRow(container, "Inside-Out Solver Settings");
+
+            s.CreateAndAddDropDownRow(container, "Non-Linear Solver", solvers, (int)column.IO_Solver, (sender, e) => column.IO_Solver = (DWSIM.Interfaces.Enums.OptimizationMethod)sender.SelectedIndex);
+
+            s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Lower Bound", column.IO_LowerBound, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.IO_LowerBound = (int)sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Upper Bound", column.IO_UpperBound, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.IO_UpperBound = (int)sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddTextBoxRow(container, nf, "Iteration Variables: Derivative Perturbation", column.IO_NumericalDerivativeStep, (sender, e) =>
+            {
+                if (sender.Text.IsValidDouble()) column.IO_NumericalDerivativeStep = (int)sender.Text.ToDoubleFromCurrent();
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Adjust Sb Scaling Factor", column.AdjustSb, (sender, e) => column.AdjustSb = sender.Checked.GetValueOrDefault());
+
+            s.CreateAndAddCheckBoxRow(container, "Calculate Kb by Weighted Average", column.KbjWeightedAverage, (sender, e) => column.KbjWeightedAverage = sender.Checked.GetValueOrDefault());
+
+            s.CreateAndAddEmptySpace(container);
+            s.CreateAndAddEmptySpace(container);
+            s.CreateAndAddEmptySpace(container);
+        
         }
 
 

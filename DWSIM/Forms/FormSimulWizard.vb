@@ -324,7 +324,7 @@ Public Class FormSimulWizard
         Dim pp As PropertyPackages.PropertyPackage
         pp = FormMain.PropertyPackages(ListViewPP.SelectedItems(0).Text).Clone
         With pp
-            pp.Tag = "PP_" & CStr(Me.dgvpp.Rows.Count + 1)
+            pp.Tag = pp.ComponentName + " (" + (FrmChild.PropertyPackages.Count + 1).ToString() + ")"
             pp.UniqueID = "PP-" & Guid.NewGuid.ToString
             pp.Flowsheet = FrmChild
         End With

@@ -58,7 +58,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] pumpcalcmode()
         {
-            return new String[] { "Outlet Pressure", "Pressure Increase", "Power", "Energy Stream" };
+            return new String[] { "Outlet Pressure", "Pressure Increase", "Power", "Energy Stream", "Defined Curves" };
         }
         public static String[] condensertype()
         {

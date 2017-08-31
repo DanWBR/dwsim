@@ -152,8 +152,10 @@ namespace DWSIM.UI
                 MostRecentList.TextColor = Colors.White;
             }
 
+            var invertedlist = new List<string>(GlobalSettings.Settings.MostRecentFiles);
+            invertedlist.Reverse();
 
-            foreach (var item in GlobalSettings.Settings.MostRecentFiles)
+            foreach (var item in invertedlist)
             {
                 if (File.Exists(item)) MostRecentList.Items.Add(new ListItem { Text = item, Key = item });
             }
