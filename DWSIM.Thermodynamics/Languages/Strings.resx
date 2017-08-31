@@ -307,7 +307,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Usar correção de volume (Peneloux) (0 = Desativar, 1 = Ativar)</value>
   </data>
   <data name="ParallelPInvokeError" xml:space="preserve">
-    <value>Este recurso utiliza uma biblioteca nativa (não-.NET) da plataforma em execução, e não funciona com o modo de cálculo em paralelo na CPU ativado. por favor desative esse recurso e tente novamente.</value>
+    <value>O recurso de Aceleração em Paralelo da CPU foi desabilitado automaticamente para que o solver não-linear IPOPT possa ser utilizado pelo DWSIM. Agora você pode tentar realizar o cálculo novamente. Para reativar o recurso de Aceleração em paralelo da CPU, vá para 'Arquivo' &gt; 'Configurações Globais' &gt; 'Solver' na nova interface ou 'Editar' &gt; 'Configurações Gerais' &gt; 'Solver' na interface clássica. </value>
   </data>
   <data name="PropPack_FlashError" xml:space="preserve">
     <value>Erro no cálculo Flash.</value>

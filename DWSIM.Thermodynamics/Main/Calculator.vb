@@ -43,6 +43,14 @@ Public Class Calculator
         End If
 
     End Function
+    Public Shared Sub CheckParallelPInvoke()
+
+        If Settings.EnableParallelProcessing Then
+            GlobalSettings.Settings.EnableParallelProcessing = False
+            Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
+        End If
+
+    End Sub
 
     Public Shared Function IsRunningOnMono() As Boolean
         Return Not Type.GetType("Mono.Runtime") Is Nothing
