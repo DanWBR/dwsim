@@ -38,6 +38,21 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
 
+Version 5.0 Update 8:
+
+- [NEW] Added IPOPT libraries for macOS
+- [NEW] Script Manager: Added an option to run scripts asynchronously
+- [NEW] Added dynamic properties to Flowsheet
+- [NEW] Redesigned Script Manager (New UI)
+- [CHG] Removed FPROPS and PC-SAFT (original) Property Packages
+- [FIX] Fixed logical block editors to include name/status (New UI)
+- [FIX] Fixed floating property table behavior on macOS (New UI)
+- [FIX] Added missing property editors for column solver methods and pump curves (New UI) 
+- [FIX] Fixed HetCat reaction rate unit selector (New UI)
+- [FIX] Fixed IPOPT link path on Linux
+- [FIX] Fixed python script execution on Linux and macOS
+- [FIX] Fixed some translation issues
+
 Version 5.0 Update 7
 
 - [FIX] Fixed loading Property Packages from the Advanced EOS Library on the new UI
