@@ -304,7 +304,7 @@ namespace DWSIM.UI.Desktop.Mac
                 context.TranslateCTM(0f, dirtyRect.Height);
                 context.ScaleCTM(1f, -1f);
                 // TODO: scale font matrix??
-                context.SetFillColorWithColor(new CGColor("White"));
+                context.SetFillColorWithColor(OxyPlot.OxyColors.White.ToCGColor());
                 context.FillRect(Bounds);
                 using (var renderer = new CoreGraphicsRenderContext(context))
                 {
