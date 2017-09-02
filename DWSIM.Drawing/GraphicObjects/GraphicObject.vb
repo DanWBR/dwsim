@@ -463,6 +463,8 @@ Namespace GraphicObjects
 
         Public Property DrawOverride As Action(Of Object) Implements IGraphicObject.DrawOverride
 
+        Public Property Extensions As New Dictionary(Of String, IGraphicObjectExtension) Implements IGraphicObject.Extensions
+
     End Class
 
 End Namespace

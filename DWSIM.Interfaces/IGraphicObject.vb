@@ -87,6 +87,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Function HitTest(zoomedSelection As Object) As Boolean
 
+    Property Extensions As Dictionary(Of String, IGraphicObjectExtension)
+
 End Interface
 
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IConnectionPoint
@@ -130,5 +132,33 @@ End Interface
     Property AttachedToOutput() As Boolean
 
     Property AttachedFromInput() As Boolean
+
+End Interface
+
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IGraphicObjectExtension
+
+    Sub Draw(surface As Object)
+
+    Function Clone() As IGraphicObjectExtension
+
+    Property Description() As String
+
+    Property Active() As Boolean
+
+    Property Tag() As String
+
+    Property Name() As String
+
+    Property Height() As Integer
+
+    Property Width() As Integer
+
+    Property RelativePosition As IPoint
+
+    Property Selected As Boolean
+
+    Property Owner As IGraphicObject
+
+    Function HitTest(zoomedSelection As Object) As Boolean
 
 End Interface

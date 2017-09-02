@@ -158,6 +158,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{A8AF483A-90B
 		PlatformFiles\Common\whatsnew.txt = PlatformFiles\Common\whatsnew.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWSIM.DrawingTools.SkiaSharp.Extended", "DWSIM.DrawingTools.SkiaSharp.Extended\DWSIM.DrawingTools.SkiaSharp.Extended.csproj", "{A58EB237-F703-45CF-89F9-E8B91BFF76C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1165,6 +1167,24 @@ Global
 		{A4B56FF1-995E-4288-8801-7F086668C4A2}.x86|x64.Build.0 = Release|Any CPU
 		{A4B56FF1-995E-4288-8801-7F086668C4A2}.x86|x86.ActiveCfg = Release|Any CPU
 		{A4B56FF1-995E-4288-8801-7F086668C4A2}.x86|x86.Build.0 = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.x86|Any CPU.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.x86|Any CPU.Build.0 = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.x86|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.x86|Mixed Platforms.Build.0 = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.x86|x64.ActiveCfg = Release|Any CPU
+		{A58EB237-F703-45CF-89F9-E8B91BFF76C1}.x86|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

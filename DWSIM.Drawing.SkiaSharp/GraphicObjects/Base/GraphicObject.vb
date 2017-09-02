@@ -175,54 +175,54 @@ Namespace GraphicObjects
         End Function
 
 #Region "Constructors"
-        Protected Sub New()
+        Public Sub New()
         End Sub
 
-        Protected Sub New(ByVal graphicPosition As SKPoint)
+        Public Sub New(ByVal graphicPosition As SKPoint)
             Me.New()
             Me.SetPosition(graphicPosition)
         End Sub
 
-        Protected Sub New(ByVal posX As Integer, ByVal posY As Integer)
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer)
             Me.New(New SKPoint(posX, posY))
         End Sub
 
-        Protected Sub New(ByVal graphicPosition As SKPoint, ByVal graphicSize As SKSize)
+        Public Sub New(ByVal graphicPosition As SKPoint, ByVal graphicSize As SKSize)
             Me.New(graphicPosition)
             Me.SetSize(graphicSize)
             Me.AutoSize = False
         End Sub
 
-        Protected Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal graphicSize As SKSize)
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal graphicSize As SKSize)
             Me.New(New SKPoint(posX, posY), graphicSize)
         End Sub
 
-        Protected Sub New(ByVal posX As Integer, ByVal posY As Integer, _
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, _
                 ByVal width As Integer, ByVal height As Integer)
             Me.New(New SKPoint(posX, posY), New SKSize(width, height))
         End Sub
 
-        Protected Sub New(ByVal graphicPosition As SKPoint, ByVal Rotation As Single)
+        Public Sub New(ByVal graphicPosition As SKPoint, ByVal Rotation As Single)
             Me.New()
             Me.SetPosition(graphicPosition)
         End Sub
 
-        Protected Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal Rotation As Single)
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal Rotation As Single)
             Me.New(New SKPoint(posX, posY), Rotation)
         End Sub
 
-        Protected Sub New(ByVal graphicPosition As SKPoint, ByVal graphicSize As SKSize, ByVal Rotation As Single)
+        Public Sub New(ByVal graphicPosition As SKPoint, ByVal graphicSize As SKSize, ByVal Rotation As Single)
             Me.New(graphicPosition, Rotation)
             Me.SetSize(graphicSize)
             Me.AutoSize = False
         End Sub
 
-        Protected Sub New(ByVal posX As Integer, ByVal posY As Integer, _
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, _
             ByVal graphicSize As SKSize, ByVal Rotation As Single)
             Me.New(New SKPoint(posX, posY), graphicSize, Rotation)
         End Sub
 
-        Protected Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal width As Integer, _
+        Public Sub New(ByVal posX As Integer, ByVal posY As Integer, ByVal width As Integer, _
                                ByVal height As Integer, ByVal Rotation As Single)
             Me.New(New SKPoint(posX, posY), New SKSize(width, height), Rotation)
         End Sub
@@ -372,6 +372,8 @@ Namespace GraphicObjects
         Public Property Rotation As Integer Implements IGraphicObject.Rotation
 
         Public Property DrawOverride As Action(Of Object) Implements IGraphicObject.DrawOverride
+
+        Public Property Extensions As Dictionary(Of String, IGraphicObjectExtension) Implements IGraphicObject.Extensions
     End Class
 
 End Namespace

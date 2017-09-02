@@ -174,4 +174,6 @@
 
     Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 
+    Function GetChartModel(name As String) As Object
+
 End Interface

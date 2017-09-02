@@ -410,6 +410,9 @@ Namespace Enums.GraphicObjects
         CompressorExpander
         HeaterCooler
 
+        GO_Chart
+        GO_InputControl
+
     End Enum
 
     Public Enum ShapeIcon

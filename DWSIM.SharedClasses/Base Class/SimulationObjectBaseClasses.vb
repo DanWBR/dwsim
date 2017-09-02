@@ -62,6 +62,10 @@ Namespace UnitOperations
 
 #Region "    ISimulationObject"
 
+        Public Overridable Function GetChartModel(name As String) As Object Implements ISimulationObject.GetChartModel
+            Return Nothing
+        End Function
+
         Public Overridable Function GetPropertyDescription(prop As String) As String Implements ISimulationObject.GetPropertyDescription
             Return "No description is available for this property."
         End Function
@@ -805,6 +809,7 @@ Namespace UnitOperations
         End Property
 
 #End Region
+
 
     End Class
 
