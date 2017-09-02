@@ -10,7 +10,7 @@ namespace DWSIM.UI.Desktop.GTK
         public CodeEditorControlHandler()
         {
             te = new Mono.TextEditor.TextEditor();
-            te.Document.SyntaxMode = Mono.TextEditor.Highlighting.SyntaxModeService.GetSyntaxMode(te.Document, "text/x-csharp");
+            te.Document.SyntaxMode = Mono.TextEditor.Highlighting.SyntaxModeService.GetSyntaxMode(te.Document, "text/x-python");
             //te.ColorStyle = Mono.TextEditor.Highlighting.SyntaxModeService.GetColorStyle("Light");
             var scroll = new Gtk.ScrolledWindow();
             scroll.BorderWidth = 1;

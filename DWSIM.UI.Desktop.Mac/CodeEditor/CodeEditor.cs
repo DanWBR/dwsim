@@ -25,7 +25,7 @@ namespace DWSIM.UI.Desktop.Mac
                 te.Selectable = true;
                 te.AutoresizingMask = NSViewResizingMask.WidthSizable;
                 te.MaxSize = new CGSize(1000, 10000000);
-                te.Formatter = new LanguageFormatter(te, new CSharpDescriptor());
+                te.Formatter = new LanguageFormatter(te, new PythonDescriptor());
                 sv = new NSScrollView { AutoresizesSubviews = true, BorderType = NSBorderType.NoBorder, HasVerticalScroller = true, HasHorizontalScroller = true, AutoresizingMask = NSViewResizingMask.WidthSizable };
                 var cv = new NSClipView { AutoresizesSubviews = true };
                 cv.DocumentView = te;

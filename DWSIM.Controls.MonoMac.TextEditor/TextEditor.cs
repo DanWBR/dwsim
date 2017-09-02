@@ -176,45 +176,5 @@ namespace DWSIM.UI.Controls.Mac
 
         }
 
-        /// <summary>
-        /// Sets the language to C sharp.
-        /// </summary>
-        public void SetLanguageToCSharp() {
-			//UnpopulateFormattingMenu ();
-			Formatter.Language = new CSharpDescriptor ();
-			//StatusLanguage.StringValue = "C# Code";
-			//PopulateFormattingMenu ();
-		}
-
-		/// <summary>
-		/// Sets the language to HTML.
-		/// </summary>
-		//public void SetLanguageToHTML() {
-		//	UnpopulateFormattingMenu ();
-		//	Formatter.Language = new HTMLDescriptor ();
-		//	StatusLanguage.StringValue = "HTML";
-		//	PopulateFormattingMenu ();
-		//}
-
-		/// <summary>
-		/// Sets the language to MarkDown.
-		/// </summary>
-		public void SetLanguageToMarkDown() {
-			//UnpopulateFormattingMenu ();
-			Formatter.Language = new MarkDownDescriptor ();
-			//StatusLanguage.StringValue = "MarkDown";
-			//PopulateFormattingMenu ();
-		}
-
-		/// <summary>
-		/// Sets the language to XML.
-		/// </summary>
-		//public void SetLanguageToXML() {
-		//	UnpopulateFormattingMenu ();
-		//	Formatter.Language = new XMLDescriptor ();
-		//	StatusLanguage.StringValue = "XML";
-		//	PopulateFormattingMenu ();
-		//}
-
 	}
 }

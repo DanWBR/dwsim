@@ -61,6 +61,7 @@
     <Compile Include="Classes\Markdown.cs" />
     <Compile Include="LanguageFormats\CSharpDescriptor.cs" />
     <Compile Include="LanguageFormats\MarkDownDescriptor.cs" />
+    <Compile Include="LanguageFormats\PythonDescriptor.cs" />
     <Compile Include="LanguageFormatters\FormatDescriptor.cs" />
     <Compile Include="LanguageFormatters\FormatDescriptorType.cs" />
     <Compile Include="LanguageFormatters\KeywordDescriptor.cs" />
