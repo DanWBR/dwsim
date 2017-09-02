@@ -51,3 +51,28 @@ End Interface
     Function Run(args As Object) As Object
 
 End Interface
+
+<InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IUtilityPlugin5
+
+    ReadOnly Property Name() As String
+    ReadOnly Property Description() As String
+    ReadOnly Property Author() As String
+    ReadOnly Property ContactInfo() As String
+    ReadOnly Property WebSite() As String
+    ReadOnly Property UniqueID() As String
+
+    ''' <summary>
+    ''' This must be an instance of Eto.Forms.Form
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    ReadOnly Property UtilityForm() As Object
+
+    ReadOnly Property CurrentFlowsheet() As IFlowsheet
+
+    Function SetFlowsheet(form As IFlowsheet) As Boolean
+
+    Function Run(args As Object) As Object
+
+End Interface
