@@ -1366,7 +1366,13 @@ Imports System.Dynamic
                 Dim obj As GraphicObject = Nothing
                 Dim t As Type = Type.GetType(xel.Element("Type").Value, False)
                 If Not t Is Nothing Then obj = CType(Activator.CreateInstance(t), GraphicObject)
-                If obj Is Nothing Then obj = CType(GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                If obj Is Nothing Then
+                    If xel.Element("Type").Value.Contains("OxyPlotGraphic") Then
+                        obj = CType(Extended.Shared.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                    Else
+                        obj = CType(GraphicObject.ReturnInstance(xel.Element("Type").Value), GraphicObject)
+                    End If
+                End If
                 If Not obj Is Nothing Then
                     obj.LoadData(xel.Elements.ToList)
                     obj.Name = pkey & obj.Name
@@ -1383,6 +1389,8 @@ Imports System.Dynamic
                         DirectCast(obj, MasterTableGraphic).Flowsheet = Me
                     ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
                         DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = Me
+                    ElseIf TypeOf obj Is Charts.OxyPlotGraphic Then
+                        DirectCast(obj, Charts.OxyPlotGraphic).Flowsheet = Me
                     ElseIf TypeOf obj Is RigorousColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or TypeOf obj Is CAPEOPENGraphic Then
                         obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
                         obj.PositionConnectors()

@@ -26,6 +26,8 @@ Imports DWSIM.SharedClasses
 Imports DWSIM.Thermodynamics.Streams
 Imports DWSIM.Thermodynamics
 Imports DWSIM.MathOps
+Imports OxyPlot
+Imports OxyPlot.Axes
 
 Namespace Reactors
 
@@ -1033,6 +1035,113 @@ Namespace Reactors
             Else
                 Return p
             End If
+        End Function
+
+        Public Overrides Function GetChartModel(name As String) As Object
+
+            Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+            Dim model = New PlotModel() With {.Subtitle = "Properties Profile", .Title = GraphicObject.Tag}
+
+            model.TitleFontSize = 14
+            model.SubtitleFontSize = 11
+
+            model.Axes.Add(New LinearAxis() With { _
+                .MajorGridlineStyle = LineStyle.Dash, _
+                .MinorGridlineStyle = LineStyle.Dot, _
+                .Position = AxisPosition.Bottom, _
+                .FontSize = 12, _
+                .Title = "Length (" + su.distance + ")" _
+            })
+
+            model.LegendFontSize = 11
+            model.LegendPlacement = LegendPlacement.Outside
+            model.LegendOrientation = LegendOrientation.Horizontal
+            model.LegendPosition = LegendPosition.BottomCenter
+            model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+
+            Dim vx As New List(Of Double)(), vy As New List(Of Double)()
+            Dim vya As New List(Of List(Of Double))()
+            Dim vn As New List(Of String)()
+
+            For Each obj In points
+                vx.Add(DirectCast(obj, Double())(0) * Length / Volume)
+            Next
+
+            Dim j As Integer
+            For j = 1 To ComponentConversions.Count + 2
+                vy = New List(Of Double)()
+                For Each obj In points
+                    vy.Add(DirectCast(obj, Double())(j))
+                Next
+                vya.Add(vy)
+            Next
+            For Each st In ComponentConversions.Keys
+                vn.Add(st)
+            Next
+            Dim color As OxyColor
+            
+
+            Select Case name
+
+                Case "Temperature Profile"
+
+                    model.Axes.Add(New LinearAxis() With { _
+                        .MajorGridlineStyle = LineStyle.Dash, _
+                        .MinorGridlineStyle = LineStyle.Dot, _
+                        .Position = AxisPosition.Left, _
+                        .FontSize = 12, _
+                        .Title = "Temperature (" + su.temperature + ")", _
+                        .Key = "temp"
+                    })
+
+                    color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
+                    model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.volume, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.temperature, vya(ComponentConversions.Count).ToArray()), color)
+                    model.Series(model.Series.Count - 1).Title = "Temperature"
+                    DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "temp"
+
+                Case "Pressure Profile"
+
+                    model.Axes.Add(New LinearAxis() With { _
+                        .MajorGridlineStyle = LineStyle.Dash, _
+                        .MinorGridlineStyle = LineStyle.Dot, _
+                        .Position = AxisPosition.Left, _
+                        .FontSize = 12, _
+                        .Title = "Pressure (" + su.pressure + ")", _
+                        .Key = "press"
+                    })
+
+                    color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
+                    model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.volume, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.pressure, vya(ComponentConversions.Count + 1).ToArray()), color)
+                    model.Series(model.Series.Count - 1).Title = "Pressure"
+                    DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "press"
+
+                Case "Concentration Profile"
+
+                    model.Axes.Add(New LinearAxis() With { _
+                        .MajorGridlineStyle = LineStyle.Dash, _
+                        .MinorGridlineStyle = LineStyle.Dot, _
+                        .Position = AxisPosition.Left, _
+                        .FontSize = 12, _
+                        .Title = "Concentration (" + su.molar_conc + ")", _
+                        .Key = "conc"
+                    })
+
+                    For j = 0 To vn.Count - 1
+                        color = OxyColor.FromRgb(Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)), Convert.ToByte(New Random().[Next](0, 255)))
+                        model.AddLineSeries(SystemsOfUnits.Converter.ConvertArrayFromSI(su.volume, vx.ToArray()), SystemsOfUnits.Converter.ConvertArrayFromSI(su.molar_conc, vya(j).ToArray()), color)
+                        model.Series(model.Series.Count - 1).Title = vn(j)
+                        DirectCast(model.Series(model.Series.Count - 1), OxyPlot.Series.LineSeries).YAxisKey = "conc"
+                    Next
+
+            End Select
+
+            Return model
+
+        End Function
+
+        Public Overrides Function GetChartModelNames() As List(Of String)
+            Return New List(Of String)({"Temperature Profile", "Pressure Profile", "Concentration Profile"})
         End Function
 
     End Class

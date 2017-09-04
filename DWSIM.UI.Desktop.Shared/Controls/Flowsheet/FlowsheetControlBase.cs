@@ -155,6 +155,13 @@ namespace DWSIM.UI.Controls
                     gobj.Flowsheet = FlowsheetObject;
                     FlowsheetObject.AddGraphicObject(gobj);
                 }
+                else if (objtname == "Chart Object")
+                {
+                    var gobj = new DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts.OxyPlotGraphic(x, y);
+                    gobj.Name = Guid.NewGuid().ToString();
+                    gobj.Flowsheet = FlowsheetObject;
+                    FlowsheetObject.AddGraphicObject(gobj);
+                }
             }
             else
             {

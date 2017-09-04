@@ -478,6 +478,7 @@ Public Class GraphicsSurface
                                 gobj.ObjectType = ObjectType.GO_Image And Not _
                                 gobj.ObjectType = ObjectType.GO_Text And Not _
                                 gobj.ObjectType = ObjectType.GO_Rectangle And Not _
+                                gobj.ObjectType = ObjectType.GO_Chart And Not _
                                 gobj.ObjectType = ObjectType.Nenhum Then
 
                             Dim flowsheet = gobj.Owner.GetFlowsheet()

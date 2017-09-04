@@ -15,6 +15,7 @@ using DWSIM.Drawing.SkiaSharp.GraphicObjects;
 using DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables;
 using System.Timers;
 using System.Diagnostics;
+using DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts;
 
 namespace DWSIM.UI.Forms
 {
@@ -127,6 +128,7 @@ namespace DWSIM.UI.Forms
             var btnInsertTable = new ButtonMenuItem { Text = "Add New Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Grid_96px.png")) };
             var btnInsertMasterTable = new ButtonMenuItem { Text = "Add New Master Property Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "GridView_96px.png")) };
             var btnInsertSpreadsheetTable = new ButtonMenuItem { Text = "Add New Linked Spreadsheet Table", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "PivotTable_96px.png")) };
+            var btnInsertChartObject = new ButtonMenuItem { Text = "Add New Chart Object", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "AreaChart_100px.png")) };
 
             var btnSensAnalysis = new ButtonMenuItem { Text = "Sensitivity Analysis", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
             var btnOptimization = new ButtonMenuItem { Text = "Flowsheet Optimizer", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-maintenance.png")) };
@@ -165,6 +167,10 @@ namespace DWSIM.UI.Forms
             btnInsertSpreadsheetTable.Click += (sender, e) =>
             {
                 FlowsheetControl.AddObject("Spreadsheet Table", 50, 50);
+            };
+            btnInsertChartObject.Click += (sender, e) =>
+            {
+                FlowsheetControl.AddObject("Chart Object", 50, 50);
             };
             FlowsheetControl.MouseDoubleClick += (sender, e) =>
             {
@@ -233,7 +239,7 @@ namespace DWSIM.UI.Forms
                     if (Application.Instance.Platform.IsMac)
                     {
                         Menu.Items.Insert(3, new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
-                        Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
+                        Menu.Items.Insert(4, new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                         Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
@@ -241,7 +247,7 @@ namespace DWSIM.UI.Forms
                     else
                     {
                         Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
-                        Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
+                        Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
@@ -250,7 +256,7 @@ namespace DWSIM.UI.Forms
                 case GlobalSettings.Settings.Platform.Linux:
                 case GlobalSettings.Settings.Platform.Windows:
                     Menu.Items.Add(new ButtonMenuItem { Text = "Setup", Items = { btnComps, btnBasis, btnOptions } });
-                    Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable } });
+                    Menu.Items.Add(new ButtonMenuItem { Text = "Objects", Items = { btnObjects, btnInsertText, btnInsertTable, btnInsertMasterTable, btnInsertSpreadsheetTable, btnInsertChartObject } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
@@ -451,8 +457,9 @@ namespace DWSIM.UI.Forms
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_Table:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable:
                             case Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable:
+                            case Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart:
                                 selctxmenu.Items.Clear();
-                                var itemtype = new ButtonMenuItem { Text = "Table/Text/Image", Enabled = false };
+                                var itemtype = new ButtonMenuItem { Text = "Misc Object", Enabled = false };
                                 selctxmenu.Items.Add(itemtype);
                                 var delitem = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
                                 delitem.Click += (sender2, e2) =>
@@ -864,6 +871,11 @@ namespace DWSIM.UI.Forms
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Tables.MasterPropertyTableEditor { Table = (MasterTableGraphic)selobj };
+                    editor.Show();
+                }
+                else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart)
+                {
+                    var editor = new DWSIM.UI.Desktop.Editors.Charts.ChartObjectEditor((OxyPlotGraphic)selobj);
                     editor.Show();
                 }
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)

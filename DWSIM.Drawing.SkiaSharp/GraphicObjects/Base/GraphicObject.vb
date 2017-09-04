@@ -10,7 +10,7 @@ Namespace GraphicObjects
 
         Implements IGraphicObject, ICustomXMLSerialization
 
-        Public Function GetPaint(color As SKColor)
+        Public Function GetPaint(color As SKColor) As SKPaint
 
             Dim p As New SKPaint
 
@@ -24,7 +24,7 @@ Namespace GraphicObjects
 
         End Function
 
-        Public Function GetStrokePaint(color As SKColor, StrokeWidth As Single)
+        Public Function GetStrokePaint(color As SKColor, StrokeWidth As Single) As SKPaint
 
             Dim p As New SKPaint
 

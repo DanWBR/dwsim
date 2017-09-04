@@ -176,4 +176,6 @@
 
     Function GetChartModel(name As String) As Object
 
+    Function GetChartModelNames() As List(Of String)
+
 End Interface

@@ -489,6 +489,10 @@ Namespace UnitOperations
 
         Public MustOverride ReadOnly Property MobileCompatible As Boolean Implements ISimulationObject.MobileCompatible
 
+        Public Overridable Function GetChartModelNames() As List(Of String) Implements ISimulationObject.GetChartModelNames
+            Return New List(Of String)
+        End Function
+
 #End Region
 
 #Region "    ICloneable"
