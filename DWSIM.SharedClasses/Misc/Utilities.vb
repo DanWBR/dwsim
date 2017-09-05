@@ -222,6 +222,10 @@
             xel.Value = xel.Value.Replace("DWSIM.Drawing.SkiaSharp.GraphicObjects.Tables", "DWSIM.GraphicObjects")
         End If
 
+        If xel.Value.StartsWith("DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts") And xel.Name = "Type" Then
+            xel.Value = xel.Value.Replace("DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts", "DWSIM.DrawingTools.GraphicObjects")
+        End If
+
     End Sub
 
     Shared Sub UpdateElementForMobileXMLLoading(xel As XElement)

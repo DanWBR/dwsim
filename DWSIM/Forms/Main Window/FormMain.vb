@@ -904,6 +904,8 @@ Public Class FormMain
                         DirectCast(obj, MasterTableGraphic).Flowsheet = form
                     ElseIf TypeOf obj Is SpreadsheetTableGraphic Then
                         DirectCast(obj, SpreadsheetTableGraphic).Flowsheet = form
+                    ElseIf TypeOf obj Is OxyPlotGraphic Then
+                        DirectCast(obj, OxyPlotGraphic).Flowsheet = form
                     ElseIf TypeOf obj Is DistillationColumnGraphic Or TypeOf obj Is AbsorptionColumnGraphic Or
                         TypeOf obj Is RefluxedAbsorberGraphic Or TypeOf obj Is ReboiledAbsorberGraphic Or TypeOf obj Is CapeOpenUOGraphic Then
                         obj.CreateConnectors(xel.Element("InputConnectors").Elements.Count, xel.Element("OutputConnectors").Elements.Count)
