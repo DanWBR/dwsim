@@ -32,7 +32,7 @@ Public Class XMLSerializer
     ''' <remarks> Properties of type Boolean, String, Double, Single, Integer, Nullable(Of Double), 
     ''' Nullable(Of Single), Nullable(Of Integer), ArrayList, Font, Color, [Enum]
     ''' are supported.</remarks>
-    Shared Function Deserialize(ByRef obj As Object, xmlprops As System.Collections.Generic.List(Of XElement), Optional ByVal Fields As Boolean = False) As Boolean
+    Shared Function Deserialize(obj As Object, xmlprops As System.Collections.Generic.List(Of XElement), Optional ByVal Fields As Boolean = False) As Boolean
 
         Dim ci As CultureInfo = CultureInfo.InvariantCulture
         Dim skip As Boolean = False
@@ -254,7 +254,7 @@ Public Class XMLSerializer
     ''' <remarks> Properties of type String, Double, Single, Integer, Nullable(Of Double), 
     ''' Nullable(Of Single), Nullable(Of Integer), ArrayList, Font, Color, [Enum]
     ''' are supported.</remarks>
-    Shared Function Serialize(ByRef obj As Object, Optional ByVal Fields As Boolean = False) As System.Collections.Generic.List(Of XElement)
+    Shared Function Serialize(obj As Object, Optional ByVal Fields As Boolean = False) As System.Collections.Generic.List(Of XElement)
 
         Dim elements As New List(Of System.Xml.Linq.XElement)
         Dim ci As CultureInfo = CultureInfo.InvariantCulture

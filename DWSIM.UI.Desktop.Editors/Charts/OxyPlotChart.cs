@@ -63,19 +63,21 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                     var charts = Chart.Flowsheet.SimulationObjects[Chart.OwnerID].GetChartModelNames();
                     foreach (var str in charts)
                     {
-                        chartselector.Items.Add(str);
+                        chartselector.Items.Add(new ListItem { Key = str, Text = str });
                     }
                 }
             };
-            
-            if (Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID))
+
+            if (Chart.OwnerID != null && Chart.Flowsheet.SimulationObjects.ContainsKey(Chart.OwnerID))
             {
                 objselector.SelectedKey = Chart.OwnerID;
+                chartselector.Items.Clear();
                 var charts = Chart.Flowsheet.SimulationObjects[Chart.OwnerID].GetChartModelNames();
                 foreach (var str in charts)
                 {
-                    objselector.Items.Add(str);
+                    chartselector.Items.Add(new ListItem { Key = str, Text = str });
                 }
+                chartselector.SelectedKey = Chart.ModelName;
             }
 
             chartselector.SelectedIndexChanged += (sender, e) =>
@@ -92,14 +94,9 @@ namespace DWSIM.UI.Desktop.Editors.Charts
                 if (sender.Text.IsValidDouble()) Chart.Height = (int)sender.Text.ToDoubleFromCurrent();
             });
 
-            container.CreateAndAddTextBoxRow("N2", "Chart Scale", Chart.Scale, (sender, e) =>
-            {
-                if (sender.Text.IsValidDouble()) Chart.Scale = sender.Text.ToDoubleFromCurrent();
-            });
-
             Content = container;
 
-            ClientSize = new Size(400, 300);
+            ClientSize = new Size(400, 200);
 
         }
 

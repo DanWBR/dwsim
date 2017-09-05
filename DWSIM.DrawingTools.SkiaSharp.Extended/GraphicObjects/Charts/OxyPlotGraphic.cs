@@ -20,6 +20,8 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
         {
             this.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart;
             this.Description = "Chart Object";
+            Width = 100;
+            Height = 100;
         }
 
         public OxyPlotGraphic()
@@ -59,18 +61,49 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
         #endregion
 
-        public double Scale { get; set; }
+        public override bool LoadData(List<System.Xml.Linq.XElement> data)
+        {
+            base.LoadData(data);
+            return true;
+        }
 
-        public string ModelName { get; set; }
+        public override List<System.Xml.Linq.XElement> SaveData()
+        {
+            return base.SaveData();
+        }
 
-        public string OwnerID { get; set; }
+        private string _ModelName = "";
+
+        public string ModelName
+        {
+            get
+            {
+                return _ModelName;
+            }
+            set
+            {
+                _ModelName = value;
+            }
+        }
+
+        private string _OwnerID = "";
+
+        public string OwnerID
+        {
+            get
+            {
+                return _OwnerID;
+            }
+            set
+            {
+                _OwnerID = value;
+            }
+        }
 
         public Interfaces.IFlowsheet Flowsheet { get; set; }
 
         public override void Draw(object g)
         {
-
-            if (OwnerID == null) OwnerID = "";
 
             var canvas = (SKCanvas)g;
 
@@ -78,7 +111,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
 
             if (Flowsheet != null)
             {
-                if (Flowsheet.SimulationObjects.ContainsKey(OwnerID))
+                if (OwnerID != null && Flowsheet.SimulationObjects.ContainsKey(OwnerID))
                 {
 
                     var obj = Flowsheet.SimulationObjects[OwnerID];
@@ -91,7 +124,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                     }
                     catch
                     {
-                        PaintInstructions(canvas);
+                        PaintInstructions(canvas, "Chart model not found.");
                         return;
                     }
 
@@ -102,52 +135,52 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                             using (var surface = SKSurface.Create(new SKImageInfo(Width, Height)))
                             {
                                 renderer.SetTarget(surface.Canvas);
-                                if (Scale == 0.0) Scale = 1.0;
                                 model.Update(true);
-                                model.Render(renderer, Width / Scale, Height / Scale);
+                                model.Render(renderer, Width, Height);
                                 var paint = GetPaint(SKColors.Black);
                                 paint.FilterQuality = SKFilterQuality.High;
-                                var zoom = ((GraphicsSurface)Flowsheet.GetSurface()).Zoom;
-                                surface.Canvas.Scale(zoom, zoom);
+                                paint.IsAutohinted = true;
+                                paint.LcdRenderText = true;
                                 canvas.DrawSurface(surface, X, Y, paint);
+                                canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            PaintInstructions(canvas);
+                            PaintInstructions(canvas, "Error drawing chart: " + ex.Message.ToString());
                         }
                     }
                     else
                     {
-                        PaintInstructions(canvas);
+                        PaintInstructions(canvas, "Chart model not found.");
                     }
 
                 }
                 else
                 {
-                    PaintInstructions(canvas);
+                    PaintInstructions(canvas, "Referenced flowsheet object not found.");
                 }
 
             }
             else
             {
-                PaintInstructions(canvas);
+                PaintInstructions(canvas, "Flowsheet not defined.");
             }
         }
 
-        private void PaintInstructions(SKCanvas canvas)
+        private void PaintInstructions(SKCanvas canvas, string text)
         {
 
-            var tpaint = GetStrokePaint(SKColors.Black, 1.0f);
+            var tpaint = GetPaint(SKColors.Black);
 
-            var size = this.MeasureString("Double-click to edit", tpaint);
+            var size = this.MeasureString(text, tpaint);
 
-            Width = 20 + (int)size.Width;
-            Height = 80 + (int)size.Height;
+            var width = (int)size.Width;
+            var height = (int)size.Height;
 
-            canvas.DrawText("Double-click to edit", X + 10, Y + 40, tpaint);
+            canvas.DrawText(text, X + (Width - width) / 2, Y + (Height - height) / 2, tpaint);
 
-            canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), tpaint);
+            canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
 
         }
 
