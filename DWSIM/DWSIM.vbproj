@@ -377,6 +377,12 @@
     <Compile Include="Forms\FormAddUtility.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormConfigureChartObject.Designer.vb">
+      <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormConfigureChartObject.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormConfigureMasterTable.Designer.vb">
       <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>
     </Compile>
@@ -927,6 +933,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Compound Creator\FormCompoundCreator.es.resx">
       <DependentUpon>FormCompoundCreator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureChartObject.en.resx">
+      <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfigureChartObject.resx">
+      <DependentUpon>FormConfigureChartObject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormConfigureMasterTable.de.resx">
       <DependentUpon>FormConfigureMasterTable.vb</DependentUpon>

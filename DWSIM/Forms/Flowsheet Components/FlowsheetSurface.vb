@@ -482,6 +482,7 @@ Public Class FlowsheetSurface
                         gobj.ObjectType = ObjectType.GO_Image And Not _
                         gobj.ObjectType = ObjectType.GO_Text And Not _
                         gobj.ObjectType = ObjectType.GO_Rectangle And Not _
+                        gobj.ObjectType = ObjectType.GO_Chart And Not _
                         gobj.ObjectType = ObjectType.Nenhum Then
 
                     If gobj.Calculated Then
@@ -507,7 +508,7 @@ Public Class FlowsheetSurface
                                 End If
                                 Me.m_qt.SetPosition(px2.ToDTPoint)
                             End If
-                            Me.FlowsheetDesignSurface.drawingObjects.Add(tabela)
+                            Me.FlowsheetDesignSurface.DrawingObjects.Add(tabela)
                             Me.ticks = 0
 
                         Else
@@ -529,8 +530,8 @@ Public Class FlowsheetSurface
 
                 ElseIf gobj.ObjectType = ObjectType.GO_FloatingTable Then
 
-                    If Me.FlowsheetDesignSurface.drawingObjects.Contains(Me.m_qt) Then
-                        Me.FlowsheetDesignSurface.drawingObjects.Remove(Me.m_qt)
+                    If Me.FlowsheetDesignSurface.DrawingObjects.Contains(Me.m_qt) Then
+                        Me.FlowsheetDesignSurface.DrawingObjects.Remove(Me.m_qt)
                     End If
                     Me.m_qt = Nothing
                     Me.ticks = 0
@@ -601,6 +602,7 @@ Public Class FlowsheetSurface
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.ReboiledAbsorber And _
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.RefluxedAbsorber And _
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_Rectangle And _
+            Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_Chart And _
             Me.FlowsheetDesignSurface.SelectedObject.ObjectType <> ObjectType.GO_Text Then
 
             Me.RecalcularToolStripMenuItem.Visible = True
@@ -1823,6 +1825,7 @@ Public Class FlowsheetSurface
                     obj.GraphicObject.ObjectType <> ObjectType.GO_MasterTable And _
                     obj.GraphicObject.ObjectType <> ObjectType.GO_SpreadsheetTable And _
                     obj.GraphicObject.ObjectType <> ObjectType.GO_Table And _
+                    obj.GraphicObject.ObjectType <> ObjectType.GO_Chart And _
                     obj.GraphicObject.ObjectType <> ObjectType.GO_Rectangle And _
                     obj.GraphicObject.ObjectType <> ObjectType.OT_Adjust And _
                     obj.GraphicObject.ObjectType <> ObjectType.OT_Spec And _
@@ -3291,10 +3294,13 @@ Public Class FlowsheetSurface
                 Case ObjectType.GO_MasterTable
                     Dim f As New FormConfigureMasterTable() With {.Table = Me.FlowsheetDesignSurface.SelectedObject}
                     f.ShowDialog(Me)
+                Case ObjectType.GO_Chart
+                    Dim f As New FormConfigureChartObject() With {.Chart = Me.FlowsheetDesignSurface.SelectedObject}
+                    f.ShowDialog(Me)
                 Case ObjectType.FlowsheetUO
                     Dim myobj As UnitOperations.UnitOperations.Flowsheet = Flowsheet.SimulationObjects(Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Name)
                     If My.Computer.Keyboard.ShiftKeyDown Then
-                        Dim viewform As New unitoperations.EditingForm_Flowsheet_Viewer
+                        Dim viewform As New UnitOperations.EditingForm_Flowsheet_Viewer
                         With viewform
                             .Text = Flowsheet.FormSurface.FlowsheetDesignSurface.SelectedObject.Tag
                             .fsuo = myobj

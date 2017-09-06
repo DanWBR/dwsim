@@ -51,10 +51,10 @@ Namespace GraphicObjects
                     If model IsNot Nothing Then
                         Using bm = New Bitmap(Width, Height, Imaging.PixelFormat.Format32bppArgb)
                             Using gr = Graphics.FromImage(bm)
-                                gr.CompositingQuality = CompositingQuality.Default
-                                gr.InterpolationMode = InterpolationMode.Bicubic
-                                gr.SmoothingMode = SmoothingMode.Default
-                                gr.TextRenderingHint = Text.TextRenderingHint.SystemDefault
+                                'gr.CompositingQuality = CompositingQuality.HighQuality
+                                'gr.InterpolationMode = InterpolationMode.HighQualityBicubic
+                                'gr.SmoothingMode = SmoothingMode.AntiAlias
+                                'gr.TextRenderingHint = Text.TextRenderingHint.SystemDefault
                                 If renderer Is Nothing Then renderer = New WindowsForms.GraphicsRenderContext(g)
                                 renderer.SetGraphicsTarget(gr)
                                 DirectCast(model, IPlotModel).Update(True)
