@@ -29,6 +29,8 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.SepOps
 Imports DWSIM.MathOps
+Imports OxyPlot
+Imports OxyPlot.Axes
 
 Namespace UnitOperations.Auxiliary.SepOps
 
@@ -3282,6 +3284,98 @@ Namespace UnitOperations
                 End If
             End If
         End Sub
+
+        Public Overrides Function GetChartModelNames() As List(Of String)
+
+            Return New List(Of String)({"Temperature Profile", "Pressure Profile", "Vapor Flow Profile", "Liquid Flow Profile"})
+
+        End Function
+
+        Public Overrides Function GetChartModel(name As String) As Object
+            Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+            Dim model = New PlotModel() With {.Subtitle = "Properties Profile", .Title = GraphicObject.Tag}
+
+            model.TitleFontSize = 11
+            model.SubtitleFontSize = 10
+
+            model.Axes.Add(New LinearAxis() With { _
+                .MajorGridlineStyle = LineStyle.Dash, _
+                .MinorGridlineStyle = LineStyle.Dot, _
+                .Position = AxisPosition.Bottom, _
+                .FontSize = 10
+            })
+
+            model.Axes.Add(New LinearAxis() With { _
+                .MajorGridlineStyle = LineStyle.Dash, _
+                .MinorGridlineStyle = LineStyle.Dot, _
+                .Position = AxisPosition.Left, _
+                .FontSize = 10,
+                .Title = "Stage",
+                .StartPosition = 1,
+                .EndPosition = 0,
+                .MajorStep = 1.0,
+                .MinorStep = 0.5
+            })
+
+            model.LegendFontSize = 11
+            model.LegendPlacement = LegendPlacement.Outside
+            model.LegendOrientation = LegendOrientation.Horizontal
+            model.LegendPosition = LegendPosition.BottomCenter
+            model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+
+            Dim py = PopulateColumnData(0)
+
+            Select Case name
+                Case "Temperature Profile"
+                    model.AddLineSeries(PopulateColumnData(2), py)
+                    model.Axes(0).Title = "Temperature (" + su.temperature + ")"
+                Case "Pressure Profile"
+                    model.AddLineSeries(PopulateColumnData(1), py)
+                    model.Axes(0).Title = "Pressure (" + su.pressure + ")"
+                Case "Vapor Flow Profile"
+                    model.AddLineSeries(PopulateColumnData(3), py)
+                    model.Axes(0).Title = "Molar Flow (" + su.molarflow + ")"
+                Case "Liquid Flow Profile"
+                    model.AddLineSeries(PopulateColumnData(4), py)
+                    model.Axes(0).Title = "Molar Flow (" + su.molarflow + ")"
+            End Select
+
+            Return model
+
+        End Function
+
+        Private Function PopulateColumnData(position As Integer) As List(Of Double)
+            Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
+            Dim vec As New List(Of Double)()
+            Select Case position
+                Case 0
+                    'stage
+                    Dim comp_ant As Double = 1.0F
+                    For Each st In Stages
+                        vec.Add(comp_ant)
+                        comp_ant += 1.0F
+                    Next
+                    Exit Select
+                Case 1
+                    'pressure
+                    vec = SystemsOfUnits.Converter.ConvertArrayFromSI(su.pressure, P0).ToList()
+                    Exit Select
+                Case 2
+                    'temperature
+                    vec = SystemsOfUnits.Converter.ConvertArrayFromSI(su.temperature, Tf).ToList()
+                    Exit Select
+                Case 3
+                    'vapor flow
+                    vec = SystemsOfUnits.Converter.ConvertArrayFromSI(su.molarflow, Vf).ToList()
+                    Exit Select
+                Case 4
+                    'liquid flow
+                    vec = SystemsOfUnits.Converter.ConvertArrayFromSI(su.molarflow, Lf).ToList()
+                    Exit Select
+            End Select
+            Return vec
+        End Function
 
     End Class
 
