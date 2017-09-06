@@ -3294,7 +3294,7 @@ Namespace UnitOperations
         Public Overrides Function GetChartModel(name As String) As Object
             Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
 
-            Dim model = New PlotModel() With {.Subtitle = "Properties Profile", .Title = GraphicObject.Tag}
+            Dim model = New PlotModel() With {.Subtitle = name, .Title = GraphicObject.Tag}
 
             model.TitleFontSize = 11
             model.SubtitleFontSize = 10
