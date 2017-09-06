@@ -77,6 +77,33 @@ Public Class EditingForm_Column
                 TabControl1.TabPages.Remove(TabCondenser)
             End If
 
+            'parameters
+
+            cbSolvingMethod.Items.Clear()
+
+            Dim dcsolvers As String() = {"Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
+            Dim acsolvers As String() = {"Burningham-Otto (Sum Rates)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
+            Dim rrsolvers As String() = {"Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
+
+            Select Case .GraphicObject.ObjectType
+                Case ObjectType.AbsorptionColumn
+                    cbSolvingMethod.Items.AddRange(acsolvers)
+                    If .SolvingMethod = 0 Then .SolvingMethod = 3
+                    If .SolvingMethod = 3 Then
+                        cbSolvingMethod.SelectedIndex = 0
+                    Else
+                        cbSolvingMethod.SelectedIndex = .SolvingMethod
+                    End If
+                Case ObjectType.DistillationColumn
+                    cbSolvingMethod.Items.AddRange(dcsolvers)
+                    If .SolvingMethod = 3 Then .SolvingMethod = 0
+                    cbSolvingMethod.SelectedIndex = .SolvingMethod
+                Case ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber
+                    cbSolvingMethod.Items.AddRange(rrsolvers)
+                    If .SolvingMethod = 0 Or .SolvingMethod = 3 Then .SolvingMethod = 1
+                    cbSolvingMethod.SelectedIndex = .SolvingMethod - 1
+            End Select
+
             If .SolvingMethod = 0 Then
                 TabControl2.TabPages.Remove(TabSolverIO)
                 TabControl2.TabPages.Remove(TabSolverNS)
@@ -91,28 +118,6 @@ Public Class EditingForm_Column
                 TabControl2.TabPages.Remove(TabSolverBP)
                 TabControl2.TabPages.Remove(TabSolverNS)
             End If
-
-            'parameters
-
-            cbSolvingMethod.Items.Clear()
-
-            Dim dcsolvers As String() = {"Wang-Henke (Bubble Point)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
-            Dim acsolvers As String() = {"Burningham-Otto (Sum Rates)", "Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
-            Dim rrsolvers As String() = {"Naphtali-Sandholm (Newton)", "Russell (Inside-Out)"}
-
-            Select Case .GraphicObject.ObjectType
-                Case ObjectType.AbsorptionColumn
-                    cbSolvingMethod.Items.AddRange(acsolvers)
-                    If .SolvingMethod = 0 Then .SolvingMethod = 3
-                Case ObjectType.DistillationColumn
-                    cbSolvingMethod.Items.AddRange(dcsolvers)
-                    If .SolvingMethod = 3 Then .SolvingMethod = 0
-                Case ObjectType.ReboiledAbsorber, ObjectType.RefluxedAbsorber
-                    cbSolvingMethod.Items.AddRange(rrsolvers)
-                    If .SolvingMethod = 0 Or .SolvingMethod = 3 Then .SolvingMethod = 1
-            End Select
-
-            cbSolvingMethod.SelectedIndex = .SolvingMethod
 
             cbCondPressureUnits.Items.Clear()
             cbCondPressureUnits.Items.AddRange(units.GetUnitSet(Interfaces.Enums.UnitOfMeasure.pressure).ToArray)
