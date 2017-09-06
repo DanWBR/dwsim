@@ -82,7 +82,10 @@ namespace DWSIM.UI.Desktop.Editors.Charts
 
             chartselector.SelectedIndexChanged += (sender, e) =>
             {
-                Chart.ModelName = chartselector.SelectedValue.ToString();
+                if (chartselector.SelectedIndex > -1)
+                {
+                    Chart.ModelName = chartselector.SelectedValue.ToString();
+                }
             };
 
             container.CreateAndAddTextBoxRow("N0", "Chart Width", Chart.Width, (sender, e) => {

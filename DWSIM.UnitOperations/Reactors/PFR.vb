@@ -1043,18 +1043,18 @@ Namespace Reactors
 
             Dim model = New PlotModel() With {.Subtitle = "Properties Profile", .Title = GraphicObject.Tag}
 
-            model.TitleFontSize = 14
-            model.SubtitleFontSize = 11
+            model.TitleFontSize = 11
+            model.SubtitleFontSize = 10
 
             model.Axes.Add(New LinearAxis() With { _
                 .MajorGridlineStyle = LineStyle.Dash, _
                 .MinorGridlineStyle = LineStyle.Dot, _
                 .Position = AxisPosition.Bottom, _
-                .FontSize = 12, _
+                .FontSize = 10, _
                 .Title = "Length (" + su.distance + ")" _
             })
 
-            model.LegendFontSize = 11
+            model.LegendFontSize = 9
             model.LegendPlacement = LegendPlacement.Outside
             model.LegendOrientation = LegendOrientation.Horizontal
             model.LegendPosition = LegendPosition.BottomCenter
@@ -1090,7 +1090,7 @@ Namespace Reactors
                         .MajorGridlineStyle = LineStyle.Dash, _
                         .MinorGridlineStyle = LineStyle.Dot, _
                         .Position = AxisPosition.Left, _
-                        .FontSize = 12, _
+                        .FontSize = 10, _
                         .Title = "Temperature (" + su.temperature + ")", _
                         .Key = "temp"
                     })
@@ -1106,7 +1106,7 @@ Namespace Reactors
                         .MajorGridlineStyle = LineStyle.Dash, _
                         .MinorGridlineStyle = LineStyle.Dot, _
                         .Position = AxisPosition.Left, _
-                        .FontSize = 12, _
+                        .FontSize = 10, _
                         .Title = "Pressure (" + su.pressure + ")", _
                         .Key = "press"
                     })
@@ -1122,7 +1122,7 @@ Namespace Reactors
                         .MajorGridlineStyle = LineStyle.Dash, _
                         .MinorGridlineStyle = LineStyle.Dot, _
                         .Position = AxisPosition.Left, _
-                        .FontSize = 12, _
+                        .FontSize = 10, _
                         .Title = "Concentration (" + su.molar_conc + ")", _
                         .Key = "conc"
                     })

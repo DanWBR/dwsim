@@ -1158,9 +1158,13 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
                 dx = Pos1.X - Pos2.X
                 dy = Pos1.Y - Pos2.Y
 
-                'adjust viewpoint to keep same position
-                Me.HorizontalScroll.Value += dx
-                Me.VerticalScroll.Value += dy
+                Try
+                    'adjust viewpoint to keep same position
+                    Me.HorizontalScroll.Value += dx
+                    Me.VerticalScroll.Value += dy
+                Catch ex As Exception
+
+                End Try
 
                 RaiseEvent StatusUpdate(Me, New StatusUpdateEventArgs(StatusUpdateType.SurfaceZoomChanged, _
                         Me.SelectedObject, String.Format("Zoom set to {0}", Me.Zoom * 100), _

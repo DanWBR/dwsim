@@ -120,11 +120,11 @@ Imports System.Dynamic
 
                 Else
 
-                    If gobj.ObjectType = ObjectType.GO_Table Then
-
-                        Me.FlowsheetSurface.DeleteSelectedObject(gobj)
-
-                    ElseIf gobj.ObjectType = ObjectType.GO_Text Then
+                    If gobj.ObjectType = ObjectType.GO_Table Or
+                        gobj.ObjectType = ObjectType.GO_FloatingTable Or
+                        gobj.ObjectType = ObjectType.GO_MasterTable Or
+                        gobj.ObjectType = ObjectType.GO_SpreadsheetTable Or
+                        gobj.ObjectType = ObjectType.GO_Chart Then
 
                         Me.FlowsheetSurface.DeleteSelectedObject(gobj)
 

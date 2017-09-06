@@ -132,17 +132,20 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                     {
                         try
                         {
-                            using (var surface = SKSurface.Create(new SKImageInfo(Width, Height)))
+                            using (var bmp = new SKBitmap(Width * 2, Height * 2))
                             {
-                                renderer.SetTarget(surface.Canvas);
-                                model.Update(true);
-                                model.Render(renderer, Width, Height);
-                                var paint = GetPaint(SKColors.Black);
-                                paint.FilterQuality = SKFilterQuality.High;
-                                paint.IsAutohinted = true;
-                                paint.LcdRenderText = true;
-                                canvas.DrawSurface(surface, X, Y, paint);
-                                canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
+                                using (var bmpcanvas = new SKCanvas(bmp))
+                                {
+                                    bmpcanvas.Scale(2.0f);
+                                    renderer.SetTarget(bmpcanvas);
+                                    model.Update(true);
+                                    model.Render(renderer, Width, Height);
+                                    var paint = GetPaint(SKColors.Black);
+                                    paint.FilterQuality = SKFilterQuality.High;
+                                    paint.IsAutohinted = true;
+                                    canvas.DrawBitmap(bmp, new SKRect(X, Y, X + Width, Y + Height), paint);
+                                    canvas.DrawRect(new SKRect(X, Y, X + Width, Y + Height), GetStrokePaint(SKColors.Black, 1.0f));
+                                }
                             }
                         }
                         catch (Exception ex)

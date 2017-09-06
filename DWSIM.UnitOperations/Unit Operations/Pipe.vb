@@ -26,6 +26,8 @@ Imports DWSIM.UnitOperations.UnitOperations.Auxiliary.Pipe
 Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.Interfaces.Enums
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
+Imports OxyPlot
+Imports OxyPlot.Axes
 
 Namespace UnitOperations
 
@@ -1694,6 +1696,200 @@ Final3:     T = bbb
                 Return p
             End If
         End Function
+
+        Public Overrides Function GetChartModelNames() As List(Of String)
+            Return New List(Of String)({"Temperature Profile", "Pressure Profile", "Heat Flow Profile", "Liquid Velocity Profile", "Vapor Velocity Profile", "Liquid Holdup Profile", "Inclination Profile", "Overall HTC Profile", "Internal HTC Profile", "Wall k/L Profile", "Insulation k/L Profile", "External HTC Profile"})
+        End Function
+
+        Public Overrides Function GetChartModel(name As String) As Object
+
+            Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
+
+            Dim model = New PlotModel() With {.Subtitle = "Properties Profile", .Title = GraphicObject.Tag}
+
+            model.TitleFontSize = 11
+            model.SubtitleFontSize = 10
+
+            model.Axes.Add(New LinearAxis() With { _
+                .MajorGridlineStyle = LineStyle.Dash, _
+                .MinorGridlineStyle = LineStyle.Dot, _
+                .Position = AxisPosition.Bottom, _
+                .FontSize = 10, _
+                .Title = "Length (" + su.distance + ")" _
+            })
+
+            model.Axes.Add(New LinearAxis() With { _
+                .MajorGridlineStyle = LineStyle.Dash, _
+                .MinorGridlineStyle = LineStyle.Dot, _
+                .Position = AxisPosition.Left, _
+                .FontSize = 10
+            })
+
+            model.LegendFontSize = 11
+            model.LegendPlacement = LegendPlacement.Outside
+            model.LegendOrientation = LegendOrientation.Horizontal
+            model.LegendPosition = LegendPosition.BottomCenter
+            model.TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView
+
+            Dim px = PopulateData(0)
+
+            Select Case name
+                Case "Temperature Profile"
+                    model.AddLineSeries(px, PopulateData(3))
+                    model.Axes(1).Title = "Temperature (" + su.temperature + ")"
+                Case "Pressure Profile"
+                    model.AddLineSeries(px, PopulateData(2))
+                    model.Axes(1).Title = "Pressure (" + su.pressure + ")"
+                Case "Heat Flow Profile"
+                    model.AddLineSeries(px, PopulateData(6))
+                    model.Axes(1).Title = "Heat Flow (" + su.heatflow + ")"
+                Case "Liquid Velocity Profile"
+                    model.AddLineSeries(px, PopulateData(4))
+                    model.Axes(1).Title = "Velocity (" + su.velocity + ")"
+                Case "Vapor Velocity Profile"
+                    model.AddLineSeries(px, PopulateData(5))
+                    model.Axes(1).Title = "Velocity (" + su.velocity + ")"
+                Case "Inclination Profile"
+                    model.AddLineSeries(px, PopulateData(1))
+                    model.Axes(1).Title = "Elevation (" + su.distance + ")"
+                Case "Liquid Holdup Profile"
+                    model.AddLineSeries(px, PopulateData(7))
+                    model.Axes(1).Title = "Holdup"
+                Case "Overall HTC Profile"
+                    model.AddLineSeries(px, PopulateData(8))
+                    model.Axes(1).Title = "Heat Transfer Coefficient (" + su.heat_transf_coeff + ")"
+                Case "Internal HTC Profile"
+                    model.AddLineSeries(px, PopulateData(9))
+                    model.Axes(1).Title = "Heat Transfer Coefficient (" + su.heat_transf_coeff + ")"
+                Case "Wall k/L Profile"
+                    model.AddLineSeries(px, PopulateData(10))
+                    model.Axes(1).Title = "Heat Transfer Coefficient (" + su.heat_transf_coeff + ")"
+                Case "Insulation k/L Profile"
+                    model.AddLineSeries(px, PopulateData(11))
+                    model.Axes(1).Title = "Heat Transfer Coefficient (" + su.heat_transf_coeff + ")"
+                Case "External HTC Profile"
+                    model.AddLineSeries(px, PopulateData(12))
+                    model.Axes(1).Title = "Heat Transfer Coefficient (" + su.heat_transf_coeff + ")"
+            End Select
+
+            Return model
+
+        End Function
+
+        Private Function PopulateData(position As Integer) As List(Of Double)
+            Dim su = FlowSheet.FlowsheetOptions.SelectedUnitSystem
+            Dim vec As New List(Of Double)()
+            Select Case position
+                Case 0
+                    'distance
+                    Dim comp_ant As Double = 0.0F
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant))
+                            comp_ant += sec.Comprimento / sec.Incrementos
+                        Next
+                    Next
+                    Exit Select
+                Case 1
+                    'elevation
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(Math.Atan(sec.Elevacao / Math.Pow(Math.Pow(sec.Comprimento, 2) - Math.Pow(sec.Elevacao, 2), 0.5) * 180 / Math.PI))
+                        Next
+                    Next
+                    Exit Select
+                Case 2
+                    'pressure
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault()))
+                        Next
+                    Next
+                    Exit Select
+                Case 3
+                    'temperaturee
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault()))
+                        Next
+                    Next
+                    Exit Select
+                Case 4
+                    'vel liqe
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault()))
+                        Next
+                    Next
+                    Exit Select
+                Case 5
+                    'vel vape
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault()))
+                        Next
+                    Next
+                    Exit Select
+                Case 6
+                    'heatflowe
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault()))
+                        Next
+                    Next
+                    Exit Select
+                Case 7
+                    'liqholde
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(res.HoldupDeLiquido.GetValueOrDefault())
+                        Next
+                    Next
+                    Exit Select
+                Case 8
+                    'OHTCe
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault()))
+                        Next
+                    Next
+                    Exit Select
+                Case 9
+                    'IHTCC
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal))
+                        Next
+                    Next
+                    Exit Select
+                Case 10
+                    'IHTC
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall))
+                        Next
+                    Next
+                    Exit Select
+                Case 11
+                    'IHTC
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation))
+                        Next
+                    Next
+                    Exit Select
+                Case 12
+                    'EHTC
+                    For Each sec In Profile.Sections.Values
+                        For Each res In sec.Resultados
+                            vec.Add(SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external))
+                        Next
+                    Next
+                    Exit Select
+            End Select
+            Return vec
+        End Function
+
     End Class
 
 End Namespace

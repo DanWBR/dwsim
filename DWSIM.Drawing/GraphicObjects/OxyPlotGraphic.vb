@@ -49,17 +49,17 @@ Namespace GraphicObjects
                 Try
                     Dim model = Flowsheet.SimulationObjects(OwnerID).GetChartModel(ModelName)
                     If model IsNot Nothing Then
-                        Using bm = New Bitmap(Width, Height, Imaging.PixelFormat.Format32bppArgb)
+                        Using bm = New Bitmap(Width * 3, Height * 3, Imaging.PixelFormat.Format32bppArgb)
                             Using gr = Graphics.FromImage(bm)
-                                'gr.CompositingQuality = CompositingQuality.HighQuality
-                                'gr.InterpolationMode = InterpolationMode.HighQualityBicubic
-                                'gr.SmoothingMode = SmoothingMode.AntiAlias
-                                'gr.TextRenderingHint = Text.TextRenderingHint.SystemDefault
-                                If renderer Is Nothing Then renderer = New WindowsForms.GraphicsRenderContext(g)
+                                gr.CompositingQuality = CompositingQuality.HighQuality
+                                gr.InterpolationMode = InterpolationMode.HighQualityBicubic
+                                gr.SmoothingMode = SmoothingMode.AntiAlias
+                                gr.ScaleTransform(3, 3)
+                                If renderer Is Nothing Then renderer = New WindowsForms.GraphicsRenderContext(gr)
                                 renderer.SetGraphicsTarget(gr)
                                 DirectCast(model, IPlotModel).Update(True)
                                 DirectCast(model, IPlotModel).Render(renderer, Width, Height)
-                                g.DrawImage(bm, X, Y)
+                                g.DrawImage(bm, New Rectangle(X, Y, Width, Height))
                             End Using
                         End Using
                     Else
@@ -69,7 +69,7 @@ Namespace GraphicObjects
                     DrawText(g, "Error: " + ex.Message)
                 End Try
             Else
-                DrawText(g, "Referenced flowsheet object not found.")
+                DrawText(g, Flowsheet.GetTranslatedString("DoubleClickToEdit"))
             End If
 
         End Sub
@@ -79,8 +79,8 @@ Namespace GraphicObjects
             Dim f As New Font("Arial", 10)
 
             Dim format10 As New StringFormat(StringFormatFlags.NoClip)
-            Dim Size = g.MeasureString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), f, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
-            g.DrawString(Flowsheet.GetTranslatedString("DoubleClickToEdit"), f, New SolidBrush(Color.Black), X + (Width - Size.Width) / 2, Y + (Height - Size.Height) / 2, format10)
+            Dim Size = g.MeasureString(txt, f, New PointF(0, 0), New StringFormat(StringFormatFlags.NoClip, 0))
+            g.DrawString(txt, f, New SolidBrush(Color.Black), X + (Width - Size.Width) / 2, Y + (Height - Size.Height) / 2, format10)
             g.DrawRectangle(New Pen(Brushes.Black), New Rectangle(X, Y, Width, Height))
 
         End Sub
