@@ -3170,4 +3170,14 @@ Public Class FormFlowsheet
         Return My.Application
     End Function
 
+    Private Sub GraficoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GraficoToolStripMenuItem.Click
+        Dim myobj As New OxyPlotGraphic(New DrawingTools.Point(-Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.X / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30,
+         -Me.FormSurface.FlowsheetDesignSurface.AutoScrollPosition.Y / Me.FormSurface.FlowsheetDesignSurface.Zoom + 30), "Chart Object")
+        myobj.Name = "CHART-" & Guid.NewGuid.ToString
+        myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
+        myobj.Height = 400
+        myobj.Width = 500
+        Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
+        Me.FormSurface.FlowsheetDesignSurface.Invalidate()
+    End Sub
 End Class
