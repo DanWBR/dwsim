@@ -1319,7 +1319,7 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
         Dim bgpaint As New SolidBrush(Color.FromArgb(200, 255, 255, 255))
 
-        Dim tfont As New Font(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize, FontStyle.Bold)
+        Dim tfont As New Font(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize, GraphicsUnit.Pixel)
 
         If Not gobj.Owner Is Nothing Then
 
