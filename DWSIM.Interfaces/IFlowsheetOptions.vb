@@ -64,5 +64,18 @@
 
     Property EnergyBalanceRelativeTolerance As Double
 
+    Property DisplayFloatingPropertyTables As Boolean
+
+    Property DisplayCornerPropertyList As Boolean
+
+    Property DisplayCornerPropertyListPosition As ListPosition
+
+    Property DisplayCornerPropertyListFontName As String
+
+    Property DisplayCornerPropertyListFontSize As Integer
+
+    Property DisplayCornerPropertyListFontColor As String
+
+    Property DisplayCornerPropertyListPadding As Integer
 
 End Interface

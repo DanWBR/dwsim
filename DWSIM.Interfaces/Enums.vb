@@ -338,6 +338,17 @@ Namespace Enums
         RaiseError = 2
     End Enum
 
+    Public Enum ListPosition
+        Top = 0
+        TopRight = 1
+        Right = 2
+        RightBottom = 3
+        Bottom = 4
+        BottomLeft = 5
+        Left = 6
+        LeftTop = 7
+    End Enum
+
 End Namespace
 
 Namespace Enums.GraphicObjects
@@ -451,7 +462,6 @@ Namespace Enums.GraphicObjects
         NotCalculated
         Modified
     End Enum
-
 
 End Namespace
 

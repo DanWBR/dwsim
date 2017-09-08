@@ -225,6 +225,20 @@ Namespace DWSIM.Flowsheet
 
         Public Property MassBalanceRelativeTolerance As Double = 0.01 Implements IFlowsheetOptions.MassBalanceRelativeTolerance
 
+        Public Property DisplayCornerPropertyList As Boolean = False Implements IFlowsheetOptions.DisplayCornerPropertyList
+
+        Public Property DisplayCornerPropertyListPosition As ListPosition = ListPosition.RightBottom Implements IFlowsheetOptions.DisplayCornerPropertyListPosition
+
+        Public Property DisplayFloatingPropertyTables As Boolean = True Implements IFlowsheetOptions.DisplayFloatingPropertyTables
+
+        Public Property DisplayCornerPropertyListFontColor As String = "DimGray" Implements IFlowsheetOptions.DisplayCornerPropertyListFontColor
+
+        Public Property DisplayCornerPropertyListFontName As String = "Consolas" Implements IFlowsheetOptions.DisplayCornerPropertyListFontName
+
+        Public Property DisplayCornerPropertyListFontSize As Integer = 8 Implements IFlowsheetOptions.DisplayCornerPropertyListFontSize
+
+        Public Property DisplayCornerPropertyListPadding As Integer = 4 Implements IFlowsheetOptions.DisplayCornerPropertyListPadding
+
     End Class
 
 End Namespace

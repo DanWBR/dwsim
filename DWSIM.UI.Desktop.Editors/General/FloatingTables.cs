@@ -68,7 +68,7 @@ namespace DWSIM.UI.Desktop.Editors
             bool add = false;
             if (flowsheet.FlowsheetOptions.VisibleProperties.Count == 0) add = true;
 
-            this.CreateAndAddDescriptionRow("Select the properties to show on Floating Property Tables according to object type.");
+            this.CreateAndAddDescriptionRow("Select the properties to show on Floating Property Tables and/or Anchored Property Lists according to object type.");
 
             var cbObjectType = this.CreateAndAddDropDownRow("Object Type", new List<string>(), 0, null);
 

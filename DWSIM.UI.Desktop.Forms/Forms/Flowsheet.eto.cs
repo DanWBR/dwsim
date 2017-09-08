@@ -334,7 +334,7 @@ namespace DWSIM.UI.Forms
                 new DWSIM.UI.Desktop.Editors.SimulationSettings(FlowsheetObject, cont);
                 cont.Tag = "Settings";
                 var cont2 = new UI.Desktop.Editors.FloatingTablesView(FlowsheetObject);
-                cont2.Tag = "Floating Tables";
+                cont2.Tag = "Visible Properties";
                 var form = UI.Shared.Common.GetDefaultTabbedForm("Settings", 500, 500, new[] { cont, cont2 });
                 form.Show();
                 form.Width += 1;

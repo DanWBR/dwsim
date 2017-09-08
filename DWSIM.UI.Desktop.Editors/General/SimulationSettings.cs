@@ -18,10 +18,10 @@ namespace DWSIM.UI.Desktop.Editors
     public class SimulationSettings
     {
 
-        public IFlowsheet flowsheet;
+        public DWSIM.UI.Desktop.Shared.Flowsheet flowsheet;
         public DynamicLayout container;
 
-        public SimulationSettings(IFlowsheet fs, DynamicLayout layout)
+        public SimulationSettings(DWSIM.UI.Desktop.Shared.Flowsheet fs, DynamicLayout layout)
         {
             flowsheet = fs;
             container = layout;
@@ -30,13 +30,13 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Initialize()
         {
-            
+
             s.CreateAndAddLabelRow(container, "General");
 
             s.CreateAndAddStringEditorRow(container, "Simulation Name", flowsheet.FlowsheetOptions.SimulationName, (sender, e) => flowsheet.FlowsheetOptions.SimulationName = sender.Text);
 
             s.CreateAndAddDescriptionRow(container, "The simulation name will be used for report identification and file name during saving.");
-                      
+
             var avunits = flowsheet.AvailableSystemsOfUnits.Select((x) => x.Name).ToList();
 
             s.CreateAndAddLabelRow(container, "System of Units");
@@ -44,9 +44,10 @@ namespace DWSIM.UI.Desktop.Editors
             Button btnEdit = null;
             DropDown uselector = null;
 
-            uselector = s.CreateAndAddDropDownRow(container, "System of Units", avunits, avunits.IndexOf(flowsheet.FlowsheetOptions.SelectedUnitSystem.Name), (sender, e) => {
+            uselector = s.CreateAndAddDropDownRow(container, "System of Units", avunits, avunits.IndexOf(flowsheet.FlowsheetOptions.SelectedUnitSystem.Name), (sender, e) =>
+            {
                 flowsheet.FlowsheetOptions.SelectedUnitSystem = flowsheet.AvailableSystemsOfUnits.Where((x) => x.Name == avunits[sender.SelectedIndex]).FirstOrDefault();
-                btnEdit.Enabled = !new string[]{"SI", "CGS", "ENG"}.Contains(uselector.SelectedValue.ToString());
+                btnEdit.Enabled = !new string[] { "SI", "CGS", "ENG" }.Contains(uselector.SelectedValue.ToString());
             });
 
             s.CreateAndAddDescriptionRow(container, "Select the System of Units to be used on this simulation");
@@ -55,7 +56,8 @@ namespace DWSIM.UI.Desktop.Editors
             {
                 var editcontainer = new Editors.UnitSetEditorView((DWSIM.SharedClasses.SystemsOfUnits.Units)flowsheet.FlowsheetOptions.SelectedUnitSystem);
                 var form = s.GetDefaultEditorForm("Edit System of Units", 400, 600, editcontainer);
-                form.Closed += (sender2, e2) => {
+                form.Closed += (sender2, e2) =>
+                {
                     container.RemoveAll();
                     container.Clear();
                     Initialize();
@@ -83,15 +85,17 @@ namespace DWSIM.UI.Desktop.Editors
 
             btnEdit.Enabled = !new string[] { "SI", "CGS", "ENG" }.Contains(uselector.SelectedValue.ToString());
 
-            var nformats = new []{"F", "G","G2","G4","G6","G8","G10","N","N2","N4","N6","R","E","E1","E2","E3","E4","E6"};
+            var nformats = new[] { "F", "G", "G2", "G4", "G6", "G8", "G10", "N", "N2", "N4", "N6", "R", "E", "E1", "E2", "E3", "E4", "E6" };
 
             s.CreateAndAddLabelRow(container, "Mass and Energy Balances");
 
-            s.CreateAndAddDropDownRow(container, "Flowsheet object mass balance check", new List<string>() { "Ignore", "Show Warning", "Throw Exception" }, (int)flowsheet.FlowsheetOptions.MassBalanceCheck, (sender, e) => {
+            s.CreateAndAddDropDownRow(container, "Flowsheet object mass balance check", new List<string>() { "Ignore", "Show Warning", "Throw Exception" }, (int)flowsheet.FlowsheetOptions.MassBalanceCheck, (sender, e) =>
+            {
                 flowsheet.FlowsheetOptions.MassBalanceCheck = (DWSIM.Interfaces.Enums.WarningType)sender.SelectedIndex;
             });
 
-            s.CreateAndAddTextBoxRow(container, "G", "Mass balance relative tolerance", flowsheet.FlowsheetOptions.MassBalanceRelativeTolerance, (sender, e) => { 
+            s.CreateAndAddTextBoxRow(container, "G", "Mass balance relative tolerance", flowsheet.FlowsheetOptions.MassBalanceRelativeTolerance, (sender, e) =>
+            {
                 if (sender.Text.IsValidDouble()) flowsheet.FlowsheetOptions.MassBalanceRelativeTolerance = sender.Text.ToDoubleFromCurrent();
             });
 
@@ -121,6 +125,54 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddDescriptionRow(container, "Select the formatting scheme for compound amounts in Material Stream reports.");
 
+            s.CreateAndAddLabelRow(container, "Floating Tables and Anchored Property Lists");
+
+            s.CreateAndAddCheckBoxRow(container, "Display Floating Tables", flowsheet.FlowsheetOptions.DisplayFloatingPropertyTables, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayFloatingPropertyTables = sender.Checked.GetValueOrDefault();
+                var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)(flowsheet.GetSurface());
+                surface.DrawFloatingTable = flowsheet.FlowsheetOptions.DisplayFloatingPropertyTables;
+            });
+
+            s.CreateAndAddCheckBoxRow(container, "Display Anchored Property Lists", flowsheet.FlowsheetOptions.DisplayCornerPropertyList, (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayCornerPropertyList = sender.Checked.GetValueOrDefault();
+                var surface = (DWSIM.Drawing.SkiaSharp.GraphicsSurface)(flowsheet.GetSurface());
+                surface.DrawPropertyList = flowsheet.FlowsheetOptions.DisplayCornerPropertyList;
+            });
+
+            s.CreateAndAddLabelRow(container, "Anchored Property List Settings");
+
+            var fp = new FontPicker(new Eto.Drawing.Font(flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize));
+
+            fp.ValueChanged += (sender, e) =>
+            {
+                if (fp.Value != null)
+                {
+                    flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName = fp.Value.FamilyName;
+                    flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize = (int)fp.Value.Size;
+                }
+            };
+
+            s.CreateAndAddLabelAndControlRow(container, "Font Name and Size", fp);
+
+            var colors = new SkiaSharp.SKColors();
+
+            var fontcolors = colors.GetType().GetFields().Select((x) => x.Name).ToList();
+
+            s.CreateAndAddDropDownRow(container, "Font Color", fontcolors, fontcolors.IndexOf(flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontColor),
+            (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontColor = fontcolors[sender.SelectedIndex];
+            });
+
+            var paddings = new List<string>() { "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+
+            s.CreateAndAddDropDownRow(container, "Line Padding", paddings, paddings.IndexOf(flowsheet.FlowsheetOptions.DisplayCornerPropertyListPadding.ToString()),
+            (sender, e) =>
+            {
+                flowsheet.FlowsheetOptions.DisplayCornerPropertyListPadding = int.Parse(paddings[sender.SelectedIndex]);
+            });
 
         }
 

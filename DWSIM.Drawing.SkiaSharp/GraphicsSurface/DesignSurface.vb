@@ -4,6 +4,7 @@ Imports System.Collections.Generic
 Imports DWSIM.Interfaces
 Imports DWSIM.Interfaces.Enums.GraphicObjects
 Imports DWSIM.Drawing.SkiaSharp.GraphicObjects
+Imports DWSIM.Interfaces.Enums
 
 Public Class GraphicsSurface
 
@@ -88,6 +89,10 @@ Public Class GraphicsSurface
 
     Public Property Size As SKSize = New SKSize(1024, 768)
 
+    Public Property DrawFloatingTable As Boolean = False
+
+    Public Property DrawPropertyList As Boolean = True
+
     Public Property SelectedObject() As IGraphicObject
         Get
             Return _SelectedObject
@@ -119,7 +124,6 @@ Public Class GraphicsSurface
         Dim objects = DrawingObjects.ToArray
 
         If objects.Count = 0 Then DrawInstructions(DrawingCanvas)
-
 
         If DrawAddedAnimation Then
             Dim tstep = (Date.Now - AnimationStart).TotalMilliseconds
@@ -157,8 +161,13 @@ Public Class GraphicsSurface
             Else
                 dobj.Draw(DrawingCanvas)
             End If
-
         Next
+
+        If DrawPropertyList Then
+            For Each dobj In objects
+                If dobj.Calculated Then DrawPropertyListBlock(DrawingCanvas, dobj)
+            Next
+        End If
 
     End Sub
 
@@ -464,7 +473,7 @@ Public Class GraphicsSurface
 
                 End If
 
-                If Not dragging Then
+                If Not dragging And DrawFloatingTable Then
 
                     Dim gobj As GraphicObject = FindObjectAtPoint(New SKPoint(x, y))
 
@@ -1046,5 +1055,118 @@ Public Class GraphicsSurface
         t.Start()
 
     End Sub
+
+    Private Sub DrawPropertyListBlock(canvas As SKCanvas, gobj As GraphicObject)
+
+        Dim X, Y, Padding, Height, Width As Double
+
+        Padding = gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListPadding
+
+        X = gobj.X + gobj.Width + 5
+        Y = gobj.Y + gobj.Height + 5
+
+        Dim tpaint As New SKPaint()
+
+        With tpaint
+            .TextSize = gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize
+            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+            .IsStroke = False
+            Dim colors = New SKColors()
+            Try
+                .Color = colors.GetType().GetField(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontColor).GetValue(colors)
+                .Typeface = SKTypeface.FromFamilyName(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, SKFontStyleWeight.Bold, SKFontStyleWidth.Condensed, SKFontStyleSlant.Upright)
+            Catch ex As Exception
+                .Color = SKColors.DimGray
+                .Typeface = SKTypeface.FromFamilyName("Consolas", SKTypefaceStyle.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright)
+            End Try
+            colors = Nothing
+        End With
+
+
+        Dim bgpaint As New SKPaint()
+
+        With bgpaint
+            .Color = SKColors.White.WithAlpha(100)
+            .IsStroke = False
+        End With
+
+        If Not gobj.Owner Is Nothing Then
+
+            If gobj.Owner.GetFlowsheet IsNot Nothing Then
+
+                Dim count As Integer
+
+                Dim fs = gobj.Owner.GetFlowsheet
+                Dim props As New List(Of String)(fs.FlowsheetOptions.VisibleProperties(gobj.Owner.GetType.Name))
+                props.AddRange(DirectCast(gobj.Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray)
+
+                If gobj.Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.CapeOpenUO Then props = gobj.Owner.GetProperties(PropertyType.ALL).ToList
+
+                Dim propstoremove As New List(Of String)
+
+                If gobj.Owner.GraphicObject.ObjectType = Enums.GraphicObjects.ObjectType.MaterialStream Then
+                    For Each p In props
+                        If gobj.Owner.GetPropertyValue(p).Equals(Double.MinValue) Then
+                            propstoremove.Add(p)
+                        End If
+                    Next
+                    For i As Integer = 0 To propstoremove.Count - 1
+                        props.Remove(propstoremove(i))
+                    Next
+                End If
+
+                count = props.Count
+
+                Size = MeasureString("MEASURE", tpaint)
+
+                Height = count * (Size.Height + Padding) + Padding
+
+                Dim propstring, propval, propunit, text As String
+                Dim pval0 As Object = Nothing
+
+                Dim texts As New List(Of String)
+
+                Dim n As Integer = 1
+                For Each prop In props
+                    propstring = gobj.Owner.GetFlowsheet.GetTranslatedString(prop)
+                    pval0 = gobj.Owner.GetPropertyValue(prop, gobj.Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    If pval0 Is Nothing Then Exit For
+                    If TypeOf pval0 Is Double Then
+                        propval = Convert.ToDouble(pval0).ToString(gobj.Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
+                    Else
+                        propval = pval0.ToString
+                    End If
+                    propunit = gobj.Owner.GetPropertyUnit(prop, gobj.Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    text = propstring + ": " + propval + " " + propunit
+                    If MeasureString(text, tpaint).Width > Width Then Width = MeasureString(text, tpaint).Width
+                    texts.Add(text)
+                    n += 1
+                Next
+
+                canvas.DrawRect(New SKRect(X, Y + 2 * (Size.Height + Padding), X + Width, Y + 2 * (Size.Height + Padding) + Height), bgpaint)
+
+                n = 1
+                For Each text In texts
+                    canvas.DrawText(text, X, Y + (n + 2) * (Size.Height + Padding), tpaint)
+                    n += 1
+                Next
+
+                props.Clear()
+                props = Nothing
+
+            End If
+
+        End If
+
+    End Sub
+
+    Public Function MeasureString(text As String, paint As SKPaint) As SKSize
+
+        Dim trect As New SKRect(0, 0, 2, 2)
+        paint.GetTextPath(text, 0, 0).GetBounds(trect)
+
+        Return New SKSize(trect.Width, trect.Height)
+
+    End Function
 
 End Class

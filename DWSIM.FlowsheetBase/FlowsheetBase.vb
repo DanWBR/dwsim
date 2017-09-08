@@ -1578,6 +1578,9 @@ Imports System.Dynamic
 
     Public Sub Initialize() Implements IFlowsheet.Initialize
 
+        FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
+        FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
+
         AddPropPacks()
         AddFlashAlgorithms()
 

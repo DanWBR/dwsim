@@ -431,6 +431,19 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static void CreateAndAddLabelAndControlRow(this DynamicLayout container, String label, Control control)
+        {
+
+            var txt = new Label { Text = label, VerticalAlignment = VerticalAlignment.Center };
+            control.Width = 200;
+
+            var tr = new TableRow(txt, null, control);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+        }
+
         public static Button CreateAndAddBoldLabelAndButtonRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, Action<Button, EventArgs> command)
         {
 
