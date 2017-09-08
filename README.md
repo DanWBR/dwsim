@@ -55,6 +55,7 @@ DWSIM.Plugins.NaturalGas|Natural Gas Properties Plugin
 **Cross-Platform UI Projects**
 DWSIM.Controls.MonoMac.TextEditor|Control for script code editing on Mac platform
 DWSIM.DrawingTools.SkiaSharp|Flowsheet Drawing Tools (SkiaSharp-based)
+DWSIM.DrawingTools.SkiaSharp.Extended|Additional Flowsheet Drawing Tools (SkiaSharp-based)
 DWSIM.FlowsheetBase|Flowsheet Base Class for Cross-Platform UI
 DWSIM.UI.Desktop|Cross-Platform UI App Launcher
 DWSIM.UI.Desktop.Editors|Cross-Platform UI Editors (Views/Forms)
