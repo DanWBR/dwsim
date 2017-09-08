@@ -1676,4 +1676,22 @@ Public Class FormSimulSettings
         FrmChild.Options.DisplayCornerPropertyList = chkShowAnchoredPropertyLists.Checked
         FrmChild.FormSurface.FlowsheetDesignSurface.DrawPropertyLists = chkShowAnchoredPropertyLists.Checked
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        FontDialog1.Font = New Font(FrmChild.Options.DisplayCornerPropertyListFontName, FrmChild.Options.DisplayCornerPropertyListFontSize, FontStyle.Bold)
+
+        Dim colortype = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("System.Drawing,")).FirstOrDefault().GetType("System.Drawing.KnownColor")
+        Dim mycolor = [Enum].Parse(colortype, FrmChild.Options.DisplayCornerPropertyListFontColor, True)
+
+        FontDialog1.Color = Color.FromKnownColor(mycolor)
+        FontDialog1.ShowColor = True
+        FontDialog1.ShowDialog(Me)
+
+        FrmChild.Options.DisplayCornerPropertyListFontName = FontDialog1.Font.FontFamily.Name
+        FrmChild.Options.DisplayCornerPropertyListFontColor = FontDialog1.Color.Name
+        FrmChild.Options.DisplayCornerPropertyListFontSize = FontDialog1.Font.Size
+
+    End Sub
+
 End Class
