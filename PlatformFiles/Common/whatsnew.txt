@@ -1,3 +1,10 @@
+Update 9:
+
+- [NEW] Anchored Property Lists
+- [NEW] Flowsheet Charts
+- [CHG] Updated syntax highlighting for macOS/Linux script editors
+- [FIX] Minor bug fixes and enhancements
+
 Update 8:
 
 - [NEW] Added IPOPT libraries for macOS
@@ -12,8 +19,3 @@ Update 8:
 - [FIX] Fixed IPOPT link path on Linux
 - [FIX] Fixed python script execution on Linux and macOS
 - [FIX] Fixed some translation issues
-
-Update 7:
-
-- [FIX] Fixed loading Property Packages from the Advanced EOS Library on the new UI
-- [FIX] Fixed missing translations 

@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.0 Update 8
+Version 5.0 Update 9
 Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -38,7 +38,14 @@ VERSION HISTORY / CHANGELOG
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
 
-Version 5.0 Update 8:
+Version 5.0 Update 9
+
+- [NEW] Anchored Property Lists
+- [NEW] Flowsheet Charts
+- [CHG] Updated syntax highlighting for macOS/Linux script editors
+- [FIX] Minor bug fixes and enhancements
+
+Version 5.0 Update 8
 
 - [NEW] Added IPOPT libraries for macOS
 - [NEW] Script Manager: Added an option to run scripts asynchronously
