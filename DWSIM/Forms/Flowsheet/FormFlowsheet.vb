@@ -351,6 +351,9 @@ Public Class FormFlowsheet
             End If
         End If
 
+        FormSurface.FlowsheetDesignSurface.DrawFloatingTables = Options.DisplayFloatingPropertyTables
+        FormSurface.FlowsheetDesignSurface.DrawPropertyLists = Options.DisplayCornerPropertyList
+
     End Sub
 
     Private Sub FormChild2_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed

@@ -153,6 +153,8 @@ Partial Class FormSimulSettings
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.chkShowAnchoredPropertyLists = New System.Windows.Forms.CheckBox()
+        Me.chkShowFloatingTables = New System.Windows.Forms.CheckBox()
         Me.btnClearSelection = New System.Windows.Forms.Button()
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.PropertyListView = New System.Windows.Forms.ListView()
@@ -1200,6 +1202,8 @@ Partial Class FormSimulSettings
         'GroupBox14
         '
         resources.ApplyResources(Me.GroupBox14, "GroupBox14")
+        Me.GroupBox14.Controls.Add(Me.chkShowAnchoredPropertyLists)
+        Me.GroupBox14.Controls.Add(Me.chkShowFloatingTables)
         Me.GroupBox14.Controls.Add(Me.btnClearSelection)
         Me.GroupBox14.Controls.Add(Me.btnSelectAll)
         Me.GroupBox14.Controls.Add(Me.PropertyListView)
@@ -1209,6 +1213,20 @@ Partial Class FormSimulSettings
         Me.GroupBox14.Name = "GroupBox14"
         Me.GroupBox14.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GroupBox14, resources.GetString("GroupBox14.ToolTip"))
+        '
+        'chkShowAnchoredPropertyLists
+        '
+        resources.ApplyResources(Me.chkShowAnchoredPropertyLists, "chkShowAnchoredPropertyLists")
+        Me.chkShowAnchoredPropertyLists.Name = "chkShowAnchoredPropertyLists"
+        Me.ToolTip1.SetToolTip(Me.chkShowAnchoredPropertyLists, resources.GetString("chkShowAnchoredPropertyLists.ToolTip"))
+        Me.chkShowAnchoredPropertyLists.UseVisualStyleBackColor = True
+        '
+        'chkShowFloatingTables
+        '
+        resources.ApplyResources(Me.chkShowFloatingTables, "chkShowFloatingTables")
+        Me.chkShowFloatingTables.Name = "chkShowFloatingTables"
+        Me.ToolTip1.SetToolTip(Me.chkShowFloatingTables, resources.GetString("chkShowFloatingTables.ToolTip"))
+        Me.chkShowFloatingTables.UseVisualStyleBackColor = True
         '
         'btnClearSelection
         '
@@ -1544,4 +1562,6 @@ Partial Class FormSimulSettings
     Friend WithEvents tbMassBalTol As System.Windows.Forms.TextBox
     Friend WithEvents cbMassBalanceCheck As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents chkShowAnchoredPropertyLists As System.Windows.Forms.CheckBox
+    Friend WithEvents chkShowFloatingTables As System.Windows.Forms.CheckBox
 End Class

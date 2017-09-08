@@ -474,7 +474,7 @@ Public Class FlowsheetSurface
 
             If Not gobj Is Nothing Then
 
-                If Me.m_qt Is Nothing And Not _
+                If FlowsheetDesignSurface.DrawFloatingTables AndAlso Me.m_qt Is Nothing And Not _
                         gobj.ObjectType = ObjectType.GO_FloatingTable And Not _
                         gobj.ObjectType = ObjectType.GO_MasterTable And Not _
                         gobj.ObjectType = ObjectType.GO_SpreadsheetTable And Not _

@@ -361,6 +361,10 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Set
     End Property
 
+    Public Property DrawFloatingTables As Boolean = False
+
+    Public Property DrawPropertyLists As Boolean = True
+
     Protected Function ConvertToHPixels(ByVal value As Single) As Single
         Return value * Me.m_HorizRes
     End Function
@@ -525,6 +529,14 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
             .VerticalResolution = g.DpiY
             .DrawObjects(g, Me.Zoom, dragging)
         End With
+
+        If DrawPropertyLists Then
+            For Each gr As GraphicObject In Me.DrawingObjects
+                If gr.Calculated Then
+                    DrawPropertyListBlock(g, gr)
+                End If
+            Next
+        End If
 
         'Draw dashed line margin indicators, over top of objects
         DrawMargins(g)
@@ -1289,5 +1301,97 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         gp.Dispose()
 
     End Sub
+
+    Private Sub DrawPropertyListBlock(canvas As Graphics, gobj As GraphicObject)
+
+        Dim gCon As Drawing2D.GraphicsContainer
+        gCon = canvas.BeginContainer()
+        canvas.ScaleTransform(Zoom, Zoom)
+
+        Dim X, Y, Padding, Height, Width As Double
+
+        Padding = gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListPadding
+
+        X = gobj.X + gobj.Width + 15
+        Y = gobj.Y + gobj.Height + 20
+
+        Dim tpaint As New SolidBrush(Color.DimGray)
+
+        Dim bgpaint As New SolidBrush(Color.FromArgb(200, 255, 255, 255))
+
+        Dim tfont As New Font(gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize, FontStyle.Bold)
+
+        If Not gobj.Owner Is Nothing Then
+
+            If gobj.Owner.GetFlowsheet IsNot Nothing Then
+
+                Dim count As Integer
+
+                Dim fs = gobj.Owner.GetFlowsheet
+                Dim props As New List(Of String)(fs.FlowsheetOptions.VisibleProperties(gobj.Owner.GetType.Name))
+                props.AddRange(DirectCast(gobj.Owner.ExtraProperties, IDictionary(Of String, Object)).Keys.ToArray)
+
+                If gobj.Owner.GraphicObject.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.CapeOpenUO Then props = gobj.Owner.GetProperties(Interfaces.Enums.PropertyType.ALL).ToList
+
+                Dim propstoremove As New List(Of String)
+
+                If gobj.Owner.GraphicObject.ObjectType = DWSIM.Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream Then
+                    For Each p In props
+                        If gobj.Owner.GetPropertyValue(p).Equals(Double.MinValue) Then
+                            propstoremove.Add(p)
+                        End If
+                    Next
+                    For i As Integer = 0 To propstoremove.Count - 1
+                        props.Remove(propstoremove(i))
+                    Next
+                End If
+
+                count = props.Count
+
+                Dim fsize = canvas.MeasureString("MEASURE", tfont)
+
+                Height = (count - 1) * (fsize.Height + Padding) + Padding
+
+                Dim propstring, propval, propunit, text As String
+                Dim pval0 As Object = Nothing
+
+                Dim texts As New List(Of String)
+
+                Dim n As Integer = 1
+                For Each prop In props
+                    propstring = gobj.Owner.GetFlowsheet.GetTranslatedString(prop)
+                    pval0 = gobj.Owner.GetPropertyValue(prop, gobj.Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    If pval0 Is Nothing Then Exit For
+                    If TypeOf pval0 Is Double Then
+                        propval = Convert.ToDouble(pval0).ToString(gobj.Owner.GetFlowsheet.FlowsheetOptions.NumberFormat)
+                    Else
+                        propval = pval0.ToString
+                    End If
+                    propunit = gobj.Owner.GetPropertyUnit(prop, gobj.Owner.GetFlowsheet.FlowsheetOptions.SelectedUnitSystem)
+                    text = propstring + ": " + propval + " " + propunit
+                    If canvas.MeasureString(text, tfont).Width > Width Then Width = canvas.MeasureString(text, tfont).Width
+                    texts.Add(text)
+                    n += 1
+                Next
+
+                canvas.FillRectangle(bgpaint, Convert.ToInt32(X), Convert.ToInt32(Y + Padding), Convert.ToInt32(Width), Convert.ToInt32(Height + Padding))
+
+                n = 0
+                For Each text In texts
+                    canvas.DrawString(text, tfont, tpaint, X, Y + n * (fsize.Height + Padding))
+                    n += 1
+                Next
+
+                props.Clear()
+                props = Nothing
+
+            End If
+
+        End If
+
+        canvas.EndContainer(gCon)
+
+    End Sub
+
 
 End Class

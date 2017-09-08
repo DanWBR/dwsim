@@ -258,6 +258,9 @@ Public Class FormSimulSettings
 
         tbEnergyBalTol.Text = FrmChild.Options.EnergyBalanceRelativeTolerance.ToString()
 
+        chkShowFloatingTables.Checked = FrmChild.Options.DisplayFloatingPropertyTables
+        chkShowAnchoredPropertyLists.Checked = FrmChild.Options.DisplayCornerPropertyList
+
         Me.loaded = True
 
     End Sub
@@ -1664,4 +1667,13 @@ Public Class FormSimulSettings
         If tbEnergyBalTol.Text.IsValidDouble Then FrmChild.Options.EnergyBalanceRelativeTolerance = tbEnergyBalTol.Text.ToDoubleFromCurrent
     End Sub
 
+    Private Sub chkShowFloatingTables_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowFloatingTables.CheckedChanged
+        FrmChild.Options.DisplayFloatingPropertyTables = chkShowFloatingTables.Checked
+        FrmChild.FormSurface.FlowsheetDesignSurface.DrawFloatingTables = chkShowFloatingTables.Checked
+    End Sub
+
+    Private Sub chkShowAnchoredPropertyLists_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowAnchoredPropertyLists.CheckedChanged
+        FrmChild.Options.DisplayCornerPropertyList = chkShowAnchoredPropertyLists.Checked
+        FrmChild.FormSurface.FlowsheetDesignSurface.DrawPropertyLists = chkShowAnchoredPropertyLists.Checked
+    End Sub
 End Class

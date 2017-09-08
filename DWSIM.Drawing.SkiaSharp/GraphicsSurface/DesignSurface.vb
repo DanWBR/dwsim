@@ -1117,9 +1117,9 @@ Public Class GraphicsSurface
 
                 count = props.Count
 
-                Size = MeasureString("MEASURE", tpaint)
+                Dim fsize = MeasureString("MEASURE", tpaint)
 
-                Height = count * (Size.Height + Padding) + Padding
+                Height = count * (fsize.Height + Padding) + Padding
 
                 Dim propstring, propval, propunit, text As String
                 Dim pval0 As Object = Nothing
@@ -1143,11 +1143,11 @@ Public Class GraphicsSurface
                     n += 1
                 Next
 
-                canvas.DrawRect(New SKRect(X, Y + 2 * (Size.Height + Padding), X + Width, Y + 2 * (Size.Height + Padding) + Height), bgpaint)
+                canvas.DrawRect(New SKRect(X, Y + 2 * (fsize.Height + Padding), X + Width, Y + 2 * (fsize.Height + Padding) + Height), bgpaint)
 
                 n = 1
                 For Each text In texts
-                    canvas.DrawText(text, X, Y + (n + 2) * (Size.Height + Padding), tpaint)
+                    canvas.DrawText(text, X, Y + (n + 2) * (fsize.Height + Padding), tpaint)
                     n += 1
                 Next
 
