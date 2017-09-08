@@ -1320,6 +1320,8 @@ Public Class FormFlowsheet
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         ElseIf SelectedObj.ObjectType = ObjectType.GO_SpreadsheetTable Then
                             Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
+                        ElseIf SelectedObj.ObjectType = ObjectType.GO_Chart Then
+                            Me.FormSurface.FlowsheetDesignSurface.DeleteSelectedObject(gobj)
                         Else
 
                             Dim obj As SharedClasses.UnitOperations.BaseClass = Me.Collections.FlowsheetObjectCollection(SelectedObj.Name)
@@ -3180,6 +3182,7 @@ Public Class FormFlowsheet
         myobj.Tag = "CHART" & ((From t As GraphicObject In Me.FormSurface.FlowsheetDesignSurface.DrawingObjects Select t Where t.ObjectType = ObjectType.GO_Chart).Count + 1).ToString
         myobj.Height = 400
         myobj.Width = 500
+        myobj.Flowsheet = Me
         Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub

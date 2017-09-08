@@ -69,7 +69,7 @@ Namespace GraphicObjects
                     DrawText(g, "Error: " + ex.Message)
                 End Try
             Else
-                DrawText(g, Flowsheet.GetTranslatedString("DoubleClickToEdit"))
+                If Flowsheet IsNot Nothing Then DrawText(g, Flowsheet.GetTranslatedString("DoubleClickToEdit"))
             End If
 
         End Sub

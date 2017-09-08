@@ -142,6 +142,8 @@ Partial Class FlowsheetSurface
         resources.ApplyResources(Me.FlowsheetDesignSurface, "FlowsheetDesignSurface")
         Me.FlowsheetDesignSurface.AllowDrop = True
         Me.FlowsheetDesignSurface.BackColor = System.Drawing.Color.White
+        Me.FlowsheetDesignSurface.DrawFloatingTables = False
+        Me.FlowsheetDesignSurface.DrawPropertyLists = True
         Me.FlowsheetDesignSurface.Editor = Nothing
         Me.FlowsheetDesignSurface.GridColor = System.Drawing.Color.GhostWhite
         Me.FlowsheetDesignSurface.GridLineWidth = 1
@@ -810,9 +812,9 @@ Partial Class FlowsheetSurface
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CloseButton = False
         Me.CloseButtonVisible = False
+        Me.Controls.Add(Me.FlowsheetDesignSurface)
         Me.Controls.Add(Me.ToolStripFlowsheet)
         Me.Controls.Add(Me.PanelSearch)
-        Me.Controls.Add(Me.FlowsheetDesignSurface)
         Me.DoubleBuffered = True
         Me.Name = "FlowsheetSurface"
         Me.ShowHint = WeifenLuo.WinFormsUI.Docking.DockState.Document
