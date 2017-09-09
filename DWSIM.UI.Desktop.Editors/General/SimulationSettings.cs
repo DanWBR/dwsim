@@ -143,6 +143,13 @@ namespace DWSIM.UI.Desktop.Editors
 
             s.CreateAndAddLabelRow(container, "Anchored Property List Settings");
 
+            var fonts = Eto.Drawing.Fonts.AvailableFontFamilies.Select((x) => x.Name.ToLower()).ToList();
+
+            if (!fonts.Contains(flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName.ToLower()))
+            {
+                flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName = Eto.Drawing.FontFamilies.MonospaceFamilyName;
+            }
+
             var fp = new FontPicker(new Eto.Drawing.Font(flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontName, flowsheet.FlowsheetOptions.DisplayCornerPropertyListFontSize));
 
             fp.ValueChanged += (sender, e) =>
