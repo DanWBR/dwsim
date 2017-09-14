@@ -317,7 +317,10 @@ namespace DWSIM.UI.Desktop.Editors
 
             container.CreateAndAddDropDownRow("Basis Units (Base Compound)", units, units.IndexOf(rx.ConcUnit), (sender, e) => rx.ConcUnit = sender.SelectedValue.ToString());
 
-            container.CreateAndAddDropDownRow("Velocity Units", units, units.IndexOf(rx.VelUnit), (sender, e) => rx.VelUnit = sender.SelectedValue.ToString());
+            var units2 = us.GetUnitSet(Interfaces.Enums.UnitOfMeasure.reac_rate);
+            units2.Insert(0, "");
+
+            container.CreateAndAddDropDownRow("Velocity Units", units2, units2.IndexOf(rx.VelUnit), (sender, e) => rx.VelUnit = sender.SelectedValue.ToString());
 
             UpdateEquation();
 
