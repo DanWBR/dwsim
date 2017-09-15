@@ -19,8 +19,6 @@
 Imports System.Math
 Imports DWSIM.MathOps.MathEx
 Imports DWSIM.Thermodynamics.BaseClasses
-Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
-Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
 
