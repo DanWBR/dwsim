@@ -662,16 +662,12 @@
     </Compile>
     <Compile Include="Objects\Classes\Shared\SharedFunctions.vb" />
     <Compile Include="Objects\Classes\Optimization\SensitivityAnalysis.vb" />
-    <Compile Include="Objects\Classes\PetroleumAssay\AssayClass.vb" />
     <Compile Include="Tools\Assay Manager\FormAssayManager.Designer.vb">
       <DependentUpon>FormAssayManager.vb</DependentUpon>
     </Compile>
     <Compile Include="Tools\Assay Manager\FormAssayManager.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\Distillation Curve Characterization\Auxiliary\CurveConversion.vb" />
-    <Compile Include="Tools\Distillation Curve Characterization\Auxiliary\Fitting.vb" />
-    <Compile Include="Tools\Distillation Curve Characterization\Auxiliary\PropertyMethods.vb" />
     <Compile Include="Tools\Reaction Subsystem Editors\FormReacConv.Designer.vb">
       <DependentUpon>FormReacConv.vb</DependentUpon>
     </Compile>
@@ -741,9 +737,6 @@
     <Compile Include="Tools\C7plus Characterization\FormPCBulk.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools\C7plus Characterization\G-L\GL.vb" />
-    <Compile Include="Tools\C7plus Characterization\LM\LM.vb" />
-    <Compile Include="Tools\C7plus Characterization\RIAZI\Riazi.vb" />
     <Compile Include="Utilities\True Critical Point\FrmCritpt.designer.vb">
       <DependentUpon>FrmCritpt.vb</DependentUpon>
     </Compile>

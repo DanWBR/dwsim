@@ -1510,7 +1510,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 Next
 
                 Dim obj As Object = Nothing
-                Dim lmfit As New DWSIM.Utilities.PetroleumCharacterization.LMFit
+                Dim lmfit As New Utilities.PetroleumCharacterization.LMFit
 
                 Dim c_a12(2), c_a21(2) As Double
                 Dim r_a12, r_a21, n_a12, n_a21 As Double
@@ -1519,7 +1519,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 c_a12(1) = 0.1
                 c_a12(2) = 0.01
 
-                obj = lmfit.GetCoeffs(px, py_a12, c_a12.Clone, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.SecondDegreePoly, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(px, py_a12, c_a12.Clone, Utilities.PetroleumCharacterization.LMFit.FitType.SecondDegreePoly, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_a12 = obj(0)
                 r_a12 = obj(2)
                 n_a12 = obj(3)
@@ -1528,7 +1528,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
                 c_a21(1) = 0.1
                 c_a21(2) = 0.01
 
-                obj = lmfit.GetCoeffs(px, py_a21, c_a21.Clone, DWSIM.Utilities.PetroleumCharacterization.LMFit.FitType.SecondDegreePoly, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
+                obj = lmfit.GetCoeffs(px, py_a21, c_a21.Clone, Utilities.PetroleumCharacterization.LMFit.FitType.SecondDegreePoly, 0.0000000001, 0.0000000001, 0.0000000001, 10000)
                 c_a21 = obj(0)
                 r_a21 = obj(2)
                 n_a21 = obj(3)

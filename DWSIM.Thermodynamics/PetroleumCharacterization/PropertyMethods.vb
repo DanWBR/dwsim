@@ -269,7 +269,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
             Dim Kw, API, v1 As Double
             Kw = (1.8 * PEMe) ^ (1 / 3) / d15
             API = 141.5 / d15 - 131.5
-            v1 = 10 ^ (4.39371 - 1.94733 * Kw + 0.12769 * Kw ^ 2 + 0.00032629 * API ^ 2 - 0.0118246 * Kw * API + (0.171617 * Kw ^ 2 + 10.9943 * API + 0.0950663 * API ^ 2 - 0.869218 * Kw * API) / (API + 50.3642 - 4.78231 * Kw))
+            v1 = 10 ^ (4.39371 - 1.94733 * Kw + 0.12769 * Kw ^ 2 + 0.00032629 * API ^ 2 - 0.0118246 * Kw * API + (0.171617 * Kw ^ 2 + 10.9943 * API + 0.0950663 * API ^ 2 - 0.860218 * Kw * API) / (API + 50.3642 - 4.78231 * Kw))
             'v1 = cSt
             Return v1 * 0.000001
 
@@ -332,7 +332,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
             Vc2 = v2 * 1000000.0
             logz1 = CalcLogZ(Vc1)
             logz2 = CalcLogZ(Vc2)
-            B = (logz2 - logz1) / (T1 - T2)
+            B = (logz2 - logz1) / (tt1 - tt2)
             Return logz2 + B * T2
         End Function
 
@@ -356,7 +356,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
             Vc2 = v2 * 1000000.0
             logz1 = CalcLogZ(Vc1)
             logz2 = CalcLogZ(Vc2)
-            Return (logz2 - logz1) / (T1 - T2)
+            Return (logz2 - logz1) / (tt1 - tt2)
 
         End Function
 
@@ -405,11 +405,11 @@ Namespace Utilities.PetroleumCharacterization.Methods
             Z1 = vk1 + 0.7 + Math.Exp(-1.47 - 1.84 * vk1 - 0.51 * vk1 ^ 2)
             Z2 = vk2 + 0.7 + Math.Exp(-1.47 - 1.84 * vk2 - 0.51 * vk2 ^ 2)
 
-            Dim var1 = (Math.Log(Math.Log(Z1)) + Math.Log(Math.Log(Z2)))
-            Dim var2 = (Math.Log(T1) + Math.Log(T2))
+            Dim var1 = (Math.Log(Math.Log(Z1)) - Math.Log(Math.Log(Z2)))
+            Dim var2 = (Math.Log(T1) - Math.Log(T2))
             B = var1 / var2
 
-            Z = Math.Exp(Math.Exp(Math.Log(Math.Log(Z1)) + B * (Math.Log(T) - Math.Log(T2))))
+            Z = Math.Exp(Math.Exp(Math.Log(Math.Log(Z1)) + B * (Math.Log(T) - Math.Log(T1))))
 
             Dim tmp = Z - 0.7 - Math.Exp(-0.7487 - 3.295 * (Z - 0.7) + 0.6119 * (Z - 0.7) ^ 2 - 0.3193 * (Z - 0.7) ^ 3)
 

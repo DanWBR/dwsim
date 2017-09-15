@@ -22,6 +22,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics
+Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
 
 
 Public Class FormPCBulk
@@ -35,8 +36,8 @@ Public Class FormPCBulk
     Private frm As FormFlowsheet
     Private ps_vect(0, 10) As Object
 
-    Private m_riazi As Methods.Riazi
-    Private m_gl As Methods.GL
+    Private m_riazi As Utilities.PetroleumCharacterization.Methods.Riazi
+    Private m_gl As Utilities.PetroleumCharacterization.Methods.GL
     Private m_props As PROPS
 
     Private m_action As String
@@ -280,7 +281,7 @@ Public Class FormPCBulk
         Next
 
         Dim prop As New Thermodynamics.PropertyPackages.Auxiliary.PROPS
-        Dim prop2 As New DWSIM.Utilities.PetroleumCharacterization.Methods.GL
+        Dim prop2 As New Utilities.PetroleumCharacterization.Methods.GL
         Dim rnd As New Random
         Dim id = rnd.Next(1000, 9999)
 
@@ -397,10 +398,10 @@ Public Class FormPCBulk
 
         'Adjust Acentric Factors and Rackett parameters to fit NBP and Density
 
-        Dim dfit As New Methods.DensityFitting
-        Dim prvsfit As New Methods.PRVSFitting
-        Dim srkvsfit As New Methods.SRKVSFitting
-        Dim nbpfit As New Methods.NBPFitting
+        Dim dfit As New Utilities.PetroleumCharacterization.Methods.DensityFitting
+        Dim prvsfit As New Utilities.PetroleumCharacterization.Methods.PRVSFitting
+        Dim srkvsfit As New Utilities.PetroleumCharacterization.Methods.SRKVSFitting
+        Dim nbpfit As New Utilities.PetroleumCharacterization.Methods.NBPFitting
         Dim tms As New Streams.MaterialStream("", "")
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
@@ -659,8 +660,8 @@ Public Class FormPCBulk
 
         Me.ComboBox1.SelectedIndex = 9
 
-        Me.m_riazi = New Methods.Riazi
-        Me.m_gl = New Methods.GL
+        Me.m_riazi = New Utilities.PetroleumCharacterization.Methods.Riazi
+        Me.m_gl = New Utilities.PetroleumCharacterization.Methods.GL
 
         'opcoes
         Me.ComboBoxAF.SelectedIndex = 0
@@ -762,7 +763,7 @@ Public Class FormPCBulk
         'salvar ensaio
 
         Try
-            Dim myassay As Assay.Assay = New Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, SystemsOfUnits.Converter.ConvertToSI("C", tb_t1.Text), SystemsOfUnits.Converter.ConvertToSI("C", tb_t2.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v1.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v2.Text))
+            Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = New Utilities.PetroleumCharacterization.Assay.Assay(tb_mw.Text, tb_sg.Text, tb_wk.Text, SystemsOfUnits.Converter.ConvertToSI("C", tb_t1.Text), SystemsOfUnits.Converter.ConvertToSI("C", tb_t2.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v1.Text), SystemsOfUnits.Converter.ConvertToSI("cSt", tb_v2.Text))
             myassay.Name = Me.TextBox1.Text
             frm.Options.PetroleumAssays.Add(Guid.NewGuid().ToString, myassay)
             MessageBox.Show("Assay data was saved succesfully.", "DWSIM", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -780,7 +781,7 @@ Public Class FormPCBulk
 
         If frmam.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
 
-            Dim myassay As Assay.Assay = frmam.currentassay
+            Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = frmam.currentassay
 
             If Not myassay Is Nothing Then
 

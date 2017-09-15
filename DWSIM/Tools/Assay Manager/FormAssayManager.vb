@@ -20,6 +20,7 @@ Imports System.Math
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports DWSIM.DWSIM
 Imports System.Runtime.Serialization.Formatters
+Imports DWSIM.Thermodynamics.Utilities.PetroleumCharacterization
 
 
 Public Class FormAssayManager

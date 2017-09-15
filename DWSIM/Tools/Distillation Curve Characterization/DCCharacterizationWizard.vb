@@ -22,6 +22,7 @@ Imports DWSIM.Thermodynamics.BaseClasses
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization.Methods
 Imports DWSIM.DWSIM.Utilities.PetroleumCharacterization
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports DWSIM.Thermodynamics.PetroleumCharacterization.Methods
 
 
 Public Class DCCharacterizationWizard
@@ -174,7 +175,7 @@ Public Class DCCharacterizationWizard
             T90 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 0.9)
             T100 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 1.0)
             'tbp
-            tbp = DistillationCurveConversion.ASTMD86ToPEV_Riazi(New Double() {T0, T10, T30, T50, T70, T90, T100})
+            tbp = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.ASTMD86ToPEV_Riazi(New Double() {T0, T10, T30, T50, T70, T90, T100})
             tbpx = New Double() {0.000001, 0.1#, 0.3#, 0.5#, 0.7#, 0.9#, 1.0#}
         ElseIf Me.ComboBoxDistMethod.SelectedItem.ToString.Contains("ASTM D1160") Then
             'vacuum
@@ -190,15 +191,15 @@ Public Class DCCharacterizationWizard
             T90 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 0.9)
             T100 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 1.0)
             'tbp
-            tbp = DistillationCurveConversion.ASTMD1160ToPEVsub_Wauquier(New Double() {T0, T10, T30, T50, T70, T90, T100})
+            tbp = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.ASTMD1160ToPEVsub_Wauquier(New Double() {T0, T10, T30, T50, T70, T90, T100})
             Dim K As Double = Convert.ToDouble(Me.TextBoxKAPI.Text)
-            tbp(0) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(0), 1333, K)
-            tbp(1) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(1), 1333, K)
-            tbp(2) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(2), 1333, K)
-            tbp(3) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(3), 1333, K)
-            tbp(4) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(4), 1333, K)
-            tbp(5) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(5), 1333, K)
-            tbp(6) = DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(6), 1333, K)
+            tbp(0) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(0), 1333, K)
+            tbp(1) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(1), 1333, K)
+            tbp(2) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(2), 1333, K)
+            tbp(3) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(3), 1333, K)
+            tbp(4) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(4), 1333, K)
+            tbp(5) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(5), 1333, K)
+            tbp(6) = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.PEVsubToPEV_MaxwellBonnel(tbp(6), 1333, K)
             tbpx = New Double() {0.000001, 0.1#, 0.3#, 0.5#, 0.7#, 0.9#, 1.0#}
         ElseIf Me.ComboBoxDistMethod.SelectedItem.ToString.Contains("ASTM D2887") Then
             'simulated
@@ -215,7 +216,7 @@ Public Class DCCharacterizationWizard
             T95 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 0.95#)
             T100 = Interpolation.polinterpolation.barycentricinterpolation(pxt.ToArray(GetType(Double)), pyt.ToArray(GetType(Double)), w, pxt.Count, 1.0#)
             'tbp
-            tbp = DistillationCurveConversion.ASTMD2887ToPEV_Daubert(New Double() {T5, T10, T30, T50, T70, T90, T95, T100})
+            tbp = Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.ASTMD2887ToPEV_Daubert(New Double() {T5, T10, T30, T50, T70, T90, T95, T100})
             tbpx = New Double() {0.05#, 0.1#, 0.3#, 0.5#, 0.7#, 0.9#, 0.95#, 1.0#}
         End If
 
@@ -241,7 +242,7 @@ Public Class DCCharacterizationWizard
         inest(5) = 10358
         inest(6) = -3000
 
-        Dim lmfit As New DistillationCurveConversion.TBPFit()
+        Dim lmfit As New Utilities.PetroleumCharacterization.Methods.DistillationCurveConversion.TBPFit()
         obj = lmfit.GetCoeffs(tbpx, tbp, inest, 0.0000000001, 0.00000001, 0.00000001, 1000)
         coeff = obj(0)
         r_pv = obj(2)
@@ -380,7 +381,7 @@ Public Class DCCharacterizationWizard
 
         'calculate all properties and display in the datagrid
 
-        Dim methods2 As New DWSIM.Utilities.PetroleumCharacterization.Methods.GL
+        Dim methods2 As New Utilities.PetroleumCharacterization.Methods.GL
         Dim rnd As New Random
         Dim id = rnd.Next(1000, 9999)
 
@@ -583,10 +584,10 @@ Public Class DCCharacterizationWizard
 
         'Adjust Acentric Factors and Rackett parameters to fit NBP and Density
 
-        Dim dfit As New Methods.DensityFitting
-        Dim prvsfit As New Methods.PRVSFitting
-        Dim srkvsfit As New Methods.SRKVSFitting
-        Dim nbpfit As New Methods.NBPFitting
+        Dim dfit As New Utilities.PetroleumCharacterization.Methods.DensityFitting
+        Dim prvsfit As New Utilities.PetroleumCharacterization.Methods.PRVSFitting
+        Dim srkvsfit As New Utilities.PetroleumCharacterization.Methods.SRKVSFitting
+        Dim nbpfit As New Utilities.PetroleumCharacterization.Methods.NBPFitting
         Dim tms As New Streams.MaterialStream("", "")
         Dim pp As PropertyPackages.PropertyPackage
         Dim fzra, fw, fprvs, fsrkvs As Double
@@ -1106,7 +1107,7 @@ Public Class DCCharacterizationWizard
         cv = New SystemsOfUnits.Converter
 
         If frmam.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Dim myassay As Assay.Assay = frmam.currentassay
+            Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = frmam.currentassay
             If Not myassay Is Nothing Then
                 With myassay
                     ComboBoxDistMethod.SelectedIndex = .NBPType
@@ -1206,7 +1207,7 @@ Public Class DCCharacterizationWizard
             If TextBoxBulkD.Text <> "" Then api = TextBoxBulkD.Text Else api = 0.0#
             vt1 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxVT1.Text)
             vt2 = SystemsOfUnits.Converter.ConvertToSI(su.temperature, TextBoxVT2.Text)
-            Dim myassay As Assay.Assay = New Assay.Assay(k_api, mw, api, vt1, vt2, ComboBoxDistMethod.SelectedIndex, ComboBoxBasis.SelectedItem.ToString, pxt, pyt, pym, pyd, pyv1, pyv2)
+            Dim myassay As Utilities.PetroleumCharacterization.Assay.Assay = New Utilities.PetroleumCharacterization.Assay.Assay(k_api, mw, api, vt1, vt2, ComboBoxDistMethod.SelectedIndex, ComboBoxBasis.SelectedItem.ToString, pxt, pyt, pym, pyd, pyv1, pyv2)
             myassay.CurveBasis = ComboBoxBasis.SelectedItem.ToString
             myassay.Name = "NBP_ASSAY_" & New Random().Next(10000).ToString
             form.Options.PetroleumAssays.Add(Guid.NewGuid().ToString, myassay)

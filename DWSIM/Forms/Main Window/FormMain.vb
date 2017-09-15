@@ -1521,7 +1521,7 @@ Public Class FormMain
 
             For Each xel As XElement In data
                 Try
-                    Dim obj As New DWSIM.Utilities.PetroleumCharacterization.Assay.Assay()
+                    Dim obj As New Utilities.PetroleumCharacterization.Assay.Assay()
                     obj.LoadData(xel.Elements.ToList)
                     form.Options.PetroleumAssays.Add(obj.Name, obj)
                 Catch ex As Exception
@@ -1997,9 +1997,9 @@ Public Class FormMain
         xdoc.Element("DWSIM_Simulation_Data").Add(New XElement("PetroleumAssays"))
         xel = xdoc.Element("DWSIM_Simulation_Data").Element("PetroleumAssays")
 
-        If form.Options.PetroleumAssays Is Nothing Then form.Options.PetroleumAssays = New Dictionary(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay)
+        If form.Options.PetroleumAssays Is Nothing Then form.Options.PetroleumAssays = New Dictionary(Of String, Utilities.PetroleumCharacterization.Assay.Assay)
 
-        For Each pp As KeyValuePair(Of String, DWSIM.Utilities.PetroleumCharacterization.Assay.Assay) In form.Options.PetroleumAssays
+        For Each pp As KeyValuePair(Of String, Utilities.PetroleumCharacterization.Assay.Assay) In form.Options.PetroleumAssays
             xel.Add(New XElement("Assay", pp.Value.SaveData().ToArray()))
         Next
 
