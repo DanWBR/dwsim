@@ -300,7 +300,7 @@ In this model, chemical and physical equilibria of NH3, CO2, and H2S in sour wat
     <value>Use Peneloux Volume Translation correction (0 = Disable, 1 = Enable)</value>
   </data>
   <data name="ParallelPInvokeError" xml:space="preserve">
-    <value>The CPU Parallel Processing feature has been automatically disabled so that the non-linear IPOPT solver can be used by DWSIM. Now you can try to perform the calculation again. To re-enable the CPU Parallel Processing feature, go to 'DWSIM Launcher' window, 'File'/'DWSIM'&gt; 'Global Settings'&gt; 'Solver' in the new interface or 'Edit'&gt; 'General Settings'&gt; 'Solver' in the classic interface.</value>
+    <value>The CPU Parallel Processing feature has been automatically disabled so that a native C++ library can be used by DWSIM. Please try to perform the calculation again. To re-enable the CPU Parallel Processing feature, go to 'DWSIM Launcher' window, 'File'/'DWSIM'&gt; 'Global Settings'&gt; 'Solver' in the new interface or 'Edit'&gt; 'General Settings'&gt; 'Solver' in the classic interface.</value>
   </data>
   <data name="PropPack_FlashError" xml:space="preserve">
     <value>Phase equilibria calculation error.</value>

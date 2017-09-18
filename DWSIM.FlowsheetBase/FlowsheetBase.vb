@@ -1086,8 +1086,8 @@ Imports System.Dynamic
                     End If
                 ElseIf xel.Element("Type").Value.Contains("ThermoC") Then
                     Dim thermockey As String = "ThermoC Bridge"
-                    If PropertyPackages.ContainsKey(thermockey) Then
-                        obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
+                    If AvailablePropertyPackages.ContainsKey(thermockey) Then
+                        obj = AvailablePropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
                     Else
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
@@ -1865,7 +1865,7 @@ Label_00CC:
         If File.Exists(thermoceos) Then
             Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(thermoceos))
             For Each pp In pplist
-                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+                AvailablePropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
             Next
         End If
 

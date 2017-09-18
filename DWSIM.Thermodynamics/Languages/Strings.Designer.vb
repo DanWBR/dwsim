@@ -370,7 +370,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to O recurso de Aceleração em Paralelo da CPU foi desabilitado automaticamente para que o solver não-linear IPOPT possa ser utilizado pelo DWSIM. Agora você pode tentar realizar o cálculo novamente. Para reativar o recurso de Aceleração em paralelo da CPU, vá para &apos;Arquivo&apos; &gt; &apos;Configurações Globais&apos; &gt; &apos;Solver&apos; na nova interface ou &apos;Editar&apos; &gt; &apos;Configurações Gerais&apos; &gt; &apos;Solver&apos; na interface clássica. .
+        '''  Looks up a localized string similar to O recurso de Aceleração em Paralelo da CPU foi desabilitado automaticamente para que uma biblioteca nativa (C++) possa ser utilizada pelo DWSIM. Agora você pode tentar realizar o cálculo novamente. Para reativar o recurso de Aceleração em paralelo da CPU, vá para &apos;Arquivo&apos; &gt; &apos;Configurações Globais&apos; &gt; &apos;Solver&apos; na nova interface ou &apos;Editar&apos; &gt; &apos;Configurações Gerais&apos; &gt; &apos;Solver&apos; na interface clássica. .
         '''</summary>
         Friend Shared ReadOnly Property ParallelPInvokeError() As String
             Get

@@ -200,13 +200,13 @@ namespace DWSIM.UI.Desktop.Shared
 
                 st.Start();
 
-                Application.Instance.AsyncInvoke(() =>
+                Application.Instance.Invoke(() =>
                 {
                     surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
                     FlowsheetForm.Enabled = false;
                     FlowsheetControl.Invalidate();
                     FlowsheetForm.Invalidate();
-                    solvform.ShowModalAsync(FlowsheetControl);
+                    if (solvform != null) solvform.ShowModal(FlowsheetControl);
                 });
 
             }
