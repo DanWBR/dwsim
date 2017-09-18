@@ -29,6 +29,9 @@ Namespace DWSIM
 
         Public Shared Sub InitializeSettings()
 
+            'initialize Eto.Forms
+            Eto.Platform.Initialize(Eto.Platforms.WinForms)
+
             'set language
             GlobalSettings.Settings.CultureInfo = My.Settings.CultureInfo
             GlobalSettings.Settings.CurrentCulture = My.Settings.CultureInfo
