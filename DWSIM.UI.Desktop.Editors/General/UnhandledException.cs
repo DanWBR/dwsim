@@ -20,7 +20,7 @@ namespace DWSIM.UI.Desktop.Editors
     {
 
         private Exception exc;
-        private string githublink;
+        private string githublink = "";
 
         public UnhandledExceptionView(Exception ex)
             : base()
