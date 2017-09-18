@@ -781,7 +781,17 @@ namespace DWSIM.UI.Forms
             item5.Click += (sender, e) =>
             {
                 var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 50, obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
+                var id = isobj.Name;
                 ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
+                isobj.Name = id;  
+                if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
+                { 
+                    foreach (var phase in ((DWSIM.Thermodynamics.Streams.MaterialStream)isobj).Phases.Values) {
+	                    foreach (var comp in FlowsheetObject.SelectedCompounds.Values) {
+		                    phase.Compounds[comp.Name].ConstantProperties = comp;
+	                    }
+                    }
+                }              
             };
 
             var item6 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };
@@ -803,7 +813,7 @@ namespace DWSIM.UI.Forms
             if (obj == null) return;
             var txt = new TextArea { ReadOnly = true, Wrap = true, Font = Fonts.Monospace(SystemFonts.Default().Size) };
             txt.Text = "Please wait, debugging object...";
-            var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 400, 300);
+            var form1 = DWSIM.UI.Shared.Common.CreateDialog(txt, "Debugging" + " " + obj.GraphicObject.Tag + "...", 500, 600);
             Task.Factory.StartNew(() => { return obj.GetDebugReport(); }).ContinueWith(t => { Application.Instance.Invoke(() => { txt.Text = t.Result; }); }, TaskContinuationOptions.ExecuteSynchronously);
             form1.ShowModal(this);
         }
