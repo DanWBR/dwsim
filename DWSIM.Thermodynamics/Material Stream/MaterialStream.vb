@@ -6196,7 +6196,7 @@ Namespace Streams
                     results.TextOutput += "Vapor Fraction: " & Phases(2).Properties.molarfraction.ToString & System.Environment.NewLine
             End Select
 
-            results.TextOutput += "Property Package: " & Me.PropertyPackage.Name & System.Environment.NewLine & System.Environment.NewLine
+            results.TextOutput += "Property Package: " & Me.PropertyPackage.ComponentName & System.Environment.NewLine & System.Environment.NewLine
 
             For Each d As KeyValuePair(Of String, List(Of Double)) In results.Data
                 Dim id As String = d.Key

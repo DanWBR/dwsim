@@ -10236,10 +10236,13 @@ Final3:
             Catch ex As Exception
             End Try
 
-            For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").SingleOrDefault.Elements.ToList
-                If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))
-            Next
-
+            Try
+                For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").SingleOrDefault.Elements.ToList
+                    If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))
+                Next
+            Catch ex As Exception
+            End Try
+           
             Select Case Me.ComponentName
 
                 Case "Peng-Robinson (PR)"
