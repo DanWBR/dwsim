@@ -144,7 +144,7 @@ Public Class FormDataRegression
                     .fixed1 = gridInEst.Rows(0).Cells(4).Value
                     .llim1 = gridInEst.Rows(0).Cells(1).Value
                     .ulim1 = gridInEst.Rows(0).Cells(3).Value
-                Case "PC-SAFT", "Lee-Kesler-Plöcker"
+                Case "Lee-Kesler-Plöcker"
                     .iepar1 = gridInEst.Rows(0).Cells(2).Value
                     .fixed1 = gridInEst.Rows(0).Cells(4).Value
                     .llim1 = gridInEst.Rows(0).Cells(1).Value
@@ -188,7 +188,8 @@ Public Class FormDataRegression
             If .comp2 IsNot Nothing Then
                 If Me.cbCompound2.Items.Contains(.comp2) Then Me.cbCompound2.SelectedItem = .comp2 Else MessageBox.Show(.comp2 & ": " & DWSIM.App.GetLocalString("CompoundNotFound"))
             End If
-            If .model.ToLower = "PRSV2" Then .model = "PRSV2-M"
+            If .model.ToLower = "prsv2" Then .model = "PRSV2-M"
+            If .model = "PC-SAFT" Then .model = "Peng-Robinson"
             Me.cbModel.SelectedItem = .model
             Select Case cbModel.SelectedItem.ToString()
                 Case "Peng-Robinson", "Soave-Redlich-Kwong"
@@ -196,7 +197,7 @@ Public Class FormDataRegression
                     If .llim1 = 0.0# Then .llim1 = -0.5#
                     If .ulim1 = 0.0# Then .ulim1 = 0.5#
                     gridInEst.Rows.Add(New Object() {"kij", .llim1, .iepar1, .ulim1, .fixed1})
-                Case "PC-SAFT", "Lee-Kesler-Plöcker"
+                Case "Lee-Kesler-Plöcker"
                     gridInEst.Rows.Clear()
                     If .llim1 = 0.0# Then .llim1 = 0.5#
                     If .ulim1 = 0.0# Then .ulim1 = 1.5#
@@ -477,7 +478,7 @@ Public Class FormDataRegression
             Select Case currcase.datatype
                 Case DataType.Pxy, DataType.Txy
                     Select Case currcase.model
-                        Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
+                        Case "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
                             If PVF Then
                                 proppack.FlashAlgorithm = New Auxiliary.FlashAlgorithms.NestedLoops
                                 ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
@@ -841,7 +842,7 @@ Public Class FormDataRegression
                             regressedparameters.Add("A12", x(0))
                             regressedparameters.Add("A21", x(1))
                             regressedparameters.Add("alpha12", x(2))
-                        Case "Lee-Kesler-Plöcker", "Peng-Robinson", "Soave-Redlich-Kwong", "PC-SAFT"
+                        Case "Lee-Kesler-Plöcker", "Peng-Robinson", "Soave-Redlich-Kwong"
                             ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             For i = 0 To np - 1
@@ -1005,18 +1006,6 @@ Public Class FormDataRegression
                             Next
                             vartext += "}"
                             regressedparameters.Add("kij", x(0))
-                        Case "PC-SAFT"
-                            For i = 0 To np - 1
-                                result = ExcelAddIn.ExcelIntegration.PTFlash(proppack, 3, VP(i), VT(i), New Object() {currcase.comp1, currcase.comp2}, New Double() {(Vx1(i) + Vx2(i)) / 2, 1 - (Vx1(i) + Vx2(i)) / 2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
-                                Vx1c(i) = result(2, 1)
-                                Vx2c(i) = result(2, 2)
-                            Next
-                            vartext = ", Parameters = {kij = "
-                            For i = 0 To x.Length - 1
-                                vartext += x(i).ToString("N4")
-                            Next
-                            vartext += "}"
-                            regressedparameters.Add("kij", x(0))
                     End Select
                     If Abs(Vx1(0) - Vx1c(0)) > Abs(Vx1(0) - Vx2c(0)) Then
                         Dim tmpvec As ArrayList = Vx1c.Clone
@@ -1055,7 +1044,7 @@ Public Class FormDataRegression
                     End If
                     ExcelAddIn.ExcelIntegration.AddCompounds(proppack, New Object() {currcase.comp1, currcase.comp2})
                     Select Case currcase.model
-                        Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
+                        Case "Peng-Robinson", "Soave-Redlich-Kwong", "Lee-Kesler-Plöcker"
                             ExcelAddIn.ExcelIntegration.SetIP(proppack.ComponentName, proppack, New Object() {currcase.comp1, currcase.comp2}, New Double(,) {{0.0#, x(0)}, {x(0), 0.0#}}, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
                             If doparallel Then
 
@@ -1427,8 +1416,6 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Dim initval As Double() = Nothing
 
             Select Case currcase.model
-                Case "PC-SAFT"
-                    initval = New Double() {currcase.iepar1}
                 Case "Peng-Robinson"
                     initval = New Double() {currcase.iepar1}
                 Case "PRSV2-M", "PRSV2-VL"
@@ -2637,7 +2624,7 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
 
     Private Sub cbModel_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbModel.SelectedIndexChanged
         Select Case cbModel.SelectedItem.ToString
-            Case "PC-SAFT", "Peng-Robinson", "Soave-Redlich-Kwong"
+            Case "Peng-Robinson", "Soave-Redlich-Kwong"
                 With gridInEst.Rows
                     .Clear()
                     .Add(New Object() {"kij", -0.5, 0.0#, 0.5, False})
@@ -3435,9 +3422,6 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Try
 
             Select Case currcase.model
-                Case "PC-SAFT"
-                    initval2 = New Double() {currcase.iepar1}
-                    nvar = 1
                 Case "Peng-Robinson"
                     initval2 = New Double() {currcase.iepar1}
                     nvar = 1
@@ -3463,8 +3447,6 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
             Dim ppm As New Thermodynamics.CAPEOPENManager()
 
             Select Case currcase.model
-                Case "PC-SAFT"
-                    ppname = "PC-SAFT"
                 Case "Peng-Robinson"
                     ppname = "Peng-Robinson (PR)"
                 Case "Soave-Redlich-Kwong"
@@ -3524,12 +3506,6 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim fixed() As Boolean = Nothing
 
         Select Case currcase.model
-            Case "PC-SAFT"
-                initval2 = initval
-                lconstr2 = New Double() {currcase.llim1}
-                uconstr2 = New Double() {currcase.ulim1}
-                fixed = New Boolean() {currcase.fixed1}
-                nvar = 1
             Case "Peng-Robinson"
                 initval2 = initval
                 lconstr2 = New Double() {currcase.llim1}
@@ -3575,8 +3551,6 @@ ByVal new_lambda As Boolean, ByVal nele_hess As Integer, ByRef iRow As Integer()
         Dim ppm As New Thermodynamics.CAPEOPENManager()
 
         Select Case currcase.model
-            Case "PC-SAFT"
-                ppname = "PC-SAFT"
             Case "Peng-Robinson"
                 ppname = "Peng-Robinson (PR)"
             Case "Soave-Redlich-Kwong"
