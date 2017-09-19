@@ -333,7 +333,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
             logz1 = CalcLogZ(Vc1)
             logz2 = CalcLogZ(Vc2)
             B = (logz2 - logz1) / (tt1 - tt2)
-            Return logz2 + B * T2
+            Return logz2 + B * tt2
         End Function
 
         ''' <summary>

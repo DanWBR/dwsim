@@ -1,21 +1,13 @@
+Update 10:
+
+- [NEW] Added support for ThermoC Property Package
+- [FIX] Fixed Material Stream cloning on new UI
+- [FIX] Fixed viscosity calculations for petroleum fractions
+- [FIX] Fixed velocity units in Kinetic Reaction editor (new UI)
+
 Update 9:
 
 - [NEW] Anchored Property Lists
 - [NEW] Flowsheet Charts
 - [CHG] Updated syntax highlighting for macOS/Linux script editors
 - [FIX] Minor bug fixes and enhancements
-
-Update 8:
-
-- [NEW] Added IPOPT libraries for macOS
-- [NEW] Script Manager: Added an option to run scripts asynchronously
-- [NEW] Added dynamic properties to Flowsheet
-- [NEW] Redesigned Script Manager (New UI)
-- [CHG] Removed FPROPS and PC-SAFT (original) Property Packages
-- [FIX] Fixed logical block editors to include name/status (New UI)
-- [FIX] Fixed floating property table behavior on macOS (New UI)
-- [FIX] Added missing property editors for column solver methods and pump curves (New UI) 
-- [FIX] Fixed HetCat reaction rate unit selector (New UI)
-- [FIX] Fixed IPOPT link path on Linux
-- [FIX] Fixed python script execution on Linux and macOS
-- [FIX] Fixed some translation issues
