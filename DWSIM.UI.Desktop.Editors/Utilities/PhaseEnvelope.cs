@@ -16,6 +16,7 @@ using Eto.Drawing;
 
 using DWSIM.ExtensionMethods;
 using DWSIM.UI.Shared;
+using s = DWSIM.UI.Shared.Common;
 
 using cv = DWSIM.SharedClasses.SystemsOfUnits.Converter;
 
@@ -45,6 +46,8 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             mslist.Insert(0, "");
 
+            this.CreateAndAddLabelRow("Setup");
+
             this.CreateAndAddDescriptionRow("The Phase Envelope utility calculates various VLE envelopes for mixtures.");
 
             var spinner = this.CreateAndAddDropDownRow("Material Stream", mslist, 0, (arg3, arg2) => { });
@@ -53,10 +56,18 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             var button = this.CreateAndAddButtonRow("Build Envelope", null, null);
 
-            var chart = new Eto.OxyPlot.Plot { Height = 400, BackgroundColor = Colors.White };
-            this.CreateAndAddControlRow(chart);
+            var tabcontainer = new TabControl() { Height = 400 };
 
-            var txtResults = this.CreateAndAddMultilineMonoSpaceTextBoxRow("", 400, true, null);
+            var chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };
+
+            var txtResults = new TextArea() {ReadOnly = true, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize)};
+
+            tabcontainer.Pages.Add(new TabPage(new TableRow(txtResults)) { Text = "Data" });
+            tabcontainer.Pages.Add(new TabPage(new TableRow(chart)) { Text = "Chart" });
+
+            this.CreateAndAddLabelRow("Results");
+
+            this.CreateAndAddControlRow(tabcontainer);
 
             button.Click += (sender, e) =>
             {

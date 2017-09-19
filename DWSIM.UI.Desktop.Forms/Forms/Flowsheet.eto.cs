@@ -119,7 +119,7 @@ namespace DWSIM.UI.Forms
             btnUtilities_PhaseEnvelope.Click += (sender, e) =>
             {
                 var pe = new Desktop.Editors.Utilities.PhaseEnvelopeView(FlowsheetObject);
-                var form = Common.GetDefaultEditorForm("Phase Envelope", 500, 750, pe);
+                var form = Common.GetDefaultEditorForm("Phase Envelope", 500, 650, pe);
                 form.Show();
             };
 

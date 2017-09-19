@@ -1060,6 +1060,8 @@ Public Class GraphicsSurface
 
         Dim X, Y, Padding, Height, Width As Double
 
+        If gobj.Owner Is Nothing Then Exit Sub
+
         Padding = gobj.Owner.GetFlowsheet.FlowsheetOptions.DisplayCornerPropertyListPadding
 
         X = gobj.X + gobj.Width + 5

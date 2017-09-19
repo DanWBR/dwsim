@@ -39,11 +39,15 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             mslist.Insert(0, "");
 
+            this.CreateAndAddLabelRow("Setup");
+
             this.CreateAndAddDescriptionRow("The True Critical Point utility calculates the True Critical Point of a mixture using the Peng-Robinson or Soave-Redlich-Kwong EOS.");
 
             var spinner = this.CreateAndAddDropDownRow("Material Stream", mslist, 0, (arg3, arg2) => { });
 
             var button = this.CreateAndAddButtonRow("Calculate", null, (arg3, arg2) => { });
+
+            this.CreateAndAddLabelRow("Results");
 
             var txtResults = this.CreateAndAddMultilineMonoSpaceTextBoxRow("", 150, true, null);
 

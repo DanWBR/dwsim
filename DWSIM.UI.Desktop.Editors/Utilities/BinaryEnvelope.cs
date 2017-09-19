@@ -45,6 +45,8 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
             complist.Insert(0, "");
 
+            this.CreateAndAddLabelRow("Setup");
+
             this.CreateAndAddDescriptionRow("The Binary Envelope utility calculates Temperature and Pressure VLE/VLLE envelopes for binary mixtures.");
 
             var spinnerComp1 = this.CreateAndAddDropDownRow("Compound 1", complist, 0, null);
@@ -56,17 +58,31 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
             var tval = this.CreateAndAddTextBoxRow(nf, "Temperature (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, 298.15f), null);
             var pval = this.CreateAndAddTextBoxRow(nf, "Pressure (" + su.pressure + ")", cv.ConvertFromSI(su.pressure, 101325.0f), null);
 
+            var pplist = flowsheet.PropertyPackages.Values.Select((x2) => x2.Tag).ToList();
+
+            pplist.Insert(0, "");
+
+            var spinnerpp = this.CreateAndAddDropDownRow("Property Package", pplist, 0, null);
+
             var button = this.CreateAndAddButtonRow("Build Envelope", null, null);
 
-            var chart =  new Eto.OxyPlot.Plot { Height = 400, BackgroundColor = Colors.White };
-            this.CreateAndAddControlRow(chart);
+            var tabcontainer = new TabControl() { Height = 400 };
 
-            var txtResults = this.CreateAndAddMultilineMonoSpaceTextBoxRow("", 400, true, null);
+            var chart = new Eto.OxyPlot.Plot { BackgroundColor = Colors.White };
+
+            var txtResults = new TextArea() { ReadOnly = true, Font = Fonts.Monospace(GlobalSettings.Settings.ResultsReportFontSize) };
+
+            tabcontainer.Pages.Add(new TabPage(new TableRow(txtResults)) { Text = "Data" });
+            tabcontainer.Pages.Add(new TabPage(new TableRow(chart)) { Text = "Chart" });
+
+            this.CreateAndAddLabelRow("Results");
+
+            this.CreateAndAddControlRow(tabcontainer);
 
             button.Click += (sender, e) =>
             {
 
-                if (spinnerPE.SelectedIndex >= 0 && spinnerComp1.SelectedIndex > 0 && spinnerComp2.SelectedIndex > 0)
+                if (spinnerPE.SelectedIndex >= 0 && spinnerComp1.SelectedIndex > 0 && spinnerComp2.SelectedIndex > 0 && spinnerpp.SelectedIndex > 0)
                 {
 
                     var comp1 = flowsheet.SelectedCompounds[complist[spinnerComp1.SelectedIndex]];
@@ -74,7 +90,7 @@ namespace DWSIM.UI.Desktop.Editors.Utilities
 
                     var ms = new MaterialStream("", "");
                     ms.SetFlowsheet(flowsheet);
-                    ms.PropertyPackage = (PropertyPackage)flowsheet.PropertyPackages.Values.First();
+                    ms.PropertyPackage = (PropertyPackage)flowsheet.PropertyPackages.Values.Where(x => x.Tag == spinnerpp.SelectedValue.ToString()).First();
                     ms.SetFlowsheet(flowsheet);
 
                     foreach (var phase in ms.Phases.Values)
