@@ -170,11 +170,15 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void MouseMoved(NSEvent theEvent)
         {
-            base.MouseMoved(theEvent);
-            _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
-            _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
-            fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
-            this.NeedsDisplay = true;
+            try
+            {
+                base.MouseMoved(theEvent);
+                _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+                _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+                fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
+                this.NeedsDisplay = true;
+            }
+            catch {}
         }
 
         public override void MouseDragged(NSEvent theEvent)

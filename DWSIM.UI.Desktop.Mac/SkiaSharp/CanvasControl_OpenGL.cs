@@ -90,7 +90,7 @@ namespace DWSIM.UI.Desktop.Mac
         }
     }
 
-    public class FlowsheetSurface_Mac_OpenGL  : SkiaSharp.Views.Mac.SKGLView, Eto.Mac.Forms.IMacControl
+    public class FlowsheetSurface_Mac_OpenGL : SkiaSharp.Views.Mac.SKGLView, Eto.Mac.Forms.IMacControl
     {
 
         private NSTrackingArea trackarea;
@@ -101,7 +101,8 @@ namespace DWSIM.UI.Desktop.Mac
         public float _lastTouchX;
         public float _lastTouchY;
 
-        public FlowsheetSurface_Mac_OpenGL(): base()
+        public FlowsheetSurface_Mac_OpenGL()
+            : base()
         {
             BecomeFirstResponder();
         }
@@ -148,7 +149,7 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void DrawRect(CGRect dirtyRect)
         {
-            
+
             base.DrawRect(dirtyRect);
 
             if (fsurface == null) return;
@@ -179,11 +180,15 @@ namespace DWSIM.UI.Desktop.Mac
 
         public override void MouseMoved(NSEvent theEvent)
         {
-            base.MouseMoved(theEvent);
-            _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
-            _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
-            fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
-            this.NeedsDisplay = true;
+            try
+            {
+                base.MouseMoved(theEvent);
+                _lastTouchX = this.ConvertPointFromView(theEvent.LocationInWindow, null).X;
+                _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
+                fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
+                this.NeedsDisplay = true;
+            }
+            catch { }
         }
 
         public override void MouseDragged(NSEvent theEvent)
@@ -193,6 +198,7 @@ namespace DWSIM.UI.Desktop.Mac
             _lastTouchY = Bounds.Height - this.ConvertPointFromView(theEvent.LocationInWindow, null).Y;
             fsurface.InputMove((int)_lastTouchX, (int)_lastTouchY);
             this.NeedsDisplay = true;
+
         }
 
         public override void MouseUp(NSEvent theEvent)

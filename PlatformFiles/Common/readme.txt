@@ -41,6 +41,7 @@ The full changelog, including code changes and their authors can be viewed at ht
 Version 5.0 Update 10
 
 - [NEW] Added support for ThermoC Property Package
+- [FIX] Fixed crashes during loading of simulations on macOS
 - [FIX] Fixed Material Stream cloning on new UI
 - [FIX] Fixed viscosity calculations for petroleum fractions
 - [FIX] Fixed velocity units in Kinetic Reaction editor (new UI)
