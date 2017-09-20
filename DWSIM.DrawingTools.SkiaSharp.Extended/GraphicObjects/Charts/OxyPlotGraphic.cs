@@ -136,6 +136,7 @@ namespace DWSIM.Drawing.SkiaSharp.GraphicObjects.Charts
                             {
                                 using (var bmpcanvas = new SKCanvas(bmp))
                                 {
+                                    bmpcanvas.Clear(SKColors.White);
                                     bmpcanvas.Scale(2.0f);
                                     renderer.SetTarget(bmpcanvas);
                                     model.Update(true);

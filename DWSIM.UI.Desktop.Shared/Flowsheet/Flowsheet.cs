@@ -200,14 +200,30 @@ namespace DWSIM.UI.Desktop.Shared
 
                 st.Start();
 
-                Application.Instance.Invoke(() =>
+                switch (GlobalSettings.Settings.RunningPlatform())
                 {
-                    surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
-                    FlowsheetForm.Enabled = false;
-                    FlowsheetControl.Invalidate();
-                    FlowsheetForm.Invalidate();
-                    if (solvform != null) solvform.ShowModal(FlowsheetControl);
-                });
+                    case GlobalSettings.Settings.Platform.Windows:
+                        Application.Instance.Invoke(() =>
+                        {
+                            surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
+                            FlowsheetForm.Enabled = false;
+                            FlowsheetControl.Invalidate();
+                            FlowsheetForm.Invalidate();
+                            if (solvform != null) solvform.ShowModal(FlowsheetControl);
+                        });
+                        break;
+                    default:
+                        Application.Instance.AsyncInvoke(() =>
+                        {
+                            surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
+                            FlowsheetForm.Enabled = false;
+                            FlowsheetControl.Invalidate();
+                            FlowsheetForm.Invalidate();
+                            if (solvform != null) solvform.ShowModalAsync(FlowsheetControl);
+                        });
+                        break;
+                }
+
 
             }
 
