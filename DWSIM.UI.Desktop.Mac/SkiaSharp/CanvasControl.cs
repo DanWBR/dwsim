@@ -163,8 +163,6 @@ namespace DWSIM.UI.Desktop.Mac
 
             fsurface.UpdateSurface(surface);
 
-            Console.WriteLine("Redraw");
-
             // draw the surface to the context
             drawable.DrawSurface(ctx, Bounds, info, surface);
 
