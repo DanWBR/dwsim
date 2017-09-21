@@ -205,12 +205,12 @@ Public Class EditingForm_SpreadsheetUO
                 Dim gobj = SimObject.GraphicObject
                 Dim flowsheet = SimObject.FlowSheet
 
-                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.InputConnectors(4).IsAttached Then
+                If flowsheet.GetFlowsheetSimulationObject(text).GraphicObject.OutputConnectors(0).IsAttached Then
                     MessageBox.Show(flowsheet.GetTranslatedString("Todasasconexespossve"), flowsheet.GetTranslatedString("Erro"), MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
                 End If
 
-                If gobj.EnergyConnector.IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(4).AttachedConnector.AttachedFrom, gobj)
+                If gobj.InputConnectors(4).IsAttached Then flowsheet.DisconnectObjects(gobj.InputConnectors(4).AttachedConnector.AttachedFrom, gobj)
                 flowsheet.ConnectObjects(flowsheet.GetFlowsheetSimulationObject(text).GraphicObject, gobj, 0, 4)
 
             End If
@@ -350,7 +350,7 @@ Public Class EditingForm_SpreadsheetUO
                 End If
             Case "btnDisconnectEnergyE"
                 If cbEnergyE.SelectedItem.ToString <> "" Then
-                    oindex = 4
+                    iindex = 4
                     cbEnergyE.SelectedItem = Nothing
                 End If
         End Select

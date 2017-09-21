@@ -145,6 +145,7 @@ namespace DWSIM.UI.Desktop.Shared
                     };
                 }
                 RequestCalculation(gobj);
+                if (GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac) Task.Delay(1000).Wait();
             });
 
             st.ContinueWith((t) =>
@@ -154,8 +155,11 @@ namespace DWSIM.UI.Desktop.Shared
                     surface.BackgroundColor = SkiaSharp.SKColors.White;
                     FlowsheetForm.Enabled = true;
                     FlowsheetControl.Invalidate();
-                    if (solvform != null) solvform.Close();
-                    solvform = null;
+                    if (solvform != null)
+                    {
+                        solvform.Close();
+                        solvform = null;
+                    }
                 });
                 GlobalSettings.Settings.CalculatorStopRequested = false;
                 GlobalSettings.Settings.CalculatorBusy = false;
