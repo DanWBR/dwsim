@@ -369,20 +369,6 @@ Public Class FormMain
 
     End Function
 
-    Function GetPropertyPackages(ByVal assmbly As Assembly) As List(Of Interfaces.IPropertyPackage)
-
-        Dim availableTypes As New List(Of Type)()
-
-        Try
-            availableTypes.AddRange(assmbly.GetTypes())
-        Catch ex As Exception
-        End Try
-
-        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
-
-        Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
-
-    End Function
 
     Function isPP(ByVal t As Type)
         Return (t Is GetType(PropertyPackage))
@@ -577,21 +563,11 @@ Public Class FormMain
 
         PropertyPackages.Add(BOPP.ComponentName.ToString, BOPP)
 
-        Dim adveos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.AdvancedEOS.dll"
-        If File.Exists(adveos) Then
-            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(adveos))
-            For Each pp In pplist
-                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
-            Next
-        End If
+        Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
 
-        Dim thermoceos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
-        If File.Exists(thermoceos) Then
-            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(thermoceos))
-            For Each pp In pplist
-                PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
-            Next
-        End If
+        For Each pp In otherpps
+            PropertyPackages.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName, pp)
+        Next
 
         'Check if DWSIM is running in Portable/Mono mode, if not then load the CAPE-OPEN Wrapper Property Package.
         If Not DWSIM.App.IsRunningOnMono Then
@@ -1426,6 +1402,13 @@ Public Class FormMain
                         obj = PropertyPackages(thermockey).ReturnInstance(xel.Element("Type").Value)
                     Else
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
+                    End If
+                ElseIf xel.Element("Type").Value.Contains("COSMO-RS") Then
+                    Dim crskey As String = "COSMO-RS (BC)"
+                    If PropertyPackages.ContainsKey(crskey) Then
+                        obj = PropertyPackages(crskey).ReturnInstance(xel.Element("Type").Value)
+                    Else
+                        Throw New Exception("The COSMO-RS library was not found. Please download and install it in order to run this simulation.")
                     End If
                 Else
                     obj = pp.ReturnInstance(xel.Element("Type").Value)

@@ -1,4 +1,7 @@
-﻿Public Class Utility
+﻿Imports System.Reflection
+Imports System.IO
+
+Public Class Utility
 
     Shared Sub UpdateElement(xel As XElement)
 
@@ -397,6 +400,53 @@
         End If
 
         Return report
+
+    End Function
+
+    Shared Function LoadAdditionalPropertyPackages() As List(Of IPropertyPackage)
+
+        Dim ppacks As New List(Of IPropertyPackage)
+
+        Dim adveos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.AdvancedEOS.dll"
+        If File.Exists(adveos) Then
+            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(adveos))
+            For Each pp In pplist
+                ppacks.Add(pp)
+            Next
+        End If
+
+        Dim thermoceos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
+        If File.Exists(thermoceos) Then
+            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(thermoceos))
+            For Each pp In pplist
+                ppacks.Add(pp)
+            Next
+        End If
+
+        Dim creos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.COSMO-RS.dll"
+        If File.Exists(creos) Then
+            Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(creos))
+            For Each pp In pplist
+                ppacks.Add(pp)
+            Next
+        End If
+
+        Return ppacks
+
+    End Function
+
+    Shared Function GetPropertyPackages(ByVal assmbly As Assembly) As List(Of Interfaces.IPropertyPackage)
+
+        Dim availableTypes As New List(Of Type)()
+
+        Try
+            availableTypes.AddRange(assmbly.GetTypes())
+        Catch ex As Exception
+        End Try
+
+        Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)
+
+        Return ppList.ConvertAll(Of Interfaces.IPropertyPackage)(Function(t As Type) TryCast(Activator.CreateInstance(t), Interfaces.IPropertyPackage))
 
     End Function
 
