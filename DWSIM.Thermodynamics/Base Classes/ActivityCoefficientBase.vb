@@ -285,7 +285,7 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Function GetArguments() As Object
+        Public Overridable Function GetArguments() As Object
 
             If TypeOf Me Is NRTLPropertyPackage Then
                 Return DirectCast(Me, NRTLPropertyPackage).RET_VNAMES
