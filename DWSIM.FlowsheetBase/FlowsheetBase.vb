@@ -1003,6 +1003,9 @@ Imports System.Dynamic
 
             Options.LoadData(data)
 
+            FlowsheetSurface.DrawFloatingTable = Options.DisplayFloatingPropertyTables
+            FlowsheetSurface.DrawPropertyList = Options.DisplayCornerPropertyList
+
             Options.FlashAlgorithms.Clear()
 
             If Not AvailableSystemsOfUnits.Contains(Options.SelectedUnitSystem1) Then

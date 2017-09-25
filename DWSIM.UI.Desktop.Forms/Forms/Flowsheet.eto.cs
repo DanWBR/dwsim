@@ -1008,7 +1008,7 @@ namespace DWSIM.UI.Forms
             var container = new TableLayout();
             new DWSIM.UI.Desktop.Editors.Results(obj, container);
             var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - View Results", 500, 500, container, true);
-            form.ShowInTaskbar = false;
+            form.ShowInTaskbar = true;
             form.Show();
             form.Width += 1;
 
