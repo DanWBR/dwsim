@@ -1091,7 +1091,7 @@ Imports System.Dynamic
                     Else
                         Throw New Exception("The ThermoC bridge library was not found. Please download and install it in order to run this simulation.")
                     End If
-                ElseIf xel.Element("Type").Value.Contains("COSMO-RS") Then
+                ElseIf xel.Element("Type").Value.Contains("COSMO_RS") Then
                     Dim crskey As String = "COSMO-RS (BC)"
                     If AvailablePropertyPackages.ContainsKey(crskey) Then
                         obj = AvailablePropertyPackages(crskey).ReturnInstance(xel.Element("Type").Value)
