@@ -33,12 +33,23 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
             chkUseLK.Checked = PP.UseLeeKeslerEnthalpy;
 
-            foreach (ICompoundConstantProperties cp in PP.Flowsheet.SelectedCompounds.Values)
+            List<ICompoundConstantProperties> compounds;
+
+            if (GlobalSettings.Settings.CAPEOPENMode)
+            {
+                compounds = PP._selectedcomps.Values.Select(x => (ICompoundConstantProperties)x).ToList();
+            }
+            else
+            {
+                compounds = PP.Flowsheet.SelectedCompounds.Values.ToList();
+            }
+
+            foreach (ICompoundConstantProperties cp in compounds)
             {
             gt0:
                 if (PP.InteractionParameters.ContainsKey(cp.Name))
                 {
-                    foreach (ICompoundConstantProperties cp2 in PP.Flowsheet.SelectedCompounds.Values)
+                    foreach (ICompoundConstantProperties cp2 in compounds)
                     {
                         if (cp.Name != cp2.Name)
                         {
@@ -81,12 +92,12 @@ namespace DWSIM.Thermodynamics.AdvancedEOS.EditingForms
 
             }
 
-            foreach (ICompoundConstantProperties cp in PP.Flowsheet.SelectedCompounds.Values)
+            foreach (ICompoundConstantProperties cp in compounds)
             {
             gt2:
                 if (PP.InteractionParametersNRTL.ContainsKey(cp.Name))
                 {
-                    foreach (ICompoundConstantProperties cp2 in PP.Flowsheet.SelectedCompounds.Values)
+                    foreach (ICompoundConstantProperties cp2 in compounds)
                     {
                         if (cp.Name != cp2.Name)
                         {

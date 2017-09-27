@@ -22,11 +22,10 @@ Partial Class FormOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormOptions))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.FaTabStrip1 = New System.Windows.Forms.TabControl()
         Me.FaTabStripItem1 = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -132,7 +131,7 @@ Partial Class FormOptions
         Me.cbDebugLevel = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.chkconsole = New System.Windows.Forms.CheckBox()
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.ImageList1 = New System.Windows.Forms.ImageList()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.ofdcs = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -180,10 +179,10 @@ Partial Class FormOptions
         '
         'FaTabStripItem1
         '
-        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox2)
         Me.FaTabStripItem1.Controls.Add(Me.GroupBox7)
+        resources.ApplyResources(Me.FaTabStripItem1, "FaTabStripItem1")
         Me.FaTabStripItem1.Name = "FaTabStripItem1"
         '
         'GroupBox2
@@ -281,9 +280,9 @@ Partial Class FormOptions
         '
         'GroupBoxAzureConfig
         '
-        resources.ApplyResources(Me.GroupBoxAzureConfig, "GroupBoxAzureConfig")
         Me.GroupBoxAzureConfig.Controls.Add(Me.tbServiceBusNamespace)
         Me.GroupBoxAzureConfig.Controls.Add(Me.Label8)
+        resources.ApplyResources(Me.GroupBoxAzureConfig, "GroupBoxAzureConfig")
         Me.GroupBoxAzureConfig.Name = "GroupBoxAzureConfig"
         Me.GroupBoxAzureConfig.TabStop = False
         '
@@ -299,11 +298,11 @@ Partial Class FormOptions
         '
         'GroupBoxNetworkComputerConfig
         '
-        resources.ApplyResources(Me.GroupBoxNetworkComputerConfig, "GroupBoxNetworkComputerConfig")
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.tbServerPort)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.tbServerIP)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.Label15)
         Me.GroupBoxNetworkComputerConfig.Controls.Add(Me.Label16)
+        resources.ApplyResources(Me.GroupBoxNetworkComputerConfig, "GroupBoxNetworkComputerConfig")
         Me.GroupBoxNetworkComputerConfig.Name = "GroupBoxNetworkComputerConfig"
         Me.GroupBoxNetworkComputerConfig.TabStop = False
         '
@@ -378,9 +377,9 @@ Partial Class FormOptions
         '
         'cbParallelism
         '
-        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
         Me.cbParallelism.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbParallelism.FormattingEnabled = True
+        resources.ApplyResources(Me.cbParallelism, "cbParallelism")
         Me.cbParallelism.Name = "cbParallelism"
         '
         'Label6
@@ -395,10 +394,10 @@ Partial Class FormOptions
         '
         'TabPage1
         '
-        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.GroupBox12)
         Me.TabPage1.Controls.Add(Me.GroupBox11)
+        resources.ApplyResources(Me.TabPage1, "TabPage1")
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
@@ -485,10 +484,10 @@ Partial Class FormOptions
         '
         'FaTabStripItem3
         '
-        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox4)
         Me.FaTabStripItem3.Controls.Add(Me.GroupBox10)
+        resources.ApplyResources(Me.FaTabStripItem3, "FaTabStripItem3")
         Me.FaTabStripItem3.Name = "FaTabStripItem3"
         '
         'GroupBox4
@@ -508,11 +507,11 @@ Partial Class FormOptions
         '
         'dgvdb
         '
-        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AllowUserToAddRows = False
         Me.dgvdb.AllowUserToDeleteRows = False
         Me.dgvdb.AllowUserToResizeColumns = False
         Me.dgvdb.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvdb, "dgvdb")
         Me.dgvdb.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvdb.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvdb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -559,10 +558,10 @@ Partial Class FormOptions
         'Column13
         '
         Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle4.NullValue = CType(resources.GetObject("DataGridViewCellStyle4.NullValue"), Object)
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle1.NullValue = CType(resources.GetObject("DataGridViewCellStyle1.NullValue"), Object)
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column13.FillWeight = 10.0!
         resources.ApplyResources(Me.Column13, "Column13")
         Me.Column13.Name = "Column13"
@@ -572,10 +571,10 @@ Partial Class FormOptions
         'BtnEdit
         '
         Me.BtnEdit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle5.NullValue = CType(resources.GetObject("DataGridViewCellStyle5.NullValue"), Object)
-        Me.BtnEdit.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle2.NullValue = CType(resources.GetObject("DataGridViewCellStyle2.NullValue"), Object)
+        Me.BtnEdit.DefaultCellStyle = DataGridViewCellStyle2
         Me.BtnEdit.FillWeight = 10.0!
         resources.ApplyResources(Me.BtnEdit, "BtnEdit")
         Me.BtnEdit.Name = "BtnEdit"
@@ -604,11 +603,11 @@ Partial Class FormOptions
         '
         'dgvIPDB
         '
-        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AllowUserToAddRows = False
         Me.dgvIPDB.AllowUserToDeleteRows = False
         Me.dgvIPDB.AllowUserToResizeColumns = False
         Me.dgvIPDB.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvIPDB, "dgvIPDB")
         Me.dgvIPDB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvIPDB.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvIPDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -655,10 +654,10 @@ Partial Class FormOptions
         'DataGridViewImageColumn1
         '
         Me.DataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle6.NullValue = CType(resources.GetObject("DataGridViewCellStyle6.NullValue"), Object)
-        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle3.NullValue = CType(resources.GetObject("DataGridViewCellStyle3.NullValue"), Object)
+        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewImageColumn1.FillWeight = 10.0!
         resources.ApplyResources(Me.DataGridViewImageColumn1, "DataGridViewImageColumn1")
         Me.DataGridViewImageColumn1.Name = "DataGridViewImageColumn1"
@@ -667,9 +666,9 @@ Partial Class FormOptions
         '
         'FaTabStripItem2
         '
-        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem2.Controls.Add(Me.GroupBox3)
+        resources.ApplyResources(Me.FaTabStripItem2, "FaTabStripItem2")
         Me.FaTabStripItem2.Name = "FaTabStripItem2"
         '
         'GroupBox3
@@ -740,7 +739,6 @@ Partial Class FormOptions
         '
         'FaTabStripItem7
         '
-        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.BackColor = System.Drawing.SystemColors.Window
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox17)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox16)
@@ -750,6 +748,7 @@ Partial Class FormOptions
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox1)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox9)
         Me.FaTabStripItem7.Controls.Add(Me.GroupBox6)
+        resources.ApplyResources(Me.FaTabStripItem7, "FaTabStripItem7")
         Me.FaTabStripItem7.Name = "FaTabStripItem7"
         '
         'GroupBox17
@@ -830,8 +829,8 @@ Partial Class FormOptions
         '
         'GroupBox15
         '
-        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
         Me.GroupBox15.Controls.Add(Me.chkIgnoreCompConstData)
+        resources.ApplyResources(Me.GroupBox15, "GroupBox15")
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.TabStop = False
         '
@@ -920,10 +919,10 @@ Partial Class FormOptions
         '
         'cbDebugLevel
         '
-        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDebugLevel.FormattingEnabled = True
         Me.cbDebugLevel.Items.AddRange(New Object() {resources.GetString("cbDebugLevel.Items"), resources.GetString("cbDebugLevel.Items1"), resources.GetString("cbDebugLevel.Items2"), resources.GetString("cbDebugLevel.Items3")})
+        resources.ApplyResources(Me.cbDebugLevel, "cbDebugLevel")
         Me.cbDebugLevel.Name = "cbDebugLevel"
         '
         'Label13

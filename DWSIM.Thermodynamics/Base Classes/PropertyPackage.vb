@@ -179,36 +179,38 @@ Namespace PropertyPackages
 
             Settings.CAPEOPENMode = capeopenmode
 
-            If capeopenmode Then
-
-                'initialize collections
-
-                _selectedcomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
-                _availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
-
-                'load chempsep database if existent
-
-                Me.LoadCSDB()
-
-                'load Electrolytes XML database
-
-                Me.LoadEDB()
-
-                'load Biodiesel XML database
-
-                Me.LoadBDDB()
-
-                'load CoolProp database
-
-                Me.LoadCPDB()
-
-                'load User databases
-
-                Me.LoadUserDBs()
-
-            End If
+            If capeopenmode Then InitCO()
 
             Initialize()
+
+        End Sub
+
+        Sub InitCO()
+
+            'initialize collections
+
+            _selectedcomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
+            _availablecomps = New Dictionary(Of String, BaseClasses.ConstantProperties)
+
+            'load chempsep database if existent
+
+            Me.LoadCSDB()
+
+            'load Electrolytes XML database
+
+            Me.LoadEDB()
+
+            'load Biodiesel XML database
+
+            Me.LoadBDDB()
+
+            'load CoolProp database
+
+            Me.LoadCPDB()
+
+            'load User databases
+
+            Me.LoadUserDBs()
 
         End Sub
 
@@ -9763,7 +9765,7 @@ Final3:
         Public _availablecomps As Dictionary(Of String, BaseClasses.ConstantProperties)
         Public _selectedcomps As Dictionary(Of String, BaseClasses.ConstantProperties)
 
-        <System.NonSerialized()> Friend _pme As Object
+        <System.NonSerialized()> Protected Friend _pme As Object
 
         ''' <summary>
         ''' The PMC displays its user interface and allows the Flowsheet User to interact with it. If no user interface is
@@ -9960,8 +9962,11 @@ Final3:
 
                 Dim xmldoc = XDocument.Parse(myarr(6))
                 Dim fadata As List(Of XElement) = xmldoc.Element("Data").Elements.ToList
-                _FlashAlgorithm = ReturnInstance(fadata.Where(Function(x) x.Name = "Type").FirstOrDefault.Value)
-                DirectCast(_FlashAlgorithm, Interfaces.ICustomXMLSerialization).LoadData(fadata)
+                Try
+                    _FlashAlgorithm = ReturnInstance(fadata.Where(Function(x) x.Name = "Type").FirstOrDefault.Value)
+                    DirectCast(_FlashAlgorithm, Interfaces.ICustomXMLSerialization).LoadData(fadata)
+                Catch ex As Exception
+                End Try
 
                 Select Case Me.ComponentName
                     Case "Peng-Robinson (PR)"

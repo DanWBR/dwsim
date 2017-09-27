@@ -151,24 +151,29 @@ Public Class Settings
             Next
         End With
 
-        Settings.EnableParallelProcessing = source.Configs("Misc").GetBoolean("EnableParallelProcessing", False)
-        Settings.MaxDegreeOfParallelism = source.Configs("Misc").GetInt("MaxDegreeOfParallelism", -1)
-        Settings.UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
+        EnableParallelProcessing = source.Configs("Misc").GetBoolean("EnableParallelProcessing", False)
+        MaxDegreeOfParallelism = source.Configs("Misc").GetInt("MaxDegreeOfParallelism", -1)
+        UseSIMDExtensions = source.Configs("Misc").GetBoolean("UseSIMDExtensions", True)
 
-        Settings.EnableGPUProcessing = source.Configs("Misc").GetBoolean("EnableGPUProcessing", False)
-        Settings.SelectedGPU = source.Configs("Misc").GetString("SelectedGPU", "")
-        Settings.CudafyTarget = source.Configs("Misc").GetInt("CudafyTarget", 0)
-        Settings.CudafyDeviceID = source.Configs("Misc").GetInt("CudafyDeviceID", 0)
+        EnableGPUProcessing = source.Configs("Misc").GetBoolean("EnableGPUProcessing", False)
+        SelectedGPU = source.Configs("Misc").GetString("SelectedGPU", "")
+        CudafyTarget = source.Configs("Misc").GetInt("CudafyTarget", 0)
+        CudafyDeviceID = source.Configs("Misc").GetInt("CudafyDeviceID", 0)
 
         If source.Configs("ExcelAddIn") Is Nothing Then source.AddConfig("ExcelAddIn")
 
-        Settings.ExcelErrorHandlingMode = source.Configs("ExcelAddIn").GetInt("ExcelErrorHandlingMode", 0)
-        Settings.ExcelFlashSettings = source.Configs("ExcelAddIn").GetString("ExcelFlashSettings", "")
+        ExcelErrorHandlingMode = source.Configs("ExcelAddIn").GetInt("ExcelErrorHandlingMode", 0)
+        ExcelFlashSettings = source.Configs("ExcelAddIn").GetString("ExcelFlashSettings", "")
 
         If source.Configs("OSInfo") Is Nothing Then source.AddConfig("OSInfo")
 
-        Settings.CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
-        Settings.CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
+        CurrentPlatform = source.Configs("OSInfo").GetString("Platform")
+        CurrentEnvironment = source.Configs("OSInfo").GetInt("Environment", 0)
+
+        If source.Configs("OctaveBridge") Is Nothing Then source.AddConfig("OctaveBridge")
+
+        OctavePath = source.Configs("OctaveBridge").GetString("OctavePath", "")
+        OctaveTimeoutInMinutes = source.Configs("OctaveBridge").GetFloat("OctaveProcessTimeout", 15)
 
     End Sub
 
@@ -200,6 +205,11 @@ Public Class Settings
 
         source.Configs("OSInfo").Set("Platform", GetPlatform)
         source.Configs("OSInfo").Set("Environment", GetEnvironment)
+
+        If source.Configs("OctaveBridge") Is Nothing Then source.AddConfig("OctaveBridge")
+
+        source.Configs("OctaveBridge").Set("OctavePath", OctavePath)
+        source.Configs("OctaveBridge").Set("OctaveProcessTimeout", OctaveTimeoutInMinutes)
 
         Try
             For Each spath In UserDatabases

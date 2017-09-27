@@ -4,6 +4,7 @@ Imports Cudafy.Host
 Imports System.Drawing
 Imports System.Reflection
 Imports DWSIM.Thermodynamics.PropertyPackages
+Imports System.IO
 
 Public Class FormConfigCAPEOPENPPackage
 
@@ -14,6 +15,14 @@ Public Class FormConfigCAPEOPENPPackage
     Dim ACSC1 As AutoCompleteStringCollection
 
     Public FlashAlgorithms As New Dictionary(Of String, Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.FlashAlgorithm)
+
+    Private Sub FormConfigCAPEOPENPPackage_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Try
+            Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+            GlobalSettings.Settings.SaveExcelSettings(inifile)
+        Catch ex As Exception
+        End Try
+    End Sub
 
     Private Sub FormConfigCAPEOPEN2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -67,6 +76,8 @@ Public Class FormConfigCAPEOPENPPackage
         Me.tbGPUCaps.Enabled = Me.chkEnableGPUProcessing.Checked
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Me.cbSIMD.Checked = GlobalSettings.Settings.UseSIMDExtensions
+
+        tbOctavePath.Text = GlobalSettings.Settings.OctavePath
 
         Me.TextBox1.AutoCompleteSource = AutoCompleteSource.CustomSource
 
@@ -404,4 +415,11 @@ Public Class FormConfigCAPEOPENPPackage
 
     End Sub
 
+    Private Sub btnSelectOctavePath_Click(sender As Object, e As EventArgs) Handles btnSelectOctavePath.Click
+        FolderBrowserDialog1.SelectedPath = tbOctavePath.Text
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            tbOctavePath.Text = FolderBrowserDialog1.SelectedPath
+            GlobalSettings.Settings.OctavePath = tbOctavePath.Text
+        End If
+    End Sub
 End Class

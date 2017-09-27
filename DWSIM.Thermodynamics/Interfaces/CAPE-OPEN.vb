@@ -2,6 +2,8 @@
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports Cudafy
 Imports System.Runtime.InteropServices
+Imports System.IO
+Imports System.Reflection
 
 <System.Serializable()>
 <ComClass(CAPEOPENManager.ClassId, CAPEOPENManager.InterfaceId, CAPEOPENManager.EventsId)>
@@ -24,8 +26,10 @@ Public Class CAPEOPENManager
     Private _scontext As Object
 
     Sub New()
+
         _name = "DWSIM Property Package Manager"
         _description = "Exposes DWSIM Property Packages to clients using CAPE-OPEN Thermodynamic Interface Definitions"
+
     End Sub
 
     Public Function GetPropertyPackage(ByVal PackageName As String) As Object Implements ICapeThermoPropertyPackageManager.GetPropertyPackage
@@ -89,16 +93,30 @@ Public Class CAPEOPENManager
                 pp = New SourWaterPropertyPackage(True)
                 pp.ComponentDescription = Calculator.GetLocalString("DescSourWaterPP")
             Case Else
-                Throw New CapeBadArgumentException("Property Package not found.")
+                Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+                Dim p0 = otherpps.Where(Function(x) DirectCast(x, ICapeIdentification).ComponentName = PackageName)
+                If p0.Count > 0 Then
+                    pp = DirectCast(p0(0), PropertyPackage)
+                    Settings.CAPEOPENMode = True
+                    pp.InitCO()
+                    pp.Initialize()
+                Else
+                    Throw New CapeBadArgumentException("Property Package not found.")
+                End If
         End Select
         If Not pp Is Nothing Then pp.ComponentName = PackageName
         Return pp
     End Function
 
     Public Function GetPropertyPackageList() As Object Implements ICapeThermoPropertyPackageManager.GetPropertyPackageList
-        Return New String() {"CoolProp", "Peng-Robinson (PR)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)", _
+        Dim l As New List(Of String)({"CoolProp", "Peng-Robinson (PR)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)", _
                              "UNIFAC", "UNIFAC-LL", "Modified UNIFAC (Dortmund)", "Modified UNIFAC (NIST)", "NRTL", "UNIQUAC", _
-                            "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables", "IAPWS-08 Seawater", "Sour Water"}
+                            "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables", "IAPWS-08 Seawater", "Sour Water"})
+        Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+        For Each pp In otherpps
+            l.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName)
+        Next
+        Return l.ToArray
     End Function
 
     Public Property ComponentDescription() As String Implements ICapeIdentification.ComponentDescription
@@ -139,12 +157,29 @@ Public Class CAPEOPENManager
             CudafyModes.Compiler = eGPUCompiler.All
             CudafyModes.Target = GlobalSettings.Settings.CudafyTarget
 
+            'load settings
+
+            Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
             'handler for unhandled exceptions
 
             Try
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException)
+
                 AddHandler Application.ThreadException, AddressOf UnhandledException
+
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
+
+                AddHandler AppDomain.CurrentDomain.AssemblyResolve, Function(sender, args)
+                                                                        Dim folderPath As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+                                                                        Dim assemblyPath As String = Path.Combine(folderPath, New AssemblyName(args.Name).Name + ".dll")
+                                                                        If Not File.Exists(assemblyPath) Then
+                                                                            Return Assembly.Load(args.Name)
+                                                                        Else
+                                                                            Return Assembly.LoadFrom(assemblyPath)
+                                                                        End If
+                                                                    End Function
             Catch ex As Exception
             End Try
 
@@ -319,7 +354,7 @@ Public Class CAPEOPENManager
         key.SetValue("ComponentVersion", My.Application.Info.Version.ToString)
         key.SetValue("VendorURL", "http://dwsim.inforside.com.br")
         key.SetValue("HelpURL", "http://dwsim.inforside.com.br")
-        key.SetValue("About", "DWSIM is open-source software, released under the GPL v3 license. (c) 2011-2016 Daniel Medeiros.")
+        key.SetValue("About", "DWSIM is open-source software, released under the GPL v3 license. (c) 2011-2017 Daniel Medeiros.")
         key.Close()
 
     End Sub

@@ -77,11 +77,20 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
         private Octave GetOctaveInstance()
         {
 
-            if (GlobalSettings.Settings.OctavePath == "" && Environment.OSVersion.Platform == PlatformID.Win32NT) { throw new Exception("Octave binaries path not set (go to 'Edit' > 'General Settings' > 'Other' > 'DWSIM/Octave bridge settings')."); }
+            if (GlobalSettings.Settings.OctavePath == "" && Environment.OSVersion.Platform == PlatformID.Win32NT) {
+                if (GlobalSettings.Settings.CAPEOPENMode)
+                {
+                    throw new Exception("Octave binaries path not set. Open the Property Package editor, set the Octave binaries path and try again.");
+                }
+                else
+                {
+                    throw new Exception("Octave binaries path not set (go to 'Edit' > 'General Settings' > 'Other' > 'DWSIM/Octave bridge settings').");
+                }
+            }
 
             var octave = new Octave(GlobalSettings.Settings.OctavePath);
 
-            octave.ExecuteCommand("addpath('" + Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + Path.DirectorySeparatorChar + "ECE')");
+            octave.ExecuteCommand("addpath('" + Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "ECE')");
             octave.ExecuteCommand("cd '" + Path.GetTempPath() + Path.DirectorySeparatorChar + "'");
 
             return octave;
@@ -171,12 +180,26 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 case Model.PC_SAFT:
                     model = "PC-SAFT";
-                    Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                    if (GlobalSettings.Settings.CAPEOPENMode)
+                    {
+                        ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("PC-SAFT calculations may take longer than usual, please be patient...");
+                    }
+                    else
+                    {
+                        Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                    }
                     contents.WriteLine("EoS = cPCSAFTEoS;");
                     break;
                 case Model.PHSC:
                     model = "PHSC";
-                    Flowsheet.ShowMessage("PHSC calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                    if (GlobalSettings.Settings.CAPEOPENMode)
+                    {
+                        ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("PHSC calculations may take longer than usual, please be patient...");
+                    }
+                    else
+                    {
+                        Flowsheet.ShowMessage("PHSC calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                    }
                     contents.WriteLine("EoS = cPHSCEoS;");
                     break;
                 case Model.PRBM:
@@ -193,7 +216,14 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     break;
                 case Model.SAFT:
                     model = "SAFT";
-                    Flowsheet.ShowMessage("SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                    if (GlobalSettings.Settings.CAPEOPENMode)
+                    {
+                        ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("SAFT calculations may take longer than usual, please be patient...");
+                    }
+                    else
+                    {
+                        Flowsheet.ShowMessage("SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                    }
                     contents.WriteLine("EoS = cSAFTEoS;");
                     break;
                 case Model.VPT:
@@ -263,9 +293,23 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
 
             try
             {
-                CurrentMaterialStream.Flowsheet.ShowMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]", IFlowsheet.MessageType.Information);
+                if (GlobalSettings.Settings.CAPEOPENMode)
+                {
+                    ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]");
+                }
+                else
+                {
+                    CurrentMaterialStream.Flowsheet.ShowMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]", IFlowsheet.MessageType.Information);
+                }
                 octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), (int)(GlobalSettings.Settings.OctaveTimeoutInMinutes * 60 * 1000));
-                CurrentMaterialStream.Flowsheet.ShowMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s", IFlowsheet.MessageType.Information);
+                if (GlobalSettings.Settings.CAPEOPENMode)
+                {
+                    ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s");
+                }
+                else
+                {
+                    CurrentMaterialStream.Flowsheet.ShowMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s", IFlowsheet.MessageType.Information);
+                }
                 switch (prop)
                 {
                     case ThermoProperty.CompressibilityCoeff:

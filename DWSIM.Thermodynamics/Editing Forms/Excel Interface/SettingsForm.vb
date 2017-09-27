@@ -288,4 +288,11 @@ Public Class SettingsForm
         End If
     End Sub
 
+    Private Sub btnSelectOctavePath_Click(sender As Object, e As EventArgs) Handles btnSelectOctavePath.Click
+        FolderBrowserDialog1.SelectedPath = tbOctavePath.Text
+        If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
+            tbOctavePath.Text = FolderBrowserDialog1.SelectedPath
+            GlobalSettings.Settings.OctavePath = tbOctavePath.Text
+        End If
+    End Sub
 End Class

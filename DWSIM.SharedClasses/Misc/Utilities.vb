@@ -407,7 +407,7 @@ Public Class Utility
 
         Dim ppacks As New List(Of IPropertyPackage)
 
-        Dim adveos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.AdvancedEOS.dll"
+        Dim adveos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.AdvancedEOS.dll"
         If File.Exists(adveos) Then
             Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(adveos))
             For Each pp In pplist
@@ -415,7 +415,7 @@ Public Class Utility
             Next
         End If
 
-        Dim thermoceos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
+        Dim thermoceos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.ThermoC.dll"
         If File.Exists(thermoceos) Then
             Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(thermoceos))
             For Each pp In pplist
@@ -423,7 +423,7 @@ Public Class Utility
             Next
         End If
 
-        Dim creos As String = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.COSMO-RS.dll"
+        Dim creos As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) + Path.DirectorySeparatorChar + "DWSIM.Thermodynamics.COSMO-RS.dll"
         If File.Exists(creos) Then
             Dim pplist As List(Of Interfaces.IPropertyPackage) = GetPropertyPackages(Assembly.LoadFile(creos))
             For Each pp In pplist
@@ -442,6 +442,7 @@ Public Class Utility
         Try
             availableTypes.AddRange(assmbly.GetTypes())
         Catch ex As Exception
+            Console.WriteLine("Error loading types from assembly '" + assmbly.FullName + "': " + ex.ToString)
         End Try
 
         Dim ppList As List(Of Type) = availableTypes.FindAll(Function(t) t.GetInterfaces().Contains(GetType(Interfaces.IPropertyPackage)) And Not t.IsAbstract)

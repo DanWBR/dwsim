@@ -49,12 +49,12 @@ Partial Class SettingsForm
         Me.Column13 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.dgvIPDB = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.cbErrorHandlingMode = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -62,6 +62,10 @@ Partial Class SettingsForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.btnSelectOctavePath = New System.Windows.Forms.Button()
+        Me.tbOctavePath = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,7 +124,7 @@ Partial Class SettingsForm
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox3.TabIndex = 11
         Me.PictureBox3.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " &
+        Me.ToolTip1.SetToolTip(Me.PictureBox3, "Enables acceleration of certain parallel calculation routines by running them on " & _
         "a GPGPU device.")
         '
         'PictureBox2
@@ -143,7 +147,7 @@ Partial Class SettingsForm
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
         Me.PictureBox1.TabIndex = 9
         Me.PictureBox1.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" &
+        Me.ToolTip1.SetToolTip(Me.PictureBox1, "Enables parallel CPU calculations. Maximum Parallelism is the number of processor" & _
         " cores to be used at the same time.")
         '
         'GroupBox8
@@ -364,17 +368,6 @@ Partial Class SettingsForm
         Me.TabPage5.Text = "User Interaction Parameters"
         Me.TabPage5.UseVisualStyleBackColor = True
         '
-        'Button4
-        '
-        Me.Button4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Button4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Button4.Location = New System.Drawing.Point(0, 249)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(588, 23)
-        Me.Button4.TabIndex = 1
-        Me.Button4.Text = "Add User IP Dataset"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'dgvIPDB
         '
         Me.dgvIPDB.AllowUserToAddRows = False
@@ -447,8 +440,22 @@ Partial Class SettingsForm
         Me.DataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridViewImageColumn1.Width = 50
         '
+        'Button4
+        '
+        Me.Button4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button4.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Button4.Location = New System.Drawing.Point(0, 249)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(588, 23)
+        Me.Button4.TabIndex = 1
+        Me.Button4.Text = "Add User IP Dataset"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.btnSelectOctavePath)
+        Me.TabPage4.Controls.Add(Me.tbOctavePath)
+        Me.TabPage4.Controls.Add(Me.Label3)
         Me.TabPage4.Controls.Add(Me.cbErrorHandlingMode)
         Me.TabPage4.Controls.Add(Me.Label2)
         Me.TabPage4.Controls.Add(Me.tbConfigFilePath)
@@ -474,7 +481,7 @@ Partial Class SettingsForm
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 74)
+        Me.Label2.Location = New System.Drawing.Point(12, 74)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(104, 13)
         Me.Label2.TabIndex = 2
@@ -491,7 +498,7 @@ Partial Class SettingsForm
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(11, 31)
+        Me.Label1.Location = New System.Drawing.Point(12, 31)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(113, 13)
         Me.Label1.TabIndex = 0
@@ -507,6 +514,40 @@ Partial Class SettingsForm
         Me.OpenFileDialog1.Filter = "XML File|*.xml"
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         Me.OpenFileDialog1.Title = "Add User Database"
+        '
+        'btnSelectOctavePath
+        '
+        Me.btnSelectOctavePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectOctavePath.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSelectOctavePath.Location = New System.Drawing.Point(503, 116)
+        Me.btnSelectOctavePath.Name = "btnSelectOctavePath"
+        Me.btnSelectOctavePath.Size = New System.Drawing.Size(68, 23)
+        Me.btnSelectOctavePath.TabIndex = 33
+        Me.btnSelectOctavePath.Text = "Select"
+        Me.btnSelectOctavePath.UseVisualStyleBackColor = True
+        '
+        'tbOctavePath
+        '
+        Me.tbOctavePath.Location = New System.Drawing.Point(136, 118)
+        Me.tbOctavePath.Name = "tbOctavePath"
+        Me.tbOctavePath.ReadOnly = True
+        Me.tbOctavePath.Size = New System.Drawing.Size(361, 20)
+        Me.tbOctavePath.TabIndex = 32
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label3.Location = New System.Drawing.Point(12, 122)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(107, 13)
+        Me.Label3.TabIndex = 31
+        Me.Label3.Text = "Octave Binaries Path"
+        '
+        'FolderBrowserDialog1
+        '
+        Me.FolderBrowserDialog1.Description = "Select a folder..."
         '
         'SettingsForm
         '
@@ -572,4 +613,8 @@ Partial Class SettingsForm
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Public WithEvents btnSelectOctavePath As System.Windows.Forms.Button
+    Friend WithEvents tbOctavePath As System.Windows.Forms.TextBox
+    Public WithEvents Label3 As System.Windows.Forms.Label
+    Public WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
 End Class
