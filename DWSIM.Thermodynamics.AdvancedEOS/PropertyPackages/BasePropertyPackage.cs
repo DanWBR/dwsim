@@ -182,11 +182,11 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     model = "PC-SAFT";
                     if (GlobalSettings.Settings.CAPEOPENMode)
                     {
-                        ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("PC-SAFT calculations may take longer than usual, please be patient...");
+                        if (!GlobalSettings.Settings.ExcelMode) ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("PC-SAFT calculations may take longer than usual, please be patient...");
                     }
                     else
                     {
-                        Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                        if (!GlobalSettings.Settings.ExcelMode) Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     }
                     contents.WriteLine("EoS = cPCSAFTEoS;");
                     break;
@@ -194,11 +194,11 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     model = "PHSC";
                     if (GlobalSettings.Settings.CAPEOPENMode)
                     {
-                        ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("PHSC calculations may take longer than usual, please be patient...");
+                        if (!GlobalSettings.Settings.ExcelMode) ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("PHSC calculations may take longer than usual, please be patient...");
                     }
                     else
                     {
-                        Flowsheet.ShowMessage("PHSC calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                        if (!GlobalSettings.Settings.ExcelMode) Flowsheet.ShowMessage("PHSC calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     }
                     contents.WriteLine("EoS = cPHSCEoS;");
                     break;
@@ -218,11 +218,11 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     model = "SAFT";
                     if (GlobalSettings.Settings.CAPEOPENMode)
                     {
-                        ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("SAFT calculations may take longer than usual, please be patient...");
+                        if (!GlobalSettings.Settings.ExcelMode) ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("SAFT calculations may take longer than usual, please be patient...");
                     }
                     else
                     {
-                        Flowsheet.ShowMessage("SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
+                        if (!GlobalSettings.Settings.ExcelMode) Flowsheet.ShowMessage("SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     }
                     contents.WriteLine("EoS = cSAFTEoS;");
                     break;
@@ -295,20 +295,20 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 if (GlobalSettings.Settings.CAPEOPENMode)
                 {
-                    ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]");
+                    if (!GlobalSettings.Settings.ExcelMode) ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]");
                 }
                 else
                 {
-                    CurrentMaterialStream.Flowsheet.ShowMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]", IFlowsheet.MessageType.Information);
+                   if (!GlobalSettings.Settings.ExcelMode) CurrentMaterialStream.Flowsheet.ShowMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]", IFlowsheet.MessageType.Information);
                 }
                 octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), (int)(GlobalSettings.Settings.OctaveTimeoutInMinutes * 60 * 1000));
                 if (GlobalSettings.Settings.CAPEOPENMode)
                 {
-                    ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s");
+                    if (!GlobalSettings.Settings.ExcelMode) ((CapeOpen.ICapeDiagnostic)this._pme).LogMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s");
                 }
                 else
                 {
-                    CurrentMaterialStream.Flowsheet.ShowMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s", IFlowsheet.MessageType.Information);
+                    if (!GlobalSettings.Settings.ExcelMode) CurrentMaterialStream.Flowsheet.ShowMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s", IFlowsheet.MessageType.Information);
                 }
                 switch (prop)
                 {
@@ -337,7 +337,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             }
             catch (Exception ex)
             {
-                CurrentMaterialStream.Flowsheet.ShowMessage("Octave process with ID " + octave.OctaveProcess.Id + " finished with errors.", IFlowsheet.MessageType.GeneralError);
+                if (!GlobalSettings.Settings.ExcelMode && !GlobalSettings.Settings.CAPEOPENMode) CurrentMaterialStream.Flowsheet.ShowMessage("Octave process with ID " + octave.OctaveProcess.Id + " finished with errors.", IFlowsheet.MessageType.GeneralError);
                 octave.OctaveProcess.Kill();
                 octave = null;
                 File.Delete(filename);

@@ -60,6 +60,8 @@ Public Class SettingsForm
         Me.cbParallelism.Enabled = Me.chkEnableParallelCalcs.Checked
         Me.chkEnableSIMD.Checked = GlobalSettings.Settings.UseSIMDExtensions
 
+        tbOctavePath.Text = Settings.OctavePath
+
         'user databases
 
         If Not GlobalSettings.Settings.UserDatabases Is Nothing Then
