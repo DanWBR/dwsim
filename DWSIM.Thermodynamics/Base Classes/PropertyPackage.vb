@@ -9762,8 +9762,8 @@ Final3:
 
 #Region "   CAPE-OPEN ICapeUtilities Implementation"
 
-        Public _availablecomps As Dictionary(Of String, BaseClasses.ConstantProperties)
-        Public _selectedcomps As Dictionary(Of String, BaseClasses.ConstantProperties)
+        Public _availablecomps As New Dictionary(Of String, BaseClasses.ConstantProperties)
+        Public _selectedcomps As New Dictionary(Of String, BaseClasses.ConstantProperties)
 
         <System.NonSerialized()> Protected Friend _pme As Object
 

@@ -112,10 +112,14 @@ Public Class CAPEOPENManager
         Dim l As New List(Of String)({"CoolProp", "Peng-Robinson (PR)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-M)", "Peng-Robinson-Stryjek-Vera 2 (PRSV2-VL)", "Soave-Redlich-Kwong (SRK)", "Peng-Robinson / Lee-Kesler (PR/LK)", _
                              "UNIFAC", "UNIFAC-LL", "Modified UNIFAC (Dortmund)", "Modified UNIFAC (NIST)", "NRTL", "UNIQUAC", _
                             "Chao-Seader", "Grayson-Streed", "Lee-Kesler-Plöcker", "Raoult's Law", "IAPWS-IF97 Steam Tables", "IAPWS-08 Seawater", "Sour Water"})
-        Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
-        For Each pp In otherpps
-            l.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName)
-        Next
+        Try
+            Dim otherpps = SharedClasses.Utility.LoadAdditionalPropertyPackages()
+            For Each pp In otherpps
+                l.Add(DirectCast(pp, CapeOpen.ICapeIdentification).ComponentName)
+            Next
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
         Return l.ToArray
     End Function
 
@@ -159,8 +163,11 @@ Public Class CAPEOPENManager
 
             'load settings
 
-            Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
-            If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+            Try
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+            Catch ex As Exception
+            End Try
 
             'handler for unhandled exceptions
 
