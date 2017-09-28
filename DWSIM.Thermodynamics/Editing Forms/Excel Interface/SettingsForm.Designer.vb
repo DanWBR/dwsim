@@ -23,8 +23,8 @@ Partial Class SettingsForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -56,15 +56,15 @@ Partial Class SettingsForm
         Me.DataGridViewImageColumn1 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.btnSelectOctavePath = New System.Windows.Forms.Button()
+        Me.tbOctavePath = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cbErrorHandlingMode = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.tbConfigFilePath = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.btnSelectOctavePath = New System.Windows.Forms.Button()
-        Me.tbOctavePath = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -333,10 +333,10 @@ Partial Class SettingsForm
         'Column13
         '
         Me.Column13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.Column13.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle1.NullValue = Nothing
+        Me.Column13.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column13.FillWeight = 10.0!
         Me.Column13.HeaderText = "Button"
         Me.Column13.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_cross
@@ -427,10 +427,10 @@ Partial Class SettingsForm
         'DataGridViewImageColumn1
         '
         Me.DataGridViewImageColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle4.NullValue = Nothing
-        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.DataGridViewImageColumn1.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewImageColumn1.FillWeight = 10.0!
         Me.DataGridViewImageColumn1.HeaderText = "Button"
         Me.DataGridViewImageColumn1.Image = Global.DWSIM.Thermodynamics.My.Resources.Resources.bullet_cross
@@ -467,6 +467,36 @@ Partial Class SettingsForm
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Miscellaneous"
         Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'btnSelectOctavePath
+        '
+        Me.btnSelectOctavePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectOctavePath.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.btnSelectOctavePath.Location = New System.Drawing.Point(503, 116)
+        Me.btnSelectOctavePath.Name = "btnSelectOctavePath"
+        Me.btnSelectOctavePath.Size = New System.Drawing.Size(68, 23)
+        Me.btnSelectOctavePath.TabIndex = 33
+        Me.btnSelectOctavePath.Text = "Select"
+        Me.btnSelectOctavePath.UseVisualStyleBackColor = True
+        '
+        'tbOctavePath
+        '
+        Me.tbOctavePath.Location = New System.Drawing.Point(136, 118)
+        Me.tbOctavePath.Name = "tbOctavePath"
+        Me.tbOctavePath.ReadOnly = True
+        Me.tbOctavePath.Size = New System.Drawing.Size(361, 20)
+        Me.tbOctavePath.TabIndex = 32
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.Label3.Location = New System.Drawing.Point(12, 122)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(107, 13)
+        Me.Label3.TabIndex = 31
+        Me.Label3.Text = "Octave Binaries Path"
         '
         'cbErrorHandlingMode
         '
@@ -514,36 +544,6 @@ Partial Class SettingsForm
         Me.OpenFileDialog1.Filter = "XML File|*.xml"
         Me.OpenFileDialog1.SupportMultiDottedExtensions = True
         Me.OpenFileDialog1.Title = "Add User Database"
-        '
-        'btnSelectOctavePath
-        '
-        Me.btnSelectOctavePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelectOctavePath.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnSelectOctavePath.Location = New System.Drawing.Point(503, 116)
-        Me.btnSelectOctavePath.Name = "btnSelectOctavePath"
-        Me.btnSelectOctavePath.Size = New System.Drawing.Size(68, 23)
-        Me.btnSelectOctavePath.TabIndex = 33
-        Me.btnSelectOctavePath.Text = "Select"
-        Me.btnSelectOctavePath.UseVisualStyleBackColor = True
-        '
-        'tbOctavePath
-        '
-        Me.tbOctavePath.Location = New System.Drawing.Point(136, 118)
-        Me.tbOctavePath.Name = "tbOctavePath"
-        Me.tbOctavePath.ReadOnly = True
-        Me.tbOctavePath.Size = New System.Drawing.Size(361, 20)
-        Me.tbOctavePath.TabIndex = 32
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(12, 122)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(107, 13)
-        Me.Label3.TabIndex = 31
-        Me.Label3.Text = "Octave Binaries Path"
         '
         'FolderBrowserDialog1
         '

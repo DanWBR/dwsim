@@ -10233,11 +10233,11 @@ Final3:
 
             Try
                 Me.UniqueID = (From el As XElement In data Select el Where el.Name = "ID").SingleOrDefault.Value
+                Me.Tag = (From el As XElement In data Select el Where el.Name = "Tag").SingleOrDefault.Value
             Catch ex As Exception
             End Try
             Me.ComponentName = (From el As XElement In data Select el Where el.Name = "ComponentName").SingleOrDefault.Value
             Me.ComponentDescription = (From el As XElement In data Select el Where el.Name = "ComponentDescription").SingleOrDefault.Value
-            Me.Tag = (From el As XElement In data Select el Where el.Name = "Tag").SingleOrDefault.Value
             Try
                 Me._tpseverity = (From el As XElement In data Select el Where el.Name = "TPSeverity").SingleOrDefault.Value
                 Me._tpcompids = XMLSerializer.XMLSerializer.StringToArray2((From el As XElement In data Select el Where el.Name = "TPCompIDs").SingleOrDefault.Value, ci, Type.GetType("System.String"))

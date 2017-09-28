@@ -12,6 +12,8 @@ Public Class SettingsForm
 
         Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
 
+        GlobalSettings.Settings.DebugLevel = 0
+
         Try
             GlobalSettings.Settings.SaveExcelSettings(inifile)
         Catch ex As Exception
@@ -297,4 +299,5 @@ Public Class SettingsForm
             GlobalSettings.Settings.OctavePath = tbOctavePath.Text
         End If
     End Sub
+
 End Class

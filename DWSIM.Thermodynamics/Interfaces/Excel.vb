@@ -23,6 +23,7 @@ Imports ExcelDna.Integration
 Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary
 Imports DWSIM.Thermodynamics.PropertyPackages
 Imports DWSIM.Thermodynamics.BaseClasses
+Imports DWSIM.ExtensionMethods
 Imports System.Reflection
 Imports System.IO
 
@@ -34,6 +35,8 @@ Namespace ExcelAddIn
 
         <ExcelFunction(Description:="Returns a list of compound constants and their values from the corresponding loaded database.", HelpTopic:="ExcelAddInHelp.chm!1")>
         Public Shared Function GetCompoundConstants(<ExcelArgument("Compound name.")> ByVal compound As String) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {compound})
 
             Try
 
@@ -101,6 +104,8 @@ Namespace ExcelAddIn
             <ExcelArgument("Temperature in K, if needed. Set as zero for a constant or P-dep property.")> ByVal temperature As Double,
             <ExcelArgument("Pressure in Pa, if needed. Set as zero for a constant or T-dep property.")> ByVal pressure As Double) As Object
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {compound, prop, temperature, pressure})
+
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -167,6 +172,8 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Returns a list of the available single compound properties.", HelpTopic:="ExcelAddInHelp.chm!3")>
         Public Shared Function GetCompoundPropList() As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {})
+
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -199,6 +206,8 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Returns a list of the available Property Packages.", HelpTopic:="ExcelAddInHelp.chm!4")>
         Public Shared Function GetPropPackList() As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {})
+
             Settings.ExcelMode = True
 
             Dim ppm As New CAPEOPENManager()
@@ -221,6 +230,8 @@ Namespace ExcelAddIn
 
         <ExcelFunction(Description:="Returns a list of the thermodynamic models.", HelpTopic:="ExcelAddInHelp.chm!5")>
         Public Shared Function GetModelList() As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {})
 
             Dim modellist As New ArrayList
 
@@ -248,6 +259,8 @@ Namespace ExcelAddIn
             <ExcelArgument("Thermodynamic Model (use 'GetModelList' to get a list of available models).")> ByVal Model As String,
             <ExcelArgument("The name of the first compound.")> ByVal Compound1 As String,
             <ExcelArgument("The name of the second compound.")> ByVal Compound2 As String) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {Model, Compound1, Compound2})
 
             Settings.ExcelMode = True
 
@@ -454,6 +467,8 @@ Namespace ExcelAddIn
             <ExcelArgument("The name of the first compound.")> ByVal Compound1 As String,
             <ExcelArgument("The name of the second compound.")> ByVal Compound2 As String) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {Model, Compound1, Compound2})
+
             Settings.ExcelMode = True
 
             Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
@@ -512,6 +527,8 @@ Namespace ExcelAddIn
         Public Shared Function GetPropList(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack})
+
             Settings.ExcelMode = True
 
             Dim ppm As New CAPEOPENManager()
@@ -541,6 +558,8 @@ Namespace ExcelAddIn
         Public Shared Function GetPhaseList(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack})
+
             Settings.ExcelMode = True
 
             Dim ppm As New CAPEOPENManager()
@@ -569,6 +588,8 @@ Namespace ExcelAddIn
         <ExcelFunction(Description:="Returns a list of the available compounds.", HelpTopic:="ExcelAddInHelp.chm!10")>
         Public Shared Function GetCompoundList(
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack})
 
             Settings.ExcelMode = True
 
@@ -626,6 +647,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, prop, basis, phaselabel, compounds, temperature, pressure, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8})
 
             Settings.ExcelMode = True
 
@@ -749,6 +772,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Pressure in Pa.")> ByVal pressure As Double,
         <ExcelArgument("*Normalized* mole fractions of the compounds in the mixture.")> ByVal molefractions As Double(),
         <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, prop, basis, phaselabel, compounds, temperature, pressure, molefractions, ppdata})
 
             Settings.ExcelMode = True
 
@@ -881,6 +906,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #6.")> ByVal ip6 As Object,
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, flashalg, P, T, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8})
 
             Settings.ExcelMode = True
 
@@ -1134,6 +1161,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, flashalg, P, H, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -1301,6 +1330,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #7.")> ByVal ip7 As Object,
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
+
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, flashalg, P, S, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, InitialEstimate})
 
             Settings.ExcelMode = True
 
@@ -1470,6 +1501,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, flashalg, P, VF, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -1638,6 +1671,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Interaction Parameters Set #8.")> ByVal ip8 As Object,
         <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, flashalg, T, VF, compounds, molefractions, ip1, ip2, ip3, ip4, ip5, ip6, ip7, ip8, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -1801,6 +1836,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
         <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, P, T, compounds, molefractions, ppdata})
+
             Settings.ExcelMode = True
 
             Try
@@ -1919,6 +1956,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, P, H, compounds, molefractions, ppdata, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -1931,7 +1970,7 @@ Namespace ExcelAddIn
                 Dim pp As PropertyPackages.PropertyPackage
 
                 pp = ppm.GetPropertyPackage(proppack)
-         
+
                 ppm.Dispose()
                 ppm = Nothing
 
@@ -2041,6 +2080,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, P, S, compounds, molefractions, ppdata, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -2053,7 +2094,7 @@ Namespace ExcelAddIn
                 Dim pp As PropertyPackages.PropertyPackage
 
                 pp = ppm.GetPropertyPackage(proppack)
-               
+
                 ppm.Dispose()
                 ppm = Nothing
 
@@ -2163,6 +2204,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
         <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, P, VF, compounds, molefractions, ppdata, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -2175,7 +2218,7 @@ Namespace ExcelAddIn
                 Dim pp As PropertyPackages.PropertyPackage
 
                 pp = ppm.GetPropertyPackage(proppack)
-               
+
                 ppm.Dispose()
                 ppm = Nothing
 
@@ -2285,6 +2328,8 @@ Namespace ExcelAddIn
         <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
         <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, T, VF, compounds, molefractions, ppdata, InitialEstimate})
+
             Settings.ExcelMode = True
 
             Try
@@ -2297,7 +2342,7 @@ Namespace ExcelAddIn
                 Dim pp As PropertyPackages.PropertyPackage
 
                 pp = ppm.GetPropertyPackage(proppack)
-                
+
                 ppm.Dispose()
                 ppm = Nothing
 
@@ -2707,6 +2752,8 @@ Namespace ExcelAddIn
         <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
         <ExcelArgument("The list of compounds to include.")> ByVal compounds As Object()) As Object
 
+            WriteMethodInfo(Reflection.MethodBase.GetCurrentMethod(), {proppack, compounds})
+
             Settings.ExcelMode = True
 
             Try
@@ -2771,6 +2818,29 @@ Namespace ExcelAddIn
 
 
         End Function
+
+        Shared Sub WriteMethodInfo(method As Reflection.MethodBase, argvalues As Object())
+
+            Console.WriteLine()
+            Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Running Excel function '" + method.Name + "' with arguments:")
+            Dim args = method.GetParameters
+            Dim i As Integer = 0
+            For Each arg In args
+                If argvalues(i) IsNot Nothing Then
+                    If TypeOf argvalues(i) Is ExcelDna.Integration.ExcelMissing Then
+                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): NO VALUE")
+                    ElseIf argvalues(i).GetType.IsArray Then
+                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): " + DirectCast(argvalues(i), Array).ToArrayString)
+                    Else
+                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): " + argvalues(i).ToString)
+                    End If
+                End If
+                i += 1
+            Next
+
+            Console.WriteLine()
+
+        End Sub
 
 #End Region
 

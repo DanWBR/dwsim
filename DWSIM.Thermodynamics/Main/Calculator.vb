@@ -9,8 +9,10 @@ Public Class Calculator
 
     Public Shared _ResourceManager As System.Resources.ResourceManager
 
+    Public Shared ExcelLogForm As LogForm
+
     Shared Sub WriteToConsole(text As String, level As Integer)
-        'If level > DebugLevel Then Console.WriteLine(text)
+        If level <= Settings.DebugLevel Then Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + text)
     End Sub
 
     Public Shared Function GetLocalString(ByVal text As String) As String

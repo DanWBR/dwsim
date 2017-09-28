@@ -160,6 +160,12 @@
     <Compile Include="Editing Forms\Excel Interface\AboutForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Editing Forms\Excel Interface\LogForm.Designer.vb">
+      <DependentUpon>LogForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Editing Forms\Excel Interface\LogForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Editing Forms\Excel Interface\SettingsForm.Designer.vb">
       <DependentUpon>SettingsForm.vb</DependentUpon>
     </Compile>
@@ -252,6 +258,7 @@
     </Compile>
     <Compile Include="Flash Algorithms\CAPEOPEN_Equilibrium_Server.vb" />
     <Compile Include="Flash Algorithms\SteamTables.vb" />
+    <Compile Include="Helper Classes\ConsoleRedirection.vb" />
     <Compile Include="Helper Classes\PhaseEnvelopeSettings.vb" />
     <Compile Include="Interfaces\ShortcutUtilities.vb" />
     <Compile Include="Interfaces\Excel.vb" />
@@ -365,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Excel Interface\AboutForm.resx">
       <DependentUpon>AboutForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Editing Forms\Excel Interface\LogForm.resx">
+      <DependentUpon>LogForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Editing Forms\Excel Interface\SettingsForm.resx">
       <DependentUpon>SettingsForm.vb</DependentUpon>
@@ -525,6 +535,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\cross.png" />
+    <None Include="Resources\copy.gif" />
     <EmbeddedResource Include="Assets\Databases\chedl_thermo.json" />
     <None Include="packages.config" />
     <Content Include="DWSIM.Thermodynamics-AddIn.dna">

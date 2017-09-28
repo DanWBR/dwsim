@@ -1,6 +1,7 @@
 <DnaLibrary Name="DWSIM" Description="DWSIM Excel Add-In for Thermodynamic Calculations" RuntimeVersion="v4.0">
 	<ExternalLibrary ExplicitExports="true" Path="DWSIM.Thermodynamics.dll"/>
 	<Reference Path="DWSIM.Thermodynamics.dll"/>
+	<Reference Path="DWSIM.GlobalSettings.dll"/>
 	<Reference Path="System.Windows.Forms.dll"/>
 	<![CDATA[
 		  Imports System.Runtime.InteropServices
@@ -8,6 +9,7 @@
 		  Imports ExcelDna.Integration.CustomUI
 		  Imports System.IO
 		  Imports DWSIM.Thermodynamics
+		  Imports DWSIM.GlobalSettings
 		  
 		  <ComVisible(True)> _
 		  Public Class MyRibbon
@@ -32,6 +34,16 @@
 				Dim f as New AboutForm()
 				f.ShowDialog()
 		    End Sub
+			    
+		    Public Sub  ShowLogWindow(control as IRibbonControl)
+				If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then 
+					Settings.DebugLevel = 3
+					Calculator.ExcelLogForm = New LogForm
+					Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
+					Console.SetOut(txtwriter)
+				End If
+				Calculator.ExcelLogForm.Show()
+		    End Sub
 
 		  End Class
 	]]>
@@ -39,6 +51,7 @@
 	<Image Name="Help" Path="appbar.question.png" />
 	<Image Name="About" Path="appbar.information.circle.png" />
 	<Image Name="Sample" Path="appbar.office.excel.png" />
+	<Image Name="Log" Path="appbar.app.png" />
 	<CustomUI>
 		<!-- Inside here is the exact RibbonX xml passed to Excel -->
 		<!-- This will only be loaded for Excel 2010 because of the namespace -->
@@ -51,6 +64,7 @@
 			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
 			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
 			  <button id='Button4' label='Open Sample Sheet' image='Sample' size='large' onAction='ShowSample' />
+			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
 			</group >
 		    </tab>
 		  </tabs>
@@ -69,6 +83,7 @@
 			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
 			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
 			  <button id='Button4' label='Open Sample Sheet' image='Sample' size='large' onAction='ShowSample' />
+			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
 			</group >
 		    </tab>
 		  </tabs>
