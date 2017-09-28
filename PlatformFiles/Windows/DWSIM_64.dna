@@ -61,10 +61,10 @@
 		    <tab id='CustomTab' label='DWSIM'>
 			<group id='Group1' label='DWSIM'>
 			  <button id='Button1' label='Options' image='Settings' size='large' onAction='ShowOptions' />
-			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
-			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
 			  <button id='Button4' label='Open Sample Sheet' image='Sample' size='large' onAction='ShowSample' />
 			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
+			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
+			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
 			</group >
 		    </tab>
 		  </tabs>
@@ -80,10 +80,10 @@
 		    <tab id='CustomTab' label='DWSIM'>
 			<group id='Group1' label='DWSIM'>
 			  <button id='Button1' label='Options' image='Settings' size='large' onAction='ShowOptions' />
-			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
-			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
 			  <button id='Button4' label='Open Sample Sheet' image='Sample' size='large' onAction='ShowSample' />
 			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
+			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
+			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
 			</group >
 		    </tab>
 		  </tabs>

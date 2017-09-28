@@ -92,12 +92,18 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 foreach (KeyValuePair<string, VPT_IP> kvp2 in kvp.Value)
                 {
-                    data[data.Count - 1].Add(new XElement("InteractionParameter",
-                        new XAttribute("Compound1", kvp2.Value.Compound1),
-                        new XAttribute("Compound2", kvp2.Value.Compound1),
-                        new XAttribute("k1", kvp2.Value.k1.ToString(ci)),
-                        new XAttribute("k2", kvp2.Value.k2.ToString(ci)),
-                        new XAttribute("k3", kvp2.Value.k3.ToString(ci))));
+                    if ((this.CurrentMaterialStream != null))
+                    {
+                        if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key) & this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp2.Key))
+                        {
+                            data[data.Count - 1].Add(new XElement("InteractionParameter",
+                                new XAttribute("Compound1", kvp2.Value.Compound1),
+                                new XAttribute("Compound2", kvp2.Value.Compound1),
+                                new XAttribute("k1", kvp2.Value.k1.ToString(ci)),
+                                new XAttribute("k2", kvp2.Value.k2.ToString(ci)),
+                                new XAttribute("k3", kvp2.Value.k3.ToString(ci))));
+                        }
+                    }
                 }
             }
             return data;

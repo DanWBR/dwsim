@@ -36,6 +36,8 @@ Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports DWSIM.Thermodynamics.Streams
 
+Imports Newtonsoft.Json
+
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 
 Namespace PropertyPackages
@@ -138,7 +140,7 @@ Namespace PropertyPackages
 
         Public Const ClassId As String = ""
 
-        <System.NonSerialized()> Private m_ms As Interfaces.IMaterialStream = Nothing
+        <JsonIgnore> <System.NonSerialized()> Private m_ms As Interfaces.IMaterialStream = Nothing
         Private m_ss As New System.Collections.Generic.List(Of String)
         Private m_configurable As Boolean = False
 
@@ -152,20 +154,20 @@ Namespace PropertyPackages
         Public _tpseverity As Integer = 0
         Public _tpcompids As String() = New String() {}
 
-        Public _phasemappings As New Dictionary(Of String, PhaseInfo)
+        <JsonIgnore> Public _phasemappings As New Dictionary(Of String, PhaseInfo)
 
         Public IsElectrolytePP As Boolean = False
 
         Private LoopVarF, LoopVarX As Double, LoopVarState As State
-        <System.NonSerialized()> Dim m_Flowsheet As IFlowsheet
+        <JsonIgnore> <System.NonSerialized()> Dim m_Flowsheet As IFlowsheet
 
         Public Property ForceNewFlashAlgorithmInstance As Boolean = False
 
-        Public Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
+        Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
 
         Public Property ExceptionLog As String = ""
 
-        <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
+        <JsonIgnore> <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
 
 #Region "   Constructor"
 
@@ -419,7 +421,7 @@ Namespace PropertyPackages
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property CurrentMaterialStream() As Interfaces.IMaterialStream Implements Interfaces.IPropertyPackage.CurrentMaterialStream
+        <XmlIgnore> <JsonIgnore> Public Property CurrentMaterialStream() As Interfaces.IMaterialStream Implements Interfaces.IPropertyPackage.CurrentMaterialStream
             Get
                 Return m_ms
             End Get
@@ -10852,7 +10854,7 @@ Final3:
 
         End Sub
 
-        <Xml.Serialization.XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
+        <JsonIgnore> <XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
             Get
                 Return m_Flowsheet
             End Get

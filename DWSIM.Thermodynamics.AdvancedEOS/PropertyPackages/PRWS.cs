@@ -281,10 +281,16 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 foreach (KeyValuePair<string, PHSC_IP> kvp2 in kvp.Value)
                 {
-                    data[data.Count - 1].Add(new XElement("InteractionParameter",
-                        new XAttribute("Compound1", kvp2.Value.Compound1),
-                        new XAttribute("Compound2", kvp2.Value.Compound2),
-                        new XAttribute("Value", kvp2.Value.kij.ToString(ci))));
+                    if ((this.CurrentMaterialStream != null))
+                    {
+                        if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key) & this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp2.Key))
+                        {
+                            data[data.Count - 1].Add(new XElement("InteractionParameter",
+                                               new XAttribute("Compound1", kvp2.Value.Compound1),
+                                               new XAttribute("Compound2", kvp2.Value.Compound2),
+                                               new XAttribute("Value", kvp2.Value.kij.ToString(ci))));
+                        }
+                    }
                 }
             }
             data.Add(new XElement("InteractionParametersNRTL"));
@@ -292,12 +298,18 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 foreach (KeyValuePair<string, NRTL_IPData> kvp2 in kvp.Value)
                 {
-                    data[data.Count - 1].Add(new XElement("InteractionParameter",
-                        new XAttribute("Compound1", kvp2.Value.ID1),
-                        new XAttribute("Compound2", kvp2.Value.ID2),
-                        new XAttribute("A12", kvp2.Value.A12.ToString(ci)),
-                        new XAttribute("A21", kvp2.Value.A21.ToString(ci)),
-                        new XAttribute("alpha12", kvp2.Value.alpha12.ToString(ci))));
+                    if ((this.CurrentMaterialStream != null))
+                    {
+                        if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key) & this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp2.Key))
+                        {
+                            data[data.Count - 1].Add(new XElement("InteractionParameter",
+                                new XAttribute("Compound1", kvp2.Value.ID1),
+                                new XAttribute("Compound2", kvp2.Value.ID2),
+                                new XAttribute("A12", kvp2.Value.A12.ToString(ci)),
+                                new XAttribute("A21", kvp2.Value.A21.ToString(ci)),
+                                new XAttribute("alpha12", kvp2.Value.alpha12.ToString(ci))));
+                        }
+                    }
                 }
             }
             return data;

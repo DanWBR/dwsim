@@ -178,25 +178,37 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 foreach (KeyValuePair<string, PCSIP> kvp2 in kvp.Value)
                 {
-                    data[data.Count - 1].Add(new XElement("InteractionParameter",
-                        new XAttribute("Compound1", kvp2.Value.compound1),
-                        new XAttribute("Compound2", kvp2.Value.compound2),
-                        new XAttribute("CAS1", kvp.Key),
-                        new XAttribute("CAS2", kvp2.Key),
-                        new XAttribute("Value", kvp2.Value.kij.ToString(ci))));
+                    if ((this.CurrentMaterialStream != null))
+                    {
+                        if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key) & this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp2.Key))
+                        {
+                            data[data.Count - 1].Add(new XElement("InteractionParameter",
+                                new XAttribute("Compound1", kvp2.Value.compound1),
+                                new XAttribute("Compound2", kvp2.Value.compound2),
+                                new XAttribute("CAS1", kvp.Key),
+                                new XAttribute("CAS2", kvp2.Key),
+                                new XAttribute("Value", kvp2.Value.kij.ToString(ci))));
+                        }
+                    }
                 }
             }
             data.Add(new XElement("CompoundParameters"));
             foreach (KeyValuePair<string, PCSParam> kvp in CompoundParameters)
             {
-                data[data.Count - 1].Add(new XElement("CompoundParameterSet",
-                        new XAttribute("Compound", kvp.Value.compound),
-                        new XAttribute("CAS_ID", kvp.Value.casno),
-                        new XAttribute("MW", kvp.Value.mw.ToString(ci)),
-                        new XAttribute("m", kvp.Value.m.ToString(ci)),
-                        new XAttribute("sigma", kvp.Value.sigma.ToString(ci)),
-                        new XAttribute("epsilon_k", kvp.Value.epsilon.ToString(ci)),
-                        new XAttribute("assocparam", kvp.Value.associationparams.Replace(System.Environment.NewLine, "|"))));
+                if ((this.CurrentMaterialStream != null))
+                {
+                    if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key))
+                    {
+                        data[data.Count - 1].Add(new XElement("CompoundParameterSet",
+                                new XAttribute("Compound", kvp.Value.compound),
+                                new XAttribute("CAS_ID", kvp.Value.casno),
+                                new XAttribute("MW", kvp.Value.mw.ToString(ci)),
+                                new XAttribute("m", kvp.Value.m.ToString(ci)),
+                                new XAttribute("sigma", kvp.Value.sigma.ToString(ci)),
+                                new XAttribute("epsilon_k", kvp.Value.epsilon.ToString(ci)),
+                                new XAttribute("assocparam", kvp.Value.associationparams.Replace(System.Environment.NewLine, "|"))));
+                    }
+                }
             }
             return data;
         }

@@ -97,21 +97,33 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
             {
                 foreach (KeyValuePair<string, PHSC_IP> kvp2 in kvp.Value)
                 {
-                    data[data.Count - 1].Add(new XElement("InteractionParameter",
-                        new XAttribute("Compound1", kvp2.Value.Compound1),
-                        new XAttribute("Compound2", kvp2.Value.Compound2),
-                        new XAttribute("Value", kvp2.Value.kij.ToString(ci))));
+                    if ((this.CurrentMaterialStream != null))
+                    {
+                        if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key) & this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp2.Key))
+                        {
+                            data[data.Count - 1].Add(new XElement("InteractionParameter",
+                                new XAttribute("Compound1", kvp2.Value.Compound1),
+                                new XAttribute("Compound2", kvp2.Value.Compound2),
+                                new XAttribute("Value", kvp2.Value.kij.ToString(ci))));
+                        }
+                    }
                 }
             }
             data.Add(new XElement("CompoundParameters"));
             foreach (KeyValuePair<string, PHSC_Param> kvp in CompoundParameters)
             {
-                data[data.Count - 1].Add(new XElement("CompoundParameterSet",
-                        new XAttribute("Compound", kvp.Value.Compound),
-                        new XAttribute("CAS_ID", kvp.Value.CAS_ID),
-                        new XAttribute("V", kvp.Value.V.ToString(ci)),
-                        new XAttribute("A", kvp.Value.A.ToString(ci)),
-                        new XAttribute("E", kvp.Value.E.ToString(ci))));
+                if ((this.CurrentMaterialStream != null))
+                {
+                    if (this.CurrentMaterialStream.Phases[0].Compounds.ContainsKey(kvp.Key))
+                    {
+                        data[data.Count - 1].Add(new XElement("CompoundParameterSet",
+                                new XAttribute("Compound", kvp.Value.Compound),
+                                new XAttribute("CAS_ID", kvp.Value.CAS_ID),
+                                new XAttribute("V", kvp.Value.V.ToString(ci)),
+                                new XAttribute("A", kvp.Value.A.ToString(ci)),
+                                new XAttribute("E", kvp.Value.E.ToString(ci))));
+                    }
+                }
             }
             return data;
         }

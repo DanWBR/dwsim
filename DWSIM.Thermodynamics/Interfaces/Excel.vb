@@ -73,6 +73,8 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results)
+
                 Return results
 
             Catch ex As Exception
@@ -139,6 +141,8 @@ Namespace ExcelAddIn
                     results = ms.GetCompoundConstant(New Object() {prop}, New Object() {compound})
                 End If
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results(0))
+
                 Return results(0)
 
                 pp.Dispose()
@@ -199,6 +203,8 @@ Namespace ExcelAddIn
                 results2(i, 0) = values(i)
             Next
 
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
+
             Return results2
 
         End Function
@@ -220,6 +226,8 @@ Namespace ExcelAddIn
             For i = 0 To values.Length - 1
                 results2(i, 0) = values(i)
             Next
+
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
 
             Return results2
 
@@ -249,6 +257,8 @@ Namespace ExcelAddIn
             For i As Integer = 0 To modellist.Count - 1
                 list(i, 0) = modellist(i)
             Next
+
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), list)
 
             Return list
 
@@ -457,6 +467,8 @@ Namespace ExcelAddIn
                     pp = Nothing
             End Select
 
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), ipdata)
+
             Return ipdata
 
         End Function
@@ -519,6 +531,8 @@ Namespace ExcelAddIn
                 i += 1
             Next
 
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), ipdata)
+
             Return ipdata
 
         End Function
@@ -546,6 +560,8 @@ Namespace ExcelAddIn
             For i = 0 To values.Length - 1
                 results2(i, 0) = values(i)
             Next
+
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
 
             Return results2
 
@@ -577,6 +593,8 @@ Namespace ExcelAddIn
             For i = 0 To values.Length - 1
                 results2(i, 0) = values(i)
             Next
+
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
 
             Return results2
 
@@ -620,6 +638,8 @@ Namespace ExcelAddIn
             For i = 0 To values.Length - 1
                 results2(i, 0) = values(i)
             Next
+
+            WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
 
             Return results2
 
@@ -736,9 +756,13 @@ Namespace ExcelAddIn
                     results2(i, 0) = values(i)
                 Next
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
+
                 Return results2
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -861,9 +885,13 @@ Namespace ExcelAddIn
                     results2(i, 0) = values(i)
                 Next
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), results2)
+
                 Return results2
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -1031,9 +1059,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -1289,9 +1321,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -1459,9 +1495,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -1629,9 +1669,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -1799,9 +1843,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -1922,9 +1970,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -2046,9 +2098,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -2170,9 +2226,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -2294,9 +2354,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -2418,9 +2482,13 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), fractions)
+
                 Return fractions
 
             Catch ex As Exception
+
+                WriteErrorMessage(Reflection.MethodBase.GetCurrentMethod(), ex)
 
                 Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
                     Case 0
@@ -2794,6 +2862,8 @@ Namespace ExcelAddIn
                 ms.Dispose()
                 ms = Nothing
 
+                WriteMethodFinishedMessage(Reflection.MethodBase.GetCurrentMethod(), data)
+
                 Return data
 
             Catch ex As Exception
@@ -2822,7 +2892,9 @@ Namespace ExcelAddIn
         Shared Sub WriteMethodInfo(method As Reflection.MethodBase, argvalues As Object())
 
             Console.WriteLine()
+
             Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Running Excel function '" + method.Name + "' with arguments:")
+
             Dim args = method.GetParameters
             Dim i As Integer = 0
             For Each arg In args
@@ -2838,6 +2910,28 @@ Namespace ExcelAddIn
                 i += 1
             Next
 
+            Console.WriteLine()
+
+        End Sub
+
+        Shared Sub WriteMethodFinishedMessage(method As Reflection.MethodBase, result As Object)
+
+            Console.WriteLine()
+
+            If result.GetType.IsArray Then
+                Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Excel function '" + method.Name + "' ran successfully. Return value: " + DirectCast(result, Array).ToArrayString)
+            Else
+                Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Excel function '" + method.Name + "' ran successfully. Return value: " + result.ToString)
+            End If
+
+            Console.WriteLine()
+
+        End Sub
+
+        Shared Sub WriteErrorMessage(method As Reflection.MethodBase, ex As Exception)
+
+            Console.WriteLine()
+            Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Excel function '" + method.Name + "' finished with errors: " + ex.ToString)
             Console.WriteLine()
 
         End Sub
