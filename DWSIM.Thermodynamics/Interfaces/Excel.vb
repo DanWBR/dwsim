@@ -606,7 +606,7 @@ Namespace ExcelAddIn
 
 #End Region
 
-#Region "Property Calculation Function"
+#Region "Property Calculation Functions"
 
         <ExcelFunction(Description:="Calculates properties using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!11")>
         Public Shared Function CalcProp(
@@ -675,6 +675,129 @@ Namespace ExcelAddIn
                     Calculator.InitComputeDevice()
                     Settings.gpu.EnableMultithreading()
                 End If
+
+                If prop.ToLower <> "molecularweight" Then
+                    pp.CalcSinglePhaseProp(New Object() {prop}, phaselabel)
+                End If
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
+                End If
+
+                Dim results As Double() = Nothing
+                Dim allres As New ArrayList
+                Dim i As Integer
+
+                results = Nothing
+                If prop.ToLower <> "molecularweight" Then
+                    ms.GetSinglePhaseProp(prop, phaselabel, basis, results)
+                Else
+                    results = New Double() {pp.AUX_MMM(dwp)}
+                End If
+                For i = 0 To results.Length - 1
+                    allres.Add(results(i))
+                Next
+
+                pp.Dispose()
+                pp = Nothing
+
+                ms.Dispose()
+                ms = Nothing
+
+                Dim values As Object() = allres.ToArray()
+
+                Dim results2(values.Length - 1, 0) As Object
+
+                For i = 0 To values.Length - 1
+                    results2(i, 0) = values(i)
+                Next
+
+                Return results2
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+
+        End Function
+
+        <ExcelFunction(Description:="Calculates properties using the selected Property Package with custom data.", HelpTopic:="ExcelAddInHelp.chm!11")>
+        Public Shared Function CalcProp2(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("The property to calculate.")> ByVal prop As String,
+        <ExcelArgument("The returning basis of the properties: Mole, Mass or UNDEFINED.")> ByVal basis As String,
+        <ExcelArgument("The name of the phase to calculate properties from.")> ByVal phaselabel As String,
+        <ExcelArgument("The list of compounds to include.")> ByVal compounds As Object(),
+        <ExcelArgument("Temperature in K.")> ByVal temperature As Double,
+        <ExcelArgument("Pressure in Pa.")> ByVal pressure As Double,
+        <ExcelArgument("*Normalized* mole fractions of the compounds in the mixture.")> ByVal molefractions As Double(),
+        <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String) As Object(,)
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
+
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    pp._selectedcomps.Add(c, tmpcomp)
+                    pp._availablecomps.Remove(c)
+                Next
+
+                Dim dwp As PropertyPackages.Phase = PropertyPackages.Phase.Mixture
+                For Each pi As PropertyPackages.PhaseInfo In pp.PhaseMappings.Values
+                    If pi.PhaseLabel = phaselabel Then dwp = pi.DWPhaseID
+                Next
+
+                ms.SetPhaseComposition(molefractions, dwp)
+                ms.CalcPhaseMassComposition(dwp)
+                ms.Phases(0).Properties.temperature = temperature
+                ms.Phases(0).Properties.pressure = pressure
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Calculator.InitComputeDevice()
+                    Settings.gpu.EnableMultithreading()
+                End If
+
+                pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
 
                 If prop.ToLower <> "molecularweight" Then
                     pp.CalcSinglePhaseProp(New Object() {prop}, phaselabel)
@@ -1667,6 +1790,615 @@ Namespace ExcelAddIn
 
 #End Region
 
+#Region "Flash Calculation Routines, v3 (accept custom property package data)"
+
+        <ExcelFunction(Description:="Calculates a Pressure / Temperature Flash using the selected Property Package.", HelpTopic:="ExcelAddInHelp.chm!12")>
+        Public Shared Function PTFlash3(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Temperature in K.")> ByVal T As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String) As Object(,)
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage
+
+                pp = ppm.GetPropertyPackage(proppack)
+
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    If Not pp._selectedcomps.ContainsKey(c) Then pp._selectedcomps.Add(c, tmpcomp)
+                    'pp._availablecomps.Remove(c)
+                Next
+
+                ms.SetOverallComposition(molefractions)
+                ms.Phases(0).Properties.temperature = T
+                ms.Phases(0).Properties.pressure = P
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Calculator.InitComputeDevice()
+                    Settings.gpu.EnableMultithreading()
+                End If
+
+                pp.CalcEquilibrium(ms, "TP", "UNDEFINED")
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
+                End If
+
+                Dim labels As String() = Nothing
+                Dim statuses As CapeOpen.CapePhaseStatus() = Nothing
+
+                ms.GetPresentPhases(labels, statuses)
+
+                Dim fractions(compounds.Length + 1, labels.Length - 1) As Object
+
+                Dim res As Object = Nothing
+
+                Dim i, j As Integer
+                i = 0
+                For Each l As String In labels
+                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                        fractions(0, i) = labels(i)
+                        ms.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                        fractions(1, i) = res(0)
+                        ms.GetSinglePhaseProp("fraction", labels(i), "Mole", res)
+                        For j = 0 To compounds.Length - 1
+                            fractions(2 + j, i) = res(j)
+                        Next
+                    End If
+                    i += 1
+                Next
+
+                If TypeOf proppack Is String Then
+                    pp.Dispose()
+                    pp = Nothing
+                End If
+
+                ms.Dispose()
+                ms = Nothing
+
+                Return fractions
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+        End Function
+
+        <ExcelFunction(Description:="Calculates a Pressure / Enthalpy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!17")>
+        Public Shared Function PHFlash3(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mass Enthalpy in kJ/kg.")> ByVal H As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
+        <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage
+
+                pp = ppm.GetPropertyPackage(proppack)
+         
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    If Not pp._selectedcomps.ContainsKey(c) Then pp._selectedcomps.Add(c, tmpcomp)
+                    'pp._availablecomps.Remove(c)
+                Next
+
+                ms.SetOverallComposition(molefractions)
+                ms.Phases(0).Properties.enthalpy = H
+                ms.Phases(0).Properties.pressure = P
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
+
+                ms.Phases(0).Properties.temperature = InitialEstimate
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Calculator.InitComputeDevice()
+                    Settings.gpu.EnableMultithreading()
+                End If
+
+                pp.CalcEquilibrium(ms, "PH", "UNDEFINED")
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
+                End If
+
+                Dim labels As String() = Nothing
+                Dim statuses As CapeOpen.CapePhaseStatus() = Nothing
+
+                ms.GetPresentPhases(labels, statuses)
+
+                Dim fractions(compounds.Length + 2, labels.Length - 1) As Object
+
+                Dim res As Object = Nothing
+
+                Dim i, j As Integer
+                i = 0
+                For Each l As String In labels
+                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                        fractions(0, i) = labels(i)
+                        ms.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                        fractions(1, i) = res(0)
+                        ms.GetSinglePhaseProp("fraction", labels(i), "Mole", res)
+                        For j = 0 To compounds.Length - 1
+                            fractions(2 + j, i) = res(j)
+                        Next
+                    End If
+                    i += 1
+                Next
+
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
+
+                If TypeOf proppack Is String Then
+                    pp.Dispose()
+                    pp = Nothing
+                End If
+
+                ms.Dispose()
+                ms = Nothing
+
+                Return fractions
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+        End Function
+
+        <ExcelFunction(Description:="Calculates a Pressure / Entropy Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!18")>
+        Public Shared Function PSFlash3(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mass Entropy in kJ/[kg.K].")> ByVal S As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
+        <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage
+
+                pp = ppm.GetPropertyPackage(proppack)
+               
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    If Not pp._selectedcomps.ContainsKey(c) Then pp._selectedcomps.Add(c, tmpcomp)
+                    'pp._availablecomps.Remove(c)
+                Next
+
+                ms.SetOverallComposition(molefractions)
+                ms.Phases(0).Properties.entropy = S
+                ms.Phases(0).Properties.pressure = P
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
+
+                ms.Phases(0).Properties.temperature = InitialEstimate
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Calculator.InitComputeDevice()
+                    Settings.gpu.EnableMultithreading()
+                End If
+
+                pp.CalcEquilibrium(ms, "PS", "UNDEFINED")
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
+                End If
+
+                Dim labels As String() = Nothing
+                Dim statuses As CapeOpen.CapePhaseStatus() = Nothing
+
+                ms.GetPresentPhases(labels, statuses)
+
+                Dim fractions(compounds.Length + 2, labels.Length - 1) As Object
+
+                Dim res As Object = Nothing
+
+                Dim i, j As Integer
+                i = 0
+                For Each l As String In labels
+                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                        fractions(0, i) = labels(i)
+                        ms.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                        fractions(1, i) = res(0)
+                        ms.GetSinglePhaseProp("fraction", labels(i), "Mole", res)
+                        For j = 0 To compounds.Length - 1
+                            fractions(2 + j, i) = res(j)
+                        Next
+                    End If
+                    i += 1
+                Next
+
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
+
+                If TypeOf proppack Is String Then
+                    pp.Dispose()
+                    pp = Nothing
+                End If
+
+                ms.Dispose()
+                ms = Nothing
+
+                Return fractions
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+        End Function
+
+        <ExcelFunction(Description:="Calculates a Pressure / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the temperature search.", HelpTopic:="ExcelAddInHelp.chm!19")>
+        Public Shared Function PVFFlash3(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Pressure in Pa.")> ByVal P As Double,
+        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
+        <ExcelArgument("Initial estimate for temperature search, in K.")> ByVal InitialEstimate As Double) As Object(,)
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage
+
+                pp = ppm.GetPropertyPackage(proppack)
+               
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    If Not pp._selectedcomps.ContainsKey(c) Then pp._selectedcomps.Add(c, tmpcomp)
+                    'pp._availablecomps.Remove(c)
+                Next
+
+                ms.SetOverallComposition(molefractions)
+                ms.Phases(2).Properties.molarfraction = VF
+                ms.Phases(0).Properties.pressure = P
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
+
+                ms.Phases(0).Properties.temperature = InitialEstimate
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Calculator.InitComputeDevice()
+                    Settings.gpu.EnableMultithreading()
+                End If
+
+                pp.CalcEquilibrium(ms, "PVF", "UNDEFINED")
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
+                End If
+
+                Dim labels As String() = Nothing
+                Dim statuses As CapeOpen.CapePhaseStatus() = Nothing
+
+                ms.GetPresentPhases(labels, statuses)
+
+                Dim fractions(compounds.Length + 2, labels.Length - 1) As Object
+
+                Dim res As Object = Nothing
+
+                Dim i, j As Integer
+                i = 0
+                For Each l As String In labels
+                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                        fractions(0, i) = labels(i)
+                        ms.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                        fractions(1, i) = res(0)
+                        ms.GetSinglePhaseProp("fraction", labels(i), "Mole", res)
+                        For j = 0 To compounds.Length - 1
+                            fractions(2 + j, i) = res(j)
+                        Next
+                    End If
+                    i += 1
+                Next
+
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.temperature.GetValueOrDefault
+
+                If TypeOf proppack Is String Then
+                    pp.Dispose()
+                    pp = Nothing
+                End If
+
+                ms.Dispose()
+                ms = Nothing
+
+                Return fractions
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+        End Function
+
+        <ExcelFunction(Description:="Calculates a Temperature / Vapor Fraction Flash using the selected Property Package. Accepts an initial estimate for the pressure search.", HelpTopic:="ExcelAddInHelp.chm!20")>
+        Public Shared Function TVFFlash3(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("Temperature in K.")> ByVal T As Double,
+        <ExcelArgument("Mixture Mole Vapor Fraction.")> ByVal VF As Double,
+        <ExcelArgument("Compound names.")> ByVal compounds As Object(),
+        <ExcelArgument("Compound mole fractions.")> ByVal molefractions As Double(),
+        <ExcelArgument("Serialized Property Package data.")> ByVal ppdata As String,
+        <ExcelArgument("Initial estimate for pressure search, in Pa.")> ByVal InitialEstimate As Double) As Object(,)
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage
+
+                pp = ppm.GetPropertyPackage(proppack)
+                
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    If Not pp._selectedcomps.ContainsKey(c) Then pp._selectedcomps.Add(c, tmpcomp)
+                    'pp._availablecomps.Remove(c)
+                Next
+
+                ms.SetOverallComposition(molefractions)
+                ms.Phases(2).Properties.molarfraction = VF
+                ms.Phases(0).Properties.temperature = T
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                pp.LoadData(Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of XElement))(ppdata))
+
+                ms.Phases(0).Properties.pressure = InitialEstimate
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Calculator.InitComputeDevice()
+                    Settings.gpu.EnableMultithreading()
+                End If
+
+                pp.CalcEquilibrium(ms, "TVF", "UNDEFINED")
+
+                If GlobalSettings.Settings.EnableGPUProcessing Then
+                    Settings.gpu.DisableMultithreading()
+                    Settings.gpu.FreeAll()
+                End If
+
+                Dim labels As String() = Nothing
+                Dim statuses As CapeOpen.CapePhaseStatus() = Nothing
+
+                ms.GetPresentPhases(labels, statuses)
+
+                Dim fractions(compounds.Length + 2, labels.Length - 1) As Object
+
+                Dim res As Object = Nothing
+
+                Dim i, j As Integer
+                i = 0
+                For Each l As String In labels
+                    If statuses(i) = CapeOpen.CapePhaseStatus.CAPE_ATEQUILIBRIUM Then
+                        fractions(0, i) = labels(i)
+                        ms.GetSinglePhaseProp("phasefraction", labels(i), "Mole", res)
+                        fractions(1, i) = res(0)
+                        ms.GetSinglePhaseProp("fraction", labels(i), "Mole", res)
+                        For j = 0 To compounds.Length - 1
+                            fractions(2 + j, i) = res(j)
+                        Next
+                    End If
+                    i += 1
+                Next
+
+                fractions(compounds.Length + 2, 0) = ms.Phases(0).Properties.pressure.GetValueOrDefault
+
+                If TypeOf proppack Is String Then
+                    pp.Dispose()
+                    pp = Nothing
+                End If
+
+                ms.Dispose()
+                ms = Nothing
+
+                Return fractions
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+        End Function
+
+#End Region
+
 #Region "Helper Procedures"
 
         Public Shared Sub SetIP(ByVal proppack As String, ByVal pp As PropertyPackage, ByVal compounds As Object, ByVal ip1 As Object, ByVal ip2 As Object,
@@ -1969,6 +2701,76 @@ Namespace ExcelAddIn
             proppack.SetMaterial(ms)
 
         End Sub
+
+        <ExcelFunction(Description:="Returns base Property Package data, which can be modified and used as an input for other functions.")>
+        Public Shared Function GetBasePropertyPackageData(
+        <ExcelArgument("The name of the Property Package to use.")> ByVal proppack As String,
+        <ExcelArgument("The list of compounds to include.")> ByVal compounds As Object()) As Object
+
+            Settings.ExcelMode = True
+
+            Try
+
+                Dim inifile As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments & Path.DirectorySeparatorChar & "DWSIM Application Data" & Path.DirectorySeparatorChar & "config.ini"
+                If File.Exists(inifile) Then GlobalSettings.Settings.LoadExcelSettings(inifile)
+
+                Dim ppm As New CAPEOPENManager()
+
+                Dim pp As PropertyPackages.PropertyPackage = ppm.GetPropertyPackage(proppack)
+
+                ppm.Dispose()
+                ppm = Nothing
+
+                Dim ms As New Streams.MaterialStream("", "")
+
+                For Each phase As BaseClasses.Phase In ms.Phases.Values
+                    For Each c As String In compounds
+                        phase.Compounds.Add(c, New BaseClasses.Compound(c, ""))
+                        phase.Compounds(c).ConstantProperties = pp._availablecomps(c)
+                    Next
+                Next
+
+                For Each c As String In compounds
+                    Dim tmpcomp As ConstantProperties = pp._availablecomps(c)
+                    pp._selectedcomps.Add(c, tmpcomp)
+                    pp._availablecomps.Remove(c)
+                Next
+
+                ms._pp = pp
+                pp.SetMaterial(ms)
+
+                Dim data = Newtonsoft.Json.JsonConvert.SerializeObject(pp.SaveData(), Newtonsoft.Json.Formatting.Indented)
+
+                pp.Dispose()
+                pp = Nothing
+
+                ms.Dispose()
+                ms = Nothing
+
+                Return data
+
+            Catch ex As Exception
+
+                Select Case GlobalSettings.Settings.ExcelErrorHandlingMode
+                    Case 0
+                        Return New Object(,) {{ex.Message}, {""}}
+                    Case 1
+                        Return New Object(,) {{ex.GetType.ToString}, {ex.ToString}}
+                    Case Else
+                        Application.EnableVisualStyles()
+                        My.Application.ChangeCulture("en")
+                        My.Application.ChangeUICulture("en")
+                        Dim frmEx As New FormUnhandledException
+                        frmEx.TextBox1.Text = ex.ToString
+                        frmEx.ex = ex
+                        frmEx.ShowDialog()
+                        Return New Object(,) {{"Error"}, {""}}
+                End Select
+
+            End Try
+
+
+        End Function
 
 #End Region
 
