@@ -188,6 +188,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     {
                         if (!GlobalSettings.Settings.ExcelMode) Flowsheet.ShowMessage("PC-SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     }
+                    if (GlobalSettings.Settings.ExcelMode) Console.WriteLine("PC-SAFT calculations may take longer than usual, please be patient...");
                     contents.WriteLine("EoS = cPCSAFTEoS;");
                     break;
                 case Model.PHSC:
@@ -200,6 +201,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     {
                         if (!GlobalSettings.Settings.ExcelMode) Flowsheet.ShowMessage("PHSC calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     }
+                    if (GlobalSettings.Settings.ExcelMode) Console.WriteLine("PHSC calculations may take longer than usual, please be patient...");
                     contents.WriteLine("EoS = cPHSCEoS;");
                     break;
                 case Model.PRBM:
@@ -224,6 +226,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                     {
                         if (!GlobalSettings.Settings.ExcelMode) Flowsheet.ShowMessage("SAFT calculations may take longer than usual, please be patient...", IFlowsheet.MessageType.Tip);
                     }
+                    if (GlobalSettings.Settings.ExcelMode) Console.WriteLine("SAFT calculations may take longer than usual, please be patient...");
                     contents.WriteLine("EoS = cSAFTEoS;");
                     break;
                 case Model.VPT:
@@ -301,6 +304,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 {
                    if (!GlobalSettings.Settings.ExcelMode) CurrentMaterialStream.Flowsheet.ShowMessage("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]", IFlowsheet.MessageType.Information);
                 }
+                if (GlobalSettings.Settings.ExcelMode) Console.WriteLine("Running file '" + Path.GetFileName(filename) + "' on Octave (octave-cli) to calculate property '" + propname + "' with model '" + model + "', [PID: " + octave.OctaveProcess.Id + "]");
                 octave.ExecuteCommand(Path.GetFileNameWithoutExtension(filename), (int)(GlobalSettings.Settings.OctaveTimeoutInMinutes * 60 * 1000));
                 if (GlobalSettings.Settings.CAPEOPENMode)
                 {
@@ -310,6 +314,7 @@ namespace DWSIM.Thermodynamics.AdvancedEOS
                 {
                     if (!GlobalSettings.Settings.ExcelMode) CurrentMaterialStream.Flowsheet.ShowMessage("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s", IFlowsheet.MessageType.Information);
                 }
+                if (GlobalSettings.Settings.ExcelMode) Console.WriteLine("Octave instance with PID " + octave.OctaveProcess.Id + " finished successfully. Time taken: " + (DateTime.Now - octave.OctaveProcess.StartTime).TotalSeconds + "s");
                 switch (prop)
                 {
                     case ThermoProperty.CompressibilityCoeff:
