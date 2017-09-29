@@ -100,20 +100,8 @@ Namespace DWSIM
 
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)
 
-            If My.Settings.RedirectOutput Then
-                My.Application.OpenForms(0).UIThread(Sub()
-                                                         If My.Settings.DebugLevel >= minlevel Then
-                                                             If Not My.Application.ActiveSimulation Is Nothing Then
-                                                                 If Not My.Application.ActiveSimulation.FormOutput Is Nothing Then
-                                                                     My.Application.ActiveSimulation.FormOutput.TextBox1.AppendText(text & vbCrLf)
-                                                                 End If
-                                                             End If
-                                                         End If
-                                                     End Sub)
-            Else
-                If My.Settings.DebugLevel >= minlevel Then Console.WriteLine(text)
-            End If
-
+            If My.Settings.DebugLevel >= minlevel Then Console.WriteLine(text)
+            
         End Sub
 
         Public Shared Sub CheckParallelPInvoke()

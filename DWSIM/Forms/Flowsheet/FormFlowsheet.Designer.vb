@@ -70,7 +70,6 @@ Partial Class FormFlowsheet
         Me.PluginsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExibirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.consoletsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExibirListaDeItensACalcularToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.varpaneltsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.COObjTSMI = New System.Windows.Forms.ToolStripMenuItem()
@@ -491,16 +490,10 @@ Partial Class FormFlowsheet
         'ExibirToolStripMenuItem
         '
         resources.ApplyResources(Me.ExibirToolStripMenuItem, "ExibirToolStripMenuItem")
-        Me.ExibirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.consoletsmi, Me.ExibirListaDeItensACalcularToolStripMenuItem, Me.varpaneltsmi, Me.COObjTSMI, Me.ToolStripSeparator10, Me.showflowsheettoolstripmenuitem, Me.showunitstoolstripmenuitem, Me.ToolStripSeparator11, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
+        Me.ExibirToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExibirListaDeItensACalcularToolStripMenuItem, Me.varpaneltsmi, Me.COObjTSMI, Me.ToolStripSeparator10, Me.showflowsheettoolstripmenuitem, Me.showunitstoolstripmenuitem, Me.ToolStripSeparator11, Me.RestoreLayoutTSMI, Me.tsmiCloseOpenedEditors})
         Me.ExibirToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly
         Me.ExibirToolStripMenuItem.MergeIndex = 9
         Me.ExibirToolStripMenuItem.Name = "ExibirToolStripMenuItem"
-        '
-        'consoletsmi
-        '
-        resources.ApplyResources(Me.consoletsmi, "consoletsmi")
-        Me.consoletsmi.CheckOnClick = True
-        Me.consoletsmi.Name = "consoletsmi"
         '
         'ExibirListaDeItensACalcularToolStripMenuItem
         '
@@ -887,7 +880,6 @@ Partial Class FormFlowsheet
     Public WithEvents ScriptsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents IronRubyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CAPEOPENFlowsheetMonitoringObjectsMOsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents consoletsmi As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExibirListaDeItensACalcularToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents COObjTSMI As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents ExibirToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem

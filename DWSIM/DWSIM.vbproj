@@ -551,12 +551,6 @@
     <Compile Include="Forms\Flowsheet Components\COReportsPanel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Flowsheet Components\ConsoleOutput.Designer.vb">
-      <DependentUpon>ConsoleOutput.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Flowsheet Components\ConsoleOutput.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Forms\Flowsheet Components\WatchPanel.Designer.vb">
       <DependentUpon>WatchPanel.vb</DependentUpon>
     </Compile>
@@ -2043,18 +2037,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\MaterialStreamPanel.es.resx">
       <DependentUpon>MaterialStreamPanel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.de.resx">
-      <DependentUpon>ConsoleOutput.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.en.resx">
-      <DependentUpon>ConsoleOutput.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.es.resx">
-      <DependentUpon>ConsoleOutput.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Flowsheet Components\ConsoleOutput.resx">
-      <DependentUpon>ConsoleOutput.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Flowsheet Components\FlowsheetSurface.de.resx">
       <DependentUpon>FlowsheetSurface.vb</DependentUpon>

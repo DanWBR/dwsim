@@ -25,6 +25,8 @@ Public Class CAPEOPENManager
 
     Private _scontext As Object
 
+    Private folderPath As String = ""
+
     Sub New()
 
         _name = "DWSIM Property Package Manager"
@@ -149,6 +151,8 @@ Public Class CAPEOPENManager
 
         If Not Settings.InitializedCOPPM Then
 
+            folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
+
             Application.EnableVisualStyles()
 
             My.Application.ChangeCulture("en")
@@ -179,8 +183,10 @@ Public Class CAPEOPENManager
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledException2
 
                 AddHandler AppDomain.CurrentDomain.AssemblyResolve, Function(sender, args)
-                                                                        Dim folderPath As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
-                                                                        Dim assemblyPath As String = Path.Combine(folderPath, New AssemblyName(args.Name).Name + ".dll")
+                                                                        Dim aname = New AssemblyName(args.Name).Name
+                                                                        If aname = "Microsoft.WindowsAPICodePack.Shell" Then Return Nothing
+                                                                        If aname = "Microsoft.WindowsAPICodePack" Then Return Nothing
+                                                                        Dim assemblyPath As String = Path.Combine(folderPath, aname + ".dll")
                                                                         If Not File.Exists(assemblyPath) Then
                                                                             Return Assembly.Load(args.Name)
                                                                         Else

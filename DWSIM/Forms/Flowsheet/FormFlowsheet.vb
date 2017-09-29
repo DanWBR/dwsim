@@ -75,7 +75,6 @@ Public Class FormFlowsheet
     Public FormSpreadsheet As New SpreadsheetForm
     Public FormObjects As New SimulationObjectsPanel With {.Flowsheet = Me}
 
-    Public FormOutput As New ConsoleOutput
     Public FormCOReports As New COReportsPanel
     Public FormWatch As New WatchPanel
 
@@ -150,7 +149,6 @@ Public Class FormFlowsheet
         showunitstoolstripmenuitem.Checked = My.Settings.ShowUnitsToolStrip
 
         Me.COObjTSMI.Checked = Me.Options.FlowsheetShowCOReportsWindow
-        Me.consoletsmi.Checked = Me.Options.FlowsheetShowConsoleWindow
         Me.ExibirListaDeItensACalcularToolStripMenuItem.Checked = Me.Options.FlowsheetShowCalculationQueue
         Me.varpaneltsmi.Checked = Me.Options.FlowsheetShowWatchWindow
 
@@ -1096,15 +1094,6 @@ Public Class FormFlowsheet
         Dim fs As New FormScript
         fs.fc = Me
         fs.Show(Me.dckPanel)
-    End Sub
-
-    Private Sub ExibirSaidaDoConsoleToolStripMenuItem_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles consoletsmi.CheckedChanged
-        If consoletsmi.Checked Then
-            FormOutput.Show(dckPanel)
-        Else
-            FormOutput.Hide()
-        End If
-        Me.Options.FlowsheetShowConsoleWindow = consoletsmi.Checked
     End Sub
 
     Private Sub ExibirRelatoriosDosObjetosCAPEOPENToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles COObjTSMI.CheckedChanged

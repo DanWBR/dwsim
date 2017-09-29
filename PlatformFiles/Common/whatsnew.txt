@@ -1,3 +1,9 @@
+Update 11:
+
+- [NEW] Advanced EOS and ThermoC models are now exposed to Excel and CAPE-OPEN
+- [CHG] Excel Add-In enhancements and bug fixes
+- [FIX] Minor bug fixes
+
 Update 10:
 
 - [NEW] Added support for ThermoC Property Package
