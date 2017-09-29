@@ -10,6 +10,7 @@
 		  Imports System.IO
 		  Imports DWSIM.Thermodynamics
 		  Imports DWSIM.GlobalSettings
+		  Imports System.Diagnostics
 		  
 		  <ComVisible(True)> _
 		  Public Class MyRibbon
@@ -44,6 +45,10 @@
 				End If
 				Calculator.ExcelLogForm.Show()
 		    End Sub
+		    
+		    Public Sub Donate(control as IRibbonControl)
+				Process.Start("https://sourceforge.net/p/dwsim/donate/")
+		    End Sub
 
 		  End Class
 	]]>
@@ -52,6 +57,7 @@
 	<Image Name="About" Path="appbar.information.circle.png" />
 	<Image Name="Sample" Path="appbar.office.excel.png" />
 	<Image Name="Log" Path="appbar.app.png" />
+	<Image Name="Donate" Path="appbar.paypal.png" />
 	<CustomUI>
 		<!-- Inside here is the exact RibbonX xml passed to Excel -->
 		<!-- This will only be loaded for Excel 2010 because of the namespace -->
@@ -65,6 +71,7 @@
 			  <button id='Button5' label='Show Log Window' image='Log' size='large' onAction='ShowLogWindow' />
 			  <button id='Button2' label='Help' image='Help' size='large' onAction='ShowHelp' />
 			  <button id='Button3' label='About' image='About' size='large' onAction='ShowAbout' />
+			  <button id='Button6' label='Donate' image='Donate' size='large' onAction='Donate' />
 			</group >
 		    </tab>
 		  </tabs>
