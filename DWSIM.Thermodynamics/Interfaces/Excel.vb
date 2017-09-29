@@ -2893,18 +2893,18 @@ Namespace ExcelAddIn
 
             Console.WriteLine()
 
-            Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Running Excel function '" + method.Name + "' with arguments:")
+            Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] Running Excel function '" + method.Name + "' with arguments:")
 
             Dim args = method.GetParameters
             Dim i As Integer = 0
             For Each arg In args
                 If argvalues(i) IsNot Nothing Then
                     If TypeOf argvalues(i) Is ExcelDna.Integration.ExcelMissing Then
-                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): NO VALUE")
+                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): NO VALUE")
                     ElseIf argvalues(i).GetType.IsArray Then
-                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): " + DirectCast(argvalues(i), Array).ToArrayString)
+                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): " + DirectCast(argvalues(i), Array).ToArrayString)
                     Else
-                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): " + argvalues(i).ToString)
+                        Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] " + arg.Name + " (" + argvalues(i).GetType.ToString + "): " + argvalues(i).ToString)
                     End If
                 End If
                 i += 1
@@ -2919,9 +2919,9 @@ Namespace ExcelAddIn
             Console.WriteLine()
 
             If result.GetType.IsArray Then
-                Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Excel function '" + method.Name + "' ran successfully. Return value: " + DirectCast(result, Array).ToArrayString)
+                Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] Excel function '" + method.Name + "' ran successfully. Return value: " + DirectCast(result, Array).ToArrayString)
             Else
-                Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Excel function '" + method.Name + "' ran successfully. Return value: " + result.ToString)
+                Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] Excel function '" + method.Name + "' ran successfully. Return value: " + result.ToString)
             End If
 
             Console.WriteLine()
@@ -2931,7 +2931,7 @@ Namespace ExcelAddIn
         Shared Sub WriteErrorMessage(method As Reflection.MethodBase, ex As Exception)
 
             Console.WriteLine()
-            Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] Excel function '" + method.Name + "' finished with errors: " + ex.ToString)
+            Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] Excel function '" + method.Name + "' finished with errors: " + ex.ToString)
             Console.WriteLine()
 
         End Sub

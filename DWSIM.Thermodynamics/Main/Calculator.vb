@@ -12,7 +12,7 @@ Public Class Calculator
     Public Shared ExcelLogForm As LogForm
 
     Shared Sub WriteToConsole(text As String, level As Integer)
-        If level <= Settings.DebugLevel Then Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "] " + text)
+        If level <= Settings.DebugLevel Then Console.WriteLine("[Thread ID: " + Threading.Thread.CurrentThread.ManagedThreadId.ToString + "][" + Date.Now.ToString + "] " + text)
     End Sub
 
     Public Shared Function GetLocalString(ByVal text As String) As String
