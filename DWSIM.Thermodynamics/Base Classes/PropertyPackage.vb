@@ -5798,7 +5798,11 @@ Final3:
                     D = subst.ConstantProperties.Solid_Density_Const_D
                     E = subst.ConstantProperties.Solid_Density_Const_E
                     result = Me.CalcCSTDepProp(eqno, A, B, C, D, E, T, 0) 'kmol/m3
-                    val += subst.MassFraction.GetValueOrDefault * 1 / (result * mw)
+                    If eqno = "" OrElse result = 0.0 Then
+                        zerodens += subst.MassFraction.GetValueOrDefault
+                    Else
+                        val += subst.MassFraction.GetValueOrDefault * 1 / (result * mw)
+                    End If
                 ElseIf db = "ChEDL Thermo" And subst.ConstantProperties.SolidDensityEquation <> "" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = subst.ConstantProperties.SolidDensityEquation

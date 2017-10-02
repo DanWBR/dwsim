@@ -462,6 +462,8 @@ out:        d2 = Date.Now
             Dim GL_old, GS_old, GV_old As Double
             Dim GlobalConv As Boolean = False
 
+            Dim SVE As Boolean = False
+
             d1 = Date.Now
 
             etol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_External_Loop_Tolerance).ToDoubleFromInvariant
@@ -524,8 +526,14 @@ out:        d2 = Date.Now
                     S = SL_Result(1) * (1 - V)
                 End If
 
-                'only solids or vapour left
-                If L = 0 Then GoTo out2
+                SVE = False
+
+                'only solids and/or vapour left
+
+                If L = 0.0 Then
+                    SVE = True
+                    GoTo out2
+                End If
 
                 '================================================
                 '== mix vapour and liquid phase =================
@@ -735,8 +743,26 @@ out:            'calculate global phase fractions
 
                 If gcount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) < 0.0000005) And (Math.Abs(GS_old - S) < 0.0000005) Then GlobalConv = True
+out2:
+                If SVE Then
 
+                    'solid-vapor equilibria
+
+                    Dim result = New NestedLoops().Flash_PT(Vz, P, T, PP)
+
+                    S = result(0)
+                    V = result(1)
+                    Vs = result(2)
+                    Vy = result(3)
+
+                    L = 0.0
+                    Vx = PP.RET_NullVector
+
+                    Exit Do
+
+                End If
+
+                If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) < 0.0000005) And (Math.Abs(GS_old - S) < 0.0000005) Then GlobalConv = True
 
             Loop Until GlobalConv
 
