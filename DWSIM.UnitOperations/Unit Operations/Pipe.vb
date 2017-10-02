@@ -682,6 +682,10 @@ Namespace UnitOperations
 
                             End With
 
+                            Hin = Hout
+                            Tin = Tout
+                            Pin = Pout
+
                         End With
 
                     End If
