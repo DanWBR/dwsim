@@ -453,7 +453,7 @@ out:        d2 = Date.Now
 
         End Function
 
-        Public Function Flash_PT_NL(ByVal Vz As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
+        Public Function Flash_PT_NL(ByVal Vz0 As Double(), ByVal P As Double, ByVal T As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
             Dim i, n, ecount, gcount As Integer
             Dim Pb, Pd, Pmin, Pmax, Px As Double
@@ -471,9 +471,11 @@ out:        d2 = Date.Now
             itol = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Internal_Loop_Tolerance).ToDoubleFromInvariant
             maxit_i = Me.FlashSettings(Interfaces.Enums.FlashSetting.PTFlash_Maximum_Number_Of_Internal_Iterations)
 
-            n = Vz.Length - 1
+            n = Vz0.Length - 1
 
-            Dim Vx(n), Vy(n), Vs(n), Vmix(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki_ant(n) As Double
+            Dim Vx(n), Vy(n), Vs(n), Vmix(n), Vx_ant(n), Vy_ant(n), Vp(n), Ki(n), Ki_ant(n), Vz(n) As Double
+
+            Vz = Vz0.Clone
 
             'Calculate Ki`s
             If Not ReuseKI Then
@@ -492,9 +494,9 @@ out:        d2 = Date.Now
 
             'initially put all into liquid phase
             Vx = Vz.Clone
-            S = 0
-            L = 1
-            V = 0
+            S = 0.0
+            L = 1.0
+            V = 0.0
 
             'do flash calculation iterations
             Do
@@ -503,7 +505,8 @@ out:        d2 = Date.Now
                 GS_old = S
                 gcount += 1
 
-                If V < 1 Then
+                If V < 1.0 Then
+
                     'there is some liquid or solid
 
                     '================================================
@@ -533,6 +536,8 @@ out:        d2 = Date.Now
                 If L = 0.0 Then
                     SVE = True
                     GoTo out2
+                Else
+                    SVE = False
                 End If
 
                 '================================================
@@ -743,28 +748,32 @@ out:            'calculate global phase fractions
 
                 If gcount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
-out2:
-                If SVE Then
-
-                    'solid-vapor equilibria
-
-                    Dim result = New NestedLoops().Flash_PT(Vz, P, T, PP)
-
-                    S = result(0)
-                    V = result(1)
-                    Vs = result(2)
-                    Vy = result(3)
-
-                    L = 0.0
-                    Vx = PP.RET_NullVector
-
-                    Exit Do
-
-                End If
-
-                If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) < 0.0000005) And (Math.Abs(GS_old - S) < 0.0000005) Then GlobalConv = True
+out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) < 0.0000005) And (Math.Abs(GS_old - S) < 0.0000005) Then GlobalConv = True
 
             Loop Until GlobalConv
+
+            If SVE Then
+
+                'solid-vapor equilibria
+
+                Dim result = New NestedLoops().Flash_PT(Vz0, P, T, PP)
+
+                V = result(1)
+                Vy = result(3)
+
+                Vs = result(2)
+
+                Dim SL_Result = Flash_SL(result(2), P, T, PP)
+
+                Vx = SL_Result(3)
+                Vs = SL_Result(4)
+
+                L = SL_Result(0) * (1 - V)
+                S = SL_Result(1) * (1 - V)
+
+                'Exit Do
+
+            End If
 
             d2 = Date.Now
 
