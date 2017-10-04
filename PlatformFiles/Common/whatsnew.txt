@@ -1,20 +1,11 @@
+Update 12:
+
+- [FIX] Fixed bugs in the SVLE flash algorithm
+- [FIX] Fixed bugs in the Pipe Segment model
+- [FIX] Fixed bugs in the CSTR editor (Classic UI)
+
 Update 11:
 
 - [NEW] Advanced EOS and ThermoC models are now exposed to Excel and CAPE-OPEN
 - [CHG] Excel Add-In enhancements and bug fixes
 - [FIX] Minor bug fixes
-
-Update 10:
-
-- [NEW] Added support for ThermoC Property Package
-- [FIX] Fixed crashes during loading of simulations on macOS
-- [FIX] Fixed Material Stream cloning on new UI
-- [FIX] Fixed viscosity calculations for petroleum fractions
-- [FIX] Fixed velocity units in Kinetic Reaction editor (new UI)
-
-Update 9:
-
-- [NEW] Anchored Property Lists
-- [NEW] Flowsheet Charts
-- [CHG] Updated syntax highlighting for macOS/Linux script editors
-- [FIX] Minor bug fixes and enhancements
