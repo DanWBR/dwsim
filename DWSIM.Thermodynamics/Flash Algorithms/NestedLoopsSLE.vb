@@ -529,8 +529,6 @@ out:        d2 = Date.Now
                     S = SL_Result(1) * (1 - V)
                 End If
 
-                SVE = False
-
                 'only solids and/or vapour left
 
                 If L = 0.0 Then
@@ -761,8 +759,6 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
                 V = result(1)
                 Vy = result(3)
 
-                Vs = result(2)
-
                 Dim SL_Result = Flash_SL(result(2), P, T, PP)
 
                 Vx = SL_Result(3)
@@ -770,8 +766,6 @@ out2:           If (Math.Abs(GL_old - L) < 0.0000005) And (Math.Abs(GV_old - V) 
 
                 L = SL_Result(0) * (1 - V)
                 S = SL_Result(1) * (1 - V)
-
-                'Exit Do
 
             End If
 
