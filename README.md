@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/dpng11yi6dusqenr?svg=true)](https://ci.appveyor.com/project/DanWBR/dwsim5)
+
 ## DWSIM - Open Source Process Simulator
 Copyright 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo León
 
