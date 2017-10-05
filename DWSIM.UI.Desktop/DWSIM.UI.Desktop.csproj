@@ -282,9 +282,20 @@ rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x86"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x86"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\de"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\docs"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\es"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\help"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\de"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR"
 
 del "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll"
 del "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll"
+
+del "$(SolutionDir)DistPackages\Windows\*vshost*"
+del "$(SolutionDir)DistPackages\Linux\*vshost*"
+del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
 )
 else

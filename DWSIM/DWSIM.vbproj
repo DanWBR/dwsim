@@ -138,7 +138,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -2380,8 +2380,19 @@
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
-del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.exe"
-del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.exe"
+del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\Windows\DWSIM.Thermodynamics.AdvancedEOS*"
+del "$(SolutionDir)DistPackages\Windows\README_ADVEOS.txt"
+del "$(SolutionDir)DistPackages\Windows\*.tmp"
+
+del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
+del "$(SolutionDir)DistPackages\Linux\DWSIM.Thermodynamics.AdvancedEOS*"
+del "$(SolutionDir)DistPackages\Linux\README_ADVEOS.txt"
+del "$(SolutionDir)DistPackages\Linux\*.tmp"
+
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
+
+rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
 
 )
 else

@@ -332,8 +332,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)Assets" "$(SolutionDir)DWSIM\bin\$(ConfigurationName)\" /E /Y /F /D
-xcopy "$(TargetDir)*" "$(SolutionDir)DWSIM\bin\$(ConfigurationName)\" /E /Y /F /D</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
