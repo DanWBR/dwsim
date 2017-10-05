@@ -1,4 +1,8 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dpng11yi6dusqenr?svg=true)](https://ci.appveyor.com/project/DanWBR/dwsim5)
+[![GitHub issues](https://img.shields.io/github/issues/DanWBR/dwsim5.svg)](https://github.com/DanWBR/dwsim5/issues)
+[![GitHub stars](https://img.shields.io/github/stars/DanWBR/dwsim5.svg)](https://github.com/DanWBR/dwsim5/stargazers)
+[![forums](https://img.shields.io/badge/join-the%20forums-yellowgreen.svg)](hhttps://sourceforge.net/p/dwsim/discussion/?source=navbar)
+[![wiki](https://img.shields.io/badge/browse-the%20wiki-orange.svg)](http://dwsim.inforside.com.br)
 
 ## DWSIM - Open Source Process Simulator
 Copyright 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo León
