@@ -3,7 +3,7 @@
 [![tickets](https://img.shields.io/badge/view-tickets-blackgray.svg)](https://sourceforge.net/p/dwsim/tickets/)
 [![forums](https://img.shields.io/badge/join-the%20forums-yellowgreen.svg)](https://sourceforge.net/p/dwsim/discussion/?source=navbar)
 [![wiki](https://img.shields.io/badge/visit-website-blackblue.svg)](http://dwsim.inforside.com.br)
-[![donate](https://img.shields.io/badge/donate-blue.svg)](https://sourceforge.net/p/dwsim/donate/)
+[![donate](https://img.shields.io/badge/support-donate-greenblue.svg)](https://sourceforge.net/p/dwsim/donate/)
 
 ## DWSIM - Open Source Process Simulator
 Copyright 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo León
