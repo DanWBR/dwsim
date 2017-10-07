@@ -1679,6 +1679,279 @@ Final3:     T = bbb
             str.AppendLine("    Volumetric flow: " & SystemsOfUnits.Converter.ConvertFromSI(su.volumetricFlow, ostr.Phases(0).Properties.volumetric_flow.GetValueOrDefault).ToString(numberformat, ci) & " " & su.volumetricFlow)
             str.AppendLine("    Vapor fraction: " & ostr.Phases(2).Properties.molarfraction.GetValueOrDefault.ToString(numberformat, ci))
 
+            Dim comp_ant As Double = 0
+
+            str.AppendLine()
+            str.AppendLine("Elevation Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Elevation (" & su.distance & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.distance, (Math.Atan(ps.Elevacao / (ps.Comprimento ^ 2 - ps.Elevacao ^ 2) ^ 0.5) * 180 / Math.PI)).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Pressure Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pressure (" & su.pressure & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.pressure, res.PressaoInicial.GetValueOrDefault).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+
+            str.AppendLine()
+            str.AppendLine("Friction Pressure Drop Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pressure Drop (" & su.deltaP & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpPorFriccao).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Hydrostatic Pressure Drop Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pressure Drop (" & su.deltaP & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.deltaP, res.DpPorHidrostatico).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Temperature Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Temperature (" & su.temperature & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.temperature, res.TemperaturaInicial.GetValueOrDefault).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Liquid Velocity Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Velocity (" & su.velocity & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.LiqVel.GetValueOrDefault).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Vapor Velocity Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Vapor Velocity (" & su.velocity & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.velocity, res.VapVel.GetValueOrDefault).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Liquid Reynolds Number Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Re")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & res.LiqRe.GetValueOrDefault.ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Vapor Reynolds Number Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Vapor Re")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & res.VapRe.GetValueOrDefault.ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Liquid Holdup Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Liquid Holdup")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & res.HoldupDeLiquido.GetValueOrDefault.ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Flow Pattern Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Flow Pattern")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & res.TipoFluxo)
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Heat Exchange Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Heat Exchanged (" & su.heatflow & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.CalorTransferido.GetValueOrDefault).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Overall HTC Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Overall HTC (" & su.heat_transf_coeff & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC.GetValueOrDefault).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Internal HTC Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Internal HTC (" & su.heat_transf_coeff & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_internal).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Pipe Wall HTC Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Pipe Wall HTC (" & su.heat_transf_coeff & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_pipewall).ToString(numberformat, ci))
+                Next
+                If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                    comp_ant += ps.Comprimento / ps.Incrementos
+                End If
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Insulation HTC Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Insulation HTC (" & su.heat_transf_coeff & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_insulation).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("External HTC Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "External HTC (" & su.heat_transf_coeff & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heat_transf_coeff, res.HTC_external).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
+            str.AppendLine()
+            str.AppendLine("Energy Flow Profile")
+            str.AppendLine()
+            str.AppendLine("Length (" & su.distance & ")" & vbTab & "Energy Flow (" & su.heatflow & ")")
+            comp_ant = 0
+            For Each ps In Profile.Sections.Values
+                For Each res In ps.Resultados
+                    str.AppendLine(SystemsOfUnits.Converter.ConvertFromSI(su.distance, comp_ant).ToString(numberformat, ci) &
+                                   vbTab & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, res.EnergyFlow_Inicial).ToString(numberformat, ci))
+                    If ps.TipoSegmento = "Tubulaosimples" Or ps.TipoSegmento = "" Or ps.TipoSegmento = "Straight Tube Section" Then
+                        comp_ant += ps.Comprimento / ps.Incrementos
+                    End If
+                Next
+            Next
+
             Return str.ToString
 
         End Function
