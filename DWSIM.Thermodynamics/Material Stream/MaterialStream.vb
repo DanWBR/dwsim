@@ -546,6 +546,9 @@ Namespace Streams
                     'calculate additional properties
                     .CalcAdditionalPhaseProperties()
 
+                    'process overriden properties (single phase)
+                    .ProcessOverridenProperties(PhaseType.SinglePhase)
+
                     If Me.Phases(2).Properties.molarfraction.GetValueOrDefault >= 0 And Me.Phases(2).Properties.molarfraction.GetValueOrDefault <= 1 Then
                         .DW_CalcPhaseProps(PropertyPackages.Phase.Liquid)
                         .DW_CalcLiqMixtureProps()
@@ -553,6 +556,9 @@ Namespace Streams
                         .DW_ZerarPhaseProps(PropertyPackages.Phase.Liquid)
                         .DW_CalcLiqMixtureProps()
                     End If
+
+                    'process overriden properties (liquid mix)
+                    .ProcessOverridenProperties(PhaseType.LiquidMixture)
 
                     If DebugMode Then AppendDebugLine(String.Format("Phase properties calculated succesfully."))
 
@@ -575,6 +581,9 @@ Namespace Streams
                             .DW_CalcTwoPhaseProps(PropertyPackages.Phase.Liquid, PropertyPackages.Phase.Vapor)
                             .DW_CalcKvalue()
                     End Select
+
+                    'process overriden properties (overall)
+                    .ProcessOverridenProperties(PhaseType.Overall)
 
                     'calculate molar concentrations
                     .DW_CalcConcentrations()

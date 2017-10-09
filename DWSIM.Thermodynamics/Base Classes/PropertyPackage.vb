@@ -39,6 +39,7 @@ Imports DWSIM.Thermodynamics.Streams
 Imports Newtonsoft.Json
 
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
+Imports Microsoft.Scripting.Hosting
 
 Namespace PropertyPackages
 
@@ -54,6 +55,14 @@ Namespace PropertyPackages
         Vapor
         Solid
         Mixture
+
+    End Enum
+
+    Public Enum PhaseType
+
+        SinglePhase
+        LiquidMixture
+        Overall
 
     End Enum
 
@@ -138,6 +147,8 @@ Namespace PropertyPackages
         'DWSIM IPropertyPackage
         Implements IPropertyPackage
 
+#Region "   Members"
+
         Public Const ClassId As String = ""
 
         <JsonIgnore> <System.NonSerialized()> Private m_ms As Interfaces.IMaterialStream = Nothing
@@ -161,13 +172,9 @@ Namespace PropertyPackages
         Private LoopVarF, LoopVarX As Double, LoopVarState As State
         <JsonIgnore> <System.NonSerialized()> Dim m_Flowsheet As IFlowsheet
 
-        Public Property ForceNewFlashAlgorithmInstance As Boolean = False
-
-        Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
-
-        Public Property ExceptionLog As String = ""
-
         <JsonIgnore> <System.NonSerialized()> Private _como As Object 'CAPE-OPEN Material Object
+
+#End Region
 
 #Region "   Constructor"
 
@@ -329,6 +336,18 @@ Namespace PropertyPackages
 #End Region
 
 #Region "   Properties"
+
+        Public Property ForceNewFlashAlgorithmInstance As Boolean = False
+
+        Property FlashSettings As New Dictionary(Of Interfaces.Enums.FlashSetting, String)
+
+        Public Property ExceptionLog As String = ""
+
+        'forced solids list
+        Public Property ForcedSolids As New List(Of String)
+
+        'overriden phase properties' calculation routines
+        Public Property PropertyOverrides As New Dictionary(Of String, String)
 
         Public ReadOnly Property PhaseMappings() As Dictionary(Of String, PhaseInfo)
             Get
@@ -1158,7 +1177,7 @@ Namespace PropertyPackages
                     End If
                 Next
             Next
-            
+
         End Sub
         Public Overridable Sub DW_CalcOverallProps()
 
@@ -2868,7 +2887,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                             Vs = result(8)
 
                             If Not Settings.CAPEOPENMode Then
-                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc)  Then
+                                If Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidateEquilibriumCalc) Then
 
                                     fge = xl * Me.DW_CalcGibbsEnergy(Vx, T, P)
                                     fge += xl2 * Me.DW_CalcGibbsEnergy(Vx2, T, P)
@@ -4400,6 +4419,53 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 #End Region
 
 #Region "   Commmon Functions"
+
+        Public Sub ProcessOverridenProperties(ptype As PhaseType)
+
+            If PropertyOverrides.Count > 0 Then
+
+                Dim engine As ScriptEngine
+                Dim scope As ScriptScope
+
+                engine = IronPython.Hosting.Python.CreateEngine()
+                engine.Runtime.LoadAssembly(GetType(System.String).Assembly)
+                engine.Runtime.LoadAssembly(GetType(BaseClasses.ConstantProperties).Assembly)
+                scope = engine.CreateScope()
+                scope.SetVariable("flowsheet", Flowsheet)
+                scope.SetVariable("plugins", Flowsheet.UtilityPlugins)
+                scope.SetVariable("this", Me)
+                scope.SetVariable("matstr", CurrentMaterialStream)
+
+                For Each item In PropertyOverrides
+
+                    Dim source As Microsoft.Scripting.Hosting.ScriptSource = engine.CreateScriptSourceFromString(item.Value, Microsoft.Scripting.SourceCodeKind.Statements)
+                    Try
+                        source.Execute(scope)
+                        Dim value = scope.GetVariable("propval")
+                        Dim phasename As String = item.Key.Split(",")(0)
+                        Dim propname As String = item.Key.Split(",")(1)
+                        Dim phase = CurrentMaterialStream.GetPhase(phasename)
+                        phase.GetType.GetProperty(propname).SetValue(phase, value)
+                    Catch ex As Exception
+                        Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
+                        Dim gobj = DirectCast(CurrentMaterialStream, MaterialStream).GraphicObject
+                        If gobj IsNot Nothing Then
+                            Throw New Exception("[" & Tag & " / " & gobj.Tag & "] Error calculating overriden property '" & item.Key & "': " & ops.FormatException(ex).ToString)
+                        Else
+                            Throw New Exception("[" & Tag & "] Error calculating overriden property '" & item.Key & "': " & ops.FormatException(ex).ToString)
+                        End If
+                    Finally
+                        source = Nothing
+                    End Try
+
+                Next
+
+                engine = Nothing
+                scope = Nothing
+
+            End If
+
+        End Sub
 
         Public Function DW_GetConstantProperties() As List(Of Interfaces.ICompoundConstantProperties)
 

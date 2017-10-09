@@ -381,7 +381,10 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                 ActCoeff = PP.DW_CalcFugCoeff(Vx, T, P, State.Liquid).MultiplyConstY(P).DivideY(Vp)
                 MaxX = MaxAct.DivideY(ActCoeff)
                 For i = 0 To n
-                    If T > Tc(i) Then MaxX(i) = 1 'Supercritical gases are put to liquid phase
+                    'Supercritical gases are put to liquid phase
+                    If T > Tc(i) Then MaxX(i) = 1
+                    'If compound is in forced solids list, put it in solid phase
+                    If PP.ForcedSolids.Contains(Vn(i)) Then MaxX(i) = 0.0
                 Next
 
                 MaxLiquPhase = Vz.DivideY(MaxX)
