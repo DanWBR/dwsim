@@ -514,6 +514,30 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static TableRow CreateAndAddTextBoxAndThreeButtonsRow(this DynamicLayout container, String label, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, String buttonlabel3, String imageResID3, Action<TextBox, EventArgs> command0, Action<Button, EventArgs> command, Action<Button, EventArgs> command2, Action<Button, EventArgs> command3)
+        {
+
+            var txt = new TextBox { Width = 300, Text = label };
+            var btn = new Button { Width = 100, Text = buttonlabel };
+            var btn2 = new Button { Width = 100, Text = buttonlabel2 };
+            var btn3 = new Button { Width = 100, Text = buttonlabel3 };
+
+            if (imageResID != null) btn.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID), 22, 22, ImageInterpolation.Default);
+            if (imageResID2 != null) btn2.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID2), 22, 22, ImageInterpolation.Default);
+            if (imageResID3 != null) btn3.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imageResID3), 22, 22, ImageInterpolation.Default);
+
+            if (command0 != null) txt.TextChanged += (sender, e) => command0.Invoke((TextBox)sender, e);
+            if (command != null) btn.Click += (sender, e) => command.Invoke((Button)sender, e);
+            if (command2 != null) btn2.Click += (sender, e) => command2.Invoke((Button)sender, e);
+            if (command3 != null) btn3.Click += (sender, e) => command3.Invoke((Button)sender, e);
+
+            var tr = new TableRow(txt, GetPlaceHolderLabel(), null, btn, GetPlaceHolderLabel(), btn2, GetPlaceHolderLabel(), btn3);
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+            return tr;
+
+        }
+
         public static TableRow CreateAndAddTwoButtonsRow(this DynamicLayout container, String buttonlabel, String imageResID, String buttonlabel2, String imageResID2, Action<Button, EventArgs> command, Action<Button, EventArgs> command2)
         {
 

@@ -10924,6 +10924,10 @@ Final3:
 
         End Sub
 
+        Public Sub DisplayAdvancedEditingForm() Implements IPropertyPackage.DisplayAdvancedEditingForm
+
+        End Sub
+
         <JsonIgnore> <XmlIgnore> Property Flowsheet As IFlowsheet Implements IPropertyPackage.Flowsheet
             Get
                 Return m_Flowsheet

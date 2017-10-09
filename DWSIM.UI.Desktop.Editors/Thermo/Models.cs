@@ -186,7 +186,7 @@ namespace DWSIM.UI.Desktop.Editors
         {
             pp.Flowsheet = flowsheet;
             var tr = new TableRow();
-            tr = s.CreateAndAddTextBoxAndTwoButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Remove", null,
+            tr = s.CreateAndAddTextBoxAndThreeButtonsRow(ppcontainer, pp.Tag, "Edit", null, "Advanced", null, "Remove", null,
                                                                 (arg1, arg2) =>
                                                                 {
                                                                     pp.Tag = arg1.Text;
@@ -203,6 +203,12 @@ namespace DWSIM.UI.Desktop.Editors
                                                                     else
                                                                     {
                                                                         Application.Instance.Invoke(() => { pp.DisplayEditingForm(); });
+                                                                    }
+                                                                },
+                                                                (arg1, arg2) =>
+                                                                {
+                                                                    {
+                                                                        Application.Instance.Invoke(() => { pp.DisplayAdvancedEditingForm(); });
                                                                     }
                                                                 },
                                                                (arg1, arg2) =>

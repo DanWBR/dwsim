@@ -219,7 +219,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        MQAAAk1TRnQBSQFMAgEBCgEAAfwBCgH8AQoBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        MQAAAk1TRnQBSQFMAgEBCgEAAQQBCwEEAQsBEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEgBgABMDEAAQEDOwFkAWUCUgH0AbICgQH/Aa8CgQH/AWICSAH2AUICQQFzIAADLQFG
         AVkCVgG+AVsCWQHEATECMAFNAWACWQHrAQABgQEAAf8DAwEEpAADKAE9AWQCXAHnAbICgQH/AcsBqwGJ
         Af8B0QG0AZUB/wG7AY4BgQH/AbUBhwGBAf8BqwKBAf8BYAJZAesDLQFGEAADHgErAVECTwGlA38B/gGP
@@ -573,6 +573,15 @@ welche in der linken Tabelle markiert ist.</value>
   <data name="GroupBox11.Text" xml:space="preserve">
     <value>Stabilitätstest</value>
   </data>
+  <data name="btnConfigPPAdv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>91, 216</value>
+  </data>
+  <data name="btnConfigPPAdv.Text" xml:space="preserve">
+    <value>Erweiterte</value>
+  </data>
+  <data name="btnDeletePP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 216</value>
+  </data>
   <data name="btnDeletePP.Text" xml:space="preserve">
     <value>Löschen</value>
   </data>
@@ -581,6 +590,9 @@ welche in der linken Tabelle markiert ist.</value>
   </data>
   <data name="btnConfigPP.Text" xml:space="preserve">
     <value>Konfigurieren</value>
+  </data>
+  <data name="btnCopyPP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 216</value>
   </data>
   <data name="btnCopyPP.Text" xml:space="preserve">
     <value>Kopieren</value>

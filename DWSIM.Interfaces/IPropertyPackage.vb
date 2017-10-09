@@ -54,6 +54,8 @@
 
     Sub DisplayEditingForm()
 
+    Sub DisplayAdvancedEditingForm()
+
     Sub CalcAdditionalPhaseProperties()
 
     ReadOnly Property MobileCompatible As Boolean

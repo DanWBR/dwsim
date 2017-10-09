@@ -1694,4 +1694,15 @@ Public Class FormSimulSettings
 
     End Sub
 
+    Private Sub btnConfigPPAdv_Click(sender As Object, e As EventArgs) Handles btnConfigPPAdv.Click
+        Dim ppid As String = ""
+        If DWSIM.App.IsRunningOnMono Then
+            ppid = dgvpp.Rows(dgvpp.SelectedCells(0).RowIndex).Cells(0).Value
+        Else
+            ppid = dgvpp.SelectedRows(0).Cells(0).Value
+        End If
+        Dim pp As PropertyPackages.PropertyPackage = FrmChild.Options.PropertyPackages(ppid)
+        pp.DisplayAdvancedEditingForm()
+    End Sub
+
 End Class
