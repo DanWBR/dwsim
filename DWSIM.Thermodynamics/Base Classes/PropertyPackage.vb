@@ -10969,7 +10969,7 @@ Final3:
             Dim container2 = sui.GetDefaultContainer()
 
             container2.Tag = "Property Overrides"
-            container2.CreateAndAddLabelRow("Overriden Properties")
+            container2.CreateAndAddLabelRow("Override Phase Properties")
             container2.CreateAndAddLabelRow2("You can write a python script to override calculated phase properties." & vbCrLf &
                                              "Select the Phase/Property pair and write the override script. Your script must contain a variable named 'propval' which will hold the override value." & vbCrLf &
                                              "Available variables:" & vbCrLf &
