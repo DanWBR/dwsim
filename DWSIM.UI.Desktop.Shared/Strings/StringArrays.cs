@@ -22,7 +22,7 @@ namespace DWSIM.UI.Desktop.Shared
         }
         public static String[] reactionphase()
         {
-            return new String[] { "Vapor", "Liquid" };
+            return new String[] { "Mixture", "Vapor", "Liquid" };
         }
         public static String[] unitssystem()
         {
