@@ -52,7 +52,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CodeEditorControl.cs" />
     <Compile Include="Controls\Flowsheet\FlowsheetControlBase.cs" />
     <Compile Include="Controls\Flowsheet\FlowsheetControlOpenGL.cs" />
     <Compile Include="Controls\Flowsheet\FlowsheetControlCPU.cs" />

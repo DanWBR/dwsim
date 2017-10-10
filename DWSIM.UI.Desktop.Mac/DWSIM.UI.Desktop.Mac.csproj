@@ -100,6 +100,10 @@
       <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
+      <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
+      <Name>DWSIM.ExtensionMethods.Eto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
       <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
       <Name>DWSIM.FlowsheetBase</Name>

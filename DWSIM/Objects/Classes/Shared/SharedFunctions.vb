@@ -4,6 +4,8 @@ Imports System.Globalization
 Imports System.Reflection
 Imports System.Linq
 Imports Cudafy
+Imports DWSIM.UI.Controls
+Imports DWSIM.UI.Desktop
 
 '    Shared Functions
 '    Copyright 2008-2014 Daniel Wagner O. de Medeiros
@@ -30,7 +32,9 @@ Namespace DWSIM
         Public Shared Sub InitializeSettings()
 
             'initialize Eto.Forms
-            Dim etoinst = New Eto.Forms.Application(Eto.Platforms.WinForms)
+            Dim platform As New Eto.WinForms.Platform()
+            platform.Add(Of CodeEditorControl.ICodeEditor)(Function() New WinForms.CodeEditorControlHandler())
+            Dim etoinst = New Eto.Forms.Application(platform)
             etoinst.Attach()
 
             'set language
@@ -101,7 +105,7 @@ Namespace DWSIM
         Public Shared Sub WriteToConsole(text As String, minlevel As Integer)
 
             If My.Settings.DebugLevel >= minlevel Then Console.WriteLine(text)
-            
+
         End Sub
 
         Public Shared Sub CheckParallelPInvoke()

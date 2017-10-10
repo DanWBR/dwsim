@@ -1,5 +1,4 @@
 ﻿using System;
-using DWSIM.Interfaces.Enums.GraphicObjects;
 using Eto.Forms;
 namespace DWSIM.UI.Controls
 {
@@ -26,5 +25,3 @@ namespace DWSIM.UI.Controls
 
     }
 }
-
-

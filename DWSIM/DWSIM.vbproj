@@ -1177,6 +1177,10 @@
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>DWSIM.Controls.DockPanel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
+      <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
+      <Name>DWSIM.ExtensionMethods.Eto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
@@ -1244,6 +1248,10 @@
     <ProjectReference Include="..\DWSIM.Thermodynamics\DWSIM.Thermodynamics.vbproj">
       <Project>{369bc7af-836b-4de1-93e3-b051bc148b23}</Project>
       <Name>DWSIM.Thermodynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DWSIM.UI.Desktop.WinForms\DWSIM.UI.Desktop.WinForms.csproj">
+      <Project>{a4b56ff1-995e-4288-8801-7f086668c4a2}</Project>
+      <Name>DWSIM.UI.Desktop.WinForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\DWSIM.UnitOperations\DWSIM.UnitOperations.vbproj">
       <Project>{9d7733e4-9b6f-437f-aaec-ca3106aca688}</Project>

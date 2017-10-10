@@ -154,7 +154,7 @@ namespace DWSIM.UI.Shared
 
             foreach (var item in options)
             {
-                drop.Items.Add(item);
+                drop.Items.Add(new ListItem() {  Key = item, Text = item});
             }
 
             drop.SelectedIndex = position;

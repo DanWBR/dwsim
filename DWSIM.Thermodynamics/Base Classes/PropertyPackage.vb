@@ -41,6 +41,9 @@ Imports Newtonsoft.Json
 Imports cv = DWSIM.SharedClasses.SystemsOfUnits.Converter
 Imports Microsoft.Scripting.Hosting
 
+Imports sui = DWSIM.UI.Shared.Common
+Imports DWSIM.UI.Shared
+
 Namespace PropertyPackages
 
 #Region "    Global Enumerations"
@@ -4435,6 +4438,8 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                 scope.SetVariable("plugins", Flowsheet.UtilityPlugins)
                 scope.SetVariable("this", Me)
                 scope.SetVariable("matstr", CurrentMaterialStream)
+                scope.SetVariable("T", CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault)
+                scope.SetVariable("P", CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault)
 
                 For Each item In PropertyOverrides
 
@@ -4442,10 +4447,10 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Try
                         source.Execute(scope)
                         Dim value = scope.GetVariable("propval")
-                        Dim phasename As String = item.Key.Split(",")(0)
-                        Dim propname As String = item.Key.Split(",")(1)
+                        Dim phasename As String = item.Key.Split("/")(0)
+                        Dim propname As String = item.Key.Split("/")(1)
                         Dim phase = CurrentMaterialStream.GetPhase(phasename)
-                        phase.GetType.GetProperty(propname).SetValue(phase, value)
+                        phase.Properties.GetType.GetProperty(propname).SetValue(phase.Properties, New Nullable(Of Double)(Convert.ToDouble(value)))
                     Catch ex As Exception
                         Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
                         Dim gobj = DirectCast(CurrentMaterialStream, MaterialStream).GraphicObject
@@ -10316,6 +10321,18 @@ Final3:
             Catch ex As Exception
             End Try
 
+            Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
+
+            Try
+                ForcedSolids = JsonConvert.DeserializeObject(Of List(Of String))((From el As XElement In data Select el Where el.Name = "ForcedSolids").SingleOrDefault.Value)
+            Catch ex As Exception
+            End Try
+
+            Try
+                PropertyOverrides = JsonConvert.DeserializeObject(Of Dictionary(Of String, String))((From el As XElement In data Select el Where el.Name = "PropertyOverrides").SingleOrDefault.Value)
+            Catch ex As Exception
+            End Try
+
             Try
                 For Each xel As XElement In (From xel2 As XElement In data Select xel2 Where xel2.Name = "Parameters").SingleOrDefault.Elements.ToList
                     If m_par.ContainsKey(xel.@ID) Then m_par(xel.@ID) = Double.Parse(xel.@Value, ci) Else m_par.Add(xel.@ID, Double.Parse(xel.@Value, ci))
@@ -10620,6 +10637,11 @@ Final3:
                 .Add(New XElement("Tag", Tag))
                 .Add(New XElement("TPSeverity", _tpseverity))
                 .Add(New XElement("TPCompIDs", XMLSerializer.XMLSerializer.ArrayToString2(_tpcompids, ci)))
+
+                Dim jsonoptions As New JsonSerializerSettings With {.StringEscapeHandling = StringEscapeHandling.EscapeHtml, .Formatting = Formatting.Indented}
+
+                .Add(New XElement("ForcedSolids", JsonConvert.SerializeObject(ForcedSolids, jsonoptions)))
+                .Add(New XElement("PropertyOverrides", JsonConvert.SerializeObject(PropertyOverrides, jsonoptions)))
 
                 .Add(New XElement("Parameters"))
 
@@ -10926,7 +10948,81 @@ Final3:
 
         Public Sub DisplayAdvancedEditingForm() Implements IPropertyPackage.DisplayAdvancedEditingForm
 
+            Dim container1 = sui.GetDefaultContainer()
 
+            container1.Tag = "Advanced Settings"
+            container1.CreateAndAddLabelRow("Forced Solids")
+            container1.CreateAndAddLabelRow2("Select the compounds which will be forcedly put into the solid phase." & vbCrLf &
+                                             "This setting will work only with the Nested Loops SVLE (Eutetic) Flash Algorithm.")
+
+            For Each comp In Flowsheet.SelectedCompounds.Values
+                container1.CreateAndAddCheckBoxRow(comp.Name, ForcedSolids.Contains(comp.Name),
+                                                   Sub(sender, e)
+                                                       If sender.Checked.GetValueOrDefault Then
+                                                           If Not ForcedSolids.Contains(comp.Name) Then ForcedSolids.Add(comp.Name)
+                                                       Else
+                                                           If ForcedSolids.Contains(comp.Name) Then ForcedSolids.Remove(comp.Name)
+                                                       End If
+                                                   End Sub)
+            Next
+
+            Dim container2 = sui.GetDefaultContainer()
+
+            container2.Tag = "Property Overrides"
+            container2.CreateAndAddLabelRow("Overriden Properties")
+            container2.CreateAndAddLabelRow2("You can write a python script to override calculated phase properties." & vbCrLf &
+                                             "Select the Phase/Property pair and write the override script. Your script must contain a variable named 'propval' which will hold the override value." & vbCrLf &
+                                             "Available variables:" & vbCrLf &
+                                             "'flowsheet': the Flowsheet Object" & vbCrLf &
+                                             "'this': the Property Package itself" & vbCrLf &
+                                             "'matstr': the currently associated Material Stream" & vbCrLf &
+                                             "'T': temperature (K) of the currently associated Material Stream" & vbCrLf &
+                                             "'P': pressure (Pa) of the currently associated Material Stream")
+
+            Dim phases = New String() {"Mixture", "Vapor", "OverallLiquid", "Liquid1", "Liquid2", "Solid"}
+
+            Dim pprops = Type.GetType("DWSIM.Thermodynamics.BaseClasses.PhaseProperties").GetProperties()
+
+            Dim plist As New List(Of String)
+
+            plist.Add("")
+            For Each p In phases
+                For Each prop In pprops
+                    plist.Add(p & "/" & prop.Name)
+                Next
+            Next
+
+            Dim codeeditor As New UI.Controls.CodeEditorControl() With {.Height = 300}
+
+            Dim dd = container2.CreateAndAddDropDownRow("Phase/Property", plist, 0,
+                                               Sub(sender, e)
+                                                   If PropertyOverrides.ContainsKey(sender.SelectedKey) Then
+                                                       codeeditor.Text = PropertyOverrides(sender.SelectedKey)
+                                                   End If
+                                               End Sub)
+
+            container2.CreateAndAddControlRow(codeeditor)
+            container2.CreateAndAddLabelAndButtonRow("Update/Save Override Script", "Save", Nothing,
+                                             Sub(sender, e)
+                                                 If Not PropertyOverrides.ContainsKey(dd.SelectedKey) Then
+                                                     PropertyOverrides.Add(dd.SelectedKey, "")
+                                                 End If
+                                                 PropertyOverrides(dd.SelectedKey) = codeeditor.Text
+                                             End Sub)
+            container2.CreateAndAddLabelAndButtonRow("Clear/Remove Override Script", "Clear", Nothing,
+                                             Sub(sender, e)
+                                                 codeeditor.Text = ""
+                                                 If PropertyOverrides.ContainsKey(dd.SelectedKey) Then
+                                                     PropertyOverrides.Remove(dd.SelectedKey)
+                                                 End If
+                                             End Sub)
+            container2.CreateAndAddLabelAndButtonRow("View SI Units for Phase Properties", "View Units", Nothing,
+                                                     Sub(sender, e)
+                                                         Process.Start("https://github.com/DanWBR/dwsim5/blob/master/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L267")
+                                                     End Sub)
+
+            Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 700, {container1, container2})
+            form.Show()
 
         End Sub
 
