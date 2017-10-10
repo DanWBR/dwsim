@@ -148,6 +148,10 @@
       <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
       <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods.Eto\DWSIM.ExtensionMethods.Eto.csproj">
+      <Project>{5ba7546b-010c-4197-975e-f462bbea1ec4}</Project>
+      <Name>DWSIM.ExtensionMethods.Eto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>

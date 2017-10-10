@@ -1,11 +1,2 @@
-Update 12:
+Version 5.1:
 
-- [FIX] Fixed bugs in the SVLE flash algorithm
-- [FIX] Fixed bugs in the Pipe Segment model
-- [FIX] Fixed bugs in the CSTR editor (Classic UI)
-
-Update 11:
-
-- [NEW] Advanced EOS and ThermoC models are now exposed to Excel and CAPE-OPEN
-- [CHG] Excel Add-In enhancements and bug fixes
-- [FIX] Minor bug fixes

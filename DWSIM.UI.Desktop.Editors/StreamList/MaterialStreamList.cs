@@ -60,6 +60,7 @@ namespace DWSIM.UI.Desktop.Editors
             List<string> mslist;
 
             mslist = Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream).Select((y) => y.GraphicObject.Tag).ToList();
+            mslist.Reverse();
 
             foreach (var ms in Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream))
             {

@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2FFD2514-E4F9-4C19-B38E-B77560585D61}</ProjectGuid>
+    <ProjectGuid>{5BA7546B-010C-4197-975E-F462BBEA1EC4}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DWSIM.UI.Desktop.Shared</RootNamespace>
-    <AssemblyName>DWSIM.UI.Desktop.Shared</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DWSIM.ExtensionMethods.Eto</RootNamespace>
+    <AssemblyName>DWSIM.ExtensionMethods.Eto</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
+    <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>8f5cfff7</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,70 +36,34 @@
       <HintPath>..\packages\Eto.Forms.2.4.0-build1087\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
-      <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.2.0.0-unstable0956\lib\net45\OxyPlot.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SkiaSharp, Version=1.58.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\SkiaSharp.1.58.0\lib\net45\SkiaSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CodeEditorControl.cs" />
-    <Compile Include="Controls\Flowsheet\FlowsheetControlBase.cs" />
-    <Compile Include="Controls\Flowsheet\FlowsheetControlOpenGL.cs" />
-    <Compile Include="Controls\Flowsheet\FlowsheetControlCPU.cs" />
-    <Compile Include="Controls\ProgressDialog.cs" />
-    <Compile Include="Flowsheet\Flowsheet.cs" />
+    <Compile Include="EtoExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\SolvingFlowsheet.cs" />
-    <Compile Include="Controls\SolvingFlowsheet.eto.cs">
-      <DependentUpon>SolvingFlowsheet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Strings\StringArrays.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DWSIM.Drawing.SkiaSharp\DWSIM.DrawingTools.SkiaSharp.vbproj">
-      <Project>{77040ecc-07b9-4b21-8b1f-7e45764e35f0}</Project>
-      <Name>DWSIM.DrawingTools.SkiaSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.DrawingTools.SkiaSharp.Extended\DWSIM.DrawingTools.SkiaSharp.Extended.csproj">
-      <Project>{a58eb237-f703-45cf-89f9-e8b91bff76c1}</Project>
-      <Name>DWSIM.DrawingTools.SkiaSharp.Extended</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
       <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
       <Name>DWSIM.ExtensionMethods</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.FlowsheetBase\DWSIM.FlowsheetBase.vbproj">
-      <Project>{aea79e29-5dff-4aa8-b431-087a67a1467b}</Project>
-      <Name>DWSIM.FlowsheetBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.FlowsheetSolver\DWSIM.FlowsheetSolver.vbproj">
-      <Project>{1d223714-d3c8-463a-b4dc-fefa1323ec87}</Project>
-      <Name>DWSIM.FlowsheetSolver</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.GlobalSettings\DWSIM.GlobalSettings.vbproj">
       <Project>{725c8134-9fe3-43aa-9b33-d9046657fb2a}</Project>
       <Name>DWSIM.GlobalSettings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Interfaces\DWSIM.Interfaces.vbproj">
-      <Project>{50bfd69a-487e-4b38-86ea-48acd85a0eb1}</Project>
-      <Name>DWSIM.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DWSIM.SharedClasses\DWSIM.SharedClasses.vbproj">
-      <Project>{30e167d2-5b5a-453a-a92c-18ff3bbb6691}</Project>
-      <Name>DWSIM.SharedClasses</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +77,12 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets'))" />
   </Target>
-  <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

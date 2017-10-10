@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Eto.Drawing;
 using Eto.Forms;
-
 using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Shared
@@ -13,7 +12,7 @@ namespace DWSIM.UI.Shared
     public static class Common
     {
 
-        static string imgprefix = "DWSIM.UI.Desktop.Shared.Resources.Icons.";
+        static string imgprefix = "DWSIM.ExtensionMethods.Eto.Resources.Icons.";
 
         public static bool IsValidDouble(string s)
         {

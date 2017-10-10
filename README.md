@@ -27,6 +27,7 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 **Shared Projects**
 DWSIM.Apps.Updater|Updater Application
 DWSIM.ExtensionMethods|Extension Methods
+DWSIM.ExtensionMethods.Eto|Extension Methods for Eto.Forms
 DWSIM.FileDownloader|File downloader for automatic updates
 DWSIM.FlowsheetSolver|Flowsheet Solver library
 DWSIM.GlobalSettings|Shared global settings
