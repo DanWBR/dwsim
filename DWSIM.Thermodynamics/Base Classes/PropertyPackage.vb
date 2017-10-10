@@ -10971,8 +10971,8 @@ Final3:
             container2.Tag = "Property Overrides"
             container2.CreateAndAddLabelRow("Override Phase Properties")
             container2.CreateAndAddLabelRow2("You can write a python script to override calculated phase properties." & vbCrLf &
-                                             "Select the Phase/Property pair and write the override script. Your script must contain a variable named 'propval' which will hold the override value." & vbCrLf &
-                                             "Available variables:" & vbCrLf &
+                                             "Select the Phase/Property pair and write the override script. Your script must contain a variable named 'propval' which will hold the override value." & vbCrLf & vbCrLf &
+                                             "Available variables:" & vbCrLf & vbCrLf &
                                              "'flowsheet': the Flowsheet Object" & vbCrLf &
                                              "'this': the Property Package itself" & vbCrLf &
                                              "'matstr': the currently associated Material Stream" & vbCrLf &
@@ -10992,7 +10992,7 @@ Final3:
                 Next
             Next
 
-            Dim codeeditor As New UI.Controls.CodeEditorControl() With {.Height = 300}
+            Dim codeeditor As New UI.Controls.CodeEditorControl() With {.Height = 280}
 
             Dim dd = container2.CreateAndAddDropDownRow("Phase/Property", plist, 0,
                                                Sub(sender, e)

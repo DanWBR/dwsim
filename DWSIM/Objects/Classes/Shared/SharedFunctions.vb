@@ -32,10 +32,17 @@ Namespace DWSIM
         Public Shared Sub InitializeSettings()
 
             'initialize Eto.Forms
-            Dim platform As New Eto.WinForms.Platform()
-            platform.Add(Of CodeEditorControl.ICodeEditor)(Function() New WinForms.CodeEditorControlHandler())
-            Dim etoinst = New Eto.Forms.Application(platform)
-            etoinst.Attach()
+            If IsRunningOnMono() Then
+                Dim platform As New Eto.WinForms.Platform()
+                platform.Add(Of CodeEditorControl.ICodeEditor)(Function() New WinForms.CodeEditorControlHandler())
+                Dim etoinst = New Eto.Forms.Application(platform)
+                etoinst.Attach()
+            Else
+                Dim platform As New Eto.Wpf.Platform()
+                platform.Add(Of CodeEditorControl.ICodeEditor)(Function() New WPF.CodeEditorControlHandler())
+                Dim etoinst = New Eto.Forms.Application(platform)
+                etoinst.Attach()
+            End If
 
             'set language
             GlobalSettings.Settings.CultureInfo = My.Settings.CultureInfo

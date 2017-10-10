@@ -108,7 +108,7 @@ namespace DWSIM.UI.Desktop.Editors
             c.CreateAndAddLabelRow2(dl, "Black-Oil: the compound being created is based on black-oil data.");
 
             c.CreateAndAddLabelRow(dl, "Load Data");
-            c.CreateAndAddLabelAndButtonRow(dl, "You can load compound data frmo an existing JSON file.", "Load Data", null, (sender, e) =>
+            c.CreateAndAddLabelAndButtonRow(dl, "You can load compound data from an existing JSON file.", "Load Data", null, (sender, e) =>
             {
                 var dialog = new OpenFileDialog();
                 dialog.Title = "Load Compound Data";
@@ -121,11 +121,11 @@ namespace DWSIM.UI.Desktop.Editors
                         comp = Newtonsoft.Json.JsonConvert.DeserializeObject<DWSIM.Thermodynamics.BaseClasses.ConstantProperties>(File.ReadAllText(dialog.FileName));
                         estimatefromunifac = false;
 
-                        MessageBox.Show("Data successfully loaded from JSON file.", MessageBoxType.Information);
+                        MessageBox.Show("Data successfully loaded from JSON file.","Information", MessageBoxButtons.OK,   MessageBoxType.Information, MessageBoxDefaultButton.OK);
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error loading compound data to JSON file: " + ex.ToString(), MessageBoxType.Information);
+                        MessageBox.Show("Error loading compound data to JSON file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxType.Error, MessageBoxDefaultButton.OK);
                     }
                 }
             });
