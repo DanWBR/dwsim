@@ -39,6 +39,15 @@ namespace DWSIM.UI.Desktop.Editors
                     this.ParentWindow.Close();
                 });
 
+            this.CreateAndAddLabelRow("Compound Creator Wizard");
+            var btn0a = this.CreateAndAddLabelAndButtonRow("Create a new compound through guided steps", "Open Compound Creator Wizard", null,
+                (sender, e) =>
+                {
+                    var form = new CompoundCreatorWizard(flowsheet);
+                    this.ParentWindow.Close();
+                    form.SetupAndDisplayPage(1);
+                });
+
             this.CreateAndAddLabelRow("Petroleum Characterization");
             var btn1 = this.CreateAndAddLabelAndButtonRow("Create new compounds from Bulk C7+ Petroleum Assay information", "Bulk C7+ Petroleum Characterization", null,
                 (sender, e) =>
@@ -57,6 +66,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             btn0.Width = 350;
+            btn0a.Width = 350;
             btn1.Width = 350;
             btn2.Width = 350;
 

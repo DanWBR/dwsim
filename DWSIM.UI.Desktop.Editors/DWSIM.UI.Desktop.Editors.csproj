@@ -85,6 +85,7 @@
     <Compile Include="Charts\OxyPlotChart.cs" />
     <Compile Include="Compounds\BulkC7.cs" />
     <Compile Include="Compounds\CompoundCreator.cs" />
+    <Compile Include="Compounds\CompoundCreatorWizard.cs" />
     <Compile Include="Compounds\CompoundViewer.cs" />
     <Compile Include="Compounds\DistCurves.cs" />
     <Compile Include="Compounds\Tools.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Utilities\BinaryEnvelope.cs" />
     <Compile Include="Utilities\PhaseEnvelope.cs" />
     <Compile Include="Utilities\TrueCriticalPoint.cs" />
+    <Compile Include="WizardSkeleton\WizardSkeleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

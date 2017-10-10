@@ -3175,4 +3175,9 @@ Public Class FormFlowsheet
         Me.FormSurface.FlowsheetDesignSurface.DrawingObjects.Add(myobj)
         Me.FormSurface.FlowsheetDesignSurface.Invalidate()
     End Sub
+
+    Private Sub AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem.Click
+        Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
+        wform.SetupAndDisplayPage(1)
+    End Sub
 End Class
