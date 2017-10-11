@@ -133,23 +133,22 @@ namespace DWSIM.UI.Desktop.Editors
             page.Init(Width, Height);
 
             var dl = c.GetDefaultContainer();
-            dl.Height = Height;
-            dl.Width = Width;
-
+            
             dl.CreateAndAddLabelRow("Process Details");
             dl.CreateAndAddLabelRow2("Check/uncheck boxes according to your process charateristics and DWSIM will choose the best thermodynamic model setup for your simulation.");
             dl.CreateAndAddLabelRow2("Please check the minimum amount of boxes as possible, avoiding redundancy and/or incompatible items.");
+            dl.CreateAndAddLabelRow2("If you prefer to setup the Property Packages manually, close this wizard and go to 'Setup' > 'Basis'.");
 
             dl.CreateAndAddLabelRow("General Information");
 
-            dl.CreateAndAddCheckBoxRow("My process can be modeled using the Ideal Gas law for vapor phase and Iedal Solution Theory for liquid phase", hasLowPressure, (sender, e) => hasLowPressure = sender.Checked.GetValueOrDefault());
+            dl.CreateAndAddCheckBoxRow("My process can be modeled using the Ideal Gas law for vapor phase and Ideal Solution Theory for liquid phase", hasLowPressure, (sender, e) => hasLowPressure = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("My process deals with Hydrocarbons only", hasHC, (sender, e) => hasHC = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("My process has Hydrocarbons and Water at higher pressures", hasHCW, (sender, e) => hasHC = sender.Checked.GetValueOrDefault());
+            dl.CreateAndAddCheckBoxRow("My process has Hydrocarbons and Water at higher pressures", hasHCW, (sender, e) => hasHCW = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("My process has Hydrocarbons and Water and they can be considered immiscible", hasHCWI, (sender, e) => hasHCWI = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("My process has polar chemicals", hasPolarChemicals, (sender, e) => hasPolarChemicals = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("My process deals with a refrigeration cycle", hasRefrigeration, (sender, e) => hasRefrigeration = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("This is a single Water/Steam simulation", hasSingleCompoundWater, (sender, e) => hasSingleCompoundWater = sender.Checked.GetValueOrDefault());
-            dl.CreateAndAddCheckBoxRow("I'm simulating a process which involves aqueous electrolytes", hasSingleCompoundWater, (sender, e) => hasSingleCompoundWater = sender.Checked.GetValueOrDefault());
+            dl.CreateAndAddCheckBoxRow("I'm simulating a process which involves aqueous electrolytes", hasElectrolytes, (sender, e) => hasElectrolytes = sender.Checked.GetValueOrDefault());
 
             dl.CreateAndAddLabelRow("Expected Phases");
             dl.CreateAndAddLabelRow2("The following options are mutually exclusive:");
@@ -157,7 +156,16 @@ namespace DWSIM.UI.Desktop.Editors
             dl.CreateAndAddCheckBoxRow("I'm expecting to deal with two liquid phases in this simulation", hasTwoLiquids, (sender, e) => hasTwoLiquids = sender.Checked.GetValueOrDefault());
             dl.CreateAndAddCheckBoxRow("I'm expecting to deal with solids in this simulation", hasSolids, (sender, e) => hasSolids = sender.Checked.GetValueOrDefault());
 
-            page.ContentContainer.Add(dl);
+            if (Application.Instance.Platform.IsGtk)
+            {
+                page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
+            }
+            else
+            {
+                dl.Height = Height;
+                dl.Width = Width;
+                page.ContentContainer.Add(dl);
+            }
             page.ShowModal();
 
         }

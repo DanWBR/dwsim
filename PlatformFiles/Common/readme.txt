@@ -40,6 +40,13 @@ The full changelog, including code changes and their authors can be viewed at ht
 
 Version 5.1
 
+- [NEW] Simulation Setup Wizard (New UI)
+- [NEW] Compound Creator Wizard
+- [NEW] Calculated Phase Properties can now be overriden by the user
+- [NEW] Force compound to be in the solid phase only
+- [NEW] Added full profile information for Pipe Segment result reports (New UI)
+- [FIX] Added missing CoolProp and Petalas-Aziz libraries for macOS
+
 Version 5.0 Update 12
 
 - [FIX] Fixed bugs in the SVLE flash algorithm

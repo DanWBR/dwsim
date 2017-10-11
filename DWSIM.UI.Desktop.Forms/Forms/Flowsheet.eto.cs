@@ -42,6 +42,8 @@ namespace DWSIM.UI.Forms
 
         private string backupfilename = "";
 
+        public bool newsim = false;
+
         ContextMenu selctxmenu, deselctxmenu;
 
         public Dictionary<string, Interfaces.ISimulationObject> ObjectList = new Dictionary<string, Interfaces.ISimulationObject>();
@@ -555,8 +557,11 @@ namespace DWSIM.UI.Forms
 
             }
 
-            var sswiz = new SimulationSetupWizard(this.FlowsheetObject);
-            sswiz.DisplayPage0(this);
+            if (newsim)
+            {
+                var sswiz = new SimulationSetupWizard(this.FlowsheetObject);
+                sswiz.DisplayPage0(this);
+            }
 
         }
 

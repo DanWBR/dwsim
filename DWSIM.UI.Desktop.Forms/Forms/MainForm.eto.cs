@@ -122,6 +122,7 @@ namespace DWSIM.UI
                 {
                     OpenForms -= 1;
                 };
+                form.newsim = true;
                 form.Show();
             };
 
