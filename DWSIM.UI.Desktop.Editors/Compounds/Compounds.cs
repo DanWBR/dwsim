@@ -192,6 +192,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
+
+
     }
 
     class CompoundItem

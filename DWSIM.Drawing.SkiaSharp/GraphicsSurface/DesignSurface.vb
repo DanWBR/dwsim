@@ -176,6 +176,7 @@ Public Class GraphicsSurface
         Dim text As New Text.StringBuilder
 
         text.AppendLine("How to create and run a new simulation")
+        text.AppendLine("(If you've configured the simulation using the Setup Wizard, skip to Step 3)")
         text.AppendLine("")
         text.AppendLine("1. Select Compounds to add to the simulation ('Setup' > 'Compounds')")
         text.AppendLine("2. Add at least one Property Package and one Flash Algorithm ('Setup' > 'Basis')")

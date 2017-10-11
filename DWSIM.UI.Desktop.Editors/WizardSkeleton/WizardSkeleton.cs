@@ -102,7 +102,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             var tr = new TableRow();
-            if (FooterText != "") tr.Cells.Add(new Label{Text = FooterText});
+            if (FooterText != "") tr.Cells.Add(new Label{Text = FooterText, VerticalAlignment = VerticalAlignment.Center});
             tr.Cells.Add(null);
             foreach (var btn in buttons)
             {

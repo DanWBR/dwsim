@@ -555,6 +555,9 @@ namespace DWSIM.UI.Forms
 
             }
 
+            var sswiz = new SimulationSetupWizard(this.FlowsheetObject);
+            sswiz.DisplayPage0(this);
+
         }
 
         void Flowsheet_Closing(object sender, System.ComponentModel.CancelEventArgs e)
