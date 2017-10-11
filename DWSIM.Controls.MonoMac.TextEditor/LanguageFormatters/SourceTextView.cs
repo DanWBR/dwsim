@@ -437,6 +437,7 @@ namespace MonoMac.AppKit.TextKit.Formatter
 		#endregion
 
 		#region Override Methods
+
 		/// <summary>
 		/// Look for special keys being pressed and does specific processing based on
 		/// the key.

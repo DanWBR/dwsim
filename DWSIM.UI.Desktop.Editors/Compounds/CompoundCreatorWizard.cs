@@ -302,7 +302,7 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
             }
 
-            page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height });
+            page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
             page2.ShowModal();
 
         }
@@ -355,7 +355,7 @@ namespace DWSIM.UI.Desktop.Editors
                 });
             }
 
-            page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height });
+            page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
             page.ShowModal();
 
         }
@@ -473,7 +473,7 @@ namespace DWSIM.UI.Desktop.Editors
                 if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / 1000;
             });
 
-            page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height });
+            page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
             page.ShowModal();
 
         }

@@ -156,10 +156,10 @@ namespace DWSIM.UI.Controls.Mac
             //AllowsImageEditing = App.Preferences.AllowImageEditing;
             //AllowsDocumentBackgroundColorChange = App.Preferences.AllowBackgroundColor;
             //BackgroundColor = App.Preferences.EditorBackgroundColor;
-            UsesFontPanel = true;
+            UsesFontPanel = false;
             UsesRuler = false;
-            CompleteClosures = true;
-            //WrapClosures = App.Preferences.WrapClosures;
+            CompleteClosures = false;
+            WrapClosures = false;
             //SelectAfterWrap = App.Preferences.SelectAfterWrap;
 
             HorizontallyResizable = true;
@@ -169,10 +169,10 @@ namespace DWSIM.UI.Controls.Mac
             TextContainer.WidthTracksTextView = true;
 
             // Auto Complete Preferences
-            //AllowAutoComplete = true;
-            //AutoCompleteKeywords = true;
-            //AutoCompleteKeywords = true;
-            DefaultWordsOnlyIfKeywordsEmpty = true;
+            AllowAutoComplete = false;
+            AutoCompleteKeywords = false;
+            AutoCompleteKeywords = false;
+            DefaultWordsOnlyIfKeywordsEmpty = false;
 
         }
 

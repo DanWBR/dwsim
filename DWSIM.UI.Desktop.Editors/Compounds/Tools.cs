@@ -65,10 +65,13 @@ namespace DWSIM.UI.Desktop.Editors
                 this.ParentWindow.Close();
             });
 
-            btn0.Width = 350;
-            btn0a.Width = 350;
-            btn1.Width = 350;
-            btn2.Width = 350;
+            if (!Application.Instance.Platform.IsGtk)
+            {
+                btn0.Width = 350;
+                btn0a.Width = 350;
+                btn1.Width = 350;
+                btn2.Width = 350;
+            }
 
         }
     }
