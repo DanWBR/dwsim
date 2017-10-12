@@ -73,12 +73,12 @@
       <HintPath>Libraries\gtk-sharp-2.0\atk-sharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Eto, Version=2.3.6429.11781, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.0-build1087\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.3.6486.38870, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.4.0-build1146\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Gtk2, Version=2.3.6429.11788, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Gtk.2.4.0-build1087\lib\net45\Eto.Gtk2.dll</HintPath>
+    <Reference Include="Eto.Gtk2, Version=2.3.6486.38877, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Gtk.2.4.0-build1146\lib\net45\Eto.Gtk2.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">

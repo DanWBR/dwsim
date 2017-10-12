@@ -4445,11 +4445,13 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
 
                     Dim source As Microsoft.Scripting.Hosting.ScriptSource = engine.CreateScriptSourceFromString(item.Value, Microsoft.Scripting.SourceCodeKind.Statements)
                     Try
-                        source.Execute(scope)
-                        Dim value = scope.GetVariable("propval")
                         Dim phasename As String = item.Key.Split("/")(0)
                         Dim propname As String = item.Key.Split("/")(1)
                         Dim phase = CurrentMaterialStream.GetPhase(phasename)
+                        scope.SetVariable("currval", phase.Properties.GetType.GetProperty(propname).GetValue(phase.Properties))
+                        scope.SetVariable("phase", phase)
+                        source.Execute(scope)
+                        Dim value = scope.GetVariable("propval")
                         phase.Properties.GetType.GetProperty(propname).SetValue(phase.Properties, New Nullable(Of Double)(Convert.ToDouble(value)))
                     Catch ex As Exception
                         Dim ops As ExceptionOperations = engine.GetService(Of ExceptionOperations)()
@@ -10976,6 +10978,8 @@ Final3:
                                              "'flowsheet': the Flowsheet Object" & vbCrLf &
                                              "'this': the Property Package itself" & vbCrLf &
                                              "'matstr': the currently associated Material Stream" & vbCrLf &
+                                             "'phase': the current phase object" & vbCrLf &
+                                             "'currval': the current property value" & vbCrLf &
                                              "'T': temperature (K) of the currently associated Material Stream" & vbCrLf &
                                              "'P': pressure (Pa) of the currently associated Material Stream")
 
@@ -10992,7 +10996,7 @@ Final3:
                 Next
             Next
 
-            Dim codeeditor As New UI.Controls.CodeEditorControl() With {.Height = 280}
+            Dim codeeditor As New UI.Controls.CodeEditorControl() With {.Height = 200}
 
             Dim dd = container2.CreateAndAddDropDownRow("Phase/Property", plist, 0,
                                                Sub(sender, e)
@@ -11021,7 +11025,7 @@ Final3:
                                                          Process.Start("https://github.com/DanWBR/dwsim5/blob/master/DWSIM.SharedClasses/UnitsOfMeasure/SystemsOfUnits.vb#L267")
                                                      End Sub)
 
-            Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 700, {container1, container2})
+            Dim form = sui.GetDefaultTabbedForm("Advanced Property Package Settings", 700, 600, {container1, container2})
             form.Show()
 
         End Sub

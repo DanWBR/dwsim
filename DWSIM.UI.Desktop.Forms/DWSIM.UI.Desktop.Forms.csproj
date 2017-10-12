@@ -75,8 +75,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
     </Reference>
-    <Reference Include="Eto, Version=2.3.6429.11781, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.0-build1087\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.3.6486.38870, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.4.0-build1146\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
