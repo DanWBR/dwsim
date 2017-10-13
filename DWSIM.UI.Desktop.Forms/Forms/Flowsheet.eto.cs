@@ -83,7 +83,8 @@ namespace DWSIM.UI.Forms
 
             FlowsheetObject.FlowsheetControl = FlowsheetControl;
 
-            FlowsheetControl.FlowsheetSurface.InvalidateCallback = (() => {
+            FlowsheetControl.FlowsheetSurface.InvalidateCallback = (() =>
+            {
                 Application.Instance.Invoke(() =>
                 {
                     FlowsheetControl.Invalidate();
@@ -178,7 +179,8 @@ namespace DWSIM.UI.Forms
             {
                 if (Application.Instance.Platform.IsMac) FlowsheetControl.FlowsheetSurface.InputRelease();
                 var obj = FlowsheetControl.FlowsheetSurface.SelectedObject;
-                if (obj == null) {
+                if (obj == null)
+                {
                     var surface = FlowsheetControl.FlowsheetSurface;
                     surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
                     surface.ZoomAll((int)FlowsheetControl.Width, (int)FlowsheetControl.Height);
@@ -419,7 +421,8 @@ namespace DWSIM.UI.Forms
             {
                 ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager_Mac(FlowsheetObject);
             }
-            else {
+            else
+            {
                 ScriptListControl = new DWSIM.UI.Desktop.Editors.ScriptManager(FlowsheetObject);
             }
 
@@ -726,8 +729,12 @@ namespace DWSIM.UI.Forms
                             break;
                     }
 
-                    outtxt.Items.Add(item);
-                    outtxt.SelectedIndex = outtxt.Items.Count - 1;
+                    try
+                    {
+                        outtxt.Items.Add(item);
+                        outtxt.SelectedIndex = outtxt.Items.Count - 1;
+                    }
+                    catch { }
 
                 });
             });
@@ -791,15 +798,17 @@ namespace DWSIM.UI.Forms
                 var isobj = FlowsheetObject.AddObject(obj.GraphicObject.ObjectType, obj.GraphicObject.X + 50, obj.GraphicObject.Y + 50, obj.GraphicObject.Tag + "_CLONE");
                 var id = isobj.Name;
                 ((Interfaces.ICustomXMLSerialization)isobj).LoadData(((Interfaces.ICustomXMLSerialization)obj).SaveData());
-                isobj.Name = id;  
+                isobj.Name = id;
                 if (obj.GraphicObject.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.MaterialStream)
-                { 
-                    foreach (var phase in ((DWSIM.Thermodynamics.Streams.MaterialStream)isobj).Phases.Values) {
-	                    foreach (var comp in FlowsheetObject.SelectedCompounds.Values) {
-		                    phase.Compounds[comp.Name].ConstantProperties = comp;
-	                    }
+                {
+                    foreach (var phase in ((DWSIM.Thermodynamics.Streams.MaterialStream)isobj).Phases.Values)
+                    {
+                        foreach (var comp in FlowsheetObject.SelectedCompounds.Values)
+                        {
+                            phase.Compounds[comp.Name].ConstantProperties = comp;
+                        }
                     }
-                }              
+                }
             };
 
             var item6 = new ButtonMenuItem { Text = "Delete", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Delete_96px.png")) };

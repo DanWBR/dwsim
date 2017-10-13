@@ -57,12 +57,12 @@ namespace DWSIM.UI.Desktop.Editors
 
             string[] props = null, units = null;
             string value = null;
-            List<string> mslist;
+            List<ISimulationObject> mslist;
 
-            mslist = Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream).Select((y) => y.GraphicObject.Tag).ToList();
-            mslist.Reverse();
+            mslist = Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream).ToList();
+            //mslist.Reverse();
 
-            foreach (var ms in Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream))
+            foreach (var ms in mslist)
             {
                 props = ms.GetProperties(Interfaces.Enums.PropertyType.ALL);
                 units = (string[])props.Clone();
@@ -74,7 +74,7 @@ namespace DWSIM.UI.Desktop.Editors
             foreach (var item in props)
             {
                 var list = new List<string>();
-                foreach (var ms in Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream))
+                foreach (var ms in mslist)
                 {
                     list.Add("");
                 }
@@ -87,7 +87,7 @@ namespace DWSIM.UI.Desktop.Editors
             foreach (string prop in props)
             {
                 j = 0;
-                foreach (var ms in Flowsheet.SimulationObjects.Values.Where((x) => x is MaterialStream))
+                foreach (var ms in mslist)
                 {
                     var data = ms.GetPropertyValue(prop, su);
                     if (data != null) value = data.ToString(); else value = "";
@@ -115,9 +115,9 @@ namespace DWSIM.UI.Desktop.Editors
             var maxlength = props.Select((x) => Flowsheet.GetTranslatedString(x)).Select((x) => x.Length).Max();
 
             string textlist = "Property / Material Stream".PadRight(maxlength + 10);
-            foreach (var name in mslist)
+            foreach (var ms in mslist)
             {
-                textlist += name.PadLeft(PadSize);
+                textlist += ms.GraphicObject.Tag.PadLeft(PadSize);
             }
             textlist += Environment.NewLine;
 

@@ -124,6 +124,7 @@ Imports System.Dynamic
                         gobj.ObjectType = ObjectType.GO_FloatingTable Or
                         gobj.ObjectType = ObjectType.GO_MasterTable Or
                         gobj.ObjectType = ObjectType.GO_SpreadsheetTable Or
+                        gobj.ObjectType = ObjectType.GO_Text Or
                         gobj.ObjectType = ObjectType.GO_Chart Then
 
                         Me.FlowsheetSurface.DeleteSelectedObject(gobj)
@@ -217,7 +218,11 @@ Imports System.Dynamic
     Public MustOverride Function GetNewInstance() As IFlowsheet Implements IFlowsheet.GetNewInstance
 
     Public Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetSelectedFlowsheetSimulationObject
-        Return SimulationObjects(FlowsheetSurface.SelectedObject.Name)
+        If FlowsheetSurface.SelectedObject IsNot Nothing Then
+            If SimulationObjects.ContainsKey(FlowsheetSurface.SelectedObject.Name) Then Return SimulationObjects(FlowsheetSurface.SelectedObject.Name) Else Return Nothing
+        Else
+            Return Nothing
+        End If
     End Function
 
     Public Function GetSurface() As Object Implements IFlowsheet.GetSurface
