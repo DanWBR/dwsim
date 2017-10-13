@@ -1,7 +1,7 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1
-Copyright (c) Daniel Medeiros, Gregor Reichert, Gustavo Leon
+Version 5.1 Update 1
+Copyright (c) 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
 DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
@@ -37,6 +37,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 1
+
+- [FIX] Fixed issues with the Classic UI on High DPI displays
+- [FIX] Fixed inverted Material Stream list (New UI)
+- [FIX] Fixed text flowsheet object removal (New UI)
 
 Version 5.1
 

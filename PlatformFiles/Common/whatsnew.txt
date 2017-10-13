@@ -1,3 +1,9 @@
+Version 5.1 Update 1:
+
+- [FIX] Fixed issues with the Classic UI on High DPI displays
+- [FIX] Fixed inverted Material Stream list (New UI)
+- [FIX] Fixed text flowsheet object removal (New UI)
+
 Version 5.1:
 
 - [NEW] Simulation Setup Wizard (New UI)
@@ -6,4 +12,3 @@ Version 5.1:
 - [NEW] Force compound to be in the solid phase only
 - [NEW] Added full profile information for Pipe Segment result reports (New UI)
 - [FIX] Added missing CoolProp and Petalas-Aziz libraries for macOS
-
