@@ -1606,6 +1606,8 @@ Imports System.Dynamic
         AddPropPacks()
         AddFlashAlgorithms()
 
+        Dim addedcomps As New List(Of String)
+
         Task.Factory.StartNew(Sub()
                                   Dim csdb As New Databases.ChemSep
                                   Dim cpa() As ConstantProperties
@@ -1617,26 +1619,30 @@ Imports System.Dynamic
                                   Dim cpdb As New Databases.CoolProp
                                   cpdb.Load()
                                   cpa = cpdb.Transfer()
+                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
                                   Dim bddb As New Databases.Biodiesel
                                   bddb.Load()
                                   cpa = bddb.Transfer()
+                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
                                   Dim chedl As New Databases.ChEDL_Thermo
                                   chedl.Load()
                                   cpa = chedl.Transfer().ToArray()
+                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
                                   Dim elec As New Databases.Electrolyte
                                   elec.Load()
                                   cpa = elec.Transfer().ToArray()
+                                  addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
                                   AddSystemsOfUnits()
                                   AddDefaultProperties()

@@ -210,11 +210,11 @@ Namespace DWSIM.Flowsheet
 
         Public Property MassBalanceRelativeTolerance As Double = 0.01 Implements IFlowsheetOptions.MassBalanceRelativeTolerance
 
-        Public Property DisplayCornerPropertyList As Boolean = True Implements IFlowsheetOptions.DisplayCornerPropertyList
+        Public Property DisplayCornerPropertyList As Boolean = False Implements IFlowsheetOptions.DisplayCornerPropertyList
 
         Public Property DisplayCornerPropertyListPosition As Enums.ListPosition = Enums.ListPosition.RightBottom Implements IFlowsheetOptions.DisplayCornerPropertyListPosition
 
-        Public Property DisplayFloatingPropertyTables As Boolean = False Implements IFlowsheetOptions.DisplayFloatingPropertyTables
+        Public Property DisplayFloatingPropertyTables As Boolean = True Implements IFlowsheetOptions.DisplayFloatingPropertyTables
 
         Public Property DisplayCornerPropertyListFontColor As String = "DimGray" Implements IFlowsheetOptions.DisplayCornerPropertyListFontColor
 

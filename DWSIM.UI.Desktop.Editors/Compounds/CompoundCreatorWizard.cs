@@ -932,7 +932,7 @@ namespace DWSIM.UI.Desktop.Editors
                 comp.Critical_Temperature = joback.CalcTc(comp.Normal_Boiling_Point, jc);
                 comp.Critical_Pressure = joback.CalcPc(jc);
                 comp.TemperatureOfFusion = joback.CalcTf(jc);
-                comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc) * 1000;
+                comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc);
                 comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc);
                 comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc);
                 comp.Critical_Volume = joback.CalcVc(jc);

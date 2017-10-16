@@ -153,9 +153,10 @@ namespace DWSIM.UI.Desktop.Editors
 
                 s.CreateAndAddLabelRow(sview, "Edit Stages");
                 s.CreateAndAddLabelRow(sview, "Number / Name / Pressure");
+                var tlist = new List<TextBox>();
                 foreach (var stage in column.Stages)
                 {
-                    s.CreateAndAddDoubleTextBoxRow(sview, nf, (column.Stages.IndexOf(stage) + 1).ToString(), stage.Name, cv.ConvertFromSI(su.pressure, stage.P),
+                    tlist.Add(s.CreateAndAddDoubleTextBoxRow(sview, nf, (column.Stages.IndexOf(stage) + 1).ToString(), stage.Name, cv.ConvertFromSI(su.pressure, stage.P),
                                                    (arg10, arg20) =>
                                                    {
                                                        stage.Name = arg10.Text;
@@ -165,13 +166,25 @@ namespace DWSIM.UI.Desktop.Editors
                                                        {
                                                            stage.P = cv.ConvertToSI(su.pressure, Double.Parse(arg11.Text));
                                                        }
-                                                   });
+                                                   }));
                 }
+                s.CreateAndAddLabelAndButtonRow(sview, "Interpolate Pressures", "Interpolate", null, (sender2, e2) =>
+                {
+                    var first = tlist[0].Text.ToDoubleFromCurrent();
+                    var last = tlist[tlist.Count - 1].Text.ToDoubleFromCurrent();
+                    var n = tlist.Count;
+                    int i = 1;
+                    for (i = 1; i < n - 1; i++)
+                    {
+                        tlist[i].Text = (first + (last - first) * i / (n - 1)).ToString(nf);
+                    }
+                });
+                s.CreateAndAddDescriptionRow(sview, "Calculate inner pressures using end stage defined values.");
 
                 var scroll = new Eto.Forms.Scrollable();
                 scroll.Content = sview;
 
-                s.CreateDialog(scroll, "Edit Stages", 300, 300).ShowModal(container);
+                s.CreateDialog(scroll, "Edit Stages", 400, 600).ShowModal(container);
 
             });
 

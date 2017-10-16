@@ -630,6 +630,7 @@ namespace DWSIM.UI.Forms
             if (!backup)
             {
                 FlowsheetObject.Options.FilePath = path;
+                Title = FlowsheetObject.Options.SimulationName + " [" + FlowsheetObject.Options.FilePath + "]";
                 FlowsheetObject.ShowMessage("Simulation file successfully saved to '" + path + "'.", Interfaces.IFlowsheet.MessageType.Information);
                 FlowsheetObject.ProcessScripts(Interfaces.Enums.Scripts.EventType.SimulationSaved, Interfaces.Enums.Scripts.ObjectType.Simulation, "");
             }

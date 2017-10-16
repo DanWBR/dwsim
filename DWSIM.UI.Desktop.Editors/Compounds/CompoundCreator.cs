@@ -125,7 +125,7 @@ namespace DWSIM.UI.Desktop.Editors
                 tc.Text = cv.ConvertFromSI(su.temperature, joback.CalcTc(comp.Normal_Boiling_Point, jc)).ToString(nf);
                 pc.Text = cv.ConvertFromSI(su.pressure, joback.CalcPc(jc)).ToString(nf);
                 tf.Text = cv.ConvertFromSI(su.temperature, joback.CalcTf(jc)).ToString(nf);
-                hfus.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcHf(jc) * 1000).ToString(nf);
+                hfus.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcHf(jc)).ToString(nf);
                 hf.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcDHf(jc)).ToString(nf);
                 gf.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcDGf(jc)).ToString(nf);
                 comp.Critical_Volume = joback.CalcVc(jc);
