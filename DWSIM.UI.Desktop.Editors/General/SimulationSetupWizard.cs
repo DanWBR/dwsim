@@ -77,7 +77,7 @@ namespace DWSIM.UI.Desktop.Editors
             dl.CreateAndAddLabelRow2("Click 'Next' to continue.");
 
             page1.ContentContainer.Add(dl);
-            page1.ShowModal(owner);
+            page1.Show();
         
         }
 
@@ -97,7 +97,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             page1.Title = "Simulation Setup Wizard";
             page1.HeaderTitle = "Step 1 - Add Compounds";
-            page1.HeaderDescription = "Select the compounds to add to the simulation. If your compound is not on the list, you can add\nother compounds using the Compound Creator Wizard ('Setup' > 'Compounds' > 'Compound Tools' > 'Compound Creator Wizard').";
+            page1.HeaderDescription = "Select the compounds to add to the simulation. If your compound is not on the list, you can create and add a new one\nusing the Compound Creator Wizard ('Setup' > 'Compounds' > 'Compound Tools' > 'Compound Creator Wizard').";
             page1.FooterText = "";
 
             page1.Init(Width, Height);
@@ -107,7 +107,7 @@ namespace DWSIM.UI.Desktop.Editors
             new Compounds(flowsheet, tl);
 
             page1.ContentContainer.Add(tl);
-            page1.ShowModal();
+            page1.Show();
 
         }
 
@@ -166,7 +166,7 @@ namespace DWSIM.UI.Desktop.Editors
                 dl.Width = Width;
                 page.ContentContainer.Add(dl);
             }
-            page.ShowModal();
+            page.Show();
 
         }
 
@@ -232,7 +232,7 @@ namespace DWSIM.UI.Desktop.Editors
             c.CreateAndAddDescriptionRow(dl, "Select the formatting scheme for compound amounts in Material Stream reports.");
 
             page.ContentContainer.Add(dl);
-            page.ShowModal();
+            page.Show();
         
         }
 

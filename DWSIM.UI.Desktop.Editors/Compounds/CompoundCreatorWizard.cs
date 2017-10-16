@@ -139,7 +139,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             page1.ContentContainer.Add(dl);
-            page1.ShowModal();
+            page1.Show();
 
         }
 
@@ -188,6 +188,20 @@ namespace DWSIM.UI.Desktop.Editors
                         });
                     });
                 }
+                else {
+                    page2.Close();
+                    switch (comptype)
+                    {
+                        case 0:
+                            DisplayPage4();
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                            DisplayPage3();
+                            break;
+                    }
+                }
             };
 
             page2.Title = "Compound Creator Wizard";
@@ -215,7 +229,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
-            page2.ShowModal();
+            page2.Show();
 
         }
 
@@ -393,7 +407,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
-            page2.ShowModal();
+            page2.Show();
 
         }
 
@@ -453,7 +467,7 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
-            page.ShowModal();
+            page.Show();
 
         }
 
@@ -582,7 +596,7 @@ namespace DWSIM.UI.Desktop.Editors
             });
 
             page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
-            page.ShowModal();
+            page.Show();
 
         }
 
@@ -781,7 +795,7 @@ namespace DWSIM.UI.Desktop.Editors
             escp.PlaceholderText = "T in K, Cp in kJ/[kg.K]";
 
             page.ContentContainer.Add(dl);
-            page.ShowModal();
+            page.Show();
 
         }
 
@@ -895,7 +909,7 @@ namespace DWSIM.UI.Desktop.Editors
             dl.CreateAndAddLabelRow2("Adds the compound to the current simulation.");
 
             page.ContentContainer.Add(dl);
-            page.ShowModal();
+            page.Show();
 
 
         }

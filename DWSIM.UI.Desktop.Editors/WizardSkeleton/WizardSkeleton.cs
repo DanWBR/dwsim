@@ -17,7 +17,7 @@ using System.IO;
 
 namespace DWSIM.UI.Desktop.Editors
 {
-    public class WizardPage : Dialog
+    public class WizardPage : Form
     {
         
         public bool hasBackButton { get; set; }
@@ -142,6 +142,8 @@ namespace DWSIM.UI.Desktop.Editors
             center.Y -= (height + 150) / 2;
 
             Location = new Point(center);
+
+            Topmost = true;
 
             Visible = true;
 
