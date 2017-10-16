@@ -4513,13 +4513,13 @@ FPROPS is Copyright (C) 2011 - Carnegie Mellon University</value>
     <value>[Electrolyte] Positive Ion</value>
   </data>
   <data name="SolidDensityAtTs" xml:space="preserve">
-    <value>Solid Density @ Ts</value>
+    <value>[Electrolyte] Solid Density @ Ts</value>
   </data>
   <data name="TemperatureOfFusion" xml:space="preserve">
     <value>Temperature of Fusion</value>
   </data>
   <data name="TemperatureOfSolidDensity_Ts" xml:space="preserve">
-    <value>Solid Density Temperature</value>
+    <value>[Electrolyte] Solid Density Temperature</value>
   </data>
   <data name="Solid" xml:space="preserve">
     <value>Solid</value>

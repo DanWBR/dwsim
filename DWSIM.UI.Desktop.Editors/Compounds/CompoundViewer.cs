@@ -217,8 +217,6 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("PontoNormaldeEbulio") + " (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, compound.Normal_Boiling_Point).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("TemperatureOfFusion") + " (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, compound.TemperatureOfFusion).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("EnthalpyOfFusionAtTf") + " (kJ/mol)", compound.EnthalpyOfFusionAtTf.ToString(nf));
-            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("TemperatureOfSolidDensity_Ts") + " (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, compound.SolidTs).ToString(nf));
-            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("SolidDensityAtTs") + " (" + su.density + ")", cv.ConvertFromSI(su.density, compound.SolidDensityAtTs).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("ChaoSeaderAcentricFactor"), compound.Chao_Seader_Acentricity.ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("ChaoSeaderSolubilityParameter"), compound.Chao_Seader_Solubility_Parameter.ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("ChaoSeaderLiquidMolarVolume") + " (mL/mol)", compound.Chao_Seader_Liquid_Molar_Volume.ToString(nf));
@@ -231,6 +229,8 @@ namespace DWSIM.UI.Desktop.Editors
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("HydrationNumber"), compound.HydrationNumber.ToString());
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("PositiveIon"), compound.PositiveIon);
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("NegativeIon"), compound.NegativeIon);
+            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("TemperatureOfSolidDensity_Ts") + " (" + su.temperature + ")", cv.ConvertFromSI(su.temperature, compound.SolidTs).ToString(nf));
+            container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("SolidDensityAtTs") + " (" + su.density + ")", cv.ConvertFromSI(su.density, compound.SolidDensityAtTs).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_DelGF") + " (" + su.enthalpy + ")", cv.ConvertFromSI(su.enthalpy, compound.Electrolyte_DelGF).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_DelHF") + " (" + su.enthalpy + ")", cv.ConvertFromSI(su.enthalpy, compound.Electrolyte_DelHF).ToString(nf));
             container.CreateAndAddTwoLabelsRow(flowsheet.GetTranslatedString("Electrolyte_Cp0") + " (kJ/[mol.K])", compound.Electrolyte_Cp0.ToString(nf));

@@ -253,6 +253,19 @@ Public Class ChemeoParser
             End If
         End If
 
+        element = tablerows.Where(Function(x) x.InnerHtml.Contains("Enthalpy of fusion at standard conditions")).FirstOrDefault
+
+        If Not element Is Nothing Then
+            If element.Descendants("td")(1).InnerText.Contains("[") Then
+                Dim text = element.Descendants("td")(1).InnerText.Trim(New Char() {"[", "]"})
+                comp.EnthalpyOfFusionAtTf = Double.Parse(text.Split("; ")(0), ci)
+            ElseIf element.Descendants("td")(1).InnerText.Contains("±") Then
+                comp.EnthalpyOfFusionAtTf = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci)
+            Else
+                comp.EnthalpyOfFusionAtTf = Double.Parse(element.Descendants("td")(1).InnerText, ci)
+            End If
+        End If
+
         Return comp
 
     End Function

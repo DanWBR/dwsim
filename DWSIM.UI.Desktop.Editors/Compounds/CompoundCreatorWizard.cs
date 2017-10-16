@@ -34,9 +34,15 @@ namespace DWSIM.UI.Desktop.Editors
 
         private int comptype = 0;
         private bool estimatefromunifac = true;
+        private bool searchonline = false;
+
+        private bool foundkdb = false, foundchemeo = false, foundddb = false;
 
         private string nf = "";
         private IUnitsOfMeasure su;
+
+        ConstantProperties kdbc = null, chemeoc = null;
+        Dictionary<string, List<string[]>> facdata = null;
 
         public CompoundCreatorWizard(IFlowsheet fs)
             : base()
@@ -49,6 +55,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         void Init()
         {
+
+            comp.ID = new Random().Next(700000, 800000);
 
             comp.OriginalDB = "User";
             comp.CurrentDB = "User";
@@ -121,7 +129,7 @@ namespace DWSIM.UI.Desktop.Editors
                         comp = Newtonsoft.Json.JsonConvert.DeserializeObject<DWSIM.Thermodynamics.BaseClasses.ConstantProperties>(File.ReadAllText(dialog.FileName));
                         estimatefromunifac = false;
 
-                        MessageBox.Show("Data successfully loaded from JSON file.","Information", MessageBoxButtons.OK,   MessageBoxType.Information, MessageBoxDefaultButton.OK);
+                        MessageBox.Show("Data successfully loaded from JSON file.", "Information", MessageBoxButtons.OK, MessageBoxType.Information, MessageBoxDefaultButton.OK);
                     }
                     catch (Exception ex)
                     {
@@ -138,6 +146,8 @@ namespace DWSIM.UI.Desktop.Editors
         private void DisplayPage2()
         {
 
+            var dl = c.GetDefaultContainer();
+
             var page2 = new WizardPage();
 
             page2.hasBackButton = true;
@@ -149,11 +159,84 @@ namespace DWSIM.UI.Desktop.Editors
             page2.backAction = () => { page2.Close(); DisplayPage1(); };
             page2.nextAction = () =>
             {
+                if (searchonline)
+                {
+                    page2.btnBack.Enabled = false;
+                    page2.btnNext.Enabled = false;
+                    page2.btnCancel.Enabled = false;
+                    dl.Enabled = false;
+                    page2.footerSpinner.Visible = true;
+                    page2.footerSpinner.Enabled = true;
+                    page2.footerLabel.Text = "Searching compound data at online sources, please wait...";
+                    var t1 = Task.Factory.StartNew(() => CheckOnlineData());
+                    t1.ContinueWith((t) =>
+                    {
+                        Application.Instance.Invoke(() =>
+                        {
+                            page2.Close();
+                            switch (comptype)
+                            {
+                                case 0:
+                                    DisplayPage4();
+                                    break;
+                                case 1:
+                                case 2:
+                                case 3:
+                                    DisplayPage3();
+                                    break;
+                            }
+                        });
+                    });
+                }
+            };
+
+            page2.Title = "Compound Creator Wizard";
+            page2.HeaderTitle = "Step 2 - Compound ID";
+            page2.HeaderDescription = "Enter identification data for the compound.";
+            page2.FooterText = "";
+
+            page2.Init(Width, Height);
+
+            dl.Width = Width;
+
+            dl.CreateAndAddLabelRow("Identification");
+            dl.CreateAndAddStringEditorRow("Compound Name", comp.Name, (sender, e) => comp.Name = sender.Text);
+
+            if (comptype < 2)
+            {
+                dl.CreateAndAddStringEditorRow("CAS ID (Optional)", comp.CAS_Number, (sender, e) => comp.CAS_Number = sender.Text);
+                dl.CreateAndAddStringEditorRow("Chemical Formula (Optional)", comp.Formula, (sender, e) => comp.Formula = sender.Text);
+                dl.CreateAndAddEmptySpace();
+                dl.CreateAndAddEmptySpace();
+                dl.CreateAndAddEmptySpace();
+                dl.CreateAndAddEmptySpace();
+                dl.CreateAndAddCheckBoxRow("Search Online Databases for Compound Data", searchonline, (sender, e) => searchonline = sender.Checked.GetValueOrDefault());
+                dl.CreateAndAddLabelRow2("This will search selected online thermodynamic databases (KDB, Cheméo and DDB) for compound data according to its name and/or CAS ID.");
+            }
+
+            page2.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
+            page2.ShowModal();
+
+        }
+
+        private void DisplayPage3()
+        {
+
+            var page2 = new WizardPage();
+
+            page2.hasBackButton = true;
+            page2.hasCancelButton = true;
+            page2.hasNextButton = true;
+            page2.hasFinishButton = false;
+
+            page2.cancelAction = () => page2.Close();
+            page2.backAction = () => { page2.Close(); DisplayPage2(); };
+            page2.nextAction = () =>
+            {
                 page2.Close();
                 switch (comptype)
                 {
                     case 0:
-                        DisplayPage3();
                         break;
                     case 1:
                     case 2:
@@ -164,18 +247,25 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             page2.Title = "Compound Creator Wizard";
-            page2.HeaderTitle = "Step 2 - Compound Properties";
+            page2.HeaderTitle = "Step 3 - Compound Properties";
             page2.HeaderDescription = "Define the basic properties of the compound.";
-            page2.FooterText = "";
+            if (foundkdb)
+            {
+                page2.FooterText = "DWSIM found compound data at KDB Online Database, check non-empty/non-zeroed fields.";
+            }
+            else if (foundchemeo)
+            {
+                page2.FooterText = "DWSIM found compound data at Cheméo Online Database, check non-empty/non-zeroed fields.";
+            }
+            else
+            {
+                page2.FooterText = "";
+            }
 
             page2.Init(Width, Height);
 
             var dl = c.GetDefaultContainer();
             dl.Width = Width;
-
-            dl.CreateAndAddLabelRow("Identification");
-            dl.CreateAndAddStringEditorRow("Compound Name", comp.Name, (sender, e) => comp.Name = sender.Text);
-            dl.CreateAndAddStringEditorRow("Chemical Formula", comp.Formula, (sender, e) => comp.Formula = sender.Text);
 
             switch (comptype)
             {
@@ -224,9 +314,9 @@ namespace DWSIM.UI.Desktop.Editors
                         if (c.IsValidDouble(arg1.Text)) comp.TemperatureOfFusion = cv.ConvertToSI(su.temperature, arg1.Text.ToDoubleFromCurrent());
                     });
 
-                    dl.CreateAndAddTextBoxRow(nf, "Enthalpy of Fusion" + FormatUnit(su.molar_enthalpy), comp.EnthalpyOfFusionAtTf.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
+                    dl.CreateAndAddTextBoxRow(nf, "Enthalpy of Fusion (kJ/mol)", comp.EnthalpyOfFusionAtTf, (arg1, arg2) =>
                     {
-                        if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / 1000;
+                        if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = arg1.Text.ToDoubleFromCurrent();
                     });
                     break;
                 case 2:
@@ -307,7 +397,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
-        private void DisplayPage3()
+        private void DisplayPage4()
         {
 
             var page = new WizardPage();
@@ -328,13 +418,20 @@ namespace DWSIM.UI.Desktop.Editors
             page.nextAction = () =>
             {
                 page.Close();
-                DisplayPage4();
+                DisplayPage5();
             };
 
             page.Title = "Compound Creator Wizard";
             page.HeaderTitle = "Step 3 - UNIFAC Structure";
             page.HeaderDescription = "Enter UNIFAC structure information, if available.";
-            page.FooterText = "";
+            if (foundddb)
+            {
+                page.FooterText = "DWSIM found UNIFAC/MODFAC structure data at DDB Online Database, check non-empty/non-zeroed fields.";
+            }
+            else
+            {
+                page.FooterText = "";
+            }
 
             page.Init(Width, Height);
 
@@ -360,7 +457,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
-        private void DisplayPage4()
+        private void DisplayPage5()
         {
 
             var page = new WizardPage();
@@ -375,19 +472,30 @@ namespace DWSIM.UI.Desktop.Editors
             page.backAction = () =>
             {
                 page.Close();
-                DisplayPage3();
+                DisplayPage4();
             };
 
             page.nextAction = () =>
             {
                 page.Close();
-                DisplayPage5();
+                DisplayPage6();
             };
 
             page.Title = "Compound Creator Wizard";
             page.HeaderTitle = "Step 4 - Constant Properties";
             page.HeaderDescription = "Enter the required information.";
-            page.FooterText = "";
+            if (!estimatefromunifac && foundkdb)
+            {
+                page.FooterText = "DWSIM found compound data at KDB Online Database, check non-empty/non-zeroed fields.";
+            }
+            else if (!estimatefromunifac && foundchemeo)
+            {
+                page.FooterText = "DWSIM found compound data at Cheméo Online Database, check non-empty/non-zeroed fields.";
+            }
+            else
+            {
+                page.FooterText = "";
+            }
 
             page.Init(Width, Height);
 
@@ -398,7 +506,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             c.CreateAndAddLabelRow(dl, "Basic Properties");
             dl.CreateAndAddLabelRow2("These are the minimum required set of properties.");
-                    
+
             c.CreateAndAddTextBoxRow(dl, nf, "Molecular Weight" + FormatUnit(su.molecularWeight), comp.Molar_Weight, (arg1, arg2) =>
             {
                 if (c.IsValidDouble(arg1.Text)) comp.Molar_Weight = cv.ConvertToSI(su.molecularWeight, arg1.Text.ToDoubleFromCurrent());
@@ -431,7 +539,7 @@ namespace DWSIM.UI.Desktop.Editors
 
             c.CreateAndAddLabelRow(dl, "Formation Properties");
             dl.CreateAndAddLabelRow2("Formation properties are required if your compound will be part of a chemical reaction.");
-                    
+
             c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), comp.IG_Enthalpy_of_Formation_25C.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
             {
                 if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
@@ -462,15 +570,15 @@ namespace DWSIM.UI.Desktop.Editors
 
             c.CreateAndAddLabelRow(dl, "Solid Phase Properties");
             dl.CreateAndAddLabelRow2("Solid phase properties are required for solid prediction. If you don't have them, you can force this compound to be in the solid phase in the Property Package Advanced Settings editor.");
-                    
+
             c.CreateAndAddTextBoxRow(dl, nf, "Temperature of Fusion" + FormatUnit(su.temperature), comp.TemperatureOfFusion.ConvertFromSI(su.temperature), (arg1, arg2) =>
             {
                 if (c.IsValidDouble(arg1.Text)) comp.TemperatureOfFusion = cv.ConvertToSI(su.temperature, arg1.Text.ToDoubleFromCurrent());
             });
 
-            c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Fusion" + FormatUnit(su.molar_enthalpy), comp.EnthalpyOfFusionAtTf.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
+            c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Fusion (kJ/mol)", comp.EnthalpyOfFusionAtTf, (arg1, arg2) =>
             {
-                if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / 1000;
+                if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = arg1.Text.ToDoubleFromCurrent();
             });
 
             page.ContentContainer.Add(new Scrollable { Content = dl, Border = BorderType.None, Height = Height, Width = Width });
@@ -478,7 +586,7 @@ namespace DWSIM.UI.Desktop.Editors
 
         }
 
-        private void DisplayPage5()
+        private void DisplayPage6()
         {
 
             var page = new WizardPage();
@@ -493,7 +601,7 @@ namespace DWSIM.UI.Desktop.Editors
             page.backAction = () =>
             {
                 page.Close();
-                DisplayPage4();
+                DisplayPage5();
             };
 
             page.nextAction = () =>
@@ -696,14 +804,12 @@ namespace DWSIM.UI.Desktop.Editors
                 switch (comptype)
                 {
                     case 0:
-                        DisplayPage2();
+                        DisplayPage6();
                         break;
                     case 1:
-                        DisplayPage2();
-                        break;
                     case 2:
                     case 3:
-                        DisplayPage2();
+                        DisplayPage3();
                         break;
                 }
             };
@@ -786,7 +892,7 @@ namespace DWSIM.UI.Desktop.Editors
                     flowsheet.ShowMessage("Compound '" + comp.Name + "' added to the simulation.", IFlowsheet.MessageType.Information);
                 }
             });
-            dl.CreateAndAddLabelRow2("Adds the compound directly to the current simulation.");
+            dl.CreateAndAddLabelRow2("Adds the compound to the current simulation.");
 
             page.ContentContainer.Add(dl);
             page.ShowModal();
@@ -804,23 +910,145 @@ namespace DWSIM.UI.Desktop.Editors
             var uf = joback.GetUNIFACList(comp.UNIFACGroups);
             var jc = joback.GetJCFromUNIFAC(uf);
             var acl = joback.GetACLFromUNIFAC(uf);
-            comp.Molar_Weight = joback.CalcMW(acl);
-            comp.Normal_Boiling_Point = joback.CalcTb(jc);
-            comp.Critical_Temperature = joback.CalcTc(comp.Normal_Boiling_Point, jc);
-            comp.Critical_Pressure = joback.CalcPc(jc);
-            comp.TemperatureOfFusion = joback.CalcTf(jc);
-            comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc) * 1000;
-            comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc);
-            comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc);
-            comp.Critical_Volume = joback.CalcVc(jc);
-            comp.Critical_Compressibility = (comp.Critical_Pressure * comp.Critical_Volume / comp.Critical_Temperature / 8.314 / 1000);
-            comp.Z_Rackett = comp.Critical_Compressibility;
-            comp.Acentric_Factor = DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods.PropertyMethods.AcentricFactor_LeeKesler(comp.Critical_Temperature, comp.Critical_Pressure, comp.Normal_Boiling_Point);
+
+            if (kdbc != null || chemeoc != null)
+            {
+                comp.Molar_Weight = joback.CalcMW(acl);
+                comp.Normal_Boiling_Point = joback.CalcTb(jc);
+                comp.Critical_Temperature = joback.CalcTc(comp.Normal_Boiling_Point, jc);
+                comp.Critical_Pressure = joback.CalcPc(jc);
+                comp.TemperatureOfFusion = joback.CalcTf(jc);
+                comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc) * 1000;
+                comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc);
+                comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc);
+                comp.Critical_Volume = joback.CalcVc(jc);
+                comp.Critical_Compressibility = (comp.Critical_Pressure * comp.Critical_Volume / comp.Critical_Temperature / 8.314 / 1000);
+                comp.Z_Rackett = comp.Critical_Compressibility;
+                comp.Acentric_Factor = DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods.PropertyMethods.AcentricFactor_LeeKesler(comp.Critical_Temperature, comp.Critical_Pressure, comp.Normal_Boiling_Point);
+            }
+
             comp.IdealgasCpEquation = "4";
             comp.Ideal_Gas_Heat_Capacity_Const_A = joback.CalcCpA(jc) * 1000;
             comp.Ideal_Gas_Heat_Capacity_Const_B = joback.CalcCpB(jc) * 1000;
             comp.Ideal_Gas_Heat_Capacity_Const_C = joback.CalcCpC(jc) * 1000;
             comp.Ideal_Gas_Heat_Capacity_Const_D = joback.CalcCpD(jc) * 1000;
+        }
+
+        void CheckOnlineData()
+        {
+
+            chemeoc = null;
+            kdbc = null;
+            facdata = null;
+
+            foundchemeo = false;
+            foundddb = false;
+            foundkdb = false;
+
+            string searchterm = "";
+
+            if (comp.CAS_Number != "") searchterm = comp.CAS_Number; else searchterm = comp.Name;
+
+            var t1 = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var cids = Thermodynamics.Databases.KDBLink.KDBParser.GetCompoundIDs(searchterm, false);
+                    kdbc = Thermodynamics.Databases.KDBLink.KDBParser.GetCompoundData(int.Parse(cids[0][0]));
+                }
+                catch { }
+            });
+
+            var t2 = Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var cids = Thermodynamics.Databases.ChemeoLink.ChemeoParser.GetCompoundIDs(comp.Name, false);
+                    chemeoc = Thermodynamics.Databases.ChemeoLink.ChemeoParser.GetCompoundData(cids[0][0]);
+                }
+                catch { }
+            });
+
+            Task.WaitAll(new[] { t1, t2 }, 20000);
+
+            if (kdbc != null && chemeoc == null)
+            {
+                if (comp.Formula == "") comp.Formula = kdbc.Formula;
+                if (comp.CAS_Number == "") comp.CAS_Number = kdbc.CAS_Number;
+                comp.Molar_Weight = kdbc.Molar_Weight;
+                comp.Normal_Boiling_Point = kdbc.Normal_Boiling_Point;
+                comp.NBP = kdbc.NBP;
+                comp.TemperatureOfFusion = kdbc.TemperatureOfFusion;
+                comp.Critical_Temperature = kdbc.Critical_Temperature;
+                comp.Critical_Pressure = kdbc.Critical_Pressure;
+                comp.Critical_Volume = kdbc.Critical_Volume;
+                comp.Critical_Compressibility = kdbc.Critical_Compressibility;
+                comp.Acentric_Factor = kdbc.Acentric_Factor;
+                comp.Z_Rackett = kdbc.Z_Rackett;
+                comp.IG_Enthalpy_of_Formation_25C = kdbc.IG_Enthalpy_of_Formation_25C;
+                comp.IG_Entropy_of_Formation_25C = kdbc.IG_Entropy_of_Formation_25C;
+                comp.IG_Gibbs_Energy_of_Formation_25C = kdbc.IG_Gibbs_Energy_of_Formation_25C;
+                comp.UNIQUAC_Q = kdbc.UNIQUAC_Q;
+                comp.UNIQUAC_R = kdbc.UNIQUAC_R;
+                foundkdb = true;
+            }
+            else if (chemeoc != null)
+            {
+                if (comp.Formula == "") comp.Formula = chemeoc.Formula;
+                if (comp.CAS_Number == "") comp.CAS_Number = chemeoc.CAS_Number;
+                comp.InChI = chemeoc.InChI;
+                comp.SMILES = chemeoc.SMILES;
+                comp.Molar_Weight = chemeoc.Molar_Weight;
+                comp.Normal_Boiling_Point = chemeoc.Normal_Boiling_Point;
+                comp.NBP = chemeoc.NBP;
+                comp.TemperatureOfFusion = chemeoc.TemperatureOfFusion;
+                comp.Critical_Temperature = chemeoc.Critical_Temperature;
+                comp.Critical_Pressure = chemeoc.Critical_Pressure;
+                comp.Critical_Volume = chemeoc.Critical_Volume;
+                comp.Critical_Compressibility = chemeoc.Critical_Compressibility;
+                comp.Acentric_Factor = chemeoc.Acentric_Factor;
+                comp.IG_Enthalpy_of_Formation_25C = chemeoc.IG_Enthalpy_of_Formation_25C;
+                comp.IG_Entropy_of_Formation_25C = chemeoc.IG_Entropy_of_Formation_25C;
+                comp.IG_Gibbs_Energy_of_Formation_25C = chemeoc.IG_Gibbs_Energy_of_Formation_25C;
+                comp.EnthalpyOfFusionAtTf = chemeoc.EnthalpyOfFusionAtTf;
+                foundchemeo = true;
+            }
+
+
+            try
+            {
+                var cid = Thermodynamics.Databases.DDBStructureLink.DDBStructureParser.GetID(comp.CAS_Number);
+                facdata = Thermodynamics.Databases.DDBStructureLink.DDBStructureParser.GetData(cid);
+            }
+            catch { }
+
+            if (facdata != null)
+            {
+                foundddb = true;
+                if (facdata.ContainsKey("Original"))
+                {
+                    comp.UNIFACGroups = new System.Collections.SortedList();
+                    comp.UNIFACGroups.Clear();
+                    foreach (var item in facdata["Original"])
+                    {
+                        comp.UNIFACGroups.Add(item[1], item[2]);
+                    }
+                }
+                if (facdata.ContainsKey("Modified"))
+                {
+                    comp.MODFACGroups = new System.Collections.SortedList();
+                    comp.MODFACGroups.Clear();
+                    comp.NISTMODFACGroups = new System.Collections.SortedList();
+                    comp.NISTMODFACGroups.Clear();
+                    foreach (var item in facdata["Modified"])
+                    {
+                        comp.MODFACGroups.Add(item[1], item[2]);
+                        comp.NISTMODFACGroups.Add(item[1], item[2]);
+                    }
+                }
+
+            }
+
         }
 
     }

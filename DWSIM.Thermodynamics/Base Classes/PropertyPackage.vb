@@ -5066,7 +5066,7 @@ redirect2:                      result = Me.FlashBase.Flash_PS(RET_VMOL(Phase.Mi
                     Else
                         result = Me.ParseEquation(eqno, A, B, C, D, E, T) / mw
                     End If
-                    Return result
+                    If result = 0.0 Then Return 3.5 * 8.314 / mw Else Return result
                 ElseIf Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.OriginalDB = "ChEDL Thermo" Then
                     Dim A, B, C, D, E, result As Double
                     Dim eqno As String = Me.CurrentMaterialStream.Phases(0).Compounds(sub1).ConstantProperties.IdealgasCpEquation
@@ -7571,6 +7571,8 @@ Final3:
         End Function
 
         Function ParseEquation(ByVal expression As String, ByVal A As Double, ByVal B As Double, ByVal C As Double, ByVal D As Double, ByVal E As Double, ByVal T As Double) As Double
+
+            If expression = "" Then Return 0.0
 
             Try
 

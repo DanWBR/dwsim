@@ -27,6 +27,8 @@ namespace DWSIM.UI.Desktop.Editors
 
         public Button btnBack, btnNext, btnCancel, btnFinish;
 
+        public Spinner footerSpinner;
+
         public Action backAction, nextAction, cancelAction, finishAction;
 
         public DynamicLayout ContentContainer;
@@ -35,6 +37,8 @@ namespace DWSIM.UI.Desktop.Editors
         public string HeaderDescription = "";
 
         public string FooterText = "";
+
+        public Label footerLabel;
 
         public WizardPage(): base()
         {
@@ -102,8 +106,15 @@ namespace DWSIM.UI.Desktop.Editors
             }
 
             var tr = new TableRow();
-            if (FooterText != "") tr.Cells.Add(new Label{Text = FooterText, VerticalAlignment = VerticalAlignment.Center});
+
+            footerSpinner = new Spinner {Visible = false, Size = new Size(20, 20) };
+            tr.Cells.Add(footerSpinner);
+
+            footerLabel = new Label { Text = FooterText, VerticalAlignment = VerticalAlignment.Center }; 
+            tr.Cells.Add(footerLabel);
+
             tr.Cells.Add(null);
+            
             foreach (var btn in buttons)
             {
                 if (Application.Instance.Platform.IsWinForms) btn.Height = 30;

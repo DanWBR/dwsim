@@ -205,9 +205,9 @@ namespace DWSIM.UI.Desktop.Editors
                 if (c.IsValidDouble(arg1.Text)) comp.TemperatureOfFusion = cv.ConvertToSI(su.temperature, arg1.Text.ToDoubleFromCurrent());
             });
 
-            hfus = c.CreateAndAddTextBoxRow(this, nf, "Enthalpy of Fusion" + FormatUnit(su.molar_enthalpy), 0d, (arg1, arg2) =>
+            hfus = c.CreateAndAddTextBoxRow(this, nf, "Enthalpy of Fusion (kJ/mol)", 0d, (arg1, arg2) =>
             {
-                if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / 1000;
+                if (c.IsValidDouble(arg1.Text)) comp.EnthalpyOfFusionAtTf = arg1.Text.ToDoubleFromCurrent();
             });
 
             c.CreateAndAddLabelRow(this, "Temperature-Dependent Properties");
