@@ -382,10 +382,14 @@ namespace DWSIM.UI.Desktop.Editors
                 }
             }
 
+            var compounds = column.GetFlowsheet().SelectedCompounds.Keys.ToList();
+            compounds.Insert(0, "");
             var specs = StringResources.columnspec();
             var units = su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.molarflow);
             units.AddRange(su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.massflow));
             units.AddRange(su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.heatflow));
+            units.AddRange(su.GetUnitSet(Interfaces.Enums.UnitOfMeasure.temperature));
+            units.AddRange(new[] { "% M/M", "% W/W", "M", "We" });
             units.Insert(0, "");
             int cspec = 0, rspec = 0;
 
@@ -403,6 +407,21 @@ namespace DWSIM.UI.Desktop.Editors
                 case ColumnSpec.SpecType.Heat_Duty:
                     cspec = 3;
                     break;
+                case ColumnSpec.SpecType.Component_Mass_Flow_Rate:
+                    cspec = 4;
+                    break;
+                case ColumnSpec.SpecType.Component_Molar_Flow_Rate:
+                    cspec = 5;
+                    break;
+                case ColumnSpec.SpecType.Component_Recovery:
+                    cspec = 6;
+                    break;
+                case ColumnSpec.SpecType.Component_Fraction:
+                    cspec = 7;
+                    break;
+                case ColumnSpec.SpecType.Temperature:
+                    cspec = 8;
+                    break;
             }
 
             switch (column.Specs["R"].SType)
@@ -418,6 +437,21 @@ namespace DWSIM.UI.Desktop.Editors
                     break;
                 case ColumnSpec.SpecType.Heat_Duty:
                     rspec = 3;
+                    break;
+                case ColumnSpec.SpecType.Component_Mass_Flow_Rate:
+                    rspec = 4;
+                    break;
+                case ColumnSpec.SpecType.Component_Molar_Flow_Rate:
+                    rspec = 5;
+                    break;
+                case ColumnSpec.SpecType.Component_Recovery:
+                    rspec = 6;
+                    break;
+                case ColumnSpec.SpecType.Component_Fraction:
+                    rspec = 7;
+                    break;
+                case ColumnSpec.SpecType.Temperature:
+                    rspec = 8;
                     break;
             }
 
@@ -438,7 +472,28 @@ namespace DWSIM.UI.Desktop.Editors
                     case 3:
                         column.Specs["C"].SType = ColumnSpec.SpecType.Heat_Duty;
                         break;
+                    case 4:
+                        column.Specs["C"].SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate;
+                        break;
+                    case 5:
+                        column.Specs["C"].SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate;
+                        break;
+                    case 6:
+                        column.Specs["C"].SType = ColumnSpec.SpecType.Component_Recovery;
+                        break;
+                    case 7:
+                        column.Specs["C"].SType = ColumnSpec.SpecType.Component_Fraction;
+                        break;
+                    case 8:
+                        column.Specs["C"].SType = ColumnSpec.SpecType.Temperature;
+                        break;
                 }
+            });
+            var cid = 0;
+            if (compounds.Contains(column.Specs["C"].ComponentID)) cid = compounds.IndexOf(column.Specs["C"].ComponentID);
+            s.CreateAndAddDropDownRow(container, "Compound", compounds, cid, (arg3, e) =>
+            {
+                column.Specs["C"].ComponentID = compounds[arg3.SelectedIndex];
             });
             s.CreateAndAddTextBoxRow(container, nf, "Value", column.Specs["C"].SpecValue, (arg1, arg2) =>
             {
@@ -470,7 +525,28 @@ namespace DWSIM.UI.Desktop.Editors
                     case 3:
                         column.Specs["R"].SType = ColumnSpec.SpecType.Heat_Duty;
                         break;
+                    case 4:
+                        column.Specs["R"].SType = ColumnSpec.SpecType.Component_Mass_Flow_Rate;
+                        break;
+                    case 5:
+                        column.Specs["R"].SType = ColumnSpec.SpecType.Component_Molar_Flow_Rate;
+                        break;
+                    case 6:
+                        column.Specs["R"].SType = ColumnSpec.SpecType.Component_Recovery;
+                        break;
+                    case 7:
+                        column.Specs["R"].SType = ColumnSpec.SpecType.Component_Fraction;
+                        break;
+                    case 8:
+                        column.Specs["R"].SType = ColumnSpec.SpecType.Temperature;
+                        break;
                 }
+            });
+            var cid2 = 0;
+            if (compounds.Contains(column.Specs["R"].ComponentID)) cid2 = compounds.IndexOf(column.Specs["R"].ComponentID);
+            s.CreateAndAddDropDownRow(container, "Compound", compounds, cid2, (arg3, e) =>
+            {
+                column.Specs["R"].ComponentID = compounds[arg3.SelectedIndex];
             });
             s.CreateAndAddTextBoxRow(container, nf, "Value", column.Specs["R"].SpecValue, (arg1, arg2) =>
             {
