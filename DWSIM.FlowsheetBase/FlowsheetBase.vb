@@ -1635,14 +1635,14 @@ Imports System.Dynamic
                                   cpa = chedl.Transfer().ToArray()
                                   addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
                                   Dim elec As New Databases.Electrolyte
                                   elec.Load()
                                   cpa = elec.Transfer().ToArray()
                                   addedcomps = AvailableCompounds.Keys.Select(Function(x) x.ToLower).ToList()
                                   For Each cp As ConstantProperties In cpa
-                                      If Not addedcomps.Contains(cp.Name.ToLower) Then AvailableCompounds.Add(cp.Name, cp)
+                                      If Not addedcomps.Contains(cp.Name.ToLower) AndAlso Not AvailableCompounds.ContainsKey(cp.Name) Then AvailableCompounds.Add(cp.Name, cp)
                                   Next
                                   AddSystemsOfUnits()
                                   AddDefaultProperties()
