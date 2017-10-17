@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 1
+Version 5.1 Update 2
 Copyright (c) 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -37,6 +37,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 2
+
+- [CHG] Updated Compound Creator Wizard to get data from online sources
+- [FIX] Exposing missing Rigorous Column specs (New UI)
+- [FIX] Minor bug fixes
 
 Version 5.1 Update 1
 
