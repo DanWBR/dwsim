@@ -313,13 +313,13 @@ namespace DWSIM.UI.Desktop.Editors
 
                     dl.CreateAndAddLabelRow("Formation Properties");
                     dl.CreateAndAddLabelRow2("Formation properties are required if your compound will be part of a chemical reaction.");
-                    c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), comp.IG_Enthalpy_of_Formation_25C.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
+                    c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.enthalpy), comp.IG_Enthalpy_of_Formation_25C.ConvertFromSI(su.enthalpy), (arg1, arg2) =>
                     {
-                        if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
+                        if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.enthalpy, arg1.Text.ToDoubleFromCurrent());
                     });
-                    c.CreateAndAddTextBoxRow(dl, nf, "Gibbs Energy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), comp.IG_Gibbs_Energy_of_Formation_25C.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
+                    c.CreateAndAddTextBoxRow(dl, nf, "Gibbs Energy of Formation (Ideal Gas)" + FormatUnit(su.enthalpy), comp.IG_Gibbs_Energy_of_Formation_25C.ConvertFromSI(su.enthalpy), (arg1, arg2) =>
                     {
-                        if (c.IsValidDouble(arg1.Text)) comp.IG_Gibbs_Energy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
+                        if (c.IsValidDouble(arg1.Text)) comp.IG_Gibbs_Energy_of_Formation_25C = cv.ConvertToSI(su.enthalpy, arg1.Text.ToDoubleFromCurrent());
                     });
                     dl.CreateAndAddLabelRow("Solid Phase Properties");
                     dl.CreateAndAddLabelRow2("Solid phase properties are required for solid prediction. If you don't have them, you can force this compound to be in the solid phase in the Property Package Advanced Settings editor.");
@@ -554,14 +554,14 @@ namespace DWSIM.UI.Desktop.Editors
             c.CreateAndAddLabelRow(dl, "Formation Properties");
             dl.CreateAndAddLabelRow2("Formation properties are required if your compound will be part of a chemical reaction.");
 
-            c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), comp.IG_Enthalpy_of_Formation_25C.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
+            c.CreateAndAddTextBoxRow(dl, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.enthalpy), comp.IG_Enthalpy_of_Formation_25C.ConvertFromSI(su.enthalpy), (arg1, arg2) =>
             {
-                if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
+                if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.enthalpy, arg1.Text.ToDoubleFromCurrent());
             });
 
-            c.CreateAndAddTextBoxRow(dl, nf, "Gibbs Energy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), comp.IG_Gibbs_Energy_of_Formation_25C.ConvertFromSI(su.molar_enthalpy), (arg1, arg2) =>
+            c.CreateAndAddTextBoxRow(dl, nf, "Gibbs Energy of Formation (Ideal Gas)" + FormatUnit(su.enthalpy), comp.IG_Gibbs_Energy_of_Formation_25C.ConvertFromSI(su.enthalpy), (arg1, arg2) =>
             {
-                if (c.IsValidDouble(arg1.Text)) comp.IG_Gibbs_Energy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
+                if (c.IsValidDouble(arg1.Text)) comp.IG_Gibbs_Energy_of_Formation_25C = cv.ConvertToSI(su.enthalpy, arg1.Text.ToDoubleFromCurrent());
             });
 
             c.CreateAndAddLabelRow(dl, "Model-Specific Parameters");
@@ -933,8 +933,8 @@ namespace DWSIM.UI.Desktop.Editors
                 comp.Critical_Pressure = joback.CalcPc(jc);
                 comp.TemperatureOfFusion = joback.CalcTf(jc);
                 comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc);
-                comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc);
-                comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc);
+                comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc) / comp.Molar_Weight;
+                comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc) / comp.Molar_Weight;
                 comp.Critical_Volume = joback.CalcVc(jc);
                 comp.Critical_Compressibility = (comp.Critical_Pressure * comp.Critical_Volume / comp.Critical_Temperature / 8.314 / 1000);
                 comp.Z_Rackett = comp.Critical_Compressibility;

@@ -221,7 +221,7 @@ Public Class ChemeoParser
                 Dim text = element.Descendants("td")(1).InnerText.Trim(New Char() {"[", "]"})
                 comp.IG_Enthalpy_of_Formation_25C = Double.Parse(text.Split("; ")(0), ci) * 1000 / comp.Molar_Weight
             ElseIf element.Descendants("td")(1).InnerText.Contains("±") Then
-                comp.IG_Enthalpy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci)
+                comp.IG_Enthalpy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci) * 1000 / comp.Molar_Weight
             Else
                 comp.IG_Enthalpy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText, ci) * 1000 / comp.Molar_Weight
             End If
@@ -234,7 +234,7 @@ Public Class ChemeoParser
                 Dim text = element.Descendants("td")(1).InnerText.Trim(New Char() {"[", "]"})
                 comp.IG_Gibbs_Energy_of_Formation_25C = Double.Parse(text.Split("; ")(0), ci) * 1000 / comp.Molar_Weight
             ElseIf element.Descendants("td")(1).InnerText.Contains("±") Then
-                comp.IG_Gibbs_Energy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci)
+                comp.IG_Gibbs_Energy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci) * 1000 / comp.Molar_Weight
             Else
                 comp.IG_Gibbs_Energy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText, ci) * 1000 / comp.Molar_Weight
             End If
@@ -247,7 +247,7 @@ Public Class ChemeoParser
                 Dim text = element.Descendants("td")(1).InnerText.Trim(New Char() {"[", "]"})
                 comp.IG_Entropy_of_Formation_25C = Double.Parse(text.Split("; ")(0), ci) / comp.Molar_Weight
             ElseIf element.Descendants("td")(1).InnerText.Contains("±") Then
-                comp.IG_Entropy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci)
+                comp.IG_Entropy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText.Split(" ± ")(0), ci) / comp.Molar_Weight
             Else
                 comp.IG_Entropy_of_Formation_25C = Double.Parse(element.Descendants("td")(1).InnerText, ci) / comp.Molar_Weight
             End If

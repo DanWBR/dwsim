@@ -125,9 +125,9 @@ namespace DWSIM.UI.Desktop.Editors
                 tc.Text = cv.ConvertFromSI(su.temperature, joback.CalcTc(comp.Normal_Boiling_Point, jc)).ToString(nf);
                 pc.Text = cv.ConvertFromSI(su.pressure, joback.CalcPc(jc)).ToString(nf);
                 tf.Text = cv.ConvertFromSI(su.temperature, joback.CalcTf(jc)).ToString(nf);
-                hfus.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcHf(jc)).ToString(nf);
-                hf.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcDHf(jc)).ToString(nf);
-                gf.Text = cv.ConvertFromSI(su.molar_enthalpy, joback.CalcDGf(jc)).ToString(nf);
+                hfus.Text = (joback.CalcHf(jc)).ToString(nf);
+                hf.Text = cv.ConvertFromSI(su.enthalpy, joback.CalcDHf(jc) / comp.Molar_Weight).ToString(nf);
+                gf.Text = cv.ConvertFromSI(su.enthalpy, joback.CalcDGf(jc) / comp.Molar_Weight).ToString(nf);
                 comp.Critical_Volume = joback.CalcVc(jc);
                 zc.Text = (comp.Critical_Pressure * comp.Critical_Volume / comp.Critical_Temperature / 8.314 / 1000).ToString(nf);
                 zr.Text = zc.Text;
@@ -171,14 +171,14 @@ namespace DWSIM.UI.Desktop.Editors
                 if (c.IsValidDouble(arg1.Text)) comp.Acentric_Factor = arg1.Text.ToDoubleFromCurrent();
             });
 
-            hf = c.CreateAndAddTextBoxRow(this, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), 0d, (arg1, arg2) =>
+            hf = c.CreateAndAddTextBoxRow(this, nf, "Enthalpy of Formation (Ideal Gas)" + FormatUnit(su.enthalpy), 0d, (arg1, arg2) =>
             {
-                if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
+                if (c.IsValidDouble(arg1.Text)) comp.IG_Enthalpy_of_Formation_25C = cv.ConvertToSI(su.enthalpy, arg1.Text.ToDoubleFromCurrent());
             });
 
-            gf = c.CreateAndAddTextBoxRow(this, nf, "Gibbs Energy of Formation (Ideal Gas)" + FormatUnit(su.molar_enthalpy), 0d, (arg1, arg2) =>
+            gf = c.CreateAndAddTextBoxRow(this, nf, "Gibbs Energy of Formation (Ideal Gas)" + FormatUnit(su.enthalpy), 0d, (arg1, arg2) =>
             {
-                if (c.IsValidDouble(arg1.Text)) comp.IG_Gibbs_Energy_of_Formation_25C = cv.ConvertToSI(su.molar_enthalpy, arg1.Text.ToDoubleFromCurrent()) / comp.Molar_Weight;
+                if (c.IsValidDouble(arg1.Text)) comp.IG_Gibbs_Energy_of_Formation_25C = cv.ConvertToSI(su.enthalpy, arg1.Text.ToDoubleFromCurrent());
             });
 
             c.CreateAndAddLabelRow(this, "Model-Specific parameters");
