@@ -1,7 +1,7 @@
-﻿Imports DWSIM.Interfaces
+﻿'Natural Gas Properties Plugin for DWSIM
+'Copyright 2010-2017 Daniel Medeiros
 
-'Natural Gas Properties Plugin for DWSIM
-'Copyright 2010 Daniel Medeiros
+Imports DWSIM.Interfaces
 
 <System.Serializable()> Public Class Plugin
 

@@ -146,15 +146,6 @@ Public Class Form1
                 'molecular weight
                 Dim mw As Double = dobj.Phases(0).Properties.molecularWeight
 
-                'declare a temporary material stream so we can do calculations without messing with the simulation.
-                Dim tmpms As New Streams.MaterialStream("", "")
-                tmpms = dobj.Clone
-                tmpms.PropertyPackage = dobj.PropertyPackage.Clone
-                tmpms.PropertyPackage.CurrentMaterialStream = tmpms
-
-                'get the current composition, check if there is water and create a new, "dry" composition
-                'vx = current composition
-                'vxnw = dry composition
                 Dim vx(dobj.Phases(0).Compounds.Count - 1), vxnw(dobj.Phases(0).Compounds.Count - 1), vxw(dobj.Phases(0).Compounds.Count - 1) As Double
                 Dim i As Integer = 0
                 Dim iw As Integer = -1
@@ -166,26 +157,6 @@ Public Class Form1
                     i += 1
                 Next
 
-                If iw <> -1 Then
-                    If vx(iw) <> 0.0# Then
-                        'water is present
-                        i = 0
-                        For Each c As Compound In dobj.Phases(0).Compounds.Values
-                            If i <> iw Then
-                                vxnw(i) = vx(i) / (1 - vx(iw))
-                                vxw(i) = 0.0#
-                            Else
-                                vxnw(i) = 0.0#
-                                vxw(i) = 1.0#
-                            End If
-                            i += 1
-                        Next
-                    End If
-                Else
-                    'if there is no water, clone the current composition.
-                    vxnw = vx.Clone
-                End If
-
                 'wdp    =   Water dew point (real, not reliable)
                 'hdp    =   Hydrocarbon dew point
                 '           Calculated using the dry composition and a normal PV-Flash.
@@ -195,49 +166,39 @@ Public Class Form1
                 '           After calculating Pisat (water partial vapor pressure), use the AUX_TSATi function 
                 '           to return the saturation temperature (dew point).
                 Dim wdp, hdp, iwdp, wc0, wc15, wc20, wcb, wdp1, iwdp1, hdp1 As Double
-                Dim fa As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                Dim fa2 As New DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms.NestedLoops3PV3
-                fa.StabSearchCompIDs = New String() {"Agua", "Water"}
-                fa.StabSearchSeverity = 0
 
-                Dim pp1 As PropertyPackage = tmpms.PropertyPackage
-                Dim pp2 As PropertyPackage = tmpms.PropertyPackage.Clone
-
-                pp1.CurrentMaterialStream = tmpms
-                pp2.CurrentMaterialStream = tmpms.Clone
+                Dim dewpcalc = New DewPointFinder()
 
                 Try
+                    dobj.PropertyPackage.CurrentMaterialStream = dobj
+                    Dim res1 = dewpcalc.CalcDewPoints(vx, dobj.Phases(0).Properties.pressure, dobj.PropertyPackage)
                     If iw <> -1 Then
-                        If vx(iw) <> 0.0# Then
-                            Dim t1 As Task = Task.Factory.StartNew(Sub()
-                                                                       Dim result As Object = pp1.FlashBase.Flash_PV(vx, tmpms.Phases(0).Properties.pressure, 1, 250, pp1)
-                                                                       iwdp = pp1.AUX_TSATi(vx(iw) * tmpms.Phases(0).Properties.pressure.GetValueOrDefault, iw)
-                                                                       hdp = pp1.FlashBase.Flash_PV(vxnw, tmpms.Phases(0).Properties.pressure, 1, result(4), pp1)(4)
-                                                                       wdp = fa.Flash_PV_3P(vx, 1.0#, 0.0#, 0.01, result(3), result(2), vxw, tmpms.Phases(0).Properties.pressure, 1.0#, iwdp, pp1)(4)
-
-                                                                   End Sub)
-                            Dim t2 As Task = Task.Factory.StartNew(Sub()
-                                                                       Dim result As Object = pp2.FlashBase.Flash_PV(vx, 101325, 1, 250, pp2)
-                                                                       iwdp1 = pp2.AUX_TSATi(vx(iw) * 101325, iw)
-                                                                       hdp1 = pp2.FlashBase.Flash_PV(vxnw, 101325, 1, result(4), pp2)(4)
-                                                                       wdp1 = fa2.Flash_PV_3P(vx, 1.0#, 0.0#, 0.01, result(3), result(2), vxw, 101325, 1.0#, iwdp1, pp2)(4)
-                                                                   End Sub)
-                            Threading.Thread.Sleep(500)
-                            Task.WaitAll(t1, t2)
-                        End If
-                    Else
-                        wdp = -1.0E+20
-                        iwdp = -1.0E+20
+                        wdp = res1("W")
+                        iwdp = res1("IW")
                     End If
+                    hdp = res1("H")
                 Catch ex As Exception
                     fsheet.WriteToLog(ex.ToString, Drawing.Color.Red, DWSIM.DWSIM.Flowsheet.MessageType.GeneralError)
-                Finally
-                    fa = Nothing
-                    fa2 = Nothing
-                    pp2.Dispose()
-                    pp2.CurrentMaterialStream = Nothing
-                    pp2 = Nothing
                 End Try
+
+                Try
+                    dobj.PropertyPackage.CurrentMaterialStream = dobj
+                    Dim res1 = dewpcalc.CalcDewPoints(vx, 101325, dobj.PropertyPackage)
+                    If iw <> -1 Then
+                        wdp1 = res1("W")
+                        iwdp1 = res1("IW")
+                    End If
+                    hdp1 = res1("H")
+                Catch ex As Exception
+                    fsheet.WriteToLog(ex.ToString, Drawing.Color.Red, DWSIM.DWSIM.Flowsheet.MessageType.GeneralError)
+                End Try
+
+
+                'declare a temporary material stream so we can do calculations without messing with the simulation.
+                Dim tmpms As New Streams.MaterialStream("", "")
+                tmpms = dobj.Clone
+                tmpms.PropertyPackage = dobj.PropertyPackage
+                tmpms.PropertyPackage.CurrentMaterialStream = tmpms
 
                 'set stream pressure
                 tmpms.Phases(0).Properties.pressure = 101325
@@ -392,12 +353,12 @@ Public Class Form1
                     .Item.Add("Wobbe Index @ BR (kJ/m3)", Format(iw20r, nf), True, "Natural Gas Properties", "BR = CNTP (T = 20 °C, P = 1 atm)", True)
                     .Item.Add("Motor Octane Number (MON)", Format(mon, nf), True, "Natural Gas Properties", "Motor Octane Number", True)
                     .Item.Add("Methane Number (MN)", Format(mn, nf), True, "Natural Gas Properties", "Methane Number", True)
-                    .Item.Add("Water Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp), nf), True, "Natural Gas Properties", "", True)
-                    .Item.Add("Water Dew Point @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp1), nf), True, "Natural Gas Properties", "", True)
-                    .Item.Add("Water Dew Point (Ideal) @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
-                    .Item.Add("Water Dew Point (Ideal) @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp1), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
                     .Item.Add("HC Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, hdp), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
+                    .Item.Add("Water Dew Point @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp), nf), True, "Natural Gas Properties", "", True)
+                    .Item.Add("Water Dew Point (Ideal) @ P (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
                     .Item.Add("HC Dew Point @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, hdp1), nf), True, "Natural Gas Properties", "Hydrocarbon Dew Point at System Pressure", True)
+                    .Item.Add("Water Dew Point @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, wdp1), nf), True, "Natural Gas Properties", "", True)
+                    .Item.Add("Water Dew Point (Ideal) @ 1 atm (" & su.temperature & ")", Format(Converter.ConvertFromSI(su.temperature, iwdp1), nf), True, "Natural Gas Properties", "Water Dew Point at System Pressure, calculated using Raoult's Law and Water's Vapor Pressure experimental curve.", True)
                     .Item.Add("Water Content @ NC (mg/m3)", Format(wc0, nf), True, "Natural Gas Properties", "Water concentration at NC = Normal Conditions (T = 0 °C, P = 1 atm)", True)
                     .Item.Add("Water Content @ SC (mg/m3)", Format(wc15, nf), True, "Natural Gas Properties", "Water concentration at SC = Standard Conditions (T = 15.56 °C, P = 1 atm)", True)
                     .Item.Add("Water Content @ BR (mg/m3)", Format(wc20, nf), True, "Natural Gas Properties", "Water concentration at BR = CNTP (T = 20 °C, P = 1 atm)", True)

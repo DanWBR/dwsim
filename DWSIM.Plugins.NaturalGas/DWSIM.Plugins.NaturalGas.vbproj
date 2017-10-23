@@ -98,6 +98,10 @@
       <HintPath>..\DWSIM\References\CapeOpen.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Cureos.Numerics">
+      <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.1.5\lib\net45\FileHelpers.dll</HintPath>
       <Private>True</Private>
@@ -117,6 +121,7 @@
   <ItemGroup>
     <Compile Include="Class1.vb" />
     <Compile Include="data.vb" />
+    <Compile Include="DewPointFinder.vb" />
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
     </Compile>
@@ -171,6 +176,11 @@
     <None Include="Resources\pc_massico.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DWSIM.ExtensionMethods\DWSIM.ExtensionMethods.vbproj">
+      <Project>{1e12c010-2661-4896-9c00-90f8b41ed10a}</Project>
+      <Name>DWSIM.ExtensionMethods</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Serializers.XML\DWSIM.XMLSerializer.vbproj">
       <Project>{6c232866-a87b-409a-8a02-39f2ff218561}</Project>
       <Name>DWSIM.XMLSerializer</Name>
