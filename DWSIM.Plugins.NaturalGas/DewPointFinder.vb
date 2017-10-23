@@ -14,7 +14,7 @@ Public Class DewPointFinder
 
     Public Function CalcDewPoints(ByVal Vz As Double(), ByVal Pressure As Double, ByVal PP As PropertyPackage) As Dictionary(Of String, Double)
 
-        vz0 = Vz.Clone
+        vz0 = CType(Vz.Clone, Double())
 
         Dim n As Integer = Vz.Length - 1
 
@@ -52,7 +52,7 @@ Public Class DewPointFinder
             End If
         Else
             'if there is no water, clone the current composition.
-            vznw = Vz.Clone
+            vznw = CType(Vz.Clone, Double())
         End If
 
         'calculate hydrocarbon dew point with no water
@@ -61,23 +61,23 @@ Public Class DewPointFinder
         Dim idwdp As Double = 0
         Dim wdp As Double = 0
 
-        Dim results As Object = Nothing
+        Dim results As Object() = Nothing
 
         Try
-            results = PP.FlashBase.Flash_PV(vznw, P, 1.0, 300.0, PP)
-            hcdp = results(4)
+            results = CType(PP.FlashBase.Flash_PV(vznw, P, 1.0, 300.0, PP), Object())
+            hcdp = CDbl(results(4))
         Catch ex As Exception
         End Try
 
         idwdp = PP.AUX_TSATi(Vz(wid) * P, wid)
 
         Try
-            results = PP.FlashBase.Flash_PV(Vz, P, 1.0, 300.0, PP)
-            Dim vx = results(2)
+            results = CType(PP.FlashBase.Flash_PV(Vz, P, 1.0, 300.0, PP), Object())
+            Dim vx As Double() = CType(results(2), Double())
             If vx(wid) > 0.99 Then
-                wdp = results(4)
+                wdp = CDbl(results(4))
             Else
-                hcdp = results(4)
+                hcdp = CDbl(results(4))
                 Dim obj As Double = 0.0#
                 Dim status As IpoptReturnCode = IpoptReturnCode.Feasible_Point_Found
                 Using problem As New Ipopt(1, New Double() {100.0}, New Double() {500.0}, 0, Nothing, Nothing,
@@ -100,9 +100,9 @@ Public Class DewPointFinder
                 Dim phi_v = proppack.DW_CalcFugCoeff(vz0, Tw, P, State.Vapor)
                 Dim phi_l = proppack.DW_CalcFugCoeff(vzw, Tw, P, State.Liquid)
                 Dim newK = phi_l.DivideY(phi_v)
-                results = PP.FlashBase.Flash_PV(Vz, P, 1.0, wdp, PP, True, newK)
-                Dim vx = results(2)
-                If vx(wid) > 0.99 Then wdp = results(4)
+                results = CType(PP.FlashBase.Flash_PV(Vz, P, 1.0, wdp, PP, True, newK), Object())
+                Dim vx As Double() = CType(results(2), Double())
+                If vx(wid) > 0.99 Then wdp = CDbl(results(4))
             End If
         Catch ex As Exception
         End Try

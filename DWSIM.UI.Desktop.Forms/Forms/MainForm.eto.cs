@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections.Generic;
 using DWSIM.Thermodynamics.BaseClasses;
+using DWSIM.Interfaces;
+using System.Reflection;
+using System.Text;
 
 namespace DWSIM.UI
 {
@@ -20,6 +23,8 @@ namespace DWSIM.UI
         private int OpenForms = 0;
 
         public List<ConstantProperties> UserCompounds = new List<ConstantProperties>();
+
+        public List<IUtilityPlugin5> plugins = new List<IUtilityPlugin5>();
 
         ListBox MostRecentList;
 
@@ -236,6 +241,10 @@ namespace DWSIM.UI
 
             Closing += MainForm_Closing;
 
+            //Plugins
+
+            LoadPlugins();
+
             //check for updates (automatic updater)
 
             SetupUpdateItems();
@@ -244,6 +253,18 @@ namespace DWSIM.UI
                 GlobalSettings.Settings.RunningPlatform() == 
                 GlobalSettings.Settings.Platform.Windows) Task.Factory.StartNew(() => LaunchUpdateProcess());
 
+        }
+
+        private void LoadPlugins()
+        {
+            //load plugins from 'Plugins' folder
+            {
+                List<Interfaces.IUtilityPlugin5> pluginlist = GetPlugins(LoadPluginAssemblies());
+                foreach (Interfaces.IUtilityPlugin5 ip in pluginlist)
+                {
+                    plugins.Add(ip);
+                }
+            }
         }
 
         private void SetupUpdateItems()
@@ -452,6 +473,69 @@ namespace DWSIM.UI
             {
                 if (!flowsheet.AvailableCompounds.ContainsKey(compound.Name)) flowsheet.AvailableCompounds.Add(compound.Name, compound);
             }
+
+        }
+
+        //plugins
+
+        public List<Interfaces.IUtilityPlugin5> GetPlugins(List<Assembly> alist)
+        {
+
+            List<Type> availableTypes = new List<Type>();
+
+            foreach (Assembly currentAssembly in alist)
+            {
+                try
+                {
+                    availableTypes.AddRange(currentAssembly.GetTypes());
+                }
+                catch
+                {
+                }
+            }
+
+            List<Type> pluginlist = availableTypes.FindAll((t) => {
+                List<Type> interfaceTypes = new List<Type>(t.GetInterfaces());
+                return (interfaceTypes.Contains(typeof(Interfaces.IUtilityPlugin)));
+            });
+
+            return pluginlist.ConvertAll<Interfaces.IUtilityPlugin5>((Type t) => Activator.CreateInstance(t) as Interfaces.IUtilityPlugin5);
+
+        }
+
+        private List<Assembly> LoadPluginAssemblies()
+        {
+
+            List<Assembly> pluginassemblylist = new List<Assembly>();
+
+
+            if (Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plugins")))
+            {
+                DirectoryInfo dinfo = new DirectoryInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plugins"));
+
+                FileInfo[] files = dinfo.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+
+                if ((files != null))
+                {
+                    foreach (FileInfo fi in files)
+                    {
+                        if (fi.Extension.ToLower() == ".exe" | fi.Extension.ToLower() == ".dll")
+                        {
+                            try
+                            {
+                                pluginassemblylist.Add(Assembly.LoadFile(fi.FullName));
+
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            return pluginassemblylist;
 
         }
 

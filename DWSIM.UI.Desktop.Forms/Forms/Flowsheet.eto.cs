@@ -237,6 +237,30 @@ namespace DWSIM.UI.Forms
                 Menu.ApplicationItems.AddRange(new[] { btnSave, btnSaveAs, btnClose });
             }
 
+            //process plugin list
+
+            var pluginbuttons = new List<ButtonMenuItem>();
+
+            var mform = (MainForm)Application.Instance.MainForm;
+
+            foreach (Interfaces.IUtilityPlugin iplugin in mform.plugins)
+            {
+                ButtonMenuItem tsmi = new ButtonMenuItem();
+                tsmi.Text = iplugin.Name;
+                tsmi.Tag = iplugin.UniqueID;
+                tsmi.Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Electrical_96px.png"));
+                tsmi.Click += (sender, e) =>
+                {
+                    iplugin.SetFlowsheet(this.FlowsheetObject);
+                    Form f = (Form)iplugin.UtilityForm;
+                    f.Show();
+                };
+                pluginbuttons.Add(tsmi);
+            }
+
+            var pluginsmenu = new ButtonMenuItem { Text = "Plugins" };
+            pluginsmenu.Items.AddRange(pluginbuttons);
+
             switch (GlobalSettings.Settings.RunningPlatform())
             {
                 case GlobalSettings.Settings.Platform.Mac:
@@ -247,6 +271,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Insert(5, new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                         Menu.Items.Insert(6, new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                         Menu.Items.Insert(7, new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                        Menu.Items.Insert(7, pluginsmenu);
                     }
                     else
                     {
@@ -255,6 +280,7 @@ namespace DWSIM.UI.Forms
                         Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                         Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                        Menu.Items.Add(pluginsmenu);
                     }
                     break;
                 case GlobalSettings.Settings.Platform.Linux:
@@ -264,6 +290,7 @@ namespace DWSIM.UI.Forms
                     Menu.Items.Add(new ButtonMenuItem { Text = "Solver", Items = { btnSolve, chkSimSolver } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Tools", Items = { btnSensAnalysis, btnOptimization } });
                     Menu.Items.Add(new ButtonMenuItem { Text = "Utilities", Items = { btnUtilities_TrueCriticalPoint, btnUtilities_PhaseEnvelope, btnUtilities_BinaryEnvelope } });
+                    Menu.Items.Add(pluginsmenu);
                     break;
             }
 

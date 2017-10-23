@@ -307,6 +307,8 @@ else
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 
+xcopy "$(SolutionDir)DWSIM\bin\Debug\plugins\*" "$(TargetDir)\plugins\" /E /Y /F /D
+
 )</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Eto.Platform.Mac.Template.2.4.0-build1146\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1146\build\Eto.Platform.Mac.Template.targets')" />
