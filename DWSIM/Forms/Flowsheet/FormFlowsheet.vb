@@ -2767,7 +2767,16 @@ Public Class FormFlowsheet
     End Property
 
     Public Function GetSelectedFlowsheetSimulationObject(tag As String) As ISimulationObject Implements IFlowsheet.GetSelectedFlowsheetSimulationObject
-        Return Me.FormSurface.FlowsheetDesignSurface.SelectedObject
+        Dim selobj = Me.FormSurface.FlowsheetDesignSurface.SelectedObject
+        If selobj Is Nothing Then
+            Return Nothing
+        Else
+            If tag Is Nothing OrElse tag = "" Then
+                If SimulationObjects.ContainsKey(selobj.Name) Then Return SimulationObjects(selobj.Name) Else Return Nothing
+            Else
+                Return SimulationObjects.Values.Where(Function(x) x.GraphicObject.Tag = tag).FirstOrDefault
+            End If
+        End If
     End Function
 
     Public Sub DisplayForm(form As Object) Implements IFlowsheet.DisplayForm
