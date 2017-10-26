@@ -75,7 +75,6 @@ Namespace PropertyPackages
                 .Add("PP_USEEXPLIQDENS", 0)
                 .Add("PP_USE_EOS_LIQDENS", 0)
                 .Add("PP_IDEAL_VAPOR_PHASE_FUG", 1)
-                .Add("PP_ENTH_CP_CALC_METHOD", 1)
                 .Item("PP_IDEAL_MIXRULE_LIQDENS") = 1
                 .Item("PP_USEEXPLIQDENS") = 1
             End With
