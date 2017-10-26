@@ -182,7 +182,7 @@ Public Class FormSimulWizard
             Try
                 Dim r As New DataGridViewRow
                 translatedname = comp.Name
-                r.CreateCells(ogc1, New Object() {comp.Name, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported, comp.IsFPROPSSupported})
+                r.CreateCells(ogc1, New Object() {comp.Name, translatedname, comp.CAS_Number, DWSIM.App.GetComponentType(comp), comp.Formula, comp.OriginalDB, comp.IsCOOLPROPSupported})
                 ogc1.Rows.Add(r)
                 Return ogc1.Rows.Count - 1
             Catch ex As Exception

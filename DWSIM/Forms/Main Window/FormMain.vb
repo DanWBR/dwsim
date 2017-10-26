@@ -754,6 +754,14 @@ Public Class FormMain
             My.Settings.UserDatabases.Remove(str)
         Next
 
+        'check coolprop compat
+        Dim cp As New CoolPropPropertyPackage()
+        For Each c In Me.AvailableComponents.Values
+            If cp.CompoundAliases.ContainsKey(c.CAS_Number) Then c.IsCOOLPROPSupported = True
+        Next
+        cp.Dispose()
+        cp = Nothing
+
         Return Nothing
 
     End Function
@@ -808,11 +816,8 @@ Public Class FormMain
         Try
             cpa = cpdb.Transfer()
             For Each cp As BaseClasses.ConstantProperties In cpa
-                If Not Me.AvailableComponents.ContainsKey(cp.Name) Then
-                    Me.AvailableComponents.Add(cp.Name, cp)
-                Else
-                    Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
-                End If
+                If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
+                Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
             Next
         Catch ex As Exception
         End Try

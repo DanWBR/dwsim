@@ -603,15 +603,6 @@ Clique em "Próximo" para continuar.</value>
   <data name="Column5.ToolTipText" xml:space="preserve">
     <value>Supported by CoolProp Property Package</value>
   </data>
-  <metadata name="Column10.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Column10.HeaderText" xml:space="preserve">
-    <value>FP</value>
-  </data>
-  <data name="Column10.ToolTipText" xml:space="preserve">
-    <value>Supported by FPROPS Property Package</value>
-  </data>
   <data name="ogc1.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 71</value>
   </data>
@@ -1539,12 +1530,6 @@ Clique em "Próximo" para continuar.</value>
     <value>Column5</value>
   </data>
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column10.Name" xml:space="preserve">
-    <value>Column10</value>
-  </data>
-  <data name="&gt;&gt;Column10.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column18.Name" xml:space="preserve">

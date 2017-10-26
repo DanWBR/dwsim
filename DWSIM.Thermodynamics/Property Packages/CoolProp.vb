@@ -33,13 +33,18 @@ Namespace PropertyPackages
 
         Public Shadows Const ClassId As String = "1F5B0263-E936-40d5-BA5B-FFAB11595E43"
 
+        Public CompoundAliases As New Dictionary(Of String, List(Of String))
+
         Public Sub New(ByVal comode As Boolean)
             MyBase.New(comode)
+            GetListOfSupportedCompounds()
         End Sub
 
         Public Sub New()
 
             MyBase.New()
+
+            GetListOfSupportedCompounds()
 
             With Me.Parameters
                 .Item("PP_IDEAL_MIXRULE_LIQDENS") = 1
@@ -50,6 +55,29 @@ Namespace PropertyPackages
             Me._packagetype = PropertyPackages.PackageType.Miscelaneous
 
         End Sub
+
+        Sub GetListOfSupportedCompounds()
+
+            Dim comps() As String = CoolProp.get_global_param_string("FluidsList").Split(",")
+
+            CompoundAliases.Clear()
+            SupportedComponents.Clear()
+
+            Dim aliases(), cas As String
+
+            For Each c In comps
+                aliases = CoolProp.get_fluid_param_string(c, "aliases").Split(",")
+                SupportedComponents.AddRange(aliases)
+                cas = CoolProp.get_fluid_param_string(c, "CAS")
+                CompoundAliases.Add(cas, aliases.ToList)
+            Next
+
+        End Sub
+
+        Function GetCoolPropName(name As String) As String
+            Dim casid As String = CurrentMaterialStream.Phases(0).Compounds(name).ConstantProperties.CAS_Number
+            Return CompoundAliases(casid)(0)
+        End Function
 
 #Region "    DWSIM Functions"
 
@@ -65,15 +93,15 @@ Namespace PropertyPackages
         Public Overrides Function AUX_CPi(sub1 As String, T As Double) As Double
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax Then
                     Try
                         If T <= Tc Then
-                            val = CoolProp.PropsSI("CP0MASS", "T", T, "Q", 1, sub1) / 1000
+                            val = CoolProp.PropsSI("CP0MASS", "T", T, "Q", 1, GetCoolPropName(sub1)) / 1000
                         Else
-                            val = CoolProp.PropsSI("CP0MASS", "T", T, "P", 101325, sub1) / 1000
+                            val = CoolProp.PropsSI("CP0MASS", "T", T, "P", 101325, GetCoolPropName(sub1)) / 1000
                         End If
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
@@ -94,12 +122,12 @@ Namespace PropertyPackages
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("P", "T", T, "Q", 0, sub1)
+                        val = CoolProp.PropsSI("P", "T", T, "Q", 0, GetCoolPropName(sub1))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_PVAPi(index, T)
@@ -117,12 +145,12 @@ Namespace PropertyPackages
         Public Overrides Function AUX_PVAPi(sub1 As String, T As Double) As Object
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("P", "T", T, "Q", 0, sub1)
+                        val = CoolProp.PropsSI("P", "T", T, "Q", 0, GetCoolPropName(sub1))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_PVAPi(sub1, T)
@@ -141,11 +169,11 @@ Namespace PropertyPackages
             Dim sub1 As String = RET_VNAMES()(index)
             Dim Pmin, Pmax, val As Double
             If IsCompoundSupported(sub1) Then
-                Pmin = CoolProp.Props1SI(sub1, "PMIN")
-                Pmax = CoolProp.Props1SI(sub1, "PMAX")
+                Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                 If PVAP > Pmin And PVAP < Pmax Then
                     Try
-                        val = CoolProp.PropsSI("T", "P", PVAP, "Q", 0, sub1)
+                        val = CoolProp.PropsSI("T", "P", PVAP, "Q", 0, GetCoolPropName(sub1))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_TSATi(PVAP, index)
@@ -164,11 +192,11 @@ Namespace PropertyPackages
         Public Overrides Function AUX_TSATi(PVAP As Double, subst As String) As Double
             Dim Pmin, Pmax, val As Double
             If IsCompoundSupported(subst) Then
-                Pmin = CoolProp.Props1SI(subst, "PMIN")
-                Pmax = CoolProp.Props1SI(subst, "PMAX")
+                Pmin = CoolProp.Props1SI(GetCoolPropName(subst), "PMIN")
+                Pmax = CoolProp.Props1SI(GetCoolPropName(subst), "PMAX")
                 If PVAP > Pmin And PVAP < Pmax Then
                     Try
-                        val = CoolProp.PropsSI("T", "P", PVAP, "Q", 0, subst)
+                        val = CoolProp.PropsSI("T", "P", PVAP, "Q", 0, GetCoolPropName(subst))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & subst & "]")
                         val = MyBase.AUX_TSATi(PVAP, subst)
@@ -188,12 +216,12 @@ Namespace PropertyPackages
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 Tc = CoolProp.Props1SI(sub1, "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("D", "T", T, "Q", 0, cprop.Name)
+                        val = CoolProp.PropsSI("D", "T", T, "Q", 0, GetCoolPropName(sub1))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_LIQDENSi(cprop, T)
@@ -213,12 +241,12 @@ Namespace PropertyPackages
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("C", "T", T, "Q", 0, cprop.Name) / 1000
+                        val = CoolProp.PropsSI("C", "T", T, "Q", 0, GetCoolPropName(sub1)) / 1000
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_LIQ_Cpi(cprop, T)
@@ -242,16 +270,17 @@ Namespace PropertyPackages
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
-                    Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                    Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                    Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                    Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
-                    Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
+                    Dim sub1 As String = subst.Name
+                    Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                    Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                    Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                    Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
+                    Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
-                        If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name) Else Tb = Tc
+                        If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                         If T > Tb Then
                             Try
-                                vk(i) = CoolProp.PropsSI("L", "T", T, "P", P, subst.ConstantProperties.Name)
+                                vk(i) = CoolProp.PropsSI("L", "T", T, "P", P, GetCoolPropName(sub1))
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value using Ely-Hanley [Fluid: " & subst.ConstantProperties.Name & "]")
                                 vk(i) = Auxiliary.PROPS.condtg_elyhanley(T, subst.ConstantProperties.Critical_Temperature,
@@ -269,11 +298,11 @@ Namespace PropertyPackages
                                 x3 = Tb + (Tmax - Tb) * 0.6
                                 x4 = Tb + (Tmax - Tb) * 0.8
                                 x5 = Tb + (Tmax - Tb) * 0.9
-                                p1 = CoolProp.PropsSI("L", "T", x1, "P", P, subst.ConstantProperties.Name)
-                                p2 = CoolProp.PropsSI("L", "T", x2, "P", P, subst.ConstantProperties.Name)
-                                p3 = CoolProp.PropsSI("L", "T", x3, "P", P, subst.ConstantProperties.Name)
-                                p4 = CoolProp.PropsSI("L", "T", x4, "P", P, subst.ConstantProperties.Name)
-                                p5 = CoolProp.PropsSI("L", "T", x5, "P", P, subst.ConstantProperties.Name)
+                                p1 = CoolProp.PropsSI("L", "T", x1, "P", P, GetCoolPropName(sub1))
+                                p2 = CoolProp.PropsSI("L", "T", x2, "P", P, GetCoolPropName(sub1))
+                                p3 = CoolProp.PropsSI("L", "T", x3, "P", P, GetCoolPropName(sub1))
+                                p4 = CoolProp.PropsSI("L", "T", x4, "P", P, GetCoolPropName(sub1))
+                                p5 = CoolProp.PropsSI("L", "T", x5, "P", P, GetCoolPropName(sub1))
                                 vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value using Ely-Hanley [Fluid: " & subst.ConstantProperties.Name & "]")
@@ -316,14 +345,15 @@ Namespace PropertyPackages
             Dim P As Double = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseid).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
-                    Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                    Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                    Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
+                    Dim sub1 As String = subst.Name
+                    Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                    Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                    Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                     If T > Tmin And T <= Tmax And T <= Tc Then
                         Try
                             Tb = Me.AUX_TSATi(P, i)
                             If T < Tb Then
-                                vk(i) = CoolProp.PropsSI("L", "T", T, "Q", 0, subst.ConstantProperties.Name)
+                                vk(i) = CoolProp.PropsSI("L", "T", T, "Q", 0, GetCoolPropName(sub1))
                             Else
                                 WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Thermal Conductivity, compound " &
                           subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -333,11 +363,11 @@ Namespace PropertyPackages
                                 x3 = Tb * 0.92
                                 x4 = Tb * 0.86
                                 x5 = Tb * 0.8
-                                p1 = CoolProp.PropsSI("L", "T", x1, "P", P, subst.ConstantProperties.Name)
-                                p2 = CoolProp.PropsSI("L", "T", x2, "P", P, subst.ConstantProperties.Name)
-                                p3 = CoolProp.PropsSI("L", "T", x3, "P", P, subst.ConstantProperties.Name)
-                                p4 = CoolProp.PropsSI("L", "T", x4, "P", P, subst.ConstantProperties.Name)
-                                p5 = CoolProp.PropsSI("L", "T", x5, "P", P, subst.ConstantProperties.Name)
+                                p1 = CoolProp.PropsSI("L", "T", x1, "P", P, GetCoolPropName(sub1))
+                                p2 = CoolProp.PropsSI("L", "T", x2, "P", P, GetCoolPropName(sub1))
+                                p3 = CoolProp.PropsSI("L", "T", x3, "P", P, GetCoolPropName(sub1))
+                                p4 = CoolProp.PropsSI("L", "T", x4, "P", P, GetCoolPropName(sub1))
+                                p5 = CoolProp.PropsSI("L", "T", x5, "P", P, GetCoolPropName(sub1))
                                 vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                             End If
                         Catch ex As Exception
@@ -372,12 +402,13 @@ Namespace PropertyPackages
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(1).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
-                    Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                    Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                    Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
+                    Dim sub1 As String = subst.Name
+                    Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                    Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                    Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                     If T > Tmin And T <= Tmax And T <= Tc Then
                         Try
-                            vk(i) = CoolProp.PropsSI("D", "T", T, "Q", 0, subst.ConstantProperties.Name)
+                            vk(i) = CoolProp.PropsSI("D", "T", T, "Q", 0, GetCoolPropName(sub1))
                         Catch ex As Exception
                             WriteWarningMessage(ex.Message.ToString & ". Estimating value using Rackett [Fluid: " & subst.ConstantProperties.Name & "]")
                             vk(i) = Auxiliary.PROPS.liq_dens_rackett(T, subst.ConstantProperties.Critical_Temperature, subst.ConstantProperties.Critical_Pressure,
@@ -407,12 +438,12 @@ Namespace PropertyPackages
             Dim sub1 = subst.ConstantProperties.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("D", "T", T, "Q", 0, sub1) / 1000
+                        val = CoolProp.PropsSI("D", "T", T, "Q", 0, GetCoolPropName(sub1)) / 1000
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_LIQDENSi(subst, T)
@@ -432,12 +463,12 @@ Namespace PropertyPackages
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("L", "T", T, "Q", 0, cprop.Name) * 1000
+                        val = CoolProp.PropsSI("L", "T", T, "Q", 0, GetCoolPropName(sub1)) * 1000
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_LIQTHERMCONDi(cprop, T)
@@ -456,12 +487,12 @@ Namespace PropertyPackages
         Public Overrides Function AUX_LIQVISCi(sub1 As String, T As Double) As Object
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax And T <= Tc Then
                     Try
-                        val = CoolProp.PropsSI("V", "T", T, "Q", 0, sub1)
+                        val = CoolProp.PropsSI("V", "T", T, "Q", 0, GetCoolPropName(sub1))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value... [Fluid: " & sub1 & "]")
                         val = MyBase.AUX_LIQVISCi(sub1, T)
@@ -481,13 +512,13 @@ Namespace PropertyPackages
             Dim sub1 = constprop.Name
             Dim Tmin, Tmax, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(sub1, "TMIN")
-                Tmax = CoolProp.Props1SI(sub1, "TMAX")
-                Tc = CoolProp.Props1SI(sub1, "TCRIT")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                 If T > Tmin And T <= Tmax Then
                     Try
                         If T <= Tc Then
-                            val = CoolProp.PropsSI("I", "T", T, "Q", 0, sub1)
+                            val = CoolProp.PropsSI("I", "T", T, "Q", 0, GetCoolPropName(sub1))
                         Else
                             val = CoolProp.PropsSI("I", "T", T, "P", 101325, sub1)
                         End If
@@ -521,16 +552,16 @@ Namespace PropertyPackages
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(cprop.Name, "TMIN")
-                Tmax = CoolProp.Props1SI(cprop.Name, "TMAX")
-                Pmin = CoolProp.Props1SI(cprop.Name, "PMIN")
-                Pmax = CoolProp.Props1SI(cprop.Name, "PMAX")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                 If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                     Tc = CoolProp.Props1SI(cprop.Name, "TCRIT")
-                    If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, cprop.Name) Else Tb = Tc
+                    If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                     If T > Tb Then
                         Try
-                            val = CoolProp.PropsSI("L", "T", T, "P", P, cprop.Name) * 1000
+                            val = CoolProp.PropsSI("L", "T", T, "P", P, GetCoolPropName(sub1)) * 1000
                         Catch ex As Exception
                             WriteWarningMessage(ex.Message.ToString & ". Estimating value using Ely-Hanley [Fluid: " & cprop.Name & "]")
                             val = Auxiliary.PROPS.condtg_elyhanley(T, cprop.Critical_Temperature,
@@ -548,11 +579,11 @@ Namespace PropertyPackages
                             x3 = Tb + (Tmax - Tb) * 0.6
                             x4 = Tb + (Tmax - Tb) * 0.8
                             x5 = Tb + (Tmax - Tb) * 0.9
-                            p1 = CoolProp.PropsSI("L", "T", x1, "P", P, cprop.Name) * 1000
-                            p2 = CoolProp.PropsSI("L", "T", x2, "P", P, cprop.Name) * 1000
-                            p3 = CoolProp.PropsSI("L", "T", x3, "P", P, cprop.Name) * 1000
-                            p4 = CoolProp.PropsSI("L", "T", x4, "P", P, cprop.Name) * 1000
-                            p5 = CoolProp.PropsSI("L", "T", x5, "P", P, cprop.Name) * 1000
+                            p1 = CoolProp.PropsSI("L", "T", x1, "P", P, GetCoolPropName(sub1)) * 1000
+                            p2 = CoolProp.PropsSI("L", "T", x2, "P", P, GetCoolPropName(sub1)) * 1000
+                            p3 = CoolProp.PropsSI("L", "T", x3, "P", P, GetCoolPropName(sub1)) * 1000
+                            p4 = CoolProp.PropsSI("L", "T", x4, "P", P, GetCoolPropName(sub1)) * 1000
+                            p5 = CoolProp.PropsSI("L", "T", x5, "P", P, GetCoolPropName(sub1)) * 1000
                             val = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                         Catch ex As Exception
                             WriteWarningMessage(ex.Message.ToString & ". Estimating value using Ely-Hanley [Fluid: " & cprop.Name & "]")
@@ -574,11 +605,11 @@ Namespace PropertyPackages
             Dim sub1 = cprop.Name
             Dim Tmin, Tmax, val As Double
             If IsCompoundSupported(sub1) Then
-                Tmin = CoolProp.Props1SI(cprop.Name, "TMIN")
-                Tmax = CoolProp.Props1SI(cprop.Name, "TMAX")
+                Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
                 If T > Tmin And T < Tmax Then
                     Try
-                        val = CoolProp.PropsSI("V", "T", T, "P", P, cprop.Name)
+                        val = CoolProp.PropsSI("V", "T", T, "P", P, GetCoolPropName(sub1))
                     Catch ex As Exception
                         WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & cprop.Name & "]")
                         val = MyBase.AUX_VAPVISCi(cprop, T)
@@ -603,16 +634,17 @@ Namespace PropertyPackages
             Dim xv As Double = Me.CurrentMaterialStream.Phases(2).Properties.molarfraction.GetValueOrDefault
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
-                    Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                    Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                    Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                    Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
+                    Dim sub1 As String = subst.Name
+                    Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                    Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                    Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                    Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
-                        Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
-                        If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name) Else Tb = Tc
+                        Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
+                        If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                         If T > Tb Then
                             Try
-                                vk(i) = CoolProp.PropsSI("V", "T", T, "P", P, subst.ConstantProperties.Name)
+                                vk(i) = CoolProp.PropsSI("V", "T", T, "P", P, GetCoolPropName(sub1))
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
                                 vk(i) = MyBase.AUX_VAPVISCi(subst.ConstantProperties, T)
@@ -627,11 +659,11 @@ Namespace PropertyPackages
                                 x3 = Tb + (Tmax - Tb) * 0.6
                                 x4 = Tb + (Tmax - Tb) * 0.8
                                 x5 = Tb + (Tmax - Tb) * 0.9
-                                p1 = CoolProp.PropsSI("V", "T", x1, "P", P, subst.ConstantProperties.Name)
-                                p2 = CoolProp.PropsSI("V", "T", x2, "P", P, subst.ConstantProperties.Name)
-                                p3 = CoolProp.PropsSI("V", "T", x3, "P", P, subst.ConstantProperties.Name)
-                                p4 = CoolProp.PropsSI("V", "T", x4, "P", P, subst.ConstantProperties.Name)
-                                p5 = CoolProp.PropsSI("V", "T", x5, "P", P, subst.ConstantProperties.Name)
+                                p1 = CoolProp.PropsSI("V", "T", x1, "P", P, GetCoolPropName(sub1))
+                                p2 = CoolProp.PropsSI("V", "T", x2, "P", P, GetCoolPropName(sub1))
+                                p3 = CoolProp.PropsSI("V", "T", x3, "P", P, GetCoolPropName(sub1))
+                                p4 = CoolProp.PropsSI("V", "T", x4, "P", P, GetCoolPropName(sub1))
+                                p5 = CoolProp.PropsSI("V", "T", x5, "P", P, GetCoolPropName(sub1))
                                 vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
@@ -675,23 +707,24 @@ Namespace PropertyPackages
 
         Public Overrides Function AUX_VAPDENS(ByVal T As Double, ByVal P As Double) As Double
 
-            Dim val As Double
+            Dim val As Double = 1.0
             Dim i As Integer
             Dim Tmin, Tmax, Pmin, Pmax, Tb, Tc As Double
             Dim vk(Me.CurrentMaterialStream.Phases(0).Compounds.Count - 1) As Double
             i = 0
             For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(2).Compounds.Values
                 If IsCompoundSupported(subst.Name) Then
-                    Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                    Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                    Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                    Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
+                    Dim sub1 As String = subst.Name
+                    Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                    Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                    Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                    Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
-                        Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
-                        If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name) Else Tb = Tc
+                        Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
+                        If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
                         If T > Tb Then
                             Try
-                                vk(i) = CoolProp.PropsSI("D", "T", T, "P", P, subst.ConstantProperties.Name)
+                                vk(i) = CoolProp.PropsSI("D", "T", T, "P", P, GetCoolPropName(sub1))
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
                                 vk(i) = 1 / (8.314 * val * T / P) * Me.AUX_MMM(Phase.Vapor) / 1000
@@ -706,11 +739,11 @@ Namespace PropertyPackages
                                 x3 = Tb + (Tmax - Tb) * 0.6
                                 x4 = Tb + (Tmax - Tb) * 0.8
                                 x5 = Tb + (Tmax - Tb) * 0.9
-                                p1 = CoolProp.PropsSI("D", "T", x1, "P", P, subst.ConstantProperties.Name)
-                                p2 = CoolProp.PropsSI("D", "T", x2, "P", P, subst.ConstantProperties.Name)
-                                p3 = CoolProp.PropsSI("D", "T", x3, "P", P, subst.ConstantProperties.Name)
-                                p4 = CoolProp.PropsSI("D", "T", x4, "P", P, subst.ConstantProperties.Name)
-                                p5 = CoolProp.PropsSI("D", "T", x5, "P", P, subst.ConstantProperties.Name)
+                                p1 = CoolProp.PropsSI("D", "T", x1, "P", P, GetCoolPropName(sub1))
+                                p2 = CoolProp.PropsSI("D", "T", x2, "P", P, GetCoolPropName(sub1))
+                                p3 = CoolProp.PropsSI("D", "T", x3, "P", P, GetCoolPropName(sub1))
+                                p4 = CoolProp.PropsSI("D", "T", x4, "P", P, GetCoolPropName(sub1))
+                                p5 = CoolProp.PropsSI("D", "T", x5, "P", P, GetCoolPropName(sub1))
                                 vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                             Catch ex As Exception
                                 WriteWarningMessage(ex.Message.ToString & ". Estimating value [Fluid: " & subst.ConstantProperties.Name & "]")
@@ -775,15 +808,16 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
-                            Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                            Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                            Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                            Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
-                            Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
+                            Dim sub1 As String = subst.Name
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
+                            Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
-                                Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name)
+                                Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1))
                                 If T < Tb Then
-                                    vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, subst.ConstantProperties.Name) / 1000
+                                    vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Cp, compound " &
                                                            subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -793,11 +827,11 @@ Namespace PropertyPackages
                                     x3 = Tb * 0.92
                                     x4 = Tb * 0.86
                                     x5 = Tb * 0.8
-                                    p1 = CoolProp.PropsSI("C", "T", x1, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p2 = CoolProp.PropsSI("C", "T", x2, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p3 = CoolProp.PropsSI("C", "T", x3, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p4 = CoolProp.PropsSI("C", "T", x4, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p5 = CoolProp.PropsSI("C", "T", x5, "P", P, subst.ConstantProperties.Name) / 1000
+                                    p1 = CoolProp.PropsSI("C", "T", x1, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p2 = CoolProp.PropsSI("C", "T", x2, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p3 = CoolProp.PropsSI("C", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p4 = CoolProp.PropsSI("C", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p5 = CoolProp.PropsSI("C", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -816,14 +850,15 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
-                            Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                            Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                            Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                            Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
+                            Dim sub1 As String = subst.Name
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
-                                Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, subst.ConstantProperties.Name)
+                                Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1))
                                 If T > Tb Then
-                                    vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, subst.ConstantProperties.Name) / 1000
+                                    vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cp, compound " &
                                                         subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -833,11 +868,11 @@ Namespace PropertyPackages
                                     x3 = Tb + (Tmax - Tb) * 0.6
                                     x4 = Tb + (Tmax - Tb) * 0.8
                                     x5 = Tb + (Tmax - Tb) * 0.9
-                                    p1 = CoolProp.PropsSI("C", "T", x1, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p2 = CoolProp.PropsSI("C", "T", x2, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p3 = CoolProp.PropsSI("C", "T", x3, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p4 = CoolProp.PropsSI("C", "T", x4, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p5 = CoolProp.PropsSI("C", "T", x5, "P", P, subst.ConstantProperties.Name) / 1000
+                                    p1 = CoolProp.PropsSI("C", "T", x1, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p2 = CoolProp.PropsSI("C", "T", x2, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p3 = CoolProp.PropsSI("C", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p4 = CoolProp.PropsSI("C", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p5 = CoolProp.PropsSI("C", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -891,15 +926,16 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
-                            Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                            Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                            Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                            Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
-                            Tc = CoolProp.Props1SI(subst.ConstantProperties.Name, "TCRIT")
+                            Dim sub1 As String = subst.Name
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
+                            Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T < Tb Then
-                                    vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, subst.ConstantProperties.Name) / 1000
+                                    vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Cv, compound " &
                                                          subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -909,11 +945,11 @@ Namespace PropertyPackages
                                     x3 = Tb * 0.92
                                     x4 = Tb * 0.86
                                     x5 = Tb * 0.8
-                                    p1 = CoolProp.PropsSI("O", "T", x1, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p2 = CoolProp.PropsSI("O", "T", x2, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p3 = CoolProp.PropsSI("O", "T", x3, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p4 = CoolProp.PropsSI("O", "T", x4, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p5 = CoolProp.PropsSI("O", "T", x5, "P", P, subst.ConstantProperties.Name) / 1000
+                                    p1 = CoolProp.PropsSI("O", "T", x1, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p2 = CoolProp.PropsSI("O", "T", x2, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p3 = CoolProp.PropsSI("O", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p4 = CoolProp.PropsSI("O", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p5 = CoolProp.PropsSI("O", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -932,14 +968,15 @@ Namespace PropertyPackages
                     i = 0
                     For Each subst As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(phaseID).Compounds.Values
                         If IsCompoundSupported(subst.Name) Then
-                            Tmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMIN")
-                            Tmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "TMAX")
-                            Pmin = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMIN")
-                            Pmax = CoolProp.Props1SI(subst.ConstantProperties.Name, "PMAX")
+                            Dim sub1 As String = subst.Name
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(sub1), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(sub1), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(sub1), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T > Tb Then
-                                    vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, subst.ConstantProperties.Name) / 1000
+                                    vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cv, compound " &
                                                          subst.ConstantProperties.Name & ". Extrapolating curve to obtain a value...")
@@ -949,11 +986,11 @@ Namespace PropertyPackages
                                     x3 = Tb + (Tmax - Tb) * 0.6
                                     x4 = Tb + (Tmax - Tb) * 0.8
                                     x5 = Tb + (Tmax - Tb) * 0.9
-                                    p1 = CoolProp.PropsSI("O", "T", x1, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p2 = CoolProp.PropsSI("O", "T", x2, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p3 = CoolProp.PropsSI("O", "T", x3, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p4 = CoolProp.PropsSI("O", "T", x4, "P", P, subst.ConstantProperties.Name) / 1000
-                                    p5 = CoolProp.PropsSI("O", "T", x5, "P", P, subst.ConstantProperties.Name) / 1000
+                                    p1 = CoolProp.PropsSI("O", "T", x1, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p2 = CoolProp.PropsSI("O", "T", x2, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p3 = CoolProp.PropsSI("O", "T", x3, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p4 = CoolProp.PropsSI("O", "T", x4, "P", P, GetCoolPropName(sub1)) / 1000
+                                    p5 = CoolProp.PropsSI("O", "T", x5, "P", P, GetCoolPropName(sub1)) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -990,14 +1027,14 @@ Namespace PropertyPackages
                 Case State.Liquid
                     For i = 0 To n
                         If IsCompoundSupported(vn(i)) Then
-                            Tmin = CoolProp.Props1SI(vn(i), "TMIN")
-                            Tmax = CoolProp.Props1SI(vn(i), "TMAX")
-                            Pmin = CoolProp.Props1SI(vn(i), "PMIN")
-                            Pmax = CoolProp.Props1SI(vn(i), "PMAX")
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T < Tb And T > Tmin Then
-                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, vn(i)) / 1000
+                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Enthalpy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1007,11 +1044,11 @@ Namespace PropertyPackages
                                     x3 = Tb * 0.92
                                     x4 = Tb * 0.86
                                     x5 = Tb * 0.8
-                                    p1 = CoolProp.PropsSI("H", "T", x1, "P", P, vn(i)) / 1000
-                                    p2 = CoolProp.PropsSI("H", "T", x2, "P", P, vn(i)) / 1000
-                                    p3 = CoolProp.PropsSI("H", "T", x3, "P", P, vn(i)) / 1000
-                                    p4 = CoolProp.PropsSI("H", "T", x4, "P", P, vn(i)) / 1000
-                                    p5 = CoolProp.PropsSI("H", "T", x5, "P", P, vn(i)) / 1000
+                                    p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -1028,14 +1065,14 @@ Namespace PropertyPackages
                 Case State.Vapor
                     For i = 0 To n
                         If IsCompoundSupported(vn(i)) Then
-                            Tmin = CoolProp.Props1SI(vn(i), "TMIN")
-                            Tmax = CoolProp.Props1SI(vn(i), "TMAX")
-                            Pmin = CoolProp.Props1SI(vn(i), "PMIN")
-                            Pmax = CoolProp.Props1SI(vn(i), "PMAX")
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T > Tb Then
-                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, vn(i)) / 1000
+                                    vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1045,11 +1082,11 @@ Namespace PropertyPackages
                                     x3 = Tb + (Tmax - Tb) * 0.6
                                     x4 = Tb + (Tmax - Tb) * 0.8
                                     x5 = Tb + (Tmax - Tb) * 0.9
-                                    p1 = CoolProp.PropsSI("H", "T", x1, "P", P, vn(i)) / 1000
-                                    p2 = CoolProp.PropsSI("H", "T", x2, "P", P, vn(i)) / 1000
-                                    p3 = CoolProp.PropsSI("H", "T", x3, "P", P, vn(i)) / 1000
-                                    p4 = CoolProp.PropsSI("H", "T", x4, "P", P, vn(i)) / 1000
-                                    p5 = CoolProp.PropsSI("H", "T", x5, "P", P, vn(i)) / 1000
+                                    p1 = CoolProp.PropsSI("H", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("H", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("H", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("H", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("H", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -1091,14 +1128,14 @@ Namespace PropertyPackages
                 Case State.Liquid
                     For i = 0 To n
                         If IsCompoundSupported(vn(i)) Then
-                            Tmin = CoolProp.Props1SI(vn(i), "TMIN")
-                            Tmax = CoolProp.Props1SI(vn(i), "TMAX")
-                            Pmin = CoolProp.Props1SI(vn(i), "PMIN")
-                            Pmax = CoolProp.Props1SI(vn(i), "PMAX")
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T < Tb And T > Tmin Then
-                                    vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, vn(i)) / 1000
+                                    vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Entropy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1108,11 +1145,11 @@ Namespace PropertyPackages
                                     x3 = Tb * 0.92
                                     x4 = Tb * 0.86
                                     x5 = Tb * 0.8
-                                    p1 = CoolProp.PropsSI("S", "T", x1, "P", P, vn(i)) / 1000
-                                    p2 = CoolProp.PropsSI("S", "T", x2, "P", P, vn(i)) / 1000
-                                    p3 = CoolProp.PropsSI("S", "T", x3, "P", P, vn(i)) / 1000
-                                    p4 = CoolProp.PropsSI("S", "T", x4, "P", P, vn(i)) / 1000
-                                    p5 = CoolProp.PropsSI("S", "T", x5, "P", P, vn(i)) / 1000
+                                    p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -1129,14 +1166,14 @@ Namespace PropertyPackages
                 Case State.Vapor
                     For i = 0 To n
                         If IsCompoundSupported(vn(i)) Then
-                            Tmin = CoolProp.Props1SI(vn(i), "TMIN")
-                            Tmax = CoolProp.Props1SI(vn(i), "TMAX")
-                            Pmin = CoolProp.Props1SI(vn(i), "PMIN")
-                            Pmax = CoolProp.Props1SI(vn(i), "PMAX")
+                            Tmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMIN")
+                            Tmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "TMAX")
+                            Pmin = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMIN")
+                            Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
                                 If T > Tb Then
-                                    vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, vn(i)) / 1000
+                                    vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Entropy, compound " &
                                                          vn(i) & ". Extrapolating curve to obtain a value...")
@@ -1146,11 +1183,11 @@ Namespace PropertyPackages
                                     x3 = Tb + (Tmax - Tb) * 0.6
                                     x4 = Tb + (Tmax - Tb) * 0.8
                                     x5 = Tb + (Tmax - Tb) * 0.9
-                                    p1 = CoolProp.PropsSI("S", "T", x1, "P", P, vn(i)) / 1000
-                                    p2 = CoolProp.PropsSI("S", "T", x2, "P", P, vn(i)) / 1000
-                                    p3 = CoolProp.PropsSI("S", "T", x3, "P", P, vn(i)) / 1000
-                                    p4 = CoolProp.PropsSI("S", "T", x4, "P", P, vn(i)) / 1000
-                                    p5 = CoolProp.PropsSI("S", "T", x5, "P", P, vn(i)) / 1000
+                                    p1 = CoolProp.PropsSI("S", "T", x1, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p2 = CoolProp.PropsSI("S", "T", x2, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p3 = CoolProp.PropsSI("S", "T", x3, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p4 = CoolProp.PropsSI("S", "T", x4, "P", P, GetCoolPropName(vn(i))) / 1000
+                                    p5 = CoolProp.PropsSI("S", "T", x5, "P", P, GetCoolPropName(vn(i))) / 1000
                                     vk(i) = Interpolation.polinterpolation.nevilleinterpolation(New Double() {x1, x2, x3, x4, x5}, New Double() {p1, p2, p3, p4, p5}, 5, T)
                                 End If
                             Else
@@ -1519,9 +1556,7 @@ Namespace PropertyPackages
 
         Public Overrides Function SupportsComponent(ByVal comp As Interfaces.ICompoundConstantProperties) As Boolean
 
-            CheckIfCompoundIsSupported(comp.Name)
-
-            Return True
+            Return IsCompoundSupported(comp.Name)
 
         End Function
 
@@ -1533,21 +1568,17 @@ Namespace PropertyPackages
 
 #Region "    Auxiliary Functions"
 
-        Sub CheckIfCompoundIsSupported(compname As String)
-
-            Dim comps() As String = CoolProp.get_global_param_string("FluidsList").Split(",")
-
-            If Not comps.Contains(compname) Then
-                Throw New ArgumentOutOfRangeException(compname, "Error: compound '" & compname & "' is not supported by this version of CoolProp.")
-            End If
-
-        End Sub
-
         Function IsCompoundSupported(compname As String) As Boolean
 
-            Dim comps() As String = CoolProp.get_global_param_string("FluidsList").Split(",")
-
-            If Not comps.Contains(compname) Then Return False Else Return True
+            If SupportedComponents.Contains(compname) Then
+                Return True
+            Else
+                If CompoundAliases.ContainsKey(CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number) Then
+                    Return True
+                Else
+                    Throw New ArgumentOutOfRangeException(compname, "Error: compound '" & compname & "' is not supported by this version of CoolProp.")
+                End If
+            End If
 
         End Function
 
