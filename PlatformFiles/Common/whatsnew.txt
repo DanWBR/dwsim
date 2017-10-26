@@ -1,20 +1,8 @@
-Version 5.1 Update 2:
+Version 5.1 Update 3:
 
-- [CHG] Updated Compound Creator Wizard to get data from online sources
-- [FIX] Exposing missing Rigorous Column specs (New UI)
-- [FIX] Minor bug fixes
-
-Version 5.1 Update 1:
-
-- [FIX] Fixed issues with the Classic UI on High DPI displays
-- [FIX] Fixed inverted Material Stream list (New UI)
-- [FIX] Fixed text flowsheet object removal (New UI)
-
-Version 5.1:
-
-- [NEW] Simulation Setup Wizard (New UI)
-- [NEW] Compound Creator Wizard
-- [NEW] Calculated Phase Properties can now be overriden by the user
-- [NEW] Force compound to be in the solid phase only
-- [NEW] Added full profile information for Pipe Segment result reports (New UI)
-- [FIX] Added missing CoolProp and Petalas-Aziz libraries for macOS
+- [NEW] Exposed Plugins Interface to Cross-Platform UI
+- [CHG] New procedure for calculation of dew points in Natural Gas properties Plugin
+- [CHG] Improved compound compatibility with CoolProp Property Package
+- [CHG] Nested Loops VLE Flash: forcing PH/PS fast mode off with single compound
+- [FIX] Fixed issues with Formation Properties in Compound Creation tools
+- [FIX] Fixed Flowsheet Solver not handling interconnected energy streams

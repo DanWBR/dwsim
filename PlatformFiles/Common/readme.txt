@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 2
+Version 5.1 Update 3
 Copyright (c) 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -37,6 +37,15 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 3
+
+- [NEW] Exposed Plugins Interface to Cross-Platform UI
+- [CHG] New procedure for calculation of dew points in Natural Gas properties Plugin
+- [CHG] Improved compound compatibility with CoolProp Property Package
+- [CHG] Nested Loops VLE Flash: forcing PH/PS fast mode off with single compound
+- [FIX] Fixed issues with Formation Properties in Compound Creation tools
+- [FIX] Fixed Flowsheet Solver not handling interconnected energy streams
 
 Version 5.1 Update 2
 

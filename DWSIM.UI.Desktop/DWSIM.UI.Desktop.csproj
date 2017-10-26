@@ -302,8 +302,7 @@ del "$(SolutionDir)DistPackages\Linux\*vshost*"
 del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
 )
-else
-(
+if $(ConfigurationName) == Debug (
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 
