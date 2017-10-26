@@ -305,7 +305,6 @@ del "$(SolutionDir)DistPackages\macOS\*vshost*"
 if $(ConfigurationName) == Debug (
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
-
 xcopy "$(SolutionDir)DWSIM\bin\Debug\plugins\*" "$(TargetDir)\plugins\" /E /Y /F /D
 
 )</PostBuildEvent>
