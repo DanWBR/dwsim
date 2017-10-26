@@ -732,6 +732,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                         lists(listidx).Add(c.AttachedConnector.AttachedTo.Name)
                                     End If
                                 Next
+                                If obj.GraphicObject.EnergyConnector.IsAttached AndAlso obj.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo IsNot obj Then
+                                    lists(listidx).Add(obj.GraphicObject.EnergyConnector.AttachedConnector.AttachedTo.Name)
+                                End If
                             End If
                         Next
                     Else
@@ -778,7 +781,9 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                         lists(0).Add(baseobj.Name)
                     End If
                 ElseIf baseobj.GraphicObject.ObjectType = ObjectType.EnergyStream Then
-                    lists(0).Add(baseobj.Name)
+                    If baseobj.GraphicObject.OutputConnectors(0).IsAttached = False Then
+                        lists(0).Add(baseobj.Name)
+                    End If
                 ElseIf baseobj.GraphicObject.ObjectType = ObjectType.OT_Recycle Then
                     lists(0).Add(baseobj.Name)
                 ElseIf baseobj.GraphicObject.ObjectType = ObjectType.OT_EnergyRecycle Then
