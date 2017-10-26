@@ -130,146 +130,11 @@
   <data name="ToolStripLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="&gt;&gt;RadioButton3.Name" xml:space="preserve">
-    <value>RadioButton3</value>
-  </data>
-  <data name="&gt;&gt;RadioButton3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RadioButton3.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;RadioButton3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;RadioButton2.Name" xml:space="preserve">
-    <value>RadioButton2</value>
-  </data>
-  <data name="&gt;&gt;RadioButton2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RadioButton2.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;RadioButton2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;Label16.Name" xml:space="preserve">
-    <value>Label16</value>
-  </data>
-  <data name="&gt;&gt;Label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label16.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label16.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;Label17.Name" xml:space="preserve">
-    <value>Label17</value>
-  </data>
-  <data name="&gt;&gt;Label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label17.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label17.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;TextBoxName.Name" xml:space="preserve">
-    <value>TextBoxName</value>
-  </data>
-  <data name="&gt;&gt;TextBoxName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBoxName.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;TextBoxName.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;RadioButton1.Name" xml:space="preserve">
-    <value>RadioButton1</value>
-  </data>
-  <data name="&gt;&gt;RadioButton1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RadioButton1.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;RadioButton1.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;Label54.Name" xml:space="preserve">
-    <value>Label54</value>
-  </data>
-  <data name="&gt;&gt;Label54.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label54.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;Label54.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip2.Name" xml:space="preserve">
-    <value>FaTabStrip2</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip2.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;FaTabStrip2.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.Name" xml:space="preserve">
-    <value>TextBoxID</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1252, 601</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="GroupBox2.Text" xml:space="preserve">
-    <value>Propriedades do Componente</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="RadioButton3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="RadioButton3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -682,7 +547,7 @@
     <value>FaTabStripItem1</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem1.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -727,7 +592,7 @@
     <value>FaTabStripItemBO</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemBO.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -787,13 +652,25 @@
     <value>FaTabStripItemEL</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItemEL.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="TBUnifac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 243</value>
+  </data>
+  <data name="TBUnifac.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TBUnifac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 116</value>
+  </data>
+  <data name="TBUnifac.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
   <data name="&gt;&gt;TBUnifac.Name" xml:space="preserve">
     <value>TBUnifac</value>
@@ -807,6 +684,21 @@
   <data name="&gt;&gt;TBUnifac.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="PicUNIFAC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PicUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 36</value>
+  </data>
+  <data name="PicUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 201</value>
+  </data>
+  <data name="PicUNIFAC.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="PicUNIFAC.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
   <data name="&gt;&gt;PicUNIFAC.Name" xml:space="preserve">
     <value>PicUNIFAC</value>
   </data>
@@ -818,6 +710,30 @@
   </data>
   <data name="&gt;&gt;PicUNIFAC.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LinkLabel2.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
+    <value>0, 50</value>
+  </data>
+  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>486, 16</value>
+  </data>
+  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 18</value>
+  </data>
+  <data name="LinkLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="LinkLabel2.Text" xml:space="preserve">
+    <value>DortmundDatabase</value>
+  </data>
+  <data name="LinkLabel2.ToolTip" xml:space="preserve">
+    <value>Call Dortmund-Database for UNIFAC group assignement assistence.</value>
   </data>
   <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
     <value>LinkLabel2</value>
@@ -831,6 +747,27 @@
   <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="Label60.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label60.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label60.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label60.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="Label60.Size" type="System.Drawing.Size, System.Drawing">
+    <value>457, 13</value>
+  </data>
+  <data name="Label60.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="Label60.Text" xml:space="preserve">
+    <value>Informe a quantidade de cada grupo funcional UNIFAC presente na substância, se disponível.</value>
+  </data>
   <data name="&gt;&gt;Label60.Name" xml:space="preserve">
     <value>Label60</value>
   </data>
@@ -842,6 +779,33 @@
   </data>
   <data name="&gt;&gt;Label60.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="UNIFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="GridUNIFAC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="GridUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 36</value>
+  </data>
+  <data name="GridUNIFAC.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>690, 476</value>
+  </data>
+  <data name="GridUNIFAC.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
   </data>
   <data name="&gt;&gt;GridUNIFAC.Name" xml:space="preserve">
     <value>GridUNIFAC</value>
@@ -856,7 +820,7 @@
     <value>4</value>
   </data>
   <data name="FaTabStripItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
+    <value>1238, 527</value>
   </data>
   <data name="FaTabStripItem2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -868,13 +832,37 @@
     <value>FaTabStripItem2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem2.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="LinkLabel4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LinkLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="LinkLabel4.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
+    <value>0, 50</value>
+  </data>
+  <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>484, 16</value>
+  </data>
+  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 18</value>
+  </data>
+  <data name="LinkLabel4.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="LinkLabel4.Text" xml:space="preserve">
+    <value>DortmundDatabase</value>
+  </data>
+  <data name="LinkLabel4.ToolTip" xml:space="preserve">
+    <value>Call Dortmund-Database for UNIFAC group assignement assistence.</value>
   </data>
   <data name="&gt;&gt;LinkLabel4.Name" xml:space="preserve">
     <value>LinkLabel4</value>
@@ -888,6 +876,18 @@
   <data name="&gt;&gt;LinkLabel4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="TBModfac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 243</value>
+  </data>
+  <data name="TBModfac.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TBModfac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 116</value>
+  </data>
+  <data name="TBModfac.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
   <data name="&gt;&gt;TBModfac.Name" xml:space="preserve">
     <value>TBModfac</value>
   </data>
@@ -899,6 +899,21 @@
   </data>
   <data name="&gt;&gt;TBModfac.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="PicMODFAC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="PicMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>715, 36</value>
+  </data>
+  <data name="PicMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 201</value>
+  </data>
+  <data name="PicMODFAC.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="PicMODFAC.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
   </data>
   <data name="&gt;&gt;PicMODFAC.Name" xml:space="preserve">
     <value>PicMODFAC</value>
@@ -912,6 +927,33 @@
   <data name="&gt;&gt;PicMODFAC.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <metadata name="MainGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="SubGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="MODFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="GridMODFAC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="GridMODFAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 36</value>
+  </data>
+  <data name="GridMODFAC.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="GridMODFAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>690, 476</value>
+  </data>
+  <data name="GridMODFAC.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
   <data name="&gt;&gt;GridMODFAC.Name" xml:space="preserve">
     <value>GridMODFAC</value>
   </data>
@@ -923,6 +965,27 @@
   </data>
   <data name="&gt;&gt;GridMODFAC.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="Label85.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label85.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label85.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Label85.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 16</value>
+  </data>
+  <data name="Label85.Size" type="System.Drawing.Size, System.Drawing">
+    <value>462, 13</value>
+  </data>
+  <data name="Label85.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="Label85.Text" xml:space="preserve">
+    <value>Informe a quantidade de cada grupo funcional MODFAC presente na substância, se disponível.</value>
   </data>
   <data name="&gt;&gt;Label85.Name" xml:space="preserve">
     <value>Label85</value>
@@ -937,7 +1000,7 @@
     <value>4</value>
   </data>
   <data name="FaTabStripItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
+    <value>1238, 527</value>
   </data>
   <data name="FaTabStripItem5.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -949,7 +1012,7 @@
     <value>FaTabStripItem5</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem5.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -994,7 +1057,7 @@
     <value>2</value>
   </data>
   <data name="FaTabStripItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1247, 527</value>
+    <value>1238, 527</value>
   </data>
   <data name="FaTabStripItem6.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1006,7 +1069,7 @@
     <value>FaTabStripItem6</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem6.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -1123,7 +1186,7 @@
     <value>FaTabStripItem3</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem3.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -1816,7 +1879,7 @@
     <value>FaTabStripItem4</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem4.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2101,7 +2164,7 @@
     <value>FaTabStripItem7</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem7.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2146,7 +2209,7 @@
     <value>FaTabStripItem8</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem8.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2431,7 +2494,7 @@
     <value>FaTabStripItem9</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem9.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2716,7 +2779,7 @@
     <value>FaTabStripItem10</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem10.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2905,7 +2968,7 @@
     <value>FaTabStripItem11</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStripItem, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStripItem11.Parent" xml:space="preserve">
     <value>FaTabStrip2</value>
@@ -2926,13 +2989,61 @@
     <value>FaTabStrip2</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Type" xml:space="preserve">
-    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6372.23219, Culture=neutral, PublicKeyToken=null</value>
+    <value>FarsiLibrary.Win.FATabStrip, TabStrip, Version=2.0.6508.16627, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.Parent" xml:space="preserve">
     <value>GroupBox2</value>
   </data>
   <data name="&gt;&gt;FaTabStrip2.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>330, 19</value>
+  </data>
+  <data name="TextBoxID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="TextBoxID.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;TextBoxID.Name" xml:space="preserve">
+    <value>TextBoxID</value>
+  </data>
+  <data name="&gt;&gt;TextBoxID.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBoxID.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;TextBoxID.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="GroupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1252, 601</value>
+  </data>
+  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Propriedades do Componente</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="TextBoxComments.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -6135,372 +6246,6 @@
   <data name="&gt;&gt;Label118.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="TBUnifac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 243</value>
-  </data>
-  <data name="TBUnifac.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TBUnifac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 116</value>
-  </data>
-  <data name="TBUnifac.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="&gt;&gt;TBUnifac.Name" xml:space="preserve">
-    <value>TBUnifac</value>
-  </data>
-  <data name="&gt;&gt;TBUnifac.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TBUnifac.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;TBUnifac.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="PicUNIFAC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PicUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 36</value>
-  </data>
-  <data name="PicUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 201</value>
-  </data>
-  <data name="PicUNIFAC.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="PicUNIFAC.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
-  <data name="&gt;&gt;PicUNIFAC.Name" xml:space="preserve">
-    <value>PicUNIFAC</value>
-  </data>
-  <data name="&gt;&gt;PicUNIFAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PicUNIFAC.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;PicUNIFAC.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="LinkLabel2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LinkLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LinkLabel2.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
-    <value>0, 50</value>
-  </data>
-  <data name="LinkLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 16</value>
-  </data>
-  <data name="LinkLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 18</value>
-  </data>
-  <data name="LinkLabel2.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="LinkLabel2.Text" xml:space="preserve">
-    <value>DortmundDatabase</value>
-  </data>
-  <data name="LinkLabel2.ToolTip" xml:space="preserve">
-    <value>Call Dortmund-Database for UNIFAC group assignement assistence.</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel2.Name" xml:space="preserve">
-    <value>LinkLabel2</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel2.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Label60.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="Label60.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label60.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label60.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="Label60.Size" type="System.Drawing.Size, System.Drawing">
-    <value>457, 13</value>
-  </data>
-  <data name="Label60.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="Label60.Text" xml:space="preserve">
-    <value>Informe a quantidade de cada grupo funcional UNIFAC presente na substância, se disponível.</value>
-  </data>
-  <data name="&gt;&gt;Label60.Name" xml:space="preserve">
-    <value>Label60</value>
-  </data>
-  <data name="&gt;&gt;Label60.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label60.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;Label60.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="UNIFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="GridUNIFAC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="GridUNIFAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 36</value>
-  </data>
-  <data name="GridUNIFAC.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="GridUNIFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 476</value>
-  </data>
-  <data name="GridUNIFAC.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;GridUNIFAC.Name" xml:space="preserve">
-    <value>GridUNIFAC</value>
-  </data>
-  <data name="&gt;&gt;GridUNIFAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GridUNIFAC.Parent" xml:space="preserve">
-    <value>FaTabStripItem2</value>
-  </data>
-  <data name="&gt;&gt;GridUNIFAC.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Column3.HeaderText" xml:space="preserve">
-    <value>Main Group</value>
-  </data>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Column5.HeaderText" xml:space="preserve">
-    <value>Subgroup</value>
-  </data>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Column4.HeaderText" xml:space="preserve">
-    <value>Quantidade</value>
-  </data>
-  <metadata name="UNIFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="UNIFACImageColumn.HeaderText" xml:space="preserve">
-    <value>Example</value>
-  </data>
-  <data name="LinkLabel4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="LinkLabel4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="LinkLabel4.LinkArea" type="System.Windows.Forms.LinkArea, System.Windows.Forms">
-    <value>0, 50</value>
-  </data>
-  <data name="LinkLabel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>484, 16</value>
-  </data>
-  <data name="LinkLabel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 18</value>
-  </data>
-  <data name="LinkLabel4.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
-  </data>
-  <data name="LinkLabel4.Text" xml:space="preserve">
-    <value>DortmundDatabase</value>
-  </data>
-  <data name="LinkLabel4.ToolTip" xml:space="preserve">
-    <value>Call Dortmund-Database for UNIFAC group assignement assistence.</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel4.Name" xml:space="preserve">
-    <value>LinkLabel4</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel4.Parent" xml:space="preserve">
-    <value>FaTabStripItem5</value>
-  </data>
-  <data name="&gt;&gt;LinkLabel4.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TBModfac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 243</value>
-  </data>
-  <data name="TBModfac.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TBModfac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 116</value>
-  </data>
-  <data name="TBModfac.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="&gt;&gt;TBModfac.Name" xml:space="preserve">
-    <value>TBModfac</value>
-  </data>
-  <data name="&gt;&gt;TBModfac.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TBModfac.Parent" xml:space="preserve">
-    <value>FaTabStripItem5</value>
-  </data>
-  <data name="&gt;&gt;TBModfac.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="PicMODFAC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="PicMODFAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>715, 36</value>
-  </data>
-  <data name="PicMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 201</value>
-  </data>
-  <data name="PicMODFAC.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="PicMODFAC.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="&gt;&gt;PicMODFAC.Name" xml:space="preserve">
-    <value>PicMODFAC</value>
-  </data>
-  <data name="&gt;&gt;PicMODFAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PicMODFAC.Parent" xml:space="preserve">
-    <value>FaTabStripItem5</value>
-  </data>
-  <data name="&gt;&gt;PicMODFAC.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="MainGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="SubGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="DataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="MODFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="GridMODFAC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="GridMODFAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 36</value>
-  </data>
-  <data name="GridMODFAC.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="GridMODFAC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 476</value>
-  </data>
-  <data name="GridMODFAC.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;GridMODFAC.Name" xml:space="preserve">
-    <value>GridMODFAC</value>
-  </data>
-  <data name="&gt;&gt;GridMODFAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GridMODFAC.Parent" xml:space="preserve">
-    <value>FaTabStripItem5</value>
-  </data>
-  <data name="&gt;&gt;GridMODFAC.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="MainGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MainGroup.HeaderText" xml:space="preserve">
-    <value>MainGroup</value>
-  </data>
-  <metadata name="SubGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="SubGroup.HeaderText" xml:space="preserve">
-    <value>SubGroup</value>
-  </data>
-  <metadata name="DataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
-    <value>Quantidade</value>
-  </data>
-  <metadata name="MODFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="MODFACImageColumn.HeaderText" xml:space="preserve">
-    <value>Example</value>
-  </data>
-  <data name="Label85.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="Label85.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label85.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="Label85.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 16</value>
-  </data>
-  <data name="Label85.Size" type="System.Drawing.Size, System.Drawing">
-    <value>462, 13</value>
-  </data>
-  <data name="Label85.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="Label85.Text" xml:space="preserve">
-    <value>Informe a quantidade de cada grupo funcional MODFAC presente na substância, se disponível.</value>
-  </data>
-  <data name="&gt;&gt;Label85.Name" xml:space="preserve">
-    <value>Label85</value>
-  </data>
-  <data name="&gt;&gt;Label85.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label85.Parent" xml:space="preserve">
-    <value>FaTabStripItem5</value>
-  </data>
-  <data name="&gt;&gt;Label85.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="TbNISTMODFAC.Location" type="System.Drawing.Point, System.Drawing">
     <value>715, 243</value>
   </data>
@@ -6590,30 +6335,6 @@
   </data>
   <data name="&gt;&gt;GridNISTMODFAC.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <metadata name="DataGridViewTextBoxColumn16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="DataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
-    <value>MainGroup</value>
-  </data>
-  <metadata name="DataGridViewTextBoxColumn17.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
-    <value>SubGroup</value>
-  </data>
-  <metadata name="DataGridViewTextBoxColumn18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
-    <value>Quantidade</value>
-  </data>
-  <metadata name="DataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="DataGridViewImageColumn1.HeaderText" xml:space="preserve">
-    <value>Example</value>
   </data>
   <data name="Label58.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -15591,27 +15312,6 @@
   <data name="&gt;&gt;CheckBoxMeltingTemp.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="TextBoxID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>330, 19</value>
-  </data>
-  <data name="TextBoxID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 20</value>
-  </data>
-  <data name="TextBoxID.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.Name" xml:space="preserve">
-    <value>TextBoxID</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.Parent" xml:space="preserve">
-    <value>GroupBox2</value>
-  </data>
-  <data name="&gt;&gt;TextBoxID.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <metadata name="DBOpenDlg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>10, 1</value>
   </metadata>
@@ -15658,7 +15358,7 @@
     <value>MiddleRight</value>
   </data>
   <data name="ToolStripStatusDWSIM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
+    <value>43, 17</value>
   </data>
   <data name="ToolStripStatusDWSIM.Text" xml:space="preserve">
     <value>SALVO</value>
@@ -15673,7 +15373,7 @@
     <value>None</value>
   </data>
   <data name="ToolStripStatusUserDB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
+    <value>43, 17</value>
   </data>
   <data name="ToolStripStatusUserDB.Text" xml:space="preserve">
     <value>SALVO</value>
@@ -15853,19 +15553,19 @@
     <value>Importar Dados de Fontes Online</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 22</value>
+    <value>255, 22</value>
   </data>
   <data name="BancoDeDadosKDBCHERICToolStripMenuItem.Text" xml:space="preserve">
     <value>Banco de Dados KDB/CHERIC</value>
   </data>
   <data name="BancoDeDadosChemeoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 22</value>
+    <value>255, 22</value>
   </data>
   <data name="BancoDeDadosChemeoToolStripMenuItem.Text" xml:space="preserve">
     <value>Banco de Dados Cheméo</value>
   </data>
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 22</value>
+    <value>255, 22</value>
   </data>
   <data name="EstruturaUNIFACMODFACDDBToolStripMenuItem.Text" xml:space="preserve">
     <value>Estrutura UNIFAC/MODFAC (DDB)</value>
@@ -15897,11 +15597,80 @@
   <data name="SaveFileDialog2.Title" xml:space="preserve">
     <value>Exportar Componente para Banco de Dados XML</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en</value>
+  <data name="Column3.HeaderText" xml:space="preserve">
+    <value>Main Group</value>
+  </data>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Column5.HeaderText" xml:space="preserve">
+    <value>Subgroup</value>
+  </data>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Column4.HeaderText" xml:space="preserve">
+    <value>Quantidade</value>
+  </data>
+  <metadata name="UNIFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="UNIFACImageColumn.HeaderText" xml:space="preserve">
+    <value>Exemplo</value>
+  </data>
+  <metadata name="MainGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="MainGroup.HeaderText" xml:space="preserve">
+    <value>MainGroup</value>
+  </data>
+  <metadata name="SubGroup.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="SubGroup.HeaderText" xml:space="preserve">
+    <value>SubGroup</value>
+  </data>
+  <metadata name="DataGridViewTextBoxColumn13.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
+    <value>Quantidade</value>
+  </data>
+  <metadata name="MODFACImageColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="MODFACImageColumn.HeaderText" xml:space="preserve">
+    <value>Example</value>
+  </data>
+  <metadata name="DataGridViewTextBoxColumn16.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
+    <value>MainGroup</value>
+  </data>
+  <metadata name="DataGridViewTextBoxColumn17.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
+    <value>SubGroup</value>
+  </data>
+  <metadata name="DataGridViewTextBoxColumn18.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
+    <value>Quantidade</value>
+  </data>
+  <metadata name="DataGridViewImageColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DataGridViewImageColumn1.HeaderText" xml:space="preserve">
+    <value>Exemplo</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>45</value>
@@ -17371,78 +17140,6 @@
   <data name="&gt;&gt;ToolStripLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
-    <value>Column3</value>
-  </data>
-  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column5.Name" xml:space="preserve">
-    <value>Column5</value>
-  </data>
-  <data name="&gt;&gt;Column5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
-    <value>Column4</value>
-  </data>
-  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;UNIFACImageColumn.Name" xml:space="preserve">
-    <value>UNIFACImageColumn</value>
-  </data>
-  <data name="&gt;&gt;UNIFACImageColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MainGroup.Name" xml:space="preserve">
-    <value>MainGroup</value>
-  </data>
-  <data name="&gt;&gt;MainGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SubGroup.Name" xml:space="preserve">
-    <value>SubGroup</value>
-  </data>
-  <data name="&gt;&gt;SubGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn13.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn13</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MODFACImageColumn.Name" xml:space="preserve">
-    <value>MODFACImageColumn</value>
-  </data>
-  <data name="&gt;&gt;MODFACImageColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn16.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn16</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn17.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn17</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn18.Name" xml:space="preserve">
-    <value>DataGridViewTextBoxColumn18</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewTextBoxColumn18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewImageColumn1.Name" xml:space="preserve">
-    <value>DataGridViewImageColumn1</value>
-  </data>
-  <data name="&gt;&gt;DataGridViewImageColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Atom.Name" xml:space="preserve">
     <value>Atom</value>
   </data>
@@ -17676,6 +17373,78 @@
   </data>
   <data name="&gt;&gt;SaveFileDialog2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column3.Name" xml:space="preserve">
+    <value>Column3</value>
+  </data>
+  <data name="&gt;&gt;Column3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column5.Name" xml:space="preserve">
+    <value>Column5</value>
+  </data>
+  <data name="&gt;&gt;Column5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Column4.Name" xml:space="preserve">
+    <value>Column4</value>
+  </data>
+  <data name="&gt;&gt;Column4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;UNIFACImageColumn.Name" xml:space="preserve">
+    <value>UNIFACImageColumn</value>
+  </data>
+  <data name="&gt;&gt;UNIFACImageColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MainGroup.Name" xml:space="preserve">
+    <value>MainGroup</value>
+  </data>
+  <data name="&gt;&gt;MainGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SubGroup.Name" xml:space="preserve">
+    <value>SubGroup</value>
+  </data>
+  <data name="&gt;&gt;SubGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn13.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn13</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MODFACImageColumn.Name" xml:space="preserve">
+    <value>MODFACImageColumn</value>
+  </data>
+  <data name="&gt;&gt;MODFACImageColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn16.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn16</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn17.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn17</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn18.Name" xml:space="preserve">
+    <value>DataGridViewTextBoxColumn18</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewTextBoxColumn18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewImageColumn1.Name" xml:space="preserve">
+    <value>DataGridViewImageColumn1</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewImageColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormCompoundCreator</value>

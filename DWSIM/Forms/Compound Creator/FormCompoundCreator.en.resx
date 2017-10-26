@@ -2189,6 +2189,12 @@
   <data name="DBOpenDlg.Title" xml:space="preserve">
     <value>Open/Create Database</value>
   </data>
+  <data name="ToolStripStatusDWSIM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
+  <data name="ToolStripStatusUserDB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
   <data name="StatusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 538</value>
   </data>
