@@ -38,7 +38,7 @@ Namespace SpecialOps
 
         Protected m_ConvPar As Helpers.Recycle.ConvergenceParameters
         Protected m_ConvHist As IRecycleConvergenceHistory
-        Protected m_AccelMethod As AccelMethod = AccelMethod.GlobalBroyden
+        Protected m_AccelMethod As AccelMethod = AccelMethod.None
         Protected m_WegPars As Helpers.Recycle.WegsteinParameters
 
         Protected m_MaxIterations As Integer = 50
