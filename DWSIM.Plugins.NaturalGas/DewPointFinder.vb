@@ -109,9 +109,9 @@ Public Class DewPointFinder
 
         Dim resdic As New Dictionary(Of String, Double)
 
-        If hcdp > 0.0 Then resdic.Add("H", hcdp)
-        If wdp > 0.0 Then resdic.Add("W", wdp)
-        If idwdp > 0.0 Then resdic.Add("IW", idwdp)
+        resdic.Add("H", hcdp)
+        resdic.Add("W", wdp)
+        resdic.Add("IW", idwdp)
 
         Return resdic
 

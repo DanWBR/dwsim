@@ -275,6 +275,13 @@ xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Window
 xcopy "$(SolutionDir)PlatformFiles\Linux\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\macOS\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
+xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows\plugins\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Linux\plugins\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\macOS\plugins\" /E /Y /F /D
+
+xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x86"

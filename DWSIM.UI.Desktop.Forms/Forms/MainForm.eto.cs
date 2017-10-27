@@ -496,7 +496,7 @@ namespace DWSIM.UI
 
             List<Type> pluginlist = availableTypes.FindAll((t) => {
                 List<Type> interfaceTypes = new List<Type>(t.GetInterfaces());
-                return (interfaceTypes.Contains(typeof(Interfaces.IUtilityPlugin)));
+                return (interfaceTypes.Contains(typeof(Interfaces.IUtilityPlugin5)));
             });
 
             return pluginlist.ConvertAll<Interfaces.IUtilityPlugin5>((Type t) => Activator.CreateInstance(t) as Interfaces.IUtilityPlugin5);
@@ -529,6 +529,7 @@ namespace DWSIM.UI
                             catch
                             {
                             }
+
                         }
                     }
                 }

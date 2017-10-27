@@ -243,7 +243,7 @@ namespace DWSIM.UI.Forms
 
             var mform = (MainForm)Application.Instance.MainForm;
 
-            foreach (Interfaces.IUtilityPlugin iplugin in mform.plugins)
+            foreach (Interfaces.IUtilityPlugin5 iplugin in mform.plugins)
             {
                 ButtonMenuItem tsmi = new ButtonMenuItem();
                 tsmi.Text = iplugin.Name;
@@ -252,8 +252,11 @@ namespace DWSIM.UI.Forms
                 tsmi.Click += (sender, e) =>
                 {
                     iplugin.SetFlowsheet(this.FlowsheetObject);
-                    Form f = (Form)iplugin.UtilityForm;
-                    f.Show();
+                    Application.Instance.Invoke(() =>
+                    {
+                        Form f = (Form)iplugin.UtilityForm;
+                        f.Show();
+                    });
                 };
                 pluginbuttons.Add(tsmi);
             }
