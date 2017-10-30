@@ -494,7 +494,7 @@
     <value>Compound Constant Properties</value>
   </data>
   <data name="chkHideSolidPhaseCO.Text" xml:space="preserve">
-    <value>Remove Solid Phase from the list of present phases for external components</value>
+    <value>Remove Solid Phase from the list of present phases for external components (requires restart)</value>
   </data>
   <data name="chkAutoUpdate.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 17</value>
@@ -512,10 +512,13 @@
     <value>Updates</value>
   </data>
   <data name="ComboBoxUILanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 25</value>
+    <value>115, 25</value>
   </data>
   <data name="ComboBoxUILanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 21</value>
+    <value>214, 21</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 30</value>
   </data>
   <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -554,22 +557,19 @@
     <value>High</value>
   </data>
   <data name="cbDebugLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 23</value>
+    <value>115, 23</value>
   </data>
   <data name="cbDebugLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 21</value>
+  </data>
+  <data name="Label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 28</value>
   </data>
   <data name="Label13.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="Label13.Text" xml:space="preserve">
     <value>Debug Level</value>
-  </data>
-  <data name="chkconsole.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 17</value>
-  </data>
-  <data name="chkconsole.Text" xml:space="preserve">
-    <value>Redirect Console Output</value>
   </data>
   <data name="GroupBox6.Text" xml:space="preserve">
     <value>Debug Mode</value>
@@ -582,7 +582,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABo
-        KgAAAk1TRnQBSQFMAgEBCgEAAXgBCAF4AQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        KgAAAk1TRnQBSQFMAgEBCgEAAYgBCAGIAQgBEAEAARABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABMAMAAQEBAAEYBgABJBIAAekCpwHpAqcB5wKlAeUCowHlAqMB5QKjAeQCogHiAqAB4QKfAd4CnAHe
         ApwB3AKaAdoCmAHaApgB2gKYAdoCmAHkAqIB4gKgAeECnwHeApwB3AGcAZoB2gKYAdoCmAHZApcB1wKV
         AdYClAHTApEB0wKRAdECjwHPAo0BzwKNAc8CjWAABvYD9APzAfIB8wHyA/ED8APuA+0D6wPpA+gB5wLm

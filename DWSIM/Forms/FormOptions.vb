@@ -62,8 +62,6 @@ Public Class FormOptions
         Me.KryptonTextBox1.Text = My.Settings.BackupFolder
         Me.TrackBar1.Value = My.Settings.BackupInterval
 
-        Me.chkconsole.Checked = My.Settings.RedirectOutput
-
         Me.chkUpdates.Checked = My.Settings.CheckForUpdates
         Me.chkAutoUpdate.Checked = My.Settings.AutomaticUpdates
 
@@ -83,6 +81,8 @@ Public Class FormOptions
             Me.KryptonLabel3.Text = TrackBar1.Value & " " & DWSIM.App.GetLocalString("minutos")
         End If
 
+        cbDebugLevel.SelectedIndex = My.Settings.DebugLevel
+        
         chkHideSolidPhaseCO.Checked = My.Settings.HideSolidPhase_CO
 
         'solver
@@ -439,18 +439,6 @@ Public Class FormOptions
                     File.Delete(f)
                 Next
             End If
-        End If
-    End Sub
-
-    Private Sub chkconsole_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkconsole.CheckedChanged
-        My.Settings.RedirectOutput = chkconsole.Checked
-        If chkconsole.Checked Then
-            'Dim txtwriter As New ConsoleRedirection.TextBoxStreamWriter()
-            'Console.SetOut(txtwriter)
-        Else
-            Dim standardOutput As New StreamWriter(Console.OpenStandardOutput())
-            standardOutput.AutoFlush = True
-            Console.SetOut(standardOutput)
         End If
     End Sub
 

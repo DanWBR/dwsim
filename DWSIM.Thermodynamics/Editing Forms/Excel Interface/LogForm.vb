@@ -27,4 +27,7 @@ Public Class LogForm
         Console.SetOut(standardOutput)
     End Sub
 
+    Private Sub LogForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not Settings.ExcelMode Then Text = "Console Output"
+    End Sub
 End Class

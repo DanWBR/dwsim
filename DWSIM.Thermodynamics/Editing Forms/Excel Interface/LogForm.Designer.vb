@@ -22,10 +22,11 @@ Partial Class LogForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LogForm))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -37,20 +38,6 @@ Partial Class LogForm
         Me.ToolStrip1.Size = New System.Drawing.Size(744, 25)
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BackColor = System.Drawing.Color.Black
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Font = New System.Drawing.Font("Consolas", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.Color.WhiteSmoke
-        Me.TextBox1.Location = New System.Drawing.Point(0, 25)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.TextBox1.Size = New System.Drawing.Size(744, 336)
-        Me.TextBox1.TabIndex = 1
         '
         'ToolStripButton1
         '
@@ -68,6 +55,21 @@ Partial Class LogForm
         Me.ToolStripButton2.Size = New System.Drawing.Size(141, 22)
         Me.ToolStripButton2.Text = "Copy All to Clipboard"
         '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.Black
+        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TextBox1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.ForeColor = System.Drawing.Color.AliceBlue
+        Me.TextBox1.Location = New System.Drawing.Point(0, 25)
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox1.Size = New System.Drawing.Size(744, 336)
+        Me.TextBox1.TabIndex = 1
+        Me.TextBox1.Text = "Test Text"
+        '
         'LogForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -75,10 +77,10 @@ Partial Class LogForm
         Me.ClientSize = New System.Drawing.Size(744, 361)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "LogForm"
-        Me.ShowIcon = False
         Me.Text = "DWSIM Excel Add-In Log Window"
+        Me.TopMost = True
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)

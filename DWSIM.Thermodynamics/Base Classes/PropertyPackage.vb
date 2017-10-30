@@ -1683,7 +1683,7 @@ Namespace PropertyPackages
 
         End Sub
 
-        Public Function CalculateEquilibrium(calctype As Interfaces.Enums.FlashCalculationType, val1 As Double, val2 As Double, mixmolefrac() As Double, initialKval() As Double, initialestimate As Double) As Interfaces.IFlashCalculationResult Implements Interfaces.IPropertyPackage.CalculateEquilibrium
+        Public Overridable Function CalculateEquilibrium(calctype As Interfaces.Enums.FlashCalculationType, val1 As Double, val2 As Double, mixmolefrac() As Double, initialKval() As Double, initialestimate As Double) As Interfaces.IFlashCalculationResult Implements Interfaces.IPropertyPackage.CalculateEquilibrium
 
             Select Case calctype
                 Case Interfaces.Enums.FlashCalculationType.PressureTemperature

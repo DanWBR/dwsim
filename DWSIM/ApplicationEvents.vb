@@ -114,19 +114,6 @@ Namespace My
                 End If
             Next
 
-            'direct console output to collection
-            If My.Settings.RedirectOutput And Not CommandLineMode Then
-                'Dim txtwriter As New ConsoleRedirection.TextBoxStreamWriter()
-                'Console.SetOut(txtwriter)
-            Else
-                If Not DWSIM.App.IsRunningOnMono Then
-                    AttachConsole(ATTACH_PARENT_PROCESS)
-                End If
-                Dim standardOutput As New StreamWriter(Console.OpenStandardOutput())
-                standardOutput.AutoFlush = True
-                Console.SetOut(standardOutput)
-            End If
-
             DWSIM.App.InitializeSettings()
 
             If My.Settings.PythonPath <> "" Then

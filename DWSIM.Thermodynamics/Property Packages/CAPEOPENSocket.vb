@@ -28,6 +28,7 @@ Imports System.Runtime.InteropServices
 Imports DWSIM.SharedClasses
 Imports DWSIM.Interfaces.Interfaces2
 Imports DWSIM.Interfaces
+Imports DWSIM.Thermodynamics.PropertyPackages.Auxiliary.FlashAlgorithms
 
 Namespace PropertyPackages
 
@@ -377,6 +378,169 @@ Namespace PropertyPackages
 
         End Function
 
+        Public Overrides Function CalculateEquilibrium(calctype As Enums.FlashCalculationType, val1 As Double, val2 As Double, mixmolefrac() As Double, initialKval() As Double, initialestimate As Double) As IFlashCalculationResult
+            Select Case calctype
+                Case Interfaces.Enums.FlashCalculationType.PressureTemperature
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.T, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureEnthalpy
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.H, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureEntropy
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.S, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureSolidFraction
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.SF, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.PressureVaporFraction
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.VAP, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureEnthalpy
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.H, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureEntropy
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.S, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureSolidFraction
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.SF, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Interfaces.Enums.FlashCalculationType.TemperatureVaporFraction
+                    Return CalculateEquilibrium_Override(FlashSpec.P, FlashSpec.VAP, val1, val2, mixmolefrac, initialKval, initialestimate)
+                Case Else
+                    Throw New NotImplementedException
+            End Select
+        End Function
+
+        Public Function CalculateEquilibrium_Override(spec1 As FlashSpec, spec2 As FlashSpec,
+                                           val1 As Double, val2 As Double,
+                                           mixmolefrac As Double(),
+                                           initialKval As Double(),
+                                           initialestimate As Double) As FlashCalculationResult
+
+            Dim pstr As Interfaces.IMaterialStream = Me.CurrentMaterialStream
+            Dim tstr As Interfaces.IMaterialStream = Me.CurrentMaterialStream.Clone
+
+            Dim constprops As List(Of Interfaces.ICompoundConstantProperties) = DW_GetConstantProperties()
+
+            Dim calcresult As New FlashCalculationResult(constprops)
+
+            With calcresult
+                .MixtureMoleAmounts = New List(Of Double)(mixmolefrac)
+                .FlashAlgorithmType = Me.GetType.ToString
+                .FlashSpecification1 = spec1
+                .FlashSpecification2 = spec2
+            End With
+
+            Me.CurrentMaterialStream = tstr
+
+            Me.CurrentMaterialStream.AtEquilibrium = False
+
+            Dim s1 As String() = New String() {}
+            Dim s2 As String() = New String() {}
+            Dim s11 As String = ""
+            Dim s22 As String = ""
+
+            Select Case spec1
+                Case FlashSpec.T
+                    s1 = New String() {"temperature", Nothing, "Overall"}
+                    s11 = "T"
+                    Me.CurrentMaterialStream.Phases(0).Properties.temperature = val1
+                Case FlashSpec.P
+                    s1 = New String() {"pressure", Nothing, "Overall"}
+                    s11 = "P"
+                    Me.CurrentMaterialStream.Phases(0).Properties.pressure = val1
+            End Select
+
+            Select Case spec2
+                Case FlashSpec.T
+                    s2 = New String() {"temperature", Nothing, "Overall"}
+                    s22 = "T"
+                    Me.CurrentMaterialStream.Phases(0).Properties.temperature = val2
+                Case FlashSpec.P
+                    s2 = New String() {"pressure", Nothing, "Overall"}
+                    s22 = "P"
+                    Me.CurrentMaterialStream.Phases(0).Properties.pressure = val2
+                Case FlashSpec.S
+                    s2 = New String() {"entropy", Nothing, "Overall"}
+                    s22 = "S"
+                    Me.CurrentMaterialStream.Phases(0).Properties.entropy = val2
+                Case FlashSpec.H
+                    s2 = New String() {"enthalpy", Nothing, "Overall"}
+                    s22 = "H"
+                    Me.CurrentMaterialStream.Phases(0).Properties.enthalpy = val2
+                Case FlashSpec.VAP
+                    s2 = New String() {"phaseFraction", "Mole", "Vapor"}
+                    s22 = "VF"
+                    Me.CurrentMaterialStream.Phases(2).Properties.molarfraction = val2
+            End Select
+
+            Me.CurrentMaterialStream.SetOverallComposition(mixmolefrac)
+
+            Me.DW_ZerarPhaseProps(Phase.Vapor)
+            Me.DW_ZerarPhaseProps(Phase.Liquid)
+            Me.DW_ZerarPhaseProps(Phase.Liquid1)
+            Me.DW_ZerarPhaseProps(Phase.Liquid2)
+            Me.DW_ZerarPhaseProps(Phase.Liquid3)
+            Me.DW_ZerarPhaseProps(Phase.Aqueous)
+            Me.DW_ZerarPhaseProps(Phase.Solid)
+
+            If _coversion = "1.0" Then
+                Try
+                    Me.CalcEquilibrium(Me.CurrentMaterialStream, s11 + s22, Nothing)
+                Catch ex As Exception
+                    Dim ecu As CapeOpen.ECapeUser = _copp
+                    Me.CurrentMaterialStream.Flowsheet.ShowMessage(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Interfaces.IFlowsheet.MessageType.GeneralError)
+                End Try
+            Else
+                Try
+                    Me.SetMaterial(Me.CurrentMaterialStream)
+                    Me.CalcEquilibrium1(s1, s2, "Unspecified")
+                Catch ex As Exception
+                    Dim ecu As CapeOpen.ECapeUser = _copp
+                    Me.CurrentMaterialStream.Flowsheet.ShowMessage(Me.ComponentName & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & "." & ecu.scope & ". Reason: " & ecu.description, Interfaces.IFlowsheet.MessageType.GeneralError)
+                End Try
+            End If
+
+            Me.CurrentMaterialStream.AtEquilibrium = True
+
+            Dim summf As Double = 0.0#, sumwf As Double = 0.0#
+            For Each pi As PhaseInfo In Me.PhaseMappings.Values
+                If Not pi.PhaseLabel = "Disabled" Then
+                    summf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.GetValueOrDefault
+                    sumwf += Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction.GetValueOrDefault
+                End If
+            Next
+            If Abs(summf - 1) > 0.000001 Then
+                For Each pi As PhaseInfo In Me.PhaseMappings.Values
+                    If Not pi.PhaseLabel = "Disabled" And Not Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction.HasValue Then
+                        Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molarfraction = 1 - summf
+                        Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.massfraction = 1 - sumwf
+                    End If
+                Next
+            End If
+
+            For Each pi As PhaseInfo In Me.PhaseMappings.Values
+                If Not pi.PhaseLabel = "Disabled" Then
+                    Me.CurrentMaterialStream.Phases(pi.DWPhaseIndex).Properties.molecularWeight = Me.AUX_MMM(pi.DWPhaseID)
+                    DW_CalcPhaseProps(pi.DWPhaseID)
+                End If
+            Next
+
+            DW_CalcPhaseProps(Phase.Liquid)
+            DW_CalcPhaseProps(Phase.Mixture)
+
+            With calcresult
+                .BaseMoleAmount = 1.0
+                .VaporPhaseMoleAmounts = Me.RET_VMOL(Phase.Vapor).ToList
+                .LiquidPhase1MoleAmounts = Me.RET_VMOL(Phase.Liquid1).ToList
+                .LiquidPhase2MoleAmounts = Me.RET_VMOL(Phase.Liquid2).ToList
+                .SolidPhaseMoleAmounts = Me.RET_VMOL(Phase.Solid).ToList
+                .CalculatedTemperature = Me.CurrentMaterialStream.Phases(0).Properties.temperature.GetValueOrDefault
+                .CalculatedPressure = Me.CurrentMaterialStream.Phases(0).Properties.pressure.GetValueOrDefault
+                .CalculatedEnthalpy = Me.CurrentMaterialStream.Phases(0).Properties.enthalpy.GetValueOrDefault
+                .CalculatedEntropy = Me.CurrentMaterialStream.Phases(0).Properties.entropy.GetValueOrDefault
+                .Kvalues = New List(Of Double)(.VaporPhaseMoleAmounts.ToArray.DivideY(.LiquidPhase1MoleAmounts.ToArray))
+            End With
+
+            Me.CurrentMaterialStream = pstr
+            tstr = Nothing
+
+            Return calcresult
+
+        End Function
+
         Public Overloads Function DW_CalcEquilibrio_ISOL(ByVal Vz As Array, ByVal spec1 As FlashSpec, ByVal spec2 As FlashSpec, ByVal val1 As Double, ByVal val2 As Double, ByVal estimate As Double) As Object
 
             Dim pstr As Interfaces.IMaterialStream = Me.CurrentMaterialStream
@@ -674,20 +838,16 @@ Namespace PropertyPackages
             Dim proplist As String()
 
             If _coversion = "1.0" Then
-                If myphase <> "Overall" And myphase <> "" Then
-                    If phase <> PropertyPackages.Phase.Liquid Then
-                        proplist = Me.GetPropList
-                        For i = 0 To UBound(proplist) - 1
-                            If Not proplist(i).ToLower.Contains(".d") Then
-                                Try
-                                    Me.CalcProp(Me.CurrentMaterialStream, New String() {proplist(i)}, New String() {myphase}, "Mixture")
-                                Catch ex As Exception
-                                End Try
-                            End If
-                        Next
-                    Else
-
-                    End If
+                If myphase <> PropertyPackages.Phase.Liquid Then
+                    proplist = Me.GetPropList
+                    For i = 0 To UBound(proplist) - 1
+                        If Not proplist(i).ToLower.Contains(".d") Then
+                            Try
+                                Me.CalcProp(Me.CurrentMaterialStream, New String() {proplist(i)}, New String() {myphase}, "Mixture")
+                            Catch ex As Exception
+                            End Try
+                        End If
+                    Next
                 End If
             Else
                 If phase <> "Overall" And phase <> "" Then
@@ -1008,13 +1168,17 @@ Namespace PropertyPackages
         Public Overrides Function AUX_MMM(Vz() As Double, Optional ByVal state As String = "") As Double
 
             Dim complist As Object = Nothing
-            Me.GetCompoundList(complist, Nothing, Nothing, Nothing, Nothing, Nothing)
-            Dim mw = DirectCast(Me.CurrentMaterialStream, ICapeThermoCompounds).GetCompoundConstant(New String() {"molecularWeight"}, complist)
+            Dim mw As Object = Nothing
+            Dim mw2 As New Dictionary(Of String, Double)
+            Me.GetCompoundList(complist, Nothing, Nothing, Nothing, mw, Nothing)
             Dim val As Double = 0.0#
             Dim subst As Interfaces.ICompound
             Dim i As Integer = 0
+            For i = 0 To Vz.Length - 1
+                mw2.Add(complist(i), mw(i))
+            Next
             For Each subst In Me.CurrentMaterialStream.Phases(0).Compounds.Values
-                val += Vz(i) * mw(i)
+                val += Vz(i) * mw2(_mappings(subst.Name))
                 i += 1
             Next
 
@@ -1026,12 +1190,16 @@ Namespace PropertyPackages
 
             Dim complist As Object = Nothing
             Dim mw As Object = Nothing
+            Dim mw2 As New Dictionary(Of String, Double)
             Me.GetCompoundList(complist, Nothing, Nothing, Nothing, mw, Nothing)
 
             Dim mwt As Double = 0.0#
             Dim i As Integer = 0
+            For i = 0 To complist.Length - 1
+                mw2.Add(complist(i), mw(i))
+            Next
             For Each c As Interfaces.ICompound In Me.CurrentMaterialStream.Phases(Me.RET_PHASEID(Phase)).Compounds.Values
-                mwt += c.MoleFraction.GetValueOrDefault * mw(i)
+                mwt += c.MoleFraction.GetValueOrDefault * mw2(_mappings(c.Name))
                 i += 1
             Next
 

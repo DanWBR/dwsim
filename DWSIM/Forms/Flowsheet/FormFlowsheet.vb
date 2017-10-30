@@ -3189,4 +3189,15 @@ Public Class FormFlowsheet
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
         wform.SetupAndDisplayPage(1)
     End Sub
+
+    Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click
+        If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then
+            Settings.DebugLevel = 3
+            Calculator.ExcelLogForm = New LogForm
+            Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
+            Console.SetOut(txtwriter)
+        End If
+        Calculator.ExcelLogForm.Show()
+    End Sub
+
 End Class
