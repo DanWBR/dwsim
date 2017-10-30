@@ -68,7 +68,6 @@ Partial Class LogForm
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox1.Size = New System.Drawing.Size(744, 336)
         Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "Test Text"
         '
         'LogForm
         '
