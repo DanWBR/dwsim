@@ -3192,7 +3192,6 @@ Public Class FormFlowsheet
 
     Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click
         If Calculator.ExcelLogForm Is Nothing OrElse Calculator.ExcelLogForm.IsDisposed Then
-            Settings.DebugLevel = 3
             Calculator.ExcelLogForm = New LogForm
             Dim txtwriter = New ConsoleRedirection.TextBoxStreamWriter(Calculator.ExcelLogForm.TextBox1)
             Console.SetOut(txtwriter)
