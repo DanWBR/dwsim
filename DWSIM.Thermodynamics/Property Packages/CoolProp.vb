@@ -816,7 +816,7 @@ Namespace PropertyPackages
                             Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
                                 Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1))
-                                If T < Tb Then
+                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Cp, compound " &
@@ -934,7 +934,7 @@ Namespace PropertyPackages
                             Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax And T <= Tc Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T < Tb Then
+                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Cv, compound " &
@@ -1033,7 +1033,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T < Tb And T > Tmin Then
+                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Enthalpy, compound " &
@@ -1100,6 +1100,8 @@ Namespace PropertyPackages
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                         vk(i) = Vxw(i) * vk(i)
                     Next
+                Case State.Solid
+                    Return DW_CalcEnthalpy(Vx, T, P, State.Liquid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T)
             End Select
 
             val = MathEx.Common.Sum(vk)
@@ -1134,7 +1136,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T < Tb And T > Tmin Then
+                                If T < Tb And Abs(T - Tb) > 0.01 And T > Tmin Then
                                     vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Entropy, compound " &
@@ -1201,6 +1203,8 @@ Namespace PropertyPackages
                         If Double.IsNaN(vk(i)) Or Double.IsInfinity(vk(i)) Then vk(i) = 0.0#
                         vk(i) = Vxw(i) * vk(i)
                     Next
+                Case State.Solid
+                    Return DW_CalcEntropy(Vx, T, P, State.Liquid) - Me.RET_HFUSM(AUX_CONVERT_MOL_TO_MASS(Vx), T) / T
             End Select
 
             val = MathEx.Common.Sum(vk)
