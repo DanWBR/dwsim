@@ -1,3 +1,10 @@
+Version 5.1 Update 4
+
+- [CHG] Updated CoolProp libraries (Windows/Linux)
+- [FIX] Fixed Console Redirection (Classic UI)
+- [FIX] Fixed issues with CoolProp Property Package
+- [FIX] Fixed issues with CAPE-OPEN Property Package Socket
+
 Version 5.1 Update 3:
 
 - [NEW] Exposed Plugins Interface to Cross-Platform UI
