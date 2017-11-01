@@ -664,35 +664,11 @@ Namespace Streams
 
                 If ASource.Phases.ContainsKey(i) Then
 
-                    Phases(i).Properties.temperature = ASource.Phases(i).Properties.temperature.GetValueOrDefault
-                    Phases(i).Properties.pressure = ASource.Phases(i).Properties.pressure.GetValueOrDefault
-                    Phases(i).Properties.density = ASource.Phases(i).Properties.density.GetValueOrDefault
-                    Phases(i).Properties.enthalpy = ASource.Phases(i).Properties.enthalpy.GetValueOrDefault
-                    Phases(i).Properties.entropy = ASource.Phases(i).Properties.entropy.GetValueOrDefault
-                    Phases(i).Properties.molar_enthalpy = ASource.Phases(i).Properties.molar_enthalpy.GetValueOrDefault
-                    Phases(i).Properties.molar_entropy = ASource.Phases(i).Properties.molar_entropy.GetValueOrDefault
-                    Phases(i).Properties.compressibilityFactor = ASource.Phases(i).Properties.compressibilityFactor.GetValueOrDefault
-                    Phases(i).Properties.heatCapacityCp = ASource.Phases(i).Properties.heatCapacityCp.GetValueOrDefault
-                    Phases(i).Properties.heatCapacityCv = ASource.Phases(i).Properties.heatCapacityCv.GetValueOrDefault
-                    Phases(i).Properties.molecularWeight = ASource.Phases(i).Properties.molecularWeight.GetValueOrDefault
-                    Phases(i).Properties.thermalConductivity = ASource.Phases(i).Properties.thermalConductivity.GetValueOrDefault
-                    Phases(i).Properties.speedOfSound = ASource.Phases(i).Properties.speedOfSound.GetValueOrDefault
-                    Phases(i).Properties.volumetric_flow = ASource.Phases(i).Properties.volumetric_flow.GetValueOrDefault
-                    Phases(i).Properties.jouleThomsonCoefficient = ASource.Phases(i).Properties.jouleThomsonCoefficient.GetValueOrDefault
-                    Phases(i).Properties.excessEnthalpy = ASource.Phases(i).Properties.excessEnthalpy.GetValueOrDefault
-                    Phases(i).Properties.excessEntropy = ASource.Phases(i).Properties.excessEntropy.GetValueOrDefault
-                    Phases(i).Properties.compressibility = ASource.Phases(i).Properties.compressibility.GetValueOrDefault
-                    Phases(i).Properties.bubbleTemperature = ASource.Phases(i).Properties.bubbleTemperature.GetValueOrDefault
-                    Phases(i).Properties.bubblePressure = ASource.Phases(i).Properties.bubblePressure.GetValueOrDefault
-                    Phases(i).Properties.dewTemperature = ASource.Phases(i).Properties.dewTemperature.GetValueOrDefault
-                    Phases(i).Properties.dewPressure = ASource.Phases(i).Properties.dewPressure.GetValueOrDefault
-                    Phases(i).Properties.viscosity = ASource.Phases(i).Properties.viscosity.GetValueOrDefault
-                    Phases(i).Properties.kinematic_viscosity = ASource.Phases(i).Properties.kinematic_viscosity.GetValueOrDefault
-                    Phases(i).Properties.molarflow = ASource.Phases(i).Properties.molarflow.GetValueOrDefault
-                    Phases(i).Properties.massflow = ASource.Phases(i).Properties.massflow.GetValueOrDefault
-                    Phases(i).Properties.massfraction = ASource.Phases(i).Properties.massfraction.GetValueOrDefault
-                    Phases(i).Properties.molarfraction = ASource.Phases(i).Properties.molarfraction.GetValueOrDefault
-                    Phases(i).Properties.bulk_modulus = ASource.Phases(i).Properties.bulk_modulus.GetValueOrDefault
+                    Dim props = ASource.Phases(i).Properties.GetType().GetProperties()
+
+                    For Each p In props
+                        p.SetValue(Phases(i).Properties, p.GetValue(ASource.Phases(i).Properties))
+                    Next
 
                 End If
 

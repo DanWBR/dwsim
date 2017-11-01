@@ -89,8 +89,8 @@ Public Class FormPhEnv
 
         End Try
 
-        If TypeOf AttachedTo.PropertyPackage Is PropertyPackages.PengRobinsonPropertyPackage Or _
-           TypeOf AttachedTo.PropertyPackage Is PropertyPackages.SRKPropertyPackage Then
+        If TypeOf DirectCast(AttachedTo, Streams.MaterialStream).PropertyPackage Is PropertyPackages.PengRobinsonPropertyPackage Or _
+           TypeOf DirectCast(AttachedTo, Streams.MaterialStream).PropertyPackage Is PropertyPackages.SRKPropertyPackage Then
             Me.chkStabCurve.Enabled = True
             chkpip.Enabled = True
         Else
