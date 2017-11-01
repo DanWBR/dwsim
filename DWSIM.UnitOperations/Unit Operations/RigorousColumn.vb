@@ -782,7 +782,11 @@ Namespace UnitOperations
                         value = Me.RefluxRatio
                     Case 4
                         'distillate molar flow
-                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
+                        If LSSf IsNot Nothing AndAlso LSSf.Length > 0 Then
+                            value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
+                        Else
+                            value = 0.0
+                        End If
                     Case 5
                         'PROP_DC_5	Condenser Duty
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
@@ -1444,7 +1448,11 @@ Namespace UnitOperations
                     value = Me.RefluxRatio
                 Case 4
                     'distillate molar flow
-                    value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
+                    If LSSf IsNot Nothing AndAlso LSSf.Length > 0 Then
+                        value = SystemsOfUnits.Converter.ConvertFromSI(su.molarflow, LSSf(0))
+                    Else
+                        value = 0.0
+                    End If
                 Case 5
                     'PROP_DC_5	Condenser Duty
                     value = SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.CondenserDuty)
