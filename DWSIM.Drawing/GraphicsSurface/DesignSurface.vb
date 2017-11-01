@@ -361,9 +361,9 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
         End Set
     End Property
 
-    Public Property DrawFloatingTables As Boolean = False
+    Public Property DrawFloatingTables As Boolean = True
 
-    Public Property DrawPropertyLists As Boolean = True
+    Public Property DrawPropertyLists As Boolean = False
 
     Protected Function ConvertToHPixels(ByVal value As Single) As Single
         Return value * Me.m_HorizRes

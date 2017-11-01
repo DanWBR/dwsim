@@ -89,9 +89,9 @@ Public Class GraphicsSurface
 
     Public Property Size As SKSize = New SKSize(1024, 768)
 
-    Public Property DrawFloatingTable As Boolean = False
+    Public Property DrawFloatingTable As Boolean = True
 
-    Public Property DrawPropertyList As Boolean = True
+    Public Property DrawPropertyList As Boolean = False
 
     Public Property SelectedObject() As IGraphicObject
         Get
