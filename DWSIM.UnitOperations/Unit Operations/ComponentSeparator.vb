@@ -243,9 +243,9 @@ Namespace UnitOperations
                             Case SeparationSpec.PercentInletMolarFlow
                                 Dim mf As Double = instr.Phases(0).Compounds(cs.ComponentID).MolarFlow.GetValueOrDefault
                                 If mf <> 0.0# Then
-                                    .MassFlow = cs.SpecValue / 100 * mf
+                                    .MolarFlow = cs.SpecValue / 100 * mf
                                 Else
-                                    .MassFlow = 0.0#
+                                    .MolarFlow = 0.0#
                                 End If
                                 .MassFlow = .MolarFlow * .ConstantProperties.Molar_Weight / 1000
                         End Select
