@@ -39,6 +39,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
         Dim pH0 As Nullable(Of Double) = Nothing
         Dim concHCO3 As Nullable(Of Double) = Nothing
 
+        Private otherargs As Object
+
         Public Property CompoundProperties As List(Of Interfaces.ICompoundConstantProperties)
 
         Public Property Reactions As New List(Of Interfaces.IReaction)
@@ -224,7 +226,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
             Setup(conc, conc0, id)
 
-            Dim nl As New NestedLoops() With {.LimitVaporFraction = True}
+            Dim nl As New NestedLoops() With {.LimitVaporFraction = LimitNLVF}
 
             ecount = 0
 
@@ -333,6 +335,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 For i = 0 To n
                     Ki(i) = Vxv(i) / Vxl(i)
+                    If Double.IsNaN(Ki(i)) Or Double.IsInfinity(Ki(i)) Then Ki(i) = 0.0#
                 Next
 
                 If id("H+") = -1 Then
@@ -351,14 +354,13 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                 fx = Vz.MultiplyY(Ki.AddConstY(-1).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
                 dfx = Vz.NegateY.MultiplyY(Ki.AddConstY(-1).MultiplyY(Ki.AddConstY(-1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1)).DivideY(Ki.AddConstY(-1).MultiplyConstY(V).AddConstY(1))).SumY
 
-                If Abs(fx) < etol / 100 Then Exit Do
+                If Abs(fx) < etol Then Exit Do
 
-                V = -fx / dfx + Vant
-
-                'If V < 0.0# Then V = 0.0#
-                'If V > 1.0# Then V = 1.0#
+                V = -0.3 * fx / dfx + Vant
 
                 ecount += 1
+
+                If Not PP.CurrentMaterialStream.Flowsheet Is Nothing Then PP.CurrentMaterialStream.Flowsheet.CheckStatus()
 
                 If ecount > maxit_e Then Throw New Exception(Calculator.GetLocalString("PropPack_FlashMaxIt2"))
 
@@ -421,14 +423,21 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             If pH0.HasValue Then
                 pH = pH0.Value
             Else
-                pH = 12.0#
+                pH = 14.0#
             End If
+
+            Dim brentsolver As New BrentOpt.BrentMinimize
+            brentsolver.DefineFuncDelegate(AddressOf DampingCheck)
 
             Do
 
                 icount = 0
 
                 Do
+
+                    'calculate liquid phase chemical equilibrium
+
+                    conc("H+") = 10 ^ (-pH)
 
                     conc("H2O") = conc0("H2O") - (conc("H+"))
                     conc("H2S") = conc0("H2S") - (conc("HS-") + conc("S-2"))
@@ -447,9 +456,7 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     Istr += 2 ^ 2 * conc("S-2") / 2
                     Istr += 1 ^ 2 * conc("Na+") / 2
 
-                    'calculate liquid phase chemical equilibrium
-
-                    conc("H+") = 10 ^ (-pH)
+                    If Istr < 0.0 Then Istr = -Istr
 
                     '   1   CO2 ionization	                CO2 + H2O <--> H+ + HCO3- 
                     '   2   Carbonate production	        HCO3- <--> CO3-2 + H+ 
@@ -508,10 +515,19 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     pH_old0 = pH_old
                     pH_old = pH
 
+                    Dim df, fval As Double
+                    df = 1.0#
+
                     If icount < 2 Then
                         pH += 0.001
                     Else
-                        pH = pH - 0.01 * fx * (pH - pH_old0) / (fx - fx_old0)
+                        otherargs = New Object() {conc, conc0, kr, T, pH, fx * (pH - pH_old0) / (fx - fx_old0)}
+                        fval = brentsolver.brentoptimize(0.01, 0.1, 0.0001, df)
+                        If (fx - fx_old0) > 1.0E-20 Then
+                            pH = pH - df * fx * (pH - pH_old0) / (fx - fx_old0)
+                        Else
+                            pH = pH * 0.999
+                        End If
                         If Double.IsNaN(pH) Then
                             Throw New Exception(Calculator.GetLocalString("PropPack_FlashError"))
                         End If
@@ -553,6 +569,96 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
             concHCO3 = conc("HCO3-")
 
         End Sub
+
+        Function DampingCheck(df As Double)
+
+            Dim nch, pch, pH, fx, fx_old, fx_old0, Istr, k1, k5 As Double
+
+            Dim conc, conc0 As New Dictionary(Of String, Double)
+            Dim kr As New List(Of Double)
+
+            conc = New Dictionary(Of String, Double)(DirectCast(otherargs(0), Dictionary(Of String, Double)))
+            conc0 = New Dictionary(Of String, Double)(DirectCast(otherargs(1), Dictionary(Of String, Double)))
+            kr = otherargs(2)
+
+            Dim T As Double = otherargs(3)
+
+            pH = CDbl(otherargs(4)) - df * CDbl(otherargs(5))
+
+            conc("H+") = 10 ^ (-pH)
+
+            conc("H2O") = conc0("H2O") - (conc("H+"))
+            conc("H2S") = conc0("H2S") - (conc("HS-") + conc("S-2"))
+            conc("NH3") = conc0("NH3") - (conc("NH4+") + conc("H2NCOO-"))
+            conc("NaOH") = conc0("NaOH") - (conc("Na+"))
+
+            'calculate ionic strength
+
+            Istr = 1 ^ 2 * conc("H+") / 2
+            Istr += 1 ^ 2 * conc("OH-") / 2
+            Istr += 1 ^ 2 * conc("HCO3-") / 2
+            Istr += 2 ^ 2 * conc("CO3-2") / 2
+            Istr += 1 ^ 2 * conc("H2NCOO-") / 2
+            Istr += 1 ^ 2 * conc("NH4+") / 2
+            Istr += 1 ^ 2 * conc("HS-") / 2
+            Istr += 2 ^ 2 * conc("S-2") / 2
+            Istr += 1 ^ 2 * conc("Na+") / 2
+
+            'calculate liquid phase chemical equilibrium
+
+            conc("H+") = 10 ^ (-pH)
+
+            '   1   CO2 ionization	                CO2 + H2O <--> H+ + HCO3- 
+            '   2   Carbonate production	        HCO3- <--> CO3-2 + H+ 
+
+            ' equilibrium constant ionic strength correction
+
+            k1 = Exp(Log(kr(0)) - 0.278 * conc("H2S") + (-1.32 + 1558.8 / (T * 1.8)) * Istr ^ 0.4)
+            'k1 = Exp(Log(kr(0)) - 0.278 * conc("H2S"))
+
+            conc("CO2") = conc("HCO3-") * conc("H+") / k1
+
+            conc("CO3-2") = kr(1) * conc("HCO3-") / conc("H+")
+
+            '   3   Ammonia ionization	            H+ + NH3 <--> NH4+ 
+            '   4   Carbamate production	        HCO3- + NH3 <--> H2NCOO- + H2O 
+
+            conc("NH4+") = kr(2) * conc("H+") * conc("NH3")
+
+            conc("H2NCOO-") = kr(3) * conc("HCO3-") * conc("NH3")
+
+            '   5   H2S ionization	                H2S <--> HS- + H+ 
+            '   6   Sulfide production	            HS- <--> S-2 + H+ 
+
+            ' equilibrium constant ionic strength correction
+
+            k5 = Exp(Log(kr(4)) + 0.427 * conc("CO2"))
+
+            conc("HS-") = k5 * conc("H2S") / (conc("H+") + k5 + 2 * k5 * kr(5) / conc("H+"))
+
+            conc("S-2") = kr(5) * conc("HS-") / conc("H+")
+
+            '   7   Water self-ionization	        H2O <--> OH- + H+ 
+            '   8   Sodium Hydroxide dissociation   NaOH <--> OH- + Na+ 
+
+            'assume full NaOH dissociation
+
+            conc("Na+") = conc0("NaOH")
+
+            conc("OH-") = kr(6) / conc("H+") - conc("Na+")
+
+            'neutrality check
+
+            pch = conc("H+") + conc("NH4+") + conc("Na+")
+            nch = conc("OH-") + conc("HCO3-") + conc("H2NCOO-") + conc("HS-") + 2 * conc("S-2") + 2 * conc("CO3-2")
+
+            fx_old0 = fx_old
+            fx_old = fx
+            fx = pch - nch
+
+            Return fx ^ 2
+
+        End Function
 
         Public Overrides Function Flash_PH(ByVal Vz As Double(), ByVal P As Double, ByVal H As Double, ByVal Tref As Double, ByVal PP As PropertyPackages.PropertyPackage, Optional ByVal ReuseKI As Boolean = False, Optional ByVal PrevKi As Double() = Nothing) As Object
 
@@ -608,26 +714,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Do
 
-                    If Settings.EnableParallelProcessing Then
-
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              fx = Herror("PT", x1, P, Vz, PP)(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
-                                                          End Sub,
-                                                            Settings.TaskCancellationTokenSource.Token,
-                                                            TaskCreationOptions.None,
-                                                           Settings.AppTaskScheduler)
-                        Task.WaitAll(task1, task2)
-
-                    Else
-                        fx = Herror("PT", x1, P, Vz, PP)(0)
-                        fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
-                    End If
+                    fx = Herror("PT", x1, P, Vz, PP)(0)
+                    fx2 = Herror("PT", x1 + epsilon(j), P, Vz, PP)(0)
 
                     If Abs(fx) <= tolEXT Then Exit Do
 
@@ -724,26 +812,8 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
 
                 Do
 
-                    If Settings.EnableParallelProcessing Then
-
-                        Dim task1 = Task.Factory.StartNew(Sub()
-                                                              fx = Serror("PT", x1, P, Vz, PP)(0)
-                                                          End Sub,
-                                                          Settings.TaskCancellationTokenSource.Token,
-                                                          TaskCreationOptions.None,
-                                                         Settings.AppTaskScheduler)
-                        Dim task2 = Task.Factory.StartNew(Sub()
-                                                              fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
-                                                          End Sub,
-                                                          Settings.TaskCancellationTokenSource.Token,
-                                                          TaskCreationOptions.None,
-                                                         Settings.AppTaskScheduler)
-                        Task.WaitAll(task1, task2)
-
-                    Else
-                        fx = Serror("PT", x1, P, Vz, PP)(0)
-                        fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
-                    End If
+                    fx = Serror("PT", x1, P, Vz, PP)(0)
+                    fx2 = Serror("PT", x1 + epsilon(j), P, Vz, PP)(0)
 
                     If Abs(fx) < tolEXT Then Exit Do
 

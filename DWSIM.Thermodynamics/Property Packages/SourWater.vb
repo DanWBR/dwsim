@@ -234,13 +234,25 @@ Namespace PropertyPackages
                 Return 1.0E-20
             ElseIf cprops(index).Name = "Ammonia" Then
                 value = Exp(178.339 - 15517.91 / (T * 1.8) - 25.6767 * Log(T * 1.8) + 0.01966 * (T * 1.8) + (131.4 / (T * 1.8) - 0.1682) * CAS) + 0.06 * (2 * CC + CS) 'psia/[mol/kg]
-                Return value * conc("NH3") / 0.000145038 / Vx(index)
+                If Vx(index) > 0.0 Then
+                    Return value * conc("NH3") / 0.000145038 / Vx(index)
+                Else
+                    Return value * conc("NH3") / 0.000145038
+                End If
             ElseIf cprops(index).Name = "Carbon dioxide" Then
                 value = Exp(18.33 - 24895.1 / (T * 1.8) + 22399600.0 / (T * 1.8) ^ 2 - 9091800000.0 / (T * 1.8) ^ 3 + 1260100000000.0 / (T * 1.8) ^ 4) 'psia/[mol/kg]
-                Return value * conc("CO2") / 0.000145038 / Vx(index)
+                If Vx(index) > 0.0 Then
+                    Return value * conc("CO2") / 0.000145038 / Vx(index)
+                Else
+                    Return value * conc("CO2") / 0.000145038
+                End If
             ElseIf cprops(index).Name = "Hydrogen sulfide" Then
                 value = Exp(100.684 - 246254 / (T * 1.8) + 239029000.0 / (T * 1.8) ^ 2 - 101898000000.0 / (T * 1.8) ^ 3 + 15973400000000.0 / (T * 1.8) ^ 4 - 0.05 * CAS + (0.965 - 486 / (T * 1.8)) * CC) 'psia/[mol/kg]
-                Return value * conc("H2S") / 0.000145038 / Vx(index)
+                If Vx(index) > 0.0 Then
+                    Return value * conc("H2S") / 0.000145038 / Vx(index)
+                Else
+                    Return value * conc("H2S") / 0.000145038
+                End If
             Else
                 Return MyBase.AUX_PVAPi(index, T)
             End If
