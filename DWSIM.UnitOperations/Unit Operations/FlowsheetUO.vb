@@ -249,26 +249,15 @@ Label_00CC:
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("Compounds").Elements.ToList
 
-            Dim complist As New Concurrent.ConcurrentBag(Of ConstantProperties)
-
-            Parallel.ForEach(data, Sub(xel)
-                                       Try
-                                           Dim obj As New ConstantProperties
-                                           obj.LoadData(xel.Elements.ToList)
-                                           complist.Add(obj)
-                                       Catch ex As Exception
-                                           excs.Add(New Exception("Error Loading Compound Information", ex))
-                                       End Try
-                                   End Sub)
-
-            Dim orderedlist = complist.OrderBy(Function(o) o.Molar_Weight)
-
-            For Each obj In orderedlist
-                fs.SelectedCompounds.Add(obj.Name, obj)
+            For Each xel As XElement In data
+                Try
+                    Dim obj As New ConstantProperties
+                    obj.LoadData(xel.Elements.ToList)
+                    fs.Options.SelectedComponents.Add(obj.Name, obj)
+                Catch ex As Exception
+                    excs.Add(New Exception("Error Loading Compound Information", ex))
+                End Try
             Next
-
-            complist = Nothing
-            orderedlist = Nothing
 
             data = xdoc.Element("DWSIM_Simulation_Data").Element("PropertyPackages").Elements.ToList
 

@@ -1304,6 +1304,8 @@ Imports DWSIM.Interfaces.Enums.GraphicObjects
 
     Private Sub DrawPropertyListBlock(canvas As Graphics, gobj As GraphicObject)
 
+        If gobj.Owner Is Nothing Then Exit Sub
+
         Dim gCon As Drawing2D.GraphicsContainer
         gCon = canvas.BeginContainer()
         canvas.ScaleTransform(Zoom, Zoom)
