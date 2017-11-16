@@ -146,7 +146,7 @@ namespace DWSIM.UI
             tableright.Padding = new Padding(5, 5, 5, 5);
             tableright.Spacing = new Size(10, 10);
 
-            MostRecentList = new ListBox { BackgroundColor = bgcolor};
+            MostRecentList = new ListBox { BackgroundColor = bgcolor, Height = 330};
 
             if (Application.Instance.Platform.IsGtk &&
                 GlobalSettings.Settings.RunningPlatform() == GlobalSettings.Settings.Platform.Mac)
