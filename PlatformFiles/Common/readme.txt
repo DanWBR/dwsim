@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 4
+Version 5.1 Update 5
 Copyright (c) 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -37,6 +37,14 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 5
+
+- [FIX] Fixed Sour Water model
+- [FIX] Fixed a bug with the Flowsheet UO
+- [FIX] Fixed molar flow separation spec in Compound Separator
+- [FIX] Fixed Material Stream phase property cloning
+- [FIX] Fixed section diameter conversion (Pipe Segment, New UI)
 
 Version 5.1 Update 4
 
