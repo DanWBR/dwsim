@@ -2492,14 +2492,6 @@ ruf:                Application.DoEvents()
         frmAbout.ShowDialog(Me)
     End Sub
 
-    Private Sub LinkLabel7_LinkClicked_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
-        Call Me.OpenToolStripButton_Click(sender, e)
-    End Sub
-
-    Private Sub LinkLabel5_LinkClicked_1(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
-        Call Me.NewToolStripButton_Click(sender, e)
-    End Sub
-
     Private Sub OpenRecent_click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         Dim myLink As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
@@ -2869,16 +2861,12 @@ ruf:                Application.DoEvents()
         End If
     End Sub
 
-    Private Sub DownloadsToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DownloadsToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://sourceforge.net/projects/dwsim/files/")
-    End Sub
-
     Private Sub WikiToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WikiToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://dwsim.inforside.com.br")
     End Sub
 
     Private Sub ForumToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForumToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://sourceforge.net/p/dwsim/discussion/")
+        System.Diagnostics.Process.Start("http://dwsim.inforside.com.br/wiki/index.php?title=Support")
     End Sub
 
     Private Sub RastreamentoDeBugsToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RastreamentoDeBugsToolStripMenuItem.Click
