@@ -40,7 +40,7 @@ Namespace GraphicObjects.Shapes
 
         Public Overrides Sub CreateConnectors(InCount As Integer, OutCount As Integer)
 
-              Dim myIC1 As New ConnectionPoint
+            Dim myIC1 As New ConnectionPoint
             myIC1.Position = New Point(X, Y + 0.5 * Height)
             myIC1.Type = ConType.ConIn
 
@@ -60,13 +60,8 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                    Else
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                    End If
+                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
                 Else
                     .Add(myIC1)
                     .Add(myIC2)
@@ -80,11 +75,7 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    End If
+                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
                 Else
                     .Add(myOC1)
                 End If

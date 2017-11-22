@@ -55,13 +55,8 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count = 2 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                    Else
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                    End If
+                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
                 ElseIf .Count = 1 Then
                     .Item(0).Position = New Point(X, Y + 0.5 * Height)
                     .Add(myIC2)
@@ -78,11 +73,7 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y + 0.1 * Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y + 0.1 * Height)
-                    End If
+                    .Item(0).Position = New Point(X + Width, Y + 0.1 * Height)
                 Else
                     .Add(myOC1)
                 End If
@@ -108,7 +99,7 @@ Namespace GraphicObjects.Shapes
             UpdateStatus()
             MyBase.Draw(g)
 
-          
+
             Dim myPen As New SKPaint()
             With myPen
                 .Color = LineColor
@@ -138,24 +129,6 @@ Namespace GraphicObjects.Shapes
             Dim pt10 As New Point(X + Width, Y)
             Dim pt11 As New Point(X + Width, Y + 0.25 * Height)
             Dim pt12 As New Point(X + 0.88 * Width, Y + 0.25 * Height)
-
-            If Me.FlippedH Then
-
-                pt3 = New Point(X + 0.9 * Width, Y + Height)
-                pt4 = New Point(X + 0.8 * Width, Y + 0.65 * Height)
-
-                pt5 = New Point(X + 0.1 * Width, Y + Height)
-                pt6 = New Point(X + 0.2 * Width, Y + 0.65 * Height)
-
-                pt7 = New Point(X + 0.9 * Width, Y + Height)
-                pt8 = New Point(X + 0.1 * Width, Y + Height)
-
-                pt9 = New Point(X + 0.5 * Width, Y)
-                pt10 = New Point(X, Y)
-                pt11 = New Point(X, Y + 0.25 * Height)
-                pt12 = New Point(X + 0.12 * Width, Y + 0.25 * Height)
-
-            End If
 
             Dim gp As New SKPath()
 

@@ -188,23 +188,124 @@ Namespace GraphicObjects
             RightBottom2.X = Me.AttachedTo.X + Me.AttachedTo.Width
             RightBottom2.Y = Me.AttachedTo.Y + Me.AttachedTo.Height
 
-            If Me.AttachedFrom.FlippedH Then
-                If StartDir = ConDir.Right Then
+            'Check Rotation
+
+            If Me.AttachedFrom.Rotation >= 90 And Me.AttachedFrom.Rotation < 180 Then
+                If StartDir = ConDir.Left Then
+                    StartDir = ConDir.Up
+                ElseIf StartDir = ConDir.Down Then
                     StartDir = ConDir.Left
-                ElseIf StartDir = ConDir.Left Then
+                ElseIf StartDir = ConDir.Right Then
+                    StartDir = ConDir.Down
+                ElseIf StartDir = ConDir.Up Then
                     StartDir = ConDir.Right
                 End If
-            End If
-            If Me.AttachedTo.FlippedH Then
-                If EndDir = ConDir.Right Then
-                    EndDir = ConDir.Left
-                ElseIf EndDir = ConDir.Left Then
-                    EndDir = ConDir.Right
+            ElseIf Me.AttachedFrom.Rotation >= 180 And Me.AttachedFrom.Rotation < 270 Then
+                If StartDir = ConDir.Left Then
+                    StartDir = ConDir.Right
+                ElseIf StartDir = ConDir.Down Then
+                    StartDir = ConDir.Up
+                ElseIf StartDir = ConDir.Right Then
+                    StartDir = ConDir.Left
+                ElseIf StartDir = ConDir.Up Then
+                    StartDir = ConDir.Down
+                End If
+            ElseIf Me.AttachedFrom.Rotation >= 270 And Me.AttachedFrom.Rotation < 360 Then
+                If StartDir = ConDir.Left Then
+                    StartDir = ConDir.Down
+                ElseIf StartDir = ConDir.Down Then
+                    StartDir = ConDir.Right
+                ElseIf StartDir = ConDir.Right Then
+                    StartDir = ConDir.Up
+                ElseIf StartDir = ConDir.Up Then
+                    StartDir = ConDir.Left
                 End If
             End If
 
+            If Me.AttachedTo.Rotation >= 90 And Me.AttachedTo.Rotation < 180 Then
+                If EndDir = ConDir.Left Then
+                    EndDir = ConDir.Up
+                ElseIf EndDir = ConDir.Down Then
+                    EndDir = ConDir.Left
+                ElseIf EndDir = ConDir.Right Then
+                    EndDir = ConDir.Down
+                ElseIf EndDir = ConDir.Up Then
+                    EndDir = ConDir.Right
+                End If
+            ElseIf Me.AttachedTo.Rotation >= 180 And Me.AttachedTo.Rotation < 270 Then
+                If EndDir = ConDir.Left Then
+                    EndDir = ConDir.Right
+                ElseIf EndDir = ConDir.Down Then
+                    EndDir = ConDir.Up
+                ElseIf EndDir = ConDir.Right Then
+                    EndDir = ConDir.Left
+                ElseIf EndDir = ConDir.Up Then
+                    EndDir = ConDir.Down
+                End If
+            ElseIf Me.AttachedTo.Rotation >= 270 And Me.AttachedTo.Rotation < 360 Then
+                If EndDir = ConDir.Left Then
+                    EndDir = ConDir.Down
+                ElseIf EndDir = ConDir.Down Then
+                    EndDir = ConDir.Right
+                ElseIf EndDir = ConDir.Right Then
+                    EndDir = ConDir.Up
+                ElseIf EndDir = ConDir.Up Then
+                    EndDir = ConDir.Left
+                End If
+            End If
+
+            'Apply Rotation
+
+            If Me.AttachedFrom.Rotation <> 0 Then
+                Dim angle_rad As Double = Me.AttachedFrom.Rotation * Math.PI / 180
+                Dim center As New Point(Me.AttachedFrom.X + Me.AttachedFrom.Width / 2, Me.AttachedFrom.Y + Me.AttachedFrom.Height / 2)
+                Dim x As Double = StartPos.X - center.X
+                Dim y As Double = StartPos.Y - center.Y
+                StartPos.X = center.X + (x * Math.Cos(angle_rad) + y * Math.Sin(angle_rad))
+                StartPos.Y = center.Y - (x * -Math.Sin(angle_rad) + y * Math.Cos(angle_rad))
+            End If
+            If Me.AttachedTo.Rotation <> 0 Then
+                Dim angle_rad As Double = Me.AttachedTo.Rotation * Math.PI / 180
+                Dim center As New Point(Me.AttachedTo.X + Me.AttachedTo.Width / 2, Me.AttachedTo.Y + Me.AttachedTo.Height / 2)
+                Dim x As Double = EndPos.X - center.X
+                Dim y As Double = EndPos.Y - center.Y
+                EndPos.X = center.X + (x * Math.Cos(angle_rad) + y * Math.Sin(angle_rad))
+                EndPos.Y = center.Y - (x * -Math.Sin(angle_rad) + y * Math.Cos(angle_rad))
+            End If
+
+            'Check Flipping
+
+            If Me.AttachedFrom.FlippedH Then
+                Dim center As New Point(Me.AttachedFrom.X + Me.AttachedFrom.Width / 2, Me.AttachedFrom.Y + Me.AttachedFrom.Height / 2)
+                Dim y As Double = StartPos.Y - center.Y
+                StartPos.Y = center.Y - y
+                If StartDir = ConDir.Down Then StartDir = ConDir.Up
+                If StartDir = ConDir.Up Then StartDir = ConDir.Down
+            End If
+            If Me.AttachedFrom.FlippedV Then
+                Dim center As New Point(Me.AttachedFrom.X + Me.AttachedFrom.Width / 2, Me.AttachedFrom.Y + Me.AttachedFrom.Height / 2)
+                Dim x As Double = StartPos.X - center.X
+                StartPos.X = center.X - x
+                If StartDir = ConDir.Left Then StartDir = ConDir.Right
+                If StartDir = ConDir.Right Then StartDir = ConDir.Left
+            End If
+            If Me.AttachedTo.FlippedH Then
+                Dim center As New Point(Me.AttachedTo.X + Me.AttachedTo.Width / 2, Me.AttachedTo.Y + Me.AttachedTo.Height / 2)
+                Dim y As Double = EndPos.Y - center.Y
+                EndPos.Y = center.Y - y
+                If EndDir = ConDir.Down Then EndDir = ConDir.Up
+                If EndDir = ConDir.Up Then EndDir = ConDir.Down
+            End If
+            If Me.AttachedTo.FlippedV Then
+                Dim center As New Point(Me.AttachedTo.X + Me.AttachedTo.Width / 2, Me.AttachedTo.Y + Me.AttachedTo.Height / 2)
+                Dim x As Double = EndPos.X - center.X
+                EndPos.X = center.X - x
+                If EndDir = ConDir.Left Then EndDir = ConDir.Right
+                If EndDir = ConDir.Right Then EndDir = ConDir.Left
+            End If
 
             'Construct path of stream
+
             PointList.Add(New Point(StartPos.X, StartPos.Y))
 
             '================== EndDir Right =======================

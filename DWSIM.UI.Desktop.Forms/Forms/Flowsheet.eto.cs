@@ -817,6 +817,13 @@ namespace DWSIM.UI.Forms
                 EditSelectedObjectProperties();
             };
 
+            var menuitem1a = new ButtonMenuItem { Text = "Edit Appearance", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+            menuitem1a.Click += (sender, e) =>
+            {
+                EditAppearance();
+            };
+            menuitem1a.Enabled = (obj.GraphicObject is ShapeGraphic);
+
             var menuitem2 = new ButtonMenuItem { Text = "View Results", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "ReportCard_96px.png")) };
             menuitem2.Click += (sender, e) =>
             {
@@ -849,7 +856,7 @@ namespace DWSIM.UI.Forms
                 DeleteObject();
             };
 
-            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
+            selctxmenu.Items.AddRange(new MenuItem[] { item0, item1, new SeparatorMenuItem(), item2, menuitem1, menuitem1a, new SeparatorMenuItem(), item3, item4, new SeparatorMenuItem(), menuitem2, new SeparatorMenuItem(), item5, item6 });
 
             return;
 
@@ -903,9 +910,24 @@ namespace DWSIM.UI.Forms
             UI.Shared.Common.CreateAndAddDescriptionRow(cont, "ConnectorsEditorDescription".Localize());
             new DWSIM.UI.Desktop.Editors.ConnectionsEditor(obj, cont);
             var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Connections", 500, 500, cont);
-            form.ShowInTaskbar = false;
+            form.ShowInTaskbar = true;
+            form.Topmost = true;
             form.Show();
             form.Width += 1;
+        }
+
+        void EditAppearance()
+        {
+            var obj = FlowsheetObject.GetSelectedFlowsheetSimulationObject(null);
+            if (obj == null) return;
+            if (obj.GraphicObject is ShapeGraphic)
+            {
+                var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + " - Edit Appearance", 500, 500, new ObjectAppearanceEditorView(FlowsheetObject, (ShapeGraphic)obj.GraphicObject));
+                form.ShowInTaskbar = true;
+                form.Topmost = true;
+                form.Show();
+                form.Width += 1;
+            }
         }
 
         private void EditSelectedObjectProperties()
@@ -919,21 +941,29 @@ namespace DWSIM.UI.Forms
                 if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Table)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Tables.PropertyTableEditor { Table = (TableGraphic)selobj };
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
                     editor.Show();
                 }
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_SpreadsheetTable)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Tables.SpreadsheetTableEditor { Table = (SpreadsheetTableGraphic)selobj };
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
                     editor.Show();
                 }
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_MasterTable)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Tables.MasterPropertyTableEditor { Table = (MasterTableGraphic)selobj };
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
                     editor.Show();
                 }
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Chart)
                 {
                     var editor = new DWSIM.UI.Desktop.Editors.Charts.ChartObjectEditor((OxyPlotGraphic)selobj);
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
                     editor.Show();
                 }
                 else if (selobj.ObjectType == Interfaces.Enums.GraphicObjects.ObjectType.GO_Text)
@@ -951,6 +981,8 @@ namespace DWSIM.UI.Forms
                     };
                     container.Rows.Add(new TableRow(txt));
                     var editor = UI.Shared.Common.GetDefaultEditorForm("Edit Text Object", 500, 500, container, false);
+                    editor.ShowInTaskbar = true;
+                    editor.Topmost = true;
                     editor.Show();
                 }
                 else
@@ -1006,6 +1038,8 @@ namespace DWSIM.UI.Forms
                             cont3.Tag = "Thermal Profile";
                             new PipeThermalProfile(obj, cont3);
                             var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new[] { cont, cont2, cont3 });
+                            form.ShowInTaskbar = true;
+                            form.Topmost = true;
                             form.Show();
                             form.Width += 1;
                         }
@@ -1023,6 +1057,8 @@ namespace DWSIM.UI.Forms
                             cont2.Rows.Add(new TableRow(dyn1));
                             cont2.Rows.Add(new TableRow(scripteditor));
                             var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 800, 600, new Control[] { cont, cont2 });
+                            form.ShowInTaskbar = true;
+                            form.Topmost = true;
                             form.Show();
                             form.Width += 1;
                         }
@@ -1032,12 +1068,16 @@ namespace DWSIM.UI.Forms
                             var dyn1 = new UI.Desktop.Editors.ShellAndTubePropertiesView(obj);
                             dyn1.Tag = "Shell and Tube Properties";
                             var form = UI.Shared.Common.GetDefaultTabbedForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, new Control[] { cont, dyn1 });
+                            form.ShowInTaskbar = true;
+                            form.Topmost = true;
                             form.Show();
                             form.Width += 1;
                         }
                         else
                         {
                             var form = UI.Shared.Common.GetDefaultEditorForm(obj.GraphicObject.Tag + ": Edit Properties", 500, 500, cont);
+                            form.ShowInTaskbar = true;
+                            form.Topmost = true;
                             form.Show();
                             form.Width += 1;
                         }

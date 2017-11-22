@@ -68,26 +68,16 @@ Namespace GraphicObjects.Shapes
             End If
 
             With InputConnectors
-                If FlippedH Then
-                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + 0.5 * Width, Y)
-                Else
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + 0.5 * Width, Y)
-                End If
+                .Item(0).Position = New Point(X, Y + 0.5 * Height)
+                .Item(1).Position = New Point(X + 0.5 * Width, Y)
                 .Item(1).Direction = ConDir.Down
                 .Item(0).ConnectorName = "Inlet Stream 1"
                 .Item(1).ConnectorName = "Inlet Stream 2"
             End With
 
             With OutputConnectors
-                If FlippedH Then
-                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                Else
-                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                End If
+                .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
+                .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
                 .Item(1).Direction = ConDir.Down
                 .Item(0).ConnectorName = "Outlet Stream 1"
                 .Item(1).ConnectorName = "Outlet Stream 2"
@@ -106,7 +96,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-           
+
             Dim myPen As New SKPaint()
             With myPen
                 .Color = LineColor

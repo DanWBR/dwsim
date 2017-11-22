@@ -108,23 +108,13 @@ Namespace GraphicObjects.Shapes
                         .Add(myIC6)
                         .Add(myIC7)
                     Else
-                        If Me.FlippedH Then
-                            .Item(0).Position = New Point(X + Width, Y)
-                            .Item(1).Position = New Point(X + Width, Y + 1 * 0.13 * Height)
-                            .Item(2).Position = New Point(X + Width, Y + 2 * 0.13 * Height)
-                            .Item(3).Position = New Point(X + Width, Y + Height)
-                            .Item(4).Position = New Point(X + Width, Y + 3 * 0.13 * Height)
-                            .Item(5).Position = New Point(X + Width, Y + 4 * 0.13 * Height)
-                            .Item(6).Position = New Point(X + Width, Y + 5 * 0.13 * Height)
-                        Else
-                            .Item(0).Position = New Point(X, Y)
-                            .Item(1).Position = New Point(X, Y + 1 * 0.13 * Height)
-                            .Item(2).Position = New Point(X, Y + 2 * 0.13 * Height)
-                            .Item(3).Position = New Point(X, Y + Height)
-                            .Item(4).Position = New Point(X, Y + 3 * 0.13 * Height)
-                            .Item(5).Position = New Point(X, Y + 4 * 0.13 * Height)
-                            .Item(6).Position = New Point(X, Y + 5 * 0.13 * Height)
-                        End If
+                        .Item(0).Position = New Point(X, Y)
+                        .Item(1).Position = New Point(X, Y + 1 * 0.13 * Height)
+                        .Item(2).Position = New Point(X, Y + 2 * 0.13 * Height)
+                        .Item(3).Position = New Point(X, Y + Height)
+                        .Item(4).Position = New Point(X, Y + 3 * 0.13 * Height)
+                        .Item(5).Position = New Point(X, Y + 4 * 0.13 * Height)
+                        .Item(6).Position = New Point(X, Y + 5 * 0.13 * Height)
                     End If
                 Else
                     .Add(myIC1)
@@ -148,23 +138,13 @@ Namespace GraphicObjects.Shapes
                         .Add(myOC6)
                         .Add(myOC7)
                     Else
-                        If Me.FlippedH Then
-                            .Item(0).Position = New Point(X, Y)
-                            .Item(1).Position = New Point(X, Y + 1 * 0.13 * Height)
-                            .Item(2).Position = New Point(X, Y + 2 * 0.13 * Height)
-                            .Item(3).Position = New Point(X, Y + Height)
-                            .Item(4).Position = New Point(X, Y + 3 * 0.13 * Height)
-                            .Item(5).Position = New Point(X, Y + 4 * 0.13 * Height)
-                            .Item(6).Position = New Point(X, Y + 5 * 0.13 * Height)
-                        Else
-                            .Item(0).Position = New Point(X + Width, Y)
-                            .Item(1).Position = New Point(X + Width, Y + 1 * 0.13 * Height)
-                            .Item(2).Position = New Point(X + Width, Y + 2 * 0.13 * Height)
-                            .Item(3).Position = New Point(X + Width, Y + Height)
-                            .Item(4).Position = New Point(X + Width, Y + 3 * 0.13 * Height)
-                            .Item(5).Position = New Point(X + Width, Y + 4 * 0.13 * Height)
-                            .Item(6).Position = New Point(X + Width, Y + 5 * 0.13 * Height)
-                        End If
+                        .Item(0).Position = New Point(X + Width, Y)
+                        .Item(1).Position = New Point(X + Width, Y + 1 * 0.13 * Height)
+                        .Item(2).Position = New Point(X + Width, Y + 2 * 0.13 * Height)
+                        .Item(3).Position = New Point(X + Width, Y + Height)
+                        .Item(4).Position = New Point(X + Width, Y + 3 * 0.13 * Height)
+                        .Item(5).Position = New Point(X + Width, Y + 4 * 0.13 * Height)
+                        .Item(6).Position = New Point(X + Width, Y + 5 * 0.13 * Height)
                     End If
                 Else
                     .Add(myOC1)

@@ -235,6 +235,41 @@ namespace DWSIM.UI.Shared
 
         }
 
+        public static ColorPicker CreateAndAddColorPickerRow(this DynamicLayout container, String text, Color currval, Action<ColorPicker, EventArgs> command)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            var editor = new ColorPicker { Width = 200,  Value = currval };
+
+            if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((ColorPicker)sender, e);
+
+            var tr = new TableRow(txt, null, editor);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return editor;
+
+        }
+
+        public static NumericStepper CreateAndAddNumericEditorRow(this DynamicLayout container, String text, double currval, double minval, double maxval, int decimalplaces, Action<NumericStepper, EventArgs> command)
+        {
+
+            var txt = new Label { Text = text, VerticalAlignment = VerticalAlignment.Center };
+            var editor = new NumericStepper { Width = 200, Value = currval, DecimalPlaces = decimalplaces, MinValue = minval, MaxValue = maxval };
+
+            if (command != null) editor.ValueChanged += (sender, e) => command.Invoke((NumericStepper)sender, e);
+
+            var tr = new TableRow(txt, null, editor);
+
+            container.AddRow(tr);
+            container.CreateAndAddEmptySpace();
+
+            return editor;
+
+        }
+
+
         public static TextBox CreateAndAddTextBoxRow2(this DynamicLayout container, String numberformat, String text, Double currval, Action<TextBox, EventArgs> command)
         {
 

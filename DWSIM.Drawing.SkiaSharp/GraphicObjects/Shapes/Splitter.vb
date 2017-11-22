@@ -60,30 +60,20 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    Else
                         .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    End If
                 Else
                     .Add(myIC1)
                 End If
                 .Item(0).ConnectorName = "Inlet"
-              
+
             End With
 
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y)
-                        .Item(1).Position = New Point(X, Y + 0.5 * Height)
-                        .Item(2).Position = New Point(X, Y + Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y)
-                        .Item(1).Position = New Point(X + Width, Y + 0.5 * Height)
-                        .Item(2).Position = New Point(X + Width, Y + Height)
-                    End If
+                    .Item(0).Position = New Point(X + Width, Y)
+                    .Item(1).Position = New Point(X + Width, Y + 0.5 * Height)
+                    .Item(2).Position = New Point(X + Width, Y + Height)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
@@ -120,22 +110,13 @@ Namespace GraphicObjects.Shapes
             Dim rect As New SKRect(X, Y, X + Width, X + Height)
 
             Dim gp As New SKPath()
-            If Not Me.FlippedH Then
-                gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
-            Else
-                gp.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-            End If
-
+            gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
+            
             gp.Close()
 
             canvas.DrawPath(gp, myPen)

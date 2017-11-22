@@ -78,21 +78,12 @@ Namespace GraphicObjects.Shapes
                         .Add(myIC5)
                         .Add(myIC6)
                     End If
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + Width, Y)
-                        .Item(1).Position = New Point(X + Width, Y + 0.2 * Height)
-                        .Item(2).Position = New Point(X + Width, Y + 0.4 * Height)
-                        .Item(3).Position = New Point(X + Width, Y + 0.6 * Height)
-                        .Item(4).Position = New Point(X + Width, Y + 0.8 * Height)
-                        .Item(5).Position = New Point(X + Width, Y + 1.0 * Height)
-                    Else
-                        .Item(0).Position = New Point(X, Y)
-                        .Item(1).Position = New Point(X, Y + 0.2 * Height)
-                        .Item(2).Position = New Point(X, Y + 0.4 * Height)
-                        .Item(3).Position = New Point(X, Y + 0.6 * Height)
-                        .Item(4).Position = New Point(X, Y + 0.8 * Height)
-                        .Item(5).Position = New Point(X, Y + 1.0 * Height)
-                    End If
+                    .Item(0).Position = New Point(X, Y)
+                    .Item(1).Position = New Point(X, Y + 0.2 * Height)
+                    .Item(2).Position = New Point(X, Y + 0.4 * Height)
+                    .Item(3).Position = New Point(X, Y + 0.6 * Height)
+                    .Item(4).Position = New Point(X, Y + 0.8 * Height)
+                    .Item(5).Position = New Point(X, Y + 1.0 * Height)
                 Else
                     .Add(myIC1)
                     .Add(myIC2)
@@ -114,11 +105,7 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    End If
+                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
                 Else
                     .Add(myOC1)
                 End If
@@ -151,21 +138,13 @@ Namespace GraphicObjects.Shapes
             Dim rect As New SKRect(X, Y, X + Width, X + Height)
 
             Dim gp As New SKPath()
-            If Me.FlippedH Then
-                gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
-            Else
-                gp.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-            End If
+
+            gp.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
+            gp.LineTo(Convert.ToInt32(X + 0.5 * Width), Convert.ToInt32(Y + Height))
+            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
 
             gp.Close()
 

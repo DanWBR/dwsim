@@ -96,23 +96,13 @@ Namespace GraphicObjects.Shapes
                     If .Count = 6 Then
                         .Add(myIC7)
                     End If
-                    If Not Me.FlippedH Then
-                        .Item(0).Position = New Point(X + 0.25 * Width, Y + 1 / 7 * Height)
-                        .Item(1).Position = New Point(X + 0.25 * Width, Y + 2 / 7 * Height)
-                        .Item(2).Position = New Point(X + 0.25 * Width, Y + 3 / 7 * Height)
-                        .Item(3).Position = New Point(X + 0.25 * Width, Y + 4 / 7 * Height)
-                        .Item(4).Position = New Point(X + 0.25 * Width, Y + 5 / 7 * Height)
-                        .Item(5).Position = New Point(X + 0.25 * Width, Y + 6 / 7 * Height)
-                        .Item(6).Position = New Point(X + 0.25 * Width, Y + 1 * Height)
-                    Else
-                        .Item(0).Position = New Point(X + (1 - 0.25) * Width, Y + 1 / 7 * Height)
-                        .Item(1).Position = New Point(X + (1 - 0.25) * Width, Y + 2 / 7 * Height)
-                        .Item(2).Position = New Point(X + (1 - 0.25) * Width, Y + 3 / 7 * Height)
-                        .Item(3).Position = New Point(X + (1 - 0.25) * Width, Y + 4 / 7 * Height)
-                        .Item(4).Position = New Point(X + (1 - 0.25) * Width, Y + 5 / 7 * Height)
-                        .Item(5).Position = New Point(X + (1 - 0.25) * Width, Y + 6 / 7 * Height)
-                        .Item(6).Position = New Point(X + (1 - 0.25) * Width, Y + 1 * Height)
-                    End If
+                    .Item(0).Position = New Point(X + 0.25 * Width, Y + 1 / 7 * Height)
+                    .Item(1).Position = New Point(X + 0.25 * Width, Y + 2 / 7 * Height)
+                    .Item(2).Position = New Point(X + 0.25 * Width, Y + 3 / 7 * Height)
+                    .Item(3).Position = New Point(X + 0.25 * Width, Y + 4 / 7 * Height)
+                    .Item(4).Position = New Point(X + 0.25 * Width, Y + 5 / 7 * Height)
+                    .Item(5).Position = New Point(X + 0.25 * Width, Y + 6 / 7 * Height)
+                    .Item(6).Position = New Point(X + 0.25 * Width, Y + 1 * Height)
                 Else
                     .Add(myIC1)
                     .Add(myIC2)
@@ -135,15 +125,9 @@ Namespace GraphicObjects.Shapes
                 If .Count = 2 Then .Add(myOC3)
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + 0.3 * Width, Y + 1 / 7 * Height)
-                        .Item(1).Position = New Point(X + 0.3 * Width, Y + 6 / 7 * Height)
-                        .Item(2).Position = New Point(X + 0.5 * Width, Y + Height)
-                    Else
-                        .Item(0).Position = New Point(X + 0.827 * Width, Y + 1 / 7 * Height)
-                        .Item(1).Position = New Point(X + 0.827 * Width, Y + 6 / 7 * Height)
-                        .Item(2).Position = New Point(X + 0.5 * Width, Y + Height)
-                    End If
+                    .Item(0).Position = New Point(X + 0.827 * Width, Y + 1 / 7 * Height)
+                    .Item(1).Position = New Point(X + 0.827 * Width, Y + 6 / 7 * Height)
+                    .Item(2).Position = New Point(X + 0.5 * Width, Y + Height)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
@@ -169,7 +153,7 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-         
+
             Dim myPen As New SKPaint()
             With myPen
                 .Color = LineColor
@@ -180,10 +164,6 @@ Namespace GraphicObjects.Shapes
 
             Dim rect3 As New SKRect(X + 0.7 * Width, Y + 0.1 * Height, X + 0.827 * Width, Y + 0.227 * Height)
             Dim rect4 As New SKRect(X + 0.7 * Width, Y + 0.773 * Height, X + 0.827 * Width, Y + (0.773 + 0.127) * Height)
-            If Me.FlippedH = True Then
-                rect3 = New SKRect(X + 0.3 * Width, Y + 0.1 * Height, X + 0.427 * Width, Y + 0.227 * Height)
-                rect4 = New SKRect(X + 0.3 * Width, Y + 0.773 * Height, X + 0.427 * Width, Y + (0.773 + 0.127) * Height)
-            End If
 
             canvas.DrawRoundRect(rect3, 2, 2, myPen)
             canvas.DrawRoundRect(rect4, 2, 2, myPen)
@@ -205,12 +185,9 @@ Namespace GraphicObjects.Shapes
 
             gp.Close()
 
-            If Me.FlippedH = True Then
-                canvas.DrawRoundRect(New SKRect(X + 0.4 * Width, Y, X + 0.85 * Width, Y + Height), 6, 6, myPen)
-            Else
-                canvas.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.7 * Width, Y + Height), 6, 6, myPen)
-            End If
-          
+
+            canvas.DrawRoundRect(New SKRect(X + 0.25 * Width, Y, X + 0.7 * Width, Y + Height), 6, 6, myPen)
+
         End Sub
 
     End Class

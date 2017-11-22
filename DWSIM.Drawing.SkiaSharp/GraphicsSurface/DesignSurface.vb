@@ -153,13 +153,56 @@ Public Class GraphicsSurface
                     .IsStroke = True
                     .StrokeWidth = 2
                 End With
-                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
-                DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+                If dobj.Rotation <> 0 Then
+                    DrawingCanvas.Save()
+                    DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+                    DrawingCanvas.Restore()
+                Else
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
+                    DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
+                End If
             End If
+
             If dobj.DrawOverride IsNot Nothing Then
+
                 dobj.DrawOverride.Invoke(DrawingCanvas)
+
             Else
+
+                Dim currmat = DrawingCanvas.TotalMatrix
+
+                DrawingCanvas.Save()
+
+                If dobj.FlippedV And Not dobj.FlippedH Then
+                    DrawingCanvas.Scale(-1, 1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                ElseIf dobj.FlippedH And Not dobj.FlippedV Then
+                    DrawingCanvas.Scale(1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                ElseIf dobj.FlippedH And dobj.FlippedV Then
+                    DrawingCanvas.Scale(-1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                End If
+
+                If dobj.Rotation <> 0 Then DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+
                 dobj.Draw(DrawingCanvas)
+
+                DrawingCanvas.SetMatrix(currmat)
+
+                If TypeOf dobj Is ShapeGraphic And
+                    dobj.ObjectType <> ObjectType.GO_MasterTable And
+                    dobj.ObjectType <> ObjectType.GO_SpreadsheetTable And
+                    dobj.ObjectType <> ObjectType.GO_Table And
+                    dobj.ObjectType <> ObjectType.GO_Animation And
+                    dobj.ObjectType <> ObjectType.GO_Chart And
+                    dobj.ObjectType <> ObjectType.GO_Image And
+                    dobj.ObjectType <> ObjectType.GO_Text And
+                    dobj.ObjectType <> ObjectType.GO_FloatingTable Then
+
+                    DirectCast(dobj, ShapeGraphic).DrawTag(DrawingCanvas)
+
+                End If
+
             End If
         Next
 

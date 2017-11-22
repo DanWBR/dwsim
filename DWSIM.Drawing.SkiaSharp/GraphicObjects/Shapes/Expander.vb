@@ -54,17 +54,13 @@ Namespace GraphicObjects.Shapes
 
             Me.EnergyConnector.Position = New Point(X + 0.5 * Width, Y + Height)
             Me.EnergyConnector.Type = ConType.ConEn
-            Me.EnergyConnector.Direction = ConDir.Up
+            Me.EnergyConnector.Direction = ConDir.Down
             Me.EnergyConnector.Active = False
 
             With InputConnectors
 
                 If .Count = 1 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    Else
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    End If
+                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
                 Else
                     .Add(myIC1)
                 End If
@@ -76,13 +72,8 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                        .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
-                    End If
+                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
+                    .Item(1).Position = New Point(X + 0.5 * Width, Y + Height)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
@@ -90,6 +81,7 @@ Namespace GraphicObjects.Shapes
 
                 .Item(0).ConnectorName = "Outlet"
                 .Item(1).ConnectorName = "Energy Stream"
+                .Item(1).Direction = ConDir.Up
 
             End With
 
@@ -104,7 +96,6 @@ Namespace GraphicObjects.Shapes
 
             MyBase.Draw(g)
 
-
             Dim myPen, myPen2 As New SKPaint()
             With myPen
                 .Color = LineColor
@@ -117,22 +108,13 @@ Namespace GraphicObjects.Shapes
 
             Dim gp2 As New SKPath()
 
-            If Me.FlippedH = True Then
-                gp2.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y))
-                gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.3 * Height))
-                gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.7 * Height))
-                gp2.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + Height))
-                gp2.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y))
-                gp2.Close()
-            Else
-                gp2.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
-                gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
-                gp2.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height))
-                gp2.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height))
-                gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
-                gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
-                gp2.Close()
-            End If
+            gp2.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+            gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+            gp2.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.3 * Height))
+            gp2.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.7 * Height))
+            gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + Height))
+            gp2.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y))
+            gp2.Close()
 
             canvas.DrawPath(gp2, myPen)
 

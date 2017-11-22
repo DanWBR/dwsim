@@ -12,25 +12,27 @@ Namespace GraphicObjects
 
             If SemiTransparent Then alpha = 50
 
-            If Me.Active Then
-                Select Case Status
-                    Case Status.Calculated
-                        LineColor = SKColors.SteelBlue
-                    Case Status.Calculating
-                        LineColor = SKColors.YellowGreen
-                    Case Status.ErrorCalculating
-                        LineColor = SKColors.Red
-                    Case Status.Idle
-                        LineColor = SKColors.SteelBlue
-                    Case Status.Inactive
-                        LineColor = SKColors.Gray
-                    Case Status.NotCalculated
-                        LineColor = SKColors.Salmon
-                    Case Status.Modified
-                        LineColor = SKColors.LightGreen
-                End Select
-            Else
-                LineColor = SKColors.Gray
+            If Not OverrideColors Then
+                If Me.Active Then
+                    Select Case Status
+                        Case Status.Calculated
+                            LineColor = SKColors.SteelBlue
+                        Case Status.Calculating
+                            LineColor = SKColors.YellowGreen
+                        Case Status.ErrorCalculating
+                            LineColor = SKColors.Red
+                        Case Status.Idle
+                            LineColor = SKColors.SteelBlue
+                        Case Status.Inactive
+                            LineColor = SKColors.Gray
+                        Case Status.NotCalculated
+                            LineColor = SKColors.Salmon
+                        Case Status.Modified
+                            LineColor = SKColors.LightGreen
+                    End Select
+                Else
+                    LineColor = SKColors.Gray
+                End If
             End If
 
         End Sub
@@ -55,11 +57,11 @@ Namespace GraphicObjects
 
         Public Overridable Property FontSize As Double = 10.0#
 
+        Public Overridable Property OverrideColors As Boolean = False
+
         Public Overrides Sub Draw(ByVal g As Object)
 
             MyBase.Draw(g)
-
-            DrawTag(g)
 
         End Sub
 

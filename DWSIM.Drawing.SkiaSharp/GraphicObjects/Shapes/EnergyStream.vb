@@ -55,11 +55,7 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    Else
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    End If
+                    .Item(0).Position = New Point(X, Y + 0.5 * Height)
                 Else
                     .Add(myIC1)
                 End If
@@ -69,11 +65,7 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X, Y + 0.5 * Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
-                    End If
+                    .Item(0).Position = New Point(X + Width, Y + 0.5 * Height)
                 Else
                     .Add(myOC1)
                 End If
@@ -103,40 +95,29 @@ Namespace GraphicObjects.Shapes
 
             Dim gp As New SKPath()
 
-
-            If Me.FlippedH = False Then
-                gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
-            Else
-                gp.MoveTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.35 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.35 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.25 * Height))
-                gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.5 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.75 * Height))
-                gp.LineTo(Convert.ToInt32(X + 0.25 * Width), Convert.ToInt32(Y + 0.65 * Height))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.65 * Height))
-                gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.35 * Height))
-            End If
-
+            gp.MoveTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.35 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.25 * Height))
+            gp.LineTo(Convert.ToInt32(X + Width), Convert.ToInt32(Y + 0.5 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.75 * Height))
+            gp.LineTo(Convert.ToInt32(X + 0.75 * Width), Convert.ToInt32(Y + 0.65 * Height))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.65 * Height))
+            gp.LineTo(Convert.ToInt32(X), Convert.ToInt32(Y + 0.35 * Height))
+            
             gp.Close()
 
             canvas.DrawPath(gp, myPen)
 
-            Dim fillPen As New SKPaint()
-            With fillPen
-                .Color = SKColors.Yellow
-                .StrokeWidth = LineWidth
-                .IsStroke = False
-                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-            End With
-
-            canvas.DrawPath(gp, fillPen)
+            If Not OverrideColors Then
+                Dim fillPen As New SKPaint()
+                With fillPen
+                    .Color = SKColors.Yellow
+                    .StrokeWidth = LineWidth
+                    .IsStroke = False
+                    .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                End With
+                canvas.DrawPath(gp, fillPen)
+            End If
 
         End Sub
 

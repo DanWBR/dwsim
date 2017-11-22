@@ -70,52 +70,27 @@ Namespace GraphicObjects.Shapes
             Dim myIC1 As New ConnectionPoint
 
             With InputConnectors
-                If FlippedH Then
-                    For i As Integer = 0 To InCount - 1
-                        .Item(i).Position = New Point(X + Width, Y + (i + 1) / InCount * Height)
-                        .Item(i).Direction = ConDir.Left
-                        .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
-                    Next
-                Else
                     For i As Integer = 0 To InCount - 1
                         .Item(i).Position = New Point(X, Y + (i + 1) / InCount * Height)
                         .Item(i).Direction = ConDir.Right
                         .Item(i).ConnectorName = "Column Feed Port #" & (i + 1)
                     Next
-                End If
             End With
 
             With OutputConnectors
-                If FlippedH Then
-                    If Me.Shape = 0 Then
-                        .Item(0).Position = New Point(X, Y + 0.3 * Height)
-                    Else
-                        .Item(0).Position = New Point(X, Y + 0.02 * Height)
-                    End If
-                    .Item(1).Position = New Point(X, Y + 0.98 * Height)
+                If Me.Shape = 0 Then
+                    .Item(0).Position = New Point(X + Width, Y + 0.3 * Height)
                 Else
-                    If Me.Shape = 0 Then
-                        .Item(0).Position = New Point(X + Width, Y + 0.3 * Height)
-                    Else
-                        .Item(0).Position = New Point(X + Width, Y + 0.02 * Height)
-                    End If
-                    .Item(1).Position = New Point(X + Width, Y + 0.98 * Height)
+                    .Item(0).Position = New Point(X + Width, Y + 0.02 * Height)
                 End If
+                .Item(1).Position = New Point(X + Width, Y + 0.98 * Height)
                 .Item(0).ConnectorName = "Top Product"
                 .Item(1).ConnectorName = "Bottoms Product"
-                If FlippedH Then
-                    For i As Integer = 2 To OutCount - 1
-                        .Item(i).Position = New Point(X + Width, Y + (i + 1) / InCount * Height)
-                        .Item(i).Direction = ConDir.Right
-                        .Item(i).ConnectorName = "Side Draw #" & (i - 1)
-                    Next
-                Else
-                    For i As Integer = 2 To OutCount - 1
-                        .Item(i).Position = New Point(X, Y + (i + 1) / InCount * Height)
-                        .Item(i).Direction = ConDir.Left
-                        .Item(i).ConnectorName = "Side Draw #" & (i - 1)
-                    Next
-                End If
+                For i As Integer = 2 To OutCount - 1
+                    .Item(i).Position = New Point(X, Y + (i + 1) / InCount * Height)
+                    .Item(i).Direction = ConDir.Left
+                    .Item(i).ConnectorName = "Side Draw #" & (i - 1)
+                Next
             End With
 
             EnergyConnector.Active = False
@@ -139,12 +114,8 @@ Namespace GraphicObjects.Shapes
                 .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
             End With
 
-            If Me.FlippedH = True Then
-                canvas.DrawRoundRect(New SKRect(X + (1 - 0.1 - 0.2) * Width, Y + 0.1 * Height, X + (1 - 0.1 - 0.2) * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
-            Else
-                canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
-            End If
-
+           canvas.DrawRoundRect(New SKRect(X + (0.05) * 1.25 * Width, Y + 0.1 * Height, X + (0.05) * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height), 10, 10, myPen)
+           
 
             'Me.DrawRoundRect(g, X + 0.05 * 1.25 * Width, Y + 0.1 * Height, X + 0.05 * 1.25 * Width + 0.2 * 1.25 * Width, Y + 0.1 * Height + 0.8 * Height, 20, myPen)
 

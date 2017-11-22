@@ -55,11 +55,7 @@ Namespace GraphicObjects.Shapes
             With InputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + (0.75 + 0.14) * Width, Y + 0.5 * Height)
-                    Else
                         .Item(0).Position = New Point(X + (0.25 - 0.14) * Width, Y + 0.5 * Height)
-                    End If
                 Else
                     .Add(myIC1)
                 End If
@@ -71,13 +67,8 @@ Namespace GraphicObjects.Shapes
             With OutputConnectors
 
                 If .Count <> 0 Then
-                    If Me.FlippedH Then
-                        .Item(0).Position = New Point(X + (0.25 - 0.14) * Width, Y + (0.1 + 0.14 / 2) * Height)
-                        .Item(1).Position = New Point(X + (0.25 - 0.14) * Width, Y + (0.9 - 0.14 / 2) * Height)
-                    Else
-                        .Item(0).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.1 + 0.14 / 2) * Height)
-                        .Item(1).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.9 - 0.14 / 2) * Height)
-                    End If
+                    .Item(0).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.1 + 0.14 / 2) * Height)
+                    .Item(1).Position = New Point(X + (0.75 + 0.14) * Width, Y + (0.9 - 0.14 / 2) * Height)
                 Else
                     .Add(myOC1)
                     .Add(myOC2)
