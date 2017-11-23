@@ -740,6 +740,16 @@ Namespace GraphicObjects
                 .PathEffect = SKPathEffect.CreateCorner(6.0F)
             End With
 
+            Dim myPen2 As New SKPaint
+
+            With myPen2
+                .IsStroke = True
+                .StrokeWidth = LineWidth + 4
+                .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+                .PathEffect = SKPathEffect.CreateCorner(6.0F)
+                .Color = SKColors.White.WithAlpha(200)
+            End With
+
             Dim path As New SKPath()
 
             Dim points() As SKPoint = PointList.Select(Function(x) x.ToSKPoint).ToArray
@@ -749,6 +759,7 @@ Namespace GraphicObjects
                 path.LineTo(points(i).X, points(i).Y)
             Next
 
+            canvas.DrawPath(path, myPen2)
             canvas.DrawPath(path, myPen)
 
         End Sub

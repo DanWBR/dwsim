@@ -83,6 +83,16 @@ Namespace GraphicObjects
 
             Dim strx As Single = (Me.Width - tpaint.MeasureText(Me.Tag)) / 2
 
+            Dim bpaint As New SKPaint()
+
+            With bpaint
+                .IsAntialias = False
+                .Color = SKColors.White.WithAlpha(200)
+                .IsStroke = False
+            End With
+
+            g.DrawRect(New SKRect(X + strx - 2, Y + Height + 20 - trect.Height - 2, X + strx + trect.Width + 2, Y + Height + 20 + 2), bpaint)
+
             g.DrawText(Me.Tag, X + strx, Y + Height + 20, tpaint)
 
         End Sub
@@ -148,7 +158,7 @@ Namespace GraphicObjects
             g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.3 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.7 * Height)}, myPen)
             g.DrawPoints(SKPointMode.Polygon, New SKPoint() {New SKPoint(X + 0.25 * Width, Y + 0.7 * Height), New SKPoint(X + 0.75 * Width, Me.Y + 0.3 * Height)}, myPen)
 
-            DrawTag(g)
+            'DrawTag(g)
 
         End Sub
 

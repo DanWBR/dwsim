@@ -817,7 +817,7 @@ namespace DWSIM.UI.Forms
                 EditSelectedObjectProperties();
             };
 
-            var menuitem1a = new ButtonMenuItem { Text = "Edit Appearance", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "EditProperty_96px.png")) };
+            var menuitem1a = new ButtonMenuItem { Text = "Edit Appearance", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "icons8-paint-palette.png")) };
             menuitem1a.Click += (sender, e) =>
             {
                 EditAppearance();
