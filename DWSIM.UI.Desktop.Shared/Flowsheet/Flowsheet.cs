@@ -85,7 +85,7 @@ namespace DWSIM.UI.Desktop.Shared
         public void SolveFlowsheet(bool wait, ISimulationObject gobj = null)
         {
 
-            var surface = ((DWSIM.Drawing.SkiaSharp.GraphicsSurface)this.GetSurface());
+            //var surface = ((DWSIM.Drawing.SkiaSharp.GraphicsSurface)this.GetSurface());
 
             if (PropertyPackages.Count == 0)
             {
@@ -111,7 +111,7 @@ namespace DWSIM.UI.Desktop.Shared
                 {
                     Application.Instance.AsyncInvoke(() =>
                     {
-                        surface.BackgroundColor = SkiaSharp.SKColors.White;
+                        //surface.BackgroundColor = SkiaSharp.SKColors.White;
                         FlowsheetForm.Enabled = true;
                         FlowsheetControl.Invalidate();
                         solvform.Close();
@@ -152,7 +152,7 @@ namespace DWSIM.UI.Desktop.Shared
             {
                 Application.Instance.AsyncInvoke(() =>
                 {
-                    surface.BackgroundColor = SkiaSharp.SKColors.White;
+                    //surface.BackgroundColor = SkiaSharp.SKColors.White;
                     FlowsheetForm.Enabled = true;
                     FlowsheetControl.Invalidate();
                     if (solvform != null)
@@ -209,7 +209,7 @@ namespace DWSIM.UI.Desktop.Shared
                     case GlobalSettings.Settings.Platform.Windows:
                         Application.Instance.Invoke(() =>
                         {
-                            surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
+                            //surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
                             FlowsheetForm.Enabled = false;
                             FlowsheetControl.Invalidate();
                             FlowsheetForm.Invalidate();
@@ -219,7 +219,7 @@ namespace DWSIM.UI.Desktop.Shared
                     default:
                         Application.Instance.AsyncInvoke(() =>
                         {
-                            surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
+                            //surface.BackgroundColor = SkiaSharp.SKColors.LightGray;
                             FlowsheetForm.Enabled = false;
                             FlowsheetControl.Invalidate();
                             FlowsheetForm.Invalidate();
