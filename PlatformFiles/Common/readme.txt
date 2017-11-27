@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 5
+Version 5.1 Update 6
 Copyright (c) 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
@@ -37,6 +37,12 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 6
+
+- [NEW] Added new sample flowsheet: NGPU with Turbo-Expansion (Windows only)
+- [NEW] PFD enhancements (New UI): edit flowsheet object appearance, horizontal/vertical flip, rotation and other properties
+- [FIX] Bug fixes
 
 Version 5.1 Update 5
 

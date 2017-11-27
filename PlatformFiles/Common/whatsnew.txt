@@ -1,14 +1,5 @@
-Version 5.1 Update 5
+Version 5.1 Update 6
 
-- [FIX] Fixed Sour Water model
-- [FIX] Fixed a bug with the Flowsheet UO
-- [FIX] Fixed molar flow separation spec in Compound Separator
-- [FIX] Fixed Material Stream phase property cloning
-- [FIX] Fixed section diameter conversion (Pipe Segment, New UI)
-
-Version 5.1 Update 4
-
-- [CHG] Updated CoolProp libraries (Windows/Linux)
-- [FIX] Fixed Console Redirection (Classic UI)
-- [FIX] Fixed issues with CoolProp Property Package
-- [FIX] Fixed issues with CAPE-OPEN Property Package Socket
+- [NEW] Added new sample flowsheet: NGPU with Turbo-Expansion (Windows only)
+- [NEW] PFD enhancements (New UI): edit flowsheet object appearance, horizontal/vertical flip, rotation and other properties
+- [FIX] Bug fixes
