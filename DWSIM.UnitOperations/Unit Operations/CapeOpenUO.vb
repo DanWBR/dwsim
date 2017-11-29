@@ -1055,60 +1055,62 @@ Namespace UnitOperations
                     Dim ecu As CapeOpen.ECapeUser = myuo
                     Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
                 End Try
-                'My.Application.ActiveSimulation = Me.FlowSheet
-                myuo.Validate(msg)
-                If myuo.ValStatus = CapeValidationStatus.CAPE_VALID Then
-                    Try
-                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                            If c.IsAttached And c.Type = ConType.ConOut Then
-                                Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
-                                mat.ClearAllProps()
-                            End If
-                        Next
-                        RestorePorts()
-                        myuo.Calculate()
-                        UpdateParams()
-                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                            If c.IsAttached And c.Type = ConType.ConOut Then
-                                Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
-                                mat.PropertyPackage.CurrentMaterialStream = mat
-                                For Each subst As Compound In mat.Phases(0).Compounds.Values
-                                    subst.MassFraction = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
-                                Next
-                            End If
-                        Next
-                        For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
-                            If c.Type = ConType.ConEn And c.IsAttached Then
-                                c.AttachedConnector.AttachedTo.Calculated = True
-                            End If
-                        Next
-                        Dim ur As CapeOpen.ICapeUnitReport = _couo
-                        If Not ur Is Nothing Then
-                            Dim reps As String() = ur.reports
-                            For Each r As String In reps
-                                ur.selectedReport = r
-                                Dim msg2 As String = ""
-                                ur.ProduceReport(msg2)
-                            Next
-                        End If
-                    Catch ex As Exception
+
+                For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                    If c.IsAttached And c.Type = ConType.ConOut Then
+                        Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
+                        mat.ClearAllProps()
+                    End If
+                Next
+
+                RestorePorts()
+
+                Try
+                    myuo.Validate(msg)
+                    If Not myuo.ValStatus = CapeValidationStatus.CAPE_VALID Then
+                        Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": CAPE-OPEN Unit Operation not validated. Reason: " + msg, IFlowsheet.MessageType.GeneralError)
                         For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                             If c.Type = ConType.ConEn Then
                                 If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
                             End If
                         Next
-                        Dim ecu As CapeOpen.ECapeUser = myuo
-                        Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
-                        Throw ex
-                    End Try
-                Else
-                    Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag + ": CO Unit not validated. Reason: " + msg, IFlowsheet.MessageType.GeneralError)
+                        Throw New Exception("CAPE-OPEN Unit Operation not validated. Reason: " + msg)
+                    End If
+                    myuo.Calculate()
+                    UpdateParams()
+                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                        If c.IsAttached And c.Type = ConType.ConOut Then
+                            Dim mat As MaterialStream = FlowSheet.SimulationObjects(c.AttachedConnector.AttachedTo.Name)
+                            mat.PropertyPackage.CurrentMaterialStream = mat
+                            For Each subst As Compound In mat.Phases(0).Compounds.Values
+                                subst.MassFraction = mat.PropertyPackage.AUX_CONVERT_MOL_TO_MASS(subst.Name, 0)
+                            Next
+                        End If
+                    Next
+                    For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
+                        If c.Type = ConType.ConEn And c.IsAttached Then
+                            c.AttachedConnector.AttachedTo.Calculated = True
+                        End If
+                    Next
+                    Dim ur As CapeOpen.ICapeUnitReport = _couo
+                    If Not ur Is Nothing Then
+                        Dim reps As String() = ur.reports
+                        For Each r As String In reps
+                            ur.selectedReport = r
+                            Dim msg2 As String = ""
+                            ur.ProduceReport(msg2)
+                        Next
+                    End If
+                Catch ex As Exception
                     For Each c As Interfaces.IConnectionPoint In Me.GraphicObject.OutputConnectors
                         If c.Type = ConType.ConEn Then
                             If c.IsAttached Then c.AttachedConnector.AttachedTo.Calculated = False
                         End If
                     Next
-                End If
+                    Dim ecu As CapeOpen.ECapeUser = myuo
+                    Me.FlowSheet.ShowMessage(Me.GraphicObject.Tag & ": CAPE-OPEN Exception " & ecu.code & " at " & ecu.interfaceName & ":" & ecu.scope & ". Reason: " & ecu.description, IFlowsheet.MessageType.GeneralError)
+                    Throw ex
+                End Try
             End If
 
         End Sub

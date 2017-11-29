@@ -174,7 +174,7 @@ Namespace UnitOperations
 
             If vf = 0.0# Then
                 'size for liquid
-                Cv = (volf * 15850.3) / ((DeltaP * 0.000145038) / (rho / 1000)) ^ 0.5
+                Cv = (volf * 15850.3) / ((DeltaP.GetValueOrDefault * 0.000145038) / (rho / 1000)) ^ 0.5
             ElseIf vf = 1.0# Then
                 'size for vapor
                 C1 = 20 '18 to 37
@@ -182,7 +182,7 @@ Namespace UnitOperations
                 Cv = (Wi * 7936.64) / 1.06 / (rho * 0.062428 * Pi * 0.000145038) ^ 0.5 / f1
             Else
                 'size for liquid
-                Cv = (1 - vf) * (volf * 15850.3) / ((DeltaP * 0.000145038) / (rho / 1000)) ^ 0.5
+                Cv = (1 - vf) * (volf * 15850.3) / ((DeltaP.GetValueOrDefault * 0.000145038) / (rho / 1000)) ^ 0.5
                 'size for vapor
                 C1 = 20 '18 to 37
                 Dim f1 As Double = Math.Sin((3417 / C1) * (Math.Abs(DeltaP.GetValueOrDefault) / Pi) ^ 0.5 / 57.2958)
