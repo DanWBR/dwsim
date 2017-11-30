@@ -1,7 +1,8 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
 Version 5.1 Update 6
-Copyright (c) 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo Leon
+Copyright (c) 2017 Daniel Medeiros
+Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
 
 DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
@@ -21,16 +22,25 @@ LICENSE
 DWSIM is licensed under the GNU General Public License (GPL) Version 3.
  
 ==================================================
-SOFTWARE/SYSTEM REQUIREMENTS
+SYSTEM REQUIREMENTS
 ==================================================
 
-OS:               Windows XP/Vista/7/8/10, Linux or macOS 
-Software:         .NET Framework 4.5 / Mono 5.0 or newer
-CPU:              1.0 GHz dual-core processor (minimum)
-GPU (optional):   CUDA 2.0 or OpenCL 1.1-enabled device
-Memory:           1 GB RAM
-HD space:         250 MB for program files.
-Display:          A 1024x768 display resolution is recommended as a minimum.
+OS:             Windows: 64-bit x86 XP/Vista/7/8/10
+				Linux: 64-bit x86 Ubuntu 12.04 or newer / 32-bit armhf Raspbian/Ubuntu MATE
+				macOS: 10.7 (OS X Lion) or newer
+
+Software:		Microsoft .NET Framework 4.5 or newer (Windows) 
+				Mono Framework 5.0.0 or newer (Linux/macOS)
+
+CPU:			1.0 GHz dual-core processor (minimum)
+
+Memory:         1 GB RAM
+
+Graphics Card:	128 MB with OpenGL hardware acceleration
+
+Display:        a 1280x800 display resolution is recommended as a minimum.
+
+Disk space:		300 MB for program files
 
 ==================================================
 VERSION HISTORY / CHANGELOG

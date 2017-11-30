@@ -6,7 +6,8 @@
 [![donate](https://img.shields.io/badge/make%20a-donation-greenblue.svg)](https://sourceforge.net/p/dwsim/donate/)
 
 ## DWSIM - Open Source Process Simulator
-Copyright 2008-2017 Daniel Medeiros, Gregor Reichert, Gustavo León
+Copyright 2017 Daniel Medeiros
+Copyright 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo León
 
 DWSIM is a software for modeling, simulation and optimization of steady-state chemical processes.
 
