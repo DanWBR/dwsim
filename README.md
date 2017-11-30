@@ -18,9 +18,7 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 
 - Windows (64-bit x86) with .NET Framework 4.5 or newer
 - Linux (64-bit x86 / 32-bit armhf) with Mono 5.0 or newer
-- macOS (64-bit x86*) or newer with Mono 5.0 or newer
-
-* DWSIM runs in 32-bit mode on macOS
+- macOS (formerly OS X) 10.7 or newer with Mono 5.0 or newer
 
 ### Project Details
 
