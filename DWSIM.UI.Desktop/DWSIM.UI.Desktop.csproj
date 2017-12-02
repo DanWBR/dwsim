@@ -265,29 +265,29 @@
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Raspbian\" /E /Y /F /D
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Raspbian\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Linux\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\Raspbian\*" "$(SolutionDir)DistPackages\Raspbian\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Raspberry\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\macOS\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows\plugins\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Linux\plugins\" /E /Y /F /D
-xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Raspbian\plugins\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Raspberry\plugins\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\macOS\plugins\" /E /Y /F /D
 
 xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
-xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\Raspbian\" /E /Y /F /D
-xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\Raspbian\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
+xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
@@ -312,26 +312,26 @@ rmdir /S /Q "$(SolutionDir)DistPackages\macOS\de"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR"
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\ECE"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\data\unifac"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\x86"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\de"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\docs"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\es"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\help"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\de"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\pt"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspbian\pt-BR"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\x64"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\x86"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\docs"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\es"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\help"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\pt"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR"
 
 del "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll"
-del "$(SolutionDir)DistPackages\Raspbian\libSkiaSharp.dll"
+del "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll"
 del "$(SolutionDir)DistPackages\macOS\libSkiaSharp.dll"
 
 del "$(SolutionDir)DistPackages\Windows\*vshost*"
 del "$(SolutionDir)DistPackages\Linux\*vshost*"
-del "$(SolutionDir)DistPackages\Raspbian\*vshost*"
+del "$(SolutionDir)DistPackages\Raspberry\*vshost*"
 del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
 )
