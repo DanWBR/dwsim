@@ -83,6 +83,8 @@ Public Class Form_CapeOpenSelector
             mykey.Close()
         Next
 
+        _couos = _couos.OrderBy(Function(x) x.Name).ToList()
+
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox1.SelectedIndexChanged
