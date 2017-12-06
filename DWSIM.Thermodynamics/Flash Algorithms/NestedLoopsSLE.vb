@@ -365,7 +365,8 @@ out:        Return New Object() {L, V, Vx, Vy, ecount, 0.0#, PP.RET_NullVector, 
                 constprop = PP.CurrentMaterialStream.Phases(0).Compounds(Vn(i)).ConstantProperties
                 cpl(i) = PP.AUX_LIQ_Cpi(constprop, Tf(i))
                 cps(i) = PP.AUX_SolidHeatCapacity(constprop, Tf(i))
-                dCp(i) = (cpl(i) - cps(i)) * constprop.Molar_Weight
+                'ignoring heat capacity difference due to issues with DWSIM characterization
+                dCp(i) = 0.0# '(cpl(i) - cps(i)) * constprop.Molar_Weight
             Next
 
             'Calculate max activities for solubility of solids
