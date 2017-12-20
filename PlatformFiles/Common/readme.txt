@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 6
+Version 5.1 Update 7
 Copyright (c) 2017 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -47,6 +47,16 @@ VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 7
+
+- [NEW] Added support for Raspberry Pi 2/3 (Linux 32-bit ARM Platform)
+- [NEW] Added a Natural Gas Water Saturator sample
+- [CHG] Heat Capacity Difference workaround for SVLE Flash
+- [FIX] Ordered list of cape-open objects in selector
+- [FIX] Fixed CAPE-OPEN UO validation/calculation
+- [FIX] Fixed a bug with valve sizing
+- [FIX] Fixed missing temperature fields on Kinetic Reaction editor (New UI)
 
 Version 5.1 Update 6
 

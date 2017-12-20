@@ -85,7 +85,7 @@ namespace DWSIM.UI.Desktop.Editors
                 alert.Show();
             });
 
-            var btnAddKin = container.CreateAndAddLabelAndButtonRow("Add New Kinetic Reaction", "New Kinetic Reaction",null, (sender, e) =>
+            var btnAddKin = container.CreateAndAddLabelAndButtonRow("Add New Kinetic Reaction", "New Kinetic Reaction", null, (sender, e) =>
             {
                 var _rx = new Reaction("NewKinReac", Guid.NewGuid().ToString(), "") { ReactionType = Interfaces.Enums.ReactionType.Kinetic };
                 var myview = s.GetDefaultContainer();
@@ -182,6 +182,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert.Close();
                                 });
+                                myview.CreateAndAddEmptySpace();
+                                myview.CreateAndAddEmptySpace();
                                 alert.Topmost = true;
                                 alert.Show();
                                 break;
@@ -196,6 +198,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert2.Close();
                                 });
+                                myview2.CreateAndAddEmptySpace();
+                                myview2.CreateAndAddEmptySpace();
                                 alert2.Topmost = true;
                                 alert2.Show();
                                 break;
@@ -210,6 +214,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert3.Close();
                                 });
+                                myview3.CreateAndAddEmptySpace();
+                                myview3.CreateAndAddEmptySpace();
                                 alert3.Topmost = true;
                                 alert3.Show();
                                 break;
@@ -224,6 +230,8 @@ namespace DWSIM.UI.Desktop.Editors
                                     CreateReactionsList();
                                     alert4.Close();
                                 });
+                                myview4.CreateAndAddEmptySpace();
+                                myview4.CreateAndAddEmptySpace();
                                 alert4.Topmost = true;
                                 alert4.Show();
                                 break;

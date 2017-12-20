@@ -12,6 +12,7 @@ using Eto.Forms;
 using s = DWSIM.UI.Shared.Common;
 using DWSIM.UI.Shared;
 using Eto.Drawing;
+using DWSIM.ExtensionMethods;
 
 namespace DWSIM.UI.Desktop.Editors
 {
@@ -265,6 +266,12 @@ namespace DWSIM.UI.Desktop.Editors
             };
 
             container.CreateAndAddLabelRow("Kinetic Parameters");
+
+            var nf = flowsheet.FlowsheetOptions.NumberFormat;
+            var su = flowsheet.FlowsheetOptions.SelectedUnitSystem;
+
+            container.CreateAndAddTextBoxRow(nf, "Minimum Temperature", rx.Tmin.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmin = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
+            container.CreateAndAddTextBoxRow(nf, "Maximum Temperature", rx.Tmax.ConvertFromSI(su.temperature), (sender, e) => { if (sender.Text.IsValidDouble()) rx.Tmax = sender.Text.ToDoubleFromCurrent().ConvertToSI(su.temperature); });
 
             container.CreateAndAddLabelRow2("Direct and Reverse Reactions Velocity Constants (k = A*exp(-E/RT), E in J/mol and T in K)");
 

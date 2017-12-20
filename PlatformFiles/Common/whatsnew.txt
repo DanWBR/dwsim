@@ -1,3 +1,13 @@
+Version 5.1 Update 7
+
+- [NEW] Added support for Raspberry Pi 2/3 (Linux 32-bit ARM Platform)
+- [NEW] Added a Natural Gas Water Saturator sample
+- [CHG] Heat Capacity Difference workaround for SVLE Flash
+- [FIX] Ordered list of cape-open objects in selector
+- [FIX] Fixed CAPE-OPEN UO validation/calculation
+- [FIX] Fixed a bug with valve sizing
+- [FIX] Fixed missing temperature fields on Kinetic Reaction editor (New UI)
+
 Version 5.1 Update 6
 
 - [NEW] Added new sample flowsheet: NGPU with Turbo-Expansion (Windows only)
