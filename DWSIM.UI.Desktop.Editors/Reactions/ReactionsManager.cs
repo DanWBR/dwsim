@@ -62,6 +62,8 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
+                myview.CreateAndAddEmptySpace();
+                myview.CreateAndAddEmptySpace();
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -81,6 +83,8 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
+                myview.CreateAndAddEmptySpace();
+                myview.CreateAndAddEmptySpace();
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -100,6 +104,8 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
+                myview.CreateAndAddEmptySpace();
+                myview.CreateAndAddEmptySpace();
                 alert.Topmost = true;
                 alert.Show();
             });
@@ -119,6 +125,8 @@ namespace DWSIM.UI.Desktop.Editors
                     CreateReactionsList();
                     alert.Close();
                 });
+                myview.CreateAndAddEmptySpace();
+                myview.CreateAndAddEmptySpace();
                 alert.Topmost = true;
                 alert.Show();
             });
