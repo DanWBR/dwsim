@@ -146,7 +146,7 @@ Namespace Reactors
 
             'loop through reactions
             Dim rxn As Reaction
-            Dim ar As ArrayList = Me.ReactionsSequence(activeAL)
+            Dim ar = Me.ReactionsSequence(activeAL)
 
             i = 0
             Do
@@ -871,13 +871,13 @@ out:        Dim ms1, ms2 As MaterialStream
 
                 'ordering of parallel reactions
                 i = 0
-                Dim arr As New ArrayList
+                Dim arr As New List(Of String)
                 Do
-                    arr = New ArrayList
+                    arr = New List(Of String)
                     For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
                         If rxnsb.Rank = i And Me.Reactions.Contains(rxnsb.ReactionID) Then arr.Add(rxnsb.ReactionID)
                     Next
-                    If arr.Count > 0 Then Me.ReactionsSequence.Add(i, arr)
+                    If arr.Count > 0 Then Me.ReactionsSequence.Add(arr)
                     i = i + 1
                 Loop Until i = maxrank + 1
 
@@ -911,7 +911,7 @@ out:        Dim ms1, ms2 As MaterialStream
                 Hr = ims.Phases(0).Properties.enthalpy.GetValueOrDefault * W
 
                 'loop through reactions
-                For Each ar As ArrayList In Me.ReactionsSequence.Values
+                For Each ar In Me.ReactionsSequence
 
                     DHr = 0
 
@@ -970,7 +970,7 @@ out:        Dim ms1, ms2 As MaterialStream
                     Ri.Clear()
                     Rxi.Clear()
 
-                    Me.activeAL = Me.ReactionsSequence.IndexOfValue(ar)
+                    Me.activeAL = Me.ReactionsSequence.IndexOf(ar)
 
                     'solve ODEs
 
@@ -1147,7 +1147,7 @@ out:        Dim ms1, ms2 As MaterialStream
             RxiT.Clear()
             DHRi.Clear()
 
-            For Each ar As ArrayList In Me.ReactionsSequence.Values
+            For Each ar In Me.ReactionsSequence
 
                 i = 0
                 Do

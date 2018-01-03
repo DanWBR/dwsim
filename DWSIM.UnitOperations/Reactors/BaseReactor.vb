@@ -35,7 +35,7 @@ Namespace Reactors
 
         Inherits UnitOperations.UnitOpBaseClass
 
-        Protected m_reactionSequence As SortedList(Of Integer, ArrayList)
+        Protected m_reactionSequence As List(Of List(Of String))
         Protected m_reactions As List(Of String)
         Protected m_conversions As Dictionary(Of String, Double)
         Protected m_componentconversions As Dictionary(Of String, Double)
@@ -50,14 +50,6 @@ Namespace Reactors
 
             MyBase.LoadData(data)
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
-
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionSequence").Elements
-                m_reactionSequence.Add(xel2.@Index, XMLSerializer.XMLSerializer.StringToArray(xel2.Value, ci))
-            Next
-
-            For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "Reaction").Elements
-                m_reactions.Add(xel2.@ID)
-            Next
 
             For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionConversions").Elements
                 m_conversions.Add(xel2.@ID, Double.Parse(xel2.Value, ci))
@@ -75,14 +67,6 @@ Namespace Reactors
             Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
 
             With elements
-                .Add(New XElement("ReactionSequence"))
-                For Each kvp As KeyValuePair(Of Integer, ArrayList) In m_reactionSequence
-                    .Item(.Count - 1).Add(New XElement("Item", New XAttribute("Index", kvp.Key), XMLSerializer.XMLSerializer.ArrayToString(kvp.Value, ci)))
-                Next
-                .Add(New XElement("Reactions"))
-                For Each s As String In m_reactions
-                    .Item(.Count - 1).Add(New XElement("Reaction", New XAttribute("ID", s)))
-                Next
                 .Add(New XElement("ReactionConversions"))
                 For Each kvp As KeyValuePair(Of String, Double) In m_conversions
                     .Item(.Count - 1).Add(New XElement("Reaction", New XAttribute("ID", kvp.Key), kvp.Value.ToString(ci)))
@@ -187,7 +171,7 @@ Namespace Reactors
 
         Sub New()
             MyBase.CreateNew()
-            Me.m_reactionSequence = New SortedList(Of Integer, ArrayList)
+            Me.m_reactionSequence = New List(Of List(Of String))
             Me.m_reactions = New List(Of String)
             Me.m_conversions = New Dictionary(Of String, Double)
             Me.m_componentconversions = New Dictionary(Of String, Double)
@@ -195,11 +179,11 @@ Namespace Reactors
 
         Public Property OutletTemperature As Double = 298.15#
 
-        <Xml.Serialization.XmlIgnore()> Public Property ReactionsSequence() As SortedList(Of Integer, ArrayList)
+        <Xml.Serialization.XmlIgnore()> Public Property ReactionsSequence() As List(Of List(Of String))
             Get
                 Return m_reactionSequence
             End Get
-            Set(ByVal value As SortedList(Of Integer, ArrayList))
+            Set(ByVal value As List(Of List(Of String)))
                 m_reactionSequence = value
             End Set
         End Property

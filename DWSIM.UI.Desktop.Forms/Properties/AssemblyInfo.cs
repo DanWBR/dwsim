@@ -7,11 +7,11 @@ using System.Resources;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("DWSIM.UI")]
-[assembly: AssemblyDescription("Cross-Platform User Interface for DWSIM Simulator")]
+[assembly: AssemblyDescription("DWSIM Simulator (Cross Platform GUI Launcher)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("DWSIM Project")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("Copyright © 2017 Daniel Medeiros")]
+[assembly: AssemblyCopyright("Copyright © 2017-2018 Daniel Medeiros")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
