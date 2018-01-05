@@ -148,7 +148,7 @@ Namespace Reactors
 
             Dim rxn As Reaction
 
-            'loop through reactions
+            'loop through conversion reaction groups (parallel/sequential) as defined in the reaction set
 
             For Each ar In Me.ReactionsSequence
 
@@ -200,7 +200,12 @@ Namespace Reactors
 
                 Loop Until i = ar.Count
 
-                'solve parallel reactions
+                ' solve parallel reactions with Simplex NL solver
+
+                ' problem setup: minimize the difference between defined and calculated (final) conversions, subject to Ni >= 0.
+
+                ' this solution scheme for parallel reactions guarantee that the mass balance is preserved, even if the final
+                ' conversion values aren't reached due to limited reactant amounts.
 
                 Dim xref(ar.Count - 1), xf(ar.Count - 1), dni(N.Count - 1) As Double
                 
@@ -213,7 +218,7 @@ Namespace Reactors
                 i = 0
                 Do
 
-                    'process reaction i
+                    'check defined conversions
 
                     rxn = FlowSheet.Reactions(ar(i))
 
@@ -228,13 +233,20 @@ Namespace Reactors
 
                     If X < 0.0# Or X > 1.0# Then Throw New ArgumentOutOfRangeException("Conversion Expression", "The conversion expression for reaction " & rxn.Name & " results in a value that is out of the valid range (0 to 100%).")
 
+                    'store defined (reference) conversions for simplex solver
+
                     xref(i) = X
+
+                    'create simplex vars
 
                     vars.Add(New OptSimplexBoundVariable(0.0#, 0.0#, xref(i)))
 
                     i += 1
 
                 Loop Until i = ar.Count
+
+                'solve parallel reactions 
+                'xf = final conversion values
 
                 xf = splex.ComputeMin(Function(xi)
 
@@ -282,6 +294,8 @@ Namespace Reactors
 
                                           Next
 
+                                          'calculate a penalty value for the objective function due to negative mole flows
+
                                           Dim pen_val As Double = 0.0#
 
                                           For Each d In nif
@@ -291,6 +305,9 @@ Namespace Reactors
                                           Return xref.SubtractY(xi).AbsSqrSumY + pen_val
 
                                       End Function, vars.ToArray)
+
+                ' at this point, the xf vector holds the final conversion values as calculated 
+                ' by the simplex solver, and the energy balance can be calculated (again). 
 
                 i = 0
                 DHr = 0
