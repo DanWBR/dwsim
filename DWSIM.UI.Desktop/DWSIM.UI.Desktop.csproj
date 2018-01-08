@@ -9,7 +9,7 @@
     <AssemblyName>DWSIM.UI.Desktop</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
-    <NuGetPackageImportStamp>8c152915</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>46b7c4b9</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -77,20 +77,20 @@
       <HintPath>..\DWSIM.UI.Desktop.GTK\Libraries\gtk-sharp-2.0\atk-sharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Eto, Version=2.3.6486.38870, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.0-build1146\lib\net45\Eto.dll</HintPath>
+    <Reference Include="Eto, Version=2.3.6575.25646, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.4.0-build1195\lib\net45\Eto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Direct2D, Version=2.3.6486.38877, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Direct2D.2.4.0-build1146\lib\net45\Eto.Direct2D.dll</HintPath>
+    <Reference Include="Eto.Direct2D, Version=2.3.6575.25652, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Direct2D.2.4.0-build1195\lib\net45\Eto.Direct2D.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Gtk2, Version=2.3.6486.38877, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Gtk.2.4.0-build1146\lib\net45\Eto.Gtk2.dll</HintPath>
+    <Reference Include="Eto.Gtk2, Version=2.3.6575.25653, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Gtk.2.4.0-build1195\lib\net45\Eto.Gtk2.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Mac, Version=2.3.6486.38877, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Mac.2.4.0-build1146\lib\net45\Eto.Mac.dll</HintPath>
+    <Reference Include="Eto.Mac, Version=2.3.6575.25652, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Mac.2.4.0-build1195\lib\net45\Eto.Mac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Eto.OxyPlot, Version=1.0.5911.41864, Culture=neutral, processorArchitecture=MSIL">
@@ -101,12 +101,12 @@
       <HintPath>..\packages\Eto.OxyPlot.Wpf.1.2.0-beta\lib\net45\Eto.OxyPlot.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.WinForms, Version=2.3.6486.38876, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Windows.2.4.0-build1146\lib\net45\Eto.WinForms.dll</HintPath>
+    <Reference Include="Eto.WinForms, Version=2.3.6575.25651, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Windows.2.4.0-build1195\lib\net45\Eto.WinForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Eto.Wpf, Version=2.3.6486.38880, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Wpf.2.4.0-build1146\lib\net45\Eto.Wpf.dll</HintPath>
+    <Reference Include="Eto.Wpf, Version=2.3.6575.25655, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Platform.Wpf.2.4.0-build1195\lib\net45\Eto.Wpf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
@@ -130,7 +130,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoMac, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Platform.Mac.2.4.0-build1146\lib\net45\MonoMac.dll</HintPath>
+      <HintPath>..\packages\Eto.Platform.Mac.2.4.0-build1195\lib\net45\MonoMac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
@@ -233,8 +233,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Mac\MyApp.app\Contents\Info.plist" />
     <None Include="Mac\MyApp.app\Contents\MacOS\Launcher.exec" />
     <None Include="Mac\MyApp.app\Contents\Resources\Icon.icns" />
+    <None Include="Mac\MyApp.app\MacAppTemplate.app\Contents\Info.plist" />
     <None Include="Mac\MyApp.app\MacAppTemplate.app\Contents\MacOS\Launcher.exec" />
     <None Include="Mac\MyApp.app\MacAppTemplate.app\Contents\Resources\Icon.icns" />
     <None Include="OpenTK.dll.config" />
@@ -242,9 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DWSIM_ico.ico" />
-    <Content Include="Mac\MyApp.app\Contents\Info.plist" />
     <Content Include="Mac\MyApp.app\Contents\MonoBundle\README.txt" />
-    <Content Include="Mac\MyApp.app\MacAppTemplate.app\Contents\Info.plist" />
     <Content Include="Mac\MyApp.app\MacAppTemplate.app\Contents\MonoBundle\README.txt" />
     <Content Include="Mac\README.txt" />
   </ItemGroup>
@@ -256,7 +256,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets'))" />
-    <Error Condition="!Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1146\build\Eto.Platform.Mac.Template.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.Mac.Template.2.4.0-build1146\build\Eto.Platform.Mac.Template.targets'))" />
+    <Error Condition="!Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1195\build\Eto.Platform.Mac.Template.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eto.Platform.Mac.Template.2.4.0-build1195\build\Eto.Platform.Mac.Template.targets'))" />
   </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
@@ -342,5 +342,5 @@ xcopy "$(SolutionDir)DWSIM\bin\Debug\plugins\*" "$(TargetDir)\plugins\" /E /Y /F
 
 )</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Eto.Platform.Mac.Template.2.4.0-build1146\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1146\build\Eto.Platform.Mac.Template.targets')" />
+  <Import Project="..\packages\Eto.Platform.Mac.Template.2.4.0-build1195\build\Eto.Platform.Mac.Template.targets" Condition="Exists('..\packages\Eto.Platform.Mac.Template.2.4.0-build1195\build\Eto.Platform.Mac.Template.targets')" />
 </Project>

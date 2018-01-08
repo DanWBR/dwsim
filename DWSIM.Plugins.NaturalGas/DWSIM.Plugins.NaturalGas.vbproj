@@ -108,9 +108,9 @@
       <HintPath>..\DWSIM\References\Cureos.Numerics.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Eto, Version=2.3.6486.38870, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Eto.Forms.2.4.0-build1146\lib\net45\Eto.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Eto, Version=2.3.6575.25646, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Eto.Forms.2.4.0-build1195\lib\net45\Eto.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.1.5\lib\net45\FileHelpers.dll</HintPath>
