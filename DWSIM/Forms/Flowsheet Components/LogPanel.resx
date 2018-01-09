@@ -169,6 +169,15 @@
   <data name="Mensagem.MinimumWidth" type="System.Int32, mscorlib">
     <value>300</value>
   </data>
+  <metadata name="Info.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Info.HeaderText" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Info.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Grid1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -178,7 +187,7 @@
     <value>30, 0</value>
   </data>
   <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>718, 199</value>
+    <value>745, 199</value>
   </data>
   <data name="Grid1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -376,7 +385,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>748, 199</value>
+    <value>775, 199</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -405,36 +414,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Informações</value>
-  </data>
-  <data name="&gt;&gt;Imagem.Name" xml:space="preserve">
-    <value>Imagem</value>
-  </data>
-  <data name="&gt;&gt;Imagem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Indice.Name" xml:space="preserve">
-    <value>Indice</value>
-  </data>
-  <data name="&gt;&gt;Indice.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Data.Name" xml:space="preserve">
-    <value>Data</value>
-  </data>
-  <data name="&gt;&gt;Data.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Tipo.Name" xml:space="preserve">
-    <value>Tipo</value>
-  </data>
-  <data name="&gt;&gt;Tipo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Mensagem.Name" xml:space="preserve">
-    <value>Mensagem</value>
-  </data>
-  <data name="&gt;&gt;Mensagem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripButton5.Name" xml:space="preserve">
     <value>ToolStripButton5</value>
@@ -525,6 +504,42 @@
   </data>
   <data name="&gt;&gt;DocumentToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Imagem.Name" xml:space="preserve">
+    <value>Imagem</value>
+  </data>
+  <data name="&gt;&gt;Imagem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Indice.Name" xml:space="preserve">
+    <value>Indice</value>
+  </data>
+  <data name="&gt;&gt;Indice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Data.Name" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="&gt;&gt;Data.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Tipo.Name" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="&gt;&gt;Tipo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Mensagem.Name" xml:space="preserve">
+    <value>Mensagem</value>
+  </data>
+  <data name="&gt;&gt;Mensagem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Info.Name" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="&gt;&gt;Info.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewButtonColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>LogPanel</value>

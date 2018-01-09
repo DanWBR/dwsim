@@ -285,4 +285,16 @@ Public Class LogPanel
 
     End Sub
 
+    Private Sub Grid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles Grid1.CellContentClick
+
+        Dim senderGrid = DirectCast(sender, DataGridView)
+
+        If TypeOf senderGrid.Columns(e.ColumnIndex) Is DataGridViewButtonColumn AndAlso e.RowIndex >= 0 Then
+
+
+
+        End If
+
+    End Sub
+
 End Class
