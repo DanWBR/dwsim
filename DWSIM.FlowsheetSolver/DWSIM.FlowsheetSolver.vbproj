@@ -98,8 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlowsheetSolver.vb" />
-    <Compile Include="Solvers\AzureSolverClient.vb" />
-    <Compile Include="Solvers\TCPSolverClient.vb" />
+    <Compile Include="Remote Solvers\AzureSolverClient.vb" />
+    <Compile Include="Remote Solvers\TCPSolverClient.vb" />
     <Compile Include="Task Schedulers\LimitedConcurrencyLevelTaskScheduler.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

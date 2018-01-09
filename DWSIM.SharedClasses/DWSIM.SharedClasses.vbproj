@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Base Class\FlowsheetBag.vb" />
     <Compile Include="Base Class\SimulationObjectBaseClasses.vb" />
+    <Compile Include="ExceptionProcessing\ExceptionProcessing.vb" />
     <Compile Include="Flowsheet\AssayClass.vb" />
     <Compile Include="Flowsheet\FlowsheetClasses.vb" />
     <Compile Include="Flowsheet\Optimization.vb" />
