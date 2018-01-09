@@ -64,7 +64,7 @@
 
     Property SimulationObjects As Dictionary(Of String, ISimulationObject)
 
-    Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType)
+    Sub ShowMessage(ByVal text As String, ByVal mtype As MessageType, Optional ByVal exceptionID As String = "")
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)
 
@@ -194,7 +194,7 @@ End Interface
 ''' </summary>
 <InterfaceType(ComInterfaceType.InterfaceIsIDispatch)> Public Interface IFlowsheetGUI
 
-    Sub ShowMessage(ByVal text As String, ByVal mtype As IFlowsheet.MessageType)
+    Sub ShowMessage(ByVal text As String, ByVal mtype As IFlowsheet.MessageType, Optional ByVal exceptionID As String = "")
 
     Sub ShowDebugInfo(ByVal text As String, ByVal level As Integer)
 

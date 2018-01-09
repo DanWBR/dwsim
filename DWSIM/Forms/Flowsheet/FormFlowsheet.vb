@@ -583,7 +583,7 @@ Public Class FormFlowsheet
         Return myNewPoint
     End Function
 
-    Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As DWSIM.Flowsheet.MessageType)
+    Public Sub WriteToLog(ByVal texto As String, ByVal cor As Color, ByVal tipo As DWSIM.Flowsheet.MessageType, Optional ByVal exceptionID As String = "")
 
         If texto.Trim <> "" Then
 
@@ -2696,12 +2696,12 @@ Public Class FormFlowsheet
         End Set
     End Property
 
-    Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType) Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
+    Public Sub ShowMessage(text As String, mtype As Interfaces.IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements Interfaces.IFlowsheet.ShowMessage, IFlowsheetGUI.ShowMessage
         Select Case mtype
             Case Interfaces.IFlowsheet.MessageType.Information
                 WriteToLog(text, Color.Blue, MessageType.Information)
             Case Interfaces.IFlowsheet.MessageType.GeneralError
-                WriteToLog(text, Color.Red, MessageType.GeneralError)
+                WriteToLog(text, Color.Red, MessageType.GeneralError, exceptionID)
             Case Interfaces.IFlowsheet.MessageType.Warning
                 WriteToLog(text, Color.OrangeRed, MessageType.Warning)
             Case Interfaces.IFlowsheet.MessageType.Tip

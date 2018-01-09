@@ -18,17 +18,25 @@
 
 Namespace ExceptionProcessing
 
-    Public Class ProcessedException
+    Public Class ExceptionList
 
-        Public Property ID As String = ""
+        Public Shared Exceptions As New Dictionary(Of String, Exception)
+
+    End Class
+
+    Public Class ProcessedException
 
         Public Property Name As String = ""
 
-        Public Property Description As String = ""
+        Public Property OriginalDescription As String = ""
+
+        Public Property DetailedDescription As String = ""
 
         Public Property CodeLocation As String = ""
 
         Public Property CodeLocationDetails As String = ""
+
+        Public Property CallingMethod As String = ""
 
         Public Property UserAction As String = ""
 
@@ -50,7 +58,19 @@ Namespace ExceptionProcessing
 
             Dim pex As New ProcessedException()
 
+            pex.Name = iex.GetType.Name
+            pex.OriginalDescription = iex.Message
 
+            pex.ExceptionObject = iex
+
+            If iex.StackTrace IsNot Nothing Then
+
+                Dim st As New StackTrace(iex)
+
+                pex.CodeLocation = st.GetFrame(0).GetFileName + "/" + st.GetFrame(0).GetMethod.Name
+                pex.CallingMethod = st.GetFrame(1).GetFileName + "/" + st.GetFrame(1).GetMethod.Name
+
+            End If
 
             Return pex
 

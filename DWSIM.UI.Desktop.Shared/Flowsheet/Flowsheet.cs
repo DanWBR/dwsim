@@ -54,7 +54,7 @@ namespace DWSIM.UI.Desktop.Shared
             Console.WriteLine(text);
         }
 
-        public override void ShowMessage(string text, IFlowsheet.MessageType mtype)
+        public override void ShowMessage(string text, IFlowsheet.MessageType mtype, string exceptionid = "")
         {
             if (!SupressMessages)
             {

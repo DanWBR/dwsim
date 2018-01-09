@@ -1303,20 +1303,22 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                 fgui.ShowMessage(fgui.GetTranslatedString("FSfinishedsolvingerror"), IFlowsheet.MessageType.GeneralError)
 
                 For Each ex In age.Flatten().InnerExceptions
+                    Dim euid As String = Guid.NewGuid().ToString()
+                    SharedClasses.ExceptionProcessing.ExceptionList.Exceptions.Add(euid, ex)
                     If TypeOf ex Is AggregateException Then
                         baseexception = ex.InnerException
                         For Each iex In DirectCast(ex, AggregateException).Flatten().InnerExceptions
                             While iex.InnerException IsNot Nothing
                                 baseexception = iex.InnerException
                             End While
-                            fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                            fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
                         Next
                     Else
                         baseexception = ex
                         While baseexception.InnerException IsNot Nothing
                             baseexception = baseexception.InnerException
                         End While
-                        fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError)
+                        fgui.ShowMessage(baseexception.Message.ToString, IFlowsheet.MessageType.GeneralError, euid)
                     End If
                 Next
 

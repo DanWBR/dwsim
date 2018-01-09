@@ -315,7 +315,7 @@ Imports System.Dynamic
 
     Public MustOverride Sub ShowDebugInfo(text As String, level As Integer) Implements IFlowsheet.ShowDebugInfo
 
-    Public MustOverride Sub ShowMessage(text As String, mtype As IFlowsheet.MessageType) Implements IFlowsheet.ShowMessage
+    Public MustOverride Sub ShowMessage(text As String, mtype As IFlowsheet.MessageType, Optional ByVal exceptionID As String = "") Implements IFlowsheet.ShowMessage
 
     Public Property SimulationObjects As New Dictionary(Of String, ISimulationObject) Implements IFlowsheet.SimulationObjects
 
