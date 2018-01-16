@@ -661,7 +661,9 @@ Public Class FormFlowsheet
                                                              frlog.Grid1.Rows.Add(New Object() {img, frlog.GridDT.Rows.Count, Date.Now, strtipo, texto})
                                                          End If
 
-                                                         frlog.Grid1.Rows(frlog.Grid1.Rows.Count - 1).Cells("Info").Tag = exceptionID
+                                                         If frlog.Grid1.Rows.Count > 0 Then
+                                                             frlog.Grid1.Rows(frlog.Grid1.Rows.Count - 1).Cells("Info").Tag = exceptionID
+                                                         End If
 
                                                      End If
 
