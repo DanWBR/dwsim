@@ -53,7 +53,11 @@ Namespace ExceptionProcessing
             If TypeOf ex Is AggregateException Then
                 iex = GetFirstException(ex)
             Else
-                iex = ex
+                If ex.InnerException IsNot Nothing Then
+                    iex = ex.InnerException
+                Else
+                    iex = ex
+                End If
             End If
 
             Dim pex As New ProcessedException()
@@ -64,13 +68,13 @@ Namespace ExceptionProcessing
             If iex.Data.Contains("DetailedDescription") Then
                 pex.DetailedDescription = iex.Data("DetailedDescription").ToString()
             Else
-                pex.DetailedDescription = "N/A"
+                pex.DetailedDescription = pex.OriginalDescription
             End If
 
             If iex.Data.Contains("UserAction") Then
-                pex.DetailedDescription = iex.Data("UserAction").ToString()
+                pex.UserAction = iex.Data("UserAction").ToString()
             Else
-                pex.DetailedDescription = "N/A"
+                pex.UserAction = "N/A"
             End If
 
             pex.ExceptionObject = iex
@@ -79,8 +83,8 @@ Namespace ExceptionProcessing
 
                 Dim st As New StackTrace(iex)
 
-                pex.CodeLocation = st.GetFrame(0).GetFileName + "/" + st.GetFrame(0).GetMethod.Name
-                pex.CallingMethod = st.GetFrame(1).GetFileName + "/" + st.GetFrame(1).GetMethod.Name
+                pex.CodeLocation = st.GetFrame(0).GetMethod.Name + " (file '" + st.GetFrame(0).GetFileName + "', line " + st.GetFrame(0).GetFileLineNumber.ToString + ")"
+                pex.CallingMethod = st.GetFrame(1).GetMethod.Name + " (file '" + st.GetFrame(0).GetFileName + "', line " + st.GetFrame(0).GetFileLineNumber.ToString + ")"
 
             End If
 

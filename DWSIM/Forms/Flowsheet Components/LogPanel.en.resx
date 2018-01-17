@@ -134,26 +134,17 @@
     <value>Message</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>552, 142</value>
+  <data name="LimparListaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
   </data>
-  <data name="ToolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 142</value>
-  </data>
-  <data name="ToolStripButton5.Text" xml:space="preserve">
-    <value>Messages</value>
-  </data>
-  <data name="ToolStripButton3.Text" xml:space="preserve">
-    <value>Errors</value>
-  </data>
-  <data name="ToolStripButton1.Text" xml:space="preserve">
-    <value>Warnings</value>
-  </data>
-  <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 6</value>
-  </data>
-  <data name="ToolStripButton2.Text" xml:space="preserve">
+  <data name="LimparListaToolStripMenuItem.Text" xml:space="preserve">
     <value>Clear List</value>
+  </data>
+  <data name="ContextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 48</value>
+  </data>
+  <data name="Grid1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>582, 142</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>582, 142</value>

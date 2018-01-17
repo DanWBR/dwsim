@@ -6,4 +6,24 @@
         Close()
     End Sub
 
+    Private Sub FormEventDescription_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub FormEventDescription_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        If PEx IsNot Nothing Then
+
+            tbEventType.Text = "Error (Exception)"
+
+            tbEventDescription.Text = PEx.DetailedDescription
+
+            tbEventLocation.Text = "Code Location: " + PEx.CodeLocation + vbCrLf + vbCrLf + "Calling Method: " + PEx.CallingMethod + vbCrLf + vbCrLf + PEx.CodeLocationDetails
+
+            tbEventActions.Text = PEx.UserAction
+
+        End If
+
+    End Sub
+
 End Class

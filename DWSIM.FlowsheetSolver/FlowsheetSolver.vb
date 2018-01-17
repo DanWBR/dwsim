@@ -381,21 +381,21 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                         If TypeOf iex3 Is AggregateException Then
                                             For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
                                                 myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
-                                                loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message))
+                                                loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
                                             Next
                                         Else
                                             myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
-                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message))
+                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
                                         End If
                                     Next
                                 Else
                                     myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                                    loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                    loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
                                 End If
                             Next
                         Else
                             myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                            loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                            loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
                         End If
                     Next
                     If GlobalSettings.Settings.SolverBreakOnException Then Exit While
@@ -473,28 +473,28 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                     If TypeOf iex3 Is AggregateException Then
                                         For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
                                             myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
-                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message))
+                                            loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
                                         Next
                                     Else
                                         myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
-                                        loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message))
+                                        loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
                                     End If
                                 Next
                             Else
                                 myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                                loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
                             End If
                         Next
                     Else
                         myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                        loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                        loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
                     End If
                 Next
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Catch ex As Exception
                 fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                 myobj.ErrorMessage = ex.Message.ToString
-                loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
+                loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message, ex))
                 If GlobalSettings.Settings.SolverBreakOnException Then Exit While
             Finally
                 fgui.UpdateInterface()
@@ -572,28 +572,28 @@ Public Delegate Sub CustomEvent2(ByVal objinfo As CalculationArgs)
                                                                              If TypeOf iex3 Is AggregateException Then
                                                                                  For Each iex4 In DirectCast(iex3, AggregateException).InnerExceptions
                                                                                      myobj.ErrorMessage += iex4.Message.ToString & vbCrLf
-                                                                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message))
+                                                                                     loopex.Add(New Exception(myinfo.Tag & ": " & iex4.Message, iex4))
                                                                                  Next
                                                                              Else
                                                                                  myobj.ErrorMessage += iex3.Message.ToString & vbCrLf
-                                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message))
+                                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex3.Message, iex3))
                                                                              End If
                                                                          Next
                                                                      Else
                                                                          myobj.ErrorMessage += iex2.Message.ToString & vbCrLf
-                                                                         loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message))
+                                                                         loopex.Add(New Exception(myinfo.Tag & ": " & iex2.Message, iex2))
                                                                      End If
                                                                  Next
                                                              Else
                                                                  myobj.ErrorMessage += iex.Message.ToString & vbCrLf
-                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message))
+                                                                 loopex.Add(New Exception(myinfo.Tag & ": " & iex.Message, iex))
                                                              End If
                                                          Next
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Catch ex As Exception
                                                          fgui.ProcessScripts(Scripts.EventType.ObjectCalculationError, Scripts.ObjectType.FlowsheetObject, myobj.Name)
                                                          myobj.ErrorMessage = ex.Message.ToString
-                                                         loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message))
+                                                         loopex.Add(New Exception(myinfo.Tag & ": " & ex.Message, ex))
                                                          If GlobalSettings.Settings.SolverBreakOnException Then state.Break()
                                                      Finally
                                                          fgui.UpdateInterface()

@@ -631,38 +631,15 @@ Public Class FormFlowsheet
                                                                  strtipo = DWSIM.App.GetLocalString("Mensagem")
                                                          End Select
 
-                                                         If frlog.GridDT.Columns.Count < 4 Then
-                                                             frlog.GridDT.Columns.Add("Imagem", GetType(Bitmap))
-                                                             frlog.GridDT.Columns.Add("Data")
-                                                             frlog.GridDT.Columns.Add("Tipo")
-                                                             frlog.GridDT.Columns.Add("Mensagem")
-                                                             frlog.GridDT.Columns.Add("Cor", GetType(Color))
-                                                             frlog.GridDT.Columns.Add("Indice")
-                                                         ElseIf frlog.GridDT.Columns.Count = 4 Then
-                                                             frlog.GridDT.Columns.Add("Cor", GetType(Color))
-                                                             frlog.GridDT.Columns.Add("Indice")
-                                                         ElseIf frlog.GridDT.Columns.Count = 5 Then
-                                                             frlog.GridDT.Columns.Add("Indice")
-                                                         End If
-                                                         frlog.GridDT.PrimaryKey = New DataColumn() {frlog.GridDT.Columns("Indice")}
-                                                         With frlog.GridDT.Columns("Indice")
-                                                             .AutoIncrement = True
-                                                             .AutoIncrementSeed = 1
-                                                             .AutoIncrementStep = 1
-                                                             .Unique = True
-                                                         End With
-
                                                          tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto
                                                          tsbLogMessage.Image = img
 
-                                                         frlog.GridDT.Rows.Add(New Object() {img, Date.Now, strtipo, texto, cor, frlog.GridDT.Rows.Count})
-
-                                                         If DWSIM.App.IsRunningOnMono Then
-                                                             frlog.Grid1.Rows.Add(New Object() {img, frlog.GridDT.Rows.Count, Date.Now, strtipo, texto})
-                                                         End If
+                                                         Dim r As Integer = frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
 
                                                          If frlog.Grid1.Rows.Count > 0 Then
-                                                             frlog.Grid1.Rows(frlog.Grid1.Rows.Count - 1).Cells("Info").Tag = exceptionID
+                                                             frlog.Grid1.Rows(r).Cells("Info").Tag = exceptionID
+                                                             frlog.Grid1.Rows(r).Cells("Mensagem").Style.ForeColor = cor
+                                                             frlog.Grid1.Sort(frlog.Grid1.Columns(1), System.ComponentModel.ListSortDirection.Descending)
                                                          End If
 
                                                      End If
