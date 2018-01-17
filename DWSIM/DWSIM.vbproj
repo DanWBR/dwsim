@@ -423,6 +423,12 @@
     <Compile Include="Forms\FormEditGraphicObject.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\FormEventDescription.Designer.vb">
+      <DependentUpon>FormEventDescription.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEventDescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\FormImportCompoundChEDLThermo.Designer.vb">
       <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
     </Compile>
@@ -984,6 +990,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormEditGraphicObject.resx">
       <DependentUpon>FormEditGraphicObject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEventDescription.en.resx">
+      <DependentUpon>FormEventDescription.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEventDescription.resx">
+      <DependentUpon>FormEventDescription.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormImportCompoundChEDLThermo.en.resx">
       <DependentUpon>FormImportCompoundChEDLThermo.vb</DependentUpon>
