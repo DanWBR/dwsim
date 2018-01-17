@@ -61,6 +61,18 @@ Namespace ExceptionProcessing
             pex.Name = iex.GetType.Name
             pex.OriginalDescription = iex.Message
 
+            If iex.Data.Contains("DetailedDescription") Then
+                pex.DetailedDescription = iex.Data("DetailedDescription").ToString()
+            Else
+                pex.DetailedDescription = "N/A"
+            End If
+
+            If iex.Data.Contains("UserAction") Then
+                pex.DetailedDescription = iex.Data("UserAction").ToString()
+            Else
+                pex.DetailedDescription = "N/A"
+            End If
+
             pex.ExceptionObject = iex
 
             If iex.StackTrace IsNot Nothing Then
