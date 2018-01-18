@@ -38,7 +38,7 @@ Namespace ExceptionProcessing
 
         Public Property CallingMethod As String = ""
 
-        Public Property UserAction As String = ""
+        Public Property UserAction As String = "Please search the Forums for related questions or fill a bug using the Bug Tracking System."
 
         Public Property ExceptionObject As Exception = Nothing
 

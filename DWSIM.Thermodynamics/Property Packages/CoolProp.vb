@@ -278,7 +278,7 @@ Namespace PropertyPackages
                     Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                         If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
-                        If T > Tb Then
+                        If T > Tb And Abs(T - Tb) > 0.01 Then
                             Try
                                 vk(i) = CoolProp.PropsSI("L", "T", T, "P", P, GetCoolPropName(sub1))
                             Catch ex As Exception
@@ -352,7 +352,7 @@ Namespace PropertyPackages
                     If T > Tmin And T <= Tmax And T <= Tc Then
                         Try
                             Tb = Me.AUX_TSATi(P, i)
-                            If T < Tb Then
+                            If T < Tb And Abs(T - Tb) > 0.01 Then
                                 vk(i) = CoolProp.PropsSI("L", "T", T, "Q", 0, GetCoolPropName(sub1))
                             Else
                                 WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Liquid Thermal Conductivity, compound " &
@@ -642,7 +642,7 @@ Namespace PropertyPackages
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                         Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                         If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
-                        If T > Tb Then
+                        If T > Tb And Abs(T - Tb) > 0.01 Then
                             Try
                                 vk(i) = CoolProp.PropsSI("V", "T", T, "P", P, GetCoolPropName(sub1))
                             Catch ex As Exception
@@ -722,7 +722,7 @@ Namespace PropertyPackages
                     If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                         Tc = CoolProp.Props1SI(GetCoolPropName(sub1), "TCRIT")
                         If T < Tc Then Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1)) Else Tb = Tc
-                        If T > Tb Then
+                        If T > Tb And Abs(T - Tb) > 0.01 Then
                             Try
                                 vk(i) = CoolProp.PropsSI("D", "T", T, "P", P, GetCoolPropName(sub1))
                             Catch ex As Exception
@@ -857,7 +857,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                                 Tb = CoolProp.PropsSI("T", "P", P, "Q", 1, GetCoolPropName(sub1))
-                                If T > Tb Then
+                                If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("C", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cp, compound " &
@@ -975,7 +975,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(sub1), "PMAX")
                             If T > Tmin And T < Tmax And P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T > Tb Then
+                                If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("O", "T", T, "P", P, GetCoolPropName(sub1)) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Cv, compound " &
@@ -1071,7 +1071,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T > Tb Then
+                                If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("H", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Enthalpy, compound " &
@@ -1174,7 +1174,7 @@ Namespace PropertyPackages
                             Pmax = CoolProp.Props1SI(GetCoolPropName(vn(i)), "PMAX")
                             If P > Pmin And P < Pmax Then
                                 Tb = Me.AUX_TSATi(P, i)
-                                If T > Tb Then
+                                If T > Tb And Abs(T - Tb) > 0.01 Then
                                     vk(i) = CoolProp.PropsSI("S", "T", T, "P", P, GetCoolPropName(vn(i))) / 1000
                                 Else
                                     WriteWarningMessage("CoolProp Warning: T and/or P is/are outside the valid range for calculation of Vapor Entropy, compound " &
@@ -1580,7 +1580,10 @@ Namespace PropertyPackages
                 If CompoundAliases.ContainsKey(CurrentMaterialStream.Phases(0).Compounds(compname).ConstantProperties.CAS_Number) Then
                     Return True
                 Else
-                    Throw New ArgumentOutOfRangeException(compname, "Error: compound '" & compname & "' is not supported by this version of CoolProp.")
+                    Dim e1 = New ArgumentOutOfRangeException(compname, "Error: compound '" & compname & "' is not supported by this version of CoolProp.")
+                    e1.Data.Add("DetailedDescription", "CoolProp doesn't suppoert his compound, so the calculation results will be incorrect.")
+                    e1.Data.Add("UserAction", "Remove the compound from the simulation or try another Property Package.")
+                    Throw e1
                 End If
             End If
 
