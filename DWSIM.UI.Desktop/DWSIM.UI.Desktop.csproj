@@ -335,6 +335,26 @@ del "$(SolutionDir)DistPackages\Raspberry\*vshost*"
 del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
 )
+
+if $(ConfigurationName) == Release_32 (
+
+xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+
+xcopy "$(SolutionDir)PlatformFiles\Windows_32\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+
+xcopy "$(SolutionDir)DWSIM\bin\Release_32\plugins\*" "$(SolutionDir)DistPackages\Windows_32\plugins\" /E /Y /F /D
+
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x86"
+
+del "$(SolutionDir)DistPackages\Windows_32\*vshost*"
+
+)
+
 if $(ConfigurationName) == Debug (
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
