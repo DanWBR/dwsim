@@ -341,14 +341,15 @@ del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
 ) else if "$(PlatformName)" == "x86" (
 
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
+xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Windows\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
-xcopy "$(SolutionDir)PlatformFiles\Windows_32\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
-xcopy "$(SolutionDir)DWSIM\bin\Release_32\plugins\*" "$(SolutionDir)DistPackages\Windows_32\plugins\" /E /Y /F /D
+xcopy "$(SolutionDir)PlatformFiles\Windows_32\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F
+
+xcopy "$(SolutionDir)DWSIM\bin\Release\plugins\*" "$(SolutionDir)DistPackages\Windows_32\plugins\" /E /Y /F /D
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
