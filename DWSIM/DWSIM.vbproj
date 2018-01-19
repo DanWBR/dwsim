@@ -2415,7 +2415,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release (
+    <PostBuildEvent>if $(ConfigurationName) == "Release" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
@@ -2435,7 +2435,7 @@ rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
 
 )
-else if $(ConfigurationName) == Release_32 (
+else if $(ConfigurationName) == "Release_32" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
