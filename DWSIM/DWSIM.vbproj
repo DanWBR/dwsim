@@ -1301,10 +1301,6 @@
       <Project>{f5dfafed-c786-4dc3-9818-16c992de3990}</Project>
       <Name>DWSIM.MathOps.RandomOps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DWSIM.Apps.RunAsx86\DWSIM.Apps.RunAsx86.csproj">
-      <Project>{caa85a70-4427-4075-a894-8eddca42ddd4}</Project>
-      <Name>DWSIM.Apps.RunAsx86</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DWSIM.Math.SwarmOps\DWSIM.MathOps.SwarmOps.csproj">
       <Project>{8f45efaa-9eac-403f-b2b0-123f0321056e}</Project>
       <Name>DWSIM.MathOps.SwarmOps</Name>
@@ -2415,7 +2411,13 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == "Release" (
+    <PostBuildEvent>if $(ConfigurationName) == "Debug"
+(
+
+xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
+
+)
+else if $(PlatformName) == "x64" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
@@ -2435,7 +2437,7 @@ rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
 
 )
-else if $(ConfigurationName) == "Release_32" (
+else if $(PlatformName) == "x86" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
@@ -2445,12 +2447,6 @@ del "$(SolutionDir)DistPackages\Windows_32\README_ADVEOS.txt"
 del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
-
-)
-else
-(
-
-xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 
 )
 
