@@ -389,7 +389,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                     opt.RequireFeasible = True
                     Dim sresult = opt.Optimize(opt.DefaultParameters)
 
-                    If Not sresult.Feasible Or Not CheckSolution() Then Throw New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+                    If Not sresult.Feasible Or Not CheckSolution() Then
+                        Dim ex As New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+                        ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                        ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                        Throw ex
+                    End If
 
                     initval = sresult.Parameters
 
@@ -614,7 +619,12 @@ Namespace PropertyPackages.Auxiliary.FlashAlgorithms
                                 opt.RequireFeasible = True
                                 Dim sresult = opt.Optimize(opt.DefaultParameters)
 
-                                If Not sresult.Feasible Or Not CheckSolution() Then Throw New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+                                If Not sresult.Feasible Or Not CheckSolution() Then
+                                    Dim ex As New Exception("PT Flash [GM]: Feasible solution not found after " & sresult.Iterations & " iterations.")
+                                    ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                                    ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                                    Throw ex
+                                End If
 
                                 initval2 = sresult.Parameters
 
@@ -1309,8 +1319,12 @@ alt:
 
             End If
 
-            If T <= Tmin Or T >= Tmax Then Throw New Exception("PH Flash [NL3PV2]: Invalid result: Temperature did not converge.")
-
+            If T <= Tmin Or T >= Tmax Then
+                Dim ex As New Exception("PH Flash [NL3PV2]: Invalid result: Temperature did not converge.")
+                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                Throw ex
+            End If
 
             Dim tmp As Object = Flash_PT(Vz, P, T, PP)
 
@@ -1434,7 +1448,12 @@ alt:
 
             End If
 
-            If T <= Tmin Or T >= Tmax Then Throw New Exception("PS Flash [NL3PV2]: Invalid result: Temperature did not converge.")
+            If T <= Tmin Or T >= Tmax Then
+                Dim ex As New Exception("PS Flash [NL3PV2]: Invalid result: Temperature did not converge.")
+                ex.Data.Add("DetailedDescription", "The Flash Algorithm was unable to converge to a solution.")
+                ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                Throw ex
+            End If
 
 
             Dim tmp As Object = Flash_PT(Vz, P, T, PP)

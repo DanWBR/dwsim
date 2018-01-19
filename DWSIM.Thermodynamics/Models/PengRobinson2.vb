@@ -391,7 +391,12 @@ Namespace PropertyPackages.ThermoPlugs
             Dim _zarray As List(Of Double), _mingz As Object, Z As Double
 
             _zarray = CalcZ(T, P, Vx, VKij, Tc, Pc, w)
-            If _zarray.Count = 0 Then Throw New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
+            If _zarray.Count = 0 Then
+                Dim ex As New Exception(String.Format("PR EOS: unable to find a root with provided parameters [T = {0} K, P = {1} Pa, MoleFracs={2}]", T.ToString, P.ToString, Vx.ToArrayString))
+                ex.Data.Add("DetailedDescription", "This error occurs when the PR EOS is unable to find a density root with the given parameters.")
+                ex.Data.Add("UserAction", "Check if the parameters are valid (T, P, composition). If this error keeps occuring, try another Property Package or check the Material Stream / Unit Operation properties.")
+                Throw ex
+            End If
             If forcephase <> "" Then
                 If forcephase = "L" Then
                     Z = Common.Min(_zarray.ToArray())

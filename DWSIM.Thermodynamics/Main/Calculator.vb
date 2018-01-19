@@ -49,7 +49,10 @@ Public Class Calculator
 
         If Settings.EnableParallelProcessing Then
             GlobalSettings.Settings.EnableParallelProcessing = False
-            Throw New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
+            Dim ex As New InvalidOperationException(GetLocalString("ParallelPInvokeError"))
+            ex.Data.Add("DetailedDescription", "This calculation will use a native (C++/FORTRAN) library which doesn't support multithreading, that is, cannot do multiple calculations at once.")
+            ex.Data.Add("UserAction", "Go to the Global Settings Panel, disable the CPU Parallel Acceleration and try again.")
+            Throw ex
         End If
 
     End Sub

@@ -1866,7 +1866,10 @@ Namespace PropertyPackages
                                     Dim dgtol As Double = Me.FlashBase.FlashSettings(Enums.FlashSetting.ValidationGibbsTolerance)
 
                                     If dge > 0.0# And Math.Abs(dge / ige * 100) > Math.Abs(dgtol) Then
-                                        Throw New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
+                                        Dim ex As New Exception(Calculator.GetLocalString("InvalidFlashResult") & "(DGE = " & dge & " kJ/kg, " & Format(dge / ige * 100, "0.00") & "%)")
+                                        ex.Data.Add("DetailedDescription", "The calculated phase and composition distribution is invalid (increased Gibbs Free Energy).")
+                                        ex.Data.Add("UserAction", "Try another Property Package and/or Flash Algorithm.")
+                                        Throw ex
                                     End If
 
                                 End If
