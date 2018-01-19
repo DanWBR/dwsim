@@ -261,18 +261,17 @@
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Import Project="..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.58.0\build\net45\SkiaSharp.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == "Debug" (
+    <PostBuildEvent>if "$(ConfigurationName)" == "Debug" (
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 xcopy "$(SolutionDir)DWSIM\bin\Debug\plugins\*" "$(TargetDir)\plugins\" /E /Y /F /D
 
-)
-else if $(PlatformName) == "x64" (
+) else if "$(PlatformName)" == "x64" (
 
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
-xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
+xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
+xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
+xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
+xcopy "$(TargetDir)*" "$(SolutionDir)DistPackages\macOS\" /E /Y /F /D
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
@@ -296,17 +295,16 @@ xcopy "$(SolutionDir)DWSIM\bin\Release\DWSIM.exe" "$(SolutionDir)DistPackages\Ra
 xcopy "$(SolutionDir)DWSIM\bin\Release\PropertyGridEx.dll" "$(SolutionDir)DistPackages\Raspberry\" /E /Y /F /D
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows\x86"
+rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Linux\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\Linux\x86"
+rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
 
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\macOS\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\data\unifac"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\x86"
@@ -317,9 +315,9 @@ rmdir /S /Q "$(SolutionDir)DistPackages\macOS\help"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\de"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt"
 rmdir /S /Q "$(SolutionDir)DistPackages\macOS\pt-BR"
+rmdir /S /Q "$(SolutionDir)DistPackages\macOS\ECE"
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\data\unifac"
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\x86"
@@ -330,6 +328,7 @@ rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\help"
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\de"
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\pt"
 rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\pt-BR"
+rmdir /S /Q "$(SolutionDir)DistPackages\Raspberry\ECE"
 
 del "$(SolutionDir)DistPackages\Linux\libSkiaSharp.dll"
 del "$(SolutionDir)DistPackages\Raspberry\libSkiaSharp.dll"
@@ -340,9 +339,7 @@ del "$(SolutionDir)DistPackages\Linux\*vshost*"
 del "$(SolutionDir)DistPackages\Raspberry\*vshost*"
 del "$(SolutionDir)DistPackages\macOS\*vshost*"
 
-)
-
-else if $(PlatformName) == "x86" (
+) else if "$(PlatformName)" == "x86" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
@@ -354,14 +351,9 @@ xcopy "$(SolutionDir)PlatformFiles\Windows_32\*" "$(SolutionDir)DistPackages\Win
 xcopy "$(SolutionDir)DWSIM\bin\Release_32\plugins\*" "$(SolutionDir)DistPackages\Windows_32\plugins\" /E /Y /F /D
 
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x86"
-
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\DWSIM.UI.Desktop.app"
 rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x64"
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\x86"
 
 del "$(SolutionDir)DistPackages\Windows_32\*vshost*"
 

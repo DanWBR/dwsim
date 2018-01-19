@@ -2411,46 +2411,29 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == "Debug"
-(
+    <PostBuildEvent>if "$(ConfigurationName)"=="Debug" (
 
 xcopy "$(SolutionDir)PlatformFiles\Common\*" "$(TargetDir)" /E /Y /F /D
 
-)
-else if $(PlatformName) == "x64" (
+) else if "$(PlatformName)"=="x64" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows\" /E /Y /F /D
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Linux\" /E /Y /F /D
 
 del "$(SolutionDir)DistPackages\Windows\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\Windows\DWSIM.Thermodynamics.AdvancedEOS*"
-del "$(SolutionDir)DistPackages\Windows\README_ADVEOS.txt"
 del "$(SolutionDir)DistPackages\Windows\*.tmp"
 
 del "$(SolutionDir)DistPackages\Linux\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\Linux\DWSIM.Thermodynamics.AdvancedEOS*"
-del "$(SolutionDir)DistPackages\Linux\README_ADVEOS.txt"
 del "$(SolutionDir)DistPackages\Linux\*.tmp"
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows\ECE"
-
-rmdir /S /Q "$(SolutionDir)DistPackages\Linux\ECE"
-
-)
-else if $(PlatformName) == "x86" (
+) else if "$(PlatformName)"=="x86" (
 
 xcopy "$(TargetDir)\*" "$(SolutionDir)DistPackages\Windows_32\" /E /Y /F /D
 
 del "$(SolutionDir)DistPackages\Windows_32\DWSIM.vshost.*"
-del "$(SolutionDir)DistPackages\Windows_32\DWSIM.Thermodynamics.AdvancedEOS*"
-del "$(SolutionDir)DistPackages\Windows_32\README_ADVEOS.txt"
 del "$(SolutionDir)DistPackages\Windows_32\*.tmp"
 
-rmdir /S /Q "$(SolutionDir)DistPackages\Windows_32\ECE"
-
-)
-
-</PostBuildEvent>
+)</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
