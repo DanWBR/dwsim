@@ -872,6 +872,7 @@ namespace DWSIM.UI.Desktop.Editors
                 {
                     try
                     {
+                        if (!File.Exists(dialog.FileName)) File.WriteAllText(dialog.FileName, "");
                         DWSIM.Thermodynamics.Databases.UserDB.AddCompounds(new[] { comp }, dialog.FileName, true);
                         flowsheet.ShowMessage("Compound '" + comp.Name + "' successfully added to XML database.", IFlowsheet.MessageType.Information);
                     }
@@ -925,21 +926,18 @@ namespace DWSIM.UI.Desktop.Editors
             var jc = joback.GetJCFromUNIFAC(uf);
             var acl = joback.GetACLFromUNIFAC(uf);
 
-            if (kdbc != null || chemeoc != null)
-            {
-                comp.Molar_Weight = joback.CalcMW(acl);
-                comp.Normal_Boiling_Point = joback.CalcTb(jc);
-                comp.Critical_Temperature = joback.CalcTc(comp.Normal_Boiling_Point, jc);
-                comp.Critical_Pressure = joback.CalcPc(jc);
-                comp.TemperatureOfFusion = joback.CalcTf(jc);
-                comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc);
-                comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc) / comp.Molar_Weight;
-                comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc) / comp.Molar_Weight;
-                comp.Critical_Volume = joback.CalcVc(jc);
-                comp.Critical_Compressibility = (comp.Critical_Pressure * comp.Critical_Volume / comp.Critical_Temperature / 8.314 / 1000);
-                comp.Z_Rackett = comp.Critical_Compressibility;
-                comp.Acentric_Factor = DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods.PropertyMethods.AcentricFactor_LeeKesler(comp.Critical_Temperature, comp.Critical_Pressure, comp.Normal_Boiling_Point);
-            }
+            comp.Molar_Weight = joback.CalcMW(acl);
+            comp.Normal_Boiling_Point = joback.CalcTb(jc);
+            comp.Critical_Temperature = joback.CalcTc(comp.Normal_Boiling_Point, jc);
+            comp.Critical_Pressure = joback.CalcPc(jc);
+            comp.TemperatureOfFusion = joback.CalcTf(jc);
+            comp.EnthalpyOfFusionAtTf = joback.CalcHf(jc);
+            comp.IG_Enthalpy_of_Formation_25C = joback.CalcDHf(jc) / comp.Molar_Weight;
+            comp.IG_Gibbs_Energy_of_Formation_25C = joback.CalcDGf(jc) / comp.Molar_Weight;
+            comp.Critical_Volume = joback.CalcVc(jc);
+            comp.Critical_Compressibility = (comp.Critical_Pressure * comp.Critical_Volume / comp.Critical_Temperature / 8.314 / 1000);
+            comp.Z_Rackett = comp.Critical_Compressibility;
+            comp.Acentric_Factor = DWSIM.Thermodynamics.Utilities.PetroleumCharacterization.Methods.PropertyMethods.AcentricFactor_LeeKesler(comp.Critical_Temperature, comp.Critical_Pressure, comp.Normal_Boiling_Point);
 
             comp.IdealgasCpEquation = "4";
             comp.Ideal_Gas_Heat_Capacity_Const_A = joback.CalcCpA(jc) * 1000;

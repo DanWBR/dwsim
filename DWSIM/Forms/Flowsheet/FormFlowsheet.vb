@@ -2743,7 +2743,7 @@ Public Class FormFlowsheet
             Return Options.SelectedComponents
         End Get
         Set(value As Dictionary(Of String, ICompoundConstantProperties))
-
+            Options.SelectedComponents = value
         End Set
     End Property
 
@@ -3030,6 +3030,13 @@ Public Class FormFlowsheet
     End Sub
 
     Public Property AvailableCompounds As Dictionary(Of String, ICompoundConstantProperties) Implements IFlowsheet.AvailableCompounds
+        Get
+            Return Options.NotSelectedComponents
+        End Get
+        Set(value As Dictionary(Of String, ICompoundConstantProperties))
+            Options.NotSelectedComponents = value
+        End Set
+    End Property
 
     Public Sub DeleteSelectedObject1(sender As Object, e As EventArgs, gobj As IGraphicObject, Optional confirmation As Boolean = True, Optional triggercalc As Boolean = False) Implements IFlowsheet.DeleteSelectedObject
 
@@ -3167,8 +3174,15 @@ Public Class FormFlowsheet
     End Sub
 
     Private Sub AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AssistenteDeCriaçãoDeSubstânciasToolStripMenuItem.Click
+
+        FrmStSim1.loaded = False
+
         Dim wform As New UI.Desktop.Editors.CompoundCreatorWizard(Me)
         wform.SetupAndDisplayPage(1)
+
+        'start dispatcher for WPF Interop
+        If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
+
     End Sub
 
     Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click

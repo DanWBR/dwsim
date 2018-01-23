@@ -30,7 +30,7 @@ Public Class FormSimulSettings
     Inherits WeifenLuo.WinFormsUI.Docking.DockContent
 
     Private FrmChild As FormFlowsheet
-    Dim loaded As Boolean = False
+    Public loaded As Boolean = False
     Public initialized As Boolean = False
     Public supports As Boolean = True
 
@@ -54,6 +54,13 @@ Public Class FormSimulSettings
                     floatWin.SetBounds(floatWin.Location.X, floatWin.Location.Y, 820, 550)
                 End If
             End If
+
+            Try
+                Init()
+            Catch ex As Exception
+
+            End Try
+
         End If
     End Sub
 
@@ -106,6 +113,7 @@ Public Class FormSimulSettings
         FrmChild = My.Application.ActiveSimulation
 
         Dim comp As BaseClasses.ConstantProperties
+
         If Not loaded Or reset Then
 
             ACSC1 = New AutoCompleteStringCollection
@@ -154,6 +162,64 @@ Public Class FormSimulSettings
                 If addobj Then Me.dgvAvailableFlashAlgos.Rows.Add(New String() {fa.Name, fa.Description})
             Next
 
+
+            Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
+            Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
+
+            aTypeList.Clear()
+            aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x)
+                                                                       If x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing Then
+                                                                           Return True
+                                                                       Else
+                                                                           Return False
+                                                                       End If
+                                                                   End Function))
+            aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x)
+                                                                   If x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing Then
+                                                                       Return True
+                                                                   Else
+                                                                       Return False
+                                                                   End If
+                                                               End Function))
+
+            Dim add As Boolean = False
+            If FrmChild.FlowsheetOptions.VisibleProperties.Count = 0 Then add = True
+
+            cbObjectType.Items.Clear()
+            availableproperties.Clear()
+            aTypeRefs.Clear()
+            For Each item In aTypeList.OrderBy(Function(x) x.Name)
+                If Not item.IsAbstract Then
+                    Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
+                    obj.SetFlowsheet(FrmChild)
+                    cbObjectType.Items.Add(obj.GetDisplayName)
+                    availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
+                    aTypeRefs.Add(obj.GetDisplayName, item.Name)
+                    If add Then FrmChild.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
+                    obj = Nothing
+                End If
+            Next
+            cbObjectType.SelectedIndex = 0
+
+            With Me.dgvpp.Rows
+                .Clear()
+                For Each pp2 As PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
+                    .Add(New Object() {pp2.UniqueID, pp2.Tag, pp2.ComponentName})
+                Next
+            End With
+
+            With Me.dgvAddedFlashAlgos.Rows
+                .Clear()
+                For Each fa In FrmChild.Options.FlashAlgorithms
+                    .Add(New Object() {fa.Tag, fa.Name})
+                Next
+            End With
+
+            Me.ComboBox2.Items.Clear()
+            Me.ComboBox2.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
+            FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
+            FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
+
         Else
 
             For Each r As DataGridViewRow In ogc1.Rows
@@ -169,63 +235,6 @@ Public Class FormSimulSettings
             Next
 
         End If
-
-        Dim calculatorassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.Thermodynamics,")).FirstOrDefault
-        Dim unitopassembly = My.Application.Info.LoadedAssemblies.Where(Function(x) x.FullName.Contains("DWSIM.UnitOperations")).FirstOrDefault
-
-        aTypeList.Clear()
-        aTypeList.AddRange(calculatorassembly.GetTypes().Where(Function(x)
-                                                                   If x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing Then
-                                                                       Return True
-                                                                   Else
-                                                                       Return False
-                                                                   End If
-                                                               End Function))
-        aTypeList.AddRange(unitopassembly.GetTypes().Where(Function(x)
-                                                               If x.GetInterface("DWSIM.Interfaces.ISimulationObject") IsNot Nothing Then
-                                                                   Return True
-                                                               Else
-                                                                   Return False
-                                                               End If
-                                                           End Function))
-
-        Dim add As Boolean = False
-        If FrmChild.FlowsheetOptions.VisibleProperties.Count = 0 Then add = True
-
-        cbObjectType.Items.Clear()
-        availableproperties.Clear()
-        aTypeRefs.Clear()
-        For Each item In aTypeList.OrderBy(Function(x) x.Name)
-            If Not item.IsAbstract Then
-                Dim obj = DirectCast(Activator.CreateInstance(item), Interfaces.ISimulationObject)
-                obj.SetFlowsheet(FrmChild)
-                cbObjectType.Items.Add(obj.GetDisplayName)
-                availableproperties.Add(obj.GetDisplayName, obj.GetProperties(PropertyType.ALL))
-                aTypeRefs.Add(obj.GetDisplayName, item.Name)
-                If add Then FrmChild.FlowsheetOptions.VisibleProperties.Add(item.Name, obj.GetDefaultProperties.ToList)
-                obj = Nothing
-            End If
-        Next
-        cbObjectType.SelectedIndex = 0
-
-        With Me.dgvpp.Rows
-            .Clear()
-            For Each pp2 As PropertyPackages.PropertyPackage In FrmChild.Options.PropertyPackages.Values
-                .Add(New Object() {pp2.UniqueID, pp2.Tag, pp2.ComponentName})
-            Next
-        End With
-
-        With Me.dgvAddedFlashAlgos.Rows
-            .Clear()
-            For Each fa In FrmChild.Options.FlashAlgorithms
-                .Add(New Object() {fa.Tag, fa.Name})
-            Next
-        End With
-
-        Me.ComboBox2.Items.Clear()
-        Me.ComboBox2.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
-        FrmChild.ToolStripComboBoxUnitSystem.Items.Clear()
-        FrmChild.ToolStripComboBoxUnitSystem.Items.AddRange(FormMain.AvailableUnitSystems.Keys.ToArray)
 
         ComboBox1.SelectedItem = Me.FrmChild.Options.NumberFormat
         ComboBox3.SelectedItem = Me.FrmChild.Options.FractionNumberFormat
