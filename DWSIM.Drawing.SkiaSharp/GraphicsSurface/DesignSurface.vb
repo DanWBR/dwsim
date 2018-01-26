@@ -127,8 +127,8 @@ Public Class GraphicsSurface
 
         If DrawAddedAnimation Then
             Dim tstep = (Date.Now - AnimationStart).TotalMilliseconds
-            Dim sp As New SKPaint
-            With sp
+            Dim spa As New SKPaint
+            With spa
                 Dim avalue As Integer = 255 - tstep / Tmax * 255
                 If avalue < 0 Then avalue = 0
                 .Color = SKColors.SteelBlue.WithAlpha(avalue)
@@ -136,7 +136,7 @@ Public Class GraphicsSurface
                 .IsStroke = False
                 .Shader = SKShader.CreateRadialGradient(New SKPoint(AddedObject.X + AddedObject.Width / 2, AddedObject.Y + AddedObject.Height / 2), Math.Max(AddedObject.Width * (1 + tstep / Tmax), AddedObject.Height * (1 + tstep / Tmax)), New SKColor() {SKColors.LightBlue, SKColors.Transparent}, New Single() {0.05, 0.95}, SKShaderTileMode.Clamp)
             End With
-            DrawingCanvas.DrawRoundRect(New SKRect(AddedObject.X - 250 * tstep / Tfactor, AddedObject.Y - 250 * tstep / Tfactor, AddedObject.X + AddedObject.Width + 250 * tstep / Tfactor, AddedObject.Y + AddedObject.Height + 250 * tstep / Tfactor), 10, 10, sp)
+            DrawingCanvas.DrawRoundRect(New SKRect(AddedObject.X - 250 * tstep / Tfactor, AddedObject.Y - 250 * tstep / Tfactor, AddedObject.X + AddedObject.Width + 250 * tstep / Tfactor, AddedObject.Y + AddedObject.Height + 250 * tstep / Tfactor), 10, 10, spa)
         End If
 
         For Each dobj In objects
@@ -145,21 +145,27 @@ Public Class GraphicsSurface
             End If
         Next
 
+        Dim sp, sp2 As New SKPaint
+        With sp
+            .Color = SKColors.LightBlue.WithAlpha(75)
+            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+            .IsStroke = False
+        End With
+        With sp2
+            .Color = SKColors.LightBlue.WithAlpha(175)
+            .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
+            .IsStroke = True
+            .StrokeWidth = 2
+        End With
+
         For Each dobj In objects
+
             If Not TypeOf dobj Is ConnectorGraphic Then
+
+                If TypeOf dobj Is ShapeGraphic Then DirectCast(dobj, ShapeGraphic).UpdateStatus()
+
                 If dobj Is SelectedObject Then
-                    Dim sp, sp2 As New SKPaint
-                    With sp
-                        .Color = SKColors.LightBlue.WithAlpha(75)
-                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .IsStroke = False
-                    End With
-                    With sp2
-                        .Color = SKColors.LightBlue.WithAlpha(175)
-                        .IsAntialias = GlobalSettings.Settings.DrawingAntiAlias
-                        .IsStroke = True
-                        .StrokeWidth = 2
-                    End With
+
                     If dobj.Rotation <> 0 Then
                         DrawingCanvas.Save()
                         DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
@@ -170,6 +176,7 @@ Public Class GraphicsSurface
                         DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp)
                         DrawingCanvas.DrawRoundRect(New SKRect(dobj.X - 10, dobj.Y - 10, dobj.X + dobj.Width + 10, dobj.Y + dobj.Height + 10), 4, 4, sp2)
                     End If
+
                 End If
 
                 If dobj.DrawOverride IsNot Nothing Then
@@ -178,23 +185,31 @@ Public Class GraphicsSurface
 
                 Else
 
-                    Dim currmat = DrawingCanvas.TotalMatrix
+                    If dobj.FlippedH Or dobj.FlippedV Or dobj.Rotation <> 0 Then
 
-                    DrawingCanvas.Save()
+                        Dim currmat = DrawingCanvas.TotalMatrix
 
-                    If dobj.FlippedV And Not dobj.FlippedH Then
-                        DrawingCanvas.Scale(-1, 1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
-                    ElseIf dobj.FlippedH And Not dobj.FlippedV Then
-                        DrawingCanvas.Scale(1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
-                    ElseIf dobj.FlippedH And dobj.FlippedV Then
-                        DrawingCanvas.Scale(-1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                        DrawingCanvas.Save()
+
+                        If dobj.FlippedV And Not dobj.FlippedH Then
+                            DrawingCanvas.Scale(-1, 1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                        ElseIf dobj.FlippedH And Not dobj.FlippedV Then
+                            DrawingCanvas.Scale(1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                        ElseIf dobj.FlippedH And dobj.FlippedV Then
+                            DrawingCanvas.Scale(-1, -1, (dobj.X + dobj.Width / 2), (dobj.Y + dobj.Height / 2))
+                        End If
+
+                        If dobj.Rotation <> 0 Then DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
+
+                        dobj.Draw(DrawingCanvas)
+
+                        DrawingCanvas.SetMatrix(currmat)
+
+                    Else
+
+                        dobj.Draw(DrawingCanvas)
+
                     End If
-
-                    If dobj.Rotation <> 0 Then DrawingCanvas.RotateDegrees(dobj.Rotation, dobj.X + dobj.Width / 2, dobj.Y + dobj.Height / 2)
-
-                    dobj.Draw(DrawingCanvas)
-
-                    DrawingCanvas.SetMatrix(currmat)
 
                     If TypeOf dobj Is ShapeGraphic And
                         dobj.ObjectType <> ObjectType.GO_MasterTable And
@@ -211,7 +226,9 @@ Public Class GraphicsSurface
                     End If
 
                 End If
+
             End If
+
         Next
 
         If DrawPropertyList Then

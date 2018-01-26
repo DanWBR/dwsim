@@ -788,6 +788,7 @@ namespace DWSIM.UI.Forms
             item1.CheckedChanged += (sender, e) =>
             {
                 obj.GraphicObject.Active = item1.Checked;
+                obj.GraphicObject.Status = item1.Checked ? Interfaces.Enums.GraphicObjects.Status.Idle : Interfaces.Enums.GraphicObjects.Status.Inactive;
             };
 
             var item2 = new ButtonMenuItem { Text = "Edit Connections", Image = new Bitmap(Eto.Drawing.Bitmap.FromResource(imgprefix + "Electrical_96px.png")) };

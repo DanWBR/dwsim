@@ -976,8 +976,16 @@ Namespace Reactors
                     c = Me.ComponentIDs.Count - 1
                     els = e
                     comps = c
+
+                    If e < 0 Then Throw New Exception("The Element Matrix is not defined.")
+                    If c < 0 Then Throw New Exception("The list of reacting compounds is not defined.")
+
                     tms = ims.Clone()
                     tms.SetFlowsheet(ims.FlowSheet)
+
+                    Dim te(els) As Double
+
+                    Me.TotalElements = te
 
                     Dim fm0(c), N0tot, W0tot, wm0 As Double
 
@@ -1271,9 +1279,7 @@ Namespace Reactors
 
                             Loop Until ni_int > MaximumInternalIterations
 
-                            If ni_int > MaximumInternalIterations Then
-                                Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
-                            End If
+                            If ni_int > MaximumInternalIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
                             lagrm = x.Take(e + 1).ToArray
 
