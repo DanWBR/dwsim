@@ -2070,7 +2070,7 @@ Namespace Reactors
             str.AppendLine("    Initial Gibbs Free Energy Value: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.InitialGibbsEnergy).ToString(numberformat, ci) & " " & su.heatflow)
             str.AppendLine("    Final Gibbs Free Energy Value: " & SystemsOfUnits.Converter.ConvertFromSI(su.heatflow, Me.FinalGibbsEnergy).ToString(numberformat, ci) & " " & su.heatflow)
             If SolvMethod = SolvingMethod.DirectMinimization Then
-                str.AppendLine("    Element Balance: " & Me.ElementBalance.ToString("R"))
+                str.AppendLine("    Element Balance Residue: " & Me.ElementBalance.ToString("R"))
             Else
                 str.AppendLine()
                 str.AppendLine("Reaction Extents")

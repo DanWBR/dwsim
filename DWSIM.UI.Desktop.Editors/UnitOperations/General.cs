@@ -1224,6 +1224,16 @@ namespace DWSIM.UI.Desktop.Editors
                                });
                     s.CreateAndAddDescriptionRow(container,
                                                  SimObject.GetPropertyDescription("Pressure Drop"));
+                    s.CreateAndAddLabelRow(container, "Convergence Parameters");
+                    s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
+                    s.CreateAndAddCheckBoxRow(container, "Initialize Reaction Extents with Previous Values", reactor2.UsePreviousReactionExtents, (sender, e) => reactor2.UsePreviousReactionExtents = sender.Checked.GetValueOrDefault());
+                    s.CreateAndAddDescriptionRow(container, "This will use the reaction extents from a previous solution to initialize the next calculation.");
+                    s.CreateAndAddTextBoxRow(container, nf, "Reaction Extents Initializer", reactor2.ReactionExtentsInitializer, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2.ReactionExtentsInitializer = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddDescriptionRow(container, "Useful for a first estimate when a previous solution is not available and/or 'Initialize with Previous Values' is disabled. Enter a value between 0.0 and 1.0.");
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2.InternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2.InternalLoopMaximumIterations = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2.ExternalLoopMaximumIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2.ExternalLoopMaximumIterations = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2.InternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2.InternalLoopTolerance = sender.Text.ToDoubleFromCurrent(); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2.ExternalLoopTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2.ExternalLoopTolerance = sender.Text.ToDoubleFromCurrent(); });
                     break;
                 case ObjectType.RCT_Gibbs:
                     var reactor2g = (Reactor_Gibbs)SimObject;
@@ -1391,7 +1401,7 @@ namespace DWSIM.UI.Desktop.Editors
                     s.CreateAndAddLabelRow(container, "Convergence Parameters");
                     s.CreateAndAddDescriptionRow(container, "Tune the following parameters if you're having convergence issues.");
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Internal Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); });
-                    s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumInternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumInternalIterations  = int.Parse(sender.Text); });
+                    s.CreateAndAddTextBoxRow(container, nf, "Maximum External Iterations", reactor2g.MaximumExternalIterations, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.MaximumExternalIterations = int.Parse(sender.Text); });
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for Internal Convergence Loop", reactor2g.InternalTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.InternalTolerance = sender.Text.ToDoubleFromCurrent(); });
                     s.CreateAndAddTextBoxRow(container, nf, "Maximum Error for External Convergence Loop", reactor2g.ExternalTolerance, (sender, e) => { if (sender.Text.IsValidDouble()) reactor2g.ExternalTolerance = sender.Text.ToDoubleFromCurrent(); });
                     break;

@@ -36,85 +36,39 @@ Namespace Reactors
 
         <NonSerialized> <Xml.Serialization.XmlIgnore> Dim f As EditingForm_ReactorConvEqGibbs
 
-        Protected m_reactionextents As New Dictionary(Of String, Double)
-        Private _rex_iest As New ArrayList
-        Private _components As New List(Of String)
-        Private _initialestimates As New List(Of Double)
-        Private _elements As String()
-        Private _totalelements As Double()
-        Private _ige, _fge As Double
-
         Dim tmpx As Double(), tmpdx As Double()
 
         Dim tms As MaterialStream
+
         Dim N0 As New Dictionary(Of String, Double)
         Dim DN As New Dictionary(Of String, Double)
         Dim N As New Dictionary(Of String, Double)
+
         Dim T, T0, P, P0, Ninerts, Winerts, E(,) As Double
+
         Dim r, c, els, comps As Integer
+
 
 #Region "Properties"
 
-        Public Property InitialGibbsEnergy() As Double
-            Get
-                Return _ige
-            End Get
-            Set(ByVal value As Double)
-                _ige = value
-            End Set
-        End Property
+        Public Property InitialGibbsEnergy As Double = 0.0
 
-        Public Property FinalGibbsEnergy() As Double
-            Get
-                Return _fge
-            End Get
-            Set(ByVal value As Double)
-                _fge = value
-            End Set
-        End Property
+        Public Property FinalGibbsEnergy As Double = 0.0
 
-        Public ReadOnly Property ReactionExtents() As Dictionary(Of String, Double)
-            Get
-                Return Me.m_reactionextents
-            End Get
-        End Property
+        Public Property ReactionExtents As New Dictionary(Of String, Double)
 
-        Public ReadOnly Property ReactionExtentsEstimates() As ArrayList
-            Get
-                Return _rex_iest
-            End Get
-        End Property
+        Public Property PreviousReactionExtents As New Dictionary(Of String, Double)
 
-        Public Property Elements() As String()
-            Get
-                Return _elements
-            End Get
-            Set(ByVal value As String())
-                _elements = value
-            End Set
-        End Property
+        Public Property ComponentIDs As New List(Of String)
 
-        Public ReadOnly Property ComponentIDs() As List(Of String)
-            Get
-                Return _components
-            End Get
-        End Property
+        Public Property UsePreviousReactionExtents As Boolean = True
+        Public Property ReactionExtentsInitializer As Double = 0.2
 
-        Public ReadOnly Property InitialEstimates() As List(Of Double)
-            Get
-                If _initialestimates Is Nothing Then _initialestimates = New List(Of Double)
-                Return _initialestimates
-            End Get
-        End Property
+        Public Property InternalLoopTolerance As Double = 0.00000001
+        Public Property ExternalLoopTolerance As Double = 0.5
 
-        Public Property TotalElements() As Double()
-            Get
-                Return _totalelements
-            End Get
-            Set(ByVal value As Double())
-                _totalelements = value
-            End Set
-        End Property
+        Public Property InternalLoopMaximumIterations As Integer = 250
+        Public Property ExternalLoopMaximumIterations As Integer = 50
 
 #End Region
 
@@ -411,8 +365,7 @@ Namespace Reactors
             Me.ComponentName = name
             Me.ComponentDescription = description
 
-            Me._rex_iest = New ArrayList()
-            Me._components = New List(Of String)
+            Me.ComponentIDs = New List(Of String)
 
         End Sub
 
@@ -439,8 +392,7 @@ Namespace Reactors
             Dim i, j As Integer
 
             If Me.Conversions Is Nothing Then Me.m_conversions = New Dictionary(Of String, Double)
-            If Me.ReactionExtents Is Nothing Then Me.m_reactionextents = New Dictionary(Of String, Double)
-            If Me.ReactionExtentsEstimates Is Nothing Then Me._rex_iest = New ArrayList
+            If Me.ReactionExtents Is Nothing Then Me.ReactionExtents = New Dictionary(Of String, Double)
             If Me.ComponentConversions Is Nothing Then Me.m_componentconversions = New Dictionary(Of String, Double)
 
             Me.Validate()
@@ -500,7 +452,7 @@ Namespace Reactors
             tms.SetFlowsheet(ims.FlowSheet)
 
             Me.ComponentConversions.Clear()
-            Me.ComponentIDs.Clear()
+            Me.ComponentIDs = New List(Of String)
 
             'r: number of reactions
             'c: number of components
@@ -586,9 +538,13 @@ Namespace Reactors
 
             Dim REx(r) As Double
 
-            For i = 0 To r
-                REx(i) = lbound(i) + 0.2 * (ubound(i) - lbound(i))
-            Next
+            If UsePreviousReactionExtents And PreviousReactionExtents.Count > 0 Then
+                REx = PreviousReactionExtents.Values.ToArray()
+            Else
+                For i = 0 To r
+                    REx(i) = lbound(i) + ReactionExtentsInitializer * (ubound(i) - lbound(i))
+                Next
+            End If
 
             Dim g0, g1 As Double
 
@@ -617,7 +573,7 @@ Namespace Reactors
 
                     fx = Me.FunctionValue2N(x)
 
-                    If AbsSum(fx) < 0.00000001 Then Exit Do
+                    If AbsSum(fx) < InternalLoopTolerance Then Exit Do
 
                     dfdx = Me.FunctionGradient2N(x)
 
@@ -650,11 +606,9 @@ Namespace Reactors
 
                     niter += 1
 
-                Loop Until niter > 249
+                Loop Until niter >= InternalLoopMaximumIterations
 
-                If niter > 249 Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
-                End If
+                If niter >= InternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
                 'reevaluate function
 
@@ -664,9 +618,11 @@ Namespace Reactors
 
                 i = 0
                 For Each r As String In Me.Reactions
-                    Me.ReactionExtents(r) = REx(i)
+                    ReactionExtents(r) = REx(i)
                     i += 1
                 Next
+
+                PreviousReactionExtents = New Dictionary(Of String, Double)(ReactionExtents)
 
                 Dim DHr, Hp As Double
 
@@ -739,7 +695,7 @@ Namespace Reactors
                         T = ims.Phases(0).Properties.temperature.GetValueOrDefault
                         Me.DeltaT = T - T0
 
-                        If Math.Abs(T - TLast) < 0.5 Then CalcFinished = True
+                        If Math.Abs(T - TLast) < ExternalLoopTolerance Then CalcFinished = True
 
                         T = 0.7 * TLast + 0.3 * T
 
@@ -782,9 +738,7 @@ Namespace Reactors
 
                 cnt += 1
 
-                If cnt > 50 Then
-                    Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
-                End If
+                If cnt >= ExternalLoopMaximumIterations Then Throw New Exception(FlowSheet.GetTranslatedString("Nmeromximodeiteraesa3"))
 
             Loop Until CalcFinished
 
@@ -1079,6 +1033,55 @@ Namespace Reactors
             End Get
         End Property
 
+        Public Overrides Function LoadData(data As System.Collections.Generic.List(Of System.Xml.Linq.XElement)) As Boolean
+
+            MyBase.LoadData(data)
+
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+
+            Dim elm As XElement = (From xel2 As XElement In data Select xel2 Where xel2.Name = "ReactionExtents").SingleOrDefault
+
+            If Not elm Is Nothing Then
+                ReactionExtents = New Dictionary(Of String, Double)
+                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "ReactionExtents").Elements
+                    ReactionExtents.Add(xel2.@ID, Double.Parse(xel2.@Value, ci))
+                Next
+            End If
+
+            elm = (From xel2 As XElement In data Select xel2 Where xel2.Name = "PreviousReactionExtents").SingleOrDefault
+
+            If Not elm Is Nothing Then
+                PreviousReactionExtents = New Dictionary(Of String, Double)
+                For Each xel2 As XElement In (From xel As XElement In data Select xel Where xel.Name = "PreviousReactionExtents").Elements
+                    PreviousReactionExtents.Add(xel2.@ID, Double.Parse(xel2.@Value, ci))
+                Next
+            End If
+
+            Return True
+
+        End Function
+
+        Public Overrides Function SaveData() As System.Collections.Generic.List(Of System.Xml.Linq.XElement)
+
+            Dim elements As System.Collections.Generic.List(Of System.Xml.Linq.XElement) = MyBase.SaveData()
+            Dim ci As Globalization.CultureInfo = Globalization.CultureInfo.InvariantCulture
+
+            With elements
+                .Add(New XElement("ReactionExtents"))
+                For Each kvp In ReactionExtents
+                    .Item(.Count - 1).Add(New XElement("ReactionExtent", New XAttribute("ID", kvp.Key), New XAttribute("Value", kvp.Value.ToString(ci))))
+                Next
+                .Add(New XElement("PreviousReactionExtents"))
+                For Each kvp In ReactionExtents
+                    .Item(.Count - 1).Add(New XElement("ReactionExtent", New XAttribute("ID", kvp.Key), New XAttribute("Value", kvp.Value.ToString(ci))))
+                Next
+            End With
+
+            Return elements
+
+        End Function
+
+
         Public Overrides Function GetReport(su As IUnitsOfMeasure, ci As Globalization.CultureInfo, numberformat As String) As String
 
             Dim str As New Text.StringBuilder
@@ -1109,14 +1112,14 @@ Namespace Reactors
             str.AppendLine()
             If Not Me.ReactionExtents Is Nothing Then
                 For Each dbl As KeyValuePair(Of String, Double) In Me.ReactionExtents
-                    If dbl.Value > 0.0# Then str.AppendLine("    " & Me.GetFlowsheet.Reactions(dbl.Key).Name & ": " & (dbl.Value * 100).ToString(numberformat, ci))
+                    If dbl.Value > 0.0# Then str.AppendLine("    " & Me.GetFlowsheet.Reactions(dbl.Key).Name & ": " & dbl.Value.ToString(numberformat, ci))
                 Next
             End If
             str.AppendLine()
             str.AppendLine("Compound Conversions")
             str.AppendLine()
             For Each dbl As KeyValuePair(Of String, Double) In Me.ComponentConversions
-                str.AppendLine("    " & dbl.Key & ": " & (dbl.Value * 100).ToString(numberformat, ci) & "%")
+                If dbl.Value > 0 Then str.AppendLine("    " & dbl.Key & ": " & (dbl.Value * 100).ToString(numberformat, ci) & "%")
             Next
             Return str.ToString
 
