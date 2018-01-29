@@ -158,12 +158,31 @@ Public Class EditingForm_ReactorConvEqGibbs
                 ieditor.Dock = DockStyle.Fill
                 TabPageInitialEstimates.Controls.Add(ieditor)
 
+                TabControlParameters.TabPages.Remove(TabPageEqParams)
+
+            ElseIf TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
+
+                TabControlParameters.TabPages.Remove(TabPageCompounds)
+                TabControlParameters.TabPages.Remove(TabPageElements)
+                TabControlParameters.TabPages.Remove(TabPageInitialEstimates)
+                TabControlParameters.TabPages.Remove(TabPageGibbsParams)
+
+                chkInitializeExtents.Checked = DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents
+
+                tbExtentsInitializer.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer
+
+                tbExtLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations
+                tbIntLoopMaxItsEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations
+                tbExtLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance
+                tbIntLoopTolEq.Text = DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance
+
             Else
 
                 TabControlParameters.TabPages.Remove(TabPageCompounds)
                 TabControlParameters.TabPages.Remove(TabPageElements)
                 TabControlParameters.TabPages.Remove(TabPageInitialEstimates)
                 TabControlParameters.TabPages.Remove(TabPageGibbsParams)
+                TabControlParameters.TabPages.Remove(TabPageEqParams)
 
             End If
 
@@ -473,7 +492,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub tb_TextChanged(sender As Object, e As EventArgs) Handles tbOutletTemperature.TextChanged, tbPDrop.TextChanged,
         txtDampingLowerLimit.TextChanged, txtDampingUpperLimit.TextChanged, tbExtLoopMaxIts.TextChanged, tbIntLoopMaxIts.TextChanged,
-        tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged
+        tbExtLoopTol.TextChanged, tbIntLoopTol.TextChanged, tbExtLoopMaxItsEq.TextChanged, tbIntLoopMaxItsEq.TextChanged,
+        tbExtLoopTolEq.TextChanged, tbIntLoopTolEq.TextChanged, tbExtentsInitializer.TextChanged
 
         Dim tbox = DirectCast(sender, TextBox)
 
@@ -487,7 +507,8 @@ Public Class EditingForm_ReactorConvEqGibbs
 
     Private Sub TextBoxKeyDown(sender As Object, e As KeyEventArgs) Handles tbOutletTemperature.KeyDown, tbPDrop.KeyDown,
         txtDampingLowerLimit.KeyDown, txtDampingUpperLimit.KeyDown, tbExtLoopMaxIts.KeyDown, tbIntLoopMaxIts.KeyDown,
-        tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown
+        tbExtLoopTol.KeyDown, tbIntLoopTol.KeyDown, tbExtLoopMaxItsEq.KeyDown, tbIntLoopMaxItsEq.KeyDown,
+        tbExtLoopTolEq.KeyDown, tbIntLoopTolEq.KeyDown, tbExtentsInitializer.KeyDown
 
 
         If e.KeyCode = Keys.Enter And Loaded And DirectCast(sender, TextBox).ForeColor = Drawing.Color.Blue Then
@@ -510,6 +531,11 @@ Public Class EditingForm_ReactorConvEqGibbs
         If sender Is tbIntLoopMaxIts Then DirectCast(SimObject, Reactors.Reactor_Gibbs).MaximumInternalIterations = tbIntLoopMaxIts.Text
         If sender Is tbExtLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).ExternalTolerance = tbExtLoopTol.Text
         If sender Is tbIntLoopTol Then DirectCast(SimObject, Reactors.Reactor_Gibbs).InternalTolerance = tbIntLoopTol.Text
+        If sender Is tbExtLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopMaximumIterations = tbExtLoopMaxItsEq.Text
+        If sender Is tbIntLoopMaxItsEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopMaximumIterations = tbIntLoopMaxItsEq.Text
+        If sender Is tbExtLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ExternalLoopTolerance = tbExtLoopTolEq.Text
+        If sender Is tbIntLoopTolEq Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).InternalLoopTolerance = tbIntLoopTolEq.Text
+        If sender Is tbExtentsInitializer Then DirectCast(SimObject, Reactors.Reactor_Equilibrium).ReactionExtentsInitializer = tbExtentsInitializer.Text
 
         RequestCalc()
 
@@ -599,4 +625,11 @@ Public Class EditingForm_ReactorConvEqGibbs
             DirectCast(SimObject, Reactors.Reactor_Gibbs).EnableDamping = chkEnableDamping.Checked
         End If
     End Sub
+
+    Private Sub chkInitializeExtents_CheckedChanged(sender As Object, e As EventArgs) Handles chkInitializeExtents.CheckedChanged
+        If TypeOf SimObject Is Reactors.Reactor_Equilibrium Then
+            DirectCast(SimObject, Reactors.Reactor_Equilibrium).UsePreviousReactionExtents = chkInitializeExtents.Checked
+        End If
+    End Sub
+
 End Class

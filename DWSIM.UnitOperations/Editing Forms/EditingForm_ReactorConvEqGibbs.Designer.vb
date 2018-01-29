@@ -84,6 +84,19 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtDampingLowerLimit = New System.Windows.Forms.TextBox()
+        Me.TabPageEqParams = New System.Windows.Forms.TabPage()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.tbExtLoopTolEq = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.tbIntLoopTolEq = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.tbIntLoopMaxItsEq = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.tbExtLoopMaxItsEq = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.chkInitializeExtents = New System.Windows.Forms.CheckBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.tbExtentsInitializer = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnCreateAndConnectEnergy = New System.Windows.Forms.Button()
         Me.btnCreateAndConnectOutlet2 = New System.Windows.Forms.Button()
@@ -127,6 +140,7 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageParams.SuspendLayout()
         Me.TabPageCompounds.SuspendLayout()
         Me.TabPageGibbsParams.SuspendLayout()
+        Me.TabPageEqParams.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.tabstrip1.SuspendLayout()
@@ -208,7 +222,7 @@ Partial Class EditingForm_ReactorConvEqGibbs
         '
         resources.ApplyResources(Me.rtbAnnotations, "rtbAnnotations")
         Me.rtbAnnotations.Name = "rtbAnnotations"
-        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" & _
+        Me.rtbAnnotations.Rtf = "{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcharset0 Microsoft S" &
     "ans Serif;}}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "\viewkind4\uc1\pard\f0\fs17\par" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.rtbAnnotations.ShowRedo = False
         Me.rtbAnnotations.ShowUndo = False
@@ -287,6 +301,7 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabControlParameters.Controls.Add(Me.TabPageElements)
         Me.TabControlParameters.Controls.Add(Me.TabPageInitialEstimates)
         Me.TabControlParameters.Controls.Add(Me.TabPageGibbsParams)
+        Me.TabControlParameters.Controls.Add(Me.TabPageEqParams)
         Me.TabControlParameters.Name = "TabControlParameters"
         Me.TabControlParameters.SelectedIndex = 0
         Me.ToolTip1.SetToolTip(Me.TabControlParameters, resources.GetString("TabControlParameters.ToolTip"))
@@ -527,6 +542,98 @@ Partial Class EditingForm_ReactorConvEqGibbs
         resources.ApplyResources(Me.txtDampingLowerLimit, "txtDampingLowerLimit")
         Me.txtDampingLowerLimit.Name = "txtDampingLowerLimit"
         Me.ToolTip1.SetToolTip(Me.txtDampingLowerLimit, resources.GetString("txtDampingLowerLimit.ToolTip"))
+        '
+        'TabPageEqParams
+        '
+        resources.ApplyResources(Me.TabPageEqParams, "TabPageEqParams")
+        Me.TabPageEqParams.Controls.Add(Me.Label26)
+        Me.TabPageEqParams.Controls.Add(Me.tbExtLoopTolEq)
+        Me.TabPageEqParams.Controls.Add(Me.Label21)
+        Me.TabPageEqParams.Controls.Add(Me.tbIntLoopTolEq)
+        Me.TabPageEqParams.Controls.Add(Me.Label22)
+        Me.TabPageEqParams.Controls.Add(Me.tbIntLoopMaxItsEq)
+        Me.TabPageEqParams.Controls.Add(Me.Label23)
+        Me.TabPageEqParams.Controls.Add(Me.tbExtLoopMaxItsEq)
+        Me.TabPageEqParams.Controls.Add(Me.Label24)
+        Me.TabPageEqParams.Controls.Add(Me.chkInitializeExtents)
+        Me.TabPageEqParams.Controls.Add(Me.Label25)
+        Me.TabPageEqParams.Controls.Add(Me.tbExtentsInitializer)
+        Me.TabPageEqParams.Name = "TabPageEqParams"
+        Me.ToolTip1.SetToolTip(Me.TabPageEqParams, resources.GetString("TabPageEqParams.ToolTip"))
+        Me.TabPageEqParams.UseVisualStyleBackColor = True
+        '
+        'Label26
+        '
+        resources.ApplyResources(Me.Label26, "Label26")
+        Me.Label26.Name = "Label26"
+        Me.ToolTip1.SetToolTip(Me.Label26, resources.GetString("Label26.ToolTip"))
+        '
+        'tbExtLoopTolEq
+        '
+        resources.ApplyResources(Me.tbExtLoopTolEq, "tbExtLoopTolEq")
+        Me.tbExtLoopTolEq.Name = "tbExtLoopTolEq"
+        Me.ToolTip1.SetToolTip(Me.tbExtLoopTolEq, resources.GetString("tbExtLoopTolEq.ToolTip"))
+        '
+        'Label21
+        '
+        resources.ApplyResources(Me.Label21, "Label21")
+        Me.Label21.Name = "Label21"
+        Me.ToolTip1.SetToolTip(Me.Label21, resources.GetString("Label21.ToolTip"))
+        '
+        'tbIntLoopTolEq
+        '
+        resources.ApplyResources(Me.tbIntLoopTolEq, "tbIntLoopTolEq")
+        Me.tbIntLoopTolEq.Name = "tbIntLoopTolEq"
+        Me.ToolTip1.SetToolTip(Me.tbIntLoopTolEq, resources.GetString("tbIntLoopTolEq.ToolTip"))
+        '
+        'Label22
+        '
+        resources.ApplyResources(Me.Label22, "Label22")
+        Me.Label22.Name = "Label22"
+        Me.ToolTip1.SetToolTip(Me.Label22, resources.GetString("Label22.ToolTip"))
+        '
+        'tbIntLoopMaxItsEq
+        '
+        resources.ApplyResources(Me.tbIntLoopMaxItsEq, "tbIntLoopMaxItsEq")
+        Me.tbIntLoopMaxItsEq.Name = "tbIntLoopMaxItsEq"
+        Me.ToolTip1.SetToolTip(Me.tbIntLoopMaxItsEq, resources.GetString("tbIntLoopMaxItsEq.ToolTip"))
+        '
+        'Label23
+        '
+        resources.ApplyResources(Me.Label23, "Label23")
+        Me.Label23.Name = "Label23"
+        Me.ToolTip1.SetToolTip(Me.Label23, resources.GetString("Label23.ToolTip"))
+        '
+        'tbExtLoopMaxItsEq
+        '
+        resources.ApplyResources(Me.tbExtLoopMaxItsEq, "tbExtLoopMaxItsEq")
+        Me.tbExtLoopMaxItsEq.Name = "tbExtLoopMaxItsEq"
+        Me.ToolTip1.SetToolTip(Me.tbExtLoopMaxItsEq, resources.GetString("tbExtLoopMaxItsEq.ToolTip"))
+        '
+        'Label24
+        '
+        resources.ApplyResources(Me.Label24, "Label24")
+        Me.Label24.Name = "Label24"
+        Me.ToolTip1.SetToolTip(Me.Label24, resources.GetString("Label24.ToolTip"))
+        '
+        'chkInitializeExtents
+        '
+        resources.ApplyResources(Me.chkInitializeExtents, "chkInitializeExtents")
+        Me.chkInitializeExtents.Name = "chkInitializeExtents"
+        Me.ToolTip1.SetToolTip(Me.chkInitializeExtents, resources.GetString("chkInitializeExtents.ToolTip"))
+        Me.chkInitializeExtents.UseVisualStyleBackColor = True
+        '
+        'Label25
+        '
+        resources.ApplyResources(Me.Label25, "Label25")
+        Me.Label25.Name = "Label25"
+        Me.ToolTip1.SetToolTip(Me.Label25, resources.GetString("Label25.ToolTip"))
+        '
+        'tbExtentsInitializer
+        '
+        resources.ApplyResources(Me.tbExtentsInitializer, "tbExtentsInitializer")
+        Me.tbExtentsInitializer.Name = "tbExtentsInitializer"
+        Me.ToolTip1.SetToolTip(Me.tbExtentsInitializer, resources.GetString("tbExtentsInitializer.ToolTip"))
         '
         'GroupBox1
         '
@@ -853,6 +960,8 @@ Partial Class EditingForm_ReactorConvEqGibbs
         Me.TabPageCompounds.ResumeLayout(False)
         Me.TabPageGibbsParams.ResumeLayout(False)
         Me.TabPageGibbsParams.PerformLayout()
+        Me.TabPageEqParams.ResumeLayout(False)
+        Me.TabPageEqParams.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
@@ -951,4 +1060,17 @@ Partial Class EditingForm_ReactorConvEqGibbs
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents tbIntLoopMaxIts As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents TabPageEqParams As TabPage
+    Friend WithEvents tbExtLoopMaxItsEq As TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents tbIntLoopMaxItsEq As TextBox
+    Friend WithEvents Label22 As Label
+    Friend WithEvents tbExtLoopTolEq As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents tbIntLoopTolEq As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents chkInitializeExtents As CheckBox
+    Friend WithEvents Label25 As Label
+    Friend WithEvents tbExtentsInitializer As TextBox
+    Friend WithEvents Label26 As Label
 End Class
