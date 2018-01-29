@@ -1578,6 +1578,10 @@ Final3:     T = bbb
 
         End Function
 
+        Public Overrides Function GetDefaultProperties() As String()
+            Return New String() {"PROP_PS_0", "PROP_PS_1", "PROP_PS_2"}
+        End Function
+
         Public Overloads Overrides Function GetProperties(ByVal proptype As Interfaces.Enums.PropertyType) As String()
             Dim i As Integer = 0
             Dim proplist As New ArrayList
