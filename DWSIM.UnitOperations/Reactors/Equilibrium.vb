@@ -76,6 +76,8 @@ Namespace Reactors
 
         Private Function FunctionValue2N(ByVal x() As Double) As Double()
 
+            If Double.IsNaN(x.Sum) Then Throw New Exception("Convergence Error")
+
             Dim i, j As Integer
 
             Dim pp As PropertyPackages.PropertyPackage = Me.PropertyPackage
