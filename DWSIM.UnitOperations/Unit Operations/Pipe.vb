@@ -1487,7 +1487,7 @@ Final3:     T = bbb
 
             If Not val0 Is Nothing Then
                 Return val0
-            Else
+            ElseIf prop.Contains("_") Then
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim cv As New SystemsOfUnits.Converter
                 Dim value As Double = 0
@@ -1512,6 +1512,63 @@ Final3:     T = bbb
                         value = SystemsOfUnits.Converter.ConvertFromSI(su.deltaT, Me.ThermalProfile.AmbientTemperatureGradient) / SystemsOfUnits.Converter.ConvertFromSI(su.distance, 1.0#)
                 End Select
                 Return value
+            Else
+                If prop.Contains("HydraulicSegment") Then
+                    Dim skey As Integer = prop.Split(",")(1)
+                    Dim sprop As String = prop.Split(",")(2)
+                    Select Case sprop
+                        Case "Length"
+                            Return Profile.Sections(skey).Comprimento
+                        Case "Elevation"
+                            Return Profile.Sections(skey).Elevacao
+                        Case "InternalDiameter"
+                            Return Profile.Sections(skey).DI
+                        Case "ExternalDiameter"
+                            Return Profile.Sections(skey).DE
+                        Case "Sections"
+                            Return Profile.Sections(skey).Incrementos
+                        Case Else
+                            Return 0.0
+                    End Select
+                ElseIf prop.Contains("ThermalProfile") Then
+                    Dim tprop As String = prop.Split(",")(1)
+                    Select Case tprop
+                        Case "CalculationType"
+                            Return ThermalProfile.TipoPerfil
+                        Case "OverallHTC"
+                            Return ThermalProfile.CGTC_Definido
+                        Case "ExternalTemperatureDefinedHTC"
+                            Return ThermalProfile.Temp_amb_definir
+                        Case "ExternalTemperatureEstimatedHTC"
+                            Return ThermalProfile.Temp_amb_estimar
+                        Case "ExternalTemperatureGradientDefinedHTC"
+                            Return ThermalProfile.AmbientTemperatureGradient
+                        Case "ExternalTemperatureGradientEstimatedHTC"
+                            Return ThermalProfile.AmbientTemperatureGradient_EstimateHTC
+                        Case "HeatExchanged"
+                            Return ThermalProfile.Calor_trocado
+                        Case "IncludeWallHTC"
+                            Return ThermalProfile.Incluir_paredes
+                        Case "IncludeInternalHTC"
+                            Return ThermalProfile.Incluir_cti
+                        Case "IncludeInsulationHTC"
+                            Return ThermalProfile.Incluir_isolamento
+                        Case "InsulationThickness"
+                            Return ThermalProfile.Espessura
+                        Case "InsulationThermalConductivity"
+                            Return ThermalProfile.Condtermica
+                        Case "IncludeExternalHTC"
+                            Return ThermalProfile.Incluir_cte
+                        Case "ExternalEnvironmentType"
+                            Return ThermalProfile.Meio
+                        Case "ExternalEnvironmentVelocityOrDeepness"
+                            Return ThermalProfile.Velocidade
+                        Case Else
+                            Return 0.0
+                    End Select
+                Else
+                    Return 0.0#
+                End If
             End If
 
         End Function
@@ -1524,6 +1581,28 @@ Final3:     T = bbb
             For i = 0 To 7
                 proplist.Add("PROP_PS_" + CStr(i))
             Next
+            For Each ps In Profile.Sections
+                proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Length")
+                proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Elevation")
+                proplist.Add("HydraulicSegment," + ps.Key.ToString + ",InternalDiameter")
+                proplist.Add("HydraulicSegment," + ps.Key.ToString + ",ExternalDiameter")
+                proplist.Add("HydraulicSegment," + ps.Key.ToString + ",Sections")
+            Next
+            proplist.Add("ThermalProfile,CalculationType")
+            proplist.Add("ThermalProfile,OverallHTC")
+            proplist.Add("ThermalProfile,ExternalTemperatureDefinedHTC")
+            proplist.Add("ThermalProfile,ExternalTemperatureGradientDefinedHTC")
+            proplist.Add("ThermalProfile,ExternalTemperatureEstimatedHTC")
+            proplist.Add("ThermalProfile,ExternalTemperatureGradientEstimatedHTC")
+            proplist.Add("ThermalProfile,HeatExchanged")
+            proplist.Add("ThermalProfile,IncludeWallHTC")
+            proplist.Add("ThermalProfile,IncludeInternalHTC")
+            proplist.Add("ThermalProfile,IncludeInsulationHTC")
+            proplist.Add("ThermalProfile,InsulationThickness")
+            proplist.Add("ThermalProfile,InsulationThermalConductivity")
+            proplist.Add("ThermalProfile,IncludeExternalHTC")
+            proplist.Add("ThermalProfile,ExternalEnvironmentType")
+            proplist.Add("ThermalProfile,ExternalEnvironmentVelocityOrDeepness")
             Return proplist.ToArray(GetType(System.String))
             proplist = Nothing
         End Function
@@ -1532,25 +1611,78 @@ Final3:     T = bbb
 
             If MyBase.SetPropertyValue(prop, propval, su) Then Return True
 
-            If su Is Nothing Then su = New SystemsOfUnits.SI
-            Dim cv As New SystemsOfUnits.Converter
-            Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
+            If prop.Contains("_") Then
+                If su Is Nothing Then su = New SystemsOfUnits.SI
+                Dim cv As New SystemsOfUnits.Converter
+                Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
 
-            Select Case propidx
-                Case 2
-                    Me.ThermalProfile.Calor_trocado = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
-                Case 3
-                    Me.OutletPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
-                Case 4
-                    Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
-                Case 5
-                    Me.ThermalProfile.CGTC_Definido = SystemsOfUnits.Converter.ConvertToSI(su.heat_transf_coeff, propval)
-                Case 6
-                    Me.ThermalProfile.Temp_amb_definir = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
-                Case 7
-                    Me.ThermalProfile.AmbientTemperatureGradient = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
-                    Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
-            End Select
+                Select Case propidx
+                    Case 2
+                        Me.ThermalProfile.Calor_trocado = SystemsOfUnits.Converter.ConvertToSI(su.heatflow, propval)
+                    Case 3
+                        Me.OutletPressure = SystemsOfUnits.Converter.ConvertToSI(su.pressure, propval)
+                    Case 4
+                        Me.OutletTemperature = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                    Case 5
+                        Me.ThermalProfile.CGTC_Definido = SystemsOfUnits.Converter.ConvertToSI(su.heat_transf_coeff, propval)
+                    Case 6
+                        Me.ThermalProfile.Temp_amb_definir = SystemsOfUnits.Converter.ConvertToSI(su.temperature, propval)
+                    Case 7
+                        Me.ThermalProfile.AmbientTemperatureGradient = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
+                        Me.ThermalProfile.AmbientTemperatureGradient_EstimateHTC = SystemsOfUnits.Converter.ConvertToSI(su.deltaT, propval) / SystemsOfUnits.Converter.ConvertToSI(su.distance, 1.0#)
+                End Select
+            Else
+                If prop.Contains("HydraulicSegment") Then
+                    Dim skey As Integer = prop.Split(",")(1)
+                    Dim sprop As String = prop.Split(",")(2)
+                    Select Case sprop
+                        Case "Length"
+                            Profile.Sections(skey).Comprimento = propval
+                        Case "Elevation"
+                            Profile.Sections(skey).Elevacao = propval
+                        Case "InternalDiameter"
+                            Profile.Sections(skey).DI = propval
+                        Case "ExternalDiameter"
+                            Profile.Sections(skey).DE = propval
+                        Case "Sections"
+                            Profile.Sections(skey).Incrementos = propval
+                    End Select
+                ElseIf prop.Contains("ThermalProfile") Then
+                    Dim tprop As String = prop.Split(",")(1)
+                    Select Case tprop
+                        Case "CalculationType"
+                            ThermalProfile.TipoPerfil = propval
+                        Case "OverallHTC"
+                            ThermalProfile.CGTC_Definido = propval
+                        Case "ExternalTemperatureDefinedHTC"
+                            ThermalProfile.Temp_amb_definir = propval
+                        Case "ExternalTemperatureEstimatedHTC"
+                            ThermalProfile.Temp_amb_estimar = propval
+                        Case "ExternalTemperatureGradientDefinedHTC"
+                            ThermalProfile.AmbientTemperatureGradient = propval
+                        Case "ExternalTemperatureGradientEstimatedHTC"
+                            ThermalProfile.AmbientTemperatureGradient_EstimateHTC = propval
+                        Case "HeatExchanged"
+                            ThermalProfile.Calor_trocado = propval
+                        Case "IncludeWallHTC"
+                            ThermalProfile.Incluir_paredes = propval
+                        Case "IncludeInternalHTC"
+                            ThermalProfile.Incluir_cti = propval
+                        Case "IncludeInsulationHTC"
+                            ThermalProfile.Incluir_isolamento = propval
+                        Case "InsulationThickness"
+                            ThermalProfile.Espessura = propval
+                        Case "InsulationThermalConductivity"
+                            ThermalProfile.Condtermica = propval
+                        Case "IncludeExternalHTC"
+                            ThermalProfile.Incluir_cte = propval
+                        Case "ExternalEnvironmentType"
+                            ThermalProfile.Meio = propval
+                        Case "ExternalEnvironmentVelocityOrDeepness"
+                            ThermalProfile.Velocidade = propval
+                    End Select
+                End If
+            End If
 
             Return 1
 
@@ -1561,7 +1693,7 @@ Final3:     T = bbb
 
             If u0 <> "NF" Then
                 Return u0
-            Else
+            ElseIf prop.Contains("_") Then
                 If su Is Nothing Then su = New SystemsOfUnits.SI
                 Dim value As String = ""
                 Dim propidx As Integer = Convert.ToInt32(prop.Split("_")(2))
@@ -1584,8 +1716,9 @@ Final3:     T = bbb
                     Case 7
                         value = su.deltaT & "/" & su.distance
                 End Select
-
                 Return value
+            Else
+                Return ""
             End If
         End Function
 

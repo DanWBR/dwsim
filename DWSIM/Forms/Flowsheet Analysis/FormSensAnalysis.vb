@@ -195,6 +195,7 @@ Public Class FormSensAnalysis
                     For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                         If Me.cbObjIndVar1.SelectedItem.ToString = obj.GraphicObject.Tag Then
                             Me.tbUnitIndVar1.Text = obj.GetPropertyUnit(prop, su)
+                            Me.tbCurrValIndVar1.Text = obj.GetPropertyValue(prop, su)
                             If EnableAutoSave Then SaveForm(selectedsacase)
                             Exit Sub
                         End If
@@ -214,6 +215,7 @@ Public Class FormSensAnalysis
                     For Each obj As SharedClasses.UnitOperations.BaseClass In form.Collections.FlowsheetObjectCollection.Values
                         If Me.cbObjIndVar2.SelectedItem.ToString = obj.GraphicObject.Tag Then
                             Me.tbUnitIndVar2.Text = obj.GetPropertyUnit(prop, su)
+                            Me.tbCurrValIndVar2.Text = obj.GetPropertyValue(prop, su)
                             If EnableAutoSave Then SaveForm(selectedsacase)
                             Exit Sub
                         End If
