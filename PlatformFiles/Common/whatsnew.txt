@@ -1,16 +1,7 @@
-Version 5.1 Update 8
+Version 5.1 Update 9
 
-- [NEW] Added more information about errors listed in the log window (Classic UI)
-- [FIX] Rewritten Conversion Reactor model
-- [FIX] Fixed CSTR connections (New UI)
-- [FIX] CoolProp fixes
-
-Version 5.1 Update 7
-
-- [NEW] Added support for Raspberry Pi 2/3 (Linux 32-bit ARM Platform)
-- [NEW] Added a Natural Gas Water Saturator sample
-- [CHG] Heat Capacity Difference workaround for SVLE Flash
-- [FIX] Ordered list of cape-open objects in selector
-- [FIX] Fixed CAPE-OPEN UO validation/calculation
-- [FIX] Fixed a bug with valve sizing
-- [FIX] Fixed missing temperature fields on Kinetic Reaction editor (New UI)
+- [NEW] Exposed Pipe Segment hydraulic and thermal properties to analysis tools
+- [NEW] Exposed Equilibrium Reactor convergence parameters
+- [CHG] Classic UI updates
+- [FIX] Fixed bugs with Compound Creator Wizard running on the Classic UI
+- [FIX] Fixed a bug with the Gibbs Reactor
