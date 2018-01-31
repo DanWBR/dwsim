@@ -631,7 +631,11 @@ Public Class FormFlowsheet
                                                                  strtipo = DWSIM.App.GetLocalString("Mensagem")
                                                          End Select
 
-                                                         tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto
+                                                         If texto.Length < 90 Then
+                                                             tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto
+                                                         Else
+                                                             tsbLogMessage.Text = "[" + Date.Now.ToString + "] " + texto.Substring(0, 90) & "..."
+                                                         End If
                                                          tsbLogMessage.Image = img
 
                                                          Dim r As Integer = frlog.Grid1.Rows.Add(New Object() {img, frlog.Grid1.Rows.Count, Date.Now, strtipo, texto})
@@ -993,7 +997,7 @@ Public Class FormFlowsheet
         End If
     End Sub
 
-    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click
+    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click, tssbSolverConfig.Click
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
@@ -1047,7 +1051,7 @@ Public Class FormFlowsheet
         End Try
     End Sub
 
-    Private Sub ToolStripComboBoxUnitSystem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripComboBoxUnitSystem.SelectedIndexChanged
+    Private Sub ToolStripComboBoxUnitSystem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripComboBoxUnitSystem.Click
 
         Try
 
@@ -3183,6 +3187,15 @@ Public Class FormFlowsheet
         'start dispatcher for WPF Interop
         If Not GlobalSettings.Settings.IsRunningOnMono Then System.Windows.Threading.Dispatcher.Run()
 
+    End Sub
+
+    Private Sub ToolStripSplitButton1_ButtonClick(sender As Object, e As EventArgs) Handles tssbSimulationSettings.ButtonClick
+        If DWSIM.App.IsRunningOnMono Then
+            Me.FrmStSim1 = New FormSimulSettings()
+            Me.FrmStSim1.Show(Me.dckPanel)
+        Else
+            Me.FrmStSim1.Show(Me.dckPanel)
+        End If
     End Sub
 
     Private Sub ConsoleOutputTSMI_Click(sender As Object, e As EventArgs) Handles ConsoleOutputTSMI.Click

@@ -462,41 +462,50 @@ Public Class SpreadsheetForm
 
     Public Sub CopyFromDT()
 
-        Dim i, j As Integer
+        Dim i, j, n1, m1, n2, m2, maxrow, maxcol As Integer
 
-        i = 0
-        For Each r As DataGridViewRow In Me.DataGridView1.Rows
-            j = 0
-            For Each ce As DataGridViewCell In r.Cells
-                Try
-                    ce.Value = dt1(i, j)
+        n1 = dt1.GetUpperBound(0) - 1
+        m1 = dt1.GetUpperBound(1) - 1
+
+        n2 = dt2.GetUpperBound(0) - 1
+        m2 = dt2.GetUpperBound(1) - 1
+
+        maxrow = Me.DataGridView1.Rows.Count - 1
+        maxcol = Me.DataGridView1.Columns.Count - 1
+
+        For i = 0 To n1
+            For j = 0 To m1
+                If i <= maxrow And j <= maxcol Then
+                    If dt1(i, j) IsNot Nothing Then Me.DataGridView1.Rows.Item(i).Cells(j).Value = dt1(i, j)
+                End If
+                If i <= n2 And j <= m2 And i <= maxrow And j <= maxcol Then
                     If dt2(i, j) Is Nothing Then
-                        ce.Tag = New Spreadsheet.SpreadsheetCellParameters
+                        Me.DataGridView1.Rows.Item(i).Cells(j).Tag = New Spreadsheet.SpreadsheetCellParameters
                     ElseIf TypeOf dt2(i, j) Is Spreadsheet.SpreadsheetCellParameters Then
-                        ce.Tag = dt2(i, j)
-                        ce.ToolTipText = dt2(i, j).ToolTipText
+                        Me.DataGridView1.Rows.Item(i).Cells(j).Tag = dt2(i, j)
+                        Me.DataGridView1.Rows.Item(i).Cells(j).ToolTipText = dt2(i, j).ToolTipText
                     ElseIf TypeOf dt2(i, j) Is Object Then
                         Dim cellparam As New Spreadsheet.SpreadsheetCellParameters
-                        With cellparam
-                            .Expression = dt2(i, j)
-                            If CStr(dt2(i, j)).StartsWith(":") Then
-                                .CellType = Spreadsheet.VarType.Read
-                                Dim str As String()
-                                str = CStr(dt2(i, j)).Split(New Char() {","})
-                                .ObjectID = str(0).Substring(1)
-                                .PropID = str(1)
-                            Else
-                                .CellType = Spreadsheet.VarType.Expression
-                            End If
-                        End With
-                        ce.Tag = cellparam
-                        ce.ToolTipText = cellparam.ToolTipText
+                        Try
+                            With cellparam
+                                .Expression = dt2(i, j)
+                                If CStr(dt2(i, j)).StartsWith(":") Then
+                                    .CellType = Spreadsheet.VarType.Read
+                                    Dim str As String()
+                                    str = CStr(dt2(i, j)).Split(New Char() {","})
+                                    .ObjectID = str(0).Substring(1)
+                                    .PropID = str(1)
+                                Else
+                                    .CellType = Spreadsheet.VarType.Expression
+                                End If
+                            End With
+                        Catch ex As Exception
+                        End Try
+                        Me.DataGridView1.Rows.Item(i).Cells(j).Tag = cellparam
+                        Me.DataGridView1.Rows.Item(i).Cells(j).ToolTipText = cellparam.ToolTipText
                     End If
-                Catch ex As Exception
-                End Try
-                j = j + 1
+                End If
             Next
-            i = i + 1
         Next
 
     End Sub

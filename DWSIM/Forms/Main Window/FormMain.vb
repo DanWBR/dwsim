@@ -1586,7 +1586,6 @@ Public Class FormMain
             excs.Add(New Exception("Error Loading Spreadsheet Information", ex))
         End Try
 
-
         For Each obj In form.FormSurface.FlowsheetDesignSurface.DrawingObjects
             If obj.ObjectType = ObjectType.GO_SpreadsheetTable Then
                 DirectCast(obj, SpreadsheetTableGraphic).SetSpreadsheet(form.FormSpreadsheet)
