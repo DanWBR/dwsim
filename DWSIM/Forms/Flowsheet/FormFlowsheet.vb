@@ -997,7 +997,7 @@ Public Class FormFlowsheet
         End If
     End Sub
 
-    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click, tssbSolverConfig.Click
+    Public Sub tsbCalc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tsbCalc.Click, tssbSolverConfig.ButtonClick
         GlobalSettings.Settings.TaskCancellationTokenSource = Nothing
         If My.Computer.Keyboard.ShiftKeyDown Then GlobalSettings.Settings.CalculatorBusy = False
         FlowsheetSolver.FlowsheetSolver.SolveFlowsheet(Me, My.Settings.SolverMode)
