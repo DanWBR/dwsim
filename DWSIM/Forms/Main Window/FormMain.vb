@@ -815,9 +815,12 @@ Public Class FormMain
         cpdb.Load()
         Try
             cpa = cpdb.Transfer()
+            Dim addedcomps = AvailableComponents.Keys.Select(Function(x) x.ToLower).ToList()
             For Each cp As BaseClasses.ConstantProperties In cpa
-                If Not Me.AvailableComponents.ContainsKey(cp.Name) Then Me.AvailableComponents.Add(cp.Name, cp)
-                Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
+                If Not addedcomps.Contains(cp.Name.ToLower) Then
+                    Me.AvailableComponents.Add(cp.Name, cp)
+                    Me.AvailableComponents(cp.Name).IsCOOLPROPSupported = True
+                End If
             Next
         Catch ex As Exception
         End Try
