@@ -542,38 +542,46 @@ Namespace Reactors
 
                     ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
 
-                        Dim numval, denmval As Double
+                        If T < rxn.Tmin Or T > rxn.Tmax Then
 
-                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
-                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+                            Rx = 0.0
 
-                        rxn.ExpContext.Variables.Clear()
-                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
-                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+                        Else
 
-                        Dim ir As Integer = 1
-                        Dim ip As Integer = 1
+                            Dim numval, denmval As Double
 
-                        For Each sb As ReactionStoichBase In rxn.Components.Values
-                            If sb.StoichCoeff < 0 Then
-                                rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                                ir += 1
-                            ElseIf sb.StoichCoeff > 0 Then
-                                rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
-                                ip += 1
-                            End If
-                        Next
+                            rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                            rxn.ExpContext.Imports.AddType(GetType(System.Math))
 
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
+                            rxn.ExpContext.Variables.Clear()
+                            rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                            rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
 
-                        numval = rxn.Expr.Evaluate
+                            Dim ir As Integer = 1
+                            Dim ip As Integer = 1
 
-                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+                            For Each sb As ReactionStoichBase In rxn.Components.Values
+                                If sb.StoichCoeff < 0 Then
+                                    rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                    ir += 1
+                                ElseIf sb.StoichCoeff > 0 Then
+                                    rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                    ip += 1
+                                End If
+                            Next
 
-                        denmval = rxn.Expr.Evaluate
+                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
 
-                        'calculate reaction rate & convert to internal SI units
-                        Rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
+                            numval = rxn.Expr.Evaluate
+
+                            rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+
+                            denmval = rxn.Expr.Evaluate
+
+                            'calculate reaction rate & convert to internal SI units
+                            Rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
+
+                        End If
 
                         Rxi(rxn.ID) = Rx
                         RxiT.Add(rxn.ID, Rxi(rxn.ID) / scBC)

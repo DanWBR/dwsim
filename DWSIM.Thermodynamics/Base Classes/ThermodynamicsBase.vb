@@ -367,9 +367,9 @@ Namespace BaseClasses
 
         Public Property ReactionGibbsEnergy As Double Implements Interfaces.IReaction.ReactionGibbsEnergy
 
-        Public Property Tmax As Double Implements Interfaces.IReaction.Tmax
+        Public Property Tmax As Double = 2000.0 Implements Interfaces.IReaction.Tmax
 
-        Public Property Tmin As Double Implements Interfaces.IReaction.Tmin
+        Public Property Tmin As Double = 0.0 Implements Interfaces.IReaction.Tmin
 
         Public Property VelUnit As String = "" Implements Interfaces.IReaction.VelUnit
 

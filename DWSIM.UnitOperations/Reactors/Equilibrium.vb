@@ -620,8 +620,19 @@ Namespace Reactors
 
                 i = 0
                 For Each r As String In Me.Reactions
-                    ReactionExtents(r) = REx(i)
+
+                    'process reaction i
+
+                    rx = FlowSheet.Reactions(r)
+
+                    If T >= rx.Tmin And T <= rx.Tmax Then
+                        ReactionExtents(r) = REx(i)
+                    Else
+                        ReactionExtents(r) = 0.0
+                    End If
+
                     i += 1
+
                 Next
 
                 PreviousReactionExtents = New Dictionary(Of String, Double)(ReactionExtents)
