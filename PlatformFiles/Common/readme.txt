@@ -1,6 +1,6 @@
 ﻿==================================================
 DWSIM - Open Source Process Simulator
-Version 5.1 Update 9
+Version 5.1 Update 10
 Copyright (c) 2017-2018 Daniel Medeiros
 Copyright (c) 2008-2016 Daniel Medeiros, Gregor Reichert, Gustavo Leon
 ==================================================
@@ -25,28 +25,48 @@ DWSIM is licensed under the GNU General Public License (GPL) Version 3.
 SYSTEM REQUIREMENTS
 ==================================================
 
-OS:             Windows: 64-bit x86 XP/Vista/7/8/10
-				Linux: 64-bit x86 Ubuntu 12.04 or newer / 32-bit armhf Raspbian/Ubuntu MATE
-				macOS: 10.7 (OS X Lion) or newer
+OS:             
 
-Software:		Microsoft .NET Framework 4.5 or newer (Windows) 
-				Mono Framework 5.0.0 or newer (Linux/macOS)
+Windows: 64-bit x86 XP/Vista/7/8/10
+Linux: 64-bit x86 Ubuntu 12.04 or newer / 32-bit armhf Raspbian/Ubuntu MATE
+macOS: 10.7 (OS X Lion) or newer
 
-CPU:			1.0 GHz dual-core processor (minimum)
+Software:
 
-Memory:         1 GB RAM
+Microsoft .NET Framework 4.5 or newer (Windows) 
+Mono Framework 5.0.0 or newer (Linux/macOS)
 
-Graphics Card:	128 MB with OpenGL hardware acceleration
+CPU:			
 
-Display:        a 1280x800 display resolution is recommended as a minimum.
+1.0 GHz dual-core processor (minimum)
 
-Disk space:		300 MB for program files
+Memory:         
+
+1 GB RAM
+
+Graphics Card:	
+
+128 MB with OpenGL hardware acceleration
+
+Display:        
+
+1280x800 display resolution is recommended as a minimum
+
+Disk space:		
+
+300 MB for program files
 
 ==================================================
 VERSION HISTORY / CHANGELOG
 ==================================================
 
 The full changelog, including code changes and their authors can be viewed at https://github.com/DanWBR/dwsim5/commits/master
+
+Version 5.1 Update 10
+
+- [FIX] Fixed HetCat reaction support on CSTR
+- [FIX] Fixed reaction temperature limits not working on Equilibrium and CSTR reactors
+- [FIX] Fixed loading of duplicate compounds (Classic UI)
 
 Version 5.1 Update 9
 

@@ -1,3 +1,9 @@
+Version 5.1 Update 10
+
+- [FIX] Fixed HetCat reaction support on CSTR
+- [FIX] Fixed reaction temperature limits not working on Equilibrium and CSTR reactors
+- [FIX] Fixed loading of duplicate compounds (Classic UI)
+
 Version 5.1 Update 9
 
 - [NEW] Exposed Pipe Segment hydraulic and thermal properties to analysis tools
