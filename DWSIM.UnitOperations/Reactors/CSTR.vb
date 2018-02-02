@@ -427,6 +427,7 @@ Namespace Reactors
             'Time step: Moles in reactor(t+dT)= Moles in reactor (t) + Feed - consumption (composition,temperature) - Output(composition) 
 
             Do
+
                 'initialise component reaction rates
                 Ri.Clear()
                 For Each comp In ims.Phases(0).Compounds.Values
@@ -463,6 +464,7 @@ Namespace Reactors
                 'Run through all reactions of Reaction Set to calculate component consumption/production rates at actual
                 'composition and temperature.
                 For Each rxnsb As ReactionSetBase In FlowSheet.ReactionSets(Me.ReactionSetID).Reactions.Values
+
                     If rxnsb.IsActive = False Then Continue For
                     rxn = FlowSheet.Reactions(rxnsb.ReactionID)
                     If rxn.ReactionType <> ReactionType.Kinetic And rxn.ReactionType <> ReactionType.Heterogeneous_Catalytic Then Continue For
@@ -470,46 +472,48 @@ Namespace Reactors
                     BC = rxn.BaseReactant
                     scBC = Math.Abs(rxn.Components(BC).StoichCoeff)
 
+                    convfactors = Me.GetConvFactors(rxn, ims)
+
+                    'Read component concentrations in phase of reaction 
+
+                    C.Clear()
+                    For Each comp As Compound In ims.Phases(RP).Compounds.Values
+                        C.Add(comp.Name, comp.Molarity) 'C: mol/m³
+                    Next
+
+                    'Qr = reaction volume where actual reaction takes place
+                    Select Case rxn.ReactionPhase
+                        Case PhaseName.Liquid
+                            RP = 1 'reacting phase ID = overall Liquid
+                            If ReactorMode = EReactorMode.SingleOutlet Then
+                                Qr = QL / Q * Me.Volume
+                            Else
+                                Qr = QL / (QL + QS) * Me.Volume
+                            End If
+
+                        Case PhaseName.Vapor
+                            RP = 2
+                            If ReactorMode = EReactorMode.SingleOutlet Then
+                                Qr = QV / Q * Me.Volume
+                            Else
+                                Qr = Me.Headspace
+                            End If
+
+                        Case PhaseName.Mixture
+                            RP = 0
+                            Qr = Me.Volume + Me.Headspace
+
+                        Case PhaseName.Solid
+                            RP = 7
+                            If ReactorMode = EReactorMode.SingleOutlet Then
+                                Qr = QS / Q * Me.Volume
+                            Else
+                                Qr = QS / (QL + QS) * Me.Volume
+                            End If
+
+                    End Select
+
                     If rxn.ReactionType = ReactionType.Kinetic Then
-                        convfactors = Me.GetConvFactors(rxn, ims)
-
-                        'Qr = reaction volume where actual reaction takes place
-                        Select Case rxn.ReactionPhase
-                            Case PhaseName.Liquid
-                                RP = 1 'reacting phase ID = overall Liquid
-                                If ReactorMode = EReactorMode.SingleOutlet Then
-                                    Qr = QL / Q * Me.Volume
-                                Else
-                                    Qr = QL / (QL + QS) * Me.Volume
-                                End If
-
-                            Case PhaseName.Vapor
-                                RP = 2
-                                If ReactorMode = EReactorMode.SingleOutlet Then
-                                    Qr = QV / Q * Me.Volume
-                                Else
-                                    Qr = Me.Headspace
-                                End If
-
-                            Case PhaseName.Mixture
-                                RP = 0
-                                Qr = Me.Volume + Me.Headspace
-
-                            Case PhaseName.Solid
-                                RP = 7
-                                If ReactorMode = EReactorMode.SingleOutlet Then
-                                    Qr = QS / Q * Me.Volume
-                                Else
-                                    Qr = QS / (QL + QS) * Me.Volume
-                                End If
-
-                        End Select
-
-                        'Read component concentrations in phase of reaction 
-                        C.Clear()
-                        For Each comp As Compound In ims.Phases(RP).Compounds.Values
-                            C.Add(comp.Name, comp.Molarity) 'C: mol/m³
-                        Next
 
                         'calculate reaction constants
                         Dim kxf As Double = rxn.A_Forward * Exp(-rxn.E_Forward / (8.314 * T))
@@ -536,16 +540,54 @@ Namespace Reactors
                         Rxi(rxn.ID) = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, Rx)
                         RxiT.Add(rxn.ID, Rxi(rxn.ID) / scBC * Qr)
 
-                        'calculate total compound production rates - Ri: mol/s
+                    ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
+
+                        Dim numval, denmval As Double
+
+                        rxn.ExpContext = New Ciloci.Flee.ExpressionContext
+                        rxn.ExpContext.Imports.AddType(GetType(System.Math))
+
+                        rxn.ExpContext.Variables.Clear()
+                        rxn.ExpContext.Variables.Add("T", ims.Phases(0).Properties.temperature.GetValueOrDefault)
+                        rxn.ExpContext.Options.ParseCulture = Globalization.CultureInfo.InvariantCulture
+
+                        Dim ir As Integer = 1
+                        Dim ip As Integer = 1
+
                         For Each sb As ReactionStoichBase In rxn.Components.Values
-                            If rxn.ReactionType = ReactionType.Kinetic Then
-                                Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / scBC * Qr
-                            ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
-                                Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / scBC * CatalystAmount * Qr
+                            If sb.StoichCoeff < 0 Then
+                                rxn.ExpContext.Variables.Add("R" & ir.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                ir += 1
+                            ElseIf sb.StoichCoeff > 0 Then
+                                rxn.ExpContext.Variables.Add("P" & ip.ToString, C(sb.CompName) * convfactors(sb.CompName))
+                                ip += 1
                             End If
                         Next
 
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationNumerator)
+
+                        numval = rxn.Expr.Evaluate
+
+                        rxn.Expr = rxn.ExpContext.CompileGeneric(Of Double)(rxn.RateEquationDenominator)
+
+                        denmval = rxn.Expr.Evaluate
+
+                        'calculate reaction rate & convert to internal SI units
+                        Rx = SystemsOfUnits.Converter.ConvertToSI(rxn.VelUnit, numval / denmval)
+
+                        Rxi(rxn.ID) = Rx
+                        RxiT.Add(rxn.ID, Rxi(rxn.ID) / scBC)
+
                     End If
+
+                    'calculate total compound production rates - Ri: mol/s
+                    For Each sb As ReactionStoichBase In rxn.Components.Values
+                        If rxn.ReactionType = ReactionType.Kinetic Then
+                            Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / scBC * Qr
+                        ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
+                            Ri(sb.CompName) += Rxi(rxn.ID) * sb.StoichCoeff / scBC * CatalystAmount
+                        End If
+                    Next
 
                     'calculate heat of reaction
                     'Reaction Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
