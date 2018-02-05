@@ -124,6 +124,10 @@ Public Class Settings
 
     Public Shared CurrentVersion As String = ""
 
+    Public Shared Property CalculationRequestID As String = ""
+
+    Public Shared Property CalculationMonitorEnabled As Boolean = False
+
     Shared Sub LoadExcelSettings(Optional ByVal configfile As String = "")
 
         If configfile = "" Then configfile = My.Application.Info.DirectoryPath + Path.DirectorySeparatorChar + "dwsim.ini"
