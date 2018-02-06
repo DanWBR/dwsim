@@ -600,7 +600,7 @@ Namespace Reactors
                     'calculate heat of reaction
                     'Reaction Heat released (or absorbed) (kJ/s = kW) (Ideal Gas)
                     'kW (kJ/s) = kJ/kmol * mol/s * 0.001 mol/kmol
-                    Hr = rxn.ReactionHeat * RxiT(rxn.ID) * 0.001 / scBC
+                    Hr = rxn.ReactionHeat * RxiT(rxn.ID) * 0.001 '/ scBC
                     DHRi.Add(rxn.ID, Hr)
                     DHr += Hr 'Total Heat released 
 

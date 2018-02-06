@@ -354,7 +354,7 @@ Namespace Reactors
             Dim N As New Dictionary(Of String, Double)
             N00.Clear()
 
-            Dim scBC, DHr, Hr, Hr0, Hp, T, T0, P, P0, Qf, Q, W As Double
+            Dim DHr, Hr, Hr0, Hp, T, T0, P, P0, Qf, Q, W As Double
             Dim BC As String = ""
             Dim tmp As IFlashCalculationResult
             Dim maxXarr As New ArrayList
@@ -484,8 +484,6 @@ Namespace Reactors
 
                         'process reaction i
                         rxn = FlowSheet.Reactions(ar(i))
-                        BC = rxn.BaseReactant
-                        scBC = rxn.Components(BC).StoichCoeff
 
                         For Each sb As ReactionStoichBase In rxn.Components.Values
 
@@ -514,7 +512,9 @@ Namespace Reactors
                         rxn = FlowSheet.Reactions(ar(i))
 
                         'Heat released (or absorbed) (kJ/s = kW)
-                        DHr += rxn.ReactionHeat * (N0(rxn.BaseReactant) - N(rxn.BaseReactant)) / 1000 * Rxi(rxn.ID) / Ri(rxn.BaseReactant)
+
+                        DHr += rxn.ReactionHeat * Rxi(rxn.ID) / 1000 / Abs(rxn.Components(BC).StoichCoeff)
+                        
                         If Ri.Values.Sum = 0.0# Then DHr = 0.0#
 
                         i += 1
@@ -707,6 +707,12 @@ Namespace Reactors
 
                 'Heat (kW)
                 Me.DeltaQ = DHRi.Values.Sum + Hp - Hr0
+
+                Me.DeltaT = OutletTemperature - T0
+
+            Else
+
+                OutletTemperature = T
 
                 Me.DeltaT = OutletTemperature - T0
 
