@@ -513,8 +513,12 @@ Namespace Reactors
 
                         'Heat released (or absorbed) (kJ/s = kW)
 
-                        DHr += rxn.ReactionHeat * Rxi(rxn.ID) / 1000 / Abs(rxn.Components(BC).StoichCoeff)
-                        
+                        If rxn.ReactionType = ReactionType.Kinetic Then
+                            DHr += rxn.ReactionHeat * Abs(Rxi(rxn.ID)) / 1000 * dV * Volume
+                        ElseIf rxn.ReactionType = ReactionType.Heterogeneous_Catalytic Then
+                            DHr += rxn.ReactionHeat * Abs(Rxi(rxn.ID)) / 1000 * CatalystLoading * dV * Volume
+                        End If
+
                         If Ri.Values.Sum = 0.0# Then DHr = 0.0#
 
                         i += 1

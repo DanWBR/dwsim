@@ -584,7 +584,7 @@ Namespace Reactors
                         End If
 
                         Rxi(rxn.ID) = Rx
-                        RxiT.Add(rxn.ID, Rxi(rxn.ID) / scBC)
+                        RxiT.Add(rxn.ID, Rxi(rxn.ID))
 
                     End If
 
