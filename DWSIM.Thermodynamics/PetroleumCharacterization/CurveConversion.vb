@@ -205,6 +205,7 @@ Namespace Utilities.PetroleumCharacterization.Methods
                     For j = 3 To fracv + 1 Step -1
                         If j = 2 Then i1 = 1
                         i2 = Int(Abs(Tastm(j) - Tastm(j - 1)) / 10) - 1
+                        If i2 > 9 Then i2 = 9
                         Tpev10(i) = Tpev10(i) - (Abs(Tastm(j) - Tastm(j - 1)) / 10 - i2) * (f(i1, i2 + 1) - f(i1, i2)) - f(i1, i2)
                     Next j
                 End If

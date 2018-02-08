@@ -397,6 +397,19 @@ Public Class DCCharacterizationWizard
                 .OriginalDB = "DWSIM"
                 .Name = "PSE_" & id & "_" & i + 1
 
+                'VISC
+                If Not Me.ComboBoxViscM.Enabled Then
+                    Dim w As Double() = Nothing
+                    Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(pxv1.ToArray(GetType(Double)), pxv1.Count, 0.5, w)
+                    .PF_v1 = Interpolation.polinterpolation.barycentricinterpolation(pxv1.ToArray(GetType(Double)), pyv1.ToArray(GetType(Double)), w, pxv1.Count, tc.fvm)
+                    Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(pxv2.ToArray(GetType(Double)), pxv2.Count, 0.5, w)
+                    .PF_v2 = Interpolation.polinterpolation.barycentricinterpolation(pxv2.ToArray(GetType(Double)), pyv2.ToArray(GetType(Double)), w, pxv2.Count, tc.fvm)
+                    If .PF_v1 < 0 Then .PF_v1 = -.PF_v1
+                    If .PF_v2 < 0 Then .PF_v2 = -.PF_v2
+                    .PF_Tv1 = (Convert.ToDouble(Me.TextBoxVT1.Text) - 32) / 9 * 5 + 273.15
+                    .PF_Tv2 = (Convert.ToDouble(Me.TextBoxVT2.Text) - 32) / 9 * 5 + 273.15
+                End If
+
                 'SG
                 If Me.ComboBoxSG.Enabled Then
                     Select Case Me.ComboBoxSG.SelectedItem.ToString
@@ -416,6 +429,23 @@ Public Class DCCharacterizationWizard
                         .PF_SG = PropertyMethods.d15d20(.PF_SG)
                     End If
                 End If
+
+                'VISC 2
+                If Me.ComboBoxViscM.Enabled Then
+                    .PF_Tv1 = 311
+                    .PF_Tv2 = 372
+                    Select Case Me.ComboBoxViscM.SelectedItem.ToString
+                        Case "Abbott (1971)"
+                            .PF_v1 = PropertyMethods.Visc37_Abbott(.NBP, .PF_SG)
+                            .PF_v2 = PropertyMethods.Visc98_Abbott(.NBP, .PF_SG)
+                        Case "Beg-Amin (1979)"
+                            .PF_v1 = PropertyMethods.ViscT_Beg_Amin(.PF_Tv1, (.NBP.GetValueOrDefault / 0.9013) ^ (1 / 1.0176), .PF_SG)
+                            .PF_v2 = PropertyMethods.ViscT_Beg_Amin(.PF_Tv2, (.NBP.GetValueOrDefault / 0.9013) ^ (1 / 1.0176), .PF_SG)
+                    End Select
+                End If
+
+                .PF_vA = PropertyMethods.ViscWaltherASTM_A(.PF_Tv1, .PF_v1, .PF_Tv2, .PF_v2)
+                .PF_vB = PropertyMethods.ViscWaltherASTM_B(.PF_Tv1, .PF_v1, .PF_Tv2, .PF_v2)
 
                 'MW
                 If Me.ComboBoxMW.Enabled Then
@@ -488,31 +518,6 @@ Public Class DCCharacterizationWizard
 
                 .NBP = tc.tbpm
                 .OriginalDB = "DWSIM"
-
-                'VISC
-                If Me.ComboBoxViscM.Enabled Then
-                    .PF_Tv1 = 311
-                    .PF_Tv2 = 372
-                    Select Case Me.ComboBoxViscM.SelectedItem.ToString
-                        Case "Abbott (1971)"
-                            .PF_v1 = PropertyMethods.Visc37_Abbott(.NBP, .PF_SG)
-                            .PF_v2 = PropertyMethods.Visc98_Abbott(.NBP, .PF_SG)
-                        Case "Beg-Amin (1979)"
-                            .PF_v1 = PropertyMethods.ViscT_Beg_Amin(.PF_Tv1, (.NBP.GetValueOrDefault / 0.9013) ^ (1 / 1.0176), .PF_SG)
-                            .PF_v2 = PropertyMethods.ViscT_Beg_Amin(.PF_Tv2, (.NBP.GetValueOrDefault / 0.9013) ^ (1 / 1.0176), .PF_SG)
-                    End Select
-                Else
-                    Dim w As Double() = Nothing
-                    Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(pxv1.ToArray(GetType(Double)), pxv1.Count, 0.5, w)
-                    .PF_v1 = Interpolation.polinterpolation.barycentricinterpolation(pxv1.ToArray(GetType(Double)), pyv1.ToArray(GetType(Double)), w, pxv1.Count, tc.fvm)
-                    Interpolation.ratinterpolation.buildfloaterhormannrationalinterpolant(pxv2.ToArray(GetType(Double)), pxv2.Count, 0.5, w)
-                    .PF_v2 = Interpolation.polinterpolation.barycentricinterpolation(pxv2.ToArray(GetType(Double)), pyv2.ToArray(GetType(Double)), w, pxv2.Count, tc.fvm)
-                    .PF_Tv1 = (Convert.ToDouble(Me.TextBoxVT1.Text) - 32) / 9 * 5 + 273.15
-                    .PF_Tv2 = (Convert.ToDouble(Me.TextBoxVT2.Text) - 32) / 9 * 5 + 273.15
-                End If
-
-                .PF_vA = PropertyMethods.ViscWaltherASTM_A(.PF_Tv1, .PF_v1, .PF_Tv2, .PF_v2)
-                .PF_vB = PropertyMethods.ViscWaltherASTM_B(.PF_Tv1, .PF_v1, .PF_Tv2, .PF_v2)
 
                 'Tc
                 Select Case Me.ComboBoxTC.SelectedItem.ToString
